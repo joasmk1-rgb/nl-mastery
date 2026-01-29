@@ -1,0 +1,599 @@
+Langue;Mot;Traduction (Singulier / Pluriel);Pluriel NL;Statut
+nl;de aandacht;l'attention / (pas de pluriel);-;Prioritaire
+nl;het aandeel;la part / les parts ;de aandelen;Standard
+nl;de aankomst;l'arrivée / les arrivées;de aankomsten;Prioritaire
+nl;de aanleg;la disposition / les dispositions;-;Standard
+nl;de aanleiding;l'occasion / les occasions;de aanleidingen;Prioritaire
+nl;het aantal;le nombre / les nombres;de aantallen;Prioritaire
+nl;het aanzien;le regard / les regards;-;Prioritaire
+nl;de aard;la nature / les natures;-;Prioritaire
+nl;de aardappel;la pomme de terre / les pommes de terre;de aardappelen;Prioritaire
+nl;de aarde;la terre / (pas de pluriel);-;Prioritaire
+nl;de afdeling;le rayon / les rayons;de afdelingen;Prioritaire
+nl;de afstand;la distance / les distances;de afstanden;Prioritaire
+nl;de afspraak;le rendez-vous / les rendez-vous;de afspraken;Prioritaire
+nl;de afkomst;l'origine / les origines;-;Standard
+nl;de angst;la peur / les peurs;de angsten;Prioritaire
+nl;het antwoord;la réponse / les réponses;de antwoorden;Prioritaire
+nl;de arbeid;le travail / les travaux;-;Prioritaire
+nl;de arbeider;l'ouvrier / les ouvriers;de bakkers;Prioritaire
+nl;de architect;l'architecte / les architectes;de architecten;Standard
+nl;de arm;le bras / les bras;de armen;Prioritaire
+nl;de armoede;la pauvreté / (pas de pluriel);-;Prioritaire
+nl;de arts;le médecin / les médecins;de artsen;Prioritaire
+nl;de auto;la voiture / les voitures;de auto's;Prioritaire
+nl;de avond;le soir / les soirs;de avonden;Prioritaire
+nl;de baan;l'emploi / les emplois;de banen;Prioritaire
+nl;de baby;le bébé / les bébés;de baby's;Standard
+nl;de achtergrond;l'arrière-plan / les arrière-plans;de achtergronden;Prioritaire
+nl;de bakker;le boulanger / les boulangers;de bakkers;Prioritaire
+nl;de bal;la balle / les balles;de ballen;Standard
+nl;de band;le lien / les liens;de banden;Prioritaire
+nl;de bank;la banque / les banques;de banken;Prioritaire
+nl;de basis;la base / les bases;de bases;Prioritaire
+nl;het bed;le lit / les lits;de bedden;Prioritaire
+nl;het bedrag;le montant / les montants;de bedragen;Prioritaire
+nl;het bedrijf;l'entreprise / les entreprises;de bedrijven;Prioritaire
+nl;de beeld;l'image / les images;de beelden;Prioritaire
+nl;het been;la jambe / les jambes;de benen;Prioritaire
+nl;het begin;le début / les débuts;-;Prioritaire
+nl;het cijfer;le chiffre / les chiffres;de cijfers;Prioritaire
+nl;de cirkel;le cercle / les cercles;de cirkels;Standard
+nl;de collega;le collègue / les collègues;de collega's;Prioritaire
+nl;de combinatie;la combinaison / les combinaisons;de combinaties;Standard
+nl;de commissie;la commission / les commissions;de commissies;Prioritaire
+nl;de communicatie;la communication / (pas de pluriel);-;Prioritaire
+nl;de computer;l'ordinateur / les ordinateurs;de computers;Prioritaire
+nl;de conclusie;la conclusion / les conclusions;de conclusies;Prioritaire
+nl;de concurrentie;la concurrence / (pas de pluriel);-;Prioritaire
+nl;de conditie;la condition (forme) / les conditions;de condities;Standard
+nl;het contact;le contact / les contacts;de contacten;Prioritaire
+nl;het contract;le contrat / les contrats;de contracten;Prioritaire
+nl;de controle;le contrôle / les contrôles;de controles;Prioritaire
+nl;de crisis;la crise / les crises;de crisissen / crises;Prioritaire
+nl;de cultuur;la culture / les cultures;de culturen;Prioritaire
+nl;de cursus;le cours / les cours;de cursussen;Prioritaire
+nl;de daad;l'acte / les actes;de daden;Prioritaire
+nl;de dag;le jour / les jours;de dagen;Prioritaire
+nl;het dak;le toit / les toits;de daken;Standard
+nl;het dal;la vallée / les vallées;de dalen;Standard
+nl;de dank;le remerciement / (pas de pluriel);-;Prioritaire
+nl;het deel;la partie / les parties;de delen;Prioritaire
+nl;de deelnemer;le participant / les participants;de deelnemers;Prioritaire
+nl;de deur;la porte / les portes;de deuren;Prioritaire
+nl;de dienst;le service / les services;de diensten;Prioritaire
+nl;het dier;l'animal / les animaux;de dieren;Prioritaire
+nl;het ding;la chose / les choses;de dingen;Prioritaire
+nl;de directie;la direction / les directions;de directies;Prioritaire
+nl;de discussie;la discussion / les discussions;de discussies;Prioritaire
+nl;de doelstelling;l'objectif / les objectifs;de doelstellingen;Prioritaire
+nl;het doel;le but / les buts;de doelen;Prioritaire
+nl;de dokter;le docteur / les docteurs;de dokters;Prioritaire
+nl;de dood;la mort / (pas de pluriel);-;Prioritaire
+nl;de doorzetting;la persévérance / (pas de pluriel);-;Standard
+nl;de doos;la boîte / les boîtes;de dozen;Standard
+nl;het dorp;le village / les villages;de dorpen;Prioritaire
+nl;de draad;le fil / les fils;de draden;Prioritaire
+nl;de drank;la boisson / les boissons;de dranken;Prioritaire
+nl;de drempel;le seuil / les seuils;de drempels;Prioritaire
+nl;de droom;le rêve / les rêves;de dromen;Prioritaire
+nl;de druk;la pression / (pas de pluriel);-;Prioritaire
+nl;het dubbeltje;la pièce de 10 cents / les pièces;de dubbeltjes;Standard
+nl;de duur;la durée / (pas de pluriel);-;Prioritaire
+nl;de dwerg;le nain / les nains;de dwergen;Standard
+nl;de echt;le mariage / (pas de pluriel);-;Standard
+nl;de economie;l'économie / les économies;de economieën;Prioritaire
+nl;de eenheid;l'unité / les unités;de eenheden;Prioritaire
+nl;de eeuw;le siècle / les siècles;de eeuwen;Prioritaire
+nl;het effect;l'effet / les effets;de effecten;Prioritaire
+nl;het ei;l'oeuf / les oeufs;de eieren;Standard
+nl;de eigenheid;l'originalité / (pas de pluriel);-;Standard
+nl;het eiland;l'île / les îles;de eilanden;Prioritaire
+nl;de eis;l'exigence / les exigences;de eisen;Prioritaire
+nl;het einde;la fin / les fins;de einden / eindes;Prioritaire
+nl;de ervaring;l'expérience / les expériences;de ervaringen;Prioritaire
+nl;de fabriek;la fabrique / les fabriques;de fabrieken;Prioritaire
+nl;het feit;le fait / les faits;de feiten;Prioritaire
+nl;de fiets;le vélo / les vélos;de fietsen;Prioritaire
+nl;de figuur;la figure / les figures;de figuren;Prioritaire
+nl;de film;le film / les films;de films;Prioritaire
+nl;de fles;la bouteille / les bouteilles;de flessen;Prioritaire
+nl;de fout;la faute / les fautes;de fouten;Prioritaire
+nl;de functie;la fonction / les fonctions;de functies;Prioritaire
+nl;de garantie;la garantie / les garanties;de garanties;Standard
+nl;het gat;le trou / les trous;de gaten;Prioritaire
+nl;het gebied;le domaine (territoire) / les domaines;de gebieden;Prioritaire
+nl;het gebouw;le bâtiment / les bâtiments;de gebouwen;Prioritaire
+nl;het gebruik;l'usage / les usages;de gebruiken;Prioritaire
+nl;de geboorte;la naissance / les naissances;de geboorten / geboortes;Prioritaire
+nl;het gedrag;le comportement / (pas de pluriel);-;Prioritaire
+nl;de gedachte;la pensée / les pensées;de gedachten;Prioritaire
+nl;het gedeelte;la partie / les parties;de gedeelten / gedeeltes;Prioritaire
+nl;het gedicht;le poème / les poèmes;de gedichten;Standard
+nl;de geest;l'esprit / les esprits;de geesten;Prioritaire
+nl;het gegeven;la donnée / les données;de gegevens;Prioritaire
+nl;het geheel;l'ensemble / les ensembles;de gehelen;Prioritaire
+nl;het geheim;le secret / les secrets;de geheimen;Prioritaire
+nl;het geheugen;la mémoire / les mémoires;de geheugens;Prioritaire
+nl;het geluk;le bonheur / (pas de pluriel);-;Prioritaire
+nl;het geluid;le son / les sons;de geluiden;Prioritaire
+nl;het geld;l'argent / (pas de pluriel);-;Prioritaire
+nl;de gelegenheid;l'occasion / les occasions;de gelegenheden;Prioritaire
+nl;het gelijk;le droit (avoir raison) / (pas de pluriel);-;Prioritaire
+nl;de gelovige;le croyant / les croyants;de gelovigen;Standard
+nl;de gemeente;la commune / les communes;de gemeenten / gemeentes;Prioritaire
+nl;de generatie;la generatie / les générations;de generaties;Prioritaire
+nl;het genot;le plaisir / (pas de pluriel);-;Standard
+nl;het gerecht;le plat / les plats;de gerechten;Prioritaire
+nl;het gereedschap;l'outillage / (pas de pluriel);-;Standard
+nl;het geschil;le litige / les litiges;de geschillen;Standard
+nl;de geschiedenis;l'histoire / (pas de pluriel);-;Prioritaire
+nl;het gezelschap;la compagnie / les compagnies;de gezelschappen;Prioritaire
+nl;het gezicht;le visage / les visages;de gezichten;Prioritaire
+nl;het gezin;le ménage (famille) / les ménages;de gezinnen;Prioritaire
+nl;het gevaar;le danger / les dangers;de gevaren;Prioritaire
+nl;het geval;le cas / les cas;de gevallen;Prioritaire
+nl;het gevoel;le sentiment / les sentiments;de gevoelens;Prioritaire
+nl;het gevolg;la conséquence / les conséquences;de gevolgen;Prioritaire
+nl;de gewoonte;l'habitude / les habitudes;de gewoonten / gewoontes;Prioritaire
+nl;het gewicht;le poids / les poids;de gewichten;Prioritaire
+nl;de geur;l'odeur / les odeurs;de geuren;Standard
+nl;de gids;le guide / les guides;de gidsen;Standard
+nl;het glas;le verre / les verres;de glazen;Prioritaire
+nl;de god;le dieu / les dieux;de goden;Prioritaire
+nl;de golf;la vague / les vagues;de golven;Prioritaire
+nl;de grens;la frontière / les frontières;de grenzen;Prioritaire
+nl;de groep;le groupe / les groupes;de groepen;Prioritaire
+nl;de groente;le légume / les légumes;de groenten / groentes;Prioritaire
+nl;de grond;le sol / les sols;de gronden;Prioritaire
+nl;de groei;la croissance / (pas de pluriel);-;Prioritaire
+nl;de haat;la haine / (pas de pluriel);-;Prioritaire
+nl;het haar;le cheveu / les cheveux;de haren;Prioritaire
+nl;de hand;la main / les mains;de handen;Prioritaire
+nl;de handel;le commerce / (pas de pluriel);-;Prioritaire
+nl;de haven;le port / les ports;de havens;Prioritaire
+nl;het hart;le cœur / les cœurs;de harten;Prioritaire
+nl;de heer;le seigneur (monsieur) / les seigneurs;de heren;Prioritaire
+nl;het heden;le présent / (pas de pluriel);-;Prioritaire
+nl;de heelal;l'univers / (pas de pluriel);-;Standard
+nl;de helft;la moitié / les moitiés;de helften;Prioritaire
+nl;de herinnering;le souvenir / les souvenirs;de herinneringen;Prioritaire
+nl;de herkomst;l'origine / les origines;-;Standard
+nl;het herstel;le rétablissement / la réparation;-;Prioritaire
+nl;de heuvel;la colline / les collines;de heuvels;Standard
+nl;de hitte;la chaleur / (pas de pluriel);-;Standard
+nl;de hoek;le coin (l'angle) / les coins;de hoeken;Prioritaire
+nl;de hoeve;la ferme / les fermes;de hoeven / hoeves;Standard
+nl;de hoeveelheid;la quantité / les quantités;de hoeveelheden;Prioritaire
+nl;het hof;la cour / les cours;de hoven;Prioritaire
+nl;het hoofd;la tête / les têtes;de hoofden;Prioritaire
+nl;de hoofdpijn;le mal de tête / les maux de tête;-;Standard
+nl;de hoop;l'espoir / (pas de pluriel);-;Prioritaire
+nl;de hoogte;la hauteur / les hauteurs;de hoogten / hoogtes;Prioritaire
+nl;de horen;la corne (ou l'ouïe) / les cornes;de horens;Standard
+nl;het hotel;l'hôtel / les hôtels;de hotels;Prioritaire
+nl;de houding;l'attitude / les attitudes;de houdingen;Prioritaire
+nl;het hout;le bois (matière) / (pas de pluriel);-;Prioritaire
+nl;het huis;la maison / les maisons;de huizen;Prioritaire
+nl;de hulp;l'aide / (pas de pluriel);-;Prioritaire
+nl;het huwelijk;le mariage / les mariages;de huwelijken;Prioritaire
+nl;het idee;l'idée / les idées;de ideeën;Prioritaire
+nl;de ijs;la glace / (pas de pluriel);-;Prioritaire
+nl;de indruk;l'impression / les impressions;de indrukken;Prioritaire
+nl;de industrie;l'industrie / les industries;de industrieën;Prioritaire
+nl;de informatie;l'information / les informations;de informaties;Prioritaire
+nl;de inhoud;le contenu / les contenus;de inhouden;Prioritaire
+nl;de inkomsten;les revenus / (toujours pluriel);de inkomsten;Prioritaire
+nl;de inleiding;l'introduction / les introductions;de inleidingen;Prioritaire
+nl;de inrichting;l'aménagement / les aménagements;de inrichtingen;Prioritaire
+nl;de instelling;l'institution (ou réglage) / les institutions;de instellingen;Prioritaire
+nl;de instrument;l'instrument / les instruments;de instrumenten;Prioritaire
+nl;de interesse;l'intérêt / les intérêts;de interesses;Prioritaire
+nl;de invloed;l'influence / les influences;de invloeden;Prioritaire
+nl;de invoer;l'importation / (pas de pluriel);-;Prioritaire
+nl;de inzet;l'enjeu / l'engagement / les enjeux;de inzetten;Prioritaire
+nl;de inzinking;la dépression / l'affaissement / les dépressions;de inzinkingen;Standard
+nl;de jaargang;l'année (publication) / les années;de jaargangen;Standard
+nl;het jaar;l'année / les années;de jaren;Prioritaire
+nl;de jager;le chasseur / les chasseurs;de jagers;Standard
+nl;de jas;le manteau / les manteaux;de jassen;Prioritaire
+nl;de jeugd;la jeunesse / (pas de pluriel);-;Prioritaire
+nl;de jongere;le jeune / les jeunes;de jongeren;Prioritaire
+nl;de journalist;le journaliste / les journalistes;de journalisten;Standard
+nl;de kaart;la carte / les cartes;de kaarten;Prioritaire
+nl;de kaas;le fromage / les fromages;de kazen;Standard
+nl;het kader;le cadre / les cadres;de kaders;Prioritaire
+nl;de kamer;la chambre / les chambres;de kamers;Prioritaire
+nl;de kans;la chance (opportunité) / les chances;de kansen;Prioritaire
+nl;de kant;le côté / les côtés;de kanten;Prioritaire
+nl;het kantoor;le bureau (lieu) / les bureaux;de kantoren;Prioritaire
+nl;de kapitein;le capitaine / les capitaines;de kapiteins;Standard
+nl;de kar;la charrette / les charrettes;de karren;Standard
+nl;de karakter;le caractère / les caractères;de karakters;Prioritaire
+nl;de kas;la caisse (ou serre) / les caisses;de kassen;Prioritaire
+nl;de kast;l'armoire / les armoires;de kasten;Prioritaire
+nl;de kasteel;le château / les châteaux;de kastelen;Standard
+nl;de keer;la fois / les fois;de keren;Prioritaire
+nl;de kelder;la cave / les caves;de kelders;Standard
+nl;de kennis;la connaissance / les connaissances;de kennissen;Prioritaire
+nl;de keuze;le choix / les choix;de keuzen / keuzes;Prioritaire
+nl;de kijk;le regard / la vue / les vues;de kijken;Prioritaire
+nl;het kind;l'enfant / les enfants;de kinderen;Prioritaire
+nl;de kip;le poulet / les poulets;de kippen;Standard
+nl;de kist;la caisse (coffre) / les caisses;de kisten;Standard
+nl;de klacht;la plainte / les plaintes;de klachten;Prioritaire
+nl;de klant;le client / les clients;de klanten;Prioritaire
+nl;de klas;la classe / les classes;de klassen;Prioritaire
+nl;de kleding;les vêtements / (pas de pluriel);-;Prioritaire
+nl;de kleren;les habits / (toujours pluriel);de kleren;Prioritaire
+nl;de kleur;la couleur / les couleurs;de kleuren;Prioritaire
+nl;de klok;l'horloge / les horloges;de klokken;Prioritaire
+nl;de knoop;le bouton / le nœud / les nœuds;de knopen;Standard
+nl;de koe;la vache / les vaches;de koeien;Standard
+nl;de koers;le cours (bourse/route) / les cours;de koersen;Prioritaire
+nl;de koffer;la valise / les valises;de koffers;Standard
+nl;de koffie;le café / (pas de pluriel);-;Prioritaire
+nl;de kogel;la balle (fusil) / les balles;de kogels;Standard
+nl;de kok;le cuisinier / les cuisiniers;de koks;Standard
+nl;de kolom;la colonne / les colonnes;de kolommen;Standard
+nl;de kom;le bol / les bols;de kommen;Standard
+nl;de komst;la venue / l'arrivée / les venues;de komsten;Prioritaire
+nl;de koning;le roi / les rois;de koningen;Prioritaire
+nl;de koningin;la reine / les reines;de koninginnen;Prioritaire
+nl;de kont;le cul / les culs;de konten;Standard
+nl;de kook;la cuisine (action) / (pas de pluriel);-;Prioritaire
+nl;de kool;le chou / les choux;de kolen;Standard
+nl;de koop;l'achat / les achats;de kopen;Prioritaire
+nl;de koper;l'acheteur / les acheteurs;de kopers;Prioritaire
+nl;de kop;la tête (animal/tasse) / les têtes;de koppen;Prioritaire
+nl;de korting;la réduction / les réductions;de kortingen;Standard
+nl;de kost;la nourriture / les frais / (pas de pluriel);-;Prioritaire
+nl;de kou;le froid / (pas de pluriel);-;Prioritaire
+nl;de kracht;la force / les forces;de krachten;Prioritaire
+nl;de krant;le journal / les journaux;de kranten;Prioritaire
+nl;de kring;le cercle / les cercles;de kringen;Prioritaire
+nl;de kritiek;la critique / les critiques;de kritieken;Prioritaire
+nl;de kroeg;le café (bistrot) / les cafés;de kroegen;Standard
+nl;de kruis;la croix / les croix;de kruisen;Standard
+nl;de kwaliteit;la qualité / les qualités;de kwaliteiten;Prioritaire
+nl;de kwartier;le quart d'heure / les quarts d'heure;de kwartieren;Prioritaire
+nl;de kwestie;la question (problème) / les questions;de kwesties;Prioritaire
+nl;de laag;la couche / les couches;de lagen;Prioritaire
+nl;de landbouw;l'agriculture / (pas de pluriel);-;Prioritaire
+nl;het land;le pays (la terre) / les pays;de landen;Prioritaire
+nl;de lader;le chargeur / les chargeurs;de laders;Standard
+nl;de last;la charge / le poids / les charges;de lasten;Prioritaire
+nl;de leeftijd;l'âge / les âges;de leeftijden;Prioritaire
+nl;het leer;le cuir / (pas de pluriel);-;Prioritaire
+nl;de leerling;l'élève / les élèves;de leerlingen;Prioritaire
+nl;de leiding;la direction (conduite) / les directions;de leidingen;Prioritaire
+nl;het leger;l'armée / les armées;de legers;Prioritaire
+nl;de les;la leçon / les leçons;de lessen;Prioritaire
+nl;de letter;la lettre (alphabet) / les lettres;de letters;Prioritaire
+nl;het leven;la vie / les vies;de levens;Prioritaire
+nl;de levering;la livraison / les livraisons;de leveringen;Prioritaire
+nl;de leugen;le mensonge / les mensonges;de leugens;Standard
+nl;het lid;le membre (club) / les membres;de leden;Prioritaire
+nl;het lied;la chanson / les chansons;de liederen;Standard
+nl;het licht;la lumière / les lumières;de lichten;Prioritaire
+nl;de liefde;l'amour / les amours;de liefden / liefdes;Prioritaire
+nl;het lijf;le corps / les corps;de lijven;Prioritaire
+nl;de lijst;la liste / les listes;de lijsten;Prioritaire
+nl;de lijn;la ligne / les lignes;de lijnen;Prioritaire
+nl;het lokaal;le local / les locaux;de lokalen;Standard
+nl;het loon;le salaire / les salaires;de lonen;Prioritaire
+nl;de loop;le cours (marche) / (pas de pluriel);-;Prioritaire
+nl;de lucht;l'air / le ciel / les airs;de luchten;Prioritaire
+nl;de luidspreker;le haut-parleur / les haut-parleurs;de luidsprekers;Standard
+nl;de lunch;le lunch / les lunchs;de lunches;Standard
+nl;de maaltijd;le repas / les repas;de maaltijden;Prioritaire
+nl;de maand;le mois / les mois;de maanden;Prioritaire
+nl;de maat;la mesure / les mesures;de maten;Prioritaire
+nl;de maatregel;la mesure (disposition) / les mesures;de maatregelen;Prioritaire
+nl;de maatschappij;la société / les sociétés;de maatschappijen;Prioritaire
+nl;de macht;le pouvoir / les pouvoirs;de machten;Prioritaire
+nl;de mama;la maman / les mamans;de mama's;Standard
+nl;de man;l'homme / les hommes;de mannen;Prioritaire
+nl;de manier;la manière / les manières;de manieren;Prioritaire
+nl;de markt;le marché / les marchés;de markten;Prioritaire
+nl;de massa;la masse / les masses;de massa's;Prioritaire
+nl;het materiaal;le matériel / les matériaux;de materialen;Prioritaire
+nl;de medewerker;le collaborateur / les collaborateurs;de medewerkers;Prioritaire
+nl;de meid;la fille / la servante / les filles;de meiden;Standard
+nl;de mening;l'avis / les avis;de meningen;Prioritaire
+nl;de mens;l'être humain / les êtres humains;de mensen;Prioritaire
+nl;het merk;la marque / les marques;de merken;Prioritaire
+nl;het mes;le couteau / les couteaux;de messen;Prioritaire
+nl;de methode;la méthode / les méthodes;de methoden / methodes;Prioritaire
+nl;het middel;le moyen / les moyens;de middelen;Prioritaire
+nl;de middag;le midi (après-midi) / les midis;de middagen;Prioritaire
+nl;de milieu;le milieu / les milieux;de milieus;Prioritaire
+nl;de minuut;la minute / les minutes;de minuten;Prioritaire
+nl;de misdaad;le crime / les crimes;de misdaden;Standard
+nl;de mode;la mode / les modes;de modes;Prioritaire
+nl;de moeder;la mère / les mères;de moeders;Prioritaire
+nl;de moed;le courage / (pas de pluriel);-;Prioritaire
+nl;de moeite;la peine (effort) / les peines;de moeiten / moeites;Prioritaire
+nl;de mond;la bouche / les bouches;de monden;Prioritaire
+nl;het moment;le moment / les moments;de momenten;Prioritaire
+nl;de monitor;le moniteur / l'écran / les écrans;de monitors / monitoren;Standard
+nl;de moord;le meurtre / les meurtres;de moorden;Standard
+nl;de morgen;le matin / les matins;de morgens;Prioritaire
+nl;de motor;le moteur / les moteurs;de motoren / motors;Prioritaire
+nl;de mouw;la manche / les manches;de mouwen;Standard
+nl;de muis;la souris / les souris;de muizen;Standard
+nl;de munt;la monnaie / les monnaies;de munten;Prioritaire
+nl;de muur;le mur / les murs;de muren;Prioritaire
+nl;de muziek;la musique / (pas de pluriel);-;Prioritaire
+nl;de naam;le nom / les noms;de namen;Prioritaire
+nl;de naarheid;le malaise / la désagrément / les malaises;de naarheden;Standard
+nl;de nadeel;le désavantage / les désavantages;de nadelen;Prioritaire
+nl;de nadruk;l'accent (insistance) / (pas de pluriel);-;Prioritaire
+nl;de nacht;la nuit / les nuits;de nachten;Prioritaire
+nl;de natuur;la nature / (pas de pluriel);-;Prioritaire
+nl;de nederlaag;la défaite / les défaites;de nederlagen;Standard
+nl;de neef;le cousin (ou neveu) / les cousins;de neven;Standard
+nl;de neiging;la tendance / les tendances;de neigingen;Prioritaire
+nl;de nek;la nuque / les nuques;de nekken;Standard
+nl;het net;le réseau / le filet / les réseaux;de netten;Prioritaire
+nl;de neus;le nez / les nez;de neuzen;Standard
+nl;het nieuws;la nouvelle (info) / (pas de pluriel);-;Prioritaire
+nl;het niveau;le niveau / les niveaux;de niveaus;Prioritaire
+nl;de nood;le besoin (nécessité) / les besoins;de noden;Prioritaire
+nl;de norm;la norme / les normes;de normen;Prioritaire
+nl;de nota;la note / les notes;de nota's;Standard
+nl;het nummer;le numéro / les numéros;de nummers;Prioritaire
+nl;het nut;l'utilité / (pas de pluriel);-;Prioritaire
+nl;de ochtend;le matin / les matins;de ochtenden;Prioritaire
+nl;de oefening;l'exercice / les exercices;de oefeningen;Prioritaire
+nl;het oog;l'oeil / les yeux;de ogen;Prioritaire
+nl;de oorlog;la guerre / les guerres;de oorlogen;Prioritaire
+nl;de oom;l'oncle / les oncles;de ooms;Standard
+nl;de oorzaak;la cause / les causes;de oorzaken;Prioritaire
+nl;de oplossing;la solution / les solutions;de oplossingen;Prioritaire
+nl;de opleiding;la formation / les formations;de opleidingen;Prioritaire
+nl;de opname;l'enregistrement / l'admission / les enregistrements;de opnamen / opnames;Prioritaire
+nl;de oppervlakte;la surface / les surfaces;de oppervlakten / oppervlaktes;Prioritaire
+nl;de opdracht;la mission / la commande / les missions;de opdrachten;Prioritaire
+nl;de opmerking;la remarque / les remarques;de opmerkingen;Prioritaire
+nl;de opvoeding;l'éducation / (pas de pluriel);-;Prioritaire
+nl;de opvolging;la succession / le suivi / (pas de pluriel);-;Standard
+nl;de orde;l'ordre / (pas de pluriel);-;Prioritaire
+nl;de organisatie;l'organisation / les organisations;de organisaties;Prioritaire
+nl;de ouder;le parent / les parents;de ouders;Prioritaire
+nl;de overheid;l'autorité (publique) / les autorités;de overheden;Prioritaire
+nl;de overtuiging;la conviction / les convictions;de overtuigingen;Prioritaire
+nl;het overleg;la concertation / (pas de pluriel);-;Prioritaire
+nl;de pa;le papa / les papas;de pa's;Standard
+nl;het paar;la paire (le couple) / les paires;de paren;Prioritaire
+nl;het paard;le cheval / les chevaux;de paarden;Standard
+nl;de pagina;la page / les pages;de pagina's;Standard
+nl;het pakket;le paquet / les paquets;de pakketten;Standard
+nl;het paleis;le palais / les palais;de paleizen;Standard
+nl;het papier;le papier / les papiers;de papieren;Prioritaire
+nl;de partij;le parti / la partie (match) / les parties;de partijen;Prioritaire
+nl;de partner;le partenaire / les partenaires;de partners;Prioritaire
+nl;de pas;le pas / le passeport / les pas;de passen;Prioritaire
+nl;de patiënt;le patient / les patients;de patiënten;Standard
+nl;de pauze;la pause / les pauses;de pauzes / pauzen;Standard
+nl;de peer;la poire / les poires;de peren;Standard
+nl;de pen;la plume (stylo) / les plumes;de pennen;Standard
+nl;de periode;la période / les périodes;de perioden / periodes;Prioritaire
+nl;de persoon;la personne / les personnes;de personen;Prioritaire
+nl;de pet;la casquette / les casquettes;de petten;Standard
+nl;de pijn;la douleur / les douleurs;de pijnen;Prioritaire
+nl;de plaats;la place (le lieu) / les places;de plaatsen;Prioritaire
+nl;het plan;le plan / les plans;de plannen;Prioritaire
+nl;de plant;la plante / les plantes;de planten;Standard
+nl;de plaat;la plaque / le disque / les plaques;de platen;Standard
+nl;het plezier;le plaisir / (pas de pluriel);-;Prioritaire
+nl;de ploeg;l'équipe / les équipes;de ploegen;Prioritaire
+nl;de politie;la police / (pas de pluriel);-;Prioritaire
+nl;de politiek;la politique / (pas de pluriel);-;Prioritaire
+nl;de poort;le portail / la porte / les portes;de poorten;Standard
+nl;de poot;la patte / les pattes;de poten;Standard
+nl;de post;la poste / le courrier / (pas de pluriel);-;Prioritaire
+nl;de pot;le pot / les pots;de potten;Standard
+nl;de praktijk;la pratique / les pratiques;de praktijken;Prioritaire
+nl;de prijs;le prix / les prix;de prijzen;Prioritaire
+nl;het principe;le principe / les principes;de principes / principia;Prioritaire
+nl;het probleem;le problème / les problèmes;de problemen;Prioritaire
+nl;het proces;le procès / le processus / les processus;de processen;Prioritaire
+nl;het product;le produit / les produits;de producten;Prioritaire
+nl;de productie;la production / (pas de pluriel);-;Prioritaire
+nl;het programma;le programme / les programmes;de programma's;Prioritaire
+nl;het project;le projet / les projets;de projecten;Prioritaire
+nl;de provincie;la province / les provinces;de provincies;Prioritaire
+nl;het publiek;le public / (pas de pluriel);-;Prioritaire
+nl;het punt;le point / les points;de punten;Prioritaire
+nl;de raad;le conseil / les conseils;de raden;Prioritaire
+nl;de radio;la radio / les radios;de radio's;Prioritaire
+nl;de rand;le bord / la marge / les bords;de randen;Prioritaire
+nl;het raam;la fenêtre / les fenêtres;de ramen;Prioritaire
+nl;de reactie;la réaction / les réactions;de reacties;Prioritaire
+nl;het recht;le droit / les droits;de rechten;Prioritaire
+nl;de reclame;la publicité / les publicités;de reclames;Prioritaire
+nl;de reden;la raison / les raisons;de redenen;Prioritaire
+nl;de regel;la règle / les règles;de regels;Prioritaire
+nl;de regering;le gouvernement / les gouvernements;de regeringen;Prioritaire
+nl;de regio;la région / les régions;de regio's;Prioritaire
+nl;de reis;le voyage / les voyages;de reizen;Prioritaire
+nl;de rekening;la facture / le compte / les comptes;de rekeningen;Prioritaire
+nl;de relatie;la relation / les relations;de relaties;Prioritaire
+nl;de rente;l'intérêt (argent) / (pas de pluriel);-;Standard
+nl;het restaurant;le restaurant / les restaurants;de restaurants;Prioritaire
+nl;het resultaat;le résultat / les résultats;de resultaten;Prioritaire
+nl;de richting;la direction (sens) / les directions;de richtingen;Prioritaire
+nl;de ridder;le chevalier / les chevaliers;de ridders;Standard
+nl;de rijkdom;la richesse / les richesses;de rijkdommen;Prioritaire
+nl;de rij;la file / la rangée / les rangées;de rijen;Prioritaire
+nl;de ring;la bague / l'anneau / les anneaux;de ringen;Standard
+nl;het risico;le risque / les risques;de risico's;Prioritaire
+nl;de rit;le trajet (course) / les trajets;de ritten;Standard
+nl;de rivier;la rivière / les rivières;de rivieren;Standard
+nl;de rok;la jupe / les jupes;de rokken;Standard
+nl;de rol;le rôle / les rôles;de rollen;Prioritaire
+nl;de roman;le roman / les romans;de romans;Standard
+nl;de ruzie;la dispute / les disputes;de ruzies / ruziën;Standard
+nl;de rust;le repos / (pas de pluriel);-;Prioritaire
+nl;de ruimte;l'espace / la pièce / les espaces;de ruimten / ruimtes;Prioritaire
+nl;de rug;le dos / les dos;de ruggen;Prioritaire
+nl;de taal;la langue / les langues;de talen;Prioritaire
+nl;de tafel;la table / les tables;de tafels;Prioritaire
+nl;de tand;la dent / les dents;de tanden;Standard
+nl;de tas;le sac / la tasse / les sacs;de tassen;Standard
+nl;tegenstelling;l'opposition / le contraste / les oppositions;de tegenstellingen;Prioritaire
+nl;het tekort;le manque / le déficit / les manques;de tekorten;Prioritaire
+nl;de tekst;le texte / les textes;de teksten;Prioritaire
+nl;de telefoon;le téléphone / les téléphones;de telefoons;Prioritaire
+nl;de televisie;la télévision / les télévisions;de televisies;Prioritaire
+nl;het tempo;le tempo / le rythme / les tempos;de tempo's;Prioritaire
+nl;de tent;la tente / les tentes;de tenten;Standard
+nl;de term;le terme / les termes;de termen;Prioritaire
+nl;het terrein;le terrain / les terrains;de terreinen;Prioritaire
+nl;de terugkeer;le retour / (pas de pluriel);-;Prioritaire
+nl;het thema;le thème / les thèmes;de thema's;Prioritaire
+nl;de thuis;le foyer / le chez-soi / (pas de pluriel);-;Prioritaire
+nl;de tijd;le temps / les temps;de tijden;Prioritaire
+nl;de toekomst;l'avenir / (pas de pluriel);-;Prioritaire
+nl;de toename;l'augmentation / les augmentations;de toenamen / toenames;Prioritaire
+nl;de toegang;l'accès / les accès;de toegangen;Prioritaire
+nl;de toestand;l'état (situation) / les états;de toestanden;Prioritaire
+nl;de toets;la touche / le test / les touches;de toetsen;Standard
+nl;de toeval;le hasard / (pas de pluriel);-;Prioritaire
+nl;de ton;la tonne / le tonneau / les tonnes;de tonnen;Standard
+nl;het toneel;la scène (théâtre) / les scènes;de toneelstukken;Prioritaire
+nl;de top;le sommet / les sommets;de toppen;Prioritaire
+nl;de totaal;le total / les totaux;de totalen;Prioritaire
+nl;de toren;la tour / les tours;de torens;Standard
+nl;de traditie;la tradition / les traditions;de tradities;Prioritaire
+nl;de trein;le train / les trains;de treinen;Prioritaire
+nl;de trap;l'escalier / les escaliers;de trappen;Standard
+nl;de trui;le pull / les pulls;de truien;Standard
+nl;de tuin;le jardin / les jardins;de tuinen;Prioritaire
+nl;tussenkomst;l'intervention / les interventions;de tussenkomsten;Prioritaire
+nl;de twijfel;le doute / les doutes;de twijfels;Prioritaire
+nl;het type;le type / les types;de types;Prioritaire
+nl;de uitdaging;le défi / les défis;de uitdagingen;Prioritaire
+nl;de uitgave;l'édition / la dépense / les éditions;de uitgaven / uitgaves;Prioritaire
+nl;de uitleg;l'explication / (pas de pluriel);-;Prioritaire
+nl;de uitkomst;le résultat / l'issue / les issues;de uitkomsten;Prioritaire
+nl;de uitzondering;l'exception / les exceptions;de uitzonderingen;Prioritaire
+nl;de uitspraak;la prononciation / les prononciations;de uitspraken;Prioritaire
+nl;de uitslag;le résultat (examen/match) / les résultats;de uitslagen;Prioritaire
+nl;het uur;l'heure / les heures;de uren;Prioritaire
+nl;de vader;le père / les pères;de vaders;Prioritaire
+nl;het vak;la branche (matière) / le métier / les vakken;de vakken;Prioritaire
+nl;de vakantie;les vacances / (souvent pluriel);de vakanties;Prioritaire
+nl;het varken;le porc / les porcs;de varkens;Standard
+nl;de vaststelling;la constatation / les constatations;de vaststellingen;Prioritaire
+nl;de vee;le bétail / (pas de pluriel);-;Prioritaire
+nl;het veld;le champ / les champs;de velden;Prioritaire
+nl;het venster;la fenêtre / les fenêtres;de vensters;Standard
+nl;de verandering;le changement / les changements;de veranderingen;Prioritaire
+nl;het verband;le lien / le pansement / les liens;de verbanden;Prioritaire
+nl;de verbetering;l'amélioration / les améliorations;de verbeteringen;Prioritaire
+nl;het verbruik;la consommation / (pas de pluriel);-;Prioritaire
+nl;het verdriet;la tristesse / (pas de pluriel);-;Prioritaire
+nl;de vereniging;l'association / les associations;de verenigingen;Prioritaire
+nl;de vergelijking;la comparaison / les comparaisons;de vergelijkingen;Prioritaire
+nl;het verhaal;l'histoire (récit) / les histoires;de verhalen;Prioritaire
+nl;de verhoging;l'augmentation (hausse) / les augmentations;de verhogingen;Prioritaire
+nl;de verhouding;le rapport (relation) / les rapports;de verhoudingen;Prioritaire
+nl;de verkoop;la vente / les ventes;de verkopen;Prioritaire
+nl;het verkeer;le trafic (circulation) / (pas de pluriel);-;Prioritaire
+nl;de verklaring;la déclaration / les déclarations;de verklaringen;Prioritaire
+nl;het verlies;la perte / les pertes;de verliezen;Prioritaire
+nl;het verlangen;le désir / les désirs;de verlangens;Standard
+nl;het verslag;le rapport (compte-rendu) / les rapports;de verslagen;Prioritaire
+nl;het verstand;l'intelligence / (pas de pluriel);-;Prioritaire
+nl;het vertrouwen;la confiance / (pas de pluriel);-;Prioritaire
+nl;de verwachting;l'attente / les attentes;de verwachtingen;Prioritaire
+nl;de verzorging;le soin / les soins;de verzorgingen;Prioritaire
+nl;de vestiging;la filiale / l'établissement / les filiales;de vestigingen;Prioritaire
+nl;de viering;la célébration / les célébrations;de vieringen;Standard
+nl;de vijand;l'ennemi / les ennemis;de vijanden;Prioritaire
+nl;de vinger;le doigt / les doigts;de vingers;Prioritaire
+nl;de vis;le poisson / les poissons;de vissen;Prioritaire
+nl;de visie;la vision / les visions;de visies;Prioritaire
+nl;het vlak;le plan / la surface / les surfaces;de vlakken;Prioritaire
+nl;de vlag;le drapeau / les drapeaux;de vlaggen;Standard
+nl;de vlam;la flamme / les flammes;de vlammen;Standard
+nl;de vlees;la viande / (pas de pluriel);-;Prioritaire
+nl;de vlieg;la mouche / les mouches;de vliegen;Standard
+nl;de vloer;le sol (plancher) / les sols;de vloeren;Prioritaire
+nl;de vlucht;le vol (avion/fuite) / les vols;de vluchten;Prioritaire
+nl;de voeding;l'alimentation / (pas de pluriel);-;Prioritaire
+nl;de voet;le pied / les pieds;de voeten;Prioritaire
+nl;het voertuig;le véhicule / les véhicules;de voertuigen;Standard
+nl;de vogel;l'oiseau / les oiseaux;de vogels;Prioritaire
+nl;het voorbeeld;l'exemple / les exemples;de voorbeelden;Prioritaire
+nl;de voorraad;le stock / les stocks;de voorraden;Prioritaire
+nl;de voordeel;l'avantage / les avantages;de voordelen;Prioritaire
+nl;het voorstel;la proposition / les propositions;de voorstellen;Prioritaire
+nl;de voorwaarde;la condition / les conditions;de voorwaarden;Prioritaire
+nl;de voorzitter;le président / les présidents;de voorzitters;Prioritaire
+nl;de vorm;la forme / les formes;de vormen;Prioritaire
+nl;de vraag;la question / les questions;de vragen;Prioritaire
+nl;de vrede;la paix / (pas de pluriel);-;Prioritaire
+nl;de vreugde;la joie / (pas de pluriel);-;Prioritaire
+nl;de vriend;l'ami / les amis;de vrienden;Prioritaire
+nl;de vriendschap;l'amitié / les amitiés;de vriendschappen;Prioritaire
+nl;de vrijheid;la liberté / les libertés;de vrijheden;Prioritaire
+nl;de vrouw;la femme / les femmes;de vrouwen;Prioritaire
+nl;de vrucht;le fruit / les fruits;de vruchten;Prioritaire
+nl;de vuist;le poing / les poings;de vuisten;Standard
+nl;het vuur;le feu / les feux;de vuren;Prioritaire
+nl;de waarheid;la vérité / les vérités;de waarheden;Prioritaire
+nl;de waarde;la valeur / les valeurs;de waarden / waardes;Prioritaire
+nl;de wagen;la voiture (charriot) / les voitures;de wagens;Prioritaire
+nl;de wand;la paroi / les parois;de wanden;Standard
+nl;de wang;la joue / les joues;de wangen;Standard
+nl;de wanhoop;le désespoir / (pas de pluriel);-;Standard
+nl;de water;l'eau / (pas de pluriel);-;Prioritaire
+nl;de week;la semaine / les semaines;de weken;Prioritaire
+nl;de weer;le temps (météo) / (pas de pluriel);-;Prioritaire
+nl;de weg;le chemin (la route) / les chemins;de wegen;Prioritaire
+nl;de weide;la prairie / les prairies;de weiden / weides;Standard
+nl;de wereld;le monde / les mondes;de werelden;Prioritaire
+nl;de werkgever;l'employeur / les employeurs;de werkgevers;Prioritaire
+nl;de werknemer;l'employé / les employés;de werknemers;Prioritaire
+nl;het werk;le travail / les travaux;de werken;Prioritaire
+nl;de werkelijkheid;la réalité / (pas de pluriel);-;Prioritaire
+nl;de wet;la loi / les lois;de wetten;Prioritaire
+nl;de wetenschap;la science / les sciences;de wetenschappen;Prioritaire
+nl;de wezen;l'être / l'orphelin / les êtres;de wezens;Standard
+nl;de wijk;le quartier / les quartiers;de wijken;Prioritaire
+nl;de wijn;le vin / les vins;de wijnen;Standard
+nl;de wijs;la manière / l'air (musique) / les airs;de wijzen;Standard
+nl;de wil;la volonté / (pas de pluriel);-;Prioritaire
+nl;de wind;le vent / les vents;de winden;Prioritaire
+nl;de winkel;le magasin / les magasins;de winkels;Prioritaire
+nl;de winst;le bénéfice / les bénéfices;de winsten;Prioritaire
+nl;de wolk;le nuage / les nuages;de wolken;Prioritaire
+nl;het woord;le mot / les mots;de woorden;Prioritaire
+nl;de woonplaats;le domicile / les domiciles;de woonplaatsen;Standard
+nl;de zaak;l'affaire (commerce) / les affaires;de zaken;Prioritaire
+nl;de zak;le sac / la poche / les sacs;de zakken;Prioritaire
+nl;de zand;le sable / (pas de pluriel);-;Prioritaire
+nl;de zee;la mer / les mers;de zeeën;Prioritaire
+nl;de zekerheid;la certitude / les certitudes;de zekerheden;Prioritaire
+nl;de zender;l'émetteur (chaîne) / les émetteurs;de zenders;Standard
+nl;de zenuw;le nerf / les nerfs;de zenuwen;Standard
+nl;de zes;le six / les six;de zessen;Standard
+nl;de zetel;le siège (fauteuil) / les sièges;de zetels;Prioritaire
+nl;de ziel;l'âme / les âmes;de zielen;Standard
+nl;de zijde;le côté / la soie / les côtés;de zijden;Prioritaire
+nl;de zin;la phrase / le sens / les phrases;de zinnen;Prioritaire
+nl;de zitting;la séance / les séances;de zittingen;Standard
+nl;de zoektocht;la recherche / les recherches;de zoektochten;Standard
+nl;de zomer;l'été / les étés;de zomers;Prioritaire
+nl;de zon;le soleil / les soleils;de zonnen;Prioritaire
+nl;de zoon;le fils / les fils;de zonen;Prioritaire
+nl;de zorg;le soin / le souci / les soucis;de zorgen;Prioritaire
+nl;de zuster;la sœur (infirmière) / les sœurs;de zusters;Standard
+nl;de zuurstof;l'oxygène / (pas de pluriel);-;Standard
+nl;de zwaarte;la pesanteur / la lourdeur / (pas de pluriel);-;Standard
+nl;de zwager;le beau-frère / les beaux-frères;de zwagers;Standard
+nl;de zwart;le noir / (pas de pluriel);-;Standard
+nl;de zweep;le fouet / les fouets;de zwepen;Standard
