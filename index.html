@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>NL Mastery Pro</title>
+    <style>
+        :root { 
+            --duo-green: #58cc02; 
+            --duo-red: #ff4b4b; 
+            --duo-blue: #1cb0f6; 
+            --duo-gray: #e5e5e5; 
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: #f7f7f7; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden; 
+        }
+        
+        .menu { 
+            display: flex; 
+            gap: 8px; 
+            padding: 12px; 
+            width: 100%; 
+            background: white; 
+            border-bottom: 2px solid var(--duo-gray); 
+            overflow-x: auto; 
+            box-sizing: border-box; 
+        }
+        .menu button { 
+            padding: 10px 16px; 
+            border-radius: 14px; 
+            border: 2px solid var(--duo-gray); 
+            background: white; 
+            font-weight: bold; 
+            color: #777; 
+            cursor: pointer; 
+            white-space: nowrap; 
+        }
+        .menu button.active { 
+            background: var(--duo-blue); 
+            color: white; 
+            border-color: #1a9bd9; 
+        }
+
+        .header-stats { width: 90%; display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+        .progress-container { flex-grow: 1; background-color: var(--duo-gray); height: 12px; border-radius: 10px; }
+        .progress-bar { width: 0%; height: 100%; background-color: var(--duo-green); border-radius: 10px; transition: width 0.5s; }
+
+        .card-container { perspective: 1000px; width: 90%; max-width: 400px; height: 350px; margin-top: 20px; }
+        .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; cursor: pointer; }
+        .card.is-flipped { transform: rotateY(180deg); }
+        .card-face { 
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            border-radius: 24px; background: white; border: 2px solid var(--duo-gray); 
+            box-shadow: 0 5px 0 var(--duo-gray); padding: 25px; text-align: center; box-sizing: border-box; 
+        }
+        .card-face-back { transform: rotateY(180deg); background-color: #d7ffb7; border-color: var(--duo-green); box-shadow: 0 5px 0 #b8e098; }
+
+        .word { font-size: 2.2rem; font-weight: bold; color: #3c3c3c; margin: 0; }
+        .mastery-dots { display: flex; gap: 4px; margin-top: 20px; }
+        .dot { width: 20px; height: 6px; background: var(--duo-gray); border-radius: 3px; }
+        .dot.filled { background: var(--duo-green); }
+
+        .controls { display: flex; width: 90%; max-width: 400px; justify-content: space-between; position: absolute; bottom: 30px; }
+        button.btn-ctrl { padding: 20px; border: none; border-radius: 18px; font-weight: bold; font-size: 1.1rem; width: 47%; cursor: pointer; color: white; }
+        .btn-bad { background-color: var(--duo-red); box-shadow: 0 4px 0 #c83737; }
+        .btn-good { background-color: var(--duo-green); box-shadow: 0 4px 0 #45a302; }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <button class="active" onclick="setCategory('Tous', this)">Tous</button>
+        <button onclick="setCategory('Verbe', this)">Verbes</button>
+        <button onclick="setCategory('Nom', this)">Noms</button>
+        <button onclick="setCategory('Adjectif', this)">Adjectifs</button>
+    </div>
+
+    <div class="header-stats">
+        <span id="scoreText" style="font-weight: bold; color: #555; font-size: 0.9rem;">0 maîtrisés</span>
+        <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+
+    <div class="card-container" onclick="flipCard()">
+        <div class="card" id="card">
+            <div class="card-face">
+                <span id="type-badge" style="position:absolute; top:20px; font-size:11px; color:#aaa; text-transform: uppercase;">CATÉGORIE</span>
+                <p class="word" id="nl-word">Chargement...</p>
+                <div class="mastery-dots" id="masteryDots">
+                    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+            <div class="card-face card-face-back">
+                <p id="fr-word" style="font-size: 1.6rem; font-weight: bold; margin: 0;">...</p>
+                <p id="extra-info" style="color: #58a700; margin-top: 15px; font-style: italic; font-size: 0.9rem;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-ctrl btn-bad" onclick="handleAnswer(false)">À REVOIR</button>
+        <button class="btn-ctrl btn-good" onclick="handleAnswer(true)">CONNU</button>
+    </div>
+
+    <script>
+        let fullDictionary = [];
+        let currentFilter = [];
+        let currentIndex = 0;
+        let stats = JSON.parse(localStorage.getItem('nl_stats_pro')) || {};
+
+        async function loadCSV(fileName, category) {
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) return; // Ignore si fichier absent
+                const data = await response.text();
+                const lines = data.split(/\r?\n/).slice(1);
+                lines.forEach(line => {
+                    const cols = line.split(';');
+                    if (cols.length >= 2 && cols[1] && cols[1].trim() !== "") {
+                        fullDictionary.push({ 
+                            id: category + "_" + cols[1].trim(), 
+                            nl: cols[1].trim(), 
+                            fr: cols[2] ? cols[2].trim() : "?", 
+                            extra: cols[3] ? cols[3].trim() : "", 
+                            cat: category 
+                        });
+                    }
+                });
+            } catch (e) { console.error("Erreur sur " + fileName); }
+        }
+
+        async function init() {
+            // NOMS DES FICHIERS CORRIGÉS
+            await loadCSV('VERBENL.csv', 'Verbe');
+            await loadCSV('NOMNL.csv', 'Nom');
+            await loadCSV('ADJNL.csv', 'Adjectif');
+            
+            if (fullDictionary.length === 0) {
+                document.getElementById('nl-word').innerText = "Fichiers introuvables";
+            } else {
+                setCategory('Tous');
+            }
+        }
+
+        function setCategory(cat, btn) {
+            if(btn) {
+                document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            currentFilter = (cat === 'Tous') ? [...fullDictionary] : fullDictionary.filter(item => item.cat === cat);
+            
+            // Mélange aléatoire
+            currentFilter.sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            displayWord();
+        }
+
+        function displayWord() {
+            if (currentFilter.length === 0) return;
+            const item = currentFilter[currentIndex];
+            const itemStats = stats[item.id] || { level: 0 };
+            
+            document.getElementById('nl-word').innerText = item.nl;
+            document.getElementById('fr-word').innerText = item.fr;
+            document.getElementById('extra-info').innerText = item.extra;
+            document.getElementById('type-badge').innerText = item.cat;
+            document.getElementById('card').classList.remove('is-flipped');
+            
+            const dots = document.getElementById('masteryDots').children;
+            for(let i=0; i<5; i++) dots[i].className = i < itemStats.level ? 'dot filled' : 'dot';
+            
+            updateGlobalStats();
+        }
+
+        function updateGlobalStats() {
+            const masteredCount = Object.values(stats).filter(s => s.level >= 5).length;
+            document.getElementById('scoreText').innerText = masteredCount + " maîtrisés";
+            const percent = (masteredCount / Math.max(1, fullDictionary.length)) * 100;
+            document.getElementById('progressBar').style.width = percent + "%";
+        }
+
+        function handleAnswer(known) {
+            if (currentFilter.length === 0) return;
+            const item = currentFilter[currentIndex];
+            if (!stats[item.id]) stats[item.id] = { level: 0 };
+            
+            if (known) {
+                stats[item.id].level = Math.min(stats[item.id].level + 1, 5);
+            } else {
+                stats[item.id].level = Math.max(0, stats[item.id].level - 1);
+            }
+            
+            localStorage.setItem('nl_stats_pro', JSON.stringify(stats));
+            currentIndex = (currentIndex + 1) % currentFilter.length;
+            displayWord();
+        }
+
+        function flipCard() { document.getElementById('card').classList.toggle('is-flipped'); }
+        
+        init();
+    </script>
+</body>
+</html>
