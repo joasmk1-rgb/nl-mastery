@@ -3,170 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NL Mastery Pro v4</title>
+    <title>NL Mastery - Arcade Edition</title>
     <style>
-        :root { --duo-green: #58cc02; --duo-red: #ff4b4b; --duo-blue: #1cb0f6; --duo-gray: #e5e5e5; --duo-gold: #ffc800; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f7f7f7; display: flex; flex-direction: column; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        :root { --duo-green: #58cc02; --duo-red: #ff4b4b; --duo-blue: #1cb0f6; --duo-gray: #e5e5e5; --duo-gold: #ffc800; --duo-purple: #ce82ff; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f7f7f7; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
         
-        /* Stats & Barre de progression */
-        .top-bar { width: 100%; background: white; border-bottom: 2px solid var(--duo-gray); padding: 10px 0; display: flex; flex-direction: column; align-items: center; }
-        .stats-row { display: flex; justify-content: space-around; width: 100%; max-width: 400px; font-weight: bold; color: #555; margin-bottom: 8px; }
-        .level-badge { background: var(--duo-gold); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; }
-        .progress-container { width: 90%; max-width: 400px; background: var(--duo-gray); height: 12px; border-radius: 6px; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: var(--duo-green); transition: width 0.5s; }
+        /* Stats Bar */
+        .top-bar { width: 100%; background: white; border-bottom: 2px solid var(--duo-gray); padding: 10px 0; display: flex; flex-direction: column; align-items: center; position: sticky; top:0; z-index: 100; }
+        .stats-row { display: flex; justify-content: space-between; width: 85%; max-width: 400px; font-weight: bold; color: #4b4b4b; margin-bottom: 5px; font-size: 0.8rem; }
+        .progress-container { width: 85%; max-width: 400px; background: var(--duo-gray); height: 10px; border-radius: 5px; overflow: hidden; }
+        .progress-bar { width: 0%; height: 100%; background: var(--duo-green); transition: width 0.4s; }
 
-        /* Menu de navigation */
-        .menu { display: flex; gap: 8px; padding: 12px; width: 100%; overflow-x: auto; background: white; border-bottom: 1px solid #ddd; box-sizing: border-box; scrollbar-width: none; }
-        .menu::-webkit-scrollbar { display: none; }
-        .menu button { padding: 10px 16px; border-radius: 12px; border: 2px solid var(--duo-gray); background: white; font-weight: bold; color: #777; cursor: pointer; white-space: nowrap; }
+        /* Menu */
+        .menu { display: flex; gap: 8px; padding: 10px; width: 100%; overflow-x: auto; background: white; border-bottom: 1px solid #ddd; box-sizing: border-box; }
+        .menu button { padding: 8px 12px; border-radius: 10px; border: 2px solid var(--duo-gray); background: white; font-weight: bold; color: #777; cursor: pointer; white-space: nowrap; font-size: 0.8rem; }
         .menu button.active { background: var(--duo-blue); color: white; border-color: #1a9bd9; }
+        .btn-game-mode { border-color: var(--duo-purple) !important; color: var(--duo-purple) !important; }
+        .btn-game-mode.active { background: var(--duo-purple) !important; color: white !important; }
 
-        /* Système de Cartes */
-        .card-container { perspective: 1000px; width: 90%; max-width: 400px; height: 350px; margin-top: 30px; }
+        /* Views */
+        .view { width: 100%; display: none; flex-direction: column; align-items: center; padding-top: 20px; }
+        .view.active { display: flex; }
+
+        /* Flashcard View */
+        .card-container { perspective: 1000px; width: 90%; max-width: 350px; height: 300px; }
         .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; cursor: pointer; }
         .card.is-flipped { transform: rotateY(180deg); }
-        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 24px; background: white; border: 2px solid var(--duo-gray); box-shadow: 0 6px 0 var(--duo-gray); padding: 25px; text-align: center; box-sizing: border-box; }
-        .card-face-back { transform: rotateY(180deg); background-color: #d7ffb7; border-color: var(--duo-green); box-shadow: 0 6px 0 #b8e098; }
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 20px; background: white; border: 2px solid var(--duo-gray); box-shadow: 0 5px 0 var(--duo-gray); padding: 20px; text-align: center; box-sizing: border-box; }
+        .card-face-back { transform: rotateY(180deg); background-color: #d7ffb7; border-color: var(--duo-green); }
+        .word { font-size: 1.8rem; font-weight: bold; color: #3c3c3c; }
 
-        .word { font-size: 2.2rem; font-weight: bold; color: #3c3c3c; margin: 0; }
-        .phrase { font-size: 1.5rem; }
-        
-        .controls { display: flex; width: 90%; max-width: 400px; justify-content: space-between; position: absolute; bottom: 40px; }
-        .btn-ctrl { padding: 20px; border: none; border-radius: 18px; font-weight: bold; width: 47%; cursor: pointer; color: white; font-size: 1.1rem; }
+        .controls { display: flex; width: 90%; max-width: 350px; justify-content: space-between; margin-top: 30px; }
+        .btn-ctrl { padding: 15px; border: none; border-radius: 15px; font-weight: bold; width: 48%; cursor: pointer; color: white; font-size: 1rem; }
         .btn-bad { background: var(--duo-red); box-shadow: 0 4px 0 #c83737; }
         .btn-good { background: var(--duo-green); box-shadow: 0 4px 0 #45a302; }
+
+        /* Memory View */
+        .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 90%; max-width: 350px; }
+        .memory-card { height: 70px; background: white; border: 2px solid var(--duo-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; padding: 5px; box-shadow: 0 3px 0 var(--duo-gray); }
+        .memory-card.selected { background: var(--duo-blue); color: white; border-color: #1a9bd9; }
+        .memory-card.matched { visibility: hidden; }
+
+        /* Quiz View */
+        .quiz-container { width: 90%; max-width: 350px; background: white; padding: 20px; border-radius: 20px; border: 2px solid var(--duo-gray); text-align: center; }
+        .quiz-question { font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .btn-opt { padding: 12px; border: 2px solid var(--duo-gray); border-radius: 12px; background: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-opt:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="stats-row">
-            <span>XP: <span id="xp-display">0</span></span>
-            <span class="level-badge">NIVEAU <span id="lvl-display">1</span></span>
-            <span>🎯 <span id="mastery-display">0</span></span>
+            <span>LVL <span id="lvl-display">1</span></span>
+            <span>🎯 <span id="mastery-display">0</span>/2000</span>
         </div>
         <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
     </div>
 
     <div class="menu">
-        <button class="active" onclick="filterCat('TOUS', this)">Tous</button>
-        <button onclick="filterCat('BASE', this)">Base</button>
-        <button onclick="filterCat('VERBE', this)">Verbes</button>
-        <button onclick="filterCat('NOM', this)">Noms</button>
-        <button onclick="filterCat('ADJECTIF', this)">Adjectifs</button>
+        <button class="active" onclick="switchView('flashcard', this)">Réviser</button>
+        <button class="btn-game-mode" onclick="switchView('memory', this)">Jeu: Paires</button>
+        <button class="btn-game-mode" onclick="switchView('quiz', this)">Jeu: Quiz</button>
     </div>
 
-    <div class="card-container" onclick="flipCard()">
-        <div class="card" id="card">
-            <div class="card-face">
-                <span id="cat-badge" style="position:absolute; top:20px; font-size:11px; color:#aaa; text-transform:uppercase;">-</span>
-                <p id="nl-display" class="word">Chargement...</p>
+    <div id="flashcard-view" class="view active">
+        <div class="card-container" onclick="flipCard()">
+            <div class="card" id="card">
+                <div class="card-face"><p id="nl-display" class="word">...</p></div>
+                <div class="card-face card-face-back"><p id="fr-display" style="font-size: 1.4rem; font-weight: bold;">...</p></div>
             </div>
-            <div class="card-face card-face-back">
-                <p id="fr-display" style="font-size: 1.6rem; font-weight: bold; color: #1a1a1a;">...</p>
-            </div>
+        </div>
+        <div class="controls">
+            <button class="btn-ctrl btn-bad" onclick="handleAnswer(false)">À REVOIR</button>
+            <button class="btn-ctrl btn-good" onclick="handleAnswer(true)">CONNU</button>
         </div>
     </div>
 
-    <div class="controls">
-        <button class="btn-ctrl btn-bad" onclick="handleAnswer(false)">À REVOIR</button>
-        <button class="btn-ctrl btn-good" onclick="handleAnswer(true)">CONNU</button>
+    <div id="memory-view" class="view">
+        <div class="memory-grid" id="memory-grid"></div>
+        <button class="btn-ctrl btn-good" style="margin-top:20px; width:80%;" onclick="startMemory()">Relancer</button>
+    </div>
+
+    <div id="quiz-view" class="view">
+        <div class="quiz-container">
+            <div class="quiz-question" id="quiz-q">?</div>
+            <div class="quiz-options" id="quiz-opts"></div>
+        </div>
     </div>
 
     <script>
         let fullDb = [];
-        let filteredDb = [];
-        let currentItem = null;
-        let userData = JSON.parse(localStorage.getItem('nl_mastery_v4')) || { xp: 0, history: {} };
+        let userData = JSON.parse(localStorage.getItem('nl_arcade_data')) || { mastered: [] };
+        let memorySelected = [];
 
-        async function loadAll() {
-            const files = [
-                { name: 'THEME_BASE.csv', cat: 'BASE' },
-                { name: 'VERBENL.csv', cat: 'VERBE' },
-                { name: 'NOMNL.csv', cat: 'NOM' },
-                { name: 'ADJNL.csv', cat: 'ADJECTIF' }
-            ];
-
-            fullDb = [];
-            for (let file of files) {
+        async function init() {
+            const files = ['THEME_BASE.csv', 'VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv'];
+            for (let f of files) {
                 try {
-                    const res = await fetch(file.name);
-                    if (!res.ok) continue;
-                    const text = await res.text();
-                    const lines = text.split(/\r?\n/).slice(1);
-                    lines.forEach((line, index) => {
+                    const r = await fetch(f); if(!r.ok) continue;
+                    const t = await r.text();
+                    t.split(/\r?\n/).slice(1).forEach(line => {
                         const cols = line.includes(';') ? line.split(';') : line.split(',');
-                        if (cols.length >= 2 && cols[1] && !cols[1].includes('{')) {
-                            fullDb.push({
-                                id: file.cat + "_" + index,
-                                nl: cols[1].trim(),
-                                fr: cols[2] ? cols[2].trim() : "?",
-                                cat: file.cat
-                            });
-                        }
+                        if(cols[1]) fullDb.push({ id: f+cols[1], nl: cols[1].trim(), fr: cols[2].trim() });
                     });
-                } catch (e) {}
+                } catch(e) {}
             }
-            filterCat('TOUS');
-        }
-
-        function filterCat(cat, btn) {
-            if (btn) {
-                document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            }
-            filteredDb = (cat === 'TOUS') ? [...fullDb] : fullDb.filter(i => i.cat === cat);
-            nextCard();
-        }
-
-        function nextCard() {
-            if (filteredDb.length === 0) return;
-
-            // Priorité : Mots jamais vus dans cette catégorie
-            let pool = filteredDb.filter(i => !userData.history[i.id]);
-            if (pool.length === 0) pool = filteredDb; // Si tout est vu, on reprend tout
-
-            currentItem = pool[Math.floor(Math.random() * pool.length)];
-            
-            const nlEl = document.getElementById('nl-display');
-            nlEl.innerText = currentItem.nl;
-            nlEl.className = currentItem.nl.length > 15 ? 'word phrase' : 'word';
-            document.getElementById('fr-display').innerText = currentItem.fr;
-            document.getElementById('cat-badge').innerText = currentItem.cat;
-            document.getElementById('card').classList.remove('is-flipped');
+            nextFlashcard();
             updateUI();
         }
 
+        function switchView(view, btn) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(view + '-view').classList.add('active');
+            document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if(view === 'memory') startMemory();
+            if(view === 'quiz') startQuiz();
+        }
+
+        // --- FLASHCARDS ---
+        function nextFlashcard() {
+            let pool = fullDb.filter(i => !userData.mastered.includes(i.id));
+            if(pool.length === 0) pool = fullDb;
+            let item = pool[Math.floor(Math.random()*pool.length)];
+            window.currentCard = item;
+            document.getElementById('nl-display').innerText = item.nl;
+            document.getElementById('fr-display').innerText = item.fr;
+            document.getElementById('card').classList.remove('is-flipped');
+        }
+
         function handleAnswer(known) {
-            if (!currentItem) return;
-            if (known) {
-                userData.xp += 10;
-                userData.history[currentItem.id] = true;
-            } else {
-                userData.xp = Math.max(0, userData.xp - 5);
-            }
-            localStorage.setItem('nl_mastery_v4', JSON.stringify(userData));
-            nextCard();
+            if(known && !userData.mastered.includes(window.currentCard.id)) userData.mastered.push(window.currentCard.id);
+            save(); nextFlashcard();
         }
 
+        // --- MEMORY ---
+        function startMemory() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = "";
+            let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 5);
+            let cards = [];
+            items.forEach(i => {
+                cards.push({ text: i.nl, match: i.id, type: 'nl' });
+                cards.push({ text: i.fr, match: i.id, type: 'fr' });
+            });
+            cards.sort(() => 0.5 - Math.random()).forEach(c => {
+                let div = document.createElement('div');
+                div.className = 'memory-card';
+                div.innerText = c.text;
+                div.onclick = () => {
+                    if(div.classList.contains('matched') || memorySelected.includes(div)) return;
+                    div.classList.add('selected');
+                    memorySelected.push({el: div, match: c.match});
+                    if(memorySelected.length === 2) {
+                        if(memorySelected[0].match === memorySelected[1].match) {
+                            memorySelected.forEach(s => s.el.classList.add('matched'));
+                            userData.mastered.push(memorySelected[0].match); save();
+                        }
+                        setTimeout(() => {
+                            memorySelected.forEach(s => s.el.classList.remove('selected'));
+                            memorySelected = [];
+                        }, 500);
+                    }
+                };
+                grid.appendChild(div);
+            });
+        }
+
+        // --- QUIZ ---
+        function startQuiz() {
+            let correct = fullDb[Math.floor(Math.random()*fullDb.length)];
+            let others = fullDb.filter(i => i.id !== correct.id).sort(() => 0.5 - Math.random()).slice(0, 2);
+            let opts = [correct, ...others].sort(() => 0.5 - Math.random());
+            document.getElementById('quiz-q').innerText = correct.nl;
+            const optContainer = document.getElementById('quiz-opts');
+            optContainer.innerHTML = "";
+            opts.forEach(o => {
+                let b = document.createElement('button');
+                b.className = 'btn-opt';
+                b.innerText = o.fr;
+                b.onclick = () => {
+                    if(o.id === correct.id) {
+                        b.style.background = "#d7ffb7";
+                        userData.mastered.push(correct.id); save();
+                        setTimeout(startQuiz, 1000);
+                    } else { b.style.background = "#ff4b4b"; }
+                };
+                optContainer.appendChild(b);
+            });
+        }
+
+        function save() { localStorage.setItem('nl_arcade_data', JSON.stringify(userData)); updateUI(); }
         function updateUI() {
-            document.getElementById('xp-display').innerText = userData.xp;
-            
-            // Calcul du niveau : 1 niveau tous les 10 mots maîtrisés (100 XP)
-            const level = Math.floor(userData.xp / 100) + 1;
-            document.getElementById('lvl-display').innerText = level;
-            
-            const masteredCount = Object.keys(userData.history).length;
-            document.getElementById('mastery-display').innerText = masteredCount;
-
-            // Barre de progression vers le prochain niveau
-            const progress = (userData.xp % 100);
-            document.getElementById('progressBar').style.width = progress + "%";
+            let count = [...new Set(userData.mastered)].length;
+            document.getElementById('mastery-display').innerText = count;
+            document.getElementById('lvl-display').innerText = Math.floor(count / 20) + 1;
+            document.getElementById('progressBar').style.width = ((count % 20) / 20 * 100) + "%";
         }
-
         function flipCard() { document.getElementById('card').classList.toggle('is-flipped'); }
 
-        loadAll();
+        init();
     </script>
 </body>
 </html>
