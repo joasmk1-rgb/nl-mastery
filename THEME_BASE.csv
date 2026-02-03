@@ -1,0 +1,21 @@
+ID;NL;FR;EXTRA;TYPE;PRIORITE
+B1;Hallo / Dag;Bonjour / Salut;Salutation de base;PHRASE;1
+B2;Hoe gaat het?;Comment ça va ?;Social;PHRASE;1
+B3;Ik ben;Je suis...;Se présenter;PHRASE;1
+B4;Mijn naam is;Mon nom est...;Se présenter;PHRASE;1
+B5;Ik kom uit;Je viens de...;Origine;PHRASE;1
+B6;Hoe heet je?;Comment t'appelles-tu ?;Question;PHRASE;1
+B7;Ja;Oui;Basique;MOT;1
+B8;Nee;Non;Basique;MOT;1
+B9;Alstublieft;S'il vous plaît;Politesse;MOT;1
+B10;Bedankt;Merci;Politesse;MOT;1
+B11;Spreekt u Frans?;Parlez-vous français ?;Survie;PHRASE;1
+B12;Ik begrijp het niet;Je ne comprends pas;Survie;PHRASE;1
+B13;Wat is je Instagram?;C'est quoi ton Instagram ?;Réseaux;PHRASE;1
+B14;Ik woon in;J'habite à...;Localisation;PHRASE;1
+B15;Tot ziens;Au revoir;Salutation;MOT;1
+B16;Hulp;Aide;Urgence;MOT;1
+B17;Waar is...?;Où est...?;Direction;PHRASE;1
+B18;Hoeveel kost het?;Combien ça coûte ?;Argent;PHRASE;1
+B19;Lekker;Bon / Délicieux;Nourriture;MOT;1
+B20;Vandaag;Aujourd'hui;Temps;MOT;1
