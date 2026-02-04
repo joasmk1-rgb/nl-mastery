@@ -3,226 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NL Mastery - Dashboard</title>
+    <title>NL Mastery - Ultimate Pro</title>
     <style>
-        :root { --duo-green: #58cc02; --duo-red: #ff4b4b; --duo-blue: #1cb0f6; --duo-gray: #e5e5e5; --duo-gold: #ffc800; --duo-purple: #ce82ff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f7f7f7; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; }
+        :root { --duo-green: #58cc02; --duo-red: #ff4b4b; --duo-blue: #1cb0f6; --duo-gray: #e5e5e5; --duo-purple: #ce82ff; --duo-gold: #ffc800; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f7f7f7; margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
         
-        /* Stats Bar */
-        .top-bar { width: 100%; background: white; border-bottom: 2px solid var(--duo-gray); padding: 10px 0; display: flex; flex-direction: column; align-items: center; position: sticky; top:0; z-index: 100; }
-        .stats-row { display: flex; justify-content: space-between; width: 85%; max-width: 400px; font-weight: bold; color: #4b4b4b; margin-bottom: 5px; font-size: 0.8rem; }
-        .progress-container { width: 85%; max-width: 400px; background: var(--duo-gray); height: 10px; border-radius: 5px; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: var(--duo-green); transition: width 0.4s; }
-
         /* Menu */
-        .menu { display: flex; gap: 8px; padding: 10px; width: 100%; overflow-x: auto; background: white; border-bottom: 1px solid #ddd; box-sizing: border-box; }
-        .menu button { padding: 8px 12px; border-radius: 10px; border: 2px solid var(--duo-gray); background: white; font-weight: bold; color: #777; cursor: pointer; white-space: nowrap; font-size: 0.8rem; }
+        .menu { display: flex; gap: 5px; padding: 10px; width: 100%; overflow-x: auto; background: white; border-bottom: 2px solid var(--duo-gray); box-sizing: border-box; }
+        .menu button { padding: 10px 15px; border-radius: 12px; border: 2px solid var(--duo-gray); background: white; font-weight: bold; cursor: pointer; white-space: nowrap; font-size: 0.8rem; flex-shrink: 0; }
         .menu button.active { background: var(--duo-blue); color: white; border-color: #1a9bd9; }
 
-        /* Views */
-        .view { width: 100%; display: none; flex-direction: column; align-items: center; padding-top: 20px; }
+        /* Vues */
+        .view { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px; box-sizing: border-box; flex-grow: 1; }
         .view.active { display: flex; }
 
-        /* Flashcard & Games (Simplified for brevity) */
-        .card-container { perspective: 1000px; width: 90%; max-width: 350px; height: 280px; }
-        .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; cursor: pointer; }
-        .card.is-flipped { transform: rotateY(180deg); }
-        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 20px; background: white; border: 2px solid var(--duo-gray); box-shadow: 0 5px 0 var(--duo-gray); padding: 20px; text-align: center; box-sizing: border-box; }
-        .card-face-back { transform: rotateY(180deg); background-color: #d7ffb7; border-color: var(--duo-green); }
-        
-        .controls { display: flex; width: 90%; max-width: 350px; justify-content: space-between; margin-top: 20px; }
-        .btn-ctrl { padding: 15px; border: none; border-radius: 15px; font-weight: bold; width: 48%; cursor: pointer; color: white; }
-        .btn-bad { background: var(--duo-red); box-shadow: 0 4px 0 #c83737; }
-        .btn-good { background: var(--duo-green); box-shadow: 0 4px 0 #45a302; }
+        /* Écriture */
+        .write-box { width: 95%; max-width: 450px; background: white; padding: 30px; border-radius: 20px; border: 2px solid var(--duo-gray); text-align: center; box-shadow: 0 4px 0 var(--duo-gray); }
+        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid var(--duo-gray); font-size: 1.1rem; text-align: center; margin-top: 20px; outline: none; box-sizing: border-box; }
+        input:focus { border-color: var(--duo-blue); border-width: 3px; }
+        #write-feedback { margin-top: 15px; font-weight: bold; min-height: 1.2em; }
 
-        /* Dashboard Styles */
-        .dash-card { width: 85%; max-width: 400px; background: white; border: 2px solid var(--duo-gray); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-sizing: border-box; }
-        .dash-title { font-weight: bold; color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .dash-value { font-size: 1.8rem; font-weight: bold; color: #4b4b4b; }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 85%; max-width: 400px; }
-        
-        .mini-progress { background: #eee; height: 8px; border-radius: 4px; margin-top: 10px; overflow: hidden; }
-        .mini-bar { height: 100%; background: var(--duo-blue); width: 0%; }
+        /* Duel Local */
+        #duel-view { padding: 0; height: 100%; justify-content: space-between; }
+        .player-zone { width: 100%; height: 49%; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; padding: 20px; box-sizing: border-box; }
+        #p1 { transform: rotate(180deg); background: #fff5f5; }
+        #p2 { background: #f5faff; }
+        .duel-word { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; text-align: center; }
+        .duel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 300px; }
+        .duel-btn { padding: 15px; border-radius: 12px; border: none; background: white; border: 2px solid var(--duo-gray); font-weight: bold; cursor: pointer; font-size: 0.9rem; }
 
-        /* Memory & Quiz Styles */
-        .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 90%; max-width: 350px; }
-        .memory-card { height: 60px; background: white; border: 2px solid var(--duo-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; padding: 5px; }
-        .memory-card.selected { background: var(--duo-blue); color: white; }
-        .memory-card.matched { visibility: hidden; }
+        /* Duel Asynchrone (Share) */
+        .share-box { background: #fff; padding: 20px; border-radius: 15px; border: 2px dashed var(--duo-gold); text-align: center; margin-top: 20px; width: 90%; }
+        .code-display { font-family: monospace; background: #eee; padding: 10px; border-radius: 5px; display: block; margin: 10px 0; word-break: break-all; }
+
+        /* Stats bar */
+        .stats-header { font-size: 0.75rem; font-weight: bold; color: #777; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="stats-row">
-            <span>LVL <span id="lvl-display">1</span></span>
-            <span>TOTAL: <span id="total-mastered">0</span> / 2000</span>
-        </div>
-        <div class="progress-container"><div class="progress-bar" id="p-bar"></div></div>
-    </div>
-
     <div class="menu">
-        <button class="active" onclick="switchView('flashcard', this)">Réviser</button>
-        <button onclick="switchView('memory', this)">Memory</button>
-        <button onclick="switchView('quiz', this)">Quiz</button>
-        <button style="border-color: var(--duo-gold); color: var(--duo-gold);" onclick="switchView('stats', this)">📊 Stats</button>
+        <button id="btn-write" class="active" onclick="switchView('write')">✍️ Écriture</button>
+        <button id="btn-duel" onclick="switchView('duel')">⚔️ Duel Local</button>
+        <button id="btn-share" onclick="switchView('share')">🏆 Défis</button>
     </div>
 
-    <div id="flashcard-view" class="view active">
-        <div class="card-container" onclick="flipCard()">
-            <div class="card" id="card">
-                <div class="card-face"><p id="nl-display" style="font-size: 2rem; font-weight: bold;">...</p></div>
-                <div class="card-face card-face-back"><p id="fr-display" style="font-size: 1.5rem; font-weight: bold;">...</p></div>
-            </div>
-        </div>
-        <div class="controls">
-            <button class="btn-ctrl btn-bad" onclick="handleAnswer(false)">À REVOIR</button>
-            <button class="btn-ctrl btn-good" onclick="handleAnswer(true)">CONNU</button>
+    <div id="write-view" class="view active">
+        <div class="stats-header">Mots maîtrisés: <span id="mast-count">0</span> / 2000</div>
+        <div class="write-box">
+            <small id="type-label" style="color:var(--duo-purple); font-weight:bold;"></small>
+            <p id="write-q" style="font-size: 1.3rem; font-weight: bold; margin: 15px 0;">Chargement...</p>
+            <input type="text" id="write-input" placeholder="Tapez en néerlandais..." autocomplete="off">
+            <p id="write-feedback"></p>
         </div>
     </div>
 
-    <div id="stats-view" class="view">
-        <div class="dash-card">
-            <span class="dash-title">Niveau Actuel</span>
-            <div class="dash-value" id="dash-lvl">Niveau 1</div>
-            <div class="mini-progress"><div class="mini-bar" id="dash-lvl-bar"></div></div>
-            <p style="font-size: 0.7rem; color: #aaa; margin-top: 5px;">Prochain niveau dans <span id="dash-next">0</span> mots</p>
+    <div id="duel-view" class="view">
+        <div class="player-zone" id="p1">
+            <div id="d-q1" class="duel-word">...</div>
+            <div id="d-opts1" class="duel-grid"></div>
         </div>
-
-        <div class="stat-grid">
-            <div class="dash-card" style="margin: 0; padding: 15px;">
-                <span class="dash-title">Mots Maîtrisés</span>
-                <div class="dash-value" style="font-size: 1.4rem;" id="dash-mastered">0</div>
-            </div>
-            <div class="dash-card" style="margin: 0; padding: 15px;">
-                <span class="dash-title">Exploration</span>
-                <div class="dash-value" style="font-size: 1.4rem;" id="dash-percent">0%</div>
-            </div>
-        </div>
-
-        <div class="dash-card" style="margin-top: 15px;">
-            <span class="dash-title">Répartition par catégorie</span>
-            <div id="category-stats" style="font-size: 0.8rem; line-height: 1.6;">
-                </div>
+        <div class="player-zone" id="p2">
+            <div id="d-q2" class="duel-word">...</div>
+            <div id="d-opts2" class="duel-grid"></div>
         </div>
     </div>
 
-    <div id="memory-view" class="view"><div class="memory-grid" id="memory-grid"></div></div>
+    <div id="share-view" class="view">
+        <div class="share-box">
+            <h3>Défier un ami</h3>
+            <p>Ton score actuel est basé sur tes mots maîtrisés.</p>
+            <button onclick="generateShareCode()" style="padding:10px; background:var(--duo-gold); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Générer mon Code Défi</button>
+            <span id="share-code-out" class="code-display">Code s'affichera ici...</span>
+        </div>
 
-    <div id="quiz-view" class="view" style="text-align:center;">
-        <div id="quiz-q" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">?</div>
-        <div id="quiz-opts" style="display: flex; flex-direction: column; gap: 10px; width: 85%;"></div>
+        <div class="share-box" style="border-color: var(--duo-blue);">
+            <h3>Relever un défi</h3>
+            <input type="text" id="input-challenge" placeholder="Coller le code ici..." style="margin-top:0;">
+            <button onclick="loadChallenge()" style="padding:10px; background:var(--duo-blue); border:none; border-radius:8px; font-weight:bold; color:white; margin-top:10px; cursor:pointer;">Lancer le Défi</button>
+        </div>
     </div>
 
     <script>
         let fullDb = [];
-        let userData = JSON.parse(localStorage.getItem('nl_pro_final')) || { mastered: [], seen: [] };
+        let userData = JSON.parse(localStorage.getItem('nl_mastery_final')) || { mastered: [], score: 0 };
+        let currentItem = null;
 
-        async function init() {
-            const files = [{n:'THEME_BASE.csv', c:'BASE'}, {n:'VERBENL.csv', c:'VERBE'}, {n:'NOMNL.csv', c:'NOM'}, {n:'ADJNL.csv', c:'ADJ'}];
+        // --- CHARGEMENT DES DONNÉES ---
+        async function loadData() {
+            const files = ['PHRASES_LABO.csv', 'MOTS_LABO.csv'];
             for (let f of files) {
                 try {
-                    const r = await fetch(f.n); if(!r.ok) continue;
+                    const r = await fetch(f);
                     const t = await r.text();
-                    t.split(/\r?\n/).slice(1).forEach(line => {
-                        const cols = line.includes(';') ? line.split(';') : line.split(',');
-                        if(cols[1]) fullDb.push({ id: f.c+"_"+cols[1].trim(), nl: cols[1].trim(), fr: cols[2].trim(), cat: f.c });
-                    });
-                } catch(e) {}
-            }
-            nextFlashcard(); updateUI();
-        }
-
-        function switchView(view, btn) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(view + '-view').classList.add('active');
-            document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if(view === 'stats') updateDashboard();
-            if(view === 'memory') startMemory();
-            if(view === 'quiz') startQuiz();
-        }
-
-        function handleAnswer(known) {
-            if(!userData.seen.includes(window.currentCard.id)) userData.seen.push(window.currentCard.id);
-            if(known && !userData.mastered.includes(window.currentCard.id)) userData.mastered.push(window.currentCard.id);
-            save(); nextFlashcard();
-        }
-
-        function nextFlashcard() {
-            let item = fullDb[Math.floor(Math.random()*fullDb.length)];
-            window.currentCard = item;
-            document.getElementById('nl-display').innerText = item.nl;
-            document.getElementById('fr-display').innerText = item.fr;
-            document.getElementById('card').classList.remove('is-flipped');
-        }
-
-        function updateDashboard() {
-            const m = userData.mastered.length;
-            const s = userData.seen.length;
-            document.getElementById('dash-lvl').innerText = "Niveau " + (Math.floor(m/20)+1);
-            document.getElementById('dash-mastered').innerText = m;
-            document.getElementById('dash-percent').innerText = Math.round((s/fullDb.length)*100) + "%";
-            document.getElementById('dash-next').innerText = 20 - (m % 20);
-            document.getElementById('dash-lvl-bar').style.width = ((m % 20) / 20 * 100) + "%";
-
-            // Stats par catégorie
-            const cats = ['BASE', 'VERBE', 'NOM', 'ADJ'];
-            let html = "";
-            cats.forEach(c => {
-                const totalCat = fullDb.filter(i => i.cat === c).length;
-                const mastCat = userData.mastered.filter(id => id.startsWith(c)).length;
-                if(totalCat > 0) {
-                    html += `<div><strong>${c}</strong>: ${mastCat}/${totalCat} maîtrisés</div>`;
-                }
-            });
-            document.getElementById('category-stats').innerHTML = html;
-        }
-
-        function save() { localStorage.setItem('nl_pro_final', JSON.stringify(userData)); updateUI(); }
-        function updateUI() {
-            const m = userData.mastered.length;
-            document.getElementById('total-mastered').innerText = m;
-            document.getElementById('lvl-display').innerText = Math.floor(m / 20) + 1;
-            document.getElementById('p-bar').style.width = ((m % 20) / 20 * 100) + "%";
-        }
-
-        function flipCard() { document.getElementById('card').classList.toggle('is-flipped'); }
-        
-        // Memory & Quiz (Même logique que précédemment)
-        function startMemory() {
-            const grid = document.getElementById('memory-grid'); grid.innerHTML = "";
-            let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 5);
-            let cards = []; items.forEach(i => { cards.push({t:i.nl, m:i.id}, {t:i.fr, m:i.id}); });
-            let sel = [];
-            cards.sort(() => 0.5 - Math.random()).forEach(c => {
-                let d = document.createElement('div'); d.className='memory-card'; d.innerText=c.t;
-                d.onclick=() => {
-                    if(sel.length<2 && !d.classList.contains('matched')) {
-                        d.classList.add('selected'); sel.push({el:d, m:c.m});
-                        if(sel.length===2) {
-                            if(sel[0].m === sel[1].m) { sel.forEach(s=>s.el.classList.add('matched')); userData.mastered.push(sel[0].m); save(); }
-                            setTimeout(() => { sel.forEach(s=>s.el.classList.remove('selected')); sel=[]; }, 500);
+                    const lines = t.split(/\r?\n/).slice(1);
+                    lines.forEach(line => {
+                        const cols = line.split(';');
+                        if(cols.length >= 3) {
+                            fullDb.push({ id: cols[0], fr: cols[1], nl: cols[2].trim(), type: f.includes('MOTS') ? 'MOT' : 'PHRASE' });
                         }
+                    });
+                } catch(e) { console.error("Erreur chargement:", f); }
+            }
+            updateStats();
+            nextWrite();
+        }
+
+        // --- NAVIGATION ---
+        function switchView(v) {
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.menu button').forEach(el => el.classList.remove('active'));
+            document.getElementById(v + '-view').classList.add('active');
+            document.getElementById('btn-' + v).classList.add('active');
+            if(v === 'duel') startDuel();
+        }
+
+        // --- LOGIQUE ÉCRITURE ---
+        function nextWrite() {
+            // On pioche un mot pas encore maîtrisé si possible
+            let pool = fullDb.filter(i => !userData.mastered.includes(i.id));
+            if(pool.length === 0) pool = fullDb;
+            
+            currentItem = pool[Math.floor(Math.random()*pool.length)];
+            document.getElementById('type-label').innerText = currentItem.type;
+            document.getElementById('write-q').innerText = currentItem.fr;
+            document.getElementById('write-input').value = "";
+            document.getElementById('write-feedback').innerText = "";
+            document.getElementById('write-input').focus();
+        }
+
+        document.getElementById('write-input').addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                let userVal = this.value.toLowerCase().trim();
+                let correctVal = currentItem.nl.toLowerCase().trim();
+                
+                if(userVal === correctVal) {
+                    showFeedback("✅ Correct !", "var(--duo-green)");
+                    if(!userData.mastered.includes(currentItem.id)) {
+                        userData.mastered.push(currentItem.id);
+                        userData.score += 10;
                     }
-                };
-                grid.appendChild(d);
+                    save();
+                    setTimeout(nextWrite, 1200);
+                } else {
+                    showFeedback("❌ " + currentItem.nl, "var(--duo-red)");
+                }
+            }
+        });
+
+        function showFeedback(txt, color) {
+            const f = document.getElementById('write-feedback');
+            f.innerText = txt;
+            f.style.color = color;
+        }
+
+        // --- LOGIQUE DUEL LOCAL ---
+        function startDuel() {
+            if(fullDb.length < 2) return;
+            let item = fullDb[Math.floor(Math.random()*fullDb.length)];
+            let others = fullDb.filter(i => i.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3);
+            let choices = [item, ...others].sort(() => 0.5 - Math.random());
+
+            [1, 2].forEach(p => {
+                document.getElementById('d-q' + p).innerText = item.fr;
+                const grid = document.getElementById('d-opts' + p);
+                grid.innerHTML = "";
+                choices.forEach(c => {
+                    let b = document.createElement('button');
+                    b.className = "duel-btn";
+                    b.innerText = c.nl;
+                    b.onclick = () => {
+                        if(c.id === item.id) {
+                            alert("Point pour Joueur " + p + " !");
+                            startDuel();
+                        } else {
+                            b.style.background = "var(--duo-red)";
+                            b.style.color = "white";
+                        }
+                    };
+                    grid.appendChild(b);
+                });
             });
         }
 
-        function startQuiz() {
-            let correct = fullDb[Math.floor(Math.random()*fullDb.length)];
-            let opts = [correct, ...fullDb.filter(i=>i.id!==correct.id).sort(()=>0.5-Math.random()).slice(0,2)].sort(()=>0.5-Math.random());
-            document.getElementById('quiz-q').innerText = correct.nl;
-            const container = document.getElementById('quiz-opts'); container.innerHTML = "";
-            opts.forEach(o => {
-                let b = document.createElement('button'); b.className='btn-opt'; b.style.padding="12px"; b.innerText=o.fr;
-                b.onclick=() => { if(o.id===correct.id){ userData.mastered.push(o.id); save(); startQuiz(); } else b.style.background="#ff4b4b"; };
-                container.appendChild(b);
-            });
+        // --- ASYNCHRONE / DÉFIS ---
+        function generateShareCode() {
+            // Un code simple : "NL-Score-NombreDeMots"
+            const code = `NL-${userData.score}-${userData.mastered.length}-${Date.now().toString().slice(-4)}`;
+            document.getElementById('share-code-out').innerText = code;
         }
 
-        init();
+        function loadChallenge() {
+            const val = document.getElementById('input-challenge').value;
+            if(val.startsWith("NL-")) {
+                const parts = val.split('-');
+                alert(`Défi accepté ! Score à battre : ${parts[1]} points (${parts[2]} mots). Bonne chance !`);
+                switchView('write');
+            } else {
+                alert("Code invalide");
+            }
+        }
+
+        // --- SYSTEME ---
+        function save() {
+            localStorage.setItem('nl_mastery_final', JSON.stringify(userData));
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('mast-count').innerText = userData.mastered.length;
+        }
+
+        window.onload = loadData;
     </script>
 </body>
 </html>
