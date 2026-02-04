@@ -3,185 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NL Mastery - La Totale</title>
+    <title>NL Mastery Platform</title>
     <style>
-        :root { --duo-green: #58cc02; --duo-red: #ff4b4b; --duo-blue: #1cb0f6; --duo-gray: #e5e5e5; --duo-purple: #ce82ff; --duo-orange: #ff9600; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f7f7f7; margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
+        :root { --primary: #1cb0f6; --success: #58cc02; --wrong: #ff4b4b; --bg: #f7f7f7; --text: #4b4b4b; --gold: #ffc800; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: var(--text); overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
         
-        /* Barre de Progression Royale */
-        .top-bar { width: 100%; background: white; border-bottom: 2px solid var(--duo-gray); padding: 10px 0; display: flex; flex-direction: column; align-items: center; }
-        .stats-row { display: flex; justify-content: space-between; width: 90%; max-width: 500px; font-weight: bold; color: #4b4b4b; font-size: 0.8rem; }
-        .p-container { width: 90%; max-width: 500px; background: var(--duo-gray); height: 12px; border-radius: 6px; overflow: hidden; margin-top: 5px; }
-        .p-bar { width: 0%; height: 100%; background: var(--duo-green); transition: width 0.5s; }
+        /* Header & Stats */
+        header { background: white; border-bottom: 2px solid #e5e5e5; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .xp-badge { background: var(--gold); color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
 
-        .menu { display: flex; gap: 5px; padding: 10px; width: 100%; overflow-x: auto; background: white; border-bottom: 1px solid #ddd; }
-        .menu button { padding: 8px 15px; border-radius: 12px; border: 2px solid var(--duo-gray); background: white; font-weight: bold; cursor: pointer; white-space: nowrap; font-size: 0.8rem; }
-        .menu button.active { background: var(--duo-blue); color: white; }
-
-        .view { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px; box-sizing: border-box; overflow-y: auto; flex-grow: 1; }
+        /* Navigation & Views */
+        .view { display: none; flex-direction: column; align-items: center; padding: 20px; flex-grow: 1; overflow-y: auto; }
         .view.active { display: flex; }
-
-        /* Styles Écriture & Cartes */
-        .card { width: 90%; max-width: 400px; background: white; padding: 30px; border-radius: 20px; border: 2px solid var(--duo-gray); text-align: center; box-shadow: 0 5px 0 var(--duo-gray); margin-bottom: 20px; }
-        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid var(--duo-gray); font-size: 1.1rem; text-align: center; outline: none; margin-top: 15px; }
         
-        .btn-action { width: 90%; max-width: 400px; padding: 15px; border-radius: 15px; border: none; color: white; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; }
-        .btn-check { background: var(--duo-green); box-shadow: 0 4px 0 #45a302; }
-        .btn-skip { background: #ccc; color: #666; font-size: 0.8rem; }
+        /* Dashboard Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 500px; margin-top: 20px; }
+        .card-menu { background: white; padding: 20px; border-radius: 15px; border: 2px solid #e5e5e5; text-align: center; cursor: pointer; transition: transform 0.2s; font-weight: bold; }
+        .card-menu:active { transform: scale(0.95); }
+        .card-menu.blue { border-color: var(--primary); color: var(--primary); }
 
-        /* Duel Local */
-        #duel-view { padding: 0; justify-content: space-between; }
-        .player-zone { width: 100%; height: 49%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-        #p1 { transform: rotate(180deg); background: #fff5f5; }
-        #p2 { background: #f5faff; }
-        .duel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+        /* Apprentissage */
+        .study-box { width: 90%; max-width: 400px; background: white; border-radius: 25px; border: 2px solid #e5e5e5; padding: 30px; text-align: center; position: relative; box-shadow: 0 6px 0 #e5e5e5; }
+        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #ccc; font-size: 1.1rem; margin: 15px 0; outline: none; text-align: center; }
+        .btn { width: 100%; padding: 15px; border-radius: 15px; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; color: white; }
+        .btn-green { background: var(--success); box-shadow: 0 4px 0 #45a302; }
+        .btn-gray { background: #e5e5e5; color: #afafaf; }
+
+        /* Memory */
+        .memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
+        .m-card { height: 80px; background: white; border: 2px solid #e5e5e5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; }
+        .m-card.selected { background: var(--primary); color: white; }
+        .hidden { visibility: hidden; }
+
+        .back-btn { align-self: flex-start; margin-bottom: 20px; background: none; border: none; color: var(--primary); font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="stats-row">
-            <span>LVL <span id="lvl">1</span></span>
-            <span>MAÎTRISE: <span id="mastered-count">0</span></span>
-            <span>XP: <span id="xp">0</span></span>
+    <header>
+        <div style="font-weight: bold; font-size: 1.2rem;">NL <span style="color:var(--primary)">Mastery</span></div>
+        <div class="xp-badge">LVL <span id="lvl">1</span> • <span id="xp">0</span> XP</div>
+    </header>
+
+    <div id="home-view" class="view active">
+        <h2>Que veux-tu bosser ?</h2>
+        <div class="grid">
+            <div class="card-menu blue" onclick="startSession('VERBENL')">Verbes</div>
+            <div class="card-menu blue" onclick="startSession('NOMNL')">Noms</div>
+            <div class="card-menu blue" onclick="startSession('ADJNL')">Adjectifs</div>
+            <div class="card-menu blue" onclick="startSession('PHRASES_LABO')">Phrases Labo</div>
         </div>
-        <div class="p-container"><div class="p-bar" id="p-bar"></div></div>
-    </div>
-
-    <div class="menu">
-        <button class="active" onclick="switchView('learn', this)">✍️ Apprendre</button>
-        <button onclick="switchView('duel', this)">⚔️ Duel</button>
-        <button onclick="switchView('review', this)">🔥 Focus (À revoir)</button>
-    </div>
-
-    <div id="learn-view" class="view active">
-        <div class="card">
-            <small id="tag" style="color:var(--duo-purple); font-weight:bold; text-transform:uppercase;"></small>
-            <p id="q-text" style="font-size: 1.4rem; font-weight: bold; margin: 15px 0;">Chargement...</p>
-            <input type="text" id="ans-input" placeholder="Réponse en NL..." autocomplete="off">
-            <p id="feedback" style="font-weight:bold; margin-top:10px;"></p>
+        <h2 style="margin-top:40px;">Jeux & Défis</h2>
+        <div class="grid">
+            <div class="card-menu" style="color:var(--success)" onclick="startMemory()">🧩 Memory</div>
+            <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack()">⏱️ Contre-la-montre</div>
         </div>
-        <button class="btn-action btn-check" onclick="checkAnswer()">VÉRIFIER</button>
-        <button class="btn-action btn-skip" onclick="nextQuestion()">PASSER / JE NE SAIS PAS</button>
     </div>
 
-    <div id="duel-view" class="view">
-        <div class="player-zone" id="p1"><div id="dq1" style="font-weight:bold;margin-bottom:10px"></div><div id="do1" class="duel-grid"></div></div>
-        <div class="player-zone" id="p2"><div id="dq2" style="font-weight:bold;margin-bottom:10px"></div><div id="do2" class="duel-grid"></div></div>
+    <div id="study-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div class="study-box">
+            <small id="session-title"></small>
+            <h1 id="q-text">Mots</h1>
+            <input type="text" id="ans-input" placeholder="Traduire en Néerlandais...">
+            <div id="feedback" style="min-height: 20px; font-weight: bold; margin-bottom: 10px;"></div>
+            <button class="btn btn-green" onclick="checkAns()">VÉRIFIER</button>
+            <button class="btn btn-gray" onclick="nextQ()">PASSER</button>
+        </div>
     </div>
 
-    <div id="review-view" class="view">
-        <h3>Mots à travailler ⚠️</h3>
-        <div id="review-list" style="width:100%"></div>
+    <div id="memory-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div class="memory-grid" id="m-grid"></div>
     </div>
 
     <script>
-        let db = [];
-        let state = JSON.parse(localStorage.getItem('nl_master_global')) || { mastered: [], toReview: [], xp: 0 };
-        let current = null;
+        let fullDb = [];
+        let sessionDb = [];
+        let state = JSON.parse(localStorage.getItem('nl_platform_v1')) || { xp: 0, mastered: [] };
+        let currentItem = null;
 
         async function init() {
-            // FUSION DE TOUS LES FICHIERS
-            const files = ['THEME_BASE.csv', 'VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv', 'PHRASES_LABO.csv', 'MOTS_LABO.csv'];
+            const files = ['VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv', 'PHRASES_LABO.csv', 'MOTS_LABO.csv', 'THEME_BASE.csv'];
             for (let f of files) {
                 try {
-                    const r = await fetch(f); if(!r.ok) continue;
+                    const r = await fetch(f);
                     const t = await r.text();
                     t.split(/\r?\n/).slice(1).forEach(l => {
                         const c = l.split(';');
-                        if(c[1]) db.push({ id: f+"_"+c[0], fr: c[1], nl: c[2].trim(), cat: f.replace('.csv','') });
+                        if(c[1]) fullDb.push({ id: f+'_'+c[0], fr: c[1], nl: c[2].trim(), file: f.replace('.csv','') });
                     });
-                } catch(e) {}
+                } catch(e){}
             }
-            updateUI();
-            nextQuestion();
+            updateStats();
         }
 
-        function switchView(v, btn) {
-            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.menu button').forEach(el => el.classList.remove('active'));
-            document.getElementById(v + '-view').classList.add('active');
-            btn.classList.add('active');
-            if(v === 'duel') startDuel();
-            if(v === 'review') renderReview();
+        function showHome() { 
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('home-view').classList.add('active');
         }
 
-        function nextQuestion() {
-            // Priorité aux mots "À revoir"
-            let pool = state.toReview.length > 0 && Math.random() > 0.4 
-                       ? db.filter(i => state.toReview.includes(i.id))
-                       : db.filter(i => !state.mastered.includes(i.id));
-            
-            if(pool.length === 0) pool = db;
-            current = pool[Math.floor(Math.random()*pool.length)];
-            
-            document.getElementById('tag').innerText = current.cat;
-            document.getElementById('q-text').innerText = current.fr;
+        function startSession(category) {
+            sessionDb = fullDb.filter(i => i.file === category);
+            if(sessionDb.length === 0) { alert("Fichier " + category + " vide ou manquant."); return; }
+            document.getElementById('session-title').innerText = category;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('study-view').classList.add('active');
+            nextQ();
+        }
+
+        function nextQ() {
+            currentItem = sessionDb[Math.floor(Math.random()*sessionDb.length)];
+            document.getElementById('q-text').innerText = currentItem.fr;
             document.getElementById('ans-input').value = "";
             document.getElementById('feedback').innerText = "";
             document.getElementById('ans-input').focus();
         }
 
-        function checkAnswer() {
-            let input = document.getElementById('ans-input').value.toLowerCase().trim();
-            let right = current.nl.toLowerCase().trim();
-            
-            if(input === right) {
-                document.getElementById('feedback').innerText = "✅ Excellent !";
-                document.getElementById('feedback').style.color = "var(--duo-green)";
-                if(!state.mastered.includes(current.id)) {
-                    state.mastered.push(current.id);
-                    state.xp += 10;
-                }
-                state.toReview = state.toReview.filter(id => id !== current.id);
+        function checkAns() {
+            const user = document.getElementById('ans-input').value.toLowerCase().trim();
+            const correct = currentItem.nl.toLowerCase().trim();
+            if(user === correct) {
+                document.getElementById('feedback').innerText = "✅ BRAVO !";
+                document.getElementById('feedback').style.color = "var(--success)";
+                state.xp += 10;
                 save();
-                setTimeout(nextQuestion, 1000);
+                setTimeout(nextQ, 1000);
             } else {
-                document.getElementById('feedback').innerText = "❌ " + current.nl;
-                document.getElementById('feedback').style.color = "var(--duo-red)";
-                if(!state.toReview.includes(current.id)) state.toReview.push(current.id);
-                save();
+                document.getElementById('feedback').innerText = "❌ RÉPONSE : " + currentItem.nl;
+                document.getElementById('feedback').style.color = "var(--wrong)";
             }
         }
 
-        // Duel, Stats et Save
-        function startDuel() {
-            let item = db[Math.floor(Math.random()*db.length)];
-            let choices = [item, ...db.filter(i=>i.id!==item.id).sort(()=>0.5-Math.random()).slice(0,3)].sort(()=>0.5-Math.random());
-            [1,2].forEach(p => {
-                document.getElementById('dq'+p).innerText = item.fr;
-                const g = document.getElementById('do'+p); g.innerHTML = "";
-                choices.forEach(c => {
-                    let b = document.createElement('button'); b.className="duel-btn"; b.style.padding="10px"; b.innerText=c.nl;
-                    b.onclick = () => { if(c.id===item.id) { alert("P"+p+" gagne!"); startDuel(); } else b.style.background="red"; };
-                    g.appendChild(b);
-                });
+        // MEMORY GAME
+        function startMemory() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('memory-view').classList.add('active');
+            const grid = document.getElementById('m-grid'); grid.innerHTML = "";
+            let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 6);
+            let cards = []; items.forEach(i => { cards.push({t:i.fr, id:i.id}, {t:i.nl, id:i.id}); });
+            cards.sort(() => 0.5 - Math.random());
+            
+            let selected = [];
+            cards.forEach(c => {
+                let d = document.createElement('div'); d.className = 'm-card'; d.innerText = c.t;
+                d.onclick = () => {
+                    if(selected.length < 2 && !d.classList.contains('selected')) {
+                        d.classList.add('selected'); selected.push({el:d, id:c.id});
+                        if(selected.length === 2) {
+                            if(selected[0].id === selected[1].id) {
+                                setTimeout(() => { selected.forEach(s => s.el.classList.add('hidden')); selected = []; }, 600);
+                                state.xp += 5; save();
+                            } else {
+                                setTimeout(() => { selected.forEach(s => s.el.classList.remove('selected')); selected = []; }, 800);
+                            }
+                        }
+                    }
+                };
+                grid.appendChild(d);
             });
         }
 
-        function save() { localStorage.setItem('nl_master_global', JSON.stringify(state)); updateUI(); }
-        
-        function updateUI() {
-            const m = state.mastered.length;
-            document.getElementById('mastered-count').innerText = m;
+        function save() { 
+            localStorage.setItem('nl_platform_v1', JSON.stringify(state)); 
+            updateStats(); 
+        }
+
+        function updateStats() {
             document.getElementById('xp').innerText = state.xp;
             document.getElementById('lvl').innerText = Math.floor(state.xp / 100) + 1;
-            document.getElementById('p-bar').style.width = (state.xp % 100) + "%";
         }
 
-        function renderReview() {
-            const list = document.getElementById('review-list');
-            list.innerHTML = state.toReview.length === 0 ? "<p>Rien à revoir !</p>" : "";
-            db.filter(i => state.toReview.includes(i.id)).forEach(i => {
-                let d = document.createElement('div');
-                d.style = "background:white; padding:10px; margin:5px; border-radius:10px; border-left:5px solid var(--duo-red)";
-                d.innerHTML = `<b>${i.fr}</b> <br> <span style="color:var(--duo-green)">${i.nl}</span>`;
-                list.appendChild(d);
-            });
-        }
-
-        // Support touche Entrée
-        document.getElementById('ans-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') checkAnswer(); });
+        // Touche Enter
+        document.getElementById('ans-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') checkAns(); });
 
         init();
     </script>
