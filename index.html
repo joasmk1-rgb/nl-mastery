@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NL Mastery - Arcade Edition</title>
+    <title>NL Mastery - Dashboard</title>
     <style>
         :root { --duo-green: #58cc02; --duo-red: #ff4b4b; --duo-blue: #1cb0f6; --duo-gray: #e5e5e5; --duo-gold: #ffc800; --duo-purple: #ce82ff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f7f7f7; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f7f7f7; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; }
         
         /* Stats Bar */
         .top-bar { width: 100%; background: white; border-bottom: 2px solid var(--duo-gray); padding: 10px 0; display: flex; flex-direction: column; align-items: center; position: sticky; top:0; z-index: 100; }
@@ -18,38 +18,37 @@
         .menu { display: flex; gap: 8px; padding: 10px; width: 100%; overflow-x: auto; background: white; border-bottom: 1px solid #ddd; box-sizing: border-box; }
         .menu button { padding: 8px 12px; border-radius: 10px; border: 2px solid var(--duo-gray); background: white; font-weight: bold; color: #777; cursor: pointer; white-space: nowrap; font-size: 0.8rem; }
         .menu button.active { background: var(--duo-blue); color: white; border-color: #1a9bd9; }
-        .btn-game-mode { border-color: var(--duo-purple) !important; color: var(--duo-purple) !important; }
-        .btn-game-mode.active { background: var(--duo-purple) !important; color: white !important; }
 
         /* Views */
         .view { width: 100%; display: none; flex-direction: column; align-items: center; padding-top: 20px; }
         .view.active { display: flex; }
 
-        /* Flashcard View */
-        .card-container { perspective: 1000px; width: 90%; max-width: 350px; height: 300px; }
+        /* Flashcard & Games (Simplified for brevity) */
+        .card-container { perspective: 1000px; width: 90%; max-width: 350px; height: 280px; }
         .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; cursor: pointer; }
         .card.is-flipped { transform: rotateY(180deg); }
         .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 20px; background: white; border: 2px solid var(--duo-gray); box-shadow: 0 5px 0 var(--duo-gray); padding: 20px; text-align: center; box-sizing: border-box; }
         .card-face-back { transform: rotateY(180deg); background-color: #d7ffb7; border-color: var(--duo-green); }
-        .word { font-size: 1.8rem; font-weight: bold; color: #3c3c3c; }
-
-        .controls { display: flex; width: 90%; max-width: 350px; justify-content: space-between; margin-top: 30px; }
-        .btn-ctrl { padding: 15px; border: none; border-radius: 15px; font-weight: bold; width: 48%; cursor: pointer; color: white; font-size: 1rem; }
+        
+        .controls { display: flex; width: 90%; max-width: 350px; justify-content: space-between; margin-top: 20px; }
+        .btn-ctrl { padding: 15px; border: none; border-radius: 15px; font-weight: bold; width: 48%; cursor: pointer; color: white; }
         .btn-bad { background: var(--duo-red); box-shadow: 0 4px 0 #c83737; }
         .btn-good { background: var(--duo-green); box-shadow: 0 4px 0 #45a302; }
 
-        /* Memory View */
-        .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 90%; max-width: 350px; }
-        .memory-card { height: 70px; background: white; border: 2px solid var(--duo-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; padding: 5px; box-shadow: 0 3px 0 var(--duo-gray); }
-        .memory-card.selected { background: var(--duo-blue); color: white; border-color: #1a9bd9; }
-        .memory-card.matched { visibility: hidden; }
+        /* Dashboard Styles */
+        .dash-card { width: 85%; max-width: 400px; background: white; border: 2px solid var(--duo-gray); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-sizing: border-box; }
+        .dash-title { font-weight: bold; color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .dash-value { font-size: 1.8rem; font-weight: bold; color: #4b4b4b; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 85%; max-width: 400px; }
+        
+        .mini-progress { background: #eee; height: 8px; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+        .mini-bar { height: 100%; background: var(--duo-blue); width: 0%; }
 
-        /* Quiz View */
-        .quiz-container { width: 90%; max-width: 350px; background: white; padding: 20px; border-radius: 20px; border: 2px solid var(--duo-gray); text-align: center; }
-        .quiz-question { font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; }
-        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
-        .btn-opt { padding: 12px; border: 2px solid var(--duo-gray); border-radius: 12px; background: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .btn-opt:active { transform: scale(0.98); }
+        /* Memory & Quiz Styles */
+        .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 90%; max-width: 350px; }
+        .memory-card { height: 60px; background: white; border: 2px solid var(--duo-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; padding: 5px; }
+        .memory-card.selected { background: var(--duo-blue); color: white; }
+        .memory-card.matched { visibility: hidden; }
     </style>
 </head>
 <body>
@@ -57,22 +56,23 @@
     <div class="top-bar">
         <div class="stats-row">
             <span>LVL <span id="lvl-display">1</span></span>
-            <span>🎯 <span id="mastery-display">0</span>/2000</span>
+            <span>TOTAL: <span id="total-mastered">0</span> / 2000</span>
         </div>
-        <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="progress-container"><div class="progress-bar" id="p-bar"></div></div>
     </div>
 
     <div class="menu">
         <button class="active" onclick="switchView('flashcard', this)">Réviser</button>
-        <button class="btn-game-mode" onclick="switchView('memory', this)">Jeu: Paires</button>
-        <button class="btn-game-mode" onclick="switchView('quiz', this)">Jeu: Quiz</button>
+        <button onclick="switchView('memory', this)">Memory</button>
+        <button onclick="switchView('quiz', this)">Quiz</button>
+        <button style="border-color: var(--duo-gold); color: var(--duo-gold);" onclick="switchView('stats', this)">📊 Stats</button>
     </div>
 
     <div id="flashcard-view" class="view active">
         <div class="card-container" onclick="flipCard()">
             <div class="card" id="card">
-                <div class="card-face"><p id="nl-display" class="word">...</p></div>
-                <div class="card-face card-face-back"><p id="fr-display" style="font-size: 1.4rem; font-weight: bold;">...</p></div>
+                <div class="card-face"><p id="nl-display" style="font-size: 2rem; font-weight: bold;">...</p></div>
+                <div class="card-face card-face-back"><p id="fr-display" style="font-size: 1.5rem; font-weight: bold;">...</p></div>
             </div>
         </div>
         <div class="controls">
@@ -81,37 +81,56 @@
         </div>
     </div>
 
-    <div id="memory-view" class="view">
-        <div class="memory-grid" id="memory-grid"></div>
-        <button class="btn-ctrl btn-good" style="margin-top:20px; width:80%;" onclick="startMemory()">Relancer</button>
+    <div id="stats-view" class="view">
+        <div class="dash-card">
+            <span class="dash-title">Niveau Actuel</span>
+            <div class="dash-value" id="dash-lvl">Niveau 1</div>
+            <div class="mini-progress"><div class="mini-bar" id="dash-lvl-bar"></div></div>
+            <p style="font-size: 0.7rem; color: #aaa; margin-top: 5px;">Prochain niveau dans <span id="dash-next">0</span> mots</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="dash-card" style="margin: 0; padding: 15px;">
+                <span class="dash-title">Mots Maîtrisés</span>
+                <div class="dash-value" style="font-size: 1.4rem;" id="dash-mastered">0</div>
+            </div>
+            <div class="dash-card" style="margin: 0; padding: 15px;">
+                <span class="dash-title">Exploration</span>
+                <div class="dash-value" style="font-size: 1.4rem;" id="dash-percent">0%</div>
+            </div>
+        </div>
+
+        <div class="dash-card" style="margin-top: 15px;">
+            <span class="dash-title">Répartition par catégorie</span>
+            <div id="category-stats" style="font-size: 0.8rem; line-height: 1.6;">
+                </div>
+        </div>
     </div>
 
-    <div id="quiz-view" class="view">
-        <div class="quiz-container">
-            <div class="quiz-question" id="quiz-q">?</div>
-            <div class="quiz-options" id="quiz-opts"></div>
-        </div>
+    <div id="memory-view" class="view"><div class="memory-grid" id="memory-grid"></div></div>
+
+    <div id="quiz-view" class="view" style="text-align:center;">
+        <div id="quiz-q" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">?</div>
+        <div id="quiz-opts" style="display: flex; flex-direction: column; gap: 10px; width: 85%;"></div>
     </div>
 
     <script>
         let fullDb = [];
-        let userData = JSON.parse(localStorage.getItem('nl_arcade_data')) || { mastered: [] };
-        let memorySelected = [];
+        let userData = JSON.parse(localStorage.getItem('nl_pro_final')) || { mastered: [], seen: [] };
 
         async function init() {
-            const files = ['THEME_BASE.csv', 'VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv'];
+            const files = [{n:'THEME_BASE.csv', c:'BASE'}, {n:'VERBENL.csv', c:'VERBE'}, {n:'NOMNL.csv', c:'NOM'}, {n:'ADJNL.csv', c:'ADJ'}];
             for (let f of files) {
                 try {
-                    const r = await fetch(f); if(!r.ok) continue;
+                    const r = await fetch(f.n); if(!r.ok) continue;
                     const t = await r.text();
                     t.split(/\r?\n/).slice(1).forEach(line => {
                         const cols = line.includes(';') ? line.split(';') : line.split(',');
-                        if(cols[1]) fullDb.push({ id: f+cols[1], nl: cols[1].trim(), fr: cols[2].trim() });
+                        if(cols[1]) fullDb.push({ id: f.c+"_"+cols[1].trim(), nl: cols[1].trim(), fr: cols[2].trim(), cat: f.c });
                     });
                 } catch(e) {}
             }
-            nextFlashcard();
-            updateUI();
+            nextFlashcard(); updateUI();
         }
 
         function switchView(view, btn) {
@@ -119,90 +138,89 @@
             document.getElementById(view + '-view').classList.add('active');
             document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            if(view === 'stats') updateDashboard();
             if(view === 'memory') startMemory();
             if(view === 'quiz') startQuiz();
         }
 
-        // --- FLASHCARDS ---
+        function handleAnswer(known) {
+            if(!userData.seen.includes(window.currentCard.id)) userData.seen.push(window.currentCard.id);
+            if(known && !userData.mastered.includes(window.currentCard.id)) userData.mastered.push(window.currentCard.id);
+            save(); nextFlashcard();
+        }
+
         function nextFlashcard() {
-            let pool = fullDb.filter(i => !userData.mastered.includes(i.id));
-            if(pool.length === 0) pool = fullDb;
-            let item = pool[Math.floor(Math.random()*pool.length)];
+            let item = fullDb[Math.floor(Math.random()*fullDb.length)];
             window.currentCard = item;
             document.getElementById('nl-display').innerText = item.nl;
             document.getElementById('fr-display').innerText = item.fr;
             document.getElementById('card').classList.remove('is-flipped');
         }
 
-        function handleAnswer(known) {
-            if(known && !userData.mastered.includes(window.currentCard.id)) userData.mastered.push(window.currentCard.id);
-            save(); nextFlashcard();
+        function updateDashboard() {
+            const m = userData.mastered.length;
+            const s = userData.seen.length;
+            document.getElementById('dash-lvl').innerText = "Niveau " + (Math.floor(m/20)+1);
+            document.getElementById('dash-mastered').innerText = m;
+            document.getElementById('dash-percent').innerText = Math.round((s/fullDb.length)*100) + "%";
+            document.getElementById('dash-next').innerText = 20 - (m % 20);
+            document.getElementById('dash-lvl-bar').style.width = ((m % 20) / 20 * 100) + "%";
+
+            // Stats par catégorie
+            const cats = ['BASE', 'VERBE', 'NOM', 'ADJ'];
+            let html = "";
+            cats.forEach(c => {
+                const totalCat = fullDb.filter(i => i.cat === c).length;
+                const mastCat = userData.mastered.filter(id => id.startsWith(c)).length;
+                if(totalCat > 0) {
+                    html += `<div><strong>${c}</strong>: ${mastCat}/${totalCat} maîtrisés</div>`;
+                }
+            });
+            document.getElementById('category-stats').innerHTML = html;
         }
 
-        // --- MEMORY ---
+        function save() { localStorage.setItem('nl_pro_final', JSON.stringify(userData)); updateUI(); }
+        function updateUI() {
+            const m = userData.mastered.length;
+            document.getElementById('total-mastered').innerText = m;
+            document.getElementById('lvl-display').innerText = Math.floor(m / 20) + 1;
+            document.getElementById('p-bar').style.width = ((m % 20) / 20 * 100) + "%";
+        }
+
+        function flipCard() { document.getElementById('card').classList.toggle('is-flipped'); }
+        
+        // Memory & Quiz (Même logique que précédemment)
         function startMemory() {
-            const grid = document.getElementById('memory-grid');
-            grid.innerHTML = "";
+            const grid = document.getElementById('memory-grid'); grid.innerHTML = "";
             let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 5);
-            let cards = [];
-            items.forEach(i => {
-                cards.push({ text: i.nl, match: i.id, type: 'nl' });
-                cards.push({ text: i.fr, match: i.id, type: 'fr' });
-            });
+            let cards = []; items.forEach(i => { cards.push({t:i.nl, m:i.id}, {t:i.fr, m:i.id}); });
+            let sel = [];
             cards.sort(() => 0.5 - Math.random()).forEach(c => {
-                let div = document.createElement('div');
-                div.className = 'memory-card';
-                div.innerText = c.text;
-                div.onclick = () => {
-                    if(div.classList.contains('matched') || memorySelected.includes(div)) return;
-                    div.classList.add('selected');
-                    memorySelected.push({el: div, match: c.match});
-                    if(memorySelected.length === 2) {
-                        if(memorySelected[0].match === memorySelected[1].match) {
-                            memorySelected.forEach(s => s.el.classList.add('matched'));
-                            userData.mastered.push(memorySelected[0].match); save();
+                let d = document.createElement('div'); d.className='memory-card'; d.innerText=c.t;
+                d.onclick=() => {
+                    if(sel.length<2 && !d.classList.contains('matched')) {
+                        d.classList.add('selected'); sel.push({el:d, m:c.m});
+                        if(sel.length===2) {
+                            if(sel[0].m === sel[1].m) { sel.forEach(s=>s.el.classList.add('matched')); userData.mastered.push(sel[0].m); save(); }
+                            setTimeout(() => { sel.forEach(s=>s.el.classList.remove('selected')); sel=[]; }, 500);
                         }
-                        setTimeout(() => {
-                            memorySelected.forEach(s => s.el.classList.remove('selected'));
-                            memorySelected = [];
-                        }, 500);
                     }
                 };
-                grid.appendChild(div);
+                grid.appendChild(d);
             });
         }
 
-        // --- QUIZ ---
         function startQuiz() {
             let correct = fullDb[Math.floor(Math.random()*fullDb.length)];
-            let others = fullDb.filter(i => i.id !== correct.id).sort(() => 0.5 - Math.random()).slice(0, 2);
-            let opts = [correct, ...others].sort(() => 0.5 - Math.random());
+            let opts = [correct, ...fullDb.filter(i=>i.id!==correct.id).sort(()=>0.5-Math.random()).slice(0,2)].sort(()=>0.5-Math.random());
             document.getElementById('quiz-q').innerText = correct.nl;
-            const optContainer = document.getElementById('quiz-opts');
-            optContainer.innerHTML = "";
+            const container = document.getElementById('quiz-opts'); container.innerHTML = "";
             opts.forEach(o => {
-                let b = document.createElement('button');
-                b.className = 'btn-opt';
-                b.innerText = o.fr;
-                b.onclick = () => {
-                    if(o.id === correct.id) {
-                        b.style.background = "#d7ffb7";
-                        userData.mastered.push(correct.id); save();
-                        setTimeout(startQuiz, 1000);
-                    } else { b.style.background = "#ff4b4b"; }
-                };
-                optContainer.appendChild(b);
+                let b = document.createElement('button'); b.className='btn-opt'; b.style.padding="12px"; b.innerText=o.fr;
+                b.onclick=() => { if(o.id===correct.id){ userData.mastered.push(o.id); save(); startQuiz(); } else b.style.background="#ff4b4b"; };
+                container.appendChild(b);
             });
         }
-
-        function save() { localStorage.setItem('nl_arcade_data', JSON.stringify(userData)); updateUI(); }
-        function updateUI() {
-            let count = [...new Set(userData.mastered)].length;
-            document.getElementById('mastery-display').innerText = count;
-            document.getElementById('lvl-display').innerText = Math.floor(count / 20) + 1;
-            document.getElementById('progressBar').style.width = ((count % 20) / 20 * 100) + "%";
-        }
-        function flipCard() { document.getElementById('card').classList.toggle('is-flipped'); }
 
         init();
     </script>
