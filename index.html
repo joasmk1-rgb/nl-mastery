@@ -7,7 +7,7 @@
     <style>
         :root { --primary: #1cb0f6; --success: #58cc02; --wrong: #ff4b4b; --bg: #f7f7f7; --text: #4b4b4b; --gold: #ffc800; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: var(--text); overflow: hidden; display: flex; flex-direction: column; height: 100vh; }
-        
+
         /* Header & Stats */
         header { background: white; border-bottom: 2px solid #e5e5e5; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
         .xp-badge { background: var(--gold); color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
@@ -15,7 +15,7 @@
         /* Navigation & Views */
         .view { display: none; flex-direction: column; align-items: center; padding: 20px; flex-grow: 1; overflow-y: auto; }
         .view.active { display: flex; }
-        
+
         /* Dashboard Grid */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 500px; margin-top: 20px; }
         .card-menu { background: white; padding: 20px; border-radius: 15px; border: 2px solid #e5e5e5; text-align: center; cursor: pointer; transition: transform 0.2s; font-weight: bold; }
@@ -24,18 +24,24 @@
 
         /* Apprentissage */
         .study-box { width: 90%; max-width: 400px; background: white; border-radius: 25px; border: 2px solid #e5e5e5; padding: 30px; text-align: center; position: relative; box-shadow: 0 6px 0 #e5e5e5; }
-        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #ccc; font-size: 1.1rem; margin: 15px 0; outline: none; text-align: center; }
+        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #ccc; font-size: 1.1rem; margin: 15px 0; outline: none; text-align: center; box-sizing: border-box; }
         .btn { width: 100%; padding: 15px; border-radius: 15px; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; color: white; }
         .btn-green { background: var(--success); box-shadow: 0 4px 0 #45a302; }
         .btn-gray { background: #e5e5e5; color: #afafaf; }
+        .btn-red { background: var(--wrong); box-shadow: 0 4px 0 #c13a3a; }
 
         /* Memory */
         .memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
-        .m-card { height: 80px; background: white; border: 2px solid #e5e5e5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; }
+        .m-card { height: 80px; background: white; border: 2px solid #e5e5e5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer; padding: 6px; }
         .m-card.selected { background: var(--primary); color: white; }
+        .m-card.matched { background: var(--success); color: white; opacity: 0.4; pointer-events: none; }
         .hidden { visibility: hidden; }
 
         .back-btn { align-self: flex-start; margin-bottom: 20px; background: none; border: none; color: var(--primary); font-weight: bold; cursor: pointer; }
+
+        #ta-timer { font-size: 2rem; font-weight: bold; color: var(--wrong); margin-bottom: 10px; }
+        #ta-score { font-weight: bold; margin-bottom: 20px; }
+        #load-error { color: var(--wrong); font-size: 0.85rem; margin-top: 10px; white-space: pre-line; }
     </style>
 </head>
 <body>
@@ -58,6 +64,7 @@
             <div class="card-menu" style="color:var(--success)" onclick="startMemory()">🧩 Memory</div>
             <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack()">⏱️ Contre-la-montre</div>
         </div>
+        <div id="load-error"></div>
     </div>
 
     <div id="study-view" class="view">
@@ -77,35 +84,71 @@
         <div class="memory-grid" id="m-grid"></div>
     </div>
 
+    <div id="timeattack-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div id="ta-timer">30</div>
+        <div id="ta-score">Score : 0</div>
+        <div class="study-box">
+            <h1 id="ta-q-text">Mots</h1>
+            <input type="text" id="ta-ans-input" placeholder="Traduire en Néerlandais...">
+            <div id="ta-feedback" style="min-height: 20px; font-weight: bold; margin-bottom: 10px;"></div>
+            <button class="btn btn-red" onclick="checkTAAns()">VALIDER</button>
+        </div>
+    </div>
+
     <script>
         let fullDb = [];
         let sessionDb = [];
         let state = JSON.parse(localStorage.getItem('nl_platform_v1')) || { xp: 0, mastered: [] };
         let currentItem = null;
 
+        // Normalise pour comparer sans se faire piéger par accents/apostrophes/espaces
+        function normalize(str) {
+            return str
+                .toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // enlève les accents
+                .replace(/['’´`]/g, "'") // uniformise les apostrophes
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
         async function init() {
             const files = ['VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv', 'PHRASES_LABO.csv', 'MOTS_LABO.csv', 'THEME_BASE.csv'];
+            const errors = [];
             for (let f of files) {
                 try {
                     const r = await fetch(f);
+                    if (!r.ok) { errors.push(f + ' : HTTP ' + r.status); continue; }
                     const t = await r.text();
+                    let count = 0;
                     t.split(/\r?\n/).slice(1).forEach(l => {
+                        if (!l.trim()) return;
                         const c = l.split(';');
-                        if(c[1]) fullDb.push({ id: f+'_'+c[0], fr: c[1], nl: c[2].trim(), file: f.replace('.csv','') });
+                        if (c[1] && c[2] !== undefined) {
+                            fullDb.push({ id: f + '_' + c[0], fr: c[1].trim(), nl: c[2].trim(), file: f.replace('.csv', '') });
+                            count++;
+                        }
                     });
-                } catch(e){}
+                    if (count === 0) errors.push(f + ' : chargé mais 0 ligne valide (vérifie le séparateur ";")');
+                } catch (e) {
+                    errors.push(f + ' : ' + e.message + ' (fichier manquant ou bloqué par CORS — sers l\'app via un serveur local, pas en double-clic file://)');
+                }
+            }
+            if (errors.length) {
+                document.getElementById('load-error').innerText = errors.join('\n');
             }
             updateStats();
         }
 
-        function showHome() { 
+        function showHome() {
+            stopTimeAttack();
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
         }
 
         function startSession(category) {
             sessionDb = fullDb.filter(i => i.file === category);
-            if(sessionDb.length === 0) { alert("Fichier " + category + " vide ou manquant."); return; }
+            if (sessionDb.length === 0) { alert("Fichier " + category + " vide ou manquant."); return; }
             document.getElementById('session-title').innerText = category;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
@@ -113,20 +156,27 @@
         }
 
         function nextQ() {
-            currentItem = sessionDb[Math.floor(Math.random()*sessionDb.length)];
+            currentItem = sessionDb[Math.floor(Math.random() * sessionDb.length)];
             document.getElementById('q-text').innerText = currentItem.fr;
             document.getElementById('ans-input').value = "";
             document.getElementById('feedback').innerText = "";
             document.getElementById('ans-input').focus();
         }
 
+        function markMastered(item) {
+            if (!state.mastered.includes(item.id)) {
+                state.mastered.push(item.id);
+            }
+        }
+
         function checkAns() {
-            const user = document.getElementById('ans-input').value.toLowerCase().trim();
-            const correct = currentItem.nl.toLowerCase().trim();
-            if(user === correct) {
+            const user = normalize(document.getElementById('ans-input').value);
+            const correct = normalize(currentItem.nl);
+            if (user === correct) {
                 document.getElementById('feedback').innerText = "✅ BRAVO !";
                 document.getElementById('feedback').style.color = "var(--success)";
                 state.xp += 10;
+                markMastered(currentItem);
                 save();
                 setTimeout(nextQ, 1000);
             } else {
@@ -137,26 +187,34 @@
 
         // MEMORY GAME
         function startMemory() {
+            if (fullDb.length < 6) { alert("Pas assez de mots chargés pour jouer au Memory."); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('memory-view').classList.add('active');
             const grid = document.getElementById('m-grid'); grid.innerHTML = "";
             let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 6);
-            let cards = []; items.forEach(i => { cards.push({t:i.fr, id:i.id}, {t:i.nl, id:i.id}); });
+            let cards = []; items.forEach(i => { cards.push({ t: i.fr, id: i.id }, { t: i.nl, id: i.id }); });
             cards.sort(() => 0.5 - Math.random());
-            
+
             let selected = [];
+            let lock = false;
             cards.forEach(c => {
                 let d = document.createElement('div'); d.className = 'm-card'; d.innerText = c.t;
                 d.onclick = () => {
-                    if(selected.length < 2 && !d.classList.contains('selected')) {
-                        d.classList.add('selected'); selected.push({el:d, id:c.id});
-                        if(selected.length === 2) {
-                            if(selected[0].id === selected[1].id) {
-                                setTimeout(() => { selected.forEach(s => s.el.classList.add('hidden')); selected = []; }, 600);
-                                state.xp += 5; save();
-                            } else {
-                                setTimeout(() => { selected.forEach(s => s.el.classList.remove('selected')); selected = []; }, 800);
-                            }
+                    if (lock || selected.length >= 2 || d.classList.contains('selected') || d.classList.contains('matched')) return;
+                    d.classList.add('selected'); selected.push({ el: d, id: c.id });
+                    if (selected.length === 2) {
+                        lock = true;
+                        if (selected[0].id === selected[1].id) {
+                            setTimeout(() => {
+                                selected.forEach(s => { s.el.classList.remove('selected'); s.el.classList.add('matched'); });
+                                selected = []; lock = false;
+                            }, 400);
+                            state.xp += 5; save();
+                        } else {
+                            setTimeout(() => {
+                                selected.forEach(s => s.el.classList.remove('selected'));
+                                selected = []; lock = false;
+                            }, 800);
                         }
                     }
                 };
@@ -164,9 +222,74 @@
             });
         }
 
-        function save() { 
-            localStorage.setItem('nl_platform_v1', JSON.stringify(state)); 
-            updateStats(); 
+        // TIME ATTACK (contre-la-montre)
+        let taInterval = null;
+        let taTimeLeft = 30;
+        let taScore = 0;
+        let taCurrent = null;
+
+        function startTimeAttack() {
+            if (fullDb.length === 0) { alert("Aucun mot chargé pour jouer."); return; }
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('timeattack-view').classList.add('active');
+            taScore = 0;
+            taTimeLeft = 30;
+            document.getElementById('ta-score').innerText = 'Score : 0';
+            document.getElementById('ta-timer').innerText = taTimeLeft;
+            document.getElementById('ta-feedback').innerText = '';
+            nextTAQ();
+            document.getElementById('ta-ans-input').focus();
+
+            clearInterval(taInterval);
+            taInterval = setInterval(() => {
+                taTimeLeft--;
+                document.getElementById('ta-timer').innerText = taTimeLeft;
+                if (taTimeLeft <= 0) {
+                    endTimeAttack();
+                }
+            }, 1000);
+        }
+
+        function nextTAQ() {
+            taCurrent = fullDb[Math.floor(Math.random() * fullDb.length)];
+            document.getElementById('ta-q-text').innerText = taCurrent.fr;
+            document.getElementById('ta-ans-input').value = '';
+        }
+
+        function checkTAAns() {
+            if (!taCurrent) return;
+            const user = normalize(document.getElementById('ta-ans-input').value);
+            const correct = normalize(taCurrent.nl);
+            const fb = document.getElementById('ta-feedback');
+            if (user === correct) {
+                taScore++;
+                state.xp += 3;
+                markMastered(taCurrent);
+                save();
+                document.getElementById('ta-score').innerText = 'Score : ' + taScore;
+                fb.innerText = '✅';
+                fb.style.color = 'var(--success)';
+            } else {
+                fb.innerText = '❌ ' + taCurrent.nl;
+                fb.style.color = 'var(--wrong)';
+            }
+            nextTAQ();
+        }
+
+        function endTimeAttack() {
+            clearInterval(taInterval);
+            taInterval = null;
+            alert("Temps écoulé ! Score final : " + taScore);
+            showHome();
+        }
+
+        function stopTimeAttack() {
+            if (taInterval) { clearInterval(taInterval); taInterval = null; }
+        }
+
+        function save() {
+            localStorage.setItem('nl_platform_v1', JSON.stringify(state));
+            updateStats();
         }
 
         function updateStats() {
@@ -175,7 +298,8 @@
         }
 
         // Touche Enter
-        document.getElementById('ans-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') checkAns(); });
+        document.getElementById('ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAns(); });
+        document.getElementById('ta-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkTAAns(); });
 
         init();
     </script>
