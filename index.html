@@ -48,7 +48,7 @@
 
     <header>
         <div style="font-weight: bold; font-size: 1.2rem;">NL <span style="color:var(--primary)">Mastery</span></div>
-        <div class="xp-badge">LVL <span id="lvl">1</span> • <span id="xp">0</span> XP • <span id="mastered-count">0</span> mots</div>
+        <div class="xp-badge" id="cecr-badge">A1 • 0%</div>
     </header>
 
     <div id="home-view" class="view active">
@@ -67,6 +67,7 @@
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#8b5cf6; grid-column: span 2;" onclick="showProfil()">👤 Profil & Stats</div>
         </div>
+        <div id="theme-section" style="width:100%; max-width:500px;"></div>
         <div id="load-error"></div>
     </div>
 
@@ -148,12 +149,22 @@
         }
 
         async function init() {
-            const files = ['VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv', 'PHRASES_LABO.csv', 'MOTS_LABO.csv', 'THEME_BASE.csv'];
+            // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
+            const coreFiles = ['VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv', 'PHRASES_LABO.csv', 'MOTS_LABO.csv'];
+            // Fichiers de thèmes métier : optionnels. Ajoute simplement un CSV avec un de ces noms
+            // (ou un nouveau nom dans cette liste) pour qu'il apparaisse automatiquement dans "Thèmes".
+            const themeCandidates = [
+                'THEME_BASE.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
+                'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
+                'THEME_MANAGEMENT.csv', 'THEME_RH.csv'
+            ];
             const errors = [];
-            for (let f of files) {
+            const loadedThemes = [];
+
+            async function loadFile(f, isCore) {
                 try {
                     const r = await fetch(f);
-                    if (!r.ok) { errors.push(f + ' : HTTP ' + r.status); continue; }
+                    if (!r.ok) { if (isCore) errors.push(f + ' : HTTP ' + r.status); return 0; }
                     const t = await r.text();
                     let count = 0;
                     t.split(/\r?\n/).slice(1).forEach(l => {
@@ -164,15 +175,38 @@
                             count++;
                         }
                     });
-                    if (count === 0) errors.push(f + ' : chargé mais 0 ligne valide (vérifie le séparateur ";")');
+                    if (count === 0 && isCore) errors.push(f + ' : chargé mais 0 ligne valide (vérifie le séparateur ";")');
+                    return count;
                 } catch (e) {
-                    errors.push(f + ' : ' + e.message + ' (fichier manquant ou bloqué par CORS — sers l\'app via un serveur local, pas en double-clic file://)');
+                    if (isCore) errors.push(f + ' : ' + e.message + ' (fichier manquant ou bloqué par CORS — sers l\'app via un serveur local, pas en double-clic file://)');
+                    return 0;
                 }
             }
+
+            for (let f of coreFiles) await loadFile(f, true);
+            for (let f of themeCandidates) {
+                const count = await loadFile(f, false);
+                if (count > 0) loadedThemes.push({ file: f.replace('.csv', ''), count });
+            }
+
             if (errors.length) {
                 document.getElementById('load-error').innerText = errors.join('\n');
             }
+            renderThemes(loadedThemes);
             updateStats();
+        }
+
+        function renderThemes(themes) {
+            const section = document.getElementById('theme-section');
+            if (!themes.length) { section.innerHTML = ''; return; }
+            const labels = {
+                THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
+                THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
+                THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH'
+            };
+            section.innerHTML = '<h2 style="margin-top:40px;">Thèmes métier</h2><div class="grid">' +
+                themes.map(t => `<div class="card-menu blue" onclick="startSession('${t.file}')">${labels[t.file] || t.file} (${t.count})</div>`).join('') +
+                '</div>';
         }
 
         function showHome() {
@@ -475,12 +509,13 @@
                     return item ? `${item.fr} → ${item.nl} (${count}x)` : `${id} (${count}x)`;
                 });
             const best = state.memoryHighScore;
+            const vp = getVocabProgress();
 
             document.getElementById('profil-content').innerHTML = `
                 <div class="study-box" style="text-align:left;">
-                    <h3>📊 Général</h3>
-                    <p>Niveau ${Math.floor(state.xp / 100) + 1} — ${state.xp} XP<br>
-                    Mots maîtrisés : ${state.mastered.length}<br>
+                    <h3>📊 Niveau CECR</h3>
+                    <p>Niveau estimé : <b>${vp.level}</b> (${vp.pct}% du vocabulaire maîtrisé)<br>
+                    Mots maîtrisés : ${vp.masteredVocab} / ${vp.totalVocab}<br>
                     Mots vus au moins une fois : ${totalDistinctSeen}</p>
 
                     <h3>🎮 Parties jouées</h3>
@@ -501,10 +536,25 @@
             updateStats();
         }
 
+        // Niveau CECR basé sur le % de vocabulaire distinct maîtrisé.
+        // PHRASES_LABO est exclu du total : ce sont des phrases qui réutilisent des mots
+        // déjà comptés ailleurs (verbes/noms/adjectifs/thèmes), donc les compter en plus fausserait le %.
+        function getVocabProgress() {
+            const vocabItems = fullDb.filter(i => i.file !== 'PHRASES_LABO');
+            const totalVocab = vocabItems.length;
+            const masteredVocab = vocabItems.filter(i => state.mastered.includes(i.id)).length;
+            const pct = totalVocab > 0 ? Math.round((masteredVocab / totalVocab) * 100) : 0;
+            let level = 'A1';
+            if (pct >= 65) level = 'B2';
+            else if (pct >= 35) level = 'B1';
+            else if (pct >= 15) level = 'A2';
+            return { pct, level, totalVocab, masteredVocab };
+        }
+
         function updateStats() {
-            document.getElementById('xp').innerText = state.xp;
-            document.getElementById('lvl').innerText = Math.floor(state.xp / 100) + 1;
-            document.getElementById('mastered-count').innerText = state.mastered.length;
+            const { pct, level } = getVocabProgress();
+            document.getElementById('cecr-badge').innerText = level + ' • ' + pct + '%';
+            document.getElementById('mastered-count') && (document.getElementById('mastered-count').innerText = state.mastered.length);
         }
 
         // Touche Enter
