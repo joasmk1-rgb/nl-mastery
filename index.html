@@ -208,31 +208,61 @@
         }
         if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
         if (!state.customLists) state.customLists = {}; // { nomListe: [id, id, ...] }
-        if (!state.stats.wrongCount) state.stats.wrongCount = {}; // { id: nb de fois raté }
-        if (!state.stats.correctCount) state.stats.correctCount = {}; // { id: nb cumulé de réussites }
+        if (!state.stats.wrongCount) state.stats.wrongCount = {}; // { dirKey: nb de fois raté }
+        if (!state.stats.correctStreak) state.stats.correctStreak = {}; // { dirKey: réussites CONSÉCUTIVES }
+        if (!state.stats.spacingAnchor) state.stats.spacingAnchor = {}; // { dirKey: position globale à la 2e réussite }
+        if (!state.stats.trueMastered) state.stats.trueMastered = {}; // { dirKey: true si vraiment maîtrisé }
+        if (!state.stats.unlockedBatches) state.stats.unlockedBatches = {}; // { sourceKey: nb de paquets de 10 débloqués }
+        if (state.stats.position === undefined) state.stats.position = 0; // compteur global, incrémenté à chaque réponse
         if (!state.settings) state.settings = { direction: 'fr2nl' }; // 'fr2nl' ou 'nl2fr'
         let wlSelected = new Set();
         let batchResults = []; // suivi des 10 derniers mots de la session en cours (id + correct/faux)
         let lastRevisionWarning = 0; // dernier seuil de révision (multiple de 10) déjà signalé
         let currentItem = null;
+        let currentSessionSourceKey = null;   // clé de la source en cours (catégorie/liste + sens), pour le système de paquets de 10
+        let currentSessionOrderedItems = null; // ordre stable des mots de cette source, pour le découpage en paquets
 
         function seeWord(id) {
-            state.stats.wordSeen[id] = (state.stats.wordSeen[id] || 0) + 1;
+            const key = dirKey(id);
+            state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
         }
 
         function bumpMode(mode) {
             state.stats.modeCounts[mode] = (state.stats.modeCounts[mode] || 0) + 1;
         }
 
+        // Clé de suivi par mot ET par sens : un mot peut être maîtrisé FR→NL sans l'être NL→FR
+        function dirKey(id) {
+            return id + '::' + state.settings.direction;
+        }
+
+        const TRUE_MASTERY_STREAK = 3;      // réussites consécutives nécessaires pour être "vraiment maîtrisé"
+        const VALIDATION_STREAK = 2;        // réussites consécutives nécessaires pour "valider" (débloque le paquet suivant)
+        const MIN_SPACING_FOR_MASTERY = 25; // nb mini de mots vus entre la 2e et la 3e réussite pour que ça compte
+
         function registerResult(id, isCorrect) {
+            const key = dirKey(id);
+            state.stats.position = (state.stats.position || 0) + 1;
+            const pos = state.stats.position;
+
             if (!isCorrect) {
-                state.stats.wrongCount[id] = (state.stats.wrongCount[id] || 0) + 1;
-                state.stats.correctCount[id] = 0; // un raté remet le compteur de maîtrise à zéro
+                state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1;
+                state.stats.correctStreak[key] = 0; // un raté remet le streak à zéro
             } else {
-                state.stats.correctCount[id] = (state.stats.correctCount[id] || 0) + 1;
-                if (state.stats.wrongCount[id]) {
+                const streak = (state.stats.correctStreak[key] || 0) + 1;
+                state.stats.correctStreak[key] = streak;
+                if (streak === VALIDATION_STREAK) {
+                    state.stats.spacingAnchor[key] = pos; // on marque le moment de la 2e réussite
+                }
+                if (streak >= TRUE_MASTERY_STREAK && !state.stats.trueMastered[key]) {
+                    const anchor = state.stats.spacingAnchor[key] || pos;
+                    if (pos - anchor >= MIN_SPACING_FOR_MASTERY) {
+                        state.stats.trueMastered[key] = true;
+                    }
+                }
+                if (state.stats.wrongCount[key]) {
                     // une bonne réponse réduit le poids "à réviser" du mot, sans jamais repasser sous 0
-                    state.stats.wrongCount[id] = Math.max(0, state.stats.wrongCount[id] - 1);
+                    state.stats.wrongCount[key] = Math.max(0, state.stats.wrongCount[key] - 1);
                 }
             }
             batchResults.push({ id, isCorrect });
@@ -243,14 +273,17 @@
             checkRevisionWarning();
         }
 
-        const TRUE_MASTERY_THRESHOLD = 3;
         function isTrueMastered(id) {
-            return (state.stats.correctCount[id] || 0) >= TRUE_MASTERY_THRESHOLD;
+            return !!state.stats.trueMastered[dirKey(id)];
+        }
+
+        function isValidated(id) {
+            return (state.stats.correctStreak[dirKey(id)] || 0) >= VALIDATION_STREAK;
         }
 
         // Retire du pool actif les mots vraiment maîtrisés (sauf s'ils sont retombés en révision entre-temps)
         function activePool(items) {
-            return items.filter(i => !isTrueMastered(i.id) || (state.stats.wrongCount[i.id] || 0) > 0);
+            return items.filter(i => !isTrueMastered(i.id) || (state.stats.wrongCount[dirKey(i.id)] || 0) > 0);
         }
 
         // Alerte dès que la pile "mots à réviser" franchit un nouveau multiple de 10
@@ -267,15 +300,45 @@
         }
 
         function getReviewItems() {
-            return fullDb.filter(i => (state.stats.wrongCount[i.id] || 0) > 0)
-                .sort((a, b) => (state.stats.wrongCount[b.id] || 0) - (state.stats.wrongCount[a.id] || 0));
+            return fullDb.filter(i => (state.stats.wrongCount[dirKey(i.id)] || 0) > 0)
+                .sort((a, b) => (state.stats.wrongCount[dirKey(b.id)] || 0) - (state.stats.wrongCount[dirKey(a.id)] || 0));
         }
 
         function wordStatus(id) {
-            if (!state.stats.wordSeen[id]) return 'unseen';
-            if ((state.stats.wrongCount[id] || 0) > 0) return 'review';
+            const key = dirKey(id);
+            if (!state.stats.wordSeen[key]) return 'unseen';
+            if ((state.stats.wrongCount[key] || 0) > 0) return 'review';
             if (isTrueMastered(id)) return 'true-mastered';
             return 'mastered';
+        }
+
+        // --- Système de paquets de 10 (déblocage progressif par catégorie/liste, par sens) ---
+        // Un paquet est "propre" quand tous ses mots sont validés (2 réussites d'affilée) et sans faute en attente.
+        function isBatchClean(batchItems) {
+            return batchItems.length > 0 && batchItems.every(i =>
+                isValidated(i.id) && (state.stats.wrongCount[dirKey(i.id)] || 0) === 0);
+        }
+
+        function maybeUnlockBatches(sourceKey, orderedItems) {
+            let unlocked = state.stats.unlockedBatches[sourceKey] || 1;
+            while (unlocked * 10 < orderedItems.length) {
+                const batch = orderedItems.slice((unlocked - 1) * 10, unlocked * 10);
+                if (isBatchClean(batch)) unlocked++; else break;
+            }
+            state.stats.unlockedBatches[sourceKey] = unlocked;
+            return unlocked;
+        }
+
+        function getUnlockedItems(sourceKey, orderedItems) {
+            const unlocked = maybeUnlockBatches(sourceKey, orderedItems);
+            return orderedItems.slice(0, unlocked * 10);
+        }
+
+        // Recalcule le pool de la session en cours (nouveau paquet débloqué, mot devenu vraiment maîtrisé, etc.)
+        function refreshSessionPool() {
+            if (!currentSessionSourceKey) return;
+            const unlocked = getUnlockedItems(currentSessionSourceKey, currentSessionOrderedItems);
+            sessionDb = activePool(unlocked);
         }
 
         // Paliers de fréquence (échelle Zipf, 0-8). freq=0 = donnée absente (fichier sans colonne fréquence).
@@ -489,19 +552,25 @@
 
         function showHome() {
             stopTimeAttack();
+            currentSessionSourceKey = null;
+            currentSessionOrderedItems = null;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
         }
 
         function startSession(category) {
-            sessionDb = activePool(fullDb.filter(i => i.file === category));
+            const orderedItems = fullDb.filter(i => i.file === category); // ordre stable = ordre du CSV
+            const sourceKey = 'cat:' + category + '::' + state.settings.direction;
+            const unlocked = getUnlockedItems(sourceKey, orderedItems);
+            sessionDb = activePool(unlocked);
             if (sessionDb.length === 0) {
-                const totalInCat = fullDb.filter(i => i.file === category).length;
-                alert(totalInCat > 0
-                    ? "Bravo, tu maîtrises déjà tous les mots de cette catégorie ! 🎉"
+                alert(orderedItems.length > 0
+                    ? "Bravo, tu maîtrises déjà tous les mots débloqués de cette catégorie (dans ce sens) ! 🎉"
                     : "Fichier " + category + " vide ou manquant.");
                 return;
             }
+            currentSessionSourceKey = sourceKey;
+            currentSessionOrderedItems = orderedItems;
             document.getElementById('session-title').innerText = category;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
@@ -514,8 +583,13 @@
 
         function startCustomList(name) {
             const ids = state.customLists[name] || [];
-            sessionDb = activePool(fullDb.filter(i => ids.includes(i.id)));
-            if (sessionDb.length === 0) { alert("Cette liste est vide, ou tous ses mots sont déjà maîtrisés ! 🎉"); return; }
+            const orderedItems = fullDb.filter(i => ids.includes(i.id));
+            const sourceKey = 'list:' + name + '::' + state.settings.direction;
+            const unlocked = getUnlockedItems(sourceKey, orderedItems);
+            sessionDb = activePool(unlocked);
+            if (sessionDb.length === 0) { alert("Cette liste est vide, ou tous ses mots débloqués sont déjà maîtrisés (dans ce sens) ! 🎉"); return; }
+            currentSessionSourceKey = sourceKey;
+            currentSessionOrderedItems = orderedItems;
             document.getElementById('session-title').innerText = '📋 ' + name;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
@@ -527,6 +601,8 @@
         }
 
         function startRevision() {
+            currentSessionSourceKey = null; // la révision n'est pas soumise au système de paquets
+            currentSessionOrderedItems = null;
             sessionDb = getReviewItems();
             if (sessionDb.length === 0) { alert("Rien à réviser pour l'instant : réponds à quelques mots d'abord, ceux que tu rates iront ici automatiquement."); return; }
             document.getElementById('session-title').innerText = '🔁 Révision (mots ratés)';
@@ -580,6 +656,12 @@
         }
 
         function nextQ() {
+            refreshSessionPool();
+            if (sessionDb.length === 0) {
+                alert("Bravo, tu as fini tous les mots débloqués disponibles ici pour l'instant ! 🎉");
+                showHome();
+                return;
+            }
             currentItem = pickRandomExcluding(sessionDb, currentItem);
             seeWord(currentItem.id);
             save();
@@ -593,9 +675,14 @@
         }
 
         function markMastered(item) {
-            if (!state.mastered.includes(item.id)) {
-                state.mastered.push(item.id);
+            const key = dirKey(item.id);
+            if (!state.mastered.includes(key)) {
+                state.mastered.push(key);
             }
+        }
+
+        function isMasteredAnyDirection(id) {
+            return state.mastered.includes(id + '::fr2nl') || state.mastered.includes(id + '::nl2fr');
         }
 
         // Un mot peut avoir plusieurs réponses valides séparées par "/", ex: "rep1/rep2"
@@ -633,13 +720,15 @@
         }
 
         // Compare la réponse de l'utilisateur à la liste des réponses acceptées.
+        // Le contenu entre parenthèses (ex: "voler (air)") est ignoré pour la comparaison,
+        // mais reste affiché tel quel dans le feedback.
         // Renvoie { status: 'correct' | 'close' | 'wrong', closest, distance }
         function evaluateAnswer(userRaw, nl) {
-            const user = normalize(userRaw);
+            const user = normalize(userRaw.replace(/\([^)]*\)/g, ''));
             const accepted = getAcceptedAnswers(nl);
             let best = { status: 'wrong', closest: accepted[0], distance: Infinity };
             for (const a of accepted) {
-                const target = normalize(a);
+                const target = normalize(a.replace(/\([^)]*\)/g, ''));
                 const dist = levenshtein(user, target);
                 if (dist === 0) return { status: 'correct', closest: a, distance: 0 };
                 if (dist <= toleranceFor(target) && dist < best.distance) {
@@ -874,9 +963,10 @@
             const seenEntries = Object.entries(state.stats.wordSeen);
             const totalDistinctSeen = seenEntries.length;
             const top5 = [...seenEntries].sort((a, b) => b[1] - a[1]).slice(0, 5)
-                .map(([id, count]) => {
-                    const item = fullDb.find(i => i.id === id);
-                    return item ? `${item.fr} → ${item.nl} (${count}x)` : `${id} (${count}x)`;
+                .map(([key, count]) => {
+                    const [wid] = key.split('::');
+                    const item = fullDb.find(i => i.id === wid);
+                    return item ? `${item.fr} → ${item.nl} (${count}x)` : `${key} (${count}x)`;
                 });
             const best = state.memoryHighScore;
             const vp = getVocabProgress();
@@ -1009,6 +1099,10 @@
             const fb = document.getElementById('test-feedback');
             fb.innerText = isCorrect ? '✅ ' + correctAnswer : '❌ ' + correctAnswer;
             fb.style.color = isCorrect ? 'var(--success)' : 'var(--wrong)';
+            seeWord(item.id);
+            registerResult(item.id, isCorrect);
+            if (isCorrect) markMastered(item);
+            save();
             testResults.push({ item, isCorrect });
             testIndex++;
             setTimeout(testNextQ, 900);
@@ -1078,7 +1172,7 @@
         function getVocabProgress() {
             const vocabItems = fullDb.filter(i => i.file !== 'PHRASES_LABO');
             const totalVocab = vocabItems.length;
-            const masteredVocab = vocabItems.filter(i => state.mastered.includes(i.id)).length;
+            const masteredVocab = vocabItems.filter(i => isMasteredAnyDirection(i.id)).length;
             const pct = totalVocab > 0 ? Math.round((masteredVocab / totalVocab) * 100) : 0;
             const thresholds = [
                 { level: 'A1', min: 0 }, { level: 'A2', min: 15 },
