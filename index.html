@@ -221,6 +221,8 @@
         let currentItem = null;
         let currentSessionSourceKey = null;   // clé de la source en cours (catégorie/liste + sens), pour le système de paquets de 10
         let currentSessionOrderedItems = null; // ordre stable des mots de cette source, pour le découpage en paquets
+        let inRevisionMode = false;
+        let revisionQueue = []; // file d'attente : chaque mot n'y figure qu'une fois
 
         function seeWord(id) {
             const key = dirKey(id);
@@ -301,7 +303,10 @@
 
         function getReviewItems() {
             return fullDb.filter(i => (state.stats.wrongCount[dirKey(i.id)] || 0) > 0)
-                .sort((a, b) => (state.stats.wrongCount[dirKey(b.id)] || 0) - (state.stats.wrongCount[dirKey(a.id)] || 0));
+                .sort((a, b) => {
+                    const diff = (state.stats.wrongCount[dirKey(b.id)] || 0) - (state.stats.wrongCount[dirKey(a.id)] || 0);
+                    return diff !== 0 ? diff : (b.freq || 0) - (a.freq || 0);
+                });
         }
 
         function wordStatus(id) {
@@ -352,6 +357,11 @@
         ];
         function freqBand(freq) {
             return FREQ_BANDS.find(b => freq >= b.min) || FREQ_BANDS[FREQ_BANDS.length - 1];
+        }
+
+        // Trie une liste de mots du plus fréquent au moins fréquent (les mots sans fréquence connue vont à la fin)
+        function byFrequencyDesc(items) {
+            return [...items].sort((a, b) => (b.freq || 0) - (a.freq || 0));
         }
 
         function toggleDirection() {
@@ -556,12 +566,14 @@
             stopTimeAttack();
             currentSessionSourceKey = null;
             currentSessionOrderedItems = null;
+            inRevisionMode = false;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
         }
 
         function startSession(category) {
-            const orderedItems = fullDb.filter(i => i.file === category); // ordre stable = ordre du CSV
+            inRevisionMode = false;
+            const orderedItems = byFrequencyDesc(fullDb.filter(i => i.file === category));
             const sourceKey = 'cat:' + category + '::' + state.settings.direction;
             const unlocked = getUnlockedItems(sourceKey, orderedItems);
             sessionDb = activePool(unlocked);
@@ -584,8 +596,9 @@
         }
 
         function startCustomList(name) {
+            inRevisionMode = false;
             const ids = state.customLists[name] || [];
-            const orderedItems = fullDb.filter(i => ids.includes(i.id));
+            const orderedItems = byFrequencyDesc(fullDb.filter(i => ids.includes(i.id)));
             const sourceKey = 'list:' + name + '::' + state.settings.direction;
             const unlocked = getUnlockedItems(sourceKey, orderedItems);
             sessionDb = activePool(unlocked);
@@ -605,8 +618,10 @@
         function startRevision() {
             currentSessionSourceKey = null; // la révision n'est pas soumise au système de paquets
             currentSessionOrderedItems = null;
-            sessionDb = getReviewItems();
-            if (sessionDb.length === 0) { alert("Rien à réviser pour l'instant : réponds à quelques mots d'abord, ceux que tu rates iront ici automatiquement."); return; }
+            const items = getReviewItems();
+            if (items.length === 0) { alert("Rien à réviser pour l'instant : réponds à quelques mots d'abord, ceux que tu rates iront ici automatiquement."); return; }
+            inRevisionMode = true;
+            revisionQueue = [...items].sort(() => 0.5 - Math.random()); // chaque mot n'y figure qu'UNE fois
             document.getElementById('session-title').innerText = '🔁 Révision (mots ratés)';
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
@@ -614,7 +629,32 @@
             document.getElementById('batch-recap').innerHTML = '';
             bumpMode('classique');
             save();
-            nextQ();
+            revisionNextQ();
+        }
+
+        // Repousse un mot raté plus loin dans la file (25 positions, ou à la fin si la file est plus courte)
+        function requeueItem(item) {
+            const insertPos = Math.min(25, revisionQueue.length);
+            revisionQueue.splice(insertPos, 0, item);
+        }
+
+        function revisionNextQ() {
+            if (revisionQueue.length === 0) {
+                alert("🎉 Session de révision terminée ! Tous les mots de la file ont été retravaillés.");
+                inRevisionMode = false;
+                showHome();
+                return;
+            }
+            currentItem = revisionQueue.shift(); // on prend le premier de la file, jamais de doublon
+            seeWord(currentItem.id);
+            save();
+            const { question } = questionFor(currentItem);
+            document.getElementById('q-text').innerText = question;
+            document.getElementById('ans-input').placeholder = state.settings.direction === 'fr2nl'
+                ? 'Traduire en Néerlandais...' : 'Traduire en Français...';
+            document.getElementById('ans-input').value = "";
+            document.getElementById('feedback').innerText = "";
+            document.getElementById('ans-input').focus();
         }
 
         function updateRevisionButton() {
@@ -629,8 +669,14 @@
             fb.innerText = "🤷 RÉPONSE : " + currentItem[answerField];
             fb.style.color = "var(--wrong)";
             registerResult(currentItem.id, false);
-            save();
-            setTimeout(nextQ, 1600);
+            if (inRevisionMode) {
+                requeueItem(currentItem);
+                save();
+                setTimeout(revisionNextQ, 1600);
+            } else {
+                save();
+                setTimeout(nextQ, 1600);
+            }
         }
 
         function showBatchRecap() {
@@ -750,6 +796,7 @@
             const multi = accepted.length > 1;
             const result = evaluateAnswer(raw, correctAnswer);
             const fb = document.getElementById('feedback');
+            const goToNext = inRevisionMode ? revisionNextQ : nextQ;
 
             if (result.status === 'correct') {
                 fb.innerText = "✅ BRAVO ! → " + correctAnswer + (multi ? "  (plusieurs réponses acceptées)" : "");
@@ -758,7 +805,7 @@
                 markMastered(currentItem);
                 registerResult(currentItem.id, true);
                 save();
-                setTimeout(nextQ, 1400);
+                setTimeout(goToNext, 1400);
             } else if (result.status === 'close') {
                 fb.innerText = "🟡 PRESQUE ! (petite faute) → " + correctAnswer;
                 fb.style.color = "var(--gold)";
@@ -766,12 +813,18 @@
                 markMastered(currentItem);
                 registerResult(currentItem.id, true);
                 save();
-                setTimeout(nextQ, 1600);
+                setTimeout(goToNext, 1600);
             } else {
                 fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer;
                 fb.style.color = "var(--wrong)";
                 registerResult(currentItem.id, false);
-                save();
+                if (inRevisionMode) {
+                    requeueItem(currentItem);
+                    save();
+                    setTimeout(goToNext, 1600); // en révision, on force l'avancée (pas de retry sur place)
+                } else {
+                    save(); // en mode classique, on laisse réessayer le même mot
+                }
             }
         }
 
@@ -789,7 +842,9 @@
             bumpMode('memory');
 
             const grid = document.getElementById('m-grid'); grid.innerHTML = "";
-            let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 6);
+            const pool = byFrequencyDesc(activePool(fullDb)).slice(0, 30);
+            const source = pool.length >= 6 ? pool : fullDb;
+            let items = [...source].sort(() => 0.5 - Math.random()).slice(0, 6);
             items.forEach(i => seeWord(i.id));
             save();
 
@@ -895,8 +950,9 @@
         }
 
         function nextTAQ() {
-            const pool = activePool(fullDb);
-            taCurrent = pickRandomExcluding(pool.length ? pool : fullDb, taCurrent);
+            const pool = byFrequencyDesc(activePool(fullDb)).slice(0, 50);
+            const source = pool.length ? pool : fullDb;
+            taCurrent = pickRandomExcluding(source, taCurrent);
             seeWord(taCurrent.id);
             save();
             const { question } = questionFor(taCurrent);
@@ -1208,4 +1264,4 @@
         init();
     </script>
 </body>
-</html> 
+</html>
