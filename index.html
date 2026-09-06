@@ -62,7 +62,10 @@
         <h2 style="margin-top:40px;">Jeux & Défis</h2>
         <div class="grid">
             <div class="card-menu" style="color:var(--success)" onclick="startMemory()">🧩 Memory</div>
-            <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack()">⏱️ Contre-la-montre</div>
+            <div class="card-menu" style="color:var(--wrong)" onclick="showTASelect()">⏱️ Contre-la-montre</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#8b5cf6; grid-column: span 2;" onclick="showProfil()">👤 Profil & Stats</div>
         </div>
         <div id="load-error"></div>
     </div>
@@ -81,7 +84,20 @@
 
     <div id="memory-view" class="view">
         <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div id="memory-stats" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="memory-grid" id="m-grid"></div>
+        <div id="memory-result" style="margin-top:20px; width:100%; max-width:400px;"></div>
+    </div>
+
+    <div id="ta-select-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>Choisis une durée</h2>
+        <div class="grid">
+            <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack(30)">30 sec</div>
+            <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack(60)">1 min</div>
+            <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack(180)">3 min</div>
+            <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack(300)">5 min</div>
+        </div>
     </div>
 
     <div id="timeattack-view" class="view">
@@ -96,11 +112,30 @@
         </div>
     </div>
 
+    <div id="profil-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>👤 Profil & Stats</h2>
+        <div id="profil-content" style="width:100%; max-width:450px;"></div>
+    </div>
+
     <script>
         let fullDb = [];
         let sessionDb = [];
         let state = JSON.parse(localStorage.getItem('nl_platform_v1')) || { xp: 0, mastered: [] };
+        // Migration douce : on ajoute les champs manquants sans écraser une sauvegarde existante
+        if (!state.stats) {
+            state.stats = { modeCounts: { classique: 0, memory: 0, timeattack: 0 }, wordSeen: {} };
+        }
+        if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
         let currentItem = null;
+
+        function seeWord(id) {
+            state.stats.wordSeen[id] = (state.stats.wordSeen[id] || 0) + 1;
+        }
+
+        function bumpMode(mode) {
+            state.stats.modeCounts[mode] = (state.stats.modeCounts[mode] || 0) + 1;
+        }
 
         // Normalise pour comparer sans se faire piéger par accents/apostrophes/espaces
         function normalize(str) {
@@ -152,11 +187,15 @@
             document.getElementById('session-title').innerText = category;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
+            bumpMode('classique');
+            save();
             nextQ();
         }
 
         function nextQ() {
             currentItem = sessionDb[Math.floor(Math.random() * sessionDb.length)];
+            seeWord(currentItem.id);
+            save();
             document.getElementById('q-text').innerText = currentItem.fr;
             document.getElementById('ans-input').value = "";
             document.getElementById('feedback').innerText = "";
@@ -250,14 +289,31 @@
         }
 
         // MEMORY GAME
+        let memMoves = 0;
+        let memStartTime = null;
+        let memMatchedPairs = 0;
+        let memTotalPairs = 6;
+
         function startMemory() {
             if (fullDb.length < 6) { alert("Pas assez de mots chargés pour jouer au Memory."); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('memory-view').classList.add('active');
+            document.getElementById('memory-result').innerHTML = '';
+            bumpMode('memory');
+
             const grid = document.getElementById('m-grid'); grid.innerHTML = "";
             let items = [...fullDb].sort(() => 0.5 - Math.random()).slice(0, 6);
+            items.forEach(i => seeWord(i.id));
+            save();
+
             let cards = []; items.forEach(i => { cards.push({ t: i.fr, id: i.id }, { t: i.nl, id: i.id }); });
             cards.sort(() => 0.5 - Math.random());
+
+            memMoves = 0;
+            memMatchedPairs = 0;
+            memTotalPairs = items.length;
+            memStartTime = Date.now();
+            updateMemoryStatsLine();
 
             let selected = [];
             let lock = false;
@@ -268,10 +324,14 @@
                     d.classList.add('selected'); selected.push({ el: d, id: c.id });
                     if (selected.length === 2) {
                         lock = true;
+                        memMoves++;
+                        updateMemoryStatsLine();
                         if (selected[0].id === selected[1].id) {
                             setTimeout(() => {
                                 selected.forEach(s => { s.el.classList.remove('selected'); s.el.classList.add('matched'); });
                                 selected = []; lock = false;
+                                memMatchedPairs++;
+                                if (memMatchedPairs >= memTotalPairs) finishMemory();
                             }, 400);
                             state.xp += 5; save();
                         } else {
@@ -286,18 +346,51 @@
             });
         }
 
+        function updateMemoryStatsLine() {
+            const best = state.memoryHighScore;
+            const bestText = best ? `Meilleur score : ${best.moves} coups en ${best.timeSec}s` : 'Meilleur score : —';
+            document.getElementById('memory-stats').innerText = `Coups : ${memMoves} — ${bestText}`;
+        }
+
+        function finishMemory() {
+            const timeSec = Math.round((Date.now() - memStartTime) / 1000);
+            const best = state.memoryHighScore;
+            let isNewBest = false;
+            if (!best || memMoves < best.moves || (memMoves === best.moves && timeSec < best.timeSec)) {
+                state.memoryHighScore = { moves: memMoves, timeSec };
+                isNewBest = true;
+            }
+            save();
+            updateMemoryStatsLine();
+            document.getElementById('memory-result').innerHTML = `
+                <div class="study-box">
+                    <h2>${isNewBest ? '🏆 Nouveau record !' : 'Terminé !'}</h2>
+                    <p>${memMoves} coups, ${timeSec} secondes</p>
+                    <button class="btn btn-green" onclick="startMemory()">🔁 REJOUER</button>
+                    <button class="btn btn-gray" onclick="showHome()">Retour au menu</button>
+                </div>`;
+        }
+
         // TIME ATTACK (contre-la-montre)
         let taInterval = null;
         let taTimeLeft = 30;
+        let taDuration = 30;
         let taScore = 0;
         let taCurrent = null;
 
-        function startTimeAttack() {
+        function showTASelect() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('ta-select-view').classList.add('active');
+        }
+
+        function startTimeAttack(durationSec) {
             if (fullDb.length === 0) { alert("Aucun mot chargé pour jouer."); return; }
+            taDuration = durationSec || 30;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('timeattack-view').classList.add('active');
+            bumpMode('timeattack');
             taScore = 0;
-            taTimeLeft = 30;
+            taTimeLeft = taDuration;
             document.getElementById('ta-score').innerText = 'Score : 0';
             document.getElementById('ta-timer').innerText = taTimeLeft;
             document.getElementById('ta-feedback').innerText = '';
@@ -316,6 +409,8 @@
 
         function nextTAQ() {
             taCurrent = fullDb[Math.floor(Math.random() * fullDb.length)];
+            seeWord(taCurrent.id);
+            save();
             document.getElementById('ta-q-text').innerText = taCurrent.fr;
             document.getElementById('ta-ans-input').value = '';
         }
@@ -351,12 +446,54 @@
         function endTimeAttack() {
             clearInterval(taInterval);
             taInterval = null;
-            alert("Temps écoulé ! Score final : " + taScore);
-            showHome();
+            const relancer = confirm("Temps écoulé ! Score final : " + taScore + "\n\nRejouer avec la même durée ?");
+            if (relancer) {
+                startTimeAttack(taDuration);
+            } else {
+                showHome();
+            }
         }
 
         function stopTimeAttack() {
             if (taInterval) { clearInterval(taInterval); taInterval = null; }
+        }
+
+        // PROFIL & STATS
+        function showProfil() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('profil-view').classList.add('active');
+            renderProfil();
+        }
+
+        function renderProfil() {
+            const mc = state.stats.modeCounts;
+            const seenEntries = Object.entries(state.stats.wordSeen);
+            const totalDistinctSeen = seenEntries.length;
+            const top5 = [...seenEntries].sort((a, b) => b[1] - a[1]).slice(0, 5)
+                .map(([id, count]) => {
+                    const item = fullDb.find(i => i.id === id);
+                    return item ? `${item.fr} → ${item.nl} (${count}x)` : `${id} (${count}x)`;
+                });
+            const best = state.memoryHighScore;
+
+            document.getElementById('profil-content').innerHTML = `
+                <div class="study-box" style="text-align:left;">
+                    <h3>📊 Général</h3>
+                    <p>Niveau ${Math.floor(state.xp / 100) + 1} — ${state.xp} XP<br>
+                    Mots maîtrisés : ${state.mastered.length}<br>
+                    Mots vus au moins une fois : ${totalDistinctSeen}</p>
+
+                    <h3>🎮 Parties jouées</h3>
+                    <p>Mode classique : ${mc.classique || 0}<br>
+                    Memory : ${mc.memory || 0}<br>
+                    Contre-la-montre : ${mc.timeattack || 0}</p>
+
+                    <h3>🧩 Memory — meilleur score</h3>
+                    <p>${best ? best.moves + ' coups en ' + best.timeSec + ' secondes' : 'Pas encore de partie terminée'}</p>
+
+                    <h3>🔥 Mots les plus revus</h3>
+                    <p>${top5.length ? top5.join('<br>') : 'Aucune donnée pour le moment'}</p>
+                </div>`;
         }
 
         function save() {
