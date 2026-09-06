@@ -49,6 +49,10 @@
         .wl-row span.wl-fr { flex: 1; font-weight: bold; }
         .wl-row span.wl-nl { flex: 1; color: var(--text); }
         .wl-row span.wl-file { font-size: 0.7rem; color: #afafaf; }
+        .wl-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; white-space: nowrap; }
+        .wl-badge.unseen { background: #e5e5e5; color: #888; }
+        .wl-badge.review { background: #ffe3b3; color: #b06d00; }
+        .wl-badge.mastered { background: #d7f7c2; color: #2f7d00; }
     </style>
 </head>
 <body>
@@ -72,6 +76,9 @@
             <div class="card-menu" style="color:var(--wrong)" onclick="showTASelect()">⏱️ Contre-la-montre</div>
         </div>
         <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#ff8c00; grid-column: span 2;" onclick="startRevision()" id="revision-btn">🔁 Révision (0 mot)</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#8b5cf6; grid-column: span 2;" onclick="showProfil()">👤 Profil & Stats</div>
         </div>
         <div class="grid" style="margin-top:15px;">
@@ -88,10 +95,18 @@
         <div style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px;">
             <input type="text" id="wl-search" placeholder="Rechercher un mot..." style="margin:0;" oninput="renderWordList()">
             <select id="wl-filter" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;"></select>
+            <select id="wl-status-filter" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;">
+                <option value="">Tous statuts</option>
+                <option value="unseen">Non vus</option>
+                <option value="review">À réviser</option>
+                <option value="mastered">Maîtrisés</option>
+            </select>
         </div>
-        <div id="wl-actions" style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px;">
-            <button class="btn btn-green" style="margin:0;" onclick="saveCustomList()">💾 Sauver la sélection comme liste</button>
-            <button class="btn btn-gray" style="margin:0;" onclick="clearWordSelection()">Vider la sélection</button>
+        <div id="wl-actions" style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <button class="btn btn-green" style="margin:0; flex:1;" onclick="saveCustomList()">💾 Sauver la sélection</button>
+            <button class="btn btn-gray" style="margin:0; flex:1;" onclick="clearWordSelection()">Vider</button>
+            <button class="btn btn-gray" style="margin:0; flex:1;" onclick="selectByStatus('unseen')">+ Non vus</button>
+            <button class="btn btn-gray" style="margin:0; flex:1;" onclick="selectByStatus('review')">+ À réviser</button>
         </div>
         <div id="wl-count" style="font-weight:bold; margin-bottom:10px;"></div>
         <div id="wl-table" style="width:100%; max-width:500px;"></div>
@@ -105,8 +120,9 @@
             <input type="text" id="ans-input" placeholder="Traduire en Néerlandais...">
             <div id="feedback" style="min-height: 20px; font-weight: bold; margin-bottom: 10px;"></div>
             <button class="btn btn-green" onclick="checkAns()">VÉRIFIER</button>
-            <button class="btn btn-gray" onclick="nextQ()">PASSER</button>
+            <button class="btn btn-gray" onclick="iDontKnow()">🤷 JE NE SAIS PAS</button>
         </div>
+        <div id="batch-recap" style="margin-top:20px; width:100%; max-width:400px;"></div>
     </div>
 
     <div id="memory-view" class="view">
@@ -155,7 +171,9 @@
         }
         if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
         if (!state.customLists) state.customLists = {}; // { nomListe: [id, id, ...] }
+        if (!state.stats.wrongCount) state.stats.wrongCount = {}; // { id: nb de fois raté }
         let wlSelected = new Set();
+        let batchResults = []; // suivi des 10 derniers mots de la session en cours (id + correct/faux)
         let currentItem = null;
 
         function seeWord(id) {
@@ -164,6 +182,31 @@
 
         function bumpMode(mode) {
             state.stats.modeCounts[mode] = (state.stats.modeCounts[mode] || 0) + 1;
+        }
+
+        function registerResult(id, isCorrect) {
+            if (!isCorrect) {
+                state.stats.wrongCount[id] = (state.stats.wrongCount[id] || 0) + 1;
+            } else if (state.stats.wrongCount[id]) {
+                // une bonne réponse réduit le poids "à réviser" du mot, sans jamais repasser sous 0
+                state.stats.wrongCount[id] = Math.max(0, state.stats.wrongCount[id] - 1);
+            }
+            batchResults.push({ id, isCorrect });
+            if (batchResults.length >= 10) {
+                showBatchRecap();
+                batchResults = [];
+            }
+        }
+
+        function getReviewItems() {
+            return fullDb.filter(i => (state.stats.wrongCount[i.id] || 0) > 0)
+                .sort((a, b) => (state.stats.wrongCount[b.id] || 0) - (state.stats.wrongCount[a.id] || 0));
+        }
+
+        function wordStatus(id) {
+            if (!state.stats.wordSeen[id]) return 'unseen';
+            if ((state.stats.wrongCount[id] || 0) > 0) return 'review';
+            return 'mastered';
         }
 
         // Normalise pour comparer sans se faire piéger par accents/apostrophes/espaces
@@ -261,21 +304,36 @@
         function renderWordList() {
             const search = normalize(document.getElementById('wl-search').value);
             const cat = document.getElementById('wl-filter').value;
+            const statusFilter = document.getElementById('wl-status-filter').value;
             let items = fullDb;
             if (cat) items = items.filter(i => i.file === cat);
+            if (statusFilter) items = items.filter(i => wordStatus(i.id) === statusFilter);
             if (search) items = items.filter(i => normalize(i.fr).includes(search) || normalize(i.nl).includes(search));
 
+            const badgeLabel = { unseen: 'Non vu', review: 'À réviser', mastered: 'Maîtrisé' };
             const table = document.getElementById('wl-table');
-            table.innerHTML = items.slice(0, 300).map(i => `
+            table.innerHTML = items.slice(0, 300).map(i => {
+                const st = wordStatus(i.id);
+                return `
                 <div class="wl-row ${wlSelected.has(i.id) ? 'selected' : ''}" onclick="toggleWordSelect('${i.id}')">
                     <span class="wl-fr">${i.fr}</span>
                     <span class="wl-nl">${i.nl}</span>
+                    <span class="wl-badge ${st}">${badgeLabel[st]}</span>
                     <span class="wl-file">${i.file}</span>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             if (items.length > 300) {
                 table.innerHTML += `<p style="color:#afafaf;font-size:0.8rem;">${items.length - 300} résultats supplémentaires non affichés, affine ta recherche.</p>`;
             }
             document.getElementById('wl-count').innerText = `${items.length} mot(s) affiché(s) — ${wlSelected.size} sélectionné(s)`;
+        }
+
+        function selectByStatus(status) {
+            const cat = document.getElementById('wl-filter').value;
+            let items = fullDb.filter(i => wordStatus(i.id) === status);
+            if (cat) items = items.filter(i => i.file === cat);
+            items.forEach(i => wlSelected.add(i.id));
+            renderWordList();
         }
 
         function toggleWordSelect(id) {
@@ -310,6 +368,8 @@
             document.getElementById('session-title').innerText = category;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
+            batchResults = [];
+            document.getElementById('batch-recap').innerHTML = '';
             bumpMode('classique');
             save();
             nextQ();
@@ -322,9 +382,53 @@
             document.getElementById('session-title').innerText = '📋 ' + name;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
+            batchResults = [];
+            document.getElementById('batch-recap').innerHTML = '';
             bumpMode('classique');
             save();
             nextQ();
+        }
+
+        function startRevision() {
+            sessionDb = getReviewItems();
+            if (sessionDb.length === 0) { alert("Rien à réviser pour l'instant : réponds à quelques mots d'abord, ceux que tu rates iront ici automatiquement."); return; }
+            document.getElementById('session-title').innerText = '🔁 Révision (mots ratés)';
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('study-view').classList.add('active');
+            batchResults = [];
+            document.getElementById('batch-recap').innerHTML = '';
+            bumpMode('classique');
+            save();
+            nextQ();
+        }
+
+        function updateRevisionButton() {
+            const n = getReviewItems().length;
+            const btn = document.getElementById('revision-btn');
+            if (btn) btn.innerText = `🔁 Révision (${n} mot${n > 1 ? 's' : ''})`;
+        }
+
+        function iDontKnow() {
+            const fb = document.getElementById('feedback');
+            fb.innerText = "🤷 RÉPONSE : " + currentItem.nl;
+            fb.style.color = "var(--wrong)";
+            registerResult(currentItem.id, false);
+            save();
+            setTimeout(nextQ, 1600);
+        }
+
+        function showBatchRecap() {
+            const wrongOnes = batchResults.filter(r => !r.isCorrect);
+            const goodCount = batchResults.length - wrongOnes.length;
+            const recap = document.getElementById('batch-recap');
+            if (!recap) return;
+            recap.innerHTML = `
+                <div class="study-box">
+                    <h3>Bilan des 10 derniers mots</h3>
+                    <p>✅ ${goodCount} bon(s) — ❌ ${wrongOnes.length} à revoir</p>
+                    ${wrongOnes.length ? '<button class="btn btn-red" onclick="startRevision()">Réviser ces mots maintenant</button>' : ''}
+                    <button class="btn btn-gray" onclick="document.getElementById('batch-recap').innerHTML=''">Continuer</button>
+                </div>`;
         }
 
         function nextQ() {
@@ -408,6 +512,7 @@
                 fb.style.color = "var(--success)";
                 state.xp += 10;
                 markMastered(currentItem);
+                registerResult(currentItem.id, true);
                 save();
                 setTimeout(nextQ, 1400);
             } else if (result.status === 'close') {
@@ -415,11 +520,14 @@
                 fb.style.color = "var(--gold)";
                 state.xp += 5;
                 markMastered(currentItem);
+                registerResult(currentItem.id, true);
                 save();
                 setTimeout(nextQ, 1600);
             } else {
                 fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + currentItem.nl;
                 fb.style.color = "var(--wrong)";
+                registerResult(currentItem.id, false);
+                save();
             }
         }
 
@@ -559,6 +667,7 @@
                 taScore++;
                 state.xp += 3;
                 markMastered(taCurrent);
+                registerResult(taCurrent.id, true);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
                 fb.innerText = '✅ ' + taCurrent.nl;
@@ -567,11 +676,14 @@
                 taScore += 0.5;
                 state.xp += 1;
                 markMastered(taCurrent);
+                registerResult(taCurrent.id, true);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
                 fb.innerText = '🟡 presque : ' + taCurrent.nl;
                 fb.style.color = 'var(--gold)';
             } else {
+                registerResult(taCurrent.id, false);
+                save();
                 fb.innerText = '❌ ' + taCurrent.nl;
                 fb.style.color = 'var(--wrong)';
             }
@@ -618,7 +730,8 @@
                     <p>Niveau estimé : <b>${vp.level}</b><br>
                     Mots maîtrisés : ${vp.masteredVocab} / ${vp.totalVocab} (${vp.pct}%)<br>
                     ${vp.nextLevel ? `Encore <b>${vp.wordsToNext}</b> mots avant le niveau ${vp.nextLevel}` : 'Niveau maximum atteint 🎉'}<br>
-                    Mots vus au moins une fois : ${totalDistinctSeen}</p>
+                    Mots vus au moins une fois : ${totalDistinctSeen}<br>
+                    Mots à réviser actuellement : ${getReviewItems().length}</p>
 
                     <h3>🎮 Parties jouées</h3>
                     <p>Mode classique : ${mc.classique || 0}<br>
@@ -667,6 +780,7 @@
         function updateStats() {
             const { level } = getVocabProgress();
             document.getElementById('cecr-badge').innerText = level;
+            updateRevisionButton();
         }
 
         // Touche Enter
