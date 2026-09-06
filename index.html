@@ -53,6 +53,7 @@
         .wl-badge.unseen { background: #e5e5e5; color: #888; }
         .wl-badge.review { background: #ffe3b3; color: #b06d00; }
         .wl-badge.mastered { background: #d7f7c2; color: #2f7d00; }
+        .wl-badge.true-mastered { background: #2f7d00; color: white; }
     </style>
 </head>
 <body>
@@ -105,7 +106,8 @@
                 <option value="">Tous statuts</option>
                 <option value="unseen">Non vus</option>
                 <option value="review">À réviser</option>
-                <option value="mastered">Maîtrisés</option>
+                <option value="mastered">Réussi (pas encore ancré)</option>
+                <option value="true-mastered">Vraiment maîtrisé</option>
             </select>
             <select id="wl-sort" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;">
                 <option value="alpha">Alphabétique</option>
@@ -207,9 +209,11 @@
         if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
         if (!state.customLists) state.customLists = {}; // { nomListe: [id, id, ...] }
         if (!state.stats.wrongCount) state.stats.wrongCount = {}; // { id: nb de fois raté }
+        if (!state.stats.correctCount) state.stats.correctCount = {}; // { id: nb cumulé de réussites }
         if (!state.settings) state.settings = { direction: 'fr2nl' }; // 'fr2nl' ou 'nl2fr'
         let wlSelected = new Set();
         let batchResults = []; // suivi des 10 derniers mots de la session en cours (id + correct/faux)
+        let lastRevisionWarning = 0; // dernier seuil de révision (multiple de 10) déjà signalé
         let currentItem = null;
 
         function seeWord(id) {
@@ -223,14 +227,42 @@
         function registerResult(id, isCorrect) {
             if (!isCorrect) {
                 state.stats.wrongCount[id] = (state.stats.wrongCount[id] || 0) + 1;
-            } else if (state.stats.wrongCount[id]) {
-                // une bonne réponse réduit le poids "à réviser" du mot, sans jamais repasser sous 0
-                state.stats.wrongCount[id] = Math.max(0, state.stats.wrongCount[id] - 1);
+                state.stats.correctCount[id] = 0; // un raté remet le compteur de maîtrise à zéro
+            } else {
+                state.stats.correctCount[id] = (state.stats.correctCount[id] || 0) + 1;
+                if (state.stats.wrongCount[id]) {
+                    // une bonne réponse réduit le poids "à réviser" du mot, sans jamais repasser sous 0
+                    state.stats.wrongCount[id] = Math.max(0, state.stats.wrongCount[id] - 1);
+                }
             }
             batchResults.push({ id, isCorrect });
             if (batchResults.length >= 10) {
                 showBatchRecap();
                 batchResults = [];
+            }
+            checkRevisionWarning();
+        }
+
+        const TRUE_MASTERY_THRESHOLD = 3;
+        function isTrueMastered(id) {
+            return (state.stats.correctCount[id] || 0) >= TRUE_MASTERY_THRESHOLD;
+        }
+
+        // Retire du pool actif les mots vraiment maîtrisés (sauf s'ils sont retombés en révision entre-temps)
+        function activePool(items) {
+            return items.filter(i => !isTrueMastered(i.id) || (state.stats.wrongCount[i.id] || 0) > 0);
+        }
+
+        // Alerte dès que la pile "mots à réviser" franchit un nouveau multiple de 10
+        function checkRevisionWarning() {
+            const n = getReviewItems().length;
+            const threshold = Math.floor(n / 10) * 10;
+            if (threshold < lastRevisionWarning) {
+                lastRevisionWarning = threshold; // la pile a baissé, on réarme l'alerte pour plus tard
+            } else if (threshold >= 10 && threshold > lastRevisionWarning) {
+                lastRevisionWarning = threshold;
+                const go = confirm(`⚠️ Tu as ${n} mots à réviser accumulés.\n\nVeux-tu t'entraîner dessus maintenant ?`);
+                if (go) startRevision();
             }
         }
 
@@ -242,6 +274,7 @@
         function wordStatus(id) {
             if (!state.stats.wordSeen[id]) return 'unseen';
             if ((state.stats.wrongCount[id] || 0) > 0) return 'review';
+            if (isTrueMastered(id)) return 'true-mastered';
             return 'mastered';
         }
 
@@ -407,7 +440,7 @@
             else if (sortMode === 'freq-asc') items.sort((a, b) => (a.freq || 0) - (b.freq || 0));
             else items.sort((a, b) => a.fr.localeCompare(b.fr));
 
-            const badgeLabel = { unseen: 'Non vu', review: 'À réviser', mastered: 'Maîtrisé' };
+            const badgeLabel = { unseen: 'Non vu', review: 'À réviser', mastered: 'Réussi', 'true-mastered': '★ Maîtrisé' };
             const table = document.getElementById('wl-table');
             table.innerHTML = items.slice(0, 300).map(i => {
                 const st = wordStatus(i.id);
@@ -461,8 +494,14 @@
         }
 
         function startSession(category) {
-            sessionDb = fullDb.filter(i => i.file === category);
-            if (sessionDb.length === 0) { alert("Fichier " + category + " vide ou manquant."); return; }
+            sessionDb = activePool(fullDb.filter(i => i.file === category));
+            if (sessionDb.length === 0) {
+                const totalInCat = fullDb.filter(i => i.file === category).length;
+                alert(totalInCat > 0
+                    ? "Bravo, tu maîtrises déjà tous les mots de cette catégorie ! 🎉"
+                    : "Fichier " + category + " vide ou manquant.");
+                return;
+            }
             document.getElementById('session-title').innerText = category;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
@@ -475,8 +514,8 @@
 
         function startCustomList(name) {
             const ids = state.customLists[name] || [];
-            sessionDb = fullDb.filter(i => ids.includes(i.id));
-            if (sessionDb.length === 0) { alert("Cette liste est vide."); return; }
+            sessionDb = activePool(fullDb.filter(i => ids.includes(i.id)));
+            if (sessionDb.length === 0) { alert("Cette liste est vide, ou tous ses mots sont déjà maîtrisés ! 🎉"); return; }
             document.getElementById('session-title').innerText = '📋 ' + name;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
@@ -530,8 +569,18 @@
                 </div>`;
         }
 
+        // Choisit un mot au hasard dans une liste, en évitant de retomber sur le mot précédent
+        function pickRandomExcluding(list, excludeItem) {
+            if (list.length <= 1) return list[0];
+            let pick;
+            do {
+                pick = list[Math.floor(Math.random() * list.length)];
+            } while (pick.id === (excludeItem && excludeItem.id));
+            return pick;
+        }
+
         function nextQ() {
-            currentItem = sessionDb[Math.floor(Math.random() * sessionDb.length)];
+            currentItem = pickRandomExcluding(sessionDb, currentItem);
             seeWord(currentItem.id);
             save();
             const { question } = questionFor(currentItem);
@@ -755,7 +804,8 @@
         }
 
         function nextTAQ() {
-            taCurrent = fullDb[Math.floor(Math.random() * fullDb.length)];
+            const pool = activePool(fullDb);
+            taCurrent = pickRandomExcluding(pool.length ? pool : fullDb, taCurrent);
             seeWord(taCurrent.id);
             save();
             const { question } = questionFor(taCurrent);
