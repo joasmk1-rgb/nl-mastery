@@ -82,6 +82,9 @@
             <div class="card-menu" style="color:#ff8c00; grid-column: span 2;" onclick="startRevision()" id="revision-btn">🔁 Révision (0 mot)</div>
         </div>
         <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#0a9396; grid-column: span 2;" onclick="showTestSelect()">🎯 Test de niveau</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#8b5cf6; grid-column: span 2;" onclick="showProfil()">👤 Profil & Stats</div>
         </div>
         <div class="grid" style="margin-top:15px;">
@@ -103,6 +106,11 @@
                 <option value="unseen">Non vus</option>
                 <option value="review">À réviser</option>
                 <option value="mastered">Maîtrisés</option>
+            </select>
+            <select id="wl-sort" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;">
+                <option value="alpha">Alphabétique</option>
+                <option value="freq-desc">Fréquence (+ courant d'abord)</option>
+                <option value="freq-asc">Fréquence (+ rare d'abord)</option>
             </select>
         </div>
         <div id="wl-actions" style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
@@ -164,6 +172,30 @@
         <div id="profil-content" style="width:100%; max-width:450px;"></div>
     </div>
 
+    <div id="test-select-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>🎯 Test de niveau</h2>
+        <p style="max-width:450px; text-align:center; font-size:0.85rem; color:#888;">
+            Estimation heuristique basée sur la fréquence d'usage réelle des mots en néerlandais (pas un test scientifiquement validé).
+        </p>
+        <div class="grid">
+            <div class="card-menu" style="color:#0a9396" onclick="startFullTest()">📖 Test complet<br><small style="font-weight:normal;">Tous les mots, du plus au moins courant</small></div>
+            <div class="card-menu" style="color:#ee9b00" onclick="startAdaptiveTest()">⚡ Test accéléré<br><small style="font-weight:normal;">Échantillon par palier, s'arrête dès que ça coince</small></div>
+        </div>
+    </div>
+
+    <div id="test-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div id="test-progress" style="font-weight:bold; margin-bottom:10px;"></div>
+        <div class="study-box">
+            <h1 id="test-q-text">Mots</h1>
+            <input type="text" id="test-ans-input" placeholder="Traduire en Néerlandais...">
+            <div id="test-feedback" style="min-height: 20px; font-weight: bold; margin-bottom: 10px;"></div>
+            <button class="btn btn-green" onclick="testCheckAns()">VÉRIFIER</button>
+        </div>
+        <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
+    </div>
+
     <script>
         let fullDb = [];
         let sessionDb = [];
@@ -211,6 +243,19 @@
             if (!state.stats.wordSeen[id]) return 'unseen';
             if ((state.stats.wrongCount[id] || 0) > 0) return 'review';
             return 'mastered';
+        }
+
+        // Paliers de fréquence (échelle Zipf, 0-8). freq=0 = donnée absente (fichier sans colonne fréquence).
+        const FREQ_BANDS = [
+            { idx: 0, label: 'Très courant', min: 5.5, level: 'A1' },
+            { idx: 1, label: 'Courant', min: 4.5, level: 'A2' },
+            { idx: 2, label: 'Moyen', min: 3.5, level: 'B1' },
+            { idx: 3, label: 'Peu courant', min: 2.5, level: 'B2' },
+            { idx: 4, label: 'Rare / spécialisé', min: 0.01, level: 'B2' },
+            { idx: 5, label: 'Fréquence inconnue', min: -Infinity, level: null }
+        ];
+        function freqBand(freq) {
+            return FREQ_BANDS.find(b => freq >= b.min) || FREQ_BANDS[FREQ_BANDS.length - 1];
         }
 
         function toggleDirection() {
@@ -283,7 +328,11 @@
                         if (!l.trim()) return;
                         const c = l.split(';');
                         if (c[frIdx] && c[nlIdx] !== undefined) {
-                            fullDb.push({ id: f + '_' + c[0], fr: c[frIdx].trim(), nl: c[nlIdx].trim(), file: base });
+                            const freqRaw = parseFloat(c[c.length - 1]);
+                            fullDb.push({
+                                id: f + '_' + c[0], fr: c[frIdx].trim(), nl: c[nlIdx].trim(),
+                                file: base, freq: isNaN(freqRaw) ? 0 : freqRaw
+                            });
                             count++;
                         }
                     });
@@ -347,21 +396,28 @@
             const search = normalize(document.getElementById('wl-search').value);
             const cat = document.getElementById('wl-filter').value;
             const statusFilter = document.getElementById('wl-status-filter').value;
+            const sortMode = document.getElementById('wl-sort').value;
             let items = fullDb;
             if (cat) items = items.filter(i => i.file === cat);
             if (statusFilter) items = items.filter(i => wordStatus(i.id) === statusFilter);
             if (search) items = items.filter(i => normalize(i.fr).includes(search) || normalize(i.nl).includes(search));
 
+            items = [...items];
+            if (sortMode === 'freq-desc') items.sort((a, b) => (b.freq || 0) - (a.freq || 0));
+            else if (sortMode === 'freq-asc') items.sort((a, b) => (a.freq || 0) - (b.freq || 0));
+            else items.sort((a, b) => a.fr.localeCompare(b.fr));
+
             const badgeLabel = { unseen: 'Non vu', review: 'À réviser', mastered: 'Maîtrisé' };
             const table = document.getElementById('wl-table');
             table.innerHTML = items.slice(0, 300).map(i => {
                 const st = wordStatus(i.id);
+                const freqTxt = i.freq ? `freq ${i.freq}` : '';
                 return `
                 <div class="wl-row ${wlSelected.has(i.id) ? 'selected' : ''}" onclick="toggleWordSelect('${i.id}')">
                     <span class="wl-fr">${i.fr}</span>
                     <span class="wl-nl">${i.nl}</span>
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
-                    <span class="wl-file">${i.file}</span>
+                    <span class="wl-file">${i.file}${freqTxt ? ' · ' + freqTxt : ''}</span>
                 </div>`;
             }).join('');
             if (items.length > 300) {
@@ -811,6 +867,156 @@
             location.reload();
         }
 
+        // TEST DE NIVEAU (basé sur la fréquence réelle des mots)
+        let testQueue = [];      // liste ordonnée des items à tester
+        let testIndex = 0;
+        let testResults = [];    // { item, isCorrect }
+        let testMode = null;     // 'full' | 'adaptive'
+        let adaptiveBandIdx = 0; // palier en cours pour le test accéléré
+
+        function showTestSelect() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('test-select-view').classList.add('active');
+        }
+
+        function testableWords() {
+            // On exclut les phrases (pas du vocabulaire isolé) et les mots sans fréquence connue
+            return fullDb.filter(i => i.file !== 'PHRASES_LABO' && i.freq > 0);
+        }
+
+        function startFullTest() {
+            const words = testableWords();
+            if (words.length === 0) { alert("Pas assez de mots avec une fréquence connue pour lancer le test."); return; }
+            testMode = 'full';
+            testQueue = [...words].sort((a, b) => b.freq - a.freq);
+            testIndex = 0;
+            testResults = [];
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('test-view').classList.add('active');
+            document.getElementById('test-result').innerHTML = '';
+            document.getElementById('test-ans-input').style.display = '';
+            document.querySelector('#test-view .btn-green').style.display = '';
+            testNextQ();
+        }
+
+        function startAdaptiveTest() {
+            const words = testableWords();
+            if (words.length === 0) { alert("Pas assez de mots avec une fréquence connue pour lancer le test."); return; }
+            testMode = 'adaptive';
+            adaptiveBandIdx = 0;
+            testResults = [];
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('test-view').classList.add('active');
+            document.getElementById('test-result').innerHTML = '';
+            document.getElementById('test-ans-input').style.display = '';
+            document.querySelector('#test-view .btn-green').style.display = '';
+            loadAdaptiveBand();
+        }
+
+        function loadAdaptiveBand() {
+            const band = FREQ_BANDS[adaptiveBandIdx];
+            if (!band || band.level === null) { finishTest(); return; }
+            const words = testableWords().filter(i => freqBand(i.freq).idx === band.idx);
+            if (words.length === 0) {
+                // Palier vide (pas de mots dedans) : on passe directement au suivant
+                adaptiveBandIdx++;
+                loadAdaptiveBand();
+                return;
+            }
+            testQueue = [...words].sort(() => 0.5 - Math.random()).slice(0, 5);
+            testIndex = 0;
+            testNextQ();
+        }
+
+        function testNextQ() {
+            if (testIndex >= testQueue.length) {
+                if (testMode === 'adaptive') {
+                    checkAdaptiveBandResult();
+                } else {
+                    finishTest();
+                }
+                return;
+            }
+            const item = testQueue[testIndex];
+            const { question } = questionFor(item);
+            document.getElementById('test-q-text').innerText = question;
+            document.getElementById('test-ans-input').placeholder = state.settings.direction === 'fr2nl'
+                ? 'Traduire en Néerlandais...' : 'Traduire en Français...';
+            document.getElementById('test-ans-input').value = '';
+            document.getElementById('test-feedback').innerText = '';
+            document.getElementById('test-ans-input').focus();
+            const label = testMode === 'adaptive' ? `Palier "${FREQ_BANDS[adaptiveBandIdx].label}" — ` : '';
+            document.getElementById('test-progress').innerText = `${label}Mot ${testIndex + 1} / ${testQueue.length}`;
+        }
+
+        function testCheckAns() {
+            const item = testQueue[testIndex];
+            const raw = document.getElementById('test-ans-input').value;
+            const { answerField } = questionFor(item);
+            const correctAnswer = item[answerField];
+            const result = evaluateAnswer(raw, correctAnswer);
+            const isCorrect = result.status !== 'wrong';
+            const fb = document.getElementById('test-feedback');
+            fb.innerText = isCorrect ? '✅ ' + correctAnswer : '❌ ' + correctAnswer;
+            fb.style.color = isCorrect ? 'var(--success)' : 'var(--wrong)';
+            testResults.push({ item, isCorrect });
+            testIndex++;
+            setTimeout(testNextQ, 900);
+        }
+
+        function checkAdaptiveBandResult() {
+            const band = FREQ_BANDS[adaptiveBandIdx];
+            const bandResults = testResults.filter(r => freqBand(r.item.freq).idx === band.idx);
+            const correctCount = bandResults.filter(r => r.isCorrect).length;
+            const accuracy = bandResults.length ? correctCount / bandResults.length : 0;
+            if (accuracy >= 0.6) {
+                adaptiveBandIdx++;
+                loadAdaptiveBand();
+            } else {
+                finishTest();
+            }
+        }
+
+        function finishTest() {
+            // Regroupe les résultats par palier de fréquence pour le bilan
+            const byBand = {};
+            testResults.forEach(r => {
+                const b = freqBand(r.item.freq);
+                if (!byBand[b.idx]) byBand[b.idx] = { label: b.label, level: b.level, correct: 0, total: 0 };
+                byBand[b.idx].total++;
+                if (r.isCorrect) byBand[b.idx].correct++;
+            });
+
+            // Niveau estimé : le dernier palier (du plus courant au plus rare) où l'accuracy reste >= 60%
+            let estimatedLevel = 'A1 (bases à consolider)';
+            Object.keys(byBand).sort((a, b) => a - b).forEach(idx => {
+                const b = byBand[idx];
+                if (b.total > 0 && b.correct / b.total >= 0.6 && b.level) {
+                    estimatedLevel = b.level;
+                }
+            });
+
+            const rows = Object.keys(byBand).sort((a, b) => a - b).map(idx => {
+                const b = byBand[idx];
+                const pct = b.total ? Math.round((b.correct / b.total) * 100) : 0;
+                return `${b.label} : ${b.correct}/${b.total} (${pct}%)`;
+            });
+
+            document.getElementById('test-result').innerHTML = `
+                <div class="study-box" style="text-align:left;">
+                    <h2 style="text-align:center;">🎯 Niveau estimé : ${estimatedLevel}</h2>
+                    <p style="font-size:0.8rem; color:#888;">Estimation heuristique basée sur la fréquence des mots — pas un test scientifiquement validé.</p>
+                    <h3>Détail par palier</h3>
+                    <p>${rows.join('<br>')}</p>
+                    <button class="btn btn-gray" onclick="showHome()" style="margin-top:15px;">Retour au menu</button>
+                </div>`;
+            document.getElementById('test-progress').innerText = '';
+            document.getElementById('test-q-text').innerText = '';
+            document.getElementById('test-ans-input').style.display = 'none';
+            document.getElementById('test-feedback').innerText = '';
+            document.querySelector('#test-view .btn-green').style.display = 'none';
+        }
+
         function save() {
             localStorage.setItem('nl_platform_v1', JSON.stringify(state));
             updateStats();
@@ -851,6 +1057,7 @@
         // Touche Enter
         document.getElementById('ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAns(); });
         document.getElementById('ta-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkTAAns(); });
+        document.getElementById('test-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') testCheckAns(); });
 
         init();
     </script>
