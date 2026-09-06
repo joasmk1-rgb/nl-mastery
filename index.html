@@ -42,6 +42,13 @@
         #ta-timer { font-size: 2rem; font-weight: bold; color: var(--wrong); margin-bottom: 10px; }
         #ta-score { font-weight: bold; margin-bottom: 20px; }
         #load-error { color: var(--wrong); font-size: 0.85rem; margin-top: 10px; white-space: pre-line; }
+
+        /* Liste des mots */
+        .wl-row { display: flex; align-items: center; gap: 10px; background: white; border: 2px solid #e5e5e5; border-radius: 10px; padding: 8px 12px; margin-bottom: 6px; font-size: 0.9rem; }
+        .wl-row.selected { border-color: var(--primary); background: #eaf7ff; }
+        .wl-row span.wl-fr { flex: 1; font-weight: bold; }
+        .wl-row span.wl-nl { flex: 1; color: var(--text); }
+        .wl-row span.wl-file { font-size: 0.7rem; color: #afafaf; }
     </style>
 </head>
 <body>
@@ -67,8 +74,27 @@
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#8b5cf6; grid-column: span 2;" onclick="showProfil()">👤 Profil & Stats</div>
         </div>
+        <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:var(--primary); grid-column: span 2;" onclick="showWordList()">📋 Liste des mots</div>
+        </div>
         <div id="theme-section" style="width:100%; max-width:500px;"></div>
+        <div id="customlist-section" style="width:100%; max-width:500px;"></div>
         <div id="load-error"></div>
+    </div>
+
+    <div id="wordlist-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>📋 Liste des mots</h2>
+        <div style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px;">
+            <input type="text" id="wl-search" placeholder="Rechercher un mot..." style="margin:0;" oninput="renderWordList()">
+            <select id="wl-filter" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;"></select>
+        </div>
+        <div id="wl-actions" style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px;">
+            <button class="btn btn-green" style="margin:0;" onclick="saveCustomList()">💾 Sauver la sélection comme liste</button>
+            <button class="btn btn-gray" style="margin:0;" onclick="clearWordSelection()">Vider la sélection</button>
+        </div>
+        <div id="wl-count" style="font-weight:bold; margin-bottom:10px;"></div>
+        <div id="wl-table" style="width:100%; max-width:500px;"></div>
     </div>
 
     <div id="study-view" class="view">
@@ -128,6 +154,8 @@
             state.stats = { modeCounts: { classique: 0, memory: 0, timeattack: 0 }, wordSeen: {} };
         }
         if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
+        if (!state.customLists) state.customLists = {}; // { nomListe: [id, id, ...] }
+        let wlSelected = new Set();
         let currentItem = null;
 
         function seeWord(id) {
@@ -193,6 +221,7 @@
                 document.getElementById('load-error').innerText = errors.join('\n');
             }
             renderThemes(loadedThemes);
+            renderCustomListsHome();
             updateStats();
         }
 
@@ -209,6 +238,66 @@
                 '</div>';
         }
 
+        function renderCustomListsHome() {
+            const section = document.getElementById('customlist-section');
+            const names = Object.keys(state.customLists);
+            if (!names.length) { section.innerHTML = ''; return; }
+            section.innerHTML = '<h2 style="margin-top:40px;">Mes listes</h2><div class="grid">' +
+                names.map(n => `<div class="card-menu" style="color:#8b5cf6" onclick="startCustomList('${n}')">📋 ${n} (${state.customLists[n].length})</div>`).join('') +
+                '</div>';
+        }
+
+        // LISTE DES MOTS (vue + sélection + listes perso)
+        function showWordList() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('wordlist-view').classList.add('active');
+            const filter = document.getElementById('wl-filter');
+            const categories = [...new Set(fullDb.map(i => i.file))];
+            filter.innerHTML = '<option value="">Toutes catégories</option>' +
+                categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            renderWordList();
+        }
+
+        function renderWordList() {
+            const search = normalize(document.getElementById('wl-search').value);
+            const cat = document.getElementById('wl-filter').value;
+            let items = fullDb;
+            if (cat) items = items.filter(i => i.file === cat);
+            if (search) items = items.filter(i => normalize(i.fr).includes(search) || normalize(i.nl).includes(search));
+
+            const table = document.getElementById('wl-table');
+            table.innerHTML = items.slice(0, 300).map(i => `
+                <div class="wl-row ${wlSelected.has(i.id) ? 'selected' : ''}" onclick="toggleWordSelect('${i.id}')">
+                    <span class="wl-fr">${i.fr}</span>
+                    <span class="wl-nl">${i.nl}</span>
+                    <span class="wl-file">${i.file}</span>
+                </div>`).join('');
+            if (items.length > 300) {
+                table.innerHTML += `<p style="color:#afafaf;font-size:0.8rem;">${items.length - 300} résultats supplémentaires non affichés, affine ta recherche.</p>`;
+            }
+            document.getElementById('wl-count').innerText = `${items.length} mot(s) affiché(s) — ${wlSelected.size} sélectionné(s)`;
+        }
+
+        function toggleWordSelect(id) {
+            if (wlSelected.has(id)) wlSelected.delete(id); else wlSelected.add(id);
+            renderWordList();
+        }
+
+        function clearWordSelection() {
+            wlSelected.clear();
+            renderWordList();
+        }
+
+        function saveCustomList() {
+            if (wlSelected.size === 0) { alert("Sélectionne au moins un mot d'abord."); return; }
+            const name = prompt("Nom de la liste :");
+            if (!name) return;
+            state.customLists[name] = [...wlSelected];
+            save();
+            renderCustomListsHome();
+            alert(`Liste "${name}" sauvegardée avec ${wlSelected.size} mots.`);
+        }
+
         function showHome() {
             stopTimeAttack();
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -219,6 +308,18 @@
             sessionDb = fullDb.filter(i => i.file === category);
             if (sessionDb.length === 0) { alert("Fichier " + category + " vide ou manquant."); return; }
             document.getElementById('session-title').innerText = category;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('study-view').classList.add('active');
+            bumpMode('classique');
+            save();
+            nextQ();
+        }
+
+        function startCustomList(name) {
+            const ids = state.customLists[name] || [];
+            sessionDb = fullDb.filter(i => ids.includes(i.id));
+            if (sessionDb.length === 0) { alert("Cette liste est vide."); return; }
+            document.getElementById('session-title').innerText = '📋 ' + name;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
             bumpMode('classique');
@@ -514,8 +615,9 @@
             document.getElementById('profil-content').innerHTML = `
                 <div class="study-box" style="text-align:left;">
                     <h3>📊 Niveau CECR</h3>
-                    <p>Niveau estimé : <b>${vp.level}</b> (${vp.pct}% du vocabulaire maîtrisé)<br>
-                    Mots maîtrisés : ${vp.masteredVocab} / ${vp.totalVocab}<br>
+                    <p>Niveau estimé : <b>${vp.level}</b><br>
+                    Mots maîtrisés : ${vp.masteredVocab} / ${vp.totalVocab} (${vp.pct}%)<br>
+                    ${vp.nextLevel ? `Encore <b>${vp.wordsToNext}</b> mots avant le niveau ${vp.nextLevel}` : 'Niveau maximum atteint 🎉'}<br>
                     Mots vus au moins une fois : ${totalDistinctSeen}</p>
 
                     <h3>🎮 Parties jouées</h3>
@@ -544,17 +646,27 @@
             const totalVocab = vocabItems.length;
             const masteredVocab = vocabItems.filter(i => state.mastered.includes(i.id)).length;
             const pct = totalVocab > 0 ? Math.round((masteredVocab / totalVocab) * 100) : 0;
-            let level = 'A1';
-            if (pct >= 65) level = 'B2';
-            else if (pct >= 35) level = 'B1';
-            else if (pct >= 15) level = 'A2';
-            return { pct, level, totalVocab, masteredVocab };
+            const thresholds = [
+                { level: 'A1', min: 0 }, { level: 'A2', min: 15 },
+                { level: 'B1', min: 35 }, { level: 'B2', min: 65 }
+            ];
+            let level = 'A1', nextLevel = 'A2', nextThresholdPct = 15;
+            for (let i = 0; i < thresholds.length; i++) {
+                if (pct >= thresholds[i].min) {
+                    level = thresholds[i].level;
+                    nextLevel = thresholds[i + 1] ? thresholds[i + 1].level : null;
+                    nextThresholdPct = thresholds[i + 1] ? thresholds[i + 1].min : null;
+                }
+            }
+            const wordsToNext = nextThresholdPct !== null
+                ? Math.max(0, Math.ceil((nextThresholdPct / 100) * totalVocab) - masteredVocab)
+                : 0;
+            return { pct, level, nextLevel, wordsToNext, totalVocab, masteredVocab };
         }
 
         function updateStats() {
-            const { pct, level } = getVocabProgress();
-            document.getElementById('cecr-badge').innerText = level + ' • ' + pct + '%';
-            document.getElementById('mastered-count') && (document.getElementById('mastered-count').innerText = state.mastered.length);
+            const { level } = getVocabProgress();
+            document.getElementById('cecr-badge').innerText = level;
         }
 
         // Touche Enter
