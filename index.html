@@ -64,6 +64,9 @@
 
     <div id="home-view" class="view active">
         <h2>Que veux-tu bosser ?</h2>
+        <div class="grid" style="max-width:500px;">
+            <div class="card-menu" style="grid-column: span 2; color:#8b5cf6;" id="direction-btn" onclick="toggleDirection()"></div>
+        </div>
         <div class="grid">
             <div class="card-menu blue" onclick="startSession('VERBENL')">Verbes</div>
             <div class="card-menu blue" onclick="startSession('NOMNL')">Noms</div>
@@ -172,6 +175,7 @@
         if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
         if (!state.customLists) state.customLists = {}; // { nomListe: [id, id, ...] }
         if (!state.stats.wrongCount) state.stats.wrongCount = {}; // { id: nb de fois raté }
+        if (!state.settings) state.settings = { direction: 'fr2nl' }; // 'fr2nl' ou 'nl2fr'
         let wlSelected = new Set();
         let batchResults = []; // suivi des 10 derniers mots de la session en cours (id + correct/faux)
         let currentItem = null;
@@ -209,6 +213,28 @@
             return 'mastered';
         }
 
+        function toggleDirection() {
+            state.settings.direction = state.settings.direction === 'fr2nl' ? 'nl2fr' : 'fr2nl';
+            save();
+            updateDirectionButton();
+        }
+
+        function updateDirectionButton() {
+            const btn = document.getElementById('direction-btn');
+            if (!btn) return;
+            btn.innerText = state.settings.direction === 'fr2nl'
+                ? '🔀 Sens : Français → Néerlandais'
+                : '🔀 Sens : Néerlandais → Français';
+        }
+
+        // Renvoie { question, answerField } selon le sens choisi, pour un item {fr, nl}
+        function questionFor(item) {
+            const dir = state.settings.direction;
+            return dir === 'fr2nl'
+                ? { question: item.fr, answerField: 'nl' }
+                : { question: item.nl, answerField: 'fr' };
+        }
+
         // Normalise pour comparer sans se faire piéger par accents/apostrophes/espaces
         function normalize(str) {
             return str
@@ -221,18 +247,33 @@
 
         async function init() {
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
-            const coreFiles = ['VERBENL.csv', 'NOMNL.csv', 'ADJNL.csv', 'PHRASES_LABO.csv', 'MOTS_LABO.csv'];
+            const coreFiles = [
+                'VERBENL_avec_frequence.csv', 'NOMNL_avec_frequence.csv', 'ADJNL_avec_frequence.csv',
+                'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
+            ];
             // Fichiers de thèmes métier : optionnels. Ajoute simplement un CSV avec un de ces noms
             // (ou un nouveau nom dans cette liste) pour qu'il apparaisse automatiquement dans "Thèmes".
             const themeCandidates = [
-                'THEME_BASE.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
+                'THEME_BASE_avec_frequence.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
                 'THEME_MANAGEMENT.csv', 'THEME_RH.csv'
             ];
             const errors = [];
             const loadedThemes = [];
 
+            // Enlève le suffixe technique pour garder des noms de catégories propres dans l'interface
+            function baseName(f) {
+                return f.replace('_avec_frequence.csv', '').replace('.csv', '');
+            }
+
             async function loadFile(f, isCore) {
+                // Selon le fichier, la colonne néerlandaise n'est pas toujours à la même place.
+                // VERBENL/NOMNL/ADJNL/THEME_* : Langue;Mot(NL);Traduction(FR);... ou ID;NL;FR;...
+                // MOTS_LABO/PHRASES_LABO : id;fr;nl
+                const base = baseName(f);
+                const frFirst = (base === 'MOTS_LABO' || base === 'PHRASES_LABO');
+                const frIdx = frFirst ? 1 : 2;
+                const nlIdx = frFirst ? 2 : 1;
                 try {
                     const r = await fetch(f);
                     if (!r.ok) { if (isCore) errors.push(f + ' : HTTP ' + r.status); return 0; }
@@ -241,8 +282,8 @@
                     t.split(/\r?\n/).slice(1).forEach(l => {
                         if (!l.trim()) return;
                         const c = l.split(';');
-                        if (c[1] && c[2] !== undefined) {
-                            fullDb.push({ id: f + '_' + c[0], fr: c[1].trim(), nl: c[2].trim(), file: f.replace('.csv', '') });
+                        if (c[frIdx] && c[nlIdx] !== undefined) {
+                            fullDb.push({ id: f + '_' + c[0], fr: c[frIdx].trim(), nl: c[nlIdx].trim(), file: base });
                             count++;
                         }
                     });
@@ -257,7 +298,7 @@
             for (let f of coreFiles) await loadFile(f, true);
             for (let f of themeCandidates) {
                 const count = await loadFile(f, false);
-                if (count > 0) loadedThemes.push({ file: f.replace('.csv', ''), count });
+                if (count > 0) loadedThemes.push({ file: baseName(f), count });
             }
 
             if (errors.length) {
@@ -265,6 +306,7 @@
             }
             renderThemes(loadedThemes);
             renderCustomListsHome();
+            updateDirectionButton();
             updateStats();
         }
 
@@ -410,7 +452,8 @@
 
         function iDontKnow() {
             const fb = document.getElementById('feedback');
-            fb.innerText = "🤷 RÉPONSE : " + currentItem.nl;
+            const { answerField } = questionFor(currentItem);
+            fb.innerText = "🤷 RÉPONSE : " + currentItem[answerField];
             fb.style.color = "var(--wrong)";
             registerResult(currentItem.id, false);
             save();
@@ -435,7 +478,10 @@
             currentItem = sessionDb[Math.floor(Math.random() * sessionDb.length)];
             seeWord(currentItem.id);
             save();
-            document.getElementById('q-text').innerText = currentItem.fr;
+            const { question } = questionFor(currentItem);
+            document.getElementById('q-text').innerText = question;
+            document.getElementById('ans-input').placeholder = state.settings.direction === 'fr2nl'
+                ? 'Traduire en Néerlandais...' : 'Traduire en Français...';
             document.getElementById('ans-input').value = "";
             document.getElementById('feedback').innerText = "";
             document.getElementById('ans-input').focus();
@@ -502,13 +548,15 @@
 
         function checkAns() {
             const raw = document.getElementById('ans-input').value;
-            const accepted = getAcceptedAnswers(currentItem.nl);
+            const { answerField } = questionFor(currentItem);
+            const correctAnswer = currentItem[answerField];
+            const accepted = getAcceptedAnswers(correctAnswer);
             const multi = accepted.length > 1;
-            const result = evaluateAnswer(raw, currentItem.nl);
+            const result = evaluateAnswer(raw, correctAnswer);
             const fb = document.getElementById('feedback');
 
             if (result.status === 'correct') {
-                fb.innerText = "✅ BRAVO ! → " + currentItem.nl + (multi ? "  (plusieurs réponses acceptées)" : "");
+                fb.innerText = "✅ BRAVO ! → " + correctAnswer + (multi ? "  (plusieurs réponses acceptées)" : "");
                 fb.style.color = "var(--success)";
                 state.xp += 10;
                 markMastered(currentItem);
@@ -516,7 +564,7 @@
                 save();
                 setTimeout(nextQ, 1400);
             } else if (result.status === 'close') {
-                fb.innerText = "🟡 PRESQUE ! (petite faute) → " + currentItem.nl;
+                fb.innerText = "🟡 PRESQUE ! (petite faute) → " + correctAnswer;
                 fb.style.color = "var(--gold)";
                 state.xp += 5;
                 markMastered(currentItem);
@@ -524,7 +572,7 @@
                 save();
                 setTimeout(nextQ, 1600);
             } else {
-                fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + currentItem.nl;
+                fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer;
                 fb.style.color = "var(--wrong)";
                 registerResult(currentItem.id, false);
                 save();
@@ -654,14 +702,17 @@
             taCurrent = fullDb[Math.floor(Math.random() * fullDb.length)];
             seeWord(taCurrent.id);
             save();
-            document.getElementById('ta-q-text').innerText = taCurrent.fr;
+            const { question } = questionFor(taCurrent);
+            document.getElementById('ta-q-text').innerText = question;
             document.getElementById('ta-ans-input').value = '';
         }
 
         function checkTAAns() {
             if (!taCurrent) return;
             const raw = document.getElementById('ta-ans-input').value;
-            const result = evaluateAnswer(raw, taCurrent.nl);
+            const { answerField } = questionFor(taCurrent);
+            const correctAnswer = taCurrent[answerField];
+            const result = evaluateAnswer(raw, correctAnswer);
             const fb = document.getElementById('ta-feedback');
             if (result.status === 'correct') {
                 taScore++;
@@ -670,7 +721,7 @@
                 registerResult(taCurrent.id, true);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
-                fb.innerText = '✅ ' + taCurrent.nl;
+                fb.innerText = '✅ ' + correctAnswer;
                 fb.style.color = 'var(--success)';
             } else if (result.status === 'close') {
                 taScore += 0.5;
@@ -679,12 +730,12 @@
                 registerResult(taCurrent.id, true);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
-                fb.innerText = '🟡 presque : ' + taCurrent.nl;
+                fb.innerText = '🟡 presque : ' + correctAnswer;
                 fb.style.color = 'var(--gold)';
             } else {
                 registerResult(taCurrent.id, false);
                 save();
-                fb.innerText = '❌ ' + taCurrent.nl;
+                fb.innerText = '❌ ' + correctAnswer;
                 fb.style.color = 'var(--wrong)';
             }
             nextTAQ();
@@ -743,7 +794,21 @@
 
                     <h3>🔥 Mots les plus revus</h3>
                     <p>${top5.length ? top5.join('<br>') : 'Aucune donnée pour le moment'}</p>
+                </div>
+                <div class="study-box" style="margin-top:15px; border-color:var(--wrong);">
+                    <h3 style="color:var(--wrong);">⚠️ Zone dangereuse</h3>
+                    <p style="font-size:0.85rem;">Ceci efface définitivement tout ton historique (XP, mots maîtrisés, listes, high scores). Aucune récupération possible.</p>
+                    <button class="btn btn-red" onclick="resetProgress()">🗑️ Réinitialiser toute la progression</button>
                 </div>`;
+        }
+
+        function resetProgress() {
+            const confirm1 = confirm("Es-tu sûr ? Toute ta progression (XP, mots maîtrisés, listes perso, stats, high scores) sera effacée définitivement.");
+            if (!confirm1) return;
+            const confirm2 = prompt('Pour confirmer, tape "RESET" en majuscules :');
+            if (confirm2 !== 'RESET') { alert("Réinitialisation annulée."); return; }
+            localStorage.removeItem('nl_platform_v1');
+            location.reload();
         }
 
         function save() {
