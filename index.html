@@ -48,7 +48,7 @@
 
     <header>
         <div style="font-weight: bold; font-size: 1.2rem;">NL <span style="color:var(--primary)">Mastery</span></div>
-        <div class="xp-badge">LVL <span id="lvl">1</span> • <span id="xp">0</span> XP</div>
+        <div class="xp-badge">LVL <span id="lvl">1</span> • <span id="xp">0</span> XP • <span id="mastered-count">0</span> mots</div>
     </header>
 
     <div id="home-view" class="view active">
@@ -169,19 +169,83 @@
             }
         }
 
+        // Un mot peut avoir plusieurs réponses valides séparées par "/", ex: "rep1/rep2"
+        function getAcceptedAnswers(nl) {
+            return nl.split('/').map(s => s.trim()).filter(Boolean);
+        }
+
+        // Distance de Levenshtein : nombre minimal de lettres à changer/ajouter/enlever
+        // pour passer d'un mot à l'autre. Sert à détecter les fautes de frappe/orthographe.
+        function levenshtein(a, b) {
+            const m = a.length, n = b.length;
+            if (m === 0) return n;
+            if (n === 0) return m;
+            let prev = Array.from({ length: n + 1 }, (_, j) => j);
+            for (let i = 1; i <= m; i++) {
+                let curr = [i];
+                for (let j = 1; j <= n; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    curr[j] = Math.min(
+                        prev[j] + 1,      // suppression
+                        curr[j - 1] + 1,  // insertion
+                        prev[j - 1] + cost // substitution
+                    );
+                }
+                prev = curr;
+            }
+            return prev[n];
+        }
+
+        // Tolérance selon la longueur du mot : plus le mot est long, plus on tolère de fautes
+        function toleranceFor(word) {
+            if (word.length >= 9) return 2;
+            if (word.length >= 4) return 1;
+            return 0;
+        }
+
+        // Compare la réponse de l'utilisateur à la liste des réponses acceptées.
+        // Renvoie { status: 'correct' | 'close' | 'wrong', closest, distance }
+        function evaluateAnswer(userRaw, nl) {
+            const user = normalize(userRaw);
+            const accepted = getAcceptedAnswers(nl);
+            let best = { status: 'wrong', closest: accepted[0], distance: Infinity };
+            for (const a of accepted) {
+                const target = normalize(a);
+                const dist = levenshtein(user, target);
+                if (dist === 0) return { status: 'correct', closest: a, distance: 0 };
+                if (dist <= toleranceFor(target) && dist < best.distance) {
+                    best = { status: 'close', closest: a, distance: dist };
+                } else if (dist < best.distance && best.status === 'wrong') {
+                    best = { status: 'wrong', closest: a, distance: dist };
+                }
+            }
+            return best;
+        }
+
         function checkAns() {
-            const user = normalize(document.getElementById('ans-input').value);
-            const correct = normalize(currentItem.nl);
-            if (user === correct) {
-                document.getElementById('feedback').innerText = "✅ BRAVO !";
-                document.getElementById('feedback').style.color = "var(--success)";
+            const raw = document.getElementById('ans-input').value;
+            const accepted = getAcceptedAnswers(currentItem.nl);
+            const multi = accepted.length > 1;
+            const result = evaluateAnswer(raw, currentItem.nl);
+            const fb = document.getElementById('feedback');
+
+            if (result.status === 'correct') {
+                fb.innerText = "✅ BRAVO ! → " + currentItem.nl + (multi ? "  (plusieurs réponses acceptées)" : "");
+                fb.style.color = "var(--success)";
                 state.xp += 10;
                 markMastered(currentItem);
                 save();
-                setTimeout(nextQ, 1000);
+                setTimeout(nextQ, 1400);
+            } else if (result.status === 'close') {
+                fb.innerText = "🟡 PRESQUE ! (petite faute) → " + currentItem.nl;
+                fb.style.color = "var(--gold)";
+                state.xp += 5;
+                markMastered(currentItem);
+                save();
+                setTimeout(nextQ, 1600);
             } else {
-                document.getElementById('feedback').innerText = "❌ RÉPONSE : " + currentItem.nl;
-                document.getElementById('feedback').style.color = "var(--wrong)";
+                fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + currentItem.nl;
+                fb.style.color = "var(--wrong)";
             }
         }
 
@@ -258,17 +322,25 @@
 
         function checkTAAns() {
             if (!taCurrent) return;
-            const user = normalize(document.getElementById('ta-ans-input').value);
-            const correct = normalize(taCurrent.nl);
+            const raw = document.getElementById('ta-ans-input').value;
+            const result = evaluateAnswer(raw, taCurrent.nl);
             const fb = document.getElementById('ta-feedback');
-            if (user === correct) {
+            if (result.status === 'correct') {
                 taScore++;
                 state.xp += 3;
                 markMastered(taCurrent);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
-                fb.innerText = '✅';
+                fb.innerText = '✅ ' + taCurrent.nl;
                 fb.style.color = 'var(--success)';
+            } else if (result.status === 'close') {
+                taScore += 0.5;
+                state.xp += 1;
+                markMastered(taCurrent);
+                save();
+                document.getElementById('ta-score').innerText = 'Score : ' + taScore;
+                fb.innerText = '🟡 presque : ' + taCurrent.nl;
+                fb.style.color = 'var(--gold)';
             } else {
                 fb.innerText = '❌ ' + taCurrent.nl;
                 fb.style.color = 'var(--wrong)';
@@ -295,6 +367,7 @@
         function updateStats() {
             document.getElementById('xp').innerText = state.xp;
             document.getElementById('lvl').innerText = Math.floor(state.xp / 100) + 1;
+            document.getElementById('mastered-count').innerText = state.mastered.length;
         }
 
         // Touche Enter
