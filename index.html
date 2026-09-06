@@ -420,16 +420,18 @@
                     if (!r.ok) { if (isCore) errors.push(f + ' : HTTP ' + r.status); return 0; }
                     const t = await r.text();
                     let count = 0;
+                    let rowIdx = 0;
                     t.split(/\r?\n/).slice(1).forEach(l => {
                         if (!l.trim()) return;
                         const c = l.split(';');
                         if (c[frIdx] && c[nlIdx] !== undefined) {
                             const freqRaw = parseFloat(c[c.length - 1]);
                             fullDb.push({
-                                id: f + '_' + c[0], fr: c[frIdx].trim(), nl: c[nlIdx].trim(),
+                                id: f + '_row' + rowIdx, fr: c[frIdx].trim(), nl: c[nlIdx].trim(),
                                 file: base, freq: isNaN(freqRaw) ? 0 : freqRaw
                             });
                             count++;
+                            rowIdx++;
                         }
                     });
                     if (count === 0 && isCore) errors.push(f + ' : chargé mais 0 ligne valide (vérifie le séparateur ";")');
@@ -1206,4 +1208,4 @@
         init();
     </script>
 </body>
-</html>
+</html> 
