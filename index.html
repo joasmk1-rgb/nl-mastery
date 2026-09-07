@@ -21,6 +21,9 @@
         .card-menu { background: white; padding: 20px; border-radius: 15px; border: 2px solid #e5e5e5; text-align: center; cursor: pointer; transition: transform 0.2s; font-weight: bold; }
         .card-menu:active { transform: scale(0.95); }
         .card-menu.blue { border-color: var(--primary); color: var(--primary); }
+        .cat-sub { font-size: 0.7rem; font-weight: normal; color: #888; margin-top: 4px; }
+        .cat-bar { height: 4px; background: #e5e5e5; border-radius: 2px; margin-top: 6px; overflow: hidden; }
+        .cat-bar-fill { height: 100%; background: var(--primary); }
 
         /* Apprentissage */
         .study-box { width: 90%; max-width: 400px; background: white; border-radius: 25px; border: 2px solid #e5e5e5; padding: 30px; text-align: center; position: relative; box-shadow: 0 6px 0 #e5e5e5; }
@@ -65,19 +68,11 @@
 
     <div id="home-view" class="view active">
         <h2>Que veux-tu bosser ?</h2>
+        <div id="total-words-count" style="font-size:0.85rem; color:#888; margin-bottom:10px;"></div>
         <div class="grid" style="max-width:500px;">
             <div class="card-menu" style="grid-column: span 2; color:#8b5cf6;" id="direction-btn" onclick="toggleDirection()"></div>
         </div>
-        <div class="grid">
-            <div class="card-menu blue" onclick="startSession('VERBES_NL')">Verbes</div>
-            <div class="card-menu blue" onclick="startSession('NOMS_NL')">Noms</div>
-            <div class="card-menu blue" onclick="startSession('ADJECTIFS_NL')">Adjectifs</div>
-            <div class="card-menu blue" onclick="startSession('ADVERBES_NL')">Adverbes</div>
-        </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu blue" onclick="startSession('MOTS_OUTILS_NL')">Mots-outils</div>
-            <div class="card-menu blue" onclick="startSession('PHRASES_LABO')">Phrases Labo</div>
-        </div>
+        <div class="grid" id="main-categories-grid"></div>
         <h2 style="margin-top:40px;">Jeux & Défis</h2>
         <div class="grid">
             <div class="card-menu" style="color:var(--success)" onclick="startMemory()">🧩 Memory</div>
@@ -469,8 +464,42 @@
             }
             renderThemes(loadedThemes);
             renderCustomListsHome();
+            renderMainCategories();
             updateDirectionButton();
             updateStats();
+        }
+
+        const MAIN_CATEGORIES = [
+            { file: 'VERBES_NL', label: 'Verbes' },
+            { file: 'NOMS_NL', label: 'Noms' },
+            { file: 'ADJECTIFS_NL', label: 'Adjectifs' },
+            { file: 'ADVERBES_NL', label: 'Adverbes' },
+            { file: 'MOTS_OUTILS_NL', label: 'Mots-outils' },
+            { file: 'PHRASES_LABO', label: 'Phrases Labo' }
+        ];
+
+        function renderMainCategories() {
+            const grid = document.getElementById('main-categories-grid');
+            if (!grid) return;
+            let totalWords = 0;
+            let totalMastered = 0;
+            grid.innerHTML = MAIN_CATEGORIES.map(cat => {
+                const items = fullDb.filter(i => i.file === cat.file);
+                const total = items.length;
+                const mastered = items.filter(i => isTrueMastered(i.id)).length;
+                const pct = total > 0 ? Math.round((mastered / total) * 100) : 0;
+                totalWords += total;
+                totalMastered += mastered;
+                return `
+                <div class="card-menu blue" onclick="startSession('${cat.file}')">
+                    ${cat.label}
+                    <div class="cat-sub">${mastered}/${total} maîtrisés (${pct}%)</div>
+                    <div class="cat-bar"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
+                </div>`;
+            }).join('');
+            const totalPct = totalWords > 0 ? Math.round((totalMastered / totalWords) * 100) : 0;
+            const totalEl = document.getElementById('total-words-count');
+            if (totalEl) totalEl.innerText = `${totalWords} mots au total — ${totalMastered} maîtrisés (${totalPct}%)`;
         }
 
         function renderThemes(themes) {
@@ -1260,6 +1289,7 @@
             const { level } = getVocabProgress();
             document.getElementById('cecr-badge').innerText = level;
             updateRevisionButton();
+            renderMainCategories();
         }
 
         // Touche Enter
