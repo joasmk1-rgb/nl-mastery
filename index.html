@@ -90,6 +90,9 @@
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:var(--primary); grid-column: span 2;" onclick="showWordList()">📋 Liste des mots</div>
         </div>
+        <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#0891b2; grid-column: span 2;" onclick="showInfo()">ℹ️ Infos & comment ça marche</div>
+        </div>
         <div id="theme-section" style="width:100%; max-width:500px;"></div>
         <div id="customlist-section" style="width:100%; max-width:500px;"></div>
         <div id="load-error"></div>
@@ -195,6 +198,80 @@
             <button class="btn btn-green" onclick="testCheckAns()">VÉRIFIER</button>
         </div>
         <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
+    </div>
+
+    <div id="info-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>ℹ️ Infos & comment ça marche</h2>
+        <div style="width:100%; max-width:500px; text-align:left;">
+            <div class="study-box" style="text-align:left;">
+                <h3>📊 Les niveaux A1 / A2 / B1 / B2 (CECR)</h3>
+                <p style="font-size:0.9rem;">
+                    C'est l'échelle européenne officielle pour les langues (Cadre Européen Commun de Référence).
+                    Ici, le niveau affiché est une <b>estimation</b> basée sur le % de ton vocabulaire vraiment maîtrisé :<br><br>
+                    <b>A1</b> — Débutant : bases essentielles (0-15% du vocabulaire)<br>
+                    <b>A2</b> — Élémentaire : peut gérer des échanges simples (15-35%)<br>
+                    <b>B1</b> — Intermédiaire : autonome dans la plupart des situations courantes (35-65%)<br>
+                    <b>B2</b> — Intermédiaire avancé : aisance, y compris sur des sujets professionnels (65-100%)<br><br>
+                    ⚠️ C'est une estimation basée sur ton vocabulaire, pas un vrai test certifiant (comme le CNaVT pour le néerlandais) — utile pour suivre ta progression, pas pour un CV.
+                </p>
+            </div>
+
+            <div class="study-box" style="text-align:left; margin-top:15px;">
+                <h3>📖 Mode classique (catégories / listes perso)</h3>
+                <p style="font-size:0.9rem;">
+                    Les mots sont débloqués par <b>paquets de 10</b>, du plus fréquent au moins fréquent. Un paquet se
+                    débloque dès que tous ses mots sont maîtrisés. Réussir un mot <b>du premier coup</b> = maîtrisé
+                    directement. Un mot raté part en révision et il faudra le réussir à nouveau (plus tard) pour qu'il
+                    sorte de la rotation.
+                </p>
+            </div>
+
+            <div class="study-box" style="text-align:left; margin-top:15px;">
+                <h3>🔁 Révision</h3>
+                <p style="font-size:0.9rem;">
+                    Reprend uniquement les mots ratés, chacun une seule fois dans la file. Si tu le rerates, il est
+                    repoussé <b>25 mots plus loin</b> (pour éviter que ce ne soit que de la mémoire à très court terme).
+                    La session se termine quand la file est vide.
+                </p>
+            </div>
+
+            <div class="study-box" style="text-align:left; margin-top:15px;">
+                <h3>🧩 Memory</h3>
+                <p style="font-size:0.9rem;">
+                    Retrouve les paires FR/NL parmi les mots les plus fréquents encore actifs. Le nombre de coups et le
+                    temps sont chronométrés — un meilleur score (moins de coups, moins de temps) bat ton record.
+                </p>
+            </div>
+
+            <div class="study-box" style="text-align:left; margin-top:15px;">
+                <h3>⏱️ Contre-la-montre</h3>
+                <p style="font-size:0.9rem;">
+                    Choisis une durée (30s à 5min) et réponds à un maximum de mots avant la fin du chrono. Piochés
+                    dans les mots les plus fréquents encore actifs. Une bonne réponse = 1 point, une presque-bonne
+                    (petite faute) = 0.5 point.
+                </p>
+            </div>
+
+            <div class="study-box" style="text-align:left; margin-top:15px;">
+                <h3>🎯 Test de niveau</h3>
+                <p style="font-size:0.9rem;">
+                    <b>Test complet</b> : tous les mots connus, du plus au moins fréquent.<br>
+                    <b>Test accéléré</b> : découpe le vocabulaire en paliers de fréquence, teste un échantillon par
+                    palier en partant du plus courant, et s'arrête dès qu'un palier échoue — plus rapide, avec un
+                    niveau estimé à la fin. C'est une estimation heuristique, pas un test validé scientifiquement.
+                </p>
+            </div>
+
+            <div class="study-box" style="text-align:left; margin-top:15px;">
+                <h3>🔀 Sens de traduction</h3>
+                <p style="font-size:0.9rem;">
+                    Le bouton violet sur l'accueil bascule entre Français→Néerlandais et Néerlandais→Français. La
+                    maîtrise d'un mot est suivie <b>séparément par sens</b> — tu peux très bien le maîtriser dans un
+                    sens et pas encore dans l'autre.
+                </p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1027,6 +1104,11 @@
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('profil-view').classList.add('active');
             renderProfil();
+        }
+
+        function showInfo() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('info-view').classList.add('active');
         }
 
         function renderProfil() {
