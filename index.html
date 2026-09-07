@@ -69,9 +69,13 @@
             <div class="card-menu" style="grid-column: span 2; color:#8b5cf6;" id="direction-btn" onclick="toggleDirection()"></div>
         </div>
         <div class="grid">
-            <div class="card-menu blue" onclick="startSession('VERBENL')">Verbes</div>
-            <div class="card-menu blue" onclick="startSession('NOMNL')">Noms</div>
-            <div class="card-menu blue" onclick="startSession('ADJNL')">Adjectifs</div>
+            <div class="card-menu blue" onclick="startSession('VERBES_NL')">Verbes</div>
+            <div class="card-menu blue" onclick="startSession('NOMS_NL')">Noms</div>
+            <div class="card-menu blue" onclick="startSession('ADJECTIFS_NL')">Adjectifs</div>
+            <div class="card-menu blue" onclick="startSession('ADVERBES_NL')">Adverbes</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
+            <div class="card-menu blue" onclick="startSession('MOTS_OUTILS_NL')">Mots-outils</div>
             <div class="card-menu blue" onclick="startSession('PHRASES_LABO')">Phrases Labo</div>
         </div>
         <h2 style="margin-top:40px;">Jeux & Défis</h2>
@@ -399,7 +403,7 @@
         async function init() {
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
             const coreFiles = [
-                'VERBENL_avec_frequence.csv', 'NOMNL_avec_frequence.csv', 'ADJNL_avec_frequence.csv',
+                'VERBES_NL.csv', 'NOMS_NL.csv', 'ADJECTIFS_NL.csv', 'ADVERBES_NL.csv', 'MOTS_OUTILS_NL.csv',
                 'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
             ];
             // Fichiers de thèmes métier : optionnels. Ajoute simplement un CSV avec un de ces noms
@@ -407,7 +411,7 @@
             const themeCandidates = [
                 'THEME_BASE_avec_frequence.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
-                'THEME_MANAGEMENT.csv', 'THEME_RH.csv'
+                'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -417,14 +421,16 @@
                 return f.replace('_avec_frequence.csv', '').replace('.csv', '');
             }
 
+            // Seul THEME_BASE garde l'ancienne structure ID;NL;FR;... — tous les nouveaux fichiers
+            // (VERBES_NL, NOMS_NL, ADJECTIFS_NL, ADVERBES_NL, MOTS_OUTILS_NL, MOTS_LABO, PHRASES_LABO)
+            // suivent désormais le même schéma propre : id;fr;nl;freq
+            const NL_FIRST_FILES = ['THEME_BASE'];
+
             async function loadFile(f, isCore) {
-                // Selon le fichier, la colonne néerlandaise n'est pas toujours à la même place.
-                // VERBENL/NOMNL/ADJNL/THEME_* : Langue;Mot(NL);Traduction(FR);... ou ID;NL;FR;...
-                // MOTS_LABO/PHRASES_LABO : id;fr;nl
                 const base = baseName(f);
-                const frFirst = (base === 'MOTS_LABO' || base === 'PHRASES_LABO');
-                const frIdx = frFirst ? 1 : 2;
-                const nlIdx = frFirst ? 2 : 1;
+                const nlFirst = NL_FIRST_FILES.includes(base);
+                const frIdx = nlFirst ? 2 : 1;
+                const nlIdx = nlFirst ? 1 : 2;
                 try {
                     const r = await fetch(f);
                     if (!r.ok) { if (isCore) errors.push(f + ' : HTTP ' + r.status); return 0; }
