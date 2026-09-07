@@ -24,6 +24,9 @@
         .cat-sub { font-size: 0.7rem; font-weight: normal; color: #888; margin-top: 4px; }
         .cat-bar { height: 4px; background: #e5e5e5; border-radius: 2px; margin-top: 6px; overflow: hidden; }
         .cat-bar-fill { height: 100%; background: var(--primary); }
+        .letter-tile { width: 42px; height: 42px; background: white; border: 2px solid #e5e5e5; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .letter-tile:active { transform: scale(0.9); }
+        .letter-tile.used { visibility: hidden; }
 
         /* Apprentissage */
         .study-box { width: 90%; max-width: 400px; background: white; border-radius: 25px; border: 2px solid #e5e5e5; padding: 30px; text-align: center; position: relative; box-shadow: 0 6px 0 #e5e5e5; }
@@ -77,6 +80,9 @@
         <div class="grid">
             <div class="card-menu" style="color:var(--success)" onclick="startMemory()">🧩 Memory</div>
             <div class="card-menu" style="color:var(--wrong)" onclick="showTASelect()">⏱️ Contre-la-montre</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#7c3aed; grid-column: span 2;" onclick="startAnagram()">🔀 Mot mélangé</div>
         </div>
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#ff8c00; grid-column: span 2;" onclick="startRevision()" id="revision-btn">🔁 Révision (0 mot)</div>
@@ -198,6 +204,19 @@
             <button class="btn btn-green" onclick="testCheckAns()">VÉRIFIER</button>
         </div>
         <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
+    </div>
+
+    <div id="anagram-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div id="anagram-score" style="font-weight:bold; margin-bottom:10px;"></div>
+        <div class="study-box">
+            <small>Indice</small>
+            <h1 id="anagram-clue">Mots</h1>
+            <div id="anagram-built" style="min-height:44px; border:2px dashed #ccc; border-radius:12px; padding:10px; margin:15px 0; font-size:1.3rem; font-weight:bold; letter-spacing:2px;"></div>
+            <div id="anagram-tiles" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:15px;"></div>
+            <div id="anagram-feedback" style="min-height:20px; font-weight:bold; margin-bottom:10px;"></div>
+            <button class="btn btn-gray" onclick="clearAnagramAnswer()">Effacer</button>
+        </div>
     </div>
 
     <div id="info-view" class="view">
@@ -417,9 +436,18 @@
             return FREQ_BANDS.find(b => freq >= b.min) || FREQ_BANDS[FREQ_BANDS.length - 1];
         }
 
-        // Trie une liste de mots du plus fréquent au moins fréquent (les mots sans fréquence connue vont à la fin)
+        // Ordre pédagogique des paliers de priorité (du plus important au moins important)
+        const TIER_ORDER = { 'Auxiliaire/Modal': 0, 'Essentiel': 1, 'Courant': 2, 'Spécialisé': 3 };
+
+        // Trie une liste de mots par priorité pédagogique d'abord (si connue), puis par fréquence.
+        // Les mots sans info de priorité (fichiers plus anciens) se trient juste par fréquence.
         function byFrequencyDesc(items) {
-            return [...items].sort((a, b) => (b.freq || 0) - (a.freq || 0));
+            return [...items].sort((a, b) => {
+                const ta = TIER_ORDER[a.tier] ?? 99;
+                const tb = TIER_ORDER[b.tier] ?? 99;
+                if (ta !== tb) return ta - tb;
+                return (b.freq || 0) - (a.freq || 0);
+            });
         }
 
         function toggleDirection() {
@@ -495,10 +523,16 @@
                         if (!l.trim()) return;
                         const c = l.split(';');
                         if (c[nlIdx] !== undefined && c[nlIdx].trim()) {
-                            const freqRaw = parseFloat(c[c.length - 1]);
+                            // La fréquence est en colonne 4 (index 3) pour les fichiers fr-first (id;fr;nl;freq;...).
+                            // Pour THEME_BASE (nl-first), elle reste en toute dernière colonne comme avant.
+                            const freqStr = nlFirst ? c[c.length - 1] : c[3];
+                            const freqRaw = parseFloat(freqStr);
+                            // Priorité (Essentiel/Courant/Spécialisé/Auxiliaire-Modal), si présente :
+                            // toujours la toute dernière colonne des fichiers fr-first avec 5+ colonnes.
+                            const tier = (!nlFirst && c.length > 4) ? (c[c.length - 1] || '').trim() : '';
                             fullDb.push({
                                 id: f + '_row' + rowIdx, fr: (c[frIdx] || '').trim(), nl: c[nlIdx].trim(),
-                                file: base, freq: isNaN(freqRaw) ? 0 : freqRaw
+                                file: base, freq: isNaN(freqRaw) ? 0 : freqRaw, tier: tier
                             });
                             count++;
                             rowIdx++;
@@ -1097,6 +1131,96 @@
 
         function stopTimeAttack() {
             if (taInterval) { clearInterval(taInterval); taInterval = null; }
+        }
+
+        // MOT MÉLANGÉ (anagramme)
+        let anagramWord = null;   // { item, target } target = mot correct à reconstituer (une seule variante, sans parenthèses/espaces)
+        let anagramBuilt = [];    // indices des tuiles déjà utilisées, dans l'ordre choisi
+        let anagramScore = 0;
+        let anagramTiles = [];    // lettres mélangées affichées
+
+        function anagramCandidates() {
+            // Seuls les mots à réponse unique, sans espace ni parenthèse, sont adaptés à ce jeu
+            const pool = byFrequencyDesc(activePool(fullDb)).slice(0, 60);
+            return pool.filter(i => {
+                const { answerField } = questionFor(i);
+                const ans = getAcceptedAnswers(i[answerField])[0];
+                return ans && !ans.includes(' ') && !ans.includes('(') && ans.length >= 3;
+            });
+        }
+
+        function startAnagram() {
+            const candidates = anagramCandidates();
+            if (candidates.length < 1) { alert("Pas assez de mots courts et simples disponibles pour ce jeu pour l'instant."); return; }
+            anagramScore = 0;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('anagram-view').classList.add('active');
+            document.getElementById('anagram-score').innerText = 'Score : 0';
+            nextAnagram();
+        }
+
+        function nextAnagram() {
+            const candidates = anagramCandidates();
+            if (candidates.length === 0) { alert("Plus de mots disponibles pour ce jeu en ce moment !"); showHome(); return; }
+            const item = candidates[Math.floor(Math.random() * candidates.length)];
+            const { question, answerField } = questionFor(item);
+            const target = normalize(getAcceptedAnswers(item[answerField])[0].replace(/\([^)]*\)/g, ''));
+
+            let letters = target.split('');
+            let shuffled;
+            do {
+                shuffled = [...letters].sort(() => 0.5 - Math.random());
+            } while (shuffled.join('') === target && letters.length > 1);
+
+            anagramWord = { item, target };
+            anagramTiles = shuffled;
+            anagramBuilt = [];
+
+            document.getElementById('anagram-clue').innerText = question;
+            document.getElementById('anagram-feedback').innerText = '';
+            renderAnagramTiles();
+        }
+
+        function renderAnagramTiles() {
+            const tilesEl = document.getElementById('anagram-tiles');
+            tilesEl.innerHTML = anagramTiles.map((letter, idx) => `
+                <div class="letter-tile ${anagramBuilt.includes(idx) ? 'used' : ''}" onclick="pickAnagramLetter(${idx})">${letter}</div>
+            `).join('');
+            document.getElementById('anagram-built').innerText = anagramBuilt.map(i => anagramTiles[i]).join('') || '\u00A0';
+        }
+
+        function pickAnagramLetter(idx) {
+            if (anagramBuilt.includes(idx)) return;
+            anagramBuilt.push(idx);
+            renderAnagramTiles();
+            if (anagramBuilt.length === anagramTiles.length) {
+                checkAnagram();
+            }
+        }
+
+        function clearAnagramAnswer() {
+            anagramBuilt = [];
+            renderAnagramTiles();
+        }
+
+        function checkAnagram() {
+            const built = anagramBuilt.map(i => anagramTiles[i]).join('');
+            const fb = document.getElementById('anagram-feedback');
+            const isCorrect = built === anagramWord.target;
+            seeWord(anagramWord.item.id);
+            registerResult(anagramWord.item.id, isCorrect);
+            if (isCorrect) {
+                markMastered(anagramWord.item);
+                anagramScore++;
+                fb.innerText = '✅ Bravo !';
+                fb.style.color = 'var(--success)';
+            } else {
+                fb.innerText = '❌ Correct : ' + anagramWord.target;
+                fb.style.color = 'var(--wrong)';
+            }
+            save();
+            document.getElementById('anagram-score').innerText = 'Score : ' + anagramScore;
+            setTimeout(nextAnagram, 1400);
         }
 
         // PROFIL & STATS
