@@ -1,0 +1,258 @@
+id;fr;nl;freq
+ADJECTIFS_NL_0;aimable / gentil;aardig;4.77
+ADJECTIFS_NL_1;absolu / absolument;absoluut;4.8
+ADJECTIFS_NL_2;actuel;actueel;4.11
+ADJECTIFS_NL_3;général;algemeen;5.15
+ADJECTIFS_NL_4;autre;ander;5.37
+ADJECTIFS_NL_5;pauvre;arm;4.67
+ADJECTIFS_NL_6;peureux / effrayé;bang;5.18
+ADJECTIFS_NL_7;de base;basis;5.17
+ADJECTIFS_NL_8;connu;bekend;5.49
+ADJECTIFS_NL_9;important;belangrijk;5.34
+ADJECTIFS_NL_10;poli;beleefd;4.0
+ADJECTIFS_NL_11;curieux (de savoir);benieuwd;4.54
+ADJECTIFS_NL_12;déterminé / certain;bepaald;4.86
+ADJECTIFS_NL_13;prêt / disposé;bereid;4.69
+ADJECTIFS_NL_14;célèbre;beroemd;4.13
+ADJECTIFS_NL_15;disponible;beschikbaar;5.01
+ADJECTIFS_NL_16;meilleur;best;5.41
+ADJECTIFS_NL_17;impliqué / concerné;betrokken;5.01
+ADJECTIFS_NL_18;occupé;bezig;5.31
+ADJECTIFS_NL_19;particulier / spécial;bijzonder;4.99
+ADJECTIFS_NL_20;bleu;blauw;4.73
+ADJECTIFS_NL_21;content;blij;5.34
+ADJECTIFS_NL_22;aveugle;blind;4.35
+ADJECTIFS_NL_23;large;breed;4.55
+ADJECTIFS_NL_24;brun / marron;bruin;4.42
+ADJECTIFS_NL_25;étranger;buitenlands;3.68
+ADJECTIFS_NL_26;commercial;commercieel;4.27
+ADJECTIFS_NL_27;complet;compleet;4.68
+ADJECTIFS_NL_28;concret;concreet;3.9
+ADJECTIFS_NL_29;continu;continu;4.01
+ADJECTIFS_NL_30;culturel;cultureel;4.27
+ADJECTIFS_NL_31;quotidien;dagelijks;4.89
+ADJECTIFS_NL_32;profond;diep;4.76
+ADJECTIFS_NL_33;fermé / dense;dicht;5.05
+ADJECTIFS_NL_34;gros / épais;dik;4.59
+ADJECTIFS_NL_35;divers;divers;3.95
+ADJECTIFS_NL_36;bête;dom;4.67
+ADJECTIFS_NL_37;sombre / foncé;donker;4.53
+ADJECTIFS_NL_38;sourd;doof;3.72
+ADJECTIFS_NL_39;efficace;doeltreffend;3.37
+ADJECTIFS_NL_40;mort;dood;5.57
+ADJECTIFS_NL_41;sec;droog;4.51
+ADJECTIFS_NL_42;animé / occupé;druk;5.34
+ADJECTIFS_NL_43;double;dubbel;4.5
+ADJECTIFS_NL_44;clair / distinct;duidelijk;5.36
+ADJECTIFS_NL_45;cher;duur;4.71
+ADJECTIFS_NL_46;vrai / véritable;echt;6.01
+ADJECTIFS_NL_47;économique;economisch;4.36
+ADJECTIFS_NL_48;simple;éénvoudig;0.0
+ADJECTIFS_NL_49;propre (à soi);eigen;5.81
+ADJECTIFS_NL_50;seul / unique / chouette;enig;4.55
+ADJECTIFS_NL_51;enthousiaste;enthousiast;4.5
+ADJECTIFS_NL_52;grave / très;erg;5.71
+ADJECTIFS_NL_53;sérieux;ernstig;4.57
+ADJECTIFS_NL_54;égal;even;5.85
+ADJECTIFS_NL_55;éventuel;eventueel;4.14
+ADJECTIFS_NL_56;exclusif;exclusief;4.15
+ADJECTIFS_NL_57;externe;extern;3.36
+ADJECTIFS_NL_58;supplémentaire;extra;5.16
+ADJECTIFS_NL_59;fin / agréable;fijn;5.09
+ADJECTIFS_NL_60;financier;financieel;4.47
+ADJECTIFS_NL_61;physique;fysiek;4.25
+ADJECTIFS_NL_62;jaune;geel;4.54
+ADJECTIFS_NL_63;entier;geheel;5.03
+ADJECTIFS_NL_64;fou;gek;5.13
+ADJECTIFS_NL_65;heureux;gelukkig;5.23
+ADJECTIFS_NL_66;facile;gemakkelijk;4.69
+ADJECTIFS_NL_67;moyen;gemiddeld;4.55
+ADJECTIFS_NL_68;assez;genoeg;5.49
+ADJECTIFS_NL_69;rassuré / tranquille;gerust;4.45
+ADJECTIFS_NL_70;sensible;gevoelig;4.32
+ADJECTIFS_NL_71;dangereux;gevaarlijk;4.63
+ADJECTIFS_NL_72;convivial / agréable;gezellig;4.64
+ADJECTIFS_NL_73;sain / en bonne santé;gezond;4.71
+ADJECTIFS_NL_74;bon / bien;goed;6.2
+ADJECTIFS_NL_75;bon marché;goedkoop;4.43
+ADJECTIFS_NL_76;grand;groot;5.59
+ADJECTIFS_NL_77;vert;groen;4.82
+ADJECTIFS_NL_78;favorable;gunstig;4.0
+ADJECTIFS_NL_79;demi;half;5.05
+ADJECTIFS_NL_80;dur / fort / vite;hard;5.15
+ADJECTIFS_NL_81;très chaud;heet;5.02
+ADJECTIFS_NL_82;clair / limpide;helder;4.5
+ADJECTIFS_NL_83;tout / entier;hele;5.79
+ADJECTIFS_NL_84;haut;hoog;5.04
+ADJECTIFS_NL_85;actuel;huidig;3.75
+ADJECTIFS_NL_86;chaque;ieder;5.2
+ADJECTIFS_NL_87;international;internationaal;4.77
+ADJECTIFS_NL_88;dommage;jammer;4.85
+ADJECTIFS_NL_89;jeune;jong;5.01
+ADJECTIFS_NL_90;juste / correct;juist;5.26
+ADJECTIFS_NL_91;calme;kalm;3.9
+ADJECTIFS_NL_92;cassé;kapot;4.7
+ADJECTIFS_NL_93;caractéristique;kenmerkend;3.88
+ADJECTIFS_NL_94;prêt / fini;klaar;5.51
+ADJECTIFS_NL_95;petit;klein;5.3
+ADJECTIFS_NL_96;coloré;kleurrijk;3.64
+ADJECTIFS_NL_97;beau / intelligent;knap;4.47
+ADJECTIFS_NL_98;court;kort;5.16
+ADJECTIFS_NL_99;froid;koud;4.72
+ADJECTIFS_NL_100;puissant;krachtig;4.23
+ADJECTIFS_NL_101;qualitatif;kwalitatief;3.57
+ADJECTIFS_NL_102;perdu (égaré);kwijt;4.93
+ADJECTIFS_NL_103;bas;laag;4.77
+ADJECTIFS_NL_104;tard;laat;5.84
+ADJECTIFS_NL_105;long;lang;5.65
+ADJECTIFS_NL_106;lent;langzaam;4.73
+ADJECTIFS_NL_107;pénible / difficile;lastig;4.81
+ADJECTIFS_NL_108;vide;leeg;4.67
+ADJECTIFS_NL_109;laid;lelijk;4.17
+ADJECTIFS_NL_110;chouette / amusant;leuk;5.6
+ADJECTIFS_NL_111;gentil / cher;lief;4.76
+ADJECTIFS_NL_112;léger / clair;licht;5.11
+ADJECTIFS_NL_113;gauche;linker;4.05
+ADJECTIFS_NL_114;à gauche;links;5.15
+ADJECTIFS_NL_115;local;lokaal;4.36
+ADJECTIFS_NL_116;détaché / libre;los;5.13
+ADJECTIFS_NL_117;social;maatschappelijk;4.23
+ADJECTIFS_NL_118;facile;makkelijk;4.99
+ADJECTIFS_NL_119;maximal;maximaal;4.46
+ADJECTIFS_NL_120;humain;menselijk;4.42
+ADJECTIFS_NL_121;immédiat;meteen;5.22
+ADJECTIFS_NL_122;environnemental;milieu;4.65
+ADJECTIFS_NL_123;moins;minder;5.5
+ADJECTIFS_NL_124;minimal;minimaal;4.35
+ADJECTIFS_NL_125;difficile;moeilijk;5.32
+ADJECTIFS_NL_126;beau;mooi;5.58
+ADJECTIFS_NL_127;fatigué;moe;4.64
+ADJECTIFS_NL_128;nu;naakt;4.36
+ADJECTIFS_NL_129;proche;nabij;4.51
+ADJECTIFS_NL_130;mouillé;nat;4.41
+ADJECTIFS_NL_131;naturel;natuurlijk;5.59
+ADJECTIFS_NL_132;étroit / précis;nauw;4.16
+ADJECTIFS_NL_133;propre / net;net;5.86
+ADJECTIFS_NL_134;soigné;netjes;4.54
+ADJECTIFS_NL_135;nouveau;nieuw;5.51
+ADJECTIFS_NL_136;nécessaire;nodig;5.73
+ADJECTIFS_NL_137;normal;normaal;5.09
+ADJECTIFS_NL_138;utile;nuttig;4.29
+ADJECTIFS_NL_139;officiel;officieel;4.85
+ADJECTIFS_NL_140;inconnu;onbekend;4.36
+ADJECTIFS_NL_141;mutuel / entre soi;onderling;4.14
+ADJECTIFS_NL_142;récemment;onlangs;4.55
+ADJECTIFS_NL_143;immédiat;onmiddellijk;4.61
+ADJECTIFS_NL_144;impossible;onmogelijk;4.65
+ADJECTIFS_NL_145;inquiet / agité;onrustig;3.5
+ADJECTIFS_NL_146;terrible / énormément;ontzettend;4.68
+ADJECTIFS_NL_147;inattendu;onverwacht;4.07
+ADJECTIFS_NL_148;de guerre;oorlog;5.29
+ADJECTIFS_NL_149;ouvert;open;5.5
+ADJECTIFS_NL_150;public;openbaar;4.85
+ADJECTIFS_NL_151;frappant / remarquable;opvallend;4.41
+ADJECTIFS_NL_152;vieux / ancien;oud;5.34
+ADJECTIFS_NL_153;restant / autre;overig;3.73
+ADJECTIFS_NL_154;après-demain;overmorgen;3.43
+ADJECTIFS_NL_155;seulement / à peine;pas;5.45
+ADJECTIFS_NL_156;adéquat / convenable;passend;3.82
+ADJECTIFS_NL_157;personnel;persoonlijk;4.9
+ADJECTIFS_NL_158;soudain;plots;4.15
+ADJECTIFS_NL_159;politique;politiek;5.17
+ADJECTIFS_NL_160;populaire;populair;4.65
+ADJECTIFS_NL_161;positif;positief;4.69
+ADJECTIFS_NL_162;précis / exactement;precies;5.34
+ADJECTIFS_NL_163;agréable;prettig;4.28
+ADJECTIFS_NL_164;excellent / parfait;prima;5.1
+ADJECTIFS_NL_165;privé;privé;4.57
+ADJECTIFS_NL_166;pour cent;procent;4.97
+ADJECTIFS_NL_167;professionnel;professioneel;4.39
+ADJECTIFS_NL_168;bizarre;raar;4.68
+ADJECTIFS_NL_169;plus récent;recenter;2.72
+ADJECTIFS_NL_170;droit;recht;5.29
+ADJECTIFS_NL_171;direct / directement;rechtstreeks;4.41
+ADJECTIFS_NL_172;régulier;regelmatig;4.88
+ADJECTIFS_NL_173;riche;rijk;4.86
+ADJECTIFS_NL_174;rouge;rood;4.84
+ADJECTIFS_NL_175;rond / environ;rond;5.56
+ADJECTIFS_NL_176;large / vaste / plus de;ruim;5.05
+ADJECTIFS_NL_177;calme / tranquille;rustig;5.0
+ADJECTIFS_NL_178;ensemble;samen;5.75
+ADJECTIFS_NL_179;propre / beau;schoon;4.69
+ADJECTIFS_NL_180;rapide / vite;snel;5.74
+ADJECTIFS_NL_181;certains;sommige;5.33
+ADJECTIFS_NL_182;social;sociaal;4.8
+ADJECTIFS_NL_183;captivant / passionnant;spannend;4.43
+ADJECTIFS_NL_184;spécial;speciaal;4.92
+ADJECTIFS_NL_185;serré / raide;strak;4.17
+ADJECTIFS_NL_186;sévère;streng;4.12
+ADJECTIFS_NL_187;innombrables;talloze;4.26
+ADJECTIFS_NL_188;contre;tegen;6.11
+ADJECTIFS_NL_189;actuel / de nos jours;tegenwoordig;5.06
+ADJECTIFS_NL_190;au moins;tenminste;4.69
+ADJECTIFS_NL_191;enfin / finalement;tenslotte;4.34
+ADJECTIFS_NL_192;à juste titre;terecht;4.95
+ADJECTIFS_NL_193;content / satisfait;tevreden;4.66
+ADJECTIFS_NL_194;à la maison;thuis;5.48
+ADJECTIFS_NL_195;pourtant / quand même;toch;6.0
+ADJECTIFS_NL_196;futur;toekomstig;3.49
+ADJECTIFS_NL_197;par hasard;toevallig;4.56
+ADJECTIFS_NL_198;total;totaal;5.12
+ADJECTIFS_NL_199;fidèle;trouw;4.56
+ADJECTIFS_NL_200;entre;tussen;5.9
+ADJECTIFS_NL_201;extrême / extrêmement;uiterst;4.27
+ADJECTIFS_NL_202;excellent;uitstekend;4.42
+ADJECTIFS_NL_203;souvent;vaak;5.6
+ADJECTIFS_NL_204;fixe / solide;vast;5.43
+ADJECTIFS_NL_205;sûr / en sécurité;veilig;5.12
+ADJECTIFS_NL_206;beaucoup;veel;6.26
+ADJECTIFS_NL_207;loin;ver;5.15
+ADJECTIFS_NL_208;responsable;verantwoordelijk;4.88
+ADJECTIFS_NL_209;mauvais / trompeur;verkeerd;4.84
+ADJECTIFS_NL_210;passé;verleden;4.93
+ADJECTIFS_NL_211;obligatoire;verplicht;4.64
+ADJECTIFS_NL_212;différent;verschillend;4.13
+ADJECTIFS_NL_213;raisonnable / sage;verstandig;4.26
+ADJECTIFS_NL_214;ensuite;vervolgens;5.24
+ADJECTIFS_NL_215;sale;vies;4.16
+ADJECTIFS_NL_216;rapide / vite;vlug;3.88
+ADJECTIFS_NL_217;plein;vol;5.34
+ADJECTIFS_NL_218;suffisant;voldoende;4.74
+ADJECTIFS_NL_219;suivant;volgend;4.5
+ADJECTIFS_NL_220;complet / complètement;volledig;5.08
+ADJECTIFS_NL_221;pour / devant;voor;7.05
+ADJECTIFS_NL_222;surtout;vooral;5.61
+ADJECTIFS_NL_223;provisoire;voorlopig;4.51
+ADJECTIFS_NL_224;ancien / ex-;voormalig;4.79
+ADJECTIFS_NL_225;prudent;voorzichtig;4.42
+ADJECTIFS_NL_226;précédent;vorig;4.95
+ADJECTIFS_NL_227;libre / assez;vrij;5.42
+ADJECTIFS_NL_228;étrange / étranger;vreemd;4.76
+ADJECTIFS_NL_229;amical / aimable;vriendelijk;4.53
+ADJECTIFS_NL_230;tôt;vroeg;5.35
+ADJECTIFS_NL_231;joyeux;vrolijk;4.43
+ADJECTIFS_NL_232;vrai;waar;6.21
+ADJECTIFS_NL_233;probable / sans doute;waarschijnlijk;5.24
+ADJECTIFS_NL_234;éveillé;wakker;5.06
+ADJECTIFS_NL_235;chaud;warm;4.86
+ADJECTIFS_NL_236;peu;weinig;5.35
+ADJECTIFS_NL_237;réel / vraiment;werkelijk;4.71
+ADJECTIFS_NL_238;scientifique;wetenschappelijk;4.41
+ADJECTIFS_NL_239;sage;wijs;4.16
+ADJECTIFS_NL_240;sauvage;wild;4.48
+ADJECTIFS_NL_241;blanc;wit;5.0
+ADJECTIFS_NL_242;furieux;woedend;3.93
+ADJECTIFS_NL_243;professionnel / d'affaires;zakelijk;4.19
+ADJECTIFS_NL_244;doux;zacht;4.4
+ADJECTIFS_NL_245;sûr / certain;zeker;5.69
+ADJECTIFS_NL_246;même;zelfde;4.39
+ADJECTIFS_NL_247;malade;ziek;4.86
+ADJECTIFS_NL_248;ainsi / si;zo;6.43
+ADJECTIFS_NL_249;comme;zoals;5.97
+ADJECTIFS_NL_250;sucré / doux;zoet;4.19
+ADJECTIFS_NL_251;à l'instant;zojuist;4.42
+ADJECTIFS_NL_252;soigneusement;zorgvuldig;4.0
+ADJECTIFS_NL_253;jusque là;zover;4.87
+ADJECTIFS_NL_254;lourd;zwaar;4.91
+ADJECTIFS_NL_255;noir;zwart;5.0
+ADJECTIFS_NL_256;faible;zwak;4.45
