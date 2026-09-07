@@ -237,34 +237,21 @@
             return id + '::' + state.settings.direction;
         }
 
-        const TRUE_MASTERY_STREAK = 3;      // réussites consécutives nécessaires pour être "vraiment maîtrisé"
-        const VALIDATION_STREAK = 2;        // réussites consécutives nécessaires pour "valider" (débloque le paquet suivant)
-        const MIN_SPACING_FOR_MASTERY = 25; // nb mini de mots vus entre la 2e et la 3e réussite pour que ça compte
+        const MIN_SPACING_FOR_MASTERY = 25; // nb mini de mots vus entre un raté et son retest en révision (déjà géré par la file d'attente)
 
+        // Règle simplifiée : réussi du premier coup (ou lors d'un retest en révision, déjà espacé
+        // naturellement par la file d'attente) = maîtrisé immédiatement. Raté = direct en révision,
+        // et il faudra une réussite (au prochain passage, espacé) pour en sortir.
         function registerResult(id, isCorrect) {
             const key = dirKey(id);
             state.stats.position = (state.stats.position || 0) + 1;
-            const pos = state.stats.position;
 
             if (!isCorrect) {
                 state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1;
-                state.stats.correctStreak[key] = 0; // un raté remet le streak à zéro
+                state.stats.trueMastered[key] = false;
             } else {
-                const streak = (state.stats.correctStreak[key] || 0) + 1;
-                state.stats.correctStreak[key] = streak;
-                if (streak === VALIDATION_STREAK) {
-                    state.stats.spacingAnchor[key] = pos; // on marque le moment de la 2e réussite
-                }
-                if (streak >= TRUE_MASTERY_STREAK && !state.stats.trueMastered[key]) {
-                    const anchor = state.stats.spacingAnchor[key] || pos;
-                    if (pos - anchor >= MIN_SPACING_FOR_MASTERY) {
-                        state.stats.trueMastered[key] = true;
-                    }
-                }
-                if (state.stats.wrongCount[key]) {
-                    // une bonne réponse réduit le poids "à réviser" du mot, sans jamais repasser sous 0
-                    state.stats.wrongCount[key] = Math.max(0, state.stats.wrongCount[key] - 1);
-                }
+                state.stats.trueMastered[key] = true;
+                state.stats.wrongCount[key] = 0;
             }
             batchResults.push({ id, isCorrect });
             if (batchResults.length >= 10) {
@@ -276,10 +263,6 @@
 
         function isTrueMastered(id) {
             return !!state.stats.trueMastered[dirKey(id)];
-        }
-
-        function isValidated(id) {
-            return (state.stats.correctStreak[dirKey(id)] || 0) >= VALIDATION_STREAK;
         }
 
         // Retire du pool actif les mots vraiment maîtrisés (sauf s'ils sont retombés en révision entre-temps)
@@ -317,10 +300,9 @@
         }
 
         // --- Système de paquets de 10 (déblocage progressif par catégorie/liste, par sens) ---
-        // Un paquet est "propre" quand tous ses mots sont validés (2 réussites d'affilée) et sans faute en attente.
+        // Un paquet est "propre" quand tous ses mots sont maîtrisés (sans faute en attente).
         function isBatchClean(batchItems) {
-            return batchItems.length > 0 && batchItems.every(i =>
-                isValidated(i.id) && (state.stats.wrongCount[dirKey(i.id)] || 0) === 0);
+            return batchItems.length > 0 && batchItems.every(i => isTrueMastered(i.id));
         }
 
         function maybeUnlockBatches(sourceKey, orderedItems) {
@@ -435,10 +417,10 @@
                     t.split(/\r?\n/).slice(1).forEach(l => {
                         if (!l.trim()) return;
                         const c = l.split(';');
-                        if (c[frIdx] && c[nlIdx] !== undefined) {
+                        if (c[nlIdx] !== undefined && c[nlIdx].trim()) {
                             const freqRaw = parseFloat(c[c.length - 1]);
                             fullDb.push({
-                                id: f + '_row' + rowIdx, fr: c[frIdx].trim(), nl: c[nlIdx].trim(),
+                                id: f + '_row' + rowIdx, fr: (c[frIdx] || '').trim(), nl: c[nlIdx].trim(),
                                 file: base, freq: isNaN(freqRaw) ? 0 : freqRaw
                             });
                             count++;
@@ -853,13 +835,9 @@
                 fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer;
                 fb.style.color = "var(--wrong)";
                 registerResult(currentItem.id, false);
-                if (inRevisionMode) {
-                    requeueItem(currentItem);
-                    save();
-                    setTimeout(goToNext, 1600); // en révision, on force l'avancée (pas de retry sur place)
-                } else {
-                    save(); // en mode classique, on laisse réessayer le même mot
-                }
+                if (inRevisionMode) requeueItem(currentItem);
+                save();
+                setTimeout(goToNext, 1600); // toujours avancer, jamais de retry immédiat sur place
             }
         }
 
