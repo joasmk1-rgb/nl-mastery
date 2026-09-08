@@ -45,6 +45,12 @@
 
         .back-btn { align-self: flex-start; margin-bottom: 20px; background: none; border: none; color: var(--primary); font-weight: bold; cursor: pointer; }
 
+        /* Barre de navigation permanente (en haut, sous le header) */
+        .bottom-nav { background: white; border-bottom: 2px solid #e5e5e5; display: flex; justify-content: flex-start; gap: 4px; padding: 6px 10px; }
+        .bottom-nav button { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 0.65rem; color: #afafaf; cursor: pointer; padding: 4px 10px; }
+        .bottom-nav button .icon { font-size: 1.2rem; }
+        .bottom-nav button.active { color: var(--primary); }
+
         #ta-timer { font-size: 2rem; font-weight: bold; color: var(--wrong); margin-bottom: 10px; }
         #ta-score { font-weight: bold; margin-bottom: 20px; }
         #load-error { color: var(--wrong); font-size: 0.85rem; margin-top: 10px; white-space: pre-line; }
@@ -69,6 +75,14 @@
         <div class="xp-badge" id="cecr-badge">A1 • 0%</div>
     </header>
 
+    <nav class="bottom-nav">
+        <button onclick="showHome()" id="nav-home"><span class="icon">🏠</span>Accueil</button>
+        <button onclick="startRevision()" id="nav-revision"><span class="icon">🔁</span>Révision</button>
+        <button onclick="showWordList()" id="nav-list"><span class="icon">📋</span>Mots</button>
+        <button onclick="showProfil()" id="nav-profil"><span class="icon">👤</span>Profil</button>
+        <button onclick="showInfo()" id="nav-info"><span class="icon">ℹ️</span>Infos</button>
+    </nav>
+
     <div id="home-view" class="view active">
         <h2>Que veux-tu bosser ?</h2>
         <div id="total-words-count" style="font-size:0.85rem; color:#888; margin-bottom:10px;"></div>
@@ -86,6 +100,9 @@
         </div>
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#ff8c00; grid-column: span 2;" onclick="startRevision()" id="revision-btn">🔁 Révision (0 mot)</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#9333ea; grid-column: span 2;" onclick="startArticleRevision()" id="article-revision-btn">🔤 Révision déterminants (0 mot)</div>
         </div>
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#0a9396; grid-column: span 2;" onclick="showTestSelect()">🎯 Test de niveau</div>
@@ -206,6 +223,20 @@
         <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
     </div>
 
+    <div id="article-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div id="article-progress" style="font-weight:bold; margin-bottom:10px;"></div>
+        <div class="study-box">
+            <small>de ou het ?</small>
+            <h1 id="article-word">mot</h1>
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button class="btn btn-green" style="margin:0;" onclick="checkArticle('de')">DE</button>
+                <button class="btn btn-red" style="margin:0;" onclick="checkArticle('het')">HET</button>
+            </div>
+            <div id="article-feedback" style="min-height:20px; font-weight:bold; margin-top:15px;"></div>
+        </div>
+    </div>
+
     <div id="anagram-view" class="view">
         <button class="back-btn" onclick="showHome()">← Retour</button>
         <div id="anagram-score" style="font-weight:bold; margin-bottom:10px;"></div>
@@ -213,8 +244,10 @@
             <small>Indice</small>
             <h1 id="anagram-clue">Mots</h1>
             <div id="anagram-built" style="min-height:44px; border:2px dashed #ccc; border-radius:12px; padding:10px; margin:15px 0; font-size:1.3rem; font-weight:bold; letter-spacing:2px;"></div>
+            <input type="text" id="anagram-input" placeholder="Ou tape le mot ici..." autocomplete="off" autocapitalize="off">
             <div id="anagram-tiles" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:15px;"></div>
             <div id="anagram-feedback" style="min-height:20px; font-weight:bold; margin-bottom:10px;"></div>
+            <button class="btn btn-green" onclick="submitAnagramTyped()">VÉRIFIER</button>
             <button class="btn btn-gray" onclick="clearAnagramAnswer()">Effacer</button>
         </div>
     </div>
@@ -304,6 +337,8 @@
         if (!state.memoryHighScore) state.memoryHighScore = null; // { moves, timeSec }
         if (!state.customLists) state.customLists = {}; // { nomListe: [id, id, ...] }
         if (!state.stats.wrongCount) state.stats.wrongCount = {}; // { dirKey: nb de fois raté }
+        if (!state.stats.articleMistakes) state.stats.articleMistakes = {}; // { dirKey: nb de fautes de/het (mot connu, article à revoir) }
+        if (!state.stats.articleStreak) state.stats.articleStreak = {}; // { dirKey: réussites consécutives au quiz déterminant }
         if (!state.stats.correctStreak) state.stats.correctStreak = {}; // { dirKey: réussites CONSÉCUTIVES }
         if (!state.stats.spacingAnchor) state.stats.spacingAnchor = {}; // { dirKey: position globale à la 2e réussite }
         if (!state.stats.trueMastered) state.stats.trueMastered = {}; // { dirKey: true si vraiment maîtrisé }
@@ -361,9 +396,10 @@
             return !!state.stats.trueMastered[dirKey(id)];
         }
 
-        // Retire du pool actif les mots vraiment maîtrisés (sauf s'ils sont retombés en révision entre-temps)
+        // Retire du pool actif les mots vraiment maîtrisés ET les mots actuellement en révision
+        // (une fois raté, un mot n'est récupérable QUE via le mode Révision dédié, pas ailleurs)
         function activePool(items) {
-            return items.filter(i => !isTrueMastered(i.id) || (state.stats.wrongCount[dirKey(i.id)] || 0) > 0);
+            return items.filter(i => !isTrueMastered(i.id) && (state.stats.wrongCount[dirKey(i.id)] || 0) === 0);
         }
 
         // Alerte dès que la pile "mots à réviser" franchit un nouveau multiple de 10
@@ -560,6 +596,7 @@
             renderMainCategories();
             updateDirectionButton();
             updateStats();
+            setActiveNav('nav-home');
         }
 
         const MAIN_CATEGORIES = [
@@ -621,6 +658,7 @@
         function showWordList() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('wordlist-view').classList.add('active');
+            setActiveNav('nav-list');
             const filter = document.getElementById('wl-filter');
             const categories = [...new Set(fullDb.map(i => i.file))];
             filter.innerHTML = '<option value="">Toutes catégories</option>' +
@@ -690,6 +728,12 @@
             alert(`Liste "${name}" sauvegardée avec ${wlSelected.size} mots.`);
         }
 
+        function setActiveNav(id) {
+            document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById(id);
+            if (btn) btn.classList.add('active');
+        }
+
         function showHome() {
             stopTimeAttack();
             currentSessionSourceKey = null;
@@ -697,6 +741,7 @@
             inRevisionMode = false;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
+            setActiveNav('nav-home');
         }
 
         function startSession(category) {
@@ -753,6 +798,7 @@
             document.getElementById('session-title').innerText = '🔁 Révision (mots ratés)';
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
+            setActiveNav('nav-revision');
             batchResults = [];
             document.getElementById('batch-recap').innerHTML = '';
             bumpMode('classique');
@@ -789,6 +835,79 @@
             const n = getReviewItems().length;
             const btn = document.getElementById('revision-btn');
             if (btn) btn.innerText = `🔁 Révision (${n} mot${n > 1 ? 's' : ''})`;
+        }
+
+        // --- RÉVISION DES DÉTERMINANTS (de / het) ---
+        function nounHasArticle(item) { return /^(de|het)\s+/i.test(item.nl); }
+        function correctArticleFor(item) { const m = item.nl.match(/^(de|het)\s+/i); return m ? m[1].toLowerCase() : null; }
+
+        function getArticleReviewItems() {
+            return fullDb.filter(i => i.file === 'NOMS_NL' && nounHasArticle(i)
+                && (state.stats.articleMistakes[dirKey(i.id)] || 0) > 0);
+        }
+
+        function updateArticleRevisionButton() {
+            const n = getArticleReviewItems().length;
+            const btn = document.getElementById('article-revision-btn');
+            if (btn) btn.innerText = `🔤 Révision déterminants (${n} mot${n > 1 ? 's' : ''})`;
+        }
+
+        let articleQueue = [];
+        let currentArticleItem = null;
+
+        function startArticleRevision() {
+            const items = getArticleReviewItems();
+            if (items.length === 0) { alert("Rien à réviser côté déterminants pour l'instant."); return; }
+            articleQueue = [...items].sort(() => 0.5 - Math.random());
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('article-view').classList.add('active');
+            nextArticleQ();
+        }
+
+        function nextArticleQ() {
+            if (articleQueue.length === 0) {
+                alert("🎉 Terminé ! Tous les déterminants de la file ont été retravaillés.");
+                showHome();
+                return;
+            }
+            currentArticleItem = articleQueue.shift();
+            document.getElementById('article-word').innerText = stripArticle(currentArticleItem.nl);
+            document.getElementById('article-feedback').innerText = '';
+            const statusLabel = { 'a-reviser': '⚠️ à réviser', 'reussi': '🟡 réussi une fois', 'maitrise': '🏆 maîtrisé', 'non-teste': '' }[articleStatus(currentArticleItem)];
+            document.getElementById('article-progress').innerText = `${articleQueue.length} restant(s) — ${statusLabel}`;
+        }
+
+        function articleStatus(item) {
+            const key = dirKey(item.id);
+            if ((state.stats.articleMistakes[key] || 0) > 0) return 'a-reviser';
+            if ((state.stats.articleStreak[key] || 0) >= 2) return 'maitrise';
+            if ((state.stats.articleStreak[key] || 0) === 1) return 'reussi';
+            return 'non-teste';
+        }
+
+        function checkArticle(choice) {
+            const correct = correctArticleFor(currentArticleItem);
+            const fb = document.getElementById('article-feedback');
+            const key = dirKey(currentArticleItem.id);
+            if (choice === correct) {
+                state.stats.articleStreak[key] = (state.stats.articleStreak[key] || 0) + 1;
+                const status = articleStatus(currentArticleItem);
+                if (status === 'maitrise') {
+                    state.stats.articleMistakes[key] = 0; // vraiment acquis, sort de la pile
+                    fb.innerText = '✅ ' + correct.toUpperCase() + ' — 🏆 maîtrisé !';
+                } else {
+                    fb.innerText = '✅ ' + correct.toUpperCase() + ' — réussi (encore 1 fois pour le maîtriser)';
+                    articleQueue.push(currentArticleItem); // pas encore acquis, on le repropose plus tard
+                }
+                fb.style.color = 'var(--success)';
+            } else {
+                state.stats.articleStreak[key] = 0; // un raté remet le streak à zéro
+                fb.innerText = '❌ C\'était ' + correct.toUpperCase();
+                fb.style.color = 'var(--wrong)';
+                articleQueue.push(currentArticleItem); // repoussé à la fin de la file
+            }
+            save();
+            setTimeout(nextArticleQ, 1400);
         }
 
         function iDontKnow() {
@@ -896,24 +1015,51 @@
         }
 
         // Compare la réponse de l'utilisateur à la liste des réponses acceptées.
-        // Le contenu entre parenthèses (ex: "voler (air)") est ignoré pour la comparaison,
-        // mais reste affiché tel quel dans le feedback.
-        // Renvoie { status: 'correct' | 'close' | 'wrong', closest, distance }
+        // Le contenu entre parenthèses (ex: "behoren (tot)") est optionnel : les DEUX formes sont
+        // acceptées comme correctes — avec la particule ("behoren tot") ou sans ("behoren").
+        // L'utilisateur peut lui aussi taper plusieurs propositions séparées par "/"
+        // (ex: "stellen/zetten" en cas d'hésitation sur un synonyme) : si l'une d'elles est bonne, c'est validé.
+        // Si les mots sont tous corrects mais juste dans un ordre différent (ex: particule "zich"
+        // déplacée), c'est compté "presque bon" plutôt que faux.
         function evaluateAnswer(userRaw, nl) {
-            const user = normalize(userRaw.replace(/\([^)]*\)/g, ''));
+            const userCandidates = getAcceptedAnswers(userRaw)
+                .map(u => normalize(u))
+                .filter(Boolean);
+            if (userCandidates.length === 0) return { status: 'wrong', closest: '', distance: Infinity };
+
             const accepted = getAcceptedAnswers(nl);
             let best = { status: 'wrong', closest: accepted[0], distance: Infinity };
-            for (const a of accepted) {
-                const target = normalize(a.replace(/\([^)]*\)/g, ''));
-                const dist = levenshtein(user, target);
-                if (dist === 0) return { status: 'correct', closest: a, distance: 0 };
-                if (dist <= toleranceFor(target) && dist < best.distance) {
-                    best = { status: 'close', closest: a, distance: dist };
-                } else if (dist < best.distance && best.status === 'wrong') {
-                    best = { status: 'wrong', closest: a, distance: dist };
+
+            for (const rawAccepted of accepted) {
+                // Deux variantes possibles pour chaque réponse acceptée : avec la particule inline, sans elle
+                const withParticle = normalize(rawAccepted.replace(/[()]/g, ''));
+                const withoutParticle = normalize(rawAccepted.replace(/\([^)]*\)/g, ''));
+                const targets = [...new Set([withParticle, withoutParticle])];
+
+                for (const user of userCandidates) {
+                    for (const target of targets) {
+                        const dist = levenshtein(user, target);
+                        if (dist === 0) return { status: 'correct', closest: rawAccepted, distance: 0 };
+                        if (dist <= toleranceFor(target) && dist < best.distance) {
+                            best = { status: 'close', closest: rawAccepted, distance: dist };
+                        } else if (dist < best.distance && best.status === 'wrong') {
+                            best = { status: 'wrong', closest: rawAccepted, distance: dist };
+                        }
+                        // Mêmes mots, ordre différent (ex: particule "zich" déplacée) = presque bon
+                        const sameWordsDifferentOrder = user.split(' ').filter(Boolean).sort().join(' ')
+                            === target.split(' ').filter(Boolean).sort().join(' ') && user !== target;
+                        if (sameWordsDifferentOrder && best.status !== 'correct') {
+                            best = { status: 'close', closest: rawAccepted, distance: 1, particleOrder: true };
+                        }
+                    }
                 }
             }
             return best;
+        }
+
+        // Retire un article de/het en tête de chaîne, pour isoler les fautes de genre grammatical
+        function stripArticle(str) {
+            return str.replace(/^(de|het)\s+/i, '').trim();
         }
 
         function checkAns() {
@@ -922,12 +1068,27 @@
             const correctAnswer = currentItem[answerField];
             const accepted = getAcceptedAnswers(correctAnswer);
             const multi = accepted.length > 1;
-            const result = evaluateAnswer(raw, correctAnswer);
+            let result = evaluateAnswer(raw, correctAnswer);
+            let articleMistake = false;
+
+            // Si c'est un nom néerlandais et que la seule faute est l'article de/het (ou son absence),
+            // on compte quand même bon pour la maîtrise, mais on note la faute pour la révision dédiée.
+            if (result.status === 'wrong' && answerField === 'nl' && currentItem.file === 'NOMS_NL') {
+                const strippedResult = evaluateAnswer(stripArticle(raw), stripArticle(correctAnswer));
+                if (strippedResult.status !== 'wrong') {
+                    result = strippedResult;
+                    articleMistake = true;
+                    const key = dirKey(currentItem.id);
+                    state.stats.articleMistakes[key] = (state.stats.articleMistakes[key] || 0) + 1;
+                }
+            }
+
             const fb = document.getElementById('feedback');
             const goToNext = inRevisionMode ? revisionNextQ : nextQ;
 
             if (result.status === 'correct') {
-                fb.innerText = "✅ BRAVO ! → " + correctAnswer + (multi ? "  (plusieurs réponses acceptées)" : "");
+                fb.innerText = "✅ BRAVO ! → " + correctAnswer + (multi ? "  (plusieurs réponses acceptées)" : "")
+                    + (articleMistake ? "  (⚠️ attention à de/het — envoyé en révision déterminants)" : "");
                 fb.style.color = "var(--success)";
                 state.xp += 10;
                 markMastered(currentItem);
@@ -935,7 +1096,8 @@
                 save();
                 setTimeout(goToNext, 1400);
             } else if (result.status === 'close') {
-                fb.innerText = "🟡 PRESQUE ! (petite faute) → " + correctAnswer;
+                const note = result.particleOrder ? " (⚠️ attention à l'ordre/la place de la particule)" : " (petite faute)";
+                fb.innerText = "🟡 PRESQUE !" + note + " → " + correctAnswer;
                 fb.style.color = "var(--gold)";
                 state.xp += 5;
                 markMastered(currentItem);
@@ -1178,6 +1340,8 @@
 
             document.getElementById('anagram-clue').innerText = question;
             document.getElementById('anagram-feedback').innerText = '';
+            document.getElementById('anagram-input').value = '';
+            document.getElementById('anagram-input').focus();
             renderAnagramTiles();
         }
 
@@ -1194,17 +1358,23 @@
             anagramBuilt.push(idx);
             renderAnagramTiles();
             if (anagramBuilt.length === anagramTiles.length) {
-                checkAnagram();
+                finalizeAnagram(anagramBuilt.map(i => anagramTiles[i]).join(''));
             }
+        }
+
+        function submitAnagramTyped() {
+            const typed = normalize(document.getElementById('anagram-input').value);
+            if (!typed) return;
+            finalizeAnagram(typed);
         }
 
         function clearAnagramAnswer() {
             anagramBuilt = [];
+            document.getElementById('anagram-input').value = '';
             renderAnagramTiles();
         }
 
-        function checkAnagram() {
-            const built = anagramBuilt.map(i => anagramTiles[i]).join('');
+        function finalizeAnagram(built) {
             const fb = document.getElementById('anagram-feedback');
             const isCorrect = built === anagramWord.target;
             seeWord(anagramWord.item.id);
@@ -1227,12 +1397,14 @@
         function showProfil() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('profil-view').classList.add('active');
+            setActiveNav('nav-profil');
             renderProfil();
         }
 
         function showInfo() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('info-view').classList.add('active');
+            setActiveNav('nav-info');
         }
 
         function renderProfil() {
@@ -1473,6 +1645,7 @@
             const { level } = getVocabProgress();
             document.getElementById('cecr-badge').innerText = level;
             updateRevisionButton();
+            updateArticleRevisionButton();
             renderMainCategories();
         }
 
@@ -1480,6 +1653,7 @@
         document.getElementById('ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAns(); });
         document.getElementById('ta-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkTAAns(); });
         document.getElementById('test-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') testCheckAns(); });
+        document.getElementById('anagram-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') submitAnagramTyped(); });
 
         init();
     </script>
