@@ -114,7 +114,7 @@
             <div class="card-menu" style="color:var(--primary); grid-column: span 2;" onclick="showWordList()">📋 Liste des mots</div>
         </div>
         <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#e11d48; grid-column: span 2;" onclick="startSwipeTriage()">👉 Tri rapide (swipe)</div>
+            <div class="card-menu" style="color:#e11d48; grid-column: span 2;" onclick="showSwipeSelect()">👉 Tri rapide (swipe)</div>
         </div>
         <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#0891b2; grid-column: span 2;" onclick="showInfo()">ℹ️ Infos & comment ça marche</div>
@@ -227,13 +227,20 @@
         <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
     </div>
 
+    <div id="swipe-select-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>👉 Choisis une catégorie</h2>
+        <div class="grid" id="swipe-category-grid"></div>
+    </div>
+
     <div id="swipe-view" class="view">
         <button class="back-btn" onclick="showHome()">← Retour</button>
         <div id="swipe-progress" style="font-weight:bold; margin-bottom:15px;"></div>
         <div style="position:relative; width:90%; max-width:380px; height:220px;">
             <div id="swipe-card" class="study-box" style="position:absolute; inset:0; width:100%; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:grab; touch-action:none; user-select:none;">
-                <small id="swipe-hint">Connais-tu ce mot ?</small>
+                <small id="swipe-hint">Tape pour révéler</small>
                 <h1 id="swipe-word" style="margin:15px 0;">mot</h1>
+                <div id="swipe-answer" style="font-size:1.1rem; font-weight:bold; color:var(--primary); min-height:26px;"></div>
             </div>
         </div>
         <div style="display:flex; gap:20px; margin-top:20px;">
@@ -744,10 +751,24 @@
         let swipeCurrentItem = null;
         let swipeDragging = false;
         let swipeStartX = 0;
+        let swipeRevealed = false;
 
-        function startSwipeTriage() {
-            swipeQueue = byFrequencyDesc(fullDb.filter(i => wordStatus(i.id) === 'unseen'));
-            if (swipeQueue.length === 0) { alert("Aucun mot non-vu à trier pour l'instant."); return; }
+        function showSwipeSelect() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('swipe-select-view').classList.add('active');
+            const cats = [...MAIN_CATEGORIES.map(c => c.file), ...new Set(fullDb.map(i => i.file).filter(f => !MAIN_CATEGORIES.some(c => c.file === f)))];
+            const grid = document.getElementById('swipe-category-grid');
+            grid.innerHTML = cats.map(cat => {
+                const n = fullDb.filter(i => i.file === cat && wordStatus(i.id) === 'unseen').length;
+                const label = (MAIN_CATEGORIES.find(c => c.file === cat) || {}).label || cat;
+                return `<div class="card-menu blue" onclick="startSwipeTriage('${cat}')">${label}<div class="cat-sub">${n} mot${n > 1 ? 's' : ''} non vu${n > 1 ? 's' : ''}</div></div>`;
+            }).join('') + `<div class="card-menu" style="color:#e11d48; grid-column: span 2;" onclick="startSwipeTriage(null)">🌐 Toutes catégories</div>`;
+        }
+
+        function startSwipeTriage(category) {
+            const pool = category ? fullDb.filter(i => i.file === category) : fullDb;
+            swipeQueue = byFrequencyDesc(pool.filter(i => wordStatus(i.id) === 'unseen'));
+            if (swipeQueue.length === 0) { alert("Aucun mot non-vu à trier dans cette catégorie pour l'instant."); return; }
             swipeTotal = swipeQueue.length;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('swipe-view').classList.add('active');
@@ -761,8 +782,11 @@
                 return;
             }
             swipeCurrentItem = swipeQueue.shift();
+            swipeRevealed = false;
             const { question } = questionFor(swipeCurrentItem);
             document.getElementById('swipe-word').innerText = question;
+            document.getElementById('swipe-answer').innerText = '';
+            document.getElementById('swipe-hint').innerText = 'Tape pour révéler';
             document.getElementById('swipe-progress').innerText = `${swipeTotal - swipeQueue.length} / ${swipeTotal}`;
             const card = document.getElementById('swipe-card');
             card.style.transition = 'none';
@@ -771,7 +795,15 @@
             void card.offsetWidth;
         }
 
+        function revealSwipeCard() {
+            swipeRevealed = true;
+            const { answerField } = questionFor(swipeCurrentItem);
+            document.getElementById('swipe-answer').innerText = '→ ' + swipeCurrentItem[answerField];
+            document.getElementById('swipe-hint').innerText = 'Tu connaissais ?';
+        }
+
         function swipeAnswer(knows) {
+            if (!swipeRevealed) { revealSwipeCard(); return; } // premier tap = révéler, pas juger
             const card = document.getElementById('swipe-card');
             card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
             card.style.transform = `translateX(${knows ? 500 : -500}px) rotate(${knows ? 20 : -20}deg)`;
@@ -789,6 +821,7 @@
         function setupSwipeDrag() {
             const card = document.getElementById('swipe-card');
             card.addEventListener('pointerdown', (e) => {
+                if (!swipeRevealed) { revealSwipeCard(); return; } // premier tap = révéler
                 swipeDragging = true;
                 swipeStartX = e.clientX;
                 card.style.transition = 'none';
