@@ -114,6 +114,9 @@
             <div class="card-menu" style="color:var(--primary); grid-column: span 2;" onclick="showWordList()">📋 Liste des mots</div>
         </div>
         <div class="grid" style="margin-top:15px;">
+            <div class="card-menu" style="color:#e11d48; grid-column: span 2;" onclick="startSwipeTriage()">👉 Tri rapide (swipe)</div>
+        </div>
+        <div class="grid" style="margin-top:15px;">
             <div class="card-menu" style="color:#0891b2; grid-column: span 2;" onclick="showInfo()">ℹ️ Infos & comment ça marche</div>
         </div>
         <div id="theme-section" style="width:100%; max-width:500px;"></div>
@@ -222,6 +225,21 @@
             <button class="btn btn-green" onclick="testCheckAns()">VÉRIFIER</button>
         </div>
         <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
+    </div>
+
+    <div id="swipe-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <div id="swipe-progress" style="font-weight:bold; margin-bottom:15px;"></div>
+        <div style="position:relative; width:90%; max-width:380px; height:220px;">
+            <div id="swipe-card" class="study-box" style="position:absolute; inset:0; width:100%; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:grab; touch-action:none; user-select:none;">
+                <small id="swipe-hint">Connais-tu ce mot ?</small>
+                <h1 id="swipe-word" style="margin:15px 0;">mot</h1>
+            </div>
+        </div>
+        <div style="display:flex; gap:20px; margin-top:20px;">
+            <button class="btn btn-gray" style="width:140px; margin:0;" onclick="swipeAnswer(false)">👈 Pas encore</button>
+            <button class="btn btn-green" style="width:140px; margin:0;" onclick="swipeAnswer(true)">Je connais 👉</button>
+        </div>
     </div>
 
     <div id="article-view" class="view">
@@ -598,6 +616,7 @@
             updateDirectionButton();
             updateStats();
             setActiveNav('nav-home');
+            setupSwipeDrag();
         }
 
         const MAIN_CATEGORIES = [
@@ -717,6 +736,84 @@
         function clearWordSelection() {
             wlSelected.clear();
             renderWordList();
+        }
+
+        // TRI RAPIDE (swipe façon Tinder) : pioche dans les mots non-vus, glisser à droite = maîtrisé
+        let swipeQueue = [];
+        let swipeTotal = 0;
+        let swipeCurrentItem = null;
+        let swipeDragging = false;
+        let swipeStartX = 0;
+
+        function startSwipeTriage() {
+            swipeQueue = byFrequencyDesc(fullDb.filter(i => wordStatus(i.id) === 'unseen'));
+            if (swipeQueue.length === 0) { alert("Aucun mot non-vu à trier pour l'instant."); return; }
+            swipeTotal = swipeQueue.length;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('swipe-view').classList.add('active');
+            nextSwipeCard();
+        }
+
+        function nextSwipeCard() {
+            if (swipeQueue.length === 0) {
+                alert("🎉 Tri terminé !");
+                showHome();
+                return;
+            }
+            swipeCurrentItem = swipeQueue.shift();
+            const { question } = questionFor(swipeCurrentItem);
+            document.getElementById('swipe-word').innerText = question;
+            document.getElementById('swipe-progress').innerText = `${swipeTotal - swipeQueue.length} / ${swipeTotal}`;
+            const card = document.getElementById('swipe-card');
+            card.style.transition = 'none';
+            card.style.transform = 'translateX(0) rotate(0)';
+            card.style.background = '';
+            void card.offsetWidth;
+        }
+
+        function swipeAnswer(knows) {
+            const card = document.getElementById('swipe-card');
+            card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+            card.style.transform = `translateX(${knows ? 500 : -500}px) rotate(${knows ? 20 : -20}deg)`;
+            card.style.opacity = '0';
+            seeWord(swipeCurrentItem.id);
+            if (knows) {
+                const key = dirKey(swipeCurrentItem.id);
+                state.stats.trueMastered[key] = true;
+                markMastered(swipeCurrentItem);
+            }
+            save();
+            setTimeout(() => { card.style.opacity = '1'; nextSwipeCard(); }, 250);
+        }
+
+        function setupSwipeDrag() {
+            const card = document.getElementById('swipe-card');
+            card.addEventListener('pointerdown', (e) => {
+                swipeDragging = true;
+                swipeStartX = e.clientX;
+                card.style.transition = 'none';
+                card.setPointerCapture(e.pointerId);
+            });
+            card.addEventListener('pointermove', (e) => {
+                if (!swipeDragging) return;
+                const dx = e.clientX - swipeStartX;
+                card.style.transform = `translateX(${dx}px) rotate(${dx / 20}deg)`;
+                card.style.background = dx > 30 ? 'var(--success)' : dx < -30 ? 'var(--wrong)' : '';
+            });
+            const endDrag = (e) => {
+                if (!swipeDragging) return;
+                swipeDragging = false;
+                const dx = e.clientX - swipeStartX;
+                if (dx > 90) swipeAnswer(true);
+                else if (dx < -90) swipeAnswer(false);
+                else {
+                    card.style.transition = 'transform 0.2s ease, background 0.2s ease';
+                    card.style.transform = 'translateX(0) rotate(0)';
+                    card.style.background = '';
+                }
+            };
+            card.addEventListener('pointerup', endDrag);
+            card.addEventListener('pointercancel', endDrag);
         }
 
         function markSelectedAsMastered() {
@@ -1457,11 +1554,53 @@
                     <h3>🔥 Mots les plus revus</h3>
                     <p>${top5.length ? top5.join('<br>') : 'Aucune donnée pour le moment'}</p>
                 </div>
+                <div class="study-box" style="margin-top:15px; border-color:var(--primary);">
+                    <h3 style="color:var(--primary);">💾 Sauvegarde</h3>
+                    <p style="font-size:0.85rem;">Exporte un fichier avec toute ta progression (à conserver, ou pour la reprendre sur un autre appareil/navigateur). L'import remplace entièrement la progression actuelle.</p>
+                    <button class="btn btn-green" onclick="exportProgress()">📤 Exporter ma progression</button>
+                    <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="importProgress(event)">
+                    <button class="btn btn-gray" onclick="document.getElementById('import-file-input').click()">📥 Importer une sauvegarde</button>
+                </div>
                 <div class="study-box" style="margin-top:15px; border-color:var(--wrong);">
                     <h3 style="color:var(--wrong);">⚠️ Zone dangereuse</h3>
                     <p style="font-size:0.85rem;">Ceci efface définitivement tout ton historique (XP, mots maîtrisés, listes, high scores). Aucune récupération possible.</p>
                     <button class="btn btn-red" onclick="resetProgress()">🗑️ Réinitialiser toute la progression</button>
                 </div>`;
+        }
+
+        function exportProgress() {
+            const dataStr = JSON.stringify(state, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const date = new Date().toISOString().slice(0, 10);
+            a.href = url;
+            a.download = `nl-mastery-sauvegarde-${date}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importProgress(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (!imported || typeof imported !== 'object' || !imported.stats) {
+                        alert("Fichier invalide : ce n'est pas une sauvegarde reconnaissable.");
+                        return;
+                    }
+                    const ok = confirm("Ceci va REMPLACER entièrement ta progression actuelle par celle du fichier importé. Continuer ?");
+                    if (!ok) return;
+                    localStorage.setItem('nl_platform_v1', JSON.stringify(imported));
+                    alert("Import réussi ! La page va se recharger.");
+                    location.reload();
+                } catch (err) {
+                    alert("Erreur : le fichier n'a pas pu être lu (" + err.message + ").");
+                }
+            };
+            reader.readAsText(file);
         }
 
         function resetProgress() {
