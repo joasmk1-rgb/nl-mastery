@@ -141,6 +141,7 @@
             </select>
         </div>
         <div id="wl-actions" style="width:100%; max-width:500px; display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <button class="btn btn-green" style="margin:0; flex:1;" onclick="markSelectedAsMastered()">✅ Marquer maîtrisé</button>
             <button class="btn btn-green" style="margin:0; flex:1;" onclick="saveCustomList()">💾 Sauver la sélection</button>
             <button class="btn btn-gray" style="margin:0; flex:1;" onclick="clearWordSelection()">Vider</button>
             <button class="btn btn-gray" style="margin:0; flex:1;" onclick="selectByStatus('unseen')">+ Non vus</button>
@@ -716,6 +717,22 @@
         function clearWordSelection() {
             wlSelected.clear();
             renderWordList();
+        }
+
+        function markSelectedAsMastered() {
+            if (wlSelected.size === 0) { alert("Sélectionne au moins un mot d'abord."); return; }
+            wlSelected.forEach(id => {
+                const key = dirKey(id);
+                state.stats.trueMastered[key] = true;
+                state.stats.wrongCount[key] = 0;
+                if (!state.stats.wordSeen[key]) state.stats.wordSeen[key] = 1;
+                const item = fullDb.find(i => i.id === id);
+                if (item) markMastered(item);
+            });
+            const n = wlSelected.size;
+            save();
+            renderWordList();
+            alert(`${n} mot(s) marqué(s) comme vraiment maîtrisé(s).`);
         }
 
         function saveCustomList() {
