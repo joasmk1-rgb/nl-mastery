@@ -208,6 +208,7 @@
         <h2>🎯 Test de niveau</h2>
         <p style="max-width:450px; text-align:center; font-size:0.85rem; color:#888;">
             Estimation heuristique basée sur la fréquence d'usage réelle des mots en néerlandais (pas un test scientifiquement validé).
+            Les mots déjà vraiment maîtrisés comptent automatiquement comme acquis, sans être reposés.
         </p>
         <div class="grid">
             <div class="card-menu" style="color:#0a9396" onclick="startFullTest()">📖 Test complet<br><small style="font-weight:normal;">Tous les mots, du plus au moins courant</small></div>
@@ -243,9 +244,13 @@
                 <div id="swipe-answer" style="font-size:1.1rem; font-weight:bold; color:var(--primary); min-height:26px;"></div>
             </div>
         </div>
-        <div style="display:flex; gap:20px; margin-top:20px;">
-            <button class="btn btn-gray" style="width:140px; margin:0;" onclick="swipeAnswer(false)">👈 Pas encore</button>
-            <button class="btn btn-green" style="width:140px; margin:0;" onclick="swipeAnswer(true)">Je connais 👉</button>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:auto auto; gap:8px; margin-top:20px; width:90%; max-width:380px;">
+            <div></div>
+            <button class="btn btn-green" style="margin:0; grid-column:2; font-size:0.8rem;" onclick="swipeAnswer('bientot')">🟢 Bientôt<br>acquis</button>
+            <div></div>
+            <button class="btn btn-red" style="margin:0; font-size:0.8rem;" onclick="swipeAnswer('difficile')">🔴 Difficile</button>
+            <button class="btn btn-gray" style="margin:0; font-size:0.8rem;" onclick="swipeAnswer('travailler')">🟡 À travailler</button>
+            <button class="btn btn-green" style="margin:0; font-size:0.8rem;" onclick="swipeAnswer('maitrise')">🏆 Maîtrisé</button>
         </div>
     </div>
 
@@ -751,6 +756,7 @@
         let swipeCurrentItem = null;
         let swipeDragging = false;
         let swipeStartX = 0;
+        let swipeStartY = 0;
         let swipeRevealed = false;
 
         function showSwipeSelect() {
@@ -799,20 +805,38 @@
             swipeRevealed = true;
             const { answerField } = questionFor(swipeCurrentItem);
             document.getElementById('swipe-answer').innerText = '→ ' + swipeCurrentItem[answerField];
-            document.getElementById('swipe-hint').innerText = 'Tu connaissais ?';
+            document.getElementById('swipe-hint').innerText = 'Comment ça se passe ?';
         }
 
-        function swipeAnswer(knows) {
-            if (!swipeRevealed) { revealSwipeCard(); return; } // premier tap = révéler, pas juger
+        // level: 'maitrise' (droite) | 'bientot' (haut) | 'travailler' (bas) | 'difficile' (gauche)
+        const SWIPE_LEVELS = {
+            maitrise:   { dx: 500,  dy: 0,    rot: 20  },
+            bientot:    { dx: 0,    dy: -400, rot: 0   },
+            travailler: { dx: 0,    dy: 400,  rot: 0   },
+            difficile:  { dx: -500, dy: 0,    rot: -20 }
+        };
+
+        function swipeAnswer(level) {
+            if (!swipeRevealed) { revealSwipeCard(); return; }
             const card = document.getElementById('swipe-card');
+            const move = SWIPE_LEVELS[level];
             card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-            card.style.transform = `translateX(${knows ? 500 : -500}px) rotate(${knows ? 20 : -20}deg)`;
+            card.style.transform = `translate(${move.dx}px, ${move.dy}px) rotate(${move.rot}deg)`;
             card.style.opacity = '0';
-            seeWord(swipeCurrentItem.id);
-            if (knows) {
-                const key = dirKey(swipeCurrentItem.id);
-                state.stats.trueMastered[key] = true;
+
+            const id = swipeCurrentItem.id;
+            seeWord(id);
+            if (level === 'maitrise') {
+                state.stats.trueMastered[dirKey(id)] = true;
+                state.stats.wrongCount[dirKey(id)] = 0;
                 markMastered(swipeCurrentItem);
+            } else if (level === 'bientot') {
+                markMastered(swipeCurrentItem);
+            } else if (level === 'travailler') {
+                registerResult(id, false);
+            } else if (level === 'difficile') {
+                registerResult(id, false);
+                registerResult(id, false);
             }
             save();
             setTimeout(() => { card.style.opacity = '1'; nextSwipeCard(); }, 250);
@@ -821,27 +845,39 @@
         function setupSwipeDrag() {
             const card = document.getElementById('swipe-card');
             card.addEventListener('pointerdown', (e) => {
-                if (!swipeRevealed) { revealSwipeCard(); return; } // premier tap = révéler
+                if (!swipeRevealed) { revealSwipeCard(); return; }
                 swipeDragging = true;
                 swipeStartX = e.clientX;
+                swipeStartY = e.clientY;
                 card.style.transition = 'none';
                 card.setPointerCapture(e.pointerId);
             });
             card.addEventListener('pointermove', (e) => {
                 if (!swipeDragging) return;
                 const dx = e.clientX - swipeStartX;
-                card.style.transform = `translateX(${dx}px) rotate(${dx / 20}deg)`;
-                card.style.background = dx > 30 ? 'var(--success)' : dx < -30 ? 'var(--wrong)' : '';
+                const dy = e.clientY - swipeStartY;
+                card.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 20}deg)`;
+                let color = '';
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    color = dx > 30 ? 'var(--success)' : dx < -30 ? 'var(--wrong)' : '';
+                } else {
+                    color = dy < -30 ? '#58cc02' : dy > 30 ? '#ffc800' : '';
+                }
+                card.style.background = color;
             });
             const endDrag = (e) => {
                 if (!swipeDragging) return;
                 swipeDragging = false;
                 const dx = e.clientX - swipeStartX;
-                if (dx > 90) swipeAnswer(true);
-                else if (dx < -90) swipeAnswer(false);
-                else {
+                const dy = e.clientY - swipeStartY;
+                const threshold = 90;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+                    swipeAnswer(dx > 0 ? 'maitrise' : 'difficile');
+                } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > threshold) {
+                    swipeAnswer(dy < 0 ? 'bientot' : 'travailler');
+                } else {
                     card.style.transition = 'transform 0.2s ease, background 0.2s ease';
-                    card.style.transform = 'translateX(0) rotate(0)';
+                    card.style.transform = 'translate(0,0) rotate(0)';
                     card.style.background = '';
                 }
             };
@@ -1666,14 +1702,19 @@
             const words = testableWords();
             if (words.length === 0) { alert("Pas assez de mots avec une fréquence connue pour lancer le test."); return; }
             testMode = 'full';
-            testQueue = [...words].sort((a, b) => b.freq - a.freq);
-            testIndex = 0;
             testResults = [];
+            // Les mots déjà vraiment maîtrisés comptent automatiquement comme acquis, sans être reposés
+            const already = words.filter(i => isTrueMastered(i.id));
+            already.forEach(i => testResults.push({ item: i, isCorrect: true }));
+            const toTest = words.filter(i => !isTrueMastered(i.id));
+            testQueue = byFrequencyDesc(toTest);
+            testIndex = 0;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('test-view').classList.add('active');
             document.getElementById('test-result').innerHTML = '';
             document.getElementById('test-ans-input').style.display = '';
             document.querySelector('#test-view .btn-green').style.display = '';
+            if (testQueue.length === 0) { finishTest(); return; }
             testNextQ();
         }
 
