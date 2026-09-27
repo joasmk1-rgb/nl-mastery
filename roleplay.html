@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NL Mastery - Assistant Vocal & Jeux de Rôle</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .config-box, .scenario-box, .chat-box {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        input[type="password"], select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .scenario-btn {
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .scenario-btn:hover, .scenario-btn.active {
+            border-color: var(--primary);
+            background: #eef2ff;
+        }
+
+        .scenario-btn strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        #chat-history {
+            height: 350px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            background: #fdfdfd;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            padding: 10px 14px;
+            border-radius: 10px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .message.assistant {
+            background: #f1f5f9;
+            color: var(--text);
+            align-self: flex-start;
+            border-left: 4px solid var(--primary);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        button.action-btn {
+            flex: 1;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button.action-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        button.action-btn.recording {
+            background: #ef4444;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .status {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Retour au vocabulaire</a>
+    <h1>NL Mastery - AI Voice Roleplay</h1>
+
+    <!-- Étape 1 : Clé API -->
+    <div class="config-box">
+        <label for="apiKey">Clé API Google Gemini (Stockée uniquement dans votre navigateur) :</label>
+        <input type="password" id="apiKey" placeholder="Entrez votre clé API Gemini ici..." onchange="saveApiKey()">
+        <small style="color: var(--text-light);">Pas encore de clé ? <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">Obtenez-en une gratuitement sur Google AI Studio →</a></small>
+        <div id="voice-warning" style="display:none; margin-top:10px; padding:10px; border-radius:8px; background:#fef3c7; color:#92400e; font-size:0.85rem;"></div>
+    </div>
+
+    <!-- Étape 2 : Choix du scénario -->
+    <div class="scenario-box">
+        <label>Choisissez votre scénario d'entraînement :</label>
+        <div class="scenarios-grid">
+            <button class="scenario-btn active" onclick="setScenario('interview', this)">
+                <strong>Entretien d'embauche</strong>
+                Simule un entretien professionnel en Flandre pour un poste en gestion.
+            </button>
+            <button class="scenario-btn" onclick="setScenario('commune', this)">
+                <strong>À la Commune / Administration</strong>
+                Régler un problème administratif ou de logement.
+            </button>
+            <button class="scenario-btn" onclick="setScenario('cafe', this)">
+                <strong>Au café / Resto</strong>
+                Commander, poser des questions sur la carte en néerlandais.
+            </button>
+        </div>
+    </div>
+
+    <!-- Étape 3 : Zone de discussion -->
+    <div class="chat-box">
+        <div id="chat-history">
+            <div class="message assistant">Hoi ! Choisissez un scénario ci-dessus et cliquez sur "Parler" pour commencer la conversation en néerlandais.</div>
+        </div>
+        
+        <div class="controls">
+            <button id="micBtn" class="action-btn" onclick="toggleSpeechRecognition()">🎤 Maintenir / Cliquer pour Parler</button>
+        </div>
+        <div id="statusText" class="status">Prêt</div>
+    </div>
+</div>
+
+<script>
+    let currentScenario = "interview";
+    let isRecording = false;
+    let recognition = null;
+    let conversationHistory = [];
+
+    // Sauvegarde de la clé API
+    function saveApiKey() {
+        const key = document.getElementById('apiKey').value;
+        localStorage.setItem('gemini_api_key', key);
+    }
+
+    window.onload = function() {
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            document.getElementById('apiKey').value = savedKey;
+        }
+        initSpeechRecognition();
+        checkDutchVoice();
+        resetConversation();
+    };
+
+    let dutchVoice = null;
+
+    function checkDutchVoice() {
+        if (!('speechSynthesis' in window)) return;
+        const findVoice = () => {
+            const voices = window.speechSynthesis.getVoices();
+            dutchVoice = voices.find(v => v.lang.toLowerCase().startsWith('nl')) || null;
+            const warningDiv = document.getElementById('voice-warning');
+            if (!dutchVoice) {
+                warningDiv.style.display = 'block';
+                warningDiv.innerHTML = "⚠️ Aucune voix néerlandaise n'est installée sur cet appareil — le texte sera lu avec une voix par défaut (mauvaise prononciation). "
+                    + "<br>Sur Windows : Paramètres → Heure et langue → Voix, ajoute \"Nederlands\". "
+                    + "<br>Sur Mac : Réglages système → Accessibilité → Contenu énoncé, ajoute une voix néerlandaise. "
+                    + "<br>Sur Android/Chrome : Paramètres → Accessibilité → Synthèse vocale, installe les données vocales néerlandaises.";
+            } else {
+                warningDiv.style.display = 'none';
+            }
+        };
+        findVoice();
+        // Sur beaucoup de navigateurs, la liste des voix n'est prête qu'après cet évènement
+        window.speechSynthesis.onvoiceschanged = findVoice;
+    }
+
+    function setScenario(scenario, btnElement) {
+        currentScenario = scenario;
+        document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+        btnElement.classList.add('active');
+        resetConversation();
+    }
+
+    function resetConversation() {
+        const historyDiv = document.getElementById('chat-history');
+        let welcomeText = "";
+        
+        if (currentScenario === 'interview') {
+            welcomeText = "Goedendag! Welkom bij dit sollicitatiegesprek. Kan je jezelf even kort voorstellen?";
+            conversationHistory = [{ role: "model", parts: [{ text: "Tu es un recruteur en Flandre. Fais passer un entretien d'embauche en néerlandais (niveau B1/B2) pour un poste en gestion. Parle exclusivement en néerlandais simple. Pose une seule question à la fois." }] }];
+        } else if (currentScenario === 'commune') {
+            welcomeText = "Goedendag, loket van de gemeente. Waarmee kan ik u vandaag helpen?";
+            conversationHistory = [{ role: "model", parts: [{ text: "Tu es un employé communal en Belgique. Accueille l'habitant en néerlandais et demande-lui la raison de sa visite administrative." }] }];
+        } else {
+            welcomeText = "Goedendag! Wat kan ik u vandaag aanbieden?";
+            conversationHistory = [{ role: "model", parts: [{ text: "Tu es un serveur dans un café en Flandre. Accueille le client en néerlandais." }] }];
+        }
+
+        historyDiv.innerHTML = `<div class="message assistant">${welcomeText}</div>`;
+        speakText(welcomeText);
+    }
+
+    // Initialisation de la reconnaissance vocale du navigateur
+    function initSpeechRecognition() {
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Votre navigateur ne supporte pas la reconnaissance vocale. Utilisez Google Chrome.");
+            return;
+        }
+
+        recognition = new SpeechRecognition();
+        recognition.lang = 'nl-NL'; // Langue cible : Néerlandais
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onresult = function(event) {
+            const speechToText = event.results[0][0].transcript;
+            appendMessage(speechToText, 'user');
+            sendToGemini(speechToText);
+        };
+
+        recognition.onerror = function(event) {
+            document.getElementById('statusText').innerText = "Erreur de reconnaissance vocale : " + event.error;
+            stopRecordingUI();
+        };
+
+        recognition.onend = function() {
+            stopRecordingUI();
+        };
+    }
+
+    function toggleSpeechRecognition() {
+        if (!document.getElementById('apiKey').value) {
+            alert("Veuillez renseigner votre clé API Gemini.");
+            return;
+        }
+
+        if (isRecording) {
+            recognition.stop();
+        } else {
+            try {
+                recognition.start();
+                startRecordingUI();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
+
+    function startRecordingUI() {
+        isRecording = true;
+        const btn = document.getElementById('micBtn');
+        btn.classList.add('recording');
+        btn.innerText = "🛑 Écoute en cours... Cliquez pour stopper";
+        document.getElementById('statusText').innerText = "Parlez en néerlandais...";
+    }
+
+    function stopRecordingUI() {
+        isRecording = false;
+        const btn = document.getElementById('micBtn');
+        btn.classList.remove('recording');
+        btn.innerText = "🎤 Maintenir / Cliquer pour Parler";
+        document.getElementById('statusText').innerText = "Prêt";
+    }
+
+    function appendMessage(text, sender) {
+        const historyDiv = document.getElementById('chat-history');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${sender}`;
+        msgDiv.innerText = text;
+        historyDiv.appendChild(msgDiv);
+        historyDiv.scrollTop = historyDiv.scrollHeight;
+    }
+
+    // Appel à l'API Gemini (Modèle Flash gratuit/économique)
+    async function sendToGemini(userText) {
+        const apiKey = document.getElementById('apiKey').value;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+        // Ajout du message utilisateur à l'historique de l'API
+        conversationHistory.push({ role: "user", parts: [{ text: userText }] });
+
+        document.getElementById('statusText').innerText = "L'IA réfléchit...";
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: conversationHistory })
+            });
+
+            const data = await response.json();
+            if (data.candidates && data.candidates[0].content) {
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                
+                // Sauvegarde de la réponse dans l'historique
+                conversationHistory.push({ role: "model", parts: [{ text: aiResponse }] });
+
+                appendMessage(aiResponse, 'assistant');
+                speakText(aiResponse);
+                document.getElementById('statusText').innerText = "Prêt";
+            } else {
+                throw new Error("Réponse invalide de l'API");
+            }
+        } catch (error) {
+            console.error(error);
+            document.getElementById('statusText').innerText = "Erreur de communication avec l'API.";
+        }
+    }
+
+    // Synthèse vocale native du navigateur (Text-to-Speech)
+    function speakText(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // Stoppe la voix précédente si besoin
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'nl-NL'; // Langue cible : Néerlandais
+            if (dutchVoice) utterance.voice = dutchVoice; // force une vraie voix néerlandaise si disponible
+            utterance.rate = 0.95; // Légèrement plus lent pour l'apprentissage
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+</script>
+
+</body>
+</html>
