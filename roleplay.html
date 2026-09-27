@@ -370,7 +370,7 @@
     // Appel à l'API Gemini (Modèle Flash gratuit/économique)
     async function sendToGemini(userText) {
         const apiKey = document.getElementById('apiKey').value;
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
 
         // Ajout du message utilisateur à l'historique de l'API
         conversationHistory.push({ role: "user", parts: [{ text: userText }] });
@@ -385,9 +385,15 @@
             });
 
             const data = await response.json();
+
+            if (data.error) {
+                // L'API a répondu avec un message d'erreur explicite (clé invalide, quota, modèle inconnu, etc.)
+                throw new Error(data.error.message || "Erreur API inconnue");
+            }
+
             if (data.candidates && data.candidates[0].content) {
                 const aiResponse = data.candidates[0].content.parts[0].text;
-                
+
                 // Sauvegarde de la réponse dans l'historique
                 conversationHistory.push({ role: "model", parts: [{ text: aiResponse }] });
 
@@ -395,11 +401,11 @@
                 speakText(aiResponse);
                 document.getElementById('statusText').innerText = "Prêt";
             } else {
-                throw new Error("Réponse invalide de l'API");
+                throw new Error("Réponse invalide de l'API (pas de contenu retourné, peut-être bloqué par un filtre de sécurité)");
             }
         } catch (error) {
             console.error(error);
-            document.getElementById('statusText').innerText = "Erreur de communication avec l'API.";
+            document.getElementById('statusText').innerText = `Erreur : ${error.message}`;
         }
     }
 
