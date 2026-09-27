@@ -75,6 +75,26 @@
         .wl-badge.review { background: #ffe3b3; color: #b06d00; }
         .wl-badge.mastered { background: #d7f7c2; color: #2f7d00; }
         .wl-badge.true-mastered { background: #2f7d00; color: white; }
+
+        /* Jeu de rôle vocal (Pratique orale) */
+        .rp-category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; width: 100%; max-width: 500px; margin-top: 15px; }
+        .rp-cat-btn { padding: 18px 10px; border: 2px solid var(--border); border-radius: 15px; background: var(--card-bg); color: var(--text); cursor: pointer; text-align: center; font-weight: bold; font-size: 0.85rem; transition: transform 0.2s; }
+        .rp-cat-btn:active { transform: scale(0.95); }
+        .rp-cat-btn .rp-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+        .rp-group-title { font-size: 0.85rem; font-weight: bold; color: var(--primary); margin: 18px 0 8px; width: 100%; max-width: 500px; text-align: left; }
+        .rp-scenario-btn { display: block; width: 100%; max-width: 500px; padding: 12px 16px; margin-bottom: 8px; border: 2px solid var(--border); border-radius: 10px; background: var(--card-bg); color: var(--text); text-align: left; cursor: pointer; font-size: 0.85rem; box-sizing: border-box; }
+        .rp-scenario-btn:active { border-color: var(--primary); background: var(--bg); }
+        .rp-config-box { width: 100%; max-width: 500px; box-sizing: border-box; margin-bottom: 15px; padding: 15px; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); text-align: left; }
+        .rp-config-box label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.85rem; }
+        #rp-voice-warning { display: none; margin-top: 10px; padding: 10px; border-radius: 8px; background: #fef3c7; color: #92400e; font-size: 0.8rem; }
+        #rp-chat-history { width: 100%; max-width: 500px; height: 320px; overflow-y: auto; border: 2px solid var(--border); border-radius: 12px; padding: 15px; background: var(--card-bg); margin: 15px 0; display: flex; flex-direction: column; gap: 10px; box-sizing: border-box; }
+        .rp-message { padding: 10px 14px; border-radius: 12px; max-width: 80%; line-height: 1.4; font-size: 0.9rem; }
+        .rp-message.user { background: var(--primary); color: white; align-self: flex-end; }
+        .rp-message.assistant { background: var(--bg); color: var(--text); align-self: flex-start; border-left: 4px solid var(--primary); }
+        #rp-mic-btn { width: 100%; max-width: 500px; box-sizing: border-box; }
+        #rp-mic-btn.recording { background: var(--wrong); box-shadow: 0 4px 0 #c13a3a; animation: rp-pulse 1.5s infinite; }
+        @keyframes rp-pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+        #rp-status { text-align: center; font-size: 0.85rem; color: var(--text); opacity: 0.7; margin-top: 8px; width: 100%; max-width: 500px; }
     </style>
 </head>
 <body>
@@ -90,7 +110,7 @@
         <button onclick="showWordList()" id="nav-list"><span class="icon">📋</span>Mots</button>
         <button onclick="showProfil()" id="nav-profil"><span class="icon">👤</span>Profil</button>
         <button onclick="showInfo()" id="nav-info"><span class="icon">ℹ️</span>Infos</button>
-        <a href="roleplay.html"><span class="icon">🎙️</span>Jeu de rôle</a>
+        <button onclick="showRoleplay()" id="nav-roleplay"><span class="icon">🎙️</span>Jeu de rôle</button>
     </nav>
 
     <div id="home-view" class="view active">
@@ -103,35 +123,35 @@
             <div class="card-menu" style="grid-column: span 2; color:#0891b2;" id="theme-btn" onclick="toggleTheme()"></div>
         </div>
         <div class="grid" id="main-categories-grid"></div>
-        <h2 style="margin-top:40px;">Jeux & Défis</h2>
-        <div class="grid">
+
+        <h2 style="margin-top:40px;">🔁 Réviser</h2>
+        <div class="grid" style="margin-top:10px;">
+            <div class="card-menu" style="color:#ff8c00; grid-column: span 2;" onclick="startRevision()" id="revision-btn">🔁 Révision (0 mot)</div>
+        </div>
+        <div class="grid" style="margin-top:10px;">
+            <div class="card-menu" style="color:#9333ea; grid-column: span 2;" onclick="startArticleRevision()" id="article-revision-btn">🔤 Révision déterminants (0 mot)</div>
+        </div>
+
+        <h2 style="margin-top:40px;">🎮 Jeux & Défis</h2>
+        <div class="grid" style="margin-top:10px;">
             <div class="card-menu" style="color:var(--success)" onclick="startMemory()">🧩 Memory</div>
             <div class="card-menu" style="color:var(--wrong)" onclick="showTASelect()">⏱️ Contre-la-montre</div>
         </div>
         <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#7c3aed; grid-column: span 2;" onclick="startAnagram()">🔀 Mot mélangé</div>
+            <div class="card-menu" style="color:#7c3aed;" onclick="startAnagram()">🔀 Mot mélangé</div>
+            <div class="card-menu" style="color:#e11d48;" onclick="showSwipeSelect()">👉 Tri rapide (swipe)</div>
         </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#ff8c00; grid-column: span 2;" onclick="startRevision()" id="revision-btn">🔁 Révision (0 mot)</div>
-        </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#9333ea; grid-column: span 2;" onclick="startArticleRevision()" id="article-revision-btn">🔤 Révision déterminants (0 mot)</div>
-        </div>
-        <div class="grid" style="margin-top:15px;">
+
+        <h2 style="margin-top:40px;">🎯 S'évaluer</h2>
+        <div class="grid" style="margin-top:10px;">
             <div class="card-menu" style="color:#0a9396; grid-column: span 2;" onclick="showTestSelect()">🎯 Test de niveau</div>
         </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#8b5cf6; grid-column: span 2;" onclick="showProfil()">👤 Profil & Stats</div>
+
+        <h2 style="margin-top:40px;">🗣️ Pratique orale</h2>
+        <div class="grid" style="margin-top:10px;">
+            <div class="card-menu" style="color:var(--primary); grid-column: span 2;" onclick="showRoleplay()">🎙️ Jeu de rôle vocal</div>
         </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:var(--primary); grid-column: span 2;" onclick="showWordList()">📋 Liste des mots</div>
-        </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#e11d48; grid-column: span 2;" onclick="showSwipeSelect()">👉 Tri rapide (swipe)</div>
-        </div>
-        <div class="grid" style="margin-top:15px;">
-            <div class="card-menu" style="color:#0891b2; grid-column: span 2;" onclick="showInfo()">ℹ️ Infos & comment ça marche</div>
-        </div>
+
         <div id="theme-section" style="width:100%; max-width:500px;"></div>
         <div id="customlist-section" style="width:100%; max-width:500px;"></div>
         <div id="load-error"></div>
@@ -367,6 +387,42 @@
                     sens et pas encore dans l'autre.
                 </p>
             </div>
+        </div>
+    </div>
+
+    <div id="roleplay-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>🎙️ Pratique orale — Jeu de rôle</h2>
+
+        <div class="rp-config-box">
+            <label for="rp-api-key">Clé API Google Gemini (stockée uniquement dans ton navigateur) :</label>
+            <input type="password" id="rp-api-key" placeholder="Colle ta clé API Gemini ici..." onchange="rpSaveApiKey()">
+            <small style="color: var(--text); opacity:0.7;">Pas encore de clé ? <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">Obtiens-en une gratuitement sur Google AI Studio →</a></small>
+            <div id="rp-voice-warning"></div>
+        </div>
+
+        <!-- Étape 1 : choix de la catégorie -->
+        <div id="rp-step-category">
+            <div class="rp-category-grid">
+                <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens d'embauche</div>
+                <div class="rp-cat-btn" onclick="rpShowCategory('admin')"><span class="rp-icon">🏛️</span>Administration belge</div>
+                <div class="rp-cat-btn" onclick="rpShowCategory('appels')"><span class="rp-icon">☎️</span>Appels téléphoniques</div>
+                <div class="rp-cat-btn" onclick="rpShowCategory('quotidien')"><span class="rp-icon">☕</span>Vie quotidienne</div>
+            </div>
+        </div>
+
+        <!-- Étape 2 : choix du scénario précis dans la catégorie -->
+        <div id="rp-step-scenario" style="display:none; width:100%;">
+            <button class="back-btn" onclick="rpShowCategoryPicker()">← Autre catégorie</button>
+            <div id="rp-scenario-list" style="width:100%; display:flex; flex-direction:column; align-items:flex-start;"></div>
+        </div>
+
+        <!-- Étape 3 : conversation -->
+        <div id="rp-step-chat" style="display:none; width:100%; display:flex; flex-direction:column; align-items:center;">
+            <button class="back-btn" onclick="rpShowScenarioPicker()">← Changer de scénario</button>
+            <div id="rp-chat-history"></div>
+            <button id="rp-mic-btn" class="btn btn-green" onclick="rpToggleSpeechRecognition()">🎤 Cliquer pour parler</button>
+            <div id="rp-status">Prêt</div>
         </div>
     </div>
 
@@ -1919,6 +1975,328 @@
         document.getElementById('test-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') testCheckAns(); });
         document.getElementById('anagram-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') submitAnagramTyped(); });
 
+
+        // ==================== JEU DE RÔLE VOCAL (Pratique orale) ====================
+        let rpRecognition = null;
+        let rpIsRecording = false;
+        let rpConversationHistory = [];
+        let rpFinalTranscript = '';
+        let rpDutchVoice = null;
+        let rpCurrentCategory = null;
+        let rpCurrentScenario = null;
+
+        const RP_SCENARIOS = {
+            entretiens: {
+                label: "Entretiens d'embauche",
+                groups: [
+                    { title: "Supply Chain / Logistique", items: [
+                        { id: 'interview_sc_phone', label: '📞 Présélection téléphonique RH',
+                          welcome: "Goedendag, u spreekt met de personeelsdienst. Bedankt om tijd te maken voor dit korte telefonisch gesprek over de vacature Supply Chain medewerker. Kan u zich eerst kort voorstellen?",
+                          prompt: "Tu es un recruteur RH belge qui mène un entretien téléphonique de présélection (10-15 minutes) pour un poste de Junior Supply Chain / Logistics Coordinator. Parle exclusivement en néerlandais simple et clair (niveau B1). Pose des questions courtes et concrètes une par une : présentation rapide, disponibilité, motivation pour le poste, expérience en entrepôt/production/gestion des stocks, connaissance d'Excel ou SAP, mobilité, prétentions salariales. Reste bref, professionnel et efficace comme un vrai screening téléphonique, pas de questions techniques poussées à ce stade." },
+                        { id: 'interview_sc_technical', label: '🛠️ Entretien technique / cas pratique',
+                          welcome: "Hallo, fijn dat je kon komen. Vandaag wil ik dieper ingaan op je technische kennis rond supply chain en logistiek. Kan je een situatie beschrijven waarin je een voorraadprobleem hebt opgelost?",
+                          prompt: "Tu es un responsable Supply Chain/Logistique belge qui mène un entretien technique en néerlandais (niveau B1/B2) pour un poste de Junior Supply Chain Consultant/Coordinator. Pose des questions concrètes sur la gestion des stocks, les flux logistiques, l'amélioration continue (Lean), l'utilisation d'Excel/SAP/Power BI, et propose un petit cas pratique oral (ex: comment réagir à une rupture de stock, comment prioriser des livraisons en retard). Une question ou un cas à la fois, reste précis et exigeant mais bienveillant." },
+                        { id: 'interview_sc_final', label: '🤝 Entretien final avec le manager',
+                          welcome: "Goedendag, leuk je te ontmoeten. Ik ben de manager van het team. Laten we het hebben over hoe je zou passen binnen ons team en wat je verwachtingen zijn.",
+                          prompt: "Tu es le manager d'équipe Supply Chain qui mène l'entretien final en néerlandais (niveau B1/B2) pour un poste de Junior Supply Chain/Logistics. Concentre-toi sur l'adéquation culturelle, la motivation à long terme, la disponibilité, les attentes salariales, la capacité d'apprentissage rapide, et termine par les prochaines étapes. Ton plus posé et conversationnel qu'un entretien technique, une question à la fois." }
+                    ]},
+                    { title: "Consultance / SAP / ERP / Power BI", items: [
+                        { id: 'interview_consult_phone', label: '📞 Présélection téléphonique RH',
+                          welcome: "Goedendag, bedankt voor je interesse in onze consultancyvacature. Ik doe graag een korte telefonische kennismaking. Kan je jezelf even voorstellen?",
+                          prompt: "Tu es un recruteur RH belge en cabinet de consultance qui fait une présélection téléphonique (10-15 min) pour un poste de Junior Consultant SAP/ERP/Power BI. Parle en néerlandais simple (B1). Pose des questions courtes sur le parcours, la motivation pour la consultance, la disponibilité pour des déplacements chez le client, les bases en gestion de projet/data/Excel/Power BI, et les attentes salariales. Une question à la fois, reste bref et professionnel." },
+                        { id: 'interview_consult_technical', label: '🛠️ Entretien technique / cas pratique',
+                          welcome: "Hallo, laten we het hebben over je analytisch denken. Stel: een klant heeft een probleem met zijn voorraadbeheer in SAP. Hoe zou je dat aanpakken?",
+                          prompt: "Tu es un senior consultant belge qui mène un entretien technique en néerlandais (B1/B2) pour un poste de Junior Consultant SAP/ERP/Power BI. Pose des questions sur la résolution de problèmes analytiques, la structuration d'une démarche de conseil, la relation client, et propose un mini cas pratique orienté data/process (ex: comment structurer un tableau de bord Power BI, comment gérer un client mécontent). Une question/cas à la fois, ton exigeant mais constructif." },
+                        { id: 'interview_consult_final', label: '🤝 Entretien final avec le manager',
+                          welcome: "Fijn je te ontmoeten. Ik wil vooral weten of je je goed zou voelen bij ons op lange termijn. Vertel me over je verwachtingen.",
+                          prompt: "Tu es un manager/partner de cabinet de consultance qui mène l'entretien final en néerlandais (B1/B2) pour un poste de Junior Consultant. Aborde la culture du cabinet (rythme, déplacements clients, esprit d'équipe), les perspectives d'évolution, les attentes salariales, la disponibilité, et conclus par les prochaines étapes. Ton conversationnel, une question à la fois." }
+                    ]},
+                    { title: "Recrutement / RH", items: [
+                        { id: 'interview_hr_phone', label: '📞 Présélection téléphonique RH',
+                          welcome: "Goedendag, bedankt om te bellen voor de functie in werving en selectie. Kan je me kort vertellen waarom deze functie je aanspreekt?",
+                          prompt: "Tu es un recruteur RH belge qui fait une présélection téléphonique (10-15 min) pour un poste de Junior Recruitment/Talent Consultant. Parle en néerlandais simple (B1). Pose des questions courtes sur la motivation pour le recrutement/RH, l'expérience en communication/persuasion/contact client, la disponibilité, et les attentes salariales. Une question à la fois, ton dynamique et bref." },
+                        { id: 'interview_hr_technical', label: '🛠️ Mises en situation',
+                          welcome: "Hallo, stel je voor: je moet een kandidaat overtuigen om een sollicitatiegesprek te plannen, maar hij twijfelt. Hoe pak je dat aan?",
+                          prompt: "Tu es un responsable recrutement belge qui mène un entretien basé sur des mises en situation, en néerlandais (B1/B2), pour un poste de Junior Recruitment/Talent Consultant. Propose des mises en situation orales concrètes (convaincre un candidat hésitant, gérer un refus, faire correspondre un profil à une offre, relancer un client) et évalue la communication, la persuasion et la gestion du refus. Une mise en situation à la fois, ton dynamique et exigeant." },
+                        { id: 'interview_hr_final', label: '🤝 Entretien final avec le manager',
+                          welcome: "Leuk je te ontmoeten. Vertel me eens hoe je jezelf over vijf jaar ziet binnen recruitment.",
+                          prompt: "Tu es le manager de l'équipe recrutement qui mène l'entretien final en néerlandais (B1/B2) pour un poste de Junior Recruitment/HR Consultant. Aborde la vision à long terme, la culture d'équipe orientée objectifs/résultats, les attentes salariales, la disponibilité, et conclus par les prochaines étapes. Ton chaleureux et conversationnel, une question à la fois." }
+                    ]}
+                ]
+            },
+            admin: {
+                label: "Administration belge",
+                items: [
+                    { id: 'admin_cpas', label: '🏢 CPAS',
+                      welcome: "Goedendag, loket OCMW. Waarmee kan ik u vandaag helpen?",
+                      prompt: "Tu es un employé du CPAS (OCMW) en Belgique. Accueille la personne en néerlandais simple (B1), demande la raison de sa visite (démarche administrative générale, pas de cas personnel précis), et pose les questions typiques d'un rendez-vous administratif (documents nécessaires, situation, prochaine étape). Une question à la fois, ton neutre et professionnel." },
+                    { id: 'admin_medecin', label: '🩺 Visite médicale',
+                      welcome: "Goedendag, komt u binnen. Wat kan ik voor u doen vandaag?",
+                      prompt: "Tu es un médecin généraliste belge qui reçoit un patient en consultation. Parle en néerlandais simple (B1), pose des questions typiques de consultation (motif de la visite, symptômes généraux bénins comme un rhume ou une douleur légère, depuis quand, antécédents simples) et donne des conseils/une ordonnance fictive à la fin. Reste sur des symptômes bénins et génériques, une question à la fois, ton rassurant et professionnel." },
+                    { id: 'admin_mutuelle', label: '💳 Mutuelle',
+                      welcome: "Goedendag, u spreekt met uw ziekenfonds. Waarmee kan ik u helpen?",
+                      prompt: "Tu es un employé d'une mutuelle belge (ziekenfonds) au téléphone ou au guichet. Parle en néerlandais simple (B1), aide la personne sur des questions courantes : remboursement de frais médicaux, affiliation, carte européenne d'assurance maladie, documents à fournir. Pose une question à la fois pour bien comprendre la demande, ton serviable et clair." },
+                    { id: 'admin_commune', label: '🏛️ Commune',
+                      welcome: "Goedendag, loket van de gemeente. Waarmee kan ik u vandaag helpen?",
+                      prompt: "Tu es un employé communal en Belgique. Accueille l'habitant en néerlandais simple (B1) et demande la raison de sa visite administrative (changement d'adresse, carte d'identité, composition de ménage, etc.), une question à la fois, ton neutre et professionnel." }
+                ]
+            },
+            appels: {
+                label: "Appels téléphoniques",
+                items: [
+                    { id: 'call_standard', label: '☎️ Standard d\'une entreprise',
+                      welcome: "Goedendag, u spreekt met het onthaal van het bedrijf. Waarmee kan ik u helpen?",
+                      prompt: "Tu es la standardiste/le standardiste d'une entreprise belge qui répond au téléphone. Parle en néerlandais simple (B1). L'utilisateur appelle pour une raison à préciser (transfert vers un service, demande d'information générale) — pose des questions pour comprendre sa demande et le rediriger ou répondre, une question à la fois, ton professionnel et courtois." },
+                    { id: 'call_rdv', label: '📅 Prise de rendez-vous',
+                      welcome: "Goedendag, met wie spreek ik en waarvoor wenst u een afspraak?",
+                      prompt: "Tu es une secrétaire/un secrétaire belge qui gère la prise de rendez-vous par téléphone (cabinet, administration ou entreprise, contexte neutre). Parle en néerlandais simple (B1), demande le motif du rendez-vous, les disponibilités de la personne, ses coordonnées, et confirme un créneau à la fin. Une question à la fois, ton efficace et aimable." },
+                    { id: 'call_suivi_candidature', label: '📄 Suivi de candidature',
+                      welcome: "Goedendag, u spreekt met de personeelsdienst. U belde ons over de stand van uw sollicitatie, klopt dat?",
+                      prompt: "Tu es un recruteur/une recruteuse belge qui répond à un appel de suivi de candidature. Parle en néerlandais simple (B1). Demande poliment de préciser pour quel poste et quand la candidature a été envoyée, donne une réponse réaliste et variable (dossier en cours d'examen, entretien à prévoir, ou décision encore en attente), et reste courtois même sans réponse définitive. Une question/réponse à la fois, ton professionnel et bienveillant." }
+                ]
+            },
+            quotidien: {
+                label: "Vie quotidienne",
+                items: [
+                    { id: 'cafe', label: '☕ Au café / Resto',
+                      welcome: "Goedendag! Wat kan ik u vandaag aanbieden?",
+                      prompt: "Tu es un serveur dans un café en Flandre. Accueille le client en néerlandais simple (B1), prends sa commande, réponds à ses questions sur le menu, une réponse/question à la fois, ton amical et naturel." }
+                ]
+            }
+        };
+
+        function rpFindScenario(catKey, itemId) {
+            const cat = RP_SCENARIOS[catKey];
+            if (!cat) return null;
+            const list = cat.groups ? cat.groups.flatMap(g => g.items) : cat.items;
+            return list.find(i => i.id === itemId) || null;
+        }
+
+        function rpSaveApiKey() {
+            localStorage.setItem('gemini_api_key', document.getElementById('rp-api-key').value);
+        }
+
+        function rpCheckDutchVoice() {
+            if (!('speechSynthesis' in window)) return;
+            const findVoice = () => {
+                const voices = window.speechSynthesis.getVoices();
+                rpDutchVoice = voices.find(v => v.lang.toLowerCase().startsWith('nl')) || null;
+                const warningDiv = document.getElementById('rp-voice-warning');
+                if (!warningDiv) return;
+                if (!rpDutchVoice) {
+                    warningDiv.style.display = 'block';
+                    warningDiv.innerHTML = "⚠️ Aucune voix néerlandaise installée sur cet appareil — le texte sera lu avec une voix par défaut. "
+                        + "<br>Windows : Paramètres → Heure et langue → Voix, ajoute \"Nederlands\". "
+                        + "<br>Mac : Réglages système → Accessibilité → Contenu énoncé, ajoute une voix néerlandaise. "
+                        + "<br>Android/Chrome : Paramètres → Accessibilité → Synthèse vocale, installe les données néerlandaises.";
+                } else {
+                    warningDiv.style.display = 'none';
+                }
+            };
+            findVoice();
+            window.speechSynthesis.onvoiceschanged = findVoice;
+        }
+
+        function rpInitSpeechRecognition() {
+            window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!window.SpeechRecognition) return; // le message d'erreur s'affichera au clic si besoin
+
+            rpRecognition = new SpeechRecognition();
+            rpRecognition.lang = 'nl-NL';
+            rpRecognition.continuous = true; // ne coupe pas à la première pause : on gère l'arrêt via le bouton
+            rpRecognition.interimResults = true;
+            rpRecognition.maxAlternatives = 1;
+
+            rpRecognition.onresult = function(event) {
+                let interim = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        rpFinalTranscript += transcript + ' ';
+                    } else {
+                        interim += transcript;
+                    }
+                }
+                document.getElementById('rp-status').innerText = "🎤 " + ((rpFinalTranscript + interim).trim() || '...');
+            };
+
+            rpRecognition.onerror = function(event) {
+                document.getElementById('rp-status').innerText = "Erreur de reconnaissance vocale : " + event.error;
+                rpStopRecordingUI();
+            };
+
+            rpRecognition.onend = function() {
+                rpStopRecordingUI();
+                const text = rpFinalTranscript.trim();
+                rpFinalTranscript = '';
+                if (text) {
+                    rpAppendMessage(text, 'user');
+                    rpSendToGemini(text);
+                }
+            };
+        }
+
+        function rpToggleSpeechRecognition() {
+            if (!window.SpeechRecognition) {
+                alert("Ton navigateur ne supporte pas la reconnaissance vocale. Utilise Google Chrome.");
+                return;
+            }
+            if (!document.getElementById('rp-api-key').value) {
+                alert("Renseigne d'abord ta clé API Gemini en haut de la page.");
+                return;
+            }
+            if (rpIsRecording) {
+                rpRecognition.stop();
+            } else {
+                try {
+                    rpFinalTranscript = '';
+                    rpRecognition.start();
+                    rpStartRecordingUI();
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+
+        function rpStartRecordingUI() {
+            rpIsRecording = true;
+            const btn = document.getElementById('rp-mic-btn');
+            btn.classList.add('recording');
+            btn.innerText = "🛑 Écoute en cours... Cliquer pour stopper";
+            document.getElementById('rp-status').innerText = "Parle en néerlandais...";
+        }
+
+        function rpStopRecordingUI() {
+            rpIsRecording = false;
+            const btn = document.getElementById('rp-mic-btn');
+            btn.classList.remove('recording');
+            btn.innerText = "🎤 Cliquer pour parler";
+            document.getElementById('rp-status').innerText = "Prêt";
+        }
+
+        function rpAppendMessage(text, sender) {
+            const historyDiv = document.getElementById('rp-chat-history');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `rp-message ${sender}`;
+            msgDiv.innerText = text;
+            historyDiv.appendChild(msgDiv);
+            historyDiv.scrollTop = historyDiv.scrollHeight;
+        }
+
+        async function rpSendToGemini(userText) {
+            const apiKey = document.getElementById('rp-api-key').value;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
+
+            rpConversationHistory.push({ role: "user", parts: [{ text: userText }] });
+            document.getElementById('rp-status').innerText = "L'IA réfléchit...";
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: rpConversationHistory })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error.message || "Erreur API inconnue");
+                }
+
+                if (data.candidates && data.candidates[0].content) {
+                    const aiResponse = data.candidates[0].content.parts[0].text;
+                    rpConversationHistory.push({ role: "model", parts: [{ text: aiResponse }] });
+                    rpAppendMessage(aiResponse, 'assistant');
+                    rpSpeakText(aiResponse);
+                    document.getElementById('rp-status').innerText = "Prêt";
+                } else {
+                    throw new Error("Réponse invalide de l'API (pas de contenu retourné, peut-être bloqué par un filtre de sécurité)");
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('rp-status').innerText = `Erreur : ${error.message}`;
+            }
+        }
+
+        function rpSpeakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'nl-NL';
+                if (rpDutchVoice) utterance.voice = rpDutchVoice;
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showRoleplay() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('roleplay-view').classList.add('active');
+            setActiveNav('nav-roleplay');
+
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (savedKey) document.getElementById('rp-api-key').value = savedKey;
+
+            rpShowCategoryPicker();
+        }
+
+        function rpShowCategoryPicker() {
+            document.getElementById('rp-step-category').style.display = '';
+            document.getElementById('rp-step-scenario').style.display = 'none';
+            document.getElementById('rp-step-chat').style.display = 'none';
+        }
+
+        function rpShowCategory(catKey) {
+            rpCurrentCategory = catKey;
+            const cat = RP_SCENARIOS[catKey];
+            const listDiv = document.getElementById('rp-scenario-list');
+            let html = '';
+            if (cat.groups) {
+                cat.groups.forEach(group => {
+                    html += `<div class="rp-group-title">${group.title}</div>`;
+                    group.items.forEach(item => {
+                        html += `<button class="rp-scenario-btn" onclick="rpStartScenario('${catKey}','${item.id}')">${item.label}</button>`;
+                    });
+                });
+            } else {
+                cat.items.forEach(item => {
+                    html += `<button class="rp-scenario-btn" onclick="rpStartScenario('${catKey}','${item.id}')">${item.label}</button>`;
+                });
+            }
+            listDiv.innerHTML = html;
+
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+        }
+
+        function rpShowScenarioPicker() {
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            if (rpCurrentCategory) {
+                rpShowCategory(rpCurrentCategory);
+            } else {
+                rpShowCategoryPicker();
+            }
+        }
+
+        function rpStartScenario(catKey, itemId) {
+            const scenario = rpFindScenario(catKey, itemId);
+            if (!scenario) return;
+            rpCurrentScenario = scenario;
+            rpConversationHistory = [{ role: "model", parts: [{ text: scenario.prompt }] }];
+
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = 'none';
+            document.getElementById('rp-step-chat').style.display = 'flex';
+
+            document.getElementById('rp-chat-history').innerHTML = '';
+            rpAppendMessage(scenario.welcome, 'assistant');
+            rpSpeakText(scenario.welcome);
+            document.getElementById('rp-status').innerText = "Prêt";
+        }
+
+        rpInitSpeechRecognition();
+        rpCheckDutchVoice();
         init();
     </script>
 </body>
