@@ -1,6 +1,0 @@
-[
-  { "id": "A1", "label": "Fondations", "order": 1 },
-  { "id": "A2", "label": "Consolidation", "order": 2 },
-  { "id": "B1", "label": "Autonomie", "order": 3 },
-  { "id": "B2", "label": "Maîtrise avancée", "order": 4 }
-]
