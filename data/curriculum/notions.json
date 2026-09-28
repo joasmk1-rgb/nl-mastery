@@ -1500,314 +1500,6 @@
       "ex_villeadmin_2"
     ]
   },
-  "nuances_temps": {
-    "level": "B2",
-    "module": "b2-m1",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "passif_avance": {
-    "level": "B2",
-    "module": "b2-m1",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "conditionnel_avance": {
-    "level": "B2",
-    "module": "b2-m1",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "discours_rapporte_avance": {
-    "level": "B2",
-    "module": "b2-m1",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "structures_impersonnelles": {
-    "level": "B2",
-    "module": "b2-m1",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "registre_formel_informel": {
-    "level": "B2",
-    "module": "b2-m2",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "expressions_figees": {
-    "level": "B2",
-    "module": "b2-m2",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "collocations": {
-    "level": "B2",
-    "module": "b2-m2",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "nuances_synonymes": {
-    "level": "B2",
-    "module": "b2-m2",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "formulations_idiomatiques": {
-    "level": "B2",
-    "module": "b2-m2",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "connecteurs_complexes": {
-    "level": "B2",
-    "module": "b2-m3",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "ordre_mots_avance": {
-    "level": "B2",
-    "module": "b2-m3",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "nominalisation_avancee": {
-    "level": "B2",
-    "module": "b2-m3",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "argumenter": {
-    "level": "B2",
-    "module": "b2-m4",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "debattre": {
-    "level": "B2",
-    "module": "b2-m4",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "defendre_position": {
-    "level": "B2",
-    "module": "b2-m4",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "analyser_probleme": {
-    "level": "B2",
-    "module": "b2-m4",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "proposer_solution": {
-    "level": "B2",
-    "module": "b2-m4",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "expliquer_avantages_inconvenients": {
-    "level": "B2",
-    "module": "b2-m4",
-    "skills": [
-      "grammaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "presenter_projet": {
-    "level": "B2",
-    "module": "b2-m5",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "reunion_avancee": {
-    "level": "B2",
-    "module": "b2-m5",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "negociation": {
-    "level": "B2",
-    "module": "b2-m5",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "presentation_professionnelle": {
-    "level": "B2",
-    "module": "b2-m5",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "email_professionnel_complexe": {
-    "level": "B2",
-    "module": "b2-m5",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "rapport": {
-    "level": "B2",
-    "module": "b2-m6",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "synthese": {
-    "level": "B2",
-    "module": "b2-m6",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "entretien_embauche_avance": {
-    "level": "B2",
-    "module": "b2-m6",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
-  "communication_collegues_clients": {
-    "level": "B2",
-    "module": "b2-m6",
-    "skills": [
-      "vocabulaire"
-    ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
-  },
   "perfectum_tous_verbes": {
     "level": "A2",
     "module": "a2-m1",
@@ -4705,6 +4397,1616 @@
       "ex_b1_missionfin1",
       "ex_b1_missionfin2",
       "ex_b1_missionfin3"
+    ]
+  },
+  "nuances_temps": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "perfectum_imperfectum_recit",
+      "chronologie_avancee"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Nuances dans les temps du passé",
+      "objectif": "Choisir entre perfectum, imperfectum et plus-que-parfait selon la perspective du locuteur et la structure du récit, au-delà d'une règle mécanique.",
+      "objectifCommunication": "Structurer un récit complexe en distinguant clairement l'arrière-plan, les événements, les états et les durées.",
+      "comprendre": "À ce niveau, le choix du temps n'est plus une simple règle (fait ponctuel vs contexte, vu en A2/B1) : c'est une décision liée à la PERSPECTIVE. Le plus-que-parfait (had/was + participe) situe un fait antérieur à un autre fait déjà passé, permettant de revenir en arrière dans un récit sans le raconter dans l'ordre chronologique strict. L'imperfectum sert aussi à décrire un état ou une durée qui sert d'arrière-plan, tandis que le perfectum marque les événements qui font avancer le récit.",
+      "regle": "Arrière-plan/état/durée : imperfectum. Événement qui avance le récit : perfectum. Fait antérieur à un autre fait passé : plus-que-parfait (had/was + participe). Toen ik aankwam, was de vergadering al begonnen (le début de la réunion précède mon arrivée).",
+      "exemples": [
+        "Toen ik aankwam, was de vergadering al begonnen. (plus-que-parfait : antériorité)",
+        "Ik werkte al drie jaar bij dat bedrijf toen ik ontslag nam. (imperfectum : durée/état de fond)",
+        "Ik heb ontslag genomen. (perfectum : événement qui avance le récit)",
+        "Ze was moe, want ze had de hele nacht doorgewerkt."
+      ],
+      "contrastes": "Perfectum = ce qui fait avancer l'histoire. Imperfectum = le décor, l'état, la durée pendant laquelle ça se passe. Plus-que-parfait = ce qui s'est passé AVANT le moment du récit déjà évoqué — sans lui, l'auditeur croirait que les faits sont dans l'ordre chronologique.",
+      "erreursFrequentes": [
+        "Raconter deux événements dans l'ordre inverse de leur survenue sans utiliser le plus-que-parfait pour signaler l'antériorité, ce qui rend la chronologie confuse.",
+        "Utiliser systématiquement le perfectum même pour l'arrière-plan/la durée, ce qui aplatit le récit.",
+        "Réduire ce choix à une règle mécanique alors qu'il dépend de l'intention narrative du locuteur."
+      ],
+      "vocabulaire": [
+        "een achtergrond",
+        "een gebeurtenis",
+        "een toestand",
+        "voorafgaand aan"
+      ],
+      "tacheProduction": "Vertel een gebeurtenis uit je leven waarin je moet terugkomen op iets wat al eerder was gebeurd. Gebruik bewust perfectum, imperfectum én plus-que-parfait (5-6 zinnen).",
+      "criteresMaitrise": "Utiliser à bon escient les trois temps du passé dans un récit cohérent, en particulier le plus-que-parfait pour marquer une antériorité, et pouvoir expliquer pourquoi ce choix a été fait."
+    },
+    "exerciseIds": [
+      "ex_b2_nuatps1",
+      "ex_b2_nuatps2",
+      "ex_b2_nuatps3",
+      "ex_b2_nuatps4"
+    ]
+  },
+  "passif_worden_zijn": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "perfectum_tous_verbes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Passif avec worden et zijn",
+      "objectif": "Distinguer le passif d'action/processus (worden) du passif d'état résultant (zijn).",
+      "objectifCommunication": "Décrire une action en cours de réalisation ou son résultat, sans nécessairement préciser qui agit.",
+      "comprendre": "Le néerlandais a deux passifs distincts, là où le français n'en a souvent qu'un : 'worden' + participe décrit le PROCESSUS, l'action en train de se faire (l'équivalent d'un passif dynamique). 'Zijn' + participe décrit l'ÉTAT RÉSULTANT, la situation une fois l'action terminée.",
+      "regle": "worden + participe = processus/événement (Het contract wordt ondertekend = la signature est en train de se faire). zijn + participe = état résultant (Het contract is ondertekend = le contrat est déjà signé, on décrit le résultat).",
+      "exemples": [
+        "Het contract wordt ondertekend. (processus, en cours)",
+        "Het contract is ondertekend. (état résultant, déjà fait)",
+        "Het project werd vorig jaar gestart. (processus au passé : imperfectum de worden)",
+        "De deur wordt gesloten. vs De deur is gesloten."
+      ],
+      "contrastes": "'Wordt ondertekend' (ça se signe maintenant/bientôt) vs 'is ondertekend' (c'est déjà signé) : le français traduit souvent les deux par 'est signé', ce qui masque une vraie différence de sens en néerlandais.",
+      "erreursFrequentes": [
+        "Utiliser 'zijn' pour décrire un processus en cours, ce qui donne l'impression que l'action est déjà terminée.",
+        "Traduire mécaniquement le passif français par 'worden' dans tous les cas, sans vérifier s'il s'agit d'un état résultant."
+      ],
+      "vocabulaire": [
+        "worden",
+        "een proces",
+        "een resultaat",
+        "ondertekenen"
+      ],
+      "tacheProduction": "Schrijf drie zinnen met 'worden' (proces) en de bijbehorende zin met 'zijn' (resultaat) voor hetzelfde feit.",
+      "criteresMaitrise": "Distinguer et produire correctement le passif de processus (worden) et le passif d'état (zijn) selon le sens voulu."
+    },
+    "exerciseIds": [
+      "ex_b2_passwz1",
+      "ex_b2_passwz2",
+      "ex_b2_passwz3",
+      "ex_b2_passwz4"
+    ]
+  },
+  "passif_avance": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "passif_worden_zijn",
+      "modaux_infinitif_perfectum"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Passif avancé (modaux, perfectum, subordonnées)",
+      "objectif": "Combiner le passif avec des verbes modaux, le perfectum et des subordonnées.",
+      "objectifCommunication": "Exprimer des obligations, possibilités ou regrets concernant une action non réalisée par le sujet lui-même.",
+      "comprendre": "Le passif se combine avec les modaux (moeten, kunnen) et avec le perfectum, créant des chaînes de plusieurs verbes qui suivent des règles précises de position, en particulier dans une subordonnée.",
+      "regle": "Modal + passif : moeten/kunnen + worden + participe (fin). Perfectum du passif : is/zijn + participe + geworden (souvent omis à l'oral : is opgelost). Combinaison complexe : Het probleem had eerder opgelost moeten worden (plus-que-parfait + modal + passif, quatre éléments en fin de phrase).",
+      "exemples": [
+        "Het probleem moet opgelost worden.",
+        "Het probleem had eerder opgelost moeten worden.",
+        "Ik denk dat het rapport morgen afgerond moet worden. (passif + modal dans une bijzin)",
+        "De regels kunnen aangepast worden."
+      ],
+      "contrastes": "'Het probleem moet opgelost worden' (obligation actuelle) vs 'Het probleem had eerder opgelost moeten worden' (regret/critique sur une obligation passée non remplie) : la richesse de la combinaison permet d'exprimer des nuances impossibles avec un passif simple.",
+      "erreursFrequentes": [
+        "Se perdre dans l'ordre des éléments en fin de phrase avec 3-4 verbes empilés (modal + participe + worden).",
+        "Oublier 'worden' en combinant modal et passif, ce qui transforme la phrase en actif."
+      ],
+      "vocabulaire": [
+        "moeten worden",
+        "opgelost",
+        "aangepast",
+        "een verplichting"
+      ],
+      "tacheProduction": "Schrijf twee zinnen over een probleem op het werk: één met 'moet opgelost worden' en één met 'had eerder opgelost moeten worden' (regret).",
+      "criteresMaitrise": "Construire correctement une phrase au passif combinée à un modal, y compris au plus-que-parfait exprimant un regret."
+    },
+    "exerciseIds": [
+      "ex_b2_passav1",
+      "ex_b2_passav2",
+      "ex_b2_passav3",
+      "ex_b2_passav4"
+    ]
+  },
+  "conditionnel_avance": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "zouden_intro",
+      "formulations_indirectes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Conditionnel et hypothèse avancés",
+      "objectif": "Approfondir zou/zouden pour exprimer une hypothèse réelle ou irréelle, une possibilité, un conseil, une prudence ou un regret.",
+      "objectifCommunication": "Envisager des scénarios hypothétiques, présents ou passés, et exprimer un regret sur une décision passée.",
+      "comprendre": "Le B1 a introduit 'zou(den)' pour la politesse, le souhait et le conseil. Le B2 étend son usage aux hypothèses complètes avec 'als' : une hypothèse réelle/possible au présent ('als + imperfectum, zou + infinitif') et une hypothèse irréelle sur le passé, exprimant souvent un regret ('als + plus-que-parfait, zou + hebben/zijn + participe').",
+      "regle": "Hypothèse présente : Als ik meer tijd had, zou ik dat doen. Hypothèse passée (regret) : Als ik dat eerder had geweten, zou ik anders hebben gehandeld.",
+      "exemples": [
+        "Als ik meer tijd had, zou ik dat doen.",
+        "Als ik dat eerder had geweten, zou ik anders hebben gehandeld.",
+        "Als hij het had gevraagd, had ik hem geholpen. (variante sans 'zou', plus-que-parfait des deux côtés)",
+        "Dat zou een goede oplossing kunnen zijn."
+      ],
+      "contrastes": "'Als ik meer tijd had, zou ik dat doen' (hypothèse présente, encore possible) vs 'Als ik dat eerder had geweten, zou ik anders hebben gehandeld' (hypothèse passée, irréelle, regret — le moment est passé, on ne peut plus agir autrement).",
+      "erreursFrequentes": [
+        "Mélanger les temps entre la partie 'als' et la partie 'zou' (utiliser le présent dans l'une et le passé dans l'autre).",
+        "Oublier que l'hypothèse passée avec 'zou' se construit avec 'zou hebben/zijn + participe', pas seulement 'zou + infinitif'."
+      ],
+      "vocabulaire": [
+        "een hypothese",
+        "een spijt",
+        "voorzichtigheid",
+        "anders handelen"
+      ],
+      "tacheProduction": "Schrijf twee hypothetische zinnen: één over het heden ('Als ik... zou ik...') en één over het verleden met spijt ('Als ik... had ik...').",
+      "criteresMaitrise": "Construire correctement une hypothèse présente et une hypothèse passée (regret), en accordant les temps dans les deux parties de la phrase."
+    },
+    "exerciseIds": [
+      "ex_b2_condav1",
+      "ex_b2_condav2",
+      "ex_b2_condav3",
+      "ex_b2_condav4"
+    ]
+  },
+  "discours_rapporte_avance": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "perfectum_bijzin",
+      "connecteurs_temporels"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Discours rapporté",
+      "objectif": "Transformer un discours direct en discours indirect en ajustant personnes, temps, références temporelles et modalité.",
+      "objectifCommunication": "Rapporter les paroles de quelqu'un de façon fluide, en particulier dans un contexte professionnel (rapporter ce qu'un collègue ou client a dit).",
+      "comprendre": "Rapporter un discours ne consiste pas seulement à ajouter 'dat' : il faut aussi changer les pronoms personnels (ik → hij/zij), reculer les temps d'un cran si le verbe introducteur est au passé (présent → imperfectum, futur → conditionnel), et adapter les références temporelles (morgen → de volgende dag, vandaag → die dag).",
+      "regle": "Direct : Hij zegt: \"Ik kom morgen.\" Indirect (verbe introducteur au présent) : Hij zegt dat hij morgen komt. Indirect (verbe introducteur au passé) : Hij zei dat hij de volgende dag zou komen (présent → imperfectum-like/futur→conditionnel, morgen → de volgende dag).",
+      "exemples": [
+        "Hij zegt: \"Ik kom morgen.\" → Hij zegt dat hij morgen komt.",
+        "Hij zei dat hij de volgende dag zou komen.",
+        "Ze zei: \"Ik heb het gedaan.\" → Ze zei dat ze het had gedaan.",
+        "Hij vroeg of ik hem kon helpen."
+      ],
+      "contrastes": "Rapporter au présent ('zegt dat... komt') garde les temps ; rapporter au passé ('zei dat... zou komen') recule tout d'un cran ET change les références temporelles ('morgen' devient 'de volgende dag') — c'est ce deuxième cas qui pose le plus de difficulté.",
+      "erreursFrequentes": [
+        "Oublier de changer la référence temporelle ('morgen' reste 'morgen' au lieu de 'de volgende dag') quand on rapporte au passé.",
+        "Ne pas ajuster la personne du pronom (garder 'ik' au lieu de 'hij/zij').",
+        "Oublier de transformer une question directe en subordonnée avec 'of' ou un mot interrogatif, sans inversion."
+      ],
+      "vocabulaire": [
+        "direct discours",
+        "indirect discours",
+        "de volgende dag",
+        "achteraf"
+      ],
+      "tacheProduction": "Neem drie uitspraken van een collega (verzin ze) en rapporteer ze indirect, zowel in het heden als vanuit het verleden.",
+      "criteresMaitrise": "Transformer correctement un discours direct en discours indirect en ajustant personne, temps et références temporelles selon le contexte."
+    },
+    "exerciseIds": [
+      "ex_b2_discrap1",
+      "ex_b2_discrap2",
+      "ex_b2_discrap3",
+      "ex_b2_discrap4"
+    ]
+  },
+  "structures_impersonnelles": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "passif_worden_zijn"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Structures impersonnelles",
+      "objectif": "Comprendre et produire des formulations impersonnelles et professionnelles qui évitent de désigner un sujet précis.",
+      "objectifCommunication": "S'exprimer de façon neutre et professionnelle, en particulier pour rapporter une information générale ou une impression sans l'attribuer à quelqu'un en particulier.",
+      "comprendre": "Ces structures permettent de présenter une information comme générale, rapportée ou probable, sans dire qui exactement l'affirme ou la pense — utile pour un registre professionnel ou pour nuancer une affirmation.",
+      "regle": "Er wordt gezegd dat... (on dit que, rumeur/info générale). Het blijkt dat... (il s'avère que, constat). Het lijkt erop dat... (il semble que, impression). Men verwacht dat... (on s'attend à ce que, prévision générale).",
+      "exemples": [
+        "Er wordt gezegd dat het bedrijf gaat verhuizen.",
+        "Het blijkt dat er een fout is gemaakt.",
+        "Het lijkt erop dat de situatie verbetert.",
+        "Men verwacht dat de prijzen zullen stijgen."
+      ],
+      "contrastes": "'Er wordt gezegd dat...' (rumeur/ce qu'on rapporte, sans confirmer) vs 'Het blijkt dat...' (un fait constaté, plus fiable) vs 'Het lijkt erop dat...' (une impression, moins certaine) : ces nuances de certitude sont essentielles en registre professionnel.",
+      "erreursFrequentes": [
+        "Confondre 'het blijkt dat' (constat objectif) et 'het lijkt erop dat' (simple impression) alors qu'ils n'ont pas le même degré de certitude.",
+        "Utiliser 'men' de façon trop familière, alors qu'il appartient à un registre plutôt neutre/écrit."
+      ],
+      "vocabulaire": [
+        "er wordt gezegd",
+        "het blijkt",
+        "het lijkt erop",
+        "men verwacht"
+      ],
+      "tacheProduction": "Herschrijf drie persoonlijke meningen ('Ik denk dat...') als onpersoonlijke, professionele formuleringen.",
+      "criteresMaitrise": "Utiliser correctement au moins 3 structures impersonnelles selon le degré de certitude voulu (rumeur, constat, impression, prévision)."
+    },
+    "exerciseIds": [
+      "ex_b2_structimp1",
+      "ex_b2_structimp2",
+      "ex_b2_structimp3"
+    ]
+  },
+  "registre_formel_informel": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "registre"
+    ],
+    "prerequisites": [
+      "zouden_intro",
+      "formulations_indirectes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Formel vs informel",
+      "objectif": "Adapter sa formulation selon l'interlocuteur (ami, collègue, employeur, administration, client), sans jugement de valeur sur les registres.",
+      "objectifCommunication": "Choisir spontanément le registre adapté à chaque interlocuteur dans une même situation de communication.",
+      "comprendre": "Aucun registre n'est 'meilleur' qu'un autre : l'enjeu est de savoir lequel correspond au contexte. Le même besoin ('demander de l'aide') se formule très différemment selon qu'on s'adresse à un ami, un collègue, un employeur, l'administration ou un client.",
+      "regle": "Ami : Kun je me helpen? Collègue : Zou je me kunnen helpen? Client/administration : Zou u mij kunnen helpen? / Zou het mogelijk zijn om...?",
+      "exemples": [
+        "Kun je me helpen? (ami, informel)",
+        "Zou je me kunnen helpen? (collègue, neutre-poli)",
+        "Zou u mij kunnen helpen? (client/administration, formel)",
+        "Zou het mogelijk zijn om dit dossier na te kijken? (très formel, professionnel)"
+      ],
+      "contrastes": "Le passage de 'jij/je' à 'u' n'est qu'une partie du changement de registre : la structure de phrase elle-même se complexifie (questions indirectes, conditionnel) à mesure que le registre devient plus formel.",
+      "erreursFrequentes": [
+        "Utiliser 'u' tout en gardant une structure de phrase informelle (mélange de registres incohérent).",
+        "Juger qu'une formulation informelle est 'moins bonne' alors qu'elle est simplement adaptée à un contexte différent."
+      ],
+      "vocabulaire": [
+        "informeel",
+        "formeel",
+        "de context",
+        "zich aanpassen"
+      ],
+      "tacheProduction": "Herschrijf dezelfde vraag ('Kun je me helpen met dit dossier?') voor vier contexten: een vriend, een collega, je werkgever, een klant.",
+      "criteresMaitrise": "Adapter une même demande à au moins 4 registres différents (ami, collègue, employeur/administration, client) de façon cohérente."
+    },
+    "exerciseIds": [
+      "ex_b2_regform1",
+      "ex_b2_regform2",
+      "ex_b2_regform3"
+    ]
+  },
+  "collocations": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "interaction_expression_personnelle"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Collocations",
+      "objectif": "Utiliser les associations naturelles de mots plutôt que de traduire mot à mot depuis le français.",
+      "objectifCommunication": "Sonner plus naturel en utilisant les verbes qui s'associent naturellement à certains noms.",
+      "comprendre": "Certains noms s'associent presque toujours au même verbe en néerlandais, souvent différent du verbe littéralement traduit du français. Apprendre ces associations (collocations) évite les erreurs de traduction mot à mot, même quand chaque mot pris isolément est correct.",
+      "regle": "een beslissing NEMEN (prendre une décision — pas 'maken'). een probleem OPLOSSEN (résoudre un problème). een afspraak MAKEN (prendre un rendez-vous — ici 'maken', pas 'nemen'). ervaring OPDOEN (acquérir de l'expérience — pas 'krijgen').",
+      "exemples": [
+        "Ik moet een beslissing nemen.",
+        "We hebben het probleem opgelost.",
+        "Ik wil een afspraak maken.",
+        "Ze heeft veel ervaring opgedaan in dit vak."
+      ],
+      "contrastes": "'Een beslissing nemen' (prendre une décision) vs 'een afspraak maken' (prendre un rendez-vous) : en français les deux utilisent 'prendre', mais en néerlandais ils demandent des verbes différents — il n'y a pas de règle générale, seulement des associations à retenir par notion/contexte.",
+      "erreursFrequentes": [
+        "Traduire systématiquement 'prendre' par 'nemen' quel que soit le nom qui suit.",
+        "Utiliser 'krijgen' pour 'ervaring opdoen', ce qui sonne peu naturel bien que compréhensible."
+      ],
+      "vocabulaire": [
+        "een beslissing nemen",
+        "een probleem oplossen",
+        "een afspraak maken",
+        "ervaring opdoen"
+      ],
+      "tacheProduction": "Schrijf vier zinnen, één voor elke collocatie (beslissing nemen, probleem oplossen, afspraak maken, ervaring opdoen), over je eigen leven.",
+      "criteresMaitrise": "Utiliser correctement au moins 4 collocations fréquentes sans les traduire mot à mot depuis le français."
+    },
+    "exerciseIds": [
+      "ex_b2_colloc1",
+      "ex_b2_colloc2",
+      "ex_b2_colloc3",
+      "ex_b2_colloc4"
+    ]
+  },
+  "expressions_figees": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "vocabulaire",
+      "comprehension"
+    ],
+    "prerequisites": [
+      "langue_parlee_courante"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Expressions figées",
+      "objectif": "Comprendre des expressions figées fréquentes et leur sens dans le contexte, sans les apprendre isolément.",
+      "objectifCommunication": "Comprendre une conversation ou un texte contenant des expressions dont le sens ne se déduit pas mot à mot.",
+      "comprendre": "Une expression figée a un sens global qui ne se déduit pas de la somme de ses mots. L'objectif B2 est de les reconnaître dans un contexte et d'en déduire le sens général, plutôt que de mémoriser une longue liste hors contexte.",
+      "regle": "Le sens d'une expression figée se déduit du contexte global de la phrase, pas mot à mot. Exemple : 'de druppel die de emmer doet overlopen' (la goutte qui fait déborder le vase) ne se comprend pas en traduisant 'druppel' et 'emmer' séparément.",
+      "exemples": [
+        "Dat was de druppel die de emmer deed overlopen. (la limite est atteinte)",
+        "Hij liet de kans niet lopen. (il n'a pas laissé passer l'occasion)",
+        "Ze heeft het hart op de juiste plaats. (elle a bon cœur)"
+      ],
+      "contrastes": "Une collocation (B2.08) reste analysable mot à mot une fois connue (nemen = prendre). Une expression figée ne l'est pas : son sens est global et indépendant de ses mots pris séparément.",
+      "erreursFrequentes": [
+        "Essayer de traduire une expression figée mot à mot, ce qui donne un résultat absurde.",
+        "Mémoriser des listes d'expressions hors contexte, sans les rencontrer dans une situation réelle."
+      ],
+      "vocabulaire": [
+        "een uitdrukking",
+        "de context",
+        "de betekenis"
+      ],
+      "tacheProduction": "Lees de drie voorbeeldzinnen en leg met eigen woorden uit wat elke uitdrukking betekent, zonder de woorden apart te vertalen.",
+      "criteresMaitrise": "Déduire correctement le sens global d'une expression figée à partir de son contexte, sans traduction mot à mot."
+    },
+    "exerciseIds": [
+      "ex_b2_exprfig1",
+      "ex_b2_exprfig2",
+      "ex_b2_exprfig3"
+    ]
+  },
+  "nuances_synonymes": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "deduire_sens_contexte"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Synonymes et nuances",
+      "objectif": "Comprendre pourquoi des mots proches en sens ne sont pas toujours interchangeables, selon le registre ou la nuance.",
+      "objectifCommunication": "Choisir le mot le plus précis selon le contexte plutôt que le premier synonyme venu.",
+      "comprendre": "Beaucoup de mots néerlandais proches en sens portent une nuance de registre, d'intensité ou de fiabilité différente. Confondre 'zeggen' (dire, neutre) et 'beweren' (prétendre, avec un doute implicite) change complètement le sens d'une phrase.",
+      "regle": "beginnen (neutre, général) / starten (souvent pour un projet/processus) / aanvangen (formel/administratif). zeggen (neutre) / vertellen (raconter, avec du contenu) / beweren (prétendre, avec doute implicite) / verklaren (déclarer, officiel).",
+      "exemples": [
+        "De vergadering begint om 10 uur. (neutre)",
+        "Het project start volgende maand. (registre professionnel)",
+        "Hij beweert dat hij onschuldig is. (doute implicite du locuteur)",
+        "De minister verklaarde dat de maatregel zou worden ingevoerd. (déclaration officielle)"
+      ],
+      "contrastes": "'Zeggen' (dire, neutre) vs 'beweren' (prétendre, sous-entend que le locuteur doute de la véracité) : utiliser 'beweren' au lieu de 'zeggen' change la façon dont l'auditeur perçoit la fiabilité du propos rapporté.",
+      "erreursFrequentes": [
+        "Utiliser 'beweren' de façon neutre alors qu'il porte toujours une nuance de doute ou de distance critique.",
+        "Confondre 'starten' et 'aanvangen' comme parfaitement équivalents, alors que 'aanvangen' est nettement plus formel."
+      ],
+      "vocabulaire": [
+        "beweren",
+        "verklaren",
+        "aanvangen",
+        "een nuance"
+      ],
+      "tacheProduction": "Schrijf twee zinnen met 'zeggen' en 'beweren' over dezelfde uitspraak, en leg uit hoe de betekenis verandert.",
+      "criteresMaitrise": "Choisir le synonyme adapté au registre et à la nuance voulue dans au moins 3 contextes différents."
+    },
+    "exerciseIds": [
+      "ex_b2_nuasyn1",
+      "ex_b2_nuasyn2",
+      "ex_b2_nuasyn3"
+    ]
+  },
+  "formulations_idiomatiques": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "comprehension",
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "expressions_figees"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Formulations idiomatiques",
+      "objectif": "Reconnaître des formulations idiomatiques fréquentes dans les conversations, médias et le travail, sans viser un apprentissage massif d'idiomes.",
+      "objectifCommunication": "Suivre une conversation ou un article sans être bloqué par une formulation idiomatique courante.",
+      "comprendre": "Certaines formulations, bien que moins figées qu'une expression complète, restent idiomatiques (leur sens n'est pas purement littéral). La production doit rester raisonnable : quelques formulations bien choisies et fréquentes, pas une liste exhaustive.",
+      "regle": "Reconnaître le sens général à partir du contexte plutôt que d'analyser chaque mot. Exemples fréquents : 'in een mum van tijd' (en un rien de temps), 'de spijker op de kop slaan' (mettre le doigt dessus), 'het gaat om' (il s'agit de).",
+      "exemples": [
+        "Dat heeft hij in een mum van tijd gedaan. (très vite)",
+        "Met die opmerking sloeg ze de spijker op de kop. (elle a vu juste)",
+        "Het gaat hier vooral om kwaliteit. (il s'agit surtout de)"
+      ],
+      "contrastes": "'Het gaat om...' est très fréquent en néerlandais professionnel/écrit et se traduit par 'il s'agit de' — une formulation idiomatique légère mais essentielle à reconnaître, différente d'une expression figée complète (B2.09) plus rare et imagée.",
+      "erreursFrequentes": [
+        "Chercher à produire soi-même de nombreux idiomes rares, ce qui sonne artificiel à ce niveau.",
+        "Bloquer sa compréhension d'un texte entier à cause d'une seule formulation idiomatique non reconnue."
+      ],
+      "vocabulaire": [
+        "in een mum van tijd",
+        "de spijker op de kop slaan",
+        "het gaat om"
+      ],
+      "tacheProduction": "Lees de drie voorbeeldzinnen en gebruik daarna 'het gaat om' in een eigen zin over je werk of studie.",
+      "criteresMaitrise": "Reconnaître le sens d'au moins 3 formulations idiomatiques fréquentes en contexte, et utiliser 'het gaat om' correctement en production."
+    },
+    "exerciseIds": [
+      "ex_b2_formidiom1",
+      "ex_b2_formidiom2",
+      "ex_b2_formidiom3"
+    ]
+  },
+  "attenuer_nuancer": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "registre",
+      "production"
+    ],
+    "prerequisites": [
+      "opinion_developpee",
+      "formulations_indirectes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Atténuer et nuancer",
+      "objectif": "Exprimer un degré de certitude précis et éviter les affirmations inutilement absolues.",
+      "objectifCommunication": "Nuancer une opinion ou une information selon son degré réel de certitude, ce qui est perçu comme plus mesuré et plus crédible.",
+      "comprendre": "Le B2 demande de savoir graduer ses affirmations : de la quasi-certitude ('waarschijnlijk') à la simple possibilité ('mogelijk'), en passant par des formulations qui expriment une opinion personnelle sans l'imposer comme un fait ('volgens mij', 'het lijkt erop dat').",
+      "regle": "Ik denk dat... (opinion neutre) Volgens mij... (opinion personnelle) Het lijkt erop dat... (impression) Voor zover ik weet... (connaissance limitée, prudence) Mogelijk... (simple possibilité) Waarschijnlijk... (forte probabilité) Ik ben er niet helemaal van overtuigd dat... (doute).",
+      "exemples": [
+        "Voor zover ik weet, is de vergadering verplaatst.",
+        "Waarschijnlijk komt hij later.",
+        "Ik ben er niet helemaal van overtuigd dat dit de beste oplossing is.",
+        "Mogelijk moeten we de planning aanpassen."
+      ],
+      "contrastes": "'Waarschijnlijk' (forte probabilité) vs 'mogelijk' (simple possibilité, plus incertain) vs 'Ik ben er niet helemaal van overtuigd dat...' (doute explicite sur une affirmation) : trois degrés de certitude bien distincts à ne pas confondre.",
+      "erreursFrequentes": [
+        "Utiliser des affirmations absolues ('Dat is zo') là où la situation appelle une nuance, ce qui peut sembler présomptueux.",
+        "Confondre 'waarschijnlijk' (probable) et 'mogelijk' (possible, plus incertain) comme s'ils étaient interchangeables."
+      ],
+      "vocabulaire": [
+        "waarschijnlijk",
+        "mogelijk",
+        "voor zover ik weet",
+        "overtuigd"
+      ],
+      "tacheProduction": "Herschrijf drie affirmaties absolues (bv. 'Dat is de beste optie.') met een passende nuance, selon le degré de certitude que tu choisis.",
+      "criteresMaitrise": "Utiliser au moins 4 formulations différentes de nuance/atténuation selon le degré de certitude approprié."
+    },
+    "exerciseIds": [
+      "ex_b2_attennuanc1",
+      "ex_b2_attennuanc2",
+      "ex_b2_attennuanc3",
+      "ex_b2_attennuanc4"
+    ]
+  },
+  "connecteurs_complexes": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "grammaire",
+      "ecriture"
+    ],
+    "prerequisites": [
+      "combiner_subordonnees",
+      "hoewel_ondanks"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Connecteurs logiques avancés",
+      "objectif": "Utiliser des connecteurs de concession, d'opposition, de cause et de conséquence plus riches que ceux vus en A2/B1 (hoewel, ondanks, daarentegen, desondanks, bijgevolg, niettemin).",
+      "objectifCommunication": "Structurer une argumentation écrite ou orale avec des liens logiques précis et variés, propres à un discours soutenu.",
+      "comprendre": "Le B1 a introduit les connecteurs de base (omdat, dus, hoewel, ondanks). Le B2 enrichit la palette avec des connecteurs plus soutenus qui marquent des nuances fines : opposition forte (daarentegen = 'en revanche'), concession renforcée (desondanks = 'malgré cela', niettemin = 'néanmoins'), conséquence formelle (bijgevolg = 'par conséquent', vandaar = 'd'où'). Ces connecteurs se rencontrent surtout à l'écrit ou dans un discours structuré.",
+      "regle": "Opposition : daarentegen (en tête de phrase indépendante, avec inversion : Daarentegen vindt hij...). Concession : desondanks/niettemin (en tête, inversion). Conséquence : bijgevolg/vandaar (en tête, inversion). Ce sont des adverbes, pas des conjonctions de subordination : ils entraînent l'inversion sujet-verbe comme 'daarom' ou 'toch'.",
+      "exemples": [
+        "Het plan is duur. Daarentegen levert het veel op termijn op.",
+        "Hij was ziek. Desondanks kwam hij naar de vergadering.",
+        "De cijfers zijn slecht; niettemin blijft de directie optimistisch.",
+        "Er was geen budget meer; bijgevolg werd het project uitgesteld."
+      ],
+      "contrastes": "'Hoewel/ondanks' (B1, en tête de subordonnée, verbe en fin) introduisent une concession DANS une phrase liée par subordination, alors que 'desondanks/niettemin' (B2) sont des adverbes qui relient deux phrases indépendantes avec inversion — deux façons différentes de construire la même idée de concession.",
+      "erreursFrequentes": [
+        "Oublier l'inversion après ces connecteurs adverbiaux (dire 'Daarentegen hij vindt' au lieu de 'Daarentegen vindt hij').",
+        "Confondre 'daarentegen' (opposition) et 'bijgevolg' (conséquence), qui n'expriment pas la même relation logique.",
+        "Traiter ces adverbes comme des conjonctions de subordination et les placer en tête de subordonnée avec le verbe en fin de phrase."
+      ],
+      "vocabulaire": [
+        "daarentegen",
+        "desondanks",
+        "niettemin",
+        "bijgevolg",
+        "vandaar"
+      ],
+      "tacheProduction": "Schrijf een korte alinea (5-6 zinnen) over een beslissing op je werk waarin je minstens drie van deze connectoren gebruikt: daarentegen, desondanks, bijgevolg.",
+      "criteresMaitrise": "Utiliser correctement au moins 3 connecteurs avancés avec l'inversion requise, en respectant la relation logique voulue (opposition, concession, conséquence)."
+    },
+    "exerciseIds": [
+      "ex_b2_connc1",
+      "ex_b2_connc2",
+      "ex_b2_connc3",
+      "ex_b2_connc4"
+    ]
+  },
+  "cohesion_texte": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "ecriture",
+      "comprehension_ecrite"
+    ],
+    "prerequisites": [
+      "connecteurs_complexes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Cohésion textuelle : reprises et substituts",
+      "objectif": "Éviter les répétitions et créer un texte fluide en utilisant des pronoms, des synonymes et des reprises nominales adaptées.",
+      "objectifCommunication": "Produire un texte écrit qui s'enchaîne naturellement, sans répéter le même mot ni créer d'ambiguïté sur ce à quoi renvoie chaque reprise.",
+      "comprendre": "Un texte cohérent ne répète pas le même nom à chaque phrase : il utilise des pronoms (die, deze, dat), des reprises synonymiques (het bedrijf → de organisatie) ou des reprises résumantes (dit probleem, deze aanpak) qui renvoient à ce qui précède. Mal utilisées, ces reprises créent une ambiguïté sur leur référent.",
+      "regle": "Reprise pronominale : die/dat renvoient au dernier groupe nominal du bon genre/nombre. Reprise résumante : dit/deze + nom générique (deze aanpak, dit probleem) résume toute une idée précédente, pas un seul mot. Reprise synonymique : varier le vocabulaire (het bedrijf, de organisatie, de onderneming) sans changer de référent.",
+      "exemples": [
+        "We hebben het plan besproken. Deze aanpak lijkt me veelbelovend. (reprise résumante)",
+        "Het bedrijf groeit snel. De organisatie heeft nu dubbel zoveel personeel. (reprise synonymique)",
+        "Ik heb met de klant gebeld. Die was niet tevreden. (reprise pronominale, 'die' = de klant)",
+        "Dit probleem moeten we snel oplossen, anders verliezen we het contract."
+      ],
+      "contrastes": "'Deze aanpak' (résume toute une phrase/idée précédente) est différent de 'die' (reprend un seul nom précis juste avant) : confondre les deux crée soit une répétition maladroite, soit une ambiguïté sur ce qui est repris.",
+      "erreursFrequentes": [
+        "Répéter le même nom à chaque phrase, ce qui donne un texte lourd et peu naturel à ce niveau.",
+        "Utiliser 'die/dat' alors que le référent n'est pas clair (plusieurs noms possibles juste avant), créant une ambiguïté.",
+        "Utiliser une reprise résumante ('dit probleem') alors qu'aucun problème n'a été mentionné explicitement avant."
+      ],
+      "vocabulaire": [
+        "een verwijzing",
+        "een herhaling",
+        "een synoniem",
+        "een samenvattend woord"
+      ],
+      "tacheProduction": "Herschrijf een tekstje van 4 zinnen waarin hetzelfde woord telkens wordt herhaald, en varieer met voornaamwoorden, synoniemen en samenvattende woorden.",
+      "criteresMaitrise": "Reformuler un texte répétitif en variant correctement les reprises (pronominale, synonymique, résumante) sans créer d'ambiguïté référentielle."
+    },
+    "exerciseIds": [
+      "ex_b2_cohtxt1",
+      "ex_b2_cohtxt2",
+      "ex_b2_cohtxt3",
+      "ex_b2_cohtxt4"
+    ]
+  },
+  "ordre_mots_avance": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "plusieurs_verbes_bijzin",
+      "combiner_subordonnees"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Ordre des mots dans les phrases complexes",
+      "objectif": "Maîtriser la position des éléments (compléments, négation, groupes verbaux multiples) dans des phrases longues à plusieurs niveaux de subordination.",
+      "objectifCommunication": "Construire des phrases longues et précises sans perdre la clarté, à l'oral comme à l'écrit soutenu.",
+      "comprendre": "À ce niveau, les phrases combinent souvent plusieurs subordonnées emboîtées et plusieurs verbes en fin de proposition. La difficulté n'est plus la règle de base (verbe en 2e position / verbe en fin de subordonnée, vue en A2/B1) mais la gestion de l'ordre RELATIF des compléments (temps-manière-lieu) et des groupes verbaux empilés dans ces structures complexes.",
+      "regle": "Ordre des compléments dans le milieveld : temps avant manière avant lieu (Ik ga morgen met de trein naar Utrecht). Dans une subordonnée avec plusieurs verbes, le verbe conjugué qui dépend d'un modal ou auxiliaire vient généralement AVANT les infinitifs/participes qu'il gouverne, tout le groupe verbal se plaçant en fin de proposition.",
+      "exemples": [
+        "Ik denk dat hij morgen met de trein naar Utrecht zal vertrekken.",
+        "Omdat ze het rapport gisteren al had moeten afmaken, werkte ze de hele avond door.",
+        "Hij zei dat hij, ondanks de drukte, op tijd zou zijn.",
+        "Ze vroeg zich af of het probleem al eerder opgelost had kunnen worden."
+      ],
+      "contrastes": "Une phrase simple respecte temps-manière-lieu facilement, mais dans une subordonnée avec plusieurs verbes empilés (had moeten afmaken), c'est l'ordre DES VERBES en fin de proposition qui devient la vraie difficulté, plus que l'ordre des compléments.",
+      "erreursFrequentes": [
+        "Placer les compléments dans le désordre (lieu avant temps) dans une phrase déjà complexe, ce qui alourdit encore la lecture.",
+        "Casser le groupe verbal en fin de subordonnée en insérant un complément entre les verbes empilés.",
+        "Perdre le fil de la structure quand une incise (ondanks de drukte) s'insère au milieu d'une subordonnée."
+      ],
+      "vocabulaire": [
+        "het middenveld",
+        "een werkwoordgroep",
+        "een bijzin",
+        "een inzet"
+      ],
+      "tacheProduction": "Schrijf drie lange zinnen met minstens één bijzin en twee werkwoorden aan het einde, en let op de juiste volgorde van tijd-wijze-plaats.",
+      "criteresMaitrise": "Construire des phrases complexes à plusieurs subordonnées et verbes empilés en respectant l'ordre des compléments et la position finale du groupe verbal."
+    },
+    "exerciseIds": [
+      "ex_b2_ordav1",
+      "ex_b2_ordav2",
+      "ex_b2_ordav3",
+      "ex_b2_ordav4"
+    ]
+  },
+  "nominalisation_avancee": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "grammaire",
+      "ecriture"
+    ],
+    "prerequisites": [
+      "registre_formel_informel"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Nominalisation",
+      "objectif": "Transformer une proposition verbale en groupe nominal pour produire un style plus formel, condensé et écrit.",
+      "objectifCommunication": "Rédiger un texte professionnel ou administratif avec un style nominal, plus dense et impersonnel que le style verbal oral.",
+      "comprendre": "La nominalisation consiste à transformer un verbe (souvent avec son sujet et son complément) en un groupe nominal, généralement avec 'het' + infinitif substantivé ou un nom dérivé. Ce procédé condense l'information et évite les subordonnées, ce qui est typique du style écrit formel (rapports, articles, textes administratifs).",
+      "regle": "Het + infinitif substantivé : 'Omdat de prijzen stijgen' → 'Door de stijging van de prijzen' (nom dérivé) ou 'Het stijgen van de prijzen' (infinitif substantivé). Le complément d'agent devient souvent un complément du nom introduit par 'van'.",
+      "exemples": [
+        "Omdat de prijzen stijgen, wordt het moeilijker. → Door de stijging van de prijzen wordt het moeilijker.",
+        "Nadat het besluit genomen was, begon de uitvoering. → Na het nemen van het besluit begon de uitvoering.",
+        "Het is belangrijk dat we snel reageren. → Een snelle reactie is belangrijk.",
+        "Doordat de markt verandert, moet het bedrijf zich aanpassen. → Door de verandering van de markt moet het bedrijf zich aanpassen."
+      ],
+      "contrastes": "Le style verbal ('omdat de prijzen stijgen') est plus proche de l'oral et plus facile à comprendre ; le style nominal ('door de stijging van de prijzen') est plus dense, plus formel, et typique des rapports écrits — les deux disent la même chose avec un registre différent.",
+      "erreursFrequentes": [
+        "Nominaliser systématiquement même à l'oral, ce qui rend le discours artificiellement lourd.",
+        "Mal former le nom dérivé (inventer une forme qui n'existe pas) au lieu d'utiliser l'infinitif substantivé, plus sûr et toujours correct.",
+        "Oublier de transformer le complément d'agent en complément du nom avec 'van'."
+      ],
+      "vocabulaire": [
+        "een nominalisatie",
+        "de stijging",
+        "de uitvoering",
+        "een zelfstandig naamwoord"
+      ],
+      "tacheProduction": "Herschrijf drie zinnen met 'omdat/doordat/nadat' naar een nominale stijl, geschikt voor een formeel rapport.",
+      "criteresMaitrise": "Transformer correctement une proposition verbale en groupe nominal (infinitif substantivé ou nom dérivé) adapté à un registre écrit formel."
+    },
+    "exerciseIds": [
+      "ex_b2_nomav1",
+      "ex_b2_nomav2",
+      "ex_b2_nomav3",
+      "ex_b2_nomav4"
+    ]
+  },
+  "transformer_style_formel": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "ecriture"
+    ],
+    "prerequisites": [
+      "registre_formel_informel",
+      "nominalisation_avancee"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Transformer un texte informel en texte formel",
+      "objectif": "Réécrire un texte oral/informel en texte écrit formel en combinant registre, nominalisation et connecteurs avancés.",
+      "objectifCommunication": "Adapter un même contenu à un contexte professionnel écrit (rapport, e-mail formel, communiqué).",
+      "comprendre": "Cette compétence combine plusieurs acquis du module (registre, nominalisation, connecteurs avancés) pour transformer un texte parlé, spontané, en un texte structuré adapté à l'écrit professionnel : vocabulaire plus soutenu, phrases nominalisées, connecteurs logiques explicites, suppression des marques d'oral (particules, répétitions, phrases inachevées).",
+      "regle": "Étapes de transformation : 1) remplacer le vocabulaire familier par un équivalent soutenu (registre) ; 2) nominaliser les propositions causales/temporelles quand c'est naturel ; 3) relier les idées avec des connecteurs avancés (daarentegen, bijgevolg...) plutôt que des juxtapositions ; 4) supprimer les marques d'oral (nou, dus eigenlijk, toch wel).",
+      "exemples": [
+        "Oral : \"Nou, de prijzen stijgen dus eigenlijk wordt het moeilijker voor ons.\"",
+        "Formel : \"Door de stijging van de prijzen wordt de situatie voor ons moeilijker.\"",
+        "Oral : \"We hebben besloten en toen zijn we begonnen.\"",
+        "Formel : \"Na het nemen van het besluit is met de uitvoering begonnen.\""
+      ],
+      "contrastes": "Le texte oral privilégie la simplicité et les marques d'interaction (nou, dus, toch), le texte formel privilégie la densité et la neutralité (nominalisation, passif, connecteurs explicites) — transformer l'un en l'autre demande d'agir sur plusieurs niveaux à la fois, pas seulement le vocabulaire.",
+      "erreursFrequentes": [
+        "Ne changer que le vocabulaire sans toucher à la structure des phrases (garder des juxtapositions orales avec un vocabulaire soutenu, ce qui sonne faux).",
+        "Sur-nominaliser au point de rendre le texte difficile à comprendre, perdant l'objectif de clarté professionnelle.",
+        "Garder des marques d'oral ('dus eigenlijk', 'toch wel') dans un texte censé être formel."
+      ],
+      "vocabulaire": [
+        "een herschrijving",
+        "het register",
+        "een formele toon",
+        "een mondelinge uitdrukking"
+      ],
+      "tacheProduction": "Herschrijf een informeel gesproken bericht (verzin het, 4-5 zinnen) als een formele e-mail aan een directie, met nominalisatie en gepaste connectoren.",
+      "criteresMaitrise": "Transformer un texte informel en texte formel cohérent, en combinant registre, nominalisation et connecteurs logiques de façon naturelle."
+    },
+    "exerciseIds": [
+      "ex_b2_transtf1",
+      "ex_b2_transtf2",
+      "ex_b2_transtf3"
+    ]
+  },
+  "construire_texte_structure": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "ecriture",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "cohesion_texte",
+      "connecteurs_complexes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Construire un texte structuré",
+      "objectif": "Organiser un texte écrit en introduction, développement (avec paragraphes liés logiquement) et conclusion.",
+      "objectifCommunication": "Rédiger un texte cohérent et bien structuré (rapport court, article d'opinion, réponse argumentée) pour un lecteur qui n'a pas le contexte oral.",
+      "comprendre": "Un texte B2 ne se limite pas à enchaîner des phrases correctes : il doit avoir une structure visible. L'introduction annonce le sujet et la position ; chaque paragraphe du développement porte une seule idée principale reliée à la précédente par un connecteur ; la conclusion résume et rouvre éventuellement la réflexion.",
+      "regle": "Introduction : présenter le sujet + annoncer le plan ou la position (Dit artikel gaat over... / In dit verslag bespreek ik...). Développement : un paragraphe = une idée, reliée par des connecteurs (ten eerste, daarnaast, bovendien, echter, tot slot). Conclusion : reprendre l'idée principale sans la répéter mot pour mot (Kortom, samenvattend, al met al).",
+      "exemples": [
+        "In dit verslag bespreek ik de voor- en nadelen van thuiswerken.",
+        "Ten eerste zorgt thuiswerken voor meer flexibiliteit. Daarnaast bespaart het reistijd.",
+        "Echter, het kan ook leiden tot isolement.",
+        "Al met al biedt thuiswerken zowel kansen als uitdagingen die een bedrijf zorgvuldig moet afwegen."
+      ],
+      "contrastes": "Un texte qui enchaîne des phrases correctes sans connecteurs de structure ('ten eerste', 'daarnaast', 'tot slot') reste une liste d'idées ; un texte B2 organise explicitement la progression pour guider le lecteur, ce qui est jugé dans la production écrite à ce niveau.",
+      "erreursFrequentes": [
+        "Développer plusieurs idées dans un même paragraphe sans les séparer, rendant la structure invisible.",
+        "Oublier la conclusion ou la réduire à une simple répétition de l'introduction sans reformulation.",
+        "Utiliser un seul connecteur ('en') pour tout relier, au lieu de varier selon la fonction (addition, opposition, conclusion)."
+      ],
+      "vocabulaire": [
+        "een inleiding",
+        "een uiteenzetting",
+        "een conclusie",
+        "ten eerste",
+        "tot slot",
+        "al met al"
+      ],
+      "tacheProduction": "Schrijf een kort verslag (introductie, twee argumenten, conclusie) van 8-10 zinnen over de voor- en nadelen van een onderwerp naar keuze op het werk.",
+      "criteresMaitrise": "Produire un texte structuré avec une introduction claire, des paragraphes reliés par des connecteurs variés et une conclusion qui reformule sans répéter."
+    },
+    "exerciseIds": [
+      "ex_b2_constrtxt1",
+      "ex_b2_constrtxt2",
+      "ex_b2_constrtxt3",
+      "ex_b2_constrtxt4"
+    ]
+  },
+  "argumenter": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "argumenter_simple",
+      "connecteurs_complexes"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Construire une argumentation structurée",
+      "objectif": "Développer un argument complet : thèse, justification, exemple concret, et lien logique explicite entre les éléments.",
+      "objectifCommunication": "Défendre une opinion de façon convaincante et structurée, à l'oral comme à l'écrit, dans un débat ou une réunion.",
+      "comprendre": "Le B1 a permis de donner une opinion justifiée simple (ik denk dat... want...). Le B2 exige une argumentation COMPLÈTE : une thèse claire, au moins un argument développé (pas juste affirmé), un exemple concret qui l'illustre, et des connecteurs qui montrent explicitement la logique (want, daarom, bijvoorbeeld, met andere woorden).",
+      "regle": "Structure : Thèse (Ik ben van mening dat...) + Argument (Dit komt doordat...) + Exemple (Bijvoorbeeld,...) + Lien de conséquence (Daarom...). Chaque argument doit être développé sur 2-3 phrases, pas une seule affirmation isolée.",
+      "exemples": [
+        "Ik ben van mening dat flexibele werktijden de productiviteit verhogen.",
+        "Dit komt doordat werknemers hun energiepiek beter kunnen benutten.",
+        "Bijvoorbeeld, iemand die 's ochtends vroeg het productiefst is, kan dan eerder beginnen.",
+        "Daarom zou ik flexibele werktijden aanraden aan elk bedrijf."
+      ],
+      "contrastes": "Une opinion B1 ('ik denk dat het goed is, want het is handig') reste une affirmation courte ; une argumentation B2 développe CHAQUE maillon (thèse, raison, exemple, conséquence) sur plusieurs phrases, ce qui la rend bien plus convaincante et complète.",
+      "erreursFrequentes": [
+        "Affirmer une thèse sans la justifier par un argument développé, se contentant d'un simple 'want' suivi d'un mot.",
+        "Donner un exemple sans lien explicite avec l'argument qu'il est censé illustrer.",
+        "Empiler plusieurs arguments faibles au lieu d'en développer un ou deux vraiment solides."
+      ],
+      "vocabulaire": [
+        "een stelling",
+        "een argument",
+        "een voorbeeld",
+        "naar mijn mening",
+        "dit komt doordat"
+      ],
+      "tacheProduction": "Schrijf een volledige argumentatie (stelling + argument + voorbeeld + gevolg) over een onderwerp op je werk of in de actualiteit (5-6 zinnen).",
+      "criteresMaitrise": "Produire une argumentation complète avec thèse, argument développé, exemple concret et connecteur de conséquence, sans maillon manquant."
+    },
+    "exerciseIds": [
+      "ex_b2_argum1",
+      "ex_b2_argum2",
+      "ex_b2_argum3",
+      "ex_b2_argum4"
+    ]
+  },
+  "expliquer_avantages_inconvenients": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "comparer_deux_possibilites",
+      "construire_texte_structure"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Exposer avantages et inconvénients",
+      "objectif": "Présenter de façon équilibrée les avantages et inconvénients d'une option, sans forcément trancher immédiatement.",
+      "objectifCommunication": "Éclairer une décision collective (au travail, en groupe) en présentant objectivement plusieurs facettes d'un sujet avant de conclure.",
+      "comprendre": "Contrairement à comparer_deux_possibilites (B1, qui choisit directement entre deux options), cette compétence B2 consiste à explorer TOUTES les facettes d'UNE option ou d'un sujet, en équilibrant explicitement les points positifs et négatifs avant d'aboutir, éventuellement, à une position.",
+      "regle": "Structure équilibrée : Een voordeel is dat... / Daarnaast biedt dit... (avantages) — Een nadeel is echter dat... / Aan de andere kant... (inconvénients) — Al met al... (bilan). Le mot 'echter' (cependant) marque le basculement du positif au négatif.",
+      "exemples": [
+        "Een groot voordeel van thuiswerken is de flexibiliteit.",
+        "Daarnaast bespaart het reistijd en kosten.",
+        "Een nadeel is echter dat collega's elkaar minder zien.",
+        "Al met al hangt het af van het type functie en persoonlijkheid."
+      ],
+      "contrastes": "'Comparer deux possibilités' (B1) choisit entre A et B ; 'exposer avantages et inconvénients' (B2) explore les deux faces d'UNE SEULE option pour informer une décision, sans nécessairement trancher — un exercice intellectuel différent, plus proche du rapport ou de l'article d'opinion.",
+      "erreursFrequentes": [
+        "Ne lister que les avantages ou que les inconvénients, perdant l'équilibre attendu à ce niveau.",
+        "Oublier le connecteur de bascule ('echter', 'aan de andere kant') entre les deux parties, rendant le passage abrupt.",
+        "Conclure de façon tranchée alors que l'exercice demande souvent de nuancer selon le contexte (het hangt af van...)."
+      ],
+      "vocabulaire": [
+        "een voordeel",
+        "een nadeel",
+        "echter",
+        "aan de andere kant",
+        "het hangt af van"
+      ],
+      "tacheProduction": "Schrijf een kort, evenwichtig overzicht (voor- en nadelen) van een verandering op je werk of in je leven (6-7 zinnen), met een genuanceerde conclusie.",
+      "criteresMaitrise": "Présenter au moins deux avantages et deux inconvénients équilibrés, reliés par les connecteurs adaptés, avec une conclusion nuancée."
+    },
+    "exerciseIds": [
+      "ex_b2_avinc1",
+      "ex_b2_avinc2",
+      "ex_b2_avinc3",
+      "ex_b2_avinc4"
+    ]
+  },
+  "contre_argumentation": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "argumenter",
+      "accord_desaccord_nuance"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Répondre à un contre-argument",
+      "objectif": "Reconnaître un argument opposé, le reformuler fidèlement, puis y répondre sans l'ignorer ni le rejeter brutalement.",
+      "objectifCommunication": "Débattre de façon respectueuse et efficace, en particulier en réunion ou en négociation, en montrant qu'on a compris l'autre position avant d'y répondre.",
+      "comprendre": "Répondre à un contre-argument ne consiste pas à l'ignorer ou à répéter sa propre thèse plus fort : il faut d'abord montrer qu'on l'a compris (reformulation), reconnaître ce qu'il a de valable si besoin, puis expliquer pourquoi on maintient malgré tout sa position, avec un nouvel argument ou une nuance.",
+      "regle": "Reconnaissance : Ik begrijp dat u vindt dat... / Het klopt dat... Réponse : Toch denk ik dat... / Maar daar staat tegenover dat... Nouvel argument après la concession partielle.",
+      "exemples": [
+        "Ik begrijp dat u vindt dat thuiswerken de samenwerking bemoeilijkt.",
+        "Het klopt dat direct contact soms sneller werkt.",
+        "Toch denk ik dat digitale tools dit probleem grotendeels oplossen.",
+        "Maar daar staat tegenover dat de productiviteit vaak juist stijgt."
+      ],
+      "contrastes": "'Accord/désaccord nuancé' (B1) exprime un degré d'accord sur une opinion donnée ; 'contre-argumentation' (B2) est un mouvement en trois temps (reconnaître → concéder partiellement → répondre avec un nouvel argument), une compétence de débat plus construite que la simple expression d'un degré d'accord.",
+      "erreursFrequentes": [
+        "Répondre à un contre-argument en ignorant complètement ce qui a été dit, ce qui bloque le dialogue.",
+        "Reformuler le contre-argument de façon caricaturale ou déformée (homme de paille), ce qui nuit à la crédibilité.",
+        "Ne jamais reconnaître la moindre validité à l'argument opposé, ce qui rend le débat rigide."
+      ],
+      "vocabulaire": [
+        "een tegenargument",
+        "toegeven",
+        "toch",
+        "daar staat tegenover dat"
+      ],
+      "tacheProduction": "Verzin een tegenargument tegen je eigen mening over een onderwerp, en reageer erop volgens het schema: erkennen, gedeeltelijk toegeven, toch reageren (4-5 zinnen).",
+      "criteresMaitrise": "Reconnaître fidèlement un contre-argument, concéder partiellement si pertinent, puis répondre avec un nouvel argument sans ignorer la position opposée."
+    },
+    "exerciseIds": [
+      "ex_b2_contrarg1",
+      "ex_b2_contrarg2",
+      "ex_b2_contrarg3",
+      "ex_b2_contrarg4"
+    ]
+  },
+  "nuancer_position": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "attenuer_nuancer",
+      "argumenter"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Nuancer sa position",
+      "objectif": "Exprimer une opinion nuancée qui reconnaît des exceptions, des degrés ou des conditions, plutôt qu'une position absolue.",
+      "objectifCommunication": "Éviter une position trop tranchée dans un débat professionnel, en montrant qu'on a pesé plusieurs aspects avant de se positionner.",
+      "comprendre": "Le module 2 a introduit l'atténuation au niveau de la phrase (enigszins, min of meer). Ici, il s'agit de nuancer une POSITION entière dans une argumentation : ajouter des conditions (mits, tenzij), des degrés (grotendeels, tot op zekere hoogte) ou reconnaître des exceptions, pour éviter une thèse caricaturale.",
+      "regle": "Condition : mits (à condition que) + subordonnée, tenzij (à moins que) + subordonnée. Degré : grotendeels (en grande partie), tot op zekere hoogte (dans une certaine mesure). Exception : behalve wanneer... (sauf quand).",
+      "exemples": [
+        "Ik ben het er grotendeels mee eens, mits de aanpassingen goed begeleid worden.",
+        "Tot op zekere hoogte klopt dat, tenzij de situatie sterk verandert.",
+        "Over het algemeen werkt dit goed, behalve wanneer het team heel klein is.",
+        "Ik sta hier niet volledig achter, maar erken wel de voordelen op korte termijn."
+      ],
+      "contrastes": "Une position absolue ('dit werkt altijd/nooit') est facile à réfuter ; une position nuancée ('dit werkt grotendeels, mits...') reconnaît les limites de sa propre thèse et résiste mieux à la contre-argumentation, ce qui est valorisé dans un débat B2.",
+      "erreursFrequentes": [
+        "Utiliser des mots absolus (altijd, nooit, iedereen) dans un débat qui demande de la nuance, ce qui affaiblit l'argumentation.",
+        "Confondre 'mits' (condition positive nécessaire) et 'tenzij' (exception qui invaliderait la thèse), qui ont des sens opposés.",
+        "Nuancer à l'excès au point de ne plus défendre aucune position claire."
+      ],
+      "vocabulaire": [
+        "mits",
+        "tenzij",
+        "grotendeels",
+        "tot op zekere hoogte",
+        "behalve wanneer"
+      ],
+      "tacheProduction": "Herformuleer drie stellige meningen (verzin ze) op een genuanceerde manier, met minstens 'mits', 'tenzij' en 'grotendeels'.",
+      "criteresMaitrise": "Reformuler une position tranchée en position nuancée en utilisant correctement au moins deux marqueurs de condition/degré/exception."
+    },
+    "exerciseIds": [
+      "ex_b2_nuanpos1",
+      "ex_b2_nuanpos2",
+      "ex_b2_nuanpos3",
+      "ex_b2_nuanpos4"
+    ]
+  },
+  "defendre_position": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "interaction"
+    ],
+    "prerequisites": [
+      "argumenter",
+      "contre_argumentation"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Défendre sa position dans un débat",
+      "objectif": "Maintenir et défendre une position sur la durée d'un échange, en enchaînant arguments, réponses aux objections et reformulations.",
+      "objectifCommunication": "Tenir sa position dans une discussion animée ou une négociation, sans être déstabilisé par plusieurs objections successives.",
+      "comprendre": "Cette compétence combine argumenter, contre-argumenter et nuancer dans un échange DYNAMIQUE et prolongé : il ne s'agit plus d'un seul tour de parole mais de tenir une position cohérente à travers plusieurs échanges, en s'adaptant aux objections sans se contredire ni céder immédiatement.",
+      "regle": "Réaffirmation stratégique : Zoals ik al zei... / Mijn punt blijft dat... Renforcement : Bovendien komt daar nog bij dat... Concession stratégique limitée : Op dat punt heeft u gelijk, maar dat verandert niets aan... .",
+      "exemples": [
+        "Zoals ik al zei, de voordelen wegen zwaarder dan de nadelen.",
+        "Bovendien komt daar nog bij dat de klanten hier positief op reageren.",
+        "Op dat punt heeft u gelijk, maar dat verandert niets aan de algemene conclusie.",
+        "Mijn punt blijft dat we dit op lange termijn moeten bekijken."
+      ],
+      "contrastes": "Contre-argumenter (B2.21) répond à UN argument précis ; défendre sa position gère une SUITE d'échanges où il faut rester cohérent, rappeler son fil argumentatif ('zoals ik al zei') et éviter de paraître contradictoire d'un tour de parole à l'autre.",
+      "erreursFrequentes": [
+        "Changer de position ou se contredire au fil des objections, ce qui affaiblit la crédibilité dans un débat prolongé.",
+        "Répéter mot pour mot le même argument sans le renforcer ni l'adapter à la nouvelle objection.",
+        "Céder sur le fond après chaque objection au lieu de distinguer les concessions mineures de la position principale."
+      ],
+      "vocabulaire": [
+        "zoals ik al zei",
+        "mijn punt blijft dat",
+        "bovendien",
+        "op dat punt"
+      ],
+      "tacheProduction": "Simuleer een kort debat (schrijf beide kanten uit, 3 beurten elk) waarin je je positie volhoudt ondanks twee tegenargumenten.",
+      "criteresMaitrise": "Maintenir une position cohérente à travers plusieurs tours d'échange, en renforçant l'argumentation et en gérant les concessions sans se contredire."
+    },
+    "exerciseIds": [
+      "ex_b2_defpos1",
+      "ex_b2_defpos2",
+      "ex_b2_defpos3",
+      "ex_b2_defpos4"
+    ]
+  },
+  "analyser_probleme": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "decrire_probleme_evolution",
+      "cohesion_texte"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Analyser un problème",
+      "objectif": "Décomposer un problème en identifiant ses causes, ses conséquences et les acteurs concernés, avant d'envisager une solution.",
+      "objectifCommunication": "Présenter une analyse claire d'une situation problématique en réunion ou dans un rapport, comme base à une prise de décision.",
+      "comprendre": "Le B1 permettait de décrire l'évolution d'un problème dans le temps. Le B2 va plus loin : il s'agit d'ANALYSER, c'est-à-dire distinguer explicitement les causes (pourquoi le problème existe), les conséquences (ce qu'il provoque) et les acteurs impliqués, en structurant cette analyse avant de proposer une solution.",
+      "regle": "Causes : De oorzaak hiervan is... / Dit is te wijten aan... Conséquences : Dit leidt tot... / Als gevolg hiervan... Acteurs : De betrokken partijen zijn... Structure : commencer par le constat, puis causes, puis conséquences.",
+      "exemples": [
+        "Het probleem is dat de levertijden steeds langer worden.",
+        "De oorzaak hiervan is een tekort aan personeel bij de leverancier.",
+        "Dit leidt tot ontevreden klanten en extra kosten.",
+        "De betrokken partijen zijn de leverancier, de klantenservice en het magazijn."
+      ],
+      "contrastes": "Décrire l'évolution d'un problème (B1) raconte comment il a changé dans le temps ; analyser un problème (B2) en distingue la structure logique (cause / conséquence / acteurs), une démarche plus systématique utile avant de chercher une solution.",
+      "erreursFrequentes": [
+        "Mélanger causes et conséquences sans les distinguer clairement, brouillant l'analyse.",
+        "Décrire seulement les symptômes du problème sans en chercher la cause réelle.",
+        "Oublier d'identifier les acteurs concernés, ce qui rend une solution ultérieure difficile à cibler."
+      ],
+      "vocabulaire": [
+        "de oorzaak",
+        "het gevolg",
+        "te wijten aan",
+        "de betrokken partij"
+      ],
+      "tacheProduction": "Analyseer een probleem op je werk of in het nieuws: beschrijf het probleem, de oorzaak, de gevolgen en de betrokken partijen (6-8 zinnen).",
+      "criteresMaitrise": "Produire une analyse structurée d'un problème distinguant clairement constat, causes, conséquences et acteurs concernés."
+    },
+    "exerciseIds": [
+      "ex_b2_anaprob1",
+      "ex_b2_anaprob2",
+      "ex_b2_anaprob3",
+      "ex_b2_anaprob4"
+    ]
+  },
+  "proposer_solution": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "analyser_probleme",
+      "defendre_position"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Proposer et justifier une solution",
+      "objectif": "Formuler une solution concrète à un problème analysé, en justifiant pourquoi elle est adaptée et en anticipant ses limites.",
+      "objectifCommunication": "Conclure une analyse par une proposition actionnable, dans un rapport, une réunion ou un e-mail professionnel.",
+      "comprendre": "Proposer une solution B2 ne se limite pas à dire 'il faut faire X' : il faut relier la solution au problème analysé, justifier en quoi elle répond aux causes identifiées, et reconnaître ses limites ou les conditions de sa réussite — une compétence de synthèse qui mobilise l'analyse, l'argumentation et la nuance.",
+      "regle": "Introduction de la solution : Een mogelijke oplossing zou zijn om... / Ik stel voor om... Justification liée au problème : Dit zou het probleem van... aanpakken, omdat... Limite/condition : Dit vereist echter wel dat... / Een aandachtspunt hierbij is...",
+      "exemples": [
+        "Een mogelijke oplossing zou zijn om een tweede leverancier in te schakelen.",
+        "Dit zou het probleem van de lange levertijden aanpakken, omdat we niet meer van één bron afhankelijk zijn.",
+        "Dit vereist echter wel dat we voldoende budget vrijmaken.",
+        "Een aandachtspunt hierbij is de kwaliteit van de nieuwe leverancier."
+      ],
+      "contrastes": "Une solution B1 reste souvent une suggestion isolée (we zouden X kunnen doen) ; une proposition de solution B2 la relie explicitement au problème analysé et anticipe ses limites, ce qui la rend crédible et directement utilisable dans une prise de décision professionnelle.",
+      "erreursFrequentes": [
+        "Proposer une solution sans la relier explicitement à la cause du problème identifiée précédemment.",
+        "Présenter la solution comme parfaite, sans reconnaître aucune limite ou condition de réussite.",
+        "Rester trop vague ('we moeten iets doen') au lieu de proposer une action concrète et réalisable."
+      ],
+      "vocabulaire": [
+        "een oplossing voorstellen",
+        "aanpakken",
+        "een aandachtspunt",
+        "vereisen"
+      ],
+      "tacheProduction": "Stel, op basis van je probleemanalyse (zie vorige notie), een concrete oplossing voor, leg uit waarom ze het probleem aanpakt, en noem één aandachtspunt (5-6 zinnen).",
+      "criteresMaitrise": "Proposer une solution concrète explicitement reliée au problème analysé, avec justification et au moins une limite ou condition mentionnée."
+    },
+    "exerciseIds": [
+      "ex_b2_propsol1",
+      "ex_b2_propsol2",
+      "ex_b2_propsol3",
+      "ex_b2_propsol4"
+    ]
+  },
+  "presenter_projet": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "expression_orale",
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "construire_texte_structure",
+      "argumenter"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Présenter un projet",
+      "objectif": "Structurer la présentation d'un projet : contexte, objectifs, étapes, résultats attendus, en s'adressant à un public professionnel.",
+      "objectifCommunication": "Présenter clairement un projet à des collègues ou une direction, de façon organisée et persuasive.",
+      "comprendre": "Présenter un projet combine la structure textuelle (introduction/développement/conclusion) et l'argumentation : il faut situer le contexte, énoncer clairement l'objectif, détailler les étapes principales, et anticiper les bénéfices attendus, en s'adaptant à un auditoire qui découvre le sujet.",
+      "regle": "Contexte : Momenteel staan we voor de uitdaging dat... Objectif : Het doel van dit project is om... Étapes : We beginnen met..., vervolgens..., tot slot... Résultat attendu : We verwachten dat dit zal leiden tot...",
+      "exemples": [
+        "Momenteel staan we voor de uitdaging dat onze klantenservice overbelast is.",
+        "Het doel van dit project is om de reactietijd te halveren.",
+        "We beginnen met een analyse van de huidige knelpunten, vervolgens testen we een nieuw systeem.",
+        "We verwachten dat dit zal leiden tot een hogere klanttevredenheid."
+      ],
+      "contrastes": "Une présentation de projet ne se limite pas à lister des tâches : elle relie CHAQUE étape à l'objectif global, pour qu'un auditeur comprenne non seulement 'quoi' mais 'pourquoi', ce qui la distingue d'une simple liste d'actions.",
+      "erreursFrequentes": [
+        "Lister des étapes sans les relier à l'objectif ou au contexte, perdant le fil pour l'auditoire.",
+        "Omettre le contexte, ce qui empêche un auditeur non familier du sujet de comprendre l'enjeu.",
+        "Ne pas mentionner le résultat attendu, laissant le projet sans finalité claire."
+      ],
+      "vocabulaire": [
+        "de uitdaging",
+        "het doel",
+        "de stap",
+        "het verwachte resultaat"
+      ],
+      "tacheProduction": "Bereid een korte presentatie voor (context, doel, 3 stappen, verwacht resultaat) van een echt of fictief project op je werk, geschikt om aan een team voor te stellen (8-10 zinnen).",
+      "criteresMaitrise": "Présenter un projet avec contexte, objectif clair, étapes reliées entre elles et résultat attendu explicite."
+    },
+    "exerciseIds": [
+      "ex_b2_presproj1",
+      "ex_b2_presproj2",
+      "ex_b2_presproj3"
+    ]
+  },
+  "reunion_avancee": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "interaction",
+      "expression_orale"
+    ],
+    "prerequisites": [
+      "defendre_position",
+      "nuancer_position"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Participer activement à une réunion",
+      "objectif": "Prendre la parole en réunion pour proposer, objecter, relancer une discussion ou recentrer le débat sur l'ordre du jour.",
+      "objectifCommunication": "Intervenir efficacement dans une réunion professionnelle : proposer une idée, objecter poliment, recentrer un débat qui dévie.",
+      "comprendre": "Une réunion B2 demande des formules précises pour gérer la dynamique de groupe : prendre la parole sans couper brutalement, proposer une idée nouvelle, objecter avec tact, et recentrer la discussion si elle s'éloigne du sujet — des actes de parole plus fins que la simple expression d'opinion.",
+      "regle": "Prendre la parole : Mag ik hier iets aan toevoegen? Proposer : Zouden we niet kunnen overwegen om... Objecter avec tact : Ik zie het punt, maar ik vraag me af of... Recentrer : Als we teruggaan naar het hoofdpunt...",
+      "exemples": [
+        "Mag ik hier iets aan toevoegen?",
+        "Zouden we niet kunnen overwegen om eerst een test te doen?",
+        "Ik zie het punt, maar ik vraag me af of dit wel haalbaar is binnen de deadline.",
+        "Als we teruggaan naar het hoofdpunt, moeten we vandaag een besluit nemen."
+      ],
+      "contrastes": "Objecter avec tact ('ik vraag me af of...') diffère nettement d'une opposition frontale ('dat klopt niet') : la formulation indirecte maintient un climat de collaboration tout en exprimant un vrai désaccord, essentiel dans une réunion professionnelle.",
+      "erreursFrequentes": [
+        "Couper la parole sans formule d'introduction, ce qui peut être perçu comme impoli en réunion formelle.",
+        "Objecter de façon trop directe et frontale, ce qui peut bloquer la discussion au lieu de la faire avancer.",
+        "Ne jamais recentrer une réunion qui s'égare, la laissant dériver sans conclusion."
+      ],
+      "vocabulaire": [
+        "mag ik iets toevoegen",
+        "overwegen",
+        "haalbaar",
+        "het hoofdpunt"
+      ],
+      "tacheProduction": "Simuleer een korte vergadering (schrijf 4-5 beurten) waarin je een voorstel doet, iemand nuanceert tegenspreekt, en jij het gesprek terugbrengt naar het hoofdpunt.",
+      "criteresMaitrise": "Utiliser des formules adaptées pour prendre la parole, proposer, objecter avec tact et recentrer une discussion en réunion."
+    },
+    "exerciseIds": [
+      "ex_b2_reunav1",
+      "ex_b2_reunav2",
+      "ex_b2_reunav3"
+    ]
+  },
+  "negociation": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "interaction",
+      "expression_orale"
+    ],
+    "prerequisites": [
+      "contre_argumentation",
+      "nuancer_position"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Négocier",
+      "objectif": "Formuler une offre, une contre-offre, un compromis et une condition dans une négociation professionnelle.",
+      "objectifCommunication": "Mener une négociation simple (délai, prix, conditions de travail) en proposant, en réagissant à une contre-offre et en trouvant un compromis.",
+      "comprendre": "Négocier combine contre-argumentation et nuance dans un but précis : obtenir un accord. Il faut savoir faire une offre claire, réagir à une contre-offre sans rupture, proposer un compromis, et poser une condition qui protège ses intérêts tout en restant constructif.",
+      "regle": "Offre : Wij stellen voor om... Réaction à contre-offre : Dat ligt hoger dan we hadden verwacht, maar... Compromis : Zouden we niet tot een tussenoplossing kunnen komen? Condition : Wij gaan hiermee akkoord, op voorwaarde dat...",
+      "exemples": [
+        "Wij stellen voor om de levertijd te verkorten tot twee weken.",
+        "Dat ligt hoger dan we hadden verwacht, maar we begrijpen uw positie.",
+        "Zouden we niet tot een tussenoplossing kunnen komen, bijvoorbeeld drie weken?",
+        "Wij gaan hiermee akkoord, op voorwaarde dat de prijs gelijk blijft."
+      ],
+      "contrastes": "Une négociation réussie ne rejette pas une contre-offre frontalement ('nee, dat kan niet') mais la reconnaît d'abord ('dat ligt hoger dan verwacht') avant de proposer un compromis — même logique de reconnaissance-puis-réponse que la contre-argumentation, appliquée à un contexte transactionnel.",
+      "erreursFrequentes": [
+        "Rejeter une contre-offre sans reconnaissance, ce qui peut braquer l'autre partie.",
+        "Accepter un compromis sans poser de condition claire, perdant l'occasion de protéger ses intérêts.",
+        "Rester sur sa position initiale sans jamais proposer de tussenoplossing (solution intermédiaire)."
+      ],
+      "vocabulaire": [
+        "voorstellen",
+        "een tegenbod",
+        "een tussenoplossing",
+        "op voorwaarde dat"
+      ],
+      "tacheProduction": "Simuleer een korte onderhandeling (schrijf beide kanten, 4 beurten) over een levertijd of prijs, met een bod, een tegenbod en een compromis met voorwaarde.",
+      "criteresMaitrise": "Formuler une offre, réagir à une contre-offre avec reconnaissance, proposer un compromis et poser une condition claire."
+    },
+    "exerciseIds": [
+      "ex_b2_negoc1",
+      "ex_b2_negoc2",
+      "ex_b2_negoc3"
+    ]
+  },
+  "presentation_professionnelle": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "expression_orale"
+    ],
+    "prerequisites": [
+      "presenter_projet",
+      "registre_formel_informel"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Faire une présentation professionnelle complète",
+      "objectif": "Organiser une présentation orale complète (accroche, plan annoncé, transitions, conclusion, invitation aux questions) devant un public professionnel.",
+      "objectifCommunication": "Présenter un sujet devant un groupe en gérant l'attention, les transitions entre parties, et l'interaction finale (questions).",
+      "comprendre": "Au-delà du contenu (déjà travaillé avec presenter_projet), cette compétence porte sur la FORME orale d'une présentation complète : capter l'attention au début, annoncer le plan, marquer clairement les transitions entre parties, conclure en résumant, et ouvrir aux questions de façon accueillante.",
+      "regle": "Accroche : Stel je voor dat... / Wist u dat...? Annonce du plan : Ik zal eerst ingaan op..., daarna bespreek ik... Transition : Dit brengt me bij mijn volgende punt. Conclusion + questions : Kortom,... Zijn er nog vragen?",
+      "exemples": [
+        "Stel je voor dat onze klanten drie keer minder lang zouden moeten wachten.",
+        "Ik zal eerst ingaan op het probleem, daarna bespreek ik onze oplossing.",
+        "Dit brengt me bij mijn volgende punt: de verwachte resultaten.",
+        "Kortom, dit project kan onze klanttevredenheid aanzienlijk verbeteren. Zijn er nog vragen?"
+      ],
+      "contrastes": "Le contenu d'une présentation (quoi dire) et sa mise en forme orale (comment le dire : accroche, transitions, clôture) sont deux compétences distinctes ; une présentation techniquement correcte mais sans transitions claires reste difficile à suivre pour l'auditoire.",
+      "erreursFrequentes": [
+        "Passer d'une partie à l'autre sans transition explicite, perdant le fil pour l'auditoire.",
+        "Oublier d'annoncer le plan au début, ce qui empêche l'auditeur d'anticiper la structure.",
+        "Clore abruptement sans résumé ni ouverture aux questions."
+      ],
+      "vocabulaire": [
+        "een inleiding",
+        "een overgang",
+        "afsluiten",
+        "vragen beantwoorden"
+      ],
+      "tacheProduction": "Schrijf de volledige tekst van een korte professionele presentatie (haakje, plan, twee delen met overgang, conclusie, uitnodiging tot vragen) over een onderwerp naar keuze.",
+      "criteresMaitrise": "Structurer une présentation orale complète avec accroche, plan annoncé, transitions explicites, conclusion et ouverture aux questions."
+    },
+    "exerciseIds": [
+      "ex_b2_presprof1",
+      "ex_b2_presprof2",
+      "ex_b2_presprof3"
+    ]
+  },
+  "email_professionnel_complexe": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "expression_ecrite"
+    ],
+    "prerequisites": [
+      "registre_formel_informel",
+      "transformer_style_formel"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Rédiger un e-mail professionnel complexe",
+      "objectif": "Rédiger un e-mail professionnel qui combine une demande, une justification, une nuance et une formule de clôture adaptée.",
+      "objectifCommunication": "Communiquer par écrit dans un contexte professionnel exigeant (demande délicate, relance, réclamation nuancée).",
+      "comprendre": "Un e-mail professionnel B2 va au-delà de la politesse de base : il structure une demande complexe (souvent délicate) en la justifiant, en anticipant une objection possible, et en gardant un ton courtois même en cas de désaccord ou de relance.",
+      "regle": "Ouverture contextualisée : Naar aanleiding van... / In verband met... Demande justifiée : Zou het mogelijk zijn om..., aangezien... Anticipation d'objection : Ik realiseer me dat dit kort dag is, maar... Clôture adaptée : In afwachting van uw reactie... / Alvast bedankt voor uw begrip.",
+      "exemples": [
+        "Naar aanleiding van ons gesprek van gisteren, zou ik graag het volgende willen voorstellen.",
+        "Zou het mogelijk zijn om de deadline te verzetten, aangezien we een technisch probleem hebben ondervonden?",
+        "Ik realiseer me dat dit kort dag is, maar ik hoop op uw begrip.",
+        "In afwachting van uw reactie, met vriendelijke groet."
+      ],
+      "contrastes": "Un e-mail simple (B1) demande directement quelque chose ; un e-mail professionnel complexe (B2) justifie la demande, anticipe une objection possible, et soigne l'ouverture et la clôture pour maintenir la relation professionnelle même dans une situation délicate (retard, réclamation).",
+      "erreursFrequentes": [
+        "Faire une demande sans justification, ce qui peut paraître abrupt dans un contexte professionnel délicat.",
+        "Omettre l'anticipation d'une objection évidente (par exemple un délai très court), ce qui peut agacer le destinataire.",
+        "Utiliser une clôture trop familière ('groetjes') dans un e-mail à un client ou une direction."
+      ],
+      "vocabulaire": [
+        "naar aanleiding van",
+        "in verband met",
+        "in afwachting van",
+        "met vriendelijke groet"
+      ],
+      "tacheProduction": "Schrijf een volledige professionele e-mail (context, verzoek met reden, anticipatie op een bezwaar, afsluiting) om een deadline te verzetten.",
+      "criteresMaitrise": "Rédiger un e-mail professionnel complet avec ouverture contextualisée, demande justifiée, anticipation d'objection et clôture adaptée."
+    },
+    "exerciseIds": [
+      "ex_b2_emailpro1",
+      "ex_b2_emailpro2",
+      "ex_b2_emailpro3"
+    ]
+  },
+  "entretien_embauche_avance": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "interaction",
+      "expression_orale"
+    ],
+    "prerequisites": [
+      "werk_solliciteren",
+      "nuancer_position"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Entretien d'embauche avancé",
+      "objectif": "Répondre à des questions d'entretien complexes (points faibles, situations difficiles, motivations profondes) avec nuance et exemples concrets.",
+      "objectifCommunication": "Réussir un entretien d'embauche néerlandophone en répondant de façon structurée et honnête à des questions délicates.",
+      "comprendre": "Le B1 a permis de se présenter et de parler de son parcours (werk_solliciteren). Le B2 aborde les questions plus complexes typiques d'un entretien avancé : un point faible présenté avec nuance et une action corrective, une situation difficile gérée (méthode STAR simplifiée : situatie, taak, actie, resultaat), et une motivation développée au-delà d'une phrase générique.",
+      "regle": "Point faible nuancé : Een aandachtspunt voor mij is..., maar ik werk hieraan door... Méthode STAR : In die situatie moest ik..., mijn taak was..., ik heb toen..., het resultaat was... Motivation développée : Wat mij vooral aantrekt in deze functie is...",
+      "exemples": [
+        "Een aandachtspunt voor mij is dat ik soms te veel details wil controleren, maar ik werk hieraan door meer te delegeren.",
+        "In die situatie moest ik een conflict tussen twee collega's oplossen.",
+        "Mijn taak was om een compromis te vinden; ik heb toen een gesprek georganiseerd.",
+        "Wat mij vooral aantrekt in deze functie is de combinatie van analyse en klantcontact."
+      ],
+      "contrastes": "Répondre à 'quel est votre point faible' par un point faible déguisé en qualité ('ik werk te hard') sonne artificiel ; une réponse B2 nomme un vrai point d'amélioration et montre une action concrète pour le corriger, ce qui est perçu comme plus honnête et mature.",
+      "erreursFrequentes": [
+        "Donner un point faible qui est en réalité une qualité déguisée, perçu comme peu sincère par les recruteurs.",
+        "Répondre à une question de situation difficile de façon vague, sans structure claire (situation, tâche, action, résultat).",
+        "Donner une motivation générique ('ik hou van uitdagingen') sans la relier concrètement au poste ou à l'entreprise."
+      ],
+      "vocabulaire": [
+        "een aandachtspunt",
+        "de situatie",
+        "de taak",
+        "het resultaat",
+        "aantrekken"
+      ],
+      "tacheProduction": "Bereid antwoorden voor op drie moeilijke sollicitatievragen (een zwak punt, een moeilijke situatie volgens STAR, je motivatie) voor een functie naar keuze.",
+      "criteresMaitrise": "Répondre avec nuance à un point faible, structurer une situation difficile selon la méthode STAR, et développer une motivation concrète et spécifique."
+    },
+    "exerciseIds": [
+      "ex_b2_entravav1",
+      "ex_b2_entravav2",
+      "ex_b2_entravav3"
+    ]
+  },
+  "comprendre_texte_argumentatif": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "comprehension_ecrite"
+    ],
+    "prerequisites": [
+      "argumenter",
+      "cohesion_texte"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Comprendre un texte argumentatif",
+      "objectif": "Identifier la thèse, les arguments principaux et les exemples dans un texte d'opinion ou un article argumentatif.",
+      "objectifCommunication": "Lire un article, un éditorial ou un rapport d'opinion et en dégager la structure argumentative pour pouvoir la résumer ou en discuter.",
+      "comprendre": "Un texte argumentatif authentique n'annonce pas toujours explicitement sa thèse : elle peut être formulée dès le début, ou seulement apparaître clairement à la fin. Comprendre ce type de texte demande de repérer la thèse (souvent renforcée par des connecteurs comme 'daarom', 'kortom'), de distinguer les arguments des exemples qui les illustrent, et de repérer d'éventuelles concessions ('hoewel', 'toch').",
+      "regle": "Repérer la thèse : chercher la phrase qui répond à 'que défend l'auteur ?', souvent en début ou fin de texte. Repérer les arguments : phrases introduites par 'omdat', 'want', 'aangezien'. Repérer les exemples : 'bijvoorbeeld', 'zoals'. Repérer une concession : 'hoewel', 'toch', 'ondanks'.",
+      "exemples": [
+        "\"Flexibel werken zou verplicht moeten worden aangeboden. Hoewel sommige bedrijven vrezen voor controleverlies, tonen studies aan dat de productiviteit stijgt. Bijvoorbeeld, een onderzoek bij X toonde een stijging van 15%. Kortom, de voordelen wegen zwaarder dan de nadelen.\"",
+        "Thèse = flexibel werken zou verplicht moeten worden aangeboden.",
+        "Concession = hoewel sommige bedrijven vrezen voor controleverlies.",
+        "Exemple = een onderzoek bij X toonde een stijging van 15%."
+      ],
+      "contrastes": "Un argument ('want de productiviteit stijgt') et un exemple qui l'illustre ('bijvoorbeeld, een onderzoek toonde...') jouent des rôles différents dans le texte : confondre les deux empêche de résumer correctement la logique de l'auteur.",
+      "erreursFrequentes": [
+        "Confondre la thèse de l'auteur avec une concession qu'il mentionne (l'auteur peut citer un avis opposé avant de le réfuter).",
+        "Prendre un exemple isolé pour l'argument principal du texte.",
+        "Ne pas repérer une concession ('hoewel...'), ce qui fausse la compréhension de la nuance de l'auteur."
+      ],
+      "vocabulaire": [
+        "de stelling",
+        "het argument",
+        "het voorbeeld",
+        "de toegeving"
+      ],
+      "tacheProduction": "Lees een kort meningsartikel (zoek er zelf een, of gebruik een tekst van je docent) en identificeer schriftelijk de stelling, twee argumenten, een voorbeeld en een eventuele toegeving.",
+      "criteresMaitrise": "Identifier correctement la thèse, au moins deux arguments et un exemple dans un texte argumentatif authentique, en distinguant une éventuelle concession."
+    },
+    "exerciseIds": [
+      "ex_b2_comptxtarg1",
+      "ex_b2_comptxtarg2",
+      "ex_b2_comptxtarg3"
+    ]
+  },
+  "comprendre_points_de_vue": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "comprehension_ecrite",
+      "comprehension_orale"
+    ],
+    "prerequisites": [
+      "nuancer_position",
+      "accord_desaccord_nuance"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Comprendre plusieurs points de vue",
+      "objectif": "Distinguer et résumer plusieurs points de vue différents (voire opposés) exprimés sur un même sujet, sans les confondre.",
+      "objectifCommunication": "Suivre un débat, une table ronde ou un ensemble d'avis (article avec plusieurs témoignages) et restituer fidèlement qui pense quoi.",
+      "comprendre": "Quand plusieurs personnes s'expriment sur un même sujet, chaque point de vue doit être attribué à la bonne personne et nuancé selon ses propres termes (pas de généralisation). Il faut aussi repérer les points de convergence et de divergence entre les différents avis.",
+      "regle": "Attribution claire : Volgens X.../ X vindt dat... Nuance dans l'attribution : X is het er gedeeltelijk mee eens, maar... Convergence : Zowel X als Y vinden dat... Divergence : Anders dan X, denkt Y dat...",
+      "exemples": [
+        "Volgens de directeur is thuiswerken vooral goed voor de productiviteit.",
+        "De vakbond is het daar gedeeltelijk mee eens, maar wijst op het risico van isolement.",
+        "Zowel de directeur als de vakbond erkennen het belang van duidelijke afspraken.",
+        "Anders dan de directeur, denkt de vakbond dat controle nodig blijft."
+      ],
+      "contrastes": "Résumer 'tout le monde pense que...' quand en réalité les avis divergent partiellement est une erreur fréquente : un point de vue B2 doit préciser QUI pense QUOI, et à quel DEGRÉ (accord total, partiel, désaccord).",
+      "erreursFrequentes": [
+        "Fusionner plusieurs points de vue différents en une seule opinion générale, perdant les nuances entre les personnes.",
+        "Attribuer un avis à la mauvaise personne dans un texte ou un enregistrement à plusieurs voix.",
+        "Ignorer les points de convergence entre des avis par ailleurs opposés."
+      ],
+      "vocabulaire": [
+        "volgens",
+        "gedeeltelijk mee eens",
+        "anders dan",
+        "zowel...als"
+      ],
+      "tacheProduction": "Lees of beluister (verzin) drie korte meningen over hetzelfde onderwerp en vat ze samen: wie denkt wat, waar zijn ze het over eens, waar verschillen ze?",
+      "criteresMaitrise": "Attribuer correctement chaque point de vue à son auteur, identifier son degré d'accord, et repérer au moins une convergence et une divergence entre plusieurs avis."
+    },
+    "exerciseIds": [
+      "ex_b2_comppdv1",
+      "ex_b2_comppdv2",
+      "ex_b2_comppdv3"
+    ]
+  },
+  "comprendre_neerlandais_professionnel": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "comprehension_ecrite"
+    ],
+    "prerequisites": [
+      "registre_formel_informel",
+      "email_professionnel_complexe"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Comprendre un texte professionnel authentique",
+      "objectif": "Lire et comprendre un document professionnel authentique (e-mail formel, note de service, extrait de contrat simplifié) avec son vocabulaire et ses formulations propres.",
+      "objectifCommunication": "Comprendre rapidement l'essentiel d'un document professionnel reçu au travail, sans se laisser bloquer par le vocabulaire soutenu ou administratif.",
+      "comprendre": "Les documents professionnels authentiques utilisent des formulations figées (registre formel vu au module 2), des structures nominalisées (module 3) et des abréviations courantes. Il faut apprendre à repérer l'information essentielle (qui, quoi, quand, quelle action attendue) sans nécessairement comprendre chaque mot.",
+      "regle": "Stratégie de lecture : repérer d'abord l'objet (onderwerp/betreft), puis l'action attendue (vaak in de laatste alinea: 'Wij verzoeken u...'), puis les délais (uiterlijk, vóór). Ne pas chercher à traduire mot à mot un texte administratif.",
+      "exemples": [
+        "Betreft: wijziging van de vergaderdatum.",
+        "Wij verzoeken u vriendelijk om uiterlijk vrijdag te reageren.",
+        "Bijgaand vindt u de notulen van de vorige vergadering.",
+        "Voor eventuele vragen kunt u contact opnemen met de administratie."
+      ],
+      "contrastes": "Comprendre un document professionnel ne demande pas de tout comprendre mot à mot : repérer l'objet, l'action demandée et le délai suffit souvent à agir correctement, une stratégie différente de la lecture d'un texte littéraire ou argumentatif.",
+      "erreursFrequentes": [
+        "Se bloquer sur un mot inconnu au lieu de continuer à chercher l'information essentielle (qui, quoi, quand).",
+        "Ne pas repérer l'action concrètement attendue, souvent formulée poliment et indirectement ('wij verzoeken u...').",
+        "Ignorer un délai mentionné de façon incidente ('uiterlijk vrijdag'), pourtant crucial."
+      ],
+      "vocabulaire": [
+        "betreft",
+        "bijgaand",
+        "uiterlijk",
+        "wij verzoeken u"
+      ],
+      "tacheProduction": "Lees een fictieve professionele e-mail (verzin er een van 5-6 zinnen) en noteer: onderwerp, gevraagde actie, deadline.",
+      "criteresMaitrise": "Extraire correctement l'objet, l'action attendue et le délai d'un document professionnel authentique sans traduction mot à mot."
+    },
+    "exerciseIds": [
+      "ex_b2_compneprof1",
+      "ex_b2_compneprof2",
+      "ex_b2_compneprof3"
+    ]
+  },
+  "comprendre_discours_audio_complexe": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "comprehension_orale"
+    ],
+    "prerequisites": [
+      "comprendre_message_authentique",
+      "langue_parlee_courante"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Comprendre un discours oral complexe",
+      "objectif": "Suivre un discours oral structuré (exposé, réunion, débat) même avec un débit naturel, des hésitations et un vocabulaire varié.",
+      "objectifCommunication": "Comprendre l'essentiel et les points clés d'un discours oral professionnel ou d'un débat, sans transcription, en environnement réel.",
+      "comprendre": "Un discours oral authentique contient des hésitations (eh, dus, nou), des reformulations en cours de phrase, et un débit plus rapide qu'un dialogue A1/A2. Comprendre à ce niveau demande de se concentrer sur les mots clés et les connecteurs logiques plutôt que sur chaque mot, et de reconnaître quand le locuteur se reprend ou change d'avis.",
+      "regle": "Repérer les connecteurs qui structurent l'oral (dus, maar, eigenlijk, nou goed) pour suivre la logique malgré les hésitations. Une reformulation est souvent signalée par 'of eigenlijk' ou 'nou ja'. Ignorer les répétitions et hésitations sans sens (eh, dus dus) pour se concentrer sur l'information.",
+      "exemples": [
+        "\"We gaan, eh, we gaan het project, dus eigenlijk, we starten het project volgende maand.\" (l'information clé : le projet démarre le mois prochain, malgré les hésitations)",
+        "\"Nou goed, laten we zeggen dat het niet ideaal was.\" (reformulation qui minimise)",
+        "\"Het is, of eigenlijk, het was een succes.\" (correction en cours de phrase : c'était un succès)",
+        "\"Dus, samengevat, we gaan door met het plan.\" (dus introduit la conclusion orale)"
+      ],
+      "contrastes": "À l'oral spontané, une hésitation ('eh', 'dus') ou une reformulation ('of eigenlijk') ne change pas nécessairement le sens final, contrairement à une vraie correction de contenu ('nee, wacht, het was volgend jaar, niet dit jaar') qui, elle, change l'information à retenir — savoir distinguer les deux est essentiel pour ne pas se tromper.",
+      "erreursFrequentes": [
+        "Se laisser déstabiliser par les hésitations au point de perdre le fil du message principal.",
+        "Retenir une information corrigée par le locuteur lui-même ('of eigenlijk...') au lieu de la version finale.",
+        "Chercher à comprendre chaque mot au lieu de se concentrer sur les connecteurs et mots clés qui portent le sens."
+      ],
+      "vocabulaire": [
+        "een aarzeling",
+        "een herformulering",
+        "samengevat",
+        "nou goed"
+      ],
+      "tacheProduction": "Luister naar (of lees een transcript van) een kort gesproken fragment met aarzelingen en herformuleringen, en vat in één zin de uiteindelijke boodschap samen.",
+      "criteresMaitrise": "Identifier le message final d'un discours oral malgré les hésitations et reformulations, sans se laisser tromper par une information corrigée en cours de phrase."
+    },
+    "exerciseIds": [
+      "ex_b2_compaudio1",
+      "ex_b2_compaudio2",
+      "ex_b2_compaudio3"
+    ]
+  },
+  "synthese": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "expression_ecrite",
+      "expression_orale",
+      "comprehension_ecrite"
+    ],
+    "prerequisites": [
+      "comprendre_texte_argumentatif",
+      "comprendre_points_de_vue",
+      "construire_texte_structure"
+    ],
+    "status": "pret",
+    "content": {
+      "titre": "Synthèse B2 : tâche finale",
+      "objectif": "Mobiliser l'ensemble des compétences B2 (compréhension, argumentation, structuration, registre) dans une tâche de synthèse complète.",
+      "objectifCommunication": "Produire une synthèse écrite ou orale complète sur un sujet donné : comprendre des points de vue, les résumer, prendre position et la défendre avec nuance.",
+      "comprendre": "Cette tâche finale rassemble tout le niveau B2 : à partir de plusieurs sources ou avis sur un sujet (fictifs ou réels), il s'agit de résumer objectivement les points de vue en présence, de prendre position personnellement, de la justifier avec une argumentation structurée et nuancée, et de rédiger le tout dans un texte cohérent avec introduction, développement et conclusion.",
+      "regle": "Étapes : 1) Résumer 2-3 points de vue différents sur le sujet (comprendre_points_de_vue). 2) Prendre position personnelle, nuancée (nuancer_position). 3) Justifier avec au moins un argument développé et un exemple (argumenter). 4) Structurer le tout avec introduction/développement/conclusion et connecteurs avancés (construire_texte_structure).",
+      "exemples": [
+        "Introductie: Dit verslag bespreekt de meningen over verplicht thuiswerken.",
+        "Samenvatting van standpunten: Volgens werkgevers... Werknemers daarentegen vinden...",
+        "Persoonlijk standpunt genuanceerd: Ik ben het er grotendeels mee eens, mits...",
+        "Conclusie: Al met al is een evenwichtige aanpak wenselijk."
+      ],
+      "contrastes": "La synthèse B2 n'est pas un simple résumé neutre (qui s'arrêterait à rapporter des avis) ni une opinion isolée (qui ignorerait les autres points de vue) : elle combine les deux, ce qui en fait la tâche la plus intégrative et la plus représentative du niveau B2 dans son ensemble.",
+      "erreursFrequentes": [
+        "Résumer les points de vue sans jamais prendre position personnelle, restant à un niveau purement descriptif.",
+        "Prendre position sans avoir d'abord présenté objectivement les points de vue existants.",
+        "Oublier la structure explicite (introduction, transitions, conclusion) qui rend le texte suivable pour le lecteur."
+      ],
+      "vocabulaire": [
+        "een synthese",
+        "een standpunt",
+        "genuanceerd",
+        "een evenwichtige aanpak"
+      ],
+      "tacheProduction": "Schrijf een volledige synthese (10-12 zinnen) over een onderwerp naar keuze: vat twee tegengestelde standpunten samen, neem genuanceerd een eigen standpunt in, onderbouw het met een argument en voorbeeld, en sluit af met een conclusie.",
+      "criteresMaitrise": "Produire une synthèse complète et structurée qui résume plusieurs points de vue, prend position de façon nuancée, justifie cette position et conclut clairement — mobilisant l'ensemble des compétences B2."
+    },
+    "exerciseIds": [
+      "ex_b2_synth1",
+      "ex_b2_synth2",
+      "ex_b2_synth3"
     ]
   }
 }

@@ -4437,5 +4437,1788 @@
     "type": "texte_a_trous",
     "question": "Complète (conclusion naturelle d'un accord) : \"Perfect, dan is dat ___.\" (réglé)",
     "answer": "geregeld"
+  },
+  {
+    "id": "ex_b2_nuatps1",
+    "notionId": "nuances_temps",
+    "type": "qcm",
+    "question": "\"Toen ik aankwam, was de vergadering al begonnen.\" Pourquoi utilise-t-on 'was begonnen' (plus-que-parfait) ?",
+    "options": [
+      "Parce que la réunion a commencé avant mon arrivée, déjà passée dans le récit",
+      "Parce que c'est plus poli",
+      "Parce que 'beginnen' est irrégulier"
+    ],
+    "answer": "Parce que la réunion a commencé avant mon arrivée, déjà passée dans le récit"
+  },
+  {
+    "id": "ex_b2_nuatps2",
+    "notionId": "nuances_temps",
+    "type": "texte_a_trous",
+    "question": "Complète (durée/arrière-plan) : \"Ik ___ al drie jaar bij dat bedrijf toen ik ontslag nam.\" (werken, imperfectum)",
+    "answer": "werkte"
+  },
+  {
+    "id": "ex_b2_nuatps3",
+    "notionId": "nuances_temps",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Elle était fatiguée, car elle avait travaillé toute la nuit.\"",
+    "words": [
+      "Ze",
+      "was",
+      "moe",
+      "want",
+      "ze",
+      "had",
+      "de",
+      "hele",
+      "nacht",
+      "doorgewerkt"
+    ],
+    "answer": [
+      "Ze",
+      "was",
+      "moe",
+      "want",
+      "ze",
+      "had",
+      "de",
+      "hele",
+      "nacht",
+      "doorgewerkt"
+    ]
+  },
+  {
+    "id": "ex_b2_nuatps4",
+    "notionId": "nuances_temps",
+    "type": "qcm",
+    "question": "Quelle phrase corrige une chronologie confuse en marquant l'antériorité ?",
+    "options": [
+      "Ik kwam aan. De vergadering begon.",
+      "Ik kwam aan. De vergadering was al begonnen.",
+      "Ik kom aan. De vergadering begint."
+    ],
+    "answer": "Ik kwam aan. De vergadering was al begonnen."
+  },
+  {
+    "id": "ex_b2_passwz1",
+    "notionId": "passif_worden_zijn",
+    "type": "qcm",
+    "question": "\"Het contract wordt ondertekend.\" décrit :",
+    "options": [
+      "Un état déjà terminé",
+      "Un processus en cours",
+      "Une intention future lointaine"
+    ],
+    "answer": "Un processus en cours"
+  },
+  {
+    "id": "ex_b2_passwz2",
+    "notionId": "passif_worden_zijn",
+    "type": "qcm",
+    "question": "\"Het contract is ondertekend.\" décrit :",
+    "options": [
+      "Un état résultant, déjà accompli",
+      "Un processus en cours",
+      "Une hypothèse"
+    ],
+    "answer": "Un état résultant, déjà accompli"
+  },
+  {
+    "id": "ex_b2_passwz3",
+    "notionId": "passif_worden_zijn",
+    "type": "texte_a_trous",
+    "question": "Complète (processus, imperfectum) : \"Het project ___ vorig jaar gestart.\" (worden)",
+    "answer": "werd"
+  },
+  {
+    "id": "ex_b2_passwz4",
+    "notionId": "passif_worden_zijn",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"La porte est fermée.\" (état résultant)",
+    "words": [
+      "De",
+      "deur",
+      "is",
+      "gesloten"
+    ],
+    "answer": [
+      "De",
+      "deur",
+      "is",
+      "gesloten"
+    ]
+  },
+  {
+    "id": "ex_b2_passav1",
+    "notionId": "passif_avance",
+    "type": "qcm",
+    "question": "Quelle phrase exprime un REGRET sur une obligation passée non remplie ?",
+    "options": [
+      "Het probleem moet opgelost worden.",
+      "Het probleem had eerder opgelost moeten worden.",
+      "Het probleem wordt opgelost."
+    ],
+    "answer": "Het probleem had eerder opgelost moeten worden."
+  },
+  {
+    "id": "ex_b2_passav2",
+    "notionId": "passif_avance",
+    "type": "texte_a_trous",
+    "question": "Complète : \"De regels kunnen ___.\" (aangepast worden)",
+    "answer": "aangepast worden"
+  },
+  {
+    "id": "ex_b2_passav3",
+    "notionId": "passif_avance",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je pense que le rapport doit être terminé demain.\"",
+    "words": [
+      "Ik",
+      "denk",
+      "dat",
+      "het",
+      "rapport",
+      "morgen",
+      "afgerond",
+      "moet",
+      "worden"
+    ],
+    "answer": [
+      "Ik",
+      "denk",
+      "dat",
+      "het",
+      "rapport",
+      "morgen",
+      "afgerond",
+      "moet",
+      "worden"
+    ]
+  },
+  {
+    "id": "ex_b2_passav4",
+    "notionId": "passif_avance",
+    "type": "qcm",
+    "question": "Dans \"Het probleem had eerder opgelost moeten worden\", combien de verbes sont regroupés en fin de phrase ?",
+    "options": [
+      "Deux",
+      "Trois",
+      "Quatre (opgelost + moeten + worden, plus had en 2e position)"
+    ],
+    "answer": "Trois"
+  },
+  {
+    "id": "ex_b2_condav1",
+    "notionId": "conditionnel_avance",
+    "type": "qcm",
+    "question": "Quelle phrase exprime un REGRET sur le passé ?",
+    "options": [
+      "Als ik meer tijd had, zou ik dat doen.",
+      "Als ik dat eerder had geweten, zou ik anders hebben gehandeld.",
+      "Dat zou een goede oplossing kunnen zijn."
+    ],
+    "answer": "Als ik dat eerder had geweten, zou ik anders hebben gehandeld."
+  },
+  {
+    "id": "ex_b2_condav2",
+    "notionId": "conditionnel_avance",
+    "type": "texte_a_trous",
+    "question": "Complète (hypothèse présente) : \"Als ik meer tijd had, ___ ik dat doen.\" (zouden, ik)",
+    "answer": "zou"
+  },
+  {
+    "id": "ex_b2_condav3",
+    "notionId": "conditionnel_avance",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"S'il l'avait demandé, je l'aurais aidé.\"",
+    "words": [
+      "Als",
+      "hij",
+      "het",
+      "had",
+      "gevraagd",
+      "had",
+      "ik",
+      "hem",
+      "geholpen"
+    ],
+    "answer": [
+      "Als",
+      "hij",
+      "het",
+      "had",
+      "gevraagd",
+      "had",
+      "ik",
+      "hem",
+      "geholpen"
+    ]
+  },
+  {
+    "id": "ex_b2_condav4",
+    "notionId": "conditionnel_avance",
+    "type": "qcm",
+    "question": "Pourquoi \"zou anders hebben gehandeld\" utilise-t-il 'hebben + participe' après 'zou' ?",
+    "options": [
+      "Parce que l'hypothèse porte sur le passé (regret), pas sur le présent",
+      "Parce que c'est une règle arbitraire sans raison",
+      "Parce que 'handelen' l'exige toujours"
+    ],
+    "answer": "Parce que l'hypothèse porte sur le passé (regret), pas sur le présent"
+  },
+  {
+    "id": "ex_b2_discrap1",
+    "notionId": "discours_rapporte_avance",
+    "type": "qcm",
+    "question": "\"Hij zegt: 'Ik kom morgen.'\" devient au discours indirect (verbe au présent) :",
+    "options": [
+      "Hij zegt dat hij morgen komt.",
+      "Hij zegt dat ik morgen kom.",
+      "Hij zegt dat hij de volgende dag komt."
+    ],
+    "answer": "Hij zegt dat hij morgen komt."
+  },
+  {
+    "id": "ex_b2_discrap2",
+    "notionId": "discours_rapporte_avance",
+    "type": "texte_a_trous",
+    "question": "Rapporté au passé : \"Hij zei dat hij de volgende dag ___ komen.\" (zouden)",
+    "answer": "zou"
+  },
+  {
+    "id": "ex_b2_discrap3",
+    "notionId": "discours_rapporte_avance",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Il a demandé si je pouvais l'aider.\"",
+    "words": [
+      "Hij",
+      "vroeg",
+      "of",
+      "ik",
+      "hem",
+      "kon",
+      "helpen"
+    ],
+    "answer": [
+      "Hij",
+      "vroeg",
+      "of",
+      "ik",
+      "hem",
+      "kon",
+      "helpen"
+    ]
+  },
+  {
+    "id": "ex_b2_discrap4",
+    "notionId": "discours_rapporte_avance",
+    "type": "qcm",
+    "question": "Pourquoi \"morgen\" devient-il \"de volgende dag\" en discours indirect rapporté au passé ?",
+    "options": [
+      "Parce que le repère temporel change : on ne parle plus depuis le moment de l'énoncé original",
+      "Parce que 'morgen' est incorrect en néerlandais",
+      "Il n'y a pas de raison, c'est une variante libre"
+    ],
+    "answer": "Parce que le repère temporel change : on ne parle plus depuis le moment de l'énoncé original"
+  },
+  {
+    "id": "ex_b2_structimp1",
+    "notionId": "structures_impersonnelles",
+    "type": "qcm",
+    "question": "Quelle structure exprime un CONSTAT objectif, pas une simple rumeur ?",
+    "options": [
+      "Er wordt gezegd dat...",
+      "Het blijkt dat...",
+      "Het lijkt erop dat..."
+    ],
+    "answer": "Het blijkt dat..."
+  },
+  {
+    "id": "ex_b2_structimp2",
+    "notionId": "structures_impersonnelles",
+    "type": "texte_a_trous",
+    "question": "Complète : \"___ verwacht dat de prijzen zullen stijgen.\" (on)",
+    "answer": "Men"
+  },
+  {
+    "id": "ex_b2_structimp3",
+    "notionId": "structures_impersonnelles",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Il semble que la situation s'améliore.\"",
+    "words": [
+      "Het",
+      "lijkt",
+      "erop",
+      "dat",
+      "de",
+      "situatie",
+      "verbetert"
+    ],
+    "answer": [
+      "Het",
+      "lijkt",
+      "erop",
+      "dat",
+      "de",
+      "situatie",
+      "verbetert"
+    ]
+  },
+  {
+    "id": "ex_b2_regform1",
+    "notionId": "registre_formel_informel",
+    "type": "qcm",
+    "question": "Quelle formulation convient à un client ou à l'administration ?",
+    "options": [
+      "Kun je me helpen?",
+      "Zou u mij kunnen helpen?",
+      "Help me even."
+    ],
+    "answer": "Zou u mij kunnen helpen?"
+  },
+  {
+    "id": "ex_b2_regform2",
+    "notionId": "registre_formel_informel",
+    "type": "texte_a_trous",
+    "question": "Complète (registre très formel) : \"Zou het mogelijk ___ om dit dossier na te kijken?\" (zijn)",
+    "answer": "zijn"
+  },
+  {
+    "id": "ex_b2_regform3",
+    "notionId": "registre_formel_informel",
+    "type": "qcm",
+    "question": "Pourquoi 'Kun je u helpen?' est-il incohérent ?",
+    "options": [
+      "Parce qu'il mélange le pronom informel 'je' avec le pronom formel 'u'",
+      "Parce que 'kunnen' ne s'utilise jamais avec 'u'",
+      "Il n'y a pas de problème"
+    ],
+    "answer": "Parce qu'il mélange le pronom informel 'je' avec le pronom formel 'u'"
+  },
+  {
+    "id": "ex_b2_colloc1",
+    "notionId": "collocations",
+    "type": "qcm",
+    "question": "Comment dit-on \"prendre une décision\" ?",
+    "options": [
+      "een beslissing maken",
+      "een beslissing nemen",
+      "een beslissing doen"
+    ],
+    "answer": "een beslissing nemen"
+  },
+  {
+    "id": "ex_b2_colloc2",
+    "notionId": "collocations",
+    "type": "qcm",
+    "question": "Comment dit-on \"prendre rendez-vous\" ?",
+    "options": [
+      "een afspraak nemen",
+      "een afspraak maken",
+      "een afspraak krijgen"
+    ],
+    "answer": "een afspraak maken"
+  },
+  {
+    "id": "ex_b2_colloc3",
+    "notionId": "collocations",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ze heeft veel ervaring ___ in dit vak.\" (opdoen, participe passé)",
+    "answer": "opgedaan"
+  },
+  {
+    "id": "ex_b2_colloc4",
+    "notionId": "collocations",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Nous avons résolu le problème.\"",
+    "words": [
+      "We",
+      "hebben",
+      "het",
+      "probleem",
+      "opgelost"
+    ],
+    "answer": [
+      "We",
+      "hebben",
+      "het",
+      "probleem",
+      "opgelost"
+    ]
+  },
+  {
+    "id": "ex_b2_exprfig1",
+    "notionId": "expressions_figees",
+    "type": "qcm",
+    "question": "\"Dat was de druppel die de emmer deed overlopen\" signifie :",
+    "options": [
+      "Il a plu beaucoup ce jour-là",
+      "C'était la limite, le point de trop",
+      "L'eau a débordé du seau"
+    ],
+    "answer": "C'était la limite, le point de trop"
+  },
+  {
+    "id": "ex_b2_exprfig2",
+    "notionId": "expressions_figees",
+    "type": "qcm",
+    "question": "\"Hij liet de kans niet lopen\" signifie :",
+    "options": [
+      "Il a couru vite",
+      "Il n'a pas laissé passer l'occasion",
+      "Il a évité une opportunité"
+    ],
+    "answer": "Il n'a pas laissé passer l'occasion"
+  },
+  {
+    "id": "ex_b2_exprfig3",
+    "notionId": "expressions_figees",
+    "type": "texte_a_trous",
+    "question": "\"Ze heeft het hart op de juiste plaats\" signifie qu'elle a bon ___. (cœur)",
+    "answer": "coeur"
+  },
+  {
+    "id": "ex_b2_nuasyn1",
+    "notionId": "nuances_synonymes",
+    "type": "qcm",
+    "question": "Quel verbe sous-entend un doute du locuteur sur la véracité du propos ?",
+    "options": [
+      "zeggen",
+      "vertellen",
+      "beweren"
+    ],
+    "answer": "beweren"
+  },
+  {
+    "id": "ex_b2_nuasyn2",
+    "notionId": "nuances_synonymes",
+    "type": "qcm",
+    "question": "Quel verbe est le plus formel/administratif pour 'commencer' ?",
+    "options": [
+      "beginnen",
+      "starten",
+      "aanvangen"
+    ],
+    "answer": "aanvangen"
+  },
+  {
+    "id": "ex_b2_nuasyn3",
+    "notionId": "nuances_synonymes",
+    "type": "texte_a_trous",
+    "question": "Complète (déclaration officielle) : \"De minister ___ dat de maatregel zou worden ingevoerd.\" (verklaren, imperfectum)",
+    "answer": "verklaarde"
+  },
+  {
+    "id": "ex_b2_formidiom1",
+    "notionId": "formulations_idiomatiques",
+    "type": "qcm",
+    "question": "\"Dat heeft hij in een mum van tijd gedaan\" signifie :",
+    "options": [
+      "Il a mis très longtemps",
+      "Il l'a fait très vite",
+      "Il a refusé de le faire"
+    ],
+    "answer": "Il l'a fait très vite"
+  },
+  {
+    "id": "ex_b2_formidiom2",
+    "notionId": "formulations_idiomatiques",
+    "type": "qcm",
+    "question": "\"Het gaat hier vooral om kwaliteit\" signifie :",
+    "options": [
+      "Il s'agit surtout de qualité",
+      "La qualité s'en va",
+      "On va vers la qualité"
+    ],
+    "answer": "Il s'agit surtout de qualité"
+  },
+  {
+    "id": "ex_b2_formidiom3",
+    "notionId": "formulations_idiomatiques",
+    "type": "texte_a_trous",
+    "question": "\"Ze sloeg de spijker op de kop\" signifie qu'elle a vu ___. (juste)",
+    "answer": "juste"
+  },
+  {
+    "id": "ex_b2_attennuanc1",
+    "notionId": "attenuer_nuancer",
+    "type": "qcm",
+    "question": "Quelle expression exprime le PLUS de certitude ?",
+    "options": [
+      "Mogelijk...",
+      "Waarschijnlijk...",
+      "Ik ben er niet helemaal van overtuigd dat..."
+    ],
+    "answer": "Waarschijnlijk..."
+  },
+  {
+    "id": "ex_b2_attennuanc2",
+    "notionId": "attenuer_nuancer",
+    "type": "texte_a_trous",
+    "question": "Complète (connaissance limitée, prudence) : \"___ zover ik weet, is de vergadering verplaatst.\"",
+    "answer": "Voor"
+  },
+  {
+    "id": "ex_b2_attennuanc3",
+    "notionId": "attenuer_nuancer",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Il est possible que nous devions adapter la planification.\"",
+    "words": [
+      "Mogelijk",
+      "moeten",
+      "we",
+      "de",
+      "planning",
+      "aanpassen"
+    ],
+    "answer": [
+      "Mogelijk",
+      "moeten",
+      "we",
+      "de",
+      "planning",
+      "aanpassen"
+    ]
+  },
+  {
+    "id": "ex_b2_attennuanc4",
+    "notionId": "attenuer_nuancer",
+    "type": "qcm",
+    "question": "Pourquoi éviter les affirmations absolues en B2 ?",
+    "options": [
+      "Parce qu'elles sont grammaticalement fausses",
+      "Parce qu'elles peuvent sembler présomptueuses quand une nuance est plus appropriée",
+      "Parce que le néerlandais n'a pas d'affirmations absolues"
+    ],
+    "answer": "Parce qu'elles peuvent sembler présomptueuses quand une nuance est plus appropriée"
+  },
+  {
+    "id": "ex_b2_connc1",
+    "notionId": "connecteurs_complexes",
+    "type": "qcm",
+    "question": "\"Het plan is duur. ___ levert het veel op termijn op.\" Quel connecteur marque l'OPPOSITION ?",
+    "options": [
+      "Daarentegen",
+      "Bijgevolg",
+      "Vandaar"
+    ],
+    "answer": "Daarentegen"
+  },
+  {
+    "id": "ex_b2_connc2",
+    "notionId": "connecteurs_complexes",
+    "type": "qcm",
+    "question": "Quelle phrase respecte l'inversion après un connecteur adverbial ?",
+    "options": [
+      "Daarentegen hij vindt het goed.",
+      "Daarentegen vindt hij het goed.",
+      "Hij daarentegen vindt het goed niet."
+    ],
+    "answer": "Daarentegen vindt hij het goed."
+  },
+  {
+    "id": "ex_b2_connc3",
+    "notionId": "connecteurs_complexes",
+    "type": "texte_a_trous",
+    "question": "Complète (concession renforcée) : \"Hij was ziek. ___ kwam hij naar de vergadering.\" (desondanks)",
+    "answer": "Desondanks"
+  },
+  {
+    "id": "ex_b2_connc4",
+    "notionId": "connecteurs_complexes",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Il n'y avait plus de budget ; par conséquent, le projet a été reporté.\"",
+    "words": [
+      "Er",
+      "was",
+      "geen",
+      "budget",
+      "meer;",
+      "bijgevolg",
+      "werd",
+      "het",
+      "project",
+      "uitgesteld"
+    ],
+    "answer": [
+      "Er",
+      "was",
+      "geen",
+      "budget",
+      "meer;",
+      "bijgevolg",
+      "werd",
+      "het",
+      "project",
+      "uitgesteld"
+    ]
+  },
+  {
+    "id": "ex_b2_cohtxt1",
+    "notionId": "cohesion_texte",
+    "type": "qcm",
+    "question": "\"We hebben het plan besproken. Deze aanpak lijkt me veelbelovend.\" Que reprend 'deze aanpak' ?",
+    "options": [
+      "Un seul mot juste avant",
+      "Toute l'idée du plan discuté",
+      "Rien, c'est une expression figée"
+    ],
+    "answer": "Toute l'idée du plan discuté"
+  },
+  {
+    "id": "ex_b2_cohtxt2",
+    "notionId": "cohesion_texte",
+    "type": "qcm",
+    "question": "Quel est le risque principal d'utiliser 'die/dat' sans précaution ?",
+    "options": [
+      "Une ambiguïté sur le référent si plusieurs noms précèdent",
+      "Une faute de conjugaison",
+      "Un manque de politesse"
+    ],
+    "answer": "Une ambiguïté sur le référent si plusieurs noms précèdent"
+  },
+  {
+    "id": "ex_b2_cohtxt3",
+    "notionId": "cohesion_texte",
+    "type": "texte_a_trous",
+    "question": "Complète (reprise synonymique) : \"Het bedrijf groeit snel. De ___ heeft nu dubbel zoveel personeel.\" (organisatie)",
+    "answer": "organisatie"
+  },
+  {
+    "id": "ex_b2_cohtxt4",
+    "notionId": "cohesion_texte",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Ce problème, nous devons le résoudre rapidement.\"",
+    "words": [
+      "Dit",
+      "probleem",
+      "moeten",
+      "we",
+      "snel",
+      "oplossen"
+    ],
+    "answer": [
+      "Dit",
+      "probleem",
+      "moeten",
+      "we",
+      "snel",
+      "oplossen"
+    ]
+  },
+  {
+    "id": "ex_b2_ordav1",
+    "notionId": "ordre_mots_avance",
+    "type": "qcm",
+    "question": "Quel est l'ordre correct des compléments dans le milieveld ?",
+    "options": [
+      "Lieu, manière, temps",
+      "Temps, manière, lieu",
+      "Manière, lieu, temps"
+    ],
+    "answer": "Temps, manière, lieu"
+  },
+  {
+    "id": "ex_b2_ordav2",
+    "notionId": "ordre_mots_avance",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ze vroeg zich af of het probleem al eerder ___ kunnen worden.\" (opgelost)",
+    "answer": "opgelost"
+  },
+  {
+    "id": "ex_b2_ordav3",
+    "notionId": "ordre_mots_avance",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je pense qu'il partira demain en train pour Utrecht.\"",
+    "words": [
+      "Ik",
+      "denk",
+      "dat",
+      "hij",
+      "morgen",
+      "met",
+      "de",
+      "trein",
+      "naar",
+      "Utrecht",
+      "zal",
+      "vertrekken"
+    ],
+    "answer": [
+      "Ik",
+      "denk",
+      "dat",
+      "hij",
+      "morgen",
+      "met",
+      "de",
+      "trein",
+      "naar",
+      "Utrecht",
+      "zal",
+      "vertrekken"
+    ]
+  },
+  {
+    "id": "ex_b2_ordav4",
+    "notionId": "ordre_mots_avance",
+    "type": "qcm",
+    "question": "Dans une subordonnée avec plusieurs verbes empilés, où va le groupe verbal complet ?",
+    "options": [
+      "Au début de la subordonnée",
+      "En fin de proposition, regroupé",
+      "Éclaté à plusieurs endroits"
+    ],
+    "answer": "En fin de proposition, regroupé"
+  },
+  {
+    "id": "ex_b2_nomav1",
+    "notionId": "nominalisation_avancee",
+    "type": "qcm",
+    "question": "Quelle version est la forme NOMINALISÉE de \"Omdat de prijzen stijgen, wordt het moeilijker\" ?",
+    "options": [
+      "Door de stijging van de prijzen wordt het moeilijker.",
+      "De prijzen stijgen en het wordt moeilijker.",
+      "Het wordt moeilijker omdat prijzen stijgen."
+    ],
+    "answer": "Door de stijging van de prijzen wordt het moeilijker."
+  },
+  {
+    "id": "ex_b2_nomav2",
+    "notionId": "nominalisation_avancee",
+    "type": "texte_a_trous",
+    "question": "Complète (infinitif substantivé) : \"Na het ___ van het besluit begon de uitvoering.\" (nemen)",
+    "answer": "nemen"
+  },
+  {
+    "id": "ex_b2_nomav3",
+    "notionId": "nominalisation_avancee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Une réaction rapide est importante.\" (style nominal)",
+    "words": [
+      "Een",
+      "snelle",
+      "reactie",
+      "is",
+      "belangrijk"
+    ],
+    "answer": [
+      "Een",
+      "snelle",
+      "reactie",
+      "is",
+      "belangrijk"
+    ]
+  },
+  {
+    "id": "ex_b2_nomav4",
+    "notionId": "nominalisation_avancee",
+    "type": "qcm",
+    "question": "Pourquoi préférer un style nominal dans un rapport écrit ?",
+    "options": [
+      "Parce que c'est plus dense et plus formel",
+      "Parce que c'est plus facile à l'oral",
+      "Parce que c'est la seule forme grammaticalement correcte"
+    ],
+    "answer": "Parce que c'est plus dense et plus formel"
+  },
+  {
+    "id": "ex_b2_transtf1",
+    "notionId": "transformer_style_formel",
+    "type": "qcm",
+    "question": "Que faut-il faire EN PLUS de changer le vocabulaire pour rendre un texte formel ?",
+    "options": [
+      "Rien, le vocabulaire suffit",
+      "Restructurer les phrases (nominalisation, connecteurs) et supprimer les marques d'oral",
+      "Traduire mot à mot depuis le français"
+    ],
+    "answer": "Restructurer les phrases (nominalisation, connecteurs) et supprimer les marques d'oral"
+  },
+  {
+    "id": "ex_b2_transtf2",
+    "notionId": "transformer_style_formel",
+    "type": "qcm",
+    "question": "Quelle phrase est la version FORMELLE de \"We hebben besloten en toen zijn we begonnen\" ?",
+    "options": [
+      "Na het nemen van het besluit is met de uitvoering begonnen.",
+      "We besloten en toen begonnen we, dus.",
+      "We hebben beslist en zijn begonnen, eigenlijk."
+    ],
+    "answer": "Na het nemen van het besluit is met de uitvoering begonnen."
+  },
+  {
+    "id": "ex_b2_transtf3",
+    "notionId": "transformer_style_formel",
+    "type": "texte_a_trous",
+    "question": "Supprime la marque d'oral et complète au style neutre : \"___ wordt de situatie moeilijker door de stijging van de prijzen.\" (Bijgevolg)",
+    "answer": "Bijgevolg"
+  },
+  {
+    "id": "ex_b2_constrtxt1",
+    "notionId": "construire_texte_structure",
+    "type": "qcm",
+    "question": "Quel rôle joue la conclusion dans un texte structuré B2 ?",
+    "options": [
+      "Répéter l'introduction mot pour mot",
+      "Résumer l'idée principale sans la répéter littéralement",
+      "Introduire un tout nouveau sujet"
+    ],
+    "answer": "Résumer l'idée principale sans la répéter littéralement"
+  },
+  {
+    "id": "ex_b2_constrtxt2",
+    "notionId": "construire_texte_structure",
+    "type": "qcm",
+    "question": "Quelle erreur rend la structure d'un texte invisible pour le lecteur ?",
+    "options": [
+      "Utiliser des connecteurs variés entre les paragraphes",
+      "Mettre plusieurs idées différentes dans un seul paragraphe sans les séparer",
+      "Avoir une introduction et une conclusion distinctes"
+    ],
+    "answer": "Mettre plusieurs idées différentes dans un seul paragraphe sans les séparer"
+  },
+  {
+    "id": "ex_b2_constrtxt3",
+    "notionId": "construire_texte_structure",
+    "type": "texte_a_trous",
+    "question": "Complète (connecteur de conclusion) : \"___ biedt thuiswerken zowel kansen als uitdagingen.\" (al met al)",
+    "answer": "Al met al"
+  },
+  {
+    "id": "ex_b2_constrtxt4",
+    "notionId": "construire_texte_structure",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Premièrement, le télétravail offre plus de flexibilité.\"",
+    "words": [
+      "Ten",
+      "eerste",
+      "zorgt",
+      "thuiswerken",
+      "voor",
+      "meer",
+      "flexibiliteit"
+    ],
+    "answer": [
+      "Ten",
+      "eerste",
+      "zorgt",
+      "thuiswerken",
+      "voor",
+      "meer",
+      "flexibiliteit"
+    ]
+  },
+  {
+    "id": "ex_b2_argum1",
+    "notionId": "argumenter",
+    "type": "qcm",
+    "question": "Quel élément manque dans \"Ik denk dat flexibel werken goed is, want het is handig\" pour être une argumentation B2 complète ?",
+    "options": [
+      "Rien, c'est déjà complet",
+      "Un développement de la raison et un exemple concret",
+      "Une deuxième thèse contradictoire"
+    ],
+    "answer": "Un développement de la raison et un exemple concret"
+  },
+  {
+    "id": "ex_b2_argum2",
+    "notionId": "argumenter",
+    "type": "qcm",
+    "question": "Quelle phrase introduit un EXEMPLE dans une argumentation ?",
+    "options": [
+      "Daarom raad ik dit aan.",
+      "Bijvoorbeeld, iemand die vroeg productief is...",
+      "Ik ben van mening dat..."
+    ],
+    "answer": "Bijvoorbeeld, iemand die vroeg productief is..."
+  },
+  {
+    "id": "ex_b2_argum3",
+    "notionId": "argumenter",
+    "type": "texte_a_trous",
+    "question": "Complète (introduit la raison) : \"Dit komt ___ werknemers hun energiepiek beter kunnen benutten.\" (doordat)",
+    "answer": "doordat"
+  },
+  {
+    "id": "ex_b2_argum4",
+    "notionId": "argumenter",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je recommanderais donc des horaires flexibles à chaque entreprise.\"",
+    "words": [
+      "Daarom",
+      "zou",
+      "ik",
+      "flexibele",
+      "werktijden",
+      "aanraden",
+      "aan",
+      "elk",
+      "bedrijf"
+    ],
+    "answer": [
+      "Daarom",
+      "zou",
+      "ik",
+      "flexibele",
+      "werktijden",
+      "aanraden",
+      "aan",
+      "elk",
+      "bedrijf"
+    ]
+  },
+  {
+    "id": "ex_b2_avinc1",
+    "notionId": "expliquer_avantages_inconvenients",
+    "type": "qcm",
+    "question": "Quelle différence sépare cette compétence de 'comparer deux possibilités' (B1) ?",
+    "options": [
+      "Aucune, c'est la même chose",
+      "Ici on explore les deux faces d'UNE option, sans forcément choisir entre deux options distinctes",
+      "Ici on ne parle que des avantages"
+    ],
+    "answer": "Ici on explore les deux faces d'UNE option, sans forcément choisir entre deux options distinctes"
+  },
+  {
+    "id": "ex_b2_avinc2",
+    "notionId": "expliquer_avantages_inconvenients",
+    "type": "texte_a_trous",
+    "question": "Complète (bascule vers l'inconvénient) : \"Een nadeel is ___ dat collega's elkaar minder zien.\" (echter)",
+    "answer": "echter"
+  },
+  {
+    "id": "ex_b2_avinc3",
+    "notionId": "expliquer_avantages_inconvenients",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Cela dépend du type de fonction et de la personnalité.\"",
+    "words": [
+      "Het",
+      "hangt",
+      "af",
+      "van",
+      "het",
+      "type",
+      "functie",
+      "en",
+      "persoonlijkheid"
+    ],
+    "answer": [
+      "Het",
+      "hangt",
+      "af",
+      "van",
+      "het",
+      "type",
+      "functie",
+      "en",
+      "persoonlijkheid"
+    ]
+  },
+  {
+    "id": "ex_b2_avinc4",
+    "notionId": "expliquer_avantages_inconvenients",
+    "type": "qcm",
+    "question": "Quelle conclusion est la plus adaptée à un exposé équilibré ?",
+    "options": [
+      "Une conclusion tranchée sans nuance",
+      "\"Al met al hangt het af van...\"",
+      "Ignorer la conclusion"
+    ],
+    "answer": "\"Al met al hangt het af van...\""
+  },
+  {
+    "id": "ex_b2_contrarg1",
+    "notionId": "contre_argumentation",
+    "type": "qcm",
+    "question": "Quelle est la PREMIÈRE étape pour bien répondre à un contre-argument ?",
+    "options": [
+      "Répéter sa propre thèse plus fort",
+      "Montrer qu'on a compris l'argument opposé (reformulation)",
+      "Changer de sujet"
+    ],
+    "answer": "Montrer qu'on a compris l'argument opposé (reformulation)"
+  },
+  {
+    "id": "ex_b2_contrarg2",
+    "notionId": "contre_argumentation",
+    "type": "qcm",
+    "question": "Quelle phrase reconnaît partiellement la validité d'un contre-argument ?",
+    "options": [
+      "Het klopt dat direct contact soms sneller werkt.",
+      "U heeft helemaal ongelijk.",
+      "Dat is niet waar."
+    ],
+    "answer": "Het klopt dat direct contact soms sneller werkt."
+  },
+  {
+    "id": "ex_b2_contrarg3",
+    "notionId": "contre_argumentation",
+    "type": "texte_a_trous",
+    "question": "Complète (réponse malgré la concession) : \"___ denk ik dat digitale tools dit probleem oplossen.\" (toch)",
+    "answer": "Toch"
+  },
+  {
+    "id": "ex_b2_contrarg4",
+    "notionId": "contre_argumentation",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Mais en contrepartie, la productivité augmente souvent.\"",
+    "words": [
+      "Maar",
+      "daar",
+      "staat",
+      "tegenover",
+      "dat",
+      "de",
+      "productiviteit",
+      "vaak",
+      "stijgt"
+    ],
+    "answer": [
+      "Maar",
+      "daar",
+      "staat",
+      "tegenover",
+      "dat",
+      "de",
+      "productiviteit",
+      "vaak",
+      "stijgt"
+    ]
+  },
+  {
+    "id": "ex_b2_nuanpos1",
+    "notionId": "nuancer_position",
+    "type": "qcm",
+    "question": "Quelle est la différence entre 'mits' et 'tenzij' ?",
+    "options": [
+      "'Mits' pose une condition nécessaire positive, 'tenzij' pose une exception qui invaliderait la thèse",
+      "Ce sont des synonymes parfaits",
+      "'Tenzij' est plus formel, 'mits' plus familier"
+    ],
+    "answer": "'Mits' pose une condition nécessaire positive, 'tenzij' pose une exception qui invaliderait la thèse"
+  },
+  {
+    "id": "ex_b2_nuanpos2",
+    "notionId": "nuancer_position",
+    "type": "texte_a_trous",
+    "question": "Complète (en grande partie) : \"Ik ben het er ___ mee eens, mits de aanpassingen goed begeleid worden.\" (grotendeels)",
+    "answer": "grotendeels"
+  },
+  {
+    "id": "ex_b2_nuanpos3",
+    "notionId": "nuancer_position",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Dans une certaine mesure, cela est correct, à moins que la situation ne change fortement.\"",
+    "words": [
+      "Tot",
+      "op",
+      "zekere",
+      "hoogte",
+      "klopt",
+      "dat,",
+      "tenzij",
+      "de",
+      "situatie",
+      "sterk",
+      "verandert"
+    ],
+    "answer": [
+      "Tot",
+      "op",
+      "zekere",
+      "hoogte",
+      "klopt",
+      "dat,",
+      "tenzij",
+      "de",
+      "situatie",
+      "sterk",
+      "verandert"
+    ]
+  },
+  {
+    "id": "ex_b2_nuanpos4",
+    "notionId": "nuancer_position",
+    "type": "qcm",
+    "question": "Pourquoi éviter les mots absolus (altijd, nooit) dans un débat B2 ?",
+    "options": [
+      "Parce qu'ils sont grammaticalement incorrects",
+      "Parce qu'ils affaiblissent l'argumentation en la rendant facile à réfuter",
+      "Parce qu'ils n'existent pas en néerlandais"
+    ],
+    "answer": "Parce qu'ils affaiblissent l'argumentation en la rendant facile à réfuter"
+  },
+  {
+    "id": "ex_b2_defpos1",
+    "notionId": "defendre_position",
+    "type": "qcm",
+    "question": "Quelle phrase rappelle stratégiquement son fil argumentatif dans un débat prolongé ?",
+    "options": [
+      "Zoals ik al zei, de voordelen wegen zwaarder.",
+      "Dat is niet waar.",
+      "Ik weet het niet."
+    ],
+    "answer": "Zoals ik al zei, de voordelen wegen zwaarder."
+  },
+  {
+    "id": "ex_b2_defpos2",
+    "notionId": "defendre_position",
+    "type": "qcm",
+    "question": "Quel est le principal risque à éviter en défendant une position sur plusieurs tours de parole ?",
+    "options": [
+      "Se contredire d'un tour à l'autre",
+      "Développer trop d'arguments",
+      "Être trop poli"
+    ],
+    "answer": "Se contredire d'un tour à l'autre"
+  },
+  {
+    "id": "ex_b2_defpos3",
+    "notionId": "defendre_position",
+    "type": "texte_a_trous",
+    "question": "Complète (concession limitée) : \"Op dat punt heeft u gelijk, maar dat ___ niets aan de conclusie.\" (verandert)",
+    "answer": "verandert"
+  },
+  {
+    "id": "ex_b2_defpos4",
+    "notionId": "defendre_position",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Mon point reste que nous devons examiner cela à long terme.\"",
+    "words": [
+      "Mijn",
+      "punt",
+      "blijft",
+      "dat",
+      "we",
+      "dit",
+      "op",
+      "lange",
+      "termijn",
+      "moeten",
+      "bekijken"
+    ],
+    "answer": [
+      "Mijn",
+      "punt",
+      "blijft",
+      "dat",
+      "we",
+      "dit",
+      "op",
+      "lange",
+      "termijn",
+      "moeten",
+      "bekijken"
+    ]
+  },
+  {
+    "id": "ex_b2_anaprob1",
+    "notionId": "analyser_probleme",
+    "type": "qcm",
+    "question": "Quelle est la différence entre 'décrire l'évolution' (B1) et 'analyser un problème' (B2) ?",
+    "options": [
+      "Aucune différence",
+      "Analyser distingue explicitement causes, conséquences et acteurs, pas seulement l'évolution dans le temps",
+      "Analyser ne concerne que le futur"
+    ],
+    "answer": "Analyser distingue explicitement causes, conséquences et acteurs, pas seulement l'évolution dans le temps"
+  },
+  {
+    "id": "ex_b2_anaprob2",
+    "notionId": "analyser_probleme",
+    "type": "texte_a_trous",
+    "question": "Complète (cause) : \"___ hiervan is een tekort aan personeel.\" (De oorzaak)",
+    "answer": "De oorzaak"
+  },
+  {
+    "id": "ex_b2_anaprob3",
+    "notionId": "analyser_probleme",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Cela mène à des clients mécontents et des coûts supplémentaires.\"",
+    "words": [
+      "Dit",
+      "leidt",
+      "tot",
+      "ontevreden",
+      "klanten",
+      "en",
+      "extra",
+      "kosten"
+    ],
+    "answer": [
+      "Dit",
+      "leidt",
+      "tot",
+      "ontevreden",
+      "klanten",
+      "en",
+      "extra",
+      "kosten"
+    ]
+  },
+  {
+    "id": "ex_b2_anaprob4",
+    "notionId": "analyser_probleme",
+    "type": "qcm",
+    "question": "Pourquoi identifier les acteurs concernés dans une analyse de problème ?",
+    "options": [
+      "Pour rendre le texte plus long",
+      "Pour cibler ensuite une solution adaptée à chacun",
+      "Ce n'est pas utile"
+    ],
+    "answer": "Pour cibler ensuite une solution adaptée à chacun"
+  },
+  {
+    "id": "ex_b2_propsol1",
+    "notionId": "proposer_solution",
+    "type": "qcm",
+    "question": "Qu'est-ce qui rend une proposition de solution B2 crédible ?",
+    "options": [
+      "Le fait qu'elle soit présentée comme parfaite et sans limite",
+      "Le lien explicite avec la cause du problème et la reconnaissance de ses limites",
+      "Le fait qu'elle soit très courte"
+    ],
+    "answer": "Le lien explicite avec la cause du problème et la reconnaissance de ses limites"
+  },
+  {
+    "id": "ex_b2_propsol2",
+    "notionId": "proposer_solution",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Een mogelijke ___ zou zijn om een tweede leverancier in te schakelen.\" (oplossing)",
+    "answer": "oplossing"
+  },
+  {
+    "id": "ex_b2_propsol3",
+    "notionId": "proposer_solution",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Cela nécessite cependant que nous libérions suffisamment de budget.\"",
+    "words": [
+      "Dit",
+      "vereist",
+      "echter",
+      "wel",
+      "dat",
+      "we",
+      "voldoende",
+      "budget",
+      "vrijmaken"
+    ],
+    "answer": [
+      "Dit",
+      "vereist",
+      "echter",
+      "wel",
+      "dat",
+      "we",
+      "voldoende",
+      "budget",
+      "vrijmaken"
+    ]
+  },
+  {
+    "id": "ex_b2_propsol4",
+    "notionId": "proposer_solution",
+    "type": "qcm",
+    "question": "Quelle formulation introduit une LIMITE ou condition d'une solution proposée ?",
+    "options": [
+      "Een aandachtspunt hierbij is...",
+      "Ik stel voor om...",
+      "Het probleem is dat..."
+    ],
+    "answer": "Een aandachtspunt hierbij is..."
+  },
+  {
+    "id": "ex_b2_presproj1",
+    "notionId": "presenter_projet",
+    "type": "qcm",
+    "question": "Pourquoi mentionner le contexte au début d'une présentation de projet ?",
+    "options": [
+      "Pour remplir du temps",
+      "Pour qu'un auditeur non familier du sujet comprenne l'enjeu",
+      "Ce n'est pas nécessaire"
+    ],
+    "answer": "Pour qu'un auditeur non familier du sujet comprenne l'enjeu"
+  },
+  {
+    "id": "ex_b2_presproj2",
+    "notionId": "presenter_projet",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Het ___ van dit project is om de reactietijd te halveren.\" (doel)",
+    "answer": "doel"
+  },
+  {
+    "id": "ex_b2_presproj3",
+    "notionId": "presenter_projet",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Nous nous attendons à ce que cela mène à une plus grande satisfaction client.\"",
+    "words": [
+      "We",
+      "verwachten",
+      "dat",
+      "dit",
+      "zal",
+      "leiden",
+      "tot",
+      "een",
+      "hogere",
+      "klanttevredenheid"
+    ],
+    "answer": [
+      "We",
+      "verwachten",
+      "dat",
+      "dit",
+      "zal",
+      "leiden",
+      "tot",
+      "een",
+      "hogere",
+      "klanttevredenheid"
+    ]
+  },
+  {
+    "id": "ex_b2_reunav1",
+    "notionId": "reunion_avancee",
+    "type": "qcm",
+    "question": "Quelle formule objecte AVEC TACT dans une réunion ?",
+    "options": [
+      "Dat klopt niet.",
+      "Ik zie het punt, maar ik vraag me af of dit haalbaar is.",
+      "U heeft het mis."
+    ],
+    "answer": "Ik zie het punt, maar ik vraag me af of dit haalbaar is."
+  },
+  {
+    "id": "ex_b2_reunav2",
+    "notionId": "reunion_avancee",
+    "type": "texte_a_trous",
+    "question": "Complète (recentrer) : \"Als we ___ gaan naar het hoofdpunt, moeten we een besluit nemen.\" (terug)",
+    "answer": "terug"
+  },
+  {
+    "id": "ex_b2_reunav3",
+    "notionId": "reunion_avancee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Ne pourrions-nous pas envisager de faire d'abord un test ?\"",
+    "words": [
+      "Zouden",
+      "we",
+      "niet",
+      "kunnen",
+      "overwegen",
+      "om",
+      "eerst",
+      "een",
+      "test",
+      "te",
+      "doen"
+    ],
+    "answer": [
+      "Zouden",
+      "we",
+      "niet",
+      "kunnen",
+      "overwegen",
+      "om",
+      "eerst",
+      "een",
+      "test",
+      "te",
+      "doen"
+    ]
+  },
+  {
+    "id": "ex_b2_negoc1",
+    "notionId": "negociation",
+    "type": "qcm",
+    "question": "Quelle réaction à une contre-offre est la plus constructive ?",
+    "options": [
+      "Nee, dat kan niet.",
+      "Dat ligt hoger dan we hadden verwacht, maar we begrijpen uw positie.",
+      "Dat is belachelijk."
+    ],
+    "answer": "Dat ligt hoger dan we hadden verwacht, maar we begrijpen uw positie."
+  },
+  {
+    "id": "ex_b2_negoc2",
+    "notionId": "negociation",
+    "type": "texte_a_trous",
+    "question": "Complète (condition) : \"Wij gaan hiermee akkoord, ___ voorwaarde dat de prijs gelijk blijft.\" (op)",
+    "answer": "op"
+  },
+  {
+    "id": "ex_b2_negoc3",
+    "notionId": "negociation",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Ne pourrions-nous pas trouver une solution intermédiaire ?\"",
+    "words": [
+      "Zouden",
+      "we",
+      "niet",
+      "tot",
+      "een",
+      "tussenoplossing",
+      "kunnen",
+      "komen"
+    ],
+    "answer": [
+      "Zouden",
+      "we",
+      "niet",
+      "tot",
+      "een",
+      "tussenoplossing",
+      "kunnen",
+      "komen"
+    ]
+  },
+  {
+    "id": "ex_b2_presprof1",
+    "notionId": "presentation_professionnelle",
+    "type": "qcm",
+    "question": "Quel est le rôle d'une phrase de transition comme \"Dit brengt me bij mijn volgende punt\" ?",
+    "options": [
+      "Combler un silence",
+      "Signaler clairement le passage à une nouvelle partie pour l'auditoire",
+      "Terminer la présentation"
+    ],
+    "answer": "Signaler clairement le passage à une nouvelle partie pour l'auditoire"
+  },
+  {
+    "id": "ex_b2_presprof2",
+    "notionId": "presentation_professionnelle",
+    "type": "texte_a_trous",
+    "question": "Complète (annonce du plan) : \"Ik zal eerst ingaan op het probleem, ___ bespreek ik onze oplossing.\" (daarna)",
+    "answer": "daarna"
+  },
+  {
+    "id": "ex_b2_presprof3",
+    "notionId": "presentation_professionnelle",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"En résumé, ce projet peut considérablement améliorer notre satisfaction client.\"",
+    "words": [
+      "Kortom,",
+      "dit",
+      "project",
+      "kan",
+      "onze",
+      "klanttevredenheid",
+      "aanzienlijk",
+      "verbeteren"
+    ],
+    "answer": [
+      "Kortom,",
+      "dit",
+      "project",
+      "kan",
+      "onze",
+      "klanttevredenheid",
+      "aanzienlijk",
+      "verbeteren"
+    ]
+  },
+  {
+    "id": "ex_b2_emailpro1",
+    "notionId": "email_professionnel_complexe",
+    "type": "qcm",
+    "question": "Que doit faire un e-mail professionnel B2 en plus de formuler une demande ?",
+    "options": [
+      "Rien, la demande suffit",
+      "La justifier et anticiper une objection possible",
+      "Utiliser un ton familier pour paraître sympathique"
+    ],
+    "answer": "La justifier et anticiper une objection possible"
+  },
+  {
+    "id": "ex_b2_emailpro2",
+    "notionId": "email_professionnel_complexe",
+    "type": "texte_a_trous",
+    "question": "Complète (ouverture contextualisée) : \"___ ons gesprek van gisteren, zou ik het volgende willen voorstellen.\" (Naar aanleiding van)",
+    "answer": "Naar aanleiding van"
+  },
+  {
+    "id": "ex_b2_emailpro3",
+    "notionId": "email_professionnel_complexe",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je me rends compte que c'est un délai court, mais j'espère votre compréhension.\"",
+    "words": [
+      "Ik",
+      "realiseer",
+      "me",
+      "dat",
+      "dit",
+      "kort",
+      "dag",
+      "is,",
+      "maar",
+      "ik",
+      "hoop",
+      "op",
+      "uw",
+      "begrip"
+    ],
+    "answer": [
+      "Ik",
+      "realiseer",
+      "me",
+      "dat",
+      "dit",
+      "kort",
+      "dag",
+      "is,",
+      "maar",
+      "ik",
+      "hoop",
+      "op",
+      "uw",
+      "begrip"
+    ]
+  },
+  {
+    "id": "ex_b2_entravav1",
+    "notionId": "entretien_embauche_avance",
+    "type": "qcm",
+    "question": "Pourquoi un point faible 'déguisé en qualité' (ik werk te hard) est-il mal perçu en entretien B2 ?",
+    "options": [
+      "Parce qu'il est trop long",
+      "Parce qu'il manque de sincérité et n'inclut pas d'action corrective",
+      "Parce que c'est grammaticalement incorrect"
+    ],
+    "answer": "Parce qu'il manque de sincérité et n'inclut pas d'action corrective"
+  },
+  {
+    "id": "ex_b2_entravav2",
+    "notionId": "entretien_embauche_avance",
+    "type": "texte_a_trous",
+    "question": "Complète (STAR - tâche) : \"Mijn ___ was om een compromis te vinden.\" (taak)",
+    "answer": "taak"
+  },
+  {
+    "id": "ex_b2_entravav3",
+    "notionId": "entretien_embauche_avance",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Ce qui m'attire surtout dans cette fonction, c'est la combinaison d'analyse et de contact client.\"",
+    "words": [
+      "Wat",
+      "mij",
+      "vooral",
+      "aantrekt",
+      "in",
+      "deze",
+      "functie",
+      "is",
+      "de",
+      "combinatie",
+      "van",
+      "analyse",
+      "en",
+      "klantcontact"
+    ],
+    "answer": [
+      "Wat",
+      "mij",
+      "vooral",
+      "aantrekt",
+      "in",
+      "deze",
+      "functie",
+      "is",
+      "de",
+      "combinatie",
+      "van",
+      "analyse",
+      "en",
+      "klantcontact"
+    ]
+  },
+  {
+    "id": "ex_b2_comptxtarg1",
+    "notionId": "comprendre_texte_argumentatif",
+    "type": "qcm",
+    "question": "Dans le texte modèle, quelle phrase exprime une CONCESSION de l'auteur ?",
+    "options": [
+      "Flexibel werken zou verplicht moeten worden aangeboden.",
+      "Hoewel sommige bedrijven vrezen voor controleverlies...",
+      "Een onderzoek bij X toonde een stijging van 15%."
+    ],
+    "answer": "Hoewel sommige bedrijven vrezen voor controleverlies..."
+  },
+  {
+    "id": "ex_b2_comptxtarg2",
+    "notionId": "comprendre_texte_argumentatif",
+    "type": "qcm",
+    "question": "Quel mot introduit généralement un EXEMPLE dans un texte argumentatif ?",
+    "options": [
+      "Bijvoorbeeld",
+      "Hoewel",
+      "Kortom"
+    ],
+    "answer": "Bijvoorbeeld"
+  },
+  {
+    "id": "ex_b2_comptxtarg3",
+    "notionId": "comprendre_texte_argumentatif",
+    "type": "texte_a_trous",
+    "question": "Complète (connecteur de conclusion/thèse résumée) : \"___, de voordelen wegen zwaarder dan de nadelen.\" (Kortom)",
+    "answer": "Kortom"
+  },
+  {
+    "id": "ex_b2_comppdv1",
+    "notionId": "comprendre_points_de_vue",
+    "type": "qcm",
+    "question": "Quelle formulation exprime une CONVERGENCE entre deux points de vue ?",
+    "options": [
+      "Anders dan X, denkt Y dat...",
+      "Zowel X als Y erkennen dat...",
+      "X is het er niet mee eens."
+    ],
+    "answer": "Zowel X als Y erkennen dat..."
+  },
+  {
+    "id": "ex_b2_comppdv2",
+    "notionId": "comprendre_points_de_vue",
+    "type": "qcm",
+    "question": "Pourquoi est-ce une erreur de résumer plusieurs avis en \"iedereen denkt hetzelfde\" ?",
+    "options": [
+      "Ce n'est jamais une erreur",
+      "Cela efface les nuances et les degrés d'accord propres à chaque personne",
+      "C'est toujours vrai dans un débat"
+    ],
+    "answer": "Cela efface les nuances et les degrés d'accord propres à chaque personne"
+  },
+  {
+    "id": "ex_b2_comppdv3",
+    "notionId": "comprendre_points_de_vue",
+    "type": "texte_a_trous",
+    "question": "Complète (divergence) : \"___ de directeur, denkt de vakbond dat controle nodig blijft.\" (Anders dan)",
+    "answer": "Anders dan"
+  },
+  {
+    "id": "ex_b2_compneprof1",
+    "notionId": "comprendre_neerlandais_professionnel",
+    "type": "qcm",
+    "question": "Dans un e-mail professionnel, que signifie généralement \"Wij verzoeken u...\" ?",
+    "options": [
+      "Une simple information",
+      "Une demande polie d'action",
+      "Un refus"
+    ],
+    "answer": "Une demande polie d'action"
+  },
+  {
+    "id": "ex_b2_compneprof2",
+    "notionId": "comprendre_neerlandais_professionnel",
+    "type": "texte_a_trous",
+    "question": "Complète (indique le sujet du message) : \"___: wijziging van de vergaderdatum.\" (Betreft)",
+    "answer": "Betreft"
+  },
+  {
+    "id": "ex_b2_compneprof3",
+    "notionId": "comprendre_neerlandais_professionnel",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Ci-joint vous trouverez le compte-rendu de la réunion précédente.\"",
+    "words": [
+      "Bijgaand",
+      "vindt",
+      "u",
+      "de",
+      "notulen",
+      "van",
+      "de",
+      "vorige",
+      "vergadering"
+    ],
+    "answer": [
+      "Bijgaand",
+      "vindt",
+      "u",
+      "de",
+      "notulen",
+      "van",
+      "de",
+      "vorige",
+      "vergadering"
+    ]
+  },
+  {
+    "id": "ex_b2_compaudio1",
+    "notionId": "comprendre_discours_audio_complexe",
+    "type": "qcm",
+    "question": "\"Het is, of eigenlijk, het was een succes.\" Quelle est l'information à retenir ?",
+    "options": [
+      "C'est un succès (présent)",
+      "C'était un succès (passé, version corrigée)",
+      "Ce n'était pas un succès"
+    ],
+    "answer": "C'était un succès (passé, version corrigée)"
+  },
+  {
+    "id": "ex_b2_compaudio2",
+    "notionId": "comprendre_discours_audio_complexe",
+    "type": "qcm",
+    "question": "Que faut-il faire face aux hésitations ('eh', 'dus dus') dans un discours oral ?",
+    "options": [
+      "Se concentrer dessus pour bien les comprendre",
+      "Les ignorer et se concentrer sur les mots clés et connecteurs",
+      "Arrêter d'écouter"
+    ],
+    "answer": "Les ignorer et se concentrer sur les mots clés et connecteurs"
+  },
+  {
+    "id": "ex_b2_compaudio3",
+    "notionId": "comprendre_discours_audio_complexe",
+    "type": "texte_a_trous",
+    "question": "Complète (introduit une conclusion orale) : \"___, samengevat, we gaan door met het plan.\" (Dus)",
+    "answer": "Dus"
+  },
+  {
+    "id": "ex_b2_synth1",
+    "notionId": "synthese",
+    "type": "qcm",
+    "question": "Quelle est la principale différence entre une synthèse B2 et un simple résumé neutre ?",
+    "options": [
+      "Il n'y en a aucune",
+      "La synthèse ajoute une prise de position personnelle nuancée et justifiée",
+      "La synthèse est toujours plus courte"
+    ],
+    "answer": "La synthèse ajoute une prise de position personnelle nuancée et justifiée"
+  },
+  {
+    "id": "ex_b2_synth2",
+    "notionId": "synthese",
+    "type": "qcm",
+    "question": "Que risque un texte de synthèse qui prend position SANS présenter d'abord les points de vue existants ?",
+    "options": [
+      "Rien, c'est la meilleure méthode",
+      "De paraître partial et de manquer d'objectivité initiale",
+      "D'être trop long"
+    ],
+    "answer": "De paraître partial et de manquer d'objectivité initiale"
+  },
+  {
+    "id": "ex_b2_synth3",
+    "notionId": "synthese",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Tout compte fait, une approche équilibrée est souhaitable.\"",
+    "words": [
+      "Al",
+      "met",
+      "al",
+      "is",
+      "een",
+      "evenwichtige",
+      "aanpak",
+      "wenselijk"
+    ],
+    "answer": [
+      "Al",
+      "met",
+      "al",
+      "is",
+      "een",
+      "evenwichtige",
+      "aanpak",
+      "wenselijk"
+    ]
   }
 ]

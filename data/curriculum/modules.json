@@ -329,6 +329,7 @@
     "label": "Nuances grammaticales avancées",
     "notions": [
       "nuances_temps",
+      "passif_worden_zijn",
       "passif_avance",
       "conditionnel_avance",
       "discours_rapporte_avance",
@@ -339,63 +340,70 @@
     "id": "b2-m2",
     "level": "B2",
     "order": 2,
-    "label": "Style et registre",
+    "label": "Précision et registre",
     "notions": [
       "registre_formel_informel",
-      "expressions_figees",
       "collocations",
+      "expressions_figees",
       "nuances_synonymes",
-      "formulations_idiomatiques"
+      "formulations_idiomatiques",
+      "attenuer_nuancer"
     ]
   },
   {
     "id": "b2-m3",
     "level": "B2",
     "order": 3,
-    "label": "Connecteurs et structure de texte",
+    "label": "Cohésion et style avancé",
     "notions": [
       "connecteurs_complexes",
+      "cohesion_texte",
       "ordre_mots_avance",
-      "nominalisation_avancee"
+      "nominalisation_avancee",
+      "transformer_style_formel",
+      "construire_texte_structure"
     ]
   },
   {
     "id": "b2-m4",
     "level": "B2",
     "order": 4,
-    "label": "Argumenter et débattre",
+    "label": "Argumentation et résolution de problèmes",
     "notions": [
       "argumenter",
-      "debattre",
+      "expliquer_avantages_inconvenients",
+      "contre_argumentation",
+      "nuancer_position",
       "defendre_position",
       "analyser_probleme",
-      "proposer_solution",
-      "expliquer_avantages_inconvenients"
+      "proposer_solution"
     ]
   },
   {
     "id": "b2-m5",
     "level": "B2",
     "order": 5,
-    "label": "Professionnel avancé",
+    "label": "Communication professionnelle",
     "notions": [
       "presenter_projet",
       "reunion_avancee",
       "negociation",
       "presentation_professionnelle",
-      "email_professionnel_complexe"
+      "email_professionnel_complexe",
+      "entretien_embauche_avance"
     ]
   },
   {
     "id": "b2-m6",
     "level": "B2",
     "order": 6,
-    "label": "Communication professionnelle écrite",
+    "label": "Compréhension avancée et synthèse",
     "notions": [
-      "rapport",
-      "synthese",
-      "entretien_embauche_avance",
-      "communication_collegues_clients"
+      "comprendre_texte_argumentatif",
+      "comprendre_points_de_vue",
+      "comprendre_neerlandais_professionnel",
+      "comprendre_discours_audio_complexe",
+      "synthese"
     ]
   }
 ]
