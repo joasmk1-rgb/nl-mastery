@@ -812,9 +812,15 @@ if (firebaseAvailable) {
 
             const zone = document.getElementById('exercise-answer-zone');
             if (ex.type === 'qcm') {
-                zone.innerHTML = ex.options.map(opt =>
-                    `<button class="ex-option-btn" onclick="selectExerciseOption(this, '${opt}')">${opt}</button>`
+                // data-index + addEventListener plutôt qu'un onclick inline : évite de casser le
+                // HTML quand une option contient une apostrophe (ex: "l'infinitif").
+                zone.innerHTML = ex.options.map((opt, i) =>
+                    `<button class="ex-option-btn" data-opt-index="${i}"></button>`
                 ).join('');
+                zone.querySelectorAll('.ex-option-btn').forEach((btn, i) => {
+                    btn.textContent = ex.options[i];
+                    btn.addEventListener('click', () => selectExerciseOption(btn, ex.options[i]));
+                });
             } else if (ex.type === 'remise_en_ordre') {
                 exerciseOrderSelection = [];
                 exerciseOrderBank = shuffleArray([...ex.words]);

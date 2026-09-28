@@ -2438,5 +2438,253 @@
     "type": "texte_a_trous",
     "question": "Complète : \"Ik ben het ___ je eens.\" (avec)",
     "answer": "met"
+  },
+  {
+    "id": "ex_a2_choix4",
+    "notionId": "choix_temps_passe",
+    "type": "qcm",
+    "question": "Kies de juiste vorm: \"Gisteren ___ ik naar de winkel.\" (fait ponctuel d'hier)",
+    "options": [
+      "ben gegaan",
+      "ging"
+    ],
+    "answer": "ben gegaan"
+  },
+  {
+    "id": "ex_a2_choix5",
+    "notionId": "choix_temps_passe",
+    "type": "qcm",
+    "question": "Kies de juiste vorm: \"Toen ik bij Thule ___, begon ik om acht uur.\" (situation/contexte)",
+    "options": [
+      "heb gewerkt",
+      "werkte"
+    ],
+    "answer": "werkte"
+  },
+  {
+    "id": "ex_a2_imp5",
+    "notionId": "imperfectum",
+    "type": "qcm",
+    "question": "Voor een gewoonte of een herhaalde situatie in het verleden gebruik je meestal:",
+    "options": [
+      "het perfectum",
+      "het imperfectum",
+      "de tegenwoordige tijd"
+    ],
+    "answer": "het imperfectum"
+  },
+  {
+    "id": "ex_a2_imp6",
+    "notionId": "imperfectum",
+    "type": "texte_a_trous",
+    "question": "Complète (habitude, imperfectum): \"Vroeger ___ ik elke zondag naar mijn oma.\" (fietsen)",
+    "answer": "fietste"
+  },
+  {
+    "id": "ex_a2_coord4",
+    "notionId": "conjonctions_coordination",
+    "type": "qcm",
+    "question": "Kies het juiste woord: \"Ik blijf thuis ___ ik ben ziek.\" (let op de woordvolgorde: 'ik ben')",
+    "options": [
+      "want",
+      "omdat"
+    ],
+    "answer": "want"
+  },
+  {
+    "id": "ex_a2_coord5",
+    "notionId": "conjonctions_coordination",
+    "type": "qcm",
+    "question": "Kies het juiste woord: \"Ik ben ziek. ___ blijf ik thuis.\" (let op de woordvolgorde: 'blijf ik')",
+    "options": [
+      "dus",
+      "daarom"
+    ],
+    "answer": "daarom"
+  },
+  {
+    "id": "ex_a2_omdat4",
+    "notionId": "subordonnee_omdat",
+    "type": "texte_a_trous",
+    "question": "Complète (attention à l'inversion) : \"Omdat ik ziek ben, ___ ik thuis.\" (blijven)",
+    "answer": "blijf"
+  },
+  {
+    "id": "ex_a2_datofals4",
+    "notionId": "dat_of_als",
+    "type": "qcm",
+    "question": "Kies het juiste woord: \"Ik weet niet ___ hij morgen komt.\" (question indirecte oui/non)",
+    "options": [
+      "dat",
+      "of",
+      "als"
+    ],
+    "answer": "of"
+  },
+  {
+    "id": "ex_a2_datofals5",
+    "notionId": "dat_of_als",
+    "type": "qcm",
+    "question": "Kies het juiste woord voor een VOORWAARDE (conditie): \"___ het regent, neem ik een paraplu.\"",
+    "options": [
+      "Omdat",
+      "Als"
+    ],
+    "answer": "Als"
+  },
+  {
+    "id": "ex_a2_connect4",
+    "notionId": "connecteurs_temporels",
+    "type": "qcm",
+    "question": "Kies het juiste woord (chronologie: eerst ik thuis, dan hij aankomen): \"Ik was al thuis ___ hij aankwam.\"",
+    "options": [
+      "voordat",
+      "nadat"
+    ],
+    "answer": "voordat"
+  },
+  {
+    "id": "ex_a2_connect5",
+    "notionId": "connecteurs_temporels",
+    "type": "qcm",
+    "question": "Kies het juiste woord (chronologie: eerst eten, dan sporten): \"___ ik gegeten had, ging ik sporten.\"",
+    "options": [
+      "Voordat",
+      "Nadat"
+    ],
+    "answer": "Nadat"
+  },
+  {
+    "id": "ex_a2_ordresub4",
+    "notionId": "ordre_mots_subordonnee",
+    "type": "qcm",
+    "question": "Corrige cette phrase fautive : \"Omdat ik ziek ben ik blijf thuis.\" Quelle est la bonne version ?",
+    "options": [
+      "Omdat ik ziek ben, blijf ik thuis.",
+      "Omdat ik ziek ben, ik blijf thuis.",
+      "Omdat ben ik ziek, blijf ik thuis."
+    ],
+    "answer": "Omdat ik ziek ben, blijf ik thuis."
+  },
+  {
+    "id": "ex_a2_ordresub5",
+    "notionId": "ordre_mots_subordonnee",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Omdat ik morgen werk, ___ ik vroeg naar bed.\" (gaan)",
+    "answer": "ga"
+  },
+  {
+    "id": "ex_a2_ordresub6",
+    "notionId": "ordre_mots_subordonnee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Parce que je suis malade, je reste à la maison.\"",
+    "words": [
+      "Omdat",
+      "ik",
+      "ziek",
+      "ben",
+      "blijf",
+      "ik",
+      "thuis"
+    ],
+    "answer": [
+      "Omdat",
+      "ik",
+      "ziek",
+      "ben",
+      "blijf",
+      "ik",
+      "thuis"
+    ]
+  },
+  {
+    "id": "ex_a2_omte4",
+    "notionId": "om_te_infinitif",
+    "type": "qcm",
+    "question": "Deze zin drukt geen echt doel uit (geen 'om' nodig): \"Ik probeer Nederlands ___ leren.\"",
+    "options": [
+      "te",
+      "om te",
+      "om"
+    ],
+    "answer": "te"
+  },
+  {
+    "id": "ex_a2_omte5",
+    "notionId": "om_te_infinitif",
+    "type": "qcm",
+    "question": "Deze zin drukt een echt doel uit ('om' nodig): \"Ik ga naar de winkel ___ brood te kopen.\"",
+    "options": [
+      "te",
+      "om",
+      "dat"
+    ],
+    "answer": "om"
+  },
+  {
+    "id": "ex_a2_comb4",
+    "notionId": "combiner_structures_verbales",
+    "type": "qcm",
+    "question": "Kies de juiste zin: \"Je ne sais pas à quelle heure je me lève demain.\"",
+    "options": [
+      "Ik weet niet hoe laat ik morgen opsta.",
+      "Ik weet niet hoe laat ik morgen sta op.",
+      "Ik weet niet hoe laat sta ik morgen op."
+    ],
+    "answer": "Ik weet niet hoe laat ik morgen opsta."
+  },
+  {
+    "id": "ex_a2_zull4",
+    "notionId": "zullen_futur",
+    "type": "qcm",
+    "question": "Iemand vraagt om hulp bij het verhuizen. Wat zeg je om een belofte te doen?",
+    "options": [
+      "Ik zal je helpen.",
+      "Ik ga je helpen gisteren.",
+      "Ik help je vroeger."
+    ],
+    "answer": "Ik zal je helpen."
+  },
+  {
+    "id": "ex_a2_erlieu4",
+    "notionId": "er_lieu",
+    "type": "qcm",
+    "question": "\"Ik woon in Mons.\" Comment reprendre ce lieu déjà mentionné, sans le répéter ?",
+    "options": [
+      "Ik woon daar al drie jaar.",
+      "Ik woon er al drie jaar."
+    ],
+    "answer": "Ik woon er al drie jaar."
+  },
+  {
+    "id": "ex_a2_erprep4",
+    "notionId": "er_preposition",
+    "type": "qcm",
+    "question": "Kies de juiste zin voor \"J'attends lui\" (une personne) :",
+    "options": [
+      "Ik wacht op hem.",
+      "Ik wacht erop.",
+      "Ik erop wacht."
+    ],
+    "answer": "Ik wacht op hem."
+  },
+  {
+    "id": "ex_a2_erquant4",
+    "notionId": "er_quantite",
+    "type": "texte_a_trous",
+    "question": "\"Hoeveel appels heb je?\" (5) → Complète : \"Ik heb ___ vijf.\"",
+    "answer": "er"
+  },
+  {
+    "id": "ex_a2_ersuj4",
+    "notionId": "er_sujet_presentatif",
+    "type": "qcm",
+    "question": "Comment demande-t-on s'il y a du pain ?",
+    "options": [
+      "Is er brood?",
+      "Er is brood?",
+      "Is brood er?"
+    ],
+    "answer": "Is er brood?"
   }
 ]

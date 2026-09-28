@@ -2205,7 +2205,7 @@
     "status": "pret",
     "content": {
       "objectif": "Former et utiliser l'imperfectum des verbes réguliers.",
-      "comprendre": "L'imperfectum (prétérit) sert à raconter un fait passé sans lien direct avec le présent, souvent dans un récit. Pour les verbes réguliers, on ajoute -te(n) ou -de(n) au radical selon la consonne finale ('t kofschip).",
+      "comprendre": "L'imperfectum (prétérit) sert surtout à parler d'actions et d'habitudes dans le passé, de situations et descriptions dans le passé, et à faire de la narration. Pour les verbes réguliers, on ajoute -te(n) ou -de(n) au radical selon la consonne finale ('t kofschip). Certains verbes très fréquents (was, had, kon, moest, wilde, wist...) apparaissent à l'imperfectum très souvent dans la conversation courante — ils sont vus en détail dans la notion suivante.",
       "regle": "radical + te/ten (après consonne sourde : t,k,f,s,ch,p) ; radical + de/den (sinon). Le singulier et le pluriel ont la même forme (pas de -t supplémentaire comme au présent).",
       "exemples": [
         "ik werkte",
@@ -2215,7 +2215,8 @@
       ],
       "erreursFrequentes": [
         "Ajouter un -t supplémentaire au singulier comme au présent ('werktte').",
-        "Confondre la règle -te/-de avec celle du perfectum (ge-...-t/d)."
+        "Confondre la règle -te/-de avec celle du perfectum (ge-...-t/d).",
+        "Penser que l'imperfectum n'a aucun rapport avec le présent : il sert surtout à décrire un contexte, une habitude ou une narration, pas à marquer une distance avec le présent."
       ],
       "objectifCommunication": "Pouvoir raconter un fait passé simple dans un petit récit.",
       "tacheProduction": "Schrijf drie zinnen over vorige zomer, met het imperfectum.",
@@ -2230,7 +2231,9 @@
       "ex_a2_imp1",
       "ex_a2_imp2",
       "ex_a2_imp3",
-      "ex_a2_imp4"
+      "ex_a2_imp4",
+      "ex_a2_imp5",
+      "ex_a2_imp6"
     ]
   },
   "imperfectum_irreguliers": {
@@ -2288,14 +2291,17 @@
     "status": "pret",
     "content": {
       "objectif": "Choisir entre perfectum et imperfectum selon le contexte.",
-      "comprendre": "En néerlandais courant, le perfectum domine pour évoquer un fait ponctuel ; l'imperfectum s'utilise surtout pour les verbes auxiliaires/modaux fréquents et pour poser le contexte d'un récit (\"toen...\").",
-      "regle": "Perfectum = événement ponctuel récent (\"Wat heb je gisteren gedaan?\"). Imperfectum = contexte/description dans un récit, ou verbes comme zijn/hebben/kunnen/moeten/willen (\"Toen ik klein was, woonde ik in België.\").",
+      "comprendre": "Les deux temps parlent du passé : il ne s'agit pas d'une règle mécanique mais d'un choix qui dépend du contexte, du type de récit et de ce que le locuteur veut présenter. Dans la conversation courante, le perfectum est très fréquent pour raconter ce qui s'est passé (\"Wat heb je gisteren gedaan?\"). L'imperfectum est très fréquent pour certaines descriptions, situations dans le passé, habitudes, et pour des verbes très courants comme zijn/hebben/kunnen/moeten/willen. À ce niveau, il ne s'agit pas de maîtriser toute la stylistique du récit néerlandais, mais de reconnaître les usages fréquents et les contrastes typiques.",
+      "regle": "Perfectum : fait ponctuel qu'on rapporte (\"Gisteren heb ik gewerkt.\"). Imperfectum : situation, description ou contexte dans lequel autre chose se produit (\"Toen ik bij Thule werkte, begon ik om acht uur.\"). Dans un même récit, les deux se combinent souvent.",
       "exemples": [
+        "Gisteren heb ik gewerkt.",
+        "Toen ik bij Thule werkte, begon ik om acht uur.",
         "Wat heb je gisteren gedaan?",
         "Toen ik klein was, woonde ik in België.",
         "Ik was moe, dus ik ben vroeg naar bed gegaan."
       ],
       "erreursFrequentes": [
+        "Croire que le perfectum et l'imperfectum s'opposent toujours selon une règle fixe (\"événement\" vs \"contexte\") : c'est une tendance fréquente, pas une loi absolue.",
         "Utiliser systématiquement le perfectum même pour poser le contexte d'un récit.",
         "Utiliser l'imperfectum pour une question ponctuelle sur 'hier'."
       ],
@@ -2312,7 +2318,9 @@
     "exerciseIds": [
       "ex_a2_choix1",
       "ex_a2_choix2",
-      "ex_a2_choix3"
+      "ex_a2_choix3",
+      "ex_a2_choix4",
+      "ex_a2_choix5"
     ]
   },
   "raconter_evenement_passe": {
@@ -2409,7 +2417,7 @@
     "status": "pret",
     "content": {
       "objectif": "Utiliser correctement les verbes séparables dans les questions et les phrases complexes.",
-      "comprendre": "Dans une question ouverte ou une subordonnée, la particule reste attachée en fin de proposition, mais sa position relative au verbe change selon la structure.",
+      "comprendre": "Dans une question ouverte ou une subordonnée, la particule reste attachée en fin de proposition, mais sa position relative au verbe change selon la structure : au présent en hoofdzin la particule part en fin de phrase (\"Ik sta ... op\"), en question ouverte elle reste en toute fin après le sujet (\"Sta je ... op?\"), et en bijzin elle se recolle directement au verbe (\"...ik opsta\").",
       "regle": "Question ouverte : [mot interrogatif] + verbe + sujet + ... + particule + ? Subordonnée : ... + sujet + ... + verbe+particule (collés, en fin de proposition).",
       "exemples": [
         "Hoe laat sta je morgen op?",
@@ -2531,7 +2539,7 @@
     "status": "pret",
     "content": {
       "objectif": "Introduire progressivement les phrases avec plusieurs verbes (modal + infinitif, perfectum de constructions modales).",
-      "comprendre": "On peut combiner un verbe modal avec un infinitif au présent, ou mettre toute la construction au perfectum (le modal reste alors à l'infinitif, en toute dernière position).",
+      "comprendre": "On peut combiner un verbe modal avec un infinitif au présent, ou mettre toute la construction au perfectum (le modal reste alors à l'infinitif, en toute dernière position). La position du verbe change selon la structure de la phrase : hoofdzin (verbe modal en 2e position, infinitif à la fin), question, bijzin (les deux verbes se regroupent en fin de proposition), ou perfectum avec modal (l'infinitif du modal reste en toute dernière position, après le participe passé de l'autre verbe).",
       "regle": "Présent : Ik moet morgen vroeg opstaan. Perfectum : Ik heb gisteren vroeg moeten opstaan (moeten reste à l'infinitif).",
       "exemples": [
         "Ik moet morgen vroeg opstaan.",
@@ -2554,7 +2562,8 @@
     "exerciseIds": [
       "ex_a2_comb1",
       "ex_a2_comb2",
-      "ex_a2_comb3"
+      "ex_a2_comb3",
+      "ex_a2_comb4"
     ]
   },
   "futur_proche_gaan": {
@@ -2608,7 +2617,7 @@
     "status": "pret",
     "content": {
       "objectif": "Utiliser 'zullen' pour le futur, la promesse, la proposition et la décision spontanée.",
-      "comprendre": "'Zullen' est plus formel/général que 'gaan' et convient pour une promesse, une décision prise à l'instant, ou une prédiction.",
+      "comprendre": "'Zullen' s'utilise couramment pour trois usages fréquents à ce niveau : faire une proposition (\"Zullen we...?\"), exprimer une promesse ou une décision (\"Ik zal het doen.\"), ou faire une prévision (\"Het zal wel lukken.\"). 'Gaan + infinitif' et 'zullen' peuvent tous deux parler du futur, mais avec des nuances différentes — sans qu'il soit nécessaire à ce niveau d'analyser cette nuance en détail.",
       "regle": "Sujet + zal/zullen + ... + infinitif (fin). ik zal, jij zal/zult, hij zal, wij zullen.",
       "exemples": [
         "Ik zal het morgen doen.",
@@ -2616,7 +2625,7 @@
         "Het zal wel lukken."
       ],
       "erreursFrequentes": [
-        "Confondre systématiquement zullen et gaan alors qu'ils ont des nuances différentes.",
+        "Croire que zullen et gaan sont interchangeables alors qu'ils ont des nuances différentes.",
         "Oublier l'infinitif en fin de phrase."
       ],
       "objectifCommunication": "Faire une promesse, proposer une activité, exprimer une décision prise sur le moment.",
@@ -2631,7 +2640,8 @@
     "exerciseIds": [
       "ex_a2_zull1",
       "ex_a2_zull2",
-      "ex_a2_zull3"
+      "ex_a2_zull3",
+      "ex_a2_zull4"
     ]
   },
   "zouden_intro": {
@@ -2654,7 +2664,7 @@
         "Je zou meer moeten oefenen. (conseil)"
       ],
       "erreursFrequentes": [
-        "Utiliser 'zullen' au lieu de 'zouden' pour une demande polie ('Zal je me helpen?' est trop direct).",
+        "Ne pas savoir que 'zou(den)' est une forme très courante pour atténuer une demande, un souhait ou un conseil.",
         "Vouloir déjà construire des hypothèses complexes avec 'als... zou...' (vu en B1)."
       ],
       "objectifCommunication": "Demander poliment un service, exprimer un souhait, donner un conseil doux.",
@@ -2729,11 +2739,12 @@
       "exemples": [
         "Ik woon in Mons.",
         "Ik woon er al drie jaar.",
-        "Werk je in Brussel? Ja, ik werk er."
+        "Werk je in Brussel? Ja, ik werk er.",
+        "Kom je naar het feest? Ja, ik kom er om acht uur."
       ],
       "erreursFrequentes": [
-        "Répéter le nom du lieu au lieu d'utiliser 'er'.",
-        "Oublier 'er' complètement, ce qui rend la phrase incomplète en néerlandais."
+        "Répéter systématiquement le nom du lieu déjà mentionné au lieu d'utiliser 'er', ce qui sonne moins naturel.",
+        "Oublier 'er' alors qu'on reprend un lieu déjà cité dans la conversation."
       ],
       "objectifCommunication": "Parler d'un lieu déjà mentionné sans le répéter, comme un locuteur natif.",
       "tacheProduction": "Vertel waar je woont en hoe lang je er al woont.",
@@ -2747,7 +2758,8 @@
     "exerciseIds": [
       "ex_a2_erlieu1",
       "ex_a2_erlieu2",
-      "ex_a2_erlieu3"
+      "ex_a2_erlieu3",
+      "ex_a2_erlieu4"
     ]
   },
   "er_preposition": {
@@ -2767,7 +2779,8 @@
       "exemples": [
         "Ik denk eraan.",
         "Ik wacht erop.",
-        "Ik ben er blij mee."
+        "Ik ben er blij mee.",
+        "Ik wacht op hem. (une personne : pas de combinaison avec 'er')"
       ],
       "erreursFrequentes": [
         "Utiliser la préposition seule avec 'het' au lieu de la combiner avec 'er'.",
@@ -2785,7 +2798,8 @@
     "exerciseIds": [
       "ex_a2_erprep1",
       "ex_a2_erprep2",
-      "ex_a2_erprep3"
+      "ex_a2_erprep3",
+      "ex_a2_erprep4"
     ]
   },
   "er_quantite": {
@@ -2805,6 +2819,8 @@
       "exemples": [
         "Ik heb drie boeken.",
         "Ik heb er drie.",
+        "Hoeveel appels heb je?",
+        "Ik heb er vijf.",
         "Hoeveel heb je er?",
         "Ik heb er geen."
       ],
@@ -2824,7 +2840,8 @@
     "exerciseIds": [
       "ex_a2_erquant1",
       "ex_a2_erquant2",
-      "ex_a2_erquant3"
+      "ex_a2_erquant3",
+      "ex_a2_erquant4"
     ]
   },
   "er_sujet_presentatif": {
@@ -2863,7 +2880,8 @@
     "exerciseIds": [
       "ex_a2_ersuj1",
       "ex_a2_ersuj2",
-      "ex_a2_ersuj3"
+      "ex_a2_ersuj3",
+      "ex_a2_ersuj4"
     ]
   },
   "conjonctions_coordination": {
@@ -2878,7 +2896,7 @@
     "status": "pret",
     "content": {
       "objectif": "Consolider les conjonctions de coordination (en, maar, of, want, dus) qui ne changent pas l'ordre des mots.",
-      "comprendre": "Ces conjonctions relient deux propositions principales sans provoquer d'inversion : chaque proposition garde son ordre normal (verbe en 2e position).",
+      "comprendre": "Ces conjonctions relient deux propositions principales sans provoquer d'inversion : chaque proposition garde son ordre normal (verbe en 2e position). Il est utile de les distinguer de deux formes proches : 'omdat' exprime aussi une cause, mais introduit une subordonnée avec le verbe à la fin (\"...omdat ik ziek ben\", pas \"...omdat ben ik ziek\") — contrairement à 'want'. Et 'daarom' exprime une conséquence comme 'dus', mais fonctionne comme un adverbe : placé en tête de phrase, il provoque l'inversion (\"Daarom blijf ik thuis\"), alors que 'dus' ne le fait pas.",
       "regle": "Proposition 1 + [en/maar/of/want/dus] + proposition 2 (ordre normal dans les deux).",
       "exemples": [
         "Ik ga niet mee, want ik ben moe.",
@@ -2895,14 +2913,17 @@
         "want",
         "dus",
         "maar",
-        "of"
+        "of",
+        "daarom (cf. omdat/dus)"
       ],
       "criteresMaitrise": "Utiliser correctement 'want' et 'dus' sans provoquer d'inversion."
     },
     "exerciseIds": [
       "ex_a2_coord1",
       "ex_a2_coord2",
-      "ex_a2_coord3"
+      "ex_a2_coord3",
+      "ex_a2_coord4",
+      "ex_a2_coord5"
     ]
   },
   "subordonnee_omdat": {
@@ -2918,10 +2939,11 @@
     "status": "pret",
     "content": {
       "objectif": "Construire une subordonnée de cause avec 'omdat', avec le verbe en fin de proposition.",
-      "comprendre": "Contrairement à 'want' (coordination), 'omdat' est une subordination : le verbe conjugué passe en toute fin de la subordonnée.",
+      "comprendre": "Contrairement à 'want' (coordination), 'omdat' est une subordination : le verbe conjugué passe en toute fin de la subordonnée. Deux ordres sont possibles : la subordonnée après la principale (ordre le plus simple), ou la subordonnée en tête — dans ce cas la principale qui suit a son verbe et son sujet inversés (\"Omdat ik ziek ben, blijf ik thuis\").",
       "regle": "Proposition principale + omdat + sujet + ... + verbe (fin).",
       "exemples": [
         "Ik blijf thuis omdat ik ziek ben.",
+        "Omdat ik ziek ben, blijf ik thuis.",
         "Ik leer Nederlands omdat ik in Nederland wil werken."
       ],
       "erreursFrequentes": [
@@ -2939,7 +2961,8 @@
     "exerciseIds": [
       "ex_a2_omdat1",
       "ex_a2_omdat2",
-      "ex_a2_omdat3"
+      "ex_a2_omdat3",
+      "ex_a2_omdat4"
     ]
   },
   "dat_of_als": {
@@ -2954,8 +2977,8 @@
     "status": "pret",
     "content": {
       "objectif": "Utiliser les subordonnées avec 'dat' (que), 'of' (si/est-ce que) et 'als' (si condition).",
-      "comprendre": "Ces trois mots introduisent une subordonnée avec le verbe en fin de proposition, comme 'omdat'.",
-      "regle": "Ik denk dat... / Ik weet niet of... / Als + condition, + proposition principale (avec inversion si 'als' est en tête).",
+      "comprendre": "Ces trois mots introduisent une subordonnée avec le verbe en fin de proposition, mais ils n'ont pas la même fonction : 'dat' introduit une proposition déclarative rapportée (ce qu'on pense, dit ou sait), 'of' introduit une question indirecte à laquelle on répond par oui ou non, et 'als' introduit une condition.",
+      "regle": "dat = proposition rapportée (Ik denk dat...). of = question indirecte oui/non (Ik weet niet of...). als = condition (Als + condition, + principale, avec inversion si 'als' est en tête).",
       "exemples": [
         "Ik denk dat hij komt.",
         "Ik weet niet of hij komt.",
@@ -2977,7 +3000,9 @@
     "exerciseIds": [
       "ex_a2_datofals1",
       "ex_a2_datofals2",
-      "ex_a2_datofals3"
+      "ex_a2_datofals3",
+      "ex_a2_datofals4",
+      "ex_a2_datofals5"
     ]
   },
   "connecteurs_temporels": {
@@ -2993,7 +3018,7 @@
     "content": {
       "objectif": "Utiliser les connecteurs temporels de subordination : toen, terwijl, voordat, nadat.",
       "comprendre": "Ces connecteurs expriment une relation temporelle entre deux actions et exigent le verbe en fin de subordonnée, comme 'omdat'.",
-      "regle": "toen (quand, passé ponctuel) ; terwijl (pendant que) ; voordat (avant que) ; nadat (après que).",
+      "regle": "toen (une situation ou un événement situé dans le passé — pas seulement un fait ponctuel unique) ; terwijl (simultanéité, parfois contraste) ; voordat (un événement avant un autre) ; nadat (un événement après un autre).",
       "exemples": [
         "Toen ik thuiskwam, was hij al weg.",
         "Ik eet voordat ik vertrek.",
@@ -3016,7 +3041,9 @@
     "exerciseIds": [
       "ex_a2_connect1",
       "ex_a2_connect2",
-      "ex_a2_connect3"
+      "ex_a2_connect3",
+      "ex_a2_connect4",
+      "ex_a2_connect5"
     ]
   },
   "ordre_mots_subordonnee": {
@@ -3044,7 +3071,7 @@
         "Mettre le verbe de la subordonnée ailleurs qu'en toute fin de celle-ci."
       ],
       "objectifCommunication": "Varier la construction de ses phrases pour un discours plus naturel et fluide.",
-      "tacheProduction": "Herschrijf: 'Ik blijf thuis omdat ik ziek ben' met de bijzin eerst.",
+      "tacheProduction": "Herschrijf 'Ik blijf thuis omdat ik ziek ben' met de bijzin eerst. Schrijf daarna een eigen zin met hetzelfde patroon (Omdat..., + inversie).",
       "vocabulaire": [
         "hoofdzin",
         "bijzin"
@@ -3054,7 +3081,10 @@
     "exerciseIds": [
       "ex_a2_ordresub1",
       "ex_a2_ordresub2",
-      "ex_a2_ordresub3"
+      "ex_a2_ordresub3",
+      "ex_a2_ordresub4",
+      "ex_a2_ordresub5",
+      "ex_a2_ordresub6"
     ]
   },
   "om_te_infinitif": {
@@ -3069,7 +3099,7 @@
     "status": "pret",
     "content": {
       "objectif": "Utiliser la construction 'om ... te + infinitif' pour exprimer un but.",
-      "comprendre": "'Om' introduit le but, 'te' précède l'infinitif qui se place en toute fin.",
+      "comprendre": "'Om ... te + infinitif' sert souvent à exprimer un but explicite (\"Ik ga naar de winkel om brood te kopen\" = dans le but d'acheter du pain). Mais 'te + infinitif' apparaît aussi, sans 'om', après certains verbes comme 'proberen' (\"Ik probeer Nederlands te leren\") : ce n'est alors pas un but, et 'om' n'y est pas obligatoire. À ce niveau, il suffit de reconnaître ce contraste, sans théorie exhaustive des infinitifs en 'te'.",
       "regle": "... om + (complément) + te + infinitif.",
       "exemples": [
         "Ik probeer Nederlands te leren.",
@@ -3077,7 +3107,8 @@
       ],
       "erreursFrequentes": [
         "Oublier 'om' quand la construction exprime un but explicite.",
-        "Oublier 'te' devant l'infinitif."
+        "Oublier 'te' devant l'infinitif.",
+        "Croire que 'om' est obligatoire devant tout infinitif en 'te', même quand il n'y a pas de but explicite (ex: 'proberen te')."
       ],
       "objectifCommunication": "Expliquer le but d'une action.",
       "tacheProduction": "Waarom leer je Nederlands? Antwoord met 'om... te'.",
@@ -3090,7 +3121,9 @@
     "exerciseIds": [
       "ex_a2_omte1",
       "ex_a2_omte2",
-      "ex_a2_omte3"
+      "ex_a2_omte3",
+      "ex_a2_omte4",
+      "ex_a2_omte5"
     ]
   },
   "demonstratifs_approfondis": {
