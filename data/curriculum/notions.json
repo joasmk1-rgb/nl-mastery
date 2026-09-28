@@ -1,0 +1,634 @@
+{
+  "salutations": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "se_presenter": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nom_age_nationalite": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "ville_profession": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nombres": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "alphabet_epeler": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "date_heure": {
+    "level": "A1",
+    "module": "a1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "sujet_verbe_objet": {
+    "level": "A1",
+    "module": "a1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "phrase_affirmative": {
+    "level": "A1",
+    "module": "a1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "questions": {
+    "level": "A1",
+    "module": "a1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "inversion": {
+    "level": "A1",
+    "module": "a1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "hoofdzin": {
+    "level": "A1",
+    "module": "a1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "ordre_des_mots_base": {
+    "level": "A1",
+    "module": "a1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "de_het": {
+    "level": "A1",
+    "module": "a1-m3",
+    "skills": [
+      "grammaire",
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "pret",
+    "content": {
+      "objectif": "Savoir choisir le bon article (de/het) devant un nom néerlandais et le retenir avec le mot.",
+      "comprendre": "Contrairement au français qui a 'le/la', le néerlandais a deux genres grammaticaux fusionnés en 'de' (environ 2/3 des noms, dont tous les pluriels) et 'het' (environ 1/3, souvent les diminutifs et les mots empruntés au latin en -um/-a/-ma).",
+      "regle": "L'article se retient MOT PAR MOT, il n'y a pas de règle fiable à 100%. Quelques tendances utiles : tous les diminutifs (-je) prennent 'het' ; tous les pluriels prennent 'de' ; les noms de langues et de métaux prennent 'het'.",
+      "exemples": [
+        "de tafel (la table)",
+        "het huis (la maison)",
+        "het meisje (la fille, diminutif)",
+        "de tafels (les tables, pluriel → de)"
+      ],
+      "erreursFrequentes": [
+        "Vouloir déduire l'article depuis le français ('la maison' → 'de huis' est faux, c'est 'het huis').",
+        "Oublier qu'un pluriel est toujours 'de', même si le singulier était 'het'."
+      ]
+    },
+    "exerciseIds": [
+      "ex_dehet_qcm1",
+      "ex_dehet_qcm2"
+    ]
+  },
+  "een": {
+    "level": "A1",
+    "module": "a1-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "pluriel": {
+    "level": "A1",
+    "module": "a1-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "diminutifs": {
+    "level": "A1",
+    "module": "a1-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "categories_de_mots": {
+    "level": "A1",
+    "module": "a1-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "pronoms_sujets": {
+    "level": "A1",
+    "module": "a1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "u_politesse": {
+    "level": "A1",
+    "module": "a1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "possessifs": {
+    "level": "A1",
+    "module": "a1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "pronoms_objets": {
+    "level": "A1",
+    "module": "a1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "demonstratifs": {
+    "level": "A1",
+    "module": "a1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "infinitif_radical": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "present_regulier": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "zijn": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "hebben": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "verbes_irreguliers": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "verbes_modaux": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "verbes_separables_intro": {
+    "level": "A1",
+    "module": "a1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "adjectif_attribut": {
+    "level": "A1",
+    "module": "a1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "adjectif_devant_nom": {
+    "level": "A1",
+    "module": "a1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "regle_du_e": {
+    "level": "A1",
+    "module": "a1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "comparatif": {
+    "level": "A1",
+    "module": "a1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "superlatif": {
+    "level": "A1",
+    "module": "a1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "prepositions_lieu": {
+    "level": "A1",
+    "module": "a1-m7",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "prepositions_essentielles": {
+    "level": "A1",
+    "module": "a1-m7",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "niet": {
+    "level": "A1",
+    "module": "a1-m8",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "geen": {
+    "level": "A1",
+    "module": "a1-m8",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "niet_vs_geen": {
+    "level": "A1",
+    "module": "a1-m8",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "niet",
+      "geen"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Savoir choisir entre 'niet' et 'geen' pour nier une phrase néerlandaise.",
+      "comprendre": "'Geen' nie un nom précédé de 'een' (un/une) ou sans article ; 'niet' nie tout le reste (un verbe, un adjectif, un nom déjà défini par 'de'/'het', un lieu, une heure...).",
+      "regle": "Nom indéfini ou non compté → geen. Tout le reste → niet. 'Niet' se place généralement en fin de proposition, sauf devant un adjectif, une préposition ou un complément de lieu précis, où il se place juste avant.",
+      "exemples": [
+        "Ik heb geen tijd. (pas de temps, nom indéfini)",
+        "Ik ga niet naar Brussel. (niet + lieu précis)",
+        "Dit is niet duur. (niet + adjectif)",
+        "Ik heb de sleutels niet. (nom déjà défini par 'de' → niet)"
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'niet' devant un nom indéfini sans article ('Ik heb niet tijd' au lieu de 'geen tijd').",
+        "Placer 'niet' n'importe où dans la phrase sans respecter sa position par rapport au mot qu'il nie."
+      ]
+    },
+    "exerciseIds": [
+      "ex_niet_geen_qcm1",
+      "ex_niet_geen_trous1"
+    ]
+  },
+  "position_niet": {
+    "level": "A1",
+    "module": "a1-m8",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "present_recap": {
+    "level": "A1",
+    "module": "a1-m9",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "perfectum_intro": {
+    "level": "A1",
+    "module": "a1-m9",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "hebben_zijn_auxiliaire": {
+    "level": "A1",
+    "module": "a1-m9",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "participe_passe": {
+    "level": "A1",
+    "module": "a1-m9",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "regles_du_passe_de_base": {
+    "level": "A1",
+    "module": "a1-m9",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "famille": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "maison": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nourriture": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "achats": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "transport": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "travail_etudes": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "meteo": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "ville_administration": {
+    "level": "A1",
+    "module": "a1-m10",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  }
+}

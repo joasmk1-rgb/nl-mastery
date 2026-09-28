@@ -1,0 +1,511 @@
+id;fr;es
+V1;offrir / proposer;ofrecer / proponer
+V2;arrêter / maintenir;detener / mantener
+V3;arriver;llegar
+V4;annoncer / s'inscrire;anunciar / inscribirse
+V5;accepter / engager;aceptar / contratar
+V6;raccorder / s'affilier;conectar / afiliarse
+V7;démontrer / prouver;demostrar / probar
+V8;accepter;aceptar
+V9;être présent;estar presente
+V10;hésiter;dudar
+V11;respirer;respirar
+V12;dépendre (de);depender (de)
+V13;déposer / passer (un examen);dejar / realizar (un examen)
+V14;diminuer / prélever;disminuir / retirar
+V15;fermer / conclure;cerrar / concluir
+V16;répondre;responder
+V17;travailler;trabajar
+V18;organiser;organizar
+V19;cuire / frire;cocinar / freír
+V20;signifier;significar
+V21;commencer;empezar
+V22;comprendre;entender
+V23;accompagner;acompañar
+V24;limiter;limitar
+V25;décider;decidir
+V26;commander;pedir
+V27;payer;pagar
+V28;bouger;mover
+V29;visiter;visitar
+V30;conserver;conservar
+V31;exister;existir
+V32;posséder;poseer
+V33;penser;pensar
+V34;calculer;calcular
+V35;concerner;concernir
+V36;procurer / fournir;proporcionar / suministrar
+V37;décrire;describir
+V38;consister (en);consistir (en)
+V39;confirmer;confirmar
+V40;construire;construir
+V41;contenir;contener
+V42;continuer;continuar
+V43;contrôler;controlar
+V44;corriger;corregir
+V45;créer;crear
+V46;danser;bailar
+V47;remercier;agradecer
+V48;partager;compartir
+V49;faire;hacer
+V50;pousser;empujar
+V51;porter;llevar
+V52;tourner;girar
+V53;boire;beber
+V54;durer;durar
+V55;oser;atreverse
+V56;manger;comer
+V57;exiger;exigir
+V58;reconnaître;reconocer
+V59;éprouver;experimentar
+V60;espérer;esperar
+V61;arriver (se passer);suceder
+V62;utiliser;utilizar
+V63;aller;ir
+V64;croire;creer
+V65;jouir;disfrutar
+V66;donner;dar
+V67;avoir;tener
+V68;répéter;repetir
+V69;aider;ayudar
+V70;rétablir;restablecer
+V71;se souvenir;recordar
+V72;reconnaître;reconocer
+V73;espérer;esperar
+V74;entendre;oír
+V75;tenir;sujetar
+V76;aimer;amar
+V77;espérer;esperar
+V78;appeler;llamar
+V79;choisir;elegir
+V80;regarder;mirar
+V81;acheter;comprar
+V82;rire;reír
+V83;conduire;conducir
+V84;vivre;vivir
+V85;marcher;caminar
+V86;apprendre;aprender
+V87;lire;leer
+V88;fournir;suministrar
+V89;mentir;mentir
+V90;ressembler;parecerse
+V91;écouter;escuchar
+V92;mener;llevar
+V93;faire;hacer
+V94;pouvoir;poder
+V95;devoir (obligation);deber
+V96;nommer;nombrar
+V97;étudier;estudiar
+V98;utiliser;usar
+V99;prendre;tomar
+V100;développer;desarrollar
+V101;recevoir;recibir
+V102;découvrir;descubrir
+V103;enquêter;investigar
+V104;réparer;reparar
+V105;rencontrer;conocer
+V106;paraître;parecer
+V107;arriver (temps);llegar
+V108;manquer;faltar
+V109;ouvrir;abrir
+V110;connaître;conocer
+V111;monter;subir
+V112;ranger;ordenar
+V113;organiser;organizar
+V114;passer;pasar
+V115;placer;colocar
+V116;pleuvoir;llover
+V117;essayer;intentar
+V118;préparer;preparar
+V119;produire;producir
+V120;publier;publicar
+V121;se raser;afeitarse
+V122;compter;contar
+V123;voyager;viajar
+V124;sauver;salvar
+V125;rouler;rodar
+V126;appeler;llamar
+V127;créer;crear
+V128;séparer;separar
+V129;jouer;jugar
+V130;frapper;golpear
+V131;fermer;cerrar
+V132;écrire;escribir
+V133;crier;gritar
+V134;peindre;pintar
+V135;dormir;dormir
+V136;couper;cortar
+V137;jouer (musique);tocar
+V138;parler;hablar
+V139;sauter;saltar
+V140;être;ser / estar
+V141;commencer;comenzar
+V142;s'arrêter;parar
+V143;envoyer;enviar
+V144;rester;quedarse
+V145;étudier;estudiar
+V146;tomber;caer
+V147;dessiner;dibujar
+V148;compter;contar
+V149;arriver (se produire);ocurrir
+V150;tirer;tirar
+V151;montrer;mostrar
+V152;vendre;vender
+V153;oublier;olvidar
+V154;partir;irse
+V155;changer;cambiar
+V156;attendre;esperar
+V157;expliquer;explicar
+V158;demander;pedir / preguntar
+V159;chercher;buscar
+V160;trouver;encontrar
+V161;voler (avion);volar
+V162;voler (dérober);robar
+V163;suivre;seguir
+V164;remplir;llenar
+V165;prévenir;avisar
+V166;attendre;esperar
+V167;marcher;caminar
+V168;laver;lavar
+V169;refuser;rechazar
+V170;savoir;saber
+V171;vouloir;querer
+V172;gagner;ganar
+V173;habiter;vivir
+V174;devenir;convertirse en
+V175;s'asseoir;sentarse
+V176;dire;decir
+V177;voir;ver
+V178;envoyer;mandar
+V179;chanter;cantar
+V180;apporter;traer
+V181;porter (vêtement);llevar puesto
+V182;préparer;preparar
+V183;nettoyer;limpiar
+V184;choisir;elegir
+V185;prier;rezar
+V186;visiter;visitar
+V187;conduire;manejar
+V188;nager;nadar
+V189;voyager;viajar
+V190;inviter;invitar
+V191;appartenir;pertenecer
+V192;croire;creer
+V193;penser;pensar
+V194;espérer;esperar
+V195;craindre;temer
+V196;douter;dudar
+V197;promettre;prometer
+V198;permettre;permitir
+V199;interdire;prohibir
+V200;conseiller;aconsejar
+V201;proposer;proponer
+V202;commander;pedir / mandar
+V203;obliger;obligar
+V204;offrir;ofrecer
+V205;développer;desarrollar
+V206;rencontrer;encontrarse con
+V207;découvrir;descubrir
+V208;recevoir;recibir
+V209;manquer;faltar / echar de menos
+V210;examiner;examinar
+V211;ouvrir;abrir
+V212;se lever;levantarse
+V213;élever / éduquer;educar / criar
+V214;remarquer;notar / observar
+V215;reprendre;reanudar / retomar
+V216;connaître;conocer
+V217;ranger;ordenar
+V218;arriver (temps/lieu);llegar
+V219;se passer / arriver;suceder / ocurrir
+V220;passer (temps/lieu);pasar
+V221;placer;colocar
+V222;planter;plantar
+V223;pleuvoir;llover
+V224;essayer;probar / intentar
+V225;préparer;preparar
+V226;produire;producir
+V227;publier;publicar
+V228;se raser;afeitarse
+V229;compter;contar
+V230;voyager;viajar
+V231;sauver;salvar
+V232;rouler;rodar / conducir
+V233;appeler;llamar
+V234;créer;crear
+V235;séparer;separar
+V236;jouer;jugar
+V237;frapper;golpear
+V238;fermer;cerrar
+V239;écrire;escribir
+V240;crier;gritar
+V241;peindre;pintar
+V242;dormir;dormir
+V243;couper;cortar
+V244;jouer (instrument);tocar
+V245;parler;hablar
+V246;sauter;saltar
+V247;être;ser / estar
+V248;commencer;comenzar
+V249;s'arrêter;parar / detenerse
+V250;envoyer;enviar
+V251;rester;quedarse
+V252;étudier;estudiar
+V253;tomber;caer
+V254;dessiner;dibujar
+V255;compter;contar
+V256;arriver (événement);ocurrir
+V257;tirer;tirar
+V258;montrer;mostrar
+V259;vendre;vender
+V260;oublier;olvidar
+V261;partir;irse / salir
+V262;changer;cambiar
+V263;attendre;esperar
+V264;expliquer;explicar
+V265;demander;pedir / preguntar
+V266;chercher;buscar
+V267;trouver;encontrar
+V268;voler (air);volar
+V269;voler (vol);robar
+V270;suivre;seguir
+V271;remplir;llenar
+V272;prévenir;prevenir / avisar
+V273;attendre;esperar
+V274;marcher;caminar
+V275;laver;lavar
+V276;refuser;rechazar
+V277;savoir;saber
+V278;vouloir;querer
+V279;gagner;ganar
+V280;habiter;vivir / habitar
+V281;devenir;llegar a ser
+V282;s'asseoir;sentarse
+V283;dire;decir
+V284;voir;ver
+V285;envoyer;mandar
+V286;chanter;cantar
+V287;apporter;traer
+V288;porter;llevar
+V289;préparer;preparar
+V290;nettoyer;limpiar
+V291;choisir;elegir
+V292;prier;rezar
+V293;visiter;visitar
+V294;conduire;conducir
+V295;nager;nadar
+V296;voyager;viajar
+V297;inviter;invitar
+V298;appartenir;pertenecer
+V299;croire;creer
+V300;penser;pensar
+V301;espérer;esperar
+V302;craindre;temer
+V303;douter;dudar
+V304;promettre;prometer
+V305;permettre;permitir
+V306;interdire;prohibir
+V307;conseiller;aconsejar
+V308;étudier;estudiar
+V309;lire;leer
+V310;écrire;escribir
+V311;écouter;escuchar
+V312;regarder;mirar
+V313;comprendre;comprender
+V314;apprendre;aprender
+V315;enseigner;enseñar
+V316;aider;ayudar
+V317;travailler;trabajar
+V318;jouer;jugar
+V319;dormir;dormir
+V320;manger;comer
+V321;boire;beber
+V322;marcher;caminar
+V323;courir;correr
+V324;sauter;saltar
+V325;nager;nadar
+V326;conduire;conducir
+V327;voyager;viajar
+V328;parler;hablar
+V329;chanter;cantar
+V330;danser;bailar
+V331;rire;reír
+V332;pleurer;llorar
+V333;aimer;amar / querer
+V334;détester;odiar
+V335;vouloir;querer
+V336;pouvoir;poder
+V337;devoir;deber
+V338;savoir;saber
+V339;connaître;conocer
+V340;penser;pensar
+V341;croire;creer
+V342;comprendre;entender
+V343;se souvenir;recordar
+V344;oublier;olvidar
+V345;donner;dar
+V346;prendre;tomar
+V347;apporter;traer
+V348;envoyer;enviar
+V349;recevoir;recibir
+V350;acheter;comprar
+V351;vendre;vender
+V352;payer;pagar
+V353;chercher;buscar
+V354;trouver;encontrar
+V355;commencer;empezar
+V356;finir;terminar
+V357;ouvrir;abrir
+V358;fermer;cerrar
+V359;arriver;llegar
+V360;partir;salir
+V361;entrer;entrar
+V362;sortir;salir
+V363;monter;subir
+V364;descendre;bajar
+V365;tomber;caer
+V366;attendre;esperar
+V367;aider;ayudar
+V368;appeler;llamar
+V369;répondre;responder
+V370;demander;preguntar
+V371;dire;decir
+V372;écouter;escuchar
+V373;voir;ver
+V374;regarder;mirar
+V375;toucher;tocar
+V376;sentir (odeur);oler
+V377;goûter;probar
+V378;sentir (émotion);sentir
+V379;porter;llevar
+V380;utiliser;usar
+V381;faire;hacer
+V382;travailler;trabajar
+V383;étudier;estudiar
+V384;apprendre;aprender
+V385;enseigner;enseñar
+V386;lire;leer
+V387;écrire;escribir
+V388;dessiner;dibujar
+V389;peindre;pintar
+V390;jouer;jugar
+V391;chanter;cantar
+V392;danser;bailar
+V393;cuisiner;cocinar
+V394;laver;lavar
+V395;nettoyer;limpiar
+V396;ranger;ordenar
+V397;réparer;reparar
+V398;construire;construir
+V399;créer;crear
+V400;détruire;destruir
+V401;pousser / croître;empujar / crecer
+V402;prévenir;prevenir / avisar
+V403;préparer;preparar
+V404;tester;probar / testar
+V405;voyager;viajar
+V406;fumer;fumar
+V407;se reposer;descansar
+V408;conduire / rouler;conducir
+V409;sentir;sentir / oler
+V410;séparer;separar
+V411;placer / fixer;colocar / fijar
+V412;frapper;golpear
+V413;fermer;cerrar
+V414;goûter;probar / saborear
+V415;écrire;escribir
+V416;crier;gritar
+V417;peindre;pintar
+V418;dormir;dormir
+V419;fondre;derretir
+V420;couper;cortar
+V421;jouer (instrument);tocar
+V422;parler;hablar
+V423;sauter;saltar
+V424;être;ser / estar
+V425;commencer;comenzar
+V426;s'arrêter;parar
+V427;envoyer;enviar
+V428;rester;quedarse
+V429;étudier;estudiar
+V430;tomber;caer
+V431;dessiner;dibujar
+V432;compter;contar
+V433;arriver (se produire);suceder
+V434;tirer;tirar
+V435;montrer;mostrar
+V436;vendre;vender
+V437;oublier;olvidar
+V438;partir;salir / irse
+V439;changer;cambiar
+V440;attendre;esperar
+V441;expliquer;explicar
+V442;demander;preguntar / pedir
+V443;chercher;buscar
+V444;trouver;encontrar
+V445;voler (avion);volar
+V446;suivre;seguir
+V447;remplir;llenar
+V448;prévenir / avertir;avisar / advertir
+V449;attendre;esperar
+V450;se promener;pasear
+V451;laver;lavar
+V452;refuser;rechazar
+V453;éveiller;despertar
+V454;pleurer;llorar
+V455;s'habituer;acostumbrarse
+V456;souhaiter;desear
+V457;travailler;trabajar
+V458;jeter;tirar / lanzar
+V459;savoir;saber
+V460;indiquer;indicar / señalar
+V461;vouloir;querer
+V462;gagner;ganar
+V463;habiter;vivir
+V464;devenir;convertirse en
+V465;échouer / descendre;suspender / bajar
+V466;dire;decir
+V467;voir;ver
+V468;envoyer;enviar
+V469;chanter;cantar
+V470;chercher;buscar
+V471;travailler;trabajar
+V472;apporter;traer
+V473;porter;llevar
+V474;préparer;preparar
+V475;nettoyer;limpiar
+V476;choisir;elegir
+V477;prier;rezar
+V478;visiter;visitar
+V479;conduire;conducir
+V480;nager;nadar
+V481;voyager;viajar
+V482;inviter;invitar
+V483;appartenir;pertenecer
+V484;croire;creer
+V485;penser;pensar
+V486;espérer;esperar
+V487;craindre;temer
+V488;douter;dudar
+V489;promettre;prometer
+V490;permettre;permitir
+V491;interdire;prohibir
+V492;conseiller;aconsejar
+V493;demander;preguntar
+V494;répondre;responder
+V495;écouter;escuchar
+V496;regarder;mirar
+V497;goûter;probar
+V498;sentir;sentir
+V499;toucher;tocar
+V500;ouvrir;abrir
+V501;fermer;cerrar
+V502;commencer;empezar
+V503;finir;terminar
+V504;donner;dar
+V505;prendre;tomar
+V506;aider;ayudar
+V507;comprendre;entender
+V508;apprendre;aprender
+V509;écrire;escribir
+V510;lire;leer
