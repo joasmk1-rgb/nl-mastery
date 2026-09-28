@@ -1,18 +1,1297 @@
 [
   {
-    "id": "ex_dehet_qcm1", "notionId": "de_het", "type": "qcm",
-    "question": "___ tafel (la table)", "options": ["de", "het"], "answer": "de"
+    "id": "ex_dehet_qcm1",
+    "notionId": "de_het",
+    "type": "qcm",
+    "question": "___ tafel (la table)",
+    "options": [
+      "de",
+      "het"
+    ],
+    "answer": "de"
   },
   {
-    "id": "ex_dehet_qcm2", "notionId": "de_het", "type": "qcm",
-    "question": "___ huis (la maison)", "options": ["de", "het"], "answer": "het"
+    "id": "ex_dehet_qcm2",
+    "notionId": "de_het",
+    "type": "qcm",
+    "question": "___ huis (la maison)",
+    "options": [
+      "de",
+      "het"
+    ],
+    "answer": "het"
   },
   {
-    "id": "ex_niet_geen_qcm1", "notionId": "niet_vs_geen", "type": "qcm",
-    "question": "Ik heb ___ tijd.", "options": ["niet", "geen"], "answer": "geen"
+    "id": "ex_niet_geen_qcm1",
+    "notionId": "niet_vs_geen",
+    "type": "qcm",
+    "question": "Ik heb ___ tijd.",
+    "options": [
+      "niet",
+      "geen"
+    ],
+    "answer": "geen"
   },
   {
-    "id": "ex_niet_geen_trous1", "notionId": "niet_vs_geen", "type": "texte_a_trous",
-    "question": "Ik ga ___ naar Brussel.", "answer": "niet"
+    "id": "ex_niet_geen_trous1",
+    "notionId": "niet_vs_geen",
+    "type": "texte_a_trous",
+    "question": "Ik ga ___ naar Brussel.",
+    "answer": "niet"
+  },
+  {
+    "id": "ex_salutations_1",
+    "notionId": "salutations",
+    "type": "qcm",
+    "question": "Comment dit-on \"Bonjour\" le matin en néerlandais ?",
+    "options": [
+      "Goedenavond",
+      "Goedemorgen",
+      "Doei"
+    ],
+    "answer": "Goedemorgen"
+  },
+  {
+    "id": "ex_salutations_2",
+    "notionId": "salutations",
+    "type": "qcm",
+    "question": "Quelle formule est informelle pour dire \"Salut\" ?",
+    "options": [
+      "Hoi",
+      "Goedemiddag",
+      "Aangenaam"
+    ],
+    "answer": "Hoi"
+  },
+  {
+    "id": "ex_sepresenter_1",
+    "notionId": "se_presenter",
+    "type": "qcm",
+    "question": "Comment dit-on \"Je m'appelle Joas\" ?",
+    "options": [
+      "Ik heet Joas.",
+      "Heet ik Joas.",
+      "Joas ik heet."
+    ],
+    "answer": "Ik heet Joas."
+  },
+  {
+    "id": "ex_sepresenter_2",
+    "notionId": "se_presenter",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Wat is je ___?\" (Quel est ton nom ?)",
+    "answer": "naam"
+  },
+  {
+    "id": "ex_age_1",
+    "notionId": "nom_age_nationalite",
+    "type": "qcm",
+    "question": "Comment dit-on \"J'ai 23 ans\" ?",
+    "options": [
+      "Ik heb 23 jaar.",
+      "Ik ben 23 jaar oud.",
+      "Ik ben 23 jaar."
+    ],
+    "answer": "Ik ben 23 jaar oud."
+  },
+  {
+    "id": "ex_age_2",
+    "notionId": "nom_age_nationalite",
+    "type": "qcm",
+    "question": "\"Ik kom uit België\" veut dire :",
+    "options": [
+      "Je viens de Belgique",
+      "Je vis en Belgique",
+      "Je visite la Belgique"
+    ],
+    "answer": "Je viens de Belgique"
+  },
+  {
+    "id": "ex_villeprof_1",
+    "notionId": "ville_profession",
+    "type": "qcm",
+    "question": "Comment dit-on \"J'habite à Mons\" ?",
+    "options": [
+      "Ik woon op Mons.",
+      "Ik woon in Mons.",
+      "Ik woon Mons."
+    ],
+    "answer": "Ik woon in Mons."
+  },
+  {
+    "id": "ex_villeprof_2",
+    "notionId": "ville_profession",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik werk ___ consultant.\" (Je travaille comme consultant)",
+    "answer": "als"
+  },
+  {
+    "id": "ex_nombres_1",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "Comment dit-on \"21\" en néerlandais ?",
+    "options": [
+      "twintigeen",
+      "eenentwintig",
+      "een-twintig"
+    ],
+    "answer": "eenentwintig"
+  },
+  {
+    "id": "ex_nombres_2",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "\"vijfendertig\" correspond à :",
+    "options": [
+      "53",
+      "35",
+      "45"
+    ],
+    "answer": "35"
+  },
+  {
+    "id": "ex_alphabet_1",
+    "notionId": "alphabet_epeler",
+    "type": "qcm",
+    "question": "\"Hoe spel je dat?\" veut dire :",
+    "options": [
+      "Comment ça s'épelle ?",
+      "Comment tu t'appelles ?",
+      "Où habites-tu ?"
+    ],
+    "answer": "Comment ça s'épelle ?"
+  },
+  {
+    "id": "ex_dateheure_1",
+    "notionId": "date_heure",
+    "type": "qcm",
+    "question": "\"Het is half acht\" veut dire :",
+    "options": [
+      "8h30",
+      "7h30",
+      "8h00"
+    ],
+    "answer": "7h30"
+  },
+  {
+    "id": "ex_dateheure_2",
+    "notionId": "date_heure",
+    "type": "qcm",
+    "question": "Comment demande-t-on l'heure ?",
+    "options": [
+      "Welke dag is het?",
+      "Hoe laat is het?",
+      "Wat is de datum?"
+    ],
+    "answer": "Hoe laat is het?"
+  },
+  {
+    "id": "ex_svo_1",
+    "notionId": "sujet_verbe_objet",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je lis un livre\"",
+    "words": [
+      "een",
+      "boek",
+      "Ik",
+      "lees"
+    ],
+    "answer": [
+      "Ik",
+      "lees",
+      "een",
+      "boek"
+    ]
+  },
+  {
+    "id": "ex_svo_2",
+    "notionId": "sujet_verbe_objet",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik een boek lees.",
+      "Ik lees een boek.",
+      "Lees ik een boek."
+    ],
+    "answer": "Ik lees een boek."
+  },
+  {
+    "id": "ex_phraseaff_1",
+    "notionId": "phrase_affirmative",
+    "type": "qcm",
+    "question": "Quelle phrase respecte l'ordre correct ?",
+    "options": [
+      "De kat slaapt.",
+      "De kat het slaapt.",
+      "Slaapt de kat vandaag hij."
+    ],
+    "answer": "De kat slaapt."
+  },
+  {
+    "id": "ex_phraseaff_2",
+    "notionId": "phrase_affirmative",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Nous travaillons aujourd'hui\"",
+    "words": [
+      "vandaag",
+      "Wij",
+      "werken"
+    ],
+    "answer": [
+      "Wij",
+      "werken",
+      "vandaag"
+    ]
+  },
+  {
+    "id": "ex_questions_1",
+    "notionId": "questions",
+    "type": "qcm",
+    "question": "Comment demande-t-on \"Tu parles néerlandais ?\" ?",
+    "options": [
+      "Je spreekt Nederlands?",
+      "Spreek je Nederlands?",
+      "Je spreek Nederlands?"
+    ],
+    "answer": "Spreek je Nederlands?"
+  },
+  {
+    "id": "ex_questions_2",
+    "notionId": "questions",
+    "type": "qcm",
+    "question": "\"Waar woon je?\" demande :",
+    "options": [
+      "Où habites-tu ?",
+      "Comment t'appelles-tu ?",
+      "Quel âge as-tu ?"
+    ],
+    "answer": "Où habites-tu ?"
+  },
+  {
+    "id": "ex_inversion_1",
+    "notionId": "inversion",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Aujourd'hui, je travaille\"",
+    "words": [
+      "ik",
+      "Vandaag",
+      "werk"
+    ],
+    "answer": [
+      "Vandaag",
+      "werk",
+      "ik"
+    ]
+  },
+  {
+    "id": "ex_inversion_2",
+    "notionId": "inversion",
+    "type": "qcm",
+    "question": "Quelle phrase respecte la règle V2 ?",
+    "options": [
+      "Morgen ik ga naar Amsterdam.",
+      "Morgen ga ik naar Amsterdam.",
+      "Ik morgen ga naar Amsterdam."
+    ],
+    "answer": "Morgen ga ik naar Amsterdam."
+  },
+  {
+    "id": "ex_hoofdzin_1",
+    "notionId": "hoofdzin",
+    "type": "qcm",
+    "question": "\"want\" est une conjonction de :",
+    "options": [
+      "Coordination (pas d'inversion)",
+      "Subordination (verbe à la fin)",
+      "Aucune des deux"
+    ],
+    "answer": "Coordination (pas d'inversion)"
+  },
+  {
+    "id": "ex_hoofdzin_2",
+    "notionId": "hoofdzin",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik werk en ik studeer.",
+      "Ik werk en studeer ik.",
+      "En ik werk ik studeer."
+    ],
+    "answer": "Ik werk en ik studeer."
+  },
+  {
+    "id": "ex_tmp_1",
+    "notionId": "ordre_des_mots_base",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre (Temps-Manière-Lieu) : \"Je vais demain en train à Bruxelles\"",
+    "words": [
+      "Ik",
+      "ga",
+      "morgen",
+      "met de trein",
+      "naar Brussel"
+    ],
+    "answer": [
+      "Ik",
+      "ga",
+      "morgen",
+      "met de trein",
+      "naar Brussel"
+    ]
+  },
+  {
+    "id": "ex_tmp_2",
+    "notionId": "ordre_des_mots_base",
+    "type": "qcm",
+    "question": "Quel est l'ordre correct des compléments ?",
+    "options": [
+      "Lieu-Manière-Temps",
+      "Temps-Manière-Lieu",
+      "Manière-Lieu-Temps"
+    ],
+    "answer": "Temps-Manière-Lieu"
+  },
+  {
+    "id": "ex_een_1",
+    "notionId": "een",
+    "type": "qcm",
+    "question": "Comment dit-on \"une maison\" ?",
+    "options": [
+      "de huis",
+      "het huis",
+      "een huis"
+    ],
+    "answer": "een huis"
+  },
+  {
+    "id": "ex_een_2",
+    "notionId": "een",
+    "type": "qcm",
+    "question": "Comment dit-on \"des maisons\" (indéfini, pluriel) ?",
+    "options": [
+      "een huizen",
+      "huizen (sans article)",
+      "de een huizen"
+    ],
+    "answer": "huizen (sans article)"
+  },
+  {
+    "id": "ex_pluriel_1",
+    "notionId": "pluriel",
+    "type": "qcm",
+    "question": "Quel est le pluriel de \"huis\" ?",
+    "options": [
+      "huisen",
+      "huizen",
+      "huises"
+    ],
+    "answer": "huizen"
+  },
+  {
+    "id": "ex_pluriel_2",
+    "notionId": "pluriel",
+    "type": "qcm",
+    "question": "Quel est le pluriel de \"tafel\" ?",
+    "options": [
+      "tafelen",
+      "tafels",
+      "tafel's"
+    ],
+    "answer": "tafels"
+  },
+  {
+    "id": "ex_diminutif_1",
+    "notionId": "diminutifs",
+    "type": "qcm",
+    "question": "Quel article prend un diminutif ?",
+    "options": [
+      "de",
+      "het",
+      "een seulement"
+    ],
+    "answer": "het"
+  },
+  {
+    "id": "ex_diminutif_2",
+    "notionId": "diminutifs",
+    "type": "qcm",
+    "question": "Quel est le diminutif de \"tafel\" ?",
+    "options": [
+      "tafelje",
+      "tafeltje",
+      "tafelpje"
+    ],
+    "answer": "tafeltje"
+  },
+  {
+    "id": "ex_categ_1",
+    "notionId": "categories_de_mots",
+    "type": "qcm",
+    "question": "\"lopen\" est un :",
+    "options": [
+      "nom",
+      "verbe",
+      "adjectif"
+    ],
+    "answer": "verbe"
+  },
+  {
+    "id": "ex_categ_2",
+    "notionId": "categories_de_mots",
+    "type": "qcm",
+    "question": "\"groot\" est un :",
+    "options": [
+      "adjectif",
+      "nom",
+      "article"
+    ],
+    "answer": "adjectif"
+  },
+  {
+    "id": "ex_pronsujet_1",
+    "notionId": "pronoms_sujets",
+    "type": "qcm",
+    "question": "Quel pronom utilise-t-on pour \"nous\" ?",
+    "options": [
+      "jullie",
+      "wij",
+      "zij"
+    ],
+    "answer": "wij"
+  },
+  {
+    "id": "ex_pronsujet_2",
+    "notionId": "pronoms_sujets",
+    "type": "qcm",
+    "question": "\"het\" peut-il désigner une personne ?",
+    "options": [
+      "Oui, toujours",
+      "Non, jamais",
+      "Seulement au pluriel"
+    ],
+    "answer": "Non, jamais"
+  },
+  {
+    "id": "ex_upolitesse_1",
+    "notionId": "u_politesse",
+    "type": "qcm",
+    "question": "\"u\" se conjugue comme :",
+    "options": [
+      "jij",
+      "hij/zij",
+      "wij"
+    ],
+    "answer": "hij/zij"
+  },
+  {
+    "id": "ex_upolitesse_2",
+    "notionId": "u_politesse",
+    "type": "qcm",
+    "question": "Comment demande-t-on poliment de l'aide ?",
+    "options": [
+      "Kun je mij helpen?",
+      "Kunt u mij helpen?",
+      "Kan ik mij helpen?"
+    ],
+    "answer": "Kunt u mij helpen?"
+  },
+  {
+    "id": "ex_possessif_1",
+    "notionId": "possessifs",
+    "type": "qcm",
+    "question": "Devant \"het huis\", on dit :",
+    "options": [
+      "onze huis",
+      "ons huis",
+      "onzen huis"
+    ],
+    "answer": "ons huis"
+  },
+  {
+    "id": "ex_possessif_2",
+    "notionId": "possessifs",
+    "type": "qcm",
+    "question": "Devant \"de tafel\", on dit :",
+    "options": [
+      "ons tafel",
+      "onze tafel",
+      "onzen tafel"
+    ],
+    "answer": "onze tafel"
+  },
+  {
+    "id": "ex_pronobjet_1",
+    "notionId": "pronoms_objets",
+    "type": "qcm",
+    "question": "Comment dit-on \"Je le vois\" (lui, un homme) ?",
+    "options": [
+      "Ik zie hij.",
+      "Ik zie hem.",
+      "Ik zie zijn."
+    ],
+    "answer": "Ik zie hem."
+  },
+  {
+    "id": "ex_pronobjet_2",
+    "notionId": "pronoms_objets",
+    "type": "qcm",
+    "question": "\"Hij helpt ___.\" (il m'aide)",
+    "options": [
+      "ik",
+      "me",
+      "mijn"
+    ],
+    "answer": "me"
+  },
+  {
+    "id": "ex_demonstratif_1",
+    "notionId": "demonstratifs",
+    "type": "qcm",
+    "question": "Devant \"het huis\" (proche), on dit :",
+    "options": [
+      "deze huis",
+      "dit huis",
+      "die huis"
+    ],
+    "answer": "dit huis"
+  },
+  {
+    "id": "ex_demonstratif_2",
+    "notionId": "demonstratifs",
+    "type": "qcm",
+    "question": "Devant \"de tafel\" (proche), on dit :",
+    "options": [
+      "deze tafel",
+      "dit tafel",
+      "dat tafel"
+    ],
+    "answer": "deze tafel"
+  },
+  {
+    "id": "ex_radical_1",
+    "notionId": "infinitif_radical",
+    "type": "qcm",
+    "question": "Quel est le radical de \"wonen\" ?",
+    "options": [
+      "won",
+      "woon",
+      "wone"
+    ],
+    "answer": "woon"
+  },
+  {
+    "id": "ex_radical_2",
+    "notionId": "infinitif_radical",
+    "type": "qcm",
+    "question": "Quel est le radical de \"werken\" ?",
+    "options": [
+      "werk",
+      "were",
+      "werke"
+    ],
+    "answer": "werk"
+  },
+  {
+    "id": "ex_presreg_1",
+    "notionId": "present_regulier",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"werken\" avec \"jij\" ?",
+    "options": [
+      "jij werk",
+      "jij werkt",
+      "jij werken"
+    ],
+    "answer": "jij werkt"
+  },
+  {
+    "id": "ex_presreg_2",
+    "notionId": "present_regulier",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"werken\" avec \"ik\" ?",
+    "options": [
+      "ik werk",
+      "ik werkt",
+      "ik werken"
+    ],
+    "answer": "ik werk"
+  },
+  {
+    "id": "ex_zijn_1",
+    "notionId": "zijn",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"zijn\" avec \"ik\" ?",
+    "options": [
+      "ik ben",
+      "ik is",
+      "ik zijn"
+    ],
+    "answer": "ik ben"
+  },
+  {
+    "id": "ex_zijn_2",
+    "notionId": "zijn",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"zijn\" avec \"wij\" ?",
+    "options": [
+      "wij is",
+      "wij bent",
+      "wij zijn"
+    ],
+    "answer": "wij zijn"
+  },
+  {
+    "id": "ex_hebben_1",
+    "notionId": "hebben",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"hebben\" avec \"hij\" ?",
+    "options": [
+      "hij heb",
+      "hij hebt",
+      "hij heeft"
+    ],
+    "answer": "hij heeft"
+  },
+  {
+    "id": "ex_hebben_2",
+    "notionId": "hebben",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"hebben\" avec \"ik\" ?",
+    "options": [
+      "ik heb",
+      "ik hebt",
+      "ik heeft"
+    ],
+    "answer": "ik heb"
+  },
+  {
+    "id": "ex_verbirr_1",
+    "notionId": "verbes_irreguliers",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"gaan\" avec \"jij\" ?",
+    "options": [
+      "jij gaat",
+      "jij ga",
+      "jij gaan"
+    ],
+    "answer": "jij gaat"
+  },
+  {
+    "id": "ex_verbirr_2",
+    "notionId": "verbes_irreguliers",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"komen\" avec \"hij\" ?",
+    "options": [
+      "hij komt",
+      "hij kom",
+      "hij komen"
+    ],
+    "answer": "hij komt"
+  },
+  {
+    "id": "ex_modaux_1",
+    "notionId": "verbes_modaux",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik kan zwem.",
+      "Ik kan zwemmen.",
+      "Ik kan zwemt."
+    ],
+    "answer": "Ik kan zwemmen."
+  },
+  {
+    "id": "ex_modaux_2",
+    "notionId": "verbes_modaux",
+    "type": "qcm",
+    "question": "\"moeten\" veut dire :",
+    "options": [
+      "pouvoir",
+      "devoir",
+      "vouloir"
+    ],
+    "answer": "devoir"
+  },
+  {
+    "id": "ex_sepverb_1",
+    "notionId": "verbes_separables_intro",
+    "type": "qcm",
+    "question": "Comment conjugue-t-on \"opstaan\" avec \"ik\" (je me lève à 7h) ?",
+    "options": [
+      "Ik opsta om 7 uur.",
+      "Ik sta om 7 uur op.",
+      "Ik sta op om 7 uur."
+    ],
+    "answer": "Ik sta om 7 uur op."
+  },
+  {
+    "id": "ex_sepverb_2",
+    "notionId": "verbes_separables_intro",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Il appelle sa mère\"",
+    "words": [
+      "Hij",
+      "belt",
+      "zijn moeder",
+      "op"
+    ],
+    "answer": [
+      "Hij",
+      "belt",
+      "zijn moeder",
+      "op"
+    ]
+  },
+  {
+    "id": "ex_adjattr_1",
+    "notionId": "adjectif_attribut",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "De tafel is grote.",
+      "De tafel is groot.",
+      "De tafel groot is."
+    ],
+    "answer": "De tafel is groot."
+  },
+  {
+    "id": "ex_adjattr_2",
+    "notionId": "adjectif_attribut",
+    "type": "qcm",
+    "question": "Un adjectif attribut prend-il un -e ?",
+    "options": [
+      "Oui, toujours",
+      "Non, jamais",
+      "Seulement au pluriel"
+    ],
+    "answer": "Non, jamais"
+  },
+  {
+    "id": "ex_adjdevant_1",
+    "notionId": "adjectif_devant_nom",
+    "type": "qcm",
+    "question": "Comment dit-on \"la grande table\" ?",
+    "options": [
+      "de groot tafel",
+      "de grote tafel",
+      "de grotere tafel"
+    ],
+    "answer": "de grote tafel"
+  },
+  {
+    "id": "ex_adjdevant_2",
+    "notionId": "adjectif_devant_nom",
+    "type": "qcm",
+    "question": "Comment dit-on \"la jolie maison\" (définie) ?",
+    "options": [
+      "het mooi huis",
+      "het mooie huis",
+      "de mooie huis"
+    ],
+    "answer": "het mooie huis"
+  },
+  {
+    "id": "ex_regledu_e_1",
+    "notionId": "regle_du_e",
+    "type": "qcm",
+    "question": "Comment dit-on \"une jolie maison\" (het huis, indéfini) ?",
+    "options": [
+      "een mooi huis",
+      "een mooie huis",
+      "het mooi huis"
+    ],
+    "answer": "een mooi huis"
+  },
+  {
+    "id": "ex_regledu_e_2",
+    "notionId": "regle_du_e",
+    "type": "qcm",
+    "question": "Pourquoi \"een mooi huis\" n'a pas de -e ?",
+    "options": [
+      "Parce que huis est un nom 'het' indéfini",
+      "Parce que mooi est irrégulier",
+      "Il devrait y avoir un -e, c'est une erreur"
+    ],
+    "answer": "Parce que huis est un nom 'het' indéfini"
+  },
+  {
+    "id": "ex_comparatif_1",
+    "notionId": "comparatif",
+    "type": "qcm",
+    "question": "Quel est le comparatif de \"groot\" ?",
+    "options": [
+      "meer groot",
+      "groter",
+      "grootst"
+    ],
+    "answer": "groter"
+  },
+  {
+    "id": "ex_comparatif_2",
+    "notionId": "comparatif",
+    "type": "qcm",
+    "question": "Comment dit-on \"que\" dans une comparaison ?",
+    "options": [
+      "als",
+      "dan",
+      "van"
+    ],
+    "answer": "dan"
+  },
+  {
+    "id": "ex_superlatif_1",
+    "notionId": "superlatif",
+    "type": "qcm",
+    "question": "Quel est le superlatif attribut de \"groot\" ?",
+    "options": [
+      "grootst",
+      "het grootst",
+      "meest groot"
+    ],
+    "answer": "het grootst"
+  },
+  {
+    "id": "ex_superlatif_2",
+    "notionId": "superlatif",
+    "type": "qcm",
+    "question": "\"Dit is het grootste huis\" : pourquoi -e sur \"grootste\" ?",
+    "options": [
+      "Parce que l'adjectif est épithète (devant le nom)",
+      "C'est une erreur",
+      "Parce que huis est masculin"
+    ],
+    "answer": "Parce que l'adjectif est épithète (devant le nom)"
+  },
+  {
+    "id": "ex_prepolieu_1",
+    "notionId": "prepositions_lieu",
+    "type": "qcm",
+    "question": "Comment dit-on \"sous la table\" ?",
+    "options": [
+      "in de tafel",
+      "onder de tafel",
+      "op de tafel"
+    ],
+    "answer": "onder de tafel"
+  },
+  {
+    "id": "ex_prepolieu_2",
+    "notionId": "prepositions_lieu",
+    "type": "qcm",
+    "question": "\"naast\" veut dire :",
+    "options": [
+      "derrière",
+      "à côté de",
+      "devant"
+    ],
+    "answer": "à côté de"
+  },
+  {
+    "id": "ex_prepoessent_1",
+    "notionId": "prepositions_essentielles",
+    "type": "qcm",
+    "question": "Comment dit-on \"Je vais à Bruxelles\" ?",
+    "options": [
+      "Ik ga van Brussel.",
+      "Ik ga naar Brussel.",
+      "Ik ga met Brussel."
+    ],
+    "answer": "Ik ga naar Brussel."
+  },
+  {
+    "id": "ex_prepoessent_2",
+    "notionId": "prepositions_essentielles",
+    "type": "qcm",
+    "question": "\"van\" veut dire :",
+    "options": [
+      "vers",
+      "de/depuis",
+      "avec"
+    ],
+    "answer": "de/depuis"
+  },
+  {
+    "id": "ex_niet_1",
+    "notionId": "niet",
+    "type": "qcm",
+    "question": "Comment nie-t-on \"Ik werk vandaag\" ?",
+    "options": [
+      "Ik werk vandaag niet niet.",
+      "Ik werk niet vandaag.",
+      "Niet ik werk vandaag."
+    ],
+    "answer": "Ik werk niet vandaag."
+  },
+  {
+    "id": "ex_niet_2",
+    "notionId": "niet",
+    "type": "qcm",
+    "question": "\"niet\" peut-il nier un nom précédé de \"een\" ?",
+    "options": [
+      "Oui",
+      "Non, on utilise 'geen'",
+      "Seulement au pluriel"
+    ],
+    "answer": "Non, on utilise 'geen'"
+  },
+  {
+    "id": "ex_geen_1",
+    "notionId": "geen",
+    "type": "qcm",
+    "question": "Comment nie-t-on \"Ik heb een auto\" ?",
+    "options": [
+      "Ik heb niet een auto.",
+      "Ik heb geen auto.",
+      "Ik heb auto niet."
+    ],
+    "answer": "Ik heb geen auto."
+  },
+  {
+    "id": "ex_geen_2",
+    "notionId": "geen",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Zij heeft ___ kinderen.\" (Elle n'a pas d'enfants)",
+    "answer": "geen"
+  },
+  {
+    "id": "ex_posniet_1",
+    "notionId": "position_niet",
+    "type": "qcm",
+    "question": "Pour nier précisément \"naar Brussel\" (et opposer à un autre lieu), où va \"niet\" ?",
+    "options": [
+      "Tout à la fin de la phrase",
+      "Juste avant 'naar Brussel'",
+      "Juste après le sujet"
+    ],
+    "answer": "Juste avant 'naar Brussel'"
+  },
+  {
+    "id": "ex_posniet_2",
+    "notionId": "position_niet",
+    "type": "qcm",
+    "question": "\"Ik ga niet naar Brussel.\" (sans suite) nie :",
+    "options": [
+      "Toute l'action d'aller à Bruxelles",
+      "Seulement 'Brussel'",
+      "Seulement 'ga'"
+    ],
+    "answer": "Toute l'action d'aller à Bruxelles"
+  },
+  {
+    "id": "ex_presrecap_1",
+    "notionId": "present_recap",
+    "type": "qcm",
+    "question": "Laquelle de ces conjugaisons est correcte ?",
+    "options": [
+      "hij werkt, hij is, hij heeft",
+      "hij werk, hij ist, hij hebt",
+      "hij werkt, hij ben, hij heb"
+    ],
+    "answer": "hij werkt, hij is, hij heeft"
+  },
+  {
+    "id": "ex_presrecap_2",
+    "notionId": "present_recap",
+    "type": "qcm",
+    "question": "\"ik ___ moe\" (je suis fatigué)",
+    "options": [
+      "heb",
+      "ben",
+      "werk"
+    ],
+    "answer": "ben"
+  },
+  {
+    "id": "ex_perfintro_1",
+    "notionId": "perfectum_intro",
+    "type": "qcm",
+    "question": "Où va le participe passé dans une phrase simple ?",
+    "options": [
+      "Juste après l'auxiliaire",
+      "À la fin de la phrase",
+      "En début de phrase"
+    ],
+    "answer": "À la fin de la phrase"
+  },
+  {
+    "id": "ex_perfintro_2",
+    "notionId": "perfectum_intro",
+    "type": "qcm",
+    "question": "\"Ik heb gewerkt\" veut dire :",
+    "options": [
+      "Je travaille",
+      "J'ai travaillé",
+      "Je vais travailler"
+    ],
+    "answer": "J'ai travaillé"
+  },
+  {
+    "id": "ex_hebzijnaux_1",
+    "notionId": "hebben_zijn_auxiliaire",
+    "type": "qcm",
+    "question": "Quel auxiliaire pour \"gaan\" (aller) ?",
+    "options": [
+      "hebben",
+      "zijn"
+    ],
+    "answer": "zijn"
+  },
+  {
+    "id": "ex_hebzijnaux_2",
+    "notionId": "hebben_zijn_auxiliaire",
+    "type": "qcm",
+    "question": "Quel auxiliaire pour \"lezen\" (lire) ?",
+    "options": [
+      "hebben",
+      "zijn"
+    ],
+    "answer": "hebben"
+  },
+  {
+    "id": "ex_partpasse_1",
+    "notionId": "participe_passe",
+    "type": "qcm",
+    "question": "Quel est le participe passé de \"werken\" ?",
+    "options": [
+      "werkt",
+      "gewerkt",
+      "geworken"
+    ],
+    "answer": "gewerkt"
+  },
+  {
+    "id": "ex_partpasse_2",
+    "notionId": "participe_passe",
+    "type": "qcm",
+    "question": "Quel est le participe passé de \"wonen\" ?",
+    "options": [
+      "gewoont",
+      "gewoond",
+      "gewonen"
+    ],
+    "answer": "gewoond"
+  },
+  {
+    "id": "ex_passebase_1",
+    "notionId": "regles_du_passe_de_base",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"J'ai hier bien travaillé\"",
+    "words": [
+      "Ik",
+      "heb",
+      "gisteren",
+      "hard",
+      "gewerkt"
+    ],
+    "answer": [
+      "Ik",
+      "heb",
+      "gisteren",
+      "hard",
+      "gewerkt"
+    ]
+  },
+  {
+    "id": "ex_passebase_2",
+    "notionId": "regles_du_passe_de_base",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik heb gelezen gisteren een boek.",
+      "Ik heb gisteren een boek gelezen.",
+      "Ik gelezen heb gisteren een boek."
+    ],
+    "answer": "Ik heb gisteren een boek gelezen."
+  },
+  {
+    "id": "ex_famille_1",
+    "notionId": "famille",
+    "type": "qcm",
+    "question": "\"broer\" veut dire :",
+    "options": [
+      "sœur",
+      "frère",
+      "parent"
+    ],
+    "answer": "frère"
+  },
+  {
+    "id": "ex_famille_2",
+    "notionId": "famille",
+    "type": "qcm",
+    "question": "\"ouders\" veut dire :",
+    "options": [
+      "enfants",
+      "parents",
+      "grands-parents"
+    ],
+    "answer": "parents"
+  },
+  {
+    "id": "ex_maison_1",
+    "notionId": "maison",
+    "type": "qcm",
+    "question": "\"slaapkamer\" veut dire :",
+    "options": [
+      "cuisine",
+      "chambre",
+      "salon"
+    ],
+    "answer": "chambre"
+  },
+  {
+    "id": "ex_maison_2",
+    "notionId": "maison",
+    "type": "qcm",
+    "question": "\"tuin\" veut dire :",
+    "options": [
+      "jardin",
+      "toit",
+      "cave"
+    ],
+    "answer": "jardin"
+  },
+  {
+    "id": "ex_nourriture_1",
+    "notionId": "nourriture",
+    "type": "qcm",
+    "question": "Comment dit-on \"J'aime le café\" ?",
+    "options": [
+      "Ik vind koffie.",
+      "Ik houd van koffie.",
+      "Ik ben koffie."
+    ],
+    "answer": "Ik houd van koffie."
+  },
+  {
+    "id": "ex_nourriture_2",
+    "notionId": "nourriture",
+    "type": "qcm",
+    "question": "\"groenten\" veut dire :",
+    "options": [
+      "fruits",
+      "légumes",
+      "viandes"
+    ],
+    "answer": "légumes"
+  },
+  {
+    "id": "ex_achats_1",
+    "notionId": "achats",
+    "type": "qcm",
+    "question": "Comment demande-t-on le prix ?",
+    "options": [
+      "Wat is dit?",
+      "Hoeveel kost dit?",
+      "Waar is dit?"
+    ],
+    "answer": "Hoeveel kost dit?"
+  },
+  {
+    "id": "ex_achats_2",
+    "notionId": "achats",
+    "type": "qcm",
+    "question": "Quelle formule est la plus polie pour demander quelque chose ?",
+    "options": [
+      "Ik wil...",
+      "Ik wil graag...",
+      "Geef mij..."
+    ],
+    "answer": "Ik wil graag..."
+  },
+  {
+    "id": "ex_transport_1",
+    "notionId": "transport",
+    "type": "qcm",
+    "question": "Comment dit-on \"en train\" ?",
+    "options": [
+      "met trein",
+      "met de trein",
+      "op de trein"
+    ],
+    "answer": "met de trein"
+  },
+  {
+    "id": "ex_transport_2",
+    "notionId": "transport",
+    "type": "qcm",
+    "question": "\"te voet\" veut dire :",
+    "options": [
+      "en voiture",
+      "à pied",
+      "à vélo"
+    ],
+    "answer": "à pied"
+  },
+  {
+    "id": "ex_travailetudes_1",
+    "notionId": "travail_etudes",
+    "type": "qcm",
+    "question": "Comment dit-on \"Je travaille chez une entreprise\" ?",
+    "options": [
+      "Ik werk in een bedrijf.",
+      "Ik werk bij een bedrijf.",
+      "Ik werk een bedrijf."
+    ],
+    "answer": "Ik werk bij een bedrijf."
+  },
+  {
+    "id": "ex_travailetudes_2",
+    "notionId": "travail_etudes",
+    "type": "qcm",
+    "question": "\"baas\" veut dire :",
+    "options": [
+      "collègue",
+      "patron",
+      "étudiant"
+    ],
+    "answer": "patron"
+  },
+  {
+    "id": "ex_meteo_1",
+    "notionId": "meteo",
+    "type": "qcm",
+    "question": "Comment dit-on \"Il pleut\" ?",
+    "options": [
+      "Regent.",
+      "Het regent.",
+      "Is regent."
+    ],
+    "answer": "Het regent."
+  },
+  {
+    "id": "ex_meteo_2",
+    "notionId": "meteo",
+    "type": "qcm",
+    "question": "\"zonnig\" veut dire :",
+    "options": [
+      "pluvieux",
+      "ensoleillé",
+      "venteux"
+    ],
+    "answer": "ensoleillé"
+  },
+  {
+    "id": "ex_villeadmin_1",
+    "notionId": "ville_administration",
+    "type": "qcm",
+    "question": "\"gemeente\" veut dire :",
+    "options": [
+      "ville",
+      "commune/administration",
+      "quartier"
+    ],
+    "answer": "commune/administration"
+  },
+  {
+    "id": "ex_villeadmin_2",
+    "notionId": "ville_administration",
+    "type": "qcm",
+    "question": "Comment dit-on \"remplir un formulaire\" ?",
+    "options": [
+      "een formulier invullen",
+      "een formulier lezen",
+      "een formulier maken"
+    ],
+    "answer": "een formulier invullen"
   }
 ]

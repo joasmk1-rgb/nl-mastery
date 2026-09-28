@@ -3,78 +3,194 @@
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Saluer, dire au revoir et utiliser les formules de politesse de base.",
+      "comprendre": "Le néerlandais a des salutations formelles et informelles, qui varient selon le moment de la journée.",
+      "regle": "Hallo/Hoi (informel) ; Goedemorgen/Goedemiddag/Goedenavond (formel, selon l'heure) ; Tot ziens/Doei pour dire au revoir.",
+      "exemples": [
+        "Hallo, hoe gaat het? (Salut, comment ça va ?)",
+        "Goedemorgen! (Bonjour - le matin)",
+        "Tot ziens! (Au revoir)",
+        "Doei! (Salut - informel)"
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"Goedenavond\" le matin.",
+        "Confondre \"Doei\" (informel) avec un contexte professionnel."
+      ]
+    },
+    "exerciseIds": [
+      "ex_salutations_1",
+      "ex_salutations_2"
+    ]
   },
   "se_presenter": {
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "grammaire",
+      "vocabulaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Se présenter avec son nom.",
+      "comprendre": "\"Heten\" (s'appeler) et \"zijn\" (être) sont les deux verbes clés pour se présenter.",
+      "regle": "Ik heet... / Ik ben... (Je m'appelle...) ; Wat is je naam? / Hoe heet je? (Comment tu t'appelles ?)",
+      "exemples": [
+        "Ik heet Joas.",
+        "Ik ben Joas.",
+        "Wat is je naam?",
+        "Aangenaam! (Enchanté)"
+      ],
+      "erreursFrequentes": [
+        "Oublier le \"ik\" (je) : le néerlandais ne peut pas l'omettre."
+      ]
+    },
+    "exerciseIds": [
+      "ex_sepresenter_1",
+      "ex_sepresenter_2"
+    ]
   },
   "nom_age_nationalite": {
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "grammaire",
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "se_presenter"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Donner son âge et sa nationalité.",
+      "comprendre": "L'âge s'exprime avec \"zijn\" (être), pas \"avoir\" comme en français : littéralement \"je suis ... ans vieux\".",
+      "regle": "Ik ben ... jaar oud (J'ai ... ans) ; Ik ben Belg / Ik kom uit België.",
+      "exemples": [
+        "Ik ben 23 jaar oud.",
+        "Ik ben Belg.",
+        "Ik kom uit België. (Je viens de Belgique)"
+      ],
+      "erreursFrequentes": [
+        "Traduire littéralement \"j'ai 23 ans\" par \"Ik heb 23 jaar\" (faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_age_1",
+      "ex_age_2"
+    ]
   },
   "ville_profession": {
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "grammaire",
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "se_presenter"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Dire d'où on vient et quel métier on fait.",
+      "comprendre": "\"Wonen\" = habiter, \"werken als\" = travailler comme.",
+      "regle": "Ik woon in... (J'habite à...) ; Ik werk als... (Je travaille comme...) ; Ik studeer... (J'étudie...)",
+      "exemples": [
+        "Ik woon in Mons.",
+        "Ik werk als consultant.",
+        "Ik studeer Handelswetenschappen. (sciences de gestion)"
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"op\" au lieu de \"in\" pour une ville (\"op Mons\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_villeprof_1",
+      "ex_villeprof_2"
+    ]
   },
   "nombres": {
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Compter de 0 à 100 en néerlandais.",
+      "comprendre": "Les nombres composés (21-99) inversent l'ordre par rapport au français : unité puis dizaine, comme en allemand.",
+      "regle": "21 = eenentwintig (un-et-vingt), pas \"vingt-et-un\". 0 nul, 1 een, 10 tien, 20 twintig, 100 honderd.",
+      "exemples": [
+        "eenentwintig (21)",
+        "vijfendertig (35)",
+        "honderd (100)"
+      ],
+      "erreursFrequentes": [
+        "Vouloir dire \"twintig-een\" (ordre français) au lieu de \"eenentwintig\"."
+      ]
+    },
+    "exerciseIds": [
+      "ex_nombres_1",
+      "ex_nombres_2"
+    ]
   },
   "alphabet_epeler": {
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Épeler un mot lettre par lettre.",
+      "comprendre": "Utile pour épeler son nom au téléphone ou à l'accueil.",
+      "regle": "Hoe spel je dat? (Comment ça s'épelle ?) Les lettres se prononcent différemment du français (ex : G se prononce comme un \"r\" guttural raclé).",
+      "exemples": [
+        "Hoe spel je je naam?",
+        "J-O-A-S (épelé lettre par lettre)"
+      ],
+      "erreursFrequentes": [
+        "Prononcer les lettres à la française plutôt qu'à la néerlandaise."
+      ]
+    },
+    "exerciseIds": [
+      "ex_alphabet_1"
+    ]
   },
   "date_heure": {
     "level": "A1",
     "module": "a1-m1",
     "skills": [
-      "grammaire"
+      "grammaire",
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "nombres"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Dire la date et l'heure.",
+      "comprendre": "L'heure se dit souvent par rapport à la demi-heure suivante (\"half acht\" = 7h30, litt. \"moitié de huit\").",
+      "regle": "Hoe laat is het? (Quelle heure est-il ?) Het is ... uur. Welke dag is het vandaag?",
+      "exemples": [
+        "Het is drie uur. (Il est 3h)",
+        "Het is half acht. (Il est 7h30)",
+        "Vandaag is het maandag. (Aujourd'hui on est lundi)"
+      ],
+      "erreursFrequentes": [
+        "Croire que \"half acht\" veut dire 8h30 (c'est en fait 7h30 !)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_dateheure_1",
+      "ex_dateheure_2"
+    ]
   },
   "sujet_verbe_objet": {
     "level": "A1",
@@ -83,9 +199,24 @@
       "grammaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Construire une phrase simple sujet-verbe-objet.",
+      "comprendre": "L'ordre de base est similaire au français : sujet, verbe conjugué, puis reste de la phrase.",
+      "regle": "Sujet + Verbe + (complément). Ik lees een boek. (Je lis un livre.)",
+      "exemples": [
+        "Ik eet een appel.",
+        "Zij drinkt koffie.",
+        "Wij spreken Nederlands."
+      ],
+      "erreursFrequentes": [
+        "Oublier de conjuguer le verbe et le laisser à l'infinitif."
+      ]
+    },
+    "exerciseIds": [
+      "ex_svo_1",
+      "ex_svo_2"
+    ]
   },
   "phrase_affirmative": {
     "level": "A1",
@@ -93,10 +224,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "sujet_verbe_objet"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Confirmer la structure affirmative de base avec plus de variété de verbes.",
+      "comprendre": "Même structure que sujet_verbe_objet ; le verbe conjugué reste toujours en 2e position dans une proposition principale.",
+      "regle": "Sujet + Verbe conjugué + reste de la phrase, quel que soit le verbe.",
+      "exemples": [
+        "De kat slaapt. (Le chat dort)",
+        "Wij werken vandaag. (Nous travaillons aujourd'hui)"
+      ],
+      "erreursFrequentes": [
+        "Mettre le verbe en 3e position en ajoutant un mot avant le sujet sans inverser."
+      ]
+    },
+    "exerciseIds": [
+      "ex_phraseaff_1",
+      "ex_phraseaff_2"
+    ]
   },
   "questions": {
     "level": "A1",
@@ -104,10 +251,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "phrase_affirmative"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Poser des questions fermées (oui/non) et ouvertes.",
+      "comprendre": "Pour une question fermée, le verbe passe en 1re position. Pour une question ouverte, le mot interrogatif est suivi du verbe.",
+      "regle": "Werk je? (Tu travailles ?) Wat doe je? Waar woon je? Wanneer...? Waarom...? Wie...?",
+      "exemples": [
+        "Spreek je Nederlands?",
+        "Wat is dat?",
+        "Waar ga je naartoe?"
+      ],
+      "erreursFrequentes": [
+        "Garder l'ordre affirmatif (sujet-verbe) dans une question fermée au lieu d'inverser."
+      ]
+    },
+    "exerciseIds": [
+      "ex_questions_1",
+      "ex_questions_2"
+    ]
   },
   "inversion": {
     "level": "A1",
@@ -115,10 +279,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "phrase_affirmative"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Comprendre la règle d'inversion : si un autre mot commence la phrase, le verbe reste en 2e position.",
+      "comprendre": "C'est la règle \"verbe en 2e position\" (V2), fondamentale en néerlandais. Le sujet vient alors après le verbe.",
+      "regle": "[Élément 1] + Verbe + Sujet + reste. Vandaag werk ik. (et non \"Vandaag ik werk\")",
+      "exemples": [
+        "Morgen ga ik naar Amsterdam.",
+        "Nu begrijp ik het.",
+        "Daarom blijf ik thuis."
+      ],
+      "erreursFrequentes": [
+        "Garder \"ik werk\" après avoir commencé par un autre mot (\"Vandaag ik werk\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_inversion_1",
+      "ex_inversion_2"
+    ]
   },
   "hoofdzin": {
     "level": "A1",
@@ -126,10 +307,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "inversion"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Comprendre la notion de proposition principale (hoofdzin) et sa place centrale dans la construction de phrases.",
+      "comprendre": "\"Hoofdzin\" = proposition principale, où le verbe est toujours en 2e position, contrairement à une subordonnée où le verbe irait en fin (vu plus tard).",
+      "regle": "Une hoofdzin peut être introduite par 'en', 'maar', 'of', 'want' sans changer l'ordre des mots (conjonctions de coordination).",
+      "exemples": [
+        "Ik werk en ik studeer.",
+        "Ik wil koffie, maar ik heb geen tijd."
+      ],
+      "erreursFrequentes": [
+        "Confondre \"want\" (car, coordination, pas d'inversion) avec \"omdat\" (parce que, subordination)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_hoofdzin_1",
+      "ex_hoofdzin_2"
+    ]
   },
   "ordre_des_mots_base": {
     "level": "A1",
@@ -137,10 +334,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "inversion"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Consolider l'ordre des mots dans les phrases simples avec compléments de temps/manière/lieu.",
+      "comprendre": "L'ordre typique des compléments est Temps-Manière-Lieu (TMP: tijd-manier-plaats), parfois différent du français.",
+      "regle": "Sujet + Verbe + Temps + Manière + Lieu. Ik ga morgen met de trein naar Brussel.",
+      "exemples": [
+        "Ik ga morgen met de trein naar Brussel.",
+        "Zij werkt elke dag hard op kantoor."
+      ],
+      "erreursFrequentes": [
+        "Mettre le lieu avant le temps par réflexe du français."
+      ]
+    },
+    "exerciseIds": [
+      "ex_tmp_1",
+      "ex_tmp_2"
+    ]
   },
   "de_het": {
     "level": "A1",
@@ -177,10 +390,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "de_het"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser l'article indéfini \"een\" (un/une).",
+      "comprendre": "Contrairement à de/het, \"een\" est unique et ne change jamais selon le genre.",
+      "regle": "een + nom (singulier seulement) ; il n'y a pas de pluriel indéfini, on omet simplement l'article.",
+      "exemples": [
+        "een tafel (une table)",
+        "een huis (une maison)",
+        "Ik heb een idee. (J'ai une idée)"
+      ],
+      "erreursFrequentes": [
+        "Chercher une forme équivalente à \"een\" pour le pluriel : au pluriel indéfini, on omet l'article."
+      ]
+    },
+    "exerciseIds": [
+      "ex_een_1",
+      "ex_een_2"
+    ]
   },
   "pluriel": {
     "level": "A1",
@@ -188,10 +418,28 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "de_het"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Former le pluriel des noms néerlandais.",
+      "comprendre": "Deux terminaisons principales : -en (la plus fréquente) et -s (après voyelle non accentuée, diminutifs -je, mots en -el/-en/-er/-aar).",
+      "regle": "tafel → tafels ; boek → boeken ; huis → huizen (s→z, f→v devant voyelle) ; auto → auto's.",
+      "exemples": [
+        "de tafels",
+        "de boeken",
+        "de huizen",
+        "de auto's"
+      ],
+      "erreursFrequentes": [
+        "Oublier le changement s→z ou f→v (dire \"huisen\" au lieu de \"huizen\")."
+      ]
+    },
+    "exerciseIds": [
+      "ex_pluriel_1",
+      "ex_pluriel_2"
+    ]
   },
   "diminutifs": {
     "level": "A1",
@@ -199,10 +447,28 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "de_het",
+      "pluriel"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Former et reconnaître les diminutifs (-je) qui expriment la petitesse ou l'affection.",
+      "comprendre": "Tout diminutif prend l'article \"het\", quel que soit le genre du mot d'origine.",
+      "regle": "-je après consonne (huisje), -tje après voyelle/l/n/r (tafeltje), -pje après m (boompje).",
+      "exemples": [
+        "het huisje (la petite maison)",
+        "het tafeltje (la petite table)",
+        "het kopje (la petite tasse)"
+      ],
+      "erreursFrequentes": [
+        "Garder l'article original du mot (\"de tafel\" → \"de tafeltje\" au lieu de \"het tafeltje\")."
+      ]
+    },
+    "exerciseIds": [
+      "ex_diminutif_1",
+      "ex_diminutif_2"
+    ]
   },
   "categories_de_mots": {
     "level": "A1",
@@ -211,9 +477,25 @@
       "grammaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Reconnaître les grandes catégories grammaticales néerlandaises (nom, verbe, adjectif, article...).",
+      "comprendre": "Base indispensable avant d'aborder les règles d'accord et de position.",
+      "regle": "zelfstandig naamwoord (nom), werkwoord (verbe), bijvoeglijk naamwoord (adjectif), lidwoord (article).",
+      "exemples": [
+        "tafel (nom)",
+        "lopen (verbe)",
+        "groot (adjectif)",
+        "de (article)"
+      ],
+      "erreursFrequentes": [
+        "Confondre bijvoeglijk naamwoord (adjectif) et zelfstandig naamwoord (nom)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_categ_1",
+      "ex_categ_2"
+    ]
   },
   "pronoms_sujets": {
     "level": "A1",
@@ -222,9 +504,24 @@
       "grammaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Connaître tous les pronoms personnels sujets.",
+      "comprendre": "ik, jij/je, hij, zij/ze, het, wij/we, jullie, zij/ze.",
+      "regle": "Formes fortes (accentuées) vs faibles (non accentuées) : jij/je, wij/we, zij/ze.",
+      "exemples": [
+        "Ik werk.",
+        "Jij bent aardig.",
+        "Wij gaan naar huis."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"het\" pour une personne : het désigne des choses/notions neutres, pas des gens."
+      ]
+    },
+    "exerciseIds": [
+      "ex_pronsujet_1",
+      "ex_pronsujet_2"
+    ]
   },
   "u_politesse": {
     "level": "A1",
@@ -232,10 +529,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser la forme de politesse \"u\".",
+      "comprendre": "\"U\" s'utilise pour vouvoyer, comme \"vous\" en français, en contexte formel ou administratif.",
+      "regle": "U + verbe à la 3e personne du singulier (comme hij/zij). U bent, u werkt, u heeft/hebt.",
+      "exemples": [
+        "Hoe gaat het met u?",
+        "Wilt u koffie?",
+        "Kunt u mij helpen?"
+      ],
+      "erreursFrequentes": [
+        "Conjuguer \"u\" comme \"jij\" (2e personne) au lieu de la 3e personne du singulier."
+      ]
+    },
+    "exerciseIds": [
+      "ex_upolitesse_1",
+      "ex_upolitesse_2"
+    ]
   },
   "possessifs": {
     "level": "A1",
@@ -243,10 +557,28 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les adjectifs possessifs (mon, ton, son...).",
+      "comprendre": "mijn, jouw/je, zijn, haar, ons/onze, jullie, hun.",
+      "regle": "\"ons\" devant un nom \"het\", \"onze\" devant un nom \"de\" ou pluriel — seul possessif qui s'accorde.",
+      "exemples": [
+        "mijn huis",
+        "jouw naam",
+        "ons huis (het huis)",
+        "onze tafel (de tafel)"
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"ons\" partout sans accorder avec de/het."
+      ]
+    },
+    "exerciseIds": [
+      "ex_possessif_1",
+      "ex_possessif_2"
+    ]
   },
   "pronoms_objets": {
     "level": "A1",
@@ -254,10 +586,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les pronoms compléments (me, te, le...).",
+      "comprendre": "mij/me, jou/je, hem, haar, het, ons, jullie, hen/hun.",
+      "regle": "Ik zie hem. (Je le vois) / Ik geef het aan haar. (Je le lui donne)",
+      "exemples": [
+        "Ik ken je.",
+        "Hij helpt me.",
+        "Wij zien hen morgen."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"hij\" (sujet) au lieu de \"hem\" (objet) après un verbe."
+      ]
+    },
+    "exerciseIds": [
+      "ex_pronobjet_1",
+      "ex_pronobjet_2"
+    ]
   },
   "demonstratifs": {
     "level": "A1",
@@ -265,10 +614,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "de_het"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser \"deze/dit\" (ce-ci) et \"die/dat\" (ce-là).",
+      "comprendre": "Le choix dépend du genre : deze/die pour \"de\", dit/dat pour \"het\" ; deze/dit pour la proximité, die/dat pour l'éloignement.",
+      "regle": "deze tafel (de) / dit huis (het) / die tafel (de, loin) / dat huis (het, loin)",
+      "exemples": [
+        "Deze tafel is mooi.",
+        "Dat huis is groot.",
+        "Ik wil dit boek."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"deze\" avec un nom \"het\" (\"deze huis\" est faux, \"dit huis\" est correct)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_demonstratif_1",
+      "ex_demonstratif_2"
+    ]
   },
   "infinitif_radical": {
     "level": "A1",
@@ -277,9 +643,24 @@
       "grammaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Identifier l'infinitif et en extraire le radical (stam) pour conjuguer.",
+      "comprendre": "L'infinitif se termine presque toujours en -en. Le radical = infinitif moins -en (avec parfois allongement de voyelle).",
+      "regle": "werken → werk (radical) ; wonen → woon ; spelen → speel (double voyelle si syllabe ouverte).",
+      "exemples": [
+        "werken → werk",
+        "wonen → woon",
+        "lopen → loop"
+      ],
+      "erreursFrequentes": [
+        "Oublier d'allonger la voyelle quand nécessaire (spelen → \"spel\" est faux, \"speel\" est correct)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_radical_1",
+      "ex_radical_2"
+    ]
   },
   "present_regulier": {
     "level": "A1",
@@ -287,10 +668,28 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "infinitif_radical",
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Conjuguer un verbe régulier au présent.",
+      "comprendre": "ik + radical ; jij/hij/zij/u + radical+t ; wij/jullie/zij(pl) = infinitif complet.",
+      "regle": "ik werk, jij werkt, hij werkt, wij werken, jullie werken, zij werken. Avec inversion de jij : pas de -t (Werk jij?).",
+      "exemples": [
+        "Ik werk.",
+        "Jij werkt.",
+        "Wij werken."
+      ],
+      "erreursFrequentes": [
+        "Ajouter le -t même à la 1re personne (\"Ik werkt\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_presreg_1",
+      "ex_presreg_2"
+    ]
   },
   "zijn": {
     "level": "A1",
@@ -298,10 +697,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Conjuguer le verbe irrégulier \"zijn\" (être).",
+      "comprendre": "L'un des verbes les plus utilisés et totalement irrégulier, à mémoriser par cœur.",
+      "regle": "ik ben, jij bent, hij/zij/het is, wij zijn, jullie zijn, zij zijn.",
+      "exemples": [
+        "Ik ben moe. (Je suis fatigué)",
+        "Zij is aardig.",
+        "Wij zijn klaar."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"is\" pour toutes les personnes par simplification."
+      ]
+    },
+    "exerciseIds": [
+      "ex_zijn_1",
+      "ex_zijn_2"
+    ]
   },
   "hebben": {
     "level": "A1",
@@ -309,10 +725,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Conjuguer le verbe irrégulier \"hebben\" (avoir).",
+      "comprendre": "Deuxième verbe essentiel, irrégulier, aussi utilisé comme auxiliaire du passé composé.",
+      "regle": "ik heb, jij hebt, hij/zij/het heeft, wij hebben, jullie hebben, zij hebben.",
+      "exemples": [
+        "Ik heb een vraag.",
+        "Zij heeft een auto.",
+        "Wij hebben tijd."
+      ],
+      "erreursFrequentes": [
+        "Dire \"hij heb\" au lieu de \"hij heeft\"."
+      ]
+    },
+    "exerciseIds": [
+      "ex_hebben_1",
+      "ex_hebben_2"
+    ]
   },
   "verbes_irreguliers": {
     "level": "A1",
@@ -320,10 +753,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "present_regulier"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Reconnaître d'autres verbes irréguliers fréquents (gaan, doen, komen).",
+      "comprendre": "Ces verbes ont un radical qui change ou des formes à mémoriser individuellement.",
+      "regle": "gaan → ik ga, jij gaat ; doen → ik doe, jij doet ; komen → ik kom, jij komt.",
+      "exemples": [
+        "Ik ga naar school.",
+        "Wat doe je?",
+        "Hij komt morgen."
+      ],
+      "erreursFrequentes": [
+        "Appliquer la règle régulière (radical+t) à ces verbes sans vérifier l'irrégularité."
+      ]
+    },
+    "exerciseIds": [
+      "ex_verbirr_1",
+      "ex_verbirr_2"
+    ]
   },
   "verbes_modaux": {
     "level": "A1",
@@ -331,10 +781,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "present_regulier"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les verbes modaux (kunnen, willen, moeten, mogen).",
+      "comprendre": "Ces verbes sont suivis d'un infinitif qui se place à la fin de la phrase.",
+      "regle": "kunnen (pouvoir), willen (vouloir), moeten (devoir), mogen (avoir la permission). Modal + ... + infinitif.",
+      "exemples": [
+        "Ik kan zwemmen.",
+        "Ik wil een koffie bestellen.",
+        "Je moet werken."
+      ],
+      "erreursFrequentes": [
+        "Conjuguer aussi le deuxième verbe au lieu de le laisser à l'infinitif (\"Ik kan zwem\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_modaux_1",
+      "ex_modaux_2"
+    ]
   },
   "verbes_separables_intro": {
     "level": "A1",
@@ -342,10 +809,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "present_regulier"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Découvrir les verbes à particule séparable (scheidbare werkwoorden).",
+      "comprendre": "Certains verbes composés se séparent en proposition principale : la particule va à la fin.",
+      "regle": "opstaan (se lever) → Ik sta om 7 uur op. (\"op\" part à la fin, séparé de \"sta\")",
+      "exemples": [
+        "Ik sta vroeg op.",
+        "Hij belt zijn moeder op. (Il appelle sa mère)"
+      ],
+      "erreursFrequentes": [
+        "Garder la particule collée au verbe en le conjuguant (\"Ik opsta\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_sepverb_1",
+      "ex_sepverb_2"
+    ]
   },
   "adjectif_attribut": {
     "level": "A1",
@@ -353,10 +836,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "zijn"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser un adjectif attribut (après le verbe \"zijn\"), qui ne s'accorde pas.",
+      "comprendre": "Quand l'adjectif est séparé du nom par le verbe être, il garde sa forme de base, sans -e.",
+      "regle": "[Nom] is/zijn [adjectif]. De tafel is groot. Het huis is mooi.",
+      "exemples": [
+        "De tafel is groot.",
+        "Het huis is mooi.",
+        "Zij zijn aardig."
+      ],
+      "erreursFrequentes": [
+        "Ajouter un -e à l'adjectif attribut par réflexe (\"De tafel is grote\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_adjattr_1",
+      "ex_adjattr_2"
+    ]
   },
   "adjectif_devant_nom": {
     "level": "A1",
@@ -364,10 +864,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "de_het"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Placer un adjectif directement devant le nom (épithète).",
+      "comprendre": "Ici l'adjectif s'accorde généralement en ajoutant -e, sauf exceptions (voir regle_du_e).",
+      "regle": "[Article] + adjectif+e + nom. de grote tafel. het mooie huis.",
+      "exemples": [
+        "de grote tafel",
+        "het mooie huis",
+        "een aardige man"
+      ],
+      "erreursFrequentes": [
+        "Oublier le -e devant un nom \"de\" (\"de groot tafel\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_adjdevant_1",
+      "ex_adjdevant_2"
+    ]
   },
   "regle_du_e": {
     "level": "A1",
@@ -375,10 +892,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "adjectif_devant_nom"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Maîtriser quand l'adjectif épithète NE prend PAS de -e.",
+      "comprendre": "Exception clé : devant un nom \"het\" singulier ET indéfini (avec \"een\" ou sans article), l'adjectif reste invariable.",
+      "regle": "een mooi huis (het huis, indéfini → pas de -e) MAIS het mooie huis (het huis, défini → -e).",
+      "exemples": [
+        "een mooi huis",
+        "het mooie huis",
+        "een grote tafel (de tafel, toujours -e)"
+      ],
+      "erreursFrequentes": [
+        "Ajouter -e même dans le cas \"een + het-woord\" (\"een mooie huis\" est faux)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_regledu_e_1",
+      "ex_regledu_e_2"
+    ]
   },
   "comparatif": {
     "level": "A1",
@@ -386,10 +920,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "adjectif_attribut"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Former le comparatif de supériorité.",
+      "comprendre": "On ajoute -er à l'adjectif, comme \"-er\" en anglais.",
+      "regle": "groot → groter ; mooi → mooier ; goed → beter (irrégulier). + dan (que).",
+      "exemples": [
+        "Dit huis is groter dan dat huis.",
+        "Zij is jonger dan ik."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"meer\" + adjectif comme en français (\"meer groot\" au lieu de \"groter\")."
+      ]
+    },
+    "exerciseIds": [
+      "ex_comparatif_1",
+      "ex_comparatif_2"
+    ]
   },
   "superlatif": {
     "level": "A1",
@@ -397,32 +947,82 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "comparatif"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Former le superlatif.",
+      "comprendre": "On ajoute -st (précédé de e si besoin), toujours avec \"het\" devant.",
+      "regle": "groot → grootst → het grootst ; mooi → mooist → het mooist.",
+      "exemples": [
+        "Dit is het grootste huis. (épithète, +e)",
+        "Dit huis is het grootst. (attribut)"
+      ],
+      "erreursFrequentes": [
+        "Oublier \"het\" devant le superlatif."
+      ]
+    },
+    "exerciseIds": [
+      "ex_superlatif_1",
+      "ex_superlatif_2"
+    ]
   },
   "prepositions_lieu": {
     "level": "A1",
     "module": "a1-m7",
     "skills": [
-      "grammaire"
+      "grammaire",
+      "vocabulaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les prépositions de lieu de base (in, op, onder, naast, achter...).",
+      "comprendre": "Certaines prépositions ressemblent au français, d'autres non — attention aux faux-amis comme \"op\" (sur).",
+      "regle": "in (dans), op (sur), onder (sous), naast (à côté de), achter (derrière), voor (devant).",
+      "exemples": [
+        "Het boek ligt op tafel.",
+        "De kat zit onder de tafel.",
+        "Ik sta naast jou."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"in\" pour \"sur\" (confondre in/op)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_prepolieu_1",
+      "ex_prepolieu_2"
+    ]
   },
   "prepositions_essentielles": {
     "level": "A1",
     "module": "a1-m7",
     "skills": [
-      "grammaire"
+      "grammaire",
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "prepositions_lieu"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les prépositions de mouvement/temps essentielles (naar, van, met, voor, na).",
+      "comprendre": "naar (vers/à, direction), van (de, provenance), met (avec), voor (avant/pour), na (après).",
+      "regle": "Ik ga naar Brussel. Ik kom van Mons. Ik reis met de trein.",
+      "exemples": [
+        "Ik ga naar school.",
+        "Dit cadeau is voor jou.",
+        "Na het eten ga ik slapen."
+      ],
+      "erreursFrequentes": [
+        "Confondre \"voor\" (avant/pour) et \"voordat\" (avant que, subordination)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_prepoessent_1",
+      "ex_prepoessent_2"
+    ]
   },
   "niet": {
     "level": "A1",
@@ -430,10 +1030,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "phrase_affirmative"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Nier une phrase avec \"niet\".",
+      "comprendre": "\"Niet\" nie un verbe, un adjectif, un adverbe ou toute la phrase — jamais un nom précédé d'un article indéfini implicite (ça, c'est \"geen\").",
+      "regle": "Sujet + Verbe + ... + niet (en fin de proposition, ou avant l'élément nié).",
+      "exemples": [
+        "Ik werk niet vandaag.",
+        "Dit is niet goed.",
+        "Hij komt niet."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"niet\" pour nier un nom indéfini (\"Ik heb niet een auto\" est faux, \"geen\" est correct)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_niet_1",
+      "ex_niet_2"
+    ]
   },
   "geen": {
     "level": "A1",
@@ -441,10 +1058,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "niet"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Nier un nom précédé de \"een\" ou sans article avec \"geen\".",
+      "comprendre": "\"Geen\" remplace \"een\" + niet, ou nie un nom pluriel/indénombrable sans article.",
+      "regle": "Ik heb een auto. → Ik heb geen auto. (pas \"niet een auto\")",
+      "exemples": [
+        "Ik heb geen tijd.",
+        "Zij heeft geen kinderen.",
+        "Er is geen probleem."
+      ],
+      "erreursFrequentes": [
+        "Dire \"niet een\" au lieu de \"geen\"."
+      ]
+    },
+    "exerciseIds": [
+      "ex_geen_1",
+      "ex_geen_2"
+    ]
   },
   "niet_vs_geen": {
     "level": "A1",
@@ -483,10 +1117,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "niet_vs_geen"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Maîtriser où placer \"niet\" dans la phrase selon ce qu'on nie.",
+      "comprendre": "Règle générale : niet se place le plus loin possible dans la phrase, sauf s'il nie un élément précis (alors il vient juste avant).",
+      "regle": "Nier tout le verbe → niet en fin. Nier un complément précis → niet juste avant ce complément.",
+      "exemples": [
+        "Ik ga niet naar Brussel. (négation générale)",
+        "Ik ga niet naar Brussel, maar naar Gent. (négation précise)"
+      ],
+      "erreursFrequentes": [
+        "Toujours mettre \"niet\" tout à la fin même quand on veut nier un élément précis."
+      ]
+    },
+    "exerciseIds": [
+      "ex_posniet_1",
+      "ex_posniet_2"
+    ]
   },
   "present_recap": {
     "level": "A1",
@@ -494,10 +1144,28 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "present_regulier",
+      "zijn",
+      "hebben",
+      "verbes_modaux"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Réviser et consolider la conjugaison au présent avant d'aborder le passé.",
+      "comprendre": "Synthèse de present_regulier + zijn + hebben + verbes irréguliers/modaux.",
+      "regle": "Radical(+t) pour les verbes réguliers ; formes propres pour zijn/hebben/modaux.",
+      "exemples": [
+        "Ik werk, ik ben, ik heb, ik kan. (résumé des 4 patterns)"
+      ],
+      "erreursFrequentes": [
+        "Mélanger les terminaisons de zijn/hebben avec celles des verbes réguliers."
+      ]
+    },
+    "exerciseIds": [
+      "ex_presrecap_1",
+      "ex_presrecap_2"
+    ]
   },
   "perfectum_intro": {
     "level": "A1",
@@ -505,10 +1173,26 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "present_recap"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Découvrir le passé composé néerlandais (perfectum).",
+      "comprendre": "Comme en français avec avoir/être + participe passé, le néerlandais utilise hebben/zijn + participe passé, mais le participe va à la FIN de la phrase.",
+      "regle": "Sujet + hebben/zijn (conjugué) + ... + participe passé (fin).",
+      "exemples": [
+        "Ik heb gewerkt. (J'ai travaillé)",
+        "Zij is gegaan. (Elle est allée)"
+      ],
+      "erreursFrequentes": [
+        "Mettre le participe passé juste après l'auxiliaire comme en français au lieu de le renvoyer en fin de phrase."
+      ]
+    },
+    "exerciseIds": [
+      "ex_perfintro_1",
+      "ex_perfintro_2"
+    ]
   },
   "hebben_zijn_auxiliaire": {
     "level": "A1",
@@ -516,10 +1200,27 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "perfectum_intro"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Choisir le bon auxiliaire (hebben ou zijn) au perfectum.",
+      "comprendre": "\"Zijn\" s'utilise avec les verbes de mouvement/changement d'état (gaan, komen, worden...), \"hebben\" pour la majorité des autres verbes.",
+      "regle": "Verbes de déplacement avec destination/changement → zijn. Sinon → hebben.",
+      "exemples": [
+        "Ik ben naar huis gegaan.",
+        "Ik heb een boek gelezen.",
+        "Zij is ziek geworden."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"hebben\" pour tous les verbes par réflexe du français (\"avoir\" généralisé)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_hebzijnaux_1",
+      "ex_hebzijnaux_2"
+    ]
   },
   "participe_passe": {
     "level": "A1",
@@ -527,10 +1228,28 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "perfectum_intro"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Former le participe passé (voltooid deelwoord).",
+      "comprendre": "Formation régulière : ge- + radical + t/d (selon la consonne finale du radical) ; verbes irréguliers à mémoriser.",
+      "regle": "werken → gewerkt (consonne sourde → t) ; wonen → gewoond (consonne sonore → d).",
+      "exemples": [
+        "gewerkt (travaillé)",
+        "gewoond (habité)",
+        "gegaan (irrégulier, allé)",
+        "gedaan (irrégulier, fait)"
+      ],
+      "erreursFrequentes": [
+        "Oublier le préfixe \"ge-\" ou confondre t/d final."
+      ]
+    },
+    "exerciseIds": [
+      "ex_partpasse_1",
+      "ex_partpasse_2"
+    ]
   },
   "regles_du_passe_de_base": {
     "level": "A1",
@@ -538,97 +1257,247 @@
     "skills": [
       "grammaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "hebben_zijn_auxiliaire",
+      "participe_passe"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Consolider l'usage du perfectum dans des phrases complètes avec compléments.",
+      "comprendre": "Combine auxiliaire + ordre des mots + participe en fin.",
+      "regle": "Sujet + aux + (compléments) + participe. Ik heb gisteren een boek gelezen.",
+      "exemples": [
+        "Ik heb gisteren hard gewerkt.",
+        "Wij zijn vorige week naar Nederland gegaan."
+      ],
+      "erreursFrequentes": [
+        "Insérer le participe passé au milieu de la phrase au lieu de la fin."
+      ]
+    },
+    "exerciseIds": [
+      "ex_passebase_1",
+      "ex_passebase_2"
+    ]
   },
   "famille": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "possessifs"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Nommer les membres de la famille.",
+      "comprendre": "Vocabulaire essentiel, combiné aux possessifs déjà vus.",
+      "regle": "vader, moeder, broer, zus, kind, ouders, grootouders.",
+      "exemples": [
+        "Mijn vader heet Marc.",
+        "Ik heb twee broers.",
+        "Onze ouders wonen in Mons."
+      ],
+      "erreursFrequentes": [
+        "Confondre \"broer\" (frère) et \"zus\" (sœur), faux-amis phonétiques pour francophones."
+      ]
+    },
+    "exerciseIds": [
+      "ex_famille_1",
+      "ex_famille_2"
+    ]
   },
   "maison": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "prepositions_lieu"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Nommer les pièces et éléments de la maison.",
+      "comprendre": "Vocabulaire combiné aux prépositions de lieu déjà vues.",
+      "regle": "keuken (cuisine), slaapkamer (chambre), badkamer (salle de bain), woonkamer (salon), tuin (jardin).",
+      "exemples": [
+        "De keuken is groot.",
+        "Ik slaap in de slaapkamer.",
+        "Wij hebben een tuin."
+      ],
+      "erreursFrequentes": [
+        "Confondre \"kamer\" (pièce/chambre en général) avec \"slaapkamer\" spécifiquement."
+      ]
+    },
+    "exerciseIds": [
+      "ex_maison_1",
+      "ex_maison_2"
+    ]
   },
   "nourriture": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Nommer des aliments et exprimer ses goûts alimentaires.",
+      "comprendre": "Vocabulaire courant + structure \"houden van\" (aimer).",
+      "regle": "brood (pain), kaas (fromage), fruit, groenten (légumes). Ik houd van... (J'aime...)",
+      "exemples": [
+        "Ik eet graag kaas.",
+        "Ik houd van koffie.",
+        "Heb je brood?"
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"vind\" au lieu de \"houd van\" pour \"aimer\" (nuance différente : vinden = trouver/penser que)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_nourriture_1",
+      "ex_nourriture_2"
+    ]
   },
   "achats": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "nombres"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Faire des achats simples (au magasin).",
+      "comprendre": "Phrases utiles pour le commerce : prix, demander, payer.",
+      "regle": "Hoeveel kost dit? (Combien ça coûte ?) Ik wil graag... (Je voudrais...)",
+      "exemples": [
+        "Hoeveel kost dit brood?",
+        "Ik wil graag een kilo appels.",
+        "Kan ik met kaart betalen?"
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"Ik wil\" seul, trop direct, au lieu de \"Ik wil graag\" (plus poli)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_achats_1",
+      "ex_achats_2"
+    ]
   },
   "transport": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "prepositions_essentielles"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Parler des moyens de transport et se déplacer.",
+      "comprendre": "Structure \"met de/het\" + moyen de transport.",
+      "regle": "met de trein (en train), met de auto (en voiture), met de fiets (à vélo), te voet (à pied).",
+      "exemples": [
+        "Ik ga met de trein naar Brussel.",
+        "Zij fietst naar het werk.",
+        "Wij gaan te voet."
+      ],
+      "erreursFrequentes": [
+        "Oublier l'article après \"met\" (\"met trein\" au lieu de \"met de trein\")."
+      ]
+    },
+    "exerciseIds": [
+      "ex_transport_1",
+      "ex_transport_2"
+    ]
   },
   "travail_etudes": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "verbes_separables_intro"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Parler de son travail ou de ses études au quotidien.",
+      "comprendre": "Réutilise le vocabulaire professionnel et les structures déjà vues.",
+      "regle": "Ik werk bij... (Je travaille chez...) Ik studeer aan... (J'étudie à...)",
+      "exemples": [
+        "Ik werk bij een bedrijf.",
+        "Ik studeer aan de universiteit.",
+        "Mijn baas is aardig."
+      ],
+      "erreursFrequentes": [
+        "Utiliser \"in\" au lieu de \"bij\" pour \"travailler chez une entreprise\"."
+      ]
+    },
+    "exerciseIds": [
+      "ex_travailetudes_1",
+      "ex_travailetudes_2"
+    ]
   },
   "meteo": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
+      "vocabulaire",
       "grammaire"
     ],
     "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "status": "pret",
+    "content": {
+      "objectif": "Parler du temps qu'il fait.",
+      "comprendre": "Structure impersonnelle \"het\" + verbe météo, obligatoire en néerlandais.",
+      "regle": "Het regent (Il pleut), Het is zonnig (il fait soleil), Het is koud/warm.",
+      "exemples": [
+        "Het regent vandaag.",
+        "Het is mooi weer.",
+        "Het waait hard. (il y a du vent)"
+      ],
+      "erreursFrequentes": [
+        "Oublier le \"het\" impersonnel obligatoire."
+      ]
+    },
+    "exerciseIds": [
+      "ex_meteo_1",
+      "ex_meteo_2"
+    ]
   },
   "ville_administration": {
     "level": "A1",
     "module": "a1-m10",
     "skills": [
-      "grammaire"
+      "vocabulaire"
     ],
-    "prerequisites": [],
-    "status": "a_rediger",
-    "content": null,
-    "exerciseIds": []
+    "prerequisites": [
+      "ville_profession"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Vocabulaire de la ville et démarches administratives de base.",
+      "comprendre": "Utile pour la vie pratique (commune, adresse, papiers).",
+      "regle": "gemeente (commune), adres (adresse), identiteitskaart (carte d'identité), formulier invullen (remplir un formulaire).",
+      "exemples": [
+        "Ik moet naar de gemeente.",
+        "Wat is uw adres?",
+        "Ik moet een formulier invullen."
+      ],
+      "erreursFrequentes": [
+        "Confondre \"gemeente\" (commune, administration) avec \"stad\" (ville en général)."
+      ]
+    },
+    "exerciseIds": [
+      "ex_villeadmin_1",
+      "ex_villeadmin_2"
+    ]
   }
 }

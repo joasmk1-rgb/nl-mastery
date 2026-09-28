@@ -1,0 +1,5154 @@
+[
+ {
+  "infinitief": "aanbieden",
+  "fr": "offrir / proposer",
+  "present": {
+   "ik": "bied aan",
+   "jij": "biedt aan",
+   "hij": "biedt aan",
+   "wij": "aanbieden"
+  },
+  "preteritum": "bood aan",
+  "participePasse": "aangeboden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij bieden onze klanten elke maand een nieuwe korting aan.",
+  "exempleFr": "Nous offrons chaque mois une nouvelle réduction à nos clients.",
+  "freq": 4.44
+ },
+ {
+  "infinitief": "aanhouden",
+  "fr": "arrêter / maintenir",
+  "present": {
+   "ik": "houd aan",
+   "jij": "houdt aan",
+   "hij": "houdt aan",
+   "wij": "aanhouden"
+  },
+  "preteritum": "hield aan",
+  "participePasse": "aangehouden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De directie houdt haar huidige strategie aan.",
+  "exempleFr": "La direction maintient sa stratégie actuelle.",
+  "freq": 3.81
+ },
+ {
+  "infinitief": "aankomen",
+  "fr": "arriver",
+  "present": {
+   "ik": "aankom",
+   "jij": "aankomt",
+   "hij": "aankomt",
+   "wij": "aankomen"
+  },
+  "preteritum": "kwam aan",
+  "participePasse": "aangekomen",
+  "auxiliaire": "zijn",
+  "exempleNl": "De levering komt morgenochtend aan.",
+  "exempleFr": "La livraison arrive demain matin.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "aanmelden",
+  "fr": "annoncer / s'inscrire",
+  "present": {
+   "ik": "meld me aan",
+   "jij": "meldt zich aan",
+   "hij": "meldt zich aan",
+   "wij": "aanmelden"
+  },
+  "preteritum": "melde aan",
+  "participePasse": "aangemeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "U kunt zich online aanmelden voor de opleiding.",
+  "exempleFr": "Vous pouvez vous inscrire en ligne pour la formation.",
+  "freq": 4.34
+ },
+ {
+  "infinitief": "aannemen",
+  "fr": "accepter / engager",
+  "present": {
+   "ik": "neem aan",
+   "jij": "neemt aan",
+   "hij": "neemt aan",
+   "wij": "aannemen"
+  },
+  "preteritum": "nam aan",
+  "participePasse": "aannenomen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf neemt dit jaar tien nieuwe medewerkers aan.",
+  "exempleFr": "L'entreprise engage dix nouveaux employés cette année.",
+  "freq": 4.28
+ },
+ {
+  "infinitief": "aansluiten",
+  "fr": "raccorder / s'affilier",
+  "present": {
+   "ik": "slui aan",
+   "jij": "sluit aan",
+   "hij": "sluit aan",
+   "wij": "aansluiten"
+  },
+  "preteritum": "sloot aan",
+  "participePasse": "aangesloten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij sluiten graag aan bij uw planning.",
+  "exempleFr": "Nous nous alignons volontiers sur votre planning.",
+  "freq": 4.07
+ },
+ {
+  "infinitief": "aantonen",
+  "fr": "démontrer / prouver",
+  "present": {
+   "ik": "toon aan",
+   "jij": "toont aan",
+   "hij": "toont aan",
+   "wij": "aantonen"
+  },
+  "preteritum": "toonde aan",
+  "participePasse": "aangetoond",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het rapport toont een duidelijke stijging aan.",
+  "exempleFr": "Le rapport démontre une nette augmentation.",
+  "freq": 3.8
+ },
+ {
+  "infinitief": "aanvaarden",
+  "fr": "accepter",
+  "present": {
+   "ik": "aanvaard",
+   "jij": "aanvaardt",
+   "hij": "aanvaardt",
+   "wij": "aanvaarden"
+  },
+  "preteritum": "aanvaardde",
+  "participePasse": "aanvaard",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant aanvaardt de nieuwe voorwaarden.",
+  "exempleFr": "Le client accepte les nouvelles conditions.",
+  "freq": 3.94
+ },
+ {
+  "infinitief": "aanwezig zijn",
+  "fr": "être présent",
+  "present": {
+   "ik": "aanwezig ben",
+   "jij": "aanwezig bent",
+   "hij": "aanwezig is",
+   "wij": "aanwezig zijn"
+  },
+  "preteritum": "was aanwezig",
+  "participePasse": "aanwezig geweest",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager is altijd aanwezig op de vergadering.",
+  "exempleFr": "Le manager est toujours présent à la réunion.",
+  "freq": 5.09
+ },
+ {
+  "infinitief": "aarzelen",
+  "fr": "hésiter",
+  "present": {
+   "ik": "aarzel",
+   "jij": "aarzelt",
+   "hij": "aarzelt",
+   "wij": "aarzelen"
+  },
+  "preteritum": "aarzelde",
+  "participePasse": "geaarzeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik aarzel nog over dit aanbod.",
+  "exempleFr": "J'hésite encore sur cette offre.",
+  "freq": 3.19
+ },
+ {
+  "infinitief": "ademen",
+  "fr": "respirer",
+  "present": {
+   "ik": "adem",
+   "jij": "ademt",
+   "hij": "ademt",
+   "wij": "ademen"
+  },
+  "preteritum": "ademde",
+  "participePasse": "geademd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Neem even de tijd om diep te ademen voor het gesprek.",
+  "exempleFr": "Prends le temps de bien respirer avant l'entretien.",
+  "freq": 3.9
+ },
+ {
+  "infinitief": "afhangen (van)",
+  "fr": "dépendre (de)",
+  "present": {
+   "ik": "hang af",
+   "jij": "hangt af",
+   "hij": "hangt af",
+   "wij": "afhangen"
+  },
+  "preteritum": "hing af",
+  "participePasse": "afgehangen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het resultaat hangt af van de levertijd.",
+  "exempleFr": "Le résultat dépend du délai de livraison.",
+  "freq": 3.23
+ },
+ {
+  "infinitief": "afleggen",
+  "fr": "déposer / passer (un examen)",
+  "present": {
+   "ik": "leg af",
+   "jij": "legt af",
+   "hij": "legt af",
+   "wij": "afleggen"
+  },
+  "preteritum": "legde af",
+  "participePasse": "afgelegd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De kandidaat legt morgen een test af.",
+  "exempleFr": "Le candidat passe un test demain.",
+  "freq": 3.98
+ },
+ {
+  "infinitief": "afnemen",
+  "fr": "diminuer / prélever",
+  "present": {
+   "ik": "neem af",
+   "jij": "neemt af",
+   "hij": "neemt af",
+   "wij": "afnemen"
+  },
+  "preteritum": "nam af",
+  "participePasse": "afgenomen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vraag neemt af tijdens de zomer.",
+  "exempleFr": "La demande diminue pendant l'été.",
+  "freq": 4.06
+ },
+ {
+  "infinitief": "afsluiten",
+  "fr": "fermer / conclure",
+  "present": {
+   "ik": "slui af",
+   "jij": "sluit af",
+   "hij": "sluit af",
+   "wij": "afsluiten"
+  },
+  "preteritum": "sloot af",
+  "participePasse": "afgesloten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij sluiten het contract deze week af.",
+  "exempleFr": "Nous concluons le contrat cette semaine.",
+  "freq": 4.31
+ },
+ {
+  "infinitief": "antwoorden",
+  "fr": "répondre",
+  "present": {
+   "ik": "antwoord",
+   "jij": "antwoordt",
+   "hij": "antwoordt",
+   "wij": "antwoorden"
+  },
+  "preteritum": "antwoordde",
+  "participePasse": "geantwoord",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klantendienst antwoordt binnen 24 uur.",
+  "exempleFr": "Le service client répond sous 24 heures.",
+  "freq": 4.64
+ },
+ {
+  "infinitief": "arbeiden",
+  "fr": "travailler",
+  "present": {
+   "ik": "arbeid",
+   "jij": "arbeidt",
+   "hij": "arbeidt",
+   "wij": "arbeiden"
+  },
+  "preteritum": "arbeidde",
+  "participePasse": "gearbeid",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij arbeidt al tien jaar in de logistieke sector.",
+  "exempleFr": "Il travaille depuis dix ans dans le secteur logistique.",
+  "freq": 1.82
+ },
+ {
+  "infinitief": "bakken",
+  "fr": "cuire",
+  "present": {
+   "ik": "bak",
+   "jij": "bakt",
+   "hij": "bakt",
+   "wij": "bakken"
+  },
+  "preteritum": "bakte",
+  "participePasse": "gebakken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De bakkerij bakt elke ochtend vers brood.",
+  "exempleFr": "La boulangerie cuit du pain frais chaque matin.",
+  "freq": 4.21
+ },
+ {
+  "infinitief": "bedoelen",
+  "fr": "vouloir dire / viser",
+  "present": {
+   "ik": "bedoel",
+   "jij": "bedoelt",
+   "hij": "bedoelt",
+   "wij": "bedoelen"
+  },
+  "preteritum": "bedoelde",
+  "participePasse": "bedoeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wat bedoelt u precies met deze clausule?",
+  "exempleFr": "Qu'entendez-vous précisément par cette clause ?",
+  "freq": 3.83
+ },
+ {
+  "infinitief": "bedragen",
+  "fr": "s'élever à (montant)",
+  "present": {
+   "ik": "bedraag",
+   "jij": "bedraagt",
+   "hij": "bedraagt",
+   "wij": "bedragen"
+  },
+  "preteritum": "bedroeg",
+  "participePasse": "bedragen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De totale kost bedraagt tweeduizend euro.",
+  "exempleFr": "Le coût total s'élève à deux mille euros.",
+  "freq": 3.86
+ },
+ {
+  "infinitief": "beginnen",
+  "fr": "commencer",
+  "present": {
+   "ik": "begin",
+   "jij": "begint",
+   "hij": "begint",
+   "wij": "beginnen"
+  },
+  "preteritum": "begon",
+  "participePasse": "begonnen",
+  "auxiliaire": "zijn",
+  "exempleNl": "De vergadering begint om negen uur.",
+  "exempleFr": "La réunion commence à neuf heures.",
+  "freq": 5.33
+ },
+ {
+  "infinitief": "begrijpen",
+  "fr": "comprendre",
+  "present": {
+   "ik": "begrijp",
+   "jij": "begrijpt",
+   "hij": "begrijpt",
+   "wij": "begrijpen"
+  },
+  "preteritum": "begreep",
+  "participePasse": "begrepen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik begrijp de procedure nog niet helemaal.",
+  "exempleFr": "Je ne comprends pas encore tout à fait la procédure.",
+  "freq": 4.96
+ },
+ {
+  "infinitief": "behandelen",
+  "fr": "traiter / manipuler",
+  "present": {
+   "ik": "behandel",
+   "jij": "behandelt",
+   "hij": "behandelt",
+   "wij": "behandelen"
+  },
+  "preteritum": "behandelde",
+  "participePasse": "behandeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De dienst behandelt uw klacht zo snel mogelijk.",
+  "exempleFr": "Le service traite votre plainte au plus vite.",
+  "freq": 4.53
+ },
+ {
+  "infinitief": "beheren",
+  "fr": "gérer",
+  "present": {
+   "ik": "beheer",
+   "jij": "beheert",
+   "hij": "beheert",
+   "wij": "beheren"
+  },
+  "preteritum": "beheerde",
+  "participePasse": "beheerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij beheert het volledige logistieke magazijn.",
+  "exempleFr": "Elle gère tout l'entrepôt logistique.",
+  "freq": 3.91
+ },
+ {
+  "infinitief": "behoren (tot)",
+  "fr": "appartenir (à)",
+  "present": {
+   "ik": "behoor",
+   "jij": "behoort",
+   "hij": "behoort",
+   "wij": "behoren"
+  },
+  "preteritum": "behoorde",
+  "participePasse": "behoord",
+  "auxiliaire": "hebben",
+  "exempleNl": "Dit product behoort tot onze topcategorie.",
+  "exempleFr": "Ce produit appartient à notre catégorie phare.",
+  "freq": 4.5
+ },
+ {
+  "infinitief": "bekijken",
+  "fr": "regarder / examiner",
+  "present": {
+   "ik": "bekijk",
+   "jij": "bekijkt",
+   "hij": "bekijkt",
+   "wij": "bekijken"
+  },
+  "preteritum": "bekeek",
+  "participePasse": "bekeken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager bekijkt de cijfers van vorige maand.",
+  "exempleFr": "Le manager examine les chiffres du mois dernier.",
+  "freq": 4.84
+ },
+ {
+  "infinitief": "bekritiseren",
+  "fr": "critiquer",
+  "present": {
+   "ik": "bekritiseer",
+   "jij": "bekritiseert",
+   "hij": "bekritiseert",
+   "wij": "bekritiseren"
+  },
+  "preteritum": "bekritiseerde",
+  "participePasse": "bekritiseerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant bekritiseert de late levering.",
+  "exempleFr": "Le client critique le retard de livraison.",
+  "freq": 3.26
+ },
+ {
+  "infinitief": "belangstellen (in)",
+  "fr": "s'intéresser (à)",
+  "present": {
+   "ik": "stel belang",
+   "jij": "stelt belang",
+   "hij": "stelt belang",
+   "wij": "belangstellen"
+  },
+  "preteritum": "stelde belang",
+  "participePasse": "belanggesteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij stellen belang in een langdurige samenwerking.",
+  "exempleFr": "Nous nous intéressons à une collaboration durable.",
+  "freq": 0.0
+ },
+ {
+  "infinitief": "beloven",
+  "fr": "promettre",
+  "present": {
+   "ik": "beloof",
+   "jij": "belooft",
+   "hij": "belooft",
+   "wij": "beloven"
+  },
+  "preteritum": "beloofde",
+  "participePasse": "beloofd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De leverancier belooft een snellere levering.",
+  "exempleFr": "Le fournisseur promet une livraison plus rapide.",
+  "freq": 3.94
+ },
+ {
+  "infinitief": "benemen",
+  "fr": "priver de / couper",
+  "present": {
+   "ik": "beneem",
+   "jij": "beneemt",
+   "hij": "beneemt",
+   "wij": "benemen"
+  },
+  "preteritum": "benam",
+  "participePasse": "benomen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze fout beneemt ons elk voordeel.",
+  "exempleFr": "Cette erreur nous prive de tout avantage.",
+  "freq": 1.99
+ },
+ {
+  "infinitief": "beoordelen",
+  "fr": "juger / évaluer",
+  "present": {
+   "ik": "beoordeel",
+   "jij": "beoordeelt",
+   "hij": "beoordeelt",
+   "wij": "beoordelen"
+  },
+  "preteritum": "beoordeelde",
+  "participePasse": "beoordeeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De jury beoordeelt elke kandidaat individueel.",
+  "exempleFr": "Le jury évalue chaque candidat individuellement.",
+  "freq": 4.16
+ },
+ {
+  "infinitief": "bepalen",
+  "fr": "déterminer",
+  "present": {
+   "ik": "bepaal",
+   "jij": "bepaalt",
+   "hij": "bepaalt",
+   "wij": "bepalen"
+  },
+  "preteritum": "bepaalde",
+  "participePasse": "bepaald",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vraag bepaalt de productieplanning.",
+  "exempleFr": "La demande détermine la planification de production.",
+  "freq": 4.65
+ },
+ {
+  "infinitief": "beperken (zich)",
+  "fr": "se limiter",
+  "present": {
+   "ik": "beperk me",
+   "jij": "beperkt zich",
+   "hij": "beperkt zich",
+   "wij": "beperken"
+  },
+  "preteritum": "beperkte",
+  "participePasse": "beperkt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij beperken ons tot drie leveranciers.",
+  "exempleFr": "Nous nous limitons à trois fournisseurs.",
+  "freq": 4.26
+ },
+ {
+  "infinitief": "beschouwen",
+  "fr": "considérer",
+  "present": {
+   "ik": "beschouw",
+   "jij": "beschouwt",
+   "hij": "beschouwt",
+   "wij": "beschouwen"
+  },
+  "preteritum": "beschouwde",
+  "participePasse": "beschouwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij beschouwen dit als een prioriteit.",
+  "exempleFr": "Nous considérons ceci comme une priorité.",
+  "freq": 4.07
+ },
+ {
+  "infinitief": "beschrijven",
+  "fr": "décrire",
+  "present": {
+   "ik": "beschrijf",
+   "jij": "beschrijft",
+   "hij": "beschrijft",
+   "wij": "beschrijven"
+  },
+  "preteritum": "beschreef",
+  "participePasse": "beschreven",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het rapport beschrijft de volledige toeleveringsketen.",
+  "exempleFr": "Le rapport décrit toute la chaîne d'approvisionnement.",
+  "freq": 4.2
+ },
+ {
+  "infinitief": "besluiten",
+  "fr": "décider / conclure",
+  "present": {
+   "ik": "beslui",
+   "jij": "besluit",
+   "hij": "besluit",
+   "wij": "besluiten"
+  },
+  "preteritum": "besloot",
+  "participePasse": "besloten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De directie besluit het project voort te zetten.",
+  "exempleFr": "La direction décide de poursuivre le projet.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "bestaan",
+  "fr": "exister",
+  "present": {
+   "ik": "besta",
+   "jij": "bestaat",
+   "hij": "bestaat",
+   "wij": "bestaan"
+  },
+  "preteritum": "bestond",
+  "participePasse": "bestaan",
+  "auxiliaire": "hebben",
+  "exempleNl": "Er bestaat geen betere oplossing op dit moment.",
+  "exempleFr": "Il n'existe pas de meilleure solution pour l'instant.",
+  "freq": 5.16
+ },
+ {
+  "infinitief": "besteden",
+  "fr": "consacrer (temps, argent)",
+  "present": {
+   "ik": "besteed",
+   "jij": "besteedt",
+   "hij": "besteedt",
+   "wij": "besteden"
+  },
+  "preteritum": "besteedde",
+  "participePasse": "besteed",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf besteedt veel tijd aan opleiding.",
+  "exempleFr": "L'entreprise consacre beaucoup de temps à la formation.",
+  "freq": 4.32
+ },
+ {
+  "infinitief": "bestellen",
+  "fr": "commander",
+  "present": {
+   "ik": "bestel",
+   "jij": "bestelt",
+   "hij": "bestelt",
+   "wij": "bestellen"
+  },
+  "preteritum": "bestelde",
+  "participePasse": "besteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant bestelt honderd stuks per maand.",
+  "exempleFr": "Le client commande cent pièces par mois.",
+  "freq": 4.56
+ },
+ {
+  "infinitief": "betekenen",
+  "fr": "signifier",
+  "present": {
+   "ik": "beteken",
+   "jij": "betekent",
+   "hij": "betekent",
+   "wij": "betekenen"
+  },
+  "preteritum": "betekende",
+  "participePasse": "betekend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze vertraging betekent extra kosten.",
+  "exempleFr": "Ce retard signifie des coûts supplémentaires.",
+  "freq": 4.64
+ },
+ {
+  "infinitief": "betreffen",
+  "fr": "concerner",
+  "present": {
+   "ik": "betref",
+   "jij": "betreft",
+   "hij": "betreft",
+   "wij": "betreffen"
+  },
+  "preteritum": "betrof",
+  "participePasse": "betroffen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze regel betreft alle nieuwe medewerkers.",
+  "exempleFr": "Cette règle concerne tous les nouveaux employés.",
+  "freq": 3.59
+ },
+ {
+  "infinitief": "betrouwen",
+  "fr": "avoir confiance",
+  "present": {
+   "ik": "betrouw",
+   "jij": "betrouwt",
+   "hij": "betrouwt",
+   "wij": "betrouwen"
+  },
+  "preteritum": "betrouwde",
+  "participePasse": "betrouwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij betrouwen op een betrouwbare partner.",
+  "exempleFr": "Nous faisons confiance à un partenaire fiable.",
+  "freq": 1.8
+ },
+ {
+  "infinitief": "bevatten",
+  "fr": "contenir",
+  "present": {
+   "ik": "beva",
+   "jij": "bevat",
+   "hij": "bevat",
+   "wij": "bevatten"
+  },
+  "preteritum": "bevatte",
+  "participePasse": "bevat",
+  "auxiliaire": "hebben",
+  "exempleNl": "De doos bevat twintig eenheden.",
+  "exempleFr": "La boîte contient vingt unités.",
+  "freq": 4.52
+ },
+ {
+  "infinitief": "bevestigen",
+  "fr": "confirmer",
+  "present": {
+   "ik": "bevestig",
+   "jij": "bevestigt",
+   "hij": "bevestigt",
+   "wij": "bevestigen"
+  },
+  "preteritum": "bevestigde",
+  "participePasse": "bevestigd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij bevestigen uw bestelling per e-mail.",
+  "exempleFr": "Nous confirmons votre commande par e-mail.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "bevinden (zich)",
+  "fr": "se trouver",
+  "present": {
+   "ik": "bevind me",
+   "jij": "bevindt zich",
+   "hij": "bevindt zich",
+   "wij": "bevinden"
+  },
+  "preteritum": "bevond zich",
+  "participePasse": "bevonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het magazijn bevindt zich naast de haven.",
+  "exempleFr": "L'entrepôt se trouve à côté du port.",
+  "freq": 4.49
+ },
+ {
+  "infinitief": "bewaren",
+  "fr": "conserver / garder",
+  "present": {
+   "ik": "bewaar",
+   "jij": "bewaart",
+   "hij": "bewaart",
+   "wij": "bewaren"
+  },
+  "preteritum": "bewaarde",
+  "participePasse": "bewaard",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij bewaren de facturen tien jaar lang.",
+  "exempleFr": "Nous conservons les factures pendant dix ans.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "bewegen",
+  "fr": "bouger",
+  "present": {
+   "ik": "beweeg",
+   "jij": "beweegt",
+   "hij": "beweegt",
+   "wij": "bewegen"
+  },
+  "preteritum": "bewoog",
+  "participePasse": "bewogen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De markt beweegt snel dit kwartaal.",
+  "exempleFr": "Le marché évolue vite ce trimestre.",
+  "freq": 4.57
+ },
+ {
+  "infinitief": "bewijzen",
+  "fr": "prouver",
+  "present": {
+   "ik": "bewijs",
+   "jij": "bewijst",
+   "hij": "bewijst",
+   "wij": "bewijzen"
+  },
+  "preteritum": "bewees",
+  "participePasse": "bewezen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze cijfers bewijzen de groei van het bedrijf.",
+  "exempleFr": "Ces chiffres prouvent la croissance de l'entreprise.",
+  "freq": 4.65
+ },
+ {
+  "infinitief": "bezitten",
+  "fr": "posséder",
+  "present": {
+   "ik": "bezi",
+   "jij": "bezit",
+   "hij": "bezit",
+   "wij": "bezitten"
+  },
+  "preteritum": "bezat",
+  "participePasse": "bezeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf bezit drie magazijnen in België.",
+  "exempleFr": "L'entreprise possède trois entrepôts en Belgique.",
+  "freq": 4.04
+ },
+ {
+  "infinitief": "bezoeken",
+  "fr": "visiter",
+  "present": {
+   "ik": "bezoek",
+   "jij": "bezoekt",
+   "hij": "bezoekt",
+   "wij": "bezoeken"
+  },
+  "preteritum": "bezocht",
+  "participePasse": "bezocht",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vertegenwoordiger bezoekt vandaag twee klanten.",
+  "exempleFr": "Le représentant visite deux clients aujourd'hui.",
+  "freq": 4.76
+ },
+ {
+  "infinitief": "bezuinigen",
+  "fr": "économiser",
+  "present": {
+   "ik": "bezuinig",
+   "jij": "bezuinigt",
+   "hij": "bezuinigt",
+   "wij": "bezuinigen"
+  },
+  "preteritum": "bezuinigde",
+  "participePasse": "bezuinigd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf bezuinigt op transportkosten.",
+  "exempleFr": "L'entreprise économise sur les frais de transport.",
+  "freq": 3.4
+ },
+ {
+  "infinitief": "bidden",
+  "fr": "prier",
+  "present": {
+   "ik": "bid",
+   "jij": "bidt",
+   "hij": "bidt",
+   "wij": "bidden"
+  },
+  "preteritum": "bad",
+  "participePasse": "gebeden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij bidt elke ochtend voor het werk.",
+  "exempleFr": "Il prie chaque matin avant le travail.",
+  "freq": 4.33
+ },
+ {
+  "infinitief": "bieden",
+  "fr": "offrir",
+  "present": {
+   "ik": "bied",
+   "jij": "biedt",
+   "hij": "biedt",
+   "wij": "bieden"
+  },
+  "preteritum": "bood",
+  "participePasse": "geboden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De leverancier biedt een betere prijs.",
+  "exempleFr": "Le fournisseur offre un meilleur prix.",
+  "freq": 4.95
+ },
+ {
+  "infinitief": "bijten",
+  "fr": "mordre",
+  "present": {
+   "ik": "bij",
+   "jij": "bijt",
+   "hij": "bijt",
+   "wij": "bijten"
+  },
+  "preteritum": "beet",
+  "participePasse": "gebeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De hond bijt niet, wees gerust.",
+  "exempleFr": "Le chien ne mord pas, sois rassuré.",
+  "freq": 3.86
+ },
+ {
+  "infinitief": "binden",
+  "fr": "lier / attacher",
+  "present": {
+   "ik": "bind",
+   "jij": "bindt",
+   "hij": "bindt",
+   "wij": "binden"
+  },
+  "preteritum": "bond",
+  "participePasse": "gebonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Dit contract bindt beide partijen voor drie jaar.",
+  "exempleFr": "Ce contrat lie les deux parties pour trois ans.",
+  "freq": 3.88
+ },
+ {
+  "infinitief": "blijken",
+  "fr": "apparaître / s'avérer",
+  "present": {
+   "ik": "blijk",
+   "jij": "blijkt",
+   "hij": "blijkt",
+   "wij": "blijken"
+  },
+  "preteritum": "bleek",
+  "participePasse": "gebleken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het blijkt dat de levering vertraging heeft.",
+  "exempleFr": "Il s'avère que la livraison a du retard.",
+  "freq": 4.39
+ },
+ {
+  "infinitief": "blijven",
+  "fr": "rester",
+  "present": {
+   "ik": "blijf",
+   "jij": "blijft",
+   "hij": "blijft",
+   "wij": "blijven"
+  },
+  "preteritum": "bleef",
+  "participePasse": "gebleven",
+  "auxiliaire": "zijn",
+  "exempleNl": "De prijzen blijven stabiel dit jaar.",
+  "exempleFr": "Les prix restent stables cette année.",
+  "freq": 5.66
+ },
+ {
+  "infinitief": "bloeien",
+  "fr": "fleurir",
+  "present": {
+   "ik": "bloei",
+   "jij": "bloeit",
+   "hij": "bloeit",
+   "wij": "bloeien"
+  },
+  "preteritum": "bloeide",
+  "participePasse": "gebloeid",
+  "auxiliaire": "hebben",
+  "exempleNl": "De sector bloeit dankzij e-commerce.",
+  "exempleFr": "Le secteur prospère grâce au e-commerce.",
+  "freq": 3.48
+ },
+ {
+  "infinitief": "boeken",
+  "fr": "réserver / enregistrer",
+  "present": {
+   "ik": "boek",
+   "jij": "boekt",
+   "hij": "boekt",
+   "wij": "boeken"
+  },
+  "preteritum": "boekte",
+  "participePasse": "geboekt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij boeken volgende week een vergaderzaal.",
+  "exempleFr": "Nous réservons une salle de réunion la semaine prochaine.",
+  "freq": 5.14
+ },
+ {
+  "infinitief": "bouwen",
+  "fr": "bâtir / construire",
+  "present": {
+   "ik": "bouw",
+   "jij": "bouwt",
+   "hij": "bouwt",
+   "wij": "bouwen"
+  },
+  "preteritum": "bouwde",
+  "participePasse": "gebouwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf bouwt een nieuw distributiecentrum.",
+  "exempleFr": "L'entreprise construit un nouveau centre de distribution.",
+  "freq": 4.95
+ },
+ {
+  "infinitief": "branden",
+  "fr": "brûler",
+  "present": {
+   "ik": "brand",
+   "jij": "brandt",
+   "hij": "brandt",
+   "wij": "branden"
+  },
+  "preteritum": "brandde",
+  "participePasse": "gebrand",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het licht brandt de hele nacht in het magazijn.",
+  "exempleFr": "La lumière brûle toute la nuit dans l'entrepôt.",
+  "freq": 4.32
+ },
+ {
+  "infinitief": "breken",
+  "fr": "casser",
+  "present": {
+   "ik": "breek",
+   "jij": "breekt",
+   "hij": "breekt",
+   "wij": "breken"
+  },
+  "preteritum": "brak",
+  "participePasse": "gebroken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Dit materiaal breekt gemakkelijk tijdens transport.",
+  "exempleFr": "Ce matériau se casse facilement pendant le transport.",
+  "freq": 4.45
+ },
+ {
+  "infinitief": "brengen",
+  "fr": "apporter / amener",
+  "present": {
+   "ik": "breng",
+   "jij": "brengt",
+   "hij": "brengt",
+   "wij": "brengen"
+  },
+  "preteritum": "bracht",
+  "participePasse": "gebracht",
+  "auxiliaire": "hebben",
+  "exempleNl": "De chauffeur brengt het pakket vandaag nog.",
+  "exempleFr": "Le chauffeur apporte le colis dès aujourd'hui.",
+  "freq": 5.39
+ },
+ {
+  "infinitief": "buigen",
+  "fr": "courber / plier",
+  "present": {
+   "ik": "buig",
+   "jij": "buigt",
+   "hij": "buigt",
+   "wij": "buigen"
+  },
+  "preteritum": "boog",
+  "participePasse": "gebogen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het metaal buigt onder druk.",
+  "exempleFr": "Le métal plie sous la pression.",
+  "freq": 3.86
+ },
+ {
+  "infinitief": "checken",
+  "fr": "vérifier",
+  "present": {
+   "ik": "check",
+   "jij": "checkt",
+   "hij": "checkt",
+   "wij": "checken"
+  },
+  "preteritum": "checkte",
+  "participePasse": "gecheckt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik check even de voorraad in het systeem.",
+  "exempleFr": "Je vérifie rapidement le stock dans le système.",
+  "freq": 3.98
+ },
+ {
+  "infinitief": "concluderen",
+  "fr": "conclure",
+  "present": {
+   "ik": "concludeer",
+   "jij": "concludeert",
+   "hij": "concludeert",
+   "wij": "concluderen"
+  },
+  "preteritum": "concludeerde",
+  "participePasse": "geconcludeerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De analist concludeert dat de vraag stijgt.",
+  "exempleFr": "L'analyste conclut que la demande augmente.",
+  "freq": 3.5
+ },
+ {
+  "infinitief": "controleren",
+  "fr": "contrôler",
+  "present": {
+   "ik": "controleer",
+   "jij": "controleert",
+   "hij": "controleert",
+   "wij": "controleren"
+  },
+  "preteritum": "controleerde",
+  "participePasse": "gecontroleerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De teamleider controleert elke levering.",
+  "exempleFr": "Le chef d'équipe contrôle chaque livraison.",
+  "freq": 4.61
+ },
+ {
+  "infinitief": "creëren",
+  "fr": "créer",
+  "present": {
+   "ik": "creëer",
+   "jij": "creëert",
+   "hij": "creëert",
+   "wij": "creëren"
+  },
+  "preteritum": "creëerde",
+  "participePasse": "gecreëerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het project creëert twintig nieuwe banen.",
+  "exempleFr": "Le projet crée vingt nouveaux emplois.",
+  "freq": 4.58
+ },
+ {
+  "infinitief": "danken",
+  "fr": "remercier",
+  "present": {
+   "ik": "dank",
+   "jij": "dankt",
+   "hij": "dankt",
+   "wij": "danken"
+  },
+  "preteritum": "dankte",
+  "participePasse": "gedankt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij danken u voor uw vertrouwen.",
+  "exempleFr": "Nous vous remercions pour votre confiance.",
+  "freq": 4.26
+ },
+ {
+  "infinitief": "dansen",
+  "fr": "danser",
+  "present": {
+   "ik": "dans",
+   "jij": "danst",
+   "hij": "danst",
+   "wij": "dansen"
+  },
+  "preteritum": "danste",
+  "participePasse": "gedanst",
+  "auxiliaire": "hebben",
+  "exempleNl": "Op het bedrijfsfeest dansen de collega's samen.",
+  "exempleFr": "À la fête d'entreprise, les collègues dansent ensemble.",
+  "freq": 4.69
+ },
+ {
+  "infinitief": "deelnemen (aan)",
+  "fr": "participer (à)",
+  "present": {
+   "ik": "neem deel",
+   "jij": "neemt deel",
+   "hij": "neemt deel",
+   "wij": "deelnemen"
+  },
+  "preteritum": "nam deel",
+  "participePasse": "deelgenomen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij neemt deel aan de beurs volgende maand.",
+  "exempleFr": "Elle participe au salon le mois prochain.",
+  "freq": 4.4
+ },
+ {
+  "infinitief": "delen",
+  "fr": "partager / diviser",
+  "present": {
+   "ik": "deel",
+   "jij": "deelt",
+   "hij": "deelt",
+   "wij": "delen"
+  },
+  "preteritum": "deelde",
+  "participePasse": "gedeeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij delen de resultaten met het hele team.",
+  "exempleFr": "Nous partageons les résultats avec toute l'équipe.",
+  "freq": 5.29
+ },
+ {
+  "infinitief": "denken",
+  "fr": "penser",
+  "present": {
+   "ik": "denk",
+   "jij": "denkt",
+   "hij": "denkt",
+   "wij": "denken"
+  },
+  "preteritum": "dacht",
+  "participePasse": "gedacht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik denk dat we de deadline halen.",
+  "exempleFr": "Je pense que nous tiendrons le délai.",
+  "freq": 5.5
+ },
+ {
+  "infinitief": "dienen",
+  "fr": "servir",
+  "present": {
+   "ik": "dien",
+   "jij": "dient",
+   "hij": "dient",
+   "wij": "dienen"
+  },
+  "preteritum": "diende",
+  "participePasse": "gediend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze dienst dient vooral kleine ondernemingen.",
+  "exempleFr": "Ce service sert surtout les petites entreprises.",
+  "freq": 4.69
+ },
+ {
+  "infinitief": "doen",
+  "fr": "faire",
+  "present": {
+   "ik": "doe",
+   "jij": "doet",
+   "hij": "doet",
+   "wij": "doen"
+  },
+  "preteritum": "deed",
+  "participePasse": "gedaan",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wat doet u als de levering te laat is?",
+  "exempleFr": "Que faites-vous si la livraison est en retard ?",
+  "freq": 6.13
+ },
+ {
+  "infinitief": "doorgaan",
+  "fr": "continuer",
+  "present": {
+   "ik": "doorga",
+   "jij": "doorgaat",
+   "hij": "doorgaat",
+   "wij": "doorgaan"
+  },
+  "preteritum": "ging door",
+  "participePasse": "doorgegaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "Het project gaat door zoals gepland.",
+  "exempleFr": "Le projet continue comme prévu.",
+  "freq": 4.61
+ },
+ {
+  "infinitief": "doorlopen",
+  "fr": "parcourir / continuer",
+  "present": {
+   "ik": "loop door",
+   "jij": "loopt door",
+   "hij": "loopt door",
+   "wij": "doorlopen"
+  },
+  "preteritum": "liep door",
+  "participePasse": "doorgelopen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De aanvraag doorloopt eerst de administratieve dienst.",
+  "exempleFr": "La demande passe d'abord par le service administratif.",
+  "freq": 4.02
+ },
+ {
+  "infinitief": "dragen",
+  "fr": "porter",
+  "present": {
+   "ik": "draag",
+   "jij": "draagt",
+   "hij": "draagt",
+   "wij": "dragen"
+  },
+  "preteritum": "droeg",
+  "participePasse": "gedragen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De operator draagt altijd veiligheidsschoenen.",
+  "exempleFr": "L'opérateur porte toujours des chaussures de sécurité.",
+  "freq": 5.01
+ },
+ {
+  "infinitief": "drijven",
+  "fr": "flotter / pousser",
+  "present": {
+   "ik": "drijf",
+   "jij": "drijft",
+   "hij": "drijft",
+   "wij": "drijven"
+  },
+  "preteritum": "dreef",
+  "participePasse": "gedreven",
+  "auxiliaire": "hebben",
+  "exempleNl": "De onderneming drijft vooral op export.",
+  "exempleFr": "L'entreprise repose surtout sur l'exportation.",
+  "freq": 4.05
+ },
+ {
+  "infinitief": "drinken",
+  "fr": "boire",
+  "present": {
+   "ik": "drink",
+   "jij": "drinkt",
+   "hij": "drinkt",
+   "wij": "drinken"
+  },
+  "preteritum": "dronk",
+  "participePasse": "gedronken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De collega's drinken samen koffie tijdens de pauze.",
+  "exempleFr": "Les collègues boivent un café ensemble pendant la pause.",
+  "freq": 4.93
+ },
+ {
+  "infinitief": "dromen",
+  "fr": "rêver",
+  "present": {
+   "ik": "droom",
+   "jij": "droomt",
+   "hij": "droomt",
+   "wij": "dromen"
+  },
+  "preteritum": "droomde",
+  "participePasse": "gedroomd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij droomt van een eigen bedrijf.",
+  "exempleFr": "Il rêve d'avoir sa propre entreprise.",
+  "freq": 4.73
+ },
+ {
+  "infinitief": "drukken",
+  "fr": "appuyer / presser",
+  "present": {
+   "ik": "druk",
+   "jij": "drukt",
+   "hij": "drukt",
+   "wij": "drukken"
+  },
+  "preteritum": "drukte",
+  "participePasse": "gedrukt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De machine drukt duizend etiketten per uur.",
+  "exempleFr": "La machine imprime mille étiquettes par heure.",
+  "freq": 4.39
+ },
+ {
+  "infinitief": "duren",
+  "fr": "durer",
+  "present": {
+   "ik": "duur",
+   "jij": "duurt",
+   "hij": "duurt",
+   "wij": "duren"
+  },
+  "preteritum": "duurde",
+  "participePasse": "geduurd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De procedure duurt gemiddeld twee weken.",
+  "exempleFr": "La procédure dure en moyenne deux semaines.",
+  "freq": 4.62
+ },
+ {
+  "infinitief": "durven",
+  "fr": "oser",
+  "present": {
+   "ik": "durf",
+   "jij": "durft",
+   "hij": "durft",
+   "wij": "durven"
+  },
+  "preteritum": "durfde",
+  "participePasse": "gedurfd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij durft de klant om uitstel vragen.",
+  "exempleFr": "Il ose demander un délai au client.",
+  "freq": 4.32
+ },
+ {
+  "infinitief": "dwingen",
+  "fr": "forcer / contraindre",
+  "present": {
+   "ik": "dwing",
+   "jij": "dwingt",
+   "hij": "dwingt",
+   "wij": "dwingen"
+  },
+  "preteritum": "dwong",
+  "participePasse": "gedwongen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De regelgeving dwingt ons tot extra controles.",
+  "exempleFr": "La réglementation nous contraint à des contrôles supplémentaires.",
+  "freq": 4.18
+ },
+ {
+  "infinitief": "eindigen",
+  "fr": "finir / se terminer",
+  "present": {
+   "ik": "eindig",
+   "jij": "eindigt",
+   "hij": "eindigt",
+   "wij": "eindigen"
+  },
+  "preteritum": "eindigde",
+  "participePasse": "geëindigd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het contract eindigt eind dit jaar.",
+  "exempleFr": "Le contrat se termine à la fin de cette année.",
+  "freq": 4.19
+ },
+ {
+  "infinitief": "eisen",
+  "fr": "exiger",
+  "present": {
+   "ik": "eis",
+   "jij": "eist",
+   "hij": "eist",
+   "wij": "eisen"
+  },
+  "preteritum": "eiste",
+  "participePasse": "geëist",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant eist een snelle levering.",
+  "exempleFr": "Le client exige une livraison rapide.",
+  "freq": 4.77
+ },
+ {
+  "infinitief": "ervaren",
+  "fr": "expérimenter / ressentir",
+  "present": {
+   "ik": "ervaar",
+   "jij": "ervaart",
+   "hij": "ervaart",
+   "wij": "ervaren"
+  },
+  "preteritum": "ervoer",
+  "participePasse": "ervaren",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team ervaart veel druk tijdens de eindejaarsperiode.",
+  "exempleFr": "L'équipe ressent beaucoup de pression pendant la période de fin d'année.",
+  "freq": 4.71
+ },
+ {
+  "infinitief": "eten",
+  "fr": "manger",
+  "present": {
+   "ik": "ee",
+   "jij": "eet",
+   "hij": "eet",
+   "wij": "eten"
+  },
+  "preteritum": "at",
+  "participePasse": "gegeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De collega's eten samen tijdens de middagpauze.",
+  "exempleFr": "Les collègues mangent ensemble pendant la pause de midi.",
+  "freq": 5.51
+ },
+ {
+  "infinitief": "fietsen",
+  "fr": "faire du vélo",
+  "present": {
+   "ik": "fiets",
+   "jij": "fietst",
+   "hij": "fietst",
+   "wij": "fietsen"
+  },
+  "preteritum": "fietste",
+  "participePasse": "gefietst",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij fietst elke dag naar het kantoor.",
+  "exempleFr": "Elle va au bureau à vélo tous les jours.",
+  "freq": 4.6
+ },
+ {
+  "infinitief": "gaan",
+  "fr": "aller",
+  "present": {
+   "ik": "ga",
+   "jij": "gaat",
+   "hij": "gaat",
+   "wij": "gaan"
+  },
+  "preteritum": "ging",
+  "participePasse": "gegaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "Ik ga morgen naar de klant.",
+  "exempleFr": "Je vais chez le client demain.",
+  "freq": 6.18
+ },
+ {
+  "infinitief": "gebeuren",
+  "fr": "se passer / arriver",
+  "present": {
+   "ik": "gebeur",
+   "jij": "gebeurt",
+   "hij": "gebeurt",
+   "wij": "gebeuren"
+  },
+  "preteritum": "gebeurde",
+  "participePasse": "gebeurd",
+  "auxiliaire": "zijn",
+  "exempleNl": "Er gebeurt zelden een fout in dit proces.",
+  "exempleFr": "Il arrive rarement une erreur dans ce processus.",
+  "freq": 5.03
+ },
+ {
+  "infinitief": "gebruiken",
+  "fr": "utiliser",
+  "present": {
+   "ik": "gebruik",
+   "jij": "gebruikt",
+   "hij": "gebruikt",
+   "wij": "gebruiken"
+  },
+  "preteritum": "gebruikte",
+  "participePasse": "gebruikt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij gebruiken SAP voor de voorraadopvolging.",
+  "exempleFr": "Nous utilisons SAP pour le suivi des stocks.",
+  "freq": 5.47
+ },
+ {
+  "infinitief": "gelden",
+  "fr": "valoir / être d'application",
+  "present": {
+   "ik": "geld",
+   "jij": "geldt",
+   "hij": "geldt",
+   "wij": "gelden"
+  },
+  "preteritum": "gold",
+  "participePasse": "gegolden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze korting geldt enkel voor grote bestellingen.",
+  "exempleFr": "Cette remise s'applique uniquement aux grosses commandes.",
+  "freq": 4.29
+ },
+ {
+  "infinitief": "geloven",
+  "fr": "croire",
+  "present": {
+   "ik": "geloof",
+   "jij": "gelooft",
+   "hij": "gelooft",
+   "wij": "geloven"
+  },
+  "preteritum": "geloofde",
+  "participePasse": "geloofd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik geloof in een snelle groei van de sector.",
+  "exempleFr": "Je crois en une croissance rapide du secteur.",
+  "freq": 4.99
+ },
+ {
+  "infinitief": "genieten (van)",
+  "fr": "profiter / jouir (de)",
+  "present": {
+   "ik": "genie van",
+   "jij": "geniet van",
+   "hij": "geniet van",
+   "wij": "genieten"
+  },
+  "preteritum": "genoot",
+  "participePasse": "genoten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Onze klanten genieten van gratis verzending.",
+  "exempleFr": "Nos clients bénéficient de la livraison gratuite.",
+  "freq": 4.99
+ },
+ {
+  "infinitief": "geven",
+  "fr": "donner",
+  "present": {
+   "ik": "geef",
+   "jij": "geeft",
+   "hij": "geeft",
+   "wij": "geven"
+  },
+  "preteritum": "gaf",
+  "participePasse": "gegeven",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager geeft feedback na elk project.",
+  "exempleFr": "Le manager donne un retour après chaque projet.",
+  "freq": 5.75
+ },
+ {
+  "infinitief": "gieten",
+  "fr": "verser",
+  "present": {
+   "ik": "gie",
+   "jij": "giet",
+   "hij": "giet",
+   "wij": "gieten"
+  },
+  "preteritum": "goot",
+  "participePasse": "gegoten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De fabriek giet het metaal in vaste vormen.",
+  "exempleFr": "L'usine coule le métal dans des moules fixes.",
+  "freq": 3.6
+ },
+ {
+  "infinitief": "glijden",
+  "fr": "glisser",
+  "present": {
+   "ik": "glijd",
+   "jij": "glijdt",
+   "hij": "glijdt",
+   "wij": "glijden"
+  },
+  "preteritum": "gleed",
+  "participePasse": "gegleden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De doos glijdt van de pallet.",
+  "exempleFr": "La boîte glisse de la palette.",
+  "freq": 3.58
+ },
+ {
+  "infinitief": "gooien",
+  "fr": "jeter",
+  "present": {
+   "ik": "gooi",
+   "jij": "gooit",
+   "hij": "gooit",
+   "wij": "gooien"
+  },
+  "preteritum": "gooide",
+  "participePasse": "gegooid",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij gooit de kapotte verpakking weg.",
+  "exempleFr": "Il jette l'emballage abîmé.",
+  "freq": 4.61
+ },
+ {
+  "infinitief": "grijpen",
+  "fr": "saisir",
+  "present": {
+   "ik": "grijp",
+   "jij": "grijpt",
+   "hij": "grijpt",
+   "wij": "grijpen"
+  },
+  "preteritum": "greep",
+  "participePasse": "gegrepen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf grijpt deze kans om te groeien.",
+  "exempleFr": "L'entreprise saisit cette occasion pour grandir.",
+  "freq": 4.15
+ },
+ {
+  "infinitief": "groeien",
+  "fr": "grandir / croître",
+  "present": {
+   "ik": "groei",
+   "jij": "groeit",
+   "hij": "groeit",
+   "wij": "groeien"
+  },
+  "preteritum": "groeide",
+  "participePasse": "gegroeid",
+  "auxiliaire": "zijn",
+  "exempleNl": "De omzet groeit elk kwartaal.",
+  "exempleFr": "Le chiffre d'affaires croît chaque trimestre.",
+  "freq": 4.63
+ },
+ {
+  "infinitief": "groeten",
+  "fr": "saluer",
+  "present": {
+   "ik": "groe",
+   "jij": "groet",
+   "hij": "groet",
+   "wij": "groeten"
+  },
+  "preteritum": "groette",
+  "participePasse": "gegroet",
+  "auxiliaire": "hebben",
+  "exempleNl": "De receptioniste groet elke bezoeker vriendelijk.",
+  "exempleFr": "La réceptionniste salue chaque visiteur avec amabilité.",
+  "freq": 4.23
+ },
+ {
+  "infinitief": "halen",
+  "fr": "chercher / obtenir",
+  "present": {
+   "ik": "haal",
+   "jij": "haalt",
+   "hij": "haalt",
+   "wij": "halen"
+  },
+  "preteritum": "haalde",
+  "participePasse": "gehaald",
+  "auxiliaire": "hebben",
+  "exempleNl": "De chauffeur haalt de goederen bij de leverancier.",
+  "exempleFr": "Le chauffeur va chercher la marchandise chez le fournisseur.",
+  "freq": 5.32
+ },
+ {
+  "infinitief": "hangen",
+  "fr": "pendre / être accroché",
+  "present": {
+   "ik": "hang",
+   "jij": "hangt",
+   "hij": "hangt",
+   "wij": "hangen"
+  },
+  "preteritum": "hing",
+  "participePasse": "gehangen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het schema hangt aan de muur van het kantoor.",
+  "exempleFr": "Le planning est accroché au mur du bureau.",
+  "freq": 4.69
+ },
+ {
+  "infinitief": "hebben",
+  "fr": "avoir",
+  "present": {
+   "ik": "heb",
+   "jij": "hebt",
+   "hij": "heeft",
+   "wij": "hebben"
+  },
+  "preteritum": "had",
+  "participePasse": "gehad",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf heeft drie vestigingen in Vlaanderen.",
+  "exempleFr": "L'entreprise a trois sites en Flandre.",
+  "freq": 6.49
+ },
+ {
+  "infinitief": "helpen",
+  "fr": "aider",
+  "present": {
+   "ik": "help",
+   "jij": "helpt",
+   "hij": "helpt",
+   "wij": "helpen"
+  },
+  "preteritum": "hielp",
+  "participePasse": "geholpen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De collega helpt mij met de administratie.",
+  "exempleFr": "Le collègue m'aide avec l'administration.",
+  "freq": 5.5
+ },
+ {
+  "infinitief": "herinneren (zich)",
+  "fr": "se souvenir",
+  "present": {
+   "ik": "herinner me",
+   "jij": "herinnert zich",
+   "hij": "herinnert zich",
+   "wij": "herinneren"
+  },
+  "preteritum": "herinnerde",
+  "participePasse": "herinnerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik herinner me die klant nog goed.",
+  "exempleFr": "Je me souviens bien de ce client.",
+  "freq": 4.63
+ },
+ {
+  "infinitief": "herstellen",
+  "fr": "réparer / se rétablir",
+  "present": {
+   "ik": "herstel",
+   "jij": "herstelt",
+   "hij": "herstelt",
+   "wij": "herstellen"
+  },
+  "preteritum": "herstelde",
+  "participePasse": "hersteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De technicus herstelt de machine binnen een uur.",
+  "exempleFr": "Le technicien répare la machine en une heure.",
+  "freq": 4.5
+ },
+ {
+  "infinitief": "heten",
+  "fr": "s'appeler",
+  "present": {
+   "ik": "hee",
+   "jij": "heet",
+   "hij": "heet",
+   "wij": "heten"
+  },
+  "preteritum": "heette",
+  "participePasse": "geheten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Onze nieuwe collega heet Sarah.",
+  "exempleFr": "Notre nouvelle collègue s'appelle Sarah.",
+  "freq": 4.25
+ },
+ {
+  "infinitief": "hopen",
+  "fr": "espérer",
+  "present": {
+   "ik": "hoop",
+   "jij": "hoopt",
+   "hij": "hoopt",
+   "wij": "hopen"
+  },
+  "preteritum": "hoopte",
+  "participePasse": "gehoopt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij hopen op een snelle goedkeuring.",
+  "exempleFr": "Nous espérons une approbation rapide.",
+  "freq": 4.9
+ },
+ {
+  "infinitief": "horen",
+  "fr": "entendre",
+  "present": {
+   "ik": "hoor",
+   "jij": "hoort",
+   "hij": "hoort",
+   "wij": "horen"
+  },
+  "preteritum": "hoorde",
+  "participePasse": "gehoord",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik hoor vandaag nog van de klant.",
+  "exempleFr": "J'aurai des nouvelles du client aujourd'hui.",
+  "freq": 5.38
+ },
+ {
+  "infinitief": "houden",
+  "fr": "tenir / garder",
+  "present": {
+   "ik": "houd",
+   "jij": "houdt",
+   "hij": "houdt",
+   "wij": "houden"
+  },
+  "preteritum": "hield",
+  "participePasse": "gehouden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager houdt vast aan de deadline.",
+  "exempleFr": "Le manager s'en tient au délai.",
+  "freq": 5.67
+ },
+ {
+  "infinitief": "huren",
+  "fr": "louer (prendre en location)",
+  "present": {
+   "ik": "huur",
+   "jij": "huurt",
+   "hij": "huurt",
+   "wij": "huren"
+  },
+  "preteritum": "huurde",
+  "participePasse": "gehuurd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf huurt een extra opslagruimte.",
+  "exempleFr": "L'entreprise loue un espace de stockage supplémentaire.",
+  "freq": 4.19
+ },
+ {
+  "infinitief": "indienen",
+  "fr": "déposer / présenter",
+  "present": {
+   "ik": "dien in",
+   "jij": "dient in",
+   "hij": "dient in",
+   "wij": "indienen"
+  },
+  "preteritum": "diende in",
+  "participePasse": "ingediend",
+  "auxiliaire": "hebben",
+  "exempleNl": "De kandidaat dient zijn CV online in.",
+  "exempleFr": "Le candidat soumet son CV en ligne.",
+  "freq": 4.08
+ },
+ {
+  "infinitief": "informeren",
+  "fr": "informer",
+  "present": {
+   "ik": "informeer",
+   "jij": "informeert",
+   "hij": "informeert",
+   "wij": "informeren"
+  },
+  "preteritum": "informeerde",
+  "participePasse": "geïnformeerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij informeren de klant over de vertraging.",
+  "exempleFr": "Nous informons le client du retard.",
+  "freq": 4.31
+ },
+ {
+  "infinitief": "ingaan",
+  "fr": "entrer / accepter",
+  "present": {
+   "ik": "inga",
+   "jij": "ingaat",
+   "hij": "ingaat",
+   "wij": "ingaan"
+  },
+  "preteritum": "ging in",
+  "participePasse": "ingegaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "Het nieuwe tarief gaat volgende maand in.",
+  "exempleFr": "Le nouveau tarif entre en vigueur le mois prochain.",
+  "freq": 4.03
+ },
+ {
+  "infinitief": "inhouden",
+  "fr": "contenir / retenir",
+  "present": {
+   "ik": "houd in",
+   "jij": "houdt in",
+   "hij": "houdt in",
+   "wij": "inhouden"
+  },
+  "preteritum": "hield in",
+  "participePasse": "ingehouden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze functie houdt veel verantwoordelijkheid in.",
+  "exempleFr": "Cette fonction implique beaucoup de responsabilités.",
+  "freq": 3.8
+ },
+ {
+  "infinitief": "inrichten",
+  "fr": "aménager / organiser",
+  "present": {
+   "ik": "rich in",
+   "jij": "richt in",
+   "hij": "richt in",
+   "wij": "inrichten"
+  },
+  "preteritum": "richtte in",
+  "participePasse": "ingericht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij richten het nieuwe kantoor deze maand in.",
+  "exempleFr": "Nous aménageons le nouveau bureau ce mois-ci.",
+  "freq": 3.58
+ },
+ {
+  "infinitief": "instellen",
+  "fr": "établir / régler",
+  "present": {
+   "ik": "stel in",
+   "jij": "stelt in",
+   "hij": "stelt in",
+   "wij": "instellen"
+  },
+  "preteritum": "stelde in",
+  "participePasse": "ingesteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De IT-dienst stelt een nieuw systeem in.",
+  "exempleFr": "Le service informatique met en place un nouveau système.",
+  "freq": 4.1
+ },
+ {
+  "infinitief": "invoeren",
+  "fr": "introduire / importer",
+  "present": {
+   "ik": "voer in",
+   "jij": "voert in",
+   "hij": "voert in",
+   "wij": "invoeren"
+  },
+  "preteritum": "voerde in",
+  "participePasse": "ingevoerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf voert een nieuw ERP-systeem in.",
+  "exempleFr": "L'entreprise met en place un nouveau système ERP.",
+  "freq": 3.98
+ },
+ {
+  "infinitief": "invullen",
+  "fr": "remplir (formulaire)",
+  "present": {
+   "ik": "vul in",
+   "jij": "vult in",
+   "hij": "vult in",
+   "wij": "invullen"
+  },
+  "preteritum": "vulde in",
+  "participePasse": "ingevuld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Gelieve het formulier volledig in te vullen.",
+  "exempleFr": "Veuillez remplir entièrement le formulaire.",
+  "freq": 4.08
+ },
+ {
+  "infinitief": "inzien",
+  "fr": "comprendre / consulter",
+  "present": {
+   "ik": "inzie",
+   "jij": "inziet",
+   "hij": "inziet",
+   "wij": "inzien"
+  },
+  "preteritum": "zag in",
+  "participePasse": "ingezien",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik zie het voordeel van deze aanpak in.",
+  "exempleFr": "Je vois l'avantage de cette approche.",
+  "freq": 4.12
+ },
+ {
+  "infinitief": "jagen",
+  "fr": "chasser",
+  "present": {
+   "ik": "jaag",
+   "jij": "jaagt",
+   "hij": "jaagt",
+   "wij": "jagen"
+  },
+  "preteritum": "jaagde / joeg",
+  "participePasse": "gejaagd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De verkoper jaagt op nieuwe klanten.",
+  "exempleFr": "Le vendeur est à la chasse de nouveaux clients.",
+  "freq": 4.16
+ },
+ {
+  "infinitief": "juichen",
+  "fr": "pousser des cris de joie",
+  "present": {
+   "ik": "juich",
+   "jij": "juicht",
+   "hij": "juicht",
+   "wij": "juichen"
+  },
+  "preteritum": "juichte",
+  "participePasse": "gejuicht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team juicht na het behalen van de doelstelling.",
+  "exempleFr": "L'équipe pousse des cris de joie après avoir atteint l'objectif.",
+  "freq": 3.79
+ },
+ {
+  "infinitief": "kaarten",
+  "fr": "jouer aux cartes",
+  "present": {
+   "ik": "kaar",
+   "jij": "kaart",
+   "hij": "kaart",
+   "wij": "kaarten"
+  },
+  "preteritum": "kaartte",
+  "participePasse": "gekaart",
+  "auxiliaire": "hebben",
+  "exempleNl": "Tijdens de pauze kaarten enkele collega's.",
+  "exempleFr": "Pendant la pause, quelques collègues jouent aux cartes.",
+  "freq": 4.71
+ },
+ {
+  "infinitief": "kamperen",
+  "fr": "camper",
+  "present": {
+   "ik": "kampeer",
+   "jij": "kampeert",
+   "hij": "kampeert",
+   "wij": "kamperen"
+  },
+  "preteritum": "kampeerde",
+  "participePasse": "gekampeerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Sommige medewerkers kamperen tijdens de teambuilding.",
+  "exempleFr": "Certains employés campent pendant le team building.",
+  "freq": 3.92
+ },
+ {
+  "infinitief": "kennen",
+  "fr": "connaître",
+  "present": {
+   "ik": "ken",
+   "jij": "kent",
+   "hij": "kent",
+   "wij": "kennen"
+  },
+  "preteritum": "kende",
+  "participePasse": "gekend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik ken deze leverancier al jaren.",
+  "exempleFr": "Je connais ce fournisseur depuis des années.",
+  "freq": 5.08
+ },
+ {
+  "infinitief": "keren",
+  "fr": "tourner / retourner",
+  "present": {
+   "ik": "keer",
+   "jij": "keert",
+   "hij": "keert",
+   "wij": "keren"
+  },
+  "preteritum": "keerde",
+  "participePasse": "gekeerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vrachtwagen keert terug naar het depot.",
+  "exempleFr": "Le camion retourne au dépôt.",
+  "freq": 4.8
+ },
+ {
+  "infinitief": "kiezen",
+  "fr": "choisir",
+  "present": {
+   "ik": "kies",
+   "jij": "kiest",
+   "hij": "kiest",
+   "wij": "kiezen"
+  },
+  "preteritum": "koos",
+  "participePasse": "gekozen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant kiest voor de snelste levering.",
+  "exempleFr": "Le client choisit la livraison la plus rapide.",
+  "freq": 5.07
+ },
+ {
+  "infinitief": "kijken",
+  "fr": "regarder",
+  "present": {
+   "ik": "kijk",
+   "jij": "kijkt",
+   "hij": "kijkt",
+   "wij": "kijken"
+  },
+  "preteritum": "keek",
+  "participePasse": "gekeken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager kijkt elke week naar de KPI's.",
+  "exempleFr": "Le manager consulte les indicateurs chaque semaine.",
+  "freq": 5.58
+ },
+ {
+  "infinitief": "klagen",
+  "fr": "se plaindre",
+  "present": {
+   "ik": "klaag",
+   "jij": "klaagt",
+   "hij": "klaagt",
+   "wij": "klagen"
+  },
+  "preteritum": "klaagde",
+  "participePasse": "geklaagd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant klaagt over de late levering.",
+  "exempleFr": "Le client se plaint du retard de livraison.",
+  "freq": 4.46
+ },
+ {
+  "infinitief": "kleden",
+  "fr": "habiller",
+  "present": {
+   "ik": "kleed",
+   "jij": "kleedt",
+   "hij": "kleedt",
+   "wij": "kleden"
+  },
+  "preteritum": "kleedde",
+  "participePasse": "gekleed",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het personeel kleedt zich volgens de veiligheidsnormen.",
+  "exempleFr": "Le personnel s'habille selon les normes de sécurité.",
+  "freq": 3.74
+ },
+ {
+  "infinitief": "klimmen",
+  "fr": "grimper",
+  "present": {
+   "ik": "klim",
+   "jij": "klimt",
+   "hij": "klimt",
+   "wij": "klimmen"
+  },
+  "preteritum": "klom",
+  "participePasse": "geklommen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De omzet klimt naar een nieuw record.",
+  "exempleFr": "Le chiffre d'affaires grimpe vers un nouveau record.",
+  "freq": 4.03
+ },
+ {
+  "infinitief": "kloppen",
+  "fr": "frapper / battre",
+  "present": {
+   "ik": "klop",
+   "jij": "klopt",
+   "hij": "klopt",
+   "wij": "kloppen"
+  },
+  "preteritum": "klopte",
+  "participePasse": "geklopt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De cijfers kloppen niet met het rapport.",
+  "exempleFr": "Les chiffres ne correspondent pas au rapport.",
+  "freq": 4.22
+ },
+ {
+  "infinitief": "koken",
+  "fr": "cuisiner / bouillir",
+  "present": {
+   "ik": "kook",
+   "jij": "kookt",
+   "hij": "kookt",
+   "wij": "koken"
+  },
+  "preteritum": "kookte",
+  "participePasse": "gekookt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De cateraar kookt voor het hele team.",
+  "exempleFr": "Le traiteur cuisine pour toute l'équipe.",
+  "freq": 4.6
+ },
+ {
+  "infinitief": "komen",
+  "fr": "venir",
+  "present": {
+   "ik": "kom",
+   "jij": "komt",
+   "hij": "komt",
+   "wij": "komen"
+  },
+  "preteritum": "kwam",
+  "participePasse": "gekomen",
+  "auxiliaire": "zijn",
+  "exempleNl": "De nieuwe collega komt volgende week.",
+  "exempleFr": "Le nouveau collègue arrive la semaine prochaine.",
+  "freq": 5.95
+ },
+ {
+  "infinitief": "kopen",
+  "fr": "acheter",
+  "present": {
+   "ik": "koop",
+   "jij": "koopt",
+   "hij": "koopt",
+   "wij": "kopen"
+  },
+  "preteritum": "kocht",
+  "participePasse": "gekocht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf koopt nieuwe machines aan.",
+  "exempleFr": "L'entreprise achète de nouvelles machines.",
+  "freq": 5.21
+ },
+ {
+  "infinitief": "kosten",
+  "fr": "coûter",
+  "present": {
+   "ik": "kos",
+   "jij": "kost",
+   "hij": "kost",
+   "wij": "kosten"
+  },
+  "preteritum": "kostte",
+  "participePasse": "gekost",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze dienst kost honderd euro per maand.",
+  "exempleFr": "Ce service coûte cent euros par mois.",
+  "freq": 4.94
+ },
+ {
+  "infinitief": "krijgen",
+  "fr": "recevoir",
+  "present": {
+   "ik": "krijg",
+   "jij": "krijgt",
+   "hij": "krijgt",
+   "wij": "krijgen"
+  },
+  "preteritum": "kreeg",
+  "participePasse": "gekregen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant krijgt een korting van tien procent.",
+  "exempleFr": "Le client reçoit une remise de dix pour cent.",
+  "freq": 5.72
+ },
+ {
+  "infinitief": "kruisen",
+  "fr": "croiser",
+  "present": {
+   "ik": "kruis",
+   "jij": "kruist",
+   "hij": "kruist",
+   "wij": "kruisen"
+  },
+  "preteritum": "kruiste",
+  "participePasse": "gekruist",
+  "auxiliaire": "hebben",
+  "exempleNl": "De twee leveringen kruisen elkaar onderweg.",
+  "exempleFr": "Les deux livraisons se croisent en chemin.",
+  "freq": 3.53
+ },
+ {
+  "infinitief": "kunnen",
+  "fr": "pouvoir (capacité)",
+  "present": {
+   "ik": "kan",
+   "jij": "kunt",
+   "hij": "kan",
+   "wij": "kunnen"
+  },
+  "preteritum": "kon",
+  "participePasse": "gekund",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik kan de deadline zonder probleem halen.",
+  "exempleFr": "Je peux tenir le délai sans problème.",
+  "freq": 6.26
+ },
+ {
+  "infinitief": "kussen",
+  "fr": "embrasser",
+  "present": {
+   "ik": "kus",
+   "jij": "kust",
+   "hij": "kust",
+   "wij": "kussen"
+  },
+  "preteritum": "kuste",
+  "participePasse": "gekust",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ze kussen elkaar bij het afscheid op het feest.",
+  "exempleFr": "Ils s'embrassent en se disant au revoir à la fête.",
+  "freq": 4.27
+ },
+ {
+  "infinitief": "lachen",
+  "fr": "rire",
+  "present": {
+   "ik": "lach",
+   "jij": "lacht",
+   "hij": "lacht",
+   "wij": "lachen"
+  },
+  "preteritum": "lachte",
+  "participePasse": "gelachen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De collega's lachen tijdens de teambuilding.",
+  "exempleFr": "Les collègues rient pendant le team building.",
+  "freq": 4.76
+ },
+ {
+  "infinitief": "laden",
+  "fr": "charger",
+  "present": {
+   "ik": "laad",
+   "jij": "laadt",
+   "hij": "laadt",
+   "wij": "laden"
+  },
+  "preteritum": "laadde",
+  "participePasse": "geladen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vrachtwagen laadt de pallets in het magazijn.",
+  "exempleFr": "Le camion charge les palettes à l'entrepôt.",
+  "freq": 4.29
+ },
+ {
+  "infinitief": "laten",
+  "fr": "laisser",
+  "present": {
+   "ik": "laa",
+   "jij": "laat",
+   "hij": "laat",
+   "wij": "laten"
+  },
+  "preteritum": "liet",
+  "participePasse": "gelaten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij laten de klant de keuze tussen twee opties.",
+  "exempleFr": "Nous laissons le client choisir entre deux options.",
+  "freq": 5.88
+ },
+ {
+  "infinitief": "leeft",
+  "fr": "vivre (être en vie)",
+  "present": {
+   "ik": "leef",
+   "jij": "leeft",
+   "hij": "leeft",
+   "wij": "leeft"
+  },
+  "preteritum": "leefde",
+  "participePasse": "geleefd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf leeft van zijn export naar Duitsland.",
+  "exempleFr": "L'entreprise vit de ses exportations vers l'Allemagne.",
+  "freq": 4.83
+ },
+ {
+  "infinitief": "leggen",
+  "fr": "poser / mettre",
+  "present": {
+   "ik": "leg",
+   "jij": "legt",
+   "hij": "legt",
+   "wij": "leggen"
+  },
+  "preteritum": "legde",
+  "participePasse": "gelegd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De operator legt de dozen op de pallet.",
+  "exempleFr": "L'opérateur pose les boîtes sur la palette.",
+  "freq": 5.0
+ },
+ {
+  "infinitief": "leiden",
+  "fr": "mener / conduire",
+  "present": {
+   "ik": "leid",
+   "jij": "leidt",
+   "hij": "leidt",
+   "wij": "leiden"
+  },
+  "preteritum": "leidde",
+  "participePasse": "geleid",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij leidt het logistieke team van tien personen.",
+  "exempleFr": "Elle dirige l'équipe logistique de dix personnes.",
+  "freq": 5.16
+ },
+ {
+  "infinitief": "lenen",
+  "fr": "emprunter / prêter",
+  "present": {
+   "ik": "leen",
+   "jij": "leent",
+   "hij": "leent",
+   "wij": "lenen"
+  },
+  "preteritum": "leende",
+  "participePasse": "geleend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf leent materiaal aan een partner.",
+  "exempleFr": "L'entreprise prête du matériel à un partenaire.",
+  "freq": 4.32
+ },
+ {
+  "infinitief": "leren",
+  "fr": "apprendre / enseigner",
+  "present": {
+   "ik": "leer",
+   "jij": "leert",
+   "hij": "leert",
+   "wij": "leren"
+  },
+  "preteritum": "leerde",
+  "participePasse": "geleerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik leer elke dag nieuwe vakwoordenschat.",
+  "exempleFr": "J'apprends chaque jour du nouveau vocabulaire professionnel.",
+  "freq": 5.41
+ },
+ {
+  "infinitief": "letten (op)",
+  "fr": "faire attention (à)",
+  "present": {
+   "ik": "le op",
+   "jij": "let op",
+   "hij": "let op",
+   "wij": "letten"
+  },
+  "preteritum": "lette",
+  "participePasse": "gelet",
+  "auxiliaire": "hebben",
+  "exempleNl": "Let goed op de leveringsdatum in het contract.",
+  "exempleFr": "Fais bien attention à la date de livraison dans le contrat.",
+  "freq": 4.35
+ },
+ {
+  "infinitief": "leveren",
+  "fr": "livrer / fournir",
+  "present": {
+   "ik": "lever",
+   "jij": "levert",
+   "hij": "levert",
+   "wij": "leveren"
+  },
+  "preteritum": "leverde",
+  "participePasse": "geleverd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De leverancier levert de bestelling binnen drie dagen.",
+  "exempleFr": "Le fournisseur livre la commande sous trois jours.",
+  "freq": 4.68
+ },
+ {
+  "infinitief": "lezen",
+  "fr": "lire",
+  "present": {
+   "ik": "lees",
+   "jij": "leest",
+   "hij": "leest",
+   "wij": "lezen"
+  },
+  "preteritum": "las",
+  "participePasse": "gelezen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik lees elke ochtend de rapporten van het team.",
+  "exempleFr": "Je lis les rapports de l'équipe chaque matin.",
+  "freq": 5.32
+ },
+ {
+  "infinitief": "liggen",
+  "fr": "être couché / se trouver",
+  "present": {
+   "ik": "lig",
+   "jij": "ligt",
+   "hij": "ligt",
+   "wij": "liggen"
+  },
+  "preteritum": "lag",
+  "participePasse": "gelegen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het magazijn ligt vlak bij de snelweg.",
+  "exempleFr": "L'entrepôt se trouve juste à côté de l'autoroute.",
+  "freq": 5.27
+ },
+ {
+  "infinitief": "lijden",
+  "fr": "souffrir",
+  "present": {
+   "ik": "lijd",
+   "jij": "lijdt",
+   "hij": "lijdt",
+   "wij": "lijden"
+  },
+  "preteritum": "leed",
+  "participePasse": "geleden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De sector lijdt onder de stijgende brandstofprijzen.",
+  "exempleFr": "Le secteur souffre de la hausse des prix du carburant.",
+  "freq": 4.51
+ },
+ {
+  "infinitief": "lijken",
+  "fr": "paraître / ressembler",
+  "present": {
+   "ik": "lijk",
+   "jij": "lijkt",
+   "hij": "lijkt",
+   "wij": "lijken"
+  },
+  "preteritum": "leek",
+  "participePasse": "geleken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Dit plan lijkt de beste optie.",
+  "exempleFr": "Ce plan semble être la meilleure option.",
+  "freq": 4.91
+ },
+ {
+  "infinitief": "lopen",
+  "fr": "marcher / courir",
+  "present": {
+   "ik": "loop",
+   "jij": "loopt",
+   "hij": "loopt",
+   "wij": "lopen"
+  },
+  "preteritum": "liep",
+  "participePasse": "gelopen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het project loopt volgens schema.",
+  "exempleFr": "Le projet se déroule comme prévu.",
+  "freq": 5.34
+ },
+ {
+  "infinitief": "luiden",
+  "fr": "sonner",
+  "present": {
+   "ik": "luid",
+   "jij": "luidt",
+   "hij": "luidt",
+   "wij": "luiden"
+  },
+  "preteritum": "luidde",
+  "participePasse": "geluid",
+  "auxiliaire": "hebben",
+  "exempleNl": "De telefoon luidt net voor de sluitingstijd.",
+  "exempleFr": "Le téléphone sonne juste avant l'heure de fermeture.",
+  "freq": 3.63
+ },
+ {
+  "infinitief": "luisteren",
+  "fr": "écouter",
+  "present": {
+   "ik": "luister",
+   "jij": "luistert",
+   "hij": "luistert",
+   "wij": "luisteren"
+  },
+  "preteritum": "luisterde",
+  "participePasse": "geluisterd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager luistert naar de feedback van het team.",
+  "exempleFr": "Le manager écoute les retours de l'équipe.",
+  "freq": 4.9
+ },
+ {
+  "infinitief": "maken",
+  "fr": "faire / fabriquer",
+  "present": {
+   "ik": "maak",
+   "jij": "maakt",
+   "hij": "maakt",
+   "wij": "maken"
+  },
+  "preteritum": "maakte",
+  "participePasse": "gemaakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij maken elke maand een nieuw rapport.",
+  "exempleFr": "Nous faisons un nouveau rapport chaque mois.",
+  "freq": 6.1
+ },
+ {
+  "infinitief": "meegaan",
+  "fr": "accompagner",
+  "present": {
+   "ik": "meega",
+   "jij": "meegaat",
+   "hij": "meegaat",
+   "wij": "meegaan"
+  },
+  "preteritum": "ging mee",
+  "participePasse": "meegegaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "De stagiair gaat mee naar het klantbezoek.",
+  "exempleFr": "Le stagiaire accompagne lors de la visite client.",
+  "freq": 3.73
+ },
+ {
+  "infinitief": "meemaken",
+  "fr": "vivre / expérimenter",
+  "present": {
+   "ik": "maak mee",
+   "jij": "maakt mee",
+   "hij": "maakt mee",
+   "wij": "meemaken"
+  },
+  "preteritum": "maakte mee",
+  "participePasse": "meegemaakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team maakt een moeilijke periode mee.",
+  "exempleFr": "L'équipe traverse une période difficile.",
+  "freq": 4.02
+ },
+ {
+  "infinitief": "melden",
+  "fr": "signaler / annoncer",
+  "present": {
+   "ik": "meld",
+   "jij": "meldt",
+   "hij": "meldt",
+   "wij": "melden"
+  },
+  "preteritum": "meldde",
+  "participePasse": "gemeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De medewerker meldt het probleem meteen.",
+  "exempleFr": "L'employé signale immédiatement le problème.",
+  "freq": 4.73
+ },
+ {
+  "infinitief": "menen",
+  "fr": "penser / être sérieux",
+  "present": {
+   "ik": "meen",
+   "jij": "meent",
+   "hij": "meent",
+   "wij": "menen"
+  },
+  "preteritum": "meende",
+  "participePasse": "gemeend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik meen dat we deze klant moeten behouden.",
+  "exempleFr": "Je pense sincèrement que nous devons garder ce client.",
+  "freq": 3.95
+ },
+ {
+  "infinitief": "merken",
+  "fr": "remarquer",
+  "present": {
+   "ik": "merk",
+   "jij": "merkt",
+   "hij": "merkt",
+   "wij": "merken"
+  },
+  "preteritum": "merkte",
+  "participePasse": "gemerkt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij merken een stijging in de vraag.",
+  "exempleFr": "Nous remarquons une hausse de la demande.",
+  "freq": 4.45
+ },
+ {
+  "infinitief": "meten",
+  "fr": "mesurer",
+  "present": {
+   "ik": "mee",
+   "jij": "meet",
+   "hij": "meet",
+   "wij": "meten"
+  },
+  "preteritum": "mat",
+  "participePasse": "gemeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De sensor meet de temperatuur in het magazijn.",
+  "exempleFr": "Le capteur mesure la température dans l'entrepôt.",
+  "freq": 4.12
+ },
+ {
+  "infinitief": "moeten",
+  "fr": "devoir",
+  "present": {
+   "ik": "moet",
+   "jij": "moet",
+   "hij": "moet",
+   "wij": "moeten"
+  },
+  "preteritum": "moest",
+  "participePasse": "gemoeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik moet dit rapport voor vrijdag afwerken.",
+  "exempleFr": "Je dois terminer ce rapport pour vendredi.",
+  "freq": 6.03
+ },
+ {
+  "infinitief": "mogen",
+  "fr": "pouvoir (permission)",
+  "present": {
+   "ik": "mag",
+   "jij": "mag",
+   "hij": "mag",
+   "wij": "mogen"
+  },
+  "preteritum": "mocht",
+  "participePasse": "gemoogd",
+  "auxiliaire": "hebben",
+  "exempleNl": "U mag de kortingscode gebruiken tot eind deze maand.",
+  "exempleFr": "Vous pouvez utiliser le code promo jusqu'à la fin de ce mois.",
+  "freq": 5.34
+ },
+ {
+  "infinitief": "naar de les gaan",
+  "fr": "aller au cours",
+  "present": {
+   "ik": "naar de les ga",
+   "jij": "naar de les gaat",
+   "hij": "naar de les gaat",
+   "wij": "naar de les gaan"
+  },
+  "preteritum": "ging",
+  "participePasse": "gegaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "Zij gaat elke avond naar de les Nederlands.",
+  "exempleFr": "Elle va au cours de néerlandais chaque soir.",
+  "freq": 5.0
+ },
+ {
+  "infinitief": "nagaan",
+  "fr": "vérifier",
+  "present": {
+   "ik": "naga",
+   "jij": "nagaat",
+   "hij": "nagaat",
+   "wij": "nagaan"
+  },
+  "preteritum": "ging na",
+  "participePasse": "nagegaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "De boekhouder gaat elke factuur na.",
+  "exempleFr": "Le comptable vérifie chaque facture.",
+  "freq": 3.73
+ },
+ {
+  "infinitief": "nemen",
+  "fr": "prendre",
+  "present": {
+   "ik": "neem",
+   "jij": "neemt",
+   "hij": "neemt",
+   "wij": "nemen"
+  },
+  "preteritum": "nam",
+  "participePasse": "genomen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager neemt vandaag een beslissing.",
+  "exempleFr": "Le manager prend une décision aujourd'hui.",
+  "freq": 5.6
+ },
+ {
+  "infinitief": "noemen",
+  "fr": "nommer / appeler",
+  "present": {
+   "ik": "noem",
+   "jij": "noemt",
+   "hij": "noemt",
+   "wij": "noemen"
+  },
+  "preteritum": "noemde",
+  "participePasse": "genoemd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij noemen dit project 'Fase 2'.",
+  "exempleFr": "Nous appelons ce projet 'Phase 2'.",
+  "freq": 5.08
+ },
+ {
+  "infinitief": "oefenen",
+  "fr": "exercer / pratiquer",
+  "present": {
+   "ik": "oefen",
+   "jij": "oefent",
+   "hij": "oefent",
+   "wij": "oefenen"
+  },
+  "preteritum": "oefende",
+  "participePasse": "geoefend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik oefen mijn Nederlands elke dag met deze app.",
+  "exempleFr": "Je pratique mon néerlandais chaque jour avec cette appli.",
+  "freq": 4.48
+ },
+ {
+  "infinitief": "ontbijten",
+  "fr": "déjeuner (matin)",
+  "present": {
+   "ik": "ontbij",
+   "jij": "ontbijt",
+   "hij": "ontbijt",
+   "wij": "ontbijten"
+  },
+  "preteritum": "ontbeet",
+  "participePasse": "ontbeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team ontbijt samen voor de belangrijke vergadering.",
+  "exempleFr": "L'équipe prend son petit-déjeuner ensemble avant la réunion importante.",
+  "freq": 3.79
+ },
+ {
+  "infinitief": "ontbreken",
+  "fr": "manquer",
+  "present": {
+   "ik": "ontbreek",
+   "jij": "ontbreekt",
+   "hij": "ontbreekt",
+   "wij": "ontbreken"
+  },
+  "preteritum": "ontbrak",
+  "participePasse": "ontbroken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Er ontbreekt nog één document in het dossier.",
+  "exempleFr": "Il manque encore un document dans le dossier.",
+  "freq": 4.25
+ },
+ {
+  "infinitief": "onthouden",
+  "fr": "retenir / se souvenir",
+  "present": {
+   "ik": "onthoud",
+   "jij": "onthoudt",
+   "hij": "onthoudt",
+   "wij": "onthouden"
+  },
+  "preteritum": "onthield",
+  "participePasse": "onthouden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Onthoud goed het nieuwe klantnummer.",
+  "exempleFr": "Retiens bien le nouveau numéro client.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "ontmoeten",
+  "fr": "rencontrer",
+  "present": {
+   "ik": "ontmoet",
+   "jij": "ontmoet",
+   "hij": "ontmoet",
+   "wij": "ontmoeten"
+  },
+  "preteritum": "ontmoette",
+  "participePasse": "ontmoet",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vertegenwoordiger ontmoet de klant op de beurs.",
+  "exempleFr": "Le représentant rencontre le client au salon.",
+  "freq": 4.6
+ },
+ {
+  "infinitief": "ontstaan",
+  "fr": "naître / provenir",
+  "present": {
+   "ik": "ontsta",
+   "jij": "ontstaat",
+   "hij": "ontstaat",
+   "wij": "ontstaan"
+  },
+  "preteritum": "ontstond",
+  "participePasse": "ontstaan",
+  "auxiliaire": "zijn",
+  "exempleNl": "Er ontstaat vertraging door het slechte weer.",
+  "exempleFr": "Un retard survient à cause du mauvais temps.",
+  "freq": 4.97
+ },
+ {
+  "infinitief": "ontvangen",
+  "fr": "recevoir",
+  "present": {
+   "ik": "ontvang",
+   "jij": "ontvangt",
+   "hij": "ontvangt",
+   "wij": "ontvangen"
+  },
+  "preteritum": "ontving",
+  "participePasse": "ontvangen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij ontvangen de bestelling morgen.",
+  "exempleFr": "Nous recevons la commande demain.",
+  "freq": 5.04
+ },
+ {
+  "infinitief": "ontwikkelen",
+  "fr": "développer",
+  "present": {
+   "ik": "ontwikkel",
+   "jij": "ontwikkelt",
+   "hij": "ontwikkelt",
+   "wij": "ontwikkelen"
+  },
+  "preteritum": "ontwikkelde",
+  "participePasse": "ontwikkeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf ontwikkelt een nieuwe applicatie.",
+  "exempleFr": "L'entreprise développe une nouvelle application.",
+  "freq": 4.69
+ },
+ {
+  "infinitief": "oordelen",
+  "fr": "juger",
+  "present": {
+   "ik": "oordeel",
+   "jij": "oordeelt",
+   "hij": "oordeelt",
+   "wij": "oordelen"
+  },
+  "preteritum": "oordeelde",
+  "participePasse": "geoordeeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant oordeelt positief over de service.",
+  "exempleFr": "Le client juge le service positivement.",
+  "freq": 3.99
+ },
+ {
+  "infinitief": "opbellen",
+  "fr": "téléphoner",
+  "present": {
+   "ik": "bel op",
+   "jij": "belt op",
+   "hij": "belt op",
+   "wij": "opbellen"
+  },
+  "preteritum": "belde op",
+  "participePasse": "opgebeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik bel de klant zo dadelijk op.",
+  "exempleFr": "J'appelle le client dans un instant.",
+  "freq": 2.74
+ },
+ {
+  "infinitief": "opbouwen",
+  "fr": "construire / édifier",
+  "present": {
+   "ik": "bouw op",
+   "jij": "bouwt op",
+   "hij": "bouwt op",
+   "wij": "opbouwen"
+  },
+  "preteritum": "bouwde op",
+  "participePasse": "opgebouwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf bouwt een sterke reputatie op.",
+  "exempleFr": "L'entreprise se construit une solide réputation.",
+  "freq": 4.15
+ },
+ {
+  "infinitief": "oplossen",
+  "fr": "résoudre",
+  "present": {
+   "ik": "los op",
+   "jij": "lost op",
+   "hij": "lost op",
+   "wij": "oplossen"
+  },
+  "preteritum": "loste op",
+  "participePasse": "opgelost",
+  "auxiliaire": "hebben",
+  "exempleNl": "De technische dienst lost het probleem snel op.",
+  "exempleFr": "Le service technique résout rapidement le problème.",
+  "freq": 4.61
+ },
+ {
+  "infinitief": "opnemen",
+  "fr": "enregistrer / décrocher",
+  "present": {
+   "ik": "neem op",
+   "jij": "neemt op",
+   "hij": "neemt op",
+   "wij": "opnemen"
+  },
+  "preteritum": "nam op",
+  "participePasse": "opgenomen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De secretaresse neemt de telefoon op.",
+  "exempleFr": "La secrétaire décroche le téléphone.",
+  "freq": 4.59
+ },
+ {
+  "infinitief": "oppassen",
+  "fr": "faire attention",
+  "present": {
+   "ik": "pas op",
+   "jij": "past op",
+   "hij": "past op",
+   "wij": "oppassen"
+  },
+  "preteritum": "paste op",
+  "participePasse": "opgepast",
+  "auxiliaire": "hebben",
+  "exempleNl": "Pas op voor fouten in de facturatie.",
+  "exempleFr": "Fais attention aux erreurs dans la facturation.",
+  "freq": 3.84
+ },
+ {
+  "infinitief": "oprichten",
+  "fr": "fonder / établir",
+  "present": {
+   "ik": "rich op",
+   "jij": "richt op",
+   "hij": "richt op",
+   "wij": "oprichten"
+  },
+  "preteritum": "richtte op",
+  "participePasse": "opgericht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij richt een nieuwe afdeling op.",
+  "exempleFr": "Elle fonde un nouveau département.",
+  "freq": 3.85
+ },
+ {
+  "infinitief": "opstaan",
+  "fr": "se lever",
+  "present": {
+   "ik": "opsta",
+   "jij": "opstaat",
+   "hij": "opstaat",
+   "wij": "opstaan"
+  },
+  "preteritum": "stond op",
+  "participePasse": "opgestaan",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij staat vroeg op voor de vroege ploeg.",
+  "exempleFr": "Il se lève tôt pour l'équipe du matin.",
+  "freq": 4.39
+ },
+ {
+  "infinitief": "opstellen",
+  "fr": "rédiger / dresser",
+  "present": {
+   "ik": "stel op",
+   "jij": "stelt op",
+   "hij": "stelt op",
+   "wij": "opstellen"
+  },
+  "preteritum": "stelde op",
+  "participePasse": "opgesteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De HR-dienst stelt het contract op.",
+  "exempleFr": "Le service RH rédige le contrat.",
+  "freq": 4.23
+ },
+ {
+  "infinitief": "opvallen",
+  "fr": "frapper / sauter aux yeux",
+  "present": {
+   "ik": "val op",
+   "jij": "valt op",
+   "hij": "valt op",
+   "wij": "opvallen"
+  },
+  "preteritum": "viel op",
+  "participePasse": "opgevallen",
+  "auxiliaire": "zijn",
+  "exempleNl": "Deze fout valt meteen op in het rapport.",
+  "exempleFr": "Cette erreur saute immédiatement aux yeux dans le rapport.",
+  "freq": 3.65
+ },
+ {
+  "infinitief": "opzoeken",
+  "fr": "chercher / rendre visite",
+  "present": {
+   "ik": "zoek op",
+   "jij": "zoekt op",
+   "hij": "zoekt op",
+   "wij": "opzoeken"
+  },
+  "preteritum": "zocht op",
+  "participePasse": "opgezocht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik zoek de leverancier even op in het systeem.",
+  "exempleFr": "Je recherche rapidement le fournisseur dans le système.",
+  "freq": 4.21
+ },
+ {
+  "infinitief": "overlijden",
+  "fr": "décéder",
+  "present": {
+   "ik": "overlijd",
+   "jij": "overlijdt",
+   "hij": "overlijdt",
+   "wij": "overlijden"
+  },
+  "preteritum": "overleed",
+  "participePasse": "overleden",
+  "auxiliaire": "zijn",
+  "exempleNl": "De oprichter van het bedrijf is vorig jaar overleden.",
+  "exempleFr": "Le fondateur de l'entreprise est décédé l'an dernier.",
+  "freq": 4.48
+ },
+ {
+  "infinitief": "oversteken",
+  "fr": "traverser",
+  "present": {
+   "ik": "steek over",
+   "jij": "steekt over",
+   "hij": "steekt over",
+   "wij": "oversteken"
+  },
+  "preteritum": "stak over",
+  "participePasse": "overgestoken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vrachtwagen steekt de grens over zonder problemen.",
+  "exempleFr": "Le camion traverse la frontière sans problème.",
+  "freq": 3.83
+ },
+ {
+  "infinitief": "pakken",
+  "fr": "prendre / saisir",
+  "present": {
+   "ik": "pak",
+   "jij": "pakt",
+   "hij": "pakt",
+   "wij": "pakken"
+  },
+  "preteritum": "pakte",
+  "participePasse": "gepakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De medewerker pakt de bestelling in.",
+  "exempleFr": "L'employé emballe la commande.",
+  "freq": 4.99
+ },
+ {
+  "infinitief": "passen",
+  "fr": "essayer / convenir",
+  "present": {
+   "ik": "pas",
+   "jij": "past",
+   "hij": "past",
+   "wij": "passen"
+  },
+  "preteritum": "paste",
+  "participePasse": "gepast",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze oplossing past perfect bij uw behoeften.",
+  "exempleFr": "Cette solution correspond parfaitement à vos besoins.",
+  "freq": 4.69
+ },
+ {
+  "infinitief": "plaatsvinden",
+  "fr": "avoir lieu",
+  "present": {
+   "ik": "vind plaats",
+   "jij": "vindt plaats",
+   "hij": "vindt plaats",
+   "wij": "plaatsvinden"
+  },
+  "preteritum": "vond plaats",
+  "participePasse": "plaatsgevonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De vergadering vindt volgende week plaats.",
+  "exempleFr": "La réunion a lieu la semaine prochaine.",
+  "freq": 4.4
+ },
+ {
+  "infinitief": "plannen",
+  "fr": "planifier",
+  "present": {
+   "ik": "plan",
+   "jij": "plant",
+   "hij": "plant",
+   "wij": "plannen"
+  },
+  "preteritum": "plande",
+  "participePasse": "gepland",
+  "auxiliaire": "hebben",
+  "exempleNl": "De planner plant de leveringen voor volgende week.",
+  "exempleFr": "Le planificateur planifie les livraisons pour la semaine prochaine.",
+  "freq": 4.92
+ },
+ {
+  "infinitief": "planten",
+  "fr": "planter",
+  "present": {
+   "ik": "plan",
+   "jij": "plant",
+   "hij": "plant",
+   "wij": "planten"
+  },
+  "preteritum": "plantte",
+  "participePasse": "geplant",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf plant bomen als compensatie voor de uitstoot.",
+  "exempleFr": "L'entreprise plante des arbres pour compenser ses émissions.",
+  "freq": 4.6
+ },
+ {
+  "infinitief": "plegen",
+  "fr": "commettre",
+  "present": {
+   "ik": "pleeg",
+   "jij": "pleegt",
+   "hij": "pleegt",
+   "wij": "plegen"
+  },
+  "preteritum": "pleegde",
+  "participePasse": "gepleegd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij pleegt overleg met de leverancier.",
+  "exempleFr": "Il se concerte avec le fournisseur.",
+  "freq": 4.26
+ },
+ {
+  "infinitief": "poetsen",
+  "fr": "nettoyer",
+  "present": {
+   "ik": "poets",
+   "jij": "poetst",
+   "hij": "poetst",
+   "wij": "poetsen"
+  },
+  "preteritum": "poetste",
+  "participePasse": "gepoetst",
+  "auxiliaire": "hebben",
+  "exempleNl": "De schoonmaakploeg poetst het kantoor elke avond.",
+  "exempleFr": "L'équipe de nettoyage nettoie le bureau chaque soir.",
+  "freq": 3.77
+ },
+ {
+  "infinitief": "praten",
+  "fr": "parler / bavarder",
+  "present": {
+   "ik": "praa",
+   "jij": "praat",
+   "hij": "praat",
+   "wij": "praten"
+  },
+  "preteritum": "praatte",
+  "participePasse": "gepraat",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij praten morgen verder over het contract.",
+  "exempleFr": "Nous continuerons à discuter du contrat demain.",
+  "freq": 5.29
+ },
+ {
+  "infinitief": "proberen",
+  "fr": "essayer",
+  "present": {
+   "ik": "probeer",
+   "jij": "probeert",
+   "hij": "probeert",
+   "wij": "proberen"
+  },
+  "preteritum": "probeerde",
+  "participePasse": "geprobeerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik probeer de deadline te halen.",
+  "exempleFr": "J'essaie de tenir le délai.",
+  "freq": 5.24
+ },
+ {
+  "infinitief": "produceren",
+  "fr": "produire",
+  "present": {
+   "ik": "produceer",
+   "jij": "produceert",
+   "hij": "produceert",
+   "wij": "produceren"
+  },
+  "preteritum": "produceerde",
+  "participePasse": "geproduceerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De fabriek produceert duizend eenheden per dag.",
+  "exempleFr": "L'usine produit mille unités par jour.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "publiceren",
+  "fr": "publier",
+  "present": {
+   "ik": "publiceer",
+   "jij": "publiceert",
+   "hij": "publiceert",
+   "wij": "publiceren"
+  },
+  "preteritum": "publiceerde",
+  "participePasse": "gepubliceerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf publiceert het jaarverslag in maart.",
+  "exempleFr": "L'entreprise publie le rapport annuel en mars.",
+  "freq": 4.11
+ },
+ {
+  "infinitief": "punten geven",
+  "fr": "donner des points",
+  "present": {
+   "ik": "geef punten",
+   "jij": "geeft punten",
+   "hij": "geeft punten",
+   "wij": "punten geven"
+  },
+  "preteritum": "gaf",
+  "participePasse": "gegeven",
+  "auxiliaire": "hebben",
+  "exempleNl": "De trainer geeft punten voor elke afgeronde module.",
+  "exempleFr": "Le formateur donne des points pour chaque module terminé.",
+  "freq": 4.95
+ },
+ {
+  "infinitief": "raken",
+  "fr": "toucher / atteindre",
+  "present": {
+   "ik": "raak",
+   "jij": "raakt",
+   "hij": "raakt",
+   "wij": "raken"
+  },
+  "preteritum": "raakte",
+  "participePasse": "geraakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze maatregel raakt vooral kleine leveranciers.",
+  "exempleFr": "Cette mesure touche surtout les petits fournisseurs.",
+  "freq": 4.73
+ },
+ {
+  "infinitief": "reageren",
+  "fr": "réagir",
+  "present": {
+   "ik": "reageer",
+   "jij": "reageert",
+   "hij": "reageert",
+   "wij": "reageren"
+  },
+  "preteritum": "reageerde",
+  "participePasse": "gereageerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant reageert snel op onze e-mail.",
+  "exempleFr": "Le client réagit rapidement à notre e-mail.",
+  "freq": 4.76
+ },
+ {
+  "infinitief": "reizen",
+  "fr": "voyager",
+  "present": {
+   "ik": "reis",
+   "jij": "reist",
+   "hij": "reist",
+   "wij": "reizen"
+  },
+  "preteritum": "reisde",
+  "participePasse": "gereisd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De consultant reist elke week naar een andere klant.",
+  "exempleFr": "Le consultant voyage chaque semaine chez un client différent.",
+  "freq": 4.82
+ },
+ {
+  "infinitief": "rekenen",
+  "fr": "compter / calculer",
+  "present": {
+   "ik": "reken",
+   "jij": "rekent",
+   "hij": "rekent",
+   "wij": "rekenen"
+  },
+  "preteritum": "rekende",
+  "participePasse": "gerekend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij rekenen op een snelle oplossing.",
+  "exempleFr": "Nous comptons sur une solution rapide.",
+  "freq": 4.48
+ },
+ {
+  "infinitief": "remmen",
+  "fr": "freiner",
+  "present": {
+   "ik": "rem",
+   "jij": "remt",
+   "hij": "remt",
+   "wij": "remmen"
+  },
+  "preteritum": "remde",
+  "participePasse": "geremd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De hoge kosten remmen de groei af.",
+  "exempleFr": "Les coûts élevés freinent la croissance.",
+  "freq": 3.91
+ },
+ {
+  "infinitief": "rijden",
+  "fr": "rouler / conduire",
+  "present": {
+   "ik": "rijd",
+   "jij": "rijdt",
+   "hij": "rijdt",
+   "wij": "rijden"
+  },
+  "preteritum": "reed",
+  "participePasse": "gereden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De chauffeur rijdt elke dag dezelfde route.",
+  "exempleFr": "Le chauffeur conduit le même itinéraire chaque jour.",
+  "freq": 5.13
+ },
+ {
+  "infinitief": "roepen",
+  "fr": "appeler / crier",
+  "present": {
+   "ik": "roep",
+   "jij": "roept",
+   "hij": "roept",
+   "wij": "roepen"
+  },
+  "preteritum": "riep",
+  "participePasse": "geroepen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De teamleider roept iedereen samen voor de briefing.",
+  "exempleFr": "Le chef d'équipe rassemble tout le monde pour le briefing.",
+  "freq": 4.62
+ },
+ {
+  "infinitief": "roken",
+  "fr": "fumer",
+  "present": {
+   "ik": "rook",
+   "jij": "rookt",
+   "hij": "rookt",
+   "wij": "roken"
+  },
+  "preteritum": "rookte",
+  "participePasse": "gerookt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Enkel buiten het gebouw mag men roken.",
+  "exempleFr": "On ne peut fumer qu'en dehors du bâtiment.",
+  "freq": 4.47
+ },
+ {
+  "infinitief": "ruilen",
+  "fr": "échanger",
+  "present": {
+   "ik": "ruil",
+   "jij": "ruilt",
+   "hij": "ruilt",
+   "wij": "ruilen"
+  },
+  "preteritum": "ruilde",
+  "participePasse": "geruild",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant ruilt het product voor een ander model.",
+  "exempleFr": "Le client échange le produit contre un autre modèle.",
+  "freq": 4.04
+ },
+ {
+  "infinitief": "rusten",
+  "fr": "se reposer",
+  "present": {
+   "ik": "rus",
+   "jij": "rust",
+   "hij": "rust",
+   "wij": "rusten"
+  },
+  "preteritum": "rustte",
+  "participePasse": "gerust",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team rust een week tussen de twee projecten.",
+  "exempleFr": "L'équipe se repose une semaine entre les deux projets.",
+  "freq": 4.25
+ },
+ {
+  "infinitief": "scheiden",
+  "fr": "séparer",
+  "present": {
+   "ik": "scheid",
+   "jij": "scheidt",
+   "hij": "scheidt",
+   "wij": "scheiden"
+  },
+  "preteritum": "scheidde",
+  "participePasse": "gescheiden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij scheiden het afval volgens de nieuwe regels.",
+  "exempleFr": "Nous trions les déchets selon les nouvelles règles.",
+  "freq": 4.18
+ },
+ {
+  "infinitief": "schelen",
+  "fr": "importer / y avoir une différence",
+  "present": {
+   "ik": "scheel",
+   "jij": "scheelt",
+   "hij": "scheelt",
+   "wij": "schelen"
+  },
+  "preteritum": "scheelde",
+  "participePasse": "gescheeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het scheelt niet veel of we halen de deadline.",
+  "exempleFr": "Il ne s'en faut pas de beaucoup pour tenir le délai.",
+  "freq": 4.22
+ },
+ {
+  "infinitief": "schenken",
+  "fr": "offrir / verser",
+  "present": {
+   "ik": "schenk",
+   "jij": "schenkt",
+   "hij": "schenkt",
+   "wij": "schenken"
+  },
+  "preteritum": "schonk",
+  "participePasse": "geschonken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf schenkt materiaal aan een goed doel.",
+  "exempleFr": "L'entreprise offre du matériel à une œuvre caritative.",
+  "freq": 3.91
+ },
+ {
+  "infinitief": "scheppen",
+  "fr": "créer",
+  "present": {
+   "ik": "schep",
+   "jij": "schept",
+   "hij": "schept",
+   "wij": "scheppen"
+  },
+  "preteritum": "schiep",
+  "participePasse": "geschept",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze investering schept nieuwe kansen.",
+  "exempleFr": "Cet investissement crée de nouvelles opportunités.",
+  "freq": 4.02
+ },
+ {
+  "infinitief": "schijnen",
+  "fr": "sembler / briller",
+  "present": {
+   "ik": "schijn",
+   "jij": "schijnt",
+   "hij": "schijnt",
+   "wij": "schijnen"
+  },
+  "preteritum": "scheen",
+  "participePasse": "geschenen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het schijnt dat de fusie doorgaat.",
+  "exempleFr": "Il paraît que la fusion va se faire.",
+  "freq": 4.0
+ },
+ {
+  "infinitief": "schrijven",
+  "fr": "écrire",
+  "present": {
+   "ik": "schrijf",
+   "jij": "schrijft",
+   "hij": "schrijft",
+   "wij": "schrijven"
+  },
+  "preteritum": "schreef",
+  "participePasse": "geschreven",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik schrijf elke week een verslag voor het team.",
+  "exempleFr": "J'écris un rapport pour l'équipe chaque semaine.",
+  "freq": 5.07
+ },
+ {
+  "infinitief": "schrikken",
+  "fr": "s'effrayer",
+  "present": {
+   "ik": "schrik",
+   "jij": "schrikt",
+   "hij": "schrikt",
+   "wij": "schrikken"
+  },
+  "preteritum": "schrok",
+  "participePasse": "geschrokken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant schrikt van de hoge factuur.",
+  "exempleFr": "Le client est surpris par la facture élevée.",
+  "freq": 3.99
+ },
+ {
+  "infinitief": "slaan",
+  "fr": "frapper",
+  "present": {
+   "ik": "sla",
+   "jij": "slaat",
+   "hij": "slaat",
+   "wij": "slaan"
+  },
+  "preteritum": "sloeg",
+  "participePasse": "geslagen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De machine slaat elk uur duizend stuks.",
+  "exempleFr": "La machine produit mille pièces par heure.",
+  "freq": 4.87
+ },
+ {
+  "infinitief": "slagen",
+  "fr": "réussir",
+  "present": {
+   "ik": "slaag",
+   "jij": "slaagt",
+   "hij": "slaagt",
+   "wij": "slagen"
+  },
+  "preteritum": "slaagde",
+  "participePasse": "geslaagd",
+  "auxiliaire": "zijn",
+  "exempleNl": "De kandidaat slaagt voor de technische test.",
+  "exempleFr": "Le candidat réussit le test technique.",
+  "freq": 4.28
+ },
+ {
+  "infinitief": "slapen",
+  "fr": "dormir",
+  "present": {
+   "ik": "slaap",
+   "jij": "slaapt",
+   "hij": "slaapt",
+   "wij": "slapen"
+  },
+  "preteritum": "sliep",
+  "participePasse": "geslapen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Na de late ploeg slaapt hij overdag.",
+  "exempleFr": "Après l'équipe de nuit, il dort la journée.",
+  "freq": 5.06
+ },
+ {
+  "infinitief": "sluiten",
+  "fr": "fermer",
+  "present": {
+   "ik": "slui",
+   "jij": "sluit",
+   "hij": "sluit",
+   "wij": "sluiten"
+  },
+  "preteritum": "sloot",
+  "participePasse": "gesloten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het magazijn sluit om achttien uur.",
+  "exempleFr": "L'entrepôt ferme à dix-huit heures.",
+  "freq": 4.9
+ },
+ {
+  "infinitief": "smaken",
+  "fr": "goûter (avoir un goût)",
+  "present": {
+   "ik": "smaak",
+   "jij": "smaakt",
+   "hij": "smaakt",
+   "wij": "smaken"
+  },
+  "preteritum": "smaakte",
+  "participePasse": "gesmaakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het personeelsrestaurant smaakt goed volgens de medewerkers.",
+  "exempleFr": "Le restaurant du personnel a bon goût selon les employés.",
+  "freq": 3.95
+ },
+ {
+  "infinitief": "smijten",
+  "fr": "jeter",
+  "present": {
+   "ik": "smij",
+   "jij": "smijt",
+   "hij": "smijt",
+   "wij": "smijten"
+  },
+  "preteritum": "smeet",
+  "participePasse": "gesmeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Hij smijt de kapotte doos in de container.",
+  "exempleFr": "Il jette la boîte cassée dans le conteneur.",
+  "freq": 3.07
+ },
+ {
+  "infinitief": "snijden",
+  "fr": "couper",
+  "present": {
+   "ik": "snijd",
+   "jij": "snijdt",
+   "hij": "snijdt",
+   "wij": "snijden"
+  },
+  "preteritum": "sneed",
+  "participePasse": "gesneden",
+  "auxiliaire": "hebben",
+  "exempleNl": "De machine snijdt het karton op maat.",
+  "exempleFr": "La machine découpe le carton sur mesure.",
+  "freq": 4.17
+ },
+ {
+  "infinitief": "spelen",
+  "fr": "jouer",
+  "present": {
+   "ik": "speel",
+   "jij": "speelt",
+   "hij": "speelt",
+   "wij": "spelen"
+  },
+  "preteritum": "speelde",
+  "participePasse": "gespeeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Prijs speelt een grote rol in de keuze van de klant.",
+  "exempleFr": "Le prix joue un grand rôle dans le choix du client.",
+  "freq": 5.47
+ },
+ {
+  "infinitief": "spreken",
+  "fr": "parler",
+  "present": {
+   "ik": "spreek",
+   "jij": "spreekt",
+   "hij": "spreekt",
+   "wij": "spreken"
+  },
+  "preteritum": "sprak",
+  "participePasse": "gesproken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij spreekt vloeiend Nederlands met de klanten.",
+  "exempleFr": "Elle parle couramment néerlandais avec les clients.",
+  "freq": 5.04
+ },
+ {
+  "infinitief": "springen",
+  "fr": "sauter",
+  "present": {
+   "ik": "spring",
+   "jij": "springt",
+   "hij": "springt",
+   "wij": "springen"
+  },
+  "preteritum": "sprong",
+  "participePasse": "gesprongen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De prijzen springen omhoog door de grondstoffenschaarste.",
+  "exempleFr": "Les prix bondissent à cause de la pénurie de matières premières.",
+  "freq": 4.45
+ },
+ {
+  "infinitief": "staan",
+  "fr": "être debout",
+  "present": {
+   "ik": "sta",
+   "jij": "staat",
+   "hij": "staat",
+   "wij": "staan"
+  },
+  "preteritum": "stond",
+  "participePasse": "gestaan",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het pakket staat klaar bij de uitgang.",
+  "exempleFr": "Le colis est prêt près de la sortie.",
+  "freq": 5.71
+ },
+ {
+  "infinitief": "stappen",
+  "fr": "marcher / monter (véhicule)",
+  "present": {
+   "ik": "stap",
+   "jij": "stapt",
+   "hij": "stapt",
+   "wij": "stappen"
+  },
+  "preteritum": "stapte",
+  "participePasse": "gestapt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant stapt in het nieuwe abonnement.",
+  "exempleFr": "Le client passe au nouvel abonnement.",
+  "freq": 4.86
+ },
+ {
+  "infinitief": "steken",
+  "fr": "piquer / mettre",
+  "present": {
+   "ik": "steek",
+   "jij": "steekt",
+   "hij": "steekt",
+   "wij": "steken"
+  },
+  "preteritum": "stak",
+  "participePasse": "gestoken",
+  "auxiliaire": "hebben",
+  "exempleNl": "De operator steekt het label op de doos.",
+  "exempleFr": "L'opérateur place l'étiquette sur la boîte.",
+  "freq": 4.68
+ },
+ {
+  "infinitief": "stellen",
+  "fr": "poser / placer",
+  "present": {
+   "ik": "stel",
+   "jij": "stelt",
+   "hij": "stelt",
+   "wij": "stellen"
+  },
+  "preteritum": "stelde",
+  "participePasse": "gesteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant stelt een vraag over de levertermijn.",
+  "exempleFr": "Le client pose une question sur le délai de livraison.",
+  "freq": 5.23
+ },
+ {
+  "infinitief": "sterven",
+  "fr": "mourir",
+  "present": {
+   "ik": "sterf",
+   "jij": "sterft",
+   "hij": "sterft",
+   "wij": "sterven"
+  },
+  "preteritum": "stierf",
+  "participePasse": "gestorven",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het merk sterft langzaam uit door de concurrentie.",
+  "exempleFr": "La marque disparaît lentement à cause de la concurrence.",
+  "freq": 4.62
+ },
+ {
+  "infinitief": "stijgen",
+  "fr": "augmenter / monter",
+  "present": {
+   "ik": "stijg",
+   "jij": "stijgt",
+   "hij": "stijgt",
+   "wij": "stijgen"
+  },
+  "preteritum": "steeg",
+  "participePasse": "gestegen",
+  "auxiliaire": "zijn",
+  "exempleNl": "De prijzen stijgen door de inflatie.",
+  "exempleFr": "Les prix augmentent à cause de l'inflation.",
+  "freq": 4.21
+ },
+ {
+  "infinitief": "stoppen",
+  "fr": "s'arrêter / cesser",
+  "present": {
+   "ik": "stop",
+   "jij": "stopt",
+   "hij": "stopt",
+   "wij": "stoppen"
+  },
+  "preteritum": "stopte",
+  "participePasse": "gestopt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De productie stopt tijdens het onderhoud.",
+  "exempleFr": "La production s'arrête pendant la maintenance.",
+  "freq": 5.1
+ },
+ {
+  "infinitief": "studeren",
+  "fr": "étudier",
+  "present": {
+   "ik": "studeer",
+   "jij": "studeert",
+   "hij": "studeert",
+   "wij": "studeren"
+  },
+  "preteritum": "studeerde",
+  "participePasse": "gestudeerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik studeer 's avonds Nederlands voor mijn werk.",
+  "exempleFr": "J'étudie le néerlandais le soir pour mon travail.",
+  "freq": 4.5
+ },
+ {
+  "infinitief": "sturen",
+  "fr": "envoyer / diriger",
+  "present": {
+   "ik": "stuur",
+   "jij": "stuurt",
+   "hij": "stuurt",
+   "wij": "sturen"
+  },
+  "preteritum": "stuurde",
+  "participePasse": "gestuurd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij sturen de factuur per e-mail.",
+  "exempleFr": "Nous envoyons la facture par e-mail.",
+  "freq": 5.06
+ },
+ {
+  "infinitief": "tekenen",
+  "fr": "dessiner / signer",
+  "present": {
+   "ik": "teken",
+   "jij": "tekent",
+   "hij": "tekent",
+   "wij": "tekenen"
+  },
+  "preteritum": "tekende",
+  "participePasse": "getekend",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant tekent het contract vandaag.",
+  "exempleFr": "Le client signe le contrat aujourd'hui.",
+  "freq": 4.6
+ },
+ {
+  "infinitief": "tellen",
+  "fr": "compter",
+  "present": {
+   "ik": "tel",
+   "jij": "telt",
+   "hij": "telt",
+   "wij": "tellen"
+  },
+  "preteritum": "telde",
+  "participePasse": "geteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De medewerker telt de voorraad elke maand.",
+  "exempleFr": "L'employé compte le stock chaque mois.",
+  "freq": 4.39
+ },
+ {
+  "infinitief": "tonen",
+  "fr": "montrer",
+  "present": {
+   "ik": "toon",
+   "jij": "toont",
+   "hij": "toont",
+   "wij": "tonen"
+  },
+  "preteritum": "toonde",
+  "participePasse": "getoond",
+  "auxiliaire": "hebben",
+  "exempleNl": "De grafiek toont een duidelijke trend.",
+  "exempleFr": "Le graphique montre une tendance claire.",
+  "freq": 4.73
+ },
+ {
+  "infinitief": "trekken",
+  "fr": "tirer",
+  "present": {
+   "ik": "trek",
+   "jij": "trekt",
+   "hij": "trekt",
+   "wij": "trekken"
+  },
+  "preteritum": "trok",
+  "participePasse": "getrokken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze promotie trekt veel nieuwe klanten aan.",
+  "exempleFr": "Cette promotion attire beaucoup de nouveaux clients.",
+  "freq": 4.97
+ },
+ {
+  "infinitief": "trouwen",
+  "fr": "se marier",
+  "present": {
+   "ik": "trouw",
+   "jij": "trouwt",
+   "hij": "trouwt",
+   "wij": "trouwen"
+  },
+  "preteritum": "trouwde",
+  "participePasse": "getrouwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Een collega trouwt volgend jaar in juni.",
+  "exempleFr": "Un collègue se marie en juin l'année prochaine.",
+  "freq": 4.61
+ },
+ {
+  "infinitief": "vallen",
+  "fr": "tomber",
+  "present": {
+   "ik": "val",
+   "jij": "valt",
+   "hij": "valt",
+   "wij": "vallen"
+  },
+  "preteritum": "viel",
+  "participePasse": "gevallen",
+  "auxiliaire": "zijn",
+  "exempleNl": "De verkoop valt terug in de zomer.",
+  "exempleFr": "Les ventes chutent en été.",
+  "freq": 5.16
+ },
+ {
+  "infinitief": "vangen",
+  "fr": "attraper",
+  "present": {
+   "ik": "vang",
+   "jij": "vangt",
+   "hij": "vangt",
+   "wij": "vangen"
+  },
+  "preteritum": "ving",
+  "participePasse": "gevangen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij vangen de vertraging op met extra personeel.",
+  "exempleFr": "Nous compensons le retard avec du personnel supplémentaire.",
+  "freq": 4.47
+ },
+ {
+  "infinitief": "varen",
+  "fr": "naviguer",
+  "present": {
+   "ik": "vaar",
+   "jij": "vaart",
+   "hij": "vaart",
+   "wij": "varen"
+  },
+  "preteritum": "voer",
+  "participePasse": "gevaren",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het schip vaart elke week naar Antwerpen.",
+  "exempleFr": "Le bateau navigue vers Anvers chaque semaine.",
+  "freq": 4.29
+ },
+ {
+  "infinitief": "vechten",
+  "fr": "se battre",
+  "present": {
+   "ik": "vech",
+   "jij": "vecht",
+   "hij": "vecht",
+   "wij": "vechten"
+  },
+  "preteritum": "vocht",
+  "participePasse": "gevochten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De verkopers vechten voor elke klant.",
+  "exempleFr": "Les vendeurs se battent pour chaque client.",
+  "freq": 4.7
+ },
+ {
+  "infinitief": "veranderen",
+  "fr": "changer",
+  "present": {
+   "ik": "verander",
+   "jij": "verandert",
+   "hij": "verandert",
+   "wij": "veranderen"
+  },
+  "preteritum": "veranderde",
+  "participePasse": "veranderd",
+  "auxiliaire": "zijn",
+  "exempleNl": "De regelgeving verandert volgend jaar.",
+  "exempleFr": "La réglementation change l'année prochaine.",
+  "freq": 5.11
+ },
+ {
+  "infinitief": "verbeteren",
+  "fr": "améliorer / corriger",
+  "present": {
+   "ik": "verbeter",
+   "jij": "verbetert",
+   "hij": "verbetert",
+   "wij": "verbeteren"
+  },
+  "preteritum": "verbeterde",
+  "participePasse": "verbeterd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team verbetert de levertijd elke maand.",
+  "exempleFr": "L'équipe améliore le délai de livraison chaque mois.",
+  "freq": 4.74
+ },
+ {
+  "infinitief": "verbinden",
+  "fr": "relier",
+  "present": {
+   "ik": "verbind",
+   "jij": "verbindt",
+   "hij": "verbindt",
+   "wij": "verbinden"
+  },
+  "preteritum": "verbond",
+  "participePasse": "verbonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Dit systeem verbindt alle afdelingen met elkaar.",
+  "exempleFr": "Ce système relie tous les départements entre eux.",
+  "freq": 4.21
+ },
+ {
+  "infinitief": "verdedigen",
+  "fr": "défendre",
+  "present": {
+   "ik": "verdedig",
+   "jij": "verdedigt",
+   "hij": "verdedigt",
+   "wij": "verdedigen"
+  },
+  "preteritum": "verdedigde",
+  "participePasse": "verdedigd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De advocaat verdedigt de belangen van het bedrijf.",
+  "exempleFr": "L'avocat défend les intérêts de l'entreprise.",
+  "freq": 4.44
+ },
+ {
+  "infinitief": "verdelen",
+  "fr": "partager / répartir",
+  "present": {
+   "ik": "verdeel",
+   "jij": "verdeelt",
+   "hij": "verdeelt",
+   "wij": "verdelen"
+  },
+  "preteritum": "verdeelde",
+  "participePasse": "verdeeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij verdelen de taken over het hele team.",
+  "exempleFr": "Nous répartissons les tâches sur toute l'équipe.",
+  "freq": 4.1
+ },
+ {
+  "infinitief": "verdienen",
+  "fr": "gagner (argent) / mériter",
+  "present": {
+   "ik": "verdien",
+   "jij": "verdient",
+   "hij": "verdient",
+   "wij": "verdienen"
+  },
+  "preteritum": "verdiende",
+  "participePasse": "verdiend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf verdient goed aan deze nieuwe klant.",
+  "exempleFr": "L'entreprise gagne bien avec ce nouveau client.",
+  "freq": 4.85
+ },
+ {
+  "infinitief": "vergelijken",
+  "fr": "comparer",
+  "present": {
+   "ik": "vergelijk",
+   "jij": "vergelijkt",
+   "hij": "vergelijkt",
+   "wij": "vergelijken"
+  },
+  "preteritum": "vergeleek",
+  "participePasse": "vergeleken",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij vergelijken drie leveranciers voor deze opdracht.",
+  "exempleFr": "Nous comparons trois fournisseurs pour cette mission.",
+  "freq": 4.43
+ },
+ {
+  "infinitief": "vergeten",
+  "fr": "oublier",
+  "present": {
+   "ik": "vergee",
+   "jij": "vergeet",
+   "hij": "vergeet",
+   "wij": "vergeten"
+  },
+  "preteritum": "vergat",
+  "participePasse": "vergeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Vergeet de handtekening op het contract niet.",
+  "exempleFr": "N'oublie pas la signature sur le contrat.",
+  "freq": 5.2
+ },
+ {
+  "infinitief": "verhuizen",
+  "fr": "déménager",
+  "present": {
+   "ik": "verhuis",
+   "jij": "verhuist",
+   "hij": "verhuist",
+   "wij": "verhuizen"
+  },
+  "preteritum": "verhuisde",
+  "participePasse": "verhuisd",
+  "auxiliaire": "zijn",
+  "exempleNl": "Het bedrijf verhuist naar een groter kantoor.",
+  "exempleFr": "L'entreprise déménage dans un bureau plus grand.",
+  "freq": 4.42
+ },
+ {
+  "infinitief": "verklaren",
+  "fr": "déclarer / expliquer",
+  "present": {
+   "ik": "verklaar",
+   "jij": "verklaart",
+   "hij": "verklaart",
+   "wij": "verklaren"
+  },
+  "preteritum": "verklaarde",
+  "participePasse": "verklaard",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager verklaart de nieuwe strategie aan het team.",
+  "exempleFr": "Le manager explique la nouvelle stratégie à l'équipe.",
+  "freq": 4.39
+ },
+ {
+  "infinitief": "verkopen",
+  "fr": "vendre",
+  "present": {
+   "ik": "verkoop",
+   "jij": "verkoopt",
+   "hij": "verkoopt",
+   "wij": "verkopen"
+  },
+  "preteritum": "verkocht",
+  "participePasse": "verkocht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij verkopen dit product vooral online.",
+  "exempleFr": "Nous vendons ce produit surtout en ligne.",
+  "freq": 4.88
+ },
+ {
+  "infinitief": "verlaten",
+  "fr": "quitter",
+  "present": {
+   "ik": "verlaa",
+   "jij": "verlaat",
+   "hij": "verlaat",
+   "wij": "verlaten"
+  },
+  "preteritum": "verliet",
+  "participePasse": "verlaten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Twee medewerkers verlaten het bedrijf dit jaar.",
+  "exempleFr": "Deux employés quittent l'entreprise cette année.",
+  "freq": 4.94
+ },
+ {
+  "infinitief": "verlengen",
+  "fr": "prolonger",
+  "present": {
+   "ik": "verleng",
+   "jij": "verlengt",
+   "hij": "verlengt",
+   "wij": "verlengen"
+  },
+  "preteritum": "verlengde",
+  "participePasse": "verlengd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij verlengen het contract met een jaar.",
+  "exempleFr": "Nous prolongeons le contrat d'un an.",
+  "freq": 4.11
+ },
+ {
+  "infinitief": "verliezen",
+  "fr": "perdre",
+  "present": {
+   "ik": "verlies",
+   "jij": "verliest",
+   "hij": "verliest",
+   "wij": "verliezen"
+  },
+  "preteritum": "verloor",
+  "participePasse": "verloren",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf verliest een belangrijke klant.",
+  "exempleFr": "L'entreprise perd un client important.",
+  "freq": 4.83
+ },
+ {
+  "infinitief": "vermijden",
+  "fr": "éviter",
+  "present": {
+   "ik": "vermijd",
+   "jij": "vermijdt",
+   "hij": "vermijdt",
+   "wij": "vermijden"
+  },
+  "preteritum": "vermeed",
+  "participePasse": "vermeden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij vermijden onnodige transportkosten.",
+  "exempleFr": "Nous évitons des frais de transport inutiles.",
+  "freq": 4.29
+ },
+ {
+  "infinitief": "vermoeden",
+  "fr": "soupçonner",
+  "present": {
+   "ik": "vermoed",
+   "jij": "vermoedt",
+   "hij": "vermoedt",
+   "wij": "vermoeden"
+  },
+  "preteritum": "vermoedde",
+  "participePasse": "vermoed",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik vermoed een fout in de facturatie.",
+  "exempleFr": "Je soupçonne une erreur dans la facturation.",
+  "freq": 4.3
+ },
+ {
+  "infinitief": "verpakken",
+  "fr": "emballer",
+  "present": {
+   "ik": "verpak",
+   "jij": "verpakt",
+   "hij": "verpakt",
+   "wij": "verpakken"
+  },
+  "preteritum": "verpakte",
+  "participePasse": "verpakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De medewerker verpakt de bestelling zorgvuldig.",
+  "exempleFr": "L'employé emballe la commande avec soin.",
+  "freq": 3.28
+ },
+ {
+  "infinitief": "verrassen",
+  "fr": "surprendre",
+  "present": {
+   "ik": "verras",
+   "jij": "verrast",
+   "hij": "verrast",
+   "wij": "verrassen"
+  },
+  "preteritum": "verraste",
+  "participePasse": "verrast",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze cijfers verrassen het hele team positief.",
+  "exempleFr": "Ces chiffres surprennent toute l'équipe positivement.",
+  "freq": 4.04
+ },
+ {
+  "infinitief": "verschillen",
+  "fr": "différer",
+  "present": {
+   "ik": "verschil",
+   "jij": "verschilt",
+   "hij": "verschilt",
+   "wij": "verschillen"
+  },
+  "preteritum": "verschilde",
+  "participePasse": "verschild",
+  "auxiliaire": "hebben",
+  "exempleNl": "De prijzen verschillen sterk per regio.",
+  "exempleFr": "Les prix diffèrent fortement selon la région.",
+  "freq": 4.68
+ },
+ {
+  "infinitief": "vertellen",
+  "fr": "raconter",
+  "present": {
+   "ik": "vertel",
+   "jij": "vertelt",
+   "hij": "vertelt",
+   "wij": "vertellen"
+  },
+  "preteritum": "vertelde",
+  "participePasse": "verteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De manager vertelt over de nieuwe strategie.",
+  "exempleFr": "Le manager parle de la nouvelle stratégie.",
+  "freq": 5.17
+ },
+ {
+  "infinitief": "vertrekken",
+  "fr": "partir",
+  "present": {
+   "ik": "vertrek",
+   "jij": "vertrekt",
+   "hij": "vertrekt",
+   "wij": "vertrekken"
+  },
+  "preteritum": "vertrok",
+  "participePasse": "vertrokken",
+  "auxiliaire": "zijn",
+  "exempleNl": "De vrachtwagen vertrekt om zes uur 's ochtends.",
+  "exempleFr": "Le camion part à six heures du matin.",
+  "freq": 4.57
+ },
+ {
+  "infinitief": "vertrouwen",
+  "fr": "faire confiance",
+  "present": {
+   "ik": "vertrouw",
+   "jij": "vertrouwt",
+   "hij": "vertrouwt",
+   "wij": "vertrouwen"
+  },
+  "preteritum": "vertrouwde",
+  "participePasse": "vertrouwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij vertrouwen op een langdurige samenwerking.",
+  "exempleFr": "Nous faisons confiance à une collaboration durable.",
+  "freq": 5.06
+ },
+ {
+  "infinitief": "vervangen",
+  "fr": "remplacer",
+  "present": {
+   "ik": "vervang",
+   "jij": "vervangt",
+   "hij": "vervangt",
+   "wij": "vervangen"
+  },
+  "preteritum": "verving",
+  "participePasse": "vervangen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De technicus vervangt het defecte onderdeel.",
+  "exempleFr": "Le technicien remplace la pièce défectueuse.",
+  "freq": 4.87
+ },
+ {
+  "infinitief": "verven",
+  "fr": "peindre",
+  "present": {
+   "ik": "verf",
+   "jij": "verft",
+   "hij": "verft",
+   "wij": "verven"
+  },
+  "preteritum": "verfde",
+  "participePasse": "geverfd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf verft de gevel van het magazijn.",
+  "exempleFr": "L'entreprise peint la façade de l'entrepôt.",
+  "freq": 3.86
+ },
+ {
+  "infinitief": "verzamelen",
+  "fr": "collectionner / rassembler",
+  "present": {
+   "ik": "verzamel",
+   "jij": "verzamelt",
+   "hij": "verzamelt",
+   "wij": "verzamelen"
+  },
+  "preteritum": "verzamelde",
+  "participePasse": "verzameld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij verzamelen alle gegevens in één dashboard.",
+  "exempleFr": "Nous rassemblons toutes les données dans un seul tableau de bord.",
+  "freq": 4.53
+ },
+ {
+  "infinitief": "verzekeren",
+  "fr": "assurer",
+  "present": {
+   "ik": "verzeker",
+   "jij": "verzekert",
+   "hij": "verzekert",
+   "wij": "verzekeren"
+  },
+  "preteritum": "verzekerde",
+  "participePasse": "verzekerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf verzekert al zijn transporten.",
+  "exempleFr": "L'entreprise assure tous ses transports.",
+  "freq": 4.09
+ },
+ {
+  "infinitief": "verzenden",
+  "fr": "expédier",
+  "present": {
+   "ik": "verzend",
+   "jij": "verzendt",
+   "hij": "verzendt",
+   "wij": "verzenden"
+  },
+  "preteritum": "verzond",
+  "participePasse": "verzonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij verzenden de bestelling nog vandaag.",
+  "exempleFr": "Nous expédions la commande dès aujourd'hui.",
+  "freq": 3.6
+ },
+ {
+  "infinitief": "verzorgen",
+  "fr": "soigner",
+  "present": {
+   "ik": "verzorg",
+   "jij": "verzorgt",
+   "hij": "verzorgt",
+   "wij": "verzorgen"
+  },
+  "preteritum": "verzorgde",
+  "participePasse": "verzorgd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De HR-dienst verzorgt het onthaal van nieuwe medewerkers.",
+  "exempleFr": "Le service RH s'occupe de l'accueil des nouveaux employés.",
+  "freq": 4.17
+ },
+ {
+  "infinitief": "vinden",
+  "fr": "trouver",
+  "present": {
+   "ik": "vind",
+   "jij": "vindt",
+   "hij": "vindt",
+   "wij": "vinden"
+  },
+  "preteritum": "vond",
+  "participePasse": "gevonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik vind deze oplossing erg interessant.",
+  "exempleFr": "Je trouve cette solution très intéressante.",
+  "freq": 5.75
+ },
+ {
+  "infinitief": "vliegen",
+  "fr": "voler (air)",
+  "present": {
+   "ik": "vlieg",
+   "jij": "vliegt",
+   "hij": "vliegt",
+   "wij": "vliegen"
+  },
+  "preteritum": "vloog",
+  "participePasse": "gevlogen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De consultant vliegt volgende week naar Duitsland.",
+  "exempleFr": "Le consultant s'envole pour l'Allemagne la semaine prochaine.",
+  "freq": 4.74
+ },
+ {
+  "infinitief": "voelen",
+  "fr": "sentir / ressentir",
+  "present": {
+   "ik": "voel",
+   "jij": "voelt",
+   "hij": "voelt",
+   "wij": "voelen"
+  },
+  "preteritum": "voelde",
+  "participePasse": "gevoeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het team voelt de druk van de deadline.",
+  "exempleFr": "L'équipe ressent la pression du délai.",
+  "freq": 5.04
+ },
+ {
+  "infinitief": "voeren",
+  "fr": "mener / nourrir",
+  "present": {
+   "ik": "voer",
+   "jij": "voert",
+   "hij": "voert",
+   "wij": "voeren"
+  },
+  "preteritum": "voerde",
+  "participePasse": "gevoerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij voeren dit project samen met de klant.",
+  "exempleFr": "Nous menons ce projet avec le client.",
+  "freq": 4.87
+ },
+ {
+  "infinitief": "volgen",
+  "fr": "suivre",
+  "present": {
+   "ik": "volg",
+   "jij": "volgt",
+   "hij": "volgt",
+   "wij": "volgen"
+  },
+  "preteritum": "volgde",
+  "participePasse": "gevolgd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De stagiair volgt een opleiding logistiek.",
+  "exempleFr": "Le stagiaire suit une formation en logistique.",
+  "freq": 5.27
+ },
+ {
+  "infinitief": "voorbereiden",
+  "fr": "préparer",
+  "present": {
+   "ik": "bereid voor",
+   "jij": "bereidt voor",
+   "hij": "bereidt voor",
+   "wij": "voorbereiden"
+  },
+  "preteritum": "bereidde voor",
+  "participePasse": "voorbereid",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik bereid het gesprek met de klant goed voor.",
+  "exempleFr": "Je prépare bien l'entretien avec le client.",
+  "freq": 4.26
+ },
+ {
+  "infinitief": "voorkomen",
+  "fr": "prévenir / arriver",
+  "present": {
+   "ik": "voorkom",
+   "jij": "voorkomt",
+   "hij": "voorkomt",
+   "wij": "voorkomen"
+  },
+  "preteritum": "kwam voor",
+  "participePasse": "voorgekomen",
+  "auxiliaire": "zijn",
+  "exempleNl": "Deze controle voorkomt fouten in de levering.",
+  "exempleFr": "Ce contrôle prévient les erreurs de livraison.",
+  "freq": 5.11
+ },
+ {
+  "infinitief": "voorspellen",
+  "fr": "prédir",
+  "present": {
+   "ik": "voorspel",
+   "jij": "voorspelt",
+   "hij": "voorspelt",
+   "wij": "voorspellen"
+  },
+  "preteritum": "voorspelde",
+  "participePasse": "voorspeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De analist voorspelt een stijging van de vraag.",
+  "exempleFr": "L'analyste prédit une hausse de la demande.",
+  "freq": 3.99
+ },
+ {
+  "infinitief": "voorstellen",
+  "fr": "présenter",
+  "present": {
+   "ik": "stel voor",
+   "jij": "stelt voor",
+   "hij": "stelt voor",
+   "wij": "voorstellen"
+  },
+  "preteritum": "stelde voor",
+  "participePasse": "voorgesteld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De consultant stelt een nieuwe aanpak voor.",
+  "exempleFr": "Le consultant propose une nouvelle approche.",
+  "freq": 4.79
+ },
+ {
+  "infinitief": "vormen",
+  "fr": "former",
+  "present": {
+   "ik": "vorm",
+   "jij": "vormt",
+   "hij": "vormt",
+   "wij": "vormen"
+  },
+  "preteritum": "vormde",
+  "participePasse": "gevormd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze drie diensten vormen samen de supply chain.",
+  "exempleFr": "Ces trois services forment ensemble la supply chain.",
+  "freq": 5.11
+ },
+ {
+  "infinitief": "vragen",
+  "fr": "demander",
+  "present": {
+   "ik": "vraag",
+   "jij": "vraagt",
+   "hij": "vraagt",
+   "wij": "vragen"
+  },
+  "preteritum": "vroeg",
+  "participePasse": "gevraagd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant vraagt om een offerte.",
+  "exempleFr": "Le client demande un devis.",
+  "freq": 5.65
+ },
+ {
+  "infinitief": "vriezen",
+  "fr": "geler",
+  "present": {
+   "ik": "vries",
+   "jij": "vriest",
+   "hij": "vriest",
+   "wij": "vriezen"
+  },
+  "preteritum": "vroor",
+  "participePasse": "gevroren",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het vriest in de koelopslag van het magazijn.",
+  "exempleFr": "Il gèle dans l'entrepôt frigorifique.",
+  "freq": 3.24
+ },
+ {
+  "infinitief": "vullen",
+  "fr": "remplir",
+  "present": {
+   "ik": "vul",
+   "jij": "vult",
+   "hij": "vult",
+   "wij": "vullen"
+  },
+  "preteritum": "vulde",
+  "participePasse": "gevuld",
+  "auxiliaire": "hebben",
+  "exempleNl": "De operator vult de dozen met producten.",
+  "exempleFr": "L'opérateur remplit les boîtes de produits.",
+  "freq": 4.38
+ },
+ {
+  "infinitief": "waarschuwen",
+  "fr": "avertir",
+  "present": {
+   "ik": "waarschuw",
+   "jij": "waarschuwt",
+   "hij": "waarschuwt",
+   "wij": "waarschuwen"
+  },
+  "preteritum": "waarschuwde",
+  "participePasse": "gewaarschuwd",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het systeem waarschuwt bij een tekort in de voorraad.",
+  "exempleFr": "Le système avertit en cas de rupture de stock.",
+  "freq": 4.18
+ },
+ {
+  "infinitief": "wachten",
+  "fr": "attendre",
+  "present": {
+   "ik": "wach",
+   "jij": "wacht",
+   "hij": "wacht",
+   "wij": "wachten"
+  },
+  "preteritum": "wachtte",
+  "participePasse": "gewacht",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant wacht al twee weken op zijn pakket.",
+  "exempleFr": "Le client attend son colis depuis deux semaines.",
+  "freq": 5.36
+ },
+ {
+  "infinitief": "wandelen",
+  "fr": "se promener",
+  "present": {
+   "ik": "wandel",
+   "jij": "wandelt",
+   "hij": "wandelt",
+   "wij": "wandelen"
+  },
+  "preteritum": "wandelde",
+  "participePasse": "gewandeld",
+  "auxiliaire": "hebben",
+  "exempleNl": "Tijdens de pauze wandelen enkele collega's buiten.",
+  "exempleFr": "Pendant la pause, quelques collègues se promènent dehors.",
+  "freq": 4.43
+ },
+ {
+  "infinitief": "wassen",
+  "fr": "laver",
+  "present": {
+   "ik": "was",
+   "jij": "wast",
+   "hij": "wast",
+   "wij": "wassen"
+  },
+  "preteritum": "waste",
+  "participePasse": "gewassen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De medewerker wast de handen voor het werk in het magazijn.",
+  "exempleFr": "L'employé se lave les mains avant le travail à l'entrepôt.",
+  "freq": 4.23
+ },
+ {
+  "infinitief": "weigeren",
+  "fr": "refuser",
+  "present": {
+   "ik": "weiger",
+   "jij": "weigert",
+   "hij": "weigert",
+   "wij": "weigeren"
+  },
+  "preteritum": "weigerde",
+  "participePasse": "geweigerd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant weigert het beschadigde pakket.",
+  "exempleFr": "Le client refuse le colis endommagé.",
+  "freq": 4.27
+ },
+ {
+  "infinitief": "wekken",
+  "fr": "éveiller",
+  "present": {
+   "ik": "wek",
+   "jij": "wekt",
+   "hij": "wekt",
+   "wij": "wekken"
+  },
+  "preteritum": "wekte",
+  "participePasse": "gewekt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze resultaten wekken vertrouwen bij de investeerders.",
+  "exempleFr": "Ces résultats suscitent la confiance des investisseurs.",
+  "freq": 3.95
+ },
+ {
+  "infinitief": "wenen",
+  "fr": "pleurer",
+  "present": {
+   "ik": "ween",
+   "jij": "weent",
+   "hij": "weent",
+   "wij": "wenen"
+  },
+  "preteritum": "weende",
+  "participePasse": "geweend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Zij weende van opluchting na het behalen van het doel.",
+  "exempleFr": "Elle a pleuré de soulagement après avoir atteint l'objectif.",
+  "freq": 4.27
+ },
+ {
+  "infinitief": "wennen",
+  "fr": "s'habituer",
+  "present": {
+   "ik": "wen",
+   "jij": "went",
+   "hij": "went",
+   "wij": "wennen"
+  },
+  "preteritum": "wende",
+  "participePasse": "gewend",
+  "auxiliaire": "hebben",
+  "exempleNl": "Nieuwe medewerkers wennen snel aan het systeem.",
+  "exempleFr": "Les nouveaux employés s'habituent vite au système.",
+  "freq": 4.24
+ },
+ {
+  "infinitief": "wensen",
+  "fr": "souhaiter",
+  "present": {
+   "ik": "wens",
+   "jij": "wenst",
+   "hij": "wenst",
+   "wij": "wensen"
+  },
+  "preteritum": "wenste",
+  "participePasse": "gewenst",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant wenst een snellere levering.",
+  "exempleFr": "Le client souhaite une livraison plus rapide.",
+  "freq": 4.7
+ },
+ {
+  "infinitief": "werken",
+  "fr": "travailler",
+  "present": {
+   "ik": "werk",
+   "jij": "werkt",
+   "hij": "werkt",
+   "wij": "werken"
+  },
+  "preteritum": "werkte",
+  "participePasse": "gewerkt",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik werk elke dag met dit softwareprogramma.",
+  "exempleFr": "Je travaille chaque jour avec ce logiciel.",
+  "freq": 5.65
+ },
+ {
+  "infinitief": "werpen",
+  "fr": "jeter",
+  "present": {
+   "ik": "werp",
+   "jij": "werpt",
+   "hij": "werpt",
+   "wij": "werpen"
+  },
+  "preteritum": "wierp",
+  "participePasse": "geworpen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Deze cijfers werpen een nieuw licht op de markt.",
+  "exempleFr": "Ces chiffres jettent un nouvel éclairage sur le marché.",
+  "freq": 3.92
+ },
+ {
+  "infinitief": "weten",
+  "fr": "savoir",
+  "present": {
+   "ik": "weet",
+   "jij": "weet",
+   "hij": "weet",
+   "wij": "weten"
+  },
+  "preteritum": "wist",
+  "participePasse": "geweten",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik weet niet zeker of de levering op tijd komt.",
+  "exempleFr": "Je ne sais pas avec certitude si la livraison arrivera à temps.",
+  "freq": 5.73
+ },
+ {
+  "infinitief": "wijzen",
+  "fr": "indiquer",
+  "present": {
+   "ik": "wijs",
+   "jij": "wijst",
+   "hij": "wijst",
+   "wij": "wijzen"
+  },
+  "preteritum": "wees",
+  "participePasse": "gewezen",
+  "auxiliaire": "hebben",
+  "exempleNl": "De cijfers wijzen op een positieve trend.",
+  "exempleFr": "Les chiffres indiquent une tendance positive.",
+  "freq": 4.55
+ },
+ {
+  "infinitief": "willen",
+  "fr": "vouloir",
+  "present": {
+   "ik": "wil",
+   "jij": "wilt",
+   "hij": "wil",
+   "wij": "willen"
+  },
+  "preteritum": "wilde / wou",
+  "participePasse": "gewild",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik wil deze klant graag zo snel mogelijk helpen.",
+  "exempleFr": "Je veux aider ce client le plus vite possible.",
+  "freq": 5.81
+ },
+ {
+  "infinitief": "winnen",
+  "fr": "gagner",
+  "present": {
+   "ik": "win",
+   "jij": "wint",
+   "hij": "wint",
+   "wij": "winnen"
+  },
+  "preteritum": "won",
+  "participePasse": "gewonnen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Het bedrijf wint een belangrijke aanbesteding.",
+  "exempleFr": "L'entreprise remporte un appel d'offres important.",
+  "freq": 5.0
+ },
+ {
+  "infinitief": "wonen",
+  "fr": "habiter",
+  "present": {
+   "ik": "woon",
+   "jij": "woont",
+   "hij": "woont",
+   "wij": "wonen"
+  },
+  "preteritum": "woonde",
+  "participePasse": "gewoond",
+  "auxiliaire": "hebben",
+  "exempleNl": "De nieuwe klant woont in Antwerpen.",
+  "exempleFr": "Le nouveau client habite à Anvers.",
+  "freq": 5.14
+ },
+ {
+  "infinitief": "worden",
+  "fr": "devenir",
+  "present": {
+   "ik": "word",
+   "jij": "wordt",
+   "hij": "wordt",
+   "wij": "worden"
+  },
+  "preteritum": "werd",
+  "participePasse": "geworden",
+  "auxiliaire": "zijn",
+  "exempleNl": "Zij wordt volgende maand teamleider.",
+  "exempleFr": "Elle devient chef d'équipe le mois prochain.",
+  "freq": 6.38
+ },
+ {
+  "infinitief": "zakken",
+  "fr": "échouer / descendre",
+  "present": {
+   "ik": "zak",
+   "jij": "zakt",
+   "hij": "zakt",
+   "wij": "zakken"
+  },
+  "preteritum": "zakte",
+  "participePasse": "gezakt",
+  "auxiliaire": "hebben",
+  "exempleNl": "De verkoopcijfers zakken tijdens de vakantieperiode.",
+  "exempleFr": "Les chiffres de vente baissent pendant les vacances.",
+  "freq": 4.52
+ },
+ {
+  "infinitief": "zeggen",
+  "fr": "dire",
+  "present": {
+   "ik": "zeg",
+   "jij": "zegt",
+   "hij": "zegt",
+   "wij": "zeggen"
+  },
+  "preteritum": "zei",
+  "participePasse": "gezegd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klant zegt tevreden te zijn over de service.",
+  "exempleFr": "Le client dit être satisfait du service.",
+  "freq": 5.71
+ },
+ {
+  "infinitief": "zenden",
+  "fr": "envoyer",
+  "present": {
+   "ik": "zend",
+   "jij": "zendt",
+   "hij": "zendt",
+   "wij": "zenden"
+  },
+  "preteritum": "zond",
+  "participePasse": "gezonden",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij zenden het contract per post.",
+  "exempleFr": "Nous envoyons le contrat par courrier.",
+  "freq": 3.93
+ },
+ {
+  "infinitief": "zetten",
+  "fr": "mettre / poser",
+  "present": {
+   "ik": "ze",
+   "jij": "zet",
+   "hij": "zet",
+   "wij": "zetten"
+  },
+  "preteritum": "zette",
+  "participePasse": "gezet",
+  "auxiliaire": "hebben",
+  "exempleNl": "De operator zet de doos op de juiste plank.",
+  "exempleFr": "L'opérateur pose la boîte sur la bonne étagère.",
+  "freq": 5.37
+ },
+ {
+  "infinitief": "zien",
+  "fr": "voir",
+  "present": {
+   "ik": "zie",
+   "jij": "ziet",
+   "hij": "ziet",
+   "wij": "zien"
+  },
+  "preteritum": "zag",
+  "participePasse": "gezien",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik zie een duidelijke verbetering in de cijfers.",
+  "exempleFr": "Je vois une nette amélioration dans les chiffres.",
+  "freq": 6.05
+ },
+ {
+  "infinitief": "zijn",
+  "fr": "être",
+  "present": {
+   "ik": "ben",
+   "jij": "bent",
+   "hij": "is",
+   "wij": "zijn"
+  },
+  "preteritum": "was",
+  "participePasse": "geweest",
+  "auxiliaire": "hebben",
+  "exempleNl": "Dit is de belangrijkste klant van het bedrijf.",
+  "exempleFr": "C'est le client le plus important de l'entreprise.",
+  "freq": 6.96
+ },
+ {
+  "infinitief": "zingen",
+  "fr": "chanter",
+  "present": {
+   "ik": "zing",
+   "jij": "zingt",
+   "hij": "zingt",
+   "wij": "zingen"
+  },
+  "preteritum": "zong",
+  "participePasse": "gezongen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Op het jaarlijkse feest zingen de collega's samen.",
+  "exempleFr": "À la fête annuelle, les collègues chantent ensemble.",
+  "freq": 4.76
+ },
+ {
+  "infinitief": "zitten",
+  "fr": "être assis",
+  "present": {
+   "ik": "zi",
+   "jij": "zit",
+   "hij": "zit",
+   "wij": "zitten"
+  },
+  "preteritum": "zat",
+  "participePasse": "gezeten",
+  "auxiliaire": "hebben",
+  "exempleNl": "De klantendienst zit op de tweede verdieping.",
+  "exempleFr": "Le service client se trouve au deuxième étage.",
+  "freq": 5.56
+ },
+ {
+  "infinitief": "zoeken",
+  "fr": "chercher",
+  "present": {
+   "ik": "zoek",
+   "jij": "zoekt",
+   "hij": "zoekt",
+   "wij": "zoeken"
+  },
+  "preteritum": "zocht",
+  "participePasse": "gezocht",
+  "auxiliaire": "hebben",
+  "exempleNl": "Wij zoeken een nieuwe leverancier voor verpakkingen.",
+  "exempleFr": "Nous cherchons un nouveau fournisseur d'emballages.",
+  "freq": 5.33
+ },
+ {
+  "infinitief": "zorgen",
+  "fr": "soigner / veiller à",
+  "present": {
+   "ik": "zorg",
+   "jij": "zorgt",
+   "hij": "zorgt",
+   "wij": "zorgen"
+  },
+  "preteritum": "zorgde",
+  "participePasse": "gezorgd",
+  "auxiliaire": "hebben",
+  "exempleNl": "De planner zorgt voor een vlotte levering.",
+  "exempleFr": "Le planificateur veille à une livraison fluide.",
+  "freq": 5.46
+ },
+ {
+  "infinitief": "zullen",
+  "fr": "auxiliaire futur",
+  "present": {
+   "ik": "zal",
+   "jij": "zult",
+   "hij": "zal",
+   "wij": "zullen"
+  },
+  "preteritum": "zou",
+  "participePasse": "-",
+  "auxiliaire": "hebben",
+  "exempleNl": "Ik zal het dossier morgen afwerken.",
+  "exempleFr": "Je terminerai le dossier demain.",
+  "freq": 5.69
+ },
+ {
+  "infinitief": "zwemmen",
+  "fr": "nager",
+  "present": {
+   "ik": "zwem",
+   "jij": "zwemt",
+   "hij": "zwemt",
+   "wij": "zwemmen"
+  },
+  "preteritum": "zwom",
+  "participePasse": "gezwommen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Sommige collega's zwemmen 's middags tijdens de lange pauze.",
+  "exempleFr": "Certains collègues nagent à midi pendant la longue pause.",
+  "freq": 4.6
+ },
+ {
+  "infinitief": "zwijgen",
+  "fr": "se taire",
+  "present": {
+   "ik": "zwijg",
+   "jij": "zwijgt",
+   "hij": "zwijgt",
+   "wij": "zwijgen"
+  },
+  "preteritum": "zweeg",
+  "participePasse": "gezwegen",
+  "auxiliaire": "hebben",
+  "exempleNl": "Bij twijfel zwijgt de medewerker en vraagt hij advies.",
+  "exempleFr": "En cas de doute, l'employé se tait et demande conseil.",
+  "freq": 4.35
+ }
+]
