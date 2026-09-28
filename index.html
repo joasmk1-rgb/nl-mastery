@@ -18,6 +18,7 @@
         <div class="header-stats">
             <span class="xp-mini-badge" id="xp-mini-badge">⭐ 0 XP</span>
             <div class="xp-badge" id="cecr-badge">A1 • 0%</div>
+            <button class="notif-bell-btn" id="notif-bell-btn" onclick="showNotifications()">🔔<span class="notif-badge" id="notif-badge" style="display:none;">0</span></button>
         </div>
     </header>
 
@@ -32,7 +33,7 @@
     </div>
 
     <div id="wordlist-view" class="view">
-        <button class="back-btn" onclick="showProfil()">← Retour</button>
+        <button class="back-btn" onclick="wordListBack()">← Retour</button>
         <h2>📋 Mots</h2>
         <div class="mots-toggle-row">
             <button id="mots-tab-liste" class="active" onclick="motsShowTab('liste')">📋 Liste</button>
@@ -79,6 +80,63 @@
             <div id="theme-section" style="width:100%;"></div>
             <div id="customlist-section" style="width:100%;"></div>
         </div>
+    </div>
+
+    <!-- ===== Social (amis, demandes, recherche, confidentialité) =====
+         Réutilise le compte Firebase existant (users/{uid}) sans le modifier : les données
+         sociales vivent dans des collections séparées (publicProfiles, friendStats, friendRequests,
+         friendships, notifications). Voir js/app.js pour le détail du modèle. -->
+    <div id="social-view" class="view">
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
+        <h2>👥 Social</h2>
+        <div class="mots-toggle-row">
+            <button id="social-tab-friends" class="active" onclick="socialShowTab('friends')">Amis</button>
+            <button id="social-tab-requests" onclick="socialShowTab('requests')">Demandes</button>
+            <button id="social-tab-challenges" onclick="socialShowTab('challenges')">Défis</button>
+            <button id="social-tab-sessions" onclick="socialShowTab('sessions')">Sessions</button>
+            <button id="social-tab-search" onclick="socialShowTab('search')">Rechercher</button>
+            <button id="social-tab-privacy" onclick="socialShowTab('privacy')">Confidentialité</button>
+        </div>
+
+        <div id="social-panel-friends" class="mots-panel">
+            <div id="social-friends-list" class="hub-grid single"></div>
+            <div id="social-encouragement-picker" style="width:100%; margin-top:var(--space-2);"></div>
+            <div id="social-challenge-picker" style="width:100%; margin-top:var(--space-2);"></div>
+            <div id="social-session-picker" style="width:100%; margin-top:var(--space-2);"></div>
+        </div>
+
+        <div id="social-panel-requests" class="mots-panel" style="display:none;">
+            <div id="social-requests-list" class="hub-grid single"></div>
+        </div>
+
+        <div id="social-panel-challenges" class="mots-panel" style="display:none;">
+            <p class="section-subtitle" style="margin-top:0;">Défie un ami sur une notion précise — c'est votre progression habituelle (le même moteur, les mêmes notions) qui compte, pas un nouveau système de points.</p>
+            <div id="social-challenges-list" class="hub-grid single"></div>
+        </div>
+
+        <div id="social-panel-sessions" class="mots-panel" style="display:none;">
+            <p class="section-subtitle" style="margin-top:0;">Propose un créneau pour réviser ensemble — c'est juste un rendez-vous partagé, pas d'appel ni de synchronisation en direct.</p>
+            <div id="social-sessions-list" class="hub-grid single"></div>
+        </div>
+
+        <div id="social-panel-search" class="mots-panel" style="display:none;">
+            <p class="section-subtitle" style="margin-top:0;">Recherche un pseudo exact (ex. maikel_nl) — pas de recherche floue pour l'instant.</p>
+            <div style="width:100%; display:flex; gap:8px; margin-bottom:10px;">
+                <input type="text" id="social-search-input" placeholder="pseudo à rechercher..." style="margin:0;" onkeydown="if(event.key==='Enter') socialSearch();">
+                <button class="btn btn-green" style="margin:0; width:auto; padding:0 18px;" onclick="socialSearch()">🔍</button>
+            </div>
+            <div id="social-search-result" class="hub-grid single"></div>
+        </div>
+
+        <div id="social-panel-privacy" class="mots-panel" style="display:none;">
+            <div id="social-privacy-content"></div>
+        </div>
+    </div>
+
+    <div id="notifications-view" class="view">
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
+        <h2>🔔 Notifications</h2>
+        <div id="notifications-list" class="hub-grid single"></div>
     </div>
 
     <div id="jouer-view" class="view">
@@ -370,9 +428,12 @@
         <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>📚 Apprendre</h2>
         <div class="quick-access-row" style="margin-bottom:var(--space-3);">
-            <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Comprendre</div></div>
+            <div class="quick-access-card" onclick="apprendreNouvelleNotion()"><div class="qa-icon">🆕</div><div class="qa-label">Nouvelle notion</div></div>
+            <div class="quick-access-card" onclick="showWordList('apprendre')"><div class="qa-icon">📖</div><div class="qa-label">Vocabulaire</div></div>
+            <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Grammaire & structures</div></div>
             <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
         </div>
+        <div class="section-title" style="margin-top:0;">📅 Parcours par niveau</div>
         <div class="level-tab-row" id="level-tab-row"></div>
         <div id="module-list"></div>
     </div>

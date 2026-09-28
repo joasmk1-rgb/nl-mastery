@@ -45,6 +45,8 @@
         .header-title { font-weight: bold; font-size: 1.2rem; }
         .header-stats { display: flex; align-items: center; gap: 8px; }
         .xp-mini-badge { background: var(--surface-2); color: var(--text); padding: 5px 10px; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.78rem; display: flex; align-items: center; gap: 4px; }
+        .notif-bell-btn { position: relative; background: none; border: none; font-size: 1.15rem; cursor: pointer; padding: 4px; line-height: 1; color: var(--text); }
+        .notif-badge { position: absolute; top: -2px; right: -4px; background: var(--wrong); color: white; font-size: 0.62rem; font-weight: 800; min-width: 15px; height: 15px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 3px; line-height: 1; }
 
         /* Navigation & Views */
         .view { display: none; flex-direction: column; align-items: center; padding: 20px; flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -119,8 +121,8 @@
         .wl-badge.review { background: #ffe3b3; color: #b06d00; }
         .wl-badge.mastered { background: #d7f7c2; color: #2f7d00; }
         .wl-badge.true-mastered { background: #2f7d00; color: white; }
-        .mots-toggle-row { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-bottom: var(--space-2); }
-        .mots-toggle-row button { flex: 1; padding: 10px 6px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-weight: 700; cursor: pointer; font-size: 0.82rem; }
+        .mots-toggle-row { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; max-width: 520px; margin-bottom: var(--space-2); }
+        .mots-toggle-row button { flex: 1; min-width: 84px; padding: 10px 6px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-weight: 700; cursor: pointer; font-size: 0.82rem; }
         .mots-toggle-row button.active { border-color: var(--primary); color: var(--primary); }
         .mots-panel { width: 100%; max-width: 520px; }
 
@@ -312,4 +314,19 @@
         }
         @media (min-width: 1000px) {
             body { max-width: 620px; }
+        }
+
+        /* Grand écran desktop (>= 1300px) : au lieu de garder le format "téléphone" minuscule
+           perdu au milieu d'un grand écran, on élargit le cadre et on laisse les grilles de
+           cartes (déjà responsives via auto-fill/1fr) utiliser l'espace en plus. On ne change
+           ni la barre de navigation du bas ni la structure des vues : uniquement des largeurs et
+           des colonnes de grille, donc rien qui puisse casser une vue existante. */
+        @media (min-width: 1300px) {
+            body { max-width: 900px; }
+            .section-title, .section-subtitle, .grid, .hub-grid, .quick-access-row,
+            .intent-grid, #load-error, .mots-toggle-row, .mots-panel, .rp-category-grid,
+            .rp-group-title, .rp-scenario-btn, .rp-config-box, #rp-chat-history, #rp-mic-btn {
+                max-width: 860px;
+            }
+            .grid, .hub-grid:not(.single) { grid-template-columns: repeat(3, 1fr); }
         }

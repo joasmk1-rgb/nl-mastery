@@ -95,6 +95,7 @@ async function accSignup(pseudo, password) {
         await db.collection('users').doc(uid).set(userDoc);
         currentUser = cred.user;
         currentUserDoc = userDoc;
+        await socialEnsureProfileDocs();
         accShowLoggedIn();
     } catch (e) {
         accSetError(accFriendlyError(e));
@@ -143,6 +144,12 @@ function accLogout() {
     auth.signOut();
     currentUser = null;
     currentUserDoc = null;
+    // Évite qu'un cache social (amis, notifications) d'un compte reste visible pour le
+    // prochain utilisateur du même appareil (ex. compte partagé, ordinateur familial).
+    socialDashboardCache = null;
+    notificationsCache = [];
+    const notifBadge = document.getElementById('notif-badge');
+    if (notifBadge) notifBadge.style.display = 'none';
     accShowLoggedOut();
 }
 
@@ -184,6 +191,749 @@ function showCompte() {
     accSwitchTab(accMode);
     if (currentUser) accShowLoggedIn(); else accShowLoggedOut();
     if (!firebaseAvailable) accSetError("Service de comptes indisponible pour le moment (connexion impossible). Ta progression locale reste intacte.");
+}
+
+// ===== Couche sociale (MVP) =====
+// Ne remplace ni ne duplique le compte Firebase existant : `users/{uid}` reste la SEULE source de
+// vérité pour la progression pédagogique (auth, login, logout, sauvegarde, sync — tout est inchangé
+// ci-dessus). Le social vit dans des collections séparées, pensées pour ne jamais pouvoir écraser ou
+// lire la progression d'un autre utilisateur :
+//   usernames/{pseudoLower}   { uid, discoverable }        — existe déjà, on ajoute juste `discoverable`
+//   publicProfiles/{uid}      { uid, pseudo, pseudoLower, createdAt }               — identité publique minimale
+//   friendStats/{uid}         { privacy:{...}, stats:{...}, updatedAt }            — sous-ensemble partageable, écrit par le propriétaire
+//   friendRequests/{pairId}   { fromUid, toUid, fromPseudo, toPseudo, status, createdAt, respondedAt }
+//   friendships/{pairId}      { uids:[a,b], status:'accepted'|'blocked', blockedBy, createdAt }
+//   notifications/{id}        { recipientUid, senderUid, senderPseudo, type, title, message, data, read, createdAt }
+// pairId = les deux uid triés alphabétiquement et joints par "_" : une seule relation possible par
+// paire (jamais de doublon friendRequests+friendships pour les mêmes deux personnes).
+//
+// Confidentialité : `friendStats/{uid}.stats` ne contient QUE les champs que l'utilisateur a choisi
+// de partager (voir socialComputeShareableStats) — la restriction se fait à l'ÉCRITURE (le
+// propriétaire ne publie jamais un champ désactivé), pas en essayant de filtrer à la lecture, ce qui
+// serait impossible à garantir avec Firestore seul. Un ami qui peut lire ce document ne voit donc
+// jamais plus que ce que le propriétaire a explicitement autorisé.
+
+function socialPairId(a, b) { return [a, b].sort().join('_'); }
+
+// Calcule uniquement les statistiques que l'utilisateur autorise à partager (voir doc ci-dessus).
+function socialComputeShareableStats(privacy) {
+    const stats = {};
+    if (privacy.shareLevel) stats.level = curriculumLoaded ? getCurriculumLevel().level : null;
+    if (privacy.shareProgress) {
+        stats.masteredCount = curriculumLoaded
+            ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
+            : 0;
+        stats.xp = state.xp || 0;
+    }
+    if (privacy.shareVocab) stats.vocabPct = getVocabProgress().pct;
+    if (privacy.shareStreak) stats.streak = (state.stats && state.stats.dailyStreak) || 0;
+    return stats;
+}
+
+const SOCIAL_DEFAULT_PRIVACY = { shareLevel: true, shareProgress: true, shareVocab: true, shareStreak: true };
+
+// Crée (ou complète, sans écraser) les documents sociaux d'un compte — appelé après signup ET à
+// chaque reprise de session, pour que les comptes créés avant cette fonctionnalité soient
+// automatiquement mis à niveau (merge:true partout, donc idempotent et sans risque).
+async function socialEnsureProfileDocs() {
+    if (!firebaseAvailable || !currentUser || !currentUserDoc) return;
+    try {
+        const uid = currentUser.uid;
+        const batch = db.batch();
+        batch.set(db.collection('publicProfiles').doc(uid), {
+            uid, pseudo: currentUserDoc.pseudo, pseudoLower: currentUserDoc.pseudoLower,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        batch.set(db.collection('friendStats').doc(uid), {
+            privacy: SOCIAL_DEFAULT_PRIVACY,
+            stats: socialComputeShareableStats(SOCIAL_DEFAULT_PRIVACY),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        batch.set(db.collection('usernames').doc(currentUserDoc.pseudoLower), { discoverable: true }, { merge: true });
+        await batch.commit();
+    } catch (e) {
+        console.warn('socialEnsureProfileDocs a échoué (non bloquant) :', e);
+    }
+}
+
+// Resynchronise friendStats après chaque save() local, avec le même anti-rebond que scheduleCloudSync
+// mais un timer séparé (les deux écritures sont indépendantes). Respecte toujours les préférences de
+// confidentialité déjà enregistrées : on les relit avant de recalculer, jamais un `set` qui les
+// écraserait par des valeurs par défaut.
+let friendStatsSyncTimer = null;
+function scheduleFriendStatsSync() {
+    if (!firebaseAvailable || !currentUser) return;
+    clearTimeout(friendStatsSyncTimer);
+    friendStatsSyncTimer = setTimeout(async () => {
+        try {
+            const ref = db.collection('friendStats').doc(currentUser.uid);
+            const snap = await ref.get();
+            const privacy = (snap.exists && snap.data().privacy) || SOCIAL_DEFAULT_PRIVACY;
+            await ref.set({
+                privacy, stats: socialComputeShareableStats(privacy),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+        } catch (e) { console.warn('Synchro friendStats échouée', e); }
+    }, 2000);
+}
+
+// ===== Paramètres de confidentialité =====
+async function privacySetFlag(flagName, value) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const ref = db.collection('friendStats').doc(currentUser.uid);
+        const snap = await ref.get();
+        const privacy = (snap.exists && snap.data().privacy) || Object.assign({}, SOCIAL_DEFAULT_PRIVACY);
+        privacy[flagName] = value;
+        await ref.set({ privacy, stats: socialComputeShareableStats(privacy), updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+        renderPrivacySettings();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function privacySetDiscoverable(value) {
+    if (!firebaseAvailable || !currentUser || !currentUserDoc) return;
+    try {
+        await db.collection('usernames').doc(currentUserDoc.pseudoLower).set({ discoverable: value }, { merge: true });
+        renderPrivacySettings();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function renderPrivacySettings() {
+    const el = document.getElementById('social-privacy-content');
+    if (!el) return;
+    if (!firebaseAvailable || !currentUser) {
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi (Profil → Compte) pour gérer tes paramètres de confidentialité.</p>`;
+        return;
+    }
+    el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
+    try {
+        const [unameSnap, statsSnap] = await Promise.all([
+            db.collection('usernames').doc(currentUserDoc.pseudoLower).get(),
+            db.collection('friendStats').doc(currentUser.uid).get()
+        ]);
+        const discoverable = unameSnap.exists ? unameSnap.data().discoverable !== false : true;
+        const privacy = (statsSnap.exists && statsSnap.data().privacy) || SOCIAL_DEFAULT_PRIVACY;
+        const toggles = [
+            ['shareLevel', 'Niveau CECR'], ['shareProgress', 'Progression (XP, notions maîtrisées)'],
+            ['shareVocab', 'Vocabulaire'], ['shareStreak', 'Activité / streak']
+        ];
+        el.innerHTML = `
+            <div class="profil-menu-row" style="cursor:pointer;" onclick="privacySetDiscoverable(${!discoverable})">
+                <span class="pm-icon">🔍</span><span>Qui peut me trouver : <strong>${discoverable ? 'Tout le monde' : 'Personne'}</strong></span><span class="pm-chevron">›</span>
+            </div>
+            <div class="section-title" style="margin-top:var(--space-3);">Que peuvent voir mes amis ?</div>
+            ${toggles.map(([key, label]) => `
+                <div class="profil-menu-row" style="cursor:pointer;" onclick="privacySetFlag('${key}', ${!privacy[key]})">
+                    <span class="pm-icon">${privacy[key] ? '✅' : '⬜'}</span><span>${label}</span>
+                </div>`).join('')}
+            <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:10px;">Par défaut, ces informations restent visibles uniquement par tes amis acceptés — jamais publiquement.</p>`;
+    } catch (e) {
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--wrong);">Erreur de chargement : ${e.message}</p>`;
+    }
+}
+
+// ===== Notifications =====
+async function notificationCreate(recipientUid, type, title, message, data) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        await db.collection('notifications').add({
+            recipientUid, senderUid: currentUser.uid, senderPseudo: (currentUserDoc && currentUserDoc.pseudo) || '',
+            type, title, message: message || '', data: data || {}, read: false,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    } catch (e) { console.warn('notificationCreate a échoué :', e); }
+}
+
+let notificationsCache = [];
+async function notificationsRefreshBadge() {
+    const badge = document.getElementById('notif-badge');
+    if (!firebaseAvailable || !currentUser) { if (badge) badge.style.display = 'none'; return; }
+    try {
+        const snap = await db.collection('notifications').where('recipientUid', '==', currentUser.uid).limit(50).get();
+        notificationsCache = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+        notificationsCache.sort((a, b) => (b.createdAt ? b.createdAt.toMillis() : 0) - (a.createdAt ? a.createdAt.toMillis() : 0));
+        const unread = notificationsCache.filter(n => !n.read).length;
+        if (badge) { badge.style.display = unread > 0 ? 'flex' : 'none'; badge.innerText = unread > 9 ? '9+' : String(unread); }
+    } catch (e) { console.warn('Notifications non chargées :', e); }
+}
+
+function showNotifications() {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('notifications-view').classList.add('active');
+    renderNotifications();
+}
+
+const NOTIFICATION_ICONS = { friend_request: '👥', friend_accept: '👥', encouragement: '👏', challenge: '⚔️', challenge_completed: '🏆', session: '📅' };
+
+async function renderNotifications() {
+    const el = document.getElementById('notifications-list');
+    if (!el) return;
+    if (!firebaseAvailable || !currentUser) {
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes notifications.</p>`;
+        return;
+    }
+    el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
+    await notificationsRefreshBadge();
+    if (!notificationsCache.length) {
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucune notification pour l'instant.</p>`;
+        return;
+    }
+    el.innerHTML = notificationsCache.map(n => {
+        const icon = NOTIFICATION_ICONS[n.type] || '🔔';
+        const dateStr = n.createdAt ? new Date(n.createdAt.toMillis()).toLocaleDateString('fr-BE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+        return `<div class="hub-card" style="cursor:pointer; ${n.read ? 'opacity:0.6;' : ''}" onclick="notificationOpen('${n.id}')">
+            <div class="hub-card-title">${icon} ${n.title}</div>
+            ${n.message ? `<div class="hub-card-desc">${n.message}</div>` : ''}
+            <div style="font-size:0.7rem; color:var(--text-secondary); margin-top:4px;">${dateStr}</div>
+        </div>`;
+    }).join('');
+}
+
+async function notificationOpen(id) {
+    const n = notificationsCache.find(x => x.id === id);
+    if (!n) return;
+    if (!n.read) {
+        try { await db.collection('notifications').doc(id).update({ read: true }); n.read = true; } catch (e) { /* non bloquant */ }
+    }
+    if (n.type === 'friend_request' || n.type === 'friend_accept') { showSocial(); socialShowTab(n.type === 'friend_request' ? 'requests' : 'friends'); }
+    else if (n.type === 'challenge' || n.type === 'challenge_completed') { showSocial(); socialShowTab('challenges'); }
+    else if (n.type === 'session') { showSocial(); socialShowTab('sessions'); }
+    else renderNotifications();
+}
+
+// ===== Recherche + relation (amis / demandes / blocage) =====
+async function socialGetRelationStatus(targetUid) {
+    const pairId = socialPairId(currentUser.uid, targetUid);
+    const [friendSnap, reqSnap] = await Promise.all([
+        db.collection('friendships').doc(pairId).get(),
+        db.collection('friendRequests').doc(pairId).get()
+    ]);
+    if (friendSnap.exists) {
+        const f = friendSnap.data();
+        if (f.status === 'blocked') return f.blockedBy === currentUser.uid ? 'blocked_by_me' : 'blocked_by_them';
+        if (f.status === 'accepted') return 'friends';
+    }
+    if (reqSnap.exists && reqSnap.data().status === 'pending') {
+        return reqSnap.data().fromUid === currentUser.uid ? 'request_sent' : 'request_received';
+    }
+    return 'none';
+}
+
+function socialRenderUserCard(uid, pseudo, relation) {
+    const pairId = socialPairId(currentUser.uid, uid);
+    const safePseudo = pseudo.replace(/'/g, "\\'");
+    let actionHtml;
+    if (relation === 'friends') actionHtml = `<span style="color:var(--success); font-weight:700;">✓ Déjà amis</span>`;
+    else if (relation === 'request_sent') actionHtml = `<span style="color:var(--text-secondary);">Demande envoyée</span>`;
+    else if (relation === 'request_received') actionHtml = `<button class="btn btn-green" style="margin:0;" onclick="friendRequestAccept('${pairId}')">Accepter sa demande</button>`;
+    else if (relation === 'blocked_by_me') actionHtml = `<span style="color:var(--wrong);">Bloqué par toi — <a href="#" onclick="friendUnblock('${uid}'); return false;">débloquer</a></span>`;
+    else if (relation === 'blocked_by_them') actionHtml = `<span style="color:var(--text-secondary);">Utilisateur indisponible</span>`;
+    else actionHtml = `<button class="btn btn-green" style="margin:0;" onclick="friendRequestSend('${uid}', '${safePseudo}')">➕ Ajouter en ami</button>`;
+    return `<div class="hub-card" style="cursor:default;">
+        <div class="hub-card-title">@${pseudo}</div>
+        <div style="margin-top:8px;">${actionHtml}</div>
+    </div>`;
+}
+
+async function socialSearch() {
+    const input = document.getElementById('social-search-input');
+    const resultEl = document.getElementById('social-search-result');
+    if (!input || !resultEl) return;
+    if (!firebaseAvailable || !currentUser) { resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour rechercher des amis.</p>`; return; }
+    const raw = input.value.trim();
+    if (!raw) { resultEl.innerHTML = ''; return; }
+    resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Recherche...</p>`;
+    const pseudoLower = raw.replace(/^@/, '').trim().toLowerCase();
+    try {
+        const unameSnap = await db.collection('usernames').doc(pseudoLower).get();
+        if (!unameSnap.exists || unameSnap.data().discoverable === false) {
+            resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucun utilisateur trouvé avec ce pseudo (ou il a choisi de ne pas être trouvable).</p>`;
+            return;
+        }
+        const targetUid = unameSnap.data().uid;
+        if (targetUid === currentUser.uid) {
+            resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">C'est ton propre pseudo 🙂</p>`;
+            return;
+        }
+        const profSnap = await db.collection('publicProfiles').doc(targetUid).get();
+        const pseudo = profSnap.exists ? profSnap.data().pseudo : raw;
+        const relation = await socialGetRelationStatus(targetUid);
+        resultEl.innerHTML = socialRenderUserCard(targetUid, pseudo, relation);
+    } catch (e) {
+        resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--wrong);">Erreur de recherche : ${e.message}</p>`;
+    }
+}
+
+async function friendRequestSend(toUid, toPseudo) {
+    if (!firebaseAvailable || !currentUser) return;
+    const pairId = socialPairId(currentUser.uid, toUid);
+    try {
+        const [friendSnap, reqSnap] = await Promise.all([
+            db.collection('friendships').doc(pairId).get(),
+            db.collection('friendRequests').doc(pairId).get()
+        ]);
+        if (friendSnap.exists && friendSnap.data().status === 'blocked') { alert("Impossible d'envoyer une demande à cet utilisateur."); return; }
+        if (friendSnap.exists && friendSnap.data().status === 'accepted') { alert('Vous êtes déjà amis.'); return; }
+        if (reqSnap.exists && reqSnap.data().status === 'pending' && reqSnap.data().fromUid !== currentUser.uid) {
+            // L'autre personne nous a déjà envoyé une demande : accepter directement plutôt que
+            // de créer une deuxième relation ("ne duplique pas inutilement les relations").
+            await friendRequestAccept(pairId);
+            return;
+        }
+        await db.collection('friendRequests').doc(pairId).set({
+            fromUid: currentUser.uid, toUid, fromPseudo: currentUserDoc.pseudo, toPseudo,
+            status: 'pending', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        await notificationCreate(toUid, 'friend_request', `${currentUserDoc.pseudo} veut devenir ton ami`, '', { pairId });
+        alert('Demande envoyée !');
+        socialSearch();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function friendRequestAccept(pairId) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const reqRef = db.collection('friendRequests').doc(pairId);
+        const reqSnap = await reqRef.get();
+        if (!reqSnap.exists) return;
+        const req = reqSnap.data();
+        if (req.toUid !== currentUser.uid || req.status !== 'pending') return;
+        const batch = db.batch();
+        batch.update(reqRef, { status: 'accepted', respondedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        batch.set(db.collection('friendships').doc(pairId), {
+            uids: [req.fromUid, req.toUid].sort(), status: 'accepted', blockedBy: null,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        await batch.commit();
+        await notificationCreate(req.fromUid, 'friend_accept', `${currentUserDoc.pseudo} a accepté ta demande d'ami`, '', {});
+        renderFriendRequests(); renderFriendsList();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function friendRequestDecline(pairId) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        await db.collection('friendRequests').doc(pairId).update({ status: 'declined', respondedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        renderFriendRequests();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function friendRemove(pairId) {
+    if (!firebaseAvailable || !currentUser) return;
+    if (!confirm('Retirer cet ami ?')) return;
+    try {
+        await db.collection('friendships').doc(pairId).delete();
+        renderFriendsList();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function friendBlock(targetUid) {
+    if (!firebaseAvailable || !currentUser) return;
+    if (!confirm("Bloquer cet utilisateur ? Il ne pourra plus t'envoyer de demandes.")) return;
+    const pairId = socialPairId(currentUser.uid, targetUid);
+    try {
+        await db.collection('friendships').doc(pairId).set({
+            uids: [currentUser.uid, targetUid].sort(), status: 'blocked', blockedBy: currentUser.uid,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        renderFriendsList();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function friendUnblock(targetUid) {
+    if (!firebaseAvailable || !currentUser) return;
+    const pairId = socialPairId(currentUser.uid, targetUid);
+    try {
+        const snap = await db.collection('friendships').doc(pairId).get();
+        if (snap.exists && snap.data().blockedBy === currentUser.uid) {
+            await db.collection('friendships').doc(pairId).delete();
+        }
+        renderFriendsList(); socialSearch();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function renderFriendsList() {
+    const el = document.getElementById('social-friends-list');
+    if (!el) return;
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes amis.</p>`; return; }
+    el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
+    try {
+        const snap = await db.collection('friendships').where('uids', 'array-contains', currentUser.uid).get();
+        const accepted = [], blockedByMe = [];
+        snap.forEach(doc => {
+            const f = doc.data();
+            const otherUid = f.uids.find(u => u !== currentUser.uid);
+            if (f.status === 'accepted') accepted.push({ pairId: doc.id, otherUid });
+            else if (f.status === 'blocked' && f.blockedBy === currentUser.uid) blockedByMe.push({ pairId: doc.id, otherUid });
+        });
+        if (!accepted.length && !blockedByMe.length) {
+            el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Tu n'as pas encore d'amis. Utilise l'onglet "Rechercher" pour en ajouter !</p>`;
+            return;
+        }
+        const rows = await Promise.all(accepted.map(async ({ pairId, otherUid }) => {
+            const [profSnap, statsSnap] = await Promise.all([
+                db.collection('publicProfiles').doc(otherUid).get(),
+                db.collection('friendStats').doc(otherUid).get()
+            ]);
+            const pseudo = profSnap.exists ? profSnap.data().pseudo : otherUid;
+            const stats = statsSnap.exists ? (statsSnap.data().stats || {}) : {};
+            const bits = [];
+            if (stats.level) bits.push(`Niveau ${stats.level}`);
+            if (typeof stats.streak === 'number') bits.push(`🔥 ${stats.streak}j`);
+            if (typeof stats.vocabPct === 'number') bits.push(`📖 ${stats.vocabPct}%`);
+            const safePseudo = pseudo.replace(/'/g, "\\'");
+            return `<div class="hub-card" style="cursor:default;">
+                <div class="hub-card-title">@${pseudo}</div>
+                <div class="hub-card-desc">${bits.length ? bits.join(' · ') : 'Statistiques non partagées'}</div>
+                <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">
+                    <button class="gemini-explain-btn" onclick="encouragementSend('${otherUid}', '${safePseudo}')">👏 Encourager</button>
+                    <button class="gemini-explain-btn" onclick="challengeSend('${otherUid}', '${safePseudo}')">🎯 Défier</button>
+                    <button class="gemini-explain-btn" onclick="sessionPropose('${otherUid}', '${safePseudo}')">📅 Session</button>
+                    <button class="gemini-explain-btn" onclick="friendRemove('${pairId}')">Retirer</button>
+                    <button class="gemini-explain-btn" style="color:var(--wrong); border-color:var(--wrong);" onclick="friendBlock('${otherUid}')">🚫 Bloquer</button>
+                </div>
+            </div>`;
+        }));
+        const blockedRows = blockedByMe.map(({ otherUid }) =>
+            `<div class="hub-card" style="cursor:default; opacity:0.7;">
+                <div class="hub-card-title">Utilisateur bloqué</div>
+                <button class="gemini-explain-btn" style="margin-top:8px;" onclick="friendUnblock('${otherUid}')">Débloquer</button>
+            </div>`);
+        el.innerHTML = rows.join('') + blockedRows.join('');
+    } catch (e) {
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--wrong);">Erreur de chargement : ${e.message}</p>`;
+    }
+}
+
+async function renderFriendRequests() {
+    const el = document.getElementById('social-requests-list');
+    if (!el) return;
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes demandes.</p>`; return; }
+    el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
+    try {
+        const snap = await db.collection('friendRequests').where('toUid', '==', currentUser.uid).where('status', '==', 'pending').get();
+        if (snap.empty) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucune demande en attente.</p>`; return; }
+        el.innerHTML = snap.docs.map(doc => {
+            const r = doc.data();
+            return `<div class="hub-card" style="cursor:default;">
+                <div class="hub-card-title">@${r.fromPseudo}</div>
+                <div style="display:flex; gap:8px; margin-top:8px;">
+                    <button class="btn btn-green" style="margin:0;" onclick="friendRequestAccept('${doc.id}')">Accepter</button>
+                    <button class="gemini-explain-btn" onclick="friendRequestDecline('${doc.id}')">Refuser</button>
+                </div>
+            </div>`;
+        }).join('');
+    } catch (e) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--wrong);">Erreur : ${e.message}</p>`; }
+}
+
+// ===== Encouragements (interactions prédéfinies — pas de messagerie libre) =====
+const ENCOURAGEMENT_PRESETS = [
+    { key: 'bravo', emoji: '👏', text: 'Bien joué !' },
+    { key: 'streak', emoji: '🔥', text: 'Continue ton streak !' },
+    { key: 'motiv', emoji: '💪', text: 'Tu peux le faire !' },
+    { key: 'defi', emoji: '🎯', text: 'Défi accepté !' },
+    { key: 'session', emoji: '📚', text: 'Bonne session !' },
+    { key: 'continue', emoji: '🚀', text: 'Continue comme ça !' }
+];
+
+function encouragementSend(toUid, toPseudo) {
+    const box = document.getElementById('social-encouragement-picker');
+    if (!box) return;
+    const safePseudo = toPseudo.replace(/'/g, "\\'");
+    const options = ENCOURAGEMENT_PRESETS.map(p =>
+        `<button class="gemini-explain-btn" style="margin:2px;" onclick="encouragementConfirmSend('${toUid}','${p.key}')">${p.emoji} ${p.text}</button>`).join('');
+    box.innerHTML = `<div class="section-title" style="margin-top:var(--space-2);">Encourager @${toPseudo}</div><div style="display:flex; flex-wrap:wrap; gap:4px;">${options}</div>`;
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+async function encouragementConfirmSend(toUid, presetKey) {
+    const preset = ENCOURAGEMENT_PRESETS.find(p => p.key === presetKey);
+    if (!preset) return;
+    const box = document.getElementById('social-encouragement-picker');
+    try {
+        await notificationCreate(toUid, 'encouragement', `${currentUserDoc.pseudo} t'a envoyé un encouragement`, `${preset.emoji} ${preset.text}`, { presetKey });
+        if (box) box.innerHTML = `<p style="color:var(--success); font-size:0.85rem;">Encouragement envoyé !</p>`;
+    } catch (e) { if (box) box.innerHTML = `<p style="color:var(--wrong); font-size:0.85rem;">Erreur : ${e.message}</p>`; }
+}
+
+// ===== Défis (architecture — MVP) =====
+// Un défi porte sur UNE notion déjà existante du curriculum (jamais une nouvelle notion ou un
+// nouveau système de points) : les deux personnes utilisent exactement le même moteur de maîtrise
+// qu'ailleurs dans l'app (getNotionStatus / WeaknessEngine, inchangés). Un défi ne fait QUE lire ce
+// statut pour savoir si chacun a rempli sa part — il ne le recalcule jamais lui-même.
+// challenges/{id} (id auto — plusieurs défis possibles dans le temps entre les deux mêmes personnes,
+// contrairement à friendships/friendRequests qui sont volontairement une relation unique par paire) :
+//   { fromUid, toUid, fromPseudo, toPseudo, notionId, titre, status:'pending'|'accepted'|'declined'|
+//     'completed'|'cancelled', fromCompleted, toCompleted, createdAt, respondedAt?, completedAt? }
+function challengeSend(toUid, toPseudo) {
+    const box = document.getElementById('social-challenge-picker');
+    if (!box) return;
+    if (!curriculumLoaded) { box.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Programme en cours de chargement...</p>`; return; }
+    const candidates = [];
+    const rec = curriculumLoaded ? getRecommendation() : null;
+    if (rec) candidates.push(rec.notionId);
+    getWeaknesses().slice(0, 4).forEach(w => { if (!candidates.includes(w.id)) candidates.push(w.id); });
+    if (!candidates.length) {
+        box.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Rien à proposer pour l'instant — avance un peu dans ta progression d'abord.</p>`;
+        return;
+    }
+    const safePseudo = toPseudo.replace(/'/g, "\\'");
+    const options = candidates.map(nid => {
+        const notion = curriculumNotions[nid];
+        const titre = (notion && notion.content && notion.content.titre) || nid.replace(/_/g, ' ');
+        const safeTitre = titre.replace(/'/g, "\\'");
+        return `<button class="gemini-explain-btn" style="margin:2px;" onclick="challengeConfirmSend('${toUid}','${safePseudo}','${nid}','${safeTitre}')">🎯 ${titre}</button>`;
+    }).join('');
+    box.innerHTML = `<div class="section-title" style="margin-top:var(--space-2);">Défier @${toPseudo} sur...</div><div style="display:flex; flex-wrap:wrap; gap:4px;">${options}</div>`;
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+async function challengeConfirmSend(toUid, toPseudo, notionId, titre) {
+    if (!firebaseAvailable || !currentUser) return;
+    const box = document.getElementById('social-challenge-picker');
+    try {
+        const ref = await db.collection('challenges').add({
+            fromUid: currentUser.uid, toUid, fromPseudo: currentUserDoc.pseudo, toPseudo,
+            notionId, titre, status: 'pending', fromCompleted: false, toCompleted: false,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        await notificationCreate(toUid, 'challenge', `${currentUserDoc.pseudo} te défie sur « ${titre} »`, '', { challengeId: ref.id });
+        if (box) box.innerHTML = `<p style="color:var(--success); font-size:0.85rem;">Défi envoyé !</p>`;
+    } catch (e) { if (box) box.innerHTML = `<p style="color:var(--wrong); font-size:0.85rem;">Erreur : ${e.message}</p>`; }
+}
+
+async function challengeRespond(id, newStatus) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const ref = db.collection('challenges').doc(id);
+        const snap = await ref.get();
+        if (!snap.exists) return;
+        const c = snap.data();
+        if (c.toUid !== currentUser.uid || c.status !== 'pending') return;
+        await ref.update({ status: newStatus, respondedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        if (newStatus === 'accepted') await notificationCreate(c.fromUid, 'challenge', `${currentUserDoc.pseudo} a accepté ton défi sur « ${c.titre} »`, '', { challengeId: id });
+        renderChallenges();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function challengeMarkMyPartDone(id) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const ref = db.collection('challenges').doc(id);
+        const snap = await ref.get();
+        if (!snap.exists) return;
+        const c = snap.data();
+        const isFrom = c.fromUid === currentUser.uid;
+        const isTo = c.toUid === currentUser.uid;
+        if ((!isFrom && !isTo) || c.status !== 'accepted') return;
+        // Relit simplement le statut déjà calculé ailleurs dans l'app — aucune nouvelle règle de
+        // maîtrise n'est introduite ici.
+        if (getNotionStatus(c.notionId) !== 'maitrisee') {
+            alert("Tu n'as pas encore maîtrisé cette notion — continue à t'entraîner, puis reviens valider ta part du défi !");
+            return;
+        }
+        const update = isFrom ? { fromCompleted: true } : { toCompleted: true };
+        const bothDone = (isFrom ? true : c.fromCompleted) && (isFrom ? c.toCompleted : true);
+        if (bothDone) { update.status = 'completed'; update.completedAt = firebase.firestore.FieldValue.serverTimestamp(); }
+        await ref.update(update);
+        if (update.status === 'completed') {
+            await notificationCreate(c.fromUid, 'challenge_completed', `Défi terminé : « ${c.titre} » 🏆`, '', { challengeId: id });
+            await notificationCreate(c.toUid, 'challenge_completed', `Défi terminé : « ${c.titre} » 🏆`, '', { challengeId: id });
+        }
+        renderChallenges();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function challengeCancel(id) {
+    if (!firebaseAvailable || !currentUser) return;
+    if (!confirm('Annuler ce défi ?')) return;
+    try {
+        const ref = db.collection('challenges').doc(id);
+        const snap = await ref.get();
+        if (!snap.exists) return;
+        const c = snap.data();
+        if (c.fromUid !== currentUser.uid && c.toUid !== currentUser.uid) return;
+        await ref.update({ status: 'cancelled' });
+        renderChallenges();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+const CHALLENGE_STATUS_LABELS = { pending: 'En attente', accepted: 'En cours', completed: 'Terminé 🏆', declined: 'Refusé', cancelled: 'Annulé' };
+
+async function renderChallenges() {
+    const el = document.getElementById('social-challenges-list');
+    if (!el) return;
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes défis.</p>`; return; }
+    el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
+    try {
+        const [sentSnap, receivedSnap] = await Promise.all([
+            db.collection('challenges').where('fromUid', '==', currentUser.uid).get(),
+            db.collection('challenges').where('toUid', '==', currentUser.uid).get()
+        ]);
+        const all = [...sentSnap.docs, ...receivedSnap.docs].map(d => Object.assign({ id: d.id }, d.data()));
+        if (!all.length) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucun défi pour l'instant — défie un ami depuis l'onglet Amis.</p>`; return; }
+        el.innerHTML = all.map(c => {
+            const isRecipient = c.toUid === currentUser.uid;
+            const otherPseudo = isRecipient ? c.fromPseudo : c.toPseudo;
+            const myDone = isRecipient ? c.toCompleted : c.fromCompleted;
+            let actions = '';
+            if (c.status === 'pending' && isRecipient) {
+                actions = `<button class="btn btn-green" style="margin:0;" onclick="challengeRespond('${c.id}','accepted')">Accepter</button>
+                           <button class="gemini-explain-btn" onclick="challengeRespond('${c.id}','declined')">Refuser</button>`;
+            } else if (c.status === 'pending') {
+                actions = `<button class="gemini-explain-btn" onclick="challengeCancel('${c.id}')">Annuler</button>`;
+            } else if (c.status === 'accepted' && !myDone) {
+                actions = `<button class="btn btn-green" style="margin:0;" onclick="challengeMarkMyPartDone('${c.id}')">✓ J'ai maîtrisé cette notion</button>
+                           <button class="gemini-explain-btn" onclick="challengeCancel('${c.id}')">Annuler</button>`;
+            } else if (c.status === 'accepted' && myDone) {
+                actions = `<span style="color:var(--success); font-size:0.8rem;">En attente de @${otherPseudo}</span>`;
+            }
+            return `<div class="hub-card" style="cursor:default;">
+                <div class="hub-card-title">🎯 ${c.titre}</div>
+                <div class="hub-card-desc">Avec @${otherPseudo} — ${CHALLENGE_STATUS_LABELS[c.status] || c.status}</div>
+                <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">${actions}</div>
+            </div>`;
+        }).join('');
+    } catch (e) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--wrong);">Erreur : ${e.message}</p>`; }
+}
+
+// ===== Sessions de travail (architecture — MVP) =====
+// MVP volontairement minimal : un simple rendez-vous partagé (date + note), PAS d'appel vidéo, PAS
+// de synchronisation en temps réel — conformément au cahier des charges ("ne mets pas en place une
+// architecture backend lourde"). studySessions/{id} (id auto, comme challenges) :
+//   { fromUid, toUid, fromPseudo, toPseudo, proposedDate, note, status:'pending'|'accepted'|
+//     'declined'|'cancelled', createdAt, respondedAt? }
+function sessionPropose(toUid, toPseudo) {
+    const dateStr = prompt(`Proposer une session de révision à @${toPseudo} — quelle date ? (ex. 2026-10-05)`);
+    if (!dateStr || !dateStr.trim()) return;
+    const note = prompt('Un message pour accompagner la proposition ? (optionnel)') || '';
+    sessionConfirmPropose(toUid, toPseudo, dateStr.trim(), note.trim());
+}
+
+async function sessionConfirmPropose(toUid, toPseudo, proposedDate, note) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const ref = await db.collection('studySessions').add({
+            fromUid: currentUser.uid, toUid, fromPseudo: currentUserDoc.pseudo, toPseudo,
+            proposedDate, note, status: 'pending',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        await notificationCreate(toUid, 'session', `${currentUserDoc.pseudo} te propose une session le ${proposedDate}`, note, { sessionId: ref.id });
+        alert('Proposition envoyée !');
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function sessionRespond(id, newStatus) {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const ref = db.collection('studySessions').doc(id);
+        const snap = await ref.get();
+        if (!snap.exists) return;
+        const s = snap.data();
+        if (s.toUid !== currentUser.uid || s.status !== 'pending') return;
+        await ref.update({ status: newStatus, respondedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        if (newStatus === 'accepted') await notificationCreate(s.fromUid, 'session', `${currentUserDoc.pseudo} a accepté ta session du ${s.proposedDate}`, '', { sessionId: id });
+        renderStudySessions();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function sessionCancel(id) {
+    if (!firebaseAvailable || !currentUser) return;
+    if (!confirm('Annuler cette session ?')) return;
+    try {
+        const ref = db.collection('studySessions').doc(id);
+        const snap = await ref.get();
+        if (!snap.exists) return;
+        const s = snap.data();
+        if (s.fromUid !== currentUser.uid && s.toUid !== currentUser.uid) return;
+        await ref.update({ status: 'cancelled', respondedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        renderStudySessions();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+const SESSION_STATUS_LABELS = { pending: 'En attente', accepted: 'Confirmée', declined: 'Refusée', cancelled: 'Annulée' };
+
+async function renderStudySessions() {
+    const el = document.getElementById('social-sessions-list');
+    if (!el) return;
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes sessions.</p>`; return; }
+    el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
+    try {
+        const [sentSnap, receivedSnap] = await Promise.all([
+            db.collection('studySessions').where('fromUid', '==', currentUser.uid).get(),
+            db.collection('studySessions').where('toUid', '==', currentUser.uid).get()
+        ]);
+        const all = [...sentSnap.docs, ...receivedSnap.docs].map(d => Object.assign({ id: d.id }, d.data()));
+        all.sort((a, b) => (a.proposedDate || '').localeCompare(b.proposedDate || ''));
+        if (!all.length) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucune session pour l'instant — propose-en une depuis l'onglet Amis.</p>`; return; }
+        el.innerHTML = all.map(s => {
+            const isRecipient = s.toUid === currentUser.uid;
+            const otherPseudo = isRecipient ? s.fromPseudo : s.toPseudo;
+            let actions = '';
+            if (s.status === 'pending' && isRecipient) {
+                actions = `<button class="btn btn-green" style="margin:0;" onclick="sessionRespond('${s.id}','accepted')">Accepter</button>
+                           <button class="gemini-explain-btn" onclick="sessionRespond('${s.id}','declined')">Refuser</button>`;
+            } else if (s.status === 'pending' || s.status === 'accepted') {
+                actions = `<button class="gemini-explain-btn" onclick="sessionCancel('${s.id}')">Annuler</button>`;
+            }
+            return `<div class="hub-card" style="cursor:default;">
+                <div class="hub-card-title">📅 ${s.proposedDate} avec @${otherPseudo}</div>
+                <div class="hub-card-desc">${SESSION_STATUS_LABELS[s.status] || s.status}${s.note ? ' — ' + s.note : ''}</div>
+                <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">${actions}</div>
+            </div>`;
+        }).join('');
+    } catch (e) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--wrong);">Erreur : ${e.message}</p>`; }
+}
+
+// ===== Vue "Social" (hub à onglets, accessible depuis Profil) =====
+function showSocial() {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('social-view').classList.add('active');
+    setActiveNav('nav-profil');
+    socialShowTab('friends');
+}
+
+function socialShowTab(tab) {
+    ['friends', 'requests', 'challenges', 'sessions', 'search', 'privacy'].forEach(t => {
+        const panel = document.getElementById('social-panel-' + t);
+        const tabBtn = document.getElementById('social-tab-' + t);
+        if (panel) panel.style.display = t === tab ? '' : 'none';
+        if (tabBtn) tabBtn.classList.toggle('active', t === tab);
+    });
+    if (tab === 'friends') renderFriendsList();
+    else if (tab === 'requests') renderFriendRequests();
+    else if (tab === 'challenges') renderChallenges();
+    else if (tab === 'sessions') renderStudySessions();
+    else if (tab === 'privacy') renderPrivacySettings();
+}
+
+// ===== Accueil : bloc léger "👥 Avec tes amis" (secondaire, cf. cahier des charges — ne doit pas
+// prendre le pas sur l'apprentissage). Chargé de façon asynchrone pour ne jamais bloquer le premier
+// rendu du dashboard ; se re-rend une fois les données disponibles. =====
+let socialDashboardCache = null;
+async function loadSocialDashboardSnippet() {
+    if (!firebaseAvailable || !currentUser) return;
+    try {
+        const snap = await db.collection('friendships').where('uids', 'array-contains', currentUser.uid).get();
+        const acceptedUids = [];
+        snap.forEach(doc => { const f = doc.data(); if (f.status === 'accepted') acceptedUids.push(f.uids.find(u => u !== currentUser.uid)); });
+        if (!acceptedUids.length) { socialDashboardCache = { friendCount: 0, lines: [] }; return; }
+        const sample = acceptedUids.slice(0, 5);
+        const lines = [];
+        for (const uid of sample) {
+            const [profSnap, statsSnap] = await Promise.all([
+                db.collection('publicProfiles').doc(uid).get(),
+                db.collection('friendStats').doc(uid).get()
+            ]);
+            if (!profSnap.exists) continue;
+            const pseudo = profSnap.data().pseudo;
+            const stats = statsSnap.exists ? (statsSnap.data().stats || {}) : {};
+            if (typeof stats.streak === 'number' && stats.streak > 1) lines.push(`🔥 ${pseudo} a un streak de ${stats.streak} jours`);
+            else if (stats.level) lines.push(`📚 ${pseudo} est au niveau ${stats.level}`);
+        }
+        socialDashboardCache = { friendCount: acceptedUids.length, lines: lines.slice(0, 3) };
+        if (document.getElementById('home-view').classList.contains('active')) renderDashboard();
+    } catch (e) { console.warn('Social dashboard snippet non chargé :', e); }
 }
 
 // ===== Panneau admin =====
@@ -253,6 +1003,12 @@ if (firebaseAvailable) {
             currentUser = user;
             currentUserDoc = userDoc;
             if (document.getElementById('compte-view').classList.contains('active')) accShowLoggedIn();
+            // Backfill : les comptes créés avant l'ajout de la couche sociale n'ont pas encore
+            // publicProfiles/friendStats/discoverable — socialEnsureProfileDocs() est idempotent
+            // (merge:true) donc l'appeler à chaque reprise de session est sans risque.
+            socialEnsureProfileDocs();
+            notificationsRefreshBadge();
+            if (document.getElementById('home-view').classList.contains('active')) renderDashboard();
         } catch (e) {
             console.error('Reprise de session échouée', e);
         }
@@ -1055,12 +1811,21 @@ if (firebaseAvailable) {
                 ${weaknesses.length ? `
                 <div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">Notions fragiles</div>
                 <div class="hub-grid single">
-                    ${weaknesses.map(w => `
+                    ${weaknesses.map(w => {
+                        const titre = w.notion.content.titre || w.id.replace(/_/g, ' ');
+                        // Phrase explicite plutôt qu'un simple badge de statut, pour répondre à
+                        // "pourquoi on me propose ça" (réutilise le statut déjà calculé par
+                        // WeaknessEngine, n'invente aucune nouvelle donnée).
+                        const reason = w.status === 'faible'
+                            ? `🔁 Tu as eu des difficultés récentes avec « ${titre} ».`
+                            : `🎯 Il te reste à consolider « ${titre} ».`;
+                        return `
                         <div class="hub-card" onclick="showLesson('${w.id}')">
-                            <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</div>
+                            <div class="hub-card-title">${reason}</div>
                             <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
                             ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
-                        </div>`).join('')}
+                        </div>`;
+                    }).join('')}
                 </div>` : ''}`;
         }
 
@@ -1534,6 +2299,14 @@ if (firebaseAvailable) {
             if (rec) startRecommendedActivity(rec.notionId); else showApprendre();
         }
 
+        // ===== Apprendre → "🆕 Nouvelle notion" =====
+        // Simple porte UX vers RecommendationEngine, identique à enterModeChoisir() (même moteur,
+        // même comportement) : on ne crée pas un deuxième "quoi étudier ensuite", on réutilise
+        // exactement la même suggestion que "🎯 Pour toi maintenant" sur l'accueil.
+        function apprendreNouvelleNotion() {
+            enterModeChoisir();
+        }
+
         // ===== Onboarding (court, skippable) =====
         // Une seule page, pas 10-15 écrans : présentation courte + les 6 façons d'utiliser l'appli +
         // 2 choix terminaux (évaluer son niveau via le Placement Engine déjà existant, ou commencer
@@ -1620,6 +2393,21 @@ if (firebaseAvailable) {
             // Ne s'affiche que pour un compte réellement neuf (aucune notion jamais tentée, aucun
             // historique de placement) — dès la première vraie réponse, ce bloc disparaît de
             // lui-même au prochain rendu.
+            // ===== -1. Bonjour / état actuel =====
+            // Première ligne de l'écran : qui es-tu et où en es-tu, avant toute recommandation —
+            // pas de nouvelle donnée, juste une phrase construite à partir de ce qui existe déjà
+            // (pseudo du compte, streak).
+            const greetName = currentUserDoc && currentUserDoc.pseudo ? currentUserDoc.pseudo : '';
+            const streak = (state.stats && state.stats.dailyStreak) || 0;
+            const greetStateLine = streak > 1
+                ? `🔥 ${streak} jours de suite — continue comme ça !`
+                : "Prêt(e) à continuer ton apprentissage du néerlandais ?";
+            const greetingHtml = `
+                <div class="dash-card dash-greeting" style="padding:14px 18px;">
+                    <div style="font-size:1.05rem; font-weight:700;">${greetName ? `Bonjour ${greetName} 👋` : 'Bonjour 👋'}</div>
+                    <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:2px;">${greetStateLine}</div>
+                </div>`;
+
             const isBrandNew = isBrandNewUser();
             const placementNudgeHtml = isBrandNew ? `
                 <div class="dash-card dash-secondary-card" style="cursor:default;">
@@ -1707,16 +2495,37 @@ if (firebaseAvailable) {
                     <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
                 </div>`).join('') : '';
 
+            // ===== 6. Social (secondaire, discret — ne doit jamais passer devant l'apprentissage) =====
+            // Chargé de façon asynchrone (voir loadSocialDashboardSnippet) pour ne jamais retarder le
+            // premier rendu ; tant que le cache est vide on ne montre rien (pas de placeholder qui
+            // clignote), et on relance le chargement une seule fois par session.
+            let socialHtml = '';
+            if (currentUser && socialDashboardCache && socialDashboardCache.friendCount > 0) {
+                socialHtml = `
+                    <div class="dash-card dash-secondary-card" style="cursor:pointer;" onclick="showSocial()">
+                        <div class="dash-secondary-label">👥 Avec tes amis</div>
+                        ${socialDashboardCache.lines.length
+                            ? socialDashboardCache.lines.map(l => `<div class="dash-secondary-sub">${l}</div>`).join('')
+                            : `<div class="dash-secondary-sub">${socialDashboardCache.friendCount} ami${socialDashboardCache.friendCount > 1 ? 's' : ''} — voir leur progression</div>`}
+                    </div>`;
+            }
+            if (currentUser && socialDashboardCache === null) loadSocialDashboardSnippet();
+
+            // Ordre voulu (cahier des charges) : 1. Bonjour/état actuel, 2. "Pour toi maintenant",
+            // 3. Continuer, 4. "Qu'est-ce que tu veux faire ?", 5. progression globale,
+            // 6. points faibles, 7. vocabulaire (déjà inclus dans la carte progression), 8. social (discret).
             block.innerHTML = `
+                ${greetingHtml}
                 ${placementNudgeHtml}
                 ${recoHtml}
-                ${progressionHtml}
                 ${continuerHtml}
                 ${quickAccessHtml}
+                ${progressionHtml}
                 ${weakHtml ? `<div class="dash-card">
                     <h3 style="margin:0 0 10px; font-size:0.9rem;">À revoir</h3>
                     ${weakHtml}
-                </div>` : ''}`;
+                </div>` : ''}
+                ${socialHtml}`;
         }
 
         // ===== Vue "Apprendre" (parcours par niveau/module/notion) =====
@@ -2472,15 +3281,24 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         // LISTE DES MOTS (vue + sélection + listes perso)
-        function showWordList() {
+        // Accessible depuis Profil ET depuis Apprendre (voir cahier des charges "Apprendre →
+        // Vocabulaire") : on retient d'où on vient pour que "← Retour" ramène au bon endroit,
+        // plutôt que de renvoyer systématiquement vers Profil.
+        let wordListReturnTo = 'profil';
+        function showWordList(returnTo) {
+            wordListReturnTo = returnTo || 'profil';
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('wordlist-view').classList.add('active');
-            setActiveNav('nav-profil');
+            setActiveNav(wordListReturnTo === 'apprendre' ? 'nav-apprendre' : 'nav-profil');
             const filter = document.getElementById('wl-filter');
             const categories = [...new Set(fullDb.map(i => i.file))];
             filter.innerHTML = '<option value="">Toutes catégories</option>' +
                 categories.map(c => `<option value="${c}">${c}</option>`).join('');
             renderWordList();
+        }
+
+        function wordListBack() {
+            if (wordListReturnTo === 'apprendre') showApprendre(); else showProfil();
         }
 
         function renderWordList() {
@@ -3529,9 +4347,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-menu-row" onclick="showPlacementIntro()"><span class="pm-icon">🚀</span><span>Évaluer mon niveau</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showApprendre()"><span class="pm-icon">📚</span><span>Mon parcours</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showReviser()"><span class="pm-icon">🔁</span><span>Révisions</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" onclick="showWordList()"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showWordList('profil')"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showConjugaison()"><span class="pm-icon">🔤</span><span>Conjugaison</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showTestSelect()"><span class="pm-icon">🎯</span><span>Test de vocabulaire</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Social</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
@@ -3798,6 +4617,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             localStorage.setItem('nl_platform_v1', JSON.stringify(state));
             updateStats();
             scheduleCloudSync();
+            scheduleFriendStatsSync();
         }
 
         // Niveau CECR basé sur le % de vocabulaire distinct maîtrisé.
