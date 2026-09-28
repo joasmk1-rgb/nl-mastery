@@ -105,3 +105,71 @@
         .admin-row .admin-status.active { background: #d7f7c2; color: #2f7d00; }
         .admin-row .admin-status.disabled { background: #ffd6d6; color: #a30000; }
         .admin-row button { padding: 6px 10px; border-radius: 8px; border: none; font-size: 0.7rem; font-weight: bold; cursor: pointer; color: white; }
+
+        /* Dashboard */
+        .dash-card { width: 100%; max-width: 500px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 15px; padding: 18px; box-sizing: border-box; margin-bottom: 14px; }
+        .dash-level-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .dash-level-badge { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
+        .dash-progress-bar { width: 100%; height: 10px; background: var(--border); border-radius: 6px; overflow: hidden; margin-top: 6px; }
+        .dash-progress-fill { height: 100%; background: var(--success); border-radius: 6px; }
+        .dash-continue-card { background: var(--primary); color: white; border: none; cursor: pointer; text-align: left; }
+        .dash-continue-card .dash-continue-label { font-size: 0.75rem; opacity: 0.85; margin-bottom: 4px; }
+        .dash-continue-card .dash-continue-title { font-size: 1.15rem; font-weight: bold; margin-bottom: 4px; }
+        .dash-today-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .dash-today-item { text-align: center; padding: 10px 6px; background: var(--bg); border-radius: 10px; }
+        .dash-today-item .dash-today-num { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
+        .dash-today-item .dash-today-label { font-size: 0.7rem; color: #888; }
+        .dash-weak-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+        .dash-weak-row:last-child { border-bottom: none; }
+        .dash-mini-bar { width: 60px; height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .dash-mini-fill { height: 100%; background: var(--wrong); }
+
+        /* Curriculum (Apprendre) */
+        .level-tab-row { display: flex; gap: 8px; width: 100%; max-width: 500px; margin-bottom: 15px; }
+        .level-tab { flex: 1; padding: 10px 6px; border-radius: 10px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-weight: bold; cursor: pointer; text-align: center; font-size: 0.85rem; }
+        .level-tab.active { border-color: var(--primary); color: var(--primary); }
+        .module-card { width: 100%; max-width: 500px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-sizing: border-box; }
+        .module-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+        .notion-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+        .notion-row:active { background: var(--bg); }
+        .notion-row.locked { opacity: 0.45; cursor: not-allowed; }
+        .notion-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; font-weight: bold; }
+        .notion-status.s0 { background: #e5e5e5; color: #888; }
+        .notion-status.s1, .notion-status.s2 { background: #ffe3b3; color: #b06d00; }
+        .notion-status.s3, .notion-status.s4 { background: #d7f7c2; color: #2f7d00; }
+        .notion-status.s5 { background: #2f7d00; color: white; }
+        .notion-status.pending { background: var(--border); color: #888; }
+
+        /* Lesson */
+        .lesson-block { margin-bottom: 18px; }
+        .lesson-block h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 6px; }
+        .lesson-block p, .lesson-block li { font-size: 0.9rem; line-height: 1.5; }
+        .lesson-block ul { padding-left: 20px; margin: 6px 0; }
+        .lesson-example { background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; font-size: 0.9rem; }
+        .lesson-error { background: #fff3cd; color: #856404; border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; font-size: 0.85rem; }
+
+        /* Exercise */
+        .ex-option-btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border-radius: 12px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 1rem; cursor: pointer; }
+        .ex-option-btn.selected { border-color: var(--primary); background: var(--bg); }
+        .ex-option-btn.correct { border-color: var(--success); background: #d7f7c2; }
+        .ex-option-btn.wrong { border-color: var(--wrong); background: #ffd6d6; }
+        .order-selection { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; padding: 10px; border-radius: 12px; border: 2px dashed var(--border); margin-bottom: 14px; }
+        .order-bank { display: flex; flex-wrap: wrap; gap: 8px; }
+        .ex-order-tile { padding: 10px 14px; border-radius: 10px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.95rem; cursor: pointer; }
+        .ex-order-tile.selected { border-color: var(--primary); background: var(--bg); }
+        .ex-order-tile.correct { border-color: var(--success); background: #d7f7c2; }
+        .ex-order-tile.wrong { border-color: var(--wrong); background: #ffd6d6; }
+        .order-placeholder { font-size: 0.85rem; color: #888; }
+        .conj-search-row { display: flex; gap: 8px; margin-bottom: 16px; }
+        .conj-search-row input { flex: 1; padding: 12px; border-radius: 12px; border: 2px solid var(--border); font-size: 1rem; }
+        .conj-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .conj-table th, .conj-table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        .conj-table th { color: #888; font-weight: 600; }
+        .conj-card { background: var(--card-bg); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+        .conj-verb-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+        .conj-sentence { font-size: 0.85rem; color: #888; margin-top: 10px; font-style: italic; }
+        .conj-list-item { padding: 10px; border-radius: 10px; cursor: pointer; }
+        .conj-list-item:hover { background: var(--bg); }
+        .gemini-explain-btn { margin-top: 10px; background: none; border: 2px solid var(--primary); color: var(--primary); border-radius: 10px; padding: 8px 14px; font-size: 0.85rem; cursor: pointer; }
+        .gemini-box { margin-top: 10px; padding: 12px; border-radius: 10px; background: var(--bg); font-size: 0.9rem; white-space: pre-wrap; }
+        .roleplay-suggestion-card { background: var(--card-bg); border-radius: 14px; padding: 14px; margin-top: 10px; cursor: pointer; border: 2px solid var(--primary); }

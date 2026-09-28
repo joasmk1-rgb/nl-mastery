@@ -551,6 +551,515 @@ if (firebaseAvailable) {
             updateStats();
             setActiveNav('nav-home');
             setupSwipeDrag();
+            await loadCurriculumData();
+            renderDashboard();
+        }
+
+        // ===== Curriculum (données de programme A1→B2) =====
+        let curriculumLevels = [];
+        let curriculumModules = [];
+        let curriculumNotions = {};
+        let curriculumExercises = [];
+        let curriculumLoaded = false;
+        let conjugationData = [];
+        let conjugationLoaded = false;
+
+        if (!state.curriculum) state.curriculum = { notionProgress: {} }; // { [notionId]: { opened, attempts, correct } }
+
+        async function loadCurriculumData() {
+            try {
+                const [lv, mo, no, ex] = await Promise.all([
+                    fetch('data/curriculum/levels.json').then(r => r.json()),
+                    fetch('data/curriculum/modules.json').then(r => r.json()),
+                    fetch('data/curriculum/notions.json').then(r => r.json()),
+                    fetch('data/curriculum/exercises.json').then(r => r.json())
+                ]);
+                curriculumLevels = lv;
+                curriculumModules = mo;
+                curriculumNotions = no;
+                curriculumExercises = ex;
+                curriculumLoaded = true;
+            } catch (e) {
+                console.warn('Curriculum non chargé (fichiers data/curriculum/*.json introuvables) :', e);
+                curriculumLoaded = false;
+            }
+            try {
+                conjugationData = await fetch('data/curriculum/conjugation.json').then(r => r.json());
+                conjugationLoaded = true;
+            } catch (e) {
+                console.warn('Conjugaison non chargée :', e);
+                conjugationLoaded = false;
+            }
+        }
+
+        function ntProgress(notionId) {
+            if (!state.curriculum.notionProgress[notionId]) {
+                state.curriculum.notionProgress[notionId] = { opened: false, attempts: 0, correct: 0 };
+            }
+            return state.curriculum.notionProgress[notionId];
+        }
+
+        // ===== MasteryEngine (v1) : score 0-5 par notion =====
+        // 0 jamais étudié, 1 découvert (leçon ouverte), 2 en cours (< 50% de bonnes réponses),
+        // 3 entraîné (>= 50%), 4 presque maîtrisé (100% sur le premier passage),
+        // 5 maîtrisé (100% de réussite, revu plusieurs fois)
+        function computeNotionMastery(notionId) {
+            const notion = curriculumNotions[notionId];
+            const p = state.curriculum.notionProgress[notionId];
+            if (!notion) return 0;
+            if (!p || (!p.opened && p.attempts === 0)) return 0;
+            if (p.attempts === 0) return 1;
+            const ratio = p.correct / p.attempts;
+            const exCount = (notion.exerciseIds || []).length || 1;
+            if (ratio < 0.5) return 2;
+            if (ratio < 1) return 3;
+            if (p.attempts < exCount * 2) return 4;
+            return 5;
+        }
+
+        function isNotionUnlocked(notionId) {
+            const notion = curriculumNotions[notionId];
+            if (!notion) return false;
+            if (!notion.prerequisites || notion.prerequisites.length === 0) return true;
+            return notion.prerequisites.every(pid => computeNotionMastery(pid) >= 3);
+        }
+
+        // ===== WeaknessEngine (v1) =====
+        // Ne regarde que les notions déjà rédigées (status "pret") — le reste n'a pas encore
+        // de contenu, ce n'est pas une "faiblesse" mais du programme pas encore construit.
+        function getWeaknesses() {
+            return Object.keys(curriculumNotions)
+                .filter(id => curriculumNotions[id].status === 'pret')
+                .map(id => ({ id, label: id, mastery: computeNotionMastery(id), notion: curriculumNotions[id] }))
+                .filter(w => w.mastery < 4)
+                .sort((a, b) => a.mastery - b.mastery);
+        }
+
+        // ===== RecommendationEngine (v1) =====
+        // Cherche, dans l'ordre du programme, la première notion prête (contenu rédigé),
+        // débloquée (prérequis acquis) et pas encore maîtrisée à 5.
+        function getRecommendation() {
+            const modulesSorted = [...curriculumModules].sort((a, b) => a.order - b.order);
+            for (const mod of modulesSorted) {
+                for (const notionId of mod.notions) {
+                    const notion = curriculumNotions[notionId];
+                    if (!notion || notion.status !== 'pret') continue;
+                    if (computeNotionMastery(notionId) >= 5) continue;
+                    if (!isNotionUnlocked(notionId)) continue;
+                    return { notionId, notion, module: mod };
+                }
+            }
+            return null;
+        }
+
+        // ===== Dashboard =====
+        function renderDashboard() {
+            const block = document.getElementById('dashboard-block');
+            if (!block) return;
+            const vp = getVocabProgress();
+            const reviewCount = getReviewItems().length;
+
+            let continueHtml = '';
+            if (curriculumLoaded) {
+                const rec = getRecommendation();
+                if (rec) {
+                    continueHtml = `
+                        <div class="dash-card dash-continue-card" onclick="showLesson('${rec.notionId}')">
+                            <div class="dash-continue-label">Continuer</div>
+                            <div class="dash-continue-title">${rec.module.label} — ${rec.notion.content.objectif ? rec.notion.content.objectif.split('.')[0] : rec.notionId}</div>
+                            <div style="font-size:0.8rem; opacity:0.9;">~10 min</div>
+                        </div>`;
+                } else {
+                    continueHtml = `<div class="dash-card" style="text-align:center; color:#888; font-size:0.85rem;">Toutes les leçons disponibles sont maîtrisées pour l'instant — d'autres arrivent bientôt 🎉</div>`;
+                }
+            }
+
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 5) : [];
+            const weakHtml = weaknesses.length ? weaknesses.map(w => `
+                <div class="dash-weak-row">
+                    <span>${w.id.replace(/_/g, ' ')}</span>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
+                </div>`).join('') : `<div style="font-size:0.8rem; color:#888;">Rien à signaler pour l'instant.</div>`;
+
+            block.innerHTML = `
+                <div class="dash-card">
+                    <div class="dash-level-row">
+                        <span class="dash-level-badge">${vp.level} — ${vp.pct}%</span>
+                        <span style="font-size:0.75rem; color:#888;">niveau interne estimé</span>
+                    </div>
+                    <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${vp.pct}%"></div></div>
+                </div>
+                ${continueHtml}
+                <div class="dash-card">
+                    <h3 style="margin:0 0 10px; font-size:0.9rem;">Aujourd'hui</h3>
+                    <div class="dash-today-grid">
+                        <div class="dash-today-item"><div class="dash-today-num">${reviewCount}</div><div class="dash-today-label">révisions</div></div>
+                        <div class="dash-today-item"><div class="dash-today-num">${curriculumLoaded && getRecommendation() ? 1 : 0}</div><div class="dash-today-label">leçon</div></div>
+                        <div class="dash-today-item"><div class="dash-today-num">${curriculumLoaded && getRecommendation() ? (getRecommendation().notion.exerciseIds || []).length : 0}</div><div class="dash-today-label">exercices</div></div>
+                        <div class="dash-today-item" style="cursor:pointer;" onclick="showRoleplay()"><div class="dash-today-num">5 min</div><div class="dash-today-label">expression orale</div></div>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <h3 style="margin:0 0 10px; font-size:0.9rem;">Tes principales faiblesses</h3>
+                    ${weakHtml}
+                </div>`;
+        }
+
+        // ===== Vue "Apprendre" (parcours par niveau/module/notion) =====
+        let apprendreCurrentLevel = 'A1';
+
+        function showApprendre() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('apprendre-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            if (!curriculumLoaded) {
+                document.getElementById('module-list').innerHTML = '<p style="color:#888;">Programme en cours de chargement...</p>';
+                return;
+            }
+            renderApprendreLevel(apprendreCurrentLevel);
+        }
+
+        function renderApprendreLevel(levelId) {
+            apprendreCurrentLevel = levelId;
+            const tabRow = document.getElementById('level-tab-row');
+            tabRow.innerHTML = curriculumLevels.map(l =>
+                `<button class="level-tab ${l.id === levelId ? 'active' : ''}" onclick="renderApprendreLevel('${l.id}')">${l.id}</button>`
+            ).join('');
+
+            const modulesForLevel = curriculumModules.filter(m => m.level === levelId).sort((a, b) => a.order - b.order);
+            const listEl = document.getElementById('module-list');
+            if (!modulesForLevel.length) {
+                listEl.innerHTML = '<p style="color:#888;">Programme pas encore rédigé pour ce niveau.</p>';
+                return;
+            }
+            listEl.innerHTML = modulesForLevel.map(mod => {
+                const rows = mod.notions.map(nid => {
+                    const notion = curriculumNotions[nid];
+                    if (!notion) return '';
+                    const ready = notion.status === 'pret';
+                    const unlocked = ready && isNotionUnlocked(nid);
+                    const mastery = ready ? computeNotionMastery(nid) : 0;
+                    const label = nid.replace(/_/g, ' ');
+                    const statusHtml = !ready
+                        ? `<span class="notion-status pending">à venir</span>`
+                        : `<span class="notion-status s${mastery}">${mastery}/5</span>`;
+                    const clickAttr = (ready && unlocked) ? `onclick="showLesson('${nid}')"` : '';
+                    return `<div class="notion-row ${(!ready || !unlocked) ? 'locked' : ''}" ${clickAttr}>
+                        <span>${label}</span>${statusHtml}
+                    </div>`;
+                }).join('');
+                return `<div class="module-card"><h3>${mod.order}. ${mod.label}</h3>${rows}</div>`;
+            }).join('');
+        }
+
+        // ===== Vue Leçon =====
+        let currentLessonNotionId = null;
+
+        function showLesson(notionId) {
+            currentLessonNotionId = notionId;
+            const notion = curriculumNotions[notionId];
+            if (!notion || !notion.content) return;
+            ntProgress(notionId).opened = true;
+            save();
+
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('lesson-view').classList.add('active');
+
+            const c = notion.content;
+            const exCount = (notion.exerciseIds || []).length;
+            const mastery = computeNotionMastery(notionId);
+            const rpSuggestion = mastery >= 4 ? getRoleplaySuggestion(notionId) : null;
+            document.getElementById('lesson-content').innerHTML = `
+                <div class="lesson-block"><h3>🎯 Objectif</h3><p>${c.objectif || ''}</p></div>
+                <div class="lesson-block"><h3>📖 Comprendre</h3><p>${c.comprendre || ''}</p></div>
+                <div class="lesson-block"><h3>🇳🇱 Règle</h3><p>${c.regle || ''}</p></div>
+                <div class="lesson-block"><h3>👀 Exemples</h3>${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
+                <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
+                <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
+                <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
+                ${exCount ? `<button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>` : ''}
+                ${rpSuggestion ? `<div class="roleplay-suggestion-card" onclick="showRoleplay(); rpShowCategory('${rpSuggestion.category}');">🎙️ Notion maîtrisée ! Envie de pratiquer à l'oral ?<br><b>${rpSuggestion.label}</b></div>` : ''}
+            `;
+        }
+
+        // ===== Vue Exercice =====
+        let exerciseQueue = [];
+        let exerciseIndex = 0;
+        let exerciseSelectedAnswer = null;
+
+        function showExercise(notionId) {
+            const notion = curriculumNotions[notionId];
+            exerciseQueue = (notion.exerciseIds || []).map(id => curriculumExercises.find(e => e.id === id)).filter(Boolean);
+            exerciseIndex = 0;
+            document.getElementById('exercise-back-btn').onclick = () => showLesson(notionId);
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('exercise-view').classList.add('active');
+            renderCurrentExercise();
+        }
+
+        function renderCurrentExercise() {
+            const ex = exerciseQueue[exerciseIndex];
+            exerciseSelectedAnswer = null;
+            document.getElementById('exercise-progress').innerText = `Exercice ${exerciseIndex + 1} / ${exerciseQueue.length}`;
+            document.getElementById('exercise-question').innerText = ex.question;
+            document.getElementById('exercise-feedback').innerText = '';
+            document.getElementById('exercise-check-btn').style.display = '';
+            document.getElementById('exercise-next-btn').style.display = 'none';
+
+            const zone = document.getElementById('exercise-answer-zone');
+            if (ex.type === 'qcm') {
+                zone.innerHTML = ex.options.map(opt =>
+                    `<button class="ex-option-btn" onclick="selectExerciseOption(this, '${opt}')">${opt}</button>`
+                ).join('');
+            } else if (ex.type === 'remise_en_ordre') {
+                exerciseOrderSelection = [];
+                exerciseOrderBank = shuffleArray([...ex.words]);
+                renderOrderZone();
+            } else {
+                zone.innerHTML = `<input type="text" id="exercise-text-input" placeholder="Ta réponse...">`;
+            }
+        }
+
+        function selectExerciseOption(btn, value) {
+            document.querySelectorAll('.ex-option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            exerciseSelectedAnswer = value;
+        }
+
+        // ===== Exercices "remise en ordre" (ordre des mots) =====
+        let exerciseOrderBank = [];
+        let exerciseOrderSelection = [];
+
+        function shuffleArray(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            // évite (rarement) que le mélange retombe exactement sur l'ordre correct
+            if (JSON.stringify(a) === JSON.stringify(arr) && a.length > 1) {
+                [a[0], a[1]] = [a[1], a[0]];
+            }
+            return a;
+        }
+
+        function renderOrderZone() {
+            const zone = document.getElementById('exercise-answer-zone');
+            zone.innerHTML = `
+                <div class="order-selection" id="order-selection">
+                    ${exerciseOrderSelection.map((w, i) => `<button class="ex-order-tile selected" onclick="removeOrderWord(${i})">${w}</button>`).join('') || '<span class="order-placeholder">Clique sur les mots ci-dessous pour construire la phrase...</span>'}
+                </div>
+                <div class="order-bank" id="order-bank">
+                    ${exerciseOrderBank.map((w, i) => `<button class="ex-order-tile" onclick="addOrderWord(${i})">${w}</button>`).join('')}
+                </div>`;
+        }
+
+        function addOrderWord(bankIndex) {
+            const word = exerciseOrderBank[bankIndex];
+            exerciseOrderSelection.push(word);
+            exerciseOrderBank.splice(bankIndex, 1);
+            renderOrderZone();
+        }
+
+        function removeOrderWord(selIndex) {
+            const word = exerciseOrderSelection[selIndex];
+            exerciseOrderBank.push(word);
+            exerciseOrderSelection.splice(selIndex, 1);
+            renderOrderZone();
+        }
+
+        function checkExerciseAnswer() {
+            const ex = exerciseQueue[exerciseIndex];
+            let given;
+            if (ex.type === 'qcm') given = exerciseSelectedAnswer;
+            else if (ex.type === 'remise_en_ordre') given = exerciseOrderSelection.join(' ');
+            else given = (document.getElementById('exercise-text-input').value || '').trim();
+            if (!given) return;
+
+            const expected = ex.type === 'remise_en_ordre' ? ex.answer.join(' ') : ex.answer;
+            const isCorrect = normalize(given) === normalize(expected);
+            const p = ntProgress(ex.notionId);
+            p.attempts++;
+            if (isCorrect) p.correct++;
+            save();
+
+            const fb = document.getElementById('exercise-feedback');
+            fb.style.color = isCorrect ? 'var(--success)' : 'var(--wrong)';
+            fb.innerText = isCorrect ? '✅ Correct !' : `❌ Réponse attendue : ${expected}`;
+
+            if (ex.type === 'qcm') {
+                document.querySelectorAll('.ex-option-btn').forEach(b => {
+                    if (b.textContent === ex.answer) b.classList.add('correct');
+                    else if (b.classList.contains('selected')) b.classList.add('wrong');
+                });
+            } else if (ex.type === 'remise_en_ordre') {
+                document.querySelectorAll('#order-selection .ex-order-tile').forEach(b => {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                    b.onclick = null;
+                });
+                document.querySelectorAll('#order-bank .ex-order-tile').forEach(b => b.onclick = null);
+            }
+            document.getElementById('exercise-check-btn').style.display = 'none';
+            document.getElementById('exercise-next-btn').style.display = '';
+        }
+
+        function nextExercise() {
+            exerciseIndex++;
+            if (exerciseIndex >= exerciseQueue.length) {
+                showLesson(exerciseQueue[0].notionId);
+                renderDashboard();
+                return;
+            }
+            renderCurrentExercise();
+        }
+
+        // ===== Vue Conjugaison =====
+        let conjugaisonSelectedVerb = null;
+
+        function showConjugaison() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('conjugaison-view').classList.add('active');
+            setActiveNav('nav-conjugaison');
+            document.getElementById('conj-detail').innerHTML = '';
+            if (!conjugationLoaded) {
+                document.getElementById('conj-list').innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
+                return;
+            }
+            renderConjugaisonList();
+        }
+
+        function renderConjugaisonList() {
+            if (!conjugationLoaded) return;
+            const q = normalize((document.getElementById('conj-search').value || '').trim());
+            const listEl = document.getElementById('conj-list');
+            let results = conjugationData;
+            if (q) {
+                results = conjugationData.filter(v =>
+                    normalize(v.infinitief).includes(q) || normalize(v.fr).includes(q)
+                );
+            }
+            results = results.slice(0, 40);
+            if (!results.length) {
+                listEl.innerHTML = '<p style="color:#888;">Aucun verbe trouvé.</p>';
+                return;
+            }
+            listEl.innerHTML = results.map(v =>
+                `<div class="conj-list-item" onclick="showConjugaisonDetail('${v.infinitief.replace(/'/g, "\\'")}')">
+                    <b>${v.infinitief}</b> <span style="color:#888;">— ${v.fr}</span>
+                </div>`
+            ).join('');
+        }
+
+        function showConjugaisonDetail(infinitief) {
+            const v = conjugationData.find(x => x.infinitief === infinitief);
+            if (!v) return;
+            conjugaisonSelectedVerb = v;
+            document.getElementById('conj-detail').innerHTML = `
+                <div class="conj-card">
+                    <div class="conj-verb-title">${v.infinitief}</div>
+                    <div style="color:#888; margin-bottom:10px;">${v.fr}</div>
+                    <table class="conj-table">
+                        <tr><th>Présent</th><th></th></tr>
+                        <tr><td>ik</td><td>${v.present.ik}</td></tr>
+                        <tr><td>jij / u</td><td>${v.present.jij}</td></tr>
+                        <tr><td>hij / zij / het</td><td>${v.present.hij}</td></tr>
+                        <tr><td>wij / jullie / zij</td><td>${v.present.wij}</td></tr>
+                        <tr><th>Imperfectum (prétérit)</th><th></th></tr>
+                        <tr><td>ik / jij / hij</td><td>${v.preteritum}</td></tr>
+                        <tr><th>Perfectum</th><th></th></tr>
+                        <tr><td>${v.auxiliaire === 'zijn' ? 'ik ben...' : 'ik heb...'}</td><td>${v.participePasse}</td></tr>
+                    </table>
+                    <div class="conj-sentence">${v.exempleNl}<br>${v.exempleFr}</div>
+                </div>`;
+        }
+
+        // ===== GeminiService (abstraction IA) =====
+        // Le curriculum NL Mastery reste toujours la source de vérité pédagogique.
+        // Gemini n'intervient qu'en complément (reformulations, exemples, correction) — jamais pour définir le programme.
+        const GeminiService = (() => {
+            function getKey() {
+                return localStorage.getItem('gemini_api_key') || '';
+            }
+            function isAvailable() {
+                return !!getKey();
+            }
+            async function generate(prompt) {
+                const apiKey = getKey();
+                if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (vue Jeu de rôle).');
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }] })
+                });
+                const data = await response.json();
+                if (data.error) throw new Error(data.error.message || 'Erreur API Gemini');
+                if (data.candidates && data.candidates[0].content) {
+                    return data.candidates[0].content.parts[0].text;
+                }
+                throw new Error('Réponse Gemini vide ou bloquée.');
+            }
+            return {
+                isAvailable,
+                explainConcept: (notionContent) => generate(
+                    `Tu es un professeur de néerlandais pour francophones. Explique ce concept autrement, avec un angle différent et un exemple concret, en français, en 4 phrases maximum :\n\n${notionContent}`
+                ),
+                simplifyExplanation: (notionContent) => generate(
+                    `Simplifie au maximum cette explication de grammaire néerlandaise pour un débutant francophone, 2 phrases maximum, langage très simple :\n\n${notionContent}`
+                ),
+                generateExamples: (notionContent, count) => generate(
+                    `Donne ${count || 3} nouvelles phrases d'exemple en néerlandais (avec traduction française) illustrant cette règle, différentes de celles déjà données :\n\n${notionContent}`
+                ),
+                generateExercises: (notionContent, count) => generate(
+                    `Crée ${count || 2} nouveaux exercices à choix multiple en néerlandais pour pratiquer cette règle. Réponds en JSON strict: [{"question":"...","options":["...","...","..."],"answer":"..."}]\n\nRègle :\n${notionContent}`
+                ),
+                correctAnswer: (question, userAnswer, correctAnswer) => generate(
+                    `Un apprenant néerlandais a répondu "${userAnswer}" à la question "${question}". La bonne réponse est "${correctAnswer}". Explique en français, en 2 phrases maximum, pourquoi sa réponse est fausse et comment retenir la bonne.`
+                ),
+                explainMistake: (mistakeDescription) => generate(
+                    `Un apprenant francophone fait l'erreur suivante en néerlandais : "${mistakeDescription}". Explique en français, simplement, pourquoi c'est une erreur fréquente pour un francophone et donne un moyen mnémotechnique.`
+                ),
+                generateConversation: (scenario, history) => generate(
+                    `Continue cette conversation en néerlandais dans le contexte suivant : ${scenario}. Historique : ${JSON.stringify(history)}. Réponds uniquement en néerlandais, une ou deux phrases.`
+                ),
+                evaluateProduction: (prompt_, userText) => generate(
+                    `Un apprenant francophone de néerlandais devait : "${prompt_}". Il a écrit : "${userText}". Évalue en français (2-3 phrases) : grammaire correcte ou non, et une suggestion d'amélioration.`
+                )
+            };
+        })();
+
+        async function askGeminiExplainOtherwise(notionId) {
+            const notion = curriculumNotions[notionId];
+            const box = document.getElementById('gemini-explain-box');
+            if (!GeminiService.isAvailable()) {
+                box.style.display = '';
+                box.innerText = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis la vue Jeu de rôle pour activer cette fonctionnalité.";
+                return;
+            }
+            box.style.display = '';
+            box.innerText = "L'IA réfléchit...";
+            try {
+                const contentStr = `${notion.content.objectif}\n${notion.content.comprendre}\n${notion.content.regle}`;
+                const text = await GeminiService.explainConcept(contentStr);
+                box.innerText = text;
+            } catch (e) {
+                box.innerText = "Erreur Gemini : " + e.message;
+            }
+        }
+
+        // ===== Lien curriculum → jeu de rôle =====
+        // Suggère une mission de jeu de rôle liée quand une notion vient d'être maîtrisée.
+        const NOTION_ROLEPLAY_LINKS = {
+            perfectum_intro: { category: 'quotidien', label: "Raconte ta journée d'hier (perfectum)" },
+            regles_du_passe_de_base: { category: 'quotidien', label: "Raconte ta journée d'hier (perfectum)" },
+            se_presenter: { category: 'entretiens', label: "Entraîne-toi à te présenter en entretien" },
+            travail_etudes: { category: 'entretiens', label: "Parle de ton travail en entretien" },
+            ville_administration: { category: 'admin', label: "Simule une démarche administrative" },
+            achats: { category: 'quotidien', label: "Simule un achat au magasin" }
+        };
+
+        function getRoleplaySuggestion(notionId) {
+            return NOTION_ROLEPLAY_LINKS[notionId] || null;
         }
 
         const MAIN_CATEGORIES = [
@@ -847,6 +1356,7 @@ if (firebaseAvailable) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
             setActiveNav('nav-home');
+            if (curriculumLoaded) renderDashboard();
         }
 
         function startSession(category) {

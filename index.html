@@ -12,7 +12,6 @@
     <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-<body>
 
     <header>
         <div style="font-weight: bold; font-size: 1.2rem;">NL <span style="color:var(--primary)">Mastery</span></div>
@@ -21,6 +20,8 @@
 
     <nav class="bottom-nav">
         <button onclick="showHome()" id="nav-home"><span class="icon">🏠</span>Accueil</button>
+        <button onclick="showApprendre()" id="nav-apprendre"><span class="icon">📚</span>Apprendre</button>
+        <button onclick="showConjugaison()" id="nav-conjugaison"><span class="icon">🔤</span>Conjugaison</button>
         <button onclick="startRevision()" id="nav-revision"><span class="icon">🔁</span>Révision</button>
         <button onclick="showWordList()" id="nav-list"><span class="icon">📋</span>Mots</button>
         <button onclick="showProfil()" id="nav-profil"><span class="icon">👤</span>Profil</button>
@@ -30,6 +31,8 @@
     </nav>
 
     <div id="home-view" class="view active">
+        <div id="dashboard-block"></div>
+
         <h2>Que veux-tu bosser ?</h2>
         <div id="total-words-count" style="font-size:0.85rem; color:#888; margin-bottom:10px;"></div>
         <div class="grid" style="max-width:500px;">
@@ -339,6 +342,40 @@
             <div id="rp-chat-history"></div>
             <button id="rp-mic-btn" class="btn btn-green" onclick="rpToggleSpeechRecognition()">🎤 Cliquer pour parler</button>
             <div id="rp-status">Prêt</div>
+        </div>
+    </div>
+
+    <div id="apprendre-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>📚 Apprendre</h2>
+        <div class="level-tab-row" id="level-tab-row"></div>
+        <div id="module-list"></div>
+    </div>
+
+    <div id="lesson-view" class="view">
+        <button class="back-btn" onclick="showApprendre()">← Retour au programme</button>
+        <div id="lesson-content" style="width:100%; max-width:500px;"></div>
+    </div>
+
+    <div id="conjugaison-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <h2>🔤 Conjugaison</h2>
+        <div class="conj-search-row" style="width:100%; max-width:500px;">
+            <input type="text" id="conj-search" placeholder="Cherche un verbe (NL ou FR)..." oninput="renderConjugaisonList()">
+        </div>
+        <div id="conj-detail" style="width:100%; max-width:500px;"></div>
+        <div id="conj-list" style="width:100%; max-width:500px;"></div>
+    </div>
+
+    <div id="exercise-view" class="view">
+        <button class="back-btn" id="exercise-back-btn">← Retour à la leçon</button>
+        <div class="study-box" id="exercise-box">
+            <div id="exercise-progress" style="font-weight:bold; margin-bottom:10px;"></div>
+            <h2 id="exercise-question"></h2>
+            <div id="exercise-answer-zone"></div>
+            <div id="exercise-feedback" style="min-height:20px; font-weight:bold; margin:10px 0;"></div>
+            <button class="btn btn-green" id="exercise-check-btn" onclick="checkExerciseAnswer()">VÉRIFIER</button>
+            <button class="btn btn-gray" id="exercise-next-btn" onclick="nextExercise()" style="display:none;">SUIVANT →</button>
         </div>
     </div>
 
