@@ -564,7 +564,14 @@ if (firebaseAvailable) {
         let conjugationData = [];
         let conjugationLoaded = false;
 
-        if (!state.curriculum) state.curriculum = { notionProgress: {} }; // { [notionId]: { opened, attempts, correct } }
+        if (!state.curriculum) state.curriculum = { notionProgress: {} };
+        // { [notionId]: { opened, attempts, correct,
+        //   weaknessCount, lastResult, lastAttemptAt } }
+        // weaknessCount/lastResult/lastAttemptAt sont ajoutés par cette version pour donner une
+        // conséquence aux erreurs (voir MasteryEngine/WeaknessEngine plus bas). Migration douce :
+        // les anciennes entrées n'ont pas ces champs, ils sont donc TOUJOURS lus avec un défaut
+        // (`|| 0`, etc.) plutôt que backfillés en masse — aucune donnée existante n'est invalidée.
+        if (!state.productionWeaknessSignals) state.productionWeaknessSignals = [];
 
         async function loadCurriculumData() {
             try {
@@ -599,7 +606,7 @@ if (firebaseAvailable) {
             return state.curriculum.notionProgress[notionId];
         }
 
-        // ===== MasteryEngine (v1) : score 0-5 par notion =====
+        // ===== MasteryEngine (v2) : score 0-5 par notion (calcul de base inchangé) =====
         // 0 jamais étudié, 1 découvert (leçon ouverte), 2 en cours (< 50% de bonnes réponses),
         // 3 entraîné (>= 50%), 4 presque maîtrisé (100% sur le premier passage),
         // 5 maîtrisé (100% de réussite, revu plusieurs fois)
@@ -624,30 +631,160 @@ if (firebaseAvailable) {
             return notion.prerequisites.every(pid => computeNotionMastery(pid) >= 3);
         }
 
-        // ===== WeaknessEngine (v1) =====
-        // Ne regarde que les notions déjà rédigées (status "pret") — le reste n'a pas encore
-        // de contenu, ce n'est pas une "faiblesse" mais du programme pas encore construit.
+        // ===== Signal de faiblesse "exercices", pondéré par la récence =====
+        // weaknessCount est incrémenté à chaque erreur et décrémenté à chaque réussite suivante
+        // (voir checkExerciseAnswer) : ce n'est jamais un compteur qui condamne durablement une
+        // notion. En plus de ça, on atténue son poids avec le temps ici, pour qu'une erreur
+        // ancienne pèse moins qu'une erreur récente même sans nouvelle tentative :
+        // - de 14 à 30 jours sans y retoucher : poids divisé par 2
+        // - au-delà de 30 jours : on ne la compte plus comme un signal actif
+        function getEffectiveWeakness(notionId) {
+            const p = state.curriculum.notionProgress[notionId];
+            const raw = (p && p.weaknessCount) || 0;
+            if (raw <= 0 || !p || !p.lastAttemptAt) return raw;
+            const daysSince = (Date.now() - p.lastAttemptAt) / 86400000;
+            if (daysSince >= 30) return 0;
+            if (daysSince >= 14) return raw * 0.5;
+            return raw;
+        }
+
+        // ===== Signal de faiblesse "production" (Gemini) =====
+        // Lecture seule de productionWeaknessSignals (déjà alimenté par
+        // recordProductionWeaknessSignals) : aucune deuxième structure de données n'est créée.
+        function getProductionWeaknessCount(notionId) {
+            return (state.productionWeaknessSignals || []).filter(s => s.notionId === notionId).length;
+        }
+
+        // ===== WeaknessEngine (v2) : 7 états par notion =====
+        // jamais_etudiee / decouverte / en_cours / faible / entrainee / presque_maitrisee / maitrisee
+        // (+ a_pratiquer : exercices bons mais un signal ponctuel — exercice ou production — reste).
+        // Garde-fous demandés : (1) un signal de production ne peut JAMAIS, à lui seul, faire
+        // basculer une notion en "faible" — il ne fait que la pousser vers "à pratiquer" ; (2) il
+        // faut au moins 2 erreurs d'exercice encore actives (récentes) pour parler de "faible" —
+        // une erreur isolée ne déclasse pas une notion déjà solide.
+        function getNotionStatus(notionId) {
+            const notion = curriculumNotions[notionId];
+            if (!notion) return 'jamais_etudiee';
+            const mastery = computeNotionMastery(notionId);
+            if (mastery === 0) return 'jamais_etudiee';
+            if (mastery === 1) return 'decouverte';
+
+            const effWeak = getEffectiveWeakness(notionId);
+            const prodCount = getProductionWeaknessCount(notionId);
+
+            if (effWeak >= 2) return 'faible';
+            if (mastery === 2) return 'en_cours';
+            if (mastery === 3) return 'entrainee';
+            if (mastery === 4) return (effWeak >= 1 || prodCount >= 1) ? 'a_pratiquer' : 'presque_maitrisee';
+            // mastery === 5
+            return (effWeak >= 1 || prodCount >= 1) ? 'a_pratiquer' : 'maitrisee';
+        }
+
+        function getNotionStatusLabel(status) {
+            return ({
+                jamais_etudiee: 'Jamais étudiée',
+                decouverte: 'Découverte',
+                en_cours: 'En cours',
+                faible: '🔁 À revoir',
+                a_pratiquer: '🎯 À pratiquer',
+                entrainee: 'Entraînée',
+                presque_maitrisee: 'Presque maîtrisée',
+                maitrisee: 'Maîtrisée'
+            })[status] || status;
+        }
+
+        // ===== WeaknessEngine (v2) =====
+        // Ne regarde que les notions déjà rédigées (status "pret") — le reste n'a pas encore de
+        // contenu, ce n'est pas une "faiblesse" mais du programme pas encore construit. Une notion
+        // jamais étudiée n'est pas non plus une "faiblesse" : c'est juste du programme pas encore vu.
         function getWeaknesses() {
             return Object.keys(curriculumNotions)
                 .filter(id => curriculumNotions[id].status === 'pret')
-                .map(id => ({ id, label: id, mastery: computeNotionMastery(id), notion: curriculumNotions[id] }))
-                .filter(w => w.mastery < 4)
-                .sort((a, b) => a.mastery - b.mastery);
+                .map(id => ({
+                    id, label: id,
+                    mastery: computeNotionMastery(id),
+                    status: getNotionStatus(id),
+                    notion: curriculumNotions[id]
+                }))
+                .filter(w => w.status === 'faible' || w.status === 'a_pratiquer')
+                .sort((a, b) => {
+                    // "faible" avant "à pratiquer", puis par intensité du signal d'exercice
+                    if (a.status !== b.status) return a.status === 'faible' ? -1 : 1;
+                    return getEffectiveWeakness(b.id) - getEffectiveWeakness(a.id);
+                });
         }
 
-        // ===== RecommendationEngine (v1) =====
-        // Cherche, dans l'ordre du programme, la première notion prête (contenu rédigé),
-        // débloquée (prérequis acquis) et pas encore maîtrisée à 5.
+        // ===== RecommendationEngine (v2) =====
+        // Le moteur dit quoi proposer MAINTENANT (une seule suggestion) — il n'impose pas de
+        // programme quotidien. Toujours filtré par : notion.status === 'pret', prérequis acquis
+        // (isNotionUnlocked), ordre du programme. Priorités, dans l'ordre :
+        //   1. faiblesse d'exercice réelle et non isolée (statut "faible")
+        //   2. notion récemment abordée mais encore fragile (découverte / en cours)
+        //   3. à consolider : exercices bons mais signal (exercice ponctuel ou production) restant
+        //      ("à pratiquer"), ou notion presque maîtrisée pas revue depuis longtemps (spaced review)
+        //   4. nouvelle notion débloquée, jamais étudiée
+        //   5. repli : comportement historique (1ère notion du programme pas encore à 5)
         function getRecommendation() {
             const modulesSorted = [...curriculumModules].sort((a, b) => a.order - b.order);
-            for (const mod of modulesSorted) {
-                for (const notionId of mod.notions) {
-                    const notion = curriculumNotions[notionId];
-                    if (!notion || notion.status !== 'pret') continue;
-                    if (computeNotionMastery(notionId) >= 5) continue;
-                    if (!isNotionUnlocked(notionId)) continue;
-                    return { notionId, notion, module: mod };
-                }
+            const ordered = modulesSorted.flatMap(mod => (mod.notions || []).map(notionId => ({ notionId, module: mod })));
+            const ready = ordered.filter(o => {
+                const n = curriculumNotions[o.notionId];
+                return n && n.status === 'pret' && isNotionUnlocked(o.notionId);
+            });
+
+            const pick = (list, reason) => {
+                if (!list.length) return null;
+                const o = list[0];
+                return { notionId: o.notionId, notion: curriculumNotions[o.notionId], module: o.module, reason };
+            };
+
+            // Priorité 1
+            let candidates = ready.filter(o => getNotionStatus(o.notionId) === 'faible')
+                .sort((a, b) => getEffectiveWeakness(b.notionId) - getEffectiveWeakness(a.notionId));
+            if (candidates.length) {
+                const titre = curriculumNotions[candidates[0].notionId].content.titre || candidates[0].notionId;
+                const r = pick(candidates, `À revoir : tu as fait plusieurs erreurs récentes sur « ${titre} ».`);
+                if (r) return r;
+            }
+
+            // Priorité 2
+            candidates = ready.filter(o => ['decouverte', 'en_cours'].includes(getNotionStatus(o.notionId)));
+            if (candidates.length) {
+                const r = pick(candidates, "À consolider : tu viens de l'aborder, elle n'est pas encore stabilisée.");
+                if (r) return r;
+            }
+
+            // Priorité 3a : à pratiquer (exercices bons, signal exercice ponctuel ou production restant)
+            candidates = ready.filter(o => getNotionStatus(o.notionId) === 'a_pratiquer');
+            if (candidates.length) {
+                const r = pick(candidates, "À pratiquer : les exercices sont bons mais un point mérite encore un peu d'entraînement (parfois vu en production).");
+                if (r) return r;
+            }
+
+            // Priorité 3b : spaced review — notion presque maîtrisée mais pas revue depuis longtemps
+            const REVIEW_GAP_DAYS = 21;
+            candidates = ready.filter(o => {
+                if (getNotionStatus(o.notionId) !== 'presque_maitrisee') return false;
+                const p = state.curriculum.notionProgress[o.notionId];
+                if (!p || !p.lastAttemptAt) return false;
+                return (Date.now() - p.lastAttemptAt) / 86400000 >= REVIEW_GAP_DAYS;
+            });
+            if (candidates.length) {
+                const r = pick(candidates, "À consolider : ça fait un moment, un petit rappel te ferait du bien.");
+                if (r) return r;
+            }
+
+            // Priorité 4 : nouvelle notion débloquée
+            candidates = ready.filter(o => getNotionStatus(o.notionId) === 'jamais_etudiee');
+            if (candidates.length) {
+                const r = pick(candidates, 'Nouvelle notion : tes prérequis sont maîtrisés.');
+                if (r) return r;
+            }
+
+            // Priorité 5 : repli, comportement historique
+            for (const o of ready) {
+                if (computeNotionMastery(o.notionId) >= 5) continue;
+                return { notionId: o.notionId, notion: curriculumNotions[o.notionId], module: o.module, reason: 'Continue ta progression dans le programme.' };
             }
             return null;
         }
@@ -667,7 +804,7 @@ if (firebaseAvailable) {
                         <div class="dash-card dash-continue-card" onclick="showLesson('${rec.notionId}')">
                             <div class="dash-continue-label">Continuer</div>
                             <div class="dash-continue-title">${rec.module.label} — ${rec.notion.content.objectif ? rec.notion.content.objectif.split('.')[0] : rec.notionId}</div>
-                            <div style="font-size:0.8rem; opacity:0.9;">~10 min</div>
+                            <div style="font-size:0.8rem; opacity:0.9;">${rec.reason || '~10 min'}</div>
                         </div>`;
                 } else {
                     continueHtml = `<div class="dash-card" style="text-align:center; color:#888; font-size:0.85rem;">Toutes les leçons disponibles sont maîtrisées pour l'instant — d'autres arrivent bientôt 🎉</div>`;
@@ -676,8 +813,8 @@ if (firebaseAvailable) {
 
             const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 5) : [];
             const weakHtml = weaknesses.length ? weaknesses.map(w => `
-                <div class="dash-weak-row">
-                    <span>${w.id.replace(/_/g, ' ')}</span>
+                <div class="dash-weak-row" style="cursor:pointer;" onclick="showLesson('${w.id}')">
+                    <span>${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</span>
                     <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
                 </div>`).join('') : `<div style="font-size:0.8rem; color:#888;">Rien à signaler pour l'instant.</div>`;
 
@@ -973,7 +1110,20 @@ if (firebaseAvailable) {
             const isCorrect = normalize(given) === normalize(expected);
             const p = ntProgress(ex.notionId);
             p.attempts++;
-            if (isCorrect) p.correct++;
+            if (isCorrect) {
+                p.correct++;
+                // Une réussite fait diminuer progressivement la faiblesse — jamais un reset brutal
+                // à 0 : plusieurs notions ont plusieurs exercices, une bonne réponse ne prouve pas
+                // à elle seule que l'erreur précédente est totalement résolue.
+                p.weaknessCount = Math.max(0, (p.weaknessCount || 0) - 1);
+            } else {
+                // Une erreur a une conséquence : elle est enregistrée au niveau de la notion (et pas
+                // seulement dans le ratio attempts/correct), pour que WeaknessEngine/
+                // RecommendationEngine puissent la traiter comme un vrai signal de faiblesse.
+                p.weaknessCount = (p.weaknessCount || 0) + 1;
+            }
+            p.lastResult = isCorrect ? 'correct' : 'incorrect';
+            p.lastAttemptAt = Date.now();
             save();
 
             const fb = document.getElementById('exercise-feedback');
