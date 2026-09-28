@@ -27,7 +27,7 @@
     </div>
 
     <div id="wordlist-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>📋 Mots</h2>
         <div class="mots-toggle-row">
             <button id="mots-tab-liste" class="active" onclick="motsShowTab('liste')">📋 Liste</button>
@@ -86,10 +86,6 @@
             <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
             <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
         </div>
-        <div class="section-title">🎯 S'évaluer</div>
-        <div class="hub-grid single">
-            <div class="hub-card accent" onclick="showTestSelect()"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Test de niveau</div><div class="hub-card-desc">Estime ton niveau CECR à partir de ton vocabulaire connu.</div></div>
-        </div>
     </div>
 
     <div id="pratiquer-view" class="view">
@@ -102,15 +98,15 @@
             <div class="hub-card accent" onclick="showRoleplay()"><span class="hub-card-icon">🎙️</span><div class="hub-card-title">Jeu de rôle vocal libre</div><div class="hub-card-desc">Choisis une situation et discute en néerlandais avec Gemini.</div></div>
         </div>
 
-        <div class="section-title">🎯 Pratique ciblée</div>
+        <div class="section-title">🎯 Entraînement ciblé</div>
         <div id="pratiquer-targeted-list" class="hub-grid single"></div>
 
-        <div class="section-title">✍️ Production</div>
+        <div class="section-title">✍️ Écrit</div>
         <div id="pratiquer-production-list" class="hub-grid single"></div>
 
-        <div class="section-title">🧠 Situations</div>
+        <div class="section-title">🎭 Situations</div>
         <div class="hub-grid">
-            <div class="hub-card" onclick="showRoleplay(); rpShowCategory('entretiens');"><span class="hub-card-icon">💼</span><div class="hub-card-title">Professionnel</div><div class="hub-card-desc">Entretiens d'embauche, RH, technique.</div></div>
+            <div class="hub-card" onclick="showRoleplay(); rpShowCategory('entretiens');"><span class="hub-card-icon">💼</span><div class="hub-card-title">Travail</div><div class="hub-card-desc">Entretiens d'embauche, RH, technique.</div></div>
             <div class="hub-card" onclick="showRoleplay(); rpShowCategory('admin');"><span class="hub-card-icon">🏛️</span><div class="hub-card-title">Administration</div><div class="hub-card-desc">CPAS, mutuelle, commune, médecin.</div></div>
             <div class="hub-card" onclick="showRoleplay(); rpShowCategory('appels');"><span class="hub-card-icon">📞</span><div class="hub-card-title">Appels</div><div class="hub-card-desc">Standard, rendez-vous, suivi.</div></div>
             <div class="hub-card" onclick="showRoleplay(); rpShowCategory('quotidien');"><span class="hub-card-icon">☕</span><div class="hub-card-title">Vie quotidienne</div><div class="hub-card-desc">Café, restaurant, petites courses.</div></div>
@@ -137,14 +133,14 @@
     </div>
 
     <div id="memory-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
         <div id="memory-stats" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="memory-grid" id="m-grid"></div>
         <div id="memory-result" style="margin-top:20px; width:100%; max-width:400px;"></div>
     </div>
 
     <div id="ta-select-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>Choisis une durée</h2>
         <div class="grid">
             <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack(30)">30 sec</div>
@@ -155,7 +151,7 @@
     </div>
 
     <div id="timeattack-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
         <div id="ta-timer">30</div>
         <div id="ta-score">Score : 0</div>
         <div class="study-box">
@@ -173,10 +169,10 @@
     </div>
 
     <div id="test-select-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
-        <h2>🎯 Test de niveau</h2>
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
+        <h2>🔤 Test de vocabulaire</h2>
         <p style="max-width:450px; text-align:center; font-size:0.85rem; color:#888;">
-            Estimation heuristique basée sur la fréquence d'usage réelle des mots en néerlandais (pas un test scientifiquement validé).
+            Estimation heuristique basée sur la fréquence d'usage réelle des mots en néerlandais (pas un test scientifiquement validé, et distinct de l'évaluation de ton niveau sur le programme).
             Les mots déjà vraiment maîtrisés comptent automatiquement comme acquis, sans être reposés.
         </p>
         <div class="grid">
@@ -186,7 +182,7 @@
     </div>
 
     <div id="test-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
         <div id="test-progress" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="study-box">
             <h1 id="test-q-text">Mots</h1>
@@ -198,13 +194,13 @@
     </div>
 
     <div id="swipe-select-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>👉 Choisis une catégorie</h2>
         <div class="grid" id="swipe-category-grid"></div>
     </div>
 
     <div id="swipe-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
         <div id="swipe-progress" style="font-weight:bold; margin-bottom:15px;"></div>
         <div style="position:relative; width:90%; max-width:380px; height:220px;">
             <div id="swipe-card" class="study-box" style="position:absolute; inset:0; width:100%; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:grab; touch-action:none; user-select:none;">
@@ -224,7 +220,7 @@
     </div>
 
     <div id="article-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="article-progress" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="study-box">
             <small>de ou het ?</small>
@@ -238,7 +234,7 @@
     </div>
 
     <div id="anagram-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
         <div id="anagram-score" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="study-box">
             <small>Indice</small>
@@ -253,7 +249,7 @@
     </div>
 
     <div id="info-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>ℹ️ Infos & comment ça marche</h2>
         <div style="width:100%; max-width:500px; text-align:left;">
             <div class="study-box" style="text-align:left;">
@@ -327,7 +323,7 @@
     </div>
 
     <div id="roleplay-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showPratiquer()">← Retour</button>
         <h2>🎙️ Pratique orale — Jeu de rôle</h2>
 
         <div class="rp-config-box">
@@ -376,7 +372,7 @@
     </div>
 
     <div id="conjugaison-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>🔤 Conjugaison</h2>
         <div class="conj-search-row" style="width:100%; max-width:500px;">
             <input type="text" id="conj-search" placeholder="Cherche un verbe (NL ou FR)..." oninput="renderConjugaisonList()">
@@ -398,7 +394,7 @@
     </div>
 
     <div id="compte-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
+        <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>🔐 Compte</h2>
 
         <div id="acc-logged-out">

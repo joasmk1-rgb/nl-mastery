@@ -1004,23 +1004,54 @@ if (firebaseAvailable) {
         }
 
         // ===== Dashboard =====
+        // Résumé du module "en cours" pour le petit bloc secondaire "▶️ Continuer" (voir
+        // getCurrentModuleProgress). Ne crée aucun nouvel état : relit simplement
+        // curriculumModules/curriculumNotions + getNotionStatus/isNotionUnlocked déjà existants,
+        // pour trouver le premier module non entièrement maîtrisé sur lequel l'utilisateur a accès.
+        function getCurrentModuleProgress() {
+            if (!curriculumLoaded) return null;
+            const modulesSorted = [...curriculumModules].sort((a, b) => {
+                const la = curriculumLevels.find(l => l.id === a.level);
+                const lb = curriculumLevels.find(l => l.id === b.level);
+                const lo = (la ? la.order : 0) - (lb ? lb.order : 0);
+                return lo !== 0 ? lo : a.order - b.order;
+            });
+            for (const mod of modulesSorted) {
+                const readyIds = (mod.notions || []).filter(nid => curriculumNotions[nid] && curriculumNotions[nid].status === 'pret');
+                if (!readyIds.length) continue;
+                const masteredCount = readyIds.filter(nid => getNotionStatus(nid) === 'maitrisee').length;
+                const workedCount = readyIds.filter(nid => computeNotionMastery(nid) >= 1).length;
+                const hasUnlocked = readyIds.some(nid => isNotionUnlocked(nid));
+                if (masteredCount < readyIds.length && hasUnlocked) {
+                    return { module: mod, workedCount, total: readyIds.length, masteredCount };
+                }
+            }
+            return null;
+        }
+
+        function continueCurrentModule(levelId) {
+            showApprendre();
+            renderApprendreLevel(levelId);
+        }
+
         function renderDashboard() {
             const block = document.getElementById('dashboard-block');
             if (!block) return;
             const vp = getVocabProgress();
             const reviewCount = getReviewItems().length;
 
-            let continueHtml = '';
+            // ===== 1. Bloc dominant : "🎯 Pour toi maintenant" (mode "professeur") =====
+            let recoHtml = '';
             if (curriculumLoaded) {
                 const rec = getRecommendation();
                 if (rec) {
                     const activity = getRecommendedActivityMeta(getNotionStatus(rec.notionId));
                     const titre = rec.notion.content.titre || rec.notionId;
-                    continueHtml = `
+                    recoHtml = `
                         <div class="dash-card dash-continue-card dash-reco-card">
                             <div class="dash-continue-label">🎯 Pour toi maintenant</div>
+                            <div class="dash-reco-titre">${rec.notion.level} · ${titre}</div>
                             <div class="dash-continue-title">${activity.icon} ${activity.label}</div>
-                            <div class="dash-reco-titre">${rec.module.label} — ${titre}</div>
                             <div class="dash-reco-reason">${rec.reason || ''}</div>
                             ${activity.duration ? `<div class="dash-reco-duration">${activity.duration}</div>` : ''}
                             <div class="dash-reco-actions">
@@ -1029,25 +1060,18 @@ if (firebaseAvailable) {
                             </div>
                         </div>`;
                 } else {
-                    continueHtml = `<div class="dash-card" style="text-align:center; color:#888; font-size:0.85rem;">Toutes les leçons disponibles sont maîtrisées pour l'instant — d'autres arrivent bientôt 🎉</div>`;
+                    recoHtml = `<div class="dash-card dash-continue-card" style="text-align:center;">Toutes les leçons disponibles sont maîtrisées pour l'instant — d'autres arrivent bientôt 🎉</div>`;
                 }
             }
 
-            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 3) : [];
-            const weakHtml = weaknesses.length ? weaknesses.map(w => `
-                <div class="dash-weak-row" style="cursor:pointer;" onclick="showLesson('${w.id}')">
-                    <span>${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</span>
-                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
-                </div>`).join('') : '';
-
+            // ===== 2. Progression (niveau interne, discret) =====
             const masteredCount = curriculumLoaded
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
                 : 0;
             const totalReadyCount = curriculumLoaded
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret').length
                 : 0;
-
-            block.innerHTML = `
+            const progressionHtml = `
                 <div class="dash-card">
                     <div class="section-title" style="margin-bottom:6px;">Ta progression</div>
                     <div class="dash-level-row">
@@ -1056,14 +1080,39 @@ if (firebaseAvailable) {
                     </div>
                     <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${vp.pct}%"></div></div>
                     ${curriculumLoaded ? `<div style="font-size:0.78rem; color:var(--text-secondary); margin-top:8px;">📚 ${masteredCount}/${totalReadyCount} notions maîtrisées · 🔁 ${reviewCount} mot${reviewCount > 1 ? 's' : ''} à réviser</div>` : ''}
-                </div>
-                ${continueHtml}
+                </div>`;
+
+            // ===== 3. Continuer (parcours structuré, distinct de la recommandation adaptative) =====
+            const curMod = getCurrentModuleProgress();
+            const continuerHtml = curMod ? `
+                <div class="dash-card dash-secondary-card" onclick="continueCurrentModule('${curMod.module.level}')">
+                    <div class="dash-secondary-label">▶️ Continuer mon parcours</div>
+                    <div class="dash-secondary-title">${curMod.module.level} · ${curMod.module.label}</div>
+                    <div class="dash-secondary-sub">${curMod.workedCount}/${curMod.total} notions travaillées</div>
+                </div>` : '';
+
+            // ===== 4. Accès rapides (libre) =====
+            const quickAccessHtml = `
                 <div class="quick-access-row">
                     <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
                     <div class="quick-access-card" onclick="showJouer()"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
                     <div class="quick-access-card" onclick="showPratiquer()"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
                     <div class="quick-access-card" onclick="showApprendre()"><div class="qa-icon">📚</div><div class="qa-label">Apprendre</div></div>
-                </div>
+                </div>`;
+
+            // ===== 5. À revoir (optionnel, court) =====
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 3) : [];
+            const weakHtml = weaknesses.length ? weaknesses.map(w => `
+                <div class="dash-weak-row" style="cursor:pointer;" onclick="showLesson('${w.id}')">
+                    <span>${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</span>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
+                </div>`).join('') : '';
+
+            block.innerHTML = `
+                ${recoHtml}
+                ${progressionHtml}
+                ${continuerHtml}
+                ${quickAccessHtml}
                 ${weakHtml ? `<div class="dash-card">
                     <h3 style="margin:0 0 10px; font-size:0.9rem;">À revoir</h3>
                     ${weakHtml}
@@ -1109,18 +1158,20 @@ if (firebaseAvailable) {
                     const unlocked = ready && isNotionUnlocked(nid);
                     const label = (ready && notion.content && notion.content.titre) ? notion.content.titre : nid.replace(/_/g, ' ');
 
+                    // Traduction en 5 états compréhensibles pour l'utilisateur (la donnée 0-5 et les
+                    // 7 statuts internes de WeaknessEngine restent inchangés en dessous — ceci est
+                    // uniquement une lecture simplifiée pour l'écran Apprendre).
                     let emoji, statusLabel, statusClass;
                     if (!ready) {
-                        emoji = '⚪'; statusLabel = 'à venir'; statusClass = 'st-pending';
+                        emoji = '○'; statusLabel = 'à venir'; statusClass = 'st-pending';
                     } else if (!unlocked) {
                         emoji = '🔒'; statusLabel = 'Verrouillée'; statusClass = 'st-pending';
                     } else {
                         const status = getNotionStatus(nid);
-                        if (status === 'maitrisee') { emoji = '🟢'; statusLabel = 'Maîtrisée'; statusClass = 'st-maitrisee'; }
-                        else if (status === 'faible') { emoji = '🟡'; statusLabel = getNotionStatusLabel(status); statusClass = 'st-faible'; }
-                        else if (status === 'a_pratiquer') { emoji = '🟡'; statusLabel = getNotionStatusLabel(status); statusClass = 'st-a_pratiquer'; }
-                        else if (status === 'jamais_etudiee') { emoji = '⚪'; statusLabel = 'Pas encore étudiée'; statusClass = 'st-jamais_etudiee'; }
-                        else { emoji = '🟠'; statusLabel = 'En cours'; statusClass = 'st-en_cours'; }
+                        if (status === 'maitrisee') { emoji = '✓'; statusLabel = 'Maîtrisée'; statusClass = 'st-maitrisee'; }
+                        else if (status === 'a_pratiquer' || status === 'entrainee' || status === 'presque_maitrisee') { emoji = '●'; statusLabel = 'À pratiquer'; statusClass = 'st-a_pratiquer'; }
+                        else if (status === 'jamais_etudiee') { emoji = '○'; statusLabel = 'À découvrir'; statusClass = 'st-jamais_etudiee'; }
+                        else { emoji = '◐'; statusLabel = 'En cours'; statusClass = 'st-en_cours'; }
                     }
 
                     const clickAttr = (ready && unlocked) ? `onclick="showLesson('${nid}')"` : '';
@@ -1167,22 +1218,37 @@ if (firebaseAvailable) {
             const exCount = (notion.exerciseIds || []).length;
             const mastery = computeNotionMastery(notionId);
             const rpSuggestion = mastery >= 4 ? getRoleplaySuggestion(notionId) : null;
+            const mod = curriculumModules.find(m => m.id === notion.module);
+            const masteryDots = Array.from({ length: 5 }, (_, i) => `<span class="mastery-dot ${i < mastery ? 'filled' : ''}"></span>`).join('');
+            const hasFriction = c.contrastes || (c.erreursFrequentes && c.erreursFrequentes.length);
             document.getElementById('lesson-content').innerHTML = `
-                ${c.titre ? `<div class="lesson-titre">${c.titre}</div>` : ''}
+                <div class="lesson-header">
+                    <div class="lesson-breadcrumb">${notion.level}${mod ? ' · ' + mod.label : ''}</div>
+                    ${c.titre ? `<div class="lesson-titre">${c.titre}</div>` : ''}
+                </div>
                 <div class="lesson-stage">
-                    <div class="lesson-stage-label">🎯 Apprendre</div>
-                    <div class="lesson-block"><h3>🎯 Objectif</h3><p>${c.objectif || ''}</p></div>
+                    <div class="lesson-stage-label">🎯 Objectif</div>
+                    <div class="lesson-block"><p>${c.objectif || ''}</p></div>
                 </div>
                 <div class="lesson-stage">
                     <div class="lesson-stage-label">📖 Comprendre</div>
-                    <div class="lesson-block"><h3>📖 Comprendre</h3><p>${c.comprendre || ''}</p></div>
-                    <div class="lesson-block"><h3>🇳🇱 Règle</h3><p>${c.regle || ''}</p></div>
-                    <div class="lesson-block"><h3>👀 Exemples</h3>${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
-                    ${c.contrastes ? `<div class="lesson-block lesson-contrastes"><h3>🔍 Points de friction</h3><p>${c.contrastes}</p></div>` : ''}
-                    <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
+                    <div class="lesson-block"><p>${c.comprendre || ''}</p></div>
+                    ${c.regle ? `<div class="lesson-block"><p>${c.regle}</p></div>` : ''}
+                </div>
+                <div class="lesson-stage">
+                    <div class="lesson-stage-label">👀 Exemple</div>
+                    <div class="lesson-block">${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
+                </div>
+                ${hasFriction ? `<div class="lesson-stage">
+                    <div class="lesson-stage-label">⚠️ Point de friction</div>
+                    ${c.contrastes ? `<div class="lesson-block lesson-contrastes"><p>${c.contrastes}</p></div>` : ''}
+                    ${(c.erreursFrequentes && c.erreursFrequentes.length) ? `<div class="lesson-block">${c.erreursFrequentes.map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>` : ''}
                     <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
                     <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
-                </div>
+                </div>` : `<div class="lesson-stage">
+                    <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
+                    <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
+                </div>`}
                 ${exCount ? `<div class="lesson-stage">
                     <div class="lesson-stage-label">🧩 S'entraîner</div>
                     <button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>
@@ -1193,14 +1259,15 @@ if (firebaseAvailable) {
                 </div>` : ''}
                 ${(c.objectifCommunication || (c.vocabulaire && c.vocabulaire.length) || rpSuggestion) ? `<div class="lesson-stage">
                     <div class="lesson-stage-label">💬 Utiliser</div>
-                    ${c.objectifCommunication ? `<div class="lesson-block"><h3>💬 Objectif de communication</h3><p>${c.objectifCommunication}</p></div>` : ''}
-                    ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><h3>🗂️ Vocabulaire utile</h3><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
+                    ${c.objectifCommunication ? `<div class="lesson-block"><p>${c.objectifCommunication}</p></div>` : ''}
+                    ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
                     ${rpSuggestion ? `<div class="roleplay-suggestion-card" onclick="showRoleplay(); rpShowCategory('${rpSuggestion.category}');">🎙️ Notion maîtrisée ! Envie de pratiquer à l'oral ?<br><b>${rpSuggestion.label}</b></div>` : ''}
                 </div>` : ''}
-                ${c.criteresMaitrise ? `<div class="lesson-stage">
-                    <div class="lesson-stage-label">✅ Maîtriser</div>
-                    <div class="lesson-block"><h3>✅ Tu maîtrises cette notion si...</h3><p>${c.criteresMaitrise}</p></div>
-                </div>` : ''}
+                <div class="lesson-stage">
+                    <div class="lesson-stage-label">✅ Maîtrise</div>
+                    <div class="lesson-mastery-row">${masteryDots}</div>
+                    ${c.criteresMaitrise ? `<div class="lesson-block"><p>${c.criteresMaitrise}</p></div>` : ''}
+                </div>
             `;
         }
 
@@ -2697,13 +2764,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-stat-tile"><div class="ps-num">${masteredNotions}</div><div class="ps-label">Notions maîtrisées</div></div>
                 </div>
                 <div class="profil-menu">
+                    <div class="profil-menu-row" onclick="showApprendre()"><span class="pm-icon">📚</span><span>Mon parcours</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showReviser()"><span class="pm-icon">🔁</span><span>Révisions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showWordList()"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showConjugaison()"><span class="pm-icon">🔤</span><span>Conjugaison</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showTestSelect()"><span class="pm-icon">🎯</span><span>Test de vocabulaire</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
                 <div class="study-box" style="text-align:left;">
-                    <h3>📊 Niveau CECR</h3>
+                    <h3>📊 Mes statistiques</h3>
                     <p>Niveau estimé : <b>${vp.level}</b><br>
                     Mots maîtrisés : ${vp.masteredVocab} / ${vp.totalVocab} (${vp.pct}%)<br>
                     ${vp.nextLevel ? `Encore <b>${vp.wordsToNext}</b> mots avant le niveau ${vp.nextLevel}` : 'Niveau maximum atteint 🎉'}<br>
@@ -2789,7 +2859,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showTestSelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('test-select-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-profil');
         }
 
         function testableWords() {

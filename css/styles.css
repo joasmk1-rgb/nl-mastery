@@ -198,6 +198,10 @@
         .dash-reco-actions { display: flex; gap: 8px; margin-top: 12px; }
         .dash-reco-actions .btn { margin-top: 0; flex: 1; font-size: 1rem; }
         .dash-reco-btn-secondary { flex: 1; background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.55); border-radius: var(--radius-lg); padding: 15px; font-weight: bold; cursor: pointer; }
+        .dash-secondary-card { cursor: pointer; padding: 14px 18px; }
+        .dash-secondary-label { font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 3px; }
+        .dash-secondary-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 2px; }
+        .dash-secondary-sub { font-size: 0.78rem; color: var(--text-secondary); }
         .guided-flow-card { text-align: center; border-color: var(--success); }
         .guided-flow-label { font-weight: bold; margin-bottom: 10px; }
         .guided-flow-actions { display: flex; gap: 8px; }
@@ -237,7 +241,12 @@
 
         /* Lesson : regroupement visuel en étapes (Comprendre / S'entraîner-Produire-Utiliser) au
            lieu d'une simple succession de blocs identiques. */
+        .lesson-header { width: 100%; max-width: 520px; margin-bottom: var(--space-2); }
+        .lesson-breadcrumb { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; }
         .lesson-titre { font-size: 1.2rem; font-weight: 800; margin-bottom: var(--space-4); color: var(--text); }
+        .lesson-mastery-row { display: flex; gap: 6px; margin-bottom: 10px; }
+        .mastery-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--border); }
+        .mastery-dot.filled { background: var(--success); }
         .lesson-stage { width: 100%; max-width: 520px; margin-bottom: var(--space-5); }
         .lesson-stage-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary); margin-bottom: var(--space-2); }
         .lesson-block { margin-bottom: 16px; }
