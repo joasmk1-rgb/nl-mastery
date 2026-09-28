@@ -4571,27 +4571,21 @@
     "id": "ex_b2_passav3",
     "notionId": "passif_avance",
     "type": "remise_en_ordre",
-    "question": "Remets dans l'ordre : \"Je pense que le rapport doit être terminé demain.\"",
+    "question": "Remets dans l'ordre : \"Le rapport doit être terminé demain.\"",
     "words": [
-      "Ik",
-      "denk",
-      "dat",
-      "het",
+      "Het",
       "rapport",
+      "moet",
       "morgen",
       "afgerond",
-      "moet",
       "worden"
     ],
     "answer": [
-      "Ik",
-      "denk",
-      "dat",
-      "het",
+      "Het",
       "rapport",
+      "moet",
       "morgen",
       "afgerond",
-      "moet",
       "worden"
     ]
   },
@@ -5012,7 +5006,7 @@
     "options": [
       "Daarentegen hij vindt het goed.",
       "Daarentegen vindt hij het goed.",
-      "Hij daarentegen vindt het goed niet."
+      "Daarentegen het goed vindt hij."
     ],
     "answer": "Daarentegen vindt hij het goed."
   },
@@ -5122,7 +5116,7 @@
     "id": "ex_b2_ordav2",
     "notionId": "ordre_mots_avance",
     "type": "texte_a_trous",
-    "question": "Complète : \"Ze vroeg zich af of het probleem al eerder ___ kunnen worden.\" (opgelost)",
+    "question": "Complète : \"Ze vroeg zich af of het probleem al eerder had ___ kunnen worden.\" (opgelost)",
     "answer": "opgelost"
   },
   {
@@ -5792,7 +5786,7 @@
     "id": "ex_b2_reunav2",
     "notionId": "reunion_avancee",
     "type": "texte_a_trous",
-    "question": "Complète (recentrer) : \"Als we ___ gaan naar het hoofdpunt, moeten we een besluit nemen.\" (terug)",
+    "question": "Complète (recentrer) : \"Als we ___ naar het hoofdpunt gaan, moeten we een besluit nemen.\" (terug)",
     "answer": "terug"
   },
   {
