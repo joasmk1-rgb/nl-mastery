@@ -779,13 +779,94 @@ if (firebaseAvailable) {
                 <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
                 ${c.objectifCommunication ? `<div class="lesson-block"><h3>💬 Objectif de communication</h3><p>${c.objectifCommunication}</p></div>` : ''}
                 ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><h3>🗂️ Vocabulaire utile</h3><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
-                ${c.tacheProduction ? `<div class="lesson-block lesson-tache"><h3>✍️ À toi de jouer</h3><p>${c.tacheProduction}</p></div>` : ''}
+                ${c.tacheProduction ? renderProductionBlock(notionId, c.tacheProduction) : ''}
                 ${c.criteresMaitrise ? `<div class="lesson-block"><h3>✅ Tu maîtrises cette notion si...</h3><p>${c.criteresMaitrise}</p></div>` : ''}
                 <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
                 <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
                 ${exCount ? `<button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>` : ''}
                 ${rpSuggestion ? `<div class="roleplay-suggestion-card" onclick="showRoleplay(); rpShowCategory('${rpSuggestion.category}');">🎙️ Notion maîtrisée ! Envie de pratiquer à l'oral ?<br><b>${rpSuggestion.label}</b></div>` : ''}
             `;
+        }
+
+        // ===== Production / Feedback (cycle NOTION → ENTRAÎNEMENT → PRODUCTION → FEEDBACK → RÉVISION) =====
+        // Réutilise entièrement GeminiService (evaluateProductionWithContext) et le moteur de
+        // reconnaissance vocale déjà présent dans le jeu de rôle (voir productionToggleVoiceCapture
+        // plus bas, section jeu de rôle). N'introduit ni deuxième service Gemini, ni deuxième
+        // système de reconnaissance vocale, ni deuxième moteur de progression.
+        function renderProductionBlock(notionId, task) {
+            const targeted = NOTION_TARGETED_PRACTICE[notionId];
+            return `
+                <div class="lesson-block lesson-tache">
+                    <h3>✍️ À toi de jouer</h3>
+                    <p>${task}</p>
+                    <div class="production-actions">
+                        <button class="gemini-explain-btn" onclick="openProductionPanel('${notionId}','ecrit')">✍️ Produire (écrit)</button>
+                        <button class="gemini-explain-btn" onclick="openProductionPanel('${notionId}','oral')">🎙️ Parler (oral)</button>
+                        ${targeted ? `<button class="gemini-explain-btn" onclick="rpStartTargetedPractice('${notionId}')">🎯 Pratique ciblée</button>` : ''}
+                    </div>
+                    <div id="production-panel" class="production-panel" style="display:none;"></div>
+                </div>`;
+        }
+
+        function openProductionPanel(notionId, mode) {
+            const panel = document.getElementById('production-panel');
+            panel.style.display = '';
+            if (mode === 'ecrit') {
+                panel.innerHTML = `
+                    <textarea id="production-text-input" rows="4" placeholder="Schrijf je antwoord in het Nederlands..."></textarea>
+                    <button class="btn btn-green" onclick="submitProduction('${notionId}','ecrit')">🤖 Envoyer à Gemini</button>
+                    <div id="production-feedback-box" class="gemini-box" style="display:none;"></div>`;
+            } else {
+                panel.innerHTML = `
+                    <button class="btn btn-green" id="production-mic-btn" onclick="toggleProductionRecording('${notionId}')">🎤 Cliquer pour parler</button>
+                    <div id="production-status">Prêt</div>
+                    <div id="production-transcript" class="production-transcript"></div>
+                    <div id="production-feedback-box" class="gemini-box" style="display:none;"></div>`;
+            }
+        }
+
+        function toggleProductionRecording(notionId) {
+            productionToggleVoiceCapture('production-mic-btn', 'production-status', (text) => {
+                const transcriptDiv = document.getElementById('production-transcript');
+                if (transcriptDiv) transcriptDiv.innerText = text;
+                submitProduction(notionId, 'oral', text);
+            });
+        }
+
+        async function submitProduction(notionId, mode, userTextOverride) {
+            const notion = curriculumNotions[notionId];
+            const box = document.getElementById('production-feedback-box');
+            let userText = userTextOverride;
+            if (userText === undefined) {
+                const input = document.getElementById('production-text-input');
+                userText = input ? input.value.trim() : '';
+            }
+            if (!userText) { alert("Écris ou dis quelque chose avant d'envoyer."); return; }
+            if (!box) return;
+            if (!GeminiService.isAvailable()) {
+                box.style.display = '';
+                box.innerHTML = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis la vue Jeu de rôle pour activer le feedback.";
+                return;
+            }
+            box.style.display = '';
+            box.innerHTML = "L'IA analyse ta production...";
+            try {
+                const raw = await GeminiService.evaluateProductionWithContext(notion, mode, userText);
+                const parsed = parseProductionFeedback(raw);
+                box.innerHTML = renderProductionFeedbackHTML(parsed);
+                const mapped = recordProductionWeaknessSignals(notionId, mode, parsed.motsCles);
+                if (!state.productions) state.productions = [];
+                state.productions.push({
+                    id: 'prod_' + Date.now(),
+                    notionId, mode, userText,
+                    feedback: parsed,
+                    linkedWeaknesses: mapped,
+                    timestamp: Date.now()
+                });
+                save();
+            } catch (e) {
+                box.innerHTML = "Erreur Gemini : " + escapeHtml(e.message);
+            }
         }
 
         // ===== Vue Exercice =====
@@ -1036,9 +1117,121 @@ if (firebaseAvailable) {
                 ),
                 evaluateProduction: (prompt_, userText) => generate(
                     `Un apprenant francophone de néerlandais devait : "${prompt_}". Il a écrit : "${userText}". Évalue en français (2-3 phrases) : grammaire correcte ou non, et une suggestion d'amélioration.`
-                )
+                ),
+                // Feedback structuré, avec le contexte pédagogique complet de la notion travaillée.
+                // Utilisé par le cycle NOTION → ENTRAÎNEMENT → PRODUCTION → FEEDBACK → RÉVISION.
+                // Gemini ne fait ici QUE du feedback linguistique : il ne redéfinit jamais le
+                // curriculum, les niveaux, les prérequis ou la maîtrise (ceux-ci restent gérés
+                // par MasteryEngine/WeaknessEngine/RecommendationEngine, inchangés).
+                evaluateProductionWithContext: (notion, mode, userText) => {
+                    const c = notion.content || {};
+                    const modeLabel = mode === 'oral'
+                        ? "à l'oral (la production a été transcrite automatiquement : ignore les petites imperfections de transcription qui ne changent pas le sens)"
+                        : "à l'écrit";
+                    const context = [
+                        `Niveau CECR travaillé : ${notion.level || ''}`,
+                        c.titre ? `Notion : ${c.titre}` : '',
+                        c.objectif ? `Objectif : ${c.objectif}` : '',
+                        c.comprendre ? `Point clé : ${c.comprendre}` : '',
+                        c.regle ? `Règle : ${c.regle}` : '',
+                        c.contrastes ? `Point de friction pour francophones : ${c.contrastes}` : '',
+                        (c.erreursFrequentes && c.erreursFrequentes.length) ? `Erreurs fréquentes connues sur cette notion : ${c.erreursFrequentes.join(' / ')}` : '',
+                        c.criteresMaitrise ? `Critère de maîtrise visé : ${c.criteresMaitrise}` : '',
+                        c.tacheProduction ? `Tâche demandée à l'apprenant : ${c.tacheProduction}` : ''
+                    ].filter(Boolean).join('\n');
+                    return generate(
+`Tu es un professeur de néerlandais pour francophones. Un apprenant a produit une réponse ${modeLabel} pour la notion suivante :
+${context}
+
+Voici ce que l'apprenant a produit en néerlandais :
+"${userText}"
+
+Analyse sa production en tenant compte spécifiquement de : la grammaire, l'ordre des mots, le vocabulaire, la structure, l'adéquation à la tâche demandée, et si pertinent la nuance/le niveau de langue. Signale les erreurs importantes s'il y en a.
+
+Réponds UNIQUEMENT en français, en respectant EXACTEMENT ce format à 4 sections (garde les émojis et les titres tels quels, mets "Rien à signaler" si une section n'a vraiment rien à dire, ne la saute pas) :
+✅ RÉUSSI: <1-2 phrases sur ce qui fonctionne bien dans sa production>
+⚠️ À AMÉLIORER: <1-2 phrases sur les points à travailler, sans lister toutes les fautes mineures>
+✏️ CORRECTION: <une reformulation naturelle et correcte de sa production en néerlandais>
+🎯 CONSEIL: <un seul conseil ciblé et actionnable, pas une liste>
+
+Puis, sur une dernière ligne séparée, ajoute exactement : MOTS_CLES: <0 à 3 mots-clés séparés par des virgules, choisis UNIQUEMENT parmi cette liste : ordre des mots, verbe séparable, connecteurs, registre professionnel, temps du passé, subordonnée, passif, omdat/doordat, daarom/daardoor, aucun>
+
+Reste bref et concret, évite les corrections interminables. Ne remets jamais en cause le niveau CECR de l'apprenant, le curriculum, les prérequis ou sa maîtrise globale : contente-toi d'un retour linguistique sur CETTE production.`
+                    );
+                }
             };
         })();
+
+        function escapeHtml(s) {
+            return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ===== Parsing du feedback structuré de Gemini (Production) =====
+        function parseProductionFeedback(raw) {
+            const result = { reussi: '', ameliorer: '', correction: '', conseil: '', motsCles: [], raw: raw || '' };
+            const sections = [
+                ['reussi', /✅\s*RÉUSSI\s*:?/i],
+                ['ameliorer', /⚠️\s*À AMÉLIORER\s*:?/i],
+                ['correction', /✏️\s*CORRECTION\s*:?/i],
+                ['conseil', /🎯\s*CONSEIL\s*:?/i]
+            ];
+            const markers = [];
+            sections.forEach(([key, re]) => {
+                const m = raw.match(re);
+                if (m) markers.push({ key, index: m.index, len: m[0].length });
+            });
+            const motsMatch = raw.match(/MOTS_CLES\s*:?\s*(.+)/i);
+            const motsIndex = motsMatch ? motsMatch.index : raw.length;
+            markers.sort((a, b) => a.index - b.index);
+            markers.forEach((m, i) => {
+                const end = i + 1 < markers.length ? markers[i + 1].index : motsIndex;
+                result[m.key] = raw.slice(m.index + m.len, end).trim();
+            });
+            if (motsMatch) {
+                result.motsCles = motsMatch[1].split(',').map(s => s.trim().toLowerCase()).filter(s => s && s !== 'aucun');
+            }
+            return result;
+        }
+
+        function renderProductionFeedbackHTML(parsed) {
+            if (!parsed.reussi && !parsed.ameliorer && !parsed.correction && !parsed.conseil) {
+                return `<div class="feedback-section">${escapeHtml(parsed.raw)}</div>`;
+            }
+            let html = '';
+            if (parsed.reussi) html += `<div class="feedback-section"><b>✅ Ce qui est réussi</b>${escapeHtml(parsed.reussi)}</div>`;
+            if (parsed.ameliorer) html += `<div class="feedback-section"><b>⚠️ Ce qui doit être amélioré</b>${escapeHtml(parsed.ameliorer)}</div>`;
+            if (parsed.correction) html += `<div class="feedback-section"><b>✏️ Correction / reformulation</b>${escapeHtml(parsed.correction)}</div>`;
+            if (parsed.conseil) html += `<div class="feedback-section"><b>🎯 Conseil ciblé</b>${escapeHtml(parsed.conseil)}</div>`;
+            return html;
+        }
+
+        // ===== Lien feedback → faiblesses curriculum (sans nouvelle taxonomie) =====
+        // Mappe des mots-clés de feedback Gemini vers des notions EXISTANTES du curriculum.
+        // Best-effort : n'affecte jamais agressivement MasteryEngine, se contente d'enregistrer
+        // le signal (voir recordProductionWeaknessSignals) pour une exploitation future.
+        const PRODUCTION_WEAKNESS_KEYWORDS = {
+            'ordre des mots': 'ordre_des_mots_base',
+            'verbe séparable': 'verbes_separables_avances',
+            'connecteurs': 'connecteurs_complexes',
+            'registre professionnel': 'registre_formel_informel',
+            'temps du passé': 'perfectum_tous_verbes',
+            'subordonnée': 'ordre_mots_subordonnee',
+            'passif': 'passif_worden_zijn',
+            'omdat/doordat': 'omdat_vs_doordat',
+            'daarom/daardoor': 'dus_daarom_daardoor'
+        };
+
+        function recordProductionWeaknessSignals(sourceNotionId, mode, motsCles) {
+            const mapped = (motsCles || []).map(k => PRODUCTION_WEAKNESS_KEYWORDS[k]).filter(Boolean);
+            if (mapped.length) {
+                if (!state.productionWeaknessSignals) state.productionWeaknessSignals = [];
+                mapped.forEach(targetNotionId => {
+                    state.productionWeaknessSignals.push({ notionId: targetNotionId, sourceNotionId, mode, timestamp: Date.now() });
+                });
+                save();
+            }
+            return mapped;
+        }
 
         async function askGeminiExplainOtherwise(notionId) {
             const notion = curriculumNotions[notionId];
@@ -2339,6 +2532,14 @@ if (firebaseAvailable) {
         let rpDutchVoice = null;
         let rpCurrentCategory = null;
         let rpCurrentScenario = null;
+        // Généralisation de la reconnaissance vocale : par défaut elle pilote les ids du jeu de
+        // rôle (rp-mic-btn/rp-status) et le flux existant (rpAppendMessage + rpSendToGemini).
+        // Le module Production (voir plus haut) la réutilise à l'identique en repointant ces
+        // variables temporairement, via productionToggleVoiceCapture — aucun deuxième moteur de
+        // reconnaissance vocale n'est créé.
+        let activeVoiceBtnId = 'rp-mic-btn';
+        let activeVoiceStatusId = 'rp-status';
+        let voiceTranscriptCallback = null;
 
         const RP_SCENARIOS = {
             entretiens: {
@@ -2477,11 +2678,13 @@ if (firebaseAvailable) {
                         interim += transcript;
                     }
                 }
-                document.getElementById('rp-status').innerText = "🎤 " + ((rpFinalTranscript + interim).trim() || '...');
+                const statusEl = document.getElementById(activeVoiceStatusId);
+                if (statusEl) statusEl.innerText = "🎤 " + ((rpFinalTranscript + interim).trim() || '...');
             };
 
             rpRecognition.onerror = function(event) {
-                document.getElementById('rp-status').innerText = "Erreur de reconnaissance vocale : " + event.error;
+                const statusEl = document.getElementById(activeVoiceStatusId);
+                if (statusEl) statusEl.innerText = "Erreur de reconnaissance vocale : " + event.error;
                 rpStopRecordingUI();
             };
 
@@ -2489,6 +2692,12 @@ if (firebaseAvailable) {
                 rpStopRecordingUI();
                 const text = rpFinalTranscript.trim();
                 rpFinalTranscript = '';
+                if (voiceTranscriptCallback) {
+                    const cb = voiceTranscriptCallback;
+                    voiceTranscriptCallback = null;
+                    if (text) cb(text);
+                    return;
+                }
                 if (text) {
                     rpAppendMessage(text, 'user');
                     rpSendToGemini(text);
@@ -2505,6 +2714,11 @@ if (firebaseAvailable) {
                 alert("Renseigne d'abord ta clé API Gemini en haut de la page.");
                 return;
             }
+            // Remet la reconnaissance vocale sur le flux par défaut du jeu de rôle (au cas où
+            // le module Production l'aurait temporairement repointée ailleurs).
+            activeVoiceBtnId = 'rp-mic-btn';
+            activeVoiceStatusId = 'rp-status';
+            voiceTranscriptCallback = null;
             if (rpIsRecording) {
                 rpRecognition.stop();
             } else {
@@ -2518,20 +2732,48 @@ if (firebaseAvailable) {
             }
         }
 
+        // Réutilisation générique de la reconnaissance vocale existante (rpRecognition) en dehors
+        // du jeu de rôle, par exemple pour la Production orale. Ne crée pas un second moteur de
+        // reconnaissance vocale : repointe seulement les ids d'affichage et le callback de fin.
+        function productionToggleVoiceCapture(btnId, statusId, onFinalTranscript) {
+            if (!window.SpeechRecognition) {
+                alert("Ton navigateur ne supporte pas la reconnaissance vocale. Utilise Google Chrome.");
+                return;
+            }
+            if (!localStorage.getItem('gemini_api_key')) {
+                alert("Renseigne d'abord ta clé API Gemini (onglet Jeu de rôle) pour utiliser la reconnaissance vocale.");
+                return;
+            }
+            if (rpIsRecording) {
+                rpRecognition.stop();
+                return;
+            }
+            activeVoiceBtnId = btnId;
+            activeVoiceStatusId = statusId;
+            voiceTranscriptCallback = onFinalTranscript;
+            try {
+                rpFinalTranscript = '';
+                rpRecognition.start();
+                rpStartRecordingUI();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
         function rpStartRecordingUI() {
             rpIsRecording = true;
-            const btn = document.getElementById('rp-mic-btn');
-            btn.classList.add('recording');
-            btn.innerText = "🛑 Écoute en cours... Cliquer pour stopper";
-            document.getElementById('rp-status').innerText = "Parle en néerlandais...";
+            const btn = document.getElementById(activeVoiceBtnId);
+            if (btn) { btn.classList.add('recording'); btn.innerText = "🛑 Écoute en cours... Cliquer pour stopper"; }
+            const st = document.getElementById(activeVoiceStatusId);
+            if (st) st.innerText = "Parle en néerlandais...";
         }
 
         function rpStopRecordingUI() {
             rpIsRecording = false;
-            const btn = document.getElementById('rp-mic-btn');
-            btn.classList.remove('recording');
-            btn.innerText = "🎤 Cliquer pour parler";
-            document.getElementById('rp-status').innerText = "Prêt";
+            const btn = document.getElementById(activeVoiceBtnId);
+            if (btn) { btn.classList.remove('recording'); btn.innerText = "🎤 Cliquer pour parler"; }
+            const st = document.getElementById(activeVoiceStatusId);
+            if (st) st.innerText = "Prêt";
         }
 
         function rpAppendMessage(text, sender) {
@@ -2642,6 +2884,13 @@ if (firebaseAvailable) {
         function rpStartScenario(catKey, itemId) {
             const scenario = rpFindScenario(catKey, itemId);
             if (!scenario) return;
+            rpBeginScenario(scenario);
+        }
+
+        // Extrait du corps historique de rpStartScenario, pour pouvoir démarrer une conversation
+        // à partir d'un scénario construit dynamiquement (Pratique ciblée) sans dupliquer la
+        // logique de démarrage ni créer un second moteur de conversation.
+        function rpBeginScenario(scenario) {
             rpCurrentScenario = scenario;
             rpConversationHistory = [{ role: "model", parts: [{ text: scenario.prompt }] }];
 
@@ -2653,6 +2902,71 @@ if (firebaseAvailable) {
             rpAppendMessage(scenario.welcome, 'assistant');
             rpSpeakText(scenario.welcome);
             document.getElementById('rp-status').innerText = "Prêt";
+        }
+
+        // ===== Pratique ciblée (jeu de rôle piloté par une notion du curriculum) =====
+        // Point de départ volontairement limité à quelques notions représentatives (voir consigne
+        // utilisateur) plutôt qu'aux 125+ notions d'un coup. Le mécanisme (rpBeginScenario +
+        // construction dynamique du prompt à partir du contenu pédagogique de la notion) est
+        // générique et réutilisable pour d'autres notions par simple ajout d'une entrée ici — pas
+        // de nouvelle architecture nécessaire. Le curriculum reste la source de vérité : Gemini ne
+        // fait que mener la conversation, il ne redéfinit ni le niveau ni le programme.
+        const NOTION_TARGETED_PRACTICE = {
+            argumenter_simple: {
+                label: '🎯 Pratique ciblée : mini-argumentation',
+                welcome: "Wat vind jij: is het beter om vanuit huis te werken of op kantoor? Ik ben benieuwd naar je mening.",
+                instruction: "Mène une courte conversation en néerlandais simple (B1) où tu invites la personne à structurer une mini-argumentation : d'abord son opinion, puis une raison, puis un exemple concret, puis une conclusion. Pose une relance à la fois pour l'aider à compléter une étape si elle l'oublie (par exemple si elle ne donne pas d'exemple, demande-lui-en un). Reste bienveillant et naturel, ce n'est pas un examen formel."
+            },
+            demander_clarification_b1: {
+                label: '🎯 Pratique ciblée : demander une clarification',
+                welcome: "Ik ga je iets uitleggen, maar het is nogal ingewikkeld: je moet het formulier binnen tien werkdagen indienen bij de bevoegde dienst, samen met de nodige bewijsstukken, anders vervalt je aanvraag automatisch.",
+                instruction: "Tu donnes volontairement une explication un peu complexe ou rapide en néerlandais (B1), pour donner à la personne l'occasion de te demander de préciser, répéter ou reformuler. Quand elle demande une clarification, réponds-y clairement puis introduis une nouvelle information un peu complexe pour lui donner une autre occasion de pratiquer. Fais cela environ 3 fois. Ton patient et naturel."
+            },
+            connecteurs_complexes: {
+                label: '🎯 Pratique ciblée : connecteurs logiques avancés',
+                welcome: "Vertel me over een beslissing die je onlangs op je werk hebt genomen, en probeer connectoren zoals daarentegen, desondanks of bijgevolg te gebruiken.",
+                instruction: "Mène une conversation en néerlandais (B2) sur une décision professionnelle. Encourage explicitement l'utilisation de connecteurs de concession/opposition/conséquence avancés (hoewel, ondanks, daarentegen, desondanks, bijgevolg, niettemin). Si la personne n'en utilise aucun après 2 réponses, demande-lui explicitement de reformuler en utilisant un de ces connecteurs. Une relance à la fois."
+            },
+            argumenter: {
+                label: '🎯 Pratique ciblée : débat argumenté',
+                welcome: "Moeten mensen tegenwoordig meer op afstand werken? Ik hoor graag jouw standpunt, met een duidelijk argument en een voorbeeld.",
+                instruction: "Mène un débat structuré en néerlandais (B2) sur le télétravail ou un sujet professionnel proche. Fais pratiquer dans l'ordre : opinion, argument développé, exemple concret, contre-argument que tu introduis toi-même, réponse de la personne au contre-argument, puis demande une conclusion. Une étape à la fois, relance si une étape est sautée."
+            },
+            email_professionnel_complexe: {
+                label: "🎯 Pratique ciblée : e-mail professionnel (à l'oral)",
+                welcome: "Stel je voor: je moet een deadline met een klant verzetten. Vertel me mondeling wat je zou schrijven: de context, je verzoek, je reden, en hoe je een mogelijk bezwaar voorkomt.",
+                instruction: "Simule oralement en néerlandais (B2) la préparation d'un e-mail professionnel pour reporter une échéance. Demande à la personne d'exprimer oralement : le contexte, la demande avec sa justification, l'anticipation d'une objection, et une formule de clôture adaptée. Relance point par point si un élément manque."
+            },
+            entretien_embauche_avance: {
+                label: "🎯 Pratique ciblée : entretien d'embauche avancé",
+                welcome: "Vertel me eens: wat is een werkpunt van jou, en hoe pak je dat aan?",
+                instruction: "Mène un entretien d'embauche avancé en néerlandais (B2) en posant successivement une question sur un point faible, une question de mise en situation (méthode STAR : situation, tâche, action, résultat), et une question sur la motivation profonde. Pousse la personne à nuancer et à donner des exemples concrets. Une question à la fois, relance si la réponse reste vague."
+            }
+        };
+
+        function buildTargetedPracticePrompt(notionId) {
+            const cfg = NOTION_TARGETED_PRACTICE[notionId];
+            const notion = curriculumNotions[notionId];
+            if (!cfg || !notion) return null;
+            const c = notion.content || {};
+            return `${cfg.instruction}
+
+Contexte pédagogique (sert uniquement à orienter tes relances, ne le récite jamais tel quel à l'apprenant) : niveau ${notion.level}, notion "${c.titre || ''}". Règle travaillée : ${c.regle || ''}. Erreurs fréquentes à surveiller sans les corriger longuement à l'oral : ${(c.erreursFrequentes || []).join(' / ')}. Critère de maîtrise visé : ${c.criteresMaitrise || ''}.
+
+Ne donne jamais de longue correction grammaticale pendant la conversation orale : reste dans le rôle et relance naturellement (la correction détaillée se fait ailleurs dans l'application, via le feedback écrit). Ne redéfinis jamais le niveau CECR de l'apprenant ni le curriculum : contente-toi de le faire pratiquer.`;
+        }
+
+        function rpStartTargetedPractice(notionId) {
+            const cfg = NOTION_TARGETED_PRACTICE[notionId];
+            if (!cfg) { alert("Pratique ciblée non disponible pour cette notion."); return; }
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('roleplay-view').classList.add('active');
+            setActiveNav('nav-roleplay');
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (savedKey) document.getElementById('rp-api-key').value = savedKey;
+            const prompt = buildTargetedPracticePrompt(notionId);
+            rpCurrentCategory = null;
+            rpBeginScenario({ id: 'cible_' + notionId, label: cfg.label, welcome: cfg.welcome, prompt });
         }
 
         rpInitSpeechRecognition();

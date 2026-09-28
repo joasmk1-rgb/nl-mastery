@@ -89,6 +89,18 @@
         @keyframes rp-pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
         #rp-status { text-align: center; font-size: 0.85rem; color: var(--text); opacity: 0.7; margin-top: 8px; width: 100%; max-width: 500px; }
 
+        /* Production / Feedback (cycle NOTION -> ENTRAINEMENT -> PRODUCTION -> FEEDBACK) */
+        .production-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .production-panel { margin-top: 12px; }
+        .production-panel textarea { width: 100%; box-sizing: border-box; padding: 10px; border-radius: 10px; border: 1px solid var(--border); font-family: inherit; font-size: 0.95rem; resize: vertical; }
+        #production-mic-btn { width: 100%; box-sizing: border-box; }
+        #production-mic-btn.recording { background: var(--wrong); box-shadow: 0 4px 0 #c13a3a; animation: rp-pulse 1.5s infinite; }
+        #production-status { text-align: center; font-size: 0.85rem; color: var(--text); opacity: 0.7; margin-top: 8px; }
+        .production-transcript { margin-top: 8px; font-style: italic; opacity: 0.85; min-height: 20px; }
+        .feedback-section { margin-bottom: 10px; }
+        .feedback-section:last-child { margin-bottom: 0; }
+        .feedback-section b { display: block; margin-bottom: 3px; }
+
         /* Compte & synchro cloud */
         .bottom-nav { overflow-x: auto; }
         .acc-box { width: 100%; max-width: 400px; background: var(--card-bg); border-radius: 20px; border: 2px solid var(--border); padding: 25px; box-sizing: border-box; }
