@@ -1,0 +1,340 @@
+id;fr;nl;freq;statut_examen;priorite_frequence;preterit;participe_passe;exemple_nl;exemple_fr;forme_frequente;personne
+VERBES_NL_0;offrir / proposer;aanbieden;4.44;Prioritaire;Courant;bood aan;aangeboden;Wij bieden onze klanten elke maand een nieuwe korting aan.;Nous offrons chaque mois une nouvelle réduction à nos clients.;biedt aan;hij/zij
+VERBES_NL_1;arrêter / maintenir;aanhouden;3.81;Standard;Courant;hield aan;aangehouden;De directie houdt haar huidige strategie aan.;La direction maintient sa stratégie actuelle.;houdt aan;hij/zij
+VERBES_NL_2;arriver;aankomen;4.3;Prioritaire;Courant;kwam aan;aangekomen;De levering komt morgenochtend aan.;La livraison arrive demain matin.;komt aan;hij/zij
+VERBES_NL_3;annoncer / s'inscrire;aanmelden;4.34;Standard;Courant;melde aan;aangemeld;U kunt zich online aanmelden voor de opleiding.;Vous pouvez vous inscrire en ligne pour la formation.;meldt zich aan;hij/zij
+VERBES_NL_4;accepter / engager;aannemen;4.28;Prioritaire;Courant;nam aan;aannenomen;Het bedrijf neemt dit jaar tien nieuwe medewerkers aan.;L'entreprise engage dix nouveaux employés cette année.;neemt aan;hij/zij
+VERBES_NL_5;raccorder / s'affilier;aansluiten;4.07;Standard;Courant;sloot aan;aangesloten;Wij sluiten graag aan bij uw planning.;Nous nous alignons volontiers sur votre planning.;sluit aan;hij/zij
+VERBES_NL_6;démontrer / prouver;aantonen;3.8;Prioritaire;Courant;toonde aan;aangetoond;Het rapport toont een duidelijke stijging aan.;Le rapport démontre une nette augmentation.;toont aan;hij/zij
+VERBES_NL_7;accepter;aanvaarden;3.94;Prioritaire;Courant;aanvaardde;aanvaard;De klant aanvaardt de nieuwe voorwaarden.;Le client accepte les nouvelles conditions.;aanvaardt;hij/zij
+VERBES_NL_8;être présent;aanwezig zijn;5.09;Prioritaire;Essentiel;was aanwezig;aanwezig geweest;De manager is altijd aanwezig op de vergadering.;Le manager est toujours présent à la réunion.;is aanwezig;hij/zij
+VERBES_NL_9;hésiter;aarzelen;3.19;Prioritaire;Spécialisé;aarzelde;geaarzeld;Ik aarzel nog over dit aanbod.;J'hésite encore sur cette offre.;aarzel;ik
+VERBES_NL_10;respirer;ademen;3.9;Prioritaire;Courant;ademde;geademd;Neem even de tijd om diep te ademen voor het gesprek.;Prends le temps de bien respirer avant l'entretien.;ademt;hij/zij
+VERBES_NL_11;dépendre (de);afhangen (van);3.23;Standard;Spécialisé;hing af;afgehangen;Het resultaat hangt af van de levertijd.;Le résultat dépend du délai de livraison.;hangt af;hij/zij
+VERBES_NL_12;déposer / passer (un examen);afleggen;3.98;Prioritaire;Courant;legde af;afgelegd;De kandidaat legt morgen een test af.;Le candidat passe un test demain.;legt af;hij/zij
+VERBES_NL_13;diminuer / prélever;afnemen;4.06;Prioritaire;Courant;nam af;afgenomen;De vraag neemt af tijdens de zomer.;La demande diminue pendant l'été.;neemt af;hij/zij
+VERBES_NL_14;fermer / conclure;afsluiten;4.31;Prioritaire;Courant;sloot af;afgesloten;Wij sluiten het contract deze week af.;Nous concluons le contrat cette semaine.;sluit af;hij/zij
+VERBES_NL_15;répondre;antwoorden;4.64;Prioritaire;Courant;antwoordde;geantwoord;De klantendienst antwoordt binnen 24 uur.;Le service client répond sous 24 heures.;antwoordt;hij/zij
+VERBES_NL_16;travailler;arbeiden;1.82;Standard;Spécialisé;arbeidde;gearbeid;Hij arbeidt al tien jaar in de logistieke sector.;Il travaille depuis dix ans dans le secteur logistique.;arbeidt;hij/zij
+VERBES_NL_17;offrir / proposer;aanbieden;4.44;Prioritaire;Courant;bood aan;aangeboden;Wij bieden onze klanten elke maand een nieuwe korting aan.;Nous offrons chaque mois une nouvelle réduction à nos clients.;biedt aan;hij/zij
+VERBES_NL_18;arrêter / maintenir;aanhouden;3.81;Standard;Courant;hield aan;aangehouden;De directie houdt haar huidige strategie aan.;La direction maintient sa stratégie actuelle.;houdt aan;hij/zij
+VERBES_NL_19;arriver;aankomen;4.3;Prioritaire;Courant;kwam aan;aangekomen;De levering komt morgenochtend aan.;La livraison arrive demain matin.;komt aan;hij/zij
+VERBES_NL_20;annoncer / s'inscrire;aanmelden;4.34;Standard;Courant;melde aan;aangemeld;U kunt zich online aanmelden voor de opleiding.;Vous pouvez vous inscrire en ligne pour la formation.;meldt zich aan;hij/zij
+VERBES_NL_21;accepter / engager;aannemen;4.28;Prioritaire;Courant;nam aan;aannenomen;Het bedrijf neemt dit jaar tien nieuwe medewerkers aan.;L'entreprise engage dix nouveaux employés cette année.;neemt aan;hij/zij
+VERBES_NL_22;raccorder / s'affilier;aansluiten;4.07;Standard;Courant;sloot aan;aangesloten;Wij sluiten graag aan bij uw planning.;Nous nous alignons volontiers sur votre planning.;sluit aan;hij/zij
+VERBES_NL_23;démontrer / prouver;aantonen;3.8;Prioritaire;Courant;toonde aan;aangetoond;Het rapport toont een duidelijke stijging aan.;Le rapport démontre une nette augmentation.;toont aan;hij/zij
+VERBES_NL_24;accepter;aanvaarden;3.94;Prioritaire;Courant;aanvaardde;aanvaard;De klant aanvaardt de nieuwe voorwaarden.;Le client accepte les nouvelles conditions.;aanvaardt;hij/zij
+VERBES_NL_25;être présent;aanwezig zijn;5.09;Prioritaire;Essentiel;was aanwezig;aanwezig geweest;De manager is altijd aanwezig op de vergadering.;Le manager est toujours présent à la réunion.;is aanwezig;hij/zij
+VERBES_NL_26;hésiter;aarzelen;3.19;Prioritaire;Spécialisé;aarzelde;geaarzeld;Ik aarzel nog over dit aanbod.;J'hésite encore sur cette offre.;aarzel;ik
+VERBES_NL_27;respirer;ademen;3.9;Prioritaire;Courant;ademde;geademd;Neem even de tijd om diep te ademen voor het gesprek.;Prends le temps de bien respirer avant l'entretien.;ademt;hij/zij
+VERBES_NL_28;dépendre (de);afhangen (van);3.23;Standard;Spécialisé;hing af;afgehangen;Het resultaat hangt af van de levertijd.;Le résultat dépend du délai de livraison.;hangt af;hij/zij
+VERBES_NL_29;déposer / passer (un examen);afleggen;3.98;Prioritaire;Courant;legde af;afgelegd;De kandidaat legt morgen een test af.;Le candidat passe un test demain.;legt af;hij/zij
+VERBES_NL_30;diminuer / prélever;afnemen;4.06;Prioritaire;Courant;nam af;afgenomen;De vraag neemt af tijdens de zomer.;La demande diminue pendant l'été.;neemt af;hij/zij
+VERBES_NL_31;fermer / conclure;afsluiten;4.31;Prioritaire;Courant;sloot af;afgesloten;Wij sluiten het contract deze week af.;Nous concluons le contrat cette semaine.;sluit af;hij/zij
+VERBES_NL_32;répondre;antwoorden;4.64;Prioritaire;Courant;antwoordde;geantwoord;De klantendienst antwoordt binnen 24 uur.;Le service client répond sous 24 heures.;antwoordt;hij/zij
+VERBES_NL_33;travailler;arbeiden;1.82;Standard;Spécialisé;arbeidde;gearbeid;Hij arbeidt al tien jaar in de logistieke sector.;Il travaille depuis dix ans dans le secteur logistique.;arbeidt;hij/zij
+VERBES_NL_34;cuire;bakken;4.21;Prioritaire;Courant;bakte;gebakken;De bakkerij bakt elke ochtend vers brood.;La boulangerie cuit du pain frais chaque matin.;bakt;hij/zij
+VERBES_NL_35;s'élever à (montant);bedragen;3.86;Prioritaire;Courant;bedroeg;bedragen;De totale kost bedraagt tweeduizend euro.;Le coût total s'élève à deux mille euros.;bedraagt;hij/zij
+VERBES_NL_36;vouloir dire / viser;bedoelen;3.83;Prioritaire;Courant;bedoelde;bedoeld;Wat bedoelt u precies met deze clausule?;Qu'entendez-vous précisément par cette clause ?;bedoelt;hij/zij
+VERBES_NL_37;commencer;beginnen;5.33;Prioritaire;Essentiel;begon;begonnen;De vergadering begint om negen uur.;La réunion commence à neuf heures.;begint;hij/zij
+VERBES_NL_38;comprendre;begrijpen;4.96;Prioritaire;Courant;begreep;begrepen;Ik begrijp de procedure nog niet helemaal.;Je ne comprends pas encore tout à fait la procédure.;begrijp;ik
+VERBES_NL_39;traiter / manipuler;behandelen;4.53;Prioritaire;Courant;behandelde;behandeld;De dienst behandelt uw klacht zo snel mogelijk.;Le service traite votre plainte au plus vite.;behandelt;hij/zij
+VERBES_NL_40;gérer;beheren;3.91;Prioritaire;Courant;beheerde;beheerd;Zij beheert het volledige logistieke magazijn.;Elle gère tout l'entrepôt logistique.;beheert;hij/zij
+VERBES_NL_41;appartenir (à);behoren (tot);4.5;Prioritaire;Courant;behoorde;behoord;Dit product behoort tot onze topcategorie.;Ce produit appartient à notre catégorie phare.;behoort;hij/zij
+VERBES_NL_42;regarder / examiner;bekijken;4.84;Prioritaire;Courant;bekeek;bekeken;De manager bekijkt de cijfers van vorige maand.;Le manager examine les chiffres du mois dernier.;bekijkt;hij/zij
+VERBES_NL_43;critiquer;bekritiseren;3.26;Standard;Spécialisé;bekritiseerde;bekritiseerd;De klant bekritiseert de late levering.;Le client critique le retard de livraison.;bekritiseert;hij/zij
+VERBES_NL_44;s'intéresser (à);belangstellen (in);0.0;Standard;Spécialisé;stelde belang;belanggesteld;Wij stellen belang in een langdurige samenwerking.;Nous nous intéressons à une collaboration durable.;stelt belang;hij/zij
+VERBES_NL_45;promettre;beloven;3.94;Prioritaire;Courant;beloofde;beloofd;De leverancier belooft een snellere levering.;Le fournisseur promet une livraison plus rapide.;belooft;hij/zij
+VERBES_NL_46;priver de / couper;benemen;1.99;Standard;Spécialisé;benam;benomen;Deze fout beneemt ons elk voordeel.;Cette erreur nous prive de tout avantage.;beneemt;hij/zij
+VERBES_NL_47;juger / évaluer;beoordelen;4.16;Prioritaire;Courant;beoordeelde;beoordeeld;De jury beoordeelt elke kandidaat individueel.;Le jury évalue chaque candidat individuellement.;beoordeelt;hij/zij
+VERBES_NL_48;déterminer;bepalen;4.65;Prioritaire;Courant;bepaalde;bepaald;De vraag bepaalt de productieplanning.;La demande détermine la planification de production.;bepaalt;hij/zij
+VERBES_NL_49;se limiter;beperken (zich);4.26;Prioritaire;Courant;beperkte;beperkt;Wij beperken ons tot drie leveranciers.;Nous nous limitons à trois fournisseurs.;beperkt zich;hij/zij
+VERBES_NL_50;considérer;beschouwen;4.07;Prioritaire;Courant;beschouwde;beschouwd;Wij beschouwen dit als een prioriteit.;Nous considérons ceci comme une priorité.;beschouwt;hij/zij
+VERBES_NL_51;décrire;beschrijven;4.2;Prioritaire;Courant;beschreef;beschreven;Het rapport beschrijft de volledige toeleveringsketen.;Le rapport décrit toute la chaîne d'approvisionnement.;beschrijft;hij/zij
+VERBES_NL_52;décider / conclure;besluiten;4.3;Prioritaire;Courant;besloot;besloten;De directie besluit het project voort te zetten.;La direction décide de poursuivre le projet.;besluit;hij/zij
+VERBES_NL_53;exister;bestaan;5.16;Prioritaire;Essentiel;bestond;bestaan;Er bestaat geen betere oplossing op dit moment.;Il n'existe pas de meilleure solution pour l'instant.;bestaat;hij/zij
+VERBES_NL_54;consacrer (temps, argent);besteden;4.32;Prioritaire;Courant;besteedde;besteed;Het bedrijf besteedt veel tijd aan opleiding.;L'entreprise consacre beaucoup de temps à la formation.;besteedt;hij/zij
+VERBES_NL_55;commander;bestellen;4.56;Prioritaire;Courant;bestelde;besteld;De klant bestelt honderd stuks per maand.;Le client commande cent pièces par mois.;bestelt;hij/zij
+VERBES_NL_56;signifier;betekenen;4.64;Prioritaire;Courant;betekende;betekend;Deze vertraging betekent extra kosten.;Ce retard signifie des coûts supplémentaires.;betekent;hij/zij
+VERBES_NL_57;concerner;betreffen;3.59;Prioritaire;Courant;betrof;betroffen;Deze regel betreft alle nieuwe medewerkers.;Cette règle concerne tous les nouveaux employés.;betreft;hij/zij
+VERBES_NL_58;avoir confiance;betrouwen;1.8;Standard;Spécialisé;betrouwde;betrouwd;Wij betrouwen op een betrouwbare partner.;Nous faisons confiance à un partenaire fiable.;betrouwt;hij/zij
+VERBES_NL_59;contenir;bevatten;4.52;Prioritaire;Courant;bevatte;bevat;De doos bevat twintig eenheden.;La boîte contient vingt unités.;bevat;hij/zij
+VERBES_NL_60;confirmer;bevestigen;4.3;Prioritaire;Courant;bevestigde;bevestigd;Wij bevestigen uw bestelling per e-mail.;Nous confirmons votre commande par e-mail.;bevestigt;hij/zij
+VERBES_NL_61;se trouver;bevinden (zich);4.49;Prioritaire;Courant;bevond zich;bevonden;Het magazijn bevindt zich naast de haven.;L'entrepôt se trouve à côté du port.;bevindt zich;hij/zij
+VERBES_NL_62;conserver / garder;bewaren;4.3;Prioritaire;Courant;bewaarde;bewaard;Wij bewaren de facturen tien jaar lang.;Nous conservons les factures pendant dix ans.;bewaart;hij/zij
+VERBES_NL_63;bouger;bewegen;4.57;Prioritaire;Courant;bewoog;bewogen;De markt beweegt snel dit kwartaal.;Le marché évolue vite ce trimestre.;beweegt;hij/zij
+VERBES_NL_64;prouver;bewijzen;4.65;Prioritaire;Courant;bewees;bewezen;Deze cijfers bewijzen de groei van het bedrijf.;Ces chiffres prouvent la croissance de l'entreprise.;bewijst;hij/zij
+VERBES_NL_65;posséder;bezitten;4.04;Prioritaire;Courant;bezat;bezeten;Het bedrijf bezit drie magazijnen in België.;L'entreprise possède trois entrepôts en Belgique.;bezit;hij/zij
+VERBES_NL_66;visiter;bezoeken;4.76;Prioritaire;Courant;bezocht;bezocht;De vertegenwoordiger bezoekt vandaag twee klanten.;Le représentant visite deux clients aujourd'hui.;bezoekt;hij/zij
+VERBES_NL_67;économiser;bezuinigen;3.4;Standard;Spécialisé;bezuinigde;bezuinigd;Het bedrijf bezuinigt op transportkosten.;L'entreprise économise sur les frais de transport.;bezuinigt;hij/zij
+VERBES_NL_68;prier;bidden;4.33;Standard;Courant;bad;gebeden;Hij bidt elke ochtend voor het werk.;Il prie chaque matin avant le travail.;bidt;hij/zij
+VERBES_NL_69;offrir;bieden;4.95;Prioritaire;Courant;bood;geboden;De leverancier biedt een betere prijs.;Le fournisseur offre un meilleur prix.;biedt;hij/zij
+VERBES_NL_70;mordre;bijten;3.86;Standard;Courant;beet;gebeten;De hond bijt niet, wees gerust.;Le chien ne mord pas, sois rassuré.;bijt;hij/zij
+VERBES_NL_71;lier / attacher;binden;3.88;Prioritaire;Courant;bond;gebonden;Dit contract bindt beide partijen voor drie jaar.;Ce contrat lie les deux parties pour trois ans.;bindt;hij/zij
+VERBES_NL_72;apparaître / s'avérer;blijken;4.39;Prioritaire;Courant;bleek;gebleken;Het blijkt dat de levering vertraging heeft.;Il s'avère que la livraison a du retard.;blijkt;hij/zij
+VERBES_NL_73;rester;blijven;5.66;Prioritaire;Essentiel;bleef;gebleven;De prijzen blijven stabiel dit jaar.;Les prix restent stables cette année.;blijft;hij/zij
+VERBES_NL_74;fleurir;bloeien;3.48;Standard;Spécialisé;bloeide;gebloeid;De sector bloeit dankzij e-commerce.;Le secteur prospère grâce au e-commerce.;bloeit;hij/zij
+VERBES_NL_75;réserver / enregistrer;boeken;5.14;Standard;Essentiel;boekte;geboekt;Wij boeken volgende week een vergaderzaal.;Nous réservons une salle de réunion la semaine prochaine.;boekt;hij/zij
+VERBES_NL_76;bâtir / construire;bouwen;4.95;Prioritaire;Courant;bouwde;gebouwd;Het bedrijf bouwt een nieuw distributiecentrum.;L'entreprise construit un nouveau centre de distribution.;bouwt;hij/zij
+VERBES_NL_77;brûler;branden;4.32;Prioritaire;Courant;brandde;gebrand;Het licht brandt de hele nacht in het magazijn.;La lumière brûle toute la nuit dans l'entrepôt.;brandt;hij/zij
+VERBES_NL_78;casser;breken;4.45;Prioritaire;Courant;brak;gebroken;Dit materiaal breekt gemakkelijk tijdens transport.;Ce matériau se casse facilement pendant le transport.;breekt;hij/zij
+VERBES_NL_79;apporter / amener;brengen;5.39;Prioritaire;Essentiel;bracht;gebracht;De chauffeur brengt het pakket vandaag nog.;Le chauffeur apporte le colis dès aujourd'hui.;brengt;hij/zij
+VERBES_NL_80;courber / plier;buigen;3.86;Prioritaire;Courant;boog;gebogen;Het metaal buigt onder druk.;Le métal plie sous la pression.;buigt;hij/zij
+VERBES_NL_81;vérifier;checken;3.98;Standard;Courant;checkte;gecheckt;Ik check even de voorraad in het systeem.;Je vérifie rapidement le stock dans le système.;check;ik
+VERBES_NL_82;conclure;concluderen;3.5;Standard;Courant;concludeerde;geconcludeerd;De analist concludeert dat de vraag stijgt.;L'analyste conclut que la demande augmente.;concludeert;hij/zij
+VERBES_NL_83;contrôler;controleren;4.61;Prioritaire;Courant;controleerde;gecontroleerd;De teamleider controleert elke levering.;Le chef d'équipe contrôle chaque livraison.;controleert;hij/zij
+VERBES_NL_84;créer;creëren;4.58;Standard;Courant;creëerde;gecreëerd;Het project creëert twintig nieuwe banen.;Le projet crée vingt nouveaux emplois.;creëert;hij/zij
+VERBES_NL_85;danser;dansen;4.69;Prioritaire;Courant;danste;gedanst;Op het bedrijfsfeest dansen de collega's samen.;À la fête d'entreprise, les collègues dansent ensemble.;danst;hij/zij
+VERBES_NL_86;remercier;danken;4.26;Prioritaire;Courant;dankte;gedankt;Wij danken u voor uw vertrouwen.;Nous vous remercions pour votre confiance.;dankt;hij/zij
+VERBES_NL_87;participer (à);deelnemen (aan);4.4;Prioritaire;Courant;nam deel;deelgenomen;Zij neemt deel aan de beurs volgende maand.;Elle participe au salon le mois prochain.;neemt deel;hij/zij
+VERBES_NL_88;partager / diviser;delen;5.29;Prioritaire;Essentiel;deelde;gedeeld;Wij delen de resultaten met het hele team.;Nous partageons les résultats avec toute l'équipe.;deelt;hij/zij
+VERBES_NL_89;penser;denken;5.5;Prioritaire;Essentiel;dacht;gedacht;Ik denk dat we de deadline halen.;Je pense que nous tiendrons le délai.;denk;ik
+VERBES_NL_90;servir;dienen;4.69;Prioritaire;Courant;diende;gediend;Deze dienst dient vooral kleine ondernemingen.;Ce service sert surtout les petites entreprises.;dient;hij/zij
+VERBES_NL_91;faire;doen;6.13;Prioritaire;Auxiliaire/Modal;deed;gedaan;Wat doet u als de levering te laat is?;Que faites-vous si la livraison est en retard ?;doet;hij/zij
+VERBES_NL_92;continuer;doorgaan;4.61;Prioritaire;Courant;ging door;doorgegaan;Het project gaat door zoals gepland.;Le projet continue comme prévu.;gaat door;hij/zij
+VERBES_NL_93;parcourir / continuer;doorlopen;4.02;Standard;Courant;liep door;doorgelopen;De aanvraag doorloopt eerst de administratieve dienst.;La demande passe d'abord par le service administratif.;loopt door;hij/zij
+VERBES_NL_94;porter;dragen;5.01;Prioritaire;Essentiel;droeg;gedragen;De operator draagt altijd veiligheidsschoenen.;L'opérateur porte toujours des chaussures de sécurité.;draagt;hij/zij
+VERBES_NL_95;flotter / pousser;drijven;4.05;Prioritaire;Courant;dreef;gedreven;De onderneming drijft vooral op export.;L'entreprise repose surtout sur l'exportation.;drijft;hij/zij
+VERBES_NL_96;boire;drinken;4.93;Prioritaire;Courant;dronk;gedronken;De collega's drinken samen koffie tijdens de pauze.;Les collègues boivent un café ensemble pendant la pause.;drinkt;hij/zij
+VERBES_NL_97;rêver;dromen;4.73;Prioritaire;Courant;droomde;gedroomd;Hij droomt van een eigen bedrijf.;Il rêve d'avoir sa propre entreprise.;droomt;hij/zij
+VERBES_NL_98;appuyer / presser;drukken;4.39;Prioritaire;Courant;drukte;gedrukt;De machine drukt duizend etiketten per uur.;La machine imprime mille étiquettes par heure.;drukt;hij/zij
+VERBES_NL_99;oser;durven;4.32;Prioritaire;Courant;durfde;gedurfd;Hij durft de klant om uitstel vragen.;Il ose demander un délai au client.;durft;hij/zij
+VERBES_NL_100;durer;duren;4.62;Prioritaire;Courant;duurde;geduurd;De procedure duurt gemiddeld twee weken.;La procédure dure en moyenne deux semaines.;duurt;hij/zij
+VERBES_NL_101;forcer / contraindre;dwingen;4.18;Prioritaire;Courant;dwong;gedwongen;De regelgeving dwingt ons tot extra controles.;La réglementation nous contraint à des contrôles supplémentaires.;dwingt;hij/zij
+VERBES_NL_102;exiger;eisen;4.77;Prioritaire;Courant;eiste;geëist;De klant eist een snelle levering.;Le client exige une livraison rapide.;eist;hij/zij
+VERBES_NL_103;finir / se terminer;eindigen;4.19;Prioritaire;Courant;eindigde;geëindigd;Het contract eindigt eind dit jaar.;Le contrat se termine à la fin de cette année.;eindigt;hij/zij
+VERBES_NL_104;expérimenter / ressentir;ervaren;4.71;Prioritaire;Courant;ervoer;ervaren;Het team ervaart veel druk tijdens de eindejaarsperiode.;L'équipe ressent beaucoup de pression pendant la période de fin d'année.;ervaart;hij/zij
+VERBES_NL_105;manger;eten;5.51;Prioritaire;Essentiel;at;gegeten;De collega's eten samen tijdens de middagpauze.;Les collègues mangent ensemble pendant la pause de midi.;eet;hij/zij
+VERBES_NL_106;faire du vélo;fietsen;4.6;Standard;Courant;fietste;gefietst;Zij fietst elke dag naar het kantoor.;Elle va au bureau à vélo tous les jours.;fietst;hij/zij
+VERBES_NL_107;aller;gaan;6.18;Prioritaire;Auxiliaire/Modal;ging;gegaan;Ik ga morgen naar de klant.;Je vais chez le client demain.;ga;ik
+VERBES_NL_108;utiliser;gebruiken;5.47;Prioritaire;Essentiel;gebruikte;gebruikt;Wij gebruiken SAP voor de voorraadopvolging.;Nous utilisons SAP pour le suivi des stocks.;gebruikt;hij/zij
+VERBES_NL_109;se passer / arriver;gebeuren;5.03;Prioritaire;Essentiel;gebeurde;gebeurd;Er gebeurt zelden een fout in dit proces.;Il arrive rarement une erreur dans ce processus.;gebeurt;hij/zij
+VERBES_NL_110;croire;geloven;4.99;Prioritaire;Courant;geloofde;geloofd;Ik geloof in een snelle groei van de sector.;Je crois en une croissance rapide du secteur.;geloof;ik
+VERBES_NL_111;valoir / être d'application;gelden;4.29;Prioritaire;Courant;gold;gegolden;Deze korting geldt enkel voor grote bestellingen.;Cette remise s'applique uniquement aux grosses commandes.;geldt;hij/zij
+VERBES_NL_112;profiter / jouir (de);genieten (van);4.99;Prioritaire;Courant;genoot;genoten;Onze klanten genieten van gratis verzending.;Nos clients bénéficient de la livraison gratuite.;geniet van;hij/zij
+VERBES_NL_113;donner;geven;5.75;Prioritaire;Essentiel;gaf;gegeven;De manager geeft feedback na elk project.;Le manager donne un retour après chaque projet.;geeft;hij/zij
+VERBES_NL_114;verser;gieten;3.6;Standard;Courant;goot;gegoten;De fabriek giet het metaal in vaste vormen.;L'usine coule le métal dans des moules fixes.;giet;hij/zij
+VERBES_NL_115;glisser;glijden;3.58;Standard;Courant;gleed;gegleden;De doos glijdt van de pallet.;La boîte glisse de la palette.;glijdt;hij/zij
+VERBES_NL_116;jeter;gooien;4.61;Prioritaire;Courant;gooide;gegooid;Hij gooit de kapotte verpakking weg.;Il jette l'emballage abîmé.;gooit;hij/zij
+VERBES_NL_117;saisir;grijpen;4.15;Prioritaire;Courant;greep;gegrepen;Het bedrijf grijpt deze kans om te groeien.;L'entreprise saisit cette occasion pour grandir.;grijpt;hij/zij
+VERBES_NL_118;grandir / croître;groeien;4.63;Prioritaire;Courant;groeide;gegroeid;De omzet groeit elk kwartaal.;Le chiffre d'affaires croît chaque trimestre.;groeit;hij/zij
+VERBES_NL_119;saluer;groeten;4.23;Prioritaire;Courant;groette;gegroet;De receptioniste groet elke bezoeker vriendelijk.;La réceptionniste salue chaque visiteur avec amabilité.;groet;hij/zij
+VERBES_NL_120;chercher / obtenir;halen;5.32;Prioritaire;Essentiel;haalde;gehaald;De chauffeur haalt de goederen bij de leverancier.;Le chauffeur va chercher la marchandise chez le fournisseur.;haalt;hij/zij
+VERBES_NL_121;pendre / être accroché;hangen;4.69;Prioritaire;Courant;hing;gehangen;Het schema hangt aan de muur van het kantoor.;Le planning est accroché au mur du bureau.;hangt;hij/zij
+VERBES_NL_122;avoir;hebben;6.49;Prioritaire;Auxiliaire/Modal;had;gehad;Het bedrijf heeft drie vestigingen in Vlaanderen.;L'entreprise a trois sites en Flandre.;heeft;hij/zij
+VERBES_NL_123;aider;helpen;5.5;Prioritaire;Essentiel;hielp;geholpen;De collega helpt mij met de administratie.;Le collègue m'aide avec l'administration.;helpt;hij/zij
+VERBES_NL_124;se souvenir;herinneren (zich);4.63;Prioritaire;Courant;herinnerde;herinnerd;Ik herinner me die klant nog goed.;Je me souviens bien de ce client.;herinnert zich;hij/zij
+VERBES_NL_125;réparer / se rétablir;herstellen;4.5;Prioritaire;Courant;herstelde;hersteld;De technicus herstelt de machine binnen een uur.;Le technicien répare la machine en une heure.;herstelt;hij/zij
+VERBES_NL_126;s'appeler;heten;4.25;Prioritaire;Courant;heette;geheten;Onze nieuwe collega heet Sarah.;Notre nouvelle collègue s'appelle Sarah.;heet;hij/zij
+VERBES_NL_127;tenir / garder;houden;5.67;Prioritaire;Essentiel;hield;gehouden;De manager houdt vast aan de deadline.;Le manager s'en tient au délai.;houdt;hij/zij
+VERBES_NL_128;entendre;horen;5.38;Prioritaire;Essentiel;hoorde;gehoord;Ik hoor vandaag nog van de klant.;J'aurai des nouvelles du client aujourd'hui.;hoor;ik
+VERBES_NL_129;espérer;hopen;4.9;Prioritaire;Courant;hoopte;gehoopt;Wij hopen op een snelle goedkeuring.;Nous espérons une approbation rapide.;hoopt;hij/zij
+VERBES_NL_130;louer (prendre en location);huren;4.19;Prioritaire;Courant;huurde;gehuurd;Het bedrijf huurt een extra opslagruimte.;L'entreprise loue un espace de stockage supplémentaire.;huurt;hij/zij
+VERBES_NL_131;déposer / présenter;indienen;4.08;Standard;Courant;diende in;ingediend;De kandidaat dient zijn CV online in.;Le candidat soumet son CV en ligne.;dient in;hij/zij
+VERBES_NL_132;informer;informeren;4.31;Prioritaire;Courant;informeerde;geïnformeerd;Wij informeren de klant over de vertraging.;Nous informons le client du retard.;informeert;hij/zij
+VERBES_NL_133;entrer / accepter;ingaan;4.03;Standard;Courant;ging in;ingegaan;Het nieuwe tarief gaat volgende maand in.;Le nouveau tarif entre en vigueur le mois prochain.;gaat in;hij/zij
+VERBES_NL_134;contenir / retenir;inhouden;3.8;Prioritaire;Courant;hield in;ingehouden;Deze functie houdt veel verantwoordelijkheid in.;Cette fonction implique beaucoup de responsabilités.;houdt in;hij/zij
+VERBES_NL_135;aménager / organiser;inrichten;3.58;Prioritaire;Courant;richtte in;ingericht;Wij richten het nieuwe kantoor deze maand in.;Nous aménageons le nouveau bureau ce mois-ci.;richt in;hij/zij
+VERBES_NL_136;établir / régler;instellen;4.1;Prioritaire;Courant;stelde in;ingesteld;De IT-dienst stelt een nieuw systeem in.;Le service informatique met en place un nouveau système.;stelt in;hij/zij
+VERBES_NL_137;introduire / importer;invoeren;3.98;Prioritaire;Courant;voerde in;ingevoerd;Het bedrijf voert een nieuw ERP-systeem in.;L'entreprise met en place un nouveau système ERP.;voert in;hij/zij
+VERBES_NL_138;remplir (formulaire);invullen;4.08;Prioritaire;Courant;vulde in;ingevuld;Gelieve het formulier volledig in te vullen.;Veuillez remplir entièrement le formulaire.;vult in;hij/zij
+VERBES_NL_139;comprendre / consulter;inzien;4.12;Standard;Courant;zag in;ingezien;Ik zie het voordeel van deze aanpak in.;Je vois l'avantage de cette approche.;zie in;ik
+VERBES_NL_140;chasser;jagen;4.16;Standard;Courant;jaagde / joeg;gejaagd;De verkoper jaagt op nieuwe klanten.;Le vendeur est à la chasse de nouveaux clients.;jaagt;hij/zij
+VERBES_NL_141;pousser des cris de joie;juichen;3.79;Standard;Courant;juichte;gejuicht;Het team juicht na het behalen van de doelstelling.;L'équipe pousse des cris de joie après avoir atteint l'objectif.;juicht;hij/zij
+VERBES_NL_142;jouer aux cartes;kaarten;4.71;Standard;Courant;kaartte;gekaart;Tijdens de pauze kaarten enkele collega's.;Pendant la pause, quelques collègues jouent aux cartes.;kaart;hij/zij
+VERBES_NL_143;camper;kamperen;3.92;Standard;Courant;kampeerde;gekampeerd;Sommige medewerkers kamperen tijdens de teambuilding.;Certains employés campent pendant le team building.;kampeert;hij/zij
+VERBES_NL_144;connaître;kennen;5.08;Prioritaire;Essentiel;kende;gekend;Ik ken deze leverancier al jaren.;Je connais ce fournisseur depuis des années.;ken;ik
+VERBES_NL_145;tourner / retourner;keren;4.8;Prioritaire;Courant;keerde;gekeerd;De vrachtwagen keert terug naar het depot.;Le camion retourne au dépôt.;keert;hij/zij
+VERBES_NL_146;choisir;kiezen;5.07;Prioritaire;Essentiel;koos;gekozen;De klant kiest voor de snelste levering.;Le client choisit la livraison la plus rapide.;kiest;hij/zij
+VERBES_NL_147;regarder;kijken;5.58;Prioritaire;Essentiel;keek;gekeken;De manager kijkt elke week naar de KPI's.;Le manager consulte les indicateurs chaque semaine.;kijkt;hij/zij
+VERBES_NL_148;se plaindre;klagen;4.46;Prioritaire;Courant;klaagde;geklaagd;De klant klaagt over de late levering.;Le client se plaint du retard de livraison.;klaagt;hij/zij
+VERBES_NL_149;habiller;kleden;3.74;Prioritaire;Courant;kleedde;gekleed;Het personeel kleedt zich volgens de veiligheidsnormen.;Le personnel s'habille selon les normes de sécurité.;kleedt;hij/zij
+VERBES_NL_150;grimper;klimmen;4.03;Prioritaire;Courant;klom;geklommen;De omzet klimt naar een nieuw record.;Le chiffre d'affaires grimpe vers un nouveau record.;klimt;hij/zij
+VERBES_NL_151;frapper / battre;kloppen;4.22;Prioritaire;Courant;klopte;geklopt;De cijfers kloppen niet met het rapport.;Les chiffres ne correspondent pas au rapport.;klopt;hij/zij
+VERBES_NL_152;cuisiner / bouillir;koken;4.6;Prioritaire;Courant;kookte;gekookt;De cateraar kookt voor het hele team.;Le traiteur cuisine pour toute l'équipe.;kookt;hij/zij
+VERBES_NL_153;venir;komen;5.95;Prioritaire;Essentiel;kwam;gekomen;De nieuwe collega komt volgende week.;Le nouveau collègue arrive la semaine prochaine.;komt;hij/zij
+VERBES_NL_154;acheter;kopen;5.21;Prioritaire;Essentiel;kocht;gekocht;Het bedrijf koopt nieuwe machines aan.;L'entreprise achète de nouvelles machines.;koopt;hij/zij
+VERBES_NL_155;coûter;kosten;4.94;Prioritaire;Courant;kostte;gekost;Deze dienst kost honderd euro per maand.;Ce service coûte cent euros par mois.;kost;hij/zij
+VERBES_NL_156;recevoir;krijgen;5.72;Prioritaire;Essentiel;kreeg;gekregen;De klant krijgt een korting van tien procent.;Le client reçoit une remise de dix pour cent.;krijgt;hij/zij
+VERBES_NL_157;croiser;kruisen;3.53;Standard;Courant;kruiste;gekruist;De twee leveringen kruisen elkaar onderweg.;Les deux livraisons se croisent en chemin.;kruist;hij/zij
+VERBES_NL_158;pouvoir (capacité);kunnen;6.26;Prioritaire;Auxiliaire/Modal;kon;gekund;Ik kan de deadline zonder probleem halen.;Je peux tenir le délai sans problème.;kan;ik
+VERBES_NL_159;embrasser;kussen;4.27;Standard;Courant;kuste;gekust;Ze kussen elkaar bij het afscheid op het feest.;Ils s'embrassent en se disant au revoir à la fête.;kust;hij/zij
+VERBES_NL_160;rire;lachen;4.76;Prioritaire;Courant;lachte;gelachen;De collega's lachen tijdens de teambuilding.;Les collègues rient pendant le team building.;lacht;hij/zij
+VERBES_NL_161;charger;laden;4.29;Standard;Courant;laadde;geladen;De vrachtwagen laadt de pallets in het magazijn.;Le camion charge les palettes à l'entrepôt.;laadt;hij/zij
+VERBES_NL_162;laisser;laten;5.88;Prioritaire;Auxiliaire/Modal;liet;gelaten;Wij laten de klant de keuze tussen twee opties.;Nous laissons le client choisir entre deux options.;laat;hij/zij
+VERBES_NL_163;vivre (être en vie);leeft;4.83;Prioritaire;Courant;leefde;geleefd;Het bedrijf leeft van zijn export naar Duitsland.;L'entreprise vit de ses exportations vers l'Allemagne.;leeft;hij/zij
+VERBES_NL_164;mener / conduire;leiden;5.16;Prioritaire;Essentiel;leidde;geleid;Zij leidt het logistieke team van tien personen.;Elle dirige l'équipe logistique de dix personnes.;leidt;hij/zij
+VERBES_NL_165;emprunter / prêter;lenen;4.32;Prioritaire;Courant;leende;geleend;Het bedrijf leent materiaal aan een partner.;L'entreprise prête du matériel à un partenaire.;leent;hij/zij
+VERBES_NL_166;apprendre / enseigner;leren;5.41;Prioritaire;Essentiel;leerde;geleerd;Ik leer elke dag nieuwe vakwoordenschat.;J'apprends chaque jour du nouveau vocabulaire professionnel.;leer;ik
+VERBES_NL_167;faire attention (à);letten (op);4.35;Prioritaire;Courant;lette;gelet;Let goed op de leveringsdatum in het contract.;Fais bien attention à la date de livraison dans le contrat.;let op;hij/zij
+VERBES_NL_168;lire;lezen;5.32;Prioritaire;Essentiel;las;gelezen;Ik lees elke ochtend de rapporten van het team.;Je lis les rapports de l'équipe chaque matin.;lees;ik
+VERBES_NL_169;livrer / fournir;leveren;4.68;Prioritaire;Courant;leverde;geleverd;De leverancier levert de bestelling binnen drie dagen.;Le fournisseur livre la commande sous trois jours.;levert;hij/zij
+VERBES_NL_170;poser / mettre;leggen;5.0;Prioritaire;Essentiel;legde;gelegd;De operator legt de dozen op de pallet.;L'opérateur pose les boîtes sur la palette.;legt;hij/zij
+VERBES_NL_171;être couché / se trouver;liggen;5.27;Prioritaire;Essentiel;lag;gelegen;Het magazijn ligt vlak bij de snelweg.;L'entrepôt se trouve juste à côté de l'autoroute.;ligt;hij/zij
+VERBES_NL_172;souffrir;lijden;4.51;Prioritaire;Courant;leed;geleden;De sector lijdt onder de stijgende brandstofprijzen.;Le secteur souffre de la hausse des prix du carburant.;lijdt;hij/zij
+VERBES_NL_173;paraître / ressembler;lijken;4.91;Prioritaire;Courant;leek;geleken;Dit plan lijkt de beste optie.;Ce plan semble être la meilleure option.;lijkt;hij/zij
+VERBES_NL_174;marcher / courir;lopen;5.34;Prioritaire;Essentiel;liep;gelopen;Het project loopt volgens schema.;Le projet se déroule comme prévu.;loopt;hij/zij
+VERBES_NL_175;écouter;luisteren;4.9;Prioritaire;Courant;luisterde;geluisterd;De manager luistert naar de feedback van het team.;Le manager écoute les retours de l'équipe.;luistert;hij/zij
+VERBES_NL_176;sonner;luiden;3.63;Standard;Courant;luidde;geluid;De telefoon luidt net voor de sluitingstijd.;Le téléphone sonne juste avant l'heure de fermeture.;luidt;hij/zij
+VERBES_NL_177;faire / fabriquer;maken;6.1;Prioritaire;Essentiel;maakte;gemaakt;Wij maken elke maand een nieuw rapport.;Nous faisons un nouveau rapport chaque mois.;maakt;hij/zij
+VERBES_NL_178;vivre / expérimenter;meemaken;4.02;Prioritaire;Courant;maakte mee;meegemaakt;Het team maakt een moeilijke periode mee.;L'équipe traverse une période difficile.;maakt mee;hij/zij
+VERBES_NL_179;accompagner;meegaan;3.73;Standard;Courant;ging mee;meegegaan;De stagiair gaat mee naar het klantbezoek.;Le stagiaire accompagne lors de la visite client.;gaat mee;hij/zij
+VERBES_NL_180;signaler / annoncer;melden;4.73;Prioritaire;Courant;meldde;gemeld;De medewerker meldt het probleem meteen.;L'employé signale immédiatement le problème.;meldt;hij/zij
+VERBES_NL_181;penser / être sérieux;menen;3.95;Prioritaire;Courant;meende;gemeend;Ik meen dat we deze klant moeten behouden.;Je pense sincèrement que nous devons garder ce client.;meen;ik
+VERBES_NL_182;remarquer;merken;4.45;Prioritaire;Courant;merkte;gemerkt;Wij merken een stijging in de vraag.;Nous remarquons une hausse de la demande.;merkt;hij/zij
+VERBES_NL_183;mesurer;meten;4.12;Prioritaire;Courant;mat;gemeten;De sensor meet de temperatuur in het magazijn.;Le capteur mesure la température dans l'entrepôt.;meet;hij/zij
+VERBES_NL_184;devoir;moeten;6.03;Prioritaire;Auxiliaire/Modal;moest;gemoeten;Ik moet dit rapport voor vrijdag afwerken.;Je dois terminer ce rapport pour vendredi.;moet;ik
+VERBES_NL_185;pouvoir (permission);mogen;5.34;Prioritaire;Auxiliaire/Modal;mocht;gemoogd;U mag de kortingscode gebruiken tot eind deze maand.;Vous pouvez utiliser le code promo jusqu'à la fin de ce mois.;mag;u
+VERBES_NL_186;aller au cours;naar de les gaan;5.0;Standard;Essentiel;ging;gegaan;Zij gaat elke avond naar de les Nederlands.;Elle va au cours de néerlandais chaque soir.;gaat naar de les;hij/zij
+VERBES_NL_187;vérifier;nagaan;3.73;Standard;Courant;ging na;nagegaan;De boekhouder gaat elke factuur na.;Le comptable vérifie chaque facture.;gaat na;hij/zij
+VERBES_NL_188;prendre;nemen;5.6;Prioritaire;Essentiel;nam;genomen;De manager neemt vandaag een beslissing.;Le manager prend une décision aujourd'hui.;neemt;hij/zij
+VERBES_NL_189;nommer / appeler;noemen;5.08;Prioritaire;Essentiel;noemde;genoemd;Wij noemen dit project 'Fase 2'.;Nous appelons ce projet 'Phase 2'.;noemt;hij/zij
+VERBES_NL_190;juger;oordelen;3.99;Prioritaire;Courant;oordeelde;geoordeeld;De klant oordeelt positief over de service.;Le client juge le service positivement.;oordeelt;hij/zij
+VERBES_NL_191;exercer / pratiquer;oefenen;4.48;Prioritaire;Courant;oefende;geoefend;Ik oefen mijn Nederlands elke dag met deze app.;Je pratique mon néerlandais chaque jour avec cette appli.;oefen;ik
+VERBES_NL_192;déjeuner (matin);ontbijten;3.79;Standard;Courant;ontbeet;ontbeten;Het team ontbijt samen voor de belangrijke vergadering.;L'équipe prend son petit-déjeuner ensemble avant la réunion importante.;ontbijt;hij/zij
+VERBES_NL_193;manquer;ontbreken;4.25;Prioritaire;Courant;ontbrak;ontbroken;Er ontbreekt nog één document in het dossier.;Il manque encore un document dans le dossier.;ontbreekt;hij/zij
+VERBES_NL_194;retenir / se souvenir;onthouden;4.3;Prioritaire;Courant;onthield;onthouden;Onthoud goed het nieuwe klantnummer.;Retiens bien le nouveau numéro client.;onthoudt;hij/zij
+VERBES_NL_195;rencontrer;ontmoeten;4.6;Prioritaire;Courant;ontmoette;ontmoet;De vertegenwoordiger ontmoet de klant op de beurs.;Le représentant rencontre le client au salon.;ontmoet;hij/zij
+VERBES_NL_196;naître / provenir;ontstaan;4.97;Prioritaire;Courant;ontstond;ontstaan;Er ontstaat vertraging door het slechte weer.;Un retard survient à cause du mauvais temps.;ontstaat;hij/zij
+VERBES_NL_197;recevoir;ontvangen;5.04;Prioritaire;Essentiel;ontving;ontvangen;Wij ontvangen de bestelling morgen.;Nous recevons la commande demain.;ontvangt;hij/zij
+VERBES_NL_198;développer;ontwikkelen;4.69;Prioritaire;Courant;ontwikkelde;ontwikkeld;Het bedrijf ontwikkelt een nieuwe applicatie.;L'entreprise développe une nouvelle application.;ontwikkelt;hij/zij
+VERBES_NL_199;téléphoner;opbellen;2.74;Prioritaire;Spécialisé;belde op;opgebeld;Ik bel de klant zo dadelijk op.;J'appelle le client dans un instant.;bel op;ik
+VERBES_NL_200;construire / édifier;opbouwen;4.15;Prioritaire;Courant;bouwde op;opgebouwd;Het bedrijf bouwt een sterke reputatie op.;L'entreprise se construit une solide réputation.;bouwt op;hij/zij
+VERBES_NL_201;enregistrer / décrocher;opnemen;4.59;Prioritaire;Courant;nam op;opgenomen;De secretaresse neemt de telefoon op.;La secrétaire décroche le téléphone.;neemt op;hij/zij
+VERBES_NL_202;faire attention;oppassen;3.84;Prioritaire;Courant;paste op;opgepast;Pas op voor fouten in de facturatie.;Fais attention aux erreurs dans la facturation.;past op;hij/zij
+VERBES_NL_203;fonder / établir;oprichten;3.85;Prioritaire;Courant;richtte op;opgericht;Zij richt een nieuwe afdeling op.;Elle fonde un nouveau département.;richt op;hij/zij
+VERBES_NL_204;résoudre;oplossen;4.61;Prioritaire;Courant;loste op;opgelost;De technische dienst lost het probleem snel op.;Le service technique résout rapidement le problème.;lost op;hij/zij
+VERBES_NL_205;se lever;opstaan;4.39;Prioritaire;Courant;stond op;opgestaan;Hij staat vroeg op voor de vroege ploeg.;Il se lève tôt pour l'équipe du matin.;staat op;hij/zij
+VERBES_NL_206;rédiger / dresser;opstellen;4.23;Prioritaire;Courant;stelde op;opgesteld;De HR-dienst stelt het contract op.;Le service RH rédige le contrat.;stelt op;hij/zij
+VERBES_NL_207;frapper / sauter aux yeux;opvallen;3.65;Prioritaire;Courant;viel op;opgevallen;Deze fout valt meteen op in het rapport.;Cette erreur saute immédiatement aux yeux dans le rapport.;valt op;hij/zij
+VERBES_NL_208;chercher / rendre visite;opzoeken;4.21;Prioritaire;Courant;zocht op;opgezocht;Ik zoek de leverancier even op in het systeem.;Je recherche rapidement le fournisseur dans le système.;zoek op;ik
+VERBES_NL_209;décéder;overlijden;4.48;Prioritaire;Courant;overleed;overleden;De oprichter van het bedrijf is vorig jaar overleden.;Le fondateur de l'entreprise est décédé l'an dernier.;overlijdt;hij/zij
+VERBES_NL_210;traverser;oversteken;3.83;Prioritaire;Courant;stak over;overgestoken;De vrachtwagen steekt de grens over zonder problemen.;Le camion traverse la frontière sans problème.;steekt over;hij/zij
+VERBES_NL_211;prendre / saisir;pakken;4.99;Prioritaire;Courant;pakte;gepakt;De medewerker pakt de bestelling in.;L'employé emballe la commande.;pakt;hij/zij
+VERBES_NL_212;essayer / convenir;passen;4.69;Prioritaire;Courant;paste;gepast;Deze oplossing past perfect bij uw behoeften.;Cette solution correspond parfaitement à vos besoins.;past;hij/zij
+VERBES_NL_213;avoir lieu;plaatsvinden;4.4;Prioritaire;Courant;vond plaats;plaatsgevonden;De vergadering vindt volgende week plaats.;La réunion a lieu la semaine prochaine.;vindt plaats;hij/zij
+VERBES_NL_214;planifier;plannen;4.92;Prioritaire;Courant;plande;gepland;De planner plant de leveringen voor volgende week.;Le planificateur planifie les livraisons pour la semaine prochaine.;plant;hij/zij
+VERBES_NL_215;planter;planten;4.6;Standard;Courant;plantte;geplant;Het bedrijf plant bomen als compensatie voor de uitstoot.;L'entreprise plante des arbres pour compenser ses émissions.;plant;hij/zij
+VERBES_NL_216;commettre;plegen;4.26;Prioritaire;Courant;pleegde;gepleegd;Hij pleegt overleg met de leverancier.;Il se concerte avec le fournisseur.;pleegt;hij/zij
+VERBES_NL_217;nettoyer;poetsen;3.77;Standard;Courant;poetste;gepoetst;De schoonmaakploeg poetst het kantoor elke avond.;L'équipe de nettoyage nettoie le bureau chaque soir.;poetst;hij/zij
+VERBES_NL_218;parler / bavarder;praten;5.29;Prioritaire;Essentiel;praatte;gepraat;Wij praten morgen verder over het contract.;Nous continuerons à discuter du contrat demain.;praat;hij/zij
+VERBES_NL_219;essayer;proberen;5.24;Prioritaire;Essentiel;probeerde;geprobeerd;Ik probeer de deadline te halen.;J'essaie de tenir le délai.;probeer;ik
+VERBES_NL_220;produire;produceren;4.3;Prioritaire;Courant;produceerde;geproduceerd;De fabriek produceert duizend eenheden per dag.;L'usine produit mille unités par jour.;produceert;hij/zij
+VERBES_NL_221;publier;publiceren;4.11;Prioritaire;Courant;publiceerde;gepubliceerd;Het bedrijf publiceert het jaarverslag in maart.;L'entreprise publie le rapport annuel en mars.;publiceert;hij/zij
+VERBES_NL_222;donner des points;punten geven;4.95;Standard;Courant;gaf;gegeven;De trainer geeft punten voor elke afgeronde module.;Le formateur donne des points pour chaque module terminé.;geeft punten;hij/zij
+VERBES_NL_223;toucher / atteindre;raken;4.73;Prioritaire;Courant;raakte;geraakt;Deze maatregel raakt vooral kleine leveranciers.;Cette mesure touche surtout les petits fournisseurs.;raakt;hij/zij
+VERBES_NL_224;réagir;reageren;4.76;Prioritaire;Courant;reageerde;gereageerd;De klant reageert snel op onze e-mail.;Le client réagit rapidement à notre e-mail.;reageert;hij/zij
+VERBES_NL_225;voyager;reizen;4.82;Prioritaire;Courant;reisde;gereisd;De consultant reist elke week naar een andere klant.;Le consultant voyage chaque semaine chez un client différent.;reist;hij/zij
+VERBES_NL_226;compter / calculer;rekenen;4.48;Prioritaire;Courant;rekende;gerekend;Wij rekenen op een snelle oplossing.;Nous comptons sur une solution rapide.;rekent;hij/zij
+VERBES_NL_227;freiner;remmen;3.91;Standard;Courant;remde;geremd;De hoge kosten remmen de groei af.;Les coûts élevés freinent la croissance.;remt;hij/zij
+VERBES_NL_228;rouler / conduire;rijden;5.13;Prioritaire;Essentiel;reed;gereden;De chauffeur rijdt elke dag dezelfde route.;Le chauffeur conduit le même itinéraire chaque jour.;rijdt;hij/zij
+VERBES_NL_229;appeler / crier;roepen;4.62;Prioritaire;Courant;riep;geroepen;De teamleider roept iedereen samen voor de briefing.;Le chef d'équipe rassemble tout le monde pour le briefing.;roept;hij/zij
+VERBES_NL_230;fumer;roken;4.47;Standard;Courant;rookte;gerookt;Enkel buiten het gebouw mag men roken.;On ne peut fumer qu'en dehors du bâtiment.;rookt;hij/zij
+VERBES_NL_231;échanger;ruilen;4.04;Standard;Courant;ruilde;geruild;De klant ruilt het product voor een ander model.;Le client échange le produit contre un autre modèle.;ruilt;hij/zij
+VERBES_NL_232;se reposer;rusten;4.25;Prioritaire;Courant;rustte;gerust;Het team rust een week tussen de twee projecten.;L'équipe se repose une semaine entre les deux projets.;rust;hij/zij
+VERBES_NL_233;séparer;scheiden;4.18;Prioritaire;Courant;scheidde;gescheiden;Wij scheiden het afval volgens de nieuwe regels.;Nous trions les déchets selon les nouvelles règles.;scheidt;hij/zij
+VERBES_NL_234;importer / y avoir une différence;schelen;4.22;Prioritaire;Courant;scheelde;gescheeld;Het scheelt niet veel of we halen de deadline.;Il ne s'en faut pas de beaucoup pour tenir le délai.;scheelt;hij/zij
+VERBES_NL_235;offrir / verser;schenken;3.91;Prioritaire;Courant;schonk;geschonken;Het bedrijf schenkt materiaal aan een goed doel.;L'entreprise offre du matériel à une œuvre caritative.;schenkt;hij/zij
+VERBES_NL_236;créer;scheppen;4.02;Standard;Courant;schiep;geschept;Deze investering schept nieuwe kansen.;Cet investissement crée de nouvelles opportunités.;schept;hij/zij
+VERBES_NL_237;sembler / briller;schijnen;4.0;Prioritaire;Courant;scheen;geschenen;Het schijnt dat de fusie doorgaat.;Il paraît que la fusion va se faire.;schijnt;hij/zij
+VERBES_NL_238;écrire;schrijven;5.07;Prioritaire;Essentiel;schreef;geschreven;Ik schrijf elke week een verslag voor het team.;J'écris un rapport pour l'équipe chaque semaine.;schrijf;ik
+VERBES_NL_239;s'effrayer;schrikken;3.99;Prioritaire;Courant;schrok;geschrokken;De klant schrikt van de hoge factuur.;Le client est surpris par la facture élevée.;schrikt;hij/zij
+VERBES_NL_240;frapper;slaan;4.87;Prioritaire;Courant;sloeg;geslagen;De machine slaat elk uur duizend stuks.;La machine produit mille pièces par heure.;slaat;hij/zij
+VERBES_NL_241;réussir;slagen;4.28;Prioritaire;Courant;slaagde;geslaagd;De kandidaat slaagt voor de technische test.;Le candidat réussit le test technique.;slaagt;hij/zij
+VERBES_NL_242;dormir;slapen;5.06;Prioritaire;Essentiel;sliep;geslapen;Na de late ploeg slaapt hij overdag.;Après l'équipe de nuit, il dort la journée.;slaapt;hij/zij
+VERBES_NL_243;fermer;sluiten;4.9;Prioritaire;Courant;sloot;gesloten;Het magazijn sluit om achttien uur.;L'entrepôt ferme à dix-huit heures.;sluit;hij/zij
+VERBES_NL_244;goûter (avoir un goût);smaken;3.95;Standard;Courant;smaakte;gesmaakt;Het personeelsrestaurant smaakt goed volgens de medewerkers.;Le restaurant du personnel a bon goût selon les employés.;smaakt;hij/zij
+VERBES_NL_245;jeter;smijten;3.07;Standard;Spécialisé;smeet;gesmeten;Hij smijt de kapotte doos in de container.;Il jette la boîte cassée dans le conteneur.;smijt;hij/zij
+VERBES_NL_246;couper;snijden;4.17;Prioritaire;Courant;sneed;gesneden;De machine snijdt het karton op maat.;La machine découpe le carton sur mesure.;snijdt;hij/zij
+VERBES_NL_247;jouer;spelen;5.47;Prioritaire;Essentiel;speelde;gespeeld;Prijs speelt een grote rol in de keuze van de klant.;Le prix joue un grand rôle dans le choix du client.;speelt;hij/zij
+VERBES_NL_248;parler;spreken;5.04;Prioritaire;Essentiel;sprak;gesproken;Zij spreekt vloeiend Nederlands met de klanten.;Elle parle couramment néerlandais avec les clients.;spreekt;hij/zij
+VERBES_NL_249;sauter;springen;4.45;Standard;Courant;sprong;gesprongen;De prijzen springen omhoog door de grondstoffenschaarste.;Les prix bondissent à cause de la pénurie de matières premières.;springt;hij/zij
+VERBES_NL_250;être debout;staan;5.71;Prioritaire;Essentiel;stond;gestaan;Het pakket staat klaar bij de uitgang.;Le colis est prêt près de la sortie.;staat;hij/zij
+VERBES_NL_251;marcher / monter (véhicule);stappen;4.86;Prioritaire;Courant;stapte;gestapt;De klant stapt in het nieuwe abonnement.;Le client passe au nouvel abonnement.;stapt;hij/zij
+VERBES_NL_252;piquer / mettre;steken;4.68;Prioritaire;Courant;stak;gestoken;De operator steekt het label op de doos.;L'opérateur place l'étiquette sur la boîte.;steekt;hij/zij
+VERBES_NL_253;poser / placer;stellen;5.23;Prioritaire;Essentiel;stelde;gesteld;De klant stelt een vraag over de levertermijn.;Le client pose une question sur le délai de livraison.;stelt;hij/zij
+VERBES_NL_254;mourir;sterven;4.62;Prioritaire;Courant;stierf;gestorven;Het merk sterft langzaam uit door de concurrentie.;La marque disparaît lentement à cause de la concurrence.;sterft;hij/zij
+VERBES_NL_255;augmenter / monter;stijgen;4.21;Prioritaire;Courant;steeg;gestegen;De prijzen stijgen door de inflatie.;Les prix augmentent à cause de l'inflation.;stijgt;hij/zij
+VERBES_NL_256;s'arrêter / cesser;stoppen;5.1;Prioritaire;Essentiel;stopte;gestopt;De productie stopt tijdens het onderhoud.;La production s'arrête pendant la maintenance.;stopt;hij/zij
+VERBES_NL_257;étudier;studeren;4.5;Prioritaire;Courant;studeerde;gestudeerd;Ik studeer 's avonds Nederlands voor mijn werk.;J'étudie le néerlandais le soir pour mon travail.;studeer;ik
+VERBES_NL_258;envoyer / diriger;sturen;5.06;Prioritaire;Essentiel;stuurde;gestuurd;Wij sturen de factuur per e-mail.;Nous envoyons la facture par e-mail.;stuurt;hij/zij
+VERBES_NL_259;dessiner / signer;tekenen;4.6;Prioritaire;Courant;tekende;getekend;De klant tekent het contract vandaag.;Le client signe le contrat aujourd'hui.;tekent;hij/zij
+VERBES_NL_260;compter;tellen;4.39;Prioritaire;Courant;telde;geteld;De medewerker telt de voorraad elke maand.;L'employé compte le stock chaque mois.;telt;hij/zij
+VERBES_NL_261;montrer;tonen;4.73;Prioritaire;Courant;toonde;getoond;De grafiek toont een duidelijke trend.;Le graphique montre une tendance claire.;toont;hij/zij
+VERBES_NL_262;tirer;trekken;4.97;Prioritaire;Courant;trok;getrokken;Deze promotie trekt veel nieuwe klanten aan.;Cette promotion attire beaucoup de nouveaux clients.;trekt;hij/zij
+VERBES_NL_263;se marier;trouwen;4.61;Prioritaire;Courant;trouwde;getrouwd;Een collega trouwt volgend jaar in juni.;Un collègue se marie en juin l'année prochaine.;trouwt;hij/zij
+VERBES_NL_264;tomber;vallen;5.16;Prioritaire;Essentiel;viel;gevallen;De verkoop valt terug in de zomer.;Les ventes chutent en été.;valt;hij/zij
+VERBES_NL_265;attraper;vangen;4.47;Prioritaire;Courant;ving;gevangen;Wij vangen de vertraging op met extra personeel.;Nous compensons le retard avec du personnel supplémentaire.;vangt;hij/zij
+VERBES_NL_266;naviguer;varen;4.29;Standard;Courant;voer;gevaren;Het schip vaart elke week naar Antwerpen.;Le bateau navigue vers Anvers chaque semaine.;vaart;hij/zij
+VERBES_NL_267;se battre;vechten;4.7;Standard;Courant;vocht;gevochten;De verkopers vechten voor elke klant.;Les vendeurs se battent pour chaque client.;vecht;hij/zij
+VERBES_NL_268;changer;veranderen;5.11;Prioritaire;Essentiel;veranderde;veranderd;De regelgeving verandert volgend jaar.;La réglementation change l'année prochaine.;verandert;hij/zij
+VERBES_NL_269;améliorer / corriger;verbeteren;4.74;Prioritaire;Courant;verbeterde;verbeterd;Het team verbetert de levertijd elke maand.;L'équipe améliore le délai de livraison chaque mois.;verbetert;hij/zij
+VERBES_NL_270;relier;verbinden;4.21;Prioritaire;Courant;verbond;verbonden;Dit systeem verbindt alle afdelingen met elkaar.;Ce système relie tous les départements entre eux.;verbindt;hij/zij
+VERBES_NL_271;défendre;verdedigen;4.44;Prioritaire;Courant;verdedigde;verdedigd;De advocaat verdedigt de belangen van het bedrijf.;L'avocat défend les intérêts de l'entreprise.;verdedigt;hij/zij
+VERBES_NL_272;partager / répartir;verdelen;4.1;Prioritaire;Courant;verdeelde;verdeeld;Wij verdelen de taken over het hele team.;Nous répartissons les tâches sur toute l'équipe.;verdeelt;hij/zij
+VERBES_NL_273;gagner (argent) / mériter;verdienen;4.85;Prioritaire;Courant;verdiende;verdiend;Het bedrijf verdient goed aan deze nieuwe klant.;L'entreprise gagne bien avec ce nouveau client.;verdient;hij/zij
+VERBES_NL_274;comparer;vergelijken;4.43;Prioritaire;Courant;vergeleek;vergeleken;Wij vergelijken drie leveranciers voor deze opdracht.;Nous comparons trois fournisseurs pour cette mission.;vergelijkt;hij/zij
+VERBES_NL_275;oublier;vergeten;5.2;Prioritaire;Essentiel;vergat;vergeten;Vergeet de handtekening op het contract niet.;N'oublie pas la signature sur le contrat.;vergeet;hij/zij
+VERBES_NL_276;déménager;verhuizen;4.42;Prioritaire;Courant;verhuisde;verhuisd;Het bedrijf verhuist naar een groter kantoor.;L'entreprise déménage dans un bureau plus grand.;verhuist;hij/zij
+VERBES_NL_277;déclarer / expliquer;verklaren;4.39;Prioritaire;Courant;verklaarde;verklaard;De manager verklaart de nieuwe strategie aan het team.;Le manager explique la nouvelle stratégie à l'équipe.;verklaart;hij/zij
+VERBES_NL_278;vendre;verkopen;4.88;Prioritaire;Courant;verkocht;verkocht;Wij verkopen dit product vooral online.;Nous vendons ce produit surtout en ligne.;verkoopt;hij/zij
+VERBES_NL_279;quitter;verlaten;4.94;Prioritaire;Courant;verliet;verlaten;Twee medewerkers verlaten het bedrijf dit jaar.;Deux employés quittent l'entreprise cette année.;verlaat;hij/zij
+VERBES_NL_280;prolonger;verlengen;4.11;Prioritaire;Courant;verlengde;verlengd;Wij verlengen het contract met een jaar.;Nous prolongeons le contrat d'un an.;verlengt;hij/zij
+VERBES_NL_281;perdre;verliezen;4.83;Prioritaire;Courant;verloor;verloren;Het bedrijf verliest een belangrijke klant.;L'entreprise perd un client important.;verliest;hij/zij
+VERBES_NL_282;éviter;vermijden;4.29;Prioritaire;Courant;vermeed;vermeden;Wij vermijden onnodige transportkosten.;Nous évitons des frais de transport inutiles.;vermijdt;hij/zij
+VERBES_NL_283;soupçonner;vermoeden;4.3;Prioritaire;Courant;vermoedde;vermoed;Ik vermoed een fout in de facturatie.;Je soupçonne une erreur dans la facturation.;vermoed;ik
+VERBES_NL_284;emballer;verpakken;3.28;Standard;Spécialisé;verpakte;verpakt;De medewerker verpakt de bestelling zorgvuldig.;L'employé emballe la commande avec soin.;verpakt;hij/zij
+VERBES_NL_285;surprendre;verrassen;4.04;Prioritaire;Courant;verraste;verrast;Deze cijfers verrassen het hele team positief.;Ces chiffres surprennent toute l'équipe positivement.;verrast;hij/zij
+VERBES_NL_286;différer;verschillen;4.68;Prioritaire;Courant;verschilde;verschild;De prijzen verschillen sterk per regio.;Les prix diffèrent fortement selon la région.;verschilt;hij/zij
+VERBES_NL_287;raconter;vertellen;5.17;Prioritaire;Essentiel;vertelde;verteld;De manager vertelt over de nieuwe strategie.;Le manager parle de la nouvelle stratégie.;vertelt;hij/zij
+VERBES_NL_288;partir;vertrekken;4.57;Prioritaire;Courant;vertrok;vertrokken;De vrachtwagen vertrekt om zes uur 's ochtends.;Le camion part à six heures du matin.;vertrekt;hij/zij
+VERBES_NL_289;faire confiance;vertrouwen;5.06;Prioritaire;Essentiel;vertrouwde;vertrouwd;Wij vertrouwen op een langdurige samenwerking.;Nous faisons confiance à une collaboration durable.;vertrouwt;hij/zij
+VERBES_NL_290;remplacer;vervangen;4.87;Prioritaire;Courant;verving;vervangen;De technicus vervangt het defecte onderdeel.;Le technicien remplace la pièce défectueuse.;vervangt;hij/zij
+VERBES_NL_291;peindre;verven;3.86;Standard;Courant;verfde;geverfd;Het bedrijf verft de gevel van het magazijn.;L'entreprise peint la façade de l'entrepôt.;verft;hij/zij
+VERBES_NL_292;collectionner / rassembler;verzamelen;4.53;Prioritaire;Courant;verzamelde;verzameld;Wij verzamelen alle gegevens in één dashboard.;Nous rassemblons toutes les données dans un seul tableau de bord.;verzamelt;hij/zij
+VERBES_NL_293;assurer;verzekeren;4.09;Prioritaire;Courant;verzekerde;verzekerd;Het bedrijf verzekert al zijn transporten.;L'entreprise assure tous ses transports.;verzekert;hij/zij
+VERBES_NL_294;expédier;verzenden;3.6;Standard;Courant;verzond;verzonden;Wij verzenden de bestelling nog vandaag.;Nous expédions la commande dès aujourd'hui.;verzendt;hij/zij
+VERBES_NL_295;soigner;verzorgen;4.17;Prioritaire;Courant;verzorgde;verzorgd;De HR-dienst verzorgt het onthaal van nieuwe medewerkers.;Le service RH s'occupe de l'accueil des nouveaux employés.;verzorgt;hij/zij
+VERBES_NL_296;trouver;vinden;5.75;Prioritaire;Essentiel;vond;gevonden;Ik vind deze oplossing erg interessant.;Je trouve cette solution très intéressante.;vind;ik
+VERBES_NL_297;voler (air);vliegen;4.74;Prioritaire;Courant;vloog;gevlogen;De consultant vliegt volgende week naar Duitsland.;Le consultant s'envole pour l'Allemagne la semaine prochaine.;vliegt;hij/zij
+VERBES_NL_298;sentir / ressentir;voelen;5.04;Prioritaire;Essentiel;voelde;gevoeld;Het team voelt de druk van de deadline.;L'équipe ressent la pression du délai.;voelt;hij/zij
+VERBES_NL_299;mener / nourrir;voeren;4.87;Prioritaire;Courant;voerde;gevoerd;Wij voeren dit project samen met de klant.;Nous menons ce projet avec le client.;voert;hij/zij
+VERBES_NL_300;suivre;volgen;5.27;Prioritaire;Essentiel;volgde;gevolgd;De stagiair volgt een opleiding logistiek.;Le stagiaire suit une formation en logistique.;volgt;hij/zij
+VERBES_NL_301;préparer;voorbereiden;4.26;Prioritaire;Courant;bereidde voor;voorbereid;Ik bereid het gesprek met de klant goed voor.;Je prépare bien l'entretien avec le client.;bereidt voor;hij/zij
+VERBES_NL_302;prévenir / arriver;voorkomen;5.11;Prioritaire;Essentiel;kwam voor;voorgekomen;Deze controle voorkomt fouten in de levering.;Ce contrôle prévient les erreurs de livraison.;voorkomt;hij/zij
+VERBES_NL_303;prédir;voorspellen;3.99;Standard;Courant;voorspelde;voorspeld;De analist voorspelt een stijging van de vraag.;L'analyste prédit une hausse de la demande.;voorspelt;hij/zij
+VERBES_NL_304;présenter;voorstellen;4.79;Prioritaire;Courant;stelde voor;voorgesteld;De consultant stelt een nieuwe aanpak voor.;Le consultant propose une nouvelle approche.;stelt voor;hij/zij
+VERBES_NL_305;former;vormen;5.11;Prioritaire;Essentiel;vormde;gevormd;Deze drie diensten vormen samen de supply chain.;Ces trois services forment ensemble la supply chain.;vormt;hij/zij
+VERBES_NL_306;demander;vragen;5.65;Prioritaire;Essentiel;vroeg;gevraagd;De klant vraagt om een offerte.;Le client demande un devis.;vraagt;hij/zij
+VERBES_NL_307;geler;vriezen;3.24;Standard;Spécialisé;vroor;gevroren;Het vriest in de koelopslag van het magazijn.;Il gèle dans l'entrepôt frigorifique.;vriest;hij/zij
+VERBES_NL_308;remplir;vullen;4.38;Prioritaire;Courant;vulde;gevuld;De operator vult de dozen met producten.;L'opérateur remplit les boîtes de produits.;vult;hij/zij
+VERBES_NL_309;avertir;waarschuwen;4.18;Prioritaire;Courant;waarschuwde;gewaarschuwd;Het systeem waarschuwt bij een tekort in de voorraad.;Le système avertit en cas de rupture de stock.;waarschuwt;hij/zij
+VERBES_NL_310;attendre;wachten;5.36;Prioritaire;Essentiel;wachtte;gewacht;De klant wacht al twee weken op zijn pakket.;Le client attend son colis depuis deux semaines.;wacht;hij/zij
+VERBES_NL_311;se promener;wandelen;4.43;Prioritaire;Courant;wandelde;gewandeld;Tijdens de pauze wandelen enkele collega's buiten.;Pendant la pause, quelques collègues se promènent dehors.;wandelt;hij/zij
+VERBES_NL_312;laver;wassen;4.23;Prioritaire;Courant;waste;gewassen;De medewerker wast de handen voor het werk in het magazijn.;L'employé se lave les mains avant le travail à l'entrepôt.;wast;hij/zij
+VERBES_NL_313;refuser;weigeren;4.27;Prioritaire;Courant;weigerde;geweigerd;De klant weigert het beschadigde pakket.;Le client refuse le colis endommagé.;weigert;hij/zij
+VERBES_NL_314;éveiller;wekken;3.95;Standard;Courant;wekte;gewekt;Deze resultaten wekken vertrouwen bij de investeerders.;Ces résultats suscitent la confiance des investisseurs.;wekt;hij/zij
+VERBES_NL_315;pleurer;wenen;4.27;Standard;Courant;weende;geweend;Zij weende van opluchting na het behalen van het doel.;Elle a pleuré de soulagement après avoir atteint l'objectif.;weent;hij/zij
+VERBES_NL_316;s'habituer;wennen;4.24;Standard;Courant;wende;gewend;Nieuwe medewerkers wennen snel aan het systeem.;Les nouveaux employés s'habituent vite au système.;went;hij/zij
+VERBES_NL_317;souhaiter;wensen;4.7;Standard;Courant;wenste;gewenst;De klant wenst een snellere levering.;Le client souhaite une livraison plus rapide.;wenst;hij/zij
+VERBES_NL_318;travailler;werken;5.65;Prioritaire;Essentiel;werkte;gewerkt;Ik werk elke dag met dit softwareprogramma.;Je travaille chaque jour avec ce logiciel.;werk;ik
+VERBES_NL_319;jeter;werpen;3.92;Standard;Courant;wierp;geworpen;Deze cijfers werpen een nieuw licht op de markt.;Ces chiffres jettent un nouvel éclairage sur le marché.;werpt;hij/zij
+VERBES_NL_320;savoir;weten;5.73;Prioritaire;Essentiel;wist;geweten;Ik weet niet zeker of de levering op tijd komt.;Je ne sais pas avec certitude si la livraison arrivera à temps.;weet;ik
+VERBES_NL_321;indiquer;wijzen;4.55;Prioritaire;Courant;wees;gewezen;De cijfers wijzen op een positieve trend.;Les chiffres indiquent une tendance positive.;wijst;hij/zij
+VERBES_NL_322;vouloir;willen;5.81;Prioritaire;Auxiliaire/Modal;wilde / wou;gewild;Ik wil deze klant graag zo snel mogelijk helpen.;Je veux aider ce client le plus vite possible.;wil;ik
+VERBES_NL_323;gagner;winnen;5.0;Prioritaire;Essentiel;won;gewonnen;Het bedrijf wint een belangrijke aanbesteding.;L'entreprise remporte un appel d'offres important.;wint;hij/zij
+VERBES_NL_324;habiter;wonen;5.14;Prioritaire;Essentiel;woonde;gewoond;De nieuwe klant woont in Antwerpen.;Le nouveau client habite à Anvers.;woont;hij/zij
+VERBES_NL_325;devenir;worden;6.38;Prioritaire;Auxiliaire/Modal;werd;geworden;Zij wordt volgende maand teamleider.;Elle devient chef d'équipe le mois prochain.;wordt;hij/zij
+VERBES_NL_326;échouer / descendre;zakken;4.52;Standard;Courant;zakte;gezakt;De verkoopcijfers zakken tijdens de vakantieperiode.;Les chiffres de vente baissent pendant les vacances.;zakt;hij/zij
+VERBES_NL_327;dire;zeggen;5.71;Prioritaire;Essentiel;zei;gezegd;De klant zegt tevreden te zijn over de service.;Le client dit être satisfait du service.;zegt;hij/zij
+VERBES_NL_328;envoyer;zenden;3.93;Standard;Courant;zond;gezonden;Wij zenden het contract per post.;Nous envoyons le contrat par courrier.;zendt;hij/zij
+VERBES_NL_329;mettre / poser;zetten;5.37;Prioritaire;Essentiel;zette;gezet;De operator zet de doos op de juiste plank.;L'opérateur pose la boîte sur la bonne étagère.;zet;hij/zij
+VERBES_NL_330;voir;zien;6.05;Prioritaire;Essentiel;zag;gezien;Ik zie een duidelijke verbetering in de cijfers.;Je vois une nette amélioration dans les chiffres.;zie;ik
+VERBES_NL_331;être;zijn;6.96;Prioritaire;Auxiliaire/Modal;was;geweest;Dit is de belangrijkste klant van het bedrijf.;C'est le client le plus important de l'entreprise.;is;hij/zij
+VERBES_NL_332;chanter;zingen;4.76;Standard;Courant;zong;gezongen;Op het jaarlijkse feest zingen de collega's samen.;À la fête annuelle, les collègues chantent ensemble.;zingt;hij/zij
+VERBES_NL_333;être assis;zitten;5.56;Prioritaire;Essentiel;zat;gezeten;De klantendienst zit op de tweede verdieping.;Le service client se trouve au deuxième étage.;zit;hij/zij
+VERBES_NL_334;chercher;zoeken;5.33;Prioritaire;Essentiel;zocht;gezocht;Wij zoeken een nieuwe leverancier voor verpakkingen.;Nous cherchons un nouveau fournisseur d'emballages.;zoekt;hij/zij
+VERBES_NL_335;soigner / veiller à;zorgen;5.46;Prioritaire;Essentiel;zorgde;gezorgd;De planner zorgt voor een vlotte levering.;Le planificateur veille à une livraison fluide.;zorgt;hij/zij
+VERBES_NL_336;auxiliaire futur;zullen;5.69;Prioritaire;Auxiliaire/Modal;zou;-;Ik zal het dossier morgen afwerken.;Je terminerai le dossier demain.;zal;ik
+VERBES_NL_337;nager;zwemmen;4.6;Standard;Courant;zwom;gezwommen;Sommige collega's zwemmen 's middags tijdens de lange pauze.;Certains collègues nagent à midi pendant la longue pause.;zwemt;hij/zij
+VERBES_NL_338;se taire;zwijgen;4.35;Prioritaire;Courant;zweeg;gezwegen;Bij twijfel zwijgt de medewerker en vraagt hij advies.;En cas de doute, l'employé se tait et demande conseil.;zwijgt;hij/zij

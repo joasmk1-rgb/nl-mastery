@@ -1,0 +1,41 @@
+id;fr;nl;freq
+THEME_SUPPLYCHAIN_0;la chaîne d'approvisionnement;de toeleveringsketen;5.2
+THEME_SUPPLYCHAIN_1;la gestion des stocks;het voorraadbeheer;5.1
+THEME_SUPPLYCHAIN_2;la prévision de la demande;de vraagvoorspelling;5.0
+THEME_SUPPLYCHAIN_3;l'approvisionnement;de bevoorrading;4.9
+THEME_SUPPLYCHAIN_4;le fournisseur;de leverancier;4.9
+THEME_SUPPLYCHAIN_5;les achats;de inkoop;4.8
+THEME_SUPPLYCHAIN_6;le sourcing;de sourcing;4.7
+THEME_SUPPLYCHAIN_7;la planification;de planning;4.7
+THEME_SUPPLYCHAIN_8;la planification de la production;de productieplanning;4.6
+THEME_SUPPLYCHAIN_9;le délai de livraison;de levertijd;4.6
+THEME_SUPPLYCHAIN_10;le stock de sécurité;de veiligheidsvoorraad;4.5
+THEME_SUPPLYCHAIN_11;la rupture de stock;de stockbreuk;4.5
+THEME_SUPPLYCHAIN_12;le surstock;de overtollige voorraad;4.4
+THEME_SUPPLYCHAIN_13;la commande;de bestelling;4.4
+THEME_SUPPLYCHAIN_14;le fournisseur stratégique;de strategische leverancier;4.3
+THEME_SUPPLYCHAIN_15;la relation fournisseur;de leveranciersrelatie;4.3
+THEME_SUPPLYCHAIN_16;l'appel d'offres;de aanbesteding;4.2
+THEME_SUPPLYCHAIN_17;le contrat-cadre;de raamovereenkomst;4.2
+THEME_SUPPLYCHAIN_18;le coût d'achat;de aankoopkosten;4.1
+THEME_SUPPLYCHAIN_19;la négociation;de onderhandeling;4.1
+THEME_SUPPLYCHAIN_20;le plan industriel et commercial;het S&OP;4.0
+THEME_SUPPLYCHAIN_21;l'indicateur de performance;de prestatie-indicator;4.0
+THEME_SUPPLYCHAIN_22;le taux de service;de servicegraad;3.9
+THEME_SUPPLYCHAIN_23;la traçabilité;de traceerbaarheid;3.9
+THEME_SUPPLYCHAIN_24;le juste-à-temps;just-in-time;3.8
+THEME_SUPPLYCHAIN_25;le délai d'approvisionnement;de aanvoertermijn;3.8
+THEME_SUPPLYCHAIN_26;la gestion de la chaîne d'approvisionnement;het supply chain management;3.7
+THEME_SUPPLYCHAIN_27;le plan de production;het productieplan;3.7
+THEME_SUPPLYCHAIN_28;la demande client;de klantvraag;3.6
+THEME_SUPPLYCHAIN_29;le risque fournisseur;het leveranciersrisico;3.6
+THEME_SUPPLYCHAIN_30;la diversification des fournisseurs;de leveranciersdiversificatie;3.5
+THEME_SUPPLYCHAIN_31;l'audit fournisseur;de leveranciersaudit;3.5
+THEME_SUPPLYCHAIN_32;le cahier des charges;het lastenboek;3.4
+THEME_SUPPLYCHAIN_33;la logistique amont;de inkomende logistiek;3.4
+THEME_SUPPLYCHAIN_34;la logistique aval;de uitgaande logistiek;3.3
+THEME_SUPPLYCHAIN_35;le coût total de possession;de totale eigendomskosten;3.3
+THEME_SUPPLYCHAIN_36;la résilience de la chaîne d'approvisionnement;de veerkracht van de toeleveringsketen;3.2
+THEME_SUPPLYCHAIN_37;le plan de continuité;het continuïteitsplan;3.2
+THEME_SUPPLYCHAIN_38;l'externalisation;de uitbesteding;3.1
+THEME_SUPPLYCHAIN_39;la relocalisation;de herlokalisatie;3.0
