@@ -81,6 +81,7 @@
         .hub-card .hub-card-desc { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.35; }
         .hub-card.accent { border-color: var(--primary); }
         .quick-access-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); width: 100%; max-width: 520px; margin: var(--space-2) 0 var(--space-2); }
+        .intent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: var(--space-2); width: 100%; max-width: 520px; margin-bottom: var(--space-2); }
         .quick-access-card { background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-md); padding: var(--space-3); text-align: center; cursor: pointer; font-weight: 700; font-size: 0.82rem; }
         .quick-access-card:active { transform: scale(0.96); }
         .quick-access-card .qa-icon { font-size: 1.3rem; display: block; margin-bottom: 4px; }
@@ -178,7 +179,7 @@
         .profil-menu-row:active { background: var(--bg); }
         .profil-menu-row .pm-icon { font-size: 1.2rem; }
         .profil-menu-row .pm-chevron { margin-left: auto; color: var(--text-secondary); }
-        .profil-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); width: 100%; max-width: 450px; margin-bottom: var(--space-4); }
+        .profil-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); width: 100%; max-width: 480px; margin-bottom: var(--space-4); }
         .profil-stat-tile { background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 12px 6px; text-align: center; }
         .profil-stat-tile .ps-num { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
         .profil-stat-tile .ps-label { font-size: 0.68rem; color: var(--text-secondary); margin-top: 2px; }

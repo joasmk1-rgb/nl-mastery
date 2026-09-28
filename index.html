@@ -26,6 +26,11 @@
         <div id="load-error"></div>
     </div>
 
+    <div id="onboarding-view" class="view">
+        <button class="back-btn" onclick="onboardingFinish()">✕ Passer</button>
+        <div id="onboarding-content" style="width:100%; max-width:520px;"></div>
+    </div>
+
     <div id="wordlist-view" class="view">
         <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>📋 Mots</h2>
@@ -85,6 +90,7 @@
             <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Teste ta vitesse sur un temps limité.</div></div>
             <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
             <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
+            <div class="hub-card" style="opacity:0.55; cursor:default;" onclick="alert('Bientôt disponible : défie tes amis en duel, vocabulaire ou rapidité !')"><span class="hub-card-icon">👥</span><div class="hub-card-title">Défis entre amis</div><div class="hub-card-desc">Bientôt disponible.</div></div>
         </div>
     </div>
 
@@ -331,11 +337,8 @@
         <button class="back-btn" onclick="showPratiquer()">← Retour</button>
         <h2>🎙️ Pratique orale — Jeu de rôle</h2>
 
-        <div class="rp-config-box">
-            <label for="rp-api-key">Clé API Google Gemini (stockée uniquement dans ton navigateur) :</label>
-            <input type="password" id="rp-api-key" placeholder="Colle ta clé API Gemini ici..." onchange="rpSaveApiKey()">
-            <small style="color: var(--text); opacity:0.7;">Pas encore de clé ? <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">Obtiens-en une gratuitement sur Google AI Studio →</a></small>
-            <div id="rp-voice-warning"></div>
+        <div class="rp-config-box" id="rp-gemini-status">
+            <!-- rempli dynamiquement par renderRpGeminiStatus() : source unique = Profil → 🤖 Intelligence IA -->
         </div>
 
         <!-- Étape 1 : choix de la catégorie -->
@@ -366,8 +369,19 @@
     <div id="apprendre-view" class="view">
         <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>📚 Apprendre</h2>
+        <div class="quick-access-row" style="margin-bottom:var(--space-3);">
+            <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Comprendre</div></div>
+            <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
+        </div>
         <div class="level-tab-row" id="level-tab-row"></div>
         <div id="module-list"></div>
+    </div>
+
+    <div id="comprendre-view" class="view">
+        <button class="back-btn" onclick="showApprendre()">← Retour</button>
+        <h2>🧠 Comprendre</h2>
+        <p class="section-subtitle" style="margin-top:0;">Comprends le mécanisme derrière chaque règle — ordre des mots, subordonnées, temps, connecteurs — pas juste une traduction à retenir.</p>
+        <div id="comprendre-content"></div>
     </div>
 
     <div id="lesson-view" class="view">

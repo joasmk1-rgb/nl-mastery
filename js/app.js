@@ -276,8 +276,26 @@ if (firebaseAvailable) {
         if (!state.stats.trueMastered) state.stats.trueMastered = {}; // { dirKey: true si vraiment maîtrisé }
         if (!state.stats.unlockedBatches) state.stats.unlockedBatches = {}; // { sourceKey: nb de paquets de 10 débloqués }
         if (state.stats.position === undefined) state.stats.position = 0; // compteur global, incrémenté à chaque réponse
+        if (!state.stats.dailyStreak) state.stats.dailyStreak = 0; // jours consécutifs d'utilisation
+        if (!state.stats.lastActiveDay) state.stats.lastActiveDay = null; // 'YYYY-MM-DD', pour calculer dailyStreak
         if (!state.settings) state.settings = { direction: 'fr2nl' }; // 'fr2nl' ou 'nl2fr'
         if (!state.settings.theme) state.settings.theme = 'auto'; // 'auto' | 'clair' | 'sombre'
+
+        // Streak quotidien : simple compteur de jours consécutifs, calculé une fois par jour au
+        // chargement (pas à chaque save(), inutile). N'affecte aucun moteur pédagogique — c'est une
+        // statistique de motivation, comme XP.
+        function updateDailyStreak() {
+            const todayStr = new Date().toISOString().slice(0, 10);
+            if (state.stats.lastActiveDay === todayStr) return;
+            if (state.stats.lastActiveDay) {
+                const diffDays = Math.round((new Date(todayStr) - new Date(state.stats.lastActiveDay)) / 86400000);
+                state.stats.dailyStreak = diffDays === 1 ? (state.stats.dailyStreak || 0) + 1 : 1;
+            } else {
+                state.stats.dailyStreak = 1;
+            }
+            state.stats.lastActiveDay = todayStr;
+            save();
+        }
         let wlSelected = new Set();
         let batchResults = []; // suivi des 10 derniers mots de la session en cours (id + correct/faux)
         let lastRevisionWarning = 0; // dernier seuil de révision (multiple de 10) déjà signalé
@@ -471,6 +489,7 @@ if (firebaseAvailable) {
         }
 
         async function init() {
+            updateDailyStreak();
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
             const coreFiles = [
                 'VERBES_NL.csv', 'NOMS_NL.csv', 'ADJECTIFS_NL.csv', 'ADVERBES_NL.csv', 'MOTS_OUTILS_NL.csv',
@@ -552,6 +571,7 @@ if (firebaseAvailable) {
             setActiveNav('nav-home');
             setupSwipeDrag();
             await loadCurriculumData();
+            updateStats(); // relit le niveau CECR maintenant que le curriculum est chargé (getCurriculumLevel)
             renderDashboard();
         }
 
@@ -578,6 +598,7 @@ if (firebaseAvailable) {
         // state.curriculum.notionProgress via recordNotionAttempt/ntProgress, exactement comme un
         // exercice normal — migration douce, tableau vide par défaut.
         if (!state.placement) state.placement = { history: [] };
+        if (state.onboardingSeen === undefined) state.onboardingSeen = false; // migration douce, jamais réécrit ailleurs qu'ici et dans onboardingMarkSeen
 
         async function loadCurriculumData() {
             try {
@@ -635,6 +656,44 @@ if (firebaseAvailable) {
             if (!notion) return false;
             if (!notion.prerequisites || notion.prerequisites.length === 0) return true;
             return notion.prerequisites.every(pid => computeNotionMastery(pid) >= 3);
+        }
+
+        // ===== Niveau CECR global : dérivé du curriculum (MasteryEngine), PLUS du vocabulaire =====
+        // Le vocabulaire reste une statistique de couverture séparée (voir getVocabProgress plus
+        // bas, renommée en usage "couverture lexicale"). Ici, on agrège computeNotionMastery — déjà
+        // existant — par niveau CECR : aucun nouvel état, aucune nouvelle source de vérité. Un
+        // niveau est considéré "largement acquis" à 60% de ses notions prêtes en mastery >= 3 (le
+        // même seuil qui débloque déjà la suite via isNotionUnlocked), cohérent avec le seuil 0.6
+        // déjà utilisé ailleurs dans l'appli (ex. progression de palier du test de vocabulaire).
+        // Comme le Placement Engine écrit exclusivement dans notionProgress (jamais une structure
+        // séparée), un résultat de placement se reflète ici automatiquement, sans rien connecter en plus.
+        const CECR_LEVEL_THRESHOLD = 0.6;
+
+        function getCurriculumLevelStats() {
+            if (!curriculumLoaded) return [];
+            return curriculumLevels.map(lvl => {
+                const ids = Object.keys(curriculumNotions).filter(id => curriculumNotions[id].level === lvl.id && curriculumNotions[id].status === 'pret');
+                const masteredCount = ids.filter(id => computeNotionMastery(id) >= 3).length;
+                const pct = ids.length ? Math.round((masteredCount / ids.length) * 100) : 0;
+                let statusLabel;
+                if (!ids.length) statusLabel = 'à venir';
+                else if (pct >= CECR_LEVEL_THRESHOLD * 100) statusLabel = 'largement maîtrisé';
+                else if (ids.some(id => computeNotionMastery(id) >= 1)) statusLabel = 'en progression';
+                else statusLabel = 'exploration';
+                return { level: lvl.id, label: lvl.label, pct, total: ids.length, mastered: masteredCount, statusLabel };
+            });
+        }
+
+        // Renvoie le niveau CECR global (le dernier niveau, dans l'ordre du programme, dont au
+        // moins 60% des notions prêtes sont en mastery >= 3) ainsi que le détail par niveau.
+        function getCurriculumLevel() {
+            const stats = getCurriculumLevelStats();
+            if (!stats.length) return { level: (curriculumLevels[0] && curriculumLevels[0].id) || 'A1', stats: [] };
+            let current = stats[0].level;
+            stats.forEach(s => {
+                if (s.total > 0 && s.pct >= CECR_LEVEL_THRESHOLD * 100) current = s.level;
+            });
+            return { level: current, stats };
         }
 
         // ===== Signal de faiblesse "exercices", pondéré par la récence =====
@@ -922,16 +981,23 @@ if (firebaseAvailable) {
             renderPratiquer();
         }
 
+        // Un seul barème de priorité, partagé par la pratique ciblée (orale) et la production
+        // (écrite) : une notion identifiée comme faiblesse par le curriculum remonte en premier
+        // dans les deux listes — c'est ça, "la pratique ciblée lancée depuis une faiblesse".
+        const PRATIQUER_STATUS_PRIORITY = { faible: 0, a_pratiquer: 1, en_cours: 2, decouverte: 3, entrainee: 4, presque_maitrisee: 5, maitrisee: 6, jamais_etudiee: 7 };
+
         function renderPratiquer() {
             const targetedList = document.getElementById('pratiquer-targeted-list');
             if (targetedList) {
-                const entries = Object.keys(NOTION_TARGETED_PRACTICE);
+                const entries = Object.keys(NOTION_TARGETED_PRACTICE)
+                    .sort((a, b) => (PRATIQUER_STATUS_PRIORITY[getNotionStatus(a)] ?? 9) - (PRATIQUER_STATUS_PRIORITY[getNotionStatus(b)] ?? 9));
                 targetedList.innerHTML = entries.length ? entries.map(nid => {
                     const cfg = NOTION_TARGETED_PRACTICE[nid];
+                    const status = curriculumLoaded ? getNotionStatus(nid) : null;
                     return `<div class="hub-card" onclick="rpStartTargetedPractice('${nid}')">
                         <span class="hub-card-icon">🎯</span>
                         <div class="hub-card-title">${cfg.label}</div>
-                        <div class="hub-card-desc">Pratique orale ciblée avec Gemini.</div>
+                        <div class="hub-card-desc">${status ? getNotionStatusLabel(status) + ' · ' : ''}Pratique orale ciblée avec Gemini.</div>
                     </div>`;
                 }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Pas encore de pratique ciblée disponible.</div>`;
             }
@@ -941,7 +1007,7 @@ if (firebaseAvailable) {
                 if (!curriculumLoaded) {
                     prodList.innerHTML = `<div style="font-size:0.8rem; color:var(--text-secondary);">Chargement du programme...</div>`;
                 } else {
-                    const statusPriority = { faible: 0, a_pratiquer: 1, en_cours: 2, decouverte: 3, entrainee: 4, presque_maitrisee: 5, maitrisee: 6, jamais_etudiee: 7 };
+                    const statusPriority = PRATIQUER_STATUS_PRIORITY;
                     const candidates = Object.keys(curriculumNotions)
                         .filter(id => curriculumNotions[id].status === 'pret' && isNotionUnlocked(id) && curriculumNotions[id].content && curriculumNotions[id].content.tacheProduction)
                         .sort((a, b) => (statusPriority[getNotionStatus(a)] ?? 9) - (statusPriority[getNotionStatus(b)] ?? 9))
@@ -993,8 +1059,46 @@ if (firebaseAvailable) {
                         <div class="hub-card" onclick="showLesson('${w.id}')">
                             <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</div>
                             <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
+                            ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
                         </div>`).join('')}
                 </div>` : ''}`;
+        }
+
+        // ===== Vue "Comprendre" (indexe les notions de grammaire DÉJÀ écrites dans le curriculum,
+        // par leur contenu `comprendre` déjà existant — aucun nouveau contenu pédagogique n'est créé
+        // ici, uniquement une entrée directe vers le mécanisme plutôt que par Niveau→Module) =====
+        function showComprendre() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('comprendre-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            renderComprendre();
+        }
+
+        function renderComprendre() {
+            const el = document.getElementById('comprendre-content');
+            if (!el) return;
+            if (!curriculumLoaded) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement du programme...</p>`; return; }
+            const byLevel = {};
+            Object.keys(curriculumNotions).forEach(id => {
+                const n = curriculumNotions[id];
+                if (n.status !== 'pret' || !(n.skills || []).includes('grammaire') || !n.content || !n.content.comprendre) return;
+                (byLevel[n.level] = byLevel[n.level] || []).push({ id, n });
+            });
+            const sections = curriculumLevels.map(lvl => {
+                const items = byLevel[lvl.id];
+                if (!items || !items.length) return '';
+                return `<div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">${lvl.id} · ${lvl.label}</div>
+                    <div class="hub-grid single">
+                        ${items.map(({ id, n }) => {
+                            const excerpt = n.content.comprendre.length > 110 ? n.content.comprendre.slice(0, 110) + '…' : n.content.comprendre;
+                            return `<div class="hub-card" onclick="showLesson('${id}')">
+                                <div class="hub-card-title">${n.content.titre || id.replace(/_/g, ' ')}</div>
+                                <div class="hub-card-desc">${excerpt}</div>
+                            </div>`;
+                        }).join('')}
+                    </div>`;
+            }).join('');
+            el.innerHTML = sections || `<p style="font-size:0.85rem; color:var(--text-secondary);">Rien à afficher pour l'instant.</p>`;
         }
 
         // ===== Hub "Mots" : bascule entre les onglets Liste / Par thème (aucun changement de données) =====
@@ -1039,9 +1143,11 @@ if (firebaseAvailable) {
 
         let placementState = null;
 
-        function seedInferredMastery(notionId) {
+        function seedInferredMastery(notionId, force) {
             const p = ntProgress(notionId);
-            if (p.attempts > 0) return; // ne jamais écraser une vraie donnée déjà présente
+            // ne jamais écraser une vraie donnée déjà présente — sauf déclaration EXPLICITE de
+            // l'utilisateur lui-même (voir markNotionAsKnown), jamais une inférence automatique
+            if (p.attempts > 0 && !force) return;
             p.opened = true;
             p.attempts = 2;
             p.correct = 1;
@@ -1320,6 +1426,7 @@ if (firebaseAvailable) {
 
         function placementQuit() {
             if (!confirm("Arrêter l'évaluation ? Ce qui a déjà été identifié reste enregistré.")) return;
+            clearTimeout(exerciseAutoAdvanceTimer);
             placementState = null;
             const backBtn = document.getElementById('exercise-back-btn');
             if (backBtn) backBtn.innerText = '← Retour à la leçon';
@@ -1406,6 +1513,72 @@ if (firebaseAvailable) {
             showHome();
         }
 
+        // Vrai compte neuf : aucune notion jamais tentée, aucun historique de placement. Utilisé à
+        // la fois par le nudge du dashboard et par l'onboarding — un seul et même critère.
+        function isBrandNewUser() {
+            return curriculumLoaded
+                && Object.values(state.curriculum.notionProgress).every(p => !p.attempts)
+                && !(state.placement.history || []).length;
+        }
+
+        // ===== Portes d'entrée "Qu'est-ce que tu veux faire ?" qui n'ont pas déjà une vue dédiée =====
+        // Toutes deux ne font que relire getRecommendation() (RecommendationEngine, inchangé) pour
+        // choisir une cible parmi les vues déjà existantes — aucune nouvelle logique de choix.
+        function enterModeEntrainer() {
+            const rec = curriculumLoaded ? getRecommendation() : null;
+            if (rec) showExercise(rec.notionId); else showApprendre();
+        }
+
+        function enterModeChoisir() {
+            const rec = curriculumLoaded ? getRecommendation() : null;
+            if (rec) startRecommendedActivity(rec.notionId); else showApprendre();
+        }
+
+        // ===== Onboarding (court, skippable) =====
+        // Une seule page, pas 10-15 écrans : présentation courte + les 6 façons d'utiliser l'appli +
+        // 2 choix terminaux (évaluer son niveau via le Placement Engine déjà existant, ou commencer
+        // directement). Ne construit aucun nouveau système, ne fait qu'expliquer puis rediriger.
+        function showOnboarding() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('onboarding-view').classList.add('active');
+            document.getElementById('onboarding-content').innerHTML = `
+                <div class="placement-intro">
+                    <div class="placement-intro-title">👋 Bienvenue sur NL Mastery</div>
+                    <p class="placement-intro-text">Un vrai programme structuré (A1 → B2) pour apprendre le néerlandais professionnel — pas juste des flashcards à mémoriser.</p>
+                    <div class="section-title" style="margin-top:var(--space-4);">Comment utiliser l'appli</div>
+                    <div class="intent-grid" style="margin-top:var(--space-2);">
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📚</div><div class="qa-label">Apprendre</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🧠</div><div class="qa-label">Comprendre</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🔄</div><div class="qa-label">Réviser</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">✍️</div><div class="qa-label">S'entraîner</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎯</div><div class="qa-label">Laisser NL Mastery choisir</div></div>
+                    </div>
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📚 Découvrir · 🧠 Comprendre le mécanisme · 🔄 Revoir ce qui risque d'être oublié · ✍️ Vérifier par l'exercice · 🗣️ Produire en situation réelle · 🎮 S'amuser · 🎯 NL Mastery choisit pour toi.</p>
+                    <button class="btn btn-green" style="margin-top:var(--space-5);" onclick="onboardingGoTo('placement')">🚀 Évaluer mon niveau</button>
+                    <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('start')">Commencer directement</button>
+                    <p style="font-size:0.78rem; margin-top:var(--space-4);">${currentUser ? '' : `<a href="#" onclick="onboardingGoTo('compte'); return false;">Créer un compte pour synchroniser ta progression (optionnel)</a>`}</p>
+                </div>`;
+        }
+
+        function onboardingMarkSeen() {
+            state.onboardingSeen = true;
+            save();
+        }
+
+        function onboardingGoTo(dest) {
+            onboardingMarkSeen();
+            if (dest === 'placement') showPlacementIntro();
+            else if (dest === 'compte') showCompte();
+            else showHome();
+        }
+
+        function onboardingFinish() {
+            onboardingMarkSeen();
+            showHome();
+        }
+
         // ===== Dashboard =====
         // Résumé du module "en cours" pour le petit bloc secondaire "▶️ Continuer" (voir
         // getCurrentModuleProgress). Ne crée aucun nouvel état : relit simplement
@@ -1447,15 +1620,13 @@ if (firebaseAvailable) {
             // Ne s'affiche que pour un compte réellement neuf (aucune notion jamais tentée, aucun
             // historique de placement) — dès la première vraie réponse, ce bloc disparaît de
             // lui-même au prochain rendu.
-            const isBrandNew = curriculumLoaded
-                && Object.values(state.curriculum.notionProgress).every(p => !p.attempts)
-                && !(state.placement.history || []).length;
+            const isBrandNew = isBrandNewUser();
             const placementNudgeHtml = isBrandNew ? `
                 <div class="dash-card dash-secondary-card" style="cursor:default;">
                     <div class="dash-secondary-label">👋 Nouveau ici</div>
-                    <div class="dash-secondary-title">Déjà un niveau en néerlandais ?</div>
-                    <div class="dash-secondary-sub" style="margin-bottom:10px;">On peut identifier ce que tu maîtrises déjà pour ne pas te faire recommencer depuis zéro.</div>
-                    <button class="btn btn-green" style="margin-top:0;" onclick="showPlacementIntro()">🚀 Évaluer mon niveau</button>
+                    <div class="dash-secondary-title">Découvre comment utiliser NL Mastery</div>
+                    <div class="dash-secondary-sub" style="margin-bottom:10px;">Présentation courte, puis on identifie ce que tu maîtrises déjà pour ne pas te faire recommencer depuis zéro.</div>
+                    <button class="btn btn-green" style="margin-top:0;" onclick="showOnboarding()">👋 Découvrir NL Mastery</button>
                 </div>` : '';
 
             // ===== 1. Bloc dominant : "🎯 Pour toi maintenant" (mode "professeur") =====
@@ -1482,22 +1653,25 @@ if (firebaseAvailable) {
                 }
             }
 
-            // ===== 2. Progression (niveau interne, discret) =====
+            // ===== 2. Progression : niveau CECR réel (curriculum), vocabulaire affiché à part =====
             const masteredCount = curriculumLoaded
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
                 : 0;
             const totalReadyCount = curriculumLoaded
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret').length
                 : 0;
+            const cecrInfo = curriculumLoaded ? getCurriculumLevel() : { level: 'A1' };
+            const cecrPct = totalReadyCount ? Math.round((masteredCount / totalReadyCount) * 100) : 0;
             const progressionHtml = `
                 <div class="dash-card">
                     <div class="section-title" style="margin-bottom:6px;">Ta progression</div>
                     <div class="dash-level-row">
-                        <span class="dash-level-badge">${vp.level} — ${vp.pct}%</span>
-                        <span style="font-size:0.75rem; color:var(--text-secondary);">niveau interne estimé</span>
+                        <span class="dash-level-badge">${cecrInfo.level}</span>
+                        <span style="font-size:0.75rem; color:var(--text-secondary);">niveau CECR (curriculum)</span>
                     </div>
-                    <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${vp.pct}%"></div></div>
+                    <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${cecrPct}%"></div></div>
                     ${curriculumLoaded ? `<div style="font-size:0.78rem; color:var(--text-secondary); margin-top:8px;">📚 ${masteredCount}/${totalReadyCount} notions maîtrisées · 🔁 ${reviewCount} mot${reviewCount > 1 ? 's' : ''} à réviser</div>` : ''}
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:4px;">🧠 Vocabulaire couvert : ${vp.pct}% <span style="opacity:0.7;">(détail dans Profil)</span></div>
                 </div>`;
 
             // ===== 3. Continuer (parcours structuré, distinct de la recommandation adaptative) =====
@@ -1509,13 +1683,20 @@ if (firebaseAvailable) {
                     <div class="dash-secondary-sub">${curMod.workedCount}/${curMod.total} notions travaillées</div>
                 </div>` : '';
 
-            // ===== 4. Accès rapides (libre) =====
+            // ===== 4. "Qu'est-ce que tu veux faire maintenant ?" — portes d'entrée UX (libre) =====
+            // Ces 7 cartes ne sont QUE de la navigation : chacune réutilise une vue/fonction déjà
+            // existante (aucun nouveau moteur pédagogique). "Je ne sais pas quoi faire" relance
+            // exactement la même recommandation que le bloc "🎯 Pour toi maintenant" ci-dessus.
             const quickAccessHtml = `
-                <div class="quick-access-row">
-                    <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
-                    <div class="quick-access-card" onclick="showJouer()"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
+                <div class="section-title" style="margin:var(--space-2) 0 var(--space-2);">Qu'est-ce que tu veux faire maintenant ?</div>
+                <div class="intent-grid">
+                    <div class="quick-access-card" onclick="showApprendre()"><div class="qa-icon">📚</div><div class="qa-label">Apprendre du nouveau</div></div>
+                    <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Comprendre</div></div>
+                    <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔄</div><div class="qa-label">Réviser</div></div>
+                    <div class="quick-access-card" onclick="enterModeEntrainer()"><div class="qa-icon">✍️</div><div class="qa-label">M'entraîner</div></div>
                     <div class="quick-access-card" onclick="showPratiquer()"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
-                    <div class="quick-access-card" onclick="showApprendre()"><div class="qa-icon">📚</div><div class="qa-label">Apprendre</div></div>
+                    <div class="quick-access-card" onclick="showJouer()"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
+                    <div class="quick-access-card" onclick="enterModeChoisir()"><div class="qa-icon">🎯</div><div class="qa-label">Je ne sais pas quoi faire</div></div>
                 </div>`;
 
             // ===== 5. À revoir (optionnel, court) =====
@@ -1619,6 +1800,7 @@ if (firebaseAvailable) {
         let currentLessonNotionId = null;
 
         function showLesson(notionId) {
+            clearTimeout(exerciseAutoAdvanceTimer);
             currentLessonNotionId = notionId;
             const notion = curriculumNotions[notionId];
             if (!notion || !notion.content) return;
@@ -1686,8 +1868,28 @@ if (firebaseAvailable) {
                     <div class="lesson-stage-label">✅ Maîtrise</div>
                     <div class="lesson-mastery-row">${masteryDots}</div>
                     ${c.criteresMaitrise ? `<div class="lesson-block"><p>${c.criteresMaitrise}</p></div>` : ''}
+                    ${mastery < 3 ? `<button class="gemini-explain-btn" onclick="markNotionAsKnown('${notionId}')">✅ Je connais déjà cette notion — passer</button>` : ''}
                 </div>
             `;
+        }
+
+        // Déclaration explicite "je connais déjà cette notion", pour sauter en avant sans passer
+        // par les exercices — réutilise EXACTEMENT le même mécanisme que le Placement Engine
+        // (seedInferredMastery avec force=true, voir plus bas) : la notion passe à mastery 3
+        // ("entraînée", suffisant pour débloquer la suite via isNotionUnlocked), jamais directement
+        // à "maîtrisée" — cohérent avec le principe "une déclaration n'est jamais une preuve
+        // complète de maîtrise" déjà appliqué au Placement Engine. Les vrais exercices restent
+        // nécessaires ensuite pour progresser vers 4 puis 5.
+        function markNotionAsKnown(notionId) {
+            const notion = curriculumNotions[notionId];
+            if (!notion) return;
+            if (computeNotionMastery(notionId) >= 3) return;
+            const titre = (notion.content && notion.content.titre) || notionId.replace(/_/g, ' ');
+            const ok = confirm(`Marquer "${titre}" comme déjà connue ?\n\nElle passera directement au statut "entraînée" (comme un niveau déclaré au Placement Engine) : ça débloque la suite du programme, mais ce n'est pas encore "maîtrisée" — il faudra encore réussir des exercices pour y arriver.`);
+            if (!ok) return;
+            seedInferredMastery(notionId, true);
+            showLesson(notionId);
+            renderDashboard();
         }
 
         // ===== Production / Feedback (cycle NOTION → ENTRAÎNEMENT → PRODUCTION → FEEDBACK → RÉVISION) =====
@@ -1747,7 +1949,7 @@ if (firebaseAvailable) {
             if (!box) return;
             if (!GeminiService.isAvailable()) {
                 box.style.display = '';
-                box.innerHTML = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis la vue Jeu de rôle pour activer le feedback.";
+                box.innerHTML = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis Profil → 🤖 Intelligence IA pour activer le feedback.";
                 return;
             }
             box.style.display = '';
@@ -1778,6 +1980,7 @@ if (firebaseAvailable) {
         let exerciseQueue = [];
         let exerciseIndex = 0;
         let exerciseSelectedAnswer = null;
+        let exerciseAutoAdvanceTimer = null; // voir checkExerciseAnswer/nextExercise : auto-avance après correction
 
         function showExercise(notionId) {
             const notion = curriculumNotions[notionId];
@@ -1790,6 +1993,7 @@ if (firebaseAvailable) {
         }
 
         function renderCurrentExercise() {
+            clearTimeout(exerciseAutoAdvanceTimer);
             const ex = exerciseQueue[exerciseIndex];
             exerciseSelectedAnswer = null;
             document.getElementById('exercise-progress').innerText = (placementState && placementState.active)
@@ -1925,9 +2129,16 @@ if (firebaseAvailable) {
             }
             document.getElementById('exercise-check-btn').style.display = 'none';
             document.getElementById('exercise-next-btn').style.display = '';
+            // Auto-avance : une réponse valide fait déjà connaître l'étape suivante, donc on
+            // n'oblige pas un clic "Suivant" en plus (voir cahier UX — réduire les clics
+            // inutiles). Le bouton reste affiché et cliquable pour zapper l'attente si
+            // l'utilisateur va plus vite ; nextExercise() annule ce minuteur dans ce cas pour ne
+            // jamais avancer deux fois.
+            exerciseAutoAdvanceTimer = setTimeout(nextExercise, isCorrect ? 1100 : 2200);
         }
 
         function nextExercise() {
+            clearTimeout(exerciseAutoAdvanceTimer);
             exerciseIndex++;
             if (exerciseIndex >= exerciseQueue.length) {
                 if (placementState && placementState.active) { placementAfterAnswer(); return; }
@@ -2014,7 +2225,7 @@ if (firebaseAvailable) {
             }
             async function generate(prompt) {
                 const apiKey = getKey();
-                if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (vue Jeu de rôle).');
+                if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (Profil → 🤖 Intelligence IA).');
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
                 const response = await fetch(url, {
                     method: 'POST',
@@ -2030,6 +2241,8 @@ if (firebaseAvailable) {
             }
             return {
                 isAvailable,
+                getKey,
+                generate,
                 explainConcept: (notionContent) => generate(
                     `Tu es un professeur de néerlandais pour francophones. Explique ce concept autrement, avec un angle différent et un exemple concret, en français, en 4 phrases maximum :\n\n${notionContent}`
                 ),
@@ -2174,7 +2387,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const box = document.getElementById('gemini-explain-box');
             if (!GeminiService.isAvailable()) {
                 box.style.display = '';
-                box.innerText = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis la vue Jeu de rôle pour activer cette fonctionnalité.";
+                box.innerText = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis Profil → 🤖 Intelligence IA pour activer cette fonctionnalité.";
                 return;
             }
             box.style.display = '';
@@ -2485,6 +2698,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function setActiveNav(id) {
+            // Sécurité anti-friction : si l'utilisateur quitte l'écran d'exercice via un onglet
+            // principal (la barre du bas reste visible partout) pendant que l'auto-avance est en
+            // attente, on annule ce minuteur plutôt que de le laisser rappeler nextExercise() sur un
+            // tout autre écran quelques instants plus tard.
+            clearTimeout(exerciseAutoAdvanceTimer);
             document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
             const btn = document.getElementById(id);
             if (btn) btn.classList.add('active');
@@ -3174,6 +3392,64 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             setActiveNav('nav-profil');
         }
 
+        // ===== Configuration Gemini centralisée (Profil → 🤖 Intelligence IA) =====
+        // SOURCE UNIQUE de configuration Gemini dans toute l'application : localStorage
+        // 'gemini_api_key', lu exclusivement via GeminiService.getKey()/isAvailable(). Le Roleplay
+        // (renderRpGeminiStatus) et la Production (submitProduction) ne font que LIRE cet état, ils
+        // ne le gèrent plus chacun de leur côté.
+        function renderGeminiConfigBlock() {
+            const configured = GeminiService.isAvailable();
+            return `
+                <div class="study-box" style="margin-top:15px;">
+                    <h3>🤖 Intelligence IA</h3>
+                    <p style="font-size:0.85rem;">Utilisée pour les corrections, le jeu de rôle vocal et la production écrite/orale. Ta clé reste uniquement sur cet appareil — elle n'est jamais envoyée dans ta sauvegarde cloud avec ta progression.</p>
+                    <p style="font-weight:bold; color:${configured ? 'var(--success)' : 'var(--wrong)'};">${configured ? '✅ Clé configurée' : '❌ Aucune clé configurée'}</p>
+                    <input type="password" id="gemini-key-input" placeholder="Colle ta clé API Gemini ici...">
+                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+                        <button class="btn btn-green" onclick="geminiSaveKeyFromProfil()">💾 Enregistrer</button>
+                        <button class="btn btn-gray" onclick="geminiTestConnection()">🔌 Tester la connexion</button>
+                        ${configured ? `<button class="btn btn-red" onclick="geminiRemoveKey()">🗑️ Supprimer</button>` : ''}
+                    </div>
+                    <p id="gemini-test-result" style="font-size:0.85rem; margin-top:8px;"></p>
+                    <small style="color: var(--text); opacity:0.7;">Pas encore de clé ? <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">Obtiens-en une gratuitement sur Google AI Studio →</a></small>
+                </div>`;
+        }
+
+        function geminiSaveKeyFromProfil() {
+            const input = document.getElementById('gemini-key-input');
+            const val = input ? input.value.trim() : '';
+            if (!val) { alert("Colle une clé avant d'enregistrer."); return; }
+            localStorage.setItem('gemini_api_key', val);
+            renderProfil();
+        }
+
+        function geminiRemoveKey() {
+            const ok = confirm('Supprimer la clé API Gemini enregistrée sur cet appareil ?');
+            if (!ok) return;
+            localStorage.removeItem('gemini_api_key');
+            renderProfil();
+        }
+
+        async function geminiTestConnection() {
+            const result = document.getElementById('gemini-test-result');
+            if (!result) return;
+            if (!GeminiService.isAvailable()) {
+                result.style.color = 'var(--wrong)';
+                result.innerText = 'Aucune clé enregistrée.';
+                return;
+            }
+            result.style.color = 'var(--text-secondary)';
+            result.innerText = 'Test en cours...';
+            try {
+                await GeminiService.generate('Réponds uniquement par le mot "ok".');
+                result.style.color = 'var(--success)';
+                result.innerText = '✅ Connexion réussie.';
+            } catch (e) {
+                result.style.color = 'var(--wrong)';
+                result.innerText = '❌ Échec : ' + e.message;
+            }
+        }
+
         function renderProfil() {
             const mc = state.stats.modeCounts;
             const seenEntries = Object.entries(state.stats.wordSeen);
@@ -3190,10 +3466,63 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
                 : 0;
 
+            // Profil = centre personnel : compte, niveau CECR réel (curriculum), maîtrise, XP,
+            // streak, couverture lexicale par catégorie, points faibles, historique de placement,
+            // et configuration Gemini centralisée — tout relit des moteurs déjà existants.
+            const compteSnapshotHtml = currentUser && currentUserDoc
+                ? `<div class="dash-card dash-secondary-card" style="cursor:pointer;" onclick="showCompte()">
+                       <div class="dash-secondary-label">👤 ${currentUserDoc.pseudo}</div>
+                       <div class="dash-secondary-sub">Compte connecté · progression synchronisée</div>
+                   </div>`
+                : `<div class="dash-card dash-secondary-card" style="cursor:pointer;" onclick="showCompte()">
+                       <div class="dash-secondary-label">🔓 Non connecté</div>
+                       <div class="dash-secondary-sub">Crée un compte pour synchroniser ta progression entre appareils</div>
+                   </div>`;
+
+            const cecrInfo = curriculumLoaded ? getCurriculumLevel() : { level: (curriculumLevels[0] && curriculumLevels[0].id) || 'A1', stats: [] };
+            const cecrBarsHtml = (cecrInfo.stats || []).map(s => `
+                <div class="placement-level-row">
+                    <span class="placement-level-name">${s.level}</span>
+                    <div class="module-progress-bar"><div class="module-progress-fill" style="width:${s.pct}%"></div></div>
+                    <span class="module-progress-pct">${s.pct}%</span>
+                </div>
+                <div style="font-size:0.72rem; color:var(--text-secondary); margin:-6px 0 10px 80px;">${s.statusLabel} · ${s.mastered}/${s.total} notions</div>`).join('');
+
+            const vocabCategories = getVocabCoverageByCategory();
+            const vocabBarsHtml = vocabCategories.map(c => `
+                <div class="placement-level-row">
+                    <span class="placement-level-name" style="width:170px;">${c.label}</span>
+                    <div class="module-progress-bar"><div class="module-progress-fill" style="width:${c.pct}%"></div></div>
+                    <span class="module-progress-pct">${c.pct}%</span>
+                </div>`).join('');
+
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 5) : [];
+            const weaknessesHtml = weaknesses.length ? weaknesses.map(w => `
+                <div class="hub-card" onclick="showLesson('${w.id}')">
+                    <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</div>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
+                    ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
+                </div>`).join('') : `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucun point faible identifié pour l'instant 🎉</p>`;
+
+            const placementHistory = (state.placement.history || []).slice().reverse().slice(0, 5);
+            const placementHistoryHtml = placementHistory.length ? placementHistory.map(h => {
+                const dateStr = new Date(h.timestamp).toLocaleDateString('fr-BE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                const sourceLabel = h.mode === 'test' ? 'Test adaptatif'
+                    : h.mode === 'declare' ? `Niveau déclaré : ${h.anchorLevel}`
+                    : h.mode === 'external' ? `${h.externalSource} → ${h.anchorLevel}`
+                    : 'Départ normal';
+                return `<div class="hub-card" style="cursor:default;">
+                    <div class="hub-card-title">${dateStr} — ${sourceLabel}</div>
+                    <div class="hub-card-desc">Niveau estimé : ${h.estimatedLevel} · confiance ${h.confidence} · ${h.testedCount} notion${h.testedCount > 1 ? 's' : ''} testée${h.testedCount > 1 ? 's' : ''}</div>
+                </div>`;
+            }).join('') : `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucune évaluation de niveau effectuée pour l'instant.</p>`;
+
             document.getElementById('profil-content').innerHTML = `
+                ${compteSnapshotHtml}
                 <div class="profil-stat-grid">
-                    <div class="profil-stat-tile"><div class="ps-num">${vp.level}</div><div class="ps-label">Niveau CECR</div></div>
+                    <div class="profil-stat-tile"><div class="ps-num">${cecrInfo.level}</div><div class="ps-label">Niveau CECR</div></div>
                     <div class="profil-stat-tile"><div class="ps-num">⭐ ${state.xp || 0}</div><div class="ps-label">XP</div></div>
+                    <div class="profil-stat-tile"><div class="ps-num">🔥 ${state.stats.dailyStreak || 0}</div><div class="ps-label">Jours de suite</div></div>
                     <div class="profil-stat-tile"><div class="ps-num">${masteredNotions}</div><div class="ps-label">Notions maîtrisées</div></div>
                 </div>
                 <div class="profil-menu">
@@ -3206,12 +3535,34 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
+
+                <div class="study-box" style="text-align:left;">
+                    <h3>📚 Progression du curriculum (par niveau CECR)</h3>
+                    ${curriculumLoaded ? cecrBarsHtml : `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement du programme...</p>`}
+                </div>
+
+                <div class="study-box" style="text-align:left;">
+                    <h3>🧠 Couverture du vocabulaire</h3>
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:10px;">Proportion approximative du vocabulaire de référence que tu maîtrises déjà — une statistique indépendante de ton niveau CECR, pas un second calcul de niveau.</p>
+                    <div class="placement-level-row"><span class="placement-level-name" style="width:170px;">Ensemble du vocabulaire</span><div class="module-progress-bar"><div class="module-progress-fill" style="width:${vp.pct}%"></div></div><span class="module-progress-pct">${vp.pct}%</span></div>
+                    ${vocabBarsHtml}
+                </div>
+
+                <div class="study-box" style="text-align:left;">
+                    <h3>🎯 Points faibles</h3>
+                    ${weaknessesHtml}
+                </div>
+
+                <div class="study-box" style="text-align:left;">
+                    <h3>🕓 Historique de placement</h3>
+                    ${placementHistoryHtml}
+                </div>
+
+                ${renderGeminiConfigBlock()}
+
                 <div class="study-box" style="text-align:left;">
                     <h3>📊 Mes statistiques</h3>
-                    <p>Niveau estimé : <b>${vp.level}</b><br>
-                    Mots maîtrisés : ${vp.masteredVocab} / ${vp.totalVocab} (${vp.pct}%)<br>
-                    ${vp.nextLevel ? `Encore <b>${vp.wordsToNext}</b> mots avant le niveau ${vp.nextLevel}` : 'Niveau maximum atteint 🎉'}<br>
-                    Mots vus au moins une fois : ${totalDistinctSeen}<br>
+                    <p>Mots vus au moins une fois : ${totalDistinctSeen}<br>
                     Mots à réviser actuellement : ${getReviewItems().length}</p>
 
                     <h3>🎮 Parties jouées</h3>
@@ -3452,31 +3803,57 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Niveau CECR basé sur le % de vocabulaire distinct maîtrisé.
         // PHRASES_LABO est exclu du total : ce sont des phrases qui réutilisent des mots
         // déjà comptés ailleurs (verbes/noms/adjectifs/thèmes), donc les compter en plus fausserait le %.
+        // ===== Couverture lexicale (statistique de vocabulaire, INDÉPENDANTE du niveau CECR) =====
+        // Répond uniquement à « quelle proportion du vocabulaire de référence est-ce que je
+        // connais ? ». Ne détermine plus aucun niveau CECR (voir getCurriculumLevel plus haut, qui
+        // seul fait autorité pour le niveau global) — `tier`/`nextTier` ne sont que des paliers de
+        // couverture lexicale internes, gardés uniquement pour la mécanique "mots avant le palier
+        // suivant", jamais affichés comme un niveau CECR.
         function getVocabProgress() {
             const vocabItems = fullDb.filter(i => i.file !== 'PHRASES_LABO');
             const totalVocab = vocabItems.length;
             const masteredVocab = vocabItems.filter(i => isMasteredAnyDirection(i.id)).length;
             const pct = totalVocab > 0 ? Math.round((masteredVocab / totalVocab) * 100) : 0;
             const thresholds = [
-                { level: 'A1', min: 0 }, { level: 'A2', min: 15 },
-                { level: 'B1', min: 35 }, { level: 'B2', min: 65 }
+                { tier: 1, min: 0 }, { tier: 2, min: 15 },
+                { tier: 3, min: 35 }, { tier: 4, min: 65 }
             ];
-            let level = 'A1', nextLevel = 'A2', nextThresholdPct = 15;
+            let tier = 1, nextTier = 2, nextThresholdPct = 15;
             for (let i = 0; i < thresholds.length; i++) {
                 if (pct >= thresholds[i].min) {
-                    level = thresholds[i].level;
-                    nextLevel = thresholds[i + 1] ? thresholds[i + 1].level : null;
+                    tier = thresholds[i].tier;
+                    nextTier = thresholds[i + 1] ? thresholds[i + 1].tier : null;
                     nextThresholdPct = thresholds[i + 1] ? thresholds[i + 1].min : null;
                 }
             }
             const wordsToNext = nextThresholdPct !== null
                 ? Math.max(0, Math.ceil((nextThresholdPct / 100) * totalVocab) - masteredVocab)
                 : 0;
-            return { pct, level, nextLevel, wordsToNext, totalVocab, masteredVocab };
+            return { pct, tier, nextTier, wordsToNext, totalVocab, masteredVocab };
+        }
+
+        // Regroupe le vocabulaire déjà chargé (voir init/loadFile, propriété `file` de chaque item
+        // de fullDb) en catégories lisibles, en réutilisant exclusivement les fichiers CSV déjà
+        // existants — aucun nouveau dataset. Une catégorie dont aucun fichier n'est chargé est
+        // simplement omise plutôt qu'affichée à 0%.
+        const VOCAB_CATEGORY_FILES = {
+            'Vocabulaire courant': ['NOMS_NL', 'ADJECTIFS_NL', 'ADVERBES_NL', 'MOTS_OUTILS_NL'],
+            'Verbes fréquents': ['VERBES_NL'],
+            'Expressions courantes': ['THEME_BASE', 'PHRASES_LABO'],
+            'Vocabulaire professionnel': ['MOTS_LABO', 'THEME_MARKETING', 'THEME_FINANCE', 'THEME_COMPTABILITE', 'THEME_LOGISTIQUE', 'THEME_SUPPLYCHAIN', 'THEME_MANAGEMENT', 'THEME_RH', 'THEME_ENTRETIEN']
+        };
+
+        function getVocabCoverageByCategory() {
+            return Object.keys(VOCAB_CATEGORY_FILES).map(label => {
+                const items = fullDb.filter(i => VOCAB_CATEGORY_FILES[label].includes(i.file));
+                const mastered = items.filter(i => isMasteredAnyDirection(i.id)).length;
+                const pct = items.length ? Math.round((mastered / items.length) * 100) : 0;
+                return { label, pct, total: items.length, mastered };
+            }).filter(c => c.total > 0);
         }
 
         function updateStats() {
-            const { level } = getVocabProgress();
+            const level = curriculumLoaded ? getCurriculumLevel().level : ((curriculumLevels[0] && curriculumLevels[0].id) || 'A1');
             document.getElementById('cecr-badge').innerText = level;
             const xpBadge = document.getElementById('xp-mini-badge');
             if (xpBadge) xpBadge.innerText = `⭐ ${state.xp || 0} XP`;
@@ -3601,8 +3978,19 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return list.find(i => i.id === itemId) || null;
         }
 
-        function rpSaveApiKey() {
-            localStorage.setItem('gemini_api_key', document.getElementById('rp-api-key').value);
+        // ===== Statut Gemini affiché dans le Roleplay — SOURCE UNIQUE : GeminiService/localStorage,
+        // configuré depuis Profil → 🤖 Intelligence IA (voir renderGeminiConfigBlock). Le Roleplay
+        // ne gère plus sa propre clé : il ne fait que lire l'état centralisé et rediriger vers
+        // Profil si rien n'est configuré.
+        function renderRpGeminiStatus() {
+            const box = document.getElementById('rp-gemini-status');
+            if (!box) return;
+            const configured = GeminiService.isAvailable();
+            box.innerHTML = configured
+                ? `<p style="font-size:0.85rem; color:var(--success);">✅ Gemini configuré (clé gérée dans Profil → 🤖 Intelligence IA)</p><div id="rp-voice-warning"></div>`
+                : `<p style="font-size:0.85rem; color:var(--wrong);">❌ Aucune clé Gemini configurée.</p>
+                   <button class="btn btn-gray" onclick="showProfil()">Configurer dans Profil</button>
+                   <div id="rp-voice-warning"></div>`;
         }
 
         function rpCheckDutchVoice() {
@@ -3678,8 +4066,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 alert("Ton navigateur ne supporte pas la reconnaissance vocale. Utilise Google Chrome.");
                 return;
             }
-            if (!document.getElementById('rp-api-key').value) {
-                alert("Renseigne d'abord ta clé API Gemini en haut de la page.");
+            if (!GeminiService.getKey()) {
+                alert("Renseigne d'abord ta clé API Gemini dans Profil → 🤖 Intelligence IA.");
                 return;
             }
             // Remet la reconnaissance vocale sur le flux par défaut du jeu de rôle (au cas où
@@ -3708,8 +4096,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 alert("Ton navigateur ne supporte pas la reconnaissance vocale. Utilise Google Chrome.");
                 return;
             }
-            if (!localStorage.getItem('gemini_api_key')) {
-                alert("Renseigne d'abord ta clé API Gemini (onglet Jeu de rôle) pour utiliser la reconnaissance vocale.");
+            if (!GeminiService.getKey()) {
+                alert("Renseigne d'abord ta clé API Gemini dans Profil → 🤖 Intelligence IA pour utiliser la reconnaissance vocale.");
                 return;
             }
             if (rpIsRecording) {
@@ -3754,7 +4142,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         async function rpSendToGemini(userText) {
-            const apiKey = document.getElementById('rp-api-key').value;
+            const apiKey = GeminiService.getKey();
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
 
             rpConversationHistory.push({ role: "user", parts: [{ text: userText }] });
@@ -3804,8 +4192,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('roleplay-view').classList.add('active');
             setActiveNav('nav-pratiquer');
 
-            const savedKey = localStorage.getItem('gemini_api_key');
-            if (savedKey) document.getElementById('rp-api-key').value = savedKey;
+            renderRpGeminiStatus();
+            rpCheckDutchVoice();
 
             rpShowCategoryPicker();
         }
@@ -3930,8 +4318,8 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('roleplay-view').classList.add('active');
             setActiveNav('nav-pratiquer');
-            const savedKey = localStorage.getItem('gemini_api_key');
-            if (savedKey) document.getElementById('rp-api-key').value = savedKey;
+            renderRpGeminiStatus();
+            rpCheckDutchVoice();
             const prompt = buildTargetedPracticePrompt(notionId);
             rpCurrentCategory = null;
             rpBeginScenario({ id: 'cible_' + notionId, label: cfg.label, welcome: cfg.welcome, prompt });

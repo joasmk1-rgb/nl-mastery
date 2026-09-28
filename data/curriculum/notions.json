@@ -122,21 +122,33 @@
     "prerequisites": [],
     "status": "pret",
     "content": {
-      "objectif": "Compter de 0 à 100 en néerlandais.",
-      "comprendre": "Les nombres composés (21-99) inversent l'ordre par rapport au français : unité puis dizaine, comme en allemand.",
-      "regle": "21 = eenentwintig (un-et-vingt), pas \"vingt-et-un\". 0 nul, 1 een, 10 tien, 20 twintig, 100 honderd.",
+      "objectif": "Compter de 0 à plusieurs milliers en néerlandais, y compris les centaines et les milliers.",
+      "comprendre": "Les nombres composés (21-99) inversent l'ordre par rapport au français : unité puis dizaine, comme en allemand. Les centaines (honderd) et les milliers (duizend) se construisent simplement en les faisant précéder du chiffre, et TOUT le nombre s'écrit en un seul mot, sans tiret ni espace, même très long.",
+      "regle": "21 = eenentwintig (un-et-vingt), pas \"vingt-et-un\". 0 nul, 1 een, 10 tien, 20 twintig, 100 honderd (jamais \"eenhonderd\"), 1000 duizend (jamais \"eenduizend\"). Centaines : tweehonderd (200), driehonderd (300)... Milliers : tweeduizend (2000). Un nombre composé reste toujours un seul mot : 235 = tweehonderdvijfendertig.",
       "exemples": [
         "eenentwintig (21)",
         "vijfendertig (35)",
-        "honderd (100)"
+        "honderd (100)",
+        "tweehonderd (200)",
+        "driehonderdvijfenzestig (365)",
+        "duizend (1000)",
+        "tweeduizend (2000)"
       ],
       "erreursFrequentes": [
-        "Vouloir dire \"twintig-een\" (ordre français) au lieu de \"eenentwintig\"."
+        "Vouloir dire \"twintig-een\" (ordre français) au lieu de \"eenentwintig\".",
+        "Dire \"eenhonderd\" ou \"eenduizend\" au lieu de \"honderd\"/\"duizend\" seuls pour 100 et 1000.",
+        "Séparer le nombre en plusieurs mots (\"twee honderd vijf\") alors qu'il s'écrit toujours en un seul mot (\"tweehonderdvijf\")."
       ]
     },
     "exerciseIds": [
       "ex_nombres_1",
-      "ex_nombres_2"
+      "ex_nombres_2",
+      "ex_nombres_3",
+      "ex_nombres_4",
+      "ex_nombres_5",
+      "ex_nombres_6",
+      "ex_nombres_7",
+      "ex_nombres_8"
     ]
   },
   "alphabet_epeler": {

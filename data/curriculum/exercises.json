@@ -150,6 +150,73 @@
     "answer": "35"
   },
   {
+    "id": "ex_nombres_3",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "Comment dit-on \"100\" en néerlandais ?",
+    "options": [
+      "eenhonderd",
+      "honderd",
+      "honderdeen"
+    ],
+    "answer": "honderd"
+  },
+  {
+    "id": "ex_nombres_4",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "Comment dit-on \"200\" en néerlandais ?",
+    "options": [
+      "tweehonderd",
+      "twee honderd",
+      "honderdtwee"
+    ],
+    "answer": "tweehonderd"
+  },
+  {
+    "id": "ex_nombres_5",
+    "notionId": "nombres",
+    "type": "texte_a_trous",
+    "question": "Complète : 1000 = ____",
+    "answer": "duizend"
+  },
+  {
+    "id": "ex_nombres_6",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "Comment dit-on \"1000\" en néerlandais ?",
+    "options": [
+      "eenduizend",
+      "duizend",
+      "honderdduizend"
+    ],
+    "answer": "duizend"
+  },
+  {
+    "id": "ex_nombres_7",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "\"driehonderdvijfenzestig\" correspond à :",
+    "options": [
+      "356",
+      "365",
+      "563"
+    ],
+    "answer": "365"
+  },
+  {
+    "id": "ex_nombres_8",
+    "notionId": "nombres",
+    "type": "qcm",
+    "question": "Quelle est la bonne orthographe pour 205 ?",
+    "options": [
+      "twee honderd vijf",
+      "tweehonderdvijf",
+      "twee-honderd-vijf"
+    ],
+    "answer": "tweehonderdvijf"
+  },
+  {
     "id": "ex_alphabet_1",
     "notionId": "alphabet_epeler",
     "type": "qcm",
