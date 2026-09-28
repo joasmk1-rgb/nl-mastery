@@ -147,6 +147,10 @@
         .lesson-block ul { padding-left: 20px; margin: 6px 0; }
         .lesson-example { background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; font-size: 0.9rem; }
         .lesson-error { background: #fff3cd; color: #856404; border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; font-size: 0.85rem; }
+        .lesson-vocab-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .lesson-vocab-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 0.82rem; }
+        .lesson-tache { background: #eaf6ff; border: 2px solid #b6e0fe; border-radius: 10px; padding: 12px 14px; }
+        .lesson-tache h3 { margin-bottom: 6px; }
 
         /* Exercise */
         .ex-option-btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border-radius: 12px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 1rem; cursor: pointer; }

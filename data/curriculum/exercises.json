@@ -1293,5 +1293,1150 @@
       "een formulier maken"
     ],
     "answer": "een formulier invullen"
+  },
+  {
+    "id": "ex_a2_perf1",
+    "notionId": "perfectum_tous_verbes",
+    "type": "qcm",
+    "question": "Complète : \"Heb je dat al ___?\"",
+    "options": [
+      "gedaan",
+      "doen",
+      "deed"
+    ],
+    "answer": "gedaan"
+  },
+  {
+    "id": "ex_a2_perf2",
+    "notionId": "perfectum_tous_verbes",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik heb naar Brussel gegaan.",
+      "Ik ben naar Brussel gegaan.",
+      "Ik heb naar Brussel ga."
+    ],
+    "answer": "Ik ben naar Brussel gegaan."
+  },
+  {
+    "id": "ex_a2_perf3",
+    "notionId": "perfectum_tous_verbes",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik ___ nog niet gedaan.\" (auxiliaire)",
+    "answer": "heb"
+  },
+  {
+    "id": "ex_a2_perf4",
+    "notionId": "perfectum_tous_verbes",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Tu as déjà fait ça ?\"",
+    "words": [
+      "Heb",
+      "je",
+      "dat",
+      "al",
+      "gedaan"
+    ],
+    "answer": [
+      "Heb",
+      "je",
+      "dat",
+      "al",
+      "gedaan"
+    ]
+  },
+  {
+    "id": "ex_a2_imp1",
+    "notionId": "imperfectum",
+    "type": "qcm",
+    "question": "Quel est l'imperfectum de \"werken\" (ik) ?",
+    "options": [
+      "werkte",
+      "werkde",
+      "werkt"
+    ],
+    "answer": "werkte"
+  },
+  {
+    "id": "ex_a2_imp2",
+    "notionId": "imperfectum",
+    "type": "qcm",
+    "question": "Quel est l'imperfectum de \"wonen\" (wij) ?",
+    "options": [
+      "woonden",
+      "woonten",
+      "wonen"
+    ],
+    "answer": "woonden"
+  },
+  {
+    "id": "ex_a2_imp3",
+    "notionId": "imperfectum",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Vroeger ___ ik Frans.\" (leren)",
+    "answer": "leerde"
+  },
+  {
+    "id": "ex_a2_imp4",
+    "notionId": "imperfectum",
+    "type": "qcm",
+    "question": "\"speelde\" est l'imperfectum de quel verbe ?",
+    "options": [
+      "spelen",
+      "speken",
+      "spreken"
+    ],
+    "answer": "spelen"
+  },
+  {
+    "id": "ex_a2_impirr1",
+    "notionId": "imperfectum_irreguliers",
+    "type": "qcm",
+    "question": "Quel est l'imperfectum de \"zijn\" (ik) ?",
+    "options": [
+      "was",
+      "ben",
+      "zijnde"
+    ],
+    "answer": "was"
+  },
+  {
+    "id": "ex_a2_impirr2",
+    "notionId": "imperfectum_irreguliers",
+    "type": "qcm",
+    "question": "Quel est l'imperfectum de \"kunnen\" (ik) ?",
+    "options": [
+      "kon",
+      "kan",
+      "kunde"
+    ],
+    "answer": "kon"
+  },
+  {
+    "id": "ex_a2_impirr3",
+    "notionId": "imperfectum_irreguliers",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Wij ___ naar school.\" (gaan)",
+    "answer": "gingen"
+  },
+  {
+    "id": "ex_a2_impirr4",
+    "notionId": "imperfectum_irreguliers",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik moestte werken.",
+      "Ik moest werken.",
+      "Ik moet werkte."
+    ],
+    "answer": "Ik moest werken."
+  },
+  {
+    "id": "ex_a2_choix1",
+    "notionId": "choix_temps_passe",
+    "type": "qcm",
+    "question": "\"___ ik klein was, woonde ik in Mons.\"",
+    "options": [
+      "Toen",
+      "Heb",
+      "Gisteren"
+    ],
+    "answer": "Toen"
+  },
+  {
+    "id": "ex_a2_choix2",
+    "notionId": "choix_temps_passe",
+    "type": "qcm",
+    "question": "Pour raconter un fait ponctuel d'hier, on utilise plutôt :",
+    "options": [
+      "le perfectum",
+      "l'imperfectum",
+      "aucun des deux"
+    ],
+    "answer": "le perfectum"
+  },
+  {
+    "id": "ex_a2_choix3",
+    "notionId": "choix_temps_passe",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik ___ moe, dus ik ben vroeg naar bed gegaan.\" (imperfectum de zijn)",
+    "answer": "was"
+  },
+  {
+    "id": "ex_a2_recit1",
+    "notionId": "raconter_evenement_passe",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"D'abord je me suis levé.\"",
+    "words": [
+      "Eerst",
+      "ben",
+      "ik",
+      "opgestaan"
+    ],
+    "answer": [
+      "Eerst",
+      "ben",
+      "ik",
+      "opgestaan"
+    ]
+  },
+  {
+    "id": "ex_a2_recit2",
+    "notionId": "raconter_evenement_passe",
+    "type": "qcm",
+    "question": "Quel connecteur introduit la toute première action d'un récit ?",
+    "options": [
+      "Eerst",
+      "Uiteindelijk",
+      "Daarna"
+    ],
+    "answer": "Eerst"
+  },
+  {
+    "id": "ex_a2_recit3",
+    "notionId": "raconter_evenement_passe",
+    "type": "texte_a_trous",
+    "question": "Complète : \"___ ik op het werk aankwam, was iedereen er al.\"",
+    "answer": "Toen"
+  },
+  {
+    "id": "ex_a2_sep1",
+    "notionId": "verbes_separables_avances",
+    "type": "qcm",
+    "question": "Quel est le perfectum de \"opstaan\" (ik) ?",
+    "options": [
+      "ik heb opgestaan",
+      "ik ben opgestaan",
+      "ik ben gestaanop"
+    ],
+    "answer": "ik ben opgestaan"
+  },
+  {
+    "id": "ex_a2_sep2",
+    "notionId": "verbes_separables_avances",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik sta om zeven uur ___.\"",
+    "answer": "op"
+  },
+  {
+    "id": "ex_a2_sep3",
+    "notionId": "verbes_separables_avances",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je te lèves à sept heures.\"",
+    "words": [
+      "Ik",
+      "sta",
+      "om",
+      "zeven",
+      "uur",
+      "op"
+    ],
+    "answer": [
+      "Ik",
+      "sta",
+      "om",
+      "zeven",
+      "uur",
+      "op"
+    ]
+  },
+  {
+    "id": "ex_a2_sepq1",
+    "notionId": "verbes_separables_questions",
+    "type": "qcm",
+    "question": "Quelle question est correcte ?",
+    "options": [
+      "Hoe laat op sta je morgen?",
+      "Hoe laat sta je morgen op?",
+      "Hoe laat sta op je morgen?"
+    ],
+    "answer": "Hoe laat sta je morgen op?"
+  },
+  {
+    "id": "ex_a2_sepq2",
+    "notionId": "verbes_separables_questions",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik weet niet hoe laat ik morgen ___.\" (opstaan, collé)",
+    "answer": "opsta"
+  },
+  {
+    "id": "ex_a2_sepq3",
+    "notionId": "verbes_separables_questions",
+    "type": "qcm",
+    "question": "Dans une subordonnée, le verbe séparable...",
+    "options": [
+      "se sépare toujours",
+      "reste collé en fin de proposition",
+      "disparaît"
+    ],
+    "answer": "reste collé en fin de proposition"
+  },
+  {
+    "id": "ex_a2_insep1",
+    "notionId": "verbes_inseparables",
+    "type": "qcm",
+    "question": "Quel est le participe passé de \"betalen\" ?",
+    "options": [
+      "gebetaald",
+      "betaald",
+      "betaalt"
+    ],
+    "answer": "betaald"
+  },
+  {
+    "id": "ex_a2_insep2",
+    "notionId": "verbes_inseparables",
+    "type": "qcm",
+    "question": "Quel est le participe passé de \"vertellen\" ?",
+    "options": [
+      "verteld",
+      "geverteld",
+      "vertelt"
+    ],
+    "answer": "verteld"
+  },
+  {
+    "id": "ex_a2_insep3",
+    "notionId": "verbes_inseparables",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik heb het niet ___.\" (begrijpen)",
+    "answer": "begrepen"
+  },
+  {
+    "id": "ex_a2_refl1",
+    "notionId": "verbes_reflechis",
+    "type": "qcm",
+    "question": "Complète : \"Ik voel ___ goed.\"",
+    "options": [
+      "me",
+      "zich",
+      "je"
+    ],
+    "answer": "me"
+  },
+  {
+    "id": "ex_a2_refl2",
+    "notionId": "verbes_reflechis",
+    "type": "qcm",
+    "question": "Complète : \"Hij voelt ___ niet goed.\"",
+    "options": [
+      "me",
+      "zich",
+      "ons"
+    ],
+    "answer": "zich"
+  },
+  {
+    "id": "ex_a2_refl3",
+    "notionId": "verbes_reflechis",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Wij vergissen ___ soms.\"",
+    "answer": "ons"
+  },
+  {
+    "id": "ex_a2_comb1",
+    "notionId": "combiner_structures_verbales",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik heb moeten opstaan vroeg.",
+      "Ik heb gisteren vroeg moeten opstaan.",
+      "Ik heb gemoeten opstaan."
+    ],
+    "answer": "Ik heb gisteren vroeg moeten opstaan."
+  },
+  {
+    "id": "ex_a2_comb2",
+    "notionId": "combiner_structures_verbales",
+    "type": "qcm",
+    "question": "Au perfectum, un verbe modal comme \"moeten\"...",
+    "options": [
+      "prend 'ge-' comme un verbe normal",
+      "reste à l'infinitif en fin de phrase",
+      "disparaît"
+    ],
+    "answer": "reste à l'infinitif en fin de phrase"
+  },
+  {
+    "id": "ex_a2_comb3",
+    "notionId": "combiner_structures_verbales",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik wil dat ___.\" (leren)",
+    "answer": "leren"
+  },
+  {
+    "id": "ex_a2_gaan1",
+    "notionId": "futur_proche_gaan",
+    "type": "qcm",
+    "question": "Comment dit-on \"Je vais travailler demain\" ?",
+    "options": [
+      "Ik werk ga morgen.",
+      "Ik ga morgen werken.",
+      "Ik ga werken morgen."
+    ],
+    "answer": "Ik ga morgen werken."
+  },
+  {
+    "id": "ex_a2_gaan2",
+    "notionId": "futur_proche_gaan",
+    "type": "texte_a_trous",
+    "question": "Complète : \"We ___ vanavond koken.\" (gaan, wij)",
+    "answer": "gaan"
+  },
+  {
+    "id": "ex_a2_gaan3",
+    "notionId": "futur_proche_gaan",
+    "type": "qcm",
+    "question": "\"gaan + infinitif\" exprime surtout :",
+    "options": [
+      "un futur proche/une intention",
+      "un fait passé",
+      "une habitude"
+    ],
+    "answer": "un futur proche/une intention"
+  },
+  {
+    "id": "ex_a2_zull1",
+    "notionId": "zullen_futur",
+    "type": "qcm",
+    "question": "Comment propose-t-on d'aller au cinéma ?",
+    "options": [
+      "Gaan we naar de bioscoop?",
+      "Zullen we naar de bioscoop gaan?",
+      "Zullen we bioscoop?"
+    ],
+    "answer": "Zullen we naar de bioscoop gaan?"
+  },
+  {
+    "id": "ex_a2_zull2",
+    "notionId": "zullen_futur",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik ___ het morgen doen.\" (zullen, ik)",
+    "answer": "zal"
+  },
+  {
+    "id": "ex_a2_zull3",
+    "notionId": "zullen_futur",
+    "type": "qcm",
+    "question": "\"zullen\" est surtout adapté pour :",
+    "options": [
+      "une promesse ou une proposition",
+      "décrire une habitude",
+      "raconter le passé"
+    ],
+    "answer": "une promesse ou une proposition"
+  },
+  {
+    "id": "ex_a2_zoud1",
+    "notionId": "zouden_intro",
+    "type": "qcm",
+    "question": "Quelle formule est la plus polie pour demander de l'aide ?",
+    "options": [
+      "Help je me?",
+      "Zou je me kunnen helpen?",
+      "Jij helpt me."
+    ],
+    "answer": "Zou je me kunnen helpen?"
+  },
+  {
+    "id": "ex_a2_zoud2",
+    "notionId": "zouden_intro",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik ___ graag naar Nederland gaan.\" (zouden, ik)",
+    "answer": "zou"
+  },
+  {
+    "id": "ex_a2_zoud3",
+    "notionId": "zouden_intro",
+    "type": "qcm",
+    "question": "\"Je zou meer moeten oefenen\" exprime :",
+    "options": [
+      "un ordre",
+      "un conseil",
+      "une interdiction"
+    ],
+    "answer": "un conseil"
+  },
+  {
+    "id": "ex_a2_modal1",
+    "notionId": "modalite_situations_reelles",
+    "type": "qcm",
+    "question": "Pour demander une permission poliment, on utilise plutôt :",
+    "options": [
+      "moeten",
+      "mogen",
+      "zullen"
+    ],
+    "answer": "mogen"
+  },
+  {
+    "id": "ex_a2_modal2",
+    "notionId": "modalite_situations_reelles",
+    "type": "qcm",
+    "question": "\"Je moet een afspraak maken\" exprime :",
+    "options": [
+      "une permission",
+      "une obligation",
+      "un souhait"
+    ],
+    "answer": "une obligation"
+  },
+  {
+    "id": "ex_a2_modal3",
+    "notionId": "modalite_situations_reelles",
+    "type": "qcm",
+    "question": "Pour donner un conseil doux, on utilise plutôt :",
+    "options": [
+      "moeten",
+      "zouden",
+      "mogen"
+    ],
+    "answer": "zouden"
+  },
+  {
+    "id": "ex_a2_erlieu1",
+    "notionId": "er_lieu",
+    "type": "qcm",
+    "question": "Comment reprend-on \"in Mons\" sans le répéter ?",
+    "options": [
+      "daar",
+      "er",
+      "het"
+    ],
+    "answer": "er"
+  },
+  {
+    "id": "ex_a2_erlieu2",
+    "notionId": "er_lieu",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik woon ___ al drie jaar.\"",
+    "answer": "er"
+  },
+  {
+    "id": "ex_a2_erlieu3",
+    "notionId": "er_lieu",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik woon in Mons al drie jaar daar.",
+      "Ik woon er al drie jaar.",
+      "Ik er woon al drie jaar."
+    ],
+    "answer": "Ik woon er al drie jaar."
+  },
+  {
+    "id": "ex_a2_erprep1",
+    "notionId": "er_preposition",
+    "type": "qcm",
+    "question": "Comment dit-on \"J'y pense\" (à une chose) ?",
+    "options": [
+      "Ik denk aan het.",
+      "Ik denk eraan.",
+      "Ik het denk aan."
+    ],
+    "answer": "Ik denk eraan."
+  },
+  {
+    "id": "ex_a2_erprep2",
+    "notionId": "er_preposition",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik wacht ___.\" (j'attends ça)",
+    "answer": "erop"
+  },
+  {
+    "id": "ex_a2_erprep3",
+    "notionId": "er_preposition",
+    "type": "qcm",
+    "question": "\"eraan/erop\" s'utilisent pour reprendre :",
+    "options": [
+      "une personne",
+      "une chose déjà mentionnée",
+      "un lieu uniquement"
+    ],
+    "answer": "une chose déjà mentionnée"
+  },
+  {
+    "id": "ex_a2_erquant1",
+    "notionId": "er_quantite",
+    "type": "qcm",
+    "question": "Comment répond-on à \"Hoeveel boeken heb je?\" si tu en as trois ?",
+    "options": [
+      "Ik heb drie boeken er.",
+      "Ik heb er drie.",
+      "Ik heb drie er."
+    ],
+    "answer": "Ik heb er drie."
+  },
+  {
+    "id": "ex_a2_erquant2",
+    "notionId": "er_quantite",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Hoeveel heb je ___?\"",
+    "answer": "er"
+  },
+  {
+    "id": "ex_a2_erquant3",
+    "notionId": "er_quantite",
+    "type": "qcm",
+    "question": "Si tu n'as aucun livre, tu réponds :",
+    "options": [
+      "Ik heb er geen.",
+      "Ik heb geen er.",
+      "Ik er heb geen."
+    ],
+    "answer": "Ik heb er geen."
+  },
+  {
+    "id": "ex_a2_ersuj1",
+    "notionId": "er_sujet_presentatif",
+    "type": "qcm",
+    "question": "Comment dit-on \"Il y a un problème\" ?",
+    "options": [
+      "Het is een probleem.",
+      "Er is een probleem.",
+      "Er zijn een probleem."
+    ],
+    "answer": "Er is een probleem."
+  },
+  {
+    "id": "ex_a2_ersuj2",
+    "notionId": "er_sujet_presentatif",
+    "type": "qcm",
+    "question": "Comment dit-on \"Il y a beaucoup d'étudiants\" ?",
+    "options": [
+      "Er is veel studenten.",
+      "Er zijn veel studenten.",
+      "Het zijn veel studenten."
+    ],
+    "answer": "Er zijn veel studenten."
+  },
+  {
+    "id": "ex_a2_ersuj3",
+    "notionId": "er_sujet_presentatif",
+    "type": "texte_a_trous",
+    "question": "Complète : \"___ niemand thuis.\"",
+    "answer": "Er is"
+  },
+  {
+    "id": "ex_a2_coord1",
+    "notionId": "conjonctions_coordination",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik ga niet mee, want ben ik moe.",
+      "Ik ga niet mee, want ik ben moe.",
+      "Ik ga niet mee want moe ik ben."
+    ],
+    "answer": "Ik ga niet mee, want ik ben moe."
+  },
+  {
+    "id": "ex_a2_coord2",
+    "notionId": "conjonctions_coordination",
+    "type": "qcm",
+    "question": "\"dus\" introduit surtout :",
+    "options": [
+      "une cause",
+      "une conséquence",
+      "une alternative"
+    ],
+    "answer": "une conséquence"
+  },
+  {
+    "id": "ex_a2_coord3",
+    "notionId": "conjonctions_coordination",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Het regent, ___ ik neem een paraplu.\"",
+    "answer": "dus"
+  },
+  {
+    "id": "ex_a2_omdat1",
+    "notionId": "subordonnee_omdat",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik blijf thuis omdat ik ben ziek.",
+      "Ik blijf thuis omdat ik ziek ben.",
+      "Ik blijf thuis omdat ben ik ziek."
+    ],
+    "answer": "Ik blijf thuis omdat ik ziek ben."
+  },
+  {
+    "id": "ex_a2_omdat2",
+    "notionId": "subordonnee_omdat",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre la fin de la phrase : \"...parce que tu es malade\"",
+    "words": [
+      "omdat",
+      "ik",
+      "ziek",
+      "ben"
+    ],
+    "answer": [
+      "omdat",
+      "ik",
+      "ziek",
+      "ben"
+    ]
+  },
+  {
+    "id": "ex_a2_omdat3",
+    "notionId": "subordonnee_omdat",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik leer Nederlands omdat ik in Nederland wil ___.\" (travailler)",
+    "answer": "werken"
+  },
+  {
+    "id": "ex_a2_datofals1",
+    "notionId": "dat_of_als",
+    "type": "qcm",
+    "question": "Pour exprimer une incertitude (\"je ne sais pas si\"), on utilise :",
+    "options": [
+      "dat",
+      "of",
+      "als"
+    ],
+    "answer": "of"
+  },
+  {
+    "id": "ex_a2_datofals2",
+    "notionId": "dat_of_als",
+    "type": "qcm",
+    "question": "Quelle phrase exprime une condition ?",
+    "options": [
+      "Ik denk dat het regent.",
+      "Als het regent, blijf ik thuis.",
+      "Ik weet niet of het regent."
+    ],
+    "answer": "Als het regent, blijf ik thuis."
+  },
+  {
+    "id": "ex_a2_datofals3",
+    "notionId": "dat_of_als",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik denk ___ hij komt.\"",
+    "answer": "dat"
+  },
+  {
+    "id": "ex_a2_connect1",
+    "notionId": "connecteurs_temporels",
+    "type": "qcm",
+    "question": "Pour un moment précis du passé, on utilise :",
+    "options": [
+      "als",
+      "toen",
+      "terwijl"
+    ],
+    "answer": "toen"
+  },
+  {
+    "id": "ex_a2_connect2",
+    "notionId": "connecteurs_temporels",
+    "type": "qcm",
+    "question": "\"terwijl\" exprime :",
+    "options": [
+      "deux actions simultanées",
+      "une action avant une autre",
+      "une cause"
+    ],
+    "answer": "deux actions simultanées"
+  },
+  {
+    "id": "ex_a2_connect3",
+    "notionId": "connecteurs_temporels",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik eet ___ ik vertrek.\" (avant que)",
+    "answer": "voordat"
+  },
+  {
+    "id": "ex_a2_ordresub1",
+    "notionId": "ordre_mots_subordonnee",
+    "type": "qcm",
+    "question": "Quelle phrase respecte la règle d'inversion ?",
+    "options": [
+      "Omdat ik morgen werk, ik ga vanavond niet uit.",
+      "Omdat ik morgen werk, ga ik vanavond niet uit.",
+      "Omdat morgen ik werk, ga ik vanavond niet uit."
+    ],
+    "answer": "Omdat ik morgen werk, ga ik vanavond niet uit."
+  },
+  {
+    "id": "ex_a2_ordresub2",
+    "notionId": "ordre_mots_subordonnee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre la fin de phrase : \"...je ne sors pas ce soir\"",
+    "words": [
+      "ga",
+      "ik",
+      "vanavond",
+      "niet",
+      "uit"
+    ],
+    "answer": [
+      "ga",
+      "ik",
+      "vanavond",
+      "niet",
+      "uit"
+    ]
+  },
+  {
+    "id": "ex_a2_ordresub3",
+    "notionId": "ordre_mots_subordonnee",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Omdat ik morgen werk, ___ ik vanavond niet uit.\" (aller, inversion)",
+    "answer": "ga"
+  },
+  {
+    "id": "ex_a2_omte1",
+    "notionId": "om_te_infinitif",
+    "type": "qcm",
+    "question": "Quelle phrase exprime correctement un but ?",
+    "options": [
+      "Ik ga naar de winkel brood kopen.",
+      "Ik ga naar de winkel om brood te kopen.",
+      "Ik ga naar de winkel te kopen brood."
+    ],
+    "answer": "Ik ga naar de winkel om brood te kopen."
+  },
+  {
+    "id": "ex_a2_omte2",
+    "notionId": "om_te_infinitif",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik probeer Nederlands ___ leren.\"",
+    "answer": "te"
+  },
+  {
+    "id": "ex_a2_omte3",
+    "notionId": "om_te_infinitif",
+    "type": "qcm",
+    "question": "\"om\" dans cette construction introduit :",
+    "options": [
+      "une cause",
+      "un but",
+      "une condition"
+    ],
+    "answer": "un but"
+  },
+  {
+    "id": "ex_a2_demo1",
+    "notionId": "demonstratifs_approfondis",
+    "type": "qcm",
+    "question": "Pour désigner \"de tas\" qui est loin, on dit :",
+    "options": [
+      "deze tas",
+      "die tas",
+      "dat tas"
+    ],
+    "answer": "die tas"
+  },
+  {
+    "id": "ex_a2_demo2",
+    "notionId": "demonstratifs_approfondis",
+    "type": "qcm",
+    "question": "Pour désigner \"het boek\" qui est proche, on dit :",
+    "options": [
+      "deze boek",
+      "dit boek",
+      "die boek"
+    ],
+    "answer": "dit boek"
+  },
+  {
+    "id": "ex_a2_demo3",
+    "notionId": "demonstratifs_approfondis",
+    "type": "texte_a_trous",
+    "question": "Complète : \"___ is interessanter dan dat boek.\" (dit boek proche)",
+    "answer": "Dit boek"
+  },
+  {
+    "id": "ex_a2_relat1",
+    "notionId": "pronoms_relatifs",
+    "type": "qcm",
+    "question": "Pour \"de man\" (qui est là-bas), on utilise :",
+    "options": [
+      "dat",
+      "die",
+      "waar"
+    ],
+    "answer": "die"
+  },
+  {
+    "id": "ex_a2_relat2",
+    "notionId": "pronoms_relatifs",
+    "type": "qcm",
+    "question": "Pour \"het boek\" (que je lis), on utilise :",
+    "options": [
+      "dat",
+      "die",
+      "waar"
+    ],
+    "answer": "dat"
+  },
+  {
+    "id": "ex_a2_relat3",
+    "notionId": "pronoms_relatifs",
+    "type": "texte_a_trous",
+    "question": "Complète : \"De stad ___ ik woon, is klein.\"",
+    "answer": "waar"
+  },
+  {
+    "id": "ex_a2_compapp1",
+    "notionId": "comparatif_approfondi",
+    "type": "qcm",
+    "question": "Quel est le comparatif de \"goed\" ?",
+    "options": [
+      "goeder",
+      "beter",
+      "meer goed"
+    ],
+    "answer": "beter"
+  },
+  {
+    "id": "ex_a2_compapp2",
+    "notionId": "comparatif_approfondi",
+    "type": "qcm",
+    "question": "Pour exprimer une égalité, on utilise :",
+    "options": [
+      "dan",
+      "even... als",
+      "meer... dan"
+    ],
+    "answer": "even... als"
+  },
+  {
+    "id": "ex_a2_compapp3",
+    "notionId": "comparatif_approfondi",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Dit is groter ___ dat.\"",
+    "answer": "dan"
+  },
+  {
+    "id": "ex_a2_superlapp1",
+    "notionId": "superlatif_approfondi",
+    "type": "qcm",
+    "question": "Quel est le superlatif de \"goed\" ?",
+    "options": [
+      "het goedste",
+      "het beste",
+      "het meer goed"
+    ],
+    "answer": "het beste"
+  },
+  {
+    "id": "ex_a2_superlapp2",
+    "notionId": "superlatif_approfondi",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Dit is ___ restaurant.\" (le meilleur)",
+    "answer": "het beste"
+  },
+  {
+    "id": "ex_a2_superlapp3",
+    "notionId": "superlatif_approfondi",
+    "type": "qcm",
+    "question": "\"Wat vind je het leukste?\" demande :",
+    "options": [
+      "ton avis préféré",
+      "une obligation",
+      "une comparaison simple"
+    ],
+    "answer": "ton avis préféré"
+  },
+  {
+    "id": "ex_a2_quant1",
+    "notionId": "quantificateurs",
+    "type": "qcm",
+    "question": "\"elke\" s'utilise avec :",
+    "options": [
+      "un nom singulier",
+      "un nom pluriel",
+      "les deux"
+    ],
+    "answer": "un nom singulier"
+  },
+  {
+    "id": "ex_a2_quant2",
+    "notionId": "quantificateurs",
+    "type": "qcm",
+    "question": "Pour dire qu'il y a trop de monde, on dit :",
+    "options": [
+      "te weinig mensen",
+      "te veel mensen",
+      "genoeg mensen"
+    ],
+    "answer": "te veel mensen"
+  },
+  {
+    "id": "ex_a2_quant3",
+    "notionId": "quantificateurs",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik heb ___ tijd.\" (juste assez)",
+    "answer": "genoeg"
+  },
+  {
+    "id": "ex_a2_tel1",
+    "notionId": "telephone_rendezvous",
+    "type": "qcm",
+    "question": "Comment demande-t-on poliment un rendez-vous ?",
+    "options": [
+      "Ik wil een afspraak.",
+      "Ik wil graag een afspraak maken.",
+      "Geef mij een afspraak."
+    ],
+    "answer": "Ik wil graag een afspraak maken."
+  },
+  {
+    "id": "ex_a2_tel2",
+    "notionId": "telephone_rendezvous",
+    "type": "qcm",
+    "question": "Pour annuler un rendez-vous, on dit :",
+    "options": [
+      "Ik wil een afspraak maken.",
+      "Ik moet mijn afspraak annuleren.",
+      "Ik kom eraan."
+    ],
+    "answer": "Ik moet mijn afspraak annuleren."
+  },
+  {
+    "id": "ex_a2_tel3",
+    "notionId": "telephone_rendezvous",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Kan het ook volgende ___?\" (semaine)",
+    "answer": "week"
+  },
+  {
+    "id": "ex_a2_log1",
+    "notionId": "logement_a2",
+    "type": "qcm",
+    "question": "Comment demande-t-on poliment une réparation ?",
+    "options": [
+      "Repareer dit!",
+      "Zou u dit kunnen repareren?",
+      "Ik wil dit repareren."
+    ],
+    "answer": "Zou u dit kunnen repareren?"
+  },
+  {
+    "id": "ex_a2_log2",
+    "notionId": "logement_a2",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Er is een probleem met de ___.\" (chauffage)",
+    "answer": "verwarming"
+  },
+  {
+    "id": "ex_a2_log3",
+    "notionId": "logement_a2",
+    "type": "qcm",
+    "question": "\"de huur\" veut dire :",
+    "options": [
+      "le loyer",
+      "la réparation",
+      "l'équipement"
+    ],
+    "answer": "le loyer"
+  },
+  {
+    "id": "ex_a2_sante1",
+    "notionId": "sante",
+    "type": "qcm",
+    "question": "Comment dit-on \"J'ai mal à la tête\" ?",
+    "options": [
+      "Ik ben hoofdpijn.",
+      "Ik heb hoofdpijn.",
+      "Ik voel hoofdpijn."
+    ],
+    "answer": "Ik heb hoofdpijn."
+  },
+  {
+    "id": "ex_a2_sante2",
+    "notionId": "sante",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik voel me niet ___.\" (bien)",
+    "answer": "goed"
+  },
+  {
+    "id": "ex_a2_sante3",
+    "notionId": "sante",
+    "type": "qcm",
+    "question": "\"U moet twee keer per dag deze pillen nemen\" est :",
+    "options": [
+      "une question",
+      "une instruction",
+      "une plainte"
+    ],
+    "answer": "une instruction"
+  },
+  {
+    "id": "ex_a2_voy1",
+    "notionId": "voyage_transport",
+    "type": "qcm",
+    "question": "Comment demande-t-on son chemin vers la gare ?",
+    "options": [
+      "Waar is het station?",
+      "Hoe kom ik bij het station?",
+      "les deux sont possibles"
+    ],
+    "answer": "les deux sont possibles"
+  },
+  {
+    "id": "ex_a2_voy2",
+    "notionId": "voyage_transport",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik wil graag een ___ naar Amsterdam.\" (billet)",
+    "answer": "kaartje"
+  },
+  {
+    "id": "ex_a2_voy3",
+    "notionId": "voyage_transport",
+    "type": "qcm",
+    "question": "\"De trein heeft vertraging\" veut dire :",
+    "options": [
+      "le train est à l'heure",
+      "le train est en retard",
+      "le train est annulé"
+    ],
+    "answer": "le train est en retard"
+  },
+  {
+    "id": "ex_a2_inter1",
+    "notionId": "interaction_expression_personnelle",
+    "type": "qcm",
+    "question": "Comment introduit-on poliment son opinion ?",
+    "options": [
+      "Ik vind dat...",
+      "Doe dit!",
+      "Nee."
+    ],
+    "answer": "Ik vind dat..."
+  },
+  {
+    "id": "ex_a2_inter2",
+    "notionId": "interaction_expression_personnelle",
+    "type": "qcm",
+    "question": "Comment demande-t-on une précision ?",
+    "options": [
+      "Ik bedoel...",
+      "Wat bedoel je?",
+      "Ik ben het eens."
+    ],
+    "answer": "Wat bedoel je?"
+  },
+  {
+    "id": "ex_a2_inter3",
+    "notionId": "interaction_expression_personnelle",
+    "type": "qcm",
+    "question": "Pour justifier son opinion, on utilise :",
+    "options": [
+      "dus",
+      "omdat",
+      "of"
+    ],
+    "answer": "omdat"
+  },
+  {
+    "id": "ex_a2_inter4",
+    "notionId": "interaction_expression_personnelle",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik ben het ___ je eens.\" (avec)",
+    "answer": "met"
   }
 ]

@@ -1,42 +1,397 @@
 [
   {
-    "id": "a1-m1", "level": "A1", "order": 1, "label": "Premiers contacts",
-    "notions": ["salutations", "se_presenter", "nom_age_nationalite", "ville_profession", "nombres", "alphabet_epeler", "date_heure"]
+    "id": "a1-m1",
+    "level": "A1",
+    "order": 1,
+    "label": "Premiers contacts",
+    "notions": [
+      "salutations",
+      "se_presenter",
+      "nom_age_nationalite",
+      "ville_profession",
+      "nombres",
+      "alphabet_epeler",
+      "date_heure"
+    ]
   },
   {
-    "id": "a1-m2", "level": "A1", "order": 2, "label": "Construire une phrase",
-    "notions": ["sujet_verbe_objet", "phrase_affirmative", "questions", "inversion", "hoofdzin", "ordre_des_mots_base"]
+    "id": "a1-m2",
+    "level": "A1",
+    "order": 2,
+    "label": "Construire une phrase",
+    "notions": [
+      "sujet_verbe_objet",
+      "phrase_affirmative",
+      "questions",
+      "inversion",
+      "hoofdzin",
+      "ordre_des_mots_base"
+    ]
   },
   {
-    "id": "a1-m3", "level": "A1", "order": 3, "label": "Les noms",
-    "notions": ["de_het", "een", "pluriel", "diminutifs", "categories_de_mots"]
+    "id": "a1-m3",
+    "level": "A1",
+    "order": 3,
+    "label": "Les noms",
+    "notions": [
+      "de_het",
+      "een",
+      "pluriel",
+      "diminutifs",
+      "categories_de_mots"
+    ]
   },
   {
-    "id": "a1-m4", "level": "A1", "order": 4, "label": "Pronoms",
-    "notions": ["pronoms_sujets", "u_politesse", "possessifs", "pronoms_objets", "demonstratifs"]
+    "id": "a1-m4",
+    "level": "A1",
+    "order": 4,
+    "label": "Pronoms",
+    "notions": [
+      "pronoms_sujets",
+      "u_politesse",
+      "possessifs",
+      "pronoms_objets",
+      "demonstratifs"
+    ]
   },
   {
-    "id": "a1-m5", "level": "A1", "order": 5, "label": "Verbes",
-    "notions": ["infinitif_radical", "present_regulier", "zijn", "hebben", "verbes_irreguliers", "verbes_modaux", "verbes_separables_intro"]
+    "id": "a1-m5",
+    "level": "A1",
+    "order": 5,
+    "label": "Verbes",
+    "notions": [
+      "infinitif_radical",
+      "present_regulier",
+      "zijn",
+      "hebben",
+      "verbes_irreguliers",
+      "verbes_modaux",
+      "verbes_separables_intro"
+    ]
   },
   {
-    "id": "a1-m6", "level": "A1", "order": 6, "label": "Adjectifs",
-    "notions": ["adjectif_attribut", "adjectif_devant_nom", "regle_du_e", "comparatif", "superlatif"]
+    "id": "a1-m6",
+    "level": "A1",
+    "order": 6,
+    "label": "Adjectifs",
+    "notions": [
+      "adjectif_attribut",
+      "adjectif_devant_nom",
+      "regle_du_e",
+      "comparatif",
+      "superlatif"
+    ]
   },
   {
-    "id": "a1-m7", "level": "A1", "order": 7, "label": "Prépositions",
-    "notions": ["prepositions_lieu", "prepositions_essentielles"]
+    "id": "a1-m7",
+    "level": "A1",
+    "order": 7,
+    "label": "Prépositions",
+    "notions": [
+      "prepositions_lieu",
+      "prepositions_essentielles"
+    ]
   },
   {
-    "id": "a1-m8", "level": "A1", "order": 8, "label": "Négation",
-    "notions": ["niet", "geen", "niet_vs_geen", "position_niet"]
+    "id": "a1-m8",
+    "level": "A1",
+    "order": 8,
+    "label": "Négation",
+    "notions": [
+      "niet",
+      "geen",
+      "niet_vs_geen",
+      "position_niet"
+    ]
   },
   {
-    "id": "a1-m9", "level": "A1", "order": 9, "label": "Temps",
-    "notions": ["present_recap", "perfectum_intro", "hebben_zijn_auxiliaire", "participe_passe", "regles_du_passe_de_base"]
+    "id": "a1-m9",
+    "level": "A1",
+    "order": 9,
+    "label": "Temps",
+    "notions": [
+      "present_recap",
+      "perfectum_intro",
+      "hebben_zijn_auxiliaire",
+      "participe_passe",
+      "regles_du_passe_de_base"
+    ]
   },
   {
-    "id": "a1-m10", "level": "A1", "order": 10, "label": "Vie quotidienne",
-    "notions": ["famille", "maison", "nourriture", "achats", "transport", "travail_etudes", "meteo", "ville_administration"]
+    "id": "a1-m10",
+    "level": "A1",
+    "order": 10,
+    "label": "Vie quotidienne",
+    "notions": [
+      "famille",
+      "maison",
+      "nourriture",
+      "achats",
+      "transport",
+      "travail_etudes",
+      "meteo",
+      "ville_administration"
+    ]
+  },
+  {
+    "id": "a2-m1",
+    "level": "A2",
+    "order": 1,
+    "label": "Raconter le passé",
+    "notions": [
+      "perfectum_tous_verbes",
+      "imperfectum",
+      "imperfectum_irreguliers",
+      "choix_temps_passe",
+      "raconter_evenement_passe"
+    ]
+  },
+  {
+    "id": "a2-m2",
+    "level": "A2",
+    "order": 2,
+    "label": "Verbes plus complexes",
+    "notions": [
+      "verbes_separables_avances",
+      "verbes_separables_questions",
+      "verbes_inseparables",
+      "verbes_reflechis",
+      "combiner_structures_verbales"
+    ]
+  },
+  {
+    "id": "a2-m3",
+    "level": "A2",
+    "order": 3,
+    "label": "Futur, intention et modalité",
+    "notions": [
+      "futur_proche_gaan",
+      "zullen_futur",
+      "zouden_intro",
+      "modalite_situations_reelles"
+    ]
+  },
+  {
+    "id": "a2-m4",
+    "level": "A2",
+    "order": 4,
+    "label": "Le pronom er, quantité et référence",
+    "notions": [
+      "er_lieu",
+      "er_preposition",
+      "er_quantite",
+      "er_sujet_presentatif"
+    ]
+  },
+  {
+    "id": "a2-m5",
+    "level": "A2",
+    "order": 5,
+    "label": "Construire des phrases plus riches",
+    "notions": [
+      "conjonctions_coordination",
+      "subordonnee_omdat",
+      "dat_of_als",
+      "connecteurs_temporels",
+      "ordre_mots_subordonnee",
+      "om_te_infinitif"
+    ]
+  },
+  {
+    "id": "a2-m6",
+    "level": "A2",
+    "order": 6,
+    "label": "Référence, description et comparaison",
+    "notions": [
+      "demonstratifs_approfondis",
+      "pronoms_relatifs",
+      "comparatif_approfondi",
+      "superlatif_approfondi",
+      "quantificateurs"
+    ]
+  },
+  {
+    "id": "a2-m7",
+    "level": "A2",
+    "order": 7,
+    "label": "Situations de vie réelle",
+    "notions": [
+      "telephone_rendezvous",
+      "logement_a2",
+      "sante",
+      "voyage_transport"
+    ]
+  },
+  {
+    "id": "a2-m8",
+    "level": "A2",
+    "order": 8,
+    "label": "Interaction et expression personnelle",
+    "notions": [
+      "interaction_expression_personnelle"
+    ]
+  },
+  {
+    "id": "b1-m1",
+    "level": "B1",
+    "order": 1,
+    "label": "Conjonctions et subordination avancée",
+    "notions": [
+      "conjonction_cause",
+      "conjonction_consequence",
+      "conjonction_condition",
+      "conjonction_concession",
+      "conjonction_temps"
+    ]
+  },
+  {
+    "id": "b1-m2",
+    "level": "B1",
+    "order": 2,
+    "label": "Relatives et connecteurs",
+    "notions": [
+      "relatives_complexes",
+      "connecteurs_texte",
+      "nominalisation"
+    ]
+  },
+  {
+    "id": "b1-m3",
+    "level": "B1",
+    "order": 3,
+    "label": "Conditionnel et discours rapporté",
+    "notions": [
+      "conditionnel_zou",
+      "discours_indirect"
+    ]
+  },
+  {
+    "id": "b1-m4",
+    "level": "B1",
+    "order": 4,
+    "label": "Passif et structures avancées",
+    "notions": [
+      "passif_intro",
+      "passif_temps",
+      "infinitif_te",
+      "om_te_avance"
+    ]
+  },
+  {
+    "id": "b1-m5",
+    "level": "B1",
+    "order": 5,
+    "label": "Ordre des mots complexe",
+    "notions": [
+      "ordre_mots_complexe",
+      "position_particules_subordonnee",
+      "er_avance",
+      "prepositions_fixes_avance",
+      "verbes_particules_avance"
+    ]
+  },
+  {
+    "id": "b1-m6",
+    "level": "B1",
+    "order": 6,
+    "label": "S'exprimer avec nuance",
+    "notions": [
+      "raconter_experience",
+      "raconter_histoire",
+      "expliquer_procedure",
+      "donner_opinion_justifiee",
+      "comparer_solutions",
+      "argumenter_simple",
+      "raconter_projets"
+    ]
+  },
+  {
+    "id": "b1-m7",
+    "level": "B1",
+    "order": 7,
+    "label": "Néerlandais professionnel B1",
+    "notions": [
+      "entretien_embauche",
+      "email_professionnel",
+      "conversation_professionnelle",
+      "reunion_simple",
+      "presentation_courte"
+    ]
+  },
+  {
+    "id": "b2-m1",
+    "level": "B2",
+    "order": 1,
+    "label": "Nuances grammaticales avancées",
+    "notions": [
+      "nuances_temps",
+      "passif_avance",
+      "conditionnel_avance",
+      "discours_rapporte_avance",
+      "structures_impersonnelles"
+    ]
+  },
+  {
+    "id": "b2-m2",
+    "level": "B2",
+    "order": 2,
+    "label": "Style et registre",
+    "notions": [
+      "registre_formel_informel",
+      "expressions_figees",
+      "collocations",
+      "nuances_synonymes",
+      "formulations_idiomatiques"
+    ]
+  },
+  {
+    "id": "b2-m3",
+    "level": "B2",
+    "order": 3,
+    "label": "Connecteurs et structure de texte",
+    "notions": [
+      "connecteurs_complexes",
+      "ordre_mots_avance",
+      "nominalisation_avancee"
+    ]
+  },
+  {
+    "id": "b2-m4",
+    "level": "B2",
+    "order": 4,
+    "label": "Argumenter et débattre",
+    "notions": [
+      "argumenter",
+      "debattre",
+      "defendre_position",
+      "analyser_probleme",
+      "proposer_solution",
+      "expliquer_avantages_inconvenients"
+    ]
+  },
+  {
+    "id": "b2-m5",
+    "level": "B2",
+    "order": 5,
+    "label": "Professionnel avancé",
+    "notions": [
+      "presenter_projet",
+      "reunion_avancee",
+      "negociation",
+      "presentation_professionnelle",
+      "email_professionnel_complexe"
+    ]
+  },
+  {
+    "id": "b2-m6",
+    "level": "B2",
+    "order": 6,
+    "label": "Communication professionnelle écrite",
+    "notions": [
+      "rapport",
+      "synthese",
+      "entretien_embauche_avance",
+      "communication_collegues_clients"
+    ]
   }
 ]

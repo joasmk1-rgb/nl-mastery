@@ -775,6 +775,10 @@ if (firebaseAvailable) {
                 <div class="lesson-block"><h3>🇳🇱 Règle</h3><p>${c.regle || ''}</p></div>
                 <div class="lesson-block"><h3>👀 Exemples</h3>${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
                 <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
+                ${c.objectifCommunication ? `<div class="lesson-block"><h3>💬 Objectif de communication</h3><p>${c.objectifCommunication}</p></div>` : ''}
+                ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><h3>🗂️ Vocabulaire utile</h3><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
+                ${c.tacheProduction ? `<div class="lesson-block lesson-tache"><h3>✍️ À toi de jouer</h3><p>${c.tacheProduction}</p></div>` : ''}
+                ${c.criteresMaitrise ? `<div class="lesson-block"><h3>✅ Tu maîtrises cette notion si...</h3><p>${c.criteresMaitrise}</p></div>` : ''}
                 <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
                 <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
                 ${exCount ? `<button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>` : ''}

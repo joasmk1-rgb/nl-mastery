@@ -1499,5 +1499,2003 @@
       "ex_villeadmin_1",
       "ex_villeadmin_2"
     ]
+  },
+  "conjonction_cause": {
+    "level": "B1",
+    "module": "b1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conjonction_consequence": {
+    "level": "B1",
+    "module": "b1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conjonction_condition": {
+    "level": "B1",
+    "module": "b1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conjonction_concession": {
+    "level": "B1",
+    "module": "b1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conjonction_temps": {
+    "level": "B1",
+    "module": "b1-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "relatives_complexes": {
+    "level": "B1",
+    "module": "b1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "connecteurs_texte": {
+    "level": "B1",
+    "module": "b1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nominalisation": {
+    "level": "B1",
+    "module": "b1-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conditionnel_zou": {
+    "level": "B1",
+    "module": "b1-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "discours_indirect": {
+    "level": "B1",
+    "module": "b1-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "passif_intro": {
+    "level": "B1",
+    "module": "b1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "passif_temps": {
+    "level": "B1",
+    "module": "b1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "infinitif_te": {
+    "level": "B1",
+    "module": "b1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "om_te_avance": {
+    "level": "B1",
+    "module": "b1-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "ordre_mots_complexe": {
+    "level": "B1",
+    "module": "b1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "position_particules_subordonnee": {
+    "level": "B1",
+    "module": "b1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "er_avance": {
+    "level": "B1",
+    "module": "b1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "prepositions_fixes_avance": {
+    "level": "B1",
+    "module": "b1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "verbes_particules_avance": {
+    "level": "B1",
+    "module": "b1-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "raconter_experience": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "raconter_histoire": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "expliquer_procedure": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "donner_opinion_justifiee": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "comparer_solutions": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "argumenter_simple": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "raconter_projets": {
+    "level": "B1",
+    "module": "b1-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "entretien_embauche": {
+    "level": "B1",
+    "module": "b1-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "email_professionnel": {
+    "level": "B1",
+    "module": "b1-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conversation_professionnelle": {
+    "level": "B1",
+    "module": "b1-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "reunion_simple": {
+    "level": "B1",
+    "module": "b1-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "presentation_courte": {
+    "level": "B1",
+    "module": "b1-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nuances_temps": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "passif_avance": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "conditionnel_avance": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "discours_rapporte_avance": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "structures_impersonnelles": {
+    "level": "B2",
+    "module": "b2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "registre_formel_informel": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "expressions_figees": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "collocations": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nuances_synonymes": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "formulations_idiomatiques": {
+    "level": "B2",
+    "module": "b2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "connecteurs_complexes": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "ordre_mots_avance": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "nominalisation_avancee": {
+    "level": "B2",
+    "module": "b2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "argumenter": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "debattre": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "defendre_position": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "analyser_probleme": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "proposer_solution": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "expliquer_avantages_inconvenients": {
+    "level": "B2",
+    "module": "b2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "presenter_projet": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "reunion_avancee": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "negociation": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "presentation_professionnelle": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "email_professionnel_complexe": {
+    "level": "B2",
+    "module": "b2-m5",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "rapport": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "synthese": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "entretien_embauche_avance": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "communication_collegues_clients": {
+    "level": "B2",
+    "module": "b2-m6",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [],
+    "status": "a_rediger",
+    "content": null,
+    "exerciseIds": []
+  },
+  "perfectum_tous_verbes": {
+    "level": "A2",
+    "module": "a2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "perfectum_intro",
+      "hebben_zijn_auxiliaire",
+      "participe_passe"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Consolider le perfectum avec tous les types de verbes (réguliers, irréguliers, hebben/zijn) dans les phrases affirmatives, négatives et interrogatives.",
+      "comprendre": "Le perfectum est déjà connu en A1 pour quelques verbes ; ici on généralise son usage à n'importe quel verbe fréquent, y compris à la forme négative et interrogative.",
+      "regle": "Sujet + hebben/zijn (conjugué) + ... + participe passé (fin). Négation : sujet + hebben/zijn + niet/geen + ... + participe. Question : Heb/Ben + sujet + ... + participe + ?",
+      "exemples": [
+        "Ik heb gewerkt.",
+        "Ik ben naar Brussel gegaan.",
+        "Heb je dat al gedaan?",
+        "Ik heb dat nog niet gedaan."
+      ],
+      "erreursFrequentes": [
+        "Oublier de renvoyer le participe passé en fin de phrase à la forme interrogative.",
+        "Utiliser 'heb' avec un verbe qui demande 'zijn' (mouvement/changement d'état)."
+      ],
+      "objectifCommunication": "Pouvoir dire ce qu'on a fait ou pas fait récemment, et demander à quelqu'un s'il a fait quelque chose.",
+      "tacheProduction": "Vertel wat je vandaag al hebt gedaan (drie zinnen).",
+      "vocabulaire": [
+        "al",
+        "nog niet",
+        "gedaan",
+        "gegaan",
+        "gewerkt"
+      ],
+      "criteresMaitrise": "Utiliser correctement hebben/zijn et placer le participe passé en fin de phrase, y compris à la forme négative et interrogative."
+    },
+    "exerciseIds": [
+      "ex_a2_perf1",
+      "ex_a2_perf2",
+      "ex_a2_perf3",
+      "ex_a2_perf4"
+    ]
+  },
+  "imperfectum": {
+    "level": "A2",
+    "module": "a2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "present_recap"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Former et utiliser l'imperfectum des verbes réguliers.",
+      "comprendre": "L'imperfectum (prétérit) sert à raconter un fait passé sans lien direct avec le présent, souvent dans un récit. Pour les verbes réguliers, on ajoute -te(n) ou -de(n) au radical selon la consonne finale ('t kofschip).",
+      "regle": "radical + te/ten (après consonne sourde : t,k,f,s,ch,p) ; radical + de/den (sinon). Le singulier et le pluriel ont la même forme (pas de -t supplémentaire comme au présent).",
+      "exemples": [
+        "ik werkte",
+        "ik woonde",
+        "wij leerden",
+        "jij speelde"
+      ],
+      "erreursFrequentes": [
+        "Ajouter un -t supplémentaire au singulier comme au présent ('werktte').",
+        "Confondre la règle -te/-de avec celle du perfectum (ge-...-t/d)."
+      ],
+      "objectifCommunication": "Pouvoir raconter un fait passé simple dans un petit récit.",
+      "tacheProduction": "Schrijf drie zinnen over vorige zomer, met het imperfectum.",
+      "vocabulaire": [
+        "vorige week",
+        "vroeger",
+        "toen"
+      ],
+      "criteresMaitrise": "Former correctement l'imperfectum des verbes réguliers fréquents et l'utiliser dans une phrase simple."
+    },
+    "exerciseIds": [
+      "ex_a2_imp1",
+      "ex_a2_imp2",
+      "ex_a2_imp3",
+      "ex_a2_imp4"
+    ]
+  },
+  "imperfectum_irreguliers": {
+    "level": "A2",
+    "module": "a2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "imperfectum"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Reconnaître et utiliser l'imperfectum des verbes irréguliers les plus fréquents.",
+      "comprendre": "Certains verbes très courants ont un imperfectum totalement irrégulier, à mémoriser individuellement plutôt que par une règle.",
+      "regle": "zijn→was/waren ; hebben→had/hadden ; gaan→ging(en) ; komen→kwam(en) ; kunnen→kon(den) ; moeten→moest(en) ; willen→wilde(n) ; weten→wist(en) ; krijgen→kreeg(en) ; doen→deed(en).",
+      "exemples": [
+        "Ik was ziek.",
+        "Hij had geen tijd.",
+        "Wij gingen naar school.",
+        "Ik kon het niet doen."
+      ],
+      "erreursFrequentes": [
+        "Appliquer la règle régulière -te/-de à ces verbes ('gaade' au lieu de 'ging').",
+        "Confondre 'was' (singulier) et 'waren' (pluriel)."
+      ],
+      "objectifCommunication": "Pouvoir dire ce qu'on pouvait, devait ou voulait faire dans le passé.",
+      "tacheProduction": "Vertel: wat kon je niet doen toen je klein was?",
+      "vocabulaire": [
+        "was",
+        "waren",
+        "kon",
+        "moest",
+        "wilde"
+      ],
+      "criteresMaitrise": "Utiliser correctement au moins les 10 imperfecta irréguliers les plus fréquents dans une phrase simple."
+    },
+    "exerciseIds": [
+      "ex_a2_impirr1",
+      "ex_a2_impirr2",
+      "ex_a2_impirr3",
+      "ex_a2_impirr4"
+    ]
+  },
+  "choix_temps_passe": {
+    "level": "A2",
+    "module": "a2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "perfectum_tous_verbes",
+      "imperfectum_irreguliers"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Choisir entre perfectum et imperfectum selon le contexte.",
+      "comprendre": "En néerlandais courant, le perfectum domine pour évoquer un fait ponctuel ; l'imperfectum s'utilise surtout pour les verbes auxiliaires/modaux fréquents et pour poser le contexte d'un récit (\"toen...\").",
+      "regle": "Perfectum = événement ponctuel récent (\"Wat heb je gisteren gedaan?\"). Imperfectum = contexte/description dans un récit, ou verbes comme zijn/hebben/kunnen/moeten/willen (\"Toen ik klein was, woonde ik in België.\").",
+      "exemples": [
+        "Wat heb je gisteren gedaan?",
+        "Toen ik klein was, woonde ik in België.",
+        "Ik was moe, dus ik ben vroeg naar bed gegaan."
+      ],
+      "erreursFrequentes": [
+        "Utiliser systématiquement le perfectum même pour poser le contexte d'un récit.",
+        "Utiliser l'imperfectum pour une question ponctuelle sur 'hier'."
+      ],
+      "objectifCommunication": "Pouvoir mélanger correctement les deux temps dans un petit récit cohérent.",
+      "tacheProduction": "Vertel over een dag die je nog goed herinnert. Gebruik zowel het perfectum als het imperfectum.",
+      "vocabulaire": [
+        "toen",
+        "dus",
+        "eerst",
+        "daarna"
+      ],
+      "criteresMaitrise": "Choisir le temps approprié dans au moins 4 phrases sur 5 d'un mini-récit."
+    },
+    "exerciseIds": [
+      "ex_a2_choix1",
+      "ex_a2_choix2",
+      "ex_a2_choix3"
+    ]
+  },
+  "raconter_evenement_passe": {
+    "level": "A2",
+    "module": "a2-m1",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "choix_temps_passe"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Raconter un événement passé en plusieurs phrases liées chronologiquement.",
+      "comprendre": "Combine perfectum, imperfectum et connecteurs temporels (eerst, daarna, toen, uiteindelijk) pour construire un petit récit cohérent.",
+      "regle": "Connecteur temporel en tête de phrase + inversion (verbe en 2e position, règle V2 déjà connue).",
+      "exemples": [
+        "Eerst ben ik opgestaan.",
+        "Daarna heb ik ontbeten.",
+        "Toen ik op het werk aankwam, was iedereen er al."
+      ],
+      "erreursFrequentes": [
+        "Enchaîner les phrases sans aucun connecteur, ce qui rend le récit haché.",
+        "Oublier l'inversion après un connecteur en début de phrase."
+      ],
+      "objectifCommunication": "Pouvoir raconter le déroulement d'une journée ou d'un événement de façon fluide.",
+      "tacheProduction": "Vertel over gisteren, van 's ochtends tot 's avonds, met minstens vier zinnen.",
+      "vocabulaire": [
+        "eerst",
+        "daarna",
+        "toen",
+        "uiteindelijk",
+        "'s ochtends",
+        "'s avonds"
+      ],
+      "criteresMaitrise": "Produire un récit d'au moins 4 phrases liées par des connecteurs temporels avec l'ordre des mots correct."
+    },
+    "exerciseIds": [
+      "ex_a2_recit1",
+      "ex_a2_recit2",
+      "ex_a2_recit3"
+    ]
+  },
+  "verbes_separables_avances": {
+    "level": "A2",
+    "module": "a2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "verbes_separables_intro"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Approfondir les verbes à particule séparable fréquents (opstaan, terugkomen, meenemen, boodschappen doen) au présent et au perfectum.",
+      "comprendre": "Au présent, la particule part en fin de proposition principale ; au perfectum, le préfixe 'ge-' du participe passé s'insère ENTRE la particule et le radical.",
+      "regle": "Présent : Ik sta om zeven uur op. Perfectum : Ik ben om zeven uur opgestaan (op+ge+staan, pas ge+opstaan).",
+      "exemples": [
+        "Ik sta om zeven uur op.",
+        "Ik ben om zeven uur opgestaan.",
+        "Neem je je laptop mee?",
+        "Ik heb boodschappen gedaan."
+      ],
+      "erreursFrequentes": [
+        "Mettre 'ge-' avant la particule séparable au lieu de l'insérer entre particule et radical.",
+        "Oublier de séparer la particule au présent."
+      ],
+      "objectifCommunication": "Décrire sa routine et ce qu'on a fait en utilisant des verbes à particule courants.",
+      "tacheProduction": "Beschrijf je ochtendroutine met minstens twee scheidbare werkwoorden.",
+      "vocabulaire": [
+        "opstaan",
+        "terugkomen",
+        "meenemen",
+        "boodschappen doen"
+      ],
+      "criteresMaitrise": "Utiliser correctement au moins 3 verbes séparables fréquents au présent et au perfectum."
+    },
+    "exerciseIds": [
+      "ex_a2_sep1",
+      "ex_a2_sep2",
+      "ex_a2_sep3"
+    ]
+  },
+  "verbes_separables_questions": {
+    "level": "A2",
+    "module": "a2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "verbes_separables_avances",
+      "questions"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser correctement les verbes séparables dans les questions et les phrases complexes.",
+      "comprendre": "Dans une question ouverte ou une subordonnée, la particule reste attachée en fin de proposition, mais sa position relative au verbe change selon la structure.",
+      "regle": "Question ouverte : [mot interrogatif] + verbe + sujet + ... + particule + ? Subordonnée : ... + sujet + ... + verbe+particule (collés, en fin de proposition).",
+      "exemples": [
+        "Hoe laat sta je morgen op?",
+        "Ik weet niet hoe laat ik morgen opsta.",
+        "Neem je iets mee naar het feest?"
+      ],
+      "erreursFrequentes": [
+        "Détacher la particule dans une subordonnée alors qu'elle doit rester collée au verbe en fin de proposition.",
+        "Oublier la particule à la fin d'une question ouverte."
+      ],
+      "objectifCommunication": "Pouvoir poser des questions précises impliquant des verbes séparables.",
+      "tacheProduction": "Stel drie vragen met scheidbare werkwoorden aan een vriend.",
+      "vocabulaire": [
+        "hoe laat",
+        "meenemen naar",
+        "opstaan"
+      ],
+      "criteresMaitrise": "Placer correctement la particule dans une question ouverte et dans une subordonnée simple."
+    },
+    "exerciseIds": [
+      "ex_a2_sepq1",
+      "ex_a2_sepq2",
+      "ex_a2_sepq3"
+    ]
+  },
+  "verbes_inseparables": {
+    "level": "A2",
+    "module": "a2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "participe_passe"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Reconnaître les verbes à préfixe inséparable (be-, ge-, ver-, ont-, her-) et former leur participe passé sans 'ge-'.",
+      "comprendre": "Contrairement aux verbes séparables, ces préfixes ne se détachent jamais et le participe passé ne prend PAS de préfixe 'ge-' supplémentaire.",
+      "regle": "betalen → betaald (pas gebetaald) ; vertellen → verteld ; begrijpen → begrepen.",
+      "exemples": [
+        "Ik heb de rekening betaald.",
+        "Hij heeft een verhaal verteld.",
+        "Ik begrijp het niet.",
+        "Ik heb het begrepen."
+      ],
+      "erreursFrequentes": [
+        "Ajouter 'ge-' par réflexe ('gebetaald' est faux).",
+        "Confondre un verbe inséparable avec un verbe séparable qui se ressemble."
+      ],
+      "objectifCommunication": "Utiliser correctement des verbes fréquents comme betalen, vertellen, begrijpen au perfectum.",
+      "tacheProduction": "Vertel een kort verhaal met 'vertellen' en 'begrijpen' in het perfectum.",
+      "vocabulaire": [
+        "betalen",
+        "vertellen",
+        "begrijpen",
+        "ontmoeten",
+        "herhalen"
+      ],
+      "criteresMaitrise": "Former sans erreur le participe passé d'au moins 4 verbes inséparables fréquents."
+    },
+    "exerciseIds": [
+      "ex_a2_insep1",
+      "ex_a2_insep2",
+      "ex_a2_insep3"
+    ]
+  },
+  "verbes_reflechis": {
+    "level": "A2",
+    "module": "a2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "pronoms_sujets"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les verbes réfléchis fréquents (zich wassen, zich voelen, zich vergissen, zich herinneren, zich aanmelden) avec le bon pronom réfléchi.",
+      "comprendre": "Le pronom réfléchi s'accorde avec le sujet : me, je, zich, ons, jullie, zich.",
+      "regle": "Ik voel me goed. Hij voelt zich niet goed. Wij vergissen ons soms.",
+      "exemples": [
+        "Ik voel me goed.",
+        "Hij voelt zich niet goed.",
+        "Ik herinner me dat niet.",
+        "Je moet je aanmelden."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'zich' pour toutes les personnes au lieu d'accorder le pronom.",
+        "Oublier le pronom réfléchi."
+      ],
+      "objectifCommunication": "Pouvoir dire comment on se sent et parler d'erreurs ou de souvenirs.",
+      "tacheProduction": "Beschrijf hoe je je vandaag voelt en waarom.",
+      "vocabulaire": [
+        "zich voelen",
+        "zich vergissen",
+        "zich herinneren",
+        "zich aanmelden",
+        "zich wassen"
+      ],
+      "criteresMaitrise": "Accorder correctement le pronom réfléchi selon la personne dans au moins 4 phrases."
+    },
+    "exerciseIds": [
+      "ex_a2_refl1",
+      "ex_a2_refl2",
+      "ex_a2_refl3"
+    ]
+  },
+  "combiner_structures_verbales": {
+    "level": "A2",
+    "module": "a2-m2",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "verbes_modaux",
+      "verbes_separables_avances",
+      "perfectum_tous_verbes"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Introduire progressivement les phrases avec plusieurs verbes (modal + infinitif, perfectum de constructions modales).",
+      "comprendre": "On peut combiner un verbe modal avec un infinitif au présent, ou mettre toute la construction au perfectum (le modal reste alors à l'infinitif, en toute dernière position).",
+      "regle": "Présent : Ik moet morgen vroeg opstaan. Perfectum : Ik heb gisteren vroeg moeten opstaan (moeten reste à l'infinitif).",
+      "exemples": [
+        "Ik moet morgen vroeg opstaan.",
+        "Ik heb gisteren vroeg moeten opstaan.",
+        "Ik wil dat leren."
+      ],
+      "erreursFrequentes": [
+        "Mettre 'moeten' au participe passé ('gemoeten') au lieu de le laisser à l'infinitif.",
+        "Inverser l'ordre des deux verbes en fin de phrase."
+      ],
+      "objectifCommunication": "Pouvoir dire ce qu'on a dû ou voulu faire, pas seulement ce qu'on doit faire.",
+      "tacheProduction": "Vertel iets wat je gisteren moest doen.",
+      "vocabulaire": [
+        "moeten opstaan",
+        "willen leren",
+        "gisteren"
+      ],
+      "criteresMaitrise": "Construire correctement une phrase au perfectum avec un verbe modal, sans mettre le modal au participe passé."
+    },
+    "exerciseIds": [
+      "ex_a2_comb1",
+      "ex_a2_comb2",
+      "ex_a2_comb3"
+    ]
+  },
+  "futur_proche_gaan": {
+    "level": "A2",
+    "module": "a2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "present_recap"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser 'gaan + infinitif' pour exprimer un futur proche ou planifié.",
+      "comprendre": "Comme en français \"aller + infinitif\", le néerlandais utilise 'gaan' conjugué + infinitif en fin de phrase pour un futur proche ou une intention.",
+      "regle": "Sujet + gaan (conjugué) + ... + infinitif (fin). Le présent simple peut aussi exprimer un futur déjà planifié avec un indicateur de temps.",
+      "exemples": [
+        "Ik ga morgen werken.",
+        "We gaan vanavond koken.",
+        "Ik werk morgen. (futur proche exprimé au présent)"
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'gaan' pour toute action future même très lointaine ou incertaine (là 'zullen' est plus adapté).",
+        "Oublier de mettre l'infinitif en toute fin de phrase."
+      ],
+      "objectifCommunication": "Pouvoir annoncer ses projets proches et son planning.",
+      "tacheProduction": "Vertel wat je dit weekend gaat doen.",
+      "vocabulaire": [
+        "morgen",
+        "vanavond",
+        "dit weekend",
+        "straks"
+      ],
+      "criteresMaitrise": "Construire correctement une phrase avec gaan+infinitif pour un projet proche."
+    },
+    "exerciseIds": [
+      "ex_a2_gaan1",
+      "ex_a2_gaan2",
+      "ex_a2_gaan3"
+    ]
+  },
+  "zullen_futur": {
+    "level": "A2",
+    "module": "a2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "futur_proche_gaan"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser 'zullen' pour le futur, la promesse, la proposition et la décision spontanée.",
+      "comprendre": "'Zullen' est plus formel/général que 'gaan' et convient pour une promesse, une décision prise à l'instant, ou une prédiction.",
+      "regle": "Sujet + zal/zullen + ... + infinitif (fin). ik zal, jij zal/zult, hij zal, wij zullen.",
+      "exemples": [
+        "Ik zal het morgen doen.",
+        "Zullen we naar de bioscoop gaan?",
+        "Het zal wel lukken."
+      ],
+      "erreursFrequentes": [
+        "Confondre systématiquement zullen et gaan alors qu'ils ont des nuances différentes.",
+        "Oublier l'infinitif en fin de phrase."
+      ],
+      "objectifCommunication": "Faire une promesse, proposer une activité, exprimer une décision prise sur le moment.",
+      "tacheProduction": "Doe een voorstel aan een vriend met 'Zullen we...?'",
+      "vocabulaire": [
+        "beloven",
+        "voorstellen",
+        "zullen"
+      ],
+      "criteresMaitrise": "Utiliser 'zullen' pour formuler une proposition ou une promesse dans une phrase correcte."
+    },
+    "exerciseIds": [
+      "ex_a2_zull1",
+      "ex_a2_zull2",
+      "ex_a2_zull3"
+    ]
+  },
+  "zouden_intro": {
+    "level": "A2",
+    "module": "a2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "zullen_futur"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Introduire 'zouden' pour la proposition polie, le souhait et le conseil, sans couvrir tout le conditionnel de B1/B2.",
+      "comprendre": "'Zouden' (conditionnel de zullen) adoucit une demande, exprime un souhait ou un conseil, de façon polie.",
+      "regle": "Zou/zouden + sujet (inversion en question) + ... + infinitif. \"Zou je... kunnen ?\" est une formule de politesse très fréquente.",
+      "exemples": [
+        "Zou je me kunnen helpen?",
+        "Ik zou graag naar Nederland gaan.",
+        "Je zou meer moeten oefenen. (conseil)"
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'zullen' au lieu de 'zouden' pour une demande polie ('Zal je me helpen?' est trop direct).",
+        "Vouloir déjà construire des hypothèses complexes avec 'als... zou...' (vu en B1)."
+      ],
+      "objectifCommunication": "Demander poliment un service, exprimer un souhait, donner un conseil doux.",
+      "tacheProduction": "Vraag iemand beleefd om hulp met 'Zou je...?'",
+      "vocabulaire": [
+        "graag",
+        "beleefd",
+        "een advies geven"
+      ],
+      "criteresMaitrise": "Formuler une demande polie ou un souhait simple avec 'zou(den)'."
+    },
+    "exerciseIds": [
+      "ex_a2_zoud1",
+      "ex_a2_zoud2",
+      "ex_a2_zoud3"
+    ]
+  },
+  "modalite_situations_reelles": {
+    "level": "A2",
+    "module": "a2-m3",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "zouden_intro",
+      "verbes_modaux"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Combiner les verbes modaux (kunnen, moeten, mogen, willen, zullen, zouden) dans des situations réelles : demander, permettre, obliger, conseiller, exprimer une intention.",
+      "comprendre": "Chaque modal a une nuance précise ; choisir le bon selon la situation communicative est plus important que de simplement les connaître isolément.",
+      "regle": "kunnen=capacité/possibilité ; moeten=obligation ; mogen=permission ; willen=volonté ; zullen=décision/promesse ; zouden=politesse/conseil.",
+      "exemples": [
+        "Mag ik binnenkomen?",
+        "Je moet een afspraak maken.",
+        "Zou u me kunnen helpen?",
+        "Ik wil dit graag proberen."
+      ],
+      "erreursFrequentes": [
+        "Confondre 'mogen' (permission) et 'kunnen' (capacité).",
+        "Utiliser 'moeten' là où 'zouden' (conseil) serait plus adapté et moins autoritaire."
+      ],
+      "objectifCommunication": "Choisir le bon verbe modal selon qu'on demande une permission, exprime une obligation ou donne un conseil.",
+      "tacheProduction": "Schrijf drie zinnen: een toestemming vragen, een verplichting uitleggen, een advies geven.",
+      "vocabulaire": [
+        "toestemming vragen",
+        "een verplichting",
+        "een advies geven"
+      ],
+      "criteresMaitrise": "Choisir le verbe modal approprié dans au moins 4 situations différentes sur 5."
+    },
+    "exerciseIds": [
+      "ex_a2_modal1",
+      "ex_a2_modal2",
+      "ex_a2_modal3"
+    ]
+  },
+  "er_lieu": {
+    "level": "A2",
+    "module": "a2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "prepositions_lieu"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser 'er' pour remplacer un complément de lieu déjà mentionné.",
+      "comprendre": "On ne répète pas un lieu déjà cité avec une préposition comme 'in' + lieu ; on utilise 'er' à sa place.",
+      "regle": "Ik woon in Mons. → Ik woon er (al drie jaar).",
+      "exemples": [
+        "Ik woon in Mons.",
+        "Ik woon er al drie jaar.",
+        "Werk je in Brussel? Ja, ik werk er."
+      ],
+      "erreursFrequentes": [
+        "Répéter le nom du lieu au lieu d'utiliser 'er'.",
+        "Oublier 'er' complètement, ce qui rend la phrase incomplète en néerlandais."
+      ],
+      "objectifCommunication": "Parler d'un lieu déjà mentionné sans le répéter, comme un locuteur natif.",
+      "tacheProduction": "Vertel waar je woont en hoe lang je er al woont.",
+      "vocabulaire": [
+        "er",
+        "al",
+        "sinds"
+      ],
+      "criteresMaitrise": "Utiliser 'er' pour reprendre un lieu déjà mentionné dans au moins 3 phrases."
+    },
+    "exerciseIds": [
+      "ex_a2_erlieu1",
+      "ex_a2_erlieu2",
+      "ex_a2_erlieu3"
+    ]
+  },
+  "er_preposition": {
+    "level": "A2",
+    "module": "a2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "er_lieu"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser 'er' combiné à une préposition (eraan, erop, ermee...) pour reprendre un complément prépositionnel.",
+      "comprendre": "Quand une préposition porte sur une chose déjà mentionnée (pas une personne), on la combine avec 'er' en un seul mot : er+préposition.",
+      "regle": "denken aan iets → Ik denk eraan. wachten op iets → Ik wacht erop.",
+      "exemples": [
+        "Ik denk eraan.",
+        "Ik wacht erop.",
+        "Ik ben er blij mee."
+      ],
+      "erreursFrequentes": [
+        "Utiliser la préposition seule avec 'het' au lieu de la combiner avec 'er'.",
+        "Utiliser 'eraan/erop' pour une personne (on garde alors la préposition + pronom : 'aan hem')."
+      ],
+      "objectifCommunication": "Reprendre naturellement ce dont on parlait sans répéter toute l'expression.",
+      "tacheProduction": "Waar denk je vaak aan? Antwoord met 'Ik denk eraan...'",
+      "vocabulaire": [
+        "eraan denken",
+        "erop wachten",
+        "ermee blij zijn"
+      ],
+      "criteresMaitrise": "Former correctement au moins 2 combinaisons er+préposition fréquentes."
+    },
+    "exerciseIds": [
+      "ex_a2_erprep1",
+      "ex_a2_erprep2",
+      "ex_a2_erprep3"
+    ]
+  },
+  "er_quantite": {
+    "level": "A2",
+    "module": "a2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "er_lieu"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser 'er' avec une expression de quantité.",
+      "comprendre": "Quand on répond à une question de quantité sans répéter le nom, on ajoute 'er' devant le nombre/quantificateur.",
+      "regle": "Ik heb drie boeken. → Ik heb er drie. Hoeveel heb je er?",
+      "exemples": [
+        "Ik heb drie boeken.",
+        "Ik heb er drie.",
+        "Hoeveel heb je er?",
+        "Ik heb er geen."
+      ],
+      "erreursFrequentes": [
+        "Oublier 'er' en répondant juste par le nombre.",
+        "Mettre 'er' après le nombre au lieu d'avant."
+      ],
+      "objectifCommunication": "Répondre naturellement à une question de quantité.",
+      "tacheProduction": "Beantwoord: Hoeveel talen spreek je? Gebruik 'er'.",
+      "vocabulaire": [
+        "hoeveel",
+        "er... geen",
+        "er... drie"
+      ],
+      "criteresMaitrise": "Répondre correctement avec 'er + quantité' à une question 'hoeveel'."
+    },
+    "exerciseIds": [
+      "ex_a2_erquant1",
+      "ex_a2_erquant2",
+      "ex_a2_erquant3"
+    ]
+  },
+  "er_sujet_presentatif": {
+    "level": "A2",
+    "module": "a2-m4",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "er_lieu"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser 'er' comme sujet grammatical présentatif pour introduire quelque chose de nouveau.",
+      "comprendre": "Quand on annonce l'existence de quelque chose (comme \"il y a\" en français), le néerlandais utilise 'er' en position sujet.",
+      "regle": "Er is + nom singulier. Er zijn + nom pluriel.",
+      "exemples": [
+        "Er is een probleem.",
+        "Er zijn veel studenten.",
+        "Er is niemand thuis."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'het is' au lieu de 'er is' pour introduire une nouveauté.",
+        "Oublier l'accord is/zijn selon le singulier/pluriel du nom qui suit."
+      ],
+      "objectifCommunication": "Signaler l'existence ou l'absence de quelque chose dans une situation.",
+      "tacheProduction": "Beschrijf je klas: wat is er, wie is er?",
+      "vocabulaire": [
+        "er is",
+        "er zijn",
+        "niemand",
+        "iedereen"
+      ],
+      "criteresMaitrise": "Utiliser correctement 'er is/zijn' avec l'accord au singulier et au pluriel."
+    },
+    "exerciseIds": [
+      "ex_a2_ersuj1",
+      "ex_a2_ersuj2",
+      "ex_a2_ersuj3"
+    ]
+  },
+  "conjonctions_coordination": {
+    "level": "A2",
+    "module": "a2-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "hoofdzin"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Consolider les conjonctions de coordination (en, maar, of, want, dus) qui ne changent pas l'ordre des mots.",
+      "comprendre": "Ces conjonctions relient deux propositions principales sans provoquer d'inversion : chaque proposition garde son ordre normal (verbe en 2e position).",
+      "regle": "Proposition 1 + [en/maar/of/want/dus] + proposition 2 (ordre normal dans les deux).",
+      "exemples": [
+        "Ik ga niet mee, want ik ben moe.",
+        "Ik wil koffie, maar ik heb geen tijd.",
+        "Het regent, dus ik neem een paraplu."
+      ],
+      "erreursFrequentes": [
+        "Inverser sujet et verbe après la conjonction comme si c'était un élément en 1re position.",
+        "Confondre 'want' (car, coordination) et 'omdat' (parce que, subordination avec verbe à la fin)."
+      ],
+      "objectifCommunication": "Relier deux idées simples de façon naturelle (cause, opposition, alternative, conséquence).",
+      "tacheProduction": "Verbind twee zinnen met 'want' en twee met 'dus'.",
+      "vocabulaire": [
+        "want",
+        "dus",
+        "maar",
+        "of"
+      ],
+      "criteresMaitrise": "Utiliser correctement 'want' et 'dus' sans provoquer d'inversion."
+    },
+    "exerciseIds": [
+      "ex_a2_coord1",
+      "ex_a2_coord2",
+      "ex_a2_coord3"
+    ]
+  },
+  "subordonnee_omdat": {
+    "level": "A2",
+    "module": "a2-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "conjonctions_coordination",
+      "hoofdzin"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Construire une subordonnée de cause avec 'omdat', avec le verbe en fin de proposition.",
+      "comprendre": "Contrairement à 'want' (coordination), 'omdat' est une subordination : le verbe conjugué passe en toute fin de la subordonnée.",
+      "regle": "Proposition principale + omdat + sujet + ... + verbe (fin).",
+      "exemples": [
+        "Ik blijf thuis omdat ik ziek ben.",
+        "Ik leer Nederlands omdat ik in Nederland wil werken."
+      ],
+      "erreursFrequentes": [
+        "Garder le verbe en 2e position après 'omdat' comme dans une principale (confusion avec 'want').",
+        "Oublier de renvoyer TOUS les verbes conjugués en fin de subordonnée."
+      ],
+      "objectifCommunication": "Expliquer la cause d'une action ou d'une situation.",
+      "tacheProduction": "Leg uit waarom je Nederlands leert, met 'omdat'.",
+      "vocabulaire": [
+        "omdat",
+        "de reden"
+      ],
+      "criteresMaitrise": "Placer correctement le verbe en fin de subordonnée avec 'omdat' dans au moins 3 phrases."
+    },
+    "exerciseIds": [
+      "ex_a2_omdat1",
+      "ex_a2_omdat2",
+      "ex_a2_omdat3"
+    ]
+  },
+  "dat_of_als": {
+    "level": "A2",
+    "module": "a2-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "subordonnee_omdat"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les subordonnées avec 'dat' (que), 'of' (si/est-ce que) et 'als' (si condition).",
+      "comprendre": "Ces trois mots introduisent une subordonnée avec le verbe en fin de proposition, comme 'omdat'.",
+      "regle": "Ik denk dat... / Ik weet niet of... / Als + condition, + proposition principale (avec inversion si 'als' est en tête).",
+      "exemples": [
+        "Ik denk dat hij komt.",
+        "Ik weet niet of hij komt.",
+        "Als het regent, blijf ik thuis."
+      ],
+      "erreursFrequentes": [
+        "Confondre 'of' (si, question indirecte) avec 'als' (si, condition).",
+        "Oublier l'inversion dans la principale quand la subordonnée 'als' est placée en premier."
+      ],
+      "objectifCommunication": "Rapporter une pensée, une incertitude, ou poser une condition simple.",
+      "tacheProduction": "Schrijf een zin met 'dat', een met 'of' en een met 'als'.",
+      "vocabulaire": [
+        "denken dat",
+        "weten of",
+        "als... dan"
+      ],
+      "criteresMaitrise": "Distinguer 'dat', 'of' et 'als' et les utiliser avec le verbe en fin de subordonnée."
+    },
+    "exerciseIds": [
+      "ex_a2_datofals1",
+      "ex_a2_datofals2",
+      "ex_a2_datofals3"
+    ]
+  },
+  "connecteurs_temporels": {
+    "level": "A2",
+    "module": "a2-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "subordonnee_omdat"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser les connecteurs temporels de subordination : toen, terwijl, voordat, nadat.",
+      "comprendre": "Ces connecteurs expriment une relation temporelle entre deux actions et exigent le verbe en fin de subordonnée, comme 'omdat'.",
+      "regle": "toen (quand, passé ponctuel) ; terwijl (pendant que) ; voordat (avant que) ; nadat (après que).",
+      "exemples": [
+        "Toen ik thuiskwam, was hij al weg.",
+        "Ik eet voordat ik vertrek.",
+        "Terwijl ik kook, luister ik muziek."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'als' au lieu de 'toen' pour un fait passé unique.",
+        "Oublier l'inversion dans la principale quand la subordonnée est en tête."
+      ],
+      "objectifCommunication": "Situer deux actions l'une par rapport à l'autre dans le temps.",
+      "tacheProduction": "Vertel iets met 'terwijl' (twee dingen tegelijk).",
+      "vocabulaire": [
+        "toen",
+        "terwijl",
+        "voordat",
+        "nadat"
+      ],
+      "criteresMaitrise": "Distinguer 'toen' d'un fait ponctuel passé et l'utiliser correctement avec le verbe en fin de subordonnée."
+    },
+    "exerciseIds": [
+      "ex_a2_connect1",
+      "ex_a2_connect2",
+      "ex_a2_connect3"
+    ]
+  },
+  "ordre_mots_subordonnee": {
+    "level": "A2",
+    "module": "a2-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "dat_of_als",
+      "connecteurs_temporels",
+      "inversion"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Maîtriser l'ordre des mots dans les phrases avec subordonnée, dans les deux ordres possibles (principale d'abord ou subordonnée d'abord).",
+      "comprendre": "Quand la subordonnée précède la principale, elle compte comme \"élément 1\" de la règle V2 : le verbe de la principale doit alors suivre directement, avant le sujet.",
+      "regle": "Hoofdzin + bijzin (ordre normal) OU Bijzin + [virgule] + verbe + sujet + ... (inversion dans la principale).",
+      "exemples": [
+        "Ik ga vanavond niet uit, omdat ik morgen werk.",
+        "Omdat ik morgen werk, ga ik vanavond niet uit."
+      ],
+      "erreursFrequentes": [
+        "Oublier l'inversion dans la principale quand la subordonnée est placée en premier.",
+        "Mettre le verbe de la subordonnée ailleurs qu'en toute fin de celle-ci."
+      ],
+      "objectifCommunication": "Varier la construction de ses phrases pour un discours plus naturel et fluide.",
+      "tacheProduction": "Herschrijf: 'Ik blijf thuis omdat ik ziek ben' met de bijzin eerst.",
+      "vocabulaire": [
+        "hoofdzin",
+        "bijzin"
+      ],
+      "criteresMaitrise": "Construire correctement une phrase avec inversion quand la subordonnée précède la principale."
+    },
+    "exerciseIds": [
+      "ex_a2_ordresub1",
+      "ex_a2_ordresub2",
+      "ex_a2_ordresub3"
+    ]
+  },
+  "om_te_infinitif": {
+    "level": "A2",
+    "module": "a2-m5",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "verbes_modaux"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser la construction 'om ... te + infinitif' pour exprimer un but.",
+      "comprendre": "'Om' introduit le but, 'te' précède l'infinitif qui se place en toute fin.",
+      "regle": "... om + (complément) + te + infinitif.",
+      "exemples": [
+        "Ik probeer Nederlands te leren.",
+        "Ik ga naar de winkel om brood te kopen."
+      ],
+      "erreursFrequentes": [
+        "Oublier 'om' quand la construction exprime un but explicite.",
+        "Oublier 'te' devant l'infinitif."
+      ],
+      "objectifCommunication": "Expliquer le but d'une action.",
+      "tacheProduction": "Waarom leer je Nederlands? Antwoord met 'om... te'.",
+      "vocabulaire": [
+        "om... te",
+        "proberen te"
+      ],
+      "criteresMaitrise": "Construire correctement une phrase de but avec 'om... te + infinitif'."
+    },
+    "exerciseIds": [
+      "ex_a2_omte1",
+      "ex_a2_omte2",
+      "ex_a2_omte3"
+    ]
+  },
+  "demonstratifs_approfondis": {
+    "level": "A2",
+    "module": "a2-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "demonstratifs"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser spontanément deze/die/dit/dat dans des situations quotidiennes variées.",
+      "comprendre": "Révision et automatisation des démonstratifs déjà vus en A1, avec des usages plus variés (désigner, comparer, choisir).",
+      "regle": "deze/dit = proche ; die/dat = loin. deze/die pour les noms 'de', dit/dat pour les noms 'het'.",
+      "exemples": [
+        "Neem je deze tas of die tas?",
+        "Dit boek is interessanter dan dat boek.",
+        "Wat is dit?"
+      ],
+      "erreursFrequentes": [
+        "Hésiter entre deze/die selon le genre du nom sans tenir compte aussi de la distance.",
+        "Utiliser 'dat' pour désigner quelque chose de proche."
+      ],
+      "objectifCommunication": "Choisir/comparer spontanément entre deux objets ou options dans une conversation.",
+      "tacheProduction": "Vergelijk twee dingen in de kamer met 'deze' en 'die'.",
+      "vocabulaire": [
+        "deze",
+        "die",
+        "dit",
+        "dat"
+      ],
+      "criteresMaitrise": "Utiliser correctement les 4 démonstratifs selon le genre et la distance, sans hésitation."
+    },
+    "exerciseIds": [
+      "ex_a2_demo1",
+      "ex_a2_demo2",
+      "ex_a2_demo3"
+    ]
+  },
+  "pronoms_relatifs": {
+    "level": "A2",
+    "module": "a2-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "demonstratifs_approfondis"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Introduire les pronoms relatifs de base : die, dat, waar.",
+      "comprendre": "'Die' pour les noms 'de' et le pluriel, 'dat' pour les noms 'het' singulier, 'waar' pour un lieu. Le verbe de la relative va en fin de proposition.",
+      "regle": "[nom 'de'] + die + ... + verbe. [nom 'het'] + dat + ... + verbe. [lieu] + waar + ... + verbe.",
+      "exemples": [
+        "De man die daar staat, is mijn buur.",
+        "Het boek dat ik lees, is interessant.",
+        "De stad waar ik woon, is klein."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'dat' pour un nom 'de' au lieu de 'die'.",
+        "Oublier de renvoyer le verbe en fin de relative."
+      ],
+      "objectifCommunication": "Décrire précisément une personne, une chose ou un lieu en une seule phrase.",
+      "tacheProduction": "Beschrijf een vriend met 'die' en een plaats met 'waar'.",
+      "vocabulaire": [
+        "die",
+        "dat",
+        "waar"
+      ],
+      "criteresMaitrise": "Choisir correctement die/dat/waar selon le nom antécédent, avec le verbe en fin de relative."
+    },
+    "exerciseIds": [
+      "ex_a2_relat1",
+      "ex_a2_relat2",
+      "ex_a2_relat3"
+    ]
+  },
+  "comparatif_approfondi": {
+    "level": "A2",
+    "module": "a2-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "comparatif"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Approfondir le comparatif, y compris les formes irrégulières et les structures 'dan' / 'even... als'.",
+      "comprendre": "Le comparatif régulier ajoute -er ; certaines formes sont irrégulières (goed→beter, veel→meer, weinig→minder). 'dan' compare une différence, 'even... als' une égalité.",
+      "regle": "[adjectif+er] + dan + ... OU even + [adjectif] + als + ...",
+      "exemples": [
+        "Dit is groter dan dat.",
+        "Nederlands is moeilijker dan Engels, vind ik.",
+        "Hij is even oud als ik."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'meer' + adjectif au lieu de la forme en -er pour les adjectifs courts.",
+        "Confondre 'dan' (différence) et 'als' (égalité)."
+      ],
+      "objectifCommunication": "Comparer deux choses ou personnes avec nuance.",
+      "tacheProduction": "Vergelijk twee steden die je kent.",
+      "vocabulaire": [
+        "beter",
+        "meer",
+        "minder",
+        "even... als"
+      ],
+      "criteresMaitrise": "Utiliser correctement 'dan' et 'even... als' avec les formes comparatives, y compris irrégulières."
+    },
+    "exerciseIds": [
+      "ex_a2_compapp1",
+      "ex_a2_compapp2",
+      "ex_a2_compapp3"
+    ]
+  },
+  "superlatif_approfondi": {
+    "level": "A2",
+    "module": "a2-m6",
+    "skills": [
+      "grammaire"
+    ],
+    "prerequisites": [
+      "superlatif",
+      "comparatif_approfondi"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Approfondir le superlatif dans des phrases d'opinion et de choix.",
+      "comprendre": "Le superlatif épithète prend -e (het beste, het meest interessante), l'attribut reste sans -e après 'het'.",
+      "regle": "het + adjectif+st(e) [+ nom]. Formes irrégulières : goed → het beste.",
+      "exemples": [
+        "Wat vind je het leukste?",
+        "Dit is het beste restaurant.",
+        "Dit boek is het meest interessante dat ik ooit heb gelezen."
+      ],
+      "erreursFrequentes": [
+        "Oublier 'het' devant le superlatif.",
+        "Oublier le -e épithète devant un nom."
+      ],
+      "objectifCommunication": "Donner son avis sur ce qu'on préfère parmi plusieurs options.",
+      "tacheProduction": "Wat is het beste restaurant dat je kent? Leg uit waarom.",
+      "vocabulaire": [
+        "het beste",
+        "het leukste",
+        "het meest interessante"
+      ],
+      "criteresMaitrise": "Utiliser correctement le superlatif avec 'het' dans une phrase d'opinion."
+    },
+    "exerciseIds": [
+      "ex_a2_superlapp1",
+      "ex_a2_superlapp2",
+      "ex_a2_superlapp3"
+    ]
+  },
+  "quantificateurs": {
+    "level": "A2",
+    "module": "a2-m6",
+    "skills": [
+      "grammaire",
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "pluriel"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Utiliser précisément les quantificateurs : veel, weinig, genoeg, te veel, te weinig, een beetje, enkele, alle, beide, elke.",
+      "comprendre": "Chaque quantificateur a une nuance précise (excès, insuffisance, suffisance, totalité, dualité) utile pour décrire une situation avec précision.",
+      "regle": "veel/weinig + nom pluriel ou indénombrable ; alle/elke + nom (elke = toujours singulier) ; beide + nom pluriel.",
+      "exemples": [
+        "Ik heb genoeg tijd.",
+        "Er zijn te veel mensen.",
+        "Ik ken enkele woorden.",
+        "Beide opties zijn goed.",
+        "Elke dag leer ik iets nieuws."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'elke' avec un nom pluriel (elke prend toujours un nom singulier).",
+        "Confondre 'weinig' (peu, insuffisant) et 'een beetje' (un peu, quantité limitée mais positive)."
+      ],
+      "objectifCommunication": "Décrire une situation avec précision en termes de quantité (temps, argent, personnes...).",
+      "tacheProduction": "Beschrijf je week: wat heb je te veel of te weinig gedaan?",
+      "vocabulaire": [
+        "veel",
+        "weinig",
+        "genoeg",
+        "een beetje",
+        "enkele",
+        "alle",
+        "beide",
+        "elke"
+      ],
+      "criteresMaitrise": "Utiliser au moins 5 quantificateurs différents correctement dans des phrases variées."
+    },
+    "exerciseIds": [
+      "ex_a2_quant1",
+      "ex_a2_quant2",
+      "ex_a2_quant3"
+    ]
+  },
+  "telephone_rendezvous": {
+    "level": "A2",
+    "module": "a2-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "questions",
+      "nombres"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Prendre, déplacer, annuler et confirmer un rendez-vous par téléphone.",
+      "comprendre": "Combine formules de politesse, questions sur l'heure/la date, et verbes modaux pour gérer un rendez-vous du début à la fin.",
+      "regle": "Ik wil graag een afspraak maken. Kan het ook op... ? Ik moet mijn afspraak verzetten/annuleren.",
+      "exemples": [
+        "Ik wil graag een afspraak maken.",
+        "Kan het ook volgende week?",
+        "Ik moet mijn afspraak helaas annuleren.",
+        "Tot dan!"
+      ],
+      "erreursFrequentes": [
+        "Être trop direct sans formule de politesse ('Ik wil een afspraak' sans 'graag').",
+        "Ne pas savoir proposer une alternative d'horaire poliment."
+      ],
+      "objectifCommunication": "Gérer un appel téléphonique complet pour un rendez-vous.",
+      "tacheProduction": "Maak telefonisch een afspraak (schrijf de dialoog).",
+      "vocabulaire": [
+        "een afspraak maken",
+        "verzetten",
+        "annuleren",
+        "bevestigen"
+      ],
+      "criteresMaitrise": "Produire un court dialogue cohérent couvrant demande, proposition d'horaire et confirmation."
+    },
+    "exerciseIds": [
+      "ex_a2_tel1",
+      "ex_a2_tel2",
+      "ex_a2_tel3"
+    ]
+  },
+  "logement_a2": {
+    "level": "A2",
+    "module": "a2-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "maison"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Décrire un logement, signaler un problème et demander une réparation.",
+      "comprendre": "Combine vocabulaire du logement (A1) avec des structures pour se plaindre poliment et demander une action.",
+      "regle": "Er is een probleem met... Zou u dit kunnen repareren? De huur is...",
+      "exemples": [
+        "Er is een probleem met de verwarming.",
+        "Zou u dit kunnen repareren?",
+        "Wat kost de huur per maand?"
+      ],
+      "erreursFrequentes": [
+        "Décrire le problème avec des mots isolés plutôt qu'une phrase complète.",
+        "Être trop direct pour demander une réparation ('Repareer dit!' au lieu d'une formule polie)."
+      ],
+      "objectifCommunication": "Signaler un problème de logement et demander une solution de façon polie.",
+      "tacheProduction": "Beschrijf een probleem in je appartement en vraag om hulp.",
+      "vocabulaire": [
+        "de verwarming",
+        "de huur",
+        "repareren",
+        "een probleem melden"
+      ],
+      "criteresMaitrise": "Décrire un problème de logement et formuler une demande de réparation polie."
+    },
+    "exerciseIds": [
+      "ex_a2_log1",
+      "ex_a2_log2",
+      "ex_a2_log3"
+    ]
+  },
+  "sante": {
+    "level": "A2",
+    "module": "a2-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "telephone_rendezvous"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Expliquer un symptôme simple, prendre rendez-vous chez le médecin et comprendre des instructions simples.",
+      "comprendre": "Vocabulaire de santé combiné aux structures déjà vues (avoir mal à, devoir prendre un médicament).",
+      "regle": "Ik heb pijn in/aan... Ik voel me niet goed. U moet... (instruction du médecin).",
+      "exemples": [
+        "Ik heb hoofdpijn.",
+        "Ik voel me niet goed.",
+        "U moet twee keer per dag deze pillen nemen."
+      ],
+      "erreursFrequentes": [
+        "Utiliser 'ik ben ziek in' au lieu de 'ik heb pijn aan/in'.",
+        "Ne pas comprendre une instruction avec un verbe modal ('moeten') donnée par le médecin."
+      ],
+      "objectifCommunication": "Décrire un symptôme et comprendre les instructions basiques d'un médecin.",
+      "tacheProduction": "Beschrijf een symptoom en maak een afspraak bij de dokter.",
+      "vocabulaire": [
+        "pijn hebben",
+        "zich niet goed voelen",
+        "pillen nemen",
+        "de dokter"
+      ],
+      "criteresMaitrise": "Décrire un symptôme simple et comprendre une instruction médicale de base."
+    },
+    "exerciseIds": [
+      "ex_a2_sante1",
+      "ex_a2_sante2",
+      "ex_a2_sante3"
+    ]
+  },
+  "voyage_transport": {
+    "level": "A2",
+    "module": "a2-m7",
+    "skills": [
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "transport"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Demander une information de transport, acheter un billet, demander son chemin et signaler un problème de trajet.",
+      "comprendre": "Combine vocabulaire transport (A1) avec des questions et des formulations pour gérer un imprévu de voyage.",
+      "regle": "Hoe kom ik bij...? Ik wil een kaartje naar... De trein heeft vertraging.",
+      "exemples": [
+        "Hoe kom ik bij het station?",
+        "Ik wil graag een kaartje naar Amsterdam.",
+        "De trein heeft vertraging."
+      ],
+      "erreursFrequentes": [
+        "Confondre 'hoe kom ik bij' (comment j'arrive à) et 'waar is' (où est).",
+        "Ne pas savoir signaler un imprévu (retard, changement de quai)."
+      ],
+      "objectifCommunication": "Se débrouiller pour un déplacement, y compris en cas d'imprévu.",
+      "tacheProduction": "Vraag de weg naar het station en koop een kaartje.",
+      "vocabulaire": [
+        "een kaartje",
+        "vertraging",
+        "het spoor",
+        "de weg vragen"
+      ],
+      "criteresMaitrise": "Formuler une demande de chemin et gérer un imprévu de transport simple."
+    },
+    "exerciseIds": [
+      "ex_a2_voy1",
+      "ex_a2_voy2",
+      "ex_a2_voy3"
+    ]
+  },
+  "interaction_expression_personnelle": {
+    "level": "A2",
+    "module": "a2-m8",
+    "skills": [
+      "grammaire",
+      "vocabulaire"
+    ],
+    "prerequisites": [
+      "choix_temps_passe",
+      "comparatif_approfondi"
+    ],
+    "status": "pret",
+    "content": {
+      "objectif": "Maintenir une interaction A2 complète sur un sujet familier : donner son opinion, être d'accord/en désaccord, justifier, comparer, demander une précision ou de l'aide, reformuler.",
+      "comprendre": "C'est la synthèse communicative du niveau A2 : mobiliser plusieurs structures déjà vues (opinion, comparaison, cause) dans une conversation suivie plutôt que des phrases isolées.",
+      "regle": "Ik vind dat... / Volgens mij... (opinion) ; Ik ben het met je eens / Ik denk het niet (accord/désaccord) ; omdat... (justifier) ; Ik vind X beter dan Y (comparer) ; Wat bedoel je? (précision) ; Kun je me helpen? (aide) ; Ik bedoel... (reformuler).",
+      "exemples": [
+        "Ik vind dat we meer buiten moeten zijn.",
+        "Ik ben het met je eens.",
+        "Ik denk het niet, want...",
+        "Wat bedoel je precies?",
+        "Ik bedoel dat..."
+      ],
+      "erreursFrequentes": [
+        "Répondre uniquement par oui/non sans jamais justifier son opinion.",
+        "Ne pas savoir demander une précision quand on ne comprend pas, et rester bloqué."
+      ],
+      "objectifCommunication": "Tenir une conversation suivie sur un sujet familier (logement, travail, études, loisirs, voyage, ville, achats), pas seulement répondre à des questions isolées.",
+      "tacheProduction": "Voer een gesprek (schriftelijk) over een van deze onderwerpen: logement, travail, études, loisirs, voyage, ville, achats. Geef je mening, wees het eens of oneens, en leg uit waarom.",
+      "vocabulaire": [
+        "ik vind dat",
+        "volgens mij",
+        "ik ben het eens",
+        "ik denk het niet",
+        "wat bedoel je",
+        "ik bedoel"
+      ],
+      "criteresMaitrise": "Produire un échange d'au moins 4-5 répliques enchaînées restant sur le sujet, avec au moins une opinion justifiée et une comparaison."
+    },
+    "exerciseIds": [
+      "ex_a2_inter1",
+      "ex_a2_inter2",
+      "ex_a2_inter3",
+      "ex_a2_inter4"
+    ]
   }
 }
