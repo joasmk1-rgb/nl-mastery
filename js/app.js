@@ -180,7 +180,7 @@ function scheduleCloudSync(immediate) {
 function showCompte() {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('compte-view').classList.add('active');
-    setActiveNav('nav-compte');
+    setActiveNav('nav-profil');
     accSwitchTab(accMode);
     if (currentUser) accShowLoggedIn(); else accShowLoggedOut();
     if (!firebaseAvailable) accSetError("Service de comptes indisponible pour le moment (connexion impossible). Ta progression locale reste intacte.");
@@ -890,6 +890,119 @@ if (firebaseAvailable) {
             showApprendre();
         }
 
+        // ===== Vue "Jouer" (hub d'accès aux jeux existants — aucune nouvelle logique de jeu) =====
+        function showJouer() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('jouer-view').classList.add('active');
+            setActiveNav('nav-jouer');
+        }
+
+        // Ouvre la leçon d'une notion puis le panneau de production déjà existant (même schéma que
+        // la branche 'a_pratiquer' de startRecommendedActivity) : aucun nouveau système Gemini.
+        function goToProduction(notionId) {
+            showLesson(notionId);
+            setTimeout(() => {
+                openProductionPanel(notionId, 'ecrit');
+                const panel = document.getElementById('production-panel');
+                if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 50);
+        }
+
+        // ===== Vue "Pratiquer" (roleplay, pratique ciblée, production — 100% de systèmes existants) =====
+        function showPratiquer() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('pratiquer-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            renderPratiquer();
+        }
+
+        function renderPratiquer() {
+            const targetedList = document.getElementById('pratiquer-targeted-list');
+            if (targetedList) {
+                const entries = Object.keys(NOTION_TARGETED_PRACTICE);
+                targetedList.innerHTML = entries.length ? entries.map(nid => {
+                    const cfg = NOTION_TARGETED_PRACTICE[nid];
+                    return `<div class="hub-card" onclick="rpStartTargetedPractice('${nid}')">
+                        <span class="hub-card-icon">🎯</span>
+                        <div class="hub-card-title">${cfg.label}</div>
+                        <div class="hub-card-desc">Pratique orale ciblée avec Gemini.</div>
+                    </div>`;
+                }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Pas encore de pratique ciblée disponible.</div>`;
+            }
+
+            const prodList = document.getElementById('pratiquer-production-list');
+            if (prodList) {
+                if (!curriculumLoaded) {
+                    prodList.innerHTML = `<div style="font-size:0.8rem; color:var(--text-secondary);">Chargement du programme...</div>`;
+                } else {
+                    const statusPriority = { faible: 0, a_pratiquer: 1, en_cours: 2, decouverte: 3, entrainee: 4, presque_maitrisee: 5, maitrisee: 6, jamais_etudiee: 7 };
+                    const candidates = Object.keys(curriculumNotions)
+                        .filter(id => curriculumNotions[id].status === 'pret' && isNotionUnlocked(id) && curriculumNotions[id].content && curriculumNotions[id].content.tacheProduction)
+                        .sort((a, b) => (statusPriority[getNotionStatus(a)] ?? 9) - (statusPriority[getNotionStatus(b)] ?? 9))
+                        .slice(0, 8);
+                    prodList.innerHTML = candidates.length ? candidates.map(id => {
+                        const notion = curriculumNotions[id];
+                        const titre = notion.content.titre || id.replace(/_/g, ' ');
+                        return `<div class="hub-card" onclick="goToProduction('${id}')">
+                            <span class="hub-card-icon">✍️</span>
+                            <div class="hub-card-title">${titre}</div>
+                            <div class="hub-card-desc">${getNotionStatusLabel(getNotionStatus(id))}</div>
+                        </div>`;
+                    }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Débloque des notions dans Apprendre pour accéder à la production écrite.</div>`;
+                }
+            }
+        }
+
+        // ===== Vue "Réviser" (mots ratés, déterminants, notions fragiles — systèmes existants) =====
+        function showReviser() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('reviser-view').classList.add('active');
+            setActiveNav('nav-home');
+            renderReviser();
+        }
+
+        function renderReviser() {
+            const el = document.getElementById('reviser-content');
+            if (!el) return;
+            const wordCount = getReviewItems().length;
+            const articleCount = getArticleReviewItems().length;
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 8) : [];
+            el.innerHTML = `
+                <div class="hub-grid single">
+                    <div class="hub-card" onclick="startRevision()">
+                        <span class="hub-card-icon">🔁</span>
+                        <div class="hub-card-title">Mots à revoir</div>
+                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''} à retravailler.</div>
+                    </div>
+                    <div class="hub-card" onclick="startArticleRevision()">
+                        <span class="hub-card-icon">🔤</span>
+                        <div class="hub-card-title">Déterminants (de/het)</div>
+                        <div class="hub-card-desc">${articleCount} mot${articleCount > 1 ? 's' : ''} à revoir.</div>
+                    </div>
+                </div>
+                ${weaknesses.length ? `
+                <div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">Notions fragiles</div>
+                <div class="hub-grid single">
+                    ${weaknesses.map(w => `
+                        <div class="hub-card" onclick="showLesson('${w.id}')">
+                            <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</div>
+                            <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
+                        </div>`).join('')}
+                </div>` : ''}`;
+        }
+
+        // ===== Hub "Mots" : bascule entre les onglets Liste / Par thème (aucun changement de données) =====
+        function motsShowTab(tab) {
+            const liste = document.getElementById('mots-panel-liste');
+            const themes = document.getElementById('mots-panel-themes');
+            const tabListe = document.getElementById('mots-tab-liste');
+            const tabThemes = document.getElementById('mots-tab-themes');
+            if (liste) liste.style.display = tab === 'liste' ? '' : 'none';
+            if (themes) themes.style.display = tab === 'themes' ? '' : 'none';
+            if (tabListe) tabListe.classList.toggle('active', tab === 'liste');
+            if (tabThemes) tabThemes.classList.toggle('active', tab === 'themes');
+        }
+
         // ===== Dashboard =====
         function renderDashboard() {
             const block = document.getElementById('dashboard-block');
@@ -920,35 +1033,41 @@ if (firebaseAvailable) {
                 }
             }
 
-            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 5) : [];
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 3) : [];
             const weakHtml = weaknesses.length ? weaknesses.map(w => `
                 <div class="dash-weak-row" style="cursor:pointer;" onclick="showLesson('${w.id}')">
                     <span>${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</span>
                     <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
-                </div>`).join('') : `<div style="font-size:0.8rem; color:#888;">Rien à signaler pour l'instant.</div>`;
+                </div>`).join('') : '';
+
+            const masteredCount = curriculumLoaded
+                ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
+                : 0;
+            const totalReadyCount = curriculumLoaded
+                ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret').length
+                : 0;
 
             block.innerHTML = `
                 <div class="dash-card">
+                    <div class="section-title" style="margin-bottom:6px;">Ta progression</div>
                     <div class="dash-level-row">
                         <span class="dash-level-badge">${vp.level} — ${vp.pct}%</span>
-                        <span style="font-size:0.75rem; color:#888;">niveau interne estimé</span>
+                        <span style="font-size:0.75rem; color:var(--text-secondary);">niveau interne estimé</span>
                     </div>
                     <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${vp.pct}%"></div></div>
+                    ${curriculumLoaded ? `<div style="font-size:0.78rem; color:var(--text-secondary); margin-top:8px;">📚 ${masteredCount}/${totalReadyCount} notions maîtrisées · 🔁 ${reviewCount} mot${reviewCount > 1 ? 's' : ''} à réviser</div>` : ''}
                 </div>
                 ${continueHtml}
-                <div class="dash-card">
-                    <h3 style="margin:0 0 10px; font-size:0.9rem;">Aujourd'hui</h3>
-                    <div class="dash-today-grid">
-                        <div class="dash-today-item"><div class="dash-today-num">${reviewCount}</div><div class="dash-today-label">révisions</div></div>
-                        <div class="dash-today-item"><div class="dash-today-num">${curriculumLoaded && getRecommendation() ? 1 : 0}</div><div class="dash-today-label">leçon</div></div>
-                        <div class="dash-today-item"><div class="dash-today-num">${curriculumLoaded && getRecommendation() ? (getRecommendation().notion.exerciseIds || []).length : 0}</div><div class="dash-today-label">exercices</div></div>
-                        <div class="dash-today-item" style="cursor:pointer;" onclick="showRoleplay()"><div class="dash-today-num">5 min</div><div class="dash-today-label">expression orale</div></div>
-                    </div>
+                <div class="quick-access-row">
+                    <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
+                    <div class="quick-access-card" onclick="showJouer()"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
+                    <div class="quick-access-card" onclick="showPratiquer()"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
+                    <div class="quick-access-card" onclick="showApprendre()"><div class="qa-icon">📚</div><div class="qa-label">Apprendre</div></div>
                 </div>
-                <div class="dash-card">
-                    <h3 style="margin:0 0 10px; font-size:0.9rem;">Tes principales faiblesses</h3>
+                ${weakHtml ? `<div class="dash-card">
+                    <h3 style="margin:0 0 10px; font-size:0.9rem;">À revoir</h3>
                     ${weakHtml}
-                </div>`;
+                </div>` : ''}`;
         }
 
         // ===== Vue "Apprendre" (parcours par niveau/module/notion) =====
@@ -979,22 +1098,50 @@ if (firebaseAvailable) {
                 return;
             }
             listEl.innerHTML = modulesForLevel.map(mod => {
+                const readyNotionIds = mod.notions.filter(nid => curriculumNotions[nid] && curriculumNotions[nid].status === 'pret');
+                const masteredInModule = readyNotionIds.filter(nid => getNotionStatus(nid) === 'maitrisee').length;
+                const modPct = readyNotionIds.length ? Math.round((masteredInModule / readyNotionIds.length) * 100) : 0;
+
                 const rows = mod.notions.map(nid => {
                     const notion = curriculumNotions[nid];
                     if (!notion) return '';
                     const ready = notion.status === 'pret';
                     const unlocked = ready && isNotionUnlocked(nid);
-                    const mastery = ready ? computeNotionMastery(nid) : 0;
                     const label = (ready && notion.content && notion.content.titre) ? notion.content.titre : nid.replace(/_/g, ' ');
-                    const statusHtml = !ready
-                        ? `<span class="notion-status pending">à venir</span>`
-                        : `<span class="notion-status s${mastery}">${mastery}/5</span>`;
+
+                    let emoji, statusLabel, statusClass;
+                    if (!ready) {
+                        emoji = '⚪'; statusLabel = 'à venir'; statusClass = 'st-pending';
+                    } else if (!unlocked) {
+                        emoji = '🔒'; statusLabel = 'Verrouillée'; statusClass = 'st-pending';
+                    } else {
+                        const status = getNotionStatus(nid);
+                        if (status === 'maitrisee') { emoji = '🟢'; statusLabel = 'Maîtrisée'; statusClass = 'st-maitrisee'; }
+                        else if (status === 'faible') { emoji = '🟡'; statusLabel = getNotionStatusLabel(status); statusClass = 'st-faible'; }
+                        else if (status === 'a_pratiquer') { emoji = '🟡'; statusLabel = getNotionStatusLabel(status); statusClass = 'st-a_pratiquer'; }
+                        else if (status === 'jamais_etudiee') { emoji = '⚪'; statusLabel = 'Pas encore étudiée'; statusClass = 'st-jamais_etudiee'; }
+                        else { emoji = '🟠'; statusLabel = 'En cours'; statusClass = 'st-en_cours'; }
+                    }
+
                     const clickAttr = (ready && unlocked) ? `onclick="showLesson('${nid}')"` : '';
                     return `<div class="notion-row ${(!ready || !unlocked) ? 'locked' : ''}" ${clickAttr}>
-                        <span>${label}</span>${statusHtml}
+                        <span class="notion-emoji">${emoji}</span>
+                        <span class="notion-label">${label}</span>
+                        <span class="notion-status ${statusClass}">${statusLabel}</span>
                     </div>`;
                 }).join('');
-                return `<div class="module-card"><h3>${mod.order}. ${mod.label}</h3>${rows}</div>`;
+
+                return `<div class="module-card">
+                    <div class="module-card-head">
+                        <span class="module-card-num">Module ${mod.order}</span>
+                    </div>
+                    <div class="module-card-title">${mod.label}</div>
+                    ${readyNotionIds.length ? `<div class="module-progress-row">
+                        <div class="module-progress-bar"><div class="module-progress-fill" style="width:${modPct}%"></div></div>
+                        <span class="module-progress-pct">${modPct}%</span>
+                    </div>` : ''}
+                    ${rows}
+                </div>`;
             }).join('');
         }
 
@@ -1022,20 +1169,38 @@ if (firebaseAvailable) {
             const rpSuggestion = mastery >= 4 ? getRoleplaySuggestion(notionId) : null;
             document.getElementById('lesson-content').innerHTML = `
                 ${c.titre ? `<div class="lesson-titre">${c.titre}</div>` : ''}
-                <div class="lesson-block"><h3>🎯 Objectif</h3><p>${c.objectif || ''}</p></div>
-                <div class="lesson-block"><h3>📖 Comprendre</h3><p>${c.comprendre || ''}</p></div>
-                <div class="lesson-block"><h3>🇳🇱 Règle</h3><p>${c.regle || ''}</p></div>
-                <div class="lesson-block"><h3>👀 Exemples</h3>${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
-                ${c.contrastes ? `<div class="lesson-block lesson-contrastes"><h3>🔍 Points de friction</h3><p>${c.contrastes}</p></div>` : ''}
-                <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
-                ${c.objectifCommunication ? `<div class="lesson-block"><h3>💬 Objectif de communication</h3><p>${c.objectifCommunication}</p></div>` : ''}
-                ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><h3>🗂️ Vocabulaire utile</h3><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
-                ${c.tacheProduction ? renderProductionBlock(notionId, c.tacheProduction) : ''}
-                ${c.criteresMaitrise ? `<div class="lesson-block"><h3>✅ Tu maîtrises cette notion si...</h3><p>${c.criteresMaitrise}</p></div>` : ''}
-                <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
-                <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
-                ${exCount ? `<button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>` : ''}
-                ${rpSuggestion ? `<div class="roleplay-suggestion-card" onclick="showRoleplay(); rpShowCategory('${rpSuggestion.category}');">🎙️ Notion maîtrisée ! Envie de pratiquer à l'oral ?<br><b>${rpSuggestion.label}</b></div>` : ''}
+                <div class="lesson-stage">
+                    <div class="lesson-stage-label">🎯 Apprendre</div>
+                    <div class="lesson-block"><h3>🎯 Objectif</h3><p>${c.objectif || ''}</p></div>
+                </div>
+                <div class="lesson-stage">
+                    <div class="lesson-stage-label">📖 Comprendre</div>
+                    <div class="lesson-block"><h3>📖 Comprendre</h3><p>${c.comprendre || ''}</p></div>
+                    <div class="lesson-block"><h3>🇳🇱 Règle</h3><p>${c.regle || ''}</p></div>
+                    <div class="lesson-block"><h3>👀 Exemples</h3>${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
+                    ${c.contrastes ? `<div class="lesson-block lesson-contrastes"><h3>🔍 Points de friction</h3><p>${c.contrastes}</p></div>` : ''}
+                    <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
+                    <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
+                    <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
+                </div>
+                ${exCount ? `<div class="lesson-stage">
+                    <div class="lesson-stage-label">🧩 S'entraîner</div>
+                    <button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>
+                </div>` : ''}
+                ${c.tacheProduction ? `<div class="lesson-stage">
+                    <div class="lesson-stage-label">✍️ Produire</div>
+                    ${renderProductionBlock(notionId, c.tacheProduction)}
+                </div>` : ''}
+                ${(c.objectifCommunication || (c.vocabulaire && c.vocabulaire.length) || rpSuggestion) ? `<div class="lesson-stage">
+                    <div class="lesson-stage-label">💬 Utiliser</div>
+                    ${c.objectifCommunication ? `<div class="lesson-block"><h3>💬 Objectif de communication</h3><p>${c.objectifCommunication}</p></div>` : ''}
+                    ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><h3>🗂️ Vocabulaire utile</h3><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
+                    ${rpSuggestion ? `<div class="roleplay-suggestion-card" onclick="showRoleplay(); rpShowCategory('${rpSuggestion.category}');">🎙️ Notion maîtrisée ! Envie de pratiquer à l'oral ?<br><b>${rpSuggestion.label}</b></div>` : ''}
+                </div>` : ''}
+                ${c.criteresMaitrise ? `<div class="lesson-stage">
+                    <div class="lesson-stage-label">✅ Maîtriser</div>
+                    <div class="lesson-block"><h3>✅ Tu maîtrises cette notion si...</h3><p>${c.criteresMaitrise}</p></div>
+                </div>` : ''}
             `;
         }
 
@@ -1283,7 +1448,7 @@ if (firebaseAvailable) {
         function showConjugaison() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conjugaison-view').classList.add('active');
-            setActiveNav('nav-conjugaison');
+            setActiveNav('nav-profil');
             document.getElementById('conj-detail').innerHTML = '';
             if (!conjugationLoaded) {
                 document.getElementById('conj-list').innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -1597,7 +1762,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showWordList() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('wordlist-view').classList.add('active');
-            setActiveNav('nav-list');
+            setActiveNav('nav-profil');
             const filter = document.getElementById('wl-filter');
             const categories = [...new Set(fullDb.map(i => i.file))];
             filter.innerHTML = '<option value="">Toutes catégories</option>' +
@@ -1669,6 +1834,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showSwipeSelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('swipe-select-view').classList.add('active');
+            setActiveNav('nav-jouer');
             const cats = [...MAIN_CATEGORIES.map(c => c.file), ...new Set(fullDb.map(i => i.file).filter(f => !MAIN_CATEGORIES.some(c => c.file === f)))];
             const grid = document.getElementById('swipe-category-grid');
             grid.innerHTML = cats.map(cat => {
@@ -1895,7 +2061,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('session-title').innerText = '🔁 Révision (mots ratés)';
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
-            setActiveNav('nav-revision');
+            setActiveNav('nav-home');
             batchResults = [];
             document.getElementById('batch-recap').innerHTML = '';
             bumpMode('classique');
@@ -1958,6 +2124,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             articleQueue = [...items].sort(() => 0.5 - Math.random());
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('article-view').classList.add('active');
+            setActiveNav('nav-home');
             nextArticleQ();
         }
 
@@ -2221,6 +2388,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (fullDb.length < 6) { alert("Pas assez de mots chargés pour jouer au Memory."); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('memory-view').classList.add('active');
+            setActiveNav('nav-jouer');
             document.getElementById('memory-result').innerHTML = '';
             bumpMode('memory');
 
@@ -2306,6 +2474,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showTASelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('ta-select-view').classList.add('active');
+            setActiveNav('nav-jouer');
         }
 
         function startTimeAttack(durationSec) {
@@ -2414,6 +2583,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             anagramScore = 0;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('anagram-view').classList.add('active');
+            setActiveNav('nav-jouer');
             document.getElementById('anagram-score').innerText = 'Score : 0';
             nextAnagram();
         }
@@ -2501,7 +2671,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showInfo() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('info-view').classList.add('active');
-            setActiveNav('nav-info');
+            setActiveNav('nav-profil');
         }
 
         function renderProfil() {
@@ -2516,8 +2686,22 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 });
             const best = state.memoryHighScore;
             const vp = getVocabProgress();
+            const masteredNotions = curriculumLoaded
+                ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
+                : 0;
 
             document.getElementById('profil-content').innerHTML = `
+                <div class="profil-stat-grid">
+                    <div class="profil-stat-tile"><div class="ps-num">${vp.level}</div><div class="ps-label">Niveau CECR</div></div>
+                    <div class="profil-stat-tile"><div class="ps-num">⭐ ${state.xp || 0}</div><div class="ps-label">XP</div></div>
+                    <div class="profil-stat-tile"><div class="ps-num">${masteredNotions}</div><div class="ps-label">Notions maîtrisées</div></div>
+                </div>
+                <div class="profil-menu">
+                    <div class="profil-menu-row" onclick="showWordList()"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showConjugaison()"><span class="pm-icon">🔤</span><span>Conjugaison</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
+                </div>
                 <div class="study-box" style="text-align:left;">
                     <h3>📊 Niveau CECR</h3>
                     <p>Niveau estimé : <b>${vp.level}</b><br>
@@ -2605,6 +2789,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showTestSelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('test-select-view').classList.add('active');
+            setActiveNav('nav-jouer');
         }
 
         function testableWords() {
@@ -2789,6 +2974,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function updateStats() {
             const { level } = getVocabProgress();
             document.getElementById('cecr-badge').innerText = level;
+            const xpBadge = document.getElementById('xp-mini-badge');
+            if (xpBadge) xpBadge.innerText = `⭐ ${state.xp || 0} XP`;
             updateRevisionButton();
             updateArticleRevisionButton();
             renderMainCategories();
@@ -3111,7 +3298,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showRoleplay() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('roleplay-view').classList.add('active');
-            setActiveNav('nav-roleplay');
+            setActiveNav('nav-pratiquer');
 
             const savedKey = localStorage.getItem('gemini_api_key');
             if (savedKey) document.getElementById('rp-api-key').value = savedKey;
@@ -3238,7 +3425,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             if (!cfg) { alert("Pratique ciblée non disponible pour cette notion."); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('roleplay-view').classList.add('active');
-            setActiveNav('nav-roleplay');
+            setActiveNav('nav-pratiquer');
             const savedKey = localStorage.getItem('gemini_api_key');
             if (savedKey) document.getElementById('rp-api-key').value = savedKey;
             const prompt = buildTargetedPracticePrompt(notionId);
