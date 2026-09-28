@@ -124,9 +124,19 @@
         .dash-level-badge { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
         .dash-progress-bar { width: 100%; height: 10px; background: var(--border); border-radius: 6px; overflow: hidden; margin-top: 6px; }
         .dash-progress-fill { height: 100%; background: var(--success); border-radius: 6px; }
-        .dash-continue-card { background: var(--primary); color: white; border: none; cursor: pointer; text-align: left; }
+        .dash-continue-card { background: var(--primary); color: white; border: none; text-align: left; }
         .dash-continue-card .dash-continue-label { font-size: 0.75rem; opacity: 0.85; margin-bottom: 4px; }
         .dash-continue-card .dash-continue-title { font-size: 1.15rem; font-weight: bold; margin-bottom: 4px; }
+        .dash-reco-titre { font-size: 0.9rem; opacity: 0.95; margin-bottom: 6px; }
+        .dash-reco-reason { font-size: 0.8rem; opacity: 0.85; margin-bottom: 2px; }
+        .dash-reco-duration { font-size: 0.72rem; opacity: 0.7; margin-bottom: 4px; }
+        .dash-reco-actions { display: flex; gap: 8px; margin-top: 12px; }
+        .dash-reco-actions .btn { margin-top: 0; flex: 1; }
+        .dash-reco-btn-secondary { flex: 1; background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.55); border-radius: 15px; padding: 15px; font-weight: bold; cursor: pointer; }
+        .guided-flow-card { text-align: center; border-color: var(--success); }
+        .guided-flow-label { font-weight: bold; margin-bottom: 10px; }
+        .guided-flow-actions { display: flex; gap: 8px; }
+        .guided-flow-actions .btn { margin-top: 0; flex: 1; }
         .dash-today-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .dash-today-item { text-align: center; padding: 10px 6px; background: var(--bg); border-radius: 10px; }
         .dash-today-item .dash-today-num { font-size: 1.3rem; font-weight: bold; color: var(--primary); }

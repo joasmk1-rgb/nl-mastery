@@ -789,6 +789,107 @@ if (firebaseAvailable) {
             return null;
         }
 
+        // ===== « Que faire maintenant ? » — couche d'expérience au-dessus du moteur existant =====
+        // Ceci n'est PAS un nouveau moteur de progression ni un DailyPlanEngine : c'est uniquement
+        // de l'orchestration d'interface. La seule source de vérité reste getRecommendation()
+        // (donc MasteryEngine → WeaknessEngine → RecommendationEngine). Cette couche se contente de
+        // (1) traduire le statut d'une notion en une activité concrète déjà existante dans l'appli
+        // (leçon, exercices, production), et (2) recalculer getRecommendation() après chaque
+        // activité pour proposer la suite — sans jamais imposer de programme ni de durée.
+        //
+        // guidedFlowActive/guidedFlowNotionId sont des variables d'état d'interface transitoires,
+        // au même titre que currentLessonNotionId ou exerciseQueue : elles ne sont pas persistées,
+        // et l'utilisateur reste libre de quitter à tout moment (aucune confirmation requise).
+        let guidedFlowActive = false;
+        let guidedFlowNotionId = null;
+
+        function endGuidedFlow() {
+            guidedFlowActive = false;
+            guidedFlowNotionId = null;
+            const banner = document.getElementById('guided-flow-banner');
+            if (banner) banner.innerHTML = '';
+        }
+
+        // Traduit un statut WeaknessEngine (voir getNotionStatus) en libellé d'activité pour
+        // l'interface. Purement cosmétique : ne recalcule rien, ne décide de rien.
+        function getRecommendedActivityMeta(status) {
+            return ({
+                jamais_etudiee: { icon: '🆕', label: 'Nouvelle notion débloquée', duration: '~10 min' },
+                decouverte: { icon: '📚', label: 'Continuer la leçon', duration: '~10 min' },
+                en_cours: { icon: '📚', label: 'Continuer la leçon', duration: '~8 min' },
+                faible: { icon: '🔁', label: 'Revoir cette notion', duration: '~5 min' },
+                a_pratiquer: { icon: '🎯', label: 'Consolider (exercices + production)', duration: '~5 min' },
+                entrainee: { icon: '🎯', label: 'Continuer les exercices', duration: '~5 min' },
+                presque_maitrisee: { icon: '🔄', label: 'Petit rappel', duration: '~3 min' },
+                maitrisee: { icon: '✅', label: 'Notion maîtrisée', duration: '' }
+            })[status] || { icon: '📚', label: 'Continuer', duration: '' };
+        }
+
+        // Démarre l'activité recommandée pour une notion donnée, en réutilisant exclusivement les
+        // vues/fonctions déjà existantes (showLesson, showExercise, openProductionPanel). N'invente
+        // aucune nouvelle vue.
+        function startRecommendedActivity(notionId) {
+            guidedFlowActive = true;
+            guidedFlowNotionId = notionId;
+            const status = getNotionStatus(notionId);
+            if (status === 'a_pratiquer') {
+                // Les exercices sont déjà bons : on va directement à la production, déjà présente
+                // dans la leçon (bloc "✍️ À toi de jouer").
+                showLesson(notionId);
+                setTimeout(() => {
+                    openProductionPanel(notionId, 'ecrit');
+                    const panel = document.getElementById('production-panel');
+                    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 50);
+            } else if (status === 'jamais_etudiee' || status === 'decouverte' || status === 'en_cours') {
+                // Notion pas encore stabilisée : on repart de la leçon (elle propose déjà le bouton
+                // vers les exercices).
+                showLesson(notionId);
+            } else {
+                // faible / entrainee / presque_maitrisee : la leçon est déjà connue, on va droit aux
+                // exercices ciblés (réutilise les exercices existants, n'en génère pas de nouveaux).
+                showExercise(notionId);
+            }
+        }
+
+        // Affiche le petit bandeau "activité terminée" une fois qu'une activité du flux guidé se
+        // termine (fin de la file d'exercices, ou retour de feedback Gemini sur une production).
+        function renderGuidedFlowCompletion(notionId) {
+            if (!guidedFlowActive || guidedFlowNotionId !== notionId) return;
+            const banner = document.getElementById('guided-flow-banner');
+            if (!banner) return;
+            banner.innerHTML = `
+                <div class="dash-card guided-flow-card">
+                    <div class="guided-flow-label">✅ Activité terminée</div>
+                    <div class="guided-flow-actions">
+                        <button class="btn btn-green" onclick="continueGuidedFlow()">Continuer</button>
+                        <button class="gemini-explain-btn" onclick="exitGuidedFlow()">Choisir autre chose</button>
+                    </div>
+                </div>`;
+        }
+
+        // « activité → résultat → recalcul → prochaine proposition » : les résultats de l'activité
+        // ont déjà mis à jour notionProgress/productionWeaknessSignals (via checkExerciseAnswer /
+        // submitProduction) ; on relit donc simplement getRecommendation() à l'instant présent —
+        // aucune nouvelle logique de recommandation n'est créée ici.
+        function continueGuidedFlow() {
+            const banner = document.getElementById('guided-flow-banner');
+            if (banner) banner.innerHTML = '';
+            const rec = getRecommendation();
+            if (rec) {
+                startRecommendedActivity(rec.notionId);
+            } else {
+                endGuidedFlow();
+                showHome();
+            }
+        }
+
+        // « Choisir autre chose » : sortie libre, sans confirmation, vers le reste de l'application.
+        function exitGuidedFlow() {
+            endGuidedFlow();
+            showApprendre();
+        }
+
         // ===== Dashboard =====
         function renderDashboard() {
             const block = document.getElementById('dashboard-block');
@@ -800,11 +901,19 @@ if (firebaseAvailable) {
             if (curriculumLoaded) {
                 const rec = getRecommendation();
                 if (rec) {
+                    const activity = getRecommendedActivityMeta(getNotionStatus(rec.notionId));
+                    const titre = rec.notion.content.titre || rec.notionId;
                     continueHtml = `
-                        <div class="dash-card dash-continue-card" onclick="showLesson('${rec.notionId}')">
-                            <div class="dash-continue-label">Continuer</div>
-                            <div class="dash-continue-title">${rec.module.label} — ${rec.notion.content.objectif ? rec.notion.content.objectif.split('.')[0] : rec.notionId}</div>
-                            <div style="font-size:0.8rem; opacity:0.9;">${rec.reason || '~10 min'}</div>
+                        <div class="dash-card dash-continue-card dash-reco-card">
+                            <div class="dash-continue-label">🎯 Pour toi maintenant</div>
+                            <div class="dash-continue-title">${activity.icon} ${activity.label}</div>
+                            <div class="dash-reco-titre">${rec.module.label} — ${titre}</div>
+                            <div class="dash-reco-reason">${rec.reason || ''}</div>
+                            ${activity.duration ? `<div class="dash-reco-duration">${activity.duration}</div>` : ''}
+                            <div class="dash-reco-actions">
+                                <button class="btn btn-green" onclick="startRecommendedActivity('${rec.notionId}')">Commencer</button>
+                                <button class="dash-reco-btn-secondary" onclick="showApprendre()">Choisir autre chose</button>
+                            </div>
                         </div>`;
                 } else {
                     continueHtml = `<div class="dash-card" style="text-align:center; color:#888; font-size:0.85rem;">Toutes les leçons disponibles sont maîtrisées pour l'instant — d'autres arrivent bientôt 🎉</div>`;
@@ -901,6 +1010,11 @@ if (firebaseAvailable) {
 
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('lesson-view').classList.add('active');
+            // On repart d'un bandeau vide à chaque (ré)ouverture de leçon ; il n'est repeuplé que
+            // par renderGuidedFlowCompletion(), juste après, quand une activité du flux guidé vient
+            // de se terminer.
+            const guidedBanner = document.getElementById('guided-flow-banner');
+            if (guidedBanner) guidedBanner.innerHTML = '';
 
             const c = notion.content;
             const exCount = (notion.exerciseIds || []).length;
@@ -1001,6 +1115,9 @@ if (firebaseAvailable) {
                     timestamp: Date.now()
                 });
                 save();
+                // Fin d'activité du flux guidé (si cette production a été lancée depuis "Pour toi
+                // maintenant") : on propose de recalculer la suite plutôt que de rester bloqué ici.
+                renderGuidedFlowCompletion(notionId);
             } catch (e) {
                 box.innerHTML = "Erreur Gemini : " + escapeHtml(e.message);
             }
@@ -1149,8 +1266,12 @@ if (firebaseAvailable) {
         function nextExercise() {
             exerciseIndex++;
             if (exerciseIndex >= exerciseQueue.length) {
-                showLesson(exerciseQueue[0].notionId);
+                const notionId = exerciseQueue[0].notionId;
+                showLesson(notionId);
                 renderDashboard();
+                // Fin d'activité du flux guidé : on recalcule via getRecommendation() plus tard,
+                // seulement si l'utilisateur clique "Continuer" (voir continueGuidedFlow).
+                renderGuidedFlowCompletion(notionId);
                 return;
             }
             renderCurrentExercise();
@@ -1701,6 +1822,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
             const btn = document.getElementById(id);
             if (btn) btn.classList.add('active');
+            // showLesson()/showExercise() n'appellent jamais setActiveNav (ce sont des sous-vues
+            // atteintes depuis Apprendre) : ce point ne se déclenche donc que lorsque l'utilisateur
+            // rejoint un onglet principal (Accueil, Apprendre, Révision, Jeux, Roleplay, etc.), ce
+            // qui correspond exactement à "choisir autre chose" librement — on sort alors du flux
+            // guidé sans jamais bloquer ni demander de confirmation.
+            endGuidedFlow();
         }
 
         function showHome() {
