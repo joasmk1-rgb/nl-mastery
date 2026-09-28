@@ -1355,6 +1355,11 @@ if (firebaseAvailable) {
         // exercice normal — migration douce, tableau vide par défaut.
         if (!state.placement) state.placement = { history: [] };
         if (state.onboardingSeen === undefined) state.onboardingSeen = false; // migration douce, jamais réécrit ailleurs qu'ici et dans onboardingMarkSeen
+        // ===== Mode libre (déverrouille toutes les notions) — désactivé par défaut, à activer soi-même
+        // dans Profil si on veut sauter le déverrouillage progressif (ex. attaquer direct du B2). Ne
+        // change rien d'autre : la maîtrise réelle (WeaknessEngine) continue d'être calculée normalement,
+        // seul l'accès à l'écran de leçon change. =====
+        if (state.freeAccess === undefined) state.freeAccess = false;
 
         async function loadCurriculumData() {
             try {
@@ -1408,10 +1413,18 @@ if (firebaseAvailable) {
         }
 
         function isNotionUnlocked(notionId) {
+            if (state.freeAccess) return true; // mode libre : l'utilisateur a choisi de sauter le déverrouillage progressif
             const notion = curriculumNotions[notionId];
             if (!notion) return false;
             if (!notion.prerequisites || notion.prerequisites.length === 0) return true;
             return notion.prerequisites.every(pid => computeNotionMastery(pid) >= 3);
+        }
+
+        function toggleFreeAccess(value) {
+            state.freeAccess = value;
+            save();
+            if (document.getElementById('apprendre-view').classList.contains('active')) renderApprendreLevel(apprendreCurrentLevel);
+            if (document.getElementById('profil-view').classList.contains('active')) renderProfil();
         }
 
         // ===== Niveau CECR global : dérivé du curriculum (MasteryEngine), PLUS du vocabulaire =====
@@ -4346,6 +4359,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="profil-menu">
                     <div class="profil-menu-row" onclick="showPlacementIntro()"><span class="pm-icon">🚀</span><span>Évaluer mon niveau</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showApprendre()"><span class="pm-icon">📚</span><span>Mon parcours</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" style="cursor:pointer;" onclick="toggleFreeAccess(${!state.freeAccess})">
+                        <span class="pm-icon">${state.freeAccess ? '🔓' : '🔒'}</span>
+                        <span>Mode libre (accès à toutes les leçons)</span>
+                        <span class="pm-chevron">${state.freeAccess ? 'Activé' : 'Désactivé'}</span>
+                    </div>
+                    ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
                     <div class="profil-menu-row" onclick="showReviser()"><span class="pm-icon">🔁</span><span>Révisions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showWordList('profil')"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showConjugaison()"><span class="pm-icon">🔤</span><span>Conjugaison</span><span class="pm-chevron">›</span></div>
