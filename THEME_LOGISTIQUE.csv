@@ -1,0 +1,41 @@
+id;fr;nl;freq
+THEME_LOGISTIQUE_0;l'entrepôt;het magazijn;5.2
+THEME_LOGISTIQUE_1;le transport;het transport;5.1
+THEME_LOGISTIQUE_2;la livraison;de levering;5.0
+THEME_LOGISTIQUE_3;le transporteur;de vervoerder;4.9
+THEME_LOGISTIQUE_4;le camion;de vrachtwagen;4.9
+THEME_LOGISTIQUE_5;la palette;de pallet;4.8
+THEME_LOGISTIQUE_6;le colis;het pakket;4.8
+THEME_LOGISTIQUE_7;l'expédition;de verzending;4.7
+THEME_LOGISTIQUE_8;la réception des marchandises;de goederenontvangst;4.7
+THEME_LOGISTIQUE_9;le bon de livraison;de leveringsbon;4.6
+THEME_LOGISTIQUE_10;le bon de commande;de bestelbon;4.6
+THEME_LOGISTIQUE_11;le préparateur de commandes;de orderpicker;4.5
+THEME_LOGISTIQUE_12;la préparation de commande;het orderpicken;4.5
+THEME_LOGISTIQUE_13;le chargement;het laden;4.4
+THEME_LOGISTIQUE_14;le déchargement;het lossen;4.4
+THEME_LOGISTIQUE_15;le quai de chargement;de laadkade;4.3
+THEME_LOGISTIQUE_16;le magasinier;de magazijnier;4.3
+THEME_LOGISTIQUE_17;le code-barres;de barcode;4.2
+THEME_LOGISTIQUE_18;le scanner;de scanner;4.2
+THEME_LOGISTIQUE_19;l'inventaire;de inventaris;4.1
+THEME_LOGISTIQUE_20;le stock;de voorraad;4.1
+THEME_LOGISTIQUE_21;l'emplacement de stockage;de opslaglocatie;4.0
+THEME_LOGISTIQUE_22;le chariot élévateur;de heftruck;4.0
+THEME_LOGISTIQUE_23;le transport routier;het wegtransport;3.9
+THEME_LOGISTIQUE_24;le transport maritime;het zeetransport;3.9
+THEME_LOGISTIQUE_25;le transport aérien;het luchttransport;3.8
+THEME_LOGISTIQUE_26;le conteneur;de container;3.8
+THEME_LOGISTIQUE_27;le dédouanement;de douaneafhandeling;3.7
+THEME_LOGISTIQUE_28;la douane;de douane;3.7
+THEME_LOGISTIQUE_29;le transitaire;de expediteur;3.6
+THEME_LOGISTIQUE_30;le délai de transit;de transittijd;3.6
+THEME_LOGISTIQUE_31;le suivi de colis;de zendingstracking;3.5
+THEME_LOGISTIQUE_32;l'entreposage;de opslag;3.5
+THEME_LOGISTIQUE_33;la zone de stockage;de opslagzone;3.4
+THEME_LOGISTIQUE_34;le dernier kilomètre;de laatste kilometer;3.4
+THEME_LOGISTIQUE_35;l'optimisation des tournées;de routeoptimalisatie;3.3
+THEME_LOGISTIQUE_36;le cross-docking;cross-docking;3.3
+THEME_LOGISTIQUE_37;la gestion d'entrepôt;het warehouse management systeem;3.2
+THEME_LOGISTIQUE_38;l'empreinte carbone;de CO2-voetafdruk;3.2
+THEME_LOGISTIQUE_39;la logistique inverse;de retourlogistiek;3.1
