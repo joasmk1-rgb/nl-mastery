@@ -288,6 +288,17 @@
         .gemini-box { margin-top: 10px; padding: 12px; border-radius: var(--radius-md); background: var(--bg); font-size: 0.9rem; white-space: pre-wrap; }
         .roleplay-suggestion-card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 14px; margin-top: 10px; cursor: pointer; border: 2px solid var(--primary); }
 
+        /* Placement Engine (évaluation de niveau) */
+        .placement-intro { width: 100%; max-width: 480px; margin: 0 auto; text-align: center; }
+        .placement-intro-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; }
+        .placement-intro-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+        .placement-warning { background: var(--surface-2); border-radius: var(--radius-md); padding: 12px 14px; font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; text-align: left; }
+        .placement-choice-list { display: flex; flex-direction: column; gap: 10px; }
+        .placement-choice-list button { width: 100%; margin-top: 0; }
+        .placement-choice-list select { width: 100%; padding: 10px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); }
+        .placement-level-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; text-align: left; }
+        .placement-level-name { flex-shrink: 0; width: 70px; font-weight: 700; font-size: 0.85rem; }
+
         /* ===================== RESPONSIVE ===================== */
         /* Mobile (< 700px) : plein écran, c'est le cas par défaut ci-dessus. */
 

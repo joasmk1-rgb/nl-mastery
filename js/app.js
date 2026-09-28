@@ -572,6 +572,12 @@ if (firebaseAvailable) {
         // les anciennes entrées n'ont pas ces champs, ils sont donc TOUJOURS lus avec un défaut
         // (`|| 0`, etc.) plutôt que backfillés en masse — aucune donnée existante n'est invalidée.
         if (!state.productionWeaknessSignals) state.productionWeaknessSignals = [];
+        // ===== Placement Engine : historique des évaluations de niveau =====
+        // Ne contient QUE de l'historique/traçabilité (source déclarée, résultat estimé). Aucune
+        // donnée de maîtrise ne vit ici : le Placement Engine écrit exclusivement dans
+        // state.curriculum.notionProgress via recordNotionAttempt/ntProgress, exactement comme un
+        // exercice normal — migration douce, tableau vide par défaut.
+        if (!state.placement) state.placement = { history: [] };
 
         async function loadCurriculumData() {
             try {
@@ -1003,6 +1009,403 @@ if (firebaseAvailable) {
             if (tabThemes) tabThemes.classList.toggle('active', tab === 'themes');
         }
 
+        // ===== Placement Engine =====
+        // Détermine un point de départ pédagogique en réutilisant EXCLUSIVEMENT les briques déjà
+        // existantes (curriculumModules/curriculumNotions/curriculumExercises, isNotionUnlocked,
+        // getNotionStatus, recordNotionAttempt, l'écran #exercise-view). Ne remplace ni ne double
+        // MasteryEngine/WeaknessEngine/RecommendationEngine : il les alimente une fois, puis
+        // getRecommendation() reprend la main normalement.
+        //
+        //   PlacementEngine → notionProgress (recordNotionAttempt / seedInferredMastery) →
+        //   MasteryEngine → WeaknessEngine → RecommendationEngine → "🎯 Pour toi maintenant"
+        //
+        // Deux façons d'alimenter notionProgress, jamais un troisième champ/système :
+        //  1. Notion réellement testée : on pose une VRAIE question (réutilise l'écran d'exercice
+        //     existant) et recordNotionAttempt() est appelé avec la vraie réponse — rien n'est
+        //     inventé, c'est le même chemin qu'un exercice normal.
+        //  2. Notion "sautée" parce qu'un niveau déclaré/externe avance le point de départ :
+        //     seedInferredMastery() écrit un attempts/correct qui, via LA MÊME formule de
+        //     computeNotionMastery, tombe pile sur mastery 3 ("entraînée") — assez pour débloquer
+        //     la suite (isNotionUnlocked exige mastery >= 3), jamais "maîtrisée" : les exercices
+        //     normaux devront encore la pousser vers 4 puis 5.
+        const PLACEMENT_SKILL_LABELS = {
+            grammaire: 'Grammaire', vocabulaire: 'Vocabulaire', production: 'Production',
+            expression_orale: 'Expression orale', expression_ecrite: 'Expression écrite',
+            interaction: 'Interaction', comprehension: 'Compréhension', ecriture: 'Écriture',
+            comprehension_ecrite: 'Compréhension écrite', comprehension_orale: 'Compréhension orale',
+            registre: 'Registre'
+        };
+        const PLACEMENT_MAX_QUESTIONS = 40; // garde-fou : jamais un test interminable
+
+        let placementState = null;
+
+        function seedInferredMastery(notionId) {
+            const p = ntProgress(notionId);
+            if (p.attempts > 0) return; // ne jamais écraser une vraie donnée déjà présente
+            p.opened = true;
+            p.attempts = 2;
+            p.correct = 1;
+            p.weaknessCount = 0;
+            p.lastResult = 'inferred';
+            p.lastAttemptAt = Date.now();
+            save();
+        }
+
+        // Applique la plage de seed différée (niveaux avant le point de départ déclaré/externe),
+        // UNE FOIS que la toute première vraie vérification l'a confirmée (voir
+        // placementHandleModuleVerdict). Tant que cette fonction n'a pas été appelée, aucun niveau
+        // sauté n'est marqué acquis — c'est le garde-fou contre le déclassement/sur-classement
+        // injustifié d'un niveau simplement déclaré.
+        function placementApplyPendingSeed() {
+            if (!placementState || !placementState.pendingSeedRange) return;
+            const [from, to] = placementState.pendingSeedRange;
+            for (let i = from; i < to; i++) {
+                (placementState.modules[i].notions || []).forEach(nid => {
+                    if (curriculumNotions[nid] && curriculumNotions[nid].status === 'pret') seedInferredMastery(nid);
+                });
+            }
+            placementState.pendingSeedRange = null;
+        }
+
+        function placementOrderedModules() {
+            return [...curriculumModules].sort((a, b) => {
+                const la = curriculumLevels.find(l => l.id === a.level);
+                const lb = curriculumLevels.find(l => l.id === b.level);
+                const lo = (la ? la.order : 0) - (lb ? lb.order : 0);
+                return lo !== 0 ? lo : a.order - b.order;
+            });
+        }
+
+        function showPlacementIntro() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('placement-view').classList.add('active');
+            setActiveNav('nav-profil');
+            const hasProgress = curriculumLoaded && Object.values(state.curriculum.notionProgress).some(p => p.attempts > 0);
+            const hasHistory = (state.placement.history || []).length > 0;
+            document.getElementById('placement-content').innerHTML = `
+                <div class="placement-intro">
+                    <div class="placement-intro-title">Déjà un niveau en néerlandais ?</div>
+                    <p class="placement-intro-text">Ne recommence pas depuis le début. NL Mastery va identifier ce que tu maîtrises déjà et trouver où tu dois vraiment progresser.</p>
+                    ${(hasProgress || hasHistory) ? `<div class="placement-warning">Tu as déjà une progression. Une nouvelle évaluation peut ajuster ton parcours, mais ne supprimera pas tes acquis.</div>` : ''}
+                    <div class="placement-choice-list">
+                        <button class="btn btn-green" onclick="placementStart('test')">🚀 Évaluer mon niveau</button>
+                        <button class="gemini-explain-btn" onclick="placementShowDeclare()">📊 J'ai déjà un niveau</button>
+                        <button class="gemini-explain-btn" onclick="placementShowExternal()">🏅 J'ai déjà passé un test ailleurs</button>
+                        <button class="dash-reco-btn-secondary" style="color:var(--text-secondary); border-color:var(--border);" onclick="showHome()">▶️ Commencer normalement</button>
+                    </div>
+                </div>`;
+        }
+
+        function placementShowDeclare() {
+            document.getElementById('placement-content').innerHTML = `
+                <div class="placement-intro">
+                    <div class="placement-intro-title">Quel niveau penses-tu avoir ?</div>
+                    <p class="placement-intro-text">On vérifie quand même avec quelques questions — ça ne veut pas dire qu'on va tout te faire refaire depuis A1.</p>
+                    <div class="placement-choice-list">
+                        ${curriculumLevels.map(l => `<button class="gemini-explain-btn" onclick="placementStart('declared','${l.id}')">${l.id} — ${l.label}</button>`).join('')}
+                    </div>
+                    <button class="back-btn" style="margin-top:12px;" onclick="showPlacementIntro()">← Retour</button>
+                </div>`;
+        }
+
+        function placementShowExternal() {
+            document.getElementById('placement-content').innerHTML = `
+                <div class="placement-intro">
+                    <div class="placement-intro-title">Résultat d'un test externe</div>
+                    <p class="placement-intro-text">Indique la source et le niveau obtenu. C'est une information de départ, pas une preuve de maîtrise — on vérifie quand même avec quelques questions.</p>
+                    <select id="placement-ext-source" style="width:100%; max-width:320px; margin-bottom:10px;">
+                        <option value="Duolingo">Duolingo</option>
+                        <option value="Babbel">Babbel</option>
+                        <option value="Certificat CECR">Certificat / test CECR officiel</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                    <select id="placement-ext-level" style="width:100%; max-width:320px; margin-bottom:14px;">
+                        ${curriculumLevels.map(l => `<option value="${l.id}">${l.id} — ${l.label}</option>`).join('')}
+                    </select>
+                    <button class="btn btn-green" onclick="placementConfirmExternal()">Continuer</button>
+                    <button class="back-btn" style="margin-top:12px;" onclick="showPlacementIntro()">← Retour</button>
+                </div>`;
+        }
+
+        function placementConfirmExternal() {
+            const source = document.getElementById('placement-ext-source').value;
+            const level = document.getElementById('placement-ext-level').value;
+            placementStart('external', level, source);
+        }
+
+        function placementStart(mode, anchorLevel, externalSource) {
+            const modulesSorted = placementOrderedModules();
+            let startIdx = 0;
+            if (mode !== 'test') {
+                // Point de départ = le niveau juste avant celui déclaré/externe, pour vérifier
+                // rapidement quelques compétences du niveau précédent plutôt que de plonger
+                // directement dedans sans aucune vérification (cf. cahier des charges).
+                const anchorOrder = (curriculumLevels.find(l => l.id === anchorLevel) || {}).order || 1;
+                const priorLevel = curriculumLevels.find(l => l.order === anchorOrder - 1);
+                const effectiveAnchor = priorLevel ? priorLevel.id : anchorLevel;
+                startIdx = modulesSorted.findIndex(m => m.level === effectiveAnchor);
+                if (startIdx < 0) startIdx = 0;
+            }
+            // Tout ce qui précède le point de départ SERAIT traité comme un prérequis supposé
+            // acquis — mais un niveau déclaré/externe ne vaut jamais preuve de maîtrise tant que la
+            // toute première vraie vérification ne l'a pas confirmé. On ne seed donc PAS ici : on
+            // mémorise seulement la plage à seeder plus tard (placementApplyPendingSeed), appliquée
+            // uniquement si ce premier vrai test réussit (voir placementHandleModuleVerdict). En cas
+            // d'échec, l'hypothèse est abandonnée et le test reprend depuis le vrai début du programme.
+            placementState = {
+                active: true, mode, anchorLevel: anchorLevel || null, externalSource: externalSource || null,
+                modules: modulesSorted, moduleIdx: startIdx, anchorModuleIdx: startIdx,
+                pendingSeedRange: (mode !== 'test' && startIdx > 0) ? [0, startIdx] : null,
+                currentNotionId: null, currentExercise: null, currentAttemptsOnNotion: 0,
+                moduleFailedNotion: null, askedCount: 0,
+                levelStats: {}, skillStats: {}, testedNotionIds: []
+            };
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('placement-view').classList.add('active');
+            placementNextStep();
+        }
+
+        function placementPickNotionForModule(mod) {
+            // Une notion représentative par module : la première prête et pas déjà testée dans ce
+            // passage de placement (voir "ne pas tester chaque notion" du cahier des charges).
+            const candidates = (mod.notions || []).filter(nid => {
+                const n = curriculumNotions[nid];
+                return n && n.status === 'pret' && !placementState.testedNotionIds.includes(nid);
+            });
+            return candidates[0] || null;
+        }
+
+        function placementExercisesFor(notionId, attemptIdx) {
+            const notion = curriculumNotions[notionId];
+            const exs = (notion.exerciseIds || []).map(id => curriculumExercises.find(e => e.id === id)).filter(Boolean);
+            if (!exs.length) return null;
+            // 1er essai : de préférence un QCM (reconnaissance, rapide) ; en cas de doute, 2e essai
+            // sur un type différent (texte à trous / remise en ordre) pour ne pas conclure sur un
+            // seul format (cf. "reconnaissance → compréhension → discrimination → construction").
+            const preferredOrder = attemptIdx === 0 ? ['qcm', 'texte_a_trous', 'remise_en_ordre'] : ['texte_a_trous', 'remise_en_ordre', 'qcm'];
+            for (const type of preferredOrder) {
+                const match = exs.find(e => e.type === type);
+                if (match) return match;
+            }
+            return exs[0];
+        }
+
+        function placementNextStep() {
+            if (!placementState) return;
+            if (placementState.askedCount >= PLACEMENT_MAX_QUESTIONS || placementState.moduleIdx >= placementState.modules.length) {
+                placementFinish();
+                return;
+            }
+            const mod = placementState.modules[placementState.moduleIdx];
+            const notionId = placementPickNotionForModule(mod);
+            if (!notionId) {
+                // Module pas encore rédigé, ou déjà couvert : module suivant.
+                placementState.moduleIdx++;
+                placementState.moduleFailedNotion = null;
+                placementNextStep();
+                return;
+            }
+            placementState.currentNotionId = notionId;
+            placementState.currentAttemptsOnNotion = 0;
+            placementAskExercise(notionId);
+        }
+
+        // Pose une vraie question en réutilisant intégralement l'écran d'exercice existant
+        // (#exercise-view / renderCurrentExercise / checkExerciseAnswer) : aucun composant de
+        // question n'est recréé. checkExerciseAnswer() appelle déjà recordNotionAttempt() avec la
+        // vraie réponse ; nextExercise() route vers placementAfterAnswer() quand placementState est
+        // actif (voir plus bas) au lieu du comportement normal de fin de file d'exercices.
+        function placementAskExercise(notionId, forcedExercise) {
+            const ex = forcedExercise || placementExercisesFor(notionId, placementState.currentAttemptsOnNotion);
+            if (!ex) {
+                // Notion sans exercice exploitable : on la saute proprement plutôt que de bloquer
+                // le test (ne devrait pas arriver, chaque notion "prête" a au moins un exercice).
+                placementState.testedNotionIds.push(notionId);
+                placementHandleModuleVerdict(notionId, true);
+                return;
+            }
+            placementState.currentExercise = ex;
+            placementState.askedCount++;
+            exerciseQueue = [ex];
+            exerciseIndex = 0;
+            const backBtn = document.getElementById('exercise-back-btn');
+            backBtn.onclick = () => placementQuit();
+            backBtn.innerText = "✕ Arrêter l'évaluation";
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('exercise-view').classList.add('active');
+            renderCurrentExercise();
+        }
+
+        function placementTrackStats(notionId, isCorrect) {
+            const notion = curriculumNotions[notionId];
+            const lvl = notion.level;
+            if (!placementState.levelStats[lvl]) placementState.levelStats[lvl] = { correct: 0, total: 0 };
+            placementState.levelStats[lvl].total++;
+            if (isCorrect) placementState.levelStats[lvl].correct++;
+            (notion.skills || []).forEach(sk => {
+                if (!placementState.skillStats[sk]) placementState.skillStats[sk] = { correct: 0, total: 0 };
+                placementState.skillStats[sk].total++;
+                if (isCorrect) placementState.skillStats[sk].correct++;
+            });
+        }
+
+        function placementAdvanceToNextModule() {
+            placementState.moduleIdx++;
+            placementState.moduleFailedNotion = null;
+            placementNextStep();
+        }
+
+        // Distingue une faiblesse isolée d'un vrai plafond de niveau : un seul échec ne suffit
+        // jamais à arrêter le test (cf. garde-fou "ne pas fausser le déclassement" déjà appliqué
+        // dans WeaknessEngine) — on redemande une 2e notion du même module avant de conclure.
+        function placementHandleModuleVerdict(notionId, wasCorrect) {
+            // Ce verdict porte-t-il sur le tout premier module réellement testé, alors qu'une plage
+            // de niveaux précédente est en attente de seed (niveau déclaré/externe) ? Si oui, ce
+            // verdict est ce qui confirme — ou infirme — l'hypothèse, jamais un fait déjà acquis.
+            const isAnchorVerdict = !!placementState.pendingSeedRange && placementState.moduleIdx === placementState.anchorModuleIdx;
+            if (wasCorrect) {
+                if (isAnchorVerdict) placementApplyPendingSeed();
+                placementAdvanceToNextModule();
+                return;
+            }
+            if (!placementState.moduleFailedNotion) {
+                placementState.moduleFailedNotion = notionId;
+                const mod = placementState.modules[placementState.moduleIdx];
+                const second = placementPickNotionForModule(mod);
+                if (second) {
+                    placementState.currentNotionId = second;
+                    placementState.currentAttemptsOnNotion = 0;
+                    placementAskExercise(second);
+                    return;
+                }
+            }
+            // 2e notion aussi ratée, ou aucune 2e notion disponible pour trancher.
+            if (isAnchorVerdict) {
+                // Le niveau déclaré/externe ne se confirme pas dès la première vraie vérification :
+                // on abandonne l'hypothèse (rien n'est seedé) et on reprend le test depuis le vrai
+                // début du programme, conformément au principe "un niveau déclaré ou externe ne doit
+                // jamais être considéré comme une maîtrise complète".
+                placementState.pendingSeedRange = null;
+                placementState.moduleIdx = 0;
+                placementState.anchorModuleIdx = 0;
+                placementState.moduleFailedNotion = null;
+                placementNextStep();
+                return;
+            }
+            // Ce module devient la frontière du placement : on arrête d'avancer plus loin dans le programme.
+            placementFinish();
+        }
+
+        function placementAfterAnswer() {
+            const notionId = placementState.currentNotionId;
+            const p = state.curriculum.notionProgress[notionId];
+            const wasCorrect = !!(p && p.lastResult === 'correct');
+            placementState.currentAttemptsOnNotion++;
+
+            if (!wasCorrect && placementState.currentAttemptsOnNotion < 2) {
+                const altEx = placementExercisesFor(notionId, 1);
+                if (altEx && (!placementState.currentExercise || altEx.id !== placementState.currentExercise.id)) {
+                    placementAskExercise(notionId, altEx);
+                    return;
+                }
+            }
+            // Verdict définitif pour cette notion (1 ou 2 essais épuisés) : on relit lastResult
+            // après le dernier essai réel.
+            const finalP = state.curriculum.notionProgress[notionId];
+            const finalCorrect = !!(finalP && finalP.lastResult === 'correct');
+            placementState.testedNotionIds.push(notionId);
+            placementTrackStats(notionId, finalCorrect);
+            placementHandleModuleVerdict(notionId, finalCorrect);
+        }
+
+        function placementQuit() {
+            if (!confirm("Arrêter l'évaluation ? Ce qui a déjà été identifié reste enregistré.")) return;
+            placementState = null;
+            const backBtn = document.getElementById('exercise-back-btn');
+            if (backBtn) backBtn.innerText = '← Retour à la leçon';
+            showHome();
+        }
+
+        function placementFinish() {
+            if (!placementState) return;
+            placementState.active = false;
+            const levelOrder = curriculumLevels.map(l => l.id);
+
+            // Niveau estimé : le dernier niveau CECR dont au moins une notion testée a été
+            // confirmée avec une accuracy suffisante.
+            let estimatedLevel = levelOrder[0];
+            levelOrder.forEach(lvl => {
+                const s = placementState.levelStats[lvl];
+                if (s && s.total > 0 && s.correct / s.total >= 0.5) estimatedLevel = lvl;
+            });
+
+            const testedCount = placementState.testedNotionIds.length;
+            const confidence = testedCount >= 6 ? 'élevée' : testedCount >= 3 ? 'moyenne' : 'faible';
+
+            const perLevelPct = {};
+            levelOrder.forEach(lvl => {
+                const lvlModIdx = placementState.modules.findIndex(m => m.level === lvl);
+                const s = placementState.levelStats[lvl];
+                if (s && s.total > 0) {
+                    perLevelPct[lvl] = Math.round((s.correct / s.total) * 100);
+                } else if (lvlModIdx >= 0 && lvlModIdx < placementState.moduleIdx) {
+                    perLevelPct[lvl] = 95; // niveau entièrement sauté avant le point de départ : supposé largement acquis
+                } else {
+                    perLevelPct[lvl] = 0; // jamais atteint : exploration future
+                }
+            });
+
+            const perSkillPct = {};
+            Object.keys(placementState.skillStats).forEach(sk => {
+                const s = placementState.skillStats[sk];
+                if (s.total > 0) perSkillPct[sk] = Math.round((s.correct / s.total) * 100);
+            });
+
+            state.placement.history.push({
+                timestamp: Date.now(), mode: placementState.mode, anchorLevel: placementState.anchorLevel,
+                externalSource: placementState.externalSource, estimatedLevel, confidence, testedCount,
+                perLevelPct, perSkillPct
+            });
+            save();
+
+            placementRenderResult(estimatedLevel, confidence, perLevelPct, perSkillPct);
+        }
+
+        function placementRenderResult(estimatedLevel, confidence, perLevelPct, perSkillPct) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('placement-view').classList.add('active');
+            const levelBarsHtml = curriculumLevels.map(l => `
+                <div class="placement-level-row">
+                    <span class="placement-level-name">${l.id}</span>
+                    <div class="module-progress-bar"><div class="module-progress-fill" style="width:${perLevelPct[l.id] || 0}%"></div></div>
+                    <span class="module-progress-pct">${perLevelPct[l.id] || 0}%</span>
+                </div>`).join('');
+            const skillKeys = Object.keys(perSkillPct);
+            const skillBarsHtml = skillKeys.map(sk => `
+                <div class="placement-level-row">
+                    <span class="placement-level-name">${PLACEMENT_SKILL_LABELS[sk] || sk}</span>
+                    <div class="module-progress-bar"><div class="module-progress-fill" style="width:${perSkillPct[sk]}%"></div></div>
+                    <span class="module-progress-pct">${perSkillPct[sk]}%</span>
+                </div>`).join('');
+
+            document.getElementById('placement-content').innerHTML = `
+                <div class="placement-intro">
+                    <div class="placement-intro-title">🎯 Ton parcours est prêt</div>
+                    <p class="placement-intro-text">Niveau estimé : <b>${estimatedLevel}</b> · confiance ${confidence}</p>
+                    <div class="section-title" style="margin-top:var(--space-4);">Ton profil par niveau</div>
+                    ${levelBarsHtml}
+                    ${skillBarsHtml ? `<div class="section-title" style="margin-top:var(--space-4);">Ce qu'on a pu observer</div>${skillBarsHtml}` : ''}
+                    <button class="btn btn-green" style="margin-top:var(--space-5);" onclick="placementGoToApp()">Commencer mon parcours →</button>
+                </div>`;
+        }
+
+        function placementGoToApp() {
+            placementState = null;
+            const backBtn = document.getElementById('exercise-back-btn');
+            if (backBtn) backBtn.innerText = '← Retour à la leçon';
+            showHome();
+        }
+
         // ===== Dashboard =====
         // Résumé du module "en cours" pour le petit bloc secondaire "▶️ Continuer" (voir
         // getCurrentModuleProgress). Ne crée aucun nouvel état : relit simplement
@@ -1039,6 +1442,21 @@ if (firebaseAvailable) {
             if (!block) return;
             const vp = getVocabProgress();
             const reviewCount = getReviewItems().length;
+
+            // ===== 0. Première utilisation : proposer l'évaluation avant de plonger en A1.01 =====
+            // Ne s'affiche que pour un compte réellement neuf (aucune notion jamais tentée, aucun
+            // historique de placement) — dès la première vraie réponse, ce bloc disparaît de
+            // lui-même au prochain rendu.
+            const isBrandNew = curriculumLoaded
+                && Object.values(state.curriculum.notionProgress).every(p => !p.attempts)
+                && !(state.placement.history || []).length;
+            const placementNudgeHtml = isBrandNew ? `
+                <div class="dash-card dash-secondary-card" style="cursor:default;">
+                    <div class="dash-secondary-label">👋 Nouveau ici</div>
+                    <div class="dash-secondary-title">Déjà un niveau en néerlandais ?</div>
+                    <div class="dash-secondary-sub" style="margin-bottom:10px;">On peut identifier ce que tu maîtrises déjà pour ne pas te faire recommencer depuis zéro.</div>
+                    <button class="btn btn-green" style="margin-top:0;" onclick="showPlacementIntro()">🚀 Évaluer mon niveau</button>
+                </div>` : '';
 
             // ===== 1. Bloc dominant : "🎯 Pour toi maintenant" (mode "professeur") =====
             let recoHtml = '';
@@ -1109,6 +1527,7 @@ if (firebaseAvailable) {
                 </div>`).join('') : '';
 
             block.innerHTML = `
+                ${placementNudgeHtml}
                 ${recoHtml}
                 ${progressionHtml}
                 ${continuerHtml}
@@ -1373,7 +1792,9 @@ if (firebaseAvailable) {
         function renderCurrentExercise() {
             const ex = exerciseQueue[exerciseIndex];
             exerciseSelectedAnswer = null;
-            document.getElementById('exercise-progress').innerText = `Exercice ${exerciseIndex + 1} / ${exerciseQueue.length}`;
+            document.getElementById('exercise-progress').innerText = (placementState && placementState.active)
+                ? `Évaluation de ton niveau — Question ${placementState.askedCount}`
+                : `Exercice ${exerciseIndex + 1} / ${exerciseQueue.length}`;
             document.getElementById('exercise-question').innerText = ex.question;
             document.getElementById('exercise-feedback').innerText = '';
             document.getElementById('exercise-check-btn').style.display = '';
@@ -1447,17 +1868,14 @@ if (firebaseAvailable) {
             renderOrderZone();
         }
 
-        function checkExerciseAnswer() {
-            const ex = exerciseQueue[exerciseIndex];
-            let given;
-            if (ex.type === 'qcm') given = exerciseSelectedAnswer;
-            else if (ex.type === 'remise_en_ordre') given = exerciseOrderSelection.join(' ');
-            else given = (document.getElementById('exercise-text-input').value || '').trim();
-            if (!given) return;
-
-            const expected = ex.type === 'remise_en_ordre' ? ex.answer.join(' ') : ex.answer;
-            const isCorrect = normalize(given) === normalize(expected);
-            const p = ntProgress(ex.notionId);
+        // ===== Mise à jour de notionProgress suite à une vraie réponse (exercice normal OU exercice
+        // posé pendant le Placement Engine) =====
+        // Point d'entrée UNIQUE vers MasteryEngine/WeaknessEngine pour toute réponse réelle à un
+        // exercice de notion : aucune deuxième logique de mise à jour n'existe ailleurs. Extrait tel
+        // quel de checkExerciseAnswer (même comportement, mêmes champs) pour que le Placement Engine
+        // puisse l'appeler avec de vraies réponses sans dupliquer/réinventer cette logique.
+        function recordNotionAttempt(notionId, isCorrect) {
+            const p = ntProgress(notionId);
             p.attempts++;
             if (isCorrect) {
                 p.correct++;
@@ -1474,6 +1892,20 @@ if (firebaseAvailable) {
             p.lastResult = isCorrect ? 'correct' : 'incorrect';
             p.lastAttemptAt = Date.now();
             save();
+            return p;
+        }
+
+        function checkExerciseAnswer() {
+            const ex = exerciseQueue[exerciseIndex];
+            let given;
+            if (ex.type === 'qcm') given = exerciseSelectedAnswer;
+            else if (ex.type === 'remise_en_ordre') given = exerciseOrderSelection.join(' ');
+            else given = (document.getElementById('exercise-text-input').value || '').trim();
+            if (!given) return;
+
+            const expected = ex.type === 'remise_en_ordre' ? ex.answer.join(' ') : ex.answer;
+            const isCorrect = normalize(given) === normalize(expected);
+            recordNotionAttempt(ex.notionId, isCorrect);
 
             const fb = document.getElementById('exercise-feedback');
             fb.style.color = isCorrect ? 'var(--success)' : 'var(--wrong)';
@@ -1498,6 +1930,7 @@ if (firebaseAvailable) {
         function nextExercise() {
             exerciseIndex++;
             if (exerciseIndex >= exerciseQueue.length) {
+                if (placementState && placementState.active) { placementAfterAnswer(); return; }
                 const notionId = exerciseQueue[0].notionId;
                 showLesson(notionId);
                 renderDashboard();
@@ -2764,6 +3197,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-stat-tile"><div class="ps-num">${masteredNotions}</div><div class="ps-label">Notions maîtrisées</div></div>
                 </div>
                 <div class="profil-menu">
+                    <div class="profil-menu-row" onclick="showPlacementIntro()"><span class="pm-icon">🚀</span><span>Évaluer mon niveau</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showApprendre()"><span class="pm-icon">📚</span><span>Mon parcours</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showReviser()"><span class="pm-icon">🔁</span><span>Révisions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showWordList()"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
