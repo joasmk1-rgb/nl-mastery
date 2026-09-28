@@ -739,7 +739,7 @@ if (firebaseAvailable) {
                     const ready = notion.status === 'pret';
                     const unlocked = ready && isNotionUnlocked(nid);
                     const mastery = ready ? computeNotionMastery(nid) : 0;
-                    const label = nid.replace(/_/g, ' ');
+                    const label = (ready && notion.content && notion.content.titre) ? notion.content.titre : nid.replace(/_/g, ' ');
                     const statusHtml = !ready
                         ? `<span class="notion-status pending">à venir</span>`
                         : `<span class="notion-status s${mastery}">${mastery}/5</span>`;
@@ -770,10 +770,12 @@ if (firebaseAvailable) {
             const mastery = computeNotionMastery(notionId);
             const rpSuggestion = mastery >= 4 ? getRoleplaySuggestion(notionId) : null;
             document.getElementById('lesson-content').innerHTML = `
+                ${c.titre ? `<div class="lesson-titre">${c.titre}</div>` : ''}
                 <div class="lesson-block"><h3>🎯 Objectif</h3><p>${c.objectif || ''}</p></div>
                 <div class="lesson-block"><h3>📖 Comprendre</h3><p>${c.comprendre || ''}</p></div>
                 <div class="lesson-block"><h3>🇳🇱 Règle</h3><p>${c.regle || ''}</p></div>
                 <div class="lesson-block"><h3>👀 Exemples</h3>${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
+                ${c.contrastes ? `<div class="lesson-block lesson-contrastes"><h3>🔍 Points de friction</h3><p>${c.contrastes}</p></div>` : ''}
                 <div class="lesson-block"><h3>⚠️ Erreurs fréquentes</h3>${(c.erreursFrequentes || []).map(er => `<div class="lesson-error">${er}</div>`).join('')}</div>
                 ${c.objectifCommunication ? `<div class="lesson-block"><h3>💬 Objectif de communication</h3><p>${c.objectifCommunication}</p></div>` : ''}
                 ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><h3>🗂️ Vocabulaire utile</h3><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}

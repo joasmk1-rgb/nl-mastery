@@ -2686,5 +2686,1756 @@
       "Is brood er?"
     ],
     "answer": "Is er brood?"
+  },
+  {
+    "id": "ex_b1_omdoor1",
+    "notionId": "omdat_vs_doordat",
+    "type": "qcm",
+    "question": "Kies het juiste woord: \"Het evenement gaat niet door ___ het hard regent.\" (fait météo, pas d'intention)",
+    "options": [
+      "omdat",
+      "doordat"
+    ],
+    "answer": "doordat"
+  },
+  {
+    "id": "ex_b1_omdoor2",
+    "notionId": "omdat_vs_doordat",
+    "type": "qcm",
+    "question": "Kies het juiste woord: \"Ik blijf thuis ___ ik ziek ben.\" (raison personnelle)",
+    "options": [
+      "omdat",
+      "doordat"
+    ],
+    "answer": "omdat"
+  },
+  {
+    "id": "ex_b1_omdoor3",
+    "notionId": "omdat_vs_doordat",
+    "type": "qcm",
+    "question": "Pourquoi utilise-t-on 'doordat' et pas 'omdat' dans \"Ik kwam te laat doordat de trein vertraging had\" ?",
+    "options": [
+      "Parce que c'est un choix personnel",
+      "Parce que c'est un enchaînement de faits sans intention",
+      "Parce que 'doordat' est plus poli"
+    ],
+    "answer": "Parce que c'est un enchaînement de faits sans intention"
+  },
+  {
+    "id": "ex_b1_omdoor4",
+    "notionId": "omdat_vs_doordat",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik ben boos ___ je te laat was.\" (raison)",
+    "answer": "omdat"
+  },
+  {
+    "id": "ex_b1_omdoor5",
+    "notionId": "omdat_vs_doordat",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"L'événement n'a pas lieu à cause de la forte pluie.\"",
+    "words": [
+      "Het",
+      "evenement",
+      "gaat",
+      "niet",
+      "door",
+      "doordat",
+      "het",
+      "hard",
+      "regent"
+    ],
+    "answer": [
+      "Het",
+      "evenement",
+      "gaat",
+      "niet",
+      "door",
+      "doordat",
+      "het",
+      "hard",
+      "regent"
+    ]
+  },
+  {
+    "id": "ex_b1_wantomdat1",
+    "notionId": "want_vs_omdat_b1",
+    "type": "qcm",
+    "question": "Quelle phrase respecte l'ordre des mots après 'omdat' ?",
+    "options": [
+      "Ik neem de trein niet omdat die is te duur.",
+      "Ik neem de trein niet omdat die te duur is.",
+      "Ik neem de trein niet omdat te duur die is."
+    ],
+    "answer": "Ik neem de trein niet omdat die te duur is."
+  },
+  {
+    "id": "ex_b1_wantomdat2",
+    "notionId": "want_vs_omdat_b1",
+    "type": "texte_a_trous",
+    "question": "Transforme en gardant le sens : \"Ik ga naar huis, want ik ben moe.\" → \"Ik ga naar huis omdat ik ___ ben.\"",
+    "answer": "moe"
+  },
+  {
+    "id": "ex_b1_wantomdat3",
+    "notionId": "want_vs_omdat_b1",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre (version 'omdat') : \"Je ne prends pas le train parce qu'il est trop cher.\"",
+    "words": [
+      "Ik",
+      "neem",
+      "de",
+      "trein",
+      "niet",
+      "omdat",
+      "die",
+      "te",
+      "duur",
+      "is"
+    ],
+    "answer": [
+      "Ik",
+      "neem",
+      "de",
+      "trein",
+      "niet",
+      "omdat",
+      "die",
+      "te",
+      "duur",
+      "is"
+    ]
+  },
+  {
+    "id": "ex_b1_wantomdat4",
+    "notionId": "want_vs_omdat_b1",
+    "type": "qcm",
+    "question": "Corrige : \"Ik ga naar huis omdat ik ben moe.\" Quelle est la bonne version ?",
+    "options": [
+      "Ik ga naar huis omdat ik ben moe.",
+      "Ik ga naar huis omdat ik moe ben.",
+      "Ik ga naar huis omdat ben ik moe."
+    ],
+    "answer": "Ik ga naar huis omdat ik moe ben."
+  },
+  {
+    "id": "ex_b1_dusdaarom1",
+    "notionId": "dus_daarom_daardoor",
+    "type": "qcm",
+    "question": "Kies het juiste woord: \"Ze was ziek, ___ kon ze niet komen.\" (effet concret/mécanique)",
+    "options": [
+      "dus",
+      "daarom",
+      "daardoor"
+    ],
+    "answer": "daardoor"
+  },
+  {
+    "id": "ex_b1_dusdaarom2",
+    "notionId": "dus_daarom_daardoor",
+    "type": "qcm",
+    "question": "Kies de juiste zin (met inversie): \"Het regent hard. ___\"",
+    "options": [
+      "Daarom ik blijf thuis.",
+      "Daarom blijf ik thuis.",
+      "Ik daarom blijf thuis."
+    ],
+    "answer": "Daarom blijf ik thuis."
+  },
+  {
+    "id": "ex_b1_dusdaarom3",
+    "notionId": "dus_daarom_daardoor",
+    "type": "texte_a_trous",
+    "question": "Complète (conclusion, pas d'inversion nécessaire ici) : \"Het regent, ___ ik neem een paraplu.\"",
+    "answer": "dus"
+  },
+  {
+    "id": "ex_b1_dusdaarom4",
+    "notionId": "dus_daarom_daardoor",
+    "type": "qcm",
+    "question": "Quelle phrase met l'accent sur la RAISON qui motive la conséquence plutôt que sur l'effet mécanique ?",
+    "options": [
+      "Daardoor blijft het evenement leeg.",
+      "Daarom blijf ik thuis.",
+      "Het regent, dus ik blijf thuis."
+    ],
+    "answer": "Daarom blijf ik thuis."
+  },
+  {
+    "id": "ex_b1_dusdaarom5",
+    "notionId": "dus_daarom_daardoor",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre (avec inversion) : \"C'est pour ça que je reste à la maison.\"",
+    "words": [
+      "Daarom",
+      "blijf",
+      "ik",
+      "thuis"
+    ],
+    "answer": [
+      "Daarom",
+      "blijf",
+      "ik",
+      "thuis"
+    ]
+  },
+  {
+    "id": "ex_b1_zodat1",
+    "notionId": "zodat",
+    "type": "qcm",
+    "question": "\"Hij sprak langzaam, zodat iedereen hem kon begrijpen.\" Cette phrase exprime surtout :",
+    "options": [
+      "une conséquence naturelle",
+      "un but",
+      "une condition"
+    ],
+    "answer": "une conséquence naturelle"
+  },
+  {
+    "id": "ex_b1_zodat2",
+    "notionId": "zodat",
+    "type": "qcm",
+    "question": "\"Ik schrijf het op, zodat ik het niet vergeet.\" Cette phrase exprime surtout :",
+    "options": [
+      "une conséquence naturelle",
+      "un but/une intention",
+      "une opposition"
+    ],
+    "answer": "un but/une intention"
+  },
+  {
+    "id": "ex_b1_zodat3",
+    "notionId": "zodat",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ze fluisterde, zodat niemand het ___.\" (horen, imperfectum)",
+    "answer": "hoorde"
+  },
+  {
+    "id": "ex_b1_zodat4",
+    "notionId": "zodat",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"J'éteins mon téléphone pour pouvoir travailler tranquillement.\"",
+    "words": [
+      "Ik",
+      "zet",
+      "mijn",
+      "telefoon",
+      "uit",
+      "zodat",
+      "ik",
+      "rustig",
+      "kan",
+      "werken"
+    ],
+    "answer": [
+      "Ik",
+      "zet",
+      "mijn",
+      "telefoon",
+      "uit",
+      "zodat",
+      "ik",
+      "rustig",
+      "kan",
+      "werken"
+    ]
+  },
+  {
+    "id": "ex_b1_zodat5",
+    "notionId": "zodat",
+    "type": "qcm",
+    "question": "Quelle est la différence structurelle entre 'zodat' et 'om... te' ?",
+    "options": [
+      "'Zodat' introduit une vraie subordonnée avec sujet + verbe conjugué ; 'om...te' utilise un infinitif",
+      "Il n'y a aucune différence",
+      "'Zodat' s'utilise seulement à l'oral"
+    ],
+    "answer": "'Zodat' introduit une vraie subordonnée avec sujet + verbe conjugué ; 'om...te' utilise un infinitif"
+  },
+  {
+    "id": "ex_b1_hoewel1",
+    "notionId": "hoewel_ondanks",
+    "type": "qcm",
+    "question": "Quelle construction est correcte ?",
+    "options": [
+      "Ondanks het regent, gaan we naar buiten.",
+      "Ondanks de regen gaan we naar buiten.",
+      "Ondanks regent het, gaan we naar buiten."
+    ],
+    "answer": "Ondanks de regen gaan we naar buiten."
+  },
+  {
+    "id": "ex_b1_hoewel2",
+    "notionId": "hoewel_ondanks",
+    "type": "qcm",
+    "question": "Quelle construction est correcte avec un verbe conjugué ?",
+    "options": [
+      "Hoewel het regent, gaan we naar buiten.",
+      "Hoewel de regen, gaan we naar buiten.",
+      "Hoewel regent het, gaan we naar buiten."
+    ],
+    "answer": "Hoewel het regent, gaan we naar buiten."
+  },
+  {
+    "id": "ex_b1_hoewel3",
+    "notionId": "hoewel_ondanks",
+    "type": "texte_a_trous",
+    "question": "Complète (inversion) : \"Hoewel hij moe was, ___ hij toch gekomen.\" (zijn)",
+    "answer": "is"
+  },
+  {
+    "id": "ex_b1_hoewel4",
+    "notionId": "hoewel_ondanks",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Bien qu'il pleuve, nous sortons.\"",
+    "words": [
+      "Hoewel",
+      "het",
+      "regent",
+      "gaan",
+      "we",
+      "naar",
+      "buiten"
+    ],
+    "answer": [
+      "Hoewel",
+      "het",
+      "regent",
+      "gaan",
+      "we",
+      "naar",
+      "buiten"
+    ]
+  },
+  {
+    "id": "ex_b1_hoewel5",
+    "notionId": "hoewel_ondanks",
+    "type": "qcm",
+    "question": "Laquelle de ces trois formes est suivie d'un groupe nominal (pas d'un verbe conjugué) ?",
+    "options": [
+      "hoewel",
+      "ondanks",
+      "ondanks dat"
+    ],
+    "answer": "ondanks"
+  },
+  {
+    "id": "ex_b1_plvb1",
+    "notionId": "plusieurs_verbes_bijzin",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik weet dat hij zal morgen komen.",
+      "Ik weet dat hij morgen zal komen.",
+      "Ik weet dat hij morgen komen zal."
+    ],
+    "answer": "Ik weet dat hij morgen zal komen."
+  },
+  {
+    "id": "ex_b1_plvb2",
+    "notionId": "plusieurs_verbes_bijzin",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik denk dat hij dat niet heeft kunnen ___.\" (doen)",
+    "answer": "doen"
+  },
+  {
+    "id": "ex_b1_plvb3",
+    "notionId": "plusieurs_verbes_bijzin",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Elle dit qu'elle veut essayer.\"",
+    "words": [
+      "Ze",
+      "zegt",
+      "dat",
+      "ze",
+      "het",
+      "wil",
+      "proberen"
+    ],
+    "answer": [
+      "Ze",
+      "zegt",
+      "dat",
+      "ze",
+      "het",
+      "wil",
+      "proberen"
+    ]
+  },
+  {
+    "id": "ex_b1_plvb4",
+    "notionId": "plusieurs_verbes_bijzin",
+    "type": "qcm",
+    "question": "Où se placent les verbes multiples dans une bijzin ?",
+    "options": [
+      "Toujours groupés en fin de proposition",
+      "Séparés comme dans une hoofdzin",
+      "N'importe où selon le style"
+    ],
+    "answer": "Toujours groupés en fin de proposition"
+  },
+  {
+    "id": "ex_b1_perfbij1",
+    "notionId": "perfectum_bijzin",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik weet dat hij naar huis gegaan is.",
+      "Ik weet dat hij naar huis is gegaan.",
+      "Ik weet dat hij is naar huis gegaan."
+    ],
+    "answer": "Ik weet dat hij naar huis is gegaan."
+  },
+  {
+    "id": "ex_b1_perfbij2",
+    "notionId": "perfectum_bijzin",
+    "type": "texte_a_trous",
+    "question": "Complète (rapporté au passé) : \"Ik dacht dat hij naar huis ___ gegaan.\" (imperfectum de zijn)",
+    "answer": "was"
+  },
+  {
+    "id": "ex_b1_perfbij3",
+    "notionId": "perfectum_bijzin",
+    "type": "qcm",
+    "question": "Pourquoi utilise-t-on 'was gegaan' et non 'is gegaan' dans \"Ik dacht dat hij naar huis was gegaan\" ?",
+    "options": [
+      "Parce que le verbe principal ('dacht') est au passé, l'auxiliaire recule aussi",
+      "Parce que 'was' est plus poli",
+      "Il n'y a pas de raison, les deux sont équivalents"
+    ],
+    "answer": "Parce que le verbe principal ('dacht') est au passé, l'auxiliaire recule aussi"
+  },
+  {
+    "id": "ex_b1_perfbij4",
+    "notionId": "perfectum_bijzin",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je ne savais pas que tu avais vu ça.\"",
+    "words": [
+      "Ik",
+      "wist",
+      "niet",
+      "dat",
+      "je",
+      "dat",
+      "had",
+      "gezien"
+    ],
+    "answer": [
+      "Ik",
+      "wist",
+      "niet",
+      "dat",
+      "je",
+      "dat",
+      "had",
+      "gezien"
+    ]
+  },
+  {
+    "id": "ex_b1_moddouble1",
+    "notionId": "modaux_infinitif_perfectum",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik heb het gemoeten doen.",
+      "Ik heb het moeten doen.",
+      "Ik heb moeten het doen."
+    ],
+    "answer": "Ik heb het moeten doen."
+  },
+  {
+    "id": "ex_b1_moddouble2",
+    "notionId": "modaux_infinitif_perfectum",
+    "type": "qcm",
+    "question": "Quelle phrase est correcte ?",
+    "options": [
+      "Ik heb niet gekund komen.",
+      "Ik heb niet kunnen komen.",
+      "Ik heb kunnen niet komen."
+    ],
+    "answer": "Ik heb niet kunnen komen."
+  },
+  {
+    "id": "ex_b1_moddouble3",
+    "notionId": "modaux_infinitif_perfectum",
+    "type": "texte_a_trous",
+    "question": "Complète (plus-que-parfait) : \"Hij ___ het moeten weten.\" (avoir, imperfectum)",
+    "answer": "had"
+  },
+  {
+    "id": "ex_b1_moddouble4",
+    "notionId": "modaux_infinitif_perfectum",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Nous avons dû attendre longtemps.\"",
+    "words": [
+      "We",
+      "hebben",
+      "lang",
+      "moeten",
+      "wachten"
+    ],
+    "answer": [
+      "We",
+      "hebben",
+      "lang",
+      "moeten",
+      "wachten"
+    ]
+  },
+  {
+    "id": "ex_b1_moddouble5",
+    "notionId": "modaux_infinitif_perfectum",
+    "type": "qcm",
+    "question": "Pourquoi 'moeten' ne prend-il jamais 'ge-' dans cette construction ?",
+    "options": [
+      "Parce qu'il reste à l'infinitif dans le double infinitif, jamais au participe passé",
+      "Parce que 'moeten' est un verbe irrégulier sans participe",
+      "Parce que c'est une exception rare"
+    ],
+    "answer": "Parce qu'il reste à l'infinitif dans le double infinitif, jamais au participe passé"
+  },
+  {
+    "id": "ex_b1_rel1",
+    "notionId": "relatives_die_dat_waar_wie",
+    "type": "qcm",
+    "question": "Complète : \"Het boek ___ ik gisteren heb gekocht is goed.\" (het-woord, objet)",
+    "options": [
+      "die",
+      "dat",
+      "waar"
+    ],
+    "answer": "dat"
+  },
+  {
+    "id": "ex_b1_rel2",
+    "notionId": "relatives_die_dat_waar_wie",
+    "type": "qcm",
+    "question": "Complète : \"De collega met ___ ik werk is aardig.\" (personne, après préposition)",
+    "options": [
+      "die",
+      "wie",
+      "dat"
+    ],
+    "answer": "wie"
+  },
+  {
+    "id": "ex_b1_rel3",
+    "notionId": "relatives_die_dat_waar_wie",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Het bedrijf ___ ik stage heb gelopen is groot.\" (lieu)",
+    "answer": "waar"
+  },
+  {
+    "id": "ex_b1_rel4",
+    "notionId": "relatives_die_dat_waar_wie",
+    "type": "qcm",
+    "question": "Pourquoi ne peut-on pas dire \"de collega met die ik werk\" ?",
+    "options": [
+      "Parce qu'après une préposition, pour une personne, on utilise 'wie' et non 'die'",
+      "Parce que 'die' n'existe pas en néerlandais",
+      "Parce qu'il faut toujours 'waar' après une préposition"
+    ],
+    "answer": "Parce qu'après une préposition, pour une personne, on utilise 'wie' et non 'die'"
+  },
+  {
+    "id": "ex_b1_rel5",
+    "notionId": "relatives_die_dat_waar_wie",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"L'homme qui se tient là-bas...\"",
+    "words": [
+      "De",
+      "man",
+      "die",
+      "daar",
+      "staat"
+    ],
+    "answer": [
+      "De",
+      "man",
+      "die",
+      "daar",
+      "staat"
+    ]
+  },
+  {
+    "id": "ex_b1_combsub1",
+    "notionId": "combiner_subordonnees",
+    "type": "qcm",
+    "question": "Dans \"Ik weet dat hij thuis blijft omdat hij ziek is\", à quelle question répond \"omdat hij ziek is\" ?",
+    "options": [
+      "Qu'est-ce que je sais ?",
+      "Pourquoi reste-t-il ?",
+      "Où est-il ?"
+    ],
+    "answer": "Pourquoi reste-t-il ?"
+  },
+  {
+    "id": "ex_b1_combsub2",
+    "notionId": "combiner_subordonnees",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik denk dat hij niet komt omdat hij morgen moet ___.\" (travailler)",
+    "answer": "werken"
+  },
+  {
+    "id": "ex_b1_combsub3",
+    "notionId": "combiner_subordonnees",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Elle dit qu'elle est contente parce qu'elle a réussi.\"",
+    "words": [
+      "Ze",
+      "zegt",
+      "dat",
+      "ze",
+      "blij",
+      "is",
+      "omdat",
+      "ze",
+      "geslaagd",
+      "is"
+    ],
+    "answer": [
+      "Ze",
+      "zegt",
+      "dat",
+      "ze",
+      "blij",
+      "is",
+      "omdat",
+      "ze",
+      "geslaagd",
+      "is"
+    ]
+  },
+  {
+    "id": "ex_b1_combsub4",
+    "notionId": "combiner_subordonnees",
+    "type": "qcm",
+    "question": "Quelle phrase combine correctement deux subordonnées ?",
+    "options": [
+      "Ik weet dat hij thuis blijft omdat hij is ziek.",
+      "Ik weet dat hij thuis blijft omdat hij ziek is.",
+      "Ik weet dat hij blijft thuis omdat hij ziek is."
+    ],
+    "answer": "Ik weet dat hij thuis blijft omdat hij ziek is."
+  },
+  {
+    "id": "ex_b1_racexp1",
+    "notionId": "raconter_experience",
+    "type": "qcm",
+    "question": "Laquelle de ces phrases pose le CONTEXTE d'un récit ?",
+    "options": [
+      "Uiteindelijk heb ik de baan gekregen.",
+      "Vorig jaar werkte ik in Antwerpen.",
+      "Ik was heel verrast."
+    ],
+    "answer": "Vorig jaar werkte ik in Antwerpen."
+  },
+  {
+    "id": "ex_b1_racexp2",
+    "notionId": "raconter_experience",
+    "type": "qcm",
+    "question": "Quel est l'ordre logique d'un récit d'expérience ?",
+    "options": [
+      "Résultat → contexte → événement → réaction",
+      "Contexte → événement → réaction → résultat",
+      "Réaction → résultat → contexte → événement"
+    ],
+    "answer": "Contexte → événement → réaction → résultat"
+  },
+  {
+    "id": "ex_b1_racexp3",
+    "notionId": "raconter_experience",
+    "type": "texte_a_trous",
+    "question": "Complète (réaction) : \"Ik was heel ___ toen ik het nieuws hoorde.\" (verrast)",
+    "answer": "verrast"
+  },
+  {
+    "id": "ex_b1_racexp4",
+    "notionId": "raconter_experience",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Un jour j'ai reçu un appel de mon patron.\"",
+    "words": [
+      "Op",
+      "een",
+      "dag",
+      "kreeg",
+      "ik",
+      "een",
+      "telefoontje",
+      "van",
+      "mijn",
+      "baas"
+    ],
+    "answer": [
+      "Op",
+      "een",
+      "dag",
+      "kreeg",
+      "ik",
+      "een",
+      "telefoontje",
+      "van",
+      "mijn",
+      "baas"
+    ]
+  },
+  {
+    "id": "ex_b1_perfimprec1",
+    "notionId": "perfectum_imperfectum_recit",
+    "type": "qcm",
+    "question": "Quelle phrase combine correctement décor (imperfectum) et action (perfectum/imperfectum ponctuel) ?",
+    "options": [
+      "Ik liep naar huis toen ik mijn vriend zag.",
+      "Ik ben naar huis gelopen toen ik mijn vriend heb gezien.",
+      "Ik loop naar huis toen ik mijn vriend zie."
+    ],
+    "answer": "Ik liep naar huis toen ik mijn vriend zag."
+  },
+  {
+    "id": "ex_b1_perfimprec2",
+    "notionId": "perfectum_imperfectum_recit",
+    "type": "texte_a_trous",
+    "question": "Complète (décor, imperfectum) : \"___ ik kookte, belde mijn moeder.\" (terwijl)",
+    "answer": "Terwijl"
+  },
+  {
+    "id": "ex_b1_perfimprec3",
+    "notionId": "perfectum_imperfectum_recit",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"J'étais juste réveillé quand le réveil a encore sonné.\"",
+    "words": [
+      "Ik",
+      "was",
+      "net",
+      "wakker",
+      "toen",
+      "de",
+      "wekker",
+      "weer",
+      "afging"
+    ],
+    "answer": [
+      "Ik",
+      "was",
+      "net",
+      "wakker",
+      "toen",
+      "de",
+      "wekker",
+      "weer",
+      "afging"
+    ]
+  },
+  {
+    "id": "ex_b1_perfimprec4",
+    "notionId": "perfectum_imperfectum_recit",
+    "type": "qcm",
+    "question": "Pourquoi \"terwijl ik kookte\" est-il à l'imperfectum ?",
+    "options": [
+      "Parce que c'est le décor/la situation en cours pendant laquelle autre chose se passe",
+      "Parce que 'terwijl' l'exige toujours au perfectum",
+      "Il n'y a pas de raison particulière"
+    ],
+    "answer": "Parce que c'est le décor/la situation en cours pendant laquelle autre chose se passe"
+  },
+  {
+    "id": "ex_b1_chrono1",
+    "notionId": "chronologie_avancee",
+    "type": "qcm",
+    "question": "\"Zodra ik thuiskwam, belde ik mijn moeder.\" 'Zodra' exprime surtout :",
+    "options": [
+      "une simultanéité vague",
+      "un enchaînement immédiat (dès que)",
+      "une opposition"
+    ],
+    "answer": "un enchaînement immédiat (dès que)"
+  },
+  {
+    "id": "ex_b1_chrono2",
+    "notionId": "chronologie_avancee",
+    "type": "qcm",
+    "question": "Quelle phrase utilise correctement 'ondertussen' comme adverbe (inversion) ?",
+    "options": [
+      "Ondertussen mijn broer dekte de tafel.",
+      "Ondertussen dekte mijn broer de tafel.",
+      "Ondertussen dat mijn broer dekte de tafel."
+    ],
+    "answer": "Ondertussen dekte mijn broer de tafel."
+  },
+  {
+    "id": "ex_b1_chrono3",
+    "notionId": "chronologie_avancee",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Eerst gingen we winkelen, ___ aten we iets.\"",
+    "answer": "daarna"
+  },
+  {
+    "id": "ex_b1_chrono4",
+    "notionId": "chronologie_avancee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Nous sommes finalement arrivés à temps.\"",
+    "words": [
+      "Uiteindelijk",
+      "zijn",
+      "we",
+      "toch",
+      "op",
+      "tijd",
+      "aangekomen"
+    ],
+    "answer": [
+      "Uiteindelijk",
+      "zijn",
+      "we",
+      "toch",
+      "op",
+      "tijd",
+      "aangekomen"
+    ]
+  },
+  {
+    "id": "ex_b1_rachist1",
+    "notionId": "raconter_histoire_film",
+    "type": "qcm",
+    "question": "Pour résumer l'intrigue d'un film, quel temps est souvent utilisé ?",
+    "options": [
+      "Uniquement l'imperfectum",
+      "Souvent le présent narratif",
+      "Uniquement le plus-que-parfait"
+    ],
+    "answer": "Souvent le présent narratif"
+  },
+  {
+    "id": "ex_b1_rachist2",
+    "notionId": "raconter_histoire_film",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Het verhaal ___ over een man die zijn baan verliest.\" (gaan)",
+    "answer": "gaat"
+  },
+  {
+    "id": "ex_b1_rachist3",
+    "notionId": "raconter_histoire_film",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Son meilleur ami essaie de l'aider.\"",
+    "words": [
+      "Zijn",
+      "beste",
+      "vriend",
+      "probeert",
+      "hem",
+      "te",
+      "helpen"
+    ],
+    "answer": [
+      "Zijn",
+      "beste",
+      "vriend",
+      "probeert",
+      "hem",
+      "te",
+      "helpen"
+    ]
+  },
+  {
+    "id": "ex_b1_rachist4",
+    "notionId": "raconter_histoire_film",
+    "type": "qcm",
+    "question": "Que doit couvrir un bon résumé d'histoire selon la structure vue ?",
+    "options": [
+      "Seulement la fin",
+      "L'événement, les personnages, la suite et la fin",
+      "Seulement les personnages"
+    ],
+    "answer": "L'événement, les personnages, la suite et la fin"
+  },
+  {
+    "id": "ex_b1_probevol1",
+    "notionId": "decrire_probleme_evolution",
+    "type": "qcm",
+    "question": "Laquelle de ces phrases décrit la CAUSE du problème ?",
+    "options": [
+      "Er is een probleem met de levering.",
+      "Dat komt doordat de leverancier vertraging heeft.",
+      "Ik stel voor om de klant te informeren."
+    ],
+    "answer": "Dat komt doordat de leverancier vertraging heeft."
+  },
+  {
+    "id": "ex_b1_probevol2",
+    "notionId": "decrire_probleme_evolution",
+    "type": "texte_a_trous",
+    "question": "Complète (conséquence) : \"___ kunnen we de deadline niet halen.\" (daardoor)",
+    "answer": "Daardoor"
+  },
+  {
+    "id": "ex_b1_probevol3",
+    "notionId": "decrire_probleme_evolution",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je propose d'informer le client.\"",
+    "words": [
+      "Ik",
+      "stel",
+      "voor",
+      "om",
+      "de",
+      "klant",
+      "te",
+      "informeren"
+    ],
+    "answer": [
+      "Ik",
+      "stel",
+      "voor",
+      "om",
+      "de",
+      "klant",
+      "te",
+      "informeren"
+    ]
+  },
+  {
+    "id": "ex_b1_probevol4",
+    "notionId": "decrire_probleme_evolution",
+    "type": "qcm",
+    "question": "Quel est l'ordre logique de cette structure ?",
+    "options": [
+      "Solution → problème → cause → résultat",
+      "Problème → cause → conséquences → solution → résultat",
+      "Résultat → cause → problème → solution"
+    ],
+    "answer": "Problème → cause → conséquences → solution → résultat"
+  },
+  {
+    "id": "ex_b1_opdev1",
+    "notionId": "opinion_developpee",
+    "type": "qcm",
+    "question": "Laquelle de ces phrases est une opinion DÉVELOPPÉE ?",
+    "options": [
+      "Ik vind het goed.",
+      "Ik vind het een goed idee omdat het tijd bespaart.",
+      "Het is goed."
+    ],
+    "answer": "Ik vind het een goed idee omdat het tijd bespaart."
+  },
+  {
+    "id": "ex_b1_opdev2",
+    "notionId": "opinion_developpee",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Volgens mij is dat niet de beste oplossing ___ het te duur is.\"",
+    "answer": "omdat"
+  },
+  {
+    "id": "ex_b1_opdev3",
+    "notionId": "opinion_developpee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je pense que c'est une bonne idée parce que ça fait gagner du temps.\"",
+    "words": [
+      "Ik",
+      "vind",
+      "het",
+      "een",
+      "goed",
+      "idee",
+      "omdat",
+      "het",
+      "tijd",
+      "bespaart"
+    ],
+    "answer": [
+      "Ik",
+      "vind",
+      "het",
+      "een",
+      "goed",
+      "idee",
+      "omdat",
+      "het",
+      "tijd",
+      "bespaart"
+    ]
+  },
+  {
+    "id": "ex_b1_justif1",
+    "notionId": "donner_opinion_justifiee",
+    "type": "qcm",
+    "question": "Quel mot ajoute une explication après une affirmation, sans changer l'ordre des mots qui suit ?",
+    "options": [
+      "omdat",
+      "namelijk",
+      "daarom"
+    ],
+    "answer": "namelijk"
+  },
+  {
+    "id": "ex_b1_justif2",
+    "notionId": "donner_opinion_justifiee",
+    "type": "qcm",
+    "question": "Quel mot introduit une opinion qui vient APRÈS la raison déjà donnée ?",
+    "options": [
+      "want",
+      "omdat",
+      "daarom"
+    ],
+    "answer": "daarom"
+  },
+  {
+    "id": "ex_b1_justif3",
+    "notionId": "donner_opinion_justifiee",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik vind het een goed plan. Het is ___ goedkoper dan de andere optie.\"",
+    "answer": "namelijk"
+  },
+  {
+    "id": "ex_b1_justif4",
+    "notionId": "donner_opinion_justifiee",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"C'est pour ça que je pense que nous devons économiser.\"",
+    "words": [
+      "Daarom",
+      "vind",
+      "ik",
+      "dat",
+      "we",
+      "moeten",
+      "sparen"
+    ],
+    "answer": [
+      "Daarom",
+      "vind",
+      "ik",
+      "dat",
+      "we",
+      "moeten",
+      "sparen"
+    ]
+  },
+  {
+    "id": "ex_b1_accord1",
+    "notionId": "accord_desaccord_nuance",
+    "type": "qcm",
+    "question": "Quelle expression marque un accord PARTIEL ?",
+    "options": [
+      "Ik ben het ermee eens.",
+      "Ik ben het er niet helemaal mee eens.",
+      "Dat klopt."
+    ],
+    "answer": "Ik ben het er niet helemaal mee eens."
+  },
+  {
+    "id": "ex_b1_accord2",
+    "notionId": "accord_desaccord_nuance",
+    "type": "qcm",
+    "question": "Quelle expression introduit un désaccord de façon polie ?",
+    "options": [
+      "Ik begrijp wat je bedoelt, maar...",
+      "Nee, dat is fout.",
+      "Dat klopt."
+    ],
+    "answer": "Ik begrijp wat je bedoelt, maar..."
+  },
+  {
+    "id": "ex_b1_accord3",
+    "notionId": "accord_desaccord_nuance",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Dat ___ ervan af.\" (dépend)",
+    "answer": "hangt"
+  },
+  {
+    "id": "ex_b1_compar1",
+    "notionId": "comparer_deux_possibilites",
+    "type": "qcm",
+    "question": "Quelle expression introduit un AVANTAGE ?",
+    "options": [
+      "Het nadeel is...",
+      "Het voordeel is...",
+      "Een probleem is..."
+    ],
+    "answer": "Het voordeel is..."
+  },
+  {
+    "id": "ex_b1_compar2",
+    "notionId": "comparer_deux_possibilites",
+    "type": "texte_a_trous",
+    "question": "Complète : \"___ de ene kant is de trein sneller, aan de andere kant is de auto goedkoper.\"",
+    "answer": "Aan"
+  },
+  {
+    "id": "ex_b1_compar3",
+    "notionId": "comparer_deux_possibilites",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"L'inconvénient est que tu as moins de contact avec les collègues.\"",
+    "words": [
+      "Het",
+      "nadeel",
+      "is",
+      "dat",
+      "je",
+      "minder",
+      "contact",
+      "hebt",
+      "met",
+      "collega's"
+    ],
+    "answer": [
+      "Het",
+      "nadeel",
+      "is",
+      "dat",
+      "je",
+      "minder",
+      "contact",
+      "hebt",
+      "met",
+      "collega's"
+    ]
+  },
+  {
+    "id": "ex_b1_argsimp1",
+    "notionId": "argumenter_simple",
+    "type": "qcm",
+    "question": "Quelle est la structure de la mini-argumentation B1 ?",
+    "options": [
+      "Exemple → conclusion → opinion → raison",
+      "Opinion → raison → exemple → conclusion",
+      "Conclusion → opinion → exemple → raison"
+    ],
+    "answer": "Opinion → raison → exemple → conclusion"
+  },
+  {
+    "id": "ex_b1_argsimp2",
+    "notionId": "argumenter_simple",
+    "type": "texte_a_trous",
+    "question": "Complète (introduit un exemple) : \"___, ik kan mijn kinderen naar school brengen.\"",
+    "answer": "Bijvoorbeeld"
+  },
+  {
+    "id": "ex_b1_argsimp3",
+    "notionId": "argumenter_simple",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"C'est pour ça que je pense que plus d'entreprises devraient le permettre.\"",
+    "words": [
+      "Daarom",
+      "vind",
+      "ik",
+      "dat",
+      "meer",
+      "bedrijven",
+      "dit",
+      "zouden",
+      "moeten",
+      "toestaan"
+    ],
+    "answer": [
+      "Daarom",
+      "vind",
+      "ik",
+      "dat",
+      "meer",
+      "bedrijven",
+      "dit",
+      "zouden",
+      "moeten",
+      "toestaan"
+    ]
+  },
+  {
+    "id": "ex_b1_werk1",
+    "notionId": "werk_solliciteren",
+    "type": "qcm",
+    "question": "Comment dit-on \"Je postule pour le poste de...\" ?",
+    "options": [
+      "Ik heb ervaring als...",
+      "Ik solliciteer voor de functie van...",
+      "Ik ben beschikbaar vanaf..."
+    ],
+    "answer": "Ik solliciteer voor de functie van..."
+  },
+  {
+    "id": "ex_b1_werk2",
+    "notionId": "werk_solliciteren",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Mijn sterke ___ zijn stiptheid en teamwork.\"",
+    "answer": "punten"
+  },
+  {
+    "id": "ex_b1_werk3",
+    "notionId": "werk_solliciteren",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"J'ai trois ans d'expérience comme employé administratif.\"",
+    "words": [
+      "Ik",
+      "heb",
+      "drie",
+      "jaar",
+      "ervaring",
+      "als",
+      "administratief",
+      "medewerker"
+    ],
+    "answer": [
+      "Ik",
+      "heb",
+      "drie",
+      "jaar",
+      "ervaring",
+      "als",
+      "administratief",
+      "medewerker"
+    ]
+  },
+  {
+    "id": "ex_b1_etudes1",
+    "notionId": "etudes_formation",
+    "type": "qcm",
+    "question": "Quelle phrase décrit une formation EN COURS ?",
+    "options": [
+      "Ik heb een diploma in bedrijfsbeheer.",
+      "Ik volg momenteel een cursus Nederlands.",
+      "Ik heb een opleiding gevolgd in logistiek."
+    ],
+    "answer": "Ik volg momenteel een cursus Nederlands."
+  },
+  {
+    "id": "ex_b1_etudes2",
+    "notionId": "etudes_formation",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik wil graag mijn ___ in Excel verbeteren.\" (compétences)",
+    "answer": "vaardigheden"
+  },
+  {
+    "id": "ex_b1_etudes3",
+    "notionId": "etudes_formation",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"J'ai un diplôme en gestion d'entreprise.\"",
+    "words": [
+      "Ik",
+      "heb",
+      "een",
+      "diploma",
+      "in",
+      "bedrijfsbeheer"
+    ],
+    "answer": [
+      "Ik",
+      "heb",
+      "een",
+      "diploma",
+      "in",
+      "bedrijfsbeheer"
+    ]
+  },
+  {
+    "id": "ex_b1_admin1",
+    "notionId": "administration_b1",
+    "type": "qcm",
+    "question": "Comment demande-t-on quels documents sont nécessaires ?",
+    "options": [
+      "Ik heb een probleem met dit formulier.",
+      "Welke documenten heb ik nodig?",
+      "Ik wil graag informatie over mijn dossier."
+    ],
+    "answer": "Welke documenten heb ik nodig?"
+  },
+  {
+    "id": "ex_b1_admin2",
+    "notionId": "administration_b1",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik heb een ___ nodig bij de gemeente.\" (rendez-vous)",
+    "answer": "afspraak"
+  },
+  {
+    "id": "ex_b1_admin3",
+    "notionId": "administration_b1",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"J'ai un problème avec ce formulaire.\"",
+    "words": [
+      "Ik",
+      "heb",
+      "een",
+      "probleem",
+      "met",
+      "dit",
+      "formulier"
+    ],
+    "answer": [
+      "Ik",
+      "heb",
+      "een",
+      "probleem",
+      "met",
+      "dit",
+      "formulier"
+    ]
+  },
+  {
+    "id": "ex_b1_log1",
+    "notionId": "logement_b1",
+    "type": "qcm",
+    "question": "Que signifie \"de lasten\" ?",
+    "options": [
+      "le loyer",
+      "les charges",
+      "le contrat"
+    ],
+    "answer": "les charges"
+  },
+  {
+    "id": "ex_b1_log2",
+    "notionId": "logement_b1",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik wil mijn contract ___.\" (résilier)",
+    "answer": "opzeggen"
+  },
+  {
+    "id": "ex_b1_log3",
+    "notionId": "logement_b1",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Le propriétaire doit réparer ça d'urgence.\"",
+    "words": [
+      "De",
+      "eigenaar",
+      "moet",
+      "dit",
+      "dringend",
+      "repareren"
+    ],
+    "answer": [
+      "De",
+      "eigenaar",
+      "moet",
+      "dit",
+      "dringend",
+      "repareren"
+    ]
+  },
+  {
+    "id": "ex_b1_sante1",
+    "notionId": "sante_procedures_b1",
+    "type": "qcm",
+    "question": "Comment demande-t-on depuis quand durent des symptômes ?",
+    "options": [
+      "Wat voelt u?",
+      "Sinds wanneer heeft u deze klachten?",
+      "Neemt u medicijnen?"
+    ],
+    "answer": "Sinds wanneer heeft u deze klachten?"
+  },
+  {
+    "id": "ex_b1_sante2",
+    "notionId": "sante_procedures_b1",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik heb al drie dagen ___ van hoofdpijn.\" (last)",
+    "answer": "last"
+  },
+  {
+    "id": "ex_b1_sante3",
+    "notionId": "sante_procedures_b1",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Pouvez-vous expliquer ça encore une fois ?\"",
+    "words": [
+      "Kunt",
+      "u",
+      "dat",
+      "nog",
+      "een",
+      "keer",
+      "uitleggen"
+    ],
+    "answer": [
+      "Kunt",
+      "u",
+      "dat",
+      "nog",
+      "een",
+      "keer",
+      "uitleggen"
+    ]
+  },
+  {
+    "id": "ex_b1_formindir1",
+    "notionId": "formulations_indirectes",
+    "type": "qcm",
+    "question": "Laquelle de ces phrases est une formulation INDIRECTE et polie ?",
+    "options": [
+      "Sluit het raam.",
+      "Zou u misschien het raam kunnen sluiten?",
+      "Het raam is open."
+    ],
+    "answer": "Zou u misschien het raam kunnen sluiten?"
+  },
+  {
+    "id": "ex_b1_formindir2",
+    "notionId": "formulations_indirectes",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Het zou ___ dat de trein vertraging heeft.\" (kunnen)",
+    "answer": "kunnen"
+  },
+  {
+    "id": "ex_b1_formindir3",
+    "notionId": "formulations_indirectes",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je ne sais pas exactement s'il est déjà parti.\"",
+    "words": [
+      "Ik",
+      "weet",
+      "niet",
+      "precies",
+      "of",
+      "hij",
+      "al",
+      "vertrokken",
+      "is"
+    ],
+    "answer": [
+      "Ik",
+      "weet",
+      "niet",
+      "precies",
+      "of",
+      "hij",
+      "al",
+      "vertrokken",
+      "is"
+    ]
+  },
+  {
+    "id": "ex_b1_formindir4",
+    "notionId": "formulations_indirectes",
+    "type": "qcm",
+    "question": "Pourquoi utilise-t-on \"Zou u misschien...?\" plutôt qu'un impératif direct ?",
+    "options": [
+      "Parce que l'impératif est grammaticalement incorrect",
+      "Pour adoucir la demande et rester poli",
+      "Parce que 'zou' est obligatoire dans toutes les questions"
+    ],
+    "answer": "Pour adoucir la demande et rester poli"
+  },
+  {
+    "id": "ex_b1_parle1",
+    "notionId": "langue_parlee_courante",
+    "type": "qcm",
+    "question": "\"Da's een goed idee\" correspond en néerlandais standard à :",
+    "options": [
+      "Dat is een goed idee",
+      "Dat gaat een goed idee",
+      "Deze is een goed idee"
+    ],
+    "answer": "Dat is een goed idee"
+  },
+  {
+    "id": "ex_b1_parle2",
+    "notionId": "langue_parlee_courante",
+    "type": "texte_a_trous",
+    "question": "Complète (filler courant) : \"Het is ___ niet mogelijk.\" (simplement)",
+    "answer": "gewoon"
+  },
+  {
+    "id": "ex_b1_parle3",
+    "notionId": "langue_parlee_courante",
+    "type": "qcm",
+    "question": "Pourquoi ne faut-il pas chercher \"da's\" dans un dictionnaire comme un mot séparé ?",
+    "options": [
+      "Parce que c'est une contraction orale de 'dat is'",
+      "Parce que ce mot n'existe pas du tout",
+      "Parce que c'est un mot dialectal rare"
+    ],
+    "answer": "Parce que c'est une contraction orale de 'dat is'"
+  },
+  {
+    "id": "ex_b1_reform1",
+    "notionId": "reformuler",
+    "type": "qcm",
+    "question": "\"Het is niet uitgesloten dat het morgen regent.\" se reformule simplement par :",
+    "options": [
+      "Het regent morgen zeker.",
+      "Misschien regent het morgen.",
+      "Het regent nooit morgen."
+    ],
+    "answer": "Misschien regent het morgen."
+  },
+  {
+    "id": "ex_b1_reform2",
+    "notionId": "reformuler",
+    "type": "texte_a_trous",
+    "question": "Reformule : \"Het zou kunnen dat hij te laat komt.\" → \"___ komt hij te laat.\"",
+    "answer": "Misschien"
+  },
+  {
+    "id": "ex_b1_reform3",
+    "notionId": "reformuler",
+    "type": "qcm",
+    "question": "Que faut-il conserver en priorité en reformulant une phrase ?",
+    "options": [
+      "La longueur exacte de la phrase",
+      "Le sens exact de la phrase d'origine",
+      "Le même vocabulaire mot pour mot"
+    ],
+    "answer": "Le sens exact de la phrase d'origine"
+  },
+  {
+    "id": "ex_b1_deduire1",
+    "notionId": "deduire_sens_contexte",
+    "type": "qcm",
+    "question": "\"De vergadering werd uitgesteld omdat er te weinig deelnemers waren.\" Que signifie probablement 'uitgesteld' ?",
+    "options": [
+      "Annulée définitivement",
+      "Reportée à plus tard",
+      "Très réussie"
+    ],
+    "answer": "Reportée à plus tard"
+  },
+  {
+    "id": "ex_b1_deduire2",
+    "notionId": "deduire_sens_contexte",
+    "type": "qcm",
+    "question": "Quelle est la meilleure stratégie face à un mot inconnu dans un texte ?",
+    "options": [
+      "S'arrêter et chercher immédiatement le mot dans un dictionnaire",
+      "Continuer à lire et déduire le sens général du contexte",
+      "Ignorer complètement la phrase qui contient ce mot"
+    ],
+    "answer": "Continuer à lire et déduire le sens général du contexte"
+  },
+  {
+    "id": "ex_b1_deduire3",
+    "notionId": "deduire_sens_contexte",
+    "type": "texte_a_trous",
+    "question": "\"Hij was ontroerd toen hij het cadeau kreeg.\" 'Ontroerd' exprime une émotion plutôt ___. (positive/négative)",
+    "answer": "positive"
+  },
+  {
+    "id": "ex_b1_messauth1",
+    "notionId": "comprendre_message_authentique",
+    "type": "qcm",
+    "question": "Dans le message \"Beste klant, door een technisch probleem is uw levering vertraagd...\", quelle est l'action demandée au client ?",
+    "options": [
+      "Annuler la commande",
+      "Aucune action, juste être informé",
+      "Payer un supplément"
+    ],
+    "answer": "Aucune action, juste être informé"
+  },
+  {
+    "id": "ex_b1_messauth2",
+    "notionId": "comprendre_message_authentique",
+    "type": "qcm",
+    "question": "Quelle est la stratégie la plus efficace pour comprendre un message authentique court ?",
+    "options": [
+      "Traduire chaque mot avant de continuer",
+      "Identifier sujet, info principale, problème et action demandée",
+      "Ignorer le message si un mot est inconnu"
+    ],
+    "answer": "Identifier sujet, info principale, problème et action demandée"
+  },
+  {
+    "id": "ex_b1_messauth3",
+    "notionId": "comprendre_message_authentique",
+    "type": "texte_a_trous",
+    "question": "Dans l'exemple donné, le problème mentionné est de nature ___. (technique)",
+    "answer": "technique"
+  },
+  {
+    "id": "ex_b1_clarif1",
+    "notionId": "demander_clarification_b1",
+    "type": "qcm",
+    "question": "Quelle formule vérifie sa propre interprétation ?",
+    "options": [
+      "Kun je dat herhalen?",
+      "Bedoel je dat we morgen beginnen?",
+      "Wat bedoel je precies?"
+    ],
+    "answer": "Bedoel je dat we morgen beginnen?"
+  },
+  {
+    "id": "ex_b1_clarif2",
+    "notionId": "demander_clarification_b1",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Kun je dat nog een keer ___?\" (répéter)",
+    "answer": "herhalen"
+  },
+  {
+    "id": "ex_b1_clarif3",
+    "notionId": "demander_clarification_b1",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Qu'est-ce que tu veux dire exactement ?\"",
+    "words": [
+      "Wat",
+      "bedoel",
+      "je",
+      "precies"
+    ],
+    "answer": [
+      "Wat",
+      "bedoel",
+      "je",
+      "precies"
+    ]
+  },
+  {
+    "id": "ex_b1_gagntemps1",
+    "notionId": "gagner_du_temps",
+    "type": "qcm",
+    "question": "Quelle expression permet de gagner du temps avant de répondre ?",
+    "options": [
+      "Even denken...",
+      "Dat klopt.",
+      "Ik ben het ermee eens."
+    ],
+    "answer": "Even denken..."
+  },
+  {
+    "id": "ex_b1_gagntemps2",
+    "notionId": "gagner_du_temps",
+    "type": "texte_a_trous",
+    "question": "Complète : \"___ zal ik het zeggen?\" (comment)",
+    "answer": "Hoe"
+  },
+  {
+    "id": "ex_b1_gagntemps3",
+    "notionId": "gagner_du_temps",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je ne sais pas exactement comment expliquer ça.\"",
+    "words": [
+      "Ik",
+      "weet",
+      "niet",
+      "precies",
+      "hoe",
+      "ik",
+      "dat",
+      "moet",
+      "uitleggen"
+    ],
+    "answer": [
+      "Ik",
+      "weet",
+      "niet",
+      "precies",
+      "hoe",
+      "ik",
+      "dat",
+      "moet",
+      "uitleggen"
+    ]
+  },
+  {
+    "id": "ex_b1_resolv1",
+    "notionId": "resoudre_probleme_conversation",
+    "type": "qcm",
+    "question": "Laquelle de ces phrases est une PROPOSITION de solution ?",
+    "options": [
+      "Er is een probleem met mijn bestelling.",
+      "Ik stel voor om het pakket opnieuw te versturen.",
+      "Het komt omdat het verkeerde adres is gebruikt."
+    ],
+    "answer": "Ik stel voor om het pakket opnieuw te versturen."
+  },
+  {
+    "id": "ex_b1_resolv2",
+    "notionId": "resoudre_probleme_conversation",
+    "type": "texte_a_trous",
+    "question": "Complète (conclusion d'accord) : \"We ___ af dat u het morgen ontvangt.\" (spreken)",
+    "answer": "spreken"
+  },
+  {
+    "id": "ex_b1_resolv3",
+    "notionId": "resoudre_probleme_conversation",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Ça me semble une bonne idée.\"",
+    "words": [
+      "Dat",
+      "lijkt",
+      "me",
+      "een",
+      "goed",
+      "idee"
+    ],
+    "answer": [
+      "Dat",
+      "lijkt",
+      "me",
+      "een",
+      "goed",
+      "idee"
+    ]
+  },
+  {
+    "id": "ex_b1_discuss1",
+    "notionId": "discussion_sujet_familier",
+    "type": "qcm",
+    "question": "Quelle phrase sollicite l'avis de l'interlocuteur ?",
+    "options": [
+      "Dat klopt.",
+      "En jij, wat vind jij daarvan?",
+      "Ik vind dat we meer moeten fietsen."
+    ],
+    "answer": "En jij, wat vind jij daarvan?"
+  },
+  {
+    "id": "ex_b1_discuss2",
+    "notionId": "discussion_sujet_familier",
+    "type": "texte_a_trous",
+    "question": "Complète : \"Ik zie het ___.\" (différemment)",
+    "answer": "anders"
+  },
+  {
+    "id": "ex_b1_discuss3",
+    "notionId": "discussion_sujet_familier",
+    "type": "remise_en_ordre",
+    "question": "Remets dans l'ordre : \"Je pense différemment, car tout le monde ne peut pas faire du vélo.\"",
+    "words": [
+      "Ik",
+      "denk",
+      "er",
+      "anders",
+      "over",
+      "want",
+      "niet",
+      "iedereen",
+      "kan",
+      "fietsen"
+    ],
+    "answer": [
+      "Ik",
+      "denk",
+      "er",
+      "anders",
+      "over",
+      "want",
+      "niet",
+      "iedereen",
+      "kan",
+      "fietsen"
+    ]
+  },
+  {
+    "id": "ex_b1_missionfin1",
+    "notionId": "mission_finale_b1",
+    "type": "qcm",
+    "question": "Que doit démontrer avant tout la mission finale B1 ?",
+    "options": [
+      "La mémorisation d'une règle de grammaire précise",
+      "La capacité à enchaîner plusieurs actes de parole dans une situation réelle",
+      "La capacité à répondre correctement à des QCM"
+    ],
+    "answer": "La capacité à enchaîner plusieurs actes de parole dans une situation réelle"
+  },
+  {
+    "id": "ex_b1_missionfin2",
+    "notionId": "mission_finale_b1",
+    "type": "qcm",
+    "question": "Quelle est la dernière étape de la mission, souvent oubliée ?",
+    "options": [
+      "Comprendre la situation",
+      "Conclure l'échange",
+      "Expliquer le problème"
+    ],
+    "answer": "Conclure l'échange"
+  },
+  {
+    "id": "ex_b1_missionfin3",
+    "notionId": "mission_finale_b1",
+    "type": "texte_a_trous",
+    "question": "Complète (conclusion naturelle d'un accord) : \"Perfect, dan is dat ___.\" (réglé)",
+    "answer": "geregeld"
   }
 ]

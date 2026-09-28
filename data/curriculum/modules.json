@@ -235,87 +235,91 @@
     "id": "b1-m1",
     "level": "B1",
     "order": 1,
-    "label": "Conjonctions et subordination avancée",
+    "label": "Oorzaak, gevolg en tegenstelling",
     "notions": [
-      "conjonction_cause",
-      "conjonction_consequence",
-      "conjonction_condition",
-      "conjonction_concession",
-      "conjonction_temps"
+      "omdat_vs_doordat",
+      "want_vs_omdat_b1",
+      "dus_daarom_daardoor",
+      "zodat",
+      "hoewel_ondanks"
     ]
   },
   {
     "id": "b1-m2",
     "level": "B1",
     "order": 2,
-    "label": "Relatives et connecteurs",
+    "label": "Complexité syntaxique",
     "notions": [
-      "relatives_complexes",
-      "connecteurs_texte",
-      "nominalisation"
+      "plusieurs_verbes_bijzin",
+      "perfectum_bijzin",
+      "modaux_infinitif_perfectum",
+      "relatives_die_dat_waar_wie",
+      "combiner_subordonnees"
     ]
   },
   {
     "id": "b1-m3",
     "level": "B1",
     "order": 3,
-    "label": "Conditionnel et discours rapporté",
+    "label": "Raconter et structurer",
     "notions": [
-      "conditionnel_zou",
-      "discours_indirect"
+      "raconter_experience",
+      "perfectum_imperfectum_recit",
+      "chronologie_avancee",
+      "raconter_histoire_film",
+      "decrire_probleme_evolution"
     ]
   },
   {
     "id": "b1-m4",
     "level": "B1",
     "order": 4,
-    "label": "Passif et structures avancées",
+    "label": "Donner son opinion et argumenter",
     "notions": [
-      "passif_intro",
-      "passif_temps",
-      "infinitif_te",
-      "om_te_avance"
+      "opinion_developpee",
+      "donner_opinion_justifiee",
+      "accord_desaccord_nuance",
+      "comparer_deux_possibilites",
+      "argumenter_simple"
     ]
   },
   {
     "id": "b1-m5",
     "level": "B1",
     "order": 5,
-    "label": "Ordre des mots complexe",
+    "label": "Néerlandais fonctionnel réel",
     "notions": [
-      "ordre_mots_complexe",
-      "position_particules_subordonnee",
-      "er_avance",
-      "prepositions_fixes_avance",
-      "verbes_particules_avance"
+      "werk_solliciteren",
+      "etudes_formation",
+      "administration_b1",
+      "logement_b1",
+      "sante_procedures_b1"
     ]
   },
   {
     "id": "b1-m6",
     "level": "B1",
     "order": 6,
-    "label": "S'exprimer avec nuance",
+    "label": "Comprendre le néerlandais réel",
     "notions": [
-      "raconter_experience",
-      "raconter_histoire",
-      "expliquer_procedure",
-      "donner_opinion_justifiee",
-      "comparer_solutions",
-      "argumenter_simple",
-      "raconter_projets"
+      "formulations_indirectes",
+      "langue_parlee_courante",
+      "reformuler",
+      "deduire_sens_contexte",
+      "comprendre_message_authentique"
     ]
   },
   {
     "id": "b1-m7",
     "level": "B1",
     "order": 7,
-    "label": "Néerlandais professionnel B1",
+    "label": "Interaction B1",
     "notions": [
-      "entretien_embauche",
-      "email_professionnel",
-      "conversation_professionnelle",
-      "reunion_simple",
-      "presentation_courte"
+      "demander_clarification_b1",
+      "gagner_du_temps",
+      "resoudre_probleme_conversation",
+      "discussion_sujet_familier",
+      "mission_finale_b1"
     ]
   },
   {
