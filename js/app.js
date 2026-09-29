@@ -1309,7 +1309,7 @@ if (firebaseAvailable) {
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
             const coreFiles = [
                 'VERBES_NL.csv', 'NOMS_NL.csv', 'ADJECTIFS_NL.csv', 'ADVERBES_NL.csv', 'MOTS_OUTILS_NL.csv',
-                'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
+                'EXPRESSIONS_NL.csv', 'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
             ];
             // Fichiers de thèmes métier : optionnels. Ajoute simplement un CSV avec un de ces noms
             // (ou un nouveau nom dans cette liste) pour qu'il apparaisse automatiquement dans "Thèmes".
@@ -3975,6 +3975,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             { file: 'ADJECTIFS_NL', label: 'Adjectifs' },
             { file: 'ADVERBES_NL', label: 'Adverbes' },
             { file: 'MOTS_OUTILS_NL', label: 'Mots-outils' },
+            { file: 'EXPRESSIONS_NL', label: 'Expressions' },
             { file: 'PHRASES_LABO', label: 'Phrases Labo' }
         ];
 
@@ -5445,7 +5446,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         const VOCAB_CATEGORY_FILES = {
             'Vocabulaire courant': ['NOMS_NL', 'ADJECTIFS_NL', 'ADVERBES_NL', 'MOTS_OUTILS_NL'],
             'Verbes fréquents': ['VERBES_NL'],
-            'Expressions courantes': ['THEME_BASE', 'PHRASES_LABO'],
+            'Expressions courantes': ['THEME_BASE', 'PHRASES_LABO', 'EXPRESSIONS_NL'],
             'Vocabulaire professionnel': ['MOTS_LABO', 'THEME_MARKETING', 'THEME_FINANCE', 'THEME_COMPTABILITE', 'THEME_LOGISTIQUE', 'THEME_SUPPLYCHAIN', 'THEME_MANAGEMENT', 'THEME_RH', 'THEME_ENTRETIEN']
         };
 

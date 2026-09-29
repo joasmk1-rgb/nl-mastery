@@ -1,0 +1,66 @@
+id;fr;nl;freq;priorite_frequence;niveauCECR;niveauCECRSource;sousCategorie;sousCategorieSource
+EXPRESSIONS_NL_0;Comment ça va ?;Hoe gaat het (met je)?;7.5;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_1;Ça va bien, merci;Het gaat goed, dank je;7.0;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_2;Au revoir;Tot ziens;7.8;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_3;À tout à l'heure;Tot straks;6.5;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_4;À demain;Tot morgen;6.2;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_5;Je t'en prie / De rien;Graag gedaan;6.8;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_6;Je suis désolé;Het spijt me;6.5;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_7;Pas de problème;Geen probleem;6.7;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_8;Enchanté (de faire connaissance);Aangenaam (kennis te maken);4.5;Essentiel;A2;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_9;Excusez-moi;Neem me niet kwalijk;5.5;Essentiel;A2;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_10;Bonne continuation / Tous mes vœux;Het beste!;5.0;Essentiel;A2;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_11;Bonne chance !;Veel succes!;5.8;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_12;Bienvenue;Welkom;6.0;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_13;Passe le bonjour à...;Doe de groeten aan...;4.2;Essentiel;A2;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_14;Bon appétit;Eet smakelijk;5.2;Essentiel;A1;estimation_manuelle;Salutations & politesse;manuel
+EXPRESSIONS_NL_15;De temps en temps;Van tijd tot tijd;5.0;Essentiel;A2;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_16;Pour toujours;Voor altijd;5.3;Essentiel;A2;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_17;À l'heure;Op tijd;5.8;Essentiel;A2;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_18;Au dernier moment;Op het laatste moment;4.5;Courant;B1;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_19;Dès que possible;Zo snel mogelijk;5.6;Essentiel;A2;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_20;Il y a bien longtemps;Een hele tijd geleden;4.3;Courant;B1;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_21;Entre-temps;In de tussentijd;4.4;Courant;B1;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_22;Au moment où...;Op het moment dat...;4.1;Courant;B1;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_23;Petit à petit;Beetje bij beetje;4.6;Essentiel;A2;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_24;Tout à coup;Ineens / Opeens;4.9;Essentiel;A2;estimation_manuelle;Expressions de temps;manuel
+EXPRESSIONS_NL_25;À mon avis;Naar mijn mening;5.9;Essentiel;A2;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_26;Je pense que...;Ik denk dat...;6.5;Essentiel;A1;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_27;Il me semble que...;Het lijkt me dat...;4.8;Courant;B1;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_28;Je suis d'accord;Ik ben het ermee eens;5.7;Essentiel;A2;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_29;Je ne suis pas d'accord;Ik ben het er niet mee eens;5.2;Essentiel;A2;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_30;C'est exact;Dat klopt;5.6;Essentiel;A2;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_31;Ce n'est pas vrai;Dat is niet waar;5.4;Essentiel;A2;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_32;Ça n'a pas d'importance;Het maakt niet uit;5.5;Essentiel;A2;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_33;Ça n'a pas d'importance;Het doet er niet toe;4.2;Courant;B1;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_34;En ce qui me concerne;Wat mij betreft;4.9;Courant;B1;estimation_manuelle;Expressions d'opinion;manuel
+EXPRESSIONS_NL_35;En d'autres termes;Met andere woorden;4.7;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_36;En tout cas;In ieder geval;5.3;Essentiel;A2;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_37;Pour être honnête;Om eerlijk te zijn;4.6;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_38;Bref / En résumé;Kortom;4.5;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_39;Somme toute / Tout compte fait;Al met al;4.0;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_40;Premièrement... deuxièmement;Ten eerste... ten tweede;4.3;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_41;D'un autre côté;Aan de andere kant;4.8;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_42;Pour commencer;Om te beginnen;4.9;Essentiel;A2;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_43;Pour conclure;Tot slot;4.4;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_44;Autrement dit;Anders gezegd;4.1;Courant;B1;estimation_manuelle;Connecteurs discursifs;manuel
+EXPRESSIONS_NL_45;Ça va très bien;Het gaat prima;5.4;Essentiel;A2;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_46;Je n'ai pas envie de ça;Ik heb er geen zin in;5.0;Essentiel;A2;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_47;Ça m'est égal;Het is mij om het even;4.0;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_48;Je suis occupé;Ik heb het druk;5.6;Essentiel;A2;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_49;Ce n'est pas facile;Het valt niet mee;4.7;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_50;Ce n'est pas si grave;Dat valt wel mee;4.6;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_51;Je n'y peux rien;Ik kan er niets aan doen;4.5;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_52;Ça va s'arranger;Het komt wel goed;5.1;Essentiel;A2;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_53;Comme neuf;Zo goed als nieuw;3.9;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_54;Maîtriser quelque chose;Iets onder de knie hebben;3.7;Courant;B2;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_55;Il n'y a pas d'autre choix;Er zit niets anders op;3.8;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_56;Être sur le point de...;Op het punt staan om...;4.0;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_57;Ça ne me dit rien;Het zegt me niets;3.9;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_58;Je m'en fiche;Het kan me niet schelen;4.3;Courant;B1;estimation_manuelle;Expressions idiomatiques;manuel
+EXPRESSIONS_NL_59;Un peu;Een beetje;6.9;Essentiel;A1;estimation_manuelle;Expressions de quantité;manuel
+EXPRESSIONS_NL_60;Un tas / beaucoup;Een heleboel;5.0;Essentiel;A2;estimation_manuelle;Expressions de quantité;manuel
+EXPRESSIONS_NL_61;Plus qu'assez;Meer dan genoeg;4.4;Courant;B1;estimation_manuelle;Expressions de quantité;manuel
+EXPRESSIONS_NL_62;Autant que possible;Zo veel mogelijk;4.8;Essentiel;A2;estimation_manuelle;Expressions de quantité;manuel
+EXPRESSIONS_NL_63;Plusieurs fois;Een aantal keer;5.2;Essentiel;A2;estimation_manuelle;Expressions de quantité;manuel
+EXPRESSIONS_NL_64;Presque rien;Bijna niets;5.0;Essentiel;A2;estimation_manuelle;Expressions de quantité;manuel
