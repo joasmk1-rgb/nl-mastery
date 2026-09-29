@@ -149,6 +149,7 @@
             <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
             <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
             <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison</div><div class="hub-card-desc">Verbes irréguliers, triés par fréquence d'usage.</div></div>
+            <div class="hub-card" onclick="startSeparableTrainingSession()"><span class="hub-card-icon">✂️</span><div class="hub-card-title">Particules séparables</div><div class="hub-card-desc">aanbieden, opstaan... et leurs 3 comportements différents.</div></div>
             <div class="hub-card" style="opacity:0.55; cursor:default;" onclick="alert('Bientôt disponible : défie tes amis en duel, vocabulaire ou rapidité !')"><span class="hub-card-icon">👥</span><div class="hub-card-title">Défis entre amis</div><div class="hub-card-desc">Bientôt disponible.</div></div>
         </div>
     </div>
@@ -474,6 +475,12 @@
             <button class="btn btn-gray" onclick="showConjugaison()">📖 Consulter un verbe en particulier</button>
         </div>
         <div id="conj-training-content" style="width:100%; max-width:500px;"></div>
+    </div>
+
+    <div id="separable-training-view" class="view">
+        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <h2>✂️ Particules séparables</h2>
+        <div id="separable-training-content" style="width:100%; max-width:500px;"></div>
     </div>
 
     <div id="exercise-view" class="view">

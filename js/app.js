@@ -3433,6 +3433,168 @@ if (firebaseAvailable) {
                 </div>`;
         }
 
+        // ===== Entraînement "verbes à particule séparable" (Jouer → Verbes à particule séparable) =====
+        // Question posée par l'utilisateur : "je ne sais pas si ils fonctionnent tous de la même
+        // façon". Réponse courte : non — un même verbe à particule séparable (ex: aanbieden, "aan"
+        // + "bieden") se comporte différemment selon le contexte :
+        //   1) après un verbe de modalité + infinitif (vouloir/pouvoir/devoir...) : la particule
+        //      RESTE collée à l'infinitif ("ik wil het aanbieden").
+        //   2) au présent, seul dans une phrase simple : la particule SE DÉTACHE et part en fin de
+        //      phrase ("ik bied het aan").
+        //   3) au perfectum : la particule se recolle, mais AVANT le préfixe "ge-" du participe
+        //      ("aangeboden" = "aan" + "ge" + "boden", jamais "geaanboden").
+        // D'où les 3 types de questions ci-dessous plutôt qu'un seul — c'est justement ça qui
+        // rend ces verbes différents des autres et qui mérite un entraînement à part.
+        //
+        // Détection des verbes concernés : verbes dont le prétérit stocké a la forme "radical
+        // particule" (2 mots), en excluant les faux positifs déjà repérés dans les données
+        // (formes alternatives séparées par "/", verbes réfléchis dont le 2e mot est "zich",
+        // groupes verbaux à 2 mots comme "aanwezig zijn" qui ne sont pas de vrais verbes à
+        // particule séparable). 38 verbes de la base correspondent à ce filtre.
+        function isSeparableVerb(v) {
+            const pret = v.preteritum;
+            if (pret.includes('/')) return false;
+            if (v.infinitief.includes(' ') || v.infinitief.includes('(')) return false;
+            const words = pret.split(' ');
+            if (words.length !== 2) return false;
+            if (words[1] === 'zich') return false;
+            return true;
+        }
+
+        const SEPARABLE_QUESTION_TYPES = [
+            {
+                key: 'infinitive_after_modal',
+                prompt: (v) => `Après "willen / kunnen / moeten..." (${v.fr}) :`,
+                hint: 'Devant un infinitif, la particule reste collée au verbe.',
+                expected: (v) => v.infinitief
+            },
+            {
+                key: 'present_split',
+                prompt: (v) => `Au présent, avec "ik" (${v.fr}) :`,
+                hint: 'Dans une phrase simple, la particule se détache et part à la fin.',
+                expected: (v) => v.present.ik
+            },
+            {
+                key: 'perfectum',
+                prompt: (v) => `Au perfectum (${v.fr}) :`,
+                hint: 'La particule se recolle, mais avant le "ge-" du participe.',
+                expected: (v) => {
+                    const aux = HULPWERKWOORDEN[v.auxiliaire] || HULPWERKWOORDEN.hebben;
+                    return `${aux.hij} ${v.participePasse}`;
+                }
+            }
+        ];
+
+        const SEPARABLE_TRAINING_SESSION_SIZE = 24;
+
+        // Même méthode de tirage pondéré que l'entraînement verbes irréguliers (voir
+        // pickConjTrainingVerbs) : favorise les verbes les plus fréquents sans jamais exclure les
+        // autres, et varie à chaque session. Chaque "cellule" est un couple (verbe, type de
+        // question) — un même verbe peut revenir avec un cas différent dans une session.
+        function pickSeparableTrainingCells() {
+            const verbs = conjugationData.filter(isSeparableVerb);
+            const cells = [];
+            verbs.forEach(v => SEPARABLE_QUESTION_TYPES.forEach(qt => cells.push({ v, qt })));
+            const keyed = cells.map(c => ({ c, key: Math.pow(Math.random(), 1 / (c.v.freq + 1)) }));
+            keyed.sort((a, b) => b.key - a.key);
+            return keyed.slice(0, SEPARABLE_TRAINING_SESSION_SIZE).map(k => k.c);
+        }
+
+        let separableTrainingState = null;
+
+        function startSeparableTrainingSession() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('separable-training-view').classList.add('active');
+            setActiveNav('nav-jouer');
+            const content = document.getElementById('separable-training-content');
+            if (!conjugationLoaded) {
+                content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
+                return;
+            }
+            separableTrainingState = { cells: pickSeparableTrainingCells(), index: 0, score: 0, missed: [] };
+            renderSeparableTrainingQuestion();
+        }
+
+        function renderSeparableTrainingQuestion() {
+            const content = document.getElementById('separable-training-content');
+            const st = separableTrainingState;
+            if (!content || !st) return;
+            if (st.index >= st.cells.length) {
+                renderSeparableTrainingSummary();
+                return;
+            }
+            const { v, qt } = st.cells[st.index];
+            content.innerHTML = `
+                <div class="conj-card">
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.cells.length} · Score : ${st.score}</div>
+                    <div class="conj-verb-title">${v.infinitief} ${speakBtnHtml(v.infinitief)}</div>
+                    <div style="color:#888; margin-bottom:6px;">${v.fr}</div>
+                    <div style="font-weight:600; margin-bottom:4px;">${qt.prompt(v)}</div>
+                    <div style="font-size:0.72rem; color:var(--text-secondary); margin-bottom:10px;">💡 ${qt.hint}</div>
+                    <input type="text" id="sep-tr-input" style="width:100%; margin-bottom:8px;" autocomplete="off" placeholder="Tape ta réponse..." onkeypress="if(event.key==='Enter') separableTrainingCheck()">
+                    <div class="acc-error" id="sep-tr-feedback"></div>
+                    <button class="btn btn-green" id="sep-tr-check-btn" onclick="separableTrainingCheck()">Vérifier</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="separableTrainingStop()">Arrêter</button>
+                </div>`;
+            const input = document.getElementById('sep-tr-input');
+            if (input) input.focus();
+        }
+
+        function separableTrainingCheck() {
+            const st = separableTrainingState;
+            if (!st) return;
+            const { v, qt } = st.cells[st.index];
+            const expected = qt.expected(v);
+            const raw = document.getElementById('sep-tr-input').value;
+            const result = evaluateAnswer(raw, expected);
+            const isCorrect = result.status !== 'wrong';
+            const fb = document.getElementById('sep-tr-feedback');
+            if (isCorrect) {
+                st.score++;
+                fb.style.color = 'var(--success)';
+                fb.innerHTML = `✅ ${expected}`;
+            } else {
+                st.missed.push({ infinitief: v.infinitief, fr: v.fr, question: qt.prompt(v), expected });
+                fb.style.color = 'var(--wrong)';
+                fb.innerHTML = `❌ Réponse attendue : ${expected}`;
+            }
+            fb.innerHTML += ' ' + speakBtnHtml(expected);
+            const checkBtn = document.getElementById('sep-tr-check-btn');
+            if (checkBtn) checkBtn.style.display = 'none';
+            st.index++;
+            setTimeout(renderSeparableTrainingQuestion, isCorrect ? 1100 : 2400);
+        }
+
+        function separableTrainingStop() {
+            separableTrainingState = null;
+            showJouer();
+        }
+
+        function renderSeparableTrainingSummary() {
+            const content = document.getElementById('separable-training-content');
+            const st = separableTrainingState;
+            const missedHtml = st.missed.length ? `
+                <div class="section-title" style="margin-top:var(--space-4);">📌 À retenir</div>
+                <div style="overflow-x:auto;">
+                    <table class="conj-grid-table">
+                        <tr><th>Verbe</th><th>Cas</th><th>Réponse attendue</th></tr>
+                        ${st.missed.map(m => `
+                            <tr>
+                                <td>${m.infinitief}<br><span style="color:var(--text-secondary); font-size:0.7rem;">${m.fr}</span></td>
+                                <td style="font-size:0.72rem;">${m.question}</td>
+                                <td>${m.expected} ${speakBtnHtml(m.expected)}</td>
+                            </tr>`).join('')}
+                    </table>
+                </div>` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`;
+            content.innerHTML = `
+                <div class="conj-card">
+                    <div class="conj-verb-title">Résultat : ${st.score}/${st.cells.length}</div>
+                    ${missedHtml}
+                    <button class="btn btn-green" style="margin-top:14px;" onclick="startSeparableTrainingSession()">🔁 Nouvelle session</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showJouer()">Retour</button>
+                </div>`;
+        }
+
         // ===== GeminiService (abstraction IA) =====
         // Le curriculum NL Mastery reste toujours la source de vérité pédagogique.
         // Gemini n'intervient qu'en complément (reformulations, exemples, correction) — jamais pour définir le programme.

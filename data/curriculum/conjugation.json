@@ -35,9 +35,9 @@
     "infinitief": "aankomen",
     "fr": "arriver",
     "present": {
-      "ik": "aankom",
-      "jij": "aankomt",
-      "hij": "aankomt",
+      "ik": "kom aan",
+      "jij": "komt aan",
+      "hij": "komt aan",
       "wij": "aankomen"
     },
     "preteritum": "kwam aan",
@@ -73,7 +73,7 @@
       "wij": "aannemen"
     },
     "preteritum": "nam aan",
-    "participePasse": "aannenomen",
+    "participePasse": "aangenomen",
     "auxiliaire": "hebben",
     "exempleNl": "Het bedrijf neemt dit jaar tien nieuwe medewerkers aan.",
     "exempleFr": "L'entreprise engage dix nouveaux employés cette année.",
@@ -1203,9 +1203,9 @@
     "infinitief": "doorgaan",
     "fr": "continuer",
     "present": {
-      "ik": "doorga",
-      "jij": "doorgaat",
-      "hij": "doorgaat",
+      "ik": "ga door",
+      "jij": "gaat door",
+      "hij": "gaat door",
       "wij": "doorgaan"
     },
     "preteritum": "ging door",
@@ -1859,9 +1859,9 @@
     "infinitief": "ingaan",
     "fr": "entrer / accepter",
     "present": {
-      "ik": "inga",
-      "jij": "ingaat",
-      "hij": "ingaat",
+      "ik": "ga in",
+      "jij": "gaat in",
+      "hij": "gaat in",
       "wij": "ingaan"
     },
     "preteritum": "ging in",
@@ -1955,9 +1955,9 @@
     "infinitief": "inzien",
     "fr": "comprendre / consulter",
     "present": {
-      "ik": "inzie",
-      "jij": "inziet",
-      "hij": "inziet",
+      "ik": "zie in",
+      "jij": "ziet in",
+      "hij": "ziet in",
       "wij": "inzien"
     },
     "preteritum": "zag in",
@@ -2579,9 +2579,9 @@
     "infinitief": "meegaan",
     "fr": "accompagner",
     "present": {
-      "ik": "meega",
-      "jij": "meegaat",
-      "hij": "meegaat",
+      "ik": "ga mee",
+      "jij": "gaat mee",
+      "hij": "gaat mee",
       "wij": "meegaan"
     },
     "preteritum": "ging mee",
@@ -2723,9 +2723,9 @@
     "infinitief": "nagaan",
     "fr": "vérifier",
     "present": {
-      "ik": "naga",
-      "jij": "nagaat",
-      "hij": "nagaat",
+      "ik": "ga na",
+      "jij": "gaat na",
+      "hij": "gaat na",
       "wij": "nagaan"
     },
     "preteritum": "ging na",
@@ -3011,9 +3011,9 @@
     "infinitief": "opstaan",
     "fr": "se lever",
     "present": {
-      "ik": "opsta",
-      "jij": "opstaat",
-      "hij": "opstaat",
+      "ik": "sta op",
+      "jij": "staat op",
+      "hij": "staat op",
       "wij": "opstaan"
     },
     "preteritum": "stond op",
@@ -4563,9 +4563,9 @@
     "infinitief": "voorkomen",
     "fr": "prévenir / arriver",
     "present": {
-      "ik": "voorkom",
-      "jij": "voorkomt",
-      "hij": "voorkomt",
+      "ik": "kom voor",
+      "jij": "komt voor",
+      "hij": "komt voor",
       "wij": "voorkomen"
     },
     "preteritum": "kwam voor",
