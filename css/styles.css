@@ -313,6 +313,15 @@
         .conj-sentence { font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px; font-style: italic; }
         .conj-list-item { padding: 10px; border-radius: var(--radius-md); cursor: pointer; }
         .conj-list-item:hover { background: var(--bg); }
+        /* Filtres par catégorie (Jouer → Conjugaison) et badges niveau CECR / catégorie verbe,
+           réutilisés dans la liste et dans le détail d'un verbe. */
+        .conj-filter-chips-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .conj-filter-chip { background: var(--surface-2); border: 2px solid transparent; border-radius: var(--radius-pill); padding: 6px 12px; font-size: 0.72rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; }
+        .conj-filter-chip.active { background: color-mix(in srgb, var(--primary) 15%, transparent); border-color: var(--primary); color: var(--primary); }
+        .conj-list-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+        .conj-niveau-badge, .verb-cat-badge { font-size: 0.64rem; font-weight: 700; padding: 2px 7px; border-radius: var(--radius-pill); white-space: nowrap; }
+        .conj-niveau-badge { background: var(--gold); color: #6b5300; }
+        .verb-cat-badge { background: var(--surface-2); color: var(--text-secondary); font-weight: 600; }
         .gemini-explain-btn { margin-top: 10px; background: none; border: 2px solid var(--primary); color: var(--primary); border-radius: var(--radius-md); padding: 8px 14px; font-size: 0.85rem; cursor: pointer; }
         .gemini-box { margin-top: 10px; padding: 12px; border-radius: var(--radius-md); background: var(--bg); font-size: 0.9rem; white-space: pre-wrap; }
         .roleplay-suggestion-card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 14px; margin-top: 10px; cursor: pointer; border: 2px solid var(--primary); }

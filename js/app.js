@@ -3055,8 +3055,82 @@ if (firebaseAvailable) {
             renderCurrentExercise();
         }
 
+        // ===== Catégorisation du vocabulaire (verbes) — pilote de l'architecture proposée par
+        // l'utilisateur : catégories/sous-catégories + niveau CECR + fréquence, plutôt qu'une
+        // simple liste. Commence par les verbes car c'est le seul type de mot où la sous-
+        // catégorisation est en grande partie déjà déductible des données existantes (régulier/
+        // irrégulier via le prétérit, particule séparable via isSeparableVerb) plutôt que de
+        // demander une relecture sémantique mot par mot comme pour les noms/adjectifs. Chaque
+        // verbe peut porter PLUSIEURS étiquettes à la fois (ex: aanbieden = irrégulier + à
+        // particule) — choix confirmé avec l'utilisateur plutôt qu'une catégorie unique.
+        //
+        // Niveau CECR : aucune liste de référence n'existe pour le néerlandais dans l'appli, donc
+        // dérivé de la fréquence d'usage réelle (champ freq, déjà présent) — choix confirmé avec
+        // l'utilisateur plutôt qu'une relecture manuelle des ~1600 mots. Les seuils ci-dessous sont
+        // les quintiles calculés sur l'ensemble des 5 fichiers de vocabulaire de base (noms,
+        // verbes, adjectifs, adverbes, mots-outils — 1556 mots), PAS seulement les verbes : ça
+        // permet de réutiliser exactement les mêmes seuils plus tard pour les autres catégories de
+        // mots, pour que "B1" veuille dire la même chose partout dans l'appli.
+        const CECR_FREQ_THRESHOLDS = { A1: 5.34, A2: 4.90, B1: 4.57, B2: 4.24 }; // en dessous de B2 => C1
+
+        function freqToNiveauCECR(freq) {
+            if (freq >= CECR_FREQ_THRESHOLDS.A1) return 'A1';
+            if (freq >= CECR_FREQ_THRESHOLDS.A2) return 'A2';
+            if (freq >= CECR_FREQ_THRESHOLDS.B1) return 'B1';
+            if (freq >= CECR_FREQ_THRESHOLDS.B2) return 'B2';
+            return 'C1';
+        }
+
+        // Verbes de modalité : liste fermée, aucune ambiguïté possible.
+        const MODAL_VERBS = ['kunnen', 'mogen', 'moeten', 'willen', 'zullen'];
+
+        // Verbes à préposition fixe ("vaste voorzetsels") : contrairement à régulier/irrégulier/
+        // séparable, RIEN dans les données ne permet de déduire ça automatiquement — c'est un
+        // travail de connaissance de la langue, pas un calcul. Liste volontairement prudente :
+        // seulement les verbes où la préposition est vraiment fixe/obligatoire dans le sens
+        // précis enseigné ici (vérifié contre la traduction FR stockée pour ce verbe, pour éviter
+        // de taguer le mauvais sens d'un verbe à plusieurs sens — ex: "houden" est stocké ici avec
+        // le sens "tenir/garder", pas "aimer", donc "houden van" n'a PAS été ajouté). Verbes au
+        // sens trop générique ou à préposition non-obligatoire (praten, spreken, vragen, zoeken,
+        // gaan, komen, staan...) volontairement exclus plutôt que de deviner. Complétable plus
+        // tard si des oublis sont repérés en testant l'appli.
+        const VERBE_PREPOSITIONS = {
+            'afhangen (van)': 'van', 'behoren (tot)': 'tot', 'belangstellen (in)': 'in',
+            'beperken (zich)': 'tot', 'deelnemen (aan)': 'aan', 'genieten (van)': 'van',
+            'denken': 'aan', 'dromen': 'van', 'geloven': 'in', 'herinneren (zich)': 'aan',
+            'hopen': 'op', 'kijken': 'naar', 'klagen': 'over', 'letten (op)': 'op',
+            'lijden': 'aan', 'luisteren': 'naar', 'passen': 'bij', 'rekenen': 'op',
+            'schrikken': 'van', 'vergelijken': 'met', 'verschillen': 'van', 'vertrouwen': 'op',
+            'voorbereiden': 'op', 'wachten': 'op', 'wennen': 'aan', 'wijzen': 'op',
+            'zorgen': 'voor', 'beginnen': 'met'
+        };
+
+        const VERB_CATEGORY_LABELS = {
+            irregulier: '⚡ Irrégulier', regulier: '📏 Régulier', particule_separable: '✂️ À particule',
+            modalite: '🔧 Modalité', prepositionnel: '🔗 + préposition'
+        };
+
+        // Retourne la liste des étiquettes applicables à un verbe (toujours régulier XOR
+        // irrégulier, plus 0 à plusieurs étiquettes supplémentaires).
+        function getVerbCategories(v) {
+            const cats = [isStrongPreteritum(v) ? 'irregulier' : 'regulier'];
+            if (isSeparableVerb(v)) cats.push('particule_separable');
+            if (MODAL_VERBS.includes(v.infinitief)) cats.push('modalite');
+            if (VERBE_PREPOSITIONS[v.infinitief]) cats.push('prepositionnel');
+            return cats;
+        }
+
+        function verbCategoryBadgesHtml(v) {
+            return getVerbCategories(v).map(c => {
+                let label = VERB_CATEGORY_LABELS[c];
+                if (c === 'prepositionnel') label += ` (${VERBE_PREPOSITIONS[v.infinitief]})`;
+                return `<span class="verb-cat-badge">${label}</span>`;
+            }).join('');
+        }
+
         // ===== Vue Conjugaison =====
         let conjugaisonSelectedVerb = null;
+        let conjFilterCategory = 'toutes';
 
         function showConjugaison() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -3070,24 +3144,49 @@ if (firebaseAvailable) {
             renderConjugaisonList();
         }
 
+        const CONJ_FILTER_CHIPS = [
+            { key: 'toutes', label: 'Toutes' },
+            { key: 'regulier', label: '📏 Réguliers' },
+            { key: 'irregulier', label: '⚡ Irréguliers' },
+            { key: 'particule_separable', label: '✂️ À particule' },
+            { key: 'modalite', label: '🔧 Modalité' },
+            { key: 'prepositionnel', label: '🔗 + préposition' }
+        ];
+
+        function conjSetFilter(key) {
+            conjFilterCategory = key;
+            renderConjugaisonList();
+        }
+
         function renderConjugaisonList() {
             if (!conjugationLoaded) return;
             const q = normalize((document.getElementById('conj-search').value || '').trim());
             const listEl = document.getElementById('conj-list');
+            const filterEl = document.getElementById('conj-filter-chips');
+            if (filterEl) {
+                filterEl.innerHTML = CONJ_FILTER_CHIPS.map(c =>
+                    `<button type="button" class="conj-filter-chip${c.key === conjFilterCategory ? ' active' : ''}" onclick="conjSetFilter('${c.key}')">${c.label}</button>`
+                ).join('');
+            }
             let results = conjugationData;
+            if (conjFilterCategory !== 'toutes') {
+                results = results.filter(v => getVerbCategories(v).includes(conjFilterCategory));
+            }
             if (q) {
-                results = conjugationData.filter(v =>
+                results = results.filter(v =>
                     normalize(v.infinitief).includes(q) || normalize(v.fr).includes(q)
                 );
             }
+            const totalMatching = results.length;
             results = results.slice(0, 40);
             if (!results.length) {
                 listEl.innerHTML = '<p style="color:#888;">Aucun verbe trouvé.</p>';
                 return;
             }
-            listEl.innerHTML = results.map(v =>
+            listEl.innerHTML = (totalMatching > 40 ? `<p style="font-size:0.72rem; color:var(--text-secondary);">${totalMatching} verbes — les 40 premiers affichés, affine ta recherche pour voir les autres.</p>` : '') + results.map(v =>
                 `<div class="conj-list-item" onclick="showConjugaisonDetail('${v.infinitief.replace(/'/g, "\\'")}')">
-                    <b>${v.infinitief}</b> <span style="color:#888;">— ${v.fr}</span>
+                    <div><b>${v.infinitief}</b> <span style="color:#888;">— ${v.fr}</span></div>
+                    <div class="conj-list-badges"><span class="conj-niveau-badge">${freqToNiveauCECR(v.freq)}</span>${verbCategoryBadgesHtml(v)}</div>
                 </div>`
             ).join('');
         }
@@ -3198,7 +3297,8 @@ if (firebaseAvailable) {
             document.getElementById('conj-detail').innerHTML = `
                 <div class="conj-card">
                     <div class="conj-verb-title">${v.infinitief}</div>
-                    <div style="color:#888; margin-bottom:10px;">${v.fr}</div>
+                    <div style="color:#888; margin-bottom:6px;">${v.fr}</div>
+                    <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${freqToNiveauCECR(v.freq)}</span>${verbCategoryBadgesHtml(v)}</div>
                     <div style="font-size:0.7rem; color:var(--text-secondary); margin-bottom:4px;">↔️ Fais glisser le tableau pour voir toutes les colonnes</div>
                     <div style="overflow-x:auto;">
                         <table class="conj-grid-table">
