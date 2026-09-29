@@ -3064,13 +3064,18 @@ if (firebaseAvailable) {
         // verbe peut porter PLUSIEURS étiquettes à la fois (ex: aanbieden = irrégulier + à
         // particule) — choix confirmé avec l'utilisateur plutôt qu'une catégorie unique.
         //
-        // Niveau CECR : aucune liste de référence n'existe pour le néerlandais dans l'appli, donc
-        // dérivé de la fréquence d'usage réelle (champ freq, déjà présent) — choix confirmé avec
-        // l'utilisateur plutôt qu'une relecture manuelle des ~1600 mots. Les seuils ci-dessous sont
-        // les quintiles calculés sur l'ensemble des 5 fichiers de vocabulaire de base (noms,
-        // verbes, adjectifs, adverbes, mots-outils — 1556 mots), PAS seulement les verbes : ça
-        // permet de réutiliser exactement les mêmes seuils plus tard pour les autres catégories de
-        // mots, pour que "B1" veuille dire la même chose partout dans l'appli.
+        // Niveau CECR : initialement dérivé uniquement de la fréquence interne (approximation par
+        // quintiles), puis REMPLACÉ pour les verbes par de vraies données du NT2Lex (Nederlands
+        // Tweede-taal Lexicon, corpus stratifié par niveau CECR réel — CGN + ODWN, KU Leuven) que
+        // l'utilisateur a fourni : 312 des 322 verbes ont un niveau directement attesté par corpus
+        // (v.niveauCECR + v.niveauCECRSource = "nt2lex" dans conjugation.json), les 10 restants
+        // (verbes trop rares ou locutions à plusieurs mots absentes du lexique, ex: "arbeiden",
+        // "aanwezig zijn") retombent sur l'estimation par fréquence ("freq_estime"). La formule
+        // par quintiles ci-dessous reste la méthode de secours — et sera la méthode principale
+        // pour les catégories de mots pas encore croisées avec le NT2Lex (noms, adjectifs...),
+        // jusqu'à ce qu'elles le soient à leur tour. Seuils calculés sur l'ensemble des 5 fichiers
+        // de vocabulaire de base (1556 mots), pas seulement les verbes, pour que "B1" veuille dire
+        // la même chose partout une fois toutes les catégories traitées.
         const CECR_FREQ_THRESHOLDS = { A1: 5.34, A2: 4.90, B1: 4.57, B2: 4.24 }; // en dessous de B2 => C1
 
         function freqToNiveauCECR(freq) {
@@ -3079,6 +3084,13 @@ if (firebaseAvailable) {
             if (freq >= CECR_FREQ_THRESHOLDS.B1) return 'B1';
             if (freq >= CECR_FREQ_THRESHOLDS.B2) return 'B2';
             return 'C1';
+        }
+
+        // Niveau CECR d'un verbe : privilégie la valeur réelle stockée (NT2Lex ou fallback déjà
+        // calculé une fois pour toutes dans les données), ne recalcule que si le champ est absent
+        // (robustesse si jamais appelé sur une entrée non enrichie).
+        function getVerbNiveauCECR(v) {
+            return v.niveauCECR || freqToNiveauCECR(v.freq);
         }
 
         // Verbes de modalité : liste fermée, aucune ambiguïté possible.
@@ -3186,7 +3198,7 @@ if (firebaseAvailable) {
             listEl.innerHTML = (totalMatching > 40 ? `<p style="font-size:0.72rem; color:var(--text-secondary);">${totalMatching} verbes — les 40 premiers affichés, affine ta recherche pour voir les autres.</p>` : '') + results.map(v =>
                 `<div class="conj-list-item" onclick="showConjugaisonDetail('${v.infinitief.replace(/'/g, "\\'")}')">
                     <div><b>${v.infinitief}</b> <span style="color:#888;">— ${v.fr}</span></div>
-                    <div class="conj-list-badges"><span class="conj-niveau-badge">${freqToNiveauCECR(v.freq)}</span>${verbCategoryBadgesHtml(v)}</div>
+                    <div class="conj-list-badges"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}</div>
                 </div>`
             ).join('');
         }
@@ -3298,7 +3310,7 @@ if (firebaseAvailable) {
                 <div class="conj-card">
                     <div class="conj-verb-title">${v.infinitief}</div>
                     <div style="color:#888; margin-bottom:6px;">${v.fr}</div>
-                    <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${freqToNiveauCECR(v.freq)}</span>${verbCategoryBadgesHtml(v)}</div>
+                    <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}</div>
                     <div style="font-size:0.7rem; color:var(--text-secondary); margin-bottom:4px;">↔️ Fais glisser le tableau pour voir toutes les colonnes</div>
                     <div style="overflow-x:auto;">
                         <table class="conj-grid-table">
