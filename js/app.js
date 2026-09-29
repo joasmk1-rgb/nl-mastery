@@ -1248,6 +1248,31 @@ if (firebaseAvailable) {
                 .trim();
         }
 
+        // ===== Synthèse vocale (prononciation) — partagée par toute l'app =====
+        // Web Speech API du navigateur : gratuit, déjà utilisé par le Jeu de rôle (voir plus bas
+        // rpDutchVoice/rpCheckDutchVoice, section Jeu de rôle où la détection de voix néerlandaise a
+        // été introduite en premier). speakNL() est le SEUL point d'entrée que le reste de l'app
+        // appelle, pour ne jamais dupliquer cette logique de sélection de voix — rpSpeakText (jeu de
+        // rôle) délègue lui aussi à cette même fonction plus bas.
+        function speakNL(text) {
+            if (!('speechSynthesis' in window) || !text) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'nl-NL';
+            if (typeof rpDutchVoice !== 'undefined' && rpDutchVoice) utterance.voice = rpDutchVoice;
+            utterance.rate = 0.95;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Bouton 🔊 réutilisable, à insérer dans n'importe quel innerHTML affichant un mot/une phrase
+        // en néerlandais. event.stopPropagation() : beaucoup de rangées appelantes (ex: wl-row,
+        // lesson-vocab-item) ont elles-mêmes un onclick sur tout le bloc — sans ça, cliquer sur 🔊
+        // déclencherait AUSSI l'action de la rangée (sélection, navigation...).
+        function speakBtnHtml(text, extraStyle) {
+            const safe = String(text).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            return `<button type="button" class="speak-btn" style="${extraStyle || ''}" onclick="event.stopPropagation(); speakNL('${safe}')" title="Écouter la prononciation" aria-label="Écouter la prononciation">🔊</button>`;
+        }
+
         async function init() {
             updateDailyStreak();
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
@@ -2676,7 +2701,7 @@ if (firebaseAvailable) {
                 </div>
                 <div class="lesson-stage">
                     <div class="lesson-stage-label">👀 Exemple</div>
-                    <div class="lesson-block">${(c.exemples || []).map(ex => `<div class="lesson-example">${ex}</div>`).join('')}</div>
+                    <div class="lesson-block">${(c.exemples || []).map(ex => `<div class="lesson-example">${ex} ${speakBtnHtml(ex)}</div>`).join('')}</div>
                 </div>
                 ${hasFriction ? `<div class="lesson-stage">
                     <div class="lesson-stage-label">⚠️ Point de friction</div>
@@ -2688,6 +2713,13 @@ if (firebaseAvailable) {
                     <button class="gemini-explain-btn" onclick="askGeminiExplainOtherwise('${notionId}')">🤖 Explique-moi autrement</button>
                     <div class="gemini-box" id="gemini-explain-box" style="display:none;"></div>
                 </div>`}
+                <div class="lesson-stage">
+                    <div class="lesson-stage-label">💬 Pose ta question</div>
+                    <div class="lesson-block" style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:8px;">Une question sur cette notion, ou "comment dit-on ... ?" — réponse en français.</div>
+                    <input type="text" id="lesson-question-input" placeholder="Ex : comment dit-on 'réunion' ?" style="width:100%; margin-bottom:8px;" autocomplete="off" onkeypress="if(event.key==='Enter') askGeminiFreeQuestion('${notionId}')">
+                    <button class="gemini-explain-btn" onclick="askGeminiFreeQuestion('${notionId}')">💬 Demander</button>
+                    <div class="gemini-box" id="gemini-question-box" style="display:none;"></div>
+                </div>
                 ${exCount ? `<div class="lesson-stage">
                     <div class="lesson-stage-label">🧩 S'entraîner</div>
                     <button class="btn btn-green" onclick="showExercise('${notionId}')">🧩 Commencer les exercices (${exCount})</button>
@@ -2699,7 +2731,7 @@ if (firebaseAvailable) {
                 ${(c.objectifCommunication || (c.vocabulaire && c.vocabulaire.length) || rpSuggestion) ? `<div class="lesson-stage">
                     <div class="lesson-stage-label">💬 Utiliser</div>
                     ${c.objectifCommunication ? `<div class="lesson-block"><p>${c.objectifCommunication}</p></div>` : ''}
-                    ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v}</span>`).join('')}</div></div>` : ''}
+                    ${(c.vocabulaire && c.vocabulaire.length) ? `<div class="lesson-block"><div class="lesson-vocab-list">${c.vocabulaire.map(v => `<span class="lesson-vocab-item">${v} ${speakBtnHtml(v)}</span>`).join('')}</div></div>` : ''}
                     ${rpSuggestion ? `<div class="roleplay-suggestion-card" onclick="showRoleplay(); rpShowCategory('${rpSuggestion.category}');">🎙️ Notion maîtrisée ! Envie de pratiquer à l'oral ?<br><b>${rpSuggestion.label}</b></div>` : ''}
                 </div>` : ''}
                 <div class="lesson-stage">
@@ -2951,7 +2983,8 @@ if (firebaseAvailable) {
 
             const fb = document.getElementById('exercise-feedback');
             fb.style.color = isCorrect ? 'var(--success)' : 'var(--wrong)';
-            fb.innerText = isCorrect ? '✅ Correct !' : `❌ Réponse attendue : ${expected}`;
+            // ex.answer est toujours en néerlandais dans exercises.json (qcm/texte_a_trous/remise_en_ordre) — bouton écoute sans risque de dévoiler une traduction dans la mauvaise langue.
+            fb.innerHTML = (isCorrect ? `✅ Correct ! → ${expected}` : `❌ Réponse attendue : ${expected}`) + ' ' + speakBtnHtml(expected);
 
             if (ex.type === 'qcm') {
                 document.querySelectorAll('.ex-option-btn').forEach(b => {
@@ -3125,10 +3158,10 @@ if (firebaseAvailable) {
             const rowsHtml = rows.map(r => `
                 <tr>
                     <td class="conj-grid-pronom">${r.pronom}</td>
-                    <td>${r.present}</td>
-                    <td>${r.futur}</td>
-                    <td>${r.imperfectum}</td>
-                    <td>${r.perfectum}</td>
+                    <td>${r.present} ${speakBtnHtml(r.present)}</td>
+                    <td>${r.futur} ${speakBtnHtml(r.futur)}</td>
+                    <td>${r.imperfectum} ${speakBtnHtml(r.imperfectum)}</td>
+                    <td>${r.perfectum} ${speakBtnHtml(r.perfectum)}</td>
                 </tr>`).join('');
             document.getElementById('conj-detail').innerHTML = `
                 <div class="conj-card">
@@ -3275,6 +3308,13 @@ if (firebaseAvailable) {
                 explainMistake: (mistakeDescription) => generate(
                     `Un apprenant francophone fait l'erreur suivante en néerlandais : "${mistakeDescription}". Explique en français, simplement, pourquoi c'est une erreur fréquente pour un francophone et donne un moyen mnémotechnique.`
                 ),
+                // Question libre posée par l'apprenant en français pendant une leçon (ex: "comment on
+                // dit X ?"), avec le contexte de la notion en cours pour rester pertinent et au bon
+                // niveau — jamais pour redéfinir le curriculum, seulement pour répondre à CETTE
+                // question précise.
+                answerFreeQuestion: (notionContent, userQuestion) => generate(
+                    `Tu es un professeur de néerlandais pour francophones, en train d'expliquer la notion suivante à un apprenant :\n${notionContent}\n\nL'apprenant te pose cette question en français, pendant la leçon : "${userQuestion}"\n\nRéponds en français, en 3-4 phrases maximum, de façon simple et concrète. Si sa question porte sur "comment dire X en néerlandais", donne la traduction néerlandaise exacte en gras avec ** autour, plus un exemple de phrase courte. Si la question sort complètement du sujet de la notion, réponds quand même utilement mais reste bref.`
+                ),
                 generateConversation: (scenario, history) => generate(
                     `Continue cette conversation en néerlandais dans le contexte suivant : ${scenario}. Historique : ${JSON.stringify(history)}. Réponds uniquement en néerlandais, une ou deux phrases.`
                 ),
@@ -3415,6 +3455,35 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             }
         }
 
+        // Question libre posée en français pendant une leçon (ex: "comment dit-on X ?"). Dépend
+        // entièrement de Gemini — pas de secours pré-écrit possible ici (contrairement au mode script
+        // du Jeu de rôle) puisque les questions sont par nature imprévisibles à l'avance ; si Gemini
+        // est indisponible, message d'erreur clair, même pattern que askGeminiExplainOtherwise.
+        async function askGeminiFreeQuestion(notionId) {
+            const notion = curriculumNotions[notionId];
+            const input = document.getElementById('lesson-question-input');
+            const question = (input.value || '').trim();
+            const box = document.getElementById('gemini-question-box');
+            if (!question) return;
+            if (!GeminiService.isAvailable()) {
+                box.style.display = '';
+                box.innerText = "Pas de clé API Gemini enregistrée. Ajoute-en une gratuitement depuis Profil → 🤖 Intelligence IA pour activer cette fonctionnalité.";
+                return;
+            }
+            box.style.display = '';
+            box.innerText = "L'IA réfléchit...";
+            try {
+                const c = notion.content || {};
+                const contentStr = `${c.objectif || ''}\n${c.comprendre || ''}\n${c.regle || ''}`;
+                const text = await GeminiService.answerFreeQuestion(contentStr, question);
+                // Convertit **mot néerlandais** (voir consigne du prompt dans GeminiService) en gras +
+                // bouton d'écoute — jamais un mot néerlandais affiché sans pouvoir l'entendre.
+                box.innerHTML = text.replace(/\*\*(.+?)\*\*/g, (_, word) => `<strong>${word}</strong> ${speakBtnHtml(word)}`);
+            } catch (e) {
+                box.innerText = "Erreur Gemini : " + e.message;
+            }
+        }
+
         // ===== Lien curriculum → jeu de rôle =====
         // Suggère une mission de jeu de rôle liée quand une notion vient d'être maîtrisée.
         const NOTION_ROLEPLAY_LINKS = {
@@ -3530,6 +3599,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="wl-row ${wlSelected.has(i.id) ? 'selected' : ''}" onclick="toggleWordSelect('${i.id}')">
                     <span class="wl-fr">${i.fr}</span>
                     <span class="wl-nl">${i.nl}</span>
+                    ${speakBtnHtml(i.nl)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
                     <span class="wl-file">${i.file}${freqTxt ? ' · ' + freqTxt : ''}</span>
                 </div>`;
@@ -4090,9 +4160,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
             const fb = document.getElementById('feedback');
             const goToNext = inRevisionMode ? revisionNextQ : nextQ;
+            // Écoute de la bonne réponse : seulement quand elle est en néerlandais (l'autre sens de
+            // traduction — nl2fr — donnerait la réponse en français, que la voix NL prononcerait mal).
+            const speakSuffix = answerField === 'nl' ? ' ' + speakBtnHtml(accepted[0]) : '';
 
             if (result.status === 'correct') {
-                fb.innerText = "✅ BRAVO ! → " + correctAnswer + (multi ? "  (plusieurs réponses acceptées)" : "")
+                fb.innerHTML = "✅ BRAVO ! → " + correctAnswer + speakSuffix + (multi ? "  (plusieurs réponses acceptées)" : "")
                     + (articleMistake ? "  (⚠️ attention à de/het — envoyé en révision déterminants)" : "");
                 fb.style.color = "var(--success)";
                 state.xp += 10;
@@ -4102,7 +4175,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 setTimeout(goToNext, 1400);
             } else if (result.status === 'close') {
                 const note = result.particleOrder ? " (⚠️ attention à l'ordre/la place de la particule)" : " (petite faute)";
-                fb.innerText = "🟡 PRESQUE !" + note + " → " + correctAnswer;
+                fb.innerHTML = "🟡 PRESQUE !" + note + " → " + correctAnswer + speakSuffix;
                 fb.style.color = "var(--gold)";
                 state.xp += 5;
                 markMastered(currentItem);
@@ -4110,7 +4183,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 save();
                 setTimeout(goToNext, 1600);
             } else {
-                fb.innerText = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer;
+                fb.innerHTML = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer + speakSuffix;
                 fb.style.color = "var(--wrong)";
                 registerResult(currentItem.id, false);
                 if (inRevisionMode) requeueItem(currentItem);
@@ -4260,6 +4333,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const correctAnswer = taCurrent[answerField];
             const result = evaluateAnswer(raw, correctAnswer);
             const fb = document.getElementById('ta-feedback');
+            const speakSuffix = answerField === 'nl' ? ' ' + speakBtnHtml(correctAnswer) : '';
             if (result.status === 'correct') {
                 taScore++;
                 state.xp += 3;
@@ -4267,7 +4341,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 registerResult(taCurrent.id, true);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
-                fb.innerText = '✅ ' + correctAnswer;
+                fb.innerHTML = '✅ ' + correctAnswer + speakSuffix;
                 fb.style.color = 'var(--success)';
             } else if (result.status === 'close') {
                 taScore += 0.5;
@@ -4276,12 +4350,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 registerResult(taCurrent.id, true);
                 save();
                 document.getElementById('ta-score').innerText = 'Score : ' + taScore;
-                fb.innerText = '🟡 presque : ' + correctAnswer;
+                fb.innerHTML = '🟡 presque : ' + correctAnswer + speakSuffix;
                 fb.style.color = 'var(--gold)';
             } else {
                 registerResult(taCurrent.id, false);
                 save();
-                fb.innerText = '❌ ' + correctAnswer;
+                fb.innerHTML = '❌ ' + correctAnswer + speakSuffix;
                 fb.style.color = 'var(--wrong)';
             }
             nextTAQ();
@@ -4760,7 +4834,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const result = evaluateAnswer(raw, correctAnswer);
             const isCorrect = result.status !== 'wrong';
             const fb = document.getElementById('test-feedback');
-            fb.innerText = isCorrect ? '✅ ' + correctAnswer : '❌ ' + correctAnswer;
+            const speakSuffix = answerField === 'nl' ? ' ' + speakBtnHtml(correctAnswer) : '';
+            fb.innerHTML = (isCorrect ? '✅ ' + correctAnswer : '❌ ' + correctAnswer) + speakSuffix;
             fb.style.color = isCorrect ? 'var(--success)' : 'var(--wrong)';
             seeWord(item.id);
             registerResult(item.id, isCorrect);
@@ -5437,14 +5512,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function rpSpeakText(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'nl-NL';
-                if (rpDutchVoice) utterance.voice = rpDutchVoice;
-                utterance.rate = 0.95;
-                window.speechSynthesis.speak(utterance);
-            }
+            // Délègue à speakNL (définie en haut du fichier) — même comportement qu'avant, mais
+            // partagé avec le reste de l'app (Mots, Leçons, Conjugaison, feedback d'exercice) au
+            // lieu d'être dupliqué.
+            speakNL(text);
         }
 
         function showRoleplay() {
