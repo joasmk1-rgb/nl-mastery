@@ -11,7 +11,11 @@ const firebaseConfig = {
 let currentUser = null;      // objet auth Firebase (uid, etc.)
 let currentUserDoc = null;   // données Firestore users/{uid} (pseudo, role, disabled...)
 let cloudSyncTimer = null;
-let accMode = 'login'; // 'login' | 'signup'
+// Par défaut sur "Créer un compte" : la plupart des gens qui ouvrent cet écran n'ont encore
+// aucun compte NL Mastery (progression purement locale jusque-là) — les accueillir sur un
+// formulaire de connexion était un cul-de-sac. Un utilisateur qui a déjà un compte n'a qu'un
+// clic à faire sur l'onglet "Connexion", clairement visible juste à côté.
+let accMode = 'signup'; // 'login' | 'signup'
 let firebaseAvailable = false;
 let auth = null;
 let db = null;
@@ -302,7 +306,7 @@ async function renderPrivacySettings() {
     const el = document.getElementById('social-privacy-content');
     if (!el) return;
     if (!firebaseAvailable || !currentUser) {
-        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi (Profil → Compte) pour gérer tes paramètres de confidentialité.</p>`;
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour gérer tes paramètres de confidentialité.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`;
         return;
     }
     el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
@@ -369,7 +373,7 @@ async function renderNotifications() {
     const el = document.getElementById('notifications-list');
     if (!el) return;
     if (!firebaseAvailable || !currentUser) {
-        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes notifications.</p>`;
+        el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour voir tes notifications.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`;
         return;
     }
     el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
@@ -439,7 +443,7 @@ async function socialSearch() {
     const input = document.getElementById('social-search-input');
     const resultEl = document.getElementById('social-search-result');
     if (!input || !resultEl) return;
-    if (!firebaseAvailable || !currentUser) { resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour rechercher des amis.</p>`; return; }
+    if (!firebaseAvailable || !currentUser) { resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour rechercher des amis.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`; return; }
     const raw = input.value.trim();
     if (!raw) { resultEl.innerHTML = ''; return; }
     resultEl.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Recherche...</p>`;
@@ -555,7 +559,7 @@ async function friendUnblock(targetUid) {
 async function renderFriendsList() {
     const el = document.getElementById('social-friends-list');
     if (!el) return;
-    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes amis.</p>`; return; }
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour voir tes amis.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`; return; }
     el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
     try {
         const snap = await db.collection('friendships').where('uids', 'array-contains', currentUser.uid).get();
@@ -608,7 +612,7 @@ async function renderFriendsList() {
 async function renderFriendRequests() {
     const el = document.getElementById('social-requests-list');
     if (!el) return;
-    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes demandes.</p>`; return; }
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour voir tes demandes.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`; return; }
     el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
     try {
         const snap = await db.collection('friendRequests').where('toUid', '==', currentUser.uid).where('status', '==', 'pending').get();
@@ -763,7 +767,7 @@ const CHALLENGE_STATUS_LABELS = { pending: 'En attente', accepted: 'En cours', c
 async function renderChallenges() {
     const el = document.getElementById('social-challenges-list');
     if (!el) return;
-    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes défis.</p>`; return; }
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour voir tes défis.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`; return; }
     el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
     try {
         const [sentSnap, receivedSnap] = await Promise.all([
@@ -856,7 +860,7 @@ const SESSION_STATUS_LABELS = { pending: 'En attente', accepted: 'Confirmée', d
 async function renderStudySessions() {
     const el = document.getElementById('social-sessions-list');
     if (!el) return;
-    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Connecte-toi pour voir tes sessions.</p>`; return; }
+    if (!firebaseAvailable || !currentUser) { el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">Connecte-toi pour voir tes sessions.</p><button class="btn btn-green" style="margin-top:0;" onclick="showCompte()">Se connecter / créer un compte</button>`; return; }
     el.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement...</p>`;
     try {
         const [sentSnap, receivedSnap] = await Promise.all([
@@ -2430,6 +2434,16 @@ if (firebaseAvailable) {
                     <button class="btn btn-green" style="margin-top:0;" onclick="showOnboarding()">👋 Découvrir NL Mastery</button>
                 </div>` : '';
 
+            // ===== 0bis. Compte non créé : visible dès l'accueil (pas seulement enfoui dans Profil)
+            // — sans ça, un nouvel utilisateur n'a aucune raison de deviner que "Compte" (menu Profil)
+            // sert à sauvegarder sa progression et à pouvoir ajouter des amis ensuite.
+            const accountNudgeHtml = !currentUser ? `
+                <div class="dash-card dash-secondary-card" style="cursor:pointer;" onclick="showCompte()">
+                    <div class="dash-secondary-label">🔓 Progression sauvegardée sur cet appareil seulement</div>
+                    <div class="dash-secondary-title">Crée un compte gratuit</div>
+                    <div class="dash-secondary-sub">Pour ne rien perdre si tu changes d'appareil, et pouvoir ajouter des amis ensuite.</div>
+                </div>` : '';
+
             // ===== 1. Bloc dominant : "🎯 Pour toi maintenant" (mode "professeur") =====
             let recoHtml = '';
             if (curriculumLoaded) {
@@ -2497,6 +2511,7 @@ if (firebaseAvailable) {
                     <div class="quick-access-card" onclick="enterModeEntrainer()"><div class="qa-icon">✍️</div><div class="qa-label">M'entraîner</div></div>
                     <div class="quick-access-card" onclick="showPratiquer()"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
                     <div class="quick-access-card" onclick="showJouer()"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
+                    <div class="quick-access-card" onclick="showSocial()"><div class="qa-icon">👥</div><div class="qa-label">Amis</div></div>
                     <div class="quick-access-card" onclick="enterModeChoisir()"><div class="qa-icon">🎯</div><div class="qa-label">Je ne sais pas quoi faire</div></div>
                 </div>`;
 
@@ -2530,6 +2545,7 @@ if (firebaseAvailable) {
             block.innerHTML = `
                 ${greetingHtml}
                 ${placementNudgeHtml}
+                ${accountNudgeHtml}
                 ${recoHtml}
                 ${continuerHtml}
                 ${quickAccessHtml}
@@ -4369,7 +4385,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-menu-row" onclick="showWordList('profil')"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showConjugaison()"><span class="pm-icon">🔤</span><span>Conjugaison</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showTestSelect()"><span class="pm-icon">🎯</span><span>Test de vocabulaire</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Social</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>

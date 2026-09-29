@@ -418,9 +418,11 @@
         <!-- Étape 3 : conversation -->
         <div id="rp-step-chat" style="display:none; width:100%; display:flex; flex-direction:column; align-items:center;">
             <button class="back-btn" onclick="rpShowScenarioPicker()">← Changer de scénario</button>
+            <div id="rp-mode-banner" style="display:none; width:100%;"></div>
             <div id="rp-chat-history"></div>
             <button id="rp-mic-btn" class="btn btn-green" onclick="rpToggleSpeechRecognition()">🎤 Cliquer pour parler</button>
             <div id="rp-status">Prêt</div>
+            <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
         </div>
     </div>
 
@@ -480,14 +482,14 @@
         <div id="acc-logged-out">
             <div class="acc-box">
                 <div class="acc-tab-row">
-                    <button class="acc-tab active" id="acc-tab-login" onclick="accSwitchTab('login')">Connexion</button>
-                    <button class="acc-tab" id="acc-tab-signup" onclick="accSwitchTab('signup')">Créer un compte</button>
+                    <button class="acc-tab" id="acc-tab-login" onclick="accSwitchTab('login')">Connexion</button>
+                    <button class="acc-tab active" id="acc-tab-signup" onclick="accSwitchTab('signup')">Créer un compte</button>
                 </div>
 
                 <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Pseudo</label>
                 <input type="text" id="acc-pseudo" placeholder="ex: joas92" autocomplete="username">
 
-                <div id="acc-email-field" style="display:none;">
+                <div id="acc-email-field">
                     <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Email (facultatif, pour récupérer ton mot de passe)</label>
                     <input type="email" id="acc-email" placeholder="ton@email.com" autocomplete="email">
                 </div>
@@ -496,9 +498,9 @@
                 <input type="password" id="acc-password" placeholder="6 caractères minimum" autocomplete="current-password">
 
                 <div class="acc-error" id="acc-error"></div>
-                <div class="acc-hint" id="acc-hint">Ta progression actuelle sera reprise sur ce compte.</div>
+                <div class="acc-hint" id="acc-hint" style="display:block;">Ta progression actuelle sera reprise sur ce compte.</div>
 
-                <button class="btn btn-green" id="acc-submit-btn" onclick="accSubmit()">Se connecter</button>
+                <button class="btn btn-green" id="acc-submit-btn" onclick="accSubmit()">Créer mon compte</button>
             </div>
         </div>
 
