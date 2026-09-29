@@ -4810,6 +4810,222 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             }
         };
 
+        // ===== Secours "mode script" (hors-ligne) =====
+        // Activé automatiquement quand Gemini est indisponible (pas de clé, ou une erreur réseau/
+        // quota en cours de conversation) : un mini-dialogue linéaire à choix (2 options par étape,
+        // 3 étapes) pour ne jamais laisser l'apprenant bloqué sans pratique. Ne remplace pas Gemini
+        // : c'est un filet de secours au contenu volontairement plus simple, pour les 18 scénarios
+        // de RP_SCENARIOS. Les 6 scénarios de Pratique ciblée (NOTION_TARGETED_PRACTICE) n'ont pas
+        // de version scriptée dans cette première passe (portée volontairement limitée).
+        const RP_SCRIPTED_FALLBACK = {
+            interview_transportplanner_kennismaking: [
+                { choices: ["Ik ben gemotiveerd en leergierig, met ervaring in logistiek.", "Ik zoek vooral een stabiele baan dicht bij huis."],
+                  ai: "Goed om te horen. Waarom spreekt de functie van transportplanner jou precies aan?" },
+                { choices: ["Ik hou van plannen en het oplossen van problemen onder tijdsdruk.", "Ik wil vooral met mensen samenwerken, chauffeurs en klanten."],
+                  ai: "Dat past goed bij de functie. En hoe voel jij je om dagelijks in het Nederlands te werken?" },
+                { choices: ["Ik voel me steeds zekerder, ik oefen elke dag.", "Het is nog een uitdaging, maar ik leer snel bij."],
+                  ai: "Bedankt voor je eerlijke antwoord. We nemen contact op voor de volgende stap. Fijne dag nog!" }
+            ],
+            interview_sc_phone: [
+                { choices: ["Ik ben beschikbaar vanaf volgende maand.", "Ik kan onmiddellijk beginnen."],
+                  ai: "Prima. Kan je kort vertellen waarom je solliciteert voor deze functie?" },
+                { choices: ["Ik heb ervaring met voorraadbeheer in een magazijn.", "Ik heb geen directe ervaring, maar ik leer snel."],
+                  ai: "Dat is nuttig om te weten. Ken je Excel of SAP een beetje?" },
+                { choices: ["Ja, ik gebruik Excel regelmatig.", "Een beetje, maar ik wil me verder verdiepen."],
+                  ai: "Goed, we nemen dit mee en contacteren je snel voor een volgend gesprek." }
+            ],
+            interview_sc_technical: [
+                { choices: ["Ik zou eerst de oorzaak van het tekort analyseren.", "Ik zou meteen extra voorraad bijbestellen."],
+                  ai: "Interessant. En hoe zou je de levering aan de klant intussen beheren?" },
+                { choices: ["Ik zou de klant proactief informeren over de vertraging.", "Ik zou prioriteit geven aan de belangrijkste klanten."],
+                  ai: "Goede reflex. Gebruik je weleens Excel of Power BI om zulke situaties op te volgen?" },
+                { choices: ["Ja, ik maak overzichten om de voorraad op te volgen.", "Nog niet veel, maar ik wil dat graag leren."],
+                  ai: "Bedankt, dat geeft me een goed beeld van je aanpak." }
+            ],
+            interview_sc_final: [
+                { choices: ["Ik werk graag in teamverband en deel graag kennis.", "Ik werk het liefst zelfstandig aan mijn taken."],
+                  ai: "Goed om te weten. Wat verwacht je van deze functie op lange termijn?" },
+                { choices: ["Ik wil groeien naar meer verantwoordelijkheid.", "Ik wil vooral stabiliteit en een goede werksfeer."],
+                  ai: "Dat is duidelijk. Heb je nog vragen over het team of de volgende stappen?" },
+                { choices: ["Ja, wanneer zou ik kunnen starten?", "Nee, alles is duidelijk voor mij."],
+                  ai: "Perfect, we laten snel iets van ons horen. Bedankt voor het gesprek!" }
+            ],
+            interview_consult_phone: [
+                { choices: ["Ik ben net afgestudeerd en wil graag in consultancy starten.", "Ik heb al wat ervaring en zoek een nieuwe uitdaging."],
+                  ai: "Mooi. Ben je bereid om regelmatig bij klanten ter plaatse te werken?" },
+                { choices: ["Ja, dat vind ik zelfs een pluspunt.", "Ja, al geef ik de voorkeur aan een beperkte reisafstand."],
+                  ai: "Begrepen. Heb je al ervaring met Excel of Power BI?" },
+                { choices: ["Ja, ik gebruik die tools regelmatig.", "Beperkt, maar ik leer graag snel bij."],
+                  ai: "Dank je, we nemen snel contact op voor de volgende stap." }
+            ],
+            interview_consult_technical: [
+                { choices: ["Ik zou eerst de oorzaak van het probleem in kaart brengen.", "Ik zou meteen een oplossing voorstellen aan de klant."],
+                  ai: "Goede aanpak. Hoe zou je dit vervolgens aan de klant communiceren?" },
+                { choices: ["Ik zou het duidelijk en stap voor stap uitleggen.", "Ik zou een kort rapport met cijfers voorbereiden."],
+                  ai: "Dat klinkt professioneel. Hoe ga je om met een klant die niet tevreden is?" },
+                { choices: ["Ik luister eerst goed naar de klacht voor ik reageer.", "Ik probeer meteen een concrete oplossing aan te bieden."],
+                  ai: "Bedankt, dat is een goede reflex in consultancy." }
+            ],
+            interview_consult_final: [
+                { choices: ["Ik zie mezelf hier op lange termijn groeien.", "Ik wil eerst ervaring opdoen en dan verder zien."],
+                  ai: "Dat is een eerlijk antwoord. Hoe ga je om met de drukte van klantenopdrachten?" },
+                { choices: ["Ik plan mijn taken goed en vraag hulp indien nodig.", "Ik werk het liefst onder een beetje druk, dat motiveert me."],
+                  ai: "Goed om te horen. Heb je nog vragen voor mij?" },
+                { choices: ["Ja, hoe ziet de eerste maand er ongeveer uit?", "Nee, ik denk dat alles duidelijk is."],
+                  ai: "Prima, we nemen snel contact op. Bedankt voor je tijd!" }
+            ],
+            interview_hr_phone: [
+                { choices: ["Ik hou van contact met mensen en overtuigen.", "Ik wil graag in een dynamische sector werken."],
+                  ai: "Mooi. Heb je al ervaring met klantcontact of verkoop?" },
+                { choices: ["Ja, ik heb ervaring met klantcontact.", "Niet direct, maar ik leer graag snel bij."],
+                  ai: "Goed om te weten. Ben je beschikbaar voor een volgend gesprek deze week?" },
+                { choices: ["Ja, ik ben flexibel deze week.", "Ik moet even mijn agenda checken, maar het lukt zeker."],
+                  ai: "Perfect, we nemen snel contact met je op." }
+            ],
+            interview_hr_technical: [
+                { choices: ["Ik zou geduldig zijn en de voordelen van de functie benadrukken.", "Ik zou vragen wat hem precies tegenhoudt."],
+                  ai: "Goede reflex. En hoe ga je om met een kandidaat die je moet afwijzen?" },
+                { choices: ["Ik geef eerlijke en constructieve feedback.", "Ik hou het kort maar vriendelijk."],
+                  ai: "Dat is belangrijk in recruitment. Hoe overtuig je een klant om een profiel te overwegen?" },
+                { choices: ["Ik leg duidelijk de sterktes van het profiel uit.", "Ik toon concrete voorbeelden van vergelijkbare profielen."],
+                  ai: "Bedankt, dat geeft een goed beeld van je aanpak." }
+            ],
+            interview_hr_final: [
+                { choices: ["Ik zie mezelf als een ervaren consultant met eigen klanten.", "Ik wil vooral goed worden in wat ik nu doe."],
+                  ai: "Mooi vooruitzicht. Wat motiveert jou het meest in recruitment?" },
+                { choices: ["Het gevoel dat ik iemand aan een baan help.", "De uitdaging om het juiste profiel te vinden."],
+                  ai: "Mooi antwoord. Heb je nog vragen over het team?" },
+                { choices: ["Ja, hoe is de sfeer binnen het team?", "Nee, ik denk dat ik voldoende weet."],
+                  ai: "Bedankt voor het gesprek, we laten snel iets weten!" }
+            ],
+            admin_cpas: [
+                { choices: ["Ik kom informatie vragen over een aanvraag.", "Ik heb een afspraak met een maatschappelijk werker."],
+                  ai: "Goed, heeft u de nodige documenten bij, zoals uw identiteitskaart?" },
+                { choices: ["Ja, ik heb alles bij me.", "Nee, welke documenten heb ik precies nodig?"],
+                  ai: "Geen probleem, ik leg u zo uit welke documenten nodig zijn. Is er nog iets anders?" },
+                { choices: ["Nee, dat was alles, bedankt.", "Ja, ik heb nog een korte vraag."],
+                  ai: "Prima, u kan hier terecht aan het loket. Nog een fijne dag verder!" }
+            ],
+            admin_medecin: [
+                { choices: ["Ik heb al een paar dagen keelpijn.", "Ik voel me moe en heb een beetje hoofdpijn."],
+                  ai: "Sinds wanneer heeft u last van deze klachten precies?" },
+                { choices: ["Sinds ongeveer drie dagen.", "Sinds het begin van deze week."],
+                  ai: "Begrepen. Heeft u nog andere klachten, zoals koorts?" },
+                { choices: ["Nee, verder niets bijzonders.", "Een klein beetje, maar niet erg hoog."],
+                  ai: "Goed, ik schrijf u iets voor. Rust goed uit en drink voldoende water." }
+            ],
+            admin_mutuelle: [
+                { choices: ["Ik heb een vraag over de terugbetaling van een doktersbezoek.", "Ik wil mijn Europese ziekteverzekeringskaart aanvragen."],
+                  ai: "Prima, heeft u het betreffende document of getuigschrift bij de hand?" },
+                { choices: ["Ja, ik heb het hier bij me.", "Nee, moet ik dat nog opsturen?"],
+                  ai: "Dat kan, u kan het gewoon nog binnenbrengen of opsturen. Nog een andere vraag?" },
+                { choices: ["Nee, dat was alles.", "Ja, hoelang duurt de terugbetaling ongeveer?"],
+                  ai: "Meestal enkele weken. Bedankt voor uw geduld en nog een fijne dag!" }
+            ],
+            admin_commune: [
+                { choices: ["Ik kom mijn adres wijzigen.", "Ik heb een nieuwe identiteitskaart nodig."],
+                  ai: "Goed, heeft u de nodige documenten bij zich voor deze aanvraag?" },
+                { choices: ["Ja, ik heb alles bij.", "Welke documenten heb ik precies nodig?"],
+                  ai: "Ik leg u dat graag uit. Is dit voor uzelf alleen, of voor het hele gezin?" },
+                { choices: ["Enkel voor mezelf.", "Voor mezelf en mijn partner."],
+                  ai: "Begrepen, we regelen dat meteen voor u. Nog een fijne dag!" }
+            ],
+            call_standard: [
+                { choices: ["Ik zou graag met de personeelsdienst spreken.", "Ik heb een algemene vraag over uw diensten."],
+                  ai: "Een ogenblikje, mag ik weten waarover het precies gaat?" },
+                { choices: ["Het gaat over een sollicitatie.", "Het gaat over een lopende bestelling."],
+                  ai: "Dank u, ik verbind u door. Wenst u nog iets anders te vermelden?" },
+                { choices: ["Nee, dat was alles, bedankt.", "Ja, kan u mij ook een e-mailadres geven?"],
+                  ai: "Natuurlijk, dat regel ik voor u. Nog een prettige dag!" }
+            ],
+            call_rdv: [
+                { choices: ["Ik zou graag een afspraak willen maken.", "Ik bel om een bestaande afspraak te verzetten."],
+                  ai: "Prima, wat is de reden van de afspraak?" },
+                { choices: ["Het gaat om een administratieve zaak.", "Het gaat om een eerste kennismaking."],
+                  ai: "Begrepen. Wanneer past het u het beste, deze of volgende week?" },
+                { choices: ["Deze week zou perfect zijn.", "Volgende week komt mij beter uit."],
+                  ai: "Genoteerd, ik bevestig de afspraak per e-mail. Bedankt voor uw telefoontje!" }
+            ],
+            call_suivi_candidature: [
+                { choices: ["Ik bel over mijn sollicitatie van vorige week.", "Ik wil graag weten of mijn dossier al bekeken is."],
+                  ai: "Voor welke functie precies, en wanneer heeft u gesolliciteerd?" },
+                { choices: ["Het gaat om de functie van transportplanner.", "Het gaat om een functie in de logistiek."],
+                  ai: "Dank u, uw dossier wordt momenteel nog bekeken door het team." },
+                { choices: ["Oké, weet u ongeveer wanneer ik iets hoor?", "Prima, ik wacht rustig af, bedankt."],
+                  ai: "We nemen binnen de twee weken contact met u op. Bedankt voor uw geduld!" }
+            ],
+            cafe: [
+                { choices: ["Mag ik een koffie en een croissant, alstublieft?", "Ik zou graag het menu even willen bekijken."],
+                  ai: "Natuurlijk, hier is het menu. Wenst u er ook iets bij te drinken?" },
+                { choices: ["Ja, graag een water erbij.", "Nee, dat is voldoende voor mij, dank u."],
+                  ai: "Prima, dat is dan geregeld. Wenst u binnen of op het terras te zitten?" },
+                { choices: ["Op het terras, als het kan.", "Binnen is prima, dank u."],
+                  ai: "Perfect, ik breng het zo naar u toe. Smakelijk alvast!" }
+            ]
+        };
+
+        let rpScriptedActive = false;
+        let rpScriptedStepIndex = 0;
+
+        // Bascule vers le mode script pour le scénario en cours (appelée automatiquement si Gemini
+        // n'est pas configuré au démarrage, ou manuellement après une erreur Gemini en cours de
+        // conversation). Ne touche jamais RP_SCENARIOS : lit uniquement RP_SCRIPTED_FALLBACK via
+        // l'id du scénario courant.
+        function rpEnterScriptedMode() {
+            if (!rpCurrentScenario || !RP_SCRIPTED_FALLBACK[rpCurrentScenario.id]) {
+                alert("Le mode script n'est pas encore disponible pour ce scénario précis. Essaie un autre scénario, ou configure Gemini dans Profil → 🤖 Intelligence IA.");
+                return;
+            }
+            rpScriptedActive = true;
+            rpScriptedStepIndex = 0;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+
+            const micBtn = document.getElementById('rp-mic-btn');
+            if (micBtn) micBtn.style.display = 'none';
+
+            const banner = document.getElementById('rp-mode-banner');
+            if (banner) {
+                banner.style.display = '';
+                banner.innerHTML = `<p style="font-size:0.78rem; background:var(--bg-tertiary); border-radius:8px; padding:8px 10px; color:var(--text-secondary);">📜 Mode script (sans IA) — choisis une réplique à chaque étape. Conversation plus courte et prévisible qu'avec Gemini.</p>`;
+            }
+
+            rpRenderScriptedStep();
+        }
+
+        function rpRenderScriptedStep() {
+            const steps = RP_SCRIPTED_FALLBACK[rpCurrentScenario.id];
+            const choicesDiv = document.getElementById('rp-scripted-choices');
+            const statusDiv = document.getElementById('rp-status');
+
+            if (rpScriptedStepIndex >= steps.length) {
+                if (choicesDiv) { choicesDiv.style.display = 'none'; choicesDiv.innerHTML = ''; }
+                if (statusDiv) statusDiv.innerText = "Fin de la pratique (mode script) — change de scénario pour continuer.";
+                return;
+            }
+
+            const step = steps[rpScriptedStepIndex];
+            if (choicesDiv) {
+                choicesDiv.style.display = 'flex';
+                choicesDiv.innerHTML = step.choices.map((c, i) =>
+                    `<button class="rp-scenario-btn" onclick="rpChooseScriptedReply(${i})">${c}</button>`
+                ).join('');
+            }
+            if (statusDiv) statusDiv.innerText = "Choisis une réplique";
+        }
+
+        function rpChooseScriptedReply(choiceIndex) {
+            const steps = RP_SCRIPTED_FALLBACK[rpCurrentScenario.id];
+            const step = steps[rpScriptedStepIndex];
+            if (!step) return;
+
+            rpAppendMessage(step.choices[choiceIndex], 'user');
+            rpAppendMessage(step.ai, 'assistant');
+            rpSpeakText(step.ai);
+
+            rpScriptedStepIndex++;
+            rpRenderScriptedStep();
+        }
+
         function rpFindScenario(catKey, itemId) {
             const cat = RP_SCENARIOS[catKey];
             if (!cat) return null;
@@ -5011,7 +5227,20 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 }
             } catch (error) {
                 console.error(error);
-                document.getElementById('rp-status').innerText = `Erreur : ${error.message}`;
+                // On retire le message de l'utilisateur qui vient d'échouer, pour ne pas fausser
+                // l'historique si la conversation reprend ensuite en mode script.
+                rpConversationHistory.pop();
+                const statusDiv = document.getElementById('rp-status');
+                if (RP_SCRIPTED_FALLBACK[rpCurrentScenario.id]) {
+                    if (statusDiv) statusDiv.innerText = `Erreur Gemini : ${error.message}`;
+                    const choicesDiv = document.getElementById('rp-scripted-choices');
+                    if (choicesDiv) {
+                        choicesDiv.style.display = 'flex';
+                        choicesDiv.innerHTML = `<button class="rp-scenario-btn" onclick="rpEnterScriptedMode()">📜 Continuer en mode script (sans IA)</button>`;
+                    }
+                } else if (statusDiv) {
+                    statusDiv.innerText = `Erreur : ${error.message}`;
+                }
             }
         }
 
@@ -5089,6 +5318,17 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpCurrentScenario = scenario;
             rpConversationHistory = [{ role: "model", parts: [{ text: scenario.prompt }] }];
 
+            // Réinitialise le mode script à chaque nouveau scénario (jamais hérité de la
+            // conversation précédente) — bannière, choix et micro repartent de l'état par défaut.
+            rpScriptedActive = false;
+            rpScriptedStepIndex = 0;
+            const micBtn = document.getElementById('rp-mic-btn');
+            if (micBtn) micBtn.style.display = '';
+            const choicesDiv = document.getElementById('rp-scripted-choices');
+            if (choicesDiv) { choicesDiv.style.display = 'none'; choicesDiv.innerHTML = ''; }
+            const banner = document.getElementById('rp-mode-banner');
+            if (banner) { banner.style.display = 'none'; banner.innerHTML = ''; }
+
             document.getElementById('rp-step-category').style.display = 'none';
             document.getElementById('rp-step-scenario').style.display = 'none';
             document.getElementById('rp-step-chat').style.display = 'flex';
@@ -5097,6 +5337,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpAppendMessage(scenario.welcome, 'assistant');
             rpSpeakText(scenario.welcome);
             document.getElementById('rp-status').innerText = "Prêt";
+
+            // Gemini non configuré du tout : bascule directe en mode script si ce scénario en a un,
+            // plutôt que de laisser l'apprenant taper/parler dans le vide sans réponse possible.
+            if (!GeminiService.isAvailable() && RP_SCRIPTED_FALLBACK[scenario.id]) {
+                rpEnterScriptedMode();
+            }
         }
 
         // ===== Pratique ciblée (jeu de rôle piloté par une notion du curriculum) =====
