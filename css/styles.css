@@ -119,6 +119,12 @@
         /* Bouton prononciation, réutilisé partout (Mots, Leçons, Conjugaison, feedback d'exercice) */
         .speak-btn { background: none; border: none; cursor: pointer; font-size: 1rem; line-height: 1; padding: 2px 4px; vertical-align: middle; flex-shrink: 0; }
         .speak-btn:active { transform: scale(0.9); }
+        /* Bouton "traduire à la demande" (Gemini), pour les mots/phrases néerlandais non traduits
+           dans les données du curriculum (exemples, vocabulaire, réponses d'exercice). */
+        .translate-btn { background: none; border: none; cursor: pointer; font-size: 0.9rem; line-height: 1; padding: 2px 4px; vertical-align: middle; flex-shrink: 0; opacity: 0.85; }
+        .translate-btn:active { transform: scale(0.9); }
+        .translate-btn:disabled { opacity: 0.4; cursor: default; }
+        .translate-result { font-size: 0.85em; color: var(--text-secondary); font-style: italic; }
         .wl-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; white-space: nowrap; }
         .wl-badge.unseen { background: var(--surface-2); color: var(--text-secondary); }
         .wl-badge.review { background: #ffe3b3; color: #b06d00; }
