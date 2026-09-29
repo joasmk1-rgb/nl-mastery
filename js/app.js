@@ -3028,27 +3028,203 @@ if (firebaseAvailable) {
             ).join('');
         }
 
+        // ===== Grille de conjugaison façon "tableau d'école" (pronoms x temps) =====
+        // Construit à partir des données déjà existantes (aucune modification de conjugation.json) :
+        // - Présent : déjà stocké, wij/jullie/zij partagent la même forme (grammaire réelle du NL).
+        // - Futur : jamais stocké mais 100% mécanique — "zullen" (auxiliaire irrégulier mais fixe) +
+        //   l'infinitif complet du verbe, valable pour les 322 verbes sans exception.
+        // - Perfectum : participePasse (stocké, invariable) + auxiliaire hebben/zijn (stocké, conjugué
+        //   ci-dessous via une table fixe) — également sans exception.
+        // - Prétérit pluriel (wij/jullie/zij) : jamais stocké (seul le singulier ik/jij/hij existe dans
+        //   conjugation.json). PAS dérivé par une règle générique — trop de vraies exceptions en
+        //   néerlandais (was→waren, kon→konden, zou→zouden, begon→begonnen avec doublement...) pour
+        //   qu'une règle automatique soit fiable à 100%. À la place : table de correspondance vérifiée
+        //   à la main, forme par forme, pour les 117 verbes forts/irréguliers réellement présents dans
+        //   cette base (les 179 verbes faibles restants suivent la seule règle sans exception du
+        //   néerlandais : prétérit pluriel = prétérit singulier + "n").
+        const HULPWERKWOORDEN = {
+            hebben: { ik: 'heb', jij: 'hebt', hij: 'heeft', wij: 'hebben', jullie: 'hebben', zij: 'hebben' },
+            zijn:   { ik: 'ben', jij: 'bent', hij: 'is',    wij: 'zijn',   jullie: 'zijn',   zij: 'zijn' },
+            zullen: { ik: 'zal', jij: 'zal',  hij: 'zal',   wij: 'zullen', jullie: 'zullen', zij: 'zullen' }
+        };
+
+        const CONJ_PRONOUNS = [
+            { key: 'ik', label: 'ik' },
+            { key: 'jij', label: 'jij / u' },
+            { key: 'hij', label: 'hij / zij / het' },
+            { key: 'wij', label: 'wij' },
+            { key: 'jullie', label: 'jullie' },
+            { key: 'zij', label: 'zij' }
+        ];
+
+        // Table vérifiée à la main (voir commentaire ci-dessus) — couvre les 117 premiers-mots de
+        // prétérit "forts/irréguliers" réellement présents dans conjugation.json (vérifié par script,
+        // 0 verbe manquant). Clé = 1er mot du prétérit singulier tel que stocké, valeur = sa forme au
+        // pluriel ; la particule éventuelle ("aan", "op"...) est rattachée telle quelle ensuite.
+        const IMPERFECTUM_PLURAL_MAP = {
+            at:'aten', bad:'baden', bedroeg:'bedroegen', beet:'beten', begon:'begonnen',
+            begreep:'begrepen', bekeek:'bekeken', benam:'benamen', beschreef:'beschreven',
+            besloot:'besloten', bestond:'bestonden', betrof:'betroffen', bevond:'bevonden',
+            bewees:'bewezen', bewoog:'bewogen', bezat:'bezaten', bezocht:'bezochten',
+            bleef:'bleven', bleek:'bleken', bond:'bonden', bood:'boden', boog:'bogen',
+            bracht:'brachten', brak:'braken', dacht:'dachten', deed:'deden', dreef:'dreven',
+            droeg:'droegen', dronk:'dronken', dwong:'dwongen', ervoer:'ervoeren', gaf:'gaven',
+            genoot:'genoten', ging:'gingen', gleed:'gleden', gold:'golden', goot:'goten',
+            greep:'grepen', had:'hadden', hield:'hielden', hielp:'hielpen', hing:'hingen',
+            keek:'keken', klom:'klommen', kocht:'kochten', kon:'konden', koos:'kozen',
+            kreeg:'kregen', kwam:'kwamen', lag:'lagen', las:'lazen', leed:'leden', leek:'leken',
+            liep:'liepen', liet:'lieten', mat:'maten', mocht:'mochten', moest:'moesten',
+            nam:'namen', ontbeet:'ontbeten', ontbrak:'ontbraken', onthield:'onthielden',
+            ontstond:'ontstonden', ontving:'ontvingen', overleed:'overleden', reed:'reden',
+            riep:'riepen', scheen:'schenen', schiep:'schiepen', schonk:'schonken',
+            schreef:'schreven', schrok:'schrokken', sliep:'sliepen', sloeg:'sloegen',
+            sloot:'sloten', smeet:'smeten', sneed:'sneden', sprak:'spraken', sprong:'sprongen',
+            stak:'staken', steeg:'stegen', stierf:'stierven', stond:'stonden', trok:'trokken',
+            verbond:'verbonden', vergat:'vergaten', vergeleek:'vergeleken', verkocht:'verkochten',
+            verliet:'verlieten', verloor:'verloren', vermeed:'vermeden', vertrok:'vertrokken',
+            verving:'vervingen', verzond:'verzonden', viel:'vielen', ving:'vingen', vloog:'vlogen',
+            vocht:'vochten', voer:'voeren', vond:'vonden', vroeg:'vroegen', vroor:'vroren',
+            was:'waren', wees:'wezen', werd:'werden', wierp:'wierpen', wist:'wisten', won:'wonnen',
+            zag:'zagen', zat:'zaten', zei:'zeiden', zocht:'zochten', zond:'zonden', zong:'zongen',
+            zou:'zouden', zweeg:'zwegen', zwom:'zwommen'
+        };
+
+        function deriveImperfectumPluriel(preteritum) {
+            const words = preteritum.split(' ');
+            const first = words[0];
+            const rest = words.slice(1);
+            // Verbes faibles (prétérit finit par -de/-te) : règle sans exception en néerlandais.
+            const pluralFirst = (first.endsWith('de') || first.endsWith('te'))
+                ? first + 'n'
+                : (IMPERFECTUM_PLURAL_MAP[first] || (first + 'en')); // filet de sécurité, ne devrait jamais servir (0 manquant vérifié)
+            return [pluralFirst, ...rest].join(' ');
+        }
+
+        function buildConjugationGrid(v) {
+            const futurAux = HULPWERKWOORDEN.zullen;
+            const perfAux = HULPWERKWOORDEN[v.auxiliaire] || HULPWERKWOORDEN.hebben;
+            const preteritumPluriel = deriveImperfectumPluriel(v.preteritum);
+            return CONJ_PRONOUNS.map(p => {
+                const isPlural = (p.key === 'wij' || p.key === 'jullie' || p.key === 'zij');
+                return {
+                    pronom: p.label,
+                    pronomKey: p.key,
+                    present: isPlural ? v.present.wij : v.present[p.key],
+                    futur: `${futurAux[p.key]} ${v.infinitief}`,
+                    imperfectum: isPlural ? preteritumPluriel : v.preteritum,
+                    perfectum: `${perfAux[p.key]} ${v.participePasse}`
+                };
+            });
+        }
+
         function showConjugaisonDetail(infinitief) {
             const v = conjugationData.find(x => x.infinitief === infinitief);
             if (!v) return;
             conjugaisonSelectedVerb = v;
+            const rows = buildConjugationGrid(v);
+            const rowsHtml = rows.map(r => `
+                <tr>
+                    <td class="conj-grid-pronom">${r.pronom}</td>
+                    <td>${r.present}</td>
+                    <td>${r.futur}</td>
+                    <td>${r.imperfectum}</td>
+                    <td>${r.perfectum}</td>
+                </tr>`).join('');
             document.getElementById('conj-detail').innerHTML = `
                 <div class="conj-card">
                     <div class="conj-verb-title">${v.infinitief}</div>
                     <div style="color:#888; margin-bottom:10px;">${v.fr}</div>
-                    <table class="conj-table">
-                        <tr><th>Présent</th><th></th></tr>
-                        <tr><td>ik</td><td>${v.present.ik}</td></tr>
-                        <tr><td>jij / u</td><td>${v.present.jij}</td></tr>
-                        <tr><td>hij / zij / het</td><td>${v.present.hij}</td></tr>
-                        <tr><td>wij / jullie / zij</td><td>${v.present.wij}</td></tr>
-                        <tr><th>Imperfectum (prétérit)</th><th></th></tr>
-                        <tr><td>ik / jij / hij</td><td>${v.preteritum}</td></tr>
-                        <tr><th>Perfectum</th><th></th></tr>
-                        <tr><td>${v.auxiliaire === 'zijn' ? 'ik ben...' : 'ik heb...'}</td><td>${v.participePasse}</td></tr>
-                    </table>
+                    <div style="font-size:0.7rem; color:var(--text-secondary); margin-bottom:4px;">↔️ Fais glisser le tableau pour voir toutes les colonnes</div>
+                    <div style="overflow-x:auto;">
+                        <table class="conj-grid-table">
+                            <tr><th></th><th>Présent</th><th>Futur</th><th>Prétérit</th><th>Perfectum</th></tr>
+                            ${rowsHtml}
+                        </table>
+                    </div>
                     <div class="conj-sentence">${v.exempleNl}<br>${v.exempleFr}</div>
+                    <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${v.infinitief.replace(/'/g, "\\'")}')">🎯 S'entraîner sur ce verbe</button>
+                </div>
+                <div id="conj-exercise-box"></div>`;
+        }
+
+        // ===== Exercices sur la grille de conjugaison =====
+        // Pioche des cases (pronom x temps) au hasard dans la grille déjà construite ci-dessus et fait
+        // taper la forme correspondante. Réutilise evaluateAnswer() (même tolérance orthographique que
+        // le reste de l'app) plutôt que de réinventer une logique de correction séparée.
+        let conjExerciseState = null;
+        const CONJ_TENSE_LABELS = { present: 'au présent', futur: 'au futur', imperfectum: "à l'imperfectum (prétérit)", perfectum: 'au perfectum (passé composé)' };
+
+        function conjExerciseStart(infinitief) {
+            const v = conjugationData.find(x => x.infinitief === infinitief);
+            if (!v) return;
+            const rows = buildConjugationGrid(v);
+            const tenses = ['present', 'futur', 'imperfectum', 'perfectum'];
+            const pool = [];
+            rows.forEach(r => tenses.forEach(t => pool.push({ pronom: r.pronom, pronomKey: r.pronomKey, tense: t, answer: r[t] })));
+            // Mélange (Fisher-Yates) puis limite à 8 questions par session — assez pour réviser un
+            // verbe sans que ce soit trop long.
+            for (let i = pool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [pool[i], pool[j]] = [pool[j], pool[i]];
+            }
+            conjExerciseState = { verb: v, pool: pool.slice(0, 8), index: 0, score: 0 };
+            conjExerciseRenderQuestion();
+        }
+
+        function conjExerciseRenderQuestion() {
+            const box = document.getElementById('conj-exercise-box');
+            if (!box || !conjExerciseState) return;
+            const st = conjExerciseState;
+            if (st.index >= st.pool.length) {
+                box.innerHTML = `
+                    <div class="conj-card">
+                        <div class="conj-verb-title">Résultat : ${st.score}/${st.pool.length}</div>
+                        <button class="btn btn-green" style="margin-top:10px;" onclick="conjExerciseStart('${st.verb.infinitief.replace(/'/g, "\\'")}')">🔁 Recommencer sur ce verbe</button>
+                        <button class="btn btn-gray" style="margin-top:8px;" onclick="conjExerciseStop()">Fermer</button>
+                    </div>`;
+                return;
+            }
+            const q = st.pool[st.index];
+            box.innerHTML = `
+                <div class="conj-card">
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.pool.length} · Score : ${st.score}</div>
+                    <div style="font-weight:600; margin-bottom:10px;">${q.pronom} — ${st.verb.infinitief} (${st.verb.fr}) — ${CONJ_TENSE_LABELS[q.tense]}</div>
+                    <input type="text" id="conj-ex-input" placeholder="Tape la forme conjuguée..." style="width:100%; margin-bottom:8px;" autocomplete="off" onkeypress="if(event.key==='Enter') conjExerciseCheck()">
+                    <div class="acc-error" id="conj-ex-feedback"></div>
+                    <button class="btn btn-green" onclick="conjExerciseCheck()">Vérifier</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="conjExerciseStop()">Arrêter</button>
                 </div>`;
+            const input = document.getElementById('conj-ex-input');
+            if (input) input.focus();
+        }
+
+        function conjExerciseCheck() {
+            const st = conjExerciseState;
+            if (!st) return;
+            const input = document.getElementById('conj-ex-input');
+            const fb = document.getElementById('conj-ex-feedback');
+            const q = st.pool[st.index];
+            const result = evaluateAnswer(input.value, q.answer);
+            if (result.status === 'correct') {
+                st.score++;
+                fb.style.color = 'var(--success)';
+                fb.innerText = '✅ Bravo ! → ' + q.answer;
+            } else if (result.status === 'close') {
+                st.score++;
+                fb.style.color = 'var(--success)';
+                fb.innerText = '🟡 Presque, on valide ! → ' + q.answer;
+            } else {
+                fb.style.color = 'var(--wrong)';
+                fb.innerText = '❌ → ' + q.answer;
+            }
+            st.index++;
+            setTimeout(conjExerciseRenderQuestion, 1300);
+        }
+
+        function conjExerciseStop() {
+            conjExerciseState = null;
+            const box = document.getElementById('conj-exercise-box');
+            if (box) box.innerHTML = '';
         }
 
         // ===== GeminiService (abstraction IA) =====

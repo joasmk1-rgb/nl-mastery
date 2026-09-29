@@ -282,6 +282,14 @@
         .conj-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         .conj-table th, .conj-table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
         .conj-table th { color: var(--text-secondary); font-weight: 600; }
+        /* Grille pronoms x temps ("façon tableau d'école") — table-layout fixed pour garder 5
+           colonnes lisibles même sur mobile (390px), avec retour à la ligne dans les cellules
+           plutôt qu'un débordement horizontal. */
+        .conj-grid-table { width: 100%; min-width: 480px; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
+        .conj-grid-table th, .conj-grid-table td { text-align: left; padding: 6px 5px; border-bottom: 1px solid var(--border); font-size: 0.72rem; word-break: break-word; vertical-align: top; }
+        .conj-grid-table th { color: var(--text-secondary); font-weight: 600; font-size: 0.68rem; }
+        .conj-grid-table th:first-child, .conj-grid-table td.conj-grid-pronom { width: 68px; font-weight: 600; }
+        .conj-grid-pronom { color: var(--text-secondary); }
         .conj-card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 14px; }
         .conj-verb-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
         .conj-sentence { font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px; font-style: italic; }
