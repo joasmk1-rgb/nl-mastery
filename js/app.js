@@ -3112,13 +3112,14 @@ if (firebaseAvailable) {
             zullen: { ik: 'zal', jij: 'zal',  hij: 'zal',   wij: 'zullen', jullie: 'zullen', zij: 'zullen' }
         };
 
+        // wij/jullie/zij partagent toujours exactement la même forme (présent, futur, prétérit
+        // pluriel, perfectum) — regroupés sur une seule ligne pour gagner de la place dans la
+        // grille, plutôt que de répéter 3 fois une ligne identique.
         const CONJ_PRONOUNS = [
             { key: 'ik', label: 'ik' },
             { key: 'jij', label: 'jij / u' },
             { key: 'hij', label: 'hij / zij / het' },
-            { key: 'wij', label: 'wij' },
-            { key: 'jullie', label: 'jullie' },
-            { key: 'zij', label: 'zij' }
+            { key: 'wij', label: 'wij / jullie / zij' }
         ];
 
         // Table vérifiée à la main (voir commentaire ci-dessus) — couvre les 117 premiers-mots de
@@ -3169,7 +3170,7 @@ if (firebaseAvailable) {
             const perfAux = HULPWERKWOORDEN[v.auxiliaire] || HULPWERKWOORDEN.hebben;
             const preteritumPluriel = deriveImperfectumPluriel(v.preteritum);
             return CONJ_PRONOUNS.map(p => {
-                const isPlural = (p.key === 'wij' || p.key === 'jullie' || p.key === 'zij');
+                const isPlural = (p.key === 'wij');
                 return {
                     pronom: p.label,
                     pronomKey: p.key,
