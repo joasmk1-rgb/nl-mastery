@@ -3061,7 +3061,7 @@ if (firebaseAvailable) {
         function showConjugaison() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conjugaison-view').classList.add('active');
-            setActiveNav('nav-profil');
+            setActiveNav('nav-jouer');
             document.getElementById('conj-detail').innerHTML = '';
             if (!conjugationLoaded) {
                 document.getElementById('conj-list').innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -3290,6 +3290,147 @@ if (firebaseAvailable) {
             conjExerciseState = null;
             const box = document.getElementById('conj-exercise-box');
             if (box) box.innerHTML = '';
+        }
+
+        // ===== Entraînement "verbes irréguliers" (Jouer → Conjugaison) =====
+        // Contrairement à la grille de consultation ci-dessus (tous les 322 verbes, ordre A-Z,
+        // grille complète), cet entraînement cible spécifiquement ce qu'il y a vraiment à
+        // mémoriser par cœur en néerlandais : le prétérit et le participe passé des verbes dont
+        // le prétérit ne suit PAS la règle régulière (-de/-te + -n au pluriel). Le présent et le
+        // futur ne sont jamais demandés ici : ce sont des formes 100% mécaniques (voir
+        // buildConjugationGrid plus haut), donc les re-taper n'entraînerait rien.
+        //
+        // Sélection des verbes : ni alphabétique ni purement aléatoire. Tirage pondéré sans
+        // remise (méthode des clés exponentielles Math.random()^(1/poids), poids = fréquence
+        // d'usage réelle déjà présente dans conjugation.json + 1 pour qu'aucun verbe n'ait une
+        // probabilité nulle) : les verbes irréguliers les plus fréquents (zijn, hebben, gaan,
+        // kunnen...) reviennent statistiquement plus souvent, mais la session varie à chaque
+        // lancement plutôt que d'être toujours strictement la même liste de 30.
+        function isStrongPreteritum(v) {
+            const first = v.preteritum.split(' ')[0];
+            return !(first.endsWith('de') || first.endsWith('te'));
+        }
+
+        const CONJ_TRAINING_SESSION_SIZE = 30;
+
+        function pickConjTrainingVerbs() {
+            const pool = conjugationData.filter(isStrongPreteritum);
+            const keyed = pool.map(v => ({ v, key: Math.pow(Math.random(), 1 / (v.freq + 1)) }));
+            keyed.sort((a, b) => b.key - a.key);
+            return keyed.slice(0, CONJ_TRAINING_SESSION_SIZE).map(k => k.v);
+        }
+
+        // Forme "attendue" pour le participe passé : le participe seul ne dit pas s'il faut
+        // "heeft" ou "is" devant, or c'est exactement le genre de piège à retenir (ex: "is gegaan"
+        // et pas "heeft gegaan") — donc on demande le participe précédé de l'auxiliaire (3e pers.
+        // du singulier), comme dans les tableaux de conjugaison scolaires classiques.
+        function conjTrainingExpected(v) {
+            const aux = HULPWERKWOORDEN[v.auxiliaire] || HULPWERKWOORDEN.hebben;
+            return { preteritum: v.preteritum, participe: `${aux.hij} ${v.participePasse}` };
+        }
+
+        let conjTrainingState = null;
+
+        function startConjTrainingSession() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('conj-training-view').classList.add('active');
+            setActiveNav('nav-jouer');
+            const content = document.getElementById('conj-training-content');
+            if (!conjugationLoaded) {
+                content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
+                return;
+            }
+            conjTrainingState = { verbs: pickConjTrainingVerbs(), index: 0, score: 0, missed: [] };
+            renderConjTrainingQuestion();
+        }
+
+        function renderConjTrainingQuestion() {
+            const content = document.getElementById('conj-training-content');
+            const st = conjTrainingState;
+            if (!content || !st) return;
+            if (st.index >= st.verbs.length) {
+                renderConjTrainingSummary();
+                return;
+            }
+            const v = st.verbs[st.index];
+            content.innerHTML = `
+                <div class="conj-card">
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Verbe ${st.index + 1}/${st.verbs.length} · Score : ${st.score}</div>
+                    <div class="conj-verb-title">${v.infinitief} ${speakBtnHtml(v.infinitief)}</div>
+                    <div style="color:#888; margin-bottom:14px;">${v.fr}</div>
+                    <div style="margin-bottom:10px;">
+                        <label style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Prétérit (ik / jij / hij)</label>
+                        <input type="text" id="conj-tr-pret" style="width:100%;" autocomplete="off" placeholder="ex : ging" onkeypress="if(event.key==='Enter') document.getElementById('conj-tr-part').focus()">
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Participe passé (avec hebben/zijn)</label>
+                        <input type="text" id="conj-tr-part" style="width:100%;" autocomplete="off" placeholder="ex : is gegaan" onkeypress="if(event.key==='Enter') conjTrainingCheck()">
+                    </div>
+                    <div class="acc-error" id="conj-tr-feedback"></div>
+                    <button class="btn btn-green" id="conj-tr-check-btn" onclick="conjTrainingCheck()">Vérifier</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="conjTrainingStop()">Arrêter</button>
+                </div>`;
+            const firstInput = document.getElementById('conj-tr-pret');
+            if (firstInput) firstInput.focus();
+        }
+
+        function conjTrainingCheck() {
+            const st = conjTrainingState;
+            if (!st) return;
+            const v = st.verbs[st.index];
+            const expected = conjTrainingExpected(v);
+            const rawPret = document.getElementById('conj-tr-pret').value;
+            const rawPart = document.getElementById('conj-tr-part').value;
+            const resPret = evaluateAnswer(rawPret, expected.preteritum);
+            const resPart = evaluateAnswer(rawPart, expected.participe);
+            const isCorrect = resPret.status !== 'wrong' && resPart.status !== 'wrong';
+            const fb = document.getElementById('conj-tr-feedback');
+            if (isCorrect) {
+                st.score++;
+                fb.style.color = 'var(--success)';
+                fb.innerHTML = `✅ ${expected.preteritum} — ${expected.participe}`;
+            } else {
+                st.missed.push({ infinitief: v.infinitief, fr: v.fr, preteritum: expected.preteritum, participe: expected.participe });
+                fb.style.color = 'var(--wrong)';
+                fb.innerHTML = `❌ Réponse attendue : ${expected.preteritum} — ${expected.participe}`;
+            }
+            fb.innerHTML += ' ' + speakBtnHtml(expected.preteritum) + speakBtnHtml(expected.participe);
+            const checkBtn = document.getElementById('conj-tr-check-btn');
+            if (checkBtn) checkBtn.style.display = 'none';
+            st.index++;
+            setTimeout(renderConjTrainingQuestion, isCorrect ? 1100 : 2200);
+        }
+
+        function conjTrainingStop() {
+            conjTrainingState = null;
+            showJouer();
+        }
+
+        // Récap de fin de session : uniquement les verbes ratés, avec leur forme correcte et un
+        // bouton d'écoute — sert de fiche de révision rapide plutôt que de ré-afficher les 30.
+        function renderConjTrainingSummary() {
+            const content = document.getElementById('conj-training-content');
+            const st = conjTrainingState;
+            const missedHtml = st.missed.length ? `
+                <div class="section-title" style="margin-top:var(--space-4);">📌 À retenir</div>
+                <div style="overflow-x:auto;">
+                    <table class="conj-grid-table">
+                        <tr><th>Infinitif</th><th>Prétérit</th><th>Participe passé</th></tr>
+                        ${st.missed.map(m => `
+                            <tr>
+                                <td>${m.infinitief}<br><span style="color:var(--text-secondary); font-size:0.7rem;">${m.fr}</span></td>
+                                <td>${m.preteritum} ${speakBtnHtml(m.preteritum)}</td>
+                                <td>${m.participe} ${speakBtnHtml(m.participe)}</td>
+                            </tr>`).join('')}
+                    </table>
+                </div>` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`;
+            content.innerHTML = `
+                <div class="conj-card">
+                    <div class="conj-verb-title">Résultat : ${st.score}/${st.verbs.length}</div>
+                    ${missedHtml}
+                    <button class="btn btn-green" style="margin-top:14px;" onclick="startConjTrainingSession()">🔁 Nouvelle session</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showJouer()">Retour</button>
+                </div>`;
         }
 
         // ===== GeminiService (abstraction IA) =====
@@ -4672,7 +4813,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
                     <div class="profil-menu-row" onclick="showReviser()"><span class="pm-icon">🔁</span><span>Révisions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showWordList('profil')"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" onclick="showConjugaison()"><span class="pm-icon">🔤</span><span>Conjugaison</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showTestSelect()"><span class="pm-icon">🎯</span><span>Test de vocabulaire</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
