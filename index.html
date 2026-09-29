@@ -29,7 +29,7 @@
 
     <div id="onboarding-view" class="view">
         <button class="back-btn" onclick="onboardingFinish()">✕ Passer</button>
-        <div id="onboarding-content" style="width:100%; max-width:520px;"></div>
+        <div id="onboarding-content" class="content-col"></div>
     </div>
 
     <div id="wordlist-view" class="view">
@@ -182,7 +182,7 @@
     <div id="reviser-view" class="view">
         <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>🔁 Réviser</h2>
-        <div id="reviser-content" style="width:100%; max-width:520px;"></div>
+        <div id="reviser-content" class="content-col"></div>
     </div>
 
     <div id="study-view" class="view">
@@ -231,7 +231,7 @@
     <div id="profil-view" class="view">
         <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>👤 Profil & Stats</h2>
-        <div id="profil-content" style="width:100%; max-width:450px;"></div>
+        <div id="profil-content" class="content-col"></div>
     </div>
 
     <div id="test-select-view" class="view">
@@ -261,7 +261,7 @@
 
     <div id="placement-view" class="view">
         <button class="back-btn" onclick="showProfil()">← Retour</button>
-        <div id="placement-content" style="width:100%; max-width:520px;"></div>
+        <div id="placement-content" class="content-col"></div>
     </div>
 
     <div id="swipe-select-view" class="view">
@@ -322,8 +322,8 @@
     <div id="info-view" class="view">
         <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>ℹ️ Infos & comment ça marche</h2>
-        <div style="width:100%; max-width:500px; text-align:left;">
-            <div class="study-box" style="text-align:left;">
+        <div class="content-col" style="text-align:left;">
+            <div class="study-box" style="text-align:left; max-width:none;">
                 <h3>📊 Les niveaux A1 / A2 / B1 / B2 (CECR)</h3>
                 <p style="font-size:0.9rem;">
                     C'est l'échelle européenne officielle pour les langues (Cadre Européen Commun de Référence).
@@ -451,36 +451,36 @@
 
     <div id="lesson-view" class="view">
         <button class="back-btn" onclick="showApprendre()">← Retour au programme</button>
-        <div id="guided-flow-banner" style="width:100%; max-width:500px;"></div>
-        <div id="lesson-content" style="width:100%; max-width:500px;"></div>
+        <div id="guided-flow-banner" class="content-col"></div>
+        <div id="lesson-content" class="content-col"></div>
     </div>
 
     <div id="conjugaison-view" class="view">
         <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>🔤 Conjugaison</h2>
-        <div class="hub-grid single" style="width:100%; max-width:500px;">
+        <div class="hub-grid single">
             <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">30 verbes irréguliers, triés par fréquence.</div></div>
         </div>
-        <div class="conj-search-row" style="width:100%; max-width:500px;">
+        <div class="conj-search-row content-col">
             <input type="text" id="conj-search" placeholder="Cherche un verbe (NL ou FR)..." oninput="renderConjugaisonList()">
         </div>
-        <div id="conj-detail" style="width:100%; max-width:500px;"></div>
-        <div id="conj-list" style="width:100%; max-width:500px;"></div>
+        <div id="conj-detail" class="content-col"></div>
+        <div id="conj-list" class="content-col"></div>
     </div>
 
     <div id="conj-training-view" class="view">
         <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>🔤 Conjugaison — Entraînement</h2>
-        <div style="width:100%; max-width:500px; margin-bottom:10px;">
+        <div class="content-col" style="margin-bottom:10px;">
             <button class="btn btn-gray" onclick="showConjugaison()">📖 Consulter un verbe en particulier</button>
         </div>
-        <div id="conj-training-content" style="width:100%; max-width:500px;"></div>
+        <div id="conj-training-content" class="content-col"></div>
     </div>
 
     <div id="separable-training-view" class="view">
         <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>✂️ Particules séparables</h2>
-        <div id="separable-training-content" style="width:100%; max-width:500px;"></div>
+        <div id="separable-training-content" class="content-col"></div>
     </div>
 
     <div id="exercise-view" class="view">
@@ -541,7 +541,7 @@
     <div id="admin-view" class="view">
         <button class="back-btn" onclick="showCompte()">← Retour</button>
         <h2>⚙️ Gestion des comptes</h2>
-        <div id="admin-user-list" style="width:100%; max-width:500px;"></div>
+        <div id="admin-user-list" class="content-col"></div>
     </div>
 
     <!-- Navigation principale : placée en dernier enfant du body (flex column) pour qu'elle reste
