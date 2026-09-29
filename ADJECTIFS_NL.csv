@@ -1,258 +1,258 @@
-id;fr;nl;freq;statut_examen;priorite_frequence
-ADJECTIFS_NL_0;aimable / gentil;aardig;4.77;Prioritaire;Courant
-ADJECTIFS_NL_1;absolu / absolument;absoluut;4.8;Standard;Courant
-ADJECTIFS_NL_2;actuel;actueel;4.11;Prioritaire;Courant
-ADJECTIFS_NL_3;général;algemeen;5.15;Prioritaire;Essentiel
-ADJECTIFS_NL_4;autre;ander;5.37;Prioritaire;Essentiel
-ADJECTIFS_NL_5;pauvre;arm;4.67;Prioritaire;Courant
-ADJECTIFS_NL_6;peureux / effrayé;bang;5.18;Prioritaire;Essentiel
-ADJECTIFS_NL_7;de base;basis;5.17;Standard;Essentiel
-ADJECTIFS_NL_8;connu;bekend;5.49;Prioritaire;Essentiel
-ADJECTIFS_NL_9;important;belangrijk;5.34;Prioritaire;Essentiel
-ADJECTIFS_NL_10;poli;beleefd;4.0;Standard;Courant
-ADJECTIFS_NL_11;curieux (de savoir);benieuwd;4.54;Standard;Courant
-ADJECTIFS_NL_12;déterminé / certain;bepaald;4.86;Prioritaire;Courant
-ADJECTIFS_NL_13;prêt / disposé;bereid;4.69;Prioritaire;Courant
-ADJECTIFS_NL_14;célèbre;beroemd;4.13;Standard;Courant
-ADJECTIFS_NL_15;disponible;beschikbaar;5.01;Prioritaire;Essentiel
-ADJECTIFS_NL_16;meilleur;best;5.41;Prioritaire;Essentiel
-ADJECTIFS_NL_17;impliqué / concerné;betrokken;5.01;Prioritaire;Essentiel
-ADJECTIFS_NL_18;occupé;bezig;5.31;Prioritaire;Essentiel
-ADJECTIFS_NL_19;particulier / spécial;bijzonder;4.99;Prioritaire;Courant
-ADJECTIFS_NL_20;bleu;blauw;4.73;Standard;Courant
-ADJECTIFS_NL_21;content;blij;5.34;Prioritaire;Essentiel
-ADJECTIFS_NL_22;aveugle;blind;4.35;Standard;Courant
-ADJECTIFS_NL_23;large;breed;4.55;Prioritaire;Courant
-ADJECTIFS_NL_24;brun / marron;bruin;4.42;Standard;Courant
-ADJECTIFS_NL_25;étranger;buitenlands;3.68;Prioritaire;Courant
-ADJECTIFS_NL_26;commercial;commercieel;4.27;Standard;Courant
-ADJECTIFS_NL_27;complet;compleet;4.68;Standard;Courant
-ADJECTIFS_NL_28;concret;concreet;3.9;Standard;Courant
-ADJECTIFS_NL_29;continu;continu;4.01;Standard;Courant
-ADJECTIFS_NL_30;culturel;cultureel;4.27;Prioritaire;Courant
-ADJECTIFS_NL_31;quotidien;dagelijks;4.89;Prioritaire;Courant
-ADJECTIFS_NL_32;profond;diep;4.76;Prioritaire;Courant
-ADJECTIFS_NL_33;fermé / dense;dicht;5.05;Prioritaire;Essentiel
-ADJECTIFS_NL_34;gros / épais;dik;4.59;Prioritaire;Courant
-ADJECTIFS_NL_35;divers;divers;3.95;Standard;Courant
-ADJECTIFS_NL_36;bête;dom;4.67;Standard;Courant
-ADJECTIFS_NL_37;sombre / foncé;donker;4.53;Prioritaire;Courant
-ADJECTIFS_NL_38;sourd;doof;3.72;Standard;Courant
-ADJECTIFS_NL_39;efficace;doeltreffend;3.37;Standard;Spécialisé
-ADJECTIFS_NL_40;mort;dood;5.57;Prioritaire;Essentiel
-ADJECTIFS_NL_41;sec;droog;4.51;Prioritaire;Courant
-ADJECTIFS_NL_42;animé / occupé;druk;5.34;Prioritaire;Essentiel
-ADJECTIFS_NL_43;double;dubbel;4.5;Prioritaire;Courant
-ADJECTIFS_NL_44;clair / distinct;duidelijk;5.36;Prioritaire;Essentiel
-ADJECTIFS_NL_45;cher;duur;4.71;Prioritaire;Courant
-ADJECTIFS_NL_46;vrai / véritable;echt;6.01;Prioritaire;Essentiel
-ADJECTIFS_NL_47;économique;economisch;4.36;Prioritaire;Courant
-ADJECTIFS_NL_48;simple;éénvoudig;0.0;Prioritaire;Spécialisé
-ADJECTIFS_NL_49;propre (à soi);eigen;5.81;Prioritaire;Essentiel
-ADJECTIFS_NL_50;seul / unique / chouette;enig;4.55;Prioritaire;Courant
-ADJECTIFS_NL_51;enthousiaste;enthousiast;4.5;Standard;Courant
-ADJECTIFS_NL_52;grave / très;erg;5.71;Prioritaire;Essentiel
-ADJECTIFS_NL_53;sérieux;ernstig;4.57;Prioritaire;Courant
-ADJECTIFS_NL_54;égal;even;5.85;Prioritaire;Essentiel
-ADJECTIFS_NL_55;éventuel;eventueel;4.14;Prioritaire;Courant
-ADJECTIFS_NL_56;exclusif;exclusief;4.15;Standard;Courant
-ADJECTIFS_NL_57;externe;extern;3.36;Standard;Spécialisé
-ADJECTIFS_NL_58;supplémentaire;extra;5.16;Prioritaire;Essentiel
-ADJECTIFS_NL_59;fin / agréable;fijn;5.09;Prioritaire;Essentiel
-ADJECTIFS_NL_60;financier;financieel;4.47;Prioritaire;Courant
-ADJECTIFS_NL_61;physique;fysiek;4.25;Standard;Courant
-ADJECTIFS_NL_62;jaune;geel;4.54;Standard;Courant
-ADJECTIFS_NL_63;entier;geheel;5.03;Prioritaire;Essentiel
-ADJECTIFS_NL_64;fou;gek;5.13;Standard;Essentiel
-ADJECTIFS_NL_65;heureux;gelukkig;5.23;Prioritaire;Essentiel
-ADJECTIFS_NL_66;facile;gemakkelijk;4.69;Prioritaire;Courant
-ADJECTIFS_NL_67;moyen;gemiddeld;4.55;Prioritaire;Courant
-ADJECTIFS_NL_68;assez;genoeg;5.49;Prioritaire;Essentiel
-ADJECTIFS_NL_69;rassuré / tranquille;gerust;4.45;Prioritaire;Courant
-ADJECTIFS_NL_70;sensible;gevoelig;4.32;Prioritaire;Courant
-ADJECTIFS_NL_71;dangereux;gevaarlijk;4.63;Prioritaire;Courant
-ADJECTIFS_NL_72;convivial / agréable;gezellig;4.64;Prioritaire;Courant
-ADJECTIFS_NL_73;sain / en bonne santé;gezond;4.71;Prioritaire;Courant
-ADJECTIFS_NL_74;bon / bien;goed;6.2;Prioritaire;Essentiel
-ADJECTIFS_NL_75;bon marché;goedkoop;4.43;Prioritaire;Courant
-ADJECTIFS_NL_76;grand;groot;5.59;Prioritaire;Essentiel
-ADJECTIFS_NL_77;vert;groen;4.82;Standard;Courant
-ADJECTIFS_NL_78;favorable;gunstig;4.0;Prioritaire;Courant
-ADJECTIFS_NL_79;demi;half;5.05;Prioritaire;Essentiel
-ADJECTIFS_NL_80;dur / fort / vite;hard;5.15;Prioritaire;Essentiel
-ADJECTIFS_NL_81;très chaud;heet;5.02;Standard;Essentiel
-ADJECTIFS_NL_82;clair / limpide;helder;4.5;Prioritaire;Courant
-ADJECTIFS_NL_83;tout / entier;hele;5.79;Prioritaire;Essentiel
-ADJECTIFS_NL_84;haut;hoog;5.04;Prioritaire;Essentiel
-ADJECTIFS_NL_85;actuel;huidig;3.75;Prioritaire;Courant
-ADJECTIFS_NL_86;chaque;ieder;5.2;Prioritaire;Essentiel
-ADJECTIFS_NL_87;international;internationaal;4.77;Prioritaire;Courant
-ADJECTIFS_NL_88;dommage;jammer;4.85;Prioritaire;Courant
-ADJECTIFS_NL_89;jeune;jong;5.01;Prioritaire;Essentiel
-ADJECTIFS_NL_90;juste / correct;juist;5.26;Prioritaire;Essentiel
-ADJECTIFS_NL_91;calme;kalm;3.9;Standard;Courant
-ADJECTIFS_NL_92;cassé;kapot;4.7;Standard;Courant
-ADJECTIFS_NL_93;caractéristique;kenmerkend;3.88;Standard;Courant
-ADJECTIFS_NL_94;prêt / fini;klaar;5.51;Prioritaire;Essentiel
-ADJECTIFS_NL_95;petit;klein;5.3;Prioritaire;Essentiel
-ADJECTIFS_NL_96;coloré;kleurrijk;3.64;Standard;Courant
-ADJECTIFS_NL_97;beau / intelligent;knap;4.47;Standard;Courant
-ADJECTIFS_NL_98;court;kort;5.16;Prioritaire;Essentiel
-ADJECTIFS_NL_99;froid;koud;4.72;Prioritaire;Courant
-ADJECTIFS_NL_100;puissant;krachtig;4.23;Prioritaire;Courant
-ADJECTIFS_NL_101;qualitatif;kwalitatief;3.57;Standard;Courant
-ADJECTIFS_NL_102;perdu (égaré);kwijt;4.93;Standard;Courant
-ADJECTIFS_NL_103;bas;laag;4.77;Prioritaire;Courant
-ADJECTIFS_NL_104;tard;laat;5.84;Prioritaire;Essentiel
-ADJECTIFS_NL_105;long;lang;5.65;Prioritaire;Essentiel
-ADJECTIFS_NL_106;lent;langzaam;4.73;Prioritaire;Courant
-ADJECTIFS_NL_107;pénible / difficile;lastig;4.81;Prioritaire;Courant
-ADJECTIFS_NL_108;vide;leeg;4.67;Prioritaire;Courant
-ADJECTIFS_NL_109;laid;lelijk;4.17;Standard;Courant
-ADJECTIFS_NL_110;chouette / amusant;leuk;5.6;Prioritaire;Essentiel
-ADJECTIFS_NL_111;gentil / cher;lief;4.76;Prioritaire;Courant
-ADJECTIFS_NL_112;léger / clair;licht;5.11;Prioritaire;Essentiel
-ADJECTIFS_NL_113;gauche;linker;4.05;Prioritaire;Courant
-ADJECTIFS_NL_114;à gauche;links;5.15;Prioritaire;Essentiel
-ADJECTIFS_NL_115;local;lokaal;4.36;Standard;Courant
-ADJECTIFS_NL_116;détaché / libre;los;5.13;Prioritaire;Essentiel
-ADJECTIFS_NL_117;social;maatschappelijk;4.23;Prioritaire;Courant
-ADJECTIFS_NL_118;facile;makkelijk;4.99;Prioritaire;Courant
-ADJECTIFS_NL_119;maximal;maximaal;4.46;Standard;Courant
-ADJECTIFS_NL_120;humain;menselijk;4.42;Prioritaire;Courant
-ADJECTIFS_NL_121;immédiat;meteen;5.22;Prioritaire;Essentiel
-ADJECTIFS_NL_122;environnemental;milieu;4.65;Prioritaire;Courant
-ADJECTIFS_NL_123;moins;minder;5.5;Prioritaire;Essentiel
-ADJECTIFS_NL_124;minimal;minimaal;4.35;Standard;Courant
-ADJECTIFS_NL_125;difficile;moeilijk;5.32;Prioritaire;Essentiel
-ADJECTIFS_NL_126;beau;mooi;5.58;Prioritaire;Essentiel
-ADJECTIFS_NL_127;fatigué;moe;4.64;Standard;Courant
-ADJECTIFS_NL_128;nu;naakt;4.36;Standard;Courant
-ADJECTIFS_NL_129;proche;nabij;4.51;Prioritaire;Courant
-ADJECTIFS_NL_130;mouillé;nat;4.41;Prioritaire;Courant
-ADJECTIFS_NL_131;naturel;natuurlijk;5.59;Prioritaire;Essentiel
-ADJECTIFS_NL_132;étroit / précis;nauw;4.16;Prioritaire;Courant
-ADJECTIFS_NL_133;propre / net;net;5.86;Prioritaire;Essentiel
-ADJECTIFS_NL_134;soigné;netjes;4.54;Standard;Courant
-ADJECTIFS_NL_135;nouveau;nieuw;5.51;Prioritaire;Essentiel
-ADJECTIFS_NL_136;nécessaire;nodig;5.73;Prioritaire;Essentiel
-ADJECTIFS_NL_137;normal;normaal;5.09;Prioritaire;Essentiel
-ADJECTIFS_NL_138;utile;nuttig;4.29;Prioritaire;Courant
-ADJECTIFS_NL_139;officiel;officieel;4.85;Prioritaire;Courant
-ADJECTIFS_NL_140;inconnu;onbekend;4.36;Standard;Courant
-ADJECTIFS_NL_141;mutuel / entre soi;onderling;4.14;Prioritaire;Courant
-ADJECTIFS_NL_142;récemment;onlangs;4.55;Prioritaire;Courant
-ADJECTIFS_NL_143;immédiat;onmiddellijk;4.61;Prioritaire;Courant
-ADJECTIFS_NL_144;impossible;onmogelijk;4.65;Prioritaire;Courant
-ADJECTIFS_NL_145;inquiet / agité;onrustig;3.5;Standard;Courant
-ADJECTIFS_NL_146;terrible / énormément;ontzettend;4.68;Standard;Courant
-ADJECTIFS_NL_147;inattendu;onverwacht;4.07;Prioritaire;Courant
-ADJECTIFS_NL_148;de guerre;oorlog;5.29;Prioritaire;Essentiel
-ADJECTIFS_NL_149;ouvert;open;5.5;Prioritaire;Essentiel
-ADJECTIFS_NL_150;public;openbaar;4.85;Prioritaire;Courant
-ADJECTIFS_NL_151;frappant / remarquable;opvallend;4.41;Prioritaire;Courant
-ADJECTIFS_NL_152;vieux / ancien;oud;5.34;Prioritaire;Essentiel
-ADJECTIFS_NL_153;restant / autre;overig;3.73;Prioritaire;Courant
-ADJECTIFS_NL_154;après-demain;overmorgen;3.43;Standard;Spécialisé
-ADJECTIFS_NL_155;seulement / à peine;pas;5.45;Prioritaire;Essentiel
-ADJECTIFS_NL_156;adéquat / convenable;passend;3.82;Standard;Courant
-ADJECTIFS_NL_157;personnel;persoonlijk;4.9;Prioritaire;Courant
-ADJECTIFS_NL_158;soudain;plots;4.15;Prioritaire;Courant
-ADJECTIFS_NL_159;politique;politiek;5.17;Prioritaire;Essentiel
-ADJECTIFS_NL_160;populaire;populair;4.65;Standard;Courant
-ADJECTIFS_NL_161;positif;positief;4.69;Prioritaire;Courant
-ADJECTIFS_NL_162;précis / exactement;precies;5.34;Prioritaire;Essentiel
-ADJECTIFS_NL_163;agréable;prettig;4.28;Standard;Courant
-ADJECTIFS_NL_164;excellent / parfait;prima;5.1;Standard;Essentiel
-ADJECTIFS_NL_165;privé;privé;4.57;Standard;Courant
-ADJECTIFS_NL_166;pour cent;procent;4.97;Prioritaire;Courant
-ADJECTIFS_NL_167;professionnel;professioneel;4.39;Standard;Courant
-ADJECTIFS_NL_168;bizarre;raar;4.68;Standard;Courant
-ADJECTIFS_NL_169;plus récent;recenter;2.72;Standard;Spécialisé
-ADJECTIFS_NL_170;droit;recht;5.29;Prioritaire;Essentiel
-ADJECTIFS_NL_171;direct / directement;rechtstreeks;4.41;Prioritaire;Courant
-ADJECTIFS_NL_172;régulier;regelmatig;4.88;Prioritaire;Courant
-ADJECTIFS_NL_173;riche;rijk;4.86;Prioritaire;Courant
-ADJECTIFS_NL_174;rouge;rood;4.84;Standard;Courant
-ADJECTIFS_NL_175;rond / environ;rond;5.56;Prioritaire;Essentiel
-ADJECTIFS_NL_176;large / vaste / plus de;ruim;5.05;Prioritaire;Essentiel
-ADJECTIFS_NL_177;calme / tranquille;rustig;5.0;Prioritaire;Essentiel
-ADJECTIFS_NL_178;ensemble;samen;5.75;Prioritaire;Essentiel
-ADJECTIFS_NL_179;propre / beau;schoon;4.69;Standard;Courant
-ADJECTIFS_NL_180;rapide / vite;snel;5.74;Prioritaire;Essentiel
-ADJECTIFS_NL_181;certains;sommige;5.33;Prioritaire;Essentiel
-ADJECTIFS_NL_182;social;sociaal;4.8;Prioritaire;Courant
-ADJECTIFS_NL_183;captivant / passionnant;spannend;4.43;Standard;Courant
-ADJECTIFS_NL_184;spécial;speciaal;4.92;Prioritaire;Courant
-ADJECTIFS_NL_185;serré / raide;strak;4.17;Standard;Courant
-ADJECTIFS_NL_186;sévère;streng;4.12;Standard;Courant
-ADJECTIFS_NL_187;innombrables;talloze;4.26;Standard;Courant
-ADJECTIFS_NL_188;contre;tegen;6.11;Prioritaire;Essentiel
-ADJECTIFS_NL_189;actuel / de nos jours;tegenwoordig;5.06;Prioritaire;Essentiel
-ADJECTIFS_NL_190;au moins;tenminste;4.69;Prioritaire;Courant
-ADJECTIFS_NL_191;enfin / finalement;tenslotte;4.34;Prioritaire;Courant
-ADJECTIFS_NL_192;à juste titre;terecht;4.95;Prioritaire;Courant
-ADJECTIFS_NL_193;content / satisfait;tevreden;4.66;Prioritaire;Courant
-ADJECTIFS_NL_194;à la maison;thuis;5.48;Prioritaire;Essentiel
-ADJECTIFS_NL_195;pourtant / quand même;toch;6.0;Prioritaire;Essentiel
-ADJECTIFS_NL_196;futur;toekomstig;3.49;Prioritaire;Spécialisé
-ADJECTIFS_NL_197;par hasard;toevallig;4.56;Prioritaire;Courant
-ADJECTIFS_NL_198;total;totaal;5.12;Prioritaire;Essentiel
-ADJECTIFS_NL_199;fidèle;trouw;4.56;Standard;Courant
-ADJECTIFS_NL_200;entre;tussen;5.9;Prioritaire;Essentiel
-ADJECTIFS_NL_201;extrême / extrêmement;uiterst;4.27;Prioritaire;Courant
-ADJECTIFS_NL_202;excellent;uitstekend;4.42;Prioritaire;Courant
-ADJECTIFS_NL_203;souvent;vaak;5.6;Prioritaire;Essentiel
-ADJECTIFS_NL_204;fixe / solide;vast;5.43;Prioritaire;Essentiel
-ADJECTIFS_NL_205;sûr / en sécurité;veilig;5.12;Prioritaire;Essentiel
-ADJECTIFS_NL_206;beaucoup;veel;6.26;Prioritaire;Essentiel
-ADJECTIFS_NL_207;loin;ver;5.15;Prioritaire;Essentiel
-ADJECTIFS_NL_208;responsable;verantwoordelijk;4.88;Prioritaire;Courant
-ADJECTIFS_NL_209;mauvais / trompeur;verkeerd;4.84;Prioritaire;Courant
-ADJECTIFS_NL_210;passé;verleden;4.93;Prioritaire;Courant
-ADJECTIFS_NL_211;obligatoire;verplicht;4.64;Prioritaire;Courant
-ADJECTIFS_NL_212;différent;verschillend;4.13;Prioritaire;Courant
-ADJECTIFS_NL_213;raisonnable / sage;verstandig;4.26;Prioritaire;Courant
-ADJECTIFS_NL_214;ensuite;vervolgens;5.24;Prioritaire;Essentiel
-ADJECTIFS_NL_215;sale;vies;4.16;Standard;Courant
-ADJECTIFS_NL_216;rapide / vite;vlug;3.88;Standard;Courant
-ADJECTIFS_NL_217;plein;vol;5.34;Prioritaire;Essentiel
-ADJECTIFS_NL_218;suffisant;voldoende;4.74;Prioritaire;Courant
-ADJECTIFS_NL_219;suivant;volgend;4.5;Prioritaire;Courant
-ADJECTIFS_NL_220;complet / complètement;volledig;5.08;Prioritaire;Essentiel
-ADJECTIFS_NL_221;pour / devant;voor;7.05;Prioritaire;Essentiel
-ADJECTIFS_NL_222;surtout;vooral;5.61;Prioritaire;Essentiel
-ADJECTIFS_NL_223;provisoire;voorlopig;4.51;Prioritaire;Courant
-ADJECTIFS_NL_224;ancien / ex-;voormalig;4.79;Standard;Courant
-ADJECTIFS_NL_225;prudent;voorzichtig;4.42;Prioritaire;Courant
-ADJECTIFS_NL_226;précédent;vorig;4.95;Prioritaire;Courant
-ADJECTIFS_NL_227;libre / assez;vrij;5.42;Prioritaire;Essentiel
-ADJECTIFS_NL_228;étrange / étranger;vreemd;4.76;Prioritaire;Courant
-ADJECTIFS_NL_229;amical / aimable;vriendelijk;4.53;Prioritaire;Courant
-ADJECTIFS_NL_230;tôt;vroeg;5.35;Prioritaire;Essentiel
-ADJECTIFS_NL_231;joyeux;vrolijk;4.43;Standard;Courant
-ADJECTIFS_NL_232;vrai;waar;6.21;Prioritaire;Essentiel
-ADJECTIFS_NL_233;probable / sans doute;waarschijnlijk;5.24;Prioritaire;Essentiel
-ADJECTIFS_NL_234;éveillé;wakker;5.06;Standard;Essentiel
-ADJECTIFS_NL_235;chaud;warm;4.86;Prioritaire;Courant
-ADJECTIFS_NL_236;peu;weinig;5.35;Prioritaire;Essentiel
-ADJECTIFS_NL_237;réel / vraiment;werkelijk;4.71;Prioritaire;Courant
-ADJECTIFS_NL_238;scientifique;wetenschappelijk;4.41;Prioritaire;Courant
-ADJECTIFS_NL_239;sage;wijs;4.16;Standard;Courant
-ADJECTIFS_NL_240;sauvage;wild;4.48;Standard;Courant
-ADJECTIFS_NL_241;blanc;wit;5.0;Standard;Essentiel
-ADJECTIFS_NL_242;furieux;woedend;3.93;Standard;Courant
-ADJECTIFS_NL_243;professionnel / d'affaires;zakelijk;4.19;Standard;Courant
-ADJECTIFS_NL_244;doux;zacht;4.4;Prioritaire;Courant
-ADJECTIFS_NL_245;sûr / certain;zeker;5.69;Prioritaire;Essentiel
-ADJECTIFS_NL_246;même;zelfde;4.39;Prioritaire;Courant
-ADJECTIFS_NL_247;malade;ziek;4.86;Prioritaire;Courant
-ADJECTIFS_NL_248;ainsi / si;zo;6.43;Prioritaire;Essentiel
-ADJECTIFS_NL_249;comme;zoals;5.97;Prioritaire;Essentiel
-ADJECTIFS_NL_250;sucré / doux;zoet;4.19;Standard;Courant
-ADJECTIFS_NL_251;à l'instant;zojuist;4.42;Standard;Courant
-ADJECTIFS_NL_252;soigneusement;zorgvuldig;4.0;Standard;Courant
-ADJECTIFS_NL_253;jusque là;zover;4.87;Standard;Courant
-ADJECTIFS_NL_254;lourd;zwaar;4.91;Prioritaire;Courant
-ADJECTIFS_NL_255;noir;zwart;5.0;Standard;Essentiel
-ADJECTIFS_NL_256;faible;zwak;4.45;Prioritaire;Courant
+id;fr;nl;freq;statut_examen;priorite_frequence;niveauCECR;niveauCECRSource;sousCategorie;sousCategorieSource
+ADJECTIFS_NL_0;aimable / gentil;aardig;4.77;Prioritaire;Courant;A1;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_1;absolu / absolument;absoluut;4.8;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_2;actuel;actueel;4.11;Prioritaire;Courant;B2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_3;général;algemeen;5.15;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_4;autre;ander;5.37;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_5;pauvre;arm;4.67;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_6;peureux / effrayé;bang;5.18;Prioritaire;Essentiel;A1;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_7;de base;basis;5.17;Standard;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_8;connu;bekend;5.49;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_9;important;belangrijk;5.34;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_10;poli;beleefd;4.0;Standard;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_11;curieux (de savoir);benieuwd;4.54;Standard;Courant;A2;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_12;déterminé / certain;bepaald;4.86;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_13;prêt / disposé;bereid;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_14;célèbre;beroemd;4.13;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_15;disponible;beschikbaar;5.01;Prioritaire;Essentiel;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_16;meilleur;best;5.41;Prioritaire;Essentiel;A1;nt2lex;Comparaison;heuristique_fr
+ADJECTIFS_NL_17;impliqué / concerné;betrokken;5.01;Prioritaire;Essentiel;A2;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_18;occupé;bezig;5.31;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_19;particulier / spécial;bijzonder;4.99;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_20;bleu;blauw;4.73;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_21;content;blij;5.34;Prioritaire;Essentiel;A1;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_22;aveugle;blind;4.35;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_23;large;breed;4.55;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_24;brun / marron;bruin;4.42;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_25;étranger;buitenlands;3.68;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_26;commercial;commercieel;4.27;Standard;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_27;complet;compleet;4.68;Standard;Courant;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_28;concret;concreet;3.9;Standard;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_29;continu;continu;4.01;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_30;culturel;cultureel;4.27;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_31;quotidien;dagelijks;4.89;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_32;profond;diep;4.76;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_33;fermé / dense;dicht;5.05;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_34;gros / épais;dik;4.59;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_35;divers;divers;3.95;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_36;bête;dom;4.67;Standard;Courant;A1;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_37;sombre / foncé;donker;4.53;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_38;sourd;doof;3.72;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_39;efficace;doeltreffend;3.37;Standard;Spécialisé;B2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_40;mort;dood;5.57;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_41;sec;droog;4.51;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_42;animé / occupé;druk;5.34;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_43;double;dubbel;4.5;Prioritaire;Courant;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_44;clair / distinct;duidelijk;5.36;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_45;cher;duur;4.71;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_46;vrai / véritable;echt;6.01;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_47;économique;economisch;4.36;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_48;simple;éénvoudig;0.0;Prioritaire;Spécialisé;C1;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_49;propre (à soi);eigen;5.81;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_50;seul / unique / chouette;enig;4.55;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_51;enthousiaste;enthousiast;4.5;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_52;grave / très;erg;5.71;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_53;sérieux;ernstig;4.57;Prioritaire;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_54;égal;even;5.85;Prioritaire;Essentiel;A2;nt2lex;Comparaison;heuristique_fr
+ADJECTIFS_NL_55;éventuel;eventueel;4.14;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_56;exclusif;exclusief;4.15;Standard;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_57;externe;extern;3.36;Standard;Spécialisé;B2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_58;supplémentaire;extra;5.16;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_59;fin / agréable;fijn;5.09;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_60;financier;financieel;4.47;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_61;physique;fysiek;4.25;Standard;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_62;jaune;geel;4.54;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_63;entier;geheel;5.03;Prioritaire;Essentiel;B1;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_64;fou;gek;5.13;Standard;Essentiel;A1;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_65;heureux;gelukkig;5.23;Prioritaire;Essentiel;A1;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_66;facile;gemakkelijk;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_67;moyen;gemiddeld;4.55;Prioritaire;Courant;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_68;assez;genoeg;5.49;Prioritaire;Essentiel;A1;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_69;rassuré / tranquille;gerust;4.45;Prioritaire;Courant;A2;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_70;sensible;gevoelig;4.32;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_71;dangereux;gevaarlijk;4.63;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_72;convivial / agréable;gezellig;4.64;Prioritaire;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_73;sain / en bonne santé;gezond;4.71;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_74;bon / bien;goed;6.2;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_75;bon marché;goedkoop;4.43;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_76;grand;groot;5.59;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_77;vert;groen;4.82;Standard;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_78;favorable;gunstig;4.0;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_79;demi;half;5.05;Prioritaire;Essentiel;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_80;dur / fort / vite;hard;5.15;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_81;très chaud;heet;5.02;Standard;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_82;clair / limpide;helder;4.5;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_83;tout / entier;hele;5.79;Prioritaire;Essentiel;A1;freq_estime;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_84;haut;hoog;5.04;Prioritaire;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_85;actuel;huidig;3.75;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_86;chaque;ieder;5.2;Prioritaire;Essentiel;A1;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_87;international;internationaal;4.77;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_88;dommage;jammer;4.85;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_89;jeune;jong;5.01;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_90;juste / correct;juist;5.26;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_91;calme;kalm;3.9;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_92;cassé;kapot;4.7;Standard;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_93;caractéristique;kenmerkend;3.88;Standard;Courant;C1;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_94;prêt / fini;klaar;5.51;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_95;petit;klein;5.3;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_96;coloré;kleurrijk;3.64;Standard;Courant;B1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_97;beau / intelligent;knap;4.47;Standard;Courant;A1;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_98;court;kort;5.16;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_99;froid;koud;4.72;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_100;puissant;krachtig;4.23;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_101;qualitatif;kwalitatief;3.57;Standard;Courant;C1;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_102;perdu (égaré);kwijt;4.93;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_103;bas;laag;4.77;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_104;tard;laat;5.84;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_105;long;lang;5.65;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_106;lent;langzaam;4.73;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_107;pénible / difficile;lastig;4.81;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_108;vide;leeg;4.67;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_109;laid;lelijk;4.17;Standard;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_110;chouette / amusant;leuk;5.6;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_111;gentil / cher;lief;4.76;Prioritaire;Courant;A1;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_112;léger / clair;licht;5.11;Prioritaire;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_113;gauche;linker;4.05;Prioritaire;Courant;C1;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_114;à gauche;links;5.15;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_115;local;lokaal;4.36;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_116;détaché / libre;los;5.13;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_117;social;maatschappelijk;4.23;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_118;facile;makkelijk;4.99;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_119;maximal;maximaal;4.46;Standard;Courant;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_120;humain;menselijk;4.42;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_121;immédiat;meteen;5.22;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_122;environnemental;milieu;4.65;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_123;moins;minder;5.5;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_124;minimal;minimaal;4.35;Standard;Courant;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_125;difficile;moeilijk;5.32;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_126;beau;mooi;5.58;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_127;fatigué;moe;4.64;Standard;Courant;A1;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_128;nu;naakt;4.36;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_129;proche;nabij;4.51;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_130;mouillé;nat;4.41;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_131;naturel;natuurlijk;5.59;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_132;étroit / précis;nauw;4.16;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_133;propre / net;net;5.86;Prioritaire;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_134;soigné;netjes;4.54;Standard;Courant;B2;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_135;nouveau;nieuw;5.51;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_136;nécessaire;nodig;5.73;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_137;normal;normaal;5.09;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_138;utile;nuttig;4.29;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_139;officiel;officieel;4.85;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_140;inconnu;onbekend;4.36;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_141;mutuel / entre soi;onderling;4.14;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_142;récemment;onlangs;4.55;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_143;immédiat;onmiddellijk;4.61;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_144;impossible;onmogelijk;4.65;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_145;inquiet / agité;onrustig;3.5;Standard;Courant;A2;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_146;terrible / énormément;ontzettend;4.68;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_147;inattendu;onverwacht;4.07;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_148;de guerre;oorlog;5.29;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_149;ouvert;open;5.5;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_150;public;openbaar;4.85;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_151;frappant / remarquable;opvallend;4.41;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_152;vieux / ancien;oud;5.34;Prioritaire;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_153;restant / autre;overig;3.73;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_154;après-demain;overmorgen;3.43;Standard;Spécialisé;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_155;seulement / à peine;pas;5.45;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_156;adéquat / convenable;passend;3.82;Standard;Courant;C1;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_157;personnel;persoonlijk;4.9;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_158;soudain;plots;4.15;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_159;politique;politiek;5.17;Prioritaire;Essentiel;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_160;populaire;populair;4.65;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_161;positif;positief;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_162;précis / exactement;precies;5.34;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_163;agréable;prettig;4.28;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_164;excellent / parfait;prima;5.1;Standard;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_165;privé;privé;4.57;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_166;pour cent;procent;4.97;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_167;professionnel;professioneel;4.39;Standard;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_168;bizarre;raar;4.68;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_169;plus récent;recenter;2.72;Standard;Spécialisé;C1;freq_estime;Comparaison;heuristique_fr
+ADJECTIFS_NL_170;droit;recht;5.29;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_171;direct / directement;rechtstreeks;4.41;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_172;régulier;regelmatig;4.88;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_173;riche;rijk;4.86;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_174;rouge;rood;4.84;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_175;rond / environ;rond;5.56;Prioritaire;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_176;large / vaste / plus de;ruim;5.05;Prioritaire;Essentiel;A1;nt2lex;Comparaison;heuristique_fr
+ADJECTIFS_NL_177;calme / tranquille;rustig;5.0;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_178;ensemble;samen;5.75;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_179;propre / beau;schoon;4.69;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_180;rapide / vite;snel;5.74;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_181;certains;sommige;5.33;Prioritaire;Essentiel;A2;freq_estime;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_182;social;sociaal;4.8;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_183;captivant / passionnant;spannend;4.43;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_184;spécial;speciaal;4.92;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_185;serré / raide;strak;4.17;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_186;sévère;streng;4.12;Standard;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_187;innombrables;talloze;4.26;Standard;Courant;B2;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_188;contre;tegen;6.11;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_189;actuel / de nos jours;tegenwoordig;5.06;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_190;au moins;tenminste;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_191;enfin / finalement;tenslotte;4.34;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_192;à juste titre;terecht;4.95;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_193;content / satisfait;tevreden;4.66;Prioritaire;Courant;A1;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_194;à la maison;thuis;5.48;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_195;pourtant / quand même;toch;6.0;Prioritaire;Essentiel;A1;nt2lex;Comparaison;heuristique_fr
+ADJECTIFS_NL_196;futur;toekomstig;3.49;Prioritaire;Spécialisé;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_197;par hasard;toevallig;4.56;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_198;total;totaal;5.12;Prioritaire;Essentiel;B1;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_199;fidèle;trouw;4.56;Standard;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_200;entre;tussen;5.9;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_201;extrême / extrêmement;uiterst;4.27;Prioritaire;Courant;B1;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_202;excellent;uitstekend;4.42;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_203;souvent;vaak;5.6;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_204;fixe / solide;vast;5.43;Prioritaire;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_205;sûr / en sécurité;veilig;5.12;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_206;beaucoup;veel;6.26;Prioritaire;Essentiel;A1;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_207;loin;ver;5.15;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_208;responsable;verantwoordelijk;4.88;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_209;mauvais / trompeur;verkeerd;4.84;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_210;passé;verleden;4.93;Prioritaire;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_211;obligatoire;verplicht;4.64;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_212;différent;verschillend;4.13;Prioritaire;Courant;A2;nt2lex;Comparaison;heuristique_fr
+ADJECTIFS_NL_213;raisonnable / sage;verstandig;4.26;Prioritaire;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_214;ensuite;vervolgens;5.24;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_215;sale;vies;4.16;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_216;rapide / vite;vlug;3.88;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_217;plein;vol;5.34;Prioritaire;Essentiel;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_218;suffisant;voldoende;4.74;Prioritaire;Courant;B1;freq_estime;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_219;suivant;volgend;4.5;Prioritaire;Courant;B2;freq_estime;Qualité;heuristique_fr
+ADJECTIFS_NL_220;complet / complètement;volledig;5.08;Prioritaire;Essentiel;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_221;pour / devant;voor;7.05;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_222;surtout;vooral;5.61;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_223;provisoire;voorlopig;4.51;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_224;ancien / ex-;voormalig;4.79;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_225;prudent;voorzichtig;4.42;Prioritaire;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_226;précédent;vorig;4.95;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_227;libre / assez;vrij;5.42;Prioritaire;Essentiel;A2;nt2lex;Taille-quantité;heuristique_fr
+ADJECTIFS_NL_228;étrange / étranger;vreemd;4.76;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_229;amical / aimable;vriendelijk;4.53;Prioritaire;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_230;tôt;vroeg;5.35;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_231;joyeux;vrolijk;4.43;Standard;Courant;A2;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_232;vrai;waar;6.21;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_233;probable / sans doute;waarschijnlijk;5.24;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_234;éveillé;wakker;5.06;Standard;Essentiel;A2;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_235;chaud;warm;4.86;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_236;peu;weinig;5.35;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_237;réel / vraiment;werkelijk;4.71;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_238;scientifique;wetenschappelijk;4.41;Prioritaire;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_239;sage;wijs;4.16;Standard;Courant;A2;nt2lex;Personnalité;heuristique_fr
+ADJECTIFS_NL_240;sauvage;wild;4.48;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_241;blanc;wit;5.0;Standard;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_242;furieux;woedend;3.93;Standard;Courant;A2;nt2lex;Émotions;heuristique_fr
+ADJECTIFS_NL_243;professionnel / d'affaires;zakelijk;4.19;Standard;Courant;B1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_244;doux;zacht;4.4;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_245;sûr / certain;zeker;5.69;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_246;même;zelfde;4.39;Prioritaire;Courant;B1;nt2lex;Comparaison;heuristique_fr
+ADJECTIFS_NL_247;malade;ziek;4.86;Prioritaire;Courant;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_248;ainsi / si;zo;6.43;Prioritaire;Essentiel;A1;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_249;comme;zoals;5.97;Prioritaire;Essentiel;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_250;sucré / doux;zoet;4.19;Standard;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_251;à l'instant;zojuist;4.42;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_252;soigneusement;zorgvuldig;4.0;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_253;jusque là;zover;4.87;Standard;Courant;A2;nt2lex;Qualité;heuristique_fr
+ADJECTIFS_NL_254;lourd;zwaar;4.91;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_255;noir;zwart;5.0;Standard;Essentiel;A1;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_256;faible;zwak;4.45;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr

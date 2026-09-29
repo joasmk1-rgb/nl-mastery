@@ -133,6 +133,7 @@
         .translate-btn:active { transform: scale(0.9); }
         .translate-btn:disabled { opacity: 0.4; cursor: default; }
         .translate-result { font-size: 0.85em; color: var(--text-secondary); font-style: italic; }
+        .wl-niveau-badge { font-size: 0.64rem; font-weight: 700; padding: 2px 7px; border-radius: var(--radius-pill); white-space: nowrap; color: white; }
         .wl-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; white-space: nowrap; }
         .wl-badge.unseen { background: var(--surface-2); color: var(--text-secondary); }
         .wl-badge.review { background: #ffe3b3; color: #b06d00; }

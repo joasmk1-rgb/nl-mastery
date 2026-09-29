@@ -44,6 +44,7 @@
             <div style="width:100%; display:flex; gap:8px; margin-bottom:10px;">
                 <input type="text" id="wl-search" placeholder="Rechercher un mot..." style="margin:0;" oninput="renderWordList()">
                 <select id="wl-filter" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;"></select>
+                <select id="wl-subcat-filter" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;"><option value="">Toutes sous-catégories</option></select>
                 <select id="wl-status-filter" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;">
                     <option value="">Tous statuts</option>
                     <option value="unseen">Non vus</option>

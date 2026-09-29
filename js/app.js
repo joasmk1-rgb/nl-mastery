@@ -1340,9 +1340,19 @@ if (firebaseAvailable) {
                     const r = await fetch(f);
                     if (!r.ok) { if (isCore) errors.push(f + ' : HTTP ' + r.status); return 0; }
                     const t = await r.text();
+                    const lines = t.split(/\r?\n/);
+                    // Les fichiers fr-first ont grandi au fil des enrichissements (statut_examen,
+                    // priorite_frequence, niveauCECR, sousCategorie...) et n'ont plus tous le même
+                    // nombre de colonnes. On lit l'en-tête pour retrouver l'index de chaque colonne
+                    // nommée plutôt que de deviner par position (l'ancien "dernière colonne" cassait
+                    // dès qu'une colonne était ajoutée après priorite_frequence).
+                    let headerIdx = {};
+                    if (!nlFirst && lines[0]) {
+                        lines[0].split(';').forEach((h, idx) => { headerIdx[h.trim()] = idx; });
+                    }
                     let count = 0;
                     let rowIdx = 0;
-                    t.split(/\r?\n/).slice(1).forEach(l => {
+                    lines.slice(1).forEach(l => {
                         if (!l.trim()) return;
                         const c = l.split(';');
                         if (c[nlIdx] !== undefined && c[nlIdx].trim()) {
@@ -1350,12 +1360,18 @@ if (firebaseAvailable) {
                             // Pour THEME_BASE (nl-first), elle reste en toute dernière colonne comme avant.
                             const freqStr = nlFirst ? c[c.length - 1] : c[3];
                             const freqRaw = parseFloat(freqStr);
-                            // Priorité (Essentiel/Courant/Spécialisé/Auxiliaire-Modal), si présente :
-                            // toujours la toute dernière colonne des fichiers fr-first avec 5+ colonnes.
-                            const tier = (!nlFirst && c.length > 4) ? (c[c.length - 1] || '').trim() : '';
+                            const get = (name) => (headerIdx[name] !== undefined ? (c[headerIdx[name]] || '').trim() : '');
+                            // Priorité (Essentiel/Courant/Spécialisé/Auxiliaire-Modal), si présente.
+                            const tier = nlFirst ? '' : get('priorite_frequence');
+                            const niveauCECR = nlFirst ? '' : get('niveauCECR');
+                            const niveauCECRSource = nlFirst ? '' : get('niveauCECRSource');
+                            const sousCategorie = nlFirst ? '' : get('sousCategorie');
+                            const sousCategorieSource = nlFirst ? '' : get('sousCategorieSource');
                             fullDb.push({
                                 id: f + '_row' + rowIdx, fr: (c[frIdx] || '').trim(), nl: c[nlIdx].trim(),
-                                file: base, freq: isNaN(freqRaw) ? 0 : freqRaw, tier: tier
+                                file: base, freq: isNaN(freqRaw) ? 0 : freqRaw, tier: tier,
+                                niveauCECR: niveauCECR || undefined, niveauCECRSource: niveauCECRSource || undefined,
+                                sousCategorie: sousCategorie || undefined, sousCategorieSource: sousCategorieSource || undefined
                             });
                             count++;
                             rowIdx++;
@@ -4029,13 +4045,43 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (wordListReturnTo === 'apprendre') showApprendre(); else showProfil();
         }
 
+        // Palette de couleurs par niveau CECR, réutilisée partout où on affiche ce badge
+        // (liste de mots, conjugaison) pour une lecture visuelle cohérente A1 → C1.
+        const CECR_BADGE_COLOR = { A1: '#16a34a', A2: '#65a30d', B1: '#ca8a04', B2: '#ea580c', C1: '#dc2626' };
+        function niveauCECRBadgeHtml(niveau) {
+            if (!niveau) return '';
+            const color = CECR_BADGE_COLOR[niveau] || '#888';
+            return `<span class="wl-niveau-badge" style="background:${color}">${niveau}</span>`;
+        }
+
+        function updateWlSubcatOptions() {
+            const cat = document.getElementById('wl-filter').value;
+            const subcatSel = document.getElementById('wl-subcat-filter');
+            if (!subcatSel) return;
+            const pool = cat ? fullDb.filter(i => i.file === cat) : fullDb;
+            const subcats = [...new Set(pool.map(i => i.sousCategorie).filter(Boolean))].sort();
+            const prevValue = subcatSel.value;
+            if (!subcats.length) {
+                subcatSel.innerHTML = '<option value="">Toutes sous-catégories</option>';
+                subcatSel.style.display = 'none';
+                return;
+            }
+            subcatSel.style.display = '';
+            subcatSel.innerHTML = '<option value="">Toutes sous-catégories</option>' +
+                subcats.map(s => `<option value="${s}">${s}</option>`).join('');
+            if (subcats.includes(prevValue)) subcatSel.value = prevValue;
+        }
+
         function renderWordList() {
+            updateWlSubcatOptions();
             const search = normalize(document.getElementById('wl-search').value);
             const cat = document.getElementById('wl-filter').value;
+            const subcat = document.getElementById('wl-subcat-filter') ? document.getElementById('wl-subcat-filter').value : '';
             const statusFilter = document.getElementById('wl-status-filter').value;
             const sortMode = document.getElementById('wl-sort').value;
             let items = fullDb;
             if (cat) items = items.filter(i => i.file === cat);
+            if (subcat) items = items.filter(i => i.sousCategorie === subcat);
             if (statusFilter) items = items.filter(i => wordStatus(i.id) === statusFilter);
             if (search) items = items.filter(i => normalize(i.fr).includes(search) || normalize(i.nl).includes(search));
 
@@ -4054,8 +4100,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <span class="wl-fr">${i.fr}</span>
                     <span class="wl-nl">${i.nl}</span>
                     ${speakBtnHtml(i.nl)}
+                    ${niveauCECRBadgeHtml(i.niveauCECR)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
-                    <span class="wl-file">${i.file}${freqTxt ? ' · ' + freqTxt : ''}</span>
+                    <span class="wl-file">${i.file}${i.sousCategorie ? ' · ' + i.sousCategorie : ''}${freqTxt ? ' · ' + freqTxt : ''}</span>
                 </div>`;
             }).join('');
             if (items.length > 300) {
