@@ -3004,10 +3004,16 @@ if (firebaseAvailable) {
                 listEl.innerHTML = '<p style="color:#888;">Programme pas encore rédigé pour ce niveau.</p>';
                 return;
             }
+            // Un seul module déplié : le premier qui n'est pas terminé. Les autres sont repliés
+            // (titre + progression) et s'ouvrent d'un clic — la page faisait quatre écrans de haut
+            // quand tous les modules d'un niveau étaient dépliés en même temps.
+            let openAssigned = false;
             listEl.innerHTML = modulesForLevel.map(mod => {
                 const readyNotionIds = mod.notions.filter(nid => curriculumNotions[nid] && curriculumNotions[nid].status === 'pret');
                 const masteredInModule = readyNotionIds.filter(nid => getNotionStatus(nid) === 'maitrisee').length;
                 const modPct = readyNotionIds.length ? Math.round((masteredInModule / readyNotionIds.length) * 100) : 0;
+                const isOpen = !openAssigned && readyNotionIds.length > 0 && masteredInModule < readyNotionIds.length;
+                if (isOpen) openAssigned = true;
 
                 const rows = mod.notions.map(nid => {
                     const notion = curriculumNotions[nid];
@@ -3040,17 +3046,20 @@ if (firebaseAvailable) {
                     </div>`;
                 }).join('');
 
-                return `<div class="module-card">
-                    <div class="module-card-head">
-                        <span class="module-card-num">Module ${mod.order}</span>
-                    </div>
-                    <div class="module-card-title">${mod.label}</div>
-                    ${readyNotionIds.length ? `<div class="module-progress-row">
-                        <div class="module-progress-bar"><div class="module-progress-fill" style="width:${modPct}%"></div></div>
-                        <span class="module-progress-pct">${modPct}%</span>
-                    </div>` : ''}
+                return `<details class="module-card" ${isOpen ? 'open' : ''}>
+                    <summary>
+                        <div class="module-card-head">
+                            <span class="module-card-num">Module ${mod.order} · ${mod.notions.length} notion${mod.notions.length > 1 ? 's' : ''}</span>
+                            <span class="module-card-chevron">▾</span>
+                        </div>
+                        <div class="module-card-title">${mod.label}</div>
+                        ${readyNotionIds.length ? `<div class="module-progress-row">
+                            <div class="module-progress-bar"><div class="module-progress-fill" style="width:${modPct}%"></div></div>
+                            <span class="module-progress-pct">${modPct}%</span>
+                        </div>` : ''}
+                    </summary>
                     ${rows}
-                </div>`;
+                </details>`;
             }).join('');
         }
 
@@ -5643,6 +5652,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function renderProfil() {
+            // Les sections repliables gardent leur état quand le profil se redessine (par exemple
+            // après avoir enregistré une clé Gemini, qui se trouve dans une section repliée).
+            const openSections = [...document.querySelectorAll('#profil-content details.profil-section[open]')].map(d => d.id);
             const mc = state.stats.modeCounts;
             const seenEntries = Object.entries(state.stats.wordSeen);
             const totalDistinctSeen = seenEntries.length;
@@ -5731,6 +5743,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
 
+                <details class="profil-section" id="profil-sec-stats" ${openSections.includes('profil-sec-stats') ? 'open' : ''}>
+                <summary>📊 Statistiques détaillées</summary>
                 <div class="study-box" style="text-align:left;">
                     <h3>📚 Progression du curriculum (par niveau CECR)</h3>
                     ${curriculumLoaded ? cecrBarsHtml : `<p style="font-size:0.85rem; color:var(--text-secondary);">Chargement du programme...</p>`}
@@ -5753,8 +5767,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${placementHistoryHtml}
                 </div>
 
-                ${renderGeminiConfigBlock()}
-
                 <div class="study-box" style="text-align:left;">
                     <h3>📊 Mes statistiques</h3>
                     <p>Mots vus au moins une fois : ${totalDistinctSeen}<br>
@@ -5771,6 +5783,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <h3>🔥 Mots les plus revus</h3>
                     <p>${top5.length ? top5.join('<br>') : 'Aucune donnée pour le moment'}</p>
                 </div>
+                </details>
+
+                <details class="profil-section" id="profil-sec-settings" ${openSections.includes('profil-sec-settings') ? 'open' : ''}>
+                <summary>⚙️ Réglages et sauvegarde</summary>
+                ${renderGeminiConfigBlock()}
                 <div class="study-box" style="margin-top:15px; border-color:var(--primary);">
                     <h3 style="color:var(--primary);">💾 Sauvegarde</h3>
                     <p style="font-size:0.85rem;">Exporte un fichier avec toute ta progression (à conserver, ou pour la reprendre sur un autre appareil/navigateur). L'import remplace entièrement la progression actuelle.</p>
@@ -5782,7 +5799,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <h3 style="color:var(--wrong);">⚠️ Zone dangereuse</h3>
                     <p style="font-size:0.85rem;">Ceci efface définitivement tout ton historique (XP, mots maîtrisés, listes, high scores). Aucune récupération possible.</p>
                     <button class="btn btn-red" onclick="resetProgress()">🗑️ Réinitialiser toute la progression</button>
-                </div>`;
+                </div>
+                </details>`;
+        }
+
+        // Ouvre le Profil directement sur les réglages (clé Gemini, sauvegarde), qui sont
+        // repliés par défaut.
+        function showProfilSettings() {
+            showProfil();
+            const sec = document.getElementById('profil-sec-settings');
+            if (sec) { sec.open = true; sec.scrollIntoView({ block: 'start' }); }
         }
 
         function exportProgress() {
@@ -6423,7 +6449,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             box.innerHTML = configured
                 ? `<p style="font-size:0.85rem; color:var(--success);">✅ Gemini configuré (clé gérée dans Profil → 🤖 Intelligence IA)</p><div id="rp-voice-warning"></div>`
                 : `<p style="font-size:0.85rem; color:var(--wrong);">❌ Aucune clé Gemini configurée.</p>
-                   <button class="btn btn-gray" onclick="showProfil()">Configurer dans Profil</button>
+                   <button class="btn btn-gray" onclick="showProfilSettings()">Configurer dans Profil</button>
                    <div id="rp-voice-warning"></div>`;
         }
 
@@ -6683,15 +6709,28 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             speakNL(text);
         }
 
-        function showRoleplay() {
+        // `group` : 'entretiens' | 'travail' | 'quotidien' — les trois entrées de la page Pratiquer.
+        // Sans groupe (appels plus anciens), les trois groupes sont affichés.
+        let rpCurrentGroup = null;
+        function showRoleplay(group) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('roleplay-view').classList.add('active');
             setActiveNav('nav-pratiquer');
+            rpCurrentGroup = group || null;
 
             renderRpGeminiStatus();
             rpCheckDutchVoice();
 
             rpShowCategoryPicker();
+            // "Au travail" n'a qu'une entrée : on l'ouvre directement plutôt que d'afficher un
+            // écran avec une seule carte à cliquer.
+            if (rpCurrentGroup === 'travail') rpShowJobHome();
+        }
+
+        // Bouton retour de la liste de scénarios : revient au choix de catégorie du groupe, ou à
+        // Pratiquer quand le groupe n'a qu'une entrée (sinon on retomberait sur une carte unique).
+        function rpBackFromScenarioList() {
+            if (rpCurrentGroup === 'travail') showPratiquer(); else rpShowCategoryPicker();
         }
 
         function rpShowCategoryPicker() {
@@ -6701,6 +6740,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpCaseState = null;
             rpHideInterviewer();
             rpJobHideDebrief();
+            document.querySelectorAll('#rp-step-category .rp-group').forEach(g => {
+                g.style.display = (!rpCurrentGroup || g.dataset.rpGroup === rpCurrentGroup) ? '' : 'none';
+            });
             document.getElementById('rp-step-category').style.display = '';
             document.getElementById('rp-step-scenario').style.display = 'none';
             document.getElementById('rp-step-chat').style.display = 'none';

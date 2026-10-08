@@ -142,28 +142,23 @@
 
     <div id="pratiquer-view" class="view">
         <h2>🗣️ Pratiquer</h2>
-        <p class="section-subtitle" style="margin-top:0;">Mets en pratique ce que tu apprends : à l'oral avec Gemini, ou à l'écrit.</p>
+        <p class="section-subtitle" style="margin-top:0;">Parle et écris en situation réelle, avec Gemini.</p>
 
-        <div class="section-title" style="margin-top:0;">🗣️ Conversation</div>
         <div class="hub-grid single">
-            <div class="hub-card accent" onclick="showRoleplay()"><span class="hub-card-icon">🎙️</span><div class="hub-card-title">Jeu de rôle vocal libre</div><div class="hub-card-desc">Choisis une situation et discute en néerlandais avec Gemini.</div></div>
+            <div class="hub-card accent" onclick="showRoleplay('entretiens')"><span class="hub-card-icon">💼</span><div class="hub-card-title">Entretiens</div><div class="hub-card-desc">Passer un entretien, le mener comme recruteur, ou résoudre une étude de cas.</div></div>
+            <div class="hub-card accent" onclick="showRoleplay('travail')"><span class="hub-card-icon">🏭</span><div class="hub-card-title">Au travail</div><div class="hub-card-desc">Chauffeurs, clients, collègues : une situation, ou une journée complète avec bilan.</div></div>
+            <div class="hub-card accent" onclick="showRoleplay('quotidien')"><span class="hub-card-icon">☕</span><div class="hub-card-title">Vie courante</div><div class="hub-card-desc">Administration, téléphone, café, petites courses.</div></div>
         </div>
 
-        <div class="section-title">🎯 Entraînement ciblé</div>
-        <div id="pratiquer-targeted-list" class="hub-grid single"></div>
-
-        <div class="section-title">✍️ Écrit</div>
-        <div id="pratiquer-production-list" class="hub-grid single"></div>
-
-        <div class="section-title">🎭 Situations</div>
-        <div class="hub-grid">
-            <div class="hub-card" onclick="showRoleplay(); rpShowCategory('entretiens');"><span class="hub-card-icon">💼</span><div class="hub-card-title">Travail</div><div class="hub-card-desc">Entretiens d'embauche, RH, technique.</div></div>
-            <div class="hub-card" onclick="showRoleplay(); rpShowCategory('admin');"><span class="hub-card-icon">🏛️</span><div class="hub-card-title">Administration</div><div class="hub-card-desc">CPAS, mutuelle, commune, médecin.</div></div>
-            <div class="hub-card" onclick="showRoleplay(); rpShowCategory('appels');"><span class="hub-card-icon">📞</span><div class="hub-card-title">Appels</div><div class="hub-card-desc">Standard, rendez-vous, suivi.</div></div>
-            <div class="hub-card" onclick="showRoleplay(); rpShowCategory('quotidien');"><span class="hub-card-icon">☕</span><div class="hub-card-title">Vie quotidienne</div><div class="hub-card-desc">Café, restaurant, petites courses.</div></div>
-        </div>
+        <details class="profil-section">
+            <summary>🎯 Pratique orale ciblée sur une notion</summary>
+            <div id="pratiquer-targeted-list" class="hub-grid single"></div>
+        </details>
+        <details class="profil-section">
+            <summary>✍️ Production écrite</summary>
+            <div id="pratiquer-production-list" class="hub-grid single"></div>
+        </details>
     </div>
-
     <div id="reviser-view" class="view">
         <h2>🔁 Réviser</h2>
         <p class="section-subtitle" style="margin-top:0;">Revois ce que tu as raté, ou entretiens ton vocabulaire en jouant.</p>
@@ -394,28 +389,33 @@
 
         <!-- Étape 1 : choix de la catégorie -->
         <div id="rp-step-category">
-            <div class="rp-group-title">Scénarios réels — tirés de vrais entretiens</div>
-            <div class="rp-category-grid" style="margin-top:0;">
-                <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">Le recruteur pose de vraies questions et improvise</div></div>
-                <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🎙️</span>Je suis recruteur<div class="cat-sub">Traduction guidée d'un vrai dialogue</div></div>
+            <div data-rp-group="entretiens" class="rp-group">
+                <div class="rp-group-title">💼 Entretiens</div>
+                <div class="rp-category-grid" style="margin-top:0;">
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">De vraies questions d'entretien, le recruteur improvise</div></div>
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🎙️</span>Je suis recruteur<div class="cat-sub">Traduction guidée d'un vrai dialogue</div></div>
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowCaseHome()"><span class="rp-icon">📊</span>Étude de cas<div class="cat-sub">Un petit problème d'entreprise à résoudre et à défendre</div></div>
+                    <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens types<div class="cat-sub">Présélection, technique, final</div></div>
+                </div>
             </div>
-            <div class="rp-group-title">Mise en situation métier — tu es en poste</div>
-            <div class="rp-category-grid" style="margin-top:0;">
-                <div class="rp-cat-btn rp-cat-real" onclick="rpShowJobHome()"><span class="rp-icon">🏭</span>Une journée au travail<div class="cat-sub">Chauffeurs, clients, collègues : une situation ou une journée complète</div></div>
-                <div class="rp-cat-btn rp-cat-real" onclick="rpShowCaseHome()"><span class="rp-icon">💼</span>Étude de cas<div class="cat-sub">Un petit problème d'entreprise à résoudre et à défendre</div></div>
+            <div data-rp-group="travail" class="rp-group">
+                <div class="rp-group-title">🏭 Au travail</div>
+                <div class="rp-category-grid" style="margin-top:0; grid-template-columns:1fr;">
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowJobHome()"><span class="rp-icon">🏭</span>Une journée au travail<div class="cat-sub">Chauffeurs, clients, collègues : une situation ou une journée complète</div></div>
+                </div>
             </div>
-            <div class="rp-group-title">Scénarios génériques</div>
-            <div class="rp-category-grid" style="margin-top:0;">
-                <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens d'embauche</div>
-                <div class="rp-cat-btn" onclick="rpShowCategory('admin')"><span class="rp-icon">🏛️</span>Administration belge</div>
-                <div class="rp-cat-btn" onclick="rpShowCategory('appels')"><span class="rp-icon">☎️</span>Appels téléphoniques</div>
-                <div class="rp-cat-btn" onclick="rpShowCategory('quotidien')"><span class="rp-icon">☕</span>Vie quotidienne</div>
+            <div data-rp-group="quotidien" class="rp-group">
+                <div class="rp-group-title">☕ Vie courante</div>
+                <div class="rp-category-grid" style="margin-top:0;">
+                    <div class="rp-cat-btn" onclick="rpShowCategory('admin')"><span class="rp-icon">🏛️</span>Administration belge</div>
+                    <div class="rp-cat-btn" onclick="rpShowCategory('appels')"><span class="rp-icon">☎️</span>Appels téléphoniques</div>
+                    <div class="rp-cat-btn" onclick="rpShowCategory('quotidien')"><span class="rp-icon">☕</span>Vie quotidienne</div>
+                </div>
             </div>
         </div>
-
         <!-- Étape 2 : choix du scénario précis dans la catégorie -->
         <div id="rp-step-scenario" style="display:none; width:100%;">
-            <button class="back-btn" onclick="rpShowCategoryPicker()">← Autre catégorie</button>
+            <button class="back-btn" onclick="rpBackFromScenarioList()">← Retour</button>
             <div id="rp-scenario-list" style="width:100%; display:flex; flex-direction:column; align-items:flex-start;"></div>
         </div>
 

@@ -482,3 +482,21 @@
         .dash-link-chip span { color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
         .dash-link-chip:active { border-color: var(--primary); }
         .dash-footnote { width: 100%; max-width: 520px; font-size: 0.76rem; color: var(--text-secondary); text-align: center; cursor: pointer; padding: 6px 0 12px; }
+        /* Sections repliables (modules du parcours, détails du profil, listes de Pratiquer) :
+           une page courte par défaut, le détail à un clic. */
+        details.module-card > summary, details.profil-section > summary { list-style: none; cursor: pointer; }
+        details.module-card > summary::-webkit-details-marker, details.profil-section > summary::-webkit-details-marker { display: none; }
+        details.module-card:not([open]) .module-card-title { margin-bottom: 6px; }
+        details.module-card:not([open]) .module-progress-row { margin-bottom: 0; }
+        .module-card-chevron { color: var(--text-secondary); transition: transform 0.15s; }
+        details.module-card:not([open]) .module-card-chevron { transform: rotate(-90deg); }
+        details.profil-section { width: 100%; max-width: 520px; margin-bottom: 12px; box-sizing: border-box; }
+        details.profil-section > summary { background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; font-weight: 700; font-size: 0.92rem; display: flex; justify-content: space-between; align-items: center; }
+        details.profil-section > summary::after { content: '▾'; color: var(--text-secondary); transform: rotate(-90deg); transition: transform 0.15s; }
+        details.profil-section[open] > summary::after { transform: none; }
+        details.profil-section[open] > summary { margin-bottom: 12px; }
+        details.profil-section .study-box { width: 100%; max-width: none; box-sizing: border-box; margin-bottom: 12px; box-shadow: none; }
+        .rp-group { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        @media (min-width: 700px) { details.profil-section { max-width: 620px; } }
+        @media (min-width: 1000px) { details.profil-section { max-width: 720px; } }
+        @media (min-width: 1300px) { details.profil-section { max-width: 860px; } }
