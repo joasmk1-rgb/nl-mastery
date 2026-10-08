@@ -77,6 +77,7 @@ function accSubmit() {
 async function accSignup(pseudo, password) {
     const pseudoLower = pseudo.toLowerCase();
     const email = document.getElementById('acc-email').value.trim();
+    accExplicitAuthInProgress = true;
     try {
         const takenDoc = await db.collection('usernames').doc(pseudoLower).get();
         if (takenDoc.exists) {
@@ -87,6 +88,7 @@ async function accSignup(pseudo, password) {
         const cred = await auth.createUserWithEmailAndPassword(authEmail, password);
         const uid = cred.user.uid;
         await db.collection('usernames').doc(pseudoLower).set({ uid });
+        const rev = syncNewRev();
         const userDoc = {
             pseudo, pseudoLower,
             recoveryEmail: email || null,
@@ -94,20 +96,28 @@ async function accSignup(pseudo, password) {
             disabled: false,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            progress: state
+            progress: syncClone(state),
+            progressRev: rev,
+            progressEpoch: 0
         };
         await db.collection('users').doc(uid).set(userDoc);
         currentUser = cred.user;
         currentUserDoc = userDoc;
+        // La progression faite sans compte sur cet appareil devient celle du nouveau compte.
+        syncMetaReplace({ uid, rev, epoch: 0, dirty: false });
+        cloudSetStatus('ok');
         await socialEnsureProfileDocs();
         accShowLoggedIn();
     } catch (e) {
         accSetError(accFriendlyError(e));
+    } finally {
+        accExplicitAuthInProgress = false;
     }
 }
 
 async function accLogin(pseudo, password) {
     const authEmail = accEmailFromPseudo(pseudo);
+    accExplicitAuthInProgress = true;
     try {
         const cred = await auth.signInWithEmailAndPassword(authEmail, password);
         const uid = cred.user.uid;
@@ -121,17 +131,18 @@ async function accLogin(pseudo, password) {
         }
         currentUser = cred.user;
         currentUserDoc = userDoc;
-        // La progression du cloud devient la référence sur cet appareil
-        if (userDoc.progress && typeof userDoc.progress === 'object' && Object.keys(userDoc.progress).length) {
-            localStorage.setItem('nl_platform_v1', JSON.stringify(userDoc.progress));
-            location.reload();
-            return;
-        } else {
-            scheduleCloudSync(true);
-            accShowLoggedIn();
-        }
+        // Réconcilie la progression de l'appareil avec celle du compte (adoption, fusion ou
+        // envoi selon le cas — voir cloudReconcile). Si la page se recharge, rien d'autre à faire.
+        cloudLastCheckAt = Date.now();
+        const reloading = await cloudReconcile(userDoc, true);
+        if (reloading) return;
+        accShowLoggedIn();
+        socialEnsureProfileDocs();
+        notificationsRefreshBadge();
     } catch (e) {
         accSetError(accFriendlyError(e));
+    } finally {
+        accExplicitAuthInProgress = false;
     }
 }
 
@@ -144,17 +155,26 @@ function accFriendlyError(e) {
     return "Erreur : " + (e && e.message ? e.message : e);
 }
 
-function accLogout() {
-    auth.signOut();
+async function accLogout() {
+    // Dernier envoi avant de partir : la progression locale est effacée juste après.
+    clearTimeout(cloudSyncTimer);
+    cloudSyncTimer = null;
+    if (syncMetaGet().dirty) {
+        await cloudPush();
+        if (syncMetaGet().dirty && !confirm(
+            "Ta progression récente n'a pas pu être envoyée au cloud (pas de connexion ?).\n\n" +
+            "Si tu te déconnectes maintenant, elle sera perdue sur cet appareil. Se déconnecter quand même ?"
+        )) return;
+    }
+    await auth.signOut();
     currentUser = null;
     currentUserDoc = null;
-    // Évite qu'un cache social (amis, notifications) d'un compte reste visible pour le
-    // prochain utilisateur du même appareil (ex. compte partagé, ordinateur familial).
-    socialDashboardCache = null;
-    notificationsCache = [];
-    const notifBadge = document.getElementById('notif-badge');
-    if (notifBadge) notifBadge.style.display = 'none';
-    accShowLoggedOut();
+    // La progression appartient au compte, pas à l'appareil : on la retire pour que le prochain
+    // utilisateur du même appareil (compte partagé, ordinateur familial) n'en hérite pas, ni du
+    // cache social (amis, notifications). Le rechargement remet tous les écrans à zéro.
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(SYNC_META_KEY);
+    location.reload();
 }
 
 function accShowLoggedIn() {
@@ -162,6 +182,7 @@ function accShowLoggedIn() {
     document.getElementById('acc-logged-in').style.display = 'block';
     document.getElementById('acc-current-pseudo').innerText = '👤 ' + currentUserDoc.pseudo;
     document.getElementById('acc-admin-entry').style.display = currentUserDoc.role === 'admin' ? 'grid' : 'none';
+    cloudSetStatus(cloudSyncStatus);
 }
 
 function accShowLoggedOut() {
@@ -171,22 +192,349 @@ function accShowLoggedOut() {
     document.getElementById('acc-password').value = '';
 }
 
-// Synchro cloud : appelée à chaque save() local, avec un léger anti-rebond
+// ===== Synchro cloud bidirectionnelle =====
+// Avant : l'app ne faisait qu'ENVOYER la progression (et ne relisait le cloud qu'à la saisie du
+// mot de passe). Un deuxième appareil resté connecté écrasait donc le cloud avec sa vieille
+// copie à sa première réponse. Maintenant chaque appareil retient la dernière révision du cloud
+// qu'il connaît (progressRev) et sait s'il a des changements non envoyés (dirty) :
+//   - cloud inchangé                  -> on envoie simplement la progression locale
+//   - cloud changé, rien en local     -> on adopte la version du cloud
+//   - les deux ont changé             -> on fusionne (mergeProgress), puis on envoie
+//   - progressEpoch différent         -> remise à zéro/import/effacement admin faits ailleurs :
+//                                        le cloud gagne, sans fusion
+const STATE_KEY = 'nl_platform_v1';
+const SYNC_META_KEY = 'nl_sync_meta_v1';            // { uid, rev, epoch, dirty }
+const SYNC_BACKUP_FIRST_KEY = 'nl_platform_v1_backup_premiere_synchro';
+const SYNC_BACKUP_LAST_KEY = 'nl_platform_v1_backup_derniere_synchro';
+const SYNC_STATUS_LABELS = {
+    ok: 'Synchronisé',
+    syncing: 'Synchronisation...',
+    offline: 'Hors ligne — envoi dès le retour de la connexion',
+    error: 'Échec de la synchro — nouvel essai dans 30 s'
+};
+let cloudSyncStatus = 'ok';
+let cloudPushPromise = null;
+let cloudRetryTimer = null;
+let cloudLastCheckAt = 0;
+let localChangeCounter = 0;      // incrémenté à chaque save(), pour repérer un changement pendant un envoi
+let accExplicitAuthInProgress = false; // connexion/inscription en cours : onAuthStateChanged ne doit pas s'en mêler
+
+function syncMetaGet() {
+    try { return JSON.parse(localStorage.getItem(SYNC_META_KEY)) || {}; } catch (e) { return {}; }
+}
+function syncMetaReplace(meta) { localStorage.setItem(SYNC_META_KEY, JSON.stringify(meta)); }
+function syncMetaPatch(patch) { syncMetaReplace(Object.assign(syncMetaGet(), patch)); }
+function syncNewRev() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 10); }
+function syncClone(o) { return JSON.parse(JSON.stringify(o)); } // retire aussi les undefined, refusés par Firestore
+function syncHasProgress(p) { return !!p && typeof p === 'object' && Object.keys(p).length > 0; }
+
+// Appelée par save() : note qu'il y a du nouveau à envoyer, même si la session Firebase n'est
+// pas encore reprise (les premières secondes après l'ouverture de la page).
+function syncMarkDirty() {
+    localChangeCounter++;
+    const meta = syncMetaGet();
+    if (meta.uid && !meta.dirty) syncMetaPatch({ dirty: true });
+}
+
+function cloudSetStatus(status) {
+    cloudSyncStatus = status;
+    const el = document.getElementById('acc-sync-status');
+    if (el) el.innerText = SYNC_STATUS_LABELS[status] || '';
+}
+
+// Copie de sécurité de la progression locale avant toute fusion/adoption : la toute première est
+// conservée telle quelle, la dernière est remplacée à chaque fois.
+function syncBackupLocal() {
+    try {
+        const raw = localStorage.getItem(STATE_KEY);
+        if (!raw) return;
+        const backup = JSON.stringify({ date: new Date().toISOString(), data: raw });
+        if (!localStorage.getItem(SYNC_BACKUP_FIRST_KEY)) localStorage.setItem(SYNC_BACKUP_FIRST_KEY, backup);
+        localStorage.setItem(SYNC_BACKUP_LAST_KEY, backup);
+    } catch (e) { console.warn('Sauvegarde locale avant synchro impossible :', e); }
+}
+
+// Secours manuel (console du navigateur) : restoreSyncBackup() remet la dernière copie de
+// sécurité, restoreSyncBackup(true) la toute première. L'état restauré repart ensuite dans le
+// cloud comme une progression normale.
+function restoreSyncBackup(first) {
+    const raw = localStorage.getItem(first ? SYNC_BACKUP_FIRST_KEY : SYNC_BACKUP_LAST_KEY);
+    if (!raw) { console.warn('Aucune copie de sécurité.'); return; }
+    localStorage.setItem(STATE_KEY, JSON.parse(raw).data);
+    if (syncMetaGet().uid) syncMetaPatch({ dirty: true });
+    location.reload();
+}
+
+function syncStableStringify(v) {
+    if (v === null || typeof v !== 'object') return JSON.stringify(v);
+    if (Array.isArray(v)) return '[' + v.map(syncStableStringify).join(',') + ']';
+    return '{' + Object.keys(v).sort().map(k => JSON.stringify(k) + ':' + syncStableStringify(v[k])).join(',') + '}';
+}
+
+function syncDayDiff(later, earlier) {
+    return Math.round((new Date(later) - new Date(earlier)) / 86400000);
+}
+
+// Fusionne deux progressions en gardant le meilleur des deux côtés : compteurs = le plus grand,
+// "maîtrisé" d'un côté = maîtrisé, listes = union. Les réglages (sens, thème, mode libre) restent
+// ceux de l'appareil courant.
+function mergeProgress(local, remote) {
+    const L = syncClone(local || {}), R = syncClone(remote || {});
+    const out = syncMergeValue(L, R, '');
+    // Streak : dépend de la date du dernier jour actif, pas un simple maximum.
+    const ls = L.stats || {}, rs = R.stats || {};
+    if (out.stats && ls.lastActiveDay && rs.lastActiveDay) {
+        const [late, early] = ls.lastActiveDay >= rs.lastActiveDay ? [ls, rs] : [rs, ls];
+        const diff = syncDayDiff(late.lastActiveDay, early.lastActiveDay);
+        let streak = late.dailyStreak || 0;
+        if (diff === 0) streak = Math.max(streak, early.dailyStreak || 0);
+        else if (diff === 1) streak = Math.max(streak, (early.dailyStreak || 0) + 1);
+        out.stats.lastActiveDay = late.lastActiveDay;
+        out.stats.dailyStreak = streak;
+    }
+    return out;
+}
+
+function syncMergeValue(a, b, path) {
+    if (a === undefined || a === null) return (b === undefined) ? a : b;
+    if (b === undefined || b === null) return a;
+    if (path === 'settings') return Object.assign({}, b, a);
+    if (path === 'freeAccess') return a;
+    if (path === 'memoryHighScore') {
+        return (b.moves < a.moves || (b.moves === a.moves && b.timeSec < a.timeSec)) ? b : a;
+    }
+    if (Array.isArray(a) && Array.isArray(b)) {
+        const seen = new Set(), res = [];
+        a.concat(b).forEach(item => {
+            const key = syncStableStringify(item);
+            if (!seen.has(key)) { seen.add(key); res.push(item); }
+        });
+        if (res.length && res.every(x => x && typeof x === 'object' && typeof x.timestamp === 'number')) {
+            res.sort((x, y) => x.timestamp - y.timestamp);
+        }
+        return res;
+    }
+    const isObj = v => typeof v === 'object' && !Array.isArray(v);
+    if (isObj(a) && isObj(b)) {
+        // Une notion : attempts/correct/lastResult vont ensemble, on garde l'entrée la plus
+        // avancée en bloc plutôt que de mélanger les champs des deux appareils.
+        if (path.indexOf('curriculum.notionProgress.') === 0) {
+            const aa = a.attempts || 0, ba = b.attempts || 0;
+            const pick = (ba > aa || (ba === aa && (b.lastAttemptAt || 0) > (a.lastAttemptAt || 0))) ? b : a;
+            return Object.assign({}, pick, { opened: !!(a.opened || b.opened) });
+        }
+        const res = {};
+        Object.keys(a).concat(Object.keys(b)).forEach(k => {
+            if (k in res) return;
+            const v = syncMergeValue(a[k], b[k], path ? path + '.' + k : k);
+            if (v !== undefined) res[k] = v;
+        });
+        return res;
+    }
+    if (typeof a === 'number' && typeof b === 'number') return Math.max(a, b);
+    if (typeof a === 'boolean' && typeof b === 'boolean') return a || b;
+    return a;
+}
+
+function syncLocalIsMeaningful() {
+    const s = state || {};
+    return (s.xp || 0) > 0 || (s.mastered || []).length > 0 ||
+        Object.keys((s.stats && s.stats.wordSeen) || {}).length > 0 ||
+        Object.keys((s.curriculum && s.curriculum.notionProgress) || {}).length > 0;
+}
+
+// Remplace la progression locale par celle du cloud puis recharge la page (les migrations de
+// `state` et tous les écrans repartent ainsi d'un état propre).
+function cloudAdoptRemote(userDoc) {
+    syncBackupLocal();
+    const remote = syncHasProgress(userDoc.progress) ? userDoc.progress : { xp: 0, mastered: [] };
+    localStorage.setItem(STATE_KEY, JSON.stringify(remote));
+    syncMetaReplace({ uid: currentUser.uid, rev: userDoc.progressRev || null, epoch: userDoc.progressEpoch || 0, dirty: false });
+    location.reload();
+}
+
+// Fusionne le cloud dans la progression en cours SANS recharger (on peut être en plein exercice).
+function cloudMergeRemoteInPlace(userDoc) {
+    syncBackupLocal();
+    state = mergeProgress(state, userDoc.progress);
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+    syncMetaReplace({ uid: currentUser.uid, rev: userDoc.progressRev || null, epoch: userDoc.progressEpoch || 0, dirty: true });
+    syncRefreshUi();
+}
+
+function syncRefreshUi() {
+    try {
+        updateStats();
+        if (document.getElementById('home-view').classList.contains('active')) renderDashboard();
+    } catch (e) { console.warn('Rafraîchissement après synchro :', e); }
+}
+
+// Compare la progression locale au document cloud et applique la bonne action.
+// `askBeforeMerging` : vrai lors d'une connexion manuelle, où la progression présente sur
+// l'appareil n'appartient pas forcément à ce compte. Retourne true si la page va se recharger.
+async function cloudReconcile(userDoc, askBeforeMerging) {
+    const meta = syncMetaGet();
+    const remoteHas = syncHasProgress(userDoc.progress);
+    const remoteRev = userDoc.progressRev || null;
+    const remoteEpoch = userDoc.progressEpoch || 0;
+
+    if (meta.uid !== currentUser.uid) {
+        // Premier rattachement de cet appareil à ce compte.
+        const localHas = syncLocalIsMeaningful();
+        if (remoteHas && !localHas) { cloudAdoptRemote(userDoc); return true; }
+        if (remoteHas && localHas) {
+            const keepLocal = !askBeforeMerging || confirm(
+                "Cet appareil contient déjà une progression (" + (state.xp || 0) + " XP).\n\n" +
+                "OK : l'ajouter à ton compte (fusion avec la progression du compte).\n" +
+                "Annuler : l'ignorer et garder uniquement la progression du compte."
+            );
+            if (!keepLocal) { cloudAdoptRemote(userDoc); return true; }
+            cloudMergeRemoteInPlace(userDoc);
+        } else {
+            syncMetaReplace({ uid: currentUser.uid, rev: remoteRev, epoch: remoteEpoch, dirty: true });
+        }
+        await cloudPush();
+        return false;
+    }
+    if (remoteEpoch !== (meta.epoch || 0)) { cloudAdoptRemote(userDoc); return true; }
+    if (remoteRev === (meta.rev || null)) {
+        if (meta.dirty) await cloudPush(); else cloudSetStatus('ok');
+        return false;
+    }
+    if (!meta.dirty) { cloudAdoptRemote(userDoc); return true; }
+    if (remoteHas) cloudMergeRemoteInPlace(userDoc);
+    await cloudPush();
+    return false;
+}
+
+// Relit le document cloud (ouverture de l'app, retour sur l'onglet) et réconcilie.
+async function cloudCheck() {
+    if (!firebaseAvailable || !currentUser) return false;
+    cloudLastCheckAt = Date.now();
+    try {
+        const snap = await db.collection('users').doc(currentUser.uid).get();
+        if (!snap.exists) return false;
+        const userDoc = snap.data();
+        if (userDoc.disabled) { await auth.signOut(); currentUser = null; currentUserDoc = null; return false; }
+        currentUserDoc = userDoc;
+        return await cloudReconcile(userDoc, false);
+    } catch (e) {
+        cloudSyncFailed(e);
+        return false;
+    }
+}
+
+function cloudSyncFailed(e) {
+    const offline = navigator.onLine === false || (e && (e.code === 'unavailable' || /offline/i.test(e.message || '')));
+    cloudSetStatus(offline ? 'offline' : 'error');
+    if (!offline) console.error('Synchro cloud échouée', e);
+    clearTimeout(cloudRetryTimer);
+    cloudRetryTimer = setTimeout(() => { if (syncMetaGet().dirty) cloudPush(); }, 30000);
+}
+
+// Envoie la progression locale. La transaction relit d'abord le document : si un autre appareil
+// a écrit entre-temps, on fusionne au lieu d'écraser ; si une remise à zéro a eu lieu ailleurs,
+// on n'envoie rien et on adopte le cloud.
+function cloudPush() {
+    if (!firebaseAvailable || !currentUser) return Promise.resolve();
+    if (cloudPushPromise) return cloudPushPromise.then(() => (syncMetaGet().dirty ? cloudPush() : undefined));
+    cloudPushPromise = cloudPushOnce().finally(() => { cloudPushPromise = null; });
+    return cloudPushPromise;
+}
+
+async function cloudPushOnce() {
+    const uid = currentUser.uid;
+    const ref = db.collection('users').doc(uid);
+    const meta = syncMetaGet();
+    const newRev = syncNewRev();
+    const counterAtStart = localChangeCounter;
+    let outcome, remoteDoc, merged;
+    clearTimeout(cloudRetryTimer);
+    cloudSetStatus('syncing');
+    try {
+        await db.runTransaction(async (tx) => {
+            outcome = 'pushed'; remoteDoc = null; merged = null;
+            const snap = await tx.get(ref);
+            if (!snap.exists) throw new Error('Document utilisateur introuvable');
+            const d = snap.data();
+            if (d.disabled) { outcome = 'disabled'; return; }
+            if ((d.progressEpoch || 0) !== (meta.epoch || 0)) { outcome = 'adopt'; remoteDoc = d; return; }
+            let toWrite = syncClone(state);
+            if ((d.progressRev || null) !== (meta.rev || null) && syncHasProgress(d.progress)) {
+                merged = mergeProgress(state, d.progress);
+                toWrite = merged;
+                outcome = 'merged';
+            }
+            tx.update(ref, {
+                progress: toWrite,
+                progressRev: newRev,
+                progressEpoch: meta.epoch || 0,
+                lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        });
+    } catch (e) {
+        cloudSyncFailed(e);
+        return;
+    }
+    if (!currentUser || currentUser.uid !== uid) return; // déconnexion pendant l'envoi
+    if (outcome === 'disabled') { await auth.signOut(); currentUser = null; currentUserDoc = null; return; }
+    if (outcome === 'adopt') { cloudAdoptRemote(remoteDoc); return; }
+    if (outcome === 'merged') {
+        syncBackupLocal();
+        // Re-fusion avec l'état courant : une réponse a pu être enregistrée pendant l'envoi.
+        state = mergeProgress(state, merged);
+        localStorage.setItem(STATE_KEY, JSON.stringify(state));
+        syncRefreshUi();
+    }
+    const stillDirty = localChangeCounter !== counterAtStart;
+    syncMetaReplace({ uid, rev: newRev, epoch: meta.epoch || 0, dirty: stillDirty });
+    cloudSetStatus('ok');
+    if (stillDirty) scheduleCloudSync();
+}
+
+// Remplace la progression du compte SANS fusion (remise à zéro, import d'une sauvegarde) :
+// progressEpoch change, donc les autres appareils adopteront cette version au lieu de la
+// fusionner avec la leur. Retourne false si le cloud n'a pas pu être joint.
+async function cloudOverwrite(newProgress) {
+    if (navigator.onLine === false) return false;
+    const rev = syncNewRev(), epoch = Date.now();
+    try {
+        const write = db.collection('users').doc(currentUser.uid).update({
+            progress: syncClone(newProgress), progressRev: rev, progressEpoch: epoch,
+            lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        // Hors ligne, l'écriture Firestore reste en attente sans jamais échouer : on borne l'attente.
+        const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('délai dépassé')), 10000));
+        await Promise.race([write, timeout]);
+    } catch (e) {
+        console.error('Remplacement de la progression cloud échoué', e);
+        return false;
+    }
+    clearTimeout(cloudSyncTimer);
+    localStorage.setItem(STATE_KEY, JSON.stringify(newProgress));
+    syncMetaReplace({ uid: currentUser.uid, rev, epoch, dirty: false });
+    return true;
+}
+
+// Appelée à chaque save() local, avec un léger anti-rebond
 function scheduleCloudSync(immediate) {
     if (!firebaseAvailable || !currentUser) return;
     clearTimeout(cloudSyncTimer);
-    const run = () => {
-        document.getElementById('acc-sync-status') && (document.getElementById('acc-sync-status').innerText = 'Synchronisation...');
-        db.collection('users').doc(currentUser.uid).set({
-            progress: state,
-            lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true }).then(() => {
-            const el = document.getElementById('acc-sync-status');
-            if (el) el.innerText = 'Synchronisé';
-        }).catch(e => console.error('Synchro cloud échouée', e));
-    };
-    if (immediate) run(); else cloudSyncTimer = setTimeout(run, 1500);
+    cloudSyncTimer = null;
+    if (immediate) cloudPush();
+    else cloudSyncTimer = setTimeout(() => { cloudSyncTimer = null; cloudPush(); }, 1500);
 }
+
+window.addEventListener('online', () => { if (currentUser && syncMetaGet().dirty) cloudPush(); });
+document.addEventListener('visibilitychange', () => {
+    if (!firebaseAvailable || !currentUser) return;
+    if (document.visibilityState === 'hidden') {
+        // On quitte l'onglet/l'app (cas typique sur mobile) : on n'attend pas l'anti-rebond.
+        if (cloudSyncTimer) scheduleCloudSync(true);
+    } else if (Date.now() - cloudLastCheckAt > 30000) {
+        cloudCheck();
+    }
+});
 
 function showCompte() {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -988,7 +1336,11 @@ async function adminToggleDisabled(uid, newVal) {
 async function adminClearProgress(uid, pseudo) {
     if (!confirm(`Effacer toute la progression de "${pseudo}" ? Cette action est irréversible.`)) return;
     try {
-        await db.collection('users').doc(uid).update({ progress: { xp: 0, mastered: [] } });
+        // progressEpoch change : les appareils de cet utilisateur adopteront la remise à zéro au
+        // lieu de renvoyer leur copie locale par-dessus.
+        await db.collection('users').doc(uid).update({
+            progress: { xp: 0, mastered: [] }, progressRev: syncNewRev(), progressEpoch: Date.now()
+        });
         alert('Progression effacée.');
     } catch (e) {
         alert('Erreur : ' + e.message);
@@ -998,7 +1350,7 @@ async function adminClearProgress(uid, pseudo) {
 // Reprend la session automatiquement au rechargement de la page (Firebase garde la session en local)
 if (firebaseAvailable) {
     auth.onAuthStateChanged(async (user) => {
-        if (!user) return;
+        if (!user || accExplicitAuthInProgress) return;
         try {
             const snap = await db.collection('users').doc(user.uid).get();
             if (!snap.exists) return;
@@ -1006,6 +1358,9 @@ if (firebaseAvailable) {
             if (userDoc.disabled) { await auth.signOut(); return; }
             currentUser = user;
             currentUserDoc = userDoc;
+            // Récupère ce qui a été fait sur un autre appareil depuis la dernière visite.
+            cloudLastCheckAt = Date.now();
+            if (await cloudReconcile(userDoc, false)) return; // la page se recharge
             if (document.getElementById('compte-view').classList.contains('active')) accShowLoggedIn();
             // Backfill : les comptes créés avant l'ajout de la couche sociale n'ont pas encore
             // publicProfiles/friendStats/discoverable — socialEnsureProfileDocs() est idempotent
@@ -5211,7 +5566,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = (e) => {
+            reader.onload = async (e) => {
                 try {
                     const imported = JSON.parse(e.target.result);
                     if (!imported || typeof imported !== 'object' || !imported.stats) {
@@ -5220,7 +5575,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     }
                     const ok = confirm("Ceci va REMPLACER entièrement ta progression actuelle par celle du fichier importé. Continuer ?");
                     if (!ok) return;
-                    localStorage.setItem('nl_platform_v1', JSON.stringify(imported));
+                    if (currentUser) {
+                        // Connecté : l'import doit aussi remplacer la progression du compte, sinon
+                        // la prochaine synchro la fusionnerait avec l'ancienne.
+                        if (!(await cloudOverwrite(imported))) {
+                            alert("Impossible de joindre le cloud : l'import n'a pas été appliqué. Vérifie ta connexion et réessaie.");
+                            return;
+                        }
+                    } else {
+                        localStorage.setItem('nl_platform_v1', JSON.stringify(imported));
+                    }
                     alert("Import réussi ! La page va se recharger.");
                     location.reload();
                 } catch (err) {
@@ -5230,12 +5594,21 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             reader.readAsText(file);
         }
 
-        function resetProgress() {
+        async function resetProgress() {
             const confirm1 = confirm("Es-tu sûr ? Toute ta progression (XP, mots maîtrisés, listes perso, stats, high scores) sera effacée définitivement.");
             if (!confirm1) return;
             const confirm2 = prompt('Pour confirmer, tape "RESET" en majuscules :');
             if (confirm2 !== 'RESET') { alert("Réinitialisation annulée."); return; }
-            localStorage.removeItem('nl_platform_v1');
+            if (currentUser) {
+                // Connecté : la remise à zéro doit aussi s'appliquer au compte, sinon la
+                // progression reviendrait du cloud à la prochaine synchro.
+                if (!(await cloudOverwrite({ xp: 0, mastered: [] }))) {
+                    alert("Impossible de joindre le cloud : la réinitialisation n'a pas été appliquée. Vérifie ta connexion et réessaie.");
+                    return;
+                }
+            } else {
+                localStorage.removeItem('nl_platform_v1');
+            }
             location.reload();
         }
 
@@ -5402,6 +5775,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function save() {
             localStorage.setItem('nl_platform_v1', JSON.stringify(state));
+            syncMarkDirty();
             updateStats();
             scheduleCloudSync();
             scheduleFriendStatsSync();
