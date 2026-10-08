@@ -1,0 +1,195 @@
+{
+  "_doc": "Fiches réflexes des mises en situation métier : pour chaque situation de job_simulations.json (même id), la marche à suivre telle qu'elle se pratique couramment en entreprise. Rédigées par Claude à partir des pratiques générales du métier, sans source officielle : chaque entreprise a ses propres procédures, à corriger selon le terrain. Format : titre, etapes (fr = quoi faire ; phrase = formulation utile dans la langue de la situation, facultative), a_eviter. Rester générique : aucun nom d'entreprise, de logiciel propriétaire ou de personne.",
+  "fiches": {
+    "guichet_chauffeur_doc_manquant": {
+      "titre": "Chauffeur sans numéro de rendez-vous",
+      "etapes": [
+        { "fr": "Accueillir et demander pour quel client et quelle marchandise il vient.", "phrase": "Goeiemiddag. Voor welke klant komt u, en wat komt u laden of lossen?" },
+        { "fr": "Demander ses documents : bon de transport (CMR) ou bon de livraison, et la plaque du camion.", "phrase": "Mag ik uw CMR en uw nummerplaat?" },
+        { "fr": "Chercher la commande dans le système autrement que par le numéro : nom du client, référence, date.", "phrase": "Ik zoek het even op in het systeem." },
+        { "fr": "Si tu la trouves : l'enregistrer et lui attribuer un quai ou une heure de passage.", "phrase": "Ik heb u gevonden. U mag naar kaai 4 rijden." },
+        { "fr": "Si tu ne la trouves pas : lui demander d'appeler son planning pour obtenir le numéro, et lui dire où attendre.", "phrase": "Ik vind uw afspraak niet. Kunt u uw planner bellen voor het afspraaknummer? U mag daar wachten." },
+        { "fr": "En cas de doute sur ce que tu peux accepter, demander à ton responsable avant de laisser entrer le camion." }
+      ],
+      "a_eviter": ["Laisser charger ou décharger sans trace dans le système.", "Renvoyer le chauffeur sans lui dire quoi faire ensuite."]
+    },
+    "guichet_chauffeur_rdv_inconnu": {
+      "titre": "Rendez-vous introuvable dans le système",
+      "etapes": [
+        { "fr": "Rester calme et reconnaître son attente.", "phrase": "Ik begrijp dat u al even wacht. Ik kijk het meteen na." },
+        { "fr": "Revérifier avec d'autres critères : nom du transporteur, client, plaque, autre date (rendez-vous pris pour la veille ou le lendemain ?).", "phrase": "Op welke naam of voor welke datum is de afspraak gemaakt?" },
+        { "fr": "Demander une preuve de réservation : e-mail de confirmation, numéro, capture d'écran.", "phrase": "Heeft u een bevestiging van de afspraak?" },
+        { "fr": "S'il y a de la place, voir avec le responsable de quai si on peut l'intercaler ; sinon proposer le premier créneau libre.", "phrase": "Ik kan u om 14 uur inplannen. Past dat voor u?" },
+        { "fr": "Lui expliquer clairement la suite : où attendre, combien de temps, qui le préviendra.", "phrase": "U mag op de parking wachten, wij roepen u op." },
+        { "fr": "Noter l'incident (erreur de réservation) pour que le planning puisse corriger à la source." }
+      ],
+      "a_eviter": ["Dire « ce n'est pas mon problème » : même si l'erreur vient d'ailleurs, il attend une solution.", "Promettre un passage immédiat sans avoir vérifié la disponibilité du quai."]
+    },
+    "guichet_collegue_urgence": {
+      "titre": "Un collègue t'appelle pour une urgence pendant que tu es occupé",
+      "etapes": [
+        { "fr": "Accuser réception tout de suite, pour qu'il sache que tu as entendu.", "phrase": "Ik heb je gehoord, één moment!" },
+        { "fr": "Demander en une phrase ce qui se passe, pour juger de l'urgence réelle.", "phrase": "Wat is er precies aan de hand?" },
+        { "fr": "S'il y a un risque pour la sécurité ou la marchandise : prévenir le chauffeur devant toi et y aller.", "phrase": "Excuseer, ik moet even dringend weg. Ik ben zo terug." },
+        { "fr": "Sinon : finir ce que tu fais et donner un délai précis.", "phrase": "Ik werk dit af en ik kom binnen twee minuten." },
+        { "fr": "Si tu ne peux vraiment pas te libérer, orienter vers quelqu'un d'autre ou prévenir le responsable.", "phrase": "Ik kan nu niet weg. Kan je het aan de ploegbaas vragen?" }
+      ],
+      "a_eviter": ["Abandonner la personne devant toi sans un mot.", "Ignorer l'appel en espérant que quelqu'un d'autre s'en occupe."]
+    },
+    "guichet_dossier_a_terminer": {
+      "titre": "Reprendre un dossier commencé par un collègue",
+      "etapes": [
+        { "fr": "Avant qu'il parte, lui demander où il en est exactement.", "phrase": "Wat heb je al gedaan, en wat moet er nog gebeuren?" },
+        { "fr": "Vérifier les points clés : chauffeur enregistré ? quai attribué ? documents contrôlés ? signature ?", "phrase": "Is de kaai al toegewezen? Zijn de documenten al gecontroleerd?" },
+        { "fr": "Lui demander s'il y avait un problème ou une remarque particulière.", "phrase": "Was er iets speciaals met dit dossier?" },
+        { "fr": "Relire le dossier dans le système avant de continuer, pour ne rien faire en double." },
+        { "fr": "Prévenir le chauffeur que c'est toi qui reprends.", "phrase": "Ik neem het over van mijn collega. Ik werk uw dossier af." },
+        { "fr": "Terminer, puis indiquer dans le dossier que tu l'as clôturé." }
+      ],
+      "a_eviter": ["Laisser partir le collègue sans avoir posé de questions.", "Recommencer depuis le début sans vérifier ce qui est déjà fait."]
+    },
+    "guichet_bruit_a_faire_repeter": {
+      "titre": "Tu n'es pas sûr d'avoir bien compris à cause du bruit",
+      "etapes": [
+        { "fr": "Le dire simplement : ce n'est pas un aveu de faiblesse, c'est du professionnalisme.", "phrase": "Sorry, er is veel lawaai. Ik heb het niet goed verstaan." },
+        { "fr": "Demander de répéter, plus lentement si besoin.", "phrase": "Kunt u dat nog eens herhalen, alstublieft? Iets trager, graag." },
+        { "fr": "Reformuler l'information critique pour la faire confirmer (numéro de quai, heure, référence).", "phrase": "Dus het gaat over kaai 3, niet kaai 4. Klopt dat?" },
+        { "fr": "Pour un chiffre ou une référence, le faire écrire ou le lire sur le document.", "phrase": "Kunt u het nummer even tonen of opschrijven?" },
+        { "fr": "Si possible, s'éloigner de la source de bruit ou fermer la porte avant de continuer." }
+      ],
+      "a_eviter": ["Faire semblant d'avoir compris : une erreur de quai coûte plus cher qu'une question.", "Répondre « ja, ja » par politesse."]
+    },
+    "ag_client_reservation": {
+      "titre": "Un client veut réserver un transport",
+      "etapes": [
+        { "fr": "Se présenter et noter qui appelle (société, nom, numéro de client s'il en a un).", "phrase": "Goeiedag, met de planning. Met wie spreek ik?" },
+        { "fr": "Recueillir les informations indispensables : quoi (type, poids, nombre de palettes), d'où, vers où, quand.", "phrase": "Wat moet er vervoerd worden, hoeveel paletten, en van waar naar waar?" },
+        { "fr": "Demander les contraintes : heure de chargement et de livraison, hayon, température, marchandise dangereuse.", "phrase": "Zijn er speciale vereisten, bijvoorbeeld een laadklep of gekoeld transport?" },
+        { "fr": "Vérifier la disponibilité avant de confirmer.", "phrase": "Ik kijk even na of we die dag nog capaciteit hebben." },
+        { "fr": "Résumer la réservation à voix haute pour la faire valider.", "phrase": "Ik vat even samen: tien paletten, dinsdag laden in Gent, woensdag leveren in Luik. Klopt dat?" },
+        { "fr": "Annoncer la suite : confirmation écrite par e-mail avec le prix et la référence.", "phrase": "U krijgt vandaag nog een bevestiging per mail." }
+      ],
+      "a_eviter": ["Confirmer une date sans avoir vérifié le planning.", "Raccrocher sans avoir le poids, les adresses complètes et un contact sur place."]
+    },
+    "ag_chauffeur_non_nl": {
+      "titre": "Un chauffeur qui ne parle pas néerlandais est perdu",
+      "etapes": [
+        { "fr": "Passer tout de suite dans une langue commune, avec des phrases très courtes.", "phrase": "No problem, we can speak English. Speak slowly, please." },
+        { "fr": "L'identifier : nom, plaque, ou numéro de tournée.", "phrase": "What is your name and your truck number?" },
+        { "fr": "Savoir où il est maintenant.", "phrase": "Where are you now? Which city or which street?" },
+        { "fr": "Donner l'adresse lentement, élément par élément, et épeler si nécessaire.", "phrase": "The address is: Industrieweg 12. I spell: I-N-D-U-S-T-R-I-E-W-E-G." },
+        { "fr": "Lui faire répéter l'adresse pour vérifier.", "phrase": "Can you repeat the address, please?" },
+        { "fr": "Doubler par écrit : envoyer l'adresse par SMS ou message, avec un lien de navigation si possible.", "phrase": "I send you the address by message now." }
+      ],
+      "a_eviter": ["Parler plus fort au lieu de parler plus simplement.", "Donner l'adresse une seule fois, vite, sans la faire répéter."]
+    },
+    "ag_devis_client": {
+      "titre": "Un client demande une offre de prix",
+      "etapes": [
+        { "fr": "Recueillir ce qu'il faut pour calculer : trajet, fréquence, volume ou poids, type de marchandise, date de début.", "phrase": "Over hoeveel paletten per week gaat het, en vanaf wanneer?" },
+        { "fr": "Demander les exigences qui font varier le prix : délais, horaires de livraison, matériel spécial.", "phrase": "Zijn er vaste levertijden of speciale vereisten?" },
+        { "fr": "Ne pas donner de prix de tête : annoncer que tu le calcules et dans quel délai.", "phrase": "Ik maak de berekening en ik stuur u de offerte ten laatste morgen." },
+        { "fr": "Vérifier à qui envoyer l'offre.", "phrase": "Naar welk e-mailadres mag ik de offerte sturen?" },
+        { "fr": "Préparer l'offre selon la grille tarifaire, la faire valider par le responsable si c'est la règle, puis l'envoyer par écrit avec une durée de validité." },
+        { "fr": "Relancer après quelques jours sans réponse.", "phrase": "Ik bel u even op in verband met de offerte van vorige week." }
+      ],
+      "a_eviter": ["Annoncer un prix au téléphone « à peu près » : le client le retiendra comme un engagement.", "Envoyer une offre sans durée de validité."]
+    },
+    "ag_mailbox_entre_appels": {
+      "titre": "Traiter la boîte mail du planning entre deux appels",
+      "etapes": [
+        { "fr": "Trier d'abord, traiter ensuite : repérer ce qui est urgent (aujourd'hui ou demain) et ce qui peut attendre." },
+        { "fr": "Pour une demande de confirmation : vérifier dans le système avant de répondre.", "phrase": "Beste, de levering van morgen is bevestigd: aankomst tussen 8 en 10 uur." },
+        { "fr": "Si tu ne peux pas répondre tout de suite, envoyer un accusé de réception avec un délai.", "phrase": "Beste, wij hebben uw bericht goed ontvangen. U krijgt vandaag voor 16 uur een antwoord." },
+        { "fr": "Répondre court et complet : date, créneau horaire, référence, personne de contact." },
+        { "fr": "Marquer le mail comme traité ou le classer, pour qu'un collègue ne le traite pas une deuxième fois." },
+        { "fr": "Transférer au bon service ce qui ne te concerne pas, en prévenant l'expéditeur.", "phrase": "Ik heb uw vraag doorgestuurd naar mijn collega van de facturatie." }
+      ],
+      "a_eviter": ["Répondre « c'est noté » sans avoir vérifié.", "Laisser un mail « dringend » sans aucune réponse, même provisoire."]
+    },
+    "usine_chauffeur_quai": {
+      "titre": "Orienter un camion de matière première vers le bon quai",
+      "etapes": [
+        { "fr": "Demander ce qu'il livre et pour quelle commande.", "phrase": "Wat komt u leveren? Heeft u een bestelnummer?" },
+        { "fr": "Contrôler les documents : bon de livraison ou CMR, et les comparer à la commande attendue.", "phrase": "Mag ik uw leveringsbon zien?" },
+        { "fr": "Vérifier dans le système qu'il est attendu, et sur quel quai va ce type de matière." },
+        { "fr": "Lui donner des indications simples et le numéro du quai.", "phrase": "U rijdt rechtdoor, dan links. U mag achteruit aan kaai 2 zetten." },
+        { "fr": "Rappeler les règles de sécurité du site : vitesse, gilet, chaussures de sécurité, moteur coupé.", "phrase": "Op het terrein is het maximum 10 kilometer per uur, en een fluohesje is verplicht." },
+        { "fr": "Prévenir l'équipe de réception qu'un camion arrive." }
+      ],
+      "a_eviter": ["Envoyer le camion « là-bas » sans numéro de quai.", "Laisser entrer une livraison qui ne correspond à aucune commande sans prévenir le responsable."]
+    },
+    "usine_erp_interruption": {
+      "titre": "Interrompu par un collègue en pleine saisie",
+      "etapes": [
+        { "fr": "Demander quelques secondes pour finir la ligne en cours : une saisie coupée au milieu, c'est une erreur plus tard.", "phrase": "Eén seconde, ik werk deze lijn even af." },
+        { "fr": "Enregistrer, ou noter où tu t'es arrêté." },
+        { "fr": "Répondre précisément à sa question, en vérifiant dans le système plutôt que de mémoire.", "phrase": "Ik kijk het na... Ja, de zending van vanochtend is ingevoerd." },
+        { "fr": "Si ce n'est pas encore fait, le dire et donner un délai.", "phrase": "Nog niet, maar dat is binnen tien minuten in orde." },
+        { "fr": "Reprendre la saisie là où tu l'avais laissée, et contrôler la dernière ligne encodée." }
+      ],
+      "a_eviter": ["Répondre « oui, c'est fait » sans vérifier.", "Lâcher la saisie au milieu d'une ligne."]
+    },
+    "usine_probleme_technique": {
+      "titre": "Signaler un problème technique au responsable",
+      "etapes": [
+        { "fr": "Constater précisément : quel appareil, quel symptôme, depuis quand.", "phrase": "Wat geeft de weegbrug precies aan? Sinds wanneer?" },
+        { "fr": "Arrêter d'utiliser l'appareil si la mesure n'est plus fiable, et le signaler à ceux qui s'en servent.", "phrase": "We gebruiken de weegbrug voorlopig niet meer." },
+        { "fr": "Prévenir le responsable avec les faits, pas des suppositions.", "phrase": "De weegbrug geeft sinds vanochtend een verkeerd gewicht aan. Dat is al de tweede keer deze week." },
+        { "fr": "Dire quel est l'impact : camions en attente, pesées à refaire.", "phrase": "Er staan twee vrachtwagens te wachten." },
+        { "fr": "Demander la consigne en attendant la réparation.", "phrase": "Wat doen we in afwachting? Gebruiken we een andere weegbrug?" },
+        { "fr": "Créer la demande d'intervention (ticket ou e-mail à la maintenance) et noter l'incident." }
+      ],
+      "a_eviter": ["Continuer à travailler avec un appareil qui donne de mauvaises valeurs.", "Signaler « ça ne marche pas » sans aucun détail."]
+    },
+    "invente_client_furieux_retard": {
+      "titre": "Client furieux : livraison en retard",
+      "etapes": [
+        { "fr": "Écouter sans interrompre, puis reformuler le problème.", "phrase": "Ik begrijp dat uw levering nog niet is aangekomen." },
+        { "fr": "S'excuser une fois, sans chercher de coupable.", "phrase": "Mijn excuses voor het ongemak." },
+        { "fr": "Demander la référence (numéro de commande ou de bon de livraison).", "phrase": "Mag ik uw ordernummer?" },
+        { "fr": "Vérifier avant de promettre : statut dans le système, appel au chauffeur ou au transporteur.", "phrase": "Ik kijk het meteen voor u na." },
+        { "fr": "Donner une heure précise, ou une heure de rappel si tu ne sais pas encore.", "phrase": "Ik bel u binnen het half uur terug." },
+        { "fr": "Proposer une solution : nouvelle heure de livraison, livraison partielle, autre transporteur.", "phrase": "Ik kan u een levering voorstellen vanmiddag voor 16 uur." },
+        { "fr": "Tracer : note dans le dossier, et information au responsable si le client est important ou si c'est la deuxième fois." }
+      ],
+      "a_eviter": ["Promettre une heure que tu n'as pas vérifiée.", "Accuser le chauffeur ou un collègue devant le client."]
+    },
+    "invente_replanification_incident": {
+      "titre": "Camion en panne : replanifier la livraison",
+      "etapes": [
+        { "fr": "D'abord la sécurité : le chauffeur est-il en sécurité, le camion est-il bien signalé ?", "phrase": "Sta je veilig? Staat de vrachtwagen op de pechstrook?" },
+        { "fr": "Localiser précisément et comprendre la panne.", "phrase": "Waar sta je precies, en wat is het probleem?" },
+        { "fr": "Lancer le dépannage selon la procédure (assistance, garage, service technique) et dire au chauffeur ce qui arrive.", "phrase": "Ik bel de pechdienst. Blijf bij de vrachtwagen, ik bel je terug." },
+        { "fr": "Faire le point sur la marchandise : quoi, pour qui, quel délai, produits sensibles (froid, urgent) ?" },
+        { "fr": "Chercher une solution : autre camion, transbordement, sous-traitant, report au lendemain." },
+        { "fr": "Prévenir le client avant qu'il n'appelle, avec une nouvelle heure réaliste.", "phrase": "Onze vrachtwagen heeft pech. Wij kunnen ten vroegste morgen om 9 uur leveren. Is dat voor u haalbaar?" },
+        { "fr": "Mettre le planning à jour et informer le responsable." }
+      ],
+      "a_eviter": ["Attendre que le client découvre le retard tout seul.", "Annoncer une nouvelle heure avant de savoir quelle solution est réellement disponible."]
+    },
+    "invente_negociation_delai": {
+      "titre": "Un transporteur demande un délai supplémentaire",
+      "etapes": [
+        { "fr": "Comprendre la raison et l'ampleur du retard.", "phrase": "Wat is de reden van de vertraging, en hoe laat kunnen jullie ten vroegste leveren?" },
+        { "fr": "Ne pas accepter tout de suite : vérifier d'abord ce que le client final peut tolérer.", "phrase": "Ik kan dat niet zomaar toezeggen. Ik moet eerst met de klant overleggen." },
+        { "fr": "Chercher un compromis : livraison partielle à l'heure, créneau plus tôt, priorité sur la prochaine tournée.", "phrase": "Kunnen jullie een deel vandaag nog leveren en de rest morgenvroeg?" },
+        { "fr": "Rappeler l'engagement pris et ses conséquences (pénalités, client mécontent), sans agressivité.", "phrase": "De afspraak was levering vandaag. Voor de klant is dat een probleem." },
+        { "fr": "Se mettre d'accord sur une nouvelle heure ferme.", "phrase": "Dan spreken we af: morgen voor 10 uur, zonder verdere vertraging." },
+        { "fr": "Confirmer l'accord par écrit et prévenir le client." }
+      ],
+      "a_eviter": ["Dire oui pour avoir la paix, puis devoir l'annoncer au client.", "Menacer avant d'avoir cherché une solution."]
+    },
+    "invente_rapport_fin_service": {
+      "titre": "Résumer ta journée au responsable",
+      "etapes": [
+        { "fr": "Commencer par l'essentiel en une phrase : tout s'est bien passé, ou non.", "phrase": "Over het algemeen is alles vlot verlopen, met één incident." },
+        { "fr": "Citer les incidents dans l'ordre d'importance : quoi, quand, ce que tu as fait.", "phrase": "Om 11 uur stond er een chauffeur zonder afspraak. Ik heb hem na controle ingepland om 14 uur." },
+        { "fr": "Dire ce qui reste ouvert et ce que le collègue suivant doit savoir.", "phrase": "Er is nog één dossier open: de levering voor kaai 3 komt morgen." },
+        { "fr": "Signaler un problème qui se répète, même petit.", "phrase": "De weegbrug gaf opnieuw een verkeerd gewicht aan." },
+        { "fr": "Demander s'il y a une consigne pour le lendemain.", "phrase": "Is er iets waar ik morgen rekening mee moet houden?" }
+      ],
+      "a_eviter": ["Tout raconter dans l'ordre chronologique sans dire ce qui compte.", "Passer sous silence un incident que tu as mal géré : il ressortira."]
+    }
+  }
+}

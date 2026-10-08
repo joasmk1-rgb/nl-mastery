@@ -7231,9 +7231,49 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         async function rpLoadJobData() {
             if (rpJobData) return rpJobData;
-            const data = await fetch('data/roleplay/job_simulations.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
-            rpJobData = { situations: data.situations || [], journees: data.journees || [] };
+            const load = url => fetch(url).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+            const [data, playbooks] = await Promise.all([
+                load('data/roleplay/job_simulations.json'),
+                load('data/roleplay/job_playbooks.json')
+            ]);
+            rpJobData = { situations: data.situations || [], journees: data.journees || [], fiches: playbooks.fiches || {} };
             return rpJobData;
+        }
+
+        // Fiche réflexe d'une situation (data/roleplay/job_playbooks.json, même id) : la marche à
+        // suivre courante en entreprise, avec les phrases utiles. Affichée repliée pendant la
+        // situation (pour essayer seul d'abord), dans le bilan, et sur la page "Fiches réflexes".
+        function rpPlaybookBodyHtml(id) {
+            const f = rpJobData && rpJobData.fiches[id];
+            if (!f) return '';
+            // Pas de lecture à voix haute pour une situation en anglais : la voix est néerlandaise.
+            const sit = rpJobData.situations.find(x => x.id === id);
+            const speak = p => (sit && rpSitLang(sit) === 'en') ? '' : speakBtnHtml(p);
+            return `<ol class="rp-playbook-steps">${(f.etapes || []).map(e =>
+                    `<li>${rpEscapeHtml(e.fr || '')}${e.phrase ? `<div class="rp-playbook-phrase">${rpEscapeHtml(e.phrase)} ${speak(e.phrase)}</div>` : ''}</li>`).join('')}</ol>` +
+                ((f.a_eviter || []).length ? `<div class="rp-playbook-avoid"><b>À éviter :</b> ${f.a_eviter.map(rpEscapeHtml).join(' ')}</div>` : '');
+        }
+
+        function rpPlaybookDetailsHtml(id, summary) {
+            const body = rpPlaybookBodyHtml(id);
+            return body ? `<details class="rp-playbook"><summary>${summary}</summary>${body}</details>` : '';
+        }
+
+        function rpShowPlaybooks() {
+            const bank = rpJobData.situations.filter(s => s.metier === rpJobMetier && rpJobData.fiches[s.id]);
+            const canaux = [...new Set(bank.map(s => s.canal))];
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <button class="back-btn" onclick="rpShowJobHome()">← Retour aux situations</button>
+                <div class="rp-group-title">📋 Fiches réflexes — ${rpEscapeHtml(RP_JOB_METIERS[rpJobMetier] || rpJobMetier)}</div>
+                <p class="rp-real-hint">La marche à suivre la plus courante pour chaque situation, avec les phrases utiles. Chaque entreprise a ses propres procédures : adapte-les à ce que tu vois sur le terrain.</p>
+                ${canaux.map(c =>
+                    `<div class="rp-job-canal">${rpEscapeHtml((RP_JOB_CANAUX[c] || { label: c }).label)}</div>` +
+                    bank.filter(s => s.canal === c).map(s =>
+                        `<details class="rp-playbook rp-playbook-card"><summary>${rpEscapeHtml(rpJobData.fiches[s.id].titre || rpSitTitle(s))}</summary>
+                            ${rpPlaybookBodyHtml(s.id)}
+                            <button class="btn btn-gray" style="margin-top:10px;" onclick="rpStartSituation('${s.id}')">▶️ S'entraîner sur cette situation</button>
+                        </details>`).join('')
+                ).join('')}`;
         }
 
         const rpSitLang = s => /^en$/i.test(s.niveau || '') ? 'en' : 'nl';
@@ -7323,7 +7363,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 ${journees.map(x => `<button class="rp-scenario-btn" onclick="rpStartDay(${x.i})">${rpEscapeHtml(x.j.label)}</button>`).join('')}
                 <button class="rp-scenario-btn" onclick="rpStartDay(-1)">🎲 Journée tirée au sort · ${Math.min(size, bank.length)} situations</button>
                 <div class="rp-group-title">🎯 Situation isolée</div>
-                ${isolated}`;
+                ${isolated}
+                ${Object.keys(data.fiches).length ? `
+                <div class="rp-group-title">📋 Fiches réflexes</div>
+                <p class="rp-real-hint">Que faire dans chaque situation : les étapes habituelles en entreprise et les phrases pour les dérouler.</p>
+                <button class="rp-scenario-btn" onclick="rpShowPlaybooks()">📋 Voir toutes les fiches réflexes</button>` : ''}`;
         }
 
         function rpJobSetMetier(m) { rpJobMetier = m; rpShowJobHome(); }
@@ -7353,6 +7397,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="rp-iv-label" style="margin-top:0;">${day ? `${rpEscapeHtml(day.label)} · Situation ${day.index + 1}/${day.situations.length} · ` : ''}${rpEscapeHtml(rpSitCanal(s).label)}</div>
                     <div>${rpEscapeHtml(s.contexte)}</div>
                     ${(s.vocabulaire_cible || []).length ? `<details><summary>Vocabulaire utile</summary>${s.vocabulaire_cible.map(rpEscapeHtml).join(' · ')}</details>` : ''}
+                    ${rpPlaybookDetailsHtml(s.id, '📋 Marche à suivre (essaie d\'abord sans)')}
                 </div>`;
             const nav = document.getElementById('rp-day-nav');
             if (day) {
@@ -7468,7 +7513,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="rp-iv-label">Situations traversées</div>
                     ${day.log.map((e, i) => {
                         const r = arr(d.situations).find(x => (x.numero | 0) === i + 1);
-                        return `<div class="rp-debrief-item"><b>${i + 1}. ${rpEscapeHtml(rpSitCanal(e.situation).label)}</b> — ${rpEscapeHtml(rpSitTitle(e.situation))}${r && r.resume ? `<div class="rp-debrief-sub">${rpEscapeHtml(r.resume)}</div>` : ''}</div>`;
+                        return `<div class="rp-debrief-item"><b>${i + 1}. ${rpEscapeHtml(rpSitCanal(e.situation).label)}</b> — ${rpEscapeHtml(rpSitTitle(e.situation))}${r && r.resume ? `<div class="rp-debrief-sub">${rpEscapeHtml(r.resume)}</div>` : ''}${rpPlaybookDetailsHtml(e.situation.id, '📋 La marche à suivre recommandée')}</div>`;
                     }).join('')}
                     <div class="rp-iv-label">Vocabulaire à retenir</div>
                     ${arr(d.vocabulaire).length ? arr(d.vocabulaire).map(v => `<div class="conj-tense-row"><span class="conj-form">${rpEscapeHtml(v.nl || '')}</span> ${speakBtnHtml(v.nl || '')}<span class="rp-debrief-sub" style="flex:1;">${rpEscapeHtml(v.fr || '')}</span></div>`).join('') : '<div class="rp-debrief-sub">Rien de particulier.</div>'}
