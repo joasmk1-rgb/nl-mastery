@@ -38,9 +38,44 @@
       "label": "2e tour — Plant Manager (admin/logistique usine)",
       "poste": "Administrative Support ou Logistics (réception matières premières)",
       "contexte": "Deuxième tour d'entretien avec le plant manager, après un premier entretien avec le RH et son assistant. Deux postes ouverts à départager.",
-      "niveau": "EN",
-      "welcome": "I am the plant manager here. I believe you've already met with the HR manager and his assistant. So you passed their initial interview and now it's the next step.",
+      "niveau": "NL",
+      "welcome": "Ik ben hier de plant manager. Ik geloof dat je al kennisgemaakt hebt met de HR-manager en zijn assistent. Je bent dus door hun eerste gesprek geraakt en dit is nu de volgende stap.",
       "questions": {
+        "accroche": [
+          "Hebben de HR-manager en zijn assistent je verteld over de functies die we openstaan hebben?"
+        ],
+        "verif_cv": [
+          "Je hebt al behoorlijk wat ervaring in logistiek, en je hebt net je master afgerond, klopt dat?"
+        ],
+        "clarification_poste": [
+          "We hebben twee functies open. De ene is meer administratief, de andere is meer gericht op logistiek. Gaat je interesse vooral uit naar logistiek?"
+        ],
+        "technique": [
+          "Ben je vertrouwd met de basis van Excel, PowerPoint en Power BI?",
+          "Heb je al ervaring met SAP of een ander ERP-systeem?"
+        ],
+        "motivation": [
+          "Wat heeft je in al je studies het meest gefascineerd?",
+          "Buiten het werk, los van alles wat je in het leven moet doen — wat drijft je? Waarvoor sta je 's ochtends op?"
+        ],
+        "vision_carriere": [
+          "Waar zie je jezelf over 5 of 10 jaar? Heb je een doel?"
+        ],
+        "objections": [
+          "Ik zal eerlijk zijn — als ik een masterdiploma zie, denk ik dat deze functie een stap terug is. Hoe kijk jij daarnaar?",
+          "Vind je het oké om op dat niveau te beginnen — in het begin vooral veel data-invoer?"
+        ],
+        "dispo": [
+          "Wanneer zou je kunnen beginnen? Werk je momenteel ergens?",
+          "Heb je nog andere sollicitatiegesprekken gepland?"
+        ],
+        "cloture": [
+          "Heb je zelf nog vragen? Over de site, de fabriek, wat dan ook?"
+        ]
+      },
+      "_source_en": {
+        "_doc": "Version d'origine en anglais (l'entretien réel s'est déroulé en anglais). Non utilisée par l'app : conservée pour la future version anglaise. Les questions néerlandaises ci-dessus en sont la traduction.",
+        "welcome": "I am the plant manager here. I believe you've already met with the HR manager and his assistant. So you passed their initial interview and now it's the next step.",
         "accroche": [
           "Did the HR manager and his assistant tell you about the positions that we have open?"
         ],
