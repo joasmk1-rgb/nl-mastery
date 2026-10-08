@@ -472,3 +472,13 @@
         /* Filtres de la liste de mots : passent à la ligne au lieu de sortir de l'écran (les 4
            menus déroulants côte à côte faisaient ~900px de large, à toutes les tailles). */
         .wl-filters select { flex: 1 1 140px; min-width: 0; max-width: 100%; }
+
+        /* Accueil épuré : en-tête compact (bonjour + niveau + progression), raccourcis discrets
+           sous l'action principale, et rappel de compte en simple ligne de bas de page. */
+        .dash-header-card { padding: 14px 18px; }
+        .dash-header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+        .dash-links-row { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; max-width: 520px; margin-bottom: 14px; }
+        .dash-link-chip { flex: 1 1 auto; text-align: left; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 10px 14px; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text); cursor: pointer; }
+        .dash-link-chip span { color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
+        .dash-link-chip:active { border-color: var(--primary); }
+        .dash-footnote { width: 100%; max-width: 520px; font-size: 0.76rem; color: var(--text-secondary); text-align: center; cursor: pointer; padding: 6px 0 12px; }

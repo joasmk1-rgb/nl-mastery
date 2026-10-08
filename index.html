@@ -140,23 +140,7 @@
         <div id="notifications-list" class="hub-grid single"></div>
     </div>
 
-    <div id="jouer-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
-        <h2>🎮 Jouer</h2>
-        <p class="section-subtitle" style="margin-top:0;">Entraîne-toi en t'amusant, avec le même vocabulaire que le reste de l'appli.</p>
-        <div class="hub-grid">
-            <div class="hub-card" onclick="startMemory()"><span class="hub-card-icon">🧩</span><div class="hub-card-title">Memory</div><div class="hub-card-desc">Associe les mots et leur traduction.</div></div>
-            <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Teste ta vitesse sur un temps limité.</div></div>
-            <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
-            <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
-            <div class="hub-card" onclick="showConjugaison()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison</div><div class="hub-card-desc">Fiches des verbes les plus courants, temps par temps, et entraînement.</div></div>
-            <div class="hub-card" onclick="startSeparableTrainingSession()"><span class="hub-card-icon">✂️</span><div class="hub-card-title">Particules séparables</div><div class="hub-card-desc">aanbieden, opstaan... et leurs 3 comportements différents.</div></div>
-            <div class="hub-card" style="opacity:0.55; cursor:default;" onclick="alert('Bientôt disponible : défie tes amis en duel, vocabulaire ou rapidité !')"><span class="hub-card-icon">👥</span><div class="hub-card-title">Défis entre amis</div><div class="hub-card-desc">Bientôt disponible.</div></div>
-        </div>
-    </div>
-
     <div id="pratiquer-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>🗣️ Pratiquer</h2>
         <p class="section-subtitle" style="margin-top:0;">Mets en pratique ce que tu apprends : à l'oral avec Gemini, ou à l'écrit.</p>
 
@@ -181,9 +165,16 @@
     </div>
 
     <div id="reviser-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>🔁 Réviser</h2>
+        <p class="section-subtitle" style="margin-top:0;">Revois ce que tu as raté, ou entretiens ton vocabulaire en jouant.</p>
         <div id="reviser-content" class="content-col"></div>
+        <div class="section-title">🎮 Jeux de vocabulaire</div>
+        <div class="hub-grid">
+            <div class="hub-card" onclick="startMemory()"><span class="hub-card-icon">🧩</span><div class="hub-card-title">Memory</div><div class="hub-card-desc">Associe les mots et leur traduction.</div></div>
+            <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Teste ta vitesse sur un temps limité.</div></div>
+            <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
+            <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
+        </div>
     </div>
 
     <div id="study-view" class="view">
@@ -200,14 +191,14 @@
     </div>
 
     <div id="memory-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="memory-stats" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="memory-grid" id="m-grid"></div>
         <div id="memory-result" style="margin-top:20px; width:100%; max-width:400px;"></div>
     </div>
 
     <div id="ta-select-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <h2>Choisis une durée</h2>
         <div class="grid">
             <div class="card-menu" style="color:var(--wrong)" onclick="startTimeAttack(30)">30 sec</div>
@@ -218,7 +209,7 @@
     </div>
 
     <div id="timeattack-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="ta-timer">30</div>
         <div id="ta-score">Score : 0</div>
         <div class="study-box">
@@ -230,8 +221,7 @@
     </div>
 
     <div id="profil-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
-        <h2>👤 Profil & Stats</h2>
+        <h2>👤 Profil</h2>
         <div id="profil-content" class="content-col"></div>
     </div>
 
@@ -266,13 +256,13 @@
     </div>
 
     <div id="swipe-select-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <h2>👉 Choisis une catégorie</h2>
         <div class="grid" id="swipe-category-grid"></div>
     </div>
 
     <div id="swipe-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="swipe-progress" style="font-weight:bold; margin-bottom:15px;"></div>
         <div style="position:relative; width:90%; max-width:380px; height:220px;">
             <div id="swipe-card" class="study-box" style="position:absolute; inset:0; width:100%; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:grab; touch-action:none; user-select:none;">
@@ -306,7 +296,7 @@
     </div>
 
     <div id="anagram-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="anagram-score" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="study-box">
             <small>Indice</small>
@@ -458,13 +448,12 @@
     </div>
 
     <div id="apprendre-view" class="view">
-        <button class="back-btn" onclick="showHome()">← Retour</button>
         <h2>📚 Apprendre</h2>
         <div class="quick-access-row" style="margin-bottom:var(--space-3);">
             <div class="quick-access-card" onclick="apprendreNouvelleNotion()"><div class="qa-icon">🆕</div><div class="qa-label">Nouvelle notion</div></div>
-            <div class="quick-access-card" onclick="showWordList('apprendre')"><div class="qa-icon">📖</div><div class="qa-label">Vocabulaire</div></div>
+            <div class="quick-access-card" onclick="showWordList('apprendre')"><div class="qa-icon">📖</div><div class="qa-label">Mots</div></div>
             <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Grammaire & structures</div></div>
-            <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
+            <div class="quick-access-card" onclick="showConjugaison()"><div class="qa-icon">🔤</div><div class="qa-label">Conjugaison</div></div>
         </div>
         <div class="section-title" style="margin-top:0;">📅 Parcours par niveau</div>
         <div class="level-tab-row" id="level-tab-row"></div>
@@ -485,10 +474,11 @@
     </div>
 
     <div id="conjugaison-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showApprendre()">← Retour</button>
         <h2>🔤 Conjugaison</h2>
-        <div class="hub-grid single">
+        <div class="hub-grid">
             <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">Tu choisis les verbes (les plus courants d'abord) et les temps. Les formes ratées reviennent en priorité.</div></div>
+            <div class="hub-card" onclick="startSeparableTrainingSession()"><span class="hub-card-icon">✂️</span><div class="hub-card-title">Particules séparables</div><div class="hub-card-desc">aanbieden, opstaan... et leurs 3 comportements différents.</div></div>
         </div>
         <div class="conj-search-row content-col">
             <input type="text" id="conj-search" placeholder="Cherche un verbe (NL ou FR)..." oninput="renderConjugaisonList()">
@@ -508,7 +498,7 @@
     </div>
 
     <div id="separable-training-view" class="view">
-        <button class="back-btn" onclick="showJouer()">← Retour</button>
+        <button class="back-btn" onclick="showConjugaison()">← Retour</button>
         <h2>✂️ Particules séparables</h2>
         <div id="separable-training-content" class="content-col"></div>
     </div>
@@ -576,13 +566,13 @@
 
     <!-- Navigation principale : placée en dernier enfant du body (flex column) pour qu'elle reste
          naturellement "collée" en bas de l'écran, sans position:fixed ni superposition possible
-         avec le contenu. 5 onglets seulement (Accueil, Apprendre, Jouer, Pratiquer, Profil) ; les
-         fonctionnalités secondaires (Révision, Mots, Conjugaison, Infos, Compte) restent toutes
-         accessibles, via l'accueil et le profil. -->
+         avec le contenu. 5 onglets, un rôle chacun : Accueil (la prochaine chose à faire), Apprendre
+         (parcours, mots, grammaire, conjugaison), Réviser (ce qui a été raté + jeux), Pratiquer
+         (jeu de rôle, écrit), Profil (statistiques, compte, réglages). -->
     <nav class="bottom-nav">
         <button onclick="showHome()" id="nav-home"><span class="icon">🏠</span>Accueil</button>
         <button onclick="showApprendre()" id="nav-apprendre"><span class="icon">📚</span>Apprendre</button>
-        <button onclick="showJouer()" id="nav-jouer"><span class="icon">🎮</span>Jouer</button>
+        <button onclick="showReviser()" id="nav-reviser"><span class="icon">🔁</span>Réviser</button>
         <button onclick="showPratiquer()" id="nav-pratiquer"><span class="icon">🗣️</span>Pratiquer</button>
         <button onclick="showProfil()" id="nav-profil"><span class="icon">👤</span>Profil</button>
     </nav>

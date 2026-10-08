@@ -2174,13 +2174,12 @@ if (firebaseAvailable) {
             showApprendre();
         }
 
-        // ===== Vue "Jouer" (hub d'accès aux jeux existants — aucune nouvelle logique de jeu) =====
+        // L'ancien onglet "Jouer" n'existe plus : ses jeux sont dans l'onglet Réviser, la
+        // conjugaison et les particules séparables dans Apprendre. showJouer() est conservé
+        // comme alias pour les appels existants.
         function showJouer() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('jouer-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            showReviser();
         }
-
         // Ouvre la leçon d'une notion puis le panneau de production déjà existant (même schéma que
         // la branche 'a_pratiquer' de startRecommendedActivity) : aucun nouveau système Gemini.
         function goToProduction(notionId) {
@@ -2248,7 +2247,7 @@ if (firebaseAvailable) {
         function showReviser() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('reviser-view').classList.add('active');
-            setActiveNav('nav-home');
+            setActiveNav('nav-reviser');
             renderReviser();
         }
 
@@ -2784,14 +2783,11 @@ if (firebaseAvailable) {
                     <div class="section-title" style="margin-top:var(--space-4);">Comment utiliser l'appli</div>
                     <div class="intent-grid" style="margin-top:var(--space-2);">
                         <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📚</div><div class="qa-label">Apprendre</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🧠</div><div class="qa-label">Comprendre</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🔄</div><div class="qa-label">Réviser</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">✍️</div><div class="qa-label">S'entraîner</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
                         <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎯</div><div class="qa-label">Laisser NL Mastery choisir</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">👤</div><div class="qa-label">Profil</div></div>
                     </div>
-                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📚 Découvrir · 🧠 Comprendre le mécanisme · 🔄 Revoir ce qui risque d'être oublié · ✍️ Vérifier par l'exercice · 🗣️ Produire en situation réelle · 🎮 S'amuser · 🎯 NL Mastery choisit pour toi.</p>
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📚 Les leçons, les mots et la conjugaison · 🔁 Revoir ce que tu as raté, et les jeux · 🗣️ Parler et écrire en situation réelle · 👤 Ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
                     <button class="btn btn-green" style="margin-top:var(--space-5);" onclick="onboardingGoTo('placement')">🚀 Évaluer mon niveau</button>
                     <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('start')">Commencer directement</button>
                     <p style="font-size:0.78rem; margin-top:var(--space-4);">${currentUser ? '' : `<a href="#" onclick="onboardingGoTo('compte'); return false;">Créer un compte pour synchroniser ta progression (optionnel)</a>`}</p>
@@ -2865,11 +2861,6 @@ if (firebaseAvailable) {
             const greetStateLine = streak > 1
                 ? `🔥 ${streak} jours de suite — continue comme ça !`
                 : "Prêt(e) à continuer ton apprentissage du néerlandais ?";
-            const greetingHtml = `
-                <div class="dash-card dash-greeting" style="padding:14px 18px;">
-                    <div style="font-size:1.05rem; font-weight:700;">${greetName ? `Bonjour ${greetName} 👋` : 'Bonjour 👋'}</div>
-                    <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:2px;">${greetStateLine}</div>
-                </div>`;
 
             const isBrandNew = isBrandNewUser();
             const placementNudgeHtml = isBrandNew ? `
@@ -2883,12 +2874,10 @@ if (firebaseAvailable) {
             // ===== 0bis. Compte non créé : visible dès l'accueil (pas seulement enfoui dans Profil)
             // — sans ça, un nouvel utilisateur n'a aucune raison de deviner que "Compte" (menu Profil)
             // sert à sauvegarder sa progression et à pouvoir ajouter des amis ensuite.
+            // Une ligne discrète en bas d'écran plutôt qu'une carte entière au-dessus de l'action
+            // principale : l'information reste visible sans concurrencer "Commencer".
             const accountNudgeHtml = !currentUser ? `
-                <div class="dash-card dash-secondary-card" style="cursor:pointer;" onclick="showCompte()">
-                    <div class="dash-secondary-label">🔓 Progression sauvegardée sur cet appareil seulement</div>
-                    <div class="dash-secondary-title">Crée un compte gratuit</div>
-                    <div class="dash-secondary-sub">Pour ne rien perdre si tu changes d'appareil, et pouvoir ajouter des amis ensuite.</div>
-                </div>` : '';
+                <div class="dash-footnote" onclick="showCompte()">🔓 Progression enregistrée sur cet appareil seulement — <u>créer un compte gratuit</u></div>` : '';
 
             // ===== 1. Bloc dominant : "🎯 Pour toi maintenant" (mode "professeur") =====
             let recoHtml = '';
@@ -2923,43 +2912,31 @@ if (firebaseAvailable) {
                 : 0;
             const cecrInfo = curriculumLoaded ? getCurriculumLevel() : { level: 'A1' };
             const cecrPct = totalReadyCount ? Math.round((masteredCount / totalReadyCount) * 100) : 0;
-            const progressionHtml = `
-                <div class="dash-card">
-                    <div class="section-title" style="margin-bottom:6px;">Ta progression</div>
-                    <div class="dash-level-row">
+            // En-tête unique : bonjour, série de jours, niveau et progression sur une seule carte
+            // compacte (avant : une carte "Bonjour" en haut et une carte "Ta progression" en bas).
+            const headerHtml = `
+                <div class="dash-card dash-header-card">
+                    <div class="dash-header-top">
+                        <div>
+                            <div style="font-size:1.05rem; font-weight:700;">${greetName ? `Bonjour ${greetName} 👋` : 'Bonjour 👋'}</div>
+                            <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">${greetStateLine}</div>
+                        </div>
                         <span class="dash-level-badge">${cecrInfo.level}</span>
-                        <span style="font-size:0.75rem; color:var(--text-secondary);">niveau CECR (curriculum)</span>
                     </div>
                     <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${cecrPct}%"></div></div>
-                    ${curriculumLoaded ? `<div style="font-size:0.78rem; color:var(--text-secondary); margin-top:8px;">📚 ${masteredCount}/${totalReadyCount} notions maîtrisées · 🔁 ${reviewCount} mot${reviewCount > 1 ? 's' : ''} à réviser</div>` : ''}
-                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:4px;">🧠 Vocabulaire couvert : ${vp.pct}% <span style="opacity:0.7;">(détail dans Profil)</span></div>
+                    ${curriculumLoaded ? `<div style="font-size:0.76rem; color:var(--text-secondary); margin-top:6px;">${masteredCount}/${totalReadyCount} notions maîtrisées · vocabulaire couvert ${vp.pct}%</div>` : ''}
                 </div>`;
 
-            // ===== 3. Continuer (parcours structuré, distinct de la recommandation adaptative) =====
+            // ===== 3. Raccourcis secondaires, discrets, sous l'action principale =====
+            // Remplace la grille "Qu'est-ce que tu veux faire maintenant ?" (8 boutons qui
+            // doublaient la barre d'onglets du bas) : il ne reste que ce qui dépend de TA
+            // situation — reprendre ton module en cours, et réviser s'il y a quelque chose à revoir.
             const curMod = getCurrentModuleProgress();
-            const continuerHtml = curMod ? `
-                <div class="dash-card dash-secondary-card" onclick="continueCurrentModule('${curMod.module.level}')">
-                    <div class="dash-secondary-label">▶️ Continuer mon parcours</div>
-                    <div class="dash-secondary-title">${curMod.module.level} · ${curMod.module.label}</div>
-                    <div class="dash-secondary-sub">${curMod.workedCount}/${curMod.total} notions travaillées</div>
+            const linksHtml = (curMod || reviewCount > 0) ? `
+                <div class="dash-links-row">
+                    ${curMod ? `<button type="button" class="dash-link-chip" onclick="continueCurrentModule('${curMod.module.level}')">▶️ Reprendre ${curMod.module.level} · ${curMod.module.label} <span>${curMod.workedCount}/${curMod.total}</span></button>` : ''}
+                    ${reviewCount > 0 ? `<button type="button" class="dash-link-chip" onclick="showReviser()">🔁 ${reviewCount} mot${reviewCount > 1 ? 's' : ''} à réviser</button>` : ''}
                 </div>` : '';
-
-            // ===== 4. "Qu'est-ce que tu veux faire maintenant ?" — portes d'entrée UX (libre) =====
-            // Ces 7 cartes ne sont QUE de la navigation : chacune réutilise une vue/fonction déjà
-            // existante (aucun nouveau moteur pédagogique). "Je ne sais pas quoi faire" relance
-            // exactement la même recommandation que le bloc "🎯 Pour toi maintenant" ci-dessus.
-            const quickAccessHtml = `
-                <div class="section-title" style="margin:var(--space-2) 0 var(--space-2);">Qu'est-ce que tu veux faire maintenant ?</div>
-                <div class="intent-grid">
-                    <div class="quick-access-card" onclick="showApprendre()"><div class="qa-icon">📚</div><div class="qa-label">Apprendre du nouveau</div></div>
-                    <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Comprendre</div></div>
-                    <div class="quick-access-card" onclick="showReviser()"><div class="qa-icon">🔄</div><div class="qa-label">Réviser</div></div>
-                    <div class="quick-access-card" onclick="enterModeEntrainer()"><div class="qa-icon">✍️</div><div class="qa-label">M'entraîner</div></div>
-                    <div class="quick-access-card" onclick="showPratiquer()"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
-                    <div class="quick-access-card" onclick="showJouer()"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
-                    <div class="quick-access-card" onclick="showSocial()"><div class="qa-icon">👥</div><div class="qa-label">Amis</div></div>
-                    <div class="quick-access-card" onclick="enterModeChoisir()"><div class="qa-icon">🎯</div><div class="qa-label">Je ne sais pas quoi faire</div></div>
-                </div>`;
 
             // ===== 5. À revoir (optionnel, court) =====
             const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 3) : [];
@@ -2985,22 +2962,19 @@ if (firebaseAvailable) {
             }
             if (currentUser && socialDashboardCache === null) loadSocialDashboardSnippet();
 
-            // Ordre voulu (cahier des charges) : 1. Bonjour/état actuel, 2. "Pour toi maintenant",
-            // 3. Continuer, 4. "Qu'est-ce que tu veux faire ?", 5. progression globale,
-            // 6. points faibles, 7. vocabulaire (déjà inclus dans la carte progression), 8. social (discret).
+            // Accueil volontairement court : où tu en es, UNE action évidente, puis le reste en
+            // retrait. La navigation générale est assurée par la barre d'onglets, pas par l'accueil.
             block.innerHTML = `
-                ${greetingHtml}
+                ${headerHtml}
                 ${placementNudgeHtml}
-                ${accountNudgeHtml}
                 ${recoHtml}
-                ${continuerHtml}
-                ${quickAccessHtml}
-                ${progressionHtml}
+                ${linksHtml}
                 ${weakHtml ? `<div class="dash-card">
                     <h3 style="margin:0 0 10px; font-size:0.9rem;">À revoir</h3>
                     ${weakHtml}
                 </div>` : ''}
-                ${socialHtml}`;
+                ${socialHtml}
+                ${accountNudgeHtml}`;
         }
 
         // ===== Vue "Apprendre" (parcours par niveau/module/notion) =====
@@ -3537,7 +3511,7 @@ if (firebaseAvailable) {
         function showConjugaison() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conjugaison-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-apprendre');
             document.getElementById('conj-detail').innerHTML = '';
             if (!conjugationLoaded) {
                 document.getElementById('conj-list').innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -4042,7 +4016,7 @@ if (firebaseAvailable) {
         function startConjTrainingSession() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conj-training-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-apprendre');
             const content = document.getElementById('conj-training-content');
             if (!conjugationLoaded) {
                 content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -4176,7 +4150,7 @@ if (firebaseAvailable) {
                     ${missedHtml}
                     <button class="btn btn-green" style="margin-top:14px;" onclick="conjTrainingLaunch()">🔁 Nouvelle session</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="startConjTrainingSession()">⚙️ Changer les réglages</button>
-                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showJouer()">Retour</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showConjugaison()">Retour</button>
                 </div>`;
         }
 
@@ -4252,7 +4226,7 @@ if (firebaseAvailable) {
         function startSeparableTrainingSession() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('separable-training-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-apprendre');
             const content = document.getElementById('separable-training-content');
             if (!conjugationLoaded) {
                 content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -4314,7 +4288,7 @@ if (firebaseAvailable) {
 
         function separableTrainingStop() {
             separableTrainingState = null;
-            showJouer();
+            showConjugaison();
         }
 
         function renderSeparableTrainingSummary() {
@@ -4338,7 +4312,7 @@ if (firebaseAvailable) {
                     <div class="conj-verb-title">Résultat : ${st.score}/${st.cells.length}</div>
                     ${missedHtml}
                     <button class="btn btn-green" style="margin-top:14px;" onclick="startSeparableTrainingSession()">🔁 Nouvelle session</button>
-                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showJouer()">Retour</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showConjugaison()">Retour</button>
                 </div>`;
         }
 
@@ -4761,7 +4735,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showSwipeSelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('swipe-select-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-reviser');
             const cats = [...MAIN_CATEGORIES.map(c => c.file), ...new Set(fullDb.map(i => i.file).filter(f => !MAIN_CATEGORIES.some(c => c.file === f)))];
             const grid = document.getElementById('swipe-category-grid');
             grid.innerHTML = cats.map(cat => {
@@ -5323,7 +5297,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (fullDb.length < 6) { alert("Pas assez de mots chargés pour jouer au Memory."); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('memory-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-reviser');
             document.getElementById('memory-result').innerHTML = '';
             bumpMode('memory');
 
@@ -5409,7 +5383,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showTASelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('ta-select-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-reviser');
         }
 
         function startTimeAttack(durationSec) {
@@ -5519,7 +5493,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             anagramScore = 0;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('anagram-view').classList.add('active');
-            setActiveNav('nav-jouer');
+            setActiveNav('nav-reviser');
             document.getElementById('anagram-score').innerText = 'Score : 0';
             nextAnagram();
         }
@@ -5745,15 +5719,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 </div>
                 <div class="profil-menu">
                     <div class="profil-menu-row" onclick="showPlacementIntro()"><span class="pm-icon">🚀</span><span>Évaluer mon niveau</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" onclick="showApprendre()"><span class="pm-icon">📚</span><span>Mon parcours</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" style="cursor:pointer;" onclick="toggleFreeAccess(${!state.freeAccess})">
                         <span class="pm-icon">${state.freeAccess ? '🔓' : '🔒'}</span>
                         <span>Mode libre (accès à toutes les leçons)</span>
                         <span class="pm-chevron">${state.freeAccess ? 'Activé' : 'Désactivé'}</span>
                     </div>
                     ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
-                    <div class="profil-menu-row" onclick="showReviser()"><span class="pm-icon">🔁</span><span>Révisions</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" onclick="showWordList('profil')"><span class="pm-icon">📋</span><span>Mots</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showTestSelect()"><span class="pm-icon">🎯</span><span>Test de vocabulaire</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
