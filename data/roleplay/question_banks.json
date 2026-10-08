@@ -1,5 +1,5 @@
 {
-  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel ; NL ou EN = langue de l'entretien), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Utiliser 'bedrijf X' / 'entreprise X', des fonctions ('de HR-manager') ou des blancs entre crochets ([plaats], [bedrijf]) que le recruteur IA remplit lui-même.",
+  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel ; NL ou EN = langue de l'entretien), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Utiliser des noms d'entreprise inventés (Logistiko, Transvio, Delmaro...), des fonctions ('de HR-manager') ou des blancs entre crochets ([plaats], [bedrijf]) que le recruteur IA remplit lui-même.",
   "scenarios": [
     {
       "id": "agence_transport_planning",
@@ -111,7 +111,7 @@
     },
     {
       "id": "stockage_frigorifique_logistiek_bediende",
-      "label": "Entreprise X — logistiek bediende (stockage frigorifique)",
+      "label": "Logistiko — logistiek bediende (stockage frigorifique)",
       "poste": "Logistiek bediende (onthaal chauffeurs, planning quais)",
       "contexte": "Entretien entièrement en néerlandais dans une entreprise de stockage frigorifique de denrées alimentaires (pas de transport propre, uniquement de l'entreposage pour des clients).",
       "niveau": "NL",

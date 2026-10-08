@@ -7491,8 +7491,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         const RP_JOB_INTENSITY = { administratif: 1, probleme_document: 2, proposition_solution: 2, negociation: 3, urgence: 3, reclamation: 3 };
         const RP_JOB_DURATIONS = { courte: 6, longue: 10 };
         // Blancs entre crochets dans les amorces ([klant]...) : l'amorce est affichée et lue telle
-        // quelle, on les remplace donc par une valeur neutre.
-        const RP_JOB_BLANKS = { klant: 'bedrijf X', bedrijf: 'bedrijf X', plaats: 'Mechelen' };
+        // quelle, on les remplace donc par un nom d'entreprise INVENTÉ (jamais une entreprise
+        // réelle) — "bedrijf X" faisait bizarre à l'oral.
+        const RP_JOB_BLANKS = { klant: 'Delmaro', bedrijf: 'Transvio', plaats: 'Mechelen' };
 
         let rpJobData = null;      // { situations: [...], journees: [...] }
         let rpJobMetier = null;
@@ -7861,7 +7862,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const raw = await GeminiService.generate(
                 'Invente une courte étude de cas pour un entretien d\'embauche en logistique / supply chain en Belgique. Thème : ' + theme.sujet + '.\n' +
                 RP_CASE_LEVELS[levelKey].consigne + '\n' +
-                'Utilise uniquement des noms génériques (bedrijf X, transporteur A et B, leverancier Y) et des chiffres ronds et cohérents entre eux. Prévois 2 ou 3 informations supplémentaires que le recruteur ne donnera que si le candidat les demande.\n\n' +
+                'Donne aux entreprises des noms inventés et crédibles, jamais ceux d\'entreprises réelles (par exemple Logistiko pour l\'entreprise du candidat, Transvio ou Nordvracht pour des transporteurs, Delmaro pour un client), et utilise des chiffres ronds et cohérents entre eux. Prévois 2 ou 3 informations supplémentaires que le recruteur ne donnera que si le candidat les demande.\n\n' +
                 'Réponds UNIQUEMENT avec un objet JSON, sans texte autour :\n' +
                 '{"titre_fr": "titre court en français", "enonce_nl": "l\'énoncé en néerlandais", "enonce_fr": "sa traduction française", ' +
                 '"chiffres": [{"nl": "donnée chiffrée en néerlandais", "fr": "traduction"}], ' +

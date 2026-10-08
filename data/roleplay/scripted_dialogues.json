@@ -1,5 +1,5 @@
 {
-  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase dite par le recruteur = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Les phrases étant affichées telles quelles, pas de blancs entre crochets ici : utiliser 'bedrijf X' / 'entreprise X' et des lieux ou âges pris au hasard.",
+  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase dite par le recruteur = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Les phrases étant affichées telles quelles, pas de blancs entre crochets ici : utiliser des noms d'entreprise inventés (Logistiko, Transvio, Delmaro...) et des lieux ou âges pris au hasard.",
   "scenarios": [
     {
       "id": "agence_transport_planning",
@@ -22,9 +22,9 @@
           "candidate_reply": "Mechelen met de auto, ja. Ja, Mechelen, dat kan."
         },
         {
-          "nl_original": "Ken je bedrijf X?",
-          "fr_cue": "Tu connais l'entreprise X ?",
-          "candidate_reply": "Nee. Bedrijf X, nee."
+          "nl_original": "Ken je Transvio?",
+          "fr_cue": "Tu connais Transvio ?",
+          "candidate_reply": "Nee. Transvio, nee."
         },
         {
           "nl_original": "Heb je momenteel andere sollicitaties lopen, of is dit nu de enige?",
@@ -40,8 +40,8 @@
     },
     {
       "id": "stockage_frigorifique_logistiek_bediende",
-      "label": "Entreprise X — logistiek bediende",
-      "contexte": "Tu es la recruteuse d'une entreprise de stockage frigorifique de denrées alimentaires (entreprise X) et tu reçois un candidat pour le poste de logistiek bediende.",
+      "label": "Logistiko — logistiek bediende",
+      "contexte": "Tu es la recruteuse de Logistiko, une entreprise de stockage frigorifique de denrées alimentaires, et tu reçois un candidat pour le poste de logistiek bediende.",
       "turns": [
         {
           "nl_original": "Jij bent alleenstaand, of getrouwd, of...",
