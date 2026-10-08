@@ -6607,7 +6607,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpShowCategoryPicker() {
             if (rpIsRecording && rpRecognition) rpRecognition.stop();
             rpIvState = null;
+            rpDayState = null;
             rpHideInterviewer();
+            rpJobHideDebrief();
             document.getElementById('rp-step-category').style.display = '';
             document.getElementById('rp-step-scenario').style.display = 'none';
             document.getElementById('rp-step-chat').style.display = 'none';
@@ -6645,6 +6647,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             } else if (rpCurrentCategory === '__reel_intervieweur') {
                 rpIvState = null;
                 rpShowInterviewerList();
+            } else if (rpCurrentCategory === '__job') {
+                rpShowJobHome();
             } else if (rpCurrentCategory) {
                 rpShowCategory(rpCurrentCategory);
             } else {
@@ -6675,6 +6679,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (textRow) textRow.style.display = 'flex';
             rpCoachClear();
             rpHideInterviewer();
+            rpJobHideNav();
+            rpJobHideDebrief();
             // La dictée suit la langue du scénario (anglais pour un scénario réel en anglais).
             if (rpRecognition) rpRecognition.lang = scenario.lang === 'en' ? 'en-US' : 'nl-NL';
             const choicesDiv = document.getElementById('rp-scripted-choices');
@@ -6868,12 +6874,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const bank = rpRealData && rpRealData.banks[index];
             if (!bank) return;
             const firstQuestion = ((bank.questions || {}).accroche || [])[0];
+            const welcome = bank.welcome || firstQuestion || 'Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?';
+            rpDayState = null;
             rpBeginScenario({
                 id: 'reel_' + bank.id,
                 lang: rpBankLang(bank),
                 label: bank.label,
-                welcome: bank.welcome || firstQuestion || 'Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?',
-                prompt: rpBuildRecruiterPrompt(bank)
+                welcome,
+                // La phrase d'accueil est affichée par l'app, pas générée : on la signale au
+                // recruteur pour qu'il enchaîne au lieu de se présenter une deuxième fois.
+                prompt: rpBuildRecruiterPrompt(bank) + '\n\nTu as déjà ouvert l\'entretien en disant : """' + welcome + '""" — enchaîne à partir de la réponse du candidat, sans te présenter à nouveau.'
             });
         }
 
@@ -7041,6 +7051,293 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <p style="font-size:0.9rem;">${st.scenario.turns.length} tours · ${evaluated} évalué(s) : ✅ ${c.correct} correct(s) · 🟡 ${c.proche} proche(s) · ❌ ${c.a_revoir} à revoir</p>
                     <button class="btn btn-green" onclick="rpIvStart(${st.scenarioIndex})">🔁 Recommencer ce dialogue</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowInterviewerList()">Choisir un autre dialogue</button>
+                </div>`;
+        }
+
+        // =====================================================================================
+        // Mises en situation métier (data/roleplay/job_simulations.json)
+        // =====================================================================================
+        // Distinct des modes Candidat et Intervieweur : ici l'apprenant est EN POSTE et fait face
+        // à des situations de travail (chauffeur au guichet, client au téléphone, collègue...).
+        // Générique tous métiers via le champ `metier` — seul "logistique" a du contenu pour
+        // l'instant. Deux prompts Gemini, séparés entre eux et de tous les autres :
+        //   - rpBuildSituationPrompt : le personnage d'UNE situation (improvise à partir de
+        //     l'amorce, jamais de réponse attendue)
+        //   - rpDayDebrief : bilan de fin de journée, appel séparé qui reçoit l'historique de la
+        //     session — les corrections sont données APRÈS, jamais pendant
+        const RP_JOB_METIERS = { logistique: '🚚 Logistique' }; // libellés ; un métier absent d'ici s'affiche avec son nom brut
+        const RP_JOB_CANAUX = {
+            guichet_chauffeur: { label: '🚛 Guichet chauffeurs', prompt: 'face à face, au guichet ou sur le quai' },
+            telephone_client: { label: '📞 Téléphone', prompt: 'au téléphone' },
+            collegue_interne: { label: '🧑‍🤝‍🧑 Collègues', prompt: 'entre collègues, sur le lieu de travail' },
+            email: { label: '✉️ E-mail', prompt: 'par e-mail : tes messages sont des e-mails courts, et l\'apprenant répond par écrit' }
+        };
+        // Intensité par type de situation, pour ordonner une journée tirée au sort (calme → pic → calme).
+        const RP_JOB_INTENSITY = { administratif: 1, probleme_document: 2, proposition_solution: 2, negociation: 3, urgence: 3, reclamation: 3 };
+        const RP_JOB_DURATIONS = { courte: 6, longue: 10 };
+        // Blancs entre crochets dans les amorces ([klant]...) : l'amorce est affichée et lue telle
+        // quelle, on les remplace donc par une valeur neutre.
+        const RP_JOB_BLANKS = { klant: 'bedrijf X', bedrijf: 'bedrijf X', plaats: 'Mechelen' };
+
+        let rpJobData = null;      // { situations: [...], journees: [...] }
+        let rpJobMetier = null;
+        let rpJobDuration = 'courte';
+        let rpDayState = null;     // { label, situations, index, log: [{ situation, turns }] } — null hors journée
+        const rpJobSeen = new Set(); // situations déjà jouées depuis l'ouverture de la page (pour varier les tirages)
+
+        async function rpLoadJobData() {
+            if (rpJobData) return rpJobData;
+            const data = await fetch('data/roleplay/job_simulations.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
+            rpJobData = { situations: data.situations || [], journees: data.journees || [] };
+            return rpJobData;
+        }
+
+        const rpSitLang = s => /^en$/i.test(s.niveau || '') ? 'en' : 'nl';
+        const rpSitAmorce = s => String(s.amorce || '').replace(/\[([^\]]+)\]/g, (m, k) => RP_JOB_BLANKS[k.toLowerCase()] || k);
+        const rpSitCanal = s => RP_JOB_CANAUX[s.canal] || { label: s.canal || 'Situation', prompt: '' };
+        const rpSitTitle = s => { const c = String(s.contexte || s.id); return (c.match(/^.*?[.!?](?=\s|$)/) || [c])[0]; };
+
+        // Prompt du personnage pour UNE situation. Ne contient que le cadre et la première
+        // réplique : la suite est improvisée selon ce que l'apprenant répond réellement.
+        function rpBuildSituationPrompt(s) {
+            const langName = RP_LANG_NAMES[rpSitLang(s)];
+            const canal = rpSitCanal(s);
+            return 'Tu joues un personnage dans une mise en situation professionnelle (métier : ' + (s.metier || 'non précisé') + '). ' +
+                'L\'apprenant occupe le poste de ' + (s.poste || 'employé') + ' ; toi, tu es son interlocuteur dans cette situation (chauffeur, client, collègue ou responsable selon le contexte) — jamais l\'apprenant lui-même.\n\n' +
+                'Situation : ' + s.contexte + '\n' +
+                (canal.prompt ? 'L\'échange a lieu ' + canal.prompt + '.\n' : '') +
+                'Tu as ouvert l\'échange en disant : """' + rpSitAmorce(s) + '"""\n\n' +
+                'Continue à partir de là, exclusivement en ' + langName + ', avec des répliques courtes (une ou deux phrases) et naturelles. ' +
+                'Réagis à ce que l\'apprenant dit réellement et invente les détails plausibles dont tu as besoin (numéro de quai, heure, référence, nom de client générique). ' +
+                'Reste dans l\'état d\'esprit de ton personnage (pressé, mécontent, détendu... selon la situation) et ne facilite pas artificiellement la tâche de l\'apprenant. ' +
+                'Ne corrige jamais sa langue et ne sors jamais de ton rôle. Quand le problème est réglé, conclus brièvement et n\'ouvre pas de nouveau sujet.';
+        }
+
+        // Compose une journée : soit la séquence figée d'une `journee` (par ids, sans dupliquer le
+        // contenu), soit un tirage dans la banque du métier — pondéré pour favoriser les
+        // situations pas encore jouées, puis ordonné calme → pic → calme.
+        function rpComposeDay(metier, journee, size) {
+            const bank = rpJobData.situations.filter(s => s.metier === metier);
+            if (journee && Array.isArray(journee.sequence)) {
+                return journee.sequence.map(id => bank.find(s => s.id === id)).filter(Boolean);
+            }
+            const keyed = bank.map(s => ({ s, key: Math.pow(Math.random(), 1 / (rpJobSeen.has(s.id) ? 1 : 3)) }));
+            keyed.sort((a, b) => b.key - a.key);
+            const picked = keyed.slice(0, size).map(k => k.s);
+            picked.sort((a, b) => (RP_JOB_INTENSITY[a.type] || 2) - (RP_JOB_INTENSITY[b.type] || 2));
+            // Du plus calme au plus intense, en alternant début / fin : les plus intenses finissent au milieu.
+            const head = [], tail = [];
+            picked.forEach((s, i) => (i % 2 === 0 ? head.push(s) : tail.unshift(s)));
+            return head.concat(tail);
+        }
+
+        // ----- Écran d'accueil du mode : métier, journée complète, situation isolée -----
+        async function rpShowJobHome() {
+            rpCurrentCategory = '__job';
+            rpDayState = null;
+            rpHideInterviewer();
+            rpJobHideDebrief();
+            const listDiv = document.getElementById('rp-scenario-list');
+            listDiv.innerHTML = '<p style="color:#888;">Chargement...</p>';
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+            const data = await rpLoadJobData();
+            const metiers = [...new Set(data.situations.map(s => s.metier).filter(Boolean))];
+            if (!metiers.length) { listDiv.innerHTML = '<p style="color:#888;">Aucune situation pour l\'instant.</p>'; return; }
+            if (!metiers.includes(rpJobMetier)) rpJobMetier = metiers[0];
+            const bank = data.situations.filter(s => s.metier === rpJobMetier);
+            const size = RP_JOB_DURATIONS[rpJobDuration];
+            const isShort = j => (j.duree_situations || (j.sequence || []).length) <= 7;
+            const journees = data.journees
+                .map((j, i) => ({ j, i }))
+                .filter(x => x.j.metier === rpJobMetier && isShort(x.j) === (rpJobDuration === 'courte'));
+            const chip = (active, onclick, label, disabled) =>
+                `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" ${disabled ? 'disabled style="opacity:0.45; cursor:default;"' : `onclick="${onclick}"`}>${label}</button>`;
+
+            const canaux = [...new Set(bank.map(s => s.canal))];
+            const isolated = canaux.map(c =>
+                `<div class="rp-job-canal">${rpEscapeHtml((RP_JOB_CANAUX[c] || { label: c }).label)}</div>` +
+                bank.filter(s => s.canal === c).map(s =>
+                    `<button class="rp-scenario-btn" onclick="rpStartSituation('${s.id}')">${rpEscapeHtml(rpSitTitle(s))}${rpSitLang(s) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}</button>`
+                ).join('')
+            ).join('');
+
+            listDiv.innerHTML = `
+                <div class="rp-group-title">🏭 Mise en situation métier</div>
+                <p class="rp-real-hint">Tu es en poste : chauffeurs, clients et collègues viennent vers toi, à toi de gérer.</p>
+                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
+                    ${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}
+                    ${chip(false, '', 'Autres métiers : bientôt', true)}
+                </div>
+                <div class="rp-group-title">📅 Journée complète</div>
+                <p class="rp-real-hint">Plusieurs situations à la suite, puis un bilan : vocabulaire à retenir et formulations corrigées.</p>
+                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
+                    ${chip(rpJobDuration === 'courte', "rpJobSetDuration('courte')", `Courte · ${RP_JOB_DURATIONS.courte} situations`)}
+                    ${chip(rpJobDuration === 'longue', "rpJobSetDuration('longue')", `Longue · ${RP_JOB_DURATIONS.longue} situations`)}
+                </div>
+                ${journees.map(x => `<button class="rp-scenario-btn" onclick="rpStartDay(${x.i})">${rpEscapeHtml(x.j.label)}</button>`).join('')}
+                <button class="rp-scenario-btn" onclick="rpStartDay(-1)">🎲 Journée tirée au sort · ${Math.min(size, bank.length)} situations</button>
+                <div class="rp-group-title">🎯 Situation isolée</div>
+                ${isolated}`;
+        }
+
+        function rpJobSetMetier(m) { rpJobMetier = m; rpShowJobHome(); }
+        function rpJobSetDuration(d) { rpJobDuration = d; rpShowJobHome(); }
+
+        function rpJobRequireGemini() {
+            if (GeminiService.isAvailable()) return true;
+            alert("Les mises en situation ont besoin de Gemini : renseigne ta clé API dans Profil → 🤖 Intelligence IA.");
+            return false;
+        }
+
+        // Démarre la conversation d'une situation dans l'écran de dialogue existant.
+        function rpJobBeginSituation(s) {
+            rpJobSeen.add(s.id);
+            rpBeginScenario({
+                id: 'job_' + s.id,
+                lang: rpSitLang(s),
+                label: rpSitTitle(s),
+                welcome: rpSitAmorce(s),
+                prompt: rpBuildSituationPrompt(s)
+            });
+            const banner = document.getElementById('rp-mode-banner');
+            const day = rpDayState;
+            banner.style.display = '';
+            banner.innerHTML = `
+                <div class="rp-job-banner">
+                    <div class="rp-iv-label" style="margin-top:0;">${day ? `${rpEscapeHtml(day.label)} · Situation ${day.index + 1}/${day.situations.length} · ` : ''}${rpEscapeHtml(rpSitCanal(s).label)}</div>
+                    <div>${rpEscapeHtml(s.contexte)}</div>
+                    ${(s.vocabulaire_cible || []).length ? `<details><summary>Vocabulaire utile</summary>${s.vocabulaire_cible.map(rpEscapeHtml).join(' · ')}</details>` : ''}
+                </div>`;
+            const nav = document.getElementById('rp-day-nav');
+            if (day) {
+                const last = day.index + 1 >= day.situations.length;
+                nav.style.display = 'block';
+                nav.innerHTML = `<button class="btn btn-gray" style="margin:0;" onclick="rpDayNext()">${last ? '🏁 Terminer la journée et voir le bilan' : 'Situation suivante →'}</button>`;
+            }
+        }
+
+        function rpJobHideNav() {
+            const nav = document.getElementById('rp-day-nav');
+            if (nav) { nav.style.display = 'none'; nav.innerHTML = ''; }
+        }
+
+        function rpStartSituation(id) {
+            const s = rpJobData && rpJobData.situations.find(x => x.id === id);
+            if (!s || !rpJobRequireGemini()) return;
+            rpDayState = null;
+            rpJobBeginSituation(s);
+        }
+
+        function rpStartDay(journeeIndex) {
+            if (!rpJobData || !rpJobRequireGemini()) return;
+            const journee = journeeIndex >= 0 ? rpJobData.journees[journeeIndex] : null;
+            const situations = rpComposeDay(rpJobMetier, journee, RP_JOB_DURATIONS[rpJobDuration]);
+            if (!situations.length) return;
+            rpDayState = { label: journee ? journee.label : 'Journée tirée au sort', situations, index: 0, log: [] };
+            rpJobBeginSituation(situations[0]);
+        }
+
+        // Archive la conversation de la situation en cours (amorce + échanges) dans le journal de
+        // la journée. rpConversationHistory[0] est le prompt du personnage : il n'est pas archivé.
+        function rpDayArchiveCurrent() {
+            const day = rpDayState;
+            if (!day) return;
+            const s = day.situations[day.index];
+            const turns = [{ qui: 'interlocuteur', texte: rpSitAmorce(s) }].concat(
+                rpConversationHistory.slice(1).map(m => ({ qui: m.role === 'user' ? 'apprenant' : 'interlocuteur', texte: m.parts[0].text }))
+            );
+            day.log.push({ situation: s, turns });
+        }
+
+        function rpDayNext() {
+            const day = rpDayState;
+            if (!day) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            rpDayArchiveCurrent();
+            day.index++;
+            if (day.index < day.situations.length) rpJobBeginSituation(day.situations[day.index]);
+            else rpDayDebrief();
+        }
+
+        function rpJobHideDebrief() {
+            const el = document.getElementById('rp-step-debrief');
+            if (el) el.style.display = 'none';
+        }
+
+        // Bilan de fin de journée : appel Gemini séparé (aucun lien avec les prompts des
+        // personnages) qui reçoit tout l'historique de la session et renvoie une restitution
+        // structurée. Affiché sur un écran distinct de la conversation.
+        async function rpDayDebrief() {
+            const day = rpDayState;
+            if (!day) return;
+            rpJobHideNav();
+            document.getElementById('rp-step-chat').style.display = 'none';
+            document.getElementById('rp-step-debrief').style.display = 'flex';
+            const box = document.getElementById('rp-debrief-content');
+            const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(day.label)}</div>`;
+            const footer = `
+                <button class="btn btn-green" style="margin-top:14px;" onclick="rpShowJobHome()">Nouvelle journée</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCategoryPicker()">Retour au jeu de rôle</button>`;
+            const spoken = day.log.reduce((n, e) => n + e.turns.filter(t => t.qui === 'apprenant').length, 0);
+            if (!spoken) {
+                box.innerHTML = `<div class="conj-card">${header}<p>Tu n'as répondu à aucune situation : rien à analyser.</p>${footer}</div>`;
+                return;
+            }
+            box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--text-secondary);">Analyse de ta journée en cours...</p></div>`;
+            const transcript = day.log.map((e, i) =>
+                `### Situation ${i + 1} — ${e.situation.contexte}\n` +
+                e.turns.map(t => `${t.qui === 'apprenant' ? 'APPRENANT' : 'INTERLOCUTEUR'} : ${t.texte}`).join('\n')
+            ).join('\n\n');
+            let raw;
+            try {
+                raw = await GeminiService.generate(
+                    'Tu es un professeur de néerlandais professionnel pour francophones. Voici la transcription d\'une journée de mises en situation au travail : un apprenant (APPRENANT) a répondu à plusieurs interlocuteurs. ' +
+                    'Analyse UNIQUEMENT les répliques de l\'APPRENANT (elles peuvent avoir été dictées : ignore ponctuation et majuscules).\n\n' +
+                    transcript + '\n\n' +
+                    'Réponds UNIQUEMENT avec un objet JSON, sans texte autour, de cette forme :\n' +
+                    '{"situations": [{"numero": 1, "resume": "en français, une phrase : ce qui s\'est passé et si l\'apprenant a géré la situation"}],\n' +
+                    ' "vocabulaire": [{"nl": "mot ou expression utile qui revient dans cette journée", "fr": "traduction"}],\n' +
+                    ' "blocages": [{"numero": 1, "phrase_apprenant": "ce qu\'il a dit", "probleme": "en français, ce qui cloche ou bloque", "formulation_correcte": "la bonne formulation dans la langue de la situation"}],\n' +
+                    ' "conseil": "en français, un conseil prioritaire pour la prochaine fois"}\n' +
+                    '8 mots de vocabulaire maximum, 6 blocages maximum (les plus importants). Si une situation est restée sans réponse de l\'apprenant, dis-le dans son résumé.'
+                );
+            } catch (e) {
+                box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--wrong);">Bilan impossible : ${rpEscapeHtml(e.message)}</p>
+                    <button class="btn btn-gray" onclick="rpDayDebrief()">Réessayer</button>${footer}</div>`;
+                return;
+            }
+            if (rpDayState !== day) return; // l'utilisateur a quitté entre-temps
+            let d = null;
+            try { const m = raw.match(/\{[\s\S]*\}/); d = JSON.parse(m ? m[0] : raw); } catch (e) { d = null; }
+            if (!d || typeof d !== 'object') {
+                // Réponse non structurée : on l'affiche telle quelle plutôt que de la perdre.
+                box.innerHTML = `<div class="conj-card">${header}<div class="rp-iv-comment">${rpEscapeHtml(raw)}</div>${footer}</div>`;
+                return;
+            }
+            const arr = x => Array.isArray(x) ? x : [];
+            const sitTitle = n => { const e = day.log[(n | 0) - 1]; return e ? rpSitTitle(e.situation) : ''; };
+            box.innerHTML = `
+                <div class="conj-card">
+                    ${header}
+                    <div class="rp-iv-label">Situations traversées</div>
+                    ${day.log.map((e, i) => {
+                        const r = arr(d.situations).find(x => (x.numero | 0) === i + 1);
+                        return `<div class="rp-debrief-item"><b>${i + 1}. ${rpEscapeHtml(rpSitCanal(e.situation).label)}</b> — ${rpEscapeHtml(rpSitTitle(e.situation))}${r && r.resume ? `<div class="rp-debrief-sub">${rpEscapeHtml(r.resume)}</div>` : ''}</div>`;
+                    }).join('')}
+                    <div class="rp-iv-label">Vocabulaire à retenir</div>
+                    ${arr(d.vocabulaire).length ? arr(d.vocabulaire).map(v => `<div class="conj-tense-row"><span class="conj-form">${rpEscapeHtml(v.nl || '')}</span> ${speakBtnHtml(v.nl || '')}<span class="rp-debrief-sub" style="flex:1;">${rpEscapeHtml(v.fr || '')}</span></div>`).join('') : '<div class="rp-debrief-sub">Rien de particulier.</div>'}
+                    <div class="rp-iv-label">Moments de blocage — la bonne formulation</div>
+                    ${arr(d.blocages).length ? arr(d.blocages).map(b => `
+                        <div class="rp-debrief-item">
+                            <div class="rp-debrief-sub">${rpEscapeHtml(sitTitle(b.numero))}</div>
+                            <div>« ${rpEscapeHtml(b.phrase_apprenant || '')} »</div>
+                            <div class="rp-debrief-sub">${rpEscapeHtml(b.probleme || '')}</div>
+                            <div class="rp-iv-reference">→ ${rpEscapeHtml(b.formulation_correcte || '')} ${speakBtnHtml(b.formulation_correcte || '')}</div>
+                        </div>`).join('') : '<div class="rp-debrief-sub">Aucun blocage relevé, bravo.</div>'}
+                    ${d.conseil ? `<div class="rp-iv-label">Conseil pour la prochaine fois</div><div>${rpEscapeHtml(d.conseil)}</div>` : ''}
+                    ${footer}
                 </div>`;
         }
 

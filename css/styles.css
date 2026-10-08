@@ -180,6 +180,17 @@
         .rp-iv-feedback-box { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); text-align: left; }
         #rp-iv-input { width: 100%; box-sizing: border-box; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font: inherit; font-size: 1rem; resize: vertical; }
         .wl-badge.iv-wrong { background: #ffd6d6; color: #a11d1d; }
+        /* Mise en situation métier : bandeau de situation, navigation de journée, bilan */
+        .rp-job-canal { font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); width: 100%; max-width: 520px; text-align: left; margin: 10px 0 6px; }
+        .rp-job-banner { background: var(--surface-2); border-radius: var(--radius-md); padding: 10px 12px; font-size: 0.86rem; text-align: left; box-sizing: border-box; }
+        .rp-job-banner details { margin-top: 6px; font-size: 0.8rem; color: var(--text-secondary); }
+        .rp-job-banner summary { cursor: pointer; font-weight: 600; }
+        #rp-mode-banner { max-width: 520px; }
+        #rp-day-nav { width: 100%; max-width: 520px; margin-top: 12px; }
+        .rp-debrief-item { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; text-align: left; }
+        .rp-debrief-sub { font-size: 0.8rem; color: var(--text-secondary); }
+        #rp-debrief-content { text-align: left; }
+        @media (min-width: 1300px) { .rp-job-canal, #rp-mode-banner, #rp-day-nav { max-width: 860px; } }
         @media (min-width: 1300px) { .rp-real-hint, #rp-text-row, #rp-coach-panel { max-width: 860px; } }
         #rp-mic-btn.recording { background: var(--wrong); box-shadow: 0 4px 0 #c13a3a; animation: rp-pulse 1.5s infinite; }
         @keyframes rp-pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }

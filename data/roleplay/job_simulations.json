@@ -1,0 +1,236 @@
+{
+  "_doc": "Banque de situations atomiques + journées composées pour le mode 'mise en situation métier' (distinct du mode Candidat et du mode Intervieweur). Générique tous métiers via le champ metier : seul 'logistique' est rempli pour l'instant, la structure accueille data analyst / agent de banque / agent communal etc. sans redesign quand du contenu réel arrivera. Chaque situation : canal (guichet_chauffeur, telephone_client, collegue_interne, email), type (administratif, probleme_document, urgence, reclamation, proposition_solution, negociation), contexte, amorce (première ligne dite par le PNJ — le modèle improvise ensuite librement, jamais de réponse attendue), vocabulaire_cible, source (entretien_1/2/3 = tiré des vraies transcriptions, invente_realiste = situation plausible ajoutée pour compléter la couverture). Une 'journee' compose une séquence de situations existantes par id, sans jamais dupliquer leur contenu. Prompts à ne jamais mélanger : rpBuildSituationPrompt (une situation isolée), rpComposeDay (enchaînement d'une journée), rpDayDebrief (bilan de fin de journée : vocabulaire récurrent, moments de blocage, formulation correcte proposée après coup — jamais pendant, pour ne pas casser le rythme).",
+  "situations": [
+    {
+      "id": "guichet_chauffeur_doc_manquant",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "canal": "guichet_chauffeur",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Un chauffeur arrive au guichet de réception, sans numéro de rendez-vous.",
+      "amorce": "Goeiemiddag, ik kom voor [klant]. Maar ik heb geen afspraaknummer gekregen, ik weet niet goed wat ik nu moet doen.",
+      "vocabulaire_cible": ["afspraak", "inboeken", "documenten controleren", "klant"],
+      "source": "entretien_3"
+    },
+    {
+      "id": "guichet_chauffeur_rdv_inconnu",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "canal": "guichet_chauffeur",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Un chauffeur affirme avoir un rendez-vous, mais le système ne le trouve pas.",
+      "amorce": "Ik sta hier al tien minuten. Mijn baas zei dat alles in orde was, maar ik zie jullie systeem zegt van niet.",
+      "vocabulaire_cible": ["systeem", "kaai", "wachten", "opzoeken"],
+      "source": "entretien_3"
+    },
+    {
+      "id": "guichet_collegue_urgence",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "NL",
+      "contexte": "Tu es en plein traitement d'un dossier chauffeur quand un collègue t'interpelle depuis l'autre bout de la pièce.",
+      "amorce": "Hey, kan je even komen? Kaai 6 heeft een probleem, ik kan er nu niet bij!",
+      "vocabulaire_cible": ["bijspringen", "kaai", "even komen", "probleem oplossen"],
+      "source": "entretien_3"
+    },
+    {
+      "id": "guichet_dossier_a_terminer",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Un collègue a commencé l'enregistrement d'un chauffeur mais doit partir avant de finir ; il te laisse le dossier.",
+      "amorce": "Kan jij dit even afwerken? Ik heb de chauffeur al ingeboekt, maar ik moet nu weg.",
+      "vocabulaire_cible": ["afwerken", "overnemen", "dossier", "inboeken"],
+      "source": "entretien_3"
+    },
+    {
+      "id": "guichet_bruit_a_faire_repeter",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "canal": "guichet_chauffeur",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Il y a beaucoup de bruit ambiant (imprimantes, collègues qui parlent fort) et un chauffeur te donne une information importante que tu n'es pas sûr d'avoir bien comprise.",
+      "amorce": "Dus zoals ik zei, het gaat over kaai 3, niet kaai 4 — hoorde je dat goed?",
+      "vocabulaire_cible": ["kan je dat herhalen", "ik heb het niet goed verstaan", "lawaai"],
+      "source": "entretien_3"
+    },
+    {
+      "id": "ag_client_reservation",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Un client appelle pour réserver un transport de marchandises.",
+      "amorce": "Goeiedag, ik zou graag een vracht willen inboeken voor volgende week, kan dat bij jullie?",
+      "vocabulaire_cible": ["vracht inboeken", "beschikbaarheid", "planning"],
+      "source": "entretien_1"
+    },
+    {
+      "id": "ag_chauffeur_non_nl",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "EN",
+      "contexte": "Un chauffeur non-néerlandophone (polonais) appelle en anglais basique pour une question sur sa tournée.",
+      "amorce": "Hello, I have problem, I don't understand where I go now. Address not clear.",
+      "vocabulaire_cible": ["switch to English", "repeat the address", "next stop"],
+      "source": "entretien_1"
+    },
+    {
+      "id": "ag_devis_client",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "proposition_solution",
+      "niveau": "NL",
+      "contexte": "Un client demande une offre de prix pour un transport régulier.",
+      "amorce": "Kunnen jullie mij een prijsofferte opmaken voor wekelijks transport naar Antwerpen?",
+      "vocabulaire_cible": ["prijsofferte opstellen", "tarief", "wekelijks"],
+      "source": "entretien_1"
+    },
+    {
+      "id": "ag_mailbox_entre_appels",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Entre deux appels, tu dois traiter rapidement la mailbox de la planification qui s'accumule.",
+      "amorce": "(e-mail) Beste, graag bevestiging van de levering van morgen, het is dringend.",
+      "vocabulaire_cible": ["mailbox opvolgen", "bevestiging sturen", "dringend"],
+      "source": "entretien_1"
+    },
+    {
+      "id": "usine_chauffeur_quai",
+      "metier": "logistique",
+      "poste": "logistiek medewerker / goederenontvangst",
+      "canal": "guichet_chauffeur",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Un camion de matière première arrive à l'usine, tu dois l'orienter vers le bon quai.",
+      "amorce": "Hallo, ik heb hier een levering voor de goederenontvangst. Waar moet ik naartoe?",
+      "vocabulaire_cible": ["kaai", "goederenontvangst", "grondstoffen", "welke kaai"],
+      "source": "entretien_2",
+      "_source_en": { "amorce": "Hi, I'm here with a delivery for dock receiving. Where do I need to go?", "vocabulaire_cible": ["dock", "receiving", "raw material", "which bay"] }
+    },
+    {
+      "id": "usine_erp_interruption",
+      "metier": "logistique",
+      "poste": "logistiek medewerker / goederenontvangst",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Tu es en train de saisir des données dans l'ERP quand un collègue vient te poser une question urgente.",
+      "amorce": "Hé, snel een vraagje — heb jij de zending van vanochtend al ingevoerd?",
+      "vocabulaire_cible": ["invoeren in het systeem", "zending", "een ogenblikje"],
+      "source": "entretien_2",
+      "_source_en": { "amorce": "Hey, quick question — did you already enter the shipment from this morning?", "vocabulaire_cible": ["enter into the system", "shipment", "hold on a second"] }
+    },
+    {
+      "id": "usine_probleme_technique",
+      "metier": "logistique",
+      "poste": "logistiek medewerker / goederenontvangst",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "NL",
+      "contexte": "Un petit problème technique survient (balance, système) et tu dois le signaler à ton responsable.",
+      "amorce": "De weegbrug geeft weer geen juiste waarde aan — kan jij dat melden aan de verantwoordelijke?",
+      "vocabulaire_cible": ["een probleem melden", "de weegbrug", "de verantwoordelijke"],
+      "source": "entretien_2",
+      "_source_en": { "amorce": "The scale isn't reading right again — can you report that to the supervisor?", "vocabulaire_cible": ["report an issue", "the scale", "supervisor"] }
+    },
+    {
+      "id": "invente_client_furieux_retard",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "reclamation",
+      "niveau": "NL",
+      "contexte": "Un client appelle, furieux, parce qu'une livraison attendue ce matin n'est toujours pas arrivée.",
+      "amorce": "Dit is nu al de tweede keer dat jullie levering te laat is! Wat gaan jullie daaraan doen?",
+      "vocabulaire_cible": ["vertraging melden", "excuses aanbieden", "oplossing voorstellen"],
+      "source": "invente_realiste"
+    },
+    {
+      "id": "invente_replanification_incident",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "proposition_solution",
+      "niveau": "NL",
+      "contexte": "Un camion est tombé en panne sur la route, il faut replanifier la livraison et en informer le client.",
+      "amorce": "Onze chauffeur heeft een pech gehad. Ik moet de levering herplannen, wat is voor jou nog mogelijk vandaag?",
+      "vocabulaire_cible": ["herplannen", "pech", "alternatief voorstellen"],
+      "source": "invente_realiste"
+    },
+    {
+      "id": "invente_negociation_delai",
+      "metier": "logistique",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "negociation",
+      "niveau": "NL",
+      "contexte": "Un transporteur externe demande un délai supplémentaire pour une livraison, tu dois négocier avec lui tout en respectant les attentes du client final.",
+      "amorce": "We hebben wat vertraging, kunnen we de levering met een halve dag uitstellen?",
+      "vocabulaire_cible": ["uitstellen", "onderhandelen", "deadline"],
+      "source": "invente_realiste"
+    },
+    {
+      "id": "invente_rapport_fin_service",
+      "metier": "logistique",
+      "poste": "logistiek bediende / dispatcher",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "En fin de service, ton responsable te demande un résumé oral rapide des incidents de la journée.",
+      "amorce": "Voor je naar huis gaat — hoe is het vandaag gegaan? Was er iets speciaals?",
+      "vocabulaire_cible": ["samenvatten", "incident melden", "alles is vlot verlopen"],
+      "source": "invente_realiste"
+    }
+  ],
+  "journees": [
+    {
+      "id": "journee_guichet_courte",
+      "metier": "logistique",
+      "label": "Journée type — guichet réception chauffeurs (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "guichet_chauffeur_doc_manquant",
+        "guichet_bruit_a_faire_repeter",
+        "guichet_collegue_urgence",
+        "guichet_chauffeur_rdv_inconnu",
+        "guichet_dossier_a_terminer",
+        "invente_rapport_fin_service"
+      ]
+    },
+    {
+      "id": "journee_dispatcher_longue",
+      "metier": "logistique",
+      "label": "Journée type — dispatcher/planning (longue)",
+      "duree_situations": 10,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "ag_client_reservation",
+        "ag_mailbox_entre_appels",
+        "ag_chauffeur_non_nl",
+        "invente_client_furieux_retard",
+        "ag_devis_client",
+        "invente_replanification_incident",
+        "invente_negociation_delai",
+        "usine_chauffeur_quai",
+        "usine_erp_interruption",
+        "invente_rapport_fin_service"
+      ]
+    }
+  ]
+}

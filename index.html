@@ -409,6 +409,10 @@
                 <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">Le recruteur pose de vraies questions et improvise</div></div>
                 <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🎙️</span>Je suis recruteur<div class="cat-sub">Traduction guidée d'un vrai dialogue</div></div>
             </div>
+            <div class="rp-group-title">Mise en situation métier — tu es en poste</div>
+            <div class="rp-category-grid" style="margin-top:0; grid-template-columns:1fr;">
+                <div class="rp-cat-btn rp-cat-real" onclick="rpShowJobHome()"><span class="rp-icon">🏭</span>Une journée au travail<div class="cat-sub">Chauffeurs, clients, collègues : gère les situations une par une ou sur une journée complète avec bilan</div></div>
+            </div>
             <div class="rp-group-title">Scénarios génériques</div>
             <div class="rp-category-grid" style="margin-top:0;">
                 <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens d'embauche</div>
@@ -436,7 +440,13 @@
                 <button class="btn btn-green" style="margin:0; width:auto;" onclick="rpSendTypedMessage()">Envoyer</button>
             </div>
             <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
+            <div id="rp-day-nav" style="display:none;"></div>
             <div id="rp-coach-panel" style="display:none;"></div>
+        </div>
+
+        <!-- Bilan de fin de journée (mise en situation métier) : écran distinct de la conversation -->
+        <div id="rp-step-debrief" style="display:none; width:100%; flex-direction:column; align-items:center;">
+            <div id="rp-debrief-content" class="content-col"></div>
         </div>
 
         <!-- Mode Intervieweur : exercice de traduction guidé (dialogue scripté) -->
