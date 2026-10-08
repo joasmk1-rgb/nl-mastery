@@ -597,3 +597,774 @@ NOMS_NL_594;la pesanteur / la lourdeur / (pas de pluriel);de zwaarte;2.76;Standa
 NOMS_NL_595;le beau-frère / les beaux-frères;de zwager;3.65;Standard;Courant;A2;nt2lex;Personnes;heuristique_fr;Personnes;heuristique_fr
 NOMS_NL_596;le noir / (pas de pluriel);de zwart;5.0;Standard;Essentiel;A1;nt2lex;Abstrait & concepts;heuristique_fr;Abstrait & concepts;heuristique_fr
 NOMS_NL_597;le fouet / les fouets;de zweep;3.28;Standard;Spécialisé;A2;nt2lex;Abstrait & concepts;heuristique_fr;Abstrait & concepts;heuristique_fr
+NOMS_NL_598;le livre;het boek;5.35;Standard;Essentiel;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_599;le chien;de hond;4.96;Standard;Courant;A1;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_600;l'école;de school;5.48;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_601;le frère;de broer;5.08;Standard;Essentiel;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_602;le chat;de kat;4.59;Standard;Courant;A1;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_603;la ville;de stad;5.68;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_604;la fille;het meisje;5.37;Standard;Essentiel;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_605;le garçon;de jongen;5.1;Standard;Essentiel;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_606;la lettre;de brief;4.9;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_607;la photo;de foto;5.61;Standard;Essentiel;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_608;le professeur;de leraar;4.51;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_609;la fleur;de bloem;4.23;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_610;le bus;de bus;4.9;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_611;la famille;de familie;5.56;Standard;Essentiel;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_612;la capitale;de hoofdstad;4.83;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_613;la sœur;de zus;4.8;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_614;l'arbre;de boom;4.74;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_615;l'étudiant;de student;4.52;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_616;l'amie / la petite amie;de vriendin;5.06;Standard;Essentiel;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_617;la pomme;de appel;4.13;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_618;le pain;het brood;4.61;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_619;la fête;het feest;4.96;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_620;la faim;de honger;4.75;Standard;Courant;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_621;le lait;de melk;4.42;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_622;le dictionnaire;het woordenboek;3.78;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_623;la rue;de straat;5.09;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_624;la chaussure;de schoen;4.1;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_625;la fille (de quelqu'un);de dochter;5.22;Standard;Essentiel;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_626;la bière;het bier;4.68;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_627;l'hôpital;het ziekenhuis;5.06;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_628;le thé;de thee;4.7;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_629;la sorte / l'espèce;de soort;5.43;Standard;Essentiel;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_630;la cuisine;de keuken;4.66;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_631;le regret;de spijt;4.73;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_632;la clé;de sleutel;4.42;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_633;la gare;het station;4.84;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_634;le quartier;de buurt;5.21;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_635;le morceau / la pièce;het stuk;5.24;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_636;le parc;het park;4.98;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_637;la télé;de tv;5.25;Standard;Essentiel;B1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_638;l'accident / le malheur;het ongeluk;4.8;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_639;le dollar;de dollar;4.8;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_640;l'État / l'état;de staat;5.98;Standard;Essentiel;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_641;la neige;de sneeuw;4.45;Standard;Courant;A1;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_642;le sommeil;de slaap;4.77;Standard;Courant;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_643;les devoirs;het huiswerk;4.19;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_644;la montagne;de berg;4.68;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_645;le chapeau;de hoed;4.05;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_646;l'avion;het vliegtuig;4.66;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_647;l'endroit;de plek;5.23;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_648;la robe;de jurk;4.31;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_649;la pluie;de regen;4.75;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_650;la pizza;de pizza;4.24;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_651;la blague;de grap;4.6;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_652;le parapluie;de paraplu;3.75;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_653;le cadeau;het cadeau;4.45;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_654;la différence;het verschil;4.99;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_655;la chaise;de stoel;4.55;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_656;le petit-déjeuner;het ontbijt;4.6;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_657;le patron;de baas;4.71;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_658;l'étranger (pays);het buitenland;4.76;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_659;le piano;de piano;4.2;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_660;l'hiver;de winter;4.69;Standard;Courant;A1;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_661;le monsieur;de meneer;4.71;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_662;l'anniversaire;de verjaardag;4.75;Standard;Courant;A1;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_663;la santé;de gezondheid;4.87;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_664;la plage;het strand;4.76;Standard;Courant;A1;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_665;le jeu;het spel;5.12;Standard;Essentiel;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_666;la bibliothèque;de bibliotheek;4.58;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_667;la montre;het horloge;4.18;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_668;la situation;de situatie;5.04;Standard;Essentiel;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_669;le navire;het schip;4.92;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_670;la lune;de maan;4.52;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_671;l'église;de kerk;5.03;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_672;la voix;de stem;5.13;Standard;Essentiel;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_673;la planète;de planeet;4.35;Standard;Courant;B2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_674;la décision;de beslissing;4.7;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_675;l'étoile;de ster;4.55;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_676;l'oreille;het oor;4.23;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_677;le ciel;de hemel;4.46;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_678;le tennis;het tennis;4.02;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_679;la forêt;het bos;4.84;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_680;l'orange;de sinaasappel;3.14;Standard;Spécialisé;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_681;l'avocat;de advocaat;4.83;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_682;le cinéma;de bioscoop;4.07;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_683;le sucre;de suiker;4.27;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_684;les lunettes;de bril;4.28;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_685;la maladie;de ziekte;4.77;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_686;le succès;het succes;5.15;Standard;Essentiel;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_687;la prison;de gevangenis;4.84;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_688;le football;het voetbal;4.99;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_689;le bain;het bad;4.7;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_690;le taxi;de taxi;4.38;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_691;l'or;het goud;4.83;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_692;le sel;het zout;4.28;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_693;le costume / le paquet;het pak;4.74;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_694;le concert;het concert;4.65;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_695;le pas / l'étape;de stap;5.14;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_696;la pierre;de steen;4.59;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_697;le corps;het lichaam;5.23;Standard;Essentiel;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_698;l'examen;het examen;4.27;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_699;l'université;de universiteit;5.08;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_700;le million;het miljoen;5.33;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_701;le crayon;het potlood;3.56;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_702;le médicament;het medicijn;3.99;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_703;le conseil;het advies;4.85;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_704;les fruits;het fruit;4.33;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_705;les mathématiques;de wiskunde;4.38;Standard;Courant;A1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_706;la traduction;de vertaling;4.75;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_707;le week-end;het weekend;4.88;Standard;Courant;A1;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_708;le chocolat;de chocolade;4.25;Standard;Courant;B1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_709;l'assiette / le panneau;het bord;4.43;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_710;le match / la compétition;de wedstrijd;5.23;Standard;Essentiel;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_711;le sang;het bloed;4.72;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_712;le pont;de brug;4.76;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_713;la visite;het bezoek;5.13;Standard;Essentiel;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_714;la soif;de dorst;3.91;Standard;Courant;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_715;le message;het bericht;5.15;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_716;le président;de president;5.18;Standard;Essentiel;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_717;le bureau;het bureau;4.83;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_718;le gâteau / la tarte;de taart;4.34;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_719;l'art;de kunst;4.98;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_720;la soupe;de soep;4.35;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_721;la guitare;de gitaar;4.23;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_722;l'islam;de islam;4.84;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_723;l'araignée;de spin;4.02;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_724;l'incendie;de brand;4.98;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_725;le frigo;de koelkast;4.13;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_726;Noël;de kerst;4.44;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_727;le dîner;het avondeten;3.71;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_728;la langue maternelle;de moedertaal;3.5;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_729;l'aversion (een hekel hebben aan);de hekel;4.23;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_730;le tableau (peinture);het schilderij;4.3;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_731;le dentiste;de tandarts;4.04;Standard;Courant;B2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_732;l'adresse;het adres;4.68;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_733;la mamie;de oma;4.68;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_734;l'appartement;het appartement;4.58;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_735;la professeure;de lerares;3.82;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_736;la serrure / le château;het slot;4.63;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_737;l'invité;de gast;4.69;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_738;le grand-père;de grootvader;4.09;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_739;la conversation;het gesprek;4.99;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_740;le printemps;de lente;4.49;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_741;l'e-mail;de e-mail;4.78;Standard;Courant;A1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_742;le soldat;de soldaat;4.47;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_743;le peuple;het volk;4.92;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_744;le sport;de sport;4.98;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_745;le tremblement de terre;de aardbeving;4.08;Standard;Courant;B1;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_746;le riz;de rijst;4.19;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_747;le voisin;de buur;3.5;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_748;la tante;de tante;4.41;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_749;le tour (à qui le tour);de beurt;4.62;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_750;le signe;het teken;4.79;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_751;le voleur;de dief;3.73;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_752;le sujet;het onderwerp;4.8;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_753;le musée;het museum;4.91;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_754;le couple;het stel;5.06;Standard;Essentiel;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_755;la tempête;de storm;4.73;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_756;le mètre;de meter;5.15;Standard;Essentiel;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_757;le souffle / l'haleine;de adem;4.24;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_758;l'herbe;het gras;4.39;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_759;l'arme;het wapen;4.84;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_760;la banane;de banaan;3.72;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_761;le musulman;de moslim;4.28;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_762;le licenciement / la démission;het ontslag;4.55;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_763;l'euro;de euro;5.25;Standard;Essentiel;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_764;la retraite;het pensioen;4.53;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_765;la nourriture;het voedsel;4.71;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_766;la caméra / l'appareil photo;de camera;4.83;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_767;l'accident;het ongeval;4.24;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_768;le mouton;het schaap;3.94;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_769;le reste;de rest;5.19;Standard;Essentiel;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_770;la recherche / l'enquête;het onderzoek;5.46;Standard;Essentiel;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_771;le numéro de téléphone;het telefoonnummer;4.08;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_772;le miroir;de spiegel;4.36;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_773;la feuille;het blad;4.4;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_774;la preuve;het bewijs;4.88;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_775;le tissu / la matière;de stof;4.67;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_776;l'internet;het internet;5.18;Standard;Essentiel;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_777;la lampe;de lamp;4.07;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_778;la tomate;de tomaat;3.72;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_779;le policier;de politieagent;4.07;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_780;la piscine;het zwembad;4.52;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_781;le pantalon;de broek;4.67;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_782;la ferme;de boerderij;4.49;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_783;la mosquée;de moskee;4.22;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_784;le hobby;de hobby;4.15;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_785;la tâche;de taak;4.64;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_786;la chemise / le maillot;het shirt;4.57;Standard;Courant;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_787;l'article;het artikel;5.42;Standard;Essentiel;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_788;la rose;de roos;4.22;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_789;l'aéroport;het vliegveld;4.48;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_790;le gars;de kerel;4.17;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_791;le professeur d'université;de professor;4.66;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_792;la permission;de toestemming;4.83;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_793;le beurre;de boter;4.05;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_794;le baseball;het honkbal;3.51;Standard;Courant;B2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_795;les spaghettis;de spaghetti;3.59;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_796;le passeport;het paspoort;4.28;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_797;le papi;de opa;4.47;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_798;la chambre à coucher;de slaapkamer;4.29;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_799;le biscuit / le gâteau;de koek;3.69;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_800;la larme;de traan;3.37;Standard;Spécialisé;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_801;le serpent;de slang;4.11;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_802;le suicide;de zelfmoord;4.41;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_803;le cadeau;het geschenk;3.93;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_804;l'étage;de verdieping;4.46;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_805;le souhait;de wens;4.74;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_806;l'excuse;het excuus;4.28;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_807;le site web;de website;5.56;Standard;Essentiel;A1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_808;la foi / la croyance;het geloof;5.17;Standard;Essentiel;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_809;le magazine;het tijdschrift;4.62;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_810;l'ascenseur;de lift;4.35;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_811;le détail;het detail;4.18;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_812;le voisin;de buurman;4.11;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_813;l'épaule;de schouder;4.1;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_814;la beauté;de schoonheid;4.43;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_815;la machine;de machine;4.57;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_816;le kilomètre;de kilometer;4.94;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_817;le zoo;de dierentuin;4.02;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_818;l'ours;de beer;4.28;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_819;l'écrivain;de schrijver;4.89;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_820;le porte-monnaie;de portemonnee;4.05;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_821;les bonbons;het snoep;3.96;Standard;Courant;B1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_822;le supermarché;de supermarkt;4.33;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_823;la possibilité;de mogelijkheid;4.8;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_824;la langue (organe);de tong;4.21;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_825;le discours;de toespraak;4.09;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_826;l'instant;het ogenblik;4.1;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_827;l'agriculteur;de boer;4.47;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_828;l'enseignant;de docent;4.43;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_829;la fin / le bout;het eind;5.15;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_830;la cravate;de stropdas;3.44;Standard;Spécialisé;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_831;la vidéo;de video;5.44;Standard;Essentiel;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_832;les études;de studie;4.72;Standard;Courant;A1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_833;le gant;de handschoen;3.37;Standard;Spécialisé;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_834;le sapin de Noël;de kerstboom;3.77;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_835;le papillon;de vlinder;3.86;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_836;le sourire;de glimlach;4.32;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_837;l'alcool;de alcohol;4.43;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_838;le pistolet;het pistool;3.83;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_839;le regard;de blik;4.53;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_840;le chanteur;de zanger;4.4;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_841;la dame;de dame;4.68;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_842;la pile / la batterie;de batterij;4.18;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_843;le poète;de dichter;4.56;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_844;la promesse;de belofte;4.17;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_845;l'automne;de herfst;4.3;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_846;la seconde;de seconde;4.31;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_847;la salade (laitue);de sla;4.32;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_848;la théorie;de theorie;4.57;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_849;l'éléphant;de olifant;4.03;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_850;la madame;de mevrouw;4.66;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_851;la population;de bevolking;4.95;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_852;l'époux;de echtgenoot;4.52;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_853;la promenade;de wandeling;4.26;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_854;les bêtises / le non-sens;de onzin;4.7;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_855;la princesse;de prinses;4.47;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_856;le goût;de smaak;4.5;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_857;le régime (alimentaire);het dieet;4.07;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_858;la grand-mère;de grootmoeder;3.97;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_859;le mot de passe;het wachtwoord;4.02;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_860;la fumée;de rook;4.48;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_861;le garage;de garage;4.29;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_862;le trésor / le chéri;de schat;4.7;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_863;le coq;de haan;4.0;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_864;le manque / le défaut;het gebrek;4.59;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_865;la source;de bron;5.02;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_866;le cake;de cake;3.94;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_867;la fièvre;de koorts;3.96;Standard;Courant;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_868;l'énergie;de energie;5.04;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_869;la carotte / la racine;de wortel;3.82;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_870;le couloir;de gang;4.89;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_871;le politicien;de politicus;4.41;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_872;la chemise;het hemd;3.74;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_873;le bateau;de boot;4.69;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_874;la température;de temperatuur;4.64;Standard;Courant;B1;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_875;le bruit;het lawaai;4.09;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_876;l'intention;de bedoeling;4.69;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_877;la signification;de betekenis;4.66;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_878;l'ambassade;de ambassade;4.11;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_879;le permis de conduire;het rijbewijs;4.27;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_880;le but (sport);het doelpunt;4.26;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_881;la vaisselle;de afwas;3.41;Standard;Spécialisé;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_882;les frites;de friet;3.48;Standard;Spécialisé;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_883;le scientifique;de wetenschapper;4.14;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_884;le bouton;de knop;4.32;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_885;l'huile / le pétrole;de olie;4.69;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_886;l'épouse;de echtgenote;4.13;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_887;le genou;de knie;4.17;Standard;Courant;A1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_888;l'étranger (personne);de buitenlander;3.4;Standard;Spécialisé;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_889;le sort / le billet de loterie;het lot;4.54;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_890;le truc / les affaires;het spul;3.92;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_891;la manière;de wijze;4.83;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_892;la poupée;de pop;4.48;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_893;l'acteur;de acteur;4.27;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_894;le respect;het respect;4.92;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_895;l'aéroport;de luchthaven;4.4;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_896;la douche;de douche;4.36;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_897;les bagages;de bagage;4.1;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_898;la rumeur;het gerucht;3.99;Standard;Courant;B2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_899;la campagne;het platteland;4.12;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_900;la poitrine;de borst;4.35;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_901;la côte;de kust;4.73;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_902;les toilettes;het toilet;4.54;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_903;le bureau de poste;het postkantoor;3.64;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_904;le silence;de stilte;4.51;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_905;la frayeur;de schrik;4.05;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_906;l'auteur;de auteur;4.67;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_907;la fourchette;de vork;3.59;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_908;la grenouille;de kikker;3.87;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_909;le singe;de aap;4.12;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_910;le kilo;de kilo;4.53;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_911;la saison;het seizoen;5.16;Standard;Essentiel;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_912;le nombre;het getal;4.09;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_913;l'habitant;de inwoner;3.99;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_914;la queue (d'animal);de staart;4.19;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_915;le touriste;de toerist;3.65;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_916;le mariage (fête);de bruiloft;4.28;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_917;la patience;het geduld;4.4;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_918;le centime;de cent;4.25;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_919;l'invitation;de uitnodiging;4.26;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_920;le journal intime;het dagboek;4.04;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_921;le loyer;de huur;4.48;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_922;la salle de bain;de badkamer;4.29;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_923;l'importance / l'intérêt;het belang;5.08;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_924;le marteau;de hamer;3.92;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_925;le Père Noël;de kerstman;3.61;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_926;le sud;het zuiden;4.8;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_927;le climat;het klimaat;4.53;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_928;les environs / l'environnement;de omgeving;5.15;Standard;Essentiel;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_929;l'humanité;de mensheid;4.32;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_930;les jouets;het speelgoed;4.23;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_931;la peau;de huid;4.56;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_932;la demande;het verzoek;4.69;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_933;la surprise;de verrassing;4.54;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_934;le papa;de papa;4.58;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_935;l'appareil photo;het fototoestel;2.99;Standard;Spécialisé;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_936;le sentier;het pad;4.69;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_937;le joueur;de speler;4.75;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_938;l'ombre;de schaduw;4.19;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_939;la gorge;de keel;4.28;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_940;le document;het document;4.25;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_941;le héros;de held;4.6;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_942;le menteur;de leugenaar;3.73;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_943;le lapin;het konijn;4.02;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_944;l'artiste;de kunstenaar;4.51;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_945;l'estomac;de maag;4.11;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_946;le citoyen;de burger;4.61;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_947;la vue;het zicht;4.5;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_948;la botte;de laars;3.51;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_949;le jus d'orange;het sinaasappelsap;2.93;Standard;Spécialisé;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_950;le degré;de graad;4.09;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_951;la chemise;het overhemd;3.56;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_952;le centre;het centrum;5.18;Standard;Essentiel;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_953;l'élection;de verkiezing;4.3;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_954;le coup / la bataille;de slag;5.01;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_955;la fête de Noël;het kerstfeest;3.19;Standard;Spécialisé;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_956;l'offre;het aanbod;4.56;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_957;l'effort;de inspanning;3.81;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_958;le végétarien;de vegetariër;3.54;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_959;le message / la course;de boodschap;4.72;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_960;le cancer;de kanker;4.52;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_961;la violence;het geweld;4.78;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_962;l'ordinateur portable;de laptop;4.46;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_963;le type;de vent;4.34;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_964;minuit;de middernacht;3.93;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_965;le vase;de vaas;3.55;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_966;le devoir (obligation);de plicht;4.23;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_967;la foule;de menigte;3.96;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_968;la serviette (de bain);de handdoek;3.7;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_969;le système;het systeem;5.04;Standard;Essentiel;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_970;le prince;de prins;4.61;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_971;l'appétit / l'envie;de trek;4.58;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_972;la victoire;de overwinning;4.77;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_973;les ciseaux;de schaar;3.63;Standard;Courant;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_974;les vacances d'été;de zomervakantie;3.81;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_975;le logement;de woning;4.77;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_976;le progrès;de vooruitgang;4.25;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_977;le petit-enfant;het kleinkind;3.25;Standard;Spécialisé;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_978;l'après-midi;de namiddag;3.73;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_979;la pitié;het medelijden;4.12;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_980;la drogue;de drug;3.59;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_981;l'enseignement;het onderwijs;5.23;Standard;Essentiel;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_982;le mouchoir;de zakdoek;3.36;Standard;Spécialisé;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_983;la victime;het slachtoffer;4.86;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_984;les jumeaux;de tweeling;3.93;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_985;l'enfer;de hel;4.38;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_986;le loup;de wolf;4.36;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_987;l'adieu / les adieux;het afscheid;4.54;Standard;Courant;A1;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_988;la nièce / la cousine;de nicht;4.17;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_989;le rideau;het gordijn;3.52;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_990;le dirigeant / le chef;de leider;4.78;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_991;le jus;het sap;3.94;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_992;le raisin;de druif;3.35;Standard;Spécialisé;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_993;la fois;de maal;4.43;Standard;Courant;B1;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_994;les pâtes;de pasta;3.93;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_995;la tartine;de boterham;3.58;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_996;l'épée;het zwaard;3.99;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_997;la sécurité;de veiligheid;4.96;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_998;l'apparence;het uiterlijk;4.49;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_999;le propriétaire;de eigenaar;4.76;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1000;l'honneur;de eer;4.59;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1001;la bougie;de kaars;3.68;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1002;l'insecte;het insect;3.56;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1003;la chanteuse;de zangeres;4.13;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1004;le baiser;de kus;4.19;Standard;Courant;A1;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1005;le lion;de leeuw;4.28;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1006;l'accent;het accent;4.02;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1007;le logiciel;de software;4.48;Standard;Courant;B2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1008;l'aisance / la facilité;het gemak;4.22;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1009;la version;de versie;5.06;Standard;Essentiel;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1010;le renard;de vos;4.19;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1011;la corde;het touw;3.97;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1012;le rire;de lach;4.32;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1013;l'échelle;de ladder;3.78;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1014;l'autre côté;de overkant;3.95;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1015;le ministre;de minister;5.21;Standard;Essentiel;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1016;la couverture;de deken;4.13;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1017;la réunion / le rassemblement;de bijeenkomst;4.6;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1018;la recette / l'ordonnance;het recept;4.37;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1019;la punition;de straf;4.56;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1020;l'arrêt de bus;de bushalte;3.59;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1021;le t-shirt;het T-shirt;4.55;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1022;le miel;de honing;4.0;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1023;le théâtre;het theater;4.53;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1024;la région;de streek;4.41;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1025;le bourgmestre / le maire;de burgemeester;4.94;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1026;la colère;de woede;4.31;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1027;le lointain (in de verte);de verte;3.76;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1028;la planche / l'étagère;de plank;4.03;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1029;l'infirmière;de verpleegster;3.86;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1030;l'aile;de vleugel;3.81;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1031;la préférence;de voorkeur;4.49;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1032;l'ange;de engel;4.1;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1033;la cigarette;de sigaret;3.93;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1034;la salle de classe;het klaslokaal;3.33;Standard;Spécialisé;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1035;la vue (panorama);het uitzicht;4.37;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1036;le câlin / la peluche;de knuffel;4.03;Standard;Courant;B2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1037;le plaisir;het genoegen;4.0;Standard;Courant;B1;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1038;la salutation;de groet;3.96;Standard;Courant;A1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1039;le club;de club;5.12;Standard;Essentiel;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1040;l'étranger / l'inconnu;de vreemdeling;3.7;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1041;le diable;de duivel;4.05;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1042;le chauffeur;de chauffeur;4.44;Standard;Courant;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1043;le rhume;de verkoudheid;3.46;Standard;Spécialisé;B1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1044;la sagesse;de wijsheid;4.16;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1045;la tentative;de poging;4.6;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1046;le GSM / le téléphone portable;de gsm;4.17;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1047;le virus;het virus;4.52;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1048;la clôture / la grille;het hek;4.16;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1049;la trace / la voie (de train);het spoor;4.65;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1050;l'action;de actie;5.19;Standard;Essentiel;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1051;la panique;de paniek;4.46;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1052;la brosse à dents;de tandenborstel;3.36;Standard;Spécialisé;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1053;l'intention (met opzet = exprès);de opzet;4.33;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1054;le hamburger;de hamburger;3.83;Standard;Courant;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1055;la barbe;de baard;4.05;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1056;la blessure;de wond;3.67;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1057;l'arc-en-ciel;de regenboog;3.81;Standard;Courant;B1;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1058;la religion;de religie;4.45;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1059;le choix;de keus;4.34;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1060;la cuillère;de lepel;3.61;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1061;le volant / le guidon;het stuur;4.93;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1062;le test;de test;4.69;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1063;l'ordre (commandement);het bevel;4.47;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1064;le CD;de cd;4.58;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1065;le miracle;het wonder;4.3;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1066;le verbe;het werkwoord;3.53;Standard;Courant;B2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1067;le malentendu;het misverstand;3.6;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1068;l'intelligence;de intelligentie;4.0;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1069;l'alphabet;het alfabet;3.89;Standard;Courant;B2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1070;le passager;de passagier;3.61;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1071;le meuble;het meubel;3.15;Standard;Spécialisé;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1072;la circonstance;de omstandigheid;2.93;Standard;Spécialisé;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1073;le peintre;de schilder;4.13;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1074;l'entrée;de ingang;4.47;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1075;le meurtrier;de moordenaar;4.2;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1076;l'essence;de benzine;4.11;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1077;le dîner;het diner;4.34;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1078;l'option;de optie;4.53;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1079;l'os;het bot;4.2;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1080;le gaz;het gas;4.55;Standard;Courant;A1;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1081;le seau;de emmer;3.83;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1082;l'avertissement;de waarschuwing;4.38;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1083;la copie;de kopie;4.21;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1084;la notion / la compréhension;het begrip;4.6;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1085;l'âne;de ezel;3.94;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1086;l'argent (métal);het zilver;4.43;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1087;le symbole;het symbool;4.45;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1088;le dommage / les dégâts;de schade;4.91;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1089;le retard;de vertraging;4.09;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1090;l'objection;het bezwaar;4.31;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1091;le ventre;de buik;4.45;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1092;le rapport / le bulletin;het rapport;4.74;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1093;le coiffeur;de kapper;3.9;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1094;le combat;het gevecht;4.51;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1095;le café (lieu);het café;4.5;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1096;le mammifère;het zoogdier;2.89;Standard;Spécialisé;C1;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1097;l'ongle / le clou;de nagel;3.71;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1098;la médaille;de medaille;4.38;Standard;Courant;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1099;le parfum;het parfum;3.91;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1100;l'expérience (scientifique);het experiment;4.22;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1101;la patrie;het vaderland;4.08;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1102;l'ouest;het westen;4.82;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1103;la date;de datum;4.62;Standard;Courant;A1;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_1104;le jour férié;de feestdag;3.9;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_1105;le fusil;het geweer;3.97;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1106;le talent;het talent;4.54;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1107;la profession;het beroep;4.78;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1108;l'essai / l'épreuve;de proef;4.29;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1109;l'humeur;het humeur;3.56;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1110;la capacité / la fortune;het vermogen;4.49;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1111;la difficulté;de moeilijkheid;3.2;Standard;Spécialisé;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1112;l'enterrement;de begrafenis;4.21;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1113;le violon;de viool;3.69;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1114;le célibataire;de vrijgezel;3.81;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1115;le locuteur natif;de moedertaalspreker;1.65;Standard;Spécialisé;B2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1116;les frites;de patat;3.37;Standard;Spécialisé;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1117;la voisine;de buurvrouw;3.94;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1118;l'expression;de uitdrukking;4.06;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1119;le cri;de schreeuw;3.54;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1120;l'étang;de vijver;3.87;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1121;le nom de famille;de achternaam;4.3;Standard;Courant;A1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1122;le soutien;de steun;4.89;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1123;l'humour;de humor;4.53;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1124;la peinture (produit);de verf;4.13;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1125;le tapis / la robe;het kleed;3.71;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1126;la boue;de modder;3.84;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1127;le cadavre;het lijk;4.25;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1128;la pharmacie;de apotheek;3.84;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1129;l'opération;de operatie;4.66;Standard;Courant;B1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1130;le savon;de zeep;3.96;Standard;Courant;B2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1131;la livre (poids, monnaie);het pond;4.21;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1132;le directeur;de directeur;4.87;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1133;le diamant;de diamant;3.86;Standard;Courant;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1134;le puits;de put;4.02;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1135;l'objet;het voorwerp;4.13;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1136;l'enseignant;de leerkracht;4.14;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1137;le nid;het nest;4.17;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1138;le développement;de ontwikkeling;5.12;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1139;le commentaire;het commentaar;4.52;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1140;la tension artérielle;de bloeddruk;3.92;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1141;le grand-parent;de grootouder;2.06;Standard;Spécialisé;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1142;le jean;de spijkerbroek;3.66;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1143;l'électricité;de elektriciteit;4.31;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1144;le nord;het noorden;4.79;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1145;la page;de bladzijde;3.58;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1146;l'image / l'illustration;de afbeelding;4.59;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1147;le dragon;de draak;4.2;Standard;Courant;B1;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1148;le réveil (appareil);de wekker;3.59;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1149;le fer;het ijzer;4.02;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1150;l'écharpe;de sjaal;3.75;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1151;la politique (ligne de conduite);het beleid;4.88;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1152;le besoin;de behoefte;4.62;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1153;le pigeon;de duif;3.72;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1154;le péché / le gâchis;de zonde;4.38;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1155;le mouvement;de beweging;4.88;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1156;le courant;de stroom;4.63;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1157;le paysage;het landschap;4.54;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1158;l'animal de compagnie;het huisdier;3.96;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1159;la tombe;het graf;4.32;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1160;le brouillard;de mist;4.5;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1161;le job;de job;4.4;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1162;la démocratie;de democratie;4.59;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1163;le végane;de veganist;2.79;Standard;Spécialisé;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1164;le temple;de tempel;4.34;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1165;l'actrice;de actrice;4.13;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1166;le conducteur / le dirigeant;de bestuurder;4.46;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1167;le coucher du soleil;de zonsondergang;4.05;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1168;la gare;het treinstation;3.73;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1169;le métro;de metro;4.42;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1170;le séjour;het verblijf;4.36;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1171;la conscience;het bewustzijn;4.31;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1172;le centre commercial;het winkelcentrum;4.21;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1173;le bâton;de stok;3.97;Standard;Courant;A1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1174;la sortie;de uitgang;3.94;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1175;la salade;de salade;3.83;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1176;le carburant;de brandstof;4.26;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1177;le salon;de woonkamer;4.09;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1178;la décision;het besluit;4.81;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1179;le plafond;het plafond;3.99;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1180;le lacet;de veter;3.09;Standard;Spécialisé;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1181;le génie;het genie;3.64;Standard;Courant;B2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1182;le fichier;het bestand;4.3;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1183;le casque;de helm;4.06;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1184;le matou / la gueule de bois;de kater;3.75;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1185;le départ;de start;5.06;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1186;l'ail;de knoflook;3.57;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1187;le billet;het ticket;4.12;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1188;l'argument;het argument;4.13;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1189;le mile;de mijl;3.96;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1190;l'imagination;de fantasie;4.12;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1191;la chasse;de jacht;4.34;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1192;l'équilibre;het evenwicht;3.95;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1193;le christianisme;het christendom;4.03;Standard;Courant;B2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1194;la branche;de tak;4.1;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1195;le lever du soleil;de zonsopgang;3.77;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1196;la salle de sport;de sportschool;3.9;Standard;Courant;A1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1197;la représentation / le spectacle;de voorstelling;4.43;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1198;le monstre / l'échantillon;het monster;4.23;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1199;le lait chocolaté;de chocolademelk;3.49;Standard;Spécialisé;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1200;l'énigme;het raadsel;3.87;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1201;l'arrêt;de halte;3.96;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1202;la passion;de passie;4.45;Standard;Courant;B1;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1203;le rat;de rat;3.9;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1204;l'entreprise / la firme;de firma;4.08;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1205;le musicien;de muzikant;3.85;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1206;le tapis;het tapijt;3.8;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1207;la chaleur;de warmte;4.21;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1208;la pièce de théâtre;het toneelstuk;3.75;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1209;la contribution;de bijdrage;4.73;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1210;la place assise;de zitplaats;3.06;Standard;Spécialisé;B1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1211;la nationalité;de nationaliteit;4.15;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1212;le jardin (derrière la maison);de achtertuin;3.97;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1213;le traducteur;de vertaler;3.89;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1214;l'adolescent;de tiener;4.1;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1215;la lutte;de strijd;4.98;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1216;l'attaque;de aanval;4.83;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1217;la société (collectivité);de samenleving;4.77;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1218;le pape;de paus;4.63;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1219;le concombre;de komkommer;3.45;Standard;Spécialisé;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1220;la cathédrale;de kathedraal;3.84;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1221;le départ;het vertrek;4.62;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1222;la carte de crédit;de creditcard;3.74;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1223;la bête;het beest;4.02;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1224;le bénévole;de vrijwilliger;4.16;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1225;la toux;de hoest;3.51;Standard;Courant;B1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1226;la chute / le piège;de val;4.99;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1227;l'écriture (manuscrite);het handschrift;3.83;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1228;l'élément;het element;4.1;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1229;le petit-fils;de kleinzoon;3.96;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1230;le câble;de kabel;4.07;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1231;le coffre-fort;de kluis;3.76;Standard;Courant;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1232;la prestation / le concert;het optreden;4.89;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1233;le cauchemar;de nachtmerrie;4.09;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1234;la mangue;de mango;3.46;Standard;Spécialisé;B2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1235;le facteur;de postbode;3.57;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1236;la machine à laver;de wasmachine;3.62;Standard;Courant;B1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1237;le bonhomme de neige;de sneeuwpop;2.95;Standard;Spécialisé;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1238;la malchance / la panne;de pech;4.11;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1239;le terroriste;de terrorist;4.08;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1240;la nourriture (pour animaux);het voer;4.22;Standard;Courant;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1241;l'ambiance / le vote;de stemming;4.27;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1242;la présence;de aanwezigheid;4.57;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1243;la goutte;de druppel;3.9;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1244;la chauve-souris;de vleermuis;3.42;Standard;Spécialisé;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1245;le score / la position;de stand;4.95;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1246;l'orteil;de teen;4.0;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1247;le jus de pomme;het appelsap;3.02;Standard;Spécialisé;A1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1248;le policier;de politieman;3.83;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1249;l'appareil;het apparaat;4.3;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1250;l'instruction;de instructie;3.65;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1251;le paillasson / le tapis;de mat;4.0;Standard;Courant;A2;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1252;le menuisier / le charpentier;de timmerman;3.72;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1253;la demande (formelle);de aanvraag;4.35;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1254;le mal de ventre;de buikpijn;3.46;Standard;Spécialisé;B2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1255;l'espion;de spion;3.83;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1256;la vitesse;de snelheid;4.6;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1257;les pompiers;de brandweer;4.15;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1258;le désordre / la troupe;de troep;3.96;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1259;l'ingénieur;de ingenieur;3.88;Standard;Courant;B2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1260;le jeune homme;de jongeman;4.09;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1261;le nageur;de zwemmer;3.43;Standard;Spécialisé;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1262;l'événement;de gebeurtenis;4.25;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1263;l'entreprise;de onderneming;4.28;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1264;l'objet;het object;4.2;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1265;la cendre / l'axe;de as;4.69;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1266;le tir / le coup de feu;het schot;4.23;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1267;l'arbitre;de scheidsrechter;3.98;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1268;le sol / le fond;de bodem;4.44;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1269;la sueur;het zweet;3.99;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1270;le lâche;de lafaard;3.44;Standard;Spécialisé;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1271;l'illusion;de illusie;3.88;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1272;l'interprète;de tolk;3.62;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1273;le boucher;de slager;3.73;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1274;la lampe de poche;de zaklamp;3.25;Standard;Spécialisé;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1275;le coureur;de loper;3.73;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1276;le collier;de halsketting;2.81;Standard;Spécialisé;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1277;l'origine;de oorsprong;4.36;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1278;la biologie;de biologie;3.89;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1279;le maître / l'instituteur;de meester;4.56;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1280;le haricot;de boon;3.55;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1281;le métal;het metaal;4.12;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1282;la technologie;de technologie;4.61;Standard;Courant;B2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1283;le visiteur;de bezoeker;4.0;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1284;le patin (à glace);de schaats;3.0;Standard;Spécialisé;B2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1285;l'enveloppe;de envelop;3.6;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1286;la littérature;de literatuur;4.51;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1287;le poivre;de peper;3.61;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1288;la vengeance;de wraak;4.19;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1289;la claque / le coup;de klap;4.28;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1290;l'erreur;de vergissing;3.82;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1291;l'appartement / l'immeuble;de flat;4.19;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel
+NOMS_NL_1292;le vol (délit);de diefstal;4.28;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1293;la pilule;de pil;3.78;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1294;le médicament;het geneesmiddel;3.72;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1295;l'accord / la ressemblance;de overeenkomst;4.64;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1296;le revenu;het inkomen;4.46;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1297;l'assistant;de assistent;4.5;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1298;le rocher;de rots;3.88;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1299;la danse;de dans;4.54;Standard;Courant;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1300;le salaire;het salaris;4.4;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1301;la protéine / le blanc d'œuf;het eiwit;3.53;Standard;Courant;B1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1302;le bifteck;de biefstuk;3.42;Standard;Spécialisé;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1303;la communauté;de gemeenschap;4.67;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1304;le champignon;de paddenstoel;2.99;Standard;Spécialisé;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1305;la majuscule;de hoofdletter;3.35;Standard;Spécialisé;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1306;le moment (précis);het tijdstip;4.25;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_1307;la salle;de zaal;4.48;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1308;l'émotion;de emotie;4.06;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1309;le printemps;het voorjaar;4.26;Standard;Courant;A2;nt2lex;Temps;manuel;Temps;manuel
+NOMS_NL_1310;le juge;de rechter;4.92;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1311;le fantôme;het spook;3.42;Standard;Spécialisé;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1312;le chauffeur de bus;de buschauffeur;3.16;Standard;Spécialisé;A1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1313;la dinde;de kalkoen;3.22;Standard;Spécialisé;A2;nt2lex;Animaux;manuel;Animaux;manuel
+NOMS_NL_1314;la conférence;de conferentie;4.18;Standard;Courant;B2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1315;l'est;het oosten;4.91;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1316;l'application;de toepassing;4.47;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1317;le tonneau / le fût;het vat;4.17;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1318;la secrétaire;de secretaresse;3.89;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1319;le travailleur;de werker;3.6;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1320;le pilote;de piloot;4.12;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1321;la lèvre;de lip;3.67;Standard;Courant;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1322;la blague;de mop;3.91;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1323;la mélodie;de melodie;3.55;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1324;l'éclair / la foudre;de bliksem;3.66;Standard;Courant;A2;nt2lex;Nature;manuel;Nature;manuel
+NOMS_NL_1325;le cahier / l'écriture;het schrift;3.73;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1326;le bas / la chaussette;de kous;3.08;Standard;Spécialisé;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1327;le centimètre;de centimeter;4.22;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1328;le titre;de titel;5.08;Standard;Essentiel;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1329;le menu;het menu;4.04;Standard;Courant;A2;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1330;le masque;het masker;4.11;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1331;l'expert;de expert;4.3;Standard;Courant;B2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1332;l'événement;het evenement;4.68;Standard;Courant;B1;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1333;la sorcière;de heks;3.77;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1334;le traitement;de behandeling;4.75;Standard;Courant;B1;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1335;la cellule;de cel;4.55;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1336;le membre de la famille;het familielid;3.84;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1337;la série;de serie;5.06;Standard;Essentiel;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1338;la magie;de magie;3.96;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1339;la relation / le poste;de betrekking;4.78;Standard;Courant;A2;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1340;la somme;de som;3.87;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1341;la chaîne / le collier;de ketting;4.21;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1342;le formulaire;het formulier;3.81;Standard;Courant;A1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1343;la découverte;de ontdekking;4.06;Standard;Courant;B2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1344;le mystère;het mysterie;3.92;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1345;la feuille (de papier) / la peau;het vel;3.83;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1346;la longueur / la taille;de lengte;4.63;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1347;la réalité;de realiteit;4.38;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1348;l'agent (de police);de agent;4.56;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1349;le champagne;de champagne;4.07;Standard;Courant;B1;nt2lex;Alimentation;manuel;Alimentation;manuel
+NOMS_NL_1350;le jugement;het oordeel;4.38;Standard;Courant;B1;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1351;le prêtre;de priester;4.24;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1352;les échecs;het schaak;3.06;Standard;Spécialisé;A2;nt2lex;Société;manuel;Société;manuel
+NOMS_NL_1353;le vendeur;de verkoper;4.09;Standard;Courant;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1354;le manteau;de mantel;3.66;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1355;le clavier;het toetsenbord;4.01;Standard;Courant;B1;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1356;le diplôme;het diploma;4.35;Standard;Courant;B1;nt2lex;Travail-études;manuel;Travail-études;manuel
+NOMS_NL_1357;le symptôme;het symptoom;3.25;Standard;Spécialisé;A2;nt2lex;Corps & santé;manuel;Corps & santé;manuel
+NOMS_NL_1358;la catastrophe;de ramp;4.4;Standard;Courant;A2;nt2lex;Abstrait & concepts;manuel;Abstrait & concepts;manuel
+NOMS_NL_1359;la place (publique);het plein;4.5;Standard;Courant;A2;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1360;la boulangerie;de bakkerij;3.7;Standard;Courant;B1;nt2lex;Lieux;manuel;Lieux;manuel
+NOMS_NL_1361;l'aiguille;de naald;3.85;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1362;la misère;de ellende;4.42;Standard;Courant;A2;nt2lex;Émotions & sentiments;manuel;Émotions & sentiments;manuel
+NOMS_NL_1363;l'encre;de inkt;3.99;Standard;Courant;A2;nt2lex;Vêtements & objets;manuel;Vêtements & objets;manuel
+NOMS_NL_1364;l'ancêtre;de voorouder;2.96;Standard;Spécialisé;A2;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1365;le témoin;de getuige;4.47;Standard;Courant;B1;nt2lex;Personnes;manuel;Personnes;manuel
+NOMS_NL_1366;l'autoroute;de snelweg;4.29;Standard;Courant;A1;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1367;la place de parking;de parkeerplaats;4.12;Standard;Courant;A2;nt2lex;Transport;manuel;Transport;manuel
+NOMS_NL_1368;le balcon;het balkon;3.98;Standard;Courant;A1;nt2lex;Maison;manuel;Maison;manuel

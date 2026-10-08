@@ -338,3 +338,315 @@ VERBES_NL_335;soigner / veiller à;zorgen;5.46;Prioritaire;Essentiel;zorgde;gezo
 VERBES_NL_336;auxiliaire futur;zullen;5.69;Prioritaire;Auxiliaire/Modal;zou;-
 VERBES_NL_337;nager;zwemmen;4.6;Standard;Courant;zwom;gezwommen
 VERBES_NL_338;se taire;zwijgen;4.35;Prioritaire;Courant;zweeg;gezwegen
+VERBES_NL_339;avoir besoin de (niet hoeven = ne pas devoir);hoeven;4.7;Standard;Courant;hoefde;gehoeven
+VERBES_NL_340;payer;betalen;5.2;Standard;Essentiel;betaalde;betaald
+VERBES_NL_341;appeler / téléphoner;bellen;4.89;Standard;Courant;belde;gebeld
+VERBES_NL_342;pleuvoir;regenen;3.89;Standard;Courant;regende;geregend
+VERBES_NL_343;manquer / rater;missen;4.71;Standard;Courant;miste;gemist
+VERBES_NL_344;pleurer;huilen;4.48;Standard;Courant;huilde;gehuild
+VERBES_NL_345;se demander;zich afvragen;4.06;Standard;Courant;vroeg zich af;afgevraagd
+VERBES_NL_346;voler (dérober);stelen;4.16;Standard;Courant;stal;gestolen
+VERBES_NL_347;arrêter / cesser;ophouden;4.25;Standard;Courant;hield op;opgehouden
+VERBES_NL_348;attendre / s'attendre à;verwachten;4.74;Standard;Courant;verwachtte;verwacht
+VERBES_NL_349;ouvrir;openen;4.6;Standard;Courant;opende;geopend
+VERBES_NL_350;traduire;vertalen;4.09;Standard;Courant;vertaalde;vertaald
+VERBES_NL_351;détester;haten;4.22;Standard;Courant;haatte;gehaat
+VERBES_NL_352;courir;rennen;4.37;Standard;Courant;rende;gerend
+VERBES_NL_353;avoir l'air;eruitzien;2.71;Standard;Spécialisé;zag eruit;eruitgezien
+VERBES_NL_354;se terminer;aflopen;3.59;Standard;Courant;liep af;afgelopen
+VERBES_NL_355;sauver;redden;4.8;Standard;Courant;redde;gered
+VERBES_NL_356;sonner / avoir l'air (son);klinken;4.1;Standard;Courant;klonk;geklonken
+VERBES_NL_357;assassiner;vermoorden;4.33;Standard;Courant;vermoordde;vermoord
+VERBES_NL_358;réussir (het lukt = ça marche);lukken;4.35;Standard;Courant;lukte;gelukt
+VERBES_NL_359;remercier;bedanken;4.36;Standard;Courant;bedankte;bedankt
+VERBES_NL_360;convaincre;overtuigen;4.36;Standard;Courant;overtuigde;overtuigd
+VERBES_NL_361;atteindre;bereiken;4.98;Standard;Courant;bereikte;bereikt
+VERBES_NL_362;passer (du temps);doorbrengen;4.07;Standard;Courant;bracht door;doorgebracht
+VERBES_NL_363;neiger;sneeuwen;2.92;Standard;Spécialisé;sneeuwde;gesneeuwd
+VERBES_NL_364;tuer;doden;5.15;Standard;Essentiel;doodde;gedood
+VERBES_NL_365;disparaître;verdwijnen;4.61;Standard;Courant;verdween;verdwenen
+VERBES_NL_366;protéger;beschermen;4.92;Standard;Courant;beschermde;beschermd
+VERBES_NL_367;revenir;terugkomen;4.01;Standard;Courant;kwam terug;teruggekomen
+VERBES_NL_368;répondre à;beantwoorden;4.33;Standard;Courant;beantwoordde;beantwoord
+VERBES_NL_369;inviter;uitnodigen;3.86;Standard;Courant;nodigde uit;uitgenodigd
+VERBES_NL_370;licencier;ontslaan;3.77;Standard;Courant;ontsloeg;ontslagen
+VERBES_NL_371;comprendre (entendre);verstaan;4.09;Standard;Courant;verstond;verstaan
+VERBES_NL_372;s'échapper;ontsnappen;4.43;Standard;Courant;ontsnapte;ontsnapt
+VERBES_NL_373;intéresser;interesseren;3.51;Standard;Courant;interesseerde;geïnteresseerd
+VERBES_NL_374;regretter (het spijt me = je suis désolé);spijten;1.48;Standard;Spécialisé;speet;gespeten
+VERBES_NL_375;pêcher;vissen;4.58;Standard;Courant;viste;gevist
+VERBES_NL_376;partir;weggaan;3.84;Standard;Courant;ging weg;weggegaan
+VERBES_NL_377;réparer;repareren;4.02;Standard;Courant;repareerde;gerepareerd
+VERBES_NL_378;ajouter;toevoegen;4.21;Standard;Courant;voegde toe;toegevoegd
+VERBES_NL_379;cacher;verbergen;4.39;Standard;Courant;verborg;verborgen
+VERBES_NL_380;expliquer;uitleggen;4.42;Standard;Courant;legde uit;uitgelegd
+VERBES_NL_381;interdire;verbieden;4.1;Standard;Courant;verbood;verboden
+VERBES_NL_382;skier;skiën;3.75;Standard;Courant;skiede;geskied
+VERBES_NL_383;réfléchir;nadenken;4.45;Standard;Courant;dacht na;nagedacht
+VERBES_NL_384;causer;veroorzaken;4.4;Standard;Courant;veroorzaakte;veroorzaakt
+VERBES_NL_385;décider;beslissen;4.25;Standard;Courant;besliste;beslist
+VERBES_NL_386;tirer (arme);schieten;4.5;Standard;Courant;schoot;geschoten
+VERBES_NL_387;fêter;vieren;4.77;Standard;Courant;vierde;gevierd
+VERBES_NL_388;retourner;terugkeren;4.24;Standard;Courant;keerde terug;teruggekeerd
+VERBES_NL_389;livrer / procurer;bezorgen;4.38;Standard;Courant;bezorgde;bezorgd
+VERBES_NL_390;étonner;verbazen;3.99;Standard;Courant;verbaasde;verbaasd
+VERBES_NL_391;rappeler (au téléphone);terugbellen;2.93;Standard;Spécialisé;belde terug;teruggebeld
+VERBES_NL_392;décevoir;teleurstellen;3.56;Standard;Courant;stelde teleur;teleurgesteld
+VERBES_NL_393;tourner;draaien;4.69;Standard;Courant;draaide;gedraaid
+VERBES_NL_394;crier;schreeuwen;4.34;Standard;Courant;schreeuwde;geschreeuwd
+VERBES_NL_395;cacher;verstoppen;3.7;Standard;Courant;verstopte;verstopt
+VERBES_NL_396;allumer / mettre (vêtement) / faire subir;aandoen;4.02;Standard;Courant;deed aan;aangedaan
+VERBES_NL_397;découvrir;ontdekken;4.5;Standard;Courant;ontdekte;ontdekt
+VERBES_NL_398;peindre;schilderen;4.15;Standard;Courant;schilderde;geschilderd
+VERBES_NL_399;déranger;storen;3.63;Standard;Courant;stoorde;gestoord
+VERBES_NL_400;prétendre / affirmer;beweren;4.04;Standard;Courant;beweerde;beweerd
+VERBES_NL_401;se garer;parkeren;4.06;Standard;Courant;parkeerde;geparkeerd
+VERBES_NL_402;discuter de;bespreken;4.61;Standard;Courant;besprak;besproken
+VERBES_NL_403;rompre / avoir de l'importance;uitmaken;4.26;Standard;Courant;maakte uit;uitgemaakt
+VERBES_NL_404;survivre;overleven;4.51;Standard;Courant;overleefde;overleefd
+VERBES_NL_405;voter;stemmen;5.06;Standard;Essentiel;stemde;gestemd
+VERBES_NL_406;remarquer;opmerken;3.46;Standard;Spécialisé;merkte op;opgemerkt
+VERBES_NL_407;abandonner;opgeven;4.29;Standard;Courant;gaf op;opgegeven
+VERBES_NL_408;apparaître;verschijnen;4.41;Standard;Courant;verscheen;verschenen
+VERBES_NL_409;dépenser / publier;uitgeven;4.08;Standard;Courant;gaf uit;uitgegeven
+VERBES_NL_410;couvrir;bedekken;3.69;Standard;Courant;bedekte;bedekt
+VERBES_NL_411;reprendre (une tâche, une entreprise);overnemen;4.19;Standard;Courant;nam over;overgenomen
+VERBES_NL_412;plaire / accoucher;bevallen;4.1;Standard;Courant;beviel;bevallen
+VERBES_NL_413;examiner / enquêter;onderzoeken;4.77;Standard;Courant;onderzocht;onderzocht
+VERBES_NL_414;pardonner;vergeven;4.12;Standard;Courant;vergaf;vergeven
+VERBES_NL_415;attaquer;aanvallen;4.57;Standard;Courant;viel aan;aangevallen
+VERBES_NL_416;puer;stinken;3.37;Standard;Spécialisé;stonk;gestonken
+VERBES_NL_417;emporter / emmener;meenemen;4.37;Standard;Courant;nam mee;meegenomen
+VERBES_NL_418;rentrer à la maison;thuiskomen;3.76;Standard;Courant;kwam thuis;thuisgekomen
+VERBES_NL_419;ignorer;negeren;4.4;Standard;Courant;negeerde;genegeerd
+VERBES_NL_420;supprimer / enlever;verwijderen;4.68;Standard;Courant;verwijderde;verwijderd
+VERBES_NL_421;arrêter (police);arresteren;4.2;Standard;Courant;arresteerde;gearresteerd
+VERBES_NL_422;terminer;afmaken;3.92;Standard;Courant;maakte af;afgemaakt
+VERBES_NL_423;répéter;herhalen;4.1;Standard;Courant;herhaalde;herhaald
+VERBES_NL_424;sourire;glimlachen;3.44;Standard;Spécialisé;glimlachte;geglimlacht
+VERBES_NL_425;imaginer / concevoir;bedenken;4.45;Standard;Courant;bedacht;bedacht
+VERBES_NL_426;mettre (vêtement) / attirer;aantrekken;4.01;Standard;Courant;trok aan;aangetrokken
+VERBES_NL_427;battre (vaincre);verslaan;4.42;Standard;Courant;versloeg;verslagen
+VERBES_NL_428;sortir;uitgaan;4.2;Standard;Courant;ging uit;uitgegaan
+VERBES_NL_429;mentir;liegen;4.4;Standard;Courant;loog;gelogen
+VERBES_NL_430;entrer;binnenkomen;3.91;Standard;Courant;kwam binnen;binnengekomen
+VERBES_NL_431;accuser;beschuldigen;3.84;Standard;Courant;beschuldigde;beschuldigd
+VERBES_NL_432;accepter;accepteren;4.48;Standard;Courant;accepteerde;geaccepteerd
+VERBES_NL_433;vivre (une expérience);beleven;4.18;Standard;Courant;beleefde;beleefd
+VERBES_NL_434;se perdre;verdwalen;3.32;Standard;Spécialisé;verdwaalde;verdwaald
+VERBES_NL_435;prononcer;uitspreken;3.93;Standard;Courant;sprak uit;uitgesproken
+VERBES_NL_436;faire du shopping;winkelen;4.05;Standard;Courant;winkelde;gewinkeld
+VERBES_NL_437;insulter;beledigen;3.9;Standard;Courant;beledigde;beledigd
+VERBES_NL_438;régler / arranger;regelen;4.55;Standard;Courant;regelde;geregeld
+VERBES_NL_439;aller chercher;ophalen;4.47;Standard;Courant;haalde op;opgehaald
+VERBES_NL_440;se permettre;zich veroorloven;3.74;Standard;Courant;veroorloofde zich;veroorloofd
+VERBES_NL_441;ranger;opruimen;4.16;Standard;Courant;ruimde op;opgeruimd
+VERBES_NL_442;brûler;verbranden;4.1;Standard;Courant;verbrandde;verbrand
+VERBES_NL_443;séjourner;verblijven;4.24;Standard;Courant;verbleef;verbleven
+VERBES_NL_444;autoriser;toestaan;4.03;Standard;Courant;stond toe;toegestaan
+VERBES_NL_445;saigner;bloeden;3.52;Standard;Courant;bloedde;gebloed
+VERBES_NL_446;démarrer;starten;4.6;Standard;Courant;startte;gestart
+VERBES_NL_447;inventer;uitvinden;3.35;Standard;Spécialisé;vond uit;uitgevonden
+VERBES_NL_448;nier;ontkennen;4.17;Standard;Courant;ontkende;ontkend
+VERBES_NL_449;nettoyer;schoonmaken;4.16;Standard;Courant;maakte schoon;schoongemaakt
+VERBES_NL_450;atterrir;landen;5.26;Standard;Essentiel;landde;geland
+VERBES_NL_451;admettre;toegeven;4.25;Standard;Courant;gaf toe;toegegeven
+VERBES_NL_452;retenir / empêcher;tegenhouden;3.99;Standard;Courant;hield tegen;tegengehouden
+VERBES_NL_453;jouer aux échecs;schaken;3.75;Standard;Courant;schaakte;geschaakt
+VERBES_NL_454;exécuter / exporter;uitvoeren;4.41;Standard;Courant;voerde uit;uitgevoerd
+VERBES_NL_455;fondre;smelten;3.67;Standard;Courant;smolt;gesmolten
+VERBES_NL_456;déjeuner (midi);lunchen;3.92;Standard;Courant;lunchte;geluncht
+VERBES_NL_457;reconnaître;herkennen;4.29;Standard;Courant;herkende;herkend
+VERBES_NL_458;échouer;falen;4.02;Standard;Courant;faalde;gefaald
+VERBES_NL_459;soupçonner;verdenken;2.74;Standard;Spécialisé;verdacht;verdacht
+VERBES_NL_460;respecter;respecteren;4.03;Standard;Courant;respecteerde;gerespecteerd
+VERBES_NL_461;pousser;duwen;4.08;Standard;Courant;duwde;geduwd
+VERBES_NL_462;douter / hésiter;twijfelen;4.05;Standard;Courant;twijfelde;getwijfeld
+VERBES_NL_463;enterrer;begraven;4.65;Standard;Courant;begroef;begraven
+VERBES_NL_464;manger (entièrement);opeten;3.69;Standard;Courant;at op;opgegeten
+VERBES_NL_465;signer;ondertekenen;3.84;Standard;Courant;ondertekende;ondertekend
+VERBES_NL_466;s'excuser;zich verontschuldigen;3.06;Standard;Spécialisé;verontschuldigde zich;verontschuldigd
+VERBES_NL_467;se raser;zich scheren;3.87;Standard;Courant;schoor zich;geschoren
+VERBES_NL_468;détruire;vernietigen;4.32;Standard;Courant;vernietigde;vernietigd
+VERBES_NL_469;se comporter;zich gedragen;4.56;Standard;Courant;gedroeg zich;gedragen
+VERBES_NL_470;toucher;aanraken;3.7;Standard;Courant;raakte aan;aangeraakt
+VERBES_NL_471;arriver (à quelqu'un);overkomen;4.19;Standard;Courant;overkwam;overkomen
+VERBES_NL_472;apprécier;waarderen;4.21;Standard;Courant;waardeerde;gewaardeerd
+VERBES_NL_473;convenir / se donner rendez-vous;afspreken;3.98;Standard;Courant;sprak af;afgesproken
+VERBES_NL_474;jouer au tennis;tennissen;3.19;Standard;Spécialisé;tenniste;getennist
+VERBES_NL_475;indiquer / déclarer;aangeven;4.26;Standard;Courant;gaf aan;aangegeven
+VERBES_NL_476;fréquenter / gérer (omgaan met);omgaan;4.53;Standard;Courant;ging om;omgegaan
+VERBES_NL_477;craindre;vrezen;4.09;Standard;Courant;vreesde;gevreesd
+VERBES_NL_478;reporter;uitstellen;3.75;Standard;Courant;stelde uit;uitgesteld
+VERBES_NL_479;couler (sombrer);zinken;3.89;Standard;Courant;zonk;gezonken
+VERBES_NL_480;réaliser;realiseren;4.44;Standard;Courant;realiseerde;gerealiseerd
+VERBES_NL_481;obliger;verplichten;3.6;Standard;Courant;verplichtte;verplicht
+VERBES_NL_482;coudre;naaien;3.76;Standard;Courant;naaide;genaaid
+VERBES_NL_483;refuser / rejeter;afwijzen;3.58;Standard;Courant;wees af;afgewezen
+VERBES_NL_484;se détendre;ontspannen;4.24;Standard;Courant;ontspande;ontspannen
+VERBES_NL_485;sentir (odeur);ruiken;4.04;Standard;Courant;rook;geroken
+VERBES_NL_486;aboyer;blaffen;3.26;Standard;Spécialisé;blafte;geblaft
+VERBES_NL_487;agir / faire du commerce;handelen;4.32;Standard;Courant;handelde;gehandeld
+VERBES_NL_488;arriver;arriveren;3.64;Standard;Courant;arriveerde;gearriveerd
+VERBES_NL_489;peser;wegen;4.65;Standard;Courant;woog;gewogen
+VERBES_NL_490;se dérouler / expirer;verlopen;4.33;Standard;Courant;verliep;verlopen
+VERBES_NL_491;se rendre compte;beseffen;4.18;Standard;Courant;besefte;beseft
+VERBES_NL_492;souffler (vent);waaien;3.34;Standard;Spécialisé;waaide;gewaaid
+VERBES_NL_493;placer;plaatsen;5.28;Standard;Essentiel;plaatste;geplaatst
+VERBES_NL_494;guérir;genezen;4.09;Standard;Courant;genas;genezen
+VERBES_NL_495;recommander;aanbevelen;3.38;Standard;Spécialisé;beval aan;aanbevolen
+VERBES_NL_496;étudier (en détail);bestuderen;4.05;Standard;Courant;bestudeerde;bestudeerd
+VERBES_NL_497;gaspiller;verspillen;3.85;Standard;Courant;verspilde;verspild
+VERBES_NL_498;sortir / se réaliser / convenir;uitkomen;4.24;Standard;Courant;kwam uit;uitgekomen
+VERBES_NL_499;changer / échanger;wisselen;4.26;Standard;Courant;wisselde;gewisseld
+VERBES_NL_500;se noyer;verdrinken;3.62;Standard;Courant;verdronk;verdronken
+VERBES_NL_501;menacer;bedreigen;3.87;Standard;Courant;bedreigde;bedreigd
+VERBES_NL_502;prévoir / fournir;voorzien;4.83;Standard;Courant;voorzag;voorzien
+VERBES_NL_503;répandre;verspreiden;4.29;Standard;Courant;verspreidde;verspreid
+VERBES_NL_504;diriger / orienter;richten;4.63;Standard;Courant;richtte;gericht
+VERBES_NL_505;participer;meedoen;4.56;Standard;Courant;deed mee;meegedaan
+VERBES_NL_506;blesser (moralement);kwetsen;3.83;Standard;Courant;kwetste;gekwetst
+VERBES_NL_507;avoir honte;zich schamen;4.05;Standard;Courant;schaamde zich;geschaamd
+VERBES_NL_508;distinguer;onderscheiden;4.28;Standard;Courant;onderscheidde;onderscheiden
+VERBES_NL_509;condamner;veroordelen;3.83;Standard;Courant;veroordeelde;veroordeeld
+VERBES_NL_510;préférer / élire;verkiezen;3.42;Standard;Spécialisé;verkoos;verkozen
+VERBES_NL_511;maîtriser;beheersen;4.06;Standard;Courant;beheerste;beheerst
+VERBES_NL_512;jouer au football;voetballen;3.98;Standard;Courant;voetbalde;gevoetbald
+VERBES_NL_513;économiser;sparen;4.19;Standard;Courant;spaarde;gespaard
+VERBES_NL_514;se concentrer;zich concentreren;3.96;Standard;Courant;concentreerde zich;geconcentreerd
+VERBES_NL_515;captiver;boeien;3.82;Standard;Courant;boeide;geboeid
+VERBES_NL_516;discuter / débattre;discussiëren;3.74;Standard;Courant;discussieerde;gediscussieerd
+VERBES_NL_517;interrompre;onderbreken;3.58;Standard;Courant;onderbrak;onderbroken
+VERBES_NL_518;conseiller;adviseren;3.87;Standard;Courant;adviseerde;geadviseerd
+VERBES_NL_519;rencontrer (par hasard);tegenkomen;3.95;Standard;Courant;kwam tegen;tegengekomen
+VERBES_NL_520;assister à;bijwonen;3.73;Standard;Courant;woonde bij;bijgewoond
+VERBES_NL_521;poursuivre;voortzetten;3.74;Standard;Courant;zette voort;voortgezet
+VERBES_NL_522;se tromper;zich vergissen;3.2;Standard;Spécialisé;vergiste zich;vergist
+VERBES_NL_523;patiner;schaatsen;3.95;Standard;Courant;schaatste;geschaatst
+VERBES_NL_524;trahir;verraden;3.93;Standard;Courant;verried;verraden
+VERBES_NL_525;régner;heersen;3.64;Standard;Courant;heerste;geheerst
+VERBES_NL_526;couper (aux ciseaux);knippen;3.93;Standard;Courant;knipte;geknipt
+VERBES_NL_527;collaborer;samenwerken;4.49;Standard;Courant;werkte samen;samengewerkt
+VERBES_NL_528;conseiller;aanraden;3.69;Standard;Courant;raadde aan;aangeraden
+VERBES_NL_529;dîner;dineren;3.58;Standard;Courant;dineerde;gedineerd
+VERBES_NL_530;constater / fixer;vaststellen;3.81;Standard;Courant;stelde vast;vastgesteld
+VERBES_NL_531;ronfler;snurken;3.1;Standard;Spécialisé;snurkte;gesnurkt
+VERBES_NL_532;s'entraîner;trainen;4.39;Standard;Courant;trainde;getraind
+VERBES_NL_533;soutenir;steunen;4.49;Standard;Courant;steunde;gesteund
+VERBES_NL_534;perdre (égarer);kwijtraken;3.65;Standard;Courant;raakte kwijt;kwijtgeraakt
+VERBES_NL_535;organiser;organiseren;4.7;Standard;Courant;organiseerde;georganiseerd
+VERBES_NL_536;fuir;vluchten;4.55;Standard;Courant;vluchtte;gevlucht
+VERBES_NL_537;réserver;reserveren;3.76;Standard;Courant;reserveerde;gereserveerd
+VERBES_NL_538;retourner;teruggaan;3.58;Standard;Courant;ging terug;teruggegaan
+VERBES_NL_539;conduire (une voiture);autorijden;3.71;Standard;Courant;reed auto;autogereden
+VERBES_NL_540;faire signe de la main;zwaaien;3.87;Standard;Courant;zwaaide;gezwaaid
+VERBES_NL_541;téléphoner;telefoneren;3.38;Standard;Spécialisé;telefoneerde;getelefoneerd
+VERBES_NL_542;diminuer;verminderen;4.25;Standard;Courant;verminderde;verminderd
+VERBES_NL_543;échouer / rater;mislukken;3.62;Standard;Courant;mislukte;mislukt
+VERBES_NL_544;exiger;vereisen;3.51;Standard;Courant;vereiste;vereist
+VERBES_NL_545;marquer (un but);scoren;4.24;Standard;Courant;scoorde;gescoord
+VERBES_NL_546;périr;omkomen;2.91;Standard;Spécialisé;kwam om;omgekomen
+VERBES_NL_547;jurer;zweren;3.51;Standard;Courant;zwoer;gezworen
+VERBES_NL_548;exagérer;overdrijven;3.63;Standard;Courant;overdreef;overdreven
+VERBES_NL_549;endommager;beschadigen;3.78;Standard;Courant;beschadigde;beschadigd
+VERBES_NL_550;éteindre / déposer;afzetten;3.7;Standard;Courant;zette af;afgezet
+VERBES_NL_551;divertir;vermaken;3.97;Standard;Courant;vermaakte;vermaakt
+VERBES_NL_552;dévaster;verwoesten;3.56;Standard;Courant;verwoestte;verwoest
+VERBES_NL_553;nourrir;voeden;4.05;Standard;Courant;voedde;gevoed
+VERBES_NL_554;baser;baseren;3.21;Standard;Spécialisé;baseerde;gebaseerd
+VERBES_NL_555;obtenir (un résultat);behalen;4.18;Standard;Courant;behaalde;behaald
+VERBES_NL_556;faire attention;opletten;3.85;Standard;Courant;lette op;opgelet
+VERBES_NL_557;googler;googelen;3.06;Standard;Spécialisé;googelde;gegoogeld
+VERBES_NL_558;couler (liquide);stromen;4.09;Standard;Courant;stroomde;gestroomd
+VERBES_NL_559;se dépêcher;zich haasten;3.56;Standard;Courant;haastte zich;gehaast
+VERBES_NL_560;approcher;naderen;3.71;Standard;Courant;naderde;genaderd
+VERBES_NL_561;prendre (médicament) / occuper;innemen;4.05;Standard;Courant;nam in;ingenomen
+VERBES_NL_562;fasciner;fascineren;2.44;Standard;Spécialisé;fascineerde;gefascineerd
+VERBES_NL_563;obéir;gehoorzamen;3.65;Standard;Courant;gehoorzaamde;gehoorzaamd
+VERBES_NL_564;augmenter;toenemen;3.93;Standard;Courant;nam toe;toegenomen
+VERBES_NL_565;déplacer;verplaatsen;4.27;Standard;Courant;verplaatste;verplaatst
+VERBES_NL_566;menacer;dreigen;3.9;Standard;Courant;dreigde;gedreigd
+VERBES_NL_567;empoisonner;vergiftigen;3.08;Standard;Spécialisé;vergiftigde;vergiftigd
+VERBES_NL_568;négocier;onderhandelen;4.03;Standard;Courant;onderhandelde;onderhandeld
+VERBES_NL_569;préparer;klaarmaken;3.91;Standard;Courant;maakte klaar;klaargemaakt
+VERBES_NL_570;annuler;annuleren;3.56;Standard;Courant;annuleerde;geannuleerd
+VERBES_NL_571;poursuivre (suivre);achtervolgen;3.46;Standard;Spécialisé;achtervolgde;achtervolgd
+VERBES_NL_572;couvrir / mettre (la table);dekken;3.83;Standard;Courant;dekte;gedekt
+VERBES_NL_573;escalader;beklimmen;3.66;Standard;Courant;beklom;beklommen
+VERBES_NL_574;maigrir;afvallen;3.96;Standard;Courant;viel af;afgevallen
+VERBES_NL_575;tenter;trachten;3.37;Standard;Spécialisé;trachtte;getracht
+VERBES_NL_576;donner un coup de pied;schoppen;3.68;Standard;Courant;schopte;geschopt
+VERBES_NL_577;concevoir (design);ontwerpen;4.33;Standard;Courant;ontwierp;ontworpen
+VERBES_NL_578;avouer;bekennen;3.87;Standard;Courant;bekende;bekend
+VERBES_NL_579;se reposer;uitrusten;3.57;Standard;Courant;rustte uit;uitgerust
+VERBES_NL_580;décorer;versieren;3.85;Standard;Courant;versierde;versierd
+VERBES_NL_581;calmer / se calmer;kalmeren;3.48;Standard;Spécialisé;kalmeerde;gekalmeerd
+VERBES_NL_582;mélanger;mengen;3.78;Standard;Courant;mengde;gemengd
+VERBES_NL_583;passer (chez quelqu'un);langskomen;3.83;Standard;Courant;kwam langs;langsgekomen
+VERBES_NL_584;verser (argent) / s'effondrer;storten;3.98;Standard;Courant;stortte;gestort
+VERBES_NL_585;enlever (kidnapper);ontvoeren;3.46;Standard;Spécialisé;ontvoerde;ontvoerd
+VERBES_NL_586;deviner;raden;4.42;Standard;Courant;raadde;geraden
+VERBES_NL_587;percuter (en voiture);aanrijden;3.02;Standard;Spécialisé;reed aan;aangereden
+VERBES_NL_588;polluer;vervuilen;2.92;Standard;Spécialisé;vervuilde;vervuild
+VERBES_NL_589;envisager;overwegen;4.13;Standard;Courant;overwoog;overwogen
+VERBES_NL_590;saluer;begroeten;3.32;Standard;Spécialisé;begroette;begroet
+VERBES_NL_591;entrer en collision;botsen;3.53;Standard;Courant;botste;gebotst
+VERBES_NL_592;protester;protesteren;3.75;Standard;Courant;protesteerde;geprotesteerd
+VERBES_NL_593;préparer (repas);bereiden;4.08;Standard;Courant;bereidde;bereid
+VERBES_NL_594;conduire / diriger;besturen;4.05;Standard;Courant;bestuurde;bestuurd
+VERBES_NL_595;remplir (un devoir, un souhait);vervullen;4.11;Standard;Courant;vervulde;vervuld
+VERBES_NL_596;cueillir;plukken;3.86;Standard;Courant;plukte;geplukt
+VERBES_NL_597;emballer / faire ses valises;inpakken;3.9;Standard;Courant;pakte in;ingepakt
+VERBES_NL_598;jeter;weggooien;3.6;Standard;Courant;gooide weg;weggegooid
+VERBES_NL_599;enlever (vêtement) / éteindre;uitdoen;3.12;Standard;Spécialisé;deed uit;uitgedaan
+VERBES_NL_600;exprimer;uitdrukken;3.45;Standard;Spécialisé;drukte uit;uitgedrukt
+VERBES_NL_601;disposer (beschikken over);beschikken;4.15;Standard;Courant;beschikte;beschikt
+VERBES_NL_602;bavarder;kletsen;3.9;Standard;Courant;kletste;gekletst
+VERBES_NL_603;se doucher;douchen;4.05;Standard;Courant;douchte;gedoucht
+VERBES_NL_604;prendre sur le fait;betrappen;3.11;Standard;Spécialisé;betrapte;betrapt
+VERBES_NL_605;tromper;bedriegen;3.63;Standard;Courant;bedroog;bedrogen
+VERBES_NL_606;rester à la maison;thuisblijven;3.56;Standard;Courant;bleef thuis;thuisgebleven
+VERBES_NL_607;arriver / parvenir (Belgique);geraken;3.96;Standard;Courant;geraakte;geraakt
+VERBES_NL_608;gouverner;regeren;3.96;Standard;Courant;regeerde;geregeerd
+VERBES_NL_609;photographier;fotograferen;3.97;Standard;Courant;fotografeerde;gefotografeerd
+VERBES_NL_610;annoncer;aankondigen;3.44;Standard;Spécialisé;kondigde aan;aangekondigd
+VERBES_NL_611;témoigner;getuigen;4.49;Standard;Courant;getuigde;getuigd
+VERBES_NL_612;faire du sport;sporten;4.43;Standard;Courant;sportte;gesport
+VERBES_NL_613;féliciter;feliciteren;3.81;Standard;Courant;feliciteerde;gefeliciteerd
+VERBES_NL_614;éplucher;schillen;3.37;Standard;Spécialisé;schilde;geschild
+VERBES_NL_615;unir;verenigen;3.78;Standard;Courant;verenigde;verenigd
+VERBES_NL_616;balayer / essuyer;vegen;3.78;Standard;Courant;veegde;geveegd
+VERBES_NL_617;communiquer;communiceren;4.27;Standard;Courant;communiceerde;gecommuniceerd
+VERBES_NL_618;grandir;opgroeien;3.86;Standard;Courant;groeide op;opgegroeid
+VERBES_NL_619;choquer;schokken;3.48;Standard;Spécialisé;schokte;geschokt
+VERBES_NL_620;reconnaître (admettre);erkennen;4.03;Standard;Courant;erkende;erkend
+VERBES_NL_621;repasser (linge);strijken;3.66;Standard;Courant;streek;gestreken
+VERBES_NL_622;sécher;drogen;3.66;Standard;Courant;droogde;gedroogd
+VERBES_NL_623;économiser / épargner;besparen;4.27;Standard;Courant;bespaarde;bespaard
+VERBES_NL_624;admirer;bewonderen;3.81;Standard;Courant;bewonderde;bewonderd
+VERBES_NL_625;subir;ondergaan;4.17;Standard;Courant;onderging;ondergaan
+VERBES_NL_626;attendre (de voir);afwachten;4.08;Standard;Courant;wachtte af;afgewacht
+VERBES_NL_627;libérer;vrijlaten;3.57;Standard;Courant;liet vrij;vrijgelaten
+VERBES_NL_628;mâcher;kauwen;3.44;Standard;Spécialisé;kauwde;gekauwd
+VERBES_NL_629;briller;schitteren;3.26;Standard;Spécialisé;schitterde;geschitterd
+VERBES_NL_630;appeler / convoquer;oproepen;4.1;Standard;Courant;riep op;opgeroepen
+VERBES_NL_631;siffler;fluiten;3.65;Standard;Courant;floot;gefloten
+VERBES_NL_632;irriter;irriteren;3.32;Standard;Spécialisé;irriteerde;geïrriteerd
+VERBES_NL_633;secouer;schudden;4.08;Standard;Courant;schudde;geschud
+VERBES_NL_634;accompagner;begeleiden;3.96;Standard;Courant;begeleidde;begeleid
+VERBES_NL_635;applaudir;applaudisseren;2.52;Standard;Spécialisé;applaudisseerde;geapplaudisseerd
+VERBES_NL_636;descendre (d'un véhicule);uitstappen;3.67;Standard;Courant;stapte uit;uitgestapt
+VERBES_NL_637;s'amuser;zich amuseren;3.21;Standard;Spécialisé;amuseerde zich;geamuseerd
+VERBES_NL_638;creuser;graven;4.29;Standard;Courant;groef;gegraven
+VERBES_NL_639;choisir / tirer au clair;uitzoeken;4.13;Standard;Courant;zocht uit;uitgezocht
+VERBES_NL_640;râler / pleurnicher;zeuren;3.86;Standard;Courant;zeurde;gezeurd
+VERBES_NL_641;frustrer;frustreren;2.5;Standard;Spécialisé;frustreerde;gefrustreerd
+VERBES_NL_642;se mêler (zich bemoeien met);zich bemoeien;4.02;Standard;Courant;bemoeide zich;bemoeid
+VERBES_NL_643;baisser;verlagen;4.02;Standard;Courant;verlaagde;verlaagd
+VERBES_NL_644;ouvrir (la porte);opendoen;2.92;Standard;Spécialisé;deed open;opengedaan
+VERBES_NL_645;communiquer / informer;meedelen;3.22;Standard;Spécialisé;deelde mee;meegedeeld
+VERBES_NL_646;éternuer;niezen;3.38;Standard;Spécialisé;niesde;geniesd
+VERBES_NL_647;vomir / se rendre;overgeven;3.58;Standard;Courant;gaf over;overgegeven
+VERBES_NL_648;éteindre;uitzetten;3.83;Standard;Courant;zette uit;uitgezet
+VERBES_NL_649;bâiller;geeuwen;2.24;Standard;Spécialisé;geeuwde;gegeeuwd
+VERBES_NL_650;s'ennuyer;zich vervelen;3.83;Standard;Courant;verveelde zich;verveeld

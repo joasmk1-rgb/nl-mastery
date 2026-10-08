@@ -256,3 +256,267 @@ ADJECTIFS_NL_253;jusque là;zover;4.87;Standard;Courant;A2;nt2lex;Qualité;heuri
 ADJECTIFS_NL_254;lourd;zwaar;4.91;Prioritaire;Courant;A1;nt2lex;Description physique;heuristique_fr
 ADJECTIFS_NL_255;noir;zwart;5.0;Standard;Essentiel;A1;nt2lex;Description physique;heuristique_fr
 ADJECTIFS_NL_256;faible;zwak;4.45;Prioritaire;Courant;A2;nt2lex;Description physique;heuristique_fr
+ADJECTIFS_NL_257;entier / très;heel;6.0;Standard;Essentiel;A1;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_258;ordinaire / simplement;gewoon;5.85;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_259;mauvais;slecht;5.24;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_260;né;geboren;5.12;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_261;possible;mogelijk;5.49;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_262;fâché;boos;4.91;Standard;Courant;A1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_263;fort;sterk;5.12;Standard;Essentiel;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_264;intéressant;interessant;4.88;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_265;bon (au goût) / agréable;lekker;5.35;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_266;favori;favoriet;4.25;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_267;magnifique;prachtig;5.09;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_268;le même / la même chose;hetzelfde;5.24;Standard;Essentiel;A1;nt2lex;Comparaison;manuel
+ADJECTIFS_NL_269;plus tôt / plutôt;eerder;5.39;Standard;Essentiel;A2;nt2lex;Comparaison;manuel
+ADJECTIFS_NL_270;formidable;geweldig;5.15;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_271;le même;dezelfde;5.33;Standard;Essentiel;A1;nt2lex;Comparaison;manuel
+ADJECTIFS_NL_272;allergique;allergisch;3.63;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_273;honnête;eerlijk;5.0;Standard;Essentiel;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_274;passé / fini;voorbij;5.11;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_275;japonais;Japans;4.37;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_276;en fait / véritable;eigenlijk;5.45;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_277;silencieux / calme;stil;4.91;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_278;qui vaut (de moeite waard);waard;4.97;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_279;enfin;eindelijk;5.08;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_280;fâché / en colère;kwaad;4.63;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_281;finalement;uiteindelijk;5.22;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_282;amoureux;verliefd;4.72;Standard;Courant;A1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_283;fier;trots;5.09;Standard;Essentiel;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_284;français;Frans;4.9;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_285;raté / faux;mis;5.12;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_286;d'habitude;gewoonlijk;4.27;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_287;coupable;schuldig;4.64;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_288;nerveux;nerveus;3.44;Standard;Spécialisé;A1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_289;blessé;gewond;4.69;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_290;terrible;verschrikkelijk;4.48;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_291;simple;eenvoudig;4.65;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_292;gratuit;gratis;5.35;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_293;parfait;perfect;4.92;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_294;intelligent / malin;slim;4.65;Standard;Courant;A1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_295;énorme;enorm;4.91;Standard;Courant;A2;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_296;chinois;Chinees;4.44;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_297;sérieux;serieus;4.89;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_298;nerveux / stressé;zenuwachtig;4.0;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_299;américain;Amerikaans;4.37;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_300;drôle;grappig;4.84;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_301;ivre;dronken;4.32;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_302;délicieux;heerlijk;5.06;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_303;affreux;vreselijk;4.6;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_304;présent;aanwezig;5.1;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_305;ennuyeux;saai;4.36;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_306;gris;grijs;4.28;Standard;Courant;A1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_307;soudain;plotseling;4.27;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_308;innocent;onschuldig;4.23;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_309;allemand;Duits;4.65;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_310;timide;verlegen;3.83;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_311;anglais;Engels;4.97;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_312;actuellement;momenteel;4.83;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_313;frais (aliment);vers;4.28;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_314;intelligent;intelligent;3.99;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_315;fou (dol op = fou de);dol;4.19;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_316;d'accord;akkoord;4.69;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_317;enceinte;zwanger;4.55;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_318;triste;verdrietig;4.2;Standard;Courant;A1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_319;ennuyeux / embêtant;vervelend;4.35;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_320;malheureux;ongelukkig;3.98;Standard;Courant;A1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_321;assez / convenable;behoorlijk;4.59;Standard;Courant;A2;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_322;bête / stupide;stom;4.31;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_323;adulte;volwassen;4.62;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_324;fantastique;fantastisch;4.77;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_325;conscient;bewust;4.72;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_326;seul / solitaire;eenzaam;3.89;Standard;Courant;A1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_327;idiot;idioot;4.25;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_328;moyen / secondaire (école);middelbaar;3.77;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_329;direct / tout de suite;direct;5.18;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_330;fort (son);luid;4.05;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_331;raisonnable;redelijk;4.47;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_332;faux;vals;4.17;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_333;méchant;gemeen;4.21;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_334;à droite / de droite;rechts;4.84;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_335;moderne;modern;4.31;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_336;orange (couleur);oranje;4.77;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_337;en or / doré;gouden;4.81;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_338;curieux;nieuwsgierig;4.27;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_339;lent;traag;4.12;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_340;frais;fris;4.1;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_341;patient;geduldig;3.74;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_342;reconnaissant;dankbaar;4.4;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_343;européen;Europees;4.6;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_344;ridicule;belachelijk;4.64;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_345;néerlandais;Nederlands;5.08;Standard;Essentiel;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_346;tranchant / pointu / épicé;scherp;4.49;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_347;somnolent;slaperig;3.01;Standard;Spécialisé;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_348;fade / pas drôle;flauw;4.05;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_349;violet;paars;3.95;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_350;italien;Italiaans;4.2;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_351;blond;blond;4.09;Standard;Courant;A1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_352;correct;correct;4.23;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_353;indépendant;onafhankelijk;4.52;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_354;impoli;onbeleefd;3.05;Standard;Spécialisé;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_355;bientôt / rapide;spoedig;4.16;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_356;urgent;dringend;4.35;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_357;nécessaire;noodzakelijk;4.32;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_358;éternel;eeuwig;4.1;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_359;chauve;kaal;3.87;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_360;classique;klassiek;4.08;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_361;apparemment;blijkbaar;4.92;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_362;absent;afwezig;3.87;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_363;cordial;hartelijk;4.3;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_364;aimé / populaire;geliefd;4.01;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_365;pratique;praktisch;4.18;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_366;attirant;aantrekkelijk;4.28;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_367;vite / bientôt;gauw;4.43;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_368;médical;medisch;4.49;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_369;électrique;elektrisch;4.01;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_370;enrhumé;verkouden;3.34;Standard;Spécialisé;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_371;sot / fou;dwaas;3.43;Standard;Spécialisé;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_372;espagnol;Spaans;4.59;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_373;mobile;mobiel;4.48;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_374;national;nationaal;4.73;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_375;amer;bitter;3.68;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_376;pareil / de ce genre;dergelijk;4.08;Standard;Courant;B1;nt2lex;Comparaison;manuel
+ADJECTIFS_NL_377;constant;constant;4.39;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_378;simple;simpel;4.69;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_379;compliqué;ingewikkeld;4.1;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_380;courageux;dapper;3.89;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_381;espérons que;hopelijk;4.73;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_382;illégal;illegaal;4.23;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_383;effrayant / étroit;eng;4.35;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_384;automatique;automatisch;4.39;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_385;russe;Russisch;4.42;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_386;mince / fin;dun;4.08;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_387;rose;roze;4.52;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_388;extrême;extreem;4.45;Standard;Courant;B2;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_389;précieux;waardevol;3.95;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_390;confus;verward;4.08;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_391;courageux;moedig;4.01;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_392;en ligne;online;5.55;Standard;Essentiel;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_393;cru;rauw;3.68;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_394;toxique / vénéneux;giftig;3.78;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_395;sale;vuil;4.27;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_396;incroyable;ongelooflijk;4.46;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_397;triste;droevig;3.82;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_398;agaçant;irritant;3.89;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_399;impressionnant;indrukwekkend;4.28;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_400;saint / sacré;heilig;4.12;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_401;contagieux;besmettelijk;3.61;Standard;Courant;B1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_402;pratique / habile;handig;4.58;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_403;idéal;ideaal;4.15;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_404;égoïste;egoïstisch;3.29;Standard;Spécialisé;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_405;agressif;agressief;4.01;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_406;britannique;Brits;4.08;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_407;logique;logisch;4.52;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_408;romantique;romantisch;3.97;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_409;dépressif;depressief;3.78;Standard;Courant;B2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_410;couronné de succès;succesvol;4.53;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_411;plat;plat;4.28;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_412;dépendant;afhankelijk;4.74;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_413;canadien;Canadees;3.67;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_414;proche / tout près;dichtbij;4.67;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_415;temporaire;tijdelijk;4.64;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_416;optimiste;optimistisch;3.76;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_417;pris de vertige;duizelig;3.35;Standard;Spécialisé;B1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_418;nu;bloot;4.04;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_419;en vain;tevergeefs;3.77;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_420;islamique;islamitisch;3.85;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_421;d'origine / à l'origine;oorspronkelijk;4.63;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_422;artificiel;kunstmatig;3.45;Standard;Spécialisé;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_423;fiable;betrouwbaar;4.15;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_424;certainement / résolu;beslist;4.49;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_425;pur;puur;4.46;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_426;mort de peur;doodsbang;3.65;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_427;pourri;rot;4.29;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_428;improbable;onwaarschijnlijk;3.82;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_429;sincère;oprecht;4.18;Standard;Courant;B2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_430;acide / aigre;zuur;4.02;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_431;impatient;ongeduldig;3.53;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_432;alternatif;alternatief;4.41;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_433;modeste;bescheiden;4.17;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_434;lisse / glissant;glad;4.02;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_435;inconfortable / mal à l'aise;ongemakkelijk;3.92;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_436;violent / intense;hevig;3.8;Standard;Courant;A1;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_437;douloureux;pijnlijk;4.3;Standard;Courant;B1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_438;comptant (en espèces);contant;3.72;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_439;triste;triest;4.38;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_440;accro / dépendant;verslaafd;3.96;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_441;extraordinaire;buitengewoon;4.13;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_442;féminin;vrouwelijk;3.99;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_443;original;origineel;4.26;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_444;indépendant / autonome;zelfstandig;4.37;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_445;solide / ferme;stevig;4.21;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_446;complètement / parfait;volkomen;4.21;Standard;Courant;B1;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_447;glacial;ijskoud;3.44;Standard;Spécialisé;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_448;inutile;nutteloos;3.78;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_449;cruel;wreed;3.83;Standard;Courant;B2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_450;horrible;afschuwelijk;3.93;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_451;mûr;rijp;3.85;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_452;visible;zichtbaar;4.53;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_453;latin;Latijns;3.98;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_454;têtu;koppig;3.56;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_455;costaud / considérable;flink;4.67;Standard;Courant;A2;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_456;creux;hol;4.06;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_457;apparenté;verwant;3.51;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_458;ensoleillé;zonnig;3.65;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_459;bruyant;luidruchtig;3.11;Standard;Spécialisé;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_460;confortable;comfortabel;3.85;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_461;approfondi;grondig;4.04;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_462;attentif;aandachtig;3.54;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_463;catholique;katholiek;3.81;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_464;turc;Turks;4.04;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_465;commun;gemeenschappelijk;3.92;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_466;valable;geldig;4.38;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_467;nommé;genaamd;4.73;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_468;désagréable;onaangenaam;3.25;Standard;Spécialisé;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_469;religieux;religieus;3.93;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_470;mortel;dodelijk;4.2;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_471;biologique;biologisch;3.93;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_472;arrogant;arrogant;3.76;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_473;soûl / qui en a assez;zat;5.21;Standard;Essentiel;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_474;mineur (âge);minderjarig;3.34;Standard;Spécialisé;B1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_475;dont c'est l'anniversaire;jarig;4.5;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_476;local;plaatselijk;3.89;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_477;littéral / littéralement;letterlijk;4.59;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_478;grec;Grieks;3.96;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_479;nuageux;bewolkt;3.33;Standard;Spécialisé;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_480;désespéré;wanhopig;4.04;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_481;étroit;smal;3.72;Standard;Courant;A2;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_482;efficace;efficiënt;3.89;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_483;assez;tamelijk;3.88;Standard;Courant;B1;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_484;sans espoir;hopeloos;3.77;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_485;gigantesque;gigantisch;3.92;Standard;Courant;B1;nt2lex;Taille-quantité;manuel
+ADJECTIFS_NL_486;nuisible;schadelijk;3.94;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_487;qui en a marre;beu;3.83;Standard;Courant;B1;nt2lex;Émotions;manuel
+ADJECTIFS_NL_488;inconscient (évanoui);bewusteloos;3.51;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_489;soulagé;opgelucht;3.7;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_490;remarquable;opmerkelijk;4.15;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_491;récent;recent;4.31;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_492;incroyable;ongelofelijk;4.2;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_493;exact;exact;4.27;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_494;frais / froid;koel;3.87;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_495;typique;typisch;4.41;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_496;inclus;inbegrepen;3.57;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_497;criminel;crimineel;4.22;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_498;dégoûtant;walgelijk;4.17;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_499;passé / dernier (afgelopen week);afgelopen;5.33;Standard;Essentiel;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_500;belge;Belgisch;4.2;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_501;vif / animé;levendig;3.73;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_502;essentiel;essentieel;4.11;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_503;humide;vochtig;3.77;Standard;Courant;A2;nt2lex;Description physique;manuel
+ADJECTIFS_NL_504;inutile / absurde;zinloos;3.95;Standard;Courant;A2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_505;créatif;creatief;4.24;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_506;à part / particulier;apart;4.42;Standard;Courant;A1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_507;inhabituel;ongewoon;3.84;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_508;serviable;behulpzaam;3.57;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_509;magique;magisch;3.77;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_510;mondial;wereldwijd;4.64;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_511;masculin;mannelijk;3.9;Standard;Courant;B1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_512;grossier;grof;4.01;Standard;Courant;A2;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_513;maigre;mager;3.69;Standard;Courant;A1;nt2lex;Description physique;manuel
+ADJECTIFS_NL_514;le plus proche;dichtstbijzijnd;1.04;Standard;Spécialisé;B1;nt2lex;Comparaison;manuel
+ADJECTIFS_NL_515;ancien (d'époque);antiek;3.68;Standard;Courant;B2;nt2lex;Qualité;manuel
+ADJECTIFS_NL_516;inquiet;ongerust;3.63;Standard;Courant;A2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_517;ambitieux;ambitieus;3.6;Standard;Courant;B1;nt2lex;Personnalité;manuel
+ADJECTIFS_NL_518;habituel;gebruikelijk;4.1;Standard;Courant;B1;nt2lex;Qualité;manuel
+ADJECTIFS_NL_519;grincheux;chagrijnig;3.35;Standard;Spécialisé;B2;nt2lex;Émotions;manuel
+ADJECTIFS_NL_520;légal;legaal;4.03;Standard;Courant;B1;nt2lex;Qualité;manuel
