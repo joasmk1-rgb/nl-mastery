@@ -6420,15 +6420,26 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpRecognition.maxAlternatives = 1;
 
             rpRecognition.onresult = function(event) {
+                // On reconstruit le texte à partir de TOUS les résultats à chaque évènement, au lieu
+                // d'ajouter au fur et à mesure. Sur Chrome Android en mode continu, chaque résultat
+                // "final" reprend toute la phrase depuis le début ("ik", "ik ben", "ik ben hier") :
+                // les additionner répétait la phrase plusieurs fois. Un segment qui prolonge le
+                // texte déjà reconnu le remplace donc ; un segment déjà contenu est ignoré ; seul
+                // un segment réellement nouveau (cas du desktop) est ajouté à la suite.
+                let finalText = '';
                 let interim = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const transcript = event.results[i][0].transcript;
-                    if (event.results[i].isFinal) {
-                        rpFinalTranscript += transcript + ' ';
-                    } else {
-                        interim += transcript;
-                    }
+                for (let i = 0; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript.trim();
+                    if (!transcript) continue;
+                    if (!event.results[i].isFinal) { interim += ' ' + transcript; continue; }
+                    const acc = finalText.toLowerCase(), seg = transcript.toLowerCase();
+                    if (!acc || seg.startsWith(acc)) finalText = transcript;
+                    else if (!acc.endsWith(seg)) finalText += ' ' + transcript;
                 }
+                // Même garde pour le texte provisoire affiché pendant qu'on parle.
+                interim = interim.trim();
+                if (interim && finalText.toLowerCase().endsWith(interim.toLowerCase())) interim = '';
+                rpFinalTranscript = finalText + ' ';
                 const statusEl = document.getElementById(activeVoiceStatusId);
                 if (statusEl) statusEl.innerText = "🎤 " + ((rpFinalTranscript + interim).trim() || '...');
             };
