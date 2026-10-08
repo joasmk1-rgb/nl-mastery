@@ -4581,6 +4581,20 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             { file: 'PHRASES_LABO', label: 'Phrases Labo' }
         ];
 
+        // Nom lisible d'une catégorie de mots. Sans ça, l'écran affichait le nom brut du fichier
+        // CSV (THEME_COMPTABILITE, MOTS_LABO, VERBES_NL...) dans le tri rapide, le filtre et les
+        // lignes de la liste de mots. Un fichier inconnu ici garde son nom, sans les "_".
+        const THEME_LABELS = {
+            THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
+            THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
+            THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
+            THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo'
+        };
+        function categoryLabel(file) {
+            const main = MAIN_CATEGORIES.find(c => c.file === file);
+            return (main && main.label) || THEME_LABELS[file] || String(file).replace(/^THEME_/, '').replace(/_/g, ' ');
+        }
+
         function renderMainCategories() {
             const grid = document.getElementById('main-categories-grid');
             if (!grid) return;
@@ -4608,13 +4622,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function renderThemes(themes) {
             const section = document.getElementById('theme-section');
             if (!themes.length) { section.innerHTML = ''; return; }
-            const labels = {
-                THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
-                THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
-                THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH'
-            };
             section.innerHTML = '<h2 style="margin-top:40px;">Thèmes métier</h2><div class="grid">' +
-                themes.map(t => `<div class="card-menu blue" onclick="startSession('${t.file}')">${labels[t.file] || t.file} (${t.count})</div>`).join('') +
+                themes.map(t => `<div class="card-menu blue" onclick="startSession('${t.file}')">${categoryLabel(t.file)} (${t.count})</div>`).join('') +
                 '</div>';
         }
 
@@ -4640,7 +4649,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const filter = document.getElementById('wl-filter');
             const categories = [...new Set(fullDb.map(i => i.file))];
             filter.innerHTML = '<option value="">Toutes catégories</option>' +
-                categories.map(c => `<option value="${c}">${c}</option>`).join('');
+                categories.map(c => `<option value="${c}">${categoryLabel(c)}</option>`).join('');
             renderWordList();
         }
 
@@ -4705,7 +4714,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${speakBtnHtml(i.nl)}
                     ${niveauCECRBadgeHtml(i.niveauCECR)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
-                    <span class="wl-file">${i.file}${i.sousCategorie ? ' · ' + i.sousCategorie : ''}${freqTxt ? ' · ' + freqTxt : ''}</span>
+                    <span class="wl-file">${categoryLabel(i.file)}${i.sousCategorie ? ' · ' + i.sousCategorie : ''}${freqTxt ? ' · ' + freqTxt : ''}</span>
                 </div>`;
             }).join('');
             if (items.length > 300) {
@@ -4749,7 +4758,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const grid = document.getElementById('swipe-category-grid');
             grid.innerHTML = cats.map(cat => {
                 const n = fullDb.filter(i => i.file === cat && wordStatus(i.id) === 'unseen').length;
-                const label = (MAIN_CATEGORIES.find(c => c.file === cat) || {}).label || cat;
+                const label = categoryLabel(cat);
                 return `<div class="card-menu blue" onclick="startSwipeTriage('${cat}')">${label}<div class="cat-sub">${n} mot${n > 1 ? 's' : ''} non vu${n > 1 ? 's' : ''}</div></div>`;
             }).join('') + `<div class="card-menu" style="color:#e11d48; grid-column: span 2;" onclick="startSwipeTriage(null)">🌐 Toutes catégories</div>`;
         }

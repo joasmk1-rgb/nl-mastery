@@ -167,8 +167,8 @@
       "canal": "telephone_client",
       "type": "proposition_solution",
       "niveau": "NL",
-      "contexte": "Un camion est tombé en panne sur la route, il faut replanifier la livraison et en informer le client.",
-      "amorce": "Onze chauffeur heeft een pech gehad. Ik moet de levering herplannen, wat is voor jou nog mogelijk vandaag?",
+      "contexte": "Un de tes chauffeurs t'appelle : son camion est tombé en panne sur la route. Tu dois organiser la suite et replanifier la livraison.",
+      "amorce": "Hallo, met de chauffeur. Ik sta met pech langs de snelweg, de vrachtwagen rijdt niet meer. Wat moet ik nu doen met de levering?",
       "vocabulaire_cible": ["herplannen", "pech", "alternatief voorstellen"],
       "source": "invente_realiste"
     },
