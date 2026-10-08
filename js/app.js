@@ -1611,8 +1611,25 @@ if (firebaseAvailable) {
         // été introduite en premier). speakNL() est le SEUL point d'entrée que le reste de l'app
         // appelle, pour ne jamais dupliquer cette logique de sélection de voix — rpSpeakText (jeu de
         // rôle) délègue lui aussi à cette même fonction plus bas.
+        // Retire la mise en forme que Gemini glisse dans ses réponses (**gras**, *italique*,
+        // # titres, listes à puces, `code`) : affichée telle quelle elle encombre le texte, et la
+        // voix la lisait à haute voix ("sterretje sterretje" pour **).
+        function stripMarkdown(text) {
+            return String(text)
+                .replace(/```[a-z]*\n?/gi, '')
+                .replace(/^\s{0,3}#{1,6}\s+/gm, '')
+                .replace(/^\s*[-*•]\s+/gm, '')
+                .replace(/[*`~]/g, '')
+                .replace(/(^|\s)_+([^_]+?)_+(?=\s|[.,!?;:]|$)/g, '$1$2')
+                .replace(/[ \t]{2,}/g, ' ')
+                .trim();
+        }
+
         function speakNL(text) {
             if (!('speechSynthesis' in window) || !text) return;
+            // Pour la voix, on retire aussi les emojis, que certaines voix décrivent à haute voix.
+            text = stripMarkdown(text).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '').trim();
+            if (!text) return;
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'nl-NL';
@@ -6607,7 +6624,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 }
 
                 if (data.candidates && data.candidates[0].content) {
-                    const aiResponse = data.candidates[0].content.parts[0].text;
+                    // Un interlocuteur à l'oral ne parle pas en gras ni en listes à puces.
+                    const aiResponse = stripMarkdown(data.candidates[0].content.parts[0].text);
                     rpConversationHistory.push({ role: "model", parts: [{ text: aiResponse }] });
                     rpAppendMessage(aiResponse, 'assistant');
                     rpSpeakText(aiResponse);
