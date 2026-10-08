@@ -149,7 +149,7 @@
             <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Teste ta vitesse sur un temps limité.</div></div>
             <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
             <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
-            <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison</div><div class="hub-card-desc">Verbes irréguliers, triés par fréquence d'usage.</div></div>
+            <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison</div><div class="hub-card-desc">Les verbes les plus courants, au temps de ton choix.</div></div>
             <div class="hub-card" onclick="startSeparableTrainingSession()"><span class="hub-card-icon">✂️</span><div class="hub-card-title">Particules séparables</div><div class="hub-card-desc">aanbieden, opstaan... et leurs 3 comportements différents.</div></div>
             <div class="hub-card" style="opacity:0.55; cursor:default;" onclick="alert('Bientôt disponible : défie tes amis en duel, vocabulaire ou rapidité !')"><span class="hub-card-icon">👥</span><div class="hub-card-title">Défis entre amis</div><div class="hub-card-desc">Bientôt disponible.</div></div>
         </div>
@@ -460,7 +460,7 @@
         <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>🔤 Conjugaison</h2>
         <div class="hub-grid single">
-            <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">30 verbes irréguliers, triés par fréquence.</div></div>
+            <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">Tu choisis les verbes (les plus courants d'abord) et les temps. Les formes ratées reviennent en priorité.</div></div>
         </div>
         <div class="conj-search-row content-col">
             <input type="text" id="conj-search" placeholder="Cherche un verbe (NL ou FR)..." oninput="renderConjugaisonList()">
@@ -474,7 +474,7 @@
         <button class="back-btn" onclick="showJouer()">← Retour</button>
         <h2>🔤 Conjugaison — Entraînement</h2>
         <div class="content-col" style="margin-bottom:10px;">
-            <button class="btn btn-gray" onclick="showConjugaison()">📖 Consulter un verbe en particulier</button>
+            <button class="btn btn-gray" onclick="showConjugaison()">📖 Voir les fiches de conjugaison</button>
         </div>
         <div id="conj-training-content" class="content-col"></div>
     </div>

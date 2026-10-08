@@ -323,6 +323,8 @@ function syncMergeValue(a, b, path) {
             const pick = (ba > aa || (ba === aa && (b.lastAttemptAt || 0) > (a.lastAttemptAt || 0))) ? b : a;
             return Object.assign({}, pick, { opened: !!(a.opened || b.opened) });
         }
+        // Une forme conjuguée : ok/ko/streak vont ensemble, on garde la réponse la plus récente.
+        if (path.indexOf('conjStats.') === 0) return (b.last || 0) > (a.last || 0) ? b : a;
         const res = {};
         Object.keys(a).concat(Object.keys(b)).forEach(k => {
             if (k in res) return;
@@ -3536,8 +3538,80 @@ if (firebaseAvailable) {
             { key: 'prepositionnel', label: '🔗 + préposition' }
         ];
 
+        // Tranche de fréquence : "les verbes les plus courants d'abord". 0 = tous les verbes.
+        const CONJ_RANGE_CHIPS = [
+            { key: 25, label: 'Top 25' },
+            { key: 50, label: 'Top 50' },
+            { key: 100, label: 'Top 100' },
+            { key: 0, label: 'Tous' }
+        ];
+        const CONJ_TENSES = ['present', 'imperfectum', 'perfectum', 'futur'];
+        const CONJ_TENSE_NAMES = { present: 'Présent', imperfectum: 'Prétérit', perfectum: 'Perfectum', futur: 'Futur' };
+        let conjFilterRange = 50;
+        let conjCurrentList = []; // infinitifs de la liste affichée, dans l'ordre : sert à "précédent / suivant"
+
+        // Verbes triés du plus courant au plus rare (fréquence d'usage déjà présente dans
+        // conjugation.json), calculé une seule fois. `rank` = position dans ce classement.
+        let conjFreqCache = null;
+        function conjByFrequency() {
+            if (!conjFreqCache || conjFreqCache.sorted.length !== conjugationData.length) {
+                const sorted = conjugationData.slice().sort((a, b) => (b.freq || 0) - (a.freq || 0));
+                const rank = {};
+                sorted.forEach((v, i) => { rank[v.infinitief] = i + 1; });
+                conjFreqCache = { sorted, rank };
+            }
+            return conjFreqCache;
+        }
+
+        // ===== Mémoire des réponses de conjugaison =====
+        // state.conjStats[`infinitif|temps|pronom`] = { ok, ko, streak, last }. Alimentée par les deux
+        // entraînements (sur un verbe, et la session réglable) ; sert à faire revenir en priorité les
+        // formes ratées et à afficher un indicateur de maîtrise par verbe. Vit dans `state`, donc
+        // sauvegardée et synchronisée comme le reste de la progression.
+        function conjStatKey(infinitief, tense, pronomKey) {
+            // Au prétérit, ik / jij / hij partagent la même forme : une seule entrée pour les trois.
+            const p = (tense === 'imperfectum' && pronomKey !== 'wij') ? 'hij' : pronomKey;
+            return infinitief + '|' + tense + '|' + p;
+        }
+
+        function conjGetStat(infinitief, tense, pronomKey) {
+            return (state.conjStats || {})[conjStatKey(infinitief, tense, pronomKey)] || null;
+        }
+
+        function conjRecordResult(infinitief, tense, pronomKey, isCorrect) {
+            if (!state.conjStats) state.conjStats = {};
+            const key = conjStatKey(infinitief, tense, pronomKey);
+            const s = state.conjStats[key] || { ok: 0, ko: 0, streak: 0, last: 0 };
+            if (isCorrect) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
+            s.last = Date.now();
+            state.conjStats[key] = s;
+        }
+
+        // Une forme est "à revoir" tant que la dernière réponse donnée dessus était fausse.
+        function conjIsWeak(stat) { return !!stat && stat.streak === 0; }
+
+        function conjVerbMastery(v) {
+            let tried = 0, weak = 0;
+            CONJ_TENSES.forEach(t => ['ik', 'jij', 'hij', 'wij'].forEach(p => {
+                if (t === 'imperfectum' && (p === 'ik' || p === 'jij')) return; // même entrée que hij
+                const s = conjGetStat(v.infinitief, t, p);
+                if (!s) return;
+                tried++;
+                if (conjIsWeak(s)) weak++;
+            }));
+            if (!tried) return { level: 'none', html: '' };
+            if (weak) return { level: 'weak', html: `<span class="wl-badge review">À revoir · ${weak}</span>` };
+            if (tried >= 6) return { level: 'ok', html: '<span class="wl-badge true-mastered">Maîtrisé</span>' };
+            return { level: 'progress', html: '<span class="wl-badge mastered">En cours</span>' };
+        }
+
         function conjSetFilter(key) {
             conjFilterCategory = key;
+            renderConjugaisonList();
+        }
+
+        function conjSetRange(n) {
+            conjFilterRange = n;
             renderConjugaisonList();
         }
 
@@ -3547,11 +3621,19 @@ if (firebaseAvailable) {
             const listEl = document.getElementById('conj-list');
             const filterEl = document.getElementById('conj-filter-chips');
             if (filterEl) {
-                filterEl.innerHTML = CONJ_FILTER_CHIPS.map(c =>
-                    `<button type="button" class="conj-filter-chip${c.key === conjFilterCategory ? ' active' : ''}" onclick="conjSetFilter('${c.key}')">${c.label}</button>`
-                ).join('');
+                filterEl.innerHTML =
+                    CONJ_RANGE_CHIPS.map(c =>
+                        `<button type="button" class="conj-filter-chip${c.key === conjFilterRange ? ' active' : ''}" onclick="conjSetRange(${c.key})">${c.label}</button>`
+                    ).join('') +
+                    '<span class="conj-chip-sep"></span>' +
+                    CONJ_FILTER_CHIPS.map(c =>
+                        `<button type="button" class="conj-filter-chip${c.key === conjFilterCategory ? ' active' : ''}" onclick="conjSetFilter('${c.key}')">${c.label}</button>`
+                    ).join('');
             }
-            let results = conjugationData;
+            const { sorted, rank } = conjByFrequency();
+            // Une recherche porte toujours sur les 322 verbes : on ne veut pas "ne pas trouver" un
+            // verbe simplement parce qu'il est hors de la tranche Top N sélectionnée.
+            let results = (q || !conjFilterRange) ? sorted : sorted.slice(0, conjFilterRange);
             if (conjFilterCategory !== 'toutes') {
                 results = results.filter(v => getVerbCategories(v).includes(conjFilterCategory));
             }
@@ -3560,16 +3642,19 @@ if (firebaseAvailable) {
                     normalize(v.infinitief).includes(q) || normalize(v.fr).includes(q)
                 );
             }
+            conjCurrentList = results.map(v => v.infinitief);
             const totalMatching = results.length;
-            results = results.slice(0, 40);
+            results = results.slice(0, 100);
             if (!results.length) {
                 listEl.innerHTML = '<p style="color:#888;">Aucun verbe trouvé.</p>';
                 return;
             }
-            listEl.innerHTML = (totalMatching > 40 ? `<p style="font-size:0.72rem; color:var(--text-secondary);">${totalMatching} verbes — les 40 premiers affichés, affine ta recherche pour voir les autres.</p>` : '') + results.map(v =>
+            listEl.innerHTML =
+                `<p style="font-size:0.72rem; color:var(--text-secondary);">${totalMatching} verbe(s), du plus courant au plus rare${totalMatching > 100 ? ' — les 100 premiers affichés, affine ta recherche pour voir les autres' : ''}.</p>` +
+                results.map(v =>
                 `<div class="conj-list-item" onclick="showConjugaisonDetail('${v.infinitief.replace(/'/g, "\\'")}')">
-                    <div><b>${v.infinitief}</b> <span style="color:#888;">— ${v.fr}</span></div>
-                    <div class="conj-list-badges"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}</div>
+                    <div><span class="conj-rank">#${rank[v.infinitief]}</span> <b>${v.infinitief}</b> <span style="color:#888;">— ${v.fr}</span></div>
+                    <div class="conj-list-badges"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}${conjVerbMastery(v).html}</div>
                 </div>`
             ).join('');
         }
@@ -3664,35 +3749,54 @@ if (firebaseAvailable) {
             });
         }
 
+        // Fiche d'un verbe : une carte par temps (au lieu d'un tableau à 5 colonnes qu'il fallait
+        // faire glisser sur téléphone), les temps primitifs en tête, les formes ratées en rouge, et
+        // des boutons précédent / suivant pour enchaîner les verbes dans l'ordre de la liste.
         function showConjugaisonDetail(infinitief) {
             const v = conjugationData.find(x => x.infinitief === infinitief);
             if (!v) return;
             conjugaisonSelectedVerb = v;
             const rows = buildConjugationGrid(v);
-            const rowsHtml = rows.map(r => `
-                <tr>
-                    <td class="conj-grid-pronom">${r.pronom}</td>
-                    <td>${r.present} ${speakBtnHtml(r.present)}</td>
-                    <td>${r.futur} ${speakBtnHtml(r.futur)}</td>
-                    <td>${r.imperfectum} ${speakBtnHtml(r.imperfectum)}</td>
-                    <td>${r.perfectum} ${speakBtnHtml(r.perfectum)}</td>
-                </tr>`).join('');
+            const esc = s => s.replace(/'/g, "\\'");
+            const tenseCards = CONJ_TENSES.map(t => `
+                <div class="conj-tense-card">
+                    <div class="conj-tense-name">${CONJ_TENSE_NAMES[t]}</div>
+                    ${rows.map(r => `
+                        <div class="conj-tense-row">
+                            <span class="conj-grid-pronom">${r.pronom}</span>
+                            <span class="conj-form${conjIsWeak(conjGetStat(v.infinitief, t, r.pronomKey)) ? ' weak' : ''}">${r[t]}</span>
+                            ${speakBtnHtml(r[t])}
+                        </div>`).join('')}
+                </div>`).join('');
+
+            const { rank } = conjByFrequency();
+            const pos = conjCurrentList.indexOf(v.infinitief);
+            const prev = pos > 0 ? conjCurrentList[pos - 1] : null;
+            const next = (pos >= 0 && pos < conjCurrentList.length - 1) ? conjCurrentList[pos + 1] : null;
+            const navBtn = (target, label) => target
+                ? `<button type="button" class="conj-filter-chip" onclick="showConjugaisonDetail('${esc(target)}')">${label}</button>`
+                : `<button type="button" class="conj-filter-chip" disabled style="opacity:0.35; cursor:default;">${label}</button>`;
+            const aux = HULPWERKWOORDEN[v.auxiliaire] || HULPWERKWOORDEN.hebben;
+            const hasWeak = conjVerbMastery(v).level === 'weak';
+
             document.getElementById('conj-detail').innerHTML = `
                 <div class="conj-card">
-                    <div class="conj-verb-title">${v.infinitief}</div>
-                    <div style="color:#888; margin-bottom:6px;">${v.fr}</div>
-                    <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}</div>
-                    <div style="font-size:0.7rem; color:var(--text-secondary); margin-bottom:4px;">↔️ Fais glisser le tableau pour voir toutes les colonnes</div>
-                    <div style="overflow-x:auto;">
-                        <table class="conj-grid-table">
-                            <tr><th></th><th>Présent</th><th>Futur</th><th>Prétérit</th><th>Perfectum</th></tr>
-                            ${rowsHtml}
-                        </table>
+                    <div class="conj-detail-nav">
+                        ${navBtn(prev, '← Précédent')}
+                        <span>#${rank[v.infinitief]} des plus courants</span>
+                        ${navBtn(next, 'Suivant →')}
                     </div>
-                    <div class="conj-sentence">${v.exempleNl}<br>${v.exempleFr}</div>
-                    <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${v.infinitief.replace(/'/g, "\\'")}')">🎯 S'entraîner sur ce verbe</button>
+                    <div class="conj-verb-title">${v.infinitief} ${speakBtnHtml(v.infinitief)}</div>
+                    <div style="color:#888; margin-bottom:6px;">${v.fr}</div>
+                    <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}${conjVerbMastery(v).html}</div>
+                    <div class="conj-principal">${v.infinitief} · ${v.preteritum} · ${aux.hij} ${v.participePasse}</div>
+                    <div class="conj-tense-grid">${tenseCards}</div>
+                    ${hasWeak ? '<div style="font-size:0.72rem; color:var(--wrong); margin-top:8px;">En rouge : les formes ratées à ta dernière tentative.</div>' : ''}
+                    <div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>
+                    <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
+            document.getElementById('conj-detail').scrollIntoView({ block: 'start' });
         }
 
         // ===== Exercices sur la grille de conjugaison =====
@@ -3765,6 +3869,8 @@ if (firebaseAvailable) {
                 fb.style.color = 'var(--wrong)';
                 fb.innerText = '❌ → ' + q.answer;
             }
+            conjRecordResult(st.verb.infinitief, q.tense, q.pronomKey, result.status !== 'wrong');
+            save();
             st.index++;
             setTimeout(conjExerciseRenderQuestion, 1300);
         }
@@ -3775,45 +3881,96 @@ if (firebaseAvailable) {
             if (box) box.innerHTML = '';
         }
 
-        // ===== Entraînement "verbes irréguliers" (Jouer → Conjugaison) =====
-        // Contrairement à la grille de consultation ci-dessus (tous les 322 verbes, ordre A-Z,
-        // grille complète), cet entraînement cible spécifiquement ce qu'il y a vraiment à
-        // mémoriser par cœur en néerlandais : le prétérit et le participe passé des verbes dont
-        // le prétérit ne suit PAS la règle régulière (-de/-te + -n au pluriel). Le présent et le
-        // futur ne sont jamais demandés ici : ce sont des formes 100% mécaniques (voir
-        // buildConjugationGrid plus haut), donc les re-taper n'entraînerait rien.
-        //
-        // Sélection des verbes : ni alphabétique ni purement aléatoire. Tirage pondéré sans
-        // remise (méthode des clés exponentielles Math.random()^(1/poids), poids = fréquence
-        // d'usage réelle déjà présente dans conjugation.json + 1 pour qu'aucun verbe n'ait une
-        // probabilité nulle) : les verbes irréguliers les plus fréquents (zijn, hebben, gaan,
-        // kunnen...) reviennent statistiquement plus souvent, mais la session varie à chaque
-        // lancement plutôt que d'être toujours strictement la même liste de 30.
+        // ===== Entraînement réglable (Jouer → Conjugaison) =====
+        // Remplace l'ancien entraînement "30 verbes irréguliers, prétérit + participe" : on choisit
+        // maintenant la tranche de verbes (les 25 / 50 / 100 plus courants, ou tous), les temps à
+        // travailler, et éventuellement les irréguliers seulement. Chaque question porte sur UNE
+        // forme (verbe + pronom + temps). Les réponses sont mémorisées (conjStats) : une forme
+        // ratée revient en priorité aux sessions suivantes jusqu'à être réussie.
+        // L'ancien réglage correspond à : Irréguliers seulement + Prétérit + Perfectum.
         function isStrongPreteritum(v) {
             const first = v.preteritum.split(' ')[0];
             return !(first.endsWith('de') || first.endsWith('te'));
         }
 
-        const CONJ_TRAINING_SESSION_SIZE = 30;
+        const CONJ_TRAINING_SESSION_SIZE = 20;
+        const CONJ_TRAINING_MAX_PER_VERB = 2;   // pas plus de 2 questions sur le même verbe par session
+        const CONJ_TRAINING_PRONOUN_LABELS = { ik: 'ik', jij: 'jij / u', hij: 'hij / zij / het', wij: 'wij / jullie / zij' };
 
-        function pickConjTrainingVerbs() {
-            const pool = conjugationData.filter(isStrongPreteritum);
-            const keyed = pool.map(v => ({ v, key: Math.pow(Math.random(), 1 / (v.freq + 1)) }));
-            keyed.sort((a, b) => b.key - a.key);
-            return keyed.slice(0, CONJ_TRAINING_SESSION_SIZE).map(k => k.v);
+        // Réglages mémorisés d'une session à l'autre (dans state.settings, donc propres à l'appareil).
+        function conjTrainingConfig() {
+            if (!state.settings.conjTraining) {
+                state.settings.conjTraining = { range: 50, tenses: ['present', 'imperfectum', 'perfectum'], irregOnly: false };
+            }
+            return state.settings.conjTraining;
         }
 
-        // Forme "attendue" pour le participe passé : le participe seul ne dit pas s'il faut
-        // "heeft" ou "is" devant, or c'est exactement le genre de piège à retenir (ex: "is gegaan"
-        // et pas "heeft gegaan") — donc on demande le participe précédé de l'auxiliaire (3e pers.
-        // du singulier), comme dans les tableaux de conjugaison scolaires classiques.
-        function conjTrainingExpected(v) {
-            const aux = HULPWERKWOORDEN[v.auxiliaire] || HULPWERKWOORDEN.hebben;
-            return { preteritum: v.preteritum, participe: `${aux.hij} ${v.participePasse}` };
+        function conjTrainingVerbPool(cfg) {
+            const { sorted } = conjByFrequency();
+            // "Top N" s'applique APRÈS le filtre irréguliers : Top 25 irréguliers = les 25 verbes
+            // irréguliers les plus courants, pas les irréguliers parmi les 25 premiers verbes.
+            const base = cfg.irregOnly ? sorted.filter(isStrongPreteritum) : sorted;
+            return cfg.range ? base.slice(0, cfg.range) : base;
+        }
+
+        // Toutes les formes interrogeables pour ces réglages : une par (verbe, temps, pronom).
+        // Au prétérit, ik/jij/hij ont la même forme : une seule question pour les trois.
+        function conjTrainingCells(cfg) {
+            const cells = [];
+            conjTrainingVerbPool(cfg).forEach(v => {
+                const rows = buildConjugationGrid(v);
+                cfg.tenses.forEach(t => rows.forEach(r => {
+                    if (t === 'imperfectum' && (r.pronomKey === 'ik' || r.pronomKey === 'jij')) return;
+                    cells.push({
+                        verb: v, tense: t, pronomKey: r.pronomKey, answer: r[t],
+                        pronom: (t === 'imperfectum' && r.pronomKey === 'hij') ? 'ik / jij / hij' : CONJ_TRAINING_PRONOUN_LABELS[r.pronomKey],
+                        stat: conjGetStat(v.infinitief, t, r.pronomKey)
+                    });
+                }));
+            });
+            return cells;
+        }
+
+        // Composition d'une session : d'abord les formes ratées la dernière fois (jusqu'à la moitié
+        // de la session, les plus anciennes en premier), puis un tirage pondéré sans remise parmi
+        // le reste — poids = fréquence du verbe, renforcé pour les formes jamais vues et réduit pour
+        // celles déjà réussies deux fois de suite. Même méthode de tirage (clés exponentielles) que
+        // l'ancien entraînement, pour que les sessions varient d'un lancement à l'autre.
+        function pickConjTrainingQuestions(cfg) {
+            const cells = conjTrainingCells(cfg);
+            const perVerb = {};
+            const picked = [];
+            const take = c => {
+                const n = perVerb[c.verb.infinitief] || 0;
+                if (n >= CONJ_TRAINING_MAX_PER_VERB) return false;
+                perVerb[c.verb.infinitief] = n + 1;
+                picked.push(c);
+                return true;
+            };
+            const due = cells.filter(c => conjIsWeak(c.stat)).sort((a, b) => a.stat.last - b.stat.last);
+            for (const c of due) {
+                if (picked.length >= CONJ_TRAINING_SESSION_SIZE / 2) break;
+                take(c);
+            }
+            const rest = cells.filter(c => !picked.includes(c)).map(c => {
+                const boost = !c.stat ? 1.5 : (c.stat.streak >= 2 ? 0.3 : 1);
+                return { c, key: Math.pow(Math.random(), 1 / (((c.verb.freq || 0) + 1) * boost)) };
+            });
+            rest.sort((a, b) => b.key - a.key);
+            for (const r of rest) {
+                if (picked.length >= CONJ_TRAINING_SESSION_SIZE) break;
+                take(r.c);
+            }
+            for (let i = picked.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [picked[i], picked[j]] = [picked[j], picked[i]];
+            }
+            return picked;
         }
 
         let conjTrainingState = null;
 
+        // Point d'entrée (Jouer → Conjugaison) : ouvre l'écran de réglages.
         function startConjTrainingSession() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conj-training-view').classList.add('active');
@@ -3823,7 +3980,56 @@ if (firebaseAvailable) {
                 content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
                 return;
             }
-            conjTrainingState = { verbs: pickConjTrainingVerbs(), index: 0, score: 0, missed: [] };
+            conjTrainingState = null;
+            renderConjTrainingSetup();
+        }
+
+        function conjTrainingSetRange(n) { conjTrainingConfig().range = n; save(); renderConjTrainingSetup(); }
+        function conjTrainingToggleIrreg() { const c = conjTrainingConfig(); c.irregOnly = !c.irregOnly; save(); renderConjTrainingSetup(); }
+        function conjTrainingToggleTense(t) {
+            const c = conjTrainingConfig();
+            if (c.tenses.includes(t)) {
+                if (c.tenses.length === 1) return; // il faut au moins un temps
+                c.tenses = c.tenses.filter(x => x !== t);
+            } else {
+                c.tenses = CONJ_TENSES.filter(x => x === t || c.tenses.includes(x));
+            }
+            save();
+            renderConjTrainingSetup();
+        }
+
+        function renderConjTrainingSetup() {
+            const content = document.getElementById('conj-training-content');
+            if (!content) return;
+            const cfg = conjTrainingConfig();
+            const cells = conjTrainingCells(cfg);
+            const verbCount = conjTrainingVerbPool(cfg).length;
+            const dueCount = cells.filter(c => conjIsWeak(c.stat)).length;
+            const seenCount = cells.filter(c => c.stat).length;
+            const chip = (active, onclick, label) =>
+                `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            content.innerHTML = `
+                <div class="conj-card">
+                    <div class="conj-setup-label">Quels verbes ?</div>
+                    <div class="conj-filter-chips-row">
+                        ${CONJ_RANGE_CHIPS.map(c => chip(c.key === cfg.range, `conjTrainingSetRange(${c.key})`, c.key ? c.label.replace('Top', 'Les') + ' plus courants' : 'Tous')).join('')}
+                        ${chip(cfg.irregOnly, 'conjTrainingToggleIrreg()', '⚡ Irréguliers seulement')}
+                    </div>
+                    <div class="conj-setup-label">Quels temps ?</div>
+                    <div class="conj-filter-chips-row">
+                        ${CONJ_TENSES.map(t => chip(cfg.tenses.includes(t), `conjTrainingToggleTense('${t}')`, CONJ_TENSE_NAMES[t])).join('')}
+                    </div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary); margin:6px 0 12px;">
+                        ${verbCount} verbe(s) · ${cells.length} formes · ${seenCount} déjà travaillée(s)${dueCount ? ` · <b style="color:var(--wrong);">${dueCount} à revoir, posée(s) en priorité</b>` : ''}
+                    </div>
+                    <button class="btn btn-green" onclick="conjTrainingLaunch()">▶️ Lancer (${Math.min(CONJ_TRAINING_SESSION_SIZE, cells.length)} questions)</button>
+                </div>`;
+        }
+
+        function conjTrainingLaunch() {
+            const questions = pickConjTrainingQuestions(conjTrainingConfig());
+            if (!questions.length) return;
+            conjTrainingState = { questions, index: 0, score: 0, missed: [] };
             renderConjTrainingQuestion();
         }
 
@@ -3831,87 +4037,77 @@ if (firebaseAvailable) {
             const content = document.getElementById('conj-training-content');
             const st = conjTrainingState;
             if (!content || !st) return;
-            if (st.index >= st.verbs.length) {
+            if (st.index >= st.questions.length) {
                 renderConjTrainingSummary();
                 return;
             }
-            const v = st.verbs[st.index];
+            const q = st.questions[st.index];
             content.innerHTML = `
                 <div class="conj-card">
-                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Verbe ${st.index + 1}/${st.verbs.length} · Score : ${st.score}</div>
-                    <div class="conj-verb-title">${v.infinitief} ${speakBtnHtml(v.infinitief)}</div>
-                    <div style="color:#888; margin-bottom:14px;">${v.fr}</div>
-                    <div style="margin-bottom:10px;">
-                        <label style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Prétérit (ik / jij / hij)</label>
-                        <input type="text" id="conj-tr-pret" style="width:100%;" autocomplete="off" placeholder="ex : ging" onkeypress="if(event.key==='Enter') document.getElementById('conj-tr-part').focus()">
-                    </div>
-                    <div style="margin-bottom:10px;">
-                        <label style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Participe passé (avec hebben/zijn)</label>
-                        <input type="text" id="conj-tr-part" style="width:100%;" autocomplete="off" placeholder="ex : is gegaan" onkeypress="if(event.key==='Enter') conjTrainingCheck()">
-                    </div>
-                    <div class="acc-error" id="conj-tr-feedback"></div>
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.questions.length} · Score : ${st.score}${conjIsWeak(q.stat) ? ' · <span style="color:var(--wrong);">à revoir</span>' : ''}</div>
+                    <div class="conj-verb-title">${q.verb.infinitief} ${speakBtnHtml(q.verb.infinitief)}</div>
+                    <div style="color:#888; margin-bottom:12px;">${q.verb.fr}</div>
+                    <div class="conj-question-prompt"><b>${q.pronom}</b> — ${CONJ_TENSE_LABELS[q.tense]}</div>
+                    <input type="text" id="conj-tr-input" style="width:100%; margin-bottom:8px;" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Tape la forme conjuguée..." onkeypress="if(event.key==='Enter') conjTrainingCheck()">
+                    <div class="acc-error" id="conj-tr-feedback" style="margin-top:0;"></div>
                     <button class="btn btn-green" id="conj-tr-check-btn" onclick="conjTrainingCheck()">Vérifier</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="conjTrainingStop()">Arrêter</button>
                 </div>`;
-            const firstInput = document.getElementById('conj-tr-pret');
-            if (firstInput) firstInput.focus();
+            const input = document.getElementById('conj-tr-input');
+            if (input) input.focus();
         }
 
         function conjTrainingCheck() {
             const st = conjTrainingState;
-            if (!st) return;
-            const v = st.verbs[st.index];
-            const expected = conjTrainingExpected(v);
-            const rawPret = document.getElementById('conj-tr-pret').value;
-            const rawPart = document.getElementById('conj-tr-part').value;
-            const resPret = evaluateAnswer(rawPret, expected.preteritum);
-            const resPart = evaluateAnswer(rawPart, expected.participe);
-            const isCorrect = resPret.status !== 'wrong' && resPart.status !== 'wrong';
+            if (!st || st.checking) return;
+            st.checking = true; // évite un double comptage si on appuie deux fois sur Entrée
+            const q = st.questions[st.index];
+            const result = evaluateAnswer(document.getElementById('conj-tr-input').value, q.answer);
+            const isCorrect = result.status !== 'wrong';
             const fb = document.getElementById('conj-tr-feedback');
             if (isCorrect) {
                 st.score++;
                 fb.style.color = 'var(--success)';
-                fb.innerHTML = `✅ ${expected.preteritum} — ${expected.participe}`;
+                fb.innerHTML = (result.status === 'close' ? '🟡 Presque, on valide ! → ' : '✅ ') + q.answer;
             } else {
-                st.missed.push({ infinitief: v.infinitief, fr: v.fr, preteritum: expected.preteritum, participe: expected.participe });
+                st.missed.push(q);
                 fb.style.color = 'var(--wrong)';
-                fb.innerHTML = `❌ Réponse attendue : ${expected.preteritum} — ${expected.participe}`;
+                fb.innerHTML = `❌ Réponse attendue : ${q.answer}`;
             }
-            fb.innerHTML += ' ' + speakBtnHtml(expected.preteritum) + speakBtnHtml(expected.participe);
+            fb.innerHTML += ' ' + speakBtnHtml(q.answer);
+            conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, isCorrect);
+            save();
             const checkBtn = document.getElementById('conj-tr-check-btn');
             if (checkBtn) checkBtn.style.display = 'none';
             st.index++;
-            setTimeout(renderConjTrainingQuestion, isCorrect ? 1100 : 2200);
+            setTimeout(() => { st.checking = false; renderConjTrainingQuestion(); }, isCorrect ? 1100 : 2400);
         }
 
         function conjTrainingStop() {
             conjTrainingState = null;
-            showJouer();
+            renderConjTrainingSetup();
         }
 
-        // Récap de fin de session : uniquement les verbes ratés, avec leur forme correcte et un
-        // bouton d'écoute — sert de fiche de révision rapide plutôt que de ré-afficher les 30.
+        // Récap de fin de session : uniquement les formes ratées, avec la bonne réponse et un
+        // bouton d'écoute — sert de fiche de révision rapide. Elles reviendront en priorité à la
+        // prochaine session.
         function renderConjTrainingSummary() {
             const content = document.getElementById('conj-training-content');
             const st = conjTrainingState;
             const missedHtml = st.missed.length ? `
-                <div class="section-title" style="margin-top:var(--space-4);">📌 À retenir</div>
-                <div style="overflow-x:auto;">
-                    <table class="conj-grid-table">
-                        <tr><th>Infinitif</th><th>Prétérit</th><th>Participe passé</th></tr>
-                        ${st.missed.map(m => `
-                            <tr>
-                                <td>${m.infinitief}<br><span style="color:var(--text-secondary); font-size:0.7rem;">${m.fr}</span></td>
-                                <td>${m.preteritum} ${speakBtnHtml(m.preteritum)}</td>
-                                <td>${m.participe} ${speakBtnHtml(m.participe)}</td>
-                            </tr>`).join('')}
-                    </table>
-                </div>` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`;
+                <div class="section-title" style="margin-top:var(--space-4);">📌 À retenir (reviendront en priorité)</div>
+                ${st.missed.map(m => `
+                    <div class="conj-tense-row" style="border-bottom:1px solid var(--border); padding:8px 0;">
+                        <span class="conj-grid-pronom" style="flex:1 1 45%;"><b style="color:var(--text);">${m.verb.infinitief}</b> · ${m.pronom}<br>${CONJ_TENSE_NAMES[m.tense]}</span>
+                        <span class="conj-form">${m.answer}</span>
+                        ${speakBtnHtml(m.answer)}
+                    </div>`).join('')}` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`;
             content.innerHTML = `
                 <div class="conj-card">
-                    <div class="conj-verb-title">Résultat : ${st.score}/${st.verbs.length}</div>
+                    <div class="conj-verb-title">Résultat : ${st.score}/${st.questions.length}</div>
                     ${missedHtml}
-                    <button class="btn btn-green" style="margin-top:14px;" onclick="startConjTrainingSession()">🔁 Nouvelle session</button>
+                    <button class="btn btn-green" style="margin-top:14px;" onclick="conjTrainingLaunch()">🔁 Nouvelle session</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="startConjTrainingSession()">⚙️ Changer les réglages</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="showJouer()">Retour</button>
                 </div>`;
         }
