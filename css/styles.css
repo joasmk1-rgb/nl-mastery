@@ -366,6 +366,8 @@
         .conj-tense-row .conj-grid-pronom { flex: 0 0 104px; font-size: 0.74rem; }
         .conj-tense-row .conj-form { flex: 1; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
         .conj-form.weak { color: var(--wrong); }
+        .conj-form-fr { display: block; font-size: 0.78rem; font-weight: 400; color: var(--text-secondary); }
+        .conj-form-fr:empty { display: none; }
         .conj-setup-label { font-size: 0.8rem; font-weight: 700; margin: 4px 0 8px; }
         .conj-question-prompt { font-size: 1.05rem; margin-bottom: 10px; }
         @media (min-width: 700px) { .conj-tense-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }

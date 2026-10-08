@@ -3781,7 +3781,7 @@ if (firebaseAvailable) {
                     ${rows.map(r => `
                         <div class="conj-tense-row">
                             <span class="conj-grid-pronom">${r.pronom}</span>
-                            <span class="conj-form${conjIsWeak(conjGetStat(v.infinitief, t, r.pronomKey)) ? ' weak' : ''}">${r[t]}</span>
+                            <span class="conj-form${conjIsWeak(conjGetStat(v.infinitief, t, r.pronomKey)) ? ' weak' : ''}">${r[t]}<span class="conj-form-fr" id="conj-fr-${t}-${r.pronomKey}"></span></span>
                             ${speakBtnHtml(r[t])}
                         </div>`).join('')}
                 </div>`).join('');
@@ -3808,12 +3808,63 @@ if (firebaseAvailable) {
                     <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}${conjVerbMastery(v).html}</div>
                     <div class="conj-principal">${v.infinitief} · ${v.preteritum} · ${aux.hij} ${v.participePasse}</div>
                     <div class="conj-tense-grid">${tenseCards}</div>
+                    <div id="conj-fr-note" style="font-size:0.72rem; color:var(--text-secondary); margin-top:8px;"></div>
                     ${hasWeak ? '<div style="font-size:0.72rem; color:var(--wrong); margin-top:8px;">En rouge : les formes ratées à ta dernière tentative.</div>' : ''}
                     <div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>
                     <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
             document.getElementById('conj-detail').scrollIntoView({ block: 'start' });
+            conjLoadFrenchForms(v);
+        }
+
+        // ===== Traduction française de chaque forme conjuguée =====
+        // conjugation.json ne contient que la traduction de l'infinitif. Les 16 formes de la fiche
+        // sont traduites par Gemini en UN appel à la première ouverture d'un verbe, puis gardées
+        // sur l'appareil (localStorage, hors de `state` pour ne pas alourdir la synchro) : les
+        // ouvertures suivantes sont instantanées et ne consomment plus rien.
+        const CONJ_FR_CACHE_KEY = 'nl_conj_fr_cache_v1';
+        function conjFrCacheGet() {
+            try { return JSON.parse(localStorage.getItem(CONJ_FR_CACHE_KEY)) || {}; } catch (e) { return {}; }
+        }
+
+        async function conjLoadFrenchForms(v) {
+            const setNote = msg => { const n = document.getElementById('conj-fr-note'); if (n) n.innerText = msg; };
+            let data = conjFrCacheGet()[v.infinitief];
+            if (!data) {
+                if (!GeminiService.isAvailable()) {
+                    setNote('Traduction de chaque forme : nécessite Gemini (Profil → 🤖 Intelligence IA).');
+                    return;
+                }
+                setNote('Traduction des formes en cours...');
+                const rows = buildConjugationGrid(v);
+                const forms = CONJ_TENSES.map(t => t + ' : ' + rows.map(r => r.pronomKey + ' = ' + r[t]).join(' ; ')).join('\n');
+                try {
+                    const raw = await GeminiService.generate(
+                        'Traduis en français chaque forme conjuguée du verbe néerlandais "' + v.infinitief + '" (sens : ' + v.fr + ').\n\n' + forms + '\n\n' +
+                        'Correspondances : ik = je, jij = tu, hij = il, wij = nous. Temps français à utiliser : present → présent, imperfectum → imparfait, perfectum → passé composé, futur → futur simple. ' +
+                        'Garde un seul sens du verbe, le même partout, et inclus le pronom (ex : "je suis", "nous avons été").\n' +
+                        'Réponds UNIQUEMENT avec un objet JSON, sans texte autour : {"present": {"ik": "...", "jij": "...", "hij": "...", "wij": "..."}, "imperfectum": {...}, "perfectum": {...}, "futur": {...}}'
+                    );
+                    const m = raw.match(/\{[\s\S]*\}/);
+                    data = JSON.parse(m ? m[0] : raw);
+                    if (!CONJ_TENSES.every(t => data[t] && typeof data[t] === 'object')) throw new Error('réponse incomplète');
+                } catch (e) {
+                    setNote('Traduction des formes impossible pour le moment (' + e.message + ').');
+                    return;
+                }
+                try {
+                    const cache = conjFrCacheGet();
+                    cache[v.infinitief] = data;
+                    localStorage.setItem(CONJ_FR_CACHE_KEY, JSON.stringify(cache));
+                } catch (e) { /* stockage plein : la traduction reste affichée, simplement pas mémorisée */ }
+            }
+            if (conjugaisonSelectedVerb !== v) return; // on a changé de verbe pendant l'appel
+            CONJ_TENSES.forEach(t => ['ik', 'jij', 'hij', 'wij'].forEach(p => {
+                const el = document.getElementById('conj-fr-' + t + '-' + p);
+                if (el && data[t] && data[t][p]) el.innerText = String(data[t][p]);
+            }));
+            setNote('Traductions françaises générées par IA : elles peuvent contenir une erreur.');
         }
 
         // ===== Exercices sur la grille de conjugaison =====
