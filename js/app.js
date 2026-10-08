@@ -6727,6 +6727,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (rpIsRecording && rpRecognition) rpRecognition.stop();
             rpIvState = null;
             rpDayState = null;
+            rpCaseState = null;
             rpHideInterviewer();
             rpJobHideDebrief();
             document.getElementById('rp-step-category').style.display = '';
@@ -6768,6 +6769,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 rpShowInterviewerList();
             } else if (rpCurrentCategory === '__job') {
                 rpShowJobHome();
+            } else if (rpCurrentCategory === '__case') {
+                rpShowCaseHome();
             } else if (rpCurrentCategory) {
                 rpShowCategory(rpCurrentCategory);
             } else {
@@ -7455,6 +7458,206 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                             <div class="rp-debrief-sub">${rpEscapeHtml(b.probleme || '')}</div>
                             <div class="rp-iv-reference">→ ${rpEscapeHtml(b.formulation_correcte || '')} ${speakBtnHtml(b.formulation_correcte || '')}</div>
                         </div>`).join('') : '<div class="rp-debrief-sub">Aucun blocage relevé, bravo.</div>'}
+                    ${d.conseil ? `<div class="rp-iv-label">Conseil pour la prochaine fois</div><div>${rpEscapeHtml(d.conseil)}</div>` : ''}
+                    ${footer}
+                </div>`;
+        }
+
+        // =====================================================================================
+        // Étude de cas (business case court) — version simple
+        // =====================================================================================
+        // Aucun fichier de contenu : le cas est inventé par Gemini au lancement, à partir d'un
+        // thème et d'une difficulté, et n'est pas stocké. Trois prompts séparés, jamais mélangés :
+        //   - rpCaseGenerate : invente le cas (énoncé, chiffres, question, infos à donner sur demande)
+        //   - rpBuildCasePrompt : le recruteur qui fait passer le cas et challenge la réponse
+        //   - rpCaseDebrief : bilan après coup (clarté, justification, formulations corrigées)
+        const RP_CASE_THEMES = [
+            { key: 'transporteur', label: '🚚 Choisir un transporteur', sujet: 'choisir entre deux transporteurs (prix, délai, fiabilité)' },
+            { key: 'retard', label: '⏰ Retards de livraison', sujet: 'des livraisons en retard chez un client important : que proposer ?' },
+            { key: 'stock', label: '📦 Niveau de stock', sujet: 'un stock trop élevé ou des ruptures fréquentes : comment ajuster ?' },
+            { key: 'tournee', label: '🗺️ Organiser une tournée', sujet: 'organiser ou réorganiser une tournée de livraison avec des contraintes' },
+            { key: 'entrepot', label: '🏭 Coût d\'entrepôt', sujet: 'réduire le coût ou améliorer l\'organisation d\'un entrepôt' },
+            { key: 'fournisseur', label: '🤝 Problème fournisseur', sujet: 'un fournisseur qui livre mal ou en retard : garder, renégocier ou changer ?' }
+        ];
+        const RP_CASE_LEVELS = {
+            simple: { label: 'Simple', consigne: 'Niveau SIMPLE : énoncé de 3 à 4 phrases courtes en néerlandais B1, 2 ou 3 chiffres seulement, une décision à prendre entre deux options claires, aucun calcul compliqué.' },
+            avance: { label: 'Avancé', consigne: 'Niveau AVANCÉ : énoncé de 5 à 6 phrases en néerlandais B2, 4 ou 5 chiffres, un calcul simple nécessaire pour comparer les options, et un compromis à arbitrer (coût contre délai ou qualité).' }
+        };
+        let rpCaseTheme = 'hasard';
+        let rpCaseLevel = 'simple';
+        let rpCaseState = null; // { cas, welcome } pendant une étude de cas, null sinon
+
+        function rpShowCaseHome() {
+            rpCurrentCategory = '__case';
+            rpCaseState = null;
+            rpHideInterviewer();
+            rpJobHideDebrief();
+            const chip = (active, onclick, label) =>
+                `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <div class="rp-group-title">💼 Étude de cas</div>
+                <p class="rp-real-hint">Un recruteur te présente un petit problème d'entreprise. Pose-lui des questions, puis explique ce que tu ferais et pourquoi. Un cas différent à chaque fois.</p>
+                <div class="rp-job-canal">Thème</div>
+                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
+                    ${chip(rpCaseTheme === 'hasard', "rpCaseSet('theme','hasard')", '🎲 Au hasard')}
+                    ${RP_CASE_THEMES.map(t => chip(rpCaseTheme === t.key, `rpCaseSet('theme','${t.key}')`, t.label)).join('')}
+                </div>
+                <div class="rp-job-canal">Difficulté</div>
+                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
+                    ${Object.keys(RP_CASE_LEVELS).map(k => chip(rpCaseLevel === k, `rpCaseSet('level','${k}')`, RP_CASE_LEVELS[k].label)).join('')}
+                </div>
+                <button class="btn btn-green" id="rp-case-start-btn" style="max-width:520px;" onclick="rpCaseStart()">▶️ Lancer une étude de cas</button>
+                <div id="rp-case-status" class="rp-real-hint" style="margin-top:8px;"></div>`;
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+        }
+
+        function rpCaseSet(what, value) {
+            if (what === 'theme') rpCaseTheme = value; else rpCaseLevel = value;
+            rpShowCaseHome();
+        }
+
+        // Invente le cas. Entreprises et personnes toujours fictives et génériques.
+        async function rpCaseGenerate(theme, levelKey) {
+            const raw = await GeminiService.generate(
+                'Invente une courte étude de cas pour un entretien d\'embauche en logistique / supply chain en Belgique. Thème : ' + theme.sujet + '.\n' +
+                RP_CASE_LEVELS[levelKey].consigne + '\n' +
+                'Utilise uniquement des noms génériques (bedrijf X, transporteur A et B, leverancier Y) et des chiffres ronds et cohérents entre eux. Prévois 2 ou 3 informations supplémentaires que le recruteur ne donnera que si le candidat les demande.\n\n' +
+                'Réponds UNIQUEMENT avec un objet JSON, sans texte autour :\n' +
+                '{"titre_fr": "titre court en français", "enonce_nl": "l\'énoncé en néerlandais", "enonce_fr": "sa traduction française", ' +
+                '"chiffres": [{"nl": "donnée chiffrée en néerlandais", "fr": "traduction"}], ' +
+                '"question_nl": "la question posée au candidat, en néerlandais", "question_fr": "sa traduction", ' +
+                '"infos_si_demande_nl": ["information supplémentaire en néerlandais"]}'
+            );
+            const m = raw.match(/\{[\s\S]*\}/);
+            const cas = JSON.parse(m ? m[0] : raw);
+            if (!cas.enonce_nl || !cas.question_nl) throw new Error('cas incomplet');
+            cas.chiffres = Array.isArray(cas.chiffres) ? cas.chiffres : [];
+            cas.infos_si_demande_nl = Array.isArray(cas.infos_si_demande_nl) ? cas.infos_si_demande_nl : [];
+            return cas;
+        }
+
+        // Prompt du recruteur pour ce cas : il connaît tout le cas, mais pas de "bonne réponse".
+        function rpBuildCasePrompt(cas, welcome) {
+            return 'Tu es un recruteur belge néerlandophone qui fait passer une courte étude de cas à un candidat pour un poste en logistique.\n\n' +
+                'Le cas : ' + cas.enonce_nl + '\n' +
+                (cas.chiffres.length ? 'Chiffres connus du candidat :\n' + cas.chiffres.map(c => '- ' + c.nl).join('\n') + '\n' : '') +
+                'Question posée : ' + cas.question_nl + '\n' +
+                (cas.infos_si_demande_nl.length ? 'Informations supplémentaires, à ne donner QUE si le candidat pose la question correspondante :\n' + cas.infos_si_demande_nl.map(x => '- ' + x).join('\n') + '\n' : '') +
+                '\nTu as déjà présenté le cas en disant : """' + welcome + '"""\n\n' +
+                'Parle exclusivement en néerlandais, comme à l\'oral : une ou deux phrases. Réponds aux questions de clarification du candidat (invente un détail plausible et cohérent si besoin). ' +
+                'Quand il propose une solution, demande-lui pourquoi, puis challenge-la une fois avec une objection réaliste. Il n\'y a pas une seule bonne réponse : tu évalues son raisonnement, tu ne donnes jamais la solution toi-même. ' +
+                'Ne corrige jamais son néerlandais et ne sors jamais de ton rôle. Quand il a donné et défendu sa recommandation, remercie-le et conclus brièvement.';
+        }
+
+        async function rpCaseStart() {
+            if (!GeminiService.isAvailable()) {
+                alert("Les études de cas ont besoin de Gemini : renseigne ta clé API dans Profil → 🤖 Intelligence IA.");
+                return;
+            }
+            const btn = document.getElementById('rp-case-start-btn');
+            const status = document.getElementById('rp-case-status');
+            const theme = rpCaseTheme === 'hasard'
+                ? RP_CASE_THEMES[Math.floor(Math.random() * RP_CASE_THEMES.length)]
+                : RP_CASE_THEMES.find(t => t.key === rpCaseTheme);
+            if (btn) btn.disabled = true;
+            if (status) status.innerText = 'Préparation du cas...';
+            let cas;
+            try {
+                cas = await rpCaseGenerate(theme, rpCaseLevel);
+            } catch (e) {
+                if (btn) btn.disabled = false;
+                if (status) status.innerText = 'Impossible de préparer le cas (' + e.message + '). Réessaie.';
+                return;
+            }
+            if (rpCurrentCategory !== '__case') return; // l'utilisateur est parti pendant la préparation
+            const welcome = stripMarkdown(cas.enonce_nl + ' ' + cas.question_nl);
+            rpDayState = null;
+            rpBeginScenario({ id: 'case_' + Date.now(), lang: 'nl', label: cas.titre_fr || 'Étude de cas', welcome, prompt: rpBuildCasePrompt(cas, welcome) });
+            rpCaseState = { cas, welcome };
+            const banner = document.getElementById('rp-mode-banner');
+            banner.style.display = '';
+            banner.innerHTML = `
+                <div class="rp-job-banner">
+                    <div class="rp-iv-label" style="margin-top:0;">💼 Étude de cas · ${rpEscapeHtml(RP_CASE_LEVELS[rpCaseLevel].label)}</div>
+                    <div><b>${rpEscapeHtml(cas.titre_fr || theme.label)}</b></div>
+                    ${cas.chiffres.length ? `<ul class="rp-case-figures">${cas.chiffres.map(c => `<li>${rpEscapeHtml(c.nl || '')}</li>`).join('')}</ul>` : ''}
+                    <details><summary>Voir la traduction</summary>
+                        <div>${rpEscapeHtml(cas.enonce_fr || '')} ${rpEscapeHtml(cas.question_fr || '')}</div>
+                        ${cas.chiffres.length ? `<ul class="rp-case-figures">${cas.chiffres.map(c => `<li>${rpEscapeHtml(c.fr || '')}</li>`).join('')}</ul>` : ''}
+                    </details>
+                </div>`;
+            const nav = document.getElementById('rp-day-nav');
+            nav.style.display = 'block';
+            nav.innerHTML = `<button class="btn btn-gray" style="margin:0;" onclick="rpCaseDebrief()">🏁 J'ai donné ma recommandation — voir le bilan</button>`;
+        }
+
+        // Bilan de l'étude de cas : appel Gemini séparé, sur le même écran de bilan que la journée.
+        async function rpCaseDebrief() {
+            const st = rpCaseState;
+            if (!st) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            if (!st.turns) {
+                st.turns = [{ qui: 'RECRUTEUR', texte: st.welcome }].concat(
+                    rpConversationHistory.slice(1).map(m => ({ qui: m.role === 'user' ? 'CANDIDAT' : 'RECRUTEUR', texte: m.parts[0].text })));
+            }
+            rpJobHideNav();
+            document.getElementById('rp-step-chat').style.display = 'none';
+            document.getElementById('rp-step-debrief').style.display = 'flex';
+            const box = document.getElementById('rp-debrief-content');
+            const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(st.cas.titre_fr || 'Étude de cas')}</div>`;
+            const footer = `
+                <button class="btn btn-green" style="margin-top:14px;" onclick="rpShowCaseHome()">Nouvelle étude de cas</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCategoryPicker()">Retour au jeu de rôle</button>`;
+            if (!st.turns.some(t => t.qui === 'CANDIDAT')) {
+                box.innerHTML = `<div class="conj-card">${header}<p>Tu n'as pas encore répondu : rien à analyser.</p>${footer}</div>`;
+                return;
+            }
+            box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--text-secondary);">Analyse de ta réponse en cours...</p></div>`;
+            let raw;
+            try {
+                raw = await GeminiService.generate(
+                    'Tu es un coach d\'entretien et professeur de néerlandais pour francophones. Voici une courte étude de cas passée en néerlandais par un candidat (CANDIDAT). Ses répliques peuvent avoir été dictées : ignore ponctuation et majuscules.\n\n' +
+                    'Cas : ' + st.cas.enonce_nl + ' ' + st.cas.question_nl + '\n\n' +
+                    st.turns.map(t => t.qui + ' : ' + t.texte).join('\n') + '\n\n' +
+                    'Évalue UNIQUEMENT les répliques du CANDIDAT, avec bienveillance : c\'est un exercice de langue, pas un concours de consultant. Réponds UNIQUEMENT avec un objet JSON, sans texte autour :\n' +
+                    '{"resume": "en français, 1-2 phrases : ce que le candidat a recommandé",\n' +
+                    ' "raisonnement": "en français, 1-2 phrases : sa recommandation était-elle claire et justifiée ? a-t-il posé des questions utiles ?",\n' +
+                    ' "points_forts": ["en français"],\n' +
+                    ' "a_corriger": [{"phrase_apprenant": "ce qu\'il a dit", "probleme": "en français", "formulation_correcte": "en néerlandais"}],\n' +
+                    ' "vocabulaire": [{"nl": "mot ou expression utile pour ce cas", "fr": "traduction"}],\n' +
+                    ' "conseil": "en français, un conseil prioritaire"}\n' +
+                    '3 points forts maximum, 5 corrections maximum, 8 mots de vocabulaire maximum.'
+                );
+            } catch (e) {
+                box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--wrong);">Bilan impossible : ${rpEscapeHtml(e.message)}</p>
+                    <button class="btn btn-gray" onclick="rpCaseDebrief()">Réessayer</button>${footer}</div>`;
+                return;
+            }
+            if (rpCaseState !== st) return;
+            let d = null;
+            try { const m = raw.match(/\{[\s\S]*\}/); d = JSON.parse(m ? m[0] : raw); } catch (e) { d = null; }
+            if (!d || typeof d !== 'object') {
+                box.innerHTML = `<div class="conj-card">${header}<div class="rp-iv-comment">${rpEscapeHtml(stripMarkdown(raw))}</div>${footer}</div>`;
+                return;
+            }
+            const arr = x => Array.isArray(x) ? x : [];
+            box.innerHTML = `
+                <div class="conj-card">
+                    ${header}
+                    ${d.resume ? `<div class="rp-iv-label">Ta recommandation</div><div>${rpEscapeHtml(d.resume)}</div>` : ''}
+                    ${d.raisonnement ? `<div class="rp-iv-label">Ton raisonnement</div><div>${rpEscapeHtml(d.raisonnement)}</div>` : ''}
+                    ${arr(d.points_forts).length ? `<div class="rp-iv-label">Points forts</div>${arr(d.points_forts).map(p => `<div class="rp-debrief-item">✅ ${rpEscapeHtml(p)}</div>`).join('')}` : ''}
+                    <div class="rp-iv-label">Formulations à corriger</div>
+                    ${arr(d.a_corriger).length ? arr(d.a_corriger).map(b => `
+                        <div class="rp-debrief-item">
+                            <div>« ${rpEscapeHtml(b.phrase_apprenant || '')} »</div>
+                            <div class="rp-debrief-sub">${rpEscapeHtml(b.probleme || '')}</div>
+                            <div class="rp-iv-reference">→ ${rpEscapeHtml(b.formulation_correcte || '')} ${speakBtnHtml(b.formulation_correcte || '')}</div>
+                        </div>`).join('') : '<div class="rp-debrief-sub">Rien à signaler, bravo.</div>'}
+                    <div class="rp-iv-label">Vocabulaire utile pour ce cas</div>
+                    ${arr(d.vocabulaire).length ? arr(d.vocabulaire).map(v => `<div class="conj-tense-row"><span class="conj-form">${rpEscapeHtml(v.nl || '')}</span> ${speakBtnHtml(v.nl || '')}<span class="rp-debrief-sub" style="flex:1;">${rpEscapeHtml(v.fr || '')}</span></div>`).join('') : '<div class="rp-debrief-sub">—</div>'}
                     ${d.conseil ? `<div class="rp-iv-label">Conseil pour la prochaine fois</div><div>${rpEscapeHtml(d.conseil)}</div>` : ''}
                     ${footer}
                 </div>`;

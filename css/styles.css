@@ -189,6 +189,7 @@
         #rp-day-nav { width: 100%; max-width: 520px; margin-top: 12px; }
         .rp-debrief-item { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; text-align: left; }
         .rp-debrief-sub { font-size: 0.8rem; color: var(--text-secondary); }
+        .rp-case-figures { margin: 6px 0 0; padding-left: 18px; font-size: 0.84rem; }
         #rp-debrief-content { text-align: left; }
         @media (min-width: 1300px) { .rp-job-canal, #rp-mode-banner, #rp-day-nav { max-width: 860px; } }
         @media (min-width: 1300px) { .rp-real-hint, #rp-text-row, #rp-coach-panel { max-width: 860px; } }
