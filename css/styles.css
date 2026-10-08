@@ -160,6 +160,27 @@
         .rp-message.user { background: var(--primary); color: white; align-self: flex-end; }
         .rp-message.assistant { background: var(--bg); color: var(--text); align-self: flex-start; border-left: 4px solid var(--primary); }
         #rp-mic-btn { width: 100%; max-width: 520px; box-sizing: border-box; }
+        /* Jeu de rôle : saisie au clavier, bouton "Corrige-moi", encart de correction, mode intervieweur */
+        #rp-step-category { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .rp-cat-real { border-color: var(--primary); }
+        .rp-cat-real .cat-sub { line-height: 1.3; }
+        .rp-real-hint { font-size: 0.8rem; color: var(--text-secondary); width: 100%; max-width: 520px; text-align: left; margin: 0 0 10px; }
+        #rp-text-row { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-top: 10px; }
+        #rp-text-row input { flex: 1; min-width: 0; }
+        .rp-coach-btn { align-self: flex-end; background: none; border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 5px 12px; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; margin-top: -4px; }
+        .rp-coach-btn:active { border-color: var(--primary); color: var(--primary); }
+        #rp-coach-panel { width: 100%; max-width: 520px; box-sizing: border-box; margin-top: 14px; padding: 12px 14px; border-radius: 12px; border: 2px dashed var(--gold); background: var(--card-bg); text-align: left; font-size: 0.88rem; }
+        .rp-coach-title { font-weight: 700; font-size: 0.8rem; margin-bottom: 6px; }
+        .rp-coach-quote { font-style: italic; color: var(--text-secondary); margin-bottom: 8px; }
+        .rp-coach-body, .rp-iv-comment { white-space: pre-wrap; line-height: 1.45; }
+        .rp-iv-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 10px 0 3px; }
+        .rp-iv-cue { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+        .rp-iv-candidate { background: var(--surface-2); border-left: 4px solid var(--border); border-radius: var(--radius-md); padding: 4px 12px 10px; margin-bottom: 12px; font-size: 0.92rem; }
+        .rp-iv-reference { font-weight: 600; color: var(--primary); }
+        .rp-iv-feedback-box { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); text-align: left; }
+        #rp-iv-input { width: 100%; box-sizing: border-box; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font: inherit; font-size: 1rem; resize: vertical; }
+        .wl-badge.iv-wrong { background: #ffd6d6; color: #a11d1d; }
+        @media (min-width: 1300px) { .rp-real-hint, #rp-text-row, #rp-coach-panel { max-width: 860px; } }
         #rp-mic-btn.recording { background: var(--wrong); box-shadow: 0 4px 0 #c13a3a; animation: rp-pulse 1.5s infinite; }
         @keyframes rp-pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
         #rp-status { text-align: center; font-size: 0.85rem; color: var(--text); opacity: 0.7; margin-top: 8px; width: 100%; max-width: 520px; }

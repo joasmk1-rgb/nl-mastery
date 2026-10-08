@@ -1,0 +1,19 @@
+{
+  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture). Mettre \"exemple\": true sur un scénario factice : il est alors signalé comme tel dans l'interface.",
+  "scenarios": [
+    {
+      "id": "exemple_candidat",
+      "exemple": true,
+      "label": "Exemple de structure (à remplacer par une vraie transcription)",
+      "poste": "Transport Planner",
+      "contexte": "Scénario factice de trois questions, présent uniquement pour tester le moteur.",
+      "niveau": "B1",
+      "welcome": "Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?",
+      "questions": {
+        "accroche": ["Kunt u zich even kort voorstellen?"],
+        "motivation": ["Waarom heeft u voor deze functie gesolliciteerd?"],
+        "cloture": ["Heeft u zelf nog vragen voor ons?"]
+      }
+    }
+  ]
+}

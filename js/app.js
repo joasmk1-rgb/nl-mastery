@@ -6320,6 +6320,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
             const micBtn = document.getElementById('rp-mic-btn');
             if (micBtn) micBtn.style.display = 'none';
+            const textRow = document.getElementById('rp-text-row');
+            if (textRow) textRow.style.display = 'none';
 
             const banner = document.getElementById('rp-mode-banner');
             if (banner) {
@@ -6448,7 +6450,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     return;
                 }
                 if (text) {
-                    rpAppendMessage(text, 'user');
+                    rpAppendUserTurn(text);
                     rpSendToGemini(text);
                 }
             };
@@ -6601,6 +6603,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function rpShowCategoryPicker() {
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            rpIvState = null;
+            rpHideInterviewer();
             document.getElementById('rp-step-category').style.display = '';
             document.getElementById('rp-step-scenario').style.display = 'none';
             document.getElementById('rp-step-chat').style.display = 'none';
@@ -6608,6 +6613,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function rpShowCategory(catKey) {
             rpCurrentCategory = catKey;
+            rpHideInterviewer();
             const cat = RP_SCENARIOS[catKey];
             const listDiv = document.getElementById('rp-scenario-list');
             let html = '';
@@ -6632,7 +6638,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function rpShowScenarioPicker() {
             if (rpIsRecording && rpRecognition) rpRecognition.stop();
-            if (rpCurrentCategory) {
+            if (rpCurrentCategory === '__reel_candidat') {
+                rpShowRealCandidateList();
+            } else if (rpCurrentCategory === '__reel_intervieweur') {
+                rpIvState = null;
+                rpShowInterviewerList();
+            } else if (rpCurrentCategory) {
                 rpShowCategory(rpCurrentCategory);
             } else {
                 rpShowCategoryPicker();
@@ -6658,6 +6669,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpScriptedStepIndex = 0;
             const micBtn = document.getElementById('rp-mic-btn');
             if (micBtn) micBtn.style.display = '';
+            const textRow = document.getElementById('rp-text-row');
+            if (textRow) textRow.style.display = 'flex';
+            rpCoachClear();
+            rpHideInterviewer();
             const choicesDiv = document.getElementById('rp-scripted-choices');
             if (choicesDiv) { choicesDiv.style.display = 'none'; choicesDiv.innerHTML = ''; }
             const banner = document.getElementById('rp-mode-banner');
@@ -6677,6 +6692,334 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!GeminiService.isAvailable() && RP_SCRIPTED_FALLBACK[scenario.id]) {
                 rpEnterScriptedMode();
             }
+        }
+
+        // =====================================================================================
+        // Extension du jeu de rôle : scénarios réels (tirés de vraies transcriptions d'entretien)
+        // =====================================================================================
+        // Trois usages de Gemini, avec trois prompts STRICTEMENT séparés — jamais mélangés dans un
+        // même appel :
+        //   1. le recruteur qui improvise (rpBuildRecruiterPrompt → conversation rpSendToGemini)
+        //   2. le correcteur "prof de néerlandais" (rpCoachCorrect) — ne voit QUE la phrase de
+        //      l'apprenant, jamais le contexte recruteur, pour rester fiable
+        //   3. le juge de traduction du mode intervieweur (rpIvJudge) — ne voit QUE la phrase de
+        //      référence et la tentative
+        // Le contenu (questions, dialogues) vit dans data/roleplay/*.json et est fourni par Joas :
+        // rien n'est inventé ici.
+
+        // ----- Tour de l'utilisateur + bouton "Corrige-moi" -----
+        // Remplace rpAppendMessage(text, 'user') pour les réponses libres (dictées ou tapées).
+        // Les répliques pré-écrites du mode script n'y passent pas : rien à corriger.
+        const rpCoachSettings = { auto: false }; // true = correction après chaque tour sans clic (option B, pas encore exposée dans l'interface)
+
+        function rpAppendUserTurn(text) {
+            rpAppendMessage(text, 'user');
+            const historyDiv = document.getElementById('rp-chat-history');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'rp-coach-btn';
+            btn.innerText = '✍️ Corrige-moi';
+            btn.onclick = () => rpCoachCorrect(text);
+            historyDiv.appendChild(btn);
+            historyDiv.scrollTop = historyDiv.scrollHeight;
+            if (rpCoachSettings.auto) rpCoachCorrect(text);
+        }
+
+        function rpSendTypedMessage() {
+            const input = document.getElementById('rp-text-input');
+            const text = (input.value || '').trim();
+            if (!text || rpScriptedActive) return;
+            if (!GeminiService.getKey()) {
+                alert("Renseigne d'abord ta clé API Gemini dans Profil → 🤖 Intelligence IA.");
+                return;
+            }
+            input.value = '';
+            rpAppendUserTurn(text);
+            rpSendToGemini(text);
+        }
+
+        function rpCoachClear() {
+            const panel = document.getElementById('rp-coach-panel');
+            if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+        }
+
+        // Correcteur : appel Gemini séparé, prompt minimal, aucune trace de la conversation.
+        // Le résultat s'affiche dans un encart sous la conversation, pas dans le fil de dialogue,
+        // pour ne pas casser l'immersion.
+        async function rpCoachCorrect(userText) {
+            const panel = document.getElementById('rp-coach-panel');
+            if (!panel) return;
+            panel.style.display = 'block';
+            panel.innerHTML = '';
+            const title = document.createElement('div');
+            title.className = 'rp-coach-title';
+            title.innerText = '✍️ Correction — prof de néerlandais';
+            const quote = document.createElement('div');
+            quote.className = 'rp-coach-quote';
+            quote.innerText = '« ' + userText + ' »';
+            const body = document.createElement('div');
+            body.className = 'rp-coach-body';
+            body.innerText = 'Correction en cours...';
+            panel.append(title, quote, body);
+            try {
+                body.innerText = await GeminiService.generate(
+                    'Tu es un professeur de néerlandais pour francophones. Corrige la grammaire, le vocabulaire et la formulation de ce texte produit par un apprenant (il peut avoir été dicté : ignore la ponctuation et les majuscules). ' +
+                    'Réponds en français, de façon brève : 2 à 3 points maximum, puis une version corrigée en néerlandais. Si le texte est déjà correct, dis-le en une phrase.\n\n' +
+                    'Texte de l\'apprenant : """' + userText + '"""'
+                );
+            } catch (e) {
+                body.innerText = 'Correction impossible : ' + e.message;
+            }
+            panel.scrollIntoView({ block: 'nearest' });
+        }
+
+        // ----- Chargement des données -----
+        let rpRealData = null; // { banks: [...], dialogues: [...] }
+
+        async function rpLoadRealData() {
+            if (rpRealData) return rpRealData;
+            const load = url => fetch(url).then(r => r.ok ? r.json() : { scenarios: [] }).catch(() => ({ scenarios: [] }));
+            const [banks, dialogues] = await Promise.all([
+                load('data/roleplay/question_banks.json'),
+                load('data/roleplay/scripted_dialogues.json')
+            ]);
+            rpRealData = { banks: banks.scenarios || [], dialogues: dialogues.scenarios || [] };
+            return rpRealData;
+        }
+
+        function rpHideInterviewer() {
+            const el = document.getElementById('rp-step-interviewer');
+            if (el) el.style.display = 'none';
+        }
+
+        const rpEscapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const rpExampleTag = sc => sc.exemple ? ' <span class="wl-badge review">exemple à remplacer</span>' : '';
+
+        // ----- Mode Candidat : recruteur piloté par une banque de questions réelles -----
+        const RP_QUESTION_TYPES = [
+            ['accroche', 'Accroche / entrée en matière'],
+            ['verif_cv', 'Vérification du CV'],
+            ['clarification_poste', 'Clarification du poste'],
+            ['technique', 'Questions techniques'],
+            ['motivation', 'Motivation'],
+            ['vision_carriere', 'Vision de carrière'],
+            ['objections', 'Objections'],
+            ['perso', 'Questions personnelles'],
+            ['dispo', 'Disponibilité / aspects pratiques'],
+            ['cloture', 'Clôture']
+        ];
+
+        // Le prompt ne contient QUE des questions à poser — aucune réponse attendue. Le modèle
+        // réagit librement à ce que l'apprenant répond réellement.
+        function rpBuildRecruiterPrompt(bank) {
+            const q = bank.questions || {};
+            const known = RP_QUESTION_TYPES.map(t => t[0]);
+            const sections = RP_QUESTION_TYPES
+                .concat(Object.keys(q).filter(k => !known.includes(k)).map(k => [k, k]))
+                .filter(([key]) => Array.isArray(q[key]) && q[key].length)
+                .map(([key, label]) => label + ' :\n' + q[key].map(x => '- ' + x).join('\n'))
+                .join('\n\n');
+            return 'Tu es un recruteur belge néerlandophone qui mène un entretien d\'embauche' + (bank.poste ? ' pour le poste suivant : ' + bank.poste : '') + '. ' +
+                (bank.contexte ? 'Contexte : ' + bank.contexte + ' ' : '') +
+                'Parle exclusivement en néerlandais' + (bank.niveau ? ' (niveau ' + bank.niveau + ')' : '') + ', comme à l\'oral : une ou deux phrases, UNE seule question à la fois.\n\n' +
+                'Voici les questions réellement posées dans ce type d\'entretien, classées par moment de l\'entretien. Suis cet ordre approximativement, sans le réciter : reformule librement, saute ce qui a déjà été abordé, et rebondis sur ce que le candidat vient de dire avec des relances improvisées avant de passer à la question suivante.\n\n' +
+                sections + '\n\n' +
+                'Tu ne connais pas les réponses du candidat à l\'avance : réagis à ce qu\'il dit réellement, comme un vrai recruteur. Ne corrige jamais son néerlandais et ne sors jamais de ton rôle. Quand les thèmes principaux ont été couverts, conclus l\'entretien naturellement.';
+        }
+
+        async function rpShowRealCandidateList() {
+            rpCurrentCategory = '__reel_candidat';
+            rpHideInterviewer();
+            const listDiv = document.getElementById('rp-scenario-list');
+            listDiv.innerHTML = '<p style="color:#888;">Chargement...</p>';
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+            const { banks } = await rpLoadRealData();
+            listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens réels</div>' +
+                '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens et improvise ses relances selon tes réponses.</p>' +
+                (banks.length
+                    ? banks.map((b, i) => `<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpExampleTag(b)}</button>`).join('')
+                    : '<p style="color:#888;">Aucun scénario réel pour l\'instant.</p>');
+        }
+
+        function rpStartRealCandidate(index) {
+            const bank = rpRealData && rpRealData.banks[index];
+            if (!bank) return;
+            const firstQuestion = ((bank.questions || {}).accroche || [])[0];
+            rpBeginScenario({
+                id: 'reel_' + bank.id,
+                label: bank.label,
+                welcome: bank.welcome || firstQuestion || 'Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?',
+                prompt: rpBuildRecruiterPrompt(bank)
+            });
+        }
+
+        // ----- Mode Intervieweur : exercice de traduction guidé sur un dialogue scripté -----
+        // Joas joue le recruteur. Chaque tour : consigne en français (fr_cue) → sa tentative en
+        // néerlandais → jugement SÉMANTIQUE par Gemini contre la phrase réellement dite
+        // (nl_original), jamais une comparaison de texte → réplique du candidat pour le contexte.
+        let rpIvState = null; // { scenario, index, counts: {correct, proche, a_revoir} }
+        const RP_IV_VERDICTS = {
+            correct: { label: '✅ Correct', cls: 'true-mastered' },
+            proche: { label: '🟡 Proche', cls: 'review' },
+            a_revoir: { label: '❌ À revoir', cls: 'iv-wrong' }
+        };
+
+        async function rpShowInterviewerList() {
+            rpCurrentCategory = '__reel_intervieweur';
+            rpHideInterviewer();
+            const listDiv = document.getElementById('rp-scenario-list');
+            listDiv.innerHTML = '<p style="color:#888;">Chargement...</p>';
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+            const { dialogues } = await rpLoadRealData();
+            listDiv.innerHTML = '<div class="rp-group-title">🎙️ Je suis recruteur — traduction guidée</div>' +
+                '<p class="rp-real-hint">Tu joues le recruteur d\'un vrai entretien : on te donne la phrase en français, tu la dis en néerlandais.</p>' +
+                (dialogues.length
+                    ? dialogues.map((d, i) => `<button class="rp-scenario-btn" onclick="rpIvStart(${i})">${rpEscapeHtml(d.label)} <span style="color:var(--text-secondary); font-weight:normal;">· ${(d.turns || []).length} tours</span>${rpExampleTag(d)}</button>`).join('')
+                    : '<p style="color:#888;">Aucun dialogue pour l\'instant.</p>');
+        }
+
+        function rpIvStart(index) {
+            const scenario = rpRealData && rpRealData.dialogues[index];
+            if (!scenario || !(scenario.turns || []).length) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            rpIvState = { scenario, scenarioIndex: index, index: 0, counts: { correct: 0, proche: 0, a_revoir: 0 } };
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = 'none';
+            document.getElementById('rp-step-chat').style.display = 'none';
+            document.getElementById('rp-step-interviewer').style.display = 'flex';
+            rpIvRenderTurn();
+        }
+
+        function rpIvRenderTurn() {
+            const st = rpIvState;
+            const box = document.getElementById('rp-iv-content');
+            if (!st || !box) return;
+            const turns = st.scenario.turns;
+            if (st.index >= turns.length) { rpIvRenderSummary(); return; }
+            const turn = turns[st.index];
+            const prev = st.index > 0 ? turns[st.index - 1] : null;
+            box.innerHTML = `
+                <div class="conj-card">
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:6px;">${rpEscapeHtml(st.scenario.label)} · Tour ${st.index + 1}/${turns.length}</div>
+                    ${st.index === 0 && st.scenario.contexte ? `<div class="rp-real-hint" style="margin-bottom:10px;">${rpEscapeHtml(st.scenario.contexte)}</div>` : ''}
+                    ${prev && prev.candidate_reply ? `<div class="rp-iv-candidate"><div class="rp-iv-label">Le candidat vient de répondre</div>${rpEscapeHtml(prev.candidate_reply)} ${speakBtnHtml(prev.candidate_reply)}</div>` : ''}
+                    <div class="rp-iv-label">Dis en néerlandais</div>
+                    <div class="rp-iv-cue">${rpEscapeHtml(turn.fr_cue)}</div>
+                    <textarea id="rp-iv-input" rows="3" placeholder="Ta phrase en néerlandais..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+                    <button class="btn btn-gray" id="rp-iv-mic-btn" style="margin-top:8px;" onclick="rpIvToggleMic()">🎤 Cliquer pour parler</button>
+                    <div id="rp-iv-status" style="font-size:0.8rem; color:var(--text-secondary); min-height:1.2em; margin:6px 0;"></div>
+                    <button class="btn btn-green" id="rp-iv-check-btn" onclick="rpIvCheck()">Vérifier</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="rpIvReveal()">Voir la phrase de référence</button>
+                    <div id="rp-iv-feedback"></div>
+                </div>`;
+            const input = document.getElementById('rp-iv-input');
+            if (input) input.focus();
+        }
+
+        function rpIvToggleMic() {
+            productionToggleVoiceCapture('rp-iv-mic-btn', 'rp-iv-status', (text) => {
+                const input = document.getElementById('rp-iv-input');
+                if (input) input.value = (input.value ? input.value + ' ' : '') + text;
+            });
+        }
+
+        // Juge de traduction : appel séparé, ne reçoit que la référence et la tentative.
+        async function rpIvJudge(nlOriginal, attempt) {
+            const raw = await GeminiService.generate(
+                'Tu évalues une phrase en néerlandais dite par un apprenant francophone qui joue le rôle d\'un recruteur dans un entretien d\'embauche professionnel.\n\n' +
+                'Phrase de référence (réellement dite par un recruteur néerlandophone) : """' + nlOriginal + '"""\n' +
+                'Tentative de l\'apprenant : """' + attempt + '"""\n\n' +
+                'Ne compare PAS mot à mot : plusieurs formulations néerlandaises sont valides pour une même idée. Ignore la ponctuation et les majuscules (la phrase peut avoir été dictée). ' +
+                'Juge si la tentative transmet la même idée que la référence, avec un niveau correct de néerlandais professionnel.\n' +
+                '- "correct" : même idée, néerlandais correct (même formulé autrement).\n' +
+                '- "proche" : idée transmise mais avec une ou des erreurs, ou un détail important manquant.\n' +
+                '- "a_revoir" : idée différente, incompréhensible, ou trop d\'erreurs.\n\n' +
+                'Réponds UNIQUEMENT avec un objet JSON, sans texte autour : {"verdict": "correct" | "proche" | "a_revoir", "commentaire": "en français, 1 à 3 phrases ; si ce n\'est pas parfait, signale précisément ce qui cloche (mot, ordre des mots, grammaire, registre) et comment le corriger"}'
+            );
+            // Réponse attendue en JSON, mais le modèle l'entoure parfois de texte ou de ```json.
+            try {
+                const match = raw.match(/\{[\s\S]*\}/);
+                const parsed = JSON.parse(match ? match[0] : raw);
+                if (RP_IV_VERDICTS[parsed.verdict]) return { verdict: parsed.verdict, commentaire: String(parsed.commentaire || '') };
+            } catch (e) { /* on retombe sur l'affichage brut ci-dessous */ }
+            return { verdict: null, commentaire: raw };
+        }
+
+        function rpIvFeedbackHtml(turn, attempt, verdictHtml, commentaire) {
+            return `
+                <div class="rp-iv-feedback-box">
+                    ${verdictHtml}
+                    ${attempt ? `<div class="rp-iv-label">Ta phrase</div><div>${rpEscapeHtml(attempt)}</div>` : ''}
+                    <div class="rp-iv-label">Phrase de référence (dite par le vrai recruteur)</div>
+                    <div class="rp-iv-reference">${rpEscapeHtml(turn.nl_original)} ${speakBtnHtml(turn.nl_original)}</div>
+                    ${commentaire ? `<div class="rp-iv-label">Commentaire</div><div class="rp-iv-comment">${rpEscapeHtml(commentaire)}</div>` : ''}
+                    ${turn.candidate_reply ? `<div class="rp-iv-candidate" style="margin-top:12px;"><div class="rp-iv-label">Le candidat répond</div>${rpEscapeHtml(turn.candidate_reply)} ${speakBtnHtml(turn.candidate_reply)}</div>` : ''}
+                    <button class="btn btn-green" style="margin-top:12px;" onclick="rpIvNext()">${rpIvState.index + 1 >= rpIvState.scenario.turns.length ? 'Voir le bilan' : 'Tour suivant →'}</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="rpIvRenderTurn()">🔁 Réessayer ce tour</button>
+                </div>`;
+        }
+
+        async function rpIvCheck() {
+            const st = rpIvState;
+            if (!st || st.checking) return;
+            const attempt = (document.getElementById('rp-iv-input').value || '').trim();
+            const fb = document.getElementById('rp-iv-feedback');
+            if (!attempt) { fb.innerHTML = '<p style="color:var(--wrong); font-size:0.85rem;">Écris ou dis d\'abord ta phrase.</p>'; return; }
+            if (!GeminiService.isAvailable()) {
+                fb.innerHTML = '<p style="color:var(--wrong); font-size:0.85rem;">La vérification a besoin de Gemini (Profil → 🤖 Intelligence IA). Sans clé, utilise « Voir la phrase de référence » pour te comparer toi-même.</p>';
+                return;
+            }
+            const turn = st.scenario.turns[st.index];
+            st.checking = true;
+            fb.innerHTML = '<p style="font-size:0.85rem; color:var(--text-secondary);">Vérification en cours...</p>';
+            try {
+                const res = await rpIvJudge(turn.nl_original, attempt);
+                if (rpIvState !== st) return; // l'utilisateur a quitté l'exercice entre-temps
+                const v = RP_IV_VERDICTS[res.verdict];
+                if (v) st.counts[res.verdict]++;
+                const verdictHtml = v
+                    ? `<span class="wl-badge ${v.cls}" style="font-size:0.9rem; padding:5px 12px;">${v.label}</span>`
+                    : '<span class="wl-badge unseen">Verdict non lisible</span>';
+                document.getElementById('rp-iv-check-btn').style.display = 'none';
+                fb.innerHTML = rpIvFeedbackHtml(turn, attempt, verdictHtml, res.commentaire);
+            } catch (e) {
+                fb.innerHTML = `<p style="color:var(--wrong); font-size:0.85rem;">Vérification impossible : ${rpEscapeHtml(e.message)}</p>`;
+            } finally {
+                st.checking = false;
+            }
+        }
+
+        // Sans jugement (pas de clé Gemini, ou simple envie de voir la réponse) : auto-comparaison.
+        function rpIvReveal() {
+            const st = rpIvState;
+            if (!st) return;
+            const turn = st.scenario.turns[st.index];
+            const attempt = (document.getElementById('rp-iv-input').value || '').trim();
+            document.getElementById('rp-iv-feedback').innerHTML =
+                rpIvFeedbackHtml(turn, attempt, '<span class="wl-badge unseen">Non évalué</span>', '');
+        }
+
+        function rpIvNext() {
+            if (!rpIvState) return;
+            rpIvState.index++;
+            rpIvRenderTurn();
+        }
+
+        function rpIvRenderSummary() {
+            const st = rpIvState;
+            const c = st.counts;
+            const evaluated = c.correct + c.proche + c.a_revoir;
+            document.getElementById('rp-iv-content').innerHTML = `
+                <div class="conj-card">
+                    <div class="conj-verb-title">Entretien terminé 🎉</div>
+                    <p style="font-size:0.9rem;">${st.scenario.turns.length} tours · ${evaluated} évalué(s) : ✅ ${c.correct} correct(s) · 🟡 ${c.proche} proche(s) · ❌ ${c.a_revoir} à revoir</p>
+                    <button class="btn btn-green" onclick="rpIvStart(${st.scenarioIndex})">🔁 Recommencer ce dialogue</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowInterviewerList()">Choisir un autre dialogue</button>
+                </div>`;
         }
 
         // ===== Pratique ciblée (jeu de rôle piloté par une notion du curriculum) =====

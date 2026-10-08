@@ -404,7 +404,13 @@
 
         <!-- Étape 1 : choix de la catégorie -->
         <div id="rp-step-category">
-            <div class="rp-category-grid">
+            <div class="rp-group-title">Scénarios réels — tirés de vrais entretiens</div>
+            <div class="rp-category-grid" style="margin-top:0;">
+                <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">Le recruteur pose de vraies questions et improvise</div></div>
+                <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🎙️</span>Je suis recruteur<div class="cat-sub">Traduction guidée d'un vrai dialogue</div></div>
+            </div>
+            <div class="rp-group-title">Scénarios génériques</div>
+            <div class="rp-category-grid" style="margin-top:0;">
                 <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens d'embauche</div>
                 <div class="rp-cat-btn" onclick="rpShowCategory('admin')"><span class="rp-icon">🏛️</span>Administration belge</div>
                 <div class="rp-cat-btn" onclick="rpShowCategory('appels')"><span class="rp-icon">☎️</span>Appels téléphoniques</div>
@@ -425,7 +431,18 @@
             <div id="rp-chat-history"></div>
             <button id="rp-mic-btn" class="btn btn-green" onclick="rpToggleSpeechRecognition()">🎤 Cliquer pour parler</button>
             <div id="rp-status">Prêt</div>
+            <div id="rp-text-row">
+                <input type="text" id="rp-text-input" placeholder="...ou écris ta réponse en néerlandais" autocomplete="off" autocapitalize="off" spellcheck="false" style="margin:0;" onkeypress="if(event.key==='Enter') rpSendTypedMessage()">
+                <button class="btn btn-green" style="margin:0; width:auto;" onclick="rpSendTypedMessage()">Envoyer</button>
+            </div>
             <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
+            <div id="rp-coach-panel" style="display:none;"></div>
+        </div>
+
+        <!-- Mode Intervieweur : exercice de traduction guidé (dialogue scripté) -->
+        <div id="rp-step-interviewer" style="display:none; width:100%; flex-direction:column; align-items:center;">
+            <button class="back-btn" onclick="rpShowScenarioPicker()">← Changer de dialogue</button>
+            <div id="rp-iv-content" class="content-col"></div>
         </div>
     </div>
 

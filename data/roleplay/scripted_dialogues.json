@@ -1,0 +1,23 @@
+{
+  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase réellement dite par le recruteur dans la transcription = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). Mettre \"exemple\": true sur un scénario factice : il est alors signalé comme tel dans l'interface.",
+  "scenarios": [
+    {
+      "id": "exemple_intervieweur",
+      "exemple": true,
+      "label": "Exemple de structure (à remplacer par une vraie transcription)",
+      "contexte": "Dialogue factice de deux tours, présent uniquement pour tester le moteur.",
+      "turns": [
+        {
+          "nl_original": "Goedendag, fijn dat u er bent. Kunt u zich even kort voorstellen?",
+          "fr_cue": "Bonjour, content que vous soyez là. Pouvez-vous vous présenter brièvement ?",
+          "candidate_reply": "Goedendag. Ik ben afgestudeerd in logistiek en ik werk sinds twee jaar als planner."
+        },
+        {
+          "nl_original": "Waarom heeft u voor deze functie gesolliciteerd?",
+          "fr_cue": "Pourquoi avez-vous postulé pour cette fonction ?",
+          "candidate_reply": "Omdat ik graag meer verantwoordelijkheid wil nemen in de planning."
+        }
+      ]
+    }
+  ]
+}
