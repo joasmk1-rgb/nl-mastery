@@ -1,0 +1,6 @@
+# Lexiques CEFRLex français / anglais / espagnol : gardés en local tant qu'ils ne sont pas
+# réellement utilisés (10 Mo). Voir data/reference/README.md pour les retélécharger.
+data/reference/FLELex-TT-Beacco.tsv
+data/reference/FLELex-CRF.csv
+data/reference/EFLLex.tsv
+data/reference/ELELex.tsv
