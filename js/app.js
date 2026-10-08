@@ -4694,7 +4694,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             let items = fullDb;
             if (cat) items = items.filter(i => i.file === cat);
             if (subcat) items = items.filter(i => i.sousCategorie === subcat);
-            if (statusFilter) items = items.filter(i => wordStatus(i.id) === statusFilter);
+            if (statusFilter === 'useful') items = items.filter(i => isUsefulWord(i.id));
+            else if (statusFilter) items = items.filter(i => wordStatus(i.id) === statusFilter);
             if (search) items = items.filter(i => normalize(i.fr).includes(search) || normalize(i.nl).includes(search));
 
             items = [...items];
@@ -4712,6 +4713,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <span class="wl-fr">${i.fr}</span>
                     <span class="wl-nl">${i.nl}</span>
                     ${speakBtnHtml(i.nl)}
+                    ${usefulStarHtml(i.id)}
                     ${niveauCECRBadgeHtml(i.niveauCECR)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
                     <span class="wl-file">${categoryLabel(i.file)}${i.sousCategorie ? ' · ' + i.sousCategorie : ''}${freqTxt ? ' · ' + freqTxt : ''}</span>
@@ -5916,6 +5918,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('test-result').innerHTML = '';
             document.getElementById('test-ans-input').style.display = '';
             document.querySelector('#test-view .btn-green').style.display = '';
+            testSetExtraControls(true);
             if (testQueue.length === 0) { finishTest(); return; }
             testNextQ();
         }
@@ -5931,6 +5934,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('test-result').innerHTML = '';
             document.getElementById('test-ans-input').style.display = '';
             document.querySelector('#test-view .btn-green').style.display = '';
+            testSetExtraControls(true);
             loadAdaptiveBand();
         }
 
@@ -5966,17 +5970,38 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('test-ans-input').value = '';
             document.getElementById('test-feedback').innerText = '';
             document.getElementById('test-ans-input').focus();
+            testLocked = false;
+            testRefreshStar();
             const label = testMode === 'adaptive' ? `Palier "${FREQ_BANDS[adaptiveBandIdx].label}" — ` : '';
             document.getElementById('test-progress').innerText = `${label}Mot ${testIndex + 1} / ${testQueue.length}`;
         }
 
+        let testLocked = false; // vrai entre une réponse et le mot suivant : évite un double comptage
+
         function testCheckAns() {
+            if (testLocked) return;
             const item = testQueue[testIndex];
+            if (!item) return;
             const raw = document.getElementById('test-ans-input').value;
             const { answerField } = questionFor(item);
+            const result = evaluateAnswer(raw, item[answerField]);
+            testRecordAnswer(item, result.status !== 'wrong', false);
+        }
+
+        // "Je le connais" : compte le mot comme su sans avoir à taper la réponse. Enregistré
+        // exactement comme une bonne réponse (mot vu, réussi, maîtrisé) — c'est une déclaration,
+        // donc à utiliser honnêtement ; la réponse s'affiche quand même pour pouvoir vérifier.
+        function testDeclareKnown() {
+            if (testLocked) return;
+            const item = testQueue[testIndex];
+            if (!item) return;
+            testRecordAnswer(item, true, true);
+        }
+
+        function testRecordAnswer(item, isCorrect, declared) {
+            testLocked = true;
+            const { answerField } = questionFor(item);
             const correctAnswer = item[answerField];
-            const result = evaluateAnswer(raw, correctAnswer);
-            const isCorrect = result.status !== 'wrong';
             const fb = document.getElementById('test-feedback');
             const speakSuffix = answerField === 'nl' ? ' ' + speakBtnHtml(correctAnswer) + translateBtnHtml(correctAnswer) : '';
             fb.innerHTML = (isCorrect ? '✅ ' + correctAnswer : '❌ ' + correctAnswer) + speakSuffix;
@@ -5987,9 +6012,49 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             save();
             testResults.push({ item, isCorrect });
             testIndex++;
-            setTimeout(testNextQ, 900);
+            // Un mot déclaré connu laisse un peu plus de temps pour lire la réponse affichée.
+            setTimeout(testNextQ, declared ? 1300 : 900);
         }
 
+        // ===== Mots utiles (étoile) =====
+        // state.usefulWords[id] = true : les mots que l'apprenant veut retrouver facilement.
+        // Indépendant de la maîtrise. Visible dans Apprendre → Mots, filtre "⭐ Mots utiles".
+        function isUsefulWord(id) { return !!(state.usefulWords && state.usefulWords[id]); }
+
+        function toggleUsefulWord(id) {
+            if (!state.usefulWords) state.usefulWords = {};
+            state.usefulWords[id] = !state.usefulWords[id];
+            save();
+        }
+
+        function usefulStarHtml(id) {
+            const on = isUsefulWord(id);
+            return `<button type="button" class="star-btn${on ? ' on' : ''}" onclick="event.stopPropagation(); toggleUsefulWord('${id}'); renderWordList();" title="Mot utile" aria-label="Marquer comme mot utile">${on ? '★' : '☆'}</button>`;
+        }
+
+        function testRefreshStar() {
+            const btn = document.getElementById('test-star-btn');
+            const item = testQueue[testIndex];
+            if (!btn || !item) return;
+            const on = isUsefulWord(item.id);
+            btn.innerText = on ? '★' : '☆';
+            btn.classList.toggle('on', on);
+        }
+
+        function testToggleUseful() {
+            const item = testQueue[testIndex];
+            if (!item || testLocked) return;
+            toggleUsefulWord(item.id);
+            testRefreshStar();
+        }
+
+        // Affiche ou masque les commandes du test (masquées sur l'écran de résultat).
+        function testSetExtraControls(visible) {
+            ['test-star-btn', 'test-known-btn'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = visible ? '' : 'none';
+            });
+        }
         function checkAdaptiveBandResult() {
             const band = FREQ_BANDS[adaptiveBandIdx];
             const bandResults = testResults.filter(r => freqBand(r.item.freq).idx === band.idx);
@@ -6041,6 +6106,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('test-ans-input').style.display = 'none';
             document.getElementById('test-feedback').innerText = '';
             document.querySelector('#test-view .btn-green').style.display = 'none';
+            testSetExtraControls(false);
         }
 
         function save() {

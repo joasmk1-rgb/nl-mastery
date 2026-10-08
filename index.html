@@ -51,6 +51,7 @@
                     <option value="review">À réviser</option>
                     <option value="mastered">Réussi (pas encore ancré)</option>
                     <option value="true-mastered">Vraiment maîtrisé</option>
+                    <option value="useful">⭐ Mots utiles</option>
                 </select>
                 <select id="wl-sort" onchange="renderWordList()" style="padding:10px; border-radius:12px; border:2px solid #ccc;">
                     <option value="alpha">Alphabétique</option>
@@ -237,10 +238,12 @@
         <button class="back-btn" onclick="showProfil()">← Retour</button>
         <div id="test-progress" style="font-weight:bold; margin-bottom:10px;"></div>
         <div class="study-box">
+            <button type="button" id="test-star-btn" class="star-btn star-btn-corner" onclick="testToggleUseful()" title="Marquer ce mot comme utile" aria-label="Marquer ce mot comme utile">☆</button>
             <h1 id="test-q-text">Mots</h1>
             <input type="text" id="test-ans-input" placeholder="Traduire en Néerlandais...">
             <div id="test-feedback" style="min-height: 20px; font-weight: bold; margin-bottom: 10px;"></div>
             <button class="btn btn-green" onclick="testCheckAns()">VÉRIFIER</button>
+            <button class="btn btn-gray" id="test-known-btn" style="margin-top:8px;" onclick="testDeclareKnown()">✔️ Je le connais</button>
         </div>
         <div id="test-result" style="margin-top:20px; width:100%; max-width:450px;"></div>
     </div>
