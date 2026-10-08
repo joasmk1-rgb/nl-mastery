@@ -17,6 +17,7 @@ citant Tatoeba).
 | `analyse.py corpus projet out` | lemmatise ~200 000 phrases, calcule la couverture (N mots → X % d'un texte) et ce que couvre le vocabulaire de l'app |
 | `missing.py out projet 3000` | liste les mots du noyau absents de l'app, validés contre NT2Lex |
 | `build_vocab.py out projet [--apply]` | ajoute aux CSV les mots traduits (fichiers `out/tr_*.txt`), fréquence Zipf via wordfreq, niveau CECR via NT2Lex |
+| `build_chunks.py corpus out projet` | génère `data/chunks/chunks_nl.json` : les blocs fréquents de chaque mot du vocabulaire, avec phrase d'exemple traduite (à relancer après un ajout de vocabulaire) |
 | `chunks_sample.py corpus out mot...` | échantillon de blocs fréquents (suites de 2-4 mots) autour de mots donnés, avec exemple traduit |
 
 Résultat d'octobre 2026 : 430 mots couvrent 80 % d'un texte courant, 1 532 → 90 %, 3 000 → 93,7 %.

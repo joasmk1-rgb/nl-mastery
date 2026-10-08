@@ -457,6 +457,7 @@
             <div class="quick-access-card" onclick="showWordList('apprendre')"><div class="qa-icon">📖</div><div class="qa-label">Mots</div></div>
             <div class="quick-access-card" onclick="showComprendre()"><div class="qa-icon">🧠</div><div class="qa-label">Grammaire & structures</div></div>
             <div class="quick-access-card" onclick="showConjugaison()"><div class="qa-icon">🔤</div><div class="qa-label">Conjugaison</div></div>
+            <div class="quick-access-card" style="grid-column: 1 / -1;" onclick="showChunkTraining()"><div class="qa-icon">🧩</div><div class="qa-label">Blocs de mots — apprendre les mots en contexte</div></div>
         </div>
         <div class="section-title" style="margin-top:0;">📅 Parcours par niveau</div>
         <div class="level-tab-row" id="level-tab-row"></div>
@@ -474,6 +475,12 @@
         <button class="back-btn" onclick="showApprendre()">← Retour au programme</button>
         <div id="guided-flow-banner" class="content-col"></div>
         <div id="lesson-content" class="content-col"></div>
+    </div>
+
+    <div id="chunk-view" class="view">
+        <button class="back-btn" onclick="showApprendre()">← Retour</button>
+        <h2>🧩 Blocs de mots</h2>
+        <div id="chunk-content" class="content-col"></div>
     </div>
 
     <div id="conjugaison-view" class="view">

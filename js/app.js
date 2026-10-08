@@ -324,7 +324,7 @@ function syncMergeValue(a, b, path) {
             return Object.assign({}, pick, { opened: !!(a.opened || b.opened) });
         }
         // Une forme conjuguée : ok/ko/streak vont ensemble, on garde la réponse la plus récente.
-        if (path.indexOf('conjStats.') === 0) return (b.last || 0) > (a.last || 0) ? b : a;
+        if (path.indexOf('conjStats.') === 0 || path.indexOf('chunkStats.') === 0) return (b.last || 0) > (a.last || 0) ? b : a;
         const res = {};
         Object.keys(a).concat(Object.keys(b)).forEach(k => {
             if (k in res) return;
@@ -3513,6 +3513,195 @@ if (firebaseAvailable) {
             }).join('');
         }
 
+        // ===== Blocs de mots (chunks) =====
+        // Apprendre un mot dans ses combinaisons les plus fréquentes ("op tijd", "geen tijd", "de
+        // laatste tijd") plutôt qu'isolé : le bloc a un sens, un contexte, et ressort tout fait
+        // quand on parle. Données : data/chunks/chunks_nl.json, extraites des phrases Tatoeba par
+        // tools/noyau/build_chunks.py — chaque bloc vient avec une vraie phrase d'exemple traduite.
+        // Mémoire des réponses : state.chunkStats[bloc] = { ok, ko, streak, last } (synchronisée).
+        let chunksData = null;      // { mot sans article: [{ c, n, ex, fr }] }
+        let chunksLoading = null;
+        function loadChunks() {
+            if (chunksData) return Promise.resolve(chunksData);
+            if (!chunksLoading) {
+                chunksLoading = fetch('data/chunks/chunks_nl.json')
+                    .then(r => r.ok ? r.json() : { chunks: {} })
+                    .then(d => { chunksData = d.chunks || {}; return chunksData; })
+                    .catch(() => { chunksData = {}; return chunksData; });
+            }
+            return chunksLoading;
+        }
+
+        // Clé de recherche d'un mot de l'app dans les blocs : première variante, sans article.
+        function chunkKey(nl) {
+            return String(nl || '').split('/')[0].replace(/\([^)]*\)/g, '').trim().toLowerCase().replace(/^(de|het|zich|een)\s+/, '');
+        }
+        function chunksForItem(item) {
+            return (chunksData && chunksData[chunkKey(item.nl)]) || [];
+        }
+
+        const escHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        // Liste de mots : panneau des blocs sous la ligne du mot.
+        let wlOpenChunksId = null;
+        function toggleWordChunks(id) {
+            wlOpenChunksId = wlOpenChunksId === id ? null : id;
+            renderWordList();
+        }
+        function wordChunksButtonHtml(item) {
+            if (!chunksForItem(item).length) return '';
+            return `<button type="button" class="star-btn" onclick="event.stopPropagation(); toggleWordChunks('${item.id}')" title="Voir ce mot dans ses blocs les plus fréquents" aria-label="Voir les blocs">🧩</button>`;
+        }
+        function wordChunksPanelHtml(item) {
+            if (wlOpenChunksId !== item.id) return '';
+            return `<div class="wl-chunks">${chunksForItem(item).map(k => `
+                <div class="wl-chunk">
+                    <div class="chunk-text">${escHtml(k.c)} ${speakBtnHtml(k.c)}</div>
+                    <div class="chunk-ex">${escHtml(k.ex)} ${speakBtnHtml(k.ex)}</div>
+                    <div class="chunk-fr">${escHtml(k.fr)}</div>
+                </div>`).join('')}</div>`;
+        }
+
+        // ----- Entraînement par blocs : phrase à trou -----
+        const CHUNK_SESSION_SIZE = 10;
+        let chunkSession = null;
+
+        function chunkBlank(k) {
+            const idx = k.ex.toLowerCase().indexOf(k.c);
+            if (idx < 0) return null;
+            return { before: k.ex.slice(0, idx), after: k.ex.slice(idx + k.c.length), answer: k.ex.slice(idx, idx + k.c.length) };
+        }
+
+        async function showChunkTraining() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('chunk-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            const box = document.getElementById('chunk-content');
+            box.innerHTML = '<p style="color:#888;">Chargement des blocs...</p>';
+            await loadChunks();
+            const st = state.chunkStats || {};
+            const all = [];
+            fullDb.forEach(i => chunksForItem(i).forEach(k => { if (chunkBlank(k)) all.push(k.c); }));
+            const distinct = [...new Set(all)];
+            const seen = distinct.filter(c => st[c]).length;
+            const due = distinct.filter(c => st[c] && st[c].streak === 0).length;
+            const known = distinct.filter(c => st[c] && st[c].streak >= 2).length;
+            chunkSession = null;
+            box.innerHTML = `
+                <div class="conj-card">
+                    <p style="font-size:0.9rem; margin-top:0;">Plutôt qu'un mot isolé, tu apprends le <b>bloc</b> dans lequel il apparaît le plus souvent : <i>op tijd</i>, <i>geen tijd</i>, <i>de laatste tijd</i>… On te donne une phrase en français et la phrase néerlandaise avec un trou : à toi de retrouver le bloc.</p>
+                    <div style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:12px;">${distinct.length} blocs disponibles · ${seen} déjà vus · ${known} acquis${due ? ` · <b style="color:var(--wrong);">${due} à revoir</b>` : ''}</div>
+                    <button class="btn btn-green" onclick="startChunkSession()">▶️ Lancer (${CHUNK_SESSION_SIZE} blocs)</button>
+                </div>
+                <p class="rp-real-hint" style="text-align:center;">Phrases d'exemple : Tatoeba (tatoeba.org), licence CC BY 2.0 FR.</p>`;
+        }
+
+        // Composition : d'abord les blocs ratés la dernière fois, puis un tirage pondéré par la
+        // fréquence du mot (plus un mot est courant, plus ses blocs sortent tôt), en favorisant les
+        // blocs jamais vus. Un seul bloc par mot dans une session.
+        function pickChunkQuestions() {
+            const st = state.chunkStats || {};
+            const cands = [];
+            fullDb.forEach(i => chunksForItem(i).forEach(k => {
+                const blank = chunkBlank(k);
+                if (blank) cands.push({ item: i, k, blank, stat: st[k.c] || null });
+            }));
+            const usedWords = new Set(), usedChunks = new Set(), picked = [];
+            const take = c => {
+                const w = chunkKey(c.item.nl);
+                if (usedWords.has(w) || usedChunks.has(c.k.c)) return;
+                usedWords.add(w); usedChunks.add(c.k.c); picked.push(c);
+            };
+            cands.filter(c => c.stat && c.stat.streak === 0).sort((a, b) => a.stat.last - b.stat.last)
+                .forEach(c => { if (picked.length < CHUNK_SESSION_SIZE / 2) take(c); });
+            const rest = cands.map(c => {
+                const boost = !c.stat ? 1.5 : (c.stat.streak >= 2 ? 0.2 : 1);
+                return { c, key: Math.pow(Math.random(), 1 / (Math.pow(10, (c.item.freq || 3) - 3) * boost)) };
+            }).sort((a, b) => b.key - a.key);
+            for (const r of rest) { if (picked.length >= CHUNK_SESSION_SIZE) break; take(r.c); }
+            for (let i = picked.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [picked[i], picked[j]] = [picked[j], picked[i]]; }
+            return picked;
+        }
+
+        function startChunkSession() {
+            const questions = pickChunkQuestions();
+            if (!questions.length) return;
+            chunkSession = { questions, index: 0, score: 0, missed: [], answered: false };
+            renderChunkQuestion();
+        }
+
+        function renderChunkQuestion() {
+            const s = chunkSession, box = document.getElementById('chunk-content');
+            if (!s || !box) return;
+            if (s.index >= s.questions.length) { renderChunkSummary(); return; }
+            const q = s.questions[s.index];
+            const nWords = q.k.c.split(' ').length;
+            s.answered = false;
+            box.innerHTML = `
+                <div class="conj-card">
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:8px;">Bloc ${s.index + 1}/${s.questions.length} · Score : ${s.score}${q.stat && q.stat.streak === 0 ? ' · <span style="color:var(--wrong);">à revoir</span>' : ''}</div>
+                    <div class="chunk-q-fr">${escHtml(q.k.fr)}</div>
+                    <div class="chunk-q-nl">${escHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(nWords).trim()}</span>${escHtml(q.blank.after)}</div>
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:10px;">${nWords} mots · autour de <b>${escHtml(chunkKey(q.item.nl))}</b> (${escHtml(q.item.fr)})</div>
+                    <input type="text" id="chunk-input" style="width:100%; margin-bottom:8px;" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Le bloc qui manque..." onkeypress="if(event.key==='Enter') chunkEnter()">
+                    <div id="chunk-feedback" style="min-height:1.4em; margin-bottom:8px;"></div>
+                    <div id="chunk-actions">
+                        <button class="btn btn-green" onclick="chunkCheck(false)">Vérifier</button>
+                        <button class="btn btn-gray" style="margin-top:8px;" onclick="chunkCheck(true)">Je ne sais pas</button>
+                    </div>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showChunkTraining()">Arrêter</button>
+                </div>`;
+            const input = document.getElementById('chunk-input');
+            if (input) input.focus();
+        }
+
+        function chunkEnter() {
+            if (!chunkSession) return;
+            if (chunkSession.answered) chunkNext(); else chunkCheck(false);
+        }
+
+        function chunkCheck(giveUp) {
+            const s = chunkSession;
+            if (!s || s.answered) return;
+            const q = s.questions[s.index];
+            const result = giveUp ? { status: 'wrong' } : evaluateAnswer(document.getElementById('chunk-input').value, q.k.c);
+            const ok = result.status !== 'wrong';
+            s.answered = true;
+            if (ok) s.score++; else s.missed.push(q);
+            if (!state.chunkStats) state.chunkStats = {};
+            const stat = state.chunkStats[q.k.c] || { ok: 0, ko: 0, streak: 0, last: 0 };
+            if (ok) { stat.ok++; stat.streak++; } else { stat.ko++; stat.streak = 0; }
+            stat.last = Date.now();
+            state.chunkStats[q.k.c] = stat;
+            save();
+            const fb = document.getElementById('chunk-feedback');
+            fb.innerHTML = `<div style="color:${ok ? 'var(--success)' : 'var(--wrong)'}; font-weight:700;">${ok ? (result.status === 'close' ? '🟡 Presque, on valide !' : '✅ Bravo !') : '❌ Le bloc était :'} ${escHtml(q.k.c)} ${speakBtnHtml(q.k.c)}</div>
+                <div class="chunk-ex">${escHtml(q.blank.before)}<b>${escHtml(q.blank.answer)}</b>${escHtml(q.blank.after)} ${speakBtnHtml(q.k.ex)}</div>`;
+            document.getElementById('chunk-actions').innerHTML = `<button class="btn btn-green" onclick="chunkNext()">${s.index + 1 >= s.questions.length ? 'Voir le résultat' : 'Suivant →'}</button>`;
+        }
+
+        function chunkNext() {
+            if (!chunkSession) return;
+            chunkSession.index++;
+            renderChunkQuestion();
+        }
+
+        function renderChunkSummary() {
+            const s = chunkSession;
+            document.getElementById('chunk-content').innerHTML = `
+                <div class="conj-card">
+                    <div class="conj-verb-title">Résultat : ${s.score}/${s.questions.length}</div>
+                    ${s.missed.length ? `<div class="section-title" style="margin-top:var(--space-4);">📌 À retenir (reviendront en priorité)</div>
+                        ${s.missed.map(q => `<div class="wl-chunk">
+                            <div class="chunk-text">${escHtml(q.k.c)} ${speakBtnHtml(q.k.c)}</div>
+                            <div class="chunk-ex">${escHtml(q.k.ex)}</div>
+                            <div class="chunk-fr">${escHtml(q.k.fr)}</div>
+                        </div>`).join('')}` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`}
+                    <button class="btn btn-green" style="margin-top:14px;" onclick="startChunkSession()">🔁 Nouvelle session</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showApprendre()">Retour</button>
+                </div>`;
+        }
+
         // ===== Vue Conjugaison =====
         let conjugaisonSelectedVerb = null;
         let conjFilterCategory = 'toutes';
@@ -4651,6 +4840,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             filter.innerHTML = '<option value="">Toutes catégories</option>' +
                 categories.map(c => `<option value="${c}">${categoryLabel(c)}</option>`).join('');
             renderWordList();
+            // Les blocs arrivent en différé : on redessine la liste quand ils sont là (bouton 🧩).
+            if (!chunksData) loadChunks().then(() => { if (document.getElementById('wordlist-view').classList.contains('active')) renderWordList(); });
         }
 
         function wordListBack() {
@@ -4714,10 +4905,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <span class="wl-nl">${i.nl}</span>
                     ${speakBtnHtml(i.nl)}
                     ${usefulStarHtml(i.id)}
+                    ${wordChunksButtonHtml(i)}
                     ${niveauCECRBadgeHtml(i.niveauCECR)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
                     <span class="wl-file">${categoryLabel(i.file)}${i.sousCategorie ? ' · ' + i.sousCategorie : ''}${freqTxt ? ' · ' + freqTxt : ''}</span>
-                </div>`;
+                </div>${wordChunksPanelHtml(i)}`;
             }).join('');
             if (items.length > 300) {
                 table.innerHTML += `<p style="color:#afafaf;font-size:0.8rem;">${items.length - 300} résultats supplémentaires non affichés, affine ta recherche.</p>`;

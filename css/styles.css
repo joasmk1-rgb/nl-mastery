@@ -517,3 +517,14 @@
         .star-btn:active { transform: scale(0.9); }
         .star-btn-corner { position: absolute; top: 10px; right: 12px; font-size: 1.5rem; padding: 6px; }
         @media (max-width: 699px) { .wl-row .star-btn { min-width: 32px; min-height: 32px; } }
+
+        /* Blocs de mots (chunks) : panneau sous un mot de la liste, et entraînement à trou */
+        .wl-chunks { background: var(--surface-2); border-radius: 10px; padding: 8px 12px; margin: -2px 0 8px; }
+        .wl-chunk { padding: 6px 0; border-bottom: 1px solid var(--border); text-align: left; }
+        .wl-chunk:last-child { border-bottom: none; }
+        .chunk-text { font-weight: 700; color: var(--primary); }
+        .chunk-ex { font-size: 0.86rem; margin-top: 2px; }
+        .chunk-fr { font-size: 0.8rem; color: var(--text-secondary); }
+        .chunk-q-fr { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+        .chunk-q-nl { font-size: 1.05rem; margin-bottom: 6px; line-height: 1.6; }
+        .chunk-gap { color: var(--primary); font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; }
