@@ -6419,6 +6419,30 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpRecognition.interimResults = true;
             rpRecognition.maxAlternatives = 1;
 
+            // Le navigateur arrête l'écoute de lui-même après un court silence (surtout sur
+            // téléphone, où `continuous` est ignoré) : la réponse partait alors avant la fin de la
+            // phrase, dès qu'on marquait une pause pour réfléchir. On distingue donc un arrêt
+            // DEMANDÉ (clic sur le bouton, changement d'écran : tout appel à stop()) d'un arrêt
+            // spontané : dans le second cas on garde ce qui a déjà été dit et on relance l'écoute.
+            // Rien n'est envoyé tant que l'arrêt n'a pas été demandé.
+            const nativeStart = rpRecognition.start.bind(rpRecognition);
+            const nativeStop = rpRecognition.stop.bind(rpRecognition);
+            let stopRequested = false;
+            let carriedTranscript = '';   // ce qui a été reconnu avant la ou les relances
+            let lastStartAt = 0;
+            let quickEnds = 0;            // arrêts spontanés quasi immédiats à la suite (micro indisponible...)
+            rpRecognition.start = function() {
+                stopRequested = false;
+                carriedTranscript = '';
+                quickEnds = 0;
+                lastStartAt = Date.now();
+                nativeStart();
+            };
+            rpRecognition.stop = function() {
+                stopRequested = true;
+                nativeStop();
+            };
+
             rpRecognition.onresult = function(event) {
                 // On reconstruit le texte à partir de TOUS les résultats à chaque évènement, au lieu
                 // d'ajouter au fur et à mesure. Sur Chrome Android en mode continu, chaque résultat
@@ -6441,18 +6465,33 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 if (interim && finalText.toLowerCase().endsWith(interim.toLowerCase())) interim = '';
                 rpFinalTranscript = finalText + ' ';
                 const statusEl = document.getElementById(activeVoiceStatusId);
-                if (statusEl) statusEl.innerText = "🎤 " + ((rpFinalTranscript + interim).trim() || '...');
+                if (statusEl) statusEl.innerText = "🎤 " + ((carriedTranscript + ' ' + rpFinalTranscript + interim).trim() || '...');
             };
 
             rpRecognition.onerror = function(event) {
+                // "no-speech" = simple silence : pas une vraie erreur, l'écoute sera relancée par onend.
+                if (event.error === 'no-speech') return;
+                stopRequested = true; // micro refusé, réseau... : inutile de relancer en boucle
                 const statusEl = document.getElementById(activeVoiceStatusId);
                 if (statusEl) statusEl.innerText = "Erreur de reconnaissance vocale : " + event.error;
                 rpStopRecordingUI();
             };
 
             rpRecognition.onend = function() {
+                if (!stopRequested) {
+                    // Arrêt spontané du navigateur : on met de côté ce qui a été dit et on relance.
+                    carriedTranscript = (carriedTranscript + ' ' + rpFinalTranscript).trim();
+                    rpFinalTranscript = '';
+                    const now = Date.now();
+                    quickEnds = (now - lastStartAt < 1000) ? quickEnds + 1 : 0;
+                    lastStartAt = now;
+                    if (quickEnds < 4) {
+                        try { nativeStart(); return; } catch (e) { console.warn('Relance de l\'écoute impossible :', e); }
+                    }
+                }
                 rpStopRecordingUI();
-                const text = rpFinalTranscript.trim();
+                const text = (carriedTranscript + ' ' + rpFinalTranscript).trim();
+                carriedTranscript = '';
                 rpFinalTranscript = '';
                 if (voiceTranscriptCallback) {
                     const cb = voiceTranscriptCallback;
@@ -6525,7 +6564,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpStartRecordingUI() {
             rpIsRecording = true;
             const btn = document.getElementById(activeVoiceBtnId);
-            if (btn) { btn.classList.add('recording'); btn.innerText = "🛑 Écoute en cours... Cliquer pour stopper"; }
+            if (btn) { btn.classList.add('recording'); btn.innerText = "🛑 J'ai fini de parler"; }
             const st = document.getElementById(activeVoiceStatusId);
             if (st) st.innerText = "Parle en néerlandais...";
         }
