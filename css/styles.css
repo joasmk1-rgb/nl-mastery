@@ -377,3 +377,48 @@
             }
             .grid, .hub-grid:not(.single) { grid-template-columns: repeat(3, 1fr); }
         }
+
+        /* ===== Téléphone (< 700px) =====
+           Passe dédiée au mobile, sans toucher au desktop (tout est dans cette media query).
+           Trois défauts réels corrigés : (1) les blocs sans largeur explicite posés directement
+           dans une vue (tableau de bord de l'accueil, étape "catégorie" du jeu de rôle) prenaient
+           la largeur de leur contenu et débordaient des deux côtés de l'écran ; (2) dans la liste
+           de mots, le mot et sa traduction étaient écrasés à quelques pixels par les badges ;
+           (3) plusieurs boutons étaient trop petits pour être touchés au doigt (< 40px). */
+        @media (max-width: 699px) {
+            .view { padding: 16px 14px; }
+            .view > * { max-width: 100%; box-sizing: border-box; }
+            header { padding: 10px 14px; }
+
+            /* Cibles tactiles */
+            .back-btn { min-height: 40px; padding: 8px 12px 8px 0; margin-bottom: 12px; }
+            .conj-filter-chip { padding: 9px 13px; font-size: 0.78rem; }
+            .speak-btn { min-width: 36px; min-height: 36px; padding: 6px; font-size: 1.1rem; }
+            .conj-grid-table .speak-btn { min-width: 28px; min-height: 28px; padding: 4px; font-size: 0.85rem; }
+
+            /* Liste de mots : mot + traduction + audio sur une ligne, badges sur la suivante */
+            .wl-row { flex-wrap: wrap; row-gap: 4px; padding: 8px 10px; }
+            .wl-row span.wl-fr, .wl-row span.wl-nl { flex: 1 1 calc(50% - 40px); min-width: 0; overflow-wrap: anywhere; }
+            .wl-row span.wl-file { flex: 1 1 0; min-width: 0; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+            /* Carte de quiz : moins de marge perdue sur un petit écran */
+            .study-box { width: 100%; padding: 22px 16px; box-sizing: border-box; }
+
+            /* Jeu de rôle : deux colonnes fixes plutôt qu'un auto-fit qui passait à trois */
+            .rp-category-grid { grid-template-columns: 1fr 1fr; }
+
+            /* Grilles de cartes : un nom long sans espace (THEME_COMPTABILITE...) élargissait
+               sa colonne et poussait la deuxième hors de l'écran. minmax(0, 1fr) garde deux
+               colonnes égales et le texte passe à la ligne. */
+            .grid, .hub-grid:not(.single) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+            .card-menu { padding: 16px 10px; overflow-wrap: anywhere; }
+
+            /* Liste de mots : les 4 boutons d'action en 2 x 2 au lieu de 4 colonnes écrasées */
+            #wl-actions > button { flex: 1 1 calc(50% - 4px) !important; }
+
+            .translate-btn { min-width: 32px; min-height: 32px; padding: 6px; font-size: 1rem; }
+        }
+
+        /* Filtres de la liste de mots : passent à la ligne au lieu de sortir de l'écran (les 4
+           menus déroulants côte à côte faisaient ~900px de large, à toutes les tailles). */
+        .wl-filters select { flex: 1 1 140px; min-width: 0; max-width: 100%; }
