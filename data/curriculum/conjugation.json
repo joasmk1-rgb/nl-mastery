@@ -6,7 +6,7 @@
       "ik": "bied aan",
       "jij": "biedt aan",
       "hij": "biedt aan",
-      "wij": "aanbieden"
+      "wij": "bieden aan"
     },
     "preteritum": "bood aan",
     "participePasse": "aangeboden",
@@ -24,7 +24,7 @@
       "ik": "houd aan",
       "jij": "houdt aan",
       "hij": "houdt aan",
-      "wij": "aanhouden"
+      "wij": "houden aan"
     },
     "preteritum": "hield aan",
     "participePasse": "aangehouden",
@@ -42,7 +42,7 @@
       "ik": "kom aan",
       "jij": "komt aan",
       "hij": "komt aan",
-      "wij": "aankomen"
+      "wij": "komen aan"
     },
     "preteritum": "kwam aan",
     "participePasse": "aangekomen",
@@ -60,7 +60,7 @@
       "ik": "meld me aan",
       "jij": "meldt zich aan",
       "hij": "meldt zich aan",
-      "wij": "aanmelden"
+      "wij": "melden aan"
     },
     "preteritum": "melde aan",
     "participePasse": "aangemeld",
@@ -78,7 +78,7 @@
       "ik": "neem aan",
       "jij": "neemt aan",
       "hij": "neemt aan",
-      "wij": "aannemen"
+      "wij": "nemen aan"
     },
     "preteritum": "nam aan",
     "participePasse": "aangenomen",
@@ -96,7 +96,7 @@
       "ik": "slui aan",
       "jij": "sluit aan",
       "hij": "sluit aan",
-      "wij": "aansluiten"
+      "wij": "sluiten aan"
     },
     "preteritum": "sloot aan",
     "participePasse": "aangesloten",
@@ -114,7 +114,7 @@
       "ik": "toon aan",
       "jij": "toont aan",
       "hij": "toont aan",
-      "wij": "aantonen"
+      "wij": "tonen aan"
     },
     "preteritum": "toonde aan",
     "participePasse": "aangetoond",
@@ -150,7 +150,7 @@
       "ik": "aanwezig ben",
       "jij": "aanwezig bent",
       "hij": "aanwezig is",
-      "wij": "aanwezig zijn"
+      "wij": " zijn aanwezig"
     },
     "preteritum": "was aanwezig",
     "participePasse": "aanwezig geweest",
@@ -222,7 +222,7 @@
       "ik": "leg af",
       "jij": "legt af",
       "hij": "legt af",
-      "wij": "afleggen"
+      "wij": "leggen af"
     },
     "preteritum": "legde af",
     "participePasse": "afgelegd",
@@ -240,7 +240,7 @@
       "ik": "neem af",
       "jij": "neemt af",
       "hij": "neemt af",
-      "wij": "afnemen"
+      "wij": "nemen af"
     },
     "preteritum": "nam af",
     "participePasse": "afgenomen",
@@ -258,7 +258,7 @@
       "ik": "slui af",
       "jij": "sluit af",
       "hij": "sluit af",
-      "wij": "afsluiten"
+      "wij": "sluiten af"
     },
     "preteritum": "sloot af",
     "participePasse": "afgesloten",
@@ -1356,7 +1356,7 @@
       "ik": "ga door",
       "jij": "gaat door",
       "hij": "gaat door",
-      "wij": "doorgaan"
+      "wij": "gaan door"
     },
     "preteritum": "ging door",
     "participePasse": "doorgegaan",
@@ -1374,7 +1374,7 @@
       "ik": "loop door",
       "jij": "loopt door",
       "hij": "loopt door",
-      "wij": "doorlopen"
+      "wij": "lopen door"
     },
     "preteritum": "liep door",
     "participePasse": "doorgelopen",
@@ -2058,7 +2058,7 @@
       "ik": "dien in",
       "jij": "dient in",
       "hij": "dient in",
-      "wij": "indienen"
+      "wij": "dienen in"
     },
     "preteritum": "diende in",
     "participePasse": "ingediend",
@@ -2094,7 +2094,7 @@
       "ik": "ga in",
       "jij": "gaat in",
       "hij": "gaat in",
-      "wij": "ingaan"
+      "wij": "gaan in"
     },
     "preteritum": "ging in",
     "participePasse": "ingegaan",
@@ -2112,7 +2112,7 @@
       "ik": "houd in",
       "jij": "houdt in",
       "hij": "houdt in",
-      "wij": "inhouden"
+      "wij": "houden in"
     },
     "preteritum": "hield in",
     "participePasse": "ingehouden",
@@ -2130,7 +2130,7 @@
       "ik": "rich in",
       "jij": "richt in",
       "hij": "richt in",
-      "wij": "inrichten"
+      "wij": "richten in"
     },
     "preteritum": "richtte in",
     "participePasse": "ingericht",
@@ -2148,7 +2148,7 @@
       "ik": "stel in",
       "jij": "stelt in",
       "hij": "stelt in",
-      "wij": "instellen"
+      "wij": "stellen in"
     },
     "preteritum": "stelde in",
     "participePasse": "ingesteld",
@@ -2166,7 +2166,7 @@
       "ik": "voer in",
       "jij": "voert in",
       "hij": "voert in",
-      "wij": "invoeren"
+      "wij": "voeren in"
     },
     "preteritum": "voerde in",
     "participePasse": "ingevoerd",
@@ -2184,7 +2184,7 @@
       "ik": "vul in",
       "jij": "vult in",
       "hij": "vult in",
-      "wij": "invullen"
+      "wij": "vullen in"
     },
     "preteritum": "vulde in",
     "participePasse": "ingevuld",
@@ -2202,7 +2202,7 @@
       "ik": "zie in",
       "jij": "ziet in",
       "hij": "ziet in",
-      "wij": "inzien"
+      "wij": "zien in"
     },
     "preteritum": "zag in",
     "participePasse": "ingezien",
@@ -2904,7 +2904,7 @@
       "ik": "ga mee",
       "jij": "gaat mee",
       "hij": "gaat mee",
-      "wij": "meegaan"
+      "wij": "gaan mee"
     },
     "preteritum": "ging mee",
     "participePasse": "meegegaan",
@@ -2922,7 +2922,7 @@
       "ik": "maak mee",
       "jij": "maakt mee",
       "hij": "maakt mee",
-      "wij": "meemaken"
+      "wij": "maken mee"
     },
     "preteritum": "maakte mee",
     "participePasse": "meegemaakt",
@@ -3066,7 +3066,7 @@
       "ik": "ga na",
       "jij": "gaat na",
       "hij": "gaat na",
-      "wij": "nagaan"
+      "wij": "gaan na"
     },
     "preteritum": "ging na",
     "participePasse": "nagegaan",
@@ -3282,7 +3282,7 @@
       "ik": "bel op",
       "jij": "belt op",
       "hij": "belt op",
-      "wij": "opbellen"
+      "wij": "bellen op"
     },
     "preteritum": "belde op",
     "participePasse": "opgebeld",
@@ -3300,7 +3300,7 @@
       "ik": "bouw op",
       "jij": "bouwt op",
       "hij": "bouwt op",
-      "wij": "opbouwen"
+      "wij": "bouwen op"
     },
     "preteritum": "bouwde op",
     "participePasse": "opgebouwd",
@@ -3318,7 +3318,7 @@
       "ik": "los op",
       "jij": "lost op",
       "hij": "lost op",
-      "wij": "oplossen"
+      "wij": "lossen op"
     },
     "preteritum": "loste op",
     "participePasse": "opgelost",
@@ -3336,7 +3336,7 @@
       "ik": "neem op",
       "jij": "neemt op",
       "hij": "neemt op",
-      "wij": "opnemen"
+      "wij": "nemen op"
     },
     "preteritum": "nam op",
     "participePasse": "opgenomen",
@@ -3354,7 +3354,7 @@
       "ik": "pas op",
       "jij": "past op",
       "hij": "past op",
-      "wij": "oppassen"
+      "wij": "passen op"
     },
     "preteritum": "paste op",
     "participePasse": "opgepast",
@@ -3372,7 +3372,7 @@
       "ik": "rich op",
       "jij": "richt op",
       "hij": "richt op",
-      "wij": "oprichten"
+      "wij": "richten op"
     },
     "preteritum": "richtte op",
     "participePasse": "opgericht",
@@ -3390,7 +3390,7 @@
       "ik": "sta op",
       "jij": "staat op",
       "hij": "staat op",
-      "wij": "opstaan"
+      "wij": "staan op"
     },
     "preteritum": "stond op",
     "participePasse": "opgestaan",
@@ -3408,7 +3408,7 @@
       "ik": "stel op",
       "jij": "stelt op",
       "hij": "stelt op",
-      "wij": "opstellen"
+      "wij": "stellen op"
     },
     "preteritum": "stelde op",
     "participePasse": "opgesteld",
@@ -3426,7 +3426,7 @@
       "ik": "val op",
       "jij": "valt op",
       "hij": "valt op",
-      "wij": "opvallen"
+      "wij": "vallen op"
     },
     "preteritum": "viel op",
     "participePasse": "opgevallen",
@@ -3444,7 +3444,7 @@
       "ik": "zoek op",
       "jij": "zoekt op",
       "hij": "zoekt op",
-      "wij": "opzoeken"
+      "wij": "zoeken op"
     },
     "preteritum": "zocht op",
     "participePasse": "opgezocht",
@@ -3480,7 +3480,7 @@
       "ik": "steek over",
       "jij": "steekt over",
       "hij": "steekt over",
-      "wij": "oversteken"
+      "wij": "steken over"
     },
     "preteritum": "stak over",
     "participePasse": "overgestoken",
@@ -3534,7 +3534,7 @@
       "ik": "vind plaats",
       "jij": "vindt plaats",
       "hij": "vindt plaats",
-      "wij": "plaatsvinden"
+      "wij": "vinden plaats"
     },
     "preteritum": "vond plaats",
     "participePasse": "plaatsgevonden",
@@ -5118,7 +5118,7 @@
       "ik": "bereid voor",
       "jij": "bereidt voor",
       "hij": "bereidt voor",
-      "wij": "voorbereiden"
+      "wij": "bereiden voor"
     },
     "preteritum": "bereidde voor",
     "participePasse": "voorbereid",
@@ -5136,7 +5136,7 @@
       "ik": "kom voor",
       "jij": "komt voor",
       "hij": "komt voor",
-      "wij": "voorkomen"
+      "wij": "komen voor"
     },
     "preteritum": "kwam voor",
     "participePasse": "voorgekomen",
@@ -5172,7 +5172,7 @@
       "ik": "stel voor",
       "jij": "stelt voor",
       "hij": "stelt voor",
-      "wij": "voorstellen"
+      "wij": "stellen voor"
     },
     "preteritum": "stelde voor",
     "participePasse": "voorgesteld",
@@ -5792,6 +5792,5622 @@
     "exempleNl": "Bij twijfel zwijgt de medewerker en vraagt hij advies.",
     "exempleFr": "En cas de doute, l'employé se tait et demande conseil.",
     "freq": 4.35,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "hoeven",
+    "fr": "avoir besoin de (niet hoeven = ne pas devoir)",
+    "present": {
+      "ik": "hoef",
+      "jij": "hoeft",
+      "hij": "hoeft",
+      "wij": "hoeven"
+    },
+    "preteritum": "hoefde",
+    "participePasse": "gehoeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij had zelf niet hoeven komen.",
+    "exempleFr": "Il n'avait pas besoin de venir lui-même.",
+    "freq": 4.7,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "betalen",
+    "fr": "payer",
+    "present": {
+      "ik": "betaal",
+      "jij": "betaalt",
+      "hij": "betaalt",
+      "wij": "betalen"
+    },
+    "preteritum": "betaalde",
+    "participePasse": "betaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Kan ik met een creditcard betalen?",
+    "exempleFr": "Est-ce que je peux payer avec une carte de crédit ?",
+    "freq": 5.2,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bellen",
+    "fr": "appeler / téléphoner",
+    "present": {
+      "ik": "bel",
+      "jij": "belt",
+      "hij": "belt",
+      "wij": "bellen"
+    },
+    "preteritum": "belde",
+    "participePasse": "gebeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik bel om 4 uur terug.",
+    "exempleFr": "Je vais rappeler à 4 heures.",
+    "freq": 4.89,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "regenen",
+    "fr": "pleuvoir",
+    "present": {
+      "ik": "regen",
+      "jij": "regent",
+      "hij": "regent",
+      "wij": "regenen"
+    },
+    "preteritum": "regende",
+    "participePasse": "geregend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik ga, zelfs al regent het.",
+    "exempleFr": "J'ai l'intention d'y aller, même s'il pleut.",
+    "freq": 3.89,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "missen",
+    "fr": "manquer / rater",
+    "present": {
+      "ik": "mis",
+      "jij": "mist",
+      "hij": "mist",
+      "wij": "missen"
+    },
+    "preteritum": "miste",
+    "participePasse": "gemist",
+    "auxiliaire": "hebben",
+    "exempleNl": "Vlug of je mist de trein.",
+    "exempleFr": "Sois rapide ou tu manqueras le train.",
+    "freq": 4.71,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "huilen",
+    "fr": "pleurer",
+    "present": {
+      "ik": "huil",
+      "jij": "huilt",
+      "hij": "huilt",
+      "wij": "huilen"
+    },
+    "preteritum": "huilde",
+    "participePasse": "gehuild",
+    "auxiliaire": "hebben",
+    "exempleNl": "De baby is aan het huilen.",
+    "exempleFr": "Le bébé pleure.",
+    "freq": 4.48,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich afvragen",
+    "fr": "se demander",
+    "present": {
+      "ik": "vraag me af",
+      "jij": "vraagt je af",
+      "hij": "vraagt zich af",
+      "wij": "vragen ons af"
+    },
+    "preteritum": "vroeg af",
+    "participePasse": "afgevraagd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Dat vraag ik me ook af.",
+    "exempleFr": "Je me le demande aussi.",
+    "freq": 4.06,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "stelen",
+    "fr": "voler (dérober)",
+    "present": {
+      "ik": "steel",
+      "jij": "steelt",
+      "hij": "steelt",
+      "wij": "stelen"
+    },
+    "preteritum": "stal",
+    "participePasse": "gestolen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Een eerlijk man steelt nooit geld.",
+    "exempleFr": "Un honnête homme ne vole jamais d'argent.",
+    "freq": 4.16,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ophouden",
+    "fr": "arrêter / cesser",
+    "present": {
+      "ik": "houd op",
+      "jij": "houdt op",
+      "hij": "houdt op",
+      "wij": "houden op"
+    },
+    "preteritum": "hield op",
+    "participePasse": "opgehouden",
+    "auxiliaire": "zijn",
+    "exempleNl": "Hij hield op met hen te praten.",
+    "exempleFr": "Il arrêta de leur parler.",
+    "freq": 4.25,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verwachten",
+    "fr": "attendre / s'attendre à",
+    "present": {
+      "ik": "verwacht",
+      "jij": "verwacht",
+      "hij": "verwacht",
+      "wij": "verwachten"
+    },
+    "preteritum": "verwachtte",
+    "participePasse": "verwacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik verwachtte je om 11 uur.",
+    "exempleFr": "Je t'attendais à 11 heures.",
+    "freq": 4.74,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "openen",
+    "fr": "ouvrir",
+    "present": {
+      "ik": "open",
+      "jij": "opent",
+      "hij": "opent",
+      "wij": "openen"
+    },
+    "preteritum": "opende",
+    "participePasse": "geopend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik zou graag een rekening openen.",
+    "exempleFr": "J'aimerais ouvrir un compte.",
+    "freq": 4.6,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vertalen",
+    "fr": "traduire",
+    "present": {
+      "ik": "vertaal",
+      "jij": "vertaalt",
+      "hij": "vertaalt",
+      "wij": "vertalen"
+    },
+    "preteritum": "vertaalde",
+    "participePasse": "vertaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik kan deze zin niet vertalen.",
+    "exempleFr": "Je ne sais pas traduire cette phrase.",
+    "freq": 4.09,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "haten",
+    "fr": "détester",
+    "present": {
+      "ik": "haat",
+      "jij": "haat",
+      "hij": "haat",
+      "wij": "haten"
+    },
+    "preteritum": "haatte",
+    "participePasse": "gehaat",
+    "auxiliaire": "hebben",
+    "exempleNl": "Haat niet wat je niet begrijpt.",
+    "exempleFr": "Ne déteste pas ce que tu ne comprends pas.",
+    "freq": 4.22,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "rennen",
+    "fr": "courir",
+    "present": {
+      "ik": "ren",
+      "jij": "rent",
+      "hij": "rent",
+      "wij": "rennen"
+    },
+    "preteritum": "rende",
+    "participePasse": "gerend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Kumiko rent zo snel als Tom.",
+    "exempleFr": "Kumiko court aussi vite que Tom.",
+    "freq": 4.37,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "eruitzien",
+    "fr": "avoir l'air",
+    "present": {
+      "ik": "zie eruit",
+      "jij": "ziet eruit",
+      "hij": "ziet eruit",
+      "wij": "zien eruit"
+    },
+    "preteritum": "zag eruit",
+    "participePasse": "eruitgezien",
+    "auxiliaire": "hebben",
+    "exempleNl": "Je o's zien eruit als a's.",
+    "exempleFr": "Tes O ressemblent à des A.",
+    "freq": 2.71,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aflopen",
+    "fr": "se terminer",
+    "present": {
+      "ik": "loop af",
+      "jij": "loopt af",
+      "hij": "loopt af",
+      "wij": "lopen af"
+    },
+    "preteritum": "liep af",
+    "participePasse": "afgelopen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Zijn broer is afgelopen maand overleden.",
+    "exempleFr": "Son frère est décédé le mois dernier.",
+    "freq": 3.59,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "redden",
+    "fr": "sauver",
+    "present": {
+      "ik": "red",
+      "jij": "redt",
+      "hij": "redt",
+      "wij": "redden"
+    },
+    "preteritum": "redde",
+    "participePasse": "gered",
+    "auxiliaire": "hebben",
+    "exempleNl": "Red een mens. Eet een kannibaal op.",
+    "exempleFr": "Sauve un être humain. Mange un cannibale.",
+    "freq": 4.8,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "klinken",
+    "fr": "sonner / avoir l'air (son)",
+    "present": {
+      "ik": "klink",
+      "jij": "klinkt",
+      "hij": "klinkt",
+      "wij": "klinken"
+    },
+    "preteritum": "klonk",
+    "participePasse": "geklonken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Je klinkt als je moeder.",
+    "exempleFr": "On croirait entendre ta mère.",
+    "freq": 4.1,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vermoorden",
+    "fr": "assassiner",
+    "present": {
+      "ik": "vermoord",
+      "jij": "vermoordt",
+      "hij": "vermoordt",
+      "wij": "vermoorden"
+    },
+    "preteritum": "vermoordde",
+    "participePasse": "vermoord",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze vermoordde hem met een mes.",
+    "exempleFr": "Elle le tua avec un couteau.",
+    "freq": 4.33,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "lukken",
+    "fr": "réussir (het lukt = ça marche)",
+    "present": {
+      "ik": "luk",
+      "jij": "lukt",
+      "hij": "lukt",
+      "wij": "lukken"
+    },
+    "preteritum": "lukte",
+    "participePasse": "gelukt",
+    "auxiliaire": "zijn",
+    "exempleNl": "Wat als het me niet lukt?",
+    "exempleFr": "Que se passe-t-il si j'échoue ?",
+    "freq": 4.35,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bedanken",
+    "fr": "remercier",
+    "present": {
+      "ik": "bedank",
+      "jij": "bedankt",
+      "hij": "bedankt",
+      "wij": "bedanken"
+    },
+    "preteritum": "bedankte",
+    "participePasse": "bedankt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Je zou tenminste \"bedankt\" kunnen zeggen.",
+    "exempleFr": "Tu devrais au moins dire « merci ».",
+    "freq": 4.36,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overtuigen",
+    "fr": "convaincre",
+    "present": {
+      "ik": "overtuig",
+      "jij": "overtuigt",
+      "hij": "overtuigt",
+      "wij": "overtuigen"
+    },
+    "preteritum": "overtuigde",
+    "participePasse": "overtuigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Zij is overtuigd van haar schoonheid.",
+    "exempleFr": "Elle croit en sa beauté.",
+    "freq": 4.36,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bereiken",
+    "fr": "atteindre",
+    "present": {
+      "ik": "bereik",
+      "jij": "bereikt",
+      "hij": "bereikt",
+      "wij": "bereiken"
+    },
+    "preteritum": "bereikte",
+    "participePasse": "bereikt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Bob bereikte als eerste de eindstreep.",
+    "exempleFr": "Bob franchit le premier la ligne d'arrivée.",
+    "freq": 4.98,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "doorbrengen",
+    "fr": "passer (du temps)",
+    "present": {
+      "ik": "breng door",
+      "jij": "brengt door",
+      "hij": "brengt door",
+      "wij": "brengen door"
+    },
+    "preteritum": "bracht door",
+    "participePasse": "doorgebracht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Brengt u Kerstmis door met Tom?",
+    "exempleFr": "Vous passez Noël avec Tom ?",
+    "freq": 4.07,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "sneeuwen",
+    "fr": "neiger",
+    "present": {
+      "ik": "sneeuw",
+      "jij": "sneeuwt",
+      "hij": "sneeuwt",
+      "wij": "sneeuwen"
+    },
+    "preteritum": "sneeuwde",
+    "participePasse": "gesneeuwd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De regen ging over in sneeuw.",
+    "exempleFr": "La pluie laissa place à la neige.",
+    "freq": 2.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "doden",
+    "fr": "tuer",
+    "present": {
+      "ik": "dood",
+      "jij": "doodt",
+      "hij": "doodt",
+      "wij": "doden"
+    },
+    "preteritum": "doodde",
+    "participePasse": "gedood",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik probeerde de tijd te doden.",
+    "exempleFr": "J'essayais de tuer le temps.",
+    "freq": 5.15,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verdwijnen",
+    "fr": "disparaître",
+    "present": {
+      "ik": "verdwijn",
+      "jij": "verdwijnt",
+      "hij": "verdwijnt",
+      "wij": "verdwijnen"
+    },
+    "preteritum": "verdween",
+    "participePasse": "verdwenen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Haar zoon verdween zeven jaar geleden.",
+    "exempleFr": "Son fils a disparu il y a sept ans.",
+    "freq": 4.61,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beschermen",
+    "fr": "protéger",
+    "present": {
+      "ik": "bescherm",
+      "jij": "beschermt",
+      "hij": "beschermt",
+      "wij": "beschermen"
+    },
+    "preteritum": "beschermde",
+    "participePasse": "beschermd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De krokodil is een beschermde diersoort.",
+    "exempleFr": "Le crocodile est un animal protégé.",
+    "freq": 4.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugkomen",
+    "fr": "revenir",
+    "present": {
+      "ik": "kom terug",
+      "jij": "komt terug",
+      "hij": "komt terug",
+      "wij": "komen terug"
+    },
+    "preteritum": "kwam terug",
+    "participePasse": "teruggekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik kwam juist terug uit Groot-Brittannië.",
+    "exempleFr": "Je viens de rentrer de Grande-Bretagne.",
+    "freq": 4.01,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beantwoorden",
+    "fr": "répondre à",
+    "present": {
+      "ik": "beantwoord",
+      "jij": "beantwoordt",
+      "hij": "beantwoordt",
+      "wij": "beantwoorden"
+    },
+    "preteritum": "beantwoordde",
+    "participePasse": "beantwoord",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik zal uw vraag graag beantwoorden.",
+    "exempleFr": "Je serai heureux de répondre à votre question.",
+    "freq": 4.33,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitnodigen",
+    "fr": "inviter",
+    "present": {
+      "ik": "nodig uit",
+      "jij": "nodigt uit",
+      "hij": "nodigt uit",
+      "wij": "nodigen uit"
+    },
+    "preteritum": "nodigde uit",
+    "participePasse": "uitgenodigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Met uitzondering van mij was iedereen uitgenodigd.",
+    "exempleFr": "Tout le monde a été invité sauf moi.",
+    "freq": 3.86,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontslaan",
+    "fr": "licencier",
+    "present": {
+      "ik": "ontsla",
+      "jij": "ontslaat",
+      "hij": "ontslaat",
+      "wij": "ontslaan"
+    },
+    "preteritum": "ontsloeg",
+    "participePasse": "ontslagen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Wij moesten er vijf ontslaan.",
+    "exempleFr": "Nous avons dû en virer cinq.",
+    "freq": 3.77,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verstaan",
+    "fr": "comprendre (entendre)",
+    "present": {
+      "ik": "versta",
+      "jij": "verstaat",
+      "hij": "verstaat",
+      "wij": "verstaan"
+    },
+    "preteritum": "verstond",
+    "participePasse": "verstaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "Verstaat ge wat ik wil zeggen?",
+    "exempleFr": "Comprenez-vous ce que je veux dire ?",
+    "freq": 4.09,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontsnappen",
+    "fr": "s'échapper",
+    "present": {
+      "ik": "ontsnap",
+      "jij": "ontsnapt",
+      "hij": "ontsnapt",
+      "wij": "ontsnappen"
+    },
+    "preteritum": "ontsnapte",
+    "participePasse": "ontsnapt",
+    "auxiliaire": "zijn",
+    "exempleNl": "Gelukkig ontsnapte hij aan de verwondingen.",
+    "exempleFr": "Il a évité d'être blessé, heureusement.",
+    "freq": 4.43,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "interesseren",
+    "fr": "intéresser",
+    "present": {
+      "ik": "interesseer",
+      "jij": "interesseert",
+      "hij": "interesseert",
+      "wij": "interesseren"
+    },
+    "preteritum": "interesseerde",
+    "participePasse": "geïnteresseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Interesseert u zich voor vreemde talen?",
+    "exempleFr": "Vous intéressez-vous aux langues étrangères ?",
+    "freq": 3.51,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "spijten",
+    "fr": "regretter (het spijt me = je suis désolé)",
+    "present": {
+      "ik": "spijt",
+      "jij": "spijt",
+      "hij": "spijt",
+      "wij": "spijten"
+    },
+    "preteritum": "speet",
+    "participePasse": "gespeten",
+    "auxiliaire": "hebben",
+    "exempleNl": "Het spijt me dat te horen.",
+    "exempleFr": "Je suis désolé d'entendre ça.",
+    "freq": 1.48,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vissen",
+    "fr": "pêcher",
+    "present": {
+      "ik": "vis",
+      "jij": "vist",
+      "hij": "vist",
+      "wij": "vissen"
+    },
+    "preteritum": "viste",
+    "participePasse": "gevist",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb liever vlees dan vis.",
+    "exempleFr": "Je préfère la viande au poisson.",
+    "freq": 4.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "weggaan",
+    "fr": "partir",
+    "present": {
+      "ik": "ga weg",
+      "jij": "gaat weg",
+      "hij": "gaat weg",
+      "wij": "gaan weg"
+    },
+    "preteritum": "ging weg",
+    "participePasse": "weggegaan",
+    "auxiliaire": "zijn",
+    "exempleNl": "Niemand gaat met lege handen weg.",
+    "exempleFr": "Personne ne part les mains vides.",
+    "freq": 3.84,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "repareren",
+    "fr": "réparer",
+    "present": {
+      "ik": "repareer",
+      "jij": "repareert",
+      "hij": "repareert",
+      "wij": "repareren"
+    },
+    "preteritum": "repareerde",
+    "participePasse": "gerepareerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik kan de computer niet repareren.",
+    "exempleFr": "Je ne peux pas réparer l'ordinateur.",
+    "freq": 4.02,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "toevoegen",
+    "fr": "ajouter",
+    "present": {
+      "ik": "voeg toe",
+      "jij": "voegt toe",
+      "hij": "voegt toe",
+      "wij": "voegen toe"
+    },
+    "preteritum": "voegde toe",
+    "participePasse": "toegevoegd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Voeg drie eetlepels witte wijn toe.",
+    "exempleFr": "Ajoutez 3 cuillères à soupe de vin blanc.",
+    "freq": 4.21,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verbergen",
+    "fr": "cacher",
+    "present": {
+      "ik": "verberg",
+      "jij": "verbergt",
+      "hij": "verbergt",
+      "wij": "verbergen"
+    },
+    "preteritum": "verborg",
+    "participePasse": "verborgen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij verborg zich achter de deur.",
+    "exempleFr": "Il se cacha derrière la porte.",
+    "freq": 4.39,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitleggen",
+    "fr": "expliquer",
+    "present": {
+      "ik": "leg uit",
+      "jij": "legt uit",
+      "hij": "legt uit",
+      "wij": "leggen uit"
+    },
+    "preteritum": "legde uit",
+    "participePasse": "uitgelegd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb hem de regels uitgelegd.",
+    "exempleFr": "Je lui ai expliqué les règles.",
+    "freq": 4.42,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verbieden",
+    "fr": "interdire",
+    "present": {
+      "ik": "verbied",
+      "jij": "verbiedt",
+      "hij": "verbiedt",
+      "wij": "verbieden"
+    },
+    "preteritum": "verbood",
+    "participePasse": "verboden",
+    "auxiliaire": "hebben",
+    "exempleNl": "Roken is verboden op deze plaats.",
+    "exempleFr": "Fumer est interdit dans ce lieu.",
+    "freq": 4.1,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "skiën",
+    "fr": "skier",
+    "present": {
+      "ik": "ski",
+      "jij": "skiet",
+      "hij": "skiet",
+      "wij": "skiën"
+    },
+    "preteritum": "skiede",
+    "participePasse": "geskied",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik denk dat ik ga skiën.",
+    "exempleFr": "Je pense que je vais aller skier.",
+    "freq": 3.75,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "nadenken",
+    "fr": "réfléchir",
+    "present": {
+      "ik": "denk na",
+      "jij": "denkt na",
+      "hij": "denkt na",
+      "wij": "denken na"
+    },
+    "preteritum": "dacht na",
+    "participePasse": "nagedacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hebt u nagedacht over uw tandenborstel?",
+    "exempleFr": "Avez-vous pensé à votre brosse à dents ?",
+    "freq": 4.45,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "veroorzaken",
+    "fr": "causer",
+    "present": {
+      "ik": "veroorzaak",
+      "jij": "veroorzaakt",
+      "hij": "veroorzaakt",
+      "wij": "veroorzaken"
+    },
+    "preteritum": "veroorzaakte",
+    "participePasse": "veroorzaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Het ongeval werd door zijn onoplettendheid veroorzaakt.",
+    "exempleFr": "L'accident était dû à son manque d'attention.",
+    "freq": 4.4,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beslissen",
+    "fr": "décider",
+    "present": {
+      "ik": "beslis",
+      "jij": "beslist",
+      "hij": "beslist",
+      "wij": "beslissen"
+    },
+    "preteritum": "besliste",
+    "participePasse": "beslist",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij besliste te stoppen met roken.",
+    "exempleFr": "Il décida d'arrêter de fumer.",
+    "freq": 4.25,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schieten",
+    "fr": "tirer (arme)",
+    "present": {
+      "ik": "schiet",
+      "jij": "schiet",
+      "hij": "schiet",
+      "wij": "schieten"
+    },
+    "preteritum": "schoot",
+    "participePasse": "geschoten",
+    "auxiliaire": "hebben",
+    "exempleNl": "De jager heeft op een hert geschoten.",
+    "exempleFr": "Le chasseur a tiré sur un cerf.",
+    "freq": 4.5,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vieren",
+    "fr": "fêter",
+    "present": {
+      "ik": "vier",
+      "jij": "viert",
+      "hij": "viert",
+      "wij": "vieren"
+    },
+    "preteritum": "vierde",
+    "participePasse": "gevierd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mijn menstruatiecyclus duurt ongeveer vier weken.",
+    "exempleFr": "Mon cycle menstruel est d'environ quatre semaines.",
+    "freq": 4.77,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugkeren",
+    "fr": "retourner",
+    "present": {
+      "ik": "keer terug",
+      "jij": "keert terug",
+      "hij": "keert terug",
+      "wij": "keren terug"
+    },
+    "preteritum": "keerde terug",
+    "participePasse": "teruggekeerd",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik ben gisteren naar Boston teruggekeerd.",
+    "exempleFr": "Je suis revenu à Boston hier.",
+    "freq": 4.24,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bezorgen",
+    "fr": "livrer / procurer",
+    "present": {
+      "ik": "bezorg",
+      "jij": "bezorgt",
+      "hij": "bezorgt",
+      "wij": "bezorgen"
+    },
+    "preteritum": "bezorgde",
+    "participePasse": "bezorgd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Uiterlijk woensdag wordt je pakket bezorgd.",
+    "exempleFr": "Ton colis sera livré au plus tard le mercredi.",
+    "freq": 4.38,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verbazen",
+    "fr": "étonner",
+    "present": {
+      "ik": "verbaas",
+      "jij": "verbaast",
+      "hij": "verbaast",
+      "wij": "verbazen"
+    },
+    "preteritum": "verbaasde",
+    "participePasse": "verbaasd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Tom zag er verbaasd uit.",
+    "exempleFr": "Tom avait l'air perplexe.",
+    "freq": 3.99,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugbellen",
+    "fr": "rappeler (au téléphone)",
+    "present": {
+      "ik": "bel terug",
+      "jij": "belt terug",
+      "hij": "belt terug",
+      "wij": "bellen terug"
+    },
+    "preteritum": "belde terug",
+    "participePasse": "teruggebeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik bel om 4 uur terug.",
+    "exempleFr": "Je vais rappeler à 4 heures.",
+    "freq": 2.93,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "teleurstellen",
+    "fr": "décevoir",
+    "present": {
+      "ik": "stel teleur",
+      "jij": "stelt teleur",
+      "hij": "stelt teleur",
+      "wij": "stellen teleur"
+    },
+    "preteritum": "stelde teleur",
+    "participePasse": "teleurgesteld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Tom is niet teleurgesteld geweest.",
+    "exempleFr": "Tom n'a pas été déçu.",
+    "freq": 3.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "draaien",
+    "fr": "tourner",
+    "present": {
+      "ik": "draai",
+      "jij": "draait",
+      "hij": "draait",
+      "wij": "draaien"
+    },
+    "preteritum": "draaide",
+    "participePasse": "gedraaid",
+    "auxiliaire": "hebben",
+    "exempleNl": "De maan draait rond de aarde.",
+    "exempleFr": "La Lune tourne autour de la Terre.",
+    "freq": 4.69,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schreeuwen",
+    "fr": "crier",
+    "present": {
+      "ik": "schreeuw",
+      "jij": "schreeuwt",
+      "hij": "schreeuwt",
+      "wij": "schreeuwen"
+    },
+    "preteritum": "schreeuwde",
+    "participePasse": "geschreeuwd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Een schreeuw doorbrak de stilte.",
+    "exempleFr": "Un cri brisa le silence.",
+    "freq": 4.34,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verstoppen",
+    "fr": "cacher",
+    "present": {
+      "ik": "verstop",
+      "jij": "verstopt",
+      "hij": "verstopt",
+      "wij": "verstoppen"
+    },
+    "preteritum": "verstopte",
+    "participePasse": "verstopt",
+    "auxiliaire": "hebben",
+    "exempleNl": "U kunt zich beter ergens verstoppen.",
+    "exempleFr": "Vous feriez mieux de vous dissimuler quelque part.",
+    "freq": 3.7,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aandoen",
+    "fr": "allumer / mettre (vêtement) / faire subir",
+    "present": {
+      "ik": "doe aan",
+      "jij": "doet aan",
+      "hij": "doet aan",
+      "wij": "doen aan"
+    },
+    "preteritum": "deed aan",
+    "participePasse": "aangedaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "Wat ben je aan het doen?",
+    "exempleFr": "Qu'est-ce que tu fais ?",
+    "freq": 4.02,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontdekken",
+    "fr": "découvrir",
+    "present": {
+      "ik": "ontdek",
+      "jij": "ontdekt",
+      "hij": "ontdekt",
+      "wij": "ontdekken"
+    },
+    "preteritum": "ontdekte",
+    "participePasse": "ontdekt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij ontdekt graag ondeugden bij anderen.",
+    "exempleFr": "Il aime trouver des défauts chez les autres.",
+    "freq": 4.5,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schilderen",
+    "fr": "peindre",
+    "present": {
+      "ik": "schilder",
+      "jij": "schildert",
+      "hij": "schildert",
+      "wij": "schilderen"
+    },
+    "preteritum": "schilderde",
+    "participePasse": "geschilderd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij heeft zijn fiets rood geschilderd.",
+    "exempleFr": "Il peignit son vélo en rouge.",
+    "freq": 4.15,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "storen",
+    "fr": "déranger",
+    "present": {
+      "ik": "stoor",
+      "jij": "stoort",
+      "hij": "stoort",
+      "wij": "storen"
+    },
+    "preteritum": "stoorde",
+    "participePasse": "gestoord",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mag ik je een moment storen?",
+    "exempleFr": "Puis-je te déranger un moment ?",
+    "freq": 3.63,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beweren",
+    "fr": "prétendre / affirmer",
+    "present": {
+      "ik": "beweer",
+      "jij": "beweert",
+      "hij": "beweert",
+      "wij": "beweren"
+    },
+    "preteritum": "beweerde",
+    "participePasse": "beweerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij beweerde het ongeval gezien te hebben.",
+    "exempleFr": "Il affirma avoir vu l'accident.",
+    "freq": 4.04,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "parkeren",
+    "fr": "se garer",
+    "present": {
+      "ik": "parkeer",
+      "jij": "parkeert",
+      "hij": "parkeert",
+      "wij": "parkeren"
+    },
+    "preteritum": "parkeerde",
+    "participePasse": "geparkeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Waar heb je de auto geparkeerd?",
+    "exempleFr": "Où as-tu garé la voiture ?",
+    "freq": 4.06,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bespreken",
+    "fr": "discuter de",
+    "present": {
+      "ik": "bespreek",
+      "jij": "bespreekt",
+      "hij": "bespreekt",
+      "wij": "bespreken"
+    },
+    "preteritum": "besprak",
+    "participePasse": "besproken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Laten we dat probleem later bespreken.",
+    "exempleFr": "Discutons de ce problème plus tard.",
+    "freq": 4.61,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitmaken",
+    "fr": "rompre / avoir de l'importance",
+    "present": {
+      "ik": "maak uit",
+      "jij": "maakt uit",
+      "hij": "maakt uit",
+      "wij": "maken uit"
+    },
+    "preteritum": "maakte uit",
+    "participePasse": "uitgemaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik maakte het uit met Tom.",
+    "exempleFr": "J'ai rompu avec Tom.",
+    "freq": 4.26,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overleven",
+    "fr": "survivre",
+    "present": {
+      "ik": "overleef",
+      "jij": "overleeft",
+      "hij": "overleeft",
+      "wij": "overleven"
+    },
+    "preteritum": "overleefde",
+    "participePasse": "overleefd",
+    "auxiliaire": "hebben",
+    "exempleNl": "We eten om te overleven.",
+    "exempleFr": "On mange pour survivre.",
+    "freq": 4.51,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "stemmen",
+    "fr": "voter",
+    "present": {
+      "ik": "stem",
+      "jij": "stemt",
+      "hij": "stemt",
+      "wij": "stemmen"
+    },
+    "preteritum": "stemde",
+    "participePasse": "gestemd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Met luide stem riep hij \"Help!\"",
+    "exempleFr": "À voix haute, il cria : \"A l'aide !\"",
+    "freq": 5.06,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opmerken",
+    "fr": "remarquer",
+    "present": {
+      "ik": "merk op",
+      "jij": "merkt op",
+      "hij": "merkt op",
+      "wij": "merken op"
+    },
+    "preteritum": "merkte op",
+    "participePasse": "opgemerkt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik merkte op dat ik geobserveerd werd.",
+    "exempleFr": "Je me suis rendu compte qu'on m'observait.",
+    "freq": 3.46,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opgeven",
+    "fr": "abandonner",
+    "present": {
+      "ik": "geef op",
+      "jij": "geeft op",
+      "hij": "geeft op",
+      "wij": "geven op"
+    },
+    "preteritum": "gaf op",
+    "participePasse": "opgegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Kom op, geef het maar toe.",
+    "exempleFr": "Allez, admets-le.",
+    "freq": 4.29,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verschijnen",
+    "fr": "apparaître",
+    "present": {
+      "ik": "verschijn",
+      "jij": "verschijnt",
+      "hij": "verschijnt",
+      "wij": "verschijnen"
+    },
+    "preteritum": "verscheen",
+    "participePasse": "verschenen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Hij verscheen dertig minuten te laat.",
+    "exempleFr": "Il arriva avec 30 minutes de retard.",
+    "freq": 4.41,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitgeven",
+    "fr": "dépenser / publier",
+    "present": {
+      "ik": "geef uit",
+      "jij": "geeft uit",
+      "hij": "geeft uit",
+      "wij": "geven uit"
+    },
+    "preteritum": "gaf uit",
+    "participePasse": "uitgegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb maar drie dollar uitgegeven.",
+    "exempleFr": "Je n'ai dépensé que trois dollars.",
+    "freq": 4.08,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bedekken",
+    "fr": "couvrir",
+    "present": {
+      "ik": "bedek",
+      "jij": "bedekt",
+      "hij": "bedekt",
+      "wij": "bedekken"
+    },
+    "preteritum": "bedekte",
+    "participePasse": "bedekt",
+    "auxiliaire": "hebben",
+    "exempleNl": "De berg is bedekt met sneeuw.",
+    "exempleFr": "Cette montagne est recouverte de neige.",
+    "freq": 3.69,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overnemen",
+    "fr": "reprendre (une tâche, une entreprise)",
+    "present": {
+      "ik": "neem over",
+      "jij": "neemt over",
+      "hij": "neemt over",
+      "wij": "nemen over"
+    },
+    "preteritum": "nam over",
+    "participePasse": "overgenomen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Het Engels heeft veel woorden uit het Frans overgenomen.",
+    "exempleFr": "L'anglais a adopté de nombreux mots venant du français.",
+    "freq": 4.19,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bevallen",
+    "fr": "plaire / accoucher",
+    "present": {
+      "ik": "beval",
+      "jij": "bevalt",
+      "hij": "bevalt",
+      "wij": "bevallen"
+    },
+    "preteritum": "beviel",
+    "participePasse": "bevallen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Kies een jurk die je bevalt.",
+    "exempleFr": "Choisissez une robe qui vous plaît.",
+    "freq": 4.1,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "onderzoeken",
+    "fr": "examiner / enquêter",
+    "present": {
+      "ik": "onderzoek",
+      "jij": "onderzoekt",
+      "hij": "onderzoekt",
+      "wij": "onderzoeken"
+    },
+    "preteritum": "onderzocht",
+    "participePasse": "onderzocht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Onderzoekt u regelmatig uw borsten zelf?",
+    "exempleFr": "Pratiquez-vous régulièrement l'auto-examen des seins ?",
+    "freq": 4.77,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vergeven",
+    "fr": "pardonner",
+    "present": {
+      "ik": "vergeef",
+      "jij": "vergeeft",
+      "hij": "vergeeft",
+      "wij": "vergeven"
+    },
+    "preteritum": "vergaf",
+    "participePasse": "vergeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij zal me nooit vergeven.",
+    "exempleFr": "Jamais il ne me pardonnera.",
+    "freq": 4.12,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aanvallen",
+    "fr": "attaquer",
+    "present": {
+      "ik": "val aan",
+      "jij": "valt aan",
+      "hij": "valt aan",
+      "wij": "vallen aan"
+    },
+    "preteritum": "viel aan",
+    "participePasse": "aangevallen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Normaal gesproken vallen wolven geen mensen aan.",
+    "exempleFr": "Normalement, les loups n'attaquent pas les gens.",
+    "freq": 4.57,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "stinken",
+    "fr": "puer",
+    "present": {
+      "ik": "stink",
+      "jij": "stinkt",
+      "hij": "stinkt",
+      "wij": "stinken"
+    },
+    "preteritum": "stonk",
+    "participePasse": "gestonken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Zeg je nou dat ik stink?",
+    "exempleFr": "Tu veux dire que je sens mauvais?",
+    "freq": 3.37,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "meenemen",
+    "fr": "emporter / emmener",
+    "present": {
+      "ik": "neem mee",
+      "jij": "neemt mee",
+      "hij": "neemt mee",
+      "wij": "nemen mee"
+    },
+    "preteritum": "nam mee",
+    "participePasse": "meegenomen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij nam geen paraplu mee.",
+    "exempleFr": "Il n'emporta pas de parapluie.",
+    "freq": 4.37,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "thuiskomen",
+    "fr": "rentrer à la maison",
+    "present": {
+      "ik": "kom thuis",
+      "jij": "komt thuis",
+      "hij": "komt thuis",
+      "wij": "komen thuis"
+    },
+    "preteritum": "kwam thuis",
+    "participePasse": "thuisgekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ze kwam om zeven uur thuis.",
+    "exempleFr": "Elle est arrivée chez elle à sept heures.",
+    "freq": 3.76,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "negeren",
+    "fr": "ignorer",
+    "present": {
+      "ik": "negeer",
+      "jij": "negeert",
+      "hij": "negeert",
+      "wij": "negeren"
+    },
+    "preteritum": "negeerde",
+    "participePasse": "genegeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Had ik dit gewoon moeten negeren?",
+    "exempleFr": "Étais-je supposé simplement l'ignorer ?",
+    "freq": 4.4,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verwijderen",
+    "fr": "supprimer / enlever",
+    "present": {
+      "ik": "verwijder",
+      "jij": "verwijdert",
+      "hij": "verwijdert",
+      "wij": "verwijderen"
+    },
+    "preteritum": "verwijderde",
+    "participePasse": "verwijderd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Verwijder zijn naam van de lijst met kandidaten.",
+    "exempleFr": "Enlevez son nom de la liste des candidats.",
+    "freq": 4.68,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "arresteren",
+    "fr": "arrêter (police)",
+    "present": {
+      "ik": "arresteer",
+      "jij": "arresteert",
+      "hij": "arresteert",
+      "wij": "arresteren"
+    },
+    "preteritum": "arresteerde",
+    "participePasse": "gearresteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De politie arresteerde de zakkenroller op heterdaad.",
+    "exempleFr": "La police arrêta le pickpocket en flagrant délit.",
+    "freq": 4.2,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afmaken",
+    "fr": "terminer",
+    "present": {
+      "ik": "maak af",
+      "jij": "maakt af",
+      "hij": "maakt af",
+      "wij": "maken af"
+    },
+    "preteritum": "maakte af",
+    "participePasse": "afgemaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik maak het in een uurtje af.",
+    "exempleFr": "Je le finirai dans une heure.",
+    "freq": 3.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "herhalen",
+    "fr": "répéter",
+    "present": {
+      "ik": "herhaal",
+      "jij": "herhaalt",
+      "hij": "herhaalt",
+      "wij": "herhalen"
+    },
+    "preteritum": "herhaalde",
+    "participePasse": "herhaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Kunt u dat herhalen, alstublieft?",
+    "exempleFr": "Pourriez-vous répéter ça s’il vous plaît ?",
+    "freq": 4.1,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "glimlachen",
+    "fr": "sourire",
+    "present": {
+      "ik": "glimlach",
+      "jij": "glimlacht",
+      "hij": "glimlacht",
+      "wij": "glimlachen"
+    },
+    "preteritum": "glimlachte",
+    "participePasse": "geglimlacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Bekijk het leven met een glimlach!",
+    "exempleFr": "Affronte la vie en souriant !",
+    "freq": 3.44,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bedenken",
+    "fr": "imaginer / concevoir",
+    "present": {
+      "ik": "bedenk",
+      "jij": "bedenkt",
+      "hij": "bedenkt",
+      "wij": "bedenken"
+    },
+    "preteritum": "bedacht",
+    "participePasse": "bedacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik kan geen andere oplossing bedenken.",
+    "exempleFr": "Je ne peux pas imaginer une autre solution.",
+    "freq": 4.45,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aantrekken",
+    "fr": "mettre (vêtement) / attirer",
+    "present": {
+      "ik": "trek aan",
+      "jij": "trekt aan",
+      "hij": "trekt aan",
+      "wij": "trekken aan"
+    },
+    "preteritum": "trok aan",
+    "participePasse": "aangetrokken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Trek aan de koord, alstublieft.",
+    "exempleFr": "Veuillez tirer sur la corde.",
+    "freq": 4.01,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verslaan",
+    "fr": "battre (vaincre)",
+    "present": {
+      "ik": "versla",
+      "jij": "verslaat",
+      "hij": "verslaat",
+      "wij": "verslaan"
+    },
+    "preteritum": "versloeg",
+    "participePasse": "verslagen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik versloeg hem in het schaken.",
+    "exempleFr": "Je l'ai battu aux échecs.",
+    "freq": 4.42,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitgaan",
+    "fr": "sortir",
+    "present": {
+      "ik": "ga uit",
+      "jij": "gaat uit",
+      "hij": "gaat uit",
+      "wij": "gaan uit"
+    },
+    "preteritum": "ging uit",
+    "participePasse": "uitgegaan",
+    "auxiliaire": "zijn",
+    "exempleNl": "We gaan uit eten op vrijdag.",
+    "exempleFr": "Nous sortons manger vendredi.",
+    "freq": 4.2,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "liegen",
+    "fr": "mentir",
+    "present": {
+      "ik": "lieg",
+      "jij": "liegt",
+      "hij": "liegt",
+      "wij": "liegen"
+    },
+    "preteritum": "loog",
+    "participePasse": "gelogen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze is handig in het liegen.",
+    "exempleFr": "C'est une menteuse très habile.",
+    "freq": 4.4,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "binnenkomen",
+    "fr": "entrer",
+    "present": {
+      "ik": "kom binnen",
+      "jij": "komt binnen",
+      "hij": "komt binnen",
+      "wij": "komen binnen"
+    },
+    "preteritum": "kwam binnen",
+    "participePasse": "binnengekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Kom binnen, de deur is open.",
+    "exempleFr": "Entre, la porte est ouverte.",
+    "freq": 3.91,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beschuldigen",
+    "fr": "accuser",
+    "present": {
+      "ik": "beschuldig",
+      "jij": "beschuldigt",
+      "hij": "beschuldigt",
+      "wij": "beschuldigen"
+    },
+    "preteritum": "beschuldigde",
+    "participePasse": "beschuldigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij beschuldigde mij van onachtzaamheid.",
+    "exempleFr": "Il me reprocha mon inattention.",
+    "freq": 3.84,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "accepteren",
+    "fr": "accepter",
+    "present": {
+      "ik": "accepteer",
+      "jij": "accepteert",
+      "hij": "accepteert",
+      "wij": "accepteren"
+    },
+    "preteritum": "accepteerde",
+    "participePasse": "geaccepteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik accepteer, maar op één voorwaarde.",
+    "exempleFr": "J'accepte, mais à une condition.",
+    "freq": 4.48,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beleven",
+    "fr": "vivre (une expérience)",
+    "present": {
+      "ik": "beleef",
+      "jij": "beleeft",
+      "hij": "beleeft",
+      "wij": "beleven"
+    },
+    "preteritum": "beleefde",
+    "participePasse": "beleefd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Die verpleegster is heel vriendelijk en beleefd.",
+    "exempleFr": "Cette infirmière est très gentille et polie.",
+    "freq": 4.18,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verdwalen",
+    "fr": "se perdre",
+    "present": {
+      "ik": "verdwaal",
+      "jij": "verdwaalt",
+      "hij": "verdwaalt",
+      "wij": "verdwalen"
+    },
+    "preteritum": "verdwaalde",
+    "participePasse": "verdwaald",
+    "auxiliaire": "zijn",
+    "exempleNl": "Hij is verdwaald in het bos.",
+    "exempleFr": "Il a perdu son chemin dans les bois.",
+    "freq": 3.32,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitspreken",
+    "fr": "prononcer",
+    "present": {
+      "ik": "spreek uit",
+      "jij": "spreekt uit",
+      "hij": "spreekt uit",
+      "wij": "spreken uit"
+    },
+    "preteritum": "sprak uit",
+    "participePasse": "uitgesproken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hoe spreek je dit woord uit?",
+    "exempleFr": "Comment se prononce le mot ?",
+    "freq": 3.93,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "winkelen",
+    "fr": "faire du shopping",
+    "present": {
+      "ik": "winkel",
+      "jij": "winkelt",
+      "hij": "winkelt",
+      "wij": "winkelen"
+    },
+    "preteritum": "winkelde",
+    "participePasse": "gewinkeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "De winkel verkoopt kranten en tijdschriften.",
+    "exempleFr": "Le magasin vend des journaux et des magazines.",
+    "freq": 4.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beledigen",
+    "fr": "insulter",
+    "present": {
+      "ik": "beledig",
+      "jij": "beledigt",
+      "hij": "beledigt",
+      "wij": "beledigen"
+    },
+    "preteritum": "beledigde",
+    "participePasse": "beledigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik wilde niemand beledigen.",
+    "exempleFr": "Je ne voulais vexer personne.",
+    "freq": 3.9,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "regelen",
+    "fr": "régler / arranger",
+    "present": {
+      "ik": "regel",
+      "jij": "regelt",
+      "hij": "regelt",
+      "wij": "regelen"
+    },
+    "preteritum": "regelde",
+    "participePasse": "geregeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "De regel zou herzien moeten worden.",
+    "exempleFr": "La règle devrait être revue.",
+    "freq": 4.55,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ophalen",
+    "fr": "aller chercher",
+    "present": {
+      "ik": "haal op",
+      "jij": "haalt op",
+      "hij": "haalt op",
+      "wij": "halen op"
+    },
+    "preteritum": "haalde op",
+    "participePasse": "opgehaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik haal fondsen op.",
+    "exempleFr": "Je collecte des fonds.",
+    "freq": 4.47,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich veroorloven",
+    "fr": "se permettre",
+    "present": {
+      "ik": "veroorloof me",
+      "jij": "veroorlooft je",
+      "hij": "veroorlooft zich",
+      "wij": "veroorloven ons"
+    },
+    "preteritum": "veroorloofde",
+    "participePasse": "veroorloofd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.74,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opruimen",
+    "fr": "ranger",
+    "present": {
+      "ik": "ruim op",
+      "jij": "ruimt op",
+      "hij": "ruimt op",
+      "wij": "ruimen op"
+    },
+    "preteritum": "ruimde op",
+    "participePasse": "opgeruimd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Als je er een boeltje van maakt, ruim het op.",
+    "exempleFr": "Si tu fais du désordre, tu le nettoies.",
+    "freq": 4.16,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verbranden",
+    "fr": "brûler",
+    "present": {
+      "ik": "verbrand",
+      "jij": "verbrandt",
+      "hij": "verbrandt",
+      "wij": "verbranden"
+    },
+    "preteritum": "verbrandde",
+    "participePasse": "verbrand",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze verbrandde zich aan het strijkijzer.",
+    "exempleFr": "Elle se brûla avec le fer à repasser.",
+    "freq": 4.1,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verblijven",
+    "fr": "séjourner",
+    "present": {
+      "ik": "verblijf",
+      "jij": "verblijft",
+      "hij": "verblijft",
+      "wij": "verblijven"
+    },
+    "preteritum": "verbleef",
+    "participePasse": "verbleven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hoe was jouw verblijf in Australië?",
+    "exempleFr": "Comment était votre séjour en Australie ?",
+    "freq": 4.24,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "toestaan",
+    "fr": "autoriser",
+    "present": {
+      "ik": "sta toe",
+      "jij": "staat toe",
+      "hij": "staat toe",
+      "wij": "staan toe"
+    },
+    "preteritum": "stond toe",
+    "participePasse": "toegestaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "Sta me toe je te helpen.",
+    "exempleFr": "Laisse-moi t'aider !",
+    "freq": 4.03,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bloeden",
+    "fr": "saigner",
+    "present": {
+      "ik": "bloed",
+      "jij": "bloedt",
+      "hij": "bloedt",
+      "wij": "bloeden"
+    },
+    "preteritum": "bloedde",
+    "participePasse": "gebloed",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik had bloed in mijn urine.",
+    "exempleFr": "J'avais du sang dans mes urines.",
+    "freq": 3.52,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "starten",
+    "fr": "démarrer",
+    "present": {
+      "ik": "start",
+      "jij": "start",
+      "hij": "start",
+      "wij": "starten"
+    },
+    "preteritum": "startte",
+    "participePasse": "gestart",
+    "auxiliaire": "zijn",
+    "exempleNl": "De school start de volgende maandag.",
+    "exempleFr": "L'école commence lundi prochain.",
+    "freq": 4.6,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitvinden",
+    "fr": "inventer",
+    "present": {
+      "ik": "vind uit",
+      "jij": "vindt uit",
+      "hij": "vindt uit",
+      "wij": "vinden uit"
+    },
+    "preteritum": "vond uit",
+    "participePasse": "uitgevonden",
+    "auxiliaire": "hebben",
+    "exempleNl": "Alles wat is uitgevonden, is waar.",
+    "exempleFr": "Tout ce qui est inventé est vrai.",
+    "freq": 3.35,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontkennen",
+    "fr": "nier",
+    "present": {
+      "ik": "ontken",
+      "jij": "ontkent",
+      "hij": "ontkent",
+      "wij": "ontkennen"
+    },
+    "preteritum": "ontkende",
+    "participePasse": "ontkend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij ontkende haar ontmoet te hebben.",
+    "exempleFr": "Il nia l'avoir rencontrée.",
+    "freq": 4.17,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schoonmaken",
+    "fr": "nettoyer",
+    "present": {
+      "ik": "maak schoon",
+      "jij": "maakt schoon",
+      "hij": "maakt schoon",
+      "wij": "maken schoon"
+    },
+    "preteritum": "maakte schoon",
+    "participePasse": "schoongemaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "De kamer wordt door Tom schoongemaakt.",
+    "exempleFr": "La chambre est nettoyée par Tom.",
+    "freq": 4.16,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "landen",
+    "fr": "atterrir",
+    "present": {
+      "ik": "land",
+      "jij": "landt",
+      "hij": "landt",
+      "wij": "landen"
+    },
+    "preteritum": "landde",
+    "participePasse": "geland",
+    "auxiliaire": "zijn",
+    "exempleNl": "Morgen landt hij op de maan.",
+    "exempleFr": "Demain, il va alunir.",
+    "freq": 5.26,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "toegeven",
+    "fr": "admettre",
+    "present": {
+      "ik": "geef toe",
+      "jij": "geeft toe",
+      "hij": "geeft toe",
+      "wij": "geven toe"
+    },
+    "preteritum": "gaf toe",
+    "participePasse": "toegegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Weinig politici geven hun fouten toe.",
+    "exempleFr": "Peu de politiciens admettent leurs erreurs.",
+    "freq": 4.25,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "tegenhouden",
+    "fr": "retenir / empêcher",
+    "present": {
+      "ik": "houd tegen",
+      "jij": "houdt tegen",
+      "hij": "houdt tegen",
+      "wij": "houden tegen"
+    },
+    "preteritum": "hield tegen",
+    "participePasse": "tegengehouden",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.99,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schaken",
+    "fr": "jouer aux échecs",
+    "present": {
+      "ik": "schaak",
+      "jij": "schaakt",
+      "hij": "schaakt",
+      "wij": "schaken"
+    },
+    "preteritum": "schaakte",
+    "participePasse": "geschaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik versloeg hem in het schaken.",
+    "exempleFr": "Je l'ai battu aux échecs.",
+    "freq": 3.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitvoeren",
+    "fr": "exécuter / exporter",
+    "present": {
+      "ik": "voer uit",
+      "jij": "voert uit",
+      "hij": "voert uit",
+      "wij": "voeren uit"
+    },
+    "preteritum": "voerde uit",
+    "participePasse": "uitgevoerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Wij voeren koffie in uit Brazilië.",
+    "exempleFr": "Nous importons du café du Brésil.",
+    "freq": 4.41,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "smelten",
+    "fr": "fondre",
+    "present": {
+      "ik": "smelt",
+      "jij": "smelt",
+      "hij": "smelt",
+      "wij": "smelten"
+    },
+    "preteritum": "smolt",
+    "participePasse": "gesmolten",
+    "auxiliaire": "zijn",
+    "exempleNl": "Door te smelten wordt ijs water.",
+    "exempleFr": "Quand la glace fond, elle se transforme en eau.",
+    "freq": 3.67,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "lunchen",
+    "fr": "déjeuner (midi)",
+    "present": {
+      "ik": "lunch",
+      "jij": "luncht",
+      "hij": "luncht",
+      "wij": "lunchen"
+    },
+    "preteritum": "lunchte",
+    "participePasse": "geluncht",
+    "auxiliaire": "hebben",
+    "exempleNl": "De mannen zijn aan het lunchen.",
+    "exempleFr": "Les hommes sont en train de déjeuner.",
+    "freq": 3.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "herkennen",
+    "fr": "reconnaître",
+    "present": {
+      "ik": "herken",
+      "jij": "herkent",
+      "hij": "herkent",
+      "wij": "herkennen"
+    },
+    "preteritum": "herkende",
+    "participePasse": "herkend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb geen van hen herkend.",
+    "exempleFr": "Je n'ai reconnu aucun d'entre eux.",
+    "freq": 4.29,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "falen",
+    "fr": "échouer",
+    "present": {
+      "ik": "faal",
+      "jij": "faalt",
+      "hij": "faalt",
+      "wij": "falen"
+    },
+    "preteritum": "faalde",
+    "participePasse": "gefaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Soms moet je falen voordat je kunt slagen.",
+    "exempleFr": "On doit parfois échouer avant de réussir.",
+    "freq": 4.02,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verdenken",
+    "fr": "soupçonner",
+    "present": {
+      "ik": "verdenk",
+      "jij": "verdenkt",
+      "hij": "verdenkt",
+      "wij": "verdenken"
+    },
+    "preteritum": "verdacht",
+    "participePasse": "verdacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Waarom verdenk je Tom ervan het gedaan te hebben?",
+    "exempleFr": "Pourquoi soupçonnes-tu Tom de l'avoir fait ?",
+    "freq": 2.74,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "respecteren",
+    "fr": "respecter",
+    "present": {
+      "ik": "respecteer",
+      "jij": "respecteert",
+      "hij": "respecteert",
+      "wij": "respecteren"
+    },
+    "preteritum": "respecteerde",
+    "participePasse": "gerespecteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij is een door iedereen gerespecteerd geleerde.",
+    "exempleFr": "C'est un scientifique qui est respecté par tous.",
+    "freq": 4.03,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "duwen",
+    "fr": "pousser",
+    "present": {
+      "ik": "duw",
+      "jij": "duwt",
+      "hij": "duwt",
+      "wij": "duwen"
+    },
+    "preteritum": "duwde",
+    "participePasse": "geduwd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij duwde op de knop en wachtte.",
+    "exempleFr": "Il appuya sur le bouton et attendit.",
+    "freq": 4.08,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "twijfelen",
+    "fr": "douter / hésiter",
+    "present": {
+      "ik": "twijfel",
+      "jij": "twijfelt",
+      "hij": "twijfelt",
+      "wij": "twijfelen"
+    },
+    "preteritum": "twijfelde",
+    "participePasse": "getwijfeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb niet de minste twijfel.",
+    "exempleFr": "Je n'ai pas le moindre doute.",
+    "freq": 4.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "begraven",
+    "fr": "enterrer",
+    "present": {
+      "ik": "begraaf",
+      "jij": "begraaft",
+      "hij": "begraaft",
+      "wij": "begraven"
+    },
+    "preteritum": "begroef",
+    "participePasse": "begraven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij werd begraven in dit kerkhof.",
+    "exempleFr": "Il fut enterré dans ce cimetière.",
+    "freq": 4.65,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opeten",
+    "fr": "manger (entièrement)",
+    "present": {
+      "ik": "eet op",
+      "jij": "eet op",
+      "hij": "eet op",
+      "wij": "eten op"
+    },
+    "preteritum": "at op",
+    "participePasse": "opgegeten",
+    "auxiliaire": "hebben",
+    "exempleNl": "De hond heeft mijn schoen opgegeten.",
+    "exempleFr": "Le chien a mangé ma chaussure.",
+    "freq": 3.69,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ondertekenen",
+    "fr": "signer",
+    "present": {
+      "ik": "onderteken",
+      "jij": "ondertekent",
+      "hij": "ondertekent",
+      "wij": "ondertekenen"
+    },
+    "preteritum": "ondertekende",
+    "participePasse": "ondertekend",
+    "auxiliaire": "hebben",
+    "exempleNl": "U moet alleen hier even ondertekenen.",
+    "exempleFr": "Vous avez juste à signer ici.",
+    "freq": 3.84,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich verontschuldigen",
+    "fr": "s'excuser",
+    "present": {
+      "ik": "verontschuldig me",
+      "jij": "verontschuldigt je",
+      "hij": "verontschuldigt zich",
+      "wij": "verontschuldigen ons"
+    },
+    "preteritum": "verontschuldigde",
+    "participePasse": "verontschuldigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "U hoeft zich niet te verontschuldigen.",
+    "exempleFr": "Vous n'êtes pas obligée de présenter des excuses.",
+    "freq": 3.06,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich scheren",
+    "fr": "se raser",
+    "present": {
+      "ik": "scheer me",
+      "jij": "scheert je",
+      "hij": "scheert zich",
+      "wij": "scheren ons"
+    },
+    "preteritum": "schoor",
+    "participePasse": "geschoren",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik scheer me elke morgen.",
+    "exempleFr": "Je me rase tous les matins.",
+    "freq": 3.87,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vernietigen",
+    "fr": "détruire",
+    "present": {
+      "ik": "vernietig",
+      "jij": "vernietigt",
+      "hij": "vernietigt",
+      "wij": "vernietigen"
+    },
+    "preteritum": "vernietigde",
+    "participePasse": "vernietigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hernán Cortés vernietigde de Azteekse cultuur.",
+    "exempleFr": "Hernan Cortés a détruit la culture aztèque.",
+    "freq": 4.32,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich gedragen",
+    "fr": "se comporter",
+    "present": {
+      "ik": "gedraag me",
+      "jij": "gedraagt je",
+      "hij": "gedraagt zich",
+      "wij": "gedragen ons"
+    },
+    "preteritum": "gedroeg",
+    "participePasse": "gedragen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Heb je je vandaag goed gedragen?",
+    "exempleFr": "Tu t'es bien tenu aujourd'hui ?",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aanraken",
+    "fr": "toucher",
+    "present": {
+      "ik": "raak aan",
+      "jij": "raakt aan",
+      "hij": "raakt aan",
+      "wij": "raken aan"
+    },
+    "preteritum": "raakte aan",
+    "participePasse": "aangeraakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Stop met me aan te raken.",
+    "exempleFr": "Arrête de me toucher.",
+    "freq": 3.7,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overkomen",
+    "fr": "arriver (à quelqu'un)",
+    "present": {
+      "ik": "overkom",
+      "jij": "overkomt",
+      "hij": "overkomt",
+      "wij": "overkomen"
+    },
+    "preteritum": "overkwam",
+    "participePasse": "overkomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik begrijp niet wat me overkomt.",
+    "exempleFr": "Je ne comprends pas ce qu'il m'arrive.",
+    "freq": 4.19,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "waarderen",
+    "fr": "apprécier",
+    "present": {
+      "ik": "waardeer",
+      "jij": "waardeert",
+      "hij": "waardeert",
+      "wij": "waarderen"
+    },
+    "preteritum": "waardeerde",
+    "participePasse": "gewaardeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "We hebben het erg gewaardeerd.",
+    "exempleFr": "Nous l'avons beaucoup apprécié.",
+    "freq": 4.21,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afspreken",
+    "fr": "convenir / se donner rendez-vous",
+    "present": {
+      "ik": "spreek af",
+      "jij": "spreekt af",
+      "hij": "spreekt af",
+      "wij": "spreken af"
+    },
+    "preteritum": "sprak af",
+    "participePasse": "afgesproken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Spreken we morgen af?",
+    "exempleFr": "On se voit demain ?",
+    "freq": 3.98,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "tennissen",
+    "fr": "jouer au tennis",
+    "present": {
+      "ik": "tennis",
+      "jij": "tennist",
+      "hij": "tennist",
+      "wij": "tennissen"
+    },
+    "preteritum": "tenniste",
+    "participePasse": "getennist",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik speel niet zo goed tennis.",
+    "exempleFr": "Je ne suis pas très bon au tennis.",
+    "freq": 3.19,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aangeven",
+    "fr": "indiquer / déclarer",
+    "present": {
+      "ik": "geef aan",
+      "jij": "geeft aan",
+      "hij": "geeft aan",
+      "wij": "geven aan"
+    },
+    "preteritum": "gaf aan",
+    "participePasse": "aangegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Geef het aan wie je wilt.",
+    "exempleFr": "Donne-le à qui tu veux.",
+    "freq": 4.26,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "omgaan",
+    "fr": "fréquenter / gérer (omgaan met)",
+    "present": {
+      "ik": "ga om",
+      "jij": "gaat om",
+      "hij": "gaat om",
+      "wij": "gaan om"
+    },
+    "preteritum": "ging om",
+    "participePasse": "omgegaan",
+    "auxiliaire": "zijn",
+    "exempleNl": "Het gaat om een type sedimentgesteente.",
+    "exempleFr": "Il s'agit d'un type de roche sédimentaire.",
+    "freq": 4.53,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vrezen",
+    "fr": "craindre",
+    "present": {
+      "ik": "vrees",
+      "jij": "vreest",
+      "hij": "vreest",
+      "wij": "vrezen"
+    },
+    "preteritum": "vreesde",
+    "participePasse": "gevreesd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik vrees dat ze ziek is.",
+    "exempleFr": "Je crains qu'elle ne soit malade.",
+    "freq": 4.09,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitstellen",
+    "fr": "reporter",
+    "present": {
+      "ik": "stel uit",
+      "jij": "stelt uit",
+      "hij": "stelt uit",
+      "wij": "stellen uit"
+    },
+    "preteritum": "stelde uit",
+    "participePasse": "uitgesteld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Stel deze dingen niet tot later uit!",
+    "exempleFr": "Ne remets pas ces affaires à plus tard !",
+    "freq": 3.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zinken",
+    "fr": "couler (sombrer)",
+    "present": {
+      "ik": "zink",
+      "jij": "zinkt",
+      "hij": "zinkt",
+      "wij": "zinken"
+    },
+    "preteritum": "zonk",
+    "participePasse": "gezonken",
+    "auxiliaire": "zijn",
+    "exempleNl": "Het schip zonk tijdens de storm.",
+    "exempleFr": "Le bateau a coulé durant la tempête.",
+    "freq": 3.89,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "realiseren",
+    "fr": "réaliser",
+    "present": {
+      "ik": "realiseer",
+      "jij": "realiseert",
+      "hij": "realiseert",
+      "wij": "realiseren"
+    },
+    "preteritum": "realiseerde",
+    "participePasse": "gerealiseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb net iets gerealiseerd.",
+    "exempleFr": "Je viens de prendre conscience de quelque chose.",
+    "freq": 4.44,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verplichten",
+    "fr": "obliger",
+    "present": {
+      "ik": "verplicht",
+      "jij": "verplicht",
+      "hij": "verplicht",
+      "wij": "verplichten"
+    },
+    "preteritum": "verplichtte",
+    "participePasse": "verplicht",
+    "auxiliaire": "hebben",
+    "exempleNl": "De aanwezigheid van alle leden is verplicht.",
+    "exempleFr": "La présence de tous les membres est requise.",
+    "freq": 3.6,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "naaien",
+    "fr": "coudre",
+    "present": {
+      "ik": "naai",
+      "jij": "naait",
+      "hij": "naait",
+      "wij": "naaien"
+    },
+    "preteritum": "naaide",
+    "participePasse": "genaaid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Je was aan het naaien.",
+    "exempleFr": "Tu cousais.",
+    "freq": 3.76,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afwijzen",
+    "fr": "refuser / rejeter",
+    "present": {
+      "ik": "wijs af",
+      "jij": "wijst af",
+      "hij": "wijst af",
+      "wij": "wijzen af"
+    },
+    "preteritum": "wees af",
+    "participePasse": "afgewezen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb het aanbod afgewezen.",
+    "exempleFr": "J'ai rejeté l'offre.",
+    "freq": 3.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontspannen",
+    "fr": "se détendre",
+    "present": {
+      "ik": "ontspan",
+      "jij": "ontspant",
+      "hij": "ontspant",
+      "wij": "ontspannen"
+    },
+    "preteritum": "ontspande",
+    "participePasse": "ontspannen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.24,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ruiken",
+    "fr": "sentir (odeur)",
+    "present": {
+      "ik": "ruik",
+      "jij": "ruikt",
+      "hij": "ruikt",
+      "wij": "ruiken"
+    },
+    "preteritum": "rook",
+    "participePasse": "geroken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Er is geen rook zonder vuur.",
+    "exempleFr": "Il n'y a pas de fumée sans feu.",
+    "freq": 4.04,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "blaffen",
+    "fr": "aboyer",
+    "present": {
+      "ik": "blaf",
+      "jij": "blaft",
+      "hij": "blaft",
+      "wij": "blaffen"
+    },
+    "preteritum": "blafte",
+    "participePasse": "geblaft",
+    "auxiliaire": "hebben",
+    "exempleNl": "We kunnen de hond horen blaffen.",
+    "exempleFr": "Nous pouvons entendre le chien aboyer.",
+    "freq": 3.26,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "handelen",
+    "fr": "agir / faire du commerce",
+    "present": {
+      "ik": "handel",
+      "jij": "handelt",
+      "hij": "handelt",
+      "wij": "handelen"
+    },
+    "preteritum": "handelde",
+    "participePasse": "gehandeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Handel niet tegen uw mening in!",
+    "exempleFr": "N'agis pas contre ton opinion !",
+    "freq": 4.32,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "arriveren",
+    "fr": "arriver",
+    "present": {
+      "ik": "arriveer",
+      "jij": "arriveert",
+      "hij": "arriveert",
+      "wij": "arriveren"
+    },
+    "preteritum": "arriveerde",
+    "participePasse": "gearriveerd",
+    "auxiliaire": "zijn",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.64,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "wegen",
+    "fr": "peser",
+    "present": {
+      "ik": "weeg",
+      "jij": "weegt",
+      "hij": "weegt",
+      "wij": "wegen"
+    },
+    "preteritum": "woog",
+    "participePasse": "gewogen",
+    "auxiliaire": "hebben",
+    "exempleNl": "De wegen staan vol met auto's.",
+    "exempleFr": "Les routes sont pleines de voitures.",
+    "freq": 4.65,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verlopen",
+    "fr": "se dérouler / expirer",
+    "present": {
+      "ik": "verloop",
+      "jij": "verloopt",
+      "hij": "verloopt",
+      "wij": "verlopen"
+    },
+    "preteritum": "verliep",
+    "participePasse": "verlopen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Hoe is je examen verlopen?",
+    "exempleFr": "Comment s'est déroulé ton examen ?",
+    "freq": 4.33,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beseffen",
+    "fr": "se rendre compte",
+    "present": {
+      "ik": "besef",
+      "jij": "beseft",
+      "hij": "beseft",
+      "wij": "beseffen"
+    },
+    "preteritum": "besefte",
+    "participePasse": "beseft",
+    "auxiliaire": "hebben",
+    "exempleNl": "Je beseft niet hoeveel geluk je hebt.",
+    "exempleFr": "Tu ne te rends pas compte de la chance que tu as.",
+    "freq": 4.18,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "waaien",
+    "fr": "souffler (vent)",
+    "present": {
+      "ik": "waai",
+      "jij": "waait",
+      "hij": "waait",
+      "wij": "waaien"
+    },
+    "preteritum": "waaide",
+    "participePasse": "gewaaid",
+    "auxiliaire": "hebben",
+    "exempleNl": "De wind waait uit het oosten.",
+    "exempleFr": "Le vent souffle de l'est.",
+    "freq": 3.34,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "plaatsen",
+    "fr": "placer",
+    "present": {
+      "ik": "plaats",
+      "jij": "plaatst",
+      "hij": "plaatst",
+      "wij": "plaatsen"
+    },
+    "preteritum": "plaatste",
+    "participePasse": "geplaatst",
+    "auxiliaire": "hebben",
+    "exempleNl": "Die plaats heeft een mysterieuse sfeer.",
+    "exempleFr": "L'atmosphère de cet endroit est mystérieuse.",
+    "freq": 5.28,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "genezen",
+    "fr": "guérir",
+    "present": {
+      "ik": "genees",
+      "jij": "geneest",
+      "hij": "geneest",
+      "wij": "genezen"
+    },
+    "preteritum": "genas",
+    "participePasse": "genezen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Het litteken is aan het genezen.",
+    "exempleFr": "La cicatrice est en train de guérir.",
+    "freq": 4.09,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aanbevelen",
+    "fr": "recommander",
+    "present": {
+      "ik": "beveel aan",
+      "jij": "beveelt aan",
+      "hij": "beveelt aan",
+      "wij": "bevelen aan"
+    },
+    "preteritum": "beval aan",
+    "participePasse": "aanbevolen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Wie heeft u deze dokter aanbevolen?",
+    "exempleFr": "Qui vous a recommandé ce médecin ?",
+    "freq": 3.38,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bestuderen",
+    "fr": "étudier (en détail)",
+    "present": {
+      "ik": "bestudeer",
+      "jij": "bestudeert",
+      "hij": "bestudeert",
+      "wij": "bestuderen"
+    },
+    "preteritum": "bestudeerde",
+    "participePasse": "bestudeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verspillen",
+    "fr": "gaspiller",
+    "present": {
+      "ik": "verspil",
+      "jij": "verspilt",
+      "hij": "verspilt",
+      "wij": "verspillen"
+    },
+    "preteritum": "verspilde",
+    "participePasse": "verspild",
+    "auxiliaire": "hebben",
+    "exempleNl": "Op deze manier verspillen we veel tijd.",
+    "exempleFr": "De cette manière, nous gâchons beaucoup de temps.",
+    "freq": 3.85,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitkomen",
+    "fr": "sortir / se réaliser / convenir",
+    "present": {
+      "ik": "kom uit",
+      "jij": "komt uit",
+      "hij": "komt uit",
+      "wij": "komen uit"
+    },
+    "preteritum": "kwam uit",
+    "participePasse": "uitgekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik kwam juist terug uit Groot-Brittannië.",
+    "exempleFr": "Je viens de rentrer de Grande-Bretagne.",
+    "freq": 4.24,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "wisselen",
+    "fr": "changer / échanger",
+    "present": {
+      "ik": "wissel",
+      "jij": "wisselt",
+      "hij": "wisselt",
+      "wij": "wisselen"
+    },
+    "preteritum": "wisselde",
+    "participePasse": "gewisseld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik zou graag tien dollar in munten wisselen.",
+    "exempleFr": "J'aimerais de la monnaie pour $10.",
+    "freq": 4.26,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verdrinken",
+    "fr": "se noyer",
+    "present": {
+      "ik": "verdrink",
+      "jij": "verdrinkt",
+      "hij": "verdrinkt",
+      "wij": "verdrinken"
+    },
+    "preteritum": "verdronk",
+    "participePasse": "verdronken",
+    "auxiliaire": "zijn",
+    "exempleNl": "Hij viel overboord en verdronk.",
+    "exempleFr": "Il tomba par-dessus bord et se noya.",
+    "freq": 3.62,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bedreigen",
+    "fr": "menacer",
+    "present": {
+      "ik": "bedreig",
+      "jij": "bedreigt",
+      "hij": "bedreigt",
+      "wij": "bedreigen"
+    },
+    "preteritum": "bedreigde",
+    "participePasse": "bedreigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De vulkaanuitbarsting bedreigde het dorp.",
+    "exempleFr": "L'éruption volcanique menaça le village.",
+    "freq": 3.87,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "voorzien",
+    "fr": "prévoir / fournir",
+    "present": {
+      "ik": "voorzie",
+      "jij": "voorziet",
+      "hij": "voorziet",
+      "wij": "voorzien"
+    },
+    "preteritum": "voorzag",
+    "participePasse": "voorzien",
+    "auxiliaire": "hebben",
+    "exempleNl": "Niemand kan voorzien wat er gaat gebeuren.",
+    "exempleFr": "Nul ne peut prévoir ce qui va arriver.",
+    "freq": 4.83,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verspreiden",
+    "fr": "répandre",
+    "present": {
+      "ik": "verspreid",
+      "jij": "verspreidt",
+      "hij": "verspreidt",
+      "wij": "verspreiden"
+    },
+    "preteritum": "verspreidde",
+    "participePasse": "verspreid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hoe kunnen we het Esperanto verspreiden?",
+    "exempleFr": "De quelle manière pouvons-nous propager l'espéranto ?",
+    "freq": 4.29,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "richten",
+    "fr": "diriger / orienter",
+    "present": {
+      "ik": "richt",
+      "jij": "richt",
+      "hij": "richt",
+      "wij": "richten"
+    },
+    "preteritum": "richtte",
+    "participePasse": "gericht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Richt u alstublieft tot de voorzitter!",
+    "exempleFr": "Veuillez vous adresser au président !",
+    "freq": 4.63,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "meedoen",
+    "fr": "participer",
+    "present": {
+      "ik": "doe mee",
+      "jij": "doet mee",
+      "hij": "doet mee",
+      "wij": "doen mee"
+    },
+    "preteritum": "deed mee",
+    "participePasse": "meegedaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "kwetsen",
+    "fr": "blesser (moralement)",
+    "present": {
+      "ik": "kwets",
+      "jij": "kwetst",
+      "hij": "kwetst",
+      "wij": "kwetsen"
+    },
+    "preteritum": "kwetste",
+    "participePasse": "gekwetst",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik wil haar niet kwetsen.",
+    "exempleFr": "Je ne veux pas le blesser dans ses sentiments.",
+    "freq": 3.83,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich schamen",
+    "fr": "avoir honte",
+    "present": {
+      "ik": "schaam me",
+      "jij": "schaamt je",
+      "hij": "schaamt zich",
+      "wij": "schamen ons"
+    },
+    "preteritum": "schaamde",
+    "participePasse": "geschaamd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Je hoeft je niet te schamen.",
+    "exempleFr": "Tu ne dois pas avoir honte.",
+    "freq": 4.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "onderscheiden",
+    "fr": "distinguer",
+    "present": {
+      "ik": "onderscheid",
+      "jij": "onderscheidt",
+      "hij": "onderscheidt",
+      "wij": "onderscheiden"
+    },
+    "preteritum": "onderscheidde",
+    "participePasse": "onderscheiden",
+    "auxiliaire": "hebben",
+    "exempleNl": "Realiteit en fantasie zijn moeilijk te onderscheiden.",
+    "exempleFr": "La réalité et le rêve sont difficiles à distinguer.",
+    "freq": 4.28,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "veroordelen",
+    "fr": "condamner",
+    "present": {
+      "ik": "veroordeel",
+      "jij": "veroordeelt",
+      "hij": "veroordeelt",
+      "wij": "veroordelen"
+    },
+    "preteritum": "veroordeelde",
+    "participePasse": "veroordeeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij werd ter dood veroordeeld.",
+    "exempleFr": "Il fut condamné à mort.",
+    "freq": 3.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verkiezen",
+    "fr": "préférer / élire",
+    "present": {
+      "ik": "verkies",
+      "jij": "verkiest",
+      "hij": "verkiest",
+      "wij": "verkiezen"
+    },
+    "preteritum": "verkoos",
+    "participePasse": "verkozen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik zou eer boven geld verkiezen.",
+    "exempleFr": "Je choisirais l'honneur plutôt que l'argent.",
+    "freq": 3.42,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beheersen",
+    "fr": "maîtriser",
+    "present": {
+      "ik": "beheers",
+      "jij": "beheerst",
+      "hij": "beheerst",
+      "wij": "beheersen"
+    },
+    "preteritum": "beheerste",
+    "participePasse": "beheerst",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik wil graag Zweeds beheersen.",
+    "exempleFr": "Je veux maîtriser le suédois.",
+    "freq": 4.06,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "voetballen",
+    "fr": "jouer au football",
+    "present": {
+      "ik": "voetbal",
+      "jij": "voetbalt",
+      "hij": "voetbalt",
+      "wij": "voetballen"
+    },
+    "preteritum": "voetbalde",
+    "participePasse": "gevoetbald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik heb altijd van voetbal gehouden.",
+    "exempleFr": "J'ai toujours aimé le football.",
+    "freq": 3.98,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "sparen",
+    "fr": "économiser",
+    "present": {
+      "ik": "spaar",
+      "jij": "spaart",
+      "hij": "spaart",
+      "wij": "sparen"
+    },
+    "preteritum": "spaarde",
+    "participePasse": "gespaard",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij spaart tien dollar per week.",
+    "exempleFr": "Il met dix dollars de côté chaque semaine.",
+    "freq": 4.19,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich concentreren",
+    "fr": "se concentrer",
+    "present": {
+      "ik": "concentreer me",
+      "jij": "concentreert je",
+      "hij": "concentreert zich",
+      "wij": "concentreren ons"
+    },
+    "preteritum": "concentreerde",
+    "participePasse": "geconcentreerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij concentreerde zich op het leren van voorzetsels.",
+    "exempleFr": "Il se concentra sur l'apprentissage des prépositions.",
+    "freq": 3.96,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "boeien",
+    "fr": "captiver",
+    "present": {
+      "ik": "boei",
+      "jij": "boeit",
+      "hij": "boeit",
+      "wij": "boeien"
+    },
+    "preteritum": "boeide",
+    "participePasse": "geboeid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Sla ze in de boeien!",
+    "exempleFr": "Coffrez-les !",
+    "freq": 3.82,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "discussiëren",
+    "fr": "discuter / débattre",
+    "present": {
+      "ik": "discussieer",
+      "jij": "discussieert",
+      "hij": "discussieert",
+      "wij": "discussiëren"
+    },
+    "preteritum": "discussieerde",
+    "participePasse": "gediscussieerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.74,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "onderbreken",
+    "fr": "interrompre",
+    "present": {
+      "ik": "onderbreek",
+      "jij": "onderbreekt",
+      "hij": "onderbreekt",
+      "wij": "onderbreken"
+    },
+    "preteritum": "onderbrak",
+    "participePasse": "onderbroken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik hoop dat ik u niet onderbreek.",
+    "exempleFr": "J'espère que je ne vous interromps pas.",
+    "freq": 3.58,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "adviseren",
+    "fr": "conseiller",
+    "present": {
+      "ik": "adviseer",
+      "jij": "adviseert",
+      "hij": "adviseert",
+      "wij": "adviseren"
+    },
+    "preteritum": "adviseerde",
+    "participePasse": "geadviseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze adviseerde hem om het geld te nemen.",
+    "exempleFr": "Elle lui conseilla de prendre l'argent.",
+    "freq": 3.87,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "tegenkomen",
+    "fr": "rencontrer (par hasard)",
+    "present": {
+      "ik": "kom tegen",
+      "jij": "komt tegen",
+      "hij": "komt tegen",
+      "wij": "komen tegen"
+    },
+    "preteritum": "kwam tegen",
+    "participePasse": "tegengekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik kwam dat restaurant toevallig tegen.",
+    "exempleFr": "J'ai trouvé ce restaurant par hasard.",
+    "freq": 3.95,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bijwonen",
+    "fr": "assister à",
+    "present": {
+      "ik": "woon bij",
+      "jij": "woont bij",
+      "hij": "woont bij",
+      "wij": "wonen bij"
+    },
+    "preteritum": "woonde bij",
+    "participePasse": "bijgewoond",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik woon dicht bij de dijk.",
+    "exempleFr": "Je réside près de la digue.",
+    "freq": 3.73,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "voortzetten",
+    "fr": "poursuivre",
+    "present": {
+      "ik": "zet voort",
+      "jij": "zet voort",
+      "hij": "zet voort",
+      "wij": "zetten voort"
+    },
+    "preteritum": "zette voort",
+    "participePasse": "voortgezet",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij zette de opsomming voort.",
+    "exempleFr": "Il continua l'énumération.",
+    "freq": 3.74,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich vergissen",
+    "fr": "se tromper",
+    "present": {
+      "ik": "vergis me",
+      "jij": "vergist je",
+      "hij": "vergist zich",
+      "wij": "vergissen ons"
+    },
+    "preteritum": "vergiste",
+    "participePasse": "vergist",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij vergiste zich en dronk vergif.",
+    "exempleFr": "Il s'est trompé et a bu du poison.",
+    "freq": 3.2,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schaatsen",
+    "fr": "patiner",
+    "present": {
+      "ik": "schaats",
+      "jij": "schaatst",
+      "hij": "schaatst",
+      "wij": "schaatsen"
+    },
+    "preteritum": "schaatste",
+    "participePasse": "geschaatst",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.95,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verraden",
+    "fr": "trahir",
+    "present": {
+      "ik": "verraad",
+      "jij": "verraadt",
+      "hij": "verraadt",
+      "wij": "verraden"
+    },
+    "preteritum": "verried",
+    "participePasse": "verraden",
+    "auxiliaire": "hebben",
+    "exempleNl": "In andere woorden, hij heeft ons verraden.",
+    "exempleFr": "En d'autres mots, il nous a trahis.",
+    "freq": 3.93,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "heersen",
+    "fr": "régner",
+    "present": {
+      "ik": "heers",
+      "jij": "heerst",
+      "hij": "heerst",
+      "wij": "heersen"
+    },
+    "preteritum": "heerste",
+    "participePasse": "geheerst",
+    "auxiliaire": "hebben",
+    "exempleNl": "Er heerste doodse stilte.",
+    "exempleFr": "Un silence de mort régnait.",
+    "freq": 3.64,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "knippen",
+    "fr": "couper (aux ciseaux)",
+    "present": {
+      "ik": "knip",
+      "jij": "knipt",
+      "hij": "knipt",
+      "wij": "knippen"
+    },
+    "preteritum": "knipte",
+    "participePasse": "geknipt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik moet mijn haar laten knippen.",
+    "exempleFr": "Je dois me faire couper les cheveux.",
+    "freq": 3.93,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "samenwerken",
+    "fr": "collaborer",
+    "present": {
+      "ik": "werk samen",
+      "jij": "werkt samen",
+      "hij": "werkt samen",
+      "wij": "werken samen"
+    },
+    "preteritum": "werkte samen",
+    "participePasse": "samengewerkt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Nu is de tijd om samen te werken.",
+    "exempleFr": "Le moment est venu de travailler ensemble.",
+    "freq": 4.49,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aanraden",
+    "fr": "conseiller",
+    "present": {
+      "ik": "raad aan",
+      "jij": "raadt aan",
+      "hij": "raadt aan",
+      "wij": "raden aan"
+    },
+    "preteritum": "raadde aan",
+    "participePasse": "aangeraden",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik raad je dit gerecht aan.",
+    "exempleFr": "Je te recommande ce plat.",
+    "freq": 3.69,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "dineren",
+    "fr": "dîner",
+    "present": {
+      "ik": "dineer",
+      "jij": "dineert",
+      "hij": "dineert",
+      "wij": "dineren"
+    },
+    "preteritum": "dineerde",
+    "participePasse": "gedineerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Heeft u nog niet gedineerd?",
+    "exempleFr": "Vous n'avez pas dîné ?",
+    "freq": 3.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vaststellen",
+    "fr": "constater / fixer",
+    "present": {
+      "ik": "stel vast",
+      "jij": "stelt vast",
+      "hij": "stelt vast",
+      "wij": "stellen vast"
+    },
+    "preteritum": "stelde vast",
+    "participePasse": "vastgesteld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Is er ooit hoge bloeddruk bij u vastgesteld?",
+    "exempleFr": "Vous a-t-on déjà diagnostiqué une hypertension artérielle ?",
+    "freq": 3.81,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "snurken",
+    "fr": "ronfler",
+    "present": {
+      "ik": "snurk",
+      "jij": "snurkt",
+      "hij": "snurkt",
+      "wij": "snurken"
+    },
+    "preteritum": "snurkte",
+    "participePasse": "gesnurkt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik moet aanvaarden dat ik snurk.",
+    "exempleFr": "Je dois admettre que je ronfle.",
+    "freq": 3.1,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "trainen",
+    "fr": "s'entraîner",
+    "present": {
+      "ik": "train",
+      "jij": "traint",
+      "hij": "traint",
+      "wij": "trainen"
+    },
+    "preteritum": "trainde",
+    "participePasse": "getraind",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.39,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "steunen",
+    "fr": "soutenir",
+    "present": {
+      "ik": "steun",
+      "jij": "steunt",
+      "hij": "steunt",
+      "wij": "steunen"
+    },
+    "preteritum": "steunde",
+    "participePasse": "gesteund",
+    "auxiliaire": "hebben",
+    "exempleNl": "Steun niet op mijn bureau.",
+    "exempleFr": "Ne vous adossez pas à mon bureau.",
+    "freq": 4.49,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "kwijtraken",
+    "fr": "perdre (égarer)",
+    "present": {
+      "ik": "raak kwijt",
+      "jij": "raakt kwijt",
+      "hij": "raakt kwijt",
+      "wij": "raken kwijt"
+    },
+    "preteritum": "raakte kwijt",
+    "participePasse": "kwijtgeraakt",
+    "auxiliaire": "zijn",
+    "exempleNl": "Zorg dat je hen kwijt raakt.",
+    "exempleFr": "Débarrassez-vous d'elles !",
+    "freq": 3.65,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "organiseren",
+    "fr": "organiser",
+    "present": {
+      "ik": "organiseer",
+      "jij": "organiseert",
+      "hij": "organiseert",
+      "wij": "organiseren"
+    },
+    "preteritum": "organiseerde",
+    "participePasse": "georganiseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De Olympische Spelen worden om de vier jaar georganiseerd.",
+    "exempleFr": "Les jeux olympiques sont organisés tous les quatre ans.",
+    "freq": 4.7,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vluchten",
+    "fr": "fuir",
+    "present": {
+      "ik": "vlucht",
+      "jij": "vlucht",
+      "hij": "vlucht",
+      "wij": "vluchten"
+    },
+    "preteritum": "vluchtte",
+    "participePasse": "gevlucht",
+    "auxiliaire": "zijn",
+    "exempleNl": "Tom wil zijn vlucht niet missen.",
+    "exempleFr": "Tom ne veut pas rater son vol.",
+    "freq": 4.55,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "reserveren",
+    "fr": "réserver",
+    "present": {
+      "ik": "reserveer",
+      "jij": "reserveert",
+      "hij": "reserveert",
+      "wij": "reserveren"
+    },
+    "preteritum": "reserveerde",
+    "participePasse": "gereserveerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik zou een zitplaats willen reserveren.",
+    "exempleFr": "Je voudrais bien réserver un siège.",
+    "freq": 3.76,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "teruggaan",
+    "fr": "retourner",
+    "present": {
+      "ik": "ga terug",
+      "jij": "gaat terug",
+      "hij": "gaat terug",
+      "wij": "gaan terug"
+    },
+    "preteritum": "ging terug",
+    "participePasse": "teruggegaan",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik ben teruggegaan naar Japan.",
+    "exempleFr": "Je suis revenu au Japon.",
+    "freq": 3.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "autorijden",
+    "fr": "conduire (une voiture)",
+    "present": {
+      "ik": "rijd auto",
+      "jij": "rijdt auto",
+      "hij": "rijdt auto",
+      "wij": "rijden auto"
+    },
+    "preteritum": "reed auto",
+    "participePasse": "autogereden",
+    "auxiliaire": "hebben",
+    "exempleNl": "De auto reed tegen de muur.",
+    "exempleFr": "La voiture s'écrasa contre le mur.",
+    "freq": 3.71,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zwaaien",
+    "fr": "faire signe de la main",
+    "present": {
+      "ik": "zwaai",
+      "jij": "zwaait",
+      "hij": "zwaait",
+      "wij": "zwaaien"
+    },
+    "preteritum": "zwaaide",
+    "participePasse": "gezwaaid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze zwaaide me gedag.",
+    "exempleFr": "D'un signe, elle me dit \"au revoir\".",
+    "freq": 3.87,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "telefoneren",
+    "fr": "téléphoner",
+    "present": {
+      "ik": "telefoneer",
+      "jij": "telefoneert",
+      "hij": "telefoneert",
+      "wij": "telefoneren"
+    },
+    "preteritum": "telefoneerde",
+    "participePasse": "getelefoneerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mijn ouders telefoneren mij alle dagen.",
+    "exempleFr": "Mes parents me téléphonent quotidiennement.",
+    "freq": 3.38,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verminderen",
+    "fr": "diminuer",
+    "present": {
+      "ik": "verminder",
+      "jij": "vermindert",
+      "hij": "vermindert",
+      "wij": "verminderen"
+    },
+    "preteritum": "verminderde",
+    "participePasse": "verminderd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De kwaliteit van de rijst vermindert.",
+    "exempleFr": "La qualité du riz diminue.",
+    "freq": 4.25,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "mislukken",
+    "fr": "échouer / rater",
+    "present": {
+      "ik": "misluk",
+      "jij": "mislukt",
+      "hij": "mislukt",
+      "wij": "mislukken"
+    },
+    "preteritum": "mislukte",
+    "participePasse": "mislukt",
+    "auxiliaire": "zijn",
+    "exempleNl": "Al onze pogingen zijn mislukt.",
+    "exempleFr": "Toutes nos tentatives ont échoué.",
+    "freq": 3.62,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vereisen",
+    "fr": "exiger",
+    "present": {
+      "ik": "vereis",
+      "jij": "vereist",
+      "hij": "vereist",
+      "wij": "vereisen"
+    },
+    "preteritum": "vereiste",
+    "participePasse": "vereist",
+    "auxiliaire": "hebben",
+    "exempleNl": "Een wachtwoord is vereist.",
+    "exempleFr": "Un mot de passe est requis.",
+    "freq": 3.51,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "scoren",
+    "fr": "marquer (un but)",
+    "present": {
+      "ik": "scoor",
+      "jij": "scoort",
+      "hij": "scoort",
+      "wij": "scoren"
+    },
+    "preteritum": "scoorde",
+    "participePasse": "gescoord",
+    "auxiliaire": "hebben",
+    "exempleNl": "Tom scoorde een doelpunt.",
+    "exempleFr": "Tom a marqué un but.",
+    "freq": 4.24,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "omkomen",
+    "fr": "périr",
+    "present": {
+      "ik": "kom om",
+      "jij": "komt om",
+      "hij": "komt om",
+      "wij": "komen om"
+    },
+    "preteritum": "kwam om",
+    "participePasse": "omgekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik kan om 11 uur komen.",
+    "exempleFr": "Je peux venir à 11 heures.",
+    "freq": 2.91,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zweren",
+    "fr": "jurer",
+    "present": {
+      "ik": "zweer",
+      "jij": "zweert",
+      "hij": "zweert",
+      "wij": "zweren"
+    },
+    "preteritum": "zwoer",
+    "participePasse": "gezworen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik zweer dat niets is gebeurd.",
+    "exempleFr": "Je jure que rien n'est arrivé.",
+    "freq": 3.51,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overdrijven",
+    "fr": "exagérer",
+    "present": {
+      "ik": "overdrijf",
+      "jij": "overdrijft",
+      "hij": "overdrijft",
+      "wij": "overdrijven"
+    },
+    "preteritum": "overdreef",
+    "participePasse": "overdreven",
+    "auxiliaire": "hebben",
+    "exempleNl": "De oude man overdrijft graag.",
+    "exempleFr": "Le vieux exagère volontiers.",
+    "freq": 3.63,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beschadigen",
+    "fr": "endommager",
+    "present": {
+      "ik": "beschadig",
+      "jij": "beschadigt",
+      "hij": "beschadigt",
+      "wij": "beschadigen"
+    },
+    "preteritum": "beschadigde",
+    "participePasse": "beschadigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Dit boek is beschadigd.",
+    "exempleFr": "Ce livre est abîmé.",
+    "freq": 3.78,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afzetten",
+    "fr": "éteindre / déposer",
+    "present": {
+      "ik": "zet af",
+      "jij": "zet af",
+      "hij": "zet af",
+      "wij": "zetten af"
+    },
+    "preteritum": "zette af",
+    "participePasse": "afgezet",
+    "auxiliaire": "hebben",
+    "exempleNl": "Tom zet zijn klanten soms af.",
+    "exempleFr": "Tom fraude parfois ses clients.",
+    "freq": 3.7,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vermaken",
+    "fr": "divertir",
+    "present": {
+      "ik": "vermaak",
+      "jij": "vermaakt",
+      "hij": "vermaakt",
+      "wij": "vermaken"
+    },
+    "preteritum": "vermaakte",
+    "participePasse": "vermaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik was de kinderen aan het vermaken.",
+    "exempleFr": "J'amusais les enfants.",
+    "freq": 3.97,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verwoesten",
+    "fr": "dévaster",
+    "present": {
+      "ik": "verwoest",
+      "jij": "verwoest",
+      "hij": "verwoest",
+      "wij": "verwoesten"
+    },
+    "preteritum": "verwoestte",
+    "participePasse": "verwoest",
+    "auxiliaire": "hebben",
+    "exempleNl": "Een reeks explosies heeft het laboratorium verwoest.",
+    "exempleFr": "Une série d'explosions mis le laboratoire en ruine.",
+    "freq": 3.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "voeden",
+    "fr": "nourrir",
+    "present": {
+      "ik": "voed",
+      "jij": "voedt",
+      "hij": "voedt",
+      "wij": "voeden"
+    },
+    "preteritum": "voedde",
+    "participePasse": "gevoed",
+    "auxiliaire": "hebben",
+    "exempleNl": "Walvissen voeden zich met kleine visjes.",
+    "exempleFr": "Les baleines se nourrissent de petits poissons.",
+    "freq": 4.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "baseren",
+    "fr": "baser",
+    "present": {
+      "ik": "baseer",
+      "jij": "baseert",
+      "hij": "baseert",
+      "wij": "baseren"
+    },
+    "preteritum": "baseerde",
+    "participePasse": "gebaseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.21,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "behalen",
+    "fr": "obtenir (un résultat)",
+    "present": {
+      "ik": "behaal",
+      "jij": "behaalt",
+      "hij": "behaalt",
+      "wij": "behalen"
+    },
+    "preteritum": "behaalde",
+    "participePasse": "behaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze behaalde opmerkelijke resultaten.",
+    "exempleFr": "Elle a obtenu des résultats remarquables.",
+    "freq": 4.18,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opletten",
+    "fr": "faire attention",
+    "present": {
+      "ik": "let op",
+      "jij": "let op",
+      "hij": "let op",
+      "wij": "letten op"
+    },
+    "preteritum": "lette op",
+    "participePasse": "opgelet",
+    "auxiliaire": "hebben",
+    "exempleNl": "Let niet op wat hij zegt.",
+    "exempleFr": "Ne tenez aucun compte de ce qu'il dit.",
+    "freq": 3.85,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "googelen",
+    "fr": "googler",
+    "present": {
+      "ik": "googel",
+      "jij": "googelt",
+      "hij": "googelt",
+      "wij": "googelen"
+    },
+    "preteritum": "googelde",
+    "participePasse": "gegoogeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Laat me dat even voor je googelen.",
+    "exempleFr": "Laisse-moi googler cela pour toi.",
+    "freq": 3.06,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "stromen",
+    "fr": "couler (liquide)",
+    "present": {
+      "ik": "stroom",
+      "jij": "stroomt",
+      "hij": "stroomt",
+      "wij": "stromen"
+    },
+    "preteritum": "stroomde",
+    "participePasse": "gestroomd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De Rijn stroomt tussen Frankrijk en Duitsland.",
+    "exempleFr": "Le Rhin s'étend entre la France et l'Allemagne.",
+    "freq": 4.09,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich haasten",
+    "fr": "se dépêcher",
+    "present": {
+      "ik": "haast me",
+      "jij": "haast je",
+      "hij": "haast zich",
+      "wij": "haasten ons"
+    },
+    "preteritum": "haastte",
+    "participePasse": "gehaast",
+    "auxiliaire": "hebben",
+    "exempleNl": "Haast je of je bent te laat.",
+    "exempleFr": "Dépêche-toi, ou tu seras en retard.",
+    "freq": 3.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "naderen",
+    "fr": "approcher",
+    "present": {
+      "ik": "nader",
+      "jij": "nadert",
+      "hij": "nadert",
+      "wij": "naderen"
+    },
+    "preteritum": "naderde",
+    "participePasse": "genaderd",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik zag een silhouet naderen.",
+    "exempleFr": "J'ai vu une silhouette s'approcher.",
+    "freq": 3.71,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "innemen",
+    "fr": "prendre (médicament) / occuper",
+    "present": {
+      "ik": "neem in",
+      "jij": "neemt in",
+      "hij": "neemt in",
+      "wij": "nemen in"
+    },
+    "preteritum": "nam in",
+    "participePasse": "ingenomen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Dat neemt nauwelijks tijd in beslag.",
+    "exempleFr": "Ça ne prend pas beaucoup de temps.",
+    "freq": 4.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "fascineren",
+    "fr": "fasciner",
+    "present": {
+      "ik": "fascineer",
+      "jij": "fascineert",
+      "hij": "fascineert",
+      "wij": "fascineren"
+    },
+    "preteritum": "fascineerde",
+    "participePasse": "gefascineerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.44,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "gehoorzamen",
+    "fr": "obéir",
+    "present": {
+      "ik": "gehoorzaam",
+      "jij": "gehoorzaamt",
+      "hij": "gehoorzaamt",
+      "wij": "gehoorzamen"
+    },
+    "preteritum": "gehoorzaamde",
+    "participePasse": "gehoorzaamd",
+    "auxiliaire": "hebben",
+    "exempleNl": "O wee als je niet gehoorzaamt!",
+    "exempleFr": "Obéis, sinon gare !",
+    "freq": 3.65,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "toenemen",
+    "fr": "augmenter",
+    "present": {
+      "ik": "neem toe",
+      "jij": "neemt toe",
+      "hij": "neemt toe",
+      "wij": "nemen toe"
+    },
+    "preteritum": "nam toe",
+    "participePasse": "toegenomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Het geweld nam daarna snel toe.",
+    "exempleFr": "La violence augmenta peu après.",
+    "freq": 3.93,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verplaatsen",
+    "fr": "déplacer",
+    "present": {
+      "ik": "verplaats",
+      "jij": "verplaatst",
+      "hij": "verplaatst",
+      "wij": "verplaatsen"
+    },
+    "preteritum": "verplaatste",
+    "participePasse": "verplaatst",
+    "auxiliaire": "hebben",
+    "exempleNl": "We moeten het spel naar de volgende zondag verplaatsen.",
+    "exempleFr": "Nous devons remettre la partie à dimanche prochain.",
+    "freq": 4.27,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "dreigen",
+    "fr": "menacer",
+    "present": {
+      "ik": "dreig",
+      "jij": "dreigt",
+      "hij": "dreigt",
+      "wij": "dreigen"
+    },
+    "preteritum": "dreigde",
+    "participePasse": "gedreigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Wie veel dreigt, is niet gevaarlijk.",
+    "exempleFr": "Il n'est pas dangereux, celui qui menace beaucoup !",
+    "freq": 3.9,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vergiftigen",
+    "fr": "empoisonner",
+    "present": {
+      "ik": "vergiftig",
+      "jij": "vergiftigt",
+      "hij": "vergiftigt",
+      "wij": "vergiftigen"
+    },
+    "preteritum": "vergiftigde",
+    "participePasse": "vergiftigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Marie vergiftigt het leven van Tom.",
+    "exempleFr": "Marie empoisonne la vie de Tom.",
+    "freq": 3.08,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "onderhandelen",
+    "fr": "négocier",
+    "present": {
+      "ik": "onderhandel",
+      "jij": "onderhandelt",
+      "hij": "onderhandelt",
+      "wij": "onderhandelen"
+    },
+    "preteritum": "onderhandelde",
+    "participePasse": "onderhandeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Beide landen hebben onderhandeld over een verdrag.",
+    "exempleFr": "Les deux pays ont négocié un traité.",
+    "freq": 4.03,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "klaarmaken",
+    "fr": "préparer",
+    "present": {
+      "ik": "maak klaar",
+      "jij": "maakt klaar",
+      "hij": "maakt klaar",
+      "wij": "maken klaar"
+    },
+    "preteritum": "maakte klaar",
+    "participePasse": "klaargemaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mijn moeder maakt het ontbijt klaar.",
+    "exempleFr": "Ma mère est en train de préparer le petit déjeuner.",
+    "freq": 3.91,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "annuleren",
+    "fr": "annuler",
+    "present": {
+      "ik": "annuleer",
+      "jij": "annuleert",
+      "hij": "annuleert",
+      "wij": "annuleren"
+    },
+    "preteritum": "annuleerde",
+    "participePasse": "geannuleerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze hebben hun trip wegens de regen geannuleerd.",
+    "exempleFr": "Leur voyage fut annulé en raison de la pluie.",
+    "freq": 3.56,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "achtervolgen",
+    "fr": "poursuivre (suivre)",
+    "present": {
+      "ik": "achtervolg",
+      "jij": "achtervolgt",
+      "hij": "achtervolgt",
+      "wij": "achtervolgen"
+    },
+    "preteritum": "achtervolgde",
+    "participePasse": "achtervolgd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De hond achtervolgde het konijn.",
+    "exempleFr": "Le chien a pourchassé le lapin.",
+    "freq": 3.46,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "dekken",
+    "fr": "couvrir / mettre (la table)",
+    "present": {
+      "ik": "dek",
+      "jij": "dekt",
+      "hij": "dekt",
+      "wij": "dekken"
+    },
+    "preteritum": "dekte",
+    "participePasse": "gedekt",
+    "auxiliaire": "hebben",
+    "exempleNl": "De garantie dekt geen normale slijtage.",
+    "exempleFr": "La garantie ne couvre pas l'usure normale.",
+    "freq": 3.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beklimmen",
+    "fr": "escalader",
+    "present": {
+      "ik": "beklim",
+      "jij": "beklimt",
+      "hij": "beklimt",
+      "wij": "beklimmen"
+    },
+    "preteritum": "beklom",
+    "participePasse": "beklommen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Een aap beklimt een hoge boom.",
+    "exempleFr": "Un singe grimpe sur un grand arbre.",
+    "freq": 3.66,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afvallen",
+    "fr": "maigrir",
+    "present": {
+      "ik": "val af",
+      "jij": "valt af",
+      "hij": "valt af",
+      "wij": "vallen af"
+    },
+    "preteritum": "viel af",
+    "participePasse": "afgevallen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Heb je moeite af te vallen?",
+    "exempleFr": "Avez-vous du mal à perdre du poids ?",
+    "freq": 3.96,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "trachten",
+    "fr": "tenter",
+    "present": {
+      "ik": "tracht",
+      "jij": "tracht",
+      "hij": "tracht",
+      "wij": "trachten"
+    },
+    "preteritum": "trachtte",
+    "participePasse": "getracht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze hebben getracht de president te vermoorden.",
+    "exempleFr": "Ils ont tenté d'assassiner le président.",
+    "freq": 3.37,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schoppen",
+    "fr": "donner un coup de pied",
+    "present": {
+      "ik": "schop",
+      "jij": "schopt",
+      "hij": "schopt",
+      "wij": "schoppen"
+    },
+    "preteritum": "schopte",
+    "participePasse": "geschopt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Schop zo hard als je kunt.",
+    "exempleFr": "Tape aussi fort que tu peux.",
+    "freq": 3.68,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontwerpen",
+    "fr": "concevoir (design)",
+    "present": {
+      "ik": "ontwerp",
+      "jij": "ontwerpt",
+      "hij": "ontwerpt",
+      "wij": "ontwerpen"
+    },
+    "preteritum": "ontwierp",
+    "participePasse": "ontworpen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mayuko ontwierp haar eigen kleding.",
+    "exempleFr": "Mayuko a conçu ses propres vêtements.",
+    "freq": 4.33,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bekennen",
+    "fr": "avouer",
+    "present": {
+      "ik": "beken",
+      "jij": "bekent",
+      "hij": "bekent",
+      "wij": "bekennen"
+    },
+    "preteritum": "bekende",
+    "participePasse": "bekend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ierland staat bekend om zijn kant.",
+    "exempleFr": "L’Irlande est réputée pour sa dentelle.",
+    "freq": 3.87,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitrusten",
+    "fr": "se reposer",
+    "present": {
+      "ik": "rust uit",
+      "jij": "rust uit",
+      "hij": "rust uit",
+      "wij": "rusten uit"
+    },
+    "preteritum": "rustte uit",
+    "participePasse": "uitgerust",
+    "auxiliaire": "hebben",
+    "exempleNl": "Iedere kamer is met een groot bureau uitgerust.",
+    "exempleFr": "Chaque pièce est équipée d'un grand bureau.",
+    "freq": 3.57,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "versieren",
+    "fr": "décorer",
+    "present": {
+      "ik": "versier",
+      "jij": "versiert",
+      "hij": "versiert",
+      "wij": "versieren"
+    },
+    "preteritum": "versierde",
+    "participePasse": "versierd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Laat ons de kerstboom versieren.",
+    "exempleFr": "Décorons l'arbre de Noël !",
+    "freq": 3.85,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "kalmeren",
+    "fr": "calmer / se calmer",
+    "present": {
+      "ik": "kalmeer",
+      "jij": "kalmeert",
+      "hij": "kalmeert",
+      "wij": "kalmeren"
+    },
+    "preteritum": "kalmeerde",
+    "participePasse": "gekalmeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Probeer jezelf te kalmeren!",
+    "exempleFr": "Essaie de te calmer !",
+    "freq": 3.48,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "mengen",
+    "fr": "mélanger",
+    "present": {
+      "ik": "meng",
+      "jij": "mengt",
+      "hij": "mengt",
+      "wij": "mengen"
+    },
+    "preteritum": "mengde",
+    "participePasse": "gemengd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.78,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "langskomen",
+    "fr": "passer (chez quelqu'un)",
+    "present": {
+      "ik": "kom langs",
+      "jij": "komt langs",
+      "hij": "komt langs",
+      "wij": "komen langs"
+    },
+    "preteritum": "kwam langs",
+    "participePasse": "langsgekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ik kom elke dag langs die kerk.",
+    "exempleFr": "Je passe tous les jours devant cette église.",
+    "freq": 3.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "storten",
+    "fr": "verser (argent) / s'effondrer",
+    "present": {
+      "ik": "stort",
+      "jij": "stort",
+      "hij": "stort",
+      "wij": "storten"
+    },
+    "preteritum": "stortte",
+    "participePasse": "gestort",
+    "auxiliaire": "hebben",
+    "exempleNl": "Stort het geld in een bank a.u.b.",
+    "exempleFr": "Déposez l'argent dans une banque s'il vous plait.",
+    "freq": 3.98,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ontvoeren",
+    "fr": "enlever (kidnapper)",
+    "present": {
+      "ik": "ontvoer",
+      "jij": "ontvoert",
+      "hij": "ontvoert",
+      "wij": "ontvoeren"
+    },
+    "preteritum": "ontvoerde",
+    "participePasse": "ontvoerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.46,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "raden",
+    "fr": "deviner",
+    "present": {
+      "ik": "raad",
+      "jij": "raadt",
+      "hij": "raadt",
+      "wij": "raden"
+    },
+    "preteritum": "raadde",
+    "participePasse": "geraden",
+    "auxiliaire": "hebben",
+    "exempleNl": "Aarzel niet om raad te vragen.",
+    "exempleFr": "N'hésite pas à demander des conseils.",
+    "freq": 4.42,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aanrijden",
+    "fr": "percuter (en voiture)",
+    "present": {
+      "ik": "rijd aan",
+      "jij": "rijdt aan",
+      "hij": "rijdt aan",
+      "wij": "rijden aan"
+    },
+    "preteritum": "reed aan",
+    "participePasse": "aangereden",
+    "auxiliaire": "hebben",
+    "exempleNl": "Een vrachtwagen heeft de hond aangereden.",
+    "exempleFr": "Un camion a percuté le chien.",
+    "freq": 3.02,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vervuilen",
+    "fr": "polluer",
+    "present": {
+      "ik": "vervuil",
+      "jij": "vervuilt",
+      "hij": "vervuilt",
+      "wij": "vervuilen"
+    },
+    "preteritum": "vervuilde",
+    "participePasse": "vervuild",
+    "auxiliaire": "hebben",
+    "exempleNl": "De inwoners van Gaza drinken vervuild water.",
+    "exempleFr": "Les habitants de Gaza consomment de l'eau polluée.",
+    "freq": 2.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overwegen",
+    "fr": "envisager",
+    "present": {
+      "ik": "overweeg",
+      "jij": "overweegt",
+      "hij": "overweegt",
+      "wij": "overwegen"
+    },
+    "preteritum": "overwoog",
+    "participePasse": "overwogen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.13,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "begroeten",
+    "fr": "saluer",
+    "present": {
+      "ik": "begroet",
+      "jij": "begroet",
+      "hij": "begroet",
+      "wij": "begroeten"
+    },
+    "preteritum": "begroette",
+    "participePasse": "begroet",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij begroette me met een glimlach.",
+    "exempleFr": "Il me salua d'un sourire.",
+    "freq": 3.32,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "botsen",
+    "fr": "entrer en collision",
+    "present": {
+      "ik": "bots",
+      "jij": "botst",
+      "hij": "botst",
+      "wij": "botsen"
+    },
+    "preteritum": "botste",
+    "participePasse": "gebotst",
+    "auxiliaire": "zijn",
+    "exempleNl": "De auto botste met de vrachtwagen.",
+    "exempleFr": "La voiture a heurté le camion.",
+    "freq": 3.53,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "protesteren",
+    "fr": "protester",
+    "present": {
+      "ik": "protesteer",
+      "jij": "protesteert",
+      "hij": "protesteert",
+      "wij": "protesteren"
+    },
+    "preteritum": "protesteerde",
+    "participePasse": "geprotesteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "We hebben vergeefs geprotesteerd.",
+    "exempleFr": "Nous avons protesté en vain.",
+    "freq": 3.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bereiden",
+    "fr": "préparer (repas)",
+    "present": {
+      "ik": "bereid",
+      "jij": "bereidt",
+      "hij": "bereidt",
+      "wij": "bereiden"
+    },
+    "preteritum": "bereidde",
+    "participePasse": "bereid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Weet je hoe men vlees bereidt?",
+    "exempleFr": "Sais-tu comment cuire de la viande ?",
+    "freq": 4.08,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "besturen",
+    "fr": "conduire / diriger",
+    "present": {
+      "ik": "bestuur",
+      "jij": "bestuurt",
+      "hij": "bestuurt",
+      "wij": "besturen"
+    },
+    "preteritum": "bestuurde",
+    "participePasse": "bestuurd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Deze auto is gemakkelijk om te besturen.",
+    "exempleFr": "Cette voiture est facile à manipuler.",
+    "freq": 4.05,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vervullen",
+    "fr": "remplir (un devoir, un souhait)",
+    "present": {
+      "ik": "vervul",
+      "jij": "vervult",
+      "hij": "vervult",
+      "wij": "vervullen"
+    },
+    "preteritum": "vervulde",
+    "participePasse": "vervuld",
+    "auxiliaire": "hebben",
+    "exempleNl": "De Fransen vervullen hun electorale plicht.",
+    "exempleFr": "Les Français accomplissent leur devoir électoral.",
+    "freq": 4.11,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "plukken",
+    "fr": "cueillir",
+    "present": {
+      "ik": "pluk",
+      "jij": "plukt",
+      "hij": "plukt",
+      "wij": "plukken"
+    },
+    "preteritum": "plukte",
+    "participePasse": "geplukt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij heeft voor haar bloemen geplukt.",
+    "exempleFr": "Il cueillit des fleurs pour elle.",
+    "freq": 3.86,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "inpakken",
+    "fr": "emballer / faire ses valises",
+    "present": {
+      "ik": "pak in",
+      "jij": "pakt in",
+      "hij": "pakt in",
+      "wij": "pakken in"
+    },
+    "preteritum": "pakte in",
+    "participePasse": "ingepakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Tom heeft de hele middag lang kerstcadeautjes ingepakt.",
+    "exempleFr": "Tom a passé tout l'après-midi à emballer des cadeaux de Noël.",
+    "freq": 3.9,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "weggooien",
+    "fr": "jeter",
+    "present": {
+      "ik": "gooi weg",
+      "jij": "gooit weg",
+      "hij": "gooit weg",
+      "wij": "gooien weg"
+    },
+    "preteritum": "gooide weg",
+    "participePasse": "weggegooid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Waar heb je ze weggegooid?",
+    "exempleFr": "Où les as-tu jetés ?",
+    "freq": 3.6,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitdoen",
+    "fr": "enlever (vêtement) / éteindre",
+    "present": {
+      "ik": "doe uit",
+      "jij": "doet uit",
+      "hij": "doet uit",
+      "wij": "doen uit"
+    },
+    "preteritum": "deed uit",
+    "participePasse": "uitgedaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze deed de afwas uit zichzelf.",
+    "exempleFr": "Elle fit la vaisselle de sa propre initiative.",
+    "freq": 3.12,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitdrukken",
+    "fr": "exprimer",
+    "present": {
+      "ik": "druk uit",
+      "jij": "drukt uit",
+      "hij": "drukt uit",
+      "wij": "drukken uit"
+    },
+    "preteritum": "drukte uit",
+    "participePasse": "uitgedrukt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Druk jezelf zo duidelijk mogelijk uit.",
+    "exempleFr": "Exprime-toi le plus clairement possible.",
+    "freq": 3.45,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "beschikken",
+    "fr": "disposer (beschikken over)",
+    "present": {
+      "ik": "beschik",
+      "jij": "beschikt",
+      "hij": "beschikt",
+      "wij": "beschikken"
+    },
+    "preteritum": "beschikte",
+    "participePasse": "beschikt",
+    "auxiliaire": "hebben",
+    "exempleNl": "De mens wikt, God beschikt.",
+    "exempleFr": "L'homme propose, Dieu dispose.",
+    "freq": 4.15,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "kletsen",
+    "fr": "bavarder",
+    "present": {
+      "ik": "klets",
+      "jij": "kletst",
+      "hij": "kletst",
+      "wij": "kletsen"
+    },
+    "preteritum": "kletste",
+    "participePasse": "gekletst",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze is gestopt met kletsen.",
+    "exempleFr": "Elle a cessé de bavarder.",
+    "freq": 3.9,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "douchen",
+    "fr": "se doucher",
+    "present": {
+      "ik": "douch",
+      "jij": "doucht",
+      "hij": "doucht",
+      "wij": "douchen"
+    },
+    "preteritum": "douchte",
+    "participePasse": "gedoucht",
+    "auxiliaire": "hebben",
+    "exempleNl": "Zijn jullie nog aan het douchen?",
+    "exempleFr": "Êtes-vous encore sous la douche ?",
+    "freq": 4.05,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "betrappen",
+    "fr": "prendre sur le fait",
+    "present": {
+      "ik": "betrap",
+      "jij": "betrapt",
+      "hij": "betrapt",
+      "wij": "betrappen"
+    },
+    "preteritum": "betrapte",
+    "participePasse": "betrapt",
+    "auxiliaire": "hebben",
+    "exempleNl": "We hebben hem op heterdaad betrapt.",
+    "exempleFr": "Nous l'avons pris en flagrant délit.",
+    "freq": 3.11,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bedriegen",
+    "fr": "tromper",
+    "present": {
+      "ik": "bedrieg",
+      "jij": "bedriegt",
+      "hij": "bedriegt",
+      "wij": "bedriegen"
+    },
+    "preteritum": "bedroog",
+    "participePasse": "bedrogen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Me moeten ermee ophouden onszelf te bedriegen.",
+    "exempleFr": "Nous ne pouvons pas continuer à nous abuser.",
+    "freq": 3.63,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "thuisblijven",
+    "fr": "rester à la maison",
+    "present": {
+      "ik": "blijf thuis",
+      "jij": "blijft thuis",
+      "hij": "blijft thuis",
+      "wij": "blijven thuis"
+    },
+    "preteritum": "bleef thuis",
+    "participePasse": "thuisgebleven",
+    "auxiliaire": "zijn",
+    "exempleNl": "Ja, ik zal waarschijnlijk thuis blijven.",
+    "exempleFr": "Oui, je resterai probablement à la maison.",
+    "freq": 3.56,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "geraken",
+    "fr": "arriver / parvenir (Belgique)",
+    "present": {
+      "ik": "geraak",
+      "jij": "geraakt",
+      "hij": "geraakt",
+      "wij": "geraken"
+    },
+    "preteritum": "geraakte",
+    "participePasse": "geraakt",
+    "auxiliaire": "zijn",
+    "exempleNl": "Hoe geraak ik aan het commissariaat?",
+    "exempleFr": "Comment puis-je me rendre au commissariat ?",
+    "freq": 3.96,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "regeren",
+    "fr": "gouverner",
+    "present": {
+      "ik": "regeer",
+      "jij": "regeert",
+      "hij": "regeert",
+      "wij": "regeren"
+    },
+    "preteritum": "regeerde",
+    "participePasse": "geregeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De koning regeerde veertig jaar over zijn volk.",
+    "exempleFr": "Le roi a régné sur son peuple pendant quarante ans.",
+    "freq": 3.96,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "fotograferen",
+    "fr": "photographier",
+    "present": {
+      "ik": "fotografeer",
+      "jij": "fotografeert",
+      "hij": "fotografeert",
+      "wij": "fotograferen"
+    },
+    "preteritum": "fotografeerde",
+    "participePasse": "gefotografeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "We lieten ons op het strand fotograferen.",
+    "exempleFr": "Nous nous fîmes photographier sur la plage.",
+    "freq": 3.97,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aankondigen",
+    "fr": "annoncer",
+    "present": {
+      "ik": "kondig aan",
+      "jij": "kondigt aan",
+      "hij": "kondigt aan",
+      "wij": "kondigen aan"
+    },
+    "preteritum": "kondigde aan",
+    "participePasse": "aangekondigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij kondigde de volgende zanger aan.",
+    "exempleFr": "Il annonça le chanteur suivant.",
+    "freq": 3.44,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "getuigen",
+    "fr": "témoigner",
+    "present": {
+      "ik": "getuig",
+      "jij": "getuigt",
+      "hij": "getuigt",
+      "wij": "getuigen"
+    },
+    "preteritum": "getuigde",
+    "participePasse": "getuigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De politie ondervraagt de getuigen.",
+    "exempleFr": "La police interroge les témoins.",
+    "freq": 4.49,
+    "niveauCECR": "C1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "sporten",
+    "fr": "faire du sport",
+    "present": {
+      "ik": "sport",
+      "jij": "sport",
+      "hij": "sport",
+      "wij": "sporten"
+    },
+    "preteritum": "sportte",
+    "participePasse": "gesport",
+    "auxiliaire": "hebben",
+    "exempleNl": "Sport is goed voor uw gezondheid.",
+    "exempleFr": "Le sport est bon pour votre santé.",
+    "freq": 4.43,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "feliciteren",
+    "fr": "féliciter",
+    "present": {
+      "ik": "feliciteer",
+      "jij": "feliciteert",
+      "hij": "feliciteert",
+      "wij": "feliciteren"
+    },
+    "preteritum": "feliciteerde",
+    "participePasse": "gefeliciteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Gefeliciteerd met je verjaardag, Muiriel!",
+    "exempleFr": "Joyeux anniversaire Muiriel !",
+    "freq": 3.81,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schillen",
+    "fr": "éplucher",
+    "present": {
+      "ik": "schil",
+      "jij": "schilt",
+      "hij": "schilt",
+      "wij": "schillen"
+    },
+    "preteritum": "schilde",
+    "participePasse": "geschild",
+    "auxiliaire": "hebben",
+    "exempleNl": "Schil de aardappelen en de wortelen.",
+    "exempleFr": "Épluche les pommes de terre et les carottes.",
+    "freq": 3.37,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verenigen",
+    "fr": "unir",
+    "present": {
+      "ik": "verenig",
+      "jij": "verenigt",
+      "hij": "verenigt",
+      "wij": "verenigen"
+    },
+    "preteritum": "verenigde",
+    "participePasse": "verenigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "De Verenigde Staten grenzen aan Canada.",
+    "exempleFr": "Les États-Unis bordent le Canada.",
+    "freq": 3.78,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vegen",
+    "fr": "balayer / essuyer",
+    "present": {
+      "ik": "veeg",
+      "jij": "veegt",
+      "hij": "veegt",
+      "wij": "vegen"
+    },
+    "preteritum": "veegde",
+    "participePasse": "geveegd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mary wil het huis vegen.",
+    "exempleFr": "Marie veut balayer la maison.",
+    "freq": 3.78,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "communiceren",
+    "fr": "communiquer",
+    "present": {
+      "ik": "communiceer",
+      "jij": "communiceert",
+      "hij": "communiceert",
+      "wij": "communiceren"
+    },
+    "preteritum": "communiceerde",
+    "participePasse": "gecommuniceerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.27,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opgroeien",
+    "fr": "grandir",
+    "present": {
+      "ik": "groei op",
+      "jij": "groeit op",
+      "hij": "groeit op",
+      "wij": "groeien op"
+    },
+    "preteritum": "groeide op",
+    "participePasse": "opgegroeid",
+    "auxiliaire": "zijn",
+    "exempleNl": "Een snor groeit op de bovenlip.",
+    "exempleFr": "Une moustache pousse sur la lèvre supérieure.",
+    "freq": 3.86,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schokken",
+    "fr": "choquer",
+    "present": {
+      "ik": "schok",
+      "jij": "schokt",
+      "hij": "schokt",
+      "wij": "schokken"
+    },
+    "preteritum": "schokte",
+    "participePasse": "geschokt",
+    "auxiliaire": "hebben",
+    "exempleNl": "Het was een grote schok voor mij.",
+    "exempleFr": "Ce fut un gros choc pour moi.",
+    "freq": 3.48,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "erkennen",
+    "fr": "reconnaître (admettre)",
+    "present": {
+      "ik": "erken",
+      "jij": "erkent",
+      "hij": "erkent",
+      "wij": "erkennen"
+    },
+    "preteritum": "erkende",
+    "participePasse": "erkend",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij heeft zijn schuld erkend.",
+    "exempleFr": "Il a confessé sa culpabilité.",
+    "freq": 4.03,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "strijken",
+    "fr": "repasser (linge)",
+    "present": {
+      "ik": "strijk",
+      "jij": "strijkt",
+      "hij": "strijkt",
+      "wij": "strijken"
+    },
+    "preteritum": "streek",
+    "participePasse": "gestreken",
+    "auxiliaire": "hebben",
+    "exempleNl": "Heeft hij zijn broek laten strijken?",
+    "exempleFr": "Est-ce qu'il a fait repasser son pantalon ?",
+    "freq": 3.66,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "drogen",
+    "fr": "sécher",
+    "present": {
+      "ik": "droog",
+      "jij": "droogt",
+      "hij": "droogt",
+      "wij": "drogen"
+    },
+    "preteritum": "droogde",
+    "participePasse": "gedroogd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Mijn hemd is nog niet droog.",
+    "exempleFr": "Ma chemise n'est pas encore sèche.",
+    "freq": 3.66,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "besparen",
+    "fr": "économiser / épargner",
+    "present": {
+      "ik": "bespaar",
+      "jij": "bespaart",
+      "hij": "bespaart",
+      "wij": "besparen"
+    },
+    "preteritum": "bespaarde",
+    "participePasse": "bespaard",
+    "auxiliaire": "hebben",
+    "exempleNl": "Bespaar me de details.",
+    "exempleFr": "Épargne-moi les détails.",
+    "freq": 4.27,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bewonderen",
+    "fr": "admirer",
+    "present": {
+      "ik": "bewonder",
+      "jij": "bewondert",
+      "hij": "bewondert",
+      "wij": "bewonderen"
+    },
+    "preteritum": "bewonderde",
+    "participePasse": "bewonderd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze bewondert haar vader heel erg.",
+    "exempleFr": "Elle admire beaucoup son père.",
+    "freq": 3.81,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "ondergaan",
+    "fr": "subir",
+    "present": {
+      "ik": "onderga",
+      "jij": "ondergaat",
+      "hij": "ondergaat",
+      "wij": "ondergaan"
+    },
+    "preteritum": "onderging",
+    "participePasse": "ondergaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "Dit was de moeilijkste beproeving die ik ooit heb ondergaan.",
+    "exempleFr": "Ce fut l'épreuve la plus difficile à vivre.",
+    "freq": 4.17,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afwachten",
+    "fr": "attendre (de voir)",
+    "present": {
+      "ik": "wacht af",
+      "jij": "wacht af",
+      "hij": "wacht af",
+      "wij": "wachten af"
+    },
+    "preteritum": "wachtte af",
+    "participePasse": "afgewacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.08,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vrijlaten",
+    "fr": "libérer",
+    "present": {
+      "ik": "laat vrij",
+      "jij": "laat vrij",
+      "hij": "laat vrij",
+      "wij": "laten vrij"
+    },
+    "preteritum": "liet vrij",
+    "participePasse": "vrijgelaten",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.57,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "kauwen",
+    "fr": "mâcher",
+    "present": {
+      "ik": "kauw",
+      "jij": "kauwt",
+      "hij": "kauwt",
+      "wij": "kauwen"
+    },
+    "preteritum": "kauwde",
+    "participePasse": "gekauwd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Doet het pijn als je kauwt?",
+    "exempleFr": "Cela fait-il mal lorsque tu mâches ?",
+    "freq": 3.44,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schitteren",
+    "fr": "briller",
+    "present": {
+      "ik": "schitter",
+      "jij": "schittert",
+      "hij": "schittert",
+      "wij": "schitteren"
+    },
+    "preteritum": "schitterde",
+    "participePasse": "geschitterd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.26,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "oproepen",
+    "fr": "appeler / convoquer",
+    "present": {
+      "ik": "roep op",
+      "jij": "roept op",
+      "hij": "roept op",
+      "wij": "roepen op"
+    },
+    "preteritum": "riep op",
+    "participePasse": "opgeroepen",
+    "auxiliaire": "hebben",
+    "exempleNl": "Steek uw hand op als ik uw naam roep.",
+    "exempleFr": "Levez la main au moment où je prononce votre nom.",
+    "freq": 4.1,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "fluiten",
+    "fr": "siffler",
+    "present": {
+      "ik": "fluit",
+      "jij": "fluit",
+      "hij": "fluit",
+      "wij": "fluiten"
+    },
+    "preteritum": "floot",
+    "participePasse": "gefloten",
+    "auxiliaire": "hebben",
+    "exempleNl": "Tom speelt ook graag de fluit.",
+    "exempleFr": "Tom aime aussi jouer de la flûte.",
+    "freq": 3.65,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "irriteren",
+    "fr": "irriter",
+    "present": {
+      "ik": "irriteer",
+      "jij": "irriteert",
+      "hij": "irriteert",
+      "wij": "irriteren"
+    },
+    "preteritum": "irriteerde",
+    "participePasse": "geïrriteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Waarom bent u geïrriteerd?",
+    "exempleFr": "Pourquoi êtes-vous énervé ?",
+    "freq": 3.32,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "schudden",
+    "fr": "secouer",
+    "present": {
+      "ik": "schud",
+      "jij": "schudt",
+      "hij": "schudt",
+      "wij": "schudden"
+    },
+    "preteritum": "schudde",
+    "participePasse": "geschud",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.08,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "begeleiden",
+    "fr": "accompagner",
+    "present": {
+      "ik": "begeleid",
+      "jij": "begeleidt",
+      "hij": "begeleidt",
+      "wij": "begeleiden"
+    },
+    "preteritum": "begeleidde",
+    "participePasse": "begeleid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze begeleidde mij op de piano.",
+    "exempleFr": "Elle m'accompagna au piano.",
+    "freq": 3.96,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "applaudisseren",
+    "fr": "applaudir",
+    "present": {
+      "ik": "applaudisseer",
+      "jij": "applaudisseert",
+      "hij": "applaudisseert",
+      "wij": "applaudisseren"
+    },
+    "preteritum": "applaudisseerde",
+    "participePasse": "geapplaudisseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik kon het niet weerstaan om te applaudisseren.",
+    "exempleFr": "Je ne pouvais pas résister à l'envie d'applaudir.",
+    "freq": 2.52,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitstappen",
+    "fr": "descendre (d'un véhicule)",
+    "present": {
+      "ik": "stap uit",
+      "jij": "stapt uit",
+      "hij": "stapt uit",
+      "wij": "stappen uit"
+    },
+    "preteritum": "stapte uit",
+    "participePasse": "uitgestapt",
+    "auxiliaire": "zijn",
+    "exempleNl": "Stap uit bij de volgende halte.",
+    "exempleFr": "Descendez au prochain arrêt.",
+    "freq": 3.67,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich amuseren",
+    "fr": "s'amuser",
+    "present": {
+      "ik": "amuseer me",
+      "jij": "amuseert je",
+      "hij": "amuseert zich",
+      "wij": "amuseren ons"
+    },
+    "preteritum": "amuseerde",
+    "participePasse": "geamuseerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze lijken zich goed te amuseren.",
+    "exempleFr": "On dirait qu'ils s'amusent bien.",
+    "freq": 3.21,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "graven",
+    "fr": "creuser",
+    "present": {
+      "ik": "graaf",
+      "jij": "graaft",
+      "hij": "graaft",
+      "wij": "graven"
+    },
+    "preteritum": "groef",
+    "participePasse": "gegraven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.29,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitzoeken",
+    "fr": "choisir / tirer au clair",
+    "present": {
+      "ik": "zoek uit",
+      "jij": "zoekt uit",
+      "hij": "zoekt uit",
+      "wij": "zoeken uit"
+    },
+    "preteritum": "zocht uit",
+    "participePasse": "uitgezocht",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.13,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zeuren",
+    "fr": "râler / pleurnicher",
+    "present": {
+      "ik": "zeur",
+      "jij": "zeurt",
+      "hij": "zeurt",
+      "wij": "zeuren"
+    },
+    "preteritum": "zeurde",
+    "participePasse": "gezeurd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hou op met zeuren.",
+    "exempleFr": "Arrêtez de râler.",
+    "freq": 3.86,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "frustreren",
+    "fr": "frustrer",
+    "present": {
+      "ik": "frustreer",
+      "jij": "frustreert",
+      "hij": "frustreert",
+      "wij": "frustreren"
+    },
+    "preteritum": "frustreerde",
+    "participePasse": "gefrustreerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.5,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich bemoeien",
+    "fr": "se mêler (zich bemoeien met)",
+    "present": {
+      "ik": "bemoei me",
+      "jij": "bemoeit je",
+      "hij": "bemoeit zich",
+      "wij": "bemoeien ons"
+    },
+    "preteritum": "bemoeide",
+    "participePasse": "bemoeid",
+    "auxiliaire": "hebben",
+    "exempleNl": "Bemoei je met je eigen zaken!",
+    "exempleFr": "Mêle-toi de tes affaires.",
+    "freq": 4.02,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verlagen",
+    "fr": "baisser",
+    "present": {
+      "ik": "verlaag",
+      "jij": "verlaagt",
+      "hij": "verlaagt",
+      "wij": "verlagen"
+    },
+    "preteritum": "verlaagde",
+    "participePasse": "verlaagd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Veel bedrijven hebben hun personeel tot het minimum verlaagd.",
+    "exempleFr": "De nombreuses entreprises ont réduit leurs effectifs au minimum.",
+    "freq": 4.02,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opendoen",
+    "fr": "ouvrir (la porte)",
+    "present": {
+      "ik": "doe open",
+      "jij": "doet open",
+      "hij": "doet open",
+      "wij": "doen open"
+    },
+    "preteritum": "deed open",
+    "participePasse": "opengedaan",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ze deed de deur open.",
+    "exempleFr": "Elle a ouvert la porte.",
+    "freq": 2.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "meedelen",
+    "fr": "communiquer / informer",
+    "present": {
+      "ik": "deel mee",
+      "jij": "deelt mee",
+      "hij": "deelt mee",
+      "wij": "delen mee"
+    },
+    "preteritum": "deelde mee",
+    "participePasse": "meegedeeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.22,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "niezen",
+    "fr": "éternuer",
+    "present": {
+      "ik": "nies",
+      "jij": "niest",
+      "hij": "niest",
+      "wij": "niezen"
+    },
+    "preteritum": "niesde",
+    "participePasse": "geniesd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ik nies de hele tijd.",
+    "exempleFr": "J'éternue tout le temps.",
+    "freq": 3.38,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overgeven",
+    "fr": "vomir / se rendre",
+    "present": {
+      "ik": "geef over",
+      "jij": "geeft over",
+      "hij": "geeft over",
+      "wij": "geven over"
+    },
+    "preteritum": "gaf over",
+    "participePasse": "overgegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "Wanneer heb je voor het laatst overgegeven?",
+    "exempleFr": "Quand as-tu vomi pour la dernière fois ?",
+    "freq": 3.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitzetten",
+    "fr": "éteindre",
+    "present": {
+      "ik": "zet uit",
+      "jij": "zet uit",
+      "hij": "zet uit",
+      "wij": "zetten uit"
+    },
+    "preteritum": "zette uit",
+    "participePasse": "uitgezet",
+    "auxiliaire": "hebben",
+    "exempleNl": "Zet de televisie uit. Ik kan me niet concentreren.",
+    "exempleFr": "Éteins la télévision. Je n'arrive pas à me concentrer.",
+    "freq": 3.83,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "geeuwen",
+    "fr": "bâiller",
+    "present": {
+      "ik": "geeuw",
+      "jij": "geeuwt",
+      "hij": "geeuwt",
+      "wij": "geeuwen"
+    },
+    "preteritum": "geeuwde",
+    "participePasse": "gegeeuwd",
+    "auxiliaire": "hebben",
+    "exempleNl": "Hij geeuwde van verveling.",
+    "exempleFr": "Il bâillait d'ennui.",
+    "freq": 2.24,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "zich vervelen",
+    "fr": "s'ennuyer",
+    "present": {
+      "ik": "verveel me",
+      "jij": "verveelt je",
+      "hij": "verveelt zich",
+      "wij": "vervelen ons"
+    },
+    "preteritum": "verveelde",
+    "participePasse": "verveeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "Ge ziet er verveeld uit.",
+    "exempleFr": "Tu as l'air de t'ennuyer.",
+    "freq": 3.83,
     "niveauCECR": "A2",
     "niveauCECRSource": "nt2lex"
   }

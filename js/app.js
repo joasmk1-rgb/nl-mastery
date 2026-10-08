@@ -3907,7 +3907,20 @@ if (firebaseAvailable) {
             vocht:'vochten', voer:'voeren', vond:'vonden', vroeg:'vroegen', vroor:'vroren',
             was:'waren', wees:'wezen', werd:'werden', wierp:'wierpen', wist:'wisten', won:'wonnen',
             zag:'zagen', zat:'zaten', zei:'zeiden', zocht:'zochten', zond:'zonden', zong:'zongen',
-            zou:'zouden', zweeg:'zwegen', zwom:'zwommen'
+            zou:'zouden', zweeg:'zwegen', zwom:'zwommen',
+            // Verbes forts ajoutés avec le noyau de vocabulaire courant (octobre 2026)
+            stal:'stalen', klonk:'klonken', verdween:'verdwenen', ontsloeg:'ontsloegen',
+            verstond:'verstonden', speet:'speten', verborg:'verborgen', verbood:'verboden',
+            schoot:'schoten', besprak:'bespraken', verscheen:'verschenen', beviel:'bevielen',
+            onderzocht:'onderzochten', vergaf:'vergaven', stonk:'stonken', bedacht:'bedachten',
+            versloeg:'versloegen', loog:'logen', verbleef:'verbleven', smolt:'smolten',
+            verdacht:'verdachten', begroef:'begroeven', schoor:'schoren', gedroeg:'gedroegen',
+            overkwam:'overkwamen', zonk:'zonken', rook:'roken', woog:'wogen', verliep:'verliepen',
+            genas:'genazen', beval:'bevalen', verdronk:'verdronken', voorzag:'voorzagen',
+            verkoos:'verkozen', onderbrak:'onderbraken', verried:'verrieden', zwoer:'zwoeren',
+            overdreef:'overdreven', beklom:'beklommen', ontwierp:'ontwierpen', overwoog:'overwogen',
+            bedroog:'bedrogen', streek:'streken', onderging:'ondergingen', floot:'floten',
+            groef:'groeven'
         };
 
         function deriveImperfectumPluriel(preteritum) {
@@ -3982,7 +3995,7 @@ if (firebaseAvailable) {
                     <div class="conj-tense-grid">${tenseCards}</div>
                     <div id="conj-fr-note" style="font-size:0.72rem; color:var(--text-secondary); margin-top:8px;"></div>
                     ${hasWeak ? '<div style="font-size:0.72rem; color:var(--wrong); margin-top:8px;">En rouge : les formes ratées à ta dernière tentative.</div>' : ''}
-                    <div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>
+                    ${v.exempleNl ? `<div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>` : ''}
                     <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
