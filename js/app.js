@@ -6588,6 +6588,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // Délègue à speakNL (définie en haut du fichier) — même comportement qu'avant, mais
             // partagé avec le reste de l'app (Mots, Leçons, Conjugaison, feedback d'exercice) au
             // lieu d'être dupliqué.
+            // Scénario réel mené en anglais : pas de lecture, la voix configurée est néerlandaise.
+            if (rpCurrentScenario && rpCurrentScenario.lang === 'en') return;
             speakNL(text);
         }
 
@@ -6673,6 +6675,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (textRow) textRow.style.display = 'flex';
             rpCoachClear();
             rpHideInterviewer();
+            // La dictée suit la langue du scénario (anglais pour un scénario réel en anglais).
+            if (rpRecognition) rpRecognition.lang = scenario.lang === 'en' ? 'en-US' : 'nl-NL';
             const choicesDiv = document.getElementById('rp-scripted-choices');
             if (choicesDiv) { choicesDiv.style.display = 'none'; choicesDiv.innerHTML = ''; }
             const banner = document.getElementById('rp-mode-banner');
@@ -6761,10 +6765,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             body.className = 'rp-coach-body';
             body.innerText = 'Correction en cours...';
             panel.append(title, quote, body);
+            // Seule information tirée du scénario : la langue pratiquée (néerlandais, sauf scénario
+            // réel mené en anglais). Rien du dialogue ni du rôle du recruteur n'est transmis.
+            const langName = RP_LANG_NAMES[(rpCurrentScenario && rpCurrentScenario.lang) || 'nl'];
             try {
                 body.innerText = await GeminiService.generate(
-                    'Tu es un professeur de néerlandais pour francophones. Corrige la grammaire, le vocabulaire et la formulation de ce texte produit par un apprenant (il peut avoir été dicté : ignore la ponctuation et les majuscules). ' +
-                    'Réponds en français, de façon brève : 2 à 3 points maximum, puis une version corrigée en néerlandais. Si le texte est déjà correct, dis-le en une phrase.\n\n' +
+                    'Tu es un professeur de ' + langName + ' pour francophones. Corrige la grammaire, le vocabulaire et la formulation de ce texte produit par un apprenant (il peut avoir été dicté : ignore la ponctuation et les majuscules). ' +
+                    'Réponds en français, de façon brève : 2 à 3 points maximum, puis une version corrigée en ' + langName + '. Si le texte est déjà correct, dis-le en une phrase.\n\n' +
                     'Texte de l\'apprenant : """' + userText + '"""'
                 );
             } catch (e) {
@@ -6819,12 +6826,26 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 .filter(([key]) => Array.isArray(q[key]) && q[key].length)
                 .map(([key, label]) => label + ' :\n' + q[key].map(x => '- ' + x).join('\n'))
                 .join('\n\n');
-            return 'Tu es un recruteur belge néerlandophone qui mène un entretien d\'embauche' + (bank.poste ? ' pour le poste suivant : ' + bank.poste : '') + '. ' +
+            const lang = rpBankLang(bank);
+            const langName = RP_LANG_NAMES[lang];
+            // "niveau" sert parfois à indiquer la langue de la transcription (NL / EN) plutôt
+            // qu'un niveau CECR : dans ce cas on ne l'annonce pas comme un niveau.
+            const niveau = /^(nl|en)$/i.test(bank.niveau || '') ? '' : (bank.niveau || '');
+            return 'Tu es un recruteur ' + (lang === 'nl' ? 'belge néerlandophone' : 'anglophone') + ' qui mène un entretien d\'embauche' + (bank.poste ? ' pour le poste suivant : ' + bank.poste : '') + '. ' +
                 (bank.contexte ? 'Contexte : ' + bank.contexte + ' ' : '') +
-                'Parle exclusivement en néerlandais' + (bank.niveau ? ' (niveau ' + bank.niveau + ')' : '') + ', comme à l\'oral : une ou deux phrases, UNE seule question à la fois.\n\n' +
-                'Voici les questions réellement posées dans ce type d\'entretien, classées par moment de l\'entretien. Suis cet ordre approximativement, sans le réciter : reformule librement, saute ce qui a déjà été abordé, et rebondis sur ce que le candidat vient de dire avec des relances improvisées avant de passer à la question suivante.\n\n' +
+                'Parle exclusivement en ' + langName + (niveau ? ' (niveau ' + niveau + ')' : '') + ', comme à l\'oral : une ou deux phrases, UNE seule question à la fois.\n\n' +
+                'Voici les questions réellement posées dans ce type d\'entretien, classées par moment de l\'entretien. Suis cet ordre approximativement, sans le réciter : reformule librement, saute ce qui a déjà été abordé, et rebondis sur ce que le candidat vient de dire avec des relances improvisées avant de passer à la question suivante. ' +
+                'Ces questions viennent d\'une transcription orale : certaines sont coupées en fin de phrase (complète-les naturellement) et les passages entre crochets comme [plaats] sont des blancs à remplacer par un détail plausible.\n\n' +
                 sections + '\n\n' +
-                'Tu ne connais pas les réponses du candidat à l\'avance : réagis à ce qu\'il dit réellement, comme un vrai recruteur. Ne corrige jamais son néerlandais et ne sors jamais de ton rôle. Quand les thèmes principaux ont été couverts, conclus l\'entretien naturellement.';
+                'Tu ne connais pas les réponses du candidat à l\'avance : réagis à ce qu\'il dit réellement, comme un vrai recruteur. Ne corrige jamais sa langue et ne sors jamais de ton rôle. Quand les thèmes principaux ont été couverts, conclus l\'entretien naturellement.';
+        }
+
+        // Langue d'un scénario réel : champ "langue" s'il existe, sinon "niveau" quand il vaut
+        // NL / EN (c'est ainsi que les premières banques l'indiquent), sinon néerlandais.
+        const RP_LANG_NAMES = { nl: 'néerlandais', en: 'anglais' };
+        function rpBankLang(bank) {
+            const raw = String(bank.langue || (/^(nl|en)$/i.test(bank.niveau || '') ? bank.niveau : 'nl')).toLowerCase();
+            return RP_LANG_NAMES[raw] ? raw : 'nl';
         }
 
         async function rpShowRealCandidateList() {
@@ -6839,7 +6860,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens réels</div>' +
                 '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens et improvise ses relances selon tes réponses.</p>' +
                 (banks.length
-                    ? banks.map((b, i) => `<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpExampleTag(b)}</button>`).join('')
+                    ? banks.map((b, i) => `<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`).join('')
                     : '<p style="color:#888;">Aucun scénario réel pour l\'instant.</p>');
         }
 
@@ -6849,6 +6870,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const firstQuestion = ((bank.questions || {}).accroche || [])[0];
             rpBeginScenario({
                 id: 'reel_' + bank.id,
+                lang: rpBankLang(bank),
                 label: bank.label,
                 welcome: bank.welcome || firstQuestion || 'Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?',
                 prompt: rpBuildRecruiterPrompt(bank)

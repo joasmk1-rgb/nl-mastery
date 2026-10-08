@@ -1,18 +1,128 @@
 {
-  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture). Mettre \"exemple\": true sur un scénario factice : il est alors signalé comme tel dans l'interface.",
+  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel ; NL ou EN = langue de l'entretien), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Utiliser 'bedrijf X' / 'entreprise X', des fonctions ('de HR-manager') ou des blancs entre crochets ([plaats], [bedrijf]) que le recruteur IA remplit lui-même.",
   "scenarios": [
     {
-      "id": "exemple_candidat",
-      "exemple": true,
-      "label": "Exemple de structure (à remplacer par une vraie transcription)",
-      "poste": "Transport Planner",
-      "contexte": "Scénario factice de trois questions, présent uniquement pour tester le moteur.",
-      "niveau": "B1",
-      "welcome": "Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?",
+      "id": "agence_transport_planning",
+      "label": "Appel agence — offres en transport planning",
+      "poste": "Transport Planner / Dispatcher administratif",
+      "contexte": "Appel avec une consultante d'agence d'intérim qui présente à la suite plusieurs offres dans différentes entreprises de la région.",
+      "niveau": "NL",
+      "welcome": "Dus je had gesolliciteerd op een vacature voor administratief bediende, planning, hè?",
       "questions": {
-        "accroche": ["Kunt u zich even kort voorstellen?"],
-        "motivation": ["Waarom heeft u voor deze functie gesolliciteerd?"],
-        "cloture": ["Heeft u zelf nog vragen voor ons?"]
+        "accroche": [
+          "Ik weet niet of je dat bedrijf al kent, of al gekend bent?",
+          "Ken je [bedrijf]?",
+          "Heb je al ooit met dat systeem gewerkt, of—"
+        ],
+        "clarification_poste": [
+          "Nu, naar functie toe: spreekt het jou aan?",
+          "Stel bijvoorbeeld dat het die functie niet werd, ze zoeken ook nog een andere rol — welke rol past het best bij jou?"
+        ],
+        "technique": [
+          "Heb je al ooit met Navision gewerkt?",
+          "Kennis van planningssystemen of TMS, is dat voor jou een probleem?"
+        ],
+        "objections": [
+          "In de meeste functies is dat wel een probleem — Nederlandstalige kandidaten die geen kennis van het Frans of Engels hebben. Hoe zie jij dat voor jezelf?"
+        ],
+        "dispo": [
+          "Is [plaats] voor jou een haalbare afstand?"
+        ],
+        "cloture": [
+          "Ik weet niet of je nog vraagjes hebt voor mij, of—"
+        ]
+      }
+    },
+    {
+      "id": "plant_manager_admin_logistics",
+      "label": "2e tour — Plant Manager (admin/logistique usine)",
+      "poste": "Administrative Support ou Logistics (réception matières premières)",
+      "contexte": "Deuxième tour d'entretien avec le plant manager, après un premier entretien avec le RH et son assistant. Deux postes ouverts à départager.",
+      "niveau": "EN",
+      "welcome": "I am the plant manager here. I believe you've already met with the HR manager and his assistant. So you passed their initial interview and now it's the next step.",
+      "questions": {
+        "accroche": [
+          "Did the HR manager and his assistant tell you about the positions that we have open?"
+        ],
+        "verif_cv": [
+          "You've got a good bit of logistics experience, and you just completed your master's, correct?"
+        ],
+        "clarification_poste": [
+          "We have two positions available. One is a more administrative function, and the other one is more tailored towards logistics. Is logistics more your primary interest?"
+        ],
+        "technique": [
+          "Are you comfortable with the basics of Excel, PowerPoint, Power BI?",
+          "Have you had any experience with SAP or an ERP system?"
+        ],
+        "motivation": [
+          "In all of your studies, what fascinated you the most?",
+          "Outside of work, forget all the things you have to do in life — what drives you? What wakes you up?"
+        ],
+        "vision_carriere": [
+          "Where do you see yourself growing in 5 years, or 10 years? Do you have a goal?"
+        ],
+        "objections": [
+          "I'll be honest with you — when I look at a master's degree, I think this position takes a step back. What are your thoughts on that?",
+          "Are you comfortable beginning on that level — strong data entry in the beginning?"
+        ],
+        "dispo": [
+          "When would you be able to start? Are you currently working somewhere?",
+          "Do you have other interviews lined up?"
+        ],
+        "cloture": [
+          "Do you have any questions? Of either the facility, the plant, anything?"
+        ]
+      }
+    },
+    {
+      "id": "stockage_frigorifique_logistiek_bediende",
+      "label": "Entreprise X — logistiek bediende (stockage frigorifique)",
+      "poste": "Logistiek bediende (onthaal chauffeurs, planning quais)",
+      "contexte": "Entretien entièrement en néerlandais dans une entreprise de stockage frigorifique de denrées alimentaires (pas de transport propre, uniquement de l'entreposage pour des clients).",
+      "niveau": "NL",
+      "welcome": "Voor onze functie van logistiek bediende. Ik stel voor dat we eens kijken welke ervaring je al hebt, wat je gedaan hebt, en ik ga jou dan ook uitleggen hoe wij hier werken.",
+      "questions": {
+        "accroche": [
+          "Heb je het makkelijk gevonden?",
+          "Jij bent nu voorgesteld voor onze functie van logistiek bediende."
+        ],
+        "verif_cv": [
+          "Jij woont in [plaats]. Is dat niet zo heel ver van hier?",
+          "Jij bent alleenstaand, of getrouwd, of...?",
+          "Mag ik eens vragen hoe oud jij bent?",
+          "Waarom ben je daar weggegaan?",
+          "Was dat eigenlijk enkel louter voor jouw stage?"
+        ],
+        "clarification_poste": [
+          "Mag ik je eens informeren: wat hebben zij jou precies uitgelegd over de functie?",
+          "Zoek je naar een combinatie van magazijnwerk en bureauwerk, of zeg je liever volledig administratief?"
+        ],
+        "technique": [
+          "En welk systeem hebben zij daar gebruikt?",
+          "Had jij al ervaring met een boekingssysteem of planningstool?"
+        ],
+        "motivation": [
+          "En waarom moest jij kiezen voor deze studierichting?"
+        ],
+        "vision_carriere": [
+          "Zoek je naar een specifieke sector, of zeg je: logistiek spreekt me wel aan, maar...?"
+        ],
+        "objections": [
+          "Hier op kantoor spreken wij onderling altijd in het Nederlands. Onze mensen op de werkvloer zijn eigenlijk allemaal Franstalig — mijn vrees is dat er heel wat informatie verloren gaat bij jou. Hoe sta jij daar tegenover?",
+          "Had mijn collega jou al uitgelegd dat dit in een ploegensysteem is?"
+        ],
+        "perso": [
+          "Heb je hobby's? Dingen die je in jouw vrije tijd doet?",
+          "Doe je dat in een vast verband, of is dat af en toe?"
+        ],
+        "dispo": [
+          "Heb je momenteel andere sollicitaties lopen, of is dit nu de enige?",
+          "Naar verwachting qua loon, heb je daar zelf al eens over nagedacht?"
+        ],
+        "cloture": [
+          "Is het voor jou een beetje duidelijk wie dat wij hier zijn, wat wij doen, wat wij verwachten van iemand in die job?",
+          "Ik weet niet of jij nog vragen hebt voor mij?"
+        ]
       }
     }
   ]

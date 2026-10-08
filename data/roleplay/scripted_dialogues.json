@@ -1,21 +1,87 @@
 {
-  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase réellement dite par le recruteur dans la transcription = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). Mettre \"exemple\": true sur un scénario factice : il est alors signalé comme tel dans l'interface.",
+  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase dite par le recruteur = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Les phrases étant affichées telles quelles, pas de blancs entre crochets ici : utiliser 'bedrijf X' / 'entreprise X' et des lieux ou âges pris au hasard.",
   "scenarios": [
     {
-      "id": "exemple_intervieweur",
-      "exemple": true,
-      "label": "Exemple de structure (à remplacer par une vraie transcription)",
-      "contexte": "Dialogue factice de deux tours, présent uniquement pour tester le moteur.",
+      "id": "agence_transport_planning",
+      "label": "Appel agence — offres en transport planning",
+      "contexte": "Tu es la consultante d'une agence d'intérim qui présente des offres de transport planning à un candidat et évalue sa pertinence pour plusieurs postes.",
       "turns": [
         {
-          "nl_original": "Goedendag, fijn dat u er bent. Kunt u zich even kort voorstellen?",
-          "fr_cue": "Bonjour, content que vous soyez là. Pouvez-vous vous présenter brièvement ?",
-          "candidate_reply": "Goedendag. Ik ben afgestudeerd in logistiek en ik werk sinds twee jaar als planner."
+          "nl_original": "Heb je al ooit met Navision gewerkt, of—",
+          "fr_cue": "As-tu déjà travaillé avec Navision ?",
+          "candidate_reply": "Nee. Nee, maar ik heb met verschillende software gewerkt die een beetje zoals Navision werkt."
         },
         {
-          "nl_original": "Waarom heeft u voor deze functie gesolliciteerd?",
-          "fr_cue": "Pourquoi avez-vous postulé pour cette fonction ?",
-          "candidate_reply": "Omdat ik graag meer verantwoordelijkheid wil nemen in de planning."
+          "nl_original": "Nu, naar functie toe: spreekt het jou aan?",
+          "fr_cue": "Bon, pour ce qui est de la fonction : est-ce que ça t'intéresse ?",
+          "candidate_reply": "Ja. Totaal. Het is precies wat ik zou doen."
+        },
+        {
+          "nl_original": "Is Mechelen voor jou een haalbare afstand?",
+          "fr_cue": "Est-ce que Mechelen est à une distance faisable pour toi ?",
+          "candidate_reply": "Mechelen met de auto, ja. Ja, Mechelen, dat kan."
+        },
+        {
+          "nl_original": "Ken je bedrijf X?",
+          "fr_cue": "Tu connais l'entreprise X ?",
+          "candidate_reply": "Nee. Bedrijf X, nee."
+        },
+        {
+          "nl_original": "Heb je momenteel andere sollicitaties lopen, of is dit nu de enige?",
+          "fr_cue": "As-tu d'autres candidatures en cours actuellement, ou c'est la seule pour le moment ?",
+          "candidate_reply": "Ik heb gewoon twee sollicitaties in het proces nu."
+        },
+        {
+          "nl_original": "Ik weet niet of je nog vraagjes hebt voor mij, of—",
+          "fr_cue": "Je ne sais pas si tu as encore des petites questions pour moi ?",
+          "candidate_reply": "Nee, niet echt."
+        }
+      ]
+    },
+    {
+      "id": "stockage_frigorifique_logistiek_bediende",
+      "label": "Entreprise X — logistiek bediende",
+      "contexte": "Tu es la recruteuse d'une entreprise de stockage frigorifique de denrées alimentaires (entreprise X) et tu reçois un candidat pour le poste de logistiek bediende.",
+      "turns": [
+        {
+          "nl_original": "Jij bent alleenstaand, of getrouwd, of...",
+          "fr_cue": "Tu es célibataire, ou marié, ou...",
+          "candidate_reply": "Nee, alleenstaand."
+        },
+        {
+          "nl_original": "Mag ik eens vragen hoe oud jij bent?",
+          "fr_cue": "Je peux te demander quel âge tu as ?",
+          "candidate_reply": "Ik ben 31."
+        },
+        {
+          "nl_original": "En waarom ben je daar weggegaan?",
+          "fr_cue": "Et pourquoi es-tu parti de là-bas ?",
+          "candidate_reply": "Het is gewoon dat het niet zo mijn richting was van mijn studie."
+        },
+        {
+          "nl_original": "En welk systeem hebben zij daar?",
+          "fr_cue": "Et quel système utilisaient-ils là-bas ?",
+          "candidate_reply": "Het was een custom, zelf ERP dat ze gebruikten."
+        },
+        {
+          "nl_original": "Heb je hobby's? Dingen dat je in jouw vrije tijd doet?",
+          "fr_cue": "Tu as des hobbies ? Des choses que tu fais pendant ton temps libre ?",
+          "candidate_reply": "Ik doe sport. Veel sporten. Lopen, fietsen, zwemmen."
+        },
+        {
+          "nl_original": "Heb je momenteel andere sollicitaties lopen, of is dit nu de enige?",
+          "fr_cue": "As-tu d'autres candidatures en cours en ce moment, ou c'est la seule ?",
+          "candidate_reply": "Ik heb gewoon twee sollicitaties."
+        },
+        {
+          "nl_original": "Naar verwachting qua loon, heb je daar zelf al eens over nagedacht?",
+          "fr_cue": "Côté attentes salariales, tu y as déjà réfléchi toi-même ?",
+          "candidate_reply": "Ik heb dat niet echt, alleé, geen aandacht. Voor mij is ervaring het meest belangrijk."
+        },
+        {
+          "nl_original": "Is het voor jou een beetje duidelijk wie dat wij hier zijn, wat wij doen, wat wij verwachten van iemand in die job?",
+          "fr_cue": "Est-ce que c'est un peu clair pour toi, qui nous sommes, ce qu'on fait, ce qu'on attend de quelqu'un dans ce poste ?",
+          "candidate_reply": "Ja. Ik ben niet bang. Ik versta alles dat je uitlegt."
         }
       ]
     }
