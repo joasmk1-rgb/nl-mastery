@@ -396,7 +396,7 @@
                 <div class="rp-group-title">💼 Entretiens</div>
                 <div class="rp-category-grid" style="margin-top:0;">
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">De vraies questions d'entretien, le recruteur improvise</div></div>
-                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🎙️</span>Je suis recruteur<div class="cat-sub">Traduction guidée d'un vrai dialogue</div></div>
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🇫🇷</span>Traduction guidée<div class="cat-sub">On te donne la phrase en français, tu la dis en néerlandais (tu joues le recruteur)</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowCaseHome()"><span class="rp-icon">📊</span>Étude de cas<div class="cat-sub">Un petit problème d'entreprise à résoudre et à défendre</div></div>
                     <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens types<div class="cat-sub">Présélection, technique, final</div></div>
                 </div>
@@ -432,6 +432,10 @@
             <div id="rp-text-row">
                 <input type="text" id="rp-text-input" placeholder="...ou écris ta réponse en néerlandais" autocomplete="off" autocapitalize="off" spellcheck="false" style="margin:0;" onkeypress="if(event.key==='Enter') rpSendTypedMessage()">
                 <button class="btn btn-green" style="margin:0; width:auto;" onclick="rpSendTypedMessage()">Envoyer</button>
+            </div>
+            <div id="rp-help-row">
+                <button type="button" class="rp-coach-btn" onclick="rpHelpSuggest()">💡 Je ne sais pas quoi dire</button>
+                <button type="button" class="rp-coach-btn" onclick="rpHelpFrench()">🇫🇷 Je le dis en français</button>
             </div>
             <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
             <div id="rp-day-nav" style="display:none;"></div>

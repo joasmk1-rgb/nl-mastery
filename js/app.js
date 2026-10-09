@@ -6667,6 +6667,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (micBtn) micBtn.style.display = 'none';
             const textRow = document.getElementById('rp-text-row');
             if (textRow) textRow.style.display = 'none';
+            const helpRow = document.getElementById('rp-help-row');
+            if (helpRow) helpRow.style.display = 'none';
 
             const banner = document.getElementById('rp-mode-banner');
             if (banner) {
@@ -6868,6 +6870,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (rpIsRecording) {
                 rpRecognition.stop();
             } else {
+                // La dictée suit la langue du scénario (une dictée en français de l'aide ou la
+                // Production orale ont pu la changer entre-temps).
+                rpRecognition.lang = (rpCurrentScenario && rpCurrentScenario.lang === 'en') ? 'en-US' : 'nl-NL';
                 try {
                     rpFinalTranscript = '';
                     rpRecognition.start();
@@ -6881,7 +6886,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Réutilisation générique de la reconnaissance vocale existante (rpRecognition) en dehors
         // du jeu de rôle, par exemple pour la Production orale. Ne crée pas un second moteur de
         // reconnaissance vocale : repointe seulement les ids d'affichage et le callback de fin.
-        function productionToggleVoiceCapture(btnId, statusId, onFinalTranscript) {
+        function productionToggleVoiceCapture(btnId, statusId, onFinalTranscript, lang) {
             if (!window.SpeechRecognition) {
                 alert("Ton navigateur ne supporte pas la reconnaissance vocale. Utilise Google Chrome.");
                 return;
@@ -6897,6 +6902,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             activeVoiceBtnId = btnId;
             activeVoiceStatusId = statusId;
             voiceTranscriptCallback = onFinalTranscript;
+            rpRecognition.lang = lang || 'nl-NL';
             try {
                 rpFinalTranscript = '';
                 rpRecognition.start();
@@ -6917,7 +6923,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpStopRecordingUI() {
             rpIsRecording = false;
             const btn = document.getElementById(activeVoiceBtnId);
-            if (btn) { btn.classList.remove('recording'); btn.innerText = "🎤 Cliquer pour parler"; }
+            if (btn) { btn.classList.remove('recording'); btn.innerText = activeVoiceBtnId === 'rp-help-mic-btn' ? '🎤' : "🎤 Cliquer pour parler"; }
             const st = document.getElementById(activeVoiceStatusId);
             if (st) st.innerText = "Prêt";
         }
@@ -7092,6 +7098,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (micBtn) micBtn.style.display = '';
             const textRow = document.getElementById('rp-text-row');
             if (textRow) textRow.style.display = 'flex';
+            const helpRow = document.getElementById('rp-help-row');
+            if (helpRow) helpRow.style.display = 'flex';
             rpCoachClear();
             rpHideInterviewer();
             rpJobHideNav();
@@ -7199,6 +7207,190 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 body.innerText = 'Correction impossible : ' + e.message;
             }
             panel.scrollIntoView({ block: 'nearest' });
+        }
+
+        // ----- Aide pendant la conversation : "Je ne sais pas quoi dire" / "Je le dis en français" -----
+        // Quatrième usage de Gemini, lui aussi séparé des trois autres : un souffleur. Il voit la
+        // fin de la conversation (pour proposer une réponse qui colle) mais ne parle jamais à la
+        // place de l'apprenant : la phrase proposée est placée dans la zone de texte, à lui de la
+        // dire ou de l'envoyer. Affichage dans le même encart que la correction.
+        function rpHelpAvailable() {
+            if (!rpCurrentScenario || rpScriptedActive) return false;
+            if (!GeminiService.getKey()) {
+                alert("Renseigne d'abord ta clé API Gemini dans Profil → 🤖 Intelligence IA.");
+                return false;
+            }
+            return true;
+        }
+
+        function rpHelpOpenPanel(titleText) {
+            const panel = document.getElementById('rp-coach-panel');
+            panel.style.display = 'block';
+            panel.innerHTML = '';
+            const title = document.createElement('div');
+            title.className = 'rp-coach-title';
+            title.innerText = titleText;
+            const body = document.createElement('div');
+            body.className = 'rp-help-body';
+            panel.append(title, body);
+            return body;
+        }
+
+        // Les derniers échanges, sans le prompt de rôle (premier élément de l'historique).
+        function rpHelpTranscript() {
+            const turns = rpConversationHistory.slice(1).slice(-6);
+            const lines = turns.map(t => (t.role === 'user' ? 'Apprenant : ' : 'Interlocuteur : ') + t.parts[0].text);
+            if (rpConversationHistory.length <= 1 && rpCurrentScenario.welcome) lines.push('Interlocuteur : ' + rpCurrentScenario.welcome);
+            return lines.join('\n');
+        }
+
+        function rpHelpParseJson(text) {
+            const m = String(text).match(/[\[{][\s\S]*[\]}]/);
+            if (!m) return null;
+            try { return JSON.parse(m[0]); } catch (e) { return null; }
+        }
+
+        function rpHelpPhraseCard(phrase, fr) {
+            const card = document.createElement('div');
+            card.className = 'rp-help-card';
+            const main = document.createElement('div');
+            main.className = 'rp-help-phrase';
+            main.innerText = phrase;
+            card.appendChild(main);
+            if (fr) {
+                const sub = document.createElement('div');
+                sub.className = 'rp-help-fr';
+                sub.innerText = fr;
+                card.appendChild(sub);
+            }
+            const actions = document.createElement('div');
+            actions.className = 'rp-help-actions';
+            const listen = document.createElement('button');
+            listen.type = 'button';
+            listen.className = 'rp-coach-btn';
+            listen.innerText = '🔊 Écouter';
+            listen.onclick = () => rpSpeakText(phrase);
+            const use = document.createElement('button');
+            use.type = 'button';
+            use.className = 'rp-coach-btn';
+            use.innerText = '✏️ Mettre dans ma réponse';
+            use.onclick = () => {
+                const input = document.getElementById('rp-text-input');
+                input.value = phrase;
+                input.focus();
+            };
+            actions.append(listen, use);
+            card.appendChild(actions);
+            return card;
+        }
+
+        async function rpHelpSuggest() {
+            if (!rpHelpAvailable()) return;
+            const body = rpHelpOpenPanel('💡 Ce que tu pourrais dire');
+            body.innerText = 'Je cherche des idées...';
+            const langName = RP_LANG_NAMES[rpCurrentScenario.lang || 'nl'];
+            try {
+                const raw = await GeminiService.generate(
+                    'Tu es le souffleur d\'un francophone qui apprend le ' + langName + ' et s\'exerce dans un jeu de rôle. Situation : ' + rpCurrentScenario.label + '.\n' +
+                    'Derniers échanges :\n"""' + rpHelpTranscript() + '"""\n\n' +
+                    'Il ne sait pas quoi répondre à la dernière réplique de son interlocuteur. Propose 3 réponses possibles en ' + langName + ', différentes par leur contenu (pas trois variantes de la même phrase), courtes (1 à 2 phrases), naturelles à l\'oral, niveau A2-B1. ' +
+                    'N\'invente pas de faits précis sur sa vie : reste général ou laisse un blanc entre crochets.\n' +
+                    'Réponds UNIQUEMENT par un tableau JSON, sans texte autour : [{"phrase":"réponse en ' + langName + '","fr":"traduction française"}]'
+                );
+                const list = rpHelpParseJson(raw);
+                body.innerHTML = '';
+                if (Array.isArray(list) && list.length) {
+                    list.slice(0, 3).forEach(s => { if (s && s.phrase) body.appendChild(rpHelpPhraseCard(String(s.phrase), s.fr ? String(s.fr) : '')); });
+                }
+                if (!body.children.length) body.innerText = stripMarkdown(raw);
+            } catch (e) {
+                body.innerText = 'Aide impossible : ' + e.message;
+            }
+            document.getElementById('rp-coach-panel').scrollIntoView({ block: 'nearest' });
+        }
+
+        function rpHelpFrench() {
+            if (!rpHelpAvailable()) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            const langName = RP_LANG_NAMES[rpCurrentScenario.lang || 'nl'];
+            const body = rpHelpOpenPanel('🇫🇷 Dis-le en français, je te donne le ' + langName);
+            const row = document.createElement('div');
+            row.className = 'rp-help-input-row';
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = 'rp-help-fr-input';
+            input.placeholder = 'Ce que tu veux dire, en français';
+            input.autocomplete = 'off';
+            input.onkeypress = (ev) => { if (ev.key === 'Enter') rpHelpTranslate(); };
+            const mic = document.createElement('button');
+            mic.type = 'button';
+            mic.id = 'rp-help-mic-btn';
+            mic.className = 'btn';
+            mic.innerText = '🎤';
+            mic.onclick = rpHelpFrenchDictate;
+            const go = document.createElement('button');
+            go.type = 'button';
+            go.className = 'btn btn-green';
+            go.innerText = 'Traduire';
+            go.onclick = rpHelpTranslate;
+            row.append(input, mic, go);
+            const status = document.createElement('div');
+            status.id = 'rp-help-status';
+            status.className = 'rp-help-fr';
+            const result = document.createElement('div');
+            result.id = 'rp-help-result';
+            body.append(row, status, result);
+            document.getElementById('rp-coach-panel').scrollIntoView({ block: 'nearest' });
+            input.focus();
+        }
+
+        // Dictée en français : même moteur de reconnaissance, langue changée le temps de la
+        // capture (rpToggleSpeechRecognition remet la langue du scénario à chaque écoute).
+        function rpHelpFrenchDictate() {
+            const wasRecording = rpIsRecording;
+            productionToggleVoiceCapture('rp-help-mic-btn', 'rp-help-status', (text) => {
+                const input = document.getElementById('rp-help-fr-input');
+                if (!input) return;
+                input.value = text;
+                rpHelpTranslate();
+            }, 'fr-FR');
+            const mic = document.getElementById('rp-help-mic-btn');
+            const status = document.getElementById('rp-help-status');
+            if (!wasRecording && rpIsRecording) {
+                if (mic) mic.innerText = '🛑';
+                if (status) status.innerText = 'Parle en français...';
+            }
+        }
+
+        async function rpHelpTranslate() {
+            const input = document.getElementById('rp-help-fr-input');
+            const result = document.getElementById('rp-help-result');
+            const status = document.getElementById('rp-help-status');
+            const mic = document.getElementById('rp-help-mic-btn');
+            if (mic) mic.innerText = '🎤'; // rpStopRecordingUI y remet le libellé long du micro principal
+            if (!input || !result) return;
+            const text = input.value.trim();
+            if (!text) return;
+            const langName = RP_LANG_NAMES[rpCurrentScenario.lang || 'nl'];
+            if (status) status.innerText = 'Traduction...';
+            result.innerHTML = '';
+            try {
+                const raw = await GeminiService.generate(
+                    'Un francophone qui apprend le ' + langName + ' s\'exerce dans un jeu de rôle. Situation : ' + rpCurrentScenario.label + '.\n' +
+                    'Derniers échanges :\n"""' + rpHelpTranscript() + '"""\n\n' +
+                    'Il veut répondre ceci, qu\'il a formulé en français : """' + text + '"""\n' +
+                    'Donne la façon naturelle de le dire en ' + langName + ', à l\'oral, avec le registre qui convient à la situation, sans rien ajouter à son idée. ' +
+                    'Ajoute une remarque d\'une phrase en français sur LE mot ou la tournure à retenir.\n' +
+                    'Réponds UNIQUEMENT en JSON, sans texte autour : {"phrase":"...","note":"..."}'
+                );
+                const obj = rpHelpParseJson(raw);
+                if (status) status.innerText = '';
+                if (obj && obj.phrase) result.appendChild(rpHelpPhraseCard(String(obj.phrase), obj.note ? '💬 ' + String(obj.note) : ''));
+                else result.innerText = stripMarkdown(raw);
+            } catch (e) {
+                if (status) status.innerText = 'Traduction impossible : ' + e.message;
+            }
+            document.getElementById('rp-coach-panel').scrollIntoView({ block: 'nearest' });
         }
 
         // ----- Chargement des données -----
@@ -7322,8 +7514,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('rp-step-scenario').style.display = '';
             document.getElementById('rp-step-chat').style.display = 'none';
             const { dialogues } = await rpLoadRealData();
-            listDiv.innerHTML = '<div class="rp-group-title">🎙️ Je suis recruteur — traduction guidée</div>' +
-                '<p class="rp-real-hint">Tu joues le recruteur d\'un vrai entretien : on te donne la phrase en français, tu la dis en néerlandais.</p>' +
+            listDiv.innerHTML = '<div class="rp-group-title">🇫🇷 Traduction guidée — français → néerlandais</div>' +
+                '<p class="rp-real-hint">On te donne la phrase en français, tu la dis en néerlandais. Tu joues le recruteur d\'un vrai entretien.</p>' +
                 (dialogues.length
                     ? dialogues.map((d, i) => `<button class="rp-scenario-btn" onclick="rpIvStart(${i})">${rpEscapeHtml(d.label)} <span style="color:var(--text-secondary); font-weight:normal;">· ${(d.turns || []).length} tours</span>${rpExampleTag(d)}</button>`).join('')
                     : '<p style="color:#888;">Aucun dialogue pour l\'instant.</p>');
