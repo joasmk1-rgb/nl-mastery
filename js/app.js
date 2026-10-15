@@ -7450,6 +7450,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 'Voici les questions réellement posées dans ce type d\'entretien, classées par moment de l\'entretien. Suis cet ordre approximativement, sans le réciter : reformule librement, saute ce qui a déjà été abordé, et rebondis sur ce que le candidat vient de dire avec des relances improvisées avant de passer à la question suivante. ' +
                 'Ces questions viennent d\'une transcription orale : certaines sont coupées en fin de phrase (complète-les naturellement) et les passages entre crochets comme [plaats] sont des blancs à remplacer par un détail plausible.\n\n' +
                 sections + '\n\n' +
+                (Array.isArray(bank.vocabulaire) && bank.vocabulaire.length
+                    ? 'Le candidat révise le vocabulaire du poste : emploie naturellement ces mots dans tes questions et tes relances, surtout pour parler des tâches concrètes : ' + bank.vocabulaire.join(', ') + '.\n\n'
+                    : '') +
                 'Tu ne connais pas les réponses du candidat à l\'avance : réagis à ce qu\'il dit réellement, comme un vrai recruteur. Ne corrige jamais sa langue et ne sors jamais de ton rôle. Quand les thèmes principaux ont été couverts, conclus l\'entretien naturellement.';
         }
 
@@ -7492,6 +7495,18 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 // recruteur pour qu'il enchaîne au lieu de se présenter une deuxième fois.
                 prompt: rpBuildRecruiterPrompt(bank) + '\n\nTu as déjà ouvert l\'entretien en disant : """' + welcome + '""" — enchaîne à partir de la réponse du candidat, sans te présenter à nouveau.'
             });
+            // Pense-bête affiché pendant l'entretien : mots du poste et phrases de secours.
+            const vocab = Array.isArray(bank.vocabulaire) ? bank.vocabulaire : [];
+            const bequilles = Array.isArray(bank.bequilles) ? bank.bequilles : [];
+            if (vocab.length || bequilles.length) {
+                const banner = document.getElementById('rp-mode-banner');
+                banner.style.display = '';
+                banner.innerHTML = `
+                    <div class="rp-job-banner">
+                        ${vocab.length ? `<details><summary>📝 Mots du poste (${vocab.length})</summary><div class="rp-bank-vocab">${vocab.map(rpEscapeHtml).join(' · ')}</div></details>` : ''}
+                        ${bequilles.length ? `<details><summary>🛟 Phrases de secours</summary><ul class="rp-case-figures">${bequilles.map(b => `<li>${rpEscapeHtml(b)}</li>`).join('')}</ul></details>` : ''}
+                    </div>`;
+            }
         }
 
         // ----- Mode Intervieweur : exercice de traduction guidé sur un dialogue scripté -----

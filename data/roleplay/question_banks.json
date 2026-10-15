@@ -1,5 +1,5 @@
 {
-  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel ; NL ou EN = langue de l'entretien), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Utiliser des noms d'entreprise inventés (Logistiko, Transvio, Delmaro...), des fonctions ('de HR-manager') ou des blancs entre crochets ([plaats], [bedrijf]) que le recruteur IA remplit lui-même.",
+  "_doc": "Banques de questions du mode Candidat (jeu de rôle, scénarios réels). Chaque scénario ne contient QUE des questions à poser, jamais de réponses attendues : le recruteur IA improvise ses relances. Champs : id (unique), label (affiché dans la liste), poste, contexte (optionnel), niveau (optionnel ; NL ou EN = langue de l'entretien), welcome (optionnel : première phrase du recruteur ; à défaut, la première question d'accroche), questions (par type : accroche, verif_cv, clarification_poste, technique, motivation, vision_carriere, objections, perso, dispo, cloture), vocabulaire (optionnel : mots du poste, que le recruteur emploie et que l'app affiche en pense-bête), bequilles (optionnel : phrases de secours affichées pendant l'entretien). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Utiliser des noms d'entreprise inventés (Logistiko, Transvio, Delmaro...), des fonctions ('de HR-manager') ou des blancs entre crochets ([plaats], [bedrijf]) que le recruteur IA remplit lui-même.",
   "scenarios": [
     {
       "id": "agence_transport_planning",
@@ -159,6 +159,65 @@
           "Ik weet niet of jij nog vragen hebt voor mij?"
         ]
       }
+    },
+    {
+      "id": "zonnewering_ondersteuning_productie",
+      "label": "Zonvella — administratieve ondersteuning productie",
+      "_source": "Questions formulées à partir d'une fiche de préparation de Joas (pas d'une transcription d'entretien).",
+      "poste": "Administratieve ondersteuning Productie (encodage des données de production, kanban, manquants, ordres de production)",
+      "contexte": "Tu es le responsable de production de Zonvella, fabricant familial belge de protection solaire (luifels, screens, pergolas à lames). Le poste : encoder les données de production et les KPI, suivre les cartes kanban et de réapprovisionnement, ajuster les priorités en cas de manquants, analyser les causes des manquants (pièces absentes, données ou quantités erronées), traiter les ordres de production et suivre le flux de production des luifels. Profil : expérience administrative, O365, ERP est un plus, néerlandais avec connaissance du français, précision et ponctualité. Le candidat a déjà travaillé chez Zonvella en préparation de commandes. Pose une ou deux questions à la fois au maximum et reste à un niveau B1 : phrases courtes, vocabulaire simple.",
+      "niveau": "B1",
+      "welcome": "Goedemorgen, welkom bij Zonvella. Ik ben de productieleider. Kunt u zich eerst even kort voorstellen?",
+      "questions": {
+        "accroche": [
+          "Kunt u zich even kort voorstellen?",
+          "Heeft u ons gemakkelijk gevonden?"
+        ],
+        "verif_cv": [
+          "Ik zie op uw cv dat u hier vroeger al gewerkt hebt. Wat deed u toen precies?",
+          "Wat deed u in uw vorige job in het magazijn? En welk administratief werk deed u daar?",
+          "Met welke programma's werkt u? Excel, Outlook, een ERP-systeem?"
+        ],
+        "clarification_poste": [
+          "Wat weet u al over deze functie?",
+          "Wat weet u over onze producten?"
+        ],
+        "technique": [
+          "Weet u wat een kanbankaart is? Hoe werkt dat volgens u?",
+          "Er ontbreken onderdelen voor een productieorder. Wat doet u?",
+          "Hoe zoekt u de oorzaak van een tekort? Wat kan er allemaal fout gaan?",
+          "Welke KPI's zou u in een productie opvolgen?",
+          "Hoe controleert u of de gegevens die u ingeeft juist zijn?",
+          "Vertel eens over een moment waarop iets niet goed liep tussen twee ploegen. Wat heeft u toen gedaan?"
+        ],
+        "motivation": [
+          "Waarom solliciteert u voor deze functie?",
+          "U werkte vroeger op de werkvloer. Waarom wilt u nu een administratieve functie?"
+        ],
+        "objections": [
+          "Bij ons is de voertaal Nederlands. Hoe goed is uw Nederlands?",
+          "Wat doet u als u iets niet begrijpt van een collega op de werkvloer?"
+        ],
+        "dispo": [
+          "De werkuren zijn van acht tot half vijf. In het hoogseizoen, van maart tot juli, beginnen we om zeven uur, met soms overuren en zaterdagen. Is dat een probleem voor u?",
+          "Wanneer kunt u beginnen?"
+        ],
+        "cloture": [
+          "Heeft u zelf nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "de productiegegevens", "de KPI's ingeven", "de kanbankaart", "de bijvulkaart", "het tekort", "de oorzaak analyseren",
+        "de prioriteiten bijsturen", "het productieorder", "de luifel", "het screen", "de pergola", "de lamellen",
+        "de productieleiding", "de werkvloer", "de ploeg", "nauwkeurig", "stipt", "flexibel", "overuren", "het hoogseizoen",
+        "de voorraad", "de onderdelen", "verkeerde aantallen", "inboeken", "opvolgen", "controleren"
+      ],
+      "bequilles": [
+        "Sorry, kunt u dat iets langzamer herhalen?",
+        "Een moment, ik zoek even het juiste woord.",
+        "Als ik het goed begrijp, bedoelt u...",
+        "Dat weet ik niet, maar dat zoek ik graag op."
+      ]
     }
   ]
 }

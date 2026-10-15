@@ -196,6 +196,7 @@
         .rp-job-banner details { margin-top: 6px; font-size: 0.8rem; color: var(--text-secondary); }
         .rp-job-banner summary { cursor: pointer; font-weight: 600; }
         #rp-mode-banner { max-width: 520px; }
+        .rp-bank-vocab { font-size: 0.85rem; line-height: 1.6; margin-top: 6px; }
         #rp-day-nav { width: 100%; max-width: 520px; margin-top: 12px; }
         .rp-debrief-item { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; text-align: left; }
         .rp-debrief-sub { font-size: 0.8rem; color: var(--text-secondary); }
