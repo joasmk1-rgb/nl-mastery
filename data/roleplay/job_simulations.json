@@ -1,5 +1,5 @@
 {
-  "_doc": "Banque de situations atomiques + journées composées pour le mode 'mise en situation métier' (distinct du mode Candidat et du mode Intervieweur). Générique tous métiers via le champ metier : seul 'logistique' est rempli pour l'instant, la structure accueille data analyst / agent de banque / agent communal etc. sans redesign quand du contenu réel arrivera. Chaque situation : canal (guichet_chauffeur, telephone_client, collegue_interne, email), type (administratif, probleme_document, urgence, reclamation, proposition_solution, negociation), contexte, amorce (première ligne dite par le PNJ — le modèle improvise ensuite librement, jamais de réponse attendue), vocabulaire_cible, source (entretien_1/2/3 = tiré des vraies transcriptions, invente_realiste = situation plausible ajoutée pour compléter la couverture). Une 'journee' compose une séquence de situations existantes par id, sans jamais dupliquer leur contenu. Prompts à ne jamais mélanger : rpBuildSituationPrompt (une situation isolée), rpComposeDay (enchaînement d'une journée), rpDayDebrief (bilan de fin de journée : vocabulaire récurrent, moments de blocage, formulation correcte proposée après coup — jamais pendant, pour ne pas casser le rythme).",
+  "_doc": "Banque de situations atomiques + journées composées pour le mode 'mise en situation métier' (distinct du mode Candidat et du mode Intervieweur). Générique tous métiers via le champ metier : seul 'logistique' est rempli pour l'instant, la structure accueille data analyst / agent de banque / agent communal etc. sans redesign quand du contenu réel arrivera. Chaque situation : canal (guichet_chauffeur, telephone_client, collegue_interne, email, picking_zone), type (administratif, probleme_document, urgence, reclamation, proposition_solution, negociation, retour), contexte, amorce (première ligne dite par le PNJ — le modèle improvise ensuite librement, jamais de réponse attendue), vocabulaire_cible, source (entretien_1/2/3 = tiré des vraies transcriptions, invente_realiste = situation plausible ajoutée pour compléter la couverture, recherche_<entreprise> = construite à partir d'une recherche sur une entreprise réelle, pas d'une transcription). Champ optionnel 'entreprise' : nom d'entreprise INVENTÉ (Logistiko Frost, Logistiko Retail...) quand la situation est spécifique à un contexte (entrepôt sous douane, retail e-commerce...), absent si la situation est générique au métier. Dépôt public : jamais de nom réel d'entreprise ni de logiciel interne. Une 'journee' compose une séquence de situations existantes par id, sans jamais dupliquer leur contenu. Prompts à ne jamais mélanger : rpBuildSituationPrompt (une situation isolée), rpComposeDay (enchaînement d'une journée), rpDayDebrief (bilan de fin de journée : vocabulaire récurrent, moments de blocage, formulation correcte proposée après coup — jamais pendant, pour ne pas casser le rythme). IMPORTANT : fichier reconstruit le 2026-10-09 après une perte de modifications (probable git checkout écrasant des changements non commités) — committer après toute édition pour éviter que ça se reproduise.",
   "situations": [
     {
       "id": "guichet_chauffeur_doc_manquant",
@@ -60,6 +60,175 @@
       "amorce": "Dus zoals ik zei, het gaat over kaai 3, niet kaai 4 — hoorde je dat goed?",
       "vocabulaire_cible": ["kan je dat herhalen", "ik heb het niet goed verstaan", "lawaai"],
       "source": "entretien_3"
+    },
+    {
+      "id": "frost_document_t1",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "guichet_chauffeur",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Un chauffeur arrive avec une marchandise provenant de hors Union Européenne, à stocker dans la partie entrepôt sous douane. Il présente un document T1 (marchandise circulant sous surveillance douanière, pas encore dédouanée).",
+      "amorce": "Hier is mijn T1-document voor deze lading, die komt van buiten de EU.",
+      "vocabulaire_cible": ["douane-entrepot", "T1-document", "niet gedestineerd", "rechten en btw"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "frost_document_t2",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "guichet_chauffeur",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Un chauffeur arrive avec une marchandise déjà dédouanée, qui a le statut communautaire et circule librement dans l'UE. Document T2.",
+      "amorce": "Dit is een T2-document, de goederen hebben al communautair statuut.",
+      "vocabulaire_cible": ["T2-document", "communautair statuut", "vrij verkeer binnen de EU"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "frost_document_veterinaire",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "guichet_chauffeur",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Le chauffeur transporte un produit alimentaire d'origine animale, qui nécessite un certificat vétérinaire en plus de la CMR.",
+      "amorce": "Ik heb ook het veterinair certificaat bij, het gaat om een product van dierlijke oorsprong.",
+      "vocabulaire_cible": ["veterinair certificaat", "dierlijke oorsprong", "sanitaire controle", "CMR"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "frost_wms_localisation",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Un collègue te demande de localiser une palette précise dans le WMS (le logiciel de gestion d'entrepôt utilisé par l'entreprise).",
+      "amorce": "Kan je in het WMS even opzoeken waar de pallet van [klant] precies staat?",
+      "vocabulaire_cible": ["WMS opzoeken", "pallet lokaliseren", "voorraad"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "frost_tms_planning_transport",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Un collègue te demande de vérifier dans le TMS l'heure d'arrivée prévue d'un transport.",
+      "amorce": "Kan je in het TMS checken wanneer die vrachtwagen hier verwacht wordt?",
+      "vocabulaire_cible": ["TMS raadplegen", "verwachte aankomst", "transport opvolgen"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "frost_edi_probleme_synchro",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "NL",
+      "contexte": "Une commande client envoyée par échange électronique de données (EDI) ne s'est pas synchronisée correctement dans le système.",
+      "amorce": "De EDI-bestelling van [klant] is niet goed binnengekomen, kan je dat even nakijken?",
+      "vocabulaire_cible": ["EDI-bestelling", "synchronisatie", "nakijken"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "frost_licence_export_controle",
+      "metier": "logistique",
+      "poste": "logistiek bediende",
+      "entreprise": "Logistiko Frost",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Avant qu'un camion ne quitte le site pour une destination hors UE, tu dois vérifier que la licence/vergunning d'exportation est bien en règle.",
+      "amorce": "Voor deze lading naar buiten de EU, hebben we de exportvergunning al in orde?",
+      "vocabulaire_cible": ["exportvergunning", "in orde brengen", "controleren voor vertrek"],
+      "source": "recherche_logistiko_frost"
+    },
+    {
+      "id": "retail_pick_ecommerce_client",
+      "metier": "logistique",
+      "poste": "logistiek medewerker (retail mode, e-commerce)",
+      "entreprise": "Logistiko Retail",
+      "canal": "picking_zone",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Tu prépares une commande e-commerce individuelle (B2C) pour un client, mais une référence manque dans le rayon.",
+      "amorce": "Volgens het systeem moet hier nog één paar sneakers liggen, maat 42, maar ik vind niets.",
+      "vocabulaire_cible": ["voorraad nakijken", "ontbrekend artikel", "systeem melden", "maat"],
+      "source": "recherche_logistiko_retail"
+    },
+    {
+      "id": "retail_carton_reassort_magasin",
+      "metier": "logistique",
+      "poste": "logistiek medewerker (retail mode, e-commerce)",
+      "entreprise": "Logistiko Retail",
+      "canal": "picking_zone",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Tu prépares un carton de réassortiment pour un magasin (flux B2B, gros volume, par carton plutôt qu'à la pièce).",
+      "amorce": "Voor deze winkel moeten we een volledige doos met twintig paar klaarmaken voor morgen.",
+      "vocabulaire_cible": ["doos klaarmaken", "winkel bevoorraden", "volume", "heraanvulling"],
+      "source": "recherche_logistiko_retail"
+    },
+    {
+      "id": "retail_retour_client_ecommerce",
+      "metier": "logistique",
+      "poste": "logistiek medewerker (retail mode, e-commerce)",
+      "entreprise": "Logistiko Retail",
+      "canal": "picking_zone",
+      "type": "retour",
+      "niveau": "NL",
+      "contexte": "Un retour client e-commerce arrive, à vérifier avant une éventuelle remise en stock.",
+      "amorce": "Hier is een retour van een klant — het label zegt 'verkeerde maat'. Wat moet ik daarmee doen?",
+      "vocabulaire_cible": ["retour verwerken", "verkeerde maat", "terug in voorraad zetten"],
+      "source": "recherche_logistiko_retail"
+    },
+    {
+      "id": "retail_controle_avant_expedition",
+      "metier": "logistique",
+      "poste": "logistiek medewerker (retail mode, e-commerce)",
+      "entreprise": "Logistiko Retail",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "NL",
+      "contexte": "Un collègue te demande un dernier contrôle qualité avant l'expédition d'une commande e-commerce (taille, couleur, état).",
+      "amorce": "Kan je deze bestelling nog even controleren voor we het verzenden? Ik wil zeker zijn dat de juiste maat erin zit.",
+      "vocabulaire_cible": ["controleren voor verzending", "juiste maat", "verzendklaar"],
+      "source": "recherche_logistiko_retail"
+    },
+    {
+      "id": "retail_pic_commandes_soldes",
+      "metier": "logistique",
+      "poste": "logistiek medewerker (retail mode, e-commerce)",
+      "entreprise": "Logistiko Retail",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "NL",
+      "contexte": "Pic d'activité pendant les soldes, un collègue te demande de l'aide urgente pour l'emballage des commandes.",
+      "amorce": "Het is superdruk vandaag met de solden, kan je even bijspringen bij het inpakken?",
+      "vocabulaire_cible": ["bijspringen", "drukte", "inpakken"],
+      "source": "recherche_logistiko_retail"
+    },
+    {
+      "id": "retail_transporteur_colis",
+      "metier": "logistique",
+      "poste": "logistiek medewerker (retail mode, e-commerce)",
+      "entreprise": "Logistiko Retail",
+      "canal": "telephone_client",
+      "type": "probleme_document",
+      "niveau": "NL",
+      "contexte": "Le transporteur de colis (type bpost/DPD) appelle pour un souci d'adresse sur un des colis à enlever aujourd'hui.",
+      "amorce": "Goeiedag, we hebben een probleem met het adres van één van de pakjes die we vandaag ophalen — kunnen we dat checken?",
+      "vocabulaire_cible": ["pakje", "adres controleren", "ophalen"],
+      "source": "recherche_logistiko_retail"
     },
     {
       "id": "ag_client_reservation",
@@ -211,6 +380,40 @@
         "guichet_chauffeur_rdv_inconnu",
         "guichet_dossier_a_terminer",
         "invente_rapport_fin_service"
+      ]
+    },
+    {
+      "id": "journee_logistiko_frost_douane",
+      "metier": "logistique",
+      "entreprise": "Logistiko Frost",
+      "label": "Journée type — Logistiko Frost (réception + douane)",
+      "duree_situations": 8,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "guichet_chauffeur_doc_manquant",
+        "frost_document_t1",
+        "frost_wms_localisation",
+        "guichet_collegue_urgence",
+        "frost_document_veterinaire",
+        "frost_edi_probleme_synchro",
+        "frost_licence_export_controle",
+        "invente_rapport_fin_service"
+      ]
+    },
+    {
+      "id": "journee_logistiko_retail",
+      "metier": "logistique",
+      "entreprise": "Logistiko Retail",
+      "label": "Journée type — Logistiko Retail (logistique retail mode, B2B + e-commerce)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "retail_pick_ecommerce_client",
+        "retail_carton_reassort_magasin",
+        "retail_retour_client_ecommerce",
+        "retail_pic_commandes_soldes",
+        "retail_controle_avant_expedition",
+        "retail_transporteur_colis"
       ]
     },
     {

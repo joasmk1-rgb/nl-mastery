@@ -8010,10 +8010,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             guichet_chauffeur: { label: '🚛 Guichet chauffeurs', prompt: 'face à face, au guichet ou sur le quai' },
             telephone_client: { label: '📞 Téléphone', prompt: 'au téléphone' },
             collegue_interne: { label: '🧑‍🤝‍🧑 Collègues', prompt: 'entre collègues, sur le lieu de travail' },
+            picking_zone: { label: '📦 Zone de picking', prompt: 'dans l\'entrepôt, en zone de préparation de commandes' },
             email: { label: '✉️ E-mail', prompt: 'par e-mail : tes messages sont des e-mails courts, et l\'apprenant répond par écrit' }
         };
         // Intensité par type de situation, pour ordonner une journée tirée au sort (calme → pic → calme).
-        const RP_JOB_INTENSITY = { administratif: 1, probleme_document: 2, proposition_solution: 2, negociation: 3, urgence: 3, reclamation: 3 };
+        const RP_JOB_INTENSITY = { administratif: 1, probleme_document: 2, proposition_solution: 2, negociation: 3, urgence: 3, reclamation: 3, retour: 2 };
         const RP_JOB_DURATIONS = { courte: 6, longue: 10 };
         // Blancs entre crochets dans les amorces ([klant]...) : l'amorce est affichée et lue telle
         // quelle, on les remplace donc par un nom d'entreprise INVENTÉ (jamais une entreprise
