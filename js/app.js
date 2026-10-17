@@ -9175,7 +9175,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // personnelles de l'apprenant : elles entrent dans les kits, les exercices (« dis-le ») et
         // le prompt des interlocuteurs. Tout vit dans state.modRp[id] (synchronisé, jamais public).
         const MODRP_IDS = ['premier_contact', 'rendez_vous', 'courses', 'logement', 'deplacer', 'journee', 'travail_a1', 'weekend',
-            'a2_sante', 'a2_souvenir', 'a2_projets', 'a2_telephone'];
+            'a2_sante', 'a2_souvenir', 'a2_projets', 'a2_telephone', 'a2_avis', 'a2_reclamation', 'a2_voyage', 'a2_invitation'];
         const MODRP_SPECIAL = {
             '#epeler': /(^|\s)([a-z][\s,.-]+){3,}/,
             '#perfectum-hebben': /\b(heb|hebt|heeft|hebben)\b[^.?!]*\b[a-z]*ge[a-z]{2,}(t|d|n)\b/,

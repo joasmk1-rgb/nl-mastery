@@ -1,0 +1,323 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_avis",
+  "niveau": "A2",
+  "icone": "💬",
+  "titre": "Donner son avis",
+  "accroche": "Dire ce que tu penses, justifier, être d'accord ou pas, comparer deux options et trouver un compromis.",
+  "objectif": "À la fin du module, tu sais participer à une discussion : donner ton avis et le justifier, réagir à celui des autres, comparer deux possibilités et proposer un compromis.",
+  "etapes": [
+    {
+      "id": "opinion",
+      "titre": "Ce que je pense : ik vind dat",
+      "intro": "Donner ton avis : « Ik vind het goed », « Ik vind dat … » (verbe à la fin), « Volgens mij … ».",
+      "roles": { "A": "Un collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat vind je van het nieuwe rooster?", "fr": "Que penses-tu du nouvel horaire ?" },
+        { "qui": "B", "nl": "Ik vind het niet slecht, maar ik begin liever later.", "fr": "Je ne le trouve pas mal, mais je préfère commencer plus tard." },
+        { "qui": "A", "nl": "Echt? Ik vind dat we te vroeg beginnen.", "fr": "Vraiment ? Moi je trouve qu'on commence trop tôt." },
+        { "qui": "B", "nl": "Volgens mij is acht uur oké.", "fr": "Selon moi, huit heures, c'est bien." },
+        { "qui": "A", "nl": "Dat hangt ervan af hoe ver je woont.", "fr": "Ça dépend d'où tu habites." }
+      ],
+      "vocab": {
+        "verbes": ["vinden", "denken", "geloven", "menen", "afhangen"],
+        "mots": [
+          { "nl": "de mening", "fr": "l'avis, l'opinion" },
+          { "nl": "volgens mij", "fr": "selon moi" },
+          { "nl": "eigenlijk", "fr": "en fait" },
+          { "nl": "het hangt ervan af", "fr": "ça dépend" },
+          { "nl": "positief", "fr": "positif" },
+          { "nl": "negatief", "fr": "négatif" },
+          { "nl": "het rooster", "fr": "l'horaire, le planning" },
+          { "nl": "belangrijk", "fr": "important" }
+        ],
+        "phrases": [
+          { "nl": "Wat vind je van ...?", "fr": "Que penses-tu de ... ?" },
+          { "nl": "Ik vind dat ...", "fr": "Je trouve que ..." },
+          { "nl": "Volgens mij ...", "fr": "Selon moi ..." },
+          { "nl": "Dat hangt ervan af.", "fr": "Ça dépend." }
+        ]
+      },
+      "regle": {
+        "titre": "Ik vind dat … (verbe à la fin) / Volgens mij … (inversion)",
+        "explication": "Trois façons courantes : « Ik vind het + adjectif » (Ik vind het goed), « Ik vind dat + phrase » avec le verbe conjugué à la FIN (Ik vind dat we te vroeg beginnen), « Volgens mij + verbe + sujet » avec inversion (Volgens mij is het te duur). « Ik denk dat … » marche comme « Ik vind dat ». Question : « Wat vind je van … ? ».",
+        "exemples": [
+          { "nl": "Ik vind het een goed idee.", "fr": "Je trouve que c'est une bonne idée." },
+          { "nl": "Ik vind dat de pauze te kort is.", "fr": "Je trouve que la pause est trop courte." },
+          { "nl": "Volgens mij is het te duur.", "fr": "Selon moi, c'est trop cher." },
+          { "nl": "Ik denk dat hij gelijk heeft.", "fr": "Je pense qu'il a raison." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je trouve que la pause est trop courte » :", "choices": ["Ik vind dat de pauze is te kort.", "Ik vind dat de pauze te kort is.", "Ik vind de pauze dat te kort is."], "answer": 1 },
+        { "type": "qcm", "q": "« Selon moi, c'est trop cher » :", "choices": ["Volgens mij het is te duur.", "Volgens mij is het te duur.", "Volgens mij te duur is het."], "answer": 1 },
+        { "type": "trou", "phrase": "Wat vind je ___ het nieuwe rooster?", "answer": "van", "fr": "Que penses-tu du nouvel horaire ?" },
+        { "type": "trou", "phrase": "Ik denk dat hij gelijk ___.", "answer": "heeft", "fr": "Je pense qu'il a raison." },
+        { "type": "ordre", "mots": ["goed", "Ik", "een", "vind", "idee.", "het"], "answer": "Ik vind het een goed idee.", "fr": "Je trouve que c'est une bonne idée." },
+        { "type": "traduire", "fr": "Ça dépend.", "answer": "Dat hangt ervan af./Het hangt ervan af." },
+        { "type": "ecoute", "nl": "Ik vind dat we te vroeg beginnen.", "fr": "Je trouve qu'on commence trop tôt." },
+        { "type": "dire", "nl": "Volgens mij is het een goed idee.", "fr": "Selon moi, c'est une bonne idée." },
+        { "type": "repondre", "question": "Wat vind je van thuiswerken?", "question_fr": "Que penses-tu du télétravail ?", "attendu": [], "un_de": ["vind", "denk", "volgens mij"], "exemple": "Ik vind het handig, maar ik mis mijn collega's." }
+      ],
+      "jeu": {
+        "titre": "Le nouveau planning",
+        "consigne": "La direction change les horaires. Discute avec un collègue : donne ton avis et justifie-le.",
+        "role": "Tu es Bram, collègue. La direction propose de commencer à 7 h au lieu de 8 h, avec une fin à 15 h 30. Demande l'avis de l'apprenant, donne le tien (tu es contre car tu déposes tes enfants à l'école), relance avec « Waarom? ». Néerlandais simple (A2).",
+        "welcome": "Heb je de mail gezien? Vanaf volgende maand beginnen we om zeven uur. Wat vind jij daarvan?"
+      }
+    },
+    {
+      "id": "justifier",
+      "titre": "Justifier : want, omdat, dus, daarom",
+      "intro": "Un avis convainc mieux avec une raison : « want » (car), « omdat » (parce que), et la conséquence : « dus », « daarom ».",
+      "roles": { "A": "Une amie", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waarom neem je de trein en niet de auto?", "fr": "Pourquoi prends-tu le train et pas la voiture ?" },
+        { "qui": "B", "nl": "Omdat er elke ochtend veel file is.", "fr": "Parce qu'il y a beaucoup de bouchons chaque matin." },
+        { "qui": "B", "nl": "En de trein is goedkoper, want mijn werkgever betaalt het abonnement.", "fr": "Et le train est moins cher, car mon employeur paie l'abonnement." },
+        { "qui": "A", "nl": "Slim!", "fr": "Malin !" },
+        { "qui": "B", "nl": "Ik kan lezen in de trein, dus ik verlies geen tijd.", "fr": "Je peux lire dans le train, donc je ne perds pas de temps." }
+      ],
+      "vocab": {
+        "verbes": ["kiezen", "verliezen", "besparen", "betalen", "redeneren"],
+        "mots": [
+          { "nl": "want", "fr": "car" },
+          { "nl": "omdat", "fr": "parce que" },
+          { "nl": "dus", "fr": "donc" },
+          { "nl": "daarom", "fr": "c'est pourquoi" },
+          { "nl": "de reden", "fr": "la raison" },
+          { "nl": "het voordeel", "fr": "l'avantage" },
+          { "nl": "het nadeel", "fr": "l'inconvénient" },
+          { "nl": "goedkoper", "fr": "moins cher" }
+        ],
+        "phrases": [
+          { "nl": "Omdat er veel file is.", "fr": "Parce qu'il y a beaucoup de bouchons." },
+          { "nl": "..., want het is goedkoper.", "fr": "..., car c'est moins cher." },
+          { "nl": "Daarom neem ik de trein.", "fr": "C'est pourquoi je prends le train." }
+        ]
+      },
+      "regle": {
+        "titre": "Trois places différentes pour le verbe",
+        "explication": "« want » et « dus » (au milieu) : ordre normal, sujet + verbe : « …, want het is goedkoper », « …, dus ik verlies geen tijd ». « omdat » : verbe à la FIN : « …, omdat er veel file is ». « daarom » (et « dus » en tête) : inversion, verbe + sujet : « Daarom neem ik de trein ». Bien placer le verbe après ces mots fait tout de suite plus naturel.",
+        "exemples": [
+          { "nl": "Ik blijf thuis, want ik ben moe.", "fr": "Je reste à la maison, car je suis fatigué." },
+          { "nl": "Ik blijf thuis omdat ik moe ben.", "fr": "Je reste à la maison parce que je suis fatigué." },
+          { "nl": "Ik ben moe, dus ik blijf thuis.", "fr": "Je suis fatigué, donc je reste à la maison." },
+          { "nl": "Ik ben moe. Daarom blijf ik thuis.", "fr": "Je suis fatigué. C'est pourquoi je reste à la maison." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« …, car c'est moins cher » :", "choices": ["want het goedkoper is", "want het is goedkoper", "want is het goedkoper"], "answer": 1 },
+        { "type": "qcm", "q": "« C'est pourquoi je prends le train » :", "choices": ["Daarom ik neem de trein.", "Daarom neem ik de trein.", "Daarom de trein neem ik."], "answer": 1 },
+        { "type": "trou", "phrase": "Ik neem de trein omdat er veel file ___.", "answer": "is", "fr": "Je prends le train parce qu'il y a beaucoup de bouchons." },
+        { "type": "trou", "phrase": "Ik ben moe, ___ ik blijf thuis. (donc)", "answer": "dus", "fr": "Je suis fatigué, donc je reste à la maison." },
+        { "type": "ordre", "mots": ["blijf", "Daarom", "thuis.", "ik"], "answer": "Daarom blijf ik thuis.", "fr": "C'est pourquoi je reste à la maison." },
+        { "type": "traduire", "fr": "Le train a un avantage : je peux lire.", "answer": "De trein heeft een voordeel: ik kan lezen." },
+        { "type": "ecoute", "nl": "Ik kan lezen in de trein, dus ik verlies geen tijd.", "fr": "Je peux lire dans le train, donc je ne perds pas de temps." },
+        { "type": "dire", "nl": "Ik neem de trein omdat er veel file is.", "fr": "Je prends le train parce qu'il y a beaucoup de bouchons." },
+        { "type": "repondre", "question": "Waarom leer je Nederlands?", "question_fr": "Pourquoi apprends-tu le néerlandais ?", "attendu": [], "un_de": ["omdat", "want", "dus", "daarom"], "exemple": "Omdat ik in Vlaanderen wil werken." }
+      ],
+      "jeu": {
+        "titre": "Défendre ses choix",
+        "consigne": "Une amie te questionne sur tes choix (transport, logement, travail). Justifie chaque choix avec une raison et une conséquence.",
+        "role": "Tu es Nele, une amie qui aime débattre. Pose à l'apprenant des questions « Waarom…? » sur ses choix (transport, quartier, type de travail, apprendre le néerlandais) et pousse-le à justifier (« Maar waarom dan? »). Utilise toi-même want, omdat, dus, daarom. Néerlandais simple (A2).",
+        "welcome": "Ik vraag me altijd af: waarom woon jij eigenlijk in Vlaanderen en niet in Brussel?"
+      }
+    },
+    {
+      "id": "accord",
+      "titre": "D'accord ou pas d'accord",
+      "intro": "Réagir à l'avis de quelqu'un : être d'accord, en partie d'accord, ou pas du tout — poliment.",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Ik vind dat we elke week moeten vergaderen.", "fr": "Je trouve qu'on doit faire une réunion chaque semaine." },
+        { "qui": "B", "nl": "Daar ben ik het gedeeltelijk mee eens.", "fr": "Je suis en partie d'accord avec ça." },
+        { "qui": "B", "nl": "Een vergadering is nuttig, maar elke week is te veel.", "fr": "Une réunion est utile, mais chaque semaine, c'est trop." },
+        { "qui": "A", "nl": "Daar heb je gelijk in. Om de twee weken dan?", "fr": "Là tu as raison. Toutes les deux semaines alors ?" },
+        { "qui": "B", "nl": "Ja, daar ben ik het mee eens.", "fr": "Oui, je suis d'accord." }
+      ],
+      "vocab": {
+        "verbes": ["vinden", "twijfelen", "geloven", "denken"],
+        "mots": [
+          { "nl": "het eens zijn", "fr": "être d'accord" },
+          { "nl": "het oneens zijn", "fr": "ne pas être d'accord" },
+          { "nl": "gelijk hebben", "fr": "avoir raison" },
+          { "nl": "gedeeltelijk", "fr": "en partie" },
+          { "nl": "helemaal", "fr": "complètement" },
+          { "nl": "toch", "fr": "pourtant, quand même" },
+          { "nl": "nuttig", "fr": "utile" },
+          { "nl": "overdreven", "fr": "exagéré" }
+        ],
+        "phrases": [
+          { "nl": "Ik ben het met je eens.", "fr": "Je suis d'accord avec toi." },
+          { "nl": "Ik ben het niet met je eens.", "fr": "Je ne suis pas d'accord avec toi." },
+          { "nl": "Je hebt gelijk.", "fr": "Tu as raison." },
+          { "nl": "Dat klopt, maar ...", "fr": "C'est vrai, mais ..." }
+        ]
+      },
+      "regle": {
+        "titre": "het eens zijn met … / daar ben ik het mee eens",
+        "explication": "« Ik ben het (niet) met je eens » = je suis (pas) d'accord avec toi. Avec une chose, on utilise « daar … mee » : « Daar ben ik het mee eens » (je suis d'accord avec ça). Nuancer : « gedeeltelijk » (en partie), « helemaal » (complètement). Désaccord poli : « Dat klopt, maar … » ou « Ik zie dat anders » (je vois ça autrement).",
+        "exemples": [
+          { "nl": "Ik ben het helemaal met je eens.", "fr": "Je suis tout à fait d'accord avec toi." },
+          { "nl": "Daar ben ik het niet mee eens.", "fr": "Je ne suis pas d'accord avec ça." },
+          { "nl": "Ik zie dat anders.", "fr": "Je vois ça autrement." },
+          { "nl": "Dat klopt, maar het is toch duur.", "fr": "C'est vrai, mais c'est quand même cher." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je suis d'accord avec toi » :", "choices": ["Ik ben akkoord met jou eens.", "Ik ben het met je eens.", "Ik heb het eens met je."], "answer": 1 },
+        { "type": "qcm", "q": "« Tu as raison » :", "choices": ["Je bent gelijk.", "Je hebt gelijk.", "Je hebt recht."], "answer": 1 },
+        { "type": "trou", "phrase": "Daar ben ik het niet ___ eens.", "answer": "mee", "fr": "Je ne suis pas d'accord avec ça." },
+        { "type": "trou", "phrase": "Ik zie dat ___. (autrement)", "answer": "anders", "fr": "Je vois ça autrement." },
+        { "type": "ordre", "mots": ["het", "Ik", "eens.", "met", "ben", "je", "helemaal"], "answer": "Ik ben het helemaal met je eens.", "fr": "Je suis tout à fait d'accord avec toi." },
+        { "type": "traduire", "fr": "C'est vrai, mais c'est quand même cher.", "answer": "Dat klopt, maar het is toch duur." },
+        { "type": "ecoute", "nl": "Daar ben ik het gedeeltelijk mee eens.", "fr": "Je suis en partie d'accord avec ça." },
+        { "type": "dire", "nl": "Dat klopt, maar ik zie dat anders.", "fr": "C'est vrai, mais je vois ça autrement." },
+        { "type": "repondre", "question": "Ik vind dat iedereen thuis moet werken. Ben je het met me eens?", "question_fr": "Je trouve que tout le monde devrait travailler de chez soi. Tu es d'accord ?", "attendu": [], "un_de": ["eens", "gelijk", "anders", "klopt"], "exemple": "Ik ben het gedeeltelijk met je eens, maar niet voor iedereen." }
+      ],
+      "jeu": {
+        "titre": "Une discussion d'équipe",
+        "consigne": "Une collègue donne des avis tranchés. Réagis à chacun : d'accord, en partie d'accord, pas d'accord, en justifiant.",
+        "role": "Tu es Leen, collègue aux avis tranchés. Donne l'un après l'autre trois avis (« de pauze is te kort », « we moeten elke dag vergaderen », « thuiswerken is niet productief ») et demande chaque fois si l'apprenant est d'accord et pourquoi. Accepte un bon argument (« Daar heb je gelijk in »). Néerlandais simple (A2).",
+        "welcome": "Ik ga eerlijk zijn: ik vind dat onze middagpauze veel te kort is. Ben je het met me eens?"
+      }
+    },
+    {
+      "id": "comparer",
+      "titre": "Comparer deux possibilités",
+      "intro": "Peser le pour et le contre : « even … als » (aussi … que), « meer / minder … dan », « het voordeel is dat … ».",
+      "roles": { "A": "Un ami", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Ik twijfel tussen een job in Gent en een job in Kortrijk.", "fr": "J'hésite entre un emploi à Gand et un emploi à Courtrai." },
+        { "qui": "B", "nl": "Wat is het voordeel van Gent?", "fr": "Quel est l'avantage de Gand ?" },
+        { "qui": "A", "nl": "Het loon is hoger, maar de reis duurt langer.", "fr": "Le salaire est plus élevé, mais le trajet dure plus longtemps." },
+        { "qui": "B", "nl": "Ik zou Kortrijk kiezen: je hebt meer vrije tijd.", "fr": "Je choisirais Courtrai : tu as plus de temps libre." },
+        { "qui": "B", "nl": "Het nadeel is dat je minder verdient.", "fr": "L'inconvénient, c'est que tu gagnes moins." }
+      ],
+      "vocab": {
+        "verbes": ["vergelijken", "twijfelen", "kiezen", "verdienen", "duren"],
+        "mots": [
+          { "nl": "het voordeel", "fr": "l'avantage" },
+          { "nl": "het nadeel", "fr": "l'inconvénient" },
+          { "nl": "hoger", "fr": "plus élevé" },
+          { "nl": "lager", "fr": "plus bas" },
+          { "nl": "even ... als", "fr": "aussi ... que" },
+          { "nl": "meer ... dan", "fr": "plus ... que" },
+          { "nl": "minder ... dan", "fr": "moins ... que" },
+          { "nl": "tussen", "fr": "entre" }
+        ],
+        "phrases": [
+          { "nl": "Het voordeel is dat ...", "fr": "L'avantage, c'est que ..." },
+          { "nl": "Het nadeel is dat ...", "fr": "L'inconvénient, c'est que ..." },
+          { "nl": "Ik twijfel tussen ... en ...", "fr": "J'hésite entre ... et ..." }
+        ]
+      },
+      "regle": {
+        "titre": "Comparer : -er dan, even … als, minder … dan",
+        "explication": "Supériorité : adjectif + -er + dan (hoger dan, langer dan) ou « meer … dan » avec un nom (meer vrije tijd dan). Égalité : « even … als » (even duur als = aussi cher que). Infériorité : « minder … dan » (minder duur dan). « Het voordeel / nadeel is dat … » : verbe à la fin après « dat ».",
+        "exemples": [
+          { "nl": "Gent is groter dan Kortrijk.", "fr": "Gand est plus grand que Courtrai." },
+          { "nl": "De trein is even snel als de auto.", "fr": "Le train est aussi rapide que la voiture." },
+          { "nl": "Deze job is minder stressvol.", "fr": "Cet emploi est moins stressant." },
+          { "nl": "Het voordeel is dat ik dichtbij woon.", "fr": "L'avantage, c'est que j'habite près." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« aussi rapide que la voiture » :", "choices": ["even snel dan de auto", "even snel als de auto", "zo sneller als de auto"], "answer": 1 },
+        { "type": "qcm", "q": "« L'avantage, c'est que j'habite près » :", "choices": ["Het voordeel is dat ik woon dichtbij.", "Het voordeel is dat ik dichtbij woon.", "Het voordeel dat is ik dichtbij woon."], "answer": 1 },
+        { "type": "trou", "phrase": "Het loon is hoger, maar de reis duurt ___. (plus longtemps)", "answer": "langer", "fr": "Le salaire est plus élevé, mais le trajet dure plus longtemps." },
+        { "type": "trou", "phrase": "Ik twijfel ___ Gent en Kortrijk.", "answer": "tussen", "fr": "J'hésite entre Gand et Courtrai." },
+        { "type": "ordre", "mots": ["minder", "Deze", "is", "stressvol.", "job"], "answer": "Deze job is minder stressvol.", "fr": "Cet emploi est moins stressant." },
+        { "type": "traduire", "fr": "L'inconvénient, c'est que tu gagnes moins.", "answer": "Het nadeel is dat je minder verdient." },
+        { "type": "ecoute", "nl": "Het loon is hoger, maar de reis duurt langer.", "fr": "Le salaire est plus élevé, mais le trajet dure plus longtemps." },
+        { "type": "dire", "nl": "Het voordeel is dat ik meer vrije tijd heb.", "fr": "L'avantage, c'est que j'ai plus de temps libre." },
+        { "type": "repondre", "question": "Werk je liever op kantoor of thuis? Waarom?", "question_fr": "Tu préfères travailler au bureau ou de chez toi ? Pourquoi ?", "attendu": [], "un_de": ["liever", "voordeel", "nadeel", "omdat", "want", "dan"], "exemple": "Liever op kantoor, want ik zie mijn collega's." }
+      ],
+      "jeu": {
+        "titre": "Aider un ami à choisir",
+        "consigne": "Un ami hésite entre deux offres d'emploi. Aide-le : compare les avantages et inconvénients, et donne ton conseil.",
+        "role": "Tu es Ruben, un ami qui hésite entre deux offres : Gand (2 900 euros brut, 1 h de trajet, grande entreprise) et Courtrai (2 600 euros, 15 minutes à vélo, petite équipe sympa). Donne les infos petit à petit quand l'apprenant pose des questions, demande-lui de comparer et de te conseiller. Néerlandais simple (A2).",
+        "welcome": "Ik moet kiezen tussen twee jobs en ik twijfel echt. Kun je me helpen?"
+      }
+    },
+    {
+      "id": "compromis",
+      "titre": "Proposer un compromis",
+      "intro": "Sortir d'un désaccord : proposer une solution intermédiaire, faire une concession, conclure ensemble.",
+      "roles": { "A": "Ton colocataire", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Ik wil de verwarming op drieëntwintig graden.", "fr": "Je veux le chauffage à vingt-trois degrés." },
+        { "qui": "B", "nl": "Dat vind ik te warm en te duur.", "fr": "Je trouve ça trop chaud et trop cher." },
+        { "qui": "B", "nl": "Wat denk je van twintig graden overdag en achttien 's nachts?", "fr": "Que penses-tu de vingt degrés le jour et dix-huit la nuit ?" },
+        { "qui": "A", "nl": "Hm, eenentwintig overdag dan?", "fr": "Hum, vingt et un le jour alors ?" },
+        { "qui": "B", "nl": "Goed, dat is een goed compromis. Afgesproken!", "fr": "D'accord, c'est un bon compromis. Entendu !" }
+      ],
+      "vocab": {
+        "verbes": ["voorstellen", "toegeven", "afspreken", "oplossen", "delen"],
+        "mots": [
+          { "nl": "het compromis", "fr": "le compromis" },
+          { "nl": "de oplossing", "fr": "la solution" },
+          { "nl": "het voorstel", "fr": "la proposition" },
+          { "nl": "overdag", "fr": "pendant la journée" },
+          { "nl": "'s nachts", "fr": "la nuit" },
+          { "nl": "eerlijk", "fr": "équitable, honnête" },
+          { "nl": "om de beurt", "fr": "à tour de rôle" },
+          { "nl": "afgesproken!", "fr": "entendu !" }
+        ],
+        "phrases": [
+          { "nl": "Wat denk je van ...?", "fr": "Que penses-tu de ... ?" },
+          { "nl": "Wat als we ...?", "fr": "Et si on ... ?" },
+          { "nl": "Dat is een goed compromis.", "fr": "C'est un bon compromis." },
+          { "nl": "Oké, voor mij is dat goed.", "fr": "D'accord, pour moi ça va." }
+        ]
+      },
+      "regle": {
+        "titre": "Proposer : Wat als we … ? / Wat denk je van … ?",
+        "explication": "« Wat denk je van + nom ? » (que penses-tu de…) ou « Wat als we + verbe à la fin ? » (et si on…) : « Wat als we om de beurt koken? ». « We kunnen ook … » (on peut aussi…). Concession : « Oké, maar dan … » (d'accord, mais alors…). Conclure : « Afgesproken! », « Dat is een goed compromis ».",
+        "exemples": [
+          { "nl": "Wat als we om de beurt koken?", "fr": "Et si on cuisinait à tour de rôle ?" },
+          { "nl": "We kunnen ook de kosten delen.", "fr": "On peut aussi partager les frais." },
+          { "nl": "Oké, maar dan doe jij de afwas.", "fr": "D'accord, mais alors tu fais la vaisselle." },
+          { "nl": "Voor mij is dat goed.", "fr": "Pour moi, ça va." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Et si on cuisinait à tour de rôle ? » :", "choices": ["Wat als we koken om de beurt?", "Wat als we om de beurt koken?", "Wat als koken we om de beurt?"], "answer": 1 },
+        { "type": "qcm", "q": "Pour conclure un accord :", "choices": ["Afgesproken!", "Ik twijfel.", "Dat klopt niet."], "answer": 0 },
+        { "type": "trou", "phrase": "Wat ___ je van twintig graden?", "answer": "denk", "fr": "Que penses-tu de vingt degrés ?" },
+        { "type": "trou", "phrase": "We kunnen ook de kosten ___.", "answer": "delen", "fr": "On peut aussi partager les frais." },
+        { "type": "ordre", "mots": ["dat", "Voor", "goed.", "is", "mij"], "answer": "Voor mij is dat goed.", "fr": "Pour moi, ça va." },
+        { "type": "traduire", "fr": "C'est un bon compromis.", "answer": "Dat is een goed compromis." },
+        { "type": "ecoute", "nl": "Oké, maar dan doe jij de afwas.", "fr": "D'accord, mais alors tu fais la vaisselle." },
+        { "type": "dire", "nl": "Wat als we om de beurt koken?", "fr": "Et si on cuisinait à tour de rôle ?" },
+        { "type": "repondre", "question": "Ik wil elke avond muziek spelen, maar jij wilt rust. Wat stel je voor?", "question_fr": "Je veux jouer de la musique chaque soir, mais tu veux du calme. Que proposes-tu ?", "attendu": [], "un_de": ["wat als", "wat denk je", "kunnen", "tot", "compromis", "maar"], "exemple": "Wat als je speelt tot negen uur en daarna is het stil?" }
+      ],
+      "jeu": {
+        "titre": "Négocier avec le colocataire",
+        "consigne": "Ton colocataire et toi n'êtes pas d'accord sur plusieurs choses (ménage, bruit, chauffage). Trouvez des compromis.",
+        "role": "Tu es Tibo, colocataire un peu têtu. Tu veux : faire la fête le vendredi soir, le chauffage à 23 degrés, et ne pas faire le ménage en semaine. Défends tes positions, puis accepte des compromis raisonnables si l'apprenant en propose (« Wat als… », « Wat denk je van… »). Termine chaque point par « Afgesproken ». Néerlandais simple (A2).",
+        "welcome": "We moeten even praten over het huis. Ik wil vrijdag een feestje geven. Is dat oké voor jou?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : une réunion pour décider",
+    "consigne": "En réunion d'équipe, on doit choisir entre deux options pour l'organisation du travail. Donne ton avis, justifie-le, réagis aux autres avis (d'accord ou pas), compare les options et propose un compromis.",
+    "role": "Tu es Katrien, responsable d'équipe, qui anime une réunion. Question : faut-il passer à 4 jours de 9 heures (vrijdag vrij) ou garder 5 jours de 7 h 36 ? Donne aussi l'avis de deux collègues absents (Tom est pour, Sarah est contre car elle a des enfants). Demande l'avis de l'apprenant, ses raisons, s'il est d'accord avec Tom ou Sarah, les avantages et inconvénients, et une proposition de compromis. Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Goeiemorgen allemaal. Vandaag beslissen we: vier dagen van negen uur, of vijf dagen zoals nu. Wat vind jij?"
+  },
+  "examen": {
+    "reussite": "Tu sais donner et défendre ton avis en néerlandais.",
+    "sujets": [
+      { "label": "donner ton avis", "etape": "opinion", "mots": ["ik vind", "volgens mij", "ik denk"] },
+      { "label": "justifier (want / omdat)", "etape": "justifier", "mots": ["want", "omdat"] },
+      { "label": "tirer une conséquence (dus / daarom)", "etape": "justifier", "mots": ["dus", "daarom"] },
+      { "label": "dire si tu es d'accord", "etape": "accord", "mots": ["eens", "gelijk", "anders", "klopt"] },
+      { "label": "comparer", "etape": "comparer", "mots": ["dan", "even", "meer", "minder", "beter", "langer", "korter"] },
+      { "label": "parler d'avantages ou d'inconvénients", "etape": "comparer", "mots": ["voordeel", "nadeel"] },
+      { "label": "proposer un compromis", "etape": "compromis", "mots": ["wat als", "wat denk je", "compromis", "voorstel", "kunnen ook"] },
+      { "label": "conclure", "etape": "compromis", "mots": ["afgesproken", "goed", "oké", "akkoord", "voor mij"] }
+    ]
+  }
+}

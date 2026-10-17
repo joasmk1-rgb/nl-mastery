@@ -1,0 +1,322 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_reclamation",
+  "niveau": "A2",
+  "icone": "🧾",
+  "titre": "Faire une réclamation",
+  "accroche": "Expliquer un problème avec un achat ou un service, montrer ce qui ne va pas et obtenir une solution.",
+  "objectif": "À la fin du module, tu sais faire une réclamation : décrire précisément le problème au passé, désigner l'objet concerné, demander une solution et insister poliment.",
+  "etapes": [
+    {
+      "id": "probleme",
+      "titre": "Décrire le problème",
+      "intro": "Dire ce qui ne va pas : « Er is iets mis met … », « … werkt niet meer », « … is kapot ».",
+      "roles": { "A": "Le vendeur", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Goeiedag, kan ik u helpen?", "fr": "Bonjour, je peux vous aider ?" },
+        { "qui": "B", "nl": "Ja, er is iets mis met deze koffiezet.", "fr": "Oui, il y a un problème avec cette cafetière." },
+        { "qui": "A", "nl": "Wat is het probleem precies?", "fr": "Quel est le problème exactement ?" },
+        { "qui": "B", "nl": "Hij werkt niet meer. Het lampje gaat niet aan.", "fr": "Elle ne marche plus. Le voyant ne s'allume pas." },
+        { "qui": "A", "nl": "Sinds wanneer?", "fr": "Depuis quand ?" },
+        { "qui": "B", "nl": "Sinds gisteren, en ik heb hem pas twee weken.", "fr": "Depuis hier, et je l'ai seulement depuis deux semaines." }
+      ],
+      "vocab": {
+        "verbes": ["werken", "aangaan", "breken", "klagen", "tonen"],
+        "mots": [
+          { "nl": "het probleem", "fr": "le problème" },
+          { "nl": "er is iets mis", "fr": "il y a un problème" },
+          { "nl": "kapot", "fr": "cassé" },
+          { "nl": "beschadigd", "fr": "abîmé" },
+          { "nl": "het defect", "fr": "le défaut" },
+          { "nl": "niet meer", "fr": "ne … plus" },
+          { "nl": "pas", "fr": "seulement, à peine" },
+          { "nl": "het toestel", "fr": "l'appareil" }
+        ],
+        "phrases": [
+          { "nl": "Er is iets mis met ...", "fr": "Il y a un problème avec ..." },
+          { "nl": "Het werkt niet meer.", "fr": "Ça ne marche plus." },
+          { "nl": "Ik heb het pas twee weken.", "fr": "Je l'ai seulement depuis deux semaines." }
+        ]
+      },
+      "regle": {
+        "titre": "niet meer, nog niet, pas",
+        "explication": "« niet meer » = ne… plus (Het werkt niet meer). « nog niet » = pas encore (Ik heb nog geen antwoord). « geen … meer » devant un nom : Er is geen garantie meer. « pas » = seulement (récent) : Ik heb het pas een week. Pour présenter le problème : « Er is iets mis met + objet ».",
+        "exemples": [
+          { "nl": "De printer werkt niet meer.", "fr": "L'imprimante ne marche plus." },
+          { "nl": "Ik heb nog geen antwoord gekregen.", "fr": "Je n'ai pas encore reçu de réponse." },
+          { "nl": "Er is iets mis met mijn factuur.", "fr": "Il y a un problème avec ma facture." },
+          { "nl": "Ik heb het pas gekocht.", "fr": "Je viens de l'acheter." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Ça ne marche plus » :", "choices": ["Het werkt niet meer.", "Het werkt meer niet.", "Het werkt geen meer."], "answer": 0 },
+        { "type": "qcm", "q": "« pas encore » :", "choices": ["niet meer", "nog niet", "pas niet"], "answer": 1 },
+        { "type": "trou", "phrase": "Er is iets ___ met deze koffiezet.", "answer": "mis", "fr": "Il y a un problème avec cette cafetière." },
+        { "type": "trou", "phrase": "Ik heb hem ___ twee weken. (seulement)", "answer": "pas", "fr": "Je l'ai seulement depuis deux semaines." },
+        { "type": "ordre", "mots": ["antwoord", "Ik", "nog", "gekregen.", "heb", "geen"], "answer": "Ik heb nog geen antwoord gekregen.", "fr": "Je n'ai pas encore reçu de réponse." },
+        { "type": "traduire", "fr": "L'imprimante ne marche plus.", "answer": "De printer werkt niet meer." },
+        { "type": "ecoute", "nl": "Het lampje gaat niet aan.", "fr": "Le voyant ne s'allume pas." },
+        { "type": "dire", "nl": "Er is iets mis met deze koffiezet.", "fr": "Il y a un problème avec cette cafetière." },
+        { "type": "repondre", "question": "Wat is het probleem precies?", "question_fr": "Quel est le problème exactement ?", "attendu": [], "un_de": ["werkt niet", "kapot", "mis", "beschadigd", "niet meer"], "exemple": "Hij werkt niet meer sinds gisteren." }
+      ],
+      "jeu": {
+        "titre": "Au service après-vente",
+        "consigne": "Un appareil acheté récemment ne marche plus. Explique précisément le problème au vendeur.",
+        "role": "Tu es vendeur dans un magasin d'électroménager. Le client revient avec un appareil en panne. Demande ce qui ne marche pas, depuis quand, comment il l'utilise, s'il a le ticket. Phrases simples (A2).",
+        "welcome": "Goeiedag, kan ik u helpen?"
+      }
+    },
+    {
+      "id": "passe",
+      "titre": "Raconter ce qui s'est passé",
+      "intro": "Expliquer dans l'ordre : quand tu as acheté, ce que tu as fait, ce qui s'est passé, au perfectum.",
+      "roles": { "A": "La responsable du magasin", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wanneer heeft u de jas gekocht?", "fr": "Quand avez-vous acheté la veste ?" },
+        { "qui": "B", "nl": "Ik heb hem vorige week gekocht.", "fr": "Je l'ai achetée la semaine passée." },
+        { "qui": "B", "nl": "Ik heb hem één keer gedragen en de rits is gebroken.", "fr": "Je l'ai portée une fois et la fermeture s'est cassée." },
+        { "qui": "A", "nl": "Heeft u hem gewassen?", "fr": "L'avez-vous lavée ?" },
+        { "qui": "B", "nl": "Nee, ik heb hem niet gewassen.", "fr": "Non, je ne l'ai pas lavée." }
+      ],
+      "vocab": {
+        "verbes": ["kopen", "dragen", "breken", "wassen", "gebruiken"],
+        "mots": [
+          { "nl": "gekocht", "fr": "acheté" },
+          { "nl": "gedragen", "fr": "porté" },
+          { "nl": "gebroken", "fr": "cassé" },
+          { "nl": "gewassen", "fr": "lavé" },
+          { "nl": "gebruikt", "fr": "utilisé" },
+          { "nl": "de rits", "fr": "la fermeture éclair" },
+          { "nl": "één keer", "fr": "une fois" },
+          { "nl": "normaal", "fr": "normalement" }
+        ],
+        "phrases": [
+          { "nl": "Ik heb het vorige week gekocht.", "fr": "Je l'ai acheté la semaine passée." },
+          { "nl": "Ik heb het normaal gebruikt.", "fr": "Je l'ai utilisé normalement." },
+          { "nl": "Toen is het gebroken.", "fr": "Ensuite, il s'est cassé." }
+        ]
+      },
+      "regle": {
+        "titre": "Perfectum : breken avec zijn, kopen avec hebben",
+        "explication": "Ce que tu as fait : hebben + participe (Ik heb hem gekocht, gedragen, gewassen). Ce qui « est arrivé » à l'objet (changement d'état) : zijn (De rits is gebroken, Het is kapotgegaan). Participes irréguliers utiles : kopen → gekocht, dragen → gedragen, breken → gebroken, krijgen → gekregen. Négation : « Ik heb hem niet gewassen » (niet devant le participe).",
+        "exemples": [
+          { "nl": "Ik heb hem één keer gedragen.", "fr": "Je l'ai portée une fois." },
+          { "nl": "De rits is gebroken.", "fr": "La fermeture s'est cassée." },
+          { "nl": "Het is na twee dagen kapotgegaan.", "fr": "C'est tombé en panne après deux jours." },
+          { "nl": "Ik heb het niet laten vallen.", "fr": "Je ne l'ai pas fait tomber." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« La fermeture s'est cassée » :", "choices": ["De rits heeft gebroken.", "De rits is gebroken.", "De rits is gebreekt."], "answer": 1 },
+        { "type": "qcm", "q": "« Je ne l'ai pas lavée » :", "choices": ["Ik heb hem gewassen niet.", "Ik heb hem niet gewassen.", "Ik niet heb hem gewassen."], "answer": 1 },
+        { "type": "trou", "phrase": "Ik heb hem vorige week ___. (acheté)", "answer": "gekocht", "fr": "Je l'ai achetée la semaine passée." },
+        { "type": "trou", "phrase": "Het is na twee dagen kapot___.", "answer": "gegaan", "fr": "C'est tombé en panne après deux jours." },
+        { "type": "ordre", "mots": ["keer", "Ik", "gedragen.", "hem", "één", "heb"], "answer": "Ik heb hem één keer gedragen.", "fr": "Je l'ai portée une fois." },
+        { "type": "traduire", "fr": "Je l'ai utilisé normalement.", "answer": "Ik heb het normaal gebruikt." },
+        { "type": "ecoute", "nl": "Heeft u hem gewassen?", "fr": "L'avez-vous lavée ?" },
+        { "type": "dire", "nl": "Ik heb hem één keer gedragen en de rits is gebroken.", "fr": "Je l'ai portée une fois et la fermeture s'est cassée." },
+        { "type": "repondre", "question": "Wanneer heeft u het gekocht?", "question_fr": "Quand l'avez-vous acheté ?", "attendu": ["gekocht"], "exemple": "Ik heb het vorige week gekocht." }
+      ],
+      "jeu": {
+        "titre": "Expliquer ce qui s'est passé",
+        "consigne": "La responsable veut comprendre comment l'article s'est abîmé. Raconte dans l'ordre et prouve que ce n'est pas ta faute.",
+        "role": "Tu es la responsable du magasin, un peu méfiante. Pose des questions sur l'utilisation (quand acheté, combien de fois utilisé, lavé ? tombé ?). Laisse entendre une fois que c'est peut-être la faute du client, puis accepte si les explications sont claires. Phrases simples (A2).",
+        "welcome": "Ik ben de verantwoordelijke. Vertel eens wat er precies gebeurd is."
+      }
+    },
+    {
+      "id": "relatifs",
+      "titre": "Désigner l'objet : die / dat",
+      "intro": "Préciser de quoi tu parles : « de jas die ik gekocht heb », « het toestel dat niet werkt ».",
+      "roles": { "A": "Le vendeur", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Over welk product gaat het?", "fr": "De quel produit s'agit-il ?" },
+        { "qui": "B", "nl": "Over de schoenen die ik zaterdag gekocht heb.", "fr": "Des chaussures que j'ai achetées samedi." },
+        { "qui": "A", "nl": "En wat is het probleem?", "fr": "Et quel est le problème ?" },
+        { "qui": "B", "nl": "De zool die links zit, komt los.", "fr": "La semelle de gauche se décolle." },
+        { "qui": "A", "nl": "Heeft u het bonnetje dat u bij de kassa kreeg?", "fr": "Avez-vous le ticket que vous avez reçu à la caisse ?" }
+      ],
+      "vocab": {
+        "verbes": ["loskomen", "krijgen", "bewaren", "zitten"],
+        "mots": [
+          { "nl": "die", "fr": "qui, que (de-woord, pluriel)" },
+          { "nl": "dat", "fr": "qui, que (het-woord)" },
+          { "nl": "het product", "fr": "le produit" },
+          { "nl": "de zool", "fr": "la semelle" },
+          { "nl": "het bonnetje", "fr": "le ticket" },
+          { "nl": "de garantie", "fr": "la garantie" },
+          { "nl": "los", "fr": "détaché" }
+        ],
+        "phrases": [
+          { "nl": "de schoenen die ik gekocht heb", "fr": "les chaussures que j'ai achetées" },
+          { "nl": "het toestel dat niet werkt", "fr": "l'appareil qui ne marche pas" },
+          { "nl": "Het gaat over ...", "fr": "Il s'agit de ..." }
+        ]
+      },
+      "regle": {
+        "titre": "Pronoms relatifs die / dat (verbe à la fin)",
+        "explication": "« die » après un nom en « de » ou un pluriel, « dat » après un nom en « het » singulier. La relative envoie le verbe à la FIN : « de jas die ik gekocht heb », « het toestel dat niet werkt ». Avec une préposition, on utilise « waar + préposition » : « de winkel waar ik het gekocht heb » (le magasin où je l'ai acheté).",
+        "exemples": [
+          { "nl": "De jas die ik gekocht heb, is kapot.", "fr": "La veste que j'ai achetée est abîmée." },
+          { "nl": "Het toestel dat ik besteld heb, is niet geleverd.", "fr": "L'appareil que j'ai commandé n'a pas été livré." },
+          { "nl": "De verkoper die me geholpen heeft.", "fr": "Le vendeur qui m'a aidé." },
+          { "nl": "De winkel waar ik het gekocht heb.", "fr": "Le magasin où je l'ai acheté." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« l'appareil (het toestel) qui ne marche pas » :", "choices": ["het toestel die niet werkt", "het toestel dat niet werkt", "het toestel dat werkt niet"], "answer": 1 },
+        { "type": "qcm", "q": "« les chaussures que j'ai achetées » :", "choices": ["de schoenen die ik gekocht heb", "de schoenen dat ik gekocht heb", "de schoenen die ik heb gekocht heb"], "answer": 0 },
+        { "type": "trou", "phrase": "De jas ___ ik gekocht heb, is kapot.", "answer": "die", "fr": "La veste que j'ai achetée est abîmée." },
+        { "type": "trou", "phrase": "Het bonnetje ___ ik kreeg, is weg.", "answer": "dat", "fr": "Le ticket que j'ai reçu est perdu." },
+        { "type": "ordre", "mots": ["ik", "het", "De", "gekocht", "heb.", "winkel", "waar"], "answer": "De winkel waar ik het gekocht heb.", "fr": "Le magasin où je l'ai acheté." },
+        { "type": "traduire", "fr": "Le vendeur qui m'a aidé.", "answer": "De verkoper die me geholpen heeft./De verkoper die mij geholpen heeft." },
+        { "type": "ecoute", "nl": "Het toestel dat ik besteld heb, is niet geleverd.", "fr": "L'appareil que j'ai commandé n'a pas été livré." },
+        { "type": "dire", "nl": "Het gaat over de schoenen die ik zaterdag gekocht heb.", "fr": "Il s'agit des chaussures que j'ai achetées samedi." },
+        { "type": "repondre", "question": "Over welk product gaat het?", "question_fr": "De quel produit s'agit-il ?", "attendu": [], "un_de": ["die", "dat"], "exemple": "Over de jas die ik vorige week gekocht heb." }
+      ],
+      "jeu": {
+        "titre": "Bien désigner l'objet",
+        "consigne": "Tu as acheté plusieurs articles. Explique précisément lequel pose problème en utilisant die / dat.",
+        "role": "Tu es vendeur. Le client a acheté plusieurs articles (deux pantalons, une veste, un sac). Fais-lui préciser de quel article il parle (« Welke? De blauwe of de zwarte? ») jusqu'à ce qu'il le désigne clairement. Phrases simples (A2).",
+        "welcome": "U heeft vorige week verschillende dingen gekocht, zie ik. Over welk product gaat het?"
+      }
+    },
+    {
+      "id": "solution",
+      "titre": "Demander une solution",
+      "intro": "Dire ce que tu veux : échanger, réparer, être remboursé, et comprendre ce qu'on te propose.",
+      "roles": { "A": "Le vendeur", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "We kunnen hem laten herstellen.", "fr": "Nous pouvons la faire réparer." },
+        { "qui": "B", "nl": "Hoe lang duurt dat?", "fr": "Combien de temps ça prend ?" },
+        { "qui": "A", "nl": "Ongeveer drie weken.", "fr": "Environ trois semaines." },
+        { "qui": "B", "nl": "Dat is te lang. Ik zou hem liever ruilen.", "fr": "C'est trop long. Je préférerais l'échanger." },
+        { "qui": "A", "nl": "Of u krijgt uw geld terug.", "fr": "Ou vous êtes remboursé." },
+        { "qui": "B", "nl": "Dan wil ik graag mijn geld terug.", "fr": "Alors je voudrais être remboursé." }
+      ],
+      "vocab": {
+        "verbes": ["ruilen", "herstellen", "terugbetalen", "terugkrijgen", "voorstellen"],
+        "mots": [
+          { "nl": "de oplossing", "fr": "la solution" },
+          { "nl": "de herstelling", "fr": "la réparation" },
+          { "nl": "de terugbetaling", "fr": "le remboursement" },
+          { "nl": "de waardebon", "fr": "le bon d'achat" },
+          { "nl": "het geld terug", "fr": "le remboursement (l'argent rendu)" },
+          { "nl": "nieuw", "fr": "neuf" },
+          { "nl": "ongeveer", "fr": "environ" }
+        ],
+        "phrases": [
+          { "nl": "Ik zou hem liever ruilen.", "fr": "Je préférerais l'échanger." },
+          { "nl": "Ik wil graag mijn geld terug.", "fr": "Je voudrais être remboursé." },
+          { "nl": "Hoe lang duurt de herstelling?", "fr": "Combien de temps dure la réparation ?" }
+        ]
+      },
+      "regle": {
+        "titre": "laten + infinitif : faire faire",
+        "explication": "« laten + infinitif » = faire faire par quelqu'un : « We laten hem herstellen » (on la fait réparer), « Ik laat het nakijken » (je le fais vérifier). Pour exprimer ta préférence : « Ik zou liever … » (je préférerais), « Ik wil graag … » (je voudrais). « Terugkrijgen » est séparable : « Krijg ik mijn geld terug? ».",
+        "exemples": [
+          { "nl": "We laten het toestel herstellen.", "fr": "On fait réparer l'appareil." },
+          { "nl": "Ik zou liever een nieuw toestel krijgen.", "fr": "Je préférerais recevoir un appareil neuf." },
+          { "nl": "Krijg ik mijn geld terug?", "fr": "Est-ce que je suis remboursé ?" },
+          { "nl": "Een waardebon is voor mij geen oplossing.", "fr": "Un bon d'achat n'est pas une solution pour moi." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« On la fait réparer » :", "choices": ["We laten hem herstellen.", "We herstellen laten hem.", "We laten herstellen hem."], "answer": 0 },
+        { "type": "qcm", "q": "« Est-ce que je suis remboursé ? » :", "choices": ["Krijg ik mijn geld terug?", "Terugkrijg ik mijn geld?", "Krijg terug ik mijn geld?"], "answer": 0 },
+        { "type": "trou", "phrase": "Ik zou hem ___ ruilen. (plutôt)", "answer": "liever", "fr": "Je préférerais l'échanger." },
+        { "type": "trou", "phrase": "Hoe lang ___ de herstelling?", "answer": "duurt", "fr": "Combien de temps dure la réparation ?" },
+        { "type": "ordre", "mots": ["geld", "Ik", "terug.", "graag", "mijn", "wil"], "answer": "Ik wil graag mijn geld terug.", "fr": "Je voudrais être remboursé." },
+        { "type": "traduire", "fr": "Un bon d'achat n'est pas une solution pour moi.", "answer": "Een waardebon is voor mij geen oplossing." },
+        { "type": "ecoute", "nl": "We kunnen hem laten herstellen.", "fr": "Nous pouvons la faire réparer." },
+        { "type": "dire", "nl": "Dat is te lang. Ik zou hem liever ruilen.", "fr": "C'est trop long. Je préférerais l'échanger." },
+        { "type": "repondre", "question": "Wat wilt u: een herstelling, een nieuw product of uw geld terug?", "question_fr": "Que voulez-vous : une réparation, un nouveau produit ou être remboursé ?", "attendu": [], "un_de": ["herstelling", "nieuw", "geld terug", "ruilen", "liever"], "exemple": "Ik zou liever een nieuw product krijgen." }
+      ],
+      "jeu": {
+        "titre": "Choisir la solution",
+        "consigne": "Le vendeur propose une réparation longue. Demande d'autres solutions et choisis celle qui te convient.",
+        "role": "Tu es vendeur. Propose d'abord une réparation (4 semaines), puis un bon d'achat, et seulement si le client insiste, un échange ou un remboursement. Demande la raison de son choix. Phrases simples (A2).",
+        "welcome": "Ik heb het bekeken. We kunnen het laten herstellen, dat duurt ongeveer vier weken."
+      }
+    },
+    {
+      "id": "insister",
+      "titre": "Insister poliment",
+      "intro": "Quand on te dit non : rester calme, rappeler tes droits (garantie), demander un responsable ou une confirmation écrite.",
+      "roles": { "A": "Le service client", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Sorry, dat kunnen we niet terugbetalen.", "fr": "Désolé, nous ne pouvons pas rembourser ça." },
+        { "qui": "B", "nl": "Ik begrijp het, maar het product is nog onder garantie.", "fr": "Je comprends, mais le produit est encore sous garantie." },
+        { "qui": "A", "nl": "Die regel geldt niet voor solden.", "fr": "Cette règle ne s'applique pas aux soldes." },
+        { "qui": "B", "nl": "De garantie geldt toch twee jaar, ook in de solden?", "fr": "La garantie vaut pourtant deux ans, même en soldes ?" },
+        { "qui": "B", "nl": "Mag ik de verantwoordelijke spreken, alstublieft?", "fr": "Puis-je parler au responsable, s'il vous plaît ?" },
+        { "qui": "A", "nl": "Een ogenblik, ik ga het vragen.", "fr": "Un instant, je vais demander." }
+      ],
+      "vocab": {
+        "verbes": ["gelden", "begrijpen", "insisteren", "bevestigen", "beslissen"],
+        "mots": [
+          { "nl": "de garantie", "fr": "la garantie" },
+          { "nl": "onder garantie", "fr": "sous garantie" },
+          { "nl": "de regel", "fr": "la règle" },
+          { "nl": "het recht", "fr": "le droit" },
+          { "nl": "de verantwoordelijke", "fr": "le responsable" },
+          { "nl": "schriftelijk", "fr": "par écrit" },
+          { "nl": "toch", "fr": "pourtant, quand même" },
+          { "nl": "rustig", "fr": "calme" }
+        ],
+        "phrases": [
+          { "nl": "Ik begrijp het, maar ...", "fr": "Je comprends, mais ..." },
+          { "nl": "Het is nog onder garantie.", "fr": "C'est encore sous garantie." },
+          { "nl": "Mag ik de verantwoordelijke spreken?", "fr": "Puis-je parler au responsable ?" },
+          { "nl": "Kunt u dat schriftelijk bevestigen?", "fr": "Pouvez-vous le confirmer par écrit ?" }
+        ]
+      },
+      "regle": {
+        "titre": "« toch » et « maar » pour insister sans agresser",
+        "explication": "« Ik begrijp het, maar … » reconnaît la réponse avant de contester. « toch » dans une question sous-entend « non ? » : « De garantie geldt toch twee jaar? » (la garantie vaut bien deux ans, non ?). Pour monter d'un niveau poliment : « Mag ik de verantwoordelijke spreken? », « Kunt u dat schriftelijk bevestigen? ». En Belgique, la garantie légale est de deux ans.",
+        "exemples": [
+          { "nl": "Ik begrijp het, maar ik heb recht op een herstelling.", "fr": "Je comprends, mais j'ai droit à une réparation." },
+          { "nl": "Dat staat toch op de website?", "fr": "C'est pourtant écrit sur le site, non ?" },
+          { "nl": "Kunt u dat schriftelijk bevestigen?", "fr": "Pouvez-vous le confirmer par écrit ?" },
+          { "nl": "Ik blijf rustig, maar ik ben niet tevreden.", "fr": "Je reste calme, mais je ne suis pas satisfait." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Insister poliment :", "choices": ["Dat is belachelijk!", "Ik begrijp het, maar het is nog onder garantie.", "Ik wil het nu!"], "answer": 1 },
+        { "type": "qcm", "q": "« La garantie vaut bien deux ans, non ? » :", "choices": ["De garantie geldt toch twee jaar?", "De garantie toch geldt twee jaar?", "Geldt de garantie twee jaar toch?"], "answer": 0 },
+        { "type": "trou", "phrase": "Het product is nog ___ garantie.", "answer": "onder", "fr": "Le produit est encore sous garantie." },
+        { "type": "trou", "phrase": "Mag ik de ___ spreken? (responsable)", "answer": "verantwoordelijke", "fr": "Puis-je parler au responsable ?" },
+        { "type": "ordre", "mots": ["dat", "Kunt", "bevestigen?", "schriftelijk", "u"], "answer": "Kunt u dat schriftelijk bevestigen?", "fr": "Pouvez-vous le confirmer par écrit ?" },
+        { "type": "traduire", "fr": "Je comprends, mais j'ai droit à une réparation.", "answer": "Ik begrijp het, maar ik heb recht op een herstelling." },
+        { "type": "ecoute", "nl": "Die regel geldt niet voor solden.", "fr": "Cette règle ne s'applique pas aux soldes." },
+        { "type": "dire", "nl": "Ik begrijp het, maar het product is nog onder garantie.", "fr": "Je comprends, mais le produit est encore sous garantie." },
+        { "type": "repondre", "question": "Sorry, dat kunnen we niet doen.", "question_fr": "Désolé, nous ne pouvons pas faire ça.", "attendu": [], "un_de": ["begrijp", "maar", "garantie", "verantwoordelijke", "toch", "recht"], "exemple": "Ik begrijp het, maar het is nog onder garantie." }
+      ],
+      "jeu": {
+        "titre": "On te dit non",
+        "consigne": "Le service client refuse ta demande. Insiste poliment, rappelle la garantie, et demande un responsable ou une confirmation écrite.",
+        "role": "Tu es employé du service client, d'abord fermé (« dat kunnen we niet doen », « het was in de solden »). Si le client reste poli et argumente (garantie de deux ans, achat récent), finis par proposer un échange. S'il s'énerve, reste neutre. Phrases simples (A2).",
+        "welcome": "Ik heb uw vraag bekeken, maar terugbetalen is helaas niet mogelijk."
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : une réclamation au magasin",
+    "consigne": "Le lave-linge que tu as acheté il y a un mois fuit. Va au magasin : décris le problème, raconte ce qui s'est passé, désigne bien l'appareil, demande une solution et insiste poliment si on refuse.",
+    "role": "Tu es Wim, employé au service après-vente d'un magasin d'électroménager. Le client vient pour un lave-linge qui fuit, acheté il y a un mois. Pose des questions (quel modèle, quand acheté, depuis quand, comment il l'utilise, ticket ?). Propose d'abord une réparation dans trois semaines ; refuse une première fois l'échange ; accepte un remplacement si le client insiste poliment avec de bons arguments (garantie, besoin urgent). Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Goeiedag, dienst na verkoop. Waarmee kan ik u helpen?"
+  },
+  "examen": {
+    "reussite": "Tu sais faire une réclamation en néerlandais.",
+    "sujets": [
+      { "label": "décrire le problème", "etape": "probleme", "mots": ["mis", "werkt niet", "lekt", "kapot", "probleem", "defect"] },
+      { "label": "dire depuis quand", "etape": "probleme", "mots": ["sinds", "maand", "week", "gisteren", "pas"] },
+      { "label": "raconter au passé", "etape": "passe", "mots": ["#perfectum-hebben", "#perfectum-zijn"] },
+      { "label": "désigner l'objet (die / dat)", "etape": "relatifs", "mots": ["die ik", "dat ik", "die u", "dat u"] },
+      { "label": "parler du ticket ou de la garantie", "etape": "insister", "mots": ["bonnetje", "kasticket", "ticket", "garantie", "factuur"] },
+      { "label": "demander une solution", "etape": "solution", "mots": ["ruilen", "herstellen", "geld terug", "terugbetalen", "nieuw", "liever"] },
+      { "label": "insister poliment", "etape": "insister", "mots": ["begrijp", "maar", "toch", "verantwoordelijke", "recht", "schriftelijk"] },
+      { "label": "conclure", "etape": "solution", "mots": ["dank", "bedankt", "goed", "oké", "afgesproken"] }
+    ]
+  }
+}

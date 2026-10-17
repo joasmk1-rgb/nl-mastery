@@ -1,0 +1,322 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_invitation",
+  "niveau": "A2",
+  "icone": "🍻",
+  "titre": "Une invitation entre collègues",
+  "accroche": "Inviter, accepter ou refuser poliment, faire la conversation pendant la soirée et remercier.",
+  "objectif": "À la fin du module, tu sais gérer la vie sociale au travail : inviter ou répondre à une invitation, faire la conversation pendant une soirée, parler de toi plus en détail et remercier.",
+  "etapes": [
+    {
+      "id": "inviter",
+      "titre": "Inviter quelqu'un",
+      "intro": "Proposer une sortie : « Heb je zin om … te … ? », « Zou je zin hebben in … ? », « Kom je ook? ».",
+      "roles": { "A": "Un collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Heb je zin om vrijdag iets te gaan drinken na het werk?", "fr": "Tu as envie d'aller boire un verre vendredi après le travail ?" },
+        { "qui": "A", "nl": "Leuk idee! Waar dacht je aan?", "fr": "Bonne idée ! Tu pensais à quoi ?" },
+        { "qui": "B", "nl": "Aan het café op de markt. Er zijn ook andere collega's.", "fr": "Au café sur la place. Il y a aussi d'autres collègues." },
+        { "qui": "A", "nl": "Hoe laat spreken we af?", "fr": "On se retrouve à quelle heure ?" },
+        { "qui": "B", "nl": "Om half zes, direct na het werk.", "fr": "À cinq heures et demie, juste après le travail." }
+      ],
+      "vocab": {
+        "verbes": ["uitnodigen", "afspreken", "drinken", "meegaan", "voorstellen"],
+        "mots": [
+          { "nl": "de uitnodiging", "fr": "l'invitation" },
+          { "nl": "zin hebben in", "fr": "avoir envie de (+ nom)" },
+          { "nl": "zin hebben om … te", "fr": "avoir envie de (+ verbe)" },
+          { "nl": "het café", "fr": "le café (bar)" },
+          { "nl": "het etentje", "fr": "le petit repas" },
+          { "nl": "de verjaardag", "fr": "l'anniversaire" },
+          { "nl": "het feestje", "fr": "la petite fête" },
+          { "nl": "na het werk", "fr": "après le travail" }
+        ],
+        "phrases": [
+          { "nl": "Heb je zin om iets te gaan drinken?", "fr": "Tu as envie d'aller boire un verre ?" },
+          { "nl": "Kom je ook?", "fr": "Tu viens aussi ?" },
+          { "nl": "Hoe laat spreken we af?", "fr": "On se retrouve à quelle heure ?" }
+        ]
+      },
+      "regle": {
+        "titre": "zin hebben in + nom / zin hebben om … te + verbe",
+        "explication": "« Ik heb zin in koffie » (j'ai envie d'un café) : avec un nom, « in ». « Ik heb zin om te dansen » : avec un verbe, « om … te + infinitif » à la fin. Pour inviter : « Heb je zin om … te … ? » ou plus poli « Zou je zin hebben om … ? ». « Afspreken » = convenir d'un rendez-vous : Hoe laat spreken we af?",
+        "exemples": [
+          { "nl": "Heb je zin in een pizza?", "fr": "Tu as envie d'une pizza ?" },
+          { "nl": "Heb je zin om mee te gaan?", "fr": "Tu as envie de venir ?" },
+          { "nl": "Zou je zin hebben om zaterdag te komen eten?", "fr": "Aurais-tu envie de venir manger samedi ?" },
+          { "nl": "We spreken om acht uur af.", "fr": "On se donne rendez-vous à huit heures." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Tu as envie d'une pizza ? » :", "choices": ["Heb je zin om een pizza?", "Heb je zin in een pizza?", "Heb je zin een pizza te?"], "answer": 1 },
+        { "type": "qcm", "q": "« Tu as envie de venir ? » :", "choices": ["Heb je zin om mee te gaan?", "Heb je zin in meegaan?", "Heb je zin om te meegaan?"], "answer": 0 },
+        { "type": "trou", "phrase": "Heb je zin ___ vrijdag iets te gaan drinken?", "answer": "om", "fr": "Tu as envie d'aller boire un verre vendredi ?" },
+        { "type": "trou", "phrase": "Hoe laat spreken we ___?", "answer": "af", "fr": "On se retrouve à quelle heure ?" },
+        { "type": "ordre", "mots": ["je", "Kom", "ook?"], "answer": "Kom je ook?", "fr": "Tu viens aussi ?" },
+        { "type": "traduire", "fr": "J'ai envie d'un café.", "answer": "Ik heb zin in koffie./Ik heb zin in een koffie." },
+        { "type": "ecoute", "nl": "Zou je zin hebben om zaterdag te komen eten?", "fr": "Aurais-tu envie de venir manger samedi ?" },
+        { "type": "dire", "nl": "Heb je zin om vrijdag iets te gaan drinken?", "fr": "Tu as envie d'aller boire un verre vendredi ?" },
+        { "type": "repondre", "question": "Waar heb je zin in vanavond?", "question_fr": "De quoi as-tu envie ce soir ?", "attendu": ["zin"], "exemple": "Ik heb zin in een film." }
+      ],
+      "jeu": {
+        "titre": "Organiser un verre",
+        "consigne": "Invite un collègue à boire un verre après le travail : propose un jour, un lieu, une heure.",
+        "role": "Tu es Kobe, collègue sympathique mais très occupé. L'apprenant t'invite. Montre de l'intérêt, demande où, quand, avec qui ; le jour proposé ne te va pas, propose un autre jour. Phrases simples (A2).",
+        "welcome": "Hé, alles goed? Ik heb net mijn laatste mail verstuurd. Eindelijk tijd voor iets anders!"
+      }
+    },
+    {
+      "id": "repondre",
+      "titre": "Accepter ou refuser poliment",
+      "intro": "Accepter avec plaisir, ou refuser sans vexer : remercier, donner une excuse, proposer autre chose.",
+      "roles": { "A": "Ta collègue Sarah", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Ik geef zaterdag een feestje voor mijn verjaardag. Kom je ook?", "fr": "Je fais une petite fête samedi pour mon anniversaire. Tu viens aussi ?" },
+        { "qui": "B", "nl": "Wat lief dat je me uitnodigt!", "fr": "C'est gentil de m'inviter !" },
+        { "qui": "B", "nl": "Jammer genoeg kan ik niet, want ik heb al iets met mijn familie.", "fr": "Malheureusement je ne peux pas, car j'ai déjà quelque chose avec ma famille." },
+        { "qui": "A", "nl": "Oh, jammer!", "fr": "Oh, dommage !" },
+        { "qui": "B", "nl": "Maar zullen we volgende week samen lunchen om het te vieren?", "fr": "Mais si on déjeunait ensemble la semaine prochaine pour fêter ça ?" }
+      ],
+      "vocab": {
+        "verbes": ["aannemen", "weigeren", "uitnodigen", "vieren", "bedanken"],
+        "mots": [
+          { "nl": "graag!", "fr": "volontiers !" },
+          { "nl": "met plezier", "fr": "avec plaisir" },
+          { "nl": "jammer genoeg", "fr": "malheureusement" },
+          { "nl": "helaas", "fr": "hélas" },
+          { "nl": "wat lief", "fr": "c'est gentil" },
+          { "nl": "een andere keer", "fr": "une autre fois" },
+          { "nl": "al iets", "fr": "déjà quelque chose (de prévu)" },
+          { "nl": "gelukkige verjaardag!", "fr": "joyeux anniversaire !" }
+        ],
+        "phrases": [
+          { "nl": "Graag, ik kom met plezier!", "fr": "Volontiers, je viens avec plaisir !" },
+          { "nl": "Jammer genoeg kan ik niet.", "fr": "Malheureusement, je ne peux pas." },
+          { "nl": "Misschien een andere keer?", "fr": "Peut-être une autre fois ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Refuser en trois temps",
+        "explication": "Un refus poli en néerlandais : 1) remercier (« Bedankt voor de uitnodiging », « Wat lief »), 2) refuser avec une raison (« Jammer genoeg kan ik niet, want … » — want garde l'ordre normal), 3) proposer autre chose (« Misschien een andere keer? », « Zullen we … ? »). Pour accepter : « Graag! », « Met plezier! », « Ik kom zeker ».",
+        "exemples": [
+          { "nl": "Bedankt voor de uitnodiging, ik kom graag.", "fr": "Merci pour l'invitation, je viens volontiers." },
+          { "nl": "Helaas kan ik niet, want ik werk die avond.", "fr": "Hélas je ne peux pas, car je travaille ce soir-là." },
+          { "nl": "Misschien een andere keer?", "fr": "Peut-être une autre fois ?" },
+          { "nl": "Ik kom zeker, maar wat later.", "fr": "Je viens sûrement, mais un peu plus tard." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Un refus poli :", "choices": ["Nee, ik wil niet.", "Jammer genoeg kan ik niet, want ik werk.", "Geen zin."], "answer": 1 },
+        { "type": "qcm", "q": "« Avec plaisir ! » :", "choices": ["Met plezier!", "Met graag!", "Plezier graag!"], "answer": 0 },
+        { "type": "trou", "phrase": "___ genoeg kan ik niet. (malheureusement)", "answer": "Jammer", "fr": "Malheureusement, je ne peux pas." },
+        { "type": "trou", "phrase": "Bedankt ___ de uitnodiging!", "answer": "voor", "fr": "Merci pour l'invitation !" },
+        { "type": "ordre", "mots": ["andere", "Misschien", "keer?", "een"], "answer": "Misschien een andere keer?", "fr": "Peut-être une autre fois ?" },
+        { "type": "traduire", "fr": "Je viens sûrement, mais un peu plus tard.", "answer": "Ik kom zeker, maar wat later./Ik kom zeker, maar een beetje later." },
+        { "type": "ecoute", "nl": "Helaas kan ik niet, want ik werk die avond.", "fr": "Hélas je ne peux pas, car je travaille ce soir-là." },
+        { "type": "dire", "nl": "Wat lief dat je me uitnodigt! Ik kom graag.", "fr": "C'est gentil de m'inviter ! Je viens volontiers." },
+        { "type": "repondre", "question": "Kom je zaterdag naar mijn feestje?", "question_fr": "Tu viens à ma fête samedi ?", "attendu": [], "un_de": ["graag", "plezier", "zeker", "jammer", "helaas", "kan niet"], "exemple": "Graag! Hoe laat begint het?" }
+      ],
+      "jeu": {
+        "titre": "Deux invitations",
+        "consigne": "Ta collègue t'invite à deux événements. Accepte l'un avec plaisir et refuse l'autre poliment en proposant autre chose.",
+        "role": "Tu es Sarah, collègue chaleureuse. Invite d'abord l'apprenant à ton anniversaire samedi soir, puis à une course à pied caritative dimanche à 8 h du matin. Réagis à ses réponses ; s'il refuse sans raison, demande « Waarom niet? ». Phrases simples (A2).",
+        "welcome": "Ik heb twee uitnodigingen voor jou! Eerst: zaterdag vier ik mijn verjaardag. Kom je ook?"
+      }
+    },
+    {
+      "id": "soiree",
+      "titre": "Faire la conversation",
+      "intro": "Pendant la soirée : lancer un sujet, poser des questions ouvertes, rebondir, et utiliser des petites phrases de liaison.",
+      "roles": { "A": "Le partenaire d'un collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hallo, ik ben Jan, de partner van Sarah. En jij?", "fr": "Bonjour, je suis Jan, le compagnon de Sarah. Et toi ?" },
+        { "qui": "B", "nl": "Aangenaam, ik werk samen met Sarah. Wat doe jij voor werk?", "fr": "Enchanté, je travaille avec Sarah. Tu fais quoi comme travail ?" },
+        { "qui": "A", "nl": "Ik ben verpleegkundige in het ziekenhuis.", "fr": "Je suis infirmier à l'hôpital." },
+        { "qui": "B", "nl": "Interessant! Werk je ook 's nachts?", "fr": "Intéressant ! Tu travailles aussi la nuit ?" },
+        { "qui": "A", "nl": "Soms, ja. Dat is wel zwaar.", "fr": "Parfois, oui. C'est assez dur." },
+        { "qui": "B", "nl": "Dat geloof ik. Hoe hou je dat vol?", "fr": "Je veux bien le croire. Comment tu tiens le coup ?" }
+      ],
+      "vocab": {
+        "verbes": ["kennen", "volhouden", "geloven", "vertellen", "proeven"],
+        "mots": [
+          { "nl": "de partner", "fr": "le/la partenaire" },
+          { "nl": "interessant", "fr": "intéressant" },
+          { "nl": "zwaar", "fr": "dur, lourd" },
+          { "nl": "dat geloof ik", "fr": "je veux bien le croire" },
+          { "nl": "o ja?", "fr": "ah oui ?" },
+          { "nl": "hoe zo?", "fr": "comment ça ?" },
+          { "nl": "trouwens", "fr": "au fait" },
+          { "nl": "de hapjes", "fr": "les amuse-bouches" }
+        ],
+        "phrases": [
+          { "nl": "Wat doe jij voor werk?", "fr": "Tu fais quoi comme travail ?" },
+          { "nl": "Hoe ken jij Sarah?", "fr": "Comment tu connais Sarah ?" },
+          { "nl": "O ja? Vertel eens!", "fr": "Ah oui ? Raconte !" },
+          { "nl": "Trouwens, ...", "fr": "Au fait, ..." }
+        ]
+      },
+      "regle": {
+        "titre": "Questions ouvertes et petites relances",
+        "explication": "Pour faire durer une conversation : questions ouvertes avec un mot interrogatif (Hoe ken jij…? Wat doe je…? Waar woon je…?), puis relances courtes : « O ja? », « Echt? », « Hoe zo? », « Vertel eens! » (raconte !). « eens » adoucit un ordre : « Vertel eens », « Kijk eens ». « Trouwens » (au fait) permet de changer de sujet.",
+        "exemples": [
+          { "nl": "Hoe ken jij de gastvrouw?", "fr": "Comment connais-tu l'hôtesse ?" },
+          { "nl": "O ja? Vertel eens!", "fr": "Ah oui ? Raconte !" },
+          { "nl": "Trouwens, de hapjes zijn heerlijk.", "fr": "Au fait, les amuse-bouches sont délicieux." },
+          { "nl": "Hoe zo?", "fr": "Comment ça ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Raconte ! » :", "choices": ["Vertel eens!", "Vertel maar eens niet!", "Eens vertellen!"], "answer": 0 },
+        { "type": "qcm", "q": "Pour changer de sujet :", "choices": ["Trouwens, …", "Dus, …", "Want, …"], "answer": 0 },
+        { "type": "trou", "phrase": "Hoe ___ jij Sarah? (connais)", "answer": "ken", "fr": "Comment tu connais Sarah ?" },
+        { "type": "trou", "phrase": "Wat doe jij ___ werk?", "answer": "voor", "fr": "Tu fais quoi comme travail ?" },
+        { "type": "ordre", "mots": ["je", "Hoe", "vol?", "hou", "dat"], "answer": "Hoe hou je dat vol?", "fr": "Comment tu tiens le coup ?" },
+        { "type": "traduire", "fr": "Au fait, les amuse-bouches sont délicieux.", "answer": "Trouwens, de hapjes zijn heerlijk." },
+        { "type": "ecoute", "nl": "Ik ben verpleegkundige in het ziekenhuis.", "fr": "Je suis infirmier à l'hôpital." },
+        { "type": "dire", "nl": "Interessant! Hoe ken jij Sarah?", "fr": "Intéressant ! Comment tu connais Sarah ?" },
+        { "type": "repondre", "question": "Hallo, ik ken je nog niet. Wie ben jij?", "question_fr": "Bonjour, je ne te connais pas encore. Qui es-tu ?", "attendu": ["ik"], "exemple": "Ik ben Sami, ik werk samen met Sarah." }
+      ],
+      "jeu": {
+        "titre": "Une conversation à la fête",
+        "consigne": "À la fête d'une collègue, tu discutes avec quelqu'un que tu ne connais pas. Fais connaissance et fais durer la conversation.",
+        "role": "Tu es Jan, le compagnon de Sarah, infirmier, passionné de cuisine et de randonnée. Réponds aux questions de l'apprenant sans trop développer pour qu'il doive relancer ; pose-lui aussi des questions (comment il connaît Sarah, son travail, ses loisirs). Phrases simples (A2).",
+        "welcome": "Hallo! Ik denk niet dat we elkaar al kennen. Ik ben Jan."
+      }
+    },
+    {
+      "id": "detail",
+      "titre": "Parler de soi plus en détail",
+      "intro": "Aller au-delà des phrases de base : raconter ton parcours, tes goûts, tes projets, en reliant tes idées.",
+      "roles": { "A": "Un collègue d'un autre service", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waar kom je eigenlijk vandaan?", "fr": "D'où viens-tu au juste ?" },
+        { "qui": "B", "nl": "Ik ben geboren in Kinshasa, maar ik ben opgegroeid in Luik.", "fr": "Je suis né à Kinshasa, mais j'ai grandi à Liège." },
+        { "qui": "B", "nl": "Drie jaar geleden ben ik naar Vlaanderen verhuisd omdat ik hier werk vond.", "fr": "Il y a trois ans, j'ai déménagé en Flandre parce que j'ai trouvé du travail ici." },
+        { "qui": "A", "nl": "En bevalt het je hier?", "fr": "Et ça te plaît ici ?" },
+        { "qui": "B", "nl": "Ja, heel goed. Alleen de taal was in het begin moeilijk.", "fr": "Oui, très bien. Seule la langue était difficile au début." }
+      ],
+      "vocab": {
+        "verbes": ["opgroeien", "verhuizen", "bevallen", "wennen", "missen"],
+        "mots": [
+          { "nl": "geboren", "fr": "né" },
+          { "nl": "opgegroeid", "fr": "grandi" },
+          { "nl": "eigenlijk", "fr": "au juste, en fait" },
+          { "nl": "in het begin", "fr": "au début" },
+          { "nl": "het bevalt me", "fr": "ça me plaît" },
+          { "nl": "gewend aan", "fr": "habitué à" },
+          { "nl": "de taal", "fr": "la langue" },
+          { "nl": "alleen", "fr": "seulement, seul" }
+        ],
+        "phrases": [
+          { "nl": "Ik ben geboren in ..., maar ik ben opgegroeid in ...", "fr": "Je suis né à ..., mais j'ai grandi à ..." },
+          { "nl": "Het bevalt me hier goed.", "fr": "Ça me plaît bien ici." },
+          { "nl": "Ik ben eraan gewend.", "fr": "Je m'y suis habitué." }
+        ]
+      },
+      "regle": {
+        "titre": "Relier les idées : maar, omdat, toen, alleen",
+        "explication": "Pour parler de toi de façon fluide, relie les phrases : « maar » (mais, ordre normal), « omdat » (verbe à la fin), un moment en tête avec inversion (« Drie jaar geleden ben ik verhuisd »). « Het bevalt me (goed) » = ça me plaît. « Ik ben gewend aan … / Ik ben eraan gewend » = je suis habitué (à ça). « opgroeien » et « verhuizen » se conjuguent avec zijn.",
+        "exemples": [
+          { "nl": "Ik ben opgegroeid in Luik.", "fr": "J'ai grandi à Liège." },
+          { "nl": "Het werk bevalt me goed.", "fr": "Le travail me plaît bien." },
+          { "nl": "Ik ben gewend aan het weer.", "fr": "Je suis habitué au temps." },
+          { "nl": "In het begin was het moeilijk, maar nu gaat het.", "fr": "Au début c'était difficile, mais maintenant ça va." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'ai grandi à Liège » :", "choices": ["Ik heb opgegroeid in Luik.", "Ik ben opgegroeid in Luik.", "Ik ben gegroeid op in Luik."], "answer": 1 },
+        { "type": "qcm", "q": "« Ça me plaît bien » :", "choices": ["Het bevalt me goed.", "Ik bevalt het goed.", "Het plezier me goed."], "answer": 0 },
+        { "type": "trou", "phrase": "Ik ben ___ aan het weer. (habitué)", "answer": "gewend", "fr": "Je suis habitué au temps." },
+        { "type": "trou", "phrase": "Drie jaar geleden ___ ik naar Vlaanderen verhuisd.", "answer": "ben", "fr": "Il y a trois ans, j'ai déménagé en Flandre." },
+        { "type": "ordre", "mots": ["was", "In", "moeilijk.", "het", "begin", "het"], "answer": "In het begin was het moeilijk.", "fr": "Au début, c'était difficile." },
+        { "type": "traduire", "fr": "Je suis né à Kinshasa.", "answer": "Ik ben geboren in Kinshasa./Ik ben in Kinshasa geboren." },
+        { "type": "ecoute", "nl": "Alleen de taal was in het begin moeilijk.", "fr": "Seule la langue était difficile au début." },
+        { "type": "dire", "nl": "Het bevalt me hier heel goed.", "fr": "Ça me plaît beaucoup ici." },
+        { "type": "repondre", "question": "Bevalt het je in Vlaanderen?", "question_fr": "Ça te plaît en Flandre ?", "attendu": [], "un_de": ["bevalt", "ja", "goed", "maar", "gewend"], "exemple": "Ja, het bevalt me goed, maar de taal is soms moeilijk." }
+      ],
+      "jeu": {
+        "titre": "Raconter son histoire",
+        "consigne": "Un collègue d'un autre service s'intéresse à ton parcours. Raconte d'où tu viens, pourquoi tu es ici, comment ça se passe, avec des phrases reliées.",
+        "role": "Tu es Bert, collègue curieux d'un autre service. Pose des questions sur le parcours de l'apprenant : où il est né et a grandi, depuis quand il est en Flandre et pourquoi, si ça lui plaît, ce qui était difficile au début, ce qui lui manque. Réagis avec intérêt. Phrases simples (A2).",
+        "welcome": "Ik hoor dat je Frans spreekt. Waar kom je eigenlijk vandaan?"
+      }
+    },
+    {
+      "id": "remercier",
+      "titre": "Partir et remercier",
+      "intro": "Quitter une soirée poliment et remercier le lendemain : « Bedankt voor de leuke avond! ».",
+      "roles": { "A": "Ta collègue Sarah", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Sarah, ik ga ervandoor. Het was een heel leuke avond!", "fr": "Sarah, je m'en vais. C'était une très bonne soirée !" },
+        { "qui": "A", "nl": "Al? Blijf nog even!", "fr": "Déjà ? Reste encore un peu !" },
+        { "qui": "B", "nl": "Ik zou graag blijven, maar ik moet morgen vroeg op.", "fr": "Je resterais volontiers, mais je dois me lever tôt demain." },
+        { "qui": "A", "nl": "Oké, bedankt om te komen!", "fr": "D'accord, merci d'être venu !" },
+        { "qui": "B", "nl": "Bedankt voor de uitnodiging. Tot maandag!", "fr": "Merci pour l'invitation. À lundi !" }
+      ],
+      "vocab": {
+        "verbes": ["vertrekken", "blijven", "bedanken", "opstaan", "genieten"],
+        "mots": [
+          { "nl": "ervandoor gaan", "fr": "s'en aller" },
+          { "nl": "de avond", "fr": "la soirée" },
+          { "nl": "gezellig", "fr": "convivial, sympa" },
+          { "nl": "nog even", "fr": "encore un peu" },
+          { "nl": "vroeg op", "fr": "levé tôt" },
+          { "nl": "tot maandag", "fr": "à lundi" },
+          { "nl": "het eten", "fr": "le repas" }
+        ],
+        "phrases": [
+          { "nl": "Ik ga ervandoor.", "fr": "Je m'en vais." },
+          { "nl": "Het was heel gezellig!", "fr": "C'était très sympa !" },
+          { "nl": "Bedankt voor de uitnodiging.", "fr": "Merci pour l'invitation." },
+          { "nl": "Bedankt om te komen!", "fr": "Merci d'être venu !" }
+        ]
+      },
+      "regle": {
+        "titre": "Bedankt voor + nom / bedankt om te + verbe",
+        "explication": "Remercier pour une chose : « Bedankt voor de uitnodiging / het eten / de leuke avond ». Pour une action : « Bedankt om te komen » (merci d'être venu), « Bedankt om me te helpen ». Partir : « Ik ga ervandoor », « Ik moet gaan ». Excuse polie avec zou : « Ik zou graag blijven, maar … ». « Gezellig » est le compliment flamand par excellence pour une soirée.",
+        "exemples": [
+          { "nl": "Bedankt voor het lekkere eten!", "fr": "Merci pour le bon repas !" },
+          { "nl": "Bedankt om me uit te nodigen.", "fr": "Merci de m'avoir invité." },
+          { "nl": "Ik zou graag blijven, maar ik moet gaan.", "fr": "Je resterais volontiers, mais je dois y aller." },
+          { "nl": "Het was echt gezellig!", "fr": "C'était vraiment sympa !" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Merci pour le bon repas ! » :", "choices": ["Bedankt om het lekkere eten!", "Bedankt voor het lekkere eten!", "Bedankt van het lekkere eten!"], "answer": 1 },
+        { "type": "qcm", "q": "« Merci d'être venu ! » :", "choices": ["Bedankt voor te komen!", "Bedankt om te komen!", "Bedankt om komen!"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik ga ___. (je m'en vais)", "answer": "ervandoor", "fr": "Je m'en vais." },
+        { "type": "trou", "phrase": "Ik zou graag blijven, ___ ik moet morgen vroeg op.", "answer": "maar", "fr": "Je resterais volontiers, mais je dois me lever tôt demain." },
+        { "type": "ordre", "mots": ["echt", "Het", "gezellig!", "was"], "answer": "Het was echt gezellig!", "fr": "C'était vraiment sympa !" },
+        { "type": "traduire", "fr": "Merci pour l'invitation. À lundi !", "answer": "Bedankt voor de uitnodiging. Tot maandag!" },
+        { "type": "ecoute", "nl": "Al? Blijf nog even!", "fr": "Déjà ? Reste encore un peu !" },
+        { "type": "dire", "nl": "Het was een heel leuke avond. Bedankt voor de uitnodiging!", "fr": "C'était une très bonne soirée. Merci pour l'invitation !" },
+        { "type": "repondre", "question": "Ga je nu al naar huis?", "question_fr": "Tu rentres déjà ?", "attendu": [], "un_de": ["moet", "zou", "maar", "morgen", "ja"], "exemple": "Ja, ik zou graag blijven, maar ik moet morgen vroeg op." }
+      ],
+      "jeu": {
+        "titre": "Quitter la fête",
+        "consigne": "Il est tard : prends congé de ton hôtesse poliment, résiste à son insistance, et remercie.",
+        "role": "Tu es Sarah, l'hôtesse, qui insiste gentiment pour que l'apprenant reste (« Nog één drankje! », « Het dessert komt nog! »). Laisse-le partir s'il donne une raison polie. Demande-lui ce qu'il a pensé de la soirée. Phrases simples (A2).",
+        "welcome": "Je kijkt op je horloge... Je gaat toch nog niet weg?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : la soirée de fin d'année",
+    "consigne": "Une collègue t'invite à la soirée de fin d'année. Réponds à l'invitation (accepte), puis pendant la soirée fais la conversation avec un collègue que tu connais peu : présente-toi, parle de ton parcours, pose des questions, relance. Puis prends congé poliment et remercie.",
+    "role": "Tu joues deux personnages. D'abord Sarah, collègue qui invite l'apprenant à la soirée de fin d'année (vendredi 20 décembre, 19 h, au restaurant De Kroon). Quand il a accepté, écris entre crochets [vendredi soir, à la soirée] et deviens Bert, collègue d'un autre service qu'il connaît peu : faites connaissance (parcours, travail, loisirs, projets pour les vacances), réponds brièvement pour qu'il doive relancer. Termine en annonçant qu'il est tard, pour qu'il prenne congé. Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Hé, je hebt toch de mail gezien? Vrijdag twintig december is ons eindejaarsfeest. Kom je ook?"
+  },
+  "examen": {
+    "reussite": "Tu sais gérer une invitation et une soirée entre collègues en néerlandais.",
+    "sujets": [
+      { "label": "répondre à l'invitation", "etape": "repondre", "mots": ["graag", "met plezier", "zeker", "ik kom", "kom ik"] },
+      { "label": "poser une question pratique", "etape": "inviter", "mots": ["hoe laat", "waar", "wie", "moet ik", "meebrengen"] },
+      { "label": "te présenter", "etape": "soiree", "mots": ["ik ben", "ik werk", "aangenaam", "ik heet"] },
+      { "label": "parler de ton parcours", "etape": "detail", "mots": ["geboren", "opgegroeid", "verhuisd", "geleden", "kom uit"] },
+      { "label": "poser des questions ouvertes", "etape": "soiree", "mots": ["wat doe", "hoe ken", "waar woon", "hoe lang", "wat vind"] },
+      { "label": "relancer la conversation", "etape": "soiree", "mots": ["o ja", "echt", "vertel eens", "hoe zo", "interessant", "trouwens", "en jij"] },
+      { "label": "prendre congé", "etape": "remercier", "mots": ["ervandoor", "moet gaan", "ga naar huis", "moet morgen"] },
+      { "label": "remercier", "etape": "remercier", "mots": ["bedankt voor", "bedankt om", "dank", "gezellig", "leuke avond"] }
+    ]
+  }
+}

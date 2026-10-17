@@ -12986,5 +12986,127 @@
     "exempleNl": "",
     "exempleFr": "",
     "freq": 2.49
+  },
+  {
+    "infinitief": "afhangen",
+    "fr": "dépendre (de)",
+    "present": {
+      "ik": "hang af",
+      "jij": "hangt af",
+      "hij": "hangt af",
+      "wij": "hangen af"
+    },
+    "preteritum": "hing af",
+    "participePasse": "afgehangen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.23,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "redeneren",
+    "fr": "raisonner",
+    "present": {
+      "ik": "redeneer",
+      "jij": "redeneert",
+      "hij": "redeneert",
+      "wij": "redeneren"
+    },
+    "preteritum": "redeneerde",
+    "participePasse": "geredeneerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.24,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "aangaan",
+    "fr": "s'allumer",
+    "present": {
+      "ik": "ga aan",
+      "jij": "gaat aan",
+      "hij": "gaat aan",
+      "wij": "gaan aan"
+    },
+    "preteritum": "ging aan",
+    "participePasse": "aangegaan",
+    "auxiliaire": "zijn",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.81,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "loskomen",
+    "fr": "se détacher / se décoller",
+    "present": {
+      "ik": "kom los",
+      "jij": "komt los",
+      "hij": "komt los",
+      "wij": "komen los"
+    },
+    "preteritum": "kwam los",
+    "participePasse": "losgekomen",
+    "auxiliaire": "zijn",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.77
+  },
+  {
+    "infinitief": "insisteren",
+    "fr": "insister",
+    "present": {
+      "ik": "insisteer",
+      "jij": "insisteert",
+      "hij": "insisteert",
+      "wij": "insisteren"
+    },
+    "preteritum": "insisteerde",
+    "participePasse": "geïnsisteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 0.0
+  },
+  {
+    "infinitief": "overnachten",
+    "fr": "passer la nuit",
+    "present": {
+      "ik": "overnacht",
+      "jij": "overnacht",
+      "hij": "overnacht",
+      "wij": "overnachten"
+    },
+    "preteritum": "overnachtte",
+    "participePasse": "overnacht",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.66,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "volhouden",
+    "fr": "tenir bon / persévérer",
+    "present": {
+      "ik": "houd vol",
+      "jij": "houdt vol",
+      "hij": "houdt vol",
+      "wij": "houden vol"
+    },
+    "preteritum": "hield vol",
+    "participePasse": "volgehouden",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.03,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
   }
 ]

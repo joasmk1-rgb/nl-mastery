@@ -1,0 +1,329 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_voyage",
+  "niveau": "A2",
+  "icone": "🏨",
+  "titre": "Voyager et réserver",
+  "accroche": "Réserver une chambre, demander des informations, louer un vélo, régler un imprévu en voyage.",
+  "objectif": "À la fin du module, tu sais organiser un court séjour : réserver, poser des questions sur les services, te débrouiller sur place et gérer un problème.",
+  "etapes": [
+    {
+      "id": "reserver",
+      "titre": "Réserver une chambre",
+      "intro": "Réserver par téléphone : dates, nombre de personnes, type de chambre, prix, petit-déjeuner.",
+      "roles": { "A": "La réceptionniste de l'hôtel", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Goeiedag, ik wil graag een kamer reserveren.", "fr": "Bonjour, je voudrais réserver une chambre." },
+        { "qui": "A", "nl": "Voor wanneer en voor hoeveel personen?", "fr": "Pour quand et pour combien de personnes ?" },
+        { "qui": "B", "nl": "Voor twee personen, van vrijdag tot zondag.", "fr": "Pour deux personnes, de vendredi à dimanche." },
+        { "qui": "A", "nl": "Een tweepersoonskamer kost negentig euro per nacht.", "fr": "Une chambre double coûte quatre-vingt-dix euros la nuit." },
+        { "qui": "B", "nl": "Is het ontbijt inbegrepen?", "fr": "Le petit-déjeuner est-il compris ?" },
+        { "qui": "A", "nl": "Ja, het ontbijt is inbegrepen.", "fr": "Oui, le petit-déjeuner est compris." }
+      ],
+      "vocab": {
+        "verbes": ["reserveren", "overnachten", "kosten", "annuleren", "bevestigen"],
+        "mots": [
+          { "nl": "het hotel", "fr": "l'hôtel" },
+          { "nl": "de kamer", "fr": "la chambre" },
+          { "nl": "de eenpersoonskamer", "fr": "la chambre simple" },
+          { "nl": "de tweepersoonskamer", "fr": "la chambre double" },
+          { "nl": "de nacht", "fr": "la nuit" },
+          { "nl": "het ontbijt", "fr": "le petit-déjeuner" },
+          { "nl": "inbegrepen", "fr": "compris" },
+          { "nl": "de reservatie", "fr": "la réservation" },
+          { "nl": "vrij", "fr": "libre, disponible" }
+        ],
+        "phrases": [
+          { "nl": "Ik wil graag een kamer reserveren.", "fr": "Je voudrais réserver une chambre." },
+          { "nl": "Van vrijdag tot zondag.", "fr": "De vendredi à dimanche." },
+          { "nl": "Is het ontbijt inbegrepen?", "fr": "Le petit-déjeuner est-il compris ?" }
+        ]
+      },
+      "regle": {
+        "titre": "van … tot, voor + durée, per nacht",
+        "explication": "Période : « van vrijdag tot zondag » (de… à…). Durée : « voor twee nachten » (pour deux nuits). Prix unitaire : « per nacht », « per persoon ». Les noms composés néerlandais s'écrivent en un mot : tweepersoonskamer (chambre pour deux personnes), eenpersoonskamer. Le dernier élément donne l'article : de kamer → de tweepersoonskamer.",
+        "exemples": [
+          { "nl": "Voor drie nachten, alstublieft.", "fr": "Pour trois nuits, s'il vous plaît." },
+          { "nl": "Van dertien tot vijftien juli.", "fr": "Du 13 au 15 juillet." },
+          { "nl": "Hoeveel kost het per persoon?", "fr": "Combien ça coûte par personne ?" },
+          { "nl": "Heeft u nog een kamer vrij?", "fr": "Avez-vous encore une chambre libre ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« De vendredi à dimanche » :", "choices": ["van vrijdag naar zondag", "van vrijdag tot zondag", "vanaf vrijdag tot zondag tot"], "answer": 1 },
+        { "type": "qcm", "q": "« une chambre double » :", "choices": ["een kamer twee", "een tweepersoonskamer", "een dubbel kamer"], "answer": 1 },
+        { "type": "trou", "phrase": "Is het ontbijt ___? (compris)", "answer": "inbegrepen", "fr": "Le petit-déjeuner est-il compris ?" },
+        { "type": "trou", "phrase": "Heeft u nog een kamer ___? (libre)", "answer": "vrij", "fr": "Avez-vous encore une chambre libre ?" },
+        { "type": "ordre", "mots": ["kamer", "Ik", "reserveren.", "een", "graag", "wil"], "answer": "Ik wil graag een kamer reserveren.", "fr": "Je voudrais réserver une chambre." },
+        { "type": "traduire", "fr": "Pour trois nuits, s'il vous plaît.", "answer": "Voor drie nachten, alstublieft." },
+        { "type": "ecoute", "nl": "Een tweepersoonskamer kost negentig euro per nacht.", "fr": "Une chambre double coûte quatre-vingt-dix euros la nuit." },
+        { "type": "dire", "nl": "Goeiedag, ik wil graag een kamer reserveren voor twee nachten.", "fr": "Bonjour, je voudrais réserver une chambre pour deux nuits." },
+        { "type": "repondre", "question": "Voor hoeveel personen en hoeveel nachten?", "question_fr": "Pour combien de personnes et combien de nuits ?", "attendu": [], "un_de": ["personen", "persoon", "nacht", "nachten"], "exemple": "Voor twee personen en drie nachten." }
+      ],
+      "jeu": {
+        "titre": "Réserver par téléphone",
+        "consigne": "Appelle un hôtel à la côte belge pour un week-end. Réserve une chambre et pose tes questions sur le prix et le petit-déjeuner.",
+        "role": "Tu es réceptionniste d'un hôtel à Ostende. Le client réserve : demande les dates, le nombre de personnes, le type de chambre ; propose une chambre avec vue mer (110 euros) ou côté ville (85 euros), petit-déjeuner 12 euros en plus ; demande son nom et son mail pour la confirmation. Phrases simples (A2).",
+        "welcome": "Hotel Zeezicht, goeiedag, met Lotte."
+      }
+    },
+    {
+      "id": "infos",
+      "titre": "Demander des informations",
+      "intro": "À l'arrivée ou à l'office de tourisme : horaires, services, conseils. Des questions avec « er » : « Is er een parking? ».",
+      "roles": { "A": "Le réceptionniste", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Is er een parking bij het hotel?", "fr": "Y a-t-il un parking à l'hôtel ?" },
+        { "qui": "A", "nl": "Ja, er is een parking achter het gebouw.", "fr": "Oui, il y a un parking derrière le bâtiment." },
+        { "qui": "B", "nl": "Tot hoe laat is het ontbijt?", "fr": "Jusqu'à quelle heure est le petit-déjeuner ?" },
+        { "qui": "A", "nl": "Van zeven tot tien uur.", "fr": "De sept à dix heures." },
+        { "qui": "B", "nl": "Kunt u een restaurant in de buurt aanraden?", "fr": "Pouvez-vous me conseiller un restaurant dans le coin ?" },
+        { "qui": "A", "nl": "Er zijn veel goede restaurants aan de dijk.", "fr": "Il y a beaucoup de bons restaurants sur la digue." }
+      ],
+      "vocab": {
+        "verbes": ["aanraden", "vinden", "openen", "sluiten", "bezoeken"],
+        "mots": [
+          { "nl": "de parking", "fr": "le parking" },
+          { "nl": "de wifi", "fr": "le wifi" },
+          { "nl": "de sleutel", "fr": "la clé" },
+          { "nl": "de toeristische dienst", "fr": "l'office de tourisme" },
+          { "nl": "de bezienswaardigheid", "fr": "le lieu à visiter" },
+          { "nl": "het museum", "fr": "le musée" },
+          { "nl": "open", "fr": "ouvert" },
+          { "nl": "gesloten", "fr": "fermé" },
+          { "nl": "in de buurt", "fr": "dans le coin" }
+        ],
+        "phrases": [
+          { "nl": "Is er een parking?", "fr": "Y a-t-il un parking ?" },
+          { "nl": "Tot hoe laat is ... open?", "fr": "Jusqu'à quelle heure ... est ouvert ?" },
+          { "nl": "Kunt u iets aanraden?", "fr": "Pouvez-vous me conseiller quelque chose ?" }
+        ]
+      },
+      "regle": {
+        "titre": "« er » : il y a, et « er » de lieu",
+        "explication": "« Er is / er zijn » = il y a : « Er is een parking », question : « Is er wifi? ». « er » remplace aussi un lieu déjà mentionné : « Ik ga er morgen naartoe » (j'y vais demain), « Ben je er al geweest? » (tu y es déjà allé ?). Il se place après le verbe conjugué (et après le sujet en cas d'inversion).",
+        "exemples": [
+          { "nl": "Is er wifi in de kamer?", "fr": "Y a-t-il du wifi dans la chambre ?" },
+          { "nl": "Er zijn veel musea in Brugge.", "fr": "Il y a beaucoup de musées à Bruges." },
+          { "nl": "Het museum? Ik ga er morgen naartoe.", "fr": "Le musée ? J'y vais demain." },
+          { "nl": "Ben je er al geweest?", "fr": "Tu y es déjà allé ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Y a-t-il du wifi ? » :", "choices": ["Is er wifi?", "Er is wifi?", "Heeft het wifi er?"], "answer": 0 },
+        { "type": "qcm", "q": "« J'y vais demain » :", "choices": ["Ik ga morgen er naartoe.", "Ik ga er morgen naartoe.", "Ik er ga morgen naartoe."], "answer": 1 },
+        { "type": "trou", "phrase": "___ zijn veel musea in Brugge.", "answer": "Er", "fr": "Il y a beaucoup de musées à Bruges." },
+        { "type": "trou", "phrase": "Tot hoe ___ is het ontbijt?", "answer": "laat", "fr": "Jusqu'à quelle heure est le petit-déjeuner ?" },
+        { "type": "ordre", "mots": ["al", "Ben", "geweest?", "er", "je"], "answer": "Ben je er al geweest?", "fr": "Tu y es déjà allé ?" },
+        { "type": "traduire", "fr": "Pouvez-vous me conseiller un restaurant ?", "answer": "Kunt u een restaurant aanraden?/Kunt u mij een restaurant aanraden?" },
+        { "type": "ecoute", "nl": "Het ontbijt is van zeven tot tien uur.", "fr": "Le petit-déjeuner est de sept à dix heures." },
+        { "type": "dire", "nl": "Is er een parking bij het hotel?", "fr": "Y a-t-il un parking à l'hôtel ?" },
+        { "type": "repondre", "question": "Wat wilt u nog weten?", "question_fr": "Que voulez-vous encore savoir ?", "attendu": [], "un_de": ["is er", "hoe laat", "waar", "kunt u", "hoeveel"], "exemple": "Is er wifi in de kamer?" }
+      ],
+      "jeu": {
+        "titre": "À la réception",
+        "consigne": "Tu arrives à l'hôtel. Pose toutes tes questions pratiques : parking, wifi, petit-déjeuner, et demande des conseils pour visiter la ville.",
+        "role": "Tu es le réceptionniste d'un hôtel à Bruges. Fais le check-in (nom, pièce d'identité), puis réponds aux questions : parking payant à 200 m (15 euros par jour), wifi gratuit (code : brugge2026), petit-déjeuner de 7 h à 10 h 30, conseille le beffroi et une balade en bateau. Phrases simples (A2).",
+        "welcome": "Goeienavond, welkom in Brugge! Op welke naam staat de reservatie?"
+      }
+    },
+    {
+      "id": "quantites",
+      "titre": "Beaucoup, peu, assez, tout",
+      "intro": "Parler des quantités et des gens : alle, veel, weinig, genoeg, iedereen, niemand, iets, niets.",
+      "roles": { "A": "Un ami en voyage", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hebben we genoeg geld bij voor de musea?", "fr": "On a assez d'argent sur nous pour les musées ?" },
+        { "qui": "B", "nl": "Ja, maar we hebben weinig tijd. We kunnen niet alle musea zien.", "fr": "Oui, mais on a peu de temps. On ne peut pas voir tous les musées." },
+        { "qui": "A", "nl": "Er zijn veel toeristen vandaag.", "fr": "Il y a beaucoup de touristes aujourd'hui." },
+        { "qui": "B", "nl": "Iedereen wil naar het belfort.", "fr": "Tout le monde veut aller au beffroi." },
+        { "qui": "A", "nl": "Laten we eerst iets eten, ik heb niets gegeten.", "fr": "Mangeons d'abord quelque chose, je n'ai rien mangé." }
+      ],
+      "vocab": {
+        "verbes": ["hebben", "zien", "eten", "nemen", "laten"],
+        "mots": [
+          { "nl": "alle", "fr": "tous, toutes" },
+          { "nl": "alles", "fr": "tout" },
+          { "nl": "veel", "fr": "beaucoup (de)" },
+          { "nl": "weinig", "fr": "peu (de)" },
+          { "nl": "genoeg", "fr": "assez (de)" },
+          { "nl": "iedereen", "fr": "tout le monde" },
+          { "nl": "niemand", "fr": "personne" },
+          { "nl": "iets", "fr": "quelque chose" },
+          { "nl": "niets", "fr": "rien" },
+          { "nl": "de toerist", "fr": "le touriste" }
+        ],
+        "phrases": [
+          { "nl": "We hebben weinig tijd.", "fr": "On a peu de temps." },
+          { "nl": "Iedereen wil naar het belfort.", "fr": "Tout le monde veut aller au beffroi." },
+          { "nl": "Laten we iets eten.", "fr": "Mangeons quelque chose." }
+        ]
+      },
+      "regle": {
+        "titre": "Quantifieurs et « laten we »",
+        "explication": "« veel / weinig / genoeg » + nom, sans article : veel toeristen, weinig tijd, genoeg geld. « alle » + pluriel (alle musea), « alles » = tout (seul). « iedereen » (tout le monde) et « niemand » (personne) prennent le verbe au singulier : Iedereen wil…, Niemand weet… « Laten we + infinitif » = proposons de…/allons… : Laten we gaan!",
+        "exemples": [
+          { "nl": "Er zijn veel toeristen.", "fr": "Il y a beaucoup de touristes." },
+          { "nl": "Ik heb alles gezien.", "fr": "J'ai tout vu." },
+          { "nl": "Niemand spreekt Frans hier.", "fr": "Personne ne parle français ici." },
+          { "nl": "Laten we een fiets huren.", "fr": "Louons un vélo." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Tout le monde veut venir » :", "choices": ["Iedereen willen komen.", "Iedereen wil komen.", "Alle wil komen."], "answer": 1 },
+        { "type": "qcm", "q": "« On a assez d'argent » :", "choices": ["We hebben genoeg geld.", "We hebben geld genoeg van.", "We hebben genoeg van geld."], "answer": 0 },
+        { "type": "trou", "phrase": "We hebben ___ tijd. (peu)", "answer": "weinig", "fr": "On a peu de temps." },
+        { "type": "trou", "phrase": "Ik heb ___ gegeten. (rien)", "answer": "niets", "fr": "Je n'ai rien mangé." },
+        { "type": "ordre", "mots": ["fiets", "Laten", "huren.", "een", "we"], "answer": "Laten we een fiets huren.", "fr": "Louons un vélo." },
+        { "type": "traduire", "fr": "Il y a beaucoup de touristes.", "answer": "Er zijn veel toeristen." },
+        { "type": "ecoute", "nl": "Niemand spreekt Frans hier.", "fr": "Personne ne parle français ici." },
+        { "type": "dire", "nl": "Laten we eerst iets eten.", "fr": "Mangeons d'abord quelque chose." },
+        { "type": "repondre", "question": "Heb je alles gezien in Brugge?", "question_fr": "Tu as tout vu à Bruges ?", "attendu": [], "un_de": ["alles", "niet alles", "veel", "weinig", "niets"], "exemple": "Nee, niet alles. We hadden weinig tijd." }
+      ],
+      "jeu": {
+        "titre": "Une journée de visite",
+        "consigne": "Avec un ami, planifie la journée de visite : vous avez peu de temps et pas beaucoup d'argent. Décidez ensemble.",
+        "role": "Tu es Jonas, ami de voyage. Vous avez une journée à Gand, 60 euros chacun. Propose plein de choses (château, musée, bateau, restaurant), dis qu'il n'y a pas assez de temps pour tout, demande ce que l'apprenant préfère. Utilise veel, weinig, genoeg, alles, iedereen, laten we. Phrases simples (A2).",
+        "welcome": "We hebben maar één dag in Gent. Wat gaan we doen? Er is zoveel te zien!"
+      }
+    },
+    {
+      "id": "louer",
+      "titre": "Louer et se déplacer sur place",
+      "intro": "Louer un vélo, acheter un ticket de bateau ou de tram, demander combien de temps et ce qui est compris.",
+      "roles": { "A": "Le loueur de vélos", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Goeiedag, kan ik hier een fiets huren?", "fr": "Bonjour, je peux louer un vélo ici ?" },
+        { "qui": "A", "nl": "Natuurlijk. Voor een halve dag of een hele dag?", "fr": "Bien sûr. Pour une demi-journée ou une journée entière ?" },
+        { "qui": "B", "nl": "Een hele dag. Hoeveel kost dat?", "fr": "Une journée entière. Combien ça coûte ?" },
+        { "qui": "A", "nl": "Vijftien euro, met een slot en een kaart.", "fr": "Quinze euros, avec un cadenas et une carte." },
+        { "qui": "B", "nl": "Moet ik een waarborg betalen?", "fr": "Dois-je payer une caution ?" },
+        { "qui": "A", "nl": "Ja, vijftig euro, die u terugkrijgt.", "fr": "Oui, cinquante euros, que vous récupérez." }
+      ],
+      "vocab": {
+        "verbes": ["huren", "terugbrengen", "terugkrijgen", "betalen", "fietsen"],
+        "mots": [
+          { "nl": "de fiets", "fr": "le vélo" },
+          { "nl": "de elektrische fiets", "fr": "le vélo électrique" },
+          { "nl": "het slot", "fr": "le cadenas" },
+          { "nl": "de kaart", "fr": "la carte (plan)" },
+          { "nl": "de waarborg", "fr": "la caution" },
+          { "nl": "een halve dag", "fr": "une demi-journée" },
+          { "nl": "een hele dag", "fr": "une journée entière" },
+          { "nl": "de boottocht", "fr": "la balade en bateau" },
+          { "nl": "de route", "fr": "l'itinéraire" }
+        ],
+        "phrases": [
+          { "nl": "Kan ik hier een fiets huren?", "fr": "Je peux louer un vélo ici ?" },
+          { "nl": "Moet ik een waarborg betalen?", "fr": "Dois-je payer une caution ?" },
+          { "nl": "Tot hoe laat moet ik hem terugbrengen?", "fr": "Jusqu'à quelle heure dois-je le ramener ?" }
+        ]
+      },
+      "regle": {
+        "titre": "halve / hele, et « die » de reprise",
+        "explication": "« een halve dag », « een hele dag » : l'adjectif prend -e devant un nom en « de ». Mais « een half uur », « een heel jaar » avec un nom en « het ». Pour reprendre une chose déjà dite, on peut utiliser « die / dat » en relative : « een waarborg, die u terugkrijgt ». « Terugbrengen » est séparable : Ik breng hem om zes uur terug.",
+        "exemples": [
+          { "nl": "Een halve dag kost acht euro.", "fr": "Une demi-journée coûte huit euros." },
+          { "nl": "Een half uur fietsen.", "fr": "Une demi-heure de vélo." },
+          { "nl": "Ik breng de fiets om zes uur terug.", "fr": "Je ramène le vélo à six heures." },
+          { "nl": "Is de kaart inbegrepen?", "fr": "La carte est comprise ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« une journée entière » :", "choices": ["een heel dag", "een hele dag", "een helen dag"], "answer": 1 },
+        { "type": "qcm", "q": "« une demi-heure » (het uur) :", "choices": ["een half uur", "een halve uur", "een helft uur"], "answer": 0 },
+        { "type": "trou", "phrase": "Moet ik een ___ betalen? (caution)", "answer": "waarborg", "fr": "Dois-je payer une caution ?" },
+        { "type": "trou", "phrase": "Ik breng de fiets om zes uur ___.", "answer": "terug", "fr": "Je ramène le vélo à six heures." },
+        { "type": "ordre", "mots": ["fiets", "Kan", "huren?", "hier", "een", "ik"], "answer": "Kan ik hier een fiets huren?", "fr": "Je peux louer un vélo ici ?" },
+        { "type": "traduire", "fr": "La carte est comprise ?", "answer": "Is de kaart inbegrepen?" },
+        { "type": "ecoute", "nl": "Vijftien euro, met een slot en een kaart.", "fr": "Quinze euros, avec un cadenas et une carte." },
+        { "type": "dire", "nl": "Tot hoe laat moet ik de fiets terugbrengen?", "fr": "Jusqu'à quelle heure dois-je ramener le vélo ?" },
+        { "type": "repondre", "question": "Wilt u een gewone fiets of een elektrische fiets?", "question_fr": "Voulez-vous un vélo normal ou électrique ?", "attendu": [], "un_de": ["gewone", "elektrische", "liever"], "exemple": "Een elektrische fiets, alstublieft." }
+      ],
+      "jeu": {
+        "titre": "Louer des vélos",
+        "consigne": "Loue des vélos pour une balade : choisis le type, la durée, demande le prix, la caution, l'heure de retour et un itinéraire.",
+        "role": "Tu es le loueur de vélos à Damme. Propose vélo normal (15 euros la journée) ou électrique (30 euros), caution 50 euros, retour avant 18 h. Conseille un itinéraire le long du canal jusqu'à Bruges. Demande une pièce d'identité. Phrases simples (A2).",
+        "welcome": "Goeiemorgen! Komt u voor een fiets?"
+      }
+    },
+    {
+      "id": "imprevu",
+      "titre": "Un imprévu en voyage",
+      "intro": "Le train est annulé, la chambre ne correspond pas, tu as perdu ton portefeuille : expliquer et trouver une solution.",
+      "roles": { "A": "Le réceptionniste", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Sorry, er is een probleem met mijn kamer.", "fr": "Pardon, il y a un problème avec ma chambre." },
+        { "qui": "A", "nl": "Wat is er aan de hand?", "fr": "Que se passe-t-il ?" },
+        { "qui": "B", "nl": "Ik had een kamer met zeezicht gereserveerd, maar ik zie alleen de parking.", "fr": "J'avais réservé une chambre avec vue mer, mais je ne vois que le parking." },
+        { "qui": "A", "nl": "Excuses, dat is een fout. Ik kijk of er nog een kamer vrij is.", "fr": "Excusez-nous, c'est une erreur. Je regarde s'il reste une chambre libre." },
+        { "qui": "A", "nl": "Morgen kunt u verhuizen naar kamer twaalf.", "fr": "Demain, vous pouvez déménager dans la chambre douze." },
+        { "qui": "B", "nl": "Goed, en krijg ik een korting voor vannacht?", "fr": "D'accord, et j'ai une réduction pour cette nuit ?" }
+      ],
+      "vocab": {
+        "verbes": ["verliezen", "vergeten", "verhuizen", "melden", "regelen"],
+        "mots": [
+          { "nl": "aan de hand", "fr": "qui se passe" },
+          { "nl": "de fout", "fr": "l'erreur" },
+          { "nl": "het zeezicht", "fr": "la vue sur mer" },
+          { "nl": "de portefeuille", "fr": "le portefeuille" },
+          { "nl": "de politie", "fr": "la police" },
+          { "nl": "de korting", "fr": "la réduction" },
+          { "nl": "de excuses", "fr": "les excuses" },
+          { "nl": "geannuleerd", "fr": "annulé" }
+        ],
+        "phrases": [
+          { "nl": "Er is een probleem met ...", "fr": "Il y a un problème avec ..." },
+          { "nl": "Ik had ... gereserveerd.", "fr": "J'avais réservé ..." },
+          { "nl": "Ik heb mijn portefeuille verloren.", "fr": "J'ai perdu mon portefeuille." }
+        ]
+      },
+      "regle": {
+        "titre": "Le plus-que-parfait : ik had gereserveerd",
+        "explication": "Pour dire ce qui était prévu AVANT le problème, on utilise le plus-que-parfait : « had / was » (imparfait de hebben/zijn) + participe : « Ik had een kamer met zeezicht gereserveerd » (j'avais réservé), « De trein was al vertrokken » (le train était déjà parti). Ça sert beaucoup dans les réclamations. Les verbes en ver- n'ont pas de ge- : verloren, vergeten.",
+        "exemples": [
+          { "nl": "Ik had een stille kamer gevraagd.", "fr": "J'avais demandé une chambre calme." },
+          { "nl": "De trein was al vertrokken.", "fr": "Le train était déjà parti." },
+          { "nl": "Ik heb mijn sleutel vergeten.", "fr": "J'ai oublié ma clé." },
+          { "nl": "Wat is er aan de hand?", "fr": "Que se passe-t-il ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'avais réservé une chambre » :", "choices": ["Ik heb een kamer gereserveerd had.", "Ik had een kamer gereserveerd.", "Ik was een kamer gereserveerd."], "answer": 1 },
+        { "type": "qcm", "q": "« Le train était déjà parti » :", "choices": ["De trein had al vertrokken.", "De trein was al vertrokken.", "De trein is al vertrokken was."], "answer": 1 },
+        { "type": "trou", "phrase": "Ik heb mijn portefeuille ___. (perdu)", "answer": "verloren", "fr": "J'ai perdu mon portefeuille." },
+        { "type": "trou", "phrase": "Wat is er aan de ___?", "answer": "hand", "fr": "Que se passe-t-il ?" },
+        { "type": "ordre", "mots": ["stille", "Ik", "gevraagd.", "een", "had", "kamer"], "answer": "Ik had een stille kamer gevraagd.", "fr": "J'avais demandé une chambre calme." },
+        { "type": "traduire", "fr": "J'ai une réduction ?", "answer": "Krijg ik een korting?" },
+        { "type": "ecoute", "nl": "Excuses, dat is een fout.", "fr": "Excusez-nous, c'est une erreur." },
+        { "type": "dire", "nl": "Ik had een kamer met zeezicht gereserveerd.", "fr": "J'avais réservé une chambre avec vue mer." },
+        { "type": "repondre", "question": "Wat is er aan de hand?", "question_fr": "Que se passe-t-il ?", "attendu": [], "un_de": ["probleem", "had", "verloren", "vergeten", "geannuleerd", "werkt niet"], "exemple": "Ik heb mijn sleutel vergeten." }
+      ],
+      "jeu": {
+        "titre": "Rien ne se passe comme prévu",
+        "consigne": "À l'hôtel, la chambre ne correspond pas à ta réservation et le wifi ne marche pas. Explique, rappelle ce que tu avais réservé, et obtiens une solution.",
+        "role": "Tu es le réceptionniste d'un hôtel, poli mais débordé. Le client se plaint : chambre sans vue mer alors qu'il l'avait réservée, wifi en panne. Excuse-toi, explique que l'hôtel est complet ce soir, propose un changement de chambre demain ; accorde une réduction ou le petit-déjeuner gratuit s'il le demande poliment. Phrases simples (A2).",
+        "welcome": "Goeienavond, kan ik u helpen?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : organiser un week-end à la côte",
+    "consigne": "Appelle un hôtel pour réserver un week-end pour deux, pose tes questions (prix, petit-déjeuner, parking, location de vélos), puis — imprévu — rappelle car tu dois changer les dates : explique et trouve une solution.",
+    "role": "Tu es Lotte, réceptionniste de l'hôtel Zeezicht à Ostende. Le client réserve : dates, nombre de personnes, type de chambre (vue mer 110 euros, côté ville 85 euros), petit-déjeuner 12 euros, parking 15 euros, location de vélos possible à l'hôtel. Une fois la réservation faite, écris entre crochets [deux jours plus tard] et le client rappelle pour changer ses dates : les nouvelles dates sont complètes en vue mer, propose côté ville ou d'autres dates. Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Hotel Zeezicht, goeiedag, met Lotte. Waarmee kan ik u helpen?"
+  },
+  "examen": {
+    "reussite": "Tu sais organiser un voyage en néerlandais.",
+    "sujets": [
+      { "label": "réserver", "etape": "reserver", "mots": ["reserveren", "reservatie", "kamer", "boeken"] },
+      { "label": "donner les dates et les personnes", "etape": "reserver", "mots": ["van", "tot", "nacht", "nachten", "personen", "vrijdag", "zaterdag", "zondag"] },
+      { "label": "demander le prix", "etape": "reserver", "mots": ["hoeveel", "kost", "prijs", "euro", "per nacht"] },
+      { "label": "demander un service (er)", "etape": "infos", "mots": ["is er", "zijn er", "parking", "wifi", "ontbijt", "inbegrepen"] },
+      { "label": "parler de location ou d'activités", "etape": "louer", "mots": ["fiets", "huren", "boot", "museum", "bezoeken"] },
+      { "label": "expliquer l'imprévu", "etape": "imprevu", "mots": ["probleem", "veranderen", "verplaatsen", "kan niet", "had", "andere datum"] },
+      { "label": "accepter une solution", "etape": "imprevu", "mots": ["goed", "oké", "prima", "afgesproken", "dat past"] },
+      { "label": "remercier", "etape": "reserver", "mots": ["dank", "bedankt", "tot ziens"] }
+    ]
+  }
+}
