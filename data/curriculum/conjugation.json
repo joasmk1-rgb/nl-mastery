@@ -12758,5 +12758,21 @@
     "freq": 3.59,
     "niveauCECR": "B1",
     "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "spellen",
+    "fr": "épeler",
+    "present": {
+      "ik": "spel",
+      "jij": "spelt",
+      "hij": "spelt",
+      "wij": "spellen"
+    },
+    "preteritum": "spelde",
+    "participePasse": "gespeld",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.32
   }
 ]

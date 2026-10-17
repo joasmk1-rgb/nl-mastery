@@ -9,6 +9,37 @@
       "id": "salutations",
       "titre": "Saluer et prendre congé",
       "intro": "Dire bonjour selon le moment de la journée, demander comment ça va, et dire au revoir. En Flandre, on salue presque toujours en entrant quelque part.",
+      "roles": {
+        "A": "Lien, ta collègue",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Goedemorgen! Hoe gaat het met jou?",
+          "fr": "Bonjour ! Comment vas-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Goed, dank je. En met jou?",
+          "fr": "Bien, merci. Et toi ?"
+        },
+        {
+          "qui": "A",
+          "nl": "Ook goed, dank je.",
+          "fr": "Bien aussi, merci."
+        },
+        {
+          "qui": "B",
+          "nl": "Tot straks!",
+          "fr": "À tout à l'heure !"
+        },
+        {
+          "qui": "A",
+          "nl": "Tot straks, prettige dag!",
+          "fr": "À tout à l'heure, bonne journée !"
+        }
+      ],
       "vocab": {
         "verbes": [
           "gaan",
@@ -179,6 +210,20 @@
           "type": "ecoute",
           "nl": "Prettige dag nog!",
           "fr": "Bonne journée !"
+        },
+        {
+          "type": "dire",
+          "nl": "Goedemorgen, hoe gaat het met u?",
+          "fr": "Bonjour, comment allez-vous ?"
+        },
+        {
+          "type": "repondre",
+          "question": "Hoe gaat het met jou?",
+          "question_fr": "Comment vas-tu ?",
+          "attendu": [
+            "goed"
+          ],
+          "exemple": "Goed, dank je. En met jou?"
         }
       ],
       "jeu": {
@@ -197,6 +242,42 @@
         "leeftijd",
         "land",
         "stad"
+      ],
+      "roles": {
+        "A": "Tim, un nouveau collègue",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Hallo, ik ben Tim. Hoe heet jij?",
+          "fr": "Salut, je suis Tim. Comment t'appelles-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik heet Sami. Aangenaam.",
+          "fr": "Je m'appelle Sami. Enchanté."
+        },
+        {
+          "qui": "A",
+          "nl": "Waar kom je vandaan?",
+          "fr": "D'où viens-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik kom uit België. Ik woon in Menen.",
+          "fr": "Je viens de Belgique. J'habite à Menen."
+        },
+        {
+          "qui": "A",
+          "nl": "En hoe oud ben je?",
+          "fr": "Et quel âge as-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik ben eenendertig jaar.",
+          "fr": "J'ai trente et un ans."
+        }
       ],
       "vocab": {
         "verbes": [
@@ -371,6 +452,11 @@
           "type": "ecoute",
           "nl": "Waar woon je?",
           "fr": "Où habites-tu ?"
+        },
+        {
+          "type": "dire",
+          "nl": "Waar kom je vandaan?",
+          "fr": "D'où viens-tu ?"
         }
       ],
       "jeu": {
@@ -389,6 +475,42 @@
         "kinderen",
         "broers",
         "zussen"
+      ],
+      "roles": {
+        "A": "Ann, une collègue",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Heb jij kinderen?",
+          "fr": "As-tu des enfants ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Nee, ik heb geen kinderen.",
+          "fr": "Non, je n'ai pas d'enfants."
+        },
+        {
+          "qui": "A",
+          "nl": "En broers of zussen?",
+          "fr": "Et des frères et sœurs ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ja, ik heb een broer en twee zussen.",
+          "fr": "Oui, j'ai un frère et deux sœurs."
+        },
+        {
+          "qui": "A",
+          "nl": "Wonen ze ook in België?",
+          "fr": "Ils habitent aussi en Belgique ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Mijn broer woont in Brussel.",
+          "fr": "Mon frère habite à Bruxelles."
+        }
       ],
       "vocab": {
         "verbes": [
@@ -557,6 +679,20 @@
           "type": "ecoute",
           "nl": "Heb je kinderen?",
           "fr": "As-tu des enfants ?"
+        },
+        {
+          "type": "dire",
+          "nl": "Ik heb geen kinderen.",
+          "fr": "Je n'ai pas d'enfants."
+        },
+        {
+          "type": "repondre",
+          "question": "Heb je broers of zussen?",
+          "question_fr": "As-tu des frères et sœurs ?",
+          "attendu": [
+            "heb"
+          ],
+          "exemple": "Ik heb een broer en twee zussen."
         }
       ],
       "jeu": {
@@ -573,6 +709,42 @@
       "portrait": [
         "situatie",
         "beroep"
+      ],
+      "roles": {
+        "A": "Meneer Janssens, ton voisin",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Wat doe jij in het leven?",
+          "fr": "Que fais-tu dans la vie ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik ben werkzoekend. Ik zoek werk in de logistiek.",
+          "fr": "Je suis demandeur d'emploi. Je cherche du travail dans la logistique."
+        },
+        {
+          "qui": "A",
+          "nl": "Wat voor werk zoek je?",
+          "fr": "Quel genre de travail cherches-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik zoek werk als planner.",
+          "fr": "Je cherche du travail comme planificateur."
+        },
+        {
+          "qui": "A",
+          "nl": "Veel succes!",
+          "fr": "Bonne chance !"
+        },
+        {
+          "qui": "B",
+          "nl": "Dank u wel!",
+          "fr": "Merci beaucoup !"
+        }
       ],
       "vocab": {
         "verbes": [
@@ -736,6 +908,26 @@
           "type": "ecoute",
           "nl": "Ik werk voltijds op kantoor.",
           "fr": "Je travaille à temps plein au bureau."
+        },
+        {
+          "type": "dire",
+          "nl": "Ik werk als magazijnier.",
+          "fr": "Je travaille comme magasinier."
+        },
+        {
+          "type": "repondre",
+          "question": "Wat doe je in het leven?",
+          "question_fr": "Que fais-tu dans la vie ?",
+          "attendu": [
+            "ik"
+          ],
+          "un_de": [
+            "werk",
+            "werkzoekend",
+            "student",
+            "studeer"
+          ],
+          "exemple": "Ik werk als bediende."
         }
       ],
       "jeu": {
@@ -752,6 +944,37 @@
       "portrait": [
         "talen",
         "hobbies"
+      ],
+      "roles": {
+        "A": "Jonas, un collègue",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Wat doe je graag in het weekend?",
+          "fr": "Qu'aimes-tu faire le week-end ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik sport graag en ik lees graag.",
+          "fr": "J'aime faire du sport et lire."
+        },
+        {
+          "qui": "A",
+          "nl": "Welke talen spreek je?",
+          "fr": "Quelles langues parles-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik spreek Frans, Engels en een beetje Nederlands.",
+          "fr": "Je parle français, anglais et un peu néerlandais."
+        },
+        {
+          "qui": "A",
+          "nl": "Knap!",
+          "fr": "Bravo !"
+        }
       ],
       "vocab": {
         "verbes": [
@@ -927,6 +1150,20 @@
           "type": "ecoute",
           "nl": "Ik kijk graag naar films.",
           "fr": "J'aime regarder des films."
+        },
+        {
+          "type": "dire",
+          "nl": "Ik spreek een beetje Nederlands.",
+          "fr": "Je parle un peu néerlandais."
+        },
+        {
+          "type": "repondre",
+          "question": "Wat doe je graag in je vrije tijd?",
+          "question_fr": "Qu'aimes-tu faire pendant ton temps libre ?",
+          "attendu": [
+            "graag"
+          ],
+          "exemple": "Ik fiets graag."
         }
       ],
       "jeu": {
@@ -1213,5 +1450,10 @@
         "nl": "Ik zwem graag."
       }
     ]
+  },
+  "icone": "👋",
+  "accroche": "Saluer, te présenter, parler de ta famille, de ton travail et de tes loisirs.",
+  "examen": {
+    "reussite": "Tu sais te présenter en néerlandais."
   }
 }

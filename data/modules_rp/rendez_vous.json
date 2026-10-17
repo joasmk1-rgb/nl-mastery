@@ -1,0 +1,330 @@
+{
+  "_doc": "Module en format jeu de rôle (voir premier_contact.json pour le format). Étape : intro, roles {A, B}, dialogue [{qui: A|B, nl, fr}] (B = l'apprenant), vocab, regle, exercices (qcm, trou, ordre, traduire, ecoute, dire {nl, fr}, repondre {question, question_fr, attendu: [mots], exemple}), jeu. examen.sujets : [{label, etape, mots}] détectés dans les répliques de l'apprenant au jeu final. Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "rendez_vous",
+  "niveau": "A1",
+  "icone": "🕐",
+  "titre": "Chiffres, heures et rendez-vous",
+  "accroche": "Donner ton numéro, épeler ton nom, dire l'heure et fixer un rendez-vous au téléphone.",
+  "objectif": "À la fin du module, tu sais prendre un rendez-vous au téléphone : épeler ton nom, donner ton numéro, proposer un jour et une heure, et confirmer.",
+  "etapes": [
+    {
+      "id": "nombres",
+      "titre": "Les nombres et ton numéro de téléphone",
+      "intro": "Compter de 0 à 100 et donner un numéro de téléphone. En néerlandais, on dit l'unité avant la dizaine : 21 = « eenentwintig » (un-et-vingt).",
+      "roles": { "A": "La réceptionniste", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat is uw telefoonnummer?", "fr": "Quel est votre numéro de téléphone ?" },
+        { "qui": "B", "nl": "Mijn nummer is nul vier zeven twee, twaalf, vierendertig, zesenvijftig.", "fr": "Mon numéro est 0472 12 34 56." },
+        { "qui": "A", "nl": "Kunt u dat herhalen, alstublieft?", "fr": "Pouvez-vous répéter, s'il vous plaît ?" },
+        { "qui": "B", "nl": "Natuurlijk. Nul vier zeven twee, twaalf, vierendertig, zesenvijftig.", "fr": "Bien sûr. 0472 12 34 56." },
+        { "qui": "A", "nl": "Dank u, ik heb het genoteerd.", "fr": "Merci, je l'ai noté." }
+      ],
+      "vocab": {
+        "verbes": ["tellen", "herhalen", "noteren", "bellen"],
+        "mots": [
+          { "nl": "het nummer", "fr": "le numéro" },
+          { "nl": "het telefoonnummer", "fr": "le numéro de téléphone" },
+          { "nl": "nul", "fr": "zéro" },
+          { "nl": "twaalf", "fr": "douze" },
+          { "nl": "twintig", "fr": "vingt" },
+          { "nl": "eenentwintig", "fr": "vingt et un" },
+          { "nl": "dertig", "fr": "trente" },
+          { "nl": "veertig", "fr": "quarante" },
+          { "nl": "vijftig", "fr": "cinquante" },
+          { "nl": "honderd", "fr": "cent" },
+          { "nl": "de gsm", "fr": "le GSM (portable)" }
+        ],
+        "phrases": [
+          { "nl": "Wat is uw telefoonnummer?", "fr": "Quel est votre numéro de téléphone ?" },
+          { "nl": "Kunt u dat herhalen, alstublieft?", "fr": "Pouvez-vous répéter, s'il vous plaît ?" },
+          { "nl": "Iets trager, alstublieft.", "fr": "Un peu plus lentement, s'il vous plaît." }
+        ]
+      },
+      "regle": {
+        "titre": "Unité avant dizaine : 21 = één-en-twintig",
+        "explication": "De 13 à 19 : dertien, veertien, vijftien, zestien, zeventien, achttien, negentien. Dizaines : twintig, dertig, veertig, vijftig, zestig, zeventig, tachtig, negentig. De 21 à 99, on dit l'unité, puis « en », puis la dizaine, en un seul mot : 34 = vierendertig, 56 = zesenvijftig, 99 = negenennegentig. Après « twee » et « drie », on met un tréma : tweeëntwintig, drieëntwintig. Les numéros de téléphone se disent chiffre par chiffre ou par groupes de deux.",
+        "exemples": [
+          { "nl": "vierendertig", "fr": "34" },
+          { "nl": "tweeëntwintig", "fr": "22" },
+          { "nl": "achtenveertig", "fr": "48" },
+          { "nl": "honderd", "fr": "100" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Comment dit-on 34 ?", "choices": ["dertigvier", "vierendertig", "drieënveertig"], "answer": 1 },
+        { "type": "qcm", "q": "« zesenvijftig », c'est :", "choices": ["65", "56", "506"], "answer": 1 },
+        { "type": "trou", "phrase": "Wat is uw ___? (numéro de téléphone)", "answer": "telefoonnummer", "fr": "Quel est votre numéro de téléphone ?" },
+        { "type": "traduire", "fr": "vingt-deux", "answer": "tweeëntwintig/tweeentwintig" },
+        { "type": "ecoute", "nl": "achtenveertig", "fr": "48" },
+        { "type": "dire", "nl": "Kunt u dat herhalen, alstublieft?", "fr": "Pouvez-vous répéter, s'il vous plaît ?" },
+        { "type": "dire", "nl": "Mijn nummer is nul vier zeven twee.", "fr": "Mon numéro est 0472." },
+        { "type": "repondre", "question": "Hoe oud ben je?", "question_fr": "Quel âge as-tu ?", "attendu": ["ben", "jaar"], "exemple": "Ik ben eenendertig jaar." }
+      ],
+      "jeu": {
+        "titre": "Laisser ses coordonnées",
+        "consigne": "La réceptionniste te demande ton numéro de téléphone pour te rappeler. Donne-le, et fais-le répéter pour vérifier.",
+        "role": "Tu es réceptionniste dans un garage. Tu demandes au client son nom et son numéro de téléphone pour le rappeler quand la voiture est prête. Répète le numéro de travers une fois pour qu'il te corrige. Phrases très simples (A1).",
+        "welcome": "Goeiedag. Ik bel u terug als de auto klaar is. Wat is uw telefoonnummer?"
+      }
+    },
+    {
+      "id": "epeler",
+      "titre": "Épeler son nom",
+      "intro": "Ton nom est souvent difficile pour un Flamand : savoir l'épeler est indispensable au téléphone, à la commune ou à l'accueil.",
+      "roles": { "A": "L'employé", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat is uw naam, alstublieft?", "fr": "Quel est votre nom, s'il vous plaît ?" },
+        { "qui": "B", "nl": "Mijn naam is Kayembe.", "fr": "Mon nom est Kayembe." },
+        { "qui": "A", "nl": "Kunt u dat spellen?", "fr": "Pouvez-vous l'épeler ?" },
+        { "qui": "B", "nl": "K, A, Y, E, M, B, E.", "fr": "K, A, Y, E, M, B, E." },
+        { "qui": "A", "nl": "Met een y?", "fr": "Avec un y ?" },
+        { "qui": "B", "nl": "Ja, met een y. Kayembe.", "fr": "Oui, avec un y. Kayembe." }
+      ],
+      "vocab": {
+        "verbes": ["spellen", "schrijven", "herhalen", "zeggen"],
+        "mots": [
+          { "nl": "de naam", "fr": "le nom" },
+          { "nl": "de voornaam", "fr": "le prénom" },
+          { "nl": "de achternaam", "fr": "le nom de famille" },
+          { "nl": "de letter", "fr": "la lettre" },
+          { "nl": "het alfabet", "fr": "l'alphabet" },
+          { "nl": "de hoofdletter", "fr": "la majuscule" },
+          { "nl": "het koppelteken", "fr": "le trait d'union" },
+          { "nl": "dubbel", "fr": "double" }
+        ],
+        "phrases": [
+          { "nl": "Kunt u dat spellen?", "fr": "Pouvez-vous l'épeler ?" },
+          { "nl": "Hoe schrijf je dat?", "fr": "Comment ça s'écrit ?" },
+          { "nl": "Met een dubbele s.", "fr": "Avec deux s." },
+          { "nl": "Mijn achternaam is ...", "fr": "Mon nom de famille est ..." }
+        ]
+      },
+      "regle": {
+        "titre": "Les lettres qui piègent les francophones",
+        "explication": "Les voyelles : a (comme « â »), e (« é »), i, o, u (« u » français). Les pièges : g = un son raclé dans la gorge (« ché »), j = « yé », h = « ha », w = « wé », y = « i grec » ou « ij ». « ij » est une lettre néerlandaise à part : prononcée « eï ». Pour une lettre doublée, dis « dubbele » : dubbele l, dubbele s. Pour éviter les erreurs, on peut dire « k van Karel, a van Anna ».",
+        "exemples": [
+          { "nl": "G van Gerard", "fr": "G comme Gérard" },
+          { "nl": "Met een dubbele l.", "fr": "Avec deux l." },
+          { "nl": "Met een hoofdletter.", "fr": "Avec une majuscule." },
+          { "nl": "Hoe schrijf je dat?", "fr": "Comment ça s'écrit ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Pouvez-vous l'épeler ? » :", "choices": ["Kunt u dat herhalen?", "Kunt u dat spellen?", "Kunt u dat schrijven?"], "answer": 1 },
+        { "type": "qcm", "q": "« Avec deux s » :", "choices": ["Met twee s.", "Met een dubbele s.", "Met s s."], "answer": 1 },
+        { "type": "trou", "phrase": "Hoe ___ je dat?", "answer": "schrijf", "fr": "Comment ça s'écrit ?" },
+        { "type": "ordre", "mots": ["is", "achternaam", "Mijn", "Kayembe."], "answer": "Mijn achternaam is Kayembe.", "fr": "Mon nom de famille est Kayembe." },
+        { "type": "traduire", "fr": "Mon prénom est Sami.", "answer": "Mijn voornaam is Sami." },
+        { "type": "ecoute", "nl": "Met een hoofdletter.", "fr": "Avec une majuscule." },
+        { "type": "dire", "nl": "Kunt u dat spellen?", "fr": "Pouvez-vous l'épeler ?" },
+        { "type": "repondre", "question": "Wat is uw achternaam?", "question_fr": "Quel est votre nom de famille ?", "attendu": ["is"], "exemple": "Mijn achternaam is ..." }
+      ],
+      "jeu": {
+        "titre": "À l'accueil de l'entreprise",
+        "consigne": "Tu arrives pour un entretien. L'accueil te demande ton nom et doit l'écrire correctement : épelle-le.",
+        "role": "Tu es réceptionniste dans une entreprise de logistique (nom inventé : Transvio). Un visiteur arrive pour un entretien. Demande son nom et son prénom, demande-lui de les épeler, répète une lettre de travers pour qu'il corrige, puis dis-lui de patienter. Phrases très simples (A1).",
+        "welcome": "Goedemorgen, welkom bij Transvio. Wat is uw naam, alstublieft?"
+      }
+    },
+    {
+      "id": "heure",
+      "titre": "Dire l'heure",
+      "intro": "Demander et dire l'heure. Attention au grand piège : « half vier » ne veut pas dire 4 h 30 mais 3 h 30 (la moitié avant quatre heures).",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hoe laat is het?", "fr": "Quelle heure est-il ?" },
+        { "qui": "B", "nl": "Het is kwart over drie.", "fr": "Il est trois heures et quart." },
+        { "qui": "A", "nl": "Hoe laat begint de vergadering?", "fr": "À quelle heure commence la réunion ?" },
+        { "qui": "B", "nl": "Om half vier.", "fr": "À trois heures et demie." },
+        { "qui": "A", "nl": "Oké, dan hebben we nog een kwartier.", "fr": "D'accord, on a encore un quart d'heure." }
+      ],
+      "vocab": {
+        "verbes": ["beginnen", "eindigen", "duren", "wachten"],
+        "mots": [
+          { "nl": "het uur", "fr": "l'heure" },
+          { "nl": "de minuut", "fr": "la minute" },
+          { "nl": "het kwartier", "fr": "le quart d'heure" },
+          { "nl": "half", "fr": "demi (… et demie de l'heure d'avant)" },
+          { "nl": "kwart over", "fr": "et quart" },
+          { "nl": "kwart voor", "fr": "moins le quart" },
+          { "nl": "'s ochtends", "fr": "le matin" },
+          { "nl": "'s middags", "fr": "l'après-midi" },
+          { "nl": "'s avonds", "fr": "le soir" },
+          { "nl": "vroeg", "fr": "tôt" },
+          { "nl": "laat", "fr": "tard" }
+        ],
+        "phrases": [
+          { "nl": "Hoe laat is het?", "fr": "Quelle heure est-il ?" },
+          { "nl": "Het is acht uur.", "fr": "Il est huit heures." },
+          { "nl": "Om hoe laat?", "fr": "À quelle heure ?" }
+        ]
+      },
+      "regle": {
+        "titre": "half vier = 3 h 30",
+        "explication": "Heure pile : « Het is drie uur ». Et quart : « kwart over drie » (3 h 15). Moins le quart : « kwart voor vier » (3 h 45). La demie se compte vers l'heure suivante : « half vier » = 3 h 30 (à moitié chemin vers quatre heures). Minutes : « tien over drie » (3 h 10), « vijf voor half vier » (3 h 25). Pour un horaire précis (train, rendez-vous), on dit aussi simplement « vijftien uur dertig ». « Om » = à (heure) : om acht uur.",
+        "exemples": [
+          { "nl": "Het is half negen.", "fr": "Il est huit heures et demie." },
+          { "nl": "Kwart over twee.", "fr": "Deux heures et quart." },
+          { "nl": "Kwart voor twaalf.", "fr": "Midi moins le quart." },
+          { "nl": "De trein vertrekt om veertien uur tien.", "fr": "Le train part à 14 h 10." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« half vier », c'est :", "choices": ["4 h 30", "3 h 30", "4 h 15"], "answer": 1 },
+        { "type": "qcm", "q": "4 h 45 se dit :", "choices": ["kwart over vier", "kwart voor vijf", "half vijf"], "answer": 1 },
+        { "type": "trou", "phrase": "Hoe ___ is het?", "answer": "laat", "fr": "Quelle heure est-il ?" },
+        { "type": "trou", "phrase": "De vergadering begint ___ negen uur.", "answer": "om", "fr": "La réunion commence à neuf heures." },
+        { "type": "traduire", "fr": "Il est huit heures.", "answer": "Het is acht uur." },
+        { "type": "ecoute", "nl": "Het is kwart over twee.", "fr": "Il est deux heures et quart." },
+        { "type": "dire", "nl": "Hoe laat begint de vergadering?", "fr": "À quelle heure commence la réunion ?" },
+        { "type": "repondre", "question": "Hoe laat begin je met werken?", "question_fr": "À quelle heure commences-tu à travailler ?", "attendu": ["uur"], "exemple": "Ik begin om acht uur." }
+      ],
+      "jeu": {
+        "titre": "Organiser la journée avec un collègue",
+        "consigne": "Ton collègue organise la journée : demande-lui l'heure des réunions et de la pause, et donne-lui tes horaires.",
+        "role": "Tu es Bram, collègue organisé. Tu organises la journée avec l'apprenant : réunion à 9 h 30 (half tien), pause à midi, livraison à 14 h 15 (kwart over twee). Demande-lui ses horaires, à quelle heure il commence et finit. Utilise des heures en toutes lettres. Phrases très simples (A1).",
+        "welcome": "Goedemorgen! Hoe laat ben jij vandaag begonnen?"
+      }
+    },
+    {
+      "id": "jours",
+      "titre": "Les jours et les dates",
+      "intro": "Les jours de la semaine, les mois, et dire une date. Les jours et les mois s'écrivent sans majuscule en néerlandais.",
+      "roles": { "A": "Ta responsable", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Welke dag ben je vrij volgende week?", "fr": "Quel jour es-tu libre la semaine prochaine ?" },
+        { "qui": "B", "nl": "Ik ben vrij op woensdag.", "fr": "Je suis libre mercredi." },
+        { "qui": "A", "nl": "Woensdag twaalf oktober?", "fr": "Mercredi 12 octobre ?" },
+        { "qui": "B", "nl": "Ja, dat klopt.", "fr": "Oui, c'est ça." },
+        { "qui": "A", "nl": "Prima, dan noteer ik het.", "fr": "Parfait, je le note." }
+      ],
+      "vocab": {
+        "verbes": ["passen", "kloppen", "noteren", "verplaatsen"],
+        "mots": [
+          { "nl": "maandag", "fr": "lundi" },
+          { "nl": "dinsdag", "fr": "mardi" },
+          { "nl": "woensdag", "fr": "mercredi" },
+          { "nl": "donderdag", "fr": "jeudi" },
+          { "nl": "vrijdag", "fr": "vendredi" },
+          { "nl": "zaterdag", "fr": "samedi" },
+          { "nl": "zondag", "fr": "dimanche" },
+          { "nl": "de week", "fr": "la semaine" },
+          { "nl": "de maand", "fr": "le mois" },
+          { "nl": "de datum", "fr": "la date" },
+          { "nl": "volgende week", "fr": "la semaine prochaine" },
+          { "nl": "morgen", "fr": "demain" },
+          { "nl": "overmorgen", "fr": "après-demain" }
+        ],
+        "phrases": [
+          { "nl": "Welke dag is het vandaag?", "fr": "Quel jour sommes-nous ?" },
+          { "nl": "Wat is de datum?", "fr": "Quelle est la date ?" },
+          { "nl": "Dat past mij goed.", "fr": "Ça me convient bien." }
+        ]
+      },
+      "regle": {
+        "titre": "op maandag, in oktober",
+        "explication": "Avec un jour : « op » (op maandag = lundi). Avec un mois ou une saison : « in » (in oktober, in de zomer). Une date se dit « maandag drie oktober » : jour, nombre, mois, sans article. « Volgende week » = la semaine prochaine, « vorige week » = la semaine passée. Mois : januari, februari, maart, april, mei, juni, juli, augustus, september, oktober, november, december.",
+        "exemples": [
+          { "nl": "Op vrijdag werk ik niet.", "fr": "Le vendredi, je ne travaille pas." },
+          { "nl": "Ik ben jarig in mei.", "fr": "Mon anniversaire est en mai." },
+          { "nl": "Donderdag vijf juni.", "fr": "Jeudi 5 juin." },
+          { "nl": "Dat past mij goed.", "fr": "Ça me convient bien." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« mercredi » :", "choices": ["woensdag", "donderdag", "dinsdag"], "answer": 0 },
+        { "type": "qcm", "q": "« Lundi, je travaille » :", "choices": ["In maandag werk ik.", "Op maandag werk ik.", "Om maandag werk ik."], "answer": 1 },
+        { "type": "trou", "phrase": "Ik ben jarig ___ maart.", "answer": "in", "fr": "Mon anniversaire est en mars." },
+        { "type": "ordre", "mots": ["mij", "goed.", "Dat", "past"], "answer": "Dat past mij goed.", "fr": "Ça me convient bien." },
+        { "type": "traduire", "fr": "demain", "answer": "morgen" },
+        { "type": "ecoute", "nl": "Vrijdag twaalf oktober.", "fr": "Vendredi 12 octobre." },
+        { "type": "dire", "nl": "Ik ben vrij op woensdag.", "fr": "Je suis libre mercredi." },
+        { "type": "repondre", "question": "Welke dag is het vandaag?", "question_fr": "Quel jour sommes-nous ?", "attendu": ["dag"], "exemple": "Vandaag is het maandag." }
+      ],
+      "jeu": {
+        "titre": "Choisir un jour de formation",
+        "consigne": "Ta responsable veut t'inscrire à une formation. Dis quels jours tu es libre et choisis une date.",
+        "role": "Tu es Hilde, responsable d'équipe. Tu dois inscrire l'apprenant à une formation Excel la semaine prochaine (possible mardi, jeudi ou vendredi). Demande quels jours il est libre, propose des dates avec le jour et le mois, et confirme. Phrases très simples (A1).",
+        "welcome": "Hallo! Volgende week is er een opleiding Excel. Welke dag ben jij vrij?"
+      }
+    },
+    {
+      "id": "rdv",
+      "titre": "Prendre un rendez-vous",
+      "intro": "Tout assembler : appeler, dire pourquoi tu appelles, proposer ou accepter un jour et une heure, confirmer.",
+      "roles": { "A": "La secrétaire", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Praktijk dokter Claes, goedemorgen.", "fr": "Cabinet du docteur Claes, bonjour." },
+        { "qui": "B", "nl": "Goedemorgen, ik wil graag een afspraak maken.", "fr": "Bonjour, je voudrais prendre un rendez-vous." },
+        { "qui": "A", "nl": "Past donderdag om tien uur?", "fr": "Jeudi à dix heures, ça vous va ?" },
+        { "qui": "B", "nl": "Nee, dan werk ik. Kan het ook 's avonds?", "fr": "Non, je travaille. C'est possible le soir ?" },
+        { "qui": "A", "nl": "Donderdag om half zes?", "fr": "Jeudi à cinq heures et demie ?" },
+        { "qui": "B", "nl": "Perfect, dat past mij.", "fr": "Parfait, ça me va." }
+      ],
+      "vocab": {
+        "verbes": ["afspreken", "passen", "bevestigen", "annuleren", "verplaatsen"],
+        "mots": [
+          { "nl": "de afspraak", "fr": "le rendez-vous" },
+          { "nl": "de praktijk", "fr": "le cabinet (médical)" },
+          { "nl": "het tijdstip", "fr": "le moment, l'heure" },
+          { "nl": "de agenda", "fr": "l'agenda" },
+          { "nl": "beschikbaar", "fr": "disponible" },
+          { "nl": "vrij", "fr": "libre" },
+          { "nl": "bezet", "fr": "occupé, pris" },
+          { "nl": "perfect", "fr": "parfait" }
+        ],
+        "phrases": [
+          { "nl": "Ik wil graag een afspraak maken.", "fr": "Je voudrais prendre un rendez-vous." },
+          { "nl": "Past dat voor u?", "fr": "Ça vous convient ?" },
+          { "nl": "Kan het ook later?", "fr": "C'est possible plus tard ?" },
+          { "nl": "Ik moet mijn afspraak verplaatsen.", "fr": "Je dois déplacer mon rendez-vous." }
+        ]
+      },
+      "regle": {
+        "titre": "Ik wil graag … / Kan het …?",
+        "explication": "Pour demander poliment : « Ik wil graag + nom/infinitif » (je voudrais) : Ik wil graag een afspraak maken. L'infinitif va à la FIN de la phrase. Pour demander si c'est possible : « Kan het … ? » (C'est possible … ?) : Kan het morgen? Kan het om vijf uur? Pour accepter : « Dat past mij » / « Perfect ». Pour refuser : « Dan kan ik niet » (je ne peux pas à ce moment-là).",
+        "exemples": [
+          { "nl": "Ik wil graag een afspraak maken.", "fr": "Je voudrais prendre un rendez-vous." },
+          { "nl": "Kan het morgen?", "fr": "C'est possible demain ?" },
+          { "nl": "Dan kan ik niet.", "fr": "À ce moment-là, je ne peux pas." },
+          { "nl": "Dat past mij.", "fr": "Ça me convient." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je voudrais prendre un rendez-vous » :", "choices": ["Ik wil graag een afspraak maken.", "Ik wil graag maken een afspraak.", "Ik graag wil een afspraak maken."], "answer": 0 },
+        { "type": "qcm", "q": "Pour refuser un horaire :", "choices": ["Dat past mij.", "Dan kan ik niet.", "Perfect."], "answer": 1 },
+        { "type": "trou", "phrase": "___ het ook later?", "answer": "Kan", "fr": "C'est possible plus tard ?" },
+        { "type": "ordre", "mots": ["afspraak", "Ik", "verplaatsen.", "moet", "mijn"], "answer": "Ik moet mijn afspraak verplaatsen.", "fr": "Je dois déplacer mon rendez-vous." },
+        { "type": "traduire", "fr": "Ça me convient.", "answer": "Dat past mij./Dat past me." },
+        { "type": "ecoute", "nl": "Past donderdag om tien uur?", "fr": "Jeudi à dix heures, ça vous va ?" },
+        { "type": "dire", "nl": "Ik wil graag een afspraak maken.", "fr": "Je voudrais prendre un rendez-vous." },
+        { "type": "repondre", "question": "Wanneer bent u beschikbaar?", "question_fr": "Quand êtes-vous disponible ?", "attendu": ["op"], "exemple": "Ik ben beschikbaar op dinsdag om tien uur." }
+      ],
+      "jeu": {
+        "titre": "Appeler le cabinet médical",
+        "consigne": "Appelle le cabinet du médecin pour prendre rendez-vous. Le premier horaire proposé ne te convient pas : propose autre chose.",
+        "role": "Tu es la secrétaire du cabinet du docteur Claes. Le patient appelle pour un rendez-vous. Propose d'abord un horaire pendant ses heures de travail (mardi 10 h), puis s'il refuse un autre (mardi à half zes ou jeudi à kwart over vijf). Demande son nom (et qu'il l'épelle) et son numéro, puis confirme le rendez-vous. Phrases très simples (A1).",
+        "welcome": "Praktijk dokter Claes, goedemorgen."
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : prendre un rendez-vous au téléphone",
+    "consigne": "Appelle le service RH d'une entreprise pour fixer un rendez-vous d'entretien. Donne ton nom (épelle-le), ton numéro de téléphone, propose un jour et une heure, et confirme.",
+    "role": "Tu es Els, assistante RH chez Logistiko. Un candidat appelle pour fixer un rendez-vous d'entretien. Demande son nom puis qu'il l'épelle, son numéro de téléphone, ses disponibilités (jour et heure) ; propose une fois un horaire qui ne lui convient pas ; termine en confirmant jour, date et heure. Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Logistiko, personeelsdienst, goedemiddag. Waarmee kan ik u helpen?"
+  },
+  "examen": {
+    "reussite": "Tu sais prendre un rendez-vous au téléphone en néerlandais.",
+    "sujets": [
+      { "label": "dire pourquoi tu appelles", "etape": "rdv", "mots": ["afspraak", "sollicitatie", "gesprek", "bel voor", "bel over"] },
+      { "label": "donner ton nom", "etape": "epeler", "mots": ["mijn naam", "ik heet", "achternaam", "voornaam"] },
+      { "label": "épeler", "etape": "epeler", "mots": ["#epeler", "dubbele", "hoofdletter"] },
+      { "label": "donner ton numéro", "etape": "nombres", "mots": ["nummer", "nul", "gsm"] },
+      { "label": "proposer un jour", "etape": "jours", "mots": ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "morgen", "volgende week"] },
+      { "label": "proposer une heure", "etape": "heure", "mots": ["uur", "half", "kwart", "'s ochtends", "'s middags", "'s avonds"] },
+      { "label": "accepter ou refuser un horaire", "etape": "rdv", "mots": ["past", "kan niet", "kan ik niet", "perfect", "goed", "prima", "oké"] },
+      { "label": "remercier et conclure", "etape": "rdv", "mots": ["dank", "bedankt", "tot dan", "tot ziens"] }
+    ]
+  }
+}

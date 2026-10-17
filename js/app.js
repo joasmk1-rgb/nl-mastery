@@ -3098,6 +3098,24 @@ if (firebaseAvailable) {
                 return;
             }
             renderApprendreLevel(apprendreCurrentLevel);
+            renderModRpEntries();
+        }
+
+        // Modules en format jeu de rôle, affichés en tête d'Apprendre avec leur progression.
+        function renderModRpEntries() {
+            const el = document.getElementById('modrp-list');
+            if (!el) return;
+            const mods = MODRP_IDS.map(id => modRpData[id]).filter(Boolean);
+            if (!mods.length) { el.innerHTML = ''; return; }
+            el.innerHTML = `<div class="section-title" style="margin-top:0;">🎭 Apprendre en situation (nouveau format)</div>` + mods.map((m, i) => {
+                const s = modRpState(m.id);
+                const done = m.etapes.filter(e => modRpEtapeDone(m.id, e)).length;
+                const passed = s.finalResult && s.finalResult.passed;
+                return `<div class="modrp-entry${passed ? ' passed' : ''}" onclick="showModuleRp('${m.id}')">
+                    <span class="modrp-entry-icon">${passed ? '🏆' : (m.icone || '🎭')}</span>
+                    <span><b>${i + 1}. ${rpEscapeHtml(m.titre)}</b> <span class="conj-niveau-badge">${m.niveau}</span><br><small>${passed ? 'Réussi' : done + '/' + m.etapes.length + ' étapes'} · ${rpEscapeHtml(m.accroche || m.objectif)}</small></span>
+                </div>`;
+            }).join('');
         }
 
         function renderApprendreLevel(levelId) {
@@ -9146,7 +9164,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // stockés en dur, mini jeu de rôle). Le portrait (questions en français) produit les phrases
         // personnelles de l'apprenant : elles entrent dans les kits, les exercices (« dis-le ») et
         // le prompt des interlocuteurs. Tout vit dans state.modRp[id] (synchronisé, jamais public).
-        const MODRP_IDS = ['premier_contact'];
+        const MODRP_IDS = ['premier_contact', 'rendez_vous'];
         const MODRP_FILE = 'MON_PORTRAIT';
         const modRpData = {};
         let modRpCurrent = null;   // id du module affiché
@@ -9183,6 +9201,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!m) return [];
             const p = modRpState(id).portrait;
             const P = m.portrait;
+            if (!P) return [];
             const out = [];
             const add = (key, etape, nl, fr) => out.push({ key, etape, nl, fr });
             if (p.naam) add('naam', 'identite', `Ik heet ${p.naam}.`, `Je m'appelle ${p.naam}.`);
@@ -9271,9 +9290,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="cat-bar"><div class="cat-bar-fill" style="width:${Math.round(done / m.etapes.length * 100)}%"></div></div>
                     <p class="report-meta">${done}/${m.etapes.length} étapes terminées${s.finalResult && s.finalResult.passed ? ' · 🏆 module réussi' : (s.final ? ' · examen final tenté' : '')}</p>
                 </div>
-                <button class="modrp-step${nPerso ? ' done' : ''}" onclick="modRpShowPortrait()">
+                ${m.portrait ? `<button class="modrp-step${nPerso ? ' done' : ''}" onclick="modRpShowPortrait()">
                     <span class="modrp-num">🪪</span><span><b>Mon portrait</b><br><small>${nPerso ? nPerso + ' phrases sur toi, prêtes à apprendre' : 'Commence ici : dis qui tu es, l\'app en fait tes phrases en néerlandais'}</small></span>
-                </button>
+                </button>` : ''}
                 ${m.etapes.map((e, i) => {
                     const st = s.etapes[e.id] || {};
                     const total = modRpExercises(id, e).length;
@@ -9381,6 +9400,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <p class="prep-sub">${rpEscapeHtml(e.intro)}</p>
                 ${e.portrait ? `<div class="conj-card"><div class="section-title" style="margin-top:0;">🗣️ Tes phrases pour cette étape</div>
                     ${perso.map(s => row(s.nl, s.fr)).join('') || `<p class="report-meta">Remplis <a href="#" onclick="modRpShowPortrait(); return false;">ton portrait</a> pour avoir tes propres phrases ici.</p>`}</div>` : ''}
+                ${(e.dialogue || []).length ? `<div class="conj-card">
+                    <div class="section-title" style="margin-top:0;">🎧 Dialogue modèle</div>
+                    <p class="report-meta">${rpEscapeHtml((e.roles && e.roles.A) || 'A')} et ${rpEscapeHtml((e.roles && e.roles.B) || 'toi')}. Écoute-le, puis joue le rôle de ${rpEscapeHtml((e.roles && e.roles.B) || 'B')} : l'app dit l'autre rôle et t'écoute.</p>
+                    <div id="modrp-dialog">${e.dialogue.map((l, i) => `<div class="modrp-line modrp-${l.qui}" id="modrp-line-${i}"><b>${l.qui === 'A' ? rpEscapeHtml((e.roles && e.roles.A) || 'A') : rpEscapeHtml((e.roles && e.roles.B) || 'Toi')}</b> : <span class="modrp-line-nl">${rpEscapeHtml(l.nl)}</span> <small>${rpEscapeHtml(l.fr)}</small></div>`).join('')}</div>
+                    <div class="prep-actions-grid" style="margin-top:10px;">
+                        <button class="btn btn-gray" onclick="modRpDialog('${e.id}', 'ecoute')">▶️ Écouter</button>
+                        <button class="btn btn-green" onclick="modRpDialog('${e.id}', 'jouer')">🎤 Jouer mon rôle</button>
+                    </div>
+                    <div id="modrp-dialog-status" class="report-meta"></div>
+                </div>` : ''}
                 <div class="conj-card modrp-rule">
                     <div class="section-title" style="margin-top:0;">💡 ${rpEscapeHtml(e.regle.titre)}</div>
                     <p>${rpEscapeHtml(e.regle.explication)}</p>
@@ -9396,6 +9425,54 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <button class="btn btn-gray" onclick="rpPrepOpen('mod:${id}:${e.id}', '${rpEscapeHtml(e.titre).replace(/'/g, "\\'")}', { type: 'mod', id: '${id}', etape: '${e.id}' })">📚 Réviser, conjuguer, écouter</button>
                 </div>
                 <div id="modrp-ex"></div>`;
+        }
+
+        // ----- Dialogue modèle -----
+        // « ecoute » : l'app lit tout le dialogue. « jouer » : elle lit les répliques de A ; pour
+        // celles de B, elle cache le texte, montre le français, écoute l'apprenant et compare
+        // (rpSpeechMatch), puis lit la bonne réplique. Moteur audio commun (Pause/Arrêt, écran).
+        async function modRpDialog(etapeId, mode) {
+            const e = modRpData[modRpCurrent].etapes.find(x => x.id === etapeId);
+            if (!e || !e.dialogue) return;
+            conjAudioStop();
+            const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: 'modrp-view' };
+            conjAudioRun = run;
+            const status = document.getElementById('modrp-dialog-status');
+            const lines = e.dialogue;
+            let ok = 0, asked = 0;
+            const lineEl = i => document.getElementById('modrp-line-' + i);
+            document.querySelectorAll('#modrp-dialog .modrp-line').forEach(el => el.classList.remove('active', 'good', 'bad'));
+            if (mode === 'jouer') document.querySelectorAll('#modrp-dialog .modrp-B .modrp-line-nl').forEach(el => el.classList.add('hidden'));
+            for (let i = 0; i < lines.length && !run.stop; i++) {
+                const l = lines[i], el = lineEl(i);
+                if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'nearest' }); }
+                if (mode === 'jouer' && l.qui === 'B') {
+                    asked++;
+                    if (status) status.innerText = '🎤 À toi : ' + l.fr;
+                    let heard = await conjAudioListen();
+                    if (run.stop) break;
+                    if (heard && heard.denied) { if (status) status.innerText = 'Micro refusé : autorise-le dans le navigateur.'; break; }
+                    let good = !!heard && heard.some(h => rpSpeechMatch(h, l.nl));
+                    if (!good && !run.stop) {
+                        if (status) status.innerText = '🔁 Écoute et répète : ' + l.fr;
+                        await conjAudioSay(l.nl, 'nl', 0.9);
+                        heard = await conjAudioListen();
+                        good = !!heard && heard.some(h => rpSpeechMatch(h, l.nl));
+                    } else if (good) ok++;
+                    if (el) { el.querySelector('.modrp-line-nl').classList.remove('hidden'); el.classList.add(good ? 'good' : 'bad'); }
+                    if (good) await conjAudioWait(400); else await conjAudioSay(l.nl, 'nl', 0.9);
+                } else {
+                    await conjAudioSay(l.nl, 'nl', 0.95);
+                    await conjAudioWait(250);
+                }
+                if (el) el.classList.remove('active');
+            }
+            if (conjAudioRun === run) {
+                conjAudioRelease(run);
+                conjAudioRun = null;
+                document.querySelectorAll('#modrp-dialog .modrp-line-nl').forEach(el => el.classList.remove('hidden'));
+                if (status) status.innerText = mode === 'jouer' ? `Terminé : ${ok}/${asked} répliques réussies du premier coup.` : '';
+            }
         }
 
         // ----- Exercices -----
@@ -9435,16 +9512,51 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="rpw-chips">${shuffled.map(x => `<button type="button" class="conj-filter-chip" data-w="${rpEscapeHtml(x.w)}" onclick="modRpPick(this)">${rpEscapeHtml(x.w)}</button>`).join('')}</div>
                     <div class="prep-actions-grid" style="margin-top:10px;"><button class="btn btn-gray" onclick="modRpRenderEx()">↺ Effacer</button><button class="btn btn-green" onclick="modRpCheck()">Vérifier</button></div>`;
             } else {
+                const say = s => `speakNL('${String(s).replace(/\\/g, '').replace(/'/g, "\\'")}')`;
                 const prompt = q.type === 'trou' ? `<div class="conj-question-fr">${rpEscapeHtml(q.phrase)}</div><div class="conj-question-hint">${rpEscapeHtml(q.fr || '')} — complète le mot manquant</div>`
-                    : q.type === 'traduire' ? `<div class="conj-question-fr">${rpEscapeHtml(q.fr)}</div><div class="conj-question-hint">Dis-le en néerlandais</div>`
-                    : `<div class="conj-question-hint">Écoute et écris ce que tu entends</div><button class="btn btn-gray" onclick="speakNL('${String(q.nl).replace(/'/g, "\\'")}')">🔊 Réécouter</button>`;
-                body = `${prompt}<input type="text" id="modrp-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="En néerlandais…" onkeypress="if(event.key==='Enter') modRpCheck()" style="width:100%; margin:8px 0;">
+                    : q.type === 'traduire' ? `<div class="conj-question-fr">${rpEscapeHtml(q.fr)}</div><div class="conj-question-hint">Écris-le ou dis-le en néerlandais</div>`
+                    : q.type === 'dire' ? `<div class="modrp-oral-tag">🗣️ Dis-le à voix haute</div><div class="conj-question-fr">${rpEscapeHtml(q.fr)}</div><div class="conj-question-hint">Appuie sur 🎤 et dis la phrase en néerlandais</div>`
+                    : q.type === 'repondre' ? `<div class="modrp-oral-tag">💬 Réponds à la question</div><div class="conj-question-fr">🔊 …</div><button class="btn btn-gray" onclick="${say(q.question)}">🔊 Réécouter la question</button>
+                        <details class="conj-question-hint"><summary>Voir la question</summary>${rpEscapeHtml(q.question)} — ${rpEscapeHtml(q.question_fr || '')}</details>`
+                    : `<div class="conj-question-hint">Écoute et écris (ou répète) ce que tu entends</div><button class="btn btn-gray" onclick="${say(q.nl)}">🔊 Réécouter</button>`;
+                const oral = q.type === 'dire' || q.type === 'repondre';
+                body = `${prompt}
+                    <div class="modrp-answer-row">
+                        <input type="text" id="modrp-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${oral ? 'Ce que tu as dit apparaît ici…' : 'En néerlandais…'}" onkeypress="if(event.key==='Enter') modRpCheck()">
+                        <button type="button" class="btn ${oral ? 'btn-green' : 'btn-gray'} modrp-mic" id="modrp-mic" onclick="modRpMic()">🎤</button>
+                    </div>
                     <button class="btn btn-green" onclick="modRpCheck()">Vérifier</button>`;
             }
             box.innerHTML = `<div class="conj-card">${head}${body}<div class="acc-error" id="modrp-fb" style="margin-top:8px;"></div></div>`;
             if (q.type === 'ecoute') speakNL(q.nl);
+            if (q.type === 'repondre') speakNL(q.question);
             const input = document.getElementById('modrp-input');
             if (input) input.focus();
+        }
+
+        // Reconnaissance vocale tolérante : au moins 75 % des mots attendus entendus (tous pour une
+        // phrase de 3 mots ou moins). La dictée oublie souvent ponctuation et petits mots.
+        function rpSpeechMatch(heard, target) {
+            const words = s => normalize(s).replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean);
+            const t = words(target), h = new Set(words(heard));
+            if (!t.length) return false;
+            const found = t.filter(w => h.has(w)).length;
+            return t.length <= 3 ? found === t.length : found / t.length >= 0.75;
+        }
+
+        // 🎤 : une écoute courte (instance de reconnaissance dédiée) qui remplit le champ puis vérifie.
+        async function modRpMic() {
+            const btn = document.getElementById('modrp-mic');
+            const input = document.getElementById('modrp-input');
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible dans ce navigateur (utilise Chrome). Tu peux écrire ta réponse."); return; }
+            if (btn) { btn.innerText = '👂'; btn.disabled = true; }
+            const heard = await conjAudioListen();
+            if (btn) { btn.innerText = '🎤'; btn.disabled = false; }
+            if (heard && heard.denied) { alert('Micro refusé : autorise-le dans le navigateur.'); return; }
+            if (!heard || !heard.length) { if (input) input.placeholder = 'Rien entendu, réessaie ou écris.'; return; }
+            if (input) input.value = heard[0];
+            if (modRpEx) modRpEx.heard = heard;
+            modRpCheck();
         }
 
         function modRpPick(btn) {
@@ -9463,12 +9575,22 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             else if (q.type === 'ordre') {
                 const clean = s => normalize(s).replace(/[.?!,]/g, '').trim();
                 ok = clean(ex.built.join(' ')) === clean(q.answer); expected = q.answer;
+            } else if (q.type === 'repondre') {
+                const alts = (ex.heard && ex.heard.length) ? ex.heard : [(document.getElementById('modrp-input') || {}).value || ''];
+                const need = (q.attendu || []).map(w => normalize(w));
+                const oneOf = (q.un_de || []).map(w => normalize(w));
+                const has = (t, w) => t.includes(' ' + w + ' ') || t.includes(' ' + w);
+                ok = alts.some(a => { const t = ' ' + normalize(a).replace(/[^a-z0-9' ]/g, ' ') + ' '; return need.every(w => has(t, w)) && (!oneOf.length || oneOf.some(w => has(t, w))); });
+                expected = q.exemple || q.attendu.join(' … ');
             } else {
                 const val = (document.getElementById('modrp-input') || {}).value || '';
-                const target = q.type === 'ecoute' ? q.nl : q.answer;
-                ok = evaluateAnswer(val.replace(/[.?!]+$/, ''), String(target).split('/').map(s => s.replace(/[.?!]+$/, '')).join('/')).status !== 'wrong';
-                expected = String(target).split('/')[0];
+                const target = q.type === 'ecoute' || q.type === 'dire' ? q.nl : q.answer;
+                const targets = String(target).split('/').map(s => s.replace(/[.?!]+$/, ''));
+                ok = evaluateAnswer(val.replace(/[.?!]+$/, ''), targets.join('/')).status !== 'wrong'
+                    || ((ex.heard || []).some(h => targets.some(t => rpSpeechMatch(h, t))));
+                expected = targets[0];
             }
+            ex.heard = null;
             ex.checking = true;
             if (ok) ex.score++;
             const fb = document.getElementById('modrp-fb');
@@ -9543,7 +9665,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const p = modRpState(id).portrait;
             const userLines = rpConversationHistory.slice(1).filter(x => x.role === 'user').map(x => x.parts[0].text);
             const text = normalize(userLines.join(' '));
-            const checks = MODRP_TOPICS.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));
+            const topics = (m.examen && Array.isArray(m.examen.sujets)) ? m.examen.sujets.map(s => ({
+                key: s.label, etape: s.etape, label: s.label,
+                // « #epeler » : au moins trois lettres isolées à la suite (« k a y e m b e »).
+                test: (t, pp) => ((s.mots || []).includes('#epeler') && /(^|\s)([a-z][\s,.-]+){3,}/.test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => new RegExp('(^|[^a-z])' + normalize(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t))
+                    || (s.portrait && pp[s.portrait] && t.includes(normalize(String(pp[s.portrait]))))
+            })) : MODRP_TOPICS;
+            const checks = topics.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));
             const covered = checks.filter(c => c.ok).length;
             const coverageOk = covered >= Math.ceil(0.75 * checks.length);
             rpJobHideNav();
@@ -9566,7 +9694,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 box.innerHTML = `
                     <div class="conj-card" style="text-align:left;">
                         <div class="conj-verb-title">${passed ? '✅ Module réussi !' : '🔁 Presque : encore un essai'}</div>
-                        <p class="report-meta">${passed ? 'Tu sais te présenter en néerlandais. 🏆 Le module est validé.' : 'Pour valider le module : parler d\'au moins ' + Math.ceil(0.75 * checks.length) + ' sujets sur ' + checks.length + (score !== null ? ' et obtenir au moins 6/10 en communication.' : '.')}</p>
+                        <p class="report-meta">${passed ? (m.examen && m.examen.reussite ? rpEscapeHtml(m.examen.reussite) : 'Objectif atteint.') + ' 🏆 Le module est validé.' : 'Pour valider le module : parler d\'au moins ' + Math.ceil(0.75 * checks.length) + ' sujets sur ' + checks.length + (score !== null ? ' et obtenir au moins 6/10 en communication.' : '.')}</p>
                         ${checklist}
                         ${judge ? `
                             <div class="rp-iv-label">🗣️ Communication : ${score !== null ? score + '/10' : '—'}</div>
@@ -9597,10 +9725,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 try {
                     const transcript = rpConversationHistory.slice(1).map(x => (x.role === 'user' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + x.parts[0].text).join('\n');
                     const raw = await GeminiService.generate(
-                        'Tu es examinateur de néerlandais pour francophones débutants (niveau A1). Un apprenant a passé l\'examen oral « se présenter » : il devait parler de lui (nom, origine, âge, ville, famille, travail, langues, loisirs). Ses répliques peuvent avoir été dictées : ignore ponctuation et majuscules.\n\n' +
+                        'Tu es examinateur de néerlandais pour francophones (niveau ' + m.niveau + '). Un apprenant a passé l\'examen oral du module « ' + m.titre + ' ». Consigne qu\'il avait : ' + m.final.consigne + ' Ses répliques peuvent avoir été dictées : ignore ponctuation et majuscules.\n\n' +
                         'Interlocuteur : ' + m.final.welcome + '\n' + transcript + '\n\n' +
-                        'Évalue UNIQUEMENT les répliques de l\'APPRENANT, avec bienveillance et pour le niveau A1 : l\'important est d\'être compris, pas la perfection. Réponds UNIQUEMENT en JSON :\n' +
-                        '{"note": nombre de 0 à 10 (capacité à se présenter de façon compréhensible), "resume": "en français, 1-2 phrases", "points_forts": ["en français, 2 maximum"], ' +
+                        'Évalue UNIQUEMENT les répliques de l\'APPRENANT, avec bienveillance et pour son niveau : l\'important est d\'être compris et d\'accomplir la tâche, pas la perfection. Réponds UNIQUEMENT en JSON :\n' +
+                        '{"note": nombre de 0 à 10 (capacité à accomplir la tâche de façon compréhensible), "resume": "en français, 1-2 phrases", "points_forts": ["en français, 2 maximum"], ' +
                         '"corrections": [{"phrase": "ce qu\'il a dit", "correction": "en néerlandais", "explication": "en français, courte"}], "conseil": "en français, un conseil prioritaire"}\n3 corrections maximum, les plus utiles.'
                     );
                     judge = rpHelpParseJson(raw);
