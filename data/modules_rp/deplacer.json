@@ -1,0 +1,329 @@
+{
+  "_doc": "Module en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "deplacer",
+  "niveau": "A1",
+  "icone": "🚆",
+  "titre": "Se déplacer",
+  "accroche": "Demander ton chemin, prendre le bus ou le train, acheter un ticket et prévenir d'un retard.",
+  "objectif": "À la fin du module, tu sais te déplacer en Flandre : demander ton chemin, acheter un ticket, comprendre un horaire et une correspondance, et prévenir si tu es en retard.",
+  "etapes": [
+    {
+      "id": "chemin",
+      "titre": "Demander son chemin",
+      "intro": "Demander poliment où se trouve un lieu et comprendre la réponse : tout droit, à gauche, à droite, la première rue.",
+      "roles": { "A": "Une passante", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Pardon mevrouw, waar is het station?", "fr": "Pardon madame, où est la gare ?" },
+        { "qui": "A", "nl": "Ga rechtdoor en neem de tweede straat links.", "fr": "Allez tout droit et prenez la deuxième rue à gauche." },
+        { "qui": "B", "nl": "Is het ver?", "fr": "C'est loin ?" },
+        { "qui": "A", "nl": "Nee, vijf minuten te voet.", "fr": "Non, cinq minutes à pied." },
+        { "qui": "B", "nl": "Dank u wel!", "fr": "Merci beaucoup !" }
+      ],
+      "vocab": {
+        "verbes": ["gaan", "nemen", "zoeken", "vinden", "volgen"],
+        "mots": [
+          { "nl": "rechtdoor", "fr": "tout droit" },
+          { "nl": "links", "fr": "à gauche" },
+          { "nl": "rechts", "fr": "à droite" },
+          { "nl": "de straat", "fr": "la rue" },
+          { "nl": "het kruispunt", "fr": "le carrefour" },
+          { "nl": "de hoek", "fr": "le coin" },
+          { "nl": "het station", "fr": "la gare" },
+          { "nl": "de halte", "fr": "l'arrêt (bus, tram)" },
+          { "nl": "ver", "fr": "loin" },
+          { "nl": "dichtbij", "fr": "près" },
+          { "nl": "te voet", "fr": "à pied" }
+        ],
+        "phrases": [
+          { "nl": "Waar is het station?", "fr": "Où est la gare ?" },
+          { "nl": "Is het ver?", "fr": "C'est loin ?" },
+          { "nl": "Hoe kom ik bij ...?", "fr": "Comment est-ce que j'arrive à ... ?" }
+        ]
+      },
+      "regle": {
+        "titre": "L'impératif : ga, neem, sla … af",
+        "explication": "Pour donner une direction, on utilise l'impératif = le radical du verbe (infinitif sans -en) : gaan → ga, nemen → neem, volgen → volg. Verbes à particule : la particule va à la fin : afslaan → « sla links af » (tourne à gauche), oversteken → « steek over » (traverse). Ordinaux utiles : de eerste, de tweede, de derde straat.",
+        "exemples": [
+          { "nl": "Ga rechtdoor.", "fr": "Allez tout droit." },
+          { "nl": "Sla rechts af.", "fr": "Tournez à droite." },
+          { "nl": "Neem de eerste straat links.", "fr": "Prenez la première rue à gauche." },
+          { "nl": "Steek de straat over.", "fr": "Traversez la rue." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Tournez à gauche » :", "choices": ["Sla links af.", "Ga links af.", "Afslaan links."], "answer": 0 },
+        { "type": "qcm", "q": "« rechtdoor » veut dire :", "choices": ["à droite", "tout droit", "à côté"], "answer": 1 },
+        { "type": "trou", "phrase": "___ de tweede straat rechts. (prenez)", "answer": "Neem", "fr": "Prenez la deuxième rue à droite." },
+        { "type": "trou", "phrase": "Is het ___? (loin)", "answer": "ver", "fr": "C'est loin ?" },
+        { "type": "ordre", "mots": ["ik", "Hoe", "het", "kom", "station?", "bij"], "answer": "Hoe kom ik bij het station?", "fr": "Comment est-ce que j'arrive à la gare ?" },
+        { "type": "traduire", "fr": "cinq minutes à pied", "answer": "vijf minuten te voet" },
+        { "type": "ecoute", "nl": "Ga rechtdoor en sla bij het kruispunt rechts af.", "fr": "Allez tout droit et tournez à droite au carrefour." },
+        { "type": "dire", "nl": "Pardon, waar is de bushalte?", "fr": "Pardon, où est l'arrêt de bus ?" },
+        { "type": "repondre", "question": "Is het station ver van jouw huis?", "question_fr": "La gare est loin de chez toi ?", "attendu": [], "un_de": ["ver", "dichtbij", "minuten", "kilometer"], "exemple": "Nee, het is tien minuten te voet." }
+      ],
+      "jeu": {
+        "titre": "Perdu en ville",
+        "consigne": "Tu dois trouver l'adresse d'un rendez-vous. Demande ton chemin à un passant, fais répéter et vérifie que tu as compris.",
+        "role": "Tu es un passant aimable à Gand. L'apprenant cherche la Veldstraat (ou un autre lieu qu'il demande). Donne des indications en 2-3 étapes (rechtdoor, de tweede straat links, aan het kruispunt rechts af, tegenover de bakker) ; s'il demande, répète plus lentement. Phrases très simples (A1).",
+        "welcome": "Ja? Kan ik u helpen?"
+      }
+    },
+    {
+      "id": "transports",
+      "titre": "Les transports",
+      "intro": "Dire comment tu te déplaces : en train, en bus, à vélo… et combien de temps ça prend.",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hoe kom je naar het werk?", "fr": "Comment viens-tu au travail ?" },
+        { "qui": "B", "nl": "Ik kom met de trein en daarna met de bus.", "fr": "Je viens en train et ensuite en bus." },
+        { "qui": "A", "nl": "Hoe lang duurt dat?", "fr": "Combien de temps ça prend ?" },
+        { "qui": "B", "nl": "Ongeveer een uur. En jij?", "fr": "Environ une heure. Et toi ?" },
+        { "qui": "A", "nl": "Ik kom met de fiets, het is maar tien minuten.", "fr": "Je viens à vélo, ce n'est que dix minutes." }
+      ],
+      "vocab": {
+        "verbes": ["rijden", "fietsen", "duren", "komen", "nemen"],
+        "mots": [
+          { "nl": "de trein", "fr": "le train" },
+          { "nl": "de bus", "fr": "le bus" },
+          { "nl": "de tram", "fr": "le tram" },
+          { "nl": "de metro", "fr": "le métro" },
+          { "nl": "de fiets", "fr": "le vélo" },
+          { "nl": "de auto", "fr": "la voiture" },
+          { "nl": "de file", "fr": "l'embouteillage" },
+          { "nl": "ongeveer", "fr": "environ" },
+          { "nl": "het openbaar vervoer", "fr": "les transports en commun" },
+          { "nl": "het rijbewijs", "fr": "le permis de conduire" }
+        ],
+        "phrases": [
+          { "nl": "Hoe kom je naar het werk?", "fr": "Comment viens-tu au travail ?" },
+          { "nl": "Ik kom met de trein.", "fr": "Je viens en train." },
+          { "nl": "Hoe lang duurt het?", "fr": "Combien de temps ça prend ?" }
+        ]
+      },
+      "regle": {
+        "titre": "met de trein, te voet",
+        "explication": "Moyen de transport : « met de » + véhicule : met de trein, met de bus, met de fiets, met de auto. Exception : « te voet » (à pied). Pour la durée : « Het duurt een uur », « Het duurt twintig minuten ». « Naar » = vers une destination (naar het werk, naar Gent), « in » = dans un lieu (in Gent).",
+        "exemples": [
+          { "nl": "Ik ga met de fiets naar het werk.", "fr": "Je vais au travail à vélo." },
+          { "nl": "Ze komt te voet.", "fr": "Elle vient à pied." },
+          { "nl": "Het duurt twintig minuten.", "fr": "Ça prend vingt minutes." },
+          { "nl": "We rijden naar Antwerpen.", "fr": "Nous roulons vers Anvers." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« à vélo » :", "choices": ["op de fiets", "met de fiets", "te fiets"], "answer": 1 },
+        { "type": "qcm", "q": "« à pied » :", "choices": ["met de voet", "te voet", "op voet"], "answer": 1 },
+        { "type": "trou", "phrase": "Hoe lang ___ het?", "answer": "duurt", "fr": "Combien de temps ça prend ?" },
+        { "type": "trou", "phrase": "Ik ga ___ Gent. (vers)", "answer": "naar", "fr": "Je vais à Gand." },
+        { "type": "ordre", "mots": ["met", "werk.", "Ik", "trein", "kom", "de", "naar", "het"], "answer": "Ik kom met de trein naar het werk.", "fr": "Je viens au travail en train." },
+        { "type": "traduire", "fr": "Ça prend environ une heure.", "answer": "Het duurt ongeveer een uur." },
+        { "type": "ecoute", "nl": "Er is veel file vandaag.", "fr": "Il y a beaucoup de bouchons aujourd'hui." },
+        { "type": "dire", "nl": "Ik kom met de bus naar het werk.", "fr": "Je viens au travail en bus." },
+        { "type": "repondre", "question": "Hoe kom jij naar het werk of naar school?", "question_fr": "Comment viens-tu au travail ou à l'école ?", "attendu": [], "un_de": ["met", "te voet"], "exemple": "Ik kom met de trein." }
+      ],
+      "jeu": {
+        "titre": "Le trajet domicile-travail",
+        "consigne": "Un collègue te demande comment tu viens au travail. Décris ton trajet et compare avec le sien.",
+        "role": "Tu es Ruben, collègue qui vient en voiture et se plaint des embouteillages. Demande à l'apprenant comment il vient au travail, combien de temps ça prend, s'il a un permis ; parle de ton trajet. Phrases très simples (A1).",
+        "welcome": "Pff, weer veel file vanochtend. Hoe kom jij eigenlijk naar het werk?"
+      }
+    },
+    {
+      "id": "ticket",
+      "titre": "Acheter un ticket",
+      "intro": "Au guichet ou à l'automate : un aller simple ou un aller-retour, la classe, le prix, le quai.",
+      "roles": { "A": "Le guichetier", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Goedemorgen, een ticket naar Brugge, alstublieft.", "fr": "Bonjour, un ticket pour Bruges, s'il vous plaît." },
+        { "qui": "A", "nl": "Enkel of heen en terug?", "fr": "Aller simple ou aller-retour ?" },
+        { "qui": "B", "nl": "Heen en terug, tweede klas.", "fr": "Aller-retour, deuxième classe." },
+        { "qui": "A", "nl": "Dat is achttien euro veertig.", "fr": "Ça fait dix-huit euros quarante." },
+        { "qui": "B", "nl": "Van welk perron vertrekt de trein?", "fr": "De quel quai part le train ?" },
+        { "qui": "A", "nl": "Perron zes, om tien voor tien.", "fr": "Quai six, à dix heures moins dix." }
+      ],
+      "vocab": {
+        "verbes": ["kopen", "vertrekken", "aankomen", "kosten"],
+        "mots": [
+          { "nl": "het ticket", "fr": "le billet" },
+          { "nl": "enkel", "fr": "aller simple" },
+          { "nl": "heen en terug", "fr": "aller-retour" },
+          { "nl": "de klas", "fr": "la classe" },
+          { "nl": "het perron", "fr": "le quai" },
+          { "nl": "de dienstregeling", "fr": "l'horaire (transports)" },
+          { "nl": "het loket", "fr": "le guichet" },
+          { "nl": "de automaat", "fr": "l'automate" },
+          { "nl": "het abonnement", "fr": "l'abonnement" },
+          { "nl": "de korting", "fr": "la réduction" }
+        ],
+        "phrases": [
+          { "nl": "Een ticket naar Gent, alstublieft.", "fr": "Un billet pour Gand, s'il vous plaît." },
+          { "nl": "Heen en terug.", "fr": "Aller-retour." },
+          { "nl": "Van welk perron vertrekt de trein?", "fr": "De quel quai part le train ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Welk / welke : quel, quelle",
+        "explication": "« welk » devant un nom en « het » au singulier (welk perron, welk ticket), « welke » partout ailleurs (welke trein, welke bus, welke kaartjes). La question : welk(e) + nom + verbe + sujet : « Welke trein moet ik nemen? ». Le verbe « moeten » + infinitif à la fin : Ik moet in Gent overstappen.",
+        "exemples": [
+          { "nl": "Van welk perron vertrekt hij?", "fr": "De quel quai part-il ?" },
+          { "nl": "Welke bus moet ik nemen?", "fr": "Quel bus dois-je prendre ?" },
+          { "nl": "Welke klas?", "fr": "Quelle classe ?" },
+          { "nl": "Is er korting voor werkzoekenden?", "fr": "Y a-t-il une réduction pour demandeurs d'emploi ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« De quel quai ? » (het perron) :", "choices": ["Van welke perron?", "Van welk perron?", "Van wat perron?"], "answer": 1 },
+        { "type": "qcm", "q": "« aller-retour » :", "choices": ["enkel", "heen en terug", "terug en heen"], "answer": 1 },
+        { "type": "trou", "phrase": "___ bus moet ik nemen?", "answer": "Welke", "fr": "Quel bus dois-je prendre ?" },
+        { "type": "trou", "phrase": "Een ticket ___ Brugge, alstublieft.", "answer": "naar", "fr": "Un billet pour Bruges, s'il vous plaît." },
+        { "type": "ordre", "mots": ["vertrekt", "Van", "trein?", "perron", "de", "welk"], "answer": "Van welk perron vertrekt de trein?", "fr": "De quel quai part le train ?" },
+        { "type": "traduire", "fr": "deuxième classe", "answer": "tweede klas" },
+        { "type": "ecoute", "nl": "De trein naar Oostende vertrekt van perron drie.", "fr": "Le train pour Ostende part du quai trois." },
+        { "type": "dire", "nl": "Een ticket naar Gent, heen en terug, alstublieft.", "fr": "Un billet aller-retour pour Gand, s'il vous plaît." },
+        { "type": "repondre", "question": "Enkel of heen en terug?", "question_fr": "Aller simple ou aller-retour ?", "attendu": [], "un_de": ["enkel", "heen en terug", "terug"], "exemple": "Heen en terug, alstublieft." }
+      ],
+      "jeu": {
+        "titre": "Au guichet de la gare",
+        "consigne": "Achète un billet pour une ville flamande : choisis aller simple ou aller-retour, demande le prix, le quai et l'heure.",
+        "role": "Tu es guichetier à la gare. Le voyageur achète un billet : demande la destination, aller simple ou aller-retour, la classe, s'il a droit à une réduction ; donne le prix, le quai et l'heure de départ (en toutes lettres). Phrases très simples (A1).",
+        "welcome": "Goeiemorgen. Waar wilt u naartoe?"
+      }
+    },
+    {
+      "id": "correspondance",
+      "titre": "Monter, descendre, changer",
+      "intro": "Comprendre une correspondance : monter, descendre, changer de train. Ce sont des verbes à particule séparable.",
+      "roles": { "A": "Un voyageur", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Sorry, stopt deze trein in Kortrijk?", "fr": "Pardon, ce train s'arrête à Courtrai ?" },
+        { "qui": "A", "nl": "Nee, je moet in Gent overstappen.", "fr": "Non, tu dois changer à Gand." },
+        { "qui": "B", "nl": "Waar stap ik uit?", "fr": "Où est-ce que je descends ?" },
+        { "qui": "A", "nl": "Je stapt uit in Gent-Sint-Pieters en je neemt de trein naar Kortrijk.", "fr": "Tu descends à Gand-Saint-Pierre et tu prends le train pour Courtrai." },
+        { "qui": "B", "nl": "Hoe laat komt die trein aan in Kortrijk?", "fr": "À quelle heure ce train arrive-t-il à Courtrai ?" }
+      ],
+      "vocab": {
+        "verbes": ["instappen", "uitstappen", "overstappen", "aankomen", "vertrekken", "stoppen"],
+        "mots": [
+          { "nl": "de overstap", "fr": "la correspondance" },
+          { "nl": "de aansluiting", "fr": "la correspondance (train)" },
+          { "nl": "de halte", "fr": "l'arrêt" },
+          { "nl": "het spoor", "fr": "la voie" },
+          { "nl": "de conducteur", "fr": "le contrôleur" },
+          { "nl": "direct", "fr": "direct" },
+          { "nl": "volgende", "fr": "prochain" }
+        ],
+        "phrases": [
+          { "nl": "Moet ik overstappen?", "fr": "Dois-je changer ?" },
+          { "nl": "Waar stap ik uit?", "fr": "Où est-ce que je descends ?" },
+          { "nl": "Stopt deze trein in Gent?", "fr": "Ce train s'arrête à Gand ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Verbes séparables : ik stap in Gent over",
+        "explication": "Certains verbes ont une particule (in, uit, over, aan…) qui se SÉPARE au présent et va à la fin de la phrase : overstappen → « Ik stap in Gent over », aankomen → « De trein komt om tien uur aan ». Avec un modal (moeten, kunnen, willen), le verbe reste entier à la fin : « Ik moet in Gent overstappen ». La particule porte l'accent : OVERstappen.",
+        "exemples": [
+          { "nl": "Ik stap in Gent over.", "fr": "Je change à Gand." },
+          { "nl": "Je moet in Gent overstappen.", "fr": "Tu dois changer à Gand." },
+          { "nl": "De trein komt om negen uur aan.", "fr": "Le train arrive à neuf heures." },
+          { "nl": "Waar stap je uit?", "fr": "Où descends-tu ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je descends à Gand » :", "choices": ["Ik uitstap in Gent.", "Ik stap in Gent uit.", "Ik stap uit in Gent uit."], "answer": 1 },
+        { "type": "qcm", "q": "« Tu dois changer » :", "choices": ["Je moet overstappen.", "Je moet stappen over.", "Je overstapt moet."], "answer": 0 },
+        { "type": "trou", "phrase": "De trein komt om tien uur ___.", "answer": "aan", "fr": "Le train arrive à dix heures." },
+        { "type": "trou", "phrase": "Waar stap ik ___? (descendre)", "answer": "uit", "fr": "Où est-ce que je descends ?" },
+        { "type": "ordre", "mots": ["Gent", "over.", "stap", "in", "Ik"], "answer": "Ik stap in Gent over.", "fr": "Je change à Gand." },
+        { "type": "traduire", "fr": "Dois-je changer ?", "answer": "Moet ik overstappen?" },
+        { "type": "ecoute", "nl": "De trein vertrekt om half negen en komt om tien uur aan.", "fr": "Le train part à huit heures et demie et arrive à dix heures." },
+        { "type": "dire", "nl": "Ik moet in Gent overstappen.", "fr": "Je dois changer à Gand." },
+        { "type": "repondre", "question": "Moet je overstappen als je naar het werk gaat?", "question_fr": "Dois-tu changer quand tu vas au travail ?", "attendu": [], "un_de": ["ja", "nee", "over", "direct"], "exemple": "Nee, de trein is direct." }
+      ],
+      "jeu": {
+        "titre": "Une correspondance compliquée",
+        "consigne": "Tu dois aller dans une ville avec une correspondance. Demande à un voyageur où changer, où descendre et à quelle heure tu arrives.",
+        "role": "Tu es une voyageuse habituée, sur le quai à Bruxelles-Midi. L'apprenant veut aller à Courtrai : il doit changer à Gand-Saint-Pierre. Explique où monter, où descendre, où changer, à quelle heure il arrive. Utilise les verbes séparables (instappen, uitstappen, overstappen, aankomen). Phrases très simples (A1).",
+        "welcome": "Ja? Waar moet je naartoe?"
+      }
+    },
+    {
+      "id": "retard",
+      "titre": "Un problème : prévenir d'un retard",
+      "intro": "Le train est supprimé, tu as raté le bus : préviens ton employeur ou ton rendez-vous avec « moeten » et « kunnen ».",
+      "roles": { "A": "Ta responsable", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Goeiemorgen, met Katrien.", "fr": "Bonjour, Katrien à l'appareil." },
+        { "qui": "B", "nl": "Goeiemorgen, ik ben een beetje te laat.", "fr": "Bonjour, je suis un peu en retard." },
+        { "qui": "A", "nl": "Wat is er gebeurd?", "fr": "Que s'est-il passé ?" },
+        { "qui": "B", "nl": "Mijn trein is afgeschaft. Ik moet de volgende nemen.", "fr": "Mon train est supprimé. Je dois prendre le suivant." },
+        { "qui": "A", "nl": "Geen probleem. Hoe laat ben je hier?", "fr": "Pas de problème. À quelle heure seras-tu là ?" },
+        { "qui": "B", "nl": "Ik kan er om half tien zijn.", "fr": "Je peux être là à neuf heures et demie." }
+      ],
+      "vocab": {
+        "verbes": ["missen", "moeten", "kunnen", "verwittigen", "wachten"],
+        "mots": [
+          { "nl": "de vertraging", "fr": "le retard" },
+          { "nl": "te laat", "fr": "en retard" },
+          { "nl": "afgeschaft", "fr": "supprimé" },
+          { "nl": "de staking", "fr": "la grève" },
+          { "nl": "het ongeval", "fr": "l'accident" },
+          { "nl": "de volgende trein", "fr": "le train suivant" },
+          { "nl": "op tijd", "fr": "à l'heure" },
+          { "nl": "spijtig", "fr": "dommage, désolé" }
+        ],
+        "phrases": [
+          { "nl": "Ik ben een beetje te laat.", "fr": "Je suis un peu en retard." },
+          { "nl": "Mijn trein heeft vertraging.", "fr": "Mon train a du retard." },
+          { "nl": "Ik heb de bus gemist.", "fr": "J'ai raté le bus." },
+          { "nl": "Sorry voor het ongemak.", "fr": "Désolé pour le dérangement." }
+        ]
+      },
+      "regle": {
+        "titre": "moeten et kunnen + infinitif à la fin",
+        "explication": "Les verbes de modalité se conjuguent en 2e position, et l'autre verbe reste à l'infinitif à la FIN : « Ik moet de volgende trein nemen », « Ik kan om tien uur komen ». moeten : ik moet, jij moet, hij moet, wij moeten. kunnen : ik kan, jij kan/kunt, hij kan, wij kunnen. Pour prévenir : « Ik ben te laat » (je suis en retard), « Mijn trein heeft vertraging ».",
+        "exemples": [
+          { "nl": "Ik moet de volgende trein nemen.", "fr": "Je dois prendre le train suivant." },
+          { "nl": "Ik kan om tien uur komen.", "fr": "Je peux venir à dix heures." },
+          { "nl": "Kunnen we de afspraak verplaatsen?", "fr": "Pouvons-nous déplacer le rendez-vous ?" },
+          { "nl": "Mijn trein heeft twintig minuten vertraging.", "fr": "Mon train a vingt minutes de retard." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je dois prendre le bus suivant » :", "choices": ["Ik moet nemen de volgende bus.", "Ik moet de volgende bus nemen.", "Ik de volgende bus moet nemen."], "answer": 1 },
+        { "type": "qcm", "q": "« Je suis en retard » :", "choices": ["Ik ben laat te.", "Ik heb te laat.", "Ik ben te laat."], "answer": 2 },
+        { "type": "trou", "phrase": "Ik ___ om tien uur komen. (peux)", "answer": "kan", "fr": "Je peux venir à dix heures." },
+        { "type": "trou", "phrase": "Mijn trein ___ vertraging.", "answer": "heeft", "fr": "Mon train a du retard." },
+        { "type": "ordre", "mots": ["trein", "nemen.", "Ik", "volgende", "moet", "de"], "answer": "Ik moet de volgende trein nemen.", "fr": "Je dois prendre le train suivant." },
+        { "type": "traduire", "fr": "Mon train est supprimé.", "answer": "Mijn trein is afgeschaft." },
+        { "type": "ecoute", "nl": "Door een staking rijden er vandaag minder treinen.", "fr": "À cause d'une grève, il y a moins de trains aujourd'hui." },
+        { "type": "dire", "nl": "Sorry, ik ben een beetje te laat.", "fr": "Désolé, je suis un peu en retard." },
+        { "type": "repondre", "question": "Hoe laat ben je hier?", "question_fr": "À quelle heure seras-tu là ?", "attendu": [], "un_de": ["uur", "half", "kwart", "minuten"], "exemple": "Ik ben hier om half tien." }
+      ],
+      "jeu": {
+        "titre": "Prévenir son employeur",
+        "consigne": "Ton train est supprimé alors que tu as une réunion à 9 heures. Appelle ta responsable, explique et propose une solution.",
+        "role": "Tu es Katrien, responsable d'équipe, un peu stressée car il y a une réunion importante à 9 heures. L'employé appelle pour prévenir d'un retard. Demande ce qui s'est passé, à quelle heure il arrive, s'il peut participer à la réunion par téléphone. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen, met Katrien."
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : aller à un entretien dans une autre ville",
+    "consigne": "Tu as un entretien à Courtrai à 10 heures. Au guichet, achète ton billet, demande le quai, l'heure et la correspondance ; puis ton train a du retard : appelle l'entreprise pour prévenir.",
+    "role": "Tu joues deux personnages successifs. D'abord le guichetier de la gare de Bruxelles : vends un billet pour Courtrai (aller simple ou aller-retour), donne le prix (25 euros 60 aller-retour), le quai (perron 12), l'heure (8 h 04) et la correspondance (changer à Gand-Saint-Pierre). Quand le voyageur a ce qu'il faut, annonce dans une phrase entre crochets que le train a 30 minutes de retard, puis deviens Els, l'assistante RH de l'entreprise qu'il appelle : demande ce qui se passe et à quelle heure il arrive, propose de décaler l'entretien. Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Goeiemorgen. Waar wilt u naartoe?"
+  },
+  "examen": {
+    "reussite": "Tu sais te déplacer et gérer un imprévu de transport en néerlandais.",
+    "sujets": [
+      { "label": "dire ta destination", "etape": "ticket", "mots": ["naar kortrijk", "naar", "kortrijk"] },
+      { "label": "acheter un billet", "etape": "ticket", "mots": ["ticket", "kaartje", "enkel", "heen en terug", "klas"] },
+      { "label": "demander le quai ou l'heure", "etape": "ticket", "mots": ["perron", "spoor", "hoe laat", "vertrekt", "uur"] },
+      { "label": "parler de la correspondance", "etape": "correspondance", "mots": ["overstappen", "stap over", "uitstappen", "stap uit", "direct"] },
+      { "label": "demander le prix", "etape": "ticket", "mots": ["hoeveel", "kost", "euro", "prijs"] },
+      { "label": "prévenir du retard", "etape": "retard", "mots": ["te laat", "vertraging", "afgeschaft", "gemist"] },
+      { "label": "dire à quelle heure tu arrives", "etape": "retard", "mots": ["ben ik", "kan er", "kom om", "uur", "half", "kwart"] },
+      { "label": "t'excuser ou remercier", "etape": "retard", "mots": ["sorry", "excuses", "spijt", "dank", "bedankt"] }
+    ]
+  }
+}

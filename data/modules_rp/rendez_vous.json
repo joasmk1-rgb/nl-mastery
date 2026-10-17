@@ -239,7 +239,7 @@
         { "type": "traduire", "fr": "demain", "answer": "morgen" },
         { "type": "ecoute", "nl": "Vrijdag twaalf oktober.", "fr": "Vendredi 12 octobre." },
         { "type": "dire", "nl": "Ik ben vrij op woensdag.", "fr": "Je suis libre mercredi." },
-        { "type": "repondre", "question": "Welke dag is het vandaag?", "question_fr": "Quel jour sommes-nous ?", "attendu": ["dag"], "exemple": "Vandaag is het maandag." }
+        { "type": "repondre", "question": "Welke dag is het vandaag?", "question_fr": "Quel jour sommes-nous ?", "attendu": [], "un_de": ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"], "exemple": "Vandaag is het maandag." }
       ],
       "jeu": {
         "titre": "Choisir un jour de formation",

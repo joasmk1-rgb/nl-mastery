@@ -1,0 +1,330 @@
+{
+  "_doc": "Module en format jeu de rôle (format : voir rendez_vous.json). Sujet d'examen spécial « #perfectum » : un auxiliaire (heb, ben…) suivi d'un participe en ge-. Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "weekend",
+  "niveau": "A1",
+  "icone": "🗓️",
+  "titre": "Raconter son week-end",
+  "accroche": "Parler au passé : ce que tu as fait, où tu es allé, le temps qu'il a fait, et réagir.",
+  "objectif": "À la fin du module, tu sais raconter ton week-end au passé (perfectum) et poser des questions à l'autre sur le sien.",
+  "etapes": [
+    {
+      "id": "hebben",
+      "titre": "Ce que j'ai fait (avec hebben)",
+      "intro": "Le passé le plus courant à l'oral : le perfectum. La plupart des verbes se conjuguent avec « hebben » + participe passé (ge- … -t ou -d).",
+      "roles": { "A": "Un collègue, lundi matin", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat heb je dit weekend gedaan?", "fr": "Qu'as-tu fait ce week-end ?" },
+        { "qui": "B", "nl": "Ik heb gewerkt in de tuin en ik heb gekookt.", "fr": "J'ai travaillé au jardin et j'ai cuisiné." },
+        { "qui": "A", "nl": "Wat heb je gekookt?", "fr": "Qu'as-tu cuisiné ?" },
+        { "qui": "B", "nl": "Ik heb een lekkere soep gemaakt.", "fr": "J'ai fait une bonne soupe." },
+        { "qui": "A", "nl": "En zondag?", "fr": "Et dimanche ?" },
+        { "qui": "B", "nl": "Zondag heb ik gesport en gerust.", "fr": "Dimanche, j'ai fait du sport et je me suis reposé." }
+      ],
+      "vocab": {
+        "verbes": ["werken", "koken", "maken", "sporten", "rusten", "spelen", "kopen"],
+        "mots": [
+          { "nl": "gewerkt", "fr": "travaillé" },
+          { "nl": "gekookt", "fr": "cuisiné" },
+          { "nl": "gemaakt", "fr": "fait" },
+          { "nl": "gesport", "fr": "fait du sport" },
+          { "nl": "gerust", "fr": "reposé" },
+          { "nl": "gespeeld", "fr": "joué" },
+          { "nl": "gekocht", "fr": "acheté" },
+          { "nl": "dit weekend", "fr": "ce week-end" },
+          { "nl": "gisteren", "fr": "hier" },
+          { "nl": "vorige week", "fr": "la semaine passée" }
+        ],
+        "phrases": [
+          { "nl": "Wat heb je dit weekend gedaan?", "fr": "Qu'as-tu fait ce week-end ?" },
+          { "nl": "Ik heb gekookt.", "fr": "J'ai cuisiné." },
+          { "nl": "Zondag heb ik gesport.", "fr": "Dimanche, j'ai fait du sport." }
+        ]
+      },
+      "regle": {
+        "titre": "Le perfectum : hebben + ge…t / ge…d (à la fin)",
+        "explication": "Perfectum = « hebben » conjugué (2e position) + participe passé à la FIN : « Ik heb gisteren gekookt ». Participe régulier : ge + radical + t ou d. On met -t si le radical finit par une consonne de « 't kofschip » (t, k, f, s, ch, p) : werken → gewerkt, koken → gekookt, maken → gemaakt. Sinon -d : spelen → gespeeld, wonen → gewoond. Irréguliers fréquents : doen → gedaan, kopen → gekocht.",
+        "exemples": [
+          { "nl": "Ik heb gewerkt.", "fr": "J'ai travaillé." },
+          { "nl": "We hebben voetbal gespeeld.", "fr": "Nous avons joué au foot." },
+          { "nl": "Wat heb je gedaan?", "fr": "Qu'as-tu fait ?" },
+          { "nl": "Zaterdag heb ik schoenen gekocht.", "fr": "Samedi, j'ai acheté des chaussures." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'ai cuisiné » :", "choices": ["Ik heb gekookt.", "Ik ben gekookt.", "Ik heb gekookd."], "answer": 0 },
+        { "type": "qcm", "q": "Le participe de « spelen » :", "choices": ["gespeelt", "gespeeld", "spelend"], "answer": 1 },
+        { "type": "trou", "phrase": "Wat ___ je dit weekend gedaan?", "answer": "heb", "fr": "Qu'as-tu fait ce week-end ?" },
+        { "type": "trou", "phrase": "Ik heb in de tuin ___. (travaillé)", "answer": "gewerkt", "fr": "J'ai travaillé au jardin." },
+        { "type": "ordre", "mots": ["heb", "Zondag", "gesport.", "ik"], "answer": "Zondag heb ik gesport.", "fr": "Dimanche, j'ai fait du sport." },
+        { "type": "traduire", "fr": "J'ai acheté du pain.", "answer": "Ik heb brood gekocht." },
+        { "type": "ecoute", "nl": "We hebben samen een soep gemaakt.", "fr": "Nous avons fait une soupe ensemble." },
+        { "type": "dire", "nl": "Wat heb je dit weekend gedaan?", "fr": "Qu'as-tu fait ce week-end ?" },
+        { "type": "repondre", "question": "Wat heb je gisteren gedaan?", "question_fr": "Qu'as-tu fait hier ?", "attendu": ["heb"], "exemple": "Gisteren heb ik gewerkt en gekookt." }
+      ],
+      "jeu": {
+        "titre": "Lundi matin",
+        "consigne": "Un collègue te demande ce que tu as fait ce week-end. Raconte au moins trois choses au passé.",
+        "role": "Tu es Pieter, collègue. Lundi matin, tu demandes à l'apprenant ce qu'il a fait ce week-end (samedi, dimanche), tu poses des questions de relance au passé (wat heb je gekookt? met wie?), et tu racontes un peu ton week-end (tu as joué au foot et cuisiné). Utilise le perfectum avec hebben. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen! En, wat heb jij dit weekend gedaan?"
+      }
+    },
+    {
+      "id": "zijn",
+      "titre": "Où je suis allé (avec zijn)",
+      "intro": "Les verbes de déplacement ou de changement d'état prennent « zijn » au perfectum : ik ben gegaan, gekomen, gebleven.",
+      "roles": { "A": "Une amie", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Ben je weggegaan dit weekend?", "fr": "Tu es parti ce week-end ?" },
+        { "qui": "B", "nl": "Ja, ik ben naar Brugge gegaan.", "fr": "Oui, je suis allé à Bruges." },
+        { "qui": "A", "nl": "Met de trein?", "fr": "En train ?" },
+        { "qui": "B", "nl": "Ja, en ik ben daar de hele dag gebleven.", "fr": "Oui, et j'y suis resté toute la journée." },
+        { "qui": "A", "nl": "Wanneer ben je teruggekomen?", "fr": "Quand es-tu revenu ?" },
+        { "qui": "B", "nl": "Ik ben om negen uur 's avonds thuisgekomen.", "fr": "Je suis rentré à neuf heures du soir." }
+      ],
+      "vocab": {
+        "verbes": ["gaan", "komen", "blijven", "vertrekken", "terugkomen", "thuiskomen"],
+        "mots": [
+          { "nl": "gegaan", "fr": "allé" },
+          { "nl": "gekomen", "fr": "venu" },
+          { "nl": "gebleven", "fr": "resté" },
+          { "nl": "vertrokken", "fr": "parti" },
+          { "nl": "teruggekomen", "fr": "revenu" },
+          { "nl": "thuisgekomen", "fr": "rentré à la maison" },
+          { "nl": "de hele dag", "fr": "toute la journée" },
+          { "nl": "naar", "fr": "vers, à (destination)" }
+        ],
+        "phrases": [
+          { "nl": "Ik ben naar Brugge gegaan.", "fr": "Je suis allé à Bruges." },
+          { "nl": "Ik ben thuisgebleven.", "fr": "Je suis resté à la maison." },
+          { "nl": "Waar ben je naartoe gegaan?", "fr": "Où es-tu allé ?" }
+        ]
+      },
+      "regle": {
+        "titre": "zijn ou hebben ?",
+        "explication": "« zijn » avec les verbes qui expriment un déplacement vers un endroit ou un changement : gaan (ik ben gegaan), komen (gekomen), blijven (gebleven), vertrekken (vertrokken), worden (geworden). Tous les autres ou presque : « hebben ». Verbes séparables : ge- se place entre la particule et le verbe : thuiskomen → thuisgekomen, terugkomen → teruggekomen. Verbes en ver-, be-, ont- : pas de ge- (vertrokken).",
+        "exemples": [
+          { "nl": "Ik ben naar de markt gegaan.", "fr": "Je suis allé au marché." },
+          { "nl": "Hij is thuisgebleven.", "fr": "Il est resté à la maison." },
+          { "nl": "We zijn om tien uur vertrokken.", "fr": "Nous sommes partis à dix heures." },
+          { "nl": "Ze is laat thuisgekomen.", "fr": "Elle est rentrée tard." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je suis allé à Gand » :", "choices": ["Ik heb naar Gent gegaan.", "Ik ben naar Gent gegaan.", "Ik ben naar Gent gaan."], "answer": 1 },
+        { "type": "qcm", "q": "Le participe de « thuiskomen » :", "choices": ["gethuiskomen", "thuisgekomen", "thuiskomen"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik ___ thuisgebleven.", "answer": "ben", "fr": "Je suis resté à la maison." },
+        { "type": "trou", "phrase": "We zijn om tien uur ___. (partis)", "answer": "vertrokken", "fr": "Nous sommes partis à dix heures." },
+        { "type": "ordre", "mots": ["naartoe", "ben", "Waar", "gegaan?", "je"], "answer": "Waar ben je naartoe gegaan?", "fr": "Où es-tu allé ?" },
+        { "type": "traduire", "fr": "Je suis resté toute la journée.", "answer": "Ik ben de hele dag gebleven." },
+        { "type": "ecoute", "nl": "Ik ben om negen uur thuisgekomen.", "fr": "Je suis rentré à neuf heures." },
+        { "type": "dire", "nl": "Ik ben naar Brugge gegaan.", "fr": "Je suis allé à Bruges." },
+        { "type": "repondre", "question": "Waar ben je vorig weekend naartoe gegaan?", "question_fr": "Où es-tu allé le week-end dernier ?", "attendu": ["ben"], "exemple": "Ik ben naar de zee gegaan." }
+      ],
+      "jeu": {
+        "titre": "Une sortie",
+        "consigne": "Une amie te demande où tu es allé. Raconte ta sortie : où, comment, combien de temps, quand tu es rentré.",
+        "role": "Tu es Nele, une amie curieuse. Demande à l'apprenant s'il est sorti ce week-end, où il est allé, comment, avec qui, combien de temps il est resté, quand il est rentré. Utilise le perfectum avec zijn (ben je gegaan, ben je gebleven). Phrases très simples (A1).",
+        "welcome": "Hoi! Ben je dit weekend nog ergens naartoe gegaan?"
+      }
+    },
+    {
+      "id": "irreguliers",
+      "titre": "Les participes à connaître par cœur",
+      "intro": "Les verbes les plus fréquents ont un participe irrégulier : gezien, gegeten, gedronken, geslapen, gelezen… Ce sont eux qui reviennent tout le temps.",
+      "roles": { "A": "Un collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Heb je die nieuwe film gezien?", "fr": "Tu as vu ce nouveau film ?" },
+        { "qui": "B", "nl": "Ja, zaterdag. Daarna hebben we pizza gegeten.", "fr": "Oui, samedi. Après, on a mangé une pizza." },
+        { "qui": "A", "nl": "Lekker! En heb je goed geslapen?", "fr": "Miam ! Et tu as bien dormi ?" },
+        { "qui": "B", "nl": "Nee, ik heb te veel koffie gedronken.", "fr": "Non, j'ai bu trop de café." },
+        { "qui": "A", "nl": "Haha, dat ken ik!", "fr": "Haha, je connais ça !" }
+      ],
+      "vocab": {
+        "verbes": ["zien", "eten", "drinken", "slapen", "lezen", "schrijven", "nemen"],
+        "mots": [
+          { "nl": "gezien", "fr": "vu" },
+          { "nl": "gegeten", "fr": "mangé" },
+          { "nl": "gedronken", "fr": "bu" },
+          { "nl": "geslapen", "fr": "dormi" },
+          { "nl": "gelezen", "fr": "lu" },
+          { "nl": "geschreven", "fr": "écrit" },
+          { "nl": "genomen", "fr": "pris" },
+          { "nl": "gedaan", "fr": "fait" },
+          { "nl": "gegeven", "fr": "donné" },
+          { "nl": "gevonden", "fr": "trouvé" }
+        ],
+        "phrases": [
+          { "nl": "Heb je de film gezien?", "fr": "Tu as vu le film ?" },
+          { "nl": "We hebben pizza gegeten.", "fr": "Nous avons mangé une pizza." },
+          { "nl": "Ik heb goed geslapen.", "fr": "J'ai bien dormi." }
+        ]
+      },
+      "regle": {
+        "titre": "Participes irréguliers : ge- … -en",
+        "explication": "Les verbes irréguliers (forts) font souvent leur participe en ge- … -en, parfois avec une autre voyelle : zien → gezien, eten → gegeten, lezen → gelezen, slapen → geslapen, nemen → genomen, drinken → gedronken, schrijven → geschreven, vinden → gevonden, geven → gegeven, doen → gedaan. Ils se retiennent par cœur, mais ils sont peu nombreux et reviennent sans cesse. Tu les trouves tous dans Apprendre → Conjugaison.",
+        "exemples": [
+          { "nl": "Ik heb een boek gelezen.", "fr": "J'ai lu un livre." },
+          { "nl": "Hij heeft de trein genomen.", "fr": "Il a pris le train." },
+          { "nl": "We hebben een cadeau gegeven.", "fr": "Nous avons donné un cadeau." },
+          { "nl": "Ik heb mijn sleutels gevonden.", "fr": "J'ai trouvé mes clés." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Le participe de « eten » :", "choices": ["geëet", "gegeten", "geeten"], "answer": 1 },
+        { "type": "qcm", "q": "« J'ai bu un café » :", "choices": ["Ik heb een koffie gedrinkt.", "Ik heb een koffie gedronken.", "Ik ben een koffie gedronken."], "answer": 1 },
+        { "type": "trou", "phrase": "Heb je de film ___? (vu)", "answer": "gezien", "fr": "Tu as vu le film ?" },
+        { "type": "trou", "phrase": "Ik heb goed ___. (dormi)", "answer": "geslapen", "fr": "J'ai bien dormi." },
+        { "type": "ordre", "mots": ["gelezen.", "heb", "Ik", "boek", "een"], "answer": "Ik heb een boek gelezen.", "fr": "J'ai lu un livre." },
+        { "type": "traduire", "fr": "Il a pris le train.", "answer": "Hij heeft de trein genomen." },
+        { "type": "ecoute", "nl": "Ik heb mijn sleutels gevonden.", "fr": "J'ai trouvé mes clés." },
+        { "type": "dire", "nl": "We hebben pizza gegeten.", "fr": "Nous avons mangé une pizza." },
+        { "type": "repondre", "question": "Wat heb je gisteren gegeten?", "question_fr": "Qu'as-tu mangé hier ?", "attendu": ["gegeten"], "exemple": "Gisteren heb ik pasta gegeten." }
+      ],
+      "jeu": {
+        "titre": "Un samedi soir",
+        "consigne": "Raconte ton samedi soir : ce que tu as vu, mangé, bu, et si tu as bien dormi.",
+        "role": "Tu es Sam, collègue enjoué. Demande à l'apprenant ce qu'il a fait samedi soir : film ou série vue, ce qu'il a mangé et bu, s'il a bien dormi, s'il a lu quelque chose. Utilise beaucoup de participes irréguliers (gezien, gegeten, gedronken, geslapen, gelezen). Phrases très simples (A1).",
+        "welcome": "Hé! Heb je zaterdag nog iets leuks gedaan? Iets gezien, iets lekkers gegeten?"
+      }
+    },
+    {
+      "id": "meteo",
+      "titre": "Le temps qu'il a fait",
+      "intro": "La météo, sujet de conversation numéro un en Belgique : dire le temps qu'il fait et qu'il a fait.",
+      "roles": { "A": "Ta voisine", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat een weer vandaag!", "fr": "Quel temps aujourd'hui !" },
+        { "qui": "B", "nl": "Ja, het regent al de hele dag.", "fr": "Oui, il pleut depuis toute la journée." },
+        { "qui": "A", "nl": "En dit weekend was het zo mooi.", "fr": "Et ce week-end, il faisait si beau." },
+        { "qui": "B", "nl": "Ja, de zon heeft geschenen en het was warm.", "fr": "Oui, le soleil a brillé et il faisait chaud." },
+        { "qui": "A", "nl": "Morgen wordt het weer beter, zeggen ze.", "fr": "Demain, il fera meilleur, à ce qu'on dit." }
+      ],
+      "vocab": {
+        "verbes": ["regenen", "sneeuwen", "waaien", "schijnen"],
+        "mots": [
+          { "nl": "het weer", "fr": "le temps (météo)" },
+          { "nl": "de zon", "fr": "le soleil" },
+          { "nl": "de regen", "fr": "la pluie" },
+          { "nl": "de wind", "fr": "le vent" },
+          { "nl": "de wolk", "fr": "le nuage" },
+          { "nl": "warm", "fr": "chaud" },
+          { "nl": "koud", "fr": "froid" },
+          { "nl": "mooi weer", "fr": "beau temps" },
+          { "nl": "slecht weer", "fr": "mauvais temps" },
+          { "nl": "de graden", "fr": "les degrés" }
+        ],
+        "phrases": [
+          { "nl": "Het regent.", "fr": "Il pleut." },
+          { "nl": "Het was mooi weer.", "fr": "Il faisait beau." },
+          { "nl": "Het heeft de hele dag geregend.", "fr": "Il a plu toute la journée." }
+        ]
+      },
+      "regle": {
+        "titre": "« het » pour la météo, « was » pour décrire le passé",
+        "explication": "La météo se dit avec « het » : het regent (il pleut), het waait (il y a du vent), het is koud. Au passé, pour décrire comment c'était, on utilise « was » (imparfait de zijn) : het was mooi, het was koud. Pour une action finie, le perfectum : het heeft geregend (il a plu), de zon heeft geschenen (le soleil a brillé). Futur proche : « Morgen wordt het warm ».",
+        "exemples": [
+          { "nl": "Het waait hard.", "fr": "Il y a beaucoup de vent." },
+          { "nl": "Het was twintig graden.", "fr": "Il faisait vingt degrés." },
+          { "nl": "Het heeft gesneeuwd.", "fr": "Il a neigé." },
+          { "nl": "Morgen wordt het mooi weer.", "fr": "Demain, il fera beau." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Il pleut » :", "choices": ["Het regent.", "Er regent.", "Het is regen."], "answer": 0 },
+        { "type": "qcm", "q": "« Il faisait beau » :", "choices": ["Het is mooi weer geweest.", "Het was mooi weer.", "Het heeft mooi weer."], "answer": 1 },
+        { "type": "trou", "phrase": "Het ___ de hele dag geregend.", "answer": "heeft", "fr": "Il a plu toute la journée." },
+        { "type": "trou", "phrase": "Het ___ koud gisteren. (était)", "answer": "was", "fr": "Il faisait froid hier." },
+        { "type": "ordre", "mots": ["wordt", "Morgen", "warm.", "het"], "answer": "Morgen wordt het warm.", "fr": "Demain, il fera chaud." },
+        { "type": "traduire", "fr": "Il y a beaucoup de vent.", "answer": "Het waait hard./Het waait veel." },
+        { "type": "ecoute", "nl": "Het was twintig graden en de zon scheen.", "fr": "Il faisait vingt degrés et le soleil brillait." },
+        { "type": "dire", "nl": "Wat een weer vandaag!", "fr": "Quel temps aujourd'hui !" },
+        { "type": "repondre", "question": "Hoe was het weer dit weekend?", "question_fr": "Quel temps a-t-il fait ce week-end ?", "attendu": [], "un_de": ["was", "regen", "zon", "mooi", "koud", "warm", "geregend"], "exemple": "Het was mooi weer, maar een beetje koud." }
+      ],
+      "jeu": {
+        "titre": "Parler de la pluie et du beau temps",
+        "consigne": "Ta voisine commente la météo. Discute avec elle du temps d'aujourd'hui, du week-end et de demain.",
+        "role": "Tu es mevrouw Peeters, voisine bavarde. Tu commentes le temps (il pleut aujourd'hui, il faisait beau ce week-end, demain il fera plus froid), tu demandes à l'apprenant ce qu'il a fait avec ce beau temps et ce qu'il préfère. Phrases très simples (A1).",
+        "welcome": "Goeiedag buurman! Wat een regen vandaag, hè?"
+      }
+    },
+    {
+      "id": "reagir",
+      "titre": "Réagir et relancer",
+      "intro": "Une conversation, ce n'est pas qu'un récit : réagir (« Leuk! », « Echt? »), poser la question en retour (« En jij? ») et placer le moment en tête de phrase.",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Ik ben zaterdag naar een concert geweest.", "fr": "Samedi, je suis allée à un concert." },
+        { "qui": "B", "nl": "Echt? Leuk! Welk concert?", "fr": "Vraiment ? Sympa ! Quel concert ?" },
+        { "qui": "A", "nl": "Een Belgische band, het was super. En jij?", "fr": "Un groupe belge, c'était super. Et toi ?" },
+        { "qui": "B", "nl": "Zaterdag heb ik gewerkt, maar zondag ben ik gaan wandelen.", "fr": "Samedi j'ai travaillé, mais dimanche je suis allé me promener." },
+        { "qui": "A", "nl": "Fijn! Waar?", "fr": "Chouette ! Où ça ?" },
+        { "qui": "B", "nl": "In het bos, met een vriend.", "fr": "Dans les bois, avec un ami." }
+      ],
+      "vocab": {
+        "verbes": ["vertellen", "vragen", "wandelen", "bezoeken"],
+        "mots": [
+          { "nl": "echt?", "fr": "vraiment ?" },
+          { "nl": "leuk!", "fr": "sympa !" },
+          { "nl": "fijn!", "fr": "chouette !" },
+          { "nl": "jammer!", "fr": "dommage !" },
+          { "nl": "en jij?", "fr": "et toi ?" },
+          { "nl": "super", "fr": "super" },
+          { "nl": "saai", "fr": "ennuyeux" },
+          { "nl": "het concert", "fr": "le concert" },
+          { "nl": "het bos", "fr": "le bois, la forêt" }
+        ],
+        "phrases": [
+          { "nl": "Echt? Leuk!", "fr": "Vraiment ? Sympa !" },
+          { "nl": "En jij, wat heb jij gedaan?", "fr": "Et toi, qu'as-tu fait ?" },
+          { "nl": "Hoe was het?", "fr": "C'était comment ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Le moment en tête : Zaterdag heb ik gewerkt",
+        "explication": "Pour raconter, on met souvent le moment en tête (zaterdag, gisteren, daarna) : le verbe conjugué reste en 2e position, le sujet passe après, et le participe reste à la fin : « Zaterdag heb ik gewerkt », « Daarna zijn we naar huis gegaan ». Pour relancer : « En jij? », « Hoe was het? », « Met wie? », « Waar? ».",
+        "exemples": [
+          { "nl": "Gisteren heb ik gekookt.", "fr": "Hier, j'ai cuisiné." },
+          { "nl": "Daarna zijn we naar huis gegaan.", "fr": "Ensuite, nous sommes rentrés." },
+          { "nl": "Hoe was het?", "fr": "C'était comment ?" },
+          { "nl": "Met wie ben je gegaan?", "fr": "Avec qui es-tu allé ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Samedi, j'ai travaillé » :", "choices": ["Zaterdag ik heb gewerkt.", "Zaterdag heb ik gewerkt.", "Zaterdag heb gewerkt ik."], "answer": 1 },
+        { "type": "qcm", "q": "Pour relancer la conversation :", "choices": ["En jij?", "Tot ziens.", "Dat klopt."], "answer": 0 },
+        { "type": "trou", "phrase": "Hoe ___ het? (était)", "answer": "was", "fr": "C'était comment ?" },
+        { "type": "trou", "phrase": "Daarna ___ we naar huis gegaan.", "answer": "zijn", "fr": "Ensuite, nous sommes rentrés." },
+        { "type": "ordre", "mots": ["gekookt.", "heb", "Gisteren", "ik"], "answer": "Gisteren heb ik gekookt.", "fr": "Hier, j'ai cuisiné." },
+        { "type": "traduire", "fr": "Avec qui es-tu allé ?", "answer": "Met wie ben je gegaan?/Met wie ben jij gegaan?" },
+        { "type": "ecoute", "nl": "Ik ben zaterdag naar een concert geweest.", "fr": "Samedi, je suis allé à un concert." },
+        { "type": "dire", "nl": "Echt? Leuk! En jij, wat heb jij gedaan?", "fr": "Vraiment ? Sympa ! Et toi, qu'as-tu fait ?" },
+        { "type": "repondre", "question": "Ik ben dit weekend naar zee geweest. En jij?", "question_fr": "Je suis allé à la mer ce week-end. Et toi ?", "attendu": [], "un_de": ["heb", "ben"], "exemple": "Leuk! Ik heb gewerkt en ik ben gaan wandelen." }
+      ],
+      "jeu": {
+        "titre": "Une vraie conversation",
+        "consigne": "Ta collègue raconte son week-end. Réagis, pose-lui des questions, puis raconte le tien.",
+        "role": "Tu es Eva, collègue. Commence par raconter ton week-end (concert samedi, famille dimanche) en deux phrases, puis attends que l'apprenant réagisse et pose des questions ; s'il ne le fait pas, demande « Vind je dat leuk? ». Ensuite demande-lui son week-end et réagis avec « Echt? Leuk! Jammer! ». Phrases très simples (A1).",
+        "welcome": "Wat een weekend! Zaterdag ben ik naar een concert geweest."
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : raconter son week-end à la machine à café",
+    "consigne": "Lundi matin, à la machine à café, un collègue te demande ton week-end. Raconte au passé ce que tu as fait samedi et dimanche, où tu es allé, le temps qu'il a fait, donne ton avis, et pose-lui des questions sur le sien.",
+    "role": "Tu es Jonas, collègue sympathique, lundi matin à la machine à café. Demande à l'apprenant son week-end ; relance sur ce qu'il n'a pas dit (samedi, dimanche, où, avec qui, le temps, si c'était bien). Raconte aussi le tien (tu as fait du vélo à la mer, il a plu dimanche) en restant bref, et laisse-lui l'occasion de te poser des questions. Utilise le perfectum. Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Goeiemorgen! Koffie? En, hoe was je weekend?"
+  },
+  "examen": {
+    "reussite": "Tu sais raconter ton week-end au passé en néerlandais.",
+    "sujets": [
+      { "label": "dire le moment (samedi, dimanche…)", "etape": "reagir", "mots": ["zaterdag", "zondag", "weekend", "gisteren"] },
+      { "label": "parler au passé avec « hebben »", "etape": "hebben", "mots": ["#perfectum-hebben"] },
+      { "label": "parler au passé avec « zijn »", "etape": "zijn", "mots": ["#perfectum-zijn"] },
+      { "label": "dire où tu es allé", "etape": "zijn", "mots": ["naar", "gegaan", "geweest", "thuisgebleven"] },
+      { "label": "parler du temps", "etape": "meteo", "mots": ["weer", "regen", "geregend", "zon", "koud", "warm", "mooi"] },
+      { "label": "donner ton avis", "etape": "reagir", "mots": ["leuk", "fijn", "super", "saai", "lekker", "goed", "jammer"] },
+      { "label": "poser une question en retour", "etape": "reagir", "mots": ["en jij", "en u", "wat heb jij", "hoe was", "met wie", "waar"] },
+      { "label": "utiliser un participe irrégulier", "etape": "irreguliers", "mots": ["gezien", "gegeten", "gedronken", "geslapen", "gelezen", "gedaan", "genomen", "gevonden", "gegeven", "geschreven"] }
+    ]
+  }
+}

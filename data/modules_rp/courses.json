@@ -1,0 +1,338 @@
+{
+  "_doc": "Module en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "courses",
+  "niveau": "A1",
+  "icone": "🛒",
+  "titre": "Faire ses courses",
+  "accroche": "Trouver un produit, demander le prix, commander au marché, décrire ce que tu veux et payer.",
+  "objectif": "À la fin du module, tu sais faire tes courses en néerlandais : demander un produit, une quantité et un prix, commander poliment et payer.",
+  "etapes": [
+    {
+      "id": "produits",
+      "titre": "Au supermarché : trouver un produit",
+      "intro": "Demander où se trouve un produit et reconnaître les aliments courants. Chaque nom a son article : « de » (la plupart) ou « het ».",
+      "roles": { "A": "Le vendeur", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Pardon, waar vind ik de melk?", "fr": "Pardon, où est-ce que je trouve le lait ?" },
+        { "qui": "A", "nl": "De melk staat achteraan, links.", "fr": "Le lait est au fond, à gauche." },
+        { "qui": "B", "nl": "En het brood?", "fr": "Et le pain ?" },
+        { "qui": "A", "nl": "Het brood ligt bij de ingang.", "fr": "Le pain est près de l'entrée." },
+        { "qui": "B", "nl": "Dank u wel!", "fr": "Merci beaucoup !" }
+      ],
+      "vocab": {
+        "verbes": ["vinden", "zoeken", "kopen", "liggen", "staan"],
+        "mots": [
+          { "nl": "de winkel", "fr": "le magasin" },
+          { "nl": "de supermarkt", "fr": "le supermarché" },
+          { "nl": "het brood", "fr": "le pain" },
+          { "nl": "de melk", "fr": "le lait" },
+          { "nl": "de kaas", "fr": "le fromage" },
+          { "nl": "het vlees", "fr": "la viande" },
+          { "nl": "de groenten", "fr": "les légumes" },
+          { "nl": "het fruit", "fr": "les fruits" },
+          { "nl": "de appel", "fr": "la pomme" },
+          { "nl": "het water", "fr": "l'eau" },
+          { "nl": "de rijst", "fr": "le riz" },
+          { "nl": "het ei", "fr": "l'œuf" }
+        ],
+        "phrases": [
+          { "nl": "Waar vind ik de melk?", "fr": "Où est-ce que je trouve le lait ?" },
+          { "nl": "Heeft u ook ...?", "fr": "Avez-vous aussi ... ?" },
+          { "nl": "Ik zoek de rijst.", "fr": "Je cherche le riz." }
+        ]
+      },
+      "regle": {
+        "titre": "de ou het ?",
+        "explication": "Environ deux noms sur trois prennent « de ». « het » est pour les noms neutres : à apprendre avec le mot (het brood, het vlees, het water, het fruit). Astuces : les diminutifs en -je prennent toujours « het » (het broodje) ; tous les pluriels prennent « de » (de eieren, de appels). L'article indéfini est toujours « een » (een appel, een brood).",
+        "exemples": [
+          { "nl": "het brood – de broden", "fr": "le pain – les pains" },
+          { "nl": "de appel – de appels", "fr": "la pomme – les pommes" },
+          { "nl": "het broodje", "fr": "le petit pain" },
+          { "nl": "een ei – twee eieren", "fr": "un œuf – deux œufs" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« le pain » :", "choices": ["de brood", "het brood", "een broden"], "answer": 1 },
+        { "type": "qcm", "q": "Au pluriel, l'article est toujours :", "choices": ["de", "het", "een"], "answer": 0 },
+        { "type": "trou", "phrase": "Waar vind ik ___ melk?", "answer": "de", "fr": "Où est-ce que je trouve le lait ?" },
+        { "type": "trou", "phrase": "Ik zoek ___ water.", "answer": "het", "fr": "Je cherche l'eau." },
+        { "type": "ordre", "mots": ["ik", "de", "Waar", "vind", "kaas?"], "answer": "Waar vind ik de kaas?", "fr": "Où est-ce que je trouve le fromage ?" },
+        { "type": "traduire", "fr": "Je cherche le riz.", "answer": "Ik zoek de rijst." },
+        { "type": "ecoute", "nl": "Het brood ligt bij de ingang.", "fr": "Le pain est près de l'entrée." },
+        { "type": "dire", "nl": "Pardon, waar vind ik de melk?", "fr": "Pardon, où est-ce que je trouve le lait ?" },
+        { "type": "repondre", "question": "Wat koop je vandaag?", "question_fr": "Qu'est-ce que tu achètes aujourd'hui ?", "attendu": ["ik"], "un_de": ["koop", "neem", "wil"], "exemple": "Ik koop brood en melk." }
+      ],
+      "jeu": {
+        "titre": "Perdu dans le supermarché",
+        "consigne": "Tu cherches trois produits dans un supermarché que tu ne connais pas. Demande à un employé où ils se trouvent.",
+        "role": "Tu es employé dans un supermarché. Le client cherche des produits : réponds où ils se trouvent (au fond, à gauche, à droite, près de l'entrée, au rayon frais), dis une fois qu'un produit est épuisé (uitverkocht) et propose autre chose. Phrases très simples (A1).",
+        "welcome": "Goeiedag, kan ik u helpen?"
+      }
+    },
+    {
+      "id": "quantites",
+      "titre": "Quantités et prix",
+      "intro": "Demander combien ça coûte, comprendre un prix et dire la quantité que tu veux : un kilo, une bouteille, un paquet.",
+      "roles": { "A": "Le marchand", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Hoeveel kosten de tomaten?", "fr": "Combien coûtent les tomates ?" },
+        { "qui": "A", "nl": "Drie euro per kilo.", "fr": "Trois euros le kilo." },
+        { "qui": "B", "nl": "Een halve kilo, alstublieft.", "fr": "Un demi-kilo, s'il vous plaît." },
+        { "qui": "A", "nl": "Dat is één euro vijftig.", "fr": "Ça fait un euro cinquante." },
+        { "qui": "B", "nl": "En een fles water.", "fr": "Et une bouteille d'eau." }
+      ],
+      "vocab": {
+        "verbes": ["kosten", "wegen", "nemen", "betalen"],
+        "mots": [
+          { "nl": "de prijs", "fr": "le prix" },
+          { "nl": "de euro", "fr": "l'euro" },
+          { "nl": "de cent", "fr": "le centime" },
+          { "nl": "de kilo", "fr": "le kilo" },
+          { "nl": "het gram", "fr": "le gramme" },
+          { "nl": "de fles", "fr": "la bouteille" },
+          { "nl": "het pak", "fr": "le paquet, la brique" },
+          { "nl": "het stuk", "fr": "la pièce, le morceau" },
+          { "nl": "de doos", "fr": "la boîte" },
+          { "nl": "goedkoop", "fr": "bon marché" },
+          { "nl": "duur", "fr": "cher" },
+          { "nl": "de promotie", "fr": "la promotion" }
+        ],
+        "phrases": [
+          { "nl": "Hoeveel kost dat?", "fr": "Combien ça coûte ?" },
+          { "nl": "Hoeveel kosten de appels?", "fr": "Combien coûtent les pommes ?" },
+          { "nl": "Dat is te duur.", "fr": "C'est trop cher." }
+        ]
+      },
+      "regle": {
+        "titre": "kost ou kosten ? et le prix",
+        "explication": "Le verbe s'accorde : « Hoeveel kost de kaas? » (une chose) mais « Hoeveel kosten de appels? » (plusieurs). Un prix se dit euros puis centimes, sans « et » : 1,50 € = « één euro vijftig ». Après une quantité, pas de « de » : een kilo tomaten, een fles water, twee pakken melk (= de la, des en français).",
+        "exemples": [
+          { "nl": "Hoeveel kost het brood?", "fr": "Combien coûte le pain ?" },
+          { "nl": "Hoeveel kosten de eieren?", "fr": "Combien coûtent les œufs ?" },
+          { "nl": "Twee euro vijfenzeventig.", "fr": "Deux euros soixante-quinze." },
+          { "nl": "Een kilo appels, alstublieft.", "fr": "Un kilo de pommes, s'il vous plaît." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Combien coûtent les tomates ? » :", "choices": ["Hoeveel kost de tomaten?", "Hoeveel kosten de tomaten?", "Wat kosten tomaten?"], "answer": 1 },
+        { "type": "qcm", "q": "« une bouteille d'eau » :", "choices": ["een fles van water", "een fles water", "een fles de water"], "answer": 1 },
+        { "type": "trou", "phrase": "Hoeveel ___ de kaas?", "answer": "kost", "fr": "Combien coûte le fromage ?" },
+        { "type": "trou", "phrase": "Dat is te ___. (cher)", "answer": "duur", "fr": "C'est trop cher." },
+        { "type": "ordre", "mots": ["kilo", "Een", "alstublieft.", "appels,"], "answer": "Een kilo appels, alstublieft.", "fr": "Un kilo de pommes, s'il vous plaît." },
+        { "type": "traduire", "fr": "Combien ça coûte ?", "answer": "Hoeveel kost dat?/Hoeveel kost het?" },
+        { "type": "ecoute", "nl": "Dat is drie euro vijftig.", "fr": "Ça fait trois euros cinquante." },
+        { "type": "dire", "nl": "Hoeveel kosten de appels?", "fr": "Combien coûtent les pommes ?" },
+        { "type": "repondre", "question": "Hoeveel wilt u?", "question_fr": "Combien en voulez-vous ?", "attendu": [], "un_de": ["kilo", "gram", "fles", "pak", "stuk", "een", "twee", "drie", "halve"], "exemple": "Een halve kilo, alstublieft." }
+      ],
+      "jeu": {
+        "titre": "Au stand de légumes",
+        "consigne": "Achète des légumes pour la semaine : demande les prix et dis les quantités.",
+        "role": "Tu es marchand de légumes au marché. Le client demande des prix : donne-les en euros (tomates 3 euros le kilo, pommes de terre 1 euro 20 le kilo, salade 1 euro 50 la pièce). Demande la quantité, pèse, annonce le total. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen! Verse groenten vandaag. Wat mag het zijn?"
+      }
+    },
+    {
+      "id": "commander",
+      "titre": "Commander poliment",
+      "intro": "À la boulangerie, à la boucherie, au marché : demander poliment ce que tu veux avec « Ik wil graag… » ou « Mag ik… ? ».",
+      "roles": { "A": "La boulangère", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Goeiemorgen, zegt u het maar.", "fr": "Bonjour, je vous écoute." },
+        { "qui": "B", "nl": "Mag ik een bruin brood, alstublieft?", "fr": "Puis-je avoir un pain gris, s'il vous plaît ?" },
+        { "qui": "A", "nl": "Gesneden?", "fr": "Tranché ?" },
+        { "qui": "B", "nl": "Ja, graag. En ik wil ook graag vier croissants.", "fr": "Oui, volontiers. Et je voudrais aussi quatre croissants." },
+        { "qui": "A", "nl": "Anders nog iets?", "fr": "Autre chose ?" },
+        { "qui": "B", "nl": "Nee, dat is alles.", "fr": "Non, c'est tout." }
+      ],
+      "vocab": {
+        "verbes": ["willen", "mogen", "snijden", "inpakken"],
+        "mots": [
+          { "nl": "de bakker", "fr": "le boulanger" },
+          { "nl": "de slager", "fr": "le boucher" },
+          { "nl": "de markt", "fr": "le marché" },
+          { "nl": "het bruin brood", "fr": "le pain gris" },
+          { "nl": "het wit brood", "fr": "le pain blanc" },
+          { "nl": "het broodje", "fr": "le petit pain" },
+          { "nl": "de croissant", "fr": "le croissant" },
+          { "nl": "de taart", "fr": "la tarte, le gâteau" },
+          { "nl": "gesneden", "fr": "tranché" },
+          { "nl": "alles", "fr": "tout" }
+        ],
+        "phrases": [
+          { "nl": "Ik wil graag ...", "fr": "Je voudrais ..." },
+          { "nl": "Mag ik ...?", "fr": "Puis-je avoir ... ?" },
+          { "nl": "Anders nog iets?", "fr": "Autre chose ?" },
+          { "nl": "Nee, dat is alles.", "fr": "Non, c'est tout." }
+        ]
+      },
+      "regle": {
+        "titre": "Ik wil graag … / Mag ik … ?",
+        "explication": "« Ik wil graag + chose » = je voudrais (poli). « Mag ik + chose ? » = puis-je avoir ? (très courant en magasin). Évite « Ik wil » seul, qui sonne sec. willen : ik wil, jij wilt, hij wil, wij willen. mogen : ik mag, jij mag, hij mag, wij mogen. Le vendeur dit souvent « Zegt u het maar » (je vous écoute) et « Anders nog iets? » (autre chose ?).",
+        "exemples": [
+          { "nl": "Ik wil graag een stuk kaas.", "fr": "Je voudrais un morceau de fromage." },
+          { "nl": "Mag ik een zak, alstublieft?", "fr": "Puis-je avoir un sac, s'il vous plaît ?" },
+          { "nl": "Zegt u het maar.", "fr": "Je vous écoute." },
+          { "nl": "Dat is alles, dank u.", "fr": "C'est tout, merci." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "La façon la plus polie de commander :", "choices": ["Ik wil een brood.", "Geef een brood.", "Mag ik een brood, alstublieft?"], "answer": 2 },
+        { "type": "qcm", "q": "« Anders nog iets? » veut dire :", "choices": ["C'est tout ?", "Autre chose ?", "Autre part ?"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik wil ___ vier croissants.", "answer": "graag", "fr": "Je voudrais quatre croissants." },
+        { "type": "trou", "phrase": "___ ik een zak, alstublieft?", "answer": "Mag", "fr": "Puis-je avoir un sac, s'il vous plaît ?" },
+        { "type": "ordre", "mots": ["is", "Nee,", "alles.", "dat"], "answer": "Nee, dat is alles.", "fr": "Non, c'est tout." },
+        { "type": "traduire", "fr": "Je voudrais un pain gris.", "answer": "Ik wil graag een bruin brood." },
+        { "type": "ecoute", "nl": "Zegt u het maar.", "fr": "Je vous écoute." },
+        { "type": "dire", "nl": "Mag ik vier croissants, alstublieft?", "fr": "Puis-je avoir quatre croissants, s'il vous plaît ?" },
+        { "type": "repondre", "question": "Anders nog iets?", "question_fr": "Autre chose ?", "attendu": [], "un_de": ["alles", "graag", "mag", "nee", "ja"], "exemple": "Nee, dat is alles, dank u." }
+      ],
+      "jeu": {
+        "titre": "À la boulangerie",
+        "consigne": "Commande du pain et des viennoiseries pour un petit-déjeuner avec des collègues, poliment.",
+        "role": "Tu es boulangère. Accueille le client (« Zegt u het maar »), demande s'il veut le pain tranché, propose une spécialité (des pistolets, une tarte au riz), demande « Anders nog iets? » et annonce le prix. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen, zegt u het maar."
+      }
+    },
+    {
+      "id": "decrire",
+      "titre": "Décrire ce que tu veux",
+      "intro": "Préciser : grand ou petit, frais, mûr, rouge… L'adjectif placé devant le nom prend souvent un -e.",
+      "roles": { "A": "La vendeuse", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Ik zoek een grote pompoen.", "fr": "Je cherche une grosse citrouille." },
+        { "qui": "A", "nl": "Deze hier is groot en vers.", "fr": "Celle-ci est grosse et fraîche." },
+        { "qui": "B", "nl": "En hebt u rijpe tomaten?", "fr": "Et vous avez des tomates mûres ?" },
+        { "qui": "A", "nl": "Ja, de rode tomaten zijn heel rijp.", "fr": "Oui, les tomates rouges sont très mûres." },
+        { "qui": "B", "nl": "Dan neem ik een kilo rode tomaten.", "fr": "Alors je prends un kilo de tomates rouges." }
+      ],
+      "vocab": {
+        "verbes": ["nemen", "proeven", "kiezen", "zien"],
+        "mots": [
+          { "nl": "groot", "fr": "grand, gros" },
+          { "nl": "klein", "fr": "petit" },
+          { "nl": "vers", "fr": "frais" },
+          { "nl": "rijp", "fr": "mûr" },
+          { "nl": "rood", "fr": "rouge" },
+          { "nl": "groen", "fr": "vert" },
+          { "nl": "zoet", "fr": "sucré, doux" },
+          { "nl": "lekker", "fr": "bon (goût)" },
+          { "nl": "de pompoen", "fr": "la citrouille" },
+          { "nl": "de tomaat", "fr": "la tomate" },
+          { "nl": "het stokbrood", "fr": "la baguette" }
+        ],
+        "phrases": [
+          { "nl": "Ik zoek een grote pompoen.", "fr": "Je cherche une grosse citrouille." },
+          { "nl": "Deze of die?", "fr": "Celle-ci ou celle-là ?" },
+          { "nl": "Mag ik proeven?", "fr": "Je peux goûter ?" }
+        ]
+      },
+      "regle": {
+        "titre": "La règle du -e : een grote appel, een groot brood",
+        "explication": "Après le nom (avec « zijn ») : jamais de -e : de appel is groot. Devant le nom : on ajoute -e (de grote appel, een grote appel, grote appels, het grote brood). SEULE exception : un nom en « het » au singulier avec « een » (ou sans article) : pas de -e → een groot brood, vers brood. Attention à l'orthographe : groot → grote, rood → rode, dik → dikke.",
+        "exemples": [
+          { "nl": "een grote tomaat", "fr": "une grosse tomate" },
+          { "nl": "een groot brood", "fr": "un gros pain" },
+          { "nl": "het grote brood", "fr": "le gros pain" },
+          { "nl": "De tomaten zijn rijp.", "fr": "Les tomates sont mûres." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« un gros pain » (het brood) :", "choices": ["een grote brood", "een groot brood", "een groten brood"], "answer": 1 },
+        { "type": "qcm", "q": "« la tomate rouge » :", "choices": ["de rood tomaat", "de rode tomaat", "de roode tomaat"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik zoek een ___ pompoen. (groot)", "answer": "grote", "fr": "Je cherche une grosse citrouille." },
+        { "type": "trou", "phrase": "De appels zijn ___. (rijp)", "answer": "rijp", "fr": "Les pommes sont mûres." },
+        { "type": "trou", "phrase": "Ik wil graag ___ brood. (vers)", "answer": "vers", "fr": "Je voudrais du pain frais." },
+        { "type": "ordre", "mots": ["rode", "neem", "Ik", "tomaten."], "answer": "Ik neem rode tomaten.", "fr": "Je prends des tomates rouges." },
+        { "type": "traduire", "fr": "un petit pain (het brood)", "answer": "een klein brood" },
+        { "type": "ecoute", "nl": "De groene appels zijn lekker.", "fr": "Les pommes vertes sont bonnes." },
+        { "type": "dire", "nl": "Ik zoek een grote pompoen.", "fr": "Je cherche une grosse citrouille." },
+        { "type": "repondre", "question": "Welke appels wilt u, de rode of de groene?", "question_fr": "Quelles pommes voulez-vous, les rouges ou les vertes ?", "attendu": [], "un_de": ["rode", "groene"], "exemple": "De rode, alstublieft." }
+      ],
+      "jeu": {
+        "titre": "Choisir les bons produits",
+        "consigne": "Tu prépares un repas : choisis des fruits et légumes en les décrivant (grands, petits, mûrs, de quelle couleur).",
+        "role": "Tu es vendeuse au marché. Le client choisit des fruits et légumes : propose différents choix (grandes ou petites, rouges ou vertes, bien mûres ou pas), fais-le préciser avec des adjectifs, propose de goûter un fruit. Phrases très simples (A1).",
+        "welcome": "Goeiedag! Wat zoekt u vandaag?"
+      }
+    },
+    {
+      "id": "caisse",
+      "titre": "À la caisse",
+      "intro": "Payer par carte ou en liquide, demander un sac, répondre aux questions de la caissière (carte de fidélité, ticket).",
+      "roles": { "A": "La caissière", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Dat is dan veertien euro twintig. Heeft u een klantenkaart?", "fr": "Ça fait quatorze euros vingt. Vous avez une carte de fidélité ?" },
+        { "qui": "B", "nl": "Nee, ik heb geen klantenkaart.", "fr": "Non, je n'ai pas de carte de fidélité." },
+        { "qui": "A", "nl": "Betaalt u met de kaart of cash?", "fr": "Vous payez par carte ou en liquide ?" },
+        { "qui": "B", "nl": "Met de kaart, alstublieft.", "fr": "Par carte, s'il vous plaît." },
+        { "qui": "A", "nl": "Wilt u het ticket?", "fr": "Vous voulez le ticket ?" },
+        { "qui": "B", "nl": "Nee, dank u. Mag ik nog een zak?", "fr": "Non, merci. Je peux avoir un sac ?" }
+      ],
+      "vocab": {
+        "verbes": ["betalen", "geven", "terugkrijgen", "inpakken"],
+        "mots": [
+          { "nl": "de kassa", "fr": "la caisse" },
+          { "nl": "de kaart", "fr": "la carte" },
+          { "nl": "cash", "fr": "en liquide" },
+          { "nl": "het wisselgeld", "fr": "la monnaie (rendue)" },
+          { "nl": "het ticket", "fr": "le ticket de caisse" },
+          { "nl": "de zak", "fr": "le sac" },
+          { "nl": "de klantenkaart", "fr": "la carte de fidélité" },
+          { "nl": "de pincode", "fr": "le code PIN" },
+          { "nl": "samen", "fr": "ensemble, au total" }
+        ],
+        "phrases": [
+          { "nl": "Met de kaart, alstublieft.", "fr": "Par carte, s'il vous plaît." },
+          { "nl": "Mag ik een zak?", "fr": "Puis-je avoir un sac ?" },
+          { "nl": "Hoeveel is het samen?", "fr": "Combien ça fait au total ?" }
+        ]
+      },
+      "regle": {
+        "titre": "geen + nom, niet + le reste",
+        "explication": "Pour dire « pas de » devant un nom sans article défini : « geen » (Ik heb geen klantenkaart, geen zak nodig). Pour le reste (verbe, adjectif, nom avec de/het) : « niet » (Ik betaal niet cash, Het is niet duur). « Nodig hebben » = avoir besoin : Ik heb geen zak nodig.",
+        "exemples": [
+          { "nl": "Ik heb geen klantenkaart.", "fr": "Je n'ai pas de carte de fidélité." },
+          { "nl": "Ik heb geen zak nodig.", "fr": "Je n'ai pas besoin de sac." },
+          { "nl": "Het is niet duur.", "fr": "Ce n'est pas cher." },
+          { "nl": "Ik betaal niet cash.", "fr": "Je ne paie pas en liquide." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je n'ai pas de carte de fidélité » :", "choices": ["Ik heb niet klantenkaart.", "Ik heb geen klantenkaart.", "Ik heb klantenkaart niet."], "answer": 1 },
+        { "type": "qcm", "q": "« Ce n'est pas cher » :", "choices": ["Het is geen duur.", "Het is niet duur.", "Het niet is duur."], "answer": 1 },
+        { "type": "trou", "phrase": "Ik betaal ___ de kaart.", "answer": "met", "fr": "Je paie par carte." },
+        { "type": "trou", "phrase": "Ik heb ___ zak nodig.", "answer": "geen", "fr": "Je n'ai pas besoin de sac." },
+        { "type": "ordre", "mots": ["het", "Hoeveel", "samen?", "is"], "answer": "Hoeveel is het samen?", "fr": "Combien ça fait au total ?" },
+        { "type": "traduire", "fr": "Par carte, s'il vous plaît.", "answer": "Met de kaart, alstublieft." },
+        { "type": "ecoute", "nl": "Betaalt u met de kaart of cash?", "fr": "Vous payez par carte ou en liquide ?" },
+        { "type": "dire", "nl": "Mag ik een zak, alstublieft?", "fr": "Puis-je avoir un sac, s'il vous plaît ?" },
+        { "type": "repondre", "question": "Heeft u een klantenkaart?", "question_fr": "Avez-vous une carte de fidélité ?", "attendu": [], "un_de": ["geen", "nee", "ja", "heb"], "exemple": "Nee, ik heb geen klantenkaart." }
+      ],
+      "jeu": {
+        "titre": "Passer à la caisse",
+        "consigne": "Paie tes courses : réponds à la caissière, choisis ton moyen de paiement et demande un sac.",
+        "role": "Tu es caissière dans un supermarché. Annonce le total (23 euros 40), demande la carte de fidélité, le mode de paiement, s'il veut un sac (payant : 10 cent) et le ticket. Une fois, dis que la carte ne passe pas et qu'il faut réessayer. Phrases très simples (A1).",
+        "welcome": "Goeiedag! Heeft u alles gevonden?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : faire les courses pour une fête",
+    "consigne": "Tu organises un petit repas. Au marché, achète ce qu'il te faut : salue, demande des produits, précise quantités et qualités, demande les prix, paie et prends congé.",
+    "role": "Tu es Marc, marchand au marché qui vend fruits, légumes, pain et fromage. Le client fait ses courses pour une fête. Salue-le, demande ce qu'il veut, propose des choix (grand ou petit, mûr ou pas), donne les prix en euros, demande les quantités, annonce le total et le mode de paiement. Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Goeiemorgen! Mooie verse producten vandaag. Wat mag het zijn?"
+  },
+  "examen": {
+    "reussite": "Tu sais faire tes courses en néerlandais.",
+    "sujets": [
+      { "label": "saluer", "etape": "commander", "mots": ["goeiemorgen", "goedemorgen", "goeiedag", "goedendag", "hallo", "dag"] },
+      { "label": "demander un produit poliment", "etape": "commander", "mots": ["ik wil graag", "mag ik", "ik zoek", "heeft u", "hebt u"] },
+      { "label": "dire une quantité", "etape": "quantites", "mots": ["kilo", "gram", "fles", "pak", "stuk", "halve", "twee", "drie", "vier"] },
+      { "label": "demander ou comprendre un prix", "etape": "quantites", "mots": ["hoeveel", "kost", "kosten", "euro", "prijs"] },
+      { "label": "décrire avec un adjectif", "etape": "decrire", "mots": ["grote", "groot", "kleine", "klein", "verse", "vers", "rijpe", "rijp", "rode", "groene", "lekker"] },
+      { "label": "payer", "etape": "caisse", "mots": ["betaal", "betalen", "kaart", "cash", "bancontact"] },
+      { "label": "dire que c'est tout", "etape": "commander", "mots": ["dat is alles", "alles", "niets meer"] },
+      { "label": "remercier et prendre congé", "etape": "caisse", "mots": ["dank", "bedankt", "tot ziens", "prettige dag", "dag"] }
+    ]
+  }
+}

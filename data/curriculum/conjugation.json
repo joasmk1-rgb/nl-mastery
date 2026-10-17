@@ -12774,5 +12774,167 @@
     "exempleNl": "",
     "exempleFr": "",
     "freq": 4.32
+  },
+  {
+    "infinitief": "proeven",
+    "fr": "goûter",
+    "present": {
+      "ik": "proef",
+      "jij": "proeft",
+      "hij": "proeft",
+      "wij": "proeven"
+    },
+    "preteritum": "proefde",
+    "participePasse": "geproefd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.21,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugkrijgen",
+    "fr": "récupérer (rendu)",
+    "present": {
+      "ik": "krijg terug",
+      "jij": "krijgt terug",
+      "hij": "krijgt terug",
+      "wij": "krijgen terug"
+    },
+    "preteritum": "kreeg terug",
+    "participePasse": "teruggekregen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.37,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "lekken",
+    "fr": "fuir (liquide)",
+    "present": {
+      "ik": "lek",
+      "jij": "lekt",
+      "hij": "lekt",
+      "wij": "lekken"
+    },
+    "preteritum": "lekte",
+    "participePasse": "gelekt",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.81,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "instappen",
+    "fr": "monter (dans un véhicule)",
+    "present": {
+      "ik": "stap in",
+      "jij": "stapt in",
+      "hij": "stapt in",
+      "wij": "stappen in"
+    },
+    "preteritum": "stapte in",
+    "participePasse": "ingestapt",
+    "auxiliaire": "zijn",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.36,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "vergaderen",
+    "fr": "être en réunion / se réunir",
+    "present": {
+      "ik": "vergader",
+      "jij": "vergadert",
+      "hij": "vergadert",
+      "wij": "vergaderen"
+    },
+    "preteritum": "vergaderde",
+    "participePasse": "vergaderd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.53,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "pauzeren",
+    "fr": "faire une pause",
+    "present": {
+      "ik": "pauzeer",
+      "jij": "pauzeert",
+      "hij": "pauzeert",
+      "wij": "pauzeren"
+    },
+    "preteritum": "pauzeerde",
+    "participePasse": "gepauzeerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.04,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "mailen",
+    "fr": "envoyer un mail",
+    "present": {
+      "ik": "mail",
+      "jij": "mailt",
+      "hij": "mailt",
+      "wij": "mailen"
+    },
+    "preteritum": "mailde",
+    "participePasse": "gemaild",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "uitslapen",
+    "fr": "faire la grasse matinée",
+    "present": {
+      "ik": "slaap uit",
+      "jij": "slaapt uit",
+      "hij": "slaapt uit",
+      "wij": "slapen uit"
+    },
+    "preteritum": "sliep uit",
+    "participePasse": "uitgeslapen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.14,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "plakken",
+    "fr": "coller",
+    "present": {
+      "ik": "plak",
+      "jij": "plakt",
+      "hij": "plakt",
+      "wij": "plakken"
+    },
+    "preteritum": "plakte",
+    "participePasse": "geplakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.95,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
   }
 ]

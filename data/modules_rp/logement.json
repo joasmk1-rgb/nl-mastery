@@ -1,0 +1,341 @@
+{
+  "_doc": "Module en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "logement",
+  "niveau": "A1",
+  "icone": "🏠",
+  "titre": "Chez moi",
+  "accroche": "Décrire ton logement, dire où sont les choses, signaler une panne et visiter un appartement.",
+  "objectif": "À la fin du module, tu sais parler de ton logement : décrire les pièces, dire où sont les choses, expliquer un problème et poser les bonnes questions lors d'une visite.",
+  "etapes": [
+    {
+      "id": "pieces",
+      "titre": "Les pièces de la maison",
+      "intro": "Nommer les pièces et dire ce qu'il y a chez toi, avec « er is / er zijn » et les possessifs (mijn, jouw, ons…).",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Woon je in een huis of in een appartement?", "fr": "Tu habites dans une maison ou un appartement ?" },
+        { "qui": "B", "nl": "In een appartement met twee slaapkamers.", "fr": "Dans un appartement avec deux chambres." },
+        { "qui": "A", "nl": "Is er een tuin?", "fr": "Il y a un jardin ?" },
+        { "qui": "B", "nl": "Nee, er is geen tuin, maar er is een terras.", "fr": "Non, il n'y a pas de jardin, mais il y a une terrasse." },
+        { "qui": "A", "nl": "En is jouw keuken groot?", "fr": "Et ta cuisine est grande ?" },
+        { "qui": "B", "nl": "Mijn keuken is klein, maar de woonkamer is groot.", "fr": "Ma cuisine est petite, mais le salon est grand." }
+      ],
+      "vocab": {
+        "verbes": ["wonen", "hebben", "huren", "delen"],
+        "mots": [
+          { "nl": "het huis", "fr": "la maison" },
+          { "nl": "het appartement", "fr": "l'appartement" },
+          { "nl": "de kamer", "fr": "la pièce, la chambre" },
+          { "nl": "de keuken", "fr": "la cuisine" },
+          { "nl": "de woonkamer", "fr": "le salon" },
+          { "nl": "de slaapkamer", "fr": "la chambre à coucher" },
+          { "nl": "de badkamer", "fr": "la salle de bain" },
+          { "nl": "het toilet", "fr": "les toilettes" },
+          { "nl": "de tuin", "fr": "le jardin" },
+          { "nl": "het terras", "fr": "la terrasse" },
+          { "nl": "de verdieping", "fr": "l'étage" },
+          { "nl": "de lift", "fr": "l'ascenseur" }
+        ],
+        "phrases": [
+          { "nl": "Ik woon in een appartement.", "fr": "J'habite dans un appartement." },
+          { "nl": "Er is een tuin.", "fr": "Il y a un jardin." },
+          { "nl": "Er zijn twee slaapkamers.", "fr": "Il y a deux chambres." }
+        ]
+      },
+      "regle": {
+        "titre": "er is / er zijn et les possessifs",
+        "explication": "« Er is » + singulier, « er zijn » + pluriel = il y a. Négation : « Er is geen tuin ». Possessifs : mijn (mon/ma), jouw/je (ton/ta), uw (votre, poli), zijn (son, à lui), haar (son, à elle), ons (notre, devant un nom en « het ») / onze (devant « de » et le pluriel), jullie (votre), hun (leur). Ex. : ons huis, onze keuken.",
+        "exemples": [
+          { "nl": "Er zijn drie kamers.", "fr": "Il y a trois pièces." },
+          { "nl": "Er is geen lift.", "fr": "Il n'y a pas d'ascenseur." },
+          { "nl": "Ons appartement is klein.", "fr": "Notre appartement est petit." },
+          { "nl": "Onze keuken is nieuw.", "fr": "Notre cuisine est neuve." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Il y a deux chambres » :", "choices": ["Er is twee slaapkamers.", "Er zijn twee slaapkamers.", "Het zijn twee slaapkamers."], "answer": 1 },
+        { "type": "qcm", "q": "« notre maison » (het huis) :", "choices": ["onze huis", "ons huis", "onzen huis"], "answer": 1 },
+        { "type": "trou", "phrase": "Er is ___ lift. (pas de)", "answer": "geen", "fr": "Il n'y a pas d'ascenseur." },
+        { "type": "trou", "phrase": "___ keuken is klein. (ma)", "answer": "Mijn", "fr": "Ma cuisine est petite." },
+        { "type": "ordre", "mots": ["in", "Ik", "appartement.", "een", "woon"], "answer": "Ik woon in een appartement.", "fr": "J'habite dans un appartement." },
+        { "type": "traduire", "fr": "la salle de bain", "answer": "de badkamer" },
+        { "type": "ecoute", "nl": "Er zijn twee slaapkamers en een badkamer.", "fr": "Il y a deux chambres et une salle de bain." },
+        { "type": "dire", "nl": "Ik woon in een appartement met twee slaapkamers.", "fr": "J'habite dans un appartement avec deux chambres." },
+        { "type": "repondre", "question": "Woon je in een huis of in een appartement?", "question_fr": "Tu habites dans une maison ou un appartement ?", "attendu": ["woon"], "exemple": "Ik woon in een appartement." }
+      ],
+      "jeu": {
+        "titre": "Parler de chez soi",
+        "consigne": "Ta collègue vient d'emménager et te parle de son appartement. Décris ton logement à toi aussi.",
+        "role": "Tu es Sarah, une collègue qui vient d'emménager dans une petite maison avec jardin. Parle un peu de ta maison et pose des questions à l'apprenant sur son logement : maison ou appartement, nombre de chambres, jardin, étage, ascenseur. Phrases très simples (A1).",
+        "welcome": "Ik ben verhuisd! Nu woon ik in een klein huis met een tuin. En jij, waar woon jij?"
+      }
+    },
+    {
+      "id": "placer",
+      "titre": "Où sont les choses ?",
+      "intro": "Dire où se trouve un objet : sur, dans, sous, à côté de… Le néerlandais précise souvent la position : staan (debout), liggen (couché), hangen (accroché).",
+      "roles": { "A": "Ton colocataire", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waar zijn mijn sleutels?", "fr": "Où sont mes clés ?" },
+        { "qui": "B", "nl": "Ze liggen op de tafel, naast de krant.", "fr": "Elles sont sur la table, à côté du journal." },
+        { "qui": "A", "nl": "En mijn jas?", "fr": "Et ma veste ?" },
+        { "qui": "B", "nl": "Je jas hangt achter de deur.", "fr": "Ta veste est accrochée derrière la porte." },
+        { "qui": "A", "nl": "Super, dank je!", "fr": "Super, merci !" }
+      ],
+      "vocab": {
+        "verbes": ["staan", "liggen", "hangen", "zetten", "leggen"],
+        "mots": [
+          { "nl": "op", "fr": "sur" },
+          { "nl": "in", "fr": "dans" },
+          { "nl": "onder", "fr": "sous" },
+          { "nl": "naast", "fr": "à côté de" },
+          { "nl": "achter", "fr": "derrière" },
+          { "nl": "voor", "fr": "devant" },
+          { "nl": "tussen", "fr": "entre" },
+          { "nl": "de tafel", "fr": "la table" },
+          { "nl": "de kast", "fr": "l'armoire, le placard" },
+          { "nl": "de stoel", "fr": "la chaise" },
+          { "nl": "het bed", "fr": "le lit" },
+          { "nl": "de sleutel", "fr": "la clé" }
+        ],
+        "phrases": [
+          { "nl": "Waar is ...?", "fr": "Où est ... ?" },
+          { "nl": "Het ligt op de tafel.", "fr": "C'est sur la table." },
+          { "nl": "Het staat in de kast.", "fr": "C'est dans l'armoire." }
+        ]
+      },
+      "regle": {
+        "titre": "staan, liggen, hangen au lieu de « être »",
+        "explication": "Pour dire où est un objet, le néerlandais préfère un verbe de position : « staan » pour ce qui est debout (de fles staat op de tafel), « liggen » pour ce qui est à plat (de sleutels liggen op de tafel), « hangen » pour ce qui est accroché (de jas hangt aan de deur). Pour l'action de poser : « zetten » (debout) et « leggen » (à plat). « zijn » reste possible, mais sonne moins naturel.",
+        "exemples": [
+          { "nl": "De fles staat in de koelkast.", "fr": "La bouteille est dans le frigo." },
+          { "nl": "Het boek ligt onder het bed.", "fr": "Le livre est sous le lit." },
+          { "nl": "De foto hangt naast de deur.", "fr": "La photo est accrochée à côté de la porte." },
+          { "nl": "Ik leg de sleutels op de tafel.", "fr": "Je pose les clés sur la table." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Les clés sont sur la table (à plat) :", "choices": ["De sleutels staan op de tafel.", "De sleutels liggen op de tafel.", "De sleutels hangen op de tafel."], "answer": 1 },
+        { "type": "qcm", "q": "« à côté de » :", "choices": ["naast", "tussen", "achter"], "answer": 0 },
+        { "type": "trou", "phrase": "De jas ___ achter de deur. (accrochée)", "answer": "hangt", "fr": "La veste est accrochée derrière la porte." },
+        { "type": "trou", "phrase": "De fles ___ in de kast. (debout)", "answer": "staat", "fr": "La bouteille est dans l'armoire." },
+        { "type": "ordre", "mots": ["onder", "Het", "ligt", "bed.", "het", "boek"], "answer": "Het boek ligt onder het bed.", "fr": "Le livre est sous le lit." },
+        { "type": "traduire", "fr": "Où sont mes clés ?", "answer": "Waar zijn mijn sleutels?" },
+        { "type": "ecoute", "nl": "De stoel staat tussen de tafel en de kast.", "fr": "La chaise est entre la table et l'armoire." },
+        { "type": "dire", "nl": "De sleutels liggen op de tafel.", "fr": "Les clés sont sur la table." },
+        { "type": "repondre", "question": "Waar staat jouw bed?", "question_fr": "Où est ton lit ?", "attendu": ["staat"], "exemple": "Mijn bed staat in de slaapkamer, naast het raam." }
+      ],
+      "jeu": {
+        "titre": "Retrouver les affaires",
+        "consigne": "Ton colocataire est pressé et cherche ses affaires. Aide-le en disant où elles sont.",
+        "role": "Tu es Pieter, colocataire pressé qui part au travail. Demande à l'apprenant où sont tes affaires (clés, portefeuille, veste, téléphone, sac), réagis à ses réponses, demande de préciser (op of in? naast wat?). Phrases très simples (A1).",
+        "welcome": "Help, ik ben te laat! Waar zijn mijn sleutels?"
+      }
+    },
+    {
+      "id": "decrire",
+      "titre": "Décrire son logement",
+      "intro": "Dire comment est ton logement — grand, clair, calme — et comparer : plus grand que, plus petit que.",
+      "roles": { "A": "Un ami", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hoe is je nieuwe appartement?", "fr": "Comment est ton nouvel appartement ?" },
+        { "qui": "B", "nl": "Het is licht en rustig.", "fr": "Il est clair et calme." },
+        { "qui": "A", "nl": "Is het groter dan je oude appartement?", "fr": "Il est plus grand que ton ancien appartement ?" },
+        { "qui": "B", "nl": "Ja, het is veel groter, maar ook duurder.", "fr": "Oui, beaucoup plus grand, mais aussi plus cher." },
+        { "qui": "A", "nl": "En de buurt?", "fr": "Et le quartier ?" },
+        { "qui": "B", "nl": "De buurt is gezellig.", "fr": "Le quartier est sympa." }
+      ],
+      "vocab": {
+        "verbes": ["vinden", "verhuizen", "zoeken", "betalen"],
+        "mots": [
+          { "nl": "licht", "fr": "clair, lumineux" },
+          { "nl": "donker", "fr": "sombre" },
+          { "nl": "rustig", "fr": "calme" },
+          { "nl": "lawaaierig", "fr": "bruyant" },
+          { "nl": "nieuw", "fr": "neuf, nouveau" },
+          { "nl": "oud", "fr": "vieux, ancien" },
+          { "nl": "gezellig", "fr": "agréable, convivial" },
+          { "nl": "duur", "fr": "cher" },
+          { "nl": "de buurt", "fr": "le quartier" },
+          { "nl": "het raam", "fr": "la fenêtre" },
+          { "nl": "de huur", "fr": "le loyer" }
+        ],
+        "phrases": [
+          { "nl": "Het is licht en rustig.", "fr": "Il est clair et calme." },
+          { "nl": "Het is groter dan mijn oude huis.", "fr": "Il est plus grand que mon ancienne maison." },
+          { "nl": "De buurt is gezellig.", "fr": "Le quartier est sympa." }
+        ]
+      },
+      "regle": {
+        "titre": "Comparer : groter dan, het grootste",
+        "explication": "Comparatif : adjectif + -er + « dan » (que) : groot → groter dan, klein → kleiner dan, duur → duurder dan (après -r, on ajoute -der). Superlatif : het + adjectif + -st : het grootst, het kleinst. Irréguliers fréquents : goed → beter → best, veel → meer → meest, graag → liever → liefst. Devant un nom, l'adjectif garde la règle du -e : mijn nieuwe appartement.",
+        "exemples": [
+          { "nl": "Mijn kamer is kleiner dan jouw kamer.", "fr": "Ma chambre est plus petite que ta chambre." },
+          { "nl": "Dit appartement is duurder.", "fr": "Cet appartement est plus cher." },
+          { "nl": "De woonkamer is het grootst.", "fr": "Le salon est le plus grand." },
+          { "nl": "Deze buurt is beter.", "fr": "Ce quartier est meilleur." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« plus grand que » :", "choices": ["meer groot dan", "groter dan", "grootte als"], "answer": 1 },
+        { "type": "qcm", "q": "Le comparatif de « goed » :", "choices": ["goeder", "beter", "meer goed"], "answer": 1 },
+        { "type": "trou", "phrase": "Mijn huis is kleiner ___ jouw huis.", "answer": "dan", "fr": "Ma maison est plus petite que ta maison." },
+        { "type": "trou", "phrase": "Dit appartement is ___. (cher → plus cher)", "answer": "duurder", "fr": "Cet appartement est plus cher." },
+        { "type": "ordre", "mots": ["is", "De", "gezellig.", "buurt"], "answer": "De buurt is gezellig.", "fr": "Le quartier est sympa." },
+        { "type": "traduire", "fr": "Il est clair et calme.", "answer": "Het is licht en rustig." },
+        { "type": "ecoute", "nl": "Mijn nieuwe appartement is groter dan mijn oude.", "fr": "Mon nouvel appartement est plus grand que l'ancien." },
+        { "type": "dire", "nl": "Het is licht en rustig.", "fr": "Il est clair et calme." },
+        { "type": "repondre", "question": "Hoe is jouw buurt?", "question_fr": "Comment est ton quartier ?", "attendu": ["is"], "exemple": "Mijn buurt is rustig en gezellig." }
+      ],
+      "jeu": {
+        "titre": "Comparer avec un ami",
+        "consigne": "Un ami hésite à déménager. Décris ton logement et ton quartier, et compare avec le sien.",
+        "role": "Tu es Kobe, un ami qui habite un petit studio bruyant au centre-ville et hésite à déménager. Demande à l'apprenant comment est son logement et son quartier, compare avec le tien (plus grand, plus calme, plus cher), demande son avis. Phrases très simples (A1-A2).",
+        "welcome": "Mijn studio is echt te klein en te lawaaierig. Hoe is jouw appartement eigenlijk?"
+      }
+    },
+    {
+      "id": "panne",
+      "titre": "Quelque chose ne marche pas",
+      "intro": "Expliquer un problème dans ton logement — chauffage, eau chaude, fuite — avec « niet » et « geen ».",
+      "roles": { "A": "Le propriétaire", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Met Claes.", "fr": "Claes, j'écoute." },
+        { "qui": "B", "nl": "Goeiedag, de verwarming werkt niet.", "fr": "Bonjour, le chauffage ne marche pas." },
+        { "qui": "A", "nl": "Sinds wanneer?", "fr": "Depuis quand ?" },
+        { "qui": "B", "nl": "Sinds gisteren. En er is ook geen warm water.", "fr": "Depuis hier. Et il n'y a pas d'eau chaude non plus." },
+        { "qui": "A", "nl": "Ik stuur morgen een technieker.", "fr": "J'envoie un technicien demain." },
+        { "qui": "B", "nl": "Kan het vandaag nog? Het is erg koud.", "fr": "C'est possible encore aujourd'hui ? Il fait très froid." }
+      ],
+      "vocab": {
+        "verbes": ["werken", "lekken", "herstellen", "sturen"],
+        "mots": [
+          { "nl": "de verwarming", "fr": "le chauffage" },
+          { "nl": "het warm water", "fr": "l'eau chaude" },
+          { "nl": "het lek", "fr": "la fuite" },
+          { "nl": "de kraan", "fr": "le robinet" },
+          { "nl": "de lamp", "fr": "la lampe" },
+          { "nl": "de deur", "fr": "la porte" },
+          { "nl": "de technieker", "fr": "le technicien" },
+          { "nl": "de eigenaar", "fr": "le propriétaire" },
+          { "nl": "kapot", "fr": "cassé" },
+          { "nl": "koud", "fr": "froid" },
+          { "nl": "sinds", "fr": "depuis" }
+        ],
+        "phrases": [
+          { "nl": "De verwarming werkt niet.", "fr": "Le chauffage ne marche pas." },
+          { "nl": "Er is geen warm water.", "fr": "Il n'y a pas d'eau chaude." },
+          { "nl": "De kraan lekt.", "fr": "Le robinet fuit." }
+        ]
+      },
+      "regle": {
+        "titre": "niet ou geen ?",
+        "explication": "« geen » remplace « een » ou l'absence d'article devant un nom : Er is geen warm water, Ik heb geen sleutel. « niet » nie tout le reste : un verbe (De lamp werkt niet), un adjectif (Het is niet warm), un nom avec de/het/mijn (Ik vind de sleutel niet). Place de « niet » : à la fin d'une phrase simple (De lamp werkt niet), mais devant un adjectif, un lieu ou une préposition (Het is niet koud, Hij is niet thuis).",
+        "exemples": [
+          { "nl": "De lamp werkt niet.", "fr": "La lampe ne marche pas." },
+          { "nl": "Er is geen licht.", "fr": "Il n'y a pas de lumière." },
+          { "nl": "Het water is niet warm.", "fr": "L'eau n'est pas chaude." },
+          { "nl": "Ik vind mijn sleutel niet.", "fr": "Je ne trouve pas ma clé." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Il n'y a pas d'eau chaude » :", "choices": ["Er is niet warm water.", "Er is geen warm water.", "Er geen is warm water."], "answer": 1 },
+        { "type": "qcm", "q": "« Le chauffage ne marche pas » :", "choices": ["De verwarming werkt geen.", "De verwarming niet werkt.", "De verwarming werkt niet."], "answer": 2 },
+        { "type": "trou", "phrase": "Het water is ___ warm.", "answer": "niet", "fr": "L'eau n'est pas chaude." },
+        { "type": "trou", "phrase": "Ik heb ___ sleutel.", "answer": "geen", "fr": "Je n'ai pas de clé." },
+        { "type": "ordre", "mots": ["sinds", "werkt", "Het", "niet", "gisteren."], "answer": "Het werkt niet sinds gisteren.", "fr": "Ça ne marche pas depuis hier." },
+        { "type": "traduire", "fr": "Le robinet fuit.", "answer": "De kraan lekt." },
+        { "type": "ecoute", "nl": "Ik stuur morgen een technieker.", "fr": "J'envoie un technicien demain." },
+        { "type": "dire", "nl": "De verwarming werkt niet.", "fr": "Le chauffage ne marche pas." },
+        { "type": "repondre", "question": "Wat is het probleem?", "question_fr": "Quel est le problème ?", "attendu": [], "un_de": ["niet", "geen", "kapot", "lekt"], "exemple": "De verwarming werkt niet." }
+      ],
+      "jeu": {
+        "titre": "Appeler le propriétaire",
+        "consigne": "Ton chauffage est en panne. Appelle ton propriétaire, explique le problème et obtiens une intervention rapide.",
+        "role": "Tu es meneer Claes, propriétaire un peu lent. Le locataire appelle pour un problème. Demande ce qui ne marche pas, depuis quand, propose d'abord de passer « volgende week », puis accepte d'envoyer un technicien plus tôt s'il insiste. Phrases très simples (A1).",
+        "welcome": "Ja, met Claes."
+      }
+    },
+    {
+      "id": "visite",
+      "titre": "Visiter un appartement",
+      "intro": "Poser les bonnes questions en visitant un logement à louer : prix, charges, disponibilité, animaux, quartier.",
+      "roles": { "A": "L'agent immobilier", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Dit is de woonkamer. Mooi licht, hè?", "fr": "Voici le salon. Bien lumineux, hein ?" },
+        { "qui": "B", "nl": "Ja, heel mooi. Hoeveel is de huur?", "fr": "Oui, très beau. Combien est le loyer ?" },
+        { "qui": "A", "nl": "Achthonderd euro per maand.", "fr": "Huit cents euros par mois." },
+        { "qui": "B", "nl": "Zijn de kosten inbegrepen?", "fr": "Les charges sont comprises ?" },
+        { "qui": "A", "nl": "Nee, de kosten zijn vijftig euro extra.", "fr": "Non, les charges font cinquante euros en plus." },
+        { "qui": "B", "nl": "Wanneer is het appartement vrij?", "fr": "Quand l'appartement est-il libre ?" }
+      ],
+      "vocab": {
+        "verbes": ["huren", "bezoeken", "betalen", "tekenen", "verhuizen"],
+        "mots": [
+          { "nl": "de huur", "fr": "le loyer" },
+          { "nl": "de kosten", "fr": "les charges" },
+          { "nl": "inbegrepen", "fr": "compris" },
+          { "nl": "de waarborg", "fr": "la garantie locative" },
+          { "nl": "het huurcontract", "fr": "le bail" },
+          { "nl": "per maand", "fr": "par mois" },
+          { "nl": "vrij", "fr": "libre" },
+          { "nl": "gemeubeld", "fr": "meublé" },
+          { "nl": "het huisdier", "fr": "l'animal de compagnie" },
+          { "nl": "de makelaar", "fr": "l'agent immobilier" }
+        ],
+        "phrases": [
+          { "nl": "Hoeveel is de huur?", "fr": "Combien est le loyer ?" },
+          { "nl": "Zijn de kosten inbegrepen?", "fr": "Les charges sont comprises ?" },
+          { "nl": "Wanneer is het vrij?", "fr": "Quand est-il libre ?" },
+          { "nl": "Mag ik een huisdier hebben?", "fr": "Puis-je avoir un animal ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Poser une question : le verbe d'abord",
+        "explication": "Question oui/non : le verbe conjugué se met en première position, puis le sujet : « Is het appartement gemeubeld? », « Zijn de kosten inbegrepen? », « Mag ik een huisdier hebben? » (l'infinitif reste à la fin). Question ouverte : mot interrogatif + verbe + sujet : « Hoeveel is de huur? », « Wanneer is het vrij? », « Waar is de badkamer? ».",
+        "exemples": [
+          { "nl": "Is er een lift?", "fr": "Y a-t-il un ascenseur ?" },
+          { "nl": "Is het appartement gemeubeld?", "fr": "L'appartement est-il meublé ?" },
+          { "nl": "Hoeveel is de waarborg?", "fr": "Combien est la garantie ?" },
+          { "nl": "Wanneer kan ik verhuizen?", "fr": "Quand puis-je emménager ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Les charges sont comprises ? » :", "choices": ["De kosten zijn inbegrepen?", "Zijn de kosten inbegrepen?", "Inbegrepen zijn de kosten?"], "answer": 1 },
+        { "type": "qcm", "q": "« de waarborg », c'est :", "choices": ["le bail", "la garantie locative", "les charges"], "answer": 1 },
+        { "type": "trou", "phrase": "___ is de huur?", "answer": "Hoeveel", "fr": "Combien est le loyer ?" },
+        { "type": "trou", "phrase": "___ ik een huisdier hebben?", "answer": "Mag", "fr": "Puis-je avoir un animal ?" },
+        { "type": "ordre", "mots": ["het", "Wanneer", "vrij?", "is", "appartement"], "answer": "Wanneer is het appartement vrij?", "fr": "Quand l'appartement est-il libre ?" },
+        { "type": "traduire", "fr": "Y a-t-il un ascenseur ?", "answer": "Is er een lift?" },
+        { "type": "ecoute", "nl": "De huur is achthonderd euro per maand.", "fr": "Le loyer est de huit cents euros par mois." },
+        { "type": "dire", "nl": "Zijn de kosten inbegrepen?", "fr": "Les charges sont comprises ?" },
+        { "type": "repondre", "question": "Wat zoekt u precies?", "question_fr": "Que cherchez-vous exactement ?", "attendu": ["zoek"], "exemple": "Ik zoek een appartement met twee slaapkamers." }
+      ],
+      "jeu": {
+        "titre": "La visite",
+        "consigne": "Tu visites un appartement à louer. Pose toutes tes questions : loyer, charges, garantie, disponibilité, et dis ce que tu en penses.",
+        "role": "Tu es Ines, agent immobilier. Tu fais visiter un appartement deux chambres (850 euros par mois, charges 60 euros, garantie de deux mois de loyer, libre le premier du mois prochain, pas d'animaux, troisième étage sans ascenseur). Présente les pièces, réponds aux questions, demande au visiteur ce qu'il cherche et s'il est intéressé. Phrases simples (A1-A2).",
+        "welcome": "Goedemiddag, welkom! Komt u binnen. Dit is de inkomhal. Wat zoekt u precies?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : visiter un logement et décider",
+    "consigne": "Tu cherches un appartement. Pendant la visite, dis ce que tu cherches, décris ce que tu vois, pose les questions sur le prix, les charges et la disponibilité, signale un problème que tu remarques et dis si tu es intéressé.",
+    "role": "Tu es Bart, propriétaire qui fait visiter son appartement (une chambre, 750 euros par mois, charges 40 euros, libre dans deux semaines). Le robinet de la cuisine fuit un peu : ne le dis pas, attends que le visiteur le remarque, puis promets de le réparer. Pose des questions au visiteur (ce qu'il cherche, son travail, quand il veut emménager). Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Dag! U komt voor het appartement? Kom maar binnen."
+  },
+  "examen": {
+    "reussite": "Tu sais parler de ton logement et mener une visite en néerlandais.",
+    "sujets": [
+      { "label": "dire ce que tu cherches", "etape": "visite", "mots": ["zoek", "slaapkamer", "appartement", "studio", "huis"] },
+      { "label": "nommer des pièces", "etape": "pieces", "mots": ["keuken", "badkamer", "woonkamer", "slaapkamer", "toilet", "terras", "tuin"] },
+      { "label": "décrire avec un adjectif", "etape": "decrire", "mots": ["licht", "donker", "rustig", "groot", "klein", "mooi", "gezellig", "nieuw", "oud"] },
+      { "label": "demander le loyer", "etape": "visite", "mots": ["huur", "hoeveel", "per maand", "euro"] },
+      { "label": "demander les charges ou la garantie", "etape": "visite", "mots": ["kosten", "inbegrepen", "waarborg"] },
+      { "label": "demander la disponibilité", "etape": "visite", "mots": ["wanneer", "vrij", "verhuizen", "beschikbaar"] },
+      { "label": "signaler un problème", "etape": "panne", "mots": ["lekt", "lek", "werkt niet", "kapot", "probleem"] },
+      { "label": "dire si tu es intéressé", "etape": "visite", "mots": ["interesse", "geïnteresseerd", "denk", "neem", "graag", "mooi"] }
+    ]
+  }
+}

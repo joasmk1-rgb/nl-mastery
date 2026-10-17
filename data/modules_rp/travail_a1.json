@@ -1,0 +1,1111 @@
+{
+  "_doc": "Module en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "travail_a1",
+  "niveau": "A1",
+  "icone": "🏭",
+  "titre": "Mes premiers jours au travail",
+  "accroche": "Te repérer, parler de tes tâches, demander de l'aide, comprendre une consigne et signaler un problème.",
+  "objectif": "À la fin du module, tu sais te débrouiller tes premiers jours au travail : comprendre ce qu'on te demande, poser des questions, demander de l'aide et dire quand quelque chose ne va pas.",
+  "etapes": [
+    {
+      "id": "lieu",
+      "titre": "Se repérer sur le lieu de travail",
+      "intro": "Les lieux et objets du travail, et demander où ils se trouvent : le bureau, l'entrepôt, l'imprimante, le réfectoire, les vestiaires.",
+      "roles": {
+        "A": "Ta collègue Lotte",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Welkom! Ik toon je even het gebouw.",
+          "fr": "Bienvenue ! Je te montre le bâtiment."
+        },
+        {
+          "qui": "B",
+          "nl": "Graag. Waar is de printer?",
+          "fr": "Volontiers. Où est l'imprimante ?"
+        },
+        {
+          "qui": "A",
+          "nl": "De printer staat naast de keuken.",
+          "fr": "L'imprimante est à côté de la cuisine."
+        },
+        {
+          "qui": "B",
+          "nl": "En waar is het magazijn?",
+          "fr": "Et où est l'entrepôt ?"
+        },
+        {
+          "qui": "A",
+          "nl": "Het magazijn is beneden. De kleedkamers zijn daar ook.",
+          "fr": "L'entrepôt est en bas. Les vestiaires sont là aussi."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "tonen",
+          "vinden",
+          "zoeken",
+          "binnenkomen"
+        ],
+        "mots": [
+          {
+            "nl": "het gebouw",
+            "fr": "le bâtiment"
+          },
+          {
+            "nl": "het kantoor",
+            "fr": "le bureau (pièce)"
+          },
+          {
+            "nl": "het magazijn",
+            "fr": "l'entrepôt"
+          },
+          {
+            "nl": "de printer",
+            "fr": "l'imprimante"
+          },
+          {
+            "nl": "de computer",
+            "fr": "l'ordinateur"
+          },
+          {
+            "nl": "de vergaderzaal",
+            "fr": "la salle de réunion"
+          },
+          {
+            "nl": "de refter",
+            "fr": "le réfectoire"
+          },
+          {
+            "nl": "de kleedkamer",
+            "fr": "le vestiaire"
+          },
+          {
+            "nl": "het onthaal",
+            "fr": "l'accueil"
+          },
+          {
+            "nl": "beneden",
+            "fr": "en bas"
+          },
+          {
+            "nl": "boven",
+            "fr": "en haut"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Waar is de printer?",
+            "fr": "Où est l'imprimante ?"
+          },
+          {
+            "nl": "Kun je mij het magazijn tonen?",
+            "fr": "Tu peux me montrer l'entrepôt ?"
+          },
+          {
+            "nl": "Het is boven, op de eerste verdieping.",
+            "fr": "C'est en haut, au premier étage."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "dit / dat / deze / die",
+        "explication": "Pour montrer : « deze » et « die » avec les noms en « de » et les pluriels (deze printer, die dozen) ; « dit » et « dat » avec les noms en « het » au singulier (dit kantoor, dat magazijn). « deze / dit » = proche (ce…-ci), « die / dat » = loin (ce…-là). « Dat » seul = cela : « Wat is dat? ».",
+        "exemples": [
+          {
+            "nl": "Dit is mijn bureau.",
+            "fr": "Ceci est mon bureau."
+          },
+          {
+            "nl": "Die printer werkt niet.",
+            "fr": "Cette imprimante-là ne marche pas."
+          },
+          {
+            "nl": "Deze dozen moeten naar het magazijn.",
+            "fr": "Ces cartons doivent aller à l'entrepôt."
+          },
+          {
+            "nl": "Wat is dat?",
+            "fr": "Qu'est-ce que c'est ?"
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« cet entrepôt-là » (het magazijn) :",
+          "choices": [
+            "die magazijn",
+            "dat magazijn",
+            "deze magazijn"
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« ces cartons-ci » :",
+          "choices": [
+            "deze dozen",
+            "dit dozen",
+            "dat dozen"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "trou",
+          "phrase": "___ is mijn computer. (ceci)",
+          "answer": "Dit",
+          "fr": "Ceci est mon ordinateur."
+        },
+        {
+          "type": "trou",
+          "phrase": "Het magazijn is ___. (en bas)",
+          "answer": "beneden",
+          "fr": "L'entrepôt est en bas."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "de",
+            "Waar",
+            "kleedkamer?",
+            "is"
+          ],
+          "answer": "Waar is de kleedkamer?",
+          "fr": "Où est le vestiaire ?"
+        },
+        {
+          "type": "traduire",
+          "fr": "la salle de réunion",
+          "answer": "de vergaderzaal"
+        },
+        {
+          "type": "ecoute",
+          "nl": "De printer staat naast de keuken.",
+          "fr": "L'imprimante est à côté de la cuisine."
+        },
+        {
+          "type": "dire",
+          "nl": "Kun je mij het magazijn tonen?",
+          "fr": "Tu peux me montrer l'entrepôt ?"
+        },
+        {
+          "type": "repondre",
+          "question": "Waar werk jij: op kantoor of in het magazijn?",
+          "question_fr": "Où travailles-tu : au bureau ou à l'entrepôt ?",
+          "attendu": [],
+          "un_de": [
+            "kantoor",
+            "magazijn",
+            "thuis",
+            "fabriek"
+          ],
+          "exemple": "Ik werk op kantoor."
+        }
+      ],
+      "jeu": {
+        "titre": "La visite des lieux",
+        "consigne": "C'est ton premier jour. Ta collègue te fait visiter : demande où sont les lieux importants.",
+        "role": "Tu es Lotte, collègue sympathique qui fait visiter le bâtiment (bureaux à l'étage, entrepôt en bas, réfectoire à côté de l'accueil, vestiaires près de l'entrepôt, imprimante à côté de la cuisine). Laisse l'apprenant poser ses questions, réponds simplement, demande s'il a tout compris. Phrases très simples (A1).",
+        "welcome": "Welkom bij Logistiko! Zal ik je eerst het gebouw tonen?"
+      }
+    },
+    {
+      "id": "taches",
+      "titre": "Mes tâches",
+      "intro": "Dire ce que tu fais et ce que tu dois faire : contrôler, encoder, téléphoner, emballer… avec « moeten ».",
+      "roles": {
+        "A": "Ton responsable",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Wat doe je vandaag?",
+          "fr": "Que fais-tu aujourd'hui ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Eerst moet ik de leveringen controleren.",
+          "fr": "D'abord je dois contrôler les livraisons."
+        },
+        {
+          "qui": "A",
+          "nl": "En daarna?",
+          "fr": "Et ensuite ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Daarna moet ik de bestellingen inboeken.",
+          "fr": "Ensuite je dois encoder les commandes."
+        },
+        {
+          "qui": "A",
+          "nl": "Goed. Vergeet niet de klant te bellen.",
+          "fr": "Bien. N'oublie pas d'appeler le client."
+        },
+        {
+          "qui": "B",
+          "nl": "Oké, dat doe ik voor de middag.",
+          "fr": "D'accord, je le fais avant midi."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "controleren",
+          "inboeken",
+          "bellen",
+          "mailen",
+          "inpakken",
+          "plannen",
+          "moeten"
+        ],
+        "mots": [
+          {
+            "nl": "de taak",
+            "fr": "la tâche"
+          },
+          {
+            "nl": "de levering",
+            "fr": "la livraison"
+          },
+          {
+            "nl": "de bestelling",
+            "fr": "la commande"
+          },
+          {
+            "nl": "de klant",
+            "fr": "le client"
+          },
+          {
+            "nl": "de mail",
+            "fr": "le mail"
+          },
+          {
+            "nl": "de doos",
+            "fr": "le carton"
+          },
+          {
+            "nl": "de lijst",
+            "fr": "la liste"
+          },
+          {
+            "nl": "vandaag",
+            "fr": "aujourd'hui"
+          },
+          {
+            "nl": "voor de middag",
+            "fr": "avant midi"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik moet de leveringen controleren.",
+            "fr": "Je dois contrôler les livraisons."
+          },
+          {
+            "nl": "Wat moet ik eerst doen?",
+            "fr": "Que dois-je faire d'abord ?"
+          },
+          {
+            "nl": "Dat doe ik voor de middag.",
+            "fr": "Je le fais avant midi."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "moeten + infinitif (séparable collé)",
+        "explication": "Avec « moeten », l'infinitif va à la fin : « Ik moet de klant bellen ». Un verbe séparable reste ENTIER à l'infinitif : « Ik moet de bestellingen inboeken », « Ik moet de dozen inpakken ». Sans modal, il se sépare : « Ik boek de bestellingen in ». Question : « Wat moet ik doen? », « Moet ik dat vandaag doen? ».",
+        "exemples": [
+          {
+            "nl": "Ik moet de klant bellen.",
+            "fr": "Je dois appeler le client."
+          },
+          {
+            "nl": "Ik moet de bestellingen inboeken.",
+            "fr": "Je dois encoder les commandes."
+          },
+          {
+            "nl": "Ik boek de bestellingen in.",
+            "fr": "J'encode les commandes."
+          },
+          {
+            "nl": "Moet ik dat vandaag doen?",
+            "fr": "Dois-je faire ça aujourd'hui ?"
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Je dois emballer les cartons » :",
+          "choices": [
+            "Ik moet de dozen inpakken.",
+            "Ik moet inpakken de dozen.",
+            "Ik moet de dozen pak in."
+          ],
+          "answer": 0
+        },
+        {
+          "type": "qcm",
+          "q": "« J'encode les commandes » (sans modal) :",
+          "choices": [
+            "Ik inboek de bestellingen.",
+            "Ik boek de bestellingen in.",
+            "Ik boek in de bestellingen in."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Wat ___ ik eerst doen?",
+          "answer": "moet",
+          "fr": "Que dois-je faire d'abord ?"
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik moet de klant ___.",
+          "answer": "bellen",
+          "fr": "Je dois appeler le client."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "controleren.",
+            "moet",
+            "leveringen",
+            "Ik",
+            "de"
+          ],
+          "answer": "Ik moet de leveringen controleren.",
+          "fr": "Je dois contrôler les livraisons."
+        },
+        {
+          "type": "traduire",
+          "fr": "Je le fais avant midi.",
+          "answer": "Dat doe ik voor de middag./Ik doe dat voor de middag."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Vergeet niet de klant te bellen.",
+          "fr": "N'oublie pas d'appeler le client."
+        },
+        {
+          "type": "dire",
+          "nl": "Wat moet ik eerst doen?",
+          "fr": "Que dois-je faire d'abord ?"
+        },
+        {
+          "type": "repondre",
+          "question": "Wat moet je vandaag doen?",
+          "question_fr": "Que dois-tu faire aujourd'hui ?",
+          "attendu": [
+            "moet"
+          ],
+          "exemple": "Ik moet de leveringen controleren."
+        }
+      ],
+      "jeu": {
+        "titre": "Le planning du jour",
+        "consigne": "Ton responsable fait le point avec toi le matin. Dis ce que tu dois faire aujourd'hui et dans quel ordre.",
+        "role": "Tu es Dirk, responsable d'équipe. Le matin, tu demandes à l'employé ce qu'il doit faire aujourd'hui, dans quel ordre, et ajoutes une tâche (appeler un client, préparer une commande urgente). Vérifie qu'il a compris. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen! Wat staat er vandaag op je planning?"
+      }
+    },
+    {
+      "id": "aide",
+      "titre": "Demander de l'aide",
+      "intro": "Demander poliment de l'aide, faire répéter, dire que tu n'as pas compris — sans gêne : c'est normal quand on débute.",
+      "roles": {
+        "A": "Ton collègue Tom",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "B",
+          "nl": "Sorry Tom, kun je mij even helpen?",
+          "fr": "Pardon Tom, tu peux m'aider un instant ?"
+        },
+        {
+          "qui": "A",
+          "nl": "Natuurlijk, wat is er?",
+          "fr": "Bien sûr, qu'est-ce qu'il y a ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Hoe werkt deze scanner?",
+          "fr": "Comment marche ce scanner ?"
+        },
+        {
+          "qui": "A",
+          "nl": "Je drukt op de knop en je scant de code.",
+          "fr": "Tu appuies sur le bouton et tu scannes le code."
+        },
+        {
+          "qui": "B",
+          "nl": "Kun je het nog eens tonen? Ik begrijp het niet goed.",
+          "fr": "Tu peux le remontrer ? Je ne comprends pas bien."
+        },
+        {
+          "qui": "A",
+          "nl": "Geen probleem, kijk.",
+          "fr": "Pas de problème, regarde."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "helpen",
+          "begrijpen",
+          "uitleggen",
+          "tonen",
+          "herhalen",
+          "kunnen"
+        ],
+        "mots": [
+          {
+            "nl": "de hulp",
+            "fr": "l'aide"
+          },
+          {
+            "nl": "de vraag",
+            "fr": "la question"
+          },
+          {
+            "nl": "de scanner",
+            "fr": "le scanner"
+          },
+          {
+            "nl": "de knop",
+            "fr": "le bouton"
+          },
+          {
+            "nl": "de code",
+            "fr": "le code"
+          },
+          {
+            "nl": "nog eens",
+            "fr": "encore une fois"
+          },
+          {
+            "nl": "langzaam",
+            "fr": "lentement"
+          },
+          {
+            "nl": "natuurlijk",
+            "fr": "bien sûr"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Kun je mij even helpen?",
+            "fr": "Tu peux m'aider un instant ?"
+          },
+          {
+            "nl": "Ik begrijp het niet goed.",
+            "fr": "Je ne comprends pas bien."
+          },
+          {
+            "nl": "Kun je dat langzamer zeggen?",
+            "fr": "Tu peux le dire plus lentement ?"
+          },
+          {
+            "nl": "Hoe werkt dit?",
+            "fr": "Comment ça marche ?"
+          }
+        ]
+      },
+      "regle": {
+        "titre": "Les pronoms compléments : mij, je, hem, haar",
+        "explication": "Après un verbe ou une préposition, on utilise la forme complément : mij/me (me, moi), jou/je (te, toi), u (vous, poli), hem (lui), haar (elle), ons (nous), jullie (vous), hen/hun/ze (eux). « Kun je mij helpen? », « Ik bel hem morgen », « Ik geef haar de lijst ». « het » remplace une chose : « Ik begrijp het niet ».",
+        "exemples": [
+          {
+            "nl": "Kun je mij helpen?",
+            "fr": "Tu peux m'aider ?"
+          },
+          {
+            "nl": "Ik vraag het aan hem.",
+            "fr": "Je le demande à lui."
+          },
+          {
+            "nl": "Kunt u ons helpen?",
+            "fr": "Pouvez-vous nous aider ?"
+          },
+          {
+            "nl": "Ik begrijp het niet.",
+            "fr": "Je ne comprends pas."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Tu peux m'aider ? » :",
+          "choices": [
+            "Kun je ik helpen?",
+            "Kun je mij helpen?",
+            "Kun je mijn helpen?"
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Je l'appelle (lui) demain » :",
+          "choices": [
+            "Ik bel hij morgen.",
+            "Ik bel hem morgen.",
+            "Ik bel zijn morgen."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik begrijp ___ niet. (le)",
+          "answer": "het",
+          "fr": "Je ne comprends pas."
+        },
+        {
+          "type": "trou",
+          "phrase": "Kun je dat ___ zeggen? (plus lentement)",
+          "answer": "langzamer",
+          "fr": "Tu peux le dire plus lentement ?"
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "deze",
+            "Hoe",
+            "scanner?",
+            "werkt"
+          ],
+          "answer": "Hoe werkt deze scanner?",
+          "fr": "Comment marche ce scanner ?"
+        },
+        {
+          "type": "traduire",
+          "fr": "Tu peux le remontrer ?",
+          "answer": "Kun je het nog eens tonen?"
+        },
+        {
+          "type": "ecoute",
+          "nl": "Je drukt op de knop en je scant de code.",
+          "fr": "Tu appuies sur le bouton et tu scannes le code."
+        },
+        {
+          "type": "dire",
+          "nl": "Sorry, kun je mij even helpen?",
+          "fr": "Pardon, tu peux m'aider un instant ?"
+        },
+        {
+          "type": "repondre",
+          "question": "Wat zeg je als je iets niet begrijpt?",
+          "question_fr": "Que dis-tu quand tu ne comprends pas quelque chose ?",
+          "attendu": [],
+          "un_de": [
+            "begrijp",
+            "herhalen",
+            "langzamer",
+            "nog eens"
+          ],
+          "exemple": "Sorry, ik begrijp het niet. Kun je het herhalen?"
+        }
+      ],
+      "jeu": {
+        "titre": "Bloqué sur un outil",
+        "consigne": "Tu ne sais pas utiliser l'outil d'encodage. Demande de l'aide à ton collègue, fais-le répéter si besoin et vérifie que tu as compris.",
+        "role": "Tu es Tom, collègue serviable mais qui parle un peu vite. L'apprenant a besoin d'aide avec le scanner et l'encodage des colis. Explique en 3 étapes, parle un peu vite au début ; s'il demande de répéter ou de ralentir, fais-le plus simplement. Phrases simples (A1).",
+        "welcome": "Ja? Zeg het maar, ik heb even tijd."
+      }
+    },
+    {
+      "id": "consigne",
+      "titre": "Comprendre une consigne",
+      "intro": "Comprendre ce qu'on te demande à l'impératif, dans l'ordre (d'abord, ensuite, enfin), et reformuler pour vérifier.",
+      "roles": {
+        "A": "La responsable",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Zet eerst de dozen op de pallet.",
+          "fr": "Mets d'abord les cartons sur la palette."
+        },
+        {
+          "qui": "A",
+          "nl": "Plak daarna een etiket op elke doos.",
+          "fr": "Colle ensuite une étiquette sur chaque carton."
+        },
+        {
+          "qui": "B",
+          "nl": "Dus eerst de dozen, dan de etiketten?",
+          "fr": "Donc d'abord les cartons, puis les étiquettes ?"
+        },
+        {
+          "qui": "A",
+          "nl": "Juist. En tot slot breng je de pallet naar kaai drie.",
+          "fr": "Exact. Et pour finir tu amènes la palette au quai trois."
+        },
+        {
+          "qui": "B",
+          "nl": "Oké, ik begin meteen.",
+          "fr": "D'accord, je commence tout de suite."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "zetten",
+          "plakken",
+          "brengen",
+          "beginnen",
+          "nakijken"
+        ],
+        "mots": [
+          {
+            "nl": "de pallet",
+            "fr": "la palette"
+          },
+          {
+            "nl": "het etiket",
+            "fr": "l'étiquette"
+          },
+          {
+            "nl": "de kaai",
+            "fr": "le quai"
+          },
+          {
+            "nl": "eerst",
+            "fr": "d'abord"
+          },
+          {
+            "nl": "daarna",
+            "fr": "ensuite"
+          },
+          {
+            "nl": "dan",
+            "fr": "puis"
+          },
+          {
+            "nl": "tot slot",
+            "fr": "pour finir"
+          },
+          {
+            "nl": "meteen",
+            "fr": "tout de suite"
+          },
+          {
+            "nl": "dus",
+            "fr": "donc"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Dus eerst ..., dan ...?",
+            "fr": "Donc d'abord ..., puis ... ?"
+          },
+          {
+            "nl": "Ik begin meteen.",
+            "fr": "Je commence tout de suite."
+          },
+          {
+            "nl": "Is dat alles?",
+            "fr": "C'est tout ?"
+          }
+        ]
+      },
+      "regle": {
+        "titre": "Comprendre l'impératif et reformuler",
+        "explication": "Une consigne est souvent à l'impératif (radical du verbe, en tête de phrase) : « Zet de dozen op de pallet », « Bel de klant », « Kijk de lijst na » (particule à la fin). Pour vérifier que tu as compris, reformule avec « Dus … ? » (donc … ?) : « Dus eerst de dozen, dan de etiketten? ». C'est très apprécié : ça évite les erreurs.",
+        "exemples": [
+          {
+            "nl": "Zet de dozen op de pallet.",
+            "fr": "Mets les cartons sur la palette."
+          },
+          {
+            "nl": "Kijk de lijst na.",
+            "fr": "Vérifie la liste."
+          },
+          {
+            "nl": "Dus ik moet eerst bellen?",
+            "fr": "Donc je dois d'abord appeler ?"
+          },
+          {
+            "nl": "Breng de pallet naar kaai drie.",
+            "fr": "Amène la palette au quai trois."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Kijk de lijst na » veut dire :",
+          "choices": [
+            "Regarde la liste après.",
+            "Vérifie la liste.",
+            "Note la liste."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "Pour vérifier une consigne, tu dis :",
+          "choices": [
+            "Dus eerst de dozen?",
+            "Ik weet het.",
+            "Tot slot."
+          ],
+          "answer": 0
+        },
+        {
+          "type": "trou",
+          "phrase": "___ eerst de dozen op de pallet. (mets)",
+          "answer": "Zet",
+          "fr": "Mets d'abord les cartons sur la palette."
+        },
+        {
+          "type": "trou",
+          "phrase": "Tot ___ breng je de pallet naar kaai drie.",
+          "answer": "slot",
+          "fr": "Pour finir, tu amènes la palette au quai trois."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "begin",
+            "Ik",
+            "meteen."
+          ],
+          "answer": "Ik begin meteen.",
+          "fr": "Je commence tout de suite."
+        },
+        {
+          "type": "traduire",
+          "fr": "C'est tout ?",
+          "answer": "Is dat alles?"
+        },
+        {
+          "type": "ecoute",
+          "nl": "Plak een etiket op elke doos.",
+          "fr": "Colle une étiquette sur chaque carton."
+        },
+        {
+          "type": "dire",
+          "nl": "Dus eerst de dozen, dan de etiketten?",
+          "fr": "Donc d'abord les cartons, puis les étiquettes ?"
+        },
+        {
+          "type": "repondre",
+          "question": "Zet de dozen op de pallet en bel dan de chauffeur. Wat doe je eerst?",
+          "question_fr": "Mets les cartons sur la palette, puis appelle le chauffeur. Que fais-tu d'abord ?",
+          "attendu": [],
+          "un_de": [
+            "dozen",
+            "pallet"
+          ],
+          "exemple": "Eerst zet ik de dozen op de pallet."
+        }
+      ],
+      "jeu": {
+        "titre": "Les consignes de la responsable",
+        "consigne": "Ta responsable te donne une suite de consignes. Reformule pour vérifier, pose des questions si c'est flou, et confirme.",
+        "role": "Tu es Hilde, responsable de l'entrepôt. Donne à l'apprenant une suite de 3-4 consignes à l'impératif (préparer une commande, coller les étiquettes, amener au quai, prévenir le chauffeur). Attends qu'il reformule ou pose des questions ; s'il ne reformule pas, demande-lui « Wat ga je eerst doen? ». Phrases simples (A1).",
+        "welcome": "Ik heb een dringende bestelling voor jou. Luister goed."
+      }
+    },
+    {
+      "id": "probleme",
+      "titre": "Signaler un problème",
+      "intro": "Dire que quelque chose ne marche pas, qu'il manque quelque chose, que tu as fini ou que tu as fait une erreur.",
+      "roles": {
+        "A": "Ton responsable",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "B",
+          "nl": "Dirk, er is een probleem: de printer werkt niet.",
+          "fr": "Dirk, il y a un problème : l'imprimante ne marche pas."
+        },
+        {
+          "qui": "A",
+          "nl": "Heb je het papier gecontroleerd?",
+          "fr": "Tu as vérifié le papier ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ja, er is genoeg papier. Er staat een foutmelding.",
+          "fr": "Oui, il y a assez de papier. Il y a un message d'erreur."
+        },
+        {
+          "qui": "A",
+          "nl": "Oké, ik bel de technieker.",
+          "fr": "D'accord, j'appelle le technicien."
+        },
+        {
+          "qui": "B",
+          "nl": "Dank je. Ik ben klaar met de bestellingen.",
+          "fr": "Merci. J'ai fini les commandes."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "werken",
+          "ontbreken",
+          "melden",
+          "zich vergissen",
+          "afwerken"
+        ],
+        "mots": [
+          {
+            "nl": "het probleem",
+            "fr": "le problème"
+          },
+          {
+            "nl": "de fout",
+            "fr": "l'erreur"
+          },
+          {
+            "nl": "de foutmelding",
+            "fr": "le message d'erreur"
+          },
+          {
+            "nl": "het papier",
+            "fr": "le papier"
+          },
+          {
+            "nl": "kapot",
+            "fr": "cassé"
+          },
+          {
+            "nl": "klaar",
+            "fr": "fini, prêt"
+          },
+          {
+            "nl": "genoeg",
+            "fr": "assez"
+          },
+          {
+            "nl": "er ontbreekt",
+            "fr": "il manque"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Er is een probleem.",
+            "fr": "Il y a un problème."
+          },
+          {
+            "nl": "De printer werkt niet.",
+            "fr": "L'imprimante ne marche pas."
+          },
+          {
+            "nl": "Er ontbreekt een doos.",
+            "fr": "Il manque un carton."
+          },
+          {
+            "nl": "Ik ben klaar.",
+            "fr": "J'ai fini."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "« Er » pour signaler : er is, er ontbreekt",
+        "explication": "Pour annoncer qu'il y a quelque chose (souvent un problème), le néerlandais commence par « er » : « Er is een probleem », « Er ontbreekt een doos » (il manque un carton), « Er staat een foutmelding » (il y a un message d'erreur). « Klaar zijn met » = avoir fini : « Ik ben klaar met de bestellingen ». « Ik heb me vergist » = je me suis trompé.",
+        "exemples": [
+          {
+            "nl": "Er is een probleem met de scanner.",
+            "fr": "Il y a un problème avec le scanner."
+          },
+          {
+            "nl": "Er ontbreken twee dozen.",
+            "fr": "Il manque deux cartons."
+          },
+          {
+            "nl": "Ik ben klaar met de lijst.",
+            "fr": "J'ai fini la liste."
+          },
+          {
+            "nl": "Sorry, ik heb me vergist.",
+            "fr": "Désolé, je me suis trompé."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Il manque un carton » :",
+          "choices": [
+            "Het ontbreekt een doos.",
+            "Er ontbreekt een doos.",
+            "Er is ontbreken een doos."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« J'ai fini » :",
+          "choices": [
+            "Ik heb klaar.",
+            "Ik ben klaar.",
+            "Ik ben gedaan klaar."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "___ is een probleem.",
+          "answer": "Er",
+          "fr": "Il y a un problème."
+        },
+        {
+          "type": "trou",
+          "phrase": "De printer ___ niet.",
+          "answer": "werkt",
+          "fr": "L'imprimante ne marche pas."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "klaar",
+            "Ik",
+            "bestellingen.",
+            "de",
+            "met",
+            "ben"
+          ],
+          "answer": "Ik ben klaar met de bestellingen.",
+          "fr": "J'ai fini les commandes."
+        },
+        {
+          "type": "traduire",
+          "fr": "Désolé, je me suis trompé.",
+          "answer": "Sorry, ik heb me vergist."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Er staat een foutmelding op het scherm.",
+          "fr": "Il y a un message d'erreur à l'écran."
+        },
+        {
+          "type": "dire",
+          "nl": "Er is een probleem: de printer werkt niet.",
+          "fr": "Il y a un problème : l'imprimante ne marche pas."
+        },
+        {
+          "type": "repondre",
+          "question": "Wat zeg je als je klaar bent met je werk?",
+          "question_fr": "Que dis-tu quand tu as fini ton travail ?",
+          "attendu": [
+            "klaar"
+          ],
+          "exemple": "Ik ben klaar met de bestellingen."
+        }
+      ],
+      "jeu": {
+        "titre": "Rien ne marche ce matin",
+        "consigne": "Le scanner ne marche pas et il manque des cartons dans une livraison. Signale les problèmes à ton responsable et dis ce que tu as déjà fini.",
+        "role": "Tu es Dirk, responsable d'équipe occupé. L'employé vient signaler des problèmes. Pose des questions (qu'est-ce qui ne marche pas ? il manque combien ? tu as vérifié ?), propose une solution, demande ce qu'il a déjà fini. Phrases très simples (A1).",
+        "welcome": "Ja, wat is er? Ik heb maar twee minuutjes."
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : ton premier jour",
+    "consigne": "Ton premier jour : ton responsable t'accueille et t'explique tes tâches. Salue-le, pose des questions sur les lieux, reformule ses consignes, demande de l'aide pour ce que tu ne comprends pas, et signale un problème que tu rencontres.",
+    "role": "Tu es Dirk, responsable d'équipe chez Logistiko. C'est le premier jour de l'apprenant. Accueille-le, montre-lui où sont les lieux importants, explique-lui 3 tâches à l'impératif (contrôler les livraisons, encoder les commandes, appeler un client). Parle un peu vite une fois pour qu'il demande de répéter. Au milieu, dis entre crochets que le scanner ne s'allume pas, et attends qu'il te le signale. Termine en lui demandant s'il a des questions. Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Goeiemorgen en welkom! Ik ben Dirk, je verantwoordelijke. Klaar voor je eerste dag?"
+  },
+  "examen": {
+    "reussite": "Tu sais te débrouiller au travail en néerlandais tes premiers jours.",
+    "sujets": [
+      {
+        "label": "saluer",
+        "etape": "lieu",
+        "mots": [
+          "goeiemorgen",
+          "goedemorgen",
+          "hallo",
+          "dag",
+          "aangenaam"
+        ]
+      },
+      {
+        "label": "demander où est quelque chose",
+        "etape": "lieu",
+        "mots": [
+          "waar is",
+          "waar zijn",
+          "waar staat",
+          "waar vind"
+        ]
+      },
+      {
+        "label": "parler d'une tâche",
+        "etape": "taches",
+        "mots": [
+          "moet",
+          "controleren",
+          "inboeken",
+          "bellen",
+          "leveringen",
+          "bestellingen"
+        ]
+      },
+      {
+        "label": "reformuler la consigne",
+        "etape": "consigne",
+        "mots": [
+          "dus",
+          "eerst",
+          "daarna",
+          "dan"
+        ]
+      },
+      {
+        "label": "demander de l'aide ou de répéter",
+        "etape": "aide",
+        "mots": [
+          "helpen",
+          "herhalen",
+          "langzamer",
+          "begrijp",
+          "nog eens",
+          "hoe werkt"
+        ]
+      },
+      {
+        "label": "signaler le problème",
+        "etape": "probleme",
+        "mots": [
+          "probleem",
+          "werkt niet",
+          "kapot",
+          "ontbreekt",
+          "foutmelding"
+        ]
+      },
+      {
+        "label": "confirmer",
+        "etape": "consigne",
+        "mots": [
+          "oké",
+          "ok",
+          "begin",
+          "doe ik",
+          "klaar",
+          "goed"
+        ]
+      },
+      {
+        "label": "remercier",
+        "etape": "aide",
+        "mots": [
+          "dank",
+          "bedankt",
+          "merci"
+        ]
+      }
+    ]
+  }
+}

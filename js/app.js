@@ -9164,7 +9164,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // stockés en dur, mini jeu de rôle). Le portrait (questions en français) produit les phrases
         // personnelles de l'apprenant : elles entrent dans les kits, les exercices (« dis-le ») et
         // le prompt des interlocuteurs. Tout vit dans state.modRp[id] (synchronisé, jamais public).
-        const MODRP_IDS = ['premier_contact', 'rendez_vous'];
+        const MODRP_IDS = ['premier_contact', 'rendez_vous', 'courses', 'logement', 'deplacer', 'journee', 'travail_a1', 'weekend'];
+        const MODRP_SPECIAL = {
+            '#epeler': /(^|\s)([a-z][\s,.-]+){3,}/,
+            '#perfectum-hebben': /\b(heb|hebt|heeft|hebben)\b[^.?!]*\b[a-z]*ge[a-z]{2,}(t|d|n)\b/,
+            '#perfectum-zijn': /\b(ben|bent|is|zijn)\b[^.?!]*\b([a-z]*ge[a-z]{2,}(n|d|t)|vertrokken|verhuisd)\b/
+        };
         const MODRP_FILE = 'MON_PORTRAIT';
         const modRpData = {};
         let modRpCurrent = null;   // id du module affiché
@@ -9667,8 +9672,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const text = normalize(userLines.join(' '));
             const topics = (m.examen && Array.isArray(m.examen.sujets)) ? m.examen.sujets.map(s => ({
                 key: s.label, etape: s.etape, label: s.label,
-                // « #epeler » : au moins trois lettres isolées à la suite (« k a y e m b e »).
-                test: (t, pp) => ((s.mots || []).includes('#epeler') && /(^|\s)([a-z][\s,.-]+){3,}/.test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => new RegExp('(^|[^a-z])' + normalize(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t))
+                // Motifs spéciaux : « #epeler » = au moins trois lettres isolées à la suite (« k a y e m b e ») ;
+                // « #perfectum-hebben / -zijn » = auxiliaire puis participe dans la même phrase.
+                test: (t, pp) => (s.mots || []).some(w => w[0] === '#' && (MODRP_SPECIAL[w] || /$^/).test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => new RegExp('(^|[^a-z])' + normalize(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t))
                     || (s.portrait && pp[s.portrait] && t.includes(normalize(String(pp[s.portrait]))))
             })) : MODRP_TOPICS;
             const checks = topics.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));

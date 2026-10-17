@@ -1,0 +1,1121 @@
+{
+  "_doc": "Module en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "journee",
+  "niveau": "A1",
+  "icone": "☀️",
+  "titre": "Ma journée",
+  "accroche": "Raconter ta journée type : le matin, le trajet, le travail, le soir et le week-end.",
+  "objectif": "À la fin du module, tu sais décrire ta journée et tes habitudes : à quelle heure tu fais quoi, combien de fois, et ce qui change le week-end.",
+  "etapes": [
+    {
+      "id": "matin",
+      "titre": "Le matin",
+      "intro": "Se lever, se doucher, prendre le petit-déjeuner… et dire à quelle heure. Quand l'heure est en tête de phrase, le verbe passe avant le sujet.",
+      "roles": {
+        "A": "Une collègue",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Hoe laat sta jij op?",
+          "fr": "À quelle heure te lèves-tu ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik sta om half zeven op.",
+          "fr": "Je me lève à six heures et demie."
+        },
+        {
+          "qui": "A",
+          "nl": "Zo vroeg! Ontbijt je thuis?",
+          "fr": "Si tôt ! Tu prends le petit-déjeuner chez toi ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ja, eerst douche ik en daarna ontbijt ik.",
+          "fr": "Oui, d'abord je me douche et ensuite je déjeune."
+        },
+        {
+          "qui": "A",
+          "nl": "Wat eet je 's ochtends?",
+          "fr": "Que manges-tu le matin ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Meestal brood met kaas en een koffie.",
+          "fr": "En général du pain avec du fromage et un café."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "opstaan",
+          "douchen",
+          "ontbijten",
+          "eten",
+          "drinken"
+        ],
+        "mots": [
+          {
+            "nl": "de ochtend",
+            "fr": "le matin"
+          },
+          {
+            "nl": "'s ochtends",
+            "fr": "le matin (habitude)"
+          },
+          {
+            "nl": "het ontbijt",
+            "fr": "le petit-déjeuner"
+          },
+          {
+            "nl": "de wekker",
+            "fr": "le réveil"
+          },
+          {
+            "nl": "de koffie",
+            "fr": "le café"
+          },
+          {
+            "nl": "de thee",
+            "fr": "le thé"
+          },
+          {
+            "nl": "eerst",
+            "fr": "d'abord"
+          },
+          {
+            "nl": "daarna",
+            "fr": "ensuite"
+          },
+          {
+            "nl": "vroeg",
+            "fr": "tôt"
+          },
+          {
+            "nl": "meestal",
+            "fr": "en général"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik sta om zeven uur op.",
+            "fr": "Je me lève à sept heures."
+          },
+          {
+            "nl": "Om zeven uur sta ik op.",
+            "fr": "À sept heures, je me lève."
+          },
+          {
+            "nl": "Eerst douche ik, daarna ontbijt ik.",
+            "fr": "D'abord je me douche, ensuite je déjeune."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "L'inversion : Om zeven uur sta ik op",
+        "explication": "En néerlandais, le verbe conjugué est TOUJOURS en 2e position. Si la phrase commence par autre chose que le sujet (une heure, « eerst », « daarna », « 's ochtends »…), le sujet passe après le verbe : « Om zeven uur sta ik op », « Daarna ontbijt ik », « 's Ochtends drink ik koffie ». La particule d'un verbe séparable reste à la fin (sta … op).",
+        "exemples": [
+          {
+            "nl": "Ik drink 's ochtends koffie.",
+            "fr": "Je bois du café le matin."
+          },
+          {
+            "nl": "'s Ochtends drink ik koffie.",
+            "fr": "Le matin, je bois du café."
+          },
+          {
+            "nl": "Daarna ontbijt ik.",
+            "fr": "Ensuite, je déjeune."
+          },
+          {
+            "nl": "Om half zeven sta ik op.",
+            "fr": "À six heures et demie, je me lève."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Ensuite, je déjeune » :",
+          "choices": [
+            "Daarna ik ontbijt.",
+            "Daarna ontbijt ik.",
+            "Ik daarna ontbijt."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Je me lève à sept heures » :",
+          "choices": [
+            "Ik opsta om zeven uur.",
+            "Ik sta om zeven uur op.",
+            "Ik sta op om zeven uur op."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Om zeven uur ___ ik op.",
+          "answer": "sta",
+          "fr": "À sept heures, je me lève."
+        },
+        {
+          "type": "trou",
+          "phrase": "___ douche ik, daarna ontbijt ik. (d'abord)",
+          "answer": "Eerst",
+          "fr": "D'abord je me douche, ensuite je déjeune."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "ik",
+            "'s Ochtends",
+            "koffie.",
+            "drink"
+          ],
+          "answer": "'s Ochtends drink ik koffie.",
+          "fr": "Le matin, je bois du café."
+        },
+        {
+          "type": "traduire",
+          "fr": "Je me lève tôt.",
+          "answer": "Ik sta vroeg op."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Mijn wekker gaat om zes uur.",
+          "fr": "Mon réveil sonne à six heures."
+        },
+        {
+          "type": "dire",
+          "nl": "Om half zeven sta ik op.",
+          "fr": "À six heures et demie, je me lève."
+        },
+        {
+          "type": "repondre",
+          "question": "Hoe laat sta je op?",
+          "question_fr": "À quelle heure te lèves-tu ?",
+          "attendu": [
+            "op"
+          ],
+          "exemple": "Ik sta om zeven uur op."
+        }
+      ],
+      "jeu": {
+        "titre": "Lève-tôt ou lève-tard ?",
+        "consigne": "Ta collègue compare vos matinées. Raconte ton matin dans l'ordre, avec les heures.",
+        "role": "Tu es Elke, collègue qui se lève très tôt (5 h 30) pour faire du sport avant le travail. Demande à l'apprenant à quelle heure il se lève, ce qu'il mange, s'il prend une douche le matin, compare avec toi. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen! Ik ben al sinds half zes wakker. En jij, hoe laat sta jij op?"
+      }
+    },
+    {
+      "id": "trajet",
+      "titre": "Partir au travail",
+      "intro": "Dire quand tu pars, comment tu y vas, quand tu arrives et combien de temps ça prend.",
+      "roles": {
+        "A": "Un voisin",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Hoe laat vertrek je 's ochtends?",
+          "fr": "À quelle heure pars-tu le matin ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik vertrek om kwart over zeven.",
+          "fr": "Je pars à sept heures et quart."
+        },
+        {
+          "qui": "A",
+          "nl": "En hoe laat kom je op je werk aan?",
+          "fr": "Et à quelle heure arrives-tu au travail ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Om acht uur. Ik neem de bus.",
+          "fr": "À huit heures. Je prends le bus."
+        },
+        {
+          "qui": "A",
+          "nl": "Dat is lang!",
+          "fr": "C'est long !"
+        },
+        {
+          "qui": "B",
+          "nl": "Ja, maar in de bus lees ik.",
+          "fr": "Oui, mais dans le bus, je lis."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "vertrekken",
+          "aankomen",
+          "nemen",
+          "duren",
+          "lezen"
+        ],
+        "mots": [
+          {
+            "nl": "het werk",
+            "fr": "le travail"
+          },
+          {
+            "nl": "de weg",
+            "fr": "le chemin, la route"
+          },
+          {
+            "nl": "de rit",
+            "fr": "le trajet"
+          },
+          {
+            "nl": "lang",
+            "fr": "long"
+          },
+          {
+            "nl": "kort",
+            "fr": "court"
+          },
+          {
+            "nl": "op tijd",
+            "fr": "à l'heure"
+          },
+          {
+            "nl": "elke dag",
+            "fr": "chaque jour"
+          },
+          {
+            "nl": "onderweg",
+            "fr": "en chemin"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik vertrek om kwart over zeven.",
+            "fr": "Je pars à sept heures et quart."
+          },
+          {
+            "nl": "Ik kom om acht uur aan.",
+            "fr": "J'arrive à huit heures."
+          },
+          {
+            "nl": "De rit duurt drie kwartier.",
+            "fr": "Le trajet dure trois quarts d'heure."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "vertrekken (inséparable) et aankomen (séparable)",
+        "explication": "Certains verbes ne se séparent jamais : vertrekken → « Ik vertrek om zeven uur ». D'autres se séparent : aankomen → « Ik kom om acht uur aan ». Astuce : les préfixes ver-, be-, ont-, her-, ge- ne se séparent jamais ; aan-, op-, uit-, in-, mee-, terug- se séparent. Durée : « drie kwartier » = 45 minutes, « anderhalf uur » = 1 h 30.",
+        "exemples": [
+          {
+            "nl": "Ik vertrek om zeven uur.",
+            "fr": "Je pars à sept heures."
+          },
+          {
+            "nl": "Ik kom om acht uur aan.",
+            "fr": "J'arrive à huit heures."
+          },
+          {
+            "nl": "De bus vertrekt om tien over zeven.",
+            "fr": "Le bus part à sept heures dix."
+          },
+          {
+            "nl": "Het duurt anderhalf uur.",
+            "fr": "Ça dure une heure et demie."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« J'arrive à huit heures » :",
+          "choices": [
+            "Ik aankom om acht uur.",
+            "Ik kom om acht uur aan.",
+            "Ik kom aan om acht uur aan."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "Quel verbe ne se sépare jamais ?",
+          "choices": [
+            "aankomen",
+            "opstaan",
+            "vertrekken"
+          ],
+          "answer": 2
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik ___ om zeven uur. (pars)",
+          "answer": "vertrek",
+          "fr": "Je pars à sept heures."
+        },
+        {
+          "type": "trou",
+          "phrase": "De rit ___ een half uur.",
+          "answer": "duurt",
+          "fr": "Le trajet dure une demi-heure."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "de",
+            "In",
+            "lees",
+            "bus",
+            "ik."
+          ],
+          "answer": "In de bus lees ik.",
+          "fr": "Dans le bus, je lis."
+        },
+        {
+          "type": "traduire",
+          "fr": "J'arrive à l'heure.",
+          "answer": "Ik kom op tijd aan."
+        },
+        {
+          "type": "ecoute",
+          "nl": "De rit duurt drie kwartier.",
+          "fr": "Le trajet dure trois quarts d'heure."
+        },
+        {
+          "type": "dire",
+          "nl": "Ik vertrek om kwart over zeven.",
+          "fr": "Je pars à sept heures et quart."
+        },
+        {
+          "type": "repondre",
+          "question": "Hoe lang duurt jouw rit naar het werk?",
+          "question_fr": "Combien de temps dure ton trajet vers le travail ?",
+          "attendu": [],
+          "un_de": [
+            "minuten",
+            "uur",
+            "kwartier",
+            "duurt"
+          ],
+          "exemple": "Mijn rit duurt een half uur."
+        }
+      ],
+      "jeu": {
+        "titre": "Le voisin curieux",
+        "consigne": "Ton voisin te voit partir tous les matins. Explique quand tu pars, comment tu vas au travail et quand tu arrives.",
+        "role": "Tu es meneer Goossens, voisin retraité curieux. Demande à l'apprenant à quelle heure il part, comment il va au travail, à quelle heure il arrive, combien de temps dure le trajet, ce qu'il fait pendant le trajet. Phrases très simples (A1).",
+        "welcome": "Goeiemorgen! Altijd zo vroeg weg, jij. Hoe laat vertrek je eigenlijk?"
+      }
+    },
+    {
+      "id": "habitudes",
+      "titre": "La journée et les habitudes",
+      "intro": "Dire ce que tu fais pendant la journée et à quelle fréquence : toujours, souvent, parfois, jamais.",
+      "roles": {
+        "A": "Un nouveau collègue",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Wat doe je meestal 's middags?",
+          "fr": "Que fais-tu en général à midi ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Ik eet meestal in de refter met mijn collega's.",
+          "fr": "Je mange en général au réfectoire avec mes collègues."
+        },
+        {
+          "qui": "A",
+          "nl": "Heb je vaak vergaderingen?",
+          "fr": "Tu as souvent des réunions ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Soms, één keer per week.",
+          "fr": "Parfois, une fois par semaine."
+        },
+        {
+          "qui": "A",
+          "nl": "En werk je soms thuis?",
+          "fr": "Et tu travailles parfois de chez toi ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Nee, ik werk nooit thuis.",
+          "fr": "Non, je ne travaille jamais de chez moi."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "werken",
+          "lunchen",
+          "vergaderen",
+          "pauzeren",
+          "mailen"
+        ],
+        "mots": [
+          {
+            "nl": "altijd",
+            "fr": "toujours"
+          },
+          {
+            "nl": "vaak",
+            "fr": "souvent"
+          },
+          {
+            "nl": "meestal",
+            "fr": "la plupart du temps"
+          },
+          {
+            "nl": "soms",
+            "fr": "parfois"
+          },
+          {
+            "nl": "nooit",
+            "fr": "jamais"
+          },
+          {
+            "nl": "elke dag",
+            "fr": "chaque jour"
+          },
+          {
+            "nl": "per week",
+            "fr": "par semaine"
+          },
+          {
+            "nl": "de middagpauze",
+            "fr": "la pause de midi"
+          },
+          {
+            "nl": "de refter",
+            "fr": "le réfectoire"
+          },
+          {
+            "nl": "de vergadering",
+            "fr": "la réunion"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik eet meestal in de refter.",
+            "fr": "Je mange en général au réfectoire."
+          },
+          {
+            "nl": "Ik werk nooit thuis.",
+            "fr": "Je ne travaille jamais de chez moi."
+          },
+          {
+            "nl": "Eén keer per week.",
+            "fr": "Une fois par semaine."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "La place des mots de fréquence",
+        "explication": "Les mots de fréquence (altijd, vaak, meestal, soms, nooit) se placent juste APRÈS le verbe conjugué : « Ik werk vaak thuis », « Ik eet nooit vlees ». Ils peuvent aussi commencer la phrase, avec l'inversion : « Soms werk ik thuis ». « Nooit » sert de négation : pas besoin de « niet ».",
+        "exemples": [
+          {
+            "nl": "Ik kom altijd met de trein.",
+            "fr": "Je viens toujours en train."
+          },
+          {
+            "nl": "Soms werk ik thuis.",
+            "fr": "Parfois, je travaille de chez moi."
+          },
+          {
+            "nl": "Ik eet nooit om twaalf uur.",
+            "fr": "Je ne mange jamais à midi."
+          },
+          {
+            "nl": "Twee keer per week sport ik.",
+            "fr": "Deux fois par semaine, je fais du sport."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Je travaille souvent de chez moi » :",
+          "choices": [
+            "Ik vaak werk thuis.",
+            "Ik werk vaak thuis.",
+            "Vaak ik werk thuis."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« nooit » veut dire :",
+          "choices": [
+            "toujours",
+            "jamais",
+            "parfois"
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "___ werk ik thuis. (parfois)",
+          "answer": "Soms",
+          "fr": "Parfois, je travaille de chez moi."
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik heb ___ keer per week een vergadering.",
+          "answer": "één/een",
+          "fr": "J'ai une réunion une fois par semaine."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "nooit",
+            "vlees.",
+            "Ik",
+            "eet"
+          ],
+          "answer": "Ik eet nooit vlees.",
+          "fr": "Je ne mange jamais de viande."
+        },
+        {
+          "type": "traduire",
+          "fr": "Je mange en général au réfectoire.",
+          "answer": "Ik eet meestal in de refter."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Twee keer per week sport ik na het werk.",
+          "fr": "Deux fois par semaine, je fais du sport après le travail."
+        },
+        {
+          "type": "dire",
+          "nl": "Soms werk ik thuis.",
+          "fr": "Parfois, je travaille de chez moi."
+        },
+        {
+          "type": "repondre",
+          "question": "Wat doe je meestal tijdens de middagpauze?",
+          "question_fr": "Que fais-tu en général pendant la pause de midi ?",
+          "attendu": [
+            "ik"
+          ],
+          "un_de": [
+            "eet",
+            "ga",
+            "wandel",
+            "lees",
+            "drink"
+          ],
+          "exemple": "Meestal eet ik met mijn collega's."
+        }
+      ],
+      "jeu": {
+        "titre": "Les habitudes au travail",
+        "consigne": "Un nouveau collègue te demande comment se passent les journées ici. Décris tes habitudes avec des mots de fréquence.",
+        "role": "Tu es Wout, nouveau collègue. Demande à l'apprenant comment se passe une journée : à quelle heure il commence, où il mange à midi, s'il a souvent des réunions, s'il travaille parfois de chez lui, quand il finit. Phrases très simples (A1).",
+        "welcome": "Hoi! Ik ben hier nieuw. Hoe ziet een gewone werkdag eruit?"
+      }
+    },
+    {
+      "id": "soir",
+      "titre": "Le soir",
+      "intro": "Rentrer, cuisiner, faire du sport, regarder la télé, aller dormir : raconter ta soirée.",
+      "roles": {
+        "A": "Un ami",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Wat doe je 's avonds?",
+          "fr": "Que fais-tu le soir ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Eerst kook ik, en daarna eten we samen.",
+          "fr": "D'abord je cuisine, et ensuite on mange ensemble."
+        },
+        {
+          "qui": "A",
+          "nl": "Kijk je tv?",
+          "fr": "Tu regardes la télé ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Soms, maar ik studeer ook Nederlands.",
+          "fr": "Parfois, mais j'étudie aussi le néerlandais."
+        },
+        {
+          "qui": "A",
+          "nl": "Hoe laat ga je slapen?",
+          "fr": "À quelle heure vas-tu dormir ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Rond elf uur.",
+          "fr": "Vers onze heures."
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "koken",
+          "kijken",
+          "slapen",
+          "studeren",
+          "thuiskomen"
+        ],
+        "mots": [
+          {
+            "nl": "de avond",
+            "fr": "le soir"
+          },
+          {
+            "nl": "'s avonds",
+            "fr": "le soir (habitude)"
+          },
+          {
+            "nl": "het avondeten",
+            "fr": "le repas du soir"
+          },
+          {
+            "nl": "de tv",
+            "fr": "la télé"
+          },
+          {
+            "nl": "de serie",
+            "fr": "la série"
+          },
+          {
+            "nl": "het bed",
+            "fr": "le lit"
+          },
+          {
+            "nl": "rond",
+            "fr": "vers (heure)"
+          },
+          {
+            "nl": "moe",
+            "fr": "fatigué"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik kom om zes uur thuis.",
+            "fr": "Je rentre à six heures."
+          },
+          {
+            "nl": "Ik ga rond elf uur slapen.",
+            "fr": "Je vais dormir vers onze heures."
+          },
+          {
+            "nl": "'s Avonds ben ik moe.",
+            "fr": "Le soir, je suis fatigué."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "gaan + infinitif : ik ga slapen",
+        "explication": "« gaan + infinitif » exprime une action qu'on va faire, souvent un mouvement : « Ik ga slapen » (je vais dormir), « Ik ga sporten ». L'infinitif va à la fin : « Ik ga om elf uur slapen ». gaan : ik ga, jij gaat, hij gaat, wij gaan. Avec « graag » : « Ik ga graag wandelen ».",
+        "exemples": [
+          {
+            "nl": "Ik ga om elf uur slapen.",
+            "fr": "Je vais dormir à onze heures."
+          },
+          {
+            "nl": "Na het eten ga ik wandelen.",
+            "fr": "Après le repas, je vais me promener."
+          },
+          {
+            "nl": "We gaan samen koken.",
+            "fr": "On va cuisiner ensemble."
+          },
+          {
+            "nl": "Ga je vanavond sporten?",
+            "fr": "Tu vas faire du sport ce soir ?"
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Je vais dormir à onze heures » :",
+          "choices": [
+            "Ik ga slapen om elf uur slapen.",
+            "Ik ga om elf uur slapen.",
+            "Ik slapen ga om elf uur."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Je rentre à six heures » (thuiskomen) :",
+          "choices": [
+            "Ik thuiskom om zes uur.",
+            "Ik kom om zes uur thuis.",
+            "Ik kom thuis om zes uur thuis."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Na het eten ___ ik wandelen.",
+          "answer": "ga",
+          "fr": "Après le repas, je vais me promener."
+        },
+        {
+          "type": "trou",
+          "phrase": "'s Avonds ___ ik tv. (regarde)",
+          "answer": "kijk",
+          "fr": "Le soir, je regarde la télé."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "slapen.",
+            "Ik",
+            "rond",
+            "elf",
+            "ga",
+            "uur"
+          ],
+          "answer": "Ik ga rond elf uur slapen.",
+          "fr": "Je vais dormir vers onze heures."
+        },
+        {
+          "type": "traduire",
+          "fr": "Le soir, je suis fatigué.",
+          "answer": "'s Avonds ben ik moe./s avonds ben ik moe"
+        },
+        {
+          "type": "ecoute",
+          "nl": "Eerst kook ik, daarna eten we samen.",
+          "fr": "D'abord je cuisine, ensuite on mange ensemble."
+        },
+        {
+          "type": "dire",
+          "nl": "Ik ga rond elf uur slapen.",
+          "fr": "Je vais dormir vers onze heures."
+        },
+        {
+          "type": "repondre",
+          "question": "Wat doe je 's avonds?",
+          "question_fr": "Que fais-tu le soir ?",
+          "attendu": [
+            "ik"
+          ],
+          "exemple": "'s Avonds kook ik en kijk ik tv."
+        }
+      ],
+      "jeu": {
+        "titre": "Comparer ses soirées",
+        "consigne": "Un ami te raconte ses soirées. Raconte les tiennes : ce que tu fais, avec qui, à quelle heure tu vas dormir.",
+        "role": "Tu es Jens, un ami qui joue au foot deux soirs par semaine et regarde beaucoup de séries. Demande à l'apprenant ce qu'il fait le soir, à quelle heure il rentre, s'il cuisine, s'il regarde des séries, à quelle heure il va dormir. Phrases très simples (A1).",
+        "welcome": "Hé! Wat doe jij eigenlijk zo 's avonds na het werk?"
+      }
+    },
+    {
+      "id": "semaine",
+      "titre": "La semaine et le week-end",
+      "intro": "Comparer la semaine et le week-end, dire ce que tu ne fais PAS (niet) et placer correctement la négation.",
+      "roles": {
+        "A": "Une amie",
+        "B": "Toi"
+      },
+      "dialogue": [
+        {
+          "qui": "A",
+          "nl": "Werk je ook op zaterdag?",
+          "fr": "Tu travailles aussi le samedi ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Nee, op zaterdag werk ik niet.",
+          "fr": "Non, le samedi je ne travaille pas."
+        },
+        {
+          "qui": "A",
+          "nl": "Wat doe je dan in het weekend?",
+          "fr": "Alors, que fais-tu le week-end ?"
+        },
+        {
+          "qui": "B",
+          "nl": "Op zaterdag slaap ik uit en op zondag bezoek ik mijn familie.",
+          "fr": "Le samedi je fais la grasse matinée et le dimanche je rends visite à ma famille."
+        },
+        {
+          "qui": "A",
+          "nl": "Klinkt goed!",
+          "fr": "Ça a l'air bien !"
+        }
+      ],
+      "vocab": {
+        "verbes": [
+          "uitslapen",
+          "bezoeken",
+          "doen",
+          "rusten",
+          "sporten"
+        ],
+        "mots": [
+          {
+            "nl": "het weekend",
+            "fr": "le week-end"
+          },
+          {
+            "nl": "de werkdag",
+            "fr": "le jour de travail"
+          },
+          {
+            "nl": "op zaterdag",
+            "fr": "le samedi"
+          },
+          {
+            "nl": "op zondag",
+            "fr": "le dimanche"
+          },
+          {
+            "nl": "door de week",
+            "fr": "en semaine"
+          },
+          {
+            "nl": "vrij",
+            "fr": "libre, en congé"
+          },
+          {
+            "nl": "de familie",
+            "fr": "la famille"
+          },
+          {
+            "nl": "de boodschappen",
+            "fr": "les courses"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Op zaterdag werk ik niet.",
+            "fr": "Le samedi, je ne travaille pas."
+          },
+          {
+            "nl": "In het weekend slaap ik uit.",
+            "fr": "Le week-end, je fais la grasse matinée."
+          },
+          {
+            "nl": "Door de week sta ik vroeg op.",
+            "fr": "En semaine, je me lève tôt."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "Où mettre « niet » ?",
+        "explication": "« niet » se place en général à la fin de la phrase simple : « Ik werk niet », « Op zaterdag werk ik niet ». Mais il se met DEVANT : un lieu ou une préposition (Ik werk niet in Gent), un adjectif (Ik ben niet moe), un infinitif ou un participe (Ik ga niet sporten), une particule séparable (Ik sta niet vroeg op).",
+        "exemples": [
+          {
+            "nl": "Op zondag werk ik niet.",
+            "fr": "Le dimanche, je ne travaille pas."
+          },
+          {
+            "nl": "Ik ben niet moe.",
+            "fr": "Je ne suis pas fatigué."
+          },
+          {
+            "nl": "Ik ga vandaag niet sporten.",
+            "fr": "Je ne vais pas faire de sport aujourd'hui."
+          },
+          {
+            "nl": "In het weekend sta ik niet vroeg op.",
+            "fr": "Le week-end, je ne me lève pas tôt."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Le samedi, je ne travaille pas » :",
+          "choices": [
+            "Op zaterdag ik werk niet.",
+            "Op zaterdag werk ik niet.",
+            "Op zaterdag niet werk ik."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Je ne suis pas fatigué » :",
+          "choices": [
+            "Ik ben moe niet.",
+            "Ik ben niet moe.",
+            "Ik niet ben moe."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "In het weekend slaap ik ___. (grasse matinée)",
+          "answer": "uit",
+          "fr": "Le week-end, je fais la grasse matinée."
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik ga vandaag ___ sporten.",
+          "answer": "niet",
+          "fr": "Je ne vais pas faire de sport aujourd'hui."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "week",
+            "vroeg",
+            "Door",
+            "sta",
+            "de",
+            "ik",
+            "op."
+          ],
+          "answer": "Door de week sta ik vroeg op.",
+          "fr": "En semaine, je me lève tôt."
+        },
+        {
+          "type": "traduire",
+          "fr": "Le dimanche, je rends visite à ma famille.",
+          "answer": "Op zondag bezoek ik mijn familie."
+        },
+        {
+          "type": "ecoute",
+          "nl": "In het weekend doe ik de boodschappen.",
+          "fr": "Le week-end, je fais les courses."
+        },
+        {
+          "type": "dire",
+          "nl": "Op zaterdag werk ik niet.",
+          "fr": "Le samedi, je ne travaille pas."
+        },
+        {
+          "type": "repondre",
+          "question": "Wat doe je graag in het weekend?",
+          "question_fr": "Qu'aimes-tu faire le week-end ?",
+          "attendu": [
+            "ik"
+          ],
+          "exemple": "In het weekend slaap ik uit en ga ik wandelen."
+        }
+      ],
+      "jeu": {
+        "titre": "Semaine contre week-end",
+        "consigne": "Une amie compare sa semaine et son week-end avec toi. Explique ce qui change, et ce que tu ne fais pas le week-end.",
+        "role": "Tu es Lies, une amie qui travaille aussi le samedi dans un magasin. Demande à l'apprenant s'il travaille le week-end, ce qu'il fait le samedi et le dimanche, ce qu'il ne fait jamais le week-end, compare avec ta semaine. Phrases très simples (A1).",
+        "welcome": "Ik moet zaterdag weer werken in de winkel. Jij ook?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : raconter sa journée type",
+    "consigne": "Un futur colocataire veut savoir si vos rythmes sont compatibles. Raconte ta journée type de A à Z : réveil, trajet, travail, midi, soir, coucher, avec les heures et des mots de fréquence, et ce qui change le week-end.",
+    "role": "Tu es Tibo, étudiant qui cherche un colocataire et veut vérifier si vos rythmes sont compatibles (toi tu te couches tard et tu fais du bruit le soir). Demande à l'apprenant de raconter sa journée type et relance sur ce qu'il oublie : heure du réveil, trajet, travail, repas de midi, soirée, coucher, week-end. Réagis (compatible ou pas). Néerlandais simple (A1-A2), une question à la fois.",
+    "welcome": "Hoi! Leuk dat je komt kijken. Vertel eens: hoe ziet een gewone dag er voor jou uit?"
+  },
+  "examen": {
+    "reussite": "Tu sais raconter ta journée et tes habitudes en néerlandais.",
+    "sujets": [
+      {
+        "label": "le réveil",
+        "etape": "matin",
+        "mots": [
+          "sta op",
+          "opstaan",
+          "wakker",
+          "wekker"
+        ]
+      },
+      {
+        "label": "le petit-déjeuner ou la douche",
+        "etape": "matin",
+        "mots": [
+          "ontbijt",
+          "ontbijten",
+          "douche",
+          "koffie"
+        ]
+      },
+      {
+        "label": "des heures",
+        "etape": "matin",
+        "mots": [
+          "uur",
+          "half",
+          "kwart"
+        ]
+      },
+      {
+        "label": "le trajet",
+        "etape": "trajet",
+        "mots": [
+          "vertrek",
+          "kom aan",
+          "trein",
+          "bus",
+          "fiets",
+          "auto",
+          "rit"
+        ]
+      },
+      {
+        "label": "le travail ou les études",
+        "etape": "habitudes",
+        "mots": [
+          "werk",
+          "kantoor",
+          "school",
+          "studeer",
+          "vergader"
+        ]
+      },
+      {
+        "label": "le soir",
+        "etape": "soir",
+        "mots": [
+          "avond",
+          "kook",
+          "tv",
+          "eten",
+          "thuis"
+        ]
+      },
+      {
+        "label": "le coucher",
+        "etape": "soir",
+        "mots": [
+          "slapen",
+          "bed",
+          "ga slapen"
+        ]
+      },
+      {
+        "label": "des mots de fréquence",
+        "etape": "habitudes",
+        "mots": [
+          "altijd",
+          "vaak",
+          "meestal",
+          "soms",
+          "nooit",
+          "elke dag"
+        ]
+      },
+      {
+        "label": "le week-end",
+        "etape": "semaine",
+        "mots": [
+          "weekend",
+          "zaterdag",
+          "zondag",
+          "uitslapen",
+          "slaap uit"
+        ]
+      }
+    ]
+  }
+}
