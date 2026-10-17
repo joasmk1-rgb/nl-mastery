@@ -4136,6 +4136,7 @@ if (firebaseAvailable) {
                     ${v.exempleNl ? `<div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>` : ''}
                     <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="conjAudioOpen()">🎧 Écouter et répéter</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="conjHandsfreeVerb('${esc(v.infinitief)}')">🗣️ Exercice mains libres (à l'oral)</button>
                     <button type="button" class="report-link" data-report="${encodeURIComponent(JSON.stringify({ kind: 'conjugaison', ref: v.infinitief, nl: v.infinitief, fr: v.fr, context: 'fiche du verbe (précise la forme dans le message)' }))}" onclick="reportFromBtn(this)">⚠️ Signaler une erreur sur ce verbe</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
@@ -4241,8 +4242,8 @@ if (firebaseAvailable) {
             return chip(lang === 'fr', 'fr', '🇫🇷 « tu as appris »') + chip(lang === 'nl', 'nl', '🇳🇱 verbe + temps');
         }
 
-        function conjFrQuestion(v, tense, pronomKey, answer) {
-            if (conjQuestionLang() !== 'fr') return null;
+        function conjFrQuestion(v, tense, pronomKey, answer, force) {
+            if (!force && conjQuestionLang() !== 'fr') return null;
             const forms = conjFrFormsFor(v);
             let person = pronomKey;
             if (pronomKey === 'wij') person = ['wij', 'jullie', 'zij'][Math.floor(Math.random() * 3)];
@@ -4413,12 +4414,12 @@ if (firebaseAvailable) {
 
         // Une écoute courte, sur une instance de reconnaissance dédiée (non continue : elle s'arrête
         // d'elle-même après une phrase), distincte de celle du jeu de rôle.
-        function conjAudioListen() {
+        function conjAudioListen(lang) {
             return new Promise(resolve => {
                 if (!window.SpeechRecognition) return resolve(null);
                 if (rpIsRecording && rpRecognition) rpRecognition.stop();
                 const rec = new window.SpeechRecognition();
-                rec.lang = 'nl-NL';
+                rec.lang = lang || 'nl-NL';
                 rec.continuous = false;
                 rec.interimResults = false;
                 rec.maxAlternatives = 3;
@@ -4706,6 +4707,132 @@ if (firebaseAvailable) {
             }
         }
 
+        // ===== Conjugaison mains libres (à l'oral) =====
+        // L'app lit la question (« tu as appris » en fr2nl, « jij hebt geleerd » en nl2fr), écoute la
+        // réponse dans l'autre langue, dit la bonne réponse et enchaîne seule. Un 2e essai après la
+        // correction (non compté). Seul le sens fr2nl (produire la forme néerlandaise) alimente
+        // state.conjStats, comme l'entraînement écrit. Moteur audio commun (Pause/Passer/Arrêter).
+        async function conjHandsfreeRun(questions, dir, boxId, viewId, onExit) {
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible dans ce navigateur (utilise Chrome)."); return; }
+            questions.forEach(q => { if (!q.frq) q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer, true); });
+            const list = questions.filter(q => q.frq);
+            if (!list.length) { alert('Traductions françaises indisponibles pour ces verbes.'); return; }
+            conjAudioStop();
+            const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId };
+            conjAudioRun = run;
+            try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
+            const box = document.getElementById(boxId);
+            conjHfExit = onExit;
+            box.innerHTML = `
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-title">🗣️ Mains libres · ${dir === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷'}</div>
+                    <div id="conj-hf-now" class="conj-audio-now"></div>
+                    <div class="conj-audio-controls">
+                        <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
+                        <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭ Passer</button>
+                        <button type="button" class="btn btn-gray" onclick="conjAudioStop(); conjHfExit && conjHfExit();">⏹ Arrêter</button>
+                    </div>
+                </div>`;
+            const show = (q, idx, status, reveal) => {
+                const el = document.getElementById('conj-hf-now');
+                if (!el) return;
+                const asked = dir === 'fr2nl' ? q.frq.fr : q.frq.fullAnswer;
+                const expected = dir === 'fr2nl' ? q.frq.fullAnswer : q.frq.fr;
+                el.innerHTML = `<div class="conj-audio-verb"><span>${idx + 1} / ${list.length} · ${rpEscapeHtml(q.verb.infinitief)} · ${CONJ_TENSE_NAMES[q.tense]}</span></div>` +
+                    `<div class="${dir === 'fr2nl' ? 'conj-audio-fr' : 'conj-audio-nl'}">${rpEscapeHtml(asked)}</div>` +
+                    `<div class="${dir === 'fr2nl' ? 'conj-audio-nl' : 'conj-audio-fr'}">${reveal ? rpEscapeHtml(expected) : '…'}</div>` +
+                    (status ? `<div class="conj-audio-status ${status.cls || ''}">${status.html}</div>` : '');
+            };
+            let ok = 0, done = 0;
+            const missed = [];
+            const listenLang = dir === 'fr2nl' ? 'nl-NL' : 'fr-FR';
+            const matches = (heard, q) => {
+                if (!heard || !heard.length) return false;
+                const targets = dir === 'fr2nl' ? [q.frq.fullAnswer, q.answer] : [q.frq.fr];
+                return heard.some(h => targets.some(t => rpSpeechMatch(h, t)));
+            };
+            for (let idx = 0; idx < list.length && !run.stop; idx++) {
+                const q = list[idx];
+                run.skip = false;
+                const asked = dir === 'fr2nl' ? q.frq.fr : q.frq.fullAnswer;
+                const expected = dir === 'fr2nl' ? q.frq.fullAnswer : q.frq.fr;
+                show(q, idx);
+                await conjAudioSay(asked, dir === 'fr2nl' ? 'fr' : 'nl', 0.95);
+                if (run.stop || run.skip) continue;
+                await conjAudioWait(0);
+                show(q, idx, { html: '🎤 À toi…' });
+                const heard = await conjAudioListen(listenLang);
+                if (run.stop || run.skip) continue;
+                if (heard && heard.denied) { show(q, idx, { html: 'Micro refusé : autorise-le dans le navigateur.', cls: 'bad' }); run.stop = true; break; }
+                const good = matches(heard, q);
+                done++;
+                if (good) ok++; else missed.push(q);
+                if (dir === 'fr2nl') conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, good);
+                const said = heard && heard.length ? '« ' + rpEscapeHtml(heard[0]) + ' »' : 'rien entendu';
+                show(q, idx, { html: (good ? '✅ ' : '❌ ') + said, cls: good ? 'good' : 'bad' }, true);
+                await conjAudioSay(expected, dir === 'fr2nl' ? 'nl' : 'fr', 0.95);
+                if (!good && !run.stop && !run.skip) {
+                    show(q, idx, { html: '🔁 Répète : ' + rpEscapeHtml(expected), cls: 'bad' }, true);
+                    const again = await conjAudioListen(listenLang);
+                    if (run.stop) break;
+                    show(q, idx, { html: matches(again, q) ? '👍 C\'est ça' : '➡️ On continue', cls: matches(again, q) ? 'good' : '' }, true);
+                }
+                await conjAudioWait(500);
+            }
+            if (done) save();
+            if (conjAudioRun === run) {
+                conjAudioRelease(run);
+                conjAudioRun = null;
+                box.innerHTML = `
+                    <div class="conj-card conj-audio">
+                        <div class="conj-audio-title">🗣️ Terminé : ${ok}/${done} du premier coup</div>
+                        ${missed.length ? `<div class="section-title">📌 À revoir</div>${missed.map(m => `
+                            <div class="conj-tense-row" style="border-bottom:1px solid var(--border); padding:6px 0;">
+                                <span class="conj-grid-pronom" style="flex:1 1 45%;">${rpEscapeHtml(m.frq.fr)}</span>
+                                <span class="conj-form">${rpEscapeHtml(m.frq.fullAnswer)}</span>${speakBtnHtml(m.frq.fullAnswer)}
+                            </div>`).join('')}` : '<p style="color:var(--success);">Aucune erreur, bravo ! 🎉</p>'}
+                        <button class="btn btn-green" style="margin-top:12px;" onclick="conjHfRestart()">🔁 Recommencer</button>
+                        <button class="btn btn-gray" onclick="conjHfExit && conjHfExit()">⚙️ Retour</button>
+                    </div>`;
+                conjHfLast = { questions, dir, boxId, viewId, onExit };
+            }
+        }
+        let conjHfExit = null, conjHfLast = null;
+        function conjHfRestart() {
+            const l = conjHfLast;
+            if (!l) return;
+            if (l.boxId === 'conj-training-content') { conjTrainingLaunch(); return; }
+            conjHandsfreeRun(l.questions.slice().sort(() => Math.random() - 0.5), l.dir, l.boxId, l.viewId, l.onExit);
+        }
+
+        // Mains libres sur un verbe (fiche) : 10 formes au hasard, sens choisi dans les réglages.
+        function conjHandsfreeVerb(infinitief) {
+            const v = conjugationData.find(x => x.infinitief === infinitief);
+            if (!v) return;
+            const cfg = conjTrainingConfig();
+            const rows = buildConjugationGrid(v);
+            const pool = [];
+            rows.forEach(r => CONJ_TENSES.forEach(t => {
+                if (cfg.skipPresentPlural !== false && conjIsTrivialPlural(v, t, r.pronomKey)) return;
+                pool.push({ verb: v, tense: t, pronomKey: r.pronomKey, answer: r[t], pronom: r.pronom });
+            }));
+            pool.sort(() => Math.random() - 0.5);
+            const box = document.getElementById('conj-exercise-box');
+            const dir = cfg.hfDir === 'nl2fr' ? 'nl2fr' : 'fr2nl';
+            box.innerHTML = `
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-title">🗣️ Mains libres — <b>${rpEscapeHtml(v.infinitief)}</b></div>
+                    <div class="conj-audio-chips">
+                        <button type="button" class="conj-filter-chip${dir === 'fr2nl' ? ' active' : ''}" onclick="conjTrainingConfig().hfDir='fr2nl'; save(); conjHandsfreeVerb('${v.infinitief.replace(/'/g, "\\'")}')">🇫🇷 → 🇳🇱</button>
+                        <button type="button" class="conj-filter-chip${dir === 'nl2fr' ? ' active' : ''}" onclick="conjTrainingConfig().hfDir='nl2fr'; save(); conjHandsfreeVerb('${v.infinitief.replace(/'/g, "\\'")}')">🇳🇱 → 🇫🇷</button>
+                    </div>
+                    <p class="conj-audio-hint">10 formes au hasard. L'app lit, t'écoute, corrige et enchaîne.</p>
+                    <button class="btn btn-green" id="conj-hf-start">▶️ Lancer</button>
+                </div>`;
+            document.getElementById('conj-hf-start').onclick = () => conjHandsfreeRun(pool.slice(0, 10), dir, 'conj-exercise-box', 'conjugaison-view', () => conjHandsfreeVerb(infinitief));
+            box.scrollIntoView({ block: 'start' });
+        }
+
         // ===== Exercices sur la grille de conjugaison =====
         // Pioche des cases (pronom x temps) au hasard dans la grille déjà construite ci-dessus et fait
         // taper la forme correspondante. Réutilise evaluateAnswer() (même tolérance orthographique que
@@ -4962,8 +5089,19 @@ if (firebaseAvailable) {
                         ${chip(cfg.irregOnly, 'conjTrainingToggleIrreg()', '⚡ Irréguliers seulement')}
                         ${chip(conjSkipPresentPlural(), 'conjTrainingToggleSkipPlural(renderConjTrainingSetup)', '⏭️ Sauter le pluriel du présent (= infinitif)')}
                     </div>
+                    <div class="conj-setup-label">Écrit ou à l'oral ?</div>
+                    <div class="conj-filter-chips-row">
+                        ${chip(!cfg.handsfree, 'conjTrainingSetHandsfree(false)', '⌨️ À l\'écrit')}
+                        ${chip(!!cfg.handsfree, 'conjTrainingSetHandsfree(true)', '🗣️ Mains libres (oral)')}
+                    </div>
+                    ${cfg.handsfree ? `<div class="conj-setup-label">Dans quel sens ?</div>
+                    <div class="conj-filter-chips-row">
+                        ${chip(cfg.hfDir !== 'nl2fr', "conjTrainingSetHfDir('fr2nl')", '🇫🇷 → 🇳🇱 j\'entends le français, je dis le néerlandais')}
+                        ${chip(cfg.hfDir === 'nl2fr', "conjTrainingSetHfDir('nl2fr')", '🇳🇱 → 🇫🇷 j\'entends le néerlandais, je dis le français')}
+                    </div>
+                    <p class="conj-audio-hint">L'app lit chaque question, t'écoute, te dit la bonne réponse et passe à la suivante toute seule. Garde l'écran allumé.</p>` : `
                     <div class="conj-setup-label">Comment poser la question ?</div>
-                    <div class="conj-filter-chips-row">${conjQuestionLangChipsHtml('renderConjTrainingSetup')}</div>
+                    <div class="conj-filter-chips-row">${conjQuestionLangChipsHtml('renderConjTrainingSetup')}</div>`}
                     <div class="conj-setup-label">Quels temps ?</div>
                     <div class="conj-filter-chips-row">
                         ${CONJ_TENSES.map(t => chip(cfg.tenses.includes(t), `conjTrainingToggleTense('${t}')`, CONJ_TENSE_NAMES[t])).join('')}
@@ -4975,9 +5113,16 @@ if (firebaseAvailable) {
                 </div>`;
         }
 
+        function conjTrainingSetHandsfree(on) { conjTrainingConfig().handsfree = !!on; save(); renderConjTrainingSetup(); }
+        function conjTrainingSetHfDir(dir) { conjTrainingConfig().hfDir = dir; save(); renderConjTrainingSetup(); }
+
         function conjTrainingLaunch() {
             const questions = pickConjTrainingQuestions(conjTrainingConfig());
             if (!questions.length) return;
+            if (conjTrainingConfig().handsfree) {
+                conjHandsfreeRun(questions, conjTrainingConfig().hfDir === 'nl2fr' ? 'nl2fr' : 'fr2nl', 'conj-training-content', 'conj-training-view', () => renderConjTrainingSetup());
+                return;
+            }
             questions.forEach(q => { q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer); });
             conjTrainingState = { questions, index: 0, score: 0, missed: [] };
             renderConjTrainingQuestion();
