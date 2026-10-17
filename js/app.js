@@ -4184,6 +4184,10 @@ if (firebaseAvailable) {
         // fait partie de la réponse attendue, mais une réponse sans pronom est aussi acceptée.
         // Pour les lignes regroupées de la grille (wij/jullie/zij, et ik/jij/hij au prétérit), la
         // personne est tirée au sort pour varier les questions.
+        function conjExerciseRestart() {
+            if (conjExerciseState) conjExerciseStart(conjExerciseState.verb.infinitief);
+        }
+
         function conjExerciseRelang() {
             const st = conjExerciseState;
             if (!st) return;
@@ -4680,7 +4684,10 @@ if (firebaseAvailable) {
             const rows = buildConjugationGrid(v);
             const tenses = ['present', 'futur', 'imperfectum', 'perfectum'];
             const pool = [];
-            rows.forEach(r => tenses.forEach(t => pool.push({ pronom: r.pronom, pronomKey: r.pronomKey, tense: t, answer: r[t] })));
+            rows.forEach(r => tenses.forEach(t => {
+                if (conjSkipPresentPlural() && conjIsTrivialPlural(v, t, r.pronomKey)) return;
+                pool.push({ pronom: r.pronom, pronomKey: r.pronomKey, tense: t, answer: r[t] });
+            }));
             // Mélange (Fisher-Yates) puis limite à 8 questions par session — assez pour réviser un
             // verbe sans que ce soit trop long.
             for (let i = pool.length - 1; i > 0; i--) {
@@ -4710,7 +4717,7 @@ if (firebaseAvailable) {
             box.innerHTML = `
                 <div class="conj-card">
                     <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.pool.length} · Score : ${st.score}</div>
-                    <div class="conj-filter-chips-row" style="margin-bottom:8px;">${conjQuestionLangChipsHtml('conjExerciseRelang')}</div>
+                    <div class="conj-filter-chips-row" style="margin-bottom:8px;">${conjQuestionLangChipsHtml('conjExerciseRelang')}<button type="button" class="conj-filter-chip${conjSkipPresentPlural() ? ' active' : ''}" onclick="conjTrainingToggleSkipPlural(conjExerciseRestart)">⏭️ Sans pluriel du présent</button></div>
                     ${q.frq
                         ? `<div class="conj-question-fr">${rpEscapeHtml(q.frq.fr)}</div><div class="conj-question-hint">${st.verb.infinitief} · ${CONJ_TENSE_NAMES[q.tense]}</div>`
                         : `<div style="font-weight:600; margin-bottom:10px;">${q.pronom} — ${st.verb.infinitief} (${st.verb.fr}) — ${CONJ_TENSE_LABELS[q.tense]}</div>`}
@@ -4798,6 +4805,7 @@ if (firebaseAvailable) {
             conjTrainingVerbPool(cfg).forEach(v => {
                 const rows = buildConjugationGrid(v);
                 cfg.tenses.forEach(t => rows.forEach(r => {
+                    if (cfg.skipPresentPlural !== false && conjIsTrivialPlural(v, t, r.pronomKey)) return;
                     if (t === 'imperfectum' && (r.pronomKey === 'ik' || r.pronomKey === 'jij')) return;
                     cells.push({
                         verb: v, tense: t, pronomKey: r.pronomKey, answer: r[t],
@@ -4863,6 +4871,19 @@ if (firebaseAvailable) {
         }
 
         function conjTrainingSetRange(n) { conjTrainingConfig().range = n; save(); renderConjTrainingSetup(); }
+        // Au présent, le pluriel (wij / jullie / zij) est simplement l'infinitif : « wij werken ».
+        // Option pour ne pas être interrogé dessus (activée par défaut). Les verbes à particule
+        // séparable restent posés, leur pluriel n'étant pas l'infinitif (« wij bieden aan »).
+        function conjIsTrivialPlural(v, tense, pronomKey) {
+            return tense === 'present' && pronomKey === 'wij' && v.present && v.present.wij === v.infinitief;
+        }
+        function conjSkipPresentPlural() { return conjTrainingConfig().skipPresentPlural !== false; }
+        function conjTrainingToggleSkipPlural(rerender) {
+            const c = conjTrainingConfig();
+            c.skipPresentPlural = !conjSkipPresentPlural();
+            save();
+            if (rerender) rerender();
+        }
         function conjTrainingToggleIrreg() { const c = conjTrainingConfig(); c.irregOnly = !c.irregOnly; save(); renderConjTrainingSetup(); }
         function conjTrainingToggleTense(t) {
             const c = conjTrainingConfig();
@@ -4892,6 +4913,7 @@ if (firebaseAvailable) {
                     <div class="conj-filter-chips-row">
                         ${CONJ_RANGE_CHIPS.map(c => chip(c.key === cfg.range, `conjTrainingSetRange(${c.key})`, c.key ? c.label.replace('Top', 'Les') + ' plus courants' : 'Tous')).join('')}
                         ${chip(cfg.irregOnly, 'conjTrainingToggleIrreg()', '⚡ Irréguliers seulement')}
+                        ${chip(conjSkipPresentPlural(), 'conjTrainingToggleSkipPlural(renderConjTrainingSetup)', '⏭️ Sauter le pluriel du présent (= infinitif)')}
                     </div>
                     <div class="conj-setup-label">Comment poser la question ?</div>
                     <div class="conj-filter-chips-row">${conjQuestionLangChipsHtml('renderConjTrainingSetup')}</div>
