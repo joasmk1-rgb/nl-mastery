@@ -1647,6 +1647,104 @@ if (firebaseAvailable) {
             return `<button type="button" class="speak-btn" style="${extraStyle || ''}" onclick="event.stopPropagation(); speakNL('${safe}')" title="Écouter la prononciation" aria-label="Écouter la prononciation">🔊</button>`;
         }
 
+        // ===== Signaler une erreur =====
+        // Bouton ⚠️ à côté d'un mot, d'une forme conjuguée ou d'une question : l'apprenant signale
+        // une traduction douteuse sans quitter sa session. Les signalements vivent dans
+        // state.reports (objet id → signalement, donc synchronisé entre appareils comme le reste ;
+        // « traité » = done:true, jamais supprimé, pour que la fusion ne le fasse pas revenir).
+        // Profil → 🚩 Mes signalements : copier ou télécharger la liste pour la corriger.
+        function reportBtnHtml(payload) {
+            const data = encodeURIComponent(JSON.stringify(payload));
+            return `<button type="button" class="report-btn" data-report="${data}" onclick="event.stopPropagation(); reportFromBtn(this)" title="Signaler une erreur" aria-label="Signaler une erreur">⚠️</button>`;
+        }
+
+        function reportFromBtn(btn) {
+            let payload = {};
+            try { payload = JSON.parse(decodeURIComponent(btn.dataset.report)); } catch (e) { return; }
+            if (reportIssue(payload)) { btn.innerText = '✅'; btn.disabled = true; }
+        }
+
+        function reportIssue(payload) {
+            const what = [payload.nl, payload.fr].filter(Boolean).join(' = ');
+            const note = window.prompt('Signaler une erreur sur :\n' + what + '\n\nQu\'est-ce qui ne va pas ? (facultatif, ex. « la traduction devrait être… »)', '');
+            if (note === null) return false; // annulé
+            if (!state.reports) state.reports = {};
+            const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+            state.reports[id] = {
+                kind: String(payload.kind || 'mot'), ref: String(payload.ref || ''), nl: String(payload.nl || ''),
+                fr: String(payload.fr || ''), context: String(payload.context || ''), note: note.trim(),
+                at: Date.now(), done: false
+            };
+            save();
+            return true;
+        }
+
+        function reportCurrentItem() {
+            if (!currentItem) return;
+            if (reportIssue({ kind: 'mot', ref: currentItem.id, nl: currentItem.nl, fr: currentItem.fr, context: categoryLabel(currentItem.file) })) {
+                const btn = document.getElementById('study-report-btn');
+                if (btn) { btn.innerText = '✅ Signalé'; setTimeout(() => { btn.innerText = '⚠️ Signaler'; }, 1500); }
+            }
+        }
+
+        function openReports() {
+            return Object.entries(state.reports || {}).filter(([, r]) => !r.done).sort((a, b) => a[1].at - b[1].at);
+        }
+
+        function reportsAsText() {
+            const list = openReports();
+            if (!list.length) return 'Aucun signalement en attente.';
+            return 'Signalements NL Mastery (' + list.length + ') :\n' + list.map(([, r]) =>
+                `- [${r.kind}] ${r.nl}${r.fr ? ' = ' + r.fr : ''}${r.context ? ' (' + r.context + ')' : ''}${r.ref && r.ref !== r.nl ? ' · réf. ' + r.ref : ''}${r.note ? ' → ' + r.note : ''} · ${new Date(r.at).toLocaleDateString('fr-BE')}`
+            ).join('\n');
+        }
+
+        async function reportsCopy() {
+            const text = reportsAsText();
+            try { await navigator.clipboard.writeText(text); alert('Liste copiée : colle-la dans ta conversation avec Claude.'); }
+            catch (e) { window.prompt('Copie ce texte :', text); }
+        }
+
+        function reportsDownload() {
+            const list = openReports().map(([id, r]) => Object.assign({ id }, r));
+            const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'nl-mastery-signalements-' + new Date().toISOString().slice(0, 10) + '.json';
+            document.body.appendChild(a); a.click(); a.remove();
+        }
+
+        function reportsMarkDone(id) {
+            const list = id ? [[id, state.reports[id]]] : openReports();
+            if (!id && !confirm('Marquer les ' + list.length + ' signalement(s) comme traités ?')) return;
+            list.forEach(([, r]) => { if (r) r.done = true; });
+            save();
+            renderProfil();
+        }
+
+        function reportsSectionHtml(openSections) {
+            const list = openReports();
+            const rows = list.map(([id, r]) => `
+                <div class="report-row">
+                    <div><b>${rpEscapeHtml(r.nl)}</b>${r.fr ? ' = ' + rpEscapeHtml(r.fr) : ''}
+                        <div class="report-meta">${rpEscapeHtml(r.kind)}${r.context ? ' · ' + rpEscapeHtml(r.context) : ''} · ${new Date(r.at).toLocaleDateString('fr-BE')}</div>
+                        ${r.note ? `<div class="report-note">« ${rpEscapeHtml(r.note)} »</div>` : ''}</div>
+                    <button type="button" class="conj-filter-chip" onclick="reportsMarkDone('${id}')">✓ Traité</button>
+                </div>`).join('');
+            return `
+                <details class="profil-section" id="profil-sec-reports" ${openSections.includes('profil-sec-reports') ? 'open' : ''}>
+                <summary>🚩 Mes signalements${list.length ? ' (' + list.length + ')' : ''}</summary>
+                <div class="study-box" style="text-align:left;">
+                    <p style="font-size:0.85rem;">Les erreurs signalées avec ⚠️ pendant tes sessions. Une fois par semaine : copie la liste et donne-la à Claude pour qu'il corrige, puis marque-les comme traitées.</p>
+                    ${list.length ? rows : '<p style="color:var(--text-secondary);">Aucun signalement en attente.</p>'}
+                    ${list.length ? `
+                        <button class="btn btn-green" onclick="reportsCopy()">📋 Copier la liste</button>
+                        <button class="btn btn-gray" onclick="reportsDownload()">📥 Télécharger (fichier)</button>
+                        <button class="btn btn-gray" onclick="reportsMarkDone()">✓ Tout marquer comme traité</button>` : ''}
+                </div>
+                </details>`;
+        }
+
         // Bouton 🇫🇷 "traduire à la demande" : beaucoup de contenus du curriculum (exemples,
         // vocabulaire, réponses d'exercice) n'ont pas de traduction française stockée en dur.
         // Plutôt que de traduire ~980 items dans les données, ce bouton appelle Gemini pour UN
@@ -1834,6 +1932,13 @@ if (firebaseAvailable) {
             } catch (e) {
                 console.warn('Conjugaison non chargée :', e);
                 conjugationLoaded = false;
+            }
+            // Traduction française de chaque forme, générée une fois pour toutes (voir
+            // tools/noyau/build_conjugation_fr.py) : plus besoin de Gemini pour la conjugaison.
+            try {
+                conjFrStatic = await fetch('data/curriculum/conjugation_fr.json').then(r => r.ok ? r.json() : {});
+            } catch (e) {
+                conjFrStatic = {};
             }
         }
 
@@ -3999,6 +4104,7 @@ if (firebaseAvailable) {
                     ${v.exempleNl ? `<div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>` : ''}
                     <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="conjAudioOpen()">🎧 Écouter et répéter</button>
+                    <button type="button" class="report-link" data-report="${encodeURIComponent(JSON.stringify({ kind: 'conjugaison', ref: v.infinitief, nl: v.infinitief, fr: v.fr, context: 'fiche du verbe (précise la forme dans le message)' }))}" onclick="reportFromBtn(this)">⚠️ Signaler une erreur sur ce verbe</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
             document.getElementById('conj-detail').scrollIntoView({ block: 'start' });
@@ -4018,7 +4124,15 @@ if (firebaseAvailable) {
         // Les 6 personnes sont demandées (jullie = vous, zij = ils) : la fiche n'en affiche que 4,
         // mais le mode audio "écouter et répéter" récite le pluriel complet. Les entrées en cache
         // d'avant cet ajout (4 personnes) sont redemandées quand `full` est exigé.
+        let conjFrStatic = {}; // data/curriculum/conjugation_fr.json, chargé au démarrage
+
+        // Formes françaises déjà disponibles sans appel réseau : fichier généré, sinon cache Gemini.
+        function conjFrFormsFor(v) {
+            return conjFrStatic[v.infinitief] || conjFrCacheGet()[v.infinitief] || null;
+        }
+
         async function conjFetchFrenchForms(v, full) {
+            if (conjFrStatic[v.infinitief]) return conjFrStatic[v.infinitief];
             const cached = conjFrCacheGet()[v.infinitief];
             if (cached && (!full || CONJ_TENSES.every(t => cached[t] && cached[t].jullie && cached[t].zij))) return cached;
             if (!GeminiService.isAvailable()) throw new Error('Gemini non configuré');
@@ -4043,7 +4157,7 @@ if (firebaseAvailable) {
 
         async function conjLoadFrenchForms(v) {
             const setNote = msg => { const n = document.getElementById('conj-fr-note'); if (n) n.innerText = msg; };
-            let data = conjFrCacheGet()[v.infinitief];
+            let data = conjFrFormsFor(v);
             if (!data) {
                 if (!GeminiService.isAvailable()) {
                     setNote('Traduction de chaque forme : nécessite Gemini (Profil → 🤖 Intelligence IA).');
@@ -4062,7 +4176,54 @@ if (firebaseAvailable) {
                 const el = document.getElementById('conj-fr-' + t + '-' + p);
                 if (el && data[t] && data[t][p]) el.innerText = String(data[t][p]);
             }));
-            setNote('Traductions françaises générées par IA : elles peuvent contenir une erreur.');
+            setNote('Traductions françaises générées automatiquement : une erreur ? Signale-la avec ⚠️ ci-dessous.');
+        }
+
+        // ===== Question en français dans les exercices de conjugaison =====
+        // « tu as appris → jij hebt geleerd » au lieu de « jij — leren — au perfectum ». Le pronom
+        // fait partie de la réponse attendue, mais une réponse sans pronom est aussi acceptée.
+        // Pour les lignes regroupées de la grille (wij/jullie/zij, et ik/jij/hij au prétérit), la
+        // personne est tirée au sort pour varier les questions.
+        function conjExerciseRelang() {
+            const st = conjExerciseState;
+            if (!st) return;
+            st.pool.forEach(q => { q.frq = conjFrQuestion(st.verb, q.tense, q.pronomKey, q.answer); });
+            conjExerciseRenderQuestion();
+        }
+
+        function conjQuestionLang() {
+            return (state.settings && state.settings.conjQuestionLang === 'nl') ? 'nl' : 'fr';
+        }
+        function conjSetQuestionLang(lang, rerender) {
+            state.settings.conjQuestionLang = lang;
+            save();
+            if (rerender) rerender();
+        }
+        function conjQuestionLangChipsHtml(rerenderName) {
+            const lang = conjQuestionLang();
+            const chip = (active, val, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="conjSetQuestionLang('${val}', ${rerenderName})">${label}</button>`;
+            return chip(lang === 'fr', 'fr', '🇫🇷 « tu as appris »') + chip(lang === 'nl', 'nl', '🇳🇱 verbe + temps');
+        }
+
+        function conjFrQuestion(v, tense, pronomKey, answer) {
+            if (conjQuestionLang() !== 'fr') return null;
+            const forms = conjFrFormsFor(v);
+            let person = pronomKey;
+            if (pronomKey === 'wij') person = ['wij', 'jullie', 'zij'][Math.floor(Math.random() * 3)];
+            else if (tense === 'imperfectum' && pronomKey === 'hij' && answer === v.preteritum) person = ['ik', 'jij', 'hij'][Math.floor(Math.random() * 3)];
+            const fr = forms && forms[tense] && forms[tense][person];
+            if (!fr) return null;
+            return { fr: String(fr), fullAnswer: person + ' ' + answer };
+        }
+
+        // Accepte la réponse avec ou sans pronom ; renvoie le meilleur des deux jugements.
+        function conjEvaluate(input, q) {
+            const withPronoun = q.frq ? evaluateAnswer(input, q.frq.fullAnswer) : null;
+            const bare = evaluateAnswer(input, q.answer);
+            if (withPronoun && withPronoun.status === 'correct') return withPronoun;
+            if (bare.status === 'correct') return bare;
+            if (withPronoun && withPronoun.status === 'close') return withPronoun;
+            return bare;
         }
 
         // ===== Écouter et répéter (conjugaison à l'oral) =====
@@ -4526,7 +4687,9 @@ if (firebaseAvailable) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [pool[i], pool[j]] = [pool[j], pool[i]];
             }
-            conjExerciseState = { verb: v, pool: pool.slice(0, 8), index: 0, score: 0 };
+            const chosen = pool.slice(0, 8);
+            chosen.forEach(q => { q.frq = conjFrQuestion(v, q.tense, q.pronomKey, q.answer); });
+            conjExerciseState = { verb: v, pool: chosen, index: 0, score: 0 };
             conjExerciseRenderQuestion();
         }
 
@@ -4547,8 +4710,11 @@ if (firebaseAvailable) {
             box.innerHTML = `
                 <div class="conj-card">
                     <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.pool.length} · Score : ${st.score}</div>
-                    <div style="font-weight:600; margin-bottom:10px;">${q.pronom} — ${st.verb.infinitief} (${st.verb.fr}) — ${CONJ_TENSE_LABELS[q.tense]}</div>
-                    <input type="text" id="conj-ex-input" placeholder="Tape la forme conjuguée..." style="width:100%; margin-bottom:8px;" autocomplete="off" onkeypress="if(event.key==='Enter') conjExerciseCheck()">
+                    <div class="conj-filter-chips-row" style="margin-bottom:8px;">${conjQuestionLangChipsHtml('conjExerciseRelang')}</div>
+                    ${q.frq
+                        ? `<div class="conj-question-fr">${rpEscapeHtml(q.frq.fr)}</div><div class="conj-question-hint">${st.verb.infinitief} · ${CONJ_TENSE_NAMES[q.tense]}</div>`
+                        : `<div style="font-weight:600; margin-bottom:10px;">${q.pronom} — ${st.verb.infinitief} (${st.verb.fr}) — ${CONJ_TENSE_LABELS[q.tense]}</div>`}
+                    <input type="text" id="conj-ex-input" placeholder="${q.frq ? 'En néerlandais, avec le pronom...' : 'Tape la forme conjuguée...'}" style="width:100%; margin-bottom:8px;" autocomplete="off" onkeypress="if(event.key==='Enter') conjExerciseCheck()">
                     <div class="acc-error" id="conj-ex-feedback"></div>
                     <button class="btn btn-green" onclick="conjExerciseCheck()">Vérifier</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="conjExerciseStop()">Arrêter</button>
@@ -4563,23 +4729,28 @@ if (firebaseAvailable) {
             const input = document.getElementById('conj-ex-input');
             const fb = document.getElementById('conj-ex-feedback');
             const q = st.pool[st.index];
-            const result = evaluateAnswer(input.value, q.answer);
+            if (st.checking) return;
+            st.checking = true;
+            const result = conjEvaluate(input.value, q);
+            const shown = q.frq ? q.frq.fullAnswer : q.answer;
             if (result.status === 'correct') {
                 st.score++;
                 fb.style.color = 'var(--success)';
-                fb.innerText = '✅ Bravo ! → ' + q.answer;
+                fb.innerText = '✅ Bravo ! → ' + shown;
             } else if (result.status === 'close') {
                 st.score++;
                 fb.style.color = 'var(--success)';
-                fb.innerText = '🟡 Presque, on valide ! → ' + q.answer;
+                fb.innerText = '🟡 Presque, on valide ! → ' + shown;
             } else {
                 fb.style.color = 'var(--wrong)';
-                fb.innerText = '❌ → ' + q.answer;
+                fb.innerText = '❌ → ' + shown;
             }
+            fb.insertAdjacentHTML('beforeend', ' ' + reportBtnHtml({ kind: 'conjugaison', ref: st.verb.infinitief, nl: shown, fr: q.frq ? q.frq.fr : st.verb.fr, context: CONJ_TENSE_NAMES[q.tense] + ' · ' + q.pronom }));
             conjRecordResult(st.verb.infinitief, q.tense, q.pronomKey, result.status !== 'wrong');
             save();
             st.index++;
-            setTimeout(conjExerciseRenderQuestion, 1300);
+            // Plus de temps sur une erreur, pour lire la réponse (et la signaler si elle est fausse).
+            setTimeout(() => { st.checking = false; conjExerciseRenderQuestion(); }, result.status === 'wrong' ? 2600 : 1300);
         }
 
         function conjExerciseStop() {
@@ -4722,6 +4893,8 @@ if (firebaseAvailable) {
                         ${CONJ_RANGE_CHIPS.map(c => chip(c.key === cfg.range, `conjTrainingSetRange(${c.key})`, c.key ? c.label.replace('Top', 'Les') + ' plus courants' : 'Tous')).join('')}
                         ${chip(cfg.irregOnly, 'conjTrainingToggleIrreg()', '⚡ Irréguliers seulement')}
                     </div>
+                    <div class="conj-setup-label">Comment poser la question ?</div>
+                    <div class="conj-filter-chips-row">${conjQuestionLangChipsHtml('renderConjTrainingSetup')}</div>
                     <div class="conj-setup-label">Quels temps ?</div>
                     <div class="conj-filter-chips-row">
                         ${CONJ_TENSES.map(t => chip(cfg.tenses.includes(t), `conjTrainingToggleTense('${t}')`, CONJ_TENSE_NAMES[t])).join('')}
@@ -4736,6 +4909,7 @@ if (firebaseAvailable) {
         function conjTrainingLaunch() {
             const questions = pickConjTrainingQuestions(conjTrainingConfig());
             if (!questions.length) return;
+            questions.forEach(q => { q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer); });
             conjTrainingState = { questions, index: 0, score: 0, missed: [] };
             renderConjTrainingQuestion();
         }
@@ -4752,10 +4926,13 @@ if (firebaseAvailable) {
             content.innerHTML = `
                 <div class="conj-card">
                     <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.questions.length} · Score : ${st.score}${conjIsWeak(q.stat) ? ' · <span style="color:var(--wrong);">à revoir</span>' : ''}</div>
+                    ${q.frq ? `
+                    <div class="conj-question-fr">${rpEscapeHtml(q.frq.fr)}</div>
+                    <div class="conj-question-hint">${q.verb.infinitief} · ${CONJ_TENSE_NAMES[q.tense]}</div>` : `
                     <div class="conj-verb-title">${q.verb.infinitief} ${speakBtnHtml(q.verb.infinitief)}</div>
                     <div style="color:#888; margin-bottom:12px;">${q.verb.fr}</div>
-                    <div class="conj-question-prompt"><b>${q.pronom}</b> — ${CONJ_TENSE_LABELS[q.tense]}</div>
-                    <input type="text" id="conj-tr-input" style="width:100%; margin-bottom:8px;" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Tape la forme conjuguée..." onkeypress="if(event.key==='Enter') conjTrainingCheck()">
+                    <div class="conj-question-prompt"><b>${q.pronom}</b> — ${CONJ_TENSE_LABELS[q.tense]}</div>`}
+                    <input type="text" id="conj-tr-input" style="width:100%; margin-bottom:8px;" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${q.frq ? 'En néerlandais, avec le pronom...' : 'Tape la forme conjuguée...'}" onkeypress="if(event.key==='Enter') conjTrainingCheck()">
                     <div class="acc-error" id="conj-tr-feedback" style="margin-top:0;"></div>
                     <button class="btn btn-green" id="conj-tr-check-btn" onclick="conjTrainingCheck()">Vérifier</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="conjTrainingStop()">Arrêter</button>
@@ -4769,19 +4946,20 @@ if (firebaseAvailable) {
             if (!st || st.checking) return;
             st.checking = true; // évite un double comptage si on appuie deux fois sur Entrée
             const q = st.questions[st.index];
-            const result = evaluateAnswer(document.getElementById('conj-tr-input').value, q.answer);
+            const result = conjEvaluate(document.getElementById('conj-tr-input').value, q);
             const isCorrect = result.status !== 'wrong';
             const fb = document.getElementById('conj-tr-feedback');
+            const shown = q.frq ? q.frq.fullAnswer : q.answer;
             if (isCorrect) {
                 st.score++;
                 fb.style.color = 'var(--success)';
-                fb.innerHTML = (result.status === 'close' ? '🟡 Presque, on valide ! → ' : '✅ ') + q.answer;
+                fb.innerHTML = (result.status === 'close' ? '🟡 Presque, on valide ! → ' : '✅ ') + shown;
             } else {
                 st.missed.push(q);
                 fb.style.color = 'var(--wrong)';
-                fb.innerHTML = `❌ Réponse attendue : ${q.answer}`;
+                fb.innerHTML = `❌ Réponse attendue : ${shown}`;
             }
-            fb.innerHTML += ' ' + speakBtnHtml(q.answer);
+            fb.innerHTML += ' ' + speakBtnHtml(shown) + ' ' + reportBtnHtml({ kind: 'conjugaison', ref: q.verb.infinitief, nl: shown, fr: q.frq ? q.frq.fr : q.verb.fr, context: CONJ_TENSE_NAMES[q.tense] + ' · ' + q.pronom });
             conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, isCorrect);
             save();
             const checkBtn = document.getElementById('conj-tr-check-btn');
@@ -4805,9 +4983,9 @@ if (firebaseAvailable) {
                 <div class="section-title" style="margin-top:var(--space-4);">📌 À retenir (reviendront en priorité)</div>
                 ${st.missed.map(m => `
                     <div class="conj-tense-row" style="border-bottom:1px solid var(--border); padding:8px 0;">
-                        <span class="conj-grid-pronom" style="flex:1 1 45%;"><b style="color:var(--text);">${m.verb.infinitief}</b> · ${m.pronom}<br>${CONJ_TENSE_NAMES[m.tense]}</span>
-                        <span class="conj-form">${m.answer}</span>
-                        ${speakBtnHtml(m.answer)}
+                        <span class="conj-grid-pronom" style="flex:1 1 45%;"><b style="color:var(--text);">${m.verb.infinitief}</b> · ${m.frq ? rpEscapeHtml(m.frq.fr) : m.pronom}<br>${CONJ_TENSE_NAMES[m.tense]}</span>
+                        <span class="conj-form">${m.frq ? m.frq.fullAnswer : m.answer}</span>
+                        ${speakBtnHtml(m.frq ? m.frq.fullAnswer : m.answer)}
                     </div>`).join('')}` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`;
             content.innerHTML = `
                 <div class="conj-card">
@@ -5374,6 +5552,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <span class="wl-nl">${i.nl}</span>
                     ${speakBtnHtml(i.nl)}
                     ${usefulStarHtml(i.id)}
+                    ${reportBtnHtml({ kind: 'mot', ref: i.id, nl: i.nl, fr: i.fr, context: categoryLabel(i.file) })}
                     ${wordChunksButtonHtml(i)}
                     ${niveauCECRBadgeHtml(i.niveauCECR)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
@@ -6456,6 +6635,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <p>${top5.length ? top5.join('<br>') : 'Aucune donnée pour le moment'}</p>
                 </div>
                 </details>
+
+                ${reportsSectionHtml(openSections)}
 
                 <details class="profil-section" id="profil-sec-settings" ${openSections.includes('profil-sec-settings') ? 'open' : ''}>
                 <summary>⚙️ Réglages et sauvegarde</summary>
