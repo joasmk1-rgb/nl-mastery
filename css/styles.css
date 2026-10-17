@@ -382,6 +382,11 @@
         .conj-detail-nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 0.72rem; color: var(--text-secondary); text-align: center; }
         .conj-principal { font-weight: 700; color: var(--primary); margin-bottom: 4px; }
         .conj-tense-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 10px; }
+        .rpw { cursor: pointer; border-radius: 3px; }
+        .rpw:hover { background: color-mix(in srgb, var(--primary) 12%, transparent); }
+        .rpw-new { text-decoration: underline 2px dotted #e8892b; text-underline-offset: 3px; }
+        .rpw-review { text-decoration: underline 2px dotted #3b82f6; text-underline-offset: 3px; }
+        .rpw-unseen { text-decoration: underline 1px dotted var(--text-secondary); text-underline-offset: 3px; }
         .rp-scenario-row { display: flex; gap: 6px; align-items: stretch; width: 100%; max-width: 520px; }
         .rp-scenario-row .rp-scenario-btn { flex: 1; min-width: 0; }
         .rp-prep-btn { flex: 0 0 auto; background: var(--surface-2); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 0 10px; font-size: 0.75rem; font-weight: 700; color: var(--text); cursor: pointer; margin-bottom: 8px; }

@@ -1865,6 +1865,7 @@ if (firebaseAvailable) {
             // Kits de préparation des jeux de rôle : leurs mots absents du vocabulaire sont ajoutés
             // à fullDb (catégorie « Kits jeu de rôle ») pour avoir une progression comme les autres.
             await rpLoadPrepKits();
+            rpWordsInject();
 
             if (errors.length) {
                 document.getElementById('load-error').innerText = errors.join('\n');
@@ -5463,7 +5464,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle'
+            THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle'
         };
         function categoryLabel(file) {
             const main = MAIN_CATEGORIES.find(c => c.file === file);
@@ -7609,9 +7611,212 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const historyDiv = document.getElementById('rp-chat-history');
             const msgDiv = document.createElement('div');
             msgDiv.className = `rp-message ${sender}`;
-            msgDiv.innerText = text;
+            // Répliques de l'interlocuteur en néerlandais : mots cliquables, inconnus soulignés.
+            if (sender === 'assistant' && !(rpCurrentScenario && rpCurrentScenario.lang === 'en')) {
+                msgDiv.innerHTML = rpAnnotateText(text);
+                msgDiv.dataset.text = text;
+            } else {
+                msgDiv.innerText = text;
+            }
             historyDiv.appendChild(msgDiv);
             historyDiv.scrollTop = historyDiv.scrollHeight;
+        }
+
+        // ===== Mots cliquables dans les répliques du jeu de rôle =====
+        // L'app (pas Gemini) repère les mots que l'apprenant ne connaît pas encore : hors de son
+        // vocabulaire (orange) ou déjà ratés en exercice (bleu) ; en option, aussi les mots jamais
+        // travaillés. Un clic donne la traduction (vocabulaire, ou Gemini en contexte pour un mot
+        // inconnu) et « ➕ À apprendre » l'ajoute à la liste RP_WORDS_LIST. Les mots inconnus de l'app
+        // ajoutés ainsi vivent dans state.rpWords (synchronisé) et rejoignent fullDb au démarrage.
+        const RP_WORDS_LIST = '🎭 Mots du jeu de rôle';
+        const RP_WORDS_FILE = 'MOTS_JEU_DE_ROLE';
+        let rpWordIdxCache = null;
+
+        // Formes fléchies probables d'un nom / adjectif (pluriel, -e, comparatif) : sans
+        // lemmatiseur dans le navigateur, on couvre les règles d'orthographe courantes.
+        function rpInflections(w) {
+            const out = [w, w + 'en', w + 's', w + "'s", w + 'e', w + 'n', w + 'er', w + 'ste', w + 'st', w + 'ere'];
+            const last = w.slice(-1);
+            if (/[bdfgklmnprst]/.test(last) && /[aeiou][^aeiou]$/.test(w) && !/[aeiou]{2}[^aeiou]$/.test(w)) out.push(w + last + 'en', w + last + 'e', w + last + 'er');
+            const m = w.match(/^(.*?)([aeou])\2([^aeiou])$/);
+            if (m) { const s = m[1] + m[2] + m[3]; out.push(s + 'en', s + 'e', s + 'er'); }
+            if (last === 'f') out.push(w.slice(0, -1) + 'ven', w.slice(0, -1) + 've');
+            if (last === 's') out.push(w.slice(0, -1) + 'zen', w.slice(0, -1) + 'ze');
+            if (m && m[3] === 'f') { const s = m[1] + m[2]; out.push(s + 'ven', s + 've'); }
+            if (m && m[3] === 's') { const s = m[1] + m[2]; out.push(s + 'zen', s + 'ze'); }
+            return out;
+        }
+
+        function rpWordIndex() {
+            const key = fullDb.length + '|' + conjugationData.length;
+            if (rpWordIdxCache && rpWordIdxCache.key === key) return rpWordIdxCache.idx;
+            const idx = new Map();
+            const add = (f, item) => { if (f && !idx.has(f)) idx.set(f, item); };
+            const byNl = {};
+            const bare = v => rpKitNorm(v).replace(/^(de|het|een|zich) /, '');
+            // D'abord les entrées dont c'est la forme entière (« zijn »), puis les variantes d'une
+            // entrée « a / b » (« aanwezig zijn / zijn ») : sinon la variante gagnait parfois.
+            [true, false].forEach(exactPass => fullDb.forEach(i => {
+                if (i.file === 'PHRASES_LABO') return;
+                const variants = String(i.nl).split('/');
+                if (exactPass && variants.length > 1) return;
+                variants.forEach(v => {
+                    const w = bare(v);
+                    if (!w || w.includes(' ')) return;
+                    if (!byNl[w]) byNl[w] = i;
+                });
+            }));
+            // Les formes exactes d'abord, puis les verbes conjugués, puis les formes fléchies.
+            Object.entries(byNl).forEach(([w, i]) => add(w, i));
+            // Verbes simples d'abord : « ging » doit renvoyer à gaan, pas à doorgaan (« ging door »),
+            // et « was » à zijn, pas à aanwezig zijn (« was aanwezig »).
+            const isCompound = v => /\s/.test(v.infinitief) || /\s/.test(v.preteritum);
+            // Puis du plus courant au plus rare : « was » = zijn plutôt que wassen.
+            const byFreq = conjugationData.slice().sort((a, b) => (b.freq || 0) - (a.freq || 0));
+            [false, true].forEach(compound => byFreq.filter(v => isCompound(v) === compound).forEach(v => {
+                const item = byNl[rpKitNorm(v.infinitief).replace(/^zich /, '')] || { id: null, nl: v.infinitief, fr: v.fr, file: 'VERBES_NL' };
+                const forms = [v.infinitief, v.preteritum, deriveImperfectumPluriel(v.preteritum), v.participePasse]
+                    .concat(Object.values(v.present || {}));
+                forms.forEach(f => String(f || '').split(' ').forEach(part => { const k = rpKitNorm(part); if (k.length > 1 && !['zich', 'me', 'je', 'ons'].includes(k)) add(k, item); }));
+            }));
+            Object.entries(byNl).forEach(([w, i]) => rpInflections(w).forEach(f => add(f, i)));
+            rpWordIdxCache = { key, idx };
+            return idx;
+        }
+
+        function rpWordLookup(token) {
+            const k = rpKitNorm(token).replace(/^'+|'+$/g, '');
+            return k ? (rpWordIndex().get(k) || null) : null;
+        }
+
+        function rpWordClass(token, item, sentenceStart) {
+            const k = rpKitNorm(token);
+            if (k.length <= 2) return '';
+            if (!item) {
+                // Nom propre probable (majuscule au milieu d'une phrase) : ni souligné ni signalé.
+                if (!sentenceStart && /^[A-ZÀ-Ý]/.test(token)) return '';
+                return 'rpw-new';
+            }
+            if (!item.id) return state.settings.rpUnderlineUnseen ? 'rpw-unseen' : '';
+            const st = wordStatus(item.id);
+            if (st === 'review') return 'rpw-review';
+            if (st === 'unseen' && state.settings.rpUnderlineUnseen && (item.freq || 0) < 5.5) return 'rpw-unseen';
+            return '';
+        }
+
+        function rpAnnotateText(text) {
+            const parts = String(text).split(/([A-Za-zÀ-ÖØ-öø-ÿ'’]+(?:-[A-Za-zÀ-ÖØ-öø-ÿ]+)*)/);
+            let sentenceStart = true;
+            return parts.map((part, i) => {
+                if (i % 2 === 0) {
+                    if (/[.!?:]\s*$/.test(part) || (i === 0 && !part.trim())) sentenceStart = true;
+                    return rpEscapeHtml(part);
+                }
+                const cls = rpWordClass(part, rpWordLookup(part), sentenceStart);
+                sentenceStart = false;
+                return `<span class="rpw ${cls}" onclick="rpWordTap(this)">${rpEscapeHtml(part)}</span>`;
+            }).join('');
+        }
+
+        function rpWordsListIds() {
+            if (!state.customLists[RP_WORDS_LIST]) state.customLists[RP_WORDS_LIST] = [];
+            return state.customLists[RP_WORDS_LIST];
+        }
+
+        function rpWordAddToList(id) {
+            const ids = rpWordsListIds();
+            if (!ids.includes(id)) ids.push(id);
+            save();
+            renderCustomListsHome();
+        }
+
+        // Mots ajoutés pendant les jeux de rôle et absents du vocabulaire : rechargés au démarrage.
+        function rpWordsInject() {
+            Object.entries(state.rpWords || {}).forEach(([k, w]) => {
+                const id = 'RPW:' + k;
+                if (!fullDb.some(i => i.id === id)) fullDb.push({ id, fr: w.fr, nl: w.nl, freq: 3, file: RP_WORDS_FILE, tier: '', niveauCECR: '', sousCategorie: '' });
+            });
+        }
+
+        function rpWordTap(el) {
+            const token = el.textContent;
+            const item = rpWordLookup(token);
+            const sentence = (el.closest('.rp-message') && el.closest('.rp-message').dataset.text) || '';
+            const panel = document.getElementById('rp-coach-panel');
+            panel.style.display = 'block';
+            const listed = item && item.id && rpWordsListIds().includes(item.id);
+            const statusTxt = item && item.id ? ({ unseen: 'jamais travaillé', review: 'à revoir (raté en exercice)', mastered: 'réussi', 'true-mastered': 'maîtrisé' }[wordStatus(item.id)]) : '';
+            panel.innerHTML = `
+                <div class="rp-coach-title">🔎 ${rpEscapeHtml(token)} ${speakBtnHtml(token)}</div>
+                <div id="rpw-detail">${item
+                    ? `<b>${rpEscapeHtml(item.nl)}</b> = ${rpEscapeHtml(item.fr)}${statusTxt ? `<div class="report-meta">Dans ton vocabulaire · ${statusTxt}</div>` : ''}`
+                    : '<div class="report-meta">Ce mot n\'est pas encore dans ton vocabulaire.</div>'}</div>
+                <div class="rp-help-actions" id="rpw-actions">
+                    ${item && item.id
+                        ? (listed ? '<span class="report-meta">✅ Déjà dans « ' + RP_WORDS_LIST + ' »</span>' : `<button type="button" class="rp-coach-btn" onclick="rpWordAddToList('${item.id.replace(/'/g, "\\'")}'); this.outerHTML='<span class=&quot;report-meta&quot;>✅ Ajouté à « ${RP_WORDS_LIST} »</span>'">➕ À apprendre</button>`)
+                        : `<button type="button" class="rp-coach-btn" id="rpw-translate-btn">🇫🇷 Traduire</button>`}
+                </div>`;
+            const tBtn = document.getElementById('rpw-translate-btn');
+            if (tBtn) tBtn.onclick = () => rpWordTranslate(token, sentence);
+            panel.scrollIntoView({ block: 'nearest' });
+        }
+
+        async function rpWordTranslate(token, sentence) {
+            const detail = document.getElementById('rpw-detail');
+            const actions = document.getElementById('rpw-actions');
+            if (!GeminiService.getKey()) { detail.innerText = 'Traduction : nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'; return; }
+            detail.innerText = 'Traduction...';
+            try {
+                const raw = await GeminiService.generate(
+                    'Dans cette phrase néerlandaise : """' + sentence + '"""\nle mot "' + token + '" : donne sa forme de base (infinitif pour un verbe, singulier avec de/het pour un nom, forme simple pour un adjectif) et sa traduction française dans ce contexte, en quelques mots.\n' +
+                    'Réponds UNIQUEMENT en JSON : {"base":"...","fr":"..."}'
+                );
+                const obj = rpHelpParseJson(raw);
+                if (!obj || !obj.base || !obj.fr) throw new Error('réponse illisible');
+                const base = String(obj.base).trim(), fr = String(obj.fr).trim();
+                detail.innerHTML = `<b>${rpEscapeHtml(base)}</b> = ${rpEscapeHtml(fr)}`;
+                const existing = rpWordLookup(base.replace(/^(de|het|een) /i, ''));
+                actions.innerHTML = '';
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'rp-coach-btn';
+                btn.innerText = '➕ À apprendre';
+                btn.onclick = () => {
+                    let id = existing && existing.id;
+                    if (!id) {
+                        const k = rpKitNorm(base);
+                        if (!state.rpWords) state.rpWords = {};
+                        state.rpWords[k] = { nl: base, fr, at: Date.now() };
+                        rpWordsInject();
+                        id = 'RPW:' + k;
+                    }
+                    rpWordAddToList(id);
+                    actions.innerHTML = `<span class="report-meta">✅ Ajouté à « ${RP_WORDS_LIST} »</span>`;
+                };
+                actions.appendChild(btn);
+            } catch (e) {
+                detail.innerText = 'Traduction impossible : ' + e.message;
+            }
+        }
+
+        function rpToggleUnderlineUnseen() {
+            state.settings.rpUnderlineUnseen = !state.settings.rpUnderlineUnseen;
+            save();
+            document.querySelectorAll('#rp-chat-history .rp-message.assistant[data-text]').forEach(m => { m.innerHTML = rpAnnotateText(m.dataset.text); });
+            rpShowUnderlineHelp();
+        }
+
+        function rpShowUnderlineHelp() {
+            const panel = document.getElementById('rp-coach-panel');
+            panel.style.display = 'block';
+            const on = !!state.settings.rpUnderlineUnseen;
+            panel.innerHTML = `
+                <div class="rp-coach-title">🔍 Mots soulignés</div>
+                <div class="rp-coach-body">Touche n'importe quel mot de ton interlocuteur pour sa traduction.
+<span class="rpw rpw-new">orange</span> : pas encore dans ton vocabulaire.
+<span class="rpw rpw-review">bleu</span> : dans ton vocabulaire, raté en exercice.${on ? '\n<span class="rpw rpw-unseen">gris</span> : dans ton vocabulaire, jamais travaillé.' : ''}
+« ➕ À apprendre » les met dans la liste « ${RP_WORDS_LIST} » (Apprendre → Mots → Par thème → Mes listes).</div>
+                <div class="rp-help-actions"><button type="button" class="rp-coach-btn" onclick="rpToggleUnderlineUnseen()">${on ? '✓ ' : ''}Souligner aussi les mots jamais travaillés</button></div>`;
         }
 
         async function rpSendToGemini(userText) {
