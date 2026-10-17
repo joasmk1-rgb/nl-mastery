@@ -12936,5 +12936,55 @@
     "freq": 3.95,
     "niveauCECR": "A2",
     "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opheffen",
+    "fr": "soulever",
+    "present": {
+      "ik": "hef op",
+      "jij": "heft op",
+      "hij": "heft op",
+      "wij": "heffen op"
+    },
+    "preteritum": "hief op",
+    "participePasse": "opgeheven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.73
+  },
+  {
+    "infinitief": "genieten",
+    "fr": "profiter (de) / savourer",
+    "present": {
+      "ik": "geniet",
+      "jij": "geniet",
+      "hij": "geniet",
+      "wij": "genieten"
+    },
+    "preteritum": "genoot",
+    "participePasse": "genoten",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.99,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "doorverbinden",
+    "fr": "passer la communication (téléphone)",
+    "present": {
+      "ik": "verbind door",
+      "jij": "verbindt door",
+      "hij": "verbindt door",
+      "wij": "verbinden door"
+    },
+    "preteritum": "verbond door",
+    "participePasse": "doorverbonden",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.49
   }
 ]

@@ -3107,14 +3107,24 @@ if (firebaseAvailable) {
             if (!el) return;
             const mods = MODRP_IDS.map(id => modRpData[id]).filter(Boolean);
             if (!mods.length) { el.innerHTML = ''; return; }
-            el.innerHTML = `<div class="section-title" style="margin-top:0;">🎭 Apprendre en situation (nouveau format)</div>` + mods.map((m, i) => {
-                const s = modRpState(m.id);
-                const done = m.etapes.filter(e => modRpEtapeDone(m.id, e)).length;
-                const passed = s.finalResult && s.finalResult.passed;
-                return `<div class="modrp-entry${passed ? ' passed' : ''}" onclick="showModuleRp('${m.id}')">
-                    <span class="modrp-entry-icon">${passed ? '🏆' : (m.icone || '🎭')}</span>
-                    <span><b>${i + 1}. ${rpEscapeHtml(m.titre)}</b> <span class="conj-niveau-badge">${m.niveau}</span><br><small>${passed ? 'Réussi' : done + '/' + m.etapes.length + ' étapes'} · ${rpEscapeHtml(m.accroche || m.objectif)}</small></span>
-                </div>`;
+            // Regroupés par niveau, repliables ; le premier niveau non terminé est ouvert.
+            const levels = [...new Set(mods.map(m => m.niveau))];
+            const isPassed = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
+            const openLevel = levels.find(l => mods.filter(m => m.niveau === l).some(m => !isPassed(m))) || levels[levels.length - 1];
+            el.innerHTML = `<div class="section-title" style="margin-top:0;">🎭 Apprendre en situation (nouveau format)</div>` + levels.map(level => {
+                const list = mods.filter(m => m.niveau === level);
+                const nPassed = list.filter(isPassed).length;
+                return `<details class="modrp-level" ${level === openLevel ? 'open' : ''}>
+                    <summary><span class="conj-niveau-badge">${level}</span> ${list.length} modules · ${nPassed} réussi${nPassed > 1 ? 's' : ''}</summary>
+                    ${list.map((m, i) => {
+                        const done = m.etapes.filter(e => modRpEtapeDone(m.id, e)).length;
+                        const passed = isPassed(m);
+                        return `<div class="modrp-entry${passed ? ' passed' : ''}" onclick="showModuleRp('${m.id}')">
+                            <span class="modrp-entry-icon">${passed ? '🏆' : (m.icone || '🎭')}</span>
+                            <span><b>${i + 1}. ${rpEscapeHtml(m.titre)}</b><br><small>${passed ? 'Réussi' : done + '/' + m.etapes.length + ' étapes'} · ${rpEscapeHtml(m.accroche || m.objectif)}</small></span>
+                        </div>`;
+                    }).join('')}
+                </details>`;
             }).join('');
         }
 
@@ -9164,11 +9174,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // stockés en dur, mini jeu de rôle). Le portrait (questions en français) produit les phrases
         // personnelles de l'apprenant : elles entrent dans les kits, les exercices (« dis-le ») et
         // le prompt des interlocuteurs. Tout vit dans state.modRp[id] (synchronisé, jamais public).
-        const MODRP_IDS = ['premier_contact', 'rendez_vous', 'courses', 'logement', 'deplacer', 'journee', 'travail_a1', 'weekend'];
+        const MODRP_IDS = ['premier_contact', 'rendez_vous', 'courses', 'logement', 'deplacer', 'journee', 'travail_a1', 'weekend',
+            'a2_sante', 'a2_souvenir', 'a2_projets', 'a2_telephone'];
         const MODRP_SPECIAL = {
             '#epeler': /(^|\s)([a-z][\s,.-]+){3,}/,
             '#perfectum-hebben': /\b(heb|hebt|heeft|hebben)\b[^.?!]*\b[a-z]*ge[a-z]{2,}(t|d|n)\b/,
-            '#perfectum-zijn': /\b(ben|bent|is|zijn)\b[^.?!]*\b([a-z]*ge[a-z]{2,}(n|d|t)|vertrokken|verhuisd)\b/
+            '#perfectum-zijn': /\b(ben|bent|is|zijn)\b[^.?!]*\b([a-z]*ge[a-z]{2,}(n|d|t)|vertrokken|verhuisd)\b/,
+            // pronom + imparfait (« ik werkte ») ou imparfait + pronom après inversion (« toen werkte ik »)
+            '#imperfectum': /\b(ik|je|jij|hij|zij|ze|we|wij|het|er|u|dat)\s+([a-z]{2,}(de|te)n?|was|waren|had|hadden|ging|gingen|deed|deden|kwam|kwamen|zag|kreeg|hielp|begon|bleef|vond|wist|kon|moest|wou|wilde)\b|\b([a-z]{2,}(de|te)n?|was|waren|had|hadden|ging|gingen|deed|kwam|zag|kreeg|hielp|begon|bleef|vond|kon|moest)\s+(ik|je|jij|hij|zij|ze|we|wij|het|er)\b/
         };
         const MODRP_FILE = 'MON_PORTRAIT';
         const modRpData = {};

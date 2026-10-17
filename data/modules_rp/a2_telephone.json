@@ -1,0 +1,317 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_telephone",
+  "niveau": "A2",
+  "icone": "☎️",
+  "titre": "Au téléphone",
+  "accroche": "Appeler un service, demander la bonne personne, laisser un message, poser des questions indirectes et confirmer.",
+  "objectif": "À la fin du module, tu sais mener un appel professionnel : te présenter, dire pourquoi tu appelles, demander à parler à quelqu'un, laisser un message clair et vérifier les informations.",
+  "etapes": [
+    {
+      "id": "debut",
+      "titre": "Commencer un appel",
+      "intro": "En Flandre, on décroche en disant son nom (« Met Sofie ») et on commence un appel en se présentant puis en disant pourquoi on appelle.",
+      "roles": { "A": "L'accueil d'une entreprise", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Transvio, goeiemiddag, met Inge.", "fr": "Transvio, bonjour, Inge à l'appareil." },
+        { "qui": "B", "nl": "Goeiemiddag, u spreekt met Sami Kayembe.", "fr": "Bonjour, c'est Sami Kayembe à l'appareil." },
+        { "qui": "B", "nl": "Ik bel in verband met de vacature van planner.", "fr": "J'appelle au sujet de l'offre de planificateur." },
+        { "qui": "A", "nl": "Ah ja. Waarmee kan ik u helpen?", "fr": "Ah oui. En quoi puis-je vous aider ?" },
+        { "qui": "B", "nl": "Ik had een paar vragen over de functie.", "fr": "J'avais quelques questions sur le poste." }
+      ],
+      "vocab": {
+        "verbes": ["bellen", "spreken", "opnemen", "helpen", "vragen"],
+        "mots": [
+          { "nl": "het telefoontje", "fr": "le coup de fil" },
+          { "nl": "het gesprek", "fr": "la conversation, l'appel" },
+          { "nl": "in verband met", "fr": "au sujet de" },
+          { "nl": "met ...", "fr": "... à l'appareil" },
+          { "nl": "de receptie", "fr": "la réception" },
+          { "nl": "de vacature", "fr": "l'offre d'emploi" },
+          { "nl": "waarmee", "fr": "avec quoi, en quoi" }
+        ],
+        "phrases": [
+          { "nl": "U spreekt met ...", "fr": "C'est ... à l'appareil." },
+          { "nl": "Ik bel in verband met ...", "fr": "J'appelle au sujet de ..." },
+          { "nl": "Ik had een vraag over ...", "fr": "J'avais une question sur ..." }
+        ]
+      },
+      "regle": {
+        "titre": "Le « had » de politesse",
+        "explication": "Pour adoucir une demande, on utilise le passé « had » ou « wou » au lieu du présent : « Ik had een vraag » (j'avais une question), « Ik wou graag iets vragen » (je voulais demander quelque chose). C'est poli, pas un vrai passé. Formule de présentation : « U spreekt met + nom » ou simplement « Met + nom ». Raison de l'appel : « Ik bel in verband met / over … ».",
+        "exemples": [
+          { "nl": "Ik had een vraag over mijn factuur.", "fr": "J'avais une question sur ma facture." },
+          { "nl": "Ik wou graag een afspraak maken.", "fr": "Je voulais prendre un rendez-vous." },
+          { "nl": "Met Sami, goeiedag.", "fr": "Sami à l'appareil, bonjour." },
+          { "nl": "Ik bel over mijn sollicitatie.", "fr": "J'appelle au sujet de ma candidature." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« C'est Sami à l'appareil » :", "choices": ["Ik ben Sami aan de telefoon.", "U spreekt met Sami.", "Hier is Sami spreekt."], "answer": 1 },
+        { "type": "qcm", "q": "Formule polie pour poser une question :", "choices": ["Ik heb een vraag.", "Ik had een vraag.", "Ik zal een vraag."], "answer": 1 },
+        { "type": "trou", "phrase": "Ik bel in verband ___ de vacature.", "answer": "met", "fr": "J'appelle au sujet de l'offre." },
+        { "type": "trou", "phrase": "___ kan ik u helpen?", "answer": "Waarmee", "fr": "En quoi puis-je vous aider ?" },
+        { "type": "ordre", "mots": ["graag", "Ik", "afspraak", "wou", "maken.", "een"], "answer": "Ik wou graag een afspraak maken.", "fr": "Je voulais prendre un rendez-vous." },
+        { "type": "traduire", "fr": "J'appelle au sujet de ma candidature.", "answer": "Ik bel over mijn sollicitatie./Ik bel in verband met mijn sollicitatie." },
+        { "type": "ecoute", "nl": "Transvio, goeiemiddag, met Inge.", "fr": "Transvio, bonjour, Inge à l'appareil." },
+        { "type": "dire", "nl": "Goeiemiddag, u spreekt met Sami. Ik bel in verband met de vacature.", "fr": "Bonjour, c'est Sami. J'appelle au sujet de l'offre." },
+        { "type": "repondre", "question": "Goeiedag, waarmee kan ik u helpen?", "question_fr": "Bonjour, en quoi puis-je vous aider ?", "attendu": [], "un_de": ["bel", "had", "wou", "vraag", "afspraak"], "exemple": "Ik bel in verband met mijn factuur." }
+      ],
+      "jeu": {
+        "titre": "Appeler une entreprise",
+        "consigne": "Appelle une entreprise au sujet d'une offre d'emploi : présente-toi et dis pourquoi tu appelles.",
+        "role": "Tu es Inge, réceptionniste chez Transvio. Décroche, demande qui appelle et pourquoi, fais répéter le nom une fois, puis demande à quel service ou quelle personne il veut parler. Néerlandais simple (A2).",
+        "welcome": "Transvio, goeiemiddag, met Inge."
+      }
+    },
+    {
+      "id": "transfert",
+      "titre": "Demander la bonne personne",
+      "intro": "Demander à parler à quelqu'un, être mis en attente, transféré, ou apprendre que la personne n'est pas là.",
+      "roles": { "A": "L'accueil", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Mag ik meneer Peeters spreken, alstublieft?", "fr": "Puis-je parler à monsieur Peeters, s'il vous plaît ?" },
+        { "qui": "A", "nl": "Een ogenblikje, ik verbind u door.", "fr": "Un instant, je vous passe la communication." },
+        { "qui": "A", "nl": "Het spijt me, hij is in vergadering.", "fr": "Je suis désolée, il est en réunion." },
+        { "qui": "B", "nl": "Wanneer is hij weer bereikbaar?", "fr": "Quand est-il à nouveau joignable ?" },
+        { "qui": "A", "nl": "Na drie uur. Wilt u een bericht achterlaten?", "fr": "Après trois heures. Voulez-vous laisser un message ?" }
+      ],
+      "vocab": {
+        "verbes": ["doorverbinden", "wachten", "bereiken", "terugbellen", "achterlaten"],
+        "mots": [
+          { "nl": "een ogenblikje", "fr": "un instant" },
+          { "nl": "bereikbaar", "fr": "joignable" },
+          { "nl": "afwezig", "fr": "absent" },
+          { "nl": "in vergadering", "fr": "en réunion" },
+          { "nl": "de dienst", "fr": "le service" },
+          { "nl": "het bericht", "fr": "le message" },
+          { "nl": "het toestel", "fr": "le poste (téléphonique)" }
+        ],
+        "phrases": [
+          { "nl": "Mag ik meneer Peeters spreken?", "fr": "Puis-je parler à monsieur Peeters ?" },
+          { "nl": "Ik verbind u door.", "fr": "Je vous passe la communication." },
+          { "nl": "Wanneer is hij bereikbaar?", "fr": "Quand est-il joignable ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Mag ik … spreken? / Kunt u mij doorverbinden?",
+        "explication": "Pour demander quelqu'un : « Mag ik + nom + spreken? » ou « Kunt u mij doorverbinden met + service/personne? ». L'interlocuteur répond « Een ogenblikje » (un instant), « Ik verbind u door » (je vous passe), « Hij is niet bereikbaar / in vergadering / afwezig ». « Doorverbinden » est séparable : ik verbind u door.",
+        "exemples": [
+          { "nl": "Kunt u mij doorverbinden met de boekhouding?", "fr": "Pouvez-vous me passer la comptabilité ?" },
+          { "nl": "Mag ik iemand van de personeelsdienst spreken?", "fr": "Puis-je parler à quelqu'un du service du personnel ?" },
+          { "nl": "Ze is vandaag afwezig.", "fr": "Elle est absente aujourd'hui." },
+          { "nl": "Ik probeer het later opnieuw.", "fr": "J'essaierai plus tard." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je vous passe la communication » :", "choices": ["Ik doorverbind u.", "Ik verbind u door.", "Ik verbind door u."], "answer": 1 },
+        { "type": "qcm", "q": "« Il est en réunion » :", "choices": ["Hij is in vergadering.", "Hij heeft vergadering in.", "Hij is op vergadering."], "answer": 0 },
+        { "type": "trou", "phrase": "___ ik meneer Peeters spreken?", "answer": "Mag", "fr": "Puis-je parler à monsieur Peeters ?" },
+        { "type": "trou", "phrase": "Wanneer is hij weer ___? (joignable)", "answer": "bereikbaar", "fr": "Quand est-il à nouveau joignable ?" },
+        { "type": "ordre", "mots": ["het", "Ik", "opnieuw.", "later", "probeer"], "answer": "Ik probeer het later opnieuw.", "fr": "J'essaierai plus tard." },
+        { "type": "traduire", "fr": "Un instant, s'il vous plaît.", "answer": "Een ogenblikje, alstublieft." },
+        { "type": "ecoute", "nl": "Het spijt me, ze is vandaag afwezig.", "fr": "Je suis désolée, elle est absente aujourd'hui." },
+        { "type": "dire", "nl": "Kunt u mij doorverbinden met de personeelsdienst?", "fr": "Pouvez-vous me passer le service du personnel ?" },
+        { "type": "repondre", "question": "Met wie wilt u spreken?", "question_fr": "À qui voulez-vous parler ?", "attendu": [], "un_de": ["met", "meneer", "mevrouw", "dienst", "iemand"], "exemple": "Met mevrouw Claes van de personeelsdienst." }
+      ],
+      "jeu": {
+        "titre": "La personne n'est pas là",
+        "consigne": "Tu dois parler à une responsable précise. Demande-la, puis gère son absence : demande quand la rappeler ou propose de laisser un message.",
+        "role": "Tu es la réceptionniste d'une entreprise. Le correspondant demande une personne : mets-le en attente (« een ogenblikje »), puis dis qu'elle est en réunion jusqu'à 15 heures. Propose qu'il rappelle ou qu'il laisse un message. Néerlandais simple (A2).",
+        "welcome": "Goedemorgen, Delmaro, waarmee kan ik u helpen?"
+      }
+    },
+    {
+      "id": "message",
+      "titre": "Laisser un message",
+      "intro": "Laisser un message clair : qui tu es, pourquoi tu appelles, comment te joindre, et demander qu'on te rappelle.",
+      "roles": { "A": "La réceptionniste", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat is uw boodschap?", "fr": "Quel est votre message ?" },
+        { "qui": "B", "nl": "Kunt u zeggen dat Sami Kayembe gebeld heeft?", "fr": "Pouvez-vous dire que Sami Kayembe a appelé ?" },
+        { "qui": "B", "nl": "Het gaat over mijn sollicitatiegesprek van donderdag.", "fr": "C'est au sujet de mon entretien de jeudi." },
+        { "qui": "A", "nl": "En op welk nummer kan ze u bereiken?", "fr": "Et à quel numéro peut-elle vous joindre ?" },
+        { "qui": "B", "nl": "Op nul vier zeven twee, vijftien, zesentwintig, achtendertig. Ze mag me altijd terugbellen.", "fr": "Au 0472 15 26 38. Elle peut me rappeler n'importe quand." }
+      ],
+      "vocab": {
+        "verbes": ["zeggen", "doorgeven", "terugbellen", "bereiken", "noteren"],
+        "mots": [
+          { "nl": "de boodschap", "fr": "le message" },
+          { "nl": "de voicemail", "fr": "la messagerie vocale" },
+          { "nl": "het nummer", "fr": "le numéro" },
+          { "nl": "het gaat over", "fr": "il s'agit de" },
+          { "nl": "dringend", "fr": "urgent" },
+          { "nl": "altijd", "fr": "toujours, n'importe quand" },
+          { "nl": "na de biep", "fr": "après le bip" }
+        ],
+        "phrases": [
+          { "nl": "Kunt u zeggen dat ik gebeld heb?", "fr": "Pouvez-vous dire que j'ai appelé ?" },
+          { "nl": "Het gaat over ...", "fr": "C'est au sujet de ..." },
+          { "nl": "Ze mag me terugbellen op ...", "fr": "Elle peut me rappeler au ..." }
+        ]
+      },
+      "regle": {
+        "titre": "dat : la subordonnée (verbe à la fin)",
+        "explication": "« dat » (que) introduit une subordonnée : le verbe conjugué part à la FIN, et au perfectum, l'auxiliaire va tout à la fin : « Kunt u zeggen dat Sami gebeld heeft? », « Ik denk dat hij morgen komt ». En français on garde l'ordre normal, en néerlandais non : c'est la règle la plus importante de l'A2.",
+        "exemples": [
+          { "nl": "Kunt u zeggen dat ik gebeld heb?", "fr": "Pouvez-vous dire que j'ai appelé ?" },
+          { "nl": "Ik denk dat ze in vergadering is.", "fr": "Je pense qu'elle est en réunion." },
+          { "nl": "Hij zegt dat hij morgen terugbelt.", "fr": "Il dit qu'il rappelle demain." },
+          { "nl": "Ik hoop dat het niet te laat is.", "fr": "J'espère que ce n'est pas trop tard." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Pouvez-vous dire que j'ai appelé ? » :", "choices": ["Kunt u zeggen dat ik heb gebeld?", "Kunt u zeggen dat ik gebeld heb?", "Kunt u zeggen dat heb ik gebeld?"], "answer": 1 },
+        { "type": "qcm", "q": "« Je pense qu'elle est malade » :", "choices": ["Ik denk dat ze ziek is.", "Ik denk dat ze is ziek.", "Ik denk dat is ze ziek."], "answer": 0 },
+        { "type": "trou", "phrase": "Het gaat ___ mijn sollicitatie.", "answer": "over", "fr": "C'est au sujet de ma candidature." },
+        { "type": "trou", "phrase": "Ik hoop dat het niet te laat ___.", "answer": "is", "fr": "J'espère que ce n'est pas trop tard." },
+        { "type": "ordre", "mots": ["dat", "terugbelt.", "hij", "Hij", "zegt", "morgen"], "answer": "Hij zegt dat hij morgen terugbelt.", "fr": "Il dit qu'il rappelle demain." },
+        { "type": "traduire", "fr": "Elle peut me rappeler n'importe quand.", "answer": "Ze mag me altijd terugbellen./Ze kan me altijd terugbellen." },
+        { "type": "ecoute", "nl": "Laat een bericht achter na de biep.", "fr": "Laissez un message après le bip." },
+        { "type": "dire", "nl": "Kunt u zeggen dat Sami gebeld heeft?", "fr": "Pouvez-vous dire que Sami a appelé ?" },
+        { "type": "repondre", "question": "Wat is uw boodschap?", "question_fr": "Quel est votre message ?", "attendu": [], "un_de": ["dat", "gaat over", "terugbellen", "gebeld"], "exemple": "Kunt u zeggen dat ik gebeld heb? Het gaat over mijn factuur." }
+      ],
+      "jeu": {
+        "titre": "Laisser un message à transmettre",
+        "consigne": "La personne que tu cherches est absente. Laisse un message complet : ton nom, la raison, ton numéro, quand te rappeler.",
+        "role": "Tu es la réceptionniste. La personne demandée est absente. Prends le message : nom (fais épeler), raison de l'appel, numéro (répète-le pour vérifier, une fois avec une erreur), meilleur moment pour rappeler. À la fin, résume le message. Néerlandais simple (A2).",
+        "welcome": "Het spijt me, mevrouw Claes is vandaag afwezig. Wilt u een boodschap achterlaten?"
+      }
+    },
+    {
+      "id": "indirect",
+      "titre": "Poser une question indirecte",
+      "intro": "Demander poliment une information : « Weet u of … ? », « Kunt u zeggen wanneer … ? ». Le verbe part à la fin.",
+      "roles": { "A": "Un employé de la commune", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Weet u of mijn aanvraag al verwerkt is?", "fr": "Savez-vous si ma demande a déjà été traitée ?" },
+        { "qui": "A", "nl": "Wat is uw naam en geboortedatum?", "fr": "Quel est votre nom et votre date de naissance ?" },
+        { "qui": "B", "nl": "Sami Kayembe, twaalf maart negentienvijfennegentig.", "fr": "Sami Kayembe, 12 mars 1995." },
+        { "qui": "A", "nl": "Uw aanvraag is nog niet klaar.", "fr": "Votre demande n'est pas encore prête." },
+        { "qui": "B", "nl": "Kunt u zeggen wanneer ik mijn kaart kan ophalen?", "fr": "Pouvez-vous me dire quand je peux venir chercher ma carte ?" },
+        { "qui": "A", "nl": "Waarschijnlijk volgende week dinsdag.", "fr": "Probablement mardi prochain." }
+      ],
+      "vocab": {
+        "verbes": ["weten", "ophalen", "verwerken", "vragen", "controleren"],
+        "mots": [
+          { "nl": "of", "fr": "si (question indirecte)" },
+          { "nl": "wanneer", "fr": "quand" },
+          { "nl": "hoeveel", "fr": "combien" },
+          { "nl": "de aanvraag", "fr": "la demande" },
+          { "nl": "de geboortedatum", "fr": "la date de naissance" },
+          { "nl": "het dossier", "fr": "le dossier" },
+          { "nl": "klaar", "fr": "prêt" }
+        ],
+        "phrases": [
+          { "nl": "Weet u of ...?", "fr": "Savez-vous si ... ?" },
+          { "nl": "Kunt u zeggen wanneer ...?", "fr": "Pouvez-vous dire quand ... ?" },
+          { "nl": "Ik wil graag weten hoeveel het kost.", "fr": "Je voudrais savoir combien ça coûte." }
+        ]
+      },
+      "regle": {
+        "titre": "Question indirecte : of / wanneer / hoeveel … + verbe à la fin",
+        "explication": "Une question directe « Is mijn aanvraag klaar? » devient indirecte (plus polie) avec « of » (si) : « Weet u of mijn aanvraag klaar is? ». Avec un mot interrogatif, on le garde : « Wanneer kan ik komen? » → « Kunt u zeggen wanneer ik kan komen? ». Dans les deux cas, le verbe conjugué part à la FIN (ou juste avant l'infinitif).",
+        "exemples": [
+          { "nl": "Weet u of de bus vandaag rijdt?", "fr": "Savez-vous si le bus roule aujourd'hui ?" },
+          { "nl": "Kunt u zeggen hoe laat het begint?", "fr": "Pouvez-vous dire à quelle heure ça commence ?" },
+          { "nl": "Ik wil weten hoeveel het kost.", "fr": "Je veux savoir combien ça coûte." },
+          { "nl": "Weet jij waar de printer staat?", "fr": "Tu sais où est l'imprimante ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Savez-vous si ma demande est prête ? » :", "choices": ["Weet u of mijn aanvraag is klaar?", "Weet u of mijn aanvraag klaar is?", "Weet u is mijn aanvraag klaar?"], "answer": 1 },
+        { "type": "qcm", "q": "« Tu sais où est l'imprimante ? » :", "choices": ["Weet jij waar de printer staat?", "Weet jij waar staat de printer?", "Weet jij of de printer staat?"], "answer": 0 },
+        { "type": "trou", "phrase": "Weet u ___ de bus vandaag rijdt? (si)", "answer": "of", "fr": "Savez-vous si le bus roule aujourd'hui ?" },
+        { "type": "trou", "phrase": "Kunt u zeggen hoe laat het ___?", "answer": "begint", "fr": "Pouvez-vous dire à quelle heure ça commence ?" },
+        { "type": "ordre", "mots": ["het", "Ik", "kost.", "wil", "hoeveel", "weten"], "answer": "Ik wil weten hoeveel het kost.", "fr": "Je veux savoir combien ça coûte." },
+        { "type": "traduire", "fr": "Savez-vous si elle est là ?", "answer": "Weet u of ze er is?/Weet u of zij er is?" },
+        { "type": "ecoute", "nl": "Kunt u zeggen wanneer ik mijn kaart kan ophalen?", "fr": "Pouvez-vous dire quand je peux venir chercher ma carte ?" },
+        { "type": "dire", "nl": "Weet u of mijn aanvraag al klaar is?", "fr": "Savez-vous si ma demande est déjà prête ?" },
+        { "type": "repondre", "question": "Wat wilt u weten?", "question_fr": "Que voulez-vous savoir ?", "attendu": [], "un_de": ["of", "wanneer", "hoeveel", "waar", "hoe"], "exemple": "Ik wil weten wanneer mijn kaart klaar is." }
+      ],
+      "jeu": {
+        "titre": "Suivre un dossier",
+        "consigne": "Appelle un service pour suivre ton dossier (demande de carte, de remboursement…) en posant des questions indirectes polies.",
+        "role": "Tu es employé d'un service administratif (commune ou mutuelle). L'usager appelle pour suivre un dossier. Demande nom et date de naissance, cherche le dossier, réponds à ses questions (pas encore traité, il manque un document, prêt dans une semaine). Si ses questions sont directes, réponds quand même ; reste poli. Néerlandais simple (A2).",
+        "welcome": "Dienst bevolking, goeiemorgen. Waarmee kan ik u helpen?"
+      }
+    },
+    {
+      "id": "verifier",
+      "titre": "Vérifier et confirmer",
+      "intro": "Ne pas raccrocher sans être sûr : faire répéter, reformuler, épeler, et demander une confirmation écrite.",
+      "roles": { "A": "Une assistante RH", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Uw gesprek is dus op dinsdag de veertiende om half elf.", "fr": "Votre entretien est donc mardi 14 à dix heures et demie." },
+        { "qui": "B", "nl": "Sorry, zei u half elf of half twaalf?", "fr": "Pardon, vous avez dit dix heures et demie ou onze heures et demie ?" },
+        { "qui": "A", "nl": "Half elf, dus tien uur dertig.", "fr": "Dix heures et demie, donc 10 h 30." },
+        { "qui": "B", "nl": "Als ik het goed begrijp, moet ik naar het hoofdkantoor komen?", "fr": "Si je comprends bien, je dois venir au siège ?" },
+        { "qui": "A", "nl": "Juist. Ik stuur u ook een bevestiging per mail.", "fr": "Exact. Je vous envoie aussi une confirmation par mail." },
+        { "qui": "B", "nl": "Perfect, dank u wel. Tot dinsdag!", "fr": "Parfait, merci beaucoup. À mardi !" }
+      ],
+      "vocab": {
+        "verbes": ["herhalen", "bevestigen", "begrijpen", "sturen", "spellen"],
+        "mots": [
+          { "nl": "de bevestiging", "fr": "la confirmation" },
+          { "nl": "het hoofdkantoor", "fr": "le siège" },
+          { "nl": "het adres", "fr": "l'adresse" },
+          { "nl": "dus", "fr": "donc" },
+          { "nl": "juist", "fr": "exact" },
+          { "nl": "als ik het goed begrijp", "fr": "si je comprends bien" },
+          { "nl": "per mail", "fr": "par mail" }
+        ],
+        "phrases": [
+          { "nl": "Sorry, zei u ... of ...?", "fr": "Pardon, vous avez dit ... ou ... ?" },
+          { "nl": "Als ik het goed begrijp, ...", "fr": "Si je comprends bien, ..." },
+          { "nl": "Kunt u het per mail bevestigen?", "fr": "Pouvez-vous le confirmer par mail ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Reformuler pour vérifier",
+        "explication": "Pour vérifier : « Zei u … of …? » (vous avez dit… ou… ?), « Als ik het goed begrijp, … » (si je comprends bien…) suivi d'une phrase avec inversion (« …, moet ik om tien uur komen? »), « Dus … ? » (donc… ?). Pour obtenir une trace écrite : « Kunt u dat per mail bevestigen? ». Pour finir : « Dank u wel, tot dinsdag! ».",
+        "exemples": [
+          { "nl": "Zei u dinsdag of donderdag?", "fr": "Vous avez dit mardi ou jeudi ?" },
+          { "nl": "Als ik het goed begrijp, is het gratis?", "fr": "Si je comprends bien, c'est gratuit ?" },
+          { "nl": "Dus ik moet niets meebrengen?", "fr": "Donc je ne dois rien apporter ?" },
+          { "nl": "Kunt u het adres spellen?", "fr": "Pouvez-vous épeler l'adresse ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Vous avez dit mardi ou jeudi ? » :", "choices": ["Zei u dinsdag of donderdag?", "Zegt u dinsdag of donderdag?", "Heeft u dinsdag of donderdag?"], "answer": 0 },
+        { "type": "qcm", "q": "« Si je comprends bien, c'est gratuit ? » :", "choices": ["Als ik het goed begrijp, het is gratis?", "Als ik het goed begrijp, is het gratis?", "Als ik begrijp het goed, is het gratis?"], "answer": 1 },
+        { "type": "trou", "phrase": "Kunt u het per mail ___?", "answer": "bevestigen", "fr": "Pouvez-vous le confirmer par mail ?" },
+        { "type": "trou", "phrase": "___ ik moet niets meebrengen? (donc)", "answer": "Dus", "fr": "Donc je ne dois rien apporter ?" },
+        { "type": "ordre", "mots": ["u", "spellen?", "Kunt", "het", "adres"], "answer": "Kunt u het adres spellen?", "fr": "Pouvez-vous épeler l'adresse ?" },
+        { "type": "traduire", "fr": "Parfait, merci beaucoup. À mardi !", "answer": "Perfect, dank u wel. Tot dinsdag!" },
+        { "type": "ecoute", "nl": "Ik stuur u ook een bevestiging per mail.", "fr": "Je vous envoie aussi une confirmation par mail." },
+        { "type": "dire", "nl": "Als ik het goed begrijp, moet ik om half elf komen?", "fr": "Si je comprends bien, je dois venir à dix heures et demie ?" },
+        { "type": "repondre", "question": "Uw afspraak is op dinsdag om half elf. Is dat duidelijk?", "question_fr": "Votre rendez-vous est mardi à 10 h 30. C'est clair ?", "attendu": [], "un_de": ["dus", "half elf", "dinsdag", "duidelijk", "begrijp", "bevestig"], "exemple": "Ja, dus dinsdag om half elf. Kunt u het per mail bevestigen?" }
+      ],
+      "jeu": {
+        "titre": "Confirmer un entretien",
+        "consigne": "L'assistante RH te donne les détails de ton entretien. Vérifie chaque information (jour, heure, adresse, personne, documents) et demande une confirmation écrite.",
+        "role": "Tu es Els, assistante RH. Donne au candidat les détails de son entretien assez vite : jeudi 16, à 14 h 15 (kwart over twee), au siège (Industrieweg 12 à Gand), avec monsieur Janssens, apporter carte d'identité et diplôme. Laisse-le vérifier ; s'il ne vérifie pas, demande « Heeft u alles genoteerd? ». Accepte d'envoyer une confirmation par mail. Néerlandais simple (A2).",
+        "welcome": "Ik heb goed nieuws: u bent uitgenodigd voor een gesprek. Heeft u iets om te noteren?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : un appel professionnel complet",
+    "consigne": "Appelle une entreprise pour savoir où en est ta candidature. Présente-toi, dis pourquoi tu appelles, demande la bonne personne ; elle est absente : laisse un message complet, pose une question indirecte sur la suite, vérifie les informations et termine poliment.",
+    "role": "Tu es Inge, réceptionniste chez Logistiko. Le candidat appelle pour sa candidature. Demande son nom et la raison, propose de le passer au service RH, puis annonce que la responsable (mevrouw Claes) est en réunion jusqu'à 16 heures. Propose de prendre un message : nom (épelé), raison, numéro, moment pour rappeler. S'il pose une question indirecte (weet u of / wanneer…), réponds (décision attendue la semaine prochaine). Termine en résumant le message. Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Logistiko, goeiemiddag, met Inge. Waarmee kan ik u helpen?"
+  },
+  "examen": {
+    "reussite": "Tu sais mener un appel professionnel en néerlandais.",
+    "sujets": [
+      { "label": "te présenter", "etape": "debut", "mots": ["u spreekt met", "met sami", "mijn naam", "ik heet", "met "] },
+      { "label": "dire pourquoi tu appelles", "etape": "debut", "mots": ["bel", "in verband met", "gaat over", "sollicitatie"] },
+      { "label": "demander quelqu'un", "etape": "transfert", "mots": ["mag ik", "spreken", "doorverbinden", "personeelsdienst"] },
+      { "label": "laisser un message", "etape": "message", "mots": ["boodschap", "bericht", "zeggen dat", "terugbellen", "terug bellen"] },
+      { "label": "donner ton numéro", "etape": "message", "mots": ["nummer", "nul"] },
+      { "label": "poser une question indirecte", "etape": "indirect", "mots": ["weet u of", "of ", "wanneer", "kunt u zeggen", "wil weten"] },
+      { "label": "vérifier une information", "etape": "verifier", "mots": ["dus", "zei u", "als ik het goed begrijp", "herhalen", "bevestig"] },
+      { "label": "conclure poliment", "etape": "verifier", "mots": ["dank", "bedankt", "tot ziens", "nog een fijne dag", "prettige dag"] }
+    ]
+  }
+}

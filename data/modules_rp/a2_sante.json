@@ -1,0 +1,330 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_sante",
+  "niveau": "A2",
+  "icone": "🩺",
+  "titre": "Chez le médecin",
+  "accroche": "Expliquer ce qui ne va pas, comprendre le médecin, la pharmacie et le certificat pour ton employeur.",
+  "objectif": "À la fin du module, tu sais gérer une visite chez le médecin : décrire tes symptômes et depuis quand, comprendre les conseils et le traitement, et régler le certificat pour ton travail.",
+  "etapes": [
+    {
+      "id": "corps",
+      "titre": "Le corps et la douleur",
+      "intro": "Dire où tu as mal. En néerlandais : « Ik heb pijn aan mijn rug » ou « Mijn rug doet pijn ».",
+      "roles": { "A": "Le médecin", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Goeiedag, wat scheelt er?", "fr": "Bonjour, qu'est-ce qui ne va pas ?" },
+        { "qui": "B", "nl": "Ik heb pijn aan mijn rug.", "fr": "J'ai mal au dos." },
+        { "qui": "A", "nl": "Waar precies? Hier, onderaan?", "fr": "Où exactement ? Ici, en bas ?" },
+        { "qui": "B", "nl": "Ja, en soms doet mijn been ook pijn.", "fr": "Oui, et parfois ma jambe fait mal aussi." },
+        { "qui": "A", "nl": "Heeft u iets zwaars opgeheven?", "fr": "Avez-vous soulevé quelque chose de lourd ?" },
+        { "qui": "B", "nl": "Ja, ik heb op het werk veel dozen opgeheven.", "fr": "Oui, j'ai soulevé beaucoup de cartons au travail." }
+      ],
+      "vocab": {
+        "verbes": ["opheffen", "bewegen", "zitten", "liggen", "voelen"],
+        "mots": [
+          { "nl": "het hoofd", "fr": "la tête" },
+          { "nl": "de keel", "fr": "la gorge" },
+          { "nl": "de buik", "fr": "le ventre" },
+          { "nl": "de rug", "fr": "le dos" },
+          { "nl": "de arm", "fr": "le bras" },
+          { "nl": "het been", "fr": "la jambe" },
+          { "nl": "de voet", "fr": "le pied" },
+          { "nl": "de hand", "fr": "la main" },
+          { "nl": "de schouder", "fr": "l'épaule" },
+          { "nl": "de knie", "fr": "le genou" },
+          { "nl": "de pijn", "fr": "la douleur" }
+        ],
+        "phrases": [
+          { "nl": "Wat scheelt er?", "fr": "Qu'est-ce qui ne va pas ?" },
+          { "nl": "Ik heb pijn aan mijn rug.", "fr": "J'ai mal au dos." },
+          { "nl": "Mijn hoofd doet pijn.", "fr": "J'ai mal à la tête." }
+        ]
+      },
+      "regle": {
+        "titre": "pijn hebben aan / pijn doen",
+        "explication": "Deux tournures : « Ik heb pijn aan mijn knie » (j'ai mal au genou) ou « Mijn knie doet pijn » (mon genou fait mal). Quelques expressions figées : « Ik heb hoofdpijn », « buikpijn », « keelpijn », « rugpijn » (un seul mot). On utilise le possessif (mijn) là où le français met l'article : j'ai mal AU dos = pijn aan MIJN rug.",
+        "exemples": [
+          { "nl": "Ik heb hoofdpijn.", "fr": "J'ai mal à la tête." },
+          { "nl": "Mijn schouder doet pijn.", "fr": "J'ai mal à l'épaule." },
+          { "nl": "Ik heb pijn aan mijn voet.", "fr": "J'ai mal au pied." },
+          { "nl": "Doet het pijn als ik hier druk?", "fr": "Ça fait mal quand j'appuie ici ?" }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'ai mal au dos » :", "choices": ["Ik heb pijn aan de rug.", "Ik heb pijn aan mijn rug.", "Ik ben pijn in mijn rug."], "answer": 1 },
+        { "type": "qcm", "q": "« Mon genou fait mal » :", "choices": ["Mijn knie doet pijn.", "Mijn knie heeft pijn.", "Mijn knie is pijn."], "answer": 0 },
+        { "type": "trou", "phrase": "Ik heb ___. (mal à la tête, un mot)", "answer": "hoofdpijn", "fr": "J'ai mal à la tête." },
+        { "type": "trou", "phrase": "Wat ___ er?", "answer": "scheelt", "fr": "Qu'est-ce qui ne va pas ?" },
+        { "type": "ordre", "mots": ["pijn", "Mijn", "doet", "been"], "answer": "Mijn been doet pijn", "fr": "Ma jambe fait mal." },
+        { "type": "traduire", "fr": "J'ai mal à la gorge.", "answer": "Ik heb keelpijn./Mijn keel doet pijn." },
+        { "type": "ecoute", "nl": "Doet het pijn als ik hier druk?", "fr": "Ça fait mal quand j'appuie ici ?" },
+        { "type": "dire", "nl": "Ik heb pijn aan mijn rug.", "fr": "J'ai mal au dos." },
+        { "type": "repondre", "question": "Wat scheelt er?", "question_fr": "Qu'est-ce qui ne va pas ?", "attendu": [], "un_de": ["pijn", "hoofdpijn", "keelpijn", "buikpijn", "rugpijn", "ziek", "koorts"], "exemple": "Ik heb pijn aan mijn rug." }
+      ],
+      "jeu": {
+        "titre": "L'examen chez le médecin",
+        "consigne": "Le médecin t'examine : dis où tu as mal, réponds à ses questions (où exactement, quand ça fait mal).",
+        "role": "Tu es dokter Maes, médecin généraliste. Le patient a mal quelque part. Demande où, exactement, quand ça fait mal (en bougeant, la nuit), s'il a soulevé quelque chose ou fait du sport. Appuie (en paroles) à différents endroits : « Doet het pijn als ik hier druk? ». Néerlandais simple (A2), une question à la fois.",
+        "welcome": "Goeiedag, neem plaats. Wat scheelt er?"
+      }
+    },
+    {
+      "id": "symptomes",
+      "titre": "Symptômes et depuis quand",
+      "intro": "Décrire tes symptômes (fièvre, toux, fatigue…) et depuis quand : « sinds » + moment, « al » + durée.",
+      "roles": { "A": "Le médecin", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Welke klachten heeft u?", "fr": "Quels symptômes avez-vous ?" },
+        { "qui": "B", "nl": "Ik heb koorts en ik hoest veel.", "fr": "J'ai de la fièvre et je tousse beaucoup." },
+        { "qui": "A", "nl": "Sinds wanneer?", "fr": "Depuis quand ?" },
+        { "qui": "B", "nl": "Sinds zondag. Ik ben al drie dagen ziek.", "fr": "Depuis dimanche. Je suis malade depuis trois jours." },
+        { "qui": "A", "nl": "Heeft u ook hoofdpijn?", "fr": "Avez-vous aussi mal à la tête ?" },
+        { "qui": "B", "nl": "Ja, en ik ben heel moe.", "fr": "Oui, et je suis très fatigué." }
+      ],
+      "vocab": {
+        "verbes": ["hoesten", "niezen", "slapen", "eten", "voelen"],
+        "mots": [
+          { "nl": "de koorts", "fr": "la fièvre" },
+          { "nl": "de hoest", "fr": "la toux" },
+          { "nl": "de verkoudheid", "fr": "le rhume" },
+          { "nl": "de griep", "fr": "la grippe" },
+          { "nl": "de klacht", "fr": "le symptôme, la plainte" },
+          { "nl": "misselijk", "fr": "nauséeux" },
+          { "nl": "duizelig", "fr": "pris de vertiges" },
+          { "nl": "moe", "fr": "fatigué" },
+          { "nl": "sinds", "fr": "depuis (un moment)" },
+          { "nl": "al", "fr": "déjà, depuis (une durée)" }
+        ],
+        "phrases": [
+          { "nl": "Ik heb koorts.", "fr": "J'ai de la fièvre." },
+          { "nl": "Sinds zondag.", "fr": "Depuis dimanche." },
+          { "nl": "Ik ben al drie dagen ziek.", "fr": "Je suis malade depuis trois jours." }
+        ]
+      },
+      "regle": {
+        "titre": "sinds + moment, al + durée",
+        "explication": "« Depuis » se traduit de deux façons. Avec un moment précis : « sinds » (sinds maandag, sinds gisteren, sinds vorige week). Avec une durée : « al » + durée, et le verbe reste au présent : « Ik hoest al een week » (je tousse depuis une semaine), « Ik ben al drie dagen ziek ». « Hoe lang al? » = depuis combien de temps ?",
+        "exemples": [
+          { "nl": "Ik heb koorts sinds gisteren.", "fr": "J'ai de la fièvre depuis hier." },
+          { "nl": "Ik hoest al een week.", "fr": "Je tousse depuis une semaine." },
+          { "nl": "Hoe lang heeft u al pijn?", "fr": "Depuis combien de temps avez-vous mal ?" },
+          { "nl": "Ik ben al twee dagen misselijk.", "fr": "J'ai la nausée depuis deux jours." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je tousse depuis une semaine » :", "choices": ["Ik hoest sinds een week.", "Ik hoest al een week.", "Ik heb gehoest een week."], "answer": 1 },
+        { "type": "qcm", "q": "« depuis lundi » :", "choices": ["al maandag", "sinds maandag", "voor maandag"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik ben ___ drie dagen ziek. (depuis + durée)", "answer": "al", "fr": "Je suis malade depuis trois jours." },
+        { "type": "trou", "phrase": "Ik heb koorts ___ gisteren.", "answer": "sinds", "fr": "J'ai de la fièvre depuis hier." },
+        { "type": "ordre", "mots": ["heeft", "al", "lang", "Hoe", "pijn?", "u"], "answer": "Hoe lang heeft u al pijn?", "fr": "Depuis combien de temps avez-vous mal ?" },
+        { "type": "traduire", "fr": "Je suis très fatigué.", "answer": "Ik ben heel moe./Ik ben erg moe." },
+        { "type": "ecoute", "nl": "Ik ben al twee dagen misselijk.", "fr": "J'ai la nausée depuis deux jours." },
+        { "type": "dire", "nl": "Ik heb koorts en ik hoest veel.", "fr": "J'ai de la fièvre et je tousse beaucoup." },
+        { "type": "repondre", "question": "Hoe lang bent u al ziek?", "question_fr": "Depuis combien de temps êtes-vous malade ?", "attendu": [], "un_de": ["sinds", "al", "dagen", "week", "gisteren"], "exemple": "Ik ben al drie dagen ziek." }
+      ],
+      "jeu": {
+        "titre": "Décrire ses symptômes",
+        "consigne": "Tu as la grippe. Décris tous tes symptômes au médecin et dis depuis quand.",
+        "role": "Tu es dokter Maes. Le patient semble avoir la grippe. Pose les questions habituelles : quels symptômes, depuis quand, fièvre (combien de degrés), toux, appétit, sommeil, médicaments déjà pris. Une question à la fois, néerlandais simple (A2).",
+        "welcome": "Dag, kom binnen. U ziet er niet zo goed uit. Welke klachten heeft u?"
+      }
+    },
+    {
+      "id": "conseils",
+      "titre": "Comprendre les conseils et le traitement",
+      "intro": "Comprendre le médecin : le traitement, la posologie, ce qu'il faut faire ou éviter. Beaucoup de verbes pronominaux (zich voelen, zich rusten…).",
+      "roles": { "A": "Le médecin", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "U heeft griep. U moet veel rusten en veel drinken.", "fr": "Vous avez la grippe. Vous devez beaucoup vous reposer et boire beaucoup." },
+        { "qui": "B", "nl": "Moet ik medicijnen nemen?", "fr": "Dois-je prendre des médicaments ?" },
+        { "qui": "A", "nl": "Neem drie keer per dag een paracetamol.", "fr": "Prenez un paracétamol trois fois par jour." },
+        { "qui": "B", "nl": "Voor of na het eten?", "fr": "Avant ou après le repas ?" },
+        { "qui": "A", "nl": "Na het eten. Als u zich na vijf dagen niet beter voelt, komt u terug.", "fr": "Après le repas. Si vous ne vous sentez pas mieux après cinq jours, revenez." },
+        { "qui": "B", "nl": "Goed, ik zal het doen. Dank u.", "fr": "D'accord, je le ferai. Merci." }
+      ],
+      "vocab": {
+        "verbes": ["voelen", "rusten", "voorschrijven", "terugkomen", "innemen"],
+        "mots": [
+          { "nl": "het medicijn", "fr": "le médicament" },
+          { "nl": "het voorschrift", "fr": "l'ordonnance" },
+          { "nl": "de tablet", "fr": "le comprimé" },
+          { "nl": "de siroop", "fr": "le sirop" },
+          { "nl": "de apotheek", "fr": "la pharmacie" },
+          { "nl": "per dag", "fr": "par jour" },
+          { "nl": "voor het eten", "fr": "avant le repas" },
+          { "nl": "na het eten", "fr": "après le repas" },
+          { "nl": "beter", "fr": "mieux" },
+          { "nl": "ernstig", "fr": "grave" }
+        ],
+        "phrases": [
+          { "nl": "Moet ik medicijnen nemen?", "fr": "Dois-je prendre des médicaments ?" },
+          { "nl": "Hoeveel keer per dag?", "fr": "Combien de fois par jour ?" },
+          { "nl": "Ik voel me niet goed.", "fr": "Je ne me sens pas bien." }
+        ]
+      },
+      "regle": {
+        "titre": "Les verbes pronominaux : ik voel me",
+        "explication": "Un verbe pronominal se conjugue avec un pronom réfléchi : ik voel me, jij voelt je, hij/zij voelt zich, wij voelen ons, jullie voelen je, zij voelen zich. Le pronom suit le verbe conjugué : « Ik voel me beter ». Avec u : « Voelt u zich beter? ». D'autres verbes courants : zich haasten (se dépêcher), zich vergissen (se tromper), zich herinneren (se souvenir), zich ziek melden (se déclarer malade).",
+        "exemples": [
+          { "nl": "Ik voel me niet goed.", "fr": "Je ne me sens pas bien." },
+          { "nl": "Voelt u zich al beter?", "fr": "Vous sentez-vous déjà mieux ?" },
+          { "nl": "Hij voelt zich moe.", "fr": "Il se sent fatigué." },
+          { "nl": "Ik moet me ziek melden.", "fr": "Je dois me déclarer malade." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je me sens mieux » :", "choices": ["Ik voel beter.", "Ik voel me beter.", "Ik me voel beter."], "answer": 1 },
+        { "type": "qcm", "q": "« Il se sent fatigué » :", "choices": ["Hij voelt hem moe.", "Hij voelt zich moe.", "Hij voelt zijn moe."], "answer": 1 },
+        { "type": "trou", "phrase": "Voelt u ___ al beter?", "answer": "zich", "fr": "Vous sentez-vous déjà mieux ?" },
+        { "type": "trou", "phrase": "Neem drie keer ___ dag een tablet.", "answer": "per", "fr": "Prenez un comprimé trois fois par jour." },
+        { "type": "ordre", "mots": ["niet", "Ik", "me", "goed.", "voel"], "answer": "Ik voel me niet goed.", "fr": "Je ne me sens pas bien." },
+        { "type": "traduire", "fr": "Avant ou après le repas ?", "answer": "Voor of na het eten?" },
+        { "type": "ecoute", "nl": "U moet veel rusten en veel drinken.", "fr": "Vous devez beaucoup vous reposer et boire beaucoup." },
+        { "type": "dire", "nl": "Hoeveel keer per dag moet ik dit nemen?", "fr": "Combien de fois par jour dois-je prendre ceci ?" },
+        { "type": "repondre", "question": "Hoe voelt u zich vandaag?", "question_fr": "Comment vous sentez-vous aujourd'hui ?", "attendu": ["voel"], "exemple": "Ik voel me al een beetje beter." }
+      ],
+      "jeu": {
+        "titre": "Le traitement",
+        "consigne": "Le médecin te donne un traitement. Pose toutes tes questions : quel médicament, combien de fois, avant ou après le repas, quand revenir.",
+        "role": "Tu es dokter Maes. Tu as diagnostiqué une bronchite. Donne un traitement (un sirop trois fois par jour, un antibiotique matin et soir pendant sept jours après le repas), des conseils (repos, boire beaucoup, ne pas fumer) et dis quand revenir. Réponds aux questions ; vérifie qu'il a compris en lui demandant de répéter. Néerlandais simple (A2).",
+        "welcome": "Zo, ik heb u onderzocht. U heeft een bronchitis. Ik schrijf u iets voor."
+      }
+    },
+    {
+      "id": "omdat",
+      "titre": "Expliquer pourquoi : omdat",
+      "intro": "Donner une raison : « Ik kan niet werken omdat ik koorts heb ». Après « omdat », le verbe part à la fin.",
+      "roles": { "A": "La secrétaire du cabinet", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waarom wilt u vandaag nog een afspraak?", "fr": "Pourquoi voulez-vous un rendez-vous encore aujourd'hui ?" },
+        { "qui": "B", "nl": "Omdat ik veel koorts heb en mijn kind ook ziek is.", "fr": "Parce que j'ai beaucoup de fièvre et que mon enfant est aussi malade." },
+        { "qui": "A", "nl": "Ik heb nog een plaats om vijf uur.", "fr": "J'ai encore une place à cinq heures." },
+        { "qui": "B", "nl": "Kan het vroeger? Ik voel me echt slecht.", "fr": "C'est possible plus tôt ? Je me sens vraiment mal." },
+        { "qui": "A", "nl": "Ik kijk even... om half vier dan.", "fr": "Je regarde... à trois heures et demie alors." }
+      ],
+      "vocab": {
+        "verbes": ["uitleggen", "weten", "kunnen", "werken"],
+        "mots": [
+          { "nl": "omdat", "fr": "parce que (verbe à la fin)" },
+          { "nl": "want", "fr": "car (ordre normal)" },
+          { "nl": "waarom", "fr": "pourquoi" },
+          { "nl": "de reden", "fr": "la raison" },
+          { "nl": "dringend", "fr": "urgent" },
+          { "nl": "vroeger", "fr": "plus tôt" },
+          { "nl": "de spoed", "fr": "les urgences" },
+          { "nl": "de wachtzaal", "fr": "la salle d'attente" }
+        ],
+        "phrases": [
+          { "nl": "Omdat ik ziek ben.", "fr": "Parce que je suis malade." },
+          { "nl": "Ik kom niet werken, want ik heb koorts.", "fr": "Je ne viens pas travailler, car j'ai de la fièvre." },
+          { "nl": "Kan het vroeger?", "fr": "C'est possible plus tôt ?" }
+        ]
+      },
+      "regle": {
+        "titre": "omdat (verbe à la fin) / want (ordre normal)",
+        "explication": "« omdat » introduit une subordonnée : le verbe conjugué part à la FIN : « … omdat ik koorts heb », « … omdat mijn kind ziek is ». « want » (car) garde l'ordre normal : « … want ik heb koorts ». Les deux expliquent une raison ; « omdat » répond aussi seul à « Waarom? » : « Omdat ik ziek ben ».",
+        "exemples": [
+          { "nl": "Ik blijf thuis omdat ik ziek ben.", "fr": "Je reste à la maison parce que je suis malade." },
+          { "nl": "Ik blijf thuis, want ik ben ziek.", "fr": "Je reste à la maison, car je suis malade." },
+          { "nl": "Omdat het dringend is.", "fr": "Parce que c'est urgent." },
+          { "nl": "Ik bel omdat ik een afspraak wil maken.", "fr": "J'appelle parce que je veux prendre rendez-vous." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Complète : « Ik kom niet, omdat ik … »", "choices": ["ben ziek", "ziek ben", "ziek zijn ben"], "answer": 1 },
+        { "type": "qcm", "q": "Complète : « Ik kom niet, want ik … »", "choices": ["ben ziek", "ziek ben", "ziek"], "answer": 0 },
+        { "type": "trou", "phrase": "Ik bel omdat mijn kind ziek ___.", "answer": "is", "fr": "J'appelle parce que mon enfant est malade." },
+        { "type": "trou", "phrase": "___ wilt u een afspraak? (pourquoi)", "answer": "Waarom", "fr": "Pourquoi voulez-vous un rendez-vous ?" },
+        { "type": "ordre", "mots": ["thuis", "ik", "ziek", "ben.", "Ik", "blijf", "omdat"], "answer": "Ik blijf thuis omdat ik ziek ben.", "fr": "Je reste à la maison parce que je suis malade." },
+        { "type": "traduire", "fr": "Parce que c'est urgent.", "answer": "Omdat het dringend is." },
+        { "type": "ecoute", "nl": "Ik bel omdat ik een afspraak wil maken.", "fr": "J'appelle parce que je veux prendre rendez-vous." },
+        { "type": "dire", "nl": "Ik kan niet werken omdat ik koorts heb.", "fr": "Je ne peux pas travailler parce que j'ai de la fièvre." },
+        { "type": "repondre", "question": "Waarom bent u niet komen werken?", "question_fr": "Pourquoi n'êtes-vous pas venu travailler ?", "attendu": [], "un_de": ["omdat", "want"], "exemple": "Omdat ik ziek ben." }
+      ],
+      "jeu": {
+        "titre": "Obtenir un rendez-vous urgent",
+        "consigne": "Le cabinet est complet aujourd'hui. Explique pourquoi c'est urgent pour obtenir un rendez-vous plus tôt.",
+        "role": "Tu es la secrétaire d'un cabinet médical, aimable mais avec un planning plein. Propose d'abord un rendez-vous dans deux jours ; demande pourquoi c'est urgent ; si le patient explique bien avec des raisons (omdat/want), trouve une place aujourd'hui. Néerlandais simple (A2).",
+        "welcome": "Praktijk dokter Maes, goeiemorgen. Vandaag is het volgeboekt, vrees ik. Waarvoor belt u?"
+      }
+    },
+    {
+      "id": "certificat",
+      "titre": "Le certificat et l'employeur",
+      "intro": "Prévenir ton employeur, demander un certificat médical et comprendre les règles de base de l'absence pour maladie.",
+      "roles": { "A": "Ta responsable RH", "B": "Toi" },
+      "dialogue": [
+        { "qui": "B", "nl": "Goeiemorgen, ik wil me ziek melden.", "fr": "Bonjour, je veux me déclarer malade." },
+        { "qui": "A", "nl": "Oei, beterschap! Heeft u een ziektebriefje?", "fr": "Oh, bon rétablissement ! Vous avez un certificat ?" },
+        { "qui": "B", "nl": "Ja, de dokter heeft me een briefje gegeven voor vijf dagen.", "fr": "Oui, le médecin m'a donné un certificat pour cinq jours." },
+        { "qui": "A", "nl": "Kunt u het vandaag nog doorsturen?", "fr": "Pouvez-vous l'envoyer encore aujourd'hui ?" },
+        { "qui": "B", "nl": "Ik stuur het per mail. Mijn collega neemt mijn dossiers over.", "fr": "Je l'envoie par mail. Mon collègue reprend mes dossiers." }
+      ],
+      "vocab": {
+        "verbes": ["melden", "doorsturen", "overnemen", "verwittigen", "herstellen"],
+        "mots": [
+          { "nl": "het ziektebriefje", "fr": "le certificat médical" },
+          { "nl": "de afwezigheid", "fr": "l'absence" },
+          { "nl": "beterschap!", "fr": "bon rétablissement !" },
+          { "nl": "de werkgever", "fr": "l'employeur" },
+          { "nl": "het ziekenfonds", "fr": "la mutuelle" },
+          { "nl": "de controlearts", "fr": "le médecin contrôleur" },
+          { "nl": "de werkdag", "fr": "le jour ouvrable" },
+          { "nl": "tijdig", "fr": "à temps" }
+        ],
+        "phrases": [
+          { "nl": "Ik wil me ziek melden.", "fr": "Je veux me déclarer malade." },
+          { "nl": "De dokter heeft me een briefje gegeven.", "fr": "Le médecin m'a donné un certificat." },
+          { "nl": "Ik stuur het per mail.", "fr": "Je l'envoie par mail." }
+        ]
+      },
+      "regle": {
+        "titre": "Raconter ce que le médecin a fait (perfectum)",
+        "explication": "Pour rapporter la visite, on utilise le perfectum : « De dokter heeft me onderzocht » (le médecin m'a examiné), « Hij heeft me een briefje gegeven », « Hij heeft me antibiotica voorgeschreven ». Les verbes en ver-, be-, ont-, onder- n'ont pas de ge- : onderzocht, voorgeschreven (voor- est séparable, donc voor-ge-schreven). « Beterschap! » se dit toujours à quelqu'un de malade.",
+        "exemples": [
+          { "nl": "De dokter heeft me onderzocht.", "fr": "Le médecin m'a examiné." },
+          { "nl": "Hij heeft me antibiotica voorgeschreven.", "fr": "Il m'a prescrit des antibiotiques." },
+          { "nl": "Ik heb me ziek gemeld.", "fr": "Je me suis déclaré malade." },
+          { "nl": "Ik ben vijf dagen thuis gebleven.", "fr": "Je suis resté cinq jours à la maison." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Le médecin m'a examiné » :", "choices": ["De dokter heeft me geonderzocht.", "De dokter heeft me onderzocht.", "De dokter is me onderzocht."], "answer": 1 },
+        { "type": "qcm", "q": "On dit à un collègue malade :", "choices": ["Proficiat!", "Beterschap!", "Smakelijk!"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik wil me ziek ___.", "answer": "melden", "fr": "Je veux me déclarer malade." },
+        { "type": "trou", "phrase": "Hij heeft me een briefje ___. (donné)", "answer": "gegeven", "fr": "Il m'a donné un certificat." },
+        { "type": "ordre", "mots": ["per", "Ik", "het", "mail.", "stuur"], "answer": "Ik stuur het per mail.", "fr": "Je l'envoie par mail." },
+        { "type": "traduire", "fr": "Mon collègue reprend mes dossiers.", "answer": "Mijn collega neemt mijn dossiers over." },
+        { "type": "ecoute", "nl": "Hij heeft me antibiotica voorgeschreven.", "fr": "Il m'a prescrit des antibiotiques." },
+        { "type": "dire", "nl": "Goeiemorgen, ik wil me ziek melden.", "fr": "Bonjour, je veux me déclarer malade." },
+        { "type": "repondre", "question": "Wat heeft de dokter gezegd?", "question_fr": "Qu'a dit le médecin ?", "attendu": [], "un_de": ["heeft", "moet", "griep", "rusten", "briefje", "dagen"], "exemple": "Ik heb griep en ik moet vijf dagen rusten." }
+      ],
+      "jeu": {
+        "titre": "Prévenir l'employeur",
+        "consigne": "Appelle les RH : déclare-toi malade, explique ce que le médecin a dit, combien de jours tu seras absent, et comment tu envoies le certificat.",
+        "role": "Tu es Marleen, gestionnaire RH. L'employé appelle pour se déclarer malade. Souhaite-lui « beterschap », demande ce qu'il a, combien de jours, s'il a un certificat et quand il l'envoie, qui reprend ses tâches urgentes. Néerlandais simple (A2).",
+        "welcome": "Personeelsdienst, met Marleen, goeiemorgen."
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : malade un lundi matin",
+    "consigne": "Tu es malade. Appelle d'abord le cabinet pour un rendez-vous (explique pourquoi c'est urgent), puis décris tes symptômes au médecin, depuis quand, comprends son traitement, et demande un certificat pour ton employeur.",
+    "role": "Tu joues deux personnages. D'abord la secrétaire du cabinet : le planning est plein, demande pourquoi c'est urgent, puis donne un rendez-vous à 11 heures. Ensuite, annonce entre crochets [chez le médecin] et deviens dokter Maes : demande les symptômes, où il a mal, depuis quand, ce qu'il a déjà pris ; donne un diagnostic (grippe), un traitement (paracétamol trois fois par jour, repos) et demande s'il a besoin d'un certificat. Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Praktijk dokter Maes, goeiemorgen. Waarmee kan ik u helpen?"
+  },
+  "examen": {
+    "reussite": "Tu sais te débrouiller chez le médecin en néerlandais.",
+    "sujets": [
+      { "label": "demander un rendez-vous", "etape": "omdat", "mots": ["afspraak", "vandaag", "vroeger"] },
+      { "label": "expliquer pourquoi (omdat / want)", "etape": "omdat", "mots": ["omdat", "want"] },
+      { "label": "dire où tu as mal", "etape": "corps", "mots": ["pijn", "hoofdpijn", "keelpijn", "buikpijn", "rugpijn", "doet pijn"] },
+      { "label": "décrire des symptômes", "etape": "symptomes", "mots": ["koorts", "hoest", "hoesten", "moe", "misselijk", "duizelig", "verkouden", "griep"] },
+      { "label": "dire depuis quand", "etape": "symptomes", "mots": ["sinds", "al", "dagen", "gisteren"] },
+      { "label": "parler de ton état", "etape": "conseils", "mots": ["voel me", "voel mij", "beter", "slecht"] },
+      { "label": "poser une question sur le traitement", "etape": "conseils", "mots": ["hoeveel keer", "per dag", "voor of na", "moet ik", "medicijn", "tablet"] },
+      { "label": "demander le certificat", "etape": "certificat", "mots": ["ziektebriefje", "briefje", "attest", "werkgever", "werk"] }
+    ]
+  }
+}

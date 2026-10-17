@@ -1,0 +1,328 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Sujets spéciaux #imperfectum (formes au prétérit) et #perfectum-*. Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_souvenir",
+  "niveau": "A2",
+  "icone": "📖",
+  "titre": "Raconter un souvenir",
+  "accroche": "Raconter ton enfance, ton ancien travail, un voyage ou un incident, dans l'ordre et au bon temps du passé.",
+  "objectif": "À la fin du module, tu sais raconter une expérience passée : décrire le contexte (imparfait), raconter les actions (passé composé), enchaîner dans l'ordre et dire ce que tu en as pensé.",
+  "etapes": [
+    {
+      "id": "enfance",
+      "titre": "Quand j'étais petit : l'imparfait",
+      "intro": "Pour décrire comment c'était avant (habitudes, descriptions), on utilise l'imperfectum : ik woonde, ik speelde, ik was, ik had.",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waar woonde je toen je klein was?", "fr": "Où habitais-tu quand tu étais petit ?" },
+        { "qui": "B", "nl": "Ik woonde in een klein dorp bij Namen.", "fr": "J'habitais dans un petit village près de Namur." },
+        { "qui": "A", "nl": "Wat deed je graag?", "fr": "Qu'est-ce que tu aimais faire ?" },
+        { "qui": "B", "nl": "Ik speelde elke dag voetbal met mijn broer.", "fr": "Je jouais au foot tous les jours avec mon frère." },
+        { "qui": "A", "nl": "En op school?", "fr": "Et à l'école ?" },
+        { "qui": "B", "nl": "Ik was goed in wiskunde, maar ik had geen zin in taal.", "fr": "J'étais bon en maths, mais je n'avais pas envie de faire les langues." }
+      ],
+      "vocab": {
+        "verbes": ["wonen", "spelen", "zijn", "hebben", "gaan", "doen"],
+        "mots": [
+          { "nl": "toen", "fr": "à l'époque, quand (passé)" },
+          { "nl": "vroeger", "fr": "autrefois" },
+          { "nl": "de jeugd", "fr": "la jeunesse, l'enfance" },
+          { "nl": "het dorp", "fr": "le village" },
+          { "nl": "de school", "fr": "l'école" },
+          { "nl": "de leraar", "fr": "le professeur" },
+          { "nl": "elke dag", "fr": "chaque jour" },
+          { "nl": "klein", "fr": "petit" },
+          { "nl": "de wiskunde", "fr": "les mathématiques" }
+        ],
+        "phrases": [
+          { "nl": "Toen ik klein was, woonde ik in Namen.", "fr": "Quand j'étais petit, j'habitais à Namur." },
+          { "nl": "Vroeger speelde ik veel voetbal.", "fr": "Autrefois, je jouais beaucoup au foot." },
+          { "nl": "Ik was goed in wiskunde.", "fr": "J'étais bon en maths." }
+        ]
+      },
+      "regle": {
+        "titre": "L'imperfectum : woonde, speelde, was, had",
+        "explication": "Verbes réguliers : radical + -de ou -te (pluriel -den/-ten). On met -te si le radical finit par t, k, f, s, ch, p (« 't kofschip ») : werken → werkte, wonen → woonde, spelen → speelde. Irréguliers à connaître : zijn → was/waren, hebben → had/hadden, gaan → ging, doen → deed, komen → kwam, zien → zag. On l'utilise pour décrire et pour les habitudes du passé. Après « toen » (quand, au passé), le verbe va à la fin : « toen ik klein was ».",
+        "exemples": [
+          { "nl": "Ik werkte in een fabriek.", "fr": "Je travaillais dans une usine." },
+          { "nl": "We woonden in Luik.", "fr": "Nous habitions à Liège." },
+          { "nl": "Het was een mooie tijd.", "fr": "C'était une belle époque." },
+          { "nl": "Toen ik student was, had ik weinig geld.", "fr": "Quand j'étais étudiant, j'avais peu d'argent." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'habitais à Liège » :", "choices": ["Ik woonte in Luik.", "Ik woonde in Luik.", "Ik heb gewoond in Luik."], "answer": 1 },
+        { "type": "qcm", "q": "L'imperfectum de « zijn » (ik) :", "choices": ["ik zijnde", "ik was", "ik ben geweest"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik ___ elke dag voetbal. (jouais)", "answer": "speelde", "fr": "Je jouais au foot tous les jours." },
+        { "type": "trou", "phrase": "Toen ik klein ___, woonde ik in Namen.", "answer": "was", "fr": "Quand j'étais petit, j'habitais à Namur." },
+        { "type": "ordre", "mots": ["fabriek.", "Ik", "in", "werkte", "een"], "answer": "Ik werkte in een fabriek.", "fr": "Je travaillais dans une usine." },
+        { "type": "traduire", "fr": "J'avais peu d'argent.", "answer": "Ik had weinig geld." },
+        { "type": "ecoute", "nl": "Vroeger ging ik elke zomer naar de zee.", "fr": "Autrefois, j'allais à la mer chaque été." },
+        { "type": "dire", "nl": "Toen ik klein was, woonde ik in een dorp.", "fr": "Quand j'étais petit, j'habitais dans un village." },
+        { "type": "repondre", "question": "Waar woonde je toen je klein was?", "question_fr": "Où habitais-tu quand tu étais petit ?", "attendu": ["woonde"], "exemple": "Ik woonde in Brussel." }
+      ],
+      "jeu": {
+        "titre": "Souvenirs d'enfance",
+        "consigne": "Une collègue te parle de son enfance à la campagne. Raconte la tienne : où tu habitais, ce que tu faisais, comment c'était à l'école.",
+        "role": "Tu es Griet, collègue de 45 ans qui a grandi dans une ferme en Flandre-Occidentale. Raconte deux souvenirs à l'imperfectum, puis demande à l'apprenant où il habitait petit, ce qu'il faisait, comment c'était à l'école, s'il avait des frères et sœurs. Utilise beaucoup l'imperfectum. Néerlandais simple (A2).",
+        "welcome": "Toen ik klein was, woonde ik op een boerderij. En jij, waar woonde jij als kind?"
+      }
+    },
+    {
+      "id": "experience",
+      "titre": "Mon ancien travail",
+      "intro": "Parler de ton expérience : où tu travaillais, ce que tu faisais, ce que tu as appris — très utile en entretien.",
+      "roles": { "A": "Une recruteuse", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waar werkte u vroeger?", "fr": "Où travailliez-vous avant ?" },
+        { "qui": "B", "nl": "Ik werkte twee jaar in een magazijn.", "fr": "J'ai travaillé deux ans dans un entrepôt." },
+        { "qui": "A", "nl": "Wat deed u daar precies?", "fr": "Qu'y faisiez-vous exactement ?" },
+        { "qui": "B", "nl": "Ik controleerde de leveringen en ik hielp de chauffeurs.", "fr": "Je contrôlais les livraisons et j'aidais les chauffeurs." },
+        { "qui": "A", "nl": "En wat heeft u daar geleerd?", "fr": "Et qu'avez-vous appris là-bas ?" },
+        { "qui": "B", "nl": "Ik heb geleerd om nauwkeurig en snel te werken.", "fr": "J'ai appris à travailler avec précision et rapidement." }
+      ],
+      "vocab": {
+        "verbes": ["werken", "controleren", "helpen", "leren", "beginnen", "stoppen"],
+        "mots": [
+          { "nl": "de ervaring", "fr": "l'expérience" },
+          { "nl": "de vorige job", "fr": "l'emploi précédent" },
+          { "nl": "het magazijn", "fr": "l'entrepôt" },
+          { "nl": "de verantwoordelijkheid", "fr": "la responsabilité" },
+          { "nl": "de taak", "fr": "la tâche" },
+          { "nl": "de stage", "fr": "le stage" },
+          { "nl": "het contract", "fr": "le contrat" },
+          { "nl": "nauwkeurig", "fr": "précis" },
+          { "nl": "geleden", "fr": "il y a (temps)" }
+        ],
+        "phrases": [
+          { "nl": "Ik werkte twee jaar in een magazijn.", "fr": "J'ai travaillé deux ans dans un entrepôt." },
+          { "nl": "Ik controleerde de leveringen.", "fr": "Je contrôlais les livraisons." },
+          { "nl": "Ik heb veel geleerd.", "fr": "J'ai beaucoup appris." }
+        ]
+      },
+      "regle": {
+        "titre": "Imperfectum des irréguliers fréquents",
+        "explication": "Pour raconter ton expérience, ces formes reviennent sans cesse : helpen → hielp, beginnen → begon, doen → deed, gaan → ging, krijgen → kreeg, zien → zag, nemen → nam, schrijven → schreef, blijven → bleef. Au pluriel : hielpen, begonnen, deden, gingen. Avec « geleden » (il y a) : « Twee jaar geleden begon ik als magazijnier ». Tu les retrouves toutes dans Apprendre → Conjugaison.",
+        "exemples": [
+          { "nl": "Ik hielp de chauffeurs.", "fr": "J'aidais les chauffeurs." },
+          { "nl": "Twee jaar geleden begon ik daar.", "fr": "Il y a deux ans, j'ai commencé là-bas." },
+          { "nl": "Ik kreeg veel verantwoordelijkheid.", "fr": "J'avais beaucoup de responsabilités." },
+          { "nl": "Ik bleef er drie jaar.", "fr": "J'y suis resté trois ans." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "L'imperfectum de « helpen » :", "choices": ["helpte", "hielp", "hulp"], "answer": 1 },
+        { "type": "qcm", "q": "« Il y a deux ans » :", "choices": ["twee jaar geleden", "geleden twee jaar", "sinds twee jaar"], "answer": 0 },
+        { "type": "trou", "phrase": "Twee jaar geleden ___ ik als magazijnier. (commençais)", "answer": "begon", "fr": "Il y a deux ans, j'ai commencé comme magasinier." },
+        { "type": "trou", "phrase": "Ik ___ veel verantwoordelijkheid. (recevais)", "answer": "kreeg", "fr": "J'avais beaucoup de responsabilités." },
+        { "type": "ordre", "mots": ["de", "Ik", "leveringen.", "controleerde"], "answer": "Ik controleerde de leveringen.", "fr": "Je contrôlais les livraisons." },
+        { "type": "traduire", "fr": "J'y suis resté trois ans.", "answer": "Ik bleef er drie jaar./Ik ben er drie jaar gebleven." },
+        { "type": "ecoute", "nl": "Ik heb geleerd om snel en nauwkeurig te werken.", "fr": "J'ai appris à travailler vite et avec précision." },
+        { "type": "dire", "nl": "Ik werkte twee jaar in een magazijn.", "fr": "J'ai travaillé deux ans dans un entrepôt." },
+        { "type": "repondre", "question": "Wat deed u in uw vorige job?", "question_fr": "Que faisiez-vous dans votre emploi précédent ?", "attendu": ["ik"], "un_de": ["werkte", "deed", "controleerde", "hielp", "was"], "exemple": "Ik werkte als magazijnier en ik controleerde de leveringen." }
+      ],
+      "jeu": {
+        "titre": "Parler de son expérience",
+        "consigne": "Une recruteuse te demande de parler de tes emplois précédents. Raconte où tu travaillais, ce que tu faisais, combien de temps, et ce que tu as appris.",
+        "role": "Tu es Sofie, recruteuse en agence d'intérim. Demande au candidat ses expériences précédentes : où, combien de temps, ses tâches, ce qu'il a appris, pourquoi il est parti. Relance pour qu'il utilise l'imperfectum (wat deed u daar?). Néerlandais simple (A2).",
+        "welcome": "Goeiedag, vertel eens: waar werkte u hiervoor?"
+      }
+    },
+    {
+      "id": "temps",
+      "titre": "Imparfait ou passé composé ?",
+      "intro": "Le contexte et les habitudes à l'imperfectum (het regende, ik was moe), les actions ponctuelles et les résultats au perfectum (ik heb de bus gemist).",
+      "roles": { "A": "Un ami", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waarom was je gisteren zo laat?", "fr": "Pourquoi étais-tu si en retard hier ?" },
+        { "qui": "B", "nl": "Het regende en er was veel file.", "fr": "Il pleuvait et il y avait beaucoup de bouchons." },
+        { "qui": "A", "nl": "En toen?", "fr": "Et alors ?" },
+        { "qui": "B", "nl": "Ik heb de bus gemist en ik ben te voet gegaan.", "fr": "J'ai raté le bus et j'y suis allé à pied." },
+        { "qui": "A", "nl": "Ben je nat geworden?", "fr": "Tu t'es fait mouiller ?" },
+        { "qui": "B", "nl": "Ja, helemaal! Ik was echt boos.", "fr": "Oui, complètement ! J'étais vraiment fâché." }
+      ],
+      "vocab": {
+        "verbes": ["regenen", "missen", "worden", "gebeuren", "lopen"],
+        "mots": [
+          { "nl": "gisteren", "fr": "hier" },
+          { "nl": "en toen?", "fr": "et alors ?" },
+          { "nl": "nat", "fr": "mouillé" },
+          { "nl": "boos", "fr": "fâché" },
+          { "nl": "plotseling", "fr": "soudain" },
+          { "nl": "helemaal", "fr": "complètement" },
+          { "nl": "de file", "fr": "les bouchons" },
+          { "nl": "het ongeluk", "fr": "l'accident, la malchance" }
+        ],
+        "phrases": [
+          { "nl": "Het regende en er was veel file.", "fr": "Il pleuvait et il y avait beaucoup de bouchons." },
+          { "nl": "Ik heb de bus gemist.", "fr": "J'ai raté le bus." },
+          { "nl": "Wat is er gebeurd?", "fr": "Que s'est-il passé ?" }
+        ]
+      },
+      "regle": {
+        "titre": "Le décor à l'imperfectum, l'action au perfectum",
+        "explication": "En néerlandais parlé, le perfectum est le passé par défaut, surtout pour une action précise et son résultat : « Ik heb de bus gemist ». L'imperfectum sert surtout à planter le décor (temps, état, ce qui était en cours) et dans un récit plus long : « Het regende », « Ik was moe », « Er was veel file ». « Wat is er gebeurd? » = que s'est-il passé ? (gebeuren se conjugue avec zijn).",
+        "exemples": [
+          { "nl": "Het was koud en ik was moe.", "fr": "Il faisait froid et j'étais fatigué." },
+          { "nl": "Ik heb mijn sleutels verloren.", "fr": "J'ai perdu mes clés." },
+          { "nl": "Wat is er gebeurd?", "fr": "Que s'est-il passé ?" },
+          { "nl": "Plotseling ging het licht uit.", "fr": "Soudain, la lumière s'est éteinte." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Décor : « Il pleuvait » :", "choices": ["Het regende.", "Het heeft geregend.", "Het regent."], "answer": 0 },
+        { "type": "qcm", "q": "Action précise : « J'ai raté le bus » :", "choices": ["Ik miste de bus.", "Ik heb de bus gemist.", "Ik ben de bus gemist."], "answer": 1 },
+        { "type": "trou", "phrase": "Wat is er ___? (passé)", "answer": "gebeurd", "fr": "Que s'est-il passé ?" },
+        { "type": "trou", "phrase": "Het was koud en ik ___ moe.", "answer": "was", "fr": "Il faisait froid et j'étais fatigué." },
+        { "type": "ordre", "mots": ["sleutels", "Ik", "verloren.", "heb", "mijn"], "answer": "Ik heb mijn sleutels verloren.", "fr": "J'ai perdu mes clés." },
+        { "type": "traduire", "fr": "Il y avait beaucoup de bouchons.", "answer": "Er was veel file." },
+        { "type": "ecoute", "nl": "Plotseling ging het licht uit.", "fr": "Soudain, la lumière s'est éteinte." },
+        { "type": "dire", "nl": "Het regende en ik heb de bus gemist.", "fr": "Il pleuvait et j'ai raté le bus." },
+        { "type": "repondre", "question": "Wat is er gebeurd?", "question_fr": "Que s'est-il passé ?", "attendu": [], "un_de": ["heb", "ben", "was", "had"], "exemple": "Ik heb de trein gemist." }
+      ],
+      "jeu": {
+        "titre": "Une journée catastrophe",
+        "consigne": "Raconte à un ami une journée où tout est allé de travers : le décor (temps, état) et ce qui s'est passé.",
+        "role": "Tu es Arne, un ami. Demande à l'apprenant de raconter une journée où tout a mal tourné. Relance avec « En toen? », « Wat is er gebeurd? », « Hoe was het weer? », « Hoe voelde je je? ». Réagis avec empathie et humour. Néerlandais simple (A2).",
+        "welcome": "Je ziet er moe uit! Wat is er gebeurd?"
+      }
+    },
+    {
+      "id": "chronologie",
+      "titre": "Raconter dans l'ordre",
+      "intro": "Enchaîner un récit : eerst, daarna, toen, uiteindelijk… et les subordonnées de temps (toen, nadat, voordat).",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hoe ben je in België terechtgekomen?", "fr": "Comment es-tu arrivé en Belgique ?" },
+        { "qui": "B", "nl": "Eerst studeerde ik in Frankrijk.", "fr": "D'abord, j'étudiais en France." },
+        { "qui": "B", "nl": "Daarna kreeg ik een stage in Brussel.", "fr": "Ensuite, j'ai eu un stage à Bruxelles." },
+        { "qui": "A", "nl": "En toen?", "fr": "Et puis ?" },
+        { "qui": "B", "nl": "Nadat mijn stage gedaan was, ben ik gebleven.", "fr": "Après la fin de mon stage, je suis resté." },
+        { "qui": "B", "nl": "Uiteindelijk heb ik hier werk gevonden.", "fr": "Finalement, j'ai trouvé du travail ici." }
+      ],
+      "vocab": {
+        "verbes": ["studeren", "verhuizen", "vinden", "blijven", "aankomen"],
+        "mots": [
+          { "nl": "eerst", "fr": "d'abord" },
+          { "nl": "daarna", "fr": "ensuite" },
+          { "nl": "toen", "fr": "alors, puis (récit)" },
+          { "nl": "later", "fr": "plus tard" },
+          { "nl": "uiteindelijk", "fr": "finalement" },
+          { "nl": "nadat", "fr": "après que" },
+          { "nl": "voordat", "fr": "avant que" },
+          { "nl": "intussen", "fr": "entre-temps" }
+        ],
+        "phrases": [
+          { "nl": "Eerst ..., daarna ..., uiteindelijk ...", "fr": "D'abord ..., ensuite ..., finalement ..." },
+          { "nl": "Toen ben ik naar België verhuisd.", "fr": "Alors j'ai déménagé en Belgique." },
+          { "nl": "Uiteindelijk heb ik werk gevonden.", "fr": "Finalement, j'ai trouvé du travail." }
+        ]
+      },
+      "regle": {
+        "titre": "Adverbes (inversion) et subordonnées (verbe à la fin)",
+        "explication": "Les mots de liaison comme eerst, daarna, toen (= alors), later, uiteindelijk sont des adverbes : en tête de phrase, ils provoquent l'inversion : « Daarna kreeg ik een stage ». Les conjonctions nadat (après que), voordat (avant que), toen (= quand, au passé) ouvrent une subordonnée : verbe à la FIN, puis la principale commence par le verbe : « Nadat mijn stage gedaan was, ben ik gebleven ».",
+        "exemples": [
+          { "nl": "Daarna ben ik verhuisd.", "fr": "Ensuite, j'ai déménagé." },
+          { "nl": "Toen ik in Brussel aankwam, kende ik niemand.", "fr": "Quand je suis arrivé à Bruxelles, je ne connaissais personne." },
+          { "nl": "Voordat ik hier werkte, was ik student.", "fr": "Avant de travailler ici, j'étais étudiant." },
+          { "nl": "Uiteindelijk heb ik een vast contract gekregen.", "fr": "Finalement, j'ai eu un contrat fixe." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Ensuite, j'ai déménagé » :", "choices": ["Daarna ik ben verhuisd.", "Daarna ben ik verhuisd.", "Daarna verhuisd ben ik."], "answer": 1 },
+        { "type": "qcm", "q": "« Quand je suis arrivé, … » :", "choices": ["Toen ik aankwam, …", "Toen kwam ik aan, …", "Als ik aankwam, …"], "answer": 0 },
+        { "type": "trou", "phrase": "___ heb ik werk gevonden. (finalement)", "answer": "Uiteindelijk", "fr": "Finalement, j'ai trouvé du travail." },
+        { "type": "trou", "phrase": "Voordat ik hier werkte, ___ ik student.", "answer": "was", "fr": "Avant de travailler ici, j'étais étudiant." },
+        { "type": "ordre", "mots": ["ik", "in", "studeerde", "Frankrijk.", "Eerst"], "answer": "Eerst studeerde ik in Frankrijk.", "fr": "D'abord, j'étudiais en France." },
+        { "type": "traduire", "fr": "Ensuite, j'ai eu un stage.", "answer": "Daarna kreeg ik een stage./Daarna heb ik een stage gekregen." },
+        { "type": "ecoute", "nl": "Toen ik in Brussel aankwam, kende ik niemand.", "fr": "Quand je suis arrivé à Bruxelles, je ne connaissais personne." },
+        { "type": "dire", "nl": "Eerst studeerde ik, daarna ben ik naar België verhuisd.", "fr": "D'abord j'ai étudié, ensuite j'ai déménagé en Belgique." },
+        { "type": "repondre", "question": "Wat deed je voordat je hier begon?", "question_fr": "Que faisais-tu avant de commencer ici ?", "attendu": [], "un_de": ["was", "werkte", "studeerde", "woonde", "deed"], "exemple": "Voordat ik hier begon, was ik student." }
+      ],
+      "jeu": {
+        "titre": "Ton parcours",
+        "consigne": "Une collègue te demande comment tu es arrivé là où tu es. Raconte ton parcours dans l'ordre, avec des mots de liaison.",
+        "role": "Tu es Lien, collègue curieuse. Demande à l'apprenant de raconter son parcours (études, premiers emplois, déménagements, arrivée en Flandre). Relance avec « En daarna? », « Wanneer was dat? », « Waarom ben je verhuisd? ». Néerlandais simple (A2).",
+        "welcome": "Ik ben benieuwd: hoe ben jij eigenlijk hier terechtgekomen?"
+      }
+    },
+    {
+      "id": "avis",
+      "titre": "Ce que j'en ai pensé",
+      "intro": "Terminer un récit : dire ce que tu as ressenti, ce que tu en as pensé et ce que tu retiens.",
+      "roles": { "A": "Un ami", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Hoe was je reis naar Marokko?", "fr": "Comment était ton voyage au Maroc ?" },
+        { "qui": "B", "nl": "Het was fantastisch, maar ook vermoeiend.", "fr": "C'était fantastique, mais aussi fatigant." },
+        { "qui": "A", "nl": "Wat vond je het leukst?", "fr": "Qu'est-ce que tu as préféré ?" },
+        { "qui": "B", "nl": "Ik vond de markten het leukst. Het eten was heerlijk.", "fr": "J'ai préféré les marchés. La nourriture était délicieuse." },
+        { "qui": "A", "nl": "Zou je terug willen gaan?", "fr": "Tu voudrais y retourner ?" },
+        { "qui": "B", "nl": "Zeker! Het was een onvergetelijke ervaring.", "fr": "Certainement ! C'était une expérience inoubliable." }
+      ],
+      "vocab": {
+        "verbes": ["vinden", "genieten", "voelen", "onthouden"],
+        "mots": [
+          { "nl": "fantastisch", "fr": "fantastique" },
+          { "nl": "vermoeiend", "fr": "fatigant" },
+          { "nl": "heerlijk", "fr": "délicieux, merveilleux" },
+          { "nl": "spannend", "fr": "palpitant" },
+          { "nl": "teleurstellend", "fr": "décevant" },
+          { "nl": "het leukst", "fr": "le plus sympa" },
+          { "nl": "de ervaring", "fr": "l'expérience" },
+          { "nl": "onvergetelijk", "fr": "inoubliable" },
+          { "nl": "zeker", "fr": "certainement" }
+        ],
+        "phrases": [
+          { "nl": "Het was fantastisch.", "fr": "C'était fantastique." },
+          { "nl": "Ik vond het leukst ...", "fr": "Ce que j'ai préféré, c'est ..." },
+          { "nl": "Ik heb ervan genoten.", "fr": "J'en ai profité / J'ai adoré." }
+        ]
+      },
+      "regle": {
+        "titre": "vinden : donner son avis sur le passé",
+        "explication": "« vinden » = trouver (avis) : « Ik vond het leuk » (j'ai trouvé ça sympa), « Hoe vond je het? » (comment tu as trouvé ?). Au passé, on dit souvent « Het was + adjectif » (c'était…). Le superlatif « het leukst / het mooist » = ce que j'ai préféré : « Ik vond de markten het leukst ». « Genieten van » = profiter de, adorer : « Ik heb van de reis genoten ».",
+        "exemples": [
+          { "nl": "Hoe vond je de film?", "fr": "Comment as-tu trouvé le film ?" },
+          { "nl": "Ik vond het een beetje saai.", "fr": "Je l'ai trouvé un peu ennuyeux." },
+          { "nl": "Het mooist vond ik de zee.", "fr": "Le plus beau, c'était la mer." },
+          { "nl": "We hebben echt genoten.", "fr": "On a vraiment adoré." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'ai trouvé ça sympa » :", "choices": ["Ik vind het leuk.", "Ik vond het leuk.", "Ik heb het leuk."], "answer": 1 },
+        { "type": "qcm", "q": "« Comment as-tu trouvé le voyage ? » :", "choices": ["Hoe vond je de reis?", "Hoe was je de reis?", "Wat vond de reis?"], "answer": 0 },
+        { "type": "trou", "phrase": "Ik vond de markten het ___. (le plus sympa)", "answer": "leukst", "fr": "J'ai préféré les marchés." },
+        { "type": "trou", "phrase": "We hebben echt ___. (profité)", "answer": "genoten", "fr": "On a vraiment adoré." },
+        { "type": "ordre", "mots": ["een", "Het", "ervaring.", "onvergetelijke", "was"], "answer": "Het was een onvergetelijke ervaring.", "fr": "C'était une expérience inoubliable." },
+        { "type": "traduire", "fr": "C'était fatigant.", "answer": "Het was vermoeiend." },
+        { "type": "ecoute", "nl": "Het mooist vond ik de zee.", "fr": "Le plus beau, c'était la mer." },
+        { "type": "dire", "nl": "Het was fantastisch, maar ook vermoeiend.", "fr": "C'était fantastique, mais aussi fatigant." },
+        { "type": "repondre", "question": "Hoe vond je je laatste vakantie?", "question_fr": "Comment as-tu trouvé tes dernières vacances ?", "attendu": [], "un_de": ["vond", "was", "leuk", "mooi", "fijn"], "exemple": "Ik vond het heel leuk, maar te kort." }
+      ],
+      "jeu": {
+        "titre": "Un voyage mémorable",
+        "consigne": "Raconte à un ami un voyage ou une sortie qui t'a marqué : où, ce que vous avez fait, ce que tu as préféré, ce que tu en as pensé.",
+        "role": "Tu es Kobe, un ami qui adore voyager. Demande à l'apprenant de raconter un voyage marquant : où, quand, avec qui, ce qu'il a fait, ce qu'il a préféré, ce qui était moins bien, s'il y retournerait. Réagis avec enthousiasme. Néerlandais simple (A2).",
+        "welcome": "Ik plan mijn volgende reis. Wat was jouw mooiste reis ooit?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : raconter une expérience marquante",
+    "consigne": "En entretien, on te demande de raconter une expérience professionnelle difficile ou marquante. Pose le contexte (où, quand, comment c'était), raconte dans l'ordre ce qui s'est passé et ce que tu as fait, puis dis ce que tu en as pensé et ce que tu as appris.",
+    "role": "Tu es Pieter, recruteur dans une entreprise logistique. Demande au candidat de raconter une situation difficile ou marquante de son ancien travail (ou de ses études). Relance pour obtenir le contexte (Waar werkte je toen? Hoe was de situatie?), le déroulé (Wat heb je toen gedaan? En daarna?), et le bilan (Wat heb je daaruit geleerd?). Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Goeiedag. Ik wil graag dat u een moeilijke of bijzondere situatie uit uw vorige job vertelt. Waar werkte u toen?"
+  },
+  "examen": {
+    "reussite": "Tu sais raconter une expérience au passé en néerlandais.",
+    "sujets": [
+      { "label": "planter le décor à l'imparfait", "etape": "enfance", "mots": ["#imperfectum"] },
+      { "label": "raconter une action au passé composé", "etape": "temps", "mots": ["#perfectum-hebben", "#perfectum-zijn"] },
+      { "label": "situer dans le temps", "etape": "experience", "mots": ["geleden", "toen", "vroeger", "vorig jaar", "in 20"] },
+      { "label": "enchaîner les étapes", "etape": "chronologie", "mots": ["eerst", "daarna", "toen", "later", "uiteindelijk", "nadat", "voordat"] },
+      { "label": "parler de ton travail d'avant", "etape": "experience", "mots": ["werkte", "magazijn", "job", "collega", "klant", "chef", "verantwoordelijke"] },
+      { "label": "dire ce que tu as ressenti ou pensé", "etape": "avis", "mots": ["vond", "was moeilijk", "was stressvol", "boos", "blij", "moeilijk", "spannend"] },
+      { "label": "dire ce que tu as appris", "etape": "experience", "mots": ["geleerd", "leren", "les", "ervaring"] },
+      { "label": "expliquer une raison", "etape": "temps", "mots": ["omdat", "want", "daarom"] }
+    ]
+  }
+}

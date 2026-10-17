@@ -1,0 +1,319 @@
+{
+  "_doc": "Module A2 en format jeu de rôle (format : voir rendez_vous.json). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "a2_projets",
+  "niveau": "A2",
+  "icone": "🧳",
+  "titre": "Faire des projets",
+  "accroche": "Parler de tes projets : le week-end prochain, les vacances, ta carrière, avec le futur et les souhaits.",
+  "objectif": "À la fin du module, tu sais parler de l'avenir : ce que tu vas faire, ce que tu as l'intention de faire, ce que tu aimerais faire, et organiser un projet avec quelqu'un.",
+  "etapes": [
+    {
+      "id": "gaan",
+      "titre": "Ce que je vais faire : gaan + infinitif",
+      "intro": "Le futur le plus courant à l'oral : « gaan » + infinitif à la fin. « Ik ga morgen werken ».",
+      "roles": { "A": "Un collègue, vendredi", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat ga je dit weekend doen?", "fr": "Que vas-tu faire ce week-end ?" },
+        { "qui": "B", "nl": "Zaterdag ga ik mijn ouders bezoeken.", "fr": "Samedi, je vais rendre visite à mes parents." },
+        { "qui": "A", "nl": "En zondag?", "fr": "Et dimanche ?" },
+        { "qui": "B", "nl": "Zondag ga ik uitrusten en een film kijken.", "fr": "Dimanche, je vais me reposer et regarder un film." },
+        { "qui": "A", "nl": "Klinkt goed. Ik ga gaan fietsen als het mooi weer is.", "fr": "Ça a l'air bien. Moi je vais faire du vélo s'il fait beau." }
+      ],
+      "vocab": {
+        "verbes": ["gaan", "bezoeken", "uitrusten", "kijken", "plannen"],
+        "mots": [
+          { "nl": "morgen", "fr": "demain" },
+          { "nl": "volgende week", "fr": "la semaine prochaine" },
+          { "nl": "straks", "fr": "tout à l'heure (futur)" },
+          { "nl": "binnenkort", "fr": "bientôt" },
+          { "nl": "het plan", "fr": "le projet, le plan" },
+          { "nl": "de ouders", "fr": "les parents" },
+          { "nl": "als", "fr": "si (condition)" }
+        ],
+        "phrases": [
+          { "nl": "Wat ga je dit weekend doen?", "fr": "Que vas-tu faire ce week-end ?" },
+          { "nl": "Ik ga mijn ouders bezoeken.", "fr": "Je vais rendre visite à mes parents." },
+          { "nl": "Als het mooi weer is, ga ik fietsen.", "fr": "S'il fait beau, je vais faire du vélo." }
+        ]
+      },
+      "regle": {
+        "titre": "gaan + infinitif, et « als » (si)",
+        "explication": "« gaan » conjugué en 2e position + infinitif à la FIN : « Ik ga morgen werken », « We gaan in augustus naar Spanje » (avec une destination, pas besoin d'infinitif). On peut aussi simplement utiliser le présent avec un mot de temps : « Morgen werk ik ». Condition : « als » + verbe à la fin : « Als het mooi weer is, ga ik fietsen » (la principale commence alors par le verbe).",
+        "exemples": [
+          { "nl": "Ik ga volgende week een cursus volgen.", "fr": "Je vais suivre un cours la semaine prochaine." },
+          { "nl": "Morgen werk ik thuis.", "fr": "Demain, je travaille de chez moi." },
+          { "nl": "Als ik tijd heb, kom ik.", "fr": "Si j'ai le temps, je viens." },
+          { "nl": "We gaan in juli naar zee.", "fr": "Nous allons à la mer en juillet." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je vais travailler demain » :", "choices": ["Ik ga werken morgen.", "Ik ga morgen werken.", "Ik morgen ga werken."], "answer": 1 },
+        { "type": "qcm", "q": "« Si j'ai le temps, je viens » :", "choices": ["Als ik tijd heb, ik kom.", "Als ik tijd heb, kom ik.", "Als ik heb tijd, kom ik."], "answer": 1 },
+        { "type": "trou", "phrase": "Wat ___ je dit weekend doen?", "answer": "ga", "fr": "Que vas-tu faire ce week-end ?" },
+        { "type": "trou", "phrase": "Als het mooi weer ___, ga ik fietsen.", "answer": "is", "fr": "S'il fait beau, je vais faire du vélo." },
+        { "type": "ordre", "mots": ["ouders", "Ik", "bezoeken.", "mijn", "ga"], "answer": "Ik ga mijn ouders bezoeken.", "fr": "Je vais rendre visite à mes parents." },
+        { "type": "traduire", "fr": "Demain, je travaille de chez moi.", "answer": "Morgen werk ik thuis." },
+        { "type": "ecoute", "nl": "We gaan in juli naar zee.", "fr": "Nous allons à la mer en juillet." },
+        { "type": "dire", "nl": "Zaterdag ga ik mijn ouders bezoeken.", "fr": "Samedi, je vais rendre visite à mes parents." },
+        { "type": "repondre", "question": "Wat ga je dit weekend doen?", "question_fr": "Que vas-tu faire ce week-end ?", "attendu": ["ga"], "exemple": "Ik ga uitrusten en sporten." }
+      ],
+      "jeu": {
+        "titre": "Les projets du week-end",
+        "consigne": "Vendredi, un collègue te demande tes projets pour le week-end. Raconte-les et réagis aux siens.",
+        "role": "Tu es Wouter, collègue. Vendredi après-midi, tu demandes à l'apprenant ce qu'il va faire ce week-end (samedi, dimanche, selon la météo). Raconte tes propres projets (barbecue samedi s'il fait beau, match de foot dimanche). Utilise « gaan + infinitif » et « als ». Néerlandais simple (A2).",
+        "welcome": "Eindelijk vrijdag! Wat ga jij dit weekend doen?"
+      }
+    },
+    {
+      "id": "zullen",
+      "titre": "Promettre et proposer : zullen",
+      "intro": "« zullen » sert à promettre (Ik zal het doen), à prévoir (Het zal regenen) et à proposer (Zullen we…?).",
+      "roles": { "A": "Ta responsable", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Kun je dit rapport voor vrijdag afmaken?", "fr": "Peux-tu terminer ce rapport pour vendredi ?" },
+        { "qui": "B", "nl": "Ja, ik zal het donderdag doorsturen.", "fr": "Oui, je l'enverrai jeudi." },
+        { "qui": "A", "nl": "Super. Zullen we het daarna samen bespreken?", "fr": "Super. On le discute ensemble après ?" },
+        { "qui": "B", "nl": "Goed idee. Zullen we vrijdagochtend afspreken?", "fr": "Bonne idée. On se voit vendredi matin ?" },
+        { "qui": "A", "nl": "Prima, om tien uur.", "fr": "Parfait, à dix heures." }
+      ],
+      "vocab": {
+        "verbes": ["zullen", "afmaken", "doorsturen", "bespreken", "beloven"],
+        "mots": [
+          { "nl": "het rapport", "fr": "le rapport" },
+          { "nl": "de deadline", "fr": "l'échéance" },
+          { "nl": "het idee", "fr": "l'idée" },
+          { "nl": "beloofd", "fr": "promis" },
+          { "nl": "zeker", "fr": "sûrement, certainement" },
+          { "nl": "waarschijnlijk", "fr": "probablement" },
+          { "nl": "misschien", "fr": "peut-être" }
+        ],
+        "phrases": [
+          { "nl": "Ik zal het doen.", "fr": "Je le ferai." },
+          { "nl": "Zullen we samen gaan?", "fr": "On y va ensemble ?" },
+          { "nl": "Het zal waarschijnlijk regenen.", "fr": "Il va probablement pleuvoir." }
+        ]
+      },
+      "regle": {
+        "titre": "zullen : ik zal, zullen we … ?",
+        "explication": "zullen : ik zal, jij zal/zult, hij zal, wij zullen. Avec un infinitif à la fin. Trois usages : 1) promesse : « Ik zal het morgen sturen » ; 2) prévision : « Het zal regenen » ; 3) proposition : « Zullen we samen lunchen? » (on déjeune ensemble ?), « Zal ik je helpen? » (je t'aide ?). Pour un projet simple, « gaan » est plus naturel à l'oral.",
+        "exemples": [
+          { "nl": "Ik zal je morgen bellen.", "fr": "Je t'appellerai demain." },
+          { "nl": "Zal ik de deur dichtdoen?", "fr": "Je ferme la porte ?" },
+          { "nl": "Zullen we om twaalf uur lunchen?", "fr": "On déjeune à midi ?" },
+          { "nl": "Dat zal wel lukken.", "fr": "Ça va sûrement marcher." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« Je t'appellerai demain » (promesse) :", "choices": ["Ik zal je morgen bellen.", "Ik zal morgen je bellen.", "Ik bel zal je morgen."], "answer": 0 },
+        { "type": "qcm", "q": "« On déjeune ensemble ? » :", "choices": ["Gaan we samen lunch?", "Zullen we samen lunchen?", "Zal we samen lunchen?"], "answer": 1 },
+        { "type": "trou", "phrase": "___ ik je helpen? (je t'aide ?)", "answer": "Zal", "fr": "Je t'aide ?" },
+        { "type": "trou", "phrase": "Ik zal het donderdag ___. (envoyer)", "answer": "doorsturen", "fr": "Je l'enverrai jeudi." },
+        { "type": "ordre", "mots": ["samen", "Zullen", "bespreken?", "het", "we"], "answer": "Zullen we het samen bespreken?", "fr": "On le discute ensemble ?" },
+        { "type": "traduire", "fr": "Il va probablement pleuvoir.", "answer": "Het zal waarschijnlijk regenen." },
+        { "type": "ecoute", "nl": "Dat zal wel lukken.", "fr": "Ça va sûrement marcher." },
+        { "type": "dire", "nl": "Ik zal het donderdag doorsturen.", "fr": "Je l'enverrai jeudi." },
+        { "type": "repondre", "question": "Kun je mij morgen de lijst sturen?", "question_fr": "Peux-tu m'envoyer la liste demain ?", "attendu": [], "un_de": ["zal", "ja", "stuur", "doe"], "exemple": "Ja, ik zal ze morgen sturen." }
+      ],
+      "jeu": {
+        "titre": "S'engager sur une tâche",
+        "consigne": "Ta responsable te confie un travail urgent. Promets ce que tu feras et quand, et propose un moment pour en reparler.",
+        "role": "Tu es Hilde, responsable. Tu confies à l'employé deux tâches avec des délais (un rapport pour vendredi, appeler un fournisseur avant mercredi). Demande quand il le fera ; s'il ne s'engage pas clairement, demande « Wanneer zal je het doen? ». Accepte qu'il propose un moment pour en reparler (« Zullen we… »). Néerlandais simple (A2).",
+        "welcome": "Ik heb twee dringende dingen voor je. Heb je even?"
+      }
+    },
+    {
+      "id": "intention",
+      "titre": "Mes intentions : van plan zijn om te",
+      "intro": "Dire ce que tu as l'intention de faire : « Ik ben van plan om een opleiding te volgen ». Avec « om … te + infinitif ».",
+      "roles": { "A": "Ton conseiller emploi", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Wat zijn uw plannen voor de komende maanden?", "fr": "Quels sont vos projets pour les prochains mois ?" },
+        { "qui": "B", "nl": "Ik ben van plan om een opleiding Excel te volgen.", "fr": "J'ai l'intention de suivre une formation Excel." },
+        { "qui": "A", "nl": "Goed. En wilt u ook uw Nederlands verbeteren?", "fr": "Bien. Et voulez-vous aussi améliorer votre néerlandais ?" },
+        { "qui": "B", "nl": "Ja, ik probeer elke dag te oefenen.", "fr": "Oui, j'essaie de m'entraîner chaque jour." },
+        { "qui": "B", "nl": "Ik hoop om tegen de zomer werk te vinden.", "fr": "J'espère trouver du travail d'ici l'été." }
+      ],
+      "vocab": {
+        "verbes": ["proberen", "hopen", "volgen", "oefenen", "vinden"],
+        "mots": [
+          { "nl": "van plan zijn", "fr": "avoir l'intention" },
+          { "nl": "het doel", "fr": "l'objectif" },
+          { "nl": "de opleiding", "fr": "la formation" },
+          { "nl": "de cursus", "fr": "le cours" },
+          { "nl": "de toekomst", "fr": "l'avenir" },
+          { "nl": "komende", "fr": "prochain (à venir)" },
+          { "nl": "tegen", "fr": "d'ici (une date)" }
+        ],
+        "phrases": [
+          { "nl": "Ik ben van plan om ... te ...", "fr": "J'ai l'intention de ..." },
+          { "nl": "Ik probeer elke dag te oefenen.", "fr": "J'essaie de m'entraîner chaque jour." },
+          { "nl": "Mijn doel is om werk te vinden.", "fr": "Mon objectif est de trouver du travail." }
+        ]
+      },
+      "regle": {
+        "titre": "om … te + infinitif",
+        "explication": "Après certaines expressions et verbes (van plan zijn, proberen, hopen, beginnen, het doel is…), l'infinitif est précédé de « te », souvent avec « om » devant le complément : « Ik ben van plan om een cursus te volgen ». Ordre : om + complément + te + infinitif (à la fin). Avec un verbe séparable, « te » se glisse au milieu : « om op te staan », « om mee te doen ».",
+        "exemples": [
+          { "nl": "Ik ben van plan om te verhuizen.", "fr": "J'ai l'intention de déménager." },
+          { "nl": "Ik probeer Nederlands te spreken.", "fr": "J'essaie de parler néerlandais." },
+          { "nl": "Het is moeilijk om vroeg op te staan.", "fr": "C'est difficile de se lever tôt." },
+          { "nl": "Mijn doel is om een vaste job te vinden.", "fr": "Mon objectif est de trouver un emploi fixe." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'ai l'intention de suivre un cours » :", "choices": ["Ik ben van plan om een cursus volgen.", "Ik ben van plan om een cursus te volgen.", "Ik ben van plan te volgen een cursus."], "answer": 1 },
+        { "type": "qcm", "q": "« se lever tôt » avec om te :", "choices": ["om vroeg te opstaan", "om vroeg op te staan", "om op vroeg te staan"], "answer": 1 },
+        { "type": "trou", "phrase": "Ik probeer elke dag ___ oefenen.", "answer": "te", "fr": "J'essaie de m'entraîner chaque jour." },
+        { "type": "trou", "phrase": "Ik ben ___ plan om te verhuizen.", "answer": "van", "fr": "J'ai l'intention de déménager." },
+        { "type": "ordre", "mots": ["doel", "werk", "Mijn", "om", "vinden.", "is", "te"], "answer": "Mijn doel is om werk te vinden.", "fr": "Mon objectif est de trouver du travail." },
+        { "type": "traduire", "fr": "J'essaie de parler néerlandais.", "answer": "Ik probeer Nederlands te spreken." },
+        { "type": "ecoute", "nl": "Ik hoop om tegen de zomer werk te vinden.", "fr": "J'espère trouver du travail d'ici l'été." },
+        { "type": "dire", "nl": "Ik ben van plan om een opleiding te volgen.", "fr": "J'ai l'intention de suivre une formation." },
+        { "type": "repondre", "question": "Wat zijn je plannen voor volgend jaar?", "question_fr": "Quels sont tes projets pour l'année prochaine ?", "attendu": [], "un_de": ["plan", "ga", "wil", "hoop", "probeer"], "exemple": "Ik ben van plan om een vaste job te vinden." }
+      ],
+      "jeu": {
+        "titre": "Le plan d'action avec le conseiller",
+        "consigne": "Ton conseiller emploi fait le point sur tes objectifs. Explique ce que tu as l'intention de faire dans les prochains mois.",
+        "role": "Tu es Bart, conseiller VDAB. Tu fais un plan d'action avec le demandeur d'emploi : demande ses objectifs (type de travail, formation, néerlandais), ce qu'il a l'intention de faire, d'ici quand, ce qu'il essaie déjà de faire. Fais-le utiliser « van plan zijn om … te » en le reformulant si besoin. Néerlandais simple (A2).",
+        "welcome": "Goeiedag. Vandaag maken we samen een actieplan. Wat zijn uw doelen voor de komende maanden?"
+      }
+    },
+    {
+      "id": "souhaits",
+      "titre": "Ce que j'aimerais : zou graag willen",
+      "intro": "Exprimer un souhait ou un rêve poliment : « Ik zou graag in een groot bedrijf willen werken ».",
+      "roles": { "A": "Un recruteur", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Waar ziet u zichzelf over vijf jaar?", "fr": "Où vous voyez-vous dans cinq ans ?" },
+        { "qui": "B", "nl": "Ik zou graag meer verantwoordelijkheid willen krijgen.", "fr": "J'aimerais avoir plus de responsabilités." },
+        { "qui": "A", "nl": "In welke richting?", "fr": "Dans quelle direction ?" },
+        { "qui": "B", "nl": "Ik zou graag planner worden.", "fr": "J'aimerais devenir planificateur." },
+        { "qui": "A", "nl": "En zou u een opleiding willen volgen?", "fr": "Et voudriez-vous suivre une formation ?" },
+        { "qui": "B", "nl": "Ja, dat zou ik heel graag doen.", "fr": "Oui, je le ferais très volontiers." }
+      ],
+      "vocab": {
+        "verbes": ["zullen", "willen", "worden", "groeien", "krijgen"],
+        "mots": [
+          { "nl": "de droom", "fr": "le rêve" },
+          { "nl": "de carrière", "fr": "la carrière" },
+          { "nl": "de verantwoordelijkheid", "fr": "la responsabilité" },
+          { "nl": "de richting", "fr": "la direction" },
+          { "nl": "over vijf jaar", "fr": "dans cinq ans" },
+          { "nl": "liever", "fr": "plutôt (préférence)" },
+          { "nl": "het liefst", "fr": "de préférence" }
+        ],
+        "phrases": [
+          { "nl": "Ik zou graag ... willen ...", "fr": "J'aimerais ..." },
+          { "nl": "Ik zou liever op kantoor werken.", "fr": "Je préférerais travailler au bureau." },
+          { "nl": "Over vijf jaar zou ik graag planner zijn.", "fr": "Dans cinq ans, j'aimerais être planificateur." }
+        ]
+      },
+      "regle": {
+        "titre": "zou(den) + infinitif à la fin",
+        "explication": "« zouden » exprime le souhait poli ou l'hypothèse : ik zou, jij zou, hij zou, wij zouden. « Ik zou graag + infinitif » = j'aimerais ; « Ik zou graag … willen + infinitif » est encore plus poli. Préférence : « liever » (plutôt), « het liefst » (de préférence) : « Ik zou liever thuis werken ». Les infinitifs vont à la fin, « willen » avant l'autre : « …meer verantwoordelijkheid willen krijgen ».",
+        "exemples": [
+          { "nl": "Ik zou graag in Gent wonen.", "fr": "J'aimerais habiter à Gand." },
+          { "nl": "Ik zou liever 's ochtends werken.", "fr": "Je préférerais travailler le matin." },
+          { "nl": "Zou je me kunnen helpen?", "fr": "Pourrais-tu m'aider ?" },
+          { "nl": "Het liefst zou ik bij een logistiek bedrijf werken.", "fr": "De préférence, je travaillerais dans une entreprise logistique." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "« J'aimerais habiter à Gand » :", "choices": ["Ik zou graag in Gent wonen.", "Ik zou in Gent graag wonen zou.", "Ik wil graag wonen in Gent zou."], "answer": 0 },
+        { "type": "qcm", "q": "« Pourrais-tu m'aider ? » :", "choices": ["Zou je me kunnen helpen?", "Kan je zou me helpen?", "Zou je kunnen me helpen?"], "answer": 0 },
+        { "type": "trou", "phrase": "Ik zou ___ thuis werken. (plutôt)", "answer": "liever", "fr": "Je préférerais travailler de chez moi." },
+        { "type": "trou", "phrase": "Ik ___ graag planner worden.", "answer": "zou", "fr": "J'aimerais devenir planificateur." },
+        { "type": "ordre", "mots": ["graag", "Ik", "worden.", "zou", "planner"], "answer": "Ik zou graag planner worden.", "fr": "J'aimerais devenir planificateur." },
+        { "type": "traduire", "fr": "Où vous voyez-vous dans cinq ans ?", "answer": "Waar ziet u zichzelf over vijf jaar?" },
+        { "type": "ecoute", "nl": "Het liefst zou ik bij een logistiek bedrijf werken.", "fr": "De préférence, je travaillerais dans une entreprise logistique." },
+        { "type": "dire", "nl": "Ik zou graag meer verantwoordelijkheid willen krijgen.", "fr": "J'aimerais avoir plus de responsabilités." },
+        { "type": "repondre", "question": "Waar zie je jezelf over vijf jaar?", "question_fr": "Où te vois-tu dans cinq ans ?", "attendu": [], "un_de": ["zou", "wil", "hoop", "graag"], "exemple": "Over vijf jaar zou ik graag teamleider zijn." }
+      ],
+      "jeu": {
+        "titre": "Les ambitions en entretien",
+        "consigne": "Le recruteur te demande tes ambitions. Explique ce que tu aimerais faire, ce que tu préférerais, et où tu te vois dans cinq ans.",
+        "role": "Tu es Kristof, recruteur. Demande au candidat ses ambitions : où il se voit dans cinq ans, ce qu'il aimerait apprendre, s'il préfère le bureau ou le terrain, s'il voudrait une formation, s'il aimerait diriger une équipe un jour. Utilise « zou… willen ». Néerlandais simple (A2).",
+        "welcome": "Laten we het even over de toekomst hebben. Waar ziet u zichzelf over vijf jaar?"
+      }
+    },
+    {
+      "id": "organiser",
+      "titre": "Organiser un projet à deux",
+      "intro": "Planifier quelque chose ensemble : proposer, accepter, refuser, se mettre d'accord sur la date, le budget, qui fait quoi.",
+      "roles": { "A": "Une collègue", "B": "Toi" },
+      "dialogue": [
+        { "qui": "A", "nl": "Zullen we samen het teamuitje organiseren?", "fr": "On organise ensemble la sortie d'équipe ?" },
+        { "qui": "B", "nl": "Goed idee! Wat zullen we doen?", "fr": "Bonne idée ! Qu'est-ce qu'on va faire ?" },
+        { "qui": "A", "nl": "Misschien een fietstocht en daarna een barbecue?", "fr": "Peut-être une balade à vélo et ensuite un barbecue ?" },
+        { "qui": "B", "nl": "Ik zou liever iets binnen doen, als het regent.", "fr": "Je préférerais faire quelque chose à l'intérieur, au cas où il pleut." },
+        { "qui": "A", "nl": "Oké. Ik zal een zaal zoeken en jij stuurt de uitnodiging?", "fr": "D'accord. Je cherche une salle et tu envoies l'invitation ?" },
+        { "qui": "B", "nl": "Afgesproken, ik doe het morgen.", "fr": "Entendu, je le fais demain." }
+      ],
+      "vocab": {
+        "verbes": ["organiseren", "voorstellen", "afspreken", "uitnodigen", "reserveren"],
+        "mots": [
+          { "nl": "het teamuitje", "fr": "la sortie d'équipe" },
+          { "nl": "de uitnodiging", "fr": "l'invitation" },
+          { "nl": "het budget", "fr": "le budget" },
+          { "nl": "de zaal", "fr": "la salle" },
+          { "nl": "het voorstel", "fr": "la proposition" },
+          { "nl": "afgesproken!", "fr": "entendu !, c'est d'accord !" },
+          { "nl": "binnen", "fr": "à l'intérieur" },
+          { "nl": "buiten", "fr": "dehors" }
+        ],
+        "phrases": [
+          { "nl": "Zullen we ... ?", "fr": "Et si on ... ?" },
+          { "nl": "Goed idee!", "fr": "Bonne idée !" },
+          { "nl": "Ik zou liever ...", "fr": "Je préférerais ..." },
+          { "nl": "Afgesproken!", "fr": "C'est d'accord !" }
+        ]
+      },
+      "regle": {
+        "titre": "Proposer, accepter, refuser poliment",
+        "explication": "Proposer : « Zullen we … ? », « Wat denk je van … ? » (que penses-tu de…), « We kunnen … ». Accepter : « Goed idee! », « Prima! », « Afgesproken! ». Refuser ou nuancer poliment : « Ik zou liever … » (je préférerais), « Dat lijkt me moeilijk, want … » (ça me semble difficile, car…). Répartir : « Ik zal … en jij … ».",
+        "exemples": [
+          { "nl": "Wat denk je van een etentje?", "fr": "Que penses-tu d'un petit repas ?" },
+          { "nl": "We kunnen in juni gaan.", "fr": "On peut y aller en juin." },
+          { "nl": "Dat lijkt me moeilijk, want het is duur.", "fr": "Ça me semble difficile, car c'est cher." },
+          { "nl": "Ik zal reserveren en jij betaalt het voorschot.", "fr": "Je réserve et tu paies l'acompte." }
+        ]
+      },
+      "exercices": [
+        { "type": "qcm", "q": "Pour accepter une proposition :", "choices": ["Afgesproken!", "Dat lijkt me moeilijk.", "Ik zou liever niet."], "answer": 0 },
+        { "type": "qcm", "q": "« Que penses-tu d'un barbecue ? » :", "choices": ["Wat vind je een barbecue?", "Wat denk je van een barbecue?", "Wat denk je een barbecue?"], "answer": 1 },
+        { "type": "trou", "phrase": "___ we samen het uitje organiseren?", "answer": "Zullen", "fr": "On organise la sortie ensemble ?" },
+        { "type": "trou", "phrase": "Dat ___ me moeilijk, want het is duur.", "answer": "lijkt", "fr": "Ça me semble difficile, car c'est cher." },
+        { "type": "ordre", "mots": ["zal", "Ik", "zaal", "zoeken.", "een"], "answer": "Ik zal een zaal zoeken.", "fr": "Je chercherai une salle." },
+        { "type": "traduire", "fr": "Bonne idée !", "answer": "Goed idee!" },
+        { "type": "ecoute", "nl": "Ik zou liever iets binnen doen.", "fr": "Je préférerais faire quelque chose à l'intérieur." },
+        { "type": "dire", "nl": "Zullen we samen een barbecue organiseren?", "fr": "On organise un barbecue ensemble ?" },
+        { "type": "repondre", "question": "Zullen we volgende vrijdag gaan bowlen met het team?", "question_fr": "On va faire un bowling avec l'équipe vendredi prochain ?", "attendu": [], "un_de": ["goed idee", "afgesproken", "liever", "ja", "prima", "graag"], "exemple": "Goed idee! Ik zal de zaal reserveren." }
+      ],
+      "jeu": {
+        "titre": "La sortie d'équipe",
+        "consigne": "Avec une collègue, organise la sortie d'équipe : propose des idées, discute, mets-toi d'accord sur la date, le lieu, le budget et qui fait quoi.",
+        "role": "Tu es Sarah, collègue enthousiaste. Vous organisez la sortie d'équipe (15 personnes, budget 30 euros par personne). Propose des idées (fietstocht, escape room, restaurant), demande l'avis de l'apprenant, refuse une de ses idées poliment (trop chère), et répartissez les tâches. Utilise « zullen we », « ik zou liever », « afgesproken ». Néerlandais simple (A2).",
+        "welcome": "De chef vraagt of wij het teamuitje willen organiseren! Heb jij al een idee?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Examen : planifier un projet avec ton conseiller",
+    "consigne": "Ton conseiller emploi te demande tes projets. Explique ce que tu vas faire la semaine prochaine, tes intentions pour les prochains mois (formation, néerlandais, recherche), ce que tu aimerais faire plus tard, et engage-toi sur des actions concrètes avec une date.",
+    "role": "Tu es Bart, conseiller VDAB bienveillant mais exigeant. Fais parler le demandeur d'emploi de ses projets : la semaine prochaine (candidatures, rendez-vous), ses intentions (formation, cours de néerlandais), ses souhaits à long terme. À la fin, demande-lui trois actions concrètes avec une date, et propose un prochain rendez-vous. Néerlandais simple (A2), une question à la fois.",
+    "welcome": "Goeiedag, fijn u te zien. Vertel eens: wat zijn uw plannen voor de komende weken?"
+  },
+  "examen": {
+    "reussite": "Tu sais parler de tes projets et de l'avenir en néerlandais.",
+    "sujets": [
+      { "label": "dire ce que tu vas faire (gaan)", "etape": "gaan", "mots": ["ga ", "gaan "] },
+      { "label": "promettre une action (zullen)", "etape": "zullen", "mots": ["zal", "zullen"] },
+      { "label": "exprimer une intention (om … te)", "etape": "intention", "mots": ["van plan", "probeer", "hoop", "om te", " te "] },
+      { "label": "exprimer un souhait (zou)", "etape": "souhaits", "mots": ["zou", "zouden", "liever", "het liefst"] },
+      { "label": "parler de formation ou de néerlandais", "etape": "intention", "mots": ["opleiding", "cursus", "nederlands", "leren", "oefenen"] },
+      { "label": "parler de ta recherche d'emploi", "etape": "intention", "mots": ["solliciteren", "sollicitatie", "werk", "job", "vacature"] },
+      { "label": "donner une date ou un délai", "etape": "gaan", "mots": ["volgende week", "morgen", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "tegen", "maand"] },
+      { "label": "accepter ou proposer", "etape": "organiser", "mots": ["afgesproken", "goed idee", "prima", "zullen we", "akkoord"] }
+    ]
+  }
+}

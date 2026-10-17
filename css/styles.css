@@ -391,6 +391,8 @@
         .rpw-chip { background: var(--surface-2); border-radius: var(--radius-pill); padding: 3px 10px; font-size: 0.82rem; font-weight: 600; }
         .rpw-chip small { font-weight: 400; color: var(--text-secondary); }
         .rp-message.rpw-inline { display: inline; background: none; padding: 0; margin: 0; border: none; box-shadow: none; max-width: none; }
+        .modrp-level { margin-bottom: 10px; }
+        .modrp-level > summary { cursor: pointer; font-weight: 700; padding: 8px 2px; list-style-position: inside; }
         .modrp-entry.passed { border-color: var(--success, #2e9e5b); }
         .modrp-oral-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; background: color-mix(in srgb, var(--primary) 15%, transparent); color: var(--primary); border-radius: var(--radius-pill); padding: 2px 10px; margin-bottom: 6px; }
         .modrp-answer-row { display: flex; gap: 6px; margin: 8px 0; }
