@@ -382,6 +382,20 @@
         .conj-detail-nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 0.72rem; color: var(--text-secondary); text-align: center; }
         .conj-principal { font-weight: 700; color: var(--primary); margin-bottom: 4px; }
         .conj-tense-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 10px; }
+        .conj-audio-title { font-size: 1rem; margin-bottom: 6px; }
+        .conj-audio-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 12px 0 6px; }
+        .conj-audio-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .conj-audio-hint { font-size: 0.75rem; color: var(--text-secondary); margin: 10px 0 0; }
+        .conj-audio-now { text-align: center; padding: 18px 8px; min-height: 150px; }
+        .conj-audio-verb { font-weight: 700; }
+        .conj-audio-verb span, .conj-audio-tense { font-weight: 400; color: var(--text-secondary); font-size: 0.85rem; }
+        .conj-audio-fr { font-size: 1.15rem; margin-top: 16px; }
+        .conj-audio-nl { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-top: 8px; }
+        .conj-audio-status { margin-top: 12px; font-size: 0.9rem; color: var(--text-secondary); }
+        .conj-audio-status.good { color: var(--correct, #2e9e5b); }
+        .conj-audio-status.bad { color: var(--wrong); }
+        .conj-audio-controls { display: flex; gap: 8px; }
+        .conj-audio-controls .btn { margin: 0; flex: 1; padding: 10px 6px; }
         .conj-tense-card { background: var(--surface-2); border-radius: var(--radius-md); padding: 10px 12px; }
         .conj-tense-name { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin-bottom: 4px; }
         .conj-tense-row { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: 0.95rem; }

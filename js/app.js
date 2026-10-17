@@ -3957,6 +3957,7 @@ if (firebaseAvailable) {
         function showConjugaisonDetail(infinitief) {
             const v = conjugationData.find(x => x.infinitief === infinitief);
             if (!v) return;
+            conjAudioStop();
             conjugaisonSelectedVerb = v;
             const rows = buildConjugationGrid(v);
             const esc = s => s.replace(/'/g, "\\'");
@@ -3997,6 +3998,7 @@ if (firebaseAvailable) {
                     ${hasWeak ? '<div style="font-size:0.72rem; color:var(--wrong); margin-top:8px;">En rouge : les formes ratées à ta dernière tentative.</div>' : ''}
                     ${v.exempleNl ? `<div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>` : ''}
                     <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="conjAudioOpen()">🎧 Écouter et répéter</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
             document.getElementById('conj-detail').scrollIntoView({ block: 'start' });
@@ -4013,6 +4015,32 @@ if (firebaseAvailable) {
             try { return JSON.parse(localStorage.getItem(CONJ_FR_CACHE_KEY)) || {}; } catch (e) { return {}; }
         }
 
+        // Les 6 personnes sont demandées (jullie = vous, zij = ils) : la fiche n'en affiche que 4,
+        // mais le mode audio "écouter et répéter" récite le pluriel complet. Les entrées en cache
+        // d'avant cet ajout (4 personnes) sont redemandées quand `full` est exigé.
+        async function conjFetchFrenchForms(v, full) {
+            const cached = conjFrCacheGet()[v.infinitief];
+            if (cached && (!full || CONJ_TENSES.every(t => cached[t] && cached[t].jullie && cached[t].zij))) return cached;
+            if (!GeminiService.isAvailable()) throw new Error('Gemini non configuré');
+            const rows = buildConjugationGrid(v);
+            const forms = CONJ_TENSES.map(t => t + ' : ' + rows.map(r => r.pronomKey + ' = ' + r[t]).join(' ; ')).join('\n');
+            const raw = await GeminiService.generate(
+                'Traduis en français chaque forme conjuguée du verbe néerlandais "' + v.infinitief + '" (sens : ' + v.fr + ').\n\n' + forms + '\n\n' +
+                '(la forme "wij" vaut aussi pour jullie et zij au pluriel). Correspondances : ik = je, jij = tu, hij = il, wij = nous, jullie = vous, zij = ils. Temps français à utiliser : present → présent, imperfectum → imparfait, perfectum → passé composé, futur → futur simple. ' +
+                'Garde un seul sens du verbe, le même partout, et inclus le pronom (ex : "je suis", "nous avons été", "ils ont été").\n' +
+                'Réponds UNIQUEMENT avec un objet JSON, sans texte autour : {"present": {"ik": "...", "jij": "...", "hij": "...", "wij": "...", "jullie": "...", "zij": "..."}, "imperfectum": {...}, "perfectum": {...}, "futur": {...}}'
+            );
+            const m = raw.match(/\{[\s\S]*\}/);
+            const data = JSON.parse(m ? m[0] : raw);
+            if (!CONJ_TENSES.every(t => data[t] && typeof data[t] === 'object')) throw new Error('réponse incomplète');
+            try {
+                const cache = conjFrCacheGet();
+                cache[v.infinitief] = data;
+                localStorage.setItem(CONJ_FR_CACHE_KEY, JSON.stringify(cache));
+            } catch (e) { /* stockage plein : la traduction reste utilisable, simplement pas mémorisée */ }
+            return data;
+        }
+
         async function conjLoadFrenchForms(v) {
             const setNote = msg => { const n = document.getElementById('conj-fr-note'); if (n) n.innerText = msg; };
             let data = conjFrCacheGet()[v.infinitief];
@@ -4022,27 +4050,12 @@ if (firebaseAvailable) {
                     return;
                 }
                 setNote('Traduction des formes en cours...');
-                const rows = buildConjugationGrid(v);
-                const forms = CONJ_TENSES.map(t => t + ' : ' + rows.map(r => r.pronomKey + ' = ' + r[t]).join(' ; ')).join('\n');
                 try {
-                    const raw = await GeminiService.generate(
-                        'Traduis en français chaque forme conjuguée du verbe néerlandais "' + v.infinitief + '" (sens : ' + v.fr + ').\n\n' + forms + '\n\n' +
-                        'Correspondances : ik = je, jij = tu, hij = il, wij = nous. Temps français à utiliser : present → présent, imperfectum → imparfait, perfectum → passé composé, futur → futur simple. ' +
-                        'Garde un seul sens du verbe, le même partout, et inclus le pronom (ex : "je suis", "nous avons été").\n' +
-                        'Réponds UNIQUEMENT avec un objet JSON, sans texte autour : {"present": {"ik": "...", "jij": "...", "hij": "...", "wij": "..."}, "imperfectum": {...}, "perfectum": {...}, "futur": {...}}'
-                    );
-                    const m = raw.match(/\{[\s\S]*\}/);
-                    data = JSON.parse(m ? m[0] : raw);
-                    if (!CONJ_TENSES.every(t => data[t] && typeof data[t] === 'object')) throw new Error('réponse incomplète');
+                    data = await conjFetchFrenchForms(v, false);
                 } catch (e) {
                     setNote('Traduction des formes impossible pour le moment (' + e.message + ').');
                     return;
                 }
-                try {
-                    const cache = conjFrCacheGet();
-                    cache[v.infinitief] = data;
-                    localStorage.setItem(CONJ_FR_CACHE_KEY, JSON.stringify(cache));
-                } catch (e) { /* stockage plein : la traduction reste affichée, simplement pas mémorisée */ }
             }
             if (conjugaisonSelectedVerb !== v) return; // on a changé de verbe pendant l'appel
             CONJ_TENSES.forEach(t => ['ik', 'jij', 'hij', 'wij'].forEach(p => {
@@ -4050,6 +4063,310 @@ if (firebaseAvailable) {
                 if (el && data[t] && data[t][p]) el.innerText = String(data[t][p]);
             }));
             setNote('Traductions françaises générées par IA : elles peuvent contenir une erreur.');
+        }
+
+        // ===== Écouter et répéter (conjugaison à l'oral) =====
+        // L'app récite un verbe forme par forme, singulier puis pluriel (ik, jij, hij, wij, jullie,
+        // zij), en français et en néerlandais, avec un blanc pour répéter. Trois modes : écoute
+        // seule, répète après moi (blanc sans vérification), répétition vérifiée (le micro écoute
+        // et compare ; le résultat compte dans state.conjStats comme l'entraînement écrit).
+        // Ordre "fr" : le français d'abord, un blanc pour essayer de dire la forme, puis la réponse.
+        const CONJ_AUDIO_PERSONS = [
+            { key: 'ik', stat: 'ik', plural: false },
+            { key: 'jij', stat: 'jij', plural: false },
+            { key: 'hij', stat: 'hij', plural: false },
+            { key: 'wij', stat: 'wij', plural: true },
+            { key: 'jullie', stat: 'wij', plural: true },
+            { key: 'zij', stat: 'wij', plural: true }
+        ];
+        const CONJ_AUDIO_MODES = [
+            { key: 'listen', label: '👂 Écoute seule' },
+            { key: 'repeat', label: '🗣️ Répète après moi' },
+            { key: 'check', label: '🎤 Répétition vérifiée' }
+        ];
+        let conjAudioRun = null; // { stop, paused, skip, wakeLock } pendant une lecture
+
+        function conjAudioSettings() {
+            if (!state.settings) state.settings = {};
+            const s = state.settings.conjAudio || {};
+            const tenses = Array.isArray(s.tenses) ? s.tenses.filter(t => CONJ_TENSES.includes(t)) : [];
+            state.settings.conjAudio = {
+                tenses: tenses.length ? tenses : ['present'],
+                mode: CONJ_AUDIO_MODES.some(m => m.key === s.mode) ? s.mode : 'repeat',
+                order: s.order === 'nl' ? 'nl' : 'fr',
+                rate: s.rate === 0.75 ? 0.75 : 0.95,
+                pause: [2, 4, 6].includes(s.pause) ? s.pause : 4,
+                count: [1, 5, 10].includes(s.count) ? s.count : 1
+            };
+            return state.settings.conjAudio;
+        }
+
+        function conjAudioSet(key, value) {
+            const s = conjAudioSettings();
+            if (key === 'tense') {
+                const i = s.tenses.indexOf(value);
+                if (i >= 0 && s.tenses.length > 1) s.tenses.splice(i, 1);
+                else if (i < 0) s.tenses = CONJ_TENSES.filter(t => t === value || s.tenses.includes(t));
+            } else {
+                s[key] = value;
+            }
+            save();
+            conjAudioRenderSetup();
+        }
+
+        function conjAudioOpen() {
+            if (!conjugaisonSelectedVerb) return;
+            conjAudioStop();
+            conjExerciseState = null;
+            conjAudioRenderSetup();
+            document.getElementById('conj-exercise-box').scrollIntoView({ block: 'start' });
+        }
+
+        function conjAudioRenderSetup() {
+            const box = document.getElementById('conj-exercise-box');
+            const v = conjugaisonSelectedVerb;
+            if (!box || !v) return;
+            const s = conjAudioSettings();
+            const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            const pos = conjCurrentList.indexOf(v.infinitief);
+            const remaining = pos >= 0 ? conjCurrentList.length - pos : 1;
+            box.innerHTML = `
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-title">🎧 Écouter et répéter — <b>${rpEscapeHtml(v.infinitief)}</b></div>
+                    <div class="conj-audio-label">Temps</div>
+                    <div class="conj-audio-chips">${CONJ_TENSES.map(t => chip(s.tenses.includes(t), `conjAudioSet('tense','${t}')`, CONJ_TENSE_NAMES[t])).join('')}</div>
+                    <div class="conj-audio-label">Mode</div>
+                    <div class="conj-audio-chips">${CONJ_AUDIO_MODES.map(m => chip(s.mode === m.key, `conjAudioSet('mode','${m.key}')`, m.label)).join('')}</div>
+                    <div class="conj-audio-label">Ordre</div>
+                    <div class="conj-audio-chips">
+                        ${chip(s.order === 'fr', "conjAudioSet('order','fr')", '🇫🇷 Français d\'abord (je cherche)')}
+                        ${chip(s.order === 'nl', "conjAudioSet('order','nl')", '🇳🇱 Néerlandais d\'abord (je découvre)')}
+                    </div>
+                    <div class="conj-audio-label">Voix et blanc pour répéter</div>
+                    <div class="conj-audio-chips">
+                        ${chip(s.rate === 0.75, 'conjAudioSet(\'rate\',0.75)', '🐢 Lent')}${chip(s.rate === 0.95, 'conjAudioSet(\'rate\',0.95)', 'Normal')}
+                        <span class="conj-chip-sep"></span>
+                        ${[2, 4, 6].map(p => chip(s.pause === p, `conjAudioSet('pause',${p})`, p + ' s')).join('')}
+                    </div>
+                    <div class="conj-audio-label">Verbes</div>
+                    <div class="conj-audio-chips">
+                        ${chip(s.count === 1, 'conjAudioSet(\'count\',1)', 'Ce verbe')}
+                        ${remaining > 1 ? chip(s.count === 5, 'conjAudioSet(\'count\',5)', '+ les suivants (5)') : ''}
+                        ${remaining > 5 ? chip(s.count === 10, 'conjAudioSet(\'count\',10)', '+ les suivants (10)') : ''}
+                    </div>
+                    ${s.mode === 'check' ? '<p class="conj-audio-hint">Après chaque forme, le micro t\'écoute quelques secondes : redis la forme avec le pronom (ex. « wij werken »).</p>' : ''}
+                    <p class="conj-audio-hint">Garde l'écran allumé : sur téléphone, la lecture s'arrête quand il se verrouille.</p>
+                    <button class="btn btn-green" style="margin-top:8px;" onclick="conjAudioStart()">▶️ Lancer</button>
+                </div>`;
+        }
+
+        // Voix d'une langue donnée ; la promesse se résout à la fin de la phrase (avec un délai
+        // maximum : certains navigateurs mobiles n'envoient pas toujours l'évènement de fin).
+        function conjAudioSpeak(text, lang, rate) {
+            return new Promise(resolve => {
+                if (!('speechSynthesis' in window) || !text) return resolve();
+                const u = new SpeechSynthesisUtterance(stripMarkdown(text));
+                u.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
+                const voices = window.speechSynthesis.getVoices();
+                const voice = lang === 'fr'
+                    ? voices.find(x => x.lang.toLowerCase().startsWith('fr'))
+                    : (rpDutchVoice || voices.find(x => x.lang.toLowerCase().startsWith('nl')));
+                if (voice) u.voice = voice;
+                u.rate = rate;
+                let done = false;
+                const finish = () => { if (!done) { done = true; resolve(); } };
+                u.onend = finish;
+                u.onerror = finish;
+                setTimeout(finish, 2500 + text.length * 180 / rate);
+                window.speechSynthesis.speak(u);
+            });
+        }
+
+        // Attente interrompue par Arrêter / Passer, et suspendue tant que la lecture est en pause.
+        async function conjAudioWait(ms) {
+            const run = conjAudioRun;
+            let left = ms;
+            while (run && !run.stop && !run.skip && (left > 0 || run.paused)) {
+                await new Promise(r => setTimeout(r, 100));
+                if (!run.paused) left -= 100;
+                // Changement d'écran : on coupe la lecture plutôt que de parler dans le vide.
+                if (!document.getElementById('conjugaison-view').classList.contains('active')) conjAudioStop();
+            }
+        }
+
+        // Lecture qui respecte Pause / Passer / Arrêter : attend la reprise avant de parler.
+        async function conjAudioSay(text, lang, rate) {
+            const run = conjAudioRun;
+            if (!run) return;
+            await conjAudioWait(0);
+            if (run.stop || run.skip) return;
+            if (!document.getElementById('conjugaison-view').classList.contains('active')) { conjAudioStop(); return; }
+            await conjAudioSpeak(text, lang, rate);
+        }
+
+        // Une écoute courte, sur une instance de reconnaissance dédiée (non continue : elle s'arrête
+        // d'elle-même après une phrase), distincte de celle du jeu de rôle.
+        function conjAudioListen() {
+            return new Promise(resolve => {
+                if (!window.SpeechRecognition) return resolve(null);
+                if (rpIsRecording && rpRecognition) rpRecognition.stop();
+                const rec = new window.SpeechRecognition();
+                rec.lang = 'nl-NL';
+                rec.continuous = false;
+                rec.interimResults = false;
+                rec.maxAlternatives = 3;
+                const heard = [];
+                let done = false;
+                const finish = () => { if (!done) { done = true; resolve(heard); } };
+                rec.onresult = e => {
+                    for (let i = 0; i < e.results.length; i++)
+                        for (let j = 0; j < e.results[i].length; j++) heard.push(e.results[i][j].transcript);
+                };
+                rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') heard.denied = true; finish(); };
+                rec.onend = finish;
+                setTimeout(() => { try { rec.abort(); } catch (e) {} finish(); }, 7000);
+                try { rec.start(); } catch (e) { finish(); }
+            });
+        }
+
+        // Correct si tous les mots de la forme (hors pronom) sont entendus, dans n'importe quel ordre.
+        function conjAudioMatches(heard, form) {
+            const clean = s => normalize(s).replace(/[^a-z' ]/g, ' ').split(/\s+/).filter(Boolean);
+            const target = clean(form);
+            return heard.some(h => { const words = clean(h); return target.every(w => words.includes(w)); });
+        }
+
+        function conjAudioShow(html) {
+            const el = document.getElementById('conj-audio-now');
+            if (el) el.innerHTML = html;
+        }
+
+        async function conjAudioStart() {
+            const first = conjugaisonSelectedVerb;
+            if (!first) return;
+            if (!('speechSynthesis' in window)) { alert('Ton navigateur ne sait pas lire à voix haute.'); return; }
+            const s = conjAudioSettings();
+            if (s.mode === 'check' && !window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : choisis « Répète après moi », ou utilise Google Chrome."); return; }
+            conjAudioStop();
+            const pos = conjCurrentList.indexOf(first.infinitief);
+            const names = pos >= 0 ? conjCurrentList.slice(pos, pos + s.count) : [first.infinitief];
+            const verbs = names.map(n => conjugationData.find(x => x.infinitief === n)).filter(Boolean);
+            const run = { stop: false, paused: false, skip: false, wakeLock: null, ok: 0, ko: 0 };
+            conjAudioRun = run;
+            try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
+
+            document.getElementById('conj-exercise-box').innerHTML = `
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-title">🎧 Écouter et répéter</div>
+                    <div id="conj-audio-now" class="conj-audio-now"></div>
+                    <div class="conj-audio-controls">
+                        <button type="button" class="btn btn-gray" id="conj-audio-pause" onclick="conjAudioTogglePause()">⏸ Pause</button>
+                        <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭ Passer</button>
+                        <button type="button" class="btn btn-gray" onclick="conjAudioStop(); conjAudioRenderSetup();">⏹ Arrêter</button>
+                    </div>
+                </div>`;
+
+            for (const v of verbs) {
+                if (run.stop) break;
+                let fr = null;
+                try { fr = await conjFetchFrenchForms(v, true); } catch (e) { fr = null; }
+                if (run.stop) break;
+                const rows = buildConjugationGrid(v);
+                const nlForm = (t, p) => {
+                    const r = rows.find(x => x.pronomKey === (p.plural ? 'wij' : p.key));
+                    return { form: r[t], sentence: p.key + ' ' + r[t] };
+                };
+                for (const t of s.tenses) {
+                    if (run.stop) break;
+                    conjAudioShow(`<div class="conj-audio-verb">${rpEscapeHtml(v.infinitief)} <span>— ${rpEscapeHtml(v.fr)}</span></div><div class="conj-audio-tense">${CONJ_TENSE_NAMES[t]}</div>`);
+                    run.skip = false;
+                    await conjAudioSay(v.infinitief, 'nl', s.rate);
+                    await conjAudioSay(v.fr + '. ' + CONJ_TENSE_NAMES[t] + '.', 'fr', s.rate);
+                    for (const p of CONJ_AUDIO_PERSONS) {
+                        if (run.stop) break;
+                        run.skip = false;
+                        const { form, sentence } = nlForm(t, p);
+                        const frText = fr && fr[t] && fr[t][p.key] ? String(fr[t][p.key]) : '';
+                        const header = `<div class="conj-audio-verb">${rpEscapeHtml(v.infinitief)} <span>— ${CONJ_TENSE_NAMES[t]} · ${p.plural ? 'pluriel' : 'singulier'}</span></div>`;
+                        const card = (showNl, extra) => header +
+                            `<div class="conj-audio-fr">${rpEscapeHtml(frText || '—')}</div>` +
+                            `<div class="conj-audio-nl">${showNl ? rpEscapeHtml(sentence) : '…'}</div>` + (extra || '');
+                        if (s.order === 'fr' && frText) {
+                            conjAudioShow(card(false));
+                            await conjAudioSay(frText, 'fr', s.rate);
+                            if (s.mode !== 'listen') await conjAudioWait(s.pause * 1000);
+                            if (run.stop || run.skip) continue;
+                            conjAudioShow(card(true));
+                            await conjAudioSay(sentence, 'nl', s.rate);
+                        } else {
+                            conjAudioShow(card(true));
+                            await conjAudioSay(sentence, 'nl', s.rate);
+                            if (frText) await conjAudioSay(frText, 'fr', s.rate);
+                        }
+                        if (run.stop || run.skip) continue;
+                        if (s.mode === 'listen') { await conjAudioWait(800); continue; }
+                        if (s.mode === 'repeat') { conjAudioShow(card(true, '<div class="conj-audio-status">🗣️ À toi…</div>')); await conjAudioWait(s.pause * 1000); continue; }
+                        // Répétition vérifiée : deux essais au plus, seul le premier compte.
+                        for (let attempt = 0; attempt < 2 && !run.stop && !run.skip; attempt++) {
+                            while (run.paused && !run.stop) await conjAudioWait(100);
+                            conjAudioShow(card(true, '<div class="conj-audio-status">🎤 À toi, je t\'écoute…</div>'));
+                            const heard = await conjAudioListen();
+                            if (run.stop || run.skip) break;
+                            if (heard && heard.denied) { conjAudioShow(card(true, '<div class="conj-audio-status bad">Micro refusé : autorise-le dans le navigateur.</div>')); run.stop = true; break; }
+                            const ok = !!heard && conjAudioMatches(heard, form);
+                            if (attempt === 0) { conjRecordResult(v.infinitief, t, p.stat, ok); ok ? run.ok++ : run.ko++; }
+                            const said = heard && heard.length ? '« ' + rpEscapeHtml(heard[0]) + ' »' : 'rien entendu';
+                            if (ok) { conjAudioShow(card(true, `<div class="conj-audio-status good">✅ ${said}</div>`)); await conjAudioWait(900); break; }
+                            conjAudioShow(card(true, `<div class="conj-audio-status bad">❌ ${said}${attempt === 0 ? ' — écoute et réessaie' : ''}</div>`));
+                            await conjAudioSay(sentence, 'nl', s.rate);
+                        }
+                    }
+                }
+            }
+            const finished = !run.stop;
+            const stats = s.mode === 'check' && (run.ok + run.ko) ? ` ${run.ok} ✅ / ${run.ko} ❌ du premier coup.` : '';
+            if (s.mode === 'check' && (run.ok + run.ko)) save();
+            if (conjAudioRun === run) {
+                conjAudioRelease(run);
+                conjAudioRun = null;
+                if (finished) {
+                    document.getElementById('conj-exercise-box').innerHTML = `
+                        <div class="conj-card conj-audio">
+                            <div class="conj-audio-title">🎧 Terminé !${stats}</div>
+                            <button class="btn btn-green" style="margin-top:8px;" onclick="conjAudioStart()">🔁 Recommencer</button>
+                            <button class="btn btn-gray" onclick="conjAudioRenderSetup()">⚙️ Changer les réglages</button>
+                        </div>`;
+                }
+            }
+        }
+
+        function conjAudioRelease(run) {
+            if (run && run.wakeLock) { try { run.wakeLock.release(); } catch (e) {} run.wakeLock = null; }
+        }
+
+        function conjAudioStop() {
+            if (conjAudioRun) {
+                conjAudioRun.stop = true;
+                conjAudioRelease(conjAudioRun);
+                conjAudioRun = null;
+            }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
+        function conjAudioSkip() {
+            if (!conjAudioRun) return;
+            conjAudioRun.skip = true;
+            conjAudioRun.paused = false;
+            window.speechSynthesis.cancel();
+        }
+
+        function conjAudioTogglePause() {
+            const run = conjAudioRun;
+            if (!run) return;
+            run.paused = !run.paused;
+            const btn = document.getElementById('conj-audio-pause');
+            if (btn) btn.innerText = run.paused ? '▶️ Reprendre' : '⏸ Pause';
+            if (run.paused) window.speechSynthesis.cancel();
         }
 
         // ===== Exercices sur la grille de conjugaison =====
@@ -4062,6 +4379,7 @@ if (firebaseAvailable) {
         function conjExerciseStart(infinitief) {
             const v = conjugationData.find(x => x.infinitief === infinitief);
             if (!v) return;
+            conjAudioStop();
             const rows = buildConjugationGrid(v);
             const tenses = ['present', 'futur', 'imperfectum', 'perfectum'];
             const pool = [];
