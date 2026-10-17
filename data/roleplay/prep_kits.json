@@ -1,0 +1,347 @@
+{
+  "_doc": "Kits de préparation des jeux de rôle (bouton « 📚 Me préparer »). Un kit = la réunion de plusieurs blocs thématiques (themes) : une base commune (ex. entretien_base) + un bloc métier ou situation. Chaque bloc : verbes (infinitifs ; ceux présents dans conjugation.json sont entraînables en conjugaison), mots ({nl avec article de/het pour les noms, fr}), phrases ({nl, fr}). Rattachement : scenarios (clé = 'bank:<id question_banks>' ou 'rp:<id RP_SCENARIOS>') et situations (préfixe d'id de job_simulations → blocs) ; une journée réunit les blocs de ses situations. Contenu rédigé par Claude à la demande de Joas, sans relecture préalable : les erreurs se signalent avec ⚠️ dans l'app. Aucun nom réel d'entreprise ou de personne (dépôt public).",
+  "themes": {
+    "entretien_base": {
+      "label": "Entretien d'embauche — base",
+      "verbes": ["solliciteren", "werken", "beginnen", "leren", "studeren", "voorstellen", "vertellen", "uitleggen", "verwachten", "verdienen", "samenwerken", "aanpassen"],
+      "mots": [
+        { "nl": "de vacature", "fr": "l'offre d'emploi" },
+        { "nl": "de sollicitatie", "fr": "la candidature" },
+        { "nl": "het sollicitatiegesprek", "fr": "l'entretien d'embauche" },
+        { "nl": "het cv", "fr": "le CV" },
+        { "nl": "de ervaring", "fr": "l'expérience" },
+        { "nl": "de opleiding", "fr": "la formation (les études)" },
+        { "nl": "het diploma", "fr": "le diplôme" },
+        { "nl": "de functie", "fr": "le poste, la fonction" },
+        { "nl": "het loon", "fr": "le salaire" },
+        { "nl": "het contract", "fr": "le contrat" },
+        { "nl": "de werkgever", "fr": "l'employeur" },
+        { "nl": "de beschikbaarheid", "fr": "la disponibilité" },
+        { "nl": "de werkuren", "fr": "les horaires de travail" },
+        { "nl": "de sterke punten", "fr": "les points forts" },
+        { "nl": "de werkpunten", "fr": "les points à améliorer" },
+        { "nl": "gemotiveerd", "fr": "motivé" },
+        { "nl": "flexibel", "fr": "flexible" },
+        { "nl": "leergierig", "fr": "désireux d'apprendre" }
+      ],
+      "phrases": [
+        { "nl": "Ik ben erg gemotiveerd om in deze functie te starten.", "fr": "Je suis très motivé à commencer dans ce poste." },
+        { "nl": "Ik heb ervaring met ...", "fr": "J'ai de l'expérience avec ..." },
+        { "nl": "Mijn sterkste punt is dat ik nauwkeurig werk.", "fr": "Mon point fort, c'est que je travaille avec précision." },
+        { "nl": "Ik kan op korte termijn beginnen.", "fr": "Je peux commencer à court terme." },
+        { "nl": "Mijn Nederlands is nog niet perfect, maar ik leer elke dag bij.", "fr": "Mon néerlandais n'est pas encore parfait, mais j'apprends chaque jour." },
+        { "nl": "Wat zijn de volgende stappen?", "fr": "Quelles sont les prochaines étapes ?" }
+      ]
+    },
+    "dom_transport": {
+      "label": "Planning transport",
+      "verbes": ["plannen", "organiseren", "opvolgen", "bellen", "leveren", "ophalen", "vervoeren", "afspreken", "regelen"],
+      "mots": [
+        { "nl": "de planning", "fr": "le planning" },
+        { "nl": "de chauffeur", "fr": "le chauffeur" },
+        { "nl": "de vrachtwagen", "fr": "le camion" },
+        { "nl": "de rit", "fr": "le trajet, la tournée" },
+        { "nl": "de levering", "fr": "la livraison" },
+        { "nl": "de lading", "fr": "le chargement" },
+        { "nl": "de transporteur", "fr": "le transporteur" },
+        { "nl": "het tijdslot", "fr": "le créneau horaire" },
+        { "nl": "de vertraging", "fr": "le retard" },
+        { "nl": "de afstand", "fr": "la distance" },
+        { "nl": "dringend", "fr": "urgent" },
+        { "nl": "haalbaar", "fr": "faisable" }
+      ],
+      "phrases": [
+        { "nl": "Ik plan de ritten volgens de prioriteiten van de klant.", "fr": "Je planifie les tournées selon les priorités du client." },
+        { "nl": "Bij een vertraging verwittig ik meteen de klant.", "fr": "En cas de retard, je préviens tout de suite le client." },
+        { "nl": "Die afstand is voor mij haalbaar met de auto.", "fr": "Cette distance est faisable pour moi en voiture." }
+      ]
+    },
+    "dom_supplychain": {
+      "label": "Supply chain",
+      "verbes": ["bestellen", "voorspellen", "aanvullen", "analyseren", "verbeteren", "beheren", "controleren", "rapporteren"],
+      "mots": [
+        { "nl": "de voorraad", "fr": "le stock" },
+        { "nl": "de leverancier", "fr": "le fournisseur" },
+        { "nl": "de bestelling", "fr": "la commande" },
+        { "nl": "de vraag", "fr": "la demande" },
+        { "nl": "de levertijd", "fr": "le délai de livraison" },
+        { "nl": "het tekort", "fr": "le manque, la pénurie" },
+        { "nl": "de stockbreuk", "fr": "la rupture de stock" },
+        { "nl": "de prognose", "fr": "la prévision" },
+        { "nl": "het proces", "fr": "le processus" },
+        { "nl": "de verbetering", "fr": "l'amélioration" },
+        { "nl": "de kosten", "fr": "les coûts" },
+        { "nl": "efficiënt", "fr": "efficace" }
+      ],
+      "phrases": [
+        { "nl": "Bij een stockbreuk zoek ik eerst de oorzaak.", "fr": "En cas de rupture de stock, je cherche d'abord la cause." },
+        { "nl": "Ik volg de voorraad op met Excel en het ERP-systeem.", "fr": "Je suis le stock avec Excel et l'ERP." },
+        { "nl": "Zo kunnen we de kosten verlagen zonder de service te verminderen.", "fr": "Ainsi on peut baisser les coûts sans réduire le service." }
+      ]
+    },
+    "dom_consult": {
+      "label": "Consultance / SAP / Power BI",
+      "verbes": ["adviseren", "analyseren", "presenteren", "begeleiden", "oplossen", "verzamelen", "overtuigen", "reizen"],
+      "mots": [
+        { "nl": "het project", "fr": "le projet" },
+        { "nl": "de klant", "fr": "le client" },
+        { "nl": "de analyse", "fr": "l'analyse" },
+        { "nl": "de gegevens", "fr": "les données" },
+        { "nl": "het rapport", "fr": "le rapport" },
+        { "nl": "de oplossing", "fr": "la solution" },
+        { "nl": "de aanpak", "fr": "l'approche" },
+        { "nl": "de opdracht", "fr": "la mission" },
+        { "nl": "de verplaatsing", "fr": "le déplacement" },
+        { "nl": "het dashboard", "fr": "le tableau de bord" },
+        { "nl": "analytisch", "fr": "analytique" },
+        { "nl": "klantgericht", "fr": "orienté client" }
+      ],
+      "phrases": [
+        { "nl": "Eerst zou ik de gegevens verzamelen en het probleem goed begrijpen.", "fr": "D'abord je collecterais les données et je comprendrais bien le problème." },
+        { "nl": "Ik zou mijn aanpak in drie stappen presenteren.", "fr": "Je présenterais mon approche en trois étapes." },
+        { "nl": "Verplaatsingen naar de klant zijn voor mij geen probleem.", "fr": "Les déplacements chez le client ne me posent pas de problème." }
+      ]
+    },
+    "dom_rh": {
+      "label": "Recrutement / RH",
+      "verbes": ["werven", "selecteren", "overtuigen", "aannemen", "weigeren", "onderhandelen", "opvolgen", "bellen"],
+      "mots": [
+        { "nl": "de kandidaat", "fr": "le candidat" },
+        { "nl": "het profiel", "fr": "le profil" },
+        { "nl": "de werving", "fr": "le recrutement" },
+        { "nl": "de selectie", "fr": "la sélection" },
+        { "nl": "het gesprek", "fr": "l'entretien, la conversation" },
+        { "nl": "de feedback", "fr": "le retour, le feedback" },
+        { "nl": "het aanbod", "fr": "l'offre" },
+        { "nl": "de weigering", "fr": "le refus" },
+        { "nl": "het doel", "fr": "l'objectif" },
+        { "nl": "het netwerk", "fr": "le réseau" },
+        { "nl": "overtuigend", "fr": "convaincant" },
+        { "nl": "resultaatgericht", "fr": "orienté résultats" }
+      ],
+      "phrases": [
+        { "nl": "Ik zou eerst luisteren naar de twijfels van de kandidaat.", "fr": "J'écouterais d'abord les doutes du candidat." },
+        { "nl": "Een weigering is ook nuttige feedback.", "fr": "Un refus, c'est aussi un retour utile." },
+        { "nl": "Ik zoek het profiel dat het best bij de klant past.", "fr": "Je cherche le profil qui correspond le mieux au client." }
+      ]
+    },
+    "dom_usine_admin": {
+      "label": "Administration et logistique d'usine",
+      "verbes": ["invoeren", "ontvangen", "controleren", "registreren", "ondersteunen", "wegen", "lossen", "verwerken"],
+      "mots": [
+        { "nl": "de grondstoffen", "fr": "les matières premières" },
+        { "nl": "de ontvangst", "fr": "la réception" },
+        { "nl": "de fabriek", "fr": "l'usine" },
+        { "nl": "de productie", "fr": "la production" },
+        { "nl": "de data-invoer", "fr": "la saisie de données" },
+        { "nl": "de gegevens", "fr": "les données" },
+        { "nl": "het ERP-systeem", "fr": "le système ERP" },
+        { "nl": "de vestiging", "fr": "le site, l'établissement" },
+        { "nl": "het magazijn", "fr": "l'entrepôt" },
+        { "nl": "de weegbrug", "fr": "le pont-bascule" },
+        { "nl": "het verslag", "fr": "le compte rendu" },
+        { "nl": "administratief", "fr": "administratif" }
+      ],
+      "phrases": [
+        { "nl": "Ik vind het geen probleem om met veel data-invoer te beginnen.", "fr": "Ça ne me dérange pas de commencer avec beaucoup de saisie de données." },
+        { "nl": "Ik heb al met SAP gewerkt tijdens mijn opleiding.", "fr": "J'ai déjà travaillé avec SAP pendant ma formation." },
+        { "nl": "Ik zie deze functie als een goede start om de fabriek te leren kennen.", "fr": "Je vois ce poste comme un bon départ pour apprendre à connaître l'usine." }
+      ]
+    },
+    "dom_entrepot": {
+      "label": "Entrepôt frigorifique / logistiek bediende",
+      "verbes": ["opslaan", "lossen", "laden", "inboeken", "ontvangen", "controleren", "opzoeken", "wachten"],
+      "mots": [
+        { "nl": "de koelcel", "fr": "la chambre froide" },
+        { "nl": "de diepvries", "fr": "le surgelé, le congélateur" },
+        { "nl": "de opslag", "fr": "le stockage" },
+        { "nl": "de kaai", "fr": "le quai (de chargement)" },
+        { "nl": "de pallet", "fr": "la palette" },
+        { "nl": "de afspraak", "fr": "le rendez-vous" },
+        { "nl": "de vrachtbrief", "fr": "la lettre de voiture" },
+        { "nl": "de temperatuur", "fr": "la température" },
+        { "nl": "de werkvloer", "fr": "le terrain, l'atelier" },
+        { "nl": "het ploegensysteem", "fr": "le travail en équipes (pauses)" },
+        { "nl": "de levensmiddelen", "fr": "les denrées alimentaires" },
+        { "nl": "Franstalig", "fr": "francophone" }
+      ],
+      "phrases": [
+        { "nl": "Ik kan zowel op kantoor als op de werkvloer werken.", "fr": "Je peux travailler aussi bien au bureau que sur le terrain." },
+        { "nl": "Met de Franstalige collega's spreek ik Frans, op kantoor Nederlands.", "fr": "Avec les collègues francophones je parle français, au bureau néerlandais." },
+        { "nl": "Een ploegensysteem is voor mij geen probleem.", "fr": "Le travail en équipes ne me pose pas de problème." }
+      ]
+    },
+    "dom_production": {
+      "label": "Appui administratif à la production",
+      "verbes": ["ingeven", "opvolgen", "bijsturen", "analyseren", "controleren", "inboeken", "verwerken", "aanvullen"],
+      "mots": [
+        { "nl": "de productiegegevens", "fr": "les données de production" },
+        { "nl": "de kanbankaart", "fr": "la carte kanban" },
+        { "nl": "de bijvulkaart", "fr": "la carte de réapprovisionnement" },
+        { "nl": "het tekort", "fr": "le manquant" },
+        { "nl": "de oorzaak", "fr": "la cause" },
+        { "nl": "de prioriteit", "fr": "la priorité" },
+        { "nl": "het productieorder", "fr": "l'ordre de production" },
+        { "nl": "de onderdelen", "fr": "les pièces" },
+        { "nl": "de luifel", "fr": "le store banne" },
+        { "nl": "de productieleiding", "fr": "la direction de production" },
+        { "nl": "het hoogseizoen", "fr": "la haute saison" },
+        { "nl": "de overuren", "fr": "les heures supplémentaires" },
+        { "nl": "stipt", "fr": "ponctuel" },
+        { "nl": "nauwkeurig", "fr": "précis" }
+      ],
+      "phrases": [
+        { "nl": "Als er een tekort is, zoek ik eerst de oorzaak: ontbrekende onderdelen of verkeerde aantallen.", "fr": "S'il y a un manquant, je cherche d'abord la cause : pièces absentes ou mauvaises quantités." },
+        { "nl": "Ik pas de prioriteiten aan en verwittig de productieleiding.", "fr": "J'adapte les priorités et je préviens la direction de production." },
+        { "nl": "Overuren in het hoogseizoen zijn voor mij geen probleem.", "fr": "Les heures sup en haute saison ne me posent pas de problème." }
+      ]
+    },
+    "sit_guichet": {
+      "label": "Guichet chauffeurs",
+      "verbes": ["inboeken", "controleren", "wachten", "opzoeken", "herhalen", "tekenen", "doorsturen", "afwerken", "overnemen"],
+      "mots": [
+        { "nl": "de afspraak", "fr": "le rendez-vous" },
+        { "nl": "het referentienummer", "fr": "le numéro de référence" },
+        { "nl": "de kaai", "fr": "le quai" },
+        { "nl": "de nummerplaat", "fr": "la plaque d'immatriculation" },
+        { "nl": "het document", "fr": "le document" },
+        { "nl": "de vrachtbrief", "fr": "la lettre de voiture" },
+        { "nl": "het systeem", "fr": "le système" },
+        { "nl": "de wachttijd", "fr": "le temps d'attente" },
+        { "nl": "het dossier", "fr": "le dossier" },
+        { "nl": "het lawaai", "fr": "le bruit" }
+      ],
+      "phrases": [
+        { "nl": "Heeft u een afspraak of een referentienummer?", "fr": "Vous avez un rendez-vous ou un numéro de référence ?" },
+        { "nl": "Een ogenblikje, ik zoek het even op in het systeem.", "fr": "Un instant, je regarde dans le système." },
+        { "nl": "Sorry, kunt u dat herhalen? Ik heb het niet goed verstaan.", "fr": "Pardon, vous pouvez répéter ? Je n'ai pas bien compris." },
+        { "nl": "U mag naar kaai vier rijden.", "fr": "Vous pouvez aller au quai quatre." }
+      ]
+    },
+    "sit_douane": {
+      "label": "Douane, documents et systèmes",
+      "verbes": ["aangeven", "inklaren", "nakijken", "opslaan", "vrijgeven", "controleren"],
+      "mots": [
+        { "nl": "de douane", "fr": "la douane" },
+        { "nl": "het douane-entrepot", "fr": "l'entrepôt sous douane" },
+        { "nl": "de rechten", "fr": "les droits (de douane)" },
+        { "nl": "de btw", "fr": "la TVA" },
+        { "nl": "de exportvergunning", "fr": "la licence d'exportation" },
+        { "nl": "het certificaat", "fr": "le certificat" },
+        { "nl": "de oorsprong", "fr": "l'origine" },
+        { "nl": "de goederen", "fr": "les marchandises" },
+        { "nl": "de zending", "fr": "l'envoi" },
+        { "nl": "de verwachte aankomst", "fr": "l'arrivée prévue" },
+        { "nl": "de EDI-bestelling", "fr": "la commande EDI" }
+      ],
+      "phrases": [
+        { "nl": "Komen deze goederen van buiten de EU?", "fr": "Ces marchandises viennent-elles de hors UE ?" },
+        { "nl": "Ik kijk even na of de exportvergunning in orde is.", "fr": "Je vérifie si la licence d'export est en règle." },
+        { "nl": "Volgens het systeem wordt de vrachtwagen om tien uur verwacht.", "fr": "D'après le système, le camion est attendu à dix heures." }
+      ]
+    },
+    "sit_retail": {
+      "label": "Logistique retail / e-commerce",
+      "verbes": ["inpakken", "verzenden", "terugsturen", "melden", "aanvullen", "sorteren", "controleren"],
+      "mots": [
+        { "nl": "het pakje", "fr": "le colis" },
+        { "nl": "de doos", "fr": "le carton, la boîte" },
+        { "nl": "de maat", "fr": "la taille, la pointure" },
+        { "nl": "de kleur", "fr": "la couleur" },
+        { "nl": "het artikel", "fr": "l'article" },
+        { "nl": "de retour", "fr": "le retour" },
+        { "nl": "het etiket", "fr": "l'étiquette" },
+        { "nl": "de winkel", "fr": "le magasin" },
+        { "nl": "de solden", "fr": "les soldes" },
+        { "nl": "de drukte", "fr": "le rush, l'affluence" },
+        { "nl": "beschadigd", "fr": "abîmé" },
+        { "nl": "verzendklaar", "fr": "prêt à l'expédition" }
+      ],
+      "phrases": [
+        { "nl": "Dit artikel ligt niet in het rek, ik meld het in het systeem.", "fr": "Cet article n'est pas dans le rayon, je le signale dans le système." },
+        { "nl": "De retour is niet beschadigd, dus hij mag terug in voorraad.", "fr": "Le retour n'est pas abîmé, il peut retourner en stock." },
+        { "nl": "Ik spring even bij om in te pakken.", "fr": "Je viens donner un coup de main pour l'emballage." }
+      ]
+    },
+    "sit_dispatch": {
+      "label": "Dispatch et planning au téléphone",
+      "verbes": ["reserveren", "bevestigen", "voorstellen", "onderhandelen", "uitstellen", "verschuiven", "beantwoorden"],
+      "mots": [
+        { "nl": "de offerte", "fr": "le devis" },
+        { "nl": "het tarief", "fr": "le tarif" },
+        { "nl": "de beschikbaarheid", "fr": "la disponibilité" },
+        { "nl": "de mailbox", "fr": "la boîte mail" },
+        { "nl": "de bevestiging", "fr": "la confirmation" },
+        { "nl": "de pech", "fr": "la panne (véhicule)" },
+        { "nl": "het alternatief", "fr": "l'alternative" },
+        { "nl": "de deadline", "fr": "la date limite" },
+        { "nl": "wekelijks", "fr": "hebdomadaire" }
+      ],
+      "phrases": [
+        { "nl": "Ik stuur u vandaag nog een offerte.", "fr": "Je vous envoie un devis aujourd'hui encore." },
+        { "nl": "Kunnen we de levering naar morgenvroeg verschuiven?", "fr": "Peut-on décaler la livraison à demain matin ?" },
+        { "nl": "Ik bevestig het per mail.", "fr": "Je le confirme par mail." }
+      ]
+    },
+    "sit_usine": {
+      "label": "Réception en usine et ERP",
+      "verbes": ["invoeren", "melden", "wegen", "ontvangen", "herstellen", "wachten"],
+      "mots": [
+        { "nl": "de goederenontvangst", "fr": "la réception des marchandises" },
+        { "nl": "de grondstoffen", "fr": "les matières premières" },
+        { "nl": "de weegbrug", "fr": "le pont-bascule" },
+        { "nl": "de verantwoordelijke", "fr": "le responsable" },
+        { "nl": "de storing", "fr": "la panne, le dérangement" },
+        { "nl": "het ERP-systeem", "fr": "le système ERP" }
+      ],
+      "phrases": [
+        { "nl": "Een ogenblikje, ik werk dit even af in het systeem.", "fr": "Un instant, je termine ça dans le système." },
+        { "nl": "De weegbrug werkt niet, ik meld het aan de verantwoordelijke.", "fr": "Le pont-bascule ne marche pas, je le signale au responsable." }
+      ]
+    },
+    "sit_incidents": {
+      "label": "Clients mécontents et incidents",
+      "verbes": ["uitleggen", "oplossen", "samenvatten", "informeren", "terugbellen", "beloven", "voorstellen"],
+      "mots": [
+        { "nl": "de klacht", "fr": "la plainte, la réclamation" },
+        { "nl": "het incident", "fr": "l'incident" },
+        { "nl": "de excuses", "fr": "les excuses" },
+        { "nl": "de vertraging", "fr": "le retard" },
+        { "nl": "de oplossing", "fr": "la solution" },
+        { "nl": "het verslag", "fr": "le compte rendu" },
+        { "nl": "boos", "fr": "fâché" },
+        { "nl": "tevreden", "fr": "satisfait" },
+        { "nl": "vlot", "fr": "sans accroc, fluide" }
+      ],
+      "phrases": [
+        { "nl": "Ik begrijp dat u boos bent, mijn excuses voor de vertraging.", "fr": "Je comprends que vous soyez fâché, toutes mes excuses pour le retard." },
+        { "nl": "Ik zoek een oplossing en bel u binnen het uur terug.", "fr": "Je cherche une solution et je vous rappelle dans l'heure." },
+        { "nl": "Vandaag is alles vlot verlopen, behalve één vertraging.", "fr": "Aujourd'hui tout s'est bien passé, sauf un retard." }
+      ]
+    }
+  },
+  "scenarios": {
+    "bank:agence_transport_planning": ["entretien_base", "dom_transport"],
+    "bank:plant_manager_admin_logistics": ["entretien_base", "dom_usine_admin"],
+    "bank:stockage_frigorifique_logistiek_bediende": ["entretien_base", "dom_entrepot"],
+    "bank:zonnewering_ondersteuning_productie": ["entretien_base", "dom_production"],
+    "rp:interview_transportplanner_kennismaking": ["entretien_base", "dom_transport"],
+    "rp:interview_sc_phone": ["entretien_base", "dom_supplychain"],
+    "rp:interview_sc_technical": ["entretien_base", "dom_supplychain"],
+    "rp:interview_sc_final": ["entretien_base", "dom_supplychain"],
+    "rp:interview_consult_phone": ["entretien_base", "dom_consult"],
+    "rp:interview_consult_technical": ["entretien_base", "dom_consult"],
+    "rp:interview_consult_final": ["entretien_base", "dom_consult"],
+    "rp:interview_hr_phone": ["entretien_base", "dom_rh"],
+    "rp:interview_hr_technical": ["entretien_base", "dom_rh"],
+    "rp:interview_hr_final": ["entretien_base", "dom_rh"]
+  },
+  "situations": {
+    "guichet_": ["sit_guichet"],
+    "frost_": ["sit_douane", "sit_guichet"],
+    "retail_": ["sit_retail"],
+    "ag_": ["sit_dispatch"],
+    "usine_": ["sit_usine"],
+    "invente_": ["sit_incidents"]
+  }
+}

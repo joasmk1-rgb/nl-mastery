@@ -456,6 +456,12 @@
         </div>
     </div>
 
+    <!-- Kit de préparation d'un jeu de rôle (📚 Préparer) -->
+    <div id="prep-view" class="view">
+        <button class="back-btn" onclick="rpPrepBack()">← Retour</button>
+        <div id="prep-content" class="content-col"></div>
+    </div>
+
     <div id="apprendre-view" class="view">
         <h2>📚 Apprendre</h2>
         <div class="quick-access-row" style="margin-bottom:var(--space-3);">
@@ -493,7 +499,7 @@
         <button class="back-btn" onclick="showApprendre()">← Retour</button>
         <h2>🔤 Conjugaison</h2>
         <div class="hub-grid">
-            <div class="hub-card" onclick="startConjTrainingSession()"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">Tu choisis les verbes (les plus courants d'abord) et les temps. Les formes ratées reviennent en priorité.</div></div>
+            <div class="hub-card" onclick="startConjTrainingSession(null)"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">Tu choisis les verbes (les plus courants d'abord) et les temps. Les formes ratées reviennent en priorité.</div></div>
             <div class="hub-card" onclick="startSeparableTrainingSession()"><span class="hub-card-icon">✂️</span><div class="hub-card-title">Particules séparables</div><div class="hub-card-desc">aanbieden, opstaan... et leurs 3 comportements différents.</div></div>
         </div>
         <div class="conj-search-row content-col">

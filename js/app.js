@@ -1862,6 +1862,9 @@ if (firebaseAvailable) {
                 const count = await loadFile(f, false);
                 if (count > 0) loadedThemes.push({ file: baseName(f), count });
             }
+            // Kits de préparation des jeux de rôle : leurs mots absents du vocabulaire sont ajoutés
+            // à fullDb (catégorie « Kits jeu de rôle ») pour avoir une progression comme les autres.
+            await rpLoadPrepKits();
 
             if (errors.length) {
                 document.getElementById('load-error').innerText = errors.join('\n');
@@ -4550,6 +4553,9 @@ if (firebaseAvailable) {
         // seulement les mots sélectionnés s'il y en a.
         let wlLastItems = [];
         const WORD_AUDIO_COUNTS = [20, 50, 100, 0];
+        // Contexte de lecture : la liste de mots (par défaut) ou un kit de jeu de rôle.
+        const WORD_AUDIO_LIST_CTX = { boxId: 'wl-audio-box', viewId: 'wordlist-view', items: null, label: '' };
+        let wordAudioCtx = WORD_AUDIO_LIST_CTX;
 
         function wordAudioSettings() {
             if (!state.settings) state.settings = {};
@@ -4571,12 +4577,13 @@ if (firebaseAvailable) {
         }
 
         function wordAudioItems() {
-            const selected = wlSelected.size ? wlLastItems.filter(i => wlSelected.has(i.id)) : wlLastItems;
+            const selected = wordAudioCtx.items ? wordAudioCtx.items : (wlSelected.size ? wlLastItems.filter(i => wlSelected.has(i.id)) : wlLastItems);
             const n = wordAudioSettings().count;
             return n ? selected.slice(0, n) : selected;
         }
 
         function wordAudioOpen() {
+            wordAudioCtx = WORD_AUDIO_LIST_CTX;
             const box = document.getElementById('wl-audio-box');
             if (box && box.innerHTML && !conjAudioRun) { box.innerHTML = ''; return; } // 2e clic : referme
             conjAudioStop();
@@ -4584,15 +4591,15 @@ if (firebaseAvailable) {
         }
 
         function wordAudioRenderSetup() {
-            const box = document.getElementById('wl-audio-box');
+            const box = document.getElementById(wordAudioCtx.boxId);
             if (!box) return;
             const s = wordAudioSettings();
             const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
-            const source = wlSelected.size ? `les ${wlLastItems.filter(i => wlSelected.has(i.id)).length} mots sélectionnés` : `les ${wlLastItems.length} mots de la liste affichée (filtres et tri compris)`;
+            const source = wordAudioCtx.items ? wordAudioCtx.label : (wlSelected.size ? `les ${wlLastItems.filter(i => wlSelected.has(i.id)).length} mots sélectionnés` : `les ${wlLastItems.length} mots de la liste affichée (filtres et tri compris)`);
             box.innerHTML = `
                 <div class="conj-card conj-audio">
                     <div class="conj-audio-title">🎧 Écouter les mots</div>
-                    <p class="conj-audio-hint" style="margin-top:0;">On lit ${source}. Choisis une catégorie (Verbes, Adjectifs, Adverbes...) dans le filtre au-dessus pour n'écouter qu'elle.</p>
+                    <p class="conj-audio-hint" style="margin-top:0;">On lit ${source}.${wordAudioCtx.items ? '' : ' Choisis une catégorie (Verbes, Adjectifs, Adverbes...) dans le filtre au-dessus pour n\'écouter qu\'elle.'}</p>
                     <div class="conj-audio-label">Mode</div>
                     <div class="conj-audio-chips">
                         ${chip(s.mode === 'listen', "wordAudioSet('mode','listen')", '👂 Écoute seule')}
@@ -4616,10 +4623,10 @@ if (firebaseAvailable) {
             if (!items.length) { alert('Aucun mot dans la liste affichée.'); return; }
             const s = wordAudioSettings();
             conjAudioStop();
-            const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: 'wordlist-view' };
+            const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: wordAudioCtx.viewId };
             conjAudioRun = run;
             try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
-            const box = document.getElementById('wl-audio-box');
+            const box = document.getElementById(wordAudioCtx.boxId);
             box.innerHTML = `
                 <div class="conj-card conj-audio">
                     <div id="word-audio-now" class="conj-audio-now"></div>
@@ -4790,8 +4797,16 @@ if (firebaseAvailable) {
             return state.settings.conjTraining;
         }
 
+        // Limite optionnelle aux verbes d'un kit de jeu de rôle ({ label, verbs: Set }) : la tranche
+        // « Top N » est alors ignorée, le filtre irréguliers reste appliqué.
+        let conjTrainingVerbFilter = null;
+
         function conjTrainingVerbPool(cfg) {
             const { sorted } = conjByFrequency();
+            if (conjTrainingVerbFilter) {
+                const kitVerbs = sorted.filter(v => conjTrainingVerbFilter.verbs.has(v.infinitief));
+                return cfg.irregOnly ? kitVerbs.filter(isStrongPreteritum) : kitVerbs;
+            }
             // "Top N" s'applique APRÈS le filtre irréguliers : Top 25 irréguliers = les 25 verbes
             // irréguliers les plus courants, pas les irréguliers parmi les 25 premiers verbes.
             const base = cfg.irregOnly ? sorted.filter(isStrongPreteritum) : sorted;
@@ -4857,7 +4872,9 @@ if (firebaseAvailable) {
         let conjTrainingState = null;
 
         // Point d'entrée (Jouer → Conjugaison) : ouvre l'écran de réglages.
-        function startConjTrainingSession() {
+        // filter : undefined = garder le filtre en cours ; null = tous les verbes ; objet = kit.
+        function startConjTrainingSession(filter) {
+            if (filter !== undefined) conjTrainingVerbFilter = filter;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conj-training-view').classList.add('active');
             setActiveNav('nav-apprendre');
@@ -4909,6 +4926,7 @@ if (firebaseAvailable) {
                 `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
             content.innerHTML = `
                 <div class="conj-card">
+                    ${conjTrainingVerbFilter ? `<div class="prep-filter-banner">📚 Verbes du kit « ${rpEscapeHtml(conjTrainingVerbFilter.label)} » (${conjTrainingVerbFilter.verbs.size}) <button type="button" class="conj-filter-chip" onclick="startConjTrainingSession(null)">✕ Tous les verbes</button></div>` : ''}
                     <div class="conj-setup-label">Quels verbes ?</div>
                     <div class="conj-filter-chips-row">
                         ${CONJ_RANGE_CHIPS.map(c => chip(c.key === cfg.range, `conjTrainingSetRange(${c.key})`, c.key ? c.label.replace('Top', 'Les') + ' plus courants' : 'Tous')).join('')}
@@ -5445,7 +5463,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo'
+            THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle'
         };
         function categoryLabel(file) {
             const main = MAIN_CATEGORIES.find(c => c.file === file);
@@ -7703,7 +7721,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 cat.groups.forEach(group => {
                     html += `<div class="rp-group-title">${group.title}</div>`;
                     group.items.forEach(item => {
-                        html += `<button class="rp-scenario-btn" onclick="rpStartScenario('${catKey}','${item.id}')">${item.label}</button>`;
+                        html += rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartScenario('${catKey}','${item.id}')">${item.label}</button>`, 'rp:' + item.id, group.title.replace(/^\S+\s/, '') + ' — ' + item.label.replace(/^\S+\s/, ''), { type: 'rp', cat: catKey, id: item.id });
                     });
                 });
             } else {
@@ -8135,7 +8153,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens réels</div>' +
                 '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens et improvise ses relances selon tes réponses.</p>' +
                 (banks.length
-                    ? banks.map((b, i) => `<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`).join('')
+                    ? banks.map((b, i) => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`, 'bank:' + b.id, b.label, { type: 'bank', index: i })).join('')
                     : '<p style="color:#888;">Aucun scénario réel pour l\'instant.</p>');
         }
 
@@ -8455,6 +8473,218 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         // ----- Écran d'accueil du mode : métier, journée complète, situation isolée -----
+        // =====================================================================================
+        // Kits de préparation (« 📚 Préparer ») : verbes, mots et phrases utiles d'un jeu de rôle
+        // =====================================================================================
+        // data/roleplay/prep_kits.json : blocs thématiques réunis par scénario (base entretien +
+        // métier, ou blocs d'une situation de travail). Depuis le kit : réviser les mots (session de
+        // vocabulaire habituelle), conjuguer les verbes (entraînement réglable limité au kit),
+        // écouter le kit (moteur audio de la liste de mots), puis lancer le jeu de rôle.
+        let rpPrepData = null;      // { themes, scenarios, situations }
+        let rpPrepCurrent = null;   // { key, label, launch, kit }
+        const KIT_FILE = 'KITS_JEU_DE_ROLE';
+
+        function rpKitNorm(s) { return normalize(String(s || '')).replace(/[^a-z0-9 '-]/g, ' ').replace(/\s+/g, ' ').trim(); }
+
+        // Index du vocabulaire par forme néerlandaise (chaque variante d'un « a / b »).
+        function rpKitVocabIndex() {
+            const idx = {};
+            fullDb.forEach(i => {
+                if (i.file === 'PHRASES_LABO') return;
+                String(i.nl).split('/').forEach(part => { const k = rpKitNorm(part); if (k && !idx[k]) idx[k] = i; });
+            });
+            return idx;
+        }
+
+        async function rpLoadPrepKits() {
+            if (rpPrepData) return rpPrepData;
+            try {
+                rpPrepData = await fetch('data/roleplay/prep_kits.json').then(r => r.ok ? r.json() : null);
+            } catch (e) { rpPrepData = null; }
+            if (!rpPrepData) { rpPrepData = { themes: {}, scenarios: {}, situations: {} }; return rpPrepData; }
+            const idx = rpKitVocabIndex();
+            Object.values(rpPrepData.themes).forEach(t => {
+                const entries = (t.verbes || []).map(v => ({ nl: v, fr: '' })).concat(t.mots || []);
+                entries.forEach(e => {
+                    const k = rpKitNorm(e.nl);
+                    if (!k || idx[k]) return;
+                    if (!e.fr) { const cv = conjugationData.find(x => x.infinitief === e.nl); e.fr = cv ? cv.fr : ''; }
+                    if (!e.fr) return;
+                    const item = { id: 'KIT:' + k, fr: e.fr, nl: e.nl, freq: 3, file: KIT_FILE, tier: '', niveauCECR: '', sousCategorie: t.label };
+                    fullDb.push(item);
+                    idx[k] = item;
+                });
+            });
+            return rpPrepData;
+        }
+
+        function rpKitThemesFor(key) {
+            if (!rpPrepData) return [];
+            if (rpPrepData.scenarios[key]) return rpPrepData.scenarios[key];
+            const sitThemes = id => {
+                const prefix = Object.keys(rpPrepData.situations || {}).find(p => id.startsWith(p));
+                return prefix ? rpPrepData.situations[prefix] : [];
+            };
+            if (key.startsWith('sit:')) return sitThemes(key.slice(4));
+            if (key.startsWith('day:') && rpJobData) {
+                const j = rpJobData.journees.find(x => x.id === key.slice(4));
+                return j ? [...new Set((j.sequence || []).flatMap(sitThemes))] : [];
+            }
+            return [];
+        }
+
+        function rpBuildKit(key) {
+            const themes = rpKitThemesFor(key).map(t => rpPrepData.themes[t]).filter(Boolean);
+            if (!themes.length) return null;
+            const idx = rpKitVocabIndex();
+            const seen = new Set();
+            const verbs = [], words = [], phrases = [];
+            themes.forEach(t => {
+                (t.verbes || []).forEach(v => {
+                    if (seen.has('v:' + v)) return; seen.add('v:' + v);
+                    verbs.push({ inf: v, conj: conjugationData.find(x => x.infinitief === v) || null, item: idx[rpKitNorm(v)] || null });
+                });
+                (t.mots || []).forEach(m => {
+                    const k = rpKitNorm(m.nl);
+                    if (seen.has('m:' + k)) return; seen.add('m:' + k);
+                    words.push({ nl: m.nl, fr: m.fr, item: idx[k] || null });
+                });
+                (t.phrases || []).forEach(p => phrases.push(p));
+            });
+            return { themes: themes.map(t => t.label), verbs, words, phrases };
+        }
+
+        function rpHasKit(key) { return rpKitThemesFor(key).length > 0; }
+
+        // Bouton « 📚 Préparer » accolé au bouton d'un scénario dans les listes.
+        function rpPrepRow(scenarioBtnHtml, key, label, launch) {
+            if (!rpHasKit(key)) return scenarioBtnHtml;
+            const data = encodeURIComponent(JSON.stringify({ key, label, launch }));
+            return `<div class="rp-scenario-row">${scenarioBtnHtml}<button type="button" class="rp-prep-btn" data-prep="${data}" onclick="rpPrepOpenFromBtn(this)" title="Préparer les mots et les verbes de ce jeu de rôle">📚 Préparer</button></div>`;
+        }
+
+        function rpPrepOpenFromBtn(btn) {
+            try { const d = JSON.parse(decodeURIComponent(btn.dataset.prep)); rpPrepOpen(d.key, d.label, d.launch); } catch (e) { console.warn(e); }
+        }
+
+        function rpPrepOpen(key, label, launch) {
+            const kit = rpBuildKit(key);
+            if (!kit) return;
+            conjAudioStop();
+            rpPrepCurrent = { key, label, launch, kit };
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('prep-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            rpPrepRender();
+            window.scrollTo(0, 0);
+        }
+
+        function rpPrepRender() {
+            const p = rpPrepCurrent;
+            const box = document.getElementById('prep-content');
+            if (!p || !box) return;
+            const { kit } = p;
+            const conjCount = kit.verbs.filter(v => v.conj).length;
+            const row = (nl, fr, extra, report) => `
+                <div class="prep-row">
+                    <span class="prep-nl">${rpEscapeHtml(nl)}</span>
+                    <span class="prep-fr">${rpEscapeHtml(fr || '')}</span>
+                    <span class="prep-actions">${extra || ''}${speakBtnHtml(nl)}${report}</span>
+                </div>`;
+            const status = item => item ? `<span class="wl-badge ${wordStatus(item.id)}">${{ unseen: 'Non vu', review: 'À réviser', mastered: 'Réussi', 'true-mastered': '★ Maîtrisé' }[wordStatus(item.id)]}</span>` : '';
+            box.innerHTML = `
+                <h2 style="margin-bottom:4px;">📚 Me préparer</h2>
+                <p class="prep-sub">${rpEscapeHtml(p.label)} · ${rpEscapeHtml(kit.themes.join(' + '))}</p>
+                <div class="prep-actions-grid">
+                    <button class="btn btn-green" onclick="rpPrepVocab()">📝 Réviser les ${kit.verbs.length + kit.words.length} mots</button>
+                    <button class="btn btn-gray" onclick="rpPrepConj()" ${conjCount ? '' : 'disabled'}>🔤 Conjuguer les ${conjCount} verbes</button>
+                    <button class="btn btn-gray" onclick="rpPrepAudio()">🎧 Écouter le kit</button>
+                    <button class="btn btn-gray" onclick="rpPrepLaunch()">▶️ Lancer le jeu de rôle</button>
+                </div>
+                <div id="prep-audio-box"></div>
+                <div class="section-title">🔤 Verbes (${kit.verbs.length})</div>
+                ${kit.verbs.map(v => row(v.inf, v.conj ? v.conj.fr : (v.item ? v.item.fr : ''),
+                    (v.conj ? `<button type="button" class="conj-filter-chip" onclick="rpPrepShowVerb('${v.inf.replace(/'/g, "\\'")}')">fiche</button>` : '') + status(v.item),
+                    reportBtnHtml({ kind: 'kit', ref: p.key, nl: v.inf, fr: v.conj ? v.conj.fr : '', context: 'kit · verbe' }))).join('')}
+                <div class="section-title">🧱 Mots (${kit.words.length})</div>
+                ${kit.words.map(w => row(w.nl, w.fr, status(w.item), reportBtnHtml({ kind: 'kit', ref: p.key, nl: w.nl, fr: w.fr, context: 'kit · mot' }))).join('')}
+                ${kit.phrases.length ? `<div class="section-title">💬 Phrases utiles (${kit.phrases.length})</div>
+                ${kit.phrases.map(ph => row(ph.nl, ph.fr, '', reportBtnHtml({ kind: 'kit', ref: p.key, nl: ph.nl, fr: ph.fr, context: 'kit · phrase' }))).join('')}` : ''}`;
+        }
+
+        function rpPrepBack() {
+            conjAudioStop();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('roleplay-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            rpShowScenarioPicker();
+        }
+
+        function rpPrepKitItems() {
+            const k = rpPrepCurrent && rpPrepCurrent.kit;
+            if (!k) return [];
+            return k.verbs.map(v => v.item).concat(k.words.map(w => w.item)).filter(Boolean);
+        }
+
+        function rpPrepVocab() {
+            const items = rpPrepKitItems();
+            if (!items.length) return;
+            inRevisionMode = false;
+            const orderedItems = byFrequencyDesc(items);
+            const sourceKey = 'kit:' + rpPrepCurrent.key + '::' + state.settings.direction;
+            const unlocked = getUnlockedItems(sourceKey, orderedItems);
+            sessionDb = activePool(unlocked);
+            if (!sessionDb.length) { alert('Tu maîtrises déjà tous les mots débloqués de ce kit (dans ce sens) ! 🎉'); return; }
+            currentSessionSourceKey = sourceKey;
+            currentSessionOrderedItems = orderedItems;
+            document.getElementById('session-title').innerText = '📚 ' + rpPrepCurrent.label;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('study-view').classList.add('active');
+            batchResults = [];
+            document.getElementById('batch-recap').innerHTML = '';
+            bumpMode('classique');
+            save();
+            nextQ();
+        }
+
+        function rpPrepConj() {
+            const verbs = rpPrepCurrent.kit.verbs.filter(v => v.conj).map(v => v.inf);
+            if (!verbs.length) return;
+            startConjTrainingSession({ label: rpPrepCurrent.label, verbs: new Set(verbs) });
+        }
+
+        function rpPrepShowVerb(inf) {
+            showConjugaison();
+            showConjugaisonDetail(inf);
+        }
+
+        function rpPrepAudio() {
+            const k = rpPrepCurrent.kit;
+            const items = k.verbs.map(v => ({ nl: v.inf, fr: v.conj ? v.conj.fr : (v.item ? v.item.fr : ''), file: KIT_FILE }))
+                .concat(k.words.map(w => ({ nl: w.nl, fr: w.fr, file: KIT_FILE })))
+                .concat(k.phrases.map(ph => ({ nl: ph.nl, fr: ph.fr, file: KIT_FILE })))
+                .filter(i => i.fr);
+            wordAudioCtx = { boxId: 'prep-audio-box', viewId: 'prep-view', items, label: 'les ' + items.length + ' éléments du kit (verbes, mots, phrases)' };
+            const box = document.getElementById('prep-audio-box');
+            if (box && box.innerHTML && !conjAudioRun) { box.innerHTML = ''; return; }
+            conjAudioStop();
+            wordAudioRenderSetup();
+        }
+
+        async function rpPrepLaunch() {
+            const l = rpPrepCurrent && rpPrepCurrent.launch;
+            if (!l) return;
+            conjAudioStop();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('roleplay-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            renderRpGeminiStatus();
+            if (l.type === 'bank') { await rpShowRealCandidateList(); rpStartRealCandidate(l.index); }
+            else if (l.type === 'rp') { rpShowCategory(l.cat); rpStartScenario(l.cat, l.id); }
+            else if (l.type === 'sit') { await rpShowJobHome(); rpStartSituation(l.id); }
+            else if (l.type === 'day') { await rpShowJobHome(); rpStartDay(l.index); }
+        }
+
         async function rpShowJobHome() {
             rpCurrentCategory = '__job';
             rpDayState = null;
@@ -8482,7 +8712,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const isolated = canaux.map(c =>
                 `<div class="rp-job-canal">${rpEscapeHtml((RP_JOB_CANAUX[c] || { label: c }).label)}</div>` +
                 bank.filter(s => s.canal === c).map(s =>
-                    `<button class="rp-scenario-btn" onclick="rpStartSituation('${s.id}')">${rpEscapeHtml(rpSitTitle(s))}${rpSitLang(s) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}</button>`
+                    rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartSituation('${s.id}')">${rpEscapeHtml(rpSitTitle(s))}${rpSitLang(s) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}</button>`, 'sit:' + s.id, rpSitTitle(s), { type: 'sit', id: s.id })
                 ).join('')
             ).join('');
 
@@ -8499,7 +8729,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${chip(rpJobDuration === 'courte', "rpJobSetDuration('courte')", `Courte · ${RP_JOB_DURATIONS.courte} situations`)}
                     ${chip(rpJobDuration === 'longue', "rpJobSetDuration('longue')", `Longue · ${RP_JOB_DURATIONS.longue} situations`)}
                 </div>
-                ${journees.map(x => `<button class="rp-scenario-btn" onclick="rpStartDay(${x.i})">${rpEscapeHtml(x.j.label)}</button>`).join('')}
+                ${journees.map(x => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartDay(${x.i})">${rpEscapeHtml(x.j.label)}</button>`, 'day:' + x.j.id, x.j.label, { type: 'day', index: x.i })).join('')}
                 <button class="rp-scenario-btn" onclick="rpStartDay(-1)">🎲 Journée tirée au sort · ${Math.min(size, bank.length)} situations</button>
                 <div class="rp-group-title">🎯 Situation isolée</div>
                 ${isolated}
