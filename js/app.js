@@ -1683,7 +1683,7 @@ if (firebaseAvailable) {
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
             const coreFiles = [
                 'VERBES_NL.csv', 'NOMS_NL.csv', 'ADJECTIFS_NL.csv', 'ADVERBES_NL.csv', 'MOTS_OUTILS_NL.csv',
-                'EXPRESSIONS_NL.csv', 'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
+                'EXPRESSIONS_NL.csv', 'LOCUTIONS_NL.csv', 'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
             ];
             // Fichiers de thèmes métier : optionnels. Ajoute simplement un CSV avec un de ces noms
             // (ou un nouveau nom dans cette liste) pour qu'il apparaisse automatiquement dans "Thèmes".
@@ -5098,6 +5098,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             { file: 'ADVERBES_NL', label: 'Adverbes' },
             { file: 'MOTS_OUTILS_NL', label: 'Mots-outils' },
             { file: 'EXPRESSIONS_NL', label: 'Expressions' },
+            { file: 'LOCUTIONS_NL', label: 'Locutions & tournures écrites' },
             { file: 'PHRASES_LABO', label: 'Phrases Labo' }
         ];
 
@@ -5470,7 +5471,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             }
             currentSessionSourceKey = sourceKey;
             currentSessionOrderedItems = orderedItems;
-            document.getElementById('session-title').innerText = category;
+            document.getElementById('session-title').innerText = categoryLabel(category);
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('study-view').classList.add('active');
             batchResults = [];
@@ -6679,7 +6680,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         const VOCAB_CATEGORY_FILES = {
             'Vocabulaire courant': ['NOMS_NL', 'ADJECTIFS_NL', 'ADVERBES_NL', 'MOTS_OUTILS_NL'],
             'Verbes fréquents': ['VERBES_NL'],
-            'Expressions courantes': ['THEME_BASE', 'PHRASES_LABO', 'EXPRESSIONS_NL'],
+            'Expressions courantes': ['THEME_BASE', 'PHRASES_LABO', 'EXPRESSIONS_NL', 'LOCUTIONS_NL'],
             'Vocabulaire professionnel': ['MOTS_LABO', 'THEME_MARKETING', 'THEME_FINANCE', 'THEME_COMPTABILITE', 'THEME_LOGISTIQUE', 'THEME_SUPPLYCHAIN', 'THEME_MANAGEMENT', 'THEME_RH', 'THEME_ENTRETIEN']
         };
 

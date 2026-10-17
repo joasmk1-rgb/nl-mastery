@@ -1,0 +1,533 @@
+id;fr;nl;freq;priorite_frequence;niveauCECR;niveauCECRSource;sousCategorie;sousCategorieSource
+LOCUTIONS_NL_0;l'attention portée à;aandacht voor de;4.08;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_1;porter à l'attention (onder de aandacht brengen);onder de aandacht;4.07;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_2;d'un certain nombre de;van een aantal;4.36;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_3;être présent;aanwezig te zijn;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_4;la bonne adresse (au bon endroit);het juiste adres;3.99;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_5;à la bonne adresse / au bon endroit;aan het juiste adres;3.86;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_6;prendre un rendez-vous;een afspraak maken;3.8;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_7;déjà plus de;al meer dan;4.29;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_8;pour tous vos;voor al uw;3.91;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_9;en général;in het algemeen;4.58;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_10;en général / généralement;over het algemeen;4.54;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_11;il ne reste plus que / seulement;alleen nog maar;4.04;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_12;diverses choses / tout ça;een en ander;4.29;Essentiel;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_13;différent de / autre que;anders dan de;3.79;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_14;dans cet article;in dit artikel;3.86;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_15;dans la voiture;in de auto;4.17;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_16;le soir / au soir;op de avond;3.79;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_17;sur le canapé / à la banque;op de bank;4.12;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_18;sur la base de;op basis van;5.05;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_19;un montant de;een bedrag van;4.16;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_20;le début de;het begin van;4.87;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_21;le début de;het begin van de;4.63;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_22;pour commencer;om te beginnen;3.79;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_23;le besoin de;de behoefte aan;3.79;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_24;faire partie de / appartenir à;behoren tot de;3.9;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_25;il s'est avéré que / on a appris que;werd bekend dat;3.86;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_26;l'importance de;het belang van;4.46;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_27;il est important;is het belangrijk;4.21;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_28;la politique/gestion de;het beleid van;3.9;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_29;déterminé par le/la;bepaald door de;3.87;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_30;est déterminé par;wordt bepaald door;3.75;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_31;un appel/recours à (een beroep doen op);een beroep op;3.96;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_32;en appel (terme juridique);in hoger beroep;3.79;Courant;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_33;l'existence de;het bestaan van;3.99;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_34;le conseil d'administration de;het bestuur van;4.4;Essentiel;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_35;conseil d'administration;raad van bestuur;4.03;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_36;se trouvent dans (zich bevinden);bevinden zich in;3.6;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_37;occupé à / en train de;bezig met het;4.2;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_38;occupé à / en train de;bezig met de;4.08;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_39;s'occupe de (zich bezighouden met);zich bezig met;3.96;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_40;une visite à;een bezoek aan;4.43;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_41;a à offrir (iets te bieden hebben);te bieden heeft;3.78;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_42;dans la bible;in de bijbel;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_43;en particulier;in het bijzonder;4.4;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_44;content de/du;blij met de;3.78;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_45;rester informé de;op de hoogte blijven;3.58;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_46;dans le livre;in het boek;4.07;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_47;une amende de;een boete van;3.77;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_48;à bord de;aan boord van;4.0;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_49;dans la forêt/le bois;in het bos;3.92;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_50;un large éventail (breed scala aan);een breed scala;3.81;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_51;dans une lettre;in een brief;3.91;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_52;à l'étranger;in het buitenland;4.54;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_53;en Belgique/NL et à l'étranger;binnen- en buitenland;4.04;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_54;dans le bus;in de bus;3.89;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_55;dans le coin / à proximité;in de buurt;4.79;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_56;les environs de;de buurt van;4.44;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_57;le centre de;het centrum van;4.58;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_58;dans le centre;in het centrum;4.51;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_59;contact avec nous;contact met ons;4.54;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_60;prendre contact avec;contact opnemen met;4.46;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_61;en outre, il y a;daarnaast zijn er;3.95;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_62;en outre, il y a;daarnaast is er;3.93;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_63;c'est pourquoi;het is daarom;3.82;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_64;le jour de / au jour;op de dag;4.42;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_65;la vie quotidienne;het dagelijks leven;3.94;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_66;sur le toit;op het dak;3.92;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_67;plus d'un(e);meer dan een;4.45;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_68;devoir à / grâce à (te danken hebben aan);te danken aan;3.99;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_69;partie de;deel van de;4.99;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_70;une partie de;een deel van;4.82;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_71;participer à;deelnemen aan de;3.89;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_72;à réfléchir (nadenken over);na te denken;4.0;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_73;penser à;denken aan de;3.78;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_74;devant la porte;voor de deur;4.12;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_75;tout près de;dicht bij de;3.89;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_76;tout près les uns des autres;dicht bij elkaar;3.46;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_77;profondément dans;diep in de;3.81;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_78;directement après;direct na de;3.79;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_79;participer (meedoen);mee te doen;4.14;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_80;après la mort;na de dood;3.99;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_81;contribuer (bijdragen aan);bij te dragen;3.79;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_82;pression sur (druk uitoefenen op);druk op de;4.0;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_83;il est clair que;is duidelijk dat;3.79;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_84;la durée de;de duur van;3.96;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_85;à la longue;op den duur;3.85;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_86;cependant / or;het is echter;3.9;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_87;une fois par (eens in de week);eens in de;3.97;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_88;plus tôt cette année;eerder dit jaar;3.92;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_89;plus tôt cette semaine;eerder deze week;3.87;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_90;pour la première fois;voor het eerst;5.27;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_91;le 19e siècle;de 19e eeuw;4.07;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_92;le siècle dernier;de vorige eeuw;4.01;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_93;selon ses propres dires;naar eigen zeggen;4.05;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_94;le propriétaire de;de eigenaar van;4.07;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_95;sur l'île;op het eiland;4.09;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_96;la fin de;het eind van;4.65;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_97;à la fin;aan het eind;4.6;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_98;la fin de;het einde van;4.88;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_99;la fin de;het einde van de;4.64;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_100;en anglais;in het engels;4.06;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_101;il semble que (het lijkt erop dat);het lijkt erop;3.68;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_102;indique que (erop wijzen dat);wijst erop dat;3.67;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_103;du principe que (ervan uitgaan dat);ervan uit dat;3.93;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_104;convaincu que;ervan overtuigd dat;3.84;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_105;part du principe que (ervan uitgaan dat);gaat ervan uit;3.47;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_106;fait en sorte que / veille à ce que;zorgt ervoor dat;4.33;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_107;le boire et le manger;eten en drinken;3.83;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_108;euros par an;euro per jaar;3.91;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_109;le Parlement européen;het europees parlement;3.98;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_110;le fait que;het feit dat;4.92;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_111;à vélo;op de fiets;3.96;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_112;dans le film;in de film;4.07;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_113;un bon nombre de;een flink aantal;3.55;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_114;sur la photo;op de foto;4.39;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_115;pour aller / à gérer (omgaan met);om te gaan;4.36;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_116;déroulement des choses;gang van zaken;4.05;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_117;en cours (aan de gang zijn);aan de gang;3.9;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_118;être l'invité de;te gast bij;3.5;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_119;une niche commerciale (gat in de markt);een gat in de;3.3;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_120;le domaine de;het gebied van;5.13;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_121;dans le domaine;op het gebied;5.11;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_122;dans le domaine de;op het gebied van;5.11;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_123;est né(e) en/à;werd geboren in;3.86;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_124;né et élevé (quelque part);geboren en getogen;3.38;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_125;dans le bâtiment;in het gebouw;3.86;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_126;l'utilisation de;het gebruik van;4.95;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_127;faire usage de / utiliser;gebruik maken van;4.57;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_128;le comportement de;het gedrag van;4.01;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_129;le Saint-Esprit;de heilige geest;3.97;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_130;incroyable, indescriptible;te gek voor woorden;3.23;Courant;C1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_131;il y a quelques années;enkele jaren geleden;3.92;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_132;il y a deux semaines;twee weken geleden;3.82;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_133;égal à;gelijk aan de;3.73;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_134;profiter de;genieten van de;4.12;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_135;profiter d'un(e);genieten van een;4.09;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_136;n'hésitez pas à contacter (gerust contact opnemen met);gerust contact met;3.5;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_137;le cœur léger / l'esprit tranquille;met een gerust hart;3.42;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_138;l'histoire de;de geschiedenis van;4.49;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_139;est adapté pour / convient à;is geschikt voor;4.04;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_140;une conversation avec;een gesprek met;3.99;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_141;en tout cas;in ieder geval;4.84;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_142;dans ce cas;in dit geval;4.42;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_143;en prison;in de gevangenis;3.96;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_144;le sentiment que;het gevoel dat;4.05;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_145;un sentiment de;een gevoel van;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_146;sens de l'humour;gevoel voor humor;3.35;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_147;en conséquence de / à la suite de;als gevolg van;4.59;Essentiel;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_148;à première vue (fragment);het eerste gezicht;3.8;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_149;à première vue;op het eerste gezicht;3.8;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_150;bon pour le/la;goed voor de;3.97;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_151;bon dans (goed zijn in);goed in de;3.91;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_152;la frontière avec;de grens met;3.87;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_153;fruits et légumes;groente en fruit;3.37;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_154;sur la base de / en vertu de;op grond van;4.54;Essentiel;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_155;sur le sol;op de grond;4.3;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_156;un grand nombre de;een groot aantal;4.65;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_157;une grande partie;een groot deel;4.55;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_158;une demi-heure;een half uur;4.25;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_159;six mois (demi-année);een half jaar;4.25;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_160;au moyen de (aan de hand van);aan de hand;4.87;Essentiel;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_161;au moyen de / à l'aide de;aan de hand van;4.71;Essentiel;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_162;avoir travaillé dur pour;hard gewerkt aan;3.52;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_163;rouler trop vite;te hard rijden;3.17;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_164;le cœur de;het hart van;4.14;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_165;au cœur;in het hart;3.93;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_166;dans le port;in de haven;3.82;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_167;beaucoup de courage (formule de réconfort);heel veel sterkte;3.78;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_168;n'est pas du tout;is helemaal niet;3.48;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_169;la moitié de;de helft van;4.63;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_170;la moitié de;de helft van de;4.42;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_171;aider à;helpen bij het;3.86;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_172;il en va de même pour;hetzelfde geldt voor;3.73;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_173;c'est la même chose que;is hetzelfde als;3.31;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_174;au même moment;op hetzelfde moment;3.3;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_175;au coin de la rue;op de hoek;3.87;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_176;la cour de;het hof van;3.8;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_177;cour de justice;hof van justitie;3.38;Courant;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_178;la tête/le chef de;het hoofd van;4.14;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_179;la capitale de;de hoofdstad van;4.01;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_180;dans la capitale;in de hoofdstad;3.95;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_181;une priorité élevée (hoog in het vaandel staan);hoog in het vaandel;3.92;Courant;C1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_182;nous espérons que;we hopen dat;3.94;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_183;apprendre/entendre que;te horen dat;3.9;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_184;l'aide de;de hulp van;3.99;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_185;avec l'aide de;met hulp van;3.78;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_186;l'idée que;het idee dat;4.06;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_187;c'est en effet / car (immers);het is immers;3.42;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_188;pour plus d'informations;voor meer informatie;4.82;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_189;plus d'informations sur;meer informatie over;4.69;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_190;sur internet;op het internet;4.37;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_191;via internet;via het internet;3.84;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_192;l'influence de;de invloed van;4.09;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_193;influence sur;invloed op de;4.05;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_194;de cette année;van dit jaar;4.47;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_195;pour la jeunesse;voor de jeugd;3.83;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_196;petits et grands;jong en oud;4.09;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_197;sur la carte;op de kaart;4.0;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_198;la Chambre des représentants (NL);de tweede kamer;4.67;Essentiel;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_199;à la Chambre des représentants;in de tweede kamer;4.16;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_200;la chance/le risque de;de kans op;4.34;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_201;l'autre côté;de andere kant;4.54;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_202;d'un autre côté / par ailleurs;aan de andere kant;4.43;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_203;la première fois;de eerste keer;4.5;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_204;fois par an;keer per jaar;4.23;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_205;connaissance de;kennis van de;4.11;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_206;connaissances et expérience;kennis en ervaring;3.97;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_207;faire connaissance avec;kennis maken met;3.81;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_208;à l'église;in de kerk;4.22;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_209;dans la cuisine;in de keuken;4.02;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_210;le choix de/pour;de keuze voor;3.9;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_211;choisir un(e);kiezen voor een;3.96;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_212;pour regarder;om te kijken;4.13;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_213;regarder le/la;kijken naar de;3.9;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_214;une plainte à propos de;een klacht over;4.01;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_215;en classe;in de klas;4.08;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_216;maîtriser qch (onder de knie hebben/krijgen);onder de knie;3.57;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_217;une tasse de café;een kopje koffie;3.79;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_218;café et thé;koffie en thee;3.63;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_219;arriver à / parvenir à;te komen tot;3.96;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_220;être éligible / être pris en considération;in aanmerking komen;3.94;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_221;jusqu'il y a peu;tot voor kort;3.92;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_222;peu après;kort na de;3.91;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_223;les coûts de;de kosten van;4.42;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_224;les coûts pour;de kosten voor;4.21;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_225;laisser en plan (iemand in de kou laten staan);in de kou;3.48;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_226;dans le journal;in de krant;4.13;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_227;la Croix-Rouge;het rode kruis;3.79;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_228;pour pouvoir;om te kunnen;4.07;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_229;au large de;voor de kust;3.86;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_230;un quart de;een kwart van;3.88;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_231;se débarrasser de;kwijt te raken;3.37;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_232;montre que;laat zien dat;3.79;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_233;pour la dernière fois;voor het laatst;3.88;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_234;dernière mise à jour le;laatst bijgewerkt op;3.87;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_235;dans le pays;in het land;4.36;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_236;loin d'être toujours;lang niet altijd;3.55;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_237;lentement mais sûrement;langzaam maar zeker;3.7;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_238;pas gêné par (geen last hebben van);geen last van;3.79;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_239;être gêné par / avoir des ennuis avec;last hebben van;3.58;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_240;sur ordre de;op last van;3.48;Courant;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_241;à montrer;te laten zien;4.15;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_242;montrer que;laten zien dat;4.12;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_243;l'âge de;de leeftijd van;4.15;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_244;à un jeune âge;op jonge leeftijd;3.75;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_245;mener à un(e);leiden tot een;4.02;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_246;peut mener à;kan leiden tot;3.86;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_247;apprendre à connaître;te leren kennen;3.84;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_248;dans la vie;in het leven;4.43;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_249;dans le corps;in het lichaam;4.07;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_250;révélé (aan het licht komen);aan het licht;3.98;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_251;membre de;lid van de;4.62;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_252;membre du;lid van het;4.1;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_253;en bas à gauche de cette page;links onderaan deze pagina;3.87;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_254;à gauche et à droite;links en rechts;3.74;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_255;indépendamment de / détaché de;los van de;3.8;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_256;dans les airs / en l'air;in de lucht;4.25;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_257;disparu (uit de lucht halen);uit de lucht;3.85;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_258;dans le mois / au mois de;in de maand;3.92;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_259;responsabilité sociale des entreprises (RSE);maatschappelijk verantwoord ondernemen;3.45;Courant;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_260;dans la société;in de maatschappij;3.82;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_261;avoir à faire avec;te maken met;4.78;Essentiel;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_262;la fabrication de / le fait de faire;het maken van;4.72;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_263;papa et maman;papa en mama;3.46;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_264;être démasqué (door de mand vallen);door de mand;3.26;Courant;C1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_265;de cette manière;op deze manier;4.63;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_266;de cette façon-là;op die manier;4.48;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_267;la manière dont;de manier waarop;4.42;Essentiel;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_268;sur le marché;op de markt;4.64;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_269;dans les médias;in de media;4.06;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_270;d'avis que (van mening zijn dat);van mening dat;4.28;Essentiel;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_271;est d'avis;is van mening;3.82;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_272;est d'avis que;is van mening dat;3.81;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_273;à mon avis;naar mijn mening;3.77;Courant;A2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_274;l'après-midi;in de middag;3.92;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_275;au Moyen Âge;in de middeleeuwen;3.84;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_276;au milieu;in het midden;4.42;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_277;le milieu de;het midden van;4.3;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_278;pour l'environnement;voor het milieu;3.85;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_279;le ministre de;de minister van;4.17;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_280;ministre des Affaires étrangères (fragment);minister van buitenlandse;4.11;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_281;au moins aussi important;minstens zo belangrijk;3.2;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_282;qui vaut la peine (de moeite waard zijn);de moeite waard;4.25;Essentiel;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_283;ça vaut la peine de;de moeite waard om;3.67;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_284;est-il possible;is het mogelijk;4.57;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_285;la possibilité de;de mogelijkheid om;4.73;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_286;en ce moment;op dit moment;4.95;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_287;au moment / en ce moment;op het moment;4.59;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_288;par beau temps;bij mooi weer;3.4;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_289;le nom de;de naam van;4.61;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_290;sous le nom de;onder de naam;4.45;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_291;dans la nuit;in de nacht;4.42;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_292;c'est en effet / à savoir (namelijk);het is namelijk;3.47;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_293;dans la nature;in de natuur;4.06;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_294;c'est naturellement / bien sûr;het is natuurlijk;3.82;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_295;en néerlandais;in het nederlands;4.26;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_296;de haut en bas / aller et venir;op en neer;3.6;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_297;emporter / prendre en compte;mee te nemen;4.14;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_298;tout comme le/la;net als de;4.31;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_299;tout comme dans;net als in;4.03;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_300;tout aussi bien;net zo goed;3.95;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_301;pas seulement le/la (niet alleen...maar ook);niet alleen de;4.41;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_302;pas plus de;niet meer dan;4.32;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_303;il faut pour / nécessaire de;nodig is om;3.94;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_304;pas encore de commentaires;nog geen reacties;4.64;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_305;pas encore de commentaires sur;nog geen reacties op;4.63;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_306;dans le nord;in het noorden;4.33;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_307;le nord de;het noorden van;4.17;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_308;jusqu'à présent;tot nu toe;4.68;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_309;le matin;in de ochtend;3.95;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_310;dans les environs/l'entourage;in de omgeving;4.44;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_311;les environs de;de omgeving van;4.29;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_312;sur ce sujet;over dit onderwerp;3.92;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_313;à propos de ce sujet;bij dit onderwerp;3.82;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_314;dans l'enseignement;in het onderwijs;4.01;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_315;l'enseignement secondaire (NL);het voortgezet onderwijs;3.86;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_316;recherche sur;onderzoek naar de;4.31;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_317;la naissance/l'origine de;het ontstaan van;4.17;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_318;en vue de (met het oog op);het oog op;4.28;Essentiel;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_319;en vue de / dans l'optique de (fragment);met het oog;4.26;Essentiel;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_320;en vue de / dans l'optique de;met het oog op;4.25;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_321;en plus / par-dessus le marché;ook nog eens;4.46;Essentiel;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_322;cette année aussi;ook dit jaar;4.18;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_323;après la guerre;na de oorlog;4.1;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_324;la cause de;de oorzaak van;4.16;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_325;grand-père et grand-mère;opa en oma;3.37;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_326;sur ordre de / à la demande de;in opdracht van;4.49;Essentiel;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_327;le ministère public;het openbaar ministerie;4.3;Essentiel;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_328;les transports en commun;het openbaar vervoer;4.2;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_329;le réveillon du Nouvel An (fête);oud en nieuw;3.49;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_330;du gouvernement/de l'État;van de overheid;4.25;Essentiel;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_331;par le gouvernement;door de overheid;3.9;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_332;le décès de;het overlijden van;3.98;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_333;quelques jours;een paar dagen;4.26;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_334;quelques années;een paar jaar;4.25;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_335;s'attaquer à (aanpakken);aan te pakken;4.16;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_336;dans le parc;in het park;3.88;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_337;au parlement;in het parlement;3.91;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_338;pendant la période;in de periode;4.35;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_339;une période de;een periode van;4.27;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_340;plan d'action;plan van aanpak;3.86;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_341;avoir l'intention de (van plan zijn om);van plan om;3.83;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_342;l'endroit où;de plek waar;3.98;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_343;à l'endroit;op de plek;3.84;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_344;avec grand plaisir;met veel plezier;3.96;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_345;en politique;in de politiek;3.9;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_346;le prix de;de prijs van;4.28;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_347;le prix pour;de prijs voor;3.88;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_348;le problème est;het probleem is;3.79;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_349;pour cent de;procent van de;4.75;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_350;pour cent du;procent van het;3.92;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_351;produit intérieur brut (PIB);bruto binnenlands product;3.3;Courant;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_352;pour le public;voor het publiek;3.91;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_353;le bord de;de rand van;4.34;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_354;au bord de / à la périphérie;aan de rand;4.2;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_355;sur cette réaction;over deze reactie;3.98;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_356;une réaction à;een reactie op;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_357;le droit de;het recht om;4.03;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_358;devant le juge;voor de rechter;3.97;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_359;pour cette raison;om die reden;4.03;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_360;la raison pour laquelle;de reden dat;3.85;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_361;la raison pour laquelle;de reden waarom;3.76;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_362;le gouvernement flamand;de vlaamse regering;3.98;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_363;dans la région;in de regio;4.65;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_364;facturé (in rekening brengen);in rekening gebracht;4.02;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_365;tenir compte de;rekening houden met;3.91;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_366;aux frais de / à la charge de;voor rekening van;3.87;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_367;la relation entre;de relatie tussen;4.0;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_368;par rapport à / en relation avec;in relatie tot;3.83;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_369;le respect pour/de;respect voor de;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_370;avec du respect pour;met respect voor;3.49;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_371;le reste de;de rest van;4.79;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_372;le reste de;de rest van de;4.46;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_373;le résultat de;het resultaat van;4.14;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_374;le résultat est;het resultaat is;3.91;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_375;la direction de;de richting van;4.26;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_376;en direction de;in de richting;4.25;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_377;conduite en état d'ivresse;rijden onder invloed;3.29;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_378;le rôle de;de rol van;4.56;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_379;un rôle important;een belangrijke rol;4.41;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_380;derrière soi (achter de rug hebben);achter de rug;4.09;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_381;dans le dos;in de rug;3.77;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_382;plus d'un an;ruim een jaar;3.6;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_383;plus de la moitié (ruim = largement/un peu plus de);ruim de helft;3.49;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_384;dans l'espace;in de ruimte;3.89;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_385;l'espace public;de openbare ruimte;3.77;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_386;en toute tranquillité;in alle rust;3.68;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_387;ensemble avec / avec le/la;samen met de;4.79;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_388;ensemble avec un(e);samen met een;4.25;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_389;dans la société;in de samenleving;3.97;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_390;une mine de / une richesse de (een schat aan informatie);een schat aan;3.57;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_391;la faute/dette de;de schuld van;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_392;à prendre au sérieux;serieus te nemen;3.33;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_393;la situation en/à;de situatie in;3.85;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_394;par mauvais temps;bij slecht weer;3.26;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_395;seulement quelques;slechts een paar;3.46;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_396;plaire, être apprécié (in de smaak vallen);in de smaak;3.56;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_397;fondre comme neige au soleil (smelten als sneeuw voor de zon);als sneeuw voor de;3.18;Courant;C1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_398;spécialement pour;speciaal voor de;3.91;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_399;en jeu (in het spel zijn);in het spel;3.88;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_400;les Jeux olympiques;de olympische spelen;4.14;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_401;parler de;te spreken over;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_402;se retrouve (komen te staan);komt te staan;3.82;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_403;capable de (in staat zijn om);in staat om;4.37;Essentiel;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_404;en ville;in de stad;4.55;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_405;pas à pas / étape par étape;stap voor stap;3.85;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_406;de plus en plus (fragment);er steeds meer;3.82;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_407;de plus en plus de gens;steeds meer mensen;3.78;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_408;la voix de;de stem van;3.77;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_409;fortement dépendant de;sterk afhankelijk van;3.37;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_410;s'arrêter sur / réfléchir à (stilstaan bij);stil te staan bij;3.36;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_411;arrêter de fumer;stoppen met roken;3.49;Courant;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_412;sur la plage;op het strand;4.06;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_413;dans la lutte/le combat;in de strijd;4.15;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_414;la lutte contre;de strijd tegen;4.09;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_415;un par un / chacun;stuk voor stuk;3.88;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_416;bien meilleur;een stuk beter;3.67;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_417;le succès de;het succes van;4.18;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_418;sous le signe de (in het teken van);in het teken;4.24;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_419;vous êtes au bon endroit chez nous;bij ons terecht;4.09;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_420;retour à / de retour vers;terug naar de;4.34;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_421;à retrouver;terug te vinden;4.23;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_422;à cette époque;in die tijd;4.38;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_423;dans le temps;in de tijd;4.28;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_424;quand même un peu;toch een beetje;3.54;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_425;dans le futur / à l'avenir;in de toekomst;4.74;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_426;le futur/l'avenir de;de toekomst van;4.25;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_427;avoir sa part / être satisfait (aan hun trekken komen);aan hun trekken;3.22;Courant;C1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_428;dans le jardin;in de tuin;4.26;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_429;c'est finalement (uiteindelijk = finalement);uiteindelijk is het;3.37;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_430;c'est bien sûr (uiteraard = évidemment);uiteraard is het;3.48;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_431;l'université de;de universiteit van;4.37;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_432;à l'université;aan de universiteit;4.25;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_433;heures par jour;uur per dag;4.19;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_434;24 heures par jour (24h/24);24 uur per dag;4.07;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_435;aujourd'hui / de nos jours;vandaag de dag;4.09;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_436;maintenir / s'accrocher à (vasthouden aan);vast te houden;3.83;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_437;sécuriser / garantir (veiligstellen);veilig te stellen;3.6;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_438;la sécurité de;de veiligheid van;4.03;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_439;pour la sécurité;voor de veiligheid;3.78;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_440;en rapport avec / en raison de;in verband met;4.62;Essentiel;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_441;l'assemblée générale;de algemene vergadering;3.88;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_442;l'histoire de;het verhaal van;4.23;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_443;transport et gestion des eaux (ministère NL);verkeer en waterstaat;3.89;Courant;C1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_444;dans le passé;in het verleden;4.55;Essentiel;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_445;du passé;uit het verleden;3.84;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_446;la différence entre;het verschil tussen;4.1;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_447;ne rien comprendre à / ne pas être compétent en (geen verstand hebben van);geen verstand van;3.18;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_448;est-il sage/prudent;is het verstandig;3.81;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_449;confiance dans/en;vertrouwen in de;3.81;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_450;à trouver dans;te vinden in;4.23;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_451;à trouver sur;te vinden op;4.16;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_452;garder le doigt sur le pouls / rester vigilant;vinger aan de pols;3.22;Courant;C1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_453;juste avant;vlak voor de;3.94;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_454;le plan de (op het vlak van);het vlak van;3.88;Courant;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_455;au pied de;aan de voet;3.81;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_456;tenir bon / persévérer (volhouden);vol te houden;3.38;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_457;surtout dans;vooral in de;4.16;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_458;surtout dans le/au;vooral in het;3.88;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_459;un exemple de;een voorbeeld van;4.05;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_460;laisser passer (une chance) (een kans voorbij laten gaan);voorbij laten gaan;3.18;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_461;donner la préférence à (de voorkeur geven aan);de voorkeur aan;3.75;Courant;B2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_462;de l'année dernière;van vorig jaar;4.14;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_463;la forme de;de vorm van;4.73;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_464;sous la forme (in de vorm van);in de vorm;4.64;Essentiel;B2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_465;la question de savoir si;de vraag of;4.42;Essentiel;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_466;à la question;op de vraag;4.14;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_467;la liberté de;de vrijheid van;3.9;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_468;liberté d'expression;vrijheid van meningsuiting;3.81;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_469;tôt ou tard;vroeg of laat;3.56;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_470;remplir (un formulaire);in te vullen;4.25;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_471;la mesure dans laquelle;de mate waarin;3.81;Courant;B2;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_472;la manière dont;de wijze waarop;4.19;Courant;B2;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_473;la date à laquelle;de datum waarop;3.37;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_474;attendre;te wachten op;3.8;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_475;se faire attendre (op zich laten wachten);op zich wachten;3.45;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_476;dans l'eau;in het water;4.29;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_477;sur l'eau;op het water;3.83;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_478;sur le site web;op de website;4.79;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_479;le site web de;de website van;4.74;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_480;dans la semaine;in de week;4.16;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_481;jours par semaine;dagen per week;4.01;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_482;le week-end;in het weekend;4.1;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_483;aller-retour / dans les deux sens;heen en weer;3.99;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_484;en route vers;op weg naar;4.34;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_485;sur la route;op de weg;4.19;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_486;parfois un(e) (wel eens);wel eens een;4.02;Courant;B1;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_487;un petit peu quand même;wel een beetje;4.0;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_488;bienvenue sur/à;welkom op de;4.4;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_489;bienvenue de tout cœur;van harte welkom;4.39;Essentiel;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_490;dans le monde;in de wereld;4.49;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_491;au travail;aan het werk;4.45;Essentiel;A2;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_492;le travail de;het werk van;4.4;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_493;travailler sur;te werken aan;3.95;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_494;dans l'ouest;in het westen;4.21;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_495;à l'ouest de;ten westen van;3.85;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_496;pour savoir;om te weten;4.03;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_497;en savoir plus sur;meer weten over;4.01;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_498;dans le magasin;in de winkel;4.22;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_499;en hiver;in de winter;4.21;Courant;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_500;pas étonnant que;geen wonder dat;3.52;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_501;dans le logement;in de woning;3.88;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_502;avoir la parole (aan het woord zijn);aan het woord;3.9;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_503;doit être (passif formel);dient te worden;4.04;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_504;doivent être;dienen te worden;3.8;Courant;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_505;dans l'affaire;in de zaak;3.89;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_506;dans la salle;in de zaal;3.94;Courant;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_507;très adapté pour;zeer geschikt voor;3.82;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_508;c'est-à-dire;dat wil zeggen;4.28;Essentiel;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_509;vaut vraiment la peine;zeker de moeite waard;3.57;Courant;B1;estimation_manuelle;Expressions idiomatiques (écrit/figuré);manuel
+LOCUTIONS_NL_510;à l'hôpital;in het ziekenhuis;4.39;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_511;vers l'hôpital;naar het ziekenhuis;4.27;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_512;pour voir;om te zien;4.36;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_513;à voir dans;te zien in;4.16;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_514;il n'y a pas encore de commentaires;zijn nog geen reacties;4.64;Essentiel;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_515;son/sa (épicène, à lui ou à elle);zijn of haar;4.27;Essentiel;B2;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_516;le sens de;de zin van;3.94;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_517;en ce sens;in die zin;3.86;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_518;le plus vite possible;zo snel mogelijk;4.56;Essentiel;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_519;le mieux possible;zo goed mogelijk;4.21;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_520;dès que possible (registre formel);zo spoedig mogelijk;4.21;Courant;B2;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_521;quasiment / pratiquement;zo goed als;4.16;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_522;à la recherche de;op zoek naar;4.95;Essentiel;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_523;chercher un(e);zoeken naar een;3.79;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_524;en été;in de zomer;4.5;Essentiel;A2;estimation_manuelle;Expressions de temps (écrit);manuel
+LOCUTIONS_NL_525;dans le secteur des soins/de la santé;in de zorg;3.98;Courant;B1;estimation_manuelle;Vocabulaire institutionnel & administratif;manuel
+LOCUTIONS_NL_526;le soin de / la prise en charge de;de zorg voor;3.92;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_527;veiller à ce que (ervoor zorgen dat);te zorgen dat;4.16;Courant;B1;estimation_manuelle;Connecteurs de discours (écrit);manuel
+LOCUTIONS_NL_528;veiller à / s'occuper de;zorgen voor een;4.14;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_529;aussi bien dans;zowel in de;3.88;Courant;B1;estimation_manuelle;Expressions de quantité & comparaison (écrit);manuel
+LOCUTIONS_NL_530;dans le sud;in het zuiden;4.29;Essentiel;A2;estimation_manuelle;Locutions prépositionnelles figées;manuel
+LOCUTIONS_NL_531;le sud de;het zuiden van;4.19;Courant;B1;estimation_manuelle;Locutions prépositionnelles figées;manuel
