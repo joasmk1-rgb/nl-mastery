@@ -677,3 +677,52 @@ VERBES_NL_674;transporter;vervoeren;4.06;Standard;Courant;vervoerde;vervoerd
 VERBES_NL_675;traiter;verwerken;4.24;Standard;Courant;verwerkte;verwerkt
 VERBES_NL_676;libérer / débloquer;vrijgeven;3.33;Standard;Spécialisé;gaf vrij;vrijgegeven
 VERBES_NL_677;recruter;werven;3.9;Standard;Courant;wierf;geworven
+VERBES_NL_678;demander (officiellement);aanvragen;4.2;Standard;Courant;vroeg aan;aangevraagd
+VERBES_NL_679;laisser (derrière soi);achterlaten;3.89;Standard;Courant;liet achter;achtergelaten
+VERBES_NL_680;remettre / déposer;afgeven;3.74;Standard;Courant;gaf af;afgegeven
+VERBES_NL_681;livrer / remettre;afleveren;3.56;Standard;Courant;leverde af;afgeleverd
+VERBES_NL_682;finaliser / arrondir;afronden;3.66;Standard;Courant;rondde af;afgerond
+VERBES_NL_683;supprimer / abolir;afschaffen;3.91;Standard;Courant;schafte af;afgeschaft
+VERBES_NL_684;apprendre davantage;bijleren;2.64;Standard;Spécialisé;leerde bij;bijgeleerd
+VERBES_NL_685;remplir (compléter);bijvullen;3.0;Standard;Spécialisé;vulde bij;bijgevuld
+VERBES_NL_686;apporter / rentrer;binnenbrengen;2.61;Standard;Spécialisé;bracht binnen;binnengebracht
+VERBES_NL_687;contacter;contacteren;3.25;Standard;Spécialisé;contacteerde;gecontacteerd
+VERBES_NL_688;créditer;crediteren;1.29;Standard;Spécialisé;crediteerde;gecrediteerd
+VERBES_NL_689;transmettre;doorgeven;4.13;Standard;Courant;gaf door;doorgegeven
+VERBES_NL_690;télécharger;downloaden;4.33;Standard;Courant;downloadde;gedownload
+VERBES_NL_691;évaluer;evalueren;3.22;Standard;Spécialisé;evalueerde;geëvalueerd
+VERBES_NL_692;exporter;exporteren;3.37;Standard;Spécialisé;exporteerde;geëxporteerd
+VERBES_NL_693;facturer;factureren;2.75;Standard;Spécialisé;factureerde;gefactureerd
+VERBES_NL_694;filtrer;filteren;3.58;Standard;Courant;filterde;gefilterd
+VERBES_NL_695;approuver;goedkeuren;3.55;Standard;Courant;keurde goed;goedgekeurd
+VERBES_NL_696;tousser;hoesten;3.62;Standard;Courant;hoestte;gehoest
+VERBES_NL_697;rattraper;inhalen;3.75;Standard;Courant;haalde in;ingehaald
+VERBES_NL_698;se connecter;inloggen;3.86;Standard;Courant;logde in;ingelogd
+VERBES_NL_699;inscrire;inschrijven;4.15;Standard;Courant;schreef in;ingeschreven
+VERBES_NL_700;faire connaissance;kennismaken;3.86;Standard;Courant;maakte kennis;kennisgemaakt
+VERBES_NL_701;cliquer;klikken;3.95;Standard;Courant;klikte;geklikt
+VERBES_NL_702;faire attention (à);letten;4.35;Standard;Courant;lette;gelet
+VERBES_NL_703;apporter;meebrengen;3.52;Standard;Courant;bracht mee;meegebracht
+VERBES_NL_704;envoyer ensuite / faire suivre;nasturen;1.55;Standard;Spécialisé;stuurde na;nagestuurd
+VERBES_NL_705;noter;noteren;3.5;Standard;Courant;noteerde;genoteerd
+VERBES_NL_706;démarrer / lancer;opstarten;3.7;Standard;Courant;startte op;opgestart
+VERBES_NL_707;envoyer (par la poste);opsturen;3.59;Standard;Courant;stuurde op;opgestuurd
+VERBES_NL_708;résilier / démissionner;opzeggen;3.57;Standard;Courant;zegde op;opgezegd
+VERBES_NL_709;transmettre / céder;overdragen;3.56;Standard;Courant;droeg over;overgedragen
+VERBES_NL_710;remettre (en main propre);overhandigen;3.39;Standard;Spécialisé;overhandigde;overhandigd
+VERBES_NL_711;passer en revue;overlopen;3.42;Standard;Spécialisé;overliep;overlopen
+VERBES_NL_712;virer (argent) / recopier;overschrijven;3.28;Standard;Spécialisé;schreef over;overgeschreven
+VERBES_NL_713;changer (de train) / passer à;overstappen;3.78;Standard;Courant;stapte over;overgestapt
+VERBES_NL_714;prioriser;prioriteren;1.48;Standard;Spécialisé;prioriteerde;geprioriteerd
+VERBES_NL_715;consulter;raadplegen;3.56;Standard;Courant;raadpleegde;geraadpleegd
+VERBES_NL_716;faire visiter;rondleiden;2.74;Standard;Spécialisé;leidde rond;rondgeleid
+VERBES_NL_717;scanner;scannen;3.57;Standard;Courant;scande;gescand
+VERBES_NL_718;rembourser;terugbetalen;3.6;Standard;Courant;betaalde terug;terugbetaald
+VERBES_NL_719;revenir sur / faire le bilan;terugblikken;2.83;Standard;Spécialisé;blikte terug;teruggeblikt
+VERBES_NL_720;rapporter / ramener;terugbrengen;3.7;Standard;Courant;bracht terug;teruggebracht
+VERBES_NL_721;reprendre;terugnemen;2.89;Standard;Spécialisé;nam terug;teruggenomen
+VERBES_NL_722;se soigner (guérir complètement);uitzieken;1.98;Standard;Spécialisé;ziekte uit;uitgeziekt
+VERBES_NL_723;augmenter;verhogen;4.34;Standard;Courant;verhoogde;verhoogd
+VERBES_NL_724;accueillir;verwelkomen;3.95;Standard;Courant;verwelkomde;verwelkomd
+VERBES_NL_725;prévenir;verwittigen;2.88;Standard;Spécialisé;verwittigde;verwittigd
+VERBES_NL_726;prescrire;voorschrijven;3.39;Standard;Spécialisé;schreef voor;voorgeschreven

@@ -1,0 +1,2433 @@
+{
+  "_doc": "Bibliothèque de situations de jeu de rôle, stockées en dur (aucun appel Gemini pour les ouvrir ni les préparer ; seule la conversation utilise Gemini). Champs : id, theme (emploi | travail | quotidien), label, contexte (en français, affiché), role (consigne du personnage pour Gemini, en français), welcome (première réplique, en néerlandais), kit {verbes (infinitifs), mots [{nl avec de/het, fr}], phrases [{nl, fr}]}. Les situations générées par Gemini depuis l'app suivent le même format et sont gardées dans state.rpLibrary. Rédigées par Claude à la demande de Joas, sans relecture préalable (signalement ⚠️ dans l'app). Noms de personnes et d'entreprises inventés.",
+  "themes": {
+    "emploi": "💼 Recherche d'emploi",
+    "travail": "🏢 Au bureau",
+    "quotidien": "🏠 Vie courante en Belgique"
+  },
+  "situations": [
+    {
+      "id": "emploi_interim_appel",
+      "theme": "emploi",
+      "label": "Une agence d'intérim t'appelle",
+      "contexte": "Une consultante d'une agence d'intérim t'appelle : elle a vu ton CV et a une offre de magasinier-administratif à te proposer.",
+      "role": "Tu es Sofie, consultante dans une agence d'intérim flamande. Tu appelles le candidat pour une offre d'employé logistique (mi-magasin, mi-bureau) dans une PME de la région. Vérifie son intérêt, sa disponibilité, sa mobilité (permis, voiture), son expérience, et propose un entretien.",
+      "welcome": "Goeiedag, u spreekt met Sofie van het interimkantoor. Ik heb uw cv gezien en ik heb misschien een interessante job voor u. Heeft u even tijd?",
+      "kit": {
+        "verbes": [
+          "bellen",
+          "voorstellen",
+          "beginnen",
+          "werken",
+          "rijden",
+          "passen",
+          "afspreken",
+          "doorsturen",
+          "solliciteren",
+          "interesseren"
+        ],
+        "mots": [
+          {
+            "nl": "het interimkantoor",
+            "fr": "l'agence d'intérim"
+          },
+          {
+            "nl": "de consulent",
+            "fr": "le consultant (agence)"
+          },
+          {
+            "nl": "de vacature",
+            "fr": "l'offre d'emploi"
+          },
+          {
+            "nl": "de interimjob",
+            "fr": "la mission d'intérim"
+          },
+          {
+            "nl": "het rijbewijs",
+            "fr": "le permis de conduire"
+          },
+          {
+            "nl": "de verplaatsing",
+            "fr": "le trajet, le déplacement"
+          },
+          {
+            "nl": "het uurloon",
+            "fr": "le salaire horaire"
+          },
+          {
+            "nl": "de werkuren",
+            "fr": "les horaires"
+          },
+          {
+            "nl": "het sollicitatiegesprek",
+            "fr": "l'entretien d'embauche"
+          },
+          {
+            "nl": "vast",
+            "fr": "fixe (contrat)"
+          },
+          {
+            "nl": "beschikbaar",
+            "fr": "disponible"
+          },
+          {
+            "nl": "dichtbij",
+            "fr": "proche"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ja, ik heb even tijd, vertel maar.",
+            "fr": "Oui, j'ai un moment, je vous écoute."
+          },
+          {
+            "nl": "Ik ben onmiddellijk beschikbaar.",
+            "fr": "Je suis disponible immédiatement."
+          },
+          {
+            "nl": "Kunt u mij de vacature per mail doorsturen?",
+            "fr": "Pouvez-vous m'envoyer l'offre par mail ?"
+          },
+          {
+            "nl": "Is er kans op een vast contract?",
+            "fr": "Y a-t-il une chance de contrat fixe ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_relance_candidature",
+      "theme": "emploi",
+      "label": "Relancer une candidature",
+      "contexte": "Tu as postulé il y a deux semaines pour un poste d'assistant planning et tu n'as pas eu de nouvelles. Tu appelles le service RH.",
+      "role": "Tu es Pieter, collaborateur du service RH d'une entreprise de transport. Un candidat appelle pour relancer sa candidature. Demande-lui son nom, le poste, la date d'envoi ; réponds de façon réaliste (dossier en cours, présélection en cours, ou réponse attendue la semaine prochaine) et reste poli.",
+      "welcome": "Personeelsdienst, goedemiddag, met Pieter. Waarmee kan ik u helpen?",
+      "kit": {
+        "verbes": [
+          "solliciteren",
+          "sturen",
+          "ontvangen",
+          "vragen",
+          "wachten",
+          "laten",
+          "terugbellen",
+          "bevestigen",
+          "verwachten"
+        ],
+        "mots": [
+          {
+            "nl": "de sollicitatie",
+            "fr": "la candidature"
+          },
+          {
+            "nl": "de personeelsdienst",
+            "fr": "le service du personnel (RH)"
+          },
+          {
+            "nl": "de functie",
+            "fr": "le poste"
+          },
+          {
+            "nl": "de stand van zaken",
+            "fr": "l'état d'avancement"
+          },
+          {
+            "nl": "de selectieprocedure",
+            "fr": "la procédure de sélection"
+          },
+          {
+            "nl": "de preselectie",
+            "fr": "la présélection"
+          },
+          {
+            "nl": "het antwoord",
+            "fr": "la réponse"
+          },
+          {
+            "nl": "het nieuws",
+            "fr": "les nouvelles"
+          },
+          {
+            "nl": "de verantwoordelijke",
+            "fr": "le responsable"
+          },
+          {
+            "nl": "nog altijd",
+            "fr": "toujours (encore)"
+          },
+          {
+            "nl": "geïnteresseerd",
+            "fr": "intéressé"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb twee weken geleden gesolliciteerd voor de functie van planningsassistent.",
+            "fr": "J'ai postulé il y a deux semaines pour le poste d'assistant planning."
+          },
+          {
+            "nl": "Ik wilde graag weten wat de stand van zaken is.",
+            "fr": "Je voulais savoir où en est le dossier."
+          },
+          {
+            "nl": "Ik ben nog altijd erg geïnteresseerd.",
+            "fr": "Je suis toujours très intéressé."
+          },
+          {
+            "nl": "Wanneer mag ik een antwoord verwachten?",
+            "fr": "Quand puis-je attendre une réponse ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_questions_offre",
+      "theme": "emploi",
+      "label": "Poser des questions sur une offre",
+      "contexte": "Avant de postuler, tu appelles l'entreprise pour mieux comprendre une offre d'employé administratif : tâches, horaires, type de contrat.",
+      "role": "Tu es Els, office manager d'une PME de distribution. Un candidat appelle pour des précisions sur l'offre d'employé administratif. Réponds à ses questions (tâches : facturation, encodage, téléphone ; horaires 8h30-17h ; CDI après 6 mois d'intérim), pose-lui une ou deux questions sur son profil, et invite-le à envoyer son CV.",
+      "welcome": "Goedemorgen, met Els. U belt over onze vacature, zei mijn collega?",
+      "kit": {
+        "verbes": [
+          "vragen",
+          "uitleggen",
+          "bestaan",
+          "inhouden",
+          "sturen",
+          "verwachten",
+          "kennen",
+          "werken",
+          "factureren"
+        ],
+        "mots": [
+          {
+            "nl": "de taken",
+            "fr": "les tâches"
+          },
+          {
+            "nl": "de facturatie",
+            "fr": "la facturation"
+          },
+          {
+            "nl": "het contract van onbepaalde duur",
+            "fr": "le CDI"
+          },
+          {
+            "nl": "het contract van bepaalde duur",
+            "fr": "le CDD"
+          },
+          {
+            "nl": "de werkuren",
+            "fr": "les horaires"
+          },
+          {
+            "nl": "de vereisten",
+            "fr": "les exigences"
+          },
+          {
+            "nl": "de opleiding",
+            "fr": "la formation"
+          },
+          {
+            "nl": "het team",
+            "fr": "l'équipe"
+          },
+          {
+            "nl": "voltijds",
+            "fr": "à temps plein"
+          },
+          {
+            "nl": "deeltijds",
+            "fr": "à temps partiel"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik had een paar vragen over de vacature voor ik solliciteer.",
+            "fr": "J'avais quelques questions sur l'offre avant de postuler."
+          },
+          {
+            "nl": "Wat houdt de functie precies in?",
+            "fr": "En quoi consiste exactement le poste ?"
+          },
+          {
+            "nl": "Is het een voltijdse job?",
+            "fr": "C'est un temps plein ?"
+          },
+          {
+            "nl": "Aan wie mag ik mijn cv sturen?",
+            "fr": "À qui puis-je envoyer mon CV ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_negocier_salaire",
+      "theme": "emploi",
+      "label": "Négocier son salaire",
+      "contexte": "L'entreprise veut t'engager. Le responsable RH te présente l'offre salariale ; tu veux discuter du salaire et des avantages (chèques-repas, voiture, télétravail).",
+      "role": "Tu es Kristof, HR business partner. Tu présentes au candidat une offre : 2 600 euros brut, chèques-repas de 8 euros, assurance hospitalisation, pas de voiture de société, un jour de télétravail. Tu as une petite marge (jusqu'à 2 750). Négocie de façon réaliste et cordiale, demande ses attentes et ses arguments.",
+      "welcome": "Goed nieuws: we willen graag met u verder. Ik wil u ons voorstel even toelichten. Heeft u zelf al een idee van uw loonverwachtingen?",
+      "kit": {
+        "verbes": [
+          "onderhandelen",
+          "verdienen",
+          "voorstellen",
+          "verwachten",
+          "aanbieden",
+          "nadenken",
+          "bespreken",
+          "verhogen"
+        ],
+        "mots": [
+          {
+            "nl": "het brutoloon",
+            "fr": "le salaire brut"
+          },
+          {
+            "nl": "het nettoloon",
+            "fr": "le salaire net"
+          },
+          {
+            "nl": "de loonverwachting",
+            "fr": "les prétentions salariales"
+          },
+          {
+            "nl": "de maaltijdcheques",
+            "fr": "les chèques-repas"
+          },
+          {
+            "nl": "de bedrijfswagen",
+            "fr": "la voiture de société"
+          },
+          {
+            "nl": "de hospitalisatieverzekering",
+            "fr": "l'assurance hospitalisation"
+          },
+          {
+            "nl": "het thuiswerk",
+            "fr": "le télétravail"
+          },
+          {
+            "nl": "de extralegale voordelen",
+            "fr": "les avantages extralégaux"
+          },
+          {
+            "nl": "het voorstel",
+            "fr": "la proposition"
+          },
+          {
+            "nl": "de ervaring",
+            "fr": "l'expérience"
+          },
+          {
+            "nl": "redelijk",
+            "fr": "raisonnable"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Op basis van mijn ervaring had ik eerder aan 2.800 euro bruto gedacht.",
+            "fr": "Vu mon expérience, j'avais plutôt pensé à 2 800 euros brut."
+          },
+          {
+            "nl": "Is er nog wat ruimte om te onderhandelen?",
+            "fr": "Y a-t-il encore une marge de négociation ?"
+          },
+          {
+            "nl": "Welke extralegale voordelen zijn er?",
+            "fr": "Quels avantages extralégaux y a-t-il ?"
+          },
+          {
+            "nl": "Mag ik er tot morgen over nadenken?",
+            "fr": "Puis-je y réfléchir jusqu'à demain ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_refus_feedback",
+      "theme": "emploi",
+      "label": "Un refus : demander un retour",
+      "contexte": "Une recruteuse t'appelle pour t'annoncer qu'un autre candidat a été choisi. Tu restes poli et tu demandes un retour pour progresser.",
+      "role": "Tu es Annelies, recruteuse. Tu annonces au candidat qu'il n'a pas été retenu pour le poste de planificateur (un candidat avec plus d'expérience et un néerlandais plus fluide a été choisi). Reste bienveillante, donne un retour honnête et constructif s'il le demande, et propose de garder son CV.",
+      "welcome": "Goedemiddag, met Annelies. Ik bel u in verband met de functie van planner. Ik heb helaas geen goed nieuws.",
+      "kit": {
+        "verbes": [
+          "kiezen",
+          "begrijpen",
+          "verbeteren",
+          "bewaren",
+          "bedanken",
+          "vragen",
+          "solliciteren",
+          "leren",
+          "ontwikkelen"
+        ],
+        "mots": [
+          {
+            "nl": "de beslissing",
+            "fr": "la décision"
+          },
+          {
+            "nl": "de feedback",
+            "fr": "le retour"
+          },
+          {
+            "nl": "de kandidaat",
+            "fr": "le candidat"
+          },
+          {
+            "nl": "het werkpunt",
+            "fr": "le point à améliorer"
+          },
+          {
+            "nl": "de sterkte",
+            "fr": "le point fort"
+          },
+          {
+            "nl": "de databank",
+            "fr": "la base de données"
+          },
+          {
+            "nl": "de volgende keer",
+            "fr": "la prochaine fois"
+          },
+          {
+            "nl": "jammer",
+            "fr": "dommage"
+          },
+          {
+            "nl": "eerlijk",
+            "fr": "honnête"
+          },
+          {
+            "nl": "nuttig",
+            "fr": "utile"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Dat is jammer, maar bedankt om mij te verwittigen.",
+            "fr": "C'est dommage, mais merci de m'avoir prévenu."
+          },
+          {
+            "nl": "Mag ik vragen waarom u voor een andere kandidaat gekozen heeft?",
+            "fr": "Puis-je demander pourquoi vous avez choisi un autre candidat ?"
+          },
+          {
+            "nl": "Wat zijn volgens u mijn werkpunten?",
+            "fr": "Selon vous, quels sont mes points à améliorer ?"
+          },
+          {
+            "nl": "Mag u mijn cv bewaren voor een volgende vacature?",
+            "fr": "Pouvez-vous garder mon CV pour une prochaine offre ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_accepter_offre",
+      "theme": "emploi",
+      "label": "Accepter une offre et fixer le début",
+      "contexte": "Tu as reçu l'offre écrite et tu appelles pour l'accepter, fixer la date de début et demander ce qu'il faut apporter.",
+      "role": "Tu es Jan, responsable logistique qui recrute. Le candidat appelle pour accepter l'offre. Réjouis-toi, fixe avec lui une date de début (il peut commencer dans deux semaines ou au premier du mois), explique l'accueil du premier jour (8 heures, accueil, chaussures de sécurité fournies) et les documents à apporter (carte d'identité, numéro de compte).",
+      "welcome": "Hallo, met Jan! Fijn dat u terugbelt. Heeft u ons voorstel goed ontvangen?",
+      "kit": {
+        "verbes": [
+          "aanvaarden",
+          "beginnen",
+          "meebrengen",
+          "tekenen",
+          "ontvangen",
+          "afspreken",
+          "voorstellen",
+          "opstarten",
+          "verwelkomen"
+        ],
+        "mots": [
+          {
+            "nl": "het aanbod",
+            "fr": "l'offre"
+          },
+          {
+            "nl": "de startdatum",
+            "fr": "la date de début"
+          },
+          {
+            "nl": "de eerste werkdag",
+            "fr": "le premier jour de travail"
+          },
+          {
+            "nl": "de identiteitskaart",
+            "fr": "la carte d'identité"
+          },
+          {
+            "nl": "het rekeningnummer",
+            "fr": "le numéro de compte"
+          },
+          {
+            "nl": "de veiligheidsschoenen",
+            "fr": "les chaussures de sécurité"
+          },
+          {
+            "nl": "de opzegtermijn",
+            "fr": "le préavis"
+          },
+          {
+            "nl": "het onthaal",
+            "fr": "l'accueil"
+          },
+          {
+            "nl": "blij",
+            "fr": "content"
+          },
+          {
+            "nl": "klaar",
+            "fr": "prêt"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik aanvaard uw aanbod graag.",
+            "fr": "J'accepte volontiers votre offre."
+          },
+          {
+            "nl": "Ik kan vanaf de eerste van de maand beginnen.",
+            "fr": "Je peux commencer à partir du premier du mois."
+          },
+          {
+            "nl": "Wat moet ik meebrengen op mijn eerste werkdag?",
+            "fr": "Que dois-je apporter le premier jour ?"
+          },
+          {
+            "nl": "Hoe laat word ik verwacht?",
+            "fr": "À quelle heure suis-je attendu ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_premier_jour",
+      "theme": "emploi",
+      "label": "Premier jour : accueil et présentations",
+      "contexte": "C'est ton premier jour. Ta future responsable t'accueille, te fait visiter et te présente à l'équipe.",
+      "role": "Tu es Katrien, team leader du service logistique-administratif. C'est le premier jour du nouveau collègue. Accueille-le chaleureusement, demande-lui de se présenter brièvement, explique le programme de la journée (visite, badge, ordinateur, parrain/marraine), présente deux collègues inventés et réponds à ses questions.",
+      "welcome": "Welkom! Fijn dat je er bent. Ik ben Katrien, je teamleider. Hoe was de rit hiernaartoe?",
+      "kit": {
+        "verbes": [
+          "voorstellen",
+          "kennismaken",
+          "rondleiden",
+          "tonen",
+          "uitleggen",
+          "vragen",
+          "helpen",
+          "inloggen",
+          "onthouden"
+        ],
+        "mots": [
+          {
+            "nl": "de teamleider",
+            "fr": "le chef d'équipe"
+          },
+          {
+            "nl": "de collega",
+            "fr": "le collègue"
+          },
+          {
+            "nl": "de badge",
+            "fr": "le badge"
+          },
+          {
+            "nl": "de rondleiding",
+            "fr": "la visite (des lieux)"
+          },
+          {
+            "nl": "het bureau",
+            "fr": "le bureau"
+          },
+          {
+            "nl": "de computer",
+            "fr": "l'ordinateur"
+          },
+          {
+            "nl": "het wachtwoord",
+            "fr": "le mot de passe"
+          },
+          {
+            "nl": "de peter",
+            "fr": "le parrain (tuteur)"
+          },
+          {
+            "nl": "de refter",
+            "fr": "le réfectoire"
+          },
+          {
+            "nl": "nieuw",
+            "fr": "nouveau"
+          },
+          {
+            "nl": "zenuwachtig",
+            "fr": "nerveux"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Aangenaam, ik ben de nieuwe collega.",
+            "fr": "Enchanté, je suis le nouveau collègue."
+          },
+          {
+            "nl": "Bij wie kan ik terecht als ik een vraag heb?",
+            "fr": "À qui puis-je m'adresser si j'ai une question ?"
+          },
+          {
+            "nl": "Sorry, hoe heette u ook alweer?",
+            "fr": "Pardon, comment vous appelez-vous déjà ?"
+          },
+          {
+            "nl": "Ik ben een beetje zenuwachtig, maar vooral blij.",
+            "fr": "Je suis un peu nerveux, mais surtout content."
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_signature_contrat",
+      "theme": "emploi",
+      "label": "Signer le contrat avec les RH",
+      "contexte": "Rendez-vous avec le service du personnel pour relire et signer ton contrat de travail.",
+      "role": "Tu es Marleen, gestionnaire du personnel. Tu parcours avec le nouvel employé son contrat : fonction, CDI avec horaire de 38 heures, salaire, période de préavis légale, congés (20 jours + jours fériés), règlement de travail. Vérifie qu'il comprend, réponds à ses questions et fais-le signer.",
+      "welcome": "Neem gerust plaats. We gaan samen even uw arbeidsovereenkomst overlopen. Als iets niet duidelijk is, vraag het gerust.",
+      "kit": {
+        "verbes": [
+          "tekenen",
+          "lezen",
+          "overlopen",
+          "begrijpen",
+          "nakijken",
+          "invullen",
+          "opzeggen",
+          "aanvragen",
+          "ondertekenen"
+        ],
+        "mots": [
+          {
+            "nl": "de arbeidsovereenkomst",
+            "fr": "le contrat de travail"
+          },
+          {
+            "nl": "het arbeidsreglement",
+            "fr": "le règlement de travail"
+          },
+          {
+            "nl": "de vakantiedagen",
+            "fr": "les jours de congé"
+          },
+          {
+            "nl": "de feestdag",
+            "fr": "le jour férié"
+          },
+          {
+            "nl": "de opzegtermijn",
+            "fr": "le préavis"
+          },
+          {
+            "nl": "het uurrooster",
+            "fr": "l'horaire"
+          },
+          {
+            "nl": "het loonbriefje",
+            "fr": "la fiche de paie"
+          },
+          {
+            "nl": "de handtekening",
+            "fr": "la signature"
+          },
+          {
+            "nl": "het formulier",
+            "fr": "le formulaire"
+          },
+          {
+            "nl": "duidelijk",
+            "fr": "clair"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Mag ik nog even dit artikel herlezen?",
+            "fr": "Puis-je relire cet article ?"
+          },
+          {
+            "nl": "Wat betekent dit precies?",
+            "fr": "Qu'est-ce que ça veut dire exactement ?"
+          },
+          {
+            "nl": "Hoeveel vakantiedagen heb ik het eerste jaar?",
+            "fr": "Combien de jours de congé ai-je la première année ?"
+          },
+          {
+            "nl": "Waar moet ik tekenen?",
+            "fr": "Où dois-je signer ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_conseiller_vdab",
+      "theme": "emploi",
+      "label": "Rendez-vous avec ton conseiller emploi",
+      "contexte": "Rendez-vous de suivi chez ton conseiller VDAB : point sur tes recherches, ton niveau de néerlandais et les formations possibles.",
+      "role": "Tu es Bart, conseiller emploi au VDAB (service public flamand de l'emploi). Rendez-vous de suivi avec un demandeur d'emploi francophone : fais le point sur ses candidatures du mois, ses cibles (logistique, administration), son néerlandais, et propose des pistes (cours de néerlandais, formation, stage, job fairs). Demande des exemples concrets.",
+      "welcome": "Dag, kom binnen. Vandaag overlopen we samen uw zoektocht van de voorbije maand. Hoeveel sollicitaties heeft u verstuurd?",
+      "kit": {
+        "verbes": [
+          "zoeken",
+          "solliciteren",
+          "volgen",
+          "inschrijven",
+          "verbeteren",
+          "aanraden",
+          "opvolgen",
+          "bijleren",
+          "plannen"
+        ],
+        "mots": [
+          {
+            "nl": "de werkzoekende",
+            "fr": "le demandeur d'emploi"
+          },
+          {
+            "nl": "de bemiddelaar",
+            "fr": "le conseiller (VDAB)"
+          },
+          {
+            "nl": "de zoektocht",
+            "fr": "la recherche"
+          },
+          {
+            "nl": "de cursus",
+            "fr": "le cours"
+          },
+          {
+            "nl": "de opleiding",
+            "fr": "la formation"
+          },
+          {
+            "nl": "de stage",
+            "fr": "le stage"
+          },
+          {
+            "nl": "het actieplan",
+            "fr": "le plan d'action"
+          },
+          {
+            "nl": "de jobbeurs",
+            "fr": "le salon de l'emploi"
+          },
+          {
+            "nl": "het niveau",
+            "fr": "le niveau"
+          },
+          {
+            "nl": "actief",
+            "fr": "actif"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Deze maand heb ik acht sollicitaties verstuurd.",
+            "fr": "Ce mois-ci, j'ai envoyé huit candidatures."
+          },
+          {
+            "nl": "Ik zoek vooral in de logistiek en de administratie.",
+            "fr": "Je cherche surtout dans la logistique et l'administration."
+          },
+          {
+            "nl": "Ik wil mijn Nederlands verder verbeteren.",
+            "fr": "Je veux continuer à améliorer mon néerlandais."
+          },
+          {
+            "nl": "Welke opleiding zou u mij aanraden?",
+            "fr": "Quelle formation me conseilleriez-vous ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emploi_salon",
+      "theme": "emploi",
+      "label": "Au salon de l'emploi",
+      "contexte": "À un salon de l'emploi, tu t'arrêtes au stand d'une entreprise de logistique et tu te présentes en quelques phrases.",
+      "role": "Tu es Wim, recruteur au stand d'une entreprise de logistique (nom inventé : Nordvracht) dans un salon de l'emploi. Un visiteur s'arrête. Écoute sa présentation, pose des questions courtes (profil, disponibilité, néerlandais), parle des postes ouverts (planning, magasin, service client) et donne-lui la marche à suivre.",
+      "welcome": "Hallo, welkom aan onze stand! Bent u op zoek naar een nieuwe uitdaging?",
+      "kit": {
+        "verbes": [
+          "voorstellen",
+          "zoeken",
+          "achterlaten",
+          "overhandigen",
+          "solliciteren",
+          "contacteren",
+          "bezoeken",
+          "vertellen"
+        ],
+        "mots": [
+          {
+            "nl": "de stand",
+            "fr": "le stand"
+          },
+          {
+            "nl": "de uitdaging",
+            "fr": "le défi"
+          },
+          {
+            "nl": "het visitekaartje",
+            "fr": "la carte de visite"
+          },
+          {
+            "nl": "de openstaande vacatures",
+            "fr": "les postes ouverts"
+          },
+          {
+            "nl": "de klantendienst",
+            "fr": "le service client"
+          },
+          {
+            "nl": "de website",
+            "fr": "le site web"
+          },
+          {
+            "nl": "het profiel",
+            "fr": "le profil"
+          },
+          {
+            "nl": "de achtergrond",
+            "fr": "le parcours"
+          },
+          {
+            "nl": "meertalig",
+            "fr": "multilingue"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben op zoek naar een job in de logistiek.",
+            "fr": "Je cherche un emploi dans la logistique."
+          },
+          {
+            "nl": "Mag ik u mijn cv geven?",
+            "fr": "Puis-je vous donner mon CV ?"
+          },
+          {
+            "nl": "Ik spreek Frans, Engels en een beetje Nederlands.",
+            "fr": "Je parle français, anglais et un peu néerlandais."
+          },
+          {
+            "nl": "Hoe kan ik het best solliciteren?",
+            "fr": "Quelle est la meilleure façon de postuler ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_reunion_equipe",
+      "theme": "travail",
+      "label": "Réunion d'équipe du lundi",
+      "contexte": "Réunion d'équipe du lundi matin : chacun fait le point sur ses tâches de la semaine. C'est ton tour.",
+      "role": "Tu es Tom, chef d'équipe, qui anime la réunion du lundi. Demande à l'employé ce qu'il a terminé la semaine passée, ce qu'il prévoit cette semaine et s'il a des problèmes ou besoin d'aide. Relance sur un point concret (un dossier en retard, une priorité).",
+      "welcome": "Goedemorgen allemaal. Laten we beginnen. Jij bent eerst: wat staat er deze week op je planning?",
+      "kit": {
+        "verbes": [
+          "afwerken",
+          "plannen",
+          "voorbereiden",
+          "opvolgen",
+          "afronden",
+          "melden",
+          "prioriteren",
+          "helpen",
+          "bespreken"
+        ],
+        "mots": [
+          {
+            "nl": "de vergadering",
+            "fr": "la réunion"
+          },
+          {
+            "nl": "de taak",
+            "fr": "la tâche"
+          },
+          {
+            "nl": "de prioriteit",
+            "fr": "la priorité"
+          },
+          {
+            "nl": "het dossier",
+            "fr": "le dossier"
+          },
+          {
+            "nl": "de deadline",
+            "fr": "l'échéance"
+          },
+          {
+            "nl": "de achterstand",
+            "fr": "le retard (de travail)"
+          },
+          {
+            "nl": "het overzicht",
+            "fr": "l'aperçu, le récapitulatif"
+          },
+          {
+            "nl": "vorige week",
+            "fr": "la semaine passée"
+          },
+          {
+            "nl": "deze week",
+            "fr": "cette semaine"
+          },
+          {
+            "nl": "dringend",
+            "fr": "urgent"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Vorige week heb ik de facturen van maart afgewerkt.",
+            "fr": "La semaine passée, j'ai terminé les factures de mars."
+          },
+          {
+            "nl": "Deze week is mijn prioriteit het dossier van Delmaro.",
+            "fr": "Cette semaine, ma priorité est le dossier Delmaro."
+          },
+          {
+            "nl": "Ik heb wat achterstand door de ziekte van een collega.",
+            "fr": "J'ai un peu de retard à cause de la maladie d'un collègue."
+          },
+          {
+            "nl": "Kan iemand mij helpen met de planning?",
+            "fr": "Quelqu'un peut-il m'aider pour le planning ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_aide_collegue",
+      "theme": "travail",
+      "label": "Demander de l'aide sur un outil",
+      "contexte": "Tu dois sortir un rapport de stock dans l'ERP mais tu ne trouves pas comment faire. Tu demandes à une collègue expérimentée.",
+      "role": "Tu es Ilse, collègue expérimentée et serviable mais occupée. Le nouveau collègue te demande de l'aide pour sortir un rapport de stock dans l'ERP. Explique pas à pas (menu, filtre, export Excel), vérifie qu'il suit, et propose de lui envoyer une petite procédure par mail.",
+      "welcome": "Ja? Zeg het maar, ik heb vijf minuutjes.",
+      "kit": {
+        "verbes": [
+          "helpen",
+          "zoeken",
+          "klikken",
+          "kiezen",
+          "filteren",
+          "exporteren",
+          "openen",
+          "opslaan",
+          "tonen"
+        ],
+        "mots": [
+          {
+            "nl": "het rapport",
+            "fr": "le rapport"
+          },
+          {
+            "nl": "het menu",
+            "fr": "le menu"
+          },
+          {
+            "nl": "de filter",
+            "fr": "le filtre"
+          },
+          {
+            "nl": "het scherm",
+            "fr": "l'écran"
+          },
+          {
+            "nl": "de knop",
+            "fr": "le bouton"
+          },
+          {
+            "nl": "het bestand",
+            "fr": "le fichier"
+          },
+          {
+            "nl": "de procedure",
+            "fr": "la procédure"
+          },
+          {
+            "nl": "de stap",
+            "fr": "l'étape"
+          },
+          {
+            "nl": "ingewikkeld",
+            "fr": "compliqué"
+          },
+          {
+            "nl": "eenvoudig",
+            "fr": "simple"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Sorry dat ik stoor, heb je even tijd?",
+            "fr": "Désolé de déranger, tu as un moment ?"
+          },
+          {
+            "nl": "Ik vind niet hoe ik een voorraadrapport moet maken.",
+            "fr": "Je ne trouve pas comment faire un rapport de stock."
+          },
+          {
+            "nl": "Kun je het mij stap voor stap tonen?",
+            "fr": "Tu peux me montrer étape par étape ?"
+          },
+          {
+            "nl": "Bedankt, dat was heel duidelijk!",
+            "fr": "Merci, c'était très clair !"
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_annoncer_erreur",
+      "theme": "travail",
+      "label": "Annoncer une erreur à son responsable",
+      "contexte": "Tu t'es trompé dans une commande : 50 palettes au lieu de 5 ont été commandées chez un fournisseur. Tu vas le dire à ton responsable.",
+      "role": "Tu es Geert, responsable des achats, exigeant mais juste. L'employé vient t'annoncer une erreur de commande (50 au lieu de 5). Réagis de façon réaliste (un peu agacé puis constructif), demande ce qui s'est passé, ce qu'il a déjà fait et propose ensemble une solution (annuler, retourner, prévenir le fournisseur).",
+      "welcome": "Kom binnen. Je ziet er bezorgd uit, wat is er aan de hand?",
+      "kit": {
+        "verbes": [
+          "zich vergissen",
+          "bestellen",
+          "annuleren",
+          "terugsturen",
+          "oplossen",
+          "verwittigen",
+          "controleren",
+          "beloven",
+          "toegeven"
+        ],
+        "mots": [
+          {
+            "nl": "de fout",
+            "fr": "l'erreur"
+          },
+          {
+            "nl": "de vergissing",
+            "fr": "la méprise"
+          },
+          {
+            "nl": "de bestelling",
+            "fr": "la commande"
+          },
+          {
+            "nl": "de leverancier",
+            "fr": "le fournisseur"
+          },
+          {
+            "nl": "het aantal",
+            "fr": "la quantité"
+          },
+          {
+            "nl": "de annulering",
+            "fr": "l'annulation"
+          },
+          {
+            "nl": "de oplossing",
+            "fr": "la solution"
+          },
+          {
+            "nl": "het gevolg",
+            "fr": "la conséquence"
+          },
+          {
+            "nl": "spijtig",
+            "fr": "regrettable"
+          },
+          {
+            "nl": "voorzichtig",
+            "fr": "prudent"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb een fout gemaakt in een bestelling.",
+            "fr": "J'ai fait une erreur dans une commande."
+          },
+          {
+            "nl": "Ik heb 50 paletten besteld in plaats van 5.",
+            "fr": "J'ai commandé 50 palettes au lieu de 5."
+          },
+          {
+            "nl": "Ik heb de leverancier al gebeld om te annuleren.",
+            "fr": "J'ai déjà appelé le fournisseur pour annuler."
+          },
+          {
+            "nl": "Voortaan controleer ik het aantal twee keer.",
+            "fr": "Désormais je vérifie la quantité deux fois."
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_demande_conge",
+      "theme": "travail",
+      "label": "Demander un jour de congé",
+      "contexte": "Tu voudrais prendre congé vendredi prochain pour un rendez-vous important. Tu en parles à ta responsable.",
+      "role": "Tu es Nathalie, responsable d'équipe. L'employé demande un jour de congé vendredi prochain. C'est une période chargée : pose des questions (raison, qui le remplace, tâches urgentes), puis accepte à condition qu'il organise son remplacement et l'encode dans le système.",
+      "welcome": "Ja, wat kan ik voor je doen?",
+      "kit": {
+        "verbes": [
+          "vragen",
+          "nemen",
+          "vervangen",
+          "regelen",
+          "aanvragen",
+          "goedkeuren",
+          "inhalen",
+          "overdragen",
+          "ingeven"
+        ],
+        "mots": [
+          {
+            "nl": "de verlofdag",
+            "fr": "le jour de congé"
+          },
+          {
+            "nl": "het verlof",
+            "fr": "le congé"
+          },
+          {
+            "nl": "de aanvraag",
+            "fr": "la demande"
+          },
+          {
+            "nl": "de vervanger",
+            "fr": "le remplaçant"
+          },
+          {
+            "nl": "de afspraak",
+            "fr": "le rendez-vous"
+          },
+          {
+            "nl": "de drukke periode",
+            "fr": "la période chargée"
+          },
+          {
+            "nl": "het systeem",
+            "fr": "le système"
+          },
+          {
+            "nl": "volgende vrijdag",
+            "fr": "vendredi prochain"
+          },
+          {
+            "nl": "dringend",
+            "fr": "urgent"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Zou ik volgende vrijdag een verlofdag mogen nemen?",
+            "fr": "Pourrais-je prendre un jour de congé vendredi prochain ?"
+          },
+          {
+            "nl": "Ik heb een belangrijke afspraak.",
+            "fr": "J'ai un rendez-vous important."
+          },
+          {
+            "nl": "Mijn collega kan mij vervangen.",
+            "fr": "Mon collègue peut me remplacer."
+          },
+          {
+            "nl": "Ik werk de dringende taken donderdag af.",
+            "fr": "Je termine les tâches urgentes jeudi."
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_fournisseur_livraison",
+      "theme": "travail",
+      "label": "Livraison incomplète : appeler le fournisseur",
+      "contexte": "La livraison de ce matin est incomplète : il manque deux cartons et un article est abîmé. Tu appelles le service client du fournisseur.",
+      "role": "Tu es Dirk, employé du service client d'un fournisseur d'emballages. Le client appelle pour une livraison incomplète (2 cartons manquants, 1 article abîmé). Demande le numéro de commande et de bon de livraison, vérifie, excuse-toi, propose une solution (renvoi demain, note de crédit) et demande des photos.",
+      "welcome": "Klantendienst, goeiemorgen, u spreekt met Dirk.",
+      "kit": {
+        "verbes": [
+          "ontbreken",
+          "leveren",
+          "nakijken",
+          "nasturen",
+          "terugnemen",
+          "fotograferen",
+          "crediteren",
+          "bevestigen",
+          "klagen"
+        ],
+        "mots": [
+          {
+            "nl": "de levering",
+            "fr": "la livraison"
+          },
+          {
+            "nl": "de leveringsbon",
+            "fr": "le bon de livraison"
+          },
+          {
+            "nl": "het bestelnummer",
+            "fr": "le numéro de commande"
+          },
+          {
+            "nl": "de doos",
+            "fr": "le carton"
+          },
+          {
+            "nl": "het artikel",
+            "fr": "l'article"
+          },
+          {
+            "nl": "de creditnota",
+            "fr": "la note de crédit"
+          },
+          {
+            "nl": "de foto",
+            "fr": "la photo"
+          },
+          {
+            "nl": "onvolledig",
+            "fr": "incomplet"
+          },
+          {
+            "nl": "beschadigd",
+            "fr": "abîmé"
+          },
+          {
+            "nl": "morgen",
+            "fr": "demain"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "De levering van vanochtend is onvolledig.",
+            "fr": "La livraison de ce matin est incomplète."
+          },
+          {
+            "nl": "Er ontbreken twee dozen en één artikel is beschadigd.",
+            "fr": "Il manque deux cartons et un article est abîmé."
+          },
+          {
+            "nl": "Het bestelnummer is 4512.",
+            "fr": "Le numéro de commande est 4512."
+          },
+          {
+            "nl": "Kunnen jullie de ontbrekende dozen morgen nasturen?",
+            "fr": "Pouvez-vous renvoyer les cartons manquants demain ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_expliquer_procedure",
+      "theme": "travail",
+      "label": "Expliquer une procédure à un nouveau",
+      "contexte": "Un nouveau collègue arrive. Tu lui expliques comment enregistrer une livraison entrante, étape par étape.",
+      "role": "Tu es Yannick, nouveau collègue un peu perdu mais motivé. L'apprenant t'explique la procédure d'enregistrement d'une livraison entrante. Pose des questions naïves mais réalistes (et si le chauffeur n'a pas de bon ? et s'il manque quelque chose ?), demande de répéter quand c'est flou, et reformule pour vérifier.",
+      "welcome": "Hoi! Ze zeiden dat jij mij zou uitleggen hoe we een levering inboeken. Ik heb echt geen idee hoe dat werkt.",
+      "kit": {
+        "verbes": [
+          "uitleggen",
+          "inboeken",
+          "scannen",
+          "tellen",
+          "vergelijken",
+          "tekenen",
+          "noteren",
+          "melden",
+          "opletten"
+        ],
+        "mots": [
+          {
+            "nl": "de procedure",
+            "fr": "la procédure"
+          },
+          {
+            "nl": "de stap",
+            "fr": "l'étape"
+          },
+          {
+            "nl": "eerst",
+            "fr": "d'abord"
+          },
+          {
+            "nl": "daarna",
+            "fr": "ensuite"
+          },
+          {
+            "nl": "tot slot",
+            "fr": "pour finir"
+          },
+          {
+            "nl": "de leveringsbon",
+            "fr": "le bon de livraison"
+          },
+          {
+            "nl": "de scanner",
+            "fr": "le scanner"
+          },
+          {
+            "nl": "het verschil",
+            "fr": "la différence"
+          },
+          {
+            "nl": "de handtekening",
+            "fr": "la signature"
+          },
+          {
+            "nl": "belangrijk",
+            "fr": "important"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Eerst controleer je de leveringsbon.",
+            "fr": "D'abord tu vérifies le bon de livraison."
+          },
+          {
+            "nl": "Daarna scan je elke pallet.",
+            "fr": "Ensuite tu scannes chaque palette."
+          },
+          {
+            "nl": "Als er iets ontbreekt, noteer je het op de bon.",
+            "fr": "S'il manque quelque chose, tu le notes sur le bon."
+          },
+          {
+            "nl": "Is het duidelijk, of zal ik het nog eens tonen?",
+            "fr": "C'est clair, ou je te remontre ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_malade",
+      "theme": "travail",
+      "label": "Prévenir qu'on est malade",
+      "contexte": "Tu te réveilles avec de la fièvre. Tu appelles ta responsable avant 8 heures pour prévenir que tu ne viendras pas.",
+      "role": "Tu es Sarah, responsable. L'employé appelle tôt pour dire qu'il est malade. Montre de la compréhension, demande combien de temps il pense être absent, s'il ira chez le médecin (certificat médical), et s'il y a des tâches urgentes à transmettre à un collègue.",
+      "welcome": "Goeiemorgen, met Sarah. Je klinkt niet zo goed...",
+      "kit": {
+        "verbes": [
+          "voelen",
+          "verwittigen",
+          "blijven",
+          "gaan",
+          "sturen",
+          "overnemen",
+          "uitzieken",
+          "herstellen",
+          "doorgeven"
+        ],
+        "mots": [
+          {
+            "nl": "de koorts",
+            "fr": "la fièvre"
+          },
+          {
+            "nl": "het ziektebriefje",
+            "fr": "le certificat médical"
+          },
+          {
+            "nl": "de dokter",
+            "fr": "le médecin"
+          },
+          {
+            "nl": "de griep",
+            "fr": "la grippe"
+          },
+          {
+            "nl": "de afwezigheid",
+            "fr": "l'absence"
+          },
+          {
+            "nl": "de keelpijn",
+            "fr": "le mal de gorge"
+          },
+          {
+            "nl": "ziek",
+            "fr": "malade"
+          },
+          {
+            "nl": "beter",
+            "fr": "mieux"
+          },
+          {
+            "nl": "vandaag",
+            "fr": "aujourd'hui"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben ziek, ik heb koorts sinds vannacht.",
+            "fr": "Je suis malade, j'ai de la fièvre depuis cette nuit."
+          },
+          {
+            "nl": "Ik kom vandaag niet werken.",
+            "fr": "Je ne viens pas travailler aujourd'hui."
+          },
+          {
+            "nl": "Ik ga vanochtend naar de dokter en ik stuur u het ziektebriefje.",
+            "fr": "Je vais chez le médecin ce matin et je vous envoie le certificat."
+          },
+          {
+            "nl": "Mijn collega kan de dringende mails overnemen.",
+            "fr": "Mon collègue peut reprendre les mails urgents."
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_evaluation",
+      "theme": "travail",
+      "label": "Entretien d'évaluation annuel",
+      "contexte": "Entretien d'évaluation avec ton responsable : bilan de l'année, points forts, points à améliorer et objectifs.",
+      "role": "Tu es Luc, manager. Tu mènes l'entretien d'évaluation annuel : demande à l'employé comment il voit son année, cite un point fort et un point à améliorer (communication en néerlandais, organisation), discute de ses objectifs et de ses souhaits de formation. Ton bienveillant et structuré.",
+      "welcome": "Bedankt om tijd te maken. Hoe kijk je zelf terug op het voorbije jaar?",
+      "kit": {
+        "verbes": [
+          "evalueren",
+          "terugblikken",
+          "verbeteren",
+          "groeien",
+          "bereiken",
+          "leren",
+          "organiseren",
+          "communiceren",
+          "volgen"
+        ],
+        "mots": [
+          {
+            "nl": "het evaluatiegesprek",
+            "fr": "l'entretien d'évaluation"
+          },
+          {
+            "nl": "de doelstelling",
+            "fr": "l'objectif"
+          },
+          {
+            "nl": "de sterkte",
+            "fr": "le point fort"
+          },
+          {
+            "nl": "het werkpunt",
+            "fr": "le point à améliorer"
+          },
+          {
+            "nl": "de opleiding",
+            "fr": "la formation"
+          },
+          {
+            "nl": "de verantwoordelijkheid",
+            "fr": "la responsabilité"
+          },
+          {
+            "nl": "de vooruitgang",
+            "fr": "le progrès"
+          },
+          {
+            "nl": "het voorbije jaar",
+            "fr": "l'année écoulée"
+          },
+          {
+            "nl": "tevreden",
+            "fr": "satisfait"
+          },
+          {
+            "nl": "zelfstandig",
+            "fr": "autonome"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben tevreden over mijn vooruitgang dit jaar.",
+            "fr": "Je suis satisfait de mes progrès cette année."
+          },
+          {
+            "nl": "Mijn grootste werkpunt is nog mijn Nederlands.",
+            "fr": "Mon plus grand point à améliorer, c'est encore mon néerlandais."
+          },
+          {
+            "nl": "Volgend jaar wil ik meer verantwoordelijkheid opnemen.",
+            "fr": "L'an prochain je veux prendre plus de responsabilités."
+          },
+          {
+            "nl": "Ik zou graag een opleiding Excel volgen.",
+            "fr": "J'aimerais suivre une formation Excel."
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_plainte_planning",
+      "theme": "travail",
+      "label": "Un collègue se plaint du planning",
+      "contexte": "Un collègue vient se plaindre : il a encore été mis sur le poste du soir. Tu gères le planning et tu dois l'écouter et trouver une solution.",
+      "role": "Tu es Kevin, collègue mécontent : pour la troisième semaine d'affilée tu es planifié le soir, alors que tu as des enfants. Sois agacé au début, puis plus calme si l'apprenant t'écoute et propose une solution (échange, rotation équitable, en parler au chef).",
+      "welcome": "Zeg, mag ik even iets zeggen? Ik sta wéér op de avondploeg. Dat is de derde week op rij!",
+      "kit": {
+        "verbes": [
+          "klagen",
+          "luisteren",
+          "begrijpen",
+          "wisselen",
+          "aanpassen",
+          "voorstellen",
+          "bespreken",
+          "verdelen",
+          "beloven"
+        ],
+        "mots": [
+          {
+            "nl": "de planning",
+            "fr": "le planning"
+          },
+          {
+            "nl": "de avondploeg",
+            "fr": "l'équipe du soir"
+          },
+          {
+            "nl": "de vroege ploeg",
+            "fr": "l'équipe du matin"
+          },
+          {
+            "nl": "de beurtrol",
+            "fr": "la rotation"
+          },
+          {
+            "nl": "de wissel",
+            "fr": "l'échange"
+          },
+          {
+            "nl": "de klacht",
+            "fr": "la plainte"
+          },
+          {
+            "nl": "het compromis",
+            "fr": "le compromis"
+          },
+          {
+            "nl": "eerlijk",
+            "fr": "équitable"
+          },
+          {
+            "nl": "op rij",
+            "fr": "d'affilée"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik begrijp dat dat vervelend is.",
+            "fr": "Je comprends que ce soit embêtant."
+          },
+          {
+            "nl": "Dat was niet de bedoeling.",
+            "fr": "Ce n'était pas voulu."
+          },
+          {
+            "nl": "Wat als je volgende week wisselt met een collega?",
+            "fr": "Et si tu échangeais avec un collègue la semaine prochaine ?"
+          },
+          {
+            "nl": "Ik zorg voor een eerlijkere beurtrol.",
+            "fr": "Je vais faire une rotation plus équitable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "travail_pause_cafe",
+      "theme": "travail",
+      "label": "Conversation à la pause café",
+      "contexte": "Pause café avec des collègues : on parle du week-end, des vacances, de la météo et un peu du travail.",
+      "role": "Tu es Lotte, collègue sympathique. À la pause café, tu bavardes de façon détendue et familière (néerlandais de Flandre courant, sans dialecte difficile) : week-end, vacances prévues, sport, météo. Pose des questions personnelles légères et rebondis sur les réponses.",
+      "welcome": "Hey! Ook nood aan koffie? Hoe was je weekend?",
+      "kit": {
+        "verbes": [
+          "drinken",
+          "vertellen",
+          "gaan",
+          "bezoeken",
+          "sporten",
+          "rusten",
+          "plannen",
+          "lachen",
+          "regenen"
+        ],
+        "mots": [
+          {
+            "nl": "het weekend",
+            "fr": "le week-end"
+          },
+          {
+            "nl": "de vakantie",
+            "fr": "les vacances"
+          },
+          {
+            "nl": "het weer",
+            "fr": "la météo"
+          },
+          {
+            "nl": "de hobby",
+            "fr": "le loisir"
+          },
+          {
+            "nl": "de familie",
+            "fr": "la famille"
+          },
+          {
+            "nl": "de uitstap",
+            "fr": "l'excursion"
+          },
+          {
+            "nl": "de zee",
+            "fr": "la mer"
+          },
+          {
+            "nl": "rustig",
+            "fr": "calme"
+          },
+          {
+            "nl": "leuk",
+            "fr": "sympa"
+          },
+          {
+            "nl": "druk",
+            "fr": "chargé"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Mijn weekend was rustig, ik ben gaan lopen.",
+            "fr": "Mon week-end était calme, je suis allé courir."
+          },
+          {
+            "nl": "En jij, iets leuks gedaan?",
+            "fr": "Et toi, tu as fait quelque chose de sympa ?"
+          },
+          {
+            "nl": "Waar ga je op vakantie deze zomer?",
+            "fr": "Où pars-tu en vacances cet été ?"
+          },
+          {
+            "nl": "Wat een weer, hé!",
+            "fr": "Quel temps, hein !"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_commune_adresse",
+      "theme": "quotidien",
+      "label": "À la commune : changement d'adresse",
+      "contexte": "Tu as déménagé et tu vas à la commune pour déclarer ta nouvelle adresse.",
+      "role": "Tu es employé(e) au service population de la commune (gemeentehuis). Le citoyen déclare un changement d'adresse. Demande sa carte d'identité, l'adresse complète, la date du déménagement, s'il vit seul ; explique que l'agent de quartier passera vérifier et que la carte d'identité sera mise à jour ensuite.",
+      "welcome": "Goedemiddag, nummer 34? Waarvoor komt u?",
+      "kit": {
+        "verbes": [
+          "verhuizen",
+          "aangeven",
+          "invullen",
+          "langskomen",
+          "controleren",
+          "wonen",
+          "aanpassen",
+          "meebrengen",
+          "wachten"
+        ],
+        "mots": [
+          {
+            "nl": "het gemeentehuis",
+            "fr": "la maison communale"
+          },
+          {
+            "nl": "de dienst bevolking",
+            "fr": "le service population"
+          },
+          {
+            "nl": "de adreswijziging",
+            "fr": "le changement d'adresse"
+          },
+          {
+            "nl": "de wijkagent",
+            "fr": "l'agent de quartier"
+          },
+          {
+            "nl": "de identiteitskaart",
+            "fr": "la carte d'identité"
+          },
+          {
+            "nl": "het huurcontract",
+            "fr": "le bail"
+          },
+          {
+            "nl": "de verhuizing",
+            "fr": "le déménagement"
+          },
+          {
+            "nl": "het loket",
+            "fr": "le guichet"
+          },
+          {
+            "nl": "het nummer",
+            "fr": "le numéro (ticket)"
+          },
+          {
+            "nl": "alleenstaand",
+            "fr": "isolé, seul"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben verhuisd en ik wil mijn nieuw adres doorgeven.",
+            "fr": "J'ai déménagé et je veux déclarer ma nouvelle adresse."
+          },
+          {
+            "nl": "Ik woon er sinds 1 september.",
+            "fr": "J'y habite depuis le 1er septembre."
+          },
+          {
+            "nl": "Wanneer komt de wijkagent langs?",
+            "fr": "Quand l'agent de quartier passe-t-il ?"
+          },
+          {
+            "nl": "Moet ik nog iets meebrengen?",
+            "fr": "Dois-je encore apporter quelque chose ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_medecin",
+      "theme": "quotidien",
+      "label": "Chez le médecin",
+      "contexte": "Tu as mal au dos depuis une semaine. Tu prends rendez-vous puis tu expliques tes symptômes au médecin généraliste.",
+      "role": "Tu es dokter Peeters, médecin généraliste. Le patient vient pour un mal de dos. Pose les questions habituelles (depuis quand, où exactement, travail physique, douleur la nuit, médicaments déjà pris), examine (décris en paroles), donne un diagnostic simple, un traitement et un certificat si besoin.",
+      "welcome": "Goeiedag, neem plaats. Wat scheelt er?",
+      "kit": {
+        "verbes": [
+          "voelen",
+          "nemen",
+          "voorschrijven",
+          "rusten",
+          "bewegen",
+          "slapen",
+          "onderzoeken",
+          "terugkomen"
+        ],
+        "mots": [
+          {
+            "nl": "de rug",
+            "fr": "le dos"
+          },
+          {
+            "nl": "de pijn",
+            "fr": "la douleur"
+          },
+          {
+            "nl": "het medicijn",
+            "fr": "le médicament"
+          },
+          {
+            "nl": "het voorschrift",
+            "fr": "l'ordonnance"
+          },
+          {
+            "nl": "de huisarts",
+            "fr": "le médecin généraliste"
+          },
+          {
+            "nl": "de kinesist",
+            "fr": "le kiné"
+          },
+          {
+            "nl": "het ziektebriefje",
+            "fr": "le certificat médical"
+          },
+          {
+            "nl": "de klacht",
+            "fr": "le symptôme, la plainte"
+          },
+          {
+            "nl": "erg",
+            "fr": "grave, fort"
+          },
+          {
+            "nl": "sinds",
+            "fr": "depuis"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb al een week pijn in mijn rug.",
+            "fr": "J'ai mal au dos depuis une semaine."
+          },
+          {
+            "nl": "Het doet vooral pijn als ik iets opheft.",
+            "fr": "Ça fait surtout mal quand je soulève quelque chose."
+          },
+          {
+            "nl": "Ik heb al paracetamol genomen, maar het helpt niet.",
+            "fr": "J'ai déjà pris du paracétamol, mais ça n'aide pas."
+          },
+          {
+            "nl": "Heb ik een ziektebriefje nodig voor mijn werk?",
+            "fr": "Ai-je besoin d'un certificat pour mon travail ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_pharmacie",
+      "theme": "quotidien",
+      "label": "À la pharmacie",
+      "contexte": "Tu as un rhume et mal à la gorge. Tu demandes conseil au pharmacien et tu achètes un médicament.",
+      "role": "Tu es apothekeres (pharmacienne). Le client a un rhume et mal à la gorge. Pose des questions (fièvre ? depuis quand ? allergies ? autres médicaments ?), conseille un produit sans ordonnance, explique la posologie et quand consulter un médecin.",
+      "welcome": "Goeiedag, zegt u het maar.",
+      "kit": {
+        "verbes": [
+          "hoesten",
+          "nemen",
+          "aanraden",
+          "innemen",
+          "gebruiken",
+          "betalen",
+          "raadplegen"
+        ],
+        "mots": [
+          {
+            "nl": "de apotheek",
+            "fr": "la pharmacie"
+          },
+          {
+            "nl": "de keelpijn",
+            "fr": "le mal de gorge"
+          },
+          {
+            "nl": "de verkoudheid",
+            "fr": "le rhume"
+          },
+          {
+            "nl": "de hoest",
+            "fr": "la toux"
+          },
+          {
+            "nl": "de siroop",
+            "fr": "le sirop"
+          },
+          {
+            "nl": "de zuigtablet",
+            "fr": "la pastille"
+          },
+          {
+            "nl": "de bijsluiter",
+            "fr": "la notice"
+          },
+          {
+            "nl": "de allergie",
+            "fr": "l'allergie"
+          },
+          {
+            "nl": "per dag",
+            "fr": "par jour"
+          },
+          {
+            "nl": "zonder voorschrift",
+            "fr": "sans ordonnance"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben verkouden en ik heb keelpijn.",
+            "fr": "J'ai un rhume et mal à la gorge."
+          },
+          {
+            "nl": "Heeft u iets zonder voorschrift?",
+            "fr": "Avez-vous quelque chose sans ordonnance ?"
+          },
+          {
+            "nl": "Hoeveel keer per dag moet ik het nemen?",
+            "fr": "Combien de fois par jour dois-je le prendre ?"
+          },
+          {
+            "nl": "Ik ben allergisch voor penicilline.",
+            "fr": "Je suis allergique à la pénicilline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_proprietaire_panne",
+      "theme": "quotidien",
+      "label": "Signaler une panne au propriétaire",
+      "contexte": "Le chauffage ne fonctionne plus depuis hier et il fait froid. Tu appelles ton propriétaire.",
+      "role": "Tu es meneer Claes, propriétaire un peu lent à réagir. Le locataire appelle car le chauffage est en panne. Pose des questions (depuis quand ? la chaudière affiche-t-elle un code ? pression ?), propose d'abord une solution simple, puis accepte d'envoyer un chauffagiste ; négocie le moment de passage.",
+      "welcome": "Ja, met Claes.",
+      "kit": {
+        "verbes": [
+          "werken",
+          "herstellen",
+          "sturen",
+          "langskomen",
+          "controleren",
+          "bijvullen",
+          "draaien",
+          "huren"
+        ],
+        "mots": [
+          {
+            "nl": "de verwarming",
+            "fr": "le chauffage"
+          },
+          {
+            "nl": "de verwarmingsketel",
+            "fr": "la chaudière"
+          },
+          {
+            "nl": "de druk",
+            "fr": "la pression"
+          },
+          {
+            "nl": "de foutcode",
+            "fr": "le code d'erreur"
+          },
+          {
+            "nl": "de verhuurder",
+            "fr": "le propriétaire (bailleur)"
+          },
+          {
+            "nl": "de huurder",
+            "fr": "le locataire"
+          },
+          {
+            "nl": "de herstelling",
+            "fr": "la réparation"
+          },
+          {
+            "nl": "de technieker",
+            "fr": "le technicien"
+          },
+          {
+            "nl": "het lek",
+            "fr": "la fuite"
+          },
+          {
+            "nl": "koud",
+            "fr": "froid"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "De verwarming werkt sinds gisteren niet meer.",
+            "fr": "Le chauffage ne marche plus depuis hier."
+          },
+          {
+            "nl": "Op de ketel staat een foutcode.",
+            "fr": "La chaudière affiche un code d'erreur."
+          },
+          {
+            "nl": "Kunt u zo snel mogelijk een technieker sturen?",
+            "fr": "Pouvez-vous envoyer un technicien au plus vite ?"
+          },
+          {
+            "nl": "Ik ben thuis vanaf vijf uur.",
+            "fr": "Je suis à la maison à partir de cinq heures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_banque",
+      "theme": "quotidien",
+      "label": "À la banque",
+      "contexte": "Tu veux ouvrir un compte à vue pour recevoir ton salaire et tu as des questions sur la carte bancaire et l'application.",
+      "role": "Tu es conseiller(ère) dans une agence bancaire. Le client veut ouvrir un compte pour recevoir son salaire. Demande sa pièce d'identité, sa situation (employé, adresse), présente le compte, les frais mensuels, la carte de débit et l'application mobile, et réponds à ses questions.",
+      "welcome": "Goedemorgen, u had een afspraak voor een nieuwe rekening, klopt dat?",
+      "kit": {
+        "verbes": [
+          "openen",
+          "storten",
+          "betalen",
+          "overschrijven",
+          "aanvragen",
+          "downloaden",
+          "ontvangen",
+          "kosten",
+          "ondertekenen"
+        ],
+        "mots": [
+          {
+            "nl": "de zichtrekening",
+            "fr": "le compte à vue"
+          },
+          {
+            "nl": "de spaarrekening",
+            "fr": "le compte d'épargne"
+          },
+          {
+            "nl": "de bankkaart",
+            "fr": "la carte bancaire"
+          },
+          {
+            "nl": "de overschrijving",
+            "fr": "le virement"
+          },
+          {
+            "nl": "de kosten",
+            "fr": "les frais"
+          },
+          {
+            "nl": "de app",
+            "fr": "l'application"
+          },
+          {
+            "nl": "de pincode",
+            "fr": "le code PIN"
+          },
+          {
+            "nl": "het loon",
+            "fr": "le salaire"
+          },
+          {
+            "nl": "maandelijks",
+            "fr": "mensuel"
+          },
+          {
+            "nl": "gratis",
+            "fr": "gratuit"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil een zichtrekening openen voor mijn loon.",
+            "fr": "Je veux ouvrir un compte à vue pour mon salaire."
+          },
+          {
+            "nl": "Hoeveel kost de rekening per maand?",
+            "fr": "Combien coûte le compte par mois ?"
+          },
+          {
+            "nl": "Wanneer krijg ik mijn bankkaart?",
+            "fr": "Quand vais-je recevoir ma carte bancaire ?"
+          },
+          {
+            "nl": "Kan ik alles via de app doen?",
+            "fr": "Puis-je tout faire via l'application ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_garage",
+      "theme": "quotidien",
+      "label": "Au garage",
+      "contexte": "Un voyant s'est allumé sur le tableau de bord et la voiture fait un bruit bizarre. Tu passes au garage.",
+      "role": "Tu es garagiste. Le client arrive avec un voyant allumé et un bruit étrange. Demande de décrire le bruit, depuis quand, à quelle vitesse ; propose un diagnostic, donne un devis approximatif et un délai, propose une voiture de remplacement si nécessaire.",
+      "welcome": "Goeiemiddag. Wat is er mis met de auto?",
+      "kit": {
+        "verbes": [
+          "branden",
+          "horen",
+          "remmen",
+          "nakijken",
+          "vervangen",
+          "herstellen",
+          "kosten",
+          "ophalen",
+          "afleveren"
+        ],
+        "mots": [
+          {
+            "nl": "het lampje",
+            "fr": "le voyant"
+          },
+          {
+            "nl": "het dashboard",
+            "fr": "le tableau de bord"
+          },
+          {
+            "nl": "het geluid",
+            "fr": "le bruit"
+          },
+          {
+            "nl": "de rem",
+            "fr": "le frein"
+          },
+          {
+            "nl": "de band",
+            "fr": "le pneu"
+          },
+          {
+            "nl": "het onderhoud",
+            "fr": "l'entretien"
+          },
+          {
+            "nl": "de offerte",
+            "fr": "le devis"
+          },
+          {
+            "nl": "de vervangwagen",
+            "fr": "la voiture de remplacement"
+          },
+          {
+            "nl": "raar",
+            "fr": "bizarre"
+          },
+          {
+            "nl": "klaar",
+            "fr": "prêt"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Er brandt een oranje lampje op het dashboard.",
+            "fr": "Un voyant orange est allumé au tableau de bord."
+          },
+          {
+            "nl": "Ik hoor een raar geluid als ik rem.",
+            "fr": "J'entends un bruit bizarre quand je freine."
+          },
+          {
+            "nl": "Hoeveel gaat het ongeveer kosten?",
+            "fr": "Combien ça va coûter environ ?"
+          },
+          {
+            "nl": "Wanneer kan ik de auto ophalen?",
+            "fr": "Quand puis-je récupérer la voiture ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_mutuelle",
+      "theme": "quotidien",
+      "label": "Appeler la mutuelle",
+      "contexte": "Tu appelles ta mutuelle : tu n'as pas encore été remboursé d'une consultation et tu veux savoir comment faire.",
+      "role": "Tu es employé(e) du centre d'appel d'une mutualité (ziekenfonds). L'affilié n'a pas été remboursé d'une consultation. Demande son numéro national ou d'affilié, la date de la consultation, s'il avait une attestation de soins ou si c'était électronique, explique la procédure et le délai de remboursement.",
+      "welcome": "Ziekenfonds, goeiedag. Mag ik eerst uw rijksregisternummer?",
+      "kit": {
+        "verbes": [
+          "terugbetalen",
+          "opsturen",
+          "binnenbrengen",
+          "nakijken",
+          "aansluiten",
+          "verwerken",
+          "ontvangen",
+          "duren"
+        ],
+        "mots": [
+          {
+            "nl": "het ziekenfonds",
+            "fr": "la mutuelle"
+          },
+          {
+            "nl": "de terugbetaling",
+            "fr": "le remboursement"
+          },
+          {
+            "nl": "het rijksregisternummer",
+            "fr": "le numéro de registre national"
+          },
+          {
+            "nl": "het getuigschrift",
+            "fr": "l'attestation de soins"
+          },
+          {
+            "nl": "de raadpleging",
+            "fr": "la consultation"
+          },
+          {
+            "nl": "het remgeld",
+            "fr": "le ticket modérateur"
+          },
+          {
+            "nl": "de brievenbus",
+            "fr": "la boîte aux lettres"
+          },
+          {
+            "nl": "elektronisch",
+            "fr": "électronique"
+          },
+          {
+            "nl": "binnen de week",
+            "fr": "dans la semaine"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben nog niet terugbetaald voor een raadpleging.",
+            "fr": "Je n'ai pas encore été remboursé pour une consultation."
+          },
+          {
+            "nl": "De raadpleging was op 3 oktober.",
+            "fr": "La consultation était le 3 octobre."
+          },
+          {
+            "nl": "Moet ik het getuigschrift opsturen?",
+            "fr": "Dois-je envoyer l'attestation ?"
+          },
+          {
+            "nl": "Hoe lang duurt de terugbetaling?",
+            "fr": "Combien de temps prend le remboursement ?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_magasin_retour",
+      "theme": "quotidien",
+      "label": "Retourner un article au magasin",
+      "contexte": "Tu as acheté une veste la semaine passée, mais elle a un défaut. Tu retournes au magasin pour l'échanger ou être remboursé.",
+      "role": "Tu es vendeur(se) dans un magasin de vêtements. Le client veut retourner une veste avec un défaut. Demande le ticket de caisse, regarde le défaut, propose un échange, un bon d'achat ou un remboursement selon la politique du magasin (30 jours avec ticket), reste aimable.",
+      "welcome": "Goeiedag! Kan ik u helpen?",
+      "kit": {
+        "verbes": [
+          "ruilen",
+          "terugbrengen",
+          "terugbetalen",
+          "kopen",
+          "passen",
+          "kiezen",
+          "tonen",
+          "proberen"
+        ],
+        "mots": [
+          {
+            "nl": "de jas",
+            "fr": "la veste"
+          },
+          {
+            "nl": "het kasticket",
+            "fr": "le ticket de caisse"
+          },
+          {
+            "nl": "het defect",
+            "fr": "le défaut"
+          },
+          {
+            "nl": "de waardebon",
+            "fr": "le bon d'achat"
+          },
+          {
+            "nl": "de terugbetaling",
+            "fr": "le remboursement"
+          },
+          {
+            "nl": "de maat",
+            "fr": "la taille"
+          },
+          {
+            "nl": "de rits",
+            "fr": "la fermeture éclair"
+          },
+          {
+            "nl": "de kassa",
+            "fr": "la caisse"
+          },
+          {
+            "nl": "kapot",
+            "fr": "cassé"
+          },
+          {
+            "nl": "vorige week",
+            "fr": "la semaine passée"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb deze jas vorige week gekocht, maar de rits is kapot.",
+            "fr": "J'ai acheté cette veste la semaine passée, mais la fermeture est cassée."
+          },
+          {
+            "nl": "Kan ik hem ruilen of terugbetaald worden?",
+            "fr": "Puis-je l'échanger ou être remboursé ?"
+          },
+          {
+            "nl": "Hier is mijn kasticket.",
+            "fr": "Voici mon ticket de caisse."
+          },
+          {
+            "nl": "Liever een terugbetaling dan een waardebon.",
+            "fr": "Plutôt un remboursement qu'un bon d'achat."
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_voisin",
+      "theme": "quotidien",
+      "label": "Parler avec un voisin",
+      "contexte": "Ton voisin a réceptionné un colis pour toi. Tu vas le chercher, et il en profite pour parler du bruit de ta machine à laver le soir.",
+      "role": "Tu es meneer Verhaegen, voisin âgé, gentil mais direct. Tu as gardé un colis pour l'apprenant. Discute un peu (le quartier, la météo), puis évoque poliment le bruit de sa machine à laver tard le soir. Accepte volontiers une solution raisonnable.",
+      "welcome": "Ah, goeiedag buurman! Ik heb hier een pakje voor u, de postbode heeft het gisteren bij mij afgegeven.",
+      "kit": {
+        "verbes": [
+          "afgeven",
+          "bedanken",
+          "storen",
+          "draaien",
+          "zetten",
+          "beloven",
+          "afspreken",
+          "slapen",
+          "letten"
+        ],
+        "mots": [
+          {
+            "nl": "de buurman",
+            "fr": "le voisin"
+          },
+          {
+            "nl": "het pakje",
+            "fr": "le colis"
+          },
+          {
+            "nl": "de postbode",
+            "fr": "le facteur"
+          },
+          {
+            "nl": "de wasmachine",
+            "fr": "la machine à laver"
+          },
+          {
+            "nl": "het lawaai",
+            "fr": "le bruit"
+          },
+          {
+            "nl": "de buurt",
+            "fr": "le quartier"
+          },
+          {
+            "nl": "de muur",
+            "fr": "le mur"
+          },
+          {
+            "nl": "'s avonds",
+            "fr": "le soir"
+          },
+          {
+            "nl": "vriendelijk",
+            "fr": "gentil"
+          },
+          {
+            "nl": "laat",
+            "fr": "tard"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Heel vriendelijk dat u het pakje heeft aangenomen!",
+            "fr": "Très gentil d'avoir pris le colis !"
+          },
+          {
+            "nl": "Sorry, ik wist niet dat u het hoorde.",
+            "fr": "Désolé, je ne savais pas que vous l'entendiez."
+          },
+          {
+            "nl": "Ik zal de wasmachine niet meer na negen uur laten draaien.",
+            "fr": "Je ne ferai plus tourner la machine après neuf heures."
+          },
+          {
+            "nl": "Als er iets is, mag u altijd aanbellen.",
+            "fr": "S'il y a quoi que ce soit, vous pouvez toujours sonner."
+          }
+        ]
+      }
+    },
+    {
+      "id": "quotidien_train",
+      "theme": "quotidien",
+      "label": "Au guichet de la gare",
+      "contexte": "Ton train est supprimé et tu dois arriver au travail. Au guichet, tu demandes une alternative et tu en profites pour te renseigner sur un abonnement.",
+      "role": "Tu es employé(e) au guichet de la SNCB/NMBS. Le voyageur a un train supprimé. Donne une alternative réaliste (train suivant, correspondance, quai), puis explique l'abonnement domicile-travail (prix mensuel, intervention de l'employeur, attestation à faire remplir).",
+      "welcome": "Goeiemorgen, waarmee kan ik u helpen?",
+      "kit": {
+        "verbes": [
+          "vertrekken",
+          "aankomen",
+          "overstappen",
+          "afschaffen",
+          "kopen",
+          "terugbetalen",
+          "nemen",
+          "invullen",
+          "missen"
+        ],
+        "mots": [
+          {
+            "nl": "de trein",
+            "fr": "le train"
+          },
+          {
+            "nl": "het perron",
+            "fr": "le quai"
+          },
+          {
+            "nl": "de vertraging",
+            "fr": "le retard"
+          },
+          {
+            "nl": "de aansluiting",
+            "fr": "la correspondance"
+          },
+          {
+            "nl": "het treinabonnement",
+            "fr": "l'abonnement de train"
+          },
+          {
+            "nl": "het woon-werkverkeer",
+            "fr": "les trajets domicile-travail"
+          },
+          {
+            "nl": "de werkgever",
+            "fr": "l'employeur"
+          },
+          {
+            "nl": "het attest",
+            "fr": "l'attestation"
+          },
+          {
+            "nl": "afgeschaft",
+            "fr": "supprimé"
+          },
+          {
+            "nl": "rechtstreeks",
+            "fr": "direct"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Mijn trein naar Gent is afgeschaft.",
+            "fr": "Mon train pour Gand est supprimé."
+          },
+          {
+            "nl": "Hoe kom ik het snelst in Gent?",
+            "fr": "Comment arriver le plus vite à Gand ?"
+          },
+          {
+            "nl": "Van welk perron vertrekt hij?",
+            "fr": "De quel quai part-il ?"
+          },
+          {
+            "nl": "Hoeveel kost een abonnement voor woon-werkverkeer?",
+            "fr": "Combien coûte un abonnement domicile-travail ?"
+          }
+        ]
+      }
+    }
+  ]
+}

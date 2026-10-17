@@ -7814,6 +7814,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (rpDayState && rpDayState.journeeId) kitKey = 'day:' + rpDayState.journeeId;
             else if (id.startsWith('reel_')) kitKey = 'bank:' + id.slice(5);
             else if (id.startsWith('job_')) kitKey = 'sit:' + id.slice(4);
+            else if (id.startsWith('lib_')) kitKey = 'lib:' + id.slice(4);
             else if (id) kitKey = 'rp:' + id;
             if (kitKey && !rpHasKit(kitKey)) kitKey = null;
             rpWordSession = { kitKey, label: rpDayState ? rpDayState.label : scenario.label, userTexts: [], tapped: new Map(), heardNew: new Map() };
@@ -7993,7 +7994,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Bouton retour de la liste de scénarios : revient au choix de catégorie du groupe, ou à
         // Pratiquer quand le groupe n'a qu'une entrée (sinon on retomberait sur une carte unique).
         function rpBackFromScenarioList() {
-            if (rpCurrentGroup === 'travail') showPratiquer(); else rpShowCategoryPicker();
+            if (rpCurrentCategory && rpCurrentCategory.startsWith('__lib:') && rpCurrentGroup === 'travail') rpShowJobHome();
+            else if (rpCurrentGroup === 'travail') showPratiquer(); else rpShowCategoryPicker();
         }
 
         function rpShowCategoryPicker() {
@@ -8047,6 +8049,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 rpShowJobHome();
             } else if (rpCurrentCategory === '__case') {
                 rpShowCaseHome();
+            } else if (rpCurrentCategory && rpCurrentCategory.startsWith('__lib:')) {
+                rpShowLibrary(rpCurrentCategory.slice(6));
             } else if (rpCurrentCategory) {
                 rpShowCategory(rpCurrentCategory);
             } else {
@@ -8798,25 +8802,32 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return idx;
         }
 
+        // Ajoute à fullDb les mots d'un bloc de kit absents du vocabulaire (id stable KIT:<nl>).
+        function rpKitInjectWords(t, idx) {
+            idx = idx || rpKitVocabIndex();
+            const entries = (t.verbes || []).map(v => ({ nl: v, fr: '' })).concat(t.mots || []);
+            entries.forEach(e => {
+                const k = rpKitNorm(e.nl);
+                if (!k || idx[k]) return;
+                let fr = e.fr;
+                if (!fr) { const cv = conjugationData.find(x => x.infinitief === e.nl); fr = cv ? cv.fr : ''; }
+                if (!fr) return;
+                const item = { id: 'KIT:' + k, fr, nl: e.nl, freq: 3, file: KIT_FILE, tier: '', niveauCECR: '', sousCategorie: t.label || '' };
+                fullDb.push(item);
+                idx[k] = item;
+            });
+        }
+
         async function rpLoadPrepKits() {
             if (rpPrepData) return rpPrepData;
             try {
                 rpPrepData = await fetch('data/roleplay/prep_kits.json').then(r => r.ok ? r.json() : null);
             } catch (e) { rpPrepData = null; }
-            if (!rpPrepData) { rpPrepData = { themes: {}, scenarios: {}, situations: {} }; return rpPrepData; }
+            if (!rpPrepData) rpPrepData = { themes: {}, scenarios: {}, situations: {} };
             const idx = rpKitVocabIndex();
-            Object.values(rpPrepData.themes).forEach(t => {
-                const entries = (t.verbes || []).map(v => ({ nl: v, fr: '' })).concat(t.mots || []);
-                entries.forEach(e => {
-                    const k = rpKitNorm(e.nl);
-                    if (!k || idx[k]) return;
-                    if (!e.fr) { const cv = conjugationData.find(x => x.infinitief === e.nl); e.fr = cv ? cv.fr : ''; }
-                    if (!e.fr) return;
-                    const item = { id: 'KIT:' + k, fr: e.fr, nl: e.nl, freq: 3, file: KIT_FILE, tier: '', niveauCECR: '', sousCategorie: t.label };
-                    fullDb.push(item);
-                    idx[k] = item;
-                });
-            });
+            Object.values(rpPrepData.themes).forEach(t => rpKitInjectWords(t, idx));
+            await rpLoadLibrary();
+            rpLibAll().forEach(e => rpKitInjectWords(Object.assign({ label: e.label }, e.kit), idx));
             return rpPrepData;
         }
 
@@ -8836,7 +8847,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function rpBuildKit(key) {
-            const themes = rpKitThemesFor(key).map(t => rpPrepData.themes[t]).filter(Boolean);
+            const lib = key.startsWith('lib:') ? rpLibFind(key.slice(4)) : null;
+            const themes = lib ? [Object.assign({ label: lib.label }, lib.kit)] : rpKitThemesFor(key).map(t => rpPrepData.themes[t]).filter(Boolean);
             if (!themes.length) return null;
             const idx = rpKitVocabIndex();
             const seen = new Set();
@@ -8856,7 +8868,127 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return { themes: themes.map(t => t.label), verbs, words, phrases };
         }
 
-        function rpHasKit(key) { return rpKitThemesFor(key).length > 0; }
+        function rpHasKit(key) { return key.startsWith('lib:') ? !!rpLibFind(key.slice(4)) : rpKitThemesFor(key).length > 0; }
+
+        // =====================================================================================
+        // Bibliothèque de situations (data/roleplay/situations_library.json + générées par Gemini)
+        // =====================================================================================
+        // Situations stockées en dur : s'ouvrent et se préparent sans Gemini (seule la conversation
+        // l'utilise). « 🎲 Nouvelle situation » en fait inventer une par Gemini, gardée ensuite dans
+        // state.rpLibrary (synchronisé) pour être rejouée sans la régénérer.
+        let rpLibData = null; // { themes: {key: label}, situations: [...] }
+
+        async function rpLoadLibrary() {
+            if (rpLibData) return rpLibData;
+            try { rpLibData = await fetch('data/roleplay/situations_library.json').then(r => r.ok ? r.json() : null); } catch (e) { rpLibData = null; }
+            if (!rpLibData) rpLibData = { themes: {}, situations: [] };
+            return rpLibData;
+        }
+
+        function rpLibGenerated() {
+            return Object.entries(state.rpLibrary || {}).filter(([, e]) => e && !e.hidden).map(([id, e]) => Object.assign({ id, generated: true }, e));
+        }
+        function rpLibAll() { return ((rpLibData && rpLibData.situations) || []).concat(rpLibGenerated()); }
+        function rpLibFind(id) { return rpLibAll().find(e => e.id === id) || null; }
+        const RP_LIB_THEMES_FALLBACK = { emploi: "💼 Recherche d'emploi", travail: '🏢 Au bureau', quotidien: '🏠 Vie courante en Belgique' };
+        function rpLibThemeLabel(t) { return (rpLibData && rpLibData.themes && rpLibData.themes[t]) || RP_LIB_THEMES_FALLBACK[t] || t; }
+
+        function rpBuildLibPrompt(e) {
+            const words = (e.kit.verbes || []).concat((e.kit.mots || []).map(m => m.nl)).join(', ');
+            return 'Tu joues un rôle dans un jeu de rôle avec un apprenant francophone de néerlandais qui vit en Belgique.\n' +
+                'Ton rôle : ' + e.role + '\nLa situation, vue par l\'apprenant : ' + e.contexte + '\n\n' +
+                'Parle exclusivement en néerlandais de Flandre courant, niveau B1 : phrases courtes, mots courants, une question ou une idée à la fois, comme à l\'oral. ' +
+                'Réagis à ce que dit réellement l\'apprenant, ne corrige jamais sa langue et ne sors jamais de ton rôle. ' +
+                'Pour qu\'il pratique son vocabulaire, emploie naturellement certains de ces mots quand c\'est pertinent : ' + words + '. ' +
+                'Quand la situation est réglée, conclus naturellement.\n\n' +
+                'Tu as déjà ouvert la conversation en disant : """' + e.welcome + '""" — enchaîne à partir de la réponse de l\'apprenant.';
+        }
+
+        async function rpShowLibrary(theme) {
+            rpCurrentCategory = '__lib:' + theme;
+            rpHideInterviewer();
+            rpJobHideDebrief();
+            const listDiv = document.getElementById('rp-scenario-list');
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+            await rpLoadLibrary();
+            const list = rpLibAll().filter(e => e.theme === theme);
+            const row = e => rpPrepRow(
+                `<button class="rp-scenario-btn" onclick="rpStartLib('${e.id}')">${rpEscapeHtml(e.label)}${e.generated ? ' <span class="wl-badge unseen">🎲 générée</span>' : ''}</button>`,
+                'lib:' + e.id, e.label, { type: 'lib', id: e.id });
+            listDiv.innerHTML = `
+                <div class="rp-group-title">${rpEscapeHtml(rpLibThemeLabel(theme))}</div>
+                <p class="rp-real-hint">Prépare d'abord les mots avec 📚, puis lance la conversation. Ton interlocuteur emploiera les mots du kit.</p>
+                ${list.map(row).join('') || '<p style="color:#888;">Aucune situation pour l\'instant.</p>'}
+                <div class="rp-group-title">🎲 Nouvelle situation (Gemini)</div>
+                <p class="rp-real-hint">Gemini invente une situation et son kit sur ce thème ; elle est ensuite gardée ici.</p>
+                <div class="rp-help-input-row" style="width:100%; max-width:520px;">
+                    <input type="text" id="rp-lib-subject" placeholder="Sujet (facultatif), ex. : réserver une salle de sport" autocomplete="off">
+                    <button class="btn btn-green" id="rp-lib-gen-btn" onclick="rpLibGenerate('${theme}')">🎲 Créer</button>
+                </div>
+                <div id="rp-lib-gen-status" class="rp-real-hint"></div>`;
+        }
+
+        function rpStartLib(id) {
+            const e = rpLibFind(id);
+            if (!e) return;
+            if (!GeminiService.getKey()) { alert("La conversation a besoin de ta clé Gemini (Profil → 🤖 Intelligence IA). Tu peux déjà préparer les mots avec 📚."); return; }
+            rpDayState = null;
+            rpBeginScenario({ id: 'lib_' + e.id, lang: 'nl', label: e.label, welcome: e.welcome, prompt: rpBuildLibPrompt(e) });
+            const banner = document.getElementById('rp-mode-banner');
+            banner.style.display = '';
+            banner.innerHTML = `
+                <div class="rp-job-banner">
+                    <div class="rp-iv-label" style="margin-top:0;">${rpEscapeHtml(rpLibThemeLabel(e.theme))}</div>
+                    <div>${rpEscapeHtml(e.contexte)}</div>
+                    <details><summary>💬 Phrases utiles</summary><ul class="rp-case-figures">${(e.kit.phrases || []).map(p => `<li>${rpEscapeHtml(p.nl)} <small>— ${rpEscapeHtml(p.fr)}</small></li>`).join('')}</ul></details>
+                </div>`;
+        }
+
+        async function rpLibGenerate(theme) {
+            const status = document.getElementById('rp-lib-gen-status');
+            const btn = document.getElementById('rp-lib-gen-btn');
+            if (!GeminiService.getKey()) { status.innerText = 'Nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'; return; }
+            const subject = (document.getElementById('rp-lib-subject').value || '').trim();
+            const existing = rpLibAll().filter(e => e.theme === theme).map(e => e.label).join(' ; ');
+            status.innerText = 'Gemini invente la situation et son kit...';
+            btn.disabled = true;
+            try {
+                const raw = await GeminiService.generate(
+                    'Invente une situation de jeu de rôle oral en néerlandais pour un francophone de niveau B1 qui vit et travaille en Flandre (Belgique).\n' +
+                    'Thème : ' + rpLibThemeLabel(theme) + '.\n' +
+                    (subject ? 'Sujet demandé : ' + subject + '.\n' : 'Choisis un sujet concret et courant, différent de ceux-ci : ' + existing + '.\n') +
+                    'Noms de personnes et d\'entreprises inventés. Le kit liste le vocabulaire dont l\'apprenant aura besoin pour s\'en sortir.\n' +
+                    'Réponds UNIQUEMENT avec un objet JSON, sans texte autour :\n' +
+                    '{"label": "titre court en français", "contexte": "en français, 1-2 phrases : ce que vit l\'apprenant", ' +
+                    '"role": "en français : qui est l\'interlocuteur, ce qu\'il veut, comment il réagit", "welcome": "première réplique de l\'interlocuteur, en néerlandais", ' +
+                    '"kit": {"verbes": ["10 infinitifs néerlandais utiles"], "mots": [{"nl": "12 noms avec de/het, ou adjectifs", "fr": "traduction"}], "phrases": [{"nl": "4 phrases utiles pour l\'apprenant", "fr": "traduction"}]}}'
+                );
+                const e = rpHelpParseJson(raw);
+                const ok = e && e.label && e.contexte && e.role && e.welcome && e.kit && Array.isArray(e.kit.verbes) && Array.isArray(e.kit.mots);
+                if (!ok) throw new Error('réponse incomplète');
+                const clean = {
+                    theme, label: String(e.label), contexte: String(e.contexte), role: String(e.role), welcome: String(e.welcome), at: Date.now(),
+                    kit: {
+                        verbes: e.kit.verbes.map(String).slice(0, 14),
+                        mots: e.kit.mots.filter(m => m && m.nl && m.fr).map(m => ({ nl: String(m.nl), fr: String(m.fr) })).slice(0, 16),
+                        phrases: (e.kit.phrases || []).filter(p => p && p.nl && p.fr).map(p => ({ nl: String(p.nl), fr: String(p.fr) })).slice(0, 6)
+                    }
+                };
+                if (!state.rpLibrary) state.rpLibrary = {};
+                const id = 'gen_' + Date.now().toString(36);
+                state.rpLibrary[id] = clean;
+                save();
+                rpKitInjectWords(Object.assign({ label: clean.label }, clean.kit));
+                await rpShowLibrary(theme);
+                const s = document.getElementById('rp-lib-gen-status');
+                if (s) s.innerText = '✅ « ' + clean.label + ' » ajoutée à la liste. Prépare-la avec 📚 ou lance-la.';
+            } catch (err) {
+                status.innerText = 'Création impossible : ' + err.message;
+                btn.disabled = false;
+            }
+        }
 
         // Bouton « 📚 Préparer » accolé au bouton d'un scénario dans les listes.
         function rpPrepRow(scenarioBtnHtml, key, label, launch) {
@@ -8985,6 +9117,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             else if (l.type === 'rp') { rpShowCategory(l.cat); rpStartScenario(l.cat, l.id); }
             else if (l.type === 'sit') { await rpShowJobHome(); rpStartSituation(l.id); }
             else if (l.type === 'day') { await rpShowJobHome(); rpStartDay(l.index); }
+            else if (l.type === 'lib') { const e = rpLibFind(l.id); if (e) { await rpShowLibrary(e.theme); rpStartLib(l.id); } }
         }
 
         async function rpShowJobHome() {
@@ -9025,6 +9158,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}
                     ${chip(false, '', 'Autres métiers : bientôt', true)}
                 </div>
+                <div class="rp-group-title">🏢 Au bureau</div>
+                <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
                 <p class="rp-real-hint">Plusieurs situations à la suite, puis un bilan : vocabulaire à retenir et formulations corrigées.</p>
                 <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">

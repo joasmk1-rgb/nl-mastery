@@ -11882,5 +11882,863 @@
     "exempleNl": "",
     "exempleFr": "",
     "freq": 3.9
+  },
+  {
+    "infinitief": "aanvragen",
+    "fr": "demander (officiellement)",
+    "present": {
+      "ik": "vraag aan",
+      "jij": "vraagt aan",
+      "hij": "vraagt aan",
+      "wij": "vragen aan"
+    },
+    "preteritum": "vroeg aan",
+    "participePasse": "aangevraagd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.2,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "achterlaten",
+    "fr": "laisser (derrière soi)",
+    "present": {
+      "ik": "laat achter",
+      "jij": "laat achter",
+      "hij": "laat achter",
+      "wij": "laten achter"
+    },
+    "preteritum": "liet achter",
+    "participePasse": "achtergelaten",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.89,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afgeven",
+    "fr": "remettre / déposer",
+    "present": {
+      "ik": "geef af",
+      "jij": "geeft af",
+      "hij": "geeft af",
+      "wij": "geven af"
+    },
+    "preteritum": "gaf af",
+    "participePasse": "afgegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.74,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afleveren",
+    "fr": "livrer / remettre",
+    "present": {
+      "ik": "lever af",
+      "jij": "levert af",
+      "hij": "levert af",
+      "wij": "leveren af"
+    },
+    "preteritum": "leverde af",
+    "participePasse": "afgeleverd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.56,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afronden",
+    "fr": "finaliser / arrondir",
+    "present": {
+      "ik": "rond af",
+      "jij": "rondt af",
+      "hij": "rondt af",
+      "wij": "ronden af"
+    },
+    "preteritum": "rondde af",
+    "participePasse": "afgerond",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.66,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "afschaffen",
+    "fr": "supprimer / abolir",
+    "present": {
+      "ik": "schaf af",
+      "jij": "schaft af",
+      "hij": "schaft af",
+      "wij": "schaffen af"
+    },
+    "preteritum": "schafte af",
+    "participePasse": "afgeschaft",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.91,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bijleren",
+    "fr": "apprendre davantage",
+    "present": {
+      "ik": "leer bij",
+      "jij": "leert bij",
+      "hij": "leert bij",
+      "wij": "leren bij"
+    },
+    "preteritum": "leerde bij",
+    "participePasse": "bijgeleerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.64,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "bijvullen",
+    "fr": "remplir (compléter)",
+    "present": {
+      "ik": "vul bij",
+      "jij": "vult bij",
+      "hij": "vult bij",
+      "wij": "vullen bij"
+    },
+    "preteritum": "vulde bij",
+    "participePasse": "bijgevuld",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.0,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "binnenbrengen",
+    "fr": "apporter / rentrer",
+    "present": {
+      "ik": "breng binnen",
+      "jij": "brengt binnen",
+      "hij": "brengt binnen",
+      "wij": "brengen binnen"
+    },
+    "preteritum": "bracht binnen",
+    "participePasse": "binnengebracht",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.61,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "contacteren",
+    "fr": "contacter",
+    "present": {
+      "ik": "contacteer",
+      "jij": "contacteert",
+      "hij": "contacteert",
+      "wij": "contacteren"
+    },
+    "preteritum": "contacteerde",
+    "participePasse": "gecontacteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.25
+  },
+  {
+    "infinitief": "crediteren",
+    "fr": "créditer",
+    "present": {
+      "ik": "crediteer",
+      "jij": "crediteert",
+      "hij": "crediteert",
+      "wij": "crediteren"
+    },
+    "preteritum": "crediteerde",
+    "participePasse": "gecrediteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 1.29
+  },
+  {
+    "infinitief": "doorgeven",
+    "fr": "transmettre",
+    "present": {
+      "ik": "geef door",
+      "jij": "geeft door",
+      "hij": "geeft door",
+      "wij": "geven door"
+    },
+    "preteritum": "gaf door",
+    "participePasse": "doorgegeven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.13,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "downloaden",
+    "fr": "télécharger",
+    "present": {
+      "ik": "download",
+      "jij": "downloadt",
+      "hij": "downloadt",
+      "wij": "downloaden"
+    },
+    "preteritum": "downloadde",
+    "participePasse": "gedownload",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.33,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "evalueren",
+    "fr": "évaluer",
+    "present": {
+      "ik": "evalueer",
+      "jij": "evalueert",
+      "hij": "evalueert",
+      "wij": "evalueren"
+    },
+    "preteritum": "evalueerde",
+    "participePasse": "geëvalueerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.22,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "exporteren",
+    "fr": "exporter",
+    "present": {
+      "ik": "exporteer",
+      "jij": "exporteert",
+      "hij": "exporteert",
+      "wij": "exporteren"
+    },
+    "preteritum": "exporteerde",
+    "participePasse": "geëxporteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.37,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "factureren",
+    "fr": "facturer",
+    "present": {
+      "ik": "factureer",
+      "jij": "factureert",
+      "hij": "factureert",
+      "wij": "factureren"
+    },
+    "preteritum": "factureerde",
+    "participePasse": "gefactureerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.75
+  },
+  {
+    "infinitief": "filteren",
+    "fr": "filtrer",
+    "present": {
+      "ik": "filter",
+      "jij": "filtert",
+      "hij": "filtert",
+      "wij": "filteren"
+    },
+    "preteritum": "filterde",
+    "participePasse": "gefilterd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.58
+  },
+  {
+    "infinitief": "goedkeuren",
+    "fr": "approuver",
+    "present": {
+      "ik": "keur goed",
+      "jij": "keurt goed",
+      "hij": "keurt goed",
+      "wij": "keuren goed"
+    },
+    "preteritum": "keurde goed",
+    "participePasse": "goedgekeurd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.55,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "hoesten",
+    "fr": "tousser",
+    "present": {
+      "ik": "hoest",
+      "jij": "hoest",
+      "hij": "hoest",
+      "wij": "hoesten"
+    },
+    "preteritum": "hoestte",
+    "participePasse": "gehoest",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.62,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "inhalen",
+    "fr": "rattraper",
+    "present": {
+      "ik": "haal in",
+      "jij": "haalt in",
+      "hij": "haalt in",
+      "wij": "halen in"
+    },
+    "preteritum": "haalde in",
+    "participePasse": "ingehaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "inloggen",
+    "fr": "se connecter",
+    "present": {
+      "ik": "log in",
+      "jij": "logt in",
+      "hij": "logt in",
+      "wij": "loggen in"
+    },
+    "preteritum": "logde in",
+    "participePasse": "ingelogd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.86,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "inschrijven",
+    "fr": "inscrire",
+    "present": {
+      "ik": "schrijf in",
+      "jij": "schrijft in",
+      "hij": "schrijft in",
+      "wij": "schrijven in"
+    },
+    "preteritum": "schreef in",
+    "participePasse": "ingeschreven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.15,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "kennismaken",
+    "fr": "faire connaissance",
+    "present": {
+      "ik": "maak kennis",
+      "jij": "maakt kennis",
+      "hij": "maakt kennis",
+      "wij": "maken kennis"
+    },
+    "preteritum": "maakte kennis",
+    "participePasse": "kennisgemaakt",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.86,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "klikken",
+    "fr": "cliquer",
+    "present": {
+      "ik": "klik",
+      "jij": "klikt",
+      "hij": "klikt",
+      "wij": "klikken"
+    },
+    "preteritum": "klikte",
+    "participePasse": "geklikt",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.95,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "letten",
+    "fr": "faire attention (à)",
+    "present": {
+      "ik": "let",
+      "jij": "let",
+      "hij": "let",
+      "wij": "letten"
+    },
+    "preteritum": "lette",
+    "participePasse": "gelet",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.35,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "meebrengen",
+    "fr": "apporter",
+    "present": {
+      "ik": "breng mee",
+      "jij": "brengt mee",
+      "hij": "brengt mee",
+      "wij": "brengen mee"
+    },
+    "preteritum": "bracht mee",
+    "participePasse": "meegebracht",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.52,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "nasturen",
+    "fr": "envoyer ensuite / faire suivre",
+    "present": {
+      "ik": "stuur na",
+      "jij": "stuurt na",
+      "hij": "stuurt na",
+      "wij": "sturen na"
+    },
+    "preteritum": "stuurde na",
+    "participePasse": "nagestuurd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 1.55
+  },
+  {
+    "infinitief": "noteren",
+    "fr": "noter",
+    "present": {
+      "ik": "noteer",
+      "jij": "noteert",
+      "hij": "noteert",
+      "wij": "noteren"
+    },
+    "preteritum": "noteerde",
+    "participePasse": "genoteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.5,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opstarten",
+    "fr": "démarrer / lancer",
+    "present": {
+      "ik": "start op",
+      "jij": "start op",
+      "hij": "start op",
+      "wij": "starten op"
+    },
+    "preteritum": "startte op",
+    "participePasse": "opgestart",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.7
+  },
+  {
+    "infinitief": "opsturen",
+    "fr": "envoyer (par la poste)",
+    "present": {
+      "ik": "stuur op",
+      "jij": "stuurt op",
+      "hij": "stuurt op",
+      "wij": "sturen op"
+    },
+    "preteritum": "stuurde op",
+    "participePasse": "opgestuurd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.59,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "opzeggen",
+    "fr": "résilier / démissionner",
+    "present": {
+      "ik": "zeg op",
+      "jij": "zegt op",
+      "hij": "zegt op",
+      "wij": "zeggen op"
+    },
+    "preteritum": "zegde op",
+    "participePasse": "opgezegd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.57,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overdragen",
+    "fr": "transmettre / céder",
+    "present": {
+      "ik": "draag over",
+      "jij": "draagt over",
+      "hij": "draagt over",
+      "wij": "dragen over"
+    },
+    "preteritum": "droeg over",
+    "participePasse": "overgedragen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.56,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overhandigen",
+    "fr": "remettre (en main propre)",
+    "present": {
+      "ik": "overhandig",
+      "jij": "overhandigt",
+      "hij": "overhandigt",
+      "wij": "overhandigen"
+    },
+    "preteritum": "overhandigde",
+    "participePasse": "overhandigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.39
+  },
+  {
+    "infinitief": "overlopen",
+    "fr": "passer en revue",
+    "present": {
+      "ik": "overloop",
+      "jij": "overloopt",
+      "hij": "overloopt",
+      "wij": "overlopen"
+    },
+    "preteritum": "overliep",
+    "participePasse": "overlopen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.42,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overschrijven",
+    "fr": "virer (argent) / recopier",
+    "present": {
+      "ik": "schrijf over",
+      "jij": "schrijft over",
+      "hij": "schrijft over",
+      "wij": "schrijven over"
+    },
+    "preteritum": "schreef over",
+    "participePasse": "overgeschreven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.28,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "overstappen",
+    "fr": "changer (de train) / passer à",
+    "present": {
+      "ik": "stap over",
+      "jij": "stapt over",
+      "hij": "stapt over",
+      "wij": "stappen over"
+    },
+    "preteritum": "stapte over",
+    "participePasse": "overgestapt",
+    "auxiliaire": "zijn",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.78,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "prioriteren",
+    "fr": "prioriser",
+    "present": {
+      "ik": "prioriteer",
+      "jij": "prioriteert",
+      "hij": "prioriteert",
+      "wij": "prioriteren"
+    },
+    "preteritum": "prioriteerde",
+    "participePasse": "geprioriteerd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 1.48
+  },
+  {
+    "infinitief": "raadplegen",
+    "fr": "consulter",
+    "present": {
+      "ik": "raadpleeg",
+      "jij": "raadpleegt",
+      "hij": "raadpleegt",
+      "wij": "raadplegen"
+    },
+    "preteritum": "raadpleegde",
+    "participePasse": "geraadpleegd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "rondleiden",
+    "fr": "faire visiter",
+    "present": {
+      "ik": "leid rond",
+      "jij": "leidt rond",
+      "hij": "leidt rond",
+      "wij": "leiden rond"
+    },
+    "preteritum": "leidde rond",
+    "participePasse": "rondgeleid",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.74
+  },
+  {
+    "infinitief": "scannen",
+    "fr": "scanner",
+    "present": {
+      "ik": "scan",
+      "jij": "scant",
+      "hij": "scant",
+      "wij": "scannen"
+    },
+    "preteritum": "scande",
+    "participePasse": "gescand",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.57,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugbetalen",
+    "fr": "rembourser",
+    "present": {
+      "ik": "betaal terug",
+      "jij": "betaalt terug",
+      "hij": "betaalt terug",
+      "wij": "betalen terug"
+    },
+    "preteritum": "betaalde terug",
+    "participePasse": "terugbetaald",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.6,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugblikken",
+    "fr": "revenir sur / faire le bilan",
+    "present": {
+      "ik": "blik terug",
+      "jij": "blikt terug",
+      "hij": "blikt terug",
+      "wij": "blikken terug"
+    },
+    "preteritum": "blikte terug",
+    "participePasse": "teruggeblikt",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.83
+  },
+  {
+    "infinitief": "terugbrengen",
+    "fr": "rapporter / ramener",
+    "present": {
+      "ik": "breng terug",
+      "jij": "brengt terug",
+      "hij": "brengt terug",
+      "wij": "brengen terug"
+    },
+    "preteritum": "bracht terug",
+    "participePasse": "teruggebracht",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.7,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "terugnemen",
+    "fr": "reprendre",
+    "present": {
+      "ik": "neem terug",
+      "jij": "neemt terug",
+      "hij": "neemt terug",
+      "wij": "nemen terug"
+    },
+    "preteritum": "nam terug",
+    "participePasse": "teruggenomen",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.89
+  },
+  {
+    "infinitief": "uitzieken",
+    "fr": "se soigner (guérir complètement)",
+    "present": {
+      "ik": "ziek uit",
+      "jij": "ziekt uit",
+      "hij": "ziekt uit",
+      "wij": "zieken uit"
+    },
+    "preteritum": "ziekte uit",
+    "participePasse": "uitgeziekt",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 1.98
+  },
+  {
+    "infinitief": "verhogen",
+    "fr": "augmenter",
+    "present": {
+      "ik": "verhoog",
+      "jij": "verhoogt",
+      "hij": "verhoogt",
+      "wij": "verhogen"
+    },
+    "preteritum": "verhoogde",
+    "participePasse": "verhoogd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.34,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verwelkomen",
+    "fr": "accueillir",
+    "present": {
+      "ik": "verwelkom",
+      "jij": "verwelkomt",
+      "hij": "verwelkomt",
+      "wij": "verwelkomen"
+    },
+    "preteritum": "verwelkomde",
+    "participePasse": "verwelkomd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.95,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "verwittigen",
+    "fr": "prévenir",
+    "present": {
+      "ik": "verwittig",
+      "jij": "verwittigt",
+      "hij": "verwittigt",
+      "wij": "verwittigen"
+    },
+    "preteritum": "verwittigde",
+    "participePasse": "verwittigd",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 2.88,
+    "niveauCECR": "B2",
+    "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "voorschrijven",
+    "fr": "prescrire",
+    "present": {
+      "ik": "schrijf voor",
+      "jij": "schrijft voor",
+      "hij": "schrijft voor",
+      "wij": "schrijven voor"
+    },
+    "preteritum": "schreef voor",
+    "participePasse": "voorgeschreven",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.39,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
   }
 ]
