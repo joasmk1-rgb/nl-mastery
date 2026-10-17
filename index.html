@@ -439,6 +439,7 @@
                 <button type="button" class="rp-coach-btn" onclick="rpHelpSuggest()">💡 Je ne sais pas quoi dire</button>
                 <button type="button" class="rp-coach-btn" onclick="rpHelpFrench()">🇫🇷 Je le dis en français</button>
                 <button type="button" class="rp-coach-btn" onclick="rpShowUnderlineHelp()">🔍 Mots soulignés</button>
+                <button type="button" class="rp-coach-btn" onclick="rpShowWordsReport()">🧾 Bilan des mots</button>
             </div>
             <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
             <div id="rp-day-nav" style="display:none;"></div>
@@ -448,6 +449,7 @@
         <!-- Bilan de fin de journée (mise en situation métier) : écran distinct de la conversation -->
         <div id="rp-step-debrief" style="display:none; width:100%; flex-direction:column; align-items:center;">
             <div id="rp-debrief-content" class="content-col"></div>
+            <div id="rp-debrief-words" class="content-col" style="margin-top:12px;"></div>
         </div>
 
         <!-- Mode Intervieweur : exercice de traduction guidé (dialogue scripté) -->

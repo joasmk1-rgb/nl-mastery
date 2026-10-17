@@ -387,6 +387,10 @@
         .rpw-new { text-decoration: underline 2px dotted #e8892b; text-underline-offset: 3px; }
         .rpw-review { text-decoration: underline 2px dotted #3b82f6; text-underline-offset: 3px; }
         .rpw-unseen { text-decoration: underline 1px dotted var(--text-secondary); text-underline-offset: 3px; }
+        .rpw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .rpw-chip { background: var(--surface-2); border-radius: var(--radius-pill); padding: 3px 10px; font-size: 0.82rem; font-weight: 600; }
+        .rpw-chip small { font-weight: 400; color: var(--text-secondary); }
+        .rp-message.rpw-inline { display: inline; background: none; padding: 0; margin: 0; border: none; box-shadow: none; max-width: none; }
         .rp-scenario-row { display: flex; gap: 6px; align-items: stretch; width: 100%; max-width: 520px; }
         .rp-scenario-row .rp-scenario-btn { flex: 1; min-width: 0; }
         .rp-prep-btn { flex: 0 0 auto; background: var(--surface-2); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 0 10px; font-size: 0.75rem; font-weight: 700; color: var(--text); cursor: pointer; margin-bottom: 8px; }

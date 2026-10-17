@@ -7615,6 +7615,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (sender === 'assistant' && !(rpCurrentScenario && rpCurrentScenario.lang === 'en')) {
                 msgDiv.innerHTML = rpAnnotateText(text);
                 msgDiv.dataset.text = text;
+                rpWordSessionHear(text);
             } else {
                 msgDiv.innerText = text;
             }
@@ -7741,6 +7742,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpWordTap(el) {
             const token = el.textContent;
             const item = rpWordLookup(token);
+            if (rpWordSession) rpWordSession.tapped.set(rpKitNorm(token), { token, item });
             const sentence = (el.closest('.rp-message') && el.closest('.rp-message').dataset.text) || '';
             const panel = document.getElementById('rp-coach-panel');
             panel.style.display = 'block';
@@ -7797,6 +7799,99 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             } catch (e) {
                 detail.innerText = 'Traduction impossible : ' + e.message;
             }
+        }
+
+        // ===== Bilan des mots d'une partie (relié au kit) =====
+        // Calculé par l'app, sans Gemini : mots du kit utilisés / évités dans les répliques de
+        // l'apprenant, mots consultés (touchés), mots nouveaux entendus. Une journée type cumule
+        // toutes ses situations (la session n'est pas remise à zéro entre deux situations).
+        let rpWordSession = null; // { kitKey, userTexts: [], tapped: Map, heardNew: Map }
+
+        function rpWordSessionStart(scenario) {
+            if (rpDayState && rpDayState.index > 0 && rpWordSession) return; // suite d'une journée
+            const id = String(scenario.id || '');
+            let kitKey = null;
+            if (rpDayState && rpDayState.journeeId) kitKey = 'day:' + rpDayState.journeeId;
+            else if (id.startsWith('reel_')) kitKey = 'bank:' + id.slice(5);
+            else if (id.startsWith('job_')) kitKey = 'sit:' + id.slice(4);
+            else if (id) kitKey = 'rp:' + id;
+            if (kitKey && !rpHasKit(kitKey)) kitKey = null;
+            rpWordSession = { kitKey, label: rpDayState ? rpDayState.label : scenario.label, userTexts: [], tapped: new Map(), heardNew: new Map() };
+        }
+
+        // Mots orange d'une réplique de l'interlocuteur, gardés avec leur phrase (contexte de traduction).
+        function rpWordSessionHear(text) {
+            if (!rpWordSession) return;
+            const tokens = String(text).match(/[A-Za-zÀ-ÖØ-öø-ÿ'’]+(?:-[A-Za-zÀ-ÖØ-öø-ÿ]+)*/g) || [];
+            tokens.forEach((t, i) => {
+                const k = rpKitNorm(t);
+                if (k.length <= 2 || rpWordSession.heardNew.has(k)) return;
+                if (rpWordClass(t, rpWordLookup(t), i === 0) === 'rpw-new') rpWordSession.heardNew.set(k, { token: t, sentence: text });
+            });
+        }
+
+        function rpWordBase(nl) { return rpKitNorm(nl).replace(/^(de|het|een|zich) /, ''); }
+
+        function rpWordsReport() {
+            const ses = rpWordSession;
+            if (!ses) return null;
+            const allText = ses.userTexts.join(' ');
+            const userNorm = ' ' + rpKitNorm(allText) + ' ';
+            const usedBases = new Set();
+            (allText.match(/[A-Za-zÀ-ÖØ-öø-ÿ'’]+/g) || []).forEach(t => { const it = rpWordLookup(t); if (it) usedBases.add(rpWordBase(it.nl)); });
+            const isUsed = nl => { const b = rpWordBase(nl); return usedBases.has(b) || userNorm.includes(' ' + b + ' '); };
+            let kit = null, used = [], avoided = [];
+            if (ses.kitKey) {
+                kit = rpBuildKit(ses.kitKey);
+                const entries = kit.verbs.map(v => ({ nl: v.inf, fr: v.conj ? v.conj.fr : (v.item ? v.item.fr : ''), item: v.item }))
+                    .concat(kit.words.map(w => ({ nl: w.nl, fr: w.fr, item: w.item })));
+                entries.forEach(e => (isUsed(e.nl) ? used : avoided).push(e));
+            }
+            const tapped = [...ses.tapped.values()];
+            const tappedKeys = new Set(tapped.map(t => rpKitNorm(t.token)));
+            const heard = [...ses.heardNew.entries()].filter(([k]) => !tappedKeys.has(k)).map(([, v]) => v);
+            return { kit, used, avoided, tapped, heard, spoke: ses.userTexts.length };
+        }
+
+        function rpWordsReportHtml() {
+            const r = rpWordsReport();
+            if (!r) return '';
+            const chip = e => `<span class="rpw-chip">${rpEscapeHtml(e.nl)}${e.fr ? ' <small>' + rpEscapeHtml(e.fr) + '</small>' : ''}</span>`;
+            const toLearn = r.avoided.concat(r.tapped.filter(t => t.item && t.item.id).map(t => ({ nl: t.item.nl, fr: t.item.fr, item: t.item })));
+            const ids = [...new Set(toLearn.filter(e => e.item && e.item.id).map(e => e.item.id))];
+            const heardHtml = r.heard.map(h => `<span class="rp-message assistant rpw-inline" data-text="${rpEscapeHtml(h.sentence)}"><span class="rpw rpw-new" onclick="rpWordTap(this)">${rpEscapeHtml(h.token)}</span></span>`).join(' ');
+            return `
+                <div class="rp-coach-title">🧾 Bilan des mots${rpWordSession.label ? ' — ' + rpEscapeHtml(rpWordSession.label) : ''}</div>
+                ${!r.spoke ? '<p class="report-meta">Tu n\'as encore rien répondu : le bilan se remplit au fil de tes réponses.</p>' : ''}
+                ${r.kit ? `
+                    <div class="rp-iv-label">✅ Mots du kit que tu as utilisés (${r.used.length}/${r.used.length + r.avoided.length})</div>
+                    <div class="rpw-chips">${r.used.map(chip).join('') || '<span class="report-meta">Aucun pour l\'instant.</span>'}</div>
+                    <div class="rp-iv-label">🙈 Mots du kit pas encore utilisés (${r.avoided.length})</div>
+                    <div class="rpw-chips">${r.avoided.map(chip).join('') || '<span class="report-meta">Tu as tout utilisé, bravo !</span>'}</div>`
+                    : '<p class="report-meta">Pas de kit de préparation pour ce jeu de rôle : seuls les mots consultés et entendus sont listés.</p>'}
+                <div class="rp-iv-label">🔎 Mots que tu as consultés (${r.tapped.length})</div>
+                <div class="rpw-chips">${r.tapped.map(t => chip(t.item ? { nl: t.item.nl, fr: t.item.fr } : { nl: t.token, fr: '' })).join('') || '<span class="report-meta">Aucun.</span>'}</div>
+                <div class="rp-iv-label">🆕 Mots nouveaux entendus (${r.heard.length}) — touche-les pour les traduire</div>
+                <div class="rpw-chips">${heardHtml || '<span class="report-meta">Aucun.</span>'}</div>
+                ${ids.length ? `<div class="rp-help-actions" style="margin-top:10px;">
+                    <button type="button" class="rp-coach-btn" onclick="rpWordsAddMany(${rpEscapeHtml(JSON.stringify(ids))}, this)">➕ Mettre les ${ids.length} mots évités et consultés à apprendre</button>
+                </div>` : ''}
+                ${(state.customLists[RP_WORDS_LIST] || []).length ? `<div class="rp-help-actions"><button type="button" class="rp-coach-btn" onclick="startCustomList('${RP_WORDS_LIST}')">📝 Réviser « ${RP_WORDS_LIST} » (${state.customLists[RP_WORDS_LIST].length})</button></div>` : ''}`;
+        }
+
+        function rpWordsAddMany(ids, btn) {
+            const list = rpWordsListIds();
+            ids.forEach(id => { if (!list.includes(id)) list.push(id); });
+            save();
+            renderCustomListsHome();
+            if (btn) btn.outerHTML = `<span class="report-meta">✅ Ajoutés à « ${RP_WORDS_LIST} » (${list.length} mots)</span>`;
+        }
+
+        function rpShowWordsReport() {
+            const panel = document.getElementById('rp-coach-panel');
+            panel.style.display = 'block';
+            panel.innerHTML = rpWordsReportHtml() || '<p class="report-meta">Lance une conversation d\'abord.</p>';
+            panel.scrollIntoView({ block: 'nearest' });
         }
 
         function rpToggleUnderlineUnseen() {
@@ -7970,6 +8065,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // logique de démarrage ni créer un second moteur de conversation.
         function rpBeginScenario(scenario) {
             rpCurrentScenario = scenario;
+            rpWordSessionStart(scenario);
             rpConversationHistory = [{ role: "model", parts: [{ text: scenario.prompt }] }];
 
             // Réinitialise le mode script à chaque nouveau scénario (jamais hérité de la
@@ -8029,6 +8125,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function rpAppendUserTurn(text) {
             rpAppendMessage(text, 'user');
+            if (rpWordSession) rpWordSession.userTexts.push(text);
             const historyDiv = document.getElementById('rp-chat-history');
             const btn = document.createElement('button');
             btn.type = 'button';
@@ -8998,7 +9095,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const journee = journeeIndex >= 0 ? rpJobData.journees[journeeIndex] : null;
             const situations = rpComposeDay(rpJobMetier, journee, RP_JOB_DURATIONS[rpJobDuration]);
             if (!situations.length) return;
-            rpDayState = { label: journee ? journee.label : 'Journée tirée au sort', situations, index: 0, log: [] };
+            rpDayState = { label: journee ? journee.label : 'Journée tirée au sort', journeeId: journee ? journee.id : null, situations, index: 0, log: [] };
             rpJobBeginSituation(situations[0]);
         }
 
@@ -9029,6 +9126,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (el) el.style.display = 'none';
         }
 
+        function rpFillDebriefWords() {
+            const el = document.getElementById('rp-debrief-words');
+            if (!el) return;
+            const html = rpWordsReportHtml();
+            el.innerHTML = html ? `<div class="conj-card" style="text-align:left;">${html}</div>` : '';
+        }
+
         // Bilan de fin de journée : appel Gemini séparé (aucun lien avec les prompts des
         // personnages) qui reçoit tout l'historique de la session et renvoie une restitution
         // structurée. Affiché sur un écran distinct de la conversation.
@@ -9038,6 +9142,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpJobHideNav();
             document.getElementById('rp-step-chat').style.display = 'none';
             document.getElementById('rp-step-debrief').style.display = 'flex';
+            rpFillDebriefWords();
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(day.label)}</div>`;
             const footer = `
@@ -9246,6 +9351,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpJobHideNav();
             document.getElementById('rp-step-chat').style.display = 'none';
             document.getElementById('rp-step-debrief').style.display = 'flex';
+            rpFillDebriefWords();
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(st.cas.titre_fr || 'Étude de cas')}</div>`;
             const footer = `
