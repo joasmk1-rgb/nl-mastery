@@ -8133,6 +8133,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpAppendUserTurn(text) {
             rpAppendMessage(text, 'user');
             if (rpWordSession) rpWordSession.userTexts.push(text);
+            // Examen de module : après quelques échanges, le bouton « J'ai fini » ressort.
+            const finishBtn = document.getElementById('modrp-finish-btn');
+            if (finishBtn && rpWordSession && rpWordSession.userTexts.length >= 4) { finishBtn.classList.remove('btn-gray'); finishBtn.classList.add('btn-green'); }
             const historyDiv = document.getElementById('rp-chat-history');
             const btn = document.createElement('button');
             btn.type = 'button';
@@ -9266,7 +9269,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <h2 style="margin:6px 0;">${rpEscapeHtml(m.titre)}</h2>
                     <p class="prep-sub">🎯 ${rpEscapeHtml(m.objectif)}</p>
                     <div class="cat-bar"><div class="cat-bar-fill" style="width:${Math.round(done / m.etapes.length * 100)}%"></div></div>
-                    <p class="report-meta">${done}/${m.etapes.length} étapes terminées${s.final ? ' · 🏆 jeu de rôle final joué' : ''}</p>
+                    <p class="report-meta">${done}/${m.etapes.length} étapes terminées${s.finalResult && s.finalResult.passed ? ' · 🏆 module réussi' : (s.final ? ' · examen final tenté' : '')}</p>
                 </div>
                 <button class="modrp-step${nPerso ? ' done' : ''}" onclick="modRpShowPortrait()">
                     <span class="modrp-num">🪪</span><span><b>Mon portrait</b><br><small>${nPerso ? nPerso + ' phrases sur toi, prêtes à apprendre' : 'Commence ici : dis qui tu es, l\'app en fait tes phrases en néerlandais'}</small></span>
@@ -9279,8 +9282,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                         <span><b>${rpEscapeHtml(e.titre)}</b><br><small>${st.best !== undefined ? `Exercices : meilleur score ${st.best}/${total}` : `${total} exercices`} · ${st.played ? '🎭 joué' : '🎭 jeu de rôle à faire'}</small></span>
                     </button>`;
                 }).join('')}
-                <button class="modrp-step final${s.final ? ' done' : ''}" onclick="modRpPlay('${id}', 'final')">
-                    <span class="modrp-num">🏆</span><span><b>${rpEscapeHtml(m.final.titre)}</b><br><small>${rpEscapeHtml(m.final.consigne)}</small></span>
+                <button class="modrp-step final${s.finalResult && s.finalResult.passed ? ' done' : ''}" onclick="modRpPlay('${id}', 'final')">
+                    <span class="modrp-num">🏆</span><span><b>${rpEscapeHtml(m.final.titre)} · examen du module</b><br><small>${s.finalResult && s.finalResult.passed ? '✅ Réussi — tu peux le rejouer quand tu veux' : rpEscapeHtml(m.final.consigne)}</small></span>
                 </button>
                 <button class="btn btn-gray" style="margin-top:12px;" onclick="rpPrepOpen('mod:${id}', '${rpEscapeHtml(m.titre).replace(/'/g, "\\'")} — tout le module', { type: 'mod', id: '${id}', etape: 'final' })">📚 Tout le vocabulaire du module (réviser, conjuguer, écouter)</button>`;
         }
@@ -9505,10 +9508,107 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             banner.style.display = '';
             banner.innerHTML = `
                 <div class="rp-job-banner">
-                    <div class="rp-iv-label" style="margin-top:0;">${rpEscapeHtml(m.titre)} · ${rpEscapeHtml(jeu.titre)}</div>
+                    <div class="rp-iv-label" style="margin-top:0;">${rpEscapeHtml(m.titre)} · ${rpEscapeHtml(jeu.titre)}${isFinal ? ' · 🏆 examen du module' : ''}</div>
                     <div>🎯 ${rpEscapeHtml(jeu.consigne)}</div>
+                    ${isFinal ? '<div class="report-meta">Quand tu as tout dit (ou si ton interlocuteur ne relance plus), clique sur « 🏁 J\'ai fini » : tu auras ton bilan et le verdict du module.</div>' : ''}
                     ${perso.length ? `<details><summary>🗣️ Mes phrases (${perso.length})</summary><ul class="rp-case-figures">${perso.map(s => `<li>${rpEscapeHtml(s.nl)} <small>— ${rpEscapeHtml(s.fr)}</small></li>`).join('')}</ul></details>` : ''}
                 </div>`;
+            const nav = document.getElementById('rp-day-nav');
+            nav.style.display = 'block';
+            nav.innerHTML = isFinal
+                ? `<button class="btn btn-gray" id="modrp-finish-btn" style="margin:0;" onclick="modRpEvaluateFinal('${id}')">🏁 J'ai fini : évaluer ma présentation</button>`
+                : `<button class="btn btn-gray" style="margin:0;" onclick="showModuleRp('${id}'); modRpShowEtape('${etapeId}')">✅ Terminer et revenir à l'étape</button>`;
+        }
+
+        // ----- Examen : jeu de rôle final → bilan et verdict du module -----
+        // Deux parties : une liste de contrôle calculée par l'app (les sujets du module abordés
+        // dans les répliques de l'apprenant), puis l'avis d'un « examinateur » Gemini (appel séparé,
+        // jamais mêlé au prompt du personnage). Verdict : sujets abordés ≥ 75 % ET note de
+        // communication ≥ 6/10 (sans Gemini disponible, la liste de contrôle seule décide).
+        const MODRP_TOPICS = [
+            { key: 'naam', etape: 'identite', label: 'ton prénom', test: (t, p) => (p.naam && t.includes(normalize(p.naam))) || /\b(ik heet|mijn naam)\b/.test(t) },
+            { key: 'leeftijd', etape: 'identite', label: 'ton âge', test: (t, p) => (p.leeftijd && new RegExp('\\b' + p.leeftijd + '\\b').test(t)) || /\bjaar\b/.test(t) },
+            { key: 'land', etape: 'identite', label: "d'où tu viens", test: t => /\b(kom uit|afkomstig|belgisch|frans|marokkaans|nationaliteit)\b/.test(t) },
+            { key: 'stad', etape: 'identite', label: 'où tu habites', test: (t, p) => (p.stad && t.includes(normalize(p.stad))) || /\bwoon\b/.test(t) },
+            { key: 'famille', etape: 'famille', label: 'ta famille', test: t => /\b(broer|broers|zus|zussen|kind|kinderen|getrouwd|alleenstaand|partner|ouders|familie|vrouw|man)\b/.test(t) },
+            { key: 'travail', etape: 'travail', label: 'ton travail ou tes études', test: t => /\b(werk|werkzoekend|student|studeer|studeren|job|bedrijf|beroep|zoek werk)\b/.test(t) },
+            { key: 'talen', etape: 'loisirs', label: 'les langues que tu parles', test: t => /\b(spreek|talen|frans|engels|nederlands|arabisch)\b/.test(t) },
+            { key: 'hobbies', etape: 'loisirs', label: 'tes loisirs', test: t => /\b(graag|hobby|hobby's|vrije tijd|sport|sporten)\b/.test(t) }
+        ];
+
+        async function modRpEvaluateFinal(id) {
+            const m = modRpData[id];
+            if (!m) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            const p = modRpState(id).portrait;
+            const userLines = rpConversationHistory.slice(1).filter(x => x.role === 'user').map(x => x.parts[0].text);
+            const text = normalize(userLines.join(' '));
+            const checks = MODRP_TOPICS.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));
+            const covered = checks.filter(c => c.ok).length;
+            const coverageOk = covered >= Math.ceil(0.75 * checks.length);
+            rpJobHideNav();
+            document.getElementById('rp-step-chat').style.display = 'none';
+            document.getElementById('rp-step-debrief').style.display = 'flex';
+            rpFillDebriefWords();
+            const box = document.getElementById('rp-debrief-content');
+            const checklist = `
+                <div class="rp-iv-label">📋 Les sujets abordés (${covered}/${checks.length})</div>
+                ${checks.map(c => `<div class="modrp-check ${c.ok ? 'ok' : 'ko'}">${c.ok ? '✓' : '✗'} ${rpEscapeHtml(c.label)}</div>`).join('')}`;
+            const render = (judge) => {
+                const score = judge && typeof judge.note === 'number' ? judge.note : null;
+                const passed = coverageOk && (score === null || score >= 6);
+                const st = modRpState(id);
+                st.finalResult = { passed: passed || !!(st.finalResult && st.finalResult.passed), lastScore: score, lastCovered: covered, at: Date.now() };
+                save();
+                const missing = checks.filter(c => !c.ok);
+                const etapesToReview = [...new Set(missing.map(c => c.etape))].map(eid => m.etapes.find(e => e.id === eid)).filter(Boolean);
+                const arr = x => Array.isArray(x) ? x : [];
+                box.innerHTML = `
+                    <div class="conj-card" style="text-align:left;">
+                        <div class="conj-verb-title">${passed ? '✅ Module réussi !' : '🔁 Presque : encore un essai'}</div>
+                        <p class="report-meta">${passed ? 'Tu sais te présenter en néerlandais. 🏆 Le module est validé.' : 'Pour valider le module : parler d\'au moins ' + Math.ceil(0.75 * checks.length) + ' sujets sur ' + checks.length + (score !== null ? ' et obtenir au moins 6/10 en communication.' : '.')}</p>
+                        ${checklist}
+                        ${judge ? `
+                            <div class="rp-iv-label">🗣️ Communication : ${score !== null ? score + '/10' : '—'}</div>
+                            ${judge.resume ? `<p>${rpEscapeHtml(judge.resume)}</p>` : ''}
+                            ${arr(judge.points_forts).length ? `<div class="rp-iv-label">👍 Points forts</div><ul>${arr(judge.points_forts).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
+                            ${arr(judge.corrections).length ? `<div class="rp-iv-label">✍️ À corriger</div>${arr(judge.corrections).map(c => `
+                                <div class="rp-debrief-item"><div class="rp-debrief-sub">« ${rpEscapeHtml(c.phrase || '')} »</div>
+                                <div><b>${rpEscapeHtml(c.correction || '')}</b> ${c.correction ? speakBtnHtml(c.correction) : ''}</div>
+                                <div class="rp-debrief-sub">${rpEscapeHtml(c.explication || '')}</div></div>`).join('')}` : ''}
+                            ${judge.conseil ? `<div class="rp-iv-label">💡 Conseil</div><p>${rpEscapeHtml(judge.conseil)}</p>` : ''}`
+                            : '<p class="report-meta">Avis détaillé indisponible (Gemini) : verdict basé sur les sujets abordés.</p>'}
+                        ${!passed && missing.length ? `<div class="rp-iv-label">➡️ Suggestions</div>
+                            <p>Tu n'as pas parlé de : ${missing.map(c => rpEscapeHtml(c.label)).join(', ')}. Revois ${etapesToReview.length > 1 ? 'ces étapes' : 'cette étape'}, puis rejoue :</p>
+                            ${etapesToReview.map(e => `<button class="btn btn-gray" onclick="showModuleRp('${id}'); modRpShowEtape('${e.id}')">📖 ${rpEscapeHtml(e.titre)}</button>`).join('')}` : ''}
+                        <button class="btn btn-green" style="margin-top:12px;" onclick="modRpPlay('${id}', 'final')">🔁 Rejouer l'examen</button>
+                        <button class="btn btn-gray" onclick="showModuleRp('${id}')">← Retour au module</button>
+                    </div>`;
+            };
+            if (!userLines.length) {
+                box.innerHTML = `<div class="conj-card">${checklist}<p>Tu n'as encore rien dit : présente-toi d'abord !</p>
+                    <button class="btn btn-gray" onclick="document.getElementById('rp-step-debrief').style.display='none'; document.getElementById('rp-step-chat').style.display='flex'; document.getElementById('rp-day-nav').style.display='block';">↩ Revenir à la conversation</button></div>`;
+                document.getElementById('rp-day-nav').innerHTML = `<button class="btn btn-gray" style="margin:0;" onclick="modRpEvaluateFinal('${id}')">🏁 J'ai fini : évaluer ma présentation</button>`;
+                return;
+            }
+            box.innerHTML = `<div class="conj-card" style="text-align:left;">${checklist}<p class="report-meta">L'examinateur analyse ta présentation...</p></div>`;
+            let judge = null;
+            if (GeminiService.getKey()) {
+                try {
+                    const transcript = rpConversationHistory.slice(1).map(x => (x.role === 'user' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + x.parts[0].text).join('\n');
+                    const raw = await GeminiService.generate(
+                        'Tu es examinateur de néerlandais pour francophones débutants (niveau A1). Un apprenant a passé l\'examen oral « se présenter » : il devait parler de lui (nom, origine, âge, ville, famille, travail, langues, loisirs). Ses répliques peuvent avoir été dictées : ignore ponctuation et majuscules.\n\n' +
+                        'Interlocuteur : ' + m.final.welcome + '\n' + transcript + '\n\n' +
+                        'Évalue UNIQUEMENT les répliques de l\'APPRENANT, avec bienveillance et pour le niveau A1 : l\'important est d\'être compris, pas la perfection. Réponds UNIQUEMENT en JSON :\n' +
+                        '{"note": nombre de 0 à 10 (capacité à se présenter de façon compréhensible), "resume": "en français, 1-2 phrases", "points_forts": ["en français, 2 maximum"], ' +
+                        '"corrections": [{"phrase": "ce qu\'il a dit", "correction": "en néerlandais", "explication": "en français, courte"}], "conseil": "en français, un conseil prioritaire"}\n3 corrections maximum, les plus utiles.'
+                    );
+                    judge = rpHelpParseJson(raw);
+                    if (judge && typeof judge.note === 'string') judge.note = parseFloat(judge.note);
+                    if (judge && (typeof judge.note !== 'number' || isNaN(judge.note))) judge.note = null;
+                } catch (e) { judge = null; }
+            }
+            render(judge);
         }
 
         async function rpShowJobHome() {
