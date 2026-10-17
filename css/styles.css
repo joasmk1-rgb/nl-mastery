@@ -391,6 +391,25 @@
         .rpw-chip { background: var(--surface-2); border-radius: var(--radius-pill); padding: 3px 10px; font-size: 0.82rem; font-weight: 600; }
         .rpw-chip small { font-weight: 400; color: var(--text-secondary); }
         .rp-message.rpw-inline { display: inline; background: none; padding: 0; margin: 0; border: none; box-shadow: none; max-width: none; }
+        .modrp-entry { display: flex; gap: 12px; align-items: center; width: 100%; box-sizing: border-box; background: color-mix(in srgb, var(--primary) 12%, var(--card-bg)); border: 2px solid var(--primary); border-radius: var(--radius-lg); padding: 12px 14px; margin-bottom: var(--space-3); cursor: pointer; text-align: left; }
+        .modrp-entry small { color: var(--text-secondary); }
+        .modrp-entry-icon { font-size: 1.8rem; }
+        .modrp-head { margin-bottom: 10px; }
+        .modrp-step { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 10px 12px; margin-bottom: 8px; cursor: pointer; color: var(--text); font: inherit; }
+        .modrp-step small { color: var(--text-secondary); }
+        .modrp-step.done { border-color: var(--success, #2e9e5b); }
+        .modrp-step.final { border-style: dashed; }
+        .modrp-num { flex: 0 0 34px; height: 34px; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .modrp-step.done .modrp-num { background: color-mix(in srgb, var(--success, #2e9e5b) 25%, transparent); }
+        .modrp-form { display: flex; flex-direction: column; gap: 10px; }
+        .modrp-field { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
+        .modrp-field > span { font-weight: 600; }
+        .modrp-field input, .modrp-field select { margin: 0; padding: 9px 10px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font: inherit; }
+        .modrp-checks { display: flex; flex-wrap: wrap; gap: 6px 14px; font-weight: 400; }
+        .modrp-checks label { display: flex; gap: 4px; align-items: center; }
+        .modrp-rule p { font-size: 0.9rem; line-height: 1.5; }
+        .modrp-choices { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+        .modrp-built { min-height: 40px; padding: 8px 10px; border: 2px dashed var(--border); border-radius: var(--radius-md); margin: 8px 0; font-weight: 600; }
         .rp-scenario-row { display: flex; gap: 6px; align-items: stretch; width: 100%; max-width: 520px; }
         .rp-scenario-row .rp-scenario-btn { flex: 1; min-width: 0; }
         .rp-prep-btn { flex: 0 0 auto; background: var(--surface-2); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 0 10px; font-size: 0.75rem; font-weight: 700; color: var(--text); cursor: pointer; margin-bottom: 8px; }

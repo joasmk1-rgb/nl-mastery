@@ -12740,5 +12740,23 @@
     "freq": 3.39,
     "niveauCECR": "B1",
     "niveauCECRSource": "nt2lex"
+  },
+  {
+    "infinitief": "samenwonen",
+    "fr": "vivre ensemble / cohabiter",
+    "present": {
+      "ik": "woon samen",
+      "jij": "woont samen",
+      "hij": "woont samen",
+      "wij": "wonen samen"
+    },
+    "preteritum": "woonde samen",
+    "participePasse": "samengewoond",
+    "auxiliaire": "hebben",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 3.59,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "nt2lex"
   }
 ]

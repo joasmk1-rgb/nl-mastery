@@ -1,0 +1,1217 @@
+{
+  "_doc": "Module en format « jeu de rôle » (pilote) : une situation de vie découpée en étapes. Chaque étape : intro, vocabulaire (verbes, mots, phrases), une règle courte utile à l'étape, des exercices stockés en dur (qcm, trou, ordre, traduire, ecoute) et un mini jeu de rôle (role/welcome pour Gemini). Le portrait (questions en français) produit les phrases personnelles de l'apprenant, gardées dans state.modRp (jamais dans le dépôt). Rédigé par Claude à la demande de Joas, sans relecture préalable (⚠️ pour signaler).",
+  "id": "premier_contact",
+  "niveau": "A1",
+  "titre": "Premier contact",
+  "objectif": "À la fin du module, tu sais te présenter à quelqu'un — un collègue, un recruteur, un voisin : saluer, dire qui tu es, d'où tu viens, parler de ta famille, de ton travail et de tes loisirs.",
+  "etapes": [
+    {
+      "id": "salutations",
+      "titre": "Saluer et prendre congé",
+      "intro": "Dire bonjour selon le moment de la journée, demander comment ça va, et dire au revoir. En Flandre, on salue presque toujours en entrant quelque part.",
+      "vocab": {
+        "verbes": [
+          "gaan",
+          "zijn",
+          "groeten"
+        ],
+        "mots": [
+          {
+            "nl": "goedemorgen",
+            "fr": "bonjour (le matin)"
+          },
+          {
+            "nl": "goedemiddag",
+            "fr": "bonjour (l'après-midi)"
+          },
+          {
+            "nl": "goedenavond",
+            "fr": "bonsoir"
+          },
+          {
+            "nl": "dag",
+            "fr": "bonjour / au revoir (neutre)"
+          },
+          {
+            "nl": "hallo",
+            "fr": "salut, bonjour"
+          },
+          {
+            "nl": "tot ziens",
+            "fr": "au revoir"
+          },
+          {
+            "nl": "tot straks",
+            "fr": "à tout à l'heure"
+          },
+          {
+            "nl": "tot morgen",
+            "fr": "à demain"
+          },
+          {
+            "nl": "aangenaam",
+            "fr": "enchanté"
+          },
+          {
+            "nl": "meneer",
+            "fr": "monsieur"
+          },
+          {
+            "nl": "mevrouw",
+            "fr": "madame"
+          },
+          {
+            "nl": "goed",
+            "fr": "bien"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Hoe gaat het met jou?",
+            "fr": "Comment vas-tu ?"
+          },
+          {
+            "nl": "Hoe gaat het met u?",
+            "fr": "Comment allez-vous ?"
+          },
+          {
+            "nl": "Goed, dank je. En met jou?",
+            "fr": "Bien, merci. Et toi ?"
+          },
+          {
+            "nl": "Het gaat, dank u.",
+            "fr": "Ça va, merci."
+          },
+          {
+            "nl": "Prettige dag nog!",
+            "fr": "Bonne journée !"
+          }
+        ]
+      },
+      "regle": {
+        "titre": "Jij ou u ?",
+        "explication": "« jij » (ou « je ») = tu : entre collègues, amis, personnes de ton âge. « u » = vous de politesse : clients, inconnus plus âgés, administrations, et souvent en entretien. Avec « u », le verbe prend la même forme qu'avec « jij » : u bent, u hebt / u heeft, u werkt. Dans le doute, commence par « u » : l'autre te proposera de passer à « jij ».",
+        "exemples": [
+          {
+            "nl": "Hoe gaat het met jou?",
+            "fr": "Comment vas-tu ?"
+          },
+          {
+            "nl": "Hoe gaat het met u?",
+            "fr": "Comment allez-vous ?"
+          },
+          {
+            "nl": "Bent u meneer Peeters?",
+            "fr": "Êtes-vous monsieur Peeters ?"
+          },
+          {
+            "nl": "Je mag gerust 'jij' zeggen.",
+            "fr": "Tu peux me tutoyer."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "Il est 9 heures du matin. Tu dis :",
+          "choices": [
+            "Goedemorgen",
+            "Goedenavond",
+            "Tot morgen"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "qcm",
+          "q": "Tu quittes un collègue que tu reverras dans une heure :",
+          "choices": [
+            "Tot ziens",
+            "Tot straks",
+            "Aangenaam"
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "Au guichet de la commune, tu demandes « Comment allez-vous ? » :",
+          "choices": [
+            "Hoe gaat het met jou?",
+            "Hoe gaat het met u?",
+            "Hoe heet je?"
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Hoe ___ het?",
+          "answer": "gaat",
+          "fr": "Comment ça va ?"
+        },
+        {
+          "type": "trou",
+          "phrase": "Goed, ___ je. En met jou?",
+          "answer": "dank",
+          "fr": "Bien, merci. Et toi ?"
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "gaat",
+            "met",
+            "het",
+            "Hoe",
+            "u?"
+          ],
+          "answer": "Hoe gaat het met u?",
+          "fr": "Comment allez-vous ?"
+        },
+        {
+          "type": "traduire",
+          "fr": "Enchanté.",
+          "answer": "Aangenaam."
+        },
+        {
+          "type": "traduire",
+          "fr": "À demain !",
+          "answer": "Tot morgen!"
+        },
+        {
+          "type": "ecoute",
+          "nl": "Prettige dag nog!",
+          "fr": "Bonne journée !"
+        }
+      ],
+      "jeu": {
+        "titre": "Le matin, à l'arrivée au travail",
+        "consigne": "Salue ta collègue, demande-lui comment elle va, réponds à ses questions, puis prends congé.",
+        "role": "Tu es Lien, une collègue sympathique. C'est le matin, l'apprenant arrive au bureau. Salue-le, demande comment il va, parle une ou deux phrases de la météo ou du week-end, puis dis que tu dois aller en réunion et prends congé. Reste à des phrases très simples (niveau A1).",
+        "welcome": "Goedemorgen! Hoe gaat het met jou?"
+      }
+    },
+    {
+      "id": "identite",
+      "titre": "Qui je suis : nom, origine, âge, ville",
+      "intro": "Dire comment tu t'appelles, d'où tu viens, ta nationalité, ton âge et où tu habites — et poser les mêmes questions à l'autre.",
+      "portrait": [
+        "naam",
+        "leeftijd",
+        "land",
+        "stad"
+      ],
+      "vocab": {
+        "verbes": [
+          "heten",
+          "zijn",
+          "komen",
+          "wonen"
+        ],
+        "mots": [
+          {
+            "nl": "de naam",
+            "fr": "le nom"
+          },
+          {
+            "nl": "de voornaam",
+            "fr": "le prénom"
+          },
+          {
+            "nl": "de achternaam",
+            "fr": "le nom de famille"
+          },
+          {
+            "nl": "het land",
+            "fr": "le pays"
+          },
+          {
+            "nl": "de nationaliteit",
+            "fr": "la nationalité"
+          },
+          {
+            "nl": "de stad",
+            "fr": "la ville"
+          },
+          {
+            "nl": "de leeftijd",
+            "fr": "l'âge"
+          },
+          {
+            "nl": "het jaar",
+            "fr": "l'an, l'année"
+          },
+          {
+            "nl": "oud",
+            "fr": "âgé (vieux)"
+          },
+          {
+            "nl": "Belgisch",
+            "fr": "belge"
+          },
+          {
+            "nl": "Frans",
+            "fr": "français"
+          },
+          {
+            "nl": "België",
+            "fr": "la Belgique"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Hoe heet je?",
+            "fr": "Comment t'appelles-tu ?"
+          },
+          {
+            "nl": "Waar kom je vandaan?",
+            "fr": "D'où viens-tu ?"
+          },
+          {
+            "nl": "Hoe oud ben je?",
+            "fr": "Quel âge as-tu ?"
+          },
+          {
+            "nl": "Waar woon je?",
+            "fr": "Où habites-tu ?"
+          }
+        ]
+      },
+      "regle": {
+        "titre": "zijn (être) et quatre verbes pour se présenter",
+        "explication": "zijn : ik ben, jij bent, hij/zij is, wij zijn. On dit l'âge avec « zijn », pas « avoir » : « Ik ben 31 jaar » (j'ai 31 ans). « Ik heet ... » = je m'appelle. « Ik kom uit ... » = je viens de (pays). « Ik woon in ... » = j'habite à (ville). Dans une question, le verbe passe devant : « Jij woont in Gent » → « Woon jij in Gent? » (et le -t tombe devant « jij »).",
+        "exemples": [
+          {
+            "nl": "Ik ben 31 jaar.",
+            "fr": "J'ai 31 ans."
+          },
+          {
+            "nl": "Ik heet Sami.",
+            "fr": "Je m'appelle Sami."
+          },
+          {
+            "nl": "Ik kom uit België.",
+            "fr": "Je viens de Belgique."
+          },
+          {
+            "nl": "Woon jij in Gent?",
+            "fr": "Tu habites à Gand ?"
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« J'ai 25 ans » se dit :",
+          "choices": [
+            "Ik heb 25 jaar.",
+            "Ik ben 25 jaar.",
+            "Ik heet 25 jaar."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Je viens du Maroc » :",
+          "choices": [
+            "Ik woon in Marokko.",
+            "Ik kom uit Marokko.",
+            "Ik ben in Marokko."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik ___ in Brussel.",
+          "answer": "woon",
+          "fr": "J'habite à Bruxelles."
+        },
+        {
+          "type": "trou",
+          "phrase": "Hoe oud ___ je?",
+          "answer": "ben",
+          "fr": "Quel âge as-tu ?"
+        },
+        {
+          "type": "trou",
+          "phrase": "Zij ___ Belgisch.",
+          "answer": "is",
+          "fr": "Elle est belge."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "je",
+            "vandaan?",
+            "Waar",
+            "kom"
+          ],
+          "answer": "Waar kom je vandaan?",
+          "fr": "D'où viens-tu ?"
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "in",
+            "jij",
+            "Woon",
+            "Gent?"
+          ],
+          "answer": "Woon jij in Gent?",
+          "fr": "Tu habites à Gand ?"
+        },
+        {
+          "type": "traduire",
+          "fr": "Comment t'appelles-tu ?",
+          "answer": "Hoe heet je?/Hoe heet jij?"
+        },
+        {
+          "type": "traduire",
+          "fr": "J'ai 30 ans.",
+          "answer": "Ik ben 30 jaar./Ik ben 30 jaar oud."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Waar woon je?",
+          "fr": "Où habites-tu ?"
+        }
+      ],
+      "jeu": {
+        "titre": "Faire connaissance avec un nouveau collègue",
+        "consigne": "Présente-toi (nom, origine, âge, ville) et pose les mêmes questions à ton nouveau collègue.",
+        "role": "Tu es Tim, un nouveau collègue de 28 ans qui vient de Malines et habite à Anvers. Tu fais connaissance avec l'apprenant : demande son nom, d'où il vient, son âge et où il habite ; réponds à ses questions sur toi. Phrases très simples (A1), une question à la fois.",
+        "welcome": "Hallo! Ik ben Tim, ik ben nieuw hier. En jij, hoe heet jij?"
+      }
+    },
+    {
+      "id": "famille",
+      "titre": "Ma famille",
+      "intro": "Dire si tu es marié ou célibataire, si tu as des enfants, des frères et sœurs — et poser la question à l'autre.",
+      "portrait": [
+        "relatie",
+        "kinderen",
+        "broers",
+        "zussen"
+      ],
+      "vocab": {
+        "verbes": [
+          "hebben",
+          "zijn",
+          "samenwonen",
+          "trouwen"
+        ],
+        "mots": [
+          {
+            "nl": "de familie",
+            "fr": "la famille"
+          },
+          {
+            "nl": "de ouders",
+            "fr": "les parents"
+          },
+          {
+            "nl": "de vader",
+            "fr": "le père"
+          },
+          {
+            "nl": "de moeder",
+            "fr": "la mère"
+          },
+          {
+            "nl": "de broer",
+            "fr": "le frère"
+          },
+          {
+            "nl": "de zus",
+            "fr": "la sœur"
+          },
+          {
+            "nl": "het kind",
+            "fr": "l'enfant"
+          },
+          {
+            "nl": "de kinderen",
+            "fr": "les enfants"
+          },
+          {
+            "nl": "de zoon",
+            "fr": "le fils"
+          },
+          {
+            "nl": "de dochter",
+            "fr": "la fille"
+          },
+          {
+            "nl": "de partner",
+            "fr": "le/la partenaire"
+          },
+          {
+            "nl": "getrouwd",
+            "fr": "marié"
+          },
+          {
+            "nl": "alleenstaand",
+            "fr": "célibataire"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ben je getrouwd?",
+            "fr": "Es-tu marié ?"
+          },
+          {
+            "nl": "Heb je kinderen?",
+            "fr": "As-tu des enfants ?"
+          },
+          {
+            "nl": "Heb je broers of zussen?",
+            "fr": "As-tu des frères et sœurs ?"
+          },
+          {
+            "nl": "Ik heb geen kinderen.",
+            "fr": "Je n'ai pas d'enfants."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "hebben (avoir), « geen » et le pluriel",
+        "explication": "hebben : ik heb, jij hebt, hij/zij heeft, wij hebben. Pour dire « pas de », on utilise « geen » devant le nom : « Ik heb geen kinderen ». Pluriel : la plupart des noms prennent -en (zus → zussen) ou -s (broer → broers) ; quelques-uns sont irréguliers (kind → kinderen). Retiens : een broer, twee broers · een zus, twee zussen · een kind, twee kinderen.",
+        "exemples": [
+          {
+            "nl": "Ik heb een broer en twee zussen.",
+            "fr": "J'ai un frère et deux sœurs."
+          },
+          {
+            "nl": "Zij heeft drie kinderen.",
+            "fr": "Elle a trois enfants."
+          },
+          {
+            "nl": "Ik heb geen kinderen.",
+            "fr": "Je n'ai pas d'enfants."
+          },
+          {
+            "nl": "Heb jij broers of zussen?",
+            "fr": "As-tu des frères et sœurs ?"
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Je n'ai pas d'enfants » :",
+          "choices": [
+            "Ik heb niet kinderen.",
+            "Ik heb geen kinderen.",
+            "Ik ben geen kinderen."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "Le pluriel de « kind » :",
+          "choices": [
+            "kinds",
+            "kinden",
+            "kinderen"
+          ],
+          "answer": 2
+        },
+        {
+          "type": "trou",
+          "phrase": "Mijn zus ___ twee kinderen.",
+          "answer": "heeft",
+          "fr": "Ma sœur a deux enfants."
+        },
+        {
+          "type": "trou",
+          "phrase": "___ je getrouwd?",
+          "answer": "Ben",
+          "fr": "Es-tu marié ?"
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik heb twee ___ (sœurs).",
+          "answer": "zussen",
+          "fr": "J'ai deux sœurs."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "of",
+            "broers",
+            "je",
+            "Heb",
+            "zussen?"
+          ],
+          "answer": "Heb je broers of zussen?",
+          "fr": "As-tu des frères et sœurs ?"
+        },
+        {
+          "type": "traduire",
+          "fr": "Mes parents habitent à Liège.",
+          "answer": "Mijn ouders wonen in Luik."
+        },
+        {
+          "type": "traduire",
+          "fr": "J'ai un frère.",
+          "answer": "Ik heb een broer."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Heb je kinderen?",
+          "fr": "As-tu des enfants ?"
+        }
+      ],
+      "jeu": {
+        "titre": "Parler de sa famille à la pause",
+        "consigne": "Ta collègue te montre une photo de ses enfants. Parle de ta famille et pose-lui des questions sur la sienne.",
+        "role": "Tu es Ann, une collègue de 40 ans, mariée, avec deux enfants (un fils de 10 ans et une fille de 7 ans). À la pause, tu montres une photo de tes enfants et tu demandes à l'apprenant s'il a une famille, des enfants, des frères et sœurs. Réagis gentiment à ses réponses. Phrases très simples (A1), une question à la fois.",
+        "welcome": "Kijk, dit zijn mijn kinderen: mijn zoon en mijn dochter. Heb jij ook kinderen?"
+      }
+    },
+    {
+      "id": "travail",
+      "titre": "Mon travail ou mes études",
+      "intro": "Dire ce que tu fais dans la vie : ton métier, où tu travailles, tes études, ou que tu cherches du travail.",
+      "portrait": [
+        "situatie",
+        "beroep"
+      ],
+      "vocab": {
+        "verbes": [
+          "werken",
+          "studeren",
+          "zoeken",
+          "doen",
+          "leren"
+        ],
+        "mots": [
+          {
+            "nl": "het werk",
+            "fr": "le travail"
+          },
+          {
+            "nl": "de job",
+            "fr": "l'emploi"
+          },
+          {
+            "nl": "het bedrijf",
+            "fr": "l'entreprise"
+          },
+          {
+            "nl": "de collega",
+            "fr": "le collègue"
+          },
+          {
+            "nl": "het kantoor",
+            "fr": "le bureau"
+          },
+          {
+            "nl": "het magazijn",
+            "fr": "l'entrepôt"
+          },
+          {
+            "nl": "de student",
+            "fr": "l'étudiant"
+          },
+          {
+            "nl": "de opleiding",
+            "fr": "la formation"
+          },
+          {
+            "nl": "werkzoekend",
+            "fr": "demandeur d'emploi"
+          },
+          {
+            "nl": "de bediende",
+            "fr": "l'employé"
+          },
+          {
+            "nl": "de magazijnier",
+            "fr": "le magasinier"
+          },
+          {
+            "nl": "voltijds",
+            "fr": "à temps plein"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Wat doe je in het leven?",
+            "fr": "Que fais-tu dans la vie ?"
+          },
+          {
+            "nl": "Waar werk je?",
+            "fr": "Où travailles-tu ?"
+          },
+          {
+            "nl": "Ik werk als magazijnier.",
+            "fr": "Je travaille comme magasinier."
+          },
+          {
+            "nl": "Ik zoek werk in de logistiek.",
+            "fr": "Je cherche du travail dans la logistique."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "« Ik werk als ... » et « Ik ben ... »",
+        "explication": "Pour le métier : « Ik werk als + métier », sans article (Ik werk als chauffeur). Ou « Ik ben + métier », aussi sans article (Ik ben student). Pour l'entreprise : « Ik werk bij + entreprise » (Ik werk bij Logistiko). Le verbe régulier au présent : ik werk, jij werkt, hij werkt, wij werken — le radical, puis -t pour jij/hij, puis l'infinitif au pluriel.",
+        "exemples": [
+          {
+            "nl": "Ik werk als bediende bij een transportbedrijf.",
+            "fr": "Je travaille comme employé dans une entreprise de transport."
+          },
+          {
+            "nl": "Ik ben student.",
+            "fr": "Je suis étudiant."
+          },
+          {
+            "nl": "Ik ben werkzoekend.",
+            "fr": "Je suis demandeur d'emploi."
+          },
+          {
+            "nl": "Wat doe jij?",
+            "fr": "Et toi, que fais-tu ?"
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« Je suis étudiant » :",
+          "choices": [
+            "Ik ben een student.",
+            "Ik ben student.",
+            "Ik werk student."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Je travaille chez Transvio » :",
+          "choices": [
+            "Ik werk bij Transvio.",
+            "Ik werk als Transvio.",
+            "Ik werk in Transvio."
+          ],
+          "answer": 0
+        },
+        {
+          "type": "trou",
+          "phrase": "Hij ___ als chauffeur.",
+          "answer": "werkt",
+          "fr": "Il travaille comme chauffeur."
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik ___ werk in de logistiek.",
+          "answer": "zoek",
+          "fr": "Je cherche du travail dans la logistique."
+        },
+        {
+          "type": "trou",
+          "phrase": "Wat ___ je in het leven?",
+          "answer": "doe",
+          "fr": "Que fais-tu dans la vie ?"
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "werk",
+            "je?",
+            "Waar"
+          ],
+          "answer": "Waar werk je?",
+          "fr": "Où travailles-tu ?"
+        },
+        {
+          "type": "traduire",
+          "fr": "Je travaille dans un entrepôt.",
+          "answer": "Ik werk in een magazijn."
+        },
+        {
+          "type": "traduire",
+          "fr": "Je suis demandeur d'emploi.",
+          "answer": "Ik ben werkzoekend."
+        },
+        {
+          "type": "ecoute",
+          "nl": "Ik werk voltijds op kantoor.",
+          "fr": "Je travaille à temps plein au bureau."
+        }
+      ],
+      "jeu": {
+        "titre": "Discussion avec un voisin",
+        "consigne": "Ton voisin te demande ce que tu fais dans la vie. Explique ton travail, tes études ou ta recherche d'emploi, et demande-lui ce qu'il fait.",
+        "role": "Tu es meneer Janssens, un voisin retraité curieux et gentil, ancien chauffeur de bus. Demande à l'apprenant ce qu'il fait dans la vie, où il travaille ou ce qu'il étudie, s'il aime son travail ; réponds à ses questions sur ton ancien métier. Phrases très simples (A1), une question à la fois.",
+        "welcome": "Dag buurman! Ik zie je elke ochtend vertrekken. Wat doe jij eigenlijk in het leven?"
+      }
+    },
+    {
+      "id": "loisirs",
+      "titre": "Mes langues et mes loisirs",
+      "intro": "Dire quelles langues tu parles, ce que tu aimes faire pendant ton temps libre, et le demander à l'autre.",
+      "portrait": [
+        "talen",
+        "hobbies"
+      ],
+      "vocab": {
+        "verbes": [
+          "spreken",
+          "lezen",
+          "sporten",
+          "koken",
+          "fietsen",
+          "wandelen",
+          "luisteren",
+          "kijken",
+          "reizen"
+        ],
+        "mots": [
+          {
+            "nl": "de hobby",
+            "fr": "le loisir"
+          },
+          {
+            "nl": "de vrije tijd",
+            "fr": "le temps libre"
+          },
+          {
+            "nl": "de sport",
+            "fr": "le sport"
+          },
+          {
+            "nl": "de muziek",
+            "fr": "la musique"
+          },
+          {
+            "nl": "het boek",
+            "fr": "le livre"
+          },
+          {
+            "nl": "de film",
+            "fr": "le film"
+          },
+          {
+            "nl": "het weekend",
+            "fr": "le week-end"
+          },
+          {
+            "nl": "de taal",
+            "fr": "la langue"
+          },
+          {
+            "nl": "graag",
+            "fr": "volontiers (aimer faire)"
+          },
+          {
+            "nl": "een beetje",
+            "fr": "un peu"
+          },
+          {
+            "nl": "vloeiend",
+            "fr": "couramment"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Wat doe je graag in je vrije tijd?",
+            "fr": "Qu'aimes-tu faire pendant ton temps libre ?"
+          },
+          {
+            "nl": "Welke talen spreek je?",
+            "fr": "Quelles langues parles-tu ?"
+          },
+          {
+            "nl": "Ik spreek een beetje Nederlands.",
+            "fr": "Je parle un peu néerlandais."
+          },
+          {
+            "nl": "Ik lees graag.",
+            "fr": "J'aime lire."
+          }
+        ]
+      },
+      "regle": {
+        "titre": "« graag » = aimer faire",
+        "explication": "Pour dire qu'on aime faire quelque chose, on conjugue le verbe et on ajoute « graag » juste après : « Ik lees graag » (j'aime lire), « Ik fiets graag » (j'aime faire du vélo). Contraire : « niet graag » (Ik kook niet graag). Avec « luisteren » et « kijken », gardez la préposition : « Ik luister graag naar muziek », « Ik kijk graag naar films ». Si une autre partie de la phrase passe en tête, le verbe reste en 2e position : « In het weekend fiets ik graag ».",
+        "exemples": [
+          {
+            "nl": "Ik sport graag.",
+            "fr": "J'aime faire du sport."
+          },
+          {
+            "nl": "Ik kook niet graag.",
+            "fr": "Je n'aime pas cuisiner."
+          },
+          {
+            "nl": "Ik luister graag naar muziek.",
+            "fr": "J'aime écouter de la musique."
+          },
+          {
+            "nl": "In het weekend fiets ik graag.",
+            "fr": "Le week-end, j'aime faire du vélo."
+          }
+        ]
+      },
+      "exercices": [
+        {
+          "type": "qcm",
+          "q": "« J'aime lire » :",
+          "choices": [
+            "Ik graag lees.",
+            "Ik lees graag.",
+            "Ik ben graag lezen."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "qcm",
+          "q": "« Le week-end, je fais du vélo » :",
+          "choices": [
+            "In het weekend ik fiets.",
+            "In het weekend fiets ik.",
+            "Ik in het weekend fiets."
+          ],
+          "answer": 1
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik luister graag ___ muziek.",
+          "answer": "naar",
+          "fr": "J'aime écouter de la musique."
+        },
+        {
+          "type": "trou",
+          "phrase": "Welke talen ___ je?",
+          "answer": "spreek",
+          "fr": "Quelles langues parles-tu ?"
+        },
+        {
+          "type": "trou",
+          "phrase": "Ik kook ___ graag.",
+          "answer": "niet",
+          "fr": "Je n'aime pas cuisiner."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "graag",
+            "Ik",
+            "wandel"
+          ],
+          "answer": "Ik wandel graag.",
+          "fr": "J'aime me promener."
+        },
+        {
+          "type": "ordre",
+          "mots": [
+            "ik",
+            "In",
+            "weekend",
+            "het",
+            "sport"
+          ],
+          "answer": "In het weekend sport ik.",
+          "fr": "Le week-end, je fais du sport."
+        },
+        {
+          "type": "traduire",
+          "fr": "Je parle français et anglais.",
+          "answer": "Ik spreek Frans en Engels."
+        },
+        {
+          "type": "traduire",
+          "fr": "Qu'aimes-tu faire pendant ton temps libre ?",
+          "answer": "Wat doe je graag in je vrije tijd?"
+        },
+        {
+          "type": "ecoute",
+          "nl": "Ik kijk graag naar films.",
+          "fr": "J'aime regarder des films."
+        }
+      ],
+      "jeu": {
+        "titre": "Un vendredi après le travail",
+        "consigne": "Un collègue te demande tes projets pour le week-end. Parle de tes langues et de tes loisirs, et demande-lui les siens.",
+        "role": "Tu es Jonas, un collègue de 30 ans qui adore le vélo et la cuisine. Vendredi après le travail, tu demandes à l'apprenant ce qu'il fait le week-end, ce qu'il aime faire pendant son temps libre et quelles langues il parle (tu es curieux car il est francophone). Réponds à ses questions. Phrases très simples (A1), une question à la fois.",
+        "welcome": "Eindelijk weekend! Wat ga jij doen? Wat doe je graag in je vrije tijd?"
+      }
+    }
+  ],
+  "final": {
+    "titre": "Jeu de rôle final : se présenter en entier",
+    "consigne": "Lors d'une petite réception de bienvenue, la responsable de l'équipe te demande de te présenter. Parle de toi : nom, origine, âge, ville, famille, travail, langues, loisirs.",
+    "role": "Tu es Katrien, responsable d'équipe, lors d'un petit accueil des nouveaux collaborateurs. Demande à l'apprenant de se présenter, puis pose-lui des questions de relance sur ce qu'il n'a pas dit (origine, âge, ville, famille, travail, langues, loisirs), une à la fois. Réagis à ses réponses avec intérêt, en néerlandais simple (A1-A2). Termine en lui souhaitant la bienvenue dans l'équipe.",
+    "welcome": "Welkom in ons team! Wil je je even voorstellen? Vertel eens iets over jezelf."
+  },
+  "portrait": {
+    "intro": "Réponds en français à quelques questions sur toi : l'app en fait tes propres phrases en néerlandais, que tu apprendras et utiliseras dans les jeux de rôle. Tout est facultatif et reste dans ta progression (jamais public).",
+    "pays": [
+      {
+        "fr": "Belgique",
+        "land": "België",
+        "adj": "Belgisch",
+        "defr": "de Belgique",
+        "natfr": "belge"
+      },
+      {
+        "fr": "France",
+        "land": "Frankrijk",
+        "adj": "Frans",
+        "defr": "de France",
+        "natfr": "français"
+      },
+      {
+        "fr": "Pays-Bas",
+        "land": "Nederland",
+        "adj": "Nederlands",
+        "defr": "des Pays-Bas",
+        "natfr": "néerlandais"
+      },
+      {
+        "fr": "Maroc",
+        "land": "Marokko",
+        "adj": "Marokkaans",
+        "defr": "du Maroc",
+        "natfr": "marocain"
+      },
+      {
+        "fr": "Algérie",
+        "land": "Algerije",
+        "adj": "Algerijns",
+        "defr": "d'Algérie",
+        "natfr": "algérien"
+      },
+      {
+        "fr": "Tunisie",
+        "land": "Tunesië",
+        "adj": "Tunesisch",
+        "defr": "de Tunisie",
+        "natfr": "tunisien"
+      },
+      {
+        "fr": "Congo (RDC)",
+        "land": "Congo",
+        "adj": "Congolees",
+        "defr": "du Congo",
+        "natfr": "congolais"
+      },
+      {
+        "fr": "Cameroun",
+        "land": "Kameroen",
+        "adj": "Kameroens",
+        "defr": "du Cameroun",
+        "natfr": "camerounais"
+      },
+      {
+        "fr": "Sénégal",
+        "land": "Senegal",
+        "adj": "Senegalees",
+        "defr": "du Sénégal",
+        "natfr": "sénégalais"
+      },
+      {
+        "fr": "Turquie",
+        "land": "Turkije",
+        "adj": "Turks",
+        "defr": "de Turquie",
+        "natfr": "turc"
+      },
+      {
+        "fr": "Pologne",
+        "land": "Polen",
+        "adj": "Pools",
+        "defr": "de Pologne",
+        "natfr": "polonais"
+      },
+      {
+        "fr": "Roumanie",
+        "land": "Roemenië",
+        "adj": "Roemeens",
+        "defr": "de Roumanie",
+        "natfr": "roumain"
+      },
+      {
+        "fr": "Espagne",
+        "land": "Spanje",
+        "adj": "Spaans",
+        "defr": "d'Espagne",
+        "natfr": "espagnol"
+      },
+      {
+        "fr": "Italie",
+        "land": "Italië",
+        "adj": "Italiaans",
+        "defr": "d'Italie",
+        "natfr": "italien"
+      },
+      {
+        "fr": "Portugal",
+        "land": "Portugal",
+        "adj": "Portugees",
+        "defr": "du Portugal",
+        "natfr": "portugais"
+      },
+      {
+        "fr": "Allemagne",
+        "land": "Duitsland",
+        "adj": "Duits",
+        "defr": "d'Allemagne",
+        "natfr": "allemand"
+      }
+    ],
+    "metiers": [
+      {
+        "fr": "magasinier",
+        "nl": "magazijnier"
+      },
+      {
+        "fr": "employé administratif",
+        "nl": "administratief bediende"
+      },
+      {
+        "fr": "employé logistique",
+        "nl": "logistiek medewerker"
+      },
+      {
+        "fr": "planificateur",
+        "nl": "planner"
+      },
+      {
+        "fr": "chauffeur",
+        "nl": "chauffeur"
+      },
+      {
+        "fr": "vendeur",
+        "nl": "verkoper"
+      },
+      {
+        "fr": "caissier",
+        "nl": "kassier"
+      },
+      {
+        "fr": "ouvrier de production",
+        "nl": "productiemedewerker"
+      },
+      {
+        "fr": "comptable",
+        "nl": "boekhouder"
+      },
+      {
+        "fr": "informaticien",
+        "nl": "informaticus"
+      },
+      {
+        "fr": "infirmier",
+        "nl": "verpleegkundige"
+      },
+      {
+        "fr": "enseignant",
+        "nl": "leerkracht"
+      },
+      {
+        "fr": "cuisinier",
+        "nl": "kok"
+      },
+      {
+        "fr": "agent d'entretien",
+        "nl": "schoonmaker"
+      },
+      {
+        "fr": "consultant",
+        "nl": "consultant"
+      }
+    ],
+    "langues": [
+      {
+        "fr": "français",
+        "nl": "Frans"
+      },
+      {
+        "fr": "anglais",
+        "nl": "Engels"
+      },
+      {
+        "fr": "arabe",
+        "nl": "Arabisch"
+      },
+      {
+        "fr": "espagnol",
+        "nl": "Spaans"
+      },
+      {
+        "fr": "allemand",
+        "nl": "Duits"
+      },
+      {
+        "fr": "italien",
+        "nl": "Italiaans"
+      },
+      {
+        "fr": "portugais",
+        "nl": "Portugees"
+      },
+      {
+        "fr": "turc",
+        "nl": "Turks"
+      },
+      {
+        "fr": "polonais",
+        "nl": "Pools"
+      },
+      {
+        "fr": "lingala",
+        "nl": "Lingala"
+      }
+    ],
+    "loisirs": [
+      {
+        "fr": "faire du sport",
+        "nl": "Ik sport graag."
+      },
+      {
+        "fr": "lire",
+        "nl": "Ik lees graag."
+      },
+      {
+        "fr": "cuisiner",
+        "nl": "Ik kook graag."
+      },
+      {
+        "fr": "jouer au foot",
+        "nl": "Ik voetbal graag."
+      },
+      {
+        "fr": "écouter de la musique",
+        "nl": "Ik luister graag naar muziek."
+      },
+      {
+        "fr": "voyager",
+        "nl": "Ik reis graag."
+      },
+      {
+        "fr": "me promener",
+        "nl": "Ik wandel graag."
+      },
+      {
+        "fr": "faire du vélo",
+        "nl": "Ik fiets graag."
+      },
+      {
+        "fr": "regarder des films",
+        "nl": "Ik kijk graag naar films."
+      },
+      {
+        "fr": "jouer aux jeux vidéo",
+        "nl": "Ik game graag."
+      },
+      {
+        "fr": "courir",
+        "nl": "Ik loop graag."
+      },
+      {
+        "fr": "nager",
+        "nl": "Ik zwem graag."
+      }
+    ]
+  }
+}

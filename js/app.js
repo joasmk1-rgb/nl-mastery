@@ -5465,7 +5465,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
             THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
-            MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle'
+            MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
             const main = MAIN_CATEGORIES.find(c => c.file === file);
@@ -7815,6 +7815,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             else if (id.startsWith('reel_')) kitKey = 'bank:' + id.slice(5);
             else if (id.startsWith('job_')) kitKey = 'sit:' + id.slice(4);
             else if (id.startsWith('lib_')) kitKey = 'lib:' + id.slice(4);
+            else if (id.startsWith('mod_')) { const [mid, et] = id.slice(4).split('__'); kitKey = et === 'final' ? 'mod:' + mid : 'mod:' + mid + ':' + et; }
             else if (id) kitKey = 'rp:' + id;
             if (kitKey && !rpHasKit(kitKey)) kitKey = null;
             rpWordSession = { kitKey, label: rpDayState ? rpDayState.label : scenario.label, userTexts: [], tapped: new Map(), heardNew: new Map() };
@@ -8049,6 +8050,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 rpShowJobHome();
             } else if (rpCurrentCategory === '__case') {
                 rpShowCaseHome();
+            } else if (rpCurrentCategory && rpCurrentCategory.startsWith('__mod:')) {
+                showModuleRp(rpCurrentCategory.slice(6));
             } else if (rpCurrentCategory && rpCurrentCategory.startsWith('__lib:')) {
                 rpShowLibrary(rpCurrentCategory.slice(6));
             } else if (rpCurrentCategory) {
@@ -8828,6 +8831,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             Object.values(rpPrepData.themes).forEach(t => rpKitInjectWords(t, idx));
             await rpLoadLibrary();
             rpLibAll().forEach(e => rpKitInjectWords(Object.assign({ label: e.label }, e.kit), idx));
+            await modRpLoadAll();
             return rpPrepData;
         }
 
@@ -8848,7 +8852,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function rpBuildKit(key) {
             const lib = key.startsWith('lib:') ? rpLibFind(key.slice(4)) : null;
-            const themes = lib ? [Object.assign({ label: lib.label }, lib.kit)] : rpKitThemesFor(key).map(t => rpPrepData.themes[t]).filter(Boolean);
+            const themes = key.startsWith('mod:') ? modRpKitThemes(key)
+                : lib ? [Object.assign({ label: lib.label }, lib.kit)] : rpKitThemesFor(key).map(t => rpPrepData.themes[t]).filter(Boolean);
             if (!themes.length) return null;
             const idx = rpKitVocabIndex();
             const seen = new Set();
@@ -8868,7 +8873,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return { themes: themes.map(t => t.label), verbs, words, phrases };
         }
 
-        function rpHasKit(key) { return key.startsWith('lib:') ? !!rpLibFind(key.slice(4)) : rpKitThemesFor(key).length > 0; }
+        function rpHasKit(key) {
+            if (key.startsWith('mod:')) return modRpKitThemes(key).length > 0;
+            return key.startsWith('lib:') ? !!rpLibFind(key.slice(4)) : rpKitThemesFor(key).length > 0;
+        }
 
         // =====================================================================================
         // Bibliothèque de situations (data/roleplay/situations_library.json + générées par Gemini)
@@ -9048,6 +9056,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function rpPrepBack() {
             conjAudioStop();
+            const key = rpPrepCurrent && rpPrepCurrent.key;
+            if (key && key.startsWith('mod:')) {
+                const [, mid, et] = key.split(':');
+                showModuleRp(mid);
+                if (et) modRpShowEtape(et);
+                return;
+            }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('roleplay-view').classList.add('active');
             setActiveNav('nav-pratiquer');
@@ -9117,7 +9132,383 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             else if (l.type === 'rp') { rpShowCategory(l.cat); rpStartScenario(l.cat, l.id); }
             else if (l.type === 'sit') { await rpShowJobHome(); rpStartSituation(l.id); }
             else if (l.type === 'day') { await rpShowJobHome(); rpStartDay(l.index); }
+            else if (l.type === 'mod') { modRpPlay(l.id, l.etape || 'final'); }
             else if (l.type === 'lib') { const e = rpLibFind(l.id); if (e) { await rpShowLibrary(e.theme); rpStartLib(l.id); } }
+        }
+
+        // =====================================================================================
+        // Modules en format « jeu de rôle » (pilote : Premier contact, A1)
+        // =====================================================================================
+        // Un module = une situation de vie découpée en étapes (vocabulaire, règle courte, exercices
+        // stockés en dur, mini jeu de rôle). Le portrait (questions en français) produit les phrases
+        // personnelles de l'apprenant : elles entrent dans les kits, les exercices (« dis-le ») et
+        // le prompt des interlocuteurs. Tout vit dans state.modRp[id] (synchronisé, jamais public).
+        const MODRP_IDS = ['premier_contact'];
+        const MODRP_FILE = 'MON_PORTRAIT';
+        const modRpData = {};
+        let modRpCurrent = null;   // id du module affiché
+        let modRpEx = null;        // exercices en cours
+
+        async function modRpLoadAll() {
+            await Promise.all(MODRP_IDS.map(async id => {
+                if (modRpData[id]) return;
+                try { const d = await fetch('data/modules_rp/' + id + '.json').then(r => r.ok ? r.json() : null); if (d) modRpData[id] = d; } catch (e) { /* module absent */ }
+            }));
+            const idx = rpKitVocabIndex();
+            Object.values(modRpData).forEach(m => m.etapes.forEach(e => rpKitInjectWords(Object.assign({ label: m.titre }, e.vocab), idx)));
+            MODRP_IDS.forEach(modRpInjectPerso);
+        }
+
+        function modRpState(id) {
+            if (!state.modRp) state.modRp = {};
+            if (!state.modRp[id]) state.modRp[id] = { portrait: {}, extras: [], etapes: {}, final: false };
+            const s = state.modRp[id];
+            if (!s.portrait) s.portrait = {};
+            if (!Array.isArray(s.extras)) s.extras = [];
+            if (!s.etapes) s.etapes = {};
+            return s;
+        }
+
+        const NL_NUMBERS = ['nul', 'één', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien'];
+        const FR_NUMBERS = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix'];
+        function nlCount(n, sing, plur) { return n === 1 ? 'een ' + sing : (NL_NUMBERS[n] || n) + ' ' + plur; }
+        function frCount(n, sing, plur) { return n === 1 ? 'un' + (/e$/.test(sing) && sing !== 'frère' ? 'e ' : ' ') + sing : (FR_NUMBERS[n] || n) + ' ' + plur; }
+
+        // Phrases personnelles tirées du portrait : [{ key, etape, nl, fr }].
+        function modRpSentences(id) {
+            const m = modRpData[id];
+            if (!m) return [];
+            const p = modRpState(id).portrait;
+            const P = m.portrait;
+            const out = [];
+            const add = (key, etape, nl, fr) => out.push({ key, etape, nl, fr });
+            if (p.naam) add('naam', 'identite', `Ik heet ${p.naam}.`, `Je m'appelle ${p.naam}.`);
+            if (p.leeftijd) add('leeftijd', 'identite', `Ik ben ${p.leeftijd} jaar.`, `J'ai ${p.leeftijd} ans.`);
+            const pays = P.pays.find(x => x.fr === p.land);
+            if (pays) add('land', 'identite', `Ik kom uit ${pays.land}. Ik ben ${pays.adj}.`, `Je viens ${pays.defr || 'de ' + pays.fr}. Je suis ${pays.natfr || pays.fr}.`);
+            if (p.stad) add('stad', 'identite', `Ik woon in ${p.stad}.`, `J'habite à ${p.stad}.`);
+            const rel = { alleenstaand: ['Ik ben alleenstaand.', 'Je suis célibataire.'], getrouwd: ['Ik ben getrouwd.', 'Je suis marié(e).'], samenwonend: ['Ik woon samen met mijn partner.', "J'habite avec mon/ma partenaire."], relatie: ['Ik heb een relatie.', "Je suis en couple."] }[p.relatie];
+            if (rel) add('relatie', 'famille', rel[0], rel[1]);
+            if (p.kinderen !== undefined && p.kinderen !== '') {
+                const k = +p.kinderen;
+                add('kinderen', 'famille', k ? `Ik heb ${nlCount(k, 'kind', 'kinderen')}.` : 'Ik heb geen kinderen.', k ? `J'ai ${frCount(k, 'enfant', 'enfants')}.` : "Je n'ai pas d'enfants.");
+            }
+            if ((p.broers !== undefined && p.broers !== '') || (p.zussen !== undefined && p.zussen !== '')) {
+                const b = +(p.broers || 0), z = +(p.zussen || 0);
+                if (!b && !z) add('fratrie', 'famille', 'Ik heb geen broers of zussen.', "Je n'ai pas de frères et sœurs.");
+                else {
+                    const nl = [b ? nlCount(b, 'broer', 'broers') : '', z ? nlCount(z, 'zus', 'zussen') : ''].filter(Boolean).join(' en ');
+                    const fr = [b ? frCount(b, 'frère', 'frères') : '', z ? frCount(z, 'sœur', 'sœurs') : ''].filter(Boolean).join(' et ');
+                    add('fratrie', 'famille', `Ik heb ${nl}.`, `J'ai ${fr}.`);
+                }
+            }
+            const met = P.metiers.find(x => x.fr === p.beroep);
+            if (p.situatie === 'werk') add('werk', 'travail', met ? `Ik werk als ${met.nl}.` : 'Ik werk.', met ? `Je travaille comme ${met.fr}.` : 'Je travaille.');
+            if (p.situatie === 'werkzoekend') add('werk', 'travail', 'Ik ben werkzoekend.' + (met ? ` Ik zoek werk als ${met.nl}.` : ''), "Je suis demandeur d'emploi." + (met ? ` Je cherche du travail comme ${met.fr}.` : ''));
+            if (p.situatie === 'student') add('werk', 'travail', 'Ik ben student.', 'Je suis étudiant(e).');
+            const langs = P.langues.filter(l => (p.talen || []).includes(l.fr));
+            if (langs.length) {
+                const list = (arr) => arr.length > 1 ? arr.slice(0, -1).join(', ') + ' en ' + arr[arr.length - 1] : arr[0];
+                const listFr = (arr) => arr.length > 1 ? arr.slice(0, -1).join(', ') + ' et ' + arr[arr.length - 1] : arr[0];
+                add('talen', 'loisirs', `Ik spreek ${list(langs.map(l => l.nl))}. Ik leer Nederlands.`, `Je parle ${listFr(langs.map(l => l.fr))}. J'apprends le néerlandais.`);
+            }
+            P.loisirs.filter(l => (p.hobbies || []).includes(l.fr)).forEach((l, i) => add('hobby' + i, 'loisirs', l.nl, "J'aime " + l.fr + '.'));
+            modRpState(id).extras.forEach((x, i) => add('extra' + i, x.etape || 'identite', x.nl, x.fr));
+            return out;
+        }
+
+        // Les phrases du portrait deviennent des « mots » révisables (fichier virtuel MON_PORTRAIT).
+        function modRpInjectPerso(id) {
+            const prefix = 'PERSO:' + id + ':';
+            for (let i = fullDb.length - 1; i >= 0; i--) if (String(fullDb[i].id).startsWith(prefix)) fullDb.splice(i, 1);
+            modRpSentences(id).forEach(s => fullDb.push({ id: prefix + s.key, fr: s.fr, nl: s.nl, freq: 3, file: MODRP_FILE, tier: '', niveauCECR: '', sousCategorie: '' }));
+        }
+
+        // Thèmes de kit d'un module (clé mod:<id>) ou d'une étape (mod:<id>:<etape>).
+        function modRpKitThemes(key) {
+            const [, id, etapeId] = key.split(':');
+            const m = modRpData[id];
+            if (!m) return [];
+            const etapes = m.etapes.filter(e => !etapeId || e.id === etapeId);
+            const perso = modRpSentences(id).filter(s => !etapeId || s.etape === etapeId);
+            const themes = etapes.map(e => Object.assign({ label: e.titre }, e.vocab));
+            if (perso.length) themes.push({ label: 'Mes phrases', verbes: [], mots: perso.map(s => ({ nl: s.nl, fr: s.fr })), phrases: [] });
+            return themes;
+        }
+
+        function showModuleRp(id) {
+            const m = modRpData[id];
+            if (!m) { alert('Module en cours de chargement, réessaie dans un instant.'); return; }
+            conjAudioStop();
+            modRpCurrent = id;
+            modRpEx = null;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('modrp-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            modRpRenderHome();
+            window.scrollTo(0, 0);
+        }
+
+        function modRpEtapeDone(id, e) {
+            const st = modRpState(id).etapes[e.id] || {};
+            return (st.best || 0) >= Math.ceil(0.7 * modRpExercises(id, e).length) && !!st.played;
+        }
+
+        function modRpRenderHome() {
+            const id = modRpCurrent, m = modRpData[id];
+            const s = modRpState(id);
+            const nPerso = modRpSentences(id).length;
+            const done = m.etapes.filter(e => modRpEtapeDone(id, e)).length;
+            const box = document.getElementById('modrp-content');
+            box.innerHTML = `
+                <div class="modrp-head">
+                    <span class="conj-niveau-badge">${m.niveau}</span>
+                    <h2 style="margin:6px 0;">${rpEscapeHtml(m.titre)}</h2>
+                    <p class="prep-sub">🎯 ${rpEscapeHtml(m.objectif)}</p>
+                    <div class="cat-bar"><div class="cat-bar-fill" style="width:${Math.round(done / m.etapes.length * 100)}%"></div></div>
+                    <p class="report-meta">${done}/${m.etapes.length} étapes terminées${s.final ? ' · 🏆 jeu de rôle final joué' : ''}</p>
+                </div>
+                <button class="modrp-step${nPerso ? ' done' : ''}" onclick="modRpShowPortrait()">
+                    <span class="modrp-num">🪪</span><span><b>Mon portrait</b><br><small>${nPerso ? nPerso + ' phrases sur toi, prêtes à apprendre' : 'Commence ici : dis qui tu es, l\'app en fait tes phrases en néerlandais'}</small></span>
+                </button>
+                ${m.etapes.map((e, i) => {
+                    const st = s.etapes[e.id] || {};
+                    const total = modRpExercises(id, e).length;
+                    return `<button class="modrp-step${modRpEtapeDone(id, e) ? ' done' : ''}" onclick="modRpShowEtape('${e.id}')">
+                        <span class="modrp-num">${modRpEtapeDone(id, e) ? '✓' : i + 1}</span>
+                        <span><b>${rpEscapeHtml(e.titre)}</b><br><small>${st.best !== undefined ? `Exercices : meilleur score ${st.best}/${total}` : `${total} exercices`} · ${st.played ? '🎭 joué' : '🎭 jeu de rôle à faire'}</small></span>
+                    </button>`;
+                }).join('')}
+                <button class="modrp-step final${s.final ? ' done' : ''}" onclick="modRpPlay('${id}', 'final')">
+                    <span class="modrp-num">🏆</span><span><b>${rpEscapeHtml(m.final.titre)}</b><br><small>${rpEscapeHtml(m.final.consigne)}</small></span>
+                </button>
+                <button class="btn btn-gray" style="margin-top:12px;" onclick="rpPrepOpen('mod:${id}', '${rpEscapeHtml(m.titre).replace(/'/g, "\\'")} — tout le module', { type: 'mod', id: '${id}', etape: 'final' })">📚 Tout le vocabulaire du module (réviser, conjuguer, écouter)</button>`;
+        }
+
+        // ----- Portrait -----
+        function modRpShowPortrait() {
+            const id = modRpCurrent, m = modRpData[id], P = m.portrait;
+            const p = modRpState(id).portrait;
+            const opt = (list, val, getLabel) => '<option value="">—</option>' + list.map(x => { const l = getLabel(x); return `<option value="${rpEscapeHtml(l)}" ${l === val ? 'selected' : ''}>${rpEscapeHtml(l)}</option>`; }).join('');
+            const num = (key, label) => `<label class="modrp-field"><span>${label}</span><input type="number" min="0" max="20" id="mp-${key}" value="${p[key] !== undefined ? rpEscapeHtml(p[key]) : ''}"></label>`;
+            const checks = (key, list) => `<div class="modrp-checks">${list.map(x => `<label><input type="checkbox" data-mp="${key}" value="${rpEscapeHtml(x.fr)}" ${(p[key] || []).includes(x.fr) ? 'checked' : ''}> ${rpEscapeHtml(x.fr)}</label>`).join('')}</div>`;
+            const sentences = modRpSentences(id);
+            document.getElementById('modrp-content').innerHTML = `
+                <button class="back-btn" onclick="modRpRenderHome()">← Le module</button>
+                <h2>🪪 Mon portrait</h2>
+                <p class="prep-sub">${rpEscapeHtml(P.intro)}</p>
+                <div class="conj-card modrp-form">
+                    <label class="modrp-field"><span>Prénom</span><input type="text" id="mp-naam" value="${rpEscapeHtml(p.naam || '')}" autocomplete="off"></label>
+                    ${num('leeftijd', 'Âge')}
+                    <label class="modrp-field"><span>Pays d'origine</span><select id="mp-land">${opt(P.pays, p.land, x => x.fr)}</select></label>
+                    <label class="modrp-field"><span>Ville où tu habites</span><input type="text" id="mp-stad" value="${rpEscapeHtml(p.stad || '')}" placeholder="ex. Gent, Kortrijk, Brussel" autocomplete="off"></label>
+                    <label class="modrp-field"><span>Situation</span><select id="mp-relatie">
+                        ${[['', '—'], ['alleenstaand', 'célibataire'], ['relatie', 'en couple'], ['samenwonend', 'cohabitant'], ['getrouwd', 'marié(e)']].map(([v, l]) => `<option value="${v}" ${p.relatie === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    ${num('kinderen', 'Enfants')}${num('broers', 'Frères')}${num('zussen', 'Sœurs')}
+                    <label class="modrp-field"><span>Tu es…</span><select id="mp-situatie">
+                        ${[['', '—'], ['werk', 'en emploi'], ['werkzoekend', "demandeur d'emploi"], ['student', 'étudiant(e)']].map(([v, l]) => `<option value="${v}" ${p.situatie === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <label class="modrp-field"><span>Métier (actuel ou recherché)</span><select id="mp-beroep">${opt(P.metiers, p.beroep, x => x.fr)}</select></label>
+                    <div class="modrp-field"><span>Langues que tu parles</span>${checks('talen', P.langues)}</div>
+                    <div class="modrp-field"><span>Ce que tu aimes faire</span>${checks('hobbies', P.loisirs)}</div>
+                    <button class="btn btn-green" onclick="modRpSavePortrait()">💾 Enregistrer et voir mes phrases</button>
+                </div>
+                <div class="section-title">🗣️ Mes phrases (${sentences.length})</div>
+                ${sentences.map(s => `<div class="prep-row"><span class="prep-nl">${rpEscapeHtml(s.nl)}</span><span class="prep-fr">${rpEscapeHtml(s.fr)}</span><span class="prep-actions">${speakBtnHtml(s.nl)}${reportBtnHtml({ kind: 'portrait', ref: id, nl: s.nl, fr: s.fr, context: 'phrase générée du portrait' })}</span></div>`).join('') || '<p class="report-meta">Remplis le portrait pour obtenir tes phrases.</p>'}
+                <div class="section-title">➕ Autre chose à dire sur toi</div>
+                <p class="report-meta">Écris en français ce que tu veux savoir dire (ex. « je suis arrivé en Belgique il y a cinq ans »). Gemini le traduit une fois, puis la phrase est gardée.</p>
+                <div class="rp-help-input-row"><input type="text" id="mp-extra" placeholder="En français…" autocomplete="off"><button class="btn btn-green" id="mp-extra-btn" onclick="modRpAddExtra()">Traduire</button></div>
+                <div id="mp-extra-status" class="report-meta"></div>`;
+        }
+
+        function modRpSavePortrait() {
+            const id = modRpCurrent;
+            const p = modRpState(id).portrait;
+            ['naam', 'stad'].forEach(k => { p[k] = document.getElementById('mp-' + k).value.trim(); });
+            ['leeftijd', 'kinderen', 'broers', 'zussen'].forEach(k => { const v = document.getElementById('mp-' + k).value; p[k] = v === '' ? '' : String(Math.max(0, Math.min(120, parseInt(v, 10) || 0))); });
+            ['land', 'relatie', 'situatie', 'beroep'].forEach(k => { p[k] = document.getElementById('mp-' + k).value; });
+            ['talen', 'hobbies'].forEach(k => { p[k] = [...document.querySelectorAll(`[data-mp="${k}"]:checked`)].map(c => c.value); });
+            modRpInjectPerso(id);
+            save();
+            modRpShowPortrait();
+        }
+
+        async function modRpAddExtra() {
+            const id = modRpCurrent;
+            const input = document.getElementById('mp-extra');
+            const status = document.getElementById('mp-extra-status');
+            const fr = (input.value || '').trim();
+            if (!fr) return;
+            if (!GeminiService.getKey()) { status.innerText = 'Nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'; return; }
+            status.innerText = 'Traduction...';
+            try {
+                const raw = await GeminiService.generate(
+                    'Traduis cette phrase qu\'un francophone veut dire sur lui-même en se présentant, en néerlandais de Flandre simple (niveau A1-A2), naturel à l\'oral : """' + fr + '"""\n' +
+                    'Indique aussi le thème le plus proche parmi : identite, famille, travail, loisirs.\nRéponds UNIQUEMENT en JSON : {"nl": "...", "etape": "..."}'
+                );
+                const obj = rpHelpParseJson(raw);
+                if (!obj || !obj.nl) throw new Error('réponse illisible');
+                const etape = ['identite', 'famille', 'travail', 'loisirs'].includes(obj.etape) ? obj.etape : 'identite';
+                modRpState(id).extras.push({ fr, nl: String(obj.nl), etape });
+                modRpInjectPerso(id);
+                save();
+                modRpShowPortrait();
+            } catch (e) {
+                status.innerText = 'Traduction impossible : ' + e.message;
+            }
+        }
+
+        // ----- Étape -----
+        function modRpExercises(id, e) {
+            const perso = modRpSentences(id).filter(s => s.etape === e.id).map(s => ({ type: 'traduire', fr: s.fr, answer: s.nl, perso: true }));
+            return (e.exercices || []).concat(perso);
+        }
+
+        function modRpShowEtape(etapeId) {
+            const id = modRpCurrent, m = modRpData[id];
+            const e = m.etapes.find(x => x.id === etapeId);
+            if (!e) return;
+            const st = modRpState(id).etapes[e.id] || {};
+            const perso = modRpSentences(id).filter(s => s.etape === e.id);
+            const verbFr = v => { const c = conjugationData.find(x => x.infinitief === v); return c ? c.fr : ''; };
+            const row = (nl, fr) => `<div class="prep-row"><span class="prep-nl">${rpEscapeHtml(nl)}</span><span class="prep-fr">${rpEscapeHtml(fr)}</span><span class="prep-actions">${speakBtnHtml(nl)}${reportBtnHtml({ kind: 'module', ref: id + ':' + e.id, nl, fr, context: e.titre })}</span></div>`;
+            const total = modRpExercises(id, e).length;
+            document.getElementById('modrp-content').innerHTML = `
+                <button class="back-btn" onclick="modRpRenderHome()">← Le module</button>
+                <h2>${rpEscapeHtml(e.titre)}</h2>
+                <p class="prep-sub">${rpEscapeHtml(e.intro)}</p>
+                ${e.portrait ? `<div class="conj-card"><div class="section-title" style="margin-top:0;">🗣️ Tes phrases pour cette étape</div>
+                    ${perso.map(s => row(s.nl, s.fr)).join('') || `<p class="report-meta">Remplis <a href="#" onclick="modRpShowPortrait(); return false;">ton portrait</a> pour avoir tes propres phrases ici.</p>`}</div>` : ''}
+                <div class="conj-card modrp-rule">
+                    <div class="section-title" style="margin-top:0;">💡 ${rpEscapeHtml(e.regle.titre)}</div>
+                    <p>${rpEscapeHtml(e.regle.explication)}</p>
+                    ${e.regle.exemples.map(x => row(x.nl, x.fr)).join('')}
+                </div>
+                <div class="section-title">🧱 Vocabulaire</div>
+                ${e.vocab.verbes.map(v => row(v, verbFr(v))).join('')}
+                ${e.vocab.mots.map(x => row(x.nl, x.fr)).join('')}
+                ${e.vocab.phrases.map(x => row(x.nl, x.fr)).join('')}
+                <div class="prep-actions-grid" style="margin-top:14px;">
+                    <button class="btn btn-green" onclick="modRpStartEx('${e.id}')">✍️ Exercices (${total})${st.best !== undefined ? ' · record ' + st.best + '/' + total : ''}</button>
+                    <button class="btn btn-gray" onclick="modRpPlay('${id}', '${e.id}')">🎭 Jouer : ${rpEscapeHtml(e.jeu.titre)}</button>
+                    <button class="btn btn-gray" onclick="rpPrepOpen('mod:${id}:${e.id}', '${rpEscapeHtml(e.titre).replace(/'/g, "\\'")}', { type: 'mod', id: '${id}', etape: '${e.id}' })">📚 Réviser, conjuguer, écouter</button>
+                </div>
+                <div id="modrp-ex"></div>`;
+        }
+
+        // ----- Exercices -----
+        function modRpStartEx(etapeId) {
+            const id = modRpCurrent;
+            const e = modRpData[id].etapes.find(x => x.id === etapeId);
+            modRpEx = { etapeId, list: modRpExercises(id, e), i: 0, score: 0, built: [] };
+            modRpRenderEx();
+            document.getElementById('modrp-ex').scrollIntoView({ block: 'start' });
+        }
+
+        function modRpRenderEx() {
+            const ex = modRpEx, box = document.getElementById('modrp-ex');
+            if (!ex || !box) return;
+            if (ex.i >= ex.list.length) {
+                const id = modRpCurrent;
+                const st = modRpState(id).etapes[ex.etapeId] || (modRpState(id).etapes[ex.etapeId] = {});
+                st.best = Math.max(st.best || 0, ex.score);
+                save();
+                box.innerHTML = `<div class="conj-card"><div class="conj-verb-title">Résultat : ${ex.score}/${ex.list.length}</div>
+                    <p class="report-meta">${ex.score >= Math.ceil(0.7 * ex.list.length) ? 'Bien joué ! Passe au jeu de rôle de l\'étape.' : 'Refais-les une fois : il faut 70 % pour valider l\'étape.'}</p>
+                    <button class="btn btn-green" onclick="modRpPlay('${id}', '${ex.etapeId}')">🎭 Jouer l'étape</button>
+                    <button class="btn btn-gray" onclick="modRpStartEx('${ex.etapeId}')">🔁 Recommencer</button></div>`;
+                return;
+            }
+            const q = ex.list[ex.i];
+            ex.built = [];
+            const head = `<div class="report-meta">Exercice ${ex.i + 1}/${ex.list.length} · Score ${ex.score}${q.perso ? ' · 🪪 ta phrase' : ''}</div>`;
+            let body = '';
+            if (q.type === 'qcm') {
+                body = `<div class="conj-question-fr" style="font-size:1.05rem;">${rpEscapeHtml(q.q)}</div>
+                    <div class="modrp-choices">${q.choices.map((c, i) => `<button class="rp-scenario-btn" onclick="modRpCheck(${i})">${rpEscapeHtml(c)}</button>`).join('')}</div>`;
+            } else if (q.type === 'ordre') {
+                const shuffled = q.mots.map((w, i) => ({ w, i })).sort(() => Math.random() - 0.5);
+                body = `<div class="conj-question-hint">Remets dans l'ordre : ${rpEscapeHtml(q.fr || '')}</div>
+                    <div id="modrp-built" class="modrp-built">…</div>
+                    <div class="rpw-chips">${shuffled.map(x => `<button type="button" class="conj-filter-chip" data-w="${rpEscapeHtml(x.w)}" onclick="modRpPick(this)">${rpEscapeHtml(x.w)}</button>`).join('')}</div>
+                    <div class="prep-actions-grid" style="margin-top:10px;"><button class="btn btn-gray" onclick="modRpRenderEx()">↺ Effacer</button><button class="btn btn-green" onclick="modRpCheck()">Vérifier</button></div>`;
+            } else {
+                const prompt = q.type === 'trou' ? `<div class="conj-question-fr">${rpEscapeHtml(q.phrase)}</div><div class="conj-question-hint">${rpEscapeHtml(q.fr || '')} — complète le mot manquant</div>`
+                    : q.type === 'traduire' ? `<div class="conj-question-fr">${rpEscapeHtml(q.fr)}</div><div class="conj-question-hint">Dis-le en néerlandais</div>`
+                    : `<div class="conj-question-hint">Écoute et écris ce que tu entends</div><button class="btn btn-gray" onclick="speakNL('${String(q.nl).replace(/'/g, "\\'")}')">🔊 Réécouter</button>`;
+                body = `${prompt}<input type="text" id="modrp-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="En néerlandais…" onkeypress="if(event.key==='Enter') modRpCheck()" style="width:100%; margin:8px 0;">
+                    <button class="btn btn-green" onclick="modRpCheck()">Vérifier</button>`;
+            }
+            box.innerHTML = `<div class="conj-card">${head}${body}<div class="acc-error" id="modrp-fb" style="margin-top:8px;"></div></div>`;
+            if (q.type === 'ecoute') speakNL(q.nl);
+            const input = document.getElementById('modrp-input');
+            if (input) input.focus();
+        }
+
+        function modRpPick(btn) {
+            modRpEx.built.push(btn.dataset.w);
+            btn.disabled = true;
+            btn.style.opacity = 0.35;
+            document.getElementById('modrp-built').innerText = modRpEx.built.join(' ');
+        }
+
+        function modRpCheck(choice) {
+            const ex = modRpEx;
+            if (!ex || ex.checking) return;
+            const q = ex.list[ex.i];
+            let ok, expected;
+            if (q.type === 'qcm') { ok = choice === q.answer; expected = q.choices[q.answer]; }
+            else if (q.type === 'ordre') {
+                const clean = s => normalize(s).replace(/[.?!,]/g, '').trim();
+                ok = clean(ex.built.join(' ')) === clean(q.answer); expected = q.answer;
+            } else {
+                const val = (document.getElementById('modrp-input') || {}).value || '';
+                const target = q.type === 'ecoute' ? q.nl : q.answer;
+                ok = evaluateAnswer(val.replace(/[.?!]+$/, ''), String(target).split('/').map(s => s.replace(/[.?!]+$/, '')).join('/')).status !== 'wrong';
+                expected = String(target).split('/')[0];
+            }
+            ex.checking = true;
+            if (ok) ex.score++;
+            const fb = document.getElementById('modrp-fb');
+            fb.style.color = ok ? 'var(--success)' : 'var(--wrong)';
+            fb.innerHTML = (ok ? '✅ ' : '❌ Réponse : ') + rpEscapeHtml(expected) + ' ' + speakBtnHtml(expected) +
+                (ok ? '' : ' ' + reportBtnHtml({ kind: 'module', ref: modRpCurrent + ':' + ex.etapeId, nl: expected, fr: q.fr || q.q || '', context: 'exercice ' + q.type }));
+            setTimeout(() => { ex.checking = false; ex.i++; modRpRenderEx(); }, ok ? 1100 : 2600);
+        }
+
+        // ----- Jeu de rôle d'une étape ou final -----
+        function modRpPlay(id, etapeId) {
+            const m = modRpData[id];
+            if (!m) return;
+            if (!GeminiService.getKey()) { alert("Le jeu de rôle a besoin de ta clé Gemini (Profil → 🤖 Intelligence IA). Les exercices et le vocabulaire marchent sans."); return; }
+            const isFinal = etapeId === 'final';
+            const e = isFinal ? null : m.etapes.find(x => x.id === etapeId);
+            const jeu = isFinal ? m.final : e.jeu;
+            const perso = modRpSentences(id).filter(s => isFinal || s.etape === etapeId);
+            const words = isFinal ? [] : e.vocab.verbes.concat(e.vocab.mots.map(x => x.nl));
+            const prompt = 'Tu joues un rôle dans un jeu de rôle avec un apprenant francophone qui débute en néerlandais (niveau A1).\n' +
+                'Ton rôle : ' + jeu.role + '\n' +
+                'Parle exclusivement en néerlandais de Flandre très simple : phrases courtes, mots très courants, une seule question à la fois. Réagis à ce que dit réellement l\'apprenant, ne corrige jamais sa langue et ne sors jamais de ton rôle. Si l\'apprenant semble perdu, reformule plus simplement.\n' +
+                (words.length ? 'Emploie naturellement ces mots de la leçon : ' + words.join(', ') + '.\n' : '') +
+                (perso.length ? 'Voici ce que l\'apprenant a préparé sur lui (ne le récite pas : pose tes questions et laisse-le le dire ; s\'il oublie un point, relance-le dessus) : ' + perso.map(s => s.nl).join(' ') + '\n' : '') +
+                '\nTu as déjà ouvert la conversation en disant : """' + jeu.welcome + '""" — enchaîne à partir de sa réponse.';
+            const st = modRpState(id);
+            if (isFinal) st.final = true; else (st.etapes[etapeId] || (st.etapes[etapeId] = {})).played = true;
+            save();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('roleplay-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            renderRpGeminiStatus();
+            rpCurrentCategory = '__mod:' + id;
+            rpDayState = null;
+            rpBeginScenario({ id: 'mod_' + id + '__' + etapeId, lang: 'nl', label: m.titre + ' — ' + jeu.titre, welcome: jeu.welcome, prompt });
+            const banner = document.getElementById('rp-mode-banner');
+            banner.style.display = '';
+            banner.innerHTML = `
+                <div class="rp-job-banner">
+                    <div class="rp-iv-label" style="margin-top:0;">${rpEscapeHtml(m.titre)} · ${rpEscapeHtml(jeu.titre)}</div>
+                    <div>🎯 ${rpEscapeHtml(jeu.consigne)}</div>
+                    ${perso.length ? `<details><summary>🗣️ Mes phrases (${perso.length})</summary><ul class="rp-case-figures">${perso.map(s => `<li>${rpEscapeHtml(s.nl)} <small>— ${rpEscapeHtml(s.fr)}</small></li>`).join('')}</ul></details>` : ''}
+                </div>`;
         }
 
         async function rpShowJobHome() {
