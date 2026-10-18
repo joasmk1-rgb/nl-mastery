@@ -34,6 +34,64 @@ try {
     console.warn('Erreur d\'initialisation Firebase :', e);
 }
 
+// ===== Accès réservé aux comptes + invitations bêta =====
+// Sans compte, on ne voit que l'écran de connexion (body.gated). Tant que Firebase n'a pas dit si
+// une session existe, un écran d'attente évite d'afficher l'app puis de la masquer
+// (body.auth-pending). Si le SDK Firebase n'a pas pu se charger, l'app reste utilisable en local.
+// Lien d'invitation : ?invite=CODE (invites/{code} actif dans Firestore) → le compte créé, ou le
+// compte déjà connecté, devient bêta-testeur et reçoit la clé Gemini partagée.
+const INVITE_KEY = 'nl_invite_code';
+if (firebaseAvailable) document.body.classList.add('auth-pending');
+(function inviteCapture() {
+    try {
+        const url = new URL(location.href);
+        const code = (url.searchParams.get('invite') || '').trim();
+        if (!code) return;
+        localStorage.setItem(INVITE_KEY, code);
+        url.searchParams.delete('invite');
+        history.replaceState(null, '', url.pathname + url.search + url.hash);
+    } catch (e) { /* pas grave */ }
+})();
+
+function invitePending() {
+    try { return localStorage.getItem(INVITE_KEY) || ''; } catch (e) { return ''; }
+}
+
+async function inviteIsValid(code) {
+    if (!code) return false;
+    try {
+        const snap = await db.collection('invites').doc(code).get();
+        return snap.exists && snap.data().active === true;
+    } catch (e) { return false; }
+}
+
+// Compte déjà existant qui ouvre un lien d'invitation : il devient bêta-testeur.
+async function inviteApplyToAccount(uid, userDoc) {
+    const code = invitePending();
+    if (!code) return;
+    if (!userDoc.beta && await inviteIsValid(code)) {
+        try {
+            await db.collection('users').doc(uid).update({ beta: true, inviteCode: code });
+            userDoc.beta = true;
+            userDoc.inviteCode = code;
+        } catch (e) { console.warn('Invitation non appliquée :', e); }
+    }
+    localStorage.removeItem(INVITE_KEY);
+}
+
+function gateShow() {
+    document.body.classList.remove('auth-pending');
+    document.body.classList.add('gated');
+    if (invitePending()) accMode = 'signup';
+    showCompte();
+    const banner = document.getElementById('gate-invite');
+    if (banner) banner.style.display = invitePending() ? '' : 'none';
+}
+
+function gateOpen() {
+    document.body.classList.remove('auth-pending', 'gated');
+}
+
 function accEmailFromPseudo(pseudo) {
     return pseudo.trim().toLowerCase().replace(/[^a-z0-9_.-]/g, '') + '@nl-mastery.local';
 }
@@ -100,14 +158,24 @@ async function accSignup(pseudo, password) {
             progressRev: rev,
             progressEpoch: 0
         };
+        const invite = invitePending();
+        let inviteExpired = false;
+        if (invite) {
+            if (await inviteIsValid(invite)) { userDoc.beta = true; userDoc.inviteCode = invite; }
+            else inviteExpired = true;
+        }
         await db.collection('users').doc(uid).set(userDoc);
+        localStorage.removeItem(INVITE_KEY);
         currentUser = cred.user;
         currentUserDoc = userDoc;
         // La progression faite sans compte sur cet appareil devient celle du nouveau compte.
         syncMetaReplace({ uid, rev, epoch: 0, dirty: false });
         cloudSetStatus('ok');
         await socialEnsureProfileDocs();
-        accShowLoggedIn();
+        await betaKeyRefresh(userDoc);
+        gateOpen();
+        showHome();
+        if (inviteExpired) alert("Ton compte est créé, mais le lien d'invitation n'est plus actif : demande un nouveau lien pour l'accès bêta.");
     } catch (e) {
         accSetError(accFriendlyError(e));
     } finally {
@@ -131,13 +199,15 @@ async function accLogin(pseudo, password) {
         }
         currentUser = cred.user;
         currentUserDoc = userDoc;
+        await inviteApplyToAccount(uid, userDoc);
         await betaKeyRefresh(userDoc);
         // Réconcilie la progression de l'appareil avec celle du compte (adoption, fusion ou
         // envoi selon le cas — voir cloudReconcile). Si la page se recharge, rien d'autre à faire.
         cloudLastCheckAt = Date.now();
         const reloading = await cloudReconcile(userDoc, true);
         if (reloading) return;
-        accShowLoggedIn();
+        gateOpen();
+        showHome();
         socialEnsureProfileDocs();
         notificationsRefreshBadge();
     } catch (e) {
@@ -1359,6 +1429,66 @@ async function adminRemoveSharedKey() {
     } catch (e) { alert('Erreur : ' + e.message); }
 }
 
+// Liens d'invitation : codes aléatoires, réutilisables, activables/désactivables.
+let adminUsersCache = [];
+async function adminRenderInvites() {
+    const el = document.getElementById('admin-invites');
+    if (!el) return;
+    let invites = [];
+    try {
+        const snap = await db.collection('invites').get();
+        snap.forEach(d => invites.push(Object.assign({ code: d.id }, d.data())));
+    } catch (e) {
+        el.innerHTML = `<p class="report-meta">Lecture des invitations impossible (${e.message}). As-tu publié les nouvelles règles Firestore ?</p>`;
+        return;
+    }
+    const base = location.origin + location.pathname;
+    el.innerHTML = `
+        <div class="study-box" style="text-align:left; margin-top:0;">
+            <h3 style="margin-top:0;">🎟️ Liens d'invitation bêta</h3>
+            <p style="font-size:0.85rem;">Une personne qui ouvre le lien et crée son compte (ou se connecte) devient bêta-testeur et reçoit la clé Gemini partagée. Le lien est réutilisable ; désactive-le quand tu veux.</p>
+            ${invites.map(inv => {
+                const n = adminUsersCache.filter(u => u.inviteCode === inv.code).length;
+                const link = base + '?invite=' + inv.code;
+                return `<div class="admin-invite">
+                    <div><b>${rpEscapeHtml(inv.label || 'Invitation')}</b> · ${inv.active ? '🟢 actif' : '⚪ désactivé'} · ${n} compte${n > 1 ? 's' : ''}</div>
+                    <input type="text" readonly value="${rpEscapeHtml(link)}" onclick="this.select()">
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <button class="btn btn-green" style="margin:0; width:auto;" onclick="adminCopyInvite('${inv.code}')">📋 Copier le lien</button>
+                        <button class="btn btn-gray" style="margin:0; width:auto;" onclick="adminToggleInvite('${inv.code}', ${!inv.active})">${inv.active ? 'Désactiver' : 'Réactiver'}</button>
+                    </div>
+                </div>`;
+            }).join('') || '<p class="report-meta">Aucun lien pour l\'instant.</p>'}
+            <button class="btn btn-green" style="margin-top:8px;" onclick="adminCreateInvite()">➕ Créer un lien d'invitation</button>
+        </div>`;
+}
+
+async function adminCreateInvite() {
+    const label = prompt('Nom du lien (pour toi, ex. « Amis », « Collègues ») :', 'Bêta') || 'Bêta';
+    const alphabet = 'abcdefghjkmnpqrstuvwxyz23456789';
+    const bytes = new Uint8Array(10);
+    crypto.getRandomValues(bytes);
+    const code = [...bytes].map(b => alphabet[b % alphabet.length]).join('');
+    try {
+        await db.collection('invites').doc(code).set({ active: true, label, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+        adminRenderInvites();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function adminToggleInvite(code, active) {
+    try {
+        await db.collection('invites').doc(code).update({ active });
+        adminRenderInvites();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+function adminCopyInvite(code) {
+    const link = location.origin + location.pathname + '?invite=' + code;
+    const done = () => alert('Lien copié :\n' + link);
+    if (navigator.clipboard) navigator.clipboard.writeText(link).then(done, () => prompt('Copie ce lien :', link));
+    else prompt('Copie ce lien :', link);
+}
+
 async function adminToggleBeta(uid, newVal) {
     try {
         await db.collection('users').doc(uid).update({ beta: newVal });
@@ -1377,7 +1507,7 @@ function showAdmin() {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('admin-view').classList.add('active');
     adminRenderSharedKey();
-    loadAdminUsers();
+    loadAdminUsers().then(adminRenderInvites);
 }
 
 async function loadAdminUsers() {
@@ -1387,6 +1517,8 @@ async function loadAdminUsers() {
         const snap = await db.collection('users').orderBy('pseudo').get();
         if (snap.empty) { listEl.innerHTML = 'Aucun compte.'; return; }
         listEl.innerHTML = '';
+        adminUsersCache = [];
+        snap.forEach(doc => adminUsersCache.push(doc.data()));
         snap.forEach(doc => {
             const u = doc.data();
             const uid = doc.id;
@@ -1432,15 +1564,18 @@ async function adminClearProgress(uid, pseudo) {
 // Reprend la session automatiquement au rechargement de la page (Firebase garde la session en local)
 if (firebaseAvailable) {
     auth.onAuthStateChanged(async (user) => {
-        if (!user || accExplicitAuthInProgress) return;
+        if (accExplicitAuthInProgress) return;
+        if (!user) { gateShow(); return; }
         try {
             const snap = await db.collection('users').doc(user.uid).get();
-            if (!snap.exists) return;
+            if (!snap.exists) { gateShow(); return; }
             const userDoc = snap.data();
             if (userDoc.disabled) { await auth.signOut(); return; }
             currentUser = user;
             currentUserDoc = userDoc;
+            await inviteApplyToAccount(user.uid, userDoc);
             await betaKeyRefresh(userDoc);
+            gateOpen();
             // Récupère ce qui a été fait sur un autre appareil depuis la dernière visite.
             cloudLastCheckAt = Date.now();
             if (await cloudReconcile(userDoc, false)) return; // la page se recharge
@@ -1452,7 +1587,9 @@ if (firebaseAvailable) {
             notificationsRefreshBadge();
             if (document.getElementById('home-view').classList.contains('active')) renderDashboard();
         } catch (e) {
+            // Session connue mais compte illisible (hors ligne...) : on ne bloque pas l'app.
             console.error('Reprise de session échouée', e);
+            gateOpen();
         }
     });
 }

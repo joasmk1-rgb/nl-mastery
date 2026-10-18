@@ -688,3 +688,15 @@
         .guide-portrait { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
         .guide-portrait .btn { margin: 0; }
         .guide-vocab .prep-row, .guide-dialog .modrp-line { font-size: 0.85rem; }
+
+        /* Accès réservé aux comptes */
+        body.auth-pending .view, body.auth-pending .bottom-nav, body.auth-pending .header-stats { visibility: hidden; }
+        body.auth-pending::after { content: 'Chargement…'; position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.95rem; pointer-events: none; }
+        body.gated .bottom-nav, body.gated .header-stats, body.gated #compte-view > .back-btn, body.gated .gate-hide { display: none !important; }
+        .gate-intro { display: none; width: 100%; max-width: 420px; text-align: center; margin: 8px 0 12px; }
+        body.gated .gate-intro { display: block; }
+        .gate-logo { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+        .gate-small { font-size: 0.85rem; color: var(--text-secondary); }
+        .gate-invite { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--primary) 15%, transparent); font-weight: 600; font-size: 0.88rem; }
+        .admin-invite { display: flex; flex-direction: column; gap: 6px; padding: 10px 0; border-top: 1px solid var(--border); }
+        .admin-invite input { margin: 0; font-size: 0.78rem; }

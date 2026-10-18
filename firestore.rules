@@ -38,6 +38,13 @@ service cloud.firestore {
       return isSignedIn() && u.get('beta', false) == true && u.get('disabled', false) == false;
     }
 
+    // Code d'invitation bêta valide : le document invites/{code} existe et est actif.
+    function validInvite(code) {
+      return code is string && code != '' &&
+        exists(/databases/$(database)/documents/invites/$(code)) &&
+        get(/databases/$(database)/documents/invites/$(code)).data.active == true;
+    }
+
     // Un seul id de relation par paire d'utilisateurs (toujours les deux uid triés, joints par
     // "_" — voir socialPairId côté client). Reproduit ici pour vérifier qu'un ami accepté peut
     // bien lire friendStats/{uid} sans jamais pouvoir lire la progression complète (users/{uid}).
@@ -64,7 +71,7 @@ service cloud.firestore {
       allow create: if isOwner(uid) &&
         request.resource.data.role == 'user' &&
         request.resource.data.disabled == false &&
-        request.resource.data.get('beta', false) == false;
+        (request.resource.data.get('beta', false) == false || validInvite(request.resource.data.get('inviteCode', '')));
 
       // Mise à jour : le propriétaire peut mettre à jour SA progression (synchro cloud à chaque
       // save()) mais ne peut jamais changer son propre rôle ni se réactiver lui-même s'il est
@@ -73,7 +80,8 @@ service cloud.firestore {
         isOwner(uid) &&
         request.resource.data.role == resource.data.role &&
         request.resource.data.disabled == resource.data.disabled &&
-        request.resource.data.get('beta', false) == resource.data.get('beta', false)
+        (request.resource.data.get('beta', false) == resource.data.get('beta', false) ||
+          (request.resource.data.get('beta', false) == true && validInvite(request.resource.data.get('inviteCode', ''))))
       );
 
       allow delete: if false; // aucune fonctionnalité de suppression de compte pour l'instant
@@ -86,6 +94,15 @@ service cloud.firestore {
     match /config/{docId} {
       allow get: if docId == 'gemini' && (isAdmin() || isBetaTester());
       allow list: if false;
+      allow write: if isAdmin();
+    }
+
+    // ================= invites/{code} — liens d'invitation bêta (réutilisables) =================
+    // Lecture d'un code précis ouverte (l'invité n'a pas encore de compte quand il ouvre le lien ;
+    // le document ne contient que active/label) ; liste et écriture réservées à l'admin.
+    match /invites/{code} {
+      allow get: if true;
+      allow list: if isAdmin();
       allow write: if isAdmin();
     }
 

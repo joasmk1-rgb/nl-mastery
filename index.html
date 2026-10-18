@@ -579,7 +579,13 @@
 
     <div id="compte-view" class="view">
         <button class="back-btn" onclick="showProfil()">← Retour</button>
-        <h2>🔐 Compte</h2>
+        <div id="gate-intro" class="gate-intro">
+            <div class="gate-logo">NL <span style="color:var(--primary)">Mastery</span></div>
+            <p>Apprends le néerlandais en situation : cours guidés, jeux de rôle à l'oral, vocabulaire du travail.</p>
+            <p class="gate-small">Connecte-toi ou crée ton compte pour commencer. Ta progression est sauvegardée et suit sur tous tes appareils.</p>
+            <div id="gate-invite" class="gate-invite" style="display:none;">🎟️ Tu as été invité(e) comme bêta-testeur : crée ton compte (ou connecte-toi) pour activer ton accès complet.</div>
+        </div>
+        <h2 class="gate-hide">🔐 Compte</h2>
 
         <div id="acc-logged-out">
             <div class="acc-box">
@@ -624,6 +630,7 @@
         <button class="back-btn" onclick="showCompte()">← Retour</button>
         <h2>⚙️ Gestion des comptes</h2>
         <div id="admin-shared-key" class="content-col"></div>
+        <div id="admin-invites" class="content-col"></div>
         <div id="admin-user-list" class="content-col"></div>
     </div>
 
