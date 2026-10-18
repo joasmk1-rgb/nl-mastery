@@ -494,6 +494,358 @@
         }
       ],
       "_source": "redige_claude"
+    },
+    "dom_cj": {
+      "label": "Consultant junior — métier",
+      "verbes": [
+        "analyseren",
+        "adviseren",
+        "aanbevelen",
+        "overtuigen",
+        "presenteren",
+        "verzamelen",
+        "begeleiden",
+        "ondersteunen",
+        "voorbereiden",
+        "verbeteren"
+      ],
+      "mots": [
+        {
+          "nl": "de consultant",
+          "fr": "le consultant"
+        },
+        {
+          "nl": "het adviesbureau",
+          "fr": "le cabinet de conseil"
+        },
+        {
+          "nl": "de opdracht",
+          "fr": "la mission"
+        },
+        {
+          "nl": "de klant",
+          "fr": "le client"
+        },
+        {
+          "nl": "de aanbeveling",
+          "fr": "la recommandation"
+        },
+        {
+          "nl": "de analyse",
+          "fr": "l'analyse"
+        },
+        {
+          "nl": "de case",
+          "fr": "le cas (étude de cas)"
+        },
+        {
+          "nl": "de schatting",
+          "fr": "l'estimation"
+        },
+        {
+          "nl": "de hypothese",
+          "fr": "l'hypothèse"
+        },
+        {
+          "nl": "de presentatie",
+          "fr": "la présentation"
+        },
+        {
+          "nl": "de STAR-methode",
+          "fr": "la méthode STAR (situation, tâche, action, résultat)"
+        },
+        {
+          "nl": "de stage",
+          "fr": "le stage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik wil consultant worden omdat ik graag complexe problemen oplos.",
+          "fr": "Je veux devenir consultant parce que j'aime résoudre des problèmes complexes."
+        },
+        {
+          "nl": "Ik zou de vraag eerst opdelen in kleinere delen.",
+          "fr": "Je découperais d'abord la question en plus petites parties."
+        },
+        {
+          "nl": "Mag ik een paar vragen stellen voor ik begin?",
+          "fr": "Puis-je poser quelques questions avant de commencer ?"
+        },
+        {
+          "nl": "Mijn hypothese is dat de kosten vooral door het transport stijgen.",
+          "fr": "Mon hypothèse est que les coûts augmentent surtout à cause du transport."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_cj": {
+      "label": "Consultant junior — chez le client",
+      "verbes": [
+        "vragen",
+        "uitleggen",
+        "samenvatten",
+        "noteren",
+        "bespreken",
+        "afspreken",
+        "informeren",
+        "aanpassen",
+        "communiceren",
+        "opvolgen"
+      ],
+      "mots": [
+        {
+          "nl": "de verwachting",
+          "fr": "l'attente"
+        },
+        {
+          "nl": "het doel",
+          "fr": "l'objectif"
+        },
+        {
+          "nl": "het gesprek",
+          "fr": "l'entretien, la conversation"
+        },
+        {
+          "nl": "vertrouwelijk",
+          "fr": "confidentiel"
+        },
+        {
+          "nl": "de werkwijze",
+          "fr": "la façon de travailler"
+        },
+        {
+          "nl": "de bijlage",
+          "fr": "la pièce jointe"
+        },
+        {
+          "nl": "de cijfers",
+          "fr": "les chiffres"
+        },
+        {
+          "nl": "de boodschap",
+          "fr": "le message (à retenir)"
+        },
+        {
+          "nl": "de slide",
+          "fr": "la diapositive"
+        },
+        {
+          "nl": "de bron",
+          "fr": "la source"
+        },
+        {
+          "nl": "de offerte",
+          "fr": "le devis, la proposition"
+        },
+        {
+          "nl": "de directie",
+          "fr": "la direction"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Wanneer bent u tevreden aan het einde van de opdracht?",
+          "fr": "Quand serez-vous satisfait à la fin de la mission ?"
+        },
+        {
+          "nl": "Wat u zegt, blijft vertrouwelijk.",
+          "fr": "Ce que vous dites reste confidentiel."
+        },
+        {
+          "nl": "Dat cijfer komt uit de verkoopgegevens van vorig jaar.",
+          "fr": "Ce chiffre vient des données de vente de l'an dernier."
+        },
+        {
+          "nl": "Dat zit niet in de huidige opdracht.",
+          "fr": "Cela ne fait pas partie de la mission actuelle."
+        },
+        {
+          "nl": "Ik bespreek het met mijn manager.",
+          "fr": "J'en parle avec mon manager."
+        },
+        {
+          "nl": "Zullen we het na de vergadering samen nakijken?",
+          "fr": "On le vérifie ensemble après la réunion ?"
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "dom_pj": {
+      "label": "Chef de projet junior — métier",
+      "verbes": [
+        "plannen",
+        "organiseren",
+        "opvolgen",
+        "rapporteren",
+        "communiceren",
+        "bijsturen",
+        "voorbereiden",
+        "opstarten",
+        "afsluiten",
+        "informeren"
+      ],
+      "mots": [
+        {
+          "nl": "de projectmanager",
+          "fr": "le chef de projet"
+        },
+        {
+          "nl": "de projectleider",
+          "fr": "le responsable de projet"
+        },
+        {
+          "nl": "de planning",
+          "fr": "le planning"
+        },
+        {
+          "nl": "de mijlpaal",
+          "fr": "le jalon"
+        },
+        {
+          "nl": "het budget",
+          "fr": "le budget"
+        },
+        {
+          "nl": "het risico",
+          "fr": "le risque"
+        },
+        {
+          "nl": "de sponsor",
+          "fr": "le sponsor (commanditaire du projet)"
+        },
+        {
+          "nl": "het stuurcomité",
+          "fr": "le comité de pilotage"
+        },
+        {
+          "nl": "de scope",
+          "fr": "le périmètre"
+        },
+        {
+          "nl": "de deadline",
+          "fr": "l'échéance"
+        },
+        {
+          "nl": "de stand van zaken",
+          "fr": "l'état d'avancement"
+        },
+        {
+          "nl": "de stage",
+          "fr": "le stage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik hou ervan om dingen te organiseren en mensen samen te brengen.",
+          "fr": "J'aime organiser les choses et rassembler les gens."
+        },
+        {
+          "nl": "Ik volg de planning op en ik waarschuw op tijd als er een risico is.",
+          "fr": "Je suis le planning et je préviens à temps s'il y a un risque."
+        },
+        {
+          "nl": "Tijdens mijn stage heb ik een evenement van A tot Z georganiseerd.",
+          "fr": "Pendant mon stage, j'ai organisé un événement de A à Z."
+        },
+        {
+          "nl": "Ik werk graag met tools zoals Excel, MS Project of Trello.",
+          "fr": "J'aime travailler avec des outils comme Excel, MS Project ou Trello."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_pj": {
+      "label": "Chef de projet junior — au quotidien",
+      "verbes": [
+        "vragen",
+        "uitleggen",
+        "afspreken",
+        "bespreken",
+        "beslissen",
+        "melden",
+        "oplossen",
+        "voorstellen",
+        "uitstellen",
+        "onderhandelen"
+      ],
+      "mots": [
+        {
+          "nl": "de taak",
+          "fr": "la tâche"
+        },
+        {
+          "nl": "de actiepunten",
+          "fr": "les points d'action"
+        },
+        {
+          "nl": "de verantwoordelijkheid",
+          "fr": "la responsabilité"
+        },
+        {
+          "nl": "de werkverdeling",
+          "fr": "la répartition du travail"
+        },
+        {
+          "nl": "de levering",
+          "fr": "la livraison"
+        },
+        {
+          "nl": "de vertraging",
+          "fr": "le retard"
+        },
+        {
+          "nl": "het alternatief",
+          "fr": "l'alternative"
+        },
+        {
+          "nl": "overschrijden",
+          "fr": "dépasser"
+        },
+        {
+          "nl": "de oorzaak",
+          "fr": "la cause"
+        },
+        {
+          "nl": "de maatregel",
+          "fr": "la mesure"
+        },
+        {
+          "nl": "de impact",
+          "fr": "l'impact"
+        },
+        {
+          "nl": "op schema",
+          "fr": "dans les temps"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Lukt het tegen donderdag?",
+          "fr": "C'est possible pour jeudi ?"
+        },
+        {
+          "nl": "Ik zet het even op mail, zodat we het allebei hebben.",
+          "fr": "Je le mets par e-mail, comme ça on l'a tous les deux."
+        },
+        {
+          "nl": "We riskeren het budget te overschrijden.",
+          "fr": "Nous risquons de dépasser le budget."
+        },
+        {
+          "nl": "Het project is grotendeels op schema, met één risico.",
+          "fr": "Le projet est globalement dans les temps, avec un risque."
+        },
+        {
+          "nl": "Wat heeft uw voorkeur?",
+          "fr": "Quelle est votre préférence ?"
+        },
+        {
+          "nl": "Ik wil ook zijn kant horen.",
+          "fr": "Je veux aussi entendre sa version."
+        }
+      ],
+      "_source": "redige_claude"
     }
   },
   "scenarios": {
@@ -511,7 +863,9 @@
     "rp:interview_hr_phone": ["entretien_base", "dom_rh"],
     "rp:interview_hr_technical": ["entretien_base", "dom_rh"],
     "rp:interview_hr_final": ["entretien_base", "dom_rh"],
-    "bank:business_analyst_junior": ["entretien_base", "dom_ba"]
+    "bank:business_analyst_junior": ["entretien_base", "dom_ba"],
+    "bank:consultant_junior": ["entretien_base", "dom_cj"],
+    "bank:projectmanager_junior": ["entretien_base", "dom_pj"]
   },
   "situations": {
     "guichet_": ["sit_guichet"],
@@ -520,6 +874,8 @@
     "ag_": ["sit_dispatch"],
     "usine_": ["sit_usine"],
     "invente_": ["sit_incidents"],
-    "ba_": ["sit_ba"]
+    "ba_": ["sit_ba"],
+    "cj_": ["sit_cj"],
+    "pj_": ["sit_pj"]
   }
 }

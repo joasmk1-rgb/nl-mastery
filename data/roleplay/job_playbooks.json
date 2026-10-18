@@ -481,6 +481,442 @@
         "Lui dire qu'il se trompe parce qu'il a signé le document.",
         "Accepter toutes les remarques comme des bugs à corriger tout de suite."
       ]
+    },
+    "cj_kickoff_client": {
+      "titre": "Réunion de lancement chez le client",
+      "etapes": [
+        {
+          "fr": "Remercier et présenter brièvement ton rôle dans la mission.",
+          "phrase": "Dank u voor de ontvangst. Ik ben junior consultant en ik werk mee aan de analyse."
+        },
+        {
+          "fr": "Faire préciser le problème avec des faits : depuis quand, de combien, où.",
+          "phrase": "Sinds wanneer stijgen de kosten, en over welke kosten gaat het vooral?"
+        },
+        {
+          "fr": "Demander ce qui serait un succès pour lui à la fin de la mission.",
+          "phrase": "Wanneer bent u tevreden aan het einde van de opdracht?"
+        },
+        {
+          "fr": "Demander qui rencontrer et quelles données sont disponibles.",
+          "phrase": "Met wie zouden we best praten, en welke cijfers kunnen we krijgen?"
+        },
+        {
+          "fr": "Résumer ce que tu as compris et les prochaines étapes.",
+          "phrase": "Als ik het samenvat: ... De volgende stap is ..."
+        }
+      ],
+      "a_eviter": [
+        "Proposer une solution dès la première réunion.",
+        "Promettre un résultat chiffré avant d'avoir analysé."
+      ]
+    },
+    "cj_interview_employe": {
+      "titre": "Interroger un employé méfiant",
+      "etapes": [
+        {
+          "fr": "Rassurer honnêtement sur le but de l'entretien, sans promettre ce que tu ne sais pas.",
+          "phrase": "Ik begrijp uw vraag. Wij kijken naar de werkwijze, niet naar personen."
+        },
+        {
+          "fr": "Expliquer ce qui sera fait de ses réponses (confidentialité).",
+          "phrase": "Wat u zegt, blijft vertrouwelijk. We noemen geen namen in het verslag."
+        },
+        {
+          "fr": "Poser des questions ouvertes sur son travail concret.",
+          "phrase": "Kunt u me een gewone werkdag beschrijven?"
+        },
+        {
+          "fr": "Lui demander ce qu'elle améliorerait si elle pouvait.",
+          "phrase": "Als u één ding mocht veranderen, wat zou dat zijn?"
+        },
+        {
+          "fr": "Remercier.",
+          "phrase": "Hartelijk bedankt voor uw tijd en uw openheid."
+        }
+      ],
+      "a_eviter": [
+        "Affirmer qu'il n'y aura aucun licenciement : tu n'en sais rien.",
+        "Juger ses réponses pendant l'entretien."
+      ]
+    },
+    "cj_donnees_manquantes": {
+      "titre": "Des données incomplètes",
+      "etapes": [
+        {
+          "fr": "Remercier pour l'envoi.",
+          "phrase": "Dag, bedankt voor het bestand."
+        },
+        {
+          "fr": "Dire précisément ce qui manque (période, colonne, site).",
+          "phrase": "De cijfers van maart tot juni ontbreken, en ook de kolom met de regio."
+        },
+        {
+          "fr": "Expliquer pourquoi tu en as besoin et pour quand.",
+          "phrase": "We hebben ze nodig voor de eerste analyse van vrijdag."
+        },
+        {
+          "fr": "Proposer d'aider : appel rapide, personne à contacter.",
+          "phrase": "Zal ik even bellen met de collega die de cijfers beheert?"
+        },
+        {
+          "fr": "Prévenir ton manager s'il y a un risque pour vendredi.",
+          "phrase": "Ik heb de ontbrekende cijfers gevraagd. Als ze er donderdag niet zijn, laat ik het je weten."
+        }
+      ],
+      "a_eviter": [
+        "Faire l'analyse sur des données incomplètes sans le dire.",
+        "Écrire un e-mail vague (« il manque des choses »)."
+      ]
+    },
+    "cj_retour_manager": {
+      "titre": "Retour du manager sur tes slides",
+      "etapes": [
+        {
+          "fr": "Accepter la remarque sans te justifier.",
+          "phrase": "Je hebt gelijk, de boodschap is niet duidelijk genoeg."
+        },
+        {
+          "fr": "Dire en une phrase ce que le client doit retenir.",
+          "phrase": "De belangrijkste boodschap is: de kosten stijgen vooral door de vele spoedleveringen."
+        },
+        {
+          "fr": "Proposer une nouvelle structure : le message d'abord, les preuves ensuite.",
+          "phrase": "Ik zet de conclusie bovenaan elke slide, en de cijfers eronder."
+        },
+        {
+          "fr": "Convenir d'une nouvelle relecture.",
+          "phrase": "Mag ik je morgenvroeg een nieuwe versie tonen?"
+        }
+      ],
+      "a_eviter": [
+        "Ajouter encore plus d'informations pour convaincre.",
+        "Prendre la remarque comme une attaque personnelle."
+      ]
+    },
+    "cj_presentation_resultats": {
+      "titre": "Un chiffre contesté en présentation",
+      "etapes": [
+        {
+          "fr": "Remercier pour la remarque, rester calme.",
+          "phrase": "Dank u, dat is een goede opmerking."
+        },
+        {
+          "fr": "Expliquer d'où vient le chiffre (source, période).",
+          "phrase": "Dat cijfer komt uit de verkoopgegevens van de laatste twaalf maanden, voor alle afdelingen samen."
+        },
+        {
+          "fr": "Reconnaître que sa situation peut être différente.",
+          "phrase": "Het kan goed zijn dat het in uw afdeling anders is."
+        },
+        {
+          "fr": "Proposer de vérifier ensemble après la réunion, et continuer.",
+          "phrase": "Zullen we het na de vergadering samen nakijken? Dan ga ik nu verder met de aanbevelingen."
+        }
+      ],
+      "a_eviter": [
+        "Défendre le chiffre coûte que coûte.",
+        "Laisser la discussion bloquer toute la présentation."
+      ]
+    },
+    "cj_demande_supplementaire": {
+      "titre": "Une demande hors mission du client",
+      "etapes": [
+        {
+          "fr": "Montrer de l'intérêt pour la demande.",
+          "phrase": "Dat is interessant. Wat wilt u precies weten over de aankoopafdeling?"
+        },
+        {
+          "fr": "Expliquer gentiment que ce n'est pas prévu dans la mission.",
+          "phrase": "Dat zit niet in de huidige opdracht."
+        },
+        {
+          "fr": "Ne pas décider seul : dire que tu en parles à ton manager.",
+          "phrase": "Ik bespreek het met mijn manager. Zij neemt contact met u op voor een voorstel."
+        },
+        {
+          "fr": "Confirmer par écrit pour garder une trace.",
+          "phrase": "Ik stuur u straks een korte mail om uw vraag te bevestigen."
+        }
+      ],
+      "a_eviter": [
+        "Dire oui pour faire plaisir au client.",
+        "Refuser sèchement : c'est peut-être une nouvelle mission pour le cabinet."
+      ]
+    },
+    "cj_atelier_animation": {
+      "titre": "Animer un atelier avec un participant envahissant",
+      "etapes": [
+        {
+          "fr": "Reconnaître son point sans le laisser continuer.",
+          "phrase": "Dank u, dat noteer ik. Dat is een belangrijk punt."
+        },
+        {
+          "fr": "Rappeler l'objectif de l'atelier et le temps disponible.",
+          "phrase": "We hebben nog twintig minuten, en ik wil graag van iedereen een idee horen."
+        },
+        {
+          "fr": "Donner la parole aux autres, un par un.",
+          "phrase": "Wat denkt u daarover?"
+        },
+        {
+          "fr": "Faire écrire les idées (post-it) pour que chacun participe.",
+          "phrase": "Schrijf elk twee ideeën op een post-it, dan bespreken we ze samen."
+        },
+        {
+          "fr": "Résumer à la fin et dire ce qui sera fait des idées.",
+          "phrase": "Ik vat samen wat we gehoord hebben, en we nemen het mee in ons verslag."
+        }
+      ],
+      "a_eviter": [
+        "Le couper brutalement devant tout le monde.",
+        "Laisser une seule personne parler pendant tout l'atelier."
+      ]
+    },
+    "cj_staffing": {
+      "titre": "On te propose une nouvelle mission",
+      "etapes": [
+        {
+          "fr": "Remercier et montrer ton intérêt.",
+          "phrase": "Bedankt, dat klinkt interessant."
+        },
+        {
+          "fr": "Demander les informations utiles : client, durée, rôle, lieu.",
+          "phrase": "Over welke klant gaat het, hoe lang duurt de opdracht, en wat wordt mijn rol?"
+        },
+        {
+          "fr": "Signaler une contrainte éventuelle (mission en cours, transport).",
+          "phrase": "Ik werk deze week nog aan mijn huidige opdracht. Kan ik die eerst afronden?"
+        },
+        {
+          "fr": "Confirmer ce qui a été convenu.",
+          "phrase": "Goed, dan begin ik maandag. Kun je me de informatie doorsturen?"
+        }
+      ],
+      "a_eviter": [
+        "Accepter sans savoir quel sera ton rôle.",
+        "Laisser ta mission actuelle en plan sans prévenir."
+      ]
+    },
+    "pj_kickoff": {
+      "titre": "Réunion de lancement : qui décide de quoi",
+      "etapes": [
+        {
+          "fr": "Remercier pour la question : clarifier les rôles est justement un objectif du lancement.",
+          "phrase": "Goede vraag, dat is precies een van de doelen van vandaag."
+        },
+        {
+          "fr": "Présenter les rôles : le sponsor décide, toi tu coordonnes, chaque responsable gère sa partie.",
+          "phrase": "De directeur is de sponsor en neemt de grote beslissingen. Ik coördineer en volg de planning op."
+        },
+        {
+          "fr": "Montrer les grandes étapes (jalons) et les dates.",
+          "phrase": "Dit zijn de belangrijkste mijlpalen en hun data."
+        },
+        {
+          "fr": "Dire comment l'équipe communiquera (réunion hebdomadaire, canal).",
+          "phrase": "We zien elkaar elke maandag een halfuur, en de rest gaat via het projectkanaal."
+        },
+        {
+          "fr": "Terminer par les actions de chacun.",
+          "phrase": "Ik stuur vandaag nog een verslag met de actiepunten van iedereen."
+        }
+      ],
+      "a_eviter": [
+        "Laisser la question sans réponse claire.",
+        "Te présenter comme celui qui décide de tout."
+      ]
+    },
+    "pj_suivi_taches": {
+      "titre": "Relancer un collègue en retard",
+      "etapes": [
+        {
+          "fr": "Rester aimable et montrer que tu comprends.",
+          "phrase": "Geen probleem, ik weet dat het druk is."
+        },
+        {
+          "fr": "Expliquer l'impact du retard sur le projet.",
+          "phrase": "Zonder jouw lijst kunnen we de bestelling niet plaatsen, en dan schuift alles op."
+        },
+        {
+          "fr": "Fixer une nouvelle date précise ensemble.",
+          "phrase": "Lukt het tegen donderdag middag?"
+        },
+        {
+          "fr": "Proposer de l'aide pour faciliter.",
+          "phrase": "Zal ik je een sjabloon sturen? Dan gaat het sneller."
+        },
+        {
+          "fr": "Confirmer par écrit.",
+          "phrase": "Ik zet het even op mail, zodat we het allebei hebben."
+        }
+      ],
+      "a_eviter": [
+        "Reprocher ou menacer de prévenir son chef dès le premier appel.",
+        "Raccrocher sans nouvelle date."
+      ]
+    },
+    "pj_retard_fournisseur": {
+      "titre": "Un fournisseur annonce un retard",
+      "etapes": [
+        {
+          "fr": "Remercier d'avoir prévenu tôt.",
+          "phrase": "Bedankt dat u het meteen laat weten."
+        },
+        {
+          "fr": "Demander la cause et la nouvelle date exacte.",
+          "phrase": "Wat is de oorzaak, en wat is de nieuwe leverdatum, met zekerheid?"
+        },
+        {
+          "fr": "Chercher des alternatives : livraison partielle, autre entrepôt, location.",
+          "phrase": "Kunt u al een deel leveren op de oorspronkelijke datum?"
+        },
+        {
+          "fr": "Rappeler l'engagement du contrat si nécessaire, sans agressivité.",
+          "phrase": "In het contract staat een leverdatum. Wat stelt u voor om de gevolgen te beperken?"
+        },
+        {
+          "fr": "Dire que tu informes ta responsable et que tu reviens vers lui.",
+          "phrase": "Ik bespreek het intern en ik bel u morgen terug."
+        }
+      ],
+      "a_eviter": [
+        "Accepter le retard sans chercher de solution.",
+        "Promettre au fournisseur une décision que ce n'est pas à toi de prendre."
+      ]
+    },
+    "pj_budget_depasse": {
+      "titre": "Annoncer un risque de dépassement de budget",
+      "etapes": [
+        {
+          "fr": "Dire le problème directement, avec le chiffre.",
+          "phrase": "We riskeren het budget met ongeveer tien procent te overschrijden."
+        },
+        {
+          "fr": "Donner la cause principale.",
+          "phrase": "Dat komt vooral door de extra kosten voor de verhuisfirma."
+        },
+        {
+          "fr": "Proposer une ou deux mesures possibles.",
+          "phrase": "We kunnen een deel van de meubels later aankopen, of een andere offerte vragen."
+        },
+        {
+          "fr": "Demander sa décision ou son avis.",
+          "phrase": "Wat stel jij voor? Moeten we het melden aan de sponsor?"
+        }
+      ],
+      "a_eviter": [
+        "Attendre la fin du mois pour le dire.",
+        "Venir avec le problème sans aucune proposition."
+      ]
+    },
+    "pj_conflit_equipe": {
+      "titre": "Un membre de l'équipe se plaint d'un collègue",
+      "etapes": [
+        {
+          "fr": "Écouter jusqu'au bout et remercier pour sa franchise.",
+          "phrase": "Bedankt dat je het zegt. Vertel eens wat er precies gebeurt."
+        },
+        {
+          "fr": "Demander des faits concrets, pas des impressions.",
+          "phrase": "Welke taken heb je overgenomen, en sinds wanneer?"
+        },
+        {
+          "fr": "Ne pas juger le collègue absent ; proposer d'abord un échange avec lui.",
+          "phrase": "Ik wil ook zijn kant horen. Ik spreek met hem af deze week."
+        },
+        {
+          "fr": "Revoir la répartition du travail si besoin.",
+          "phrase": "Daarna bekijken we samen de werkverdeling opnieuw."
+        },
+        {
+          "fr": "Fixer un moment pour refaire le point.",
+          "phrase": "Laten we volgende vrijdag kort samenzitten om te zien of het beter gaat."
+        }
+      ],
+      "a_eviter": [
+        "Prendre parti tout de suite.",
+        "Promettre de « régler ça » sans rien prévoir de concret."
+      ]
+    },
+    "pj_changement_scope": {
+      "titre": "Le sponsor veut ajouter quelque chose au projet",
+      "etapes": [
+        {
+          "fr": "Accueillir la demande et comprendre le besoin.",
+          "phrase": "Ik begrijp het. Waarvoor zou de extra zaal vooral dienen?"
+        },
+        {
+          "fr": "Expliquer l'impact : coût, délai ou autre chose à retirer.",
+          "phrase": "Een extra zaal kost ongeveer ... en vraagt twee weken extra werk."
+        },
+        {
+          "fr": "Proposer des options et laisser le choix au sponsor.",
+          "phrase": "We kunnen de datum verschuiven, het budget verhogen, of iets anders schrappen. Wat heeft uw voorkeur?"
+        },
+        {
+          "fr": "Noter la décision et mettre le plan à jour.",
+          "phrase": "Ik noteer uw beslissing en pas de planning aan."
+        }
+      ],
+      "a_eviter": [
+        "Dire « oui, pas de problème » sans évaluer l'impact.",
+        "Dire non : c'est au sponsor de choisir, en connaissant les conséquences."
+      ]
+    },
+    "pj_statut_comite": {
+      "titre": "Présenter l'avancement au comité",
+      "etapes": [
+        {
+          "fr": "Commencer par le statut global en une phrase.",
+          "phrase": "Het project is grotendeels op schema, met één risico."
+        },
+        {
+          "fr": "Dire ce qui est fait depuis la dernière fois.",
+          "phrase": "Sinds de vorige keer hebben we de verhuisfirma gekozen en de plannen goedgekeurd."
+        },
+        {
+          "fr": "Expliquer le point orange : problème, impact, ce que tu fais.",
+          "phrase": "De meubels komen twee weken later. We bekijken een gedeeltelijke levering."
+        },
+        {
+          "fr": "Dire ce dont tu as besoin du comité (décision, aide).",
+          "phrase": "We hebben uw beslissing nodig over een mogelijke extra kost."
+        },
+        {
+          "fr": "Donner les prochaines étapes.",
+          "phrase": "De volgende stappen zijn ..."
+        }
+      ],
+      "a_eviter": [
+        "Cacher le problème ou le minimiser.",
+        "Raconter tous les détails techniques."
+      ]
+    },
+    "pj_compte_rendu": {
+      "titre": "Résumer une réunion pour un absent",
+      "etapes": [
+        {
+          "fr": "Saluer et donner les décisions principales.",
+          "phrase": "Hoi, geen probleem. De belangrijkste beslissingen: ..."
+        },
+        {
+          "fr": "Lister ses actions à lui, avec la date.",
+          "phrase": "Voor jou: de lijst met de IT-materialen, tegen vrijdag."
+        },
+        {
+          "fr": "Joindre le compte rendu complet.",
+          "phrase": "Het volledige verslag zit in bijlage."
+        },
+        {
+          "fr": "Proposer d'en parler s'il a des questions.",
+          "phrase": "Bel me gerust als iets niet duidelijk is."
+        }
+      ],
+      "a_eviter": [
+        "Renvoyer seulement vers le compte rendu sans dire ce qui le concerne.",
+        "Oublier les dates."
+      ]
     }
   }
 }

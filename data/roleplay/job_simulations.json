@@ -551,6 +551,278 @@
         "het misverstand"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "cj_kickoff_client",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "reunion",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Réunion de lancement chez un client : le directeur des opérations explique pourquoi il a fait appel à votre cabinet, et tu dois comprendre ses attentes.",
+      "amorce": "Welkom bij ons. Eerlijk gezegd weet ik niet goed waar het probleem zit. Onze kosten stijgen elk jaar en niemand kan me zeggen waarom.",
+      "vocabulaire_cible": [
+        "de verwachting",
+        "het doel",
+        "de kosten",
+        "de planning"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_interview_employe",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "reunion",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Tu interroges une employée du client sur sa façon de travailler ; elle se méfie, elle pense que la mission va supprimer des postes.",
+      "amorce": "Mag ik eerst iets vragen? Komen jullie hier om te besparen op personeel? Want dat is wat iedereen op de gang zegt.",
+      "vocabulaire_cible": [
+        "het gesprek",
+        "vertrouwelijk",
+        "de werkwijze",
+        "verbeteren"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_donnees_manquantes",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "email",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Le client devait t'envoyer les chiffres de ventes pour l'analyse, mais le fichier est incomplet et ton manager attend une première analyse vendredi.",
+      "amorce": "Dag, in bijlage vind je het bestand met de verkoopcijfers. Laat maar weten als je nog iets nodig hebt.",
+      "vocabulaire_cible": [
+        "de bijlage",
+        "ontbreken",
+        "de cijfers",
+        "tegen vrijdag"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_retour_manager",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Ton manager relit tes premières slides et trouve que le message n'est pas clair : il te demande ce que le client doit retenir.",
+      "amorce": "Ik heb je slides bekeken. Er staat veel informatie in, maar wat is eigenlijk de boodschap voor de klant?",
+      "vocabulaire_cible": [
+        "de boodschap",
+        "de slide",
+        "de conclusie",
+        "aanpassen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_presentation_resultats",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu présentes une partie de l'analyse au comité de direction du client ; un directeur conteste un de tes chiffres.",
+      "amorce": "Wacht even. Dat cijfer van twintig procent klopt toch niet? Bij ons in de afdeling zien we dat helemaal niet.",
+      "vocabulaire_cible": [
+        "de analyse",
+        "de bron",
+        "nakijken",
+        "de aanbeveling"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_demande_supplementaire",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "telephone_client",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Le client t'appelle directement pour te demander une analyse en plus, qui ne fait pas partie de la mission prévue.",
+      "amorce": "Dag, ik heb nog een vraagje. Zouden jullie ook even naar onze aankoopafdeling kunnen kijken? Dat is toch maar een kleine moeite voor jullie.",
+      "vocabulaire_cible": [
+        "de opdracht",
+        "de offerte",
+        "afspreken",
+        "de manager"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_atelier_animation",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu animes un atelier avec quatre employés du client pour trouver des idées d'amélioration ; l'un d'eux parle tout le temps et les autres se taisent.",
+      "amorce": "Ik zeg het al jaren: het probleem is het management. Als ze naar ons zouden luisteren, was alles opgelost. Ik kan daar uren over praten.",
+      "vocabulaire_cible": [
+        "het idee",
+        "de beurt",
+        "iedereen",
+        "samenvatten"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cj_staffing",
+      "metier": "consultant_junior",
+      "poste": "junior consultant",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "La responsable du planning du cabinet te propose une nouvelle mission chez un client à une heure de route, à partir de lundi.",
+      "amorce": "Goed nieuws: er is een nieuwe opdracht vanaf maandag, bij een klant in [plaats]. Ben je beschikbaar?",
+      "vocabulaire_cible": [
+        "de opdracht",
+        "beschikbaar",
+        "de verplaatsing",
+        "de duur"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_kickoff",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu ouvres la réunion de lancement d'un projet de déménagement de bureaux ; un chef d'équipe demande d'emblée qui décide de quoi.",
+      "amorce": "Voor we beginnen: wie beslist er eigenlijk in dit project? Want vorige keer wist niemand bij wie we terecht konden.",
+      "vocabulaire_cible": [
+        "de projectleider",
+        "de verantwoordelijkheid",
+        "de mijlpaal",
+        "de planning"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_suivi_taches",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu appelles un collègue d'un autre service qui n'a pas livré sa partie (une liste de besoins) prévue hier.",
+      "amorce": "Ja, hallo? Ah, het project. Sorry, ik heb het echt heel druk deze week.",
+      "vocabulaire_cible": [
+        "de deadline",
+        "de taak",
+        "opvolgen",
+        "de nieuwe datum"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_retard_fournisseur",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "telephone_client",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Le fournisseur des meubles t'annonce deux semaines de retard, ce qui met en danger la date du déménagement.",
+      "amorce": "Dag, ik bel u met slecht nieuws: de bureaus kunnen pas twee weken later geleverd worden. Ons magazijn heeft een probleem.",
+      "vocabulaire_cible": [
+        "de levering",
+        "de vertraging",
+        "het alternatief",
+        "het contract"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_budget_depasse",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "En préparant le rapport mensuel, tu vois que le budget risque d'être dépassé de dix pour cent ; tu en parles à ta responsable.",
+      "amorce": "Je wilde me iets vragen over het budget? Zeg het maar, ik heb tien minuten.",
+      "vocabulaire_cible": [
+        "het budget",
+        "overschrijden",
+        "de oorzaak",
+        "de maatregel"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_conflit_equipe",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "collegue_interne",
+      "type": "reclamation",
+      "niveau": "B1",
+      "contexte": "Un membre de l'équipe vient se plaindre : un collègue ne fait pas sa part et c'est toujours lui qui doit rattraper.",
+      "amorce": "Mag ik eerlijk zijn? Ik doe al twee weken het werk van mijn collega erbij. Zo kan ik niet verder.",
+      "vocabulaire_cible": [
+        "de werkverdeling",
+        "het gesprek",
+        "eerlijk",
+        "oplossen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_changement_scope",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "reunion",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Le directeur, sponsor du projet, veut ajouter une salle de réunion au nouvel étage, sans changer ni la date ni le budget.",
+      "amorce": "Ik heb er nog eens over nagedacht: we hebben op de nieuwe verdieping ook een extra vergaderzaal nodig. Dat moet toch lukken binnen dezelfde planning?",
+      "vocabulaire_cible": [
+        "de scope",
+        "de impact",
+        "de keuze",
+        "het budget"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_statut_comite",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu présentes l'avancement du projet au comité de pilotage, avec un indicateur orange (le retard du fournisseur).",
+      "amorce": "Goed, de volgende op de agenda is de verhuis. Hoe staat het ervoor?",
+      "vocabulaire_cible": [
+        "de stand van zaken",
+        "het risico",
+        "de volgende stappen",
+        "op schema"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pj_compte_rendu",
+      "metier": "projet_junior",
+      "poste": "junior projectmanager",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un participant absent à la réunion d'équipe te demande par e-mail ce qui a été décidé et ce qu'il doit faire.",
+      "amorce": "Hoi, ik kon er gisteren niet bij zijn. Wat is er beslist, en moet ik iets doen?",
+      "vocabulaire_cible": [
+        "de actiepunten",
+        "de beslissing",
+        "tegen wanneer",
+        "het verslag"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -635,6 +907,38 @@
         "ba_bug_utilisateur",
         "ba_hors_scope",
         "ba_compte_rendu"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_cj_courte",
+      "metier": "consultant_junior",
+      "label": "Journée type de consultant junior chez un client (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "cj_kickoff_client",
+        "cj_interview_employe",
+        "cj_donnees_manquantes",
+        "cj_retour_manager",
+        "cj_presentation_resultats",
+        "cj_demande_supplementaire"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_pj_courte",
+      "metier": "projet_junior",
+      "label": "Journée type de chef de projet junior (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "pj_compte_rendu",
+        "pj_suivi_taches",
+        "pj_retard_fournisseur",
+        "pj_budget_depasse",
+        "pj_conflit_equipe",
+        "pj_statut_comite"
       ],
       "_source": "redige_claude"
     }

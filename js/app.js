@@ -1790,7 +1790,7 @@ if (firebaseAvailable) {
                 'THEME_BASE_avec_frequence.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
                 'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv',
-                'THEME_BUSINESS_ANALYST.csv'
+                'THEME_BUSINESS_ANALYST.csv', 'THEME_CONSULTANT.csv', 'THEME_PROJET.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -5890,7 +5890,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -9180,7 +9180,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // domaine : pour les prompts ; noms : entreprises inventées que Gemini peut utiliser.
         const RP_METIERS = {
             logistique: { label: '🚚 Logistique', domaine: 'logistique / supply chain', noms: 'Logistiko pour l\'entreprise du candidat, Transvio ou Nordvracht pour des transporteurs, Delmaro pour un client' },
-            business_analyst: { label: '📊 Business analyst', domaine: 'business analysis (analyse des besoins, processus, projets IT)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients, Transvio pour un éditeur de logiciel' }
+            business_analyst: { label: '📊 Business analyst', domaine: 'business analysis (analyse des besoins, processus, projets IT)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients, Transvio pour un éditeur de logiciel' },
+            consultant_junior: { label: '💼 Consultant junior', domaine: 'conseil en organisation et en management (consultant junior en cabinet)', noms: 'Zonvella Consulting pour le cabinet du candidat, Delmaro, Logistiko ou Nordvracht pour des clients' },
+            projet_junior: { label: '🗂️ Chef de projet junior', domaine: 'gestion de projet (chef de projet junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' }
         };
         const RP_JOB_METIERS = Object.fromEntries(Object.entries(RP_METIERS).map(([k, v]) => [k, v.label])); // un métier absent s'affiche avec son nom brut
         const RP_JOB_CANAUX = {
@@ -10513,7 +10515,15 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             { key: 'ba_outil', metier: 'business_analyst', label: '🧰 Choisir un outil', sujet: 'choisir entre deux logiciels, ou un développement sur mesure, pour un besoin métier : coût, délai, adoption par les utilisateurs' },
             { key: 'ba_business_case', metier: 'business_analyst', label: '💶 Petit business case', sujet: 'un projet d\'automatisation est-il rentable ? coût du projet contre temps gagné par les équipes' },
             { key: 'ba_priorites', metier: 'business_analyst', label: '📋 Prioriser des demandes', sujet: 'cinq demandes d\'utilisateurs pour une capacité limitée au prochain sprint : lesquelles faire d\'abord, et pourquoi ?' },
-            { key: 'ba_chiffres', metier: 'business_analyst', label: '📊 Lire des chiffres', sujet: 'un tableau de bord montre une baisse (ventes, satisfaction ou délais) : quelles questions poser et quelles hypothèses vérifier ?' }
+            { key: 'ba_chiffres', metier: 'business_analyst', label: '📊 Lire des chiffres', sujet: 'un tableau de bord montre une baisse (ventes, satisfaction ou délais) : quelles questions poser et quelles hypothèses vérifier ?' },
+            { key: 'cj_estimation', metier: 'consultant_junior', label: '🔢 Estimation (guesstimate)', sujet: 'une estimation à faire à voix haute (par exemple la taille d\'un marché ou un nombre de clients en Belgique) : le candidat doit découper le problème et poser ses hypothèses ; pas de bonne réponse unique' },
+            { key: 'cj_rentabilite', metier: 'consultant_junior', label: '📉 Baisse de bénéfice', sujet: 'un client voit son bénéfice baisser alors que son chiffre d\'affaires augmente : chercher les causes (coûts, prix, mix de produits)' },
+            { key: 'cj_croissance', metier: 'consultant_junior', label: '🚀 Croissance', sujet: 'un client veut grandir : nouveau produit, nouvelle région ou nouveaux clients ? choisir et justifier' },
+            { key: 'cj_organisation', metier: 'consultant_junior', label: '🏢 Organisation', sujet: 'une équipe ou un service fonctionne mal (délais, erreurs, ambiance) : que regarder en premier et que recommander ?' },
+            { key: 'pj_planning', metier: 'projet_junior', label: '📅 Planning qui dérape', sujet: 'un projet prend du retard à cause d\'une tâche bloquante : comment remettre le planning sur les rails ?' },
+            { key: 'pj_budget', metier: 'projet_junior', label: '💶 Budget dépassé', sujet: 'le budget d\'un projet sera dépassé : réduire le périmètre, demander plus d\'argent ou décaler ?' },
+            { key: 'pj_ressources', metier: 'projet_junior', label: '👥 Manque de personnes', sujet: 'deux personnes de l\'équipe partent en plein projet : comment réorganiser le travail ?' },
+            { key: 'pj_priorites', metier: 'projet_junior', label: '⚖️ Deux projets en conflit', sujet: 'deux projets ont besoin des mêmes personnes au même moment : comment choisir et convaincre ?' }
         ];
         let rpCaseMetier = 'logistique';
         const rpCaseThemesOf = m => RP_CASE_THEMES.filter(t => t.metier === m);

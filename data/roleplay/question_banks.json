@@ -293,6 +293,142 @@
         "Tijdens mijn stage heb ik bijvoorbeeld ...",
         "Als ik het goed begrijp, bedoelt u ...?"
       ]
+    },
+    {
+      "id": "consultant_junior",
+      "metier": "consultant_junior",
+      "label": "Entretien — consultant junior (premier poste)",
+      "poste": "Junior Consultant",
+      "contexte": "Entretien pour un poste de consultant junior chez Zonvella Consulting, un cabinet de conseil en organisation et en IT. Le candidat sort d'études. Le recruteur teste la motivation pour le conseil, la façon de structurer un problème (une petite estimation à voix haute) et la capacité à parler d'un projet avec la méthode STAR.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemorgen, welkom bij Zonvella Consulting. Fijn dat je er bent. Vertel eens iets over jezelf?",
+      "questions": {
+        "accroche": [
+          "Hoe ben je bij ons terechtgekomen?"
+        ],
+        "verif_cv": [
+          "Ik zie dat je [opleiding] hebt gestudeerd. Waarom die richting?",
+          "Vertel eens over een project uit je studies of je stage waar je trots op bent. Wat was jouw rol, wat heb je gedaan, en wat was het resultaat?"
+        ],
+        "clarification_poste": [
+          "Wat doet een consultant volgens jou, concreet, op een gewone dag?",
+          "Wat maakt volgens jou een goede consultant?"
+        ],
+        "technique": [
+          "Ik geef je een kleine oefening. Hoeveel koffie wordt er per dag gedronken in een kantoorgebouw met vijfhonderd werknemers? Denk luidop.",
+          "Een klant ziet zijn winst dalen, terwijl de verkoop stijgt. Welke vragen zou je eerst stellen?",
+          "Hoe zou je een probleem aanpakken waar je nog niets van weet?"
+        ],
+        "motivation": [
+          "Waarom wil je in consultancy werken, en niet direct bij een bedrijf?",
+          "Waarom ons kantoor?"
+        ],
+        "vision_carriere": [
+          "Waar zie je jezelf binnen vijf jaar?"
+        ],
+        "objections": [
+          "Consultancy betekent soms lange dagen en veel verplaatsingen. Hoe kijk je daartegen aan?",
+          "Je hebt nog geen werkervaring. Hoe ga je klanten overtuigen die twintig jaar ervaring hebben?"
+        ],
+        "perso": [
+          "Vertel eens over een moment waarop je een fout hebt gemaakt. Wat heb je daaruit geleerd?",
+          "Hoe ga je om met stress en meerdere deadlines tegelijk?"
+        ],
+        "dispo": [
+          "Wanneer zou je kunnen beginnen?",
+          "Heb je een rijbewijs? Onze klanten zitten soms buiten de stad."
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "de opdracht",
+        "de klant",
+        "de aanbeveling",
+        "de analyse",
+        "de hypothese",
+        "de schatting",
+        "de presentatie",
+        "het resultaat"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Ik deel het probleem eerst op in kleinere delen.",
+        "Mijn hypothese is ...",
+        "Laat me even samenvatten wat ik tot nu toe heb.",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
+    },
+    {
+      "id": "projectmanager_junior",
+      "metier": "projet_junior",
+      "label": "Entretien — chef de projet junior (premier poste)",
+      "poste": "Junior Projectmanager",
+      "contexte": "Entretien pour un poste de chef de projet junior chez Zonvella, dans l'équipe qui gère les projets internes (déménagements, nouveaux outils, réorganisations). Le candidat sort d'études ou a une première expérience. Le recruteur cherche l'organisation, la communication, le calme sous pression et des exemples concrets.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemiddag, welkom. Leuk je te ontmoeten. Kun je jezelf kort voorstellen?",
+      "questions": {
+        "accroche": [
+          "Hoe heb je de vacature gevonden?"
+        ],
+        "verif_cv": [
+          "Ik zie op je cv een stage bij [bedrijf]. Wat deed je daar precies?",
+          "Heb je al eens iets georganiseerd van begin tot einde, op school, in je stage of in een vereniging?"
+        ],
+        "clarification_poste": [
+          "Wat doet een projectmanager volgens jou?",
+          "Wat is het verschil tussen een junior en een senior projectmanager, denk je?"
+        ],
+        "technique": [
+          "Hoe maak je een planning voor een nieuw project?",
+          "Een collega levert zijn deel te laat. Wat doe je?",
+          "Het budget dreigt overschreden te worden. Hoe reageer je?",
+          "Welke tools gebruik je om een project op te volgen?",
+          "Een directeur vraagt een extra functie, maar de deadline blijft dezelfde. Wat zeg je?"
+        ],
+        "motivation": [
+          "Waarom wil je projectmanager worden?",
+          "Wat spreekt je aan in ons bedrijf?"
+        ],
+        "vision_carriere": [
+          "Waar zie je jezelf binnen drie jaar?"
+        ],
+        "objections": [
+          "Je hebt nog weinig ervaring met het leiden van mensen. Hoe ga je dat aanpakken?",
+          "Je zult met mensen werken die ouder en meer ervaren zijn dan jij. Hoe zie je dat?"
+        ],
+        "perso": [
+          "Vertel eens over een conflict in een team. Hoe heb je dat opgelost?",
+          "Hoe blijf je kalm als alles tegelijk misloopt?"
+        ],
+        "dispo": [
+          "Wanneer kun je beginnen?",
+          "Is [plaats] goed bereikbaar voor jou?"
+        ],
+        "cloture": [
+          "Heb je zelf nog vragen?"
+        ]
+      },
+      "vocabulaire": [
+        "de planning",
+        "de mijlpaal",
+        "het budget",
+        "het risico",
+        "de deadline",
+        "het stuurcomité",
+        "de scope",
+        "de stand van zaken"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Bijvoorbeeld, tijdens mijn stage ...",
+        "Eerst zou ik ..., daarna ...",
+        "Ik zou het op tijd melden aan ...",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
     }
   ]
 }
