@@ -11694,6 +11694,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     <button type="button" class="btn btn-green" id="prof-mic" onclick="profMic('nl')">🎤 Parler</button>
                     <button type="button" class="btn btn-gray" id="prof-hold" style="display:none;" onclick="profHold()">✋ Je réfléchis</button>
                     <button type="button" class="btn btn-gray" id="prof-mic-fr" onclick="profMic('fr')">🇫🇷 En français</button>
+                    <button type="button" class="btn btn-gray prof-hint-btn" onclick="profHint()" title="Je ne sais pas quoi dire">💡</button>
                 </div>`;
             profRenderPhases();
             (prof.log || []).forEach(m => profAppend(m, true));
@@ -11960,7 +11961,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         function profConvPrompt(isLast) {
             const phaseTxt = prof.phase === 0
                 ? `Phase actuelle : ÉCHAUFFEMENT (quelques minutes). Discussion informelle et chaleureuse pour faire basculer l'apprenant en néerlandais : sa semaine, son travail, ses projets, en lien avec son objectif. Pose UNE question à la fois et rebondis sur ce qu'il dit. Ne corrige que les fautes qui empêchent de comprendre, en reformulant correctement sa phrase dans ta réponse, sans faire de leçon.${prof.last ? ' Tu peux faire allusion à la séance précédente au début.' : ''}`
-                : `Phase actuelle : MISE EN PRATIQUE, le cœur du cours. Tâche : ${prof.task.titre}. ${prof.task.role_prof}${prof.task.texte_nl ? '\nTexte étudié (l\'apprenant l\'a sous les yeux) : ' + prof.task.texte_nl : ''}\nCe qu'on attend de l'apprenant : ${prof.task.objectif_fr}. Reste dans ton rôle. Fais-le parler le plus possible : demande-lui de préciser, d'expliquer pourquoi, de donner un exemple, de nuancer.`;
+                : `Phase actuelle : MISE EN PRATIQUE, le cœur du cours. Tâche : ${prof.task.titre}. ${prof.task.role_prof}${prof.task.situation_fr ? '\nSituation (l\'apprenant a cette fiche sous les yeux) : ' + prof.task.situation_fr : ''}${Array.isArray(prof.task.infos_fr) && prof.task.infos_fr.length ? '\nCe que l\'apprenant sait : ' + prof.task.infos_fr.join(' ; ') : ''}${Array.isArray(prof.task.a_dire_fr) && prof.task.a_dire_fr.length ? '\nCe qu\'il doit dire ou obtenir : ' + prof.task.a_dire_fr.join(' ; ') : ''}\nNe fais jamais allusion à quelque chose que l\'apprenant n\'a pas dit ; pose des questions simples auxquelles il peut répondre avec sa fiche.${prof.task.texte_nl ? '\nTexte étudié (l\'apprenant l\'a sous les yeux) : ' + prof.task.texte_nl : ''}\nCe qu'on attend de l'apprenant : ${prof.task.objectif_fr}. Reste dans ton rôle. Fais-le parler le plus possible : demande-lui de préciser, d'expliquer pourquoi, de donner un exemple, de nuancer.`;
             const hist = prof.history.map(h => h.who === 'prof' ? 'Prof : ' + h.nl + (h.fr ? ' [en français : ' + h.fr + ']' : '') : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
             return `Tu es un professeur particulier de néerlandais (néerlandais standard, comme en Flandre) qui donne un cours en tête-à-tête, à l'oral, à un apprenant francophone.
 ${profContextLines()}
@@ -12134,7 +12135,12 @@ Type imposé : ${type}.
 Fais-y apparaître la notion du jour et des mots du jour quand c'est naturel.
 ${past.length ? 'Évite les sujets des séances précédentes : ' + past.join(' ; ') + '.' : ''}
 Aucun nom de marque, d'entreprise ou de personne réelle (invente-les).
-Réponds UNIQUEMENT en JSON : {"titre": "titre court en français", "consigne_fr": "ce que l'apprenant doit faire, 1 ou 2 phrases en français", "role_prof": "qui tu joues et comment (pour toi, en français)", "objectif_fr": "ce qu'on attend de lui", "texte_nl": "", "texte_fr": ""}`;
+TRÈS IMPORTANT : l'apprenant doit savoir quoi dire sans rien inventer de compliqué. Donne-lui une FICHE concrète :
+- "situation_fr" : 2 ou 3 phrases simples qui posent le décor (qui, où, quoi, pourquoi maintenant) ;
+- "infos_fr" : 3 à 5 faits précis qu'il connaît et peut utiliser (chiffres, dates, problème, son avis à défendre…), en français ;
+- "a_dire_fr" : 2 ou 3 choses concrètes qu'il doit dire ou obtenir pendant l'échange, en français.
+Le personnage ne connaît que ce qui est dans la fiche et ce que l'apprenant dit : il ne fait JAMAIS allusion à quelque chose que l'apprenant n'a pas dit.
+Réponds UNIQUEMENT en JSON : {"titre": "titre court en français", "consigne_fr": "ce que l'apprenant doit faire, 1 phrase en français", "situation_fr": "", "infos_fr": [""], "a_dire_fr": [""], "role_prof": "qui tu joues et comment (pour toi, en français)", "objectif_fr": "ce qu'on attend de lui", "texte_nl": "", "texte_fr": ""}`;
         }
 
         async function profStartTask() {
@@ -12150,10 +12156,43 @@ Réponds UNIQUEMENT en JSON : {"titre": "titre court en français", "consigne_fr
                 return;
             }
             prof.task = r;
-            profAppend({ who: 'info', html: `<div class="prof-target-title">🎬 ${rpEscapeHtml(r.titre)}</div><div class="prof-fr">${rpEscapeHtml(r.consigne_fr || '')}</div>${r.texte_nl ? `<div class="prof-text">${rpEscapeHtml(r.texte_nl)} ${speakBtnHtml(r.texte_nl)}${r.texte_fr ? `<details class="prof-trad"><summary>Traduction</summary>${rpEscapeHtml(r.texte_fr)}</details>` : ''}</div>` : ''}` });
-            await profSpeak(r.consigne_fr, r.texte_nl || '');
+            const list = a => (Array.isArray(a) ? a : []).filter(Boolean);
+            const fiche = `${r.situation_fr ? `<div class="prof-fr">${rpEscapeHtml(r.situation_fr)}</div>` : ''}
+                ${list(r.infos_fr).length ? `<div class="prof-deb-sec">📋 Ce que tu sais</div><ul class="prof-fiche">${list(r.infos_fr).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
+                ${list(r.a_dire_fr).length ? `<div class="prof-deb-sec">🎯 Ce que tu dois dire</div><ul class="prof-fiche">${list(r.a_dire_fr).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}`;
+            profAppend({ who: 'info', html: `<div class="prof-target-title">🎬 ${rpEscapeHtml(r.titre)}</div><div class="prof-fr">${rpEscapeHtml(r.consigne_fr || '')}</div>${fiche}${r.texte_nl ? `<div class="prof-text">${rpEscapeHtml(r.texte_nl)} ${speakBtnHtml(r.texte_nl)}${r.texte_fr ? `<details class="prof-trad"><summary>Traduction</summary>${rpEscapeHtml(r.texte_fr)}</details>` : ''}</div>` : ''}` });
+            await profSpeak([r.consigne_fr, r.situation_fr].filter(Boolean).join(' '), r.texte_nl || '');
             if (!profActive()) return;
             await profConvTurn();
+        }
+
+        // ----- Souffleur : « 💡 Je ne sais pas quoi dire » -----
+        // Prompt séparé : propose 3 réponses possibles à la dernière réplique du prof, au niveau
+        // de l'apprenant ; un clic place la phrase dans la zone de texte, sans jamais l'envoyer.
+        async function profHint() {
+            if (!prof || prof.ended || prof.busy) return;
+            const lastProf = [...prof.log].reverse().find(m => m.who === 'prof' && m.nl);
+            const ex = prof.phase === 1 && prof.target ? prof.target.exercices[prof.exIdx] : null;
+            const ctx = ex ? `Exercice en cours — consigne : ${ex.consigne_fr} ; énoncé : ${ex.enonce}. Donne des PISTES (début de phrase, mot clé), pas la réponse complète.`
+                : (prof.phase === 2 && prof.task ? `Mise en pratique : ${prof.task.titre}. Fiche de l'apprenant : ${prof.task.situation_fr || ''} ${(prof.task.infos_fr || []).join(' ; ')} ; à dire : ${(prof.task.a_dire_fr || []).join(' ; ')}` : 'Échauffement : conversation libre sur sa semaine, son travail, ses projets.');
+            profThinking(true);
+            const r = await profGemini(`Tu aides un apprenant francophone de néerlandais (niveau ${prof.level}) qui ne sait pas quoi répondre pendant un cours.
+${ctx}
+${lastProf ? 'Dernière réplique du prof : « ' + lastProf.nl + ' »' : ''}
+Ce que l'apprenant sait de lui : ${prof.portrait.join(' ') || '(rien de particulier)'}
+Propose 3 réponses courtes et naturelles qu'il pourrait dire, adaptées à son niveau (phrases simples pour A1/A2), variées (par exemple : une réponse directe, une avec une raison, une qui pose une question en retour).
+Réponds UNIQUEMENT en JSON : [{"nl": "", "fr": ""}]`);
+            profThinking(false);
+            if (!prof || prof.ended) return;
+            const list = Array.isArray(r) ? r.filter(x => x && x.nl) : [];
+            if (!list.length) { profAppend({ who: 'info', html: '⚠️ Pas de suggestion pour l\'instant, réessaie.' }); return; }
+            profAppend({ who: 'info', html: `<div class="prof-deb-sec">💡 Tu pourrais dire :</div>${list.map(x => `<button type="button" class="prof-hint" data-nl="${rpEscapeHtml(x.nl)}" onclick="profHintUse(this)"><b>${rpEscapeHtml(x.nl)}</b><br><small>${rpEscapeHtml(x.fr || '')}</small></button>`).join('')}<div class="report-meta">Touche une phrase pour la mettre dans la zone de texte, adapte-la si tu veux, puis envoie-la ou dis-la au micro.</div>` });
+        }
+
+        function profHintUse(btn) {
+            const input = document.getElementById('prof-input');
+            if (input) { input.value = btn.dataset.nl; input.focus(); }
+            conjAudioSpeak(btn.dataset.nl, 'nl', PROF_RATE[prof.level]);
         }
 
         // ----- Bilan -----

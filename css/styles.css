@@ -721,3 +721,8 @@
         .acc-google-btn { background: #fff; color: #1f1f1f; border: 1px solid #dadce0; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .acc-google-g { font-weight: 800; color: #4285f4; font-size: 1.05rem; }
         .acc-backup-row { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-top: 1px solid var(--border); font-size: 0.85rem; }
+        /* Cours particulier : fiche de mise en pratique et souffleur */
+        .prof-fiche { margin: 4px 0 6px; padding-left: 18px; font-size: 0.85rem; }
+        .prof-mic-row .prof-hint-btn { flex: 0 0 auto; width: auto; padding-left: 14px; padding-right: 14px; }
+        .prof-hint { display: block; width: 100%; text-align: left; margin-top: 6px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-size: 0.88rem; }
+        .prof-hint small { color: var(--text-secondary); }
