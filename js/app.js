@@ -10768,7 +10768,9 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 dur: s.dur === 30 ? 30 : 15,
                 goal: PROF_GOALS[s.goal] ? s.goal : 'travail',
                 handsfree: s.handsfree !== false,
-                silence: [1500, 3000, 5000, 0].includes(s.silence) ? s.silence : 3000,
+                // 5 s par défaut (3 s coupait les pauses de réflexion) ; anciens réglages remis à 5 s.
+                silence: s.silenceV2 && [3000, 5000, 8000, 0].includes(s.silence) ? s.silence : 5000,
+                silenceV2: true,
                 notion: s.notion || ''
             };
             return state.settings.prof;
@@ -10924,6 +10926,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 </div>
                 <div class="prof-mic-row">
                     <button type="button" class="btn btn-green" id="prof-mic" onclick="profMic('nl')">🎤 Parler</button>
+                    <button type="button" class="btn btn-gray" id="prof-hold" style="display:none;" onclick="profHold()">✋ Je réfléchis</button>
                     <button type="button" class="btn btn-gray" id="prof-mic-fr" onclick="profMic('fr')">🇫🇷 En français</button>
                 </div>`;
             profRenderPhases();
@@ -11002,18 +11005,31 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             if (prof.handsfree && window.SpeechRecognition) profMic('nl');
         }
 
-        function profMicState(lang) {
-            const nl = document.getElementById('prof-mic'), fr = document.getElementById('prof-mic-fr');
-            const manual = profSettings().silence === 0;
-            if (nl) nl.innerText = lang === 'nl' ? (manual ? '🎙️ J\'écoute… touche pour envoyer' : '🎙️ J\'écoute… (touche pour envoyer tout de suite)') : '🎤 Parler';
-            if (fr) fr.innerText = lang === 'fr' ? '🎙️ J\'écoute en français…' : '🇫🇷 En français';
+        // countdown : secondes avant l'envoi automatique (affichées dans le bouton), hold : envoi
+        // automatique suspendu par « ✋ Je réfléchis ».
+        function profMicState(lang, countdown, hold) {
+            const nl = document.getElementById('prof-mic'), fr = document.getElementById('prof-mic-fr'), wait = document.getElementById('prof-hold');
+            const manual = profSettings().silence === 0 || hold;
+            const label = countdown ? `📤 Envoi dans ${countdown}… (touche pour envoyer)` : (manual ? '🎙️ J\'écoute… touche pour envoyer' : '🎙️ J\'écoute… (touche pour envoyer)');
+            if (nl) nl.innerText = lang === 'nl' ? label : '🎤 Parler';
+            if (fr) fr.innerText = lang === 'fr' ? label.replace('J\'écoute', 'J\'écoute en français') : '🇫🇷 En français';
+            if (wait) wait.style.display = lang && !manual ? '' : 'none';
+        }
+
+        function profHold() {
+            if (!profRec) return;
+            profRec.hold = true;
+            profMicState(profRec.lang, 0, true);
         }
 
         // Micro du cours : écoute CONTINUE, relancée si le navigateur la coupe (Android le fait
         // après chaque phrase), et envoi seulement après un silence réglable (state.settings.prof.
         // silence, en ms ; 0 = on touche le bouton pour envoyer). Avant la première parole, on
-        // laisse 10 secondes pour réfléchir.
-        const PROF_SILENCES = [1500, 3000, 5000, 0];
+        // laisse 10 secondes pour réfléchir. Si la phrase s'arrête visiblement en plein milieu
+        // (« omdat », « de », « euh »…), on attend deux fois plus longtemps. Les 2 dernières
+        // secondes s'affichent ; « ✋ Je réfléchis » suspend l'envoi automatique pour cette réponse.
+        const PROF_SILENCES = [3000, 5000, 8000, 0];
+        const PROF_UNFINISHED = /\b(de|het|een|en|of|maar|want|omdat|dat|die|als|om|te|ik|je|jij|we|wij|zij|hij|ze|met|van|in|op|voor|naar|aan|bij|uit|over|is|ben|bent|heb|hebt|heeft|wil|kan|moet|ga|zal|euh|eh|uh|uhm|ehm|dus|toen|wanneer|hoewel|zodat|doordat|terwijl|nadat|voordat|le|la|les|un|une|et|mais|que|qui|parce|pour|avec|dans|est|suis|ai|euh)$/i;
         function profMic(lang) {
             if (!prof || prof.ended) return;
             if (profRec) { profMicFinish(profRec, true); return; }
@@ -11065,8 +11081,14 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 if (!profActive()) { profMicFinish(st, false); return; }
                 const now = Date.now();
                 if (now - st.startAt > 120000) { profMicFinish(st, true); return; }
-                if (!silence) return;
-                if (st.heard ? now - st.lastAt > silence : now - st.startAt > 10000) profMicFinish(st, true);
+                if (!silence || st.hold) return;
+                if (!st.heard) { if (now - st.startAt > 10000) profMicFinish(st, true); return; }
+                const text = input ? input.value.trim() : '';
+                const limit = PROF_UNFINISHED.test(text) ? silence * 2 : silence;
+                const left = limit - (now - st.lastAt);
+                if (left <= 0) { profMicFinish(st, true); return; }
+                const cd = left <= 2000 ? Math.ceil(left / 1000) : 0;
+                if (cd !== st.cd) { st.cd = cd; profMicState(lang, cd); }
             }, 200);
             profRec = st;
             profMicState(lang);
