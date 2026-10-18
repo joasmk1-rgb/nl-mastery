@@ -10745,7 +10745,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         };
         const PROF_RATE = { A1: 0.8, A2: 0.88, B1: 0.95, B2: 1 };
         const PROF_GOALS = {
-            travail: { label: '💼 Travail', desc: 'contexte professionnel (logistique, supply chain, réunions, appels, e-mails, clients, collègues)' },
+            travail: { label: '💼 Travail', desc: 'contexte professionnel en général (réunions, appels, e-mails, clients, collègues, entretiens), sans secteur imposé' },
             quotidien: { label: '🏠 Quotidien', desc: 'vie quotidienne en Flandre / à Bruxelles (administration, voisins, commerces, rendez-vous, santé)' },
             aisance: { label: '💬 Aisance', desc: 'conversation générale : raconter, donner son avis, argumenter, nuancer, hésiter moins' }
         };
@@ -10819,7 +10819,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             };
             const ofLevel = fullDb.filter(i => usable(i) && i.niveauCECR === level);
             if (goal === 'travail') {
-                const metier = fullDb.filter(i => usable(i) && ((/^THEME_/.test(i.file) && i.file !== 'THEME_BASE') || i.file === 'KITS_JEU_DE_ROLE'));
+                const metier = fullDb.filter(i => usable(i) && /^THEME_/.test(i.file) && !['THEME_BASE', 'THEME_LOGISTIQUE', 'THEME_SUPPLYCHAIN'].includes(i.file));
                 const a = pick(metier, Math.ceil(n / 2), []);
                 return a.concat(pick(ofLevel, n - a.length, a));
             }
@@ -11147,7 +11147,10 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             if (prof.portrait.length) lines.push(`Ce que tu sais de lui (il l'a dit dans ses leçons) : ${prof.portrait.join(' ')}`);
             if (prof.last) lines.push(`Séance précédente (${new Date(prof.last.at).toLocaleDateString('fr-FR')}) : ${prof.last.resume || ''}${prof.last.defi ? ' Défi donné : ' + prof.last.defi : ''}`);
             lines.push(`Point de grammaire du jour : ${prof.notion.content.titre}.`);
-            lines.push(`Mots du jour à lui faire employer naturellement, si possible : ${prof.words.map(w => w.nl).join(', ')}.`);
+            lines.push(`Mots du jour à lui faire employer naturellement, si l'occasion se présente (ils ne doivent PAS décider du sujet) : ${prof.words.map(w => w.nl).join(', ')}.`);
+            lines.push(`Ne lui prête pas de métier ni de secteur (logistique ou autre) : pars uniquement de ce qu'il te dit lui-même ; s'il n'a rien dit, reste général ou pose-lui la question.`);
+            const said = prof.phase > 0 ? prof.learner.slice(0, 10) : [];
+            if (said.length) lines.push(`Ce qu'il a dit plus tôt dans la séance : ${said.join(' / ')}`);
             return lines.join('\n');
         }
 
@@ -11323,7 +11326,7 @@ Réponds UNIQUEMENT en JSON : {"correct": false, "question": false, "explication
             const past = profLessonsSorted().slice(0, 5).map(l => l.taskTitle).filter(Boolean);
             return `Tu prépares la MISE EN PRATIQUE (cœur d'un cours particulier de néerlandais, environ ${n} répliques de l'apprenant). ${profContextLines()}
 Type imposé : ${type}.
-- jeu_de_role : une situation réaliste liée à son objectif ; tu joues un personnage (collègue, client, employé, voisin…), l'apprenant joue son propre rôle.
+- jeu_de_role : une situation réaliste liée à son objectif ; tu joues un personnage (collègue, client, employé, voisin…), l'apprenant joue son propre rôle. Si pendant l'échauffement il a parlé de son métier ou de ses projets, la situation peut s'y rattacher ; sinon, choisis une situation courante, sans secteur particulier.
 - texte : un court texte néerlandais (${prof.level === 'A1' ? '40 à 60' : prof.level === 'A2' ? '60 à 90' : '90 à 140'} mots, adapté au niveau) sur un thème lié à son objectif ou de société, puis discussion : compréhension, puis son avis.
 - debat : un sujet sur lequel il doit donner et défendre son avis, avec des nuances ; tu joues un contradicteur bienveillant.
 Fais-y apparaître la notion du jour et des mots du jour quand c'est naturel.
