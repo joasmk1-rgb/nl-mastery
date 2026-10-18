@@ -4370,15 +4370,23 @@ if (firebaseAvailable) {
 
         // Voix d'une langue donnée ; la promesse se résout à la fin de la phrase (avec un délai
         // maximum : certains navigateurs mobiles n'envoient pas toujours l'évènement de fin).
-        function conjAudioSpeak(text, lang, rate) {
+        // opt.speaker : 0 ou 1 = personnage d'une scène (2e voix néerlandaise si l'appareil en a une,
+        // sinon même voix plus grave), opt.pitch pour forcer la hauteur.
+        function conjAudioSpeak(text, lang, rate, opt) {
             return new Promise(resolve => {
                 if (!('speechSynthesis' in window) || !text) return resolve();
                 const u = new SpeechSynthesisUtterance(stripMarkdown(text));
                 u.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
                 const voices = window.speechSynthesis.getVoices();
-                const voice = lang === 'fr'
+                const nlVoices = voices.filter(x => x.lang.toLowerCase().startsWith('nl'));
+                let voice = lang === 'fr'
                     ? voices.find(x => x.lang.toLowerCase().startsWith('fr'))
-                    : (rpDutchVoice || voices.find(x => x.lang.toLowerCase().startsWith('nl')));
+                    : (rpDutchVoice || nlVoices[0]);
+                if (lang !== 'fr' && opt && opt.speaker === 1) {
+                    const other = nlVoices.find(x => x !== voice);
+                    if (other) voice = other; else u.pitch = 0.75;
+                }
+                if (opt && opt.pitch) u.pitch = opt.pitch;
                 if (voice) u.voice = voice;
                 u.rate = rate;
                 let done = false;
@@ -4403,13 +4411,13 @@ if (firebaseAvailable) {
         }
 
         // Lecture qui respecte Pause / Passer / Arrêter : attend la reprise avant de parler.
-        async function conjAudioSay(text, lang, rate) {
+        async function conjAudioSay(text, lang, rate, opt) {
             const run = conjAudioRun;
             if (!run) return;
             await conjAudioWait(0);
             if (run.stop || run.skip) return;
             if (!document.getElementById(run.viewId).classList.contains('active')) { conjAudioStop(); return; }
-            await conjAudioSpeak(text, lang, rate);
+            await conjAudioSpeak(text, lang, rate, opt);
         }
 
         // Une écoute courte, sur une instance de reconnaissance dédiée (non continue : elle s'arrête
@@ -4704,6 +4712,190 @@ if (firebaseAvailable) {
                         <button class="btn btn-green" style="margin-top:8px;" onclick="wordAudioStart()">🔁 Recommencer</button>
                         <button class="btn btn-gray" onclick="wordAudioRenderSetup()">⚙️ Changer les réglages</button>
                     </div>`;
+            }
+        }
+
+        // ===== Écouter une scène (spectateur) =====
+        // Lecteur commun : dialogues modèles des modules (stockés) et scènes complètes générées par
+        // Gemini pour un jeu de rôle (gardées sur l'appareil, localStorage SCENES_KEY). Deux voix
+        // quand c'est possible ; réglage state.settings.sceneMode : nl | nl_fr | fr_nl.
+        const SCENES_KEY = 'nl_scenes_v1';
+        let sceneCurrent = null; // { title, lines, roles, back, regen }
+
+        function sceneMode() { return (state.settings && state.settings.sceneMode) || 'nl_fr'; }
+        function sceneRate() { return (state.settings && state.settings.sceneRate) || 0.95; }
+        function sceneSet(key, value) { state.settings[key] = value; save(); sceneRenderChips(); }
+
+        function sceneRenderChips() {
+            const el = document.getElementById('scene-chips');
+            if (!el) return;
+            const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            const m = sceneMode(), r = sceneRate();
+            el.innerHTML = `
+                <div class="conj-audio-chips">
+                    ${chip(m === 'nl', "sceneSet('sceneMode','nl')", '🇳🇱 seul')}
+                    ${chip(m === 'nl_fr', "sceneSet('sceneMode','nl_fr')", '🇳🇱 puis 🇫🇷')}
+                    ${chip(m === 'fr_nl', "sceneSet('sceneMode','fr_nl')", '🇫🇷 puis 🇳🇱')}
+                    <span class="conj-chip-sep"></span>
+                    ${chip(r === 0.8, "sceneSet('sceneRate',0.8)", '🐢 Lent')}
+                    ${chip(r === 0.95, "sceneSet('sceneRate',0.95)", 'Normal')}
+                </div>`;
+        }
+
+        // lines : [{ qui: 'A' | 'B' | 'titre', nl, fr }] ; roles : { A, B } ; back : fonction de retour.
+        function sceneOpen(scene) {
+            conjAudioStop();
+            sceneCurrent = scene;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('scene-view').classList.add('active');
+            const box = document.getElementById('scene-content');
+            const roles = scene.roles || {};
+            box.innerHTML = `
+                <h2 style="margin-bottom:4px;">👂 ${rpEscapeHtml(scene.title)}</h2>
+                ${scene.subtitle ? `<p class="prep-sub">${rpEscapeHtml(scene.subtitle)}</p>` : ''}
+                <div id="scene-chips"></div>
+                <div class="conj-audio-controls" style="margin:10px 0;">
+                    <button type="button" class="btn btn-green" onclick="scenePlay(0)">▶️ Écouter</button>
+                    <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
+                    <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭</button>
+                    <button type="button" class="btn btn-gray" onclick="conjAudioStop()">⏹</button>
+                </div>
+                ${scene.regen ? `<button type="button" class="report-link" onclick="sceneCurrent.regen()">🔄 Générer une autre scène</button>` : ''}
+                <div id="scene-lines">${scene.lines.map((l, i) => l.qui === 'titre'
+                    ? `<div class="scene-title" id="scene-line-${i}">${rpEscapeHtml(l.nl)}</div>`
+                    : `<div class="scene-line scene-${l.qui}" id="scene-line-${i}" onclick="scenePlay(${i})">
+                        <div class="scene-who">${rpEscapeHtml(roles[l.qui] || l.qui)}</div>
+                        <div class="scene-nl">${rpEscapeHtml(l.nl)}</div>
+                        <div class="scene-fr">${rpEscapeHtml(l.fr || '')}</div>
+                    </div>`).join('')}</div>
+                <p class="conj-audio-hint">Touche une réplique pour reprendre la lecture à partir d'elle. Garde l'écran allumé.</p>`;
+            sceneRenderChips();
+            window.scrollTo(0, 0);
+        }
+
+        function sceneBack() {
+            conjAudioStop();
+            if (sceneCurrent && sceneCurrent.back) sceneCurrent.back(); else showPratiquer();
+        }
+
+        async function scenePlay(from) {
+            const sc = sceneCurrent;
+            if (!sc) return;
+            conjAudioStop();
+            const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: 'scene-view' };
+            conjAudioRun = run;
+            try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
+            for (let i = from || 0; i < sc.lines.length && !run.stop; i++) {
+                const l = sc.lines[i];
+                run.skip = false;
+                const el = document.getElementById('scene-line-' + i);
+                document.querySelectorAll('#scene-lines .active').forEach(x => x.classList.remove('active'));
+                if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+                const rate = sceneRate(), mode = sceneMode();
+                if (l.qui === 'titre') { await conjAudioWait(600); continue; }
+                const speaker = l.qui === 'B' ? 1 : 0;
+                if (mode === 'fr_nl' && l.fr) { await conjAudioSay(l.fr, 'fr', rate); await conjAudioWait(250); }
+                await conjAudioSay(l.nl, 'nl', rate, { speaker });
+                if (mode === 'nl_fr' && l.fr) { await conjAudioWait(250); await conjAudioSay(l.fr, 'fr', rate); }
+                await conjAudioWait(500);
+            }
+            if (conjAudioRun === run) {
+                conjAudioRelease(run);
+                conjAudioRun = null;
+                document.querySelectorAll('#scene-lines .active').forEach(x => x.classList.remove('active'));
+            }
+        }
+
+        // Tous les dialogues modèles d'un module, étape par étape.
+        function sceneModule(id) {
+            const m = modRpData[id];
+            if (!m) return;
+            const lines = [];
+            m.etapes.forEach((e, i) => {
+                if (!(e.dialogue || []).length) return;
+                lines.push({ qui: 'titre', nl: (i + 1) + '. ' + e.titre });
+                e.dialogue.forEach(l => lines.push({ qui: l.qui, nl: l.nl, fr: l.fr, roleA: e.roles && e.roles.A }));
+            });
+            // Le nom du personnage A change d'une étape à l'autre : on l'affiche ligne par ligne.
+            const roles = { A: 'Interlocuteur', B: 'Toi' };
+            sceneOpen({ title: m.titre, subtitle: 'Tous les dialogues du module, à écouter comme un podcast.', lines: lines.map(l => l.roleA ? Object.assign({}, l) : l), roles, back: () => showModuleRp(id) });
+            lines.forEach((l, i) => { if (l.roleA && l.qui === 'A') { const w = document.querySelector('#scene-line-' + i + ' .scene-who'); if (w) w.textContent = l.roleA; } });
+        }
+
+        // ----- Scènes générées pour un jeu de rôle -----
+        function scenesCache() { try { return JSON.parse(localStorage.getItem(SCENES_KEY)) || {}; } catch (e) { return {}; } }
+        function scenesSave(cache) { try { localStorage.setItem(SCENES_KEY, JSON.stringify(cache)); } catch (e) { /* stockage plein */ } }
+
+        // Description d'un jeu de rôle pour Gemini : qui est A, la situation, la première réplique.
+        function rpSceneSource(launch) {
+            if (!launch) return null;
+            if (launch.type === 'bank' && rpRealData) {
+                const b = rpRealData.banks[launch.index];
+                if (!b || rpBankLang(b) !== 'nl') return null;
+                const qs = Object.values(b.questions || {}).flat().slice(0, 10);
+                return { title: b.label, roleA: 'Le recruteur', roleB: 'Le candidat', welcome: b.welcome || qs[0] || '',
+                    desc: 'Entretien d\'embauche pour le poste : ' + (b.poste || '') + '. ' + (b.contexte || '') + ' Le recruteur pose notamment ces questions : ' + qs.join(' / ') };
+            }
+            if (launch.type === 'rp') {
+                const s = rpFindScenario(launch.cat, launch.id);
+                if (!s) return null;
+                return { title: s.label.replace(/^\S+\s/, ''), roleA: 'L\'interlocuteur', roleB: 'Toi', welcome: s.welcome, desc: s.prompt };
+            }
+            if (launch.type === 'sit' && rpJobData) {
+                const s = rpJobData.situations.find(x => x.id === launch.id);
+                if (!s || rpSitLang(s) !== 'nl') return null;
+                return { title: rpSitTitle(s), roleA: 'L\'interlocuteur', roleB: 'L\'employé (toi)', welcome: rpSitAmorce(s),
+                    desc: 'Situation au travail (' + (s.poste || 'logistique') + ') : ' + s.contexte + ' A est la personne qui s\'adresse à l\'employé ; B est l\'employé, qui gère bien la situation.' };
+            }
+            if (launch.type === 'lib') {
+                const e = rpLibFind(launch.id);
+                if (!e) return null;
+                return { title: e.label, roleA: 'L\'interlocuteur', roleB: 'Toi', welcome: e.welcome, desc: 'Rôle de A : ' + e.role + ' Situation (vue par B) : ' + e.contexte };
+            }
+            return null;
+        }
+
+        function rpSceneOpenFromBtn(btn) {
+            try { const d = JSON.parse(decodeURIComponent(btn.dataset.scene)); rpSceneOpen(d.key, d.launch, false); } catch (e) { console.warn(e); }
+        }
+
+        async function rpSceneOpen(key, launch, forceNew) {
+            const src = rpSceneSource(launch);
+            if (!src) return;
+            const back = () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); rpShowScenarioPicker(); };
+            const cache = scenesCache();
+            const saved = (cache[key] || []);
+            const show = sc => sceneOpen({ title: src.title, subtitle: (saved.length > 1 ? 'Scène ' + (saved.indexOf(sc) + 1) + '/' + saved.length + ' · ' : '') + 'Écoute la scène comme si tu étais dans la pièce.',
+                lines: sc.lignes, roles: { A: sc.roleA || src.roleA, B: src.roleB }, back, regen: () => rpSceneOpen(key, launch, true) });
+            if (saved.length && !forceNew) { show(saved[saved.length - 1]); return; }
+            if (!GeminiService.getKey()) { alert('Générer une scène nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'); return; }
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('scene-view').classList.add('active');
+            document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p class="prep-sub">Gemini écrit la scène…</p>`;
+            sceneCurrent = { back };
+            const kit = rpHasKit(key) ? rpBuildKit(key) : null;
+            const words = kit ? kit.verbs.map(v => v.inf).concat(kit.words.map(w => w.nl)).slice(0, 18) : [];
+            try {
+                const raw = await GeminiService.generate(
+                    'Écris une scène de dialogue réaliste en néerlandais de Flandre courant (niveau B1, phrases naturelles à l\'oral, pas trop longues) entre deux personnes.\n' +
+                    'Situation : ' + src.desc + '\n' +
+                    'A = ' + src.roleA + ' ; B = ' + src.roleB + ', un francophone qui parle bien néerlandais et se débrouille très bien : il sert de modèle à imiter.\n' +
+                    'La scène commence par cette réplique de A : """' + src.welcome + '"""\n' +
+                    '12 à 16 répliques qui alternent, avec un vrai déroulé (début, questions, réponses précises, conclusion). Noms de personnes et d\'entreprises inventés.' +
+                    (words.length ? ' Emploie naturellement plusieurs de ces mots : ' + words.join(', ') + '.' : '') + '\n' +
+                    'Réponds UNIQUEMENT en JSON : {"roleA": "nom court de A en français (ex. La recruteuse)", "lignes": [{"qui": "A", "nl": "réplique", "fr": "traduction française"}]}'
+                );
+                const obj = rpHelpParseJson(raw);
+                const lignes = obj && Array.isArray(obj.lignes) ? obj.lignes.filter(l => l && (l.qui === 'A' || l.qui === 'B') && l.nl).map(l => ({ qui: l.qui, nl: String(l.nl), fr: String(l.fr || '') })) : [];
+                if (lignes.length < 4) throw new Error('scène incomplète');
+                const sc = { roleA: obj.roleA ? String(obj.roleA) : src.roleA, lignes, at: Date.now() };
+                const c2 = scenesCache();
+                c2[key] = (c2[key] || []).concat(sc).slice(-3);
+                scenesSave(c2);
+                saved.push(sc);
+                show(sc);
+            } catch (e) {
+                document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p style="color:var(--wrong);">Scène impossible à générer : ${rpEscapeHtml(e.message)}</p><button class="btn btn-gray" onclick="sceneBack()">← Retour</button>`;
             }
         }
 
@@ -8223,7 +8415,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 });
             } else {
                 cat.items.forEach(item => {
-                    html += `<button class="rp-scenario-btn" onclick="rpStartScenario('${catKey}','${item.id}')">${item.label}</button>`;
+                    html += rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartScenario('${catKey}','${item.id}')">${item.label}</button>`, 'rp:' + item.id, item.label, { type: 'rp', cat: catKey, id: item.id });
                 });
             }
             listDiv.innerHTML = html;
@@ -9197,9 +9389,15 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         // Bouton « 📚 Préparer » accolé au bouton d'un scénario dans les listes.
         function rpPrepRow(scenarioBtnHtml, key, label, launch) {
-            if (!rpHasKit(key)) return scenarioBtnHtml;
+            const hasKit = rpHasKit(key);
+            const canListen = !!rpSceneSource(launch);
+            if (!hasKit && !canListen) return scenarioBtnHtml;
             const data = encodeURIComponent(JSON.stringify({ key, label, launch }));
-            return `<div class="rp-scenario-row">${scenarioBtnHtml}<button type="button" class="rp-prep-btn" data-prep="${data}" onclick="rpPrepOpenFromBtn(this)" title="Préparer les mots et les verbes de ce jeu de rôle">📚 Préparer</button></div>`;
+            const sceneData = encodeURIComponent(JSON.stringify({ key, launch }));
+            return `<div class="rp-scenario-row">${scenarioBtnHtml}` +
+                (hasKit ? `<button type="button" class="rp-prep-btn" data-prep="${data}" onclick="rpPrepOpenFromBtn(this)" title="Préparer les mots et les verbes de ce jeu de rôle">📚<span class="rp-prep-label"> Préparer</span></button>` : '') +
+                (canListen ? `<button type="button" class="rp-prep-btn" data-scene="${sceneData}" onclick="rpSceneOpenFromBtn(this)" title="Écouter une scène complète, comme spectateur">👂</button>` : '') +
+                `</div>`;
         }
 
         function rpPrepOpenFromBtn(btn) {
@@ -9488,7 +9686,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <button class="modrp-step final${s.finalResult && s.finalResult.passed ? ' done' : ''}" onclick="modRpPlay('${id}', 'final')">
                     <span class="modrp-num">🏆</span><span><b>${rpEscapeHtml(m.final.titre)} · examen du module</b><br><small>${s.finalResult && s.finalResult.passed ? '✅ Réussi — tu peux le rejouer quand tu veux' : rpEscapeHtml(m.final.consigne)}</small></span>
                 </button>
-                <button class="btn btn-gray" style="margin-top:12px;" onclick="rpPrepOpen('mod:${id}', '${rpEscapeHtml(m.titre).replace(/'/g, "\\'")} — tout le module', { type: 'mod', id: '${id}', etape: 'final' })">📚 Tout le vocabulaire du module (réviser, conjuguer, écouter)</button>`;
+                <button class="btn btn-gray" style="margin-top:12px;" onclick="sceneModule('${id}')">🎧 Écouter tous les dialogues du module</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpPrepOpen('mod:${id}', '${rpEscapeHtml(m.titre).replace(/'/g, "\\'")} — tout le module', { type: 'mod', id: '${id}', etape: 'final' })">📚 Tout le vocabulaire du module (réviser, conjuguer, écouter)</button>`;
         }
 
         // ----- Portrait -----

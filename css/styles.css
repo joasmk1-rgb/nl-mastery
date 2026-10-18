@@ -391,6 +391,14 @@
         .rpw-chip { background: var(--surface-2); border-radius: var(--radius-pill); padding: 3px 10px; font-size: 0.82rem; font-weight: 600; }
         .rpw-chip small { font-weight: 400; color: var(--text-secondary); }
         .rp-message.rpw-inline { display: inline; background: none; padding: 0; margin: 0; border: none; box-shadow: none; max-width: none; }
+        .scene-title { font-weight: 700; margin: 14px 0 6px; color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .scene-line { padding: 8px 10px; border-radius: var(--radius-md); margin-bottom: 6px; cursor: pointer; max-width: 88%; }
+        .scene-line.scene-A { background: var(--surface-2); }
+        .scene-line.scene-B { background: color-mix(in srgb, var(--primary) 12%, transparent); margin-left: auto; }
+        .scene-line.active, .scene-title.active { outline: 2px solid var(--primary); }
+        .scene-who { font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); }
+        .scene-nl { font-weight: 600; }
+        .scene-fr { font-size: 0.8rem; color: var(--text-secondary); }
         .modrp-level { margin-bottom: 10px; }
         .modrp-level > summary { cursor: pointer; font-weight: 700; padding: 8px 2px; list-style-position: inside; }
         .modrp-entry.passed { border-color: var(--success, #2e9e5b); }
@@ -430,6 +438,7 @@
         .rp-scenario-row { display: flex; gap: 6px; align-items: stretch; width: 100%; max-width: 520px; }
         .rp-scenario-row .rp-scenario-btn { flex: 1; min-width: 0; }
         .rp-prep-btn { flex: 0 0 auto; background: var(--surface-2); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 0 10px; font-size: 0.75rem; font-weight: 700; color: var(--text); cursor: pointer; margin-bottom: 8px; }
+        @media (max-width: 520px) { .rp-prep-label { display: none; } .rp-prep-btn { padding: 0 9px; font-size: 1rem; } }
         .rp-prep-btn:active { border-color: var(--primary); color: var(--primary); }
         .prep-sub { font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 12px; }
         .prep-actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
