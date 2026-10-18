@@ -2067,10 +2067,16 @@ if (firebaseAvailable) {
                 .trim();
         }
 
+        // Les trous des exercices (___, ----, ....) étaient lus « tiret tiret » ou « liggend
+        // streepje » : on les remplace par une courte pause.
+        function speechBlanks(text) {
+            return String(text).replace(/_+|-{3,}|\.{4,}|…{2,}/g, ' … ').replace(/\s+/g, ' ').trim();
+        }
+
         function speakNL(text) {
             if (!('speechSynthesis' in window) || !text) return;
             // Pour la voix, on retire aussi les emojis, que certaines voix décrivent à haute voix.
-            text = stripMarkdown(text).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '').trim();
+            text = speechBlanks(stripMarkdown(text)).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '').trim();
             if (!text) return;
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
@@ -4966,7 +4972,7 @@ if (firebaseAvailable) {
         function conjAudioSpeak(text, lang, rate, opt) {
             return new Promise(resolve => {
                 if (!('speechSynthesis' in window) || !text) return resolve();
-                const u = new SpeechSynthesisUtterance(stripMarkdown(text));
+                const u = new SpeechSynthesisUtterance(speechBlanks(stripMarkdown(text)));
                 u.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
                 const voices = window.speechSynthesis.getVoices();
                 const nlVoices = voices.filter(x => x.lang.toLowerCase().startsWith('nl'));
