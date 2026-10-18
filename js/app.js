@@ -4136,7 +4136,7 @@ if (firebaseAvailable) {
                     ${v.exempleNl ? `<div class="conj-sentence">${v.exempleNl} ${speakBtnHtml(v.exempleNl)}<br>${v.exempleFr}</div>` : ''}
                     <button class="btn btn-green" style="margin-top:12px;" onclick="conjExerciseStart('${esc(v.infinitief)}')">🎯 S'entraîner sur ce verbe</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="conjAudioOpen()">🎧 Écouter et répéter</button>
-                    <button class="btn btn-gray" style="margin-top:8px;" onclick="conjHandsfreeVerb('${esc(v.infinitief)}')">🗣️ Exercice mains libres (à l'oral)</button>
+                    <button class="btn btn-gray" style="margin-top:8px;" onclick="conjHandsfreeVerb('${esc(v.infinitief)}')">🗣️ Mains libres : répondre ou écouter</button>
                     <button type="button" class="report-link" data-report="${encodeURIComponent(JSON.stringify({ kind: 'conjugaison', ref: v.infinitief, nl: v.infinitief, fr: v.fr, context: 'fiche du verbe (précise la forme dans le message)' }))}" onclick="reportFromBtn(this)">⚠️ Signaler une erreur sur ce verbe</button>
                 </div>
                 <div id="conj-exercise-box"></div>`;
@@ -4712,8 +4712,8 @@ if (firebaseAvailable) {
         // réponse dans l'autre langue, dit la bonne réponse et enchaîne seule. Un 2e essai après la
         // correction (non compté). Seul le sens fr2nl (produire la forme néerlandaise) alimente
         // state.conjStats, comme l'entraînement écrit. Moteur audio commun (Pause/Passer/Arrêter).
-        async function conjHandsfreeRun(questions, dir, boxId, viewId, onExit) {
-            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible dans ce navigateur (utilise Chrome)."); return; }
+        async function conjHandsfreeRun(questions, dir, boxId, viewId, onExit, listenOnly) {
+            if (!listenOnly && !window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible dans ce navigateur (utilise Chrome)."); return; }
             questions.forEach(q => { if (!q.frq) q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer, true); });
             const list = questions.filter(q => q.frq);
             if (!list.length) { alert('Traductions françaises indisponibles pour ces verbes.'); return; }
@@ -4725,7 +4725,7 @@ if (firebaseAvailable) {
             conjHfExit = onExit;
             box.innerHTML = `
                 <div class="conj-card conj-audio">
-                    <div class="conj-audio-title">🗣️ Mains libres · ${dir === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷'}</div>
+                    <div class="conj-audio-title">${listenOnly ? '👂 Écoute seule' : '🗣️ Mains libres'} · ${dir === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷'}</div>
                     <div id="conj-hf-now" class="conj-audio-now"></div>
                     <div class="conj-audio-controls">
                         <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
@@ -4759,6 +4759,16 @@ if (firebaseAvailable) {
                 show(q, idx);
                 await conjAudioSay(asked, dir === 'fr2nl' ? 'fr' : 'nl', 0.95);
                 if (run.stop || run.skip) continue;
+                if (listenOnly) {
+                    // Écoute seule : un court temps pour chercher, puis la traduction, sans écouter.
+                    await conjAudioWait(900);
+                    if (run.stop || run.skip) continue;
+                    show(q, idx, null, true);
+                    await conjAudioSay(expected, dir === 'fr2nl' ? 'nl' : 'fr', 0.95);
+                    done++;
+                    await conjAudioWait(700);
+                    continue;
+                }
                 await conjAudioWait(0);
                 show(q, idx, { html: '🎤 À toi…' });
                 const heard = await conjAudioListen(listenLang);
@@ -4779,14 +4789,14 @@ if (firebaseAvailable) {
                 }
                 await conjAudioWait(500);
             }
-            if (done) save();
+            if (done && !listenOnly) save();
             if (conjAudioRun === run) {
                 conjAudioRelease(run);
                 conjAudioRun = null;
                 box.innerHTML = `
                     <div class="conj-card conj-audio">
-                        <div class="conj-audio-title">🗣️ Terminé : ${ok}/${done} du premier coup</div>
-                        ${missed.length ? `<div class="section-title">📌 À revoir</div>${missed.map(m => `
+                        <div class="conj-audio-title">${listenOnly ? '👂 Terminé : ' + done + ' formes écoutées' : '🗣️ Terminé : ' + ok + '/' + done + ' du premier coup'}</div>
+                        ${listenOnly ? '' : missed.length ? `<div class="section-title">📌 À revoir</div>${missed.map(m => `
                             <div class="conj-tense-row" style="border-bottom:1px solid var(--border); padding:6px 0;">
                                 <span class="conj-grid-pronom" style="flex:1 1 45%;">${rpEscapeHtml(m.frq.fr)}</span>
                                 <span class="conj-form">${rpEscapeHtml(m.frq.fullAnswer)}</span>${speakBtnHtml(m.frq.fullAnswer)}
@@ -4794,7 +4804,7 @@ if (firebaseAvailable) {
                         <button class="btn btn-green" style="margin-top:12px;" onclick="conjHfRestart()">🔁 Recommencer</button>
                         <button class="btn btn-gray" onclick="conjHfExit && conjHfExit()">⚙️ Retour</button>
                     </div>`;
-                conjHfLast = { questions, dir, boxId, viewId, onExit };
+                conjHfLast = { questions, dir, boxId, viewId, onExit, listenOnly };
             }
         }
         let conjHfExit = null, conjHfLast = null;
@@ -4802,7 +4812,7 @@ if (firebaseAvailable) {
             const l = conjHfLast;
             if (!l) return;
             if (l.boxId === 'conj-training-content') { conjTrainingLaunch(); return; }
-            conjHandsfreeRun(l.questions.slice().sort(() => Math.random() - 0.5), l.dir, l.boxId, l.viewId, l.onExit);
+            conjHandsfreeRun(l.questions.slice().sort(() => Math.random() - 0.5), l.dir, l.boxId, l.viewId, l.onExit, l.listenOnly);
         }
 
         // Mains libres sur un verbe (fiche) : 10 formes au hasard, sens choisi dans les réglages.
@@ -4826,10 +4836,14 @@ if (firebaseAvailable) {
                         <button type="button" class="conj-filter-chip${dir === 'fr2nl' ? ' active' : ''}" onclick="conjTrainingConfig().hfDir='fr2nl'; save(); conjHandsfreeVerb('${v.infinitief.replace(/'/g, "\\'")}')">🇫🇷 → 🇳🇱</button>
                         <button type="button" class="conj-filter-chip${dir === 'nl2fr' ? ' active' : ''}" onclick="conjTrainingConfig().hfDir='nl2fr'; save(); conjHandsfreeVerb('${v.infinitief.replace(/'/g, "\\'")}')">🇳🇱 → 🇫🇷</button>
                     </div>
-                    <p class="conj-audio-hint">10 formes au hasard. L'app lit, t'écoute, corrige et enchaîne.</p>
+                    <div class="conj-audio-chips" style="margin-top:6px;">
+                        <button type="button" class="conj-filter-chip${!cfg.hfListen ? ' active' : ''}" onclick="conjTrainingConfig().hfListen=false; save(); conjHandsfreeVerb('${v.infinitief.replace(/'/g, "\\'")}')">🗣️ Je réponds</button>
+                        <button type="button" class="conj-filter-chip${cfg.hfListen ? ' active' : ''}" onclick="conjTrainingConfig().hfListen=true; save(); conjHandsfreeVerb('${v.infinitief.replace(/'/g, "\\'")}')">👂 Écoute seule</button>
+                    </div>
+                    <p class="conj-audio-hint">${cfg.hfListen ? '10 formes au hasard, dites dans une langue puis dans l\'autre, sans répondre.' : '10 formes au hasard. L\'app lit, t\'écoute, corrige et enchaîne.'}</p>
                     <button class="btn btn-green" id="conj-hf-start">▶️ Lancer</button>
                 </div>`;
-            document.getElementById('conj-hf-start').onclick = () => conjHandsfreeRun(pool.slice(0, 10), dir, 'conj-exercise-box', 'conjugaison-view', () => conjHandsfreeVerb(infinitief));
+            document.getElementById('conj-hf-start').onclick = () => conjHandsfreeRun(pool.slice(0, 10), dir, 'conj-exercise-box', 'conjugaison-view', () => conjHandsfreeVerb(infinitief), !!cfg.hfListen);
             box.scrollIntoView({ block: 'start' });
         }
 
@@ -5092,14 +5106,15 @@ if (firebaseAvailable) {
                     <div class="conj-setup-label">Écrit ou à l'oral ?</div>
                     <div class="conj-filter-chips-row">
                         ${chip(!cfg.handsfree, 'conjTrainingSetHandsfree(false)', '⌨️ À l\'écrit')}
-                        ${chip(!!cfg.handsfree, 'conjTrainingSetHandsfree(true)', '🗣️ Mains libres (oral)')}
+                        ${chip(!!cfg.handsfree && !cfg.hfListen, 'conjTrainingSetHandsfree(true)', '🗣️ Mains libres (je réponds)')}
+                        ${chip(!!cfg.handsfree && !!cfg.hfListen, "conjTrainingSetHandsfree('ecoute')", '👂 Écoute seule')}
                     </div>
                     ${cfg.handsfree ? `<div class="conj-setup-label">Dans quel sens ?</div>
                     <div class="conj-filter-chips-row">
-                        ${chip(cfg.hfDir !== 'nl2fr', "conjTrainingSetHfDir('fr2nl')", '🇫🇷 → 🇳🇱 j\'entends le français, je dis le néerlandais')}
-                        ${chip(cfg.hfDir === 'nl2fr', "conjTrainingSetHfDir('nl2fr')", '🇳🇱 → 🇫🇷 j\'entends le néerlandais, je dis le français')}
+                        ${chip(cfg.hfDir !== 'nl2fr', "conjTrainingSetHfDir('fr2nl')", cfg.hfListen ? '🇫🇷 puis 🇳🇱' : '🇫🇷 → 🇳🇱 j\'entends le français, je dis le néerlandais')}
+                        ${chip(cfg.hfDir === 'nl2fr', "conjTrainingSetHfDir('nl2fr')", cfg.hfListen ? '🇳🇱 puis 🇫🇷' : '🇳🇱 → 🇫🇷 j\'entends le néerlandais, je dis le français')}
                     </div>
-                    <p class="conj-audio-hint">L'app lit chaque question, t'écoute, te dit la bonne réponse et passe à la suivante toute seule. Garde l'écran allumé.</p>` : `
+                    <p class="conj-audio-hint">${cfg.hfListen ? 'L\'app lit chaque forme dans une langue puis dans l\'autre, sans t\'écouter, et enchaîne. Garde l\'écran allumé.' : 'L\'app lit chaque question, t\'écoute, te dit la bonne réponse et passe à la suivante toute seule. Garde l\'écran allumé.'}</p>` : `
                     <div class="conj-setup-label">Comment poser la question ?</div>
                     <div class="conj-filter-chips-row">${conjQuestionLangChipsHtml('renderConjTrainingSetup')}</div>`}
                     <div class="conj-setup-label">Quels temps ?</div>
@@ -5113,14 +5128,20 @@ if (firebaseAvailable) {
                 </div>`;
         }
 
-        function conjTrainingSetHandsfree(on) { conjTrainingConfig().handsfree = !!on; save(); renderConjTrainingSetup(); }
+        function conjTrainingSetHandsfree(on) {
+            const c = conjTrainingConfig();
+            c.handsfree = !!on;
+            c.hfListen = on === 'ecoute';
+            save();
+            renderConjTrainingSetup();
+        }
         function conjTrainingSetHfDir(dir) { conjTrainingConfig().hfDir = dir; save(); renderConjTrainingSetup(); }
 
         function conjTrainingLaunch() {
             const questions = pickConjTrainingQuestions(conjTrainingConfig());
             if (!questions.length) return;
             if (conjTrainingConfig().handsfree) {
-                conjHandsfreeRun(questions, conjTrainingConfig().hfDir === 'nl2fr' ? 'nl2fr' : 'fr2nl', 'conj-training-content', 'conj-training-view', () => renderConjTrainingSetup());
+                conjHandsfreeRun(questions, conjTrainingConfig().hfDir === 'nl2fr' ? 'nl2fr' : 'fr2nl', 'conj-training-content', 'conj-training-view', () => renderConjTrainingSetup(), !!conjTrainingConfig().hfListen);
                 return;
             }
             questions.forEach(q => { q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer); });
