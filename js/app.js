@@ -3062,7 +3062,7 @@ if (firebaseAvailable) {
                         <div class="dash-continue-title">${nextMod.icone || '🎭'} ${rpEscapeHtml(nextMod.titre)}</div>
                         <div class="dash-reco-reason">${doneEt}/${nextMod.etapes.length} étapes · ${rpEscapeHtml(nextMod.accroche || nextMod.objectif || '')}</div>
                         <div class="dash-reco-actions">
-                            <button class="btn btn-green" onclick="showModuleRp('${nextMod.id}')">${doneEt ? 'Continuer' : 'Commencer'}</button>
+                            <button class="btn btn-green" onclick="guideStart('${nextMod.id}')">${doneEt ? 'Continuer' : 'Commencer'}</button>
                         </div>
                     </div>`;
             }
@@ -3158,7 +3158,7 @@ if (firebaseAvailable) {
                     ${list.map((m, i) => {
                         const done = m.etapes.filter(e => modRpEtapeDone(m.id, e)).length;
                         const passed = isPassed(m);
-                        return `<div class="modrp-entry${passed ? ' passed' : ''}" onclick="showModuleRp('${m.id}')">
+                        return `<div class="modrp-entry${passed ? ' passed' : ''}" onclick="guideStart('${m.id}')">
                             <span class="modrp-entry-icon">${passed ? '🏆' : (m.icone || '🎭')}</span>
                             <span><b>${i + 1}. ${rpEscapeHtml(m.titre)}</b><br><small>${passed ? 'Réussi' : done + '/' + m.etapes.length + ' étapes'} · ${rpEscapeHtml(m.accroche || m.objectif)}</small></span>
                         </div>`;
@@ -9783,6 +9783,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="cat-bar"><div class="cat-bar-fill" style="width:${Math.round(done / m.etapes.length * 100)}%"></div></div>
                     <p class="report-meta">${done}/${m.etapes.length} étapes terminées${s.finalResult && s.finalResult.passed ? ' · 🏆 module réussi' : (s.final ? ' · examen final tenté' : '')}</p>
                 </div>
+                <button class="btn btn-green" style="margin-bottom:12px;" onclick="guideStart('${id}')">▶️ ${s.guide ? 'Continuer la session guidée' : 'Commencer la session guidée'}</button>
+                <p class="report-meta" style="margin-top:0;">Ou revois une partie précise :</p>
                 ${m.portrait ? `<button class="modrp-step${nPerso ? ' done' : ''}" onclick="modRpShowPortrait()">
                     <span class="modrp-num">🪪</span><span><b>Mon portrait</b><br><small>${nPerso ? nPerso + ' phrases sur toi, prêtes à apprendre' : 'Commence ici : dis qui tu es, l\'app en fait tes phrases en néerlandais'}</small></span>
                 </button>` : ''}
@@ -9979,8 +9981,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function modRpRenderEx() {
-            const ex = modRpEx, box = document.getElementById('modrp-ex');
+            const ex = modRpEx, box = document.getElementById((ex && ex.boxId) || 'modrp-ex');
             if (!ex || !box) return;
+            if (ex.i >= ex.list.length && ex.onDone) { const f = ex.onDone; ex.onDone = null; f(ex); return; }
             if (ex.i >= ex.list.length) {
                 const id = modRpCurrent;
                 const st = modRpState(id).etapes[ex.etapeId] || (modRpState(id).etapes[ex.etapeId] = {});
@@ -10022,6 +10025,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <button class="btn btn-green" onclick="modRpCheck()">Vérifier</button>`;
             }
             box.innerHTML = `<div class="conj-card">${head}${body}<div class="acc-error" id="modrp-fb" style="margin-top:8px;"></div></div>`;
+            if (ex.onRender) { ex.onRender(q); return; }
             if (q.type === 'ecoute') speakNL(q.nl);
             if (q.type === 'repondre') speakNL(q.question);
             const input = document.getElementById('modrp-input');
@@ -10087,6 +10091,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             ex.heard = null;
             ex.checking = true;
             if (ok) ex.score++;
+            (ex.results || (ex.results = []))[ex.i] = ok;
+            if (ex.onCheck) ex.onCheck(ok, expected);
             const fb = document.getElementById('modrp-fb');
             fb.style.color = ok ? 'var(--success)' : 'var(--wrong)';
             fb.innerHTML = (ok ? '✅ ' : '❌ Réponse : ') + rpEscapeHtml(expected) + ' ' + speakBtnHtml(expected) +
@@ -10095,21 +10101,28 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         // ----- Jeu de rôle d'une étape ou final -----
-        function modRpPlay(id, etapeId) {
+        function modRpRolePrompt(id, etapeId) {
             const m = modRpData[id];
-            if (!m) return;
-            if (!GeminiService.getKey()) { alert("Le jeu de rôle a besoin de ta clé Gemini (Profil → 🤖 Intelligence IA). Les exercices et le vocabulaire marchent sans."); return; }
             const isFinal = etapeId === 'final';
             const e = isFinal ? null : m.etapes.find(x => x.id === etapeId);
             const jeu = isFinal ? m.final : e.jeu;
             const perso = modRpSentences(id).filter(s => isFinal || s.etape === etapeId);
             const words = isFinal ? [] : e.vocab.verbes.concat(e.vocab.mots.map(x => x.nl));
-            const prompt = 'Tu joues un rôle dans un jeu de rôle avec un apprenant francophone qui débute en néerlandais (niveau A1).\n' +
+            const prompt = 'Tu joues un rôle dans un jeu de rôle avec un apprenant francophone qui débute en néerlandais (niveau ' + (m.niveau || 'A1') + ').\n' +
                 'Ton rôle : ' + jeu.role + '\n' +
                 'Parle exclusivement en néerlandais de Flandre très simple : phrases courtes, mots très courants, une seule question à la fois. Réagis à ce que dit réellement l\'apprenant, ne corrige jamais sa langue et ne sors jamais de ton rôle. Si l\'apprenant semble perdu, reformule plus simplement.\n' +
                 (words.length ? 'Emploie naturellement ces mots de la leçon : ' + words.join(', ') + '.\n' : '') +
                 (perso.length ? 'Voici ce que l\'apprenant a préparé sur lui (ne le récite pas : pose tes questions et laisse-le le dire ; s\'il oublie un point, relance-le dessus) : ' + perso.map(s => s.nl).join(' ') + '\n' : '') +
                 '\nTu as déjà ouvert la conversation en disant : """' + jeu.welcome + '""" — enchaîne à partir de sa réponse.';
+            return { jeu, perso, prompt };
+        }
+
+        function modRpPlay(id, etapeId) {
+            const m = modRpData[id];
+            if (!m) return;
+            if (!GeminiService.getKey()) { alert("Le jeu de rôle a besoin de ta clé Gemini (Profil → 🤖 Intelligence IA). Les exercices et le vocabulaire marchent sans."); return; }
+            const isFinal = etapeId === 'final';
+            const { jeu, perso, prompt } = modRpRolePrompt(id, etapeId);
             const st = modRpState(id);
             if (isFinal) st.final = true; else (st.etapes[etapeId] || (st.etapes[etapeId] = {})).played = true;
             save();
@@ -10156,20 +10169,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const m = modRpData[id];
             if (!m) return;
             if (rpIsRecording && rpRecognition) rpRecognition.stop();
-            const p = modRpState(id).portrait;
             const userLines = rpConversationHistory.slice(1).filter(x => x.role === 'user').map(x => x.parts[0].text);
-            const text = normalize(userLines.join(' '));
-            const topics = (m.examen && Array.isArray(m.examen.sujets)) ? m.examen.sujets.map(s => ({
-                key: s.label, etape: s.etape, label: s.label,
-                // Motifs spéciaux : « #epeler » = au moins trois lettres isolées à la suite (« k a y e m b e ») ;
-                // « #perfectum-hebben / -zijn » = auxiliaire puis participe dans la même phrase.
-                test: (t, pp) => (s.mots || []).some(w => w[0] === '#' && (MODRP_SPECIAL[w] || /$^/).test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => new RegExp('(^|[^a-z])' + normalize(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t))
-                    || (s.portrait && pp[s.portrait] && t.includes(normalize(String(pp[s.portrait]))))
-            })) : MODRP_TOPICS;
-            const checks = topics.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));
-            const covered = checks.filter(c => c.ok).length;
-            const coverageOk = covered >= Math.ceil(0.75 * checks.length);
+            const { checks, covered, coverageOk } = modRpExamChecks(id, userLines);
             rpJobHideNav();
+
             document.getElementById('rp-step-chat').style.display = 'none';
             document.getElementById('rp-step-debrief').style.display = 'flex';
             rpFillDebriefWords();
@@ -10215,10 +10218,33 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 return;
             }
             box.innerHTML = `<div class="conj-card" style="text-align:left;">${checklist}<p class="report-meta">L'examinateur analyse ta présentation...</p></div>`;
+            const transcript = rpConversationHistory.slice(1).map(x => (x.role === 'user' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + x.parts[0].text).join('\n');
+            render(await modRpExamJudge(id, transcript));
+        }
+
+        // Liste de contrôle de l'examen : les sujets du module abordés dans les répliques.
+        function modRpExamChecks(id, userLines) {
+            const m = modRpData[id];
+            const p = modRpState(id).portrait;
+            const text = normalize(userLines.join(' '));
+            const topics = (m.examen && Array.isArray(m.examen.sujets)) ? m.examen.sujets.map(s => ({
+                key: s.label, etape: s.etape, label: s.label,
+                // Motifs spéciaux : « #epeler » = au moins trois lettres isolées à la suite (« k a y e m b e ») ;
+                // « #perfectum-hebben / -zijn » = auxiliaire puis participe dans la même phrase.
+                test: (t, pp) => (s.mots || []).some(w => w[0] === '#' && (MODRP_SPECIAL[w] || /$^/).test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => new RegExp('(^|[^a-z])' + normalize(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t))
+                    || (s.portrait && pp[s.portrait] && t.includes(normalize(String(pp[s.portrait]))))
+            })) : MODRP_TOPICS;
+            const checks = topics.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));
+            const covered = checks.filter(c => c.ok).length;
+            return { checks, covered, coverageOk: covered >= Math.ceil(0.75 * checks.length) };
+        }
+
+        // Avis de l'examinateur (appel Gemini séparé) ; null si indisponible.
+        async function modRpExamJudge(id, transcript) {
+            const m = modRpData[id];
             let judge = null;
             if (GeminiService.getKey()) {
                 try {
-                    const transcript = rpConversationHistory.slice(1).map(x => (x.role === 'user' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + x.parts[0].text).join('\n');
                     const raw = await GeminiService.generate(
                         'Tu es examinateur de néerlandais pour francophones (niveau ' + m.niveau + '). Un apprenant a passé l\'examen oral du module « ' + m.titre + ' ». Consigne qu\'il avait : ' + m.final.consigne + ' Ses répliques peuvent avoir été dictées : ignore ponctuation et majuscules.\n\n' +
                         'Interlocuteur : ' + m.final.welcome + '\n' + transcript + '\n\n' +
@@ -10231,7 +10257,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     if (judge && (typeof judge.note !== 'number' || isNaN(judge.note))) judge.note = null;
                 } catch (e) { judge = null; }
             }
-            render(judge);
+            return judge;
         }
 
         async function rpShowJobHome() {
@@ -11017,9 +11043,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         }
 
         function profHold() {
-            if (!profRec) return;
-            profRec.hold = true;
-            profMicState(profRec.lang, 0, true);
+            if (profRec) profRec.pause();
         }
 
         // Micro du cours : écoute CONTINUE, relancée si le navigateur la coupe (Android le fait
@@ -11030,21 +11054,28 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         // secondes s'affichent ; « ✋ Je réfléchis » suspend l'envoi automatique pour cette réponse.
         const PROF_SILENCES = [3000, 5000, 8000, 0];
         const PROF_UNFINISHED = /\b(de|het|een|en|of|maar|want|omdat|dat|die|als|om|te|ik|je|jij|we|wij|zij|hij|ze|met|van|in|op|voor|naar|aan|bij|uit|over|is|ben|bent|heb|hebt|heeft|wil|kan|moet|ga|zal|euh|eh|uh|uhm|ehm|dus|toen|wanneer|hoewel|zodat|doordat|terwijl|nadat|voordat|le|la|les|un|une|et|mais|que|qui|parce|pour|avec|dans|est|suis|ai|euh)$/i;
-        function profMic(lang) {
-            if (!prof || prof.ended) return;
-            if (profRec) { profMicFinish(profRec, true); return; }
-            if (!window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : écris ta réponse, ou utilise Google Chrome."); return; }
-            if (prof.busy) return;
-            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            if (rpIsRecording && rpRecognition) rpRecognition.stop();
-            const input = document.getElementById('prof-input');
-            const silence = profSettings().silence;
-            const st = { lang, committed: '', session: '', rec: null, done: false, heard: false, lastAt: Date.now(), startAt: Date.now(), timer: null };
+        // Écoute longue commune (cours particulier, session guidée). o = { lang, input, silence,
+        // isActive(), onState(st, countdown), onEnd(st), onSubmit(text, st) }. Renvoie st, avec
+        // st.finish(envoyer) et st.pause() (« ✋ Je réfléchis »).
+        function longListen(o) {
+            const input = o.input;
+            const silence = o.silence;
+            const st = { lang: o.lang, committed: '', session: '', rec: null, done: false, heard: false, hold: false, lastAt: Date.now(), startAt: Date.now(), timer: null, cd: 0 };
             const show = interim => { if (input) input.value = [st.committed, st.session, interim].filter(Boolean).join(' ').trim(); };
+            st.finish = submit => {
+                if (st.done) return;
+                st.done = true;
+                clearInterval(st.timer);
+                try { st.rec && st.rec.abort(); } catch (e) {}
+                if (o.onEnd) o.onEnd(st);
+                const text = input ? input.value.trim() : '';
+                if (submit && text && o.isActive()) { input.value = ''; o.onSubmit(text, st); }
+            };
+            st.pause = () => { st.hold = true; if (o.onState) o.onState(st, 0); };
             const startSession = () => {
                 if (st.done) return;
                 const rec = new window.SpeechRecognition();
-                rec.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
+                rec.lang = o.lang === 'fr' ? 'fr-FR' : 'nl-NL';
                 rec.continuous = true;
                 rec.interimResults = true;
                 rec.onresult = e => {
@@ -11065,7 +11096,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     show(interim.trim());
                 };
                 rec.onerror = e => {
-                    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { alert('Micro refusé : autorise le micro pour ce site.'); profMicFinish(st, false); }
+                    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { alert('Micro refusé : autorise le micro pour ce site.'); st.finish(false); }
                 };
                 rec.onend = () => {
                     if (st.done) return;
@@ -11078,34 +11109,42 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             };
             st.timer = setInterval(() => {
                 if (st.done) return;
-                if (!profActive()) { profMicFinish(st, false); return; }
+                if (!o.isActive()) { st.finish(false); return; }
                 const now = Date.now();
-                if (now - st.startAt > 120000) { profMicFinish(st, true); return; }
+                if (now - st.startAt > 120000) { st.finish(true); return; }
                 if (!silence || st.hold) return;
-                if (!st.heard) { if (now - st.startAt > 10000) profMicFinish(st, true); return; }
+                if (!st.heard) { if (now - st.startAt > 10000) st.finish(true); return; }
                 const text = input ? input.value.trim() : '';
                 const limit = PROF_UNFINISHED.test(text) ? silence * 2 : silence;
                 const left = limit - (now - st.lastAt);
-                if (left <= 0) { profMicFinish(st, true); return; }
+                if (left <= 0) { st.finish(true); return; }
                 const cd = left <= 2000 ? Math.ceil(left / 1000) : 0;
-                if (cd !== st.cd) { st.cd = cd; profMicState(lang, cd); }
+                if (cd !== st.cd) { st.cd = cd; if (o.onState) o.onState(st, cd); }
             }, 200);
-            profRec = st;
-            profMicState(lang);
             if (input) input.value = '';
+            if (o.onState) o.onState(st, 0);
             startSession();
+            return st;
+        }
+
+        function profMic(lang) {
+            if (!prof || prof.ended) return;
+            if (profRec) { profRec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : écris ta réponse, ou utilise Google Chrome."); return; }
+            if (prof.busy) return;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            profRec = longListen({
+                lang, input: document.getElementById('prof-input'), silence: profSettings().silence,
+                isActive: profActive,
+                onState: (st, cd) => profMicState(lang, cd, st.hold),
+                onEnd: st => { if (profRec === st) profRec = null; profMicState(null); },
+                onSubmit: text => profSubmit(text, lang === 'fr')
+            });
         }
 
         function profMicFinish(st, submit) {
-            if (st.done) return;
-            st.done = true;
-            clearInterval(st.timer);
-            if (profRec === st) profRec = null;
-            try { st.rec && st.rec.abort(); } catch (e) {}
-            profMicState(null);
-            const input = document.getElementById('prof-input');
-            const text = input ? input.value.trim() : '';
-            if (submit && text && profActive()) { input.value = ''; profSubmit(text, st.lang === 'fr'); }
+            st.finish(submit);
         }
 
         function profSendTyped() {
@@ -11462,6 +11501,584 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 ${(l.mots || []).length ? `<div class="prof-deb-sec">📖 Mots à retenir${l.added ? ` (ajoutés à « ${PROF_WORDS_LIST} »)` : ''}</div><ul>${l.mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr)}</li>`).join('')}</ul>` : ''}
                 ${l.defi ? `<div class="prof-deb-sec">🎯 Défi pour la prochaine fois</div><p>${rpEscapeHtml(l.defi)}</p>` : ''}
             </div>`;
+        }
+
+        // ===== Session guidée des modules =====
+        // Un module se fait d'une traite, comme avec un tuteur : « Continuer » reprend là où on
+        // s'est arrêté, et le guide enchaîne tout seul, étape après étape : mise en situation,
+        // portrait (questions en néerlandais + français, pour les modules qui en ont un), mots,
+        // écoute du dialogue, « à toi de jouer », règle, exercices (on refait les ratés jusqu'à
+        // 70 %), petit jeu de rôle avec Gemini, puis l'étape suivante et enfin l'examen, joué dans
+        // la même conversation. Le contenu est celui des fichiers data/modules_rp (aucun appel
+        // Gemini hors jeux de rôle et avis de l'examinateur). Position mémorisée dans
+        // state.modRp[id].guide = { e: n° d'étape, b: n° de temps dans l'étape }.
+        const GUIDE_BEATS = ['scene', 'portrait', 'vocab', 'ecoute', 'jouer', 'regle', 'exercices', 'jeu'];
+        const GUIDE_BEAT_LABELS = { scene: 'Mise en situation', portrait: 'Toi', vocab: 'Les mots', ecoute: 'Écoute', jouer: 'À toi de jouer', regle: 'La règle', exercices: 'Exercices', jeu: 'Jeu de rôle' };
+        const GUIDE_PORTRAIT_Q = {
+            identite: [
+                { key: 'naam', nl: 'Hoe heet je?', fr: "Comment tu t'appelles ?", type: 'text', ph: 'Ton prénom' },
+                { key: 'leeftijd', nl: 'Hoe oud ben je?', fr: 'Quel âge as-tu ?', type: 'num' },
+                { key: 'land', nl: 'Waar kom je vandaan?', fr: "D'où viens-tu ?", type: 'select', list: P => P.pays.map(x => x.fr) },
+                { key: 'stad', nl: 'Waar woon je?', fr: 'Dans quelle ville habites-tu ?', type: 'text', ph: 'ex. Gent, Brussel' }
+            ],
+            famille: [
+                { key: 'relatie', nl: 'Ben je getrouwd?', fr: 'Tu es marié(e), en couple, célibataire ?', type: 'choice', options: [['alleenstaand', 'célibataire'], ['relatie', 'en couple'], ['samenwonend', 'cohabitant'], ['getrouwd', 'marié(e)']] },
+                { key: 'kinderen', nl: 'Heb je kinderen?', fr: 'Tu as des enfants ? Combien ?', type: 'num' },
+                { key: 'broers', nl: 'Heb je broers?', fr: 'Tu as des frères ? Combien ?', type: 'num' },
+                { key: 'zussen', nl: 'En zussen?', fr: 'Et des sœurs ?', type: 'num' }
+            ],
+            travail: [
+                { key: 'situatie', nl: 'Werk je?', fr: 'Tu travailles, tu cherches du travail ou tu étudies ?', type: 'choice', options: [['werk', 'je travaille'], ['werkzoekend', 'je cherche du travail'], ['student', 'je suis étudiant(e)']] },
+                { key: 'beroep', nl: 'Wat is je beroep?', fr: 'Quel est ton métier (actuel ou recherché) ?', type: 'select', list: P => P.metiers.map(x => x.fr) }
+            ],
+            loisirs: [
+                { key: 'talen', nl: 'Welke talen spreek je?', fr: 'Quelles langues parles-tu ?', type: 'multi', list: P => P.langues.map(x => x.fr) },
+                { key: 'hobbies', nl: 'Wat doe je graag?', fr: "Qu'est-ce que tu aimes faire ?", type: 'multi', list: P => P.loisirs.map(x => x.fr) }
+            ]
+        };
+        let guide = null; // { id, m, run, token, resolver, rec, skipBeat }
+
+        function guidePos() {
+            const g = modRpState(guide.id).guide;
+            return g && typeof g.e === 'number' ? { e: g.e, b: g.b || 0 } : { e: 0, b: 0 };
+        }
+        function guideSetPos(e, b) {
+            modRpState(guide.id).guide = { e, b };
+            save();
+        }
+        function guideAlive(token) {
+            return !!(guide && guide.token === token && guide.run && !guide.run.stop && conjAudioRun === guide.run && document.getElementById('modguide-view').classList.contains('active'));
+        }
+        function guideActive() { return !!(guide && guide.run && !guide.run.stop && document.getElementById('modguide-view').classList.contains('active')); }
+
+        function guideStart(id) {
+            const m = modRpData[id];
+            if (!m) { alert('Module en cours de chargement, réessaie dans un instant.'); return; }
+            conjAudioStop();
+            guideStopListen();
+            modRpCurrent = id;
+            modRpEx = null;
+            const mc = document.getElementById('modrp-content');
+            if (mc) mc.innerHTML = ''; // pas d'identifiants d'exercice en double
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('modguide-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: 'modguide-view' };
+            conjAudioRun = run;
+            try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { run.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
+            guide = { id, m, run, token: Date.now() + Math.random(), resolver: null, rec: null, skipBeat: false };
+            document.getElementById('guide-content').innerHTML = `
+                <div class="guide-head">
+                    <div class="guide-title"><span class="conj-niveau-badge">${m.niveau}</span> ${m.icone || '🎭'} ${rpEscapeHtml(m.titre)}</div>
+                    <div class="cat-bar"><div class="cat-bar-fill" id="guide-bar" style="width:0%"></div></div>
+                    <div class="guide-where" id="guide-where"></div>
+                    <div class="guide-controls">
+                        <button type="button" class="rp-coach-btn" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
+                        <button type="button" class="rp-coach-btn" onclick="guideSkip()">⏭ Passer</button>
+                        <button type="button" class="rp-coach-btn" onclick="guideQuit(); showModuleRp('${id}')">📋 Sommaire</button>
+                    </div>
+                </div>
+                <div id="guide-chat" class="prof-chat guide-chat"></div>
+                <div id="guide-actions" class="guide-actions"></div>
+                <div id="guide-input-row" style="display:none;">
+                    <div class="prof-input-row">
+                        <input type="text" id="guide-input" placeholder="Réponds en néerlandais…" onkeydown="if(event.key==='Enter') guideSendTyped()">
+                        <button type="button" class="btn btn-green prof-send" onclick="guideSendTyped()">➤</button>
+                    </div>
+                    <div class="prof-mic-row">
+                        <button type="button" class="btn btn-green" id="guide-mic" onclick="guideMic('nl')">🎤 Parler</button>
+                        <button type="button" class="btn btn-gray" id="guide-hold" style="display:none;" onclick="guide && guide.rec && guide.rec.pause()">✋ Je réfléchis</button>
+                        <button type="button" class="btn btn-gray" id="guide-mic-fr" onclick="guideMic('fr')">🇫🇷 En français</button>
+                    </div>
+                    <div id="guide-conv-extra"></div>
+                </div>`;
+            const st = modRpState(id);
+            const pos = guidePos();
+            if (pos.e >= m.etapes.length && st.finalResult && st.finalResult.passed) { guideOfferPassed(); return; }
+            if (pos.e > 0 || pos.b > 0) {
+                const e = m.etapes[pos.e];
+                guideBubble('info', `<div class="prof-phase-title">On reprend : ${e ? `étape ${pos.e + 1} · ${rpEscapeHtml(e.titre)}` : "l'examen"}</div>`);
+            }
+            guideLoop(guide.token);
+        }
+
+        function guideQuit() {
+            if (!guide) return;
+            guide.run.stop = true;
+            guideStopListen();
+            if (conjAudioRun === guide.run) conjAudioStop();
+            if (guide.resolver) { const r = guide.resolver; guide.resolver = null; r(null); }
+        }
+
+        function guideSkip() {
+            if (!guide) return;
+            guide.skipBeat = true;
+            guide.run.skip = true;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            guideStopListen();
+            if (guide.resolver) { const r = guide.resolver; guide.resolver = null; r('__skip__'); }
+        }
+
+        function guideWaitFor() {
+            return new Promise(resolve => { guide.resolver = resolve; });
+        }
+        function guideResolve(v) {
+            if (!guide || !guide.resolver) return;
+            const r = guide.resolver;
+            guide.resolver = null;
+            document.getElementById('guide-actions').innerHTML = '';
+            r(v);
+        }
+        // Boutons sous le chat ; la promesse rend la valeur du bouton touché.
+        function guideButtons(buttons) {
+            document.getElementById('guide-actions').innerHTML = buttons.map(([v, label, cls]) =>
+                `<button class="btn ${cls || 'btn-green'}" onclick="guideResolve('${v}')">${label}</button>`).join('');
+            return guideWaitFor();
+        }
+
+        function guideBubble(who, html) {
+            const chat = document.getElementById('guide-chat');
+            if (!chat) return null;
+            const div = document.createElement('div');
+            div.className = 'prof-msg ' + who;
+            div.innerHTML = html;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            return div;
+        }
+        // Le guide parle (français).
+        async function gSay(fr) {
+            guideBubble('prof guide-voice', `<div>${rpEscapeHtml(fr)}</div>`);
+            await conjAudioSay(fr, 'fr', 1);
+        }
+        // Une phrase néerlandaise (avec sa traduction) dite par la voix néerlandaise.
+        async function gSayNl(nl, fr, speaker) {
+            guideBubble('prof', `<div class="prof-nl">${rpEscapeHtml(nl)} ${speakBtnHtml(nl)}</div>${fr ? `<div class="prof-fr">${rpEscapeHtml(fr)}</div>` : ''}`);
+            await conjAudioSay(nl, 'nl', 0.9, speaker !== undefined ? { speaker } : undefined);
+        }
+
+        function guideRenderTop() {
+            const m = guide.m, pos = guidePos();
+            const total = m.etapes.length * GUIDE_BEATS.length + 1;
+            const done = Math.min(total, pos.e * GUIDE_BEATS.length + pos.b);
+            const bar = document.getElementById('guide-bar');
+            if (bar) bar.style.width = Math.round(done / total * 100) + '%';
+            const where = document.getElementById('guide-where');
+            if (where) where.innerText = pos.e >= m.etapes.length ? '🏆 Examen du module' : `Étape ${pos.e + 1}/${m.etapes.length} · ${m.etapes[pos.e].titre} · ${GUIDE_BEAT_LABELS[GUIDE_BEATS[pos.b]] || ''}`;
+        }
+
+        async function guideLoop(token) {
+            while (guideAlive(token)) {
+                const m = guide.m, pos = guidePos();
+                guide.run.skip = false;
+                guide.skipBeat = false;
+                guideRenderTop();
+                if (pos.e >= m.etapes.length) { await guideExam(token); return; }
+                const beat = GUIDE_BEATS[pos.b];
+                if (!beat) { guideSetPos(pos.e + 1, 0); continue; }
+                const e = m.etapes[pos.e];
+                const res = await GUIDE_FN[beat](e, token, pos);
+                if (!guideAlive(token)) return;
+                if (res && res.goto) { guideSetPos(res.goto.e, res.goto.b); continue; }
+                if (res === 'again') continue;
+                guideSetPos(pos.e, pos.b + 1);
+            }
+        }
+
+        const GUIDE_FN = {
+            async scene(e, token, pos) {
+                const m = guide.m;
+                if (pos.e === 0) {
+                    await gSay(`On commence le module « ${m.titre} ». ${m.objectif} Je te guide pas à pas : écoute, répète, et réponds quand c'est ton tour.`);
+                    if (!guideAlive(token)) return;
+                }
+                guideBubble('info', `<div class="prof-phase-title">Étape ${pos.e + 1} / ${m.etapes.length} · ${rpEscapeHtml(e.titre)}</div>`);
+                await gSay(e.intro);
+                if (guideAlive(token) && e.roles && e.roles.A) await gSay(`Dans cette scène, tu vas parler avec ${e.roles.A}.`);
+            },
+
+            async portrait(e, token) {
+                const m = guide.m, P = m.portrait;
+                if (!P || !e.portrait || !GUIDE_PORTRAIT_Q[e.id]) return;
+                const p = modRpState(guide.id).portrait;
+                const filled = k => p[k] !== undefined && p[k] !== '' && !(Array.isArray(p[k]) && !p[k].length);
+                const qs = GUIDE_PORTRAIT_Q[e.id].filter(q => !filled(q.key));
+                if (qs.length) {
+                    await gSay("Avant d'apprendre, parle-moi un peu de toi. Je te pose la question en néerlandais, tu réponds en touchant ou en écrivant.");
+                    for (const q of qs) {
+                        if (!guideAlive(token) || guide.skipBeat) return;
+                        await gSayNl(q.nl, q.fr);
+                        if (!guideAlive(token)) return;
+                        const v = await guideAskPortrait(q, P);
+                        if (v === null || v === '__skip__') { if (!guideAlive(token) || guide.skipBeat) return; continue; }
+                        if (v !== '__pass__') p[q.key] = v;
+                        modRpInjectPerso(guide.id);
+                        save();
+                    }
+                }
+                const sentences = modRpSentences(guide.id).filter(s => s.etape === e.id);
+                if (!sentences.length || !guideAlive(token) || guide.skipBeat) return;
+                await gSay(qs.length ? 'Voilà comment tu le dis en néerlandais. Répète après moi :' : 'Tes phrases pour cette étape, répète après moi :');
+                for (const s of sentences) {
+                    if (!guideAlive(token) || guide.skipBeat) return;
+                    await gSayNl(s.nl, s.fr);
+                    await conjAudioWait(2200);
+                }
+            },
+
+            async vocab(e, token) {
+                const verbFr = v => { const c = conjugationData.find(x => x.infinitief === v); return c ? c.fr : ''; };
+                const items = e.vocab.verbes.map(v => ({ nl: v, fr: verbFr(v) })).concat(e.vocab.mots, e.vocab.phrases || []);
+                await gSay('Voici les mots dont tu vas avoir besoin. Écoute-les une fois :');
+                if (!guideAlive(token)) return;
+                guideBubble('info', `<div class="guide-vocab">${items.map(x => `<div class="prep-row"><span class="prep-nl">${rpEscapeHtml(x.nl)}</span><span class="prep-fr">${rpEscapeHtml(x.fr || '')}</span><span class="prep-actions">${speakBtnHtml(x.nl)}</span></div>`).join('')}</div>`);
+                for (const x of items) {
+                    if (!guideAlive(token) || guide.skipBeat) break;
+                    await conjAudioSay(x.nl, 'nl', 0.85);
+                    if (x.fr) await conjAudioSay(x.fr.replace(/\s*\/\s*/g, ', '), 'fr', 1.1);
+                    await conjAudioWait(350);
+                }
+                if (!guideAlive(token) || guide.skipBeat) return;
+                await guideButtons([['ok', "➡️ C'est bon, on continue"]]);
+            },
+
+            async ecoute(e, token) {
+                if (!(e.dialogue || []).length) return;
+                const A = (e.roles && e.roles.A) || 'A', B = (e.roles && e.roles.B) || 'Toi';
+                await gSay(`Écoute d'abord la conversation.`);
+                await guideDialogue(e, false, token, A, B);
+            },
+
+            async jouer(e, token) {
+                if (!(e.dialogue || []).length) return;
+                const A = (e.roles && e.roles.A) || 'A', B = (e.roles && e.roles.B) || 'Toi';
+                const canListen = !!window.SpeechRecognition;
+                await gSay(canListen
+                    ? `À toi maintenant. Je fais ${A}. Quand c'est ton tour, je te montre ta phrase en français : dis-la en néerlandais.`
+                    : `À toi maintenant. Je fais ${A}. Quand c'est ton tour, lis ta réplique à voix haute.`);
+                if (!guideAlive(token)) return;
+                const r = await guideDialogue(e, canListen, token, A, B);
+                if (!guideAlive(token) || guide.skipBeat || !r || !r.asked) return;
+                await gSay(r.ok === r.asked ? `Parfait, ${r.ok} sur ${r.asked} du premier coup !` : `${r.ok} sur ${r.asked} du premier coup. Ce n'est pas grave : on retravaille tout ça juste après.`);
+            },
+
+            async regle(e, token) {
+                guideBubble('info', `<div class="conj-card modrp-rule" style="margin:0;"><div class="section-title" style="margin-top:0;">💡 ${rpEscapeHtml(e.regle.titre)}</div><p>${rpEscapeHtml(e.regle.explication)}</p>${e.regle.exemples.map(x => `<div class="prep-row"><span class="prep-nl">${rpEscapeHtml(x.nl)}</span><span class="prep-fr">${rpEscapeHtml(x.fr)}</span><span class="prep-actions">${speakBtnHtml(x.nl)}</span></div>`).join('')}</div>`);
+                await conjAudioSay('La règle : ' + e.regle.titre + '. ' + e.regle.explication, 'fr', 1);
+                for (const x of e.regle.exemples) {
+                    if (!guideAlive(token) || guide.skipBeat) break;
+                    await conjAudioSay(x.nl, 'nl', 0.85);
+                    await conjAudioWait(300);
+                }
+                if (!guideAlive(token) || guide.skipBeat) return;
+                await guideButtons([['ok', '➡️ Compris, aux exercices']]);
+            },
+
+            async exercices(e, token) {
+                const id = guide.id;
+                const all = modRpExercises(id, e);
+                const need = Math.ceil(0.7 * all.length);
+                await gSay(`Maintenant, ${all.length} petits exercices. Il en faut ${need} de justes pour valider l'étape.`);
+                if (!guideAlive(token)) return;
+                let r = await guideRunExercises(e, all, token);
+                if (!r) return;
+                let score = r.score, round = 0;
+                let missed = all.filter((q, i) => !r.results[i]);
+                while (score < need && round < 2 && guideAlive(token) && !guide.skipBeat) {
+                    round++;
+                    await gSay(`${score} sur ${all.length}. Il en faut ${need}. Je te rappelle la règle, et on refait celles que tu as ratées.`);
+                    if (!guideAlive(token)) return;
+                    await conjAudioSay(e.regle.titre + '. ' + e.regle.explication, 'fr', 1);
+                    const r2 = await guideRunExercises(e, missed, token);
+                    if (!r2) return;
+                    score += r2.score;
+                    missed = missed.filter((q, i) => !r2.results[i]);
+                }
+                const st = modRpState(id).etapes[e.id] || (modRpState(id).etapes[e.id] = {});
+                st.best = Math.max(st.best || 0, Math.min(score, all.length));
+                save();
+                if (!guideAlive(token) || guide.skipBeat) return;
+                if (score >= need) { await gSay(`Bravo, ${Math.min(score, all.length)} sur ${all.length} : c'est validé !`); return; }
+                await gSay("Ce n'est pas encore tout à fait ça. Tu peux tout refaire, ou continuer et y revenir plus tard.");
+                const v = await guideButtons([['again', '🔁 Refaire tous les exercices'], ['go', '➡️ Continuer quand même', 'btn-gray']]);
+                if (v === 'again') return 'again';
+            },
+
+            async jeu(e, token) {
+                const id = guide.id;
+                const st = modRpState(id).etapes[e.id] || (modRpState(id).etapes[e.id] = {});
+                if (!GeminiService.getKey()) {
+                    st.played = true;
+                    save();
+                    await gSay("Le petit jeu de rôle demande une clé Gemini. Tu as déjà joué le dialogue : on passe à la suite.");
+                } else {
+                    await gSay(`Petit jeu de rôle pour finir l'étape. ${e.jeu.consigne}`);
+                    if (!guideAlive(token)) return;
+                    const conv = await guideConversation('etape', e.id, token, 4);
+                    if (!conv) return;
+                    st.played = true;
+                    save();
+                }
+                if (!guideAlive(token)) return;
+                const isLast = guidePos().e === guide.m.etapes.length - 1;
+                await gSay(modRpEtapeDone(id, e)
+                    ? `Étape « ${e.titre} » terminée !${isLast ? " Il ne reste plus que l'examen." : ' On passe à la suivante.'}`
+                    : `Étape « ${e.titre} » vue. Les exercices ne sont pas encore à 70 % : tu pourras la refaire depuis le sommaire.`);
+            }
+        };
+
+        function guideAskPortrait(q, P) {
+            let html = '';
+            if (q.type === 'text') html = `<div class="prof-input-row"><input type="text" id="guide-pf" placeholder="${rpEscapeHtml(q.ph || '')}" autocomplete="off"><button class="btn btn-green prof-send" onclick="guidePortraitOk('text')">OK</button></div>`;
+            else if (q.type === 'num') html = `<div class="conj-audio-chips">${[0, 1, 2, 3, 4, 5].map(n => `<button class="conj-filter-chip" onclick="guideResolve('${n}')">${n === 5 ? '5+' : n}</button>`).join('')}</div>` +
+                (q.key === 'leeftijd' ? '' : '');
+            else if (q.type === 'select') html = `<div class="prof-input-row"><select id="guide-pf" class="prof-select"><option value="">—</option>${q.list(P).map(x => `<option value="${rpEscapeHtml(x)}">${rpEscapeHtml(x)}</option>`).join('')}</select><button class="btn btn-green prof-send" onclick="guidePortraitOk('text')">OK</button></div>`;
+            else if (q.type === 'choice') html = `<div class="conj-audio-chips">${q.options.map(([v, l]) => `<button class="conj-filter-chip" onclick="guideResolve('${v}')">${rpEscapeHtml(l)}</button>`).join('')}</div>`;
+            else if (q.type === 'multi') html = `<div class="conj-audio-chips" id="guide-pf-multi">${q.list(P).map(x => `<button type="button" class="conj-filter-chip" data-v="${rpEscapeHtml(x)}" onclick="this.classList.toggle('active')">${rpEscapeHtml(x)}</button>`).join('')}</div><button class="btn btn-green" onclick="guidePortraitOk('multi')">OK</button>`;
+            if (q.key === 'leeftijd') html = `<div class="prof-input-row"><input type="number" min="1" max="120" id="guide-pf" placeholder="Ton âge"><button class="btn btn-green prof-send" onclick="guidePortraitOk('text')">OK</button></div>`;
+            document.getElementById('guide-actions').innerHTML = `<div class="guide-portrait">${html}<button class="btn btn-gray" onclick="guideResolve('__pass__')">Je préfère ne pas répondre</button></div>`;
+            return guideWaitFor();
+        }
+        function guidePortraitOk(kind) {
+            if (kind === 'multi') {
+                const v = [...document.querySelectorAll('#guide-pf-multi .active')].map(b => b.dataset.v);
+                guideResolve(v);
+                return;
+            }
+            const el = document.getElementById('guide-pf');
+            const v = el ? el.value.trim() : '';
+            if (!v) return;
+            guideResolve(v);
+        }
+
+        // Dialogue modèle dans le chat : écoute seule, ou l'apprenant joue le rôle B (micro court).
+        async function guideDialogue(e, play, token, A, B) {
+            const pre = 'gl-' + Math.floor(Math.random() * 1e9) + '-';
+            guideBubble('info', `<div class="guide-dialog">${e.dialogue.map((l, i) => `<div class="modrp-line modrp-${l.qui}" id="${pre}${i}"><b>${rpEscapeHtml(l.qui === 'A' ? A : B)}</b> : <span class="modrp-line-nl${play && l.qui === 'B' ? ' hidden' : ''}">${rpEscapeHtml(l.nl)}</span> <small>${rpEscapeHtml(l.fr)}</small></div>`).join('')}</div>`);
+            let ok = 0, asked = 0;
+            for (let i = 0; i < e.dialogue.length; i++) {
+                if (!guideAlive(token) || guide.skipBeat) break;
+                const l = e.dialogue[i], el = document.getElementById(pre + i);
+                if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'nearest' }); }
+                if (play && l.qui === 'B') {
+                    asked++;
+                    let heard = await conjAudioListen();
+                    if (!guideAlive(token)) break;
+                    let good = !!heard && heard.some(h => rpSpeechMatch(h, l.nl));
+                    if (good) ok++;
+                    else if (!guide.skipBeat) {
+                        await conjAudioSay(l.nl, 'nl', 0.85);
+                        heard = await conjAudioListen();
+                        good = !!heard && heard.some(h => rpSpeechMatch(h, l.nl));
+                    }
+                    if (el) { el.querySelector('.modrp-line-nl').classList.remove('hidden'); el.classList.add(good ? 'good' : 'bad'); }
+                    if (!good) await conjAudioSay(l.nl, 'nl', 0.85);
+                } else {
+                    await conjAudioSay(l.nl, 'nl', 0.9, { speaker: l.qui === 'A' ? 0 : 1 });
+                    await conjAudioWait(250);
+                }
+                if (el) el.classList.remove('active');
+            }
+            return { ok, asked };
+        }
+
+        // Une série d'exercices dans le chat (moteur des exercices de module) ; rend { score, results }.
+        async function guideRunExercises(e, list, token) {
+            const boxId = 'guide-ex-' + Math.floor(Math.random() * 1e9);
+            guideBubble('info', `<div id="${boxId}"></div>`);
+            const done = guideWaitFor();
+            modRpEx = {
+                etapeId: e.id, list, i: 0, score: 0, built: [], results: [], boxId,
+                onDone: ex => guideResolve(ex),
+                onRender: q => guideExerciseVoice(q, token),
+                onCheck: (ok, expected) => {
+                    if (!guideAlive(token)) return;
+                    if (ok) conjAudioSpeak(['Goed!', 'Juist!', 'Prima!'][Math.floor(Math.random() * 3)], 'nl', 1);
+                    else conjAudioSpeak(expected, 'nl', 0.85);
+                }
+            };
+            modRpRenderEx();
+            const chat = document.getElementById('guide-chat');
+            chat.scrollTop = chat.scrollHeight;
+            const ex = await done;
+            const box = document.getElementById(boxId);
+            if (box) { box.removeAttribute('id'); box.innerHTML = ex && ex !== '__skip__' ? `<div class="report-meta">Exercices : ${ex.score}/${list.length}</div>` : ''; }
+            if (!ex || ex === '__skip__') { modRpEx = null; return null; }
+            modRpEx = null;
+            return { score: ex.score, results: ex.results || [] };
+        }
+
+        // Lecture de la consigne et micro automatique pour les exercices oraux.
+        async function guideExerciseVoice(q, token) {
+            const chat = document.getElementById('guide-chat');
+            if (chat) chat.scrollTop = chat.scrollHeight;
+            if (!guideAlive(token)) return;
+            const ex = modRpEx;
+            if (q.type === 'ecoute') await conjAudioSpeak(q.nl, 'nl', 0.85);
+            else if (q.type === 'repondre') await conjAudioSpeak(q.question, 'nl', 0.9);
+            else if (q.type === 'dire' || q.type === 'traduire') await conjAudioSpeak(q.fr, 'fr', 1);
+            if (!guideAlive(token) || modRpEx !== ex || !window.SpeechRecognition) return;
+            if (['dire', 'repondre', 'traduire', 'ecoute'].includes(q.type) && ex.list[ex.i] === q) modRpMic();
+        }
+
+        // ----- Conversation (jeu de rôle d'étape ou examen) dans le chat -----
+        // Prompt du personnage = celui des modules (modRpRolePrompt) + réponse en JSON avec un champ
+        // « fr » quand l'apprenant parle français. Sans Gemini (examen seulement), le guide relance.
+        function guideStopListen() {
+            if (guide && guide.rec) { const r = guide.rec; guide.rec = null; r.finish(false); }
+        }
+        function guideMicState(lang, cd, hold) {
+            const nl = document.getElementById('guide-mic'), fr = document.getElementById('guide-mic-fr'), wait = document.getElementById('guide-hold');
+            const manual = profSettings().silence === 0 || hold;
+            const label = cd ? `📤 Envoi dans ${cd}… (touche pour envoyer)` : (manual ? '🎙️ J\'écoute… touche pour envoyer' : '🎙️ J\'écoute… (touche pour envoyer)');
+            if (nl) nl.innerText = lang === 'nl' ? label : '🎤 Parler';
+            if (fr) fr.innerText = lang === 'fr' ? label : '🇫🇷 En français';
+            if (wait) wait.style.display = lang && !manual ? '' : 'none';
+        }
+        function guideMic(lang) {
+            if (!guide) return;
+            if (guide.rec) { guide.rec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : écris ta réponse, ou utilise Google Chrome."); return; }
+            if (!guide.conv || guide.conv.busy) return;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            guide.rec = longListen({
+                lang, input: document.getElementById('guide-input'), silence: profSettings().silence,
+                isActive: guideActive,
+                onState: (st, cd) => guideMicState(lang, cd, st.hold),
+                onEnd: st => { if (guide && guide.rec === st) guide.rec = null; guideMicState(null); },
+                onSubmit: text => guideConvSubmit(text, lang === 'fr')
+            });
+        }
+        function guideSendTyped() {
+            const input = document.getElementById('guide-input');
+            const text = input ? input.value.trim() : '';
+            if (!text) return;
+            input.value = '';
+            guideConvSubmit(text, /(\bcomment\b|\bpourquoi\b|est-ce|c'est|qu'est|veut dire|\bje ne\b|\bje comprends\b|\bon dit\b|ça|\bquoi\b|\bque\b|\bles\b)/i.test(text));
+        }
+        function guideConvSubmit(text, isFr) {
+            if (!guide || !guide.conv || guide.conv.busy || !guide.resolver) return;
+            guideResolve({ text, isFr });
+        }
+
+        async function guideConversation(kind, etapeId, token, maxTurns) {
+            const id = guide.id;
+            const { jeu, prompt } = modRpRolePrompt(id, etapeId);
+            const conv = { busy: false, history: [{ who: 'them', nl: jeu.welcome }], userLines: [] };
+            guide.conv = conv;
+            const row = document.getElementById('guide-input-row');
+            row.style.display = '';
+            document.getElementById('guide-conv-extra').innerHTML = kind === 'exam'
+                ? `<button class="btn btn-gray" style="margin-top:8px;" onclick="guideResolve('__fin__')">🏁 J'ai fini : évaluer ma présentation</button>` : '';
+            const themSay = async (nl, fr, nlFr) => {
+                guideBubble('prof', `${fr ? `<div class="prof-fr">🇫🇷 ${rpEscapeHtml(fr)}</div>` : ''}<div class="prof-nl">${rpEscapeHtml(nl)} ${speakBtnHtml(nl)}</div>${nlFr ? `<details class="prof-trad"><summary>Traduction</summary>${rpEscapeHtml(nlFr)}</details>` : ''}`);
+                if (fr) await conjAudioSay(fr, 'fr', 1);
+                await conjAudioSay(nl, 'nl', 0.9, { speaker: 0 });
+            };
+            await themSay(jeu.welcome, '', '');
+            const fallback = ['Oké. En verder?', 'Goed. Vertel nog iets.', 'Interessant! En wat nog meer?'];
+            let turns = 0, finished = false;
+            while (guideAlive(token) && !finished) {
+                if (window.SpeechRecognition && !guide.rec) guideMic('nl');
+                const ans = await guideWaitFor();
+                guideStopListen();
+                if (!guideAlive(token) || ans === null || ans === '__skip__') break;
+                if (ans === '__fin__') break;
+                guideBubble('moi', `${ans.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(ans.text)}`);
+                conv.history.push({ who: 'me', text: ans.text, isFr: ans.isFr });
+                if (!ans.isFr) { conv.userLines.push(ans.text); turns++; }
+                const closing = !!maxTurns && turns >= maxTurns;
+                conv.busy = true;
+                let reply = null;
+                if (GeminiService.getKey()) {
+                    const hist = conv.history.map(h => h.who === 'them' ? 'Toi (personnage) : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
+                    try {
+                        reply = rpHelpParseJson(await GeminiService.generate(prompt +
+                            '\n\nRègles en plus :\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
+                            (closing ? '\n- C\'est ta DERNIÈRE réplique : réagis et conclus gentiment, sans nouvelle question.' : '') +
+                            '\n\nConversation :\n' + hist + '\n\nRéponds UNIQUEMENT en JSON : {"fr": "", "nl": "", "nl_fr": "traduction française de nl"}'));
+                    } catch (e) { reply = null; }
+                }
+                if (!reply || !reply.nl) reply = { nl: fallback[turns % fallback.length], fr: '', nl_fr: '' };
+                conv.busy = false;
+                if (!guideAlive(token)) break;
+                conv.history.push({ who: 'them', nl: reply.nl });
+                await themSay(reply.nl, reply.fr, reply.nl_fr);
+                if (closing) finished = true;
+                if (kind === 'exam' && turns >= 14) finished = true;
+            }
+            guideStopListen();
+            row.style.display = 'none';
+            guide.conv = null;
+            if (!guideAlive(token)) return null;
+            return conv;
+        }
+
+        // ----- Examen -----
+        async function guideExam(token) {
+            const id = guide.id, m = guide.m;
+            const st = modRpState(id);
+            guideBubble('info', `<div class="prof-phase-title">🏆 Examen du module</div>`);
+            await gSay(`Dernière ligne droite : l'examen. ${m.final.consigne} Quand tu as tout dit, touche « J'ai fini ».`);
+            if (!guideAlive(token)) return;
+            const conv = await guideConversation('exam', 'final', token, 0);
+            if (!conv) return;
+            st.final = true;
+            save();
+            if (!conv.userLines.length) {
+                await gSay("Tu n'as encore rien dit en néerlandais. On recommence l'examen quand tu veux.");
+                const v = await guideButtons([['again', "🔁 Recommencer l'examen"]]);
+                if (v === 'again' && guideAlive(token)) guideExam(token);
+                return;
+            }
+            const { checks, covered, coverageOk } = modRpExamChecks(id, conv.userLines);
+            guideBubble('info', '<div class="report-meta" id="guide-judging">L\'examinateur écoute ta présentation…</div>');
+            const transcript = conv.history.map(h => (h.who === 'me' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + (h.text || h.nl)).join('\n');
+            const judge = await modRpExamJudge(id, transcript);
+            const wait = document.getElementById('guide-judging');
+            if (wait) wait.parentElement.remove();
+            if (!guideAlive(token)) return;
+            const score = judge && typeof judge.note === 'number' ? judge.note : null;
+            const passed = coverageOk && (score === null || score >= 6);
+            st.finalResult = { passed: passed || !!(st.finalResult && st.finalResult.passed), lastScore: score, lastCovered: covered, at: Date.now() };
+            save();
+            const arr = x => Array.isArray(x) ? x : [];
+            guideBubble('info', `<div class="prof-debrief">
+                <div class="prof-target-title">${passed ? '✅ Module réussi !' : '🔁 Presque : encore un essai'}</div>
+                <div class="prof-deb-sec">📋 Sujets abordés (${covered}/${checks.length})</div>
+                ${checks.map(c => `<div class="modrp-check ${c.ok ? 'ok' : 'ko'}">${c.ok ? '✓' : '✗'} ${rpEscapeHtml(c.label)}</div>`).join('')}
+                ${judge ? `<div class="prof-deb-sec">🗣️ Communication : ${score !== null ? score + '/10' : '—'}</div>
+                    ${judge.resume ? `<p>${rpEscapeHtml(judge.resume)}</p>` : ''}
+                    ${arr(judge.points_forts).length ? `<div class="prof-deb-sec">👍 Points forts</div><ul>${arr(judge.points_forts).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
+                    ${arr(judge.corrections).length ? `<div class="prof-deb-sec">✍️ À corriger</div><ul>${arr(judge.corrections).map(c => `<li>« ${rpEscapeHtml(c.phrase || '')} » → <b>${rpEscapeHtml(c.correction || '')}</b> ${c.correction ? speakBtnHtml(c.correction) : ''}<br><small>${rpEscapeHtml(c.explication || '')}</small></li>`).join('')}</ul>` : ''}
+                    ${judge.conseil ? `<div class="prof-deb-sec">💡 Conseil</div><p>${rpEscapeHtml(judge.conseil)}</p>` : ''}` : ''}
+            </div>`);
+            if (passed) {
+                await gSay(`Bravo, le module « ${m.titre} » est réussi !`);
+                guideOfferPassed(true);
+                return;
+            }
+            const missing = checks.filter(c => !c.ok);
+            const toReview = [...new Set(missing.map(c => c.etape))].map(eid => m.etapes.findIndex(e => e.id === eid)).filter(i => i >= 0);
+            await gSay(missing.length
+                ? `Il te manque : ${missing.map(c => c.label).join(', ')}. ${toReview.length ? 'Je te propose de revoir ' + (toReview.length > 1 ? 'ces étapes' : 'cette étape') + ', ou de retenter directement.' : 'Retente quand tu veux.'}`
+                : 'Tu as parlé de tout, mais il faut être un peu plus clair. Retente quand tu veux.');
+            const v = await guideButtons(toReview.map(i => ['e' + i, `📖 Revoir : ${rpEscapeHtml(m.etapes[i].titre)}`, 'btn-gray']).concat([['again', "🔁 Repasser l'examen"]]));
+            if (!guideAlive(token) || !v) return;
+            if (v === 'again') { guideExam(token); return; }
+            if (v[0] === 'e') { guideSetPos(parseInt(v.slice(1), 10), GUIDE_BEATS.indexOf('vocab')); guideLoop(token); }
+        }
+
+        // Module déjà réussi : module suivant, ou le refaire.
+        async function guideOfferPassed(justNow) {
+            const id = guide.id, token = guide.token;
+            const next = MODRP_IDS.slice(MODRP_IDS.indexOf(id) + 1).map(x => modRpData[x]).find(Boolean);
+            if (!justNow) await gSay(`Tu as déjà réussi le module « ${guide.m.titre} ».`);
+            const v = await guideButtons((next ? [['next', `▶️ Module suivant : ${rpEscapeHtml(next.titre)}`]] : []).concat([['restart', '🔁 Refaire le module depuis le début', 'btn-gray'], ['exam', "🏆 Repasser l'examen", 'btn-gray']]));
+            if (!guide || guide.token !== token || !v) return;
+            if (v === 'next') { guideStart(next.id); return; }
+            if (v === 'restart') { guideSetPos(0, 0); guideLoop(token); return; }
+            if (v === 'exam') { guideSetPos(guide.m.etapes.length, 0); guideExam(token); }
         }
 
         rpInitSpeechRecognition();
