@@ -100,7 +100,8 @@ function accSwitchTab(mode) {
     accMode = mode;
     document.getElementById('acc-tab-login').classList.toggle('active', mode === 'login');
     document.getElementById('acc-tab-signup').classList.toggle('active', mode === 'signup');
-    document.getElementById('acc-email-field').style.display = mode === 'signup' ? 'block' : 'none';
+    document.getElementById('acc-pseudo-label').innerText = mode === 'signup' ? 'Pseudo' : 'Pseudo (ou e-mail de récupération)';
+    document.getElementById('acc-forgot').style.display = mode === 'login' ? 'block' : 'none';
     document.getElementById('acc-hint').style.display = mode === 'signup' ? 'block' : 'none';
     document.getElementById('acc-submit-btn').innerText = mode === 'signup' ? 'Créer mon compte' : 'Se connecter';
     document.getElementById('acc-error').innerText = '';
@@ -111,7 +112,7 @@ function accSetError(msg) {
 }
 
 function accSubmit() {
-    const pseudo = document.getElementById('acc-pseudo').value.trim();
+    const ident = document.getElementById('acc-pseudo').value.trim();
     const password = document.getElementById('acc-password').value;
     accSetError('');
 
@@ -119,7 +120,9 @@ function accSubmit() {
         accSetError("Service de comptes indisponible pour le moment (connexion impossible). Ta progression locale reste intacte, réessaie plus tard.");
         return;
     }
-    if (!/^[a-zA-Z0-9_]{3,20}$/.test(pseudo)) {
+    // En connexion, on accepte aussi l'e-mail de récupération (il devient l'identifiant).
+    const isEmail = accMode === 'login' && ident.includes('@');
+    if (!isEmail && !/^[a-zA-Z0-9_]{3,20}$/.test(ident)) {
         accSetError('Pseudo : 3 à 20 caractères, lettres/chiffres/underscore uniquement.');
         return;
     }
@@ -128,13 +131,49 @@ function accSubmit() {
         return;
     }
 
-    if (accMode === 'signup') accSignup(pseudo, password);
-    else accLogin(pseudo, password);
+    if (accMode === 'signup') accSignup(ident, password);
+    else accLogin(ident, password);
+}
+
+// Crée le compte NL Mastery (pseudo + document users) pour un utilisateur Firebase déjà
+// authentifié : inscription classique ou première connexion avec Google.
+async function accCreateAccountDoc(user, pseudo) {
+    const uid = user.uid;
+    const pseudoLower = pseudo.toLowerCase();
+    await db.collection('usernames').doc(pseudoLower).set({ uid });
+    const rev = syncNewRev();
+    const userDoc = {
+        pseudo, pseudoLower,
+        role: 'user',
+        disabled: false,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        progress: syncClone(state),
+        progressRev: rev,
+        progressEpoch: 0
+    };
+    const invite = invitePending();
+    let inviteExpired = false;
+    if (invite) {
+        if (await inviteIsValid(invite)) { userDoc.beta = true; userDoc.inviteCode = invite; }
+        else inviteExpired = true;
+    }
+    await db.collection('users').doc(uid).set(userDoc);
+    localStorage.removeItem(INVITE_KEY);
+    currentUser = user;
+    currentUserDoc = userDoc;
+    // La progression faite sans compte sur cet appareil devient celle du nouveau compte.
+    syncMetaReplace({ uid, rev, epoch: 0, dirty: false });
+    cloudSetStatus('ok');
+    await socialEnsureProfileDocs();
+    await betaKeyRefresh(userDoc);
+    gateOpen();
+    if (state.onboardingSeen) showHome(); else showOnboarding();
+    if (inviteExpired) alert("Ton compte est créé, mais le lien d'invitation n'est plus actif : demande un nouveau lien pour l'accès bêta.");
 }
 
 async function accSignup(pseudo, password) {
     const pseudoLower = pseudo.toLowerCase();
-    const email = document.getElementById('acc-email').value.trim();
     accExplicitAuthInProgress = true;
     try {
         const takenDoc = await db.collection('usernames').doc(pseudoLower).get();
@@ -142,40 +181,8 @@ async function accSignup(pseudo, password) {
             accSetError('Ce pseudo est déjà pris.');
             return;
         }
-        const authEmail = accEmailFromPseudo(pseudo);
-        const cred = await auth.createUserWithEmailAndPassword(authEmail, password);
-        const uid = cred.user.uid;
-        await db.collection('usernames').doc(pseudoLower).set({ uid });
-        const rev = syncNewRev();
-        const userDoc = {
-            pseudo, pseudoLower,
-            recoveryEmail: email || null,
-            role: 'user',
-            disabled: false,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            progress: syncClone(state),
-            progressRev: rev,
-            progressEpoch: 0
-        };
-        const invite = invitePending();
-        let inviteExpired = false;
-        if (invite) {
-            if (await inviteIsValid(invite)) { userDoc.beta = true; userDoc.inviteCode = invite; }
-            else inviteExpired = true;
-        }
-        await db.collection('users').doc(uid).set(userDoc);
-        localStorage.removeItem(INVITE_KEY);
-        currentUser = cred.user;
-        currentUserDoc = userDoc;
-        // La progression faite sans compte sur cet appareil devient celle du nouveau compte.
-        syncMetaReplace({ uid, rev, epoch: 0, dirty: false });
-        cloudSetStatus('ok');
-        await socialEnsureProfileDocs();
-        await betaKeyRefresh(userDoc);
-        gateOpen();
-        if (state.onboardingSeen) showHome(); else showOnboarding();
-        if (inviteExpired) alert("Ton compte est créé, mais le lien d'invitation n'est plus actif : demande un nouveau lien pour l'accès bêta.");
+        const cred = await auth.createUserWithEmailAndPassword(accEmailFromPseudo(pseudo), password);
+        await accCreateAccountDoc(cred.user, pseudo);
     } catch (e) {
         accSetError(accFriendlyError(e));
     } finally {
@@ -183,37 +190,206 @@ async function accSignup(pseudo, password) {
     }
 }
 
-async function accLogin(pseudo, password) {
-    const authEmail = accEmailFromPseudo(pseudo);
+// Après une connexion réussie (mot de passe ou Google) d'un compte existant.
+async function accAfterLogin(user, userDoc) {
+    currentUser = user;
+    currentUserDoc = userDoc;
+    await inviteApplyToAccount(user.uid, userDoc);
+    await betaKeyRefresh(userDoc);
+    // Réconcilie la progression de l'appareil avec celle du compte (adoption, fusion ou
+    // envoi selon le cas — voir cloudReconcile). Si la page se recharge, rien d'autre à faire.
+    cloudLastCheckAt = Date.now();
+    const reloading = await cloudReconcile(userDoc, true);
+    if (reloading) return;
+    gateOpen();
+    showHome();
+    socialEnsureProfileDocs();
+    notificationsRefreshBadge();
+}
+
+async function accLogin(ident, password) {
+    const byEmail = ident.includes('@');
+    const authEmail = byEmail ? ident : accEmailFromPseudo(ident);
     accExplicitAuthInProgress = true;
     try {
         const cred = await auth.signInWithEmailAndPassword(authEmail, password);
-        const uid = cred.user.uid;
-        const snap = await db.collection('users').doc(uid).get();
+        const snap = await db.collection('users').doc(cred.user.uid).get();
         if (!snap.exists) { accSetError("Compte introuvable."); await auth.signOut(); return; }
         const userDoc = snap.data();
         if (userDoc.disabled) {
-            accSetError("Ce compte a été désactivé. Contacte l'administrateur.");
+            accSetError(userDoc.transferredTo ? "Ce compte a été transféré vers un nouveau compte : connecte-toi avec le nouveau." : "Ce compte a été désactivé. Contacte l'administrateur.");
             await auth.signOut();
             return;
         }
-        currentUser = cred.user;
-        currentUserDoc = userDoc;
-        await inviteApplyToAccount(uid, userDoc);
-        await betaKeyRefresh(userDoc);
-        // Réconcilie la progression de l'appareil avec celle du compte (adoption, fusion ou
-        // envoi selon le cas — voir cloudReconcile). Si la page se recharge, rien d'autre à faire.
-        cloudLastCheckAt = Date.now();
-        const reloading = await cloudReconcile(userDoc, true);
-        if (reloading) return;
-        gateOpen();
-        showHome();
-        socialEnsureProfileDocs();
-        notificationsRefreshBadge();
+        await accAfterLogin(cred.user, userDoc);
     } catch (e) {
-        accSetError(accFriendlyError(e));
+        let msg = accFriendlyError(e);
+        if (!byEmail && /incorrect|introuvable|Aucun compte/.test(msg)) msg += " Si tu as ajouté un e-mail de récupération, connecte-toi avec cet e-mail.";
+        accSetError(msg);
     } finally {
         accExplicitAuthInProgress = false;
+    }
+}
+
+// ===== Récupération de compte : Google, e-mail, transfert par l'admin =====
+// 1) Google : « Continuer avec Google » (connexion, ou création avec un pseudo choisi ensuite)
+//    et « Lier mon compte Google » pour un compte existant (Firebase : linkWithPopup).
+// 2) E-mail : l'e-mail confirmé (verifyBeforeUpdateEmail) remplace l'adresse fictive
+//    pseudo@nl-mastery.local ; on se connecte alors avec lui, et « Mot de passe oublié ? »
+//    marche (sendPasswordResetEmail). L'e-mail n'est jamais lisible à partir du pseudo.
+// 3) Sinon, l'admin transfère la progression vers un nouveau compte (panneau admin).
+function accGoogleProvider() {
+    const p = new firebase.auth.GoogleAuthProvider();
+    p.setCustomParameters({ prompt: 'select_account' });
+    return p;
+}
+
+async function accGoogle() {
+    if (!firebaseAvailable) { accSetError('Service de comptes indisponible pour le moment.'); return; }
+    accSetError('');
+    accExplicitAuthInProgress = true;
+    try {
+        let cred;
+        try { cred = await auth.signInWithPopup(accGoogleProvider()); }
+        catch (e) {
+            if (/popup-blocked|operation-not-supported/.test(e.code || '')) { await auth.signInWithRedirect(accGoogleProvider()); return; }
+            throw e;
+        }
+        await accGoogleContinue(cred.user);
+    } catch (e) {
+        if (!/popup-closed|cancelled-popup/.test(e.code || '')) accSetError(accFriendlyError(e));
+    } finally {
+        accExplicitAuthInProgress = false;
+    }
+}
+
+// Utilisateur Google authentifié : compte existant → connexion ; sinon → choix du pseudo.
+async function accGoogleContinue(user) {
+    const snap = await db.collection('users').doc(user.uid).get();
+    if (snap.exists) {
+        const userDoc = snap.data();
+        if (userDoc.disabled) { accSetError("Ce compte a été désactivé. Contacte l'administrateur."); await auth.signOut(); return; }
+        await accAfterLogin(user, userDoc);
+        return;
+    }
+    currentUser = user;
+    accShowPseudoStep();
+}
+
+function accShowPseudoStep() {
+    document.getElementById('acc-logged-out').style.display = 'none';
+    document.getElementById('acc-pseudo-step').style.display = 'block';
+    const input = document.getElementById('acc-google-pseudo');
+    if (input) input.focus();
+}
+
+async function accGoogleFinish() {
+    const user = auth && auth.currentUser;
+    const err = document.getElementById('acc-google-error');
+    const pseudo = (document.getElementById('acc-google-pseudo').value || '').trim();
+    err.innerText = '';
+    if (!user) { err.innerText = 'Session Google expirée : recommence avec « Continuer avec Google ».'; return; }
+    if (!/^[a-zA-Z0-9_]{3,20}$/.test(pseudo)) { err.innerText = 'Pseudo : 3 à 20 caractères, lettres/chiffres/underscore uniquement.'; return; }
+    accExplicitAuthInProgress = true;
+    try {
+        const taken = await db.collection('usernames').doc(pseudo.toLowerCase()).get();
+        if (taken.exists) { err.innerText = 'Ce pseudo est déjà pris.'; return; }
+        await accCreateAccountDoc(user, pseudo);
+        document.getElementById('acc-pseudo-step').style.display = 'none';
+    } catch (e) {
+        err.innerText = accFriendlyError(e);
+    } finally {
+        accExplicitAuthInProgress = false;
+    }
+}
+
+async function accGoogleCancel() {
+    document.getElementById('acc-pseudo-step').style.display = 'none';
+    document.getElementById('acc-logged-out').style.display = 'block';
+    try { await auth.signOut(); } catch (e) { /* pas grave */ }
+    currentUser = null;
+}
+
+function accForgotPassword() {
+    const typed = (document.getElementById('acc-pseudo').value || '').trim();
+    const email = prompt("Ton e-mail de récupération (celui que tu as confirmé dans ton compte) :", typed.includes('@') ? typed : '');
+    if (!email) return;
+    if (!email.includes('@')) { alert("Il faut l'adresse e-mail. Sans e-mail de récupération ni compte Google lié, demande à l'administrateur de transférer ta progression vers un nouveau compte."); return; }
+    auth.sendPasswordResetEmail(email.trim())
+        .then(() => alert("Si un compte utilise cette adresse, un e-mail vient d'être envoyé pour choisir un nouveau mot de passe. Pense à regarder dans les spams."))
+        .catch(e => alert('Envoi impossible : ' + accFriendlyError(e)));
+}
+
+// Bloc « Ne jamais perdre l'accès » dans le compte connecté.
+function accRenderBackup() {
+    const el = document.getElementById('acc-backup');
+    const user = auth && auth.currentUser;
+    if (!el || !user) return;
+    const google = user.providerData.find(p => p.providerId === 'google.com');
+    const realEmail = user.email && !/@nl-mastery\.local$/i.test(user.email) ? user.email : '';
+    const pending = localStorage.getItem('nl_pending_email') || '';
+    el.innerHTML = `
+        <div class="study-box acc-backup" style="text-align:left;">
+            <h3 style="margin-top:0;">🛟 Ne jamais perdre l'accès</h3>
+            <p style="font-size:0.82rem;">Si tu oublies ton mot de passe, ces options te permettent de récupérer ton compte. Une seule suffit.</p>
+            <div class="acc-backup-row">
+                <b>Google</b>
+                ${google ? `<span>✅ Lié (${rpEscapeHtml(google.email || '')}) : tu peux te connecter avec « Continuer avec Google ».</span>`
+                    : `<button class="btn btn-gray" style="margin:4px 0 0;" onclick="accLinkGoogle()">🔗 Lier mon compte Google</button>`}
+            </div>
+            <div class="acc-backup-row">
+                <b>E-mail de récupération</b>
+                ${realEmail ? `<span>✅ ${rpEscapeHtml(realEmail)} : connecte-toi avec cette adresse ; « Mot de passe oublié ? » fonctionne.</span>`
+                    : `${pending ? `<span>📨 Lien envoyé à ${rpEscapeHtml(pending)} : clique dessus pour confirmer (regarde aussi les spams). Ensuite, tu te connecteras avec cette adresse.</span>` : ''}
+                       <input type="email" id="acc-backup-email" placeholder="ton@email.com" autocomplete="email" style="margin:6px 0 0;">
+                       <button class="btn btn-gray" style="margin:6px 0 0;" onclick="accAddRecoveryEmail()">📧 Envoyer le lien de confirmation</button>`}
+            </div>
+            ${!google && !realEmail ? `<p class="report-meta">Sans Google ni e-mail, en cas d'oubli, seul l'administrateur peut transférer ta progression vers un nouveau compte.</p>` : ''}
+            <p id="acc-backup-msg" class="report-meta"></p>
+        </div>`;
+}
+
+async function accReauth() {
+    const user = auth.currentUser;
+    if (user.providerData.some(p => p.providerId === 'password')) {
+        const pwd = prompt('Par sécurité, retape ton mot de passe :');
+        if (!pwd) throw new Error('Opération annulée.');
+        await user.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(user.email, pwd));
+    } else {
+        await user.reauthenticateWithPopup(accGoogleProvider());
+    }
+}
+
+async function accLinkGoogle() {
+    const msg = document.getElementById('acc-backup-msg');
+    try {
+        await auth.currentUser.linkWithPopup(accGoogleProvider());
+        accRenderBackup();
+    } catch (e) {
+        const code = e.code || '';
+        if (/credential-already-in-use|email-already-in-use/.test(code)) msg.innerText = 'Ce compte Google est déjà utilisé par un autre compte NL Mastery.';
+        else if (/provider-already-linked/.test(code)) accRenderBackup();
+        else if (!/popup-closed|cancelled-popup/.test(code)) msg.innerText = 'Liaison impossible : ' + accFriendlyError(e);
+    }
+}
+
+async function accAddRecoveryEmail() {
+    const msg = document.getElementById('acc-backup-msg');
+    const email = (document.getElementById('acc-backup-email').value || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.innerText = 'Adresse e-mail invalide.'; return; }
+    const send = () => auth.currentUser.verifyBeforeUpdateEmail(email);
+    try {
+        try { await send(); }
+        catch (e) {
+            if (!/requires-recent-login/.test(e.code || '')) throw e;
+            await accReauth();
+            await send();
+        }
+        localStorage.setItem('nl_pending_email', email);
+        accRenderBackup();
+    } catch (e) {
+        const code = e.code || '';
+        msg.innerText = /email-already-in-use/.test(code) ? 'Cette adresse est déjà utilisée par un autre compte.' : 'Envoi impossible : ' + accFriendlyError(e);
     }
 }
 
@@ -254,6 +430,7 @@ function accShowLoggedIn() {
     document.getElementById('acc-logged-in').style.display = 'block';
     document.getElementById('acc-current-pseudo').innerText = '👤 ' + currentUserDoc.pseudo;
     document.getElementById('acc-admin-entry').style.display = currentUserDoc.role === 'admin' ? 'grid' : 'none';
+    accRenderBackup();
     cloudSetStatus(cloudSyncStatus);
 }
 
@@ -1371,6 +1548,10 @@ async function loadSocialDashboardSnippet() {
 // retirée. Voir firestore.rules (isBetaTester) : personne d'autre ne peut la lire.
 const BETA_KEY_STORAGE = 'gemini_shared_key';
 async function betaKeyRefresh(userDoc) {
+    try {
+        const u = auth && auth.currentUser;
+        if (u && u.email && !/@nl-mastery\.local$/i.test(u.email)) localStorage.removeItem('nl_pending_email');
+    } catch (e) { /* pas grave */ }
     if (!userDoc || !(userDoc.beta || userDoc.role === 'admin') || userDoc.disabled) {
         localStorage.removeItem(BETA_KEY_STORAGE);
         return;
@@ -1489,6 +1670,44 @@ function adminCopyInvite(code) {
     else prompt('Copie ce lien :', link);
 }
 
+// Transfert d'un compte (mot de passe perdu, sans Google ni e-mail) vers un nouveau compte :
+// progression et statut bêta passent sur le nouveau ; l'ancien est désactivé. progressEpoch
+// change : les appareils du nouveau compte adoptent la progression au lieu de la fusionner.
+function adminRenderTransfer() {
+    const el = document.getElementById('admin-transfer');
+    if (!el) return;
+    const opts = adminUsersCache.filter(u => !u.transferredTo).map(u => `<option value="${u.uid}">${rpEscapeHtml(u.pseudo || u.uid)}${u.disabled ? ' (désactivé)' : ''}</option>`).join('');
+    el.innerHTML = `
+        <div class="study-box" style="text-align:left; margin-top:0;">
+            <h3 style="margin-top:0;">🔁 Transférer un compte</h3>
+            <p style="font-size:0.85rem;">Pour quelqu'un qui a perdu son mot de passe sans Google ni e-mail : il crée un nouveau compte, puis tu y transfères sa progression (et son accès bêta). L'ancien compte est désactivé. Le nouveau garde son propre pseudo.</p>
+            <label class="report-meta">Ancien compte (perdu)</label>
+            <select id="admin-transfer-from" class="prof-select"><option value="">—</option>${opts}</select>
+            <label class="report-meta" style="display:block; margin-top:6px;">Nouveau compte</label>
+            <select id="admin-transfer-to" class="prof-select"><option value="">—</option>${opts}</select>
+            <button class="btn btn-green" style="margin-top:8px;" onclick="adminTransfer()">🔁 Transférer</button>
+        </div>`;
+}
+
+async function adminTransfer() {
+    const from = document.getElementById('admin-transfer-from').value;
+    const to = document.getElementById('admin-transfer-to').value;
+    if (!from || !to || from === to) { alert('Choisis deux comptes différents.'); return; }
+    const a = adminUsersCache.find(u => u.uid === from), b = adminUsersCache.find(u => u.uid === to);
+    if (!confirm(`Transférer la progression de « ${a.pseudo} » vers « ${b.pseudo} » ? La progression actuelle de « ${b.pseudo} » sera remplacée, et « ${a.pseudo} » sera désactivé.`)) return;
+    try {
+        const snap = await db.collection('users').doc(from).get();
+        const old = snap.data() || {};
+        const patchTo = { progress: old.progress || {}, progressRev: syncNewRev(), progressEpoch: Date.now() };
+        if (old.beta) { patchTo.beta = true; if (old.inviteCode) patchTo.inviteCode = old.inviteCode; }
+        await db.collection('users').doc(to).update(patchTo);
+        await db.collection('users').doc(from).update({ disabled: true, transferredTo: to });
+        alert('Transfert effectué.');
+        if (currentUser && currentUser.uid === to) { await cloudCheck(); }
+        loadAdminUsers().then(adminRenderInvites);
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
 async function adminToggleBeta(uid, newVal) {
     try {
         await db.collection('users').doc(uid).update({ beta: newVal });
@@ -1518,7 +1737,8 @@ async function loadAdminUsers() {
         if (snap.empty) { listEl.innerHTML = 'Aucun compte.'; return; }
         listEl.innerHTML = '';
         adminUsersCache = [];
-        snap.forEach(doc => adminUsersCache.push(doc.data()));
+        snap.forEach(doc => adminUsersCache.push(Object.assign({ uid: doc.id }, doc.data())));
+        adminRenderTransfer();
         snap.forEach(doc => {
             const u = doc.data();
             const uid = doc.id;
@@ -1568,7 +1788,11 @@ if (firebaseAvailable) {
         if (!user) { gateShow(); return; }
         try {
             const snap = await db.collection('users').doc(user.uid).get();
-            if (!snap.exists) { gateShow(); return; }
+            if (!snap.exists) {
+                gateShow();
+                if (user.providerData.some(p => p.providerId === 'google.com')) { currentUser = user; accShowPseudoStep(); }
+                return;
+            }
             const userDoc = snap.data();
             if (userDoc.disabled) { await auth.signOut(); return; }
             currentUser = user;

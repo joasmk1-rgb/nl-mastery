@@ -594,21 +594,30 @@
                     <button class="acc-tab active" id="acc-tab-signup" onclick="accSwitchTab('signup')">Créer un compte</button>
                 </div>
 
-                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Pseudo</label>
+                <label id="acc-pseudo-label" style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Pseudo</label>
                 <input type="text" id="acc-pseudo" placeholder="ex: joas92" autocomplete="username">
-
-                <div id="acc-email-field">
-                    <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Email (facultatif, pour récupérer ton mot de passe)</label>
-                    <input type="email" id="acc-email" placeholder="ton@email.com" autocomplete="email">
-                </div>
 
                 <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Mot de passe</label>
                 <input type="password" id="acc-password" placeholder="6 caractères minimum" autocomplete="current-password">
 
                 <div class="acc-error" id="acc-error"></div>
-                <div class="acc-hint" id="acc-hint" style="display:block;">Ta progression actuelle sera reprise sur ce compte.</div>
+                <div class="acc-hint" id="acc-hint" style="display:block;">Après l'inscription, ajoute Google ou un e-mail dans ton compte pour ne jamais perdre l'accès.</div>
 
                 <button class="btn btn-green" id="acc-submit-btn" onclick="accSubmit()">Créer mon compte</button>
+                <div id="acc-forgot" class="acc-forgot" style="display:none;"><a href="#" onclick="accForgotPassword(); return false;">Mot de passe oublié ?</a></div>
+                <div class="acc-or">ou</div>
+                <button class="btn acc-google-btn" onclick="accGoogle()"><span class="acc-google-g">G</span> Continuer avec Google</button>
+            </div>
+        </div>
+
+        <div id="acc-pseudo-step" style="display:none;">
+            <div class="acc-box">
+                <h3 style="margin-top:0;">Dernière étape</h3>
+                <p style="font-size:0.85rem;">Choisis ton pseudo : c'est le nom que verront tes amis dans l'app.</p>
+                <input type="text" id="acc-google-pseudo" placeholder="ex: joas92" autocomplete="username" onkeydown="if(event.key==='Enter') accGoogleFinish()">
+                <div class="acc-error" id="acc-google-error"></div>
+                <button class="btn btn-green" onclick="accGoogleFinish()">Créer mon compte</button>
+                <button class="btn btn-gray" onclick="accGoogleCancel()">Annuler</button>
             </div>
         </div>
 
@@ -620,6 +629,7 @@
                 </div>
                 <button class="btn btn-gray" style="width:auto; margin:0; padding:8px 14px;" onclick="accLogout()">Déconnexion</button>
             </div>
+            <div id="acc-backup"></div>
             <div class="grid" id="acc-admin-entry" style="display:none;">
                 <div class="card-menu" style="grid-column: span 2; color:var(--gold);" onclick="showAdmin()">⚙️ Gérer les comptes (admin)</div>
             </div>
@@ -631,6 +641,7 @@
         <h2>⚙️ Gestion des comptes</h2>
         <div id="admin-shared-key" class="content-col"></div>
         <div id="admin-invites" class="content-col"></div>
+        <div id="admin-transfer" class="content-col"></div>
         <div id="admin-user-list" class="content-col"></div>
     </div>
 

@@ -713,3 +713,11 @@
         .carte-chip.mid { background: color-mix(in srgb, #eab308 22%, transparent); color: var(--text); }
         .carte-chip.weak { background: color-mix(in srgb, #ef4444 22%, transparent); color: var(--text); }
         .carte-chip.ok { background: color-mix(in srgb, #22c55e 25%, transparent); color: var(--text); }
+
+        /* Récupération de compte */
+        .acc-forgot { text-align: center; margin-top: 8px; font-size: 0.85rem; }
+        .acc-forgot a { color: var(--primary); }
+        .acc-or { text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin: 10px 0 6px; }
+        .acc-google-btn { background: #fff; color: #1f1f1f; border: 1px solid #dadce0; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .acc-google-g { font-weight: 800; color: #4285f4; font-size: 1.05rem; }
+        .acc-backup-row { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-top: 1px solid var(--border); font-size: 0.85rem; }
