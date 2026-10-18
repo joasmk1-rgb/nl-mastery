@@ -325,6 +325,7 @@ function syncMergeValue(a, b, path) {
         }
         // Une forme conjuguée : ok/ko/streak vont ensemble, on garde la réponse la plus récente.
         if (path.indexOf('conjStats.') === 0 || path.indexOf('chunkStats.') === 0) return (b.last || 0) > (a.last || 0) ? b : a;
+        if (path.indexOf('profLessons.') === 0) return a;
         const res = {};
         Object.keys(a).concat(Object.keys(b)).forEach(k => {
             if (k in res) return;
@@ -10721,6 +10722,675 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             const prompt = buildTargetedPracticePrompt(notionId);
             rpCurrentCategory = null;
             rpBeginScenario({ id: 'cible_' + notionId, label: cfg.label, welcome: cfg.welcome, prompt });
+        }
+
+        // ===== Cours particulier (mode professeur) =====
+        // Une séance de 15 ou 30 minutes comme avec un prof particulier, en 4 phases : échauffement
+        // (conversation), point ciblé (explication + mini-exercices oraux), mise en pratique (jeu de
+        // rôle, texte ou débat) et bilan. La TRAME vient de l'app (notions et mots du niveau, points
+        // faibles, portrait, séance précédente) ; Gemini ne fait que la mettre en scène, donc chaque
+        // séance est différente. Prompts séparés, jamais mélangés : prof (profConvPrompt),
+        // correcteur (profCorrectPrompt, ne voit qu'une phrase), générateur du point ciblé
+        // (profTargetPrompt), juge des exercices (profJudgePrompt), générateur de la tâche
+        // (profTaskPrompt), bilan (profDebriefPrompt). L'apprenant peut parler en français à tout
+        // moment (bouton 🇫🇷) : le prof répond en français puis reprend en néerlandais.
+        // Historique : state.profLessons (id → bilan), relu par la séance suivante.
+        const PROF_PLAN = { 15: { warm: 4, ex: 4, task: 8 }, 30: { warm: 7, ex: 8, task: 14 } };
+        const PROF_PHASES = ['Échauffement', 'Point ciblé', 'Mise en pratique', 'Bilan'];
+        const PROF_LEVEL_DESC = {
+            A1: 'débutant (A1) : phrases très courtes (5 à 8 mots), présent surtout, vocabulaire très courant',
+            A2: 'élémentaire (A2) : phrases simples, présent, passé composé (perfectum), futur avec gaan',
+            B1: 'intermédiaire (B1) : phrases complètes avec subordonnées, passé, donner son avis simplement',
+            B2: 'avancé (B2) : langue naturelle et nuancée, argumentation, expressions idiomatiques courantes'
+        };
+        const PROF_RATE = { A1: 0.8, A2: 0.88, B1: 0.95, B2: 1 };
+        const PROF_GOALS = {
+            travail: { label: '💼 Travail', desc: 'contexte professionnel (logistique, supply chain, réunions, appels, e-mails, clients, collègues)' },
+            quotidien: { label: '🏠 Quotidien', desc: 'vie quotidienne en Flandre / à Bruxelles (administration, voisins, commerces, rendez-vous, santé)' },
+            aisance: { label: '💬 Aisance', desc: 'conversation générale : raconter, donner son avis, argumenter, nuancer, hésiter moins' }
+        };
+        const PROF_TASK_TYPES = { travail: ['jeu_de_role', 'jeu_de_role', 'debat', 'texte'], quotidien: ['jeu_de_role', 'jeu_de_role', 'texte', 'debat'], aisance: ['debat', 'texte', 'jeu_de_role'] };
+        const PROF_WORDS_LIST = '🎓 Mon cours';
+        const PROF_GOAL_FILES = {
+            travail: f => /^THEME_/.test(f) || f === 'KITS_JEU_DE_ROLE',
+            quotidien: f => ['VERBES_NL', 'NOMS_NL', 'ADJECTIFS_NL', 'ADVERBES_NL', 'EXPRESSIONS_NL'].includes(f),
+            aisance: f => ['EXPRESSIONS_NL', 'LOCUTIONS_NL', 'ADVERBES_NL', 'MOTS_OUTILS_NL', 'VERBES_NL'].includes(f)
+        };
+        let prof = null;      // séance en cours
+        let profRec = null;   // reconnaissance vocale en cours
+
+        function profSettings() {
+            if (!state.settings) state.settings = {};
+            const s = state.settings.prof || {};
+            const lvl = ['A1', 'A2', 'B1', 'B2'];
+            state.settings.prof = {
+                level: lvl.includes(s.level) ? s.level : (curriculumLoaded && lvl.includes(getCurriculumLevel().level) ? getCurriculumLevel().level : 'A1'),
+                dur: s.dur === 30 ? 30 : 15,
+                goal: PROF_GOALS[s.goal] ? s.goal : 'travail',
+                handsfree: s.handsfree !== false,
+                notion: s.notion || ''
+            };
+            return state.settings.prof;
+        }
+        function profSet(key, value) {
+            const s = profSettings();
+            s[key] = value;
+            if (key === 'level') s.notion = '';
+            save();
+            profRenderSetup();
+        }
+
+        function profLessonsSorted() {
+            return Object.entries(state.profLessons || {}).map(([id, l]) => Object.assign({ id }, l)).sort((a, b) => (b.at || 0) - (a.at || 0));
+        }
+
+        function profNotionsOfLevel(level) {
+            if (!curriculumLoaded) return [];
+            return Object.keys(curriculumNotions).filter(id => curriculumNotions[id].level === level && curriculumNotions[id].status === 'pret');
+        }
+
+        // Le point ciblé proposé : une faiblesse du niveau d'abord, puis une notion entamée, puis la
+        // prochaine jamais étudiée ; on évite celle de la séance précédente.
+        function profProposeNotion(level) {
+            const ids = profNotionsOfLevel(level);
+            if (!ids.length) return '';
+            const last = profLessonsSorted()[0];
+            const avoid = last && last.notion;
+            const weak = getWeaknesses().map(w => w.id).filter(id => ids.includes(id) && id !== avoid);
+            if (weak.length) return weak[0];
+            const started = ids.filter(id => id !== avoid && ['decouverte', 'en_cours', 'entrainee', 'a_pratiquer', 'presque_maitrisee'].includes(getNotionStatus(id)));
+            if (started.length) return started[Math.floor(Math.random() * Math.min(3, started.length))];
+            const fresh = ids.filter(id => id !== avoid && getNotionStatus(id) === 'jamais_etudiee');
+            return fresh[0] || ids[0];
+        }
+
+        // Mots du jour : ceux à revoir d'abord, puis des mots courants du niveau, pris un peu au
+        // hasard parmi les plus fréquents pour que deux séances ne se ressemblent pas. Les mots
+        // métier (thèmes, kits) n'ont pas de niveau : pour l'objectif travail, moitié mots métier,
+        // moitié mots courants du niveau.
+        function profPickWords(level, goal, n) {
+            const usable = i => i.nl && i.fr && i.nl.length >= 4 && i.file !== 'PHRASES_LABO' && i.nl.split(' ').length <= 3 && !/^(ik|je|we|wij|hallo|dag|nee|ja)\b/i.test(i.nl);
+            const pick = (pool, k, taken) => {
+                pool = pool.filter(i => !taken.includes(i));
+                const review = pool.filter(i => wordStatus(i.id) === 'review').slice(0, Math.ceil(k / 3));
+                const rest = byFrequencyDesc(pool.filter(i => !review.includes(i) && !isTrueMastered(i.id))).slice(0, 60).sort(() => Math.random() - 0.5);
+                return review.concat(rest).slice(0, k);
+            };
+            const ofLevel = fullDb.filter(i => usable(i) && i.niveauCECR === level);
+            if (goal === 'travail') {
+                const metier = fullDb.filter(i => usable(i) && ((/^THEME_/.test(i.file) && i.file !== 'THEME_BASE') || i.file === 'KITS_JEU_DE_ROLE'));
+                const a = pick(metier, Math.ceil(n / 2), []);
+                return a.concat(pick(ofLevel, n - a.length, a));
+            }
+            const pool = ofLevel.filter(i => PROF_GOAL_FILES[goal](i.file));
+            return pick(pool.length >= 15 ? pool : ofLevel, n, []);
+        }
+
+        function profConjToRecycle() {
+            return Object.entries(state.conjStats || {})
+                .filter(([, s]) => s.ko > 0 && s.ko >= s.ok)
+                .sort((a, b) => (b[1].last || 0) - (a[1].last || 0))
+                .slice(0, 4)
+                .map(([k]) => { const [inf, temps, pr] = k.split('|'); return `${inf} (${temps}, ${pr})`; });
+        }
+
+        function profPortrait() {
+            try { return MODRP_IDS.flatMap(id => modRpSentences(id)).map(s => s.fr).slice(0, 14); } catch (e) { return []; }
+        }
+
+        function showProf() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('prof-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            if (prof && !prof.ended) { profRenderSession(); return; }
+            profRenderSetup();
+        }
+
+        function profRenderSetup() {
+            const box = document.getElementById('prof-content');
+            if (!box) return;
+            const s = profSettings();
+            const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            const ids = profNotionsOfLevel(s.level);
+            if (!s.notion || !ids.includes(s.notion)) { s.notion = profProposeNotion(s.level); }
+            const proposed = profProposeNotion(s.level);
+            const history = profLessonsSorted().slice(0, 5);
+            const plan = PROF_PLAN[s.dur];
+            box.innerHTML = `
+                <h2 style="margin-bottom:4px;">🎓 Cours particulier</h2>
+                <p class="section-subtitle" style="margin-top:0;">Comme avec un prof : on discute, on travaille un point précis, on le met en pratique, puis le bilan. Le contenu change à chaque séance.</p>
+                ${GeminiService.isAvailable() ? '' : `<div class="prof-warn">Il faut une clé Gemini (gratuite) : Profil 👤 → 🤖 Intelligence IA.</div>`}
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-label">Niveau</div>
+                    <div class="conj-audio-chips">${['A1', 'A2', 'B1', 'B2'].map(l => chip(s.level === l, `profSet('level','${l}')`, l)).join('')}</div>
+                    <div class="conj-audio-label">Durée</div>
+                    <div class="conj-audio-chips">${chip(s.dur === 15, "profSet('dur',15)", '⏱️ 15 min')}${chip(s.dur === 30, "profSet('dur',30)", '⏱️ 30 min')}</div>
+                    <div class="conj-audio-label">Objectif</div>
+                    <div class="conj-audio-chips">${Object.entries(PROF_GOALS).map(([k, g]) => chip(s.goal === k, `profSet('goal','${k}')`, g.label)).join('')}</div>
+                    <div class="conj-audio-label">Point ciblé</div>
+                    <select id="prof-notion" class="prof-select" onchange="profSettings().notion=this.value; save();">
+                        ${ids.map(id => `<option value="${id}" ${id === s.notion ? 'selected' : ''}>${rpEscapeHtml(curriculumNotions[id].content.titre || id)}${id === proposed ? ' (proposé)' : ''} · ${getNotionStatusLabel(getNotionStatus(id))}</option>`).join('')}
+                    </select>
+                    <div class="conj-audio-label">Mode</div>
+                    <div class="conj-audio-chips">${chip(s.handsfree, "profSet('handsfree',true)", '🗣️ Mains libres')}${chip(!s.handsfree, "profSet('handsfree',false)", '👆 Je touche 🎤 pour parler')}</div>
+                    <p class="conj-audio-hint">${s.dur} min : échauffement (${plan.warm} échanges) · point ciblé (${plan.ex} exercices) · mise en pratique (${plan.task} répliques) · bilan. Tu peux parler 🇫🇷 en français à tout moment pour poser une question.</p>
+                    <button class="btn btn-green" style="margin-top:8px;" onclick="profStart()" ${GeminiService.isAvailable() && ids.length ? '' : 'disabled'}>▶️ Commencer le cours</button>
+                </div>
+                ${history.length ? `<div class="section-title">🗂️ Séances précédentes</div>${history.map(l => `
+                    <details class="profil-section">
+                        <summary>${new Date(l.at).toLocaleDateString('fr-FR')} · ${l.level} · ${rpEscapeHtml(l.taskTitle || '')}</summary>
+                        ${profDebriefHtml(l)}
+                    </details>`).join('')}` : ''}`;
+        }
+
+        function profStart() {
+            const s = profSettings();
+            const sel = document.getElementById('prof-notion');
+            if (sel) s.notion = sel.value;
+            save();
+            const notion = curriculumNotions[s.notion];
+            if (!notion) return;
+            profStopAudio();
+            prof = {
+                id: 'L' + Date.now(), at: Date.now(), level: s.level, dur: s.dur, goal: s.goal, handsfree: s.handsfree,
+                notionId: s.notion, notion, plan: PROF_PLAN[s.dur],
+                words: profPickWords(s.level, s.goal, s.dur === 30 ? 14 : 10),
+                conj: profConjToRecycle(), portrait: profPortrait(), last: profLessonsSorted()[0] || null,
+                phase: 0, turns: 0, history: [], learner: [], errors: [], exResults: [],
+                target: null, exIdx: 0, task: null, busy: false, ended: false, awaitNext: false, log: []
+            };
+            profRenderSession();
+            profEnterPhase(0);
+        }
+
+        function profRenderSession() {
+            const box = document.getElementById('prof-content');
+            box.innerHTML = `
+                <div class="prof-top">
+                    <div class="prof-phases" id="prof-phases"></div>
+                    <div class="prof-top-actions">
+                        <button type="button" class="rp-coach-btn" onclick="profNextPhase()">⏭ Phase suivante</button>
+                        <button type="button" class="rp-coach-btn" onclick="profEndEarly()">⏹ Terminer</button>
+                    </div>
+                </div>
+                <div id="prof-chat" class="prof-chat"></div>
+                <div id="prof-next" class="prof-next"></div>
+                <div class="prof-input-row" id="prof-input-row">
+                    <input type="text" id="prof-input" placeholder="Réponds en néerlandais…" onkeydown="if(event.key==='Enter') profSendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="profSendTyped()">➤</button>
+                </div>
+                <div class="prof-mic-row">
+                    <button type="button" class="btn btn-green" id="prof-mic" onclick="profMic('nl')">🎤 Parler</button>
+                    <button type="button" class="btn btn-gray" id="prof-mic-fr" onclick="profMic('fr')">🇫🇷 En français</button>
+                </div>`;
+            profRenderPhases();
+            (prof.log || []).forEach(m => profAppend(m, true));
+        }
+
+        function profRenderPhases() {
+            const el = document.getElementById('prof-phases');
+            if (!el || !prof) return;
+            el.innerHTML = PROF_PHASES.map((p, i) => `<span class="prof-phase${i === prof.phase ? ' active' : ''}${i < prof.phase ? ' done' : ''}">${i + 1}. ${p}</span>`).join('');
+        }
+
+        // Message du chat. who : 'prof' | 'moi' | 'info'. Gardé dans prof.log pour redessiner.
+        function profAppend(m, replay) {
+            if (!replay) prof.log.push(m);
+            const chat = document.getElementById('prof-chat');
+            if (!chat) return null;
+            const div = document.createElement('div');
+            div.className = 'prof-msg ' + m.who;
+            if (m.who === 'prof') {
+                div.innerHTML = `${m.fr ? `<div class="prof-fr">🇫🇷 ${rpEscapeHtml(m.fr)}</div>` : ''}${m.nl ? `<div class="prof-nl">${rpEscapeHtml(m.nl)} ${speakBtnHtml(m.nl)}</div>` : ''}${m.nl_fr ? `<details class="prof-trad"><summary>Traduction</summary>${rpEscapeHtml(m.nl_fr)}</details>` : ''}`;
+            } else if (m.who === 'moi') {
+                div.innerHTML = `${m.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(m.text)}<div class="prof-corr"></div>`;
+                if (m.corr) profShowCorrection(div, m.corr);
+            } else {
+                div.innerHTML = m.html;
+            }
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            return div;
+        }
+
+        function profShowCorrection(div, c) {
+            const el = div.querySelector('.prof-corr');
+            if (!el || !c || c.fr) return;
+            if (c.ok) { el.innerHTML = '<span class="prof-ok">✓</span>'; return; }
+            el.innerHTML = `<details ${c.bloquant ? 'open' : ''}><summary>✏️ ${rpEscapeHtml(c.corrige || 'Correction')}</summary>${(c.erreurs || []).map(e => `<div>${rpEscapeHtml(e.faux)} → <b>${rpEscapeHtml(e.correct)}</b> : ${rpEscapeHtml(e.pourquoi || '')}</div>`).join('')}</details>`;
+        }
+
+        function profThinking(on) {
+            if (!prof) return;
+            prof.busy = on;
+            const chat = document.getElementById('prof-chat');
+            const old = document.getElementById('prof-thinking');
+            if (old) old.remove();
+            if (on && chat) {
+                const d = document.createElement('div');
+                d.id = 'prof-thinking';
+                d.className = 'prof-msg info';
+                d.innerText = '…';
+                chat.appendChild(d);
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+
+        function profActive() { return !!(prof && !prof.ended && document.getElementById('prof-view').classList.contains('active')); }
+
+        function profStopAudio() {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (profRec) { const r = profRec; profRec = null; r._aborted = true; try { r.abort(); } catch (e) {} }
+            profMicState(null);
+        }
+
+        // Le prof parle : d'abord le français (s'il y en a), puis le néerlandais, à la vitesse du niveau.
+        async function profSpeak(fr, nl, nlFirst) {
+            const parts = nlFirst ? [[nl, 'nl'], [fr, 'fr']] : [[fr, 'fr'], [nl, 'nl']];
+            for (const [t, lang] of parts) {
+                if (!t || !profActive()) continue;
+                await conjAudioSpeak(t, lang, lang === 'fr' ? 1 : PROF_RATE[prof.level]);
+            }
+        }
+
+        // Après une réplique du prof : en mains libres, le micro s'ouvre tout seul.
+        function profAwaitAnswer() {
+            if (!profActive()) return;
+            if (prof.handsfree && window.SpeechRecognition) profMic('nl');
+        }
+
+        function profMicState(lang) {
+            const nl = document.getElementById('prof-mic'), fr = document.getElementById('prof-mic-fr');
+            if (nl) nl.innerText = lang === 'nl' ? '🎙️ J\'écoute… (touche pour arrêter)' : '🎤 Parler';
+            if (fr) fr.innerText = lang === 'fr' ? '🎙️ J\'écoute en français…' : '🇫🇷 En français';
+        }
+
+        function profMic(lang) {
+            if (!prof || prof.ended) return;
+            if (profRec) { const r = profRec; profRec = null; try { r.stop(); } catch (e) {} return; }
+            if (!window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : écris ta réponse, ou utilise Google Chrome."); return; }
+            if (prof.busy) return;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            const rec = new window.SpeechRecognition();
+            rec.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
+            rec.continuous = false;
+            rec.interimResults = true;
+            const input = document.getElementById('prof-input');
+            let finalText = '';
+            rec.onresult = e => {
+                let interim = '';
+                finalText = '';
+                for (let i = 0; i < e.results.length; i++) {
+                    if (e.results[i].isFinal) finalText += e.results[i][0].transcript;
+                    else interim += e.results[i][0].transcript;
+                }
+                if (input) input.value = (finalText + ' ' + interim).trim();
+            };
+            rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') alert('Micro refusé : autorise le micro pour ce site.'); };
+            rec.onend = () => {
+                const wasMine = profRec === rec || profRec === null;
+                if (profRec === rec) profRec = null;
+                profMicState(null);
+                const text = (input && input.value.trim()) || finalText.trim();
+                if (wasMine && !rec._aborted && text && profActive()) { input.value = ''; profSubmit(text, lang === 'fr'); }
+            };
+            profRec = rec;
+            profMicState(lang);
+            try { rec.start(); } catch (e) { profRec = null; profMicState(null); }
+        }
+
+        function profSendTyped() {
+            const input = document.getElementById('prof-input');
+            const text = input ? input.value.trim() : '';
+            if (!text || !prof || prof.busy) return;
+            input.value = '';
+            // Texte tapé : français détecté à quelques mots courants.
+            const isFr = /(\bcomment\b|\bpourquoi\b|est-ce|c'est|qu'est|veut dire|\bje ne\b|\bje comprends\b|\bon dit\b|ça|\bquoi\b|\bque\b|\bles\b)/i.test(text);
+            profSubmit(text, isFr);
+        }
+
+        async function profGemini(prompt) {
+            try { return rpHelpParseJson(await GeminiService.generate(prompt)); }
+            catch (e) { return { error: e.message }; }
+        }
+
+        // ----- Phases -----
+        async function profEnterPhase(i) {
+            prof.phase = i;
+            prof.turns = 0;
+            prof.history = [];
+            prof.awaitNext = false;
+            document.getElementById('prof-next').innerHTML = '';
+            profRenderPhases();
+            profAppend({ who: 'info', html: `<div class="prof-phase-title">${i + 1}. ${PROF_PHASES[i]}</div>` });
+            if (i === 0) await profConvTurn();
+            else if (i === 1) await profStartTarget();
+            else if (i === 2) await profStartTask();
+            else await profDebrief();
+        }
+
+        function profNextPhase() {
+            if (!prof || prof.ended || prof.busy) return;
+            profStopAudio();
+            if (prof.phase < 3) profEnterPhase(prof.phase + 1);
+        }
+
+        function profEndEarly() {
+            if (!prof || prof.ended) return;
+            profStopAudio();
+            if (!prof.learner.length) { prof = null; profRenderSetup(); return; }
+            if (prof.busy) return;
+            profEnterPhase(3);
+        }
+
+        function profOfferNext(label) {
+            prof.awaitNext = true;
+            const el = document.getElementById('prof-next');
+            el.innerHTML = `<button class="btn btn-green" onclick="profNextPhase()">➡️ ${label}</button>`;
+            if (prof.handsfree) {
+                const phase = prof.phase;
+                setTimeout(() => { if (prof && prof.phase === phase && prof.awaitNext && profActive() && !prof.busy) profNextPhase(); }, 2500);
+            }
+        }
+
+        function profContextLines() {
+            const lines = [];
+            lines.push(`Niveau de l'apprenant : ${PROF_LEVEL_DESC[prof.level]}.`);
+            lines.push(`Objectif de l'apprenant : ${PROF_GOALS[prof.goal].desc}.`);
+            if (prof.portrait.length) lines.push(`Ce que tu sais de lui (il l'a dit dans ses leçons) : ${prof.portrait.join(' ')}`);
+            if (prof.last) lines.push(`Séance précédente (${new Date(prof.last.at).toLocaleDateString('fr-FR')}) : ${prof.last.resume || ''}${prof.last.defi ? ' Défi donné : ' + prof.last.defi : ''}`);
+            lines.push(`Point de grammaire du jour : ${prof.notion.content.titre}.`);
+            lines.push(`Mots du jour à lui faire employer naturellement, si possible : ${prof.words.map(w => w.nl).join(', ')}.`);
+            return lines.join('\n');
+        }
+
+        // Prompt du PROF pour les phases de conversation (échauffement et mise en pratique).
+        function profConvPrompt(isLast) {
+            const phaseTxt = prof.phase === 0
+                ? `Phase actuelle : ÉCHAUFFEMENT (quelques minutes). Discussion informelle et chaleureuse pour faire basculer l'apprenant en néerlandais : sa semaine, son travail, ses projets, en lien avec son objectif. Pose UNE question à la fois et rebondis sur ce qu'il dit. Ne corrige que les fautes qui empêchent de comprendre, en reformulant correctement sa phrase dans ta réponse, sans faire de leçon.${prof.last ? ' Tu peux faire allusion à la séance précédente au début.' : ''}`
+                : `Phase actuelle : MISE EN PRATIQUE, le cœur du cours. Tâche : ${prof.task.titre}. ${prof.task.role_prof}${prof.task.texte_nl ? '\nTexte étudié (l\'apprenant l\'a sous les yeux) : ' + prof.task.texte_nl : ''}\nCe qu'on attend de l'apprenant : ${prof.task.objectif_fr}. Reste dans ton rôle. Fais-le parler le plus possible : demande-lui de préciser, d'expliquer pourquoi, de donner un exemple, de nuancer.`;
+            const hist = prof.history.map(h => h.who === 'prof' ? 'Prof : ' + h.nl + (h.fr ? ' [en français : ' + h.fr + ']' : '') : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
+            return `Tu es un professeur particulier de néerlandais (néerlandais standard, comme en Flandre) qui donne un cours en tête-à-tête, à l'oral, à un apprenant francophone.
+${profContextLines()}
+${phaseTxt}
+
+Règles :
+- 1 à 3 phrases en néerlandais, adaptées au niveau. Pas d'emojis, pas de mise en forme.
+- Si l'apprenant parle ou écrit en FRANÇAIS (une question, « comment on dit… ? », « je ne comprends pas », un mot qui lui manque), réponds-lui d'abord en français dans "fr" : réponse claire et courte (2 ou 3 phrases), avec la formulation néerlandaise utile ; puis, dans "nl", relance en néerlandais (par exemple en l'invitant à redire sa phrase avec cette formulation). Sinon "fr" reste vide.
+- Ne redéfinis jamais le niveau de l'apprenant.
+${isLast ? '- C\'est ta DERNIÈRE réplique de cette phase : réagis à ce qu\'il vient de dire et conclus en une phrase, sans poser de nouvelle question.' : ''}
+${hist ? 'Conversation jusqu\'ici :\n' + hist : (prof.phase === 0 ? 'Commence le cours : salue-le et pose ta première question.' : 'Commence la mise en pratique : présente brièvement la situation dans ton rôle et lance l\'échange.')}
+
+Réponds UNIQUEMENT en JSON : {"fr": "", "nl": "ce que tu dis en néerlandais", "nl_fr": "traduction française de nl"}`;
+        }
+
+        async function profConvTurn(isLast) {
+            profThinking(true);
+            const r = await profGemini(profConvPrompt(isLast));
+            profThinking(false);
+            if (!profActive()) return;
+            if (!r || r.error || !r.nl) {
+                profAppend({ who: 'info', html: `⚠️ Le prof n'a pas répondu (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="profConvTurn(${!!isLast})">Réessayer</button>` });
+                return;
+            }
+            prof.history.push({ who: 'prof', nl: r.nl, fr: r.fr || '' });
+            profAppend({ who: 'prof', fr: r.fr || '', nl: r.nl, nl_fr: r.nl_fr || '' });
+            await profSpeak(r.fr, r.nl);
+            if (isLast) { profOfferNext(prof.phase === 0 ? 'Passer au point ciblé' : 'Voir le bilan'); return; }
+            profAwaitAnswer();
+        }
+
+        // Prompt du CORRECTEUR : ne voit qu'une phrase de l'apprenant.
+        function profCorrectPrompt(sentence) {
+            return `Tu es correcteur de néerlandais. Voici UNE phrase dite à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou écrite par un apprenant francophone de niveau ${prof.level}. Corrige seulement les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant), pas le style.
+Si la phrase est en français, réponds {"fr": true}.
+Phrase : "${sentence.replace(/"/g, "'")}"
+Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "bloquant": false}
+("ok" = aucune faute ; "bloquant" = on ne comprend pas ce qu'il veut dire)`;
+        }
+
+        async function profCorrect(text, msg, div) {
+            const c = await profGemini(profCorrectPrompt(text));
+            if (!c || c.error) return;
+            msg.corr = c;
+            if (!c.ok && !c.fr) (c.erreurs || []).forEach(e => prof && prof.errors.push(e));
+            if (div) profShowCorrection(div, c);
+        }
+
+        async function profSubmit(text, isFr) {
+            if (!prof || prof.ended || prof.busy) return;
+            if (prof.phase === 1) return profAnswerExercise(text, isFr);
+            if (prof.phase === 3 || prof.awaitNext) return;
+            const msg = { who: 'moi', text, isFr };
+            const div = profAppend(msg);
+            prof.history.push({ who: 'moi', text, isFr });
+            if (!isFr) {
+                prof.learner.push(text);
+                prof.turns++;
+                profCorrect(text, msg, div);
+            }
+            const limit = prof.phase === 0 ? prof.plan.warm : prof.plan.task;
+            await profConvTurn(!isFr && prof.turns >= limit);
+        }
+
+        // ----- Point ciblé -----
+        function profTargetPrompt() {
+            const n = prof.plan.ex;
+            const c = prof.notion.content;
+            const lastErr = prof.last && prof.last.erreurs ? prof.last.erreurs.map(e => `${e.faux} → ${e.correct}`).join(' ; ') : '';
+            return `Tu es professeur particulier de néerlandais pour un francophone. ${profContextLines()}
+Prépare le POINT CIBLÉ de la séance, sur la notion « ${c.titre} ».
+Objectif : ${c.objectif || ''}
+Règle (résumé du cours) : ${String(c.comprendre || '').slice(0, 1400)}
+${lastErr ? 'Erreurs de la séance précédente, à recycler si elles sont liées : ' + lastErr : ''}
+${prof.conj.length ? 'Formes de conjugaison qu\'il rate souvent (à glisser si ça s\'y prête) : ' + prof.conj.join(', ') : ''}
+Produis :
+- "explication_fr" : l'explication orale en français, 3 ou 4 phrases simples et concrètes, comme un prof qui parle.
+- "exemples" : 2 ou 3 phrases néerlandaises courtes avec leur traduction, dans le contexte de son objectif.
+- "exercices" : exactement ${n} mini-exercices ORAUX variés (transformer une phrase, compléter une phrase à trou ___, traduire une phrase française, répondre à une question en appliquant la règle), chacun avec UNE réponse courte (une phrase au maximum). Champs : "consigne_fr" (courte, en français), "enonce" (ce que l'apprenant entend : phrase néerlandaise à transformer ou à compléter, ou phrase française à traduire), "langue_enonce" ("nl" ou "fr"), "reponse" (réponse attendue complète, en néerlandais), "alternatives" (autres réponses correctes), "astuce_fr".
+Réponds UNIQUEMENT en JSON : {"explication_fr": "", "exemples": [{"nl": "", "fr": ""}], "exercices": []}`;
+        }
+
+        async function profStartTarget() {
+            profThinking(true);
+            const r = await profGemini(profTargetPrompt());
+            profThinking(false);
+            if (!profActive()) return;
+            if (!r || r.error || !Array.isArray(r.exercices) || !r.exercices.length) {
+                profAppend({ who: 'info', html: `⚠️ Le point ciblé n'a pas pu être préparé (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="profStartTarget()">Réessayer</button>` });
+                return;
+            }
+            prof.target = r;
+            prof.exIdx = 0;
+            const ex = (r.exemples || []).map(e => `<div class="prof-example">${rpEscapeHtml(e.nl)} ${speakBtnHtml(e.nl)}<br><small>${rpEscapeHtml(e.fr)}</small></div>`).join('');
+            profAppend({ who: 'info', html: `<div class="prof-target-title">📌 ${rpEscapeHtml(prof.notion.content.titre)}</div><div class="prof-fr">${rpEscapeHtml(r.explication_fr || '')}</div>${ex}` });
+            await profSpeak(r.explication_fr, '');
+            for (const e of (r.exemples || [])) { if (!profActive()) return; await conjAudioSpeak(e.nl, 'nl', PROF_RATE[prof.level]); }
+            profAskExercise();
+        }
+
+        async function profAskExercise() {
+            const ex = prof.target.exercices[prof.exIdx];
+            prof.exTries = 0;
+            profAppend({ who: 'info', html: `<div class="prof-ex"><small>Exercice ${prof.exIdx + 1} / ${prof.target.exercices.length}</small><div>${rpEscapeHtml(ex.consigne_fr || '')}</div><div class="prof-ex-enonce">${rpEscapeHtml(ex.enonce || '')}</div></div>` });
+            await profSpeak(ex.consigne_fr, ex.langue_enonce === 'fr' ? '' : ex.enonce);
+            if (ex.langue_enonce === 'fr' && profActive()) await conjAudioSpeak(ex.enonce, 'fr', 1);
+            profAwaitAnswer();
+        }
+
+        function profNormAnswer(s) { return normalize(String(s || '')).replace(/[^a-z0-9' ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+
+        // Prompt du JUGE : un exercice, une réponse ; jugement sur le fond, jamais mot pour mot.
+        function profJudgePrompt(ex, given, isFr) {
+            return `Tu juges la réponse d'un apprenant francophone de niveau ${prof.level} à un mini-exercice oral de néerlandais (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes).
+Notion : ${prof.notion.content.titre}
+Consigne : ${ex.consigne_fr}
+Énoncé : ${ex.enonce}
+Réponse attendue : ${ex.reponse}${(ex.alternatives || []).length ? ' (aussi acceptées : ' + ex.alternatives.join(' / ') + ')' : ''}
+Réponse de l'apprenant${isFr ? ' (dite EN FRANÇAIS)' : ''} : "${given.replace(/"/g, "'")}"
+Juge sur le fond : correct si la règle est bien appliquée et le sens juste, même si ce n'est pas mot pour mot la réponse attendue. Si l'apprenant parle en français, pose une question ou dit qu'il ne sait pas, mets "question": true et réponds-lui dans "explication_fr" (sans donner directement la réponse s'il pose juste une question, sauf s'il dit qu'il ne sait pas).
+Réponds UNIQUEMENT en JSON : {"correct": false, "question": false, "explication_fr": "1 ou 2 phrases en français", "correction": "la bonne réponse en néerlandais"}`;
+        }
+
+        async function profAnswerExercise(text, isFr) {
+            if (!prof.target || prof.awaitNext) return;
+            const ex = prof.target.exercices[prof.exIdx];
+            profAppend({ who: 'moi', text, isFr });
+            const accepted = [ex.reponse].concat(ex.alternatives || []).map(profNormAnswer);
+            let r;
+            if (!isFr && accepted.includes(profNormAnswer(text))) r = { correct: true, explication_fr: '', correction: ex.reponse };
+            else {
+                profThinking(true);
+                r = await profGemini(profJudgePrompt(ex, text, isFr));
+                profThinking(false);
+                if (!profActive()) return;
+                if (!r || r.error) { r = { correct: false, explication_fr: 'Je n\'ai pas pu vérifier ta réponse.', correction: ex.reponse }; }
+            }
+            if (r.question) {
+                profAppend({ who: 'prof', fr: r.explication_fr || '', nl: '' });
+                await profSpeak(r.explication_fr, '');
+                profAwaitAnswer();
+                return;
+            }
+            if (!isFr) prof.learner.push(text);
+            prof.exResults.push({ enonce: ex.enonce, attendu: ex.reponse, donne: text, ok: !!r.correct });
+            recordNotionAttempt(prof.notionId, !!r.correct);
+            save();
+            const good = ['Juist!', 'Heel goed!', 'Perfect!', 'Goed zo!'][Math.floor(Math.random() * 4)];
+            profAppend({ who: 'info', html: r.correct
+                ? `<div class="prof-good">✅ ${good}${r.explication_fr ? ' <small>' + rpEscapeHtml(r.explication_fr) + '</small>' : ''}</div>`
+                : `<div class="prof-bad">❌ <b>${rpEscapeHtml(r.correction || ex.reponse)}</b> ${speakBtnHtml(r.correction || ex.reponse)}<br><small>${rpEscapeHtml(r.explication_fr || ex.astuce_fr || '')}</small></div>` });
+            if (r.correct) await conjAudioSpeak(good, 'nl', 1);
+            else { await profSpeak(r.explication_fr || ex.astuce_fr, ''); if (profActive()) await conjAudioSpeak(r.correction || ex.reponse, 'nl', PROF_RATE[prof.level]); }
+            if (!profActive()) return;
+            prof.exIdx++;
+            if (prof.exIdx < prof.target.exercices.length) { profAskExercise(); return; }
+            const ok = prof.exResults.filter(x => x.ok).length;
+            profAppend({ who: 'info', html: `<div class="prof-target-title">${ok} / ${prof.exResults.length} du premier coup</div>` });
+            profOfferNext('Passer à la mise en pratique');
+        }
+
+        // ----- Mise en pratique -----
+        function profTaskPrompt(type) {
+            const n = prof.plan.task;
+            const past = profLessonsSorted().slice(0, 5).map(l => l.taskTitle).filter(Boolean);
+            return `Tu prépares la MISE EN PRATIQUE (cœur d'un cours particulier de néerlandais, environ ${n} répliques de l'apprenant). ${profContextLines()}
+Type imposé : ${type}.
+- jeu_de_role : une situation réaliste liée à son objectif ; tu joues un personnage (collègue, client, employé, voisin…), l'apprenant joue son propre rôle.
+- texte : un court texte néerlandais (${prof.level === 'A1' ? '40 à 60' : prof.level === 'A2' ? '60 à 90' : '90 à 140'} mots, adapté au niveau) sur un thème lié à son objectif ou de société, puis discussion : compréhension, puis son avis.
+- debat : un sujet sur lequel il doit donner et défendre son avis, avec des nuances ; tu joues un contradicteur bienveillant.
+Fais-y apparaître la notion du jour et des mots du jour quand c'est naturel.
+${past.length ? 'Évite les sujets des séances précédentes : ' + past.join(' ; ') + '.' : ''}
+Aucun nom de marque, d'entreprise ou de personne réelle (invente-les).
+Réponds UNIQUEMENT en JSON : {"titre": "titre court en français", "consigne_fr": "ce que l'apprenant doit faire, 1 ou 2 phrases en français", "role_prof": "qui tu joues et comment (pour toi, en français)", "objectif_fr": "ce qu'on attend de lui", "texte_nl": "", "texte_fr": ""}`;
+        }
+
+        async function profStartTask() {
+            let types = PROF_TASK_TYPES[prof.goal];
+            if (prof.level === 'A1') types = types.filter(t => t !== 'debat');
+            const type = types[Math.floor(Math.random() * types.length)];
+            profThinking(true);
+            const r = await profGemini(profTaskPrompt(type));
+            profThinking(false);
+            if (!profActive()) return;
+            if (!r || r.error || !r.titre) {
+                profAppend({ who: 'info', html: `⚠️ La mise en pratique n'a pas pu être préparée (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="profStartTask()">Réessayer</button>` });
+                return;
+            }
+            prof.task = r;
+            profAppend({ who: 'info', html: `<div class="prof-target-title">🎬 ${rpEscapeHtml(r.titre)}</div><div class="prof-fr">${rpEscapeHtml(r.consigne_fr || '')}</div>${r.texte_nl ? `<div class="prof-text">${rpEscapeHtml(r.texte_nl)} ${speakBtnHtml(r.texte_nl)}${r.texte_fr ? `<details class="prof-trad"><summary>Traduction</summary>${rpEscapeHtml(r.texte_fr)}</details>` : ''}</div>` : ''}` });
+            await profSpeak(r.consigne_fr, r.texte_nl || '');
+            if (!profActive()) return;
+            await profConvTurn();
+        }
+
+        // ----- Bilan -----
+        function profDebriefPrompt() {
+            const errs = prof.errors.slice(0, 30).map(e => `- ${e.faux} → ${e.correct} (${e.pourquoi || ''})`).join('\n');
+            const exs = prof.exResults.map(x => `- ${x.enonce} — attendu : ${x.attendu} — donné : ${x.donne} — ${x.ok ? 'juste' : 'faux'}`).join('\n');
+            return `Tu es le professeur particulier de néerlandais. Fais le BILAN de la séance (niveau ${prof.level}, ${prof.dur} minutes, objectif : ${PROF_GOALS[prof.goal].desc}).
+Point ciblé : ${prof.notion.content.titre}. Mise en pratique : ${prof.task ? prof.task.titre : 'non faite'}.
+Phrases de l'apprenant, dans l'ordre :
+${prof.learner.map(t => '- ' + t).join('\n') || '(aucune)'}
+Erreurs relevées par le correcteur :
+${errs || '(aucune)'}
+Exercices :
+${exs || '(aucun)'}
+Mots du jour proposés : ${prof.words.map(w => w.nl).join(', ')}
+Écris en français, ton chaleureux, concret, en t'appuyant sur ce qu'il a vraiment dit.
+Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un exemple tiré de ses phrases"], "erreurs": [{"faux": "", "correct": "", "explication": ""}], "mots": [{"nl": "", "fr": ""}], "defi": "un petit défi concret pour la prochaine fois", "resume": "une ou deux phrases qui résument la séance (sujets abordés, ce qu'il a raconté) pour s'en souvenir la prochaine fois", "fluidite": 6}
+("erreurs" : les 3 à 5 plus importantes ou récurrentes ; "mots" : 5 à 8 mots ou tournures utiles apparus ou qui lui ont manqué, avec de/het pour les noms ; "fluidite" : note de 1 à 10)`;
+        }
+
+        async function profDebrief() {
+            profThinking(true);
+            const r = await profGemini(profDebriefPrompt());
+            profThinking(false);
+            if (!prof || prof.ended) return;
+            if (!r || r.error || !Array.isArray(r.forces)) {
+                profAppend({ who: 'info', html: `⚠️ Le bilan n'a pas pu être fait (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="profDebrief()">Réessayer</button>` });
+                return;
+            }
+            const ok = prof.exResults.filter(x => x.ok).length;
+            const lesson = {
+                at: prof.at, level: prof.level, dur: prof.dur, goal: prof.goal, notion: prof.notionId,
+                notionTitle: prof.notion.content.titre, taskTitle: prof.task ? prof.task.titre : '',
+                exOk: ok, exTotal: prof.exResults.length, forces: r.forces.slice(0, 4),
+                erreurs: (r.erreurs || []).slice(0, 6), mots: (r.mots || []).slice(0, 10),
+                defi: r.defi || '', resume: r.resume || '', fluidite: r.fluidite || 0
+            };
+            if (!state.profLessons) state.profLessons = {};
+            state.profLessons[prof.id] = lesson;
+            Object.keys(state.profLessons).sort().slice(0, -20).forEach(k => delete state.profLessons[k]);
+            lesson.added = profAddWords(lesson.mots);
+            save();
+            prof.ended = true;
+            profStopAudio();
+            document.getElementById('prof-input-row').style.display = 'none';
+            document.querySelector('#prof-content .prof-mic-row').style.display = 'none';
+            document.querySelector('#prof-content .prof-top-actions').style.display = 'none';
+            profAppend({ who: 'info', html: profDebriefHtml(lesson) + `
+                <div class="prof-actions">
+                    <button class="btn btn-green" onclick="prof = null; profRenderSetup();">🔁 Nouveau cours</button>
+                    ${lesson.added ? `<button class="btn btn-gray" onclick="vocabOpenCat('list', PROF_WORDS_LIST)">📋 Revoir « ${PROF_WORDS_LIST} »</button>` : ''}
+                </div>` });
+            await conjAudioSpeak((r.forces[0] || '') + ' ' + (r.defi ? 'Ton défi : ' + r.defi : ''), 'fr', 1);
+        }
+
+        // Les mots du bilan rejoignent la liste « 🎓 Mon cours » (inconnus du vocabulaire : ajoutés
+        // comme les mots repérés en jeu de rôle).
+        function profAddWords(mots) {
+            if (!state.customLists[PROF_WORDS_LIST]) state.customLists[PROF_WORDS_LIST] = [];
+            const ids = state.customLists[PROF_WORDS_LIST];
+            let n = 0;
+            (mots || []).forEach(m => {
+                if (!m || !m.nl || !m.fr) return;
+                const base = String(m.nl).trim();
+                const existing = rpWordLookup(base.replace(/^(de|het|een) /i, ''));
+                let id = existing && existing.id;
+                if (!id) {
+                    const k = rpKitNorm(base);
+                    if (!k) return;
+                    if (!state.rpWords) state.rpWords = {};
+                    if (!state.rpWords[k]) state.rpWords[k] = { nl: base, fr: m.fr, at: Date.now() };
+                    rpWordsInject();
+                    id = 'RPW:' + k;
+                }
+                if (!ids.includes(id)) { ids.push(id); n++; }
+            });
+            renderCustomListsHome();
+            return n;
+        }
+
+        function profDebriefHtml(l) {
+            return `<div class="prof-debrief">
+                <div class="prof-target-title">📝 Bilan · ${rpEscapeHtml(l.notionTitle || '')}${l.exTotal ? ` · exercices ${l.exOk}/${l.exTotal}` : ''}${l.fluidite ? ` · fluidité ${l.fluidite}/10` : ''}</div>
+                ${(l.forces || []).length ? `<div class="prof-deb-sec">💪 Tes forces</div><ul>${l.forces.map(f => `<li>${rpEscapeHtml(f)}</li>`).join('')}</ul>` : ''}
+                ${(l.erreurs || []).length ? `<div class="prof-deb-sec">✏️ À corriger</div><ul>${l.erreurs.map(e => `<li>${rpEscapeHtml(e.faux)} → <b>${rpEscapeHtml(e.correct)}</b><br><small>${rpEscapeHtml(e.explication || '')}</small></li>`).join('')}</ul>` : ''}
+                ${(l.mots || []).length ? `<div class="prof-deb-sec">📖 Mots à retenir${l.added ? ` (ajoutés à « ${PROF_WORDS_LIST} »)` : ''}</div><ul>${l.mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr)}</li>`).join('')}</ul>` : ''}
+                ${l.defi ? `<div class="prof-deb-sec">🎯 Défi pour la prochaine fois</div><p>${rpEscapeHtml(l.defi)}</p>` : ''}
+            </div>`;
         }
 
         rpInitSpeechRecognition();

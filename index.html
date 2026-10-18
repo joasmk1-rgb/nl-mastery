@@ -487,9 +487,17 @@
         <div id="modrp-content" class="content-col"></div>
     </div>
 
+    <div id="prof-view" class="view">
+        <button class="back-btn" onclick="profStopAudio(); showApprendre()">← Cours</button>
+        <div id="prof-content" class="content-col"></div>
+    </div>
+
     <div id="apprendre-view" class="view">
         <h2>📚 Cours</h2>
         <p class="section-subtitle" style="margin-top:0;">Des leçons en situation, avec un jeu de rôle final pour valider chaque module.</p>
+        <div class="hub-grid single" style="margin-bottom:var(--space-3);">
+            <div class="hub-card accent" onclick="showProf()"><span class="hub-card-icon">🎓</span><div class="hub-card-title">Cours particulier</div><div class="hub-card-desc">15 ou 30 min avec un prof : conversation, point ciblé, mise en pratique, bilan. Différent à chaque fois.</div></div>
+        </div>
         <div id="modrp-list"></div>
         <div class="hub-grid single" style="margin-top:var(--space-3);">
             <div class="hub-card" onclick="showComprendre()"><span class="hub-card-icon">🧠</span><div class="hub-card-title">Grammaire & structures</div><div class="hub-card-desc">Le mémo : ordre des mots, temps, subordonnées, connecteurs.</div></div>
