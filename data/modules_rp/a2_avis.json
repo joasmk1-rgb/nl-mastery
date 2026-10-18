@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais participer à une discussion : donner ton avis et le justifier, réagir à celui des autres, comparer deux possibilités et proposer un compromis.",
   "etapes": [
     {
-      "id": "opinion",
+      "id": "opinion", "notions": ["interaction_expression_personnelle", "dat_of_als"],
       "titre": "Ce que je pense : ik vind dat",
       "intro": "Donner ton avis : « Ik vind het goed », « Ik vind dat … » (verbe à la fin), « Volgens mij … ».",
       "roles": { "A": "Un collègue", "B": "Toi" },
@@ -67,7 +67,7 @@
       }
     },
     {
-      "id": "justifier",
+      "id": "justifier", "notions": ["ordre_mots_subordonnee", "conjonctions_coordination"],
       "titre": "Justifier : want, omdat, dus, daarom",
       "intro": "Un avis convainc mieux avec une raison : « want » (car), « omdat » (parce que), et la conséquence : « dus », « daarom ».",
       "roles": { "A": "Une amie", "B": "Toi" },
@@ -125,7 +125,7 @@
       }
     },
     {
-      "id": "accord",
+      "id": "accord", "notions": ["er_preposition"],
       "titre": "D'accord ou pas d'accord",
       "intro": "Réagir à l'avis de quelqu'un : être d'accord, en partie d'accord, ou pas du tout — poliment.",
       "roles": { "A": "Une collègue", "B": "Toi" },
@@ -184,7 +184,7 @@
       }
     },
     {
-      "id": "comparer",
+      "id": "comparer", "notions": ["comparatif_approfondi", "superlatif_approfondi"],
       "titre": "Comparer deux possibilités",
       "intro": "Peser le pour et le contre : « even … als » (aussi … que), « meer / minder … dan », « het voordeel is dat … ».",
       "roles": { "A": "Un ami", "B": "Toi" },
@@ -242,7 +242,7 @@
       }
     },
     {
-      "id": "compromis",
+      "id": "compromis", "notions": ["modalite_situations_reelles"],
       "titre": "Proposer un compromis",
       "intro": "Sortir d'un désaccord : proposer une solution intermédiaire, faire une concession, conclure ensemble.",
       "roles": { "A": "Ton colocataire", "B": "Toi" },

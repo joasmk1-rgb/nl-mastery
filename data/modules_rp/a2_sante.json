@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais gérer une visite chez le médecin : décrire tes symptômes et depuis quand, comprendre les conseils et le traitement, et régler le certificat pour ton travail.",
   "etapes": [
     {
-      "id": "corps",
+      "id": "corps", "notions": ["sante"],
       "titre": "Le corps et la douleur",
       "intro": "Dire où tu as mal. En néerlandais : « Ik heb pijn aan mijn rug » ou « Mijn rug doet pijn ».",
       "roles": { "A": "Le médecin", "B": "Toi" },
@@ -70,7 +70,7 @@
       }
     },
     {
-      "id": "symptomes",
+      "id": "symptomes", "notions": ["sante", "connecteurs_temporels"],
       "titre": "Symptômes et depuis quand",
       "intro": "Décrire tes symptômes (fièvre, toux, fatigue…) et depuis quand : « sinds » + moment, « al » + durée.",
       "roles": { "A": "Le médecin", "B": "Toi" },
@@ -131,7 +131,7 @@
       }
     },
     {
-      "id": "conseils",
+      "id": "conseils", "notions": ["verbes_reflechis"],
       "titre": "Comprendre les conseils et le traitement",
       "intro": "Comprendre le médecin : le traitement, la posologie, ce qu'il faut faire ou éviter. Beaucoup de verbes pronominaux (zich voelen, zich rusten…).",
       "roles": { "A": "Le médecin", "B": "Toi" },
@@ -192,7 +192,7 @@
       }
     },
     {
-      "id": "omdat",
+      "id": "omdat", "notions": ["subordonnee_omdat", "conjonctions_coordination"],
       "titre": "Expliquer pourquoi : omdat",
       "intro": "Donner une raison : « Ik kan niet werken omdat ik koorts heb ». Après « omdat », le verbe part à la fin.",
       "roles": { "A": "La secrétaire du cabinet", "B": "Toi" },
@@ -250,7 +250,7 @@
       }
     },
     {
-      "id": "certificat",
+      "id": "certificat", "notions": ["perfectum_tous_verbes"],
       "titre": "Le certificat et l'employeur",
       "intro": "Prévenir ton employeur, demander un certificat médical et comprendre les règles de base de l'absence pour maladie.",
       "roles": { "A": "Ta responsable RH", "B": "Toi" },

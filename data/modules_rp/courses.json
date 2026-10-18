@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais faire tes courses en néerlandais : demander un produit, une quantité et un prix, commander poliment et payer.",
   "etapes": [
     {
-      "id": "produits",
+      "id": "produits", "notions": ["de_het", "een", "nourriture"],
       "titre": "Au supermarché : trouver un produit",
       "intro": "Demander où se trouve un produit et reconnaître les aliments courants. Chaque nom a son article : « de » (la plupart) ou « het ».",
       "roles": { "A": "Le vendeur", "B": "Toi" },
@@ -70,7 +70,7 @@
       }
     },
     {
-      "id": "quantites",
+      "id": "quantites", "notions": ["pluriel", "achats", "nombres"],
       "titre": "Quantités et prix",
       "intro": "Demander combien ça coûte, comprendre un prix et dire la quantité que tu veux : un kilo, une bouteille, un paquet.",
       "roles": { "A": "Le marchand", "B": "Toi" },
@@ -132,7 +132,7 @@
       }
     },
     {
-      "id": "commander",
+      "id": "commander", "notions": ["verbes_modaux", "u_politesse"],
       "titre": "Commander poliment",
       "intro": "À la boulangerie, à la boucherie, au marché : demander poliment ce que tu veux avec « Ik wil graag… » ou « Mag ik… ? ».",
       "roles": { "A": "La boulangère", "B": "Toi" },
@@ -194,7 +194,7 @@
       }
     },
     {
-      "id": "decrire",
+      "id": "decrire", "notions": ["regle_du_e", "adjectif_devant_nom", "adjectif_attribut"],
       "titre": "Décrire ce que tu veux",
       "intro": "Préciser : grand ou petit, frais, mûr, rouge… L'adjectif placé devant le nom prend souvent un -e.",
       "roles": { "A": "La vendeuse", "B": "Toi" },
@@ -256,7 +256,7 @@
       }
     },
     {
-      "id": "caisse",
+      "id": "caisse", "notions": ["geen", "niet_vs_geen"],
       "titre": "À la caisse",
       "intro": "Payer par carte ou en liquide, demander un sac, répondre aux questions de la caissière (carte de fidélité, ticket).",
       "roles": { "A": "La caissière", "B": "Toi" },

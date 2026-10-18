@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais te déplacer en Flandre : demander ton chemin, acheter un ticket, comprendre un horaire et une correspondance, et prévenir si tu es en retard.",
   "etapes": [
     {
-      "id": "chemin",
+      "id": "chemin", "notions": ["prepositions_lieu", "ville_administration"],
       "titre": "Demander son chemin",
       "intro": "Demander poliment où se trouve un lieu et comprendre la réponse : tout droit, à gauche, à droite, la première rue.",
       "roles": { "A": "Une passante", "B": "Toi" },
@@ -69,7 +69,7 @@
       }
     },
     {
-      "id": "transports",
+      "id": "transports", "notions": ["transport", "prepositions_essentielles"],
       "titre": "Les transports",
       "intro": "Dire comment tu te déplaces : en train, en bus, à vélo… et combien de temps ça prend.",
       "roles": { "A": "Une collègue", "B": "Toi" },
@@ -129,7 +129,7 @@
       }
     },
     {
-      "id": "ticket",
+      "id": "ticket", "notions": ["questions"],
       "titre": "Acheter un ticket",
       "intro": "Au guichet ou à l'automate : un aller simple ou un aller-retour, la classe, le prix, le quai.",
       "roles": { "A": "Le guichetier", "B": "Toi" },
@@ -190,7 +190,7 @@
       }
     },
     {
-      "id": "correspondance",
+      "id": "correspondance", "notions": ["verbes_separables_intro"],
       "titre": "Monter, descendre, changer",
       "intro": "Comprendre une correspondance : monter, descendre, changer de train. Ce sont des verbes à particule séparable.",
       "roles": { "A": "Un voyageur", "B": "Toi" },
@@ -247,7 +247,7 @@
       }
     },
     {
-      "id": "retard",
+      "id": "retard", "notions": ["verbes_modaux", "ordre_des_mots_base"],
       "titre": "Un problème : prévenir d'un retard",
       "intro": "Le train est supprimé, tu as raté le bus : préviens ton employeur ou ton rendez-vous avec « moeten » et « kunnen ».",
       "roles": { "A": "Ta responsable", "B": "Toi" },

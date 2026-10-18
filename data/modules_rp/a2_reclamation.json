@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais faire une réclamation : décrire précisément le problème au passé, désigner l'objet concerné, demander une solution et insister poliment.",
   "etapes": [
     {
-      "id": "probleme",
+      "id": "probleme", "notions": ["interaction_expression_personnelle"],
       "titre": "Décrire le problème",
       "intro": "Dire ce qui ne va pas : « Er is iets mis met … », « … werkt niet meer », « … is kapot ».",
       "roles": { "A": "Le vendeur", "B": "Toi" },
@@ -67,7 +67,7 @@
       }
     },
     {
-      "id": "passe",
+      "id": "passe", "notions": ["perfectum_tous_verbes"],
       "titre": "Raconter ce qui s'est passé",
       "intro": "Expliquer dans l'ordre : quand tu as acheté, ce que tu as fait, ce qui s'est passé, au perfectum.",
       "roles": { "A": "La responsable du magasin", "B": "Toi" },
@@ -125,7 +125,7 @@
       }
     },
     {
-      "id": "relatifs",
+      "id": "relatifs", "notions": ["pronoms_relatifs"],
       "titre": "Désigner l'objet : die / dat",
       "intro": "Préciser de quoi tu parles : « de jas die ik gekocht heb », « het toestel dat niet werkt ».",
       "roles": { "A": "Le vendeur", "B": "Toi" },
@@ -182,7 +182,7 @@
       }
     },
     {
-      "id": "solution",
+      "id": "solution", "notions": ["combiner_structures_verbales"],
       "titre": "Demander une solution",
       "intro": "Dire ce que tu veux : échanger, réparer, être remboursé, et comprendre ce qu'on te propose.",
       "roles": { "A": "Le vendeur", "B": "Toi" },
@@ -240,7 +240,7 @@
       }
     },
     {
-      "id": "insister",
+      "id": "insister", "notions": ["interaction_expression_personnelle"],
       "titre": "Insister poliment",
       "intro": "Quand on te dit non : rester calme, rappeler tes droits (garantie), demander un responsable ou une confirmation écrite.",
       "roles": { "A": "Le service client", "B": "Toi" },

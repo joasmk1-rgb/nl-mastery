@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais parler de ton logement : décrire les pièces, dire où sont les choses, expliquer un problème et poser les bonnes questions lors d'une visite.",
   "etapes": [
     {
-      "id": "pieces",
+      "id": "pieces", "notions": ["maison", "possessifs", "er_sujet_presentatif"],
       "titre": "Les pièces de la maison",
       "intro": "Nommer les pièces et dire ce qu'il y a chez toi, avec « er is / er zijn » et les possessifs (mijn, jouw, ons…).",
       "roles": { "A": "Une collègue", "B": "Toi" },
@@ -71,7 +71,7 @@
       }
     },
     {
-      "id": "placer",
+      "id": "placer", "notions": ["prepositions_lieu"],
       "titre": "Où sont les choses ?",
       "intro": "Dire où se trouve un objet : sur, dans, sous, à côté de… Le néerlandais précise souvent la position : staan (debout), liggen (couché), hangen (accroché).",
       "roles": { "A": "Ton colocataire", "B": "Toi" },
@@ -133,7 +133,7 @@
       }
     },
     {
-      "id": "decrire",
+      "id": "decrire", "notions": ["comparatif", "superlatif"],
       "titre": "Décrire son logement",
       "intro": "Dire comment est ton logement — grand, clair, calme — et comparer : plus grand que, plus petit que.",
       "roles": { "A": "Un ami", "B": "Toi" },
@@ -195,7 +195,7 @@
       }
     },
     {
-      "id": "panne",
+      "id": "panne", "notions": ["niet_vs_geen"],
       "titre": "Quelque chose ne marche pas",
       "intro": "Expliquer un problème dans ton logement — chauffage, eau chaude, fuite — avec « niet » et « geen ».",
       "roles": { "A": "Le propriétaire", "B": "Toi" },
@@ -257,7 +257,7 @@
       }
     },
     {
-      "id": "visite",
+      "id": "visite", "notions": ["questions", "inversion"],
       "titre": "Visiter un appartement",
       "intro": "Poser les bonnes questions en visitant un logement à louer : prix, charges, disponibilité, animaux, quartier.",
       "roles": { "A": "L'agent immobilier", "B": "Toi" },

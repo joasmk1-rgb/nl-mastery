@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais gérer la vie sociale au travail : inviter ou répondre à une invitation, faire la conversation pendant une soirée, parler de toi plus en détail et remercier.",
   "etapes": [
     {
-      "id": "inviter",
+      "id": "inviter", "notions": ["om_te_infinitif"],
       "titre": "Inviter quelqu'un",
       "intro": "Proposer une sortie : « Heb je zin om … te … ? », « Zou je zin hebben in … ? », « Kom je ook? ».",
       "roles": { "A": "Un collègue", "B": "Toi" },
@@ -66,7 +66,7 @@
       }
     },
     {
-      "id": "repondre",
+      "id": "repondre", "notions": ["modalite_situations_reelles"],
       "titre": "Accepter ou refuser poliment",
       "intro": "Accepter avec plaisir, ou refuser sans vexer : remercier, donner une excuse, proposer autre chose.",
       "roles": { "A": "Ta collègue Sarah", "B": "Toi" },
@@ -124,7 +124,7 @@
       }
     },
     {
-      "id": "soiree",
+      "id": "soiree", "notions": ["interaction_expression_personnelle"],
       "titre": "Faire la conversation",
       "intro": "Pendant la soirée : lancer un sujet, poser des questions ouvertes, rebondir, et utiliser des petites phrases de liaison.",
       "roles": { "A": "Le partenaire d'un collègue", "B": "Toi" },
@@ -184,7 +184,7 @@
       }
     },
     {
-      "id": "detail",
+      "id": "detail", "notions": ["conjonctions_coordination", "connecteurs_temporels"],
       "titre": "Parler de soi plus en détail",
       "intro": "Aller au-delà des phrases de base : raconter ton parcours, tes goûts, tes projets, en reliant tes idées.",
       "roles": { "A": "Un collègue d'un autre service", "B": "Toi" },
@@ -242,7 +242,7 @@
       }
     },
     {
-      "id": "remercier",
+      "id": "remercier", "notions": ["om_te_infinitif"],
       "titre": "Partir et remercier",
       "intro": "Quitter une soirée poliment et remercier le lendemain : « Bedankt voor de leuke avond! ».",
       "roles": { "A": "Ta collègue Sarah", "B": "Toi" },

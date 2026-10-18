@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais décrire ta journée et tes habitudes : à quelle heure tu fais quoi, combien de fois, et ce qui change le week-end.",
   "etapes": [
     {
-      "id": "matin",
+      "id": "matin", "notions": ["inversion", "verbes_separables_intro"],
       "titre": "Le matin",
       "intro": "Se lever, se doucher, prendre le petit-déjeuner… et dire à quelle heure. Quand l'heure est en tête de phrase, le verbe passe avant le sujet.",
       "roles": {
@@ -211,7 +211,7 @@
       }
     },
     {
-      "id": "trajet",
+      "id": "trajet", "notions": ["verbes_separables_intro", "verbes_inseparables", "transport"],
       "titre": "Partir au travail",
       "intro": "Dire quand tu pars, comment tu y vas, quand tu arrives et combien de temps ça prend.",
       "roles": {
@@ -411,7 +411,7 @@
       }
     },
     {
-      "id": "habitudes",
+      "id": "habitudes", "notions": ["ordre_des_mots_base", "hoofdzin", "present_recap"],
       "titre": "La journée et les habitudes",
       "intro": "Dire ce que tu fais pendant la journée et à quelle fréquence : toujours, souvent, parfois, jamais.",
       "roles": {
@@ -621,7 +621,7 @@
       }
     },
     {
-      "id": "soir",
+      "id": "soir", "notions": ["futur_proche_gaan", "verbes_irreguliers"],
       "titre": "Le soir",
       "intro": "Rentrer, cuisiner, faire du sport, regarder la télé, aller dormir : raconter ta soirée.",
       "roles": {
@@ -818,7 +818,7 @@
       }
     },
     {
-      "id": "semaine",
+      "id": "semaine", "notions": ["position_niet", "niet"],
       "titre": "La semaine et le week-end",
       "intro": "Comparer la semaine et le week-end, dire ce que tu ne fais PAS (niet) et placer correctement la négation.",
       "roles": {

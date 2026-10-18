@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais raconter ton week-end au passé (perfectum) et poser des questions à l'autre sur le sien.",
   "etapes": [
     {
-      "id": "hebben",
+      "id": "hebben", "notions": ["perfectum_intro", "participe_passe"],
       "titre": "Ce que j'ai fait (avec hebben)",
       "intro": "Le passé le plus courant à l'oral : le perfectum. La plupart des verbes se conjuguent avec « hebben » + participe passé (ge- … -t ou -d).",
       "roles": { "A": "Un collègue, lundi matin", "B": "Toi" },
@@ -69,7 +69,7 @@
       }
     },
     {
-      "id": "zijn",
+      "id": "zijn", "notions": ["hebben_zijn_auxiliaire"],
       "titre": "Où je suis allé (avec zijn)",
       "intro": "Les verbes de déplacement ou de changement d'état prennent « zijn » au perfectum : ik ben gegaan, gekomen, gebleven.",
       "roles": { "A": "Une amie", "B": "Toi" },
@@ -128,7 +128,7 @@
       }
     },
     {
-      "id": "irreguliers",
+      "id": "irreguliers", "notions": ["participe_passe", "regles_du_passe_de_base"],
       "titre": "Les participes à connaître par cœur",
       "intro": "Les verbes les plus fréquents ont un participe irrégulier : gezien, gegeten, gedronken, geslapen, gelezen… Ce sont eux qui reviennent tout le temps.",
       "roles": { "A": "Un collègue", "B": "Toi" },
@@ -188,7 +188,7 @@
       }
     },
     {
-      "id": "meteo",
+      "id": "meteo", "notions": ["meteo"],
       "titre": "Le temps qu'il a fait",
       "intro": "La météo, sujet de conversation numéro un en Belgique : dire le temps qu'il fait et qu'il a fait.",
       "roles": { "A": "Ta voisine", "B": "Toi" },
@@ -248,7 +248,7 @@
       }
     },
     {
-      "id": "reagir",
+      "id": "reagir", "notions": ["inversion", "perfectum_intro"],
       "titre": "Réagir et relancer",
       "intro": "Une conversation, ce n'est pas qu'un récit : réagir (« Leuk! », « Echt? »), poser la question en retour (« En jij? ») et placer le moment en tête de phrase.",
       "roles": { "A": "Une collègue", "B": "Toi" },

@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais mener un appel professionnel : te présenter, dire pourquoi tu appelles, demander à parler à quelqu'un, laisser un message clair et vérifier les informations.",
   "etapes": [
     {
-      "id": "debut",
+      "id": "debut", "notions": ["telephone_rendezvous"],
       "titre": "Commencer un appel",
       "intro": "En Flandre, on décroche en disant son nom (« Met Sofie ») et on commence un appel en se présentant puis en disant pourquoi on appelle.",
       "roles": { "A": "L'accueil d'une entreprise", "B": "Toi" },
@@ -65,7 +65,7 @@
       }
     },
     {
-      "id": "transfert",
+      "id": "transfert", "notions": ["telephone_rendezvous", "modalite_situations_reelles"],
       "titre": "Demander la bonne personne",
       "intro": "Demander à parler à quelqu'un, être mis en attente, transféré, ou apprendre que la personne n'est pas là.",
       "roles": { "A": "L'accueil", "B": "Toi" },
@@ -122,7 +122,7 @@
       }
     },
     {
-      "id": "message",
+      "id": "message", "notions": ["dat_of_als", "ordre_mots_subordonnee"],
       "titre": "Laisser un message",
       "intro": "Laisser un message clair : qui tu es, pourquoi tu appelles, comment te joindre, et demander qu'on te rappelle.",
       "roles": { "A": "La réceptionniste", "B": "Toi" },
@@ -179,7 +179,7 @@
       }
     },
     {
-      "id": "indirect",
+      "id": "indirect", "notions": ["dat_of_als", "ordre_mots_subordonnee"],
       "titre": "Poser une question indirecte",
       "intro": "Demander poliment une information : « Weet u of … ? », « Kunt u zeggen wanneer … ? ». Le verbe part à la fin.",
       "roles": { "A": "Un employé de la commune", "B": "Toi" },
@@ -237,7 +237,7 @@
       }
     },
     {
-      "id": "verifier",
+      "id": "verifier", "notions": ["interaction_expression_personnelle"],
       "titre": "Vérifier et confirmer",
       "intro": "Ne pas raccrocher sans être sûr : faire répéter, reformuler, épeler, et demander une confirmation écrite.",
       "roles": { "A": "Une assistante RH", "B": "Toi" },

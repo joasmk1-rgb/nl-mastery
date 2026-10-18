@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais organiser un court séjour : réserver, poser des questions sur les services, te débrouiller sur place et gérer un problème.",
   "etapes": [
     {
-      "id": "reserver",
+      "id": "reserver", "notions": ["voyage_transport"],
       "titre": "Réserver une chambre",
       "intro": "Réserver par téléphone : dates, nombre de personnes, type de chambre, prix, petit-déjeuner.",
       "roles": { "A": "La réceptionniste de l'hôtel", "B": "Toi" },
@@ -68,7 +68,7 @@
       }
     },
     {
-      "id": "infos",
+      "id": "infos", "notions": ["er_lieu", "er_sujet_presentatif"],
       "titre": "Demander des informations",
       "intro": "À l'arrivée ou à l'office de tourisme : horaires, services, conseils. Des questions avec « er » : « Is er een parking? ».",
       "roles": { "A": "Le réceptionniste", "B": "Toi" },
@@ -128,7 +128,7 @@
       }
     },
     {
-      "id": "quantites",
+      "id": "quantites", "notions": ["quantificateurs", "er_quantite"],
       "titre": "Beaucoup, peu, assez, tout",
       "intro": "Parler des quantités et des gens : alle, veel, weinig, genoeg, iedereen, niemand, iets, niets.",
       "roles": { "A": "Un ami en voyage", "B": "Toi" },
@@ -188,7 +188,7 @@
       }
     },
     {
-      "id": "louer",
+      "id": "louer", "notions": ["demonstratifs_approfondis"],
       "titre": "Louer et se déplacer sur place",
       "intro": "Louer un vélo, acheter un ticket de bateau ou de tram, demander combien de temps et ce qui est compris.",
       "roles": { "A": "Le loueur de vélos", "B": "Toi" },
@@ -248,7 +248,7 @@
       }
     },
     {
-      "id": "imprevu",
+      "id": "imprevu", "notions": ["choix_temps_passe"],
       "titre": "Un imprévu en voyage",
       "intro": "Le train est annulé, la chambre ne correspond pas, tu as perdu ton portefeuille : expliquer et trouver une solution.",
       "roles": { "A": "Le réceptionniste", "B": "Toi" },

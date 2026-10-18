@@ -6,7 +6,7 @@
   "objectif": "À la fin du module, tu sais te présenter à quelqu'un — un collègue, un recruteur, un voisin : saluer, dire qui tu es, d'où tu viens, parler de ta famille, de ton travail et de tes loisirs.",
   "etapes": [
     {
-      "id": "salutations",
+      "id": "salutations", "notions": ["salutations", "u_politesse"],
       "titre": "Saluer et prendre congé",
       "intro": "Dire bonjour selon le moment de la journée, demander comment ça va, et dire au revoir. En Flandre, on salue presque toujours en entrant quelque part.",
       "roles": {
@@ -234,7 +234,7 @@
       }
     },
     {
-      "id": "identite",
+      "id": "identite", "notions": ["se_presenter", "nom_age_nationalite", "zijn", "pronoms_sujets"],
       "titre": "Qui je suis : nom, origine, âge, ville",
       "intro": "Dire comment tu t'appelles, d'où tu viens, ta nationalité, ton âge et où tu habites — et poser les mêmes questions à l'autre.",
       "portrait": [
@@ -467,7 +467,7 @@
       }
     },
     {
-      "id": "famille",
+      "id": "famille", "notions": ["famille", "hebben", "geen", "pluriel"],
       "titre": "Ma famille",
       "intro": "Dire si tu es marié ou célibataire, si tu as des enfants, des frères et sœurs — et poser la question à l'autre.",
       "portrait": [
@@ -703,7 +703,7 @@
       }
     },
     {
-      "id": "travail",
+      "id": "travail", "notions": ["travail_etudes", "ville_profession"],
       "titre": "Mon travail ou mes études",
       "intro": "Dire ce que tu fais dans la vie : ton métier, où tu travailles, tes études, ou que tu cherches du travail.",
       "portrait": [
@@ -938,7 +938,7 @@
       }
     },
     {
-      "id": "loisirs",
+      "id": "loisirs", "notions": ["present_regulier", "sujet_verbe_objet", "infinitif_radical"],
       "titre": "Mes langues et mes loisirs",
       "intro": "Dire quelles langues tu parles, ce que tu aimes faire pendant ton temps libre, et le demander à l'autre.",
       "portrait": [

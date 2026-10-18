@@ -700,3 +700,16 @@
         .gate-invite { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--primary) 15%, transparent); font-weight: 600; font-size: 0.88rem; }
         .admin-invite { display: flex; flex-direction: column; gap: 6px; padding: 10px 0; border-top: 1px solid var(--border); }
         .admin-invite input { margin: 0; font-size: 0.78rem; }
+
+        /* Progression unifiée */
+        .modrp-entry { position: relative; }
+        .modrp-exam-btn { margin-left: auto; align-self: center; flex-shrink: 0; background: none; border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 4px 8px; font-size: 0.7rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; }
+        .cours-hint { width: 100%; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--primary) 12%, transparent); font-size: 0.85rem; margin-bottom: 10px; box-sizing: border-box; }
+        .cours-hint .rp-coach-btn { margin: 6px 0 0; }
+        .carte-level { margin-bottom: 12px; }
+        .carte-level-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; }
+        .carte-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+        .carte-chip { border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 3px 9px; font-size: 0.72rem; background: var(--card-bg); color: var(--text-secondary); cursor: pointer; }
+        .carte-chip.mid { background: color-mix(in srgb, #eab308 22%, transparent); color: var(--text); }
+        .carte-chip.weak { background: color-mix(in srgb, #ef4444 22%, transparent); color: var(--text); }
+        .carte-chip.ok { background: color-mix(in srgb, #22c55e 25%, transparent); color: var(--text); }

@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais parler de l'avenir : ce que tu vas faire, ce que tu as l'intention de faire, ce que tu aimerais faire, et organiser un projet avec quelqu'un.",
   "etapes": [
     {
-      "id": "gaan",
+      "id": "gaan", "notions": ["futur_proche_gaan", "dat_of_als"],
       "titre": "Ce que je vais faire : gaan + infinitif",
       "intro": "Le futur le plus courant à l'oral : « gaan » + infinitif à la fin. « Ik ga morgen werken ».",
       "roles": { "A": "Un collègue, vendredi", "B": "Toi" },
@@ -65,7 +65,7 @@
       }
     },
     {
-      "id": "zullen",
+      "id": "zullen", "notions": ["zullen_futur"],
       "titre": "Promettre et proposer : zullen",
       "intro": "« zullen » sert à promettre (Ik zal het doen), à prévoir (Het zal regenen) et à proposer (Zullen we…?).",
       "roles": { "A": "Ta responsable", "B": "Toi" },
@@ -122,7 +122,7 @@
       }
     },
     {
-      "id": "intention",
+      "id": "intention", "notions": ["om_te_infinitif"],
       "titre": "Mes intentions : van plan zijn om te",
       "intro": "Dire ce que tu as l'intention de faire : « Ik ben van plan om een opleiding te volgen ». Avec « om … te + infinitif ».",
       "roles": { "A": "Ton conseiller emploi", "B": "Toi" },
@@ -179,7 +179,7 @@
       }
     },
     {
-      "id": "souhaits",
+      "id": "souhaits", "notions": ["zouden_intro"],
       "titre": "Ce que j'aimerais : zou graag willen",
       "intro": "Exprimer un souhait ou un rêve poliment : « Ik zou graag in een groot bedrijf willen werken ».",
       "roles": { "A": "Un recruteur", "B": "Toi" },
@@ -237,7 +237,7 @@
       }
     },
     {
-      "id": "organiser",
+      "id": "organiser", "notions": ["modalite_situations_reelles"],
       "titre": "Organiser un projet à deux",
       "intro": "Planifier quelque chose ensemble : proposer, accepter, refuser, se mettre d'accord sur la date, le budget, qui fait quoi.",
       "roles": { "A": "Une collègue", "B": "Toi" },

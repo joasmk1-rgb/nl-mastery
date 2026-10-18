@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais te débrouiller tes premiers jours au travail : comprendre ce qu'on te demande, poser des questions, demander de l'aide et dire quand quelque chose ne va pas.",
   "etapes": [
     {
-      "id": "lieu",
+      "id": "lieu", "notions": ["demonstratifs"],
       "titre": "Se repérer sur le lieu de travail",
       "intro": "Les lieux et objets du travail, et demander où ils se trouvent : le bureau, l'entrepôt, l'imprimante, le réfectoire, les vestiaires.",
       "roles": {
@@ -213,7 +213,7 @@
       }
     },
     {
-      "id": "taches",
+      "id": "taches", "notions": ["verbes_modaux", "verbes_separables_intro"],
       "titre": "Mes tâches",
       "intro": "Dire ce que tu fais et ce que tu dois faire : contrôler, encoder, téléphoner, emballer… avec « moeten ».",
       "roles": {
@@ -415,7 +415,7 @@
       }
     },
     {
-      "id": "aide",
+      "id": "aide", "notions": ["pronoms_objets"],
       "titre": "Demander de l'aide",
       "intro": "Demander poliment de l'aide, faire répéter, dire que tu n'as pas compris — sans gêne : c'est normal quand on débute.",
       "roles": {
@@ -619,7 +619,7 @@
       }
     },
     {
-      "id": "consigne",
+      "id": "consigne", "notions": ["ordre_des_mots_base", "phrase_affirmative"],
       "titre": "Comprendre une consigne",
       "intro": "Comprendre ce qu'on te demande à l'impératif, dans l'ordre (d'abord, ensuite, enfin), et reformuler pour vérifier.",
       "roles": {
@@ -814,7 +814,7 @@
       }
     },
     {
-      "id": "probleme",
+      "id": "probleme", "notions": ["er_sujet_presentatif"],
       "titre": "Signaler un problème",
       "intro": "Dire que quelque chose ne marche pas, qu'il manque quelque chose, que tu as fini ou que tu as fait une erreur.",
       "roles": {

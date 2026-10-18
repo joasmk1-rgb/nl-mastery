@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais raconter une expérience passée : décrire le contexte (imparfait), raconter les actions (passé composé), enchaîner dans l'ordre et dire ce que tu en as pensé.",
   "etapes": [
     {
-      "id": "enfance",
+      "id": "enfance", "notions": ["imperfectum"],
       "titre": "Quand j'étais petit : l'imparfait",
       "intro": "Pour décrire comment c'était avant (habitudes, descriptions), on utilise l'imperfectum : ik woonde, ik speelde, ik was, ik had.",
       "roles": { "A": "Une collègue", "B": "Toi" },
@@ -68,7 +68,7 @@
       }
     },
     {
-      "id": "experience",
+      "id": "experience", "notions": ["imperfectum_irreguliers"],
       "titre": "Mon ancien travail",
       "intro": "Parler de ton expérience : où tu travaillais, ce que tu faisais, ce que tu as appris — très utile en entretien.",
       "roles": { "A": "Une recruteuse", "B": "Toi" },
@@ -128,7 +128,7 @@
       }
     },
     {
-      "id": "temps",
+      "id": "temps", "notions": ["choix_temps_passe"],
       "titre": "Imparfait ou passé composé ?",
       "intro": "Le contexte et les habitudes à l'imperfectum (het regende, ik was moe), les actions ponctuelles et les résultats au perfectum (ik heb de bus gemist).",
       "roles": { "A": "Un ami", "B": "Toi" },
@@ -187,7 +187,7 @@
       }
     },
     {
-      "id": "chronologie",
+      "id": "chronologie", "notions": ["connecteurs_temporels", "ordre_mots_subordonnee"],
       "titre": "Raconter dans l'ordre",
       "intro": "Enchaîner un récit : eerst, daarna, toen, uiteindelijk… et les subordonnées de temps (toen, nadat, voordat).",
       "roles": { "A": "Une collègue", "B": "Toi" },
@@ -246,7 +246,7 @@
       }
     },
     {
-      "id": "avis",
+      "id": "avis", "notions": ["raconter_evenement_passe"],
       "titre": "Ce que j'en ai pensé",
       "intro": "Terminer un récit : dire ce que tu as ressenti, ce que tu en as pensé et ce que tu retiens.",
       "roles": { "A": "Un ami", "B": "Toi" },

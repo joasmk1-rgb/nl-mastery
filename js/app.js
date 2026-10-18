@@ -174,7 +174,7 @@ async function accSignup(pseudo, password) {
         await socialEnsureProfileDocs();
         await betaKeyRefresh(userDoc);
         gateOpen();
-        showHome();
+        if (state.onboardingSeen) showHome(); else showOnboarding();
         if (inviteExpired) alert("Ton compte est créé, mais le lien d'invitation n'est plus actif : demande un nouveau lien pour l'accès bêta.");
     } catch (e) {
         accSetError(accFriendlyError(e));
@@ -393,7 +393,7 @@ function syncMergeValue(a, b, path) {
         if (path.indexOf('curriculum.notionProgress.') === 0) {
             const aa = a.attempts || 0, ba = b.attempts || 0;
             const pick = (ba > aa || (ba === aa && (b.lastAttemptAt || 0) > (a.lastAttemptAt || 0))) ? b : a;
-            return Object.assign({}, pick, { opened: !!(a.opened || b.opened) });
+            return Object.assign({}, pick, { opened: !!(a.opened || b.opened), validated: !!(a.validated || b.validated) });
         }
         // Une forme conjuguée : ok/ko/streak vont ensemble, on garde la réponse la plus récente.
         if (path.indexOf('conjStats.') === 0 || path.indexOf('chunkStats.') === 0) return (b.last || 0) > (a.last || 0) ? b : a;
@@ -2184,14 +2184,19 @@ if (firebaseAvailable) {
             const notion = curriculumNotions[notionId];
             const p = state.curriculum.notionProgress[notionId];
             if (!notion) return 0;
-            if (!p || (!p.opened && p.attempts === 0)) return 0;
-            if (p.attempts === 0) return 1;
-            const ratio = p.correct / p.attempts;
-            const exCount = (notion.exerciseIds || []).length || 1;
-            if (ratio < 0.5) return 2;
-            if (ratio < 1) return 3;
-            if (p.attempts < exCount * 2) return 4;
-            return 5;
+            if (!p || (!p.opened && !p.attempts && !p.validated)) return 0;
+            if (!p.attempts) return p.validated ? 4 : 1;
+            // Progression unifiée (octobre 2026) : toutes les activités (modules, cours particulier,
+            // conjugaison, exercices de notion) alimentent les mêmes notions. On juge sur les 10
+            // dernières réponses (p.recent) : avant, une seule erreur bloquait la notion à 3 pour
+            // toujours. Un examen de module réussi (p.validated) garantit au moins « presque maîtrisée ».
+            const recent = Array.isArray(p.recent) && p.recent.length ? p.recent : null;
+            const ratio = recent ? recent.reduce((a, b) => a + b, 0) / recent.length : p.correct / p.attempts;
+            let m = ratio < 0.5 ? 2 : (ratio < 0.8 ? 3 : 4);
+            if (m === 4 && p.attempts < 3) m = 3; // une ou deux bonnes réponses ne suffisent pas
+            if (m === 4 && p.attempts >= 6) m = 5;
+            if (p.validated && ratio >= 0.5) m = Math.max(m, 4);
+            return m;
         }
 
         function isNotionUnlocked(notionId) {
@@ -2618,16 +2623,18 @@ if (firebaseAvailable) {
                 <div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">Notions à consolider</div>
                 <div class="hub-grid single">
                     ${weaknesses.map(w => {
-                        const titre = w.notion.content.titre || w.id.replace(/_/g, ' ');
+                        const titre = notionTitle(w.id);
                         // Phrase explicite plutôt qu'un simple badge de statut, pour répondre à
                         // "pourquoi on me propose ça" (réutilise le statut déjà calculé par
                         // WeaknessEngine, n'invente aucune nouvelle donnée).
                         const reason = w.status === 'faible'
                             ? `🔁 Tu as eu des difficultés récentes avec « ${titre} ».`
                             : `🎯 Il te reste à consolider « ${titre} ».`;
+                        const where = notionWhere(w.id);
                         return `
-                        <div class="hub-card" onclick="showLesson('${w.id}')">
+                        <div class="hub-card" onclick="notionGo('${w.id}')">
                             <div class="hub-card-title">${reason}</div>
+                            <div class="hub-card-desc">${where ? '📚 ' + rpEscapeHtml(where.m.titre) + ' · ' + rpEscapeHtml(where.e.titre) : '🎓 En cours particulier'}</div>
                             <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
                             ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
                         </div>`;
@@ -3132,8 +3139,9 @@ if (firebaseAvailable) {
                         <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
                     </div>
                     <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📖 Les mots et la conjugaison · 📚 Des leçons en situation · 🎭 Parler et écrire en situation réelle · 🎮 Des jeux pour entretenir ton vocabulaire · 👤 en haut : ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
-                    <button class="btn btn-green" style="margin-top:var(--space-5);" onclick="onboardingGoTo('placement')">🚀 Évaluer mon niveau</button>
-                    <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('start')">Commencer directement</button>
+                    <div class="section-title" style="margin-top:var(--space-5);">Par où commencer ?</div>
+                    <button class="btn btn-green" style="margin-top:var(--space-2);" onclick="onboardingGoTo('debut')">🌱 Je débute : premier module</button>
+                    <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('bases')">💪 J'ai déjà des bases : passer les examens des modules que je connais</button>
                     <p style="font-size:0.78rem; margin-top:var(--space-4);">${currentUser ? '' : `<a href="#" onclick="onboardingGoTo('compte'); return false;">Créer un compte pour synchroniser ta progression (optionnel)</a>`}</p>
                 </div>`;
         }
@@ -3147,6 +3155,8 @@ if (firebaseAvailable) {
             onboardingMarkSeen();
             if (dest === 'placement') showPlacementIntro();
             else if (dest === 'compte') showCompte();
+            else if (dest === 'debut') guideStart(MODRP_IDS[0]);
+            else if (dest === 'bases') { state.coursBasesHint = true; save(); showApprendre(); }
             else showHome();
         }
 
@@ -3372,7 +3382,8 @@ if (firebaseAvailable) {
             const levels = [...new Set(mods.map(m => m.niveau))];
             const isPassed = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
             const openLevel = levels.find(l => mods.filter(m => m.niveau === l).some(m => !isPassed(m))) || levels[levels.length - 1];
-            el.innerHTML = levels.map(level => {
+            const hint = state.coursBasesHint ? `<div class="cours-hint">💪 Tu as des bases : pour chaque module que tu connais déjà, touche <b>🏆 Examen</b>. Réussi, le module et ses notions sont validés et tu passes au suivant. <button type="button" class="rp-coach-btn" onclick="state.coursBasesHint=false; save(); renderModRpEntries();">OK</button></div>` : '';
+            el.innerHTML = hint + levels.map(level => {
                 const list = mods.filter(m => m.niveau === level);
                 const nPassed = list.filter(isPassed).length;
                 return `<details class="modrp-level" ${level === openLevel ? 'open' : ''}>
@@ -3383,6 +3394,7 @@ if (firebaseAvailable) {
                         return `<div class="modrp-entry${passed ? ' passed' : ''}" onclick="guideStart('${m.id}')">
                             <span class="modrp-entry-icon">${passed ? '🏆' : (m.icone || '🎭')}</span>
                             <span><b>${i + 1}. ${rpEscapeHtml(m.titre)}</b><br><small>${passed ? 'Réussi' : done + '/' + m.etapes.length + ' étapes'} · ${rpEscapeHtml(m.accroche || m.objectif)}</small></span>
+                            ${passed ? '' : `<button type="button" class="modrp-exam-btn" title="Passer l'examen directement" onclick="event.stopPropagation(); guideExamDirect('${m.id}')">🏆 Examen</button>`}
                         </div>`;
                     }).join('')}
                 </details>`;
@@ -3767,8 +3779,88 @@ if (firebaseAvailable) {
             }
             p.lastResult = isCorrect ? 'correct' : 'incorrect';
             p.lastAttemptAt = Date.now();
+            p.recent = (Array.isArray(p.recent) ? p.recent : []).concat(isCorrect ? 1 : 0).slice(-10);
             save();
             return p;
+        }
+
+        // Notions enseignées par une étape de module (champ "notions" des fichiers modules_rp).
+        function modRpEtapeNotions(id, etapeId) {
+            const m = modRpData[id];
+            const e = m && m.etapes.find(x => x.id === etapeId);
+            return (e && e.notions) || [];
+        }
+        function modRpModuleNotions(id) {
+            const m = modRpData[id];
+            return m ? [...new Set(m.etapes.flatMap(e => e.notions || []))] : [];
+        }
+        // Examen réussi : toutes les notions du module sont validées.
+        function modRpValidateNotions(id) {
+            modRpModuleNotions(id).forEach(n => {
+                if (!curriculumNotions[n]) return;
+                ntProgress(n).validated = true;
+                recordNotionAttempt(n, true);
+            });
+        }
+        // Examen raté : les notions des étapes dont les sujets manquaient sont signalées.
+        function modRpFlagMissing(id, missingEtapes) {
+            [...new Set(missingEtapes)].forEach(eid => modRpEtapeNotions(id, eid).forEach(n => { if (curriculumNotions[n]) recordNotionAttempt(n, false); }));
+        }
+
+        // Où travailler une notion : l'étape de module qui l'enseigne, sinon le cours particulier.
+        function notionWhere(notionId) {
+            for (const mid of MODRP_IDS) {
+                const m = modRpData[mid];
+                if (!m) continue;
+                const idx = m.etapes.findIndex(e => (e.notions || []).includes(notionId));
+                if (idx >= 0) return { mid, idx, m, e: m.etapes[idx] };
+            }
+            return null;
+        }
+        function notionTitle(notionId) {
+            const n = curriculumNotions[notionId];
+            if (n && n.content && n.content.titre) return n.content.titre;
+            const s = String(notionId).replace(/_/g, ' ');
+            return s.charAt(0).toUpperCase() + s.slice(1);
+        }
+
+        // Carte des compétences : toutes les notions prêtes, par niveau, colorées selon leur état.
+        // Un clic mène là où la notion se travaille (notionGo).
+        function competenceMapHtml() {
+            if (!curriculumLoaded) return '<p class="report-meta">Chargement du programme...</p>';
+            const cls = st => ({ maitrisee: 'ok', presque_maitrisee: 'ok', entrainee: 'mid', en_cours: 'mid', decouverte: 'mid', a_pratiquer: 'weak', faible: 'weak' }[st] || 'none');
+            return curriculumLevels.map(l => {
+                const ids = Object.keys(curriculumNotions).filter(id => curriculumNotions[id].level === l.id && curriculumNotions[id].status === 'pret');
+                if (!ids.length) return '';
+                const ok = ids.filter(id => computeNotionMastery(id) >= 4).length;
+                return `<div class="carte-level">
+                    <div class="carte-level-title"><span class="conj-niveau-badge">${l.id}</span> ${ok} / ${ids.length} acquises</div>
+                    <div class="carte-chips">${ids.map(id => {
+                        const st = getNotionStatus(id);
+                        return `<button type="button" class="carte-chip ${cls(st)}" title="${rpEscapeHtml(getNotionStatusLabel(st))}" onclick="notionGo('${id}')">${rpEscapeHtml(notionTitle(id))}</button>`;
+                    }).join('')}</div>
+                </div>`;
+            }).join('') + `<p class="report-meta">⬜ pas encore vue · 🟨 en cours · 🟥 à revoir · 🟩 acquise. Tout compte : modules, examens, cours particulier, conjugaison. Touche une notion pour la travailler.</p>`;
+        }
+
+        function notionGo(notionId) {
+            const w = notionWhere(notionId);
+            const n = curriculumNotions[notionId];
+            const titre = notionTitle(notionId);
+            if (w) {
+                if (!confirm(`« ${titre} » se travaille dans le module « ${w.m.titre} », étape « ${w.e.titre} ». Y aller ?`)) return;
+                modRpState(w.mid).guide = { e: w.idx, b: GUIDE_BEATS.indexOf('vocab') };
+                save();
+                guideStart(w.mid);
+                return;
+            }
+            if (!n) return;
+            if (!confirm(`« ${titre} » n'a pas encore de module : on la travaille en cours particulier. Y aller ?`)) return;
+            const s = profSettings();
+            s.level = n.level;
+            s.notion = notionId;
+            save();
+            showProf();
         }
 
         function checkExerciseAnswer() {
@@ -4172,6 +4264,20 @@ if (firebaseAvailable) {
             if (isCorrect) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
             s.last = Date.now();
             state.conjStats[key] = s;
+            const nid = conjTenseNotion(infinitief, tense);
+            if (nid && curriculumNotions[nid]) recordNotionAttempt(nid, isCorrect);
+        }
+
+        // Notion du curriculum entraînée par une forme conjuguée.
+        function conjTenseNotion(infinitief, tense) {
+            if (tense === 'present') return infinitief === 'zijn' ? 'zijn' : (infinitief === 'hebben' ? 'hebben' : 'present_regulier');
+            if (tense === 'perfectum') return 'perfectum_intro';
+            if (tense === 'futur') return 'zullen_futur';
+            if (tense === 'imperfectum') {
+                const v = conjugationLoaded && conjugationData.find(x => x.infinitief === infinitief);
+                return v && getVerbCategories(v).includes('irregulier') ? 'imperfectum_irreguliers' : 'imperfectum';
+            }
+            return null;
         }
 
         // Une forme est "à revoir" tant que la dernière réponse donnée dessus était fausse.
@@ -5800,6 +5906,7 @@ if (firebaseAvailable) {
             const raw = document.getElementById('sep-tr-input').value;
             const result = evaluateAnswer(raw, expected);
             const isCorrect = result.status !== 'wrong';
+            if (curriculumNotions.verbes_separables_intro) recordNotionAttempt('verbes_separables_intro', isCorrect);
             const fb = document.getElementById('sep-tr-feedback');
             if (isCorrect) {
                 st.score++;
@@ -7320,8 +7427,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
             const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 5) : [];
             const weaknessesHtml = weaknesses.length ? weaknesses.map(w => `
-                <div class="hub-card" onclick="showLesson('${w.id}')">
-                    <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</div>
+                <div class="hub-card" onclick="notionGo('${w.id}')">
+                    <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${rpEscapeHtml(notionTitle(w.id))}</div>
                     <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
                     ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
                 </div>`).join('') : `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucun point faible identifié pour l'instant 🎉</p>`;
@@ -7348,7 +7455,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-stat-tile"><div class="ps-num">${masteredNotions}</div><div class="ps-label">Notions maîtrisées</div></div>
                 </div>
                 <div class="profil-menu">
-                    <div class="profil-menu-row" onclick="showPlacementIntro()"><span class="pm-icon">🚀</span><span>Évaluer mon niveau</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showOnboarding()"><span class="pm-icon">🧭</span><span>Choisir mon point de départ</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" style="cursor:pointer;" onclick="toggleFreeAccess(${!state.freeAccess})">
                         <span class="pm-icon">${state.freeAccess ? '🔓' : '🔒'}</span>
                         <span>Mode libre (accès à toutes les leçons)</span>
@@ -7359,6 +7466,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
+
+                <details class="profil-section" id="profil-sec-carte" ${openSections.includes('profil-sec-carte') || !openSections.length ? 'open' : ''}>
+                <summary>🗺️ Carte de mes compétences</summary>
+                <div class="carte">${competenceMapHtml()}</div>
+                </details>
 
                 <details class="profil-section" id="profil-sec-stats" ${openSections.includes('profil-sec-stats') ? 'open' : ''}>
                 <summary>📊 Statistiques détaillées</summary>
@@ -10336,6 +10448,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             ex.checking = true;
             if (ok) ex.score++;
             (ex.results || (ex.results = []))[ex.i] = ok;
+            modRpEtapeNotions(modRpCurrent, ex.etapeId).forEach(n => { if (curriculumNotions[n]) recordNotionAttempt(n, ok); });
             if (ex.onCheck) ex.onCheck(ok, expected);
             const fb = document.getElementById('modrp-fb');
             fb.style.color = ok ? 'var(--success)' : 'var(--wrong)';
@@ -10431,6 +10544,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 st.finalResult = { passed: passed || !!(st.finalResult && st.finalResult.passed), lastScore: score, lastCovered: covered, at: Date.now() };
                 save();
                 const missing = checks.filter(c => !c.ok);
+                if (passed) modRpValidateNotions(id); else modRpFlagMissing(id, missing.map(c => c.etape));
                 const etapesToReview = [...new Set(missing.map(c => c.etape))].map(eid => m.etapes.find(e => e.id === eid)).filter(Boolean);
                 const arr = x => Array.isArray(x) ? x : [];
                 box.innerHTML = `
@@ -12321,6 +12435,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const passed = coverageOk && (score === null || score >= 6);
             st.finalResult = { passed: passed || !!(st.finalResult && st.finalResult.passed), lastScore: score, lastCovered: covered, at: Date.now() };
             save();
+            if (passed) modRpValidateNotions(id); else modRpFlagMissing(id, checks.filter(c => !c.ok).map(c => c.etape));
             const arr = x => Array.isArray(x) ? x : [];
             guideBubble('info', `<div class="prof-debrief">
                 <div class="prof-target-title">${passed ? '✅ Module réussi !' : '🔁 Presque : encore un essai'}</div>
@@ -12346,6 +12461,16 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             if (!guideAlive(token) || !v) return;
             if (v === 'again') { guideExam(token); return; }
             if (v[0] === 'e') { guideSetPos(parseInt(v.slice(1), 10), GUIDE_BEATS.indexOf('vocab')); guideLoop(token); }
+        }
+
+        // Examen direct (« j'ai déjà des bases ») : on saute les étapes.
+        function guideExamDirect(id) {
+            const m = modRpData[id];
+            if (!m) return;
+            if (!GeminiService.isAvailable() && !confirm("Sans clé Gemini, l'examen est jugé seulement sur les sujets abordés, sans avis détaillé. Continuer ?")) return;
+            modRpState(id).guide = { e: m.etapes.length, b: 0 };
+            save();
+            guideStart(id);
         }
 
         // Module déjà réussi : module suivant, ou le refaire.

@@ -8,7 +8,7 @@
   "objectif": "À la fin du module, tu sais prendre un rendez-vous au téléphone : épeler ton nom, donner ton numéro, proposer un jour et une heure, et confirmer.",
   "etapes": [
     {
-      "id": "nombres",
+      "id": "nombres", "notions": ["nombres"],
       "titre": "Les nombres et ton numéro de téléphone",
       "intro": "Compter de 0 à 100 et donner un numéro de téléphone. En néerlandais, on dit l'unité avant la dizaine : 21 = « eenentwintig » (un-et-vingt).",
       "roles": { "A": "La réceptionniste", "B": "Toi" },
@@ -68,7 +68,7 @@
       }
     },
     {
-      "id": "epeler",
+      "id": "epeler", "notions": ["alphabet_epeler"],
       "titre": "Épeler son nom",
       "intro": "Ton nom est souvent difficile pour un Flamand : savoir l'épeler est indispensable au téléphone, à la commune ou à l'accueil.",
       "roles": { "A": "L'employé", "B": "Toi" },
@@ -127,7 +127,7 @@
       }
     },
     {
-      "id": "heure",
+      "id": "heure", "notions": ["date_heure"],
       "titre": "Dire l'heure",
       "intro": "Demander et dire l'heure. Attention au grand piège : « half vier » ne veut pas dire 4 h 30 mais 3 h 30 (la moitié avant quatre heures).",
       "roles": { "A": "Une collègue", "B": "Toi" },
@@ -187,7 +187,7 @@
       }
     },
     {
-      "id": "jours",
+      "id": "jours", "notions": ["date_heure", "prepositions_essentielles"],
       "titre": "Les jours et les dates",
       "intro": "Les jours de la semaine, les mois, et dire une date. Les jours et les mois s'écrivent sans majuscule en néerlandais.",
       "roles": { "A": "Ta responsable", "B": "Toi" },
@@ -249,7 +249,7 @@
       }
     },
     {
-      "id": "rdv",
+      "id": "rdv", "notions": ["verbes_modaux", "questions"],
       "titre": "Prendre un rendez-vous",
       "intro": "Tout assembler : appeler, dire pourquoi tu appelles, proposer ou accepter un jour et une heure, confirmer.",
       "roles": { "A": "La secrétaire", "B": "Toi" },
