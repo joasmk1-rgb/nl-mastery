@@ -1,5 +1,5 @@
 {
-  "_doc": "Banque de situations atomiques + journées composées pour le mode 'mise en situation métier' (distinct du mode Candidat et du mode Intervieweur). Générique tous métiers via le champ metier : seul 'logistique' est rempli pour l'instant, la structure accueille data analyst / agent de banque / agent communal etc. sans redesign quand du contenu réel arrivera. Chaque situation : canal (guichet_chauffeur, telephone_client, collegue_interne, email, picking_zone), type (administratif, probleme_document, urgence, reclamation, proposition_solution, negociation, retour), contexte, amorce (première ligne dite par le PNJ — le modèle improvise ensuite librement, jamais de réponse attendue), vocabulaire_cible, source (entretien_1/2/3 = tiré des vraies transcriptions, invente_realiste = situation plausible ajoutée pour compléter la couverture, recherche_<entreprise> = construite à partir d'une recherche sur une entreprise réelle, pas d'une transcription). Champ optionnel 'entreprise' : nom d'entreprise INVENTÉ (Logistiko Frost, Logistiko Retail...) quand la situation est spécifique à un contexte (entrepôt sous douane, retail e-commerce...), absent si la situation est générique au métier. Dépôt public : jamais de nom réel d'entreprise ni de logiciel interne. Une 'journee' compose une séquence de situations existantes par id, sans jamais dupliquer leur contenu. Prompts à ne jamais mélanger : rpBuildSituationPrompt (une situation isolée), rpComposeDay (enchaînement d'une journée), rpDayDebrief (bilan de fin de journée : vocabulaire récurrent, moments de blocage, formulation correcte proposée après coup — jamais pendant, pour ne pas casser le rythme). IMPORTANT : fichier reconstruit le 2026-10-09 après une perte de modifications (probable git checkout écrasant des changements non commités) — committer après toute édition pour éviter que ça se reproduise.",
+  "_doc": "Banque de situations atomiques + journées composées pour le mode 'mise en situation métier' (distinct du mode Candidat et du mode Intervieweur). Générique tous métiers via le champ metier : métiers remplis : logistique et business_analyst (ce dernier rédigé par Claude, _source = redige_claude), la structure accueille data analyst / agent de banque / agent communal etc. sans redesign quand du contenu réel arrivera. Chaque situation : canal (guichet_chauffeur, telephone_client, collegue_interne, email, picking_zone, reunion, chat), type (administratif, probleme_document, urgence, reclamation, proposition_solution, negociation, retour), contexte, amorce (première ligne dite par le PNJ — le modèle improvise ensuite librement, jamais de réponse attendue), vocabulaire_cible, source (entretien_1/2/3 = tiré des vraies transcriptions, invente_realiste = situation plausible ajoutée pour compléter la couverture, recherche_<entreprise> = construite à partir d'une recherche sur une entreprise réelle, pas d'une transcription). Champ optionnel 'entreprise' : nom d'entreprise INVENTÉ (Logistiko Frost, Logistiko Retail...) quand la situation est spécifique à un contexte (entrepôt sous douane, retail e-commerce...), absent si la situation est générique au métier. Dépôt public : jamais de nom réel d'entreprise ni de logiciel interne. Une 'journee' compose une séquence de situations existantes par id, sans jamais dupliquer leur contenu. Prompts à ne jamais mélanger : rpBuildSituationPrompt (une situation isolée), rpComposeDay (enchaînement d'une journée), rpDayDebrief (bilan de fin de journée : vocabulaire récurrent, moments de blocage, formulation correcte proposée après coup — jamais pendant, pour ne pas casser le rythme). IMPORTANT : fichier reconstruit le 2026-10-09 après une perte de modifications (probable git checkout écrasant des changements non commités) — committer après toute édition pour éviter que ça se reproduise.",
   "situations": [
     {
       "id": "guichet_chauffeur_doc_manquant",
@@ -364,6 +364,193 @@
       "amorce": "Voor je naar huis gaat — hoe is het vandaag gegaan? Was er iets speciaals?",
       "vocabulaire_cible": ["samenvatten", "incident melden", "alles is vlot verlopen"],
       "source": "invente_realiste"
+    },
+    {
+      "id": "ba_premier_jour",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Premier jour dans l'équipe : ta manager te présente le projet et te demande ce dont tu as besoin pour bien démarrer.",
+      "amorce": "Welkom in het team! Ik leg je eerst kort het project uit. Of heb je al vragen?",
+      "vocabulaire_cible": [
+        "het project",
+        "de stakeholder",
+        "de toegang",
+        "de documentatie"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_standup",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "reunion",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Stand-up du matin : la scrum master te demande ce que tu as fait hier, ce que tu fais aujourd'hui et si quelque chose te bloque.",
+      "amorce": "Oké, jij bent aan de beurt. Wat heb je gisteren gedaan, wat doe je vandaag, en zit je ergens mee vast?",
+      "vocabulaire_cible": [
+        "de user story",
+        "de analyse",
+        "vastzitten",
+        "afwerken"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_atelier_besoins",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "reunion",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Atelier avec la responsable du service clientèle pour comprendre son besoin : elle veut « un meilleur outil » sans préciser ce qui ne va pas.",
+      "amorce": "Goedemorgen. Zoals ik al zei: ons systeem werkt gewoon niet goed. We hebben echt een beter programma nodig.",
+      "vocabulaire_cible": [
+        "de behoefte",
+        "het proces",
+        "het voorbeeld",
+        "het probleem"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_user_story_floue",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Un développeur vient te voir : la user story que tu as écrite ne dit pas quoi faire quand le client n'a pas d'adresse e-mail.",
+      "amorce": "Hé, heb je even? Ik ben bezig met jouw user story over de registratie, maar wat moet er gebeuren als de klant geen e-mailadres heeft?",
+      "vocabulaire_cible": [
+        "de user story",
+        "het acceptatiecriterium",
+        "de uitzondering",
+        "navragen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_aide_senior",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu dois dessiner le processus de traitement des retours clients, mais tu ne sais pas par où commencer : une analyste senior te propose son aide.",
+      "amorce": "Je ziet er een beetje verloren uit. Kan ik je ergens mee helpen?",
+      "vocabulaire_cible": [
+        "het processchema",
+        "de stap",
+        "de huidige situatie",
+        "de tip"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_compte_rendu",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Après un atelier, une partie prenante te demande par e-mail un compte rendu avec les décisions et les prochaines étapes.",
+      "amorce": "Dag, bedankt voor de workshop van vanochtend. Kun je me een kort verslag sturen met de beslissingen en de volgende stappen?",
+      "vocabulaire_cible": [
+        "het verslag",
+        "de beslissing",
+        "de volgende stap",
+        "de deadline"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_bug_utilisateur",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "chat",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Une utilisatrice t'écrit sur la messagerie interne : depuis la mise à jour d'hier, elle ne voit plus ses factures et doit préparer des paiements aujourd'hui.",
+      "amorce": "Hallo, sinds de update van gisteren zie ik mijn facturen niet meer. Ik moet vandaag nog betalingen klaarzetten. Kun je helpen?",
+      "vocabulaire_cible": [
+        "de update",
+        "de fout",
+        "het scherm",
+        "doorgeven"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_hors_scope",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "telephone_client",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Un responsable de la comptabilité appelle pour ajouter une fonctionnalité au projet, alors que le périmètre est figé et la mise en production dans deux semaines.",
+      "amorce": "Dag, met de boekhouding. Ik heb nog een klein dingetje: kunnen jullie ook een export naar Excel toevoegen? Dat moet echt mee in de volgende versie.",
+      "vocabulaire_cible": [
+        "de scope",
+        "het wijzigingsverzoek",
+        "de prioriteit",
+        "de livegang"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_retard_analyse",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "reunion",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Tu dois annoncer au product owner que l'analyse d'une interface avec un fournisseur prendra une semaine de plus, car il manque une information de son côté.",
+      "amorce": "Ik hoorde dat er een probleem is met de analyse van de koppeling. Wat is er aan de hand?",
+      "vocabulaire_cible": [
+        "de koppeling",
+        "de leverancier",
+        "de vertraging",
+        "de planning"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_demo_sprint",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Démo de fin de sprint : tu présentes la nouvelle page de suivi des commandes aux utilisateurs ; l'un d'eux n'est pas convaincu.",
+      "amorce": "Goed, we zijn er allemaal. Laat maar zien wat jullie deze sprint gebouwd hebben. Ik ben benieuwd.",
+      "vocabulaire_cible": [
+        "de demo",
+        "de functie",
+        "de feedback",
+        "de gebruiker"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ba_test_refuse",
+      "metier": "business_analyst",
+      "poste": "junior business analist",
+      "canal": "reunion",
+      "type": "reclamation",
+      "niveau": "B1",
+      "contexte": "Pendant les tests d'acceptation, un utilisateur clé refuse de valider : « ce n'est pas ce que j'avais demandé ».",
+      "amorce": "Sorry, maar dit is helemaal niet wat ik gevraagd had. Zo kan ik het niet goedkeuren.",
+      "vocabulaire_cible": [
+        "de acceptatietest",
+        "de vereiste",
+        "goedkeuren",
+        "het misverstand"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -434,6 +621,22 @@
         "usine_erp_interruption",
         "invente_rapport_fin_service"
       ]
+    },
+    {
+      "id": "journee_ba_courte",
+      "metier": "business_analyst",
+      "label": "Journée type de junior business analyst (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "ba_standup",
+        "ba_atelier_besoins",
+        "ba_user_story_floue",
+        "ba_bug_utilisateur",
+        "ba_hors_scope",
+        "ba_compte_rendu"
+      ],
+      "_source": "redige_claude"
     }
   ]
 }

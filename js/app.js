@@ -1789,7 +1789,8 @@ if (firebaseAvailable) {
             const themeCandidates = [
                 'THEME_BASE_avec_frequence.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
-                'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv'
+                'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv',
+                'THEME_BUSINESS_ANALYST.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -5889,7 +5890,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -8899,7 +8900,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         const rpEscapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-        const rpExampleTag = sc => sc.exemple ? ' <span class="wl-badge review">exemple à remplacer</span>' : '';
+        const rpExampleTag = sc => sc.exemple ? ' <span class="wl-badge review">exemple à remplacer</span>'
+            : (sc._source === 'redige_claude' ? ' <span class="wl-badge unseen">questions types</span>' : '');
 
         // ----- Mode Candidat : recruteur piloté par une banque de questions réelles -----
         const RP_QUESTION_TYPES = [
@@ -8933,8 +8935,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return 'Tu es un recruteur ' + (lang === 'nl' ? 'belge néerlandophone' : 'anglophone') + ' qui mène un entretien d\'embauche' + (bank.poste ? ' pour le poste suivant : ' + bank.poste : '') + '. ' +
                 (bank.contexte ? 'Contexte : ' + bank.contexte + ' ' : '') +
                 'Parle exclusivement en ' + langName + (niveau ? ' (niveau ' + niveau + ')' : '') + ', comme à l\'oral : une ou deux phrases, UNE seule question à la fois.\n\n' +
-                'Voici les questions réellement posées dans ce type d\'entretien, classées par moment de l\'entretien. Suis cet ordre approximativement, sans le réciter : reformule librement, saute ce qui a déjà été abordé, et rebondis sur ce que le candidat vient de dire avec des relances improvisées avant de passer à la question suivante. ' +
-                'Ces questions viennent d\'une transcription orale : certaines sont coupées en fin de phrase (complète-les naturellement) et les passages entre crochets comme [plaats] sont des blancs à remplacer par un détail plausible.\n\n' +
+                (bank._source === 'redige_claude' ? 'Voici des questions typiques de ce type d\'entretien' : 'Voici les questions réellement posées dans ce type d\'entretien') + ', classées par moment de l\'entretien. Suis cet ordre approximativement, sans le réciter : reformule librement, saute ce qui a déjà été abordé, et rebondis sur ce que le candidat vient de dire avec des relances improvisées avant de passer à la question suivante. ' +
+                (bank._source === 'redige_claude' ? 'Les passages entre crochets comme [plaats] sont des blancs à remplacer par un détail plausible.\n\n' : 'Ces questions viennent d\'une transcription orale : certaines sont coupées en fin de phrase (complète-les naturellement) et les passages entre crochets comme [plaats] sont des blancs à remplacer par un détail plausible.\n\n') +
                 sections + '\n\n' +
                 (Array.isArray(bank.vocabulaire) && bank.vocabulaire.length
                     ? 'Le candidat révise le vocabulaire du poste : emploie naturellement ces mots dans tes questions et tes relances, surtout pour parler des tâches concrètes : ' + bank.vocabulaire.join(', ') + '.\n\n'
@@ -8959,8 +8961,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('rp-step-scenario').style.display = '';
             document.getElementById('rp-step-chat').style.display = 'none';
             const { banks } = await rpLoadRealData();
-            listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens réels</div>' +
-                '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens et improvise ses relances selon tes réponses.</p>' +
+            listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens</div>' +
+                '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens (ou des questions types du métier) et improvise ses relances selon tes réponses.</p>' +
                 (banks.length
                     ? banks.map((b, i) => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`, 'bank:' + b.id, b.label, { type: 'bank', index: i })).join('')
                     : '<p style="color:#888;">Aucun scénario réel pour l\'instant.</p>');
@@ -9173,16 +9175,25 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         //     l'amorce, jamais de réponse attendue)
         //   - rpDayDebrief : bilan de fin de journée, appel séparé qui reçoit l'historique de la
         //     session — les corrections sont données APRÈS, jamais pendant
-        const RP_JOB_METIERS = { logistique: '🚚 Logistique' }; // libellés ; un métier absent d'ici s'affiche avec son nom brut
+        // Liste centrale des métiers : ajouter un métier = une entrée ici + ses contenus (situations,
+        // journées, fiches, kits, banque d'entretien, thèmes d'études de cas, THEME_<METIER>.csv).
+        // domaine : pour les prompts ; noms : entreprises inventées que Gemini peut utiliser.
+        const RP_METIERS = {
+            logistique: { label: '🚚 Logistique', domaine: 'logistique / supply chain', noms: 'Logistiko pour l\'entreprise du candidat, Transvio ou Nordvracht pour des transporteurs, Delmaro pour un client' },
+            business_analyst: { label: '📊 Business analyst', domaine: 'business analysis (analyse des besoins, processus, projets IT)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients, Transvio pour un éditeur de logiciel' }
+        };
+        const RP_JOB_METIERS = Object.fromEntries(Object.entries(RP_METIERS).map(([k, v]) => [k, v.label])); // un métier absent s'affiche avec son nom brut
         const RP_JOB_CANAUX = {
             guichet_chauffeur: { label: '🚛 Guichet chauffeurs', prompt: 'face à face, au guichet ou sur le quai' },
             telephone_client: { label: '📞 Téléphone', prompt: 'au téléphone' },
             collegue_interne: { label: '🧑‍🤝‍🧑 Collègues', prompt: 'entre collègues, sur le lieu de travail' },
             picking_zone: { label: '📦 Zone de picking', prompt: 'dans l\'entrepôt, en zone de préparation de commandes' },
-            email: { label: '✉️ E-mail', prompt: 'par e-mail : tes messages sont des e-mails courts, et l\'apprenant répond par écrit' }
+            email: { label: '✉️ E-mail', prompt: 'par e-mail : tes messages sont des e-mails courts, et l\'apprenant répond par écrit' },
+            reunion: { label: '🗓️ Réunions & ateliers', prompt: 'en réunion, sur place ou en visioconférence' },
+            chat: { label: '💬 Messagerie interne', prompt: 'par messagerie instantanée : tes messages sont courts et écrits, et l\'apprenant répond par écrit' }
         };
         // Intensité par type de situation, pour ordonner une journée tirée au sort (calme → pic → calme).
-        const RP_JOB_INTENSITY = { administratif: 1, probleme_document: 2, proposition_solution: 2, negociation: 3, urgence: 3, reclamation: 3, retour: 2 };
+        const RP_JOB_INTENSITY = { administratif: 1, clarification: 1, probleme_document: 2, proposition_solution: 2, presentation: 2, negociation: 3, urgence: 3, reclamation: 3, retour: 2 };
         const RP_JOB_DURATIONS = { courte: 6, longue: 10 };
         // Blancs entre crochets dans les amorces ([klant]...) : l'amorce est affichée et lue telle
         // quelle, on les remplace donc par un nom d'entreprise INVENTÉ (jamais une entreprise
@@ -9252,13 +9263,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpBuildSituationPrompt(s) {
             const langName = RP_LANG_NAMES[rpSitLang(s)];
             const canal = rpSitCanal(s);
-            return 'Tu joues un personnage dans une mise en situation professionnelle (métier : ' + (s.metier || 'non précisé') + '). ' +
-                'L\'apprenant occupe le poste de ' + (s.poste || 'employé') + ' ; toi, tu es son interlocuteur dans cette situation (chauffeur, client, collègue ou responsable selon le contexte) — jamais l\'apprenant lui-même.\n\n' +
+            return 'Tu joues un personnage dans une mise en situation professionnelle (métier : ' + ((RP_METIERS[s.metier] || {}).domaine || s.metier || 'non précisé') + '). ' +
+                'L\'apprenant occupe le poste de ' + (s.poste || 'employé') + ' ; toi, tu es son interlocuteur dans cette situation (client, utilisateur, chauffeur, collègue ou responsable selon le contexte) — jamais l\'apprenant lui-même.\n\n' +
                 'Situation : ' + s.contexte + '\n' +
                 (canal.prompt ? 'L\'échange a lieu ' + canal.prompt + '.\n' : '') +
                 'Tu as ouvert l\'échange en disant : """' + rpSitAmorce(s) + '"""\n\n' +
                 'Continue à partir de là, exclusivement en ' + langName + ', avec des répliques courtes (une ou deux phrases) et naturelles. ' +
-                'Réagis à ce que l\'apprenant dit réellement et invente les détails plausibles dont tu as besoin (numéro de quai, heure, référence, nom de client générique). ' +
+                'Réagis à ce que l\'apprenant dit réellement et invente les détails plausibles dont tu as besoin (heure, référence, numéro, nom de projet ou d\'outil générique, nom de client générique). ' +
                 'Reste dans l\'état d\'esprit de ton personnage (pressé, mécontent, détendu... selon la situation) et ne facilite pas artificiellement la tâche de l\'apprenant. ' +
                 'Ne corrige jamais sa langue et ne sors jamais de ton rôle. Quand le problème est réglé, conclus brièvement et n\'ouvre pas de nouveau sujet.';
         }
@@ -10293,10 +10304,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
             listDiv.innerHTML = `
                 <div class="rp-group-title">🏭 Mise en situation métier</div>
-                <p class="rp-real-hint">Tu es en poste : chauffeurs, clients et collègues viennent vers toi, à toi de gérer.</p>
+                <p class="rp-real-hint">Tu es en poste : clients, collègues et utilisateurs viennent vers toi, à toi de gérer. Choisis ton métier.</p>
                 <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
                     ${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}
-                    ${chip(false, '', 'Autres métiers : bientôt', true)}
                 </div>
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
@@ -10493,13 +10503,20 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         //   - rpBuildCasePrompt : le recruteur qui fait passer le cas et challenge la réponse
         //   - rpCaseDebrief : bilan après coup (clarté, justification, formulations corrigées)
         const RP_CASE_THEMES = [
-            { key: 'transporteur', label: '🚚 Choisir un transporteur', sujet: 'choisir entre deux transporteurs (prix, délai, fiabilité)' },
-            { key: 'retard', label: '⏰ Retards de livraison', sujet: 'des livraisons en retard chez un client important : que proposer ?' },
-            { key: 'stock', label: '📦 Niveau de stock', sujet: 'un stock trop élevé ou des ruptures fréquentes : comment ajuster ?' },
-            { key: 'tournee', label: '🗺️ Organiser une tournée', sujet: 'organiser ou réorganiser une tournée de livraison avec des contraintes' },
-            { key: 'entrepot', label: '🏭 Coût d\'entrepôt', sujet: 'réduire le coût ou améliorer l\'organisation d\'un entrepôt' },
-            { key: 'fournisseur', label: '🤝 Problème fournisseur', sujet: 'un fournisseur qui livre mal ou en retard : garder, renégocier ou changer ?' }
+            { key: 'transporteur', metier: 'logistique', label: '🚚 Choisir un transporteur', sujet: 'choisir entre deux transporteurs (prix, délai, fiabilité)' },
+            { key: 'retard', metier: 'logistique', label: '⏰ Retards de livraison', sujet: 'des livraisons en retard chez un client important : que proposer ?' },
+            { key: 'stock', metier: 'logistique', label: '📦 Niveau de stock', sujet: 'un stock trop élevé ou des ruptures fréquentes : comment ajuster ?' },
+            { key: 'tournee', metier: 'logistique', label: '🗺️ Organiser une tournée', sujet: 'organiser ou réorganiser une tournée de livraison avec des contraintes' },
+            { key: 'entrepot', metier: 'logistique', label: '🏭 Coût d\'entrepôt', sujet: 'réduire le coût ou améliorer l\'organisation d\'un entrepôt' },
+            { key: 'fournisseur', metier: 'logistique', label: '🤝 Problème fournisseur', sujet: 'un fournisseur qui livre mal ou en retard : garder, renégocier ou changer ?' },
+            { key: 'ba_processus', metier: 'business_analyst', label: '🔄 Améliorer un processus', sujet: 'un processus administratif lent (par exemple le traitement des factures) : où se perd le temps et que proposer ?' },
+            { key: 'ba_outil', metier: 'business_analyst', label: '🧰 Choisir un outil', sujet: 'choisir entre deux logiciels, ou un développement sur mesure, pour un besoin métier : coût, délai, adoption par les utilisateurs' },
+            { key: 'ba_business_case', metier: 'business_analyst', label: '💶 Petit business case', sujet: 'un projet d\'automatisation est-il rentable ? coût du projet contre temps gagné par les équipes' },
+            { key: 'ba_priorites', metier: 'business_analyst', label: '📋 Prioriser des demandes', sujet: 'cinq demandes d\'utilisateurs pour une capacité limitée au prochain sprint : lesquelles faire d\'abord, et pourquoi ?' },
+            { key: 'ba_chiffres', metier: 'business_analyst', label: '📊 Lire des chiffres', sujet: 'un tableau de bord montre une baisse (ventes, satisfaction ou délais) : quelles questions poser et quelles hypothèses vérifier ?' }
         ];
+        let rpCaseMetier = 'logistique';
+        const rpCaseThemesOf = m => RP_CASE_THEMES.filter(t => t.metier === m);
         const RP_CASE_LEVELS = {
             simple: { label: 'Simple', consigne: 'Niveau SIMPLE : énoncé de 3 à 4 phrases courtes en néerlandais B1, 2 ou 3 chiffres seulement, une décision à prendre entre deux options claires, aucun calcul compliqué.' },
             avance: { label: 'Avancé', consigne: 'Niveau AVANCÉ : énoncé de 5 à 6 phrases en néerlandais B2, 4 ou 5 chiffres, un calcul simple nécessaire pour comparer les options, et un compromis à arbitrer (coût contre délai ou qualité).' }
@@ -10518,10 +10535,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('rp-scenario-list').innerHTML = `
                 <div class="rp-group-title">💼 Étude de cas</div>
                 <p class="rp-real-hint">Un recruteur te présente un petit problème d'entreprise. Pose-lui des questions, puis explique ce que tu ferais et pourquoi. Un cas différent à chaque fois.</p>
+                <div class="rp-job-canal">Métier</div>
+                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
+                    ${[...new Set(RP_CASE_THEMES.map(t => t.metier))].map(m => chip(rpCaseMetier === m, `rpCaseSet('metier','${m}')`, RP_JOB_METIERS[m] || m)).join('')}
+                </div>
                 <div class="rp-job-canal">Thème</div>
                 <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
                     ${chip(rpCaseTheme === 'hasard', "rpCaseSet('theme','hasard')", '🎲 Au hasard')}
-                    ${RP_CASE_THEMES.map(t => chip(rpCaseTheme === t.key, `rpCaseSet('theme','${t.key}')`, t.label)).join('')}
+                    ${rpCaseThemesOf(rpCaseMetier).map(t => chip(rpCaseTheme === t.key, `rpCaseSet('theme','${t.key}')`, t.label)).join('')}
                 </div>
                 <div class="rp-job-canal">Difficulté</div>
                 <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
@@ -10535,16 +10556,17 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function rpCaseSet(what, value) {
-            if (what === 'theme') rpCaseTheme = value; else rpCaseLevel = value;
+            if (what === 'metier') { rpCaseMetier = value; rpCaseTheme = 'hasard'; }
+            else if (what === 'theme') rpCaseTheme = value; else rpCaseLevel = value;
             rpShowCaseHome();
         }
 
         // Invente le cas. Entreprises et personnes toujours fictives et génériques.
         async function rpCaseGenerate(theme, levelKey) {
             const raw = await GeminiService.generate(
-                'Invente une courte étude de cas pour un entretien d\'embauche en logistique / supply chain en Belgique. Thème : ' + theme.sujet + '.\n' +
+                'Invente une courte étude de cas pour un entretien d\'embauche en ' + RP_METIERS[theme.metier].domaine + ' en Belgique. Thème : ' + theme.sujet + '.\n' +
                 RP_CASE_LEVELS[levelKey].consigne + '\n' +
-                'Donne aux entreprises des noms inventés et crédibles, jamais ceux d\'entreprises réelles (par exemple Logistiko pour l\'entreprise du candidat, Transvio ou Nordvracht pour des transporteurs, Delmaro pour un client), et utilise des chiffres ronds et cohérents entre eux. Prévois 2 ou 3 informations supplémentaires que le recruteur ne donnera que si le candidat les demande.\n\n' +
+                'Donne aux entreprises des noms inventés et crédibles, jamais ceux d\'entreprises réelles (par exemple ' + RP_METIERS[theme.metier].noms + '), et utilise des chiffres ronds et cohérents entre eux. Prévois 2 ou 3 informations supplémentaires que le recruteur ne donnera que si le candidat les demande.\n\n' +
                 'Réponds UNIQUEMENT avec un objet JSON, sans texte autour :\n' +
                 '{"titre_fr": "titre court en français", "enonce_nl": "l\'énoncé en néerlandais", "enonce_fr": "sa traduction française", ' +
                 '"chiffres": [{"nl": "donnée chiffrée en néerlandais", "fr": "traduction"}], ' +
@@ -10561,7 +10583,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         // Prompt du recruteur pour ce cas : il connaît tout le cas, mais pas de "bonne réponse".
         function rpBuildCasePrompt(cas, welcome) {
-            return 'Tu es un recruteur belge néerlandophone qui fait passer une courte étude de cas à un candidat pour un poste en logistique.\n\n' +
+            return 'Tu es un recruteur belge néerlandophone qui fait passer une courte étude de cas à un candidat pour un poste en ' + RP_METIERS[rpCaseMetier].domaine + '.\n\n' +
                 'Le cas : ' + cas.enonce_nl + '\n' +
                 (cas.chiffres.length ? 'Chiffres connus du candidat :\n' + cas.chiffres.map(c => '- ' + c.nl).join('\n') + '\n' : '') +
                 'Question posée : ' + cas.question_nl + '\n' +
@@ -10580,7 +10602,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const btn = document.getElementById('rp-case-start-btn');
             const status = document.getElementById('rp-case-status');
             const theme = rpCaseTheme === 'hasard'
-                ? RP_CASE_THEMES[Math.floor(Math.random() * RP_CASE_THEMES.length)]
+                ? rpCaseThemesOf(rpCaseMetier)[Math.floor(Math.random() * rpCaseThemesOf(rpCaseMetier).length)]
                 : RP_CASE_THEMES.find(t => t.key === rpCaseTheme);
             if (btn) btn.disabled = true;
             if (status) status.innerText = 'Préparation du cas...';

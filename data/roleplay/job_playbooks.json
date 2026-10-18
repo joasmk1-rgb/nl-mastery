@@ -190,6 +190,297 @@
         { "fr": "Demander s'il y a une consigne pour le lendemain.", "phrase": "Is er iets waar ik morgen rekening mee moet houden?" }
       ],
       "a_eviter": ["Tout raconter dans l'ordre chronologique sans dire ce qui compte.", "Passer sous silence un incident que tu as mal géré : il ressortira."]
+    },
+    "ba_premier_jour": {
+      "titre": "Premier jour dans l'équipe",
+      "etapes": [
+        {
+          "fr": "Remercier et montrer que tu es content d'être là.",
+          "phrase": "Dank je, ik ben blij dat ik hier ben."
+        },
+        {
+          "fr": "Écouter la présentation du projet et reformuler l'objectif pour vérifier que tu as compris.",
+          "phrase": "Als ik het goed begrijp, is het doel van het project ..."
+        },
+        {
+          "fr": "Demander qui sont les personnes clés (parties prenantes) et à qui t'adresser.",
+          "phrase": "Wie zijn de belangrijkste stakeholders, en bij wie kan ik terecht met vragen?"
+        },
+        {
+          "fr": "Demander les accès et la documentation dont tu as besoin.",
+          "phrase": "Welke documentatie kan ik best eerst lezen? En heb ik al toegang tot de tools?"
+        },
+        {
+          "fr": "Convenir d'un premier point dans quelques jours.",
+          "phrase": "Kunnen we eind deze week even samenzitten om te zien hoe het gaat?"
+        }
+      ],
+      "a_eviter": [
+        "Faire semblant d'avoir tout compris : poser des questions le premier jour est normal.",
+        "Promettre des résultats avant de connaître le projet."
+      ]
+    },
+    "ba_standup": {
+      "titre": "Stand-up du matin",
+      "etapes": [
+        {
+          "fr": "Dire en une phrase ce que tu as terminé hier.",
+          "phrase": "Gisteren heb ik de analyse van de registratie afgewerkt."
+        },
+        {
+          "fr": "Dire ce que tu vas faire aujourd'hui.",
+          "phrase": "Vandaag schrijf ik de user stories voor de betaalpagina."
+        },
+        {
+          "fr": "Signaler clairement un blocage, avec ce dont tu as besoin.",
+          "phrase": "Ik zit vast: ik wacht nog op een antwoord van de boekhouding."
+        },
+        {
+          "fr": "Proposer d'en parler après le stand-up si c'est long.",
+          "phrase": "Kunnen we dat na de stand-up even bespreken?"
+        }
+      ],
+      "a_eviter": [
+        "Raconter tous les détails : le stand-up dure quinze minutes pour toute l'équipe.",
+        "Cacher un blocage par peur de paraître lent."
+      ]
+    },
+    "ba_atelier_besoins": {
+      "titre": "Comprendre un besoin flou",
+      "etapes": [
+        {
+          "fr": "Remercier et rappeler le but de l'atelier.",
+          "phrase": "Bedankt voor uw tijd. Vandaag wil ik vooral goed begrijpen wat er niet werkt."
+        },
+        {
+          "fr": "Demander un exemple concret récent plutôt qu'un avis général.",
+          "phrase": "Kunt u een concreet voorbeeld geven van de laatste keer dat het misliep?"
+        },
+        {
+          "fr": "Faire décrire le processus actuel étape par étape.",
+          "phrase": "Wat gebeurt er eerst? En daarna?"
+        },
+        {
+          "fr": "Chercher l'impact : temps perdu, erreurs, clients mécontents.",
+          "phrase": "Hoeveel tijd verliest u daar ongeveer mee per week?"
+        },
+        {
+          "fr": "Reformuler le besoin et le faire confirmer, sans promettre de solution.",
+          "phrase": "Dus uw echte behoefte is ... Klopt dat?"
+        }
+      ],
+      "a_eviter": [
+        "Proposer un logiciel dès la première minute.",
+        "Noter la demande telle quelle (« un meilleur outil ») sans chercher le vrai problème."
+      ]
+    },
+    "ba_user_story_floue": {
+      "titre": "Une user story pas claire",
+      "etapes": [
+        {
+          "fr": "Remercier le développeur d'avoir posé la question plutôt que d'avoir deviné.",
+          "phrase": "Goed dat je het vraagt."
+        },
+        {
+          "fr": "Reconnaître le cas oublié.",
+          "phrase": "Daar heb ik niet aan gedacht, dat ontbreekt inderdaad."
+        },
+        {
+          "fr": "Si tu connais la règle, la donner ; sinon, dire que tu vas la vérifier auprès du métier.",
+          "phrase": "Ik vraag het na bij de klantendienst en ik laat het je vandaag nog weten."
+        },
+        {
+          "fr": "Mettre à jour la user story avec un critère d'acceptation pour ce cas.",
+          "phrase": "Ik voeg een acceptatiecriterium toe voor klanten zonder e-mailadres."
+        }
+      ],
+      "a_eviter": [
+        "Inventer une règle métier pour débloquer le développeur.",
+        "Laisser la réponse seulement à l'oral : elle doit être écrite dans la story."
+      ]
+    },
+    "ba_aide_senior": {
+      "titre": "Demander de l'aide à un collègue expérimenté",
+      "etapes": [
+        {
+          "fr": "Accepter l'aide et expliquer brièvement ta tâche.",
+          "phrase": "Graag! Ik moet het proces van de retours tekenen, maar ik weet niet goed waar te beginnen."
+        },
+        {
+          "fr": "Montrer ce que tu as déjà fait ou essayé.",
+          "phrase": "Ik heb al met twee collega's gepraat en wat notities gemaakt."
+        },
+        {
+          "fr": "Poser une question précise.",
+          "phrase": "Begin jij meestal met de huidige situatie of met de gewenste situatie?"
+        },
+        {
+          "fr": "Remercier et proposer de lui montrer le résultat.",
+          "phrase": "Bedankt, mag ik je straks mijn eerste versie tonen?"
+        }
+      ],
+      "a_eviter": [
+        "Demander qu'on fasse le travail à ta place.",
+        "Attendre plusieurs jours avant de demander de l'aide."
+      ]
+    },
+    "ba_compte_rendu": {
+      "titre": "Envoyer un compte rendu d'atelier",
+      "etapes": [
+        {
+          "fr": "Remercier pour l'atelier.",
+          "phrase": "Dag, bedankt voor de workshop van vanochtend."
+        },
+        {
+          "fr": "Lister les décisions prises, une par ligne.",
+          "phrase": "Beslissingen: ..."
+        },
+        {
+          "fr": "Lister les prochaines étapes avec qui et quand.",
+          "phrase": "Volgende stappen: ... (wie, tegen wanneer)."
+        },
+        {
+          "fr": "Signaler les questions encore ouvertes.",
+          "phrase": "Open vragen: ..."
+        },
+        {
+          "fr": "Demander de corriger si quelque chose manque.",
+          "phrase": "Laat het me weten als ik iets vergeten ben."
+        }
+      ],
+      "a_eviter": [
+        "Raconter toute la réunion au lieu des décisions.",
+        "Envoyer le compte rendu plusieurs jours après."
+      ]
+    },
+    "ba_bug_utilisateur": {
+      "titre": "Un utilisateur bloqué après une mise à jour",
+      "etapes": [
+        {
+          "fr": "Rassurer et montrer que tu prends le problème au sérieux.",
+          "phrase": "Vervelend, ik kijk er meteen naar."
+        },
+        {
+          "fr": "Demander les détails : quel écran, depuis quand, un message d'erreur, une capture d'écran.",
+          "phrase": "Op welk scherm precies? Krijg je een foutmelding? Kun je een screenshot sturen?"
+        },
+        {
+          "fr": "Vérifier si d'autres personnes ont le même problème.",
+          "phrase": "Hebben je collega's hetzelfde probleem?"
+        },
+        {
+          "fr": "Transmettre à l'équipe technique avec toutes les informations, en signalant l'urgence.",
+          "phrase": "Ik geef het door aan het team, met hoge prioriteit."
+        },
+        {
+          "fr": "Proposer une solution de secours et dire quand tu reviens vers elle.",
+          "phrase": "Ondertussen kun je de facturen via het rapport opzoeken. Ik laat je voor de middag iets weten."
+        }
+      ],
+      "a_eviter": [
+        "Promettre une heure de correction que tu ne maîtrises pas.",
+        "Répondre « ce n'est pas mon travail » : tu fais le lien avec l'équipe."
+      ]
+    },
+    "ba_hors_scope": {
+      "titre": "Une demande hors périmètre",
+      "etapes": [
+        {
+          "fr": "Écouter la demande et comprendre pourquoi elle est importante.",
+          "phrase": "Waarom hebt u die export nodig? Wat wilt u ermee doen?"
+        },
+        {
+          "fr": "Expliquer calmement que le périmètre de la version est fixé.",
+          "phrase": "De scope van deze versie ligt vast, de livegang is binnen twee weken."
+        },
+        {
+          "fr": "Proposer de l'enregistrer comme demande de changement pour une prochaine version.",
+          "phrase": "Ik noteer het als wijzigingsverzoek voor de volgende versie."
+        },
+        {
+          "fr": "Si c'est vraiment urgent, dire que c'est le product owner qui décide de la priorité.",
+          "phrase": "Als het echt dringend is, bespreek ik het met de product owner. Zij beslist over de prioriteiten."
+        }
+      ],
+      "a_eviter": [
+        "Dire oui pour faire plaisir : c'est l'équipe qui en paiera le prix.",
+        "Dire non sèchement sans proposer de suite."
+      ]
+    },
+    "ba_retard_analyse": {
+      "titre": "Annoncer un retard",
+      "etapes": [
+        {
+          "fr": "Annoncer le retard tout de suite et clairement.",
+          "phrase": "De analyse van de koppeling zal een week later klaar zijn dan gepland."
+        },
+        {
+          "fr": "Donner la raison, sans accuser personne.",
+          "phrase": "We wachten nog op de technische documentatie van de leverancier."
+        },
+        {
+          "fr": "Expliquer ce que tu as déjà fait pour débloquer.",
+          "phrase": "Ik heb ze twee keer gemaild en morgen hebben we een call."
+        },
+        {
+          "fr": "Proposer une solution : avancer sur autre chose, ou livrer une partie.",
+          "phrase": "Ondertussen kan ik al de andere user stories afwerken."
+        }
+      ],
+      "a_eviter": [
+        "Attendre le dernier jour pour prévenir.",
+        "Rejeter toute la faute sur le fournisseur."
+      ]
+    },
+    "ba_demo_sprint": {
+      "titre": "Démo de fin de sprint",
+      "etapes": [
+        {
+          "fr": "Rappeler en une phrase le problème que la fonctionnalité résout.",
+          "phrase": "Vroeger moest u drie schermen openen om een bestelling te volgen. Nu ziet u alles op één pagina."
+        },
+        {
+          "fr": "Montrer un cas concret, du point de vue de l'utilisateur.",
+          "phrase": "Stel, een klant belt over zijn bestelling. Dan doet u dit ..."
+        },
+        {
+          "fr": "Accueillir les critiques sans te défendre, et demander des précisions.",
+          "phrase": "Dank u voor de feedback. Wat zou het voor u makkelijker maken?"
+        },
+        {
+          "fr": "Noter les remarques et dire ce qui en sera fait.",
+          "phrase": "Ik noteer het en we bekijken het bij de volgende sprintplanning."
+        }
+      ],
+      "a_eviter": [
+        "Montrer les détails techniques au lieu de l'usage.",
+        "Promettre en direct un changement non discuté avec l'équipe."
+      ]
+    },
+    "ba_test_refuse": {
+      "titre": "Un test d'acceptation refusé",
+      "etapes": [
+        {
+          "fr": "Rester calme et demander ce qui ne correspond pas exactement.",
+          "phrase": "Ik begrijp het. Wat had u precies verwacht?"
+        },
+        {
+          "fr": "Comparer avec ce qui avait été écrit et validé (user story, critères).",
+          "phrase": "Laten we samen kijken naar wat we in de user story hadden afgesproken."
+        },
+        {
+          "fr": "Distinguer un vrai bug d'un malentendu ou d'une nouvelle demande.",
+          "phrase": "Dit is een fout, die lossen we op. Dat andere punt is eigenlijk een nieuwe vraag."
+        },
+        {
+          "fr": "Convenir des prochaines étapes et d'une nouvelle date de test.",
+          "phrase": "Ik pas de vereisten aan en we testen opnieuw volgende dinsdag. Is dat goed?"
+        }
+      ],
+      "a_eviter": [
+        "Lui dire qu'il se trompe parce qu'il a signé le document.",
+        "Accepter toutes les remarques comme des bugs à corriger tout de suite."
+      ]
     }
   }
 }

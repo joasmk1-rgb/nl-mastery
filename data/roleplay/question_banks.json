@@ -218,6 +218,81 @@
         "Als ik het goed begrijp, bedoelt u...",
         "Dat weet ik niet, maar dat zoek ik graag op."
       ]
+    },
+    {
+      "id": "business_analyst_junior",
+      "metier": "business_analyst",
+      "label": "Entretien — business analyst junior (premier poste)",
+      "poste": "Junior Business Analyst",
+      "contexte": "Entretien pour un premier poste de business analyst chez Zonvella, une entreprise de services IT. Le candidat sort d'études ou se reconvertit : le recruteur cherche surtout la logique, la curiosité et la communication, pas une longue expérience.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemiddag, welkom bij Zonvella. Fijn dat je er bent. Kun je jezelf even kort voorstellen?",
+      "questions": {
+        "accroche": [
+          "Hoe heb je onze vacature gevonden?",
+          "Wat weet je al over ons bedrijf?"
+        ],
+        "verif_cv": [
+          "Ik zie op je cv dat je [opleiding] hebt gestudeerd. Wat heb je daar vooral geleerd?",
+          "Heb je tijdens je stage of je studies al aan een project met echte gebruikers gewerkt?",
+          "Welke tools heb je al gebruikt? Excel, SQL, Jira, een tool om processen te tekenen?"
+        ],
+        "clarification_poste": [
+          "Wat doet een business analist volgens jou, in je eigen woorden?",
+          "Wat is volgens jou het verschil tussen een business analist en een projectmanager?"
+        ],
+        "technique": [
+          "Je komt nieuw in een project. Hoe breng je de behoeften van de gebruikers in kaart?",
+          "Kun je uitleggen wat een user story is, en wat een goede user story is?",
+          "Wat zijn acceptatiecriteria, en waarom zijn ze belangrijk?",
+          "Drie afdelingen vragen tegelijk iets aan jou. Hoe bepaal je de prioriteiten?",
+          "Een stakeholder vraagt iets dat buiten de scope van het project valt. Wat doe je?",
+          "Heb je al met SQL gewerkt? Hoe zou je bijvoorbeeld alle klanten van vorige maand opzoeken?"
+        ],
+        "motivation": [
+          "Waarom wil je business analist worden?",
+          "Wat spreekt je aan in deze functie bij ons?"
+        ],
+        "vision_carriere": [
+          "Waar zie je jezelf binnen drie jaar?",
+          "Welke vaardigheden wil je het eerst ontwikkelen?"
+        ],
+        "objections": [
+          "Je hebt nog weinig ervaring. Waarom zouden we jou kiezen en niet iemand met drie jaar ervaring?",
+          "Ons team werkt in het Nederlands, ook met de klanten. Hoe zie jij dat?"
+        ],
+        "perso": [
+          "Hoe ga je om met kritiek op je werk?",
+          "Vertel eens over een situatie waarin je in een groep een meningsverschil hebt opgelost."
+        ],
+        "dispo": [
+          "Wanneer zou je kunnen beginnen?",
+          "We werken twee dagen per week op kantoor in [plaats]. Is dat haalbaar voor jou?"
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "de behoefte",
+        "de stakeholder",
+        "de user story",
+        "het acceptatiecriterium",
+        "de prioriteit",
+        "de scope",
+        "het proces",
+        "de workshop",
+        "de product owner",
+        "de backlog"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Kunt u de vraag herhalen, alstublieft?",
+        "Daar heb ik nog geen ervaring mee, maar ik leer snel.",
+        "Tijdens mijn stage heb ik bijvoorbeeld ...",
+        "Als ik het goed begrijp, bedoelt u ...?"
+      ]
     }
   ]
 }

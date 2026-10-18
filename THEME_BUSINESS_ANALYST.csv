@@ -1,0 +1,41 @@
+id;fr;nl;freq
+THEME_BUSINESS_ANALYST_0;l'analyste métier;de business analist;5.20
+THEME_BUSINESS_ANALYST_1;le besoin;de behoefte;5.15
+THEME_BUSINESS_ANALYST_2;l'exigence;de vereiste;5.10
+THEME_BUSINESS_ANALYST_3;la partie prenante;de stakeholder;5.05
+THEME_BUSINESS_ANALYST_4;le processus;het proces;5.00
+THEME_BUSINESS_ANALYST_5;le cahier des charges;het lastenboek;4.95
+THEME_BUSINESS_ANALYST_6;la user story;de user story;4.90
+THEME_BUSINESS_ANALYST_7;le critère d'acceptation;het acceptatiecriterium;4.85
+THEME_BUSINESS_ANALYST_8;l'atelier;de workshop;4.80
+THEME_BUSINESS_ANALYST_9;la priorité;de prioriteit;4.75
+THEME_BUSINESS_ANALYST_10;le périmètre;de scope;4.70
+THEME_BUSINESS_ANALYST_11;la demande de changement;het wijzigingsverzoek;4.65
+THEME_BUSINESS_ANALYST_12;le flux de travail;de workflow;4.60
+THEME_BUSINESS_ANALYST_13;le schéma de processus;het processchema;4.55
+THEME_BUSINESS_ANALYST_14;la situation actuelle;de huidige situatie;4.50
+THEME_BUSINESS_ANALYST_15;la situation souhaitée;de gewenste situatie;4.45
+THEME_BUSINESS_ANALYST_16;l'écart;de kloof;4.40
+THEME_BUSINESS_ANALYST_17;le cas d'usage;de use case;4.35
+THEME_BUSINESS_ANALYST_18;le prototype;het prototype;4.30
+THEME_BUSINESS_ANALYST_19;le test d'acceptation;de acceptatietest;4.25
+THEME_BUSINESS_ANALYST_20;l'utilisateur final;de eindgebruiker;4.20
+THEME_BUSINESS_ANALYST_21;le responsable produit;de product owner;4.15
+THEME_BUSINESS_ANALYST_22;le sprint;de sprint;4.10
+THEME_BUSINESS_ANALYST_23;le backlog;de backlog;4.05
+THEME_BUSINESS_ANALYST_24;la base de données;de database;4.00
+THEME_BUSINESS_ANALYST_25;la requête;de query;3.95
+THEME_BUSINESS_ANALYST_26;le tableau de bord;het dashboard;3.90
+THEME_BUSINESS_ANALYST_27;l'indicateur clé;de KPI;3.85
+THEME_BUSINESS_ANALYST_28;les données;de gegevens;3.80
+THEME_BUSINESS_ANALYST_29;l'analyse d'écart;de gap-analyse;3.75
+THEME_BUSINESS_ANALYST_30;la documentation;de documentatie;3.70
+THEME_BUSINESS_ANALYST_31;l'estimation;de inschatting;3.65
+THEME_BUSINESS_ANALYST_32;le risque;het risico;3.60
+THEME_BUSINESS_ANALYST_33;l'approbation;de goedkeuring;3.55
+THEME_BUSINESS_ANALYST_34;l'interface entre logiciels;de koppeling;3.50
+THEME_BUSINESS_ANALYST_35;le fournisseur de logiciel;de softwareleverancier;3.45
+THEME_BUSINESS_ANALYST_36;la mise en production;de livegang;3.40
+THEME_BUSINESS_ANALYST_37;le message d'erreur;de foutmelding;3.35
+THEME_BUSINESS_ANALYST_38;le compte rendu;het verslag;3.30
+THEME_BUSINESS_ANALYST_39;le malentendu;het misverstand;3.25

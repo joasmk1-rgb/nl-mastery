@@ -318,6 +318,182 @@
         { "nl": "Ik zoek een oplossing en bel u binnen het uur terug.", "fr": "Je cherche une solution et je vous rappelle dans l'heure." },
         { "nl": "Vandaag is alles vlot verlopen, behalve één vertraging.", "fr": "Aujourd'hui tout s'est bien passé, sauf un retard." }
       ]
+    },
+    "dom_ba": {
+      "label": "Business analyst — métier",
+      "verbes": [
+        "analyseren",
+        "beschrijven",
+        "verzamelen",
+        "bespreken",
+        "prioriteren",
+        "opstellen",
+        "voorstellen",
+        "verbeteren",
+        "vergelijken",
+        "presenteren"
+      ],
+      "mots": [
+        {
+          "nl": "de business analist",
+          "fr": "l'analyste métier (business analyst)"
+        },
+        {
+          "nl": "de behoefte",
+          "fr": "le besoin"
+        },
+        {
+          "nl": "de vereiste",
+          "fr": "l'exigence"
+        },
+        {
+          "nl": "de stakeholder",
+          "fr": "la partie prenante"
+        },
+        {
+          "nl": "het proces",
+          "fr": "le processus"
+        },
+        {
+          "nl": "de user story",
+          "fr": "la user story"
+        },
+        {
+          "nl": "het acceptatiecriterium",
+          "fr": "le critère d'acceptation"
+        },
+        {
+          "nl": "de workshop",
+          "fr": "l'atelier"
+        },
+        {
+          "nl": "de scope",
+          "fr": "le périmètre"
+        },
+        {
+          "nl": "de product owner",
+          "fr": "le product owner (responsable produit)"
+        },
+        {
+          "nl": "de backlog",
+          "fr": "le backlog (liste des tâches)"
+        },
+        {
+          "nl": "de stage",
+          "fr": "le stage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Als business analist vertaal ik de behoeften van de gebruikers naar duidelijke vereisten.",
+          "fr": "En tant que business analyst, je traduis les besoins des utilisateurs en exigences claires."
+        },
+        {
+          "nl": "Tijdens mijn stage heb ik workshops met gebruikers voorbereid.",
+          "fr": "Pendant mon stage, j'ai préparé des ateliers avec des utilisateurs."
+        },
+        {
+          "nl": "Ik stel veel vragen om het echte probleem te begrijpen.",
+          "fr": "Je pose beaucoup de questions pour comprendre le vrai problème."
+        },
+        {
+          "nl": "Ik heb nog weinig ervaring, maar ik leer snel.",
+          "fr": "J'ai encore peu d'expérience, mais j'apprends vite."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_ba": {
+      "label": "Business analyst — au quotidien",
+      "verbes": [
+        "uitleggen",
+        "vragen",
+        "noteren",
+        "samenvatten",
+        "opvolgen",
+        "melden",
+        "beslissen",
+        "goedkeuren",
+        "aanpassen",
+        "uitstellen"
+      ],
+      "mots": [
+        {
+          "nl": "de stand-up",
+          "fr": "la réunion debout du matin"
+        },
+        {
+          "nl": "de sprint",
+          "fr": "le sprint (période de travail de 2 à 3 semaines)"
+        },
+        {
+          "nl": "het verslag",
+          "fr": "le compte rendu"
+        },
+        {
+          "nl": "de beslissing",
+          "fr": "la décision"
+        },
+        {
+          "nl": "de volgende stap",
+          "fr": "la prochaine étape"
+        },
+        {
+          "nl": "het wijzigingsverzoek",
+          "fr": "la demande de changement"
+        },
+        {
+          "nl": "de koppeling",
+          "fr": "l'interface (entre deux logiciels)"
+        },
+        {
+          "nl": "de foutmelding",
+          "fr": "le message d'erreur"
+        },
+        {
+          "nl": "de acceptatietest",
+          "fr": "le test d'acceptation"
+        },
+        {
+          "nl": "de livegang",
+          "fr": "la mise en production"
+        },
+        {
+          "nl": "de vertraging",
+          "fr": "le retard"
+        },
+        {
+          "nl": "het misverstand",
+          "fr": "le malentendu"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Als ik het goed begrijp, bedoelt u ...",
+          "fr": "Si je comprends bien, vous voulez dire ..."
+        },
+        {
+          "nl": "Kunt u een concreet voorbeeld geven?",
+          "fr": "Pouvez-vous donner un exemple concret ?"
+        },
+        {
+          "nl": "Ik vraag het na en ik laat het u weten.",
+          "fr": "Je me renseigne et je vous tiens au courant."
+        },
+        {
+          "nl": "Dat valt buiten de scope van deze versie.",
+          "fr": "Cela sort du périmètre de cette version."
+        },
+        {
+          "nl": "Ik noteer het als wijzigingsverzoek.",
+          "fr": "Je le note comme demande de changement."
+        },
+        {
+          "nl": "Ik zit vast, ik wacht nog op een antwoord.",
+          "fr": "Je suis bloqué, j'attends encore une réponse."
+        }
+      ],
+      "_source": "redige_claude"
     }
   },
   "scenarios": {
@@ -334,7 +510,8 @@
     "rp:interview_consult_final": ["entretien_base", "dom_consult"],
     "rp:interview_hr_phone": ["entretien_base", "dom_rh"],
     "rp:interview_hr_technical": ["entretien_base", "dom_rh"],
-    "rp:interview_hr_final": ["entretien_base", "dom_rh"]
+    "rp:interview_hr_final": ["entretien_base", "dom_rh"],
+    "bank:business_analyst_junior": ["entretien_base", "dom_ba"]
   },
   "situations": {
     "guichet_": ["sit_guichet"],
@@ -342,6 +519,7 @@
     "retail_": ["sit_retail"],
     "ag_": ["sit_dispatch"],
     "usine_": ["sit_usine"],
-    "invente_": ["sit_incidents"]
+    "invente_": ["sit_incidents"],
+    "ba_": ["sit_ba"]
   }
 }
