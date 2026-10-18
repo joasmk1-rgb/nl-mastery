@@ -4787,6 +4787,123 @@ if (firebaseAvailable) {
             await conjAudioSpeak(text, lang, rate, opt);
         }
 
+        // ===== Lecture bilingue =====
+        // Les explications en français contiennent souvent du néerlandais (« Ik ben 31 jaar »,
+        // « zijn : ik ben, jij bent »…). Lues d'un bloc par la voix française, ces phrases étaient
+        // prononcées à la française. On découpe donc le texte en morceaux FR / NL, mot à mot :
+        // un mot connu du vocabulaire néerlandais de l'app (mots, formes conjuguées, dialogues
+        // des modules) est NL ; un mot avec accent français ou un mot-outil français est FR ; les
+        // mots ambigus (de, en, je…) ou inconnus prennent la langue de leurs voisins, avec une
+        // préférence pour le NL entre guillemets « ». Chaque morceau est lu par la bonne voix.
+        const BILINGUAL_FR = new Set(('le la les l un une des du de d et est sont à au aux en pour avec sans par sur sous dans entre vers chez qui que qu quoi dont où ou si mais donc car ni ne n pas plus moins très trop aussi même comme quand lorsque puis alors ensuite toujours jamais souvent parfois encore déjà ce cet cette ces c se s son sa ses mon ma mes ton ta tes notre nos votre vos leur leurs il ils elle elles on nous vous tu te t je j me m moi toi lui eux y a ai as avons avez ont été être avoir fait faire dit dire va aller vont peut peux pouvoir veut veux vouloir doit dois devoir prend prendre met mettre passe passer reste rester sert servir sert ici là voici voilà oui non bien mal tout tous toute toutes autre autres chaque quelque quelques plusieurs aucun aucune rien personne chose fois verbe verbes nom noms mot mots phrase phrases forme formes question questions réponse fin début place ordre sujet temps présent passé futur infinitif pluriel singulier article masculin féminin neutre exemple exemples règle sens comme surtout seulement souvent pareil même mêmes devant derrière après avant pendant depuis jusqu sinon') .split(' '));
+        // Mots-outils français qui ne sont jamais lus en néerlandais, même s'ils existent aussi
+        // en néerlandais (« les » = la leçon, « on », « pas »…).
+        const BILINGUAL_FR_STRONG = new Set('le la les un une des du et est à au aux pour avec sans par sur dans qui que ce cette ces se son sa ses mon ma mes ton ta tes il ils elle elles on nous vous tu y ou où si mais donc car ne pas plus très aussi comme quand chose milieu'.split(' '));
+        const BILINGUAL_ACCENT = /[éèêàâçîïôûùœ]/i;
+        let bilingualNlSet = null;
+
+        function bilingualWords(s) { return String(s || '').toLowerCase().match(/[a-zà-ÿ]+/g) || []; }
+
+        function bilingualNl() {
+            if (bilingualNlSet && bilingualNlSet.size > 500) return bilingualNlSet;
+            const set = new Set();
+            const add = s => bilingualWords(s).forEach(w => set.add(w));
+            (fullDb || []).forEach(i => { if (i && i.nl) add(i.nl); });
+            if (conjugationLoaded) conjugationData.forEach(v => {
+                add(v.infinitief); add(v.preteritum); add(v.participePasse); add(v.exempleNl);
+                Object.values(v.present || {}).forEach(add);
+            });
+            Object.values(typeof modRpData !== 'undefined' ? modRpData : {}).forEach(m => (m.etapes || []).forEach(e => {
+                (e.dialogue || []).forEach(l => add(l.nl));
+                ((e.regle || {}).exemples || []).forEach(x => add(x.nl));
+                ((e.vocab || {}).mots || []).concat((e.vocab || {}).phrases || []).forEach(x => add(x.nl));
+            }));
+            ['ik', 'jij', 'je', 'hij', 'zij', 'ze', 'wij', 'we', 'jullie', 'u', 'het', 'een', 'niet', 'geen', 'is', 'ben', 'bent', 'zijn', 'heb', 'hebt', 'heeft', 'hebben', 'van', 'op', 'met', 'naar', 'als', 'dat', 'die', 'dit', 'wat', 'hoe', 'waar', 'om', 'te', 'er', 'maar', 'want', 'omdat', 'graag', 'ook', 'nog', 'al', 'zal', 'ga', 'gaat', 'mag', 'wil', 'kan', 'moet'].forEach(w => set.add(w));
+            bilingualNlSet = set;
+            return set;
+        }
+
+        // Découpe un texte « en français » en [{ lang, text }].
+        function bilingualSegments(text) {
+            text = stripMarkdown(String(text || ''));
+            const NL = bilingualNl();
+            const parts = text.split(/([A-Za-zÀ-ÿ]+(?:['’][A-Za-zÀ-ÿ]+)*)/);
+            const words = [];
+            let quote = 0;
+            for (let i = 0; i < parts.length; i++) {
+                if (i % 2 === 0) {
+                    for (const ch of parts[i]) { if (ch === '«' || ch === '“') quote++; if ((ch === '»' || ch === '”') && quote > 0) quote--; }
+                    continue;
+                }
+                const raw = parts[i], w = raw.toLowerCase();
+                const frElision = /^(l|d|j|c|m|n|s|t|qu)['’]/i.test(raw);
+                const inNl = NL.has(w), inFr = BILINGUAL_FR.has(w);
+                let cls;
+                if (frElision || BILINGUAL_FR_STRONG.has(w)) cls = 'fr';
+                else if (inNl && !inFr) cls = 'nl';
+                else if (inFr && !inNl) cls = 'fr';
+                else if (BILINGUAL_ACCENT.test(w)) cls = 'fr';
+                else cls = inNl ? 'amb' : 'unk';
+                if (w.length === 1 && !['u', 'a', 'y', 'à'].includes(w)) cls = 'unk';
+                words.push({ i, cls, quote: quote > 0, sep: i > 0 ? parts[i - 1] : '' });
+            }
+            // 1) Mots ambigus (de, en, je, dit…) : français s'ils suivent directement un mot
+            // français (« On dit », « pas de »), sinon la langue du mot qui suit (l'article
+            // prend celle de son nom) ; un mot inconnu voisin compte alors comme français.
+            // Entre guillemets « », néerlandais sauf si tout autour est français.
+            const near = (k, dir, val) => { for (let x = k + dir; x >= 0 && x < words.length; x += dir) { const v = val(words[x]); if (v) return v; } return null; };
+            const firm = x => x.cls === 'fr' || x.cls === 'nl' ? x.cls : null;
+            words.forEach((wd, k) => {
+                if (wd.cls !== 'amb') return;
+                const prevFr = k > 0 && words[k - 1].cls === 'fr' && !/[:(«=→\/·;]/.test(wd.sep);
+                const side = x => firm(x) || (x.cls === 'unk' ? 'fr' : null);
+                const l = near(k, -1, side), r = near(k, 1, side);
+                if (wd.quote) wd.res = (l === 'fr' && r === 'fr') || prevFr ? 'fr' : 'nl';
+                else wd.res = prevFr ? 'fr' : (r || l || 'fr');
+            });
+            // 2) Mots inconnus : néerlandais seulement entourés de néerlandais.
+            const settled = x => firm(x) || x.res || null;
+            words.forEach((wd, k) => {
+                if (wd.cls !== 'unk') return;
+                const l = near(k, -1, settled), r = near(k, 1, settled);
+                if (wd.quote) wd.res = (l === 'fr' && r === 'fr') ? 'fr' : 'nl';
+                else wd.res = ((l === 'nl' || l === null) && (r === 'nl' || r === null) && (l || r)) ? 'nl' : 'fr';
+            });
+            const langOf = new Map(words.map(wd => [wd.i, wd.res || wd.cls]));
+            // Regroupement : la ponctuation suit le mot qui la précède.
+            const segs = [];
+            let cur = null;
+            for (let i = 0; i < parts.length; i++) {
+                const piece = parts[i];
+                if (!piece) continue;
+                const lang = i % 2 === 1 ? langOf.get(i) : (cur ? cur.lang : 'fr');
+                if (cur && cur.lang === lang) cur.text += piece;
+                else { cur = { lang, text: piece }; segs.push(cur); }
+            }
+            // Les chiffres entre deux morceaux néerlandais se lisent en néerlandais (déjà le cas
+            // par regroupement) ; on retire les morceaux vides ou faits seulement de ponctuation.
+            // Symboles lus à voix haute de travers (« égal », « is gelijk aan ») : retirés.
+            return segs.map(s => ({ lang: s.lang, text: s.text.replace(/[«»“”=→·()…]/g, ' ').replace(/\s*\/\s*/g, ', ').replace(/\s+/g, ' ').trim() }))
+                .filter(s => /[A-Za-zÀ-ÿ0-9]/.test(s.text));
+        }
+
+        // Lecture bilingue qui respecte Pause / Passer / Arrêter (moteur audio commun).
+        async function conjAudioSayMixed(text, rate, nlRate) {
+            for (const s of bilingualSegments(text)) {
+                const run = conjAudioRun;
+                if (!run || run.stop || run.skip) return;
+                await conjAudioSay(s.text, s.lang, s.lang === 'fr' ? (rate || 1) : (nlRate || 0.9));
+            }
+        }
+
+        // Lecture bilingue simple (sans moteur de pause), pour le cours particulier.
+        async function conjAudioSpeakMixed(text, rate, nlRate, keepGoing) {
+            for (const s of bilingualSegments(text)) {
+                if (keepGoing && !keepGoing()) return;
+                await conjAudioSpeak(s.text, s.lang, s.lang === 'fr' ? (rate || 1) : (nlRate || 0.9));
+            }
+        }
+
         // Une écoute courte, sur une instance de reconnaissance dédiée (non continue : elle s'arrête
         // d'elle-même après une phrase), distincte de celle du jeu de rôle.
         function conjAudioListen(lang) {
@@ -11414,7 +11531,8 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             const parts = nlFirst ? [[nl, 'nl'], [fr, 'fr']] : [[fr, 'fr'], [nl, 'nl']];
             for (const [t, lang] of parts) {
                 if (!t || !profActive()) continue;
-                await conjAudioSpeak(t, lang, lang === 'fr' ? 1 : PROF_RATE[prof.level]);
+                if (lang === 'fr') await conjAudioSpeakMixed(t, 1, PROF_RATE[prof.level], profActive);
+                else await conjAudioSpeak(t, lang, PROF_RATE[prof.level]);
             }
         }
 
@@ -11858,7 +11976,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     <button class="btn btn-green" onclick="prof = null; profRenderSetup();">🔁 Nouveau cours</button>
                     ${lesson.added ? `<button class="btn btn-gray" onclick="vocabOpenCat('list', PROF_WORDS_LIST)">📋 Revoir « ${PROF_WORDS_LIST} »</button>` : ''}
                 </div>` });
-            await conjAudioSpeak((r.forces[0] || '') + ' ' + (r.defi ? 'Ton défi : ' + r.defi : ''), 'fr', 1);
+            await conjAudioSpeakMixed((r.forces[0] || '') + ' ' + (r.defi ? 'Ton défi : ' + r.defi : ''), 1);
         }
 
         // Les mots du bilan rejoignent la liste « 🎓 Mon cours » (inconnus du vocabulaire : ajoutés
@@ -12042,7 +12160,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
         // Le guide parle (français).
         async function gSay(fr) {
             guideBubble('prof guide-voice', `<div>${rpEscapeHtml(fr)}</div>`);
-            await conjAudioSay(fr, 'fr', 1);
+            await conjAudioSayMixed(fr, 1);
         }
         // Une phrase néerlandaise (avec sa traduction) dite par la voix néerlandaise.
         async function gSayNl(nl, fr, speaker) {
@@ -12157,7 +12275,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
 
             async regle(e, token) {
                 guideBubble('info', `<div class="conj-card modrp-rule" style="margin:0;"><div class="section-title" style="margin-top:0;">💡 ${rpEscapeHtml(e.regle.titre)}</div><p>${rpEscapeHtml(e.regle.explication)}</p>${e.regle.exemples.map(x => `<div class="prep-row"><span class="prep-nl">${rpEscapeHtml(x.nl)}</span><span class="prep-fr">${rpEscapeHtml(x.fr)}</span><span class="prep-actions">${speakBtnHtml(x.nl)}</span></div>`).join('')}</div>`);
-                await conjAudioSay('La règle : ' + e.regle.titre + '. ' + e.regle.explication, 'fr', 1);
+                await conjAudioSayMixed('La règle : ' + e.regle.titre + '. ' + e.regle.explication, 1);
                 for (const x of e.regle.exemples) {
                     if (!guideAlive(token) || guide.skipBeat) break;
                     await conjAudioSay(x.nl, 'nl', 0.85);
@@ -12181,7 +12299,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     round++;
                     await gSay(`${score} sur ${all.length}. Il en faut ${need}. Je te rappelle la règle, et on refait celles que tu as ratées.`);
                     if (!guideAlive(token)) return;
-                    await conjAudioSay(e.regle.titre + '. ' + e.regle.explication, 'fr', 1);
+                    await conjAudioSayMixed(e.regle.titre + '. ' + e.regle.explication, 1);
                     const r2 = await guideRunExercises(e, missed, token);
                     if (!r2) return;
                     score += r2.score;
@@ -12309,7 +12427,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const ex = modRpEx;
             if (q.type === 'ecoute') await conjAudioSpeak(q.nl, 'nl', 0.85);
             else if (q.type === 'repondre') await conjAudioSpeak(q.question, 'nl', 0.9);
-            else if (q.type === 'dire' || q.type === 'traduire') await conjAudioSpeak(q.fr, 'fr', 1);
+            else if (q.type === 'dire' || q.type === 'traduire') await conjAudioSpeakMixed(q.fr, 1, 0.85, () => guideAlive(token));
             if (!guideAlive(token) || modRpEx !== ex || !window.SpeechRecognition) return;
             if (['dire', 'repondre', 'traduire', 'ecoute'].includes(q.type) && ex.list[ex.i] === q) modRpMic();
         }
@@ -12365,7 +12483,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 ? `<button class="btn btn-gray" style="margin-top:8px;" onclick="guideResolve('__fin__')">🏁 J'ai fini : évaluer ma présentation</button>` : '';
             const themSay = async (nl, fr, nlFr) => {
                 guideBubble('prof', `${fr ? `<div class="prof-fr">🇫🇷 ${rpEscapeHtml(fr)}</div>` : ''}<div class="prof-nl">${rpEscapeHtml(nl)} ${speakBtnHtml(nl)}</div>${nlFr ? `<details class="prof-trad"><summary>Traduction</summary>${rpEscapeHtml(nlFr)}</details>` : ''}`);
-                if (fr) await conjAudioSay(fr, 'fr', 1);
+                if (fr) await conjAudioSayMixed(fr, 1);
                 await conjAudioSay(nl, 'nl', 0.9, { speaker: 0 });
             };
             await themSay(jeu.welcome, '', '');
