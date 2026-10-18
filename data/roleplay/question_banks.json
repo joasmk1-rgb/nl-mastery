@@ -429,6 +429,77 @@
         "Ik zou het op tijd melden aan ...",
         "Kunt u de vraag herhalen, alstublieft?"
       ]
+    },
+    {
+      "id": "bibliotheekmedewerker",
+      "metier": "bibliotheque",
+      "label": "Entretien — employé(e) de bibliothèque (commune)",
+      "poste": "Bibliotheekmedewerker (niveau C, lokaal bestuur)",
+      "contexte": "Entretien de sélection pour un poste d'employé de bibliothèque dans une commune flamande, devant un petit jury (la responsable de la bibliothèque et quelqu'un du service du personnel). Le poste : accueil au comptoir, prêt et retours, inscriptions et amendes, aide pour le catalogue et le numérique, activités pour enfants et classes. Le jury aime les questions de situation (« que fais-tu si… »).",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goeiedag, welkom. Fijn dat u er bent. Kunt u zich eerst even voorstellen?",
+      "questions": {
+        "accroche": [
+          "Hoe kent u onze bibliotheek? Komt u er zelf al eens?"
+        ],
+        "verif_cv": [
+          "Op uw cv zie ik dat u al aan een balie of met klanten gewerkt hebt. Wat deed u daar precies?",
+          "Werkt u vlot met de computer, met e-mail en met een catalogus of een databank?"
+        ],
+        "clarification_poste": [
+          "Wat doet een bibliotheekmedewerker volgens u, naast boeken uitlenen?",
+          "Waarom is een bibliotheek belangrijk voor een gemeente, denkt u?"
+        ],
+        "technique": [
+          "Een lezer is boos omdat hij een boete moet betalen. Wat doet u?",
+          "Iemand die weinig Nederlands spreekt, wil lid worden. Hoe helpt u die persoon?",
+          "Een ouder iemand kan niet werken met de zelfscan. Hoe pakt u dat aan?",
+          "Het is druk aan de balie en de telefoon gaat. Wat doet u?",
+          "Hoe zou u een jongere die niet graag leest, toch aan het lezen krijgen?"
+        ],
+        "motivation": [
+          "Waarom wilt u in een bibliotheek werken?",
+          "Wat leest u zelf graag?"
+        ],
+        "vision_carriere": [
+          "Welke activiteiten zou u graag mee organiseren in de bibliotheek?"
+        ],
+        "objections": [
+          "U zult soms op zaterdag en 's avonds moeten werken. Is dat een probleem?",
+          "U komt in contact met heel verschillende mensen, ook soms met moeilijke bezoekers. Hoe gaat u daarmee om?"
+        ],
+        "perso": [
+          "Hoe blijft u vriendelijk als iemand onbeleefd is?",
+          "Werkt u liever alleen of in een team?"
+        ],
+        "dispo": [
+          "Wanneer zou u kunnen beginnen?",
+          "Het gaat om een halftijdse job. Past dat voor u?"
+        ],
+        "cloture": [
+          "Hebt u zelf nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "de balie",
+        "de lenerspas",
+        "de boete",
+        "de reservatie",
+        "de catalogus",
+        "de collectie",
+        "de zelfscan",
+        "het voorleesuurtje",
+        "de jeugdafdeling",
+        "de lezer"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "In zo'n situatie zou ik eerst ...",
+        "Ik zou rustig blijven en uitleggen dat ...",
+        "Als ik het niet weet, vraag ik het aan een collega.",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
     }
   ]
 }

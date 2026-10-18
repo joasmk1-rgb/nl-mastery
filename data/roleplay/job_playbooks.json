@@ -917,6 +917,272 @@
         "Renvoyer seulement vers le compte rendu sans dire ce qui le concerne.",
         "Oublier les dates."
       ]
+    },
+    "bib_inscription": {
+      "titre": "Inscrire un nouveau membre qui parle peu néerlandais",
+      "etapes": [
+        {
+          "fr": "Accueillir chaleureusement et parler lentement, avec des phrases courtes.",
+          "phrase": "Welkom! Ik help u graag. Ik spreek langzaam."
+        },
+        {
+          "fr": "Demander la carte d'identité (ou un titre de séjour).",
+          "phrase": "Hebt u uw identiteitskaart bij u?"
+        },
+        {
+          "fr": "Expliquer simplement ce que comprend l'inscription : prix, durée de prêt, nombre de livres.",
+          "phrase": "U mag tien boeken lenen, voor drie weken. Voor volwassenen kost het lidmaatschap een klein bedrag per jaar."
+        },
+        {
+          "fr": "Montrer les rayons utiles : livres en néerlandais facile, livres dans sa langue, cours de langue.",
+          "phrase": "Hier staan boeken in makkelijk Nederlands. Daar vindt u boeken in andere talen."
+        },
+        {
+          "fr": "Remettre la carte et vérifier qu'il a compris.",
+          "phrase": "Dit is uw lenerspas. Is alles duidelijk?"
+        }
+      ],
+      "a_eviter": [
+        "Parler vite ou en jargon (« uitleentermijn », « reservatiekosten ») sans expliquer.",
+        "Passer à une autre langue sans demander s'il préfère : beaucoup veulent pratiquer le néerlandais."
+      ]
+    },
+    "bib_retard_amende": {
+      "titre": "Un lecteur conteste une amende de retard",
+      "etapes": [
+        {
+          "fr": "Rester calme et montrer que tu comprends son agacement.",
+          "phrase": "Ik begrijp dat dat vervelend is."
+        },
+        {
+          "fr": "Vérifier dans le système : dates de prêt, rappels envoyés, adresse e-mail.",
+          "phrase": "Ik kijk even in het systeem. De herinnering is verstuurd naar dit e-mailadres. Klopt dat nog?"
+        },
+        {
+          "fr": "Expliquer la règle simplement, sans te justifier longuement.",
+          "phrase": "Na de uitleentermijn betaalt u per dag een kleine boete. Dat is de regel voor iedereen."
+        },
+        {
+          "fr": "Appliquer ce qui est prévu en cas de doute réel (adresse erronée) ou en référer au responsable.",
+          "phrase": "Uw e-mailadres was fout in het systeem. Ik vraag aan mijn verantwoordelijke of we de boete kunnen kwijtschelden."
+        },
+        {
+          "fr": "Proposer d'éviter le problème la prochaine fois : mettre à jour l'adresse, prolonger en ligne.",
+          "phrase": "Zal ik uw e-mailadres aanpassen? Dan krijgt u voortaan een herinnering."
+        }
+      ],
+      "a_eviter": [
+        "Annuler l'amende de ta propre initiative si ce n'est pas prévu.",
+        "Discuter longtemps devant une file d'attente : proposer d'en parler à côté."
+      ]
+    },
+    "bib_recherche_livre": {
+      "titre": "Retrouver un livre sans titre ni auteur",
+      "etapes": [
+        {
+          "fr": "Poser des questions : de quoi parle-t-il, couverture, quand l'a-t-elle vu, roman ou non.",
+          "phrase": "Weet u nog iets over de kaft, of waar u het boek gezien hebt?"
+        },
+        {
+          "fr": "Chercher dans le catalogue avec des mots-clés.",
+          "phrase": "Ik zoek even in de catalogus met een paar trefwoorden."
+        },
+        {
+          "fr": "Proposer les résultats et vérifier avec elle.",
+          "phrase": "Is het misschien dit boek? Hier is de samenvatting."
+        },
+        {
+          "fr": "S'il est déjà prêté : proposer une réservation.",
+          "phrase": "Het is momenteel uitgeleend. Zal ik het voor u reserveren? U krijgt een bericht als het terug is."
+        },
+        {
+          "fr": "Si tu ne trouves pas : proposer une alternative ou de chercher plus tard.",
+          "phrase": "Ik vind het nu niet. Mag ik uw nummer noteren? Ik zoek nog verder."
+        }
+      ],
+      "a_eviter": [
+        "Dire « je ne sais pas » sans chercher.",
+        "Laisser la lectrice chercher seule dans les rayons."
+      ]
+    },
+    "bib_livre_perdu": {
+      "titre": "Un livre perdu",
+      "etapes": [
+        {
+          "fr": "Rassurer : ça arrive souvent.",
+          "phrase": "Geen paniek, dat gebeurt vaker."
+        },
+        {
+          "fr": "Retrouver le prêt dans le système avec la carte ou le nom.",
+          "phrase": "Op welke naam staat de lenerspas?"
+        },
+        {
+          "fr": "Proposer d'abord de chercher encore quelques jours et prolonger le prêt.",
+          "phrase": "Ik verleng het boek nog twee weken. Misschien vindt u het nog terug."
+        },
+        {
+          "fr": "Sinon, expliquer les options : payer le prix de remplacement ou racheter le même livre neuf.",
+          "phrase": "Als het echt weg is, kunt u de vervangingskost betalen of zelf een nieuw exemplaar kopen."
+        }
+      ],
+      "a_eviter": [
+        "Faire peur avec un montant avant d'avoir vérifié le livre.",
+        "Bloquer la carte de l'enfant sans prévenir."
+      ]
+    },
+    "bib_aide_numerique": {
+      "titre": "Aider un lecteur avec le numérique",
+      "etapes": [
+        {
+          "fr": "Le rassurer et prendre le temps.",
+          "phrase": "Geen probleem, ik doe het samen met u."
+        },
+        {
+          "fr": "Montrer la borne étape par étape en le laissant faire lui-même.",
+          "phrase": "Legt u eerst uw pas hier. Dan legt u het boek op de plaat. Ziet u?"
+        },
+        {
+          "fr": "Pour le compte en ligne : vérifier l'identifiant, réinitialiser le mot de passe si besoin.",
+          "phrase": "Uw gebruikersnaam is het nummer op uw pas. Ik maak een nieuw wachtwoord voor u."
+        },
+        {
+          "fr": "Lui donner un papier avec les étapes et lui dire qu'il peut revenir.",
+          "phrase": "Ik schrijf de stappen voor u op. En u mag altijd terugkomen met vragen."
+        }
+      ],
+      "a_eviter": [
+        "Tout faire à sa place très vite : il ne saura pas le refaire.",
+        "Utiliser des mots techniques sans les expliquer."
+      ]
+    },
+    "bib_bruit_salle": {
+      "titre": "Du bruit dans la salle d'étude",
+      "etapes": [
+        {
+          "fr": "Remercier la personne de l'avoir signalé.",
+          "phrase": "Bedankt dat u het zegt. Ik ga meteen kijken."
+        },
+        {
+          "fr": "Aller voir le groupe et rappeler la règle calmement, sans humilier.",
+          "phrase": "Hallo, dit is een stille zaal. Mogen jullie wat stiller zijn, alstublieft?"
+        },
+        {
+          "fr": "Proposer une solution : un espace où ils peuvent parler.",
+          "phrase": "Als jullie samen willen werken, kunnen jullie naar de groepsruimte op de eerste verdieping."
+        },
+        {
+          "fr": "Si ça recommence : prévenir un collègue ou le responsable selon les règles de la maison.",
+          "phrase": "Als het niet lukt, moet ik mijn verantwoordelijke erbij halen."
+        }
+      ],
+      "a_eviter": [
+        "Crier ou faire la morale devant toute la salle.",
+        "Ignorer la plainte en disant que ce n'est pas ton rôle."
+      ]
+    },
+    "bib_visite_classe": {
+      "titre": "Organiser une visite de classe",
+      "etapes": [
+        {
+          "fr": "Accueillir la demande avec plaisir.",
+          "phrase": "Natuurlijk, klasbezoeken doen we heel graag."
+        },
+        {
+          "fr": "Demander les infos : âge, nombre d'élèves, objectif (découverte, recherche, lecture).",
+          "phrase": "Met hoeveel leerlingen komt u, en wat wilt u vooral doen tijdens het bezoek?"
+        },
+        {
+          "fr": "Proposer des dates et une durée.",
+          "phrase": "Kan het op een dinsdag- of donderdagvoormiddag? Een bezoek duurt ongeveer een uur."
+        },
+        {
+          "fr": "Expliquer le déroulement et si les élèves peuvent emprunter.",
+          "phrase": "We geven een rondleiding, lezen een verhaal voor en de kinderen mogen boeken lenen met de klaskaart."
+        },
+        {
+          "fr": "Confirmer par e-mail.",
+          "phrase": "Ik stuur u een bevestiging per mail."
+        }
+      ],
+      "a_eviter": [
+        "Fixer une date sans vérifier le planning de l'équipe.",
+        "Oublier de demander s'il y a des enfants avec des besoins particuliers."
+      ]
+    },
+    "bib_conseil_lecture": {
+      "titre": "Conseiller un jeune qui n'aime pas lire",
+      "etapes": [
+        {
+          "fr": "Parler directement au jeune, pas seulement à sa mère.",
+          "phrase": "Wat vind jij leuk? Films, games, sport?"
+        },
+        {
+          "fr": "Partir de ses goûts pour proposer 2 ou 3 livres variés (roman court, BD, livre sur un sport).",
+          "phrase": "Als je van voetbal houdt, is dit boek misschien iets voor jou. Het is kort en spannend."
+        },
+        {
+          "fr": "Vérifier ce que l'école accepte.",
+          "phrase": "Mag het ook een strip of een graphic novel zijn voor school?"
+        },
+        {
+          "fr": "Le laisser choisir et l'inviter à revenir.",
+          "phrase": "Kies maar wat je wilt. Als het niet bevalt, mag je het gewoon ruilen."
+        }
+      ],
+      "a_eviter": [
+        "Juger le fait qu'il n'aime pas lire.",
+        "Proposer un classique long et difficile."
+      ]
+    },
+    "bib_don_livres": {
+      "titre": "Quelqu'un veut donner des livres",
+      "etapes": [
+        {
+          "fr": "Remercier pour la générosité.",
+          "phrase": "Dank u, dat is heel vriendelijk."
+        },
+        {
+          "fr": "Expliquer la règle de la bibliothèque sur les dons (souvent limités).",
+          "phrase": "Helaas kunnen we niet alle boeken opnemen in de collectie. We nemen alleen recente boeken in goede staat."
+        },
+        {
+          "fr": "Proposer de regarder ensemble quelques livres ou des alternatives.",
+          "phrase": "Ik kijk even of er iets bij zit. De andere boeken kunt u in de boekenruilkast zetten, of naar een kringwinkel brengen."
+        },
+        {
+          "fr": "Ne pas laisser les caisses sans accord.",
+          "phrase": "Ik kan ze hier helaas niet laten staan."
+        }
+      ],
+      "a_eviter": [
+        "Tout accepter pour éviter le conflit, puis devoir tout jeter.",
+        "Refuser sèchement : la personne fait un geste qui compte pour elle."
+      ]
+    },
+    "bib_collegue_planning": {
+      "titre": "Une collègue te demande d'échanger un service",
+      "etapes": [
+        {
+          "fr": "Montrer que tu veux aider.",
+          "phrase": "Ik wil je graag helpen."
+        },
+        {
+          "fr": "Expliquer ta contrainte.",
+          "phrase": "Maar zaterdagvoormiddag bereid ik het voorleesuurtje voor."
+        },
+        {
+          "fr": "Proposer une solution : un échange ou une autre personne.",
+          "phrase": "Kunnen we ruilen? Ik doe jouw baliedienst, en jij helpt mij vrijdag met de voorbereiding."
+        },
+        {
+          "fr": "Faire valider l'échange par la personne qui gère le planning.",
+          "phrase": "Laten we het even doorgeven aan wie de planning maakt."
+        }
+      ],
+      "a_eviter": [
+        "Dire oui et laisser tomber ta propre tâche.",
+        "Changer le planning sans prévenir le responsable."
+      ]
     }
   }
 }

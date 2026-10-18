@@ -1790,7 +1790,8 @@ if (firebaseAvailable) {
                 'THEME_BASE_avec_frequence.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
                 'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv',
-                'THEME_BUSINESS_ANALYST.csv', 'THEME_CONSULTANT.csv', 'THEME_PROJET.csv'
+                'THEME_BUSINESS_ANALYST.csv', 'THEME_CONSULTANT.csv', 'THEME_PROJET.csv',
+                'THEME_BIBLIOTHEQUE.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -5890,7 +5891,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -9182,7 +9183,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             logistique: { label: '🚚 Logistique', domaine: 'logistique / supply chain', noms: 'Logistiko pour l\'entreprise du candidat, Transvio ou Nordvracht pour des transporteurs, Delmaro pour un client' },
             business_analyst: { label: '📊 Business analyst', domaine: 'business analysis (analyse des besoins, processus, projets IT)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients, Transvio pour un éditeur de logiciel' },
             consultant_junior: { label: '💼 Consultant junior', domaine: 'conseil en organisation et en management (consultant junior en cabinet)', noms: 'Zonvella Consulting pour le cabinet du candidat, Delmaro, Logistiko ou Nordvracht pour des clients' },
-            projet_junior: { label: '🗂️ Chef de projet junior', domaine: 'gestion de projet (chef de projet junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' }
+            projet_junior: { label: '🗂️ Chef de projet junior', domaine: 'gestion de projet (chef de projet junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' },
+            bibliotheque: { label: '📚 Bibliothèque', domaine: 'bibliothèque publique (employé de bibliothèque d\'une commune)', noms: 'la bibliothèque communale de Zonvelde (commune inventée) pour l\'employeur, Delmaro pour un fournisseur de livres' }
         };
         const RP_JOB_METIERS = Object.fromEntries(Object.entries(RP_METIERS).map(([k, v]) => [k, v.label])); // un métier absent s'affiche avec son nom brut
         const RP_JOB_CANAUX = {
@@ -9192,7 +9194,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             picking_zone: { label: '📦 Zone de picking', prompt: 'dans l\'entrepôt, en zone de préparation de commandes' },
             email: { label: '✉️ E-mail', prompt: 'par e-mail : tes messages sont des e-mails courts, et l\'apprenant répond par écrit' },
             reunion: { label: '🗓️ Réunions & ateliers', prompt: 'en réunion, sur place ou en visioconférence' },
-            chat: { label: '💬 Messagerie interne', prompt: 'par messagerie instantanée : tes messages sont courts et écrits, et l\'apprenant répond par écrit' }
+            chat: { label: '💬 Messagerie interne', prompt: 'par messagerie instantanée : tes messages sont courts et écrits, et l\'apprenant répond par écrit' },
+            balie: { label: '🛎️ Accueil / comptoir', prompt: 'au comptoir d\'accueil, en face à face' }
         };
         // Intensité par type de situation, pour ordonner une journée tirée au sort (calme → pic → calme).
         const RP_JOB_INTENSITY = { administratif: 1, clarification: 1, probleme_document: 2, proposition_solution: 2, presentation: 2, negociation: 3, urgence: 3, reclamation: 3, retour: 2 };
@@ -10523,7 +10526,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             { key: 'pj_planning', metier: 'projet_junior', label: '📅 Planning qui dérape', sujet: 'un projet prend du retard à cause d\'une tâche bloquante : comment remettre le planning sur les rails ?' },
             { key: 'pj_budget', metier: 'projet_junior', label: '💶 Budget dépassé', sujet: 'le budget d\'un projet sera dépassé : réduire le périmètre, demander plus d\'argent ou décaler ?' },
             { key: 'pj_ressources', metier: 'projet_junior', label: '👥 Manque de personnes', sujet: 'deux personnes de l\'équipe partent en plein projet : comment réorganiser le travail ?' },
-            { key: 'pj_priorites', metier: 'projet_junior', label: '⚖️ Deux projets en conflit', sujet: 'deux projets ont besoin des mêmes personnes au même moment : comment choisir et convaincre ?' }
+            { key: 'pj_priorites', metier: 'projet_junior', label: '⚖️ Deux projets en conflit', sujet: 'deux projets ont besoin des mêmes personnes au même moment : comment choisir et convaincre ?' },
+            { key: 'bib_jeunes', metier: 'bibliotheque', label: '🧒 Attirer les jeunes', sujet: 'les 12-18 ans ne viennent presque plus à la bibliothèque : quelles actions proposer avec un petit budget ?' },
+            { key: 'bib_activite', metier: 'bibliotheque', label: '🎉 Organiser une activité', sujet: 'organiser une activité (heure du conte, atelier numérique, club de lecture) pour un public précis : public, date, budget, communication' },
+            { key: 'bib_budget', metier: 'bibliotheque', label: '💶 Budget d\'achat', sujet: 'un budget d\'achat limité pour l\'année : quels types de documents acheter en priorité (romans, livres pour enfants, livres en néerlandais facile, numérique) et pourquoi ?' },
+            { key: 'bib_espace', metier: 'bibliotheque', label: '🪑 Réaménager l\'espace', sujet: 'la bibliothèque manque de place et les étudiants se plaignent du bruit : comment réorganiser l\'espace ?' }
         ];
         let rpCaseMetier = 'logistique';
         const rpCaseThemesOf = m => RP_CASE_THEMES.filter(t => t.metier === m);

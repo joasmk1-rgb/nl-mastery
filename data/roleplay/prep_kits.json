@@ -846,6 +846,182 @@
         }
       ],
       "_source": "redige_claude"
+    },
+    "dom_bib": {
+      "label": "Bibliothèque — métier",
+      "verbes": [
+        "lenen",
+        "terugbrengen",
+        "verlengen",
+        "reserveren",
+        "inschrijven",
+        "zoeken",
+        "aanraden",
+        "begeleiden",
+        "informeren",
+        "sorteren"
+      ],
+      "mots": [
+        {
+          "nl": "de bibliotheek",
+          "fr": "la bibliothèque"
+        },
+        {
+          "nl": "de bibliotheekmedewerker",
+          "fr": "l'employé(e) de bibliothèque"
+        },
+        {
+          "nl": "de bibliothecaris",
+          "fr": "le/la bibliothécaire"
+        },
+        {
+          "nl": "de balie",
+          "fr": "le comptoir d'accueil"
+        },
+        {
+          "nl": "de collectie",
+          "fr": "la collection"
+        },
+        {
+          "nl": "de catalogus",
+          "fr": "le catalogue"
+        },
+        {
+          "nl": "de lezer",
+          "fr": "le lecteur"
+        },
+        {
+          "nl": "de jeugdafdeling",
+          "fr": "le rayon jeunesse"
+        },
+        {
+          "nl": "de leesbevordering",
+          "fr": "la promotion de la lecture"
+        },
+        {
+          "nl": "het voorleesuurtje",
+          "fr": "l'heure du conte"
+        },
+        {
+          "nl": "het lokaal bestuur",
+          "fr": "l'administration communale"
+        },
+        {
+          "nl": "de klantvriendelijkheid",
+          "fr": "le sens de l'accueil"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik help graag mensen en ik lees zelf veel.",
+          "fr": "J'aime aider les gens et je lis moi-même beaucoup."
+        },
+        {
+          "nl": "Een bibliotheek is een plek voor iedereen.",
+          "fr": "Une bibliothèque est un lieu pour tout le monde."
+        },
+        {
+          "nl": "Ik kan geduldig uitleggen hoe iets werkt.",
+          "fr": "Je sais expliquer patiemment comment quelque chose fonctionne."
+        },
+        {
+          "nl": "Ik heb ervaring met klanten aan een balie.",
+          "fr": "J'ai de l'expérience avec des clients à un comptoir."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_bib": {
+      "label": "Bibliothèque — au comptoir",
+      "verbes": [
+        "helpen",
+        "uitleggen",
+        "opzoeken",
+        "vinden",
+        "betalen",
+        "terugbetalen",
+        "kwijtraken",
+        "vergeten",
+        "storen",
+        "tonen"
+      ],
+      "mots": [
+        {
+          "nl": "het lidmaatschap",
+          "fr": "l'inscription, l'abonnement"
+        },
+        {
+          "nl": "de lenerspas",
+          "fr": "la carte de lecteur"
+        },
+        {
+          "nl": "de uitleentermijn",
+          "fr": "la durée de prêt"
+        },
+        {
+          "nl": "de boete",
+          "fr": "l'amende"
+        },
+        {
+          "nl": "de herinnering",
+          "fr": "le rappel"
+        },
+        {
+          "nl": "de reservatie",
+          "fr": "la réservation"
+        },
+        {
+          "nl": "de zelfscan",
+          "fr": "la borne de prêt automatique"
+        },
+        {
+          "nl": "het wachtwoord",
+          "fr": "le mot de passe"
+        },
+        {
+          "nl": "de studiezaal",
+          "fr": "la salle d'étude"
+        },
+        {
+          "nl": "het exemplaar",
+          "fr": "l'exemplaire"
+        },
+        {
+          "nl": "de schenking",
+          "fr": "le don"
+        },
+        {
+          "nl": "de baliedienst",
+          "fr": "le service au comptoir"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Hebt u uw lenerspas bij u?",
+          "fr": "Avez-vous votre carte de lecteur ?"
+        },
+        {
+          "nl": "U mag de boeken drie weken houden.",
+          "fr": "Vous pouvez garder les livres trois semaines."
+        },
+        {
+          "nl": "Ik kijk even in het systeem.",
+          "fr": "Je regarde un instant dans le système."
+        },
+        {
+          "nl": "Het boek is uitgeleend. Zal ik het reserveren?",
+          "fr": "Le livre est prêté. Je le réserve pour vous ?"
+        },
+        {
+          "nl": "Dit is een stille zaal.",
+          "fr": "C'est une salle silencieuse."
+        },
+        {
+          "nl": "Ik doe het samen met u, stap voor stap.",
+          "fr": "Je le fais avec vous, étape par étape."
+        }
+      ],
+      "_source": "redige_claude"
     }
   },
   "scenarios": {
@@ -865,7 +1041,8 @@
     "rp:interview_hr_final": ["entretien_base", "dom_rh"],
     "bank:business_analyst_junior": ["entretien_base", "dom_ba"],
     "bank:consultant_junior": ["entretien_base", "dom_cj"],
-    "bank:projectmanager_junior": ["entretien_base", "dom_pj"]
+    "bank:projectmanager_junior": ["entretien_base", "dom_pj"],
+    "bank:bibliotheekmedewerker": ["entretien_base", "dom_bib"]
   },
   "situations": {
     "guichet_": ["sit_guichet"],
@@ -876,6 +1053,7 @@
     "invente_": ["sit_incidents"],
     "ba_": ["sit_ba"],
     "cj_": ["sit_cj"],
-    "pj_": ["sit_pj"]
+    "pj_": ["sit_pj"],
+    "bib_": ["sit_bib"]
   }
 }

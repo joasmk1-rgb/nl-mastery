@@ -823,6 +823,176 @@
         "het verslag"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "bib_inscription",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "balie",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Une personne arrivée récemment en Belgique veut s'inscrire à la bibliothèque ; elle parle encore peu le néerlandais et ne sait pas quels documents il faut.",
+      "amorce": "Goeiedag. Ik wil graag lid worden van de bibliotheek. Wat moet ik doen? Ik spreek nog niet zo goed Nederlands.",
+      "vocabulaire_cible": [
+        "het lidmaatschap",
+        "de identiteitskaart",
+        "de lenerspas",
+        "gratis"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_retard_amende",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "balie",
+      "type": "reclamation",
+      "niveau": "B1",
+      "contexte": "Un lecteur rapporte trois livres avec un mois de retard et conteste l'amende : il dit qu'il n'a jamais reçu de rappel.",
+      "amorce": "Wat? Vijf euro boete? Ik heb nooit een herinnering gekregen! Dat ga ik niet betalen.",
+      "vocabulaire_cible": [
+        "de boete",
+        "de herinnering",
+        "te laat",
+        "de uitleentermijn"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_recherche_livre",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "balie",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Une lectrice cherche un livre dont elle ne connaît ni le titre ni l'auteur : seulement l'histoire, vaguement.",
+      "amorce": "Ik zoek een boek, maar ik weet de titel niet meer. Het gaat over een vrouw die in een klein dorp aan zee een boekhandel opent. Weet u welk dat is?",
+      "vocabulaire_cible": [
+        "de catalogus",
+        "de schrijver",
+        "de titel",
+        "de reservatie"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_livre_perdu",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "telephone_client",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Une mère de famille appelle : son enfant a perdu un livre emprunté et elle demande ce qu'elle doit faire.",
+      "amorce": "Dag, mijn zoontje is een boek van de bibliotheek kwijt. We hebben overal gezocht. Wat moeten we nu doen?",
+      "vocabulaire_cible": [
+        "kwijtraken",
+        "vervangen",
+        "de kosten",
+        "het exemplaar"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_aide_numerique",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "balie",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un monsieur âgé n'arrive pas à utiliser la borne de prêt automatique ni à se connecter à son compte en ligne pour prolonger ses livres.",
+      "amorce": "Dat machientje daar, ik snap er niets van. En op de computer moet ik een wachtwoord hebben, zegt mijn kleindochter. Kunt u mij helpen?",
+      "vocabulaire_cible": [
+        "de zelfscan",
+        "het wachtwoord",
+        "verlengen",
+        "stap voor stap"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_bruit_salle",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "collegue_interne",
+      "type": "reclamation",
+      "niveau": "B1",
+      "contexte": "Une étudiante vient se plaindre : un groupe de jeunes fait du bruit dans la salle d'étude et elle ne peut pas travailler.",
+      "amorce": "Sorry, maar in de studiezaal zitten jongeren die de hele tijd luid praten en muziek luisteren. Ik heb morgen examen. Kunt u iets doen?",
+      "vocabulaire_cible": [
+        "de studiezaal",
+        "stil",
+        "de regel",
+        "vriendelijk vragen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_visite_classe",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "telephone_client",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Un instituteur appelle pour organiser la visite de sa classe de 22 élèves de dix ans le mois prochain.",
+      "amorce": "Goeiemiddag, ik ben leerkracht van het vierde leerjaar. Ik zou graag met mijn klas op bezoek komen in de bibliotheek. Kan dat?",
+      "vocabulaire_cible": [
+        "het klasbezoek",
+        "de datum",
+        "de rondleiding",
+        "de leeftijd"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_conseil_lecture",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "balie",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Un adolescent qui « n'aime pas lire » doit lire un livre pour l'école ; sa mère te demande conseil devant lui.",
+      "amorce": "Hij moet een boek lezen voor school, maar hij leest nooit. Hebt u iets dat hij wél leuk zou vinden?",
+      "vocabulaire_cible": [
+        "aanraden",
+        "de strip",
+        "spannend",
+        "de jeugdafdeling"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_don_livres",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "balie",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Une dame arrive avec trois grandes caisses de vieux livres et veut absolument les donner à la bibliothèque.",
+      "amorce": "Ik heb hier boeken van mijn moeder, ze zijn nog in goede staat. Jullie kunnen ze toch gebruiken? Ik zet ze hier gewoon neer.",
+      "vocabulaire_cible": [
+        "de schenking",
+        "de collectie",
+        "de boekenruilkast",
+        "helaas"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "bib_collegue_planning",
+      "metier": "bibliotheque",
+      "poste": "bibliotheekmedewerker",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Une collègue te demande de reprendre son service au comptoir samedi matin, alors que tu avais prévu de préparer l'heure du conte.",
+      "amorce": "Zeg, zou jij zaterdagvoormiddag mijn baliedienst kunnen overnemen? Ik heb een familiefeest.",
+      "vocabulaire_cible": [
+        "de baliedienst",
+        "overnemen",
+        "het voorleesuurtje",
+        "ruilen"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -939,6 +1109,22 @@
         "pj_budget_depasse",
         "pj_conflit_equipe",
         "pj_statut_comite"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_bib_courte",
+      "metier": "bibliotheque",
+      "label": "Journée type au comptoir de la bibliothèque (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "bib_inscription",
+        "bib_recherche_livre",
+        "bib_aide_numerique",
+        "bib_retard_amende",
+        "bib_bruit_salle",
+        "bib_collegue_planning"
       ],
       "_source": "redige_claude"
     }
