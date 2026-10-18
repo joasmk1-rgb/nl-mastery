@@ -993,6 +993,414 @@
         "ruilen"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "da_demande_floue",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "chat",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Le responsable commercial t'écrit qu'il veut « un rapport sur les ventes » pour demain, sans dire lequel.",
+      "amorce": "Hoi, kun je tegen morgen een rapport maken over de verkoop? Het is voor de directie.",
+      "vocabulaire_cible": [
+        "het rapport",
+        "de periode",
+        "de regio",
+        "het doel"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_chiffres_differents",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "reunion",
+      "type": "reclamation",
+      "niveau": "B1",
+      "contexte": "En réunion, la responsable financière dit que ton tableau de bord ne donne pas le même chiffre d'affaires que son fichier Excel.",
+      "amorce": "Jouw dashboard zegt 2,3 miljoen omzet, maar in mijn Excel staat 2,1 miljoen. Welk cijfer klopt nu?",
+      "vocabulaire_cible": [
+        "het verschil",
+        "de definitie",
+        "de bron",
+        "nakijken"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_donnees_sales",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "En préparant une analyse, tu découvres des doublons et des dates vides dans les données clients ; tu en parles au collègue qui gère la base.",
+      "amorce": "Je wilde me iets vragen over de klantendata? Ik heb maar vijf minuten, hoor.",
+      "vocabulaire_cible": [
+        "het dubbel",
+        "de lege waarde",
+        "de kwaliteit",
+        "opkuisen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_presenter_insight",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu présentes à l'équipe marketing ce que tu as trouvé : les clients qui achètent en ligne reviennent moins souvent. Un manager te demande ce qu'il faut en faire.",
+      "amorce": "Interessant. Maar wat moeten wij daar nu concreet mee doen?",
+      "vocabulaire_cible": [
+        "de trend",
+        "de oorzaak",
+        "de aanbeveling",
+        "testen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_urgence_direction",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "telephone_client",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Le directeur t'appelle : il a besoin d'un chiffre dans l'heure pour une réunion avec un client, alors que tu es sur une autre analyse.",
+      "amorce": "Dag, met de directeur. Ik heb binnen een uur een vergadering met een grote klant. Hoeveel hebben ze vorig jaar bij ons gekocht?",
+      "vocabulaire_cible": [
+        "dringend",
+        "binnen het uur",
+        "de prioriteit",
+        "ongeveer"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_relecture_senior",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Une analyste senior relit ta requête SQL et te fait remarquer que tu as oublié de filtrer les commandes annulées.",
+      "amorce": "Ik heb je query bekeken. Ziet er goed uit, maar je telt de geannuleerde bestellingen mee, denk ik. Zie je het?",
+      "vocabulaire_cible": [
+        "de query",
+        "de filter",
+        "geannuleerd",
+        "aanpassen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_vie_privee",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "email",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Un collègue du marketing te demande par e-mail la liste complète des clients avec noms, adresses et numéros de téléphone pour une campagne.",
+      "amorce": "Hoi, kun je me snel een Excel sturen met alle klanten: naam, adres, telefoonnummer? Het is voor een actie volgende week.",
+      "vocabulaire_cible": [
+        "de persoonsgegevens",
+        "de privacy",
+        "de GDPR",
+        "de toestemming"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "da_standup",
+      "metier": "data_analyst",
+      "poste": "junior data analist",
+      "canal": "reunion",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Réunion d'équipe du lundi : ta responsable te demande où en sont tes trois analyses et si tu as besoin d'aide.",
+      "amorce": "Goedemorgen. Hoe ver sta je met je analyses? En lukt het allemaal qua tijd?",
+      "vocabulaire_cible": [
+        "de analyse",
+        "klaar",
+        "de vertraging",
+        "hulp vragen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_rapport_manquant",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "C'est jeudi, le rapport mensuel des projets part demain à la direction, et deux chefs de projet n'ont pas encore rempli leur statut ; tu appelles l'un d'eux.",
+      "amorce": "Ja, hallo? Ah, het statusrapport... Dat ben ik helemaal vergeten. Is dat echt nodig deze maand?",
+      "vocabulaire_cible": [
+        "het statusrapport",
+        "de deadline",
+        "de directie",
+        "invullen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_planning_comite",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu dois organiser le prochain comité de pilotage ; un directeur répond qu'il n'est pas disponible à la date proposée.",
+      "amorce": "Dag, ik kan helaas niet op 14 maart. Kunnen we een andere datum zoeken? Ik wil er absoluut bij zijn.",
+      "vocabulaire_cible": [
+        "het stuurcomité",
+        "de datum",
+        "de agenda",
+        "beschikbaar"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_donnees_incoherentes",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "En consolidant les rapports, tu vois qu'un projet est « vert » alors que sa date de fin a glissé de deux mois ; tu en parles au chef de projet.",
+      "amorce": "Je had een vraag over mijn project? Ik dacht dat alles in orde was.",
+      "vocabulaire_cible": [
+        "de status",
+        "groen",
+        "de einddatum",
+        "verschuiven"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_outil_nouveau",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu présentes aux chefs de projet le nouvel outil de suivi des projets ; l'un d'eux trouve que c'est « encore de l'administration en plus ».",
+      "amorce": "Weer een nieuwe tool? We hebben al genoeg administratie. Wat brengt dat ons eigenlijk op?",
+      "vocabulaire_cible": [
+        "de tool",
+        "het voordeel",
+        "de tijdwinst",
+        "de opleiding"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_budget_suivi",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "En faisant le suivi financier, tu remarques qu'un projet a déjà dépensé 80 % de son budget à mi-parcours ; tu préviens ta responsable PMO.",
+      "amorce": "Je zei dat je iets vreemds gezien had in de cijfers?",
+      "vocabulaire_cible": [
+        "het budget",
+        "uitgeven",
+        "halfweg",
+        "het risico"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_compte_rendu_comite",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Après le comité de pilotage, le sponsor te demande d'envoyer le compte rendu avec les décisions et la liste des actions.",
+      "amorce": "Bedankt voor de organisatie vandaag. Kun je het verslag met de beslissingen en de acties tegen morgen rondsturen?",
+      "vocabulaire_cible": [
+        "het verslag",
+        "de beslissing",
+        "de actielijst",
+        "rondsturen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_demande_template",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "chat",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Une nouvelle cheffe de projet t'écrit : elle ne sait pas quels documents elle doit préparer pour lancer son projet.",
+      "amorce": "Hoi! Ik start volgende week met mijn eerste project hier. Welke documenten moet ik eigenlijk klaarmaken?",
+      "vocabulaire_cible": [
+        "het sjabloon",
+        "het projectplan",
+        "de risicolijst",
+        "de procedure"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "pmo_priorites_conflit",
+      "metier": "pmo",
+      "poste": "PMO-medewerker",
+      "canal": "reunion",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Deux chefs de projet veulent le même expert informatique la même semaine ; ta responsable te demande de préparer les éléments pour décider.",
+      "amorce": "Dus twee projecten willen dezelfde persoon in dezelfde week. Wat zijn de feiten? Wat stel je voor?",
+      "vocabulaire_cible": [
+        "de capaciteit",
+        "de prioriteit",
+        "de impact",
+        "voorstellen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_atelier_processus",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "reunion",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Premier atelier chez le client pour comprendre comment il traite ses commandes aujourd'hui, avant de paramétrer le nouveau logiciel (ERP).",
+      "amorce": "Goedemorgen. Bij ons werkt het een beetje speciaal, hoor. Elke klant heeft zijn eigen prijzen en sommige bestellingen komen nog per fax.",
+      "vocabulaire_cible": [
+        "de bestelling",
+        "de werkwijze",
+        "de uitzondering",
+        "het standaardproces"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_demande_specifique",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "reunion",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Le client veut que le logiciel reproduise exactement son vieux fichier Excel, ce qui demanderait un développement sur mesure coûteux.",
+      "amorce": "Kunnen jullie het scherm niet gewoon zo maken als ons oude Excel-bestand? Daar zijn mijn mensen aan gewend.",
+      "vocabulaire_cible": [
+        "de standaard",
+        "het maatwerk",
+        "de kost",
+        "de gewoonte"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_formation_utilisateurs",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Tu donnes une formation au nouveau logiciel à des employés de l'entrepôt ; un employé expérimenté dit que l'ancien système était beaucoup mieux.",
+      "amorce": "Ik werk hier al twintig jaar met het oude systeem. Waarom moet alles nu veranderen? Dit is veel trager.",
+      "vocabulaire_cible": [
+        "de opleiding",
+        "de gebruiker",
+        "het voordeel",
+        "wennen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_bug_go_live",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "telephone_client",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Le jour du démarrage du nouveau logiciel, la responsable comptable appelle : les factures ne s'impriment pas et des camions attendent.",
+      "amorce": "Dag, het is hier chaos! Sinds vanochtend kunnen we geen facturen meer afdrukken en de chauffeurs staan te wachten.",
+      "vocabulaire_cible": [
+        "de livegang",
+        "de fout",
+        "de tijdelijke oplossing",
+        "het supportteam"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_test_scenarios",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu dois demander aux utilisateurs clés du client de tester le logiciel avant la mise en production ; l'un d'eux répond qu'il n'a pas le temps.",
+      "amorce": "Dag, ik heb echt geen tijd om te testen deze week. Kunnen jullie dat niet zelf doen?",
+      "vocabulaire_cible": [
+        "de test",
+        "de sleutelgebruiker",
+        "het testscenario",
+        "goedkeuren"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_migration_donnees",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "En préparant la reprise des données de l'ancien système, tu vois que des articles n'ont pas de prix ; tu en parles au consultant technique de ton équipe.",
+      "amorce": "Je zei dat er een probleem is met de data voor de migratie? Wat zie je precies?",
+      "vocabulaire_cible": [
+        "de migratie",
+        "het artikel",
+        "de prijs",
+        "ontbreken"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_parametrage_explication",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "chat",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un utilisateur du client t'écrit qu'il ne comprend pas pourquoi il doit maintenant valider chaque commande au-dessus de 5 000 euros.",
+      "amorce": "Waarom moet ik nu elke bestelling boven de 5.000 euro laten goedkeuren? Vroeger moest dat niet en nu duurt alles langer.",
+      "vocabulaire_cible": [
+        "de goedkeuring",
+        "de regel",
+        "de controle",
+        "instellen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "cf_point_chef_projet",
+      "metier": "consultant_fonctionnel",
+      "poste": "junior functioneel consultant",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Ta cheffe de projet te demande où en est le paramétrage du module achats et si la date de démarrage tient toujours.",
+      "amorce": "Hoe staat het met de inkoopmodule? Halen we de startdatum nog?",
+      "vocabulaire_cible": [
+        "de module",
+        "de instelling",
+        "de startdatum",
+        "het risico"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -1125,6 +1533,54 @@
         "bib_retard_amende",
         "bib_bruit_salle",
         "bib_collegue_planning"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_da_courte",
+      "metier": "data_analyst",
+      "label": "Journée type de data analyst junior (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "da_standup",
+        "da_demande_floue",
+        "da_donnees_sales",
+        "da_urgence_direction",
+        "da_chiffres_differents",
+        "da_relecture_senior"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_pmo_courte",
+      "metier": "pmo",
+      "label": "Journée type au PMO, avant le comité (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "pmo_demande_template",
+        "pmo_rapport_manquant",
+        "pmo_donnees_incoherentes",
+        "pmo_budget_suivi",
+        "pmo_planning_comite",
+        "pmo_compte_rendu_comite"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_cf_courte",
+      "metier": "consultant_fonctionnel",
+      "label": "Journée type de consultant fonctionnel chez le client (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "cf_point_chef_projet",
+        "cf_atelier_processus",
+        "cf_migration_donnees",
+        "cf_demande_specifique",
+        "cf_bug_go_live",
+        "cf_parametrage_explication"
       ],
       "_source": "redige_claude"
     }

@@ -1,0 +1,41 @@
+id;fr;nl;freq
+THEME_ERP_0;le consultant fonctionnel;de functioneel consultant;5.20
+THEME_ERP_1;le logiciel;de software;5.15
+THEME_ERP_2;le progiciel de gestion (ERP);het ERP-systeem;5.10
+THEME_ERP_3;le module;de module;5.05
+THEME_ERP_4;la mise en place;de implementatie;5.00
+THEME_ERP_5;le paramétrage;de instelling;4.95
+THEME_ERP_6;paramétrer;instellen;4.90
+THEME_ERP_7;le processus standard;het standaardproces;4.85
+THEME_ERP_8;le développement sur mesure;het maatwerk;4.80
+THEME_ERP_9;l'utilisateur;de gebruiker;4.75
+THEME_ERP_10;l'utilisateur clé;de sleutelgebruiker;4.70
+THEME_ERP_11;la formation;de opleiding;4.65
+THEME_ERP_12;le manuel;de handleiding;4.60
+THEME_ERP_13;le démarrage;de livegang;4.55
+THEME_ERP_14;la reprise des données;de migratie;4.50
+THEME_ERP_15;l'ancien système;het oude systeem;4.45
+THEME_ERP_16;le test;de test;4.40
+THEME_ERP_17;le scénario de test;het testscenario;4.35
+THEME_ERP_18;la validation;de goedkeuring;4.30
+THEME_ERP_19;le message d'erreur;de foutmelding;4.25
+THEME_ERP_20;la solution provisoire;de tijdelijke oplossing;4.20
+THEME_ERP_21;l'équipe de support;het supportteam;4.15
+THEME_ERP_22;le ticket;het ticket;4.10
+THEME_ERP_23;la mise à jour;de update;4.05
+THEME_ERP_24;la commande;de bestelling;4.00
+THEME_ERP_25;la facture;de factuur;3.95
+THEME_ERP_26;le devis;de offerte;3.90
+THEME_ERP_27;les achats;de aankoop;3.85
+THEME_ERP_28;les ventes;de verkoop;3.80
+THEME_ERP_29;le stock;de voorraad;3.75
+THEME_ERP_30;la comptabilité;de boekhouding;3.70
+THEME_ERP_31;l'article (produit);het artikel;3.65
+THEME_ERP_32;la fiche client;de klantenfiche;3.60
+THEME_ERP_33;l'écran;het scherm;3.55
+THEME_ERP_34;le champ (à remplir);het veld;3.50
+THEME_ERP_35;l'exception;de uitzondering;3.45
+THEME_ERP_36;l'habitude;de gewoonte;3.40
+THEME_ERP_37;le chef de projet;de projectleider;3.35
+THEME_ERP_38;la date de démarrage;de startdatum;3.30
+THEME_ERP_39;la PME;de kmo;3.25

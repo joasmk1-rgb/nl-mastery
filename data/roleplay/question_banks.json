@@ -500,6 +500,206 @@
         "Als ik het niet weet, vraag ik het aan een collega.",
         "Kunt u de vraag herhalen, alstublieft?"
       ]
+    },
+    {
+      "id": "data_analyst_junior",
+      "metier": "data_analyst",
+      "label": "Entretien — data analyst junior (premier poste)",
+      "poste": "Junior Data Analyst",
+      "contexte": "Entretien pour un premier poste de data analyst chez Zonvella, une entreprise de distribution. Le candidat sort d'études ou se reconvertit. Le recruteur teste la logique, les bases (Excel, SQL, un outil de visualisation), le soin apporté aux données et la capacité à expliquer un résultat à quelqu'un qui n'aime pas les chiffres.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemiddag, welkom bij Zonvella. Kun je jezelf even voorstellen?",
+      "questions": {
+        "accroche": [
+          "Hoe ben je in data terechtgekomen?"
+        ],
+        "verif_cv": [
+          "Op je cv staat een project met [tool]. Wat heb je precies geanalyseerd?",
+          "Welke tools ken je: Excel, SQL, Power BI, Python?"
+        ],
+        "clarification_poste": [
+          "Wat doet een data-analist volgens jou, op een gewone dag?"
+        ],
+        "technique": [
+          "Wat doe je als je in een bestand dubbele of lege gegevens vindt?",
+          "Leg eens uit wat een gemiddelde en een mediaan is, en wanneer je liever de mediaan gebruikt.",
+          "Hoe zou je in SQL de tien klanten met de hoogste omzet opzoeken?",
+          "Twee rapporten geven een ander cijfer. Hoe zoek je uit welk cijfer klopt?",
+          "Hoe leg je een resultaat uit aan iemand die niet van cijfers houdt?"
+        ],
+        "motivation": [
+          "Waarom wil je data-analist worden?",
+          "Wat spreekt je aan in onze sector?"
+        ],
+        "vision_carriere": [
+          "Wat wil je de komende twee jaar nog leren?"
+        ],
+        "objections": [
+          "Je hebt nog geen professionele ervaring met grote databanken. Hoe ga je dat aanpakken?",
+          "Je zult veel met collega's praten die geen technische kennis hebben, in het Nederlands. Hoe zie je dat?"
+        ],
+        "perso": [
+          "Vertel eens over een keer dat je een fout in je eigen werk ontdekte. Wat deed je?",
+          "Werk je liever alleen of in een team?"
+        ],
+        "dispo": [
+          "Wanneer kun je beginnen?"
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "de gegevens",
+        "de databank",
+        "de query",
+        "het dashboard",
+        "de KPI",
+        "de grafiek",
+        "het gemiddelde",
+        "de datakwaliteit"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Eerst zou ik de data controleren.",
+        "Als ik het goed begrijp, bedoelt u ...?",
+        "Daar heb ik nog geen ervaring mee, maar ik zou het zo aanpakken: ...",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
+    },
+    {
+      "id": "pmo_junior",
+      "metier": "pmo",
+      "label": "Entretien — PMO / assistant(e) de pilotage de projets",
+      "poste": "PMO-medewerker (junior)",
+      "contexte": "Entretien pour un poste de PMO junior chez Zonvella : soutien aux chefs de projet (rapports d'avancement, suivi du planning et du budget, organisation des comités, modèles de documents). Le recruteur cherche la rigueur, l'aisance avec Excel et la capacité à relancer les gens avec tact.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemorgen, welkom. Fijn dat je er bent. Kun je jezelf kort voorstellen?",
+      "questions": {
+        "accroche": [
+          "Weet je wat een PMO doet? Hoe heb je deze functie gevonden?"
+        ],
+        "verif_cv": [
+          "Ik zie dat je al administratief werk hebt gedaan bij [bedrijf]. Wat deed je daar precies?",
+          "Hoe goed ken je Excel? Draaitabellen, formules?"
+        ],
+        "clarification_poste": [
+          "Wat is volgens jou het verschil tussen een projectleider en iemand van het PMO?"
+        ],
+        "technique": [
+          "Een projectleider levert zijn statusrapport niet op tijd. Wat doe je?",
+          "Je ziet dat een project groen staat, terwijl het twee maanden vertraging heeft. Hoe reageer je?",
+          "Hoe zou je een vergadering van het stuurcomité voorbereiden?",
+          "Hoe zou je tien projecten tegelijk overzichtelijk opvolgen?"
+        ],
+        "motivation": [
+          "Waarom wil je in een PMO werken?",
+          "Wat trekt je aan in ons bedrijf?"
+        ],
+        "vision_carriere": [
+          "Zie je jezelf later als projectleider?"
+        ],
+        "objections": [
+          "Het werk is soms repetitief, elke maand dezelfde rapporten. Hoe ga je daarmee om?",
+          "Je moet soms ervaren collega's aanspreken op hun afspraken. Durf je dat?"
+        ],
+        "perso": [
+          "Hoe organiseer je je werk als alles tegelijk komt?",
+          "Vertel eens over een situatie waarin je iemand moest overtuigen."
+        ],
+        "dispo": [
+          "Wanneer zou je kunnen beginnen?"
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "het statusrapport",
+        "het stuurcomité",
+        "de projectleider",
+        "het sjabloon",
+        "het budget",
+        "de risicolijst",
+        "de planning",
+        "het overzicht"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Eerst zou ik ...",
+        "Ik zou het vriendelijk maar duidelijk vragen.",
+        "Als ik het niet zeker weet, vraag ik het aan mijn verantwoordelijke.",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
+    },
+    {
+      "id": "consultant_fonctionnel_junior",
+      "metier": "consultant_fonctionnel",
+      "label": "Entretien — consultant fonctionnel junior (logiciel / ERP)",
+      "poste": "Junior Functioneel Consultant (ERP)",
+      "contexte": "Entretien pour un poste de consultant fonctionnel junior chez Zonvella, une société qui installe un logiciel de gestion (ERP) chez des PME : comprendre les processus du client, paramétrer, tester, former les utilisateurs. Le candidat sort d'études ou se reconvertit. Le recruteur cherche la compréhension des processus d'entreprise, la pédagogie et le goût du contact client.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemiddag, welkom bij Zonvella. Fijn dat je er bent. Kun je jezelf even voorstellen?",
+      "questions": {
+        "accroche": [
+          "Weet je wat een functioneel consultant doet?"
+        ],
+        "verif_cv": [
+          "Op je cv zie ik [opleiding]. Heb je daar iets geleerd over boekhouding, aankoop of logistiek?",
+          "Heb je al met een ERP-systeem of een andere bedrijfssoftware gewerkt?"
+        ],
+        "clarification_poste": [
+          "Wat is volgens jou het verschil tussen een functioneel en een technisch consultant?"
+        ],
+        "technique": [
+          "Een klant wil dat het systeem precies werkt zoals zijn oude Excel. Wat zeg je?",
+          "Hoe zou je een gebruiker opleiden die weinig met computers werkt?",
+          "Leg eens in eenvoudige woorden uit hoe een bestelling verloopt, van offerte tot factuur.",
+          "Op de dag van de livegang werkt er iets niet. Hoe reageer je?"
+        ],
+        "motivation": [
+          "Waarom wil je functioneel consultant worden?",
+          "Wat spreekt je aan in ons bedrijf?"
+        ],
+        "vision_carriere": [
+          "In welke module of welk domein zou je je willen specialiseren?"
+        ],
+        "objections": [
+          "Je zult veel bij klanten zijn, soms ver van huis. Is dat een probleem?",
+          "Je hebt nog geen ervaring met onze software. Hoe ga je die snel leren?"
+        ],
+        "perso": [
+          "Hoe ga je om met een klant die niet tevreden is?",
+          "Vertel eens over een moment waarop je iets moeilijks aan iemand moest uitleggen."
+        ],
+        "dispo": [
+          "Wanneer kun je beginnen?",
+          "Heb je een rijbewijs?"
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "het ERP-systeem",
+        "de module",
+        "de implementatie",
+        "de instelling",
+        "het standaardproces",
+        "het maatwerk",
+        "de sleutelgebruiker",
+        "de livegang"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Eerst zou ik het proces van de klant proberen te begrijpen.",
+        "Ik zou het eenvoudig uitleggen, met een voorbeeld.",
+        "Daar heb ik nog geen ervaring mee, maar ik leer snel.",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
     }
   ]
 }

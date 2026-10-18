@@ -1022,6 +1022,534 @@
         }
       ],
       "_source": "redige_claude"
+    },
+    "dom_da": {
+      "label": "Data analyst — métier",
+      "verbes": [
+        "analyseren",
+        "verzamelen",
+        "filteren",
+        "meten",
+        "tellen",
+        "vergelijken",
+        "rapporteren",
+        "controleren",
+        "presenteren",
+        "verbeteren"
+      ],
+      "mots": [
+        {
+          "nl": "de data-analist",
+          "fr": "l'analyste de données"
+        },
+        {
+          "nl": "de gegevens",
+          "fr": "les données"
+        },
+        {
+          "nl": "de databank",
+          "fr": "la base de données"
+        },
+        {
+          "nl": "de query",
+          "fr": "la requête"
+        },
+        {
+          "nl": "het dashboard",
+          "fr": "le tableau de bord"
+        },
+        {
+          "nl": "de KPI",
+          "fr": "l'indicateur clé"
+        },
+        {
+          "nl": "de grafiek",
+          "fr": "le graphique"
+        },
+        {
+          "nl": "de trend",
+          "fr": "la tendance"
+        },
+        {
+          "nl": "het gemiddelde",
+          "fr": "la moyenne"
+        },
+        {
+          "nl": "het percentage",
+          "fr": "le pourcentage"
+        },
+        {
+          "nl": "de datakwaliteit",
+          "fr": "la qualité des données"
+        },
+        {
+          "nl": "de stage",
+          "fr": "le stage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik werk graag met cijfers en ik zoek wat erachter zit.",
+          "fr": "J'aime travailler avec des chiffres et chercher ce qu'il y a derrière."
+        },
+        {
+          "nl": "Ik heb ervaring met Excel, SQL en een beetje Power BI.",
+          "fr": "J'ai de l'expérience avec Excel, SQL et un peu de Power BI."
+        },
+        {
+          "nl": "Ik controleer altijd eerst de kwaliteit van de data.",
+          "fr": "Je vérifie toujours d'abord la qualité des données."
+        },
+        {
+          "nl": "Ik probeer mijn resultaten eenvoudig uit te leggen.",
+          "fr": "J'essaie d'expliquer mes résultats simplement."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_da": {
+      "label": "Data analyst — au quotidien",
+      "verbes": [
+        "vragen",
+        "uitleggen",
+        "aanpassen",
+        "opvolgen",
+        "invoeren",
+        "exporteren",
+        "bespreken",
+        "informeren",
+        "samenvatten",
+        "voorstellen"
+      ],
+      "mots": [
+        {
+          "nl": "het rapport",
+          "fr": "le rapport"
+        },
+        {
+          "nl": "de periode",
+          "fr": "la période"
+        },
+        {
+          "nl": "het verschil",
+          "fr": "la différence, l'écart"
+        },
+        {
+          "nl": "de definitie",
+          "fr": "la définition"
+        },
+        {
+          "nl": "de bron",
+          "fr": "la source"
+        },
+        {
+          "nl": "de dubbel",
+          "fr": "le doublon"
+        },
+        {
+          "nl": "de lege waarde",
+          "fr": "la valeur vide"
+        },
+        {
+          "nl": "de filter",
+          "fr": "le filtre"
+        },
+        {
+          "nl": "geannuleerd",
+          "fr": "annulé"
+        },
+        {
+          "nl": "de persoonsgegevens",
+          "fr": "les données personnelles"
+        },
+        {
+          "nl": "de toestemming",
+          "fr": "le consentement"
+        },
+        {
+          "nl": "de btw",
+          "fr": "la TVA"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Over welke periode gaat het?",
+          "fr": "Sur quelle période ?"
+        },
+        {
+          "nl": "Laten we kijken waar het verschil vandaan komt.",
+          "fr": "Regardons d'où vient l'écart."
+        },
+        {
+          "nl": "Is dat cijfer met of zonder btw?",
+          "fr": "Ce chiffre est avec ou sans TVA ?"
+        },
+        {
+          "nl": "We weten nog niet waarom.",
+          "fr": "Nous ne savons pas encore pourquoi."
+        },
+        {
+          "nl": "U krijgt het binnen een halfuur.",
+          "fr": "Vous l'aurez dans une demi-heure."
+        },
+        {
+          "nl": "Goed gezien, dank je!",
+          "fr": "Bien vu, merci !"
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "dom_pmo": {
+      "label": "PMO — métier",
+      "verbes": [
+        "opvolgen",
+        "rapporteren",
+        "plannen",
+        "organiseren",
+        "controleren",
+        "verzamelen",
+        "vergelijken",
+        "ondersteunen",
+        "informeren",
+        "voorbereiden"
+      ],
+      "mots": [
+        {
+          "nl": "het PMO",
+          "fr": "le PMO (bureau de pilotage des projets)"
+        },
+        {
+          "nl": "de PMO-medewerker",
+          "fr": "l'assistant(e) de pilotage de projets"
+        },
+        {
+          "nl": "het projectportfolio",
+          "fr": "le portefeuille de projets"
+        },
+        {
+          "nl": "het statusrapport",
+          "fr": "le rapport d'avancement"
+        },
+        {
+          "nl": "het stuurcomité",
+          "fr": "le comité de pilotage"
+        },
+        {
+          "nl": "de projectleider",
+          "fr": "le chef de projet"
+        },
+        {
+          "nl": "het sjabloon",
+          "fr": "le modèle (template)"
+        },
+        {
+          "nl": "de procedure",
+          "fr": "la procédure"
+        },
+        {
+          "nl": "het budget",
+          "fr": "le budget"
+        },
+        {
+          "nl": "de risicolijst",
+          "fr": "le registre des risques"
+        },
+        {
+          "nl": "het overzicht",
+          "fr": "la vue d'ensemble"
+        },
+        {
+          "nl": "de stage",
+          "fr": "le stage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik ben iemand die graag overzicht houdt.",
+          "fr": "Je suis quelqu'un qui aime garder une vue d'ensemble."
+        },
+        {
+          "nl": "Ik werk nauwkeurig en ik volg deadlines goed op.",
+          "fr": "Je travaille avec précision et je suis bien les échéances."
+        },
+        {
+          "nl": "Ik ondersteun de projectleiders met planning en rapportering.",
+          "fr": "J'aide les chefs de projet avec le planning et le reporting."
+        },
+        {
+          "nl": "Ik werk vlot met Excel en met planningstools.",
+          "fr": "Je travaille facilement avec Excel et des outils de planification."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_pmo": {
+      "label": "PMO — au quotidien",
+      "verbes": [
+        "vragen",
+        "uitleggen",
+        "invoeren",
+        "aanpassen",
+        "afspreken",
+        "bespreken",
+        "samenvatten",
+        "noteren",
+        "melden",
+        "voorstellen"
+      ],
+      "mots": [
+        {
+          "nl": "de status",
+          "fr": "le statut"
+        },
+        {
+          "nl": "groen, oranje, rood",
+          "fr": "vert, orange, rouge (code couleur)"
+        },
+        {
+          "nl": "de einddatum",
+          "fr": "la date de fin"
+        },
+        {
+          "nl": "de uitnodiging",
+          "fr": "l'invitation"
+        },
+        {
+          "nl": "de agenda",
+          "fr": "l'ordre du jour / l'agenda"
+        },
+        {
+          "nl": "het verslag",
+          "fr": "le compte rendu"
+        },
+        {
+          "nl": "de actielijst",
+          "fr": "la liste d'actions"
+        },
+        {
+          "nl": "de capaciteit",
+          "fr": "la capacité (personnes disponibles)"
+        },
+        {
+          "nl": "de gedeelde schijf",
+          "fr": "le dossier partagé"
+        },
+        {
+          "nl": "de factuur",
+          "fr": "la facture"
+        },
+        {
+          "nl": "halfweg",
+          "fr": "à mi-parcours"
+        },
+        {
+          "nl": "de opleiding",
+          "fr": "la formation"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Het rapport gaat morgen naar de directie.",
+          "fr": "Le rapport part demain à la direction."
+        },
+        {
+          "nl": "Zullen we het nu samen invullen?",
+          "fr": "On le remplit ensemble maintenant ?"
+        },
+        {
+          "nl": "Zou 18 maart passen?",
+          "fr": "Le 18 mars vous conviendrait ?"
+        },
+        {
+          "nl": "Volgens onze regels wordt het project oranje.",
+          "fr": "Selon nos règles, le projet passe en orange."
+        },
+        {
+          "nl": "In bijlage vindt u het verslag.",
+          "fr": "Vous trouverez le compte rendu en pièce jointe."
+        },
+        {
+          "nl": "Uiteindelijk beslist het stuurcomité.",
+          "fr": "Au final, c'est le comité de pilotage qui décide."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "dom_cf": {
+      "label": "Consultant fonctionnel — métier",
+      "verbes": [
+        "instellen",
+        "analyseren",
+        "begeleiden",
+        "ondersteunen",
+        "uitleggen",
+        "aanpassen",
+        "invoeren",
+        "controleren",
+        "adviseren",
+        "opstarten"
+      ],
+      "mots": [
+        {
+          "nl": "de functioneel consultant",
+          "fr": "le consultant fonctionnel"
+        },
+        {
+          "nl": "het ERP-systeem",
+          "fr": "le progiciel de gestion (ERP)"
+        },
+        {
+          "nl": "de software",
+          "fr": "le logiciel"
+        },
+        {
+          "nl": "de module",
+          "fr": "le module"
+        },
+        {
+          "nl": "de implementatie",
+          "fr": "la mise en place"
+        },
+        {
+          "nl": "de instelling",
+          "fr": "le paramétrage"
+        },
+        {
+          "nl": "het standaardproces",
+          "fr": "le processus standard"
+        },
+        {
+          "nl": "het maatwerk",
+          "fr": "le développement sur mesure"
+        },
+        {
+          "nl": "de sleutelgebruiker",
+          "fr": "l'utilisateur clé"
+        },
+        {
+          "nl": "de livegang",
+          "fr": "le démarrage (mise en production)"
+        },
+        {
+          "nl": "de migratie",
+          "fr": "la reprise des données"
+        },
+        {
+          "nl": "de stage",
+          "fr": "le stage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik ben de brug tussen de klant en de techniek.",
+          "fr": "Je suis le pont entre le client et la technique."
+        },
+        {
+          "nl": "Ik probeer eerst het proces van de klant te begrijpen.",
+          "fr": "J'essaie d'abord de comprendre le processus du client."
+        },
+        {
+          "nl": "Ik leg graag uit hoe iets werkt.",
+          "fr": "J'aime expliquer comment quelque chose fonctionne."
+        },
+        {
+          "nl": "Tijdens mijn stage heb ik gebruikers opgeleid.",
+          "fr": "Pendant mon stage, j'ai formé des utilisateurs."
+        }
+      ],
+      "_source": "redige_claude"
+    },
+    "sit_cf": {
+      "label": "Consultant fonctionnel — chez le client",
+      "verbes": [
+        "vragen",
+        "tonen",
+        "leren",
+        "oplossen",
+        "melden",
+        "afspreken",
+        "goedkeuren",
+        "bespreken",
+        "noteren",
+        "informeren"
+      ],
+      "mots": [
+        {
+          "nl": "de bestelling",
+          "fr": "la commande"
+        },
+        {
+          "nl": "de factuur",
+          "fr": "la facture"
+        },
+        {
+          "nl": "de uitzondering",
+          "fr": "l'exception"
+        },
+        {
+          "nl": "de gewoonte",
+          "fr": "l'habitude"
+        },
+        {
+          "nl": "de opleiding",
+          "fr": "la formation"
+        },
+        {
+          "nl": "de foutmelding",
+          "fr": "le message d'erreur"
+        },
+        {
+          "nl": "de tijdelijke oplossing",
+          "fr": "la solution provisoire"
+        },
+        {
+          "nl": "het supportteam",
+          "fr": "l'équipe de support"
+        },
+        {
+          "nl": "het testscenario",
+          "fr": "le scénario de test"
+        },
+        {
+          "nl": "het artikel",
+          "fr": "l'article (produit)"
+        },
+        {
+          "nl": "de goedkeuring",
+          "fr": "la validation, l'approbation"
+        },
+        {
+          "nl": "de startdatum",
+          "fr": "la date de démarrage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Kunt u me een bestelling volgen, van begin tot einde?",
+          "fr": "Pouvez-vous me faire suivre une commande, du début à la fin ?"
+        },
+        {
+          "nl": "Dat kan met de standaard, zonder maatwerk.",
+          "fr": "C'est possible avec le standard, sans sur-mesure."
+        },
+        {
+          "nl": "De eerste weken is het wennen.",
+          "fr": "Les premières semaines, il faut s'habituer."
+        },
+        {
+          "nl": "Ik bel u binnen het halfuur terug.",
+          "fr": "Je vous rappelle dans la demi-heure."
+        },
+        {
+          "nl": "Alleen u kent de echte situaties.",
+          "fr": "Il n'y a que vous qui connaissez les vraies situations."
+        },
+        {
+          "nl": "Die regel is gevraagd door uw directie.",
+          "fr": "Cette règle a été demandée par votre direction."
+        }
+      ],
+      "_source": "redige_claude"
     }
   },
   "scenarios": {
@@ -1042,7 +1570,10 @@
     "bank:business_analyst_junior": ["entretien_base", "dom_ba"],
     "bank:consultant_junior": ["entretien_base", "dom_cj"],
     "bank:projectmanager_junior": ["entretien_base", "dom_pj"],
-    "bank:bibliotheekmedewerker": ["entretien_base", "dom_bib"]
+    "bank:bibliotheekmedewerker": ["entretien_base", "dom_bib"],
+    "bank:data_analyst_junior": ["entretien_base", "dom_da"],
+    "bank:pmo_junior": ["entretien_base", "dom_pmo"],
+    "bank:consultant_fonctionnel_junior": ["entretien_base", "dom_cf"]
   },
   "situations": {
     "guichet_": ["sit_guichet"],
@@ -1054,6 +1585,9 @@
     "ba_": ["sit_ba"],
     "cj_": ["sit_cj"],
     "pj_": ["sit_pj"],
-    "bib_": ["sit_bib"]
+    "bib_": ["sit_bib"],
+    "da_": ["sit_da"],
+    "pmo_": ["sit_pmo"],
+    "cf_": ["sit_cf"]
   }
 }

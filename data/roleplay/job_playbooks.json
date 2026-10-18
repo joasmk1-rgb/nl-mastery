@@ -1183,6 +1183,598 @@
         "Dire oui et laisser tomber ta propre tâche.",
         "Changer le planning sans prévenir le responsable."
       ]
+    },
+    "da_demande_floue": {
+      "titre": "Une demande de rapport trop vague",
+      "etapes": [
+        {
+          "fr": "Accepter la demande et poser les questions qui manquent.",
+          "phrase": "Geen probleem. Over welke periode en welke regio gaat het?"
+        },
+        {
+          "fr": "Demander à quoi servira le rapport (quelle décision).",
+          "phrase": "Welke beslissing wil de directie ermee nemen?"
+        },
+        {
+          "fr": "Demander la forme attendue : un chiffre, un tableau, des graphiques.",
+          "phrase": "Wilt u een paar grafieken, of liever een tabel?"
+        },
+        {
+          "fr": "Confirmer ce que tu livreras et quand.",
+          "phrase": "Dan stuur ik u morgen om tien uur de verkoop per regio voor dit jaar."
+        }
+      ],
+      "a_eviter": [
+        "Faire un rapport énorme « au cas où ».",
+        "Commencer sans savoir à quelle question il répond."
+      ]
+    },
+    "da_chiffres_differents": {
+      "titre": "Deux chiffres différents",
+      "etapes": [
+        {
+          "fr": "Ne pas se défendre : reconnaître qu'il faut comprendre l'écart.",
+          "phrase": "Goede vraag. Laten we kijken waar het verschil vandaan komt."
+        },
+        {
+          "fr": "Vérifier la définition : TVA, retours, période, filiales.",
+          "phrase": "Is uw cijfer met of zonder btw? En zijn de retours eraf?"
+        },
+        {
+          "fr": "Vérifier la source et la date des données.",
+          "phrase": "Mijn dashboard gebruikt de gegevens van het ERP, bijgewerkt tot gisteren."
+        },
+        {
+          "fr": "Proposer de vérifier ensemble après la réunion et de corriger si besoin.",
+          "phrase": "Zullen we na de vergadering samen de twee bestanden vergelijken?"
+        }
+      ],
+      "a_eviter": [
+        "Affirmer que ton chiffre est le bon sans vérifier.",
+        "Changer le tableau de bord en urgence pendant la réunion."
+      ]
+    },
+    "da_donnees_sales": {
+      "titre": "Des données de mauvaise qualité",
+      "etapes": [
+        {
+          "fr": "Aller droit au but : ce que tu as trouvé, avec un exemple.",
+          "phrase": "Ik vind veel dubbele klanten, bijvoorbeeld dezelfde naam met twee nummers."
+        },
+        {
+          "fr": "Donner l'ampleur du problème.",
+          "phrase": "Het gaat om ongeveer vijf procent van de klanten, en bij drie procent ontbreekt de datum."
+        },
+        {
+          "fr": "Demander s'il connaît la cause.",
+          "phrase": "Weet jij waar dat vandaan komt?"
+        },
+        {
+          "fr": "Proposer une solution pour ton analyse et pour la suite.",
+          "phrase": "Voor mijn analyse haal ik de dubbels eruit. Kunnen we later bekijken hoe we het aan de bron oplossen?"
+        }
+      ],
+      "a_eviter": [
+        "Corriger les données sans le dire à personne.",
+        "Accuser l'équipe qui saisit les données."
+      ]
+    },
+    "da_presenter_insight": {
+      "titre": "Passer du chiffre à l'action",
+      "etapes": [
+        {
+          "fr": "Reformuler le constat simplement.",
+          "phrase": "Kort gezegd: online klanten komen minder vaak terug."
+        },
+        {
+          "fr": "Dire ce qu'on ne sait pas encore (causes possibles).",
+          "phrase": "We weten nog niet waarom. Misschien door de levertijd, of omdat ze maar één keer iets nodig hadden."
+        },
+        {
+          "fr": "Proposer une action simple ou un test.",
+          "phrase": "We kunnen een test doen: een korting voor een tweede bestelling, en meten wat er gebeurt."
+        },
+        {
+          "fr": "Proposer de suivre l'effet avec un indicateur.",
+          "phrase": "Ik volg het resultaat op in het dashboard en ik rapporteer binnen een maand."
+        }
+      ],
+      "a_eviter": [
+        "Présenter une corrélation comme une cause certaine.",
+        "Répondre « ce n'est pas mon rôle de décider » sans rien proposer."
+      ]
+    },
+    "da_urgence_direction": {
+      "titre": "Une demande urgente de la direction",
+      "etapes": [
+        {
+          "fr": "Accepter et préciser exactement ce qu'il faut.",
+          "phrase": "Begrepen. Wilt u het totaalbedrag van vorig jaar, met of zonder btw?"
+        },
+        {
+          "fr": "Donner un délai réaliste.",
+          "phrase": "U krijgt het binnen een halfuur."
+        },
+        {
+          "fr": "Prévenir la personne dont tu repousses le travail.",
+          "phrase": "Ik verschuif mijn andere analyse met een uur, ik verwittig mijn collega."
+        },
+        {
+          "fr": "Envoyer le chiffre avec une phrase d'explication et ses limites.",
+          "phrase": "Het bedrag is 480.000 euro zonder btw, op basis van de facturen. De retours zijn er al af."
+        }
+      ],
+      "a_eviter": [
+        "Donner un chiffre de tête au téléphone.",
+        "Envoyer un chiffre sans dire d'où il vient."
+      ]
+    },
+    "da_relecture_senior": {
+      "titre": "Une erreur relevée dans ta requête",
+      "etapes": [
+        {
+          "fr": "Remercier simplement.",
+          "phrase": "Goed gezien, dank je!"
+        },
+        {
+          "fr": "Vérifier et comprendre l'erreur.",
+          "phrase": "Inderdaad, ik moet een filter toevoegen op de status van de bestelling."
+        },
+        {
+          "fr": "Vérifier si l'erreur touche des résultats déjà envoyés.",
+          "phrase": "Ik kijk ook of ik dat cijfer al naar iemand gestuurd heb."
+        },
+        {
+          "fr": "Demander un conseil pour éviter que ça se reproduise.",
+          "phrase": "Heb je een tip om zulke fouten sneller te zien?"
+        }
+      ],
+      "a_eviter": [
+        "Te justifier longuement.",
+        "Corriger sans prévenir ceux qui ont reçu le mauvais chiffre."
+      ]
+    },
+    "da_vie_privee": {
+      "titre": "Une demande de données personnelles",
+      "etapes": [
+        {
+          "fr": "Répondre aimablement, sans envoyer tout de suite.",
+          "phrase": "Dag, ik help je graag, maar ik heb eerst een paar vragen."
+        },
+        {
+          "fr": "Demander à quoi serviront les données et si les clients ont donné leur accord.",
+          "phrase": "Waarvoor heb je de gegevens nodig, en hebben de klanten toestemming gegeven voor marketing?"
+        },
+        {
+          "fr": "Proposer de ne donner que le nécessaire.",
+          "phrase": "Misschien volstaat een lijst met alleen de klanten die toestemming gaven, zonder telefoonnummer?"
+        },
+        {
+          "fr": "En cas de doute, demander l'avis du responsable vie privée (DPO).",
+          "phrase": "Ik vraag het even na bij onze privacyverantwoordelijke."
+        }
+      ],
+      "a_eviter": [
+        "Envoyer un fichier complet de données personnelles par e-mail.",
+        "Refuser sans expliquer : la règle protège les clients et l'entreprise."
+      ]
+    },
+    "da_standup": {
+      "titre": "Faire le point sur tes analyses",
+      "etapes": [
+        {
+          "fr": "Donner l'état de chaque analyse en une phrase.",
+          "phrase": "De eerste analyse is klaar, de tweede voor de helft, de derde begin ik woensdag."
+        },
+        {
+          "fr": "Signaler un risque de retard.",
+          "phrase": "Voor de derde wacht ik nog op data van de boekhouding."
+        },
+        {
+          "fr": "Demander de l'aide ou une priorité claire.",
+          "phrase": "Welke analyse is voor jou het belangrijkst, als ik moet kiezen?"
+        }
+      ],
+      "a_eviter": [
+        "Dire que tout va bien alors que tu es en retard.",
+        "Entrer dans les détails techniques."
+      ]
+    },
+    "pmo_rapport_manquant": {
+      "titre": "Relancer pour un rapport en retard",
+      "etapes": [
+        {
+          "fr": "Rester aimable et rappeler l'échéance.",
+          "phrase": "Geen probleem, het gebeurt. Het rapport gaat morgen naar de directie."
+        },
+        {
+          "fr": "Expliquer pourquoi c'est important (la direction suit tous les projets).",
+          "phrase": "Zonder jouw status ontbreekt jouw project in het overzicht."
+        },
+        {
+          "fr": "Faciliter : proposer de le remplir ensemble en 10 minutes.",
+          "phrase": "Zullen we het nu samen invullen? Het duurt maar tien minuten."
+        },
+        {
+          "fr": "Fixer une heure limite.",
+          "phrase": "Lukt het tegen vandaag vier uur?"
+        }
+      ],
+      "a_eviter": [
+        "Menacer de le signaler à la direction.",
+        "Remplir son statut à sa place en inventant."
+      ]
+    },
+    "pmo_planning_comite": {
+      "titre": "Trouver une nouvelle date pour un comité",
+      "etapes": [
+        {
+          "fr": "Remercier pour la réponse rapide.",
+          "phrase": "Bedankt om het meteen te laten weten."
+        },
+        {
+          "fr": "Proposer deux ou trois nouvelles dates, après avoir vérifié les agendas des autres.",
+          "phrase": "Zou 18 of 20 maart in de voormiddag passen?"
+        },
+        {
+          "fr": "Informer les autres participants une fois la date fixée.",
+          "phrase": "Ik verplaats de uitnodiging zodra we een datum hebben."
+        },
+        {
+          "fr": "Rappeler ce que l'on attend de lui avant le comité, si besoin.",
+          "phrase": "De documenten stuur ik een week op voorhand."
+        }
+      ],
+      "a_eviter": [
+        "Proposer une seule date.",
+        "Changer la date sans prévenir les autres."
+      ]
+    },
+    "pmo_donnees_incoherentes": {
+      "titre": "Un statut qui ne correspond pas aux faits",
+      "etapes": [
+        {
+          "fr": "Partir des faits, sans accuser.",
+          "phrase": "Ik zie dat de einddatum twee maanden verschoven is, maar de status staat op groen."
+        },
+        {
+          "fr": "Rappeler la règle de l'entreprise (par exemple : retard de plus d'un mois = orange).",
+          "phrase": "Volgens onze regels wordt een project oranje vanaf een maand vertraging."
+        },
+        {
+          "fr": "Lui laisser expliquer.",
+          "phrase": "Is er iets dat ik niet weet?"
+        },
+        {
+          "fr": "Convenir de la correction et de ce qui sera dit au comité.",
+          "phrase": "Zet je de status op oranje, met een korte uitleg en een plan?"
+        }
+      ],
+      "a_eviter": [
+        "Changer toi-même la couleur sans lui en parler.",
+        "Laisser passer pour éviter le conflit."
+      ]
+    },
+    "pmo_outil_nouveau": {
+      "titre": "Présenter un nouvel outil à des utilisateurs réticents",
+      "etapes": [
+        {
+          "fr": "Reconnaître la charge administrative.",
+          "phrase": "Ik begrijp het, niemand wil extra administratie."
+        },
+        {
+          "fr": "Montrer ce qu'ils gagnent concrètement.",
+          "phrase": "Met deze tool moet je je status maar één keer invullen, en het rapport maakt zichzelf."
+        },
+        {
+          "fr": "Montrer un exemple réel en deux minutes.",
+          "phrase": "Ik toon je even hoe het werkt met een echt project."
+        },
+        {
+          "fr": "Proposer de l'aide et recueillir les remarques.",
+          "phrase": "Ik organiseer een korte opleiding, en jullie feedback is welkom."
+        }
+      ],
+      "a_eviter": [
+        "Imposer l'outil sans expliquer son intérêt.",
+        "Promettre que tout sera parfait dès le premier jour."
+      ]
+    },
+    "pmo_budget_suivi": {
+      "titre": "Signaler un risque budgétaire",
+      "etapes": [
+        {
+          "fr": "Donner le fait avec le chiffre.",
+          "phrase": "Het project heeft al tachtig procent van het budget uitgegeven, en het is maar halfweg."
+        },
+        {
+          "fr": "Dire ce que tu as vérifié.",
+          "phrase": "Ik heb de facturen nagekeken, het gaat vooral om externe consultants."
+        },
+        {
+          "fr": "Proposer la suite : en parler au chef de projet, l'ajouter au comité.",
+          "phrase": "Zal ik het met de projectleider bespreken en het op de agenda van het stuurcomité zetten?"
+        }
+      ],
+      "a_eviter": [
+        "Attendre le rapport de fin de mois.",
+        "Tirer des conclusions sur les causes sans avoir vérifié."
+      ]
+    },
+    "pmo_compte_rendu_comite": {
+      "titre": "Le compte rendu du comité",
+      "etapes": [
+        {
+          "fr": "Envoyer vite (le lendemain au plus tard).",
+          "phrase": "Dag allemaal, in bijlage het verslag van het stuurcomité van gisteren."
+        },
+        {
+          "fr": "Mettre les décisions en premier.",
+          "phrase": "Beslissingen: ..."
+        },
+        {
+          "fr": "Lister les actions : quoi, qui, quand.",
+          "phrase": "Acties: ... (wie, tegen wanneer)."
+        },
+        {
+          "fr": "Demander de signaler toute correction.",
+          "phrase": "Laat het me weten als er iets niet klopt."
+        }
+      ],
+      "a_eviter": [
+        "Retranscrire toute la discussion.",
+        "Oublier les responsables et les dates des actions."
+      ]
+    },
+    "pmo_demande_template": {
+      "titre": "Guider une nouvelle cheffe de projet",
+      "etapes": [
+        {
+          "fr": "Lui souhaiter la bienvenue.",
+          "phrase": "Welkom! Fijn dat je erbij bent."
+        },
+        {
+          "fr": "Lister les documents de départ.",
+          "phrase": "Je hebt een projectplan, een planning en een risicolijst nodig. De sjablonen staan op de gedeelde schijf."
+        },
+        {
+          "fr": "Expliquer le rythme du suivi.",
+          "phrase": "Elke maand vul je een korte status in, voor de vijfentwintigste."
+        },
+        {
+          "fr": "Proposer un rendez-vous rapide.",
+          "phrase": "Zullen we volgende week een halfuurtje samenzitten om alles te overlopen?"
+        }
+      ],
+      "a_eviter": [
+        "Envoyer seulement un lien sans explication.",
+        "Noyer la personne sous toutes les procédures d'un coup."
+      ]
+    },
+    "pmo_priorites_conflit": {
+      "titre": "Préparer une décision entre deux projets",
+      "etapes": [
+        {
+          "fr": "Présenter les faits des deux côtés, de façon neutre.",
+          "phrase": "Project A heeft hem nodig voor de livegang, project B voor een test."
+        },
+        {
+          "fr": "Montrer l'impact de chaque choix.",
+          "phrase": "Als A moet wachten, schuift de livegang een week op. Als B wacht, is er geen klantimpact."
+        },
+        {
+          "fr": "Proposer une option, ou un partage.",
+          "phrase": "Mijn voorstel: hij werkt deze week voor A, en B krijgt hem volgende week."
+        },
+        {
+          "fr": "Rappeler que la décision revient à la responsable ou au comité.",
+          "phrase": "Uiteindelijk beslis jij, of het stuurcomité."
+        }
+      ],
+      "a_eviter": [
+        "Prendre parti pour le chef de projet le plus insistant.",
+        "Décider à la place des responsables."
+      ]
+    },
+    "cf_atelier_processus": {
+      "titre": "Comprendre le processus du client",
+      "etapes": [
+        {
+          "fr": "Faire décrire le processus étape par étape, du début à la fin.",
+          "phrase": "Kunt u me een bestelling volgen, van het moment dat de klant belt tot de factuur?"
+        },
+        {
+          "fr": "Repérer les exceptions et leur fréquence.",
+          "phrase": "Hoe vaak komt een bestelling per fax? Een paar keer per week, of elke dag?"
+        },
+        {
+          "fr": "Comparer avec le processus standard du logiciel.",
+          "phrase": "In het systeem gebeurt dat standaard zo. Zou dat voor u werken?"
+        },
+        {
+          "fr": "Noter ce qui doit être adapté et le faire valider.",
+          "phrase": "Ik noteer de speciale prijzen per klant als belangrijk punt. Klopt dat?"
+        }
+      ],
+      "a_eviter": [
+        "Promettre que le logiciel fera tout comme avant.",
+        "Paramétrer avant d'avoir compris les exceptions."
+      ]
+    },
+    "cf_demande_specifique": {
+      "titre": "Une demande de développement sur mesure",
+      "etapes": [
+        {
+          "fr": "Comprendre le vrai besoin derrière la demande.",
+          "phrase": "Wat vinden uw mensen zo handig aan het oude bestand?"
+        },
+        {
+          "fr": "Montrer ce que le standard permet déjà.",
+          "phrase": "Met een filter en een eigen weergave krijgt u bijna hetzelfde, zonder maatwerk."
+        },
+        {
+          "fr": "Expliquer le coût et les inconvénients du sur-mesure (prix, mises à jour).",
+          "phrase": "Maatwerk kost extra en maakt elke update moeilijker."
+        },
+        {
+          "fr": "Proposer d'essayer le standard, puis de décider avec le chef de projet.",
+          "phrase": "Zullen we eerst de standaard testen, en daarna samen met de projectleider beslissen?"
+        }
+      ],
+      "a_eviter": [
+        "Dire oui pour faire plaisir.",
+        "Refuser sans comprendre pourquoi c'est important pour eux."
+      ]
+    },
+    "cf_formation_utilisateurs": {
+      "titre": "Former un utilisateur réticent",
+      "etapes": [
+        {
+          "fr": "Reconnaître son expérience.",
+          "phrase": "U kent het werk heel goed, en uw ervaring is belangrijk voor ons."
+        },
+        {
+          "fr": "Admettre que le changement demande un temps d'adaptation.",
+          "phrase": "De eerste weken is het wennen, dat is normaal."
+        },
+        {
+          "fr": "Montrer un avantage concret pour lui.",
+          "phrase": "Kijk: u hoeft de voorraad niet meer met de hand te tellen, het systeem doet het voor u."
+        },
+        {
+          "fr": "Lui proposer un rôle : remonter les problèmes, aider les collègues.",
+          "phrase": "Wilt u ons laten weten wat niet goed werkt? Dan passen we het aan waar het kan."
+        }
+      ],
+      "a_eviter": [
+        "Le contredire devant le groupe.",
+        "Prétendre que le nouveau système est meilleur en tout."
+      ]
+    },
+    "cf_bug_go_live": {
+      "titre": "Un problème bloquant le jour du démarrage",
+      "etapes": [
+        {
+          "fr": "Garder son calme et rassurer.",
+          "phrase": "Ik begrijp het, we lossen het samen op."
+        },
+        {
+          "fr": "Comprendre précisément : quoi, depuis quand, qui est touché, message d'erreur.",
+          "phrase": "Bij alle facturen, of alleen bij bepaalde klanten? Krijgt u een foutmelding?"
+        },
+        {
+          "fr": "Proposer une solution provisoire pour que les camions partent.",
+          "phrase": "Kunt u de factuur intussen als pdf opslaan en meegeven? Dan kunnen de chauffeurs vertrekken."
+        },
+        {
+          "fr": "Escalader au support avec toutes les informations et donner un délai de retour.",
+          "phrase": "Ik geef het met hoge prioriteit door aan ons supportteam en ik bel u binnen het halfuur terug."
+        }
+      ],
+      "a_eviter": [
+        "Paniquer ou chercher un coupable au téléphone.",
+        "Raccrocher sans solution provisoire ni heure de rappel."
+      ]
+    },
+    "cf_test_scenarios": {
+      "titre": "Convaincre un utilisateur clé de tester",
+      "etapes": [
+        {
+          "fr": "Reconnaître sa charge de travail.",
+          "phrase": "Ik begrijp dat het druk is."
+        },
+        {
+          "fr": "Expliquer pourquoi c'est lui qui doit tester.",
+          "phrase": "Alleen u kent de echte situaties. Als we het niet goed testen, merkt u het na de livegang."
+        },
+        {
+          "fr": "Réduire l'effort : scénarios prêts, durée courte, aide sur place.",
+          "phrase": "De testscenario's zijn klaar, het duurt ongeveer twee uur, en ik zit erbij."
+        },
+        {
+          "fr": "Fixer un créneau précis.",
+          "phrase": "Past donderdag van tien tot twaalf?"
+        }
+      ],
+      "a_eviter": [
+        "Tester à sa place puis dire que c'est validé.",
+        "Menacer de reporter la date sans en parler au chef de projet."
+      ]
+    },
+    "cf_migration_donnees": {
+      "titre": "Des données incomplètes pour la migration",
+      "etapes": [
+        {
+          "fr": "Décrire le problème avec un chiffre et un exemple.",
+          "phrase": "Bij ongeveer driehonderd artikelen ontbreekt de prijs, bijvoorbeeld bij de reserveonderdelen."
+        },
+        {
+          "fr": "Dire l'impact si on ne fait rien.",
+          "phrase": "Zonder prijs kan het systeem die artikelen niet factureren."
+        },
+        {
+          "fr": "Proposer : demander au client de compléter, avec une échéance.",
+          "phrase": "Ik stuur de lijst naar de klant en vraag de prijzen tegen vrijdag."
+        },
+        {
+          "fr": "Prévenir la cheffe de projet si le planning est en danger.",
+          "phrase": "Als het later wordt, verwittig ik de projectleider."
+        }
+      ],
+      "a_eviter": [
+        "Inventer des prix ou mettre zéro « pour que ça passe ».",
+        "Découvrir le problème seulement le jour de la migration."
+      ]
+    },
+    "cf_parametrage_explication": {
+      "titre": "Expliquer une règle paramétrée",
+      "etapes": [
+        {
+          "fr": "Comprendre sa gêne.",
+          "phrase": "Ik begrijp dat het extra tijd kost."
+        },
+        {
+          "fr": "Expliquer d'où vient la règle (décision de la direction, contrôle).",
+          "phrase": "Die regel is gevraagd door uw directie, om grote aankopen beter te controleren."
+        },
+        {
+          "fr": "Expliquer comment faire vite (qui valide, comment).",
+          "phrase": "Uw verantwoordelijke krijgt meteen een melding en kan goedkeuren met één klik."
+        },
+        {
+          "fr": "S'il y a un vrai problème, proposer de le remonter.",
+          "phrase": "Als het echt te traag gaat, bespreek ik met de projectleider of de grens anders kan."
+        }
+      ],
+      "a_eviter": [
+        "Dire « c'est le système, je n'y peux rien ».",
+        "Supprimer la règle sans l'accord de ceux qui l'ont demandée."
+      ]
+    },
+    "cf_point_chef_projet": {
+      "titre": "Faire le point avec ta cheffe de projet",
+      "etapes": [
+        {
+          "fr": "Donner l'état d'avancement en une phrase.",
+          "phrase": "De inkoopmodule is voor tachtig procent ingesteld."
+        },
+        {
+          "fr": "Signaler ce qui reste et le risque principal.",
+          "phrase": "Wat nog ontbreekt zijn de goedkeuringsregels. Het risico is dat de klant de tests uitstelt."
+        },
+        {
+          "fr": "Dire si la date tient, honnêtement.",
+          "phrase": "Als de tests volgende week doorgaan, halen we de startdatum."
+        },
+        {
+          "fr": "Demander l'aide dont tu as besoin.",
+          "phrase": "Kun jij de klant vragen om de testdata vrij te maken?"
+        }
+      ],
+      "a_eviter": [
+        "Dire que tout va bien par peur de décevoir.",
+        "Noyer ta cheffe dans les détails du paramétrage."
+      ]
     }
   }
 }

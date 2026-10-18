@@ -1791,7 +1791,10 @@ if (firebaseAvailable) {
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
                 'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv',
                 'THEME_BUSINESS_ANALYST.csv', 'THEME_CONSULTANT.csv', 'THEME_PROJET.csv',
-                'THEME_BIBLIOTHEQUE.csv'
+                'THEME_BIBLIOTHEQUE.csv',
+                'THEME_DATA.csv',
+                'THEME_PMO.csv',
+                'THEME_ERP.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -5891,7 +5894,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -9184,7 +9187,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             business_analyst: { label: '📊 Business analyst', domaine: 'business analysis (analyse des besoins, processus, projets IT)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients, Transvio pour un éditeur de logiciel' },
             consultant_junior: { label: '💼 Consultant junior', domaine: 'conseil en organisation et en management (consultant junior en cabinet)', noms: 'Zonvella Consulting pour le cabinet du candidat, Delmaro, Logistiko ou Nordvracht pour des clients' },
             projet_junior: { label: '🗂️ Chef de projet junior', domaine: 'gestion de projet (chef de projet junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' },
-            bibliotheque: { label: '📚 Bibliothèque', domaine: 'bibliothèque publique (employé de bibliothèque d\'une commune)', noms: 'la bibliothèque communale de Zonvelde (commune inventée) pour l\'employeur, Delmaro pour un fournisseur de livres' }
+            bibliotheque: { label: '📚 Bibliothèque', domaine: 'bibliothèque publique (employé de bibliothèque d\'une commune)', noms: 'la bibliothèque communale de Zonvelde (commune inventée) pour l\'employeur, Delmaro pour un fournisseur de livres' },
+            data_analyst: { label: '📈 Data analyst junior', domaine: 'analyse de données (data analyst junior)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients' },
+            pmo: { label: '🧭 PMO (pilotage de projets)', domaine: 'PMO, pilotage de portefeuille de projets (assistant(e) PMO junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' },
+            consultant_fonctionnel: { label: '🧩 Consultant fonctionnel', domaine: 'conseil fonctionnel en logiciel de gestion / ERP (consultant fonctionnel junior)', noms: 'Zonvella pour l\'éditeur ou l\'intégrateur du candidat, Delmaro ou Logistiko pour des clients (PME)' }
         };
         const RP_JOB_METIERS = Object.fromEntries(Object.entries(RP_METIERS).map(([k, v]) => [k, v.label])); // un métier absent s'affiche avec son nom brut
         const RP_JOB_CANAUX = {
@@ -10530,7 +10536,19 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             { key: 'bib_jeunes', metier: 'bibliotheque', label: '🧒 Attirer les jeunes', sujet: 'les 12-18 ans ne viennent presque plus à la bibliothèque : quelles actions proposer avec un petit budget ?' },
             { key: 'bib_activite', metier: 'bibliotheque', label: '🎉 Organiser une activité', sujet: 'organiser une activité (heure du conte, atelier numérique, club de lecture) pour un public précis : public, date, budget, communication' },
             { key: 'bib_budget', metier: 'bibliotheque', label: '💶 Budget d\'achat', sujet: 'un budget d\'achat limité pour l\'année : quels types de documents acheter en priorité (romans, livres pour enfants, livres en néerlandais facile, numérique) et pourquoi ?' },
-            { key: 'bib_espace', metier: 'bibliotheque', label: '🪑 Réaménager l\'espace', sujet: 'la bibliothèque manque de place et les étudiants se plaignent du bruit : comment réorganiser l\'espace ?' }
+            { key: 'bib_espace', metier: 'bibliotheque', label: '🪑 Réaménager l\'espace', sujet: 'la bibliothèque manque de place et les étudiants se plaignent du bruit : comment réorganiser l\'espace ?' },
+            { key: 'da_baisse', metier: 'data_analyst', label: '📉 Expliquer une baisse', sujet: 'les ventes d\'un produit baissent depuis trois mois : quelles données regarder, dans quel ordre, et quelles hypothèses tester ?' },
+            { key: 'da_kpi', metier: 'data_analyst', label: '🎯 Choisir des indicateurs', sujet: 'un service veut un tableau de bord : quels 3 à 5 indicateurs proposer, et pourquoi ?' },
+            { key: 'da_qualite', metier: 'data_analyst', label: '🧹 Données douteuses', sujet: 'un fichier client contient des doublons, des valeurs vides et des dates incohérentes : comment s\'y prendre avant toute analyse ?' },
+            { key: 'da_test', metier: 'data_analyst', label: '🧪 Tester une action', sujet: 'le marketing veut savoir si une réduction fait vraiment revenir les clients : comment le mesurer correctement ?' },
+            { key: 'pmo_tableau', metier: 'pmo', label: '📋 Suivre 10 projets', sujet: 'la direction veut voir d\'un coup d\'œil l\'état de dix projets : quelles informations demander aux chefs de projet et comment les présenter ?' },
+            { key: 'pmo_retards', metier: 'pmo', label: '⏰ Rapports toujours en retard', sujet: 'chaque mois, la moitié des chefs de projet rendent leur rapport en retard : que mettre en place ?' },
+            { key: 'pmo_arbitrage', metier: 'pmo', label: '⚖️ Arbitrer des ressources', sujet: 'trois projets veulent les mêmes experts le même mois : comment préparer la décision du comité ?' },
+            { key: 'pmo_budget', metier: 'pmo', label: '💶 Budget à mi-parcours', sujet: 'un projet a dépensé 80 % de son budget à mi-parcours : quelles questions poser et que proposer au comité ?' },
+            { key: 'cf_standard', metier: 'consultant_fonctionnel', label: '⚙️ Standard ou sur-mesure', sujet: 'un client veut un développement sur mesure ; le logiciel standard fait presque la même chose : que conseiller (coût, mises à jour, habitudes des utilisateurs) ?' },
+            { key: 'cf_adoption', metier: 'consultant_fonctionnel', label: '🙋 Faire adopter le logiciel', sujet: 'trois mois après le démarrage, les employés continuent d\'utiliser leurs fichiers Excel : pourquoi, et que faire ?' },
+            { key: 'cf_demarrage', metier: 'consultant_fonctionnel', label: '🚦 Démarrer ou reporter ?', sujet: 'la date de démarrage approche mais les tests ne sont pas finis : démarrer quand même, démarrer en partie, ou reporter ?' },
+            { key: 'cf_processus', metier: 'consultant_fonctionnel', label: '🔄 Simplifier un processus', sujet: 'le processus de commande du client a beaucoup d\'étapes manuelles : que peut-on simplifier avec le logiciel ?' }
         ];
         let rpCaseMetier = 'logistique';
         const rpCaseThemesOf = m => RP_CASE_THEMES.filter(t => t.metier === m);

@@ -1,0 +1,41 @@
+id;fr;nl;freq
+THEME_DATA_0;l'analyste de données;de data-analist;5.20
+THEME_DATA_1;les données;de gegevens;5.15
+THEME_DATA_2;la base de données;de databank;5.10
+THEME_DATA_3;la requête;de query;5.05
+THEME_DATA_4;le tableau de bord;het dashboard;5.00
+THEME_DATA_5;l'indicateur clé;de KPI;4.95
+THEME_DATA_6;le graphique;de grafiek;4.90
+THEME_DATA_7;le tableau;de tabel;4.85
+THEME_DATA_8;la colonne;de kolom;4.80
+THEME_DATA_9;la ligne;de rij;4.75
+THEME_DATA_10;la tendance;de trend;4.70
+THEME_DATA_11;la moyenne;het gemiddelde;4.65
+THEME_DATA_12;la médiane;de mediaan;4.60
+THEME_DATA_13;le pourcentage;het percentage;4.55
+THEME_DATA_14;la hausse;de stijging;4.50
+THEME_DATA_15;la baisse;de daling;4.45
+THEME_DATA_16;l'écart;het verschil;4.40
+THEME_DATA_17;la qualité des données;de datakwaliteit;4.35
+THEME_DATA_18;le doublon;de dubbel;4.30
+THEME_DATA_19;la valeur vide;de lege waarde;4.25
+THEME_DATA_20;le filtre;de filter;4.20
+THEME_DATA_21;la source;de bron;4.15
+THEME_DATA_22;la définition;de definitie;4.10
+THEME_DATA_23;le rapport;het rapport;4.05
+THEME_DATA_24;la période;de periode;4.00
+THEME_DATA_25;l'échantillon;de steekproef;3.95
+THEME_DATA_26;la corrélation;de correlatie;3.90
+THEME_DATA_27;la cause;de oorzaak;3.85
+THEME_DATA_28;l'hypothèse;de hypothese;3.80
+THEME_DATA_29;la prévision;de voorspelling;3.75
+THEME_DATA_30;les données personnelles;de persoonsgegevens;3.70
+THEME_DATA_31;le consentement;de toestemming;3.65
+THEME_DATA_32;la vie privée;de privacy;3.60
+THEME_DATA_33;le chiffre d'affaires;de omzet;3.55
+THEME_DATA_34;le client;de klant;3.50
+THEME_DATA_35;la commande;de bestelling;3.45
+THEME_DATA_36;annulé;geannuleerd;3.40
+THEME_DATA_37;le tableur;het rekenblad;3.35
+THEME_DATA_38;la visualisation;de visualisatie;3.30
+THEME_DATA_39;la recommandation;de aanbeveling;3.25
