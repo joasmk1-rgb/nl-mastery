@@ -12874,6 +12874,377 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             if (v === 'exam') { guideSetPos(guide.m.etapes.length, 0); guideExam(token); }
         }
 
+        // ===== Discuter (conversation libre, inspirée des apps de type « partenaire IA ») =====
+        // Deux partenaires, Svetlana et John, qui changent de casquette (ami, collègue,
+        // recruteur…). Pensé pour la fluidité : UN seul appel Gemini par tour renvoie la réplique,
+        // la correction douce de la dernière phrase de l'apprenant et 3 suggestions de réponse
+        // (exception assumée à la séparation des prompts : ici, pas d'examen ni de note).
+        // Micro mains libres (longListen), mots touchables, mémoire des conversations par
+        // partenaire et petit objectif quotidien (state.talk).
+        const TALK_PARTNERS = {
+            svetlana: { name: 'Svetlana', emoji: '👩🏼', speaker: 0, desc: 'Curieuse et chaleureuse : elle rebondit sur chaque détail et adore les histoires.',
+                base: "Tu es Svetlana, une femme d'une trentaine d'années qui vit en Flandre depuis longtemps : chaleureuse, curieuse, tu rebondis sur les détails et tu partages volontiers tes propres anecdotes." },
+            john: { name: 'John', emoji: '👨🏽', speaker: 1, desc: 'Détendu et blagueur : il donne son avis sur tout et aime les bons plans.',
+                base: "Tu es John, un homme d'une quarantaine d'années, détendu, avec de l'humour ; tu aimes le sport, la musique et les bons plans, et tu donnes volontiers ton avis." }
+        };
+        const TALK_HATS = {
+            ami: { label: '😊 En ami', prompt: "en ami(e) de l'apprenant : conversation détendue, tutoiement (jij)" },
+            collegue: { label: '☕ Collègue', prompt: "en collègue de bureau, à la pause café : ton amical, tutoiement (jij)" },
+            recruteur: { label: '🎯 Recruteur', prompt: "en recruteur qui fait passer un entretien détendu à l'apprenant : vouvoiement (u)" },
+            commercant: { label: '🛒 Commerçant', prompt: "en commerçant ou serveur ; l'apprenant est ton client : vouvoiement (u)" },
+            voisin: { label: '🏠 Voisin', prompt: "en voisin(e) de l'apprenant, croisé(e) devant l'immeuble : tutoiement (jij)" }
+        };
+        const TALK_TOPICS = {
+            libre: '🗨️ Libre', weekend: '🌤️ Mon week-end', travail: '💼 Le travail', voyages: '✈️ Les voyages',
+            cuisine: '🍝 La cuisine', series: '🎬 Films et séries', sport: '⚽ Le sport', projets: '🚀 Mes projets'
+        };
+        const TALK_GOAL = 10; // échanges par jour
+        let talk = null;      // conversation en cours
+        let talkRec = null;   // écoute en cours
+
+        function talkSettings() {
+            if (!state.settings) state.settings = {};
+            const s = state.settings.talk || {};
+            const lvl = ['A1', 'A2', 'B1', 'B2'];
+            state.settings.talk = {
+                partner: TALK_PARTNERS[s.partner] ? s.partner : 'svetlana',
+                hat: TALK_HATS[s.hat] || s.hat === 'surprise' ? s.hat : 'ami',
+                topic: TALK_TOPICS[s.topic] || s.topic === 'surprise' ? s.topic : 'libre',
+                level: lvl.includes(s.level) ? s.level : (curriculumLoaded && lvl.includes(getCurriculumLevel().level) ? getCurriculumLevel().level : 'A1'),
+                handsfree: s.handsfree !== false
+            };
+            return state.settings.talk;
+        }
+        function talkSet(k, v) { talkSettings()[k] = v; save(); talkRenderSetup(); }
+
+        function talkState() {
+            if (!state.talk) state.talk = {};
+            if (!state.talk.memory) state.talk.memory = {};
+            if (!state.talk.days) state.talk.days = {};
+            return state.talk;
+        }
+        function talkToday() { return new Date().toISOString().slice(0, 10); }
+        function talkTodayCount() { return talkState().days[talkToday()] || 0; }
+        function talkStreak() {
+            const days = talkState().days;
+            let n = 0;
+            const d = new Date();
+            if (!days[talkToday()]) d.setDate(d.getDate() - 1); // la série tient tant qu'on n'a pas raté hier
+            while (days[d.toISOString().slice(0, 10)]) { n++; d.setDate(d.getDate() - 1); }
+            return n;
+        }
+        function talkRingHtml(size) {
+            const pct = Math.min(1, talkTodayCount() / TALK_GOAL);
+            const r = 16, c = 2 * Math.PI * r;
+            return `<svg class="talk-ring" width="${size}" height="${size}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="${r}" class="talk-ring-bg"/><circle cx="20" cy="20" r="${r}" class="talk-ring-fg" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct)}"/><text x="20" y="24" text-anchor="middle">${Math.min(talkTodayCount(), 99)}</text></svg>`;
+        }
+
+        function showTalk() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('talk-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            if (talk && !talk.ended) { talkRenderChat(); return; }
+            talkRenderSetup();
+        }
+
+        function talkRenderSetup() {
+            const s = talkSettings();
+            const chip = (on, click, label) => `<button type="button" class="conj-filter-chip${on ? ' active' : ''}" onclick="${click}">${label}</button>`;
+            const streak = talkStreak();
+            document.getElementById('talk-content').innerHTML = `
+                <div class="talk-goal">${talkRingHtml(46)}<div><b>${talkTodayCount()} / ${TALK_GOAL} échanges aujourd'hui</b><br><small>${streak > 1 ? '🔥 ' + streak + ' jours de suite' : 'Un peu chaque jour, c\'est ce qui compte.'}</small></div></div>
+                ${GeminiService.isAvailable() ? '' : '<div class="prof-warn">Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA.</div>'}
+                <div class="talk-partners">${Object.entries(TALK_PARTNERS).map(([k, p]) => `
+                    <button type="button" class="talk-partner${s.partner === k ? ' active' : ''}" onclick="talkSet('partner','${k}')">
+                        <span class="talk-avatar">${p.emoji}</span><b>${p.name}</b><small>${p.desc}</small>
+                        ${talkState().memory[k] ? '<small class="talk-remember">💭 se souvient de vous</small>' : ''}
+                    </button>`).join('')}</div>
+                <div class="conj-audio-label">Sa casquette</div>
+                <div class="conj-audio-chips">${Object.entries(TALK_HATS).map(([k, h]) => chip(s.hat === k, `talkSet('hat','${k}')`, h.label)).join('')}${chip(s.hat === 'surprise', "talkSet('hat','surprise')", '🎲 Surprise')}</div>
+                <div class="conj-audio-label">De quoi parler</div>
+                <div class="conj-audio-chips">${Object.entries(TALK_TOPICS).map(([k, t]) => chip(s.topic === k, `talkSet('topic','${k}')`, t)).join('')}${chip(s.topic === 'surprise', "talkSet('topic','surprise')", '🎲 Surprends-moi')}</div>
+                <div class="conj-audio-label">Ton niveau</div>
+                <div class="conj-audio-chips">${['A1', 'A2', 'B1', 'B2'].map(l => chip(s.level === l, `talkSet('level','${l}')`, l)).join('')}</div>
+                <div class="conj-audio-chips" style="margin-top:8px;">${chip(s.handsfree, "talkSet('handsfree',true)", '🗣️ Mains libres')}${chip(!s.handsfree, "talkSet('handsfree',false)", '👆 Je touche le micro')}</div>
+                <button class="btn btn-green talk-start" onclick="talkStart()" ${GeminiService.isAvailable() ? '' : 'disabled'}>💬 Parler avec ${TALK_PARTNERS[s.partner].name}</button>`;
+        }
+
+        function talkActive() { return !!(talk && !talk.ended && document.getElementById('talk-view').classList.contains('active')); }
+
+        function talkStart() {
+            const s = talkSettings();
+            const pick = o => { const k = Object.keys(o); return k[Math.floor(Math.random() * k.length)]; };
+            const hat = s.hat === 'surprise' ? pick(TALK_HATS) : s.hat;
+            const topic = s.topic === 'surprise' ? pick(TALK_TOPICS) : s.topic;
+            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], hat, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0 };
+            talkRenderChat();
+            talkTurn();
+        }
+
+        function talkRenderChat() {
+            const p = talk.p;
+            document.getElementById('talk-content').innerHTML = `
+                <div class="talk-head">
+                    <span class="talk-avatar small">${p.emoji}</span>
+                    <div class="talk-head-txt"><b>${p.name}</b><small>${TALK_HATS[talk.hat].label} · ${TALK_TOPICS[talk.topic]}</small></div>
+                    <span id="talk-ring-small">${talkRingHtml(34)}</span>
+                    <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
+                </div>
+                <div id="talk-chat" class="talk-chat"></div>
+                <div id="talk-sugg" class="talk-sugg"></div>
+                <div id="talk-text-row" class="prof-input-row" style="display:none;">
+                    <input type="text" id="talk-input" placeholder="Écris en néerlandais…" onkeydown="if(event.key==='Enter') talkSendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="talkSendTyped()">➤</button>
+                </div>
+                <div class="talk-bar">
+                    <button type="button" class="talk-side" id="talk-fr" onclick="talkMic('fr')" title="Parler en français">🇫🇷</button>
+                    <button type="button" class="talk-mic" id="talk-mic" onclick="talkMic('nl')">🎤</button>
+                    <button type="button" class="talk-side" onclick="talkToggleText()" title="Écrire">⌨️</button>
+                </div>
+                <div id="talk-mic-hint" class="talk-mic-hint">Touche le micro pour parler</div>`;
+            talk.log.forEach(m => talkAppend(m, true));
+            talkRenderSugg();
+        }
+
+        function talkAppend(m, replay) {
+            if (!replay) talk.log.push(m);
+            const chat = document.getElementById('talk-chat');
+            if (!chat) return null;
+            const div = document.createElement('div');
+            if (m.who === 'them') {
+                div.className = 'talk-msg them';
+                const words = rpAnnotateText(m.nl).replace(/rpWordTap\(this\)/g, 'talkWordTap(this)');
+                div.innerHTML = `${m.help ? `<div class="talk-help">🇫🇷 ${rpEscapeHtml(m.help)}</div>` : ''}<div class="talk-nl">${words}</div>
+                    <div class="talk-tools"><button type="button" onclick="talkReplay(this)" data-nl="${rpEscapeHtml(m.nl)}">🔁</button><button type="button" onclick="this.closest('.talk-msg').querySelector('.talk-fr').classList.toggle('show')">🇫🇷</button></div>
+                    <div class="talk-fr">${rpEscapeHtml(m.fr || '')}</div><div class="talk-word"></div>`;
+            } else if (m.who === 'me') {
+                div.className = 'talk-msg me';
+                div.innerHTML = `${m.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(m.text)}${m.corr ? talkCorrHtml(m.corr) : ''}`;
+            } else {
+                div.className = 'talk-msg info';
+                div.innerHTML = m.html;
+            }
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            return div;
+        }
+
+        function talkCorrHtml(c) {
+            return `<details class="talk-corr"><summary>✨ Plus naturel</summary><b>${rpEscapeHtml(c.natural)}</b>${c.note_fr ? `<br><small>${rpEscapeHtml(c.note_fr)}</small>` : ''}</details>`;
+        }
+
+        function talkRenderSugg() {
+            const el = document.getElementById('talk-sugg');
+            if (!el || !talk) return;
+            el.innerHTML = (talk.suggestions || []).map((s, i) => `<button type="button" class="talk-chip" onclick="talkUseSugg(${i})" title="${rpEscapeHtml(s.fr || '')}">${rpEscapeHtml(s.nl)}</button>`).join('');
+        }
+
+        function talkUseSugg(i) {
+            const s = talk && talk.suggestions[i];
+            if (!s) return;
+            talkToggleText(true);
+            const input = document.getElementById('talk-input');
+            input.value = s.nl;
+            document.getElementById('talk-mic-hint').innerText = '🇫🇷 ' + (s.fr || '') + ' · dis-la au micro ou envoie-la ➤';
+            conjAudioSpeak(s.nl, 'nl', PROF_RATE[talk.level]);
+        }
+
+        function talkToggleText(force) {
+            const row = document.getElementById('talk-text-row');
+            if (!row) return;
+            row.style.display = force === true || row.style.display === 'none' ? '' : 'none';
+        }
+
+        function talkReplay(btn) { conjAudioSpeak(btn.dataset.nl, 'nl', PROF_RATE[talk.level], { speaker: talk.p.speaker }); }
+
+        // Mot touché : traduction tirée du vocabulaire de l'app (pas d'appel Gemini).
+        function talkWordTap(el) {
+            const box = el.closest('.talk-msg').querySelector('.talk-word');
+            const token = el.textContent;
+            const item = rpWordLookup(token);
+            speakNL(token);
+            if (!item) { box.innerHTML = `<b>${rpEscapeHtml(token)}</b> : pas encore dans ton vocabulaire (touche 🇫🇷 pour la phrase traduite).`; return; }
+            const inList = item.id && rpWordsListIds().includes(item.id);
+            box.innerHTML = `<b>${rpEscapeHtml(item.nl)}</b> = ${rpEscapeHtml(item.fr)} ${item.id && !inList ? `<button type="button" class="rp-coach-btn" style="margin:0 0 0 6px;" onclick="rpWordAddToList('${item.id}'); this.outerHTML='✅'">➕ À apprendre</button>` : (inList ? '✅' : '')}`;
+        }
+
+        function talkPrompt() {
+            const p = talk.p, mem = talkState().memory[talk.partner];
+            const portrait = typeof profPortrait === 'function' ? profPortrait() : [];
+            const hist = talk.history.slice(-16).map(h => h.who === 'them' ? p.name + ' : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
+            return `${p.base} Tu parles avec un(e) apprenant(e) francophone de néerlandais, niveau ${PROF_LEVEL_DESC[talk.level]}.
+Aujourd'hui, tu lui parles ${TALK_HATS[talk.hat].prompt}. Sujet de départ : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')} (si c'est « Libre », choisis un sujet simple du quotidien).
+Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
+${portrait.length ? "Ce que tu sais de l'apprenant : " + portrait.join(' ') : ''}
+Règles :
+- Une vraie conversation, vivante, comme entre deux personnes : réagis à ce qu'il dit, raconte aussi un peu de toi, pose UNE question à la fois. 1 à 3 phrases courtes, adaptées à son niveau (A1 : phrases très simples et mots très courants).
+- Néerlandais standard, comme en Flandre. Pas d'emojis.
+- Ne corrige jamais dans "reply_nl" : la correction va seulement dans "correction".
+- S'il parle FRANÇAIS (question, mot qui manque), réponds-lui brièvement en français dans "fr_help" avec la formule néerlandaise utile, puis continue en néerlandais dans "reply_nl". Sinon "fr_help" est vide.
+- "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle", "note_fr": "explication très courte en français"} ; sinon null.
+- "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
+${hist ? "Conversation jusqu'ici :\n" + hist : "Commence la conversation : salue-le naturellement selon ta casquette et pose une première question simple sur le sujet."}
+Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}]}`;
+        }
+
+        function talkThinking(on) {
+            talk.busy = on;
+            const old = document.getElementById('talk-typing');
+            if (old) old.remove();
+            const chat = document.getElementById('talk-chat');
+            if (on && chat) {
+                const d = document.createElement('div');
+                d.id = 'talk-typing';
+                d.className = 'talk-msg them typing';
+                d.innerHTML = '<span></span><span></span><span></span>';
+                chat.appendChild(d);
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+
+        async function talkTurn(lastMsg, lastDiv) {
+            talkThinking(true);
+            let r = null;
+            try { r = rpHelpParseJson(await GeminiService.generate(talkPrompt())); } catch (e) { r = { error: e.message }; }
+            if (!talk || talk.ended) return;
+            talkThinking(false);
+            if (!r || r.error || !r.reply_nl) {
+                talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>` });
+                return;
+            }
+            if (lastMsg && r.correction && r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) {
+                lastMsg.corr = r.correction;
+                if (lastDiv) lastDiv.insertAdjacentHTML('beforeend', talkCorrHtml(r.correction));
+            }
+            talk.history.push({ who: 'them', nl: r.reply_nl });
+            talk.suggestions = (Array.isArray(r.suggestions) ? r.suggestions : []).filter(s => s && s.nl).slice(0, 3);
+            talkAppend({ who: 'them', nl: r.reply_nl, fr: r.reply_fr || '', help: r.fr_help || '' });
+            talkRenderSugg();
+            if (!talkActive()) return;
+            if (r.fr_help) await conjAudioSpeakMixed(r.fr_help, 1, PROF_RATE[talk.level], talkActive);
+            if (talkActive()) await conjAudioSpeak(r.reply_nl, 'nl', PROF_RATE[talk.level], { speaker: talk.p.speaker });
+            if (talkActive() && talk.handsfree && window.SpeechRecognition && !talkRec) talkMic('nl');
+        }
+
+        function talkSubmit(text, isFr) {
+            if (!talk || talk.ended || talk.busy) return;
+            const msg = { who: 'me', text, isFr };
+            const div = talkAppend(msg);
+            talk.history.push({ who: 'me', text, isFr });
+            document.getElementById('talk-mic-hint').innerText = 'Touche le micro pour parler';
+            if (!isFr) {
+                talk.userCount++;
+                const d = talkState().days;
+                d[talkToday()] = (d[talkToday()] || 0) + 1;
+                save();
+                const ring = document.getElementById('talk-ring-small');
+                if (ring) ring.innerHTML = talkRingHtml(34);
+                if (talkTodayCount() === TALK_GOAL) talkAppend({ who: 'info', html: `🎉 Objectif du jour atteint : ${TALK_GOAL} échanges !` });
+            }
+            talkTurn(isFr ? null : msg, div);
+        }
+
+        function talkSendTyped() {
+            const input = document.getElementById('talk-input');
+            const text = input ? input.value.trim() : '';
+            if (!text) return;
+            input.value = '';
+            talkSubmit(text, /(\bcomment\b|\bpourquoi\b|est-ce|c'est|qu'est|veut dire|\bje ne\b|\bon dit\b|ça|\bquoi\b|\bque\b|\bles\b)/i.test(text));
+        }
+
+        function talkMicState(lang, cd, hold) {
+            const mic = document.getElementById('talk-mic'), fr = document.getElementById('talk-fr'), hint = document.getElementById('talk-mic-hint');
+            if (mic) mic.classList.toggle('listening', lang === 'nl');
+            if (fr) fr.classList.toggle('listening', lang === 'fr');
+            if (hint && lang) hint.innerText = cd ? `Envoi dans ${cd}… (touche le micro pour envoyer)` : (lang === 'fr' ? 'J\'écoute en français…' : (hold ? 'J\'écoute… touche le micro pour envoyer' : 'J\'écoute… (touche le micro pour envoyer)'));
+            if (hint && !lang && hint.innerText.startsWith('J\'écoute')) hint.innerText = 'Touche le micro pour parler';
+        }
+
+        function talkMic(lang) {
+            if (!talk || talk.ended) return;
+            if (talkRec) { talkRec.finish(true); return; }
+            if (!window.SpeechRecognition) { talkToggleText(true); alert("La reconnaissance vocale n'est pas disponible dans ce navigateur : écris ta réponse (⌨️), ou utilise Chrome."); return; }
+            if (talk.busy) return;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            talkToggleText(true);
+            talkRec = longListen({
+                lang, input: document.getElementById('talk-input'), silence: profSettings().silence,
+                isActive: talkActive,
+                onState: (st, cd) => talkMicState(lang, cd, st.hold),
+                onEnd: st => { if (talkRec === st) talkRec = null; talkMicState(null); },
+                onSubmit: text => talkSubmit(text, lang === 'fr')
+            });
+        }
+
+        function talkStop() {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (talkRec) { const r = talkRec; talkRec = null; r.finish(false); }
+        }
+
+        // Fin : mise à jour de la mémoire du partenaire + 3 mots et une tournure à garder.
+        async function talkEnd() {
+            if (!talk || talk.ended) return;
+            talkStop();
+            const t = talk;
+            t.ended = true;
+            if (!t.userCount) { talk = null; talkRenderSetup(); return; }
+            const box = document.getElementById('talk-chat');
+            talkAppend({ who: 'info', html: '<div class="report-meta" id="talk-recap-wait">Petit récap…</div>' });
+            const mem = talkState().memory[t.partner] || '';
+            const hist = t.history.map(h => h.who === 'them' ? t.p.name + ' : ' + h.nl : 'Apprenant : ' + h.text).join('\n');
+            let r = null;
+            try {
+                r = rpHelpParseJson(await GeminiService.generate(`Voici une conversation en néerlandais entre ${t.p.name} et un apprenant francophone (niveau ${t.level}).
+${hist}
+Mémoire actuelle de ${t.p.name} sur l'apprenant : ${mem || '(vide)'}
+Produis en JSON :
+- "memoire" : la mémoire mise à jour, en français, 5 phrases maximum : ce que l'apprenant a raconté de lui (faits, projets, goûts) et les sujets déjà abordés, pour que ${t.p.name} puisse y revenir la prochaine fois ;
+- "mots" : 3 mots ou tournures néerlandais utiles apparus ou qui lui ont manqué, avec de/het pour les noms, et leur traduction ;
+- "tournure" : une phrase néerlandaise utile à retenir de cette conversation, avec sa traduction.
+Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "tournure": {"nl": "", "fr": ""}}`));
+            } catch (e) { r = null; }
+            const wait = document.getElementById('talk-recap-wait');
+            if (wait) wait.parentElement.remove();
+            if (r && r.memoire) { talkState().memory[t.partner] = String(r.memoire).slice(0, 900); save(); }
+            const mots = r && Array.isArray(r.mots) ? r.mots.filter(m => m && m.nl) : [];
+            const added = mots.length ? talkAddWords(mots) : 0;
+            if (box) talkAppend({ who: 'info', html: `<div class="prof-debrief">
+                <div class="prof-target-title">👋 Fin de la conversation · ${t.userCount} échange${t.userCount > 1 ? 's' : ''}</div>
+                ${mots.length ? `<div class="prof-deb-sec">📖 À garder${added ? ' (ajoutés à « 💬 Mes discussions »)' : ''}</div><ul>${mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr || '')}</li>`).join('')}</ul>` : ''}
+                ${r && r.tournure && r.tournure.nl ? `<div class="prof-deb-sec">💬 Tournure du jour</div><p><b>${rpEscapeHtml(r.tournure.nl)}</b> ${speakBtnHtml(r.tournure.nl)}<br><small>${rpEscapeHtml(r.tournure.fr || '')}</small></p>` : ''}
+                <div class="prof-actions"><button class="btn btn-green" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button></div>
+            </div>` });
+            const bar = document.querySelector('#talk-content .talk-bar');
+            if (bar) bar.style.display = 'none';
+            const sugg = document.getElementById('talk-sugg');
+            if (sugg) sugg.innerHTML = '';
+        }
+
+        const TALK_WORDS_LIST = '💬 Mes discussions';
+        function talkAddWords(mots) {
+            if (!state.customLists[TALK_WORDS_LIST]) state.customLists[TALK_WORDS_LIST] = [];
+            const ids = state.customLists[TALK_WORDS_LIST];
+            let n = 0;
+            mots.forEach(m => {
+                if (!m.fr) return;
+                const base = String(m.nl).trim();
+                const existing = rpWordLookup(base.replace(/^(de|het|een) /i, ''));
+                let id = existing && existing.id;
+                if (!id) {
+                    const k = rpKitNorm(base);
+                    if (!k) return;
+                    if (!state.rpWords) state.rpWords = {};
+                    if (!state.rpWords[k]) state.rpWords[k] = { nl: base, fr: m.fr, at: Date.now() };
+                    rpWordsInject();
+                    id = 'RPW:' + k;
+                }
+                if (!ids.includes(id)) { ids.push(id); n++; }
+            });
+            save();
+            renderCustomListsHome();
+            return n;
+        }
+
         rpInitSpeechRecognition();
         rpCheckDutchVoice();
         init();

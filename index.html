@@ -154,6 +154,10 @@
         <h2>🎭 Pratiquer</h2>
         <p class="section-subtitle" style="margin-top:0;">Parle et écris en situation réelle, avec Gemini.</p>
 
+        <div class="talk-entry" onclick="showTalk()">
+            <span class="talk-entry-avatars">👩🏼👨🏽</span>
+            <div><b>💬 Discuter</b><br><small>Parle de tout et de rien avec Svetlana ou John, à l'oral, sans pression. Ils t'aident quand tu bloques.</small></div>
+        </div>
         <div class="hub-grid single">
             <div class="hub-card accent" onclick="showRoleplay('entretiens')"><span class="hub-card-icon">💼</span><div class="hub-card-title">Entretiens</div><div class="hub-card-desc">Passer un entretien, le mener comme recruteur, ou résoudre une étude de cas.</div></div>
             <div class="hub-card accent" onclick="showRoleplay('travail')"><span class="hub-card-icon">🏭</span><div class="hub-card-title">Au travail</div><div class="hub-card-desc">Choisis ton métier : une situation, ou une journée complète avec bilan.</div></div>
@@ -490,6 +494,11 @@
     <div id="modguide-view" class="view">
         <button class="back-btn" onclick="guideQuit(); showApprendre()">← Cours</button>
         <div id="guide-content" class="content-col"></div>
+    </div>
+
+    <div id="talk-view" class="view">
+        <button class="back-btn" onclick="talkStop(); showPratiquer()">← Pratiquer</button>
+        <div id="talk-content" class="content-col"></div>
     </div>
 
     <div id="prof-view" class="view">

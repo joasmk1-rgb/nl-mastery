@@ -726,3 +726,51 @@
         .prof-mic-row .prof-hint-btn { flex: 0 0 auto; width: auto; padding-left: 14px; padding-right: 14px; }
         .prof-hint { display: block; width: 100%; text-align: left; margin-top: 6px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-size: 0.88rem; }
         .prof-hint small { color: var(--text-secondary); }
+
+        /* Discuter */
+        .talk-entry { width: 100%; max-width: 520px; box-sizing: border-box; display: flex; gap: 14px; align-items: center; padding: 16px; margin-bottom: var(--space-3); border-radius: var(--radius-lg); cursor: pointer; background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 30%, var(--card-bg)), color-mix(in srgb, #a855f7 25%, var(--card-bg))); border: 2px solid var(--primary); }
+        .talk-entry small { color: var(--text-secondary); }
+        .talk-entry-avatars { font-size: 2rem; white-space: nowrap; }
+        .talk-goal { display: flex; gap: 12px; align-items: center; width: 100%; margin-bottom: 12px; font-size: 0.88rem; }
+        .talk-goal small { color: var(--text-secondary); }
+        .talk-ring-bg { fill: none; stroke: var(--border); stroke-width: 4; }
+        .talk-ring-fg { fill: none; stroke: var(--success); stroke-width: 4; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 20px 20px; transition: stroke-dashoffset .4s; }
+        .talk-ring text { font-size: 11px; font-weight: 700; fill: var(--text); }
+        .talk-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 6px; }
+        .talk-partner { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 10px; border-radius: var(--radius-lg); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); cursor: pointer; text-align: center; }
+        .talk-partner.active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--card-bg)); }
+        .talk-partner small { color: var(--text-secondary); font-size: 0.75rem; }
+        .talk-partner .talk-remember { color: var(--primary); }
+        .talk-avatar { font-size: 2.6rem; line-height: 1; }
+        .talk-avatar.small { font-size: 1.8rem; }
+        .talk-start { margin-top: 14px; }
+        .talk-head { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 8px; }
+        .talk-head-txt { flex: 1; display: flex; flex-direction: column; }
+        .talk-head-txt small { color: var(--text-secondary); font-size: 0.75rem; }
+        .talk-head .rp-coach-btn { margin: 0; }
+        .talk-chat { width: 100%; height: 44vh; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 6px 2px; box-sizing: border-box; }
+        .talk-msg { max-width: 85%; padding: 10px 14px; border-radius: 18px; line-height: 1.45; font-size: 0.95rem; }
+        .talk-msg.them { align-self: flex-start; background: var(--card-bg); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+        .talk-msg.me { align-self: flex-end; background: var(--primary); color: #fff; border-bottom-right-radius: 4px; }
+        .talk-msg.info { align-self: stretch; max-width: none; background: none; padding: 0; font-size: 0.85rem; }
+        .talk-msg.typing span { display: inline-block; width: 7px; height: 7px; margin: 0 2px; border-radius: 50%; background: var(--text-secondary); animation: talkDot 1s infinite; }
+        .talk-msg.typing span:nth-child(2) { animation-delay: .15s; } .talk-msg.typing span:nth-child(3) { animation-delay: .3s; }
+        @keyframes talkDot { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+        .talk-nl .rpw { cursor: pointer; }
+        .talk-tools { display: flex; gap: 6px; margin-top: 4px; }
+        .talk-tools button { background: none; border: none; cursor: pointer; font-size: 0.95rem; padding: 2px 4px; opacity: .75; }
+        .talk-fr { display: none; font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+        .talk-fr.show { display: block; }
+        .talk-word:not(:empty) { font-size: 0.82rem; margin-top: 6px; padding: 6px 8px; border-radius: 8px; background: var(--bg); }
+        .talk-help { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .talk-corr { margin-top: 6px; font-size: 0.8rem; background: rgba(255,255,255,.15); border-radius: 8px; padding: 4px 8px; }
+        .talk-corr summary { cursor: pointer; }
+        .talk-sugg { display: flex; gap: 6px; overflow-x: auto; width: 100%; padding: 6px 0; scrollbar-width: none; }
+        .talk-chip { flex: 0 0 auto; max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid var(--primary); background: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--text); border-radius: var(--radius-pill); padding: 7px 12px; font-size: 0.82rem; cursor: pointer; }
+        .talk-bar { display: flex; align-items: center; justify-content: center; gap: 22px; width: 100%; margin-top: 6px; }
+        .talk-mic { width: 74px; height: 74px; border-radius: 50%; border: none; background: var(--success); color: #fff; font-size: 2rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+        .talk-mic.listening { background: #ef4444; animation: talkPulse 1.2s infinite; }
+        @keyframes talkPulse { 0% { box-shadow: 0 0 0 0 rgba(239,68,68,.5); } 100% { box-shadow: 0 0 0 18px rgba(239,68,68,0); } }
+        .talk-side { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border); background: var(--card-bg); font-size: 1.3rem; cursor: pointer; color: var(--text); }
+        .talk-side.listening { border-color: #ef4444; }
+        .talk-mic-hint { text-align: center; font-size: 0.78rem; color: var(--text-secondary); margin-top: 6px; min-height: 1.2em; }
