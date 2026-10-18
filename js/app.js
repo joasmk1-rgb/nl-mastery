@@ -2283,9 +2283,8 @@ if (firebaseAvailable) {
             showApprendre();
         }
 
-        // L'ancien onglet "Jouer" n'existe plus : ses jeux sont dans l'onglet Réviser, la
-        // conjugaison et les particules séparables dans Apprendre. showJouer() est conservé
-        // comme alias pour les appels existants.
+        // L'onglet « Jouer » (4 jeux) s'affiche par showReviser() (ancien nom gardé pour les
+        // boutons retour des jeux) ; showJouer() est un alias.
         function showJouer() {
             showReviser();
         }
@@ -2347,40 +2346,53 @@ if (firebaseAvailable) {
                             <div class="hub-card-title">${titre}</div>
                             <div class="hub-card-desc">${getNotionStatusLabel(getNotionStatus(id))}</div>
                         </div>`;
-                    }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Débloque des notions dans Apprendre pour accéder à la production écrite.</div>`;
+                    }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Débloque des notions dans Cours pour accéder à la production écrite.</div>`;
                 }
             }
         }
 
-        // ===== Vue "Réviser" (mots ratés, déterminants, notions fragiles — systèmes existants) =====
+        // ===== Onglet « Jouer » : les 4 jeux de vocabulaire =====
         function showReviser() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('reviser-view').classList.add('active');
             setActiveNav('nav-reviser');
-            renderReviser();
         }
 
+        // Ce qui est à revoir : les mots (en bas de Vocabulaire) et les notions fragiles (dans
+        // Cours). Chacun est dessiné là où sa vue existe.
         function renderReviser() {
-            const el = document.getElementById('reviser-content');
-            if (!el) return;
-            const wordCount = getReviewItems().length;
-            const articleCount = getArticleReviewItems().length;
-            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 8) : [];
-            el.innerHTML = `
-                <div class="hub-grid single">
-                    <div class="hub-card" onclick="startRevision()">
+            const voc = document.getElementById('vocab-review');
+            if (voc) {
+                const wordCount = getReviewItems().length;
+                const articleCount = getArticleReviewItems().length;
+                voc.innerHTML = `
+                    <div class="hub-card" onclick="studyReturnFn = showVocab; startRevision()">
                         <span class="hub-card-icon">🔁</span>
                         <div class="hub-card-title">Mots à revoir</div>
-                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''} à retravailler.</div>
+                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''}.</div>
                     </div>
-                    <div class="hub-card" onclick="startArticleRevision()">
+                    <div class="hub-card" onclick="studyReturnFn = showVocab; startArticleRevision()">
                         <span class="hub-card-icon">🔤</span>
-                        <div class="hub-card-title">Déterminants (de/het)</div>
+                        <div class="hub-card-title">De ou het ?</div>
                         <div class="hub-card-desc">${articleCount} mot${articleCount > 1 ? 's' : ''} à revoir.</div>
                     </div>
-                </div>
+                    <div class="hub-card" onclick="showChunkTraining()">
+                        <span class="hub-card-icon">🧩</span>
+                        <div class="hub-card-title">Blocs de mots</div>
+                        <div class="hub-card-desc">Les mots en contexte.</div>
+                    </div>
+                    <div class="hub-card" onclick="showTestSelect()">
+                        <span class="hub-card-icon">🎯</span>
+                        <div class="hub-card-title">Test de vocabulaire</div>
+                        <div class="hub-card-desc">Combien de mots tu connais.</div>
+                    </div>`;
+            }
+            const el = document.getElementById('cours-weak');
+            if (!el) return;
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 8) : [];
+            el.innerHTML = `
                 ${weaknesses.length ? `
-                <div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">Notions fragiles</div>
+                <div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">Notions à consolider</div>
                 <div class="hub-grid single">
                     ${weaknesses.map(w => {
                         const titre = w.notion.content.titre || w.id.replace(/_/g, ' ');
@@ -2891,12 +2903,12 @@ if (firebaseAvailable) {
                     <p class="placement-intro-text">Un vrai programme structuré (A1 → B2) pour apprendre le néerlandais professionnel — pas juste des flashcards à mémoriser.</p>
                     <div class="section-title" style="margin-top:var(--space-4);">Comment utiliser l'appli</div>
                     <div class="intent-grid" style="margin-top:var(--space-2);">
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📚</div><div class="qa-label">Apprendre</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🔁</div><div class="qa-label">Réviser</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🗣️</div><div class="qa-label">Pratiquer</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">👤</div><div class="qa-label">Profil</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📖</div><div class="qa-label">Vocabulaire</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📚</div><div class="qa-label">Cours</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎭</div><div class="qa-label">Pratiquer</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
                     </div>
-                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📚 Les leçons, les mots et la conjugaison · 🔁 Revoir ce que tu as raté, et les jeux · 🗣️ Parler et écrire en situation réelle · 👤 Ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📖 Les mots et la conjugaison · 📚 Des leçons en situation · 🎭 Parler et écrire en situation réelle · 🎮 Des jeux pour entretenir ton vocabulaire · 👤 en haut : ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
                     <button class="btn btn-green" style="margin-top:var(--space-5);" onclick="onboardingGoTo('placement')">🚀 Évaluer mon niveau</button>
                     <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('start')">Commencer directement</button>
                     <p style="font-size:0.78rem; margin-top:var(--space-4);">${currentUser ? '' : `<a href="#" onclick="onboardingGoTo('compte'); return false;">Créer un compte pour synchroniser ta progression (optionnel)</a>`}</p>
@@ -3036,6 +3048,24 @@ if (firebaseAvailable) {
                     ${curriculumLoaded ? `<div style="font-size:0.76rem; color:var(--text-secondary); margin-top:6px;">${masteredCount}/${totalReadyCount} notions maîtrisées · vocabulaire couvert ${vp.pct}%</div>` : ''}
                 </div>`;
 
+            // ===== 2bis. Continuer : le prochain module en situation non réussi (le format
+            // principal des cours) ; à défaut, la recommandation du programme ci-dessus.
+            const isPassedMod = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
+            const nextMod = MODRP_IDS.map(id => modRpData[id]).filter(Boolean).find(m => !isPassedMod(m));
+            if (nextMod) {
+                const doneEt = nextMod.etapes.filter(e => modRpEtapeDone(nextMod.id, e)).length;
+                recoHtml = `
+                    <div class="dash-card dash-continue-card dash-reco-card">
+                        <div class="dash-continue-label">▶️ ${doneEt ? 'Continuer' : 'Commencer'}</div>
+                        <div class="dash-reco-titre">${nextMod.niveau} · Cours</div>
+                        <div class="dash-continue-title">${nextMod.icone || '🎭'} ${rpEscapeHtml(nextMod.titre)}</div>
+                        <div class="dash-reco-reason">${doneEt}/${nextMod.etapes.length} étapes · ${rpEscapeHtml(nextMod.accroche || nextMod.objectif || '')}</div>
+                        <div class="dash-reco-actions">
+                            <button class="btn btn-green" onclick="showModuleRp('${nextMod.id}')">${doneEt ? 'Continuer' : 'Commencer'}</button>
+                        </div>
+                    </div>`;
+            }
+
             // ===== 3. Raccourcis secondaires, discrets, sous l'action principale =====
             // Remplace la grille "Qu'est-ce que tu veux faire maintenant ?" (8 boutons qui
             // doublaient la barre d'onglets du bas) : il ne reste que ce qui dépend de TA
@@ -3073,15 +3103,22 @@ if (firebaseAvailable) {
 
             // Accueil volontairement court : où tu en es, UNE action évidente, puis le reste en
             // retrait. La navigation générale est assurée par la barre d'onglets, pas par l'accueil.
+            // Les 5 intentions, une tuile chacune (mêmes entrées que la barre du bas, plus la
+            // révision des erreurs) : on ouvre l'app et on sait quoi faire.
+            const tilesHtml = `
+                <div class="section-title" style="margin:var(--space-3) 0 var(--space-2);">Qu'est-ce que tu veux faire aujourd'hui ?</div>
+                <div class="hub-grid">
+                    <div class="hub-card" onclick="showVocab()"><span class="hub-card-icon">📖</span><div class="hub-card-title">Vocabulaire</div><div class="hub-card-desc">Verbes, noms, thèmes métier, conjugaison.</div></div>
+                    <div class="hub-card" onclick="showApprendre()"><span class="hub-card-icon">📚</span><div class="hub-card-title">Cours</div><div class="hub-card-desc">Modules en situation, grammaire.</div></div>
+                    <div class="hub-card" onclick="showPratiquer()"><span class="hub-card-icon">🎭</span><div class="hub-card-title">Pratiquer</div><div class="hub-card-desc">Jeux de rôle à l'oral, écrit.</div></div>
+                    <div class="hub-card" onclick="showReviser()"><span class="hub-card-icon">🎮</span><div class="hub-card-title">Jouer</div><div class="hub-card-desc">Memory, contre-la-montre, mot mélangé, tri rapide.</div></div>
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="studyReturnFn = showHome; startRevision()"><span class="hub-card-icon">🔁</span><div class="hub-card-title">Réviser mes erreurs</div><div class="hub-card-desc">${reviewCount ? reviewCount + ' mot' + (reviewCount > 1 ? 's' : '') + ' raté' + (reviewCount > 1 ? 's' : '') + ' à revoir.' : 'Rien à revoir pour l\'instant.'}</div></div>
+                </div>`;
             block.innerHTML = `
                 ${headerHtml}
                 ${placementNudgeHtml}
                 ${recoHtml}
-                ${linksHtml}
-                ${weakHtml ? `<div class="dash-card">
-                    <h3 style="margin:0 0 10px; font-size:0.9rem;">À revoir</h3>
-                    ${weakHtml}
-                </div>` : ''}
+                ${tilesHtml}
                 ${socialHtml}
                 ${accountNudgeHtml}`;
         }
@@ -3093,12 +3130,13 @@ if (firebaseAvailable) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('apprendre-view').classList.add('active');
             setActiveNav('nav-apprendre');
+            renderModRpEntries();
             if (!curriculumLoaded) {
                 document.getElementById('module-list').innerHTML = '<p style="color:#888;">Programme en cours de chargement...</p>';
                 return;
             }
             renderApprendreLevel(apprendreCurrentLevel);
-            renderModRpEntries();
+            renderReviser();
         }
 
         // Modules en format jeu de rôle, affichés en tête d'Apprendre avec leur progression.
@@ -3111,7 +3149,7 @@ if (firebaseAvailable) {
             const levels = [...new Set(mods.map(m => m.niveau))];
             const isPassed = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
             const openLevel = levels.find(l => mods.filter(m => m.niveau === l).some(m => !isPassed(m))) || levels[levels.length - 1];
-            el.innerHTML = `<div class="section-title" style="margin-top:0;">🎭 Apprendre en situation (nouveau format)</div>` + levels.map(level => {
+            el.innerHTML = levels.map(level => {
                 const list = mods.filter(m => m.niveau === level);
                 const nPassed = list.filter(isPassed).length;
                 return `<details class="modrp-level" ${level === openLevel ? 'open' : ''}>
@@ -3712,7 +3750,7 @@ if (firebaseAvailable) {
         async function showChunkTraining() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('chunk-view').classList.add('active');
-            setActiveNav('nav-apprendre');
+            setActiveNav('nav-vocab');
             const box = document.getElementById('chunk-content');
             box.innerHTML = '<p style="color:#888;">Chargement des blocs...</p>';
             await loadChunks();
@@ -3846,7 +3884,7 @@ if (firebaseAvailable) {
         function showConjugaison() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conjugaison-view').classList.add('active');
-            setActiveNav('nav-apprendre');
+            setActiveNav('nav-vocab');
             document.getElementById('conj-detail').innerHTML = '';
             if (!conjugationLoaded) {
                 document.getElementById('conj-list').innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -5239,7 +5277,7 @@ if (firebaseAvailable) {
             if (filter !== undefined) conjTrainingVerbFilter = filter;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conj-training-view').classList.add('active');
-            setActiveNav('nav-apprendre');
+            setActiveNav('nav-vocab');
             const content = document.getElementById('conj-training-content');
             if (!conjugationLoaded) {
                 content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -5496,7 +5534,7 @@ if (firebaseAvailable) {
         function startSeparableTrainingSession() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('separable-training-view').classList.add('active');
-            setActiveNav('nav-apprendre');
+            setActiveNav('nav-vocab');
             const content = document.getElementById('separable-training-content');
             if (!conjugationLoaded) {
                 content.innerHTML = '<p style="color:#888;">Données de conjugaison en cours de chargement...</p>';
@@ -5871,7 +5909,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 totalWords += total;
                 totalMastered += mastered;
                 return `
-                <div class="card-menu blue" onclick="startSession('${cat.file}')">
+                <div class="card-menu blue" onclick="vocabOpenCat('file', '${cat.file}')">
                     ${cat.label}
                     <div class="cat-sub">${mastered}/${total} maîtrisés (${pct}%)</div>
                     <div class="cat-bar"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
@@ -5885,41 +5923,114 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function renderThemes(themes) {
             const section = document.getElementById('theme-section');
             if (!themes.length) { section.innerHTML = ''; return; }
-            section.innerHTML = '<h2 style="margin-top:40px;">Thèmes métier</h2><div class="grid">' +
-                themes.map(t => `<div class="card-menu blue" onclick="startSession('${t.file}')">${categoryLabel(t.file)} (${t.count})</div>`).join('') +
+            section.innerHTML = '<div class="section-title">💼 Thèmes métier</div><div class="grid" style="margin-top:0;">' +
+                themes.map(t => `<div class="card-menu blue" onclick="vocabOpenCat('file', '${t.file}')">${categoryLabel(t.file)} (${t.count})</div>`).join('') +
                 '</div>';
         }
 
+        // « Mes listes » : les mots venus du jeu de rôle et du portrait (fichiers virtuels de
+        // fullDb), puis les listes perso.
+        const VOCAB_VIRTUAL_FILES = ['MOTS_JEU_DE_ROLE', 'KITS_JEU_DE_ROLE', 'MON_PORTRAIT'];
         function renderCustomListsHome() {
             const section = document.getElementById('customlist-section');
-            const names = Object.keys(state.customLists);
-            if (!names.length) { section.innerHTML = ''; return; }
-            section.innerHTML = '<h2 style="margin-top:40px;">Mes listes</h2><div class="grid">' +
-                names.map(n => `<div class="card-menu" style="color:#8b5cf6" onclick="startCustomList('${n}')">📋 ${n} (${state.customLists[n].length})</div>`).join('') +
+            if (!section) return;
+            const files = VOCAB_VIRTUAL_FILES.map(f => ({ f, n: fullDb.filter(i => i.file === f).length })).filter(x => x.n);
+            const names = Object.keys(state.customLists).filter(n => state.customLists[n].length);
+            if (!files.length && !names.length) { section.innerHTML = ''; return; }
+            section.innerHTML = '<div class="section-title">📋 Mes listes</div><div class="grid" style="margin-top:0;">' +
+                files.map(x => `<div class="card-menu" style="color:#8b5cf6" onclick="vocabOpenCat('file', '${x.f}')">${categoryLabel(x.f)} (${x.n})</div>`).join('') +
+                names.map(n => `<div class="card-menu" style="color:#8b5cf6" onclick="vocabOpenCat('list', decodeURIComponent('${encodeURIComponent(n).replace(/'/g, '%27')}'))">📋 ${rpEscapeHtml(n)} (${state.customLists[n].length})</div>`).join('') +
                 '</div>';
+        }
+
+        // ===== Onglet « Vocabulaire » =====
+        function showVocab() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('vocab-view').classList.add('active');
+            setActiveNav('nav-vocab');
+            renderMainCategories();
+            renderCustomListsHome();
+            updateDirectionButton();
+            renderReviser();
+        }
+
+        // Fiche d'une catégorie (fichier de mots ou liste perso) : les mêmes boutons partout.
+        let vocabCurrent = null;   // { kind, key }
+        let studyReturnFn = null;  // où ramène « ← Retour » de l'entraînement
+        function vocabItems(kind, key) {
+            const items = kind === 'list'
+                ? fullDb.filter(i => (state.customLists[key] || []).includes(i.id))
+                : fullDb.filter(i => i.file === key);
+            return byFrequencyDesc(items);
+        }
+        function vocabOpenCat(kind, key) {
+            conjAudioStop();
+            vocabCurrent = { kind, key };
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('vocabcat-view').classList.add('active');
+            setActiveNav('nav-vocab');
+            const items = vocabItems(kind, key);
+            const label = kind === 'list' ? '📋 ' + key : categoryLabel(key);
+            const mastered = items.filter(i => isTrueMastered(i.id)).length;
+            const toReview = items.filter(i => wordStatus(i.id) === 'review').length;
+            const pct = items.length ? Math.round(mastered / items.length * 100) : 0;
+            document.getElementById('vocabcat-audio-box').innerHTML = '';
+            document.getElementById('vocabcat-content').innerHTML = `
+                <h2 style="margin-bottom:4px;">${rpEscapeHtml(label)}</h2>
+                <p class="section-subtitle" style="margin-top:0;">${items.length} mots · ${mastered} maîtrisés (${pct}%)${toReview ? ' · ' + toReview + ' à revoir' : ''}</p>
+                <div class="cat-bar" style="margin-bottom:var(--space-3);"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
+                <div class="hub-grid single">
+                    <div class="hub-card accent" onclick="vocabTrain()"><span class="hub-card-icon">✍️</span><div class="hub-card-title">S'entraîner</div><div class="hub-card-desc">Traduire les mots, du plus courant au plus rare, par paquets.</div></div>
+                    <div class="hub-card" onclick="vocabListen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Les mots lus en néerlandais et en français, mains libres.</div></div>
+                    ${key === 'VERBES_NL' ? `<div class="hub-card" onclick="showConjugaison()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison</div><div class="hub-card-desc">Fiches des verbes et entraînement, à l'écrit, à l'oral ou en écoute.</div></div>` : ''}
+                    ${kind === 'file' ? `<div class="hub-card" onclick="showWordList('vocab', '${key}')"><span class="hub-card-icon">📋</span><div class="hub-card-title">Voir la liste</div><div class="hub-card-desc">Chercher, filtrer, sélectionner des mots pour en faire une liste.</div></div>` : ''}
+                </div>`;
+        }
+        function vocabTrain() {
+            if (!vocabCurrent) return;
+            const { kind, key } = vocabCurrent;
+            studyReturnFn = () => vocabOpenCat(kind, key);
+            if (kind === 'list') startCustomList(key); else startSession(key);
+        }
+        function vocabListen() {
+            if (!vocabCurrent) return;
+            const box = document.getElementById('vocabcat-audio-box');
+            if (box.innerHTML && !conjAudioRun) { box.innerHTML = ''; return; } // 2e clic : referme
+            const { kind, key } = vocabCurrent;
+            const label = kind === 'list' ? key : categoryLabel(key);
+            wordAudioCtx = { boxId: 'vocabcat-audio-box', viewId: 'vocabcat-view', items: vocabItems(kind, key), label: `les mots « ${label} », du plus courant au plus rare` };
+            conjAudioStop();
+            wordAudioRenderSetup();
+            box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        function studyBack() {
+            const f = studyReturnFn;
+            studyReturnFn = null;
+            if (f) f(); else showHome();
         }
 
         // LISTE DES MOTS (vue + sélection + listes perso)
-        // Accessible depuis Profil ET depuis Apprendre (voir cahier des charges "Apprendre →
+        // Accessible depuis Vocabulaire (fiche d'une catégorie). Ancien commentaire : "Apprendre →
         // Vocabulaire") : on retient d'où on vient pour que "← Retour" ramène au bon endroit,
         // plutôt que de renvoyer systématiquement vers Profil.
-        let wordListReturnTo = 'profil';
-        function showWordList(returnTo) {
-            wordListReturnTo = returnTo || 'profil';
+        let wordListReturnTo = 'vocab';
+        function showWordList(returnTo, presetFile) {
+            wordListReturnTo = returnTo || 'vocab';
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('wordlist-view').classList.add('active');
-            setActiveNav(wordListReturnTo === 'apprendre' ? 'nav-apprendre' : 'nav-profil');
+            setActiveNav('nav-vocab');
             const filter = document.getElementById('wl-filter');
             const categories = [...new Set(fullDb.map(i => i.file))];
             filter.innerHTML = '<option value="">Toutes catégories</option>' +
                 categories.map(c => `<option value="${c}">${categoryLabel(c)}</option>`).join('');
+            if (presetFile) filter.value = presetFile;
             renderWordList();
             // Les blocs arrivent en différé : on redessine la liste quand ils sont là (bouton 🧩).
             if (!chunksData) loadChunks().then(() => { if (document.getElementById('wordlist-view').classList.contains('active')) renderWordList(); });
         }
 
         function wordListBack() {
-            if (wordListReturnTo === 'apprendre') showApprendre(); else showProfil();
+            if (vocabCurrent) vocabOpenCat(vocabCurrent.kind, vocabCurrent.key); else showVocab();
         }
 
         // Palette de couleurs par niveau CECR, réutilisée partout où on affiche ce badge
@@ -6179,7 +6290,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // attente, on annule ce minuteur plutôt que de le laisser rappeler nextExercise() sur un
             // tout autre écran quelques instants plus tard.
             clearTimeout(exerciseAutoAdvanceTimer);
-            document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.bottom-nav button, .header-profil-btn').forEach(b => b.classList.remove('active'));
             const btn = document.getElementById(id);
             if (btn) btn.classList.add('active');
             // showLesson()/showExercise() n'appellent jamais setActiveNav (ce sont des sous-vues
@@ -7016,7 +7127,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                         <span class="pm-chevron">${state.freeAccess ? 'Activé' : 'Désactivé'}</span>
                     </div>
                     ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
-                    <div class="profil-menu-row" onclick="showTestSelect()"><span class="pm-icon">🎯</span><span>Test de vocabulaire</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
@@ -7164,7 +7274,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showTestSelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('test-select-view').classList.add('active');
-            setActiveNav('nav-profil');
+            setActiveNav('nav-vocab');
         }
 
         function testableWords() {
@@ -8298,7 +8408,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="rp-coach-body">Touche n'importe quel mot de ton interlocuteur pour sa traduction.
 <span class="rpw rpw-new">orange</span> : pas encore dans ton vocabulaire.
 <span class="rpw rpw-review">bleu</span> : dans ton vocabulaire, raté en exercice.${on ? '\n<span class="rpw rpw-unseen">gris</span> : dans ton vocabulaire, jamais travaillé.' : ''}
-« ➕ À apprendre » les met dans la liste « ${RP_WORDS_LIST} » (Apprendre → Mots → Par thème → Mes listes).</div>
+« ➕ À apprendre » les met dans la liste « ${RP_WORDS_LIST} » (Vocabulaire → Mes listes).</div>
                 <div class="rp-help-actions"><button type="button" class="rp-coach-btn" onclick="rpToggleUnderlineUnseen()">${on ? '✓ ' : ''}Souligner aussi les mots jamais travaillés</button></div>`;
         }
 

@@ -629,3 +629,4 @@
         .chunk-q-fr { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
         .chunk-q-nl { font-size: 1.05rem; margin-bottom: 6px; line-height: 1.6; }
         .chunk-gap { color: var(--primary); font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; }
+        .header-profil-btn.active { color: var(--primary); }
