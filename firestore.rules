@@ -31,6 +31,13 @@ service cloud.firestore {
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
 
+    // Compte coché « bêta-testeur » par l'admin (et non désactivé) : peut lire la clé Gemini
+    // partagée (config/gemini).
+    function isBetaTester() {
+      let u = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+      return isSignedIn() && u.get('beta', false) == true && u.get('disabled', false) == false;
+    }
+
     // Un seul id de relation par paire d'utilisateurs (toujours les deux uid triés, joints par
     // "_" — voir socialPairId côté client). Reproduit ici pour vérifier qu'un ami accepté peut
     // bien lire friendStats/{uid} sans jamais pouvoir lire la progression complète (users/{uid}).
@@ -56,7 +63,8 @@ service cloud.firestore {
       // compte activé — empêche un client malveillant de s'auto-promouvoir admin dès la création.
       allow create: if isOwner(uid) &&
         request.resource.data.role == 'user' &&
-        request.resource.data.disabled == false;
+        request.resource.data.disabled == false &&
+        request.resource.data.get('beta', false) == false;
 
       // Mise à jour : le propriétaire peut mettre à jour SA progression (synchro cloud à chaque
       // save()) mais ne peut jamais changer son propre rôle ni se réactiver lui-même s'il est
@@ -64,10 +72,21 @@ service cloud.firestore {
       allow update: if isAdmin() || (
         isOwner(uid) &&
         request.resource.data.role == resource.data.role &&
-        request.resource.data.disabled == resource.data.disabled
+        request.resource.data.disabled == resource.data.disabled &&
+        request.resource.data.get('beta', false) == resource.data.get('beta', false)
       );
 
       allow delete: if false; // aucune fonctionnalité de suppression de compte pour l'instant
+    }
+
+    // ================= config/gemini — clé Gemini partagée avec les bêta-testeurs =================
+    // Lisible uniquement par l'admin et les comptes cochés bêta-testeur ; modifiable par l'admin
+    // seul. Un bêta-testeur peut techniquement voir la clé dans son navigateur : la restreindre
+    // au site (console Google Cloud → Identifiants → Référents HTTP) limite ce risque.
+    match /config/{docId} {
+      allow get: if docId == 'gemini' && (isAdmin() || isBetaTester());
+      allow list: if false;
+      allow write: if isAdmin();
     }
 
     // ================= usernames/{pseudoLower} — mapping pseudo -> uid (existait déjà) =================

@@ -131,6 +131,7 @@ async function accLogin(pseudo, password) {
         }
         currentUser = cred.user;
         currentUserDoc = userDoc;
+        await betaKeyRefresh(userDoc);
         // Réconcilie la progression de l'appareil avec celle du compte (adoption, fusion ou
         // envoi selon le cas — voir cloudReconcile). Si la page se recharge, rien d'autre à faire.
         cloudLastCheckAt = Date.now();
@@ -174,6 +175,7 @@ async function accLogout() {
     // cache social (amis, notifications). Le rechargement remet tous les écrans à zéro.
     localStorage.removeItem(STATE_KEY);
     localStorage.removeItem(SYNC_META_KEY);
+    localStorage.removeItem(BETA_KEY_STORAGE);
     location.reload();
 }
 
@@ -418,8 +420,9 @@ async function cloudCheck() {
         const snap = await db.collection('users').doc(currentUser.uid).get();
         if (!snap.exists) return false;
         const userDoc = snap.data();
-        if (userDoc.disabled) { await auth.signOut(); currentUser = null; currentUserDoc = null; return false; }
+        if (userDoc.disabled) { await auth.signOut(); currentUser = null; currentUserDoc = null; betaKeyRefresh(null); return false; }
         currentUserDoc = userDoc;
+        betaKeyRefresh(userDoc);
         return await cloudReconcile(userDoc, false);
     } catch (e) {
         cloudSyncFailed(e);
@@ -1291,6 +1294,80 @@ async function loadSocialDashboardSnippet() {
     } catch (e) { console.warn('Social dashboard snippet non chargé :', e); }
 }
 
+// ===== Clé Gemini partagée (bêta-testeurs) =====
+// L'admin range sa clé une fois dans Firestore (config/gemini) et coche les comptes bêta-testeurs
+// (users/{uid}.beta). À la connexion, un compte coché reçoit la clé sur son appareil
+// (localStorage, jamais dans la progression synchronisée) ; décoché ou déconnecté, elle est
+// retirée. Voir firestore.rules (isBetaTester) : personne d'autre ne peut la lire.
+const BETA_KEY_STORAGE = 'gemini_shared_key';
+async function betaKeyRefresh(userDoc) {
+    if (!userDoc || !(userDoc.beta || userDoc.role === 'admin') || userDoc.disabled) {
+        localStorage.removeItem(BETA_KEY_STORAGE);
+        return;
+    }
+    try {
+        const snap = await db.collection('config').doc('gemini').get();
+        const key = snap.exists ? String(snap.data().key || '').trim() : '';
+        if (key) localStorage.setItem(BETA_KEY_STORAGE, key); else localStorage.removeItem(BETA_KEY_STORAGE);
+    } catch (e) {
+        // Règles pas encore publiées, ou accès retiré : pas de clé partagée.
+        localStorage.removeItem(BETA_KEY_STORAGE);
+    }
+}
+
+async function adminRenderSharedKey() {
+    const el = document.getElementById('admin-shared-key');
+    if (!el) return;
+    let key = '';
+    try {
+        const snap = await db.collection('config').doc('gemini').get();
+        key = snap.exists ? String(snap.data().key || '') : '';
+    } catch (e) {
+        el.innerHTML = `<p class="report-meta">Lecture impossible (${e.message}). As-tu publié les nouvelles règles Firestore ?</p>`;
+        return;
+    }
+    el.innerHTML = `
+        <div class="study-box" style="text-align:left; margin-top:0;">
+            <h3 style="margin-top:0;">🔑 Clé Gemini partagée (bêta)</h3>
+            <p style="font-size:0.85rem;">${key ? `✅ Une clé est enregistrée (…${key.slice(-4)}). Les comptes cochés « 🧪 Bêta » la reçoivent à la connexion.` : 'Aucune clé partagée pour l\'instant.'}</p>
+            <input type="password" id="admin-shared-key-input" placeholder="Colle ici la clé à partager">
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+                <button class="btn btn-green" style="margin:0; width:auto;" onclick="adminSaveSharedKey()">💾 Enregistrer</button>
+                ${key ? `<button class="btn btn-red" style="margin:0; width:auto;" onclick="adminRemoveSharedKey()">🗑️ Retirer la clé partagée</button>` : ''}
+            </div>
+            <p class="report-meta">Conseil : limite la clé à ton site dans la console Google Cloud (Identifiants → Référents HTTP : https://joasmk1-rgb.github.io/*).</p>
+        </div>`;
+}
+
+async function adminSaveSharedKey() {
+    const input = document.getElementById('admin-shared-key-input');
+    const key = input ? input.value.trim() : '';
+    if (!key) { alert("Colle une clé avant d'enregistrer."); return; }
+    try {
+        await db.collection('config').doc('gemini').set({ key, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        await betaKeyRefresh(currentUserDoc);
+        adminRenderSharedKey();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function adminRemoveSharedKey() {
+    if (!confirm('Retirer la clé partagée ? Les bêta-testeurs ne pourront plus utiliser Gemini (sauf avec leur propre clé).')) return;
+    try {
+        await db.collection('config').doc('gemini').delete();
+        await betaKeyRefresh(currentUserDoc);
+        adminRenderSharedKey();
+    } catch (e) { alert('Erreur : ' + e.message); }
+}
+
+async function adminToggleBeta(uid, newVal) {
+    try {
+        await db.collection('users').doc(uid).update({ beta: newVal });
+        loadAdminUsers();
+    } catch (e) {
+        alert('Erreur : ' + e.message);
+    }
+}
+
 // ===== Panneau admin =====
 function showAdmin() {
     if (!currentUserDoc || currentUserDoc.role !== 'admin') {
@@ -1299,6 +1376,7 @@ function showAdmin() {
     }
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('admin-view').classList.add('active');
+    adminRenderSharedKey();
     loadAdminUsers();
 }
 
@@ -1318,6 +1396,7 @@ async function loadAdminUsers() {
                 <span class="admin-pseudo">${u.pseudo}${u.role === 'admin' ? ' 👑' : ''}</span>
                 <span class="admin-status ${u.disabled ? 'disabled' : 'active'}">${u.disabled ? 'Désactivé' : 'Actif'}</span>
                 <button style="background:${u.disabled ? 'var(--success)' : 'var(--wrong)'}" onclick="adminToggleDisabled('${uid}', ${!u.disabled})">${u.disabled ? 'Réactiver' : 'Désactiver'}</button>
+                <button style="background:${u.beta ? 'var(--primary)' : '#888'}" onclick="adminToggleBeta('${uid}', ${!u.beta})" title="Reçoit la clé Gemini partagée">🧪 Bêta : ${u.beta ? 'oui' : 'non'}</button>
                 <button style="background:#888" onclick="adminClearProgress('${uid}', '${u.pseudo.replace(/'/g, "\\'")}')">Effacer progression</button>
             `;
             listEl.appendChild(row);
@@ -1361,6 +1440,7 @@ if (firebaseAvailable) {
             if (userDoc.disabled) { await auth.signOut(); return; }
             currentUser = user;
             currentUserDoc = userDoc;
+            await betaKeyRefresh(userDoc);
             // Récupère ce qui a été fait sur un autre appareil depuis la dernière visite.
             cloudLastCheckAt = Date.now();
             if (await cloudReconcile(userDoc, false)) return; // la page se recharge
@@ -5634,8 +5714,10 @@ if (firebaseAvailable) {
         // Le curriculum NL Mastery reste toujours la source de vérité pédagogique.
         // Gemini n'intervient qu'en complément (reformulations, exemples, correction) — jamais pour définir le programme.
         const GeminiService = (() => {
+            // Sa propre clé d'abord ; sinon la clé partagée par l'admin aux bêta-testeurs
+            // (BETA_KEY_STORAGE, copiée depuis Firestore config/gemini à la connexion).
             function getKey() {
-                return localStorage.getItem('gemini_api_key') || '';
+                return localStorage.getItem('gemini_api_key') || localStorage.getItem(BETA_KEY_STORAGE) || '';
             }
             function isAvailable() {
                 return !!getKey();
@@ -6996,16 +7078,19 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // ne le gèrent plus chacun de leur côté.
         function renderGeminiConfigBlock() {
             const configured = GeminiService.isAvailable();
+            const ownKey = !!localStorage.getItem('gemini_api_key');
+            const sharedKey = !ownKey && !!localStorage.getItem(BETA_KEY_STORAGE);
             return `
                 <div class="study-box" style="margin-top:15px;">
                     <h3>🤖 Intelligence IA</h3>
                     <p style="font-size:0.85rem;">Utilisée pour les corrections, le jeu de rôle vocal et la production écrite/orale. Ta clé reste uniquement sur cet appareil — elle n'est jamais envoyée dans ta sauvegarde cloud avec ta progression.</p>
-                    <p style="font-weight:bold; color:${configured ? 'var(--success)' : 'var(--wrong)'};">${configured ? '✅ Clé configurée' : '❌ Aucune clé configurée'}</p>
+                    <p style="font-weight:bold; color:${configured ? 'var(--success)' : 'var(--wrong)'};">${sharedKey ? '✅ Clé fournie (accès bêta) : rien à faire' : (configured ? '✅ Clé configurée' : '❌ Aucune clé configurée')}</p>
+                    ${sharedKey ? '<p style="font-size:0.8rem;">Tu peux quand même enregistrer ta propre clé ci-dessous : elle sera utilisée à la place.</p>' : ''}
                     <input type="password" id="gemini-key-input" placeholder="Colle ta clé API Gemini ici...">
                     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
                         <button class="btn btn-green" onclick="geminiSaveKeyFromProfil()">💾 Enregistrer</button>
                         <button class="btn btn-gray" onclick="geminiTestConnection()">🔌 Tester la connexion</button>
-                        ${configured ? `<button class="btn btn-red" onclick="geminiRemoveKey()">🗑️ Supprimer</button>` : ''}
+                        ${ownKey ? `<button class="btn btn-red" onclick="geminiRemoveKey()">🗑️ Supprimer</button>` : ''}
                     </div>
                     <p id="gemini-test-result" style="font-size:0.85rem; margin-top:8px;"></p>
                     <small style="color: var(--text); opacity:0.7;">Pas encore de clé ? <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">Obtiens-en une gratuitement sur Google AI Studio →</a></small>
