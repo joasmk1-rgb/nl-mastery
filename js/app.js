@@ -10768,6 +10768,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 dur: s.dur === 30 ? 30 : 15,
                 goal: PROF_GOALS[s.goal] ? s.goal : 'travail',
                 handsfree: s.handsfree !== false,
+                silence: [1500, 3000, 5000, 0].includes(s.silence) ? s.silence : 3000,
                 notion: s.notion || ''
             };
             return state.settings.prof;
@@ -10873,6 +10874,8 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     </select>
                     <div class="conj-audio-label">Mode</div>
                     <div class="conj-audio-chips">${chip(s.handsfree, "profSet('handsfree',true)", '🗣️ Mains libres')}${chip(!s.handsfree, "profSet('handsfree',false)", '👆 Je touche 🎤 pour parler')}</div>
+                    <div class="conj-audio-label">Envoi de ma réponse</div>
+                    <div class="conj-audio-chips">${PROF_SILENCES.map(ms => chip(s.silence === ms, `profSet('silence',${ms})`, ms ? `après ${String(ms / 1000).replace('.', ',')} s de silence` : '👆 quand je touche le micro')).join('')}</div>
                     <p class="conj-audio-hint">${s.dur} min : échauffement (${plan.warm} échanges) · point ciblé (${plan.ex} exercices) · mise en pratique (${plan.task} répliques) · bilan. Tu peux parler 🇫🇷 en français à tout moment pour poser une question.</p>
                     <button class="btn btn-green" style="margin-top:8px;" onclick="profStart()" ${GeminiService.isAvailable() && ids.length ? '' : 'disabled'}>▶️ Commencer le cours</button>
                 </div>
@@ -10980,7 +10983,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
 
         function profStopAudio() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            if (profRec) { const r = profRec; profRec = null; r._aborted = true; try { r.abort(); } catch (e) {} }
+            if (profRec) profMicFinish(profRec, false);
             profMicState(null);
         }
 
@@ -11001,43 +11004,86 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
 
         function profMicState(lang) {
             const nl = document.getElementById('prof-mic'), fr = document.getElementById('prof-mic-fr');
-            if (nl) nl.innerText = lang === 'nl' ? '🎙️ J\'écoute… (touche pour arrêter)' : '🎤 Parler';
+            const manual = profSettings().silence === 0;
+            if (nl) nl.innerText = lang === 'nl' ? (manual ? '🎙️ J\'écoute… touche pour envoyer' : '🎙️ J\'écoute… (touche pour envoyer tout de suite)') : '🎤 Parler';
             if (fr) fr.innerText = lang === 'fr' ? '🎙️ J\'écoute en français…' : '🇫🇷 En français';
         }
 
+        // Micro du cours : écoute CONTINUE, relancée si le navigateur la coupe (Android le fait
+        // après chaque phrase), et envoi seulement après un silence réglable (state.settings.prof.
+        // silence, en ms ; 0 = on touche le bouton pour envoyer). Avant la première parole, on
+        // laisse 10 secondes pour réfléchir.
+        const PROF_SILENCES = [1500, 3000, 5000, 0];
         function profMic(lang) {
             if (!prof || prof.ended) return;
-            if (profRec) { const r = profRec; profRec = null; try { r.stop(); } catch (e) {} return; }
+            if (profRec) { profMicFinish(profRec, true); return; }
             if (!window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : écris ta réponse, ou utilise Google Chrome."); return; }
             if (prof.busy) return;
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             if (rpIsRecording && rpRecognition) rpRecognition.stop();
-            const rec = new window.SpeechRecognition();
-            rec.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
-            rec.continuous = false;
-            rec.interimResults = true;
             const input = document.getElementById('prof-input');
-            let finalText = '';
-            rec.onresult = e => {
-                let interim = '';
-                finalText = '';
-                for (let i = 0; i < e.results.length; i++) {
-                    if (e.results[i].isFinal) finalText += e.results[i][0].transcript;
-                    else interim += e.results[i][0].transcript;
-                }
-                if (input) input.value = (finalText + ' ' + interim).trim();
+            const silence = profSettings().silence;
+            const st = { lang, committed: '', session: '', rec: null, done: false, heard: false, lastAt: Date.now(), startAt: Date.now(), timer: null };
+            const show = interim => { if (input) input.value = [st.committed, st.session, interim].filter(Boolean).join(' ').trim(); };
+            const startSession = () => {
+                if (st.done) return;
+                const rec = new window.SpeechRecognition();
+                rec.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
+                rec.continuous = true;
+                rec.interimResults = true;
+                rec.onresult = e => {
+                    // Les phrases finales de la session ; Android renvoie parfois chaque phrase
+                    // complétée de la précédente : on ne garde que la plus longue d'une même suite.
+                    const finals = [];
+                    let interim = '';
+                    for (let i = 0; i < e.results.length; i++) {
+                        const t = e.results[i][0].transcript.trim();
+                        if (!e.results[i].isFinal) { interim += ' ' + t; continue; }
+                        const prev = finals[finals.length - 1];
+                        if (prev && normalize(t).startsWith(normalize(prev))) finals[finals.length - 1] = t;
+                        else if (t) finals.push(t);
+                    }
+                    st.session = finals.join(' ');
+                    st.heard = true;
+                    st.lastAt = Date.now();
+                    show(interim.trim());
+                };
+                rec.onerror = e => {
+                    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { alert('Micro refusé : autorise le micro pour ce site.'); profMicFinish(st, false); }
+                };
+                rec.onend = () => {
+                    if (st.done) return;
+                    st.committed = [st.committed, st.session].filter(Boolean).join(' ');
+                    st.session = '';
+                    setTimeout(startSession, 120);
+                };
+                st.rec = rec;
+                try { rec.start(); } catch (e) { setTimeout(startSession, 300); }
             };
-            rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') alert('Micro refusé : autorise le micro pour ce site.'); };
-            rec.onend = () => {
-                const wasMine = profRec === rec || profRec === null;
-                if (profRec === rec) profRec = null;
-                profMicState(null);
-                const text = (input && input.value.trim()) || finalText.trim();
-                if (wasMine && !rec._aborted && text && profActive()) { input.value = ''; profSubmit(text, lang === 'fr'); }
-            };
-            profRec = rec;
+            st.timer = setInterval(() => {
+                if (st.done) return;
+                if (!profActive()) { profMicFinish(st, false); return; }
+                const now = Date.now();
+                if (now - st.startAt > 120000) { profMicFinish(st, true); return; }
+                if (!silence) return;
+                if (st.heard ? now - st.lastAt > silence : now - st.startAt > 10000) profMicFinish(st, true);
+            }, 200);
+            profRec = st;
             profMicState(lang);
-            try { rec.start(); } catch (e) { profRec = null; profMicState(null); }
+            if (input) input.value = '';
+            startSession();
+        }
+
+        function profMicFinish(st, submit) {
+            if (st.done) return;
+            st.done = true;
+            clearInterval(st.timer);
+            if (profRec === st) profRec = null;
+            try { st.rec && st.rec.abort(); } catch (e) {}
+            profMicState(null);
+            const input = document.getElementById('prof-input');
+            const text = input ? input.value.trim() : '';
+            if (submit && text && profActive()) { input.value = ''; profSubmit(text, st.lang === 'fr'); }
         }
 
         function profSendTyped() {
