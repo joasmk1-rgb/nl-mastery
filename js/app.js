@@ -12040,7 +12040,9 @@ ${prof.conj.length ? 'Formes de conjugaison qu\'il rate souvent (à glisser si �
 Produis :
 - "explication_fr" : l'explication orale en français, 3 ou 4 phrases simples et concrètes, comme un prof qui parle.
 - "exemples" : 2 ou 3 phrases néerlandaises courtes avec leur traduction, dans le contexte de son objectif.
-- "exercices" : exactement ${n} mini-exercices ORAUX variés (transformer une phrase, compléter une phrase à trou ___, traduire une phrase française, répondre à une question en appliquant la règle), chacun avec UNE réponse courte (une phrase au maximum). Champs : "consigne_fr" (courte, en français), "enonce" (ce que l'apprenant entend : phrase néerlandaise à transformer ou à compléter, ou phrase française à traduire), "langue_enonce" ("nl" ou "fr"), "reponse" (réponse attendue complète, en néerlandais), "alternatives" (autres réponses correctes), "astuce_fr".
+- "exercices" : exactement ${n} mini-exercices ORAUX variés (transformer une phrase, compléter une phrase à trou ___, traduire une phrase française, répondre à une question en appliquant la règle), chacun avec UNE réponse courte (une phrase au maximum).
+  RÈGLE ABSOLUE : l'apprenant ne doit JAMAIS avoir à inventer du contenu. L'exercice teste la grammaire, pas l'imagination : toute information nécessaire (la raison, le fait, le moment, le chiffre…) est donnée dans la consigne ou l'énoncé. Exemple correct pour « répondre avec doordat » : consigne « Réponds avec doordat. Raison : la signature manque. », énoncé « Waarom is het document afgekeurd? », réponse « Het document is afgekeurd doordat de handtekening ontbreekt. ». Si l'exercice demande d'utiliser un mot précis (omdat, doordat…), la réponse attendue l'utilise. Pour les A1/A2, n'utilise que des mots très courants.
+  Champs : "consigne_fr" (courte, en français), "enonce" (ce que l'apprenant entend : phrase néerlandaise à transformer ou à compléter, ou phrase française à traduire), "langue_enonce" ("nl" ou "fr"), "reponse" (réponse attendue complète, en néerlandais), "alternatives" (autres réponses correctes), "astuce_fr".
 Réponds UNIQUEMENT en JSON : {"explication_fr": "", "exemples": [{"nl": "", "fr": ""}], "exercices": []}`;
         }
 
@@ -12081,7 +12083,7 @@ Consigne : ${ex.consigne_fr}
 Énoncé : ${ex.enonce}
 Réponse attendue : ${ex.reponse}${(ex.alternatives || []).length ? ' (aussi acceptées : ' + ex.alternatives.join(' / ') + ')' : ''}
 Réponse de l'apprenant${isFr ? ' (dite EN FRANÇAIS)' : ''} : "${given.replace(/"/g, "'")}"
-Juge sur le fond : correct si la règle est bien appliquée et le sens juste, même si ce n'est pas mot pour mot la réponse attendue. Si l'apprenant parle en français, pose une question ou dit qu'il ne sait pas, mets "question": true et réponds-lui dans "explication_fr" (sans donner directement la réponse s'il pose juste une question, sauf s'il dit qu'il ne sait pas).
+Juge sur le fond : correct si la règle est bien appliquée et le sens juste, même si ce n'est pas mot pour mot la réponse attendue. Si la consigne impose un mot (omdat, doordat…), vérifie qu'il est utilisé correctement ; une autre raison plausible que celle de l'exemple est acceptée si la grammaire est juste. Si l'apprenant parle en français, pose une question ou dit qu'il ne sait pas, mets "question": true et réponds-lui dans "explication_fr" (sans donner directement la réponse s'il pose juste une question, sauf s'il dit qu'il ne sait pas).
 Réponds UNIQUEMENT en JSON : {"correct": false, "question": false, "explication_fr": "1 ou 2 phrases en français", "correction": "la bonne réponse en néerlandais"}`;
         }
 
