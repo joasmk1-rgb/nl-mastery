@@ -9019,8 +9019,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // réagit librement à ce que l'apprenant répond réellement.
         function rpBuildRecruiterPrompt(bank) {
             const q = bank.questions || {};
-            const known = RP_QUESTION_TYPES.map(t => t[0]);
-            const sections = RP_QUESTION_TYPES
+            const known = RP_QUESTION_TYPES.map(t => t[0]).concat(['_tirage']);
+            const sections = RP_QUESTION_TYPES.slice(0, 1).concat([['_tirage', 'Questions de cet entretien (dans un ordre naturel)']], RP_QUESTION_TYPES.slice(1))
                 .concat(Object.keys(q).filter(k => !known.includes(k)).map(k => [k, k]))
                 .filter(([key]) => Array.isArray(q[key]) && q[key].length)
                 .map(([key, label]) => label + ' :\n' + q[key].map(x => '- ' + x).join('\n'))
@@ -9061,9 +9061,76 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const { banks } = await rpLoadRealData();
             listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens</div>' +
                 '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens (ou des questions types du métier) et improvise ses relances selon tes réponses.</p>' +
+                `<button class="rp-scenario-btn rp-profile-btn" onclick="rpEditCandidateProfile()">📄 Mon profil de candidat <small>(privé : ${(state.candidateProfile || '').trim() ? 'rempli' : 'à remplir'})</small></button>` +
                 (banks.length
-                    ? banks.map((b, i) => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartRealCandidate(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`, 'bank:' + b.id, b.label, { type: 'bank', index: i })).join('')
+                    ? banks.map((b, i) => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpRealSetup(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`, 'bank:' + b.id, b.label, { type: 'bank', index: i })).join('')
                     : '<p style="color:#888;">Aucun scénario réel pour l\'instant.</p>');
+        }
+
+        // ----- Profil de candidat (privé) et préparation d'un entretien -----
+        // Le profil (CV, parcours) et les « points de vigilance » propres à un entretien vivent
+        // dans la progression de l'utilisateur (state.candidateProfile, state.candidateNotes) :
+        // jamais dans les fichiers du dépôt public. Le profil est donné au recruteur (il connaît
+        // le CV) ; les points de vigilance ne servent qu'au bilan.
+        const RP_DIFFICULTY_LABELS = { facile: '🟢 Facile', moyen: '🟡 Moyen', difficile: '🔴 Difficile' };
+
+        function rpEditCandidateProfile() {
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <button class="back-btn" onclick="rpShowRealCandidateList()">← Entretiens</button>
+                <div class="rp-group-title">📄 Mon profil de candidat</div>
+                <p class="rp-real-hint">Ce que le recruteur peut savoir de toi, comme s'il avait ton CV : âge, ville, études, expériences, langues, formations. Écris-le en français ou en néerlandais. C'est privé : enregistré dans ton compte uniquement, jamais publié.</p>
+                <textarea id="rp-profile-text" class="rp-profile-text" rows="12" placeholder="Ex. : 30 ans, habite à … Études : … Expériences : … Langues : …">${rpEscapeHtml(state.candidateProfile || '')}</textarea>
+                <button class="btn btn-green" onclick="state.candidateProfile = document.getElementById('rp-profile-text').value; save(); rpShowRealCandidateList();">💾 Enregistrer</button>`;
+        }
+
+        function rpRealSetup(index) {
+            const bank = rpRealData && rpRealData.banks[index];
+            if (!bank) return;
+            if (!state.settings.rpDifficulty) state.settings.rpDifficulty = {};
+            const diff = bank.difficultes ? (state.settings.rpDifficulty[bank.id] || 'moyen') : null;
+            const notes = (state.candidateNotes || {})[bank.id] || '';
+            const chip = (on, click, label) => `<button type="button" class="conj-filter-chip${on ? ' active' : ''}" onclick="${click}">${label}</button>`;
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <button class="back-btn" onclick="rpShowRealCandidateList()">← Entretiens</button>
+                <div class="rp-group-title">${rpEscapeHtml(bank.label)}</div>
+                ${bank.poste ? `<p class="rp-real-hint">${rpEscapeHtml(bank.poste)}</p>` : ''}
+                ${diff ? `<div class="rp-job-canal">Difficulté</div><div class="conj-filter-chips-row" style="width:100%; max-width:520px;">${Object.keys(bank.difficultes).map(k => chip(k === diff, `state.settings.rpDifficulty['${bank.id}']='${k}'; save(); rpRealSetup(${index})`, RP_DIFFICULTY_LABELS[k] || k)).join('')}</div>
+                    <p class="rp-real-hint">${rpEscapeHtml(bank.difficultes[diff])}</p>` : ''}
+                <div class="rp-job-canal">Mon profil</div>
+                <p class="rp-real-hint">${(state.candidateProfile || '').trim() ? '✅ Le recruteur connaît ton profil (ton CV).' : '⚠️ Profil vide : le recruteur ne sait rien de toi.'} <a href="#" onclick="rpEditCandidateProfile(); return false;">Modifier</a></p>
+                <div class="rp-job-canal">Mes points de vigilance pour cet entretien (privé)</div>
+                <p class="rp-real-hint">Ce que tu dois dire ou ne surtout pas dire (ex. « ne pas dire que je suis déjà des cours »). Le recruteur ne les voit pas : ils servent au bilan.</p>
+                <textarea id="rp-notes-text" class="rp-profile-text" rows="5">${rpEscapeHtml(notes)}</textarea>
+                <button class="btn btn-green" style="max-width:520px;" onclick="rpRealSaveNotes('${bank.id}'); rpStartRealCandidate(${index})">▶️ Commencer l'entretien</button>`;
+        }
+
+        function rpRealSaveNotes(bankId) {
+            const el = document.getElementById('rp-notes-text');
+            if (!el) return;
+            if (!state.candidateNotes) state.candidateNotes = {};
+            state.candidateNotes[bankId] = el.value;
+            save();
+        }
+
+        // Tirage des questions (champ « tirage » d'une banque) : l'accroche et la clôture restent,
+        // les autres sont tirées au hasard et leur ordre varie, pour que deux entretiens diffèrent.
+        function rpSampleBank(bank) {
+            if (!bank.tirage) return bank;
+            const q = bank.questions || {};
+            const first = (q.accroche || []).slice(0, 1), last = (q.cloture || []).slice(0, 1);
+            const pool = [];
+            Object.keys(q).forEach(type => (q[type] || []).forEach(text => {
+                if (first.includes(text) || last.includes(text)) return;
+                pool.push({ type, text });
+            }));
+            pool.sort(() => Math.random() - 0.5);
+            const min = bank.tirage.min || 8, max = bank.tirage.max || 12;
+            const n = Math.max(0, Math.min(pool.length, min + Math.floor(Math.random() * (max - min + 1))) - first.length - last.length);
+            const chosen = pool.slice(0, n);
+            const out = { accroche: first };
+            chosen.forEach(x => { (out['_tirage'] = out['_tirage'] || []).push(x.text); });
+            out.cloture = last;
+            return Object.assign({}, bank, { questions: out });
         }
 
         function rpStartRealCandidate(index) {
@@ -9071,6 +9138,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!bank) return;
             const firstQuestion = ((bank.questions || {}).accroche || [])[0];
             const welcome = bank.welcome || firstQuestion || 'Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?';
+            const diff = bank.difficultes ? ((state.settings.rpDifficulty || {})[bank.id] || 'moyen') : null;
+            const profile = (state.candidateProfile || '').trim();
             rpDayState = null;
             rpBeginScenario({
                 id: 'reel_' + bank.id,
@@ -9079,8 +9148,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 welcome,
                 // La phrase d'accueil est affichée par l'app, pas générée : on la signale au
                 // recruteur pour qu'il enchaîne au lieu de se présenter une deuxième fois.
-                prompt: rpBuildRecruiterPrompt(bank) + '\n\nTu as déjà ouvert l\'entretien en disant : """' + welcome + '""" — enchaîne à partir de la réponse du candidat, sans te présenter à nouveau.'
+                prompt: rpBuildRecruiterPrompt(rpSampleBank(bank)) +
+                    (bank.tirage ? '\n\nLes questions ci-dessus ont été tirées au hasard pour cet entretien : pose-les dans un ordre naturel, une à la fois.' : '') +
+                    (diff ? '\n\nDifficulté de cet entretien : ' + bank.difficultes[diff] : '') +
+                    (profile ? '\n\nCe que tu sais du candidat (son CV et son parcours) : ' + profile + '\nUtilise-le pour poser des questions précises sur son parcours, sans jamais réciter ses réponses à sa place.' : '') +
+                    '\n\nTu as déjà ouvert l\'entretien en disant : """' + welcome + '""" — enchaîne à partir de la réponse du candidat, sans te présenter à nouveau.'
             });
+            rpRealInterview = { index, bank, diff };
+            const nav = document.getElementById('rp-day-nav');
+            nav.style.display = 'block';
+            nav.innerHTML = `<button class="btn btn-gray" style="margin:0;" onclick="rpInterviewDebrief()">🏁 Fin de l'entretien : mon bilan</button>`;
             // Pense-bête affiché pendant l'entretien : mots du poste et phrases de secours.
             const vocab = Array.isArray(bank.vocabulaire) ? bank.vocabulaire : [];
             const bequilles = Array.isArray(bank.bequilles) ? bank.bequilles : [];
@@ -9093,6 +9170,66 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                         ${bequilles.length ? `<details><summary>🛟 Phrases de secours</summary><ul class="rp-case-figures">${bequilles.map(b => `<li>${rpEscapeHtml(b)}</li>`).join('')}</ul></details>` : ''}
                     </div>`;
             }
+        }
+
+        // ----- Bilan d'un entretien (mode Candidat) -----
+        // Appel Gemini séparé du recruteur : il reçoit la transcription, les critères de la banque,
+        // les erreurs déjà commises en vrai et les points de vigilance privés du candidat.
+        let rpRealInterview = null; // { index, bank, diff }
+
+        async function rpInterviewDebrief() {
+            const it = rpRealInterview;
+            if (!it) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            const bank = it.bank;
+            rpJobHideNav();
+            document.getElementById('rp-step-chat').style.display = 'none';
+            document.getElementById('rp-step-debrief').style.display = 'flex';
+            rpFillDebriefWords();
+            const box = document.getElementById('rp-debrief-content');
+            const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(bank.label)}${it.diff ? ' · ' + (RP_DIFFICULTY_LABELS[it.diff] || it.diff) : ''}</div>`;
+            const footer = `
+                <button class="btn btn-green" style="margin-top:14px;" onclick="rpRealSetup(${it.index})">🔁 Refaire l'entretien</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowRealCandidateList()">Retour aux entretiens</button>`;
+            const lines = rpConversationHistory.slice(1).map(m => (m.role === 'user' ? 'CANDIDAT : ' : 'RECRUTEUR : ') + m.parts[0].text);
+            if (!rpConversationHistory.slice(1).some(m => m.role === 'user')) {
+                box.innerHTML = `<div class="conj-card">${header}<p>Tu n'as encore rien répondu : rien à analyser.</p>${footer}</div>`;
+                return;
+            }
+            box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--text-secondary);">Analyse de ton entretien en cours...</p></div>`;
+            const crit = Array.isArray(bank.criteres) ? bank.criteres : [];
+            const errs = Array.isArray(bank.erreurs_frequentes) ? bank.erreurs_frequentes : [];
+            const notes = ((state.candidateNotes || {})[bank.id] || '').trim();
+            let d = null;
+            try {
+                d = rpHelpParseJson(await GeminiService.generate(
+                    'Tu es un coach d\'entretien d\'embauche et un professeur de néerlandais pour francophones. Voici la transcription d\'un entretien d\'entraînement pour le poste : ' + (bank.poste || bank.label) + '. Les répliques du CANDIDAT peuvent avoir été dictées : ignore ponctuation et majuscules.\n\n' +
+                    'RECRUTEUR : ' + (rpCurrentScenario && rpCurrentScenario.welcome || '') + '\n' + lines.join('\n') + '\n\n' +
+                    (crit.length ? 'Critères à évaluer :\n' + crit.map(x => '- ' + x).join('\n') + '\n\n' : '') +
+                    (errs.length ? 'Erreurs que ce candidat a déjà faites en vrai entretien (vérifie s\'il les refait) :\n' + errs.map(x => '- « ' + x.faux + ' » au lieu de « ' + x.correct + ' »').join('\n') + '\n\n' : '') +
+                    (notes ? 'Points de vigilance personnels du candidat (ce qu\'il doit dire ou ne surtout pas dire ; signale toute réplique qui les contredit) :\n' + notes + '\n\n' : '') +
+                    'Analyse UNIQUEMENT les répliques du CANDIDAT. Réponds UNIQUEMENT en JSON :\n' +
+                    '{"resume": "en français, 2 phrases sur l\'impression générale", "criteres": [{"critere": "", "ok": true, "commentaire": "en français, court"}], ' +
+                    '"corrections": [{"phrase": "ce qu\'il a dit", "correction": "la bonne formulation en néerlandais", "explication": "en français, court"}], ' +
+                    '"vigilance": [{"phrase": "ce qu\'il a dit", "probleme": "en français : quel point de vigilance ou quelle erreur connue est en cause"}], ' +
+                    '"conseil": "en français, le conseil prioritaire pour le vrai entretien"}\n6 corrections maximum, les plus utiles ; vigilance vide si rien à signaler.'));
+            } catch (e) { d = { error: e.message }; }
+            if (rpRealInterview !== it) return;
+            if (!d || d.error) {
+                box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--wrong);">Bilan impossible${d && d.error ? ' : ' + rpEscapeHtml(d.error) : ''}.</p><button class="btn btn-gray" onclick="rpInterviewDebrief()">Réessayer</button>${footer}</div>`;
+                return;
+            }
+            const arr = x => Array.isArray(x) ? x : [];
+            box.innerHTML = `
+                <div class="conj-card" style="text-align:left;">
+                    ${header}
+                    ${d.resume ? `<p>${rpEscapeHtml(d.resume)}</p>` : ''}
+                    ${arr(d.criteres).length ? `<div class="rp-iv-label">📋 Critères</div>${arr(d.criteres).map(x => `<div class="modrp-check ${x.ok ? 'ok' : 'ko'}">${x.ok ? '✓' : '✗'} ${rpEscapeHtml(x.critere || '')}${x.commentaire ? `<div class="rp-debrief-sub">${rpEscapeHtml(x.commentaire)}</div>` : ''}</div>`).join('')}` : ''}
+                    ${arr(d.vigilance).length ? `<div class="rp-iv-label">⚠️ Points de vigilance</div>${arr(d.vigilance).map(v => `<div class="rp-debrief-item"><div>« ${rpEscapeHtml(v.phrase || '')} »</div><div class="rp-debrief-sub">${rpEscapeHtml(v.probleme || '')}</div></div>`).join('')}` : ''}
+                    ${arr(d.corrections).length ? `<div class="rp-iv-label">✍️ À corriger</div>${arr(d.corrections).map(x => `<div class="rp-debrief-item"><div class="rp-debrief-sub">« ${rpEscapeHtml(x.phrase || '')} »</div><div><b>${rpEscapeHtml(x.correction || '')}</b> ${x.correction ? speakBtnHtml(x.correction) : ''}</div><div class="rp-debrief-sub">${rpEscapeHtml(x.explication || '')}</div></div>`).join('')}` : ''}
+                    ${d.conseil ? `<div class="rp-iv-label">💡 Pour le vrai entretien</div><p>${rpEscapeHtml(d.conseil)}</p>` : ''}
+                    ${footer}
+                </div>`;
         }
 
         // ----- Mode Intervieweur : exercice de traduction guidé sur un dialogue scripté -----

@@ -700,6 +700,132 @@
         "Daar heb ik nog geen ervaring mee, maar ik leer snel.",
         "Kunt u de vraag herhalen, alstublieft?"
       ]
+    },
+    {
+      "id": "zonnewering_administratief_medewerker",
+      "label": "Zonvella — administratief medewerker (aankoop, productie, onthaal)",
+      "_source": "Questions formulées à partir d'une fiche de préparation de Joas (brief d'entretien), anonymisées : entreprise, personnes, lieux et chiffres modifiés.",
+      "poste": "Administratief medewerker : soutien administratif à la production, aux achats et à la logistique, commande des fournitures, remplacement du portier à l'accueil",
+      "contexte": "Tu es une employée du service du personnel de Zonvella, PME familiale d'environ 200 personnes qui fabrique des couvertures de terrasse et des protections solaires (terrasoverkappingen, zonwering, pergola's). Tu reçois un candidat envoyé par une agence d'intérim pour un poste d'administratief medewerker : soutien administratif à la production, aux achats et à la logistique, commande de fournitures de bureau, remplacement du portier à la loge. Intérim avec option de contrat fixe, statut ouvrier (arbeider), 39 heures par semaine, autour de 16 € brut de l'heure. Registre : cordial, direct, néerlandais de Flandre-Occidentale, pas scolaire ; tu tutoies le candidat (je/jij). Tu enchaînes vite et tu coupes parfois.",
+      "niveau": "B1",
+      "tirage": {
+        "min": 8,
+        "max": 12
+      },
+      "welcome": "Goeiemorgen, welkom bij Zonvella. Zet je maar. Vertel eens iets over jezelf.",
+      "questions": {
+        "accroche": [
+          "Vertel eens iets over jezelf."
+        ],
+        "clarification_poste": [
+          "Wat weet je over Zonvella?"
+        ],
+        "motivation": [
+          "Waarom heb je gesolliciteerd voor deze functie?",
+          "Je hebt hier vroeger in de productie gewerkt. Waarom wil je nu naar het bureau?"
+        ],
+        "verif_cv": [
+          "Welke administratieve ervaring heb je precies?",
+          "Welke programma's ken je? Ken je Excel? Ken je een ERP-systeem?",
+          "Wat heb je gedaan sinds je vorige job in de logistiek?"
+        ],
+        "technique": [
+          "Een deel van de job is de portier vervangen. Is dat oké voor jou?",
+          "Hoe reageer je als er veel dingen tegelijk samenkomen?",
+          "Kan je zelfstandig werken?"
+        ],
+        "objections": [
+          "Je hebt een master. Is deze functie niet te laag voor jou?",
+          "Hoe is je Nederlands? Kan je telefoneren in het Nederlands?"
+        ],
+        "vision_carriere": [
+          "Heb je nog andere sollicitaties lopen?"
+        ],
+        "perso": [
+          "Hoe oud ben je?",
+          "Ben je alleenstaand?",
+          "Heb je hobby's?"
+        ],
+        "dispo": [
+          "Hoe kom je naar het werk?",
+          "Wanneer kan je starten?"
+        ],
+        "cloture": [
+          "Heb je zelf nog vragen?"
+        ]
+      },
+      "difficultes": {
+        "facile": "Une seule question à la fois ; tu laisses le candidat finir ses phrases et tu parles lentement.",
+        "moyen": "Tu enchaînes les questions sans transition et tu relances une fois quand une réponse reste vague.",
+        "difficile": "Ton direct et rapide, tu coupes parfois. Garde l'objection de la surqualification (« Je hebt een master, is dit niet te laag voor jou? ») pour la toute fin. À un moment, décris en détail un bureau bruyant juste à côté de la production et demande s'il suivra dans CES conditions. Une fois, au milieu de l'entretien, fais entrer un(e) collègue qui lance une remarque banale, écrite entre crochets (par exemple : [Een collega komt binnen: « Goeiemorgen! Fris vandaag, hè? »]), et laisse le candidat réagir avant de reprendre."
+      },
+      "criteres": [
+        "Phrases courtes, verbe en 2e position (V2) respecté",
+        "Pas de blanc : utiliser une phrase de secours plutôt que se taire",
+        "Sur la surqualification : ne pas se dévaloriser ni dire que le poste est temporaire",
+        "Sur le néerlandais : amener le sujet soi-même et finir sur du concret, pas sur l'inquiétude",
+        "Sur la période depuis le dernier emploi : assumer sans trop s'expliquer",
+        "À la fin : poser au moins 3 questions"
+      ],
+      "erreurs_frequentes": [
+        {
+          "faux": "de meeste relevant",
+          "correct": "de meest relevante"
+        },
+        {
+          "faux": "ik hebt",
+          "correct": "ik heb"
+        },
+        {
+          "faux": "geontvangen",
+          "correct": "ontvangen"
+        },
+        {
+          "faux": "passer à l'anglais dès qu'un mot manque",
+          "correct": "utiliser une phrase de secours (Hoe zegt men dat in het Nederlands?)"
+        }
+      ],
+      "vocabulaire": [
+        "de terrasoverkapping",
+        "de zonwering",
+        "de pergola",
+        "de lamellen",
+        "het familiebedrijf",
+        "de hoofdzetel",
+        "de productiehal",
+        "administratief medewerker",
+        "de aankoopdienst",
+        "de productieafdeling",
+        "de logistieke dienst",
+        "de ploegbaas",
+        "de portier",
+        "het onthaal",
+        "het bureaumateriaal",
+        "een bestelling plaatsen",
+        "de leverancier",
+        "gegevens invoeren",
+        "opvolgen",
+        "doorgeven",
+        "nalezen",
+        "bijspringen",
+        "de vervaldatum",
+        "de voorraad",
+        "de draaitabel",
+        "het paritair comité",
+        "arbeider / bediende",
+        "interim met optie vast",
+        "de inwerkperiode",
+        "doorgroeien"
+      ],
+      "bequilles": [
+        "Sorry, kan je dat herhalen?",
+        "Een beetje langzamer, alsjeblieft?",
+        "Hoe zegt men dat in het Nederlands?",
+        "Ik begrijp het, maar ik vind het juiste woord niet.",
+        "Mag ik even nadenken?",
+        "Dus als ik het goed begrijp, ...",
+        "Ik ga het in het Nederlands proberen. Als het niet lukt, zeg ik het in het Engels."
+      ]
     }
   ]
 }

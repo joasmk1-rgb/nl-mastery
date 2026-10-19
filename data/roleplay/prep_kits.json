@@ -1550,6 +1550,120 @@
         }
       ],
       "_source": "redige_claude"
+    },
+    "dom_zonnewering_admin": {
+      "label": "Administratief medewerker (productie, aankoop, onthaal)",
+      "verbes": [
+        "bestellen",
+        "opvolgen",
+        "controleren",
+        "invoeren",
+        "sorteren",
+        "informeren",
+        "helpen",
+        "leveren"
+      ],
+      "mots": [
+        {
+          "nl": "de terrasoverkapping",
+          "fr": "la couverture de terrasse"
+        },
+        {
+          "nl": "de zonwering",
+          "fr": "la protection solaire"
+        },
+        {
+          "nl": "de lamellen",
+          "fr": "les lames"
+        },
+        {
+          "nl": "het familiebedrijf",
+          "fr": "l'entreprise familiale"
+        },
+        {
+          "nl": "de hoofdzetel",
+          "fr": "le siège"
+        },
+        {
+          "nl": "de productiehal",
+          "fr": "le hall de production"
+        },
+        {
+          "nl": "de aankoopdienst",
+          "fr": "le service achats"
+        },
+        {
+          "nl": "de ploegbaas",
+          "fr": "le chef d'équipe"
+        },
+        {
+          "nl": "de portier",
+          "fr": "le portier"
+        },
+        {
+          "nl": "het onthaal",
+          "fr": "l'accueil"
+        },
+        {
+          "nl": "het bureaumateriaal",
+          "fr": "les fournitures de bureau"
+        },
+        {
+          "nl": "de leverancier",
+          "fr": "le fournisseur"
+        },
+        {
+          "nl": "de vervaldatum",
+          "fr": "l'échéance"
+        },
+        {
+          "nl": "de draaitabel",
+          "fr": "le tableau croisé dynamique"
+        },
+        {
+          "nl": "het paritair comité",
+          "fr": "la commission paritaire"
+        },
+        {
+          "nl": "de inwerkperiode",
+          "fr": "la période de formation"
+        },
+        {
+          "nl": "de maaltijdcheques",
+          "fr": "les chèques-repas"
+        },
+        {
+          "nl": "de collectieve sluiting",
+          "fr": "la fermeture collective"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik werk liever traag en juist dan snel en fout.",
+          "fr": "Je préfère travailler lentement et juste que vite et faux."
+        },
+        {
+          "nl": "Informatie doorgeven is het belangrijkste.",
+          "fr": "Transmettre l'information, c'est le plus important."
+        },
+        {
+          "nl": "Ik ken het bedrijf al van binnenuit.",
+          "fr": "Je connais déjà l'entreprise de l'intérieur."
+        },
+        {
+          "nl": "Dat spreekt mij aan.",
+          "fr": "Ça me plaît, ça m'attire."
+        },
+        {
+          "nl": "Ik doe liever twee keer de vraag dan één keer een fout.",
+          "fr": "Je préfère poser deux fois la question que faire une erreur."
+        },
+        {
+          "nl": "Ik laat het liever nalezen voor ik het verstuur.",
+          "fr": "Je préfère le faire relire avant de l'envoyer."
+        }
+      ],
+      "_source": "Vocabulaire tiré de la fiche de préparation de Joas."
     }
   },
   "scenarios": {
@@ -1573,7 +1687,8 @@
     "bank:bibliotheekmedewerker": ["entretien_base", "dom_bib"],
     "bank:data_analyst_junior": ["entretien_base", "dom_da"],
     "bank:pmo_junior": ["entretien_base", "dom_pmo"],
-    "bank:consultant_fonctionnel_junior": ["entretien_base", "dom_cf"]
+    "bank:consultant_fonctionnel_junior": ["entretien_base", "dom_cf"],
+    "bank:zonnewering_administratief_medewerker": ["entretien_base", "dom_zonnewering_admin"]
   },
   "situations": {
     "guichet_": ["sit_guichet"],
