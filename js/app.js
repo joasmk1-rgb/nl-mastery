@@ -4976,9 +4976,16 @@ if (firebaseAvailable) {
             if (launch.type === 'bank' && rpRealData) {
                 const b = rpRealData.banks[launch.index];
                 if (!b || rpBankLang(b) !== 'nl') return null;
-                const qs = Object.values(b.questions || {}).flat().slice(0, 10);
-                return { title: b.label, roleA: 'Le recruteur', roleB: 'Le candidat', welcome: b.welcome || qs[0] || '',
-                    desc: 'Entretien d\'embauche pour le poste : ' + (b.poste || '') + '. ' + (b.contexte || '') + ' Le recruteur pose notamment ces questions : ' + qs.join(' / ') };
+                // Entretien complet de A à Z, et si le profil privé est rempli, le candidat modèle
+                // c'est l'apprenant lui-même : il répond avec son vrai parcours et ses points de vigilance.
+                const qs = Object.values(b.questions || {}).flat();
+                const profile = (state.candidateProfile || '').trim();
+                const notes = ((state.candidateNotes || {})[b.id] || '').trim();
+                return { title: b.label, roleA: 'Le recruteur', roleB: profile ? 'Toi (le candidat)' : 'Le candidat', welcome: b.welcome || qs[0] || '',
+                    length: '26 à 36', level: b.niveau && !/^(nl|en)$/i.test(b.niveau) ? b.niveau : 'B1',
+                    desc: 'Entretien d\'embauche complet, du début à la fin, pour le poste : ' + (b.poste || '') + '. ' + (b.contexte || '') + ' Le recruteur pose ces questions, dans un ordre naturel, en relançant quand il le faut : ' + qs.join(' / ') +
+                        (profile ? '\nLe candidat (B) est une personne réelle qui s\'entraîne : il répond avec SON vrai parcours, sans rien inventer : ' + profile : '') +
+                        (notes ? '\nIl respecte strictement ces points : ' + notes : '') };
             }
             if (launch.type === 'rp') {
                 const s = rpFindScenario(launch.cat, launch.id);
@@ -5021,11 +5028,11 @@ if (firebaseAvailable) {
             const words = kit ? kit.verbs.map(v => v.inf).concat(kit.words.map(w => w.nl)).slice(0, 18) : [];
             try {
                 const raw = await GeminiService.generate(
-                    'Écris une scène de dialogue réaliste en néerlandais de Flandre courant (niveau B1, phrases naturelles à l\'oral, pas trop longues) entre deux personnes.\n' +
+                    'Écris une scène de dialogue réaliste en néerlandais de Flandre courant (niveau ' + (src.level || 'B1') + ', phrases naturelles à l\'oral, pas trop longues) entre deux personnes.\n' +
                     'Situation : ' + src.desc + '\n' +
                     'A = ' + src.roleA + ' ; B = ' + src.roleB + ', un francophone qui parle bien néerlandais et se débrouille très bien : il sert de modèle à imiter.\n' +
                     'La scène commence par cette réplique de A : """' + src.welcome + '"""\n' +
-                    '12 à 16 répliques qui alternent, avec un vrai déroulé (début, questions, réponses précises, conclusion). Noms de personnes et d\'entreprises inventés.' +
+                    (src.length || '12 à 16') + ' répliques qui alternent, avec un vrai déroulé (début, questions, réponses précises, conclusion).' + (String(src.roleB).startsWith('Toi') ? '' : ' Noms de personnes et d\'entreprises inventés.') +
                     (words.length ? ' Emploie naturellement plusieurs de ces mots : ' + words.join(', ') + '.' : '') + '\n' +
                     'Réponds UNIQUEMENT en JSON : {"roleA": "nom court de A en français (ex. La recruteuse)", "lignes": [{"qui": "A", "nl": "réplique", "fr": "traduction française"}]}'
                 );
