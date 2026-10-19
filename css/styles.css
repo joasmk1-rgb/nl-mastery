@@ -90,7 +90,6 @@
         .hub-card .hub-card-title { font-weight: 700; font-size: 0.92rem; margin-bottom: 3px; }
         .hub-card .hub-card-desc { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.35; }
         .hub-card.accent { border-color: var(--primary); }
-        .quick-access-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); width: 100%; max-width: 520px; margin: var(--space-2) 0 var(--space-2); }
         .intent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: var(--space-2); width: 100%; max-width: 520px; margin-bottom: var(--space-2); }
         .quick-access-card { background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-md); padding: var(--space-3); text-align: center; cursor: pointer; font-weight: 700; font-size: 0.82rem; }
         .quick-access-card:active { transform: scale(0.96); }
@@ -238,7 +237,6 @@
         .acc-error { color: var(--wrong); font-size: 0.8rem; margin-top: -8px; margin-bottom: 8px; min-height: 1em; }
         .acc-hint { font-size: 0.75rem; color: var(--text-secondary); margin-top: -8px; margin-bottom: 8px; }
         .acc-logged-row { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 400px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 15px; padding: 18px; box-sizing: border-box; margin-bottom: 15px; }
-        .acc-badge-admin { background: var(--gold); color: #4b3600; font-size: 0.65rem; font-weight: bold; padding: 2px 8px; border-radius: 8px; margin-left: 6px; }
         .admin-row { display: flex; align-items: center; gap: 10px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; font-size: 0.85rem; flex-wrap: wrap; }
         .admin-row .admin-pseudo { font-weight: bold; flex: 1; min-width: 100px; }
         .admin-row .admin-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; font-weight: bold; }
@@ -260,7 +258,6 @@
 
         /* Dashboard (Accueil) */
         .dash-card { width: 100%; max-width: 520px; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 18px; box-sizing: border-box; margin-bottom: 14px; }
-        .dash-level-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .dash-level-badge { font-size: 1.15rem; font-weight: bold; color: var(--primary); }
         .dash-progress-bar { width: 100%; height: 10px; background: var(--border); border-radius: 6px; overflow: hidden; margin-top: 6px; }
         .dash-progress-fill { height: 100%; background: var(--success); border-radius: 6px; }
@@ -281,38 +278,13 @@
         .guided-flow-label { font-weight: bold; margin-bottom: 10px; }
         .guided-flow-actions { display: flex; gap: 8px; }
         .guided-flow-actions .btn { margin-top: 0; flex: 1; }
-        .dash-today-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .dash-today-item { text-align: center; padding: 10px 6px; background: var(--bg); border-radius: 10px; }
-        .dash-today-item .dash-today-num { font-size: 1.15rem; font-weight: bold; color: var(--primary); }
-        .dash-today-item .dash-today-label { font-size: 0.66rem; color: var(--text-secondary); }
-        .dash-weak-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
-        .dash-weak-row:last-child { border-bottom: none; }
         .dash-mini-bar { width: 60px; height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; flex-shrink: 0; margin-left: 10px; }
         .dash-mini-fill { height: 100%; background: var(--wrong); }
 
         /* Curriculum (Apprendre) */
-        .level-tab-row { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-bottom: 18px; }
-        .level-tab { flex: 1; padding: 12px 6px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-weight: 800; cursor: pointer; text-align: center; font-size: 0.9rem; }
-        .level-tab.active { border-color: var(--primary); color: white; background: var(--primary); }
-        .module-card { width: 100%; max-width: 520px; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 14px; box-sizing: border-box; }
-        .module-card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
-        .module-card-num { font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
-        .module-card-title { font-size: 1rem; font-weight: 700; margin: 2px 0 10px; }
-        .module-progress-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
         .module-progress-bar { flex: 1; height: 8px; background: var(--border); border-radius: 6px; overflow: hidden; }
         .module-progress-fill { height: 100%; background: var(--success); border-radius: 6px; }
         .module-progress-pct { font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); min-width: 32px; text-align: right; }
-        .notion-row { display: flex; align-items: center; gap: 10px; padding: 10px 8px; border-radius: var(--radius-md); cursor: pointer; font-size: 0.88rem; }
-        .notion-row:active { background: var(--bg); }
-        .notion-row.locked { opacity: 0.5; cursor: not-allowed; }
-        .notion-row .notion-emoji { font-size: 1rem; flex-shrink: 0; }
-        .notion-row .notion-label { flex: 1; font-weight: 600; }
-        .notion-status { font-size: 0.66rem; padding: 3px 9px; border-radius: var(--radius-pill); font-weight: 700; white-space: nowrap; }
-        .notion-status.st-jamais_etudiee { background: var(--surface-2); color: var(--text-secondary); }
-        .notion-status.st-en_cours { background: #ffe3b3; color: #b06d00; }
-        .notion-status.st-faible, .notion-status.st-a_pratiquer { background: #fff1b8; color: #8a6d00; }
-        .notion-status.st-maitrisee { background: #2f7d00; color: white; }
-        .notion-status.st-pending { background: var(--border); color: var(--text-secondary); }
 
         /* Lesson : regroupement visuel en étapes (Comprendre / S'entraîner-Produire-Utiliser) au
            lieu d'une simple succession de blocs identiques. */
@@ -351,9 +323,6 @@
         .order-placeholder { font-size: 0.85rem; color: var(--text-secondary); }
         .conj-search-row { display: flex; gap: 8px; margin-bottom: 16px; }
         .conj-search-row input { flex: 1; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border); font-size: 1rem; }
-        .conj-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .conj-table th, .conj-table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-        .conj-table th { color: var(--text-secondary); font-weight: 600; }
         /* Grille pronoms x temps ("façon tableau d'école") — table-layout fixed pour garder 5
            colonnes lisibles même sur mobile (390px), avec retour à la ligne dans les cellules
            plutôt qu'un débordement horizontal. */
@@ -492,10 +461,6 @@
         .placement-intro { width: 100%; max-width: 480px; margin: 0 auto; text-align: center; }
         .placement-intro-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; }
         .placement-intro-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
-        .placement-warning { background: var(--surface-2); border-radius: var(--radius-md); padding: 12px 14px; font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; text-align: left; }
-        .placement-choice-list { display: flex; flex-direction: column; gap: 10px; }
-        .placement-choice-list button { width: 100%; margin-top: 0; }
-        .placement-choice-list select { width: 100%; padding: 10px; border-radius: var(--radius-md); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); }
         .placement-level-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; text-align: left; }
         .placement-level-name { flex-shrink: 0; width: 70px; font-weight: 700; font-size: 0.85rem; }
 
@@ -588,19 +553,11 @@
            sous l'action principale, et rappel de compte en simple ligne de bas de page. */
         .dash-header-card { padding: 14px 18px; }
         .dash-header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-        .dash-links-row { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; max-width: 520px; margin-bottom: 14px; }
-        .dash-link-chip { flex: 1 1 auto; text-align: left; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-md); padding: 10px 14px; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text); cursor: pointer; }
-        .dash-link-chip span { color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
-        .dash-link-chip:active { border-color: var(--primary); }
         .dash-footnote { width: 100%; max-width: 520px; font-size: 0.76rem; color: var(--text-secondary); text-align: center; cursor: pointer; padding: 6px 0 12px; }
         /* Sections repliables (modules du parcours, détails du profil, listes de Pratiquer) :
            une page courte par défaut, le détail à un clic. */
-        details.module-card > summary, details.profil-section > summary { list-style: none; cursor: pointer; }
-        details.module-card > summary::-webkit-details-marker, details.profil-section > summary::-webkit-details-marker { display: none; }
-        details.module-card:not([open]) .module-card-title { margin-bottom: 6px; }
-        details.module-card:not([open]) .module-progress-row { margin-bottom: 0; }
-        .module-card-chevron { color: var(--text-secondary); transition: transform 0.15s; }
-        details.module-card:not([open]) .module-card-chevron { transform: rotate(-90deg); }
+        details.profil-section > summary { list-style: none; cursor: pointer; }
+        details.profil-section > summary::-webkit-details-marker { display: none; }
         details.profil-section { width: 100%; max-width: 520px; margin-bottom: 12px; box-sizing: border-box; }
         details.profil-section > summary { background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; font-weight: 700; font-size: 0.92rem; display: flex; justify-content: space-between; align-items: center; }
         details.profil-section > summary::after { content: '▾'; color: var(--text-secondary); transform: rotate(-90deg); transition: transform 0.15s; }

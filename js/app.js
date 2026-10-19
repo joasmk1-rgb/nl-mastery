@@ -1878,7 +1878,6 @@ if (firebaseAvailable) {
             return id + '::' + state.settings.direction;
         }
 
-        const MIN_SPACING_FOR_MASTERY = 25; // nb mini de mots vus entre un raté et son retest en révision (déjà géré par la file d'attente)
 
         // Règle simplifiée : réussi du premier coup (ou lors d'un retest en révision, déjà espacé
         // naturellement par la file d'attente) = maîtrisé immédiatement. Raté = direct en révision,
@@ -2440,7 +2439,6 @@ if (firebaseAvailable) {
         function toggleFreeAccess(value) {
             state.freeAccess = value;
             save();
-            if (document.getElementById('apprendre-view').classList.contains('active')) renderApprendreLevel(apprendreCurrentLevel);
             if (document.getElementById('profil-view').classList.contains('active')) renderProfil();
         }
 
@@ -2741,11 +2739,6 @@ if (firebaseAvailable) {
             showApprendre();
         }
 
-        // L'onglet « Jouer » (4 jeux) s'affiche par showReviser() (ancien nom gardé pour les
-        // boutons retour des jeux) ; showJouer() est un alias.
-        function showJouer() {
-            showReviser();
-        }
         // Ouvre la leçon d'une notion puis le panneau de production déjà existant (même schéma que
         // la branche 'a_pratiquer' de startRecommendedActivity) : aucun nouveau système Gemini.
         function goToProduction(notionId) {
@@ -2909,417 +2902,6 @@ if (firebaseAvailable) {
             el.innerHTML = sections || `<p style="font-size:0.85rem; color:var(--text-secondary);">Rien à afficher pour l'instant.</p>`;
         }
 
-        // ===== Hub "Mots" : bascule entre les onglets Liste / Par thème (aucun changement de données) =====
-        function motsShowTab(tab) {
-            const liste = document.getElementById('mots-panel-liste');
-            const themes = document.getElementById('mots-panel-themes');
-            const tabListe = document.getElementById('mots-tab-liste');
-            const tabThemes = document.getElementById('mots-tab-themes');
-            if (liste) liste.style.display = tab === 'liste' ? '' : 'none';
-            if (themes) themes.style.display = tab === 'themes' ? '' : 'none';
-            if (tabListe) tabListe.classList.toggle('active', tab === 'liste');
-            if (tabThemes) tabThemes.classList.toggle('active', tab === 'themes');
-        }
-
-        // ===== Placement Engine =====
-        // Détermine un point de départ pédagogique en réutilisant EXCLUSIVEMENT les briques déjà
-        // existantes (curriculumModules/curriculumNotions/curriculumExercises, isNotionUnlocked,
-        // getNotionStatus, recordNotionAttempt, l'écran #exercise-view). Ne remplace ni ne double
-        // MasteryEngine/WeaknessEngine/RecommendationEngine : il les alimente une fois, puis
-        // getRecommendation() reprend la main normalement.
-        //
-        //   PlacementEngine → notionProgress (recordNotionAttempt / seedInferredMastery) →
-        //   MasteryEngine → WeaknessEngine → RecommendationEngine → "🎯 Pour toi maintenant"
-        //
-        // Deux façons d'alimenter notionProgress, jamais un troisième champ/système :
-        //  1. Notion réellement testée : on pose une VRAIE question (réutilise l'écran d'exercice
-        //     existant) et recordNotionAttempt() est appelé avec la vraie réponse — rien n'est
-        //     inventé, c'est le même chemin qu'un exercice normal.
-        //  2. Notion "sautée" parce qu'un niveau déclaré/externe avance le point de départ :
-        //     seedInferredMastery() écrit un attempts/correct qui, via LA MÊME formule de
-        //     computeNotionMastery, tombe pile sur mastery 3 ("entraînée") — assez pour débloquer
-        //     la suite (isNotionUnlocked exige mastery >= 3), jamais "maîtrisée" : les exercices
-        //     normaux devront encore la pousser vers 4 puis 5.
-        const PLACEMENT_SKILL_LABELS = {
-            grammaire: 'Grammaire', vocabulaire: 'Vocabulaire', production: 'Production',
-            expression_orale: 'Expression orale', expression_ecrite: 'Expression écrite',
-            interaction: 'Interaction', comprehension: 'Compréhension', ecriture: 'Écriture',
-            comprehension_ecrite: 'Compréhension écrite', comprehension_orale: 'Compréhension orale',
-            registre: 'Registre'
-        };
-        const PLACEMENT_MAX_QUESTIONS = 40; // garde-fou : jamais un test interminable
-
-        let placementState = null;
-
-        function seedInferredMastery(notionId, force) {
-            const p = ntProgress(notionId);
-            // ne jamais écraser une vraie donnée déjà présente — sauf déclaration EXPLICITE de
-            // l'utilisateur lui-même (voir markNotionAsKnown), jamais une inférence automatique
-            if (p.attempts > 0 && !force) return;
-            p.opened = true;
-            p.attempts = 2;
-            p.correct = 1;
-            p.weaknessCount = 0;
-            p.lastResult = 'inferred';
-            p.lastAttemptAt = Date.now();
-            save();
-        }
-
-        // Applique la plage de seed différée (niveaux avant le point de départ déclaré/externe),
-        // UNE FOIS que la toute première vraie vérification l'a confirmée (voir
-        // placementHandleModuleVerdict). Tant que cette fonction n'a pas été appelée, aucun niveau
-        // sauté n'est marqué acquis — c'est le garde-fou contre le déclassement/sur-classement
-        // injustifié d'un niveau simplement déclaré.
-        function placementApplyPendingSeed() {
-            if (!placementState || !placementState.pendingSeedRange) return;
-            const [from, to] = placementState.pendingSeedRange;
-            for (let i = from; i < to; i++) {
-                (placementState.modules[i].notions || []).forEach(nid => {
-                    if (curriculumNotions[nid] && curriculumNotions[nid].status === 'pret') seedInferredMastery(nid);
-                });
-            }
-            placementState.pendingSeedRange = null;
-        }
-
-        function placementOrderedModules() {
-            return [...curriculumModules].sort((a, b) => {
-                const la = curriculumLevels.find(l => l.id === a.level);
-                const lb = curriculumLevels.find(l => l.id === b.level);
-                const lo = (la ? la.order : 0) - (lb ? lb.order : 0);
-                return lo !== 0 ? lo : a.order - b.order;
-            });
-        }
-
-        function showPlacementIntro() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('placement-view').classList.add('active');
-            setActiveNav('nav-profil');
-            const hasProgress = curriculumLoaded && Object.values(state.curriculum.notionProgress).some(p => p.attempts > 0);
-            const hasHistory = (state.placement.history || []).length > 0;
-            document.getElementById('placement-content').innerHTML = `
-                <div class="placement-intro">
-                    <div class="placement-intro-title">Déjà un niveau en néerlandais ?</div>
-                    <p class="placement-intro-text">Ne recommence pas depuis le début. NL Mastery va identifier ce que tu maîtrises déjà et trouver où tu dois vraiment progresser.</p>
-                    ${(hasProgress || hasHistory) ? `<div class="placement-warning">Tu as déjà une progression. Une nouvelle évaluation peut ajuster ton parcours, mais ne supprimera pas tes acquis.</div>` : ''}
-                    <div class="placement-choice-list">
-                        <button class="btn btn-green" onclick="placementStart('test')">🚀 Évaluer mon niveau</button>
-                        <button class="gemini-explain-btn" onclick="placementShowDeclare()">📊 J'ai déjà un niveau</button>
-                        <button class="gemini-explain-btn" onclick="placementShowExternal()">🏅 J'ai déjà passé un test ailleurs</button>
-                        <button class="dash-reco-btn-secondary" style="color:var(--text-secondary); border-color:var(--border);" onclick="showHome()">▶️ Commencer normalement</button>
-                    </div>
-                </div>`;
-        }
-
-        function placementShowDeclare() {
-            document.getElementById('placement-content').innerHTML = `
-                <div class="placement-intro">
-                    <div class="placement-intro-title">Quel niveau penses-tu avoir ?</div>
-                    <p class="placement-intro-text">On vérifie quand même avec quelques questions — ça ne veut pas dire qu'on va tout te faire refaire depuis A1.</p>
-                    <div class="placement-choice-list">
-                        ${curriculumLevels.map(l => `<button class="gemini-explain-btn" onclick="placementStart('declared','${l.id}')">${l.id} — ${l.label}</button>`).join('')}
-                    </div>
-                    <button class="back-btn" style="margin-top:12px;" onclick="showPlacementIntro()">← Retour</button>
-                </div>`;
-        }
-
-        function placementShowExternal() {
-            document.getElementById('placement-content').innerHTML = `
-                <div class="placement-intro">
-                    <div class="placement-intro-title">Résultat d'un test externe</div>
-                    <p class="placement-intro-text">Indique la source et le niveau obtenu. C'est une information de départ, pas une preuve de maîtrise — on vérifie quand même avec quelques questions.</p>
-                    <select id="placement-ext-source" style="width:100%; max-width:320px; margin-bottom:10px;">
-                        <option value="Duolingo">Duolingo</option>
-                        <option value="Babbel">Babbel</option>
-                        <option value="Certificat CECR">Certificat / test CECR officiel</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                    <select id="placement-ext-level" style="width:100%; max-width:320px; margin-bottom:14px;">
-                        ${curriculumLevels.map(l => `<option value="${l.id}">${l.id} — ${l.label}</option>`).join('')}
-                    </select>
-                    <button class="btn btn-green" onclick="placementConfirmExternal()">Continuer</button>
-                    <button class="back-btn" style="margin-top:12px;" onclick="showPlacementIntro()">← Retour</button>
-                </div>`;
-        }
-
-        function placementConfirmExternal() {
-            const source = document.getElementById('placement-ext-source').value;
-            const level = document.getElementById('placement-ext-level').value;
-            placementStart('external', level, source);
-        }
-
-        function placementStart(mode, anchorLevel, externalSource) {
-            const modulesSorted = placementOrderedModules();
-            let startIdx = 0;
-            if (mode !== 'test') {
-                // Point de départ = le niveau juste avant celui déclaré/externe, pour vérifier
-                // rapidement quelques compétences du niveau précédent plutôt que de plonger
-                // directement dedans sans aucune vérification (cf. cahier des charges).
-                const anchorOrder = (curriculumLevels.find(l => l.id === anchorLevel) || {}).order || 1;
-                const priorLevel = curriculumLevels.find(l => l.order === anchorOrder - 1);
-                const effectiveAnchor = priorLevel ? priorLevel.id : anchorLevel;
-                startIdx = modulesSorted.findIndex(m => m.level === effectiveAnchor);
-                if (startIdx < 0) startIdx = 0;
-            }
-            // Tout ce qui précède le point de départ SERAIT traité comme un prérequis supposé
-            // acquis — mais un niveau déclaré/externe ne vaut jamais preuve de maîtrise tant que la
-            // toute première vraie vérification ne l'a pas confirmé. On ne seed donc PAS ici : on
-            // mémorise seulement la plage à seeder plus tard (placementApplyPendingSeed), appliquée
-            // uniquement si ce premier vrai test réussit (voir placementHandleModuleVerdict). En cas
-            // d'échec, l'hypothèse est abandonnée et le test reprend depuis le vrai début du programme.
-            placementState = {
-                active: true, mode, anchorLevel: anchorLevel || null, externalSource: externalSource || null,
-                modules: modulesSorted, moduleIdx: startIdx, anchorModuleIdx: startIdx,
-                pendingSeedRange: (mode !== 'test' && startIdx > 0) ? [0, startIdx] : null,
-                currentNotionId: null, currentExercise: null, currentAttemptsOnNotion: 0,
-                moduleFailedNotion: null, askedCount: 0,
-                levelStats: {}, skillStats: {}, testedNotionIds: []
-            };
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('placement-view').classList.add('active');
-            placementNextStep();
-        }
-
-        function placementPickNotionForModule(mod) {
-            // Une notion représentative par module : la première prête et pas déjà testée dans ce
-            // passage de placement (voir "ne pas tester chaque notion" du cahier des charges).
-            const candidates = (mod.notions || []).filter(nid => {
-                const n = curriculumNotions[nid];
-                return n && n.status === 'pret' && !placementState.testedNotionIds.includes(nid);
-            });
-            return candidates[0] || null;
-        }
-
-        function placementExercisesFor(notionId, attemptIdx) {
-            const notion = curriculumNotions[notionId];
-            const exs = (notion.exerciseIds || []).map(id => curriculumExercises.find(e => e.id === id)).filter(Boolean);
-            if (!exs.length) return null;
-            // 1er essai : de préférence un QCM (reconnaissance, rapide) ; en cas de doute, 2e essai
-            // sur un type différent (texte à trous / remise en ordre) pour ne pas conclure sur un
-            // seul format (cf. "reconnaissance → compréhension → discrimination → construction").
-            const preferredOrder = attemptIdx === 0 ? ['qcm', 'texte_a_trous', 'remise_en_ordre'] : ['texte_a_trous', 'remise_en_ordre', 'qcm'];
-            for (const type of preferredOrder) {
-                const match = exs.find(e => e.type === type);
-                if (match) return match;
-            }
-            return exs[0];
-        }
-
-        function placementNextStep() {
-            if (!placementState) return;
-            if (placementState.askedCount >= PLACEMENT_MAX_QUESTIONS || placementState.moduleIdx >= placementState.modules.length) {
-                placementFinish();
-                return;
-            }
-            const mod = placementState.modules[placementState.moduleIdx];
-            const notionId = placementPickNotionForModule(mod);
-            if (!notionId) {
-                // Module pas encore rédigé, ou déjà couvert : module suivant.
-                placementState.moduleIdx++;
-                placementState.moduleFailedNotion = null;
-                placementNextStep();
-                return;
-            }
-            placementState.currentNotionId = notionId;
-            placementState.currentAttemptsOnNotion = 0;
-            placementAskExercise(notionId);
-        }
-
-        // Pose une vraie question en réutilisant intégralement l'écran d'exercice existant
-        // (#exercise-view / renderCurrentExercise / checkExerciseAnswer) : aucun composant de
-        // question n'est recréé. checkExerciseAnswer() appelle déjà recordNotionAttempt() avec la
-        // vraie réponse ; nextExercise() route vers placementAfterAnswer() quand placementState est
-        // actif (voir plus bas) au lieu du comportement normal de fin de file d'exercices.
-        function placementAskExercise(notionId, forcedExercise) {
-            const ex = forcedExercise || placementExercisesFor(notionId, placementState.currentAttemptsOnNotion);
-            if (!ex) {
-                // Notion sans exercice exploitable : on la saute proprement plutôt que de bloquer
-                // le test (ne devrait pas arriver, chaque notion "prête" a au moins un exercice).
-                placementState.testedNotionIds.push(notionId);
-                placementHandleModuleVerdict(notionId, true);
-                return;
-            }
-            placementState.currentExercise = ex;
-            placementState.askedCount++;
-            exerciseQueue = [ex];
-            exerciseIndex = 0;
-            const backBtn = document.getElementById('exercise-back-btn');
-            backBtn.onclick = () => placementQuit();
-            backBtn.innerText = "✕ Arrêter l'évaluation";
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('exercise-view').classList.add('active');
-            renderCurrentExercise();
-        }
-
-        function placementTrackStats(notionId, isCorrect) {
-            const notion = curriculumNotions[notionId];
-            const lvl = notion.level;
-            if (!placementState.levelStats[lvl]) placementState.levelStats[lvl] = { correct: 0, total: 0 };
-            placementState.levelStats[lvl].total++;
-            if (isCorrect) placementState.levelStats[lvl].correct++;
-            (notion.skills || []).forEach(sk => {
-                if (!placementState.skillStats[sk]) placementState.skillStats[sk] = { correct: 0, total: 0 };
-                placementState.skillStats[sk].total++;
-                if (isCorrect) placementState.skillStats[sk].correct++;
-            });
-        }
-
-        function placementAdvanceToNextModule() {
-            placementState.moduleIdx++;
-            placementState.moduleFailedNotion = null;
-            placementNextStep();
-        }
-
-        // Distingue une faiblesse isolée d'un vrai plafond de niveau : un seul échec ne suffit
-        // jamais à arrêter le test (cf. garde-fou "ne pas fausser le déclassement" déjà appliqué
-        // dans WeaknessEngine) — on redemande une 2e notion du même module avant de conclure.
-        function placementHandleModuleVerdict(notionId, wasCorrect) {
-            // Ce verdict porte-t-il sur le tout premier module réellement testé, alors qu'une plage
-            // de niveaux précédente est en attente de seed (niveau déclaré/externe) ? Si oui, ce
-            // verdict est ce qui confirme — ou infirme — l'hypothèse, jamais un fait déjà acquis.
-            const isAnchorVerdict = !!placementState.pendingSeedRange && placementState.moduleIdx === placementState.anchorModuleIdx;
-            if (wasCorrect) {
-                if (isAnchorVerdict) placementApplyPendingSeed();
-                placementAdvanceToNextModule();
-                return;
-            }
-            if (!placementState.moduleFailedNotion) {
-                placementState.moduleFailedNotion = notionId;
-                const mod = placementState.modules[placementState.moduleIdx];
-                const second = placementPickNotionForModule(mod);
-                if (second) {
-                    placementState.currentNotionId = second;
-                    placementState.currentAttemptsOnNotion = 0;
-                    placementAskExercise(second);
-                    return;
-                }
-            }
-            // 2e notion aussi ratée, ou aucune 2e notion disponible pour trancher.
-            if (isAnchorVerdict) {
-                // Le niveau déclaré/externe ne se confirme pas dès la première vraie vérification :
-                // on abandonne l'hypothèse (rien n'est seedé) et on reprend le test depuis le vrai
-                // début du programme, conformément au principe "un niveau déclaré ou externe ne doit
-                // jamais être considéré comme une maîtrise complète".
-                placementState.pendingSeedRange = null;
-                placementState.moduleIdx = 0;
-                placementState.anchorModuleIdx = 0;
-                placementState.moduleFailedNotion = null;
-                placementNextStep();
-                return;
-            }
-            // Ce module devient la frontière du placement : on arrête d'avancer plus loin dans le programme.
-            placementFinish();
-        }
-
-        function placementAfterAnswer() {
-            const notionId = placementState.currentNotionId;
-            const p = state.curriculum.notionProgress[notionId];
-            const wasCorrect = !!(p && p.lastResult === 'correct');
-            placementState.currentAttemptsOnNotion++;
-
-            if (!wasCorrect && placementState.currentAttemptsOnNotion < 2) {
-                const altEx = placementExercisesFor(notionId, 1);
-                if (altEx && (!placementState.currentExercise || altEx.id !== placementState.currentExercise.id)) {
-                    placementAskExercise(notionId, altEx);
-                    return;
-                }
-            }
-            // Verdict définitif pour cette notion (1 ou 2 essais épuisés) : on relit lastResult
-            // après le dernier essai réel.
-            const finalP = state.curriculum.notionProgress[notionId];
-            const finalCorrect = !!(finalP && finalP.lastResult === 'correct');
-            placementState.testedNotionIds.push(notionId);
-            placementTrackStats(notionId, finalCorrect);
-            placementHandleModuleVerdict(notionId, finalCorrect);
-        }
-
-        function placementQuit() {
-            if (!confirm("Arrêter l'évaluation ? Ce qui a déjà été identifié reste enregistré.")) return;
-            clearTimeout(exerciseAutoAdvanceTimer);
-            placementState = null;
-            const backBtn = document.getElementById('exercise-back-btn');
-            if (backBtn) backBtn.innerText = '← Retour à la leçon';
-            showHome();
-        }
-
-        function placementFinish() {
-            if (!placementState) return;
-            placementState.active = false;
-            const levelOrder = curriculumLevels.map(l => l.id);
-
-            // Niveau estimé : le dernier niveau CECR dont au moins une notion testée a été
-            // confirmée avec une accuracy suffisante.
-            let estimatedLevel = levelOrder[0];
-            levelOrder.forEach(lvl => {
-                const s = placementState.levelStats[lvl];
-                if (s && s.total > 0 && s.correct / s.total >= 0.5) estimatedLevel = lvl;
-            });
-
-            const testedCount = placementState.testedNotionIds.length;
-            const confidence = testedCount >= 6 ? 'élevée' : testedCount >= 3 ? 'moyenne' : 'faible';
-
-            const perLevelPct = {};
-            levelOrder.forEach(lvl => {
-                const lvlModIdx = placementState.modules.findIndex(m => m.level === lvl);
-                const s = placementState.levelStats[lvl];
-                if (s && s.total > 0) {
-                    perLevelPct[lvl] = Math.round((s.correct / s.total) * 100);
-                } else if (lvlModIdx >= 0 && lvlModIdx < placementState.moduleIdx) {
-                    perLevelPct[lvl] = 95; // niveau entièrement sauté avant le point de départ : supposé largement acquis
-                } else {
-                    perLevelPct[lvl] = 0; // jamais atteint : exploration future
-                }
-            });
-
-            const perSkillPct = {};
-            Object.keys(placementState.skillStats).forEach(sk => {
-                const s = placementState.skillStats[sk];
-                if (s.total > 0) perSkillPct[sk] = Math.round((s.correct / s.total) * 100);
-            });
-
-            state.placement.history.push({
-                timestamp: Date.now(), mode: placementState.mode, anchorLevel: placementState.anchorLevel,
-                externalSource: placementState.externalSource, estimatedLevel, confidence, testedCount,
-                perLevelPct, perSkillPct
-            });
-            save();
-
-            placementRenderResult(estimatedLevel, confidence, perLevelPct, perSkillPct);
-        }
-
-        function placementRenderResult(estimatedLevel, confidence, perLevelPct, perSkillPct) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('placement-view').classList.add('active');
-            const levelBarsHtml = curriculumLevels.map(l => `
-                <div class="placement-level-row">
-                    <span class="placement-level-name">${l.id}</span>
-                    <div class="module-progress-bar"><div class="module-progress-fill" style="width:${perLevelPct[l.id] || 0}%"></div></div>
-                    <span class="module-progress-pct">${perLevelPct[l.id] || 0}%</span>
-                </div>`).join('');
-            const skillKeys = Object.keys(perSkillPct);
-            const skillBarsHtml = skillKeys.map(sk => `
-                <div class="placement-level-row">
-                    <span class="placement-level-name">${PLACEMENT_SKILL_LABELS[sk] || sk}</span>
-                    <div class="module-progress-bar"><div class="module-progress-fill" style="width:${perSkillPct[sk]}%"></div></div>
-                    <span class="module-progress-pct">${perSkillPct[sk]}%</span>
-                </div>`).join('');
-
-            document.getElementById('placement-content').innerHTML = `
-                <div class="placement-intro">
-                    <div class="placement-intro-title">🎯 Ton parcours est prêt</div>
-                    <p class="placement-intro-text">Niveau estimé : <b>${estimatedLevel}</b> · confiance ${confidence}</p>
-                    <div class="section-title" style="margin-top:var(--space-4);">Ton profil par niveau</div>
-                    ${levelBarsHtml}
-                    ${skillBarsHtml ? `<div class="section-title" style="margin-top:var(--space-4);">Ce qu'on a pu observer</div>${skillBarsHtml}` : ''}
-                    <button class="btn btn-green" style="margin-top:var(--space-5);" onclick="placementGoToApp()">Commencer mon parcours →</button>
-                </div>`;
-        }
-
-        function placementGoToApp() {
-            placementState = null;
-            const backBtn = document.getElementById('exercise-back-btn');
-            if (backBtn) backBtn.innerText = '← Retour à la leçon';
-            showHome();
-        }
 
         // Vrai compte neuf : aucune notion jamais tentée, aucun historique de placement. Utilisé à
         // la fois par le nudge du dashboard et par l'onboarding — un seul et même critère.
@@ -3327,27 +2909,6 @@ if (firebaseAvailable) {
             return curriculumLoaded
                 && Object.values(state.curriculum.notionProgress).every(p => !p.attempts)
                 && !(state.placement.history || []).length;
-        }
-
-        // ===== Portes d'entrée "Qu'est-ce que tu veux faire ?" qui n'ont pas déjà une vue dédiée =====
-        // Toutes deux ne font que relire getRecommendation() (RecommendationEngine, inchangé) pour
-        // choisir une cible parmi les vues déjà existantes — aucune nouvelle logique de choix.
-        function enterModeEntrainer() {
-            const rec = curriculumLoaded ? getRecommendation() : null;
-            if (rec) showExercise(rec.notionId); else showApprendre();
-        }
-
-        function enterModeChoisir() {
-            const rec = curriculumLoaded ? getRecommendation() : null;
-            if (rec) startRecommendedActivity(rec.notionId); else showApprendre();
-        }
-
-        // ===== Apprendre → "🆕 Nouvelle notion" =====
-        // Simple porte UX vers RecommendationEngine, identique à enterModeChoisir() (même moteur,
-        // même comportement) : on ne crée pas un deuxième "quoi étudier ensuite", on réutilise
-        // exactement la même suggestion que "🎯 Pour toi maintenant" sur l'accueil.
-        function apprendreNouvelleNotion() {
-            enterModeChoisir();
         }
 
         // ===== Onboarding (court, skippable) =====
@@ -3383,8 +2944,7 @@ if (firebaseAvailable) {
 
         function onboardingGoTo(dest) {
             onboardingMarkSeen();
-            if (dest === 'placement') showPlacementIntro();
-            else if (dest === 'compte') showCompte();
+            if (dest === 'compte') showCompte();
             else if (dest === 'debut') guideStart(MODRP_IDS[0]);
             else if (dest === 'bases') { state.coursBasesHint = true; save(); showApprendre(); }
             else showHome();
@@ -3393,37 +2953,6 @@ if (firebaseAvailable) {
         function onboardingFinish() {
             onboardingMarkSeen();
             showHome();
-        }
-
-        // ===== Dashboard =====
-        // Résumé du module "en cours" pour le petit bloc secondaire "▶️ Continuer" (voir
-        // getCurrentModuleProgress). Ne crée aucun nouvel état : relit simplement
-        // curriculumModules/curriculumNotions + getNotionStatus/isNotionUnlocked déjà existants,
-        // pour trouver le premier module non entièrement maîtrisé sur lequel l'utilisateur a accès.
-        function getCurrentModuleProgress() {
-            if (!curriculumLoaded) return null;
-            const modulesSorted = [...curriculumModules].sort((a, b) => {
-                const la = curriculumLevels.find(l => l.id === a.level);
-                const lb = curriculumLevels.find(l => l.id === b.level);
-                const lo = (la ? la.order : 0) - (lb ? lb.order : 0);
-                return lo !== 0 ? lo : a.order - b.order;
-            });
-            for (const mod of modulesSorted) {
-                const readyIds = (mod.notions || []).filter(nid => curriculumNotions[nid] && curriculumNotions[nid].status === 'pret');
-                if (!readyIds.length) continue;
-                const masteredCount = readyIds.filter(nid => getNotionStatus(nid) === 'maitrisee').length;
-                const workedCount = readyIds.filter(nid => computeNotionMastery(nid) >= 1).length;
-                const hasUnlocked = readyIds.some(nid => isNotionUnlocked(nid));
-                if (masteredCount < readyIds.length && hasUnlocked) {
-                    return { module: mod, workedCount, total: readyIds.length, masteredCount };
-                }
-            }
-            return null;
-        }
-
-        function continueCurrentModule(levelId) {
-            showApprendre();
-            renderApprendreLevel(levelId);
         }
 
         function renderDashboard() {
@@ -3529,24 +3058,6 @@ if (firebaseAvailable) {
                     </div>`;
             }
 
-            // ===== 3. Raccourcis secondaires, discrets, sous l'action principale =====
-            // Remplace la grille "Qu'est-ce que tu veux faire maintenant ?" (8 boutons qui
-            // doublaient la barre d'onglets du bas) : il ne reste que ce qui dépend de TA
-            // situation — reprendre ton module en cours, et réviser s'il y a quelque chose à revoir.
-            const curMod = getCurrentModuleProgress();
-            const linksHtml = (curMod || reviewCount > 0) ? `
-                <div class="dash-links-row">
-                    ${curMod ? `<button type="button" class="dash-link-chip" onclick="continueCurrentModule('${curMod.module.level}')">▶️ Reprendre ${curMod.module.level} · ${curMod.module.label} <span>${curMod.workedCount}/${curMod.total}</span></button>` : ''}
-                    ${reviewCount > 0 ? `<button type="button" class="dash-link-chip" onclick="showReviser()">🔁 ${reviewCount} mot${reviewCount > 1 ? 's' : ''} à réviser</button>` : ''}
-                </div>` : '';
-
-            // ===== 5. À revoir (optionnel, court) =====
-            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 3) : [];
-            const weakHtml = weaknesses.length ? weaknesses.map(w => `
-                <div class="dash-weak-row" style="cursor:pointer;" onclick="showLesson('${w.id}')">
-                    <span>${getNotionStatusLabel(w.status)} — ${(w.notion.content.titre || w.id.replace(/_/g, ' '))}</span>
-                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
-                </div>`).join('') : '';
 
             // ===== 6. Social (secondaire, discret — ne doit jamais passer devant l'apprentissage) =====
             // Chargé de façon asynchrone (voir loadSocialDashboardSnippet) pour ne jamais retarder le
@@ -3586,20 +3097,14 @@ if (firebaseAvailable) {
                 ${accountNudgeHtml}`;
         }
 
-        // ===== Vue "Apprendre" (parcours par niveau/module/notion) =====
-        let apprendreCurrentLevel = 'A1';
+        // ===== Vue "Cours" (modules en situation, grammaire, notions à consolider) =====
 
         function showApprendre() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('apprendre-view').classList.add('active');
             setActiveNav('nav-apprendre');
             renderModRpEntries();
-            if (!curriculumLoaded) {
-                document.getElementById('module-list').innerHTML = '<p style="color:#888;">Programme en cours de chargement...</p>';
-                return;
-            }
-            renderApprendreLevel(apprendreCurrentLevel);
-            renderReviser();
+            if (curriculumLoaded) renderReviser();
         }
 
         // Modules en format jeu de rôle, affichés en tête d'Apprendre avec leur progression.
@@ -3627,78 +3132,6 @@ if (firebaseAvailable) {
                             ${passed ? '' : `<button type="button" class="modrp-exam-btn" title="Passer l'examen directement" onclick="event.stopPropagation(); guideExamDirect('${m.id}')">🏆 Examen</button>`}
                         </div>`;
                     }).join('')}
-                </details>`;
-            }).join('');
-        }
-
-        function renderApprendreLevel(levelId) {
-            apprendreCurrentLevel = levelId;
-            const tabRow = document.getElementById('level-tab-row');
-            tabRow.innerHTML = curriculumLevels.map(l =>
-                `<button class="level-tab ${l.id === levelId ? 'active' : ''}" onclick="renderApprendreLevel('${l.id}')">${l.id}</button>`
-            ).join('');
-
-            const modulesForLevel = curriculumModules.filter(m => m.level === levelId).sort((a, b) => a.order - b.order);
-            const listEl = document.getElementById('module-list');
-            if (!modulesForLevel.length) {
-                listEl.innerHTML = '<p style="color:#888;">Programme pas encore rédigé pour ce niveau.</p>';
-                return;
-            }
-            // Un seul module déplié : le premier qui n'est pas terminé. Les autres sont repliés
-            // (titre + progression) et s'ouvrent d'un clic — la page faisait quatre écrans de haut
-            // quand tous les modules d'un niveau étaient dépliés en même temps.
-            let openAssigned = false;
-            listEl.innerHTML = modulesForLevel.map(mod => {
-                const readyNotionIds = mod.notions.filter(nid => curriculumNotions[nid] && curriculumNotions[nid].status === 'pret');
-                const masteredInModule = readyNotionIds.filter(nid => getNotionStatus(nid) === 'maitrisee').length;
-                const modPct = readyNotionIds.length ? Math.round((masteredInModule / readyNotionIds.length) * 100) : 0;
-                const isOpen = !openAssigned && readyNotionIds.length > 0 && masteredInModule < readyNotionIds.length;
-                if (isOpen) openAssigned = true;
-
-                const rows = mod.notions.map(nid => {
-                    const notion = curriculumNotions[nid];
-                    if (!notion) return '';
-                    const ready = notion.status === 'pret';
-                    const unlocked = ready && isNotionUnlocked(nid);
-                    const label = (ready && notion.content && notion.content.titre) ? notion.content.titre : nid.replace(/_/g, ' ');
-
-                    // Traduction en 5 états compréhensibles pour l'utilisateur (la donnée 0-5 et les
-                    // 7 statuts internes de WeaknessEngine restent inchangés en dessous — ceci est
-                    // uniquement une lecture simplifiée pour l'écran Apprendre).
-                    let emoji, statusLabel, statusClass;
-                    if (!ready) {
-                        emoji = '○'; statusLabel = 'à venir'; statusClass = 'st-pending';
-                    } else if (!unlocked) {
-                        emoji = '🔒'; statusLabel = 'Verrouillée'; statusClass = 'st-pending';
-                    } else {
-                        const status = getNotionStatus(nid);
-                        if (status === 'maitrisee') { emoji = '✓'; statusLabel = 'Maîtrisée'; statusClass = 'st-maitrisee'; }
-                        else if (status === 'a_pratiquer' || status === 'entrainee' || status === 'presque_maitrisee') { emoji = '●'; statusLabel = 'À pratiquer'; statusClass = 'st-a_pratiquer'; }
-                        else if (status === 'jamais_etudiee') { emoji = '○'; statusLabel = 'À découvrir'; statusClass = 'st-jamais_etudiee'; }
-                        else { emoji = '◐'; statusLabel = 'En cours'; statusClass = 'st-en_cours'; }
-                    }
-
-                    const clickAttr = (ready && unlocked) ? `onclick="showLesson('${nid}')"` : '';
-                    return `<div class="notion-row ${(!ready || !unlocked) ? 'locked' : ''}" ${clickAttr}>
-                        <span class="notion-emoji">${emoji}</span>
-                        <span class="notion-label">${label}</span>
-                        <span class="notion-status ${statusClass}">${statusLabel}</span>
-                    </div>`;
-                }).join('');
-
-                return `<details class="module-card" ${isOpen ? 'open' : ''}>
-                    <summary>
-                        <div class="module-card-head">
-                            <span class="module-card-num">Module ${mod.order} · ${mod.notions.length} notion${mod.notions.length > 1 ? 's' : ''}</span>
-                            <span class="module-card-chevron">▾</span>
-                        </div>
-                        <div class="module-card-title">${mod.label}</div>
-                        ${readyNotionIds.length ? `<div class="module-progress-row">
-                            <div class="module-progress-bar"><div class="module-progress-fill" style="width:${modPct}%"></div></div>
-                            <span class="module-progress-pct">${modPct}%</span>
-                        </div>` : ''}
-                    </summary>
-                    ${rows}
                 </details>`;
             }).join('');
         }
@@ -3910,9 +3343,7 @@ if (firebaseAvailable) {
             clearTimeout(exerciseAutoAdvanceTimer);
             const ex = exerciseQueue[exerciseIndex];
             exerciseSelectedAnswer = null;
-            document.getElementById('exercise-progress').innerText = (placementState && placementState.active)
-                ? `Évaluation de ton niveau — Question ${placementState.askedCount}`
-                : `Exercice ${exerciseIndex + 1} / ${exerciseQueue.length}`;
+            document.getElementById('exercise-progress').innerText = `Exercice ${exerciseIndex + 1} / ${exerciseQueue.length}`;
             document.getElementById('exercise-question').innerText = ex.question;
             document.getElementById('exercise-feedback').innerText = '';
             document.getElementById('exercise-check-btn').style.display = '';
@@ -4136,7 +3567,6 @@ if (firebaseAvailable) {
             clearTimeout(exerciseAutoAdvanceTimer);
             exerciseIndex++;
             if (exerciseIndex >= exerciseQueue.length) {
-                if (placementState && placementState.active) { placementAfterAnswer(); return; }
                 const notionId = exerciseQueue[0].notionId;
                 showLesson(notionId);
                 renderDashboard();
@@ -7780,18 +7210,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
                 </div>`).join('') : `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucun point faible identifié pour l'instant 🎉</p>`;
 
-            const placementHistory = (state.placement.history || []).slice().reverse().slice(0, 5);
-            const placementHistoryHtml = placementHistory.length ? placementHistory.map(h => {
-                const dateStr = new Date(h.timestamp).toLocaleDateString('fr-BE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                const sourceLabel = h.mode === 'test' ? 'Test adaptatif'
-                    : h.mode === 'declare' ? `Niveau déclaré : ${h.anchorLevel}`
-                    : h.mode === 'external' ? `${h.externalSource} → ${h.anchorLevel}`
-                    : 'Départ normal';
-                return `<div class="hub-card" style="cursor:default;">
-                    <div class="hub-card-title">${dateStr} — ${sourceLabel}</div>
-                    <div class="hub-card-desc">Niveau estimé : ${h.estimatedLevel} · confiance ${h.confidence} · ${h.testedCount} notion${h.testedCount > 1 ? 's' : ''} testée${h.testedCount > 1 ? 's' : ''}</div>
-                </div>`;
-            }).join('') : `<p style="font-size:0.85rem; color:var(--text-secondary);">Aucune évaluation de niveau effectuée pour l'instant.</p>`;
 
             document.getElementById('profil-content').innerHTML = `
                 ${compteSnapshotHtml}
@@ -7836,11 +7254,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="study-box" style="text-align:left;">
                     <h3>🎯 Points faibles</h3>
                     ${weaknessesHtml}
-                </div>
-
-                <div class="study-box" style="text-align:left;">
-                    <h3>🕓 Historique de placement</h3>
-                    ${placementHistoryHtml}
                 </div>
 
                 <div class="study-box" style="text-align:left;">
