@@ -1,5 +1,5 @@
 {
-  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase dite par le recruteur = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Les phrases étant affichées telles quelles, pas de blancs entre crochets ici : utiliser des noms d'entreprise inventés (Logistiko, Transvio, Delmaro...) et des lieux ou âges pris au hasard.",
+  "_doc": "Dialogues scriptés du mode Intervieweur (exercice de traduction guidé : Joas joue le recruteur). Champs d'un scénario : id (unique), label, contexte (optionnel, affiché au premier tour), turns (séquence ordonnée). Champs d'un tour : nl_original (phrase dite par le recruteur = référence), fr_cue (consigne française affichée : \"dis en néerlandais : ...\"), candidate_reply (optionnel : réplique du candidat, affichée après la tentative pour donner le contexte du tour suivant). Champs optionnels pour le mode « Rejouer tel quel » (l'apprenant est le candidat) : speaker (qui parle, pour varier les voix), suggestion_fr (idée de réponse en français), et au niveau du scénario wpm (débit réel du recruteur, en mots par minute). ANONYMISATION OBLIGATOIRE (dépôt public) : aucun nom réel d'entreprise, de personne ou de lieu, aucun âge réel. Les phrases étant affichées telles quelles, pas de blancs entre crochets ici : utiliser des noms d'entreprise inventés (Logistiko, Transvio, Delmaro...) et des lieux ou âges pris au hasard.",
   "scenarios": [
     {
       "id": "agence_transport_planning",
@@ -82,6 +82,290 @@
           "nl_original": "Is het voor jou een beetje duidelijk wie dat wij hier zijn, wat wij doen, wat wij verwachten van iemand in die job?",
           "fr_cue": "Est-ce que c'est un peu clair pour toi, qui nous sommes, ce qu'on fait, ce qu'on attend de quelqu'un dans ce poste ?",
           "candidate_reply": "Ja. Ik ben niet bang. Ik versta alles dat je uitlegt."
+        }
+      ]
+    },
+    {
+      "id": "zonvella_administratief_reel",
+      "label": "Zonvella — administratief medewerker (entretien réel à trois)",
+      "contexte": "Entretien réel chez Zonvella, fabricant familial de protections solaires, pour un poste administratif d'appui à la production. Trois interlocuteurs : la consultante de l'agence d'intérim, le responsable RH et le plant manager. Le candidat a déjà travaillé chez Zonvella en production.",
+      "_source": "Transcription réelle d'un entretien de Joas (octobre 2026), anonymisée : entreprises, personnes et lieux remplacés ; répliques des recruteurs reprises telles quelles sinon. Suggestions de réponse rédigées par Claude.",
+      "wpm": 135,
+      "turns": [
+        {
+          "speaker": "De interimconsulente",
+          "nl_original": "Voor het studentenstatuut moet je meer dan dertig credits hebben om student te blijven, eigenlijk. De enige reden waarom ik het vraag, is dat het voor ons ook interessanter is als je nog student bent. Ik ga het checken.",
+          "fr_cue": "Pour le statut étudiant, il faut plus de trente crédits pour rester étudiant, en fait. La seule raison pour laquelle je le demande, c'est que c'est plus intéressant pour nous aussi si tu es encore étudiant. Je vais vérifier.",
+          "candidate_reply": "Oké, dat wist ik niet. Ik moet nog één vak volgen dit jaar.",
+          "suggestion_fr": "Montre que tu as compris et donne ta situation en une phrase : il te reste un seul cours cette année. Remercie-la de vérifier."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Waarom denk je dat deze functie voor jou interessant is?",
+          "fr_cue": "Pourquoi penses-tu que cette fonction est intéressante pour toi ?",
+          "candidate_reply": "Mijn ervaring als magazijnier of productiemedewerker was niet in de richting van mijn studie. Hier kan ik meer relevante ervaring krijgen. En ik heb hier al gewerkt, en mijn broer werkt hier ook.",
+          "suggestion_fr": "Deux raisons, courtes : 1) c'est de l'administratif proche de la production, dans la ligne de tes études ; 2) tu connais déjà l'entreprise de l'intérieur (tu y as travaillé en production, ton frère y travaille)."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Je broer, weet je hoelang hij hier al werkt?",
+          "fr_cue": "Ton frère, tu sais depuis combien de temps il travaille ici ?",
+          "candidate_reply": "Ja, meer dan zes of zeven jaar.",
+          "suggestion_fr": "Réponds simplement par la durée (« plus de six ou sept ans »), puis rebondis : c'est aussi pour ça que tu connais bien l'entreprise."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "En je bachelor, die heb je gehaald aan de universiteit van...?",
+          "fr_cue": "Et ton bachelier, tu l'as obtenu à l'université de... ?",
+          "candidate_reply": "Aan een Franstalige universiteit, een beetje zoals de KU Leuven maar dan Franstalig. Mijn master doe ik daar ook.",
+          "suggestion_fr": "Nomme ton université et situe-la pour un Flamand (« un peu comme la KU Leuven, mais francophone »), et dis que ton master y est aussi."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Om heel transparant te zijn: waar komt dan de interesse in een functie als arbeider vandaan?",
+          "fr_cue": "Pour être très transparent : d'où vient alors l'intérêt pour une fonction sous statut ouvrier ?",
+          "candidate_reply": "Je moet ergens beginnen. Twee jaar in deze functie geeft mij veel ervaring in logistiek en supply chain vanuit een administratieve hoek. En ik wil mijn Nederlands echt verbeteren.",
+          "suggestion_fr": "Ne te dévalorise pas et ne dis pas que c'est temporaire. « Il faut commencer quelque part » : ce poste te donne de l'expérience concrète en logistique côté administratif, et un environnement néerlandophone pour progresser."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Dat valt helemaal niet weg. Waar ik het vooral aan merk, is dat je niet zo hard moet zoeken naar woorden, en dat is meestal een indicatie dat je de taal wel kan. Dus zeg zeker niet dat je Nederlands niet goed is.",
+          "fr_cue": "Ça ne pose pas du tout problème. Ce que je remarque surtout, c'est que tu ne dois pas chercher tes mots, et c'est en général le signe que tu maîtrises la langue. Donc ne dis surtout pas que ton néerlandais n'est pas bon.",
+          "candidate_reply": "Dank u. Ik wil het gewoon echt verbeteren door te oefenen.",
+          "suggestion_fr": "Accepte le compliment simplement (« merci ») et finis sur du positif : tu veux progresser en pratiquant tous les jours. Ne reviens pas sur tes faiblesses."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Welk doel had je met die studies?",
+          "fr_cue": "Quel objectif avais-tu avec ces études ?",
+          "candidate_reply": "Eerst omdat het veel deuren openhoudt. Daarna heb ik me gespecialiseerd in supply chain en logistiek, want dat sprak mij het meest aan in mijn studentenjobs.",
+          "suggestion_fr": "Garder beaucoup de portes ouvertes, puis tu t'es spécialisé en supply chain et logistique parce que c'est ce qui t'a le plus plu dans tes jobs étudiants."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "En jouw hobby?",
+          "fr_cue": "Et ton hobby ?",
+          "candidate_reply": "Ik ben fan van data. Ik twijfelde tussen supply chain en data-analist.",
+          "suggestion_fr": "Une ou deux passions, en une phrase chacune (le sport, les données et l'IA), sans te justifier."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Dus met Excel heb je geen probleem?",
+          "fr_cue": "Donc avec Excel, tu n'as pas de problème ?",
+          "candidate_reply": "Nee. Ik ben geen expert, maar ik ken de formules en ik werk met draaitabellen.",
+          "suggestion_fr": "Non : tu n'es pas expert, mais tu utilises les formules, les filtres et les tableaux croisés dynamiques."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Als ik je zou vragen om een draaitabel te maken, wat ga je dan doen?",
+          "fr_cue": "Si je te demandais de faire un tableau croisé dynamique, qu'est-ce que tu ferais ?",
+          "candidate_reply": "Ik selecteer de gegevens, ik voeg een draaitabel in, en ik kies wat in de rijen, de kolommen en de waarden komt.",
+          "suggestion_fr": "Décris les étapes concrètement : sélectionner les données, insérer un tableau croisé, choisir les lignes, les colonnes et les valeurs, puis filtrer. Concret = crédible."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Ik ben blij dat je zelf twee jaar zegt, want de administratieve functie die je nu zou doen, schatten we ook in op ongeveer twee jaar. Na die twee jaar hoef je niet noodzakelijk te stoppen. We veranderen van ERP-systeem, en met de juiste skills en opleiding kan je eventueel bij ons doorgroeien.",
+          "fr_cue": "Je suis content que tu dises toi-même deux ans, parce que la fonction administrative que tu ferais, on l'estime aussi à environ deux ans. Après ces deux ans, tu ne dois pas forcément arrêter. On change de système ERP, et avec les bonnes compétences et la bonne formation, tu pourrais évoluer chez nous.",
+          "candidate_reply": "Dat spreekt mij aan. Ik wil graag mee leren met het nieuwe ERP-systeem.",
+          "suggestion_fr": "Réagis avec intérêt : la possibilité d'évoluer te plaît, et le changement d'ERP t'intéresse (tu as suivi une formation ERP)."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Ik zag dat je hier al stond. Wat heb je hier gedaan?",
+          "fr_cue": "J'ai vu que tu étais déjà passé ici. Qu'est-ce que tu as fait ici ?",
+          "candidate_reply": "Ik heb hier in de productie gewerkt, in de kleine magazijnen. Ik heb orders gepickt en dingen in het systeem geboekt.",
+          "suggestion_fr": "Raconte en deux phrases ce que tu faisais en production (picking, emballage, encodage dans le système) et que tu connais donc les produits et l'atelier."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Naast AI, wat heb je nog als hobby?",
+          "fr_cue": "À part l'IA, quel autre hobby as-tu ?",
+          "candidate_reply": "Voetbal was mijn passie, nu speel ik liever padel.",
+          "suggestion_fr": "Une phrase : un sport que tu pratiques. Tu peux relancer la conversation (une équipe que tu suis)."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Welke ervaring heb je nog, naast hier gewerkt te hebben?",
+          "fr_cue": "Quelle autre expérience as-tu, à part avoir travaillé ici ?",
+          "candidate_reply": "Ik heb stage gedaan bij een logistiek bedrijf. Ik hielp de magazijnverantwoordelijke met veel Excel, bijvoorbeeld de planning van de chauffeurs.",
+          "suggestion_fr": "Ton stage en logistique : soutien administratif au responsable d'entrepôt (Excel, planning, documents de transport, accueil des chauffeurs). C'est ton expérience la plus proche du poste."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "Al je opdrachten waren in verschillende ploegen: nachtploeg, weekendploeg, ochtendploeg?",
+          "fr_cue": "Toutes tes missions étaient dans différentes équipes : équipe de nuit, de week-end, du matin ?",
+          "candidate_reply": "Ja, voor mij is dat geen probleem. Een rooster stoort mij niet.",
+          "suggestion_fr": "Oui, et ça ne te pose aucun problème : tu t'adaptes aux horaires."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "Hier blijft het overdag. Het enige is dat het soms op zaterdag kan zijn, maar dan word je daarvoor ook betaald.",
+          "fr_cue": "Ici, c'est en journée. La seule chose, c'est que ça peut parfois être le samedi, mais alors tu es aussi payé pour ça.",
+          "candidate_reply": "Ja, dat is geen probleem.",
+          "suggestion_fr": "Confirme simplement que le samedi occasionnel n'est pas un problème."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "Hoe ga je om met stress?",
+          "fr_cue": "Comment gères-tu le stress ?",
+          "candidate_reply": "Ik blijf rustig. Ik heb in de horeca gewerkt, in het weekend was het heel druk. Rustig blijven en de juiste informatie geven, dat is voor mij het belangrijkste.",
+          "suggestion_fr": "Un exemple concret (l'horeca le week-end, ou les deux équipes en entrepôt qui ne se passaient pas l'info), puis ta méthode : rester calme, transmettre la bonne information."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "Zeg nooit dat je Nederlands niet goed is. Veel mensen die hier in de productie werken, hebben ook nog moeite met Nederlands.",
+          "fr_cue": "Ne dis jamais que ton néerlandais n'est pas bon. Beaucoup de gens qui travaillent ici en production ont aussi encore du mal avec le néerlandais.",
+          "candidate_reply": "Ik ben niet kritisch, ik wil het gewoon echt verbeteren. Daarvoor heb ik een Nederlandstalige omgeving nodig.",
+          "suggestion_fr": "Remercie, puis tourne-le en positif : tu veux progresser, et un environnement néerlandophone est la meilleure façon. Annonce le niveau de ton test officiel, le même que sur ton CV."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "Is dat ook wat je zoekt, een Nederlandstalige omgeving?",
+          "fr_cue": "C'est aussi ce que tu cherches, un environnement néerlandophone ?",
+          "candidate_reply": "Ja, dat is belangrijk voor mij. Ik hou van talen, omdat je dan met meer mensen kan spreken.",
+          "suggestion_fr": "Oui : c'est important pour toi en Belgique, tu aimes les langues, et travailler en néerlandais est la meilleure façon de progresser."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "Had je al eens een conflict- of confrontatiesituatie, bijvoorbeeld in een productieomgeving in hoogseizoen waar veel stress is? Hoe reageer je als iemand kortaf reageert?",
+          "fr_cue": "As-tu déjà eu une situation de conflit ou de confrontation, par exemple en production en haute saison quand il y a beaucoup de stress ? Comment réagis-tu si quelqu'un te répond sèchement ?",
+          "candidate_reply": "Ik neem dat niet snel op. Ik blijf rustig, ik luister naar wat er gezegd wordt, en ik werk verder. Het doel is dat het bedrijf blijft draaien.",
+          "suggestion_fr": "Tu ne le prends pas personnellement : tu restes calme, tu écoutes ce qu'on te dit, tu reformules si besoin et tu continues à travailler. L'objectif commun, c'est que la production tourne."
+        },
+        {
+          "speaker": "De interimconsulente",
+          "nl_original": "Heb je nog studentenuren over dit jaar?",
+          "fr_cue": "As-tu encore des heures étudiant cette année ?",
+          "candidate_reply": "Ja, meer dan driehonderd.",
+          "suggestion_fr": "Donne le nombre d'heures qu'il te reste (vérifie-le avant sur ton compte étudiant)."
+        },
+        {
+          "speaker": "De interimconsulente",
+          "nl_original": "En hoe lang zou je, als je afstudeert, nog als student kunnen werken?",
+          "fr_cue": "Et combien de temps pourrais-tu encore travailler comme étudiant, une fois diplômé ?",
+          "candidate_reply": "Ik weet het niet precies, ik denk tot eind september.",
+          "suggestion_fr": "Si tu ne sais pas, dis-le honnêtement et propose de vérifier et de la rappeler."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Normaal, na een interimperiode, maak je kans op een contract. Het begint met zes maanden, dan nog zes maanden, en als dat positief verloopt, krijg je een jaar. Dus reken op ongeveer twee jaar tijdelijke contracten voor je een vast contract krijgt.",
+          "fr_cue": "Normalement, après une période d'intérim, tu as une chance d'avoir un contrat. Ça commence par six mois, puis encore six mois, et si ça se passe bien, tu as un an. Donc compte environ deux ans de contrats temporaires avant d'avoir un CDI.",
+          "candidate_reply": "Oké, dat is duidelijk. Dat past bij wat ik zoek.",
+          "suggestion_fr": "Montre que c'est clair et que ça te convient ; tu peux demander comment se passent les évaluations."
+        },
+        {
+          "speaker": "De plant manager",
+          "nl_original": "We werken daarmee ook. Elke morgen laden we de stock op in een draaitabel, en daarmee bekijken we hoe we goederen aan de productie kunnen uitleveren. Bijvoorbeeld: we hebben nog vier stukken op voorraad, en meerdere afdelingen vragen er elk vier. Dan moeten we inschatten hoe we die verdelen.",
+          "fr_cue": "On travaille aussi avec ça. Chaque matin, on charge le stock dans un tableau croisé, et on regarde comment livrer les marchandises à la production. Par exemple : il nous reste quatre pièces en stock, et plusieurs départements en demandent quatre chacun. Il faut alors estimer comment les répartir.",
+          "candidate_reply": "Dan zou ik eerst kijken welke afdeling ze het dringendst nodig heeft, en het doorgeven aan de ploegbaas.",
+          "suggestion_fr": "Raisonne à voix haute : regarder quelle commande est la plus urgente (date de livraison, client), demander la priorité au responsable, prévenir les autres départements et vérifier quand arrive le prochain réassort."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "En het Nederlands leren?",
+          "fr_cue": "Et apprendre le néerlandais ?",
+          "candidate_reply": "Ik weet dat ik nog veel moet verbeteren, maar ik krijg zelden de kans om in een Nederlandstalige omgeving te werken.",
+          "suggestion_fr": "Positif et concret : ce que tu fais pour progresser (pratique quotidienne, cours prévus si c'est vrai) et pourquoi ce poste t'aidera."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "We zijn een Vlaams bedrijf, de voertaal op papier is Nederlands, maar op de werkvloer is het vaak Franstalig. Tussen de leidinggevenden en jou zou het Nederlandstalig zijn, maar op de werkvloer kan het tot negentig procent Franstalig zijn.",
+          "fr_cue": "On est une entreprise flamande, la langue officielle est le néerlandais, mais en atelier c'est souvent en français. Entre les responsables et toi, ce serait en néerlandais, mais en atelier ça peut être jusqu'à quatre-vingt-dix pour cent en français.",
+          "candidate_reply": "Dat is goed. Zo kan ik met iedereen praten: Nederlands met de leidinggevenden en Frans op de werkvloer.",
+          "suggestion_fr": "Transforme-le en atout : tu peux faire le lien entre le bureau (néerlandais) et l'atelier (français)."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Wat weet je over Zonvella?",
+          "fr_cue": "Que sais-tu de Zonvella ?",
+          "candidate_reply": "Ik ken de producten, mijn broer heeft me erover verteld en ik heb het zelf gezien. Het is een groot familiebedrijf, dat voelt stabiel. Het is ook bekend in Wallonië.",
+          "suggestion_fr": "Les produits (couvertures de terrasse, protections solaires, pergolas), une entreprise familiale qui grandit, et ce que tu en as vu de l'intérieur."
+        },
+        {
+          "speaker": "De HR-verantwoordelijke",
+          "nl_original": "Je masteropleiding, qua beschikbaarheid, zal dat een probleem geven?",
+          "fr_cue": "Ton master, au niveau de la disponibilité, est-ce que ça va poser problème ?",
+          "candidate_reply": "Nee, het is maar één les, 's avonds, ongeveer achttien uur in totaal. Overdag moet ik er niet voor weg.",
+          "suggestion_fr": "Rassure : dis exactement ce qu'il te reste à faire pour ton master (le même discours que sur ton CV) et que ça ne touche pas tes horaires de travail."
+        },
+        {
+          "speaker": "De interimconsulente",
+          "nl_original": "Heb je zelf nog vragen?",
+          "fr_cue": "As-tu encore des questions ?",
+          "candidate_reply": "Hoe verloopt de inwerkperiode? En wie leert mij de job aan?",
+          "suggestion_fr": "Pose au moins trois questions : la répartition entre administratif et accueil, qui te formera et combien de temps, quand le poste peut devenir fixe."
+        }
+      ]
+    },
+    {
+      "id": "zonvella_appel_agence_reel",
+      "label": "Appel de l'agence — poste d'appui à la production chez Zonvella (réel)",
+      "contexte": "Appel réel d'une consultante d'agence d'intérim qui présente un poste d'appui à la production chez Zonvella (encodage, suivi du stock, manquants) et vérifie la disponibilité du candidat.",
+      "_source": "Transcription réelle d'un appel reçu par Joas (octobre 2026), anonymisée ; répliques de la consultante reprises telles quelles sinon. Suggestions de réponse rédigées par Claude.",
+      "wpm": 135,
+      "turns": [
+        {
+          "speaker": "De consulente",
+          "nl_original": "Het is eigenlijk de bedoeling om data in te voeren in het systeem. Ze zijn aan het digitaliseren met zo'n computerprogramma, dus volgens mij ga je in het begin vooral moeten helpen met cijfers in te geven. Dus gewoon, alles leren kennen.",
+          "fr_cue": "En fait, le but est d'encoder des données dans le système. Ils sont en train de digitaliser avec un logiciel, donc au début tu devras surtout aider à encoder des chiffres. Bref, apprendre à tout connaître.",
+          "candidate_reply": "Ja, dat lijkt mij interessant.",
+          "suggestion_fr": "Montre ton intérêt et rebondis : tu as l'habitude d'encoder des données (Excel, documents de transport) et tu apprends vite un nouveau système."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Stel: in de lakkerij lakken ze alles, in de confectie maken ze alle doeken, maar in de voormontage hebben ze stukken tekort. Als alles op een kar terechtkomt in de montage en zij hebben stukken tekort, dan gaan ze die luifel nooit kunnen afwerken.",
+          "fr_cue": "Imagine : à la peinture ils peignent tout, à la confection ils font toutes les toiles, mais au pré-montage il leur manque des pièces. Si tout arrive sur un chariot au montage et qu'il leur manque des pièces, ils ne pourront jamais terminer ce store.",
+          "candidate_reply": "Ja, ik begrijp het.",
+          "suggestion_fr": "Montre que tu as compris en reformulant : ton rôle serait de voir les manques à l'avance pour que le montage ne soit jamais bloqué."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Ik zal moeten zeggen aan de teamleader: let op, we hebben nog maar honderd stuks, we moeten tegen eind deze week zoveel producten maken, jij zal die onderdelen extra moeten maken, anders gaat het niet lukken. We zoeken iemand die analytisch is en die data goed kan begrijpen.",
+          "fr_cue": "Il faudra dire au chef d'équipe : attention, il ne reste que cent pièces, on doit faire tant de produits d'ici la fin de la semaine, tu devras fabriquer ces pièces en plus, sinon ça n'ira pas. On cherche quelqu'un d'analytique, qui comprend bien les données.",
+          "candidate_reply": "Ja, dat is mijn profiel. Mijn studie was analytisch, en ik kan goed werken met Excel en de Office-pakketten.",
+          "suggestion_fr": "Relie à ton profil : études analytiques, Excel (formules, tableaux croisés), formation ERP ; et tu sais transmettre une information claire à une équipe."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Je spreekt Nederlands, dat is belangrijk, want de computers zijn waarschijnlijk in het Nederlands. Maar veel mensen op de werkvloer zijn Franstalig, dus je kan ook met hen spreken indien nodig.",
+          "fr_cue": "Tu parles néerlandais, c'est important, parce que les ordinateurs sont probablement en néerlandais. Mais beaucoup de gens en atelier sont francophones, donc tu peux aussi leur parler si besoin.",
+          "candidate_reply": "Ja, dat is een voordeel voor mij.",
+          "suggestion_fr": "Confirme que c'est un atout : tu lis et comprends le néerlandais au travail, et tu peux parler français avec l'atelier."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Je hebt een opleiding gevolgd voor handelsingenieur, een bachelor, en nu ook een master, of nog niet helemaal?",
+          "fr_cue": "Tu as suivi une formation d'ingénieur de gestion, un bachelier, et maintenant aussi un master, ou pas encore tout à fait ?",
+          "candidate_reply": "Voor de master moet ik nog één les volgen.",
+          "suggestion_fr": "Dis précisément où en est ton master, exactement comme sur ton CV, et que ce qui reste ne touche pas ta disponibilité."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Hun echte piekmoment begint rond februari, zeker in maart, tot eind juli. Lukt dat voor jou? Ben je dan vrij, zeg van eind februari tot juli?",
+          "fr_cue": "Leur vrai pic commence vers février, surtout en mars, jusqu'à fin juillet. Ça te va ? Tu es libre, disons de fin février à juillet ?",
+          "candidate_reply": "Ja, geen probleem.",
+          "suggestion_fr": "Oui, tu es disponible toute la période, sans vacances prévues."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Het is een dagjob, van acht tot kwart voor vijf. Maar in het hoogseizoen werk je in een flexsysteem, van zeven uur 's morgens tot rond vijf uur, soms wat langer indien nodig.",
+          "fr_cue": "C'est un travail de jour, de huit heures à cinq heures moins le quart. Mais en haute saison, tu travailles en horaire flexible, de sept heures du matin à environ cinq heures, parfois un peu plus si nécessaire.",
+          "candidate_reply": "Ja, dat heb ik ook al moeten doen tijdens mijn stage.",
+          "suggestion_fr": "Pas de problème : tu as déjà connu des horaires flexibles et des pics d'activité."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Heb je een loonsverwachting?",
+          "fr_cue": "As-tu une attente salariale ?",
+          "candidate_reply": "Nee. Voor mij is het nu het belangrijkste om ervaring op te doen.",
+          "suggestion_fr": "Tu peux dire que l'expérience compte d'abord, mais demande quand même le barème ou la commission paritaire, pour savoir où tu te situes."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Goed, ik neem contact op met de firma. Ben je deze week of volgende week vrij voor een gesprek?",
+          "fr_cue": "Bien, je contacte l'entreprise. Tu es libre cette semaine ou la semaine prochaine pour un entretien ?",
+          "candidate_reply": "Ja, deze week of volgende week.",
+          "suggestion_fr": "Donne tes disponibilités précises (jours et heures) et remercie-la."
         }
       ]
     }

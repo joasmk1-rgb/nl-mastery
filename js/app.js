@@ -12802,6 +12802,249 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             return n;
         }
 
+        // ===== Rejouer un vrai entretien tel quel =====
+        // Les répliques des recruteurs sont dites EXACTEMENT comme dans la transcription
+        // (scripted_dialogues.json, nl_original), à leur débit réel (wpm du scénario : l'app mesure
+        // le débit de la voix et ajuste la vitesse pour s'en approcher). Après chaque réplique, une
+        // idée de réponse en français (suggestion_fr) ; l'apprenant répond ce qu'il veut, à l'oral.
+        // Pas de Gemini pour le recruteur ; un correcteur séparé (une phrase à la fois) en option.
+        const REPLAY_SPEEDS = { lent: { label: '🐢 Plus lent', f: 0.8 }, reel: { label: '🎯 Vitesse réelle', f: 1 }, rapide: { label: '🐇 Plus rapide', f: 1.2 } };
+        const REPLAY_VOICES = [{ speaker: 0 }, { speaker: 1 }, { speaker: 0, pitch: 1.25 }, { speaker: 1, pitch: 0.8 }];
+        let rpReplay = null;
+        let rpReplayRec = null;
+
+        function replaySettings() {
+            const s = state.settings.replay || {};
+            state.settings.replay = {
+                speed: REPLAY_SPEEDS[s.speed] ? s.speed : 'reel',
+                handsfree: s.handsfree !== false,
+                showSugg: s.showSugg !== false,
+                rate: typeof s.rate === 'number' && s.rate > 0.4 && s.rate < 2 ? s.rate : 1
+            };
+            return state.settings.replay;
+        }
+
+        function replayActive() { return !!(rpReplay && !rpReplay.ended && document.getElementById('replay-view').classList.contains('active')); }
+
+        async function rpShowReplayList() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('replay-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            const box = document.getElementById('replay-content');
+            box.innerHTML = '<p class="report-meta">Chargement…</p>';
+            const { dialogues } = await rpLoadRealData();
+            const list = dialogues.map((d, i) => ({ d, i })).filter(x => (x.d.turns || []).length);
+            box.innerHTML = `
+                <h2 style="margin-bottom:4px;">🎬 Rejouer un vrai entretien</h2>
+                <p class="section-subtitle" style="margin-top:0;">Les vraies questions des recruteurs, mot pour mot et à leur vitesse. Tu réponds ce que tu veux ; une idée de réponse en français t'aide si tu bloques.</p>
+                ${list.map(x => `<button class="rp-scenario-btn" onclick="rpReplaySetup(${x.i})">${rpEscapeHtml(x.d.label)} <small style="color:var(--text-secondary);">· ${x.d.turns.length} répliques${x.d.turns.some(t => t.suggestion_fr) ? '' : ' · sans idées de réponse'}</small></button>`).join('')}`;
+        }
+
+        function rpReplaySetup(index) {
+            const d = rpRealData.dialogues[index];
+            const s = replaySettings();
+            const chip = (on, click, label) => `<button type="button" class="conj-filter-chip${on ? ' active' : ''}" onclick="${click}">${label}</button>`;
+            const set = (k, v) => `replaySettings()['${k}']=${JSON.stringify(v).replace(/"/g, "'")}; save(); rpReplaySetup(${index})`;
+            document.getElementById('replay-content').innerHTML = `
+                <button class="back-btn" onclick="rpShowReplayList()">← Entretiens réels</button>
+                <h2 style="margin-bottom:4px;">${rpEscapeHtml(d.label)}</h2>
+                ${d.contexte ? `<p class="section-subtitle" style="margin-top:0;">${rpEscapeHtml(d.contexte)}</p>` : ''}
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-label">Vitesse${d.wpm ? ` (réelle : environ ${d.wpm} mots par minute)` : ''}</div>
+                    <div class="conj-audio-chips">${Object.entries(REPLAY_SPEEDS).map(([k, v]) => chip(s.speed === k, set('speed', k), v.label)).join('')}</div>
+                    <div class="conj-audio-label">Idées de réponse en français</div>
+                    <div class="conj-audio-chips">${chip(s.showSugg, set('showSugg', true), '👀 Affichées')}${chip(!s.showSugg, set('showSugg', false), '🙈 Sur demande')}</div>
+                    <div class="conj-audio-label">Micro</div>
+                    <div class="conj-audio-chips">${chip(s.handsfree, set('handsfree', true), '🗣️ Mains libres')}${chip(!s.handsfree, set('handsfree', false), '👆 Je touche le micro')}</div>
+                    <button class="btn btn-green" style="margin-top:10px;" onclick="rpReplayStart(${index})">▶️ Commencer</button>
+                </div>`;
+        }
+
+        function rpReplayStart(index) {
+            const d = rpRealData.dialogues[index];
+            const s = replaySettings();
+            const speakers = [...new Set(d.turns.map(t => t.speaker || 'Le recruteur'))];
+            rpReplay = { index, d, i: 0, answers: [], ended: false, busy: false, token: Date.now(), speakers,
+                target: (d.wpm || 135) * REPLAY_SPEEDS[s.speed].f };
+            document.getElementById('replay-content').innerHTML = `
+                <div class="talk-head">
+                    <div class="talk-head-txt"><b>${rpEscapeHtml(d.label)}</b><small id="replay-progress"></small></div>
+                    <button type="button" class="rp-coach-btn" onclick="rpReplayEnd()">Terminer</button>
+                </div>
+                <div id="replay-chat" class="talk-chat"></div>
+                <div id="replay-sugg"></div>
+                <div class="prof-input-row">
+                    <input type="text" id="replay-input" placeholder="Ta réponse, comme tu veux…" onkeydown="if(event.key==='Enter') rpReplaySendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="rpReplaySendTyped()">➤</button>
+                </div>
+                <div class="talk-bar">
+                    <button type="button" class="talk-side" onclick="rpReplaySay()" title="Réécouter">🔁</button>
+                    <button type="button" class="talk-mic" id="replay-mic" onclick="rpReplayMic()">🎤</button>
+                    <button type="button" class="talk-side" onclick="rpReplaySkip()" title="Passer">⏭</button>
+                </div>
+                <div id="replay-mic-hint" class="talk-mic-hint">Écoute la question, puis réponds.</div>`;
+            rpReplayAsk();
+        }
+
+        function rpReplayBubble(cls, html) {
+            const chat = document.getElementById('replay-chat');
+            if (!chat) return null;
+            const div = document.createElement('div');
+            div.className = 'talk-msg ' + cls;
+            div.innerHTML = html;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            return div;
+        }
+
+        // Lit une réplique et ajuste la vitesse de la voix pour viser le débit réel du recruteur.
+        async function rpReplaySpeak(text, speakerName) {
+            const r = rpReplay, s = replaySettings();
+            const voice = REPLAY_VOICES[Math.max(0, r.speakers.indexOf(speakerName)) % REPLAY_VOICES.length];
+            const words = (text.match(/[A-Za-zÀ-ÿ']+/g) || []).length;
+            const t0 = Date.now(), token = r.token;
+            await conjAudioSpeak(text, 'nl', s.rate, voice);
+            const dt = (Date.now() - t0) / 1000;
+            // Mesure seulement sur une lecture complète (pas interrompue par une réponse, un saut
+            // ou un arrêt, ni terminée par le délai de secours).
+            if (rpReplay === r && r.token === token && !r.ended && words >= 6 && dt > 1.2 && dt < 2.5 + text.length * 0.18 / s.rate - 0.5) {
+                const wpm = words / dt * 60;
+                const ideal = s.rate * r.target / wpm;
+                s.rate = Math.max(0.6, Math.min(1.8, s.rate * 0.5 + ideal * 0.5));
+                save();
+            }
+        }
+
+        async function rpReplayAsk() {
+            const r = rpReplay;
+            if (!r || r.ended) return;
+            const t = r.d.turns[r.i];
+            if (!t) { rpReplayEnd(); return; }
+            const s = replaySettings();
+            const prog = document.getElementById('replay-progress');
+            if (prog) prog.innerText = `Réplique ${r.i + 1} / ${r.d.turns.length}`;
+            const words = rpAnnotateText(t.nl_original).replace(/rpWordTap\(this\)/g, 'talkWordTap(this)');
+            rpReplayBubble('them', `<div class="replay-who">${rpEscapeHtml(t.speaker || 'Le recruteur')}</div><div class="talk-nl">${words}</div>
+                <div class="talk-tools"><button type="button" onclick="this.closest('.talk-msg').querySelector('.talk-fr').classList.toggle('show')">🇫🇷</button></div>
+                <div class="talk-fr">${rpEscapeHtml(t.fr_cue || '')}</div><div class="talk-word"></div>`);
+            const sugg = document.getElementById('replay-sugg');
+            const idea = t.suggestion_fr || (t.candidate_reply ? 'Ce qui avait été répondu : « ' + t.candidate_reply + ' »' : '');
+            r.idea = idea;
+            sugg.innerHTML = idea ? (s.showSugg ? `<div class="replay-idea">💡 ${rpEscapeHtml(idea)}</div>` : `<button type="button" class="rp-coach-btn" onclick="rpReplayShowIdea()">💡 Idée de réponse</button>`) : '';
+            const token = r.token;
+            await rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
+            if (!replayActive() || rpReplay.token !== token || rpReplay.i !== r.i) return;
+            if (s.handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
+        }
+
+        function rpReplayShowIdea() {
+            const el = document.getElementById('replay-sugg');
+            if (el && rpReplay && rpReplay.idea) el.innerHTML = `<div class="replay-idea">💡 ${rpEscapeHtml(rpReplay.idea)}</div>`;
+        }
+
+        function rpReplaySay() {
+            const r = rpReplay;
+            if (!r || r.ended) return;
+            const t = r.d.turns[r.i];
+            if (t) rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
+        }
+
+        function rpReplayMicState(on, cd, hold) {
+            const mic = document.getElementById('replay-mic'), hint = document.getElementById('replay-mic-hint');
+            if (mic) mic.classList.toggle('listening', !!on);
+            if (hint) hint.innerText = on ? (cd ? `Envoi dans ${cd}… (touche le micro pour envoyer)` : (hold ? 'J\'écoute… touche le micro pour envoyer' : 'J\'écoute… (touche le micro pour envoyer)')) : 'Écoute la question, puis réponds.';
+        }
+
+        function rpReplayMic() {
+            if (!rpReplay || rpReplay.ended) return;
+            if (rpReplayRec) { rpReplayRec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta réponse, ou utilise Chrome."); return; }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            rpReplayRec = longListen({
+                lang: 'nl', input: document.getElementById('replay-input'), silence: profSettings().silence,
+                isActive: replayActive,
+                onState: (st, cd) => rpReplayMicState(true, cd, st.hold),
+                onEnd: st => { if (rpReplayRec === st) rpReplayRec = null; rpReplayMicState(false); },
+                onSubmit: text => rpReplayAnswer(text)
+            });
+        }
+
+        function rpReplaySendTyped() {
+            const input = document.getElementById('replay-input');
+            const text = input ? input.value.trim() : '';
+            if (!text) return;
+            input.value = '';
+            rpReplayAnswer(text);
+        }
+
+        function rpReplayStopListen() {
+            if (rpReplayRec) { const st = rpReplayRec; rpReplayRec = null; st.finish(false); }
+        }
+
+        function rpReplayAnswer(text) {
+            const r = rpReplay;
+            if (!r || r.ended) return;
+            const t = r.d.turns[r.i];
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            r.token = Date.now();
+            const div = rpReplayBubble('me', rpEscapeHtml(text));
+            const a = { q: t.nl_original, text, corr: null };
+            r.answers.push(a);
+            rpReplayCorrect(a, div);
+            r.i++;
+            document.getElementById('replay-sugg').innerHTML = '';
+            setTimeout(() => { if (replayActive() && rpReplay === r) rpReplayAsk(); }, 700);
+        }
+
+        function rpReplaySkip() {
+            const r = rpReplay;
+            if (!r || r.ended) return;
+            rpReplayStopListen();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            r.token = Date.now();
+            r.i++;
+            document.getElementById('replay-sugg').innerHTML = '';
+            rpReplayAsk();
+        }
+
+        // Correcteur séparé : il ne voit que la phrase de l'apprenant.
+        async function rpReplayCorrect(a, div) {
+            if (!GeminiService.isAvailable()) return;
+            try {
+                const c = rpHelpParseJson(await GeminiService.generate(
+                    `Tu es correcteur de néerlandais. Voici UNE réponse dite à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription) par un candidat francophone de niveau B1 pendant un entretien d'embauche. Corrige seulement les vraies fautes (grammaire, ordre des mots, conjugaison, mot faux), pas le style.\nRéponse : "${a.text.replace(/"/g, "'")}"\nRéponds UNIQUEMENT en JSON : {"ok": true, "corrige": "la phrase corrigée", "explication": "très court, en français"}`));
+                if (!c || c.ok || !c.corrige || normalize(c.corrige) === normalize(a.text)) return;
+                a.corr = c;
+                if (div) div.insertAdjacentHTML('beforeend', `<details class="talk-corr"><summary>✨ Correction</summary><b>${rpEscapeHtml(c.corrige)}</b>${c.explication ? `<br><small>${rpEscapeHtml(c.explication)}</small>` : ''}</details>`);
+            } catch (e) { /* pas de correction, pas grave */ }
+        }
+
+        function rpReplayEnd() {
+            const r = rpReplay;
+            if (!r || r.ended) return;
+            r.ended = true;
+            rpReplayStopListen();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const corr = r.answers.filter(x => x.corr);
+            document.getElementById('replay-sugg').innerHTML = '';
+            const bar = document.querySelector('#replay-content .talk-bar');
+            if (bar) bar.style.display = 'none';
+            rpReplayBubble('info', `<div class="prof-debrief">
+                <div class="prof-target-title">🏁 ${r.answers.length} réponse${r.answers.length > 1 ? 's' : ''} sur ${r.d.turns.length} répliques</div>
+                ${corr.length ? `<div class="prof-deb-sec">✍️ À retenir</div><ul>${corr.map(x => `<li>« ${rpEscapeHtml(x.text)} »<br><b>${rpEscapeHtml(x.corr.corrige)}</b> ${speakBtnHtml(x.corr.corrige)}<br><small>${rpEscapeHtml(x.corr.explication || '')}</small></li>`).join('')}</ul>` : '<p class="report-meta">Aucune faute relevée' + (GeminiService.isAvailable() ? '.' : ' (corrections indisponibles sans clé Gemini).') + '</p>'}
+                <div class="prof-actions">
+                    <button class="btn btn-green" onclick="rpReplaySetup(${r.index})">🔁 Recommencer</button>
+                    <button class="btn btn-gray" onclick="rpShowReplayList()">← Entretiens réels</button>
+                </div>
+            </div>`);
+        }
+
+        function rpReplayStop() {
+            if (rpReplay) rpReplay.ended = true;
+            rpReplayStopListen();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
         rpInitSpeechRecognition();
         rpCheckDutchVoice();
         init();

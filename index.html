@@ -404,6 +404,7 @@
             <div data-rp-group="entretiens" class="rp-group">
                 <div class="rp-group-title">💼 Entretiens</div>
                 <div class="rp-category-grid" style="margin-top:0;">
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowReplayList()"><span class="rp-icon">🎬</span>Rejouer un vrai entretien<div class="cat-sub">Les vraies questions, mot pour mot et à leur vitesse ; tu réponds ce que tu veux</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">De vraies questions d'entretien, le recruteur improvise</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🇫🇷</span>Traduction guidée<div class="cat-sub">On te donne la phrase en français, tu la dis en néerlandais (tu joues le recruteur)</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowCaseHome()"><span class="rp-icon">📊</span>Étude de cas<div class="cat-sub">Un petit problème d'entreprise à résoudre et à défendre</div></div>
@@ -489,6 +490,11 @@
     <div id="modguide-view" class="view">
         <button class="back-btn" onclick="guideQuit(); showApprendre()">← Cours</button>
         <div id="guide-content" class="content-col"></div>
+    </div>
+
+    <div id="replay-view" class="view">
+        <button class="back-btn" onclick="rpReplayStop(); showRoleplay('entretiens')">← Entretiens</button>
+        <div id="replay-content" class="content-col"></div>
     </div>
 
     <div id="talk-view" class="view">

@@ -734,3 +734,8 @@
         /* Entretiens : profil privé et préparation */
         .rp-profile-btn small { color: var(--text-secondary); font-weight: 400; }
         .rp-profile-text { width: 100%; max-width: 520px; box-sizing: border-box; padding: 10px; border-radius: 12px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.88rem; font-family: inherit; margin-bottom: 10px; }
+
+        /* Rejouer un vrai entretien */
+        .replay-who { font-size: 0.72rem; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+        .replay-idea { width: 100%; box-sizing: border-box; padding: 8px 12px; border-radius: 10px; background: color-mix(in srgb, #eab308 16%, transparent); font-size: 0.85rem; margin: 6px 0; }
+        #replay-sugg .rp-coach-btn { margin: 6px 0; }
