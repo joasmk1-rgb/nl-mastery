@@ -3090,6 +3090,7 @@ if (firebaseAvailable) {
                 </div>`;
             block.innerHTML = `
                 ${headerHtml}
+                ${buddyHomeHtml()}
                 ${placementNudgeHtml}
                 ${recoHtml}
                 ${tilesHtml}
@@ -13044,6 +13045,310 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             rpReplayStopListen();
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
+
+        // ===== Compagnon vocal (Svetlana ou John, partout) =====
+        // Un micro flottant sur tous les écrans : on parle (ou écrit) au compagnon, en français ou en
+        // néerlandais ; il ouvre l'activité demandée, répond aux questions de langue, ou propose la
+        // suite. Les demandes courantes sont reconnues dans l'app, sans Gemini (buddyLocal) ; les
+        // phrases libres partent à Gemini avec la liste des actions possibles (buddyAsk), qui répond
+        // en JSON { reply, action, params }. Les actions ne font qu'appeler les écrans existants.
+        let buddyLog = [];      // conversation de la session (non sauvegardée)
+        let buddyRec = null;
+        let buddyBusy = false;
+
+        function buddySettings() {
+            if (!state.settings) state.settings = {};
+            const s = state.settings.buddy || {};
+            state.settings.buddy = { partner: TALK_PARTNERS[s.partner] ? s.partner : 'svetlana', lang: s.lang === 'nl' ? 'nl' : 'fr' };
+            return state.settings.buddy;
+        }
+        function buddyPartner() { return TALK_PARTNERS[buddySettings().partner]; }
+
+        // Écrans qui ont déjà leur propre micro : le bouton flottant s'y efface.
+        const BUDDY_HIDDEN_VIEWS = ['talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
+        function buddyRefreshFab() {
+            const fab = document.getElementById('buddy-fab');
+            if (!fab) return;
+            const v = document.querySelector('.view.active');
+            const hide = document.body.classList.contains('gated') || document.body.classList.contains('auth-pending') || (v && BUDDY_HIDDEN_VIEWS.includes(v.id)) || document.getElementById('buddy-sheet').classList.contains('open');
+            fab.style.display = hide ? 'none' : '';
+            fab.innerHTML = '🎙️';
+            fab.title = 'Parler à ' + buddyPartner().name;
+        }
+
+        // ----- Les actions que le compagnon sait lancer -----
+        function buddyNextModule() {
+            const isPassed = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
+            return MODRP_IDS.map(id => modRpData[id]).filter(Boolean).find(m => !isPassed(m));
+        }
+        const BUDDY_CATS = { verbes: 'VERBES_NL', noms: 'NOMS_NL', adjectifs: 'ADJECTIFS_NL', adverbes: 'ADVERBES_NL', expressions: 'EXPRESSIONS_NL', locutions: 'LOCUTIONS_NL', 'mots-outils': 'MOTS_OUTILS_NL' };
+        const BUDDY_ACTIONS = {
+            accueil: { desc: "écran d'accueil", run: () => showHome() },
+            vocabulaire: { desc: 'onglet Vocabulaire (choix des catégories de mots)', run: () => showVocab() },
+            categorie: { desc: "fiche d'une catégorie de mots ; params.categorie parmi " + Object.keys(BUDDY_CATS).join(', ') + " ; params.entrainer=true pour lancer l'entraînement", run: p => { const f = BUDDY_CATS[p.categorie]; if (!f) return showVocab(); vocabOpenCat('file', f); if (p.entrainer) vocabTrain(); } },
+            erreurs: { desc: 'réviser les mots ratés', check: () => getReviewItems().length ? null : "Tu n'as aucun mot raté à revoir pour l'instant, bravo ! On fait autre chose ?", run: () => { studyReturnFn = showHome; startRevision(); } },
+            dehet: { desc: 'réviser les articles de / het', check: () => getArticleReviewItems().length ? null : "Rien à revoir côté de / het pour l'instant. Tu veux t'entraîner sur les noms ?", run: () => { studyReturnFn = showHome; startArticleRevision(); } },
+            conjugaison: { desc: "conjugaison ; params.verbe = infinitif néerlandais pour ouvrir sa fiche ; params.entrainer=true pour l'entraînement", run: p => { const v = p.verbe && conjugationLoaded && conjugationData.find(x => normalize(x.infinitief) === normalize(p.verbe)); if (p.entrainer && !v) return startConjTrainingSession(); showConjugaison(); if (v) showConjugaisonDetail(v.infinitief); } },
+            separables: { desc: "entraînement aux verbes à particule séparable", run: () => startSeparableTrainingSession() },
+            blocs: { desc: 'blocs de mots (mots en contexte)', run: () => showChunkTraining() },
+            test: { desc: 'test de vocabulaire', run: () => showTestSelect() },
+            cours: { desc: 'onglet Cours (modules en situation)', run: () => showApprendre() },
+            module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
+            grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
+            cours_particulier: { desc: 'cours particulier avec le prof ; params.duree 15 ou 30', run: p => { if (p.duree) profSettings().dur = Number(p.duree) === 30 ? 30 : 15; showProf(); } },
+            discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; showTalk(); if (p.lancer) talkStart(); } },
+            pratiquer: { desc: 'onglet Pratiquer', run: () => showPratiquer() },
+            entretiens: { desc: "entraînement aux entretiens d'embauche (questions de vrais entretiens)", run: () => { showRoleplay('entretiens'); rpShowRealCandidateList(); } },
+            rejouer: { desc: 'rejouer un vrai entretien mot pour mot', run: () => rpShowReplayList() },
+            etude_de_cas: { desc: 'étude de cas (business case)', run: () => { showRoleplay('entretiens'); rpShowCaseHome(); } },
+            travail: { desc: 'mises en situation au travail (métiers)', run: () => showRoleplay('travail') },
+            jeux: { desc: "onglet Jouer ; params.jeu parmi memory, chrono, anagramme, tri", run: p => ({ memory: startMemory, chrono: showTASelect, anagramme: startAnagram, tri: showSwipeSelect }[p.jeu] || showReviser)() },
+            profil: { desc: 'profil, statistiques, carte des compétences', run: () => showProfil() }
+        };
+
+        // ----- Reconnaissance locale des demandes courantes (sans Gemini) -----
+        function buddyLocal(text) {
+            const t = ' ' + normalize(text).replace(/[^a-z0-9' -]/g, ' ').replace(/\s+/g, ' ') + ' ';
+            const has = re => re.test(t);
+            // Traduction : « comment on dit X », « que veut dire X », « wat betekent X »
+            let m = t.match(/comment (?:on dit|dit-on|dire) (.+?)(?: en neerlandais)? $/);
+            if (m) return { translate: { dir: 'fr2nl', q: m[1].trim() } };
+            m = t.match(/(?:que veut dire|ca veut dire quoi|wat betekent|qu'est-ce que veut dire) (.+?) $/);
+            if (m) return { translate: { dir: 'nl2fr', q: m[1].trim() } };
+            const verbe = conjugationLoaded ? conjugationData.find(v => t.includes(' ' + normalize(v.infinitief) + ' ')) : null;
+            if (has(/conjug|vervoeg/)) return { action: 'conjugaison', params: { verbe: verbe && verbe.infinitief, entrainer: has(/entrain|exerc|interroge/) } };
+            if (has(/separable|particule/)) return { action: 'separables' };
+            if (has(/erreur|rate|fautes|mots a revoir/)) return { action: 'erreurs' };
+            if (has(/ de het |de ou het|article/)) return { action: 'dehet' };
+            if (has(/cours particulier|prof\b|professeur/)) return { action: 'cours_particulier', params: { duree: has(/30|trente/) ? 30 : (has(/15|quinze/) ? 15 : null) } };
+            if (has(/rejou|tel quel|mot pour mot/)) return { action: 'rejouer' };
+            if (has(/entretien|sollicit|recruteur/)) return { action: 'entretiens' };
+            if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
+            if (has(/discut|parler (avec|de|un peu)|bavard|conversation/)) return { action: 'discuter', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null), sujet: text, lancer: true } };
+            if (has(/module|lecon|continue|reprend/)) {
+                const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean);
+                const named = all.find(x => normalize(x.titre).split(/\s+/).some(w => w.length > 4 && t.includes(' ' + w + ' ')));
+                return { action: 'module', params: { module: named ? named.id : null } };
+            }
+            if (has(/memory/)) return { action: 'jeux', params: { jeu: 'memory' } };
+            if (has(/contre la montre|chrono/)) return { action: 'jeux', params: { jeu: 'chrono' } };
+            if (has(/anagram|melange/)) return { action: 'jeux', params: { jeu: 'anagramme' } };
+            if (has(/ jeu| jeux|jouer/)) return { action: 'jeux' };
+            const cat = Object.keys(BUDDY_CATS).find(k => t.includes(' ' + k.replace('-', ' ') + ' ') || t.includes(' ' + k + ' '));
+            if (cat) return { action: 'categorie', params: { categorie: cat, entrainer: has(/entrain|revis|apprend|interroge/) } };
+            if (has(/bloc/)) return { action: 'blocs' };
+            if (has(/test/)) return { action: 'test' };
+            if (has(/grammaire|regle/)) return { action: 'grammaire' };
+            if (has(/vocabulaire|mots/)) return { action: 'vocabulaire' };
+            if (has(/metier|au travail|situation/)) return { action: 'travail' };
+            if (has(/profil|progression|competence|statistique/)) return { action: 'profil' };
+            if (has(/accueil|maison/)) return { action: 'accueil' };
+            return null;
+        }
+
+        function buddyTranslateLocal(tr) {
+            const q = normalize(tr.q).replace(/^(le |la |les |l'|un |une |de |het |een )/, '');
+            if (!q) return null;
+            const field = tr.dir === 'fr2nl' ? 'fr' : 'nl';
+            const pool = fullDb.filter(i => i.nl && i.fr);
+            const exact = pool.filter(i => normalize(i[field]).split(/\s*[\/,;]\s*/).some(x => x.replace(/^(le |la |les |l'|de |het |een |un |une )/, '') === q));
+            const hits = (exact.length ? exact : pool.filter(i => normalize(i[field]).includes(q))).slice(0, 3);
+            if (!hits.length) return null;
+            return hits.map(i => tr.dir === 'fr2nl' ? `« ${i.fr} » se dit **${i.nl}**` : `**${i.nl}** veut dire « ${i.fr} »`).join(' ; ');
+        }
+
+        // ----- Interface : panneau qui s'ouvre depuis le micro flottant ou l'accueil -----
+        function buddyOpen(listen) {
+            const sheet = document.getElementById('buddy-sheet');
+            sheet.classList.add('open');
+            buddyRender();
+            buddyRefreshFab();
+            if (!buddyLog.length) buddyGreet();
+            if (listen && window.SpeechRecognition) setTimeout(() => buddyMic(), 150);
+        }
+        function buddyClose() {
+            buddyStopListen();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            document.getElementById('buddy-sheet').classList.remove('open');
+            buddyRefreshFab();
+        }
+
+        function buddyRender() {
+            const p = buddyPartner(), s = buddySettings();
+            document.getElementById('buddy-sheet').innerHTML = `
+                <div class="buddy-head">
+                    <div class="buddy-who">${Object.entries(TALK_PARTNERS).map(([k, x]) => `<button type="button" class="buddy-pick${s.partner === k ? ' active' : ''}" onclick="buddySetPartner('${k}')">${x.emoji} ${x.name}</button>`).join('')}</div>
+                    <button type="button" class="buddy-close" onclick="buddyClose()" title="Fermer">✕</button>
+                </div>
+                <div id="buddy-chat" class="buddy-chat"></div>
+                <div id="buddy-sugg" class="talk-sugg"></div>
+                <div class="prof-input-row">
+                    <input type="text" id="buddy-input" placeholder="Demande-moi ce que tu veux…" onkeydown="if(event.key==='Enter') buddySendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="buddySendTyped()">➤</button>
+                </div>
+                <div class="talk-bar">
+                    <button type="button" class="talk-side" onclick="buddySetLang('${s.lang === 'fr' ? 'nl' : 'fr'}')" title="Langue du micro">${s.lang === 'fr' ? '🇫🇷' : '🇳🇱'}</button>
+                    <button type="button" class="talk-mic" id="buddy-mic" onclick="buddyMic()">🎤</button>
+                    <span class="talk-side" style="visibility:hidden;"></span>
+                </div>
+                <div id="buddy-hint" class="talk-mic-hint">Parle-moi en ${s.lang === 'fr' ? 'français' : 'néerlandais'} (touche le drapeau pour changer).</div>`;
+            buddyLog.forEach(m => buddyAppend(m, true));
+            buddyRenderSugg();
+        }
+
+        function buddySetPartner(k) { buddySettings().partner = k; save(); buddyLog = []; buddyRender(); buddyGreet(); buddyRefreshFab(); if (document.getElementById('home-view').classList.contains('active')) renderDashboard(); }
+        function buddySetLang(l) { buddySettings().lang = l; save(); buddyRender(); }
+
+        function buddyAppend(m, replay) {
+            if (!replay) buddyLog.push(m);
+            const chat = document.getElementById('buddy-chat');
+            if (!chat) return;
+            const div = document.createElement('div');
+            div.className = 'talk-msg ' + (m.who === 'me' ? 'me' : 'them');
+            div.innerHTML = m.who === 'me' ? rpEscapeHtml(m.text) : rpEscapeHtml(m.text).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        // Suggestions selon la situation, calculées dans l'app.
+        function buddySuggestions() {
+            const out = [];
+            const next = buddyNextModule();
+            if (next) out.push({ label: '▶️ ' + next.titre, text: 'continue le module ' + next.titre });
+            const n = getReviewItems().length;
+            if (n) out.push({ label: `🔁 Mes ${n} erreurs`, text: 'fais-moi réviser mes erreurs' });
+            out.push({ label: '💬 Discuter', text: 'je veux discuter' });
+            out.push({ label: '🎓 Cours de 15 min', text: 'lance un cours particulier de 15 minutes' });
+            out.push({ label: '🔤 Conjugaison', text: 'je veux travailler la conjugaison' });
+            out.push({ label: '🎯 Entretien', text: "entraîne-moi pour un entretien" });
+            return out;
+        }
+        function buddyRenderSugg() {
+            const el = document.getElementById('buddy-sugg');
+            if (el) el.innerHTML = buddySuggestions().map((s, i) => `<button type="button" class="talk-chip" onclick="buddySubmit(buddySuggestions()[${i}].text)">${rpEscapeHtml(s.label)}</button>`).join('');
+        }
+
+        function buddyGreeting() {
+            const p = buddyPartner();
+            const name = currentUserDoc && currentUserDoc.pseudo ? ' ' + currentUserDoc.pseudo : '';
+            const next = buddyNextModule();
+            const n = getReviewItems().length;
+            const idea = next ? `on continue « ${next.titre} » ?` : (n ? `on revoit tes ${n} mots ratés ?` : 'on discute un peu en néerlandais ?');
+            return `Salut${name} ! C'est ${p.name}. Dis-moi ce que tu veux faire, ou ${idea}`;
+        }
+        function buddyGreet() {
+            const g = buddyGreeting();
+            buddyAppend({ who: 'them', text: g });
+            conjAudioSpeakMixed(g, 1, 0.9);
+        }
+
+        async function buddySay(text, speak) {
+            buddyAppend({ who: 'them', text });
+            if (speak !== false) await conjAudioSpeakMixed(text.replace(/\*\*/g, ''), 1, 0.9);
+        }
+
+        // Exécute une action : courte confirmation, puis le panneau se ferme et l'écran s'ouvre.
+        async function buddyRun(id, params) {
+            const a = BUDDY_ACTIONS[id];
+            if (!a) return false;
+            const why = a.check && a.check(params || {});
+            if (why) { await buddySay(why); return true; }
+            buddyClose();
+            try { await a.run(params || {}); } catch (e) { console.warn('Action du compagnon impossible :', id, e); }
+            return true;
+        }
+
+        async function buddySubmit(text) {
+            text = String(text || '').trim();
+            if (!text || buddyBusy) return;
+            buddyStopListen();
+            buddyAppend({ who: 'me', text });
+            const local = buddyLocal(text);
+            if (local && local.translate) {
+                const ans = buddyTranslateLocal(local.translate);
+                if (ans) { await buddySay(ans); return; }
+            } else if (local && local.action) {
+                const label = { conjugaison: 'la conjugaison', erreurs: 'tes erreurs', module: 'le module', cours_particulier: 'le cours particulier', discuter: 'la discussion', entretiens: 'les entretiens', rejouer: 'les vrais entretiens', jeux: 'les jeux', categorie: 'le vocabulaire', vocabulaire: 'le vocabulaire' }[local.action];
+                if (!(BUDDY_ACTIONS[local.action].check && BUDDY_ACTIONS[local.action].check(local.params || {}))) buddySay(label ? `C'est parti pour ${label} !` : "C'est parti !", false);
+                await buddyRun(local.action, local.params);
+                return;
+            }
+            await buddyAsk(text);
+        }
+
+        // Phrase libre : Gemini choisit l'action ou répond (question de langue, conseil…).
+        async function buddyAsk(text) {
+            if (!GeminiService.isAvailable()) { await buddySay("Je n'ai pas compris, et sans clé Gemini je ne peux pas aller plus loin. Essaie par exemple : « conjugue werken », « mes erreurs », « continue le module »."); return; }
+            const p = buddyPartner();
+            buddyBusy = true;
+            const chat = document.getElementById('buddy-chat');
+            const wait = document.createElement('div');
+            wait.className = 'talk-msg them typing';
+            wait.innerHTML = '<span></span><span></span><span></span>';
+            if (chat) { chat.appendChild(wait); chat.scrollTop = chat.scrollHeight; }
+            let r = null;
+            try {
+                r = rpHelpParseJson(await GeminiService.generate(`${p.base} Ici, tu es le compagnon d'apprentissage de l'apprenant dans l'application NL Mastery (néerlandais pour francophones, niveau ${curriculumLoaded ? getCurriculumLevel().level : 'A1'}). Tu parles surtout français, avec des exemples en néerlandais.
+Actions que tu peux lancer dans l'app (id : description) :
+${Object.entries(BUDDY_ACTIONS).map(([k, a]) => '- ' + k + ' : ' + a.desc).join('\n')}
+Conversation récente :
+${buddyLog.slice(-8).map(m => (m.who === 'me' ? 'Apprenant : ' : p.name + ' : ') + m.text).join('\n')}
+Si l'apprenant veut faire une activité, choisis l'action et ses paramètres. S'il pose une question (traduction, grammaire, conseil), réponds-y en 2 à 4 phrases claires, avec les mots néerlandais entre ** **, sans action. Reste chaleureux et bref.
+Réponds UNIQUEMENT en JSON : {"reply": "ce que tu dis, en français", "action": null, "params": {}}`));
+            } catch (e) { r = { error: e.message }; }
+            wait.remove();
+            buddyBusy = false;
+            if (!r || r.error || !r.reply) { await buddySay("Oups, je n'ai pas réussi à répondre. Réessaie dans un instant."); return; }
+            await buddySay(r.reply, !(r.action && BUDDY_ACTIONS[r.action]));
+            if (r.action && BUDDY_ACTIONS[r.action]) await buddyRun(r.action, r.params || {});
+        }
+
+        function buddySendTyped() {
+            const input = document.getElementById('buddy-input');
+            const v = input ? input.value.trim() : '';
+            if (!v) return;
+            input.value = '';
+            buddySubmit(v);
+        }
+
+        function buddyStopListen() { if (buddyRec) { const st = buddyRec; buddyRec = null; st.finish(false); } }
+        function buddyMic() {
+            if (buddyRec) { buddyRec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta demande, ou utilise Chrome."); return; }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const lang = buddySettings().lang;
+            const mic = document.getElementById('buddy-mic'), hint = document.getElementById('buddy-hint');
+            buddyRec = longListen({
+                lang, input: document.getElementById('buddy-input'), silence: Math.min(profSettings().silence || 3000, 3000) || 3000,
+                isActive: () => document.getElementById('buddy-sheet').classList.contains('open'),
+                onState: (st, cd) => { if (mic) mic.classList.add('listening'); if (hint) hint.innerText = cd ? `Envoi dans ${cd}…` : "J'écoute…"; },
+                onEnd: st => { if (buddyRec === st) buddyRec = null; if (mic) mic.classList.remove('listening'); if (hint) hint.innerText = 'Touche le micro pour parler.'; },
+                onSubmit: text => buddySubmit(text)
+            });
+        }
+
+        // Bloc « conversation » en haut de l'accueil.
+        function buddyHomeHtml() {
+            const s = buddySettings(), p = buddyPartner();
+            return `<div class="dash-card buddy-home">
+                <div class="buddy-home-top">
+                    <span class="buddy-home-mic">🎙️</span>
+                    <div class="buddy-home-txt"><b>${p.name}</b> · <span class="buddy-home-switch">${Object.entries(TALK_PARTNERS).filter(([k]) => k !== s.partner).map(([k, x]) => `<a href="#" onclick="buddySetPartner('${k}'); return false;">passer à ${x.name}</a>`).join('')}</span><div>${rpEscapeHtml(buddyGreeting())}</div></div>
+                </div>
+                <div class="talk-sugg">${buddySuggestions().slice(0, 4).map((x, i) => `<button type="button" class="talk-chip" onclick="buddyOpen(false); buddySubmit(buddySuggestions()[${i}].text)">${rpEscapeHtml(x.label)}</button>`).join('')}</div>
+                <button class="btn btn-green" style="margin:8px 0 0;" onclick="buddyOpen(true)">🎤 Parler à ${p.name}</button>
+            </div>`;
+        }
+
+        // Le bouton suit les changements d'écran (classe .active des vues) et l'état de connexion.
+        function buddyInit() {
+            if (!document.getElementById('buddy-fab')) return;
+            const obs = new MutationObserver(() => buddyRefreshFab());
+            document.querySelectorAll('.view').forEach(v => obs.observe(v, { attributes: true, attributeFilter: ['class'] }));
+            obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            buddyRefreshFab();
+        }
+        buddyInit();
 
         rpInitSpeechRecognition();
         rpCheckDutchVoice();
