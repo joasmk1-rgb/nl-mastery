@@ -8225,6 +8225,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             }
             historyDiv.appendChild(msgDiv);
             historyDiv.scrollTop = historyDiv.scrollHeight;
+            return msgDiv;
         }
 
         // ===== Mots cliquables dans les répliques du jeu de rôle =====
@@ -8732,15 +8733,18 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // ----- Tour de l'utilisateur + bouton "Corrige-moi" -----
         // Remplace rpAppendMessage(text, 'user') pour les réponses libres (dictées ou tapées).
         // Les répliques pré-écrites du mode script n'y passent pas : rien à corriger.
-        const rpCoachSettings = { auto: false }; // true = correction après chaque tour sans clic (option B, pas encore exposée dans l'interface)
-
         function rpAppendUserTurn(text) {
-            rpAppendMessage(text, 'user');
+            const msgDiv = rpAppendMessage(text, 'user');
             if (rpWordSession) rpWordSession.userTexts.push(text);
             // Examen de module : après quelques échanges, le bouton « J'ai fini » ressort.
             const finishBtn = document.getElementById('modrp-finish-btn');
             if (finishBtn && rpWordSession && rpWordSession.userTexts.length >= 4) { finishBtn.classList.remove('btn-gray'); finishBtn.classList.add('btn-green'); }
             const historyDiv = document.getElementById('rp-chat-history');
+            // Correction active (néerlandais seulement) : sous la bulle ; sinon bouton « Corrige-moi ».
+            if (liveCorrectOn() && GeminiService.isAvailable() && !(rpCurrentScenario && rpCurrentScenario.lang === 'en')) {
+                liveCorrectUnder(msgDiv, text).then(() => { historyDiv.scrollTop = historyDiv.scrollHeight; });
+                return;
+            }
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'rp-coach-btn';
@@ -8748,7 +8752,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             btn.onclick = () => rpCoachCorrect(text);
             historyDiv.appendChild(btn);
             historyDiv.scrollTop = historyDiv.scrollHeight;
-            if (rpCoachSettings.auto) rpCoachCorrect(text);
         }
 
         function rpSendTypedMessage() {
@@ -11288,7 +11291,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             const el = div.querySelector('.prof-corr');
             if (!el || !c || c.fr) return;
             if (c.ok) { el.innerHTML = '<span class="prof-ok">✓</span>'; return; }
-            el.innerHTML = `<details ${c.bloquant ? 'open' : ''}><summary>✏️ ${rpEscapeHtml(c.corrige || 'Correction')}</summary>${(c.erreurs || []).map(e => `<div>${rpEscapeHtml(e.faux)} → <b>${rpEscapeHtml(e.correct)}</b> : ${rpEscapeHtml(e.pourquoi || '')}</div>`).join('')}</details>`;
+            el.innerHTML = `<details ${c.bloquant || (c.francais || []).length ? 'open' : ''}><summary>✏️ ${rpEscapeHtml(c.corrige || 'Correction')}</summary>${(c.francais || []).map(x => `<div class="lc-fr">🇫🇷 ${rpEscapeHtml(x.fr)} → <b>${rpEscapeHtml(x.nl)}</b></div>`).join('')}${(c.erreurs || []).map(e => `<div>${rpEscapeHtml(e.faux)} → <b>${rpEscapeHtml(e.correct)}</b> : ${rpEscapeHtml(e.pourquoi || '')}</div>`).join('')}</details>`;
         }
 
         function profThinking(on) {
@@ -11554,9 +11557,10 @@ Réponds UNIQUEMENT en JSON : {"fr": "", "nl": "ce que tu dis en néerlandais", 
         // Prompt du CORRECTEUR : ne voit qu'une phrase de l'apprenant.
         function profCorrectPrompt(sentence) {
             return `Tu es correcteur de néerlandais. Voici UNE phrase dite à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou écrite par un apprenant francophone de niveau ${prof.level}. Corrige seulement les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant), pas le style.
-Si la phrase est en français, réponds {"fr": true}.
+${LIVE_MIX_RULES}
+Si la phrase est ENTIÈREMENT en français, réponds {"fr": true}.
 Phrase : "${sentence.replace(/"/g, "'")}"
-Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "bloquant": false}
+Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false}
 ("ok" = aucune faute ; "bloquant" = on ne comprend pas ce qu'il veut dire)`;
         }
 
@@ -11564,6 +11568,8 @@ Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase co
             const c = await profGemini(profCorrectPrompt(text));
             if (!c || c.error) return;
             msg.corr = c;
+            c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
+            if (c.francais.length) { c.ok = false; liveSaveWords(c.francais); }
             if (!c.ok && !c.fr) (c.erreurs || []).forEach(e => prof && prof.errors.push(e));
             if (div) profShowCorrection(div, c);
         }
@@ -11930,6 +11936,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                         <button type="button" class="btn btn-gray" id="guide-hold" style="display:none;" onclick="guide && guide.rec && guide.rec.pause()">✋ Je réfléchis</button>
                         <button type="button" class="btn btn-gray" id="guide-mic-fr" onclick="guideMic('fr')">🇫🇷 En français</button>
                     </div>
+                    <div class="lc-row">${liveCorrectToggleHtml()}</div>
                     <div id="guide-conv-extra"></div>
                 </div>`;
             const st = modRpState(id);
@@ -12324,7 +12331,8 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 guideStopListen();
                 if (!guideAlive(token) || ans === null || ans === '__skip__') break;
                 if (ans === '__fin__') break;
-                guideBubble('moi', `${ans.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(ans.text)}`);
+                const meDiv = guideBubble('moi', `${ans.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(ans.text)}`);
+                if (!ans.isFr) liveCorrectUnder(meDiv, ans.text);
                 conv.history.push({ who: 'me', text: ans.text, isFr: ans.isFr });
                 if (!ans.isFr) { conv.userLines.push(ans.text); turns++; }
                 const closing = !!maxTurns && turns >= maxTurns;
@@ -12545,6 +12553,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
                     <div class="talk-head-txt"><b>${p.name}</b><small>${TALK_HATS[talk.hat].label} · ${TALK_TOPICS[talk.topic]}</small></div>
+                    ${liveCorrectToggleHtml()}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
                 </div>
@@ -12588,7 +12597,8 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
         }
 
         function talkCorrHtml(c) {
-            return `<details class="talk-corr"><summary>✨ Plus naturel</summary><b>${rpEscapeHtml(c.natural)}</b>${c.note_fr ? `<br><small>${rpEscapeHtml(c.note_fr)}</small>` : ''}</details>`;
+            const fr = (c.francais || []).map(x => `<div class="lc-fr">🇫🇷 ${rpEscapeHtml(x.fr)} → <b>${rpEscapeHtml(x.nl)}</b></div>`).join('');
+            return `<details class="talk-corr"${fr ? ' open' : ''}><summary>✨ Plus naturel</summary><b>${rpEscapeHtml(c.natural)}</b> ${speakBtnHtml(c.natural)}${fr}${c.note_fr ? `<br><small>${rpEscapeHtml(c.note_fr)}</small>` : ''}</details>`;
         }
 
         function talkRenderSugg() {
@@ -12639,7 +12649,8 @@ Règles :
 - Néerlandais standard, comme en Flandre. Pas d'emojis.
 - Ne corrige jamais dans "reply_nl" : la correction va seulement dans "correction".
 - S'il parle FRANÇAIS (question, mot qui manque), réponds-lui brièvement en français dans "fr_help" avec la formule néerlandaise utile, puis continue en néerlandais dans "reply_nl". Sinon "fr_help" est vide.
-- "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle", "note_fr": "explication très courte en français"} ; sinon null.
+- ${LIVE_MIX_RULES}
+- "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : "Commence la conversation : salue-le naturellement selon ta casquette et pose une première question simple sur le sujet."}
 Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}]}`;
@@ -12670,7 +12681,9 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>` });
                 return;
             }
-            if (lastMsg && r.correction && r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) {
+            if (lastMsg && liveCorrectOn() && r.correction && r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) {
+                r.correction.francais = (Array.isArray(r.correction.francais) ? r.correction.francais : []).filter(x => x && x.fr && x.nl);
+                if (r.correction.francais.length) liveSaveWords(r.correction.francais);
                 lastMsg.corr = r.correction;
                 if (lastDiv) lastDiv.insertAdjacentHTML('beforeend', talkCorrHtml(r.correction));
             }
@@ -12883,7 +12896,8 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                     <button type="button" class="talk-mic" id="replay-mic" onclick="rpReplayMic()">🎤</button>
                     <button type="button" class="talk-side" onclick="rpReplaySkip()" title="Passer">⏭</button>
                 </div>
-                <div id="replay-mic-hint" class="talk-mic-hint">Écoute la question, puis réponds.</div>`;
+                <div id="replay-mic-hint" class="talk-mic-hint">Écoute la question, puis réponds.</div>
+                <div class="lc-row">${liveCorrectToggleHtml()}</div>`;
             rpReplayAsk();
         }
 
@@ -13010,14 +13024,9 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
 
         // Correcteur séparé : il ne voit que la phrase de l'apprenant.
         async function rpReplayCorrect(a, div) {
-            if (!GeminiService.isAvailable()) return;
-            try {
-                const c = rpHelpParseJson(await GeminiService.generate(
-                    `Tu es correcteur de néerlandais. Voici UNE réponse dite à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription) par un candidat francophone de niveau B1 pendant un entretien d'embauche. Corrige seulement les vraies fautes (grammaire, ordre des mots, conjugaison, mot faux), pas le style.\nRéponse : "${a.text.replace(/"/g, "'")}"\nRéponds UNIQUEMENT en JSON : {"ok": true, "corrige": "la phrase corrigée", "explication": "très court, en français"}`));
-                if (!c || c.ok || !c.corrige || normalize(c.corrige) === normalize(a.text)) return;
-                a.corr = c;
-                if (div) div.insertAdjacentHTML('beforeend', `<details class="talk-corr"><summary>✨ Correction</summary><b>${rpEscapeHtml(c.corrige)}</b>${c.explication ? `<br><small>${rpEscapeHtml(c.explication)}</small>` : ''}</details>`);
-            } catch (e) { /* pas de correction, pas grave */ }
+            const c = await liveCorrectUnder(div, a.text, 'B1');
+            if (!c || !c.corrige || ((c.ok || normalize(c.corrige) === normalize(a.text)) && !c.francais.length)) return;
+            a.corr = { corrige: c.corrige, explication: c.erreurs.map(e => e.pourquoi).filter(Boolean).concat(c.francais.map(f => f.fr + ' → ' + f.nl)).join(' ; ') };
         }
 
         function rpReplayEnd() {
@@ -13044,6 +13053,102 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             if (rpReplay) rpReplay.ended = true;
             rpReplayStopListen();
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
+        // ===== Correction active =====
+        // Un seul interrupteur (state.settings.liveCorrect, activé par défaut) pour toutes les
+        // conversations : jeu de rôle, session guidée, Discuter, Rejouer un entretien, compagnon.
+        // Après chaque phrase de l'apprenant, une correction s'affiche sous sa bulle sans couper
+        // l'échange. L'apprenant peut mélanger français et néerlandais dans une phrase : le
+        // correcteur rend la phrase entière en néerlandais et liste ce qu'il a dit en français ;
+        // ces mots vont dans la liste « ✍️ Mes corrections ». Correcteur = appel Gemini séparé
+        // (liveCorrectPrompt), qui ne voit que la phrase. Discuter garde sa correction intégrée à
+        // son appel unique, le cours particulier corrige toujours (c'est son rôle), mais les deux
+        // utilisent les mêmes règles de mélange des langues.
+        const LIVE_WORDS_LIST = '✍️ Mes corrections';
+        function liveCorrectOn() { return !(state.settings && state.settings.liveCorrect === false); }
+        function liveCorrectToggle() {
+            if (!state.settings) state.settings = {};
+            state.settings.liveCorrect = !liveCorrectOn();
+            save();
+            document.querySelectorAll('.lc-toggle').forEach(b => { b.outerHTML = liveCorrectToggleHtml(); });
+        }
+        function liveCorrectToggleHtml() {
+            const on = liveCorrectOn();
+            return `<button type="button" class="lc-toggle${on ? ' on' : ''}" onclick="liveCorrectToggle()" title="Corriger chacune de mes phrases">✍️ Correction ${on ? 'activée' : 'désactivée'}</button>`;
+        }
+
+        // Règles communes sur le mélange des langues (reprises par Discuter et le cours particulier).
+        const LIVE_MIX_RULES = `L'apprenant peut MÉLANGER français et néerlandais dans une même phrase quand un mot lui manque (ex. « ik wil een rendez-vous prendre met de dokter »). À l'oral, la reconnaissance vocale écoute en néerlandais : un mot français peut donc être mal transcrit (ex. « prendre » → « pranter ») ; s'il ne veut rien dire en néerlandais et ressemble à un mot français à l'oreille, reconstitue le mot français. Rends alors la phrase ENTIÈRE en néerlandais naturel, et liste chaque partie dite en français avec son équivalent néerlandais.`;
+
+        function liveCorrectPrompt(text, level) {
+            return `Tu es correcteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase qu'il vient de dire à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou d'écrire.
+${LIVE_MIX_RULES}
+Corrige les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant) et ce qui sonnerait nettement mieux autrement ; garde son idée, ne rajoute rien.
+Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.
+Phrase : "${String(text).replace(/"/g, "'")}"
+Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false}
+("ok" = aucune faute ET aucun mot français ; "bloquant" = on ne comprend pas ce qu'il veut dire)`;
+        }
+
+        function liveLevel() { return curriculumLoaded ? getCurriculumLevel().level : 'A1'; }
+
+        // Corrige une phrase ; renvoie l'objet de correction (ou null). Mémorise les mots dits en
+        // français dans « ✍️ Mes corrections ».
+        async function liveCorrect(text, level) {
+            if (!text || !GeminiService.isAvailable()) return null;
+            let c = null;
+            try { c = rpHelpParseJson(await GeminiService.generate(liveCorrectPrompt(text, level || liveLevel()))); } catch (e) { return null; }
+            if (!c || c.error || c.tout_fr) return null;
+            c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
+            c.erreurs = (Array.isArray(c.erreurs) ? c.erreurs : []).filter(x => x && x.correct);
+            if (c.francais.length) liveSaveWords(c.francais);
+            return c;
+        }
+
+        function liveSaveWords(pairs) {
+            if (!state.customLists) state.customLists = {};
+            if (!state.customLists[LIVE_WORDS_LIST]) state.customLists[LIVE_WORDS_LIST] = [];
+            const ids = state.customLists[LIVE_WORDS_LIST];
+            pairs.forEach(p => {
+                const base = String(p.nl).trim();
+                const existing = rpWordLookup(base.replace(/^(de|het|een) /i, ''));
+                let id = existing && existing.id;
+                if (!id) {
+                    const k = rpKitNorm(base);
+                    if (!k) return;
+                    if (!state.rpWords) state.rpWords = {};
+                    if (!state.rpWords[k]) state.rpWords[k] = { nl: base, fr: p.fr, at: Date.now() };
+                    rpWordsInject();
+                    id = 'RPW:' + k;
+                }
+                if (!ids.includes(id)) ids.push(id);
+            });
+            save();
+            if (typeof renderCustomListsHome === 'function') renderCustomListsHome();
+        }
+
+        // Encart sous la bulle de l'apprenant.
+        function liveCorrectHtml(c, original) {
+            if (!c) return '';
+            const same = c.corrige && original && normalize(c.corrige).replace(/[^a-z0-9 ]/g, '') === normalize(original).replace(/[^a-z0-9 ]/g, '');
+            if ((c.ok || same) && !c.francais.length) return '<div class="lc-card lc-ok">✓ Bien dit</div>';
+            const fr = c.francais.map(x => `<div class="lc-fr">🇫🇷 ${rpEscapeHtml(x.fr)} → <b>${rpEscapeHtml(x.nl)}</b></div>`).join('');
+            const err = c.erreurs.map(e => `<div class="lc-err">${e.faux ? rpEscapeHtml(e.faux) + ' → ' : ''}<b>${rpEscapeHtml(e.correct)}</b>${e.pourquoi ? ' : ' + rpEscapeHtml(e.pourquoi) : ''}</div>`).join('');
+            return `<div class="lc-card"><div class="lc-best">✨ <b>${rpEscapeHtml(c.corrige || '')}</b> ${c.corrige ? speakBtnHtml(c.corrige) : ''}</div>${fr}${err}${c.bloquant ? '<div class="lc-err">On ne comprend pas bien ce que tu veux dire : essaie plus simple.</div>' : ''}</div>`;
+        }
+
+        // Corrige et affiche sous l'élément donné (si la correction active est en marche).
+        async function liveCorrectUnder(el, text, level) {
+            if (!liveCorrectOn() || !el || !GeminiService.isAvailable()) return null;
+            const wait = document.createElement('div');
+            wait.className = 'lc-card lc-wait';
+            wait.innerText = '✍️ …';
+            el.appendChild(wait);
+            const c = await liveCorrect(text, level);
+            wait.remove();
+            if (c) el.insertAdjacentHTML('beforeend', liveCorrectHtml(c, text));
+            return c;
         }
 
         // ===== Compagnon vocal (Svetlana ou John, partout) =====
@@ -13073,6 +13178,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const hide = document.body.classList.contains('gated') || document.body.classList.contains('auth-pending') || (v && BUDDY_HIDDEN_VIEWS.includes(v.id)) || document.getElementById('buddy-sheet').classList.contains('open');
             fab.style.display = hide ? 'none' : '';
             fab.innerHTML = '🎙️';
+            document.querySelectorAll('#rp-help-row .lc-toggle').forEach(b => { b.outerHTML = liveCorrectToggleHtml(); });
             fab.title = 'Parler à ' + buddyPartner().name;
         }
 
@@ -13191,7 +13297,8 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                     <button type="button" class="talk-mic" id="buddy-mic" onclick="buddyMic()">🎤</button>
                     <span class="talk-side" style="visibility:hidden;"></span>
                 </div>
-                <div id="buddy-hint" class="talk-mic-hint">Parle-moi en ${s.lang === 'fr' ? 'français' : 'néerlandais'} (touche le drapeau pour changer).</div>`;
+                <div id="buddy-hint" class="talk-mic-hint">Parle-moi en ${s.lang === 'fr' ? 'français' : 'néerlandais'} (touche le drapeau pour changer).</div>
+                ${s.lang === 'nl' ? `<div class="lc-row">${liveCorrectToggleHtml()}</div>` : ''}`;
             buddyLog.forEach(m => buddyAppend(m, true));
             buddyRenderSugg();
         }
@@ -13208,6 +13315,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             div.innerHTML = m.who === 'me' ? rpEscapeHtml(m.text) : rpEscapeHtml(m.text).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
             chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
+            return div;
         }
 
         // Suggestions selon la situation, calculées dans l'app.
@@ -13262,7 +13370,8 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             text = String(text || '').trim();
             if (!text || buddyBusy) return;
             buddyStopListen();
-            buddyAppend({ who: 'me', text });
+            const meDiv = buddyAppend({ who: 'me', text });
+            if (buddySettings().lang === 'nl') liveCorrectUnder(meDiv, text);
             const local = buddyLocal(text);
             if (local && local.translate) {
                 const ans = buddyTranslateLocal(local.translate);

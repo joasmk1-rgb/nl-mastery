@@ -757,3 +757,12 @@
         .buddy-home-mic { font-size: 1.6rem; width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--primary) 14%, transparent); }
         .buddy-home-txt { font-size: 0.9rem; line-height: 1.4; }
         .buddy-home-switch a { font-size: 0.75rem; color: var(--text-secondary); }
+
+        /* Correction active */
+        .lc-toggle { border: 1px solid var(--border); background: none; color: var(--text-secondary); border-radius: var(--radius-pill); padding: 5px 11px; font-size: 0.78rem; cursor: pointer; }
+        .lc-toggle.on { border-color: var(--success); color: var(--text); background: color-mix(in srgb, var(--success) 14%, transparent); }
+        .lc-row { display: flex; justify-content: center; width: 100%; margin-top: 6px; }
+        .lc-card { margin-top: 6px; padding: 6px 9px; border-radius: 10px; background: color-mix(in srgb, #eab308 16%, transparent); color: var(--text); font-size: 0.84rem; text-align: left; line-height: 1.35; }
+        .lc-card.lc-ok { background: color-mix(in srgb, var(--success) 16%, transparent); }
+        .lc-card.lc-wait { opacity: .6; }
+        .lc-fr, .lc-err { font-size: 0.8rem; margin-top: 3px; }
