@@ -9211,7 +9211,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpFillDebriefWords();
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(bank.label)}${it.diff ? ' · ' + (RP_DIFFICULTY_LABELS[it.diff] || it.diff) : ''}</div>`;
-            const footer = `
+            const footer = `${usedSessionHtml()}
                 <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('rp')">🧑‍🏫 Revoir avec mon tuteur</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpRealSetup(${it.index})">🔁 Refaire l'entretien</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowRealCandidateList()">Retour aux entretiens</button>`;
@@ -10700,7 +10700,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpFillDebriefWords();
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(day.label)}</div>`;
-            const footer = `
+            const footer = `${usedSessionHtml()}
                 <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('day')">🧑‍🏫 Revoir avec mon tuteur</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowJobHome()">Nouvelle journée</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCategoryPicker()">Retour au jeu de rôle</button>`;
@@ -10946,7 +10946,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpFillDebriefWords();
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(st.cas.titre_fr || 'Étude de cas')}</div>`;
-            const footer = `
+            const footer = `${usedSessionHtml()}
                 <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('case')">🧑‍🏫 Revoir avec mon tuteur</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCaseHome()">Nouvelle étude de cas</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCategoryPicker()">Retour au jeu de rôle</button>`;
@@ -11824,7 +11824,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             document.getElementById('prof-input-row').style.display = 'none';
             document.querySelector('#prof-content .prof-mic-row').style.display = 'none';
             document.querySelector('#prof-content .prof-top-actions').style.display = 'none';
-            profAppend({ who: 'info', html: profDebriefHtml(lesson) + `
+            profAppend({ who: 'info', html: profDebriefHtml(lesson) + usedSessionHtml() + `
                 <div class="prof-actions">
                     <button class="btn btn-green" onclick="prof = null; profRenderSetup();">🔁 Nouveau cours</button>
                     ${lesson.added ? `<button class="btn btn-gray" onclick="vocabOpenCat('list', PROF_WORDS_LIST)">📋 Revoir « ${PROF_WORDS_LIST} »</button>` : ''}
@@ -12839,6 +12839,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 <div class="prof-target-title">👋 Fin de la conversation · ${t.userCount} échange${t.userCount > 1 ? 's' : ''}</div>
                 ${mots.length ? `<div class="prof-deb-sec">📖 À garder${added ? ' (ajoutés à « 💬 Mes discussions »)' : ''}</div><ul>${mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr || '')}</li>`).join('')}</ul>` : ''}
                 ${r && r.tournure && r.tournure.nl ? `<div class="prof-deb-sec">💬 Tournure du jour</div><p><b>${rpEscapeHtml(r.tournure.nl)}</b> ${speakBtnHtml(r.tournure.nl)}<br><small>${rpEscapeHtml(r.tournure.fr || '')}</small></p>` : ''}
+                ${usedSessionHtml()}
                 <div class="prof-actions"><button class="btn btn-green" onclick="tutorOpen('talk')">🧑‍🏫 Revoir avec mon tuteur</button><button class="btn btn-gray" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button></div>
             </div>` });
             const bar = document.querySelector('#talk-content .talk-bar');
@@ -13198,6 +13199,7 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             rpReplayBubble('info', `<div class="prof-debrief">
                 <div class="prof-target-title">🏁 ${r.answers.length} réponse${r.answers.length > 1 ? 's' : ''} sur ${r.d.turns.length} répliques</div>
                 ${corr.length ? `<div class="prof-deb-sec">✍️ À retenir</div><ul>${corr.map(x => `<li>« ${rpEscapeHtml(x.text)} »<br><b>${rpEscapeHtml(x.corr.corrige)}</b> ${speakBtnHtml(x.corr.corrige)}<br><small>${rpEscapeHtml(x.corr.explication || '')}</small></li>`).join('')}</ul>` : '<p class="report-meta">Aucune faute relevée' + (GeminiService.isAvailable() ? '.' : ' (corrections indisponibles sans clé Gemini).') + '</p>'}
+                ${usedSessionHtml()}
                 <div class="prof-actions">
                     <button class="btn btn-green" onclick="tutorOpen('replay')">🧑‍🏫 Revoir avec mon tuteur</button>
                     <button class="btn btn-gray" onclick="rpReplaySetup(${r.index})">🔁 Recommencer</button>
@@ -13231,27 +13233,74 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
 
         // text : la phrase de l'apprenant ; corr : l'objet de correction s'il y en a un
         // ({ corrige } ou { natural }), null sinon.
+        // Séance en cours (même règle des 30 min) : ce qui a bougé, pour le montrer à l'apprenant.
+        let usedSession = null; // { at, ids: Set, fresh: Set, activated: Set, n0 : mots couverts au début }
+        function usedSessionCurrent() {
+            const now = Date.now();
+            if (!usedSession || now - usedSession.at > USED_CONV_GAP) usedSession = { at: now, ids: new Set(), fresh: new Set(), activated: new Set(), n0: getVocabProgress().masteredVocab };
+            return usedSession;
+        }
+
         function usedWordsRecord(text, corr) {
             if (!text || (corr && (corr.tout_fr || corr.fr === true))) return 0;
             const fixed = corr && (corr.corrige || corr.natural);
             const okSet = fixed ? new Set(usedTokens(fixed)) : null;
             if (!state.usedWords) state.usedWords = {};
+            const ses = usedSessionCurrent();
             const now = Date.now();
             const seen = new Set();
+            const fresh = [], activated = [];
             usedTokens(text).forEach(t => {
                 if (okSet && !okSet.has(t)) return;
                 if (['de', 'het', 'een', "'t", "'n"].includes(t)) return; // articles : comptés avec leur nom
                 const item = rpWordLookup(t);
                 if (!item || !item.id || seen.has(item.id)) return;
                 seen.add(item.id);
+                const isNew = !state.usedWords[item.id];
                 const u = state.usedWords[item.id] || { n: 0, c: 0, last: 0 };
                 u.n = (u.n || 0) + 1;
-                if (!u.last || now - u.last > USED_CONV_GAP) u.c = (u.c || 0) + 1;
+                if (!u.last || now - u.last > USED_CONV_GAP) {
+                    u.c = (u.c || 0) + 1;
+                    if (u.c === USED_ACTIVE_CONVS) { activated.push(item); ses.activated.add(item.id); }
+                }
                 u.last = now;
                 state.usedWords[item.id] = u;
+                ses.ids.add(item.id);
+                if (isNew) { fresh.push(item); ses.fresh.add(item.id); }
             });
+            ses.at = now;
             if (seen.size) save();
+            usedToast(fresh, activated);
             return seen.size;
+        }
+
+        // Petit signal pendant la conversation : nouveaux mots dits, mots devenus actifs.
+        let usedToastTimer = null;
+        function usedToast(fresh, activated) {
+            if (!fresh.length && !activated.length) return;
+            let el = document.getElementById('used-toast');
+            if (!el) { el = document.createElement('div'); el.id = 'used-toast'; el.className = 'used-toast'; document.body.appendChild(el); }
+            const name = i => rpEscapeHtml(String(i.nl).replace(/^(de|het) /, ''));
+            el.innerHTML = activated.length
+                ? `⭐ <b>${activated.slice(0, 3).map(name).join(', ')}</b> ${activated.length > 1 ? 'deviennent actifs' : 'devient actif'}`
+                : `🗣️ +${fresh.length} mot${fresh.length > 1 ? 's' : ''} : ${fresh.slice(0, 3).map(name).join(', ')}${fresh.length > 3 ? '…' : ''}`;
+            el.classList.add('show');
+            clearTimeout(usedToastTimer);
+            usedToastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+        }
+
+        // Encart de fin de conversation : ce que la séance a apporté au vocabulaire.
+        function usedSessionHtml() {
+            const s = usedSession;
+            if (!s || !s.ids.size) return '';
+            const vp = getVocabProgress();
+            const list = ids => [...ids].slice(0, 8).map(id => { const i = fullDb.find(x => x.id === id); return i ? `<b>${rpEscapeHtml(i.nl)}</b>` : ''; }).filter(Boolean).join(', ');
+            return `<div class="used-recap">
+                <div class="prof-deb-sec">🗣️ Ton vocabulaire</div>
+                <div>${s.ids.size} mot${s.ids.size > 1 ? 's' : ''} de ton vocabulaire employé${s.ids.size > 1 ? 's' : ''}${s.fresh.size ? `, dont <b>${s.fresh.size} pour la première fois</b> : ${list(s.fresh)}` : ''}.</div>
+                ${s.activated.size ? `<div>⭐ ${s.activated.size} devien${s.activated.size > 1 ? 'nent' : 't'} actif${s.activated.size > 1 ? 's' : ''} : ${list(s.activated)}</div>` : ''}
+                <div class="used-recap-pct">Mots couverts : ${s.n0} → <b>${vp.masteredVocab}</b>${vp.masteredVocab > s.n0 ? ` (+${vp.masteredVocab - s.n0})` : ''} · ${vp.pct} % du vocabulaire</div>
+            </div>`;
         }
 
         function usedWordsCount(items) {
