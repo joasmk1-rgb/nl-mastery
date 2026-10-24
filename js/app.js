@@ -2932,7 +2932,7 @@ if (firebaseAvailable) {
                     <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📖 Les mots et la conjugaison · 📚 Des leçons en situation · 🎭 Parler et écrire en situation réelle · 🎮 Des jeux pour entretenir ton vocabulaire · 👤 en haut : ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
                     <div class="section-title" style="margin-top:var(--space-5);">Par où commencer ?</div>
                     <button class="btn btn-green" style="margin-top:var(--space-2);" onclick="onboardingGoTo('debut')">🌱 Je débute : premier module</button>
-                    <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('bases')">💪 J'ai déjà des bases : passer les examens des modules que je connais</button>
+                    <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('bases')">💪 J'ai déjà des bases : on fait connaissance en conversation, et ce que je sais est validé</button>
                     <p style="font-size:0.78rem; margin-top:var(--space-4);">${currentUser ? '' : `<a href="#" onclick="onboardingGoTo('compte'); return false;">Créer un compte pour synchroniser ta progression (optionnel)</a>`}</p>
                 </div>`;
         }
@@ -2946,7 +2946,7 @@ if (firebaseAvailable) {
             onboardingMarkSeen();
             if (dest === 'compte') showCompte();
             else if (dest === 'debut') guideStart(MODRP_IDS[0]);
-            else if (dest === 'bases') { state.coursBasesHint = true; save(); showApprendre(); }
+            else if (dest === 'bases') talkStartPoint(talkSettings().partner);
             else showHome();
         }
 
@@ -3119,7 +3119,7 @@ if (firebaseAvailable) {
             const isPassed = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
             const openLevel = levels.find(l => mods.filter(m => m.niveau === l).some(m => !isPassed(m))) || levels[levels.length - 1];
             const hint = state.coursBasesHint ? `<div class="cours-hint">💪 Tu as des bases : pour chaque module que tu connais déjà, touche <b>🏆 Examen</b>. Réussi, le module et ses notions sont validés et tu passes au suivant. <button type="button" class="rp-coach-btn" onclick="state.coursBasesHint=false; save(); renderModRpEntries();">OK</button></div>` : '';
-            el.innerHTML = hint + levels.map(level => {
+            el.innerHTML = talkPointCardHtml() + levels.map(level => {
                 const list = mods.filter(m => m.niveau === level);
                 const nPassed = list.filter(isPassed).length;
                 return `<details class="modrp-level" ${level === openLevel ? 'open' : ''}>
@@ -12603,7 +12603,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             document.getElementById('talk-content').innerHTML = `
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
-                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
+                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
                     ${liveCorrectToggleHtml()}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
@@ -12693,7 +12693,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const portrait = typeof profPortrait === 'function' ? profPortrait() : [];
             const hist = talk.history.slice(-16).map(h => h.who === 'them' ? p.name + ' : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
             return `${p.base} Tu parles avec un(e) apprenant(e) francophone de néerlandais, niveau ${PROF_LEVEL_DESC[talk.level]}.
-${talk.sit ? `Aujourd'hui, vous jouez une SITUATION de la vie courante en Flandre. Tu restes ${p.name} (même voix, même caractère), mais tu joues ce rôle : ${talk.sit.role}
+${talk.point ? talkPointPrompt() : talk.sit ? `Aujourd'hui, vous jouez une SITUATION de la vie courante en Flandre. Tu restes ${p.name} (même voix, même caractère), mais tu joues ce rôle : ${talk.sit.role}
 La situation, vue par l'apprenant : ${talk.sit.contexte}
 Registre : vouvoiement (u) avec un client, un patient ou un usager ; tutoiement (jij) entre amis, voisins ou collègues. Reste dans ton rôle, fais avancer la situation jusqu'à ce qu'elle soit réglée, puis conclus naturellement. Emploie naturellement certains de ces mots : ${(talk.sit.kit && talk.sit.kit.mots || []).map(m => m.nl).concat(talk.sit.kit && talk.sit.kit.verbes || []).join(', ')}.` : `Aujourd'hui, tu lui parles en ami(e) : conversation détendue, tutoiement (jij). Sujet de départ : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')} (si c'est « Libre », choisis un sujet simple du quotidien).`}
 Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
@@ -12706,7 +12706,7 @@ Règles :
 - ${LIVE_MIX_RULES}
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
-- FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.
+- ${talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
 Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false}`;
@@ -12743,7 +12743,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 lastMsg.corr = r.correction;
                 if (lastDiv) lastDiv.insertAdjacentHTML('beforeend', talkCorrHtml(r.correction));
             }
-            if (lastMsg) usedWordsRecord(lastMsg.text, r.correction && r.correction.natural ? r.correction : null);
+            if (lastMsg) { const ids = usedWordsRecord(lastMsg.text, r.correction && r.correction.natural ? r.correction : null); if (talk.point && Array.isArray(ids)) ids.forEach(id => talk.point.words.add(id)); }
             talk.history.push({ who: 'them', nl: r.reply_nl });
             talk.suggestions = (Array.isArray(r.suggestions) ? r.suggestions : []).filter(s => s && s.nl).slice(0, 3);
             talkAppend({ who: 'them', nl: r.reply_nl, fr: r.reply_fr || '', help: r.fr_help || '' });
@@ -12818,6 +12818,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             const t = talk;
             t.ended = true;
             if (!t.userCount) { talk = null; talkRenderSetup(); return; }
+            if (t.point && !t.point.done) { t.point.done = true; await talkPointEvaluate(t); }
             const box = document.getElementById('talk-chat');
             talkAppend({ who: 'info', html: '<div class="report-meta" id="talk-recap-wait">Petit récap…</div>' });
             const mem = talkState().memory[t.partner] || '';
@@ -13229,6 +13230,126 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
+        // ===== Faire le point en conversation (placement) =====
+        // Au lieu de refaire les cours notion après notion, Svetlana ou John (les profs) font
+        // parler l'apprenant, du plus simple (se présenter, épeler, son numéro) au plus difficile
+        // (argumenter, hypothèses), en sautant ce qu'il montre déjà. S'il bloque, il le dit en
+        // français : le prof lui montre comment le dire et l'invite à essayer. Moteur : Discuter
+        // (talk.point), donc mêmes aides, correction et fin naturelle. À la fin, ce qu'il a montré
+        // est certifié : modules A1/A2 validés (contrôles d'examen de l'app + avis d'un
+        // examinateur Gemini séparé, talkPointJudgePrompt), notions B1/B2 acquises, mots bien
+        // employés pendant la séance comptés actifs d'office, portrait rempli, niveau du cours
+        // particulier et de Discuter réglé. Résultat gardé dans state.coursPoint.
+        async function talkStartPoint(partner) {
+            await rpLoadLibrary();
+            if (typeof modRpLoadAll === 'function') await modRpLoadAll();
+            const s = talkSettings();
+            if (TALK_PARTNERS[partner]) s.partner = partner;
+            s.mode = 'libre';
+            save();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('talk-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            if (!GeminiService.isAvailable()) { talkRenderSetup(); alert("Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA."); return; }
+            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit: null, topic: 'libre', level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0,
+                point: { words: new Set() } };
+            talkRenderChat();
+            talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>🧑‍🏫 On fait connaissance</b><div>${rpEscapeHtml(talk.p.name)} va te faire parler, du plus simple au plus difficile, pour voir ce que tu sais déjà. Réponds en néerlandais ; si tu bloques, dis-le en français (🇫🇷) : on te montre comment le dire. Ce que tu montres sera validé, sans refaire les cours.</div></div>` });
+            talkTurn();
+        }
+
+        function talkPointPrompt() {
+            return `Aujourd'hui, tu es SON PROF de néerlandais (tu restes ${talk.p.name}) et vous faites connaissance : une séance pour découvrir ce qu'il sait déjà, sous forme de VRAIE conversation chaleureuse, pas d'interrogatoire. Tutoiement (jij).
+Fais-le parler, UNE chose à la fois, du plus simple au plus difficile, en sautant ce qu'il montre déjà :
+- A1 : se présenter (prénom, âge, d'où il vient, où il habite), épeler son prénom, donner son numéro de téléphone (il peut l'inventer), sa famille, son travail ou ses études, les langues qu'il parle, ses loisirs, l'heure, un prix.
+- A2 : sa journée type, son logement, ce qu'il a fait le week-end dernier (passé composé), ses déplacements, ses courses.
+- B1 : son parcours (imparfait), ses projets (zullen, gaan), son avis justifié (omdat, want, daarom), un problème qu'il a réglé.
+- B2 : nuancer, argumenter pour et contre, faire des hypothèses (als ik … zou …), un sujet de société.
+Adapte-toi : parle simplement au début, puis à son niveau. Si ses réponses sont aisées, monte vite (une ou deux questions suffisent par niveau). S'il bloque deux fois de suite à un niveau, reste à ce niveau et conclus.
+S'il répond EN FRANÇAIS ou dit qu'il ne sait pas le dire : dans "fr_help", montre-lui la phrase néerlandaise qui convient, et dans "reply_nl" invite-le gentiment à la dire à son tour. Ce qui compte, c'est ce qu'il dit lui-même.`;
+        }
+
+        function talkPointJudgePrompt(t, checks) {
+            const mods = MODRP_IDS.map(id => modRpData[id]).filter(Boolean);
+            const modLines = mods.map(m => `- ${m.id} — ${m.niveau} — ${m.titre} — compétences : ${((m.examen && m.examen.sujets) || []).map(x => x.label).join(', ')} (l'app a repéré ${checks[m.id].covered}/${checks[m.id].checks.length} de ces sujets)`).join('\n');
+            const notions = Object.entries(curriculumNotions).filter(([, n]) => n.level === 'B1' || n.level === 'B2').map(([id, n]) => `- ${id} — ${n.level} — ${(n.content && n.content.titre) || id}`).join('\n');
+            const pq = Object.values(GUIDE_PORTRAIT_Q).flat().map(q => `${q.key} (${q.fr}${q.options ? ' ; valeurs : ' + q.options.map(o => o[0]).join(', ') : ''})`).join(' ; ');
+            const conv = t.history.map(h => h.who === 'them' ? 'PROF : ' + h.nl : 'APPRENANT' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
+            return `Tu es examinateur de néerlandais (CECR) pour francophones. Voici une conversation de placement entre un prof et un apprenant. Les répliques de l'apprenant ont pu être dictées (ignore ponctuation, majuscules et petites erreurs de transcription). Ses répliques EN FRANÇAIS, et celles qui répètent mot pour mot une aide du prof, ne prouvent rien.
+${conv}
+
+Modules du programme (id — niveau — titre — compétences) :
+${modLines}
+
+Notions B1 et B2 (id — niveau — titre) :
+${notions}
+
+Pour chaque module : "acquis" si ses répliques montrent clairement ces compétences, OU si elles sont évidemment impliquées par un niveau nettement supérieur qu'il a démontré (quelqu'un qui raconte son parcours au passé avec aisance sait se présenter et compter) — alors "deduit": true ; "presque" si c'est là mais avec des fautes gênantes ; "non" sinon. Sois juste : en cas de doute, "presque".
+Notions B1/B2 : seulement les ids CLAIREMENT acquis, avec une preuve dans ses répliques.
+Portrait : remplis seulement ce qu'il a dit de lui (clés : ${pq}).
+Réponds UNIQUEMENT en JSON :
+{"niveau": "A1|A2|B1|B2", "resume_fr": "2 phrases chaleureuses et honnêtes", "modules": [{"id": "", "verdict": "acquis|presque|non", "deduit": false, "preuve": "courte citation ou raison"}], "notions_acquises": [""], "portrait": {}, "points_forts": [""], "a_travailler": [""]}`;
+        }
+
+        // Évaluation de fin de séance et certification.
+        async function talkPointEvaluate(t) {
+            const userLines = t.history.filter(h => h.who === 'me' && !h.isFr).map(h => h.text);
+            const checks = {};
+            MODRP_IDS.forEach(id => { if (modRpData[id]) checks[id] = modRpExamChecks(id, userLines); });
+            talkAppend({ who: 'info', html: '<div class="report-meta" id="talk-point-wait">🧑‍🏫 Je fais le point sur ce que tu sais…</div>' });
+            let r = null;
+            try { r = rpHelpParseJson(await GeminiService.generate(talkPointJudgePrompt(t, checks))); } catch (e) { r = { error: e.message }; }
+            const wait = document.getElementById('talk-point-wait');
+            if (wait) wait.parentElement.remove();
+            if (!r || r.error) { talkAppend({ who: 'info', html: `⚠️ Le bilan n'a pas pu être fait (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). Rien n'a été validé : tu peux refaire le point plus tard depuis Cours.` }); return; }
+            const arr = x => Array.isArray(x) ? x : [];
+            const lvl = ['A1', 'A2', 'B1', 'B2'].includes(r.niveau) ? r.niveau : null;
+            // Modules acquis : validés comme après un examen réussi.
+            const validated = [], almost = [];
+            arr(r.modules).forEach(x => {
+                const m = x && modRpData[x.id];
+                if (!m) return;
+                if (x.verdict === 'acquis') {
+                    const st = modRpState(m.id);
+                    if (!(st.finalResult && st.finalResult.passed)) { st.finalResult = { passed: true, placement: true, deduit: !!x.deduit, at: Date.now() }; modRpValidateNotions(m.id); }
+                    validated.push({ m, x });
+                } else if (x.verdict === 'presque') almost.push({ m, x });
+            });
+            // Notions B1/B2 acquises.
+            const notionsOk = arr(r.notions_acquises).filter(id => curriculumNotions[id]);
+            notionsOk.forEach(id => { ntProgress(id).validated = true; recordNotionAttempt(id, true); });
+            // Mots bien employés pendant la séance : actifs d'office.
+            let certified = 0;
+            t.point.words.forEach(id => { const u = state.usedWords && state.usedWords[id]; if (u && (u.c || 0) < USED_ACTIVE_CONVS) { u.c = USED_ACTIVE_CONVS; certified++; } });
+            // Portrait (sans écraser ce qui est déjà rempli).
+            const keys = new Set(Object.values(GUIDE_PORTRAIT_Q).flat().map(q => q.key));
+            const portrait = modRpState(MODRP_IDS[0]).portrait;
+            Object.entries(r.portrait || {}).forEach(([k, v]) => { if (keys.has(k) && v !== '' && v != null && (portrait[k] === undefined || portrait[k] === '')) portrait[k] = v; });
+            if (lvl) { talkSettings().level = lvl; profSettings().level = lvl; }
+            state.coursPoint = { at: Date.now(), niveau: lvl, modules: validated.length, notions: notionsOk.length, mots: certified };
+            save();
+            const names = list => list.map(({ m, x }) => `<li>${rpEscapeHtml(m.titre)} <small>(${m.niveau}${x.deduit ? ', déduit de ton niveau' : ''})</small></li>`).join('');
+            talkAppend({ who: 'info', html: `<div class="prof-debrief">
+                <div class="prof-target-title">🧑‍🏫 Le point${lvl ? ` · niveau estimé <span class="conj-niveau-badge">${lvl}</span>` : ''}</div>
+                ${r.resume_fr ? `<p>${rpEscapeHtml(r.resume_fr)}</p>` : ''}
+                ${validated.length ? `<div class="prof-deb-sec">✅ Validé, pas besoin de le refaire (${validated.length} module${validated.length > 1 ? 's' : ''})</div><ul>${names(validated)}</ul>` : ''}
+                ${notionsOk.length ? `<div class="prof-deb-sec">✅ Notions ${lvl === 'B2' ? 'B1/B2' : 'B1'} acquises : ${notionsOk.length}</div>` : ''}
+                ${certified ? `<div class="prof-deb-sec">🗣️ ${certified} mots certifiés</div><p>Tu les as bien employés : ils comptent comme acquis, sans exercices.</p>` : ''}
+                ${almost.length ? `<div class="prof-deb-sec">🔁 Presque (à consolider)</div><ul>${names(almost)}</ul>` : ''}
+                ${arr(r.points_forts).length ? `<div class="prof-deb-sec">👍 Points forts</div><ul>${arr(r.points_forts).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
+                ${arr(r.a_travailler).length ? `<div class="prof-deb-sec">🎯 À travailler</div><ul>${arr(r.a_travailler).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
+                <div class="prof-actions"><button class="btn btn-green" onclick="showApprendre()">📚 Voir mes cours</button></div>
+            </div>` });
+        }
+
+        // Encart en tête de Cours.
+        function talkPointCardHtml() {
+            const pl = state.coursPoint;
+            const btns = Object.entries(TALK_PARTNERS).map(([k, p]) => `<button class="btn ${pl ? 'btn-gray' : 'btn-green'}" style="margin:6px 0 0;" onclick="talkStartPoint('${k}')">${p.emoji} Avec ${p.name}</button>`).join('');
+            if (pl) return `<details class="cours-point"><summary>🧑‍🏫 Dernier point : ${pl.niveau ? 'niveau ' + pl.niveau + ' · ' : ''}${new Date(pl.at).toLocaleDateString('fr-BE')} · refaire le point</summary><div class="cours-point-btns">${btns}</div></details>`;
+            return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as déjà des bases ? Svetlana ou John te font parler (te présenter, ton numéro, ta journée, tes projets…) et valident ce que tu sais déjà : pas besoin de refaire ces cours. Si tu bloques, dis-le en français, ils te montrent comment le dire.</p><div class="cours-point-btns">${btns}</div></div>`;
+        }
+
         // ===== Mots utilisés à l'oral =====
         // Chaque phrase dite (ou écrite) en néerlandais dans une conversation alimente le
         // vocabulaire : les mots reconnus par l'app (rpWordLookup, formes fléchies comprises) sont
@@ -13285,7 +13406,7 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             });
             ses.at = now;
             if (seen.size) save();
-            return seen.size;
+            return [...seen];
         }
 
         // Encart de fin de conversation : ce que la séance a apporté au vocabulaire.
@@ -13720,6 +13841,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
             grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
             cours_particulier: { desc: 'cours particulier avec le prof ; params.duree 15 ou 30', run: p => { if (p.duree) profSettings().dur = Number(p.duree) === 30 ? 30 : 15; showProf(); } },
+            faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
             discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
             pratiquer: { desc: 'onglet Pratiquer', run: () => showPratiquer() },
@@ -13749,6 +13871,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             if (has(/rejou|tel quel|mot pour mot/)) return { action: 'rejouer' };
             if (has(/entretien|sollicit|recruteur/)) return { action: 'entretiens' };
             if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
+            if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };
             if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
             if (has(/discut|parler (avec|de|un peu)|bavard|conversation/)) return { action: 'discuter', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null), sujet: text, lancer: true } };
             if (has(/module|lecon|continue|reprend/)) {

@@ -798,3 +798,10 @@
         .used-recap { text-align: left; margin-top: 10px; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, #0ea5e9 12%, transparent); font-size: 0.86rem; line-height: 1.45; }
         .used-recap .prof-deb-sec { margin-top: 0; }
         .used-recap-pct { margin-top: 4px; }
+
+        /* Faire le point en conversation */
+        .cours-point { width: 100%; box-sizing: border-box; padding: 12px 14px; margin-bottom: 12px; border-radius: var(--radius-lg); border: 2px solid var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--card-bg)); text-align: left; }
+        .cours-point p { font-size: 0.86rem; margin: 6px 0; line-height: 1.4; }
+        details.cours-point { border-width: 1px; background: var(--card-bg); }
+        details.cours-point summary { cursor: pointer; font-size: 0.86rem; color: var(--text-secondary); }
+        .cours-point-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
