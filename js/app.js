@@ -8746,7 +8746,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const historyDiv = document.getElementById('rp-chat-history');
             // Correction active (néerlandais seulement) : sous la bulle ; sinon bouton « Corrige-moi ».
             if (liveCorrectOn() && GeminiService.isAvailable() && !(rpCurrentScenario && rpCurrentScenario.lang === 'en')) {
-                liveCorrectUnder(msgDiv, text).then(() => { historyDiv.scrollTop = historyDiv.scrollHeight; });
+                const prevMsgs = historyDiv.querySelectorAll('.rp-message.assistant');
+                const prevMsg = prevMsgs.length ? prevMsgs[prevMsgs.length - 1] : null;
+                liveCorrectUnder(msgDiv, text, null, prevMsg ? (prevMsg.dataset.text || prevMsg.innerText) : '').then(() => { historyDiv.scrollTop = historyDiv.scrollHeight; });
                 return;
             }
             const btn = document.createElement('button');
@@ -12339,7 +12341,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 if (!guideAlive(token) || ans === null || ans === '__skip__') break;
                 if (ans === '__fin__') break;
                 const meDiv = guideBubble('moi', `${ans.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(ans.text)}`);
-                if (!ans.isFr) liveCorrectUnder(meDiv, ans.text);
+                if (!ans.isFr) { const lastThem = [...conv.history].reverse().find(h => h.who === 'them'); liveCorrectUnder(meDiv, ans.text, null, lastThem ? lastThem.nl : ''); }
                 conv.history.push({ who: 'me', text: ans.text, isFr: ans.isFr });
                 if (!ans.isFr) { conv.userLines.push(ans.text); turns++; }
                 const closing = !!maxTurns && turns >= maxTurns;
@@ -12605,7 +12607,8 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
 
         function talkCorrHtml(c) {
             const fr = (c.francais || []).map(x => `<div class="lc-fr">🇫🇷 ${rpEscapeHtml(x.fr)} → <b>${rpEscapeHtml(x.nl)}</b></div>`).join('');
-            return `<details class="talk-corr"${fr ? ' open' : ''}><summary>✨ Plus naturel</summary><b>${rpEscapeHtml(c.natural)}</b> ${speakBtnHtml(c.natural)}${fr}${c.note_fr ? `<br><small>${rpEscapeHtml(c.note_fr)}</small>` : ''}</details>`;
+            const off = c.a_cote ? `<div class="lc-offq">❓ <b>Tu as répondu à côté</b>${c.comprehension_fr ? ' : ' + rpEscapeHtml(c.comprehension_fr) : ''}</div>` : '';
+            return `<details class="talk-corr"${fr || off ? ' open' : ''}><summary>${off ? '❓ Réponse à côté' : '✨ Plus naturel'}</summary>${off}${c.natural ? `<b>${rpEscapeHtml(c.natural)}</b> ${speakBtnHtml(c.natural)}` : ''}${fr}${c.note_fr ? `<br><small>${rpEscapeHtml(c.note_fr)}</small>` : ''}</details>`;
         }
 
         function talkRenderSugg() {
@@ -12657,6 +12660,7 @@ Règles :
 - Ne corrige jamais dans "reply_nl" : la correction va seulement dans "correction".
 - S'il parle FRANÇAIS (question, mot qui manque), réponds-lui brièvement en français dans "fr_help" avec la formule néerlandaise utile, puis continue en néerlandais dans "reply_nl". Sinon "fr_help" est vide.
 - ${LIVE_MIX_RULES}
+- ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : "Commence la conversation : salue-le naturellement selon ta casquette et pose une première question simple sur le sujet."}
@@ -12688,7 +12692,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>` });
                 return;
             }
-            if (lastMsg && liveCorrectOn() && r.correction && r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) {
+            if (lastMsg && liveCorrectOn() && r.correction && ((r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) || r.correction.a_cote)) {
                 r.correction.francais = (Array.isArray(r.correction.francais) ? r.correction.francais : []).filter(x => x && x.fr && x.nl);
                 if (r.correction.francais.length) liveSaveWords(r.correction.francais);
                 lastMsg.corr = r.correction;
@@ -13012,6 +13016,7 @@ ${next.join('\n') || '(aucune)'}
 
 Consignes :
 - "reaction" : réaction courte et naturelle en ${lang} (Flandre), par ${speaker}, dans le ton de l'entretien (même tutoiement ou vouvoiement que les questions). Montre que tu as écouté en reprenant un détail de SA réponse. Varie : pas de compliment systématique ; parfois « Oké. » ou « Ah ja, ik zie het. » suffit. Ne corrige jamais sa langue. Le candidat peut avoir glissé des mots français : comprends-les.
+- Si sa réponse est À CÔTÉ de la question (il l'a sans doute mal comprise), ne fais pas comme si de rien n'était : "reaction" vide ou très courte, et "relance" = la même question reformulée plus simplement, comme un vrai recruteur (« Ik bedoel eigenlijk… »).
 - "relance" : une question de suivi en ${lang}, SEULEMENT si sa réponse est très courte, floue ou hors sujet, OU si son dossier contient un élément important lié à cette question qu'il n'a pas mentionné (demande-le comme un recruteur qui a son CV sous les yeux, par ex. « Ik zie dat je hier al in de productie gewerkt hebt, hoe was dat? »). Sinon "". Environ une fois sur trois au plus. Jamais sur un point qu'une des questions suivantes va aborder.
 - "idee_fr" : si tu relances, une idée de réponse pour le candidat, en français, tirée de son dossier (1 ou 2 phrases). Sinon "".
 - "sauter" : numéros des questions suivantes auxquelles il a DÉJÀ clairement répondu (souvent []).
@@ -13128,8 +13133,9 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
 
         // Correcteur séparé : il ne voit que la phrase de l'apprenant.
         async function rpReplayCorrect(a, div) {
-            const c = await liveCorrectUnder(div, a.text, 'B1');
-            if (!c || !c.corrige || ((c.ok || normalize(c.corrige) === normalize(a.text)) && !c.francais.length)) return;
+            const c = await liveCorrectUnder(div, a.text, 'B1', a.q);
+            if (!c || !c.corrige || ((c.ok || normalize(c.corrige) === normalize(a.text)) && !c.francais.length && !c.a_cote)) return;
+            if (c.a_cote && c.piste_nl) { a.corr = { corrige: c.piste_nl, explication: '❓ Réponse à côté : ' + (c.comprehension_fr || c.question_fr || '') }; return; }
             a.corr = { corrige: c.corrige, explication: c.erreurs.map(e => e.pourquoi).filter(Boolean).concat(c.francais.map(f => f.fr + ' → ' + f.nl)).join(' ; ') };
         }
 
@@ -13186,24 +13192,29 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
         // Règles communes sur le mélange des langues (reprises par Discuter et le cours particulier).
         const LIVE_MIX_RULES = `L'apprenant peut MÉLANGER français et néerlandais dans une même phrase quand un mot lui manque (ex. « ik wil een rendez-vous prendre met de dokter »). À l'oral, la reconnaissance vocale écoute en néerlandais : un mot français peut donc être mal transcrit (ex. « prendre » → « pranter ») ; s'il ne veut rien dire en néerlandais et ressemble à un mot français à l'oreille, reconstitue le mot français. Rends alors la phrase ENTIÈRE en néerlandais naturel, et liste chaque partie dite en français avec son équivalent néerlandais.`;
 
-        function liveCorrectPrompt(text, level) {
+        // Règle commune « réponse à côté » (correcteur, Discuter, tuteur, recruteur de Rejouer).
+        const LIVE_OFFTOPIC_RULE = `Vérifie aussi qu'il RÉPOND VRAIMENT à la question ou à la réplique de son interlocuteur : une phrase juste en néerlandais peut répondre à côté, parce qu'il a mal compris la question. Une réponse partielle, une demande de répétition (« Sorry, kunt u dat herhalen? ») ou une question en retour ne sont PAS à côté.`;
+
+        function liveCorrectPrompt(text, level, question) {
             return `Tu es correcteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase qu'il vient de dire à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou d'écrire.
 ${LIVE_MIX_RULES}
 Corrige les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant) et ce qui sonnerait nettement mieux autrement ; garde son idée, ne rajoute rien.
 Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.
-Phrase : "${String(text).replace(/"/g, "'")}"
-Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false}
-("ok" = aucune faute ET aucun mot français ; "bloquant" = on ne comprend pas ce qu'il veut dire)`;
+${question ? `Il répond à cette réplique de son interlocuteur : « ${String(question).replace(/"/g, "'").slice(0, 500)} »
+${LIVE_OFFTOPIC_RULE}
+` : ''}Phrase : "${String(text).replace(/"/g, "'")}"
+Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false${question ? ', "a_cote": false, "question_fr": "", "comprehension_fr": "", "piste_nl": ""' : ''}}
+("ok" = aucune faute ET aucun mot français ; "bloquant" = on ne comprend pas ce qu'il veut dire${question ? ` ; "a_cote" = il répond à côté : alors "question_fr" = la question traduite en français, "comprehension_fr" = en une phrase, ce qu'on lui demandait vraiment et ce qu'il a compris à la place, "piste_nl" = une courte réponse en néerlandais qui répond vraiment, en gardant ses informations si possible` : ''})`;
         }
 
         function liveLevel() { return curriculumLoaded ? getCurriculumLevel().level : 'A1'; }
 
         // Corrige une phrase ; renvoie l'objet de correction (ou null). Mémorise les mots dits en
         // français dans « ✍️ Mes corrections ».
-        async function liveCorrect(text, level) {
+        async function liveCorrect(text, level, question) {
             if (!text || !GeminiService.isAvailable()) return null;
             let c = null;
-            try { c = rpHelpParseJson(await GeminiService.generate(liveCorrectPrompt(text, level || liveLevel()))); } catch (e) { return null; }
+            try { c = rpHelpParseJson(await GeminiService.generate(liveCorrectPrompt(text, level || liveLevel(), question))); } catch (e) { return null; }
             if (!c || c.error || c.tout_fr) return null;
             c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
             c.erreurs = (Array.isArray(c.erreurs) ? c.erreurs : []).filter(x => x && x.correct);
@@ -13237,20 +13248,29 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
         function liveCorrectHtml(c, original) {
             if (!c) return '';
             const same = c.corrige && original && normalize(c.corrige).replace(/[^a-z0-9 ]/g, '') === normalize(original).replace(/[^a-z0-9 ]/g, '');
-            if ((c.ok || same) && !c.francais.length) return '<div class="lc-card lc-ok">✓ Bien dit</div>';
+            const offTopic = c.a_cote ? liveOffTopicHtml(c) : '';
+            if ((c.ok || same) && !c.francais.length) return offTopic ? `<div class="lc-card lc-off">${offTopic}<div class="lc-fr">(Ta phrase, elle, est correcte.)</div></div>` : '<div class="lc-card lc-ok">✓ Bien dit</div>';
             const fr = c.francais.map(x => `<div class="lc-fr">🇫🇷 ${rpEscapeHtml(x.fr)} → <b>${rpEscapeHtml(x.nl)}</b></div>`).join('');
             const err = c.erreurs.map(e => `<div class="lc-err">${e.faux ? rpEscapeHtml(e.faux) + ' → ' : ''}<b>${rpEscapeHtml(e.correct)}</b>${e.pourquoi ? ' : ' + rpEscapeHtml(e.pourquoi) : ''}</div>`).join('');
-            return `<div class="lc-card"><div class="lc-best">✨ <b>${rpEscapeHtml(c.corrige || '')}</b> ${c.corrige ? speakBtnHtml(c.corrige) : ''}</div>${fr}${err}${c.bloquant ? '<div class="lc-err">On ne comprend pas bien ce que tu veux dire : essaie plus simple.</div>' : ''}</div>`;
+            return `<div class="lc-card${offTopic ? ' lc-off' : ''}">${offTopic}<div class="lc-best">✨ <b>${rpEscapeHtml(c.corrige || '')}</b> ${c.corrige ? speakBtnHtml(c.corrige) : ''}</div>${fr}${err}${c.bloquant ? '<div class="lc-err">On ne comprend pas bien ce que tu veux dire : essaie plus simple.</div>' : ''}</div>`;
+        }
+
+        // « Tu as répondu à côté » : ce qu'on demandait, et une piste de vraie réponse.
+        function liveOffTopicHtml(c) {
+            return `<div class="lc-offq">❓ <b>Tu as répondu à côté</b>${c.question_fr ? ` : on te demandait « ${rpEscapeHtml(c.question_fr)} »` : ''}</div>
+                ${c.comprehension_fr ? `<div class="lc-fr">${rpEscapeHtml(c.comprehension_fr)}</div>` : ''}
+                ${c.piste_nl ? `<div class="lc-fr">💡 Par exemple : <b>${rpEscapeHtml(c.piste_nl)}</b> ${speakBtnHtml(c.piste_nl)}</div>` : ''}`;
         }
 
         // Corrige et affiche sous l'élément donné (si la correction active est en marche).
-        async function liveCorrectUnder(el, text, level) {
+        // question = la réplique à laquelle l'apprenant répond (pour repérer une réponse à côté).
+        async function liveCorrectUnder(el, text, level, question) {
             if (!liveCorrectOn() || !el || !GeminiService.isAvailable()) return null;
             const wait = document.createElement('div');
             wait.className = 'lc-card lc-wait';
             wait.innerText = '✍️ …';
             el.appendChild(wait);
-            const c = await liveCorrect(text, level);
+            const c = await liveCorrect(text, level, question);
             wait.remove();
             if (c) el.insertAdjacentHTML('beforeend', liveCorrectHtml(c, text));
             return c;
@@ -13295,7 +13315,7 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
 Conversation (APPRENANT = lui ; ses répliques ont pu être dictées : ignore ponctuation, majuscules et petites erreurs de transcription évidentes ; il a pu glisser des mots français quand un mot lui manquait) :
 ${conv}
 
-Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, ou qui se diraient nettement mieux autrement (les plus utiles, dans l'ordre de la conversation), et 1 ou 2 répliques réussies à saluer.
+Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, qui répondent À CÔTÉ de ce qu'on lui demandait (il a mal compris la question : explique-lui alors ce qu'on lui demandait vraiment, et "version_nl" est une réponse qui y répond), ou qui se diraient nettement mieux autrement (les plus utiles, dans l'ordre de la conversation), et 1 ou 2 répliques réussies à saluer.
 Réponds UNIQUEMENT en JSON :
 {"intro_fr": "1 ou 2 phrases chaleureuses : ton impression générale",
  "bons": [{"phrase": "sa réplique réussie, telle quelle", "pourquoi_fr": "ce qui est bien, court"}],
