@@ -13233,7 +13233,8 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
 
         // text : la phrase de l'apprenant ; corr : l'objet de correction s'il y en a un
         // ({ corrige } ou { natural }), null sinon.
-        // Séance en cours (même règle des 30 min) : ce qui a bougé, pour le montrer à l'apprenant.
+        // Séance en cours (même règle des 30 min) : ce qui a bougé, montré SEULEMENT à la fin de la
+        // conversation (usedSessionHtml) ; rien pendant l'échange, pour ne pas déranger (choix de Joas).
         let usedSession = null; // { at, ids: Set, fresh: Set, activated: Set, n0 : mots couverts au début }
         function usedSessionCurrent() {
             const now = Date.now();
@@ -13249,7 +13250,6 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             const ses = usedSessionCurrent();
             const now = Date.now();
             const seen = new Set();
-            const fresh = [], activated = [];
             usedTokens(text).forEach(t => {
                 if (okSet && !okSet.has(t)) return;
                 if (['de', 'het', 'een', "'t", "'n"].includes(t)) return; // articles : comptés avec leur nom
@@ -13261,32 +13261,16 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
                 u.n = (u.n || 0) + 1;
                 if (!u.last || now - u.last > USED_CONV_GAP) {
                     u.c = (u.c || 0) + 1;
-                    if (u.c === USED_ACTIVE_CONVS) { activated.push(item); ses.activated.add(item.id); }
+                    if (u.c === USED_ACTIVE_CONVS) ses.activated.add(item.id);
                 }
                 u.last = now;
                 state.usedWords[item.id] = u;
                 ses.ids.add(item.id);
-                if (isNew) { fresh.push(item); ses.fresh.add(item.id); }
+                if (isNew) ses.fresh.add(item.id);
             });
             ses.at = now;
             if (seen.size) save();
-            usedToast(fresh, activated);
             return seen.size;
-        }
-
-        // Petit signal pendant la conversation : nouveaux mots dits, mots devenus actifs.
-        let usedToastTimer = null;
-        function usedToast(fresh, activated) {
-            if (!fresh.length && !activated.length) return;
-            let el = document.getElementById('used-toast');
-            if (!el) { el = document.createElement('div'); el.id = 'used-toast'; el.className = 'used-toast'; document.body.appendChild(el); }
-            const name = i => rpEscapeHtml(String(i.nl).replace(/^(de|het) /, ''));
-            el.innerHTML = activated.length
-                ? `⭐ <b>${activated.slice(0, 3).map(name).join(', ')}</b> ${activated.length > 1 ? 'deviennent actifs' : 'devient actif'}`
-                : `🗣️ +${fresh.length} mot${fresh.length > 1 ? 's' : ''} : ${fresh.slice(0, 3).map(name).join(', ')}${fresh.length > 3 ? '…' : ''}`;
-            el.classList.add('show');
-            clearTimeout(usedToastTimer);
-            usedToastTimer = setTimeout(() => el.classList.remove('show'), 3200);
         }
 
         // Encart de fin de conversation : ce que la séance a apporté au vocabulaire.
