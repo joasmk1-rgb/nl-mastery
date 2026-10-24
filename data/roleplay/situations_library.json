@@ -1,9 +1,19 @@
 {
-  "_doc": "Bibliothèque de situations de jeu de rôle, stockées en dur (aucun appel Gemini pour les ouvrir ni les préparer ; seule la conversation utilise Gemini). Champs : id, theme (emploi | travail | quotidien), label, contexte (en français, affiché), role (consigne du personnage pour Gemini, en français), welcome (première réplique, en néerlandais), kit {verbes (infinitifs), mots [{nl avec de/het, fr}], phrases [{nl, fr}]}. Les situations générées par Gemini depuis l'app suivent le même format et sont gardées dans state.rpLibrary. Rédigées par Claude à la demande de Joas, sans relecture préalable (signalement ⚠️ dans l'app). Noms de personnes et d'entreprises inventés.",
+  "_doc": "Bibliothèque de situations de jeu de rôle, stockées en dur (aucun appel Gemini pour les ouvrir ni les préparer ; seule la conversation utilise Gemini). Champs : id, theme (emploi | travail | quotidien), label, contexte (en français, affiché), role (consigne du personnage pour Gemini, en français), welcome (première réplique, en néerlandais), kit {verbes (infinitifs), mots [{nl avec de/het, fr}], phrases [{nl, fr}]}. Les situations générées par Gemini depuis l'app suivent le même format et sont gardées dans state.rpLibrary. Rédigées par Claude à la demande de Joas, sans relecture préalable (signalement ⚠️ dans l'app). Noms de personnes et d'entreprises inventés. Les situations « quotidien » ont aussi un champ famille (voir familles) : elles se jouent dans Discuter, avec Svetlana ou John dans le rôle (octobre 2026). _source = redige_claude : ajoutées par Claude à la demande de Joas.",
   "themes": {
     "emploi": "💼 Recherche d'emploi",
     "travail": "🏢 Au bureau",
     "quotidien": "🏠 Vie courante en Belgique"
+  },
+  "familles": {
+    "demarches": "🏛️ Démarches",
+    "logement": "🏠 Logement",
+    "sante": "🩺 Santé et urgences",
+    "courses": "🛒 Courses et services",
+    "sorties": "🍽️ Sorties",
+    "social": "🤝 Vie sociale",
+    "telephone": "☎️ Au téléphone",
+    "transport": "🚆 Transports"
   },
   "situations": [
     {
@@ -1708,7 +1718,8 @@
             "fr": "Dois-je encore apporter quelque chose ?"
           }
         ]
-      }
+      },
+      "famille": "demarches"
     },
     {
       "id": "quotidien_medecin",
@@ -1788,7 +1799,8 @@
             "fr": "Ai-je besoin d'un certificat pour mon travail ?"
           }
         ]
-      }
+      },
+      "famille": "sante"
     },
     {
       "id": "quotidien_pharmacie",
@@ -1867,7 +1879,8 @@
             "fr": "Je suis allergique à la pénicilline."
           }
         ]
-      }
+      },
+      "famille": "sante"
     },
     {
       "id": "quotidien_proprietaire_panne",
@@ -1947,7 +1960,8 @@
             "fr": "Je suis à la maison à partir de cinq heures."
           }
         ]
-      }
+      },
+      "famille": "logement"
     },
     {
       "id": "quotidien_banque",
@@ -2028,7 +2042,8 @@
             "fr": "Puis-je tout faire via l'application ?"
           }
         ]
-      }
+      },
+      "famille": "courses"
     },
     {
       "id": "quotidien_garage",
@@ -2109,7 +2124,8 @@
             "fr": "Quand puis-je récupérer la voiture ?"
           }
         ]
-      }
+      },
+      "famille": "courses"
     },
     {
       "id": "quotidien_mutuelle",
@@ -2185,7 +2201,8 @@
             "fr": "Combien de temps prend le remboursement ?"
           }
         ]
-      }
+      },
+      "famille": "demarches"
     },
     {
       "id": "quotidien_magasin_retour",
@@ -2265,7 +2282,8 @@
             "fr": "Plutôt un remboursement qu'un bon d'achat."
           }
         ]
-      }
+      },
+      "famille": "courses"
     },
     {
       "id": "quotidien_voisin",
@@ -2346,7 +2364,8 @@
             "fr": "S'il y a quoi que ce soit, vous pouvez toujours sonner."
           }
         ]
-      }
+      },
+      "famille": "social"
     },
     {
       "id": "quotidien_train",
@@ -2427,7 +2446,2134 @@
             "fr": "Combien coûte un abonnement domicile-travail ?"
           }
         ]
-      }
+      },
+      "famille": "transport"
+    },
+    {
+      "id": "quotidien_inburgering",
+      "theme": "quotidien",
+      "famille": "demarches",
+      "label": "S'inscrire au cours de néerlandais (inburgering)",
+      "contexte": "Tu viens t'inscrire au parcours d'intégration et à un cours de néerlandais. L'employé te pose des questions pour trouver le bon niveau et le bon horaire.",
+      "role": "Tu es employé(e) à l'accueil d'un bureau d'intégration flamand (Huis van het Nederlands). Demande à la personne son nom, depuis quand elle habite en Belgique, si elle a déjà suivi des cours de néerlandais, son niveau, ses disponibilités (jour, soir, en ligne). Propose un test de niveau et un horaire, explique les documents à apporter (carte d'identité, attestation de domicile).",
+      "welcome": "Goedemorgen, welkom. Komt u zich inschrijven voor een cursus Nederlands?",
+      "kit": {
+        "verbes": [
+          "inschrijven",
+          "volgen",
+          "wonen",
+          "leren",
+          "beginnen",
+          "meebrengen",
+          "passen",
+          "kiezen"
+        ],
+        "mots": [
+          {
+            "nl": "de cursus",
+            "fr": "le cours"
+          },
+          {
+            "nl": "het niveau",
+            "fr": "le niveau"
+          },
+          {
+            "nl": "de niveautest",
+            "fr": "le test de niveau"
+          },
+          {
+            "nl": "de inschrijving",
+            "fr": "l'inscription"
+          },
+          {
+            "nl": "het lesrooster",
+            "fr": "l'horaire des cours"
+          },
+          {
+            "nl": "'s avonds",
+            "fr": "le soir"
+          },
+          {
+            "nl": "overdag",
+            "fr": "en journée"
+          },
+          {
+            "nl": "de identiteitskaart",
+            "fr": "la carte d'identité"
+          },
+          {
+            "nl": "het inburgeringstraject",
+            "fr": "le parcours d'intégration"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil me inschrijven voor een cursus Nederlands.",
+            "fr": "Je voudrais m'inscrire à un cours de néerlandais."
+          },
+          {
+            "nl": "Ik heb al een beetje Nederlands geleerd.",
+            "fr": "J'ai déjà appris un peu de néerlandais."
+          },
+          {
+            "nl": "Ik kan alleen 's avonds.",
+            "fr": "Je ne peux que le soir."
+          },
+          {
+            "nl": "Welke documenten moet ik meebrengen?",
+            "fr": "Quels documents dois-je apporter ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_impots",
+      "theme": "quotidien",
+      "famille": "demarches",
+      "label": "Une question sur ta déclaration d'impôts",
+      "contexte": "Tu as reçu ta déclaration d'impôts et tu ne comprends pas une partie. Tu vas au bureau des contributions pour demander de l'aide.",
+      "role": "Tu es employé(e) au guichet du bureau des contributions (belastingen) en Flandre. Aide la personne avec sa déclaration : demande ce qu'elle ne comprend pas, si elle travaille comme salarié, si elle a des enfants à charge, et explique simplement (Tax-on-web, date limite, documents comme la fiche de salaire annuelle). Reste général, pas de chiffres précis.",
+      "welcome": "Goeiedag. Waarmee kan ik u helpen?",
+      "kit": {
+        "verbes": [
+          "invullen",
+          "begrijpen",
+          "ontvangen",
+          "betalen",
+          "terugkrijgen",
+          "uitleggen",
+          "indienen"
+        ],
+        "mots": [
+          {
+            "nl": "de belastingaangifte",
+            "fr": "la déclaration d'impôts"
+          },
+          {
+            "nl": "de belastingen",
+            "fr": "les impôts"
+          },
+          {
+            "nl": "de loonfiche",
+            "fr": "la fiche de salaire annuelle"
+          },
+          {
+            "nl": "de deadline",
+            "fr": "la date limite"
+          },
+          {
+            "nl": "het formulier",
+            "fr": "le formulaire"
+          },
+          {
+            "nl": "ten laste",
+            "fr": "à charge"
+          },
+          {
+            "nl": "de terugbetaling",
+            "fr": "le remboursement"
+          },
+          {
+            "nl": "online",
+            "fr": "en ligne"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik begrijp dit deel van mijn aangifte niet.",
+            "fr": "Je ne comprends pas cette partie de ma déclaration."
+          },
+          {
+            "nl": "Tot wanneer moet ik het indienen?",
+            "fr": "Jusqu'à quand dois-je la rendre ?"
+          },
+          {
+            "nl": "Kan ik dat ook online doen?",
+            "fr": "Est-ce que je peux le faire en ligne aussi ?"
+          },
+          {
+            "nl": "Krijg ik geld terug?",
+            "fr": "Est-ce que je récupère de l'argent ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_ecole",
+      "theme": "quotidien",
+      "famille": "demarches",
+      "label": "Inscrire un enfant à l'école",
+      "contexte": "Tu veux inscrire un enfant (ton fils, ta fille ou un enfant dont tu t'occupes) dans l'école du quartier. Tu rencontres la direction.",
+      "role": "Tu es directeur ou directrice d'une école primaire en Flandre. Accueille le parent, demande l'âge de l'enfant, sa langue à la maison, son ancienne école, explique les horaires, la garderie (opvang) avant et après l'école, les repas, les frais, et le soutien en néerlandais pour les enfants qui ne le parlent pas encore. Ton chaleureux.",
+      "welcome": "Dag, welkom op onze school. U wilt uw kind inschrijven, als ik het goed begrijp?",
+      "kit": {
+        "verbes": [
+          "inschrijven",
+          "spreken",
+          "beginnen",
+          "ophalen",
+          "brengen",
+          "eten",
+          "helpen"
+        ],
+        "mots": [
+          {
+            "nl": "de school",
+            "fr": "l'école"
+          },
+          {
+            "nl": "het leerjaar",
+            "fr": "l'année (scolaire), la classe"
+          },
+          {
+            "nl": "de juf",
+            "fr": "l'institutrice"
+          },
+          {
+            "nl": "de meester",
+            "fr": "l'instituteur"
+          },
+          {
+            "nl": "de opvang",
+            "fr": "la garderie"
+          },
+          {
+            "nl": "de thuistaal",
+            "fr": "la langue parlée à la maison"
+          },
+          {
+            "nl": "de schoolbus",
+            "fr": "le bus scolaire"
+          },
+          {
+            "nl": "de warme maaltijd",
+            "fr": "le repas chaud"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil mijn dochter inschrijven.",
+            "fr": "Je voudrais inscrire ma fille."
+          },
+          {
+            "nl": "Thuis spreken we Frans.",
+            "fr": "À la maison, on parle français."
+          },
+          {
+            "nl": "Is er opvang na school?",
+            "fr": "Y a-t-il une garderie après l'école ?"
+          },
+          {
+            "nl": "Hoe laat begint de school?",
+            "fr": "À quelle heure commence l'école ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_creche",
+      "theme": "quotidien",
+      "famille": "demarches",
+      "label": "Visiter une crèche",
+      "contexte": "Tu cherches une place en crèche pour un bébé. Tu visites une crèche et tu poses tes questions.",
+      "role": "Tu es responsable d'une crèche (kinderdagverblijf) en Flandre. Fais visiter, demande l'âge du bébé, la date de début souhaitée, les jours de garde, explique les horaires d'ouverture, le prix (selon les revenus), ce qu'il faut apporter (langes, vêtements de rechange) et la liste d'attente.",
+      "welcome": "Hallo, welkom! U komt voor een rondleiding, toch? Hoe oud is uw kindje?",
+      "kit": {
+        "verbes": [
+          "zoeken",
+          "beginnen",
+          "brengen",
+          "ophalen",
+          "meebrengen",
+          "slapen",
+          "kosten"
+        ],
+        "mots": [
+          {
+            "nl": "het kinderdagverblijf",
+            "fr": "la crèche"
+          },
+          {
+            "nl": "de baby",
+            "fr": "le bébé"
+          },
+          {
+            "nl": "de wachtlijst",
+            "fr": "la liste d'attente"
+          },
+          {
+            "nl": "de luiers",
+            "fr": "les langes, les couches"
+          },
+          {
+            "nl": "de openingsuren",
+            "fr": "les heures d'ouverture"
+          },
+          {
+            "nl": "het inkomen",
+            "fr": "les revenus"
+          },
+          {
+            "nl": "voltijds",
+            "fr": "à temps plein"
+          },
+          {
+            "nl": "deeltijds",
+            "fr": "à temps partiel"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik zoek een plaats vanaf september.",
+            "fr": "Je cherche une place à partir de septembre."
+          },
+          {
+            "nl": "Hoeveel kost het per dag?",
+            "fr": "Combien ça coûte par jour ?"
+          },
+          {
+            "nl": "Is er een wachtlijst?",
+            "fr": "Y a-t-il une liste d'attente ?"
+          },
+          {
+            "nl": "Wat moet ik meebrengen?",
+            "fr": "Qu'est-ce que je dois apporter ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_poste",
+      "theme": "quotidien",
+      "famille": "demarches",
+      "label": "À la poste : envoyer un colis",
+      "contexte": "Tu dois envoyer un colis à l'étranger et un courrier recommandé. Tu vas au bureau de poste.",
+      "role": "Tu es guichetier ou guichetière à la poste (bpost) en Flandre. Demande la destination, pèse le colis, propose les options (normal, rapide, avec suivi), demande pour le recommandé l'adresse du destinataire, annonce le prix et donne le reçu avec le numéro de suivi.",
+      "welcome": "Goeiedag, zegt u het maar.",
+      "kit": {
+        "verbes": [
+          "verzenden",
+          "wegen",
+          "kosten",
+          "aankomen",
+          "volgen",
+          "betalen",
+          "invullen"
+        ],
+        "mots": [
+          {
+            "nl": "het pakje",
+            "fr": "le colis"
+          },
+          {
+            "nl": "de brief",
+            "fr": "la lettre"
+          },
+          {
+            "nl": "aangetekend",
+            "fr": "recommandé"
+          },
+          {
+            "nl": "de postzegel",
+            "fr": "le timbre"
+          },
+          {
+            "nl": "het buitenland",
+            "fr": "l'étranger"
+          },
+          {
+            "nl": "de ontvanger",
+            "fr": "le destinataire"
+          },
+          {
+            "nl": "het volgnummer",
+            "fr": "le numéro de suivi"
+          },
+          {
+            "nl": "het ontvangstbewijs",
+            "fr": "le reçu"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil dit pakje naar Frankrijk versturen.",
+            "fr": "Je voudrais envoyer ce colis en France."
+          },
+          {
+            "nl": "Wanneer komt het aan?",
+            "fr": "Quand est-ce qu'il arrive ?"
+          },
+          {
+            "nl": "Ik wil deze brief aangetekend versturen.",
+            "fr": "Je voudrais envoyer cette lettre en recommandé."
+          },
+          {
+            "nl": "Kan ik het pakje volgen?",
+            "fr": "Est-ce que je peux suivre le colis ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_ocmw",
+      "theme": "quotidien",
+      "famille": "demarches",
+      "label": "Au CPAS (OCMW) : demander une aide",
+      "contexte": "Tu traverses une période difficile et tu viens au CPAS (OCMW) pour te renseigner sur les aides possibles.",
+      "role": "Tu es assistant(e) social(e) à l'OCMW en Flandre. Accueille la personne avec respect, demande sa situation de façon générale (logement, revenus, travail), explique les aides possibles en restant général (aide financière, aide pour le loyer, accompagnement vers l'emploi), les documents à apporter et propose un rendez-vous. Ton calme et rassurant, pas de jugement.",
+      "welcome": "Goedendag, loket OCMW. Neemt u plaats. Waarmee kan ik u vandaag helpen?",
+      "kit": {
+        "verbes": [
+          "aanvragen",
+          "helpen",
+          "wonen",
+          "zoeken",
+          "verdienen",
+          "meebrengen",
+          "afspreken"
+        ],
+        "mots": [
+          {
+            "nl": "het OCMW",
+            "fr": "le CPAS"
+          },
+          {
+            "nl": "de maatschappelijk werker",
+            "fr": "l'assistant social"
+          },
+          {
+            "nl": "de steun",
+            "fr": "l'aide, le soutien"
+          },
+          {
+            "nl": "de huur",
+            "fr": "le loyer"
+          },
+          {
+            "nl": "het inkomen",
+            "fr": "les revenus"
+          },
+          {
+            "nl": "de afspraak",
+            "fr": "le rendez-vous"
+          },
+          {
+            "nl": "het attest",
+            "fr": "l'attestation"
+          },
+          {
+            "nl": "de situatie",
+            "fr": "la situation"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil informatie over de steun die mogelijk is.",
+            "fr": "Je voudrais des informations sur les aides possibles."
+          },
+          {
+            "nl": "Ik heb op dit moment geen werk.",
+            "fr": "Je n'ai pas de travail pour le moment."
+          },
+          {
+            "nl": "Ik heb moeite om mijn huur te betalen.",
+            "fr": "J'ai du mal à payer mon loyer."
+          },
+          {
+            "nl": "Welke documenten heeft u nodig?",
+            "fr": "De quels documents avez-vous besoin ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_visite_appart",
+      "theme": "quotidien",
+      "famille": "logement",
+      "label": "Visiter un appartement à louer",
+      "contexte": "Tu visites un appartement à louer avec le propriétaire. Tu poses des questions sur le loyer, les charges et le quartier.",
+      "role": "Tu es propriétaire d'un appartement à louer en Flandre. Fais la visite (séjour, cuisine, chambre, salle de bain), réponds aux questions sur le loyer, les charges, la garantie locative (deux mois), la date de disponibilité, les animaux, et pose tes propres questions au candidat locataire (travail, revenus, nombre de personnes).",
+      "welcome": "Goeiedag, u komt voor het appartement? Komt u binnen, dan laat ik alles zien.",
+      "kit": {
+        "verbes": [
+          "huren",
+          "betalen",
+          "verhuizen",
+          "wonen",
+          "bekijken",
+          "bevatten",
+          "tonen"
+        ],
+        "mots": [
+          {
+            "nl": "het appartement",
+            "fr": "l'appartement"
+          },
+          {
+            "nl": "de huur",
+            "fr": "le loyer"
+          },
+          {
+            "nl": "de kosten",
+            "fr": "les charges"
+          },
+          {
+            "nl": "de huurwaarborg",
+            "fr": "la garantie locative"
+          },
+          {
+            "nl": "de slaapkamer",
+            "fr": "la chambre"
+          },
+          {
+            "nl": "de badkamer",
+            "fr": "la salle de bain"
+          },
+          {
+            "nl": "het huurcontract",
+            "fr": "le bail"
+          },
+          {
+            "nl": "de buurt",
+            "fr": "le quartier"
+          },
+          {
+            "nl": "vrij",
+            "fr": "libre, disponible"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Hoeveel bedraagt de huur?",
+            "fr": "À combien s'élève le loyer ?"
+          },
+          {
+            "nl": "Zijn de kosten inbegrepen?",
+            "fr": "Les charges sont-elles comprises ?"
+          },
+          {
+            "nl": "Vanaf wanneer is het appartement vrij?",
+            "fr": "À partir de quand l'appartement est-il libre ?"
+          },
+          {
+            "nl": "Zijn huisdieren toegelaten?",
+            "fr": "Les animaux sont-ils autorisés ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_etat_lieux",
+      "theme": "quotidien",
+      "famille": "logement",
+      "label": "L'état des lieux d'entrée",
+      "contexte": "Tu emménages. Avec le propriétaire, tu fais l'état des lieux : tu signales ce qui est abîmé pour ne pas devoir le payer plus tard.",
+      "role": "Tu es propriétaire et tu fais l'état des lieux d'entrée (plaatsbeschrijving) avec le nouveau locataire. Passe pièce par pièce, note ce qu'il signale (une tache sur le mur, une fenêtre qui ferme mal, une rayure sur le sol), relève les compteurs (eau, gaz, électricité), donne les clés. Tu es de bonne foi mais tu minimises un peu certains défauts.",
+      "welcome": "Zo, dan gaan we samen de plaatsbeschrijving doen. Als u iets ziet dat beschadigd is, zegt u het maar.",
+      "kit": {
+        "verbes": [
+          "noteren",
+          "tekenen",
+          "beschadigen",
+          "sluiten",
+          "werken",
+          "controleren",
+          "afgeven"
+        ],
+        "mots": [
+          {
+            "nl": "de plaatsbeschrijving",
+            "fr": "l'état des lieux"
+          },
+          {
+            "nl": "de vlek",
+            "fr": "la tache"
+          },
+          {
+            "nl": "de kras",
+            "fr": "la rayure"
+          },
+          {
+            "nl": "beschadigd",
+            "fr": "abîmé"
+          },
+          {
+            "nl": "de meterstand",
+            "fr": "le relevé de compteur"
+          },
+          {
+            "nl": "de sleutels",
+            "fr": "les clés"
+          },
+          {
+            "nl": "het raam",
+            "fr": "la fenêtre"
+          },
+          {
+            "nl": "de muur",
+            "fr": "le mur"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Hier is een vlek op de muur.",
+            "fr": "Il y a une tache sur le mur ici."
+          },
+          {
+            "nl": "Dit raam sluit niet goed.",
+            "fr": "Cette fenêtre ne ferme pas bien."
+          },
+          {
+            "nl": "Kunt u dat noteren, alstublieft?",
+            "fr": "Pouvez-vous le noter, s'il vous plaît ?"
+          },
+          {
+            "nl": "Ik teken pas als alles erin staat.",
+            "fr": "Je ne signe que quand tout y est."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_loodgieter",
+      "theme": "quotidien",
+      "famille": "logement",
+      "label": "Appeler un plombier pour une fuite",
+      "contexte": "Il y a une fuite d'eau sous ton évier. Tu appelles un plombier pour qu'il vienne vite.",
+      "role": "Tu es plombier (loodgieter) indépendant en Flandre et tu réponds au téléphone. Demande où est la fuite, depuis quand, si l'eau est coupée, l'adresse ; conseille de fermer le robinet principal ; propose un passage (pas avant demain matin sauf urgence, avec supplément), annonce le prix du déplacement.",
+      "welcome": "Met de loodgieter, goeiedag. Wat is het probleem?",
+      "kit": {
+        "verbes": [
+          "lekken",
+          "sluiten",
+          "langskomen",
+          "herstellen",
+          "kosten",
+          "bellen",
+          "wachten"
+        ],
+        "mots": [
+          {
+            "nl": "het lek",
+            "fr": "la fuite"
+          },
+          {
+            "nl": "de gootsteen",
+            "fr": "l'évier"
+          },
+          {
+            "nl": "de kraan",
+            "fr": "le robinet"
+          },
+          {
+            "nl": "de hoofdkraan",
+            "fr": "le robinet principal"
+          },
+          {
+            "nl": "de verplaatsingskosten",
+            "fr": "les frais de déplacement"
+          },
+          {
+            "nl": "dringend",
+            "fr": "urgent"
+          },
+          {
+            "nl": "het water",
+            "fr": "l'eau"
+          },
+          {
+            "nl": "morgenvroeg",
+            "fr": "demain matin tôt"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Er is een lek onder mijn gootsteen.",
+            "fr": "Il y a une fuite sous mon évier."
+          },
+          {
+            "nl": "Kunt u vandaag nog langskomen?",
+            "fr": "Pouvez-vous encore passer aujourd'hui ?"
+          },
+          {
+            "nl": "Ik heb de hoofdkraan dichtgedraaid.",
+            "fr": "J'ai fermé le robinet principal."
+          },
+          {
+            "nl": "Hoeveel kost de verplaatsing?",
+            "fr": "Combien coûte le déplacement ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_voisin_bruit",
+      "theme": "quotidien",
+      "famille": "logement",
+      "label": "Le voisin fait trop de bruit",
+      "contexte": "Ton voisin met la musique fort tard le soir depuis plusieurs jours. Tu vas lui en parler, poliment mais clairement.",
+      "role": "Tu es le voisin ou la voisine du dessus, plutôt sympathique mais un peu sur la défensive : tu ne te rendais pas compte du bruit, tu as eu des fêtes d'anniversaire. Au début tu minimises, puis tu acceptes un compromis (pas de musique forte après 22 heures). Tutoiement possible si l'autre tutoie.",
+      "welcome": "Hé, goeienavond! Is er iets?",
+      "kit": {
+        "verbes": [
+          "storen",
+          "slapen",
+          "zetten",
+          "beloven",
+          "opletten",
+          "begrijpen",
+          "zeggen"
+        ],
+        "mots": [
+          {
+            "nl": "het lawaai",
+            "fr": "le bruit"
+          },
+          {
+            "nl": "de muziek",
+            "fr": "la musique"
+          },
+          {
+            "nl": "de buur",
+            "fr": "le voisin"
+          },
+          {
+            "nl": "'s nachts",
+            "fr": "la nuit"
+          },
+          {
+            "nl": "stil",
+            "fr": "calme, silencieux"
+          },
+          {
+            "nl": "luid",
+            "fr": "fort (son)"
+          },
+          {
+            "nl": "het feestje",
+            "fr": "la petite fête"
+          },
+          {
+            "nl": "het compromis",
+            "fr": "le compromis"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Sorry dat ik stoor, maar de muziek is 's avonds heel luid.",
+            "fr": "Désolé de déranger, mais la musique est très forte le soir."
+          },
+          {
+            "nl": "Ik moet vroeg opstaan voor mijn werk.",
+            "fr": "Je dois me lever tôt pour mon travail."
+          },
+          {
+            "nl": "Kun je na tien uur wat stiller zijn?",
+            "fr": "Tu peux être un peu plus calme après dix heures ?"
+          },
+          {
+            "nl": "Bedankt voor je begrip.",
+            "fr": "Merci de ta compréhension."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_112",
+      "theme": "quotidien",
+      "famille": "sante",
+      "label": "Appeler le 112",
+      "contexte": "Un piéton vient de tomber à vélo devant chez toi : il saigne à la tête et ne se lève pas. Tu appelles le 112.",
+      "role": "Tu es opérateur ou opératrice du 112 en Flandre. Pose des questions courtes et précises, une à la fois : quelle est l'urgence, l'adresse exacte, la personne est-elle consciente, respire-t-elle, saigne-t-elle ; donne des consignes simples (ne pas la bouger, appuyer sur la plaie avec un tissu propre, rester à côté) et annonce l'arrivée de l'ambulance. Ton calme et ferme.",
+      "welcome": "Honderdtwaalf, wat is uw noodgeval?",
+      "kit": {
+        "verbes": [
+          "vallen",
+          "bloeden",
+          "ademen",
+          "bewegen",
+          "drukken",
+          "blijven",
+          "komen"
+        ],
+        "mots": [
+          {
+            "nl": "het ongeval",
+            "fr": "l'accident"
+          },
+          {
+            "nl": "de ziekenwagen",
+            "fr": "l'ambulance"
+          },
+          {
+            "nl": "het adres",
+            "fr": "l'adresse"
+          },
+          {
+            "nl": "bewust",
+            "fr": "conscient"
+          },
+          {
+            "nl": "het hoofd",
+            "fr": "la tête"
+          },
+          {
+            "nl": "de wonde",
+            "fr": "la plaie"
+          },
+          {
+            "nl": "de fietser",
+            "fr": "le cycliste"
+          },
+          {
+            "nl": "dringend",
+            "fr": "urgent"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Er is een ongeval gebeurd voor mijn deur.",
+            "fr": "Il y a eu un accident devant chez moi."
+          },
+          {
+            "nl": "Hij bloedt aan zijn hoofd.",
+            "fr": "Il saigne à la tête."
+          },
+          {
+            "nl": "Hij is bewust, maar hij staat niet op.",
+            "fr": "Il est conscient, mais il ne se lève pas."
+          },
+          {
+            "nl": "Het adres is Stationsstraat tien.",
+            "fr": "L'adresse est Stationsstraat dix."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_spoed",
+      "theme": "quotidien",
+      "famille": "sante",
+      "label": "Aux urgences",
+      "contexte": "Tu t'es fait mal à la cheville en tombant dans l'escalier. Tu arrives aux urgences de l'hôpital.",
+      "role": "Tu es infirmier ou infirmière d'accueil aux urgences (spoedgevallen). Demande la carte d'identité et la mutuelle, ce qui s'est passé, où ça fait mal, sur une échelle de 1 à 10, si la personne peut marcher, si elle prend des médicaments ou a des allergies ; explique qu'il y aura une radio et un temps d'attente.",
+      "welcome": "Goeiedag. Wat is er gebeurd?",
+      "kit": {
+        "verbes": [
+          "vallen",
+          "voelen",
+          "lopen",
+          "wachten",
+          "nemen",
+          "krijgen",
+          "onderzoeken"
+        ],
+        "mots": [
+          {
+            "nl": "de spoedgevallen",
+            "fr": "les urgences"
+          },
+          {
+            "nl": "de enkel",
+            "fr": "la cheville"
+          },
+          {
+            "nl": "de trap",
+            "fr": "l'escalier"
+          },
+          {
+            "nl": "de pijn",
+            "fr": "la douleur"
+          },
+          {
+            "nl": "de foto",
+            "fr": "la radio (examen)"
+          },
+          {
+            "nl": "gezwollen",
+            "fr": "enflé"
+          },
+          {
+            "nl": "het ziekenfonds",
+            "fr": "la mutuelle"
+          },
+          {
+            "nl": "de wachttijd",
+            "fr": "le temps d'attente"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben van de trap gevallen.",
+            "fr": "Je suis tombé dans l'escalier."
+          },
+          {
+            "nl": "Mijn enkel doet veel pijn.",
+            "fr": "Ma cheville me fait très mal."
+          },
+          {
+            "nl": "Ik kan bijna niet lopen.",
+            "fr": "Je ne peux presque pas marcher."
+          },
+          {
+            "nl": "Hoe lang moet ik wachten?",
+            "fr": "Combien de temps dois-je attendre ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_tandarts",
+      "theme": "quotidien",
+      "famille": "sante",
+      "label": "Rendez-vous chez le dentiste",
+      "contexte": "Tu as mal à une dent depuis deux jours. Tu appelles le cabinet du dentiste pour avoir un rendez-vous rapidement.",
+      "role": "Tu es secrétaire d'un cabinet dentaire en Flandre, au téléphone. Demande le nom, si la personne est déjà patiente, ce qui ne va pas, depuis quand, si la joue est gonflée ; l'agenda est plein cette semaine mais propose une place d'urgence demain en fin de journée ; rappelle d'apporter la carte d'identité.",
+      "welcome": "Tandartspraktijk, goeiemorgen.",
+      "kit": {
+        "verbes": [
+          "bellen",
+          "voelen",
+          "afspreken",
+          "passen",
+          "komen",
+          "wachten",
+          "verwittigen"
+        ],
+        "mots": [
+          {
+            "nl": "de tandarts",
+            "fr": "le dentiste"
+          },
+          {
+            "nl": "de tand",
+            "fr": "la dent"
+          },
+          {
+            "nl": "de kiespijn",
+            "fr": "le mal de dents"
+          },
+          {
+            "nl": "de afspraak",
+            "fr": "le rendez-vous"
+          },
+          {
+            "nl": "de wang",
+            "fr": "la joue"
+          },
+          {
+            "nl": "dringend",
+            "fr": "urgent"
+          },
+          {
+            "nl": "de agenda",
+            "fr": "l'agenda"
+          },
+          {
+            "nl": "eind van de dag",
+            "fr": "en fin de journée"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb al twee dagen kiespijn.",
+            "fr": "J'ai mal aux dents depuis deux jours."
+          },
+          {
+            "nl": "Heeft u deze week nog een plaatsje?",
+            "fr": "Avez-vous encore une petite place cette semaine ?"
+          },
+          {
+            "nl": "Ik ben nog geen patiënt bij jullie.",
+            "fr": "Je ne suis pas encore patient chez vous."
+          },
+          {
+            "nl": "Morgen om vijf uur past voor mij.",
+            "fr": "Demain à cinq heures, ça me va."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_supermarkt",
+      "theme": "quotidien",
+      "famille": "courses",
+      "label": "Au supermarché",
+      "contexte": "Tu fais tes courses : tu ne trouves pas un produit, puis à la caisse on te demande ta carte de fidélité et il y a un souci de prix.",
+      "role": "Tu joues d'abord un employé de rayon puis la caissière d'un supermarché en Flandre. Indique où trouver le produit demandé (rayon, en haut, à côté de…), puis à la caisse demande la carte de fidélité, s'il faut un sac ; quand le client signale un prix différent de l'étiquette, vérifie et corrige poliment.",
+      "welcome": "Goeiedag, kan ik u helpen? U zoekt iets?",
+      "kit": {
+        "verbes": [
+          "zoeken",
+          "vinden",
+          "liggen",
+          "betalen",
+          "kosten",
+          "nakijken",
+          "hebben"
+        ],
+        "mots": [
+          {
+            "nl": "het rek",
+            "fr": "le rayon"
+          },
+          {
+            "nl": "de kassa",
+            "fr": "la caisse"
+          },
+          {
+            "nl": "de klantenkaart",
+            "fr": "la carte de fidélité"
+          },
+          {
+            "nl": "het zakje",
+            "fr": "le petit sac"
+          },
+          {
+            "nl": "de prijs",
+            "fr": "le prix"
+          },
+          {
+            "nl": "de promotie",
+            "fr": "la promotion"
+          },
+          {
+            "nl": "het bonnetje",
+            "fr": "le ticket de caisse"
+          },
+          {
+            "nl": "bovenaan",
+            "fr": "en haut"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Waar kan ik de rijst vinden?",
+            "fr": "Où est-ce que je peux trouver le riz ?"
+          },
+          {
+            "nl": "Nee, ik heb geen klantenkaart.",
+            "fr": "Non, je n'ai pas de carte de fidélité."
+          },
+          {
+            "nl": "In het rek stond een andere prijs.",
+            "fr": "Dans le rayon, il y avait un autre prix."
+          },
+          {
+            "nl": "Ik heb geen zakje nodig, dank u.",
+            "fr": "Je n'ai pas besoin de sac, merci."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_bakker",
+      "theme": "quotidien",
+      "famille": "courses",
+      "label": "À la boulangerie",
+      "contexte": "Tu achètes du pain et quelques pâtisseries pour des invités. Tu demandes ce qu'on te conseille.",
+      "role": "Tu es boulanger ou boulangère dans une boulangerie de quartier en Flandre, souriant(e) et bavard(e). Prends la commande (pain tranché ou non, quel pain), conseille des pâtisseries (pistolets, koffiekoeken, taart), demande pour combien de personnes, annonce le total.",
+      "welcome": "Goeiemorgen! Wat mag het zijn?",
+      "kit": {
+        "verbes": [
+          "nemen",
+          "snijden",
+          "aanraden",
+          "proeven",
+          "kosten",
+          "betalen",
+          "geven"
+        ],
+        "mots": [
+          {
+            "nl": "het brood",
+            "fr": "le pain"
+          },
+          {
+            "nl": "gesneden",
+            "fr": "tranché"
+          },
+          {
+            "nl": "de pistolet",
+            "fr": "le petit pain rond"
+          },
+          {
+            "nl": "de koffiekoek",
+            "fr": "la viennoiserie"
+          },
+          {
+            "nl": "de taart",
+            "fr": "la tarte, le gâteau"
+          },
+          {
+            "nl": "het stuk",
+            "fr": "le morceau, la pièce"
+          },
+          {
+            "nl": "vers",
+            "fr": "frais"
+          },
+          {
+            "nl": "nog iets",
+            "fr": "autre chose"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Een grof brood, gesneden alstublieft.",
+            "fr": "Un pain gris, tranché s'il vous plaît."
+          },
+          {
+            "nl": "Wat raadt u aan voor zes personen?",
+            "fr": "Que me conseillez-vous pour six personnes ?"
+          },
+          {
+            "nl": "Doe er ook vier pistolets bij.",
+            "fr": "Ajoutez aussi quatre petits pains."
+          },
+          {
+            "nl": "Dat is alles, dank u.",
+            "fr": "Ce sera tout, merci."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_kapper",
+      "theme": "quotidien",
+      "famille": "courses",
+      "label": "Chez le coiffeur",
+      "contexte": "Tu vas chez le coiffeur et tu expliques la coupe que tu veux.",
+      "role": "Tu es coiffeur ou coiffeuse dans un salon en Flandre. Accueille le client, demande ce qu'il veut (couper combien, court sur les côtés, la frange, shampoing), fais la conversation pendant la coupe (vacances, travail, quartier), montre le résultat dans le miroir et demande si c'est bien.",
+      "welcome": "Dag! Neem maar plaats. Wat zal het vandaag zijn?",
+      "kit": {
+        "verbes": [
+          "knippen",
+          "wassen",
+          "houden",
+          "laten",
+          "vinden",
+          "betalen",
+          "afspreken"
+        ],
+        "mots": [
+          {
+            "nl": "de kapper",
+            "fr": "le coiffeur"
+          },
+          {
+            "nl": "het haar",
+            "fr": "les cheveux"
+          },
+          {
+            "nl": "kort",
+            "fr": "court"
+          },
+          {
+            "nl": "lang",
+            "fr": "long"
+          },
+          {
+            "nl": "de zijkanten",
+            "fr": "les côtés"
+          },
+          {
+            "nl": "de pony",
+            "fr": "la frange"
+          },
+          {
+            "nl": "de spiegel",
+            "fr": "le miroir"
+          },
+          {
+            "nl": "een beetje",
+            "fr": "un peu"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Alleen een beetje korter, alstublieft.",
+            "fr": "Juste un peu plus court, s'il vous plaît."
+          },
+          {
+            "nl": "Kort aan de zijkanten en wat langer bovenaan.",
+            "fr": "Court sur les côtés et un peu plus long dessus."
+          },
+          {
+            "nl": "Ja, zo is het perfect.",
+            "fr": "Oui, comme ça c'est parfait."
+          },
+          {
+            "nl": "Kan ik meteen een nieuwe afspraak maken?",
+            "fr": "Je peux prendre un nouveau rendez-vous tout de suite ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_gsm",
+      "theme": "quotidien",
+      "famille": "courses",
+      "label": "Changer d'abonnement téléphonique",
+      "contexte": "Ton abonnement GSM est trop cher. Tu vas dans un magasin d'opérateur pour en trouver un moins cher, avec plus de données.",
+      "role": "Tu es vendeur ou vendeuse dans un magasin d'opérateur télécom en Flandre. Demande l'usage du client (appels, internet mobile, à l'étranger), propose deux formules (prix et gigas inventés), parle de la durée d'engagement, du transfert du numéro, et essaie un peu de vendre un abonnement internet à la maison en plus.",
+      "welcome": "Dag, welkom. Kan ik u ergens mee helpen?",
+      "kit": {
+        "verbes": [
+          "veranderen",
+          "bellen",
+          "gebruiken",
+          "kosten",
+          "houden",
+          "opzeggen",
+          "krijgen"
+        ],
+        "mots": [
+          {
+            "nl": "het abonnement",
+            "fr": "l'abonnement"
+          },
+          {
+            "nl": "de gsm",
+            "fr": "le portable"
+          },
+          {
+            "nl": "de mobiele data",
+            "fr": "les données mobiles"
+          },
+          {
+            "nl": "het nummer",
+            "fr": "le numéro"
+          },
+          {
+            "nl": "per maand",
+            "fr": "par mois"
+          },
+          {
+            "nl": "goedkoper",
+            "fr": "moins cher"
+          },
+          {
+            "nl": "de opzegtermijn",
+            "fr": "le délai de résiliation"
+          },
+          {
+            "nl": "het buitenland",
+            "fr": "l'étranger"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Mijn abonnement is te duur.",
+            "fr": "Mon abonnement est trop cher."
+          },
+          {
+            "nl": "Ik gebruik veel mobiele data.",
+            "fr": "J'utilise beaucoup de données mobiles."
+          },
+          {
+            "nl": "Kan ik mijn nummer houden?",
+            "fr": "Est-ce que je peux garder mon numéro ?"
+          },
+          {
+            "nl": "Moet ik me voor een jaar vastleggen?",
+            "fr": "Dois-je m'engager pour un an ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_cafe",
+      "theme": "quotidien",
+      "famille": "sorties",
+      "label": "Au café",
+      "contexte": "Tu es au café avec un ami. Tu commandes, tu demandes ce qu'il y a à manger, puis tu paies.",
+      "role": "Tu es serveur ou serveuse dans un café flamand, sympathique et rapide. Prends la commande des boissons, propose une petite restauration (croque-monsieur, soupe du jour, spaghetti), réponds aux questions sur les bières, puis apporte l'addition et demande si on paie ensemble ou séparément, en liquide ou par carte.",
+      "welcome": "Dag! Wat mag ik jullie brengen?",
+      "kit": {
+        "verbes": [
+          "bestellen",
+          "drinken",
+          "eten",
+          "nemen",
+          "betalen",
+          "brengen",
+          "aanraden"
+        ],
+        "mots": [
+          {
+            "nl": "de ober",
+            "fr": "le serveur"
+          },
+          {
+            "nl": "de kaart",
+            "fr": "la carte"
+          },
+          {
+            "nl": "een pintje",
+            "fr": "une bière pression"
+          },
+          {
+            "nl": "een koffie",
+            "fr": "un café"
+          },
+          {
+            "nl": "de soep van de dag",
+            "fr": "la soupe du jour"
+          },
+          {
+            "nl": "de rekening",
+            "fr": "l'addition"
+          },
+          {
+            "nl": "samen",
+            "fr": "ensemble"
+          },
+          {
+            "nl": "apart",
+            "fr": "séparément"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Voor mij een koffie, alstublieft.",
+            "fr": "Pour moi un café, s'il vous plaît."
+          },
+          {
+            "nl": "Hebben jullie ook iets te eten?",
+            "fr": "Vous avez aussi quelque chose à manger ?"
+          },
+          {
+            "nl": "Mogen we de rekening, alstublieft?",
+            "fr": "Pouvons-nous avoir l'addition, s'il vous plaît ?"
+          },
+          {
+            "nl": "We betalen apart, met de kaart.",
+            "fr": "On paie séparément, par carte."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_restaurant",
+      "theme": "quotidien",
+      "famille": "sorties",
+      "label": "Au restaurant : un problème avec le plat",
+      "contexte": "Tu dînes au restaurant. Tu commandes, mais le plat qui arrive n'est pas le bon et il est froid. Tu le signales poliment.",
+      "role": "Tu es serveur ou serveuse dans un restaurant en Flandre. Prends la commande (entrée, plat, cuisson de la viande, boissons), puis quand le client signale un problème (mauvais plat, froid), excuse-toi, propose de le remplacer rapidement et offre le dessert ou le café.",
+      "welcome": "Goedenavond en welkom. Heeft u gereserveerd?",
+      "kit": {
+        "verbes": [
+          "reserveren",
+          "bestellen",
+          "kiezen",
+          "klagen",
+          "vervangen",
+          "zeggen",
+          "aanbieden"
+        ],
+        "mots": [
+          {
+            "nl": "het voorgerecht",
+            "fr": "l'entrée"
+          },
+          {
+            "nl": "het hoofdgerecht",
+            "fr": "le plat principal"
+          },
+          {
+            "nl": "het dessert",
+            "fr": "le dessert"
+          },
+          {
+            "nl": "de bediening",
+            "fr": "le service"
+          },
+          {
+            "nl": "koud",
+            "fr": "froid"
+          },
+          {
+            "nl": "doorbakken",
+            "fr": "bien cuit"
+          },
+          {
+            "nl": "saignant",
+            "fr": "saignant"
+          },
+          {
+            "nl": "het gerecht",
+            "fr": "le plat"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb gereserveerd op naam van Martin.",
+            "fr": "J'ai réservé au nom de Martin."
+          },
+          {
+            "nl": "Sorry, maar dit is niet wat ik besteld heb.",
+            "fr": "Désolé, mais ce n'est pas ce que j'ai commandé."
+          },
+          {
+            "nl": "Het eten is koud.",
+            "fr": "Le plat est froid."
+          },
+          {
+            "nl": "Geen probleem, dat kan gebeuren.",
+            "fr": "Pas de problème, ça peut arriver."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "quotidien_bioscoop",
+      "theme": "quotidien",
+      "famille": "sorties",
+      "label": "Acheter des places de cinéma",
+      "contexte": "Tu veux aller au cinéma ce soir avec deux amis. Tu achètes les places au guichet.",
+      "role": "Tu es employé(e) au guichet d'un cinéma en Flandre. Demande quel film, quelle séance (propose 19 h 30 ou 21 h 45), combien de places, si le film est en version originale avec sous-titres, propose des places côte à côte au milieu, les réductions (étudiant), le pop-corn, et annonce le prix.",
+      "welcome": "Goeienavond! Voor welke film?",
+      "kit": {
+        "verbes": [
+          "kiezen",
+          "beginnen",
+          "zitten",
+          "kosten",
+          "betalen",
+          "duren",
+          "kijken"
+        ],
+        "mots": [
+          {
+            "nl": "de bioscoop",
+            "fr": "le cinéma"
+          },
+          {
+            "nl": "de voorstelling",
+            "fr": "la séance"
+          },
+          {
+            "nl": "het ticket",
+            "fr": "le billet"
+          },
+          {
+            "nl": "de ondertitels",
+            "fr": "les sous-titres"
+          },
+          {
+            "nl": "naast elkaar",
+            "fr": "côte à côte"
+          },
+          {
+            "nl": "de korting",
+            "fr": "la réduction"
+          },
+          {
+            "nl": "de zaal",
+            "fr": "la salle"
+          },
+          {
+            "nl": "uitverkocht",
+            "fr": "complet"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Drie tickets voor de voorstelling van half acht.",
+            "fr": "Trois billets pour la séance de sept heures et demie."
+          },
+          {
+            "nl": "Is de film ondertiteld?",
+            "fr": "Le film est-il sous-titré ?"
+          },
+          {
+            "nl": "Kunnen we naast elkaar zitten?",
+            "fr": "Pouvons-nous être assis côte à côte ?"
+          },
+          {
+            "nl": "Is er korting voor studenten?",
+            "fr": "Y a-t-il une réduction pour les étudiants ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "social_feestje",
+      "theme": "quotidien",
+      "famille": "social",
+      "label": "À une soirée : faire connaissance",
+      "contexte": "Tu es invité(e) à l'anniversaire d'un collègue. Tu ne connais presque personne. Quelqu'un vient te parler.",
+      "role": "Tu es un(e) invité(e) à l'anniversaire, ami(e) d'enfance de la personne qui fête. Sociable et curieux(se) : présente-toi, demande comment l'autre connaît la personne qui fête, d'où il vient, ce qu'il fait, depuis quand il est en Belgique, ses loisirs ; parle un peu de toi, propose une boisson. Tutoiement.",
+      "welcome": "Hoi! Ik denk niet dat we elkaar al kennen. Ik ben Lotte. Hoe ken jij de jarige?",
+      "kit": {
+        "verbes": [
+          "kennen",
+          "voorstellen",
+          "werken",
+          "wonen",
+          "drinken",
+          "houden",
+          "doen"
+        ],
+        "mots": [
+          {
+            "nl": "de jarige",
+            "fr": "la personne dont c'est l'anniversaire"
+          },
+          {
+            "nl": "het feestje",
+            "fr": "la fête"
+          },
+          {
+            "nl": "de collega",
+            "fr": "le/la collègue"
+          },
+          {
+            "nl": "de hobby",
+            "fr": "le loisir"
+          },
+          {
+            "nl": "gezellig",
+            "fr": "convivial, sympa"
+          },
+          {
+            "nl": "eigenlijk",
+            "fr": "en fait"
+          },
+          {
+            "nl": "leuk",
+            "fr": "chouette, sympa"
+          },
+          {
+            "nl": "het drankje",
+            "fr": "le verre (boisson)"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik ben een collega van Tom.",
+            "fr": "Je suis un collègue de Tom."
+          },
+          {
+            "nl": "Ik woon hier nu twee jaar.",
+            "fr": "J'habite ici depuis deux ans."
+          },
+          {
+            "nl": "En wat doe jij in het leven?",
+            "fr": "Et toi, tu fais quoi dans la vie ?"
+          },
+          {
+            "nl": "Het is hier echt gezellig.",
+            "fr": "C'est vraiment sympa ici."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "social_afspreken",
+      "theme": "quotidien",
+      "famille": "social",
+      "label": "Proposer une sortie à un ami",
+      "contexte": "Tu appelles un ami flamand pour organiser une sortie ce week-end : trouver une activité, un jour et une heure qui vont à tout le monde.",
+      "role": "Tu es un(e) ami(e) flamand(e) de l'apprenant. Tu es partant(e) mais pas libre samedi après-midi (tu as le foot de ton fils) ; propose d'autres idées (un marché, une balade à vélo, un film), négocie le jour et l'heure, et le lieu de rendez-vous. Tutoiement, ton détendu.",
+      "welcome": "Hé, alles goed? Zeg het eens!",
+      "kit": {
+        "verbes": [
+          "afspreken",
+          "voorstellen",
+          "kunnen",
+          "passen",
+          "hebben",
+          "ophalen",
+          "laten"
+        ],
+        "mots": [
+          {
+            "nl": "het weekend",
+            "fr": "le week-end"
+          },
+          {
+            "nl": "zaterdag",
+            "fr": "samedi"
+          },
+          {
+            "nl": "zondag",
+            "fr": "dimanche"
+          },
+          {
+            "nl": "de fietstocht",
+            "fr": "la balade à vélo"
+          },
+          {
+            "nl": "de markt",
+            "fr": "le marché"
+          },
+          {
+            "nl": "vrij",
+            "fr": "libre"
+          },
+          {
+            "nl": "het station",
+            "fr": "la gare"
+          },
+          {
+            "nl": "tof",
+            "fr": "génial, chouette"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Heb je zin om dit weekend iets te doen?",
+            "fr": "Ça te dit de faire quelque chose ce week-end ?"
+          },
+          {
+            "nl": "Past zondag voor jou?",
+            "fr": "Dimanche, ça te va ?"
+          },
+          {
+            "nl": "Zullen we om tien uur afspreken aan het station?",
+            "fr": "On se retrouve à dix heures à la gare ?"
+          },
+          {
+            "nl": "Laat me iets weten!",
+            "fr": "Tiens-moi au courant !"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "social_sportclub",
+      "theme": "quotidien",
+      "famille": "social",
+      "label": "S'inscrire dans un club de sport",
+      "contexte": "Tu veux faire du sport en club (football, course, natation…) pour bouger et rencontrer des gens. Tu viens te renseigner.",
+      "role": "Tu es bénévole à l'accueil d'un club de sport local en Flandre. Demande quel sport, le niveau, l'âge, explique les entraînements (jours, heures), la cotisation annuelle, l'assurance, le certificat médical éventuel, propose un entraînement d'essai gratuit et parle de l'ambiance (troisième mi-temps au bar du club).",
+      "welcome": "Dag! Kom je voor informatie over de club?",
+      "kit": {
+        "verbes": [
+          "sporten",
+          "trainen",
+          "inschrijven",
+          "proberen",
+          "betalen",
+          "lopen",
+          "zwemmen"
+        ],
+        "mots": [
+          {
+            "nl": "de club",
+            "fr": "le club"
+          },
+          {
+            "nl": "de training",
+            "fr": "l'entraînement"
+          },
+          {
+            "nl": "het lidgeld",
+            "fr": "la cotisation"
+          },
+          {
+            "nl": "het lid",
+            "fr": "le membre"
+          },
+          {
+            "nl": "de proefles",
+            "fr": "la séance d'essai"
+          },
+          {
+            "nl": "de beginner",
+            "fr": "le débutant"
+          },
+          {
+            "nl": "de verzekering",
+            "fr": "l'assurance"
+          },
+          {
+            "nl": "de sfeer",
+            "fr": "l'ambiance"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil graag lid worden.",
+            "fr": "Je voudrais devenir membre."
+          },
+          {
+            "nl": "Ik ben een beginner.",
+            "fr": "Je suis débutant."
+          },
+          {
+            "nl": "Wanneer zijn de trainingen?",
+            "fr": "Quand ont lieu les entraînements ?"
+          },
+          {
+            "nl": "Mag ik eerst een keer proberen?",
+            "fr": "Je peux d'abord essayer une fois ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "social_familie",
+      "theme": "quotidien",
+      "famille": "social",
+      "label": "Parler de sa famille",
+      "contexte": "À la pause, une collègue sympathique te pose des questions sur ta famille : frères et sœurs, parents, où ils habitent.",
+      "role": "Tu es une collègue curieuse et chaleureuse, à la pause café. Pose des questions sur la famille de l'apprenant (frères et sœurs, parents, enfants éventuels, où ils vivent, s'il les voit souvent), parle aussi de ta propre famille (deux enfants, des parents à la côte belge). Tutoiement. Ne force jamais sur des sujets intimes.",
+      "welcome": "Zeg, ik weet eigenlijk bijna niets over jou! Heb je een grote familie?",
+      "kit": {
+        "verbes": [
+          "hebben",
+          "wonen",
+          "zien",
+          "missen",
+          "bezoeken",
+          "bellen",
+          "trouwen"
+        ],
+        "mots": [
+          {
+            "nl": "de familie",
+            "fr": "la famille"
+          },
+          {
+            "nl": "de broer",
+            "fr": "le frère"
+          },
+          {
+            "nl": "de zus",
+            "fr": "la sœur"
+          },
+          {
+            "nl": "de ouders",
+            "fr": "les parents"
+          },
+          {
+            "nl": "het kind",
+            "fr": "l'enfant"
+          },
+          {
+            "nl": "de neef",
+            "fr": "le cousin, le neveu"
+          },
+          {
+            "nl": "de nicht",
+            "fr": "la cousine, la nièce"
+          },
+          {
+            "nl": "enig kind",
+            "fr": "enfant unique"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb een broer en twee zussen.",
+            "fr": "J'ai un frère et deux sœurs."
+          },
+          {
+            "nl": "Mijn ouders wonen in Frankrijk.",
+            "fr": "Mes parents habitent en France."
+          },
+          {
+            "nl": "Ik zie ze niet zo vaak.",
+            "fr": "Je ne les vois pas très souvent."
+          },
+          {
+            "nl": "En jij, heb je kinderen?",
+            "fr": "Et toi, tu as des enfants ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "social_uitnodiging",
+      "theme": "quotidien",
+      "famille": "social",
+      "label": "Invité à dîner chez des amis",
+      "contexte": "Des amis flamands t'ont invité à dîner chez eux. Tu arrives, tu offres ce que tu as apporté et tu passes la soirée à table avec eux.",
+      "role": "Tu es l'hôte ou l'hôtesse, flamand(e), qui reçoit l'apprenant à dîner. Accueille-le, remercie pour le cadeau, propose un apéritif, fais la conversation à table (le repas, les vacances, le travail), propose de se resservir, et à la fin le café ; demande s'il a aimé. Tutoiement, ton chaleureux.",
+      "welcome": "Hé, welkom! Kom binnen, geef me je jas maar.",
+      "kit": {
+        "verbes": [
+          "uitnodigen",
+          "meebrengen",
+          "smaken",
+          "nemen",
+          "bedanken",
+          "koken",
+          "proeven"
+        ],
+        "mots": [
+          {
+            "nl": "de uitnodiging",
+            "fr": "l'invitation"
+          },
+          {
+            "nl": "het aperitief",
+            "fr": "l'apéritif"
+          },
+          {
+            "nl": "de fles wijn",
+            "fr": "la bouteille de vin"
+          },
+          {
+            "nl": "de bloemen",
+            "fr": "les fleurs"
+          },
+          {
+            "nl": "lekker",
+            "fr": "bon, délicieux"
+          },
+          {
+            "nl": "het recept",
+            "fr": "la recette"
+          },
+          {
+            "nl": "nog wat",
+            "fr": "encore un peu"
+          },
+          {
+            "nl": "gezellig",
+            "fr": "convivial"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Bedankt voor de uitnodiging!",
+            "fr": "Merci pour l'invitation !"
+          },
+          {
+            "nl": "Ik heb een fles wijn meegebracht.",
+            "fr": "J'ai apporté une bouteille de vin."
+          },
+          {
+            "nl": "Het smaakt heel lekker.",
+            "fr": "C'est vraiment délicieux."
+          },
+          {
+            "nl": "Nee, dank je, ik heb genoeg gegeten.",
+            "fr": "Non merci, j'ai assez mangé."
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "tel_onthaal",
+      "theme": "quotidien",
+      "famille": "telephone",
+      "label": "Appeler le standard d'une entreprise",
+      "contexte": "Tu appelles une entreprise pour parler à une personne précise du service clients. Le standard te pose des questions et te transfère.",
+      "role": "Tu es réceptionniste au standard d'une entreprise belge (nom inventé : Delmaro). Demande le nom de l'appelant, la personne ou le service voulu, la raison de l'appel ; la personne est en réunion : propose de laisser un message, de rappeler plus tard ou de parler à un collègue ; note le numéro et épelle-le pour vérifier.",
+      "welcome": "Delmaro, goeiedag, u spreekt met Ilse. Waarmee kan ik u helpen?",
+      "kit": {
+        "verbes": [
+          "doorverbinden",
+          "terugbellen",
+          "spreken",
+          "noteren",
+          "spellen",
+          "achterlaten",
+          "wachten"
+        ],
+        "mots": [
+          {
+            "nl": "het onthaal",
+            "fr": "l'accueil, le standard"
+          },
+          {
+            "nl": "de dienst",
+            "fr": "le service"
+          },
+          {
+            "nl": "de vergadering",
+            "fr": "la réunion"
+          },
+          {
+            "nl": "het bericht",
+            "fr": "le message"
+          },
+          {
+            "nl": "het telefoonnummer",
+            "fr": "le numéro de téléphone"
+          },
+          {
+            "nl": "even",
+            "fr": "un instant"
+          },
+          {
+            "nl": "bereikbaar",
+            "fr": "joignable"
+          },
+          {
+            "nl": "de klantendienst",
+            "fr": "le service clients"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Kan ik mevrouw Peeters spreken, alstublieft?",
+            "fr": "Puis-je parler à madame Peeters, s'il vous plaît ?"
+          },
+          {
+            "nl": "Kunt u mij doorverbinden met de klantendienst?",
+            "fr": "Pouvez-vous me passer le service clients ?"
+          },
+          {
+            "nl": "Kan ze mij terugbellen?",
+            "fr": "Peut-elle me rappeler ?"
+          },
+          {
+            "nl": "Mijn nummer is nul vier, zeventig…",
+            "fr": "Mon numéro est zéro quatre, septante…"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "tel_klacht",
+      "theme": "quotidien",
+      "famille": "telephone",
+      "label": "Réclamation : colis jamais livré",
+      "contexte": "Tu as commandé un article en ligne il y a deux semaines. Le site dit qu'il est livré, mais tu n'as rien reçu. Tu appelles le service clients.",
+      "role": "Tu es agent(e) du service clients d'une boutique en ligne belge (nom inventé : Transvio Shop). Demande le numéro de commande, le nom, l'adresse ; vérifie : le transporteur dit l'avoir déposé chez un voisin ou dans un point relais ; propose de vérifier, d'ouvrir une enquête (48 heures) puis un renvoi ou un remboursement. Reste poli même si le client s'impatiente.",
+      "welcome": "Klantendienst Transvio Shop, goeiedag. Mag ik uw bestelnummer, alstublieft?",
+      "kit": {
+        "verbes": [
+          "bestellen",
+          "ontvangen",
+          "leveren",
+          "nakijken",
+          "terugbetalen",
+          "opsturen",
+          "klagen"
+        ],
+        "mots": [
+          {
+            "nl": "de bestelling",
+            "fr": "la commande"
+          },
+          {
+            "nl": "het bestelnummer",
+            "fr": "le numéro de commande"
+          },
+          {
+            "nl": "de levering",
+            "fr": "la livraison"
+          },
+          {
+            "nl": "het afhaalpunt",
+            "fr": "le point relais"
+          },
+          {
+            "nl": "de terugbetaling",
+            "fr": "le remboursement"
+          },
+          {
+            "nl": "de klacht",
+            "fr": "la réclamation"
+          },
+          {
+            "nl": "het onderzoek",
+            "fr": "l'enquête"
+          },
+          {
+            "nl": "nog steeds",
+            "fr": "toujours (encore)"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb mijn bestelling nooit ontvangen.",
+            "fr": "Je n'ai jamais reçu ma commande."
+          },
+          {
+            "nl": "Op de website staat dat het geleverd is.",
+            "fr": "Sur le site, il est écrit que c'est livré."
+          },
+          {
+            "nl": "Ik wil graag mijn geld terug.",
+            "fr": "Je voudrais être remboursé."
+          },
+          {
+            "nl": "Wanneer hoor ik iets van u?",
+            "fr": "Quand aurai-je de vos nouvelles ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "tel_afspraak",
+      "theme": "quotidien",
+      "famille": "telephone",
+      "label": "Prendre un rendez-vous par téléphone",
+      "contexte": "Tu appelles un cabinet (kinésithérapeute) pour prendre un premier rendez-vous. Il faut trouver un créneau compatible avec ton travail.",
+      "role": "Tu es secrétaire d'un cabinet de kinésithérapie en Flandre. Demande le nom, le motif, s'il y a une prescription du médecin, les disponibilités ; propose des créneaux qui ne vont pas au début (en journée), puis trouve un créneau en fin de journée ; confirme la date, l'heure et l'adresse, rappelle d'apporter la prescription.",
+      "welcome": "Praktijk kinesitherapie, goeiedag. Wat kan ik voor u doen?",
+      "kit": {
+        "verbes": [
+          "afspreken",
+          "passen",
+          "werken",
+          "voorstellen",
+          "bevestigen",
+          "meebrengen",
+          "verplaatsen"
+        ],
+        "mots": [
+          {
+            "nl": "de kinesist",
+            "fr": "le kinésithérapeute"
+          },
+          {
+            "nl": "het voorschrift",
+            "fr": "la prescription"
+          },
+          {
+            "nl": "de afspraak",
+            "fr": "le rendez-vous"
+          },
+          {
+            "nl": "beschikbaar",
+            "fr": "disponible"
+          },
+          {
+            "nl": "na de werkuren",
+            "fr": "après les heures de travail"
+          },
+          {
+            "nl": "volgende week",
+            "fr": "la semaine prochaine"
+          },
+          {
+            "nl": "het adres",
+            "fr": "l'adresse"
+          },
+          {
+            "nl": "de rug",
+            "fr": "le dos"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik wil graag een afspraak maken.",
+            "fr": "Je voudrais prendre un rendez-vous."
+          },
+          {
+            "nl": "Overdag werk ik, kan het na vijf uur?",
+            "fr": "En journée je travaille, est-ce possible après cinq heures ?"
+          },
+          {
+            "nl": "Ik heb een voorschrift van mijn dokter.",
+            "fr": "J'ai une prescription de mon médecin."
+          },
+          {
+            "nl": "Dus dinsdag om half zes, klopt dat?",
+            "fr": "Donc mardi à cinq heures et demie, c'est bien ça ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
+    },
+    {
+      "id": "transport_bus",
+      "theme": "quotidien",
+      "famille": "transport",
+      "label": "Dans le bus : demander son chemin",
+      "contexte": "Tu dois aller à un rendez-vous dans un quartier que tu ne connais pas. Tu montes dans le bus et tu demandes au chauffeur, puis à une passagère.",
+      "role": "Tu joues le chauffeur de bus (De Lijn) puis une passagère serviable. Le chauffeur : vérifie le ticket ou l'application, dit si le bus passe par l'arrêt demandé et lequel est le plus proche. La passagère : explique à quel arrêt descendre, combien d'arrêts, puis le chemin à pied (tourner à gauche, tout droit, après le feu).",
+      "welcome": "Goeiedag. Waar moet u naartoe?",
+      "kit": {
+        "verbes": [
+          "uitstappen",
+          "instappen",
+          "nemen",
+          "stoppen",
+          "draaien",
+          "wandelen",
+          "vinden"
+        ],
+        "mots": [
+          {
+            "nl": "de bus",
+            "fr": "le bus"
+          },
+          {
+            "nl": "de halte",
+            "fr": "l'arrêt"
+          },
+          {
+            "nl": "het ticket",
+            "fr": "le ticket"
+          },
+          {
+            "nl": "de chauffeur",
+            "fr": "le chauffeur"
+          },
+          {
+            "nl": "links",
+            "fr": "à gauche"
+          },
+          {
+            "nl": "rechts",
+            "fr": "à droite"
+          },
+          {
+            "nl": "rechtdoor",
+            "fr": "tout droit"
+          },
+          {
+            "nl": "het verkeerslicht",
+            "fr": "le feu"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Stopt deze bus aan het ziekenhuis?",
+            "fr": "Ce bus s'arrête-t-il à l'hôpital ?"
+          },
+          {
+            "nl": "Bij welke halte moet ik uitstappen?",
+            "fr": "À quel arrêt dois-je descendre ?"
+          },
+          {
+            "nl": "Is het ver te voet?",
+            "fr": "C'est loin à pied ?"
+          },
+          {
+            "nl": "Kunt u mij verwittigen als we er zijn?",
+            "fr": "Pouvez-vous me prévenir quand on y est ?"
+          }
+        ]
+      },
+      "_source": "redige_claude"
     }
   ]
 }

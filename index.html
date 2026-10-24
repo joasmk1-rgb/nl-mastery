@@ -156,12 +156,10 @@
 
         <div class="talk-entry" onclick="showTalk()">
             <span class="talk-entry-avatars">👩🏼👨🏽</span>
-            <div><b>💬 Discuter</b><br><small>Parle de tout et de rien avec Svetlana ou John, à l'oral, sans pression. Ils t'aident quand tu bloques.</small></div>
+            <div><b>💬 Discuter</b><br><small>De tout et de rien, ou une situation de la vie courante (commune, médecin, logement, soirée…) avec Svetlana ou John. Ils t'aident quand tu bloques.</small></div>
         </div>
         <div class="hub-grid single">
-            <div class="hub-card accent" onclick="showRoleplay('entretiens')"><span class="hub-card-icon">💼</span><div class="hub-card-title">Entretiens</div><div class="hub-card-desc">Passer un entretien, le mener comme recruteur, ou résoudre une étude de cas.</div></div>
-            <div class="hub-card accent" onclick="showRoleplay('travail')"><span class="hub-card-icon">🏭</span><div class="hub-card-title">Au travail</div><div class="hub-card-desc">Choisis ton métier : une situation, ou une journée complète avec bilan.</div></div>
-            <div class="hub-card accent" onclick="showRoleplay('quotidien')"><span class="hub-card-icon">☕</span><div class="hub-card-title">Vie courante</div><div class="hub-card-desc">Administration, téléphone, café, petites courses.</div></div>
+            <div class="hub-card accent" onclick="showRoleplay('travail')"><span class="hub-card-icon">💼</span><div class="hub-card-title">Mon travail</div><div class="hub-card-desc">Entretiens d'embauche et mises en situation dans ton métier.</div></div>
         </div>
 
         <details class="profil-section">
@@ -401,31 +399,26 @@
 
         <!-- Étape 1 : choix de la catégorie -->
         <div id="rp-step-category">
-            <div data-rp-group="entretiens" class="rp-group">
-                <div class="rp-group-title">💼 Entretiens</div>
+            <!-- « Mon travail » : entretiens + métier. La vie courante se joue dans Discuter. -->
+            <div data-rp-group="travail" class="rp-group">
+                <div class="rp-group-title">💼 Mon travail</div>
+                <div class="rp-category-grid" style="margin-top:0; grid-template-columns:1fr;">
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowJobHome()"><span class="rp-icon">🏭</span><span id="rp-metier-label">Au travail</span><div class="cat-sub">Situations, journées complètes et fiches réflexes de ton métier</div></div>
+                </div>
+                <div class="rp-group-title">🎯 Entretiens</div>
                 <div class="rp-category-grid" style="margin-top:0;">
-                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowReplayList()"><span class="rp-icon">🎬</span>Rejouer un vrai entretien<div class="cat-sub">Les vraies questions, mot pour mot et à leur vitesse ; tu réponds ce que tu veux</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowRealCandidateList()"><span class="rp-icon">🎯</span>Je suis candidat<div class="cat-sub">De vraies questions d'entretien, le recruteur improvise</div></div>
-                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🇫🇷</span>Traduction guidée<div class="cat-sub">On te donne la phrase en français, tu la dis en néerlandais (tu joues le recruteur)</div></div>
+                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowReplayList()"><span class="rp-icon">🎬</span>Rejouer un vrai entretien<div class="cat-sub">Les vraies questions, mot pour mot ; le recruteur réagit</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowCaseHome()"><span class="rp-icon">📊</span>Étude de cas<div class="cat-sub">Un petit problème d'entreprise à résoudre et à défendre</div></div>
-                    <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens types<div class="cat-sub">Présélection, technique, final</div></div>
                     <div class="rp-cat-btn rp-cat-real" onclick="rpShowLibrary('emploi')"><span class="rp-icon">💼</span>Recherche d'emploi<div class="cat-sub">Agence d'intérim, relance, salaire, contrat, premier jour…</div></div>
                 </div>
-            </div>
-            <div data-rp-group="travail" class="rp-group">
-                <div class="rp-group-title">🏭 Au travail</div>
-                <div class="rp-category-grid" style="margin-top:0; grid-template-columns:1fr;">
-                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowJobHome()"><span class="rp-icon">🏭</span>Une journée au travail<div class="cat-sub">Choisis ton métier : une situation ou une journée complète</div></div>
-                </div>
-            </div>
-            <div data-rp-group="quotidien" class="rp-group">
-                <div class="rp-group-title">☕ Vie courante</div>
-                <div class="rp-category-grid" style="margin-top:0;">
-                    <div class="rp-cat-btn rp-cat-real" onclick="rpShowLibrary('quotidien')"><span class="rp-icon">🇧🇪</span>Situations du quotidien<div class="cat-sub">Commune, médecin, banque, garage, voisins… avec kit de préparation</div></div>
-                    <div class="rp-cat-btn" onclick="rpShowCategory('admin')"><span class="rp-icon">🏛️</span>Administration belge</div>
-                    <div class="rp-cat-btn" onclick="rpShowCategory('appels')"><span class="rp-icon">☎️</span>Appels téléphoniques</div>
-                    <div class="rp-cat-btn" onclick="rpShowCategory('quotidien')"><span class="rp-icon">☕</span>Vie quotidienne</div>
-                </div>
+                <details class="rp-more">
+                    <summary>Plus d'entraînements d'entretien</summary>
+                    <div class="rp-category-grid">
+                        <div class="rp-cat-btn rp-cat-real" onclick="rpShowInterviewerList()"><span class="rp-icon">🇫🇷</span>Traduction guidée<div class="cat-sub">On te donne la phrase en français, tu la dis en néerlandais (tu joues le recruteur)</div></div>
+                        <div class="rp-cat-btn" onclick="rpShowCategory('entretiens')"><span class="rp-icon">🧑‍💼</span>Entretiens types<div class="cat-sub">Présélection, technique, final</div></div>
+                    </div>
+                </details>
             </div>
         </div>
         <!-- Étape 2 : choix du scénario précis dans la catégorie -->
@@ -495,7 +488,7 @@
     </div>
 
     <div id="replay-view" class="view">
-        <button class="back-btn" onclick="rpReplayStop(); showRoleplay('entretiens')">← Entretiens</button>
+        <button class="back-btn" onclick="rpReplayStop(); showRoleplay('travail')">← Mon travail</button>
         <div id="replay-content" class="content-col"></div>
     </div>
 

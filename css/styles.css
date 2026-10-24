@@ -774,3 +774,19 @@
         .tutor-said { margin-top: 4px; }
         .lc-card.lc-off { background: color-mix(in srgb, #f97316 18%, transparent); }
         .lc-offq { font-size: 0.84rem; margin-bottom: 4px; }
+
+        /* Discuter : de tout et de rien / une situation */
+        .talk-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin: 10px 0 6px; }
+        .talk-mode { padding: 12px 8px; border-radius: var(--radius-lg); border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+        .talk-mode.active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--card-bg)); }
+        .talk-family { width: 100%; margin-top: 8px; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 6px 10px; box-sizing: border-box; }
+        .talk-family summary { cursor: pointer; font-weight: 700; padding: 4px 0; }
+        .talk-family small { color: var(--text-secondary); font-weight: 400; }
+        .talk-settings { width: 100%; margin-top: 14px; font-size: 0.88rem; }
+        .talk-settings summary { cursor: pointer; color: var(--text-secondary); }
+        .talk-sit-card { text-align: left; font-size: 0.86rem; line-height: 1.4; }
+        .talk-sit-card details { margin-top: 6px; }
+        .talk-sit-ph { margin: 4px 0; }
+        .talk-sit-word { white-space: nowrap; }
+        .rp-more { width: 100%; margin-top: 10px; }
+        .rp-more summary { cursor: pointer; color: var(--text-secondary); font-size: 0.88rem; }

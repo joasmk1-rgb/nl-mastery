@@ -8583,10 +8583,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             speakNL(text);
         }
 
-        // `group` : 'entretiens' | 'travail' | 'quotidien' — les trois entrées de la page Pratiquer.
-        // Sans groupe (appels plus anciens), les trois groupes sont affichés.
+        // Pratiquer n'a plus que deux entrées : Discuter (dont la vie courante) et « Mon travail »
+        // (groupe 'travail' : entretiens + métier). Les anciens groupes 'entretiens' et
+        // 'quotidien' sont redirigés.
         let rpCurrentGroup = null;
         function showRoleplay(group) {
+            if (group === 'quotidien') { showTalk(); return; }
+            if (group === 'entretiens') group = 'travail';
+            const lbl = document.getElementById('rp-metier-label');
+            const m = state.settings && state.settings.jobMetier;
+            if (lbl) lbl.innerText = m && RP_JOB_METIERS[m] ? 'Au travail · ' + RP_JOB_METIERS[m].replace(/^\S+\s/, '') : 'Au travail : choisis ton métier';
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('roleplay-view').classList.add('active');
             setActiveNav('nav-pratiquer');
@@ -8596,16 +8602,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpCheckDutchVoice();
 
             rpShowCategoryPicker();
-            // "Au travail" n'a qu'une entrée : on l'ouvre directement plutôt que d'afficher un
-            // écran avec une seule carte à cliquer.
-            if (rpCurrentGroup === 'travail') rpShowJobHome();
         }
 
         // Bouton retour de la liste de scénarios : revient au choix de catégorie du groupe, ou à
         // Pratiquer quand le groupe n'a qu'une entrée (sinon on retomberait sur une carte unique).
         function rpBackFromScenarioList() {
-            if (rpCurrentCategory && rpCurrentCategory.startsWith('__lib:') && rpCurrentGroup === 'travail') rpShowJobHome();
-            else if (rpCurrentGroup === 'travail') showPratiquer(); else rpShowCategoryPicker();
+            if (rpCurrentCategory === '__lib:travail') rpShowJobHome();
+            else rpShowCategoryPicker();
         }
 
         function rpShowCategoryPicker() {
@@ -9712,6 +9715,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpStartLib(id) {
             const e = rpLibFind(id);
             if (!e) return;
+            if (e.theme === 'quotidien') { talkOpenSituation(id); return; }
             if (!GeminiService.getKey()) { alert("La conversation a besoin de ta clé Gemini (Profil → 🤖 Intelligence IA). Tu peux déjà préparer les mots avec 📚."); return; }
             rpDayState = null;
             rpBeginScenario({ id: 'lib_' + e.id, lang: 'nl', label: e.label, welcome: e.welcome, prompt: rpBuildLibPrompt(e) });
@@ -9910,7 +9914,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             else if (l.type === 'sit') { await rpShowJobHome(); rpStartSituation(l.id); }
             else if (l.type === 'day') { await rpShowJobHome(); rpStartDay(l.index); }
             else if (l.type === 'mod') { modRpPlay(l.id, l.etape || 'final'); }
-            else if (l.type === 'lib') { const e = rpLibFind(l.id); if (e) { await rpShowLibrary(e.theme); rpStartLib(l.id); } }
+            else if (l.type === 'lib') { const e = rpLibFind(l.id); if (e && e.theme === 'quotidien') talkOpenSituation(l.id); else if (e) { await rpShowLibrary(e.theme); rpStartLib(l.id); } }
         }
 
         // =====================================================================================
@@ -10546,7 +10550,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const data = await rpLoadJobData();
             const metiers = [...new Set(data.situations.map(s => s.metier).filter(Boolean))];
             if (!metiers.length) { listDiv.innerHTML = '<p style="color:#888;">Aucune situation pour l\'instant.</p>'; return; }
-            if (!metiers.includes(rpJobMetier)) rpJobMetier = metiers[0];
+            const saved = state.settings && state.settings.jobMetier;
+            if (!metiers.includes(rpJobMetier)) rpJobMetier = metiers.includes(saved) ? saved : metiers[0];
             const bank = data.situations.filter(s => s.metier === rpJobMetier);
             const size = RP_JOB_DURATIONS[rpJobDuration];
             const isShort = j => (j.duree_situations || (j.sequence || []).length) <= 7;
@@ -10565,11 +10570,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             ).join('');
 
             listDiv.innerHTML = `
-                <div class="rp-group-title">🏭 Mise en situation métier</div>
-                <p class="rp-real-hint">Tu es en poste : clients, collègues et utilisateurs viennent vers toi, à toi de gérer. Choisis ton métier.</p>
-                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
-                    ${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}
-                </div>
+                <div class="rp-group-title">${RP_JOB_METIERS[rpJobMetier] || rpEscapeHtml(rpJobMetier)}</div>
+                <p class="rp-real-hint">Tu es en poste : clients, collègues et utilisateurs viennent vers toi, à toi de gérer.</p>
+                <details class="rp-more" style="width:100%; max-width:520px;"><summary>Changer de métier</summary>
+                    <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
+                </details>
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -10588,7 +10593,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <button class="rp-scenario-btn" onclick="rpShowPlaybooks()">📋 Voir toutes les fiches réflexes</button>` : ''}`;
         }
 
-        function rpJobSetMetier(m) { rpJobMetier = m; rpShowJobHome(); }
+        function rpJobSetMetier(m) { rpJobMetier = m; if (!state.settings) state.settings = {}; state.settings.jobMetier = m; save(); rpShowJobHome(); }
         function rpJobSetDuration(d) { rpJobDuration = d; rpShowJobHome(); }
 
         function rpJobRequireGemini() {
@@ -12450,8 +12455,10 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
         }
 
         // ===== Discuter (conversation libre, inspirée des apps de type « partenaire IA ») =====
-        // Deux partenaires, Svetlana et John, qui changent de casquette (ami, collègue,
-        // recruteur…). Pensé pour la fluidité : UN seul appel Gemini par tour renvoie la réplique,
+        // Deux partenaires, Svetlana et John. Deux façons de parler : « de tout et de rien » (en
+        // ami, sur un sujet) ou « une situation » de la vie courante (pharmacie, logement, soirée… :
+        // les situations « quotidien » de situations_library.json, rangées par famille), où le
+        // partenaire joue le rôle décrit. Pensé pour la fluidité : UN seul appel Gemini par tour renvoie la réplique,
         // la correction douce de la dernière phrase de l'apprenant et 3 suggestions de réponse
         // (exception assumée à la séparation des prompts : ici, pas d'examen ni de note).
         // Micro mains libres (longListen), mots touchables, mémoire des conversations par
@@ -12462,13 +12469,9 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             john: { name: 'John', emoji: '👨🏽', speaker: 1, desc: 'Détendu et blagueur : il donne son avis sur tout et aime les bons plans.',
                 base: "Tu es John, un homme d'une quarantaine d'années, détendu, avec de l'humour ; tu aimes le sport, la musique et les bons plans, et tu donnes volontiers ton avis." }
         };
-        const TALK_HATS = {
-            ami: { label: '😊 En ami', prompt: "en ami(e) de l'apprenant : conversation détendue, tutoiement (jij)" },
-            collegue: { label: '☕ Collègue', prompt: "en collègue de bureau, à la pause café : ton amical, tutoiement (jij)" },
-            recruteur: { label: '🎯 Recruteur', prompt: "en recruteur qui fait passer un entretien détendu à l'apprenant : vouvoiement (u)" },
-            commercant: { label: '🛒 Commerçant', prompt: "en commerçant ou serveur ; l'apprenant est ton client : vouvoiement (u)" },
-            voisin: { label: '🏠 Voisin', prompt: "en voisin(e) de l'apprenant, croisé(e) devant l'immeuble : tutoiement (jij)" }
-        };
+        const TALK_FAMILIES_FALLBACK = { demarches: '🏛️ Démarches', logement: '🏠 Logement', sante: '🩺 Santé et urgences', courses: '🛒 Courses et services', sorties: '🍽️ Sorties', social: '🤝 Vie sociale', telephone: '☎️ Au téléphone', transport: '🚆 Transports' };
+        function talkFamilies() { return (rpLibData && rpLibData.familles) || TALK_FAMILIES_FALLBACK; }
+        function talkSituations() { return rpLibAll().filter(e => e.theme === 'quotidien'); }
         const TALK_TOPICS = {
             libre: '🗨️ Libre', weekend: '🌤️ Mon week-end', travail: '💼 Le travail', voyages: '✈️ Les voyages',
             cuisine: '🍝 La cuisine', series: '🎬 Films et séries', sport: '⚽ Le sport', projets: '🚀 Mes projets'
@@ -12483,7 +12486,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const lvl = ['A1', 'A2', 'B1', 'B2'];
             state.settings.talk = {
                 partner: TALK_PARTNERS[s.partner] ? s.partner : 'svetlana',
-                hat: TALK_HATS[s.hat] || s.hat === 'surprise' ? s.hat : 'ami',
+                mode: s.mode === 'situation' ? 'situation' : 'libre',
                 topic: TALK_TOPICS[s.topic] || s.topic === 'surprise' ? s.topic : 'libre',
                 level: lvl.includes(s.level) ? s.level : (curriculumLoaded && lvl.includes(getCurriculumLevel().level) ? getCurriculumLevel().level : 'A1'),
                 handsfree: s.handsfree !== false
@@ -12514,12 +12517,25 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             return `<svg class="talk-ring" width="${size}" height="${size}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="${r}" class="talk-ring-bg"/><circle cx="20" cy="20" r="${r}" class="talk-ring-fg" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct)}"/><text x="20" y="24" text-anchor="middle">${Math.min(talkTodayCount(), 99)}</text></svg>`;
         }
 
-        function showTalk() {
+        async function showTalk() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('talk-view').classList.add('active');
             setActiveNav('nav-pratiquer');
             if (talk && !talk.ended) { talkRenderChat(); return; }
+            await rpLoadLibrary();
             talkRenderSetup();
+        }
+
+        // Situation de la vie courante, ouverte depuis Discuter, le kit 📚 ou le compagnon.
+        async function talkOpenSituation(id) {
+            await rpLoadLibrary();
+            const e = rpLibFind(id);
+            if (!e) return showTalk();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('talk-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            if (!GeminiService.isAvailable()) { talkRenderSetup(); return; }
+            talkStart(e.id);
         }
 
         function talkRenderSetup() {
@@ -12534,25 +12550,47 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                         <span class="talk-avatar">${p.emoji}</span><b>${p.name}</b><small>${p.desc}</small>
                         ${talkState().memory[k] ? '<small class="talk-remember">💭 se souvient de vous</small>' : ''}
                     </button>`).join('')}</div>
-                <div class="conj-audio-label">Sa casquette</div>
-                <div class="conj-audio-chips">${Object.entries(TALK_HATS).map(([k, h]) => chip(s.hat === k, `talkSet('hat','${k}')`, h.label)).join('')}${chip(s.hat === 'surprise', "talkSet('hat','surprise')", '🎲 Surprise')}</div>
-                <div class="conj-audio-label">De quoi parler</div>
+                <div class="talk-modes">
+                    <button type="button" class="talk-mode${s.mode === 'libre' ? ' active' : ''}" onclick="talkSet('mode','libre')">🗨️ De tout et de rien</button>
+                    <button type="button" class="talk-mode${s.mode === 'situation' ? ' active' : ''}" onclick="talkSet('mode','situation')">🎭 Une situation</button>
+                </div>
+                ${s.mode === 'libre' ? `
                 <div class="conj-audio-chips">${Object.entries(TALK_TOPICS).map(([k, t]) => chip(s.topic === k, `talkSet('topic','${k}')`, t)).join('')}${chip(s.topic === 'surprise', "talkSet('topic','surprise')", '🎲 Surprends-moi')}</div>
-                <div class="conj-audio-label">Ton niveau</div>
-                <div class="conj-audio-chips">${['A1', 'A2', 'B1', 'B2'].map(l => chip(s.level === l, `talkSet('level','${l}')`, l)).join('')}</div>
-                <div class="conj-audio-chips" style="margin-top:8px;">${chip(s.handsfree, "talkSet('handsfree',true)", '🗣️ Mains libres')}${chip(!s.handsfree, "talkSet('handsfree',false)", '👆 Je touche le micro')}</div>
-                <button class="btn btn-green talk-start" onclick="talkStart()" ${GeminiService.isAvailable() ? '' : 'disabled'}>💬 Parler avec ${TALK_PARTNERS[s.partner].name}</button>`;
+                <button class="btn btn-green talk-start" onclick="talkStart()" ${GeminiService.isAvailable() ? '' : 'disabled'}>💬 Parler avec ${TALK_PARTNERS[s.partner].name}</button>` : talkSituationListHtml()}
+                <details class="talk-settings"><summary>⚙️ Réglages</summary>
+                    <div class="conj-audio-label">Ton niveau</div>
+                    <div class="conj-audio-chips">${['A1', 'A2', 'B1', 'B2'].map(l => chip(s.level === l, `talkSet('level','${l}')`, l)).join('')}</div>
+                    <div class="conj-audio-chips" style="margin-top:8px;">${chip(s.handsfree, "talkSet('handsfree',true)", '🗣️ Mains libres')}${chip(!s.handsfree, "talkSet('handsfree',false)", '👆 Je touche le micro')}</div>
+                </details>`;
+        }
+
+        // Les situations par famille ; 📚 prépare les mots, 👂 fait écouter une scène.
+        function talkSituationListHtml() {
+            const all = talkSituations();
+            const fams = talkFamilies();
+            const p = TALK_PARTNERS[talkSettings().partner];
+            const row = e => rpPrepRow(`<button class="rp-scenario-btn" onclick="talkStart('${e.id}')" ${GeminiService.isAvailable() ? '' : 'disabled'}>${rpEscapeHtml(e.label)}${e.generated ? ' <span class="wl-badge unseen">🎲</span>' : ''}</button>`, 'lib:' + e.id, e.label, { type: 'lib', id: e.id });
+            const keys = Object.keys(fams).concat([...new Set(all.map(e => e.famille || 'autres'))].filter(k => !fams[k]));
+            return `<p class="rp-real-hint">${p.name} joue le rôle (pharmacien, propriétaire, voisine…) et t'aide comme d'habitude : suggestions, corrections, et ton tuteur à la fin.</p>
+                <button class="btn btn-green talk-start" style="margin-top:4px;" onclick="talkStart('__random')" ${GeminiService.isAvailable() ? '' : 'disabled'}>🎲 Une situation au hasard</button>
+                ${keys.map(k => { const list = all.filter(e => (e.famille || 'autres') === k); return list.length ? `<details class="talk-family"><summary>${rpEscapeHtml(fams[k] || '✨ Autres')} <small>(${list.length})</small></summary>${list.map(row).join('')}</details>` : ''; }).join('')}`;
         }
 
         function talkActive() { return !!(talk && !talk.ended && document.getElementById('talk-view').classList.contains('active')); }
 
-        function talkStart() {
+        // sitId : id d'une situation de la vie courante, '__random' pour en tirer une, sinon conversation libre.
+        function talkStart(sitId) {
             const s = talkSettings();
             const pick = o => { const k = Object.keys(o); return k[Math.floor(Math.random() * k.length)]; };
-            const hat = s.hat === 'surprise' ? pick(TALK_HATS) : s.hat;
+            let sit = null;
+            if (sitId === '__random') { const all = talkSituations(); sit = all[Math.floor(Math.random() * all.length)] || null; }
+            else if (sitId) sit = rpLibFind(sitId);
             const topic = s.topic === 'surprise' ? pick(TALK_TOPICS) : s.topic;
-            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], hat, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0 };
+            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0 };
             talkRenderChat();
+            if (sit) talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>🎭 ${rpEscapeHtml(sit.label)}</b><div>${rpEscapeHtml(sit.contexte)}</div>
+                ${(sit.kit && sit.kit.phrases || []).length ? `<details><summary>💬 Phrases utiles</summary>${sit.kit.phrases.map(x => `<div class="talk-sit-ph">${rpEscapeHtml(x.nl)} ${speakBtnHtml(x.nl)}<br><small>${rpEscapeHtml(x.fr)}</small></div>`).join('')}</details>` : ''}
+                ${(sit.kit && sit.kit.mots || []).length ? `<details><summary>📖 Mots utiles</summary>${sit.kit.mots.map(x => `<span class="talk-sit-word"><b>${rpEscapeHtml(x.nl)}</b> ${rpEscapeHtml(x.fr)}</span>`).join(' · ')}</details>` : ''}</div>` });
             talkTurn();
         }
 
@@ -12561,7 +12599,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             document.getElementById('talk-content').innerHTML = `
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
-                    <div class="talk-head-txt"><b>${p.name}</b><small>${TALK_HATS[talk.hat].label} · ${TALK_TOPICS[talk.topic]}</small></div>
+                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
                     ${liveCorrectToggleHtml()}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
@@ -12651,7 +12689,9 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const portrait = typeof profPortrait === 'function' ? profPortrait() : [];
             const hist = talk.history.slice(-16).map(h => h.who === 'them' ? p.name + ' : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
             return `${p.base} Tu parles avec un(e) apprenant(e) francophone de néerlandais, niveau ${PROF_LEVEL_DESC[talk.level]}.
-Aujourd'hui, tu lui parles ${TALK_HATS[talk.hat].prompt}. Sujet de départ : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')} (si c'est « Libre », choisis un sujet simple du quotidien).
+${talk.sit ? `Aujourd'hui, vous jouez une SITUATION de la vie courante en Flandre. Tu restes ${p.name} (même voix, même caractère), mais tu joues ce rôle : ${talk.sit.role}
+La situation, vue par l'apprenant : ${talk.sit.contexte}
+Registre : vouvoiement (u) avec un client, un patient ou un usager ; tutoiement (jij) entre amis, voisins ou collègues. Reste dans ton rôle, fais avancer la situation jusqu'à ce qu'elle soit réglée, puis conclus naturellement. Emploie naturellement certains de ces mots : ${(talk.sit.kit && talk.sit.kit.mots || []).map(m => m.nl).concat(talk.sit.kit && talk.sit.kit.verbes || []).join(', ')}.` : `Aujourd'hui, tu lui parles en ami(e) : conversation détendue, tutoiement (jij). Sujet de départ : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')} (si c'est « Libre », choisis un sujet simple du quotidien).`}
 Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
 ${portrait.length ? "Ce que tu sais de l'apprenant : " + portrait.join(' ') : ''}
 Règles :
@@ -12663,7 +12703,7 @@ Règles :
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
-${hist ? "Conversation jusqu'ici :\n" + hist : "Commence la conversation : salue-le naturellement selon ta casquette et pose une première question simple sur le sujet."}
+${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
 Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}]}`;
         }
 
@@ -13573,12 +13613,13 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
             grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
             cours_particulier: { desc: 'cours particulier avec le prof ; params.duree 15 ou 30', run: p => { if (p.duree) profSettings().dur = Number(p.duree) === 30 ? 30 : 15; showProf(); } },
-            discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; showTalk(); if (p.lancer) talkStart(); } },
+            situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
+            discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
             pratiquer: { desc: 'onglet Pratiquer', run: () => showPratiquer() },
-            entretiens: { desc: "entraînement aux entretiens d'embauche (questions de vrais entretiens)", run: () => { showRoleplay('entretiens'); rpShowRealCandidateList(); } },
+            entretiens: { desc: "entraînement aux entretiens d'embauche (questions de vrais entretiens)", run: () => { showRoleplay('travail'); rpShowRealCandidateList(); } },
             rejouer: { desc: 'rejouer un vrai entretien mot pour mot', run: () => rpShowReplayList() },
-            etude_de_cas: { desc: 'étude de cas (business case)', run: () => { showRoleplay('entretiens'); rpShowCaseHome(); } },
-            travail: { desc: 'mises en situation au travail (métiers)', run: () => showRoleplay('travail') },
+            etude_de_cas: { desc: 'étude de cas (business case)', run: () => { showRoleplay('travail'); rpShowCaseHome(); } },
+            travail: { desc: 'mises en situation dans mon métier', run: () => { showRoleplay('travail'); rpShowJobHome(); } },
             jeux: { desc: "onglet Jouer ; params.jeu parmi memory, chrono, anagramme, tri", run: p => ({ memory: startMemory, chrono: showTASelect, anagramme: startAnagram, tri: showSwipeSelect }[p.jeu] || showReviser)() },
             profil: { desc: 'profil, statistiques, carte des compétences', run: () => showProfil() }
         };
@@ -13601,6 +13642,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             if (has(/rejou|tel quel|mot pour mot/)) return { action: 'rejouer' };
             if (has(/entretien|sollicit|recruteur/)) return { action: 'entretiens' };
             if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
+            if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
             if (has(/discut|parler (avec|de|un peu)|bavard|conversation/)) return { action: 'discuter', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null), sujet: text, lancer: true } };
             if (has(/module|lecon|continue|reprend/)) {
                 const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean);
