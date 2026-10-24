@@ -12706,9 +12706,10 @@ Règles :
 - ${LIVE_MIX_RULES}
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
+- FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
-Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}]}`;
+Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false}`;
         }
 
         function talkThinking(on) {
@@ -12750,6 +12751,8 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             if (!talkActive()) return;
             if (r.fr_help) await conjAudioSpeakMixed(r.fr_help, 1, PROF_RATE[talk.level], talkActive);
             if (talkActive()) await conjAudioSpeak(r.reply_nl, 'nl', PROF_RATE[talk.level], { speaker: talk.p.speaker });
+            // Le partenaire a conclu : le récap s'enchaîne tout seul (on peut encore continuer).
+            if (r.fin === true && talk.userCount > 0 && talkActive()) { talkEnd(); return; }
             if (talkActive() && talk.handsfree && window.SpeechRecognition && !talkRec) talkMic('nl');
         }
 
@@ -12840,12 +12843,24 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 ${mots.length ? `<div class="prof-deb-sec">📖 À garder${added ? ' (ajoutés à « 💬 Mes discussions »)' : ''}</div><ul>${mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr || '')}</li>`).join('')}</ul>` : ''}
                 ${r && r.tournure && r.tournure.nl ? `<div class="prof-deb-sec">💬 Tournure du jour</div><p><b>${rpEscapeHtml(r.tournure.nl)}</b> ${speakBtnHtml(r.tournure.nl)}<br><small>${rpEscapeHtml(r.tournure.fr || '')}</small></p>` : ''}
                 ${usedSessionHtml()}
-                <div class="prof-actions"><button class="btn btn-green" onclick="tutorOpen('talk')">🧑‍🏫 Revoir avec mon tuteur</button><button class="btn btn-gray" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button></div>
+                <div class="prof-actions"><button class="btn btn-green" onclick="tutorOpen('talk')">🧑‍🏫 Revoir avec mon tuteur</button><button class="btn btn-gray" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button><button class="btn btn-gray" onclick="talkResume()">🔁 On continue encore un peu</button></div>
             </div>` });
             const bar = document.querySelector('#talk-content .talk-bar');
             if (bar) bar.style.display = 'none';
             const sugg = document.getElementById('talk-sugg');
             if (sugg) sugg.innerHTML = '';
+        }
+
+        // Reprendre après la fin : les repères de fin repartent de là où on en est (talk.extra).
+        function talkResume() {
+            const t = talk;
+            if (!t || !t.ended) return;
+            t.ended = false;
+            t.extra = t.userCount;
+            const bar = document.querySelector('#talk-content .talk-bar');
+            if (bar) bar.style.display = '';
+            talkAppend({ who: 'info', html: `🔁 On continue ! Réponds à ${rpEscapeHtml(t.p.name)} quand tu veux.` });
+            if (t.handsfree && window.SpeechRecognition && !talkRec) talkMic('nl');
         }
 
         const TALK_WORDS_LIST = '💬 Mes discussions';
