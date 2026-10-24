@@ -12821,7 +12821,8 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
         // (scripted_dialogues.json, nl_original), à leur débit réel (wpm du scénario : l'app mesure
         // le débit de la voix et ajuste la vitesse pour s'en approcher). Après chaque réplique, une
         // idée de réponse en français (suggestion_fr) ; l'apprenant répond ce qu'il veut, à l'oral.
-        // Pas de Gemini pour le recruteur ; un correcteur séparé (une phrase à la fois) en option.
+        // Le recruteur réagit et relance (Gemini, réglage replay.react, voir rpReplayReactPrompt) ;
+        // les questions du script, elles, ne passent jamais par Gemini. Correcteur séparé.
         const REPLAY_SPEEDS = { lent: { label: '🐢 Plus lent', f: 0.8 }, reel: { label: '🎯 Vitesse réelle', f: 1 }, rapide: { label: '🐇 Plus rapide', f: 1.2 } };
         const REPLAY_VOICES = [{ speaker: 0 }, { speaker: 1 }, { speaker: 0, pitch: 1.25 }, { speaker: 1, pitch: 0.8 }];
         let rpReplay = null;
@@ -12833,6 +12834,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 speed: REPLAY_SPEEDS[s.speed] ? s.speed : 'reel',
                 handsfree: s.handsfree !== false,
                 showSugg: s.showSugg !== false,
+                react: s.react !== false,
                 rate: typeof s.rate === 'number' && s.rate > 0.4 && s.rate < 2 ? s.rate : 1
             };
             return state.settings.replay;
@@ -12850,7 +12852,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const list = dialogues.map((d, i) => ({ d, i })).filter(x => (x.d.turns || []).length);
             box.innerHTML = `
                 <h2 style="margin-bottom:4px;">🎬 Rejouer un vrai entretien</h2>
-                <p class="section-subtitle" style="margin-top:0;">Les vraies questions des recruteurs, mot pour mot et à leur vitesse. Tu réponds ce que tu veux ; une idée de réponse en français t'aide si tu bloques.</p>
+                <p class="section-subtitle" style="margin-top:0;">Les vraies questions des recruteurs, mot pour mot et à leur vitesse. Tu réponds ce que tu veux : le recruteur réagit, relance comme s'il avait ton CV sous les yeux, et une idée de réponse t'aide si tu bloques.</p>
                 ${list.map(x => `<button class="rp-scenario-btn" onclick="rpReplaySetup(${x.i})">${rpEscapeHtml(x.d.label)} <small style="color:var(--text-secondary);">· ${x.d.turns.length} répliques${x.d.turns.some(t => t.suggestion_fr) ? '' : ' · sans idées de réponse'}</small></button>`).join('')}`;
         }
 
@@ -12866,6 +12868,8 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 <div class="conj-card conj-audio">
                     <div class="conj-audio-label">Vitesse${d.wpm ? ` (réelle : environ ${d.wpm} mots par minute)` : ''}</div>
                     <div class="conj-audio-chips">${Object.entries(REPLAY_SPEEDS).map(([k, v]) => chip(s.speed === k, set('speed', k), v.label)).join('')}</div>
+                    <div class="conj-audio-label">Le recruteur</div>
+                    <div class="conj-audio-chips">${chip(s.react, set('react', true), '🎙️ Réagit à mes réponses')}${chip(!s.react, set('react', false), '📜 Script pur')}</div>
                     <div class="conj-audio-label">Idées de réponse en français</div>
                     <div class="conj-audio-chips">${chip(s.showSugg, set('showSugg', true), '👀 Affichées')}${chip(!s.showSugg, set('showSugg', false), '🙈 Sur demande')}</div>
                     <div class="conj-audio-label">Micro</div>
@@ -12878,7 +12882,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const d = rpRealData.dialogues[index];
             const s = replaySettings();
             const speakers = [...new Set(d.turns.map(t => t.speaker || 'Le recruteur'))];
-            rpReplay = { index, d, i: 0, answers: [], ended: false, busy: false, token: Date.now(), speakers,
+            rpReplay = { index, d, i: 0, answers: [], ended: false, busy: false, token: Date.now(), speakers, pending: null, skip: new Set(), log: [],
                 target: (d.wpm || 135) * REPLAY_SPEEDS[s.speed].f };
             document.getElementById('replay-content').innerHTML = `
                 <div class="talk-head">
@@ -12942,26 +12946,69 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             rpReplayBubble('them', `<div class="replay-who">${rpEscapeHtml(t.speaker || 'Le recruteur')}</div><div class="talk-nl">${words}</div>
                 <div class="talk-tools"><button type="button" onclick="this.closest('.talk-msg').querySelector('.talk-fr').classList.toggle('show')">🇫🇷</button></div>
                 <div class="talk-fr">${rpEscapeHtml(t.fr_cue || '')}</div><div class="talk-word"></div>`);
-            const sugg = document.getElementById('replay-sugg');
-            const idea = t.suggestion_fr || (t.candidate_reply ? 'Ce qui avait été répondu : « ' + t.candidate_reply + ' »' : '');
-            r.idea = idea;
-            sugg.innerHTML = idea ? (s.showSugg ? `<div class="replay-idea">💡 ${rpEscapeHtml(idea)}</div>` : `<button type="button" class="rp-coach-btn" onclick="rpReplayShowIdea()">💡 Idée de réponse</button>`) : '';
+            // Idée de réponse : la piste rédigée + ce qui avait été répondu dans le vrai entretien.
+            r.idea = (t.suggestion_fr ? `💡 ${rpEscapeHtml(t.suggestion_fr)}` : '') +
+                (t.candidate_reply ? `<div class="replay-real">🗣️ Ta vraie réponse : « ${rpEscapeHtml(t.candidate_reply)} » ${speakBtnHtml(t.candidate_reply)}</div>` : '');
+            rpReplayRenderIdea();
             const token = r.token;
             await rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
             if (!replayActive() || rpReplay.token !== token || rpReplay.i !== r.i) return;
             if (s.handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
         }
 
-        function rpReplayShowIdea() {
+        function rpReplayRenderIdea(force) {
             const el = document.getElementById('replay-sugg');
-            if (el && rpReplay && rpReplay.idea) el.innerHTML = `<div class="replay-idea">💡 ${rpEscapeHtml(rpReplay.idea)}</div>`;
+            const r = rpReplay;
+            if (!el || !r) return;
+            el.innerHTML = !r.idea ? '' : (replaySettings().showSugg || force ? `<div class="replay-idea">${r.idea}</div>` : `<button type="button" class="rp-coach-btn" onclick="rpReplayShowIdea()">💡 Idée de réponse</button>`);
         }
+        function rpReplayShowIdea() { rpReplayRenderIdea(true); }
 
         function rpReplaySay() {
             const r = rpReplay;
             if (!r || r.ended) return;
             const t = r.d.turns[r.i];
-            if (t) rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
+            if (r.pending) rpReplaySpeak(r.pending.q, r.pending.speaker);
+            else if (t) rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
+        }
+
+        // ----- Le recruteur réagit (Gemini, appel séparé du correcteur) -----
+        // Les questions du script restent lues mot pour mot ; entre deux, le recruteur réagit à la
+        // réponse, relance au besoin (réponse courte ou floue, ou point du dossier non mentionné,
+        // comme s'il avait le CV sous les yeux) et saute les questions déjà couvertes. Le dossier =
+        // le profil privé du candidat + ses vraies réponses dans l'entretien d'origine.
+        function rpReplayDossier(d) {
+            const profile = (state.candidateProfile || '').trim();
+            const real = d.turns.filter(t => t.candidate_reply).map(t => `- « ${t.nl_original.slice(0, 140)} » → « ${t.candidate_reply} »`).join('\n');
+            return (profile ? `Profil (CV) du candidat :\n${profile.slice(0, 2500)}\n\n` : '') +
+                (real ? `Ce qu'il a répondu lors du vrai entretien (sa situation réelle, que tu connais comme si c'était sur son CV) :\n${real}` : '');
+        }
+
+        function rpReplayReactPrompt(r, q, speaker, text, wasRelance) {
+            const d = r.d, lang = RP_LANG_NAMES[d.lang || 'nl'] || 'néerlandais';
+            const next = [];
+            for (let k = r.i + 1; k < d.turns.length - 1 && next.length < 4; k++) if (!r.skip.has(k)) next.push(`${k}: ${d.turns[k].nl_original.slice(0, 160)}`);
+            return `Tu joues les recruteurs d'un VRAI entretien d'embauche, rejoué par le candidat pour s'entraîner. ${d.contexte || ''}
+Interlocuteurs : ${r.speakers.join(', ')}.
+Les questions viennent de la transcription du vrai entretien et l'application les lit telles quelles. Toi, tu ajoutes seulement ce qu'un vrai recruteur dirait ENTRE deux questions, en réagissant à ce que le candidat vient de répondre.
+
+${rpReplayDossier(d)}
+
+Échanges de cette séance :
+${r.log.slice(-10).join('\n') || '(début)'}
+
+Question posée (par ${speaker}) : « ${q} »
+Réponse du candidat : « ${text} »
+${wasRelance ? "C'était déjà ta question de relance : réagis brièvement, SANS nouvelle relance." : ''}
+Questions suivantes du script (numéro: question) :
+${next.join('\n') || '(aucune)'}
+
+Consignes :
+- "reaction" : réaction courte et naturelle en ${lang} (Flandre), par ${speaker}, dans le ton de l'entretien (même tutoiement ou vouvoiement que les questions). Montre que tu as écouté en reprenant un détail de SA réponse. Varie : pas de compliment systématique ; parfois « Oké. » ou « Ah ja, ik zie het. » suffit. Ne corrige jamais sa langue. Le candidat peut avoir glissé des mots français : comprends-les.
+- "relance" : une question de suivi en ${lang}, SEULEMENT si sa réponse est très courte, floue ou hors sujet, OU si son dossier contient un élément important lié à cette question qu'il n'a pas mentionné (demande-le comme un recruteur qui a son CV sous les yeux, par ex. « Ik zie dat je hier al in de productie gewerkt hebt, hoe was dat? »). Sinon "". Environ une fois sur trois au plus. Jamais sur un point qu'une des questions suivantes va aborder.
+- "idee_fr" : si tu relances, une idée de réponse pour le candidat, en français, tirée de son dossier (1 ou 2 phrases). Sinon "".
+- "sauter" : numéros des questions suivantes auxquelles il a DÉJÀ clairement répondu (souvent []).
+Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "", "relance_fr": "", "idee_fr": "", "sauter": []}`;
         }
 
         function rpReplayMicState(on, cd, hold) {
@@ -12996,19 +13043,64 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             if (rpReplayRec) { const st = rpReplayRec; rpReplayRec = null; st.finish(false); }
         }
 
-        function rpReplayAnswer(text) {
+        async function rpReplayAnswer(text) {
             const r = rpReplay;
-            if (!r || r.ended) return;
+            if (!r || r.ended || r.busy) return;
             const t = r.d.turns[r.i];
+            if (!t) return;
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            r.token = Date.now();
+            const token = r.token = Date.now();
+            const speaker = r.pending ? r.pending.speaker : (t.speaker || 'Le recruteur');
+            const q = r.pending ? r.pending.q : t.nl_original;
+            const wasRelance = !!r.pending;
+            r.pending = null;
             const div = rpReplayBubble('me', rpEscapeHtml(text));
-            const a = { q: t.nl_original, text, corr: null };
+            const a = { q, text, corr: null };
             r.answers.push(a);
             rpReplayCorrect(a, div);
-            r.i++;
+            r.log.push(`${speaker} : ${q}`, `Candidat : ${text}`);
             document.getElementById('replay-sugg').innerHTML = '';
-            setTimeout(() => { if (replayActive() && rpReplay === r) rpReplayAsk(); }, 700);
+            if (replaySettings().react && GeminiService.isAvailable()) {
+                r.busy = true;
+                const wait = rpReplayBubble('them typing', '<span></span><span></span><span></span>');
+                let res = null;
+                try { res = rpHelpParseJson(await GeminiService.generate(rpReplayReactPrompt(r, q, speaker, text, wasRelance))); } catch (e) { res = null; }
+                if (wait) wait.remove();
+                r.busy = false;
+                if (!replayActive() || rpReplay !== r || r.token !== token) return;
+                if (res && !res.error) {
+                    const relance = !wasRelance && res.relance ? String(res.relance).trim() : '';
+                    const say = [res.reaction, relance].map(x => String(x || '').trim()).filter(Boolean).join(' ');
+                    (Array.isArray(res.sauter) ? res.sauter : []).map(Number).filter(n => n > r.i && n < r.d.turns.length - 1).forEach(n => r.skip.add(n));
+                    if (say) {
+                        const fr = [res.reaction_fr, relance ? res.relance_fr : ''].filter(Boolean).join(' ');
+                        rpReplayBubble('them', `<div class="replay-who">${rpEscapeHtml(speaker)}</div><div class="talk-nl">${rpAnnotateText(say).replace(/rpWordTap\(this\)/g, 'talkWordTap(this)')}</div>
+                            <div class="talk-tools"><button type="button" onclick="this.closest('.talk-msg').querySelector('.talk-fr').classList.toggle('show')">🇫🇷</button></div>
+                            <div class="talk-fr">${rpEscapeHtml(fr)}</div><div class="talk-word"></div>`);
+                        r.log.push(`${speaker} : ${say}`);
+                        if (relance) {
+                            r.pending = { q: relance, speaker };
+                            r.idea = res.idee_fr ? `💡 ${rpEscapeHtml(res.idee_fr)}` : '';
+                            rpReplayRenderIdea();
+                        }
+                        await rpReplaySpeak(say, speaker);
+                        if (!replayActive() || rpReplay !== r || r.token !== token) return;
+                        if (relance) {
+                            if (replaySettings().handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
+                            return;
+                        }
+                    }
+                }
+            }
+            rpReplayNext(r);
+        }
+
+        // Question suivante du script, en sautant celles auxquelles il a déjà répondu.
+        function rpReplayNext(r) {
+            r.i++;
+            while (r.skip.has(r.i)) r.i++;
+            document.getElementById('replay-sugg').innerHTML = '';
+            setTimeout(() => { if (replayActive() && rpReplay === r) rpReplayAsk(); }, 500);
         }
 
         function rpReplaySkip() {
@@ -13017,7 +13109,12 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             rpReplayStopListen();
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             r.token = Date.now();
+            r.busy = false;
+            const typing = document.querySelector('#replay-chat .typing');
+            if (typing) typing.remove();
+            if (r.pending) { r.pending = null; rpReplayNext(r); return; }
             r.i++;
+            while (r.skip.has(r.i)) r.i++;
             document.getElementById('replay-sugg').innerHTML = '';
             rpReplayAsk();
         }

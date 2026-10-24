@@ -766,3 +766,4 @@
         .lc-card.lc-ok { background: color-mix(in srgb, var(--success) 16%, transparent); }
         .lc-card.lc-wait { opacity: .6; }
         .lc-fr, .lc-err { font-size: 0.8rem; margin-top: 3px; }
+        .replay-real { margin-top: 6px; font-size: 0.82rem; color: var(--text-secondary); }
