@@ -1908,7 +1908,7 @@ if (firebaseAvailable) {
         // Retire du pool actif les mots vraiment maîtrisés ET les mots actuellement en révision
         // (une fois raté, un mot n'est récupérable QUE via le mode Révision dédié, pas ailleurs)
         function activePool(items) {
-            return items.filter(i => !isTrueMastered(i.id) && (state.stats.wrongCount[dirKey(i.id)] || 0) === 0);
+            return items.filter(i => !isTrueMastered(i.id) && !isActiveWord(i.id) && (state.stats.wrongCount[dirKey(i.id)] || 0) === 0);
         }
 
         // Alerte dès que la pile "mots à réviser" franchit un nouveau multiple de 10
@@ -1943,7 +1943,7 @@ if (firebaseAvailable) {
         // --- Système de paquets de 10 (déblocage progressif par catégorie/liste, par sens) ---
         // Un paquet est "propre" quand tous ses mots sont maîtrisés (sans faute en attente).
         function isBatchClean(batchItems) {
-            return batchItems.length > 0 && batchItems.every(i => isTrueMastered(i.id));
+            return batchItems.length > 0 && batchItems.every(i => isTrueMastered(i.id) || isActiveWord(i.id));
         }
 
         function maybeUnlockBatches(sourceKey, orderedItems) {
@@ -3037,7 +3037,7 @@ if (firebaseAvailable) {
                         <span class="dash-level-badge">${cecrInfo.level}</span>
                     </div>
                     <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${cecrPct}%"></div></div>
-                    ${curriculumLoaded ? `<div style="font-size:0.76rem; color:var(--text-secondary); margin-top:6px;">${masteredCount}/${totalReadyCount} notions maîtrisées · vocabulaire couvert ${vp.pct}%</div>` : ''}
+                    ${curriculumLoaded ? `<div style="font-size:0.76rem; color:var(--text-secondary); margin-top:6px;">${masteredCount}/${totalReadyCount} notions maîtrisées · vocabulaire couvert ${vp.pct}%${usedWordsCount() ? ` · 🗣️ ${usedWordsCount()} mots dits à l'oral` : ''}</div>` : ''}
                 </div>`;
 
             // ===== 2bis. Continuer : le prochain module en situation non réussi (le format
@@ -6098,7 +6098,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('vocabcat-audio-box').innerHTML = '';
             document.getElementById('vocabcat-content').innerHTML = `
                 <h2 style="margin-bottom:4px;">${rpEscapeHtml(label)}</h2>
-                <p class="section-subtitle" style="margin-top:0;">${items.length} mots · ${mastered} maîtrisés (${pct}%)${toReview ? ' · ' + toReview + ' à revoir' : ''}</p>
+                <p class="section-subtitle" style="margin-top:0;">${items.length} mots · ${mastered} maîtrisés (${pct}%)${toReview ? ' · ' + toReview + ' à revoir' : ''}${usedWordsCount(items) ? ' · 🗣️ ' + usedWordsCount(items) + " dits à l'oral" : ''}</p>
                 <div class="cat-bar" style="margin-bottom:var(--space-3);"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
                 <div class="hub-grid single">
                     <div class="hub-card accent" onclick="vocabTrain()"><span class="hub-card-icon">✍️</span><div class="hub-card-title">S'entraîner</div><div class="hub-card-desc">Traduire les mots, du plus courant au plus rare, par paquets.</div></div>
@@ -6216,6 +6216,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${wordChunksButtonHtml(i)}
                     ${niveauCECRBadgeHtml(i.niveauCECR)}
                     <span class="wl-badge ${st}">${badgeLabel[st]}</span>
+                    ${usedBadgeHtml(i.id)}
                     <span class="wl-file">${categoryLabel(i.file)}${i.sousCategorie ? ' · ' + i.sousCategorie : ''}${freqTxt ? ' · ' + freqTxt : ''}</span>
                 </div>${wordChunksPanelHtml(i)}`;
             }).join('');
@@ -7621,7 +7622,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function getVocabProgress() {
             const vocabItems = fullDb.filter(i => i.file !== 'PHRASES_LABO');
             const totalVocab = vocabItems.length;
-            const masteredVocab = vocabItems.filter(i => isMasteredAnyDirection(i.id)).length;
+            // Mots maîtrisés en exercice OU actifs à l'oral (dits dans plusieurs conversations).
+            const masteredVocab = vocabItems.filter(i => isMasteredAnyDirection(i.id) || isActiveWord(i.id)).length;
             const pct = totalVocab > 0 ? Math.round((masteredVocab / totalVocab) * 100) : 0;
             const thresholds = [
                 { tier: 1, min: 0 }, { tier: 2, min: 15 },
@@ -8751,9 +8753,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (liveCorrectOn() && GeminiService.isAvailable() && !(rpCurrentScenario && rpCurrentScenario.lang === 'en')) {
                 const prevMsgs = historyDiv.querySelectorAll('.rp-message.assistant');
                 const prevMsg = prevMsgs.length ? prevMsgs[prevMsgs.length - 1] : null;
-                liveCorrectUnder(msgDiv, text, null, prevMsg ? (prevMsg.dataset.text || prevMsg.innerText) : '').then(() => { historyDiv.scrollTop = historyDiv.scrollHeight; });
+                liveCorrectUnder(msgDiv, text, null, prevMsg ? (prevMsg.dataset.text || prevMsg.innerText) : '').then(c => { usedWordsRecord(text, c); historyDiv.scrollTop = historyDiv.scrollHeight; });
                 return;
             }
+            if (!(rpCurrentScenario && rpCurrentScenario.lang === 'en')) usedWordsRecord(text);
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'rp-coach-btn';
@@ -11580,7 +11583,8 @@ Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase co
 
         async function profCorrect(text, msg, div) {
             const c = await profGemini(profCorrectPrompt(text));
-            if (!c || c.error) return;
+            if (!c || c.error) { usedWordsRecord(text); return; }
+            usedWordsRecord(text, c);
             msg.corr = c;
             c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
             if (c.francais.length) { c.ok = false; liveSaveWords(c.francais); }
@@ -12346,7 +12350,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 if (!guideAlive(token) || ans === null || ans === '__skip__') break;
                 if (ans === '__fin__') break;
                 const meDiv = guideBubble('moi', `${ans.isFr ? '🇫🇷 ' : ''}${rpEscapeHtml(ans.text)}`);
-                if (!ans.isFr) { const lastThem = [...conv.history].reverse().find(h => h.who === 'them'); liveCorrectUnder(meDiv, ans.text, null, lastThem ? lastThem.nl : ''); }
+                if (!ans.isFr) { const lastThem = [...conv.history].reverse().find(h => h.who === 'them'); const said = ans.text; (liveCorrectOn() ? liveCorrectUnder(meDiv, said, null, lastThem ? lastThem.nl : '') : Promise.resolve(null)).then(c => usedWordsRecord(said, c)); }
                 conv.history.push({ who: 'me', text: ans.text, isFr: ans.isFr });
                 if (!ans.isFr) { conv.userLines.push(ans.text); turns++; }
                 const closing = !!maxTurns && turns >= maxTurns;
@@ -12738,6 +12742,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 lastMsg.corr = r.correction;
                 if (lastDiv) lastDiv.insertAdjacentHTML('beforeend', talkCorrHtml(r.correction));
             }
+            if (lastMsg) usedWordsRecord(lastMsg.text, r.correction && r.correction.natural ? r.correction : null);
             talk.history.push({ who: 'them', nl: r.reply_nl });
             talk.suggestions = (Array.isArray(r.suggestions) ? r.suggestions : []).filter(s => s && s.nl).slice(0, 3);
             talkAppend({ who: 'them', nl: r.reply_nl, fr: r.reply_fr || '', help: r.fr_help || '' });
@@ -13174,6 +13179,7 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
         // Correcteur séparé : il ne voit que la phrase de l'apprenant.
         async function rpReplayCorrect(a, div) {
             const c = await liveCorrectUnder(div, a.text, 'B1', a.q);
+            usedWordsRecord(a.text, c);
             if (!c || !c.corrige || ((c.ok || normalize(c.corrige) === normalize(a.text)) && !c.francais.length && !c.a_cote)) return;
             if (c.a_cote && c.piste_nl) { a.corr = { corrige: c.piste_nl, explication: '❓ Réponse à côté : ' + (c.comprehension_fr || c.question_fr || '') }; return; }
             a.corr = { corrige: c.corrige, explication: c.erreurs.map(e => e.pourquoi).filter(Boolean).concat(c.francais.map(f => f.fr + ' → ' + f.nl)).join(' ; ') };
@@ -13204,6 +13210,59 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             if (rpReplay) rpReplay.ended = true;
             rpReplayStopListen();
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
+        // ===== Mots utilisés à l'oral =====
+        // Chaque phrase dite (ou écrite) en néerlandais dans une conversation alimente le
+        // vocabulaire : les mots reconnus par l'app (rpWordLookup, formes fléchies comprises) sont
+        // notés dans state.usedWords[id] = { n: nombre d'emplois, c: nombre de conversations, last }.
+        // Seuls les mots bien employés comptent : si une correction existe, un mot absent de la
+        // version corrigée est ignoré. Une nouvelle conversation = plus de 30 min depuis le dernier
+        // emploi. « 🗣️ Actif » = dit dans au moins USED_ACTIVE_CONVS conversations : compte dans le
+        // vocabulaire couvert et sort des paquets d'entraînement. Le niveau CECR n'en dépend PAS
+        // (séparation voulue par Joas). Fusion multi-appareil : règle par défaut (max des nombres).
+        const USED_ACTIVE_CONVS = 3;
+        const USED_CONV_GAP = 30 * 60 * 1000;
+
+        function usedWordInfo(id) { return (state.usedWords && state.usedWords[id]) || null; }
+        function isActiveWord(id) { const u = usedWordInfo(id); return !!(u && (u.c || 0) >= USED_ACTIVE_CONVS); }
+
+        const usedTokens = s => String(s || '').split(/[^A-Za-zÀ-ÿ'-]+/).map(t => rpKitNorm(t).replace(/^'+|'+$/g, '')).filter(t => t.length > 1);
+
+        // text : la phrase de l'apprenant ; corr : l'objet de correction s'il y en a un
+        // ({ corrige } ou { natural }), null sinon.
+        function usedWordsRecord(text, corr) {
+            if (!text || (corr && (corr.tout_fr || corr.fr === true))) return 0;
+            const fixed = corr && (corr.corrige || corr.natural);
+            const okSet = fixed ? new Set(usedTokens(fixed)) : null;
+            if (!state.usedWords) state.usedWords = {};
+            const now = Date.now();
+            const seen = new Set();
+            usedTokens(text).forEach(t => {
+                if (okSet && !okSet.has(t)) return;
+                if (['de', 'het', 'een', "'t", "'n"].includes(t)) return; // articles : comptés avec leur nom
+                const item = rpWordLookup(t);
+                if (!item || !item.id || seen.has(item.id)) return;
+                seen.add(item.id);
+                const u = state.usedWords[item.id] || { n: 0, c: 0, last: 0 };
+                u.n = (u.n || 0) + 1;
+                if (!u.last || now - u.last > USED_CONV_GAP) u.c = (u.c || 0) + 1;
+                u.last = now;
+                state.usedWords[item.id] = u;
+            });
+            if (seen.size) save();
+            return seen.size;
+        }
+
+        function usedWordsCount(items) {
+            const u = state.usedWords || {};
+            return (items || fullDb).filter(i => u[i.id]).length;
+        }
+        function usedBadgeHtml(id) {
+            const u = usedWordInfo(id);
+            if (!u) return '';
+            const active = (u.c || 0) >= USED_ACTIVE_CONVS;
+            return `<span class="wl-badge used${active ? ' active' : ''}" title="Dit ${u.n} fois, dans ${u.c} conversation${u.c > 1 ? 's' : ''}">🗣️ ${active ? 'Actif' : 'Utilisé'}</span>`;
         }
 
         // ===== Correction active =====
@@ -13784,7 +13843,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             if (!text || buddyBusy) return;
             buddyStopListen();
             const meDiv = buddyAppend({ who: 'me', text });
-            if (buddySettings().lang === 'nl') liveCorrectUnder(meDiv, text);
+            if (buddySettings().lang === 'nl') (liveCorrectOn() ? liveCorrectUnder(meDiv, text) : Promise.resolve(null)).then(c => usedWordsRecord(text, c));
             const local = buddyLocal(text);
             if (local && local.translate) {
                 const ans = buddyTranslateLocal(local.translate);

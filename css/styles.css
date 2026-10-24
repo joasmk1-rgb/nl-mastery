@@ -790,3 +790,7 @@
         .talk-sit-word { white-space: nowrap; }
         .rp-more { width: 100%; margin-top: 10px; }
         .rp-more summary { cursor: pointer; color: var(--text-secondary); font-size: 0.88rem; }
+
+        /* Mots utilisés à l'oral */
+        .wl-badge.used { background: color-mix(in srgb, #0ea5e9 16%, transparent); color: var(--text); }
+        .wl-badge.used.active { background: color-mix(in srgb, #0ea5e9 34%, transparent); font-weight: 700; }
