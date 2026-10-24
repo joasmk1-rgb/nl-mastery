@@ -4884,6 +4884,8 @@ if (firebaseAvailable) {
                     <span class="conj-chip-sep"></span>
                     ${chip(r === 0.8, "sceneSet('sceneRate',0.8)", '🐢 Lent')}
                     ${chip(r === 0.95, "sceneSet('sceneRate',0.95)", 'Normal')}
+                    ${chip(r === 1.15, "sceneSet('sceneRate',1.15)", '🐇 Rapide')}
+                    ${chip(r === 1.35, "sceneSet('sceneRate',1.35)", '⚡ Très rapide')}
                 </div>`;
         }
 
@@ -4939,10 +4941,12 @@ if (firebaseAvailable) {
                 const rate = sceneRate(), mode = sceneMode();
                 if (l.qui === 'titre') { await conjAudioWait(600); continue; }
                 const speaker = l.qui === 'B' ? 1 : 0;
-                if (mode === 'fr_nl' && l.fr) { await conjAudioSay(l.fr, 'fr', rate); await conjAudioWait(250); }
+                // Pauses raccourcies quand la lecture va plus vite.
+                const gap = ms => conjAudioWait(Math.round(ms * Math.min(1, 0.95 / rate)));
+                if (mode === 'fr_nl' && l.fr) { await conjAudioSay(l.fr, 'fr', rate); await gap(250); }
                 await conjAudioSay(l.nl, 'nl', rate, { speaker });
-                if (mode === 'nl_fr' && l.fr) { await conjAudioWait(250); await conjAudioSay(l.fr, 'fr', rate); }
-                await conjAudioWait(500);
+                if (mode === 'nl_fr' && l.fr) { await gap(250); await conjAudioSay(l.fr, 'fr', rate); }
+                await gap(500);
             }
             if (conjAudioRun === run) {
                 conjAudioRelease(run);
