@@ -450,6 +450,7 @@
                 <button type="button" class="rp-coach-btn" onclick="rpHelpFrench()">🇫🇷 Je le dis en français</button>
                 <button type="button" class="rp-coach-btn" onclick="rpShowUnderlineHelp()">🔍 Mots soulignés</button>
                 <button type="button" class="rp-coach-btn" onclick="rpShowWordsReport()">🧾 Bilan des mots</button>
+                <button type="button" class="rp-coach-btn" onclick="tutorOpen('rp')">🧑‍🏫 Revoir avec mon tuteur</button>
                 <button type="button" class="lc-toggle on" onclick="liveCorrectToggle()">✍️ Correction activée</button>
             </div>
             <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
@@ -501,6 +502,11 @@
     <div id="talk-view" class="view">
         <button class="back-btn" onclick="talkStop(); showPratiquer()">← Pratiquer</button>
         <div id="talk-content" class="content-col"></div>
+    </div>
+
+    <div id="tutor-view" class="view">
+        <button class="back-btn" onclick="tutorQuit()">← Retour</button>
+        <div id="tutor-content" class="content-col"></div>
     </div>
 
     <div id="prof-view" class="view">

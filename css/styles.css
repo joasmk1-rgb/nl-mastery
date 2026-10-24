@@ -767,3 +767,8 @@
         .lc-card.lc-wait { opacity: .6; }
         .lc-fr, .lc-err { font-size: 0.8rem; margin-top: 3px; }
         .replay-real { margin-top: 6px; font-size: 0.82rem; color: var(--text-secondary); }
+
+        /* Revoir avec mon tuteur */
+        .tutor-step { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .03em; }
+        .tutor-ctx { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+        .tutor-said { margin-top: 4px; }

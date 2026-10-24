@@ -9204,7 +9204,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(bank.label)}${it.diff ? ' · ' + (RP_DIFFICULTY_LABELS[it.diff] || it.diff) : ''}</div>`;
             const footer = `
-                <button class="btn btn-green" style="margin-top:14px;" onclick="rpRealSetup(${it.index})">🔁 Refaire l'entretien</button>
+                <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('rp')">🧑‍🏫 Revoir avec mon tuteur</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpRealSetup(${it.index})">🔁 Refaire l'entretien</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowRealCandidateList()">Retour aux entretiens</button>`;
             const lines = rpConversationHistory.slice(1).map(m => (m.role === 'user' ? 'CANDIDAT : ' : 'RECRUTEUR : ') + m.parts[0].text);
             if (!rpConversationHistory.slice(1).some(m => m.role === 'user')) {
@@ -10690,7 +10691,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(day.label)}</div>`;
             const footer = `
-                <button class="btn btn-green" style="margin-top:14px;" onclick="rpShowJobHome()">Nouvelle journée</button>
+                <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('day')">🧑‍🏫 Revoir avec mon tuteur</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowJobHome()">Nouvelle journée</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCategoryPicker()">Retour au jeu de rôle</button>`;
             const spoken = day.log.reduce((n, e) => n + e.turns.filter(t => t.qui === 'apprenant').length, 0);
             if (!spoken) {
@@ -10935,7 +10937,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const box = document.getElementById('rp-debrief-content');
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(st.cas.titre_fr || 'Étude de cas')}</div>`;
             const footer = `
-                <button class="btn btn-green" style="margin-top:14px;" onclick="rpShowCaseHome()">Nouvelle étude de cas</button>
+                <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('case')">🧑‍🏫 Revoir avec mon tuteur</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCaseHome()">Nouvelle étude de cas</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowCategoryPicker()">Retour au jeu de rôle</button>`;
             if (!st.turns.some(t => t.qui === 'CANDIDAT')) {
                 box.innerHTML = `<div class="conj-card">${header}<p>Tu n'as pas encore répondu : rien à analyser.</p>${footer}</div>`;
@@ -12787,7 +12790,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 <div class="prof-target-title">👋 Fin de la conversation · ${t.userCount} échange${t.userCount > 1 ? 's' : ''}</div>
                 ${mots.length ? `<div class="prof-deb-sec">📖 À garder${added ? ' (ajoutés à « 💬 Mes discussions »)' : ''}</div><ul>${mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr || '')}</li>`).join('')}</ul>` : ''}
                 ${r && r.tournure && r.tournure.nl ? `<div class="prof-deb-sec">💬 Tournure du jour</div><p><b>${rpEscapeHtml(r.tournure.nl)}</b> ${speakBtnHtml(r.tournure.nl)}<br><small>${rpEscapeHtml(r.tournure.fr || '')}</small></p>` : ''}
-                <div class="prof-actions"><button class="btn btn-green" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button></div>
+                <div class="prof-actions"><button class="btn btn-green" onclick="tutorOpen('talk')">🧑‍🏫 Revoir avec mon tuteur</button><button class="btn btn-gray" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button></div>
             </div>` });
             const bar = document.querySelector('#talk-content .talk-bar');
             if (bar) bar.style.display = 'none';
@@ -13144,7 +13147,8 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
                 <div class="prof-target-title">🏁 ${r.answers.length} réponse${r.answers.length > 1 ? 's' : ''} sur ${r.d.turns.length} répliques</div>
                 ${corr.length ? `<div class="prof-deb-sec">✍️ À retenir</div><ul>${corr.map(x => `<li>« ${rpEscapeHtml(x.text)} »<br><b>${rpEscapeHtml(x.corr.corrige)}</b> ${speakBtnHtml(x.corr.corrige)}<br><small>${rpEscapeHtml(x.corr.explication || '')}</small></li>`).join('')}</ul>` : '<p class="report-meta">Aucune faute relevée' + (GeminiService.isAvailable() ? '.' : ' (corrections indisponibles sans clé Gemini).') + '</p>'}
                 <div class="prof-actions">
-                    <button class="btn btn-green" onclick="rpReplaySetup(${r.index})">🔁 Recommencer</button>
+                    <button class="btn btn-green" onclick="tutorOpen('replay')">🧑‍🏫 Revoir avec mon tuteur</button>
+                    <button class="btn btn-gray" onclick="rpReplaySetup(${r.index})">🔁 Recommencer</button>
                     <button class="btn btn-gray" onclick="rpShowReplayList()">← Entretiens réels</button>
                 </div>
             </div>`);
@@ -13252,6 +13256,252 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
             return c;
         }
 
+        // ===== Revoir avec mon tuteur (après une conversation) =====
+        // À la fin d'un jeu de rôle (entretien, journée métier, étude de cas, jeu de rôle classique,
+        // Discuter, Rejouer), le tuteur prend le relais, à l'oral et en français : il revoit les
+        // répliques de l'apprenant une par une (contexte, explication de la faute, bonne version en
+        // néerlandais, autre façon de le dire) ; l'apprenant peut lui poser des questions en
+        // français à tout moment. Répéter la phrase au micro est une option (state.settings.tutor
+        // .repeat, désactivée par défaut). Gemini : un appel pour préparer la séance (tutorPrepPrompt),
+        // puis un par question posée (tutorAskPrompt) ; prompts séparés des personnages.
+        let tutor = null;
+
+        function tutorSettings() {
+            if (!state.settings) state.settings = {};
+            const s = state.settings.tutor || {};
+            state.settings.tutor = { repeat: s.repeat === true };
+            return state.settings.tutor;
+        }
+        function tutorActive(t) { return !!(t && tutor === t && !t.ended && document.getElementById('tutor-view').classList.contains('active')); }
+
+        // La conversation à revoir, selon d'où on vient : [{ me, text }].
+        function tutorLines(src) {
+            const out = [];
+            const push = (me, text) => { text = String(text || '').trim(); if (text) out.push({ me, text }); };
+            if (src === 'talk' && talk) talk.history.forEach(h => push(h.who === 'me', h.who === 'me' ? h.text : h.nl));
+            else if (src === 'replay' && rpReplay) rpReplay.log.forEach(l => { const m = l.match(/^(.*?) : ([\s\S]*)$/); if (m) push(m[1] === 'Candidat', m[2]); });
+            else if (src === 'day' && rpDayState) rpDayState.log.forEach(e => e.turns.forEach(x => push(x.qui === 'apprenant', x.texte)));
+            else if (src === 'case' && rpCaseState && rpCaseState.turns) rpCaseState.turns.forEach(x => push(x.qui === 'CANDIDAT', x.texte));
+            else if (src === 'rp') {
+                if (rpCurrentScenario && rpCurrentScenario.welcome) push(false, rpCurrentScenario.welcome);
+                rpConversationHistory.slice(1).forEach(m => push(m.role === 'user', m.parts && m.parts[0] && m.parts[0].text));
+            }
+            return out;
+        }
+
+        function tutorPrepPrompt(lines) {
+            const conv = lines.slice(-70).map(l => (l.me ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + l.text).join('\n');
+            return `Tu es le tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}. Il vient de terminer une conversation d'entraînement ; tu prends le relais pour la revoir AVEC lui, à l'oral, comme un tuteur bienveillant.
+Conversation (APPRENANT = lui ; ses répliques ont pu être dictées : ignore ponctuation, majuscules et petites erreurs de transcription évidentes ; il a pu glisser des mots français quand un mot lui manquait) :
+${conv}
+
+Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, ou qui se diraient nettement mieux autrement (les plus utiles, dans l'ordre de la conversation), et 1 ou 2 répliques réussies à saluer.
+Réponds UNIQUEMENT en JSON :
+{"intro_fr": "1 ou 2 phrases chaleureuses : ton impression générale",
+ "bons": [{"phrase": "sa réplique réussie, telle quelle", "pourquoi_fr": "ce qui est bien, court"}],
+ "items": [{"contexte": "la réplique de l'interlocuteur à laquelle il répondait, telle quelle", "phrase": "ce qu'il a dit, tel quel", "explication_fr": "2 ou 3 phrases simples, comme à l'oral, qui expliquent la ou les fautes ; mots néerlandais entre ** **", "version_nl": "la bonne façon de le dire, en gardant son idée", "version_fr": "traduction française", "autre_nl": "une autre façon naturelle de le dire", "a_retenir": {"nl": "la tournure clé, quelques mots", "fr": "sa traduction"}}],
+ "conclusion_fr": "1 ou 2 phrases : le point prioritaire à travailler"}`;
+        }
+
+        function tutorAskPrompt(item, question) {
+            return `Tu es tuteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${liveLevel()}. Vous revoyez ensemble une de ses phrases.
+Il avait dit : « ${item ? item.phrase : ''} »
+Bonne version : « ${item ? item.version_nl : ''} »
+Ton explication : ${item ? item.explication_fr : ''}
+Il te demande, en français : « ${question} »
+Réponds-lui en français, comme à l'oral, en 2 à 4 phrases claires, avec les mots néerlandais entre ** ** et un exemple si utile.
+Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
+        }
+
+        function tutorBubble(who, html) {
+            const chat = document.getElementById('tutor-chat');
+            if (!chat) return null;
+            const div = document.createElement('div');
+            div.className = 'prof-msg ' + who;
+            div.innerHTML = html;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            return div;
+        }
+        const tutorMd = s => rpEscapeHtml(s || '').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+        async function tutorSay(t, fr) {
+            tutorBubble('prof guide-voice', `<div>${tutorMd(fr)}</div>`);
+            if (tutorActive(t)) await conjAudioSpeakMixed(String(fr).replace(/\*\*/g, ''), 1, 0.9, () => tutorActive(t));
+        }
+        async function tutorSayNl(t, nl) { if (tutorActive(t) && nl) await conjAudioSpeak(nl, 'nl', 0.9); }
+
+        function tutorRenderShell() {
+            const s = tutorSettings();
+            document.getElementById('tutor-content').innerHTML = `
+                <h2 style="margin-bottom:4px;">🧑‍🏫 Revoir avec mon tuteur</h2>
+                <div class="lc-row" style="margin-bottom:6px;"><button type="button" class="lc-toggle${s.repeat ? ' on' : ''}" onclick="tutorSettings().repeat = !tutorSettings().repeat; save(); this.classList.toggle('on'); this.innerText = '🔁 Me faire répéter : ' + (tutorSettings().repeat ? 'oui' : 'non');">🔁 Me faire répéter : ${s.repeat ? 'oui' : 'non'}</button></div>
+                <div id="tutor-chat" class="prof-chat guide-chat"></div>
+                <div id="tutor-actions" class="guide-actions"></div>
+                <div class="prof-input-row">
+                    <input type="text" id="tutor-input" placeholder="Pose-moi ta question en français…" onkeydown="if(event.key==='Enter') tutorSendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="tutorSendTyped()">➤</button>
+                </div>
+                <div class="prof-mic-row"><button type="button" class="btn btn-gray" id="tutor-mic" onclick="tutorMic()">🎤 Poser une question</button></div>`;
+        }
+
+        // Attente d'un choix (boutons) ou d'une question tapée / dite.
+        function tutorWait(t, btns) {
+            return new Promise(res => {
+                if (!tutorActive(t)) return res('quit');
+                if (t.queued) { const q = t.queued; t.queued = null; return res({ q }); }
+                t.waiter = res;
+                document.getElementById('tutor-actions').innerHTML = btns.map(([v, l]) => `<button type="button" class="btn ${v === 'next' ? 'btn-green' : 'btn-gray'}" onclick="tutorPick('${v}')">${l}</button>`).join('');
+            });
+        }
+        function tutorPick(v) {
+            const t = tutor;
+            if (!t || !t.waiter) return;
+            const w = t.waiter;
+            t.waiter = null;
+            const el = document.getElementById('tutor-actions');
+            if (el) el.innerHTML = '';
+            w(v);
+        }
+        function tutorSubmit(text) {
+            const t = tutor;
+            text = String(text || '').trim();
+            if (!t || t.ended || !text) return;
+            if (t.waiter) tutorPick({ q: text }); else t.queued = text;
+        }
+        function tutorSendTyped() {
+            const input = document.getElementById('tutor-input');
+            const v = input ? input.value.trim() : '';
+            if (!v) return;
+            input.value = '';
+            tutorSubmit(v);
+        }
+        function tutorMic() {
+            const t = tutor;
+            if (!t) return;
+            if (t.rec) { t.rec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta question."); return; }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const mic = document.getElementById('tutor-mic');
+            t.rec = longListen({
+                lang: 'fr', input: document.getElementById('tutor-input'), silence: profSettings().silence,
+                isActive: () => tutorActive(t),
+                onState: (st, cd) => { if (mic) { mic.classList.add('listening'); mic.innerText = cd ? `Envoi dans ${cd}…` : "👂 J'écoute… (touche pour envoyer)"; } },
+                onEnd: st => { if (t.rec === st) t.rec = null; if (mic) { mic.classList.remove('listening'); mic.innerText = '🎤 Poser une question'; } },
+                onSubmit: text => tutorSubmit(text)
+            });
+        }
+
+        async function tutorAnswer(t, item, q) {
+            tutorBubble('moi', '🇫🇷 ' + rpEscapeHtml(q));
+            const wait = tutorBubble('info', '…');
+            let r = null;
+            try { r = rpHelpParseJson(await GeminiService.generate(tutorAskPrompt(item, q))); } catch (e) { r = null; }
+            if (wait) wait.remove();
+            if (!tutorActive(t)) return;
+            if (!r || !r.reponse_fr) { await tutorSay(t, "Je n'ai pas réussi à te répondre, réessaie dans un instant."); return; }
+            await tutorSay(t, r.reponse_fr);
+            if (r.exemple_nl) { tutorBubble('prof', `<div class="prof-nl">${rpEscapeHtml(r.exemple_nl)} ${speakBtnHtml(r.exemple_nl)}</div>`); await tutorSayNl(t, r.exemple_nl); }
+        }
+
+        // Répétition (option) : deux essais, vérifiés dans l'app (rpSpeechMatch), sans Gemini.
+        async function tutorRepeat(t, nl) {
+            if (!window.SpeechRecognition) return;
+            for (let k = 0; k < 2 && tutorActive(t); k++) {
+                await tutorSay(t, k ? 'Encore une fois ?' : 'À toi, redis-la.');
+                const heard = await conjAudioListen();
+                if (!tutorActive(t)) return;
+                if (!heard) continue;
+                tutorBubble('moi', rpEscapeHtml(heard));
+                if (rpSpeechMatch(heard, nl)) { await tutorSay(t, 'Parfait !'); return; }
+            }
+            if (tutorActive(t)) await tutorSay(t, "Pas grave, on continue : tu la retrouveras dans tes corrections.");
+        }
+
+        async function tutorOpen(src) {
+            const lines = tutorLines(src);
+            if (!lines.some(l => l.me)) { alert("Tu n'as encore rien dit : rien à revoir."); return; }
+            if (!GeminiService.isAvailable()) { alert("Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA."); return; }
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            if (typeof rpReplayStopListen === 'function') rpReplayStopListen();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (tutor) tutorQuit(true);
+            const prev = document.querySelector('.view.active');
+            const t = tutor = { prev: prev ? prev.id : 'home-view', ended: false, waiter: null, queued: null, rec: null };
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('tutor-view').classList.add('active');
+            tutorRenderShell();
+            const wait = tutorBubble('info', '🧑‍🏫 Je relis ta conversation…');
+            let p = null;
+            try { p = rpHelpParseJson(await GeminiService.generate(tutorPrepPrompt(lines))); } catch (e) { p = { error: e.message }; }
+            if (wait) wait.remove();
+            if (!tutorActive(t)) return;
+            if (!p || p.error) {
+                tutorBubble('info', `⚠️ Je n'ai pas pu préparer la séance (${rpEscapeHtml((p && p.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="tutorOpen('${src}')">Réessayer</button>`);
+                return;
+            }
+            const arr = x => Array.isArray(x) ? x : [];
+            const items = arr(p.items).filter(x => x && x.version_nl);
+            if (p.intro_fr) await tutorSay(t, p.intro_fr);
+            for (const b of arr(p.bons).slice(0, 2)) {
+                if (!tutorActive(t) || !b.phrase) break;
+                tutorBubble('info', `👍 « ${rpEscapeHtml(b.phrase)} »`);
+                if (b.pourquoi_fr) await tutorSay(t, b.pourquoi_fr);
+            }
+            if (!items.length && tutorActive(t)) await tutorSay(t, "Je n'ai rien trouvé d'important à corriger : bravo !");
+            for (let i = 0; i < items.length && tutorActive(t); i++) {
+                const it = items[i];
+                if (it.a_retenir && it.a_retenir.nl && it.a_retenir.fr) liveSaveWords([{ nl: it.a_retenir.nl, fr: it.a_retenir.fr }]);
+                tutorBubble('info', `<div class="tutor-step">Réplique ${i + 1} / ${items.length}</div>
+                    ${it.contexte ? `<div class="tutor-ctx">On t'a dit : « ${rpEscapeHtml(it.contexte)} »</div>` : ''}
+                    <div class="tutor-said">Tu as répondu : « ${rpEscapeHtml(it.phrase || '')} »</div>`);
+                if (it.explication_fr) await tutorSay(t, it.explication_fr);
+                if (!tutorActive(t)) break;
+                tutorBubble('prof', `<div class="prof-nl">✨ <b>${rpEscapeHtml(it.version_nl)}</b> ${speakBtnHtml(it.version_nl)}</div>${it.version_fr ? `<small>${rpEscapeHtml(it.version_fr)}</small>` : ''}`);
+                await tutorSayNl(t, it.version_nl);
+                if (tutorSettings().repeat) await tutorRepeat(t, it.version_nl);
+                let shownOther = false;
+                while (tutorActive(t)) {
+                    const btns = [['next', i + 1 < items.length ? '✅ Suivant' : '✅ Terminer'], ['again', '🔁 Réécouter']];
+                    if (it.autre_nl && !shownOther) btns.push(['other', '🤔 Une autre façon de le dire']);
+                    const v = await tutorWait(t, btns);
+                    if (v === 'next' || v === 'quit') break;
+                    if (v === 'again') { await tutorSayNl(t, it.version_nl); continue; }
+                    if (v === 'other') {
+                        shownOther = true;
+                        tutorBubble('prof', `<div class="prof-nl">💬 ${rpEscapeHtml(it.autre_nl)} ${speakBtnHtml(it.autre_nl)}</div>`);
+                        await tutorSayNl(t, it.autre_nl);
+                        continue;
+                    }
+                    if (v && v.q) await tutorAnswer(t, it, v.q);
+                }
+            }
+            if (!tutorActive(t)) return;
+            if (p.conclusion_fr) await tutorSay(t, p.conclusion_fr);
+            if (items.length) tutorBubble('info', `Les tournures à retenir sont dans « ${LIVE_WORDS_LIST} ».`);
+            // Questions libres jusqu'à la sortie.
+            while (tutorActive(t)) {
+                const v = await tutorWait(t, [['next', '🏁 J\'ai fini']]);
+                if (v === 'next' || v === 'quit') break;
+                if (v && v.q) await tutorAnswer(t, items[items.length - 1] || null, v.q);
+            }
+            if (tutor === t && !t.ended) tutorQuit();
+        }
+
+        // Retour à l'écran d'où l'on venait (le bilan reste affiché tel quel).
+        function tutorQuit(silent) {
+            const t = tutor;
+            if (!t) return;
+            t.ended = true;
+            if (t.rec) { const st = t.rec; t.rec = null; st.finish(false); }
+            if (t.waiter) { const w = t.waiter; t.waiter = null; w('quit'); }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            tutor = null;
+            if (silent) return;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            const back = document.getElementById(t.prev) || document.getElementById('home-view');
+            back.classList.add('active');
+        }
+
         // ===== Compagnon vocal (Svetlana ou John, partout) =====
         // Un micro flottant sur tous les écrans : on parle (ou écrit) au compagnon, en français ou en
         // néerlandais ; il ouvre l'activité demandée, répond aux questions de langue, ou propose la
@@ -13271,7 +13521,7 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
         function buddyPartner() { return TALK_PARTNERS[buddySettings().partner]; }
 
         // Écrans qui ont déjà leur propre micro : le bouton flottant s'y efface.
-        const BUDDY_HIDDEN_VIEWS = ['talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
+        const BUDDY_HIDDEN_VIEWS = ['tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
         function buddyRefreshFab() {
             const fab = document.getElementById('buddy-fab');
             if (!fab) return;
