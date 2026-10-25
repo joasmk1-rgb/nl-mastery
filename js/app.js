@@ -8548,13 +8548,21 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('rp-status').innerText = "L'IA réfléchit...";
 
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: rpConversationHistory })
-                });
-
-                const data = await response.json();
+                // Règles de conversation naturelle pour TOUS les jeux de rôle, + deux réessais si
+                // Gemini est surchargé (comme GeminiService.generate).
+                const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES }] } });
+                let data = null;
+                for (let attempt = 0; attempt < 3; attempt++) {
+                    let status = 0;
+                    try {
+                        const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+                        status = response.status;
+                        data = await response.json();
+                    } catch (e) { data = { error: { message: e.message } }; }
+                    const busy = data && data.error && (status === 429 || status === 500 || status === 503 || /overload|high demand|unavailable|exhausted|try again/i.test(data.error.message || ''));
+                    if (!busy || attempt === 2) break;
+                    await new Promise(r => setTimeout(r, attempt ? 5000 : 2000));
+                }
 
                 if (data.error) {
                     throw new Error(data.error.message || "Erreur API inconnue");
@@ -10355,11 +10363,28 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('modrp-built').innerText = modRpEx.built.join(' ');
         }
 
-        function modRpCheck(choice) {
+        // Réponse libre que l'app n'a pas reconnue : Gemini vérifie si elle est juste quand même
+        // (autre formulation, synonyme, autre ordre). Le corrigé reste une aide, pas la règle.
+        async function modRpSupportJudge(q, given) {
+            const enonce = q.type === 'traduire' ? 'Traduire en néerlandais : « ' + (q.fr || '') + ' »'
+                : q.type === 'trou' ? 'Compléter le trou : « ' + (q.phrase || '') + ' »' + (q.fr ? ' (sens : ' + q.fr + ')' : '')
+                : 'Répondre à la question : « ' + (q.question || '') + ' »' + (q.question_fr ? ' (' + q.question_fr + ')' : '');
+            const attendu = q.type === 'repondre' ? (q.exemple || (q.attendu || []).join(' … ')) : q.answer;
+            try {
+                const r = rpHelpParseJson(await GeminiService.generate(`Exercice de néerlandais pour un apprenant francophone. ${enonce}
+Réponse attendue (une possibilité parmi d'autres) : « ${attendu} »
+Réponse de l'apprenant (elle a pu être dictée : ignore ponctuation, majuscules et petites erreurs de transcription) : « ${given} »
+Elle n'est pas identique à la réponse attendue. Est-elle quand même CORRECTE et répond-elle bien à la consigne (autre formulation, synonyme, autre ordre des mots possible) ? Refuse-la si elle contient une faute de grammaire ou de vocabulaire, ou si elle ne répond pas à la consigne.
+Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase courte"}`));
+                return r && typeof r.correct === 'boolean' ? r : null;
+            } catch (e) { return null; }
+        }
+
+        async function modRpCheck(choice) {
             const ex = modRpEx;
             if (!ex || ex.checking) return;
             const q = ex.list[ex.i];
-            let ok, expected;
+            let ok, expected, supportNote = '';
             if (q.type === 'qcm') { ok = choice === q.answer; expected = q.choices[q.answer]; }
             else if (q.type === 'ordre') {
                 const clean = s => normalize(s).replace(/[.?!,]/g, '').trim();
@@ -10379,17 +10404,29 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     || ((ex.heard || []).some(h => targets.some(t => rpSpeechMatch(h, t))));
                 expected = targets[0];
             }
-            ex.heard = null;
             ex.checking = true;
+            // Gemini en appui pour les réponses libres que l'app n'a pas reconnues.
+            if (!ok && ['repondre', 'traduire', 'trou'].includes(q.type) && GeminiService.isAvailable()) {
+                const given = (ex.heard && ex.heard[0]) || (document.getElementById('modrp-input') || {}).value || '';
+                if (given.trim()) {
+                    const fb0 = document.getElementById('modrp-fb');
+                    if (fb0) { fb0.style.color = 'var(--text-secondary)'; fb0.innerText = '🤔 Ce n\'est pas la réponse prévue, je vérifie si la tienne est juste aussi…'; }
+                    const j = await modRpSupportJudge(q, given);
+                    if (modRpEx !== ex) return;
+                    if (j && j.correct) { ok = true; expected = given.trim(); supportNote = ' <small>(autre bonne réponse : ' + rpEscapeHtml(q.type === 'repondre' ? (q.exemple || '') : q.answer) + ')</small>'; }
+                    else if (j && j.explication_fr) supportNote = '<br><small>' + rpEscapeHtml(j.explication_fr) + '</small>';
+                }
+            }
+            ex.heard = null;
             if (ok) ex.score++;
             (ex.results || (ex.results = []))[ex.i] = ok;
             modRpEtapeNotions(modRpCurrent, ex.etapeId).forEach(n => { if (curriculumNotions[n]) recordNotionAttempt(n, ok); });
             if (ex.onCheck) ex.onCheck(ok, expected);
             const fb = document.getElementById('modrp-fb');
             fb.style.color = ok ? 'var(--success)' : 'var(--wrong)';
-            fb.innerHTML = (ok ? '✅ ' : '❌ Réponse : ') + rpEscapeHtml(expected) + ' ' + speakBtnHtml(expected) +
+            fb.innerHTML = (ok ? '✅ ' : '❌ Réponse : ') + rpEscapeHtml(expected) + ' ' + speakBtnHtml(expected) + supportNote +
                 (ok ? '' : ' ' + reportBtnHtml({ kind: 'module', ref: modRpCurrent + ':' + ex.etapeId, nl: expected, fr: q.fr || q.q || '', context: 'exercice ' + q.type }));
-            setTimeout(() => { ex.checking = false; ex.i++; modRpRenderEx(); }, ok ? 1100 : 2600);
+            setTimeout(() => { ex.checking = false; ex.i++; modRpRenderEx(); }, ok ? (supportNote ? 2600 : 1100) : 2600);
         }
 
         // ----- Jeu de rôle d'une étape ou final -----
@@ -11613,6 +11650,8 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
 ${profContextLines()}
 ${phaseTxt}
 
+${CONV_NATURAL_RULES}
+
 Règles :
 - 1 à 3 phrases en néerlandais, adaptées au niveau. Pas d'emojis, pas de mise en forme.
 - Si l'apprenant parle ou écrit en FRANÇAIS (une question, « comment on dit… ? », « je ne comprends pas », un mot qui lui manque), réponds-lui d'abord en français dans "fr" : réponse claire et courte (2 ou 3 phrases), avec la formulation néerlandaise utile ; puis, dans "nl", relance en néerlandais (par exemple en l'invitant à redire sa phrase avec cette formulation). Sinon "fr" reste vide.
@@ -12454,7 +12493,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     const hist = conv.history.map(h => h.who === 'them' ? 'Toi (personnage) : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
                     try {
                         reply = rpHelpParseJson(await GeminiService.generate(prompt +
-                            '\n\nRègles en plus :\n- Tiens compte de TOUT ce qu\'il a déjà dit, même dans une longue réplique : ne redemande JAMAIS une information qu\'il a déjà donnée ; rebondis dessus (« Ah, u heet dus… ») et passe à ce qui manque.\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
+                            '\n\n' + CONV_NATURAL_RULES + '\n\nRègles en plus :\n- Tiens compte de TOUT ce qu\'il a déjà dit, même dans une longue réplique : ne redemande JAMAIS une information qu\'il a déjà donnée ; rebondis dessus (« Ah, u heet dus… ») et passe à ce qui manque.\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
                             (remaining ? (conv.coveredLabels.length ? '\n- Sujets qu\'il a DÉJÀ abordés (ne les redemande pas) : ' + conv.coveredLabels.join(', ') + '.' : '') + (remaining.length ? '\n- Sujets que l\'application n\'a pas repérés : ' + remaining.join(', ') + '. VÉRIFIE dans la conversation s\'il les a en fait déjà abordés autrement (ex. « ik ben Joas » = donner son nom) : ceux-là, ne les redemande pas et mets-les dans "sujets_abordes". Pour les autres, amène-le naturellement vers l\'un d\'eux, un seul à la fois. S\'il ne reste vraiment rien, conclus sans nouvelle question et mets "fin": true.' : '\n- Il a abordé tous les sujets : réagis, conclus gentiment sans nouvelle question, et mets "fin": true.') : '') +
                             (closing ? '\n- C\'est ta DERNIÈRE réplique : réagis et conclus gentiment, sans nouvelle question.' : '') +
                             '\n- "suggestions" : 3 réponses courtes QU\'IL pourrait te dire maintenant, à son niveau, variées, avec leur traduction.' +
@@ -12813,6 +12852,7 @@ Règles :
 - Ne corrige jamais dans "reply_nl" : la correction va seulement dans "correction".
 - S'il parle FRANÇAIS (question, mot qui manque), réponds-lui brièvement en français dans "fr_help" avec la formule néerlandaise utile, puis continue en néerlandais dans "reply_nl". Sinon "fr_help" est vide.
 - ${LIVE_MIX_RULES}
+- ${CONV_NATURAL_RULES}
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
 - ${talk.lesson ? `FIN : quand toutes les tâches sont validées (✓) ou abandonnées (✗), conclus la séance chaleureusement, sans question, avec "fin": true ; sinon "fin": false.` : ''}${talk.lesson ? '' : talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
@@ -13192,6 +13232,7 @@ ${next.join('\n') || '(aucune)'}
 
 Consignes :
 - "reaction" : réaction courte et naturelle en ${lang} (Flandre), par ${speaker}, dans le ton de l'entretien (même tutoiement ou vouvoiement que les questions). Montre que tu as écouté en reprenant un détail de SA réponse. Varie : pas de compliment systématique ; parfois « Oké. » ou « Ah ja, ik zie het. » suffit. Ne corrige jamais sa langue. Le candidat peut avoir glissé des mots français : comprends-les.
+- S'il te pose une question ou prend l'initiative, réponds-y brièvement dans "reaction", comme un vrai recruteur, avant la suite.
 - Si sa réponse est À CÔTÉ de la question (il l'a sans doute mal comprise), ne fais pas comme si de rien n'était : "reaction" vide ou très courte, et "relance" = la même question reformulée plus simplement, comme un vrai recruteur (« Ik bedoel eigenlijk… »).
 - "relance" : une question de suivi en ${lang}, SEULEMENT si sa réponse est très courte, floue ou hors sujet, OU si son dossier contient un élément important lié à cette question qu'il n'a pas mentionné (demande-le comme un recruteur qui a son CV sous les yeux, par ex. « Ik zie dat je hier al in de productie gewerkt hebt, hoe was dat? »). Sinon "". Environ une fois sur trois au plus. Jamais sur un point qu'une des questions suivantes va aborder.
 - "idee_fr" : si tu relances, une idée de réponse pour le candidat, en français, tirée de son dossier (1 ou 2 phrases). Sinon "".
@@ -13810,6 +13851,18 @@ Réponds UNIQUEMENT en JSON :
             const on = liveCorrectOn();
             return `<button type="button" class="lc-toggle${on ? ' on' : ''}" onclick="liveCorrectToggle()" title="Corriger chacune de mes phrases">✍️ Correction ${on ? 'activée' : 'désactivée'}</button>`;
         }
+
+        // Conversation naturelle, partout où l'apprenant parle (décision de Joas : « le script est
+        // une aide, pas la règle ; Gemini est un support ») : jeux de rôle (systemInstruction de
+        // rpSendToGemini), Discuter, session guidée, cours particulier, Rejouer un entretien.
+        const CONV_NATURAL_RULES = `RÈGLES DE CONVERSATION NATURELLE (prioritaires sur ton script) :
+1. Réagis à ce que la personne vient VRAIMENT de dire, en reprenant un détail de sa réponse : jamais de réplique toute faite qui l'ignore.
+2. Tiens compte de tout ce qu'elle a déjà dit, même dans une longue réplique : ne redemande jamais une information déjà donnée.
+3. Si elle répond à côté de ta question (elle a mal compris), recadre gentiment, comme une vraie personne (« Nee, ik bedoelde eigenlijk… »), puis repose la question plus simplement.
+4. Si elle prend l'initiative (te pose une question, ajoute une info, change de sujet), réponds-y naturellement, puis reviens à ton objectif si besoin.
+5. Ton rôle, ta liste de questions ou ton script sont un GUIDE, pas une règle : adapte l'ordre, saute ce qui est déjà couvert, approfondis brièvement ce qui est intéressant.
+6. Si elle bloque ou semble perdue, simplifie, reformule ou propose-lui deux choix.
+7. Reste dans ton rôle et dans la langue de la conversation.`;
 
         // Règles communes sur le mélange des langues (reprises par Discuter et le cours particulier).
         const LIVE_MIX_RULES = `L'apprenant peut MÉLANGER français et néerlandais dans une même phrase quand un mot lui manque (ex. « ik wil een rendez-vous prendre met de dokter »). À l'oral, la reconnaissance vocale écoute en néerlandais : un mot français peut donc être mal transcrit (ex. « prendre » → « pranter ») ; s'il ne veut rien dire en néerlandais et ressemble à un mot français à l'oreille, reconstitue le mot français. Rends alors la phrase ENTIÈRE en néerlandais naturel, et liste chaque partie dite en français avec son équivalent néerlandais.`;
