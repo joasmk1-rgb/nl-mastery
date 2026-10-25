@@ -12540,7 +12540,7 @@ ${talk.extraWords && talk.extraWords.length ? "Mots que l'apprenant a appris auj
 Règles :
 - Une vraie conversation, vivante, comme entre deux personnes : réagis à ce qu'il dit, raconte aussi un peu de toi, pose UNE question à la fois. 1 à 3 phrases courtes, adaptées à son niveau (A1 : phrases très simples et mots très courants).
 - Néerlandais standard, comme en Flandre. Pas d'emojis.
-- Ne corrige jamais dans "reply_nl" : la correction va seulement dans "correction".
+- Pas de correction EXPLICITE dans "reply_nl" (elle va dans "correction") ; l'écho naturel de la règle 9 y est en revanche bienvenu.
 - S'il parle FRANÇAIS (question, mot qui manque), réponds-lui brièvement en français dans "fr_help" avec la formule néerlandaise utile, puis continue en néerlandais dans "reply_nl". Sinon "fr_help" est vide.
 - ${LIVE_MIX_RULES}
 - ${CONV_NATURAL_RULES}
@@ -12927,6 +12927,7 @@ ${next.join('\n') || '(aucune)'}
 Consignes :
 - "reaction" : réaction courte et naturelle en ${lang} (Flandre), par ${speaker}, dans le ton de l'entretien (même tutoiement ou vouvoiement que les questions). Montre que tu as écouté en reprenant un détail de SA réponse. Varie : pas de compliment systématique ; parfois « Oké. » ou « Ah ja, ik zie het. » suffit. Ne corrige jamais sa langue. Le candidat peut avoir glissé des mots français : comprends-les.
 - S'il te pose une question ou prend l'initiative, réponds-y brièvement dans "reaction", comme un vrai recruteur, avant la suite.
+- ${CONV_RECAST_RULE} (Ici, l'écho se fait dans "reaction", sur le ton d'un recruteur qui reformule pour vérifier qu'il a bien compris.)
 - Si sa réponse est À CÔTÉ de la question (il l'a sans doute mal comprise), ne fais pas comme si de rien n'était : "reaction" vide ou très courte, et "relance" = la même question reformulée plus simplement, comme un vrai recruteur (« Ik bedoel eigenlijk… »).
 - "relance" : une question de suivi en ${lang}, SEULEMENT si sa réponse est très courte, floue ou hors sujet, OU si son dossier contient un élément important lié à cette question qu'il n'a pas mentionné (demande-le comme un recruteur qui a son CV sous les yeux, par ex. « Ik zie dat je hier al in de productie gewerkt hebt, hoe was dat? »). Sinon "". Environ une fois sur trois au plus. Jamais sur un point qu'une des questions suivantes va aborder.
 - "idee_fr" : si tu relances, une idée de réponse pour le candidat, en français, tirée de son dossier (1 ou 2 phrases). Sinon "".
@@ -13681,6 +13682,7 @@ Réponds UNIQUEMENT en JSON :
         // Conversation naturelle, partout où l'apprenant parle (décision de Joas : « le script est
         // une aide, pas la règle ; Gemini est un support ») : jeux de rôle (systemInstruction de
         // rpSendToGemini), Discuter, session guidée, cours particulier, Rejouer un entretien.
+        const CONV_RECAST_RULE = `AIDE À REFORMULER (Joas : « comme quelqu'un de bienveillant qui parle avec un étranger ») : si sa phrase contient une faute qui compte, un mot français ou une phrase inachevée, reprends SA phrase sous la bonne forme dans ta réplique, en écho naturel, puis enchaîne (il a dit « ik heb naar de markt gegaan » → « Ah, je bent naar de markt gegaan? Leuk! En wat heb je gekocht? »). Ce n'est PAS une correction : aucune remarque sur sa langue (c'est compatible avec la consigne de ne jamais corriger), juste la bonne forme, entendue au bon moment. Une seule reprise par réplique, sur la faute la plus utile ; rien si la phrase est juste ou si la faute est infime. S'il cherche ses mots ou s'arrête au milieu, aide-le à finir (« … een huisgenoot, bedoel je? ») au lieu de passer à autre chose.`;
         const CONV_NATURAL_RULES = `RÈGLES DE CONVERSATION NATURELLE (prioritaires sur ton script) :
 1. Réagis à ce que la personne vient VRAIMENT de dire, en reprenant un détail de sa réponse : jamais de réplique toute faite qui l'ignore.
 2. Tiens compte de tout ce qu'elle a déjà dit, même dans une longue réplique : ne redemande jamais une information déjà donnée.
@@ -13689,7 +13691,8 @@ Réponds UNIQUEMENT en JSON :
 5. Ton rôle, ta liste de questions ou ton script sont un GUIDE, pas une règle : adapte l'ordre, saute ce qui est déjà couvert, approfondis brièvement ce qui est intéressant.
 6. Si elle bloque ou semble perdue, simplifie, reformule ou propose-lui deux choix.
 7. Reste dans ton rôle et dans la langue de la conversation.
-8. Si elle demande comment on dit quelque chose (« hoe zeg je… », « ik weet niet hoe je dat zegt ») suivi d'un mot français (souvent entre « »), donne-lui le mot néerlandais au passage, naturellement et brièvement (« Een huisgenoot, bedoel je? »), puis continue.`;
+8. Si elle demande comment on dit quelque chose (« hoe zeg je… », « ik weet niet hoe je dat zegt ») suivi d'un mot français (souvent entre « »), donne-lui le mot néerlandais au passage, naturellement et brièvement (« Een huisgenoot, bedoel je? »), puis continue.
+9. ${CONV_RECAST_RULE}`;
 
         // Règles communes sur le mélange des langues (reprises par Discuter et le cours particulier).
         const LIVE_MIX_RULES = `L'apprenant peut MÉLANGER français et néerlandais dans une même phrase quand un mot lui manque (ex. « ik wil een rendez-vous prendre met de dokter »). À l'oral, la reconnaissance vocale écoute en néerlandais : un mot français peut donc être mal transcrit (ex. « prendre » → « pranter ») ; s'il ne veut rien dire en néerlandais et ressemble à un mot français à l'oreille, reconstitue le mot français. Un passage entre « » qui suit « hoe zeg je… » ou « ik weet niet hoe je dat zegt » a été dicté EN FRANÇAIS exprès (le micro a basculé) : c'est le mot qu'il cherche ; dans la phrase corrigée, remplace la demande et le passage par le mot néerlandais à sa place naturelle. Rends alors la phrase ENTIÈRE en néerlandais naturel, et liste chaque partie dite en français avec son équivalent néerlandais.`;
