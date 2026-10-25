@@ -1861,7 +1861,6 @@ if (firebaseAvailable) {
         let currentItem = null;
         let currentSessionSourceKey = null;   // clé de la source en cours (catégorie/liste + sens), pour le système de paquets de 10
         let currentSessionOrderedItems = null; // ordre stable des mots de cette source, pour le découpage en paquets
-        let inRevisionMode = false;
         let revisionQueue = []; // file d'attente : chaque mot n'y figure qu'une fois
 
         function seeWord(id) {
@@ -2760,7 +2759,7 @@ if (firebaseAvailable) {
         function renderReviser() {
             const voc = document.getElementById('vocab-review');
             if (voc) {
-                const wordCount = getReviewItems().length;
+                const wordCount = routineRevoirItems().length;
                 const articleCount = getArticleReviewItems().length;
                 voc.innerHTML = `
                     <div class="hub-card" style="grid-column:1 / -1;" onclick="showConjugaison()">
@@ -2771,17 +2770,17 @@ if (firebaseAvailable) {
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startRevision()">
                         <span class="hub-card-icon">🔁</span>
                         <div class="hub-card-title">Mots à revoir</div>
-                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''}.</div>
+                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''}, avec ton tuteur, à l'oral.</div>
                     </div>
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startArticleRevision()">
                         <span class="hub-card-icon">⚖️</span>
                         <div class="hub-card-title">De ou het ?</div>
-                        <div class="hub-card-desc">${articleCount} mot${articleCount > 1 ? 's' : ''} à revoir.</div>
+                        <div class="hub-card-desc">${articleCount ? `${articleCount} mot${articleCount > 1 ? 's' : ''} à revoir` : 'Les noms courants'}, à l'oral.</div>
                     </div>
                     <div class="hub-card" onclick="showChunkTraining()">
                         <span class="hub-card-icon">🧩</span>
                         <div class="hub-card-title">Blocs de mots</div>
-                        <div class="hub-card-desc">Les mots en contexte.</div>
+                        <div class="hub-card-desc">Les mots en contexte, avec ton tuteur, à l'oral.</div>
                     </div>
                     <div class="hub-card" onclick="startAdaptiveTest()">
                         <span class="hub-card-icon">📏</span>
@@ -3587,36 +3586,11 @@ if (firebaseAvailable) {
 
         // ----- Entraînement par blocs : phrase à trou -----
         const CHUNK_SESSION_SIZE = 10;
-        let chunkSession = null;
 
         function chunkBlank(k) {
             const idx = k.ex.toLowerCase().indexOf(k.c);
             if (idx < 0) return null;
             return { before: k.ex.slice(0, idx), after: k.ex.slice(idx + k.c.length), answer: k.ex.slice(idx, idx + k.c.length) };
-        }
-
-        async function showChunkTraining() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('chunk-view').classList.add('active');
-            setActiveNav('nav-vocab');
-            const box = document.getElementById('chunk-content');
-            box.innerHTML = '<p style="color:#888;">Chargement des blocs...</p>';
-            await loadChunks();
-            const st = state.chunkStats || {};
-            const all = [];
-            fullDb.forEach(i => chunksForItem(i).forEach(k => { if (chunkBlank(k)) all.push(k.c); }));
-            const distinct = [...new Set(all)];
-            const seen = distinct.filter(c => st[c]).length;
-            const due = distinct.filter(c => st[c] && st[c].streak === 0).length;
-            const known = distinct.filter(c => st[c] && st[c].streak >= 2).length;
-            chunkSession = null;
-            box.innerHTML = `
-                <div class="conj-card">
-                    <p style="font-size:0.9rem; margin-top:0;">Plutôt qu'un mot isolé, tu apprends le <b>bloc</b> dans lequel il apparaît le plus souvent : <i>op tijd</i>, <i>geen tijd</i>, <i>de laatste tijd</i>… On te donne une phrase en français et la phrase néerlandaise avec un trou : à toi de retrouver le bloc.</p>
-                    <div style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:12px;">${distinct.length} blocs disponibles · ${seen} déjà vus · ${known} acquis${due ? ` · <b style="color:var(--wrong);">${due} à revoir</b>` : ''}</div>
-                    <button class="btn btn-green" onclick="startChunkSession()">▶️ Lancer (${CHUNK_SESSION_SIZE} blocs)</button>
-                </div>
-                <p class="rp-real-hint" style="text-align:center;">Phrases d'exemple : Tatoeba (tatoeba.org), licence CC BY 2.0 FR.</p>`;
         }
 
         // Composition : d'abord les blocs ratés la dernière fois, puis un tirage pondéré par la
@@ -3644,85 +3618,6 @@ if (firebaseAvailable) {
             for (const r of rest) { if (picked.length >= CHUNK_SESSION_SIZE) break; take(r.c); }
             for (let i = picked.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [picked[i], picked[j]] = [picked[j], picked[i]]; }
             return picked;
-        }
-
-        function startChunkSession() {
-            const questions = pickChunkQuestions();
-            if (!questions.length) return;
-            chunkSession = { questions, index: 0, score: 0, missed: [], answered: false };
-            renderChunkQuestion();
-        }
-
-        function renderChunkQuestion() {
-            const s = chunkSession, box = document.getElementById('chunk-content');
-            if (!s || !box) return;
-            if (s.index >= s.questions.length) { renderChunkSummary(); return; }
-            const q = s.questions[s.index];
-            const nWords = q.k.c.split(' ').length;
-            s.answered = false;
-            box.innerHTML = `
-                <div class="conj-card">
-                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:8px;">Bloc ${s.index + 1}/${s.questions.length} · Score : ${s.score}${q.stat && q.stat.streak === 0 ? ' · <span style="color:var(--wrong);">à revoir</span>' : ''}</div>
-                    <div class="chunk-q-fr">${escHtml(q.k.fr)}</div>
-                    <div class="chunk-q-nl">${escHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(nWords).trim()}</span>${escHtml(q.blank.after)}</div>
-                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:10px;">${nWords} mots · autour de <b>${escHtml(chunkKey(q.item.nl))}</b> (${escHtml(q.item.fr)})</div>
-                    <input type="text" id="chunk-input" style="width:100%; margin-bottom:8px;" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Le bloc qui manque..." onkeypress="if(event.key==='Enter') chunkEnter()">
-                    <div id="chunk-feedback" style="min-height:1.4em; margin-bottom:8px;"></div>
-                    <div id="chunk-actions">
-                        <button class="btn btn-green" onclick="chunkCheck(false)">Vérifier</button>
-                        <button class="btn btn-gray" style="margin-top:8px;" onclick="chunkCheck(true)">Je ne sais pas</button>
-                    </div>
-                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showChunkTraining()">Arrêter</button>
-                </div>`;
-            const input = document.getElementById('chunk-input');
-            if (input) input.focus();
-        }
-
-        function chunkEnter() {
-            if (!chunkSession) return;
-            if (chunkSession.answered) chunkNext(); else chunkCheck(false);
-        }
-
-        function chunkCheck(giveUp) {
-            const s = chunkSession;
-            if (!s || s.answered) return;
-            const q = s.questions[s.index];
-            const result = giveUp ? { status: 'wrong' } : evaluateAnswer(document.getElementById('chunk-input').value, q.k.c);
-            const ok = result.status !== 'wrong';
-            s.answered = true;
-            if (ok) s.score++; else s.missed.push(q);
-            if (!state.chunkStats) state.chunkStats = {};
-            const stat = state.chunkStats[q.k.c] || { ok: 0, ko: 0, streak: 0, last: 0 };
-            if (ok) { stat.ok++; stat.streak++; } else { stat.ko++; stat.streak = 0; }
-            stat.last = Date.now();
-            state.chunkStats[q.k.c] = stat;
-            save();
-            const fb = document.getElementById('chunk-feedback');
-            fb.innerHTML = `<div style="color:${ok ? 'var(--success)' : 'var(--wrong)'}; font-weight:700;">${ok ? (result.status === 'close' ? '🟡 Presque, on valide !' : '✅ Bravo !') : '❌ Le bloc était :'} ${escHtml(q.k.c)} ${speakBtnHtml(q.k.c)}</div>
-                <div class="chunk-ex">${escHtml(q.blank.before)}<b>${escHtml(q.blank.answer)}</b>${escHtml(q.blank.after)} ${speakBtnHtml(q.k.ex)}</div>`;
-            document.getElementById('chunk-actions').innerHTML = `<button class="btn btn-green" onclick="chunkNext()">${s.index + 1 >= s.questions.length ? 'Voir le résultat' : 'Suivant →'}</button>`;
-        }
-
-        function chunkNext() {
-            if (!chunkSession) return;
-            chunkSession.index++;
-            renderChunkQuestion();
-        }
-
-        function renderChunkSummary() {
-            const s = chunkSession;
-            document.getElementById('chunk-content').innerHTML = `
-                <div class="conj-card">
-                    <div class="conj-verb-title">Résultat : ${s.score}/${s.questions.length}</div>
-                    ${s.missed.length ? `<div class="section-title" style="margin-top:var(--space-4);">📌 À retenir (reviendront en priorité)</div>
-                        ${s.missed.map(q => `<div class="wl-chunk">
-                            <div class="chunk-text">${escHtml(q.k.c)} ${speakBtnHtml(q.k.c)}</div>
-                            <div class="chunk-ex">${escHtml(q.k.ex)}</div>
-                            <div class="chunk-fr">${escHtml(q.k.fr)}</div>
-                        </div>`).join('')}` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`}
-                    <button class="btn btn-green" style="margin-top:14px;" onclick="startChunkSession()">🔁 Nouvelle session</button>
-                    <button class="btn btn-gray" style="margin-top:8px;" onclick="showApprendre()">Retour</button>
-                </div>`;
         }
 
         // ===== Vue Conjugaison =====
@@ -6312,7 +6207,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             stopTimeAttack();
             currentSessionSourceKey = null;
             currentSessionOrderedItems = null;
-            inRevisionMode = false;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
             setActiveNav('nav-home');
@@ -6320,7 +6214,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function startSession(category) {
-            inRevisionMode = false;
             const orderedItems = byFrequencyDesc(fullDb.filter(i => i.file === category));
             const sourceKey = 'cat:' + category + '::' + state.settings.direction;
             const unlocked = getUnlockedItems(sourceKey, orderedItems);
@@ -6344,7 +6237,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function startCustomList(name) {
-            inRevisionMode = false;
             const ids = state.customLists[name] || [];
             const orderedItems = byFrequencyDesc(fullDb.filter(i => ids.includes(i.id)));
             const sourceKey = 'list:' + name + '::' + state.settings.direction;
@@ -6363,48 +6255,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             nextQ();
         }
 
-        function startRevision() {
-            currentSessionSourceKey = null; // la révision n'est pas soumise au système de paquets
-            currentSessionOrderedItems = null;
-            const items = getReviewItems();
-            if (items.length === 0) { alert("Rien à réviser pour l'instant : réponds à quelques mots d'abord, ceux que tu rates iront ici automatiquement."); return; }
-            inRevisionMode = true;
-            revisionQueue = [...items].sort(() => 0.5 - Math.random()); // chaque mot n'y figure qu'UNE fois
-            document.getElementById('session-title').innerText = '🔁 Révision (mots ratés)';
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('study-view').classList.add('active');
-            setActiveNav('nav-home');
-            batchResults = [];
-            document.getElementById('batch-recap').innerHTML = '';
-            bumpMode('classique');
-            save();
-            revisionNextQ();
-        }
-
-        // Repousse un mot raté plus loin dans la file (25 positions, ou à la fin si la file est plus courte)
-        function requeueItem(item) {
-            const insertPos = Math.min(25, revisionQueue.length);
-            revisionQueue.splice(insertPos, 0, item);
-        }
-
-        function revisionNextQ() {
-            if (revisionQueue.length === 0) {
-                alert("🎉 Session de révision terminée ! Tous les mots de la file ont été retravaillés.");
-                inRevisionMode = false;
-                showHome();
-                return;
-            }
-            currentItem = revisionQueue.shift(); // on prend le premier de la file, jamais de doublon
-            seeWord(currentItem.id);
-            save();
-            const { question } = questionFor(currentItem);
-            document.getElementById('q-text').innerText = question;
-            document.getElementById('ans-input').placeholder = state.settings.direction === 'fr2nl'
-                ? 'Traduire en Néerlandais...' : 'Traduire en Français...';
-            document.getElementById('ans-input').value = "";
-            document.getElementById('feedback').innerText = "";
-            document.getElementById('ans-input').focus();
-        }
+        // Les anciennes entrées ouvrent désormais l'entraînement avec le tuteur.
+        function startRevision() { routineDrill('revoir'); }
+        function startArticleRevision() { routineDrill('dehet'); }
+        function showChunkTraining() { routineDrill('blocs'); }
 
         function updateRevisionButton() {
             const n = getReviewItems().length;
@@ -6427,79 +6281,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (btn) btn.innerText = `🔤 Révision déterminants (${n} mot${n > 1 ? 's' : ''})`;
         }
 
-        let articleQueue = [];
-        let currentArticleItem = null;
-
-        function startArticleRevision() {
-            const items = getArticleReviewItems();
-            if (items.length === 0) { alert("Rien à réviser côté déterminants pour l'instant."); return; }
-            articleQueue = [...items].sort(() => 0.5 - Math.random());
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('article-view').classList.add('active');
-            setActiveNav('nav-home');
-            nextArticleQ();
-        }
-
-        function nextArticleQ() {
-            if (articleQueue.length === 0) {
-                alert("🎉 Terminé ! Tous les déterminants de la file ont été retravaillés.");
-                showHome();
-                return;
-            }
-            currentArticleItem = articleQueue.shift();
-            document.getElementById('article-word').innerText = stripArticle(currentArticleItem.nl);
-            document.getElementById('article-feedback').innerText = '';
-            const statusLabel = { 'a-reviser': '⚠️ à réviser', 'reussi': '🟡 réussi une fois', 'maitrise': '🏆 maîtrisé', 'non-teste': '' }[articleStatus(currentArticleItem)];
-            document.getElementById('article-progress').innerText = `${articleQueue.length} restant(s) — ${statusLabel}`;
-        }
-
-        function articleStatus(item) {
-            const key = dirKey(item.id);
-            if ((state.stats.articleMistakes[key] || 0) > 0) return 'a-reviser';
-            if ((state.stats.articleStreak[key] || 0) >= 2) return 'maitrise';
-            if ((state.stats.articleStreak[key] || 0) === 1) return 'reussi';
-            return 'non-teste';
-        }
-
-        function checkArticle(choice) {
-            const correct = correctArticleFor(currentArticleItem);
-            const fb = document.getElementById('article-feedback');
-            const key = dirKey(currentArticleItem.id);
-            if (choice === correct) {
-                state.stats.articleStreak[key] = (state.stats.articleStreak[key] || 0) + 1;
-                const status = articleStatus(currentArticleItem);
-                if (status === 'maitrise') {
-                    state.stats.articleMistakes[key] = 0; // vraiment acquis, sort de la pile
-                    fb.innerText = '✅ ' + correct.toUpperCase() + ' — 🏆 maîtrisé !';
-                } else {
-                    fb.innerText = '✅ ' + correct.toUpperCase() + ' — réussi (encore 1 fois pour le maîtriser)';
-                    articleQueue.push(currentArticleItem); // pas encore acquis, on le repropose plus tard
-                }
-                fb.style.color = 'var(--success)';
-            } else {
-                state.stats.articleStreak[key] = 0; // un raté remet le streak à zéro
-                fb.innerText = '❌ C\'était ' + correct.toUpperCase();
-                fb.style.color = 'var(--wrong)';
-                articleQueue.push(currentArticleItem); // repoussé à la fin de la file
-            }
-            save();
-            setTimeout(nextArticleQ, 1400);
-        }
-
         function iDontKnow() {
             const fb = document.getElementById('feedback');
             const { answerField } = questionFor(currentItem);
             fb.innerText = "🤷 RÉPONSE : " + currentItem[answerField];
             fb.style.color = "var(--wrong)";
             registerResult(currentItem.id, false);
-            if (inRevisionMode) {
-                requeueItem(currentItem);
-                save();
-                setTimeout(revisionNextQ, 1600);
-            } else {
-                save();
-                setTimeout(nextQ, 1600);
-            }
+            save();
+            setTimeout(nextQ, 1600);
         }
 
         function showBatchRecap() {
@@ -6660,7 +6449,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             }
 
             const fb = document.getElementById('feedback');
-            const goToNext = inRevisionMode ? revisionNextQ : nextQ;
+            const goToNext = nextQ;
             // Écoute de la bonne réponse : seulement quand elle est en néerlandais (l'autre sens de
             // traduction — nl2fr — donnerait la réponse en français, que la voix NL prononcerait mal).
             const speakSuffix = answerField === 'nl' ? ' ' + speakBtnHtml(accepted[0]) + translateBtnHtml(accepted[0]) : '';
@@ -6687,7 +6476,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 fb.innerHTML = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer + speakSuffix;
                 fb.style.color = "var(--wrong)";
                 registerResult(currentItem.id, false);
-                if (inRevisionMode) requeueItem(currentItem);
                 save();
                 setTimeout(goToNext, 1600); // toujours avancer, jamais de retry immédiat sur place
             }
@@ -9714,7 +9502,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpPrepVocab() {
             const items = rpPrepKitItems();
             if (!items.length) return;
-            inRevisionMode = false;
             const orderedItems = byFrequencyDesc(items);
             const sourceKey = 'kit:' + rpPrepCurrent.key + '::' + state.settings.direction;
             const unlocked = getUnlockedItems(sourceKey, orderedItems);
@@ -14580,10 +14367,23 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
             const p = routineTutor(), rs = routineState();
+            routineBackBtn('← Accueil', showHome);
             document.getElementById('routine-content').innerHTML = `
                 <div class="routine-head"><div><b>☀️ Ma routine du jour</b><small>avec ${p.emoji} ${p.name} · 15 à 20 minutes</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
                 <div class="routine-steps" id="routine-steps"></div>
-                <div id="routine-chat" class="prof-chat guide-chat"></div>
+                ${routineChatHtml(p)}`;
+            routineRenderSteps();
+            const left = Object.keys(ROUTINE_STEPS).filter(k => !rs.done[k]);
+
+            const hello = left.length === 4
+                ? `Bonjour ! C'est ${p.name}, ton tuteur pour la routine du jour. On fait quatre petites étapes : conjugaison, nouveaux mots, blocs de mots, puis on parle. Tu peux les faire dans l'ordre que tu veux, ou te laisser porter et je m'occupe de tout.`
+                : (left.length ? `Re-bonjour ! Il te reste ${left.map(k => ROUTINE_STEPS[k].label.toLowerCase()).join(', ')}. On continue ?` : `Ta routine du jour est finie, bravo ! Tu peux refaire une étape, ou continuer à pratiquer.`);
+            routineSay(r, hello).then(() => routineMenu(r));
+        }
+
+        // Zone de conversation commune (routine et entraînements avec le tuteur).
+        function routineChatHtml(p) {
+            return `<div id="routine-chat" class="prof-chat guide-chat"></div>
                 <div id="routine-actions" class="guide-actions"></div>
                 <div class="prof-input-row">
                     <input type="text" id="routine-input" placeholder="Ta réponse… (ou ta question, puis ❓)" onkeydown="if(event.key==='Enter') routineSendTyped()">
@@ -14594,13 +14394,207 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                     <button type="button" class="talk-mic" id="routine-mic" onclick="routineMic('nl')">🎤</button>
                     <button type="button" class="talk-side" id="routine-mic-fr" onclick="routineMic('fr')" title="Parler en français (question au tuteur)">🇫🇷</button>
                 </div>
-                <div class="talk-mic-hint">🎤 pour répondre · 🇫🇷 ou ❓ pour poser une question à ${p.name}</div>`;
-            routineRenderSteps();
-            const left = Object.keys(ROUTINE_STEPS).filter(k => !rs.done[k]);
-            const hello = left.length === 4
-                ? `Bonjour ! C'est ${p.name}, ton tuteur pour la routine du jour. On fait quatre petites étapes : conjugaison, nouveaux mots, blocs de mots, puis on parle. Tu peux les faire dans l'ordre que tu veux, ou te laisser porter et je m'occupe de tout.`
-                : (left.length ? `Re-bonjour ! Il te reste ${left.map(k => ROUTINE_STEPS[k].label.toLowerCase()).join(', ')}. On continue ?` : `Ta routine du jour est finie, bravo ! Tu peux refaire une étape, ou continuer à pratiquer.`);
-            routineSay(r, hello).then(() => routineMenu(r));
+                <div class="talk-mic-hint">🎤 pour répondre (ou écris) · 🇫🇷 ou ❓ pour poser une question à ${p.name}</div>`;
+        }
+        function routineBackBtn(label, fn) {
+            const b = document.getElementById('routine-back');
+            if (!b) return;
+            b.textContent = label;
+            b.onclick = () => { routineQuitRun(); fn(); };
+        }
+
+        // ===== Entraînements avec le tuteur =====
+        // Joas (25 octobre 2026) : « partout où on peut, que ce soit comme un cours ». Blocs de mots,
+        // mots à revoir et de / het passent par l'écran de la routine : le tuteur dit la question à
+        // voix haute, on répond au micro (mains libres : il se relance tout seul) ou par écrit, 🎧 écoute
+        // seule, ❓ / 🇫🇷 pour lui poser une question, ⏩ vitesse. Remplace les anciens écrans à taper.
+        const ROUTINE_DRILLS = {
+            blocs: {
+                icon: '🧩', label: 'Blocs de mots', run: r => routineBlocs(r, { blocs: 10, petits: 4 }),
+                credit: "Phrases d'exemple : Tatoeba (tatoeba.org), licence CC BY 2.0 FR.",
+                why: "On travaille les blocs de mots : les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd ». Je te dis la phrase en français, puis la phrase néerlandaise avec le trou dit en français : dis-moi le bloc qui manque, ou toute la phrase si tu préfères. Ensuite, quelques petits mots, dans une vraie phrase.",
+                whyPassive: "On écoute des blocs de mots. Je te dis la phrase en français, puis en néerlandais avec le trou en français ; cherche le bloc dans ta tête, puis écoute la phrase complète."
+            },
+            revoir: {
+                icon: '🔁', label: 'Mots à revoir', run: r => routineDrillRevoir(r),
+                why: "On reprend les mots que tu as ratés. Je te dis le mot en français, tu me le dis en néerlandais. Ceux que tu retrouves sortent de la liste ; les autres reviendront une autre fois, pas tout de suite.",
+                whyPassive: "On écoute les mots que tu as ratés : le français, un instant pour chercher, puis le néerlandais."
+            },
+            dehet: {
+                icon: '⚖️', label: 'De ou het ?', run: r => routineDrillDeHet(r),
+                why: "De ou het ? Je te dis un nom : réponds avec son article, par exemple « de tafel », ou touche DE ou HET. Deux bonnes réponses, et le nom est acquis.",
+                whyPassive: "On écoute des noms avec leur article : le nom seul, un instant pour chercher, puis avec de ou het."
+            }
+        };
+        function routineDrill(k, back) {
+            const d = ROUTINE_DRILLS[k];
+            if (!d) return;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('routine-view').classList.add('active');
+            setActiveNav('nav-vocab');
+            if (routine) routineQuitRun();
+            const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab };
+            try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
+            const p = routineTutor();
+            routineBackBtn('← Vocabulaire', r.back);
+            document.getElementById('routine-content').innerHTML = `
+                <div class="routine-head"><div><b>${d.icon} ${d.label}</b><small>avec ${p.emoji} ${p.name}</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
+                ${routineChatHtml(p)}
+                ${d.credit ? `<p class="rp-real-hint" style="text-align:center;">${d.credit}</p>` : ''}`;
+            routineDrillLoop(r, true);
+        }
+        async function routineDrillLoop(r, first) {
+            const d = ROUTINE_DRILLS[r.drill];
+            if (first) await routineSay(r, routinePassive() && d.whyPassive ? d.whyPassive : d.why);
+            if (!routineActive(r)) return;
+            r.busy = true;
+            let res = true;
+            try { res = await d.run(r); } catch (e) { console.warn('Entraînement', r.drill, e); }
+            r.busy = false;
+            r.ctx = null;
+            if (!routineActive(r) || res === false) return;
+            // En écoute seule, ça tourne tout seul (comme en cours) tant qu'il y a de quoi faire.
+            if (routinePassive() && res !== 'empty') { routineDrillLoop(r, false); return; }
+            const v = await routineWait(r, (res === 'empty' ? [] : [['again', '🔁 Encore une série']]).concat([['back', '← Vocabulaire', 'btn-gray']]));
+            if (!routineActive(r) || v === 'quit') return;
+            if (v === 'back') { routineQuitRun(); r.back(); return; }
+            routineDrillLoop(r, false);
+        }
+
+        // Mots à revoir : ratés dans un sens ou dans l'autre ; on les demande du français vers le
+        // néerlandais (le plus utile à l'oral) ; retrouvé = sorti de la liste dans les deux sens.
+        function routineRevoirItems() {
+            const w = id => (state.stats.wrongCount[id + '::fr2nl'] || 0) + (state.stats.wrongCount[id + '::nl2fr'] || 0);
+            return fullDb.filter(i => w(i.id) > 0).sort((a, b) => (w(b.id) - w(a.id)) || ((b.freq || 0) - (a.freq || 0)));
+        }
+        async function routineDrillRevoir(r) {
+            const items = routineRevoirItems().slice(0, 12);
+            if (!items.length) { await routineSay(r, "Tu n'as aucun mot raté à revoir pour l'instant, bravo ! Les mots que tu rates ailleurs arriveront ici."); return 'empty'; }
+            let score = 0, n = 0, asked = 0;
+            for (const item of items) {
+                if (!routineActive(r)) return false;
+                n++;
+                const fr = String(item.fr).split('/')[0].trim();
+                r.ctx = `traduire « ${item.fr} » (réponse : ${item.nl})`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${n}/${items.length}</small><div>${rpEscapeHtml(item.fr)}</div></div>`, fr, fr);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineFeedback(null, item.nl, rpEscapeHtml(item.fr), true);
+                    if (routineActive(r)) await conjAudioSpeak(item.nl, 'nl', 0.9);
+                    continue;
+                }
+                // Article oublié ou différent : le mot est retrouvé (de / het a son entraînement à part).
+                const ok = !!given && (evaluateAnswer(given, item.nl).status !== 'wrong'
+                    || (nounHasArticle(item) && evaluateAnswer(stripArticle(given), stripArticle(item.nl)).status !== 'wrong'));
+                const key = item.id + '::fr2nl';
+                state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+                asked++;
+                if (ok) {
+                    score++;
+                    ['fr2nl', 'nl2fr'].forEach(d => { state.stats.wrongCount[item.id + '::' + d] = 0; });
+                    state.stats.trueMastered[key] = true;
+                } else {
+                    state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1;
+                    state.stats.trueMastered[key] = false;
+                }
+                save();
+                routineFeedback(ok, item.nl, ok ? 'Retiré des mots à revoir.' : 'Il reviendra une autre fois.', true);
+                if (routineActive(r)) await conjAudioSpeak(item.nl, 'nl', 0.9);
+            }
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (!routinePassive() && asked) {
+                const left = routineRevoirItems().length;
+                await routineSay(r, `${score} sur ${asked}. ${left ? `Il reste ${left} mot${left > 1 ? 's' : ''} à revoir.` : 'Plus aucun mot à revoir, bravo !'}`);
+            }
+            return true;
+        }
+
+        // De ou het : les noms ratés d'abord ; sinon des noms courants pas encore acquis.
+        async function routineDrillDeHet(r) {
+            let items = getArticleReviewItems(), fresh = false;
+            if (!items.length) {
+                items = fullDb.filter(i => i.file === 'NOMS_NL' && nounHasArticle(i) && (state.stats.articleStreak[dirKey(i.id)] || 0) < 2)
+                    .sort((a, b) => (b.freq || 0) - (a.freq || 0)).slice(0, 40);
+                fresh = true;
+            }
+            items = items.slice().sort(() => Math.random() - 0.5).slice(0, 12);
+            if (!items.length) { await routineSay(r, "Tous les noms courants sont acquis côté de / het, bravo !"); return 'empty'; }
+            if (fresh && !routinePassive()) await routineSay(r, "Tu n'as pas d'erreur de / het à revoir : je te propose des noms courants que tu n'as pas encore acquis.");
+            let score = 0, asked = 0;
+            for (let i = 0; i < items.length; i++) {
+                if (!routineActive(r)) return false;
+                const item = items[i], word = stripArticle(item.nl), art = correctArticleFor(item);
+                r.ctx = `de ou het : « ${word} » (réponse : ${art})`;
+                const say = () => conjAudioSpeak(word, 'nl', 0.9);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${items.length} · de ou het ?</small><div>${rpEscapeHtml(word)}</div><small>${rpEscapeHtml(item.fr)}</small></div>`, say, say, { btns: [['de', 'DE'], ['het', 'HET', 'btn-red']] });
+                if (given === null) return false;
+                if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineFeedback(null, art + ' ' + word, rpEscapeHtml(item.fr), true);
+                    if (routineActive(r)) await conjAudioSpeak(art + ' ' + word, 'nl', 0.9);
+                    continue;
+                }
+                const t = normalize(String(given || '')).split(' ')[0];
+                const choice = (t === 'het' || t === "'t") ? 'het' : t === 'de' ? 'de' : null;
+                const ok = choice === art;
+                asked++;
+                const key = dirKey(item.id);
+                if (ok) {
+                    score++;
+                    state.stats.articleStreak[key] = (state.stats.articleStreak[key] || 0) + 1;
+                    if (state.stats.articleStreak[key] >= 2) state.stats.articleMistakes[key] = 0;
+                } else {
+                    state.stats.articleStreak[key] = 0;
+                    state.stats.articleMistakes[key] = (state.stats.articleMistakes[key] || 0) + 1;
+                }
+                save();
+                routineFeedback(ok, art + ' ' + word, ok ? (state.stats.articleStreak[key] >= 2 ? 'Acquis.' : 'Encore une bonne réponse un autre jour, et il est acquis.') : rpEscapeHtml(item.fr), true);
+                if (routineActive(r)) await conjAudioSpeak(art + ' ' + word, 'nl', 0.9);
+            }
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (!routinePassive() && asked) await routineSay(r, `${score} sur ${asked}.`);
+            return true;
+        }
+
+        // Phrase à trou dite à l'oral : la phrase en français, puis la phrase néerlandaise avec le
+        // trou dit en français (« Ik kom altijd … à l'heure … naar mijn werk »).
+        async function chunkSayQuestion(r, fr, before, gapFr, after) {
+            const go = () => routineActive(r);
+            if (fr && go()) await conjAudioSpeak(fr, 'fr', 1.05);
+            if (String(before).trim() && go()) await conjAudioSpeak(before, 'nl', 0.9);
+            if (gapFr && go()) await conjAudioSpeak(gapFr, 'fr', 1.05);
+            if (String(after).replace(/[.,!?;:\s]/g, '') && go()) await conjAudioSpeak(after, 'nl', 0.9);
+        }
+        // Sens en français du bloc dans sa phrase (« op tijd » → « à l'heure ») : un seul appel Gemini
+        // pour toute la série, gardé sur l'appareil (localStorage nl_chunk_fr_v1, hors progression).
+        // Sans Gemini : le sens du mot autour duquel le bloc est construit.
+        async function chunkGapFrFetch(qs) {
+            let cache = {};
+            try { cache = JSON.parse(localStorage.getItem('nl_chunk_fr_v1') || '{}') || {}; } catch (e) { cache = {}; }
+            const keyOf = q => q.k.c + '|' + q.k.ex;
+            const missing = qs.filter(q => !cache[keyOf(q)]);
+            if (missing.length && GeminiService.isAvailable()) {
+                try {
+                    const a = rpHelpParseJson(await GeminiService.generate(`Pour chaque phrase néerlandaise, donne le passage de sa traduction française qui correspond au bloc indiqué : quelques mots, repris de la traduction (ou au plus près), sans rien d'autre.
+${missing.map((q, i) => `${i + 1}. Phrase : « ${q.k.ex} » ; traduction : « ${q.k.fr} » ; bloc : « ${q.blank.answer} »`).join('\n')}
+Réponds UNIQUEMENT en JSON : {"sens": ["passage 1", "passage 2"]} (même ordre, ${missing.length} éléments).`));
+                    if (a && Array.isArray(a.sens)) missing.forEach((q, i) => { if (a.sens[i]) cache[keyOf(q)] = String(a.sens[i]).slice(0, 60); });
+                    try { localStorage.setItem('nl_chunk_fr_v1', JSON.stringify(cache)); } catch (e) { /* pas grave */ }
+                } catch (e) { /* on se contente du sens du mot */ }
+            }
+            qs.forEach(q => { q.gapFr = cache[keyOf(q)] || String(q.item.fr || '').split('/')[0].trim(); });
+        }
+        // Réponse au micro : s'il a dit toute la phrase, on ne garde que ce qui remplit le trou.
+        function chunkAnswerPart(given, before, after) {
+            const toks = s => normalize(String(s || '')).replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean);
+            let g = toks(given);
+            const b = toks(before), a = toks(after);
+            if (g.length > b.length && b.length && b.every((w, i) => g[i] === w)) g = g.slice(b.length);
+            if (g.length > a.length && a.length && a.every((w, i) => g[g.length - a.length + i] === w)) g = g.slice(0, g.length - a.length);
+            return g.join(' ');
         }
 
         function routineRenderSteps() {
@@ -14724,7 +14718,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             const wait = routineBubble('info', '…');
             let a = null;
             try {
-                a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}. Vous faites sa routine du jour${r.step ? ', étape « ' + ROUTINE_STEPS[r.step].label + ' »' : ''}${r.ctx ? ' ; exercice en cours : ' + r.ctx : ''}.
+                a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}. Vous faites ${r.drill ? 'un entraînement « ' + ROUTINE_DRILLS[r.drill].label + ' »' : 'sa routine du jour' + (r.step ? ', étape « ' + ROUTINE_STEPS[r.step].label + ' »' : '')}${r.ctx ? ' ; exercice en cours : ' + r.ctx : ''}.
 ${tutorMemPromptLine()}
 Il te demande : « ${q} »
 Réponds dans sa langue (français s'il parle français), comme à l'oral, en 2 à 4 phrases claires ; mots néerlandais entre ** **, avec un exemple si utile. Si sa question porte sur la routine (pourquoi, comment), explique-lui simplement.
@@ -14735,15 +14729,17 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             await routineSay(r, a && a.reponse ? a.reponse : "Je n'ai pas réussi à répondre, réessaie dans un instant.");
         }
 
-        // Pose une question et attend la réponse ; '' = « je ne sais pas ».
-        async function routineAskAnswer(r, html, speakFr, passiveFr) {
+        // Pose une question et attend la réponse ; '' = « je ne sais pas ». speakFr / passiveFr : texte
+        // français dit à voix haute, ou fonction qui dit la question elle-même (phrase à trou mêlant
+        // les deux langues). opt.btns : boutons de réponse en plus (ex. DE / HET), renvoyés tels quels.
+        async function routineAskAnswer(r, html, speakFr, passiveFr, opt) {
             routineBubble('prof', html);
             const fr = speakFr || (routinePassive() ? passiveFr : null);
-            if (fr && routineActive(r)) await conjAudioSpeak(fr, 'fr', 1.05);
+            if (fr && routineActive(r)) { if (typeof fr === 'function') await fr(); else await conjAudioSpeak(fr, 'fr', 1.05); }
             if (routinePassive()) {
                 // Blanc de réflexion (interrompable : bouton Arrêter, ou retour au mode actif).
                 const t0 = Date.now();
-                document.getElementById('routine-actions').innerHTML = `<button type="button" class="btn btn-gray" onclick="routinePick('__stop')">⏹ Arrêter cette étape</button>`;
+                document.getElementById('routine-actions').innerHTML = `<button type="button" class="btn btn-gray" onclick="routinePick('__stop')">⏹ Arrêter${r.drill ? '' : ' cette étape'}</button>`;
                 let stop = false;
                 r.waiter = v => { stop = v === '__stop' || v === 'quit' ? v : stop; };
                 while (routineActive(r) && Date.now() - t0 < ROUTINE_THINK_MS / voiceSpeed() && !stop) await new Promise(res => setTimeout(res, 150));
@@ -14754,9 +14750,11 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 return '__passive';
             }
             if (routineActive(r) && window.SpeechRecognition && !r.rec) routineMic('nl');
-            const v = await routineWait(r, [['__idk', '🤷 Je ne sais pas', 'btn-gray'], ['__stop', '⏹ Arrêter cette étape', 'btn-gray']]);
+            const extra = (opt && opt.btns) || [];
+            const v = await routineWait(r, extra.concat([['__idk', '🤷 Je ne sais pas', 'btn-gray'], ['__stop', r.drill ? '⏹ Arrêter' : '⏹ Arrêter cette étape', 'btn-gray']]));
             routineStopRec();
             if (v === 'quit') return null;
+            if (typeof v === 'string' && extra.some(b => b[0] === v)) { routineBubble('moi', rpEscapeHtml(v)); return v; }
             if (v === '__stop') return '__stop';
             if (v === '__passive') return '__passive';
             if (v === '__idk') { routineBubble('moi', '🤷'); return ''; }
@@ -14984,69 +14982,84 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         }
 
         // ----- 3. Blocs de mots -----
-        async function routineBlocs(r) {
+        async function routineBlocs(r, opt) {
             await loadChunks();
+            const nBlocs = (opt && opt.blocs) || ROUTINE.blocs, nPetits = (opt && opt.petits) || ROUTINE.petitsMots;
             const rs = routineState();
-            const st = state.chunkStats || {};
-            const today = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
+            const today = r.drill ? [] : rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
             const qs = [], usedC = new Set();
-            const add = (item, k) => { const blank = chunkBlank(k); if (blank && !usedC.has(k.c) && qs.length < ROUTINE.blocs) { usedC.add(k.c); qs.push({ item, k, blank }); } };
+            const add = (item, k) => { const blank = chunkBlank(k); if (blank && !usedC.has(k.c) && qs.length < nBlocs) { usedC.add(k.c); qs.push({ item, k, blank }); } };
             today.forEach(i => { const k = chunksForItem(i)[0]; if (k) add(i, k); });
             pickChunkQuestions().forEach(q => add(q.item, q.k));
-            if (!qs.length) { await routineSay(r, "Pas de bloc disponible pour l'instant."); return true; }
-            let score = 0;
+            if (!qs.length) { await routineSay(r, "Pas de bloc disponible pour l'instant."); return r.drill ? 'empty' : true; }
+            await chunkGapFrFetch(qs);
+            if (!routineActive(r)) return false;
+            let score = 0, asked = 0, stopped = false;
             for (let i = 0; i < qs.length && routineActive(r); i++) {
                 const q = qs[i];
                 const n = q.k.c.split(' ').length;
-                r.ctx = `retrouver le bloc « ${q.k.c} »`;
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Bloc ${i + 1}/${qs.length} · ${n} mots</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(n).trim()}</span>${rpEscapeHtml(q.blank.after)}</div></div>`, null, q.k.fr);
+                r.ctx = `retrouver le bloc « ${q.k.c} » dans « ${q.k.ex} »`;
+                const say = () => chunkSayQuestion(r, q.k.fr, q.blank.before, q.gapFr, q.blank.after);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Bloc ${i + 1}/${qs.length} · ${n} mots</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(n).trim()}</span>${rpEscapeHtml(q.blank.after)}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small></div>`, say, say);
                 if (given === null) return false;
-                if (given === '__stop') break;
+                if (given === '__stop') { stopped = true; break; }
+                const full = rpEscapeHtml(q.blank.before) + '<b>' + rpEscapeHtml(q.blank.answer) + '</b>' + rpEscapeHtml(q.blank.after);
                 if (given === '__passive') {
-                    routineFeedback(null, q.k.c, rpEscapeHtml(q.blank.before) + '<b>' + rpEscapeHtml(q.blank.answer) + '</b>' + rpEscapeHtml(q.blank.after), true);
+                    routineFeedback(null, q.k.c, full, true);
                     if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
                     continue;
                 }
-                const ok = !!given && evaluateAnswer(given, q.k.c).status !== 'wrong';
+                const part = given ? chunkAnswerPart(given, q.blank.before, q.blank.after) : '';
+                const ok = !!part && evaluateAnswer(part, q.k.c).status !== 'wrong';
+                asked++;
                 if (ok) score++;
                 if (!state.chunkStats) state.chunkStats = {};
                 const s = state.chunkStats[q.k.c] || { ok: 0, ko: 0, streak: 0, last: 0 };
                 if (ok) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
                 s.last = Date.now();
                 state.chunkStats[q.k.c] = s;
-                routineFeedback(ok, q.k.c, rpEscapeHtml(q.blank.before) + '<b>' + rpEscapeHtml(q.blank.answer) + '</b>' + rpEscapeHtml(q.blank.after));
+                // Toujours entendre la phrase complète : c'est elle qui ancre le bloc.
+                routineFeedback(ok, q.k.c, full, true);
+                if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
             }
             save();
             r.ctx = null;
-            if (routineActive(r) && !routinePassive()) await routineSay(r, `${score} sur ${qs.length}. Les blocs ratés reviendront.`);
+            if (routineActive(r) && !routinePassive() && asked) await routineSay(r, `${score} sur ${asked}. Les blocs ratés reviendront.`);
             if (!routineActive(r)) return false;
+            if (stopped) return true;
             // Petits mots (prépositions, pronoms, conjonctions) : dans une vraie phrase, jamais seuls.
-            const fq = routineFunctionQuestions(ROUTINE.petitsMots);
+            const fq = routineFunctionQuestions(nPetits);
             if (!fq.length) return true;
             await routineSay(r, 'Et maintenant, les petits mots.');
-            let fs = 0;
+            let fs = 0, fAsked = 0;
             for (let i = 0; i < fq.length && routineActive(r); i++) {
                 const q = fq[i];
-                r.ctx = `le petit mot « ${q.item.nl} » dans une phrase`;
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.before)}<span class="chunk-gap">___</span>${rpEscapeHtml(q.after)}</div></div>`, null, q.k.fr);
+                const gapFr = String(q.item.fr || '').split('/')[0].trim();
+                r.ctx = `le petit mot « ${q.item.nl} » dans « ${q.k.ex} »`;
+                const say = () => chunkSayQuestion(r, q.k.fr, q.before, gapFr, q.after);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.before)}<span class="chunk-gap">___</span>${rpEscapeHtml(q.after)}</div><small>🇫🇷 le trou : ${rpEscapeHtml(gapFr)}</small></div>`, say, say);
                 if (given === null) return false;
                 if (given === '__stop') break;
+                const full = rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.answer) + '</b>' + rpEscapeHtml(q.after) + ' — ' + rpEscapeHtml(q.item.fr);
                 if (given === '__passive') {
-                    routineFeedback(null, q.answer, rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.answer) + '</b>' + rpEscapeHtml(q.after) + ' — ' + rpEscapeHtml(q.item.fr), true);
+                    routineFeedback(null, q.answer, full, true);
                     if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
                     continue;
                 }
-                const ok = !!given && normalize(given).replace(/[^a-z']/g, '') === normalize(q.answer).replace(/[^a-z']/g, '');
+                const part = given ? chunkAnswerPart(given, q.before, q.after) : '';
+                const ok = !!part && part.replace(/[^a-z']/g, '') === normalize(q.answer).replace(/[^a-z']/g, '');
+                fAsked++;
                 if (ok) fs++;
                 const key = q.item.id + '::fr2nl';
                 state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
                 if (ok) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (!state.mastered.includes(key)) state.mastered.push(key); }
                 else { state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1; state.stats.trueMastered[key] = false; }
-                routineFeedback(ok, q.answer, rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.answer) + '</b>' + rpEscapeHtml(q.after) + ' — ' + rpEscapeHtml(q.item.fr));
+                routineFeedback(ok, q.answer, full, true);
+                if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
             }
             save();
             r.ctx = null;
-            if (routineActive(r) && !routinePassive()) await routineSay(r, `${fs} sur ${fq.length} pour les petits mots.`);
+            if (routineActive(r) && !routinePassive() && fAsked) await routineSay(r, `${fs} sur ${fAsked} pour les petits mots.`);
             return true;
         }
 
@@ -15187,8 +15200,8 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             accueil: { desc: "écran d'accueil", run: () => showHome() },
             vocabulaire: { desc: 'onglet Vocabulaire (choix des catégories de mots)', run: () => showVocab() },
             categorie: { desc: "fiche d'une catégorie de mots ; params.categorie parmi " + Object.keys(BUDDY_CATS).join(', ') + " ; params.entrainer=true pour lancer l'entraînement", run: p => { const f = BUDDY_CATS[p.categorie]; if (!f) return showVocab(); vocabOpenCat('file', f); if (p.entrainer) vocabTrain(); } },
-            erreurs: { desc: 'réviser les mots ratés', check: () => getReviewItems().length ? null : "Tu n'as aucun mot raté à revoir pour l'instant, bravo ! On fait autre chose ?", run: () => { studyReturnFn = showHome; startRevision(); } },
-            dehet: { desc: 'réviser les articles de / het', check: () => getArticleReviewItems().length ? null : "Rien à revoir côté de / het pour l'instant. Tu veux t'entraîner sur les noms ?", run: () => { studyReturnFn = showHome; startArticleRevision(); } },
+            erreurs: { desc: 'réviser les mots ratés', check: () => routineRevoirItems().length ? null : "Tu n'as aucun mot raté à revoir pour l'instant, bravo ! On fait autre chose ?", run: () => { studyReturnFn = showHome; startRevision(); } },
+            dehet: { desc: 'réviser les articles de / het', run: () => { studyReturnFn = showHome; startArticleRevision(); } },
             conjugaison: { desc: "conjugaison ; params.verbe = infinitif néerlandais pour ouvrir sa fiche ; params.entrainer=true pour l'entraînement", run: p => { const v = p.verbe && conjugationLoaded && conjugationData.find(x => normalize(x.infinitief) === normalize(p.verbe)); if (p.entrainer && !v) return startConjTrainingSession(); showConjugaison(); if (v) showConjugaisonDetail(v.infinitief); } },
             separables: { desc: "entraînement aux verbes à particule séparable", run: () => startSeparableTrainingSession() },
             blocs: { desc: 'blocs de mots (mots en contexte)', run: () => showChunkTraining() },

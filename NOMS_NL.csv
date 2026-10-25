@@ -552,7 +552,7 @@ NOMS_NL_549;la joue / les joues;de wang;4.21;Standard;Courant;A2;nt2lex;Corps & 
 NOMS_NL_550;le désespoir / (pas de pluriel);de wanhoop;3.82;Standard;Courant;C1;freq_estime;Émotions & sentiments;heuristique_fr;Émotions & sentiments;heuristique_fr
 NOMS_NL_551;l'eau / (pas de pluriel);de water;5.52;Prioritaire;Essentiel;A1;nt2lex;Alimentation;heuristique_fr;Alimentation;heuristique_fr
 NOMS_NL_552;la semaine / les semaines;de week;5.58;Prioritaire;Essentiel;A1;nt2lex;Temps;heuristique_fr;Temps;heuristique_fr
-NOMS_NL_553;le temps (météo) / (pas de pluriel);de weer;6.04;Prioritaire;Essentiel;A1;nt2lex;Abstrait & concepts;heuristique_fr;Abstrait & concepts;heuristique_fr
+NOMS_NL_553;le temps (météo) / (pas de pluriel);het weer;6.04;Prioritaire;Essentiel;A1;nt2lex;Abstrait & concepts;heuristique_fr;Abstrait & concepts;heuristique_fr
 NOMS_NL_554;le chemin (la route) / les chemins;de weg;5.8;Prioritaire;Essentiel;A1;nt2lex;Lieux;heuristique_fr;Lieux;heuristique_fr
 NOMS_NL_555;la prairie / les prairies;de weide;3.56;Standard;Courant;C1;freq_estime;Abstrait & concepts;heuristique_fr;Abstrait & concepts;heuristique_fr
 NOMS_NL_556;le monde / les mondes;de wereld;5.63;Prioritaire;Essentiel;A2;nt2lex;Lieux;heuristique_fr;Lieux;heuristique_fr

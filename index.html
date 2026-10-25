@@ -265,20 +265,6 @@
         </div>
     </div>
 
-    <div id="article-view" class="view">
-        <button class="back-btn" onclick="showReviser()">← Retour</button>
-        <div id="article-progress" style="font-weight:bold; margin-bottom:10px;"></div>
-        <div class="study-box">
-            <small>de ou het ?</small>
-            <h1 id="article-word">mot</h1>
-            <div style="display:flex; gap:10px; margin-top:15px;">
-                <button class="btn btn-green" style="margin:0;" onclick="checkArticle('de')">DE</button>
-                <button class="btn btn-red" style="margin:0;" onclick="checkArticle('het')">HET</button>
-            </div>
-            <div id="article-feedback" style="min-height:20px; font-weight:bold; margin-top:15px;"></div>
-        </div>
-    </div>
-
     <div id="anagram-view" class="view">
         <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="anagram-score" style="font-weight:bold; margin-bottom:10px;"></div>
@@ -298,7 +284,7 @@
          chaque pilier (boutons vers les activités). Page statique, ouverte depuis le Profil, le
          premier lancement et le compagnon (showProgress) ; la page Infos y est fusionnée. -->
     <div id="routine-view" class="view">
-        <button class="back-btn" onclick="routineQuitRun(); showHome()">← Accueil</button>
+        <button class="back-btn" id="routine-back" onclick="routineQuitRun(); showHome()">← Accueil</button>
         <div id="routine-content" class="content-col"></div>
     </div>
 
@@ -535,12 +521,6 @@
         <button class="back-btn" onclick="showApprendre()">← Retour au programme</button>
         <div id="guided-flow-banner" class="content-col"></div>
         <div id="lesson-content" class="content-col"></div>
-    </div>
-
-    <div id="chunk-view" class="view">
-        <button class="back-btn" onclick="showVocab()">← Vocabulaire</button>
-        <h2>🧩 Blocs de mots</h2>
-        <div id="chunk-content" class="content-col"></div>
     </div>
 
     <div id="conjugaison-view" class="view">
