@@ -236,19 +236,6 @@
         <div id="profil-content" class="content-col"></div>
     </div>
 
-    <div id="test-select-view" class="view">
-        <button class="back-btn" onclick="showVocab()">← Retour</button>
-        <h2>🔤 Test de vocabulaire</h2>
-        <p style="max-width:450px; text-align:center; font-size:0.85rem; color:#888;">
-            Estimation heuristique basée sur la fréquence d'usage réelle des mots en néerlandais (pas un test scientifiquement validé, et distinct de l'évaluation de ton niveau sur le programme).
-            Les mots déjà vraiment maîtrisés comptent automatiquement comme acquis, sans être reposés.
-        </p>
-        <div class="grid">
-            <div class="card-menu" style="color:#0a9396" onclick="startFullTest()">📖 Test complet<br><small style="font-weight:normal;">Tous les mots, du plus au moins courant</small></div>
-            <div class="card-menu" style="color:#ee9b00" onclick="startAdaptiveTest()">⚡ Test accéléré<br><small style="font-weight:normal;">Échantillon par palier, s'arrête dès que ça coince</small></div>
-        </div>
-    </div>
-
     <div id="test-view" class="view">
         <button class="back-btn" onclick="showVocab()">← Retour</button>
         <div id="test-progress" style="font-weight:bold; margin-bottom:10px;"></div>
@@ -457,12 +444,12 @@
             </div>
 
             <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>🎯 Test de niveau</h3>
+                <h3>📏 Mon niveau de vocabulaire</h3>
                 <p style="font-size:0.9rem;">
-                    <b>Test complet</b> : tous les mots connus, du plus au moins fréquent.<br>
-                    <b>Test accéléré</b> : découpe le vocabulaire en paliers de fréquence, teste un échantillon par
-                    palier en partant du plus courant, et s'arrête dès qu'un palier échoue — plus rapide, avec un
-                    niveau estimé à la fin. C'est une estimation heuristique, pas un test validé scientifiquement.
+                    Dans Vocabulaire → Comment travailler. Le test pose quelques mots par palier de fréquence, du plus
+                    courant au plus rare, et s'arrête dès qu'un palier coince : en 3 minutes, il estime jusqu'où tu connais
+                    les mots. La routine du jour te propose ensuite des mots nouveaux à ce niveau. C'est une estimation,
+                    pas un test certifié.
                 </p>
             </div>
 

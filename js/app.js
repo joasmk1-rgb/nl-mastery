@@ -2856,10 +2856,10 @@ if (firebaseAvailable) {
                         <div class="hub-card-title">Blocs de mots</div>
                         <div class="hub-card-desc">Les mots en contexte.</div>
                     </div>
-                    <div class="hub-card" onclick="showTestSelect()">
-                        <span class="hub-card-icon">🎯</span>
-                        <div class="hub-card-title">Test de vocabulaire</div>
-                        <div class="hub-card-desc">Combien de mots tu connais.</div>
+                    <div class="hub-card" onclick="startAdaptiveTest()">
+                        <span class="hub-card-icon">📏</span>
+                        <div class="hub-card-title">Mon niveau de vocabulaire</div>
+                        <div class="hub-card-desc">3 minutes pour mesurer jusqu'où tu connais les mots ; la routine en tient compte.</div>
                     </div>`;
             }
             const el = document.getElementById('cours-weak');
@@ -7383,36 +7383,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         let testMode = null;     // 'full' | 'adaptive'
         let adaptiveBandIdx = 0; // palier en cours pour le test accéléré
 
-        function showTestSelect() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('test-select-view').classList.add('active');
-            setActiveNav('nav-vocab');
-        }
-
         function testableWords() {
             // On exclut les phrases (pas du vocabulaire isolé) et les mots sans fréquence connue
             return fullDb.filter(i => i.file !== 'PHRASES_LABO' && i.freq > 0);
-        }
-
-        function startFullTest() {
-            const words = testableWords();
-            if (words.length === 0) { alert("Pas assez de mots avec une fréquence connue pour lancer le test."); return; }
-            testMode = 'full';
-            testResults = [];
-            // Les mots déjà vraiment maîtrisés comptent automatiquement comme acquis, sans être reposés
-            const already = words.filter(i => isTrueMastered(i.id));
-            already.forEach(i => testResults.push({ item: i, isCorrect: true }));
-            const toTest = words.filter(i => !isTrueMastered(i.id));
-            testQueue = byFrequencyDesc(toTest);
-            testIndex = 0;
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('test-view').classList.add('active');
-            document.getElementById('test-result').innerHTML = '';
-            document.getElementById('test-ans-input').style.display = '';
-            document.querySelector('#test-view .btn-green').style.display = '';
-            testSetExtraControls(true);
-            if (testQueue.length === 0) { finishTest(); return; }
-            testNextQ();
         }
 
         function startAdaptiveTest() {
@@ -7585,13 +7558,18 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 return `${b.label} : ${b.correct}/${b.total} (${pct}%)`;
             });
 
+            // Le niveau mesuré règle les nouveaux mots de la routine (routineWordLevel).
+            const lvlCode = String(estimatedLevel).slice(0, 2);
+            if (['A1', 'A2', 'B1', 'B2'].includes(lvlCode)) { state.routineLvl = { lvl: lvlCode, at: Date.now(), from: 'test' }; save(); }
             document.getElementById('test-result').innerHTML = `
                 <div class="study-box" style="text-align:left;">
-                    <h2 style="text-align:center;">🎯 Niveau estimé : ${estimatedLevel}</h2>
-                    <p style="font-size:0.8rem; color:#888;">Estimation heuristique basée sur la fréquence des mots — pas un test scientifiquement validé.</p>
-                    <h3>Détail par palier</h3>
+                    <h2 style="text-align:center;">📏 Ton vocabulaire : niveau ${estimatedLevel}</h2>
+                    <p>La routine du jour te proposera désormais des mots nouveaux à ce niveau. Elle s'ajustera ensuite toute seule, selon les mots que tu connais déjà.</p>
+                    <h3>Détail par palier de fréquence</h3>
                     <p>${rows.join('<br>')}</p>
-                    <button class="btn btn-gray" onclick="showHome()" style="margin-top:15px;">Retour au menu</button>
+                    <p style="font-size:0.8rem; color:#888;">Estimation sur la fréquence des mots, pas un test certifié.</p>
+                    <button class="btn btn-green" onclick="showRoutine()" style="margin-top:15px;">☀️ Ma routine du jour</button>
+                    <button class="btn btn-gray" onclick="showVocab()" style="margin-top:8px;">← Vocabulaire</button>
                 </div>`;
             document.getElementById('test-progress').innerText = '';
             document.getElementById('test-q-text').innerText = '';
@@ -15347,7 +15325,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             conjugaison: { desc: "conjugaison ; params.verbe = infinitif néerlandais pour ouvrir sa fiche ; params.entrainer=true pour l'entraînement", run: p => { const v = p.verbe && conjugationLoaded && conjugationData.find(x => normalize(x.infinitief) === normalize(p.verbe)); if (p.entrainer && !v) return startConjTrainingSession(); showConjugaison(); if (v) showConjugaisonDetail(v.infinitief); } },
             separables: { desc: "entraînement aux verbes à particule séparable", run: () => startSeparableTrainingSession() },
             blocs: { desc: 'blocs de mots (mots en contexte)', run: () => showChunkTraining() },
-            test: { desc: 'test de vocabulaire', run: () => showTestSelect() },
+            test: { desc: 'mesurer mon niveau de vocabulaire (test rapide par fréquence)', run: () => startAdaptiveTest() },
             cours: { desc: 'onglet Cours (modules en situation)', run: () => showApprendre() },
             module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
             grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
