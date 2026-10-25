@@ -13771,10 +13771,11 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
             return c;
         }
 
-        function liveSaveWords(pairs) {
+        function liveSaveWords(pairs, listName) {
+            const L = listName || LIVE_WORDS_LIST;
             if (!state.customLists) state.customLists = {};
-            if (!state.customLists[LIVE_WORDS_LIST]) state.customLists[LIVE_WORDS_LIST] = [];
-            const ids = state.customLists[LIVE_WORDS_LIST];
+            if (!state.customLists[L]) state.customLists[L] = [];
+            const ids = state.customLists[L];
             pairs.forEach(p => {
                 const base = String(p.nl).trim();
                 const existing = rpWordLookup(base.replace(/^(de|het|een) /i, ''));
@@ -14422,6 +14423,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On travaille ces mots, du plus courant au plus rare, par paquets de dix : un paquet s'ouvre quand le précédent est acquis. Je te dis le mot, tu me le traduis, à l'oral ou à l'écrit. Un mot raté ne revient pas tout de suite : il va dans tes mots à revoir.",
                 whyPassive: "On écoute ces mots, du plus courant au plus rare : le mot, un instant pour chercher, puis sa traduction."
             },
+            dire: {
+                icon: '💭', label: 'Dis-le en néerlandais', nav: 'nav-pratiquer', back: '← Pratiquer', run: r => routineDrillSay(r),
+                why: "Dis-moi en français ce qui te passe par la tête : une pensée, une envie, quelque chose qui t'est arrivé. Je t'apprends à le dire en néerlandais, naturellement, à ton niveau. Puis tu le redis à ta manière, et je te corrige.",
+                whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
+            },
             dehet: {
                 icon: '⚖️', label: 'De ou het ?', run: r => routineDrillDeHet(r),
                 why: "De ou het ? Je te dis un nom : réponds avec son article, par exemple « de tafel », ou touche DE ou HET. Deux bonnes réponses, et le nom est acquis.",
@@ -14433,12 +14439,12 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!d) return;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('routine-view').classList.add('active');
-            setActiveNav('nav-vocab');
+            setActiveNav(d.nav || 'nav-vocab');
             if (routine) routineQuitRun();
             const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab, train: train || null };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
             const p = routineTutor();
-            routineBackBtn(back ? '← Retour' : '← Vocabulaire', r.back);
+            routineBackBtn(d.back || (back ? '← Retour' : '← Vocabulaire'), r.back);
             document.getElementById('routine-content').innerHTML = `
                 <div class="routine-head"><div><b>${d.icon} ${rpEscapeHtml(train ? train.label : d.label)}</b><small>avec ${p.emoji} ${p.name}${train ? ' · ' + (state.settings.direction === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷') : ''}</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
                 ${routineChatHtml(p)}
@@ -14457,10 +14463,80 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!routineActive(r) || res === false) return;
             // En écoute seule, ça tourne tout seul (comme en cours) tant qu'il y a de quoi faire.
             if (routinePassive() && res !== 'empty') { routineDrillLoop(r, false); return; }
-            const v = await routineWait(r, (res === 'empty' ? [] : [['again', '🔁 Encore une série']]).concat([['back', r.train ? '← Retour' : '← Vocabulaire', 'btn-gray']]));
+            const v = await routineWait(r, (res === 'empty' ? [] : [['again', r.drill === 'dire' ? '💭 Autre chose' : '🔁 Encore une série']]).concat([['back', d.back || (r.train ? '← Retour' : '← Vocabulaire'), 'btn-gray']]));
             if (!routineActive(r) || v === 'quit') return;
             if (v === 'back') { routineQuitRun(); r.back(); return; }
             routineDrillLoop(r, false);
+        }
+
+        // ===== 💭 Dis-le en néerlandais (Joas, 25 octobre 2026) =====
+        // Il dit en français ce qui lui passe par la tête ; le tuteur lui apprend à le dire en
+        // néerlandais (version naturelle à son niveau, morceaux clés, mots nouveaux, astuce si les
+        // rappels de règles sont activés), puis il le redit à sa manière et le tuteur juge et corrige
+        // comme pour les blocs (routineTranslateJudge / routineJudgeFeedback). Phrases gardées dans la
+        // liste « 💭 Mes phrases », mots nouveaux dans « ✍️ Mes corrections ».
+        const SAY_LIST = '💭 Mes phrases';
+        function showSayIt() { routineDrill('dire', showPratiquer); }
+        async function routineDrillSay(r) {
+            if (routinePassive()) routineTogglePassive();
+            if (!GeminiService.isAvailable()) { await routineSay(r, "Pour t'apprendre à dire tes propres phrases, il me faut la clé Gemini."); return 'empty'; }
+            let n = 0;
+            while (routineActive(r)) {
+                const sayAsk = () => conjAudioSpeak(n ? 'Autre chose ?' : 'Je t\'écoute.', 'fr', 1.05);
+                const fr = await routineAskAnswer(r, `<div class="routine-q"><small>💭 En français, ce qui te passe par la tête</small><div>${n ? 'Autre chose ?' : 'Je t\'écoute.'}</div></div>`, sayAsk, null, { lang: 'fr' });
+                if (fr === null) return false;
+                if (fr === '__stop' || fr === '__passive') return n ? true : 'empty';
+                if (!fr) continue;
+                r.ctx = `lui apprendre à dire « ${fr} »`;
+                const wait = routineBubble('info', '<span class="report-meta">🤔</span>');
+                let a = null;
+                try {
+                    a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}.
+Il te dit en français ce qu'il voudrait exprimer (peut-être dicté : ignore les petites erreurs de transcription) : « ${fr} »
+${tutorMemPromptLine()}
+Apprends-lui à le dire :
+- "nl" : la façon NATURELLE de le dire à l'oral en Flandre, à son niveau (un cran au-dessus au plus), pas une traduction mot à mot ; 1 à 3 phrases courtes si sa pensée est longue. S'il a parlé en néerlandais, rends sa phrase juste et naturelle.
+- "nl_fr" : la traduction fidèle de "nl" en français.
+- "morceaux" : 2 à 5 morceaux clés de "nl" avec leur sens [{"nl": "", "fr": ""}].
+- "astuce_fr" : ${courseRulesOn() ? 'une phrase en français sur la tournure ou la règle la plus utile à retenir ici (vide si rien de spécial).' : 'vide (il ne veut pas de rappel des règles).'}
+- "mots" : 3 au plus, les mots ou tournures qu'il ne connaît probablement pas encore [{"nl": "", "fr": ""}].
+Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr": "", "mots": []}`));
+                } catch (e) { a = null; }
+                if (wait) wait.remove();
+                if (!routineActive(r)) return false;
+                if (!a || !a.nl) { await routineSay(r, "Je n'ai pas réussi, redis-le autrement ou réessaie dans un instant."); continue; }
+                n++;
+                const nl = String(a.nl), parts = (Array.isArray(a.morceaux) ? a.morceaux : []).filter(x => x && x.nl);
+                const words = (Array.isArray(a.mots) ? a.mots : []).filter(x => x && x.nl && x.fr);
+                routineBubble('prof', `<div class="say-nl"><b>${rpEscapeHtml(nl)}</b> ${speakBtnHtml(nl)}</div>
+                    <small>${rpEscapeHtml(a.nl_fr || '')}</small>
+                    ${parts.length ? `<div class="say-parts">${parts.map(x => `<span><b>${rpEscapeHtml(x.nl)}</b> ${rpEscapeHtml(x.fr || '')}</span>`).join('')}</div>` : ''}
+                    ${words.length ? `<div class="report-meta">📖 ${words.map(x => `<b>${rpEscapeHtml(x.nl)}</b> ${rpEscapeHtml(x.fr)}`).join(' · ')}</div>` : ''}
+                    ${a.astuce_fr ? `<div class="report-meta">💡 ${rpEscapeHtml(a.astuce_fr)}</div>` : ''}`);
+                await conjAudioSpeak(nl, 'nl', 0.85);
+                if (a.astuce_fr && routineActive(r)) await conjAudioSpeak(a.astuce_fr, 'fr', 1.05);
+                liveSaveWords([{ nl, fr }], SAY_LIST);
+                if (words.length) liveSaveWords(words);
+                if (!routineActive(r)) return false;
+                // À lui de le redire, à sa manière ; un second essai s'il sèche.
+                const q = { kind: 'phrase', fr, ex: nl, target: nl, before: '', after: '' };
+                for (let essai = 0; essai < 2 && routineActive(r); essai++) {
+                    r.ctx = `redire en néerlandais « ${fr} » (modèle : « ${nl} »)`;
+                    const given = await routineAskAnswer(r, `<div class="routine-q"><small>À toi</small><div>Redis-le en néerlandais, à ta manière.</div></div>`, () => conjAudioSpeak('À toi.', 'fr', 1.05), null);
+                    if (given === null) return false;
+                    if (given === '__stop' || given === '__passive') return true;
+                    if (!given) { routineBubble('info', `<div class="say-nl"><b>${rpEscapeHtml(nl)}</b></div>`); await conjAudioSpeak(nl, 'nl', 0.8); continue; }
+                    const w2 = routineBubble('info', '<span class="report-meta">🤔</span>');
+                    const j = await routineTranslateJudge(q, given);
+                    if (w2) w2.remove();
+                    if (!routineActive(r)) return false;
+                    usedWordsRecord(given, j.version ? { corrige: j.version } : null);
+                    await routineJudgeFeedback(r, q, given, j, rpEscapeHtml(nl));
+                    break;
+                }
+                r.ctx = null;
+            }
+            return false;
         }
 
         // S'entraîner sur une catégorie, un thème, une liste ou un kit (ancien écran à taper) : même
@@ -15099,6 +15175,12 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 if (wait) wait.remove();
             }
             if (!routineActive(r)) return null;
+            await routineJudgeFeedback(r, q, given, j, model);
+            return { ok: !!j.ok };
+        }
+        // Retour commun après une traduction libre : bon ou pas, SA phrase corrigée (✨ À ta manière),
+        // l'explication, et la version attendue ; dits à voix haute ; la règle va dans la mémoire du tuteur.
+        async function routineJudgeFeedback(r, q, given, j, model) {
             const own = j.version && normalize(j.version) !== normalize(given) && normalize(j.version) !== normalize(q.ex) ? j.version : '';
             routineBubble('info', `<div class="routine-fb ${j.ok ? 'ok' : 'ko'}">${j.ok ? (j.close ? '🟡 Le sens est bon' : '✅ C\'est bon') : given ? '❌ Pas tout à fait' : '🤷'}
                 ${own ? `<div class="report-meta">✨ À ta manière : <b>${rpEscapeHtml(own)}</b> ${speakBtnHtml(own)}</div>` : ''}
@@ -15108,8 +15190,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             if (own && routineActive(r)) await conjAudioSpeak(own, 'nl', 0.9);
             if (j.explication && !j.ok && routineActive(r)) await conjAudioSpeak(j.explication, 'fr', 1.05);
             if (routineActive(r)) await conjAudioSpeak(q.ex, 'nl', 0.9);
-            if (!j.ok && j.regle) tutorMemAdd([{ regle: j.regle, faux: given, correct: j.version || q.ex }], 'blocs');
-            return { ok: !!j.ok };
+            if (!j.ok && j.regle) tutorMemAdd([{ regle: j.regle, faux: given, correct: j.version || q.ex }], q.kind === 'phrase' ? 'dire' : 'blocs');
         }
         // Jugement d'une traduction libre : d'abord sans Gemini (le bloc seul, ou la phrase modèle à
         // peu près), sinon Gemini juge le sens et la justesse ; sans Gemini, compté faux.
@@ -15120,14 +15201,14 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             try {
                 const a = rpHelpParseJson(await GeminiService.generate(`Exercice de traduction pour un apprenant francophone de néerlandais (Flandre), niveau ${liveLevel()}.
 Phrase française : « ${q.fr} »
-Traduction modèle : « ${q.ex} » (${q.kind === 'petit' ? 'petit mot travaillé' : 'bloc de mots travaillé'} : « ${q.target} »)
+Traduction modèle : « ${q.ex} »${q.kind === 'phrase' ? '' : ` (${q.kind === 'petit' ? 'petit mot travaillé' : 'bloc de mots travaillé'} : « ${q.target} »)`}
 Sa traduction (peut-être dictée : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) : « ${given} »
 Le modèle n'est qu'UNE façon de le dire : juge sur le SENS et la justesse, jamais sur la ressemblance avec le modèle.
 - "sens_ok" : il dit bien la même chose (petites nuances acceptées).
 - "juste" : c'est du néerlandais correct et naturel (une petite faute d'orthographe ou de transcription ne compte pas).
 - "sa_version" : SA phrase corrigée, en gardant au maximum ses mots et sa construction (recopie-la si elle est juste).
 - "explication_fr" : une phrase courte, en français, sur ce qui n'allait pas (vide si tout est juste).
-- "bloc_fr" : s'il n'a pas employé « ${q.target} » alors que sa phrase est juste, une courte phrase en français qui le lui fait remarquer comme une autre façon courante de le dire (sinon vide).
+- "bloc_fr" : ${q.kind === 'phrase' ? 'vide.' : `s'il n'a pas employé « ${q.target} » alors que sa phrase est juste, une courte phrase en français qui le lui fait remarquer comme une autre façon courante de le dire (sinon vide).`}
 - ${TUTOR_REGLE_FIELD} (seulement s'il y a une vraie faute, sinon vide)
 Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "", "explication_fr": "", "bloc_fr": "", "regle": ""}`));
                 if (!a || typeof a.sens_ok !== 'boolean') return { ok: false };
@@ -15344,6 +15425,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             routine: { desc: 'ma routine du jour (conjugaison, nouveaux mots, blocs de mots, pratique) avec le tuteur', run: () => showRoutine() },
             progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
+            dire: { desc: "dire en néerlandais ce qu'on pense en français (le tuteur apprend la phrase)", run: () => showSayIt() },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
             discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
@@ -15377,6 +15459,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             if (has(/ma routine|routine du jour|lance la routine|ma seance du jour|entrainement du jour/)) return { action: 'routine' };
             if (has(/comment progresser|devenir bon|etre bon|conseils?|routine|comment (ca|ça) marche|par ou commencer/)) return { action: 'progresser' };
             if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
+            if (has(/dis le en|dire en neerlandais|comment dire ce que|ce qui me passe|exprimer ce que je pense|apprends? moi a dire/)) return { action: 'dire' };
             if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };
             if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
             if (has(/discut|parler (avec|de|un peu)|bavard|conversation/)) return { action: 'discuter', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null), sujet: text, lancer: true } };
