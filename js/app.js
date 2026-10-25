@@ -3012,31 +3012,6 @@ if (firebaseAvailable) {
             const accountNudgeHtml = !currentUser ? `
                 <div class="dash-footnote" onclick="showCompte()">🔓 Progression enregistrée sur cet appareil seulement — <u>créer un compte gratuit</u></div>` : '';
 
-            // ===== 1. Bloc dominant : "🎯 Pour toi maintenant" (mode "professeur") =====
-            let recoHtml = '';
-            if (curriculumLoaded) {
-                const rec = getRecommendation();
-                if (rec) {
-                    const activity = getRecommendedActivityMeta(getNotionStatus(rec.notionId));
-                    const titre = rec.notion.content.titre || rec.notionId;
-                    recoHtml = `
-                        <div class="dash-card dash-continue-card dash-reco-card">
-                            <div class="dash-continue-label">🎯 Pour toi maintenant</div>
-                            <div class="dash-reco-titre">${rec.notion.level} · ${titre}</div>
-                            <div class="dash-continue-title">${activity.icon} ${activity.label}</div>
-                            <div class="dash-reco-reason">${rec.reason || ''}</div>
-                            ${activity.duration ? `<div class="dash-reco-duration">${activity.duration}</div>` : ''}
-                            <div class="dash-reco-actions">
-                                <button class="btn btn-green" onclick="startRecommendedActivity('${rec.notionId}')">Commencer</button>
-                                <button class="dash-reco-btn-secondary" onclick="showApprendre()">Choisir autre chose</button>
-                            </div>
-                        </div>`;
-                } else {
-                    recoHtml = `<div class="dash-card dash-continue-card" style="text-align:center;">Toutes les leçons disponibles sont maîtrisées pour l'instant — d'autres arrivent bientôt 🎉</div>`;
-                }
-            }
-
-            // ===== 2. Progression : niveau CECR réel (curriculum), vocabulaire affiché à part =====
             const masteredCount = curriculumLoaded
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
                 : 0;
@@ -3060,25 +3035,6 @@ if (firebaseAvailable) {
                     ${curriculumLoaded ? `<div style="font-size:0.76rem; color:var(--text-secondary); margin-top:6px;">${masteredCount}/${totalReadyCount} notions maîtrisées · vocabulaire couvert ${vp.pct}%${usedWordsCount() ? ` · 🗣️ ${usedWordsCount()} mots dits à l'oral` : ''}</div>` : ''}
                 </div>`;
 
-            // ===== 2bis. Continuer : le prochain module en situation non réussi (le format
-            // principal des cours) ; à défaut, la recommandation du programme ci-dessus.
-            const isPassedMod = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
-            const nextMod = MODRP_IDS.map(id => modRpData[id]).filter(Boolean).find(m => !isPassedMod(m));
-            if (nextMod) {
-                const doneEt = nextMod.etapes.filter(e => modRpEtapeDone(nextMod.id, e)).length;
-                recoHtml = `
-                    <div class="dash-card dash-continue-card dash-reco-card">
-                        <div class="dash-continue-label">▶️ ${doneEt ? 'Continuer' : 'Commencer'}</div>
-                        <div class="dash-reco-titre">${nextMod.niveau} · Cours</div>
-                        <div class="dash-continue-title">${nextMod.icone || '🎭'} ${rpEscapeHtml(nextMod.titre)}</div>
-                        <div class="dash-reco-reason">${doneEt}/${nextMod.etapes.length} étapes · ${rpEscapeHtml(nextMod.accroche || nextMod.objectif || '')}</div>
-                        <div class="dash-reco-actions">
-                            <button class="btn btn-green" onclick="guideStart('${nextMod.id}')">${doneEt ? 'Continuer' : 'Commencer'}</button>
-                        </div>
-                    </div>`;
-            }
-
-
             // ===== 6. Social (secondaire, discret — ne doit jamais passer devant l'apprentissage) =====
             // Chargé de façon asynchrone (voir loadSocialDashboardSnippet) pour ne jamais retarder le
             // premier rendu ; tant que le cache est vide on ne montre rien (pas de placeholder qui
@@ -3095,26 +3051,14 @@ if (firebaseAvailable) {
             }
             if (currentUser && socialDashboardCache === null) loadSocialDashboardSnippet();
 
-            // Accueil volontairement court : où tu en es, UNE action évidente, puis le reste en
-            // retrait. La navigation générale est assurée par la barre d'onglets, pas par l'accueil.
-            // Les 5 intentions, une tuile chacune (mêmes entrées que la barre du bas, plus la
-            // révision des erreurs) : on ouvre l'app et on sait quoi faire.
-            const tilesHtml = `
-                <div class="section-title" style="margin:var(--space-3) 0 var(--space-2);">Qu'est-ce que tu veux faire aujourd'hui ?</div>
-                <div class="hub-grid">
-                    <div class="hub-card" onclick="showVocab()"><span class="hub-card-icon">📖</span><div class="hub-card-title">Vocabulaire</div><div class="hub-card-desc">Verbes, noms, thèmes métier, conjugaison.</div></div>
-                    <div class="hub-card" onclick="showApprendre()"><span class="hub-card-icon">📚</span><div class="hub-card-title">Cours</div><div class="hub-card-desc">Modules en situation, grammaire.</div></div>
-                    <div class="hub-card" onclick="showPratiquer()"><span class="hub-card-icon">🎭</span><div class="hub-card-title">Pratiquer</div><div class="hub-card-desc">Jeux de rôle à l'oral, écrit.</div></div>
-                    <div class="hub-card" onclick="showReviser()"><span class="hub-card-icon">🎮</span><div class="hub-card-title">Jouer</div><div class="hub-card-desc">Memory, contre-la-montre, mot mélangé, tri rapide.</div></div>
-                    <div class="hub-card" style="grid-column:1 / -1;" onclick="studyReturnFn = showHome; startRevision()"><span class="hub-card-icon">🔁</span><div class="hub-card-title">Réviser mes erreurs</div><div class="hub-card-desc">${reviewCount ? reviewCount + ' mot' + (reviewCount > 1 ? 's' : '') + ' raté' + (reviewCount > 1 ? 's' : '') + ' à revoir.' : 'Rien à revoir pour l\'instant.'}</div></div>
-                </div>`;
+            // Accueil = la prochaine chose à faire, rien d'autre (Joas, octobre 2026 : « ne pas feindre
+            // d'avoir plein de fonctions parce qu'on peut y aller de plein de façons ») : l'en-tête, puis
+            // la routine du jour. Pas de tuiles (= barre du bas), pas de bloc compagnon (= micro
+            // flottant), pas de « Continuer » (= Cours, et la routine propose la prochaine séance).
             block.innerHTML = `
                 ${headerHtml}
-                ${routineHomeHtml()}
-                ${buddyHomeHtml()}
                 ${placementNudgeHtml}
-                ${recoHtml}
-                ${tilesHtml}
+                ${routineHomeHtml()}
                 ${socialHtml}
                 ${accountNudgeHtml}`;
         }
@@ -15295,10 +15239,11 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         function routineHomeHtml() {
             const rs = routineState();
             const n = Object.keys(ROUTINE_STEPS).filter(k => rs.done[k]).length;
-            return `<div class="dash-card routine-home" onclick="showRoutine()">
-                <div class="routine-home-top"><b>☀️ Ma routine du jour</b><span>${n === 4 ? '✅ faite' : n + '/4'}</span></div>
+            const p = routineTutor(), other = Object.entries(TALK_PARTNERS).find(([k]) => k !== talkSettings().partner);
+            return `<div class="dash-card routine-home" onclick="showRoutine()" role="button">
+                <div class="routine-home-top"><b>☀️ Ma routine du jour</b><span class="routine-home-go">${n === 4 ? '✅ faite' : n ? n + '/4 ›' : '15-20 min ›'}</span></div>
                 <div class="routine-home-steps">${Object.entries(ROUTINE_STEPS).map(([k, s]) => `<span class="${rs.done[k] ? 'ok' : ''}">${rs.done[k] ? '✓' : s.icon} ${s.label}</span>`).join('')}</div>
-                <button class="btn btn-green" style="margin:8px 0 0;" onclick="event.stopPropagation(); showRoutine()">${n === 0 ? '▶️ Commencer (15-20 min)' : n === 4 ? '🔁 Continuer à pratiquer' : '▶️ Continuer'}</button>
+                <div class="routine-home-tutor">avec ${p.emoji} ${p.name}${other ? ` · <a href="#" onclick="event.stopPropagation(); talkSettings().partner = '${other[0]}'; save(); renderDashboard(); return false;">plutôt ${other[1].name}</a>` : ''}</div>
             </div>`;
         }
 
@@ -15465,7 +15410,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             buddyRenderSugg();
         }
 
-        function buddySetPartner(k) { buddySettings().partner = k; save(); buddyLog = []; buddyRender(); buddyGreet(); buddyRefreshFab(); if (document.getElementById('home-view').classList.contains('active')) renderDashboard(); }
+        function buddySetPartner(k) { buddySettings().partner = k; save(); buddyLog = []; buddyRender(); buddyGreet(); buddyRefreshFab(); }
         function buddySetLang(l) { buddySettings().lang = l; save(); buddyRender(); }
 
         function buddyAppend(m, replay) {
@@ -15596,19 +15541,6 @@ Réponds UNIQUEMENT en JSON : {"reply": "ce que tu dis, en français", "action":
                 onEnd: st => { if (buddyRec === st) buddyRec = null; if (mic) mic.classList.remove('listening'); if (hint) hint.innerText = 'Touche le micro pour parler.'; },
                 onSubmit: text => buddySubmit(text)
             });
-        }
-
-        // Bloc « conversation » en haut de l'accueil.
-        function buddyHomeHtml() {
-            const s = buddySettings(), p = buddyPartner();
-            return `<div class="dash-card buddy-home">
-                <div class="buddy-home-top">
-                    <span class="buddy-home-mic">🎙️</span>
-                    <div class="buddy-home-txt"><b>${p.name}</b> · <span class="buddy-home-switch">${Object.entries(TALK_PARTNERS).filter(([k]) => k !== s.partner).map(([k, x]) => `<a href="#" onclick="buddySetPartner('${k}'); return false;">passer à ${x.name}</a>`).join('')}</span><div>${rpEscapeHtml(buddyGreeting())}</div></div>
-                </div>
-                <div class="talk-sugg">${buddySuggestions().slice(0, 4).map((x, i) => `<button type="button" class="talk-chip" onclick="buddyOpen(false); buddySubmit(buddySuggestions()[${i}].text)">${rpEscapeHtml(x.label)}</button>`).join('')}</div>
-                <button class="btn btn-green" style="margin:8px 0 0;" onclick="buddyOpen(true)">🎤 Parler à ${p.name}</button>
-            </div>`;
         }
 
         // Le bouton suit les changements d'écran (classe .active des vues) et l'état de connexion.

@@ -753,10 +753,6 @@
         .buddy-chat { flex: 1; width: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding: 10px 0; }
         .buddy-sheet .prof-input-row { width: 100%; }
         .buddy-sheet .talk-mic { width: 60px; height: 60px; font-size: 1.6rem; }
-        .buddy-home-top { display: flex; gap: 10px; align-items: flex-start; }
-        .buddy-home-mic { font-size: 1.6rem; width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--primary) 14%, transparent); }
-        .buddy-home-txt { font-size: 0.9rem; line-height: 1.4; }
-        .buddy-home-switch a { font-size: 0.75rem; color: var(--text-secondary); }
 
         /* Correction active */
         .lc-toggle { border: 1px solid var(--border); background: none; color: var(--text-secondary); border-radius: var(--radius-pill); padding: 5px 11px; font-size: 0.78rem; cursor: pointer; }
@@ -881,3 +877,6 @@
         /* Vitesse des voix */
         .speed-btn { border: 1px solid var(--border); background: var(--card-bg); color: var(--text); border-radius: var(--radius-pill); padding: 5px 10px; font-size: 0.78rem; cursor: pointer; white-space: nowrap; }
         .routine-head-btns { display: flex; gap: 6px; align-items: center; }
+        .routine-home-go { color: var(--primary); font-weight: 700; font-size: 0.85rem; }
+        .routine-home-tutor { margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary); }
+        .routine-home-tutor a { color: var(--text-secondary); }
