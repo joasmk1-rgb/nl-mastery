@@ -7258,6 +7258,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
 
+                <details class="profil-section" id="profil-sec-tmem" ${openSections.includes('profil-sec-tmem') ? 'open' : ''}>
+                <summary>🧠 Ce que ton tuteur a retenu</summary>
+                <div id="tmem-box">${tutorMemHtml()}</div>
+                </details>
+
                 <details class="profil-section" id="profil-sec-carte" ${openSections.includes('profil-sec-carte') || !openSections.length ? 'open' : ''}>
                 <summary>🗺️ Carte de mes compétences</summary>
                 <div class="carte">${competenceMapHtml()}</div>
@@ -8550,7 +8555,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             try {
                 // Règles de conversation naturelle pour TOUS les jeux de rôle, + deux réessais si
                 // Gemini est surchargé (comme GeminiService.generate).
-                const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES }] } });
+                const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '') }] } });
                 let data = null;
                 for (let attempt = 0; attempt < 3; attempt++) {
                     let status = 0;
@@ -11631,6 +11636,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             lines.push(`Niveau de l'apprenant : ${PROF_LEVEL_DESC[prof.level]}.`);
             lines.push(`Objectif de l'apprenant : ${PROF_GOALS[prof.goal].desc}.`);
             if (prof.portrait.length) lines.push(`Ce que tu sais de lui (il l'a dit dans ses leçons) : ${prof.portrait.join(' ')}`);
+            if (tutorMemPromptLine()) lines.push(tutorMemPromptLine());
             if (prof.last) lines.push(`Séance précédente (${new Date(prof.last.at).toLocaleDateString('fr-FR')}) : ${prof.last.resume || ''}${prof.last.defi ? ' Défi donné : ' + prof.last.defi : ''}`);
             lines.push(`Point de grammaire du jour : ${prof.notion.content.titre}.`);
             lines.push(`Mots du jour à lui faire employer naturellement, si l'occasion se présente (ils ne doivent PAS décider du sujet) : ${prof.words.map(w => w.nl).join(', ')}.`);
@@ -11684,7 +11690,7 @@ Réponds UNIQUEMENT en JSON : {"fr": "", "nl": "ce que tu dis en néerlandais", 
 ${LIVE_MIX_RULES}
 Si la phrase est ENTIÈREMENT en français, réponds {"fr": true}.
 Phrase : "${sentence.replace(/"/g, "'")}"
-Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false}
+Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false}
 ("ok" = aucune faute ; "bloquant" = on ne comprend pas ce qu'il veut dire)`;
         }
 
@@ -11693,6 +11699,7 @@ Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase co
             if (!c || c.error) { usedWordsRecord(text); return; }
             usedWordsRecord(text, c);
             msg.corr = c;
+            if (!c.fr) tutorMemAdd(c.erreurs, 'prof');
             c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
             if (c.francais.length) { c.ok = false; liveSaveWords(c.francais); }
             if (!c.ok && !c.fr) (c.erreurs || []).forEach(e => prof && prof.errors.push(e));
@@ -12060,9 +12067,8 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     <div class="prof-mic-row">
                         <button type="button" class="btn btn-green" id="guide-mic" onclick="guideMic('nl')">🎤 Parler</button>
                         <button type="button" class="btn btn-gray" id="guide-hold" style="display:none;" onclick="guide && guide.rec && guide.rec.pause()">✋ Je réfléchis</button>
-                        <button type="button" class="btn btn-gray" id="guide-mic-fr" onclick="guideMic('fr')">🇫🇷 En français</button>
                     </div>
-                    <div class="lc-row">${liveCorrectToggleHtml()}</div>
+                    ${tutorBarHtml({ suggest: 'guideToggleSugg()', french: "guideMic('fr')", frenchId: 'guide-mic-fr', review: null })}
                     <div id="guide-conv-extra"></div>
                 </div>`;
             const st = modRpState(id);
@@ -12405,7 +12411,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const manual = profSettings().silence === 0 || hold;
             const label = cd ? `📤 Envoi dans ${cd}… (touche pour envoyer)` : (manual ? '🎙️ J\'écoute… touche pour envoyer' : '🎙️ J\'écoute… (touche pour envoyer)');
             if (nl) nl.innerText = lang === 'nl' ? label : '🎤 Parler';
-            if (fr) fr.innerText = lang === 'fr' ? label : '🇫🇷 En français';
+            if (fr) fr.innerHTML = lang === 'fr' ? '🎙️<span>' + (cd ? 'Envoi ' + cd + '…' : 'J\'écoute…') + '</span>' : '🇫🇷<span>En français</span>';
             if (wait) wait.style.display = lang && !manual ? '' : 'none';
         }
         function guideMic(lang) {
@@ -12436,6 +12442,10 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             guideSuggList = (list || []).filter(s => s && s.nl).slice(0, 3);
             const el = document.getElementById('guide-sugg');
             if (el) el.innerHTML = guideSuggList.map((s, i) => `<button type="button" class="talk-chip" title="${rpEscapeHtml(s.fr || '')}" onclick="guideUseSugg(${i})">${rpEscapeHtml(s.nl)}</button>`).join('');
+        }
+        function guideToggleSugg() {
+            const el = document.getElementById('guide-sugg');
+            if (el) el.style.display = el.style.display === 'none' ? '' : 'none';
         }
         function guideUseSugg(i) {
             const s = guideSuggList[i];
@@ -12493,7 +12503,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     const hist = conv.history.map(h => h.who === 'them' ? 'Toi (personnage) : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
                     try {
                         reply = rpHelpParseJson(await GeminiService.generate(prompt +
-                            '\n\n' + CONV_NATURAL_RULES + '\n\nRègles en plus :\n- Tiens compte de TOUT ce qu\'il a déjà dit, même dans une longue réplique : ne redemande JAMAIS une information qu\'il a déjà donnée ; rebondis dessus (« Ah, u heet dus… ») et passe à ce qui manque.\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
+                            '\n\n' + CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '') + '\n\nRègles en plus :\n- Tiens compte de TOUT ce qu\'il a déjà dit, même dans une longue réplique : ne redemande JAMAIS une information qu\'il a déjà donnée ; rebondis dessus (« Ah, u heet dus… ») et passe à ce qui manque.\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
                             (remaining ? (conv.coveredLabels.length ? '\n- Sujets qu\'il a DÉJÀ abordés (ne les redemande pas) : ' + conv.coveredLabels.join(', ') + '.' : '') + (remaining.length ? '\n- Sujets que l\'application n\'a pas repérés : ' + remaining.join(', ') + '. VÉRIFIE dans la conversation s\'il les a en fait déjà abordés autrement (ex. « ik ben Joas » = donner son nom) : ceux-là, ne les redemande pas et mets-les dans "sujets_abordes". Pour les autres, amène-le naturellement vers l\'un d\'eux, un seul à la fois. S\'il ne reste vraiment rien, conclus sans nouvelle question et mets "fin": true.' : '\n- Il a abordé tous les sujets : réagis, conclus gentiment sans nouvelle question, et mets "fin": true.') : '') +
                             (closing ? '\n- C\'est ta DERNIÈRE réplique : réagis et conclus gentiment, sans nouvelle question.' : '') +
                             '\n- "suggestions" : 3 réponses courtes QU\'IL pourrait te dire maintenant, à son niveau, variées, avec leur traduction.' +
@@ -12750,7 +12760,6 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
                     <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
-                    ${liveCorrectToggleHtml()}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
                 </div>
@@ -12762,11 +12771,12 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     <button type="button" class="btn btn-green prof-send" onclick="talkSendTyped()">➤</button>
                 </div>
                 <div class="talk-bar">
-                    <button type="button" class="talk-side" id="talk-fr" onclick="talkMic('fr')" title="Parler en français">🇫🇷</button>
-                    <button type="button" class="talk-mic" id="talk-mic" onclick="talkMic('nl')">🎤</button>
                     <button type="button" class="talk-side" onclick="talkToggleText()" title="Écrire">⌨️</button>
+                    <button type="button" class="talk-mic" id="talk-mic" onclick="talkMic('nl')">🎤</button>
+                    <span class="talk-side" style="visibility:hidden;"></span>
                 </div>
-                <div id="talk-mic-hint" class="talk-mic-hint">Touche le micro pour parler</div>`;
+                <div id="talk-mic-hint" class="talk-mic-hint">Touche le micro pour parler</div>
+                ${tutorBarHtml({ suggest: 'talkToggleSugg()', french: "talkMic('fr')", frenchId: 'talk-fr', review: "tutorOpen('talk')" })}`;
             talk.log.forEach(m => talkAppend(m, true));
             talkRenderSugg();
             convRenderTasks();
@@ -12805,6 +12815,11 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const el = document.getElementById('talk-sugg');
             if (!el || !talk) return;
             el.innerHTML = (talk.suggestions || []).map((s, i) => `<button type="button" class="talk-chip" onclick="talkUseSugg(${i})" title="${rpEscapeHtml(s.fr || '')}">${rpEscapeHtml(s.nl)}</button>`).join('');
+        }
+
+        function talkToggleSugg() {
+            const el = document.getElementById('talk-sugg');
+            if (el) el.style.display = el.style.display === 'none' ? '' : 'none';
         }
 
         function talkUseSugg(i) {
@@ -12846,6 +12861,7 @@ La situation, vue par l'apprenant : ${talk.sit.contexte}
 Registre : vouvoiement (u) avec un client, un patient ou un usager ; tutoiement (jij) entre amis, voisins ou collègues. Reste dans ton rôle, fais avancer la situation jusqu'à ce qu'elle soit réglée, puis conclus naturellement. Emploie naturellement certains de ces mots : ${(talk.sit.kit && talk.sit.kit.mots || []).map(m => m.nl).concat(talk.sit.kit && talk.sit.kit.verbes || []).join(', ')}.` : `Aujourd'hui, tu lui parles en ami(e) : conversation détendue, tutoiement (jij). Sujet de départ : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')} (si c'est « Libre », choisis un sujet simple du quotidien).`}
 Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
 ${portrait.length ? "Ce que tu sais de l'apprenant : " + portrait.join(' ') : ''}
+${tutorMemPromptLine()}
 Règles :
 - Une vraie conversation, vivante, comme entre deux personnes : réagis à ce qu'il dit, raconte aussi un peu de toi, pose UNE question à la fois. 1 à 3 phrases courtes, adaptées à son niveau (A1 : phrases très simples et mots très courants).
 - Néerlandais standard, comme en Flandre. Pas d'emojis.
@@ -12854,7 +12870,7 @@ Règles :
 - ${LIVE_MIX_RULES}
 - ${CONV_NATURAL_RULES}
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
-- "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
+- "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", ${TUTOR_REGLE_FIELD.replace('"regle"', '"regle" (seulement si c\'est une vraie faute, sinon "")')}, "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
 - ${talk.lesson ? `FIN : quand toutes les tâches sont validées (✓) ou abandonnées (✗), conclus la séance chaleureusement, sans question, avec "fin": true ; sinon "fin": false.` : ''}${talk.lesson ? '' : talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
@@ -12889,6 +12905,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>${talk.point && talk.userCount ? ' <button class="rp-coach-btn" onclick="talkEnd()">🏁 Terminer et faire le point</button>' : ''}` });
                 return;
             }
+            if (lastMsg && r.correction && r.correction.regle && r.correction.natural) tutorMemAdd([{ faux: lastMsg.text, correct: r.correction.natural, regle: r.correction.regle }], 'discuter');
             if (lastMsg && liveCorrectOn() && r.correction && ((r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) || r.correction.a_cote)) {
                 r.correction.francais = (Array.isArray(r.correction.francais) ? r.correction.francais : []).filter(x => x && x.fr && x.nl);
                 if (r.correction.francais.length) liveSaveWords(r.correction.francais);
@@ -13128,7 +13145,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                     <button type="button" class="talk-side" onclick="rpReplaySkip()" title="Passer">⏭</button>
                 </div>
                 <div id="replay-mic-hint" class="talk-mic-hint">Écoute la question, puis réponds.</div>
-                <div class="lc-row">${liveCorrectToggleHtml()}</div>`;
+                ${tutorBarHtml({ suggest: 'rpReplayShowIdea()', french: null, review: "tutorOpen('replay')" })}`;
             rpReplayAsk();
         }
 
@@ -13829,6 +13846,81 @@ Réponds UNIQUEMENT en JSON :
             return `<span class="wl-badge used${active ? ' active' : ''}" title="Dit ${u.n} fois, dans ${u.c} conversation${u.c > 1 ? 's' : ''}">🗣️ ${active ? 'Actif' : 'Utilisé'}</span>`;
         }
 
+        // ===== Barre du tuteur (la même dans chaque conversation) =====
+        // 💡 Que dire ? · 🇫🇷 En français · ✍️ Correction · 🧑‍🏫 Revoir : mêmes boutons, même
+        // place, partout où l'on parle (jeu de rôle, Discuter, cours, Rejouer). Chaque mode fournit
+        // ses actions ; une action absente laisse le bouton grisé pour garder la même disposition.
+        function tutorBarHtml(o) {
+            const b = (fn, icon, label, id) => `<button type="button" class="tbar-btn"${id ? ` id="${id}"` : ''} ${fn ? `onclick="${fn}"` : 'disabled'}>${icon}<span>${label}</span></button>`;
+            return `<div class="tutor-bar">${b(o.suggest, '💡', 'Que dire ?', o.suggestId)}${b(o.french, '🇫🇷', 'En français', o.frenchId)}${liveCorrectToggleHtml()}${b(o.review, '🧑‍🏫', 'Revoir', null)}</div>`;
+        }
+
+        // ===== Mémoire du tuteur (fautes récurrentes, toutes activités confondues) =====
+        // Chaque correction (correction active, Discuter, cours particulier, séance du tuteur)
+        // renvoie la RÈGLE en jeu (« inversion après un adverbe », « de/het »…). L'app compte les
+        // règles dans state.tutorMem.rules[clé] = { label, n, last, ex: [{ faux, correct }], done }.
+        // Les règles récurrentes (2 fois ou plus) sont données à tous les interlocuteurs
+        // (tutorMemPromptLine), qui les font réemployer quand l'occasion se présente. Profil →
+        // 🧠 Ce que ton tuteur a retenu (tutorMemHtml) ; « C'est acquis » les retire (done).
+        const TUTOR_REGLE_FIELD = '"regle": "la règle en jeu, en quelques mots de français (ex. inversion après un adverbe, de ou het, perfectum avec zijn, place du verbe dans la subordonnée)"';
+
+        function tutorMemAdd(errs, src) {
+            const list = (Array.isArray(errs) ? errs : []).filter(e => e && e.regle && String(e.regle).trim());
+            if (!list.length) return;
+            if (!state.tutorMem) state.tutorMem = {};
+            if (!state.tutorMem.rules) state.tutorMem.rules = {};
+            const R = state.tutorMem.rules;
+            list.forEach(e => {
+                const label = String(e.regle).trim().replace(/\.$/, '').slice(0, 80);
+                const key = normalize(label).replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 60);
+                if (!key) return;
+                const r = R[key] || { label, n: 0, last: 0, ex: [] };
+                r.n = (r.n || 0) + 1;
+                r.last = Date.now();
+                r.src = src || r.src || '';
+                if (r.done) r.done = false; // la faute revient : le point n'est plus acquis
+                if (e.faux || e.correct) r.ex = [{ faux: String(e.faux || '').slice(0, 120), correct: String(e.correct || '').slice(0, 120) }].concat((r.ex || []).filter(x => x.correct !== e.correct)).slice(0, 3);
+                R[key] = r;
+            });
+            save();
+        }
+
+        function tutorMemTop(k) {
+            const R = (state.tutorMem && state.tutorMem.rules) || {};
+            return Object.entries(R).filter(([, r]) => r && !r.done && (r.n || 0) >= 2)
+                .sort((a, b) => (b[1].n - a[1].n) || (b[1].last - a[1].last)).slice(0, k || 5);
+        }
+
+        // Ligne donnée aux interlocuteurs : les points faibles connus, à faire réemployer.
+        function tutorMemPromptLine() {
+            const top = tutorMemTop(4);
+            if (!top.length) return '';
+            return "Points faibles récurrents de l'apprenant (repérés dans ses conversations précédentes) : " +
+                top.map(([, r]) => `${r.label} (${r.n} fois${r.ex && r.ex[0] ? ', ex. « ' + r.ex[0].faux + ' » → « ' + r.ex[0].correct + ' »' : ''})`).join(' ; ') +
+                ". Quand l'occasion se présente NATURELLEMENT, amène-le à réemployer ces points (une question qui les appelle), sans en faire une leçon ni interrompre la conversation.";
+        }
+
+        function tutorMemHtml() {
+            const R = (state.tutorMem && state.tutorMem.rules) || {};
+            const all = Object.entries(R).filter(([, r]) => r && !r.done).sort((a, b) => (b[1].n - a[1].n) || (b[1].last - a[1].last));
+            if (!all.length) return '<p class="report-meta">Rien pour l\'instant : ton tuteur retiendra ici les fautes qui reviennent dans tes conversations.</p>';
+            return `<p class="report-meta">Les règles qui reviennent dans tes conversations. Tes interlocuteurs les connaissent et te les font réemployer quand l'occasion se présente.</p>
+                ${all.slice(0, 12).map(([k, r]) => `<div class="tmem-row">
+                    <div><b>${rpEscapeHtml(r.label)}</b> <small class="report-meta">${r.n} fois</small>
+                    ${(r.ex || []).slice(0, 2).map(x => `<div class="tmem-ex">${x.faux ? rpEscapeHtml(x.faux) + ' → ' : ''}<b>${rpEscapeHtml(x.correct)}</b> ${x.correct ? speakBtnHtml(x.correct) : ''}</div>`).join('')}</div>
+                    <button type="button" class="rp-coach-btn" onclick="tutorMemDone('${k}')">✅ C'est acquis</button>
+                </div>`).join('')}
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="showProf()">🎓 Les travailler en cours particulier</button>`;
+        }
+        function tutorMemDone(k) {
+            const r = state.tutorMem && state.tutorMem.rules && state.tutorMem.rules[k];
+            if (!r) return;
+            r.done = true;
+            save();
+            const el = document.getElementById('tmem-box');
+            if (el) el.innerHTML = tutorMemHtml();
+        }
+
         // ===== Correction active =====
         // Un seul interrupteur (state.settings.liveCorrect, activé par défaut) pour toutes les
         // conversations : jeu de rôle, session guidée, Discuter, Rejouer un entretien, compagnon.
@@ -13849,7 +13941,7 @@ Réponds UNIQUEMENT en JSON :
         }
         function liveCorrectToggleHtml() {
             const on = liveCorrectOn();
-            return `<button type="button" class="lc-toggle${on ? ' on' : ''}" onclick="liveCorrectToggle()" title="Corriger chacune de mes phrases">✍️ Correction ${on ? 'activée' : 'désactivée'}</button>`;
+            return `<button type="button" class="lc-toggle tbar-btn${on ? ' on' : ''}" onclick="liveCorrectToggle()" title="Corriger chacune de mes phrases (${on ? 'activée' : 'désactivée'})">✍️<span>Correction ${on ? '✓' : 'non'}</span></button>`;
         }
 
         // Conversation naturelle, partout où l'apprenant parle (décision de Joas : « le script est
@@ -13878,7 +13970,7 @@ Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exem
 ${question ? `Il répond à cette réplique de son interlocuteur : « ${String(question).replace(/"/g, "'").slice(0, 500)} »
 ${LIVE_OFFTOPIC_RULE}
 ` : ''}Phrase : "${String(text).replace(/"/g, "'")}"
-Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français"}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false${question ? ', "a_cote": false, "question_fr": "", "comprehension_fr": "", "piste_nl": ""' : ''}}
+Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false${question ? ', "a_cote": false, "question_fr": "", "comprehension_fr": "", "piste_nl": ""' : ''}}
 ("ok" = aucune faute ET aucun mot français ; "bloquant" = on ne comprend pas ce qu'il veut dire${question ? ` ; "a_cote" = il répond à côté : alors "question_fr" = la question traduite en français, "comprehension_fr" = en une phrase, ce qu'on lui demandait vraiment et ce qu'il a compris à la place, "piste_nl" = une courte réponse en néerlandais qui répond vraiment, en gardant ses informations si possible` : ''})`;
         }
 
@@ -13894,6 +13986,7 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
             c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
             c.erreurs = (Array.isArray(c.erreurs) ? c.erreurs : []).filter(x => x && x.correct);
             if (c.francais.length) liveSaveWords(c.francais);
+            tutorMemAdd(c.erreurs, 'correction');
             return c;
         }
 
@@ -13990,7 +14083,7 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
 Conversation (APPRENANT = lui ; ses répliques ont pu être dictées : ignore ponctuation, majuscules et petites erreurs de transcription évidentes ; il a pu glisser des mots français quand un mot lui manquait) :
 ${conv}
 
-Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, qui répondent À CÔTÉ de ce qu'on lui demandait (il a mal compris la question : explique-lui alors ce qu'on lui demandait vraiment, et "version_nl" est une réponse qui y répond), ou qui se diraient nettement mieux autrement (les plus utiles, dans l'ordre de la conversation), et 1 ou 2 répliques réussies à saluer.
+${tutorMemPromptLine() ? 'Ses points faibles connus (vérifie en priorité s\'il les refait, et dis-lui s\'il progresse) : ' + tutorMemTop(4).map(([, r]) => r.label).join(', ') + '.\n' : ''}Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, qui répondent À CÔTÉ de ce qu'on lui demandait (il a mal compris la question : explique-lui alors ce qu'on lui demandait vraiment, et "version_nl" est une réponse qui y répond), ou qui se diraient nettement mieux autrement (les plus utiles, dans l'ordre de la conversation), et 1 ou 2 répliques réussies à saluer.
 Réponds UNIQUEMENT en JSON :
 {"intro_fr": "1 ou 2 phrases chaleureuses : ton impression générale",
  "bons": [{"phrase": "sa réplique réussie, telle quelle", "pourquoi_fr": "ce qui est bien, court"}],

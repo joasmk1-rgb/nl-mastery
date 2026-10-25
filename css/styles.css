@@ -830,3 +830,18 @@
         .conv-seances { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
         .conv-seance { text-align: left; border: 1px solid var(--primary); background: color-mix(in srgb, var(--primary) 8%, transparent); color: var(--text); border-radius: var(--radius-md); padding: 7px 10px; font-size: 0.82rem; cursor: pointer; }
         .conv-seance.ok { border-color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); }
+
+        /* Mémoire du tuteur */
+        .tmem-row { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); text-align: left; font-size: 0.88rem; }
+        .tmem-ex { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+
+        /* Barre du tuteur (même disposition partout) */
+        .tutor-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%; max-width: 520px; margin: 8px auto 0; }
+        .tutor-bar .tbar-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 7px 4px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 1.15rem; cursor: pointer; min-height: 54px; }
+        .tutor-bar .tbar-btn span { font-size: 0.68rem; color: var(--text-secondary); line-height: 1.15; text-align: center; }
+        .tutor-bar .tbar-btn:disabled { opacity: .35; cursor: default; }
+        .tutor-bar .tbar-btn.on { border-color: var(--success); background: color-mix(in srgb, var(--success) 14%, var(--card-bg)); }
+        .tutor-bar .tbar-btn.listening { border-color: var(--wrong); }
+        .tbar-more { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; width: 100%; margin-top: 6px; }
+        .tbar-more .rp-coach-btn { margin: 0; padding: 5px 10px; font-size: 0.78rem; }
+        #rp-help-row { flex-direction: column; }

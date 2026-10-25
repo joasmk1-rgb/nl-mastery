@@ -439,13 +439,18 @@
                 <input type="text" id="rp-text-input" placeholder="...ou écris ta réponse en néerlandais" autocomplete="off" autocapitalize="off" spellcheck="false" style="margin:0;" onkeypress="if(event.key==='Enter') rpSendTypedMessage()">
                 <button class="btn btn-green" style="margin:0; width:auto;" onclick="rpSendTypedMessage()">Envoyer</button>
             </div>
+            <!-- Barre du tuteur : la même dans chaque conversation (tutorBarHtml dans app.js) -->
             <div id="rp-help-row">
-                <button type="button" class="rp-coach-btn" onclick="rpHelpSuggest()">💡 Je ne sais pas quoi dire</button>
-                <button type="button" class="rp-coach-btn" onclick="rpHelpFrench()">🇫🇷 Je le dis en français</button>
-                <button type="button" class="rp-coach-btn" onclick="rpShowUnderlineHelp()">🔍 Mots soulignés</button>
-                <button type="button" class="rp-coach-btn" onclick="rpShowWordsReport()">🧾 Bilan des mots</button>
-                <button type="button" class="rp-coach-btn" onclick="tutorOpen('rp')">🧑‍🏫 Revoir avec mon tuteur</button>
-                <button type="button" class="lc-toggle on" onclick="liveCorrectToggle()">✍️ Correction activée</button>
+                <div class="tutor-bar">
+                    <button type="button" class="tbar-btn" onclick="rpHelpSuggest()">💡<span>Que dire ?</span></button>
+                    <button type="button" class="tbar-btn" onclick="rpHelpFrench()">🇫🇷<span>En français</span></button>
+                    <button type="button" class="lc-toggle tbar-btn on" onclick="liveCorrectToggle()">✍️<span>Correction ✓</span></button>
+                    <button type="button" class="tbar-btn" onclick="tutorOpen('rp')">🧑‍🏫<span>Revoir</span></button>
+                </div>
+                <div class="tbar-more">
+                    <button type="button" class="rp-coach-btn" onclick="rpShowUnderlineHelp()">🔍 Mots soulignés</button>
+                    <button type="button" class="rp-coach-btn" onclick="rpShowWordsReport()">🧾 Bilan des mots</button>
+                </div>
             </div>
             <div id="rp-scripted-choices" style="display:none; width:100%; flex-direction:column; gap:8px; margin-top:10px;"></div>
             <div id="rp-day-nav" style="display:none;"></div>
