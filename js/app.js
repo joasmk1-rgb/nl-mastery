@@ -10524,7 +10524,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 key: s.label, etape: s.etape, label: s.label,
                 // Motifs spéciaux : « #epeler » = au moins trois lettres isolées à la suite (« k a y e m b e ») ;
                 // « #perfectum-hebben / -zijn » = auxiliaire puis participe dans la même phrase.
-                test: (t, pp) => (s.mots || []).some(w => w[0] === '#' && (MODRP_SPECIAL[w] || /$^/).test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => new RegExp('(^|[^a-z])' + normalize(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t))
+                // Un mot de 5 lettres ou plus compte aussi dans un mot composé (« telefoonnummer ») ;
+                // un numéro dicté en chiffres compte pour « nummer ».
+                test: (t, pp) => (s.mots || []).some(w => w[0] === '#' && (MODRP_SPECIAL[w] || /$^/).test(t)) || (s.mots || []).filter(w => w[0] !== '#').some(w => { const nw = normalize(w); return nw.length >= 5 ? t.includes(nw) : new RegExp('(^|[^a-z])' + nw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z])').test(t); })
+                    || ((s.mots || []).includes('nummer') && /\d(?:[\s.\/-]?\d){5,}/.test(t))
                     || (s.portrait && pp[s.portrait] && t.includes(normalize(String(pp[s.portrait]))))
             })) : MODRP_TOPICS;
             const checks = topics.map(t => Object.assign({ ok: !!text && t.test(text, p) }, t));
@@ -11405,7 +11408,28 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             const input = o.input;
             const silence = o.silence;
             const st = { lang: o.lang, committed: '', session: '', rec: null, done: false, heard: false, hold: false, lastAt: Date.now(), startAt: Date.now(), timer: null, cd: 0 };
-            const show = interim => { if (input) input.value = [st.committed, st.session, interim].filter(Boolean).join(' ').trim(); };
+            // Android renvoie souvent, à la reprise, la fin de ce qui a déjà été retenu : on retire
+            // le chevauchement (fin du texte retenu = début du nouveau) avant de coller les deux.
+            const joinNoOverlap = (a, b) => {
+                const aw = String(a || '').split(/\s+/).filter(Boolean), bw = String(b || '').split(/\s+/).filter(Boolean);
+                if (!aw.length) return bw.join(' ');
+                if (!bw.length) return aw.join(' ');
+                const na = aw.map(w => normalize(w).replace(/[^a-z0-9]/g, '')), nb = bw.map(w => normalize(w).replace(/[^a-z0-9]/g, ''));
+                for (let k = Math.min(aw.length, bw.length); k > 0; k--) {
+                    const tailA = na.slice(-k), headB = nb.slice(0, k);
+                    // dernier mot identique, ou complété (« 47 » → « 472501526 ») : on garde la version longue
+                    const last = tailA[k - 1], same = last === headB[k - 1];
+                    // garde-fous : un seul mot en commun ne suffit que s'il est long ; un mot complété
+                    // seulement pour un nombre ou au sein d'un chevauchement de plusieurs mots
+                    if (!last || (k === 1 && !(same ? last.length >= 4 : /^\d+$/.test(last)))) continue;
+                    if (tailA.slice(0, -1).join(' ') === headB.slice(0, -1).join(' ') && (same || headB[k - 1].startsWith(last))) return aw.slice(0, aw.length - k).concat(bw).join(' ');
+                }
+                // le nouveau texte reprend tout l'ancien : on garde le nouveau
+                if (nb.join(' ').includes(na.join(' '))) return bw.join(' ');
+                return aw.concat(bw).join(' ');
+            };
+            st.join = joinNoOverlap;
+            const show = interim => { if (input) input.value = joinNoOverlap(joinNoOverlap(st.committed, st.session), interim).trim(); };
             st.finish = submit => {
                 if (st.done) return;
                 st.done = true;
@@ -11437,7 +11461,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                         if (prev && normalize(t).startsWith(normalize(prev))) finals[finals.length - 1] = t;
                         else if (t) finals.push(t);
                     }
-                    st.session = finals.join(' ');
+                    st.session = finals.reduce((acc, f) => joinNoOverlap(acc, f), '');
                     // Android renvoie parfois, dans la nouvelle session, le texte déjà retenu.
                     if (st.committed && normalize(st.session).startsWith(normalize(st.committed))) st.committed = '';
                     st.heard = true;
@@ -11449,7 +11473,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 };
                 rec.onend = () => {
                     if (st.done || (st.rec && st.rec !== rec)) return;
-                    st.committed = [st.committed, st.session].filter(Boolean).join(' ');
+                    st.committed = joinNoOverlap(st.committed, st.session);
                     st.session = '';
                     setTimeout(startSession, 120);
                 };
@@ -11464,7 +11488,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 // gardé), on ne compte pas ce temps comme du silence, et on reprend après.
                 if (ttsBusy()) {
                     if (st.rec) {
-                        st.committed = [st.committed, st.session].filter(Boolean).join(' ');
+                        st.committed = joinNoOverlap(st.committed, st.session);
                         st.session = '';
                         const r = st.rec;
                         st.rec = null;
@@ -11989,6 +12013,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 <div id="guide-chat" class="prof-chat guide-chat"></div>
                 <div id="guide-actions" class="guide-actions"></div>
                 <div id="guide-input-row" style="display:none;">
+                    <div id="guide-sugg" class="talk-sugg"></div>
                     <div class="prof-input-row">
                         <input type="text" id="guide-input" placeholder="Réponds en néerlandais…" onkeydown="if(event.key==='Enter') guideSendTyped()">
                         <button type="button" class="btn btn-green prof-send" onclick="guideSendTyped()">➤</button>
@@ -12365,6 +12390,22 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             input.value = '';
             guideConvSubmit(text, /(\bcomment\b|\bpourquoi\b|est-ce|c'est|qu'est|veut dire|\bje ne\b|\bje comprends\b|\bon dit\b|ça|\bquoi\b|\bque\b|\bles\b)/i.test(text));
         }
+        // Suggestions de réponse sous la conversation (comme dans Discuter) : touchées, elles vont
+        // dans la zone de texte et sont lues, à l'apprenant de les dire ou de les envoyer.
+        let guideSuggList = [];
+        function guideRenderSugg(list) {
+            guideSuggList = (list || []).filter(s => s && s.nl).slice(0, 3);
+            const el = document.getElementById('guide-sugg');
+            if (el) el.innerHTML = guideSuggList.map((s, i) => `<button type="button" class="talk-chip" title="${rpEscapeHtml(s.fr || '')}" onclick="guideUseSugg(${i})">${rpEscapeHtml(s.nl)}</button>`).join('');
+        }
+        function guideUseSugg(i) {
+            const s = guideSuggList[i];
+            const input = document.getElementById('guide-input');
+            if (!s || !input) return;
+            input.value = s.nl;
+            conjAudioSpeak(s.nl, 'nl', 0.9);
+        }
+
         function guideConvSubmit(text, isFr) {
             if (!guide || !guide.conv || guide.conv.busy || !guide.resolver) return;
             guideResolve({ text, isFr });
@@ -12400,14 +12441,31 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 const closing = !!maxTurns && turns >= maxTurns;
                 conv.busy = true;
                 let reply = null;
+                // Examen : l'app sait quels sujets sont déjà abordés ; l'examinateur ne les redemande
+                // pas et ne fait parler que de ce qui manque, puis conclut.
+                let remaining = null;
+                if (kind === 'exam') {
+                    const ch = modRpExamChecks(id, conv.userLines);
+                    const jc = conv.judgeCovered || new Set();
+                    remaining = ch.checks.filter(c => !c.ok && !jc.has(c.label)).map(c => c.label);
+                    conv.coveredLabels = ch.checks.filter(c => c.ok || jc.has(c.label)).map(c => c.label);
+                }
                 if (GeminiService.getKey()) {
                     const hist = conv.history.map(h => h.who === 'them' ? 'Toi (personnage) : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
                     try {
                         reply = rpHelpParseJson(await GeminiService.generate(prompt +
-                            '\n\nRègles en plus :\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
+                            '\n\nRègles en plus :\n- Tiens compte de TOUT ce qu\'il a déjà dit, même dans une longue réplique : ne redemande JAMAIS une information qu\'il a déjà donnée ; rebondis dessus (« Ah, u heet dus… ») et passe à ce qui manque.\n- Si l\'apprenant parle FRANÇAIS (une question, un mot qui lui manque), réponds-lui d\'abord en français dans "fr" (1 ou 2 phrases simples, avec la formule néerlandaise utile), puis relance en néerlandais dans "nl" en restant dans ton rôle. Sinon "fr" reste vide.\n- 1 ou 2 phrases courtes en néerlandais.' +
+                            (remaining ? (conv.coveredLabels.length ? '\n- Sujets qu\'il a DÉJÀ abordés (ne les redemande pas) : ' + conv.coveredLabels.join(', ') + '.' : '') + (remaining.length ? '\n- Sujets que l\'application n\'a pas repérés : ' + remaining.join(', ') + '. VÉRIFIE dans la conversation s\'il les a en fait déjà abordés autrement (ex. « ik ben Joas » = donner son nom) : ceux-là, ne les redemande pas et mets-les dans "sujets_abordes". Pour les autres, amène-le naturellement vers l\'un d\'eux, un seul à la fois. S\'il ne reste vraiment rien, conclus sans nouvelle question et mets "fin": true.' : '\n- Il a abordé tous les sujets : réagis, conclus gentiment sans nouvelle question, et mets "fin": true.') : '') +
                             (closing ? '\n- C\'est ta DERNIÈRE réplique : réagis et conclus gentiment, sans nouvelle question.' : '') +
-                            '\n\nConversation :\n' + hist + '\n\nRéponds UNIQUEMENT en JSON : {"fr": "", "nl": "", "nl_fr": "traduction française de nl"}'));
+                            '\n- "suggestions" : 3 réponses courtes QU\'IL pourrait te dire maintenant, à son niveau, variées, avec leur traduction.' +
+                            '\n\nConversation :\n' + hist + '\n\nRéponds UNIQUEMENT en JSON : {"fr": "", "nl": "", "nl_fr": "traduction française de nl", "suggestions": [{"nl": "", "fr": ""}], "fin": false' + (remaining ? ', "sujets_abordes": []' : '') + '}'));
                     } catch (e) { reply = null; }
+                }
+                guideRenderSugg(reply && Array.isArray(reply.suggestions) ? reply.suggestions : []);
+                // Sujets que l'examinateur a reconnus alors que l'application ne les avait pas repérés.
+                if (remaining && reply && Array.isArray(reply.sujets_abordes)) {
+                    conv.judgeCovered = new Set([...(conv.judgeCovered || []), ...reply.sujets_abordes.filter(l => remaining.includes(l))]);
+                    remaining = remaining.filter(l => !conv.judgeCovered.has(l));
                 }
                 if (!reply || !reply.nl) reply = { nl: fallback[turns % fallback.length], fr: '', nl_fr: '' };
                 conv.busy = false;
@@ -12415,10 +12473,11 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 conv.history.push({ who: 'them', nl: reply.nl });
                 await themSay(reply.nl, reply.fr, reply.nl_fr);
                 if (closing) finished = true;
-                if (kind === 'exam' && turns >= 14) finished = true;
+                if (kind === 'exam' && (turns >= 14 || (remaining && !remaining.length && reply.fin === true))) finished = true;
             }
             guideStopListen();
             row.style.display = 'none';
+            guideRenderSugg([]);
             guide.conv = null;
             if (!guideAlive(token)) return null;
             return conv;
@@ -12441,7 +12500,11 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 if (v === 'again' && guideAlive(token)) guideExam(token);
                 return;
             }
-            const { checks, covered, coverageOk } = modRpExamChecks(id, conv.userLines);
+            const raw = modRpExamChecks(id, conv.userLines);
+            const jc = conv.judgeCovered || new Set();
+            const checks = raw.checks.map(c => c.ok || !jc.has(c.label) ? c : Object.assign({}, c, { ok: true }));
+            const covered = checks.filter(c => c.ok).length;
+            const coverageOk = covered >= Math.ceil(0.75 * checks.length);
             guideBubble('info', '<div class="report-meta" id="guide-judging">L\'examinateur écoute ta présentation…</div>');
             const transcript = conv.history.map(h => (h.who === 'me' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + (h.text || h.nl)).join('\n');
             const judge = await modRpExamJudge(id, transcript);
@@ -13757,7 +13820,7 @@ Réponds UNIQUEMENT en JSON :
         function liveCorrectPrompt(text, level, question) {
             return `Tu es correcteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase qu'il vient de dire à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou d'écrire.
 ${LIVE_MIX_RULES}
-Corrige les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant) et ce qui sonnerait nettement mieux autrement ; garde son idée, ne rajoute rien.
+Corrige les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant) et ce qui sonnerait nettement mieux autrement ; garde son idée, ne rajoute rien. S'il y a des répétitions dues à la dictée, ne les garde qu'une fois. "corrige" contient UNIQUEMENT la phrase corrigée : jamais de note, de commentaire ni de crochets.
 Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.
 ${question ? `Il répond à cette réplique de son interlocuteur : « ${String(question).replace(/"/g, "'").slice(0, 500)} »
 ${LIVE_OFFTOPIC_RULE}
