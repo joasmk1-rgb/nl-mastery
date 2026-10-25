@@ -2378,10 +2378,9 @@ if (firebaseAvailable) {
         // exercice normal — migration douce, tableau vide par défaut.
         if (!state.placement) state.placement = { history: [] };
         if (state.onboardingSeen === undefined) state.onboardingSeen = false; // migration douce, jamais réécrit ailleurs qu'ici et dans onboardingMarkSeen
-        // ===== Mode libre (déverrouille toutes les notions) — désactivé par défaut, à activer soi-même
-        // dans Profil si on veut sauter le déverrouillage progressif (ex. attaquer direct du B2). Ne
-        // change rien d'autre : la maîtrise réelle (WeaknessEngine) continue d'être calculée normalement,
-        // seul l'accès à l'écran de leçon change. =====
+        // ===== Mode libre (déverrouille toutes les notions de l'ancien parcours) : plus de bouton dans
+        // le Profil depuis la revue d'octobre 2026 (l'ancien parcours n'est plus proposé) ; la valeur
+        // reste lue par isNotionUnlocked pour les comptes qui l'avaient activé. =====
         if (state.freeAccess === undefined) state.freeAccess = false;
 
         async function loadCurriculumData() {
@@ -2455,11 +2454,6 @@ if (firebaseAvailable) {
             return notion.prerequisites.every(pid => computeNotionMastery(pid) >= 3);
         }
 
-        function toggleFreeAccess(value) {
-            state.freeAccess = value;
-            save();
-            if (document.getElementById('profil-view').classList.contains('active')) renderProfil();
-        }
 
         // ===== Niveau CECR global : dérivé du curriculum (MasteryEngine), PLUS du vocabulaire =====
         // Le vocabulaire reste une statistique de couverture séparée (voir getVocabProgress plus
@@ -2678,20 +2672,6 @@ if (firebaseAvailable) {
             if (banner) banner.innerHTML = '';
         }
 
-        // Traduit un statut WeaknessEngine (voir getNotionStatus) en libellé d'activité pour
-        // l'interface. Purement cosmétique : ne recalcule rien, ne décide de rien.
-        function getRecommendedActivityMeta(status) {
-            return ({
-                jamais_etudiee: { icon: '🆕', label: 'Nouvelle notion débloquée', duration: '~10 min' },
-                decouverte: { icon: '📚', label: 'Continuer la leçon', duration: '~10 min' },
-                en_cours: { icon: '📚', label: 'Continuer la leçon', duration: '~8 min' },
-                faible: { icon: '🔁', label: 'Revoir cette notion', duration: '~5 min' },
-                a_pratiquer: { icon: '🎯', label: 'Consolider (exercices + production)', duration: '~5 min' },
-                entrainee: { icon: '🎯', label: 'Continuer les exercices', duration: '~5 min' },
-                presque_maitrisee: { icon: '🔄', label: 'Petit rappel', duration: '~3 min' },
-                maitrisee: { icon: '✅', label: 'Notion maîtrisée', duration: '' }
-            })[status] || { icon: '📚', label: 'Continuer', duration: '' };
-        }
 
         // Démarre l'activité recommandée pour une notion donnée, en réutilisant exclusivement les
         // vues/fonctions déjà existantes (showLesson, showExercise, openProductionPanel). N'invente
@@ -2758,74 +2738,21 @@ if (firebaseAvailable) {
             showApprendre();
         }
 
-        // Ouvre la leçon d'une notion puis le panneau de production déjà existant (même schéma que
-        // la branche 'a_pratiquer' de startRecommendedActivity) : aucun nouveau système Gemini.
-        function goToProduction(notionId) {
-            showLesson(notionId);
-            setTimeout(() => {
-                openProductionPanel(notionId, 'ecrit');
-                const panel = document.getElementById('production-panel');
-                if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 50);
-        }
 
         // ===== Vue "Pratiquer" (roleplay, pratique ciblée, production — 100% de systèmes existants) =====
         function showPratiquer() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('pratiquer-view').classList.add('active');
             setActiveNav('nav-pratiquer');
-            renderPratiquer();
         }
 
-        // Un seul barème de priorité, partagé par la pratique ciblée (orale) et la production
-        // (écrite) : une notion identifiée comme faiblesse par le curriculum remonte en premier
-        // dans les deux listes — c'est ça, "la pratique ciblée lancée depuis une faiblesse".
-        const PRATIQUER_STATUS_PRIORITY = { faible: 0, a_pratiquer: 1, en_cours: 2, decouverte: 3, entrainee: 4, presque_maitrisee: 5, maitrisee: 6, jamais_etudiee: 7 };
 
-        function renderPratiquer() {
-            const targetedList = document.getElementById('pratiquer-targeted-list');
-            if (targetedList) {
-                const entries = Object.keys(NOTION_TARGETED_PRACTICE)
-                    .sort((a, b) => (PRATIQUER_STATUS_PRIORITY[getNotionStatus(a)] ?? 9) - (PRATIQUER_STATUS_PRIORITY[getNotionStatus(b)] ?? 9));
-                targetedList.innerHTML = entries.length ? entries.map(nid => {
-                    const cfg = NOTION_TARGETED_PRACTICE[nid];
-                    const status = curriculumLoaded ? getNotionStatus(nid) : null;
-                    return `<div class="hub-card" onclick="rpStartTargetedPractice('${nid}')">
-                        <span class="hub-card-icon">🎯</span>
-                        <div class="hub-card-title">${cfg.label}</div>
-                        <div class="hub-card-desc">${status ? getNotionStatusLabel(status) + ' · ' : ''}Pratique orale ciblée avec Gemini.</div>
-                    </div>`;
-                }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Pas encore de pratique ciblée disponible.</div>`;
-            }
-
-            const prodList = document.getElementById('pratiquer-production-list');
-            if (prodList) {
-                if (!curriculumLoaded) {
-                    prodList.innerHTML = `<div style="font-size:0.8rem; color:var(--text-secondary);">Chargement du programme...</div>`;
-                } else {
-                    const statusPriority = PRATIQUER_STATUS_PRIORITY;
-                    const candidates = Object.keys(curriculumNotions)
-                        .filter(id => curriculumNotions[id].status === 'pret' && isNotionUnlocked(id) && curriculumNotions[id].content && curriculumNotions[id].content.tacheProduction)
-                        .sort((a, b) => (statusPriority[getNotionStatus(a)] ?? 9) - (statusPriority[getNotionStatus(b)] ?? 9))
-                        .slice(0, 8);
-                    prodList.innerHTML = candidates.length ? candidates.map(id => {
-                        const notion = curriculumNotions[id];
-                        const titre = notion.content.titre || id.replace(/_/g, ' ');
-                        return `<div class="hub-card" onclick="goToProduction('${id}')">
-                            <span class="hub-card-icon">✍️</span>
-                            <div class="hub-card-title">${titre}</div>
-                            <div class="hub-card-desc">${getNotionStatusLabel(getNotionStatus(id))}</div>
-                        </div>`;
-                    }).join('') : `<div style="font-size:0.8rem; color:var(--text-secondary);">Débloque des notions dans Cours pour accéder à la production écrite.</div>`;
-                }
-            }
-        }
-
-        // ===== Onglet « Jouer » : les 4 jeux de vocabulaire =====
+        // Les 4 jeux vivent dans Vocabulaire (section « En jouant ») ; plus d'onglet « Jouer ».
+        // showReviser (retour des jeux, compagnon) ramène à cette section.
         function showReviser() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('reviser-view').classList.add('active');
-            setActiveNav('nav-reviser');
+            showVocab();
+            const t = document.getElementById('vocab-games-title');
+            if (t) setTimeout(() => t.scrollIntoView({ block: 'start' }), 50);
         }
 
         // Ce qui est à revoir : les mots (en bas de Vocabulaire) et les notions fragiles (dans
@@ -2862,31 +2789,6 @@ if (firebaseAvailable) {
                         <div class="hub-card-desc">3 minutes pour mesurer jusqu'où tu connais les mots ; la routine en tient compte.</div>
                     </div>`;
             }
-            const el = document.getElementById('cours-weak');
-            if (!el) return;
-            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 8) : [];
-            el.innerHTML = `
-                ${weaknesses.length ? `
-                <div class="section-title" style="margin:var(--space-4) 0 var(--space-2);">Notions à consolider</div>
-                <div class="hub-grid single">
-                    ${weaknesses.map(w => {
-                        const titre = notionTitle(w.id);
-                        // Phrase explicite plutôt qu'un simple badge de statut, pour répondre à
-                        // "pourquoi on me propose ça" (réutilise le statut déjà calculé par
-                        // WeaknessEngine, n'invente aucune nouvelle donnée).
-                        const reason = w.status === 'faible'
-                            ? `🔁 Tu as eu des difficultés récentes avec « ${titre} ».`
-                            : `🎯 Il te reste à consolider « ${titre} ».`;
-                        const where = notionWhere(w.id);
-                        return `
-                        <div class="hub-card" onclick="notionGo('${w.id}')">
-                            <div class="hub-card-title">${reason}</div>
-                            <div class="hub-card-desc">${where ? '📚 ' + rpEscapeHtml(where.m.titre) + ' · ' + rpEscapeHtml(where.e.titre) : '🎓 En cours particulier'}</div>
-                            <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:${w.mastery * 20}%"></div></div>
-                            ${NOTION_TARGETED_PRACTICE[w.id] ? `<button class="gemini-explain-btn" onclick="event.stopPropagation(); rpStartTargetedPractice('${w.id}')">🎯 Pratiquer à l'oral cette notion</button>` : ''}
-                        </div>`;
-                    }).join('')}
-                </div>` : ''}`;
         }
 
         // ===== Vue "Comprendre" (indexe les notions de grammaire DÉJÀ écrites dans le curriculum,
@@ -3034,7 +2936,6 @@ if (firebaseAvailable) {
                             <div style="font-size:1.05rem; font-weight:700;">${greetName ? `Bonjour ${greetName} 👋` : 'Bonjour 👋'}</div>
                             <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">${greetStateLine}</div>
                         </div>
-                        <span class="dash-level-badge">${cecrInfo.level}</span>
                     </div>
                     <div class="dash-progress-bar"><div class="dash-progress-fill" style="width:${cecrPct}%"></div></div>
                     ${curriculumLoaded ? `<div style="font-size:0.76rem; color:var(--text-secondary); margin-top:6px;">${masteredCount}/${totalReadyCount} notions maîtrisées · vocabulaire couvert ${vp.pct}%${usedWordsCount() ? ` · 🗣️ ${usedWordsCount()} mots dits à l'oral` : ''}</div>` : ''}
@@ -6240,7 +6141,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showSwipeSelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('swipe-select-view').classList.add('active');
-            setActiveNav('nav-reviser');
+            setActiveNav('nav-vocab');
             const cats = [...MAIN_CATEGORIES.map(c => c.file), ...new Set(fullDb.map(i => i.file).filter(f => !MAIN_CATEGORIES.some(c => c.file === f)))];
             const grid = document.getElementById('swipe-category-grid');
             grid.innerHTML = cats.map(cat => {
@@ -6802,7 +6703,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (fullDb.length < 6) { alert("Pas assez de mots chargés pour jouer au Memory."); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('memory-view').classList.add('active');
-            setActiveNav('nav-reviser');
+            setActiveNav('nav-vocab');
             document.getElementById('memory-result').innerHTML = '';
             bumpMode('memory');
 
@@ -6888,7 +6789,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function showTASelect() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('ta-select-view').classList.add('active');
-            setActiveNav('nav-reviser');
+            setActiveNav('nav-vocab');
         }
 
         function startTimeAttack(durationSec) {
@@ -6998,7 +6899,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             anagramScore = 0;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('anagram-view').classList.add('active');
-            setActiveNav('nav-reviser');
+            setActiveNav('nav-vocab');
             document.getElementById('anagram-score').innerText = 'Score : 0';
             nextAnagram();
         }
@@ -7091,11 +6992,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             window.scrollTo(0, 0);
         }
 
-        function showInfo() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('info-view').classList.add('active');
-            setActiveNav('nav-profil');
-        }
 
         // ===== Configuration Gemini centralisée (Profil → 🤖 Intelligence IA) =====
         // SOURCE UNIQUE de configuration Gemini dans toute l'application : localStorage
@@ -7162,16 +7058,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // Les sections repliables gardent leur état quand le profil se redessine (par exemple
             // après avoir enregistré une clé Gemini, qui se trouve dans une section repliée).
             const openSections = [...document.querySelectorAll('#profil-content details.profil-section[open]')].map(d => d.id);
-            const mc = state.stats.modeCounts;
-            const seenEntries = Object.entries(state.stats.wordSeen);
-            const totalDistinctSeen = seenEntries.length;
-            const top5 = [...seenEntries].sort((a, b) => b[1] - a[1]).slice(0, 5)
-                .map(([key, count]) => {
-                    const [wid] = key.split('::');
-                    const item = fullDb.find(i => i.id === wid);
-                    return item ? `${item.fr} → ${item.nl} (${count}x)` : `${key} (${count}x)`;
-                });
-            const best = state.memoryHighScore;
+            const totalDistinctSeen = Object.keys(state.stats.wordSeen).length;
             const vp = getVocabProgress();
             const masteredNotions = curriculumLoaded
                 ? Object.keys(curriculumNotions).filter(id => curriculumNotions[id].status === 'pret' && getNotionStatus(id) === 'maitrisee').length
@@ -7207,7 +7094,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <span class="module-progress-pct">${c.pct}%</span>
                 </div>`).join('');
 
-            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 5) : [];
+            const weaknesses = curriculumLoaded ? getWeaknesses().slice(0, 6) : [];
             const weaknessesHtml = weaknesses.length ? weaknesses.map(w => `
                 <div class="hub-card" onclick="notionGo('${w.id}')">
                     <div class="hub-card-title">${getNotionStatusLabel(w.status)} — ${rpEscapeHtml(notionTitle(w.id))}</div>
@@ -7225,23 +7112,17 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     <div class="profil-stat-tile"><div class="ps-num">${masteredNotions}</div><div class="ps-label">Notions maîtrisées</div></div>
                 </div>
                 <div class="profil-menu">
-                    <div class="profil-menu-row" onclick="showOnboarding()"><span class="pm-icon">🧭</span><span>Choisir mon point de départ</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" style="cursor:pointer;" onclick="toggleFreeAccess(${!state.freeAccess})">
-                        <span class="pm-icon">${state.freeAccess ? '🔓' : '🔒'}</span>
-                        <span>Mode libre (accès à toutes les leçons)</span>
-                        <span class="pm-chevron">${state.freeAccess ? 'Activé' : 'Désactivé'}</span>
-                    </div>
-                    ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="voiceSpeedCycle()"><span class="pm-icon">⏩</span><span>Vitesse des voix</span><span class="pm-chevron" id="profil-speed-val">${voiceSpeedLabel()}</span></div>
                     <div class="profil-menu-row" onclick="showProgress()"><span class="pm-icon">🌱</span><span>Comment progresser</span><span class="pm-chevron">›</span></div>
-                    <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
 
                 <details class="profil-section" id="profil-sec-tmem" ${openSections.includes('profil-sec-tmem') ? 'open' : ''}>
-                <summary>🧠 Ce que ton tuteur a retenu</summary>
+                <summary>🧠 Mes points faibles</summary>
                 <div id="tmem-box">${tutorMemHtml()}</div>
+                <div class="tmem-sub">Notions à consolider</div>
+                ${weaknessesHtml}
                 </details>
 
                 <details class="profil-section" id="profil-sec-carte" ${openSections.includes('profil-sec-carte') || !openSections.length ? 'open' : ''}>
@@ -7263,26 +7144,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${vocabBarsHtml}
                 </div>
 
-                <div class="study-box" style="text-align:left;">
-                    <h3>🎯 Points faibles</h3>
-                    ${weaknessesHtml}
-                </div>
 
                 <div class="study-box" style="text-align:left;">
                     <h3>📊 Mes statistiques</h3>
                     <p>Mots vus au moins une fois : ${totalDistinctSeen}<br>
                     Mots à réviser actuellement : ${getReviewItems().length}</p>
 
-                    <h3>🎮 Parties jouées</h3>
-                    <p>Mode classique : ${mc.classique || 0}<br>
-                    Memory : ${mc.memory || 0}<br>
-                    Contre-la-montre : ${mc.timeattack || 0}</p>
-
-                    <h3>🧩 Memory — meilleur score</h3>
-                    <p>${best ? best.moves + ' coups en ' + best.timeSec + ' secondes' : 'Pas encore de partie terminée'}</p>
-
-                    <h3>🔥 Mots les plus revus</h3>
-                    <p>${top5.length ? top5.join('<br>') : 'Aucune donnée pour le moment'}</p>
                 </div>
                 </details>
 
@@ -14032,7 +13899,7 @@ Réponds UNIQUEMENT en JSON :
         function tutorMemHtml() {
             const R = (state.tutorMem && state.tutorMem.rules) || {};
             const all = Object.entries(R).filter(([, r]) => r && !r.done).sort((a, b) => (b[1].n - a[1].n) || (b[1].last - a[1].last));
-            if (!all.length) return '<p class="report-meta">Rien pour l\'instant : ton tuteur retiendra ici les fautes qui reviennent dans tes conversations.</p>';
+            if (!all.length) return '<p class="report-meta">Fautes qui reviennent : rien pour l\'instant, ton tuteur les retiendra ici au fil de tes conversations.</p>';
             return `<p class="report-meta">Les règles qui reviennent dans tes conversations. Tes interlocuteurs les connaissent et te les font réemployer quand l'occasion se présente.</p>
                 ${all.slice(0, 12).map(([k, r]) => `<div class="tmem-row">
                     <div><b>${rpEscapeHtml(r.label)}</b> <small class="report-meta">${r.n} fois</small>
@@ -15341,7 +15208,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             rejouer: { desc: 'rejouer un vrai entretien mot pour mot', run: () => rpShowReplayList() },
             etude_de_cas: { desc: 'étude de cas (business case)', run: () => { showRoleplay('travail'); rpShowCaseHome(); } },
             travail: { desc: 'mises en situation dans mon métier', run: () => { showRoleplay('travail'); rpShowJobHome(); } },
-            jeux: { desc: "onglet Jouer ; params.jeu parmi memory, chrono, anagramme, tri", run: p => ({ memory: startMemory, chrono: showTASelect, anagramme: startAnagram, tri: showSwipeSelect }[p.jeu] || showReviser)() },
+            jeux: { desc: "jeux de vocabulaire ; params.jeu parmi memory, chrono, anagramme, tri", run: p => ({ memory: startMemory, chrono: showTASelect, anagramme: startAnagram, tri: showSwipeSelect }[p.jeu] || showReviser)() },
             profil: { desc: 'profil, statistiques, carte des compétences', run: () => showProfil() }
         };
 

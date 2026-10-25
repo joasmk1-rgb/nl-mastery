@@ -880,3 +880,4 @@
         .routine-home-go { color: var(--primary); font-weight: 700; font-size: 0.85rem; }
         .routine-home-tutor { margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary); }
         .routine-home-tutor a { color: var(--text-secondary); }
+        .tmem-sub { font-weight: 700; font-size: 0.85rem; margin: 12px 0 6px; text-align: left; }

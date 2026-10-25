@@ -79,6 +79,14 @@
         <!-- Les modes en haut, les catégories en dessous (Joas, octobre 2026). -->
         <div class="section-title" style="margin-top:0;">🛠️ Comment travailler</div>
         <div id="vocab-review" class="hub-grid"></div>
+        <!-- Les jeux sont des façons de travailler le vocabulaire (plus d'onglet « Jouer ») -->
+        <div class="section-title" id="vocab-games-title">🎮 En jouant</div>
+        <div class="hub-grid" id="vocab-games">
+            <div class="hub-card" onclick="startMemory()"><span class="hub-card-icon">🧩</span><div class="hub-card-title">Memory</div><div class="hub-card-desc">Associe les mots et leur traduction.</div></div>
+            <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Un maximum de mots avant la fin du chrono.</div></div>
+            <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
+            <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Trie en un geste les mots que tu connais.</div></div>
+        </div>
         <div class="section-title">📚 Sur quels mots</div>
         <div id="total-words-count" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;"></div>
         <div class="grid" id="main-categories-grid" style="margin-top:0;"></div>
@@ -154,7 +162,7 @@
 
     <div id="pratiquer-view" class="view">
         <h2>🎭 Pratiquer</h2>
-        <p class="section-subtitle" style="margin-top:0;">Parle et écris en situation réelle, avec Gemini.</p>
+        <p class="section-subtitle" style="margin-top:0;">Parle et écoute en situation réelle : la vie courante, ton travail, et la compréhension orale.</p>
 
         <div class="talk-entry" onclick="showTalk()">
             <span class="talk-entry-avatars">👩🏼👨🏽</span>
@@ -165,26 +173,7 @@
             <div class="hub-card accent" onclick="showListen()"><span class="hub-card-icon">👂</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Message vocal, annonce, radio, consigne : écoute, réponds, résume.</div></div>
         </div>
 
-        <details class="profil-section">
-            <summary>🎯 Pratique orale ciblée sur une notion</summary>
-            <div id="pratiquer-targeted-list" class="hub-grid single"></div>
-        </details>
-        <details class="profil-section">
-            <summary>✍️ Production écrite</summary>
-            <div id="pratiquer-production-list" class="hub-grid single"></div>
-        </details>
     </div>
-    <div id="reviser-view" class="view">
-        <h2>🎮 Jouer</h2>
-        <p class="section-subtitle" style="margin-top:0;">Entretiens ton vocabulaire en jouant.</p>
-        <div class="hub-grid">
-            <div class="hub-card" onclick="startMemory()"><span class="hub-card-icon">🧩</span><div class="hub-card-title">Memory</div><div class="hub-card-desc">Associe les mots et leur traduction.</div></div>
-            <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Teste ta vitesse sur un temps limité.</div></div>
-            <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
-            <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Swipe pour trier les mots que tu connais.</div></div>
-        </div>
-    </div>
-
     <div id="study-view" class="view">
         <button class="back-btn" onclick="studyBack()">← Retour</button>
         <div class="study-box">
@@ -307,7 +296,7 @@
 
     <!-- Comment progresser : ce qui fait qu'on est bon dans une langue, et ce que l'app fait pour
          chaque pilier (boutons vers les activités). Page statique, ouverte depuis le Profil, le
-         premier lancement, la page Infos et le compagnon (showProgress). -->
+         premier lancement et le compagnon (showProgress) ; la page Infos y est fusionnée. -->
     <div id="routine-view" class="view">
         <button class="back-btn" onclick="routineQuitRun(); showHome()">← Accueil</button>
         <div id="routine-content" class="content-col"></div>
@@ -381,85 +370,16 @@
             </div>
 
             <div class="howto-card">
+                <div class="howto-title">📊 Les niveaux A1 → B2</div>
+                <p>C'est l'échelle européenne (CECR), la même que les cours de néerlandais en Flandre : <b>A1</b> débutant (≈ CVO 1.1), <b>A2</b> élémentaire (≈ CVO 1.2), <b>B1</b> autonome dans la plupart des situations (≈ CVO 2.1–2.4), <b>B2</b> à l'aise, y compris au travail (≈ CVO 3.1–3.2). Le niveau affiché ici est une estimation, pas un test certifié comme le test NT2 ou le CNaVT.</p>
+                <p><b>Sens de traduction</b> : en bas de Vocabulaire, tu choisis Français → Néerlandais ou l'inverse ; un mot est suivi séparément dans chaque sens.</p>
+            </div>
+
+            <div class="howto-card">
                 <div class="howto-title">📈 Comment l'app mesure tes progrès</div>
                 <p><b>Ton niveau CECR</b> (A1 → B2) monte avec les notions de grammaire validées : examens des modules, séances B1/B2, « faire le point », et simplement en les employant correctement en conversation (3 fois, dans 2 conversations).</p>
                 <p><b>Ton vocabulaire couvert</b> compte les mots maîtrisés en exercice et les mots actifs à l'oral.</p>
                 <p><b>La mémoire du tuteur</b> montre les fautes qui reviennent, jusqu'à ce qu'elles disparaissent.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="info-view" class="view">
-        <button class="back-btn" onclick="showProfil()">← Retour</button>
-        <h2>ℹ️ Infos & comment ça marche</h2>
-        <div class="content-col" style="text-align:left;">
-            <button class="btn btn-green" onclick="showProgress()">🌱 Comment devenir bon en néerlandais (et comment l'app t'y aide)</button>
-            <div class="study-box" style="text-align:left; max-width:none;">
-                <h3>📊 Les niveaux A1 / A2 / B1 / B2 (CECR)</h3>
-                <p style="font-size:0.9rem;">
-                    C'est l'échelle européenne officielle pour les langues (Cadre Européen Commun de Référence).
-                    Ici, ton niveau monte avec les <b>notions de grammaire et de communication validées</b> : examens des modules, séances B1/B2, « faire le point », ou en les employant correctement en conversation. Il est indépendant de ton vocabulaire (suivi à part, en « vocabulaire couvert ») :<br><br>
-                    <b>A1</b> — Débutant : bases essentielles (≈ CVO 1.1 Breakthrough)<br>
-                    <b>A2</b> — Élémentaire : peut gérer des échanges simples (≈ CVO 1.2 Waystage)<br>
-                    <b>B1</b> — Intermédiaire : autonome dans la plupart des situations courantes (≈ CVO 2.1–2.4 Threshold)<br>
-                    <b>B2</b> — Intermédiaire avancé : aisance, y compris sur des sujets professionnels (≈ CVO 3.1–3.2 Vantage)<br><br>
-                    ⚠️ C'est une estimation, pas un test certifiant (comme le CNaVT ou le test NT2) : utile pour suivre ta progression, pas pour un CV.
-                </p>
-            </div>
-
-            <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>📖 Mode classique (catégories / listes perso)</h3>
-                <p style="font-size:0.9rem;">
-                    Les mots sont débloqués par <b>paquets de 10</b>, du plus fréquent au moins fréquent. Un paquet se
-                    débloque dès que tous ses mots sont maîtrisés. Réussir un mot <b>du premier coup</b> = maîtrisé
-                    directement. Un mot raté part en révision et il faudra le réussir à nouveau (plus tard) pour qu'il
-                    sorte de la rotation.
-                </p>
-            </div>
-
-            <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>🔁 Révision</h3>
-                <p style="font-size:0.9rem;">
-                    Reprend uniquement les mots ratés, chacun une seule fois dans la file. Si tu le rerates, il est
-                    repoussé <b>25 mots plus loin</b> (pour éviter que ce ne soit que de la mémoire à très court terme).
-                    La session se termine quand la file est vide.
-                </p>
-            </div>
-
-            <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>🧩 Memory</h3>
-                <p style="font-size:0.9rem;">
-                    Retrouve les paires FR/NL parmi les mots les plus fréquents encore actifs. Le nombre de coups et le
-                    temps sont chronométrés — un meilleur score (moins de coups, moins de temps) bat ton record.
-                </p>
-            </div>
-
-            <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>⏱️ Contre-la-montre</h3>
-                <p style="font-size:0.9rem;">
-                    Choisis une durée (30s à 5min) et réponds à un maximum de mots avant la fin du chrono. Piochés
-                    dans les mots les plus fréquents encore actifs. Une bonne réponse = 1 point, une presque-bonne
-                    (petite faute) = 0.5 point.
-                </p>
-            </div>
-
-            <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>📏 Mon niveau de vocabulaire</h3>
-                <p style="font-size:0.9rem;">
-                    Dans Vocabulaire → Comment travailler. Le test pose quelques mots par palier de fréquence, du plus
-                    courant au plus rare, et s'arrête dès qu'un palier coince : en 3 minutes, il estime jusqu'où tu connais
-                    les mots. La routine du jour te propose ensuite des mots nouveaux à ce niveau. C'est une estimation,
-                    pas un test certifié.
-                </p>
-            </div>
-
-            <div class="study-box" style="text-align:left; margin-top:15px;">
-                <h3>🔀 Sens de traduction</h3>
-                <p style="font-size:0.9rem;">
-                    Le bouton violet sur l'accueil bascule entre Français→Néerlandais et Néerlandais→Français. La
-                    maîtrise d'un mot est suivie <b>séparément par sens</b> — tu peux très bien le maîtriser dans un
-                    sens et pas encore dans l'autre.
-                </p>
             </div>
         </div>
     </div>
@@ -595,15 +515,13 @@
 
     <div id="apprendre-view" class="view">
         <h2>📚 Cours</h2>
-        <p class="section-subtitle" style="margin-top:0;">Des leçons en situation, avec un jeu de rôle final pour valider chaque module.</p>
-        <div class="hub-grid single" style="margin-bottom:var(--space-3);">
-            <div class="hub-card accent" onclick="showProf()"><span class="hub-card-icon">🎓</span><div class="hub-card-title">Cours particulier</div><div class="hub-card-desc">15 ou 30 min avec un prof : conversation, point ciblé, mise en pratique, bilan. Différent à chaque fois.</div></div>
-        </div>
+        <p class="section-subtitle" style="margin-top:0;">Ton parcours de A1 à B2, calqué sur les cours de néerlandais en Flandre : commence par faire le point, puis avance niveau par niveau.</p>
         <div id="modrp-list"></div>
-        <div class="hub-grid single" style="margin-top:var(--space-3);">
+        <div class="section-title" style="margin-top:var(--space-4);">À côté du parcours</div>
+        <div class="hub-grid single">
+            <div class="hub-card" onclick="showProf()"><span class="hub-card-icon">🎓</span><div class="hub-card-title">Cours particulier</div><div class="hub-card-desc">15 ou 30 min avec un prof : conversation, point ciblé, mise en pratique, bilan. Différent à chaque fois.</div></div>
             <div class="hub-card" onclick="showComprendre()"><span class="hub-card-icon">🧠</span><div class="hub-card-title">Grammaire & structures</div><div class="hub-card-desc">Le mémo : ordre des mots, temps, subordonnées, connecteurs.</div></div>
         </div>
-        <div id="cours-weak"></div>
     </div>
 
     <div id="comprendre-view" class="view">
@@ -745,7 +663,6 @@
         <button onclick="showVocab()" id="nav-vocab"><span class="icon">📖</span>Vocabulaire</button>
         <button onclick="showApprendre()" id="nav-apprendre"><span class="icon">📚</span>Cours</button>
         <button onclick="showPratiquer()" id="nav-pratiquer"><span class="icon">🎭</span>Pratiquer</button>
-        <button onclick="showReviser()" id="nav-reviser"><span class="icon">🎮</span>Jouer</button>
     </nav>
 
     <!-- Compagnon vocal : micro flottant présent sur tous les écrans (sauf ceux qui ont leur micro) -->
