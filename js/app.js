@@ -11687,10 +11687,10 @@ Réponds UNIQUEMENT en JSON : {"fr": "", "nl": "ce que tu dis en néerlandais", 
         // Prompt du CORRECTEUR : ne voit qu'une phrase de l'apprenant.
         function profCorrectPrompt(sentence) {
             return `Tu es correcteur de néerlandais. Voici UNE phrase dite à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou écrite par un apprenant francophone de niveau ${prof.level}. Corrige seulement les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant), pas le style.
-${LIVE_MIX_RULES}
+${LIVE_MIX_RULES}${notionPromptPart()}
 Si la phrase est ENTIÈREMENT en français, réponds {"fr": true}.
 Phrase : "${sentence.replace(/"/g, "'")}"
-Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false}
+Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase corrigée complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false, "notions_ok": [], "notions_ko": []}
 ("ok" = aucune faute ; "bloquant" = on ne comprend pas ce qu'il veut dire)`;
         }
 
@@ -11699,7 +11699,7 @@ Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase co
             if (!c || c.error) { usedWordsRecord(text); return; }
             usedWordsRecord(text, c);
             msg.corr = c;
-            if (!c.fr) tutorMemAdd(c.erreurs, 'prof');
+            if (!c.fr) { tutorMemAdd(c.erreurs, 'prof'); notionUsageRecord(c.notions_ok, c.notions_ko); }
             c.francais = (Array.isArray(c.francais) ? c.francais : []).filter(x => x && x.fr && x.nl);
             if (c.francais.length) { c.ok = false; liveSaveWords(c.francais); }
             if (!c.ok && !c.fr) (c.erreurs || []).forEach(e => prof && prof.errors.push(e));
@@ -12931,9 +12931,10 @@ Règles :
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", ${TUTOR_REGLE_FIELD.replace('"regle"', '"regle" (seulement si c\'est une vraie faute, sinon "")')}, "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
 - ${talk.lesson ? `FIN : quand toutes les tâches sont validées (✓) ou abandonnées (✗), conclus la séance chaleureusement, sans question, avec "fin": true ; sinon "fin": false.` : ''}${talk.lesson ? '' : talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
+- "notions_ok" / "notions_ko" : à propos de SA DERNIÈRE phrase en néerlandais.${notionPromptPart()}
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
-Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false${talk.lesson ? ', "tache": "", "validee": null, "ratee": null, "a_enseigner": null' : ''}}`;
+Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "notions_ok": [], "notions_ko": [], "fin": false${talk.lesson ? ', "tache": "", "validee": null, "ratee": null, "a_enseigner": null' : ''}}`;
         }
 
         function talkThinking(on) {
@@ -12971,6 +12972,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 lastMsg.corr = r.correction;
                 if (lastDiv) lastDiv.insertAdjacentHTML('beforeend', talkCorrHtml(r.correction));
             }
+            if (lastMsg) notionUsageRecord(r.notions_ok, r.notions_ko);
             if (lastMsg) { const ids = usedWordsRecord(lastMsg.text, r.correction && r.correction.natural ? r.correction : null); if (talk.point && Array.isArray(ids)) ids.forEach(id => talk.point.words.add(id)); }
             if (talk.lesson) convHandle(r);
             talk.history.push({ who: 'them', nl: r.reply_nl });
@@ -13804,6 +13806,57 @@ Réponds UNIQUEMENT en JSON :
             return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as déjà des bases ? Svetlana ou John te font parler (te présenter, ton numéro, ta journée, tes projets…) et valident ce que tu sais déjà : pas besoin de refaire ces cours. Si tu bloques, dis-le en français, ils te montrent comment le dire.</p><div class="cours-point-btns">${btns}</div></div>`;
         }
 
+        // ===== Notions employées en conversation =====
+        // Comme le vocabulaire, la grammaire se valide partout où l'on parle : le correcteur (même
+        // appel) reçoit les notions du niveau de l'apprenant et du niveau au-dessus, pas encore
+        // validées (notionCandidates), et renvoie celles qu'il emploie correctement (notions_ok) ou
+        // avec une faute (notions_ko). Chaque emploi = une réponse pour la notion
+        // (recordNotionAttempt). Validée après USED_NOTION_OK bons emplois dans au moins
+        // USED_NOTION_CONVS conversations (state.notionUse[id] = { n, c, last }), si les dernières
+        // réponses sont bonnes à 80 %. Le niveau CECR suit.
+        const USED_NOTION_OK = 3, USED_NOTION_CONVS = 2;
+        function notionCandidates() {
+            if (!curriculumLoaded) return [];
+            const order = ['A1', 'A2', 'B1', 'B2'];
+            const lvl = order.indexOf(getCurriculumLevel().level);
+            const max = Math.min(order.length - 1, Math.max(1, lvl + 1));
+            return Object.entries(curriculumNotions)
+                .filter(([id, n]) => order.indexOf(n.level) <= max && !(state.curriculum.notionProgress[id] && state.curriculum.notionProgress[id].validated))
+                .sort((a, b) => order.indexOf(a[1].level) - order.indexOf(b[1].level))
+                .slice(0, 60).map(([id, n]) => ({ id, titre: (n.content && (n.content.titre || (n.content.objectif && String(n.content.objectif).slice(0, 100)))) || notionTitle(id), level: n.level }));
+        }
+        // Texte ajouté aux prompts des correcteurs ; '' si rien à suivre.
+        function notionPromptPart() {
+            const list = notionCandidates();
+            if (!list.length) return '';
+            return `\nNotions de grammaire suivies (id : intitulé) :\n${list.map(n => `- ${n.id} : ${n.titre}`).join('\n')}\nDans "notions_ok", mets les ids des notions de cette liste qu'il EMPLOIE CORRECTEMENT dans sa phrase (la structure y est vraiment, ex. omdat avec le verbe à la fin) ; dans "notions_ko", celles qu'il emploie avec une faute. En cas de doute, ne mets rien.`;
+        }
+        function notionUsageRecord(ok, ko) {
+            if (!curriculumLoaded) return;
+            const ses = typeof usedSessionCurrent === 'function' ? usedSessionCurrent() : null;
+            const now = Date.now();
+            if (!state.notionUse) state.notionUse = {};
+            (Array.isArray(ko) ? ko : []).filter(id => curriculumNotions[id]).forEach(id => recordNotionAttempt(id, false));
+            (Array.isArray(ok) ? ok : []).filter(id => curriculumNotions[id]).forEach(id => {
+                recordNotionAttempt(id, true);
+                const u = state.notionUse[id] || { n: 0, c: 0, last: 0 };
+                u.n = (u.n || 0) + 1;
+                if (!u.last || now - u.last > USED_CONV_GAP) u.c = (u.c || 0) + 1;
+                u.last = now;
+                state.notionUse[id] = u;
+                if (ses) { ses.notions = ses.notions || new Set(); ses.notions.add(id); }
+                const p = ntProgress(id);
+                const recent = Array.isArray(p.recent) ? p.recent : [];
+                const rate = recent.length ? recent.reduce((a, b) => a + b, 0) / recent.length : 1;
+                if (!p.validated && u.n >= USED_NOTION_OK && u.c >= USED_NOTION_CONVS && rate >= 0.8) {
+                    p.validated = true;
+                    p.validatedBy = 'conversation';
+                    if (ses) { ses.notionsValidated = ses.notionsValidated || new Set(); ses.notionsValidated.add(id); }
+                }
+            });
+            save();
+        }
+
         // ===== Mots utilisés à l'oral =====
         // Chaque phrase dite (ou écrite) en néerlandais dans une conversation alimente le
         // vocabulaire : les mots reconnus par l'app (rpWordLookup, formes fléchies comprises) sont
@@ -13887,13 +13940,15 @@ Réponds UNIQUEMENT en JSON :
         // Encart de fin de conversation : ce que la séance a apporté au vocabulaire.
         function usedSessionHtml() {
             const s = usedSession;
-            if (!s || !s.ids.size) return '';
+            if (!s || (!s.ids.size && !(s.notions && s.notions.size))) return '';
             const vp = getVocabProgress();
             const list = ids => [...ids].slice(0, 8).map(id => { const i = fullDb.find(x => x.id === id); return i ? `<b>${rpEscapeHtml(i.nl)}</b>` : ''; }).filter(Boolean).join(', ');
             return `<div class="used-recap">
                 <div class="prof-deb-sec">🗣️ Ton vocabulaire</div>
-                <div>${s.ids.size} mot${s.ids.size > 1 ? 's' : ''} de ton vocabulaire employé${s.ids.size > 1 ? 's' : ''}${s.fresh.size ? `, dont <b>${s.fresh.size} pour la première fois</b> : ${list(s.fresh)}` : ''}.</div>
+                <div${s.ids.size ? '' : ' style="display:none;"'}>${s.ids.size} mot${s.ids.size > 1 ? 's' : ''} de ton vocabulaire employé${s.ids.size > 1 ? 's' : ''}${s.fresh.size ? `, dont <b>${s.fresh.size} pour la première fois</b> : ${list(s.fresh)}` : ''}.</div>
                 ${s.activated.size ? `<div>⭐ ${s.activated.size} devien${s.activated.size > 1 ? 'nent' : 't'} actif${s.activated.size > 1 ? 's' : ''} : ${list(s.activated)}</div>` : ''}
+                ${s.notions && s.notions.size ? `<div>📘 Grammaire bien employée : ${[...s.notions].slice(0, 6).map(id => rpEscapeHtml(notionTitle(id))).join(', ')}</div>` : ''}
+                ${s.notionsValidated && s.notionsValidated.size ? `<div>🏅 Notion${s.notionsValidated.size > 1 ? 's' : ''} validée${s.notionsValidated.size > 1 ? 's' : ''} en conversation : ${[...s.notionsValidated].map(id => '<b>' + rpEscapeHtml(notionTitle(id)) + '</b>').join(', ')}</div>` : ''}
                 <div class="used-recap-pct">Mots couverts : ${s.n0} → <b>${vp.masteredVocab}</b>${vp.masteredVocab > s.n0 ? ` (+${vp.masteredVocab - s.n0})` : ''} · ${vp.pct} % du vocabulaire</div>
             </div>`;
         }
@@ -14029,11 +14084,11 @@ Réponds UNIQUEMENT en JSON :
             return `Tu es correcteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase qu'il vient de dire à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou d'écrire.
 ${LIVE_MIX_RULES}
 Corrige les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant) et ce qui sonnerait nettement mieux autrement ; garde son idée, ne rajoute rien. S'il y a des répétitions dues à la dictée, ne les garde qu'une fois. "corrige" contient UNIQUEMENT la phrase corrigée : jamais de note, de commentaire ni de crochets.
-Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.
+Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.${notionPromptPart()}
 ${question ? `Il répond à cette réplique de son interlocuteur : « ${String(question).replace(/"/g, "'").slice(0, 500)} »
 ${LIVE_OFFTOPIC_RULE}
 ` : ''}Phrase : "${String(text).replace(/"/g, "'")}"
-Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false${question ? ', "a_cote": false, "question_fr": "", "comprehension_fr": "", "piste_nl": ""' : ''}}
+Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phrase complète, entièrement en néerlandais", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}], "bloquant": false, "notions_ok": [], "notions_ko": []${question ? ', "a_cote": false, "question_fr": "", "comprehension_fr": "", "piste_nl": ""' : ''}}
 ("ok" = aucune faute ET aucun mot français ; "bloquant" = on ne comprend pas ce qu'il veut dire${question ? ` ; "a_cote" = il répond à côté : alors "question_fr" = la question traduite en français, "comprehension_fr" = en une phrase, ce qu'on lui demandait vraiment et ce qu'il a compris à la place, "piste_nl" = une courte réponse en néerlandais qui répond vraiment, en gardant ses informations si possible` : ''})`;
         }
 
@@ -14050,6 +14105,7 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
             c.erreurs = (Array.isArray(c.erreurs) ? c.erreurs : []).filter(x => x && x.correct);
             if (c.francais.length) liveSaveWords(c.francais);
             tutorMemAdd(c.erreurs, 'correction');
+            notionUsageRecord(c.notions_ok, c.notions_ko);
             return c;
         }
 
