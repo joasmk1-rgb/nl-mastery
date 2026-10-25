@@ -873,3 +873,11 @@
         .routine-home-top { display: flex; justify-content: space-between; align-items: center; }
         .routine-home-steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; font-size: 0.78rem; color: var(--text-secondary); }
         .routine-home-steps .ok { color: var(--success); }
+        .routine-head { flex-direction: row; justify-content: space-between; align-items: center; gap: 8px; }
+        .routine-head > div { display: flex; flex-direction: column; }
+        .routine-mode { border: 1px solid var(--border); background: var(--card-bg); color: var(--text); border-radius: var(--radius-pill); padding: 6px 12px; font-size: 0.8rem; cursor: pointer; white-space: nowrap; }
+        .routine-mode.on { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--card-bg)); font-weight: 700; }
+
+        /* Vitesse des voix */
+        .speed-btn { border: 1px solid var(--border); background: var(--card-bg); color: var(--text); border-radius: var(--radius-pill); padding: 5px 10px; font-size: 0.78rem; cursor: pointer; white-space: nowrap; }
+        .routine-head-btns { display: flex; gap: 6px; align-items: center; }

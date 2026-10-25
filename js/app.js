@@ -2072,6 +2072,25 @@ if (firebaseAvailable) {
             return String(text).replace(/_+|-{3,}|\.{4,}|…{2,}/g, ' … ').replace(/\s+/g, ' ').trim();
         }
 
+        // ===== Vitesse des voix (réglage global, Joas : « avoir un pouvoir sur la vitesse ») =====
+        // Multiplie la vitesse de toutes les voix de l'app (conjAudioSpeak, speakNL) et raccourcit
+        // d'autant les pauses (conjAudioWait, blanc de réflexion de la routine). Exception : Rejouer
+        // un entretien, calé sur le débit réel du recruteur (option raw). Bouton ⏩ dans les écrans
+        // d'écoute, et Profil → Vitesse des voix. state.settings.voiceSpeed.
+        const VOICE_SPEEDS = [0.85, 1, 1.15, 1.3, 1.5];
+        function voiceSpeed() { const v = state && state.settings && state.settings.voiceSpeed; return VOICE_SPEEDS.includes(v) ? v : 1; }
+        function voiceSpeedLabel() { const v = voiceSpeed(); return (v === 1 ? '1' : String(v).replace('.', ',')) + '×'; }
+        function speedBtnHtml() { return `<button type="button" class="speed-btn" onclick="event.stopPropagation(); voiceSpeedCycle()" title="Vitesse des voix">⏩ ${voiceSpeedLabel()}</button>`; }
+        function voiceSpeedCycle() {
+            if (!state.settings) state.settings = {};
+            const i = VOICE_SPEEDS.indexOf(voiceSpeed());
+            state.settings.voiceSpeed = VOICE_SPEEDS[(i + 1) % VOICE_SPEEDS.length];
+            save();
+            document.querySelectorAll('.speed-btn').forEach(b => { b.innerHTML = '⏩ ' + voiceSpeedLabel(); });
+            const row = document.getElementById('profil-speed-val');
+            if (row) row.innerText = voiceSpeedLabel();
+        }
+
         function speakNL(text) {
             if (!('speechSynthesis' in window) || !text) return;
             // Pour la voix, on retire aussi les emojis, que certaines voix décrivent à haute voix.
@@ -2081,7 +2100,7 @@ if (firebaseAvailable) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'nl-NL';
             if (typeof rpDutchVoice !== 'undefined' && rpDutchVoice) utterance.voice = rpDutchVoice;
-            utterance.rate = 0.95;
+            utterance.rate = 0.95 * voiceSpeed();
             window.speechSynthesis.speak(utterance);
         }
 
@@ -4419,12 +4438,13 @@ if (firebaseAvailable) {
                 }
                 if (opt && opt.pitch) u.pitch = opt.pitch;
                 if (voice) u.voice = voice;
-                u.rate = rate;
+                const eff = Math.max(0.5, Math.min(2, rate * (opt && opt.raw ? 1 : voiceSpeed())));
+                u.rate = eff;
                 let done = false;
                 const finish = () => { if (!done) { done = true; resolve(); } };
                 u.onend = finish;
                 u.onerror = finish;
-                setTimeout(finish, 2500 + text.length * 180 / rate);
+                setTimeout(finish, 2500 + text.length * 180 / eff);
                 window.speechSynthesis.speak(u);
             });
         }
@@ -4432,7 +4452,7 @@ if (firebaseAvailable) {
         // Attente interrompue par Arrêter / Passer, et suspendue tant que la lecture est en pause.
         async function conjAudioWait(ms) {
             const run = conjAudioRun;
-            let left = ms;
+            let left = ms / voiceSpeed();
             while (run && !run.stop && !run.skip && (left > 0 || run.paused)) {
                 await new Promise(r => setTimeout(r, 100));
                 if (!run.paused) left -= 100;
@@ -4905,6 +4925,7 @@ if (firebaseAvailable) {
                 ${scene.subtitle ? `<p class="prep-sub">${rpEscapeHtml(scene.subtitle)}</p>` : ''}
                 <div id="scene-chips"></div>
                 <div class="conj-audio-controls" style="margin:10px 0;">
+                    ${speedBtnHtml()}
                     <button type="button" class="btn btn-green" onclick="scenePlay(0)">▶️ Écouter</button>
                     <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
                     <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭</button>
@@ -4930,7 +4951,7 @@ if (firebaseAvailable) {
 
         async function scenePlay(from) {
             const sc = sceneCurrent;
-            if (!sc) return;
+            if (!sc || !Array.isArray(sc.lines)) return; // scène pas (encore) prête
             conjAudioStop();
             const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: 'scene-view' };
             conjAudioRun = run;
@@ -7264,6 +7285,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     </div>
                     ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="voiceSpeedCycle()"><span class="pm-icon">⏩</span><span>Vitesse des voix</span><span class="pm-chevron" id="profil-speed-val">${voiceSpeedLabel()}</span></div>
                     <div class="profil-menu-row" onclick="showProgress()"><span class="pm-icon">🌱</span><span>Comment progresser</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
@@ -12062,6 +12084,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     <div class="cat-bar"><div class="cat-bar-fill" id="guide-bar" style="width:0%"></div></div>
                     <div class="guide-where" id="guide-where"></div>
                     <div class="guide-controls">
+                        ${speedBtnHtml()}
                         <button type="button" class="rp-coach-btn" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
                         <button type="button" class="rp-coach-btn" onclick="guideSkip()">⏭ Passer</button>
                         <button type="button" class="rp-coach-btn" onclick="guideQuit(); showModuleRp('${id}')">📋 Sommaire</button>
@@ -12830,6 +12853,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
                     <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
+                    ${speedBtnHtml()}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
                 </div>
@@ -13239,7 +13263,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const voice = REPLAY_VOICES[Math.max(0, r.speakers.indexOf(speakerName)) % REPLAY_VOICES.length];
             const words = (text.match(/[A-Za-zÀ-ÿ']+/g) || []).length;
             const t0 = Date.now(), token = r.token;
-            await conjAudioSpeak(text, 'nl', s.rate, voice);
+            await conjAudioSpeak(text, 'nl', s.rate, Object.assign({ raw: true }, voice));
             const dt = (Date.now() - t0) / 1000;
             // Mesure seulement sur une lecture complète (pas interrompue par une réponse, un saut
             // ou un arrêt, ni terminée par le délai de secours).
@@ -14253,6 +14277,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             const s = tutorSettings();
             document.getElementById('tutor-content').innerHTML = `
                 <h2 style="margin-bottom:4px;">🧑‍🏫 Revoir avec mon tuteur</h2>
+                <div class="lc-row">${speedBtnHtml()}</div>
                 <div class="lc-row" style="margin-bottom:6px;"><button type="button" class="lc-toggle${s.repeat ? ' on' : ''}" onclick="tutorSettings().repeat = !tutorSettings().repeat; save(); this.classList.toggle('on'); this.innerText = '🔁 Me faire répéter : ' + (tutorSettings().repeat ? 'oui' : 'non');">🔁 Me faire répéter : ${s.repeat ? 'oui' : 'non'}</button></div>
                 <div id="tutor-chat" class="prof-chat guide-chat"></div>
                 <div id="tutor-actions" class="guide-actions"></div>
@@ -14509,7 +14534,7 @@ Réponds UNIQUEMENT en JSON : {"titre_fr": "", "contexte_fr": "ce que l'apprenan
                 ${d.contexte_fr ? `<p class="listen-ctx">${rpEscapeHtml(d.contexte_fr)}</p>` : ''}
                 <div class="listen-player">
                     <button type="button" class="talk-mic" id="listen-play" onclick="listenPlay()">▶️</button>
-                    <div><button type="button" class="lc-toggle${l.slow ? ' on' : ''}" onclick="listen.slow = !listen.slow; listenRender();">🐢 Plus lentement</button>
+                    <div>${speedBtnHtml()} <button type="button" class="lc-toggle${l.slow ? ' on' : ''}" onclick="listen.slow = !listen.slow; listenRender();">🐢 Plus lentement</button>
                     <div class="report-meta" id="listen-plays">${l.plays ? `Écouté ${l.plays} fois` : 'Écoute bien…'}</div></div>
                 </div>
                 <div class="listen-q">
@@ -14671,12 +14696,29 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
         // entraînements (conjStats, mots, chunkStats). État du jour : state.routine.
         const ROUTINE = { conj: 8, conjVerbs: 20, newWords: 6, maxWords: 25, blocs: 6, petitsMots: 4 };
         const ROUTINE_STEPS = {
-            conj: { icon: '🔤', label: 'Conjugaison', why: "On s'échauffe avec la conjugaison des 20 verbes les plus courants : à eux seuls, ils font une grande partie des verbes d'une conversation. Chaque jour, je te demande 8 formes, en tournant sur les temps, et celles que tu as ratées reviennent en priorité. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit." },
-            mots: { icon: '📖', label: 'Nouveaux mots', why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, puis je te les redemande." },
-            blocs: { icon: '🧩', label: 'Blocs et petits mots', why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. À chaque fois, je te donne la phrase en français et la phrase néerlandaise avec un trou." },
-            pratique: { icon: '💬', label: 'Pratique', why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
+            conj: { icon: '🔤', label: 'Conjugaison', whyPassive: "On s'échauffe avec la conjugaison des 20 verbes les plus courants. Je te dis une forme en français, tu as quelques secondes pour la dire dans ta tête, puis je te donne la réponse en néerlandais et son sens.", why: "On s'échauffe avec la conjugaison des 20 verbes les plus courants : à eux seuls, ils font une grande partie des verbes d'une conversation. Chaque jour, je te demande 8 formes, en tournant sur les temps, et celles que tu as ratées reviennent en priorité. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit." },
+            mots: { icon: '📖', label: 'Nouveaux mots', whyPassive: "Maintenant, quelques mots de ton niveau : écoute-les, avec leur sens et un exemple. En mode écoute, je ne te demande rien.", why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, puis je te les redemande." },
+            blocs: { icon: '🧩', label: 'Blocs et petits mots', whyPassive: "Ensuite, les blocs de mots puis les petits mots, dans de vraies phrases. Je te dis la phrase en français, tu as un instant pour la chercher, puis tu l'entends en néerlandais.", why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. À chaque fois, je te donne la phrase en français et la phrase néerlandaise avec un trou." },
+            pratique: { icon: '💬', label: 'Pratique', whyPassive: "Pour finir, une scène à écouter : deux personnes dans une situation de tous les jours. Écoute comme si tu étais dans la pièce.", why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
         };
         let routine = null; // séance en cours : { step, waiter, rec, token }
+
+        // Mode écoute (passif) : l'app tourne seule, comme en cours. Questions dites, blanc de
+        // réflexion, puis la réponse et son sens ; nouveaux mots présentés sans quiz ; étapes
+        // enchaînées ; pratique = une scène à écouter. Rien n'est compté comme réussi (l'app ne sait
+        // pas si l'apprenant savait). Bascule à tout moment (state.settings.routinePassive).
+        const ROUTINE_THINK_MS = 3500;
+        function routinePassive() { return !!(state.settings && state.settings.routinePassive); }
+        function routineModeHtml() { return `<button type="button" class="routine-mode${routinePassive() ? ' on' : ''}" id="routine-mode" onclick="routineTogglePassive()">${routinePassive() ? '🎧 Mode écoute' : '🎤 Mode actif'}</button>`; }
+        function routineTogglePassive() {
+            if (!state.settings) state.settings = {};
+            state.settings.routinePassive = !routinePassive();
+            save();
+            const b = document.getElementById('routine-mode');
+            if (b) b.outerHTML = routineModeHtml();
+            const r = routine;
+            if (r && routinePassive()) { routineStopRec(); if (r.waiter) routinePick(r.busy ? '__passive' : 'flow'); }
+        }
 
         function routineToday() { return new Date().toISOString().slice(0, 10); }
         function routineState() {
@@ -14694,9 +14736,10 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             setActiveNav('nav-home');
             if (routine) routineQuitRun();
             const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false };
+            try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
             const p = routineTutor(), rs = routineState();
             document.getElementById('routine-content').innerHTML = `
-                <div class="routine-head"><b>☀️ Ma routine du jour</b><small>avec ${p.emoji} ${p.name} · 15 à 20 minutes</small></div>
+                <div class="routine-head"><div><b>☀️ Ma routine du jour</b><small>avec ${p.emoji} ${p.name} · 15 à 20 minutes</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
                 <div class="routine-steps" id="routine-steps"></div>
                 <div id="routine-chat" class="prof-chat guide-chat"></div>
                 <div id="routine-actions" class="guide-actions"></div>
@@ -14730,6 +14773,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!routineActive(r)) return;
             const rs = routineState();
             const left = Object.keys(ROUTINE_STEPS).filter(k => !rs.done[k]);
+            if (routinePassive() && left.length) { r.flow = true; routineNext(r); return; }
             const v = await routineWait(r, (left.length ? [['flow', "🌊 Laisse-toi porter"]] : []).concat(left.map(k => [k, ROUTINE_STEPS[k].icon + ' ' + ROUTINE_STEPS[k].label, 'btn-gray'])).concat(left.length ? [] : [['pratique', '💬 Pratiquer encore', 'btn-gray']]));
             if (!routineActive(r) || v === 'quit') return;
             if (v === 'flow') { r.flow = true; routineNext(r); return; }
@@ -14755,12 +14799,12 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             r.step = k;
             routineRenderSteps();
             routineBubble('info', `<div class="prof-phase-title">${ROUTINE_STEPS[k].icon} ${ROUTINE_STEPS[k].label}</div>`);
-            await routineSay(r, ROUTINE_STEPS[k].why);
+            await routineSay(r, routinePassive() && ROUTINE_STEPS[k].whyPassive ? ROUTINE_STEPS[k].whyPassive : ROUTINE_STEPS[k].why);
             let ok = true;
             try { ok = await ({ conj: routineConj, mots: routineWords, blocs: routineBlocs, pratique: routinePratique })[k](r); } catch (e) { console.warn('Routine', k, e); }
             r.busy = false;
             if (!routineActive(r)) return;
-            if (ok !== false) { routineState().done[k] = true; save(); }
+            if (ok !== false) { routineState().done[k] = routinePassive() ? 'ecoute' : true; save(); }
             r.step = null;
             routineRenderSteps();
             if (k === 'pratique') return;
@@ -14850,20 +14894,35 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         }
 
         // Pose une question et attend la réponse ; '' = « je ne sais pas ».
-        async function routineAskAnswer(r, html, speakFr) {
+        async function routineAskAnswer(r, html, speakFr, passiveFr) {
             routineBubble('prof', html);
-            if (speakFr && routineActive(r)) await conjAudioSpeak(speakFr, 'fr', 1.05);
+            const fr = speakFr || (routinePassive() ? passiveFr : null);
+            if (fr && routineActive(r)) await conjAudioSpeak(fr, 'fr', 1.05);
+            if (routinePassive()) {
+                // Blanc de réflexion (interrompable : bouton Arrêter, ou retour au mode actif).
+                const t0 = Date.now();
+                document.getElementById('routine-actions').innerHTML = `<button type="button" class="btn btn-gray" onclick="routinePick('__stop')">⏹ Arrêter cette étape</button>`;
+                let stop = false;
+                r.waiter = v => { stop = v === '__stop' || v === 'quit' ? v : stop; };
+                while (routineActive(r) && Date.now() - t0 < ROUTINE_THINK_MS / voiceSpeed() && !stop) await new Promise(res => setTimeout(res, 150));
+                r.waiter = null;
+                document.getElementById('routine-actions').innerHTML = '';
+                if (!routineActive(r) || stop === 'quit') return null;
+                if (stop === '__stop') return '__stop';
+                return '__passive';
+            }
             if (routineActive(r) && window.SpeechRecognition && !r.rec) routineMic('nl');
             const v = await routineWait(r, [['__idk', '🤷 Je ne sais pas', 'btn-gray'], ['__stop', '⏹ Arrêter cette étape', 'btn-gray']]);
             routineStopRec();
             if (v === 'quit') return null;
             if (v === '__stop') return '__stop';
+            if (v === '__passive') return '__passive';
             if (v === '__idk') { routineBubble('moi', '🤷'); return ''; }
             routineBubble('moi', rpEscapeHtml(v.text));
             return v.text;
         }
         function routineFeedback(ok, answer, extra, silent) {
-            routineBubble('info', `<div class="routine-fb ${ok ? 'ok' : 'ko'}">${ok ? '✅' : '❌'} <b>${rpEscapeHtml(answer)}</b> ${speakBtnHtml(answer)}${extra ? `<div class="report-meta">${extra}</div>` : ''}</div>`);
+            routineBubble('info', `<div class="routine-fb ${ok === null ? '' : ok ? 'ok' : 'ko'}">${ok === null ? '🎧' : ok ? '✅' : '❌'} <b>${rpEscapeHtml(answer)}</b> ${speakBtnHtml(answer)}${extra ? `<div class="report-meta">${extra}</div>` : ''}</div>`);
             if (!ok && !silent) conjAudioSpeak(answer, 'nl', 0.9);
         }
 
@@ -14871,7 +14930,9 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         function routinePickConj() {
             const saveFilter = conjTrainingVerbFilter;
             conjTrainingVerbFilter = null;
-            const cells = conjTrainingCells({ range: ROUTINE.conjVerbs, tenses: CONJ_TENSES, irregOnly: false, skipPresentPlural: true });
+            // Formes incomplètes dans les données (ex. perfectum de « zullen » = « hebt - ») : écartées.
+            const cells = conjTrainingCells({ range: ROUTINE.conjVerbs, tenses: CONJ_TENSES, irregOnly: false, skipPresentPlural: true })
+                .filter(c => c.answer && String(c.answer).trim() && !/(^|\s)-(\s|$)/.test(String(c.answer)));
             conjTrainingVerbFilter = saveFilter;
             const dayTense = CONJ_TENSES[Math.floor(Date.now() / 86400000) % CONJ_TENSES.length];
             const picked = [], used = new Set();
@@ -14893,9 +14954,10 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${qs.length} · ${CONJ_TENSE_NAMES[q.tense]}</small><div>${rpEscapeHtml(label)}</div><small>${rpEscapeHtml(q.verb.infinitief)} (${rpEscapeHtml(q.verb.fr || '')})</small></div>`, q.frq ? q.frq.fr : null);
                 if (given === null) return false;
                 if (given === '__stop') break;
-                const res = given ? conjEvaluate(given, q) : { status: 'wrong' };
-                const ok = res.status !== 'wrong';
-                conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, ok);
+                const passive = given === '__passive';
+                const res = passive ? null : given ? conjEvaluate(given, q) : { status: 'wrong' };
+                const ok = passive ? null : res.status !== 'wrong';
+                if (!passive) conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, ok);
                 if (ok) score++;
                 // Toujours entendre la forme puis son sens : c'est ce qui l'ancre (juste ou fausse).
                 const form = q.frq ? q.frq.fullAnswer : q.answer;
@@ -14905,7 +14967,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             }
             save();
             r.ctx = null;
-            if (routineActive(r)) await routineSay(r, score === qs.length ? `Parfait, ${score} sur ${qs.length} !` : `${score} sur ${qs.length}. Les formes ratées reviendront en priorité demain.`);
+            if (routineActive(r) && !routinePassive()) await routineSay(r, score === qs.length ? `Parfait, ${score} sur ${qs.length} !` : `${score} sur ${qs.length}. Les formes ratées reviendront en priorité demain.`);
             return true;
         }
 
@@ -14953,6 +15015,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         async function routineWords(r) {
             const rs = routineState();
             const pool = routineWordPool();
+            if (routinePassive()) return routinePresentWords(r, pool.slice(0, ROUTINE.newWords), true);
             const fresh = [];
             let asked = 0, known = 0;
             for (const item of pool) {
@@ -14962,6 +15025,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${asked} · niveau ${routineWordLevel()} · nouveaux mots trouvés : ${rs.newWords.length + fresh.length}/${ROUTINE.newWords}</small><div>${rpEscapeHtml(item.fr)}</div></div>`, String(item.fr).split('/')[0]);
                 if (given === null) return false;
                 if (given === '__stop') break;
+                if (given === '__passive') return routinePresentWords(r, pool.slice(pool.indexOf(item), pool.indexOf(item) + ROUTINE.newWords), true);
                 const ok = !!given && evaluateAnswer(given, item.nl).status !== 'wrong';
                 const key = item.id + '::fr2nl';
                 state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
@@ -14991,16 +15055,8 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             const words = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
             if (!words.length) { await routineSay(r, known ? `Tu connaissais les ${known} mots proposés : bravo, ils sont validés.` : "Pas de nouveau mot aujourd'hui."); return true; }
             await routineSay(r, `${known ? `Tu en connaissais déjà ${known}, validés. ` : ''}Voici tes ${words.length} mots du jour. Écoute-les, avec un exemple quand j'en ai un.`);
-            await loadChunks();
-            for (const w of words) {
-                if (!routineActive(r)) return false;
-                const ex = chunksForItem(w)[0];
-                routineBubble('prof', `<div class="prof-nl"><b>${rpEscapeHtml(w.nl)}</b> ${speakBtnHtml(w.nl)} = ${rpEscapeHtml(w.fr)}</div>${ex && ex.ex ? `<small>${rpEscapeHtml(ex.ex)} ${speakBtnHtml(ex.ex)}</small>` : ''}`);
-                await conjAudioSpeak(w.nl, 'nl', 0.85);
-                await conjAudioSpeak(String(w.fr).split('/')[0], 'fr', 1.05);
-                if (ex && ex.ex) await conjAudioSpeak(ex.ex, 'nl', 0.85);
-            }
-            if (!routineActive(r)) return false;
+            if (await routinePresentWords(r, words, false) === false) return false;
+            if (!routineActive(r) || routinePassive()) return routineActive(r);
             await routineSay(r, "Et maintenant, je te les redemande, pour voir si c'est entré.");
             let back = 0;
             for (const w of words.slice().sort(() => Math.random() - 0.5)) {
@@ -15012,6 +15068,25 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 routineFeedback(ok, w.nl);
             }
             if (routineActive(r)) await routineSay(r, `${back} sur ${words.length} au rappel. Ils restent dans tes mots à revoir : ils reviendront dans les révisions, et on les réemploiera tout à l'heure.`);
+            return true;
+        }
+
+        // Présente des mots (sens + exemple), à voix haute. passive = mode écoute (rien n'est compté).
+        async function routinePresentWords(r, words, passive) {
+            if (passive) {
+                if (!words.length) { await routineSay(r, "Pas de nouveau mot à écouter aujourd'hui."); return true; }
+                await routineSay(r, `Écoute ces ${words.length} mots de ton niveau, avec un exemple quand j'en ai un.`);
+            }
+            await loadChunks();
+            for (const w of words) {
+                if (!routineActive(r)) return false;
+                const ex = chunksForItem(w)[0];
+                routineBubble('prof', `<div class="prof-nl"><b>${rpEscapeHtml(w.nl)}</b> ${speakBtnHtml(w.nl)} = ${rpEscapeHtml(w.fr)}</div>${ex && ex.ex ? `<small>${rpEscapeHtml(ex.ex)} ${speakBtnHtml(ex.ex)}${ex.fr ? '<br>' + rpEscapeHtml(ex.fr) : ''}</small>` : ''}`);
+                await conjAudioSpeak(w.nl, 'nl', 0.85);
+                await conjAudioSpeak(String(w.fr).split('/')[0], 'fr', 1.05);
+                if (ex && ex.ex) await conjAudioSpeak(ex.ex, 'nl', 0.85);
+                await new Promise(res => setTimeout(res, 400));
+            }
             return true;
         }
 
@@ -15031,9 +15106,14 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 const q = qs[i];
                 const n = q.k.c.split(' ').length;
                 r.ctx = `retrouver le bloc « ${q.k.c} »`;
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Bloc ${i + 1}/${qs.length} · ${n} mots</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(n).trim()}</span>${rpEscapeHtml(q.blank.after)}</div></div>`, null);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Bloc ${i + 1}/${qs.length} · ${n} mots</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(n).trim()}</span>${rpEscapeHtml(q.blank.after)}</div></div>`, null, q.k.fr);
                 if (given === null) return false;
                 if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineFeedback(null, q.k.c, rpEscapeHtml(q.blank.before) + '<b>' + rpEscapeHtml(q.blank.answer) + '</b>' + rpEscapeHtml(q.blank.after), true);
+                    if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
+                    continue;
+                }
                 const ok = !!given && evaluateAnswer(given, q.k.c).status !== 'wrong';
                 if (ok) score++;
                 if (!state.chunkStats) state.chunkStats = {};
@@ -15045,7 +15125,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             }
             save();
             r.ctx = null;
-            if (routineActive(r)) await routineSay(r, `${score} sur ${qs.length}. Les blocs ratés reviendront.`);
+            if (routineActive(r) && !routinePassive()) await routineSay(r, `${score} sur ${qs.length}. Les blocs ratés reviendront.`);
             if (!routineActive(r)) return false;
             // Petits mots (prépositions, pronoms, conjonctions) : dans une vraie phrase, jamais seuls.
             const fq = routineFunctionQuestions(ROUTINE.petitsMots);
@@ -15055,9 +15135,14 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             for (let i = 0; i < fq.length && routineActive(r); i++) {
                 const q = fq[i];
                 r.ctx = `le petit mot « ${q.item.nl} » dans une phrase`;
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.before)}<span class="chunk-gap">___</span>${rpEscapeHtml(q.after)}</div></div>`, null);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.before)}<span class="chunk-gap">___</span>${rpEscapeHtml(q.after)}</div></div>`, null, q.k.fr);
                 if (given === null) return false;
                 if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineFeedback(null, q.answer, rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.answer) + '</b>' + rpEscapeHtml(q.after) + ' — ' + rpEscapeHtml(q.item.fr), true);
+                    if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
+                    continue;
+                }
                 const ok = !!given && normalize(given).replace(/[^a-z']/g, '') === normalize(q.answer).replace(/[^a-z']/g, '');
                 if (ok) fs++;
                 const key = q.item.id + '::fr2nl';
@@ -15068,7 +15153,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             }
             save();
             r.ctx = null;
-            if (routineActive(r)) await routineSay(r, `${fs} sur ${fq.length} pour les petits mots.`);
+            if (routineActive(r) && !routinePassive()) await routineSay(r, `${fs} sur ${fq.length} pour les petits mots.`);
             return true;
         }
 
@@ -15113,6 +15198,20 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             await convLoad();
             if (!routineActive(r)) return false;
             const next = typeof convData !== 'undefined' && convData && convData.modules.flatMap(m => m.seances.map(s => ({ m, s }))).find(x => !convSeanceOk(x.m.id, x.s.id));
+            if (routinePassive()) {
+                await rpLoadLibrary();
+                const all = talkSituations();
+                const sit = all[Math.floor(Math.random() * all.length)];
+                if (!sit) return true;
+                await routineSay(r, `La scène : « ${sit.label} ».`);
+                if (!routineActive(r)) return false;
+                rs.done.pratique = 'ecoute';
+                save();
+                routineQuitRun();
+                await rpSceneOpen('lib:' + sit.id, { type: 'lib', id: sit.id }, false);
+                if (document.getElementById('scene-view').classList.contains('active') && sceneCurrent && Array.isArray(sceneCurrent.lines)) scenePlay(0);
+                return true;
+            }
             const v = await routineWait(r, [['situation', `🎭 Une situation${words.length ? ' avec mes mots du jour' : ''}`], ['listen', '👂 Une écoute', 'btn-gray'], ['cours', next ? `📚 Séance : ${rpEscapeHtml(next.s.titre)}` : '📚 Mes cours', 'btn-gray'], ['travail', '💼 Mon travail', 'btn-gray']]);
             if (!routineActive(r) || v === 'quit') return false;
             rs.done.pratique = true;
@@ -15137,6 +15236,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             routineStopRec();
             if (r.waiter) { const w = r.waiter; r.waiter = null; w('quit'); }
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            try { if (r.wakeLock) r.wakeLock.release(); } catch (e) { /* pas grave */ }
             routine = null;
         }
 
@@ -15179,6 +15279,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             fab.style.display = hide ? 'none' : '';
             fab.innerHTML = '🎙️';
             document.querySelectorAll('#rp-help-row .lc-toggle').forEach(b => { b.outerHTML = liveCorrectToggleHtml(); });
+            document.querySelectorAll('#rp-help-row .speed-btn').forEach(b => { b.innerHTML = '⏩ ' + voiceSpeedLabel(); });
             fab.title = 'Parler à ' + buddyPartner().name;
         }
 
