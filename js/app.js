@@ -12078,7 +12078,64 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 const e = m.etapes[pos.e];
                 guideBubble('info', `<div class="prof-phase-title">On reprend : ${e ? `étape ${pos.e + 1} · ${rpEscapeHtml(e.titre)}` : "l'examen"}</div>`);
             }
+            // Module jamais commencé : d'abord un test d'entrée, pour ne pas refaire ce qu'on sait.
+            if (pos.e === 0 && pos.b === 0 && !st.pretest && !(st.finalResult && st.finalResult.passed)) { guidePretest(guide.token); return; }
             guideLoop(guide.token);
+        }
+
+        // Test d'entrée : la conversation de l'examen, tout de suite, sans leçon. Réussi → module
+        // validé ; sinon, les étapes dont tous les sujets sont déjà couverts sont sautées
+        // (st.skipEtapes) et on ne travaille que le reste. « Je débute » passe le test.
+        async function guidePretest(token) {
+            const id = guide.id, m = guide.m, st = modRpState(id);
+            guideBubble('info', `<div class="prof-phase-title">🎯 Test d'entrée</div>`);
+            await gSay(`Avant de commencer « ${m.titre} », un petit test : ${m.final.consigne} Si tu sais déjà le faire, pas besoin de suivre tout le module.`);
+            if (!guideAlive(token)) return;
+            const v = await guideButtons([['test', "🎯 Faire le test"], ['debut', "🌱 Je débute : commencer le module", 'btn-gray']]);
+            if (!guideAlive(token)) return;
+            if (v !== 'test') { st.pretest = { at: Date.now(), skipped: true }; save(); guideLoop(token); return; }
+            const conv = await guideConversation('exam', 'final', token, 0);
+            if (!guideAlive(token)) return;
+            if (!conv || !conv.userLines.length) { st.pretest = { at: Date.now(), skipped: true }; save(); await gSay("Pas de souci, on commence le module depuis le début."); guideLoop(token); return; }
+            const raw = modRpExamChecks(id, conv.userLines);
+            const jc = conv.judgeCovered || new Set();
+            const checks = raw.checks.map(c => c.ok || !jc.has(c.label) ? c : Object.assign({}, c, { ok: true }));
+            const covered = checks.filter(c => c.ok).length;
+            const coverageOk = covered >= Math.ceil(0.75 * checks.length);
+            guideBubble('info', '<div class="report-meta" id="guide-judging">Je regarde ce que tu sais déjà…</div>');
+            const transcript = conv.history.map(h => (h.who === 'me' ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + (h.text || h.nl)).join('\n');
+            const judge = await modRpExamJudge(id, transcript);
+            const wait = document.getElementById('guide-judging');
+            if (wait) wait.parentElement.remove();
+            if (!guideAlive(token)) return;
+            const score = judge && typeof judge.note === 'number' ? judge.note : null;
+            const passed = coverageOk && (score === null || score >= 6);
+            // Étapes acquises : tous leurs sujets d'examen sont couverts.
+            const etapeIds = m.etapes.map(e => e.id);
+            const acquired = etapeIds.filter(eid => { const own = checks.filter(c => c.etape === eid); return own.length && own.every(c => c.ok); });
+            st.pretest = { at: Date.now(), score, covered, acquired };
+            if (passed) {
+                st.finalResult = { passed: true, pretest: true, lastScore: score, lastCovered: covered, at: Date.now() };
+                save();
+                modRpValidateNotions(id);
+                guideBubble('info', `<div class="prof-debrief"><div class="prof-target-title">✅ Tu sais déjà le faire</div>${checks.map(c => `<div class="modrp-check ok">✓ ${rpEscapeHtml(c.label)}</div>`).join('')}${judge && judge.resume ? `<p>${rpEscapeHtml(judge.resume)}</p>` : ''}</div>`);
+                await gSay(`Bravo : le module « ${m.titre} » est validé, pas besoin de le suivre.`);
+                guideOfferPassed(true);
+                return;
+            }
+            st.skipEtapes = acquired;
+            save();
+            const todo = m.etapes.filter(e => !acquired.includes(e.id));
+            guideBubble('info', `<div class="prof-debrief"><div class="prof-target-title">🎯 Résultat du test</div>
+                ${checks.map(c => `<div class="modrp-check ${c.ok ? 'ok' : 'ko'}">${c.ok ? '✓' : '✗'} ${rpEscapeHtml(c.label)}</div>`).join('')}
+                ${acquired.length ? `<p class="report-meta">Étapes déjà acquises, sautées : ${m.etapes.filter(e => acquired.includes(e.id)).map(e => rpEscapeHtml(e.titre)).join(', ')}.</p>` : ''}</div>`);
+            await gSay(acquired.length
+                ? `Tu maîtrises déjà une partie. On ne travaille que ${todo.length > 1 ? 'les ' + todo.length + ' étapes qui manquent' : "l'étape qui manque"}, puis l'examen.`
+                : "On va suivre le module ensemble, étape par étape.");
+            if (!guideAlive(token)) return;
+            const first = m.etapes.findIndex(e => !acquired.includes(e.id));
+            guideSetPos(first >= 0 ? first : m.etapes.length, 0);
+            guideLoop(token);
         }
 
         function guideQuit() {
@@ -12153,6 +12210,8 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 guide.skipBeat = false;
                 guideRenderTop();
                 if (pos.e >= m.etapes.length) { await guideExam(token); return; }
+                const skipE = modRpState(guide.id).skipEtapes || [];
+                if (pos.b === 0 && skipE.includes(m.etapes[pos.e].id)) { guideSetPos(pos.e + 1, 0); continue; }
                 const beat = GUIDE_BEATS[pos.b];
                 if (!beat) { guideSetPos(pos.e + 1, 0); continue; }
                 const e = m.etapes[pos.e];
@@ -12610,7 +12669,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const v = await guideButtons((next ? [['next', `▶️ Module suivant : ${rpEscapeHtml(next.titre)}`]] : []).concat([['restart', '🔁 Refaire le module depuis le début', 'btn-gray'], ['exam', "🏆 Repasser l'examen", 'btn-gray']]));
             if (!guide || guide.token !== token || !v) return;
             if (v === 'next') { guideStart(next.id); return; }
-            if (v === 'restart') { guideSetPos(0, 0); guideLoop(token); return; }
+            if (v === 'restart') { modRpState(id).skipEtapes = []; guideSetPos(0, 0); guideLoop(token); return; }
             if (v === 'exam') { guideSetPos(guide.m.etapes.length, 0); guideExam(token); }
         }
 
@@ -12874,7 +12933,7 @@ Règles :
 - ${talk.lesson ? `FIN : quand toutes les tâches sont validées (✓) ou abandonnées (✗), conclus la séance chaleureusement, sans question, avec "fin": true ; sinon "fin": false.` : ''}${talk.lesson ? '' : talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
-Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false${talk.lesson ? ', "tache": "", "validee": null, "ratee": null' : ''}}`;
+Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false${talk.lesson ? ', "tache": "", "validee": null, "ratee": null, "a_enseigner": null' : ''}}`;
         }
 
         function talkThinking(on) {
@@ -13440,7 +13499,7 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             setActiveNav('nav-apprendre');
             if (!GeminiService.isAvailable()) { talkRenderSetup(); alert("Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA."); return; }
             talk = { partner: set.partner, p: TALK_PARTNERS[set.partner], sit: null, topic: 'libre', level: m.niveau || 'B1', handsfree: set.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0,
-                lesson: { modId, sid, m, s, done: new Set(), failed: new Set() } };
+                lesson: { modId, sid, m, s, done: new Set(), failed: new Set(), toTeach: new Set() } };
             talkRenderChat();
             talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>${m.icone || '📘'} ${rpEscapeHtml(s.titre)}</b> <small class="cvo-eq">≈ CVO ${rpEscapeHtml(m.cvo)} · ${s.domaine === 'public' ? 'vie publique' : 'vie personnelle'}</small><div>${rpEscapeHtml(s.intro_fr || '')}</div></div>` });
             talkTurn();
@@ -13450,16 +13509,17 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             const el = document.getElementById('talk-lesson');
             if (!el || !talk || !talk.lesson) return;
             const L = talk.lesson;
-            el.innerHTML = L.s.taches.map(t => `<span class="conv-task ${L.done.has(t.id) ? 'ok' : L.failed.has(t.id) ? 'ko' : ''}" title="${rpEscapeHtml(t.label)}">${L.done.has(t.id) ? '✓' : L.failed.has(t.id) ? '✗' : '○'} ${rpEscapeHtml(t.label)}</span>`).join('');
+            el.innerHTML = L.s.taches.map(t => `<span class="conv-task ${L.done.has(t.id) ? 'ok' : L.failed.has(t.id) ? 'ko' : ''}" title="${rpEscapeHtml(t.label)}">${L.done.has(t.id) ? '✓' : L.failed.has(t.id) ? '✗' : L.toTeach.has(t.id) ? '📘' : '○'} ${rpEscapeHtml(t.label)}</span>`).join('');
         }
 
         function convPrompt() {
             const L = talk.lesson;
-            const tasks = L.s.taches.map(t => `- ${L.done.has(t.id) ? '✓ ' : L.failed.has(t.id) ? '✗ ' : ''}${t.id} : ${t.label}${t.ecoute ? ' (TÂCHE D\'ÉCOUTE : dis d\'abord le texte, puis la question)' : ''}\n  Ce que tu lui fais faire : ${t.consigne}\n  Réussi si : ${t.critere}\n  Tournures modèles : ${(t.modeles || []).join(' / ')}`).join('\n');
+            const tasks = L.s.taches.map(t => `- ${L.done.has(t.id) ? '✓ ' : L.failed.has(t.id) ? '✗ ' : L.toTeach.has(t.id) ? '📘 ' : ''}${t.id} : ${t.label}${t.ecoute ? ' (TÂCHE D\'ÉCOUTE : dis d\'abord le texte, puis la question)' : ''}\n  Ce que tu lui fais faire : ${t.consigne}\n  Réussi si : ${t.critere}\n  Tournures modèles : ${(t.modeles || []).join(' / ')}`).join('\n');
             return `Aujourd'hui, tu es SON PROF de néerlandais (tu restes ${talk.p.name}) pour une séance du parcours ${L.m.niveau}, équivalent du module CVO ${L.m.cvo} (${L.s.domaine === 'public' ? 'vie publique' : 'vie personnelle'}) : « ${L.s.titre} ». Objectif : ${L.m.objectif}
 Idées de mises en situation : ${(L.s.situations || []).join(' ; ')}.
 Tutoiement (jij) avec lui ; quand tu joues un employé ou un service dans une mini-situation, vouvoiement (u) dans le jeu.
-Déroulé : UNE tâche à la fois, dans l'ordre de la liste (passe celles marquées ✓ ou ✗). Pour chaque tâche :
+D'ABORD UN TEST RAPIDE : pour chaque tâche non marquée, propose directement une mini-situation, SANS explication ni modèle. S'il la réussit seul selon le critère → "validee": son id. Sinon → "a_enseigner": son id, sans longue correction, et passe à la suivante. Une fois toutes les tâches testées, ENSEIGNE seulement celles marquées 📘 (à enseigner) comme suit.
+Déroulé de l'enseignement : UNE tâche à la fois, dans l'ordre (passe celles marquées ✓ ou ✗). Pour chaque tâche :
 1) présente-la en français dans "fr_help" (1 ou 2 phrases simples) avec 2 ou 3 tournures néerlandaises utiles ;
 2) lance une mini-situation concrète dans "reply_nl" (tu joues le rôle nécessaire), en néerlandais ${L.m.niveau} naturel${L.m.niveau === 'B2' ? ' (tempo et vocabulaire naturels, quelques expressions courantes)' : ''} ;
 3) laisse-le essayer. S'il réussit SEUL selon le critère (petites fautes acceptées : la correction est faite à part), mets "validee": l'id de la tâche, félicite-le en une phrase et enchaîne sur la tâche suivante dans le même message. Sinon, aide-le (indice, début de phrase, modèle) et redonne-lui une chance ; après 3 essais sans réussite, mets "ratee": l'id et passe à la suite.
@@ -13477,6 +13537,8 @@ ${tasks}`;
             const ids = L.s.taches.map(t => t.id);
             if (r.validee && ids.includes(r.validee) && !L.failed.has(r.validee)) L.done.add(r.validee);
             if (r.ratee && ids.includes(r.ratee) && !L.done.has(r.ratee)) L.failed.add(r.ratee);
+            if (r.a_enseigner && ids.includes(r.a_enseigner) && !L.done.has(r.a_enseigner)) L.toTeach.add(r.a_enseigner);
+            if (r.validee && ids.includes(r.validee) && !L.toTeach.has(r.validee)) L.atTest = (L.atTest || 0) + 1;
             convRenderTasks();
         }
 
@@ -13501,6 +13563,7 @@ ${tasks}`;
             const modDone = seances.every(x => convSeanceOk(L.modId, x.id));
             talkAppend({ who: 'info', html: `<div class="prof-debrief">
                 <div class="prof-target-title">${ok ? '✅ Séance réussie' : '🔁 Encore un effort'} · ${L.done.size}/${total} tâches</div>
+                ${L.atTest ? `<p class="report-meta">🎯 ${L.atTest} tâche${L.atTest > 1 ? 's' : ''} réussie${L.atTest > 1 ? 's' : ''} dès le test, sans leçon.</p>` : ''}
                 ${L.s.taches.map(x => `<div class="modrp-check ${L.done.has(x.id) ? 'ok' : 'ko'}">${L.done.has(x.id) ? '✓' : '✗'} ${rpEscapeHtml(x.label)}</div>`).join('')}
                 <p class="report-meta">${ok ? (modDone ? `🏆 Module « ${rpEscapeHtml(L.m.titre)} » (≈ CVO ${rpEscapeHtml(L.m.cvo)}) validé, avec ses notions ${rpEscapeHtml(L.m.niveau)}.` : 'Les notions de cette séance sont validées.') : 'Il faut réussir 70 % des tâches : refais la séance quand tu veux, les tâches réussies restent acquises.'}</p>
                 <div class="prof-actions">
