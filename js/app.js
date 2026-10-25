@@ -13281,9 +13281,9 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
-        // ===== Modules B1 en conversation (CVO 2.1 à 2.4) =====
+        // ===== Modules B1 et B2 en conversation (CVO 2.1 à 2.4, 3.1 et 3.2) =====
         // data/modules_conv/b1.json : 4 modules × 2 séances, calqués sur le B1 oral des CVO
-        // (Richtgraad 2 Mondeling). Une séance = une conversation de Discuter (talk.lesson) où
+        // (Richtgraad 2 Mondeling) ; b2.json : 2 modules × 3 séances (Richtgraad 3, Vantage). Une séance = une conversation de Discuter (talk.lesson) où
         // Svetlana ou John enseignent les tâches une à une (explication courte + tournures dans
         // fr_help, mini-situation dans reply_nl) et renvoient, dans le même appel, "validee" /
         // "ratee" quand une tâche est réussie seul ou abandonnée après trois essais. Séance réussie
@@ -13292,8 +13292,8 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
         let convData = null;
         async function convLoad() {
             if (convData) return convData;
-            try { convData = await fetch('data/modules_conv/b1.json').then(r => r.ok ? r.json() : null); } catch (e) { convData = null; }
-            if (!convData) convData = { modules: [] };
+            const files = await Promise.all(['b1', 'b2'].map(f => fetch('data/modules_conv/' + f + '.json').then(r => r.ok ? r.json() : null).catch(() => null)));
+            convData = { modules: files.filter(Boolean).flatMap(d => d.modules || []) };
             return convData;
         }
         function convFind(modId, sid) {
@@ -13335,12 +13335,12 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
         function convPrompt() {
             const L = talk.lesson;
             const tasks = L.s.taches.map(t => `- ${L.done.has(t.id) ? '✓ ' : L.failed.has(t.id) ? '✗ ' : ''}${t.id} : ${t.label}${t.ecoute ? ' (TÂCHE D\'ÉCOUTE : dis d\'abord le texte, puis la question)' : ''}\n  Ce que tu lui fais faire : ${t.consigne}\n  Réussi si : ${t.critere}\n  Tournures modèles : ${(t.modeles || []).join(' / ')}`).join('\n');
-            return `Aujourd'hui, tu es SON PROF de néerlandais (tu restes ${talk.p.name}) pour une séance du parcours B1, équivalent du module CVO ${L.m.cvo} (${L.s.domaine === 'public' ? 'vie publique' : 'vie personnelle'}) : « ${L.s.titre} ». Objectif : ${L.m.objectif}
+            return `Aujourd'hui, tu es SON PROF de néerlandais (tu restes ${talk.p.name}) pour une séance du parcours ${L.m.niveau}, équivalent du module CVO ${L.m.cvo} (${L.s.domaine === 'public' ? 'vie publique' : 'vie personnelle'}) : « ${L.s.titre} ». Objectif : ${L.m.objectif}
 Idées de mises en situation : ${(L.s.situations || []).join(' ; ')}.
 Tutoiement (jij) avec lui ; quand tu joues un employé ou un service dans une mini-situation, vouvoiement (u) dans le jeu.
 Déroulé : UNE tâche à la fois, dans l'ordre de la liste (passe celles marquées ✓ ou ✗). Pour chaque tâche :
 1) présente-la en français dans "fr_help" (1 ou 2 phrases simples) avec 2 ou 3 tournures néerlandaises utiles ;
-2) lance une mini-situation concrète dans "reply_nl" (tu joues le rôle nécessaire), en néerlandais B1 naturel ;
+2) lance une mini-situation concrète dans "reply_nl" (tu joues le rôle nécessaire), en néerlandais ${L.m.niveau} naturel${L.m.niveau === 'B2' ? ' (tempo et vocabulaire naturels, quelques expressions courantes)' : ''} ;
 3) laisse-le essayer. S'il réussit SEUL selon le critère (petites fautes acceptées : la correction est faite à part), mets "validee": l'id de la tâche, félicite-le en une phrase et enchaîne sur la tâche suivante dans le même message. Sinon, aide-le (indice, début de phrase, modèle) et redonne-lui une chance ; après 3 essais sans réussite, mets "ratee": l'id et passe à la suite.
 Une phrase qu'il répète juste après ton aide ne suffit pas : il doit la réutiliser dans une nouvelle réplique à lui.
 S'il parle FRANÇAIS ou dit qu'il ne sait pas : aide-le dans "fr_help" et invite-le à réessayer en néerlandais.
@@ -13381,7 +13381,7 @@ ${tasks}`;
             talkAppend({ who: 'info', html: `<div class="prof-debrief">
                 <div class="prof-target-title">${ok ? '✅ Séance réussie' : '🔁 Encore un effort'} · ${L.done.size}/${total} tâches</div>
                 ${L.s.taches.map(x => `<div class="modrp-check ${L.done.has(x.id) ? 'ok' : 'ko'}">${L.done.has(x.id) ? '✓' : '✗'} ${rpEscapeHtml(x.label)}</div>`).join('')}
-                <p class="report-meta">${ok ? (modDone ? `🏆 Module « ${rpEscapeHtml(L.m.titre)} » (≈ CVO ${rpEscapeHtml(L.m.cvo)}) validé, avec ses notions B1.` : 'Les notions de cette séance sont validées.') : 'Il faut réussir 70 % des tâches : refais la séance quand tu veux, les tâches réussies restent acquises.'}</p>
+                <p class="report-meta">${ok ? (modDone ? `🏆 Module « ${rpEscapeHtml(L.m.titre)} » (≈ CVO ${rpEscapeHtml(L.m.cvo)}) validé, avec ses notions ${rpEscapeHtml(L.m.niveau)}.` : 'Les notions de cette séance sont validées.') : 'Il faut réussir 70 % des tâches : refais la séance quand tu veux, les tâches réussies restent acquises.'}</p>
                 <div class="prof-actions">
                     ${ok && nextS ? `<button class="btn btn-green" onclick="convStart('${L.modId}', '${nextS.id}')">▶️ Séance suivante</button>` : ''}
                     ${ok && nextM ? `<button class="btn btn-green" onclick="convStart('${nextM.id}', '${nextM.seances[0].id}')">▶️ Module suivant</button>` : ''}
@@ -13390,27 +13390,34 @@ ${tasks}`;
                 </div></div>` });
         }
 
-        // Niveau B1 dans Cours.
+        // Niveaux B1 et B2 dans Cours, sous A1 / A2.
+        const CONV_CVO = { B1: '≈ CVO 2.1–2.4 Threshold', B2: '≈ CVO 3.1–3.2 Vantage' };
         function convHtml() {
             if (!convData || !convData.modules.length) return '';
-            const mods = convData.modules;
-            const nOk = mods.reduce((n, m) => n + m.seances.filter(s => convSeanceOk(m.id, s.id)).length, 0);
-            const nAll = mods.reduce((n, m) => n + m.seances.length, 0);
             const p = TALK_PARTNERS[talkSettings().partner];
-            const open = (state.coursPoint && ['B1', 'B2'].includes(state.coursPoint.niveau)) || MODRP_IDS.every(id => { const s = state.modRp && state.modRp[id]; return s && s.finalResult && s.finalResult.passed; });
-            return `<details class="modrp-level" ${open ? 'open' : ''}>
-                <summary><span class="conj-niveau-badge">B1</span> ${mods.length} modules en conversation · ${nOk}/${nAll} séances <small class="cvo-eq">≈ CVO 2.1–2.4 Threshold</small></summary>
-                <p class="report-meta" style="margin:6px 0;">Ton prof te fait parler et valide chaque tâche. Prof : <b>${p.emoji} ${p.name}</b> · <a href="#" onclick="talkSettings().partner = talkSettings().partner === 'john' ? 'svetlana' : 'john'; save(); renderModRpEntries(); return false;">changer</a></p>
-                ${mods.map(m => {
-                    const done = m.seances.every(s => convSeanceOk(m.id, s.id));
-                    return `<div class="modrp-entry conv-entry${done ? ' passed' : ''}">
-                        <span class="modrp-entry-icon">${done ? '🏆' : (m.icone || '📘')}</span>
-                        <span style="flex:1;"><b>${rpEscapeHtml(m.titre)}</b> <small class="cvo-eq">CVO ${rpEscapeHtml(m.cvo)}</small><br><small>${rpEscapeHtml(m.objectif)}</small>
-                            <span class="conv-seances">${m.seances.map((s, i) => `<button type="button" class="conv-seance${convSeanceOk(m.id, s.id) ? ' ok' : ''}" onclick="convStart('${m.id}', '${s.id}')">${convSeanceOk(m.id, s.id) ? '✓' : '▶️'} Séance ${i + 1} · ${rpEscapeHtml(s.titre)}</button>`).join('')}</span>
-                        </span>
-                    </div>`;
-                }).join('')}
-            </details>`;
+            const levelOk = lvl => convData.modules.filter(m => m.niveau === lvl).every(m => m.seances.every(s => convSeanceOk(m.id, s.id)));
+            const a2Done = MODRP_IDS.every(id => { const s = state.modRp && state.modRp[id]; return s && s.finalResult && s.finalResult.passed; });
+            const pl = state.coursPoint && state.coursPoint.niveau;
+            return ['B1', 'B2'].map(lvl => {
+                const mods = convData.modules.filter(m => m.niveau === lvl);
+                if (!mods.length) return '';
+                const nOk = mods.reduce((n, m) => n + m.seances.filter(s => convSeanceOk(m.id, s.id)).length, 0);
+                const nAll = mods.reduce((n, m) => n + m.seances.length, 0);
+                const open = lvl === 'B1' ? ((pl === 'B1' || a2Done) && !levelOk('B1')) : (pl === 'B2' || levelOk('B1'));
+                return `<details class="modrp-level" ${open ? 'open' : ''}>
+                    <summary><span class="conj-niveau-badge">${lvl}</span> ${mods.length} modules en conversation · ${nOk}/${nAll} séances <small class="cvo-eq">${CONV_CVO[lvl] || ''}</small></summary>
+                    <p class="report-meta" style="margin:6px 0;">Ton prof te fait parler et valide chaque tâche. Prof : <b>${p.emoji} ${p.name}</b> · <a href="#" onclick="talkSettings().partner = talkSettings().partner === 'john' ? 'svetlana' : 'john'; save(); renderModRpEntries(); return false;">changer</a></p>
+                    ${mods.map(m => {
+                        const done = m.seances.every(s => convSeanceOk(m.id, s.id));
+                        return `<div class="modrp-entry conv-entry${done ? ' passed' : ''}">
+                            <span class="modrp-entry-icon">${done ? '🏆' : (m.icone || '📘')}</span>
+                            <span style="flex:1;"><b>${rpEscapeHtml(m.titre)}</b> <small class="cvo-eq">CVO ${rpEscapeHtml(m.cvo)}</small><br><small>${rpEscapeHtml(m.objectif)}</small>
+                                <span class="conv-seances">${m.seances.map((s, i) => `<button type="button" class="conv-seance${convSeanceOk(m.id, s.id) ? ' ok' : ''}" onclick="convStart('${m.id}', '${s.id}')">${convSeanceOk(m.id, s.id) ? '✓' : '▶️'} Séance ${i + 1} · ${rpEscapeHtml(s.titre)}</button>`).join('')}</span>
+                            </span>
+                        </div>`;
+                    }).join('')}
+                </details>`;
+            }).join('');
         }
 
         // ===== Faire le point en conversation (placement) =====

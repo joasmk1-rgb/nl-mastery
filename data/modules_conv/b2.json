@@ -1,0 +1,92 @@
+{
+  "_doc": "Modules B2 en conversation (octobre 2026), même format que b1.json. Parcours NT2 des CVO flamands : Richtgraad 3 = B2 (Vantage), 2 modules de 120 h (CVO 3.1 et 3.2). Le profil NT2 Richtgraad 3 n'étant pas publié en ligne, les tâches suivent les basiscompetenties B2 (Vantage) des profils flamands Richtgraad 3 (spreken/gesprekken voeren BC S01-S05, luisteren BC L01-L04) : informer en détail (conversation, démonstration, téléphone, présentation), résumer un rapport, un plan d'action ou un récit, exprimer des besoins nuancés, défendre un point de vue ; suivre la ligne de pensée d'un exposé, comprendre une émission, juger un discours persuasif. Sujets possiblement abstraits et liés au domaine de compétence de l'apprenant. Trois séances par module (120 h). Rédigé par Claude à la demande de Joas, sans relecture préalable : signalements ⚠️ dans l'app.",
+  "_source": "redige_claude",
+  "modules": [
+    {
+      "id": "b2_v1", "cvo": "3.1", "niveau": "B2", "icone": "🎙️",
+      "titre": "Expliquer, suivre un exposé, défendre ses intérêts",
+      "objectif": "Expliquer en détail et présenter un sujet de son domaine, suivre et résumer un exposé ou une émission, et défendre ses intérêts face à un service ou une institution.",
+      "seances": [
+        {
+          "id": "s1", "domaine": "public",
+          "titre": "Expliquer en détail et présenter",
+          "intro_fr": "Au niveau B2, on ne se contente plus de donner une info : on explique un sujet complexe de façon structurée, on fait une petite présentation et on répond aux questions.",
+          "situations": ["expliquer à un nouveau voisin comment fonctionne le système de santé ou de tri en Belgique", "présenter en 2 minutes un sujet de son domaine (son métier, un projet, un outil)", "un appel téléphonique pour régler un dossier compliqué (assurance, banque, fournisseur d'énergie)"],
+          "taches": [
+            { "id": "b2_expliquer", "label": "Expliquer un fonctionnement complexe de façon structurée", "bc": "BC S01", "consigne": "Demande-lui d'expliquer en détail comment fonctionne quelque chose de complexe qu'il connaît (un système, une procédure de son travail, un outil), et pose des questions de précision.", "critere": "Une explication structurée (introduction, étapes ou parties, conclusion) avec des connecteurs variés, qui répond à tes questions de précision.", "modeles": ["Om te beginnen moet je weten dat…", "Dat hangt eigenlijk af van twee zaken: enerzijds…, anderzijds…", "Concreet betekent dat dat…"] },
+            { "id": "b2_presenter", "label": "Faire une courte présentation et répondre aux questions", "bc": "BC S01 / BC S05", "consigne": "Demande-lui une présentation d'environ deux minutes sur un sujet de son domaine ou un projet, puis pose deux questions critiques.", "critere": "Il annonce son plan, développe au moins deux points avec des exemples, conclut, puis répond à tes questions de façon argumentée.", "modeles": ["Ik zou het graag hebben over…", "Ten eerste…, ten tweede…, tot slot…", "Dat is een goede vraag; wat ik daarmee bedoel, is…"] },
+            { "id": "b2_telephone", "label": "Régler un dossier compliqué au téléphone", "bc": "BC S01", "consigne": "Joue un service clients (assurance, banque, énergie) qui ne comprend pas tout de suite le problème : il doit exposer le dossier, obtenir des informations précises et convenir de la suite.", "critere": "Il expose clairement le dossier, reformule ce qu'on lui dit, obtient des engagements précis (qui, quoi, quand) et récapitule.", "modeles": ["Ik bel in verband met dossier nummer…", "Als ik u goed begrijp, zou het dus…", "Kunt u mij bevestigen dat dit voor het einde van de maand geregeld wordt?"] }
+          ],
+          "notions": ["connecteurs_complexes", "construire_texte_structure", "presenter_projet", "structures_impersonnelles"]
+        },
+        {
+          "id": "s2", "domaine": "public",
+          "titre": "Suivre un exposé ou une émission, et le résumer",
+          "intro_fr": "On travaille l'écoute exigeante : suivre le raisonnement de quelqu'un qui parle longtemps, retenir l'essentiel et le résumer avec ses mots.",
+          "situations": ["un passage d'une émission de radio sur la mobilité, le logement ou le travail", "une courte conférence sur un sujet de société", "un responsable qui présente un plan d'action à l'équipe"],
+          "taches": [
+            { "id": "b2_suivre_expose", "label": "Saisir le sujet et suivre la ligne de pensée d'un exposé", "bc": "BC L01", "ecoute": true, "consigne": "Fais-lui un petit exposé oral argumenté (150 à 200 mots, ton naturel, avec un raisonnement en plusieurs étapes), puis demande-lui quel est le sujet et comment l'orateur construit son raisonnement.", "critere": "Il identifie le sujet global et restitue les étapes du raisonnement (thèse, arguments, conclusion).", "modeles": ["De spreker heeft het over…", "Eerst legt hij uit dat…, daarna geeft hij twee argumenten…", "Zijn conclusie is dat…"] },
+            { "id": "b2_resumer_rapport", "label": "Résumer un compte rendu ou un plan d'action", "bc": "BC S02", "ecoute": true, "consigne": "Présente-lui oralement un plan d'action ou un compte rendu de réunion (130 à 170 mots) avec des décisions, des responsables et des délais, puis demande-lui de le résumer pour quelqu'un d'absent.", "critere": "Son résumé reprend les décisions, qui fait quoi et les délais, de façon concise et ordonnée.", "modeles": ["Samengevat werd er beslist dat…", "Tegen eind volgende maand moet…", "Wie wat doet: …"] },
+            { "id": "b2_info_media", "label": "Retrouver une information précise dans une émission", "bc": "BC L02", "ecoute": true, "consigne": "Dis un extrait d'émission (radio, info, interview) avec plusieurs chiffres et noms, puis pose une question sur un détail précis et une sur l'idée principale.", "critere": "Il retrouve le détail précis et formule l'idée principale correctement.", "modeles": ["Volgens de journalist…", "Het cijfer dat ze noemde, was…", "De kern van het verhaal is dat…"] }
+          ],
+          "notions": ["comprendre_discours_audio_complexe", "comprendre_points_de_vue", "discours_rapporte_avance", "cohesion_texte"]
+        },
+        {
+          "id": "s3", "domaine": "public",
+          "titre": "Défendre ses intérêts face à un service",
+          "intro_fr": "On apprend à exprimer des besoins et un mécontentement de façon nuancée mais ferme, à négocier et à obtenir une solution.",
+          "situations": ["négocier les conditions d'un bail ou une hausse de loyer", "contester une facture ou une décision administrative", "demander un aménagement (horaire, délai, échelonnement de paiement)"],
+          "taches": [
+            { "id": "b2_besoins_nuances", "label": "Exprimer un besoin ou un mécontentement de façon nuancée", "bc": "BC S04", "consigne": "Joue un interlocuteur peu coopératif (propriétaire, administration) : il doit exprimer ce qu'il ressent et ce dont il a besoin, poliment mais fermement, en nuançant.", "critere": "Il exprime son ressenti et son besoin avec des atténuations et un registre adapté (ik begrijp dat…, maar; het zou fijn zijn als…), sans agressivité.", "modeles": ["Ik begrijp uw standpunt, maar voor mij is dit echt een probleem.", "Het zou al veel helpen als u…", "Ik ben eerlijk gezegd wat teleurgesteld over de manier waarop…"] },
+            { "id": "b2_negocier", "label": "Négocier et trouver un compromis", "bc": "BC S05", "consigne": "Lance une négociation (loyer, délai, conditions) : il doit faire une proposition, réagir à ta contre-proposition et arriver à un accord.", "critere": "Il propose, argumente, fait une concession conditionnelle (als u…, dan ben ik bereid…) et conclut l'accord.", "modeles": ["Wat zou u ervan denken als we…?", "Ik ben bereid om…, op voorwaarde dat…", "Dan stel ik voor dat we het zo afspreken."] },
+            { "id": "b2_contester", "label": "Contester une décision en argumentant", "bc": "BC S05", "consigne": "Annonce-lui une décision défavorable (refus, facture, sanction) : il doit la contester avec des arguments et demander une solution ou un recours.", "critere": "Il conteste avec au moins deux arguments, cite les faits et demande une suite concrète.", "modeles": ["Ik ga niet akkoord met deze beslissing, omdat…", "Bovendien blijkt uit… dat…", "Welke mogelijkheden heb ik om bezwaar aan te tekenen?"] }
+          ],
+          "notions": ["negociation", "attenuer_nuancer", "registre_formel_informel", "conditionnel_avance"]
+        }
+      ]
+    },
+    {
+      "id": "b2_v2", "cvo": "3.2", "niveau": "B2", "icone": "⚖️",
+      "titre": "Argumenter, réunir, juger un discours",
+      "objectif": "Défendre une position nuancée sur un sujet de société ou de travail, participer activement à une réunion, et analyser un discours persuasif.",
+      "seances": [
+        {
+          "id": "s1", "domaine": "public",
+          "titre": "Défendre une position nuancée",
+          "intro_fr": "Au B2, on argumente avec nuance : on reconnaît les arguments de l'autre, on répond à une objection, on fait des hypothèses.",
+          "situations": ["la semaine de quatre jours", "l'intelligence artificielle au travail", "les voitures en centre-ville", "le télétravail obligatoire ou non"],
+          "taches": [
+            { "id": "b2_position", "label": "Exposer avantages et inconvénients, puis prendre position", "bc": "BC S05", "consigne": "Lance un sujet de société : il doit exposer avantages et inconvénients, puis donner sa position argumentée.", "critere": "Au moins deux avantages et deux inconvénients, une position claire et justifiée, avec des connecteurs de concession (hoewel, weliswaar… maar, desondanks).", "modeles": ["Enerzijds biedt het veel voordelen, anderzijds…", "Hoewel het duurder is, denk ik toch dat…", "Alles bij elkaar genomen ben ik eerder voor…"] },
+            { "id": "b2_contre_argument", "label": "Répondre à un contre-argument", "bc": "BC S05", "consigne": "Oppose-lui un contre-argument solide à sa position : il doit le reconnaître, puis le réfuter ou nuancer sa position.", "critere": "Il reformule ton argument, le reconnaît en partie et y répond avec un argument ou une nuance.", "modeles": ["Je hebt gelijk dat…, maar je vergeet dat…", "Dat argument snijdt hout, toch denk ik dat…", "Ik wil mijn standpunt wel wat nuanceren: …"] },
+            { "id": "b2_hypothese", "label": "Raisonner par hypothèse", "bc": "BC S05", "consigne": "Pose une question hypothétique sur le sujet (que se passerait-il si…) : il doit raisonner sur les conséquences.", "critere": "Il construit au moins deux hypothèses avec conséquences, au conditionnel (zou, zouden, als … zou).", "modeles": ["Als de regering dat zou invoeren, zouden veel mensen…", "In dat geval zou het kunnen dat…", "Stel dat…, dan…"] }
+          ],
+          "notions": ["argumenter", "expliquer_avantages_inconvenients", "contre_argumentation", "nuancer_position", "defendre_position"]
+        },
+        {
+          "id": "s2", "domaine": "public",
+          "titre": "Réunion de travail : analyser, proposer, décider",
+          "intro_fr": "On participe activement à une réunion : analyser un problème, proposer une solution, réagir aux objections avec diplomatie, et résumer les décisions.",
+          "situations": ["une réunion d'équipe sur un problème de délais ou de qualité", "choisir un nouvel outil ou une nouvelle organisation", "préparer un événement ou un projet avec des collègues"],
+          "taches": [
+            { "id": "b2_analyser", "label": "Analyser un problème : causes et conséquences", "bc": "BC S01", "consigne": "Présente un problème de travail (retards, erreurs, mécontentement client) : il doit l'analyser, causes et conséquences.", "critere": "Il distingue au moins deux causes et leurs conséquences, de façon structurée (doordat, als gevolg van, daardoor).", "modeles": ["Het probleem ontstaat vooral doordat…", "Als gevolg daarvan…", "Een tweede oorzaak is…"] },
+            { "id": "b2_proposer", "label": "Proposer et justifier une solution", "bc": "BC S05", "consigne": "Demande-lui de proposer une solution au problème et de la justifier face à tes objections (coût, temps, faisabilité).", "critere": "Une proposition concrète, justifiée, et une réponse diplomatique à au moins une objection.", "modeles": ["Mijn voorstel zou zijn om…", "Dat kost inderdaad tijd, maar op lange termijn…", "Zullen we het eerst een maand uittesten?"] },
+            { "id": "b2_reunion_diplomatie", "label": "Intervenir en réunion avec diplomatie et résumer les décisions", "bc": "BC S02 / interaction", "consigne": "Joue deux collègues en désaccord : il doit prendre la parole, recadrer la discussion avec diplomatie, puis résumer ce qui a été décidé.", "critere": "Il intervient au bon moment, nuance poliment, propose une synthèse et résume les décisions (qui, quoi, quand).", "modeles": ["Mag ik even inpikken?", "Ik denk dat we eigenlijk hetzelfde willen, alleen…", "Als ik het samenvat: we beslissen dus dat…"] }
+          ],
+          "notions": ["reunion_avancee", "analyser_probleme", "proposer_solution", "presentation_professionnelle", "entretien_embauche_avance"]
+        },
+        {
+          "id": "s3", "domaine": "public",
+          "titre": "Juger un discours persuasif et comprendre l'implicite",
+          "intro_fr": "Dernière séance : écouter un discours qui cherche à convaincre (publicité, discours politique, éditorial), en comprendre l'implicite et s'en faire un avis critique.",
+          "situations": ["une publicité radio", "un extrait de discours d'un échevin ou d'un ministre", "une chronique d'opinion à la radio", "une nouvelle mesure annoncée (règlement, consignes)"],
+          "taches": [
+            { "id": "b2_juger_discours", "label": "Comprendre un discours persuasif et le juger", "bc": "BC L04", "ecoute": true, "consigne": "Dis un court discours persuasif (publicité ou prise de position, 120 à 160 mots, avec des procédés de persuasion) : il doit dire ce qu'on veut lui faire croire ou faire, et s'il trouve ça convaincant et pourquoi.", "critere": "Il identifie le but et au moins un procédé de persuasion, puis donne un avis critique argumenté.", "modeles": ["Ze proberen ons te overtuigen dat…", "Ze spelen vooral in op…", "Ik vind het weinig overtuigend, want…"] },
+            { "id": "b2_implicite", "label": "Comprendre l'implicite, les nuances et les expressions", "bc": "BC L02 / LT03", "ecoute": true, "consigne": "Dis une réplique ou un court échange contenant de l'implicite, de l'ironie ou une expression figée flamande courante, puis demande-lui ce que la personne veut vraiment dire.", "critere": "Il explique le sens implicite ou l'expression correctement.", "modeles": ["Eigenlijk bedoelt ze dat…", "Die uitdrukking betekent…", "Hij zegt het niet rechtstreeks, maar…"] },
+            { "id": "b2_mesure", "label": "Comprendre une mesure officielle et l'expliquer", "bc": "BC L03", "ecoute": true, "consigne": "Annonce oralement une nouvelle mesure ou un règlement (stationnement, primes, horaires) avec conditions et exceptions : il doit l'expliquer à quelqu'un, avec les conditions.", "critere": "Il explique la mesure, à qui elle s'applique, les conditions et au moins une exception.", "modeles": ["Vanaf volgende maand geldt dat…", "Dat geldt niet voor…, behalve als…", "Wie daar recht op heeft, moet…"] }
+          ],
+          "notions": ["comprendre_texte_argumentatif", "expressions_figees", "formulations_idiomatiques", "passif_worden_zijn", "synthese"]
+        }
+      ]
+    }
+  ]
+}
