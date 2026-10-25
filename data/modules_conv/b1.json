@@ -1,0 +1,133 @@
+{
+  "_doc": "Modules B1 en conversation (octobre 2026), calqués sur le parcours NT2 des CVO flamands : Richtgraad 2 Mondeling = Threshold 1 à 4 (CVO 2.1 à 2.4), 8 modules de 60 h. Threshold 1-2 = domaine personnel, Threshold 3-4 = domaine public ; chaque module CVO a deux sous-modules (ici : deux séances) dont les tâches reprennent les basiscompetenties officielles (BC 108 à 125). Une séance = une conversation avec Svetlana ou John qui enseignent chaque tâche (explication courte en français, tournures modèles, mini-situation) puis la font réussir et la valident. Champs : id, cvo, titre, icone, objectif ; seances[] : id, domaine (personnel | public), titre, intro_fr, situations (idées de mises en situation pour le prof), taches[] (id, label, bc = compétence officielle, consigne = ce que le prof fait faire, critere = ce qui valide, ecoute = true si le prof doit d'abord dire un texte à comprendre, modeles = tournures néerlandaises), notions (ids de notions.json validées quand la séance est réussie). Rédigé par Claude à la demande de Joas, sans relecture préalable : signalements ⚠️ dans l'app.",
+  "_source": "redige_claude",
+  "modules": [
+    {
+      "id": "b1_t1", "cvo": "2.1", "niveau": "B1", "icone": "🗣️",
+      "titre": "S'informer, expliquer, dire ce qu'on veut",
+      "objectif": "Demander et donner des informations précises, expliquer comment faire, résumer un message et dire ce dont on a besoin, dans sa vie personnelle.",
+      "seances": [
+        {
+          "id": "s1", "domaine": "personnel",
+          "titre": "Demander, informer, expliquer comment faire",
+          "intro_fr": "Aujourd'hui on travaille à obtenir et donner des infos précises, et à expliquer une marche à suivre, comme entre amis, voisins ou en famille.",
+          "situations": ["un ami te demande comment venir chez toi en transports", "une voisine t'explique comment fonctionne le tri des déchets", "tu organises un anniversaire et tu demandes des infos à une salle des fêtes", "tu expliques à un proche comment installer une application"],
+          "taches": [
+            { "id": "info_demander", "label": "Obtenir des informations précises en posant les bonnes questions", "bc": "BC 108", "consigne": "Mets-le dans une situation où il doit obtenir 3 informations précises (prix, horaire, lieu, conditions) en posant lui-même ses questions.", "critere": "Il pose au moins deux vraies questions ouvertes (wanneer, hoeveel, waar, hoe…) et obtient l'info.", "modeles": ["Kun je me zeggen hoe laat het begint?", "Hoeveel kost het per persoon?", "Weet jij of ik vooraf moet reserveren?"] },
+            { "id": "info_donner", "label": "Donner des informations claires et détaillées", "bc": "BC 108", "consigne": "Pose-lui des questions sur un sujet qu'il connaît (son quartier, son trajet, un magasin qu'il aime) et fais-le répondre avec des détails.", "critere": "Ses réponses contiennent des détails concrets (lieu, moment, raison) dans des phrases complètes.", "modeles": ["Het is vlak bij het station, naast de bakker.", "Je kunt er het best met de tram naartoe gaan.", "Het is elke dag open, behalve op maandag."] },
+            { "id": "consigne_donner", "label": "Expliquer une marche à suivre, étape par étape", "bc": "BC 110", "consigne": "Demande-lui d'expliquer comment faire quelque chose de concret (venir chez lui, préparer un plat simple, utiliser un appareil), étape par étape.", "critere": "Au moins trois étapes dans l'ordre, avec des mots d'ordre (eerst, dan, daarna, tot slot) ou l'impératif.", "modeles": ["Eerst neem je bus 3 tot aan de markt.", "Daarna steek je over en ga je rechtdoor.", "Tot slot bel je aan bij nummer 12."] },
+            { "id": "consigne_comprendre", "label": "Comprendre une consigne et vérifier qu'on a bien compris", "bc": "BC 109 / BC 123", "ecoute": true, "consigne": "Donne-lui toi-même une consigne en 4 ou 5 étapes (en néerlandais, à l'oral), puis demande-lui ce qu'il doit faire. Il peut reformuler ou demander une précision.", "critere": "Il redit les étapes importantes dans le bon ordre, ou demande une précision pertinente avant de répondre.", "modeles": ["Als ik het goed begrijp, moet ik eerst…", "Sorry, wat moet ik doen na de tweede stap?", "Dus ik mag het niet voor acht uur buitenzetten?"] }
+          ],
+          "notions": ["demander_clarification_b1", "reformuler", "formulations_indirectes", "relatives_die_dat_waar_wie"]
+        },
+        {
+          "id": "s2", "domaine": "personnel",
+          "titre": "Résumer, dire ses envies et ses besoins, rendre compte",
+          "intro_fr": "On apprend à résumer ce qu'on a entendu, à dire ce qu'on veut ou ce qui nous gêne, et à raconter ce qui s'est passé de façon claire.",
+          "situations": ["un ami t'a laissé un long message vocal sur un week-end prévu", "tu parles avec un colocataire de ce qui ne va pas dans l'appartement", "tu expliques à un proche ce que le médecin t'a dit"],
+          "taches": [
+            { "id": "resumer_info", "label": "Résumer un message entendu", "bc": "BC 113 / BC 120", "ecoute": true, "consigne": "Dis-lui un message ou une petite info de 60 à 90 mots (message vocal d'un ami, info pratique), puis demande-lui de résumer l'essentiel en 2 ou 3 phrases.", "critere": "Son résumé reprend l'idée principale et au moins deux informations importantes, avec ses propres mots.", "modeles": ["Kort samengevat: …", "Het belangrijkste is dat…", "Hij vraagt of we zaterdag om tien uur kunnen komen."] },
+            { "id": "besoins", "label": "Dire ses envies, ses besoins et ce qu'on ressent", "bc": "BC 111", "consigne": "Crée une situation où il doit dire ce qu'il voudrait, ce dont il a besoin ou ce qui le dérange (vacances, colocation, organisation à la maison).", "critere": "Il exprime clairement un souhait ou un besoin ET un ressenti, avec une raison (omdat, want, zodat).", "modeles": ["Ik zou graag wat meer rust willen, omdat ik vroeg moet opstaan.", "Het stoort me een beetje dat…", "Ik heb nood aan een rustige plek om te studeren."] },
+            { "id": "demander_ressenti", "label": "Demander à l'autre ce qu'il veut et ce qu'il en pense", "bc": "BC 111", "consigne": "Fais-le mener un bout de la conversation : il doit te demander ton avis, tes envies ou comment tu te sens, et réagir à ta réponse.", "critere": "Il pose au moins une question sur ton ressenti ou tes envies et réagit à ta réponse.", "modeles": ["En jij, wat zou jij liever doen?", "Hoe voel je je daarbij?", "Vind jij dat ook een goed idee?"] },
+            { "id": "rendre_compte", "label": "Rendre compte d'un fait ou d'une situation", "bc": "BC 115", "consigne": "Demande-lui de te mettre au courant de quelque chose qui s'est passé (un rendez-vous, une réunion de parents, une visite) : quoi, quand, résultat.", "critere": "Il dit ce qui s'est passé, avec le moment et le résultat, au passé (perfectum).", "modeles": ["Ik ben gisteren bij de dokter geweest.", "Hij heeft gezegd dat ik een week rust moet nemen.", "Uiteindelijk hebben we afgesproken dat…"] }
+          ],
+          "notions": ["comprendre_message_authentique", "deduire_sens_contexte", "omdat_vs_doordat", "want_vs_omdat_b1", "zodat"]
+        }
+      ]
+    },
+    {
+      "id": "b1_t2", "cvo": "2.2", "niveau": "B1", "icone": "📖",
+      "titre": "Raconter et donner son avis",
+      "objectif": "Raconter un événement ou une histoire de façon vivante et ordonnée, puis dire ce qu'on en pense et défendre son avis, dans sa vie personnelle.",
+      "seances": [
+        {
+          "id": "s1", "domaine": "personnel",
+          "titre": "Raconter un événement, réel ou imaginé",
+          "intro_fr": "On travaille le récit : raconter ce qui s'est passé dans l'ordre, avec les temps du passé et des mots pour enchaîner.",
+          "situations": ["ton meilleur souvenir de vacances", "une journée où tout est allé de travers", "un déménagement", "un rêve ou une situation imaginée (si tu gagnais au loto…)"],
+          "taches": [
+            { "id": "rapport_evenement", "label": "Raconter un événement vécu, dans l'ordre", "bc": "BC 116", "consigne": "Demande-lui de raconter un événement vécu (vacances, déménagement, une fête) en 5 ou 6 phrases au moins, et relance avec des questions.", "critere": "Un récit d'au moins 4 phrases au passé, dans l'ordre, avec des mots d'enchaînement (eerst, toen, daarna, uiteindelijk).", "modeles": ["Vorig jaar zijn we naar Spanje gereden.", "Toen we aankwamen, regende het.", "Uiteindelijk hebben we toch een fijne week gehad."] },
+            { "id": "decrire_imagine", "label": "Décrire une situation imaginée", "bc": "BC 118", "consigne": "Lance une situation imaginaire (s'il gagnait au loto, s'il pouvait vivre ailleurs, son week-end idéal) et fais-le la décrire.", "critere": "Il décrit la situation avec au moins trois éléments concrets, avec zou/zouden ou als….", "modeles": ["Als ik de lotto zou winnen, zou ik eerst een huis kopen.", "Ik zou elke dag aan zee wandelen.", "Mijn ideale weekend zou er zo uitzien: …"] },
+            { "id": "resumer_histoire", "label": "Résumer une histoire entendue", "bc": "BC 114 / BC 122", "ecoute": true, "consigne": "Raconte-lui toi-même une courte anecdote (80 à 110 mots, au passé), puis demande-lui de la résumer.", "critere": "Il résume l'histoire dans l'ordre avec le personnage, le problème et la fin.", "modeles": ["Het verhaal gaat over een man die…", "Eerst… maar toen…", "Op het einde…"] }
+          ],
+          "notions": ["raconter_experience", "perfectum_imperfectum_recit", "chronologie_avancee", "perfectum_bijzin", "plusieurs_verbes_bijzin"]
+        },
+        {
+          "id": "s2", "domaine": "personnel",
+          "titre": "Raconter une histoire et défendre son avis",
+          "intro_fr": "On raconte une histoire (un film, un livre, une anecdote) puis on donne son avis, on le justifie et on écoute celui de l'autre.",
+          "situations": ["un film ou une série que tu as aimé ou détesté", "un sujet du quotidien : télétravail, réseaux sociaux, vacances à la maison ou à l'étranger", "une décision à prendre en famille"],
+          "taches": [
+            { "id": "raconter_histoire", "label": "Raconter une histoire (film, livre, anecdote)", "bc": "BC 119", "consigne": "Demande-lui de raconter l'histoire d'un film, d'une série ou d'une anecdote qu'il connaît, sans tout dévoiler.", "critere": "Il présente le contexte, les personnages et l'intrigue de façon compréhensible, en plusieurs phrases liées.", "modeles": ["Het is een film over een vrouw die…", "In het begin…, maar dan…", "Ik ga het einde niet verklappen!"] },
+            { "id": "ressenti_persuasif", "label": "Dire ce qu'on a ressenti et donner envie (ou pas)", "bc": "BC 112", "consigne": "Fais-le dire ce qu'il a ressenti et pourquoi tu devrais (ou pas) voir ce film / faire cette activité.", "critere": "Il exprime un ressenti et cherche à te convaincre avec au moins une raison.", "modeles": ["Ik vond het echt ontroerend.", "Je moet hem zeker zien, want…", "Ik zou het je eerlijk gezegd niet aanraden."] },
+            { "id": "avis_defendre", "label": "Défendre un avis et demander celui de l'autre", "bc": "BC 117 / BC 125", "consigne": "Prends une position sur un sujet du quotidien et laisse-le défendre la sienne : opinion, raison, exemple ; il doit aussi te demander ton avis et réagir.", "critere": "Il donne un avis justifié (omdat, want, daarom, bijvoorbeeld), réagit à ton argument (akkoord, niet helemaal akkoord) et te demande ton avis.", "modeles": ["Ik vind dat thuiswerken veel voordelen heeft, omdat…", "Daar ben ik het niet helemaal mee eens.", "Wat vind jij daar eigenlijk van?"] }
+          ],
+          "notions": ["raconter_histoire_film", "opinion_developpee", "donner_opinion_justifiee", "accord_desaccord_nuance", "langue_parlee_courante"]
+        }
+      ]
+    },
+    {
+      "id": "b1_t3", "cvo": "2.3", "niveau": "B1", "icone": "🏛️",
+      "titre": "Se débrouiller dans les démarches",
+      "objectif": "Obtenir et donner des informations, suivre une procédure, résumer un message officiel et exposer un problème, dans la vie publique (administration, santé, logement, services).",
+      "seances": [
+        {
+          "id": "s1", "domaine": "public",
+          "titre": "S'informer et suivre une procédure",
+          "intro_fr": "On passe à la vie publique : guichet, téléphone, services. Il faut obtenir les bonnes infos, comprendre une procédure et poser les bonnes questions.",
+          "situations": ["à la commune pour une nouvelle carte d'identité", "au téléphone avec la mutuelle pour un remboursement", "chez le médecin ou à l'hôpital pour un examen", "avec l'agence immobilière pour une location"],
+          "taches": [
+            { "id": "pub_info_obtenir", "label": "Obtenir des informations à un guichet ou au téléphone", "bc": "BC 108", "consigne": "Joue un employé (commune, mutuelle, agence) : il doit obtenir les informations dont il a besoin (documents, délais, prix, horaires).", "critere": "Il formule sa demande poliment (u), pose ses questions et obtient au moins deux informations utiles.", "modeles": ["Goedemorgen, ik had graag wat informatie over…", "Welke documenten moet ik meebrengen?", "Hoe lang duurt het voor ik de kaart krijg?"] },
+            { "id": "pub_procedure", "label": "Comprendre une procédure et la redire", "bc": "BC 109 / BC 123", "ecoute": true, "consigne": "Explique-lui une procédure administrative en 4 ou 5 étapes (en néerlandais), puis demande-lui de redire ce qu'il doit faire et dans quel ordre.", "critere": "Il redit correctement les étapes principales, dans l'ordre, ou demande une précision utile.", "modeles": ["Dus eerst vul ik het formulier online in, en daarna…", "Moet ik dan zelf een afspraak maken?", "Mag ik nog eens herhalen om zeker te zijn?"] },
+            { "id": "pub_expliquer", "label": "Expliquer sa situation à un service", "bc": "BC 108 / BC 110", "consigne": "Il doit expliquer sa situation à un employé (changement d'adresse, problème de paiement, rendez-vous à déplacer) pour qu'on puisse l'aider.", "critere": "Il explique sa situation de façon claire et ordonnée, avec les détails nécessaires.", "modeles": ["Ik ben vorige maand verhuisd en ik heb mijn nieuwe adres nog niet doorgegeven.", "Het probleem is dat…", "Kunt u kijken wat er mogelijk is?"] },
+            { "id": "pub_gagner_temps", "label": "Gagner du temps et faire répéter poliment", "bc": "stratégies", "consigne": "Parle un peu vite ou avec un mot difficile : il doit gagner du temps, faire répéter ou faire expliquer un mot, poliment.", "critere": "Il utilise au moins une formule pour faire répéter, reformuler ou gagner du temps, puis poursuit l'échange.", "modeles": ["Sorry, kunt u dat iets trager herhalen?", "Wat bedoelt u precies met…?", "Even kijken, ogenblikje…"] }
+          ],
+          "notions": ["administration_b1", "sante_procedures_b1", "logement_b1", "modaux_infinitif_perfectum", "gagner_du_temps"]
+        },
+        {
+          "id": "s2", "domaine": "public",
+          "titre": "Résumer un message officiel, exposer un problème",
+          "intro_fr": "On apprend à résumer une info officielle, à dire clairement ce dont on a besoin à un service, et à rendre compte d'un problème et de son évolution.",
+          "situations": ["un message vocal de la commune ou de l'école", "une panne de chauffage que le propriétaire ne répare pas", "un colis perdu, une facture erronée", "une réunion d'information sur des travaux dans le quartier"],
+          "taches": [
+            { "id": "pub_resumer", "label": "Résumer un message officiel", "bc": "BC 113 / BC 120", "ecoute": true, "consigne": "Dis-lui un message officiel de 70 à 100 mots (commune, école, gestionnaire d'immeuble, annonce de travaux) puis demande-lui de le résumer et de dire ce qu'il doit faire.", "critere": "Il résume l'idée principale et dit l'action à faire (quoi, quand).", "modeles": ["De gemeente laat weten dat…", "Wij moeten voor vrijdag…", "Het gaat over werken in onze straat vanaf maandag."] },
+            { "id": "pub_besoin", "label": "Exposer un problème et dire ce qu'on attend", "bc": "BC 111 / BC 112", "consigne": "Joue l'employé ou le propriétaire : il doit exposer son problème, dire ce qui le dérange et ce qu'il attend comme solution, poliment mais fermement.", "critere": "Il expose le problème, dit son ressenti avec une raison et formule une demande concrète.", "modeles": ["Ik ben echt niet tevreden, want het duurt al twee weken.", "Ik zou willen dat het deze week nog hersteld wordt.", "Kunt u mij laten weten wanneer…?"] },
+            { "id": "pub_evolution", "label": "Rendre compte d'un problème et de son évolution", "bc": "BC 115", "consigne": "Il doit raconter l'historique d'un problème (ce qui s'est passé, ce qu'il a déjà fait, où on en est) à quelqu'un qui reprend le dossier.", "critere": "Il donne la chronologie (eerst, daarna, sindsdien, nu) et l'état actuel, au passé puis au présent.", "modeles": ["Het begon vorige week, toen de verwarming uitviel.", "Ik heb al twee keer gebeld, maar er is niemand gekomen.", "Sindsdien hebben we geen warm water."] }
+          ],
+          "notions": ["resoudre_probleme_conversation", "decrire_probleme_evolution", "combiner_subordonnees", "dus_daarom_daardoor", "hoewel_ondanks"]
+        }
+      ]
+    },
+    {
+      "id": "b1_t4", "cvo": "2.4", "niveau": "B1", "icone": "🏢",
+      "titre": "Raconter, convaincre, débattre",
+      "objectif": "Rendre compte d'une expérience, présenter et défendre un point de vue, et participer à une discussion, dans la vie publique : travail, formation, société.",
+      "seances": [
+        {
+          "id": "s1", "domaine": "public",
+          "titre": "Rendre compte d'une expérience au travail ou en formation",
+          "intro_fr": "On raconte son parcours et ses expériences (travail, stage, formation) et on résume ce qu'on a entendu dans un cadre professionnel.",
+          "situations": ["un entretien où l'on te demande de parler d'une expérience", "le compte rendu d'une journée de formation à un collègue", "un incident au travail à raconter au responsable"],
+          "taches": [
+            { "id": "pro_parcours", "label": "Raconter son parcours et une expérience marquante", "bc": "BC 116", "consigne": "Demande-lui de raconter son parcours (études, emplois) puis une expérience marquante : la situation, ce qu'il a fait, le résultat.", "critere": "Un récit structuré (situation, action, résultat) au passé, avec des enchaînements.", "modeles": ["Na mijn studies heb ik twee jaar in een magazijn gewerkt.", "Op een dag was er een groot probleem met een levering.", "Daardoor heb ik geleerd om…"] },
+            { "id": "pro_incident", "label": "Décrire un incident ou une situation au travail", "bc": "BC 118", "consigne": "Joue le responsable : il doit te décrire un incident (retard, erreur, client mécontent) de façon claire et objective.", "critere": "Il décrit ce qui s'est passé, qui était concerné et les conséquences, sans confusion.", "modeles": ["Vanochtend is er een fout gebeurd bij het inpakken.", "De klant heeft daarom twee keer gebeld.", "Ik heb het meteen aan mijn collega gemeld."] },
+            { "id": "pro_resumer", "label": "Résumer une réunion ou une formation entendue", "bc": "BC 114 / BC 122", "ecoute": true, "consigne": "Fais-lui un court compte rendu oral (80 à 110 mots) d'une réunion ou d'une formation, puis demande-lui de le résumer pour un collègue absent.", "critere": "Il résume les décisions ou points importants et ce qui change pour le collègue.", "modeles": ["In de vergadering hebben ze beslist dat…", "Vanaf volgende week moeten we…", "Voor jou verandert er vooral dat…"] }
+          ],
+          "notions": ["werk_solliciteren", "etudes_formation", "reformuler"]
+        },
+        {
+          "id": "s2", "domaine": "public",
+          "titre": "Convaincre et débattre",
+          "intro_fr": "Dernière séance du B1 : défendre un point de vue avec des arguments, comparer deux solutions, et tenir sa place dans une discussion.",
+          "situations": ["une réunion d'équipe sur un nouvel horaire", "un débat sur la mobilité en ville (voiture, vélo, transports)", "choisir entre deux propositions pour un projet de quartier"],
+          "taches": [
+            { "id": "deb_argumenter", "label": "Défendre un point de vue : avis, raison, exemple, conclusion", "bc": "BC 117", "consigne": "Lance un sujet de société ou de travail et demande-lui de défendre son point de vue avec la structure opinion → raison → exemple → conclusion.", "critere": "Les quatre éléments sont présents et liés (volgens mij, omdat, bijvoorbeeld, daarom/kortom).", "modeles": ["Volgens mij is de fiets de beste oplossing in de stad.", "Bijvoorbeeld in Gent werkt dat heel goed.", "Kortom, ik ben voor meer fietspaden."] },
+            { "id": "deb_comparer", "label": "Comparer deux possibilités et choisir", "bc": "BC 112", "consigne": "Propose deux options (deux horaires, deux projets) : il doit comparer les avantages et inconvénients et dire laquelle il choisit.", "critere": "Il compare (meer, minder, beter, terwijl, aan de ene kant… aan de andere kant) et justifie son choix.", "modeles": ["Aan de ene kant is optie A goedkoper, aan de andere kant…", "Optie B lijkt me beter, omdat…", "Ik zou toch voor de eerste kiezen."] },
+            { "id": "deb_discussion", "label": "Participer à une discussion : prendre la parole, réagir, faire réagir", "bc": "BC 125 / interaction", "consigne": "Mène une petite discussion où tu joues deux collègues qui ne sont pas d'accord : il doit prendre la parole, réagir à un argument, nuancer et inviter l'autre à donner son avis.", "critere": "Il prend la parole, réagit à un argument précis (akkoord / niet akkoord, nuance) et invite l'autre à s'exprimer.", "modeles": ["Mag ik daar iets aan toevoegen?", "Ik begrijp je punt, maar…", "Wat denk jij, Sarah?"] }
+          ],
+          "notions": ["argumenter_simple", "comparer_deux_possibilites", "discussion_sujet_familier", "mission_finale_b1"]
+        }
+      ]
+    }
+  ]
+}

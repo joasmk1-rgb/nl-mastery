@@ -3119,6 +3119,7 @@ if (firebaseAvailable) {
             const isPassed = m => { const s = modRpState(m.id); return !!(s.finalResult && s.finalResult.passed); };
             const openLevel = levels.find(l => mods.filter(m => m.niveau === l).some(m => !isPassed(m))) || levels[levels.length - 1];
             const hint = state.coursBasesHint ? `<div class="cours-hint">💪 Tu as des bases : pour chaque module que tu connais déjà, touche <b>🏆 Examen</b>. Réussi, le module et ses notions sont validés et tu passes au suivant. <button type="button" class="rp-coach-btn" onclick="state.coursBasesHint=false; save(); renderModRpEntries();">OK</button></div>` : '';
+            if (!convData) convLoad().then(() => { if (document.getElementById('apprendre-view').classList.contains('active')) renderModRpEntries(); });
             el.innerHTML = talkPointCardHtml() + levels.map(level => {
                 const list = mods.filter(m => m.niveau === level);
                 const nPassed = list.filter(isPassed).length;
@@ -3134,7 +3135,7 @@ if (firebaseAvailable) {
                         </div>`;
                     }).join('')}
                 </details>`;
-            }).join('');
+            }).join('') + convHtml();
         }
 
         // ===== Vue Leçon =====
@@ -12646,11 +12647,12 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             document.getElementById('talk-content').innerHTML = `
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
-                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
+                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
                     ${liveCorrectToggleHtml()}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
                 </div>
+                ${talk.lesson ? '<div id="talk-lesson" class="talk-lesson"></div>' : ''}
                 <div id="talk-chat" class="talk-chat"></div>
                 <div id="talk-sugg" class="talk-sugg"></div>
                 <div id="talk-text-row" class="prof-input-row" style="display:none;">
@@ -12665,6 +12667,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 <div id="talk-mic-hint" class="talk-mic-hint">Touche le micro pour parler</div>`;
             talk.log.forEach(m => talkAppend(m, true));
             talkRenderSugg();
+            convRenderTasks();
         }
 
         function talkAppend(m, replay) {
@@ -12736,7 +12739,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             const portrait = typeof profPortrait === 'function' ? profPortrait() : [];
             const hist = talk.history.slice(-16).map(h => h.who === 'them' ? p.name + ' : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
             return `${p.base} Tu parles avec un(e) apprenant(e) francophone de néerlandais, niveau ${PROF_LEVEL_DESC[talk.level]}.
-${talk.point ? talkPointPrompt() : talk.sit ? `Aujourd'hui, vous jouez une SITUATION de la vie courante en Flandre. Tu restes ${p.name} (même voix, même caractère), mais tu joues ce rôle : ${talk.sit.role}
+${talk.point ? talkPointPrompt() : talk.lesson ? convPrompt() : talk.sit ? `Aujourd'hui, vous jouez une SITUATION de la vie courante en Flandre. Tu restes ${p.name} (même voix, même caractère), mais tu joues ce rôle : ${talk.sit.role}
 La situation, vue par l'apprenant : ${talk.sit.contexte}
 Registre : vouvoiement (u) avec un client, un patient ou un usager ; tutoiement (jij) entre amis, voisins ou collègues. Reste dans ton rôle, fais avancer la situation jusqu'à ce qu'elle soit réglée, puis conclus naturellement. Emploie naturellement certains de ces mots : ${(talk.sit.kit && talk.sit.kit.mots || []).map(m => m.nl).concat(talk.sit.kit && talk.sit.kit.verbes || []).join(', ')}.` : `Aujourd'hui, tu lui parles en ami(e) : conversation détendue, tutoiement (jij). Sujet de départ : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')} (si c'est « Libre », choisis un sujet simple du quotidien).`}
 Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
@@ -12749,10 +12752,10 @@ Règles :
 - ${LIVE_MIX_RULES}
 - ${LIVE_OFFTOPIC_RULE} S'il a répondu À CÔTÉ de ta question, ne rebondis pas comme si de rien n'était : dans "reply_nl", reformule gentiment ta question plus simplement ; et mets "a_cote": true dans "correction", avec "comprehension_fr" (ce que tu lui demandais, en une phrase).
 - "correction" : seulement si sa DERNIÈRE phrase en néerlandais contient une faute, un passage en français, ou se dirait nettement plus naturellement : {"natural": "la phrase corrigée ou plus naturelle, entièrement en néerlandais", "note_fr": "explication très courte en français", "francais": [{"fr": "ce qu'il a dit en français", "nl": "l'équivalent néerlandais"}]} ; sinon null.
-- ${talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
+- ${talk.lesson ? `FIN : quand toutes les tâches sont validées (✓) ou abandonnées (✗), conclus la séance chaleureusement, sans question, avec "fin": true ; sinon "fin": false.` : ''}${talk.lesson ? '' : talk.point ? `FIN : quand tu connais son plafond (ou qu'il a montré le niveau B2), au plus tard vers 25 échanges (il en a fait ${talk.userCount}), annonce gentiment que tu vas faire le point : "reply_nl" sans question et "fin": true ; sinon "fin": false.` : `FIN NATURELLE (l'apprenant a déjà fait ${talk.userCount} échange${talk.userCount > 1 ? 's' : ''}${talk.extra ? `, dont ${talk.userCount - talk.extra} depuis qu'il a voulu continuer` : ''}) : une vraie conversation a une fin. ${talk.sit ? `Ici, la situation se termine quand elle est réglée (achat fait, rendez-vous fixé, problème résolu…) : conclus alors poliment, comme dans la vraie vie.` : `Avant ${8 + (talk.extra || 0)} échanges, fais vivre la conversation. Vers ${10 + (talk.extra || 0)} à ${12 + (talk.extra || 0)}, cherche une sortie naturelle (tu dois y aller, ton train, un rendez-vous…). Au plus tard à ${16 + (talk.extra || 0)}, conclus.`} Si la conversation tourne en rond, relance UNE fois sur un autre sujet ; si ça ne prend pas, conclus. S'il dit au revoir (« ik moet gaan », « tot later »…), dis-lui au revoir chaleureusement au lieu de relancer. Quand tu conclus : "reply_nl" = une réplique de fin, SANS question, et "fin": true ; sinon "fin": false.`}
 - "suggestions" : 3 réponses courtes QU'IL pourrait te dire maintenant, à son niveau et variées (répondre, donner une raison ou un détail, te poser une question en retour), avec leur traduction.
 ${hist ? "Conversation jusqu'ici :\n" + hist : (talk.sit ? `Commence la situation par cette réplique, telle quelle ou presque : « ${talk.sit.welcome} »` : "Commence la conversation : salue-le naturellement et pose une première question simple sur le sujet.")}
-Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false}`;
+Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction française de reply_nl", "fr_help": "", "correction": null, "suggestions": [{"nl": "", "fr": ""}], "fin": false${talk.lesson ? ', "tache": "", "validee": null, "ratee": null' : ''}}`;
         }
 
         function talkThinking(on) {
@@ -12790,6 +12793,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 if (lastDiv) lastDiv.insertAdjacentHTML('beforeend', talkCorrHtml(r.correction));
             }
             if (lastMsg) { const ids = usedWordsRecord(lastMsg.text, r.correction && r.correction.natural ? r.correction : null); if (talk.point && Array.isArray(ids)) ids.forEach(id => talk.point.words.add(id)); }
+            if (talk.lesson) convHandle(r);
             talk.history.push({ who: 'them', nl: r.reply_nl });
             talk.suggestions = (Array.isArray(r.suggestions) ? r.suggestions : []).filter(s => s && s.nl).slice(0, 3);
             talkAppend({ who: 'them', nl: r.reply_nl, fr: r.reply_fr || '', help: r.fr_help || '' });
@@ -12865,6 +12869,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             t.ended = true;
             if (!t.userCount) { talk = null; talkRenderSetup(); return; }
             if (t.point && !t.point.done) { t.point.done = true; await talkPointEvaluate(t); }
+            if (t.lesson) convSaveResult(t);
             const box = document.getElementById('talk-chat');
             talkAppend({ who: 'info', html: '<div class="report-meta" id="talk-recap-wait">Petit récap…</div>' });
             const mem = talkState().memory[t.partner] || '';
@@ -13276,6 +13281,138 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
+        // ===== Modules B1 en conversation (CVO 2.1 à 2.4) =====
+        // data/modules_conv/b1.json : 4 modules × 2 séances, calqués sur le B1 oral des CVO
+        // (Richtgraad 2 Mondeling). Une séance = une conversation de Discuter (talk.lesson) où
+        // Svetlana ou John enseignent les tâches une à une (explication courte + tournures dans
+        // fr_help, mini-situation dans reply_nl) et renvoient, dans le même appel, "validee" /
+        // "ratee" quand une tâche est réussie seul ou abandonnée après trois essais. Séance réussie
+        // = 70 % des tâches validées : ses notions B1 sont alors validées (le niveau CECR monte).
+        // Résultats dans state.convMod[module].seances[séance] = { ok, validated, failed, at }.
+        let convData = null;
+        async function convLoad() {
+            if (convData) return convData;
+            try { convData = await fetch('data/modules_conv/b1.json').then(r => r.ok ? r.json() : null); } catch (e) { convData = null; }
+            if (!convData) convData = { modules: [] };
+            return convData;
+        }
+        function convFind(modId, sid) {
+            const m = convData && convData.modules.find(x => x.id === modId);
+            return { m, s: m && m.seances.find(x => x.id === sid) };
+        }
+        function convState(modId) {
+            if (!state.convMod) state.convMod = {};
+            if (!state.convMod[modId]) state.convMod[modId] = { seances: {} };
+            if (!state.convMod[modId].seances) state.convMod[modId].seances = {};
+            return state.convMod[modId];
+        }
+        function convSeanceOk(modId, sid) { const r = state.convMod && state.convMod[modId] && state.convMod[modId].seances && state.convMod[modId].seances[sid]; return !!(r && r.ok); }
+
+        async function convStart(modId, sid) {
+            await convLoad();
+            await rpLoadLibrary();
+            const { m, s } = convFind(modId, sid);
+            if (!s) return;
+            const set = talkSettings();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('talk-view').classList.add('active');
+            setActiveNav('nav-apprendre');
+            if (!GeminiService.isAvailable()) { talkRenderSetup(); alert("Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA."); return; }
+            talk = { partner: set.partner, p: TALK_PARTNERS[set.partner], sit: null, topic: 'libre', level: m.niveau || 'B1', handsfree: set.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0,
+                lesson: { modId, sid, m, s, done: new Set(), failed: new Set() } };
+            talkRenderChat();
+            talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>${m.icone || '📘'} ${rpEscapeHtml(s.titre)}</b> <small class="cvo-eq">≈ CVO ${rpEscapeHtml(m.cvo)} · ${s.domaine === 'public' ? 'vie publique' : 'vie personnelle'}</small><div>${rpEscapeHtml(s.intro_fr || '')}</div></div>` });
+            talkTurn();
+        }
+
+        function convRenderTasks() {
+            const el = document.getElementById('talk-lesson');
+            if (!el || !talk || !talk.lesson) return;
+            const L = talk.lesson;
+            el.innerHTML = L.s.taches.map(t => `<span class="conv-task ${L.done.has(t.id) ? 'ok' : L.failed.has(t.id) ? 'ko' : ''}" title="${rpEscapeHtml(t.label)}">${L.done.has(t.id) ? '✓' : L.failed.has(t.id) ? '✗' : '○'} ${rpEscapeHtml(t.label)}</span>`).join('');
+        }
+
+        function convPrompt() {
+            const L = talk.lesson;
+            const tasks = L.s.taches.map(t => `- ${L.done.has(t.id) ? '✓ ' : L.failed.has(t.id) ? '✗ ' : ''}${t.id} : ${t.label}${t.ecoute ? ' (TÂCHE D\'ÉCOUTE : dis d\'abord le texte, puis la question)' : ''}\n  Ce que tu lui fais faire : ${t.consigne}\n  Réussi si : ${t.critere}\n  Tournures modèles : ${(t.modeles || []).join(' / ')}`).join('\n');
+            return `Aujourd'hui, tu es SON PROF de néerlandais (tu restes ${talk.p.name}) pour une séance du parcours B1, équivalent du module CVO ${L.m.cvo} (${L.s.domaine === 'public' ? 'vie publique' : 'vie personnelle'}) : « ${L.s.titre} ». Objectif : ${L.m.objectif}
+Idées de mises en situation : ${(L.s.situations || []).join(' ; ')}.
+Tutoiement (jij) avec lui ; quand tu joues un employé ou un service dans une mini-situation, vouvoiement (u) dans le jeu.
+Déroulé : UNE tâche à la fois, dans l'ordre de la liste (passe celles marquées ✓ ou ✗). Pour chaque tâche :
+1) présente-la en français dans "fr_help" (1 ou 2 phrases simples) avec 2 ou 3 tournures néerlandaises utiles ;
+2) lance une mini-situation concrète dans "reply_nl" (tu joues le rôle nécessaire), en néerlandais B1 naturel ;
+3) laisse-le essayer. S'il réussit SEUL selon le critère (petites fautes acceptées : la correction est faite à part), mets "validee": l'id de la tâche, félicite-le en une phrase et enchaîne sur la tâche suivante dans le même message. Sinon, aide-le (indice, début de phrase, modèle) et redonne-lui une chance ; après 3 essais sans réussite, mets "ratee": l'id et passe à la suite.
+Une phrase qu'il répète juste après ton aide ne suffit pas : il doit la réutiliser dans une nouvelle réplique à lui.
+S'il parle FRANÇAIS ou dit qu'il ne sait pas : aide-le dans "fr_help" et invite-le à réessayer en néerlandais.
+"tache" = l'id de la tâche en cours.
+Tâches de la séance :
+${tasks}`;
+        }
+
+        // Après chaque réponse du prof : tâches validées ou abandonnées.
+        function convHandle(r) {
+            const L = talk && talk.lesson;
+            if (!L || !r) return;
+            const ids = L.s.taches.map(t => t.id);
+            if (r.validee && ids.includes(r.validee) && !L.failed.has(r.validee)) L.done.add(r.validee);
+            if (r.ratee && ids.includes(r.ratee) && !L.done.has(r.ratee)) L.failed.add(r.ratee);
+            convRenderTasks();
+        }
+
+        // Fin de séance : résultat gardé, notions validées si la séance est réussie.
+        function convSaveResult(t) {
+            const L = t.lesson;
+            if (!L || L.saved) return;
+            L.saved = true;
+            const total = L.s.taches.length;
+            const ok = L.done.size / total >= 0.7;
+            const st = convState(L.modId);
+            const prev = st.seances[L.sid] || {};
+            st.seances[L.sid] = { ok: ok || !!prev.ok, validated: [...new Set([...(prev.validated || []), ...L.done])], failed: [...L.failed], at: Date.now() };
+            if (ok) (L.s.notions || []).forEach(id => { if (curriculumNotions[id]) { ntProgress(id).validated = true; recordNotionAttempt(id, true); } });
+            else (L.s.notions || []).forEach(id => { if (curriculumNotions[id]) recordNotionAttempt(id, false); });
+            save();
+            const seances = L.m.seances;
+            const idx = seances.findIndex(x => x.id === L.sid);
+            const nextS = seances[idx + 1];
+            const mIdx = convData.modules.findIndex(x => x.id === L.modId);
+            const nextM = !nextS && convData.modules[mIdx + 1];
+            const modDone = seances.every(x => convSeanceOk(L.modId, x.id));
+            talkAppend({ who: 'info', html: `<div class="prof-debrief">
+                <div class="prof-target-title">${ok ? '✅ Séance réussie' : '🔁 Encore un effort'} · ${L.done.size}/${total} tâches</div>
+                ${L.s.taches.map(x => `<div class="modrp-check ${L.done.has(x.id) ? 'ok' : 'ko'}">${L.done.has(x.id) ? '✓' : '✗'} ${rpEscapeHtml(x.label)}</div>`).join('')}
+                <p class="report-meta">${ok ? (modDone ? `🏆 Module « ${rpEscapeHtml(L.m.titre)} » (≈ CVO ${rpEscapeHtml(L.m.cvo)}) validé, avec ses notions B1.` : 'Les notions de cette séance sont validées.') : 'Il faut réussir 70 % des tâches : refais la séance quand tu veux, les tâches réussies restent acquises.'}</p>
+                <div class="prof-actions">
+                    ${ok && nextS ? `<button class="btn btn-green" onclick="convStart('${L.modId}', '${nextS.id}')">▶️ Séance suivante</button>` : ''}
+                    ${ok && nextM ? `<button class="btn btn-green" onclick="convStart('${nextM.id}', '${nextM.seances[0].id}')">▶️ Module suivant</button>` : ''}
+                    ${!ok ? `<button class="btn btn-green" onclick="convStart('${L.modId}', '${L.sid}')">🔁 Refaire la séance</button>` : ''}
+                    <button class="btn btn-gray" onclick="showApprendre()">📚 Cours</button>
+                </div></div>` });
+        }
+
+        // Niveau B1 dans Cours.
+        function convHtml() {
+            if (!convData || !convData.modules.length) return '';
+            const mods = convData.modules;
+            const nOk = mods.reduce((n, m) => n + m.seances.filter(s => convSeanceOk(m.id, s.id)).length, 0);
+            const nAll = mods.reduce((n, m) => n + m.seances.length, 0);
+            const p = TALK_PARTNERS[talkSettings().partner];
+            const open = (state.coursPoint && ['B1', 'B2'].includes(state.coursPoint.niveau)) || MODRP_IDS.every(id => { const s = state.modRp && state.modRp[id]; return s && s.finalResult && s.finalResult.passed; });
+            return `<details class="modrp-level" ${open ? 'open' : ''}>
+                <summary><span class="conj-niveau-badge">B1</span> ${mods.length} modules en conversation · ${nOk}/${nAll} séances <small class="cvo-eq">≈ CVO 2.1–2.4 Threshold</small></summary>
+                <p class="report-meta" style="margin:6px 0;">Ton prof te fait parler et valide chaque tâche. Prof : <b>${p.emoji} ${p.name}</b> · <a href="#" onclick="talkSettings().partner = talkSettings().partner === 'john' ? 'svetlana' : 'john'; save(); renderModRpEntries(); return false;">changer</a></p>
+                ${mods.map(m => {
+                    const done = m.seances.every(s => convSeanceOk(m.id, s.id));
+                    return `<div class="modrp-entry conv-entry${done ? ' passed' : ''}">
+                        <span class="modrp-entry-icon">${done ? '🏆' : (m.icone || '📘')}</span>
+                        <span style="flex:1;"><b>${rpEscapeHtml(m.titre)}</b> <small class="cvo-eq">CVO ${rpEscapeHtml(m.cvo)}</small><br><small>${rpEscapeHtml(m.objectif)}</small>
+                            <span class="conv-seances">${m.seances.map((s, i) => `<button type="button" class="conv-seance${convSeanceOk(m.id, s.id) ? ' ok' : ''}" onclick="convStart('${m.id}', '${s.id}')">${convSeanceOk(m.id, s.id) ? '✓' : '▶️'} Séance ${i + 1} · ${rpEscapeHtml(s.titre)}</button>`).join('')}</span>
+                        </span>
+                    </div>`;
+                }).join('')}
+            </details>`;
+        }
+
         // ===== Faire le point en conversation (placement) =====
         // Au lieu de refaire les cours notion après notion, Svetlana ou John (les profs) font
         // parler l'apprenant, du plus simple (se présenter, épeler, son numéro) au plus difficile
@@ -13376,6 +13513,7 @@ Réponds UNIQUEMENT en JSON :
 
         async function talkPointRun(ses) {
             if (typeof modRpLoadAll === 'function') await modRpLoadAll();
+            await convLoad();
             const checks = talkPointChecks(ses);
             let r = null;
             if (GeminiService.isAvailable()) {
@@ -13435,6 +13573,14 @@ Réponds UNIQUEMENT en JSON :
             // Notions B1/B2 acquises.
             const notionsOk = arr(r.notions_acquises).filter(id => curriculumNotions[id]);
             notionsOk.forEach(id => { ntProgress(id).validated = true; recordNotionAttempt(id, true); });
+            // Séances B1 dont toutes les notions sont acquises : cochées sans les refaire.
+            const convOk = [];
+            (convData && convData.modules || []).forEach(m => m.seances.forEach(s => {
+                if ((s.notions || []).length && !convSeanceOk(m.id, s.id) && s.notions.every(id => curriculumNotions[id] && ntProgress(id).validated)) {
+                    convState(m.id).seances[s.id] = { ok: true, placement: true, validated: [], failed: [], at: Date.now() };
+                    convOk.push(s.titre);
+                }
+            }));
             const certified = talkPointCertify(ses);
             // Portrait (sans écraser ce qui est déjà rempli).
             const keys = new Set(Object.values(GUIDE_PORTRAIT_Q).flat().map(q => q.key));
@@ -13449,6 +13595,7 @@ Réponds UNIQUEMENT en JSON :
                 ${r.resume_fr ? `<p>${rpEscapeHtml(r.resume_fr)}</p>` : ''}
                 ${validated.length ? `<div class="prof-deb-sec">✅ Validé, pas besoin de le refaire (${validated.length} module${validated.length > 1 ? 's' : ''})</div><ul>${names(validated)}</ul>` : ''}
                 ${notionsOk.length ? `<div class="prof-deb-sec">✅ Notions ${lvl === 'B2' ? 'B1/B2' : 'B1'} acquises : ${notionsOk.length}</div>` : ''}
+                ${convOk.length ? `<div class="prof-deb-sec">✅ Séances B1 déjà acquises (${convOk.length})</div><ul>${convOk.map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
                 ${certified ? `<div class="prof-deb-sec">🗣️ ${certified} mots certifiés</div><p>Tu les as bien employés : ils comptent comme acquis, sans exercices.</p>` : ''}
                 ${almost.length ? `<div class="prof-deb-sec">🔁 Presque (à consolider)</div><ul>${names(almost)}</ul>` : ''}
                 ${arr(r.points_forts).length ? `<div class="prof-deb-sec">👍 Points forts</div><ul>${arr(r.points_forts).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
