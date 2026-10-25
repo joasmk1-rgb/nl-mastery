@@ -14862,9 +14862,9 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             routineBubble('moi', rpEscapeHtml(v.text));
             return v.text;
         }
-        function routineFeedback(ok, answer, extra) {
+        function routineFeedback(ok, answer, extra, silent) {
             routineBubble('info', `<div class="routine-fb ${ok ? 'ok' : 'ko'}">${ok ? '✅' : '❌'} <b>${rpEscapeHtml(answer)}</b> ${speakBtnHtml(answer)}${extra ? `<div class="report-meta">${extra}</div>` : ''}</div>`);
-            if (!ok) conjAudioSpeak(answer, 'nl', 0.9);
+            if (!ok && !silent) conjAudioSpeak(answer, 'nl', 0.9);
         }
 
         // ----- 1. Conjugaison -----
@@ -14897,7 +14897,11 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 const ok = res.status !== 'wrong';
                 conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, ok);
                 if (ok) score++;
-                routineFeedback(ok, q.frq ? q.frq.fullAnswer : q.answer);
+                // Toujours entendre la forme puis son sens : c'est ce qui l'ancre (juste ou fausse).
+                const form = q.frq ? q.frq.fullAnswer : q.answer;
+                routineFeedback(ok, form, q.frq ? rpEscapeHtml(q.frq.fr) : '', true);
+                if (routineActive(r)) await conjAudioSpeak(form, 'nl', 0.9);
+                if (routineActive(r) && q.frq) await conjAudioSpeak(q.frq.fr, 'fr', 1.05);
             }
             save();
             r.ctx = null;
