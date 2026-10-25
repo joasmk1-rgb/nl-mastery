@@ -1859,8 +1859,6 @@ if (firebaseAvailable) {
         let batchResults = []; // suivi des 10 derniers mots de la session en cours (id + correct/faux)
         let lastRevisionWarning = 0; // dernier seuil de révision (multiple de 10) déjà signalé
         let currentItem = null;
-        let currentSessionSourceKey = null;   // clé de la source en cours (catégorie/liste + sens), pour le système de paquets de 10
-        let currentSessionOrderedItems = null; // ordre stable des mots de cette source, pour le découpage en paquets
         let revisionQueue = []; // file d'attente : chaque mot n'y figure qu'une fois
 
         function seeWord(id) {
@@ -1958,13 +1956,6 @@ if (firebaseAvailable) {
         function getUnlockedItems(sourceKey, orderedItems) {
             const unlocked = maybeUnlockBatches(sourceKey, orderedItems);
             return orderedItems.slice(0, unlocked * 10);
-        }
-
-        // Recalcule le pool de la session en cours (nouveau paquet débloqué, mot devenu vraiment maîtrisé, etc.)
-        function refreshSessionPool() {
-            if (!currentSessionSourceKey) return;
-            const unlocked = getUnlockedItems(currentSessionSourceKey, currentSessionOrderedItems);
-            sessionDb = activePool(unlocked);
         }
 
         // Paliers de fréquence (échelle Zipf, 0-8). freq=0 = donnée absente (fichier sans colonne fréquence).
@@ -5882,7 +5873,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <p class="section-subtitle" style="margin-top:0;">${items.length} mots · ${mastered} maîtrisés (${pct}%)${toReview ? ' · ' + toReview + ' à revoir' : ''}${usedWordsCount(items) ? ' · 🗣️ ' + usedWordsCount(items) + " dits à l'oral" : ''}</p>
                 <div class="cat-bar" style="margin-bottom:var(--space-3);"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
                 <div class="hub-grid single">
-                    <div class="hub-card accent" onclick="vocabTrain()"><span class="hub-card-icon">✍️</span><div class="hub-card-title">S'entraîner</div><div class="hub-card-desc">Traduire les mots, du plus courant au plus rare, par paquets.</div></div>
+                    <div class="hub-card accent" onclick="vocabTrain()"><span class="hub-card-icon">✍️</span><div class="hub-card-title">S'entraîner</div><div class="hub-card-desc">Avec ton tuteur, à l'oral ou à l'écrit : du plus courant au plus rare, par paquets.</div></div>
                     <div class="hub-card" onclick="vocabListen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Les mots lus en néerlandais et en français, mains libres.</div></div>
                     ${kind === 'file' ? `<div class="hub-card" onclick="showWordList('vocab', '${key}')"><span class="hub-card-icon">📋</span><div class="hub-card-title">Voir la liste</div><div class="hub-card-desc">Chercher, filtrer, sélectionner des mots pour en faire une liste.</div></div>` : ''}
                 </div>`;
@@ -5904,12 +5895,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             wordAudioRenderSetup();
             box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
-        function studyBack() {
-            const f = studyReturnFn;
-            studyReturnFn = null;
-            if (f) f(); else showHome();
-        }
-
         // LISTE DES MOTS (vue + sélection + listes perso)
         // Accessible depuis Vocabulaire (fiche d'une catégorie). Ancien commentaire : "Apprendre →
         // Vocabulaire") : on retient d'où on vient pour que "← Retour" ramène au bon endroit,
@@ -6205,8 +6190,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
         function showHome() {
             stopTimeAttack();
-            currentSessionSourceKey = null;
-            currentSessionOrderedItems = null;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('home-view').classList.add('active');
             setActiveNav('nav-home');
@@ -6224,16 +6207,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     : "Fichier " + category + " vide ou manquant.");
                 return;
             }
-            currentSessionSourceKey = sourceKey;
-            currentSessionOrderedItems = orderedItems;
-            document.getElementById('session-title').innerText = categoryLabel(category);
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('study-view').classList.add('active');
-            batchResults = [];
-            document.getElementById('batch-recap').innerHTML = '';
-            bumpMode('classique');
-            save();
-            nextQ();
+            routineTrainStart(categoryLabel(category), sourceKey, orderedItems);
         }
 
         function startCustomList(name) {
@@ -6243,16 +6217,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const unlocked = getUnlockedItems(sourceKey, orderedItems);
             sessionDb = activePool(unlocked);
             if (sessionDb.length === 0) { alert("Cette liste est vide, ou tous ses mots débloqués sont déjà maîtrisés (dans ce sens) ! 🎉"); return; }
-            currentSessionSourceKey = sourceKey;
-            currentSessionOrderedItems = orderedItems;
-            document.getElementById('session-title').innerText = '📋 ' + name;
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('study-view').classList.add('active');
-            batchResults = [];
-            document.getElementById('batch-recap').innerHTML = '';
-            bumpMode('classique');
-            save();
-            nextQ();
+            routineTrainStart('📋 ' + name, sourceKey, orderedItems);
         }
 
         // Les anciennes entrées ouvrent désormais l'entraînement avec le tuteur.
@@ -6281,16 +6246,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (btn) btn.innerText = `🔤 Révision déterminants (${n} mot${n > 1 ? 's' : ''})`;
         }
 
-        function iDontKnow() {
-            const fb = document.getElementById('feedback');
-            const { answerField } = questionFor(currentItem);
-            fb.innerText = "🤷 RÉPONSE : " + currentItem[answerField];
-            fb.style.color = "var(--wrong)";
-            registerResult(currentItem.id, false);
-            save();
-            setTimeout(nextQ, 1600);
-        }
-
         function showBatchRecap() {
             const wrongOnes = batchResults.filter(r => !r.isCorrect);
             const goodCount = batchResults.length - wrongOnes.length;
@@ -6313,25 +6268,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 pick = list[Math.floor(Math.random() * list.length)];
             } while (pick.id === (excludeItem && excludeItem.id));
             return pick;
-        }
-
-        function nextQ() {
-            refreshSessionPool();
-            if (sessionDb.length === 0) {
-                alert("Bravo, tu as fini tous les mots débloqués disponibles ici pour l'instant ! 🎉");
-                showHome();
-                return;
-            }
-            currentItem = pickRandomExcluding(sessionDb, currentItem);
-            seeWord(currentItem.id);
-            save();
-            const { question } = questionFor(currentItem);
-            document.getElementById('q-text').innerText = question;
-            document.getElementById('ans-input').placeholder = state.settings.direction === 'fr2nl'
-                ? 'Traduire en Néerlandais...' : 'Traduire en Français...';
-            document.getElementById('ans-input').value = "";
-            document.getElementById('feedback').innerText = "";
-            document.getElementById('ans-input').focus();
         }
 
         function markMastered(item) {
@@ -6425,60 +6361,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Retire un article de/het en tête de chaîne, pour isoler les fautes de genre grammatical
         function stripArticle(str) {
             return str.replace(/^(de|het)\s+/i, '').trim();
-        }
-
-        function checkAns() {
-            const raw = document.getElementById('ans-input').value;
-            const { answerField } = questionFor(currentItem);
-            const correctAnswer = currentItem[answerField];
-            const accepted = getAcceptedAnswers(correctAnswer);
-            const multi = accepted.length > 1;
-            let result = evaluateAnswer(raw, correctAnswer);
-            let articleMistake = false;
-
-            // Si c'est un nom néerlandais et que la seule faute est l'article de/het (ou son absence),
-            // on compte quand même bon pour la maîtrise, mais on note la faute pour la révision dédiée.
-            if (result.status === 'wrong' && answerField === 'nl' && currentItem.file === 'NOMS_NL') {
-                const strippedResult = evaluateAnswer(stripArticle(raw), stripArticle(correctAnswer));
-                if (strippedResult.status !== 'wrong') {
-                    result = strippedResult;
-                    articleMistake = true;
-                    const key = dirKey(currentItem.id);
-                    state.stats.articleMistakes[key] = (state.stats.articleMistakes[key] || 0) + 1;
-                }
-            }
-
-            const fb = document.getElementById('feedback');
-            const goToNext = nextQ;
-            // Écoute de la bonne réponse : seulement quand elle est en néerlandais (l'autre sens de
-            // traduction — nl2fr — donnerait la réponse en français, que la voix NL prononcerait mal).
-            const speakSuffix = answerField === 'nl' ? ' ' + speakBtnHtml(accepted[0]) + translateBtnHtml(accepted[0]) : '';
-
-            if (result.status === 'correct') {
-                fb.innerHTML = "✅ BRAVO ! → " + correctAnswer + speakSuffix + (multi ? "  (plusieurs réponses acceptées)" : "")
-                    + (articleMistake ? "  (⚠️ attention à de/het — envoyé en révision déterminants)" : "");
-                fb.style.color = "var(--success)";
-                state.xp += 10;
-                markMastered(currentItem);
-                registerResult(currentItem.id, true);
-                save();
-                setTimeout(goToNext, 1400);
-            } else if (result.status === 'close') {
-                const note = result.particleOrder ? " (⚠️ attention à l'ordre/la place de la particule)" : " (petite faute)";
-                fb.innerHTML = "🟡 PRESQUE !" + note + " → " + correctAnswer + speakSuffix;
-                fb.style.color = "var(--gold)";
-                state.xp += 5;
-                markMastered(currentItem);
-                registerResult(currentItem.id, true);
-                save();
-                setTimeout(goToNext, 1600);
-            } else {
-                fb.innerHTML = "❌ RÉPONSE" + (multi ? "S POSSIBLES : " : " : ") + correctAnswer + speakSuffix;
-                fb.style.color = "var(--wrong)";
-                registerResult(currentItem.id, false);
-                save();
-                setTimeout(goToNext, 1600); // toujours avancer, jamais de retry immédiat sur place
-            }
         }
 
         // MEMORY GAME
@@ -7306,7 +7188,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         // Touche Enter
-        document.getElementById('ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAns(); });
         document.getElementById('ta-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkTAAns(); });
         document.getElementById('test-ans-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') testCheckAns(); });
         document.getElementById('anagram-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') submitAnagramTyped(); });
@@ -9507,16 +9388,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const unlocked = getUnlockedItems(sourceKey, orderedItems);
             sessionDb = activePool(unlocked);
             if (!sessionDb.length) { alert('Tu maîtrises déjà tous les mots débloqués de ce kit (dans ce sens) ! 🎉'); return; }
-            currentSessionSourceKey = sourceKey;
-            currentSessionOrderedItems = orderedItems;
-            document.getElementById('session-title').innerText = '📚 ' + rpPrepCurrent.label;
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('study-view').classList.add('active');
-            batchResults = [];
-            document.getElementById('batch-recap').innerHTML = '';
-            bumpMode('classique');
-            save();
-            nextQ();
+            routineTrainStart('📚 ' + rpPrepCurrent.label, sourceKey, orderedItems);
         }
 
         function rpPrepConj() {
@@ -14391,7 +14263,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 </div>
                 <div class="talk-bar">
                     <button type="button" class="talk-side" onclick="routineAskTyped()" title="Poser une question au tuteur">❓</button>
-                    <button type="button" class="talk-mic" id="routine-mic" onclick="routineMic('nl')">🎤</button>
+                    <button type="button" class="talk-mic" id="routine-mic" onclick="routineMic(routine && routine.answerLang || 'nl', true)">🎤</button>
                     <button type="button" class="talk-side" id="routine-mic-fr" onclick="routineMic('fr')" title="Parler en français (question au tuteur)">🇫🇷</button>
                 </div>
                 <div class="talk-mic-hint">🎤 pour répondre (ou écris) · 🇫🇷 ou ❓ pour poser une question à ${p.name}</div>`;
@@ -14420,25 +14292,30 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On reprend les mots que tu as ratés. Je te dis le mot en français, tu me le dis en néerlandais. Ceux que tu retrouves sortent de la liste ; les autres reviendront une autre fois, pas tout de suite.",
                 whyPassive: "On écoute les mots que tu as ratés : le français, un instant pour chercher, puis le néerlandais."
             },
+            train: {
+                icon: '✍️', label: "S'entraîner", run: r => routineDrillTrain(r),
+                why: "On travaille ces mots, du plus courant au plus rare, par paquets de dix : un paquet s'ouvre quand le précédent est acquis. Je te dis le mot, tu me le traduis, à l'oral ou à l'écrit. Un mot raté ne revient pas tout de suite : il va dans tes mots à revoir.",
+                whyPassive: "On écoute ces mots, du plus courant au plus rare : le mot, un instant pour chercher, puis sa traduction."
+            },
             dehet: {
                 icon: '⚖️', label: 'De ou het ?', run: r => routineDrillDeHet(r),
                 why: "De ou het ? Je te dis un nom : réponds avec son article, par exemple « de tafel », ou touche DE ou HET. Deux bonnes réponses, et le nom est acquis.",
                 whyPassive: "On écoute des noms avec leur article : le nom seul, un instant pour chercher, puis avec de ou het."
             }
         };
-        function routineDrill(k, back) {
+        function routineDrill(k, back, train) {
             const d = ROUTINE_DRILLS[k];
             if (!d) return;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('routine-view').classList.add('active');
             setActiveNav('nav-vocab');
             if (routine) routineQuitRun();
-            const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab };
+            const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab, train: train || null };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
             const p = routineTutor();
-            routineBackBtn('← Vocabulaire', r.back);
+            routineBackBtn(back ? '← Retour' : '← Vocabulaire', r.back);
             document.getElementById('routine-content').innerHTML = `
-                <div class="routine-head"><div><b>${d.icon} ${d.label}</b><small>avec ${p.emoji} ${p.name}</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
+                <div class="routine-head"><div><b>${d.icon} ${rpEscapeHtml(train ? train.label : d.label)}</b><small>avec ${p.emoji} ${p.name}${train ? ' · ' + (state.settings.direction === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷') : ''}</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
                 ${routineChatHtml(p)}
                 ${d.credit ? `<p class="rp-real-hint" style="text-align:center;">${d.credit}</p>` : ''}`;
             routineDrillLoop(r, true);
@@ -14455,10 +14332,92 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!routineActive(r) || res === false) return;
             // En écoute seule, ça tourne tout seul (comme en cours) tant qu'il y a de quoi faire.
             if (routinePassive() && res !== 'empty') { routineDrillLoop(r, false); return; }
-            const v = await routineWait(r, (res === 'empty' ? [] : [['again', '🔁 Encore une série']]).concat([['back', '← Vocabulaire', 'btn-gray']]));
+            const v = await routineWait(r, (res === 'empty' ? [] : [['again', '🔁 Encore une série']]).concat([['back', r.train ? '← Retour' : '← Vocabulaire', 'btn-gray']]));
             if (!routineActive(r) || v === 'quit') return;
             if (v === 'back') { routineQuitRun(); r.back(); return; }
             routineDrillLoop(r, false);
+        }
+
+        // S'entraîner sur une catégorie, un thème, une liste ou un kit (ancien écran à taper) : même
+        // système de paquets de 10 (getUnlockedItems / activePool), dans le sens de traduction choisi ;
+        // pas deux fois le même mot dans une série (un raté part dans les mots à revoir).
+        function routineTrainStart(label, sourceKey, orderedItems) {
+            const back = studyReturnFn || showVocab;
+            studyReturnFn = null;
+            bumpMode('classique');
+            save();
+            routineDrill('train', back, { label, sourceKey, orderedItems });
+        }
+        function routineReport() {
+            if (routine && routine.item) { currentItem = routine.item; reportCurrentItem(); }
+        }
+        async function routineDrillTrain(r) {
+            const t = r.train, fr2nl = state.settings.direction === 'fr2nl';
+            const asked = new Set();
+            let score = 0, n = 0;
+            for (let i = 0; i < 10; i++) {
+                if (!routineActive(r)) return false;
+                const pool = activePool(getUnlockedItems(t.sourceKey, t.orderedItems)).filter(x => !asked.has(x.id));
+                if (!pool.length) break;
+                const item = pool[Math.floor(Math.random() * Math.min(pool.length, 10))];
+                asked.add(item.id);
+                seeWord(item.id);
+                r.item = item;
+                const q = fr2nl ? item.fr : item.nl, answer = fr2nl ? item.nl : item.fr;
+                const qSpoken = String(q).split('/')[0].replace(/\([^)]*\)/g, '').trim();
+                const say = () => conjAudioSpeak(qSpoken, fr2nl ? 'fr' : 'nl', fr2nl ? 1.05 : 0.9);
+                r.ctx = `traduire « ${q} » (réponse : ${answer})`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${i + 1}/10 <button type="button" class="report-link" onclick="routineReport()">⚠️ Signaler</button></small><div>${rpEscapeHtml(q)}</div></div>`, say, say, { lang: fr2nl ? 'nl' : 'fr' });
+                if (given === null) return false;
+                if (given === '__stop') break;
+                n++;
+                const sayAnswer = async () => {
+                    if (!routineActive(r)) return;
+                    if (fr2nl) await conjAudioSpeak(item.nl, 'nl', 0.9);
+                    else await conjAudioSpeak(String(item.fr).split('/')[0].trim(), 'fr', 1.05);
+                };
+                if (given === '__passive') { routineFeedback(null, answer, '', true); await sayAnswer(); continue; }
+                let res = given ? evaluateAnswer(given, answer) : { status: 'wrong' };
+                let articleNote = '';
+                // Bon nom, mauvais article (ou sans article) : compté bon, l'article part dans de / het.
+                if (given && res.status === 'wrong' && fr2nl && nounHasArticle(item)) {
+                    const s = evaluateAnswer(stripArticle(given), stripArticle(item.nl));
+                    if (s.status !== 'wrong') {
+                        res = s;
+                        const said = normalize(given).split(' ')[0];
+                        if (said === 'de' || said === 'het') {
+                            const k = dirKey(item.id);
+                            state.stats.articleMistakes[k] = (state.stats.articleMistakes[k] || 0) + 1;
+                            articleNote = 'Attention à l\'article : il part dans « De ou het ? ».';
+                        }
+                    }
+                }
+                const ok = res.status !== 'wrong';
+                const key = dirKey(item.id);
+                state.stats.position = (state.stats.position || 0) + 1;
+                if (ok) {
+                    score++;
+                    state.xp += res.status === 'correct' ? 10 : 5;
+                    markMastered(item);
+                    state.stats.trueMastered[key] = true;
+                    state.stats.wrongCount[key] = 0;
+                } else {
+                    state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1;
+                    state.stats.trueMastered[key] = false;
+                }
+                save();
+                routineFeedback(ok, answer, articleNote || (res.status === 'close' ? (res.particleOrder ? 'Presque : attention à la place de la particule.' : 'Presque, petite faute.') : (ok ? '' : 'Il part dans tes mots à revoir.')), true);
+                await sayAnswer();
+            }
+            r.item = null;
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (!n && !routinePassive()) {
+                await routineSay(r, t.orderedItems.length ? "Bravo, tu maîtrises tous les mots débloqués ici pour l'instant !" : "Il n'y a pas de mots ici.");
+                return 'empty';
+            }
+            if (!routinePassive() && n) await routineSay(r, `${score} sur ${n}.`);
+            return n ? true : 'empty';
         }
 
         // Mots à revoir : ratés dans un sens ou dans l'autre ; on les demande du français vers le
@@ -14694,19 +14653,20 @@ Réponds UNIQUEMENT en JSON : {"sens": ["passage 1", "passage 2"]} (même ordre,
             routineAsk(v);
         }
         function routineStopRec() { if (routine && routine.rec) { const st = routine.rec; routine.rec = null; st.finish(false); } }
-        function routineMic(lang) {
+        // lang 'fr' = question au tuteur, sauf si answer (réponse attendue en français, sens NL → FR).
+        function routineMic(lang, answer) {
             const r = routine;
             if (!r) return;
             if (r.rec) { r.rec.finish(true); return; }
             if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta réponse."); return; }
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            const btn = document.getElementById(lang === 'fr' ? 'routine-mic-fr' : 'routine-mic');
+            const btn = document.getElementById(lang === 'fr' && !answer ? 'routine-mic-fr' : 'routine-mic');
             r.rec = longListen({
                 lang, input: document.getElementById('routine-input'), silence: Math.min(profSettings().silence || 3000, 3000) || 3000,
                 isActive: () => routineActive(r),
                 onState: () => { if (btn) btn.classList.add('listening'); },
                 onEnd: st => { if (r.rec === st) r.rec = null; if (btn) btn.classList.remove('listening'); },
-                onSubmit: text => { if (lang === 'fr') routineAsk(text); else if (r.waiter) routinePick({ text }); }
+                onSubmit: text => { if (lang === 'fr' && !answer) routineAsk(text); else if (r.waiter) routinePick({ text }); }
             });
         }
         // Question au tuteur (en français ou en néerlandais), à tout moment.
@@ -14749,7 +14709,8 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 if (stop === '__stop') return '__stop';
                 return '__passive';
             }
-            if (routineActive(r) && window.SpeechRecognition && !r.rec) routineMic('nl');
+            r.answerLang = (opt && opt.lang) || 'nl';
+            if (routineActive(r) && window.SpeechRecognition && !r.rec) routineMic(r.answerLang, true);
             const extra = (opt && opt.btns) || [];
             const v = await routineWait(r, extra.concat([['__idk', '🤷 Je ne sais pas', 'btn-gray'], ['__stop', r.drill ? '⏹ Arrêter' : '⏹ Arrêter cette étape', 'btn-gray']]));
             routineStopRec();
