@@ -10836,6 +10836,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 <div class="prof-top">
                     <div class="prof-phases" id="prof-phases"></div>
                     <div class="prof-top-actions">
+                        ${courseRulesBtnHtml()}
                         <button type="button" class="rp-coach-btn" onclick="profNextPhase()">⏭ Phase suivante</button>
                         <button type="button" class="rp-coach-btn" onclick="profEndEarly()">⏹ Terminer</button>
                     </div>
@@ -11226,7 +11227,7 @@ Règles :
 - 1 à 3 phrases en néerlandais, adaptées au niveau. Pas d'emojis, pas de mise en forme.
 - Si l'apprenant parle ou écrit en FRANÇAIS (une question, « comment on dit… ? », « je ne comprends pas », un mot qui lui manque), réponds-lui d'abord en français dans "fr" : réponse claire et courte (2 ou 3 phrases), avec la formulation néerlandaise utile ; puis, dans "nl", relance en néerlandais (par exemple en l'invitant à redire sa phrase avec cette formulation). Sinon "fr" reste vide.
 - Ne redéfinis jamais le niveau de l'apprenant.
-${isLast ? '- C\'est ta DERNIÈRE réplique de cette phase : réagis à ce qu\'il vient de dire et conclus en une phrase, sans poser de nouvelle question.' : ''}
+${courseRulesOn() ? '' : "- Il ne veut PAS de rappel des règles : aucune explication de grammaire, seulement la bonne formulation quand il en a besoin.\n"}${isLast ? '- C\'est ta DERNIÈRE réplique de cette phase : réagis à ce qu\'il vient de dire et conclus en une phrase, sans poser de nouvelle question.' : ''}
 ${hist ? 'Conversation jusqu\'ici :\n' + hist : (prof.phase === 0 ? 'Commence le cours : salue-le et pose ta première question.' : 'Commence la mise en pratique : présente brièvement la situation dans ton rôle et lance l\'échange.')}
 
 Réponds UNIQUEMENT en JSON : {"fr": "", "nl": "ce que tu dis en néerlandais", "nl_fr": "traduction française de nl"}`;
@@ -11272,6 +11273,8 @@ Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase co
 
         async function profSubmit(text, isFr) {
             if (!prof || prof.ended || prof.busy) return;
+            const rulesMsg = courseRulesHeard(text);
+            if (rulesMsg) { profAppend({ who: 'info', html: `<span class="report-meta">${rulesMsg}</span>` }); if (isFr) return; }
             if (prof.phase === 1) return profAnswerExercise(text, isFr);
             if (prof.phase === 3 || prof.awaitNext) return;
             const msg = { who: 'moi', text, isFr };
@@ -11318,8 +11321,10 @@ Réponds UNIQUEMENT en JSON : {"explication_fr": "", "exemples": [{"nl": "", "fr
             prof.target = r;
             prof.exIdx = 0;
             const ex = (r.exemples || []).map(e => `<div class="prof-example">${rpEscapeHtml(e.nl)} ${speakBtnHtml(e.nl)}<br><small>${rpEscapeHtml(e.fr)}</small></div>`).join('');
-            profAppend({ who: 'info', html: `<div class="prof-target-title">📌 ${rpEscapeHtml(prof.notion.content.titre)}</div><div class="prof-fr">${rpEscapeHtml(r.explication_fr || '')}</div>${ex}` });
-            await profSpeak(r.explication_fr, '');
+            // Sans rappel des règles : le titre et les exemples, puis directement les exercices.
+            const explain = courseRulesOn() ? (r.explication_fr || '') : '';
+            profAppend({ who: 'info', html: `<div class="prof-target-title">📌 ${rpEscapeHtml(prof.notion.content.titre)}</div>${explain ? `<div class="prof-fr">${rpEscapeHtml(explain)}</div>` : ''}${ex}` });
+            if (explain) await profSpeak(explain, '');
             for (const e of (r.exemples || [])) { if (!profActive()) return; await conjAudioSpeak(e.nl, 'nl', PROF_RATE[prof.level]); }
             profAskExercise();
         }
@@ -11554,6 +11559,33 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
         // la même conversation. Le contenu est celui des fichiers data/modules_rp (aucun appel
         // Gemini hors jeux de rôle et avis de l'examinateur). Position mémorisée dans
         // state.modRp[id].guide = { e: n° d'étape, b: n° de temps dans l'étape }.
+        // Rappel des règles dans les cours (Joas, 25 octobre 2026 : « il faut pouvoir dire qu'on ne veut
+        // pas de rappel des règles »). Un seul réglage (state.settings.courseRules, oui par défaut) pour
+        // la session guidée (étape « La règle » sautée), les séances B1/B2 (pas d'explication de
+        // grammaire, seulement le modèle) et le cours particulier (point ciblé sans explication : exemples
+        // puis exercices). Bouton 📘 dans les trois écrans, ou simplement le dire (courseRulesHeard).
+        function courseRulesOn() { return !(state.settings && state.settings.courseRules === false); }
+        function courseRulesBtnHtml() {
+            return `<button type="button" class="rp-coach-btn course-rules-btn" onclick="courseRulesToggle()" title="Rappels de grammaire dans les cours">📘 Règles : ${courseRulesOn() ? 'oui' : 'non'}</button>`;
+        }
+        function courseRulesSet(on) {
+            if (!state.settings) state.settings = {};
+            state.settings.courseRules = !!on;
+            save();
+            document.querySelectorAll('.course-rules-btn').forEach(b => { b.outerHTML = courseRulesBtnHtml(); });
+        }
+        function courseRulesToggle() { courseRulesSet(!courseRulesOn()); }
+        // Phrase de l'apprenant qui demande d'arrêter (ou de reprendre) les rappels : renvoie le message
+        // à afficher, ou null.
+        function courseRulesHeard(text) {
+            const t = normalize(String(text || ''));
+            const off = /\b(pas|plus|sans|arrete[rsz]?|stop|marre)\b.{0,30}\b(regles?|rappels?|explications?|grammaire|theorie)\b/.test(t) || /\bgeen (regels|uitleg|grammatica)\b/.test(t);
+            const on = !off && /\b(remet[sz]?|reprend[sz]?|veux|rajoute[sz]?)\b.{0,20}\b(les )?(regles|rappels|explications)\b/.test(t);
+            if (off && courseRulesOn()) { courseRulesSet(false); return "📘 D'accord : plus de rappel des règles dans les cours. Touche 📘 pour les remettre."; }
+            if (on && !courseRulesOn()) { courseRulesSet(true); return '📘 Les rappels des règles sont remis.'; }
+            return null;
+        }
+
         const GUIDE_BEATS = ['scene', 'portrait', 'vocab', 'ecoute', 'jouer', 'regle', 'exercices', 'jeu'];
         const GUIDE_BEAT_LABELS = { scene: 'Mise en situation', portrait: 'Toi', vocab: 'Les mots', ecoute: 'Écoute', jouer: 'À toi de jouer', regle: 'La règle', exercices: 'Exercices', jeu: 'Jeu de rôle' };
         const GUIDE_PORTRAIT_Q = {
@@ -11618,6 +11650,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                         ${speedBtnHtml()}
                         <button type="button" class="rp-coach-btn" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
                         <button type="button" class="rp-coach-btn" onclick="guideSkip()">⏭ Passer</button>
+                        ${courseRulesBtnHtml()}
                         <button type="button" class="rp-coach-btn" onclick="guideQuit(); showModuleRp('${id}')">📋 Sommaire</button>
                     </div>
                 </div>
@@ -11779,6 +11812,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                 if (pos.b === 0 && skipE.includes(m.etapes[pos.e].id)) { guideSetPos(pos.e + 1, 0); continue; }
                 const beat = GUIDE_BEATS[pos.b];
                 if (!beat) { guideSetPos(pos.e + 1, 0); continue; }
+                if (beat === 'regle' && !courseRulesOn()) { guideSetPos(pos.e, pos.b + 1); continue; }
                 const e = m.etapes[pos.e];
                 const res = await GUIDE_FN[beat](e, token, pos);
                 if (!guideAlive(token)) return;
@@ -12130,6 +12164,8 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
 
         function guideConvSubmit(text, isFr) {
             if (!guide || !guide.conv || guide.conv.busy || !guide.resolver) return;
+            const rulesMsg = courseRulesHeard(text);
+            if (rulesMsg) { guideBubble('info', `<span class="report-meta">${rulesMsg}</span>`); if (isFr) return; }
             guideResolve({ text, isFr });
         }
 
@@ -12434,6 +12470,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                     <span class="talk-avatar small">${p.emoji}</span>
                     <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
                     ${speedBtnHtml()}
+                    ${talk.lesson ? courseRulesBtnHtml() : ''}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
                 </div>
@@ -12605,6 +12642,10 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
 
         function talkSubmit(text, isFr) {
             if (!talk || talk.ended || talk.busy) return;
+            if (talk.lesson) {
+                const rulesMsg = courseRulesHeard(text);
+                if (rulesMsg) { talkAppend({ who: 'info', html: `<span class="report-meta">${rulesMsg}</span>` }); if (isFr) return; }
+            }
             const msg = { who: 'me', text, isFr };
             const div = talkAppend(msg);
             talk.history.push({ who: 'me', text, isFr });
@@ -13144,7 +13185,8 @@ Déroulé de l'enseignement : UNE tâche à la fois, dans l'ordre (passe celles 
 3) laisse-le essayer. S'il réussit SEUL selon le critère (petites fautes acceptées : la correction est faite à part), mets "validee": l'id de la tâche, félicite-le en une phrase et enchaîne sur la tâche suivante dans le même message. Sinon, aide-le (indice, début de phrase, modèle) et redonne-lui une chance ; après 3 essais sans réussite, mets "ratee": l'id et passe à la suite.
 Une phrase qu'il répète juste après ton aide ne suffit pas : il doit la réutiliser dans une nouvelle réplique à lui.
 S'il parle FRANÇAIS ou dit qu'il ne sait pas : aide-le dans "fr_help" et invite-le à réessayer en néerlandais.
-"tache" = l'id de la tâche en cours.
+${courseRulesOn() ? '' : `IL NE VEUT PAS DE RAPPEL DES RÈGLES : jamais d'explication de grammaire ; quand tu enseignes une tâche ou l'aides, donne seulement, dans "fr_help", la ou les tournures néerlandaises qui conviennent (avec leur sens), sans théorie.
+`}"tache" = l'id de la tâche en cours.
 Tâches de la séance :
 ${tasks}`;
         }
