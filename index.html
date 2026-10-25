@@ -75,13 +75,15 @@
          la même fiche partout : s'entraîner, écouter, voir la liste (+ conjugaison pour les verbes). -->
     <div id="vocab-view" class="view">
         <h2>📖 Vocabulaire</h2>
-        <p class="section-subtitle" style="margin-top:0;">Choisis ce que tu veux travailler.</p>
+        <p class="section-subtitle" style="margin-top:0;">D'abord comment travailler, puis sur quels mots.</p>
+        <!-- Les modes en haut, les catégories en dessous (Joas, octobre 2026). -->
+        <div class="section-title" style="margin-top:0;">🛠️ Comment travailler</div>
+        <div id="vocab-review" class="hub-grid"></div>
+        <div class="section-title">📚 Sur quels mots</div>
         <div id="total-words-count" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;"></div>
         <div class="grid" id="main-categories-grid" style="margin-top:0;"></div>
         <div id="theme-section" style="width:100%;"></div>
         <div id="customlist-section" style="width:100%;"></div>
-        <div class="section-title">🔁 Revoir et tester</div>
-        <div id="vocab-review" class="hub-grid"></div>
         <div class="grid" style="margin-top:10px;">
             <div class="card-menu" style="grid-column: span 2; color:#8b5cf6;" id="direction-btn" onclick="toggleDirection()"></div>
         </div>

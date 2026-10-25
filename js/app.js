@@ -2836,13 +2836,18 @@ if (firebaseAvailable) {
                 const wordCount = getReviewItems().length;
                 const articleCount = getArticleReviewItems().length;
                 voc.innerHTML = `
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="showConjugaison()">
+                        <span class="hub-card-icon">🔤</span>
+                        <div class="hub-card-title">Conjugaison</div>
+                        <div class="hub-card-desc">Les tables des verbes (les 25, 50, 100 plus courants ou tous) et l'entraînement, à l'écrit, à l'oral ou en écoute.</div>
+                    </div>
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startRevision()">
                         <span class="hub-card-icon">🔁</span>
                         <div class="hub-card-title">Mots à revoir</div>
                         <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''}.</div>
                     </div>
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startArticleRevision()">
-                        <span class="hub-card-icon">🔤</span>
+                        <span class="hub-card-icon">⚖️</span>
                         <div class="hub-card-title">De ou het ?</div>
                         <div class="hub-card-desc">${articleCount} mot${articleCount > 1 ? 's' : ''} à revoir.</div>
                     </div>
@@ -6083,7 +6088,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="hub-grid single">
                     <div class="hub-card accent" onclick="vocabTrain()"><span class="hub-card-icon">✍️</span><div class="hub-card-title">S'entraîner</div><div class="hub-card-desc">Traduire les mots, du plus courant au plus rare, par paquets.</div></div>
                     <div class="hub-card" onclick="vocabListen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Les mots lus en néerlandais et en français, mains libres.</div></div>
-                    ${key === 'VERBES_NL' ? `<div class="hub-card" onclick="showConjugaison()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison</div><div class="hub-card-desc">Fiches des verbes et entraînement, à l'écrit, à l'oral ou en écoute.</div></div>` : ''}
                     ${kind === 'file' ? `<div class="hub-card" onclick="showWordList('vocab', '${key}')"><span class="hub-card-icon">📋</span><div class="hub-card-title">Voir la liste</div><div class="hub-card-desc">Chercher, filtrer, sélectionner des mots pour en faire une liste.</div></div>` : ''}
                 </div>`;
         }
