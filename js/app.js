@@ -14669,11 +14669,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
         // Le tuteur (Svetlana ou John) explique avant chaque étape pourquoi et comment, en français,
         // et répond aux questions (❓, appel Gemini) à tout moment. Mêmes statistiques que les
         // entraînements (conjStats, mots, chunkStats). État du jour : state.routine.
-        const ROUTINE = { conj: 8, conjVerbs: 20, newWords: 6, maxWords: 25, blocs: 8 };
+        const ROUTINE = { conj: 8, conjVerbs: 20, newWords: 6, maxWords: 25, blocs: 6, petitsMots: 4 };
         const ROUTINE_STEPS = {
             conj: { icon: '🔤', label: 'Conjugaison', why: "On s'échauffe avec la conjugaison des 20 verbes les plus courants : à eux seuls, ils font une grande partie des verbes d'une conversation. Chaque jour, je te demande 8 formes, en tournant sur les temps, et celles que tu as ratées reviennent en priorité. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit." },
             mots: { icon: '📖', label: 'Nouveaux mots', why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, puis je te les redemande." },
-            blocs: { icon: '🧩', label: 'Blocs de mots', why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Je te donne la phrase en français et la phrase néerlandaise avec un trou." },
+            blocs: { icon: '🧩', label: 'Blocs et petits mots', why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. À chaque fois, je te donne la phrase en français et la phrase néerlandaise avec un trou." },
             pratique: { icon: '💬', label: 'Pratique', why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
         };
         let routine = null; // séance en cours : { step, waiter, rec, token }
@@ -14906,13 +14906,36 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         }
 
         // ----- 2. Nouveaux mots -----
+        // Niveau des mots proposés : d'abord l'ajustement de la routine elle-même (s'il est plus
+        // récent que la dernière évaluation), sinon l'évaluation « On fait connaissance », sinon le
+        // niveau réglé par l'apprenant (Discuter / cours particulier), sinon le niveau calculé.
+        // Puis il s'ajuste tout seul : presque tout connu → un cran au-dessus ; presque rien → en dessous.
+        const ROUTINE_LEVELS = ['A1', 'A2', 'B1', 'B2'];
+        function routineWordLevel() {
+            const adj = state.routineLvl, pt = state.coursPoint;
+            if (adj && ROUTINE_LEVELS.includes(adj.lvl) && (!pt || !pt.at || adj.at > pt.at)) return adj.lvl;
+            if (pt && ROUTINE_LEVELS.includes(pt.niveau)) return pt.niveau;
+            const declared = state.settings && state.settings.talk && state.settings.talk.level;
+            if (ROUTINE_LEVELS.includes(declared)) return declared;
+            return ROUTINE_LEVELS.includes(liveLevel()) ? liveLevel() : 'A1';
+        }
+        function routineAdjustLevel(asked, known) {
+            if (asked < 8) return null;
+            const i = ROUTINE_LEVELS.indexOf(routineWordLevel()), rate = known / asked;
+            const ni = rate >= 0.8 ? Math.min(ROUTINE_LEVELS.length - 1, i + 1) : rate <= 0.3 ? Math.max(0, i - 1) : i;
+            if (ni === i) return null;
+            state.routineLvl = { lvl: ROUTINE_LEVELS[ni], at: Date.now() };
+            save();
+            return ni > i ? 'up' : 'down';
+        }
+
         function routineWordPool() {
             const rs = routineState();
             const order = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
             // Mots de son niveau d'abord, puis du niveau en dessous, puis au-dessus ; dans chaque
             // niveau, du plus courant au plus rare. Mots-outils (de, van, en…) et mots très courts
             // exclus : les demander n'apprend rien.
-            const lvl = order.indexOf(liveLevel());
+            const lvl = order.indexOf(routineWordLevel());
             // Sans niveau CECR dans les données, on l'estime par la fréquence (Zipf).
             const est = i => i.niveauCECR || (i.freq >= 5 ? 'A1' : i.freq >= 4.3 ? 'A2' : i.freq >= 3.6 ? 'B1' : 'B2');
             const rank = i => { const d = order.indexOf(est(i)) - lvl; return d === 0 ? 0 : d === -1 ? 1 : d === 1 ? 2 : 3 + Math.abs(d); };
@@ -14932,7 +14955,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 if (!routineActive(r) || fresh.length + rs.newWords.length >= ROUTINE.newWords || asked >= ROUTINE.maxWords) break;
                 asked++;
                 r.ctx = `traduire « ${item.fr} »`;
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${asked} · nouveaux mots trouvés : ${rs.newWords.length + fresh.length}/${ROUTINE.newWords}</small><div>${rpEscapeHtml(item.fr)}</div></div>`, String(item.fr).split('/')[0]);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${asked} · niveau ${routineWordLevel()} · nouveaux mots trouvés : ${rs.newWords.length + fresh.length}/${ROUTINE.newWords}</small><div>${rpEscapeHtml(item.fr)}</div></div>`, String(item.fr).split('/')[0]);
                 if (given === null) return false;
                 if (given === '__stop') break;
                 const ok = !!given && evaluateAnswer(given, item.nl).status !== 'wrong';
@@ -14954,6 +14977,12 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             rs.newWords = rs.newWords.concat(fresh.map(i => i.id));
             save();
             r.ctx = null;
+            if (!routineActive(r)) return false;
+            const lvlBefore = routineWordLevel();
+            const moved = routineAdjustLevel(asked, known);
+            if (moved) await routineSay(r, moved === 'up'
+                ? `Tu connaissais presque tous les mots de niveau ${lvlBefore} : la prochaine fois, je te proposerai des mots de niveau ${routineWordLevel()}.`
+                : `Ces mots de niveau ${lvlBefore} étaient encore nouveaux pour toi : la prochaine fois, je te proposerai des mots de niveau ${routineWordLevel()}.`);
             if (!routineActive(r)) return false;
             const words = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
             if (!words.length) { await routineSay(r, known ? `Tu connaissais les ${known} mots proposés : bravo, ils sont validés.` : "Pas de nouveau mot aujourd'hui."); return true; }
@@ -15013,7 +15042,64 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             save();
             r.ctx = null;
             if (routineActive(r)) await routineSay(r, `${score} sur ${qs.length}. Les blocs ratés reviendront.`);
+            if (!routineActive(r)) return false;
+            // Petits mots (prépositions, pronoms, conjonctions) : dans une vraie phrase, jamais seuls.
+            const fq = routineFunctionQuestions(ROUTINE.petitsMots);
+            if (!fq.length) return true;
+            await routineSay(r, 'Et maintenant, les petits mots.');
+            let fs = 0;
+            for (let i = 0; i < fq.length && routineActive(r); i++) {
+                const q = fq[i];
+                r.ctx = `le petit mot « ${q.item.nl} » dans une phrase`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.before)}<span class="chunk-gap">___</span>${rpEscapeHtml(q.after)}</div></div>`, null);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                const ok = !!given && normalize(given).replace(/[^a-z']/g, '') === normalize(q.answer).replace(/[^a-z']/g, '');
+                if (ok) fs++;
+                const key = q.item.id + '::fr2nl';
+                state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+                if (ok) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (!state.mastered.includes(key)) state.mastered.push(key); }
+                else { state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1; state.stats.trueMastered[key] = false; }
+                routineFeedback(ok, q.answer, rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.answer) + '</b>' + rpEscapeHtml(q.after) + ' — ' + rpEscapeHtml(q.item.fr));
+            }
+            save();
+            r.ctx = null;
+            if (routineActive(r)) await routineSay(r, `${fs} sur ${fq.length} pour les petits mots.`);
             return true;
+        }
+
+        // Petits mots à travailler : mots-outils pas encore maîtrisés (les ratés d'abord, puis les
+        // plus courants), chacun dans une phrase d'exemple du corpus où il apparaît, mis en trou.
+        let routineFnIndex = null;
+        function routineFunctionQuestions(n) {
+            if (!chunksData) return [];
+            if (!routineFnIndex) {
+                routineFnIndex = new Map();
+                Object.values(chunksData).forEach(list => (list || []).forEach(k => {
+                    if (!k || !k.ex || !k.fr || k.ex.length > 90) return;
+                    new Set(String(k.ex).toLowerCase().match(/[a-zà-ÿ']+/g) || []).forEach(t => {
+                        if (!routineFnIndex.has(t)) routineFnIndex.set(t, []);
+                        routineFnIndex.get(t).push(k);
+                    });
+                }));
+            }
+            const st = state.stats;
+            const cands = fullDb.filter(i => i.file === 'MOTS_OUTILS_NL' && i.nl && !st.trueMastered[i.id + '::fr2nl'])
+                .sort((a, b) => ((st.wrongCount[b.id + '::fr2nl'] || 0) - (st.wrongCount[a.id + '::fr2nl'] || 0)) || ((b.freq || 0) - (a.freq || 0)));
+            const out = [];
+            for (const item of cands) {
+                if (out.length >= n) break;
+                const w = String(item.nl).split('/')[0].replace(/\([^)]*\)/g, '').trim().toLowerCase();
+                if (!w || w.includes(' ') || ['de', 'het', 'een', "'t", "'n"].includes(w)) continue; // articles : entraînement de/het à part
+                const list = routineFnIndex.get(w);
+                if (!list || !list.length) continue;
+                const k = list[Math.floor(Math.random() * list.length)];
+                const m = k.ex.match(new RegExp('(^|[^a-zà-ÿ\'])(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?=$|[^a-zà-ÿ\'])', 'i'));
+                if (!m) continue;
+                const at = m.index + m[1].length;
+                out.push({ item, k, before: k.ex.slice(0, at), after: k.ex.slice(at + m[2].length), answer: k.ex.slice(at, at + m[2].length) });
+            }
+            return out;
         }
 
         // ----- 4. Pratique -----
