@@ -3091,6 +3091,7 @@ if (firebaseAvailable) {
                 </div>`;
             block.innerHTML = `
                 ${headerHtml}
+                ${routineHomeHtml()}
                 ${buddyHomeHtml()}
                 ${placementNudgeHtml}
                 ${recoHtml}
@@ -12815,7 +12816,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             if (sitId === '__random') { const all = talkSituations(); sit = all[Math.floor(Math.random() * all.length)] || null; }
             else if (sitId) sit = rpLibFind(sitId);
             const topic = s.topic === 'surprise' ? pick(TALK_TOPICS) : s.topic;
-            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0 };
+            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0, extraWords: routineWordsForTalk.splice(0) };
             talkRenderChat();
             if (sit) talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>🎭 ${rpEscapeHtml(sit.label)}</b><div>${rpEscapeHtml(sit.contexte)}</div>
                 ${(sit.kit && sit.kit.phrases || []).length ? `<details><summary>💬 Phrases utiles</summary>${sit.kit.phrases.map(x => `<div class="talk-sit-ph">${rpEscapeHtml(x.nl)} ${speakBtnHtml(x.nl)}<br><small>${rpEscapeHtml(x.fr)}</small></div>`).join('')}</details>` : ''}
@@ -12931,6 +12932,7 @@ Registre : vouvoiement (u) avec un client, un patient ou un usager ; tutoiement 
 Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
 ${portrait.length ? "Ce que tu sais de l'apprenant : " + portrait.join(' ') : ''}
 ${tutorMemPromptLine()}
+${talk.extraWords && talk.extraWords.length ? "Mots que l'apprenant a appris aujourd'hui : " + talk.extraWords.join(', ') + ". Amène-le naturellement à les employer (des questions qui les appellent), sans en faire une leçon." : ''}
 Règles :
 - Une vraie conversation, vivante, comme entre deux personnes : réagis à ce qu'il dit, raconte aussi un peu de toi, pose UNE question à la fois. 1 à 3 phrases courtes, adaptées à son niveau (A1 : phrases très simples et mots très courants).
 - Néerlandais standard, comme en Flandre. Pas d'emojis.
@@ -14654,6 +14656,411 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
+        // ===== Ma routine du jour (un bouton, un tuteur tout du long) =====
+        // Quatre étapes, à faire toutes, dans le désordre, ou en se laissant porter :
+        // 1. Conjugaison : 8 formes des 20 verbes les plus courants, en tournant sur les temps
+        //    (temps du jour + formes ratées en priorité) : 600 formes en tout, impossible chaque jour.
+        // 2. Nouveaux mots : des mots courants jamais travaillés, FR → NL ; ceux qu'il connaît sont
+        //    validés, les inconnus deviennent ses mots du jour (6 au plus, 25 proposés au plus),
+        //    présentés puis redemandés.
+        // 3. Blocs de mots : 8, ceux des mots du jour d'abord.
+        // 4. Pratique : une situation de Discuter qui fait réemployer les mots du jour, ou une
+        //    écoute, la prochaine séance de cours, Mon travail.
+        // Le tuteur (Svetlana ou John) explique avant chaque étape pourquoi et comment, en français,
+        // et répond aux questions (❓, appel Gemini) à tout moment. Mêmes statistiques que les
+        // entraînements (conjStats, mots, chunkStats). État du jour : state.routine.
+        const ROUTINE = { conj: 8, conjVerbs: 20, newWords: 6, maxWords: 25, blocs: 8 };
+        const ROUTINE_STEPS = {
+            conj: { icon: '🔤', label: 'Conjugaison', why: "On s'échauffe avec la conjugaison des 20 verbes les plus courants : à eux seuls, ils font une grande partie des verbes d'une conversation. Chaque jour, je te demande 8 formes, en tournant sur les temps, et celles que tu as ratées reviennent en priorité. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit." },
+            mots: { icon: '📖', label: 'Nouveaux mots', why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, puis je te les redemande." },
+            blocs: { icon: '🧩', label: 'Blocs de mots', why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Je te donne la phrase en français et la phrase néerlandaise avec un trou." },
+            pratique: { icon: '💬', label: 'Pratique', why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
+        };
+        let routine = null; // séance en cours : { step, waiter, rec, token }
+
+        function routineToday() { return new Date().toISOString().slice(0, 10); }
+        function routineState() {
+            if (!state.routine || state.routine.date !== routineToday()) state.routine = { date: routineToday(), done: {}, newWords: [] };
+            if (!state.routine.done) state.routine.done = {};
+            if (!Array.isArray(state.routine.newWords)) state.routine.newWords = [];
+            return state.routine;
+        }
+        function routineActive(r) { return !!(r && routine === r && document.getElementById('routine-view').classList.contains('active')); }
+        function routineTutor() { return TALK_PARTNERS[talkSettings().partner]; }
+
+        function showRoutine() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('routine-view').classList.add('active');
+            setActiveNav('nav-home');
+            if (routine) routineQuitRun();
+            const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false };
+            const p = routineTutor(), rs = routineState();
+            document.getElementById('routine-content').innerHTML = `
+                <div class="routine-head"><b>☀️ Ma routine du jour</b><small>avec ${p.emoji} ${p.name} · 15 à 20 minutes</small></div>
+                <div class="routine-steps" id="routine-steps"></div>
+                <div id="routine-chat" class="prof-chat guide-chat"></div>
+                <div id="routine-actions" class="guide-actions"></div>
+                <div class="prof-input-row">
+                    <input type="text" id="routine-input" placeholder="Ta réponse… (ou ta question, puis ❓)" onkeydown="if(event.key==='Enter') routineSendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="routineSendTyped()">➤</button>
+                </div>
+                <div class="talk-bar">
+                    <button type="button" class="talk-side" onclick="routineAskTyped()" title="Poser une question au tuteur">❓</button>
+                    <button type="button" class="talk-mic" id="routine-mic" onclick="routineMic('nl')">🎤</button>
+                    <button type="button" class="talk-side" id="routine-mic-fr" onclick="routineMic('fr')" title="Parler en français (question au tuteur)">🇫🇷</button>
+                </div>
+                <div class="talk-mic-hint">🎤 pour répondre · 🇫🇷 ou ❓ pour poser une question à ${p.name}</div>`;
+            routineRenderSteps();
+            const left = Object.keys(ROUTINE_STEPS).filter(k => !rs.done[k]);
+            const hello = left.length === 4
+                ? `Bonjour ! C'est ${p.name}, ton tuteur pour la routine du jour. On fait quatre petites étapes : conjugaison, nouveaux mots, blocs de mots, puis on parle. Tu peux les faire dans l'ordre que tu veux, ou te laisser porter et je m'occupe de tout.`
+                : (left.length ? `Re-bonjour ! Il te reste ${left.map(k => ROUTINE_STEPS[k].label.toLowerCase()).join(', ')}. On continue ?` : `Ta routine du jour est finie, bravo ! Tu peux refaire une étape, ou continuer à pratiquer.`);
+            routineSay(r, hello).then(() => routineMenu(r));
+        }
+
+        function routineRenderSteps() {
+            const el = document.getElementById('routine-steps');
+            if (!el) return;
+            const rs = routineState();
+            el.innerHTML = Object.entries(ROUTINE_STEPS).map(([k, s]) => `<button type="button" class="routine-step${rs.done[k] ? ' ok' : ''}${routine && routine.step === k ? ' current' : ''}" onclick="routineStart('${k}')">${rs.done[k] ? '✓' : s.icon} ${s.label}</button>`).join('');
+        }
+
+        // Menu : laisse-toi porter, ou choisir une étape.
+        async function routineMenu(r) {
+            if (!routineActive(r)) return;
+            const rs = routineState();
+            const left = Object.keys(ROUTINE_STEPS).filter(k => !rs.done[k]);
+            const v = await routineWait(r, (left.length ? [['flow', "🌊 Laisse-toi porter"]] : []).concat(left.map(k => [k, ROUTINE_STEPS[k].icon + ' ' + ROUTINE_STEPS[k].label, 'btn-gray'])).concat(left.length ? [] : [['pratique', '💬 Pratiquer encore', 'btn-gray']]));
+            if (!routineActive(r) || v === 'quit') return;
+            if (v === 'flow') { r.flow = true; routineNext(r); return; }
+            if (ROUTINE_STEPS[v]) routineRun(r, v);
+        }
+        // Toucher une étape : seulement entre deux étapes (pendant un exercice, il faut l'arrêter d'abord).
+        function routineStart(k) {
+            const r = routine;
+            if (!r) return;
+            if (r.busy) { routineBubble('info', '<span class="report-meta">Termine ou arrête d\'abord l\'étape en cours (⏹).</span>'); return; }
+            r.flow = false;
+            if (r.waiter) routinePick(k); else routineRun(r, k);
+        }
+        function routineNext(r) {
+            const rs = routineState();
+            const k = Object.keys(ROUTINE_STEPS).find(x => !rs.done[x]);
+            if (k) routineRun(r, k); else routineMenu(r);
+        }
+
+        async function routineRun(r, k) {
+            if (!routineActive(r) || r.busy) return;
+            r.busy = true;
+            r.step = k;
+            routineRenderSteps();
+            routineBubble('info', `<div class="prof-phase-title">${ROUTINE_STEPS[k].icon} ${ROUTINE_STEPS[k].label}</div>`);
+            await routineSay(r, ROUTINE_STEPS[k].why);
+            let ok = true;
+            try { ok = await ({ conj: routineConj, mots: routineWords, blocs: routineBlocs, pratique: routinePratique })[k](r); } catch (e) { console.warn('Routine', k, e); }
+            r.busy = false;
+            if (!routineActive(r)) return;
+            if (ok !== false) { routineState().done[k] = true; save(); }
+            r.step = null;
+            routineRenderSteps();
+            if (k === 'pratique') return;
+            if (r.flow) routineNext(r); else routineMenu(r);
+        }
+
+        // ----- Échanges avec l'apprenant -----
+        function routineBubble(who, html) {
+            const chat = document.getElementById('routine-chat');
+            if (!chat) return null;
+            const div = document.createElement('div');
+            div.className = 'prof-msg ' + who;
+            div.innerHTML = html;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            return div;
+        }
+        async function routineSay(r, fr) {
+            routineBubble('prof guide-voice', `<div>${rpEscapeHtml(fr).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')}</div>`);
+            if (routineActive(r)) await conjAudioSpeakMixed(String(fr).replace(/\*\*/g, ''), 1.05, 0.9, () => routineActive(r));
+        }
+        // Attend des boutons, une réponse (texte) ou une question (❓).
+        function routineWait(r, btns) {
+            return new Promise(res => {
+                if (!routineActive(r)) return res('quit');
+                r.waiter = res;
+                document.getElementById('routine-actions').innerHTML = (btns || []).map(([v, l, cls]) => `<button type="button" class="btn ${cls || 'btn-green'}" onclick="routinePick('${v}')">${l}</button>`).join('');
+            });
+        }
+        function routinePick(v) {
+            const r = routine;
+            if (!r || !r.waiter) return;
+            const w = r.waiter;
+            r.waiter = null;
+            const el = document.getElementById('routine-actions');
+            if (el) el.innerHTML = '';
+            w(v);
+        }
+        function routineSendTyped() {
+            const input = document.getElementById('routine-input');
+            const v = input ? input.value.trim() : '';
+            if (!v || !routine || !routine.waiter) return;
+            input.value = '';
+            routinePick({ text: v });
+        }
+        function routineAskTyped() {
+            const input = document.getElementById('routine-input');
+            const v = input ? input.value.trim() : '';
+            if (!v) { routineMic('fr'); return; }
+            input.value = '';
+            routineAsk(v);
+        }
+        function routineStopRec() { if (routine && routine.rec) { const st = routine.rec; routine.rec = null; st.finish(false); } }
+        function routineMic(lang) {
+            const r = routine;
+            if (!r) return;
+            if (r.rec) { r.rec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta réponse."); return; }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const btn = document.getElementById(lang === 'fr' ? 'routine-mic-fr' : 'routine-mic');
+            r.rec = longListen({
+                lang, input: document.getElementById('routine-input'), silence: Math.min(profSettings().silence || 3000, 3000) || 3000,
+                isActive: () => routineActive(r),
+                onState: () => { if (btn) btn.classList.add('listening'); },
+                onEnd: st => { if (r.rec === st) r.rec = null; if (btn) btn.classList.remove('listening'); },
+                onSubmit: text => { if (lang === 'fr') routineAsk(text); else if (r.waiter) routinePick({ text }); }
+            });
+        }
+        // Question au tuteur (en français ou en néerlandais), à tout moment.
+        async function routineAsk(q) {
+            const r = routine;
+            if (!r) return;
+            routineBubble('moi', '❓ ' + rpEscapeHtml(q));
+            if (!GeminiService.isAvailable()) { await routineSay(r, "Pour répondre à tes questions, il me faut la clé Gemini. On continue la routine !"); return; }
+            const wait = routineBubble('info', '…');
+            let a = null;
+            try {
+                a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}. Vous faites sa routine du jour${r.step ? ', étape « ' + ROUTINE_STEPS[r.step].label + ' »' : ''}${r.ctx ? ' ; exercice en cours : ' + r.ctx : ''}.
+${tutorMemPromptLine()}
+Il te demande : « ${q} »
+Réponds dans sa langue (français s'il parle français), comme à l'oral, en 2 à 4 phrases claires ; mots néerlandais entre ** **, avec un exemple si utile. Si sa question porte sur la routine (pourquoi, comment), explique-lui simplement.
+Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
+            } catch (e) { a = null; }
+            if (wait) wait.remove();
+            if (!routineActive(r)) return;
+            await routineSay(r, a && a.reponse ? a.reponse : "Je n'ai pas réussi à répondre, réessaie dans un instant.");
+        }
+
+        // Pose une question et attend la réponse ; '' = « je ne sais pas ».
+        async function routineAskAnswer(r, html, speakFr) {
+            routineBubble('prof', html);
+            if (speakFr && routineActive(r)) await conjAudioSpeak(speakFr, 'fr', 1.05);
+            if (routineActive(r) && window.SpeechRecognition && !r.rec) routineMic('nl');
+            const v = await routineWait(r, [['__idk', '🤷 Je ne sais pas', 'btn-gray'], ['__stop', '⏹ Arrêter cette étape', 'btn-gray']]);
+            routineStopRec();
+            if (v === 'quit') return null;
+            if (v === '__stop') return '__stop';
+            if (v === '__idk') { routineBubble('moi', '🤷'); return ''; }
+            routineBubble('moi', rpEscapeHtml(v.text));
+            return v.text;
+        }
+        function routineFeedback(ok, answer, extra) {
+            routineBubble('info', `<div class="routine-fb ${ok ? 'ok' : 'ko'}">${ok ? '✅' : '❌'} <b>${rpEscapeHtml(answer)}</b> ${speakBtnHtml(answer)}${extra ? `<div class="report-meta">${extra}</div>` : ''}</div>`);
+            if (!ok) conjAudioSpeak(answer, 'nl', 0.9);
+        }
+
+        // ----- 1. Conjugaison -----
+        function routinePickConj() {
+            const saveFilter = conjTrainingVerbFilter;
+            conjTrainingVerbFilter = null;
+            const cells = conjTrainingCells({ range: ROUTINE.conjVerbs, tenses: CONJ_TENSES, irregOnly: false, skipPresentPlural: true });
+            conjTrainingVerbFilter = saveFilter;
+            const dayTense = CONJ_TENSES[Math.floor(Date.now() / 86400000) % CONJ_TENSES.length];
+            const picked = [], used = new Set();
+            const take = c => { const k = c.verb.infinitief + c.tense; if (picked.length < ROUTINE.conj && !used.has(k)) { used.add(k); picked.push(c); } };
+            cells.filter(c => conjIsWeak(c.stat)).sort((a, b) => a.stat.last - b.stat.last).slice(0, 3).forEach(take);
+            const weight = c => (c.tense === dayTense ? 3 : 1) * (!c.stat ? 1.5 : (c.stat.streak >= 2 ? 0.3 : 1));
+            cells.map(c => ({ c, k: Math.pow(Math.random(), 1 / weight(c)) })).sort((a, b) => b.k - a.k).forEach(x => take(x.c));
+            return picked;
+        }
+        async function routineConj(r) {
+            if (!conjugationLoaded) { await routineSay(r, "La conjugaison n'est pas encore chargée, on y reviendra."); return false; }
+            const qs = routinePickConj();
+            let score = 0;
+            for (let i = 0; i < qs.length && routineActive(r); i++) {
+                const q = qs[i];
+                q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer, true);
+                r.ctx = `conjuguer « ${q.verb.infinitief} » au ${CONJ_TENSE_NAMES[q.tense]}`;
+                const label = q.frq ? `« ${q.frq.fr} »` : `${q.verb.infinitief} · ${q.pronom}`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${qs.length} · ${CONJ_TENSE_NAMES[q.tense]}</small><div>${rpEscapeHtml(label)}</div><small>${rpEscapeHtml(q.verb.infinitief)} (${rpEscapeHtml(q.verb.fr || '')})</small></div>`, q.frq ? q.frq.fr : null);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                const res = given ? conjEvaluate(given, q) : { status: 'wrong' };
+                const ok = res.status !== 'wrong';
+                conjRecordResult(q.verb.infinitief, q.tense, q.pronomKey, ok);
+                if (ok) score++;
+                routineFeedback(ok, q.frq ? q.frq.fullAnswer : q.answer);
+            }
+            save();
+            r.ctx = null;
+            if (routineActive(r)) await routineSay(r, score === qs.length ? `Parfait, ${score} sur ${qs.length} !` : `${score} sur ${qs.length}. Les formes ratées reviendront en priorité demain.`);
+            return true;
+        }
+
+        // ----- 2. Nouveaux mots -----
+        function routineWordPool() {
+            const rs = routineState();
+            const order = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+            // Mots de son niveau d'abord, puis du niveau en dessous, puis au-dessus ; dans chaque
+            // niveau, du plus courant au plus rare. Mots-outils (de, van, en…) et mots très courts
+            // exclus : les demander n'apprend rien.
+            const lvl = order.indexOf(liveLevel());
+            // Sans niveau CECR dans les données, on l'estime par la fréquence (Zipf).
+            const est = i => i.niveauCECR || (i.freq >= 5 ? 'A1' : i.freq >= 4.3 ? 'A2' : i.freq >= 3.6 ? 'B1' : 'B2');
+            const rank = i => { const d = order.indexOf(est(i)) - lvl; return d === 0 ? 0 : d === -1 ? 1 : d === 1 ? 2 : 3 + Math.abs(d); };
+            return fullDb.filter(i => i.nl && i.fr && i.id && !String(i.id).startsWith('KIT:') && !String(i.id).startsWith('RPW:') && !['PHRASES_LABO', 'LOCUTIONS_NL', 'MOTS_OUTILS_NL'].includes(i.file)
+                    && String(i.nl).replace(/^(de|het|een)\s+/i, '').length >= 3
+                    && wordStatus(i.id) === 'unseen' && !isMasteredAnyDirection(i.id) && !isActiveWord(i.id) && !rs.newWords.includes(i.id)
+                    && order.indexOf(est(i)) <= lvl + 1)
+                .sort((a, b) => (rank(a) - rank(b)) || ((b.freq || 0) - (a.freq || 0)))
+                .filter((i, k, arr) => arr.findIndex(x => normalize(x.nl) === normalize(i.nl)) === k); // un mot à plusieurs sens : une fois
+        }
+        async function routineWords(r) {
+            const rs = routineState();
+            const pool = routineWordPool();
+            const fresh = [];
+            let asked = 0, known = 0;
+            for (const item of pool) {
+                if (!routineActive(r) || fresh.length + rs.newWords.length >= ROUTINE.newWords || asked >= ROUTINE.maxWords) break;
+                asked++;
+                r.ctx = `traduire « ${item.fr} »`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${asked} · nouveaux mots trouvés : ${rs.newWords.length + fresh.length}/${ROUTINE.newWords}</small><div>${rpEscapeHtml(item.fr)}</div></div>`, String(item.fr).split('/')[0]);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                const ok = !!given && evaluateAnswer(given, item.nl).status !== 'wrong';
+                const key = item.id + '::fr2nl';
+                state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+                if (ok) {
+                    known++;
+                    state.stats.trueMastered[key] = true;
+                    state.stats.wrongCount[key] = 0;
+                    if (!state.mastered.includes(key)) state.mastered.push(key);
+                    routineFeedback(true, item.nl, 'Tu le connais déjà : validé.');
+                } else {
+                    state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1;
+                    state.stats.trueMastered[key] = false;
+                    fresh.push(item);
+                    routineFeedback(false, item.nl, 'Nouveau mot du jour.');
+                }
+            }
+            rs.newWords = rs.newWords.concat(fresh.map(i => i.id));
+            save();
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            const words = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
+            if (!words.length) { await routineSay(r, known ? `Tu connaissais les ${known} mots proposés : bravo, ils sont validés.` : "Pas de nouveau mot aujourd'hui."); return true; }
+            await routineSay(r, `${known ? `Tu en connaissais déjà ${known}, validés. ` : ''}Voici tes ${words.length} mots du jour. Écoute-les, avec un exemple quand j'en ai un.`);
+            await loadChunks();
+            for (const w of words) {
+                if (!routineActive(r)) return false;
+                const ex = chunksForItem(w)[0];
+                routineBubble('prof', `<div class="prof-nl"><b>${rpEscapeHtml(w.nl)}</b> ${speakBtnHtml(w.nl)} = ${rpEscapeHtml(w.fr)}</div>${ex && ex.ex ? `<small>${rpEscapeHtml(ex.ex)} ${speakBtnHtml(ex.ex)}</small>` : ''}`);
+                await conjAudioSpeak(w.nl, 'nl', 0.85);
+                await conjAudioSpeak(String(w.fr).split('/')[0], 'fr', 1.05);
+                if (ex && ex.ex) await conjAudioSpeak(ex.ex, 'nl', 0.85);
+            }
+            if (!routineActive(r)) return false;
+            await routineSay(r, "Et maintenant, je te les redemande, pour voir si c'est entré.");
+            let back = 0;
+            for (const w of words.slice().sort(() => Math.random() - 0.5)) {
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Rappel</small><div>${rpEscapeHtml(w.fr)}</div></div>`, String(w.fr).split('/')[0]);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                const ok = !!given && evaluateAnswer(given, w.nl).status !== 'wrong';
+                if (ok) back++;
+                routineFeedback(ok, w.nl);
+            }
+            if (routineActive(r)) await routineSay(r, `${back} sur ${words.length} au rappel. Ils restent dans tes mots à revoir : ils reviendront dans les révisions, et on les réemploiera tout à l'heure.`);
+            return true;
+        }
+
+        // ----- 3. Blocs de mots -----
+        async function routineBlocs(r) {
+            await loadChunks();
+            const rs = routineState();
+            const st = state.chunkStats || {};
+            const today = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
+            const qs = [], usedC = new Set();
+            const add = (item, k) => { const blank = chunkBlank(k); if (blank && !usedC.has(k.c) && qs.length < ROUTINE.blocs) { usedC.add(k.c); qs.push({ item, k, blank }); } };
+            today.forEach(i => { const k = chunksForItem(i)[0]; if (k) add(i, k); });
+            pickChunkQuestions().forEach(q => add(q.item, q.k));
+            if (!qs.length) { await routineSay(r, "Pas de bloc disponible pour l'instant."); return true; }
+            let score = 0;
+            for (let i = 0; i < qs.length && routineActive(r); i++) {
+                const q = qs[i];
+                const n = q.k.c.split(' ').length;
+                r.ctx = `retrouver le bloc « ${q.k.c} »`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Bloc ${i + 1}/${qs.length} · ${n} mots</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(n).trim()}</span>${rpEscapeHtml(q.blank.after)}</div></div>`, null);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                const ok = !!given && evaluateAnswer(given, q.k.c).status !== 'wrong';
+                if (ok) score++;
+                if (!state.chunkStats) state.chunkStats = {};
+                const s = state.chunkStats[q.k.c] || { ok: 0, ko: 0, streak: 0, last: 0 };
+                if (ok) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
+                s.last = Date.now();
+                state.chunkStats[q.k.c] = s;
+                routineFeedback(ok, q.k.c, rpEscapeHtml(q.blank.before) + '<b>' + rpEscapeHtml(q.blank.answer) + '</b>' + rpEscapeHtml(q.blank.after));
+            }
+            save();
+            r.ctx = null;
+            if (routineActive(r)) await routineSay(r, `${score} sur ${qs.length}. Les blocs ratés reviendront.`);
+            return true;
+        }
+
+        // ----- 4. Pratique -----
+        async function routinePratique(r) {
+            const rs = routineState();
+            const words = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
+            await convLoad();
+            if (!routineActive(r)) return false;
+            const next = typeof convData !== 'undefined' && convData && convData.modules.flatMap(m => m.seances.map(s => ({ m, s }))).find(x => !convSeanceOk(x.m.id, x.s.id));
+            const v = await routineWait(r, [['situation', `🎭 Une situation${words.length ? ' avec mes mots du jour' : ''}`], ['listen', '👂 Une écoute', 'btn-gray'], ['cours', next ? `📚 Séance : ${rpEscapeHtml(next.s.titre)}` : '📚 Mes cours', 'btn-gray'], ['travail', '💼 Mon travail', 'btn-gray']]);
+            if (!routineActive(r) || v === 'quit') return false;
+            rs.done.pratique = true;
+            save();
+            routineQuitRun();
+            if (v === 'listen') { showListen(); return true; }
+            if (v === 'travail') { showRoleplay('travail'); return true; }
+            if (v === 'cours') { if (next) convStart(next.m.id, next.s.id); else showApprendre(); return true; }
+            await rpLoadLibrary();
+            const all = talkSituations();
+            const sit = all[Math.floor(Math.random() * all.length)];
+            routineWordsForTalk = words.map(w => w.nl);
+            if (sit) talkOpenSituation(sit.id); else showTalk();
+            return true;
+        }
+        // Mots du jour à faire réemployer dans la conversation lancée depuis la routine.
+        let routineWordsForTalk = [];
+
+        function routineQuitRun() {
+            const r = routine;
+            if (!r) return;
+            routineStopRec();
+            if (r.waiter) { const w = r.waiter; r.waiter = null; w('quit'); }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            routine = null;
+        }
+
+        // Carte de l'accueil.
+        function routineHomeHtml() {
+            const rs = routineState();
+            const n = Object.keys(ROUTINE_STEPS).filter(k => rs.done[k]).length;
+            return `<div class="dash-card routine-home" onclick="showRoutine()">
+                <div class="routine-home-top"><b>☀️ Ma routine du jour</b><span>${n === 4 ? '✅ faite' : n + '/4'}</span></div>
+                <div class="routine-home-steps">${Object.entries(ROUTINE_STEPS).map(([k, s]) => `<span class="${rs.done[k] ? 'ok' : ''}">${rs.done[k] ? '✓' : s.icon} ${s.label}</span>`).join('')}</div>
+                <button class="btn btn-green" style="margin:8px 0 0;" onclick="event.stopPropagation(); showRoutine()">${n === 0 ? '▶️ Commencer (15-20 min)' : n === 4 ? '🔁 Continuer à pratiquer' : '▶️ Continuer'}</button>
+            </div>`;
+        }
+
         // ===== Compagnon vocal (Svetlana ou John, partout) =====
         // Un micro flottant sur tous les écrans : on parle (ou écrit) au compagnon, en français ou en
         // néerlandais ; il ouvre l'activité demandée, répond aux questions de langue, ou propose la
@@ -14673,7 +15080,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
         function buddyPartner() { return TALK_PARTNERS[buddySettings().partner]; }
 
         // Écrans qui ont déjà leur propre micro : le bouton flottant s'y efface.
-        const BUDDY_HIDDEN_VIEWS = ['listen-view', 'tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
+        const BUDDY_HIDDEN_VIEWS = ['routine-view', 'listen-view', 'tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
         function buddyRefreshFab() {
             const fab = document.getElementById('buddy-fab');
             if (!fab) return;
@@ -14705,6 +15112,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
             grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
             cours_particulier: { desc: 'cours particulier avec le prof ; params.duree 15 ou 30', run: p => { if (p.duree) profSettings().dur = Number(p.duree) === 30 ? 30 : 15; showProf(); } },
+            routine: { desc: 'ma routine du jour (conjugaison, nouveaux mots, blocs de mots, pratique) avec le tuteur', run: () => showRoutine() },
             progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
@@ -14737,6 +15145,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (has(/rejou|tel quel|mot pour mot/)) return { action: 'rejouer' };
             if (has(/entretien|sollicit|recruteur/)) return { action: 'entretiens' };
             if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
+            if (has(/ma routine|routine du jour|lance la routine|ma seance du jour|entrainement du jour/)) return { action: 'routine' };
             if (has(/comment progresser|devenir bon|etre bon|conseils?|routine|comment (ca|ça) marche|par ou commencer/)) return { action: 'progresser' };
             if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
             if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };

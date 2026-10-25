@@ -319,6 +319,11 @@
     <!-- Comment progresser : ce qui fait qu'on est bon dans une langue, et ce que l'app fait pour
          chaque pilier (boutons vers les activités). Page statique, ouverte depuis le Profil, le
          premier lancement, la page Infos et le compagnon (showProgress). -->
+    <div id="routine-view" class="view">
+        <button class="back-btn" onclick="routineQuitRun(); showHome()">← Accueil</button>
+        <div id="routine-content" class="content-col"></div>
+    </div>
+
     <div id="progress-view" class="view">
         <button class="back-btn" onclick="showProfil()">← Profil</button>
         <div class="content-col howto">
@@ -380,10 +385,10 @@
 
             <div class="howto-card howto-routine">
                 <div class="howto-title">📅 Ta routine conseillée</div>
-                <p><b>Chaque jour (15 à 20 min)</b> : une conversation dans Discuter (10 échanges) · une écoute · 5 minutes de blocs de mots ou de mots à revoir.</p>
+                <p><b>Chaque jour (15 à 20 min)</b> : <b>☀️ Ma routine du jour</b>, sur l'accueil : conjugaison, nouveaux mots, blocs de mots, puis une conversation, avec ton tuteur du début à la fin.</p>
                 <p><b>Chaque semaine</b> : une séance de Cours · un entretien ou une situation de Mon travail · un coup d'œil à « Ce que ton tuteur a retenu ».</p>
                 <p><b>Tous les deux ou trois mois</b> : « On fait connaissance » dans Cours, pour refaire le point et sauter ce que tu sais déjà.</p>
-                <div class="howto-btns"><button class="btn btn-green" onclick="showApprendre()">📚 Cours</button></div>
+                <div class="howto-btns"><button class="btn btn-green" onclick="showRoutine()">☀️ Ma routine du jour</button><button class="btn btn-gray" onclick="showApprendre()">📚 Cours</button></div>
             </div>
 
             <div class="howto-card">

@@ -856,3 +856,20 @@
         .howto-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
         .howto-btns .btn { width: auto; margin: 0; padding: 8px 14px; font-size: 0.85rem; }
         .howto-routine { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 8%, var(--card-bg)); }
+
+        /* Ma routine du jour */
+        .routine-head { display: flex; flex-direction: column; width: 100%; margin-bottom: 6px; }
+        .routine-head small { color: var(--text-secondary); }
+        .routine-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%; margin-bottom: 8px; }
+        .routine-step { padding: 7px 4px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.74rem; cursor: pointer; }
+        .routine-step.ok { border-color: var(--success); background: color-mix(in srgb, var(--success) 14%, var(--card-bg)); }
+        .routine-step.current { border-color: var(--primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 35%, transparent); }
+        .routine-q { font-size: 1.05rem; }
+        .routine-q small { display: block; font-size: 0.72rem; color: var(--text-secondary); }
+        .routine-q > div { font-weight: 700; margin: 2px 0; }
+        .routine-fb.ok { color: var(--success); }
+        .routine-fb.ko { color: var(--wrong); }
+        .routine-home { cursor: pointer; border: 2px solid var(--primary); }
+        .routine-home-top { display: flex; justify-content: space-between; align-items: center; }
+        .routine-home-steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; font-size: 0.78rem; color: var(--text-secondary); }
+        .routine-home-steps .ok { color: var(--success); }
