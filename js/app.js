@@ -5759,15 +5759,20 @@ if (firebaseAvailable) {
                 const apiKey = getKey();
                 if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (Profil → 🤖 Intelligence IA).');
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
+                // Quand le prompt demande du JSON, on l'impose à l'API : sinon Gemini glisse parfois
+                // une phrase ou un caractère qui rend la réponse illisible.
+                const wantsJson = /UNIQUEMENT en JSON|JSON strict/i.test(prompt);
+                const body = { contents: [{ role: 'user', parts: [{ text: prompt }] }] };
+                if (wantsJson) body.generationConfig = { responseMimeType: 'application/json' };
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }] })
+                    body: JSON.stringify(body)
                 });
                 const data = await response.json();
                 if (data.error) throw new Error(data.error.message || 'Erreur API Gemini');
                 if (data.candidates && data.candidates[0].content) {
-                    return data.candidates[0].content.parts[0].text;
+                    return (data.candidates[0].content.parts || []).map(x => x.text || '').join('');
                 }
                 throw new Error('Réponse Gemini vide ou bloquée.');
             }
@@ -11377,6 +11382,17 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         // Écoute longue commune (cours particulier, session guidée). o = { lang, input, silence,
         // isActive(), onState(st, countdown), onEnd(st), onSubmit(text, st) }. Renvoie st, avec
         // st.finish(envoyer) et st.pause() (« ✋ Je réfléchis »).
+        // Une voix de l'app est-elle en train de parler ? (sur Android, la fin de lecture est parfois
+        // annoncée trop tôt : on se fie aussi à speaking / pending.)
+        // Garde-fou : si l'indicateur reste bloqué (certains Android), on l'ignore après 25 s.
+        let ttsBusySince = 0;
+        function ttsBusy() {
+            const busy = !!(window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending));
+            if (!busy) { ttsBusySince = 0; return false; }
+            if (!ttsBusySince) ttsBusySince = Date.now();
+            return Date.now() - ttsBusySince < 25000;
+        }
+
         function longListen(o) {
             const input = o.input;
             const silence = o.silence;
@@ -11394,11 +11410,14 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             st.pause = () => { st.hold = true; if (o.onState) o.onState(st, 0); };
             const startSession = () => {
                 if (st.done) return;
+                // Pas d'écoute pendant qu'une voix de l'app parle : sinon le micro l'enregistre.
+                if (ttsBusy()) { setTimeout(startSession, 300); return; }
                 const rec = new window.SpeechRecognition();
                 rec.lang = o.lang === 'fr' ? 'fr-FR' : 'nl-NL';
                 rec.continuous = true;
                 rec.interimResults = true;
                 rec.onresult = e => {
+                    if (rec !== st.rec) return; // session coupée (voix de l'app) : résultats ignorés
                     // Les phrases finales de la session ; Android renvoie parfois chaque phrase
                     // complétée de la précédente : on ne garde que la plus longue d'une même suite.
                     const finals = [];
@@ -11411,6 +11430,8 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                         else if (t) finals.push(t);
                     }
                     st.session = finals.join(' ');
+                    // Android renvoie parfois, dans la nouvelle session, le texte déjà retenu.
+                    if (st.committed && normalize(st.session).startsWith(normalize(st.committed))) st.committed = '';
                     st.heard = true;
                     st.lastAt = Date.now();
                     show(interim.trim());
@@ -11419,7 +11440,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { alert('Micro refusé : autorise le micro pour ce site.'); st.finish(false); }
                 };
                 rec.onend = () => {
-                    if (st.done) return;
+                    if (st.done || (st.rec && st.rec !== rec)) return;
                     st.committed = [st.committed, st.session].filter(Boolean).join(' ');
                     st.session = '';
                     setTimeout(startSession, 120);
@@ -11431,6 +11452,21 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 if (st.done) return;
                 if (!o.isActive()) { st.finish(false); return; }
                 const now = Date.now();
+                // Une voix de l'app parle : on coupe la session en cours (ce qui a été dit avant est
+                // gardé), on ne compte pas ce temps comme du silence, et on reprend après.
+                if (ttsBusy()) {
+                    if (st.rec) {
+                        st.committed = [st.committed, st.session].filter(Boolean).join(' ');
+                        st.session = '';
+                        const r = st.rec;
+                        st.rec = null;
+                        try { r.abort(); } catch (e) {}
+                        setTimeout(startSession, 300);
+                    }
+                    st.lastAt = now;
+                    st.startAt = Math.max(st.startAt, now - 5000);
+                    return;
+                }
                 if (now - st.startAt > 120000) { st.finish(true); return; }
                 if (!silence || st.hold) return;
                 if (!st.heard) { if (now - st.startAt > 10000) st.finish(true); return; }
@@ -12731,6 +12767,9 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             talkThinking(true);
             let r = null;
             try { r = rpHelpParseJson(await GeminiService.generate(talkPrompt())); } catch (e) { r = { error: e.message }; }
+            if (talk && !talk.ended && (!r || r.error || !r.reply_nl)) {
+                try { r = rpHelpParseJson(await GeminiService.generate(talkPrompt())); } catch (e) { r = { error: e.message }; }
+            }
             if (!talk || talk.ended) return;
             talkThinking(false);
             if (!r || r.error || !r.reply_nl) {
