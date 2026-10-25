@@ -160,6 +160,7 @@
         </div>
         <div class="hub-grid single">
             <div class="hub-card accent" onclick="showRoleplay('travail')"><span class="hub-card-icon">💼</span><div class="hub-card-title">Mon travail</div><div class="hub-card-desc">Entretiens d'embauche et mises en situation dans ton métier.</div></div>
+            <div class="hub-card accent" onclick="showListen()"><span class="hub-card-icon">👂</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Message vocal, annonce, radio, consigne : écoute, réponds, résume.</div></div>
         </div>
 
         <details class="profil-section">
@@ -490,6 +491,11 @@
     <div id="replay-view" class="view">
         <button class="back-btn" onclick="rpReplayStop(); showRoleplay('travail')">← Mon travail</button>
         <div id="replay-content" class="content-col"></div>
+    </div>
+
+    <div id="listen-view" class="view">
+        <button class="back-btn" onclick="listenStop(); showPratiquer()">← Pratiquer</button>
+        <div id="listen-content" class="content-col"></div>
     </div>
 
     <div id="talk-view" class="view">

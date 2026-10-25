@@ -3123,7 +3123,7 @@ if (firebaseAvailable) {
                 const list = mods.filter(m => m.niveau === level);
                 const nPassed = list.filter(isPassed).length;
                 return `<details class="modrp-level" ${level === openLevel ? 'open' : ''}>
-                    <summary><span class="conj-niveau-badge">${level}</span> ${list.length} modules · ${nPassed} réussi${nPassed > 1 ? 's' : ''}</summary>
+                    <summary><span class="conj-niveau-badge">${level}</span> ${list.length} modules · ${nPassed} réussi${nPassed > 1 ? 's' : ''} <small class="cvo-eq">${{ A1: '≈ CVO 1.1 Breakthrough', A2: '≈ CVO 1.2 Waystage', B1: '≈ CVO 2.1–2.4 Threshold', B2: '≈ CVO 3.1–3.2' }[level] || ''}</small></summary>
                     ${list.map((m, i) => {
                         const done = m.etapes.filter(e => modRpEtapeDone(m.id, e)).length;
                         const passed = isPassed(m);
@@ -13927,6 +13927,241 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             back.classList.add('active');
         }
 
+        // ===== Écouter (compréhension orale, sur le modèle du B1 oral des CVO) =====
+        // Le parcours flamand NT2 (Richtgraad 2 mondeling) demande de comprendre messages,
+        // annonces, médias, consignes, récits et discours d'opinion, d'en saisir l'idée principale
+        // ou un détail, et de RÉSUMER ce qu'on a entendu. Ici : Gemini écrit un court texte oral
+        // (listenGenPrompt), l'app le lit à voix haute (deux voix pour un dialogue, réécoute et
+        // version plus lente), puis 3 questions en néerlandais et un résumé, à l'oral ou à l'écrit.
+        // Correction par un appel séparé (listenJudgePrompt) : la compréhension d'abord, la langue
+        // ensuite. Texte affiché seulement à la fin. Statistiques dans state.listenStats.
+        const LISTEN_TYPES = {
+            vocal: { icon: '📞', label: 'Message vocal', desc: "un message vocal laissé sur le répondeur de l'apprenant (médecin, garage, école, employeur, agence, livreur…), avec une demande ou une info pratique" },
+            annonce: { icon: '🚉', label: 'Annonce', desc: "une annonce publique (gare, train, magasin, aéroport, hôpital, piscine…) avec un changement ou une consigne" },
+            media: { icon: '📻', label: 'Radio et infos', desc: "un court passage de radio flamande : bulletin d'informations locales, météo, trafic, ou petite interview" },
+            consigne: { icon: '📋', label: 'Consigne', desc: "des instructions orales : un collègue explique une procédure, un employé explique une démarche, ou un mode d'emploi" },
+            recit: { icon: '🗣️', label: 'Récit', desc: "quelqu'un raconte un événement ou une expérience (week-end, voyage, problème réglé, anecdote au travail)" },
+            avis: { icon: '💬', label: 'Avis', desc: "deux personnes donnent leur avis et débattent d'un sujet de la vie courante ou du travail, avec des arguments" }
+        };
+        const LISTEN_RATE = { A1: 0.85, A2: 0.92, B1: 1, B2: 1.05 };
+        let listen = null;
+        let listenRec = null;
+
+        function listenLevel() {
+            const l = (state.coursPoint && state.coursPoint.niveau) || talkSettings().level;
+            return ['A1', 'A2', 'B1', 'B2'].includes(l) ? (l === 'A1' ? 'A2' : l) : 'B1';
+        }
+        function listenStats() {
+            if (!state.listenStats) state.listenStats = {};
+            return state.listenStats;
+        }
+        function listenActive(l) { return !!(listen && (!l || listen === l) && document.getElementById('listen-view').classList.contains('active')); }
+
+        function showListen() {
+            listenStop();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('listen-view').classList.add('active');
+            setActiveNav('nav-pratiquer');
+            listen = null;
+            const st = listenStats();
+            const total = Object.values(st).reduce((n, x) => n + (x.n || 0), 0);
+            document.getElementById('listen-content').innerHTML = `
+                <h2 style="margin-bottom:4px;">👂 Écouter</h2>
+                <p class="section-subtitle" style="margin-top:0;">Un message, une annonce, la radio… Écoute (autant de fois que tu veux), réponds à 3 questions, puis résume ce que tu as compris. Niveau ${listenLevel()}${total ? ` · ${total} écoute${total > 1 ? 's' : ''} faite${total > 1 ? 's' : ''}` : ''}.</p>
+                ${GeminiService.isAvailable() ? '' : '<div class="prof-warn">Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA.</div>'}
+                <button class="btn btn-green" onclick="listenStart()" ${GeminiService.isAvailable() ? '' : 'disabled'}>🎲 Une écoute au hasard</button>
+                <div class="hub-grid" style="margin-top:12px;">${Object.entries(LISTEN_TYPES).map(([k, t]) => `
+                    <div class="hub-card" onclick="listenStart('${k}')"><span class="hub-card-icon">${t.icon}</span><div class="hub-card-title">${t.label}</div>${st[k] && st[k].n ? `<div class="hub-card-desc">${st[k].n} faite${st[k].n > 1 ? 's' : ''} · ${Math.round((st[k].ok || 0) / Math.max(1, st[k].q || 0) * 100)} % compris</div>` : ''}</div>`).join('')}</div>`;
+        }
+
+        function listenGenPrompt(type, level) {
+            const len = { A2: '60 à 90', B1: '100 à 150', B2: '150 à 220' }[level] || '100 à 150';
+            return `Crée un exercice d'ÉCOUTE de néerlandais pour un adulte francophone qui vit en Flandre, niveau ${level} (CECR ; ${PROF_LEVEL_DESC[level] || ''}).
+Type : ${LISTEN_TYPES[type].desc}.
+Le texte est ORAL et naturel, tel qu'on l'entendrait vraiment en Flandre (néerlandais standard, quelques tournures flamandes courantes bienvenues), ${len} mots. Un dialogue a deux personnes au plus. Noms de personnes et d'entreprises inventés.
+Ensuite 3 questions de compréhension EN NÉERLANDAIS, simples à formuler, variées : une sur un détail précis (heure, lieu, chiffre, nom…), une sur l'idée principale ou le pourquoi, une sur ce qu'il faut faire ou sur l'avis exprimé. Réponses attendues courtes.
+Réponds UNIQUEMENT en JSON : {"titre_fr": "", "contexte_fr": "ce que l'apprenant sait avant d'écouter (qui parle, où, pourquoi), sans dévoiler les réponses", "lignes": [{"qui": "A", "nl": ""}], "questions": [{"nl": "", "fr": "", "reponse": "réponse attendue en néerlandais", "reponse_fr": ""}], "resume_modele": "résumé modèle en 2 ou 3 phrases néerlandaises", "mots": [{"nl": "", "fr": ""}]}
+("lignes" : une ligne par prise de parole, "qui" = A ou B ; "mots" : 5 mots ou tournures utiles du texte, avec de/het pour les noms)`;
+        }
+
+        async function listenStart(type) {
+            if (!GeminiService.isAvailable()) return;
+            listenStop();
+            const t = type && LISTEN_TYPES[type] ? type : Object.keys(LISTEN_TYPES)[Math.floor(Math.random() * Object.keys(LISTEN_TYPES).length)];
+            const level = listenLevel();
+            const l = listen = { type: t, level, data: null, q: 0, answers: [], summary: '', plays: 0, slow: false, phase: 'loading' };
+            const box = document.getElementById('listen-content');
+            box.innerHTML = `<div class="listen-head">${LISTEN_TYPES[t].icon} ${LISTEN_TYPES[t].label} · ${level}</div><p class="report-meta">Préparation de l'écoute…</p>`;
+            let d = null;
+            try { d = rpHelpParseJson(await GeminiService.generate(listenGenPrompt(t, level))); } catch (e) { d = { error: e.message }; }
+            if (listen !== l) return;
+            if (!d || d.error || !Array.isArray(d.lignes) || !d.lignes.length || !Array.isArray(d.questions) || !d.questions.length) {
+                box.innerHTML = `<p class="prof-warn">L'écoute n'a pas pu être préparée (${rpEscapeHtml((d && d.error) || 'réponse illisible')}).</p><button class="btn btn-green" onclick="listenStart('${t}')">Réessayer</button><button class="btn btn-gray" onclick="showListen()">← Écouter</button>`;
+                return;
+            }
+            d.questions = d.questions.slice(0, 3);
+            l.data = d;
+            l.phase = 'questions';
+            listenRender();
+            listenPlay();
+        }
+
+        function listenRender() {
+            const l = listen, d = l.data;
+            const q = d.questions[l.q];
+            const inSummary = l.q >= d.questions.length;
+            document.getElementById('listen-content').innerHTML = `
+                <div class="listen-head">${LISTEN_TYPES[l.type].icon} ${rpEscapeHtml(d.titre_fr || LISTEN_TYPES[l.type].label)} · ${l.level}</div>
+                ${d.contexte_fr ? `<p class="listen-ctx">${rpEscapeHtml(d.contexte_fr)}</p>` : ''}
+                <div class="listen-player">
+                    <button type="button" class="talk-mic" id="listen-play" onclick="listenPlay()">▶️</button>
+                    <div><button type="button" class="lc-toggle${l.slow ? ' on' : ''}" onclick="listen.slow = !listen.slow; listenRender();">🐢 Plus lentement</button>
+                    <div class="report-meta" id="listen-plays">${l.plays ? `Écouté ${l.plays} fois` : 'Écoute bien…'}</div></div>
+                </div>
+                <div class="listen-q">
+                    ${inSummary
+                        ? `<div class="listen-step">Pour finir</div><div class="listen-qnl">Vat in twee of drie zinnen samen wat je gehoord hebt.</div><div class="report-meta">Résume en 2 ou 3 phrases ce que tu as entendu (en néerlandais).</div>`
+                        : `<div class="listen-step">Question ${l.q + 1} / ${d.questions.length}</div><div class="listen-qnl">${rpEscapeHtml(q.nl)} ${speakBtnHtml(q.nl)}</div><details class="listen-qfr"><summary>🇫🇷</summary>${rpEscapeHtml(q.fr || '')}</details>`}
+                </div>
+                <div class="prof-input-row">
+                    <input type="text" id="listen-input" placeholder="${inSummary ? 'Ton résumé…' : 'Ta réponse…'}" onkeydown="if(event.key==='Enter') listenSendTyped()">
+                    <button type="button" class="btn btn-green prof-send" onclick="listenSendTyped()">➤</button>
+                </div>
+                <div class="talk-bar">
+                    <span class="talk-side" style="visibility:hidden;"></span>
+                    <button type="button" class="talk-mic" id="listen-mic" onclick="listenMic()">🎤</button>
+                    <button type="button" class="talk-side" onclick="listenAnswer('')" title="Je ne sais pas">🤷</button>
+                </div>
+                <div id="listen-hint" class="talk-mic-hint">Réponds à l'oral ou à l'écrit, en néerlandais si tu peux.</div>`;
+        }
+
+        // Lecture du texte, avec deux voix si c'est un dialogue.
+        async function listenPlay() {
+            const l = listen;
+            if (!l || !l.data) return;
+            listenStopRec();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const token = l.token = Date.now();
+            const btn = document.getElementById('listen-play');
+            if (btn) btn.classList.add('listening');
+            const rate = (LISTEN_RATE[l.level] || 1) * (l.slow ? 0.8 : 1);
+            for (const line of l.data.lignes) {
+                if (!listenActive(l) || l.token !== token) break;
+                await conjAudioSpeak(line.nl, 'nl', rate, { speaker: line.qui === 'B' ? 1 : 0 });
+                await new Promise(r => setTimeout(r, 250));
+            }
+            if (l.token !== token) return;
+            l.plays++;
+            const b = document.getElementById('listen-play');
+            if (b) b.classList.remove('listening');
+            const p = document.getElementById('listen-plays');
+            if (p) p.innerText = `Écouté ${l.plays} fois · ▶️ pour réécouter`;
+        }
+
+        function listenSendTyped() {
+            const input = document.getElementById('listen-input');
+            const v = input ? input.value.trim() : '';
+            if (!v) return;
+            input.value = '';
+            listenAnswer(v);
+        }
+        function listenStopRec() { if (listenRec) { const st = listenRec; listenRec = null; st.finish(false); } }
+        function listenMic() {
+            if (!listen) return;
+            if (listenRec) { listenRec.finish(true); return; }
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta réponse."); return; }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            listen.token = Date.now();
+            const mic = document.getElementById('listen-mic'), hint = document.getElementById('listen-hint');
+            listenRec = longListen({
+                lang: 'nl', input: document.getElementById('listen-input'), silence: profSettings().silence,
+                isActive: () => listenActive(),
+                onState: (st, cd) => { if (mic) mic.classList.add('listening'); if (hint) hint.innerText = cd ? `Envoi dans ${cd}…` : "J'écoute… (touche le micro pour envoyer)"; },
+                onEnd: st => { if (listenRec === st) listenRec = null; if (mic) mic.classList.remove('listening'); },
+                onSubmit: text => listenAnswer(text)
+            });
+        }
+
+        function listenAnswer(text) {
+            const l = listen;
+            if (!l || !l.data) return;
+            listenStopRec();
+            if (l.q < l.data.questions.length) { l.answers.push(text); l.q++; listenRender(); return; }
+            l.summary = text;
+            listenJudge();
+        }
+
+        function listenJudgePrompt(l) {
+            const d = l.data;
+            return `Tu corriges un exercice d'ÉCOUTE de néerlandais (niveau ${l.level}) fait par un apprenant francophone. Ses réponses ont pu être dictées (ignore ponctuation, majuscules et petites erreurs de transcription) ; il a pu répondre en français ou mêler les deux.
+Texte entendu :
+${d.lignes.map(x => x.qui + ' : ' + x.nl).join('\n')}
+
+${d.questions.map((q, i) => `Question ${i + 1} : ${q.nl}\nRéponse attendue : ${q.reponse}\nRéponse de l'apprenant : ${l.answers[i] || '(pas de réponse)'}`).join('\n\n')}
+
+Résumé demandé (2-3 phrases) ; résumé de l'apprenant : ${l.summary || '(pas de résumé)'}
+Résumé modèle : ${d.resume_modele || ''}
+
+Juge d'abord la COMPRÉHENSION : pour chaque question "juste", "partiel" ou "faux", avec une explication courte en français (ce qu'il fallait comprendre et à quel moment du texte). Signale à part une faute de néerlandais importante (correction_nl), sans pénaliser la compréhension. Pour le résumé : les points principaux présents et manquants, puis sa version corrigée en bon néerlandais.
+Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "explication_fr": "", "correction_nl": ""}], "resume": {"points_ok": [""], "points_manquants": [""], "corrige_nl": "", "commentaire_fr": ""}, "note": 0, "conseil_fr": ""}
+("note" : compréhension globale sur 10)`;
+        }
+
+        async function listenJudge() {
+            const l = listen;
+            l.phase = 'judging';
+            const box = document.getElementById('listen-content');
+            box.innerHTML = `<div class="listen-head">${LISTEN_TYPES[l.type].icon} ${rpEscapeHtml(l.data.titre_fr || '')}</div><p class="report-meta">Correction…</p>`;
+            let r = null;
+            try { r = rpHelpParseJson(await GeminiService.generate(listenJudgePrompt(l))); } catch (e) { r = { error: e.message }; }
+            if (listen !== l) return;
+            const arr = x => Array.isArray(x) ? x : [];
+            const qs = arr(r && r.questions);
+            // Statistiques et mots dits (seulement les réponses en néerlandais bien comprises).
+            const st = listenStats();
+            const s = st[l.type] || (st[l.type] = { n: 0, q: 0, ok: 0 });
+            s.n++;
+            s.q += l.data.questions.length;
+            s.ok += qs.reduce((n, x) => n + (x.verdict === 'juste' ? 1 : x.verdict === 'partiel' ? 0.5 : 0), 0);
+            [...l.answers, l.summary].forEach(a => { if (a) usedWordsRecord(a); });
+            save();
+            const v = { juste: '✅', partiel: '🟡', faux: '❌' };
+            const d = l.data;
+            box.innerHTML = `
+                <div class="listen-head">${LISTEN_TYPES[l.type].icon} ${rpEscapeHtml(d.titre_fr || '')} · ${l.level}</div>
+                ${!r || r.error ? `<p class="prof-warn">La correction détaillée n'a pas pu être faite (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). Voici les réponses attendues.</p>` : `<div class="listen-score">Compréhension : <b>${typeof r.note === 'number' ? r.note + '/10' : '—'}</b></div>`}
+                ${d.questions.map((q, i) => { const x = qs[i] || {}; return `<div class="listen-res">
+                    <div class="listen-qnl">${x.verdict ? v[x.verdict] || '' : ''} ${rpEscapeHtml(q.nl)}</div>
+                    <div class="report-meta">Ta réponse : ${rpEscapeHtml(l.answers[i] || '(pas de réponse)')}</div>
+                    <div>Réponse : <b>${rpEscapeHtml(q.reponse || '')}</b> ${q.reponse ? speakBtnHtml(q.reponse) : ''}${q.reponse_fr ? ` <small>(${rpEscapeHtml(q.reponse_fr)})</small>` : ''}</div>
+                    ${x.explication_fr ? `<div class="report-meta">${rpEscapeHtml(x.explication_fr)}</div>` : ''}
+                    ${x.correction_nl ? `<div class="lc-card">✨ <b>${rpEscapeHtml(x.correction_nl)}</b> ${speakBtnHtml(x.correction_nl)}</div>` : ''}
+                </div>`; }).join('')}
+                <div class="listen-res">
+                    <div class="listen-qnl">📝 Ton résumé</div>
+                    <div class="report-meta">${rpEscapeHtml(l.summary || '(pas de résumé)')}</div>
+                    ${r && r.resume ? `${arr(r.resume.points_ok).length ? `<div>✅ ${arr(r.resume.points_ok).map(rpEscapeHtml).join(' · ')}</div>` : ''}
+                        ${arr(r.resume.points_manquants).length ? `<div>➕ Il manquait : ${arr(r.resume.points_manquants).map(rpEscapeHtml).join(' · ')}</div>` : ''}
+                        ${r.resume.corrige_nl ? `<div class="lc-card">✨ <b>${rpEscapeHtml(r.resume.corrige_nl)}</b> ${speakBtnHtml(r.resume.corrige_nl)}</div>` : ''}
+                        ${r.resume.commentaire_fr ? `<div class="report-meta">${rpEscapeHtml(r.resume.commentaire_fr)}</div>` : ''}` : ''}
+                    ${d.resume_modele ? `<details><summary>Résumé modèle</summary>${rpEscapeHtml(d.resume_modele)} ${speakBtnHtml(d.resume_modele)}</details>` : ''}
+                </div>
+                ${r && r.conseil_fr ? `<p>💡 ${rpEscapeHtml(r.conseil_fr)}</p>` : ''}
+                <details class="listen-res"><summary>📄 Le texte entendu</summary>${d.lignes.map(x => `<div class="listen-line"><b>${x.qui}</b> ${rpEscapeHtml(x.nl)} ${speakBtnHtml(x.nl)}</div>`).join('')}</details>
+                ${arr(d.mots).length ? `<details class="listen-res"><summary>📖 Mots utiles</summary>${arr(d.mots).map(m => `<div><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr || '')}</div>`).join('')}</details>` : ''}
+                <div class="prof-actions">
+                    <button class="btn btn-green" onclick="listenStart('${l.type}')">${LISTEN_TYPES[l.type].icon} Une autre du même type</button>
+                    <button class="btn btn-gray" onclick="showListen()">👂 Autre écoute</button>
+                </div>`;
+            l.phase = 'done';
+        }
+
+        function listenStop() {
+            listenStopRec();
+            if (listen) listen.token = Date.now();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
         // ===== Compagnon vocal (Svetlana ou John, partout) =====
         // Un micro flottant sur tous les écrans : on parle (ou écrit) au compagnon, en français ou en
         // néerlandais ; il ouvre l'activité demandée, répond aux questions de langue, ou propose la
@@ -13946,7 +14181,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
         function buddyPartner() { return TALK_PARTNERS[buddySettings().partner]; }
 
         // Écrans qui ont déjà leur propre micro : le bouton flottant s'y efface.
-        const BUDDY_HIDDEN_VIEWS = ['tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
+        const BUDDY_HIDDEN_VIEWS = ['listen-view', 'tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
         function buddyRefreshFab() {
             const fab = document.getElementById('buddy-fab');
             if (!fab) return;
@@ -13978,6 +14213,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
             grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
             cours_particulier: { desc: 'cours particulier avec le prof ; params.duree 15 ou 30', run: p => { if (p.duree) profSettings().dur = Number(p.duree) === 30 ? 30 : 15; showProf(); } },
+            ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
             discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
@@ -14008,6 +14244,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             if (has(/rejou|tel quel|mot pour mot/)) return { action: 'rejouer' };
             if (has(/entretien|sollicit|recruteur/)) return { action: 'entretiens' };
             if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
+            if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
             if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };
             if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
             if (has(/discut|parler (avec|de|un peu)|bavard|conversation/)) return { action: 'discuter', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null), sujet: text, lancer: true } };

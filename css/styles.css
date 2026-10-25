@@ -805,3 +805,18 @@
         details.cours-point { border-width: 1px; background: var(--card-bg); }
         details.cours-point summary { cursor: pointer; font-size: 0.86rem; color: var(--text-secondary); }
         .cours-point-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+        /* Écouter */
+        .listen-head { font-weight: 700; font-size: 1rem; margin: 4px 0 6px; width: 100%; }
+        .listen-ctx { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 10px; width: 100%; }
+        .listen-player { display: flex; align-items: center; gap: 14px; width: 100%; margin-bottom: 12px; }
+        .listen-player .talk-mic { width: 64px; height: 64px; font-size: 1.6rem; flex: 0 0 64px; }
+        .listen-q { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--card-bg); margin-bottom: 8px; }
+        .listen-step { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+        .listen-qnl { font-weight: 600; margin: 4px 0; }
+        .listen-qfr summary { cursor: pointer; font-size: 0.8rem; }
+        .listen-score { width: 100%; margin-bottom: 8px; }
+        .listen-res { width: 100%; box-sizing: border-box; text-align: left; padding: 8px 10px; margin-bottom: 8px; border-radius: 10px; border: 1px solid var(--border); font-size: 0.88rem; line-height: 1.4; }
+        .listen-res summary { cursor: pointer; font-weight: 600; }
+        .listen-line { margin: 4px 0; }
+        .cvo-eq { color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
