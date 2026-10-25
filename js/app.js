@@ -5764,13 +5764,20 @@ if (firebaseAvailable) {
                 const wantsJson = /UNIQUEMENT en JSON|JSON strict/i.test(prompt);
                 const body = { contents: [{ role: 'user', parts: [{ text: prompt }] }] };
                 if (wantsJson) body.generationConfig = { responseMimeType: 'application/json' };
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                });
-                const data = await response.json();
-                if (data.error) throw new Error(data.error.message || 'Erreur API Gemini');
+                // Gemini surchargé (« trop de demandes ») : deux nouveaux essais, après 2 puis 5 s.
+                const busy = (status, msg) => status === 429 || status === 500 || status === 503 || /overload|high demand|unavailable|exhausted|try again/i.test(msg || '');
+                let data = null;
+                for (let attempt = 0; attempt < 3; attempt++) {
+                    let status = 0;
+                    try {
+                        const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+                        status = response.status;
+                        data = await response.json();
+                    } catch (e) { data = { error: { message: e.message } }; }
+                    if (!(data && data.error && busy(status, data.error.message)) || attempt === 2) break;
+                    await new Promise(r => setTimeout(r, attempt ? 5000 : 2000));
+                }
+                if (data.error) throw new Error(/overload|high demand|unavailable|exhausted|try again/i.test(data.error.message || '') ? 'Gemini est surchargé pour le moment (trop de demandes), réessaie dans un instant' : (data.error.message || 'Erreur API Gemini'));
                 if (data.candidates && data.candidates[0].content) {
                     return (data.candidates[0].content.parts || []).map(x => x.text || '').join('');
                 }
@@ -12773,7 +12780,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             if (!talk || talk.ended) return;
             talkThinking(false);
             if (!r || r.error || !r.reply_nl) {
-                talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>` });
+                talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>${talk.point && talk.userCount ? ' <button class="rp-coach-btn" onclick="talkEnd()">🏁 Terminer et faire le point</button>' : ''}` });
                 return;
             }
             if (lastMsg && liveCorrectOn() && r.correction && ((r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) || r.correction.a_cote)) {
@@ -13330,17 +13337,91 @@ Réponds UNIQUEMENT en JSON :
 {"niveau": "A1|A2|B1|B2", "resume_fr": "2 phrases chaleureuses et honnêtes", "modules": [{"id": "", "verdict": "acquis|presque|non", "deduit": false, "preuve": "courte citation ou raison"}], "notions_acquises": [""], "portrait": {}, "points_forts": [""], "a_travailler": [""]}`;
         }
 
-        // Évaluation de fin de séance et certification.
+        // Évaluation de fin de séance et certification. La séance (répliques + mots) est gardée
+        // dans state.coursPointPending tant que l'évaluation détaillée (Gemini) n'a pas abouti :
+        // si Gemini est surchargé, l'app fait un compte rendu provisoire avec ses propres contrôles
+        // (sujets d'examen des modules, mots bien employés) et on peut relancer l'évaluation
+        // détaillée plus tard, depuis le bilan ou depuis Cours.
         async function talkPointEvaluate(t) {
-            const userLines = t.history.filter(h => h.who === 'me' && !h.isFr).map(h => h.text);
-            const checks = {};
-            MODRP_IDS.forEach(id => { if (modRpData[id]) checks[id] = modRpExamChecks(id, userLines); });
+            const ses = { at: Date.now(), partner: t.partner, history: t.history.slice(-80).map(h => h.who === 'them' ? { who: 'them', nl: h.nl } : { who: 'me', text: h.text, isFr: !!h.isFr }), words: [...t.point.words] };
+            state.coursPointPending = ses;
+            save();
             talkAppend({ who: 'info', html: '<div class="report-meta" id="talk-point-wait">🧑‍🏫 Je fais le point sur ce que tu sais…</div>' });
-            let r = null;
-            try { r = rpHelpParseJson(await GeminiService.generate(talkPointJudgePrompt(t, checks))); } catch (e) { r = { error: e.message }; }
+            const html = await talkPointRun(ses);
             const wait = document.getElementById('talk-point-wait');
             if (wait) wait.parentElement.remove();
-            if (!r || r.error) { talkAppend({ who: 'info', html: `⚠️ Le bilan n'a pas pu être fait (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). Rien n'a été validé : tu peux refaire le point plus tard depuis Cours.` }); return; }
+            talkAppend({ who: 'info', html });
+        }
+
+        function talkPointChecks(ses) {
+            const userLines = ses.history.filter(h => h.who === 'me' && !h.isFr).map(h => h.text);
+            const checks = {};
+            MODRP_IDS.forEach(id => { if (modRpData[id]) checks[id] = modRpExamChecks(id, userLines); });
+            return checks;
+        }
+
+        // Mots bien employés pendant la séance : actifs d'office (une seule fois par séance).
+        function talkPointCertify(ses) {
+            if (ses.certified !== undefined) return ses.certified;
+            let n = 0;
+            (ses.words || []).forEach(id => { const u = state.usedWords && state.usedWords[id]; if (u && (u.c || 0) < USED_ACTIVE_CONVS) { u.c = USED_ACTIVE_CONVS; n++; } });
+            ses.certified = n;
+            return n;
+        }
+
+        function talkPointValidateModule(m, deduit) {
+            const st = modRpState(m.id);
+            if (!(st.finalResult && st.finalResult.passed)) { st.finalResult = { passed: true, placement: true, deduit: !!deduit, at: Date.now() }; modRpValidateNotions(m.id); }
+        }
+
+        async function talkPointRun(ses) {
+            if (typeof modRpLoadAll === 'function') await modRpLoadAll();
+            const checks = talkPointChecks(ses);
+            let r = null;
+            if (GeminiService.isAvailable()) {
+                try { r = rpHelpParseJson(await GeminiService.generate(talkPointJudgePrompt(ses, checks))); } catch (e) { r = { error: e.message }; }
+            }
+            if (!r || r.error || !Array.isArray(r.modules)) return talkPointLocalHtml(ses, checks, (r && r.error) || 'réponse illisible');
+            ses.done = true; // pas null : la fusion entre appareils ferait réapparaître la séance
+            return talkPointApplyHtml(ses, r);
+        }
+
+        // Compte rendu provisoire, sans Gemini : seuls les contrôles de l'app comptent (la même
+        // règle que l'examen d'un module sans Gemini : au moins 75 % des sujets abordés).
+        function talkPointLocalHtml(ses, checks, why) {
+            const validated = [], partial = [];
+            Object.entries(checks).forEach(([id, ch]) => {
+                const m = modRpData[id];
+                if (ch.coverageOk) { talkPointValidateModule(m, false); validated.push(m); }
+                else if (ch.covered > 0) partial.push({ m, ch });
+            });
+            const certified = talkPointCertify(ses);
+            const lvl = validated.some(m => m.niveau === 'A2') ? 'A2' : (validated.length ? 'A1' : null);
+            if (!state.coursPoint || !state.coursPoint.detailed) state.coursPoint = { at: Date.now(), niveau: lvl, modules: validated.length, mots: certified, provisoire: true };
+            save();
+            return `<div class="prof-debrief">
+                <div class="prof-target-title">🧑‍🏫 Le point · compte rendu provisoire</div>
+                <p class="report-meta">Gemini n'a pas pu faire l'évaluation détaillée (${rpEscapeHtml(why)}). Ta séance est gardée : relance-la quand Gemini sera disponible. En attendant, voici ce que l'app a pu vérifier seule.</p>
+                ${validated.length ? `<div class="prof-deb-sec">✅ Validé (${validated.length} module${validated.length > 1 ? 's' : ''})</div><ul>${validated.map(m => `<li>${rpEscapeHtml(m.titre)} <small>(${m.niveau})</small></li>`).join('')}</ul>` : ''}
+                ${certified ? `<div class="prof-deb-sec">🗣️ ${certified} mots certifiés</div><p>Tu les as bien employés : ils comptent comme acquis, sans exercices.</p>` : ''}
+                ${partial.length ? `<div class="prof-deb-sec">👀 Abordé en partie</div><ul>${partial.map(({ m, ch }) => `<li>${rpEscapeHtml(m.titre)} <small>(${ch.covered}/${ch.checks.length} sujets)</small></li>`).join('')}</ul>` : ''}
+                <p class="report-meta">Le niveau B1/B2, les notions et les modules « déduits » ne peuvent être évalués que par l'évaluation détaillée.</p>
+                <div class="prof-actions"><button class="btn btn-green" onclick="talkPointRetry(this)">🔁 Relancer l'évaluation détaillée</button><button class="btn btn-gray" onclick="showApprendre()">📚 Voir mes cours</button></div>
+            </div>`;
+        }
+
+        // Relance depuis le bilan ou depuis Cours : le résultat remplace le bouton.
+        async function talkPointRetry(btn) {
+            const ses = state.coursPointPending;
+            if (!ses || ses.done) return;
+            const box = btn.closest('.prof-debrief, .cours-point') || btn.parentElement;
+            btn.disabled = true;
+            btn.innerText = '🧑‍🏫 Évaluation en cours…';
+            const html = await talkPointRun(ses);
+            box.outerHTML = html;
+        }
+
+        function talkPointApplyHtml(ses, r) {
             const arr = x => Array.isArray(x) ? x : [];
             const lvl = ['A1', 'A2', 'B1', 'B2'].includes(r.niveau) ? r.niveau : null;
             // Modules acquis : validés comme après un examen réussi.
@@ -13348,27 +13429,22 @@ Réponds UNIQUEMENT en JSON :
             arr(r.modules).forEach(x => {
                 const m = x && modRpData[x.id];
                 if (!m) return;
-                if (x.verdict === 'acquis') {
-                    const st = modRpState(m.id);
-                    if (!(st.finalResult && st.finalResult.passed)) { st.finalResult = { passed: true, placement: true, deduit: !!x.deduit, at: Date.now() }; modRpValidateNotions(m.id); }
-                    validated.push({ m, x });
-                } else if (x.verdict === 'presque') almost.push({ m, x });
+                if (x.verdict === 'acquis') { talkPointValidateModule(m, x.deduit); validated.push({ m, x }); }
+                else if (x.verdict === 'presque') almost.push({ m, x });
             });
             // Notions B1/B2 acquises.
             const notionsOk = arr(r.notions_acquises).filter(id => curriculumNotions[id]);
             notionsOk.forEach(id => { ntProgress(id).validated = true; recordNotionAttempt(id, true); });
-            // Mots bien employés pendant la séance : actifs d'office.
-            let certified = 0;
-            t.point.words.forEach(id => { const u = state.usedWords && state.usedWords[id]; if (u && (u.c || 0) < USED_ACTIVE_CONVS) { u.c = USED_ACTIVE_CONVS; certified++; } });
+            const certified = talkPointCertify(ses);
             // Portrait (sans écraser ce qui est déjà rempli).
             const keys = new Set(Object.values(GUIDE_PORTRAIT_Q).flat().map(q => q.key));
             const portrait = modRpState(MODRP_IDS[0]).portrait;
             Object.entries(r.portrait || {}).forEach(([k, v]) => { if (keys.has(k) && v !== '' && v != null && (portrait[k] === undefined || portrait[k] === '')) portrait[k] = v; });
             if (lvl) { talkSettings().level = lvl; profSettings().level = lvl; }
-            state.coursPoint = { at: Date.now(), niveau: lvl, modules: validated.length, notions: notionsOk.length, mots: certified };
+            state.coursPoint = { at: Date.now(), niveau: lvl, modules: validated.length, notions: notionsOk.length, mots: certified, detailed: true };
             save();
             const names = list => list.map(({ m, x }) => `<li>${rpEscapeHtml(m.titre)} <small>(${m.niveau}${x.deduit ? ', déduit de ton niveau' : ''})</small></li>`).join('');
-            talkAppend({ who: 'info', html: `<div class="prof-debrief">
+            return `<div class="prof-debrief">
                 <div class="prof-target-title">🧑‍🏫 Le point${lvl ? ` · niveau estimé <span class="conj-niveau-badge">${lvl}</span>` : ''}</div>
                 ${r.resume_fr ? `<p>${rpEscapeHtml(r.resume_fr)}</p>` : ''}
                 ${validated.length ? `<div class="prof-deb-sec">✅ Validé, pas besoin de le refaire (${validated.length} module${validated.length > 1 ? 's' : ''})</div><ul>${names(validated)}</ul>` : ''}
@@ -13378,12 +13454,13 @@ Réponds UNIQUEMENT en JSON :
                 ${arr(r.points_forts).length ? `<div class="prof-deb-sec">👍 Points forts</div><ul>${arr(r.points_forts).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
                 ${arr(r.a_travailler).length ? `<div class="prof-deb-sec">🎯 À travailler</div><ul>${arr(r.a_travailler).map(x => `<li>${rpEscapeHtml(x)}</li>`).join('')}</ul>` : ''}
                 <div class="prof-actions"><button class="btn btn-green" onclick="showApprendre()">📚 Voir mes cours</button></div>
-            </div>` });
+            </div>`;
         }
 
         // Encart en tête de Cours.
         function talkPointCardHtml() {
             const pl = state.coursPoint;
+            if (state.coursPointPending && !state.coursPointPending.done) return `<div class="cours-point open"><b>🧑‍🏫 Ton point n'est pas terminé</b><p>Ta dernière séance avec ${rpEscapeHtml((TALK_PARTNERS[state.coursPointPending.partner] || TALK_PARTNERS.svetlana).name)} est gardée, mais l'évaluation détaillée n'a pas pu se faire (Gemini surchargé).${pl && pl.provisoire ? ' Un compte rendu provisoire a déjà été fait.' : ''}</p><button class="btn btn-green" style="margin:6px 0 0;" onclick="talkPointRetry(this)">🔁 Relancer l'évaluation détaillée</button></div>`;
             const btns = Object.entries(TALK_PARTNERS).map(([k, p]) => `<button class="btn ${pl ? 'btn-gray' : 'btn-green'}" style="margin:6px 0 0;" onclick="talkStartPoint('${k}')">${p.emoji} Avec ${p.name}</button>`).join('');
             if (pl) return `<details class="cours-point"><summary>🧑‍🏫 Dernier point : ${pl.niveau ? 'niveau ' + pl.niveau + ' · ' : ''}${new Date(pl.at).toLocaleDateString('fr-BE')} · refaire le point</summary><div class="cours-point-btns">${btns}</div></details>`;
             return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as déjà des bases ? Svetlana ou John te font parler (te présenter, ton numéro, ta journée, tes projets…) et valident ce que tu sais déjà : pas besoin de refaire ces cours. Si tu bloques, dis-le en français, ils te montrent comment le dire.</p><div class="cours-point-btns">${btns}</div></div>`;
@@ -13403,6 +13480,22 @@ Réponds UNIQUEMENT en JSON :
 
         function usedWordInfo(id) { return (state.usedWords && state.usedWords[id]) || null; }
         function isActiveWord(id) { const u = usedWordInfo(id); return !!(u && (u.c || 0) >= USED_ACTIVE_CONVS); }
+
+        // Après un pronom sujet (« ik kom »), une forme conjuguée est un verbe, pas un nom
+        // homonyme (« de kom », le bol) : index des formes conjuguées → infinitif.
+        const USED_SUBJECTS = new Set(['ik', 'je', 'jij', 'hij', 'zij', 'ze', 'we', 'wij', 'jullie', 'u', 'men', 'het']);
+        let usedVerbForms = null;
+        function usedVerbLookup(token) {
+            if (!usedVerbForms) {
+                usedVerbForms = new Map();
+                // Verbes simples d'abord, du plus courant au plus rare (« kom » = komen, pas aankomen).
+                const isCompound = v => /\s/.test(v.infinitief) || /\s/.test(v.preteritum) || Object.values(v.present || {}).some(f => /\s/.test(f));
+                conjugationData.slice().sort((a, b) => (isCompound(a) - isCompound(b)) || ((b.freq || 0) - (a.freq || 0))).forEach(v => [v.preteritum, deriveImperfectumPluriel(v.preteritum)].concat(Object.values(v.present || {}))
+                    .forEach(f => { const k = rpKitNorm(String(f || '').split(' ')[0]); if (k && !usedVerbForms.has(k)) usedVerbForms.set(k, v.infinitief); }));
+            }
+            const inf = usedVerbForms.get(token);
+            return inf ? rpWordLookup(inf) : null;
+        }
 
         const usedTokens = s => String(s || '').split(/[^A-Za-zÀ-ÿ'-]+/).map(t => rpKitNorm(t).replace(/^'+|'+$/g, '')).filter(t => t.length > 1);
 
@@ -13425,10 +13518,15 @@ Réponds UNIQUEMENT en JSON :
             const ses = usedSessionCurrent();
             const now = Date.now();
             const seen = new Set();
-            usedTokens(text).forEach(t => {
+            const toks = usedTokens(text);
+            // Mot avec majuscule au milieu d'une phrase = nom propre (« Menen », « Frankrijk ») : ignoré.
+            const raw = String(text).split(/[^A-Za-zÀ-ÿ'-]+/).filter(w => rpKitNorm(w).replace(/^'+|'+$/g, '').length > 1);
+            const proper = new Set(raw.map((w, i) => i > 0 && /^[A-ZÀ-Þ]/.test(w) && !/[.!?]\s*$/.test(String(text).split(w)[0]) ? rpKitNorm(w) : null).filter(Boolean));
+            toks.forEach((t, i) => {
                 if (okSet && !okSet.has(t)) return;
+                if (proper.has(t)) return;
                 if (['de', 'het', 'een', "'t", "'n"].includes(t)) return; // articles : comptés avec leur nom
-                const item = rpWordLookup(t);
+                const item = (i > 0 && USED_SUBJECTS.has(toks[i - 1]) && usedVerbLookup(t)) || rpWordLookup(t);
                 if (!item || !item.id || seen.has(item.id)) return;
                 seen.add(item.id);
                 const isNew = !state.usedWords[item.id];
