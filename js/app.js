@@ -14697,7 +14697,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
         const ROUTINE = { conj: 8, conjVerbs: 20, newWords: 6, maxWords: 25, blocs: 6, petitsMots: 4 };
         const ROUTINE_STEPS = {
             conj: { icon: '🔤', label: 'Conjugaison', whyPassive: "On s'échauffe avec la conjugaison des 20 verbes les plus courants. Je te dis une forme en français, tu as quelques secondes pour la dire dans ta tête, puis je te donne la réponse en néerlandais et son sens.", why: "On s'échauffe avec la conjugaison des 20 verbes les plus courants : à eux seuls, ils font une grande partie des verbes d'une conversation. Chaque jour, je te demande 8 formes, en tournant sur les temps, et celles que tu as ratées reviennent en priorité. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit." },
-            mots: { icon: '📖', label: 'Nouveaux mots', whyPassive: "Maintenant, quelques mots de ton niveau : écoute-les, avec leur sens et un exemple. En mode écoute, je ne te demande rien.", why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, puis je te les redemande." },
+            mots: { icon: '📖', label: 'Nouveaux mots', whyPassive: "Maintenant, quelques mots de ton niveau : écoute-les, avec leur sens et un exemple. En mode écoute, je ne te demande rien.", why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, tu les réemploies dans la conversation, et je te les redemanderai les jours suivants, à intervalles de plus en plus longs." },
             blocs: { icon: '🧩', label: 'Blocs et petits mots', whyPassive: "Ensuite, les blocs de mots puis les petits mots, dans de vraies phrases. Je te dis la phrase en français, tu as un instant pour la chercher, puis tu l'entends en néerlandais.", why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. À chaque fois, je te donne la phrase en français et la phrase néerlandaise avec un trou." },
             pratique: { icon: '💬', label: 'Pratique', whyPassive: "Pour finir, une scène à écouter : deux personnes dans une situation de tous les jours. Écoute comme si tu étais dans la pièce.", why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
         };
@@ -15013,6 +15013,8 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 .filter((i, k, arr) => arr.findIndex(x => normalize(x.nl) === normalize(i.nl)) === k); // un mot à plusieurs sens : une fois
         }
         async function routineWords(r) {
+            if (await routineSpacedReview(r) === false) return false;
+            if (!routineActive(r)) return false;
             const rs = routineState();
             const pool = routineWordPool();
             if (routinePassive()) return routinePresentWords(r, pool.slice(0, ROUTINE.newWords), true);
@@ -15056,18 +15058,67 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             if (!words.length) { await routineSay(r, known ? `Tu connaissais les ${known} mots proposés : bravo, ils sont validés.` : "Pas de nouveau mot aujourd'hui."); return true; }
             await routineSay(r, `${known ? `Tu en connaissais déjà ${known}, validés. ` : ''}Voici tes ${words.length} mots du jour. Écoute-les, avec un exemple quand j'en ai un.`);
             if (await routinePresentWords(r, words, false) === false) return false;
-            if (!routineActive(r) || routinePassive()) return routineActive(r);
-            await routineSay(r, "Et maintenant, je te les redemande, pour voir si c'est entré.");
+            fresh.forEach(i => routineSpacedAdd(i.id));
+            save();
+            if (routineActive(r) && !routinePassive()) await routineSay(r, "Je ne te les redemande pas tout de suite : ça ne prouverait rien. Tu vas les réemployer tout à l'heure, et je te les redemanderai demain, puis dans quelques jours.");
+            return true;
+        }
+
+        // ----- Répétition espacée des mots du jour -----
+        // Les mots appris dans la routine reviennent au début de l'étape « Mots » des jours
+        // suivants : J+1, puis +3, +7, +16 jours ; réussi → intervalle suivant, raté → J+1 ;
+        // 4 réussites espacées = acquis (retiré). state.routineSpaced[id] = { step, due, ok, ko }.
+        const ROUTINE_SPACING = [1, 3, 7, 16];
+        const ROUTINE_MAX_REVIEW = 8;
+        function routineDayPlus(n) { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); }
+        function routineSpacedAdd(id) {
+            if (!state.routineSpaced) state.routineSpaced = {};
+            if (!state.routineSpaced[id]) state.routineSpaced[id] = { step: 0, due: routineDayPlus(ROUTINE_SPACING[0]), ok: 0, ko: 0 };
+        }
+        function routineSpacedDue() {
+            const today = routineToday(), S = state.routineSpaced || {};
+            return Object.entries(S).filter(([, s]) => s && !s.done && s.due <= today)
+                .sort((a, b) => a[1].due.localeCompare(b[1].due)).slice(0, ROUTINE_MAX_REVIEW)
+                .map(([id]) => fullDb.find(i => i.id === id)).filter(Boolean);
+        }
+        function routineSpacedResult(id, ok) {
+            const s = state.routineSpaced && state.routineSpaced[id];
+            if (!s) return;
+            if (ok) {
+                s.ok = (s.ok || 0) + 1;
+                s.step = (s.step || 0) + 1;
+                if (s.step >= ROUTINE_SPACING.length) s.done = true;
+                else s.due = routineDayPlus(ROUTINE_SPACING[s.step]);
+            } else {
+                s.ko = (s.ko || 0) + 1;
+                s.step = 0;
+                s.due = routineDayPlus(ROUTINE_SPACING[0]);
+            }
+            // Le mot suit aussi le vocabulaire habituel (maîtrisé / à revoir).
+            const key = id + '::fr2nl';
+            state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+            if (ok) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (s.done && !state.mastered.includes(key)) state.mastered.push(key); }
+            else { state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1; state.stats.trueMastered[key] = false; }
+        }
+        // Rappel des mots des jours précédents dont c'est le tour (début de l'étape « Mots »).
+        async function routineSpacedReview(r) {
+            const due = routineSpacedDue();
+            if (!due.length || routinePassive()) return true;
+            await routineSay(r, `D'abord, ${due.length > 1 ? 'les ' + due.length + ' mots' : 'le mot'} des jours précédents dont c'est le tour. C'est en les retrouvant après quelques jours qu'ils s'ancrent.`);
             let back = 0;
-            for (const w of words.slice().sort(() => Math.random() - 0.5)) {
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Rappel</small><div>${rpEscapeHtml(w.fr)}</div></div>`, String(w.fr).split('/')[0]);
+            for (const w of due) {
+                if (!routineActive(r)) return false;
+                const s = state.routineSpaced[w.id];
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Rappel · ${s && s.step ? 'appris il y a un moment' : 'appris hier'}</small><div>${rpEscapeHtml(w.fr)}</div></div>`, String(w.fr).split('/')[0]);
                 if (given === null) return false;
                 if (given === '__stop') break;
-                const ok = !!given && evaluateAnswer(given, w.nl).status !== 'wrong';
+                const ok = !!given && given !== '__passive' && evaluateAnswer(given, w.nl).status !== 'wrong';
+                if (given !== '__passive') routineSpacedResult(w.id, ok);
                 if (ok) back++;
-                routineFeedback(ok, w.nl);
+                routineFeedback(ok, w.nl, ok ? (state.routineSpaced[w.id].done ? 'Acquis : il ne reviendra plus ici.' : 'Prochain rappel dans quelques jours.') : 'Il revient demain.');
             }
-            if (routineActive(r)) await routineSay(r, `${back} sur ${words.length} au rappel. Ils restent dans tes mots à revoir : ils reviendront dans les révisions, et on les réemploiera tout à l'heure.`);
+            save();
+            if (routineActive(r)) await routineSay(r, `${back} sur ${due.length}. Maintenant, de nouveaux mots.`);
             return true;
         }
 
