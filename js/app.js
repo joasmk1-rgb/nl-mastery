@@ -14282,7 +14282,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
         const ROUTINE_STEPS = {
             conj: { icon: '🔤', label: 'Conjugaison', whyPassive: "On s'échauffe avec la conjugaison des 20 verbes les plus courants. Je te dis une forme en français, tu as quelques secondes pour la dire dans ta tête, puis je te donne la réponse en néerlandais et son sens.", why: "On s'échauffe avec la conjugaison des 20 verbes les plus courants : à eux seuls, ils font une grande partie des verbes d'une conversation. Chaque jour, je te demande 8 formes, en tournant sur les temps, et celles que tu as ratées reviennent en priorité. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit." },
             mots: { icon: '📖', label: 'Nouveaux mots', whyPassive: "Maintenant, quelques mots de ton niveau : écoute-les, avec leur sens et un exemple. En mode écoute, je ne te demande rien.", why: "Maintenant, du vocabulaire. Je te propose des mots courants que tu n'as encore jamais travaillés : dis-moi leur traduction. Ceux que tu connais déjà, je les valide tout de suite. Ceux que tu ne connais pas deviennent tes mots du jour, six au plus : je te les présente, tu les réemploies dans la conversation, et je te les redemanderai les jours suivants, à intervalles de plus en plus longs." },
-            blocs: { icon: '🧩', label: 'Blocs et petits mots', whyPassive: "Ensuite, les blocs de mots puis les petits mots, dans de vraies phrases. Je te dis la phrase en français, tu as un instant pour la chercher, puis tu l'entends en néerlandais.", why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. À chaque fois, je te donne la phrase en français et la phrase néerlandaise avec un trou." },
+            blocs: { icon: '🧩', label: 'Blocs et petits mots', whyPassive: "Ensuite, les blocs de mots puis les petits mots, dans de vraies phrases. Je te dis la phrase en français, tu as un instant pour la chercher, puis tu l'entends en néerlandais.", why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. Je te donne une phrase en français, tu la traduis à ta manière ; je te dis si le sens est bon, je corrige ta version et je te montre la mienne. Si tu sèches, 💡 te donne la phrase à trou." },
             pratique: { icon: '💬', label: 'Pratique', whyPassive: "Pour finir, une scène à écouter : deux personnes dans une situation de tous les jours. Écoute comme si tu étais dans la pièce.", why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
         };
         let routine = null; // séance en cours : { step, waiter, rec, token }
@@ -14367,7 +14367,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             blocs: {
                 icon: '🧩', label: 'Blocs de mots', run: r => routineBlocs(r, { blocs: 10, petits: 4 }),
                 credit: "Phrases d'exemple : Tatoeba (tatoeba.org), licence CC BY 2.0 FR.",
-                why: "On travaille les blocs de mots : les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd ». Je te dis la phrase en français, puis la phrase néerlandaise avec le trou dit en français : dis-moi le bloc qui manque, ou toute la phrase si tu préfères. Ensuite, quelques petits mots, dans une vraie phrase.",
+                why: "On travaille les blocs de mots : les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd ». Je te dis une phrase en français : traduis-la à ta manière, à l'oral ou à l'écrit. Je te dis si le sens est bon, je corrige ta phrase en gardant tes mots, et je te montre comment je l'aurais dite. Si tu sèches, 💡 te donne la phrase à trou. Ensuite, quelques petits mots, dans une vraie phrase.",
                 whyPassive: "On écoute des blocs de mots. Je te dis la phrase en français, puis en néerlandais avec le trou en français ; cherche le bloc dans ta tête, puis écoute la phrase complète."
             },
             revoir: {
@@ -15026,6 +15026,73 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         }
 
         // ----- 3. Blocs de mots -----
+        // Blocs et petits mots, en mode actif (Joas, 25 octobre 2026 : la phrase à trou était trop
+        // rigide, le bloc à trouver pas toujours le plus intéressant, et la dictée d'un bout de phrase
+        // marche mal) : il traduit TOUTE la phrase française à sa manière, à l'oral ou à l'écrit ;
+        // jugée sur le SENS et la justesse (routineTranslateJudge : modèle reconnu par l'app, sinon
+        // Gemini) ; le tuteur rend SA phrase corrigée (en gardant ses mots) et dit ce qu'il attendait,
+        // bloc en gras. La phrase à trou reste en indice (💡). En écoute seule : comme avant.
+        async function routineTranslateQ(r, q) {
+            const holeId = 'rq-hole-' + Math.floor(Math.random() * 1e9);
+            const hole = `${rpEscapeHtml(q.before)}<span class="chunk-gap">${q.gapMark}</span>${rpEscapeHtml(q.after)}`;
+            const sayPassive = () => chunkSayQuestion(r, q.fr, q.before, q.gapFr, q.after);
+            const passive = routinePassive();
+            const html = passive
+                ? `<div class="routine-q"><small>${q.label}</small><div class="chunk-q-fr">${rpEscapeHtml(q.fr)}</div><div class="chunk-q-nl">${hole}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small></div>`
+                : `<div class="routine-q"><small>${q.label} · traduis toute la phrase, à ta manière</small><div class="chunk-q-fr">${rpEscapeHtml(q.fr)}</div>
+                    <button type="button" class="report-link" onclick="const h = document.getElementById('${holeId}'); if (h) h.style.display = ''; this.remove();">💡 Indice</button>
+                    <div id="${holeId}" style="display:none;"><div class="chunk-q-nl">${hole}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small></div></div>`;
+            const given = await routineAskAnswer(r, html, () => conjAudioSpeak(q.fr, 'fr', 1.05), sayPassive);
+            const model = rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.target) + '</b>' + rpEscapeHtml(q.after);
+            if (given === null || given === '__stop') return given;
+            if (given === '__passive') {
+                routineFeedback(null, q.target, model + (q.extra ? ' — ' + rpEscapeHtml(q.extra) : ''), true);
+                if (routineActive(r)) await conjAudioSpeak(q.ex, 'nl', 0.9);
+                return '__passive';
+            }
+            let j = { ok: false };
+            if (given) {
+                const wait = routineBubble('info', '<span class="report-meta">🤔</span>');
+                j = await routineTranslateJudge(q, given);
+                if (wait) wait.remove();
+            }
+            if (!routineActive(r)) return null;
+            const own = j.version && normalize(j.version) !== normalize(given) && normalize(j.version) !== normalize(q.ex) ? j.version : '';
+            routineBubble('info', `<div class="routine-fb ${j.ok ? 'ok' : 'ko'}">${j.ok ? (j.close ? '🟡 Le sens est bon' : '✅ C\'est bon') : given ? '❌ Pas tout à fait' : '🤷'}
+                ${own ? `<div class="report-meta">✨ À ta manière : <b>${rpEscapeHtml(own)}</b> ${speakBtnHtml(own)}</div>` : ''}
+                ${j.explication ? `<div class="report-meta">${rpEscapeHtml(j.explication)}</div>` : ''}
+                <div class="report-meta">💬 Ce que j'attendais : ${model} ${speakBtnHtml(q.ex)}${q.extra ? ' — ' + rpEscapeHtml(q.extra) : ''}</div>
+                ${j.bloc ? `<div class="report-meta">🧩 ${rpEscapeHtml(j.bloc)}</div>` : ''}</div>`);
+            if (own && routineActive(r)) await conjAudioSpeak(own, 'nl', 0.9);
+            if (j.explication && !j.ok && routineActive(r)) await conjAudioSpeak(j.explication, 'fr', 1.05);
+            if (routineActive(r)) await conjAudioSpeak(q.ex, 'nl', 0.9);
+            if (!j.ok && j.regle) tutorMemAdd([{ regle: j.regle, faux: given, correct: j.version || q.ex }], 'blocs');
+            return { ok: !!j.ok };
+        }
+        // Jugement d'une traduction libre : d'abord sans Gemini (le bloc seul, ou la phrase modèle à
+        // peu près), sinon Gemini juge le sens et la justesse ; sans Gemini, compté faux.
+        async function routineTranslateJudge(q, given) {
+            const part = chunkAnswerPart(given, q.before, q.after);
+            if ((part && evaluateAnswer(part, q.target).status !== 'wrong') || evaluateAnswer(given, q.ex).status !== 'wrong' || rpSpeechMatch(given, q.ex)) return { ok: true };
+            if (!GeminiService.isAvailable()) return { ok: false };
+            try {
+                const a = rpHelpParseJson(await GeminiService.generate(`Exercice de traduction pour un apprenant francophone de néerlandais (Flandre), niveau ${liveLevel()}.
+Phrase française : « ${q.fr} »
+Traduction modèle : « ${q.ex} » (${q.kind === 'petit' ? 'petit mot travaillé' : 'bloc de mots travaillé'} : « ${q.target} »)
+Sa traduction (peut-être dictée : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) : « ${given} »
+Le modèle n'est qu'UNE façon de le dire : juge sur le SENS et la justesse, jamais sur la ressemblance avec le modèle.
+- "sens_ok" : il dit bien la même chose (petites nuances acceptées).
+- "juste" : c'est du néerlandais correct et naturel (une petite faute d'orthographe ou de transcription ne compte pas).
+- "sa_version" : SA phrase corrigée, en gardant au maximum ses mots et sa construction (recopie-la si elle est juste).
+- "explication_fr" : une phrase courte, en français, sur ce qui n'allait pas (vide si tout est juste).
+- "bloc_fr" : s'il n'a pas employé « ${q.target} » alors que sa phrase est juste, une courte phrase en français qui le lui fait remarquer comme une autre façon courante de le dire (sinon vide).
+- ${TUTOR_REGLE_FIELD} (seulement s'il y a une vraie faute, sinon vide)
+Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "", "explication_fr": "", "bloc_fr": "", "regle": ""}`));
+                if (!a || typeof a.sens_ok !== 'boolean') return { ok: false };
+                return { ok: a.sens_ok && a.juste !== false, close: a.sens_ok && a.juste !== false && !!a.explication_fr, version: String(a.sa_version || ''), explication: String(a.explication_fr || ''), bloc: String(a.bloc_fr || ''), regle: String(a.regle || '') };
+            } catch (e) { return { ok: false }; }
+        }
+
         async function routineBlocs(r, opt) {
             await loadChunks();
             const nBlocs = (opt && opt.blocs) || ROUTINE.blocs, nPetits = (opt && opt.petits) || ROUTINE.petitsMots;
@@ -15038,39 +15105,27 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             if (!qs.length) { await routineSay(r, "Pas de bloc disponible pour l'instant."); return r.drill ? 'empty' : true; }
             await chunkGapFrFetch(qs);
             if (!routineActive(r)) return false;
-            let score = 0, asked = 0, stopped = false;
+            let score = 0, asked = 0;
             for (let i = 0; i < qs.length && routineActive(r); i++) {
                 const q = qs[i];
                 const n = q.k.c.split(' ').length;
-                r.ctx = `retrouver le bloc « ${q.k.c} » dans « ${q.k.ex} »`;
-                const say = () => chunkSayQuestion(r, q.k.fr, q.blank.before, q.gapFr, q.blank.after);
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Bloc ${i + 1}/${qs.length} · ${n} mots</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.blank.before)}<span class="chunk-gap">${'_ '.repeat(n).trim()}</span>${rpEscapeHtml(q.blank.after)}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small></div>`, say, say);
-                if (given === null) return false;
-                if (given === '__stop') { stopped = true; break; }
-                const full = rpEscapeHtml(q.blank.before) + '<b>' + rpEscapeHtml(q.blank.answer) + '</b>' + rpEscapeHtml(q.blank.after);
-                if (given === '__passive') {
-                    routineFeedback(null, q.k.c, full, true);
-                    if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
-                    continue;
-                }
-                const part = given ? chunkAnswerPart(given, q.blank.before, q.blank.after) : '';
-                const ok = !!part && evaluateAnswer(part, q.k.c).status !== 'wrong';
+                r.ctx = `traduire « ${q.k.fr} » (modèle : « ${q.k.ex} », bloc « ${q.k.c} »)`;
+                const res = await routineTranslateQ(r, { kind: 'bloc', label: `Bloc ${i + 1}/${qs.length}`, fr: q.k.fr, ex: q.k.ex, target: q.blank.answer, before: q.blank.before, after: q.blank.after, gapFr: q.gapFr, gapMark: '_ '.repeat(n).trim() });
+                if (res === null) return false;
+                if (res === '__stop') return true;
+                if (res === '__passive') continue;
                 asked++;
-                if (ok) score++;
+                if (res.ok) score++;
                 if (!state.chunkStats) state.chunkStats = {};
                 const s = state.chunkStats[q.k.c] || { ok: 0, ko: 0, streak: 0, last: 0 };
-                if (ok) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
+                if (res.ok) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
                 s.last = Date.now();
                 state.chunkStats[q.k.c] = s;
-                // Toujours entendre la phrase complète : c'est elle qui ancre le bloc.
-                routineFeedback(ok, q.k.c, full, true);
-                if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
+                save();
             }
-            save();
             r.ctx = null;
             if (routineActive(r) && !routinePassive() && asked) await routineSay(r, `${score} sur ${asked}. Les blocs ratés reviendront.`);
             if (!routineActive(r)) return false;
-            if (stopped) return true;
             // Petits mots (prépositions, pronoms, conjonctions) : dans une vraie phrase, jamais seuls.
             const fq = routineFunctionQuestions(nPetits);
             if (!fq.length) return true;
@@ -15079,29 +15134,19 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             for (let i = 0; i < fq.length && routineActive(r); i++) {
                 const q = fq[i];
                 const gapFr = String(q.item.fr || '').split('/')[0].trim();
-                r.ctx = `le petit mot « ${q.item.nl} » dans « ${q.k.ex} »`;
-                const say = () => chunkSayQuestion(r, q.k.fr, q.before, gapFr, q.after);
-                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}</small><div class="chunk-q-fr">${rpEscapeHtml(q.k.fr)}</div><div class="chunk-q-nl">${rpEscapeHtml(q.before)}<span class="chunk-gap">___</span>${rpEscapeHtml(q.after)}</div><small>🇫🇷 le trou : ${rpEscapeHtml(gapFr)}</small></div>`, say, say);
-                if (given === null) return false;
-                if (given === '__stop') break;
-                const full = rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.answer) + '</b>' + rpEscapeHtml(q.after) + ' — ' + rpEscapeHtml(q.item.fr);
-                if (given === '__passive') {
-                    routineFeedback(null, q.answer, full, true);
-                    if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
-                    continue;
-                }
-                const part = given ? chunkAnswerPart(given, q.before, q.after) : '';
-                const ok = !!part && part.replace(/[^a-z']/g, '') === normalize(q.answer).replace(/[^a-z']/g, '');
+                r.ctx = `traduire « ${q.k.fr} » (modèle : « ${q.k.ex} », petit mot « ${q.item.nl} »)`;
+                const res = await routineTranslateQ(r, { kind: 'petit', label: `Petit mot ${i + 1}/${fq.length} · ${rpEscapeHtml(q.item.sousCategorie || '')}`, fr: q.k.fr, ex: q.k.ex, target: q.answer, before: q.before, after: q.after, gapFr, gapMark: '___', extra: q.item.fr });
+                if (res === null) return false;
+                if (res === '__stop') break;
+                if (res === '__passive') continue;
                 fAsked++;
-                if (ok) fs++;
+                if (res.ok) fs++;
                 const key = q.item.id + '::fr2nl';
                 state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
-                if (ok) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (!state.mastered.includes(key)) state.mastered.push(key); }
+                if (res.ok) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (!state.mastered.includes(key)) state.mastered.push(key); }
                 else { state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1; state.stats.trueMastered[key] = false; }
-                routineFeedback(ok, q.answer, full, true);
-                if (routineActive(r)) await conjAudioSpeak(q.k.ex, 'nl', 0.9);
+                save();
             }
-            save();
             r.ctx = null;
             if (routineActive(r) && !routinePassive() && fAsked) await routineSay(r, `${fs} sur ${fAsked} pour les petits mots.`);
             return true;
