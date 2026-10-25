@@ -10348,10 +10348,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Réponse libre que l'app n'a pas reconnue : Gemini vérifie si elle est juste quand même
         // (autre formulation, synonyme, autre ordre). Le corrigé reste une aide, pas la règle.
         async function modRpSupportJudge(q, given) {
-            const enonce = q.type === 'traduire' ? 'Traduire en néerlandais : « ' + (q.fr || '') + ' »'
+            const enonce = q.type === 'traduire' || q.type === 'dire' ? 'Dire en néerlandais : « ' + (q.fr || '') + ' »'
                 : q.type === 'trou' ? 'Compléter le trou : « ' + (q.phrase || '') + ' »' + (q.fr ? ' (sens : ' + q.fr + ')' : '')
                 : 'Répondre à la question : « ' + (q.question || '') + ' »' + (q.question_fr ? ' (' + q.question_fr + ')' : '');
-            const attendu = q.type === 'repondre' ? (q.exemple || (q.attendu || []).join(' … ')) : q.answer;
+            const attendu = q.type === 'repondre' ? (q.exemple || (q.attendu || []).join(' … ')) : (q.type === 'dire' ? q.nl : q.answer);
             try {
                 const r = rpHelpParseJson(await GeminiService.generate(`Exercice de néerlandais pour un apprenant francophone. ${enonce}
 Réponse attendue (une possibilité parmi d'autres) : « ${attendu} »
@@ -10388,14 +10388,14 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             }
             ex.checking = true;
             // Gemini en appui pour les réponses libres que l'app n'a pas reconnues.
-            if (!ok && ['repondre', 'traduire', 'trou'].includes(q.type) && GeminiService.isAvailable()) {
+            if (!ok && ['repondre', 'traduire', 'trou', 'dire'].includes(q.type) && GeminiService.isAvailable()) {
                 const given = (ex.heard && ex.heard[0]) || (document.getElementById('modrp-input') || {}).value || '';
                 if (given.trim()) {
                     const fb0 = document.getElementById('modrp-fb');
                     if (fb0) { fb0.style.color = 'var(--text-secondary)'; fb0.innerText = '🤔 Ce n\'est pas la réponse prévue, je vérifie si la tienne est juste aussi…'; }
                     const j = await modRpSupportJudge(q, given);
                     if (modRpEx !== ex) return;
-                    if (j && j.correct) { ok = true; expected = given.trim(); supportNote = ' <small>(autre bonne réponse : ' + rpEscapeHtml(q.type === 'repondre' ? (q.exemple || '') : q.answer) + ')</small>'; }
+                    if (j && j.correct) { ok = true; expected = given.trim(); supportNote = ' <small>(autre bonne réponse : ' + rpEscapeHtml(q.type === 'repondre' ? (q.exemple || '') : (q.type === 'dire' ? q.nl : q.answer)) + ')</small>'; }
                     else if (j && j.explication_fr) supportNote = '<br><small>' + rpEscapeHtml(j.explication_fr) + '</small>';
                 }
             }
@@ -12268,14 +12268,11 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
             async jouer(e, token) {
                 if (!(e.dialogue || []).length) return;
                 const A = (e.roles && e.roles.A) || 'A', B = (e.roles && e.roles.B) || 'Toi';
-                const canListen = !!window.SpeechRecognition;
-                await gSay(canListen
-                    ? `À toi maintenant. Je fais ${A}. Quand c'est ton tour, je te montre ta phrase en français : dis-la en néerlandais.`
-                    : `À toi maintenant. Je fais ${A}. Quand c'est ton tour, lis ta réplique à voix haute.`);
+                await gSay(`À toi maintenant. Je fais ${A}. Quand c'est ton tour, je te montre l'idée en français : réponds en néerlandais avec tes mots, la phrase affichée n'est qu'une aide. Tu peux parler, écrire, ou passer par 🇫🇷 si tu bloques.`);
                 if (!guideAlive(token)) return;
-                const r = await guideDialogue(e, canListen, token, A, B);
+                const r = await guideDialogue(e, true, token, A, B);
                 if (!guideAlive(token) || guide.skipBeat || !r || !r.asked) return;
-                await gSay(r.ok === r.asked ? `Parfait, ${r.ok} sur ${r.asked} du premier coup !` : `${r.ok} sur ${r.asked} du premier coup. Ce n'est pas grave : on retravaille tout ça juste après.`);
+                await gSay(r.ok === r.asked ? `Parfait, ${r.ok} sur ${r.asked} !` : `${r.ok} sur ${r.asked}. Ce n'est pas grave : on retravaille tout ça juste après.`);
             },
 
             async regle(e, token) {
@@ -12368,29 +12365,81 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
         }
 
         // Dialogue modèle dans le chat : écoute seule, ou l'apprenant joue le rôle B (micro court).
+        // Dialogue de l'étape : écoute (play = false) ou « à toi de jouer » (play = true). Le script est
+        // une AIDE, pas une contrainte (décision de Joas) : l'apprenant répond avec le micro de
+        // conversation (longListen) ou par écrit ; sa réplique est jugée sur le SENS (modèle reconnu
+        // dans l'app, sinon Gemini : juste et naturelle ?), sans répétition forcée ; et la réplique
+        // suivante de l'interlocuteur est adaptée à ce qu'il a vraiment dit (suite_nl).
         async function guideDialogue(e, play, token, A, B) {
             const pre = 'gl-' + Math.floor(Math.random() * 1e9) + '-';
-            guideBubble('info', `<div class="guide-dialog">${e.dialogue.map((l, i) => `<div class="modrp-line modrp-${l.qui}" id="${pre}${i}"><b>${rpEscapeHtml(l.qui === 'A' ? A : B)}</b> : <span class="modrp-line-nl${play && l.qui === 'B' ? ' hidden' : ''}">${rpEscapeHtml(l.nl)}</span> <small>${rpEscapeHtml(l.fr)}</small></div>`).join('')}</div>`);
-            let ok = 0, asked = 0;
+            guideBubble('info', `<div class="guide-dialog">${e.dialogue.map((l, i) => `<div class="modrp-line modrp-${l.qui}" id="${pre}${i}"><b>${rpEscapeHtml(l.qui === 'A' ? A : B)}</b> : <span class="modrp-line-nl${play && l.qui === 'B' ? ' hidden' : ''}">${rpEscapeHtml(l.nl)}</span> <small>${rpEscapeHtml(l.fr)}</small><div class="guide-said"></div></div>`).join('')}</div>`);
+            let ok = 0, asked = 0, adapted = null;
+            const row = document.getElementById('guide-input-row');
             for (let i = 0; i < e.dialogue.length; i++) {
                 if (!guideAlive(token) || guide.skipBeat) break;
                 const l = e.dialogue[i], el = document.getElementById(pre + i);
                 if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'nearest' }); }
                 if (play && l.qui === 'B') {
                     asked++;
-                    let heard = await conjAudioListen();
-                    if (!guideAlive(token)) break;
-                    let good = !!heard && heard.some(h => rpSpeechMatch(h, l.nl));
-                    if (good) ok++;
-                    else if (!guide.skipBeat) {
+                    // Saisie libre : micro de conversation ou texte (et 🇫🇷 pour demander la phrase).
+                    guide.conv = { busy: false, dialogue: true, history: [], userLines: [] };
+                    if (row) row.style.display = '';
+                    if (window.SpeechRecognition && !guide.rec) guideMic('nl');
+                    const ans = await guideWaitFor();
+                    guideStopListen();
+                    if (row) row.style.display = 'none';
+                    guide.conv = null;
+                    if (!guideAlive(token) || ans === null) break;
+                    if (ans === '__skip__' || ans === '__fin__') break;
+                    const said = el && el.querySelector('.guide-said');
+                    const nlSpan = el && el.querySelector('.modrp-line-nl');
+                    if (nlSpan) nlSpan.classList.remove('hidden');
+                    if (ans.isFr) {
+                        // Il demande de l'aide en français : on lui donne la phrase, on continue.
+                        if (said) said.innerHTML = `<small>🇫🇷 ${rpEscapeHtml(ans.text)}</small>`;
                         await conjAudioSay(l.nl, 'nl', 0.85);
-                        heard = await conjAudioListen();
-                        good = !!heard && heard.some(h => rpSpeechMatch(h, l.nl));
+                        adapted = null;
+                        if (el) el.classList.remove('active');
+                        continue;
                     }
-                    if (el) { el.querySelector('.modrp-line-nl').classList.remove('hidden'); el.classList.add(good ? 'good' : 'bad'); }
-                    if (!good) await conjAudioSay(l.nl, 'nl', 0.85);
+                    if (said) said.innerHTML = `🗣️ ${rpEscapeHtml(ans.text)}`;
+                    const next = e.dialogue[i + 1];
+                    let good = rpSpeechMatch(ans.text, l.nl), verdict = null;
+                    adapted = null;
+                    if (!good && GeminiService.isAvailable()) {
+                        if (said) said.insertAdjacentHTML('beforeend', ' <small class="report-meta">🤔</small>');
+                        try {
+                            verdict = rpHelpParseJson(await GeminiService.generate(`Jeu de rôle de néerlandais (Flandre) pour un apprenant francophone. Situation : ${e.intro || e.titre || ''}
+Réplique précédente de l'interlocuteur : « ${(e.dialogue[i - 1] || {}).nl || ''} »
+Ce que l'apprenant devait exprimer (en français) : « ${l.fr} » ; une façon de le dire : « ${l.nl} ».
+Ce qu'il a dit (peut-être dicté : ignore ponctuation, majuscules et petites erreurs de transcription) : « ${ans.text} »
+Le modèle n'est qu'une aide : accepte toute réplique correcte et naturelle qui répond bien à l'interlocuteur, même avec d'autres mots ou d'autres informations. Refuse si elle contient une vraie faute ou ne répond pas.
+${next && next.qui === 'A' ? `Réplique suivante prévue de l'interlocuteur : « ${next.nl} ». Si ce qu'il a dit change la situation (autre lieu, autre information…), réécris cette réplique pour qu'elle réagisse à SA réponse, dans le même esprit et aussi courte ; sinon recopie-la telle quelle.` : ''}
+Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte", "correction_nl": "sa phrase corrigée, ou vide si elle est juste", "suite_nl": "${next && next.qui === 'A' ? 'la réplique suivante, adaptée ou non' : ''}", "suite_fr": "sa traduction"}`));
+                        } catch (err) { verdict = null; }
+                        if (!guideAlive(token)) break;
+                        if (said) { const t = said.querySelector('.report-meta'); if (t) t.remove(); }
+                        if (verdict && typeof verdict.ok === 'boolean') good = verdict.ok;
+                        if (verdict && verdict.suite_nl && next && next.qui === 'A' && normalize(verdict.suite_nl) !== normalize(next.nl)) adapted = { nl: String(verdict.suite_nl), fr: String(verdict.suite_fr || '') };
+                    }
+                    if (good) ok++;
+                    if (el) el.classList.add(good ? 'good' : 'bad');
+                    if (said) said.insertAdjacentHTML('beforeend', good
+                        ? (normalize(ans.text) !== normalize(l.nl) && !rpSpeechMatch(ans.text, l.nl) ? ` <small class="report-meta">✓ (autre façon de le dire : ${rpEscapeHtml(l.nl)})</small>` : ' ✓')
+                        : `${verdict && verdict.correction_nl ? `<div class="lc-card">✨ <b>${rpEscapeHtml(verdict.correction_nl)}</b> ${speakBtnHtml(verdict.correction_nl)}${verdict.explication_fr ? `<div class="lc-err">${rpEscapeHtml(verdict.explication_fr)}</div>` : ''}</div>` : ''}`);
+                    if (!good) await conjAudioSay(verdict && verdict.correction_nl ? verdict.correction_nl : l.nl, 'nl', 0.85);
                 } else {
-                    await conjAudioSay(l.nl, 'nl', 0.9, { speaker: l.qui === 'A' ? 0 : 1 });
+                    // Réplique de l'interlocuteur, adaptée à ce que l'apprenant vient de dire si besoin.
+                    let line = l;
+                    if (adapted && l.qui === 'A') {
+                        line = adapted;
+                        const nlSpan = el && el.querySelector('.modrp-line-nl');
+                        if (nlSpan) nlSpan.innerText = adapted.nl;
+                        const fr = el && el.querySelector('small');
+                        if (fr && adapted.fr) fr.innerText = adapted.fr;
+                    }
+                    adapted = null;
+                    await conjAudioSay(line.nl, 'nl', 0.9, { speaker: l.qui === 'A' ? 0 : 1 });
                     await conjAudioWait(250);
                 }
                 if (el) el.classList.remove('active');
