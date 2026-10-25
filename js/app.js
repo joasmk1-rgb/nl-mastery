@@ -7576,19 +7576,40 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // Rien n'est envoyé tant que l'arrêt n'a pas été demandé.
             const nativeStart = rpRecognition.start.bind(rpRecognition);
             const nativeStop = rpRecognition.stop.bind(rpRecognition);
+            const nativeAbort = rpRecognition.abort.bind(rpRecognition);
             let stopRequested = false;
             let carriedTranscript = '';   // ce qui a été reconnu avant la ou les relances
             let lastStartAt = 0;
             let quickEnds = 0;            // arrêts spontanés quasi immédiats à la suite (micro indisponible...)
+            // Bascule en français (voir MIC_FR_CUE) : seulement quand la dictée est en néerlandais.
+            let frMode = false, baseLang = 'nl-NL', cueFrom = 0, switchT = null, backT = null, lastInterim = '', switching = false;
+            const rpSwitch = toFr => {
+                clearTimeout(switchT); clearTimeout(backT);
+                if (stopRequested || frMode === toFr) return;
+                const cur = (rpFinalTranscript + ' ' + lastInterim).trim();
+                carriedTranscript = (carriedTranscript + ' ' + cur).replace(/\s+/g, ' ').trim() + (toFr ? ' «' : ' »');
+                rpFinalTranscript = '';
+                lastInterim = '';
+                frMode = toFr;
+                if (!toFr) cueFrom = carriedTranscript.length;
+                rpRecognition.lang = toFr ? 'fr-FR' : baseLang;
+                if (toFr) backT = setTimeout(() => rpSwitch(false), 5000);
+                switching = true;
+                try { nativeAbort(); } catch (e) { switching = false; }
+            };
             rpRecognition.start = function() {
                 stopRequested = false;
                 carriedTranscript = '';
                 quickEnds = 0;
                 lastStartAt = Date.now();
+                frMode = false; cueFrom = 0; lastInterim = ''; switching = false;
+                baseLang = rpRecognition.lang;
                 nativeStart();
             };
             rpRecognition.stop = function() {
                 stopRequested = true;
+                clearTimeout(switchT); clearTimeout(backT);
+                if (frMode) { carriedTranscript = (carriedTranscript + ' ' + (rpFinalTranscript + ' ' + lastInterim).trim()).trim() + ' »'; rpFinalTranscript = ''; frMode = false; rpRecognition.lang = baseLang; }
                 nativeStop();
             };
 
@@ -7613,13 +7634,20 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 interim = interim.trim();
                 if (interim && finalText.toLowerCase().endsWith(interim.toLowerCase())) interim = '';
                 rpFinalTranscript = finalText + ' ';
+                lastInterim = interim;
+                const all = (carriedTranscript + ' ' + rpFinalTranscript + interim).trim();
                 const statusEl = document.getElementById(activeVoiceStatusId);
-                if (statusEl) statusEl.innerText = "🎤 " + ((carriedTranscript + ' ' + rpFinalTranscript + interim).trim() || '...');
+                if (statusEl) statusEl.innerText = (frMode ? "🇫🇷 " : "🎤 ") + (all || '...');
+                if (baseLang === 'nl-NL') {
+                    clearTimeout(switchT); clearTimeout(backT);
+                    if (!frMode && micFrCue(all.slice(cueFrom))) switchT = setTimeout(() => rpSwitch(true), MIC_FR_WAIT);
+                    else if (frMode) backT = setTimeout(() => rpSwitch(false), MIC_FR_BACK);
+                }
             };
 
             rpRecognition.onerror = function(event) {
                 // "no-speech" = simple silence : pas une vraie erreur, l'écoute sera relancée par onend.
-                if (event.error === 'no-speech') return;
+                if (event.error === 'no-speech' || (event.error === 'aborted' && switching)) return;
                 stopRequested = true; // micro refusé, réseau... : inutile de relancer en boucle
                 const statusEl = document.getElementById(activeVoiceStatusId);
                 if (statusEl) statusEl.innerText = "Erreur de reconnaissance vocale : " + event.error;
@@ -7627,6 +7655,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             };
 
             rpRecognition.onend = function() {
+                if (switching && !stopRequested) {
+                    // Bascule de langue : on relance tout de suite dans l'autre langue.
+                    switching = false;
+                    lastStartAt = Date.now();
+                    try { nativeStart(); return; } catch (e) { console.warn('Relance de l\'écoute impossible :', e); }
+                }
+                switching = false;
                 if (!stopRequested) {
                     // Arrêt spontané du navigateur : on met de côté ce qui a été dit et on relance.
                     carriedTranscript = (carriedTranscript + ' ' + rpFinalTranscript).trim();
@@ -10923,6 +10958,20 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         // Une voix de l'app est-elle en train de parler ? (sur Android, la fin de lecture est parfois
         // annoncée trop tôt : on se fie aussi à speaking / pending.)
         // Garde-fou : si l'indicateur reste bloqué (certains Android), on l'ignore après 25 s.
+        // Bascule du micro en français (Joas, 25 octobre 2026) : le micro du navigateur n'écoute qu'une
+        // langue à la fois. Quand l'apprenant annonce qu'un mot lui manque (« ik weet niet hoe je dat
+        // zegt », « hoe zeg je… », « in het Frans »), puis marque une petite pause, l'écoute repasse en
+        // français pour capter le mot proprement, puis revient au néerlandais après une pause. Le
+        // passage français est mis entre « » dans le texte, pour le correcteur et l'interlocuteur.
+        const MIC_FR_CUE = /\b(hoe (zeg|zegt|zeggen|noem|noemt|noemen|heet|heten)|weet (het )?niet (meer )?hoe|weet het woord niet|in het frans|op (zijn|z n) frans|en francais|in french)\b/;
+        const MIC_FR_END = /\b(zeggen|zeg|zegt|noemen|noem|noemt|heet|heten|frans|nederlands|vlaams|francais|french|dat|het|woord|niet)$/;
+        const MIC_FR_WAIT = 700;    // pause après la tournure avant de basculer
+        const MIC_FR_BACK = 1300;   // pause après le mot français avant de revenir au néerlandais
+        function micFrCue(text) {
+            const w = normalize(String(text || '')).replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean).slice(-12).join(' ');
+            return MIC_FR_CUE.test(w) && (MIC_FR_END.test(w) || /\bhoe (zeg|noem) (je|jij|u)$/.test(w));
+        }
+
         let ttsBusySince = 0;
         function ttsBusy() {
             const busy = !!(window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending));
@@ -10934,7 +10983,9 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         function longListen(o) {
             const input = o.input;
             const silence = o.silence;
-            const st = { lang: o.lang, committed: '', session: '', rec: null, done: false, heard: false, hold: false, lastAt: Date.now(), startAt: Date.now(), timer: null, cd: 0 };
+            const st = { lang: o.lang, committed: '', session: '', rec: null, done: false, heard: false, hold: false, lastAt: Date.now(), startAt: Date.now(), timer: null, cd: 0,
+                curLang: o.lang === 'fr' ? 'fr' : 'nl', cueFrom: 0, switchT: null, backT: null };
+            const canSwitch = o.lang !== 'fr' && !o.noFrSwitch;
             // Android renvoie souvent, à la reprise, la fin de ce qui a déjà été retenu : on retire
             // le chevauchement (fin du texte retenu = début du nouveau) avant de coller les deux.
             const joinNoOverlap = (a, b) => {
@@ -10956,9 +11007,31 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 return aw.concat(bw).join(' ');
             };
             st.join = joinNoOverlap;
-            const show = interim => { if (input) input.value = joinNoOverlap(joinNoOverlap(st.committed, st.session), interim).trim(); };
+            const fullText = interim => joinNoOverlap(joinNoOverlap(st.committed, st.session), interim).trim();
+            const show = interim => { st.text = fullText(interim); if (input) input.value = st.text; };
+            // Bascule de langue : ce qui a été dit (même provisoire) est gardé, la session en cours est
+            // abandonnée (abort : plus aucun résultat d'elle), et une nouvelle démarre dans l'autre langue.
+            const switchTo = lang => {
+                clearTimeout(st.switchT); clearTimeout(st.backT);
+                if (st.done || st.curLang === lang) return;
+                st.committed = (st.text || fullText('')) + (lang === 'fr' ? ' «' : ' »');
+                st.session = '';
+                st.text = st.committed;
+                if (input) { input.value = st.committed; input.classList.toggle('mic-fr', lang === 'fr'); }
+                st.curLang = lang;
+                if (lang === 'nl') st.cueFrom = st.committed.length;
+                st.lastAt = Date.now();
+                const r = st.rec;
+                st.rec = null;
+                if (r) r.dead = true;
+                try { r && r.abort(); } catch (e) {}
+                if (lang === 'fr') st.backT = setTimeout(() => switchTo('nl'), 5000); // rien dit : on revient
+                setTimeout(startSession, 150);
+            };
             st.finish = submit => {
                 if (st.done) return;
+                clearTimeout(st.switchT); clearTimeout(st.backT);
+                if (st.curLang === 'fr' && st.lang !== 'fr' && input) { input.value = input.value.trim() + ' »'; input.classList.remove('mic-fr'); }
                 st.done = true;
                 clearInterval(st.timer);
                 try { st.rec && st.rec.abort(); } catch (e) {}
@@ -10972,7 +11045,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 // Pas d'écoute pendant qu'une voix de l'app parle : sinon le micro l'enregistre.
                 if (ttsBusy()) { setTimeout(startSession, 300); return; }
                 const rec = new window.SpeechRecognition();
-                rec.lang = o.lang === 'fr' ? 'fr-FR' : 'nl-NL';
+                rec.lang = st.curLang === 'fr' ? 'fr-FR' : 'nl-NL';
                 rec.continuous = true;
                 rec.interimResults = true;
                 rec.onresult = e => {
@@ -10994,12 +11067,17 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     st.heard = true;
                     st.lastAt = Date.now();
                     show(interim.trim());
+                    if (canSwitch) {
+                        clearTimeout(st.switchT); clearTimeout(st.backT);
+                        if (st.curLang === 'nl' && micFrCue(st.text.slice(st.cueFrom))) st.switchT = setTimeout(() => switchTo('fr'), MIC_FR_WAIT);
+                        else if (st.curLang === 'fr') st.backT = setTimeout(() => switchTo('nl'), MIC_FR_BACK);
+                    }
                 };
                 rec.onerror = e => {
                     if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { alert('Micro refusé : autorise le micro pour ce site.'); st.finish(false); }
                 };
                 rec.onend = () => {
-                    if (st.done || (st.rec && st.rec !== rec)) return;
+                    if (st.done || rec.dead || (st.rec && st.rec !== rec)) return;
                     st.committed = joinNoOverlap(st.committed, st.session);
                     st.session = '';
                     setTimeout(startSession, 120);
@@ -11019,6 +11097,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                         st.session = '';
                         const r = st.rec;
                         st.rec = null;
+                        r.dead = true;
                         try { r.abort(); } catch (e) {}
                         setTimeout(startSession, 300);
                     }
@@ -11036,7 +11115,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 const cd = left <= 2000 ? Math.ceil(left / 1000) : 0;
                 if (cd !== st.cd) { st.cd = cd; if (o.onState) o.onState(st, cd); }
             }, 200);
-            if (input) input.value = '';
+            if (input) { input.value = ''; input.classList.remove('mic-fr'); }
             if (o.onState) o.onState(st, 0);
             startSession();
             return st;
@@ -13609,10 +13688,11 @@ Réponds UNIQUEMENT en JSON :
 4. Si elle prend l'initiative (te pose une question, ajoute une info, change de sujet), réponds-y naturellement, puis reviens à ton objectif si besoin.
 5. Ton rôle, ta liste de questions ou ton script sont un GUIDE, pas une règle : adapte l'ordre, saute ce qui est déjà couvert, approfondis brièvement ce qui est intéressant.
 6. Si elle bloque ou semble perdue, simplifie, reformule ou propose-lui deux choix.
-7. Reste dans ton rôle et dans la langue de la conversation.`;
+7. Reste dans ton rôle et dans la langue de la conversation.
+8. Si elle demande comment on dit quelque chose (« hoe zeg je… », « ik weet niet hoe je dat zegt ») suivi d'un mot français (souvent entre « »), donne-lui le mot néerlandais au passage, naturellement et brièvement (« Een huisgenoot, bedoel je? »), puis continue.`;
 
         // Règles communes sur le mélange des langues (reprises par Discuter et le cours particulier).
-        const LIVE_MIX_RULES = `L'apprenant peut MÉLANGER français et néerlandais dans une même phrase quand un mot lui manque (ex. « ik wil een rendez-vous prendre met de dokter »). À l'oral, la reconnaissance vocale écoute en néerlandais : un mot français peut donc être mal transcrit (ex. « prendre » → « pranter ») ; s'il ne veut rien dire en néerlandais et ressemble à un mot français à l'oreille, reconstitue le mot français. Rends alors la phrase ENTIÈRE en néerlandais naturel, et liste chaque partie dite en français avec son équivalent néerlandais.`;
+        const LIVE_MIX_RULES = `L'apprenant peut MÉLANGER français et néerlandais dans une même phrase quand un mot lui manque (ex. « ik wil een rendez-vous prendre met de dokter »). À l'oral, la reconnaissance vocale écoute en néerlandais : un mot français peut donc être mal transcrit (ex. « prendre » → « pranter ») ; s'il ne veut rien dire en néerlandais et ressemble à un mot français à l'oreille, reconstitue le mot français. Un passage entre « » qui suit « hoe zeg je… » ou « ik weet niet hoe je dat zegt » a été dicté EN FRANÇAIS exprès (le micro a basculé) : c'est le mot qu'il cherche ; dans la phrase corrigée, remplace la demande et le passage par le mot néerlandais à sa place naturelle. Rends alors la phrase ENTIÈRE en néerlandais naturel, et liste chaque partie dite en français avec son équivalent néerlandais.`;
 
         // Règle commune « réponse à côté » (correcteur, Discuter, tuteur, recruteur de Rejouer).
         const LIVE_OFFTOPIC_RULE = `Vérifie aussi qu'il RÉPOND VRAIMENT à la question ou à la réplique de son interlocuteur : une phrase juste en néerlandais peut répondre à côté, parce qu'il a mal compris la question. Une réponse partielle, une demande de répétition (« Sorry, kunt u dat herhalen? ») ou une question en retour ne sont PAS à côté.`;
