@@ -316,20 +316,100 @@
         </div>
     </div>
 
+    <!-- Comment progresser : ce qui fait qu'on est bon dans une langue, et ce que l'app fait pour
+         chaque pilier (boutons vers les activités). Page statique, ouverte depuis le Profil, le
+         premier lancement, la page Infos et le compagnon (showProgress). -->
+    <div id="progress-view" class="view">
+        <button class="back-btn" onclick="showProfil()">← Profil</button>
+        <div class="content-col howto">
+            <h2 style="margin-bottom:4px;">🌱 Comment devenir bon en néerlandais</h2>
+            <p class="howto-lead">On est bon dans une langue quand <b>on comprend vite et qu'on se fait comprendre sans effort, même quand ça coince</b>. Ce n'est pas le nombre de règles apprises qui compte, mais le nombre d'heures à vraiment écouter et parler, avec un retour sur ses erreurs. Voici les 8 piliers, et ce que l'app fait pour chacun.</p>
+
+            <div class="howto-card">
+                <div class="howto-title">👂 1. Comprendre à l'oral</div>
+                <p>La base de tout : suivre une vraie conversation, à vitesse normale, avec un accent. On ne peut pas répondre à ce qu'on n'a pas compris.</p>
+                <p class="howto-app">Dans l'app : <b>Écouter</b> (messages vocaux, annonces, radio… avec questions et résumé), <b>Rejouer un vrai entretien</b> à la vraie vitesse, et 👂 pour écouter une scène en spectateur.</p>
+                <div class="howto-btns"><button class="btn btn-green" onclick="showListen()">👂 Écouter</button><button class="btn btn-gray" onclick="rpShowReplayList()">🎬 Rejouer un entretien</button></div>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">📖 2. Le bon vocabulaire, et pouvoir le sortir</div>
+                <p>Environ 3 000 mots courants suffisent pour comprendre 95 % d'un texte ordinaire, puis il faut ceux de ton métier. Mais reconnaître un mot et le dire sont deux choses : c'est le second qui compte.</p>
+                <p class="howto-app">Dans l'app : le <b>Vocabulaire</b> par catégories et par métier ; et chaque mot que tu dis correctement en conversation devient <b>🗣️ utilisé</b>, puis <b>actif</b> après trois conversations.</p>
+                <div class="howto-btns"><button class="btn btn-green" onclick="showVocab()">📖 Vocabulaire</button></div>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">🌊 3. La fluidité</div>
+                <p>Parler sans chercher chaque mot. Elle vient de l'automatisation : les tournures fréquentes (« ik zou graag… », « het hangt ervan af ») doivent sortir d'un bloc, sans réfléchir.</p>
+                <p class="howto-app">Dans l'app : les <b>blocs de mots</b>, la <b>conjugaison en mains libres</b>, et surtout <b>Discuter</b> un peu chaque jour (objectif : 10 échanges).</p>
+                <div class="howto-btns"><button class="btn btn-green" onclick="showTalk()">💬 Discuter</button><button class="btn btn-gray" onclick="showChunkTraining()">🧩 Blocs de mots</button></div>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">✍️ 4. La justesse, pas la perfection</div>
+                <p>Un bon locuteur équilibre trois choses : l'aisance, peu de fautes qui gênent, et la capacité à nuancer. Trop de prudence rend lent et pauvre ; trop de fautes gênent la compréhension.</p>
+                <p class="howto-app">Dans l'app : la <b>correction active</b> sous chaque phrase (même mi-français mi-néerlandais), le <b>tuteur</b> qui revoit ta conversation à la fin, et la <b>mémoire du tuteur</b> : les fautes qui reviennent sont connues de tous tes interlocuteurs, qui te les font réemployer.</p>
+                <div class="howto-btns"><button class="btn btn-gray" onclick="showProfil(); setTimeout(() => { const d = document.getElementById('profil-sec-tmem'); if (d) { d.open = true; d.scrollIntoView({ block: 'start' }); } }, 50)">🧠 Ce que ton tuteur a retenu</button></div>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">🛟 5. Se débrouiller quand ça coince</div>
+                <p>Contourner un mot qui manque, faire répéter, reformuler, gagner du temps (« even kijken… ») : les bilingues le font sans arrêt. C'est une compétence à part entière.</p>
+                <p class="howto-app">Dans l'app : la <b>barre du tuteur</b> dans chaque conversation (💡 Que dire ? · 🇫🇷 En français · ✍️ Correction · 🧑‍🏫 Revoir), et des interlocuteurs qui te recadrent gentiment si tu réponds à côté. Astuce : avant de passer au français, essaie de décrire le mot en néerlandais.</p>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">🎩 6. Le bon registre</div>
+                <p>Savoir quand dire <i>u</i> ou <i>je</i>, comment refuser poliment, se plaindre sans agresser, ce qui se dit en entretien en Flandre. On peut parler sans faute et sonner bizarre.</p>
+                <p class="howto-app">Dans l'app : les <b>situations</b> de la vie courante dans Discuter (commune, médecin, voisin, soirée…) et <b>Mon travail</b> (entretiens, journées dans ton métier).</p>
+                <div class="howto-btns"><button class="btn btn-green" onclick="showRoleplay('travail')">💼 Mon travail</button></div>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">🗣️ 7. Être compris</div>
+                <p>Pas besoin d'un accent parfait : il faut être compris sans effort (les sons qui changent le sens, l'accent tonique, le rythme).</p>
+                <p class="howto-app">Dans l'app : pas de note de prononciation pour l'instant. Un bon repère : si la reconnaissance vocale comprend ta phrase, un Flamand la comprendra aussi. Pour le rythme, imite les répliques avec 🔊 et la vraie vitesse de Rejouer.</p>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">⏱️ 8. Le volume de pratique</div>
+                <p>C'est le facteur numéro un : un peu chaque jour vaut mieux que beaucoup une fois par semaine.</p>
+                <p class="howto-app">Dans l'app : l'objectif de <b>10 échanges par jour</b> dans Discuter, la série de jours 🔥, et le compagnon 🎙️ qui te propose la suite à tout moment.</p>
+            </div>
+
+            <div class="howto-card howto-routine">
+                <div class="howto-title">📅 Ta routine conseillée</div>
+                <p><b>Chaque jour (15 à 20 min)</b> : une conversation dans Discuter (10 échanges) · une écoute · 5 minutes de blocs de mots ou de mots à revoir.</p>
+                <p><b>Chaque semaine</b> : une séance de Cours · un entretien ou une situation de Mon travail · un coup d'œil à « Ce que ton tuteur a retenu ».</p>
+                <p><b>Tous les deux ou trois mois</b> : « On fait connaissance » dans Cours, pour refaire le point et sauter ce que tu sais déjà.</p>
+                <div class="howto-btns"><button class="btn btn-green" onclick="showApprendre()">📚 Cours</button></div>
+            </div>
+
+            <div class="howto-card">
+                <div class="howto-title">📈 Comment l'app mesure tes progrès</div>
+                <p><b>Ton niveau CECR</b> (A1 → B2) monte avec les notions de grammaire validées : examens des modules, séances B1/B2, « faire le point », et simplement en les employant correctement en conversation (3 fois, dans 2 conversations).</p>
+                <p><b>Ton vocabulaire couvert</b> compte les mots maîtrisés en exercice et les mots actifs à l'oral.</p>
+                <p><b>La mémoire du tuteur</b> montre les fautes qui reviennent, jusqu'à ce qu'elles disparaissent.</p>
+            </div>
+        </div>
+    </div>
+
     <div id="info-view" class="view">
         <button class="back-btn" onclick="showProfil()">← Retour</button>
         <h2>ℹ️ Infos & comment ça marche</h2>
         <div class="content-col" style="text-align:left;">
+            <button class="btn btn-green" onclick="showProgress()">🌱 Comment devenir bon en néerlandais (et comment l'app t'y aide)</button>
             <div class="study-box" style="text-align:left; max-width:none;">
                 <h3>📊 Les niveaux A1 / A2 / B1 / B2 (CECR)</h3>
                 <p style="font-size:0.9rem;">
                     C'est l'échelle européenne officielle pour les langues (Cadre Européen Commun de Référence).
-                    Ici, le niveau affiché est une <b>estimation</b> basée sur le % de ton vocabulaire vraiment maîtrisé :<br><br>
-                    <b>A1</b> — Débutant : bases essentielles (0-15% du vocabulaire)<br>
-                    <b>A2</b> — Élémentaire : peut gérer des échanges simples (15-35%)<br>
-                    <b>B1</b> — Intermédiaire : autonome dans la plupart des situations courantes (35-65%)<br>
-                    <b>B2</b> — Intermédiaire avancé : aisance, y compris sur des sujets professionnels (65-100%)<br><br>
-                    ⚠️ C'est une estimation basée sur ton vocabulaire, pas un vrai test certifiant (comme le CNaVT pour le néerlandais) — utile pour suivre ta progression, pas pour un CV.
+                    Ici, ton niveau monte avec les <b>notions de grammaire et de communication validées</b> : examens des modules, séances B1/B2, « faire le point », ou en les employant correctement en conversation. Il est indépendant de ton vocabulaire (suivi à part, en « vocabulaire couvert ») :<br><br>
+                    <b>A1</b> — Débutant : bases essentielles (≈ CVO 1.1 Breakthrough)<br>
+                    <b>A2</b> — Élémentaire : peut gérer des échanges simples (≈ CVO 1.2 Waystage)<br>
+                    <b>B1</b> — Intermédiaire : autonome dans la plupart des situations courantes (≈ CVO 2.1–2.4 Threshold)<br>
+                    <b>B2</b> — Intermédiaire avancé : aisance, y compris sur des sujets professionnels (≈ CVO 3.1–3.2 Vantage)<br><br>
+                    ⚠️ C'est une estimation, pas un test certifiant (comme le CNaVT ou le test NT2) : utile pour suivre ta progression, pas pour un CV.
                 </p>
             </div>
 

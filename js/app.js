@@ -2930,6 +2930,7 @@ if (firebaseAvailable) {
                         <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
                     </div>
                     <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📖 Les mots et la conjugaison · 📚 Des leçons en situation · 🎭 Parler et écrire en situation réelle · 🎮 Des jeux pour entretenir ton vocabulaire · 👤 en haut : ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
+                    <p style="font-size:0.85rem; margin-top:var(--space-3);"><a href="#" onclick="onboardingMarkSeen(); showProgress(); return false;">🌱 Comment devenir bon en néerlandais, et comment l'app t'y aide</a></p>
                     <div class="section-title" style="margin-top:var(--space-5);">Par où commencer ?</div>
                     <button class="btn btn-green" style="margin-top:var(--space-2);" onclick="onboardingGoTo('debut')">🌱 Je débute : premier module</button>
                     <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('bases')">💪 J'ai déjà des bases : on fait connaissance en conversation, et ce que je sais est validé</button>
@@ -7112,6 +7113,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             renderProfil();
         }
 
+        // Page « Comment devenir bon en néerlandais » (statique, dans index.html).
+        function showProgress() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('progress-view').classList.add('active');
+            setActiveNav('nav-profil');
+            window.scrollTo(0, 0);
+        }
+
         function showInfo() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('info-view').classList.add('active');
@@ -7254,6 +7263,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     </div>
                     ${state.freeAccess ? `<p style="font-size:0.72rem; color:var(--text-secondary); margin:-8px 0 var(--space-2) 14px;">Tu peux sauter le déverrouillage progressif et aller direct où tu veux (ex. B2). Ce n'est pas l'ordre recommandé — les notions plus avancées supposent souvent des prérequis non travaillés — mais rien ne t'en empêche.</p>` : ''}
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="showProgress()"><span class="pm-icon">🌱</span><span>Comment progresser</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showInfo()"><span class="pm-icon">ℹ️</span><span>Infos</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
                 </div>
@@ -14695,6 +14705,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             module: { desc: "lancer ou continuer un module en situation ; params.module = mot du titre (ex. courses, logement), sinon le prochain", run: p => { const all = MODRP_IDS.map(id => modRpData[id]).filter(Boolean); const q = p.module ? normalize(p.module) : ''; const m = (q && all.find(x => normalize(x.titre).includes(q) || x.id.includes(q))) || buddyNextModule() || all[0]; if (m) guideStart(m.id); else showApprendre(); } },
             grammaire: { desc: 'mémo de grammaire', run: () => showComprendre() },
             cours_particulier: { desc: 'cours particulier avec le prof ; params.duree 15 ou 30', run: p => { if (p.duree) profSettings().dur = Number(p.duree) === 30 ? 30 : 15; showProf(); } },
+            progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
@@ -14726,6 +14737,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (has(/rejou|tel quel|mot pour mot/)) return { action: 'rejouer' };
             if (has(/entretien|sollicit|recruteur/)) return { action: 'entretiens' };
             if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
+            if (has(/comment progresser|devenir bon|etre bon|conseils?|routine|comment (ca|ça) marche|par ou commencer/)) return { action: 'progresser' };
             if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
             if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };
             if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
