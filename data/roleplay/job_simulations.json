@@ -1401,6 +1401,240 @@
         "het risico"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "ap_eerste_dag_vragen",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Premier jour chez Zonvella, fabricant familial de terrasoverkappingen, zonwering et pergola's. Ta formatrice t'accueille au bureau de production : c'est le moment de poser tes questions (logiciel de gestion, trajet d'une commande, kanban, analyses attendues, personnes de contact).",
+      "amorce": "Welkom bij Zonvella! Ik ga je de eerste weken opleiden. Voor we beginnen: heb je al vragen?",
+      "vocabulaire_cible": [
+        "het ERP-systeem",
+        "de bestelling",
+        "het kanbansysteem",
+        "de analyse",
+        "het aanspreekpunt"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_status_bestelling",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Un chef d'équipe passe au bureau : il lui manque des lamelles pour une commande qui doit partir en production demain. Tu ne sais pas encore où en est la commande fournisseur : tu dois clarifier, vérifier et promettre un retour précis.",
+      "amorce": "Zeg, weet jij waar de lamellen voor order 4512 blijven? We hebben ze morgen nodig voor de productie.",
+      "vocabulaire_cible": [
+        "de lamel",
+        "de levering",
+        "de leverancier",
+        "nakijken",
+        "erop terugkomen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_leverancier_vertraging",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "telephone_client",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Delmaro, fournisseur de moteurs pour les screens, appelle : la livraison prévue jeudi aura une semaine de retard. Trois commandes clients en dépendent. Tu dois comprendre, demander une livraison partielle ou une date ferme, et noter pour prévenir la production.",
+      "amorce": "Goeiemiddag, met Delmaro, afdeling verkoop. Ik bel in verband met jullie bestelling motoren: die levering zal helaas een week later komen.",
+      "vocabulaire_cible": [
+        "de vertraging",
+        "de deellevering",
+        "de leverdatum",
+        "verwittigen",
+        "de motor"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_chauffeur_loge",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "guichet_chauffeur",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Tu remplaces le portier à la loge. Un chauffeur de Transvio livre des profilés en aluminium. Sa pakbon indique 40 profilés, mais le bon de commande en prévoyait 60. Tu dois vérifier, noter l'écart sur les documents et prévenir les achats avant de signer.",
+      "amorce": "Dag, ik heb een levering aluminium profielen voor jullie. Waar moet ik lossen? En kan je hier even aftekenen?",
+      "vocabulaire_cible": [
+        "de pakbon",
+        "de bestelbon",
+        "het verschil",
+        "lossen",
+        "aftekenen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_kanban_lege_bak",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Le magasinier t'apporte une carte kanban : le bac de vis M6 est vide. C'est la deuxième fois ce mois-ci. Tu dois encoder la recommande, vérifier le délai du fournisseur et noter que ce bac se vide trop vite.",
+      "amorce": "De bak met de schroeven M6 is weer leeg. Hier is de kanbankaart. Wat doe jij daar nu mee?",
+      "vocabulaire_cible": [
+        "de kanbankaart",
+        "de bak",
+        "bestellen",
+        "de levertermijn",
+        "het verbruik"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_telefoon_bericht",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Le téléphone du service achats sonne, l'acheteur est absent. Un fournisseur veut une confirmation pour une référence. Tu prends le message : nom, société, numéro de rappel, référence épelée et relue.",
+      "amorce": "Goeiedag, mag ik de aankoopdienst? Het gaat over artikelnummer 2479-B, ik heb dringend een bevestiging nodig.",
+      "vocabulaire_cible": [
+        "het artikelnummer",
+        "spellen",
+        "noteren",
+        "terugbellen",
+        "de aankoopdienst"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_mail_nalezen",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu as écrit en néerlandais un mail à un fournisseur pour réclamer une confirmation de livraison. Avant de l'envoyer, tu demandes à une collègue de le relire, et tu lui expliques ce que tu veux dire si elle ne comprend pas une phrase.",
+      "amorce": "Ja, zeg het maar, ik heb even tijd. Wat is er?",
+      "vocabulaire_cible": [
+        "nalezen",
+        "de mail",
+        "de orderbevestiging",
+        "de fout",
+        "verbeteren"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_voorraadanalyse_presentatie",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Ton responsable t'a demandé une analyse de stock. Tes constats : 20 % des références représentent 80 % de la valeur du stock ; trois références (moteurs, LED, vis M6) tombent régulièrement en rupture ; des screens d'un ancien coloris dorment depuis neuf mois. Présente-les clairement, avec une proposition.",
+      "amorce": "Je had een voorraadanalyse gemaakt, hé? Vertel eens: wat zie je in de cijfers?",
+      "vocabulaire_cible": [
+        "de voorraadanalyse",
+        "de ABC-analyse",
+        "het voorraadtekort",
+        "de slapende voorraad",
+        "ik stel voor om"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_inventarisverschil",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "reunion",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Lors du comptage, on a trouvé 104 moteurs alors que le système en indique 120. Le responsable de production te demande d'où peut venir l'écart. Pistes possibles : sorties non encodées, livraison partielle encodée comme complète, erreur de comptage, retours non enregistrés.",
+      "amorce": "Bij de telling hebben we 104 motoren geteld, maar het systeem zegt 120. Hoe komt dat volgens jou?",
+      "vocabulaire_cible": [
+        "de telling",
+        "het verschil",
+        "de theoretische voorraad",
+        "invoeren",
+        "de oorzaak"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_bestelpunt_voorstel",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "reunion",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Tu as remarqué que la consommation de bandes LED a doublé depuis le printemps, mais que le point de commande kanban n'a pas changé : le bac se vide avant que la recommande arrive. Tu proposes de revoir la quantité par bac et le point de commande, chiffres à l'appui.",
+      "amorce": "Je wilde iets voorstellen over de kanban van de ledstrips? Ik luister.",
+      "vocabulaire_cible": [
+        "het bestelpunt",
+        "het verbruik",
+        "de hoeveelheid per bak",
+        "de levertermijn",
+        "aanpassen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_onthaal_bezoeker",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "balie",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu remplaces le portier à l'accueil. Un visiteur arrive pour un rendez-vous avec le responsable de production. Tu l'accueilles, tu lui fais remplir le registre, tu lui donnes un badge et les consignes de sécurité, et tu préviens la personne qu'il vient voir.",
+      "amorce": "Goedemorgen, ik heb om tien uur een afspraak met de productieverantwoordelijke.",
+      "vocabulaire_cible": [
+        "het onthaal",
+        "de afspraak",
+        "de bezoekersbadge",
+        "de veiligheidsvoorschriften",
+        "verwittigen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_dringende_wijziging",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Le chef de production arrive pressé : un gros client veut ses pergolas une semaine plus tôt. Il te demande de vérifier tout de suite si les composants sont en stock et ce qui manquerait. Tu dois clarifier la commande, dire ce que tu vas vérifier et dans quel délai.",
+      "amorce": "We moeten de planning omgooien: een grote klant wil zijn pergola's een week vroeger. Kan jij nakijken of we genoeg onderdelen hebben?",
+      "vocabulaire_cible": [
+        "de planning",
+        "de wijziging",
+        "de onderdelen",
+        "de stuklijst",
+        "dringend"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_draaitabel_vraag",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "chat",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Par la messagerie interne, une collègue des achats te demande un tableau de la consommation par semaine des cinq références les plus utilisées. Tu dois clarifier la période, les références et le format, puis expliquer comment tu vas le faire (draaitabel, SOMMEN.ALS).",
+      "amorce": "Hoi! Kan jij een overzicht maken van het verbruik per week van onze vijf belangrijkste referenties? Liefst tegen vrijdag.",
+      "vocabulaire_cible": [
+        "de draaitabel",
+        "het verbruik",
+        "per week",
+        "het overzicht",
+        "SOMMEN.ALS"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -1581,6 +1815,58 @@
         "cf_demande_specifique",
         "cf_bug_go_live",
         "cf_parametrage_explication"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_ap_eerste_week",
+      "metier": "admin_productie",
+      "label": "Ma première semaine chez Zonvella (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "ap_eerste_dag_vragen",
+        "ap_onthaal_bezoeker",
+        "ap_telefoon_bericht",
+        "ap_kanban_lege_bak",
+        "ap_status_bestelling",
+        "ap_mail_nalezen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_ap_courte",
+      "metier": "admin_productie",
+      "label": "Journée type au bureau de production (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "ap_status_bestelling",
+        "ap_chauffeur_loge",
+        "ap_leverancier_vertraging",
+        "ap_dringende_wijziging",
+        "ap_inventarisverschil",
+        "ap_voorraadanalyse_presentatie"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_ap_longue",
+      "metier": "admin_productie",
+      "label": "Grosse journée : stock, fournisseurs et analyses (longue)",
+      "duree_situations": 10,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "ap_kanban_lege_bak",
+        "ap_telefoon_bericht",
+        "ap_status_bestelling",
+        "ap_chauffeur_loge",
+        "ap_leverancier_vertraging",
+        "ap_dringende_wijziging",
+        "ap_draaitabel_vraag",
+        "ap_inventarisverschil",
+        "ap_bestelpunt_voorstel",
+        "ap_voorraadanalyse_presentatie"
       ],
       "_source": "redige_claude"
     }

@@ -1,0 +1,215 @@
+id;fr;nl;freq
+THEME_ADMIN_PRODUCTIE_0;la toiture de terrasse;de terrasoverkapping;5.20
+THEME_ADMIN_PRODUCTIE_1;la protection solaire;de zonwering;5.15
+THEME_ADMIN_PRODUCTIE_2;la pergola;de pergola;5.10
+THEME_ADMIN_PRODUCTIE_3;la pergola à lamelles orientables;de lamellenpergola;5.05
+THEME_ADMIN_PRODUCTIE_4;la lamelle;de lamel;5.00
+THEME_ADMIN_PRODUCTIE_5;le store vertical (screen);de screen;4.95
+THEME_ADMIN_PRODUCTIE_6;le store banne;het knikarmscherm;4.90
+THEME_ADMIN_PRODUCTIE_7;l'auvent / la marquise;de luifel;4.85
+THEME_ADMIN_PRODUCTIE_8;le profilé en aluminium;het aluminium profiel;4.80
+THEME_ADMIN_PRODUCTIE_9;le poteau;de staander;4.75
+THEME_ADMIN_PRODUCTIE_10;la gouttière;de goot;4.70
+THEME_ADMIN_PRODUCTIE_11;le moteur;de motor;4.65
+THEME_ADMIN_PRODUCTIE_12;la télécommande;de afstandsbediening;4.60
+THEME_ADMIN_PRODUCTIE_13;le capteur de vent;de windsensor;4.55
+THEME_ADMIN_PRODUCTIE_14;l'éclairage LED;de ledverlichting;4.50
+THEME_ADMIN_PRODUCTIE_15;la bande LED;de ledstrip;4.45
+THEME_ADMIN_PRODUCTIE_16;le chauffage de terrasse;de terrasverwarming;4.40
+THEME_ADMIN_PRODUCTIE_17;le panneau de verre;het glaspaneel;4.35
+THEME_ADMIN_PRODUCTIE_18;la paroi coulissante en verre;de glazen schuifwand;4.30
+THEME_ADMIN_PRODUCTIE_19;la toile (du store);het doek;4.25
+THEME_ADMIN_PRODUCTIE_20;la teinte RAL;de RAL-kleur;4.20
+THEME_ADMIN_PRODUCTIE_21;le thermolaquage;het poederlakken;4.15
+THEME_ADMIN_PRODUCTIE_22;la vis;de schroef;4.10
+THEME_ADMIN_PRODUCTIE_23;le boulon;de bout;4.05
+THEME_ADMIN_PRODUCTIE_24;le support de fixation;de beugel;4.00
+THEME_ADMIN_PRODUCTIE_25;le kit de montage;de montageset;3.95
+THEME_ADMIN_PRODUCTIE_26;sur mesure;op maat;3.90
+THEME_ADMIN_PRODUCTIE_27;le modèle standard;het standaardmodel;3.85
+THEME_ADMIN_PRODUCTIE_28;le revendeur;de verdeler;3.80
+THEME_ADMIN_PRODUCTIE_29;le poseur (installateur);de plaatser;3.75
+THEME_ADMIN_PRODUCTIE_30;le client final;de eindklant;3.70
+THEME_ADMIN_PRODUCTIE_31;l'entreprise familiale;het familiebedrijf;3.65
+THEME_ADMIN_PRODUCTIE_32;le hall de production;de productiehal;3.60
+THEME_ADMIN_PRODUCTIE_33;l'atelier (le sol de production);de werkvloer;3.55
+THEME_ADMIN_PRODUCTIE_34;la ligne de production;de productielijn;3.50
+THEME_ADMIN_PRODUCTIE_35;le poste de travail;de werkpost;3.45
+THEME_ADMIN_PRODUCTIE_36;le bureau (Belgique);het bureel;3.40
+THEME_ADMIN_PRODUCTIE_37;le quai de chargement;de laadkade;3.35
+THEME_ADMIN_PRODUCTIE_38;la loge du portier;de loge;3.30
+THEME_ADMIN_PRODUCTIE_39;l'accueil;het onthaal;3.25
+THEME_ADMIN_PRODUCTIE_40;le chef d'équipe;de ploegbaas;3.20
+THEME_ADMIN_PRODUCTIE_41;le responsable de production;de productieverantwoordelijke;3.15
+THEME_ADMIN_PRODUCTIE_42;le chef de production;de productieleider;3.10
+THEME_ADMIN_PRODUCTIE_43;le service achats;de aankoopdienst;3.05
+THEME_ADMIN_PRODUCTIE_44;l'acheteur;de aankoper;3.00
+THEME_ADMIN_PRODUCTIE_45;le service logistique;de logistieke dienst;3.00
+THEME_ADMIN_PRODUCTIE_46;le magasinier;de magazijnier;3.00
+THEME_ADMIN_PRODUCTIE_47;le portier;de portier;3.00
+THEME_ADMIN_PRODUCTIE_48;le formateur;de opleider;3.00
+THEME_ADMIN_PRODUCTIE_49;le fournisseur;de leverancier;3.00
+THEME_ADMIN_PRODUCTIE_50;le transporteur;de transporteur;3.00
+THEME_ADMIN_PRODUCTIE_51;le visiteur;de bezoeker;3.00
+THEME_ADMIN_PRODUCTIE_52;le responsable direct;de rechtstreekse leidinggevende;3.00
+THEME_ADMIN_PRODUCTIE_53;la personne de contact;het aanspreekpunt;3.00
+THEME_ADMIN_PRODUCTIE_54;l'intérimaire;de uitzendkracht;3.00
+THEME_ADMIN_PRODUCTIE_55;le contrat fixe;het vast contract;3.00
+THEME_ADMIN_PRODUCTIE_56;l'équipe (de travail posté);de ploeg;3.00
+THEME_ADMIN_PRODUCTIE_57;le stock;de voorraad;3.00
+THEME_ADMIN_PRODUCTIE_58;l'analyse de stock;de voorraadanalyse;3.00
+THEME_ADMIN_PRODUCTIE_59;le point de commande;het bestelpunt;3.00
+THEME_ADMIN_PRODUCTIE_60;le stock de sécurité;de veiligheidsvoorraad;3.00
+THEME_ADMIN_PRODUCTIE_61;la commande;de bestelling;3.00
+THEME_ADMIN_PRODUCTIE_62;passer une commande;een bestelling plaatsen;3.00
+THEME_ADMIN_PRODUCTIE_63;la commande client;de klantenorder;3.00
+THEME_ADMIN_PRODUCTIE_64;l'ordre de production;het productieorder;3.00
+THEME_ADMIN_PRODUCTIE_65;la commande fournisseur;het aankooporder;3.00
+THEME_ADMIN_PRODUCTIE_66;le délai de livraison;de levertermijn;3.00
+THEME_ADMIN_PRODUCTIE_67;la date de livraison;de leverdatum;3.00
+THEME_ADMIN_PRODUCTIE_68;la livraison;de levering;3.00
+THEME_ADMIN_PRODUCTIE_69;la livraison partielle;de deellevering;3.00
+THEME_ADMIN_PRODUCTIE_70;le retard;de vertraging;3.00
+THEME_ADMIN_PRODUCTIE_71;les pièces (composants);de onderdelen;3.00
+THEME_ADMIN_PRODUCTIE_72;la nomenclature;de stuklijst;3.00
+THEME_ADMIN_PRODUCTIE_73;le numéro d'article;het artikelnummer;3.00
+THEME_ADMIN_PRODUCTIE_74;la référence;de referentie;3.00
+THEME_ADMIN_PRODUCTIE_75;la quantité;de hoeveelheid;3.00
+THEME_ADMIN_PRODUCTIE_76;par pièce;per stuk;3.00
+THEME_ADMIN_PRODUCTIE_77;la rupture de stock;het voorraadtekort;3.00
+THEME_ADMIN_PRODUCTIE_78;plus en stock;niet meer op voorraad;3.00
+THEME_ADMIN_PRODUCTIE_79;l'excédent;het overschot;3.00
+THEME_ADMIN_PRODUCTIE_80;l'inventaire;de inventaris;3.00
+THEME_ADMIN_PRODUCTIE_81;le comptage;de telling;3.00
+THEME_ADMIN_PRODUCTIE_82;l'écart (différence);het verschil;3.00
+THEME_ADMIN_PRODUCTIE_83;la vitesse de rotation du stock;de omloopsnelheid;3.00
+THEME_ADMIN_PRODUCTIE_84;le stock dormant;de slapende voorraad;3.00
+THEME_ADMIN_PRODUCTIE_85;la couverture (en jours);de dekking;3.00
+THEME_ADMIN_PRODUCTIE_86;la consommation;het verbruik;3.00
+THEME_ADMIN_PRODUCTIE_87;la consommation moyenne;het gemiddeld verbruik;3.00
+THEME_ADMIN_PRODUCTIE_88;la prévision;de prognose;3.00
+THEME_ADMIN_PRODUCTIE_89;le stock théorique;de theoretische voorraad;3.00
+THEME_ADMIN_PRODUCTIE_90;le stock physique;de fysieke voorraad;3.00
+THEME_ADMIN_PRODUCTIE_91;l'emplacement de stockage;de stockplaats;3.00
+THEME_ADMIN_PRODUCTIE_92;la palette;de pallet;3.00
+THEME_ADMIN_PRODUCTIE_93;le carton;de doos;3.00
+THEME_ADMIN_PRODUCTIE_94;la sortie de stock;de uitgifte;3.00
+THEME_ADMIN_PRODUCTIE_95;l'entrée en stock;de ontvangst;3.00
+THEME_ADMIN_PRODUCTIE_96;le bon de commande;de bestelbon;3.00
+THEME_ADMIN_PRODUCTIE_97;le bon de livraison;de leveringsbon;3.00
+THEME_ADMIN_PRODUCTIE_98;le bordereau de colisage;de pakbon;3.00
+THEME_ADMIN_PRODUCTIE_99;la facture;de factuur;3.00
+THEME_ADMIN_PRODUCTIE_100;la lettre de voiture CMR;de CMR;3.00
+THEME_ADMIN_PRODUCTIE_101;la note d'envoi;de verzendnota;3.00
+THEME_ADMIN_PRODUCTIE_102;la confirmation de commande;de orderbevestiging;3.00
+THEME_ADMIN_PRODUCTIE_103;le devis (l'offre);de offerte;3.00
+THEME_ADMIN_PRODUCTIE_104;la signature;de handtekening;3.00
+THEME_ADMIN_PRODUCTIE_105;le cachet;de stempel;3.00
+THEME_ADMIN_PRODUCTIE_106;le classeur;de map;3.00
+THEME_ADMIN_PRODUCTIE_107;encoder (saisir);invoeren;3.00
+THEME_ADMIN_PRODUCTIE_108;encoder (en Belgique);ingeven;3.00
+THEME_ADMIN_PRODUCTIE_109;suivre (un dossier);opvolgen;3.00
+THEME_ADMIN_PRODUCTIE_110;vérifier;controleren;3.00
+THEME_ADMIN_PRODUCTIE_111;revoir, vérifier;nakijken;3.00
+THEME_ADMIN_PRODUCTIE_112;transmettre;doorgeven;3.00
+THEME_ADMIN_PRODUCTIE_113;commander;bestellen;3.00
+THEME_ADMIN_PRODUCTIE_114;réapprovisionner;aanvullen;3.00
+THEME_ADMIN_PRODUCTIE_115;classer;klasseren;3.00
+THEME_ADMIN_PRODUCTIE_116;relire;nalezen;3.00
+THEME_ADMIN_PRODUCTIE_117;dépanner (un collègue);bijspringen;3.00
+THEME_ADMIN_PRODUCTIE_118;signaler;melden;3.00
+THEME_ADMIN_PRODUCTIE_119;se coordonner avec;afstemmen met;3.00
+THEME_ADMIN_PRODUCTIE_120;résoudre;oplossen;3.00
+THEME_ADMIN_PRODUCTIE_121;rappeler (au téléphone);terugbellen;3.00
+THEME_ADMIN_PRODUCTIE_122;passer un appel à quelqu'un;doorverbinden;3.00
+THEME_ADMIN_PRODUCTIE_123;prendre un message;een bericht noteren;3.00
+THEME_ADMIN_PRODUCTIE_124;épeler;spellen;3.00
+THEME_ADMIN_PRODUCTIE_125;réceptionner une livraison;een levering ontvangen;3.00
+THEME_ADMIN_PRODUCTIE_126;décharger;lossen;3.00
+THEME_ADMIN_PRODUCTIE_127;signer pour réception;aftekenen;3.00
+THEME_ADMIN_PRODUCTIE_128;prévenir (avertir);verwittigen;3.00
+THEME_ADMIN_PRODUCTIE_129;rechercher (une information);opzoeken;3.00
+THEME_ADMIN_PRODUCTIE_130;ajuster;aanpassen;3.00
+THEME_ADMIN_PRODUCTIE_131;planifier;inplannen;3.00
+THEME_ADMIN_PRODUCTIE_132;la carte kanban;de kanbankaart;3.00
+THEME_ADMIN_PRODUCTIE_133;le bac;de bak;3.00
+THEME_ADMIN_PRODUCTIE_134;le signal;het signaal;3.00
+THEME_ADMIN_PRODUCTIE_135;le bac vide;de lege bak;3.00
+THEME_ADMIN_PRODUCTIE_136;le système à deux bacs;het tweebakkensysteem;3.00
+THEME_ADMIN_PRODUCTIE_137;la quantité par bac;de hoeveelheid per bak;3.00
+THEME_ADMIN_PRODUCTIE_138;le délai de traitement (lead time);de doorlooptijd;3.00
+THEME_ADMIN_PRODUCTIE_139;le planning;de planning;3.00
+THEME_ADMIN_PRODUCTIE_140;la modification;de wijziging;3.00
+THEME_ADMIN_PRODUCTIE_141;la priorité;de prioriteit;3.00
+THEME_ADMIN_PRODUCTIE_142;la commande urgente;de spoedbestelling;3.00
+THEME_ADMIN_PRODUCTIE_143;le goulot d'étranglement;het knelpunt;3.00
+THEME_ADMIN_PRODUCTIE_144;le fichier Excel;het Excelbestand;3.00
+THEME_ADMIN_PRODUCTIE_145;la feuille de calcul;het werkblad;3.00
+THEME_ADMIN_PRODUCTIE_146;la cellule;de cel;3.00
+THEME_ADMIN_PRODUCTIE_147;la colonne;de kolom;3.00
+THEME_ADMIN_PRODUCTIE_148;la ligne (d'un tableau);de rij;3.00
+THEME_ADMIN_PRODUCTIE_149;la formule;de formule;3.00
+THEME_ADMIN_PRODUCTIE_150;RECHERCHEV (Excel);VERT.ZOEKEN;3.00
+THEME_ADMIN_PRODUCTIE_151;RECHERCHEX (Excel);X.ZOEKEN;3.00
+THEME_ADMIN_PRODUCTIE_152;SOMME.SI.ENS (Excel);SOMMEN.ALS;3.00
+THEME_ADMIN_PRODUCTIE_153;NB.SI (Excel);AANTAL.ALS;3.00
+THEME_ADMIN_PRODUCTIE_154;SI (Excel);ALS;3.00
+THEME_ADMIN_PRODUCTIE_155;SOMME (Excel);SOM;3.00
+THEME_ADMIN_PRODUCTIE_156;MOYENNE (Excel);GEMIDDELDE;3.00
+THEME_ADMIN_PRODUCTIE_157;le tableau croisé dynamique;de draaitabel;3.00
+THEME_ADMIN_PRODUCTIE_158;la mise en forme conditionnelle;de voorwaardelijke opmaak;3.00
+THEME_ADMIN_PRODUCTIE_159;la validation des données;de gegevensvalidatie;3.00
+THEME_ADMIN_PRODUCTIE_160;figer les volets;titels blokkeren;3.00
+THEME_ADMIN_PRODUCTIE_161;le filtre;de filter;3.00
+THEME_ADMIN_PRODUCTIE_162;trier;sorteren;3.00
+THEME_ADMIN_PRODUCTIE_163;la liste déroulante;de vervolgkeuzelijst;3.00
+THEME_ADMIN_PRODUCTIE_164;le graphique;de grafiek;3.00
+THEME_ADMIN_PRODUCTIE_165;l'aperçu (le tableau récapitulatif);het overzicht;3.00
+THEME_ADMIN_PRODUCTIE_166;l'analyse ABC;de ABC-analyse;3.00
+THEME_ADMIN_PRODUCTIE_167;la tendance;de trend;3.00
+THEME_ADMIN_PRODUCTIE_168;la hausse;de stijging;3.00
+THEME_ADMIN_PRODUCTIE_169;la baisse;de daling;3.00
+THEME_ADMIN_PRODUCTIE_170;la moyenne;het gemiddelde;3.00
+THEME_ADMIN_PRODUCTIE_171;l'écart (par rapport à la norme);de afwijking;3.00
+THEME_ADMIN_PRODUCTIE_172;le pourcentage;het percentage;3.00
+THEME_ADMIN_PRODUCTIE_173;le chiffre;het cijfer;3.00
+THEME_ADMIN_PRODUCTIE_174;les chiffres montrent que;uit de cijfers blijkt dat;3.00
+THEME_ADMIN_PRODUCTIE_175;je constate que;ik stel vast dat;3.00
+THEME_ADMIN_PRODUCTIE_176;le constat;de vaststelling;3.00
+THEME_ADMIN_PRODUCTIE_177;d'après mon analyse;volgens mijn analyse;3.00
+THEME_ADMIN_PRODUCTIE_178;la cause;de oorzaak;3.00
+THEME_ADMIN_PRODUCTIE_179;la conséquence;het gevolg;3.00
+THEME_ADMIN_PRODUCTIE_180;la proposition;het voorstel;3.00
+THEME_ADMIN_PRODUCTIE_181;je propose de;ik stel voor om;3.00
+THEME_ADMIN_PRODUCTIE_182;l'amélioration;de verbetering;3.00
+THEME_ADMIN_PRODUCTIE_183;le capital immobilisé;het vastliggend kapitaal;3.00
+THEME_ADMIN_PRODUCTIE_184;l'arrêt de production;de productiestilstand;3.00
+THEME_ADMIN_PRODUCTIE_185;le risque;het risico;3.00
+THEME_ADMIN_PRODUCTIE_186;la valeur du stock;de voorraadwaarde;3.00
+THEME_ADMIN_PRODUCTIE_187;le tableau de bord;het dashboard;3.00
+THEME_ADMIN_PRODUCTIE_188;le rapport;het rapport;3.00
+THEME_ADMIN_PRODUCTIE_189;l'indicateur (KPI);het kengetal;3.00
+THEME_ADMIN_PRODUCTIE_190;les fournitures de bureau;het kantoormateriaal;3.00
+THEME_ADMIN_PRODUCTIE_191;le rendez-vous;de afspraak;3.00
+THEME_ADMIN_PRODUCTIE_192;le badge visiteur;de bezoekersbadge;3.00
+THEME_ADMIN_PRODUCTIE_193;le registre des visiteurs;het bezoekersregister;3.00
+THEME_ADMIN_PRODUCTIE_194;les consignes de sécurité;de veiligheidsvoorschriften;3.00
+THEME_ADMIN_PRODUCTIE_195;les chaussures de sécurité;de veiligheidsschoenen;3.00
+THEME_ADMIN_PRODUCTIE_196;le gilet fluo;het fluohesje;3.00
+THEME_ADMIN_PRODUCTIE_197;Pouvez-vous répéter ?;Kan u dat herhalen?;3.00
+THEME_ADMIN_PRODUCTIE_198;Un peu plus lentement, s'il vous plaît ?;Een beetje trager, alstublieft?;3.00
+THEME_ADMIN_PRODUCTIE_199;Pouvez-vous l'épeler ?;Kan u dat spellen?;3.00
+THEME_ADMIN_PRODUCTIE_200;Si je comprends bien, ...;Als ik het goed begrijp, ...;3.00
+THEME_ADMIN_PRODUCTIE_201;Je relis le numéro.;Ik lees het nummer nog eens voor.;3.00
+THEME_ADMIN_PRODUCTIE_202;C'est bien ça ?;Klopt dat?;3.00
+THEME_ADMIN_PRODUCTIE_203;Je vérifie et je reviens vers vous.;Ik kijk het na en ik kom erop terug.;3.00
+THEME_ADMIN_PRODUCTIE_204;Je préfère demander.;Ik vraag het liever na.;3.00
+THEME_ADMIN_PRODUCTIE_205;Qui est à l'appareil ?;Met wie spreek ik?;3.00
+THEME_ADMIN_PRODUCTIE_206;C'est pour qui ?;Voor wie is het?;3.00
+THEME_ADMIN_PRODUCTIE_207;Je vous passe la personne.;Ik verbind u door.;3.00
+THEME_ADMIN_PRODUCTIE_208;On vous rappelle.;We bellen u terug.;3.00
+THEME_ADMIN_PRODUCTIE_209;Peux-tu relire mon mail ?;Kan je mijn mail even nalezen?;3.00
+THEME_ADMIN_PRODUCTIE_210;Où en est la commande ?;Hoe ver staat de bestelling?;3.00
+THEME_ADMIN_PRODUCTIE_211;Quand sera-t-elle livrée ?;Wanneer wordt ze geleverd?;3.00
+THEME_ADMIN_PRODUCTIE_212;Nous en avons besoin demain.;We hebben ze morgen nodig.;3.00
+THEME_ADMIN_PRODUCTIE_213;C'est urgent.;Het is dringend.;3.00

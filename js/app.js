@@ -2249,7 +2249,8 @@ if (firebaseAvailable) {
                 'THEME_BIBLIOTHEQUE.csv',
                 'THEME_DATA.csv',
                 'THEME_PMO.csv',
-                'THEME_ERP.csv'
+                'THEME_ERP.csv',
+                'THEME_ADMIN_PRODUCTIE.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -2331,6 +2332,7 @@ if (firebaseAvailable) {
             if (errors.length) {
                 document.getElementById('load-error').innerText = errors.join('\n');
             }
+            vocabThemes = loadedThemes;
             renderThemes(loadedThemes);
             renderCustomListsHome();
             renderMainCategories();
@@ -5781,7 +5783,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', THEME_ADMIN_PRODUCTIE: '🏭 Admin. production', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -5813,8 +5815,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (totalEl) totalEl.innerText = `${totalWords} mots au total — ${totalMastered} maîtrisés (${totalPct}%)`;
         }
 
+        // Thèmes chargés, redessinés à chaque ouverture de Vocabulaire (un métier privé n'apparaît
+        // qu'une fois le compte connu).
+        let vocabThemes = [];
         function renderThemes(themes) {
             const section = document.getElementById('theme-section');
+            themes = themes.filter(t => !metierHiddenFile(t.file));
             if (!themes.length) { section.innerHTML = ''; return; }
             section.innerHTML = '<div class="section-title">💼 Thèmes métier</div><div class="grid" style="margin-top:0;">' +
                 themes.map(t => `<div class="card-menu blue" onclick="vocabOpenCat('file', '${t.file}')">${categoryLabel(t.file)} (${t.count})</div>`).join('') +
@@ -5842,6 +5848,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('vocab-view').classList.add('active');
             setActiveNav('nav-vocab');
             renderMainCategories();
+            renderThemes(vocabThemes);
             renderCustomListsHome();
             updateDirectionButton();
             renderReviser();
@@ -9001,8 +9008,28 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             bibliotheque: { label: '📚 Bibliothèque', domaine: 'bibliothèque publique (employé de bibliothèque d\'une commune)', noms: 'la bibliothèque communale de Zonvelde (commune inventée) pour l\'employeur, Delmaro pour un fournisseur de livres' },
             data_analyst: { label: '📈 Data analyst junior', domaine: 'analyse de données (data analyst junior)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients' },
             pmo: { label: '🧭 PMO (pilotage de projets)', domaine: 'PMO, pilotage de portefeuille de projets (assistant(e) PMO junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' },
-            consultant_fonctionnel: { label: '🧩 Consultant fonctionnel', domaine: 'conseil fonctionnel en logiciel de gestion / ERP (consultant fonctionnel junior)', noms: 'Zonvella pour l\'éditeur ou l\'intégrateur du candidat, Delmaro ou Logistiko pour des clients (PME)' }
+            consultant_fonctionnel: { label: '🧩 Consultant fonctionnel', domaine: 'conseil fonctionnel en logiciel de gestion / ERP (consultant fonctionnel junior)', noms: 'Zonvella pour l\'éditeur ou l\'intégrateur du candidat, Delmaro ou Logistiko pour des clients (PME)' },
+            // Métier privé (prive) : visible seulement pour l'admin, ou pour qui l'a déjà choisi
+            // (Joas, octobre 2026 : « un mode accessible que pour moi pour l'instant »). vigilance :
+            // fautes fréquentes données au correcteur pendant ses situations (rien de personnel).
+            admin_productie: { prive: true, csv: 'THEME_ADMIN_PRODUCTIE',
+                vigilance: "Fautes fréquentes chez cet apprenant, à relever à chaque fois : « ik hebt » au lieu de « ik heb » ; participe des verbes en ont-, be-, ver-, her- sans ge- (« ontvangen », pas « geontvangen ») ; verbe en DEUXIÈME position (inversion après un complément en tête de phrase) ; « de meest relevante », pas « de meeste relevant » ; mot anglais glissé quand un mot néerlandais manque.",
+                label: '🏭 Soutien administratif production', domaine: 'soutien administratif à la production chez un fabricant (commandes, stock, kanban, analyses, accueil et téléphone)', noms: 'Zonvella pour l\'entreprise du candidat (fabricant familial de terrasoverkappingen, zonwering et pergola\'s), Delmaro pour un fournisseur de composants, Transvio ou Nordvracht pour des transporteurs' }
         };
+        function metierVisible(m) {
+            const M = RP_METIERS[m];
+            return !M || !M.prive || !!(currentUserDoc && currentUserDoc.role === 'admin') || !!(state.settings && state.settings.jobMetier === m);
+        }
+        // Fichier de vocabulaire d'un métier privé qu'on ne doit pas voir.
+        function metierHiddenFile(f) {
+            return Object.entries(RP_METIERS).some(([k, M]) => M.prive && M.csv === f && !metierVisible(k));
+        }
+        let rpJobLiveMetier = null; // métier de la situation en cours (consignes du correcteur)
+        function liveMetierVigilance() {
+            const M = rpJobLiveMetier && RP_METIERS[rpJobLiveMetier];
+            const v = document.getElementById('roleplay-view');
+            return M && M.vigilance && v && v.classList.contains('active') ? '\n' + M.vigilance : '';
+        }
         const RP_JOB_METIERS = Object.fromEntries(Object.entries(RP_METIERS).map(([k, v]) => [k, v.label])); // un métier absent s'affiche avec son nom brut
         const RP_JOB_CANAUX = {
             guichet_chauffeur: { label: '🚛 Guichet chauffeurs', prompt: 'face à face, au guichet ou sur le quai' },
@@ -10129,7 +10156,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             document.getElementById('rp-step-scenario').style.display = '';
             document.getElementById('rp-step-chat').style.display = 'none';
             const data = await rpLoadJobData();
-            const metiers = [...new Set(data.situations.map(s => s.metier).filter(Boolean))];
+            const metiers = [...new Set(data.situations.map(s => s.metier).filter(Boolean))].filter(metierVisible);
             if (!metiers.length) { listDiv.innerHTML = '<p style="color:#888;">Aucune situation pour l\'instant.</p>'; return; }
             const saved = state.settings && state.settings.jobMetier;
             if (!metiers.includes(rpJobMetier)) rpJobMetier = metiers.includes(saved) ? saved : metiers[0];
@@ -10219,12 +10246,14 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
         function rpStartSituation(id) {
             const s = rpJobData && rpJobData.situations.find(x => x.id === id);
             if (!s || !rpJobRequireGemini()) return;
+            rpJobLiveMetier = s.metier || null;
             rpDayState = null;
             rpJobBeginSituation(s);
         }
 
         function rpStartDay(journeeIndex) {
             if (!rpJobData || !rpJobRequireGemini()) return;
+            rpJobLiveMetier = rpJobMetier;
             const journee = journeeIndex >= 0 ? rpJobData.journees[journeeIndex] : null;
             const situations = rpComposeDay(rpJobMetier, journee, RP_JOB_DURATIONS[rpJobDuration]);
             if (!situations.length) return;
@@ -10386,7 +10415,12 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             { key: 'cf_standard', metier: 'consultant_fonctionnel', label: '⚙️ Standard ou sur-mesure', sujet: 'un client veut un développement sur mesure ; le logiciel standard fait presque la même chose : que conseiller (coût, mises à jour, habitudes des utilisateurs) ?' },
             { key: 'cf_adoption', metier: 'consultant_fonctionnel', label: '🙋 Faire adopter le logiciel', sujet: 'trois mois après le démarrage, les employés continuent d\'utiliser leurs fichiers Excel : pourquoi, et que faire ?' },
             { key: 'cf_demarrage', metier: 'consultant_fonctionnel', label: '🚦 Démarrer ou reporter ?', sujet: 'la date de démarrage approche mais les tests ne sont pas finis : démarrer quand même, démarrer en partie, ou reporter ?' },
-            { key: 'cf_processus', metier: 'consultant_fonctionnel', label: '🔄 Simplifier un processus', sujet: 'le processus de commande du client a beaucoup d\'étapes manuelles : que peut-on simplifier avec le logiciel ?' }
+            { key: 'cf_processus', metier: 'consultant_fonctionnel', label: '🔄 Simplifier un processus', sujet: 'le processus de commande du client a beaucoup d\'étapes manuelles : que peut-on simplifier avec le logiciel ?' },
+            { key: 'ap_ecart', metier: 'admin_productie', label: '🔢 Écart d\'inventaire', sujet: 'le stock compté ne correspond pas au stock du système pour une référence importante : d\'où peut venir l\'écart, et que faire ?' },
+            { key: 'ap_abc', metier: 'admin_productie', label: '🅰️ Analyse ABC', sujet: 'à partir d\'une courte liste de références avec leur consommation et leur valeur, lesquelles faut-il surveiller de près et pourquoi ?' },
+            { key: 'ap_couverture', metier: 'admin_productie', label: '📆 Couverture de stock', sujet: 'avec le stock actuel et la consommation moyenne par semaine, combien de temps la production est-elle couverte, et faut-il commander maintenant ?' },
+            { key: 'ap_kanban', metier: 'admin_productie', label: '🗂️ Paramètres kanban', sujet: 'la consommation d\'un composant a fortement changé : le point de commande et la quantité par bac kanban sont-ils encore bons ?' },
+            { key: 'ap_retard', metier: 'admin_productie', label: '⏳ Retard fournisseur', sujet: 'une livraison de composants arrive une semaine plus tard que prévu : quelles commandes clients sont touchées, et que proposer ?' }
         ];
         let rpCaseMetier = 'logistique';
         const rpCaseThemesOf = m => RP_CASE_THEMES.filter(t => t.metier === m);
@@ -10410,7 +10444,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <p class="rp-real-hint">Un recruteur te présente un petit problème d'entreprise. Pose-lui des questions, puis explique ce que tu ferais et pourquoi. Un cas différent à chaque fois.</p>
                 <div class="rp-job-canal">Métier</div>
                 <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
-                    ${[...new Set(RP_CASE_THEMES.map(t => t.metier))].map(m => chip(rpCaseMetier === m, `rpCaseSet('metier','${m}')`, RP_JOB_METIERS[m] || m)).join('')}
+                    ${[...new Set(RP_CASE_THEMES.map(t => t.metier))].filter(metierVisible).map(m => chip(rpCaseMetier === m, `rpCaseSet('metier','${m}')`, RP_JOB_METIERS[m] || m)).join('')}
                 </div>
                 <div class="rp-job-canal">Thème</div>
                 <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
@@ -13746,7 +13780,7 @@ Réponds UNIQUEMENT en JSON :
             return `Tu es correcteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase qu'il vient de dire à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou d'écrire.
 ${LIVE_MIX_RULES}
 Corrige les vraies fautes (grammaire, ordre des mots, conjugaison, de/het, mot faux ou inexistant) et ce qui sonnerait nettement mieux autrement ; garde son idée, ne rajoute rien. S'il y a des répétitions dues à la dictée, ne les garde qu'une fois. "corrige" contient UNIQUEMENT la phrase corrigée : jamais de note, de commentaire ni de crochets.
-Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.${notionPromptPart()}
+Si la phrase est ENTIÈREMENT en français (une question qu'il te pose, par exemple), réponds {"tout_fr": true}.${notionPromptPart()}${liveMetierVigilance()}
 ${question ? `Il répond à cette réplique de son interlocuteur : « ${String(question).replace(/"/g, "'").slice(0, 500)} »
 ${LIVE_OFFTOPIC_RULE}
 ` : ''}Phrase : "${String(text).replace(/"/g, "'")}"
@@ -15007,7 +15041,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             // Sans niveau CECR dans les données, on l'estime par la fréquence (Zipf).
             const est = i => i.niveauCECR || (i.freq >= 5 ? 'A1' : i.freq >= 4.3 ? 'A2' : i.freq >= 3.6 ? 'B1' : 'B2');
             const rank = i => { const d = order.indexOf(est(i)) - lvl; return d === 0 ? 0 : d === -1 ? 1 : d === 1 ? 2 : 3 + Math.abs(d); };
-            return fullDb.filter(i => i.nl && i.fr && i.id && !String(i.id).startsWith('KIT:') && !String(i.id).startsWith('RPW:') && !['PHRASES_LABO', 'LOCUTIONS_NL', 'MOTS_OUTILS_NL'].includes(i.file)
+            return fullDb.filter(i => i.nl && i.fr && i.id && !metierHiddenFile(i.file) && !String(i.id).startsWith('KIT:') && !String(i.id).startsWith('RPW:') && !['PHRASES_LABO', 'LOCUTIONS_NL', 'MOTS_OUTILS_NL'].includes(i.file)
                     && String(i.nl).replace(/^(de|het|een)\s+/i, '').length >= 3
                     && wordStatus(i.id) === 'unseen' && !isMasteredAnyDirection(i.id) && !isActiveWord(i.id) && !rs.newWords.includes(i.id)
                     && order.indexOf(est(i)) <= lvl + 1)

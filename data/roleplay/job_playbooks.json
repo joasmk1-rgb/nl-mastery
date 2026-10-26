@@ -1775,6 +1775,331 @@
         "Dire que tout va bien par peur de décevoir.",
         "Noyer ta cheffe dans les détails du paramétrage."
       ]
+    },
+    "ap_eerste_dag_vragen": {
+      "titre": "Le premier jour : poser les bonnes questions",
+      "etapes": [
+        {
+          "fr": "Remercier et montrer qu'on veut vite être utile.",
+          "phrase": "Dank je, ik ben blij dat ik hier ben. Ik wil zo snel mogelijk zelfstandig kunnen werken."
+        },
+        {
+          "fr": "Demander le trajet complet d'une commande, du client à la facture.",
+          "phrase": "Hoe loopt een order hier van begin tot einde, van de klant tot de facturatie?"
+        },
+        {
+          "fr": "Demander quel logiciel on utilise et quels rapports existent déjà.",
+          "phrase": "Welk ERP-systeem gebruiken jullie, en welke rapporten bestaan er al?"
+        },
+        {
+          "fr": "Demander ce qu'on attend de toi et les erreurs les plus fréquentes.",
+          "phrase": "Welke analyses verwachten jullie van mij? En wat gaat hier het vaakst fout?"
+        }
+      ],
+      "a_eviter": [
+        "Faire semblant d'avoir compris : mieux vaut faire répéter tout de suite.",
+        "Ne rien noter : personne n'aime réexpliquer deux fois."
+      ]
+    },
+    "ap_status_bestelling": {
+      "titre": "Un collègue demande où en est une commande",
+      "etapes": [
+        {
+          "fr": "Reformuler la demande : quelle commande, quelle pièce, pour quand.",
+          "phrase": "Dus je zoekt de lamellen voor order 4512, en je hebt ze morgen nodig. Klopt dat?"
+        },
+        {
+          "fr": "Dire honnêtement ce que tu sais, et ce que tu vas vérifier.",
+          "phrase": "Ik weet het nog niet. Ik kijk de aankooporder na en ik bel de leverancier."
+        },
+        {
+          "fr": "Promettre un retour précis, avec une heure.",
+          "phrase": "Ik kom er voor elf uur op terug."
+        },
+        {
+          "fr": "Revenir avec la réponse, et une solution si c'est en retard.",
+          "phrase": "De levering komt morgenvroeg. Als dat te laat is, kunnen we een deellevering vragen."
+        }
+      ],
+      "a_eviter": [
+        "Donner une date au hasard : une estimation devient une promesse.",
+        "Oublier de revenir vers lui, même sans nouvelle."
+      ]
+    },
+    "ap_leverancier_vertraging": {
+      "titre": "Un fournisseur annonce un retard",
+      "etapes": [
+        {
+          "fr": "Noter la commande concernée et la nouvelle date.",
+          "phrase": "Over welke bestelling gaat het precies, en wat is de nieuwe leverdatum?"
+        },
+        {
+          "fr": "Demander la cause et si une partie peut être livrée plus tôt.",
+          "phrase": "Is een deellevering mogelijk? We hebben er minstens twintig dringend nodig."
+        },
+        {
+          "fr": "Faire confirmer la date par écrit.",
+          "phrase": "Kan u die nieuwe datum per mail bevestigen?"
+        },
+        {
+          "fr": "Prévenir la production et les achats.",
+          "phrase": "Ik verwittig de productie en de aankoopdienst meteen."
+        }
+      ],
+      "a_eviter": [
+        "Accepter le retard sans demander de solution.",
+        "Garder l'information pour soi jusqu'au lendemain."
+      ]
+    },
+    "ap_chauffeur_loge": {
+      "titre": "À la loge : les papiers ne correspondent pas",
+      "etapes": [
+        {
+          "fr": "Accueillir le chauffeur et demander les documents.",
+          "phrase": "Dag! Mag ik de pakbon en de CMR even zien?"
+        },
+        {
+          "fr": "Comparer avec le bon de commande et nommer l'écart.",
+          "phrase": "Op de pakbon staan veertig profielen, maar we hadden er zestig besteld."
+        },
+        {
+          "fr": "Noter l'écart sur le document avant de signer.",
+          "phrase": "Ik noteer het verschil op de pakbon voor ik afteken."
+        },
+        {
+          "fr": "Prévenir les achats.",
+          "phrase": "Ik geef het door aan de aankoopdienst, zij nemen contact op met jullie."
+        }
+      ],
+      "a_eviter": [
+        "Signer sans compter ni comparer : la signature dit que tout est arrivé.",
+        "Renvoyer le chauffeur sans avoir prévenu personne."
+      ]
+    },
+    "ap_kanban_lege_bak": {
+      "titre": "Un bac kanban est vide",
+      "etapes": [
+        {
+          "fr": "Prendre la carte et vérifier la référence et la quantité.",
+          "phrase": "Dank je. Schroeven M6, vijfhonderd stuks per bak. Klopt dat?"
+        },
+        {
+          "fr": "Encoder la recommande et vérifier le délai.",
+          "phrase": "Ik plaats de bestelling meteen. De levertermijn is drie dagen."
+        },
+        {
+          "fr": "Dire si la production risque de manquer.",
+          "phrase": "Is er nog een tweede bak, of komen jullie tekort voor de levering?"
+        },
+        {
+          "fr": "Noter que le bac se vide trop souvent.",
+          "phrase": "Dat is al de tweede keer deze maand. Ik noteer het voor de kanbananalyse."
+        }
+      ],
+      "a_eviter": [
+        "Commander sans vérifier le délai fournisseur.",
+        "Ignorer une rupture qui revient : c'est un signal, pas un hasard."
+      ]
+    },
+    "ap_telefoon_bericht": {
+      "titre": "Prendre un message au téléphone",
+      "etapes": [
+        {
+          "fr": "Dire que la personne est absente et proposer de prendre un message.",
+          "phrase": "De aankoper is er momenteel niet. Mag ik een bericht noteren?"
+        },
+        {
+          "fr": "Demander le nom, la société et le numéro, et faire épeler.",
+          "phrase": "Met wie spreek ik? Kan u uw naam spellen, alstublieft?"
+        },
+        {
+          "fr": "Relire la référence chiffre par chiffre.",
+          "phrase": "Ik lees het nummer nog eens voor: twee, vier, zeven, negen, B. Juist?"
+        },
+        {
+          "fr": "Promettre de transmettre et un rappel.",
+          "phrase": "Ik geef het door en we bellen u vandaag nog terug."
+        }
+      ],
+      "a_eviter": [
+        "Noter un numéro sans le relire.",
+        "Promettre une réponse sur le fond à la place de l'acheteur."
+      ]
+    },
+    "ap_mail_nalezen": {
+      "titre": "Faire relire un mail en néerlandais",
+      "etapes": [
+        {
+          "fr": "Demander poliment un peu de temps.",
+          "phrase": "Mag ik je iets vragen? Heb je twee minuutjes?"
+        },
+        {
+          "fr": "Dire ce que tu as écrit et à qui.",
+          "phrase": "Ik heb een mail opgesteld voor een leverancier, om een orderbevestiging te vragen."
+        },
+        {
+          "fr": "Demander une relecture.",
+          "phrase": "Kan je even nalezen of het goed is? Mijn Nederlands is nog niet perfect."
+        },
+        {
+          "fr": "Remercier et retenir la correction.",
+          "phrase": "Bedankt! Ik noteer het, dan maak ik die fout niet meer."
+        }
+      ],
+      "a_eviter": [
+        "Envoyer dix mails avec des fautes plutôt que d'en faire relire un.",
+        "S'excuser trop : demander une relecture est sérieux, pas faible."
+      ]
+    },
+    "ap_voorraadanalyse_presentatie": {
+      "titre": "Présenter une analyse de stock",
+      "etapes": [
+        {
+          "fr": "Annoncer le plan en une phrase.",
+          "phrase": "Ik heb drie vaststellingen en één voorstel."
+        },
+        {
+          "fr": "Donner les constats, chiffres à l'appui.",
+          "phrase": "Uit de cijfers blijkt dat twintig procent van de referenties tachtig procent van de waarde vertegenwoordigt."
+        },
+        {
+          "fr": "Nommer les problèmes : ruptures répétées, stock dormant.",
+          "phrase": "Drie referenties vallen regelmatig in tekort, en de oude screens liggen al negen maanden stil."
+        },
+        {
+          "fr": "Proposer une action concrète.",
+          "phrase": "Ik stel voor om die drie referenties wekelijks op te volgen en het bestelpunt te verhogen."
+        }
+      ],
+      "a_eviter": [
+        "Lire un tableau de chiffres sans conclusion.",
+        "Proposer sans dire ce que ça coûte ou ce que ça évite."
+      ]
+    },
+    "ap_inventarisverschil": {
+      "titre": "Expliquer un écart d'inventaire",
+      "etapes": [
+        {
+          "fr": "Reformuler l'écart.",
+          "phrase": "Dus we hebben zestien motoren minder dan het systeem zegt."
+        },
+        {
+          "fr": "Donner les causes possibles, sans accuser.",
+          "phrase": "Misschien zijn er uitgiftes niet ingegeven, of is een deellevering als volledig geboekt."
+        },
+        {
+          "fr": "Proposer comment vérifier.",
+          "phrase": "Ik kan de bewegingen van de laatste maand nakijken en vergelijken met de leveringsbonnen."
+        },
+        {
+          "fr": "Promettre un retour.",
+          "phrase": "Ik kom erop terug met de oorzaak en een voorstel."
+        }
+      ],
+      "a_eviter": [
+        "Corriger le stock dans le système sans comprendre l'écart.",
+        "Désigner un coupable."
+      ]
+    },
+    "ap_bestelpunt_voorstel": {
+      "titre": "Proposer de revoir un point de commande kanban",
+      "etapes": [
+        {
+          "fr": "Partir d'un constat chiffré.",
+          "phrase": "Het verbruik van ledstrips is sinds de lente verdubbeld."
+        },
+        {
+          "fr": "Expliquer la conséquence.",
+          "phrase": "De bak is leeg voor de nieuwe levering aankomt, dus de productie moet wachten."
+        },
+        {
+          "fr": "Faire la proposition.",
+          "phrase": "Ik stel voor om het bestelpunt te verhogen en de hoeveelheid per bak aan te passen."
+        },
+        {
+          "fr": "Proposer de tester et de suivre.",
+          "phrase": "We kunnen het een maand testen en daarna opnieuw bekijken."
+        }
+      ],
+      "a_eviter": [
+        "Proposer de tout augmenter : trop de stock immobilise de l'argent et de la place.",
+        "Oublier le délai fournisseur dans le calcul."
+      ]
+    },
+    "ap_onthaal_bezoeker": {
+      "titre": "Accueillir un visiteur à la loge",
+      "etapes": [
+        {
+          "fr": "Accueillir et demander le nom et la personne attendue.",
+          "phrase": "Goedemorgen! Mag ik uw naam, en met wie hebt u een afspraak?"
+        },
+        {
+          "fr": "Faire signer le registre et donner le badge.",
+          "phrase": "Wilt u hier even tekenen? Hier is uw bezoekersbadge."
+        },
+        {
+          "fr": "Donner les consignes de sécurité.",
+          "phrase": "In de productiehal moet u altijd een fluohesje dragen."
+        },
+        {
+          "fr": "Prévenir la personne et faire patienter.",
+          "phrase": "Ik verwittig hem, hij komt u zo halen. Neemt u even plaats."
+        }
+      ],
+      "a_eviter": [
+        "Laisser entrer un visiteur dans la production sans badge ni consignes.",
+        "Oublier de prévenir la personne attendue."
+      ]
+    },
+    "ap_dringende_wijziging": {
+      "titre": "Une commande urgente bouscule le planning",
+      "etapes": [
+        {
+          "fr": "Clarifier : quelle commande, quels produits, quelle date.",
+          "phrase": "Over welke order gaat het, hoeveel pergola's, en voor welke datum?"
+        },
+        {
+          "fr": "Dire ce que tu vas vérifier.",
+          "phrase": "Ik kijk de stuklijst na en ik vergelijk met de voorraad."
+        },
+        {
+          "fr": "Donner un délai de réponse.",
+          "phrase": "Binnen een uur weet je wat er ontbreekt."
+        },
+        {
+          "fr": "Annoncer ce qui manque et une piste.",
+          "phrase": "Er ontbreken veertig staanders. Ik vraag de leverancier of hij sneller kan leveren."
+        }
+      ],
+      "a_eviter": [
+        "Dire « oui, c'est possible » avant d'avoir vérifié.",
+        "Changer le planning sans prévenir les autres commandes concernées."
+      ]
+    },
+    "ap_draaitabel_vraag": {
+      "titre": "Une demande de tableau Excel",
+      "etapes": [
+        {
+          "fr": "Clarifier la période et les références.",
+          "phrase": "Over welke periode? De laatste drie maanden, of het hele jaar?"
+        },
+        {
+          "fr": "Clarifier le format attendu.",
+          "phrase": "Wil je een tabel per week, of ook een grafiek?"
+        },
+        {
+          "fr": "Dire comment tu vas le faire.",
+          "phrase": "Ik maak een draaitabel op basis van de uitgiftes, met het verbruik per week."
+        },
+        {
+          "fr": "Confirmer le délai.",
+          "phrase": "Je krijgt het donderdag, dan heb je nog tijd om het na te kijken."
+        }
+      ],
+      "a_eviter": [
+        "Commencer sans savoir ce que la personne veut en faire.",
+        "Envoyer des chiffres sans dire d'où ils viennent."
+      ]
     }
   }
 }

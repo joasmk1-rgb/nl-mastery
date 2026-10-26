@@ -1664,6 +1664,269 @@
         }
       ],
       "_source": "Vocabulaire tiré de la fiche de préparation de Joas."
+    },
+    "dom_ap": {
+      "label": "Soutien administratif production — l'entreprise et le stock",
+      "verbes": [
+        "invoeren",
+        "ingeven",
+        "opvolgen",
+        "nakijken",
+        "controleren",
+        "doorgeven",
+        "bestellen",
+        "aanvullen",
+        "verwittigen",
+        "oplossen"
+      ],
+      "mots": [
+        {
+          "nl": "de terrasoverkapping",
+          "fr": "la toiture de terrasse"
+        },
+        {
+          "nl": "de zonwering",
+          "fr": "la protection solaire"
+        },
+        {
+          "nl": "de pergola",
+          "fr": "la pergola"
+        },
+        {
+          "nl": "de lamel",
+          "fr": "la lamelle"
+        },
+        {
+          "nl": "de screen",
+          "fr": "le store vertical (screen)"
+        },
+        {
+          "nl": "het profiel",
+          "fr": "le profilé"
+        },
+        {
+          "nl": "de ploegbaas",
+          "fr": "le chef d'équipe"
+        },
+        {
+          "nl": "de aankoopdienst",
+          "fr": "le service achats"
+        },
+        {
+          "nl": "de magazijnier",
+          "fr": "le magasinier"
+        },
+        {
+          "nl": "de voorraad",
+          "fr": "le stock"
+        },
+        {
+          "nl": "het bestelpunt",
+          "fr": "le point de commande"
+        },
+        {
+          "nl": "de levertermijn",
+          "fr": "le délai de livraison"
+        },
+        {
+          "nl": "het artikelnummer",
+          "fr": "le numéro d'article"
+        },
+        {
+          "nl": "de pakbon",
+          "fr": "le bordereau de colisage"
+        },
+        {
+          "nl": "de kanbankaart",
+          "fr": "la carte kanban"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Ik kijk het na en ik kom erop terug.",
+          "fr": "Je vérifie et je reviens vers toi."
+        },
+        {
+          "nl": "Ik lees het nummer nog eens voor. Juist?",
+          "fr": "Je relis le numéro. C'est bien ça ?"
+        },
+        {
+          "nl": "Ik wil geen fout maken, dus ik vraag het liever na.",
+          "fr": "Je ne veux pas faire d'erreur, donc je préfère demander."
+        },
+        {
+          "nl": "Dus als ik het goed begrijp, ...",
+          "fr": "Donc si je comprends bien, ..."
+        }
+      ]
+    },
+    "dom_ap_analyse": {
+      "label": "Soutien administratif production — analyses et Excel",
+      "verbes": [
+        "analyseren",
+        "vergelijken",
+        "tellen",
+        "voorstellen",
+        "aanpassen",
+        "verhogen",
+        "verminderen",
+        "tonen"
+      ],
+      "mots": [
+        {
+          "nl": "de voorraadanalyse",
+          "fr": "l'analyse de stock"
+        },
+        {
+          "nl": "de ABC-analyse",
+          "fr": "l'analyse ABC"
+        },
+        {
+          "nl": "het verbruik",
+          "fr": "la consommation"
+        },
+        {
+          "nl": "de dekking",
+          "fr": "la couverture (en jours)"
+        },
+        {
+          "nl": "het voorraadtekort",
+          "fr": "la rupture de stock"
+        },
+        {
+          "nl": "de slapende voorraad",
+          "fr": "le stock dormant"
+        },
+        {
+          "nl": "de afwijking",
+          "fr": "l'écart"
+        },
+        {
+          "nl": "de trend",
+          "fr": "la tendance"
+        },
+        {
+          "nl": "de draaitabel",
+          "fr": "le tableau croisé dynamique"
+        },
+        {
+          "nl": "VERT.ZOEKEN",
+          "fr": "RECHERCHEV"
+        },
+        {
+          "nl": "SOMMEN.ALS",
+          "fr": "SOMME.SI.ENS"
+        },
+        {
+          "nl": "AANTAL.ALS",
+          "fr": "NB.SI"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Uit de cijfers blijkt dat ...",
+          "fr": "Les chiffres montrent que ..."
+        },
+        {
+          "nl": "Ik heb drie vaststellingen en één voorstel.",
+          "fr": "J'ai trois constats et une proposition."
+        },
+        {
+          "nl": "Ik stel voor om het bestelpunt te verhogen.",
+          "fr": "Je propose d'augmenter le point de commande."
+        },
+        {
+          "nl": "Dat legt geld en plaats vast.",
+          "fr": "Ça immobilise de l'argent et de la place."
+        }
+      ]
+    },
+    "sit_ap": {
+      "label": "Soutien administratif production — au quotidien",
+      "verbes": [
+        "bellen",
+        "terugbellen",
+        "noteren",
+        "spellen",
+        "herhalen",
+        "doorverbinden",
+        "lossen",
+        "tekenen",
+        "ontvangen",
+        "leveren"
+      ],
+      "mots": [
+        {
+          "nl": "de bestelling",
+          "fr": "la commande"
+        },
+        {
+          "nl": "de levering",
+          "fr": "la livraison"
+        },
+        {
+          "nl": "de deellevering",
+          "fr": "la livraison partielle"
+        },
+        {
+          "nl": "de vertraging",
+          "fr": "le retard"
+        },
+        {
+          "nl": "de bestelbon",
+          "fr": "le bon de commande"
+        },
+        {
+          "nl": "de leveringsbon",
+          "fr": "le bon de livraison"
+        },
+        {
+          "nl": "de orderbevestiging",
+          "fr": "la confirmation de commande"
+        },
+        {
+          "nl": "de loge",
+          "fr": "la loge (du portier)"
+        },
+        {
+          "nl": "het onthaal",
+          "fr": "l'accueil"
+        },
+        {
+          "nl": "de bezoekersbadge",
+          "fr": "le badge visiteur"
+        },
+        {
+          "nl": "de stuklijst",
+          "fr": "la nomenclature"
+        },
+        {
+          "nl": "de planning",
+          "fr": "le planning"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Sorry, kan u dat herhalen?",
+          "fr": "Pardon, pouvez-vous répéter ?"
+        },
+        {
+          "nl": "Een beetje trager, alstublieft?",
+          "fr": "Un peu plus lentement, s'il vous plaît ?"
+        },
+        {
+          "nl": "Mag ik een bericht noteren?",
+          "fr": "Puis-je prendre un message ?"
+        },
+        {
+          "nl": "Ik geef het door en we bellen u terug.",
+          "fr": "Je transmets et on vous rappelle."
+        },
+        {
+          "nl": "Kan je mijn mail even nalezen?",
+          "fr": "Peux-tu relire mon mail ?"
+        }
+      ]
     }
   },
   "scenarios": {
@@ -1703,6 +1966,7 @@
     "bib_": ["sit_bib"],
     "da_": ["sit_da"],
     "pmo_": ["sit_pmo"],
-    "cf_": ["sit_cf"]
+    "cf_": ["sit_cf"],
+    "ap_": ["dom_ap", "sit_ap", "dom_ap_analyse"]
   }
 }
