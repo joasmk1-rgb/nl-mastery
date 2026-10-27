@@ -8458,6 +8458,17 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return card;
         }
 
+        // Faits réels du candidat pour le souffleur (mode Candidat) : profil, canevas, offre visée.
+        function rpHelpCandidateFacts() {
+            const profile = (state.candidateProfile || '').trim();
+            const canvas = typeof canvasSummary === 'function' ? canvasSummary(2500) : '';
+            const o = typeof canvasOffer === 'function' ? canvasOffer() : null;
+            if (!profile && !canvas) return '';
+            return (profile ? 'Son profil (CV) : ' + profile.slice(0, 2500) + '\n' : '') +
+                (canvas ? 'Ses réponses préparées (idées) :\n' + canvas + '\n' : '') +
+                (o ? 'Offre visée : ' + o.titre + ' — ' + o.texte.slice(0, 800) + '\n' : '');
+        }
+
         async function rpHelpSuggest() {
             if (!rpHelpAvailable()) return;
             const body = rpHelpOpenPanel('💡 Ce que tu pourrais dire');
@@ -8468,7 +8479,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     'Tu es le souffleur d\'un francophone qui apprend le ' + langName + ' et s\'exerce dans un jeu de rôle. Situation : ' + rpCurrentScenario.label + '.\n' +
                     'Derniers échanges :\n"""' + rpHelpTranscript() + '"""\n\n' +
                     'Il ne sait pas quoi répondre à la dernière réplique de son interlocuteur. Propose 3 réponses possibles en ' + langName + ', différentes par leur contenu (pas trois variantes de la même phrase), courtes (1 à 2 phrases), naturelles à l\'oral, niveau A2-B1. ' +
-                    'N\'invente pas de faits précis sur sa vie : reste général ou laisse un blanc entre crochets.\n' +
+                    (rpRealInterview && rpCurrentScenario && String(rpCurrentScenario.id || '').startsWith('reel_') && rpHelpCandidateFacts()
+                        ? 'C\'est un entretien d\'embauche et l\'apprenant joue SON propre rôle : tire les réponses de ses vrais faits ci-dessous, sans rien inventer ; « fr » donne aussi, en une phrase, l\'idée à dire.\n' + rpHelpCandidateFacts() + '\n'
+                        : 'N\'invente pas de faits précis sur sa vie : reste général ou laisse un blanc entre crochets.\n') +
                     'Réponds UNIQUEMENT par un tableau JSON, sans texte autour : [{"phrase":"réponse en ' + langName + '","fr":"traduction française"}]'
                 );
                 const list = rpHelpParseJson(raw);
@@ -8651,6 +8664,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             listDiv.innerHTML = '<div class="rp-group-title">🎯 Je suis candidat — entretiens</div>' +
                 '<p class="rp-real-hint">Le recruteur pose les questions de vrais entretiens (ou des questions types du métier) et improvise ses relances selon tes réponses.</p>' +
                 `<button class="rp-scenario-btn rp-profile-btn" onclick="rpEditCandidateProfile()">📄 Mon profil de candidat <small>(privé : ${(state.candidateProfile || '').trim() ? 'rempli' : 'à remplir'})</small></button>` +
+                `<button class="rp-scenario-btn rp-profile-btn" onclick="rpCanvasShow()">🗂️ Mes réponses types et entretien RH sur mesure <small>(privé${canvasReady() ? '' : ' : à préparer'})</small></button>` +
                 (banks.length
                     ? banks.map((b, i) => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpRealSetup(${i})">${rpEscapeHtml(b.label)}${rpBankLang(b) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}${rpExampleTag(b)}</button>`, 'bank:' + b.id, b.label, { type: 'bank', index: i })).join('')
                     : '<p style="color:#888;">Aucun scénario réel pour l\'instant.</p>');
@@ -8701,6 +8715,270 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             save();
         }
 
+
+        // ===== 🗂️ Mes réponses types (canevas d'entretien) et RH sur mesure =====
+        // Joas (27 octobre 2026) : un canevas de réponses tiré de SON CV et de ses textes, à réécouter
+        // et à pratiquer, adapté à une offre précise s'il en colle une ; et un recruteur RH « sur
+        // mesure » qui pose les questions types pendant que le souffleur propose des réponses
+        // cohérentes avec son vrai parcours. Tout est PRIVÉ (state.answerCanvas, dans la progression) :
+        // textes, offres collées, réponses ; le dépôt ne contient que les questions types (RH_QUESTIONS).
+        const RH_QUESTIONS = [
+            { id: 'voorstellen', g: 'accroche', nl: 'Vertel eens iets over jezelf.', fr: 'Parle-moi un peu de toi.' },
+            { id: 'ervaring', g: 'verif_cv', nl: 'Welke ervaring heb je die nuttig is voor deze job?', fr: 'Quelle expérience as-tu qui est utile pour ce poste ?' },
+            { id: 'motivatie_functie', g: 'motivation', nl: 'Waarom heb je voor deze functie gesolliciteerd?', fr: 'Pourquoi as-tu postulé pour ce poste ?' },
+            { id: 'motivatie_bedrijf', g: 'motivation', nl: 'Waarom wil je bij ons werken? Wat weet je over ons bedrijf?', fr: 'Pourquoi veux-tu travailler chez nous ? Que sais-tu de notre entreprise ?' },
+            { id: 'sterktes', g: 'perso', nl: 'Wat zijn je sterke punten?', fr: 'Quels sont tes points forts ?' },
+            { id: 'werkpunten', g: 'perso', nl: 'Wat zijn je werkpunten?', fr: 'Quels sont tes points à améliorer ?' },
+            { id: 'communicatie', g: 'technique', nl: 'Geef eens een voorbeeld van een situatie waarin je goed moest communiceren.', fr: 'Donne un exemple d\'une situation où tu as dû bien communiquer.' },
+            { id: 'plannen', g: 'technique', nl: 'Hoe plan en organiseer je je werk als er veel tegelijk moet gebeuren?', fr: 'Comment planifies-tu et organises-tu ton travail quand il y a beaucoup à faire en même temps ?' },
+            { id: 'initiatief', g: 'technique', nl: 'Geef een voorbeeld van een keer dat je zelf initiatief hebt genomen.', fr: 'Donne un exemple d\'une fois où tu as pris une initiative.' },
+            { id: 'stress', g: 'technique', nl: 'Ben je stressbestendig? Geef eens een voorbeeld.', fr: 'Résistes-tu bien au stress ? Donne un exemple.' },
+            { id: 'samenwerken', g: 'technique', nl: 'Werk je liever alleen of in een team? Geef een voorbeeld van een goede samenwerking.', fr: 'Préfères-tu travailler seul ou en équipe ? Donne un exemple de bonne collaboration.' },
+            { id: 'fout', g: 'technique', nl: 'Vertel eens over een fout die je gemaakt hebt. Wat heb je daaruit geleerd?', fr: 'Parle d\'une erreur que tu as faite. Qu\'en as-tu appris ?' },
+            { id: 'talen', g: 'objections', nl: 'Hoe is je Nederlands? En je andere talen?', fr: 'Comment est ton néerlandais ? Et tes autres langues ?' },
+            { id: 'toekomst', g: 'vision_carriere', nl: 'Waar zie je jezelf binnen twee jaar?', fr: 'Où te vois-tu dans deux ans ?' },
+            { id: 'praktisch', g: 'dispo', nl: 'Wanneer kan je beginnen? En hoe kom je naar het werk?', fr: 'Quand peux-tu commencer ? Et comment viens-tu au travail ?' },
+            { id: 'loon', g: 'dispo', nl: 'Wat zijn je loonverwachtingen?', fr: 'Quelles sont tes attentes salariales ?' },
+            { id: 'vragen', g: 'cloture', nl: 'Heb je nog vragen voor ons?', fr: 'As-tu encore des questions pour nous ?' }
+        ];
+        function canvasState() {
+            if (!state.answerCanvas) state.answerCanvas = {};
+            const C = state.answerCanvas;
+            if (!C.items) C.items = {};
+            if (!C.offres) C.offres = {};
+            return C;
+        }
+        function canvasOffer() {
+            const C = canvasState();
+            const o = C.offre && C.offres[C.offre];
+            return o && !o.del ? Object.assign({ id: C.offre }, o) : null;
+        }
+        // Réponse d'une question : celle adaptée à l'offre active, sinon la réponse générale.
+        function canvasItem(qid) {
+            const C = canvasState(), o = canvasOffer();
+            return (o && C.items[o.id + ':' + qid]) || C.items[qid] || null;
+        }
+        function canvasReady() { return RH_QUESTIONS.some(q => canvasItem(q.id)); }
+        // Résumé pour le souffleur et le recruteur de Rejouer (faits réels du candidat).
+        function canvasSummary(max) {
+            const parts = RH_QUESTIONS.map(q => { const it = canvasItem(q.id); return it && it.idee ? `- ${q.nl} → ${it.idee}` : ''; }).filter(Boolean);
+            return parts.join('\n').slice(0, max || 3000);
+        }
+        async function canvasBack() {
+            showRoleplay('travail');
+            await rpShowRealCandidateList();
+            rpCanvasShow();
+        }
+
+        function rpCanvasShow(msg) {
+            const C = canvasState(), o = canvasOffer();
+            const offers = Object.entries(C.offres).filter(([, x]) => x && !x.del);
+            const chip = (on, click, label) => `<button type="button" class="conj-filter-chip${on ? ' active' : ''}" onclick="${click}">${label}</button>`;
+            const hasProfile = !!(state.candidateProfile || '').trim();
+            const items = RH_QUESTIONS.map(q => {
+                const it = canvasItem(q.id);
+                const k = it ? ((o && C.items[o.id + ':' + q.id]) ? o.id + ':' + q.id : q.id) : '';
+                return `<details class="canvas-q"><summary>${rpEscapeHtml(q.nl)} ${it ? '' : '<span class="report-meta">— à préparer</span>'}</summary>
+                    <div class="report-meta">${rpEscapeHtml(q.fr)}</div>
+                    ${it ? `<div class="canvas-idee">💡 ${rpEscapeHtml(it.idee || '').replace(/\n/g, '<br>')}</div>
+                        <div class="canvas-rep" id="canvas-rep-${q.id}">🇳🇱 ${rpEscapeHtml(it.rep || '')} ${it.rep ? speakBtnHtml(it.rep) : ''}</div>
+                        <button type="button" class="rp-coach-btn" onclick="rpCanvasEdit('${q.id}', '${k}')">✏️ Modifier ma réponse</button>` : ''}
+                </details>`;
+            }).join('');
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <button class="back-btn" onclick="rpShowRealCandidateList()">← Entretiens</button>
+                <div class="rp-group-title">🗂️ Mes réponses types</div>
+                <p class="rp-real-hint">Les questions qui reviennent dans presque tous les entretiens, avec ce que TOI tu as à dire (tiré de ton profil et de tes textes) et une réponse modèle en néerlandais. Privé : enregistré dans ton compte uniquement.</p>
+                ${msg ? `<p class="rp-real-hint"><b>${msg}</b></p>` : ''}
+                <p class="rp-real-hint">${hasProfile ? '✅ Ton profil de candidat est rempli.' : '⚠️ Ton profil de candidat est vide : remplis-le d\'abord, les réponses en dépendent.'} <a href="#" onclick="rpEditCandidateProfile(); return false;">Modifier mon profil</a></p>
+                <details class="rp-more" style="width:100%; max-width:520px;"><summary>✍️ Mes textes (compétences, points forts, points à améliorer…)</summary>
+                    <textarea id="canvas-textes" class="rp-profile-text" rows="7" placeholder="Colle ici tes textes : ce que tu dis de tes compétences, de tes points forts et de tes points à améliorer…">${rpEscapeHtml(C.textes || '')}</textarea>
+                    <button class="btn btn-gray" onclick="canvasState().textes = document.getElementById('canvas-textes').value; save(); rpCanvasShow('Textes enregistrés.')">💾 Enregistrer</button>
+                </details>
+                <div class="rp-job-canal">🎯 Offre visée</div>
+                <div class="conj-filter-chips-row" style="width:100%; max-width:520px;">
+                    ${chip(!o, "canvasState().offre = ''; save(); rpCanvasShow()", 'Réponses générales')}
+                    ${offers.map(([id, x]) => chip(o && o.id === id, `canvasState().offre = '${id}'; save(); rpCanvasShow()`, rpEscapeHtml(x.titre || 'Offre'))).join('')}
+                    ${chip(false, 'rpCanvasNewOffer()', '➕ Ajouter une offre')}
+                </div>
+                ${o ? `<p class="rp-real-hint">Les réponses s'adaptent à cette offre. <a href="#" onclick="rpCanvasDeleteOffer('${o.id}'); return false;">Retirer cette offre</a></p>` : ''}
+                <div id="canvas-new-offer"></div>
+                <button class="btn btn-green" style="max-width:520px;" onclick="rpCanvasGenerate()">✨ ${canvasReady() ? 'Mettre à jour mes réponses' : 'Préparer mes réponses'}${o ? ' pour cette offre' : ''}</button>
+                ${canvasReady() ? `<div class="hub-grid" style="width:100%; max-width:520px; margin-top:8px;">
+                    <div class="hub-card" onclick="rpCanvasDrill(true)"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">La question, l'idée en français, puis ta réponse en néerlandais.</div></div>
+                    <div class="hub-card" onclick="rpCanvasDrill(false)"><span class="hub-card-icon">🗣️</span><div class="hub-card-title">M'entraîner</div><div class="hub-card-desc">Le tuteur pose la question, tu réponds à ta manière, il corrige.</div></div>
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="rpCanvasInterview()"><span class="hub-card-icon">🧑‍💼</span><div class="hub-card-title">Entretien RH sur mesure</div><div class="hub-card-desc">Un recruteur pose ces questions${o ? ' pour cette offre' : ''} et relance ; 💡 te souffle des idées tirées de ton vrai parcours.</div></div>
+                </div>` : ''}
+                <div class="canvas-list">${items}</div>`;
+        }
+        function rpCanvasNewOffer() {
+            const box = document.getElementById('canvas-new-offer');
+            if (!box) return;
+            box.innerHTML = `<input type="text" id="canvas-offer-title" placeholder="Titre (ex. : Planner transport)" style="width:100%; max-width:520px;">
+                <textarea id="canvas-offer-text" class="rp-profile-text" rows="7" placeholder="Colle ici le texte de l'offre ou ta fiche de poste : missions, profil demandé…"></textarea>
+                <button class="btn btn-green" style="max-width:520px;" onclick="rpCanvasSaveOffer()">💾 Enregistrer l'offre</button>`;
+        }
+        function rpCanvasSaveOffer() {
+            const t = (document.getElementById('canvas-offer-title') || {}).value || '', x = (document.getElementById('canvas-offer-text') || {}).value || '';
+            if (!x.trim()) { alert("Colle le texte de l'offre."); return; }
+            const C = canvasState(), id = 'o' + Date.now();
+            C.offres[id] = { titre: t.trim().slice(0, 60) || 'Offre', texte: x.trim().slice(0, 6000), at: Date.now() };
+            C.offre = id;
+            save();
+            rpCanvasShow('Offre enregistrée : touche ✨ pour adapter tes réponses.');
+        }
+        function rpCanvasDeleteOffer(id) {
+            const C = canvasState();
+            if (!C.offres[id] || !confirm('Retirer cette offre et ses réponses adaptées ?')) return;
+            C.offres[id].del = true; // jamais supprimé : la fusion entre appareils le ferait revenir
+            if (C.offre === id) C.offre = '';
+            save();
+            rpCanvasShow();
+        }
+        function rpCanvasEdit(qid, key) {
+            const it = canvasState().items[key];
+            const box = document.getElementById('canvas-rep-' + qid);
+            if (!it || !box) return;
+            box.innerHTML = `<textarea id="canvas-edit-${qid}" class="rp-profile-text" rows="5">${rpEscapeHtml(it.rep || '')}</textarea>
+                <button class="btn btn-green" onclick="const v = document.getElementById('canvas-edit-${qid}').value.trim(); if (v) { canvasState().items['${key}'].rep = v; canvasState().items['${key}'].edited = Date.now(); save(); } rpCanvasShow('Réponse modifiée.')">💾 Enregistrer</button>`;
+        }
+
+        async function rpCanvasGenerate() {
+            if (!GeminiService.isAvailable()) { alert('Il faut la clé Gemini pour préparer tes réponses.'); return; }
+            const C = canvasState(), o = canvasOffer();
+            const ta = document.getElementById('canvas-textes');
+            if (ta) C.textes = ta.value;
+            const profile = (state.candidateProfile || '').trim();
+            if (!profile && !(C.textes || '').trim()) { alert("Remplis d'abord ton profil de candidat (ou tes textes) : les réponses viennent de là."); return; }
+            const list = document.querySelector('.canvas-list');
+            if (list) list.innerHTML = '<p class="report-meta">Je prépare tes réponses… (environ 30 secondes)</p>';
+            const prompt = `Tu prépares un candidat francophone (néerlandais ${liveLevel()}, vise un niveau B1 clair) à ses entretiens d'embauche en Flandre.
+SON PROFIL (CV, parcours) — n'invente RIEN au-delà :
+« ${profile.slice(0, 5000)} »
+${(C.textes || '').trim() ? `SES TEXTES (ce qu'il dit de ses compétences, points forts et points à améliorer ; reprends ses idées et corrige leur néerlandais) :
+« ${C.textes.trim().slice(0, 3000)} »` : ''}
+${o ? `OFFRE VISÉE : « ${o.titre} »
+« ${o.texte.slice(0, 5000)} »
+Adapte chaque réponse à ce poste : relie son parcours aux missions et au profil demandés, avec les mots de l'offre.` : 'Pas d\'offre précise : réponses valables pour un poste junior en administration, logistique ou supply chain.'}
+${tutorMemPromptLine()}
+Pour chaque question, donne :
+- "idee" : en français, 3 ou 4 points courts à dire, tirés de SON profil (faits réels), dans l'ordre où les dire ; pour les questions par compétence : la situation, ce qu'il a fait, le résultat ;
+- "rep" : une réponse modèle en néerlandais parlé, niveau B1 (phrases courtes, verbe à la fin dans les subordonnées, inversion après un élément en tête), 4 à 6 phrases, avec SES vrais faits ; si une information manque dans son profil, laisse un blanc entre crochets […] plutôt que d'inventer.
+Questions :
+${RH_QUESTIONS.map(q => `[${q.id}] ${q.nl}`).join('\n')}
+Réponds UNIQUEMENT en JSON : {"reponses": [{"id": "", "idee": "", "rep": ""}]}`;
+            let a = null;
+            try { a = rpHelpParseJson(await GeminiService.generate(prompt)); } catch (e) { a = { error: e.message }; }
+            const got = (a && Array.isArray(a.reponses) ? a.reponses : []).filter(x => x && x.id && x.rep && RH_QUESTIONS.some(q => q.id === x.id));
+            if (!got.length) { rpCanvasShow('⚠️ Je n\'ai pas réussi à préparer les réponses' + (a && a.error ? ' (' + rpEscapeHtml(a.error) + ')' : '') + '. Réessaie dans un instant.'); return; }
+            got.forEach(x => {
+                const key = o ? o.id + ':' + x.id : x.id;
+                const old = C.items[key];
+                if (old && old.edited) return; // une réponse modifiée à la main n'est pas écrasée
+                C.items[key] = { idee: String(x.idee || '').slice(0, 800), rep: String(x.rep).slice(0, 1500), at: Date.now() };
+            });
+            C.at = Date.now();
+            save();
+            rpCanvasShow(`✅ ${got.length} réponses prêtes${o ? ' pour « ' + rpEscapeHtml(o.titre) + ' »' : ''}.`);
+        }
+
+        // 🎧 / 🗣️ : l'écran du tuteur (routine), en écoute seule ou en mode actif.
+        function rpCanvasDrill(listen) {
+            if (!state.settings) state.settings = {};
+            state.settings.routinePassive = !!listen;
+            save();
+            const o = canvasOffer();
+            routineDrill('canevas', canvasBack, { label: 'Mes réponses types' + (o ? ' · ' + o.titre : '') });
+        }
+        async function routineDrillCanvas(r) {
+            const list = RH_QUESTIONS.map(q => ({ q, it: canvasItem(q.id) })).filter(x => x.it && x.it.rep);
+            if (!list.length) { await routineSay(r, "Prépare d'abord tes réponses avec ✨."); return 'empty'; }
+            let ok = 0, asked = 0;
+            for (let i = 0; i < list.length && routineActive(r); i++) {
+                const { q, it } = list[i];
+                const hid = 'cv-idea-' + Math.floor(Math.random() * 1e9);
+                r.ctx = `répondre à « ${q.nl} » (idée : ${it.idee})`;
+                const say = () => conjAudioSpeak(q.nl, 'nl', 0.9);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${list.length}</small><div>${rpEscapeHtml(q.nl)}</div><small>${rpEscapeHtml(q.fr)}</small>
+                    ${routinePassive() ? '' : `<button type="button" class="report-link" onclick="const h = document.getElementById('${hid}'); if (h) h.style.display = ''; this.remove();">💡 Mon idée</button><div id="${hid}" style="display:none;" class="canvas-idee">${rpEscapeHtml(it.idee || '').replace(/\n/g, '<br>')}</div>`}</div>`, say, say);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineBubble('info', `<div class="canvas-idee">💡 ${rpEscapeHtml(it.idee || '').replace(/\n/g, '<br>')}</div><div class="canvas-rep">🇳🇱 ${rpEscapeHtml(it.rep)} ${speakBtnHtml(it.rep)}</div>`);
+                    if (routineActive(r) && it.idee) await conjAudioSpeak(String(it.idee).replace(/\n/g, ' '), 'fr', 1.05);
+                    if (routineActive(r)) await conjAudioSpeak(it.rep, 'nl', 0.9);
+                    continue;
+                }
+                asked++;
+                let j = { ok: false };
+                if (given && GeminiService.isAvailable()) {
+                    const w2 = routineBubble('info', '<span class="report-meta">🤔</span>');
+                    try {
+                        const a = rpHelpParseJson(await GeminiService.generate(`Entraînement à l'entretien d'embauche en néerlandais (Flandre) pour un apprenant francophone de niveau ${liveLevel()}.
+Question du recruteur : « ${q.nl} »
+Ce qu'il voulait dire (son canevas, en français) : ${it.idee}
+Réponse modèle : « ${it.rep} »
+Sa réponse (peut-être dictée : ignore ponctuation, majuscules et petites erreurs de transcription) : « ${given} »
+La réponse modèle n'est qu'UNE façon de le dire : juge le fond et la langue, jamais la ressemblance.
+- "fond_ok" : il répond à la question et dit l'essentiel de son canevas (un point oublié est acceptable).
+- "manque_fr" : en français, le point important qu'il a oublié (vide sinon).
+- "juste" : son néerlandais est correct (une petite faute ou une erreur de transcription ne compte pas).
+- "sa_version" : SA réponse corrigée, en gardant au maximum ses mots et sa construction.
+- "explication_fr" : une phrase courte, en français, sur la faute principale (vide si tout est juste).
+- ${TUTOR_REGLE_FIELD} (seulement s'il y a une vraie faute, sinon vide)
+Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, "sa_version": "", "explication_fr": "", "regle": ""}`));
+                        if (a && typeof a.fond_ok === 'boolean') j = { ok: a.fond_ok && a.juste !== false, version: String(a.sa_version || ''), explication: [a.manque_fr ? '📌 ' + a.manque_fr : '', a.explication_fr || ''].filter(Boolean).join(' '), regle: String(a.regle || '') };
+                    } catch (e) { j = { ok: false }; }
+                    if (w2) w2.remove();
+                }
+                if (!routineActive(r)) return false;
+                if (j.ok) ok++;
+                usedWordsRecord(given, j.version ? { corrige: j.version } : null);
+                await routineJudgeFeedback(r, { kind: 'phrase', fr: q.fr, ex: it.rep, target: it.rep, before: '', after: '' }, given, j, rpEscapeHtml(it.rep));
+            }
+            r.ctx = null;
+            if (routineActive(r) && !routinePassive() && asked) await routineSay(r, `${ok} sur ${asked} réponses qui tiennent la route.`);
+            return true;
+        }
+
+        // 🧑‍💼 Entretien RH sur mesure : une banque construite à la volée (questions types + offre
+        // active), jouée par le moteur « Je suis candidat ». Le recruteur ne voit PAS le canevas ;
+        // le souffleur 💡, lui, s'en sert pour proposer des réponses tirées du vrai parcours.
+        function canvasBank() {
+            const o = canvasOffer(), q = {};
+            RH_QUESTIONS.forEach(x => { (q[x.g] = q[x.g] || []).push(x.nl); });
+            return {
+                id: 'rh_sur_mesure' + (o ? '_' + o.id : ''),
+                label: '🧑‍💼 Entretien RH sur mesure' + (o ? ' — ' + o.titre : ''),
+                _source: 'redige_claude',
+                poste: o ? o.titre + ' — ' + o.texte.slice(0, 1500) : 'poste junior en administration, logistique ou supply chain',
+                contexte: "Tu es recruteur(se) au service RH d'une entreprise flamande. Entretien en face à face, vouvoiement (u), ton professionnel et bienveillant, néerlandais clair. Les questions sont un guide : si le candidat dévie, reprends naturellement la main (recadre, relance, ou creuse ce qu'il vient de dire). Pour les questions par compétence, demande un exemple concret s'il reste général.",
+                niveau: 'B1-B2',
+                tirage: { min: 8, max: 11 },
+                welcome: 'Goeiedag, welkom! Fijn dat u er bent. Vertel eens iets over uzelf.',
+                questions: q,
+                difficultes: {
+                    facile: 'Une question à la fois, tu laisses le candidat finir, tu reformules si besoin.',
+                    moyen: 'Ton professionnel standard ; tu demandes un exemple concret une fois quand une réponse reste générale.',
+                    difficile: 'Tu es exigeant : tu creuses chaque réponse (« Hoe precies? », « Wat was het resultaat? ») et tu poses une question piège sur ses points faibles ou sur son néerlandais.'
+                },
+                criteres: [
+                    'Réponses structurées (situation, action, résultat) pour les questions par compétence',
+                    'Faits concrets de son parcours plutôt que des affirmations générales',
+                    o ? "Réponses reliées aux missions et au profil de l'offre" : 'Réponses cohérentes avec son profil',
+                    'Néerlandais simple et juste : verbe à la fin dans les subordonnées, inversion après un élément en tête',
+                    'Au moins une question pour le recruteur à la fin'
+                ],
+                vocabulaire: [],
+                bequilles: ['Sorry, kan u dat herhalen?', 'Mag ik even nadenken?', 'Hoe zeg je dat in het Nederlands?', 'Dus als ik het goed begrijp, ...']
+            };
+        }
+        async function rpCanvasInterview() {
+            if (!GeminiService.isAvailable()) { alert('Il faut la clé Gemini pour l\'entretien.'); return; }
+            await rpLoadRealData();
+            rpStartRealCandidate(-1, canvasBank());
+        }
+
         // Tirage des questions (champ « tirage » d'une banque) : l'accroche et la clôture restent,
         // les autres sont tirées au hasard et leur ordre varie, pour que deux entretiens diffèrent.
         function rpSampleBank(bank) {
@@ -8722,8 +9000,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             return Object.assign({}, bank, { questions: out });
         }
 
-        function rpStartRealCandidate(index) {
-            const bank = rpRealData && rpRealData.banks[index];
+        function rpStartRealCandidate(index, bankOverride) {
+            const bank = bankOverride || (rpRealData && rpRealData.banks[index]);
             if (!bank) return;
             const firstQuestion = ((bank.questions || {}).accroche || [])[0];
             const welcome = bank.welcome || firstQuestion || 'Goedendag, fijn dat u er bent. Kunt u zich eerst even kort voorstellen?';
@@ -8779,7 +9057,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const header = `<div class="conj-verb-title">🏁 Bilan — ${rpEscapeHtml(bank.label)}${it.diff ? ' · ' + (RP_DIFFICULTY_LABELS[it.diff] || it.diff) : ''}</div>`;
             const footer = `${usedSessionHtml()}
                 <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('rp')">🧑‍🏫 Revoir avec mon tuteur</button>
-                <button class="btn btn-gray" style="margin-top:8px;" onclick="rpRealSetup(${it.index})">🔁 Refaire l'entretien</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="${it.index < 0 ? 'rpCanvasInterview()' : `rpRealSetup(${it.index})`}">🔁 Refaire l'entretien</button>
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="rpShowRealCandidateList()">Retour aux entretiens</button>`;
             const lines = rpConversationHistory.slice(1).map(m => (m.role === 'user' ? 'CANDIDAT : ' : 'RECRUTEUR : ') + m.parts[0].text);
             if (!rpConversationHistory.slice(1).some(m => m.role === 'user')) {
@@ -12979,7 +13257,9 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
         function rpReplayDossier(d) {
             const profile = (state.candidateProfile || '').trim();
             const real = d.turns.filter(t => t.candidate_reply).map(t => `- « ${t.nl_original.slice(0, 140)} » → « ${t.candidate_reply} »`).join('\n');
+            const canvas = typeof canvasSummary === 'function' ? canvasSummary(2000) : '';
             return (profile ? `Profil (CV) du candidat :\n${profile.slice(0, 2500)}\n\n` : '') +
+                (canvas ? `Ses réponses préparées (idées, en français) :\n${canvas}\n\n` : '') +
                 (real ? `Ce qu'il a répondu lors du vrai entretien (sa situation réelle, que tu connais comme si c'était sur son CV) :\n${real}` : '');
         }
 
@@ -14547,6 +14827,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On travaille ces mots, du plus courant au plus rare, par paquets de dix : un paquet s'ouvre quand le précédent est acquis. Je te dis le mot, tu me le traduis, à l'oral ou à l'écrit. Un mot raté ne revient pas tout de suite : il va dans tes mots à revoir.",
                 whyPassive: "On écoute ces mots, du plus courant au plus rare : le mot, un instant pour chercher, puis sa traduction."
             },
+            canevas: {
+                icon: '🗂️', label: 'Mes réponses types', back: '← Mes réponses', nav: 'nav-pratiquer', run: r => routineDrillCanvas(r),
+                why: "Je te pose les questions d'entretien qui reviennent tout le temps. Réponds à ta manière, à l'oral ou à l'écrit ; si tu sèches, 💡 te rappelle ton idée. Je regarde si tu as dit l'essentiel, je corrige ton néerlandais, et tu réentends ta réponse modèle.",
+                whyPassive: "J'écoute avec toi tes réponses types : la question, un instant pour y penser, ton idée en français, puis ta réponse en néerlandais."
+            },
             motif: {
                 icon: '🎯', label: 'Une faute à automatiser', back: '← Profil', run: r => routineDrillMotif(r),
                 why: "On travaille une seule faute, celle qui revient chez toi. Je te dis cinq phrases en français qui obligent à appliquer la règle : traduis-les à ta manière, à l'oral ou à l'écrit. Je regarde surtout ce point.",
@@ -14575,7 +14860,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             const p = routineTutor();
             routineBackBtn(d.back || (back ? '← Retour' : '← Vocabulaire'), r.back);
             document.getElementById('routine-content').innerHTML = `
-                <div class="routine-head"><div><b>${d.icon} ${rpEscapeHtml(train ? train.label : d.label)}</b><small>avec ${p.emoji} ${p.name}${train ? ' · ' + (state.settings.direction === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷') : ''}</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
+                <div class="routine-head"><div><b>${d.icon} ${rpEscapeHtml(train ? train.label : d.label)}</b><small>avec ${p.emoji} ${p.name}${k === 'train' ? ' · ' + (state.settings.direction === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷') : ''}</small></div><div class="routine-head-btns">${speedBtnHtml()}${routineModeHtml()}</div></div>
                 ${routineChatHtml(p)}
                 ${d.credit ? `<p class="rp-real-hint" style="text-align:center;">${d.credit}</p>` : ''}`;
             routineDrillLoop(r, true);

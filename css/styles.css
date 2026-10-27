@@ -887,3 +887,8 @@
         .say-parts { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
         .say-parts span { background: var(--bg-secondary, rgba(127,127,127,0.12)); border-radius: 8px; padding: 2px 8px; font-size: 0.85rem; }
         .tmem-btns { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+        .canvas-list { width: 100%; max-width: 520px; margin-top: 10px; }
+        .canvas-q { border-bottom: 1px solid var(--border); padding: 6px 0; text-align: left; }
+        .canvas-q summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; }
+        .canvas-idee { font-size: 0.86rem; margin: 6px 0; color: var(--text-secondary); text-align: left; }
+        .canvas-rep { font-size: 0.92rem; margin: 6px 0; text-align: left; }
