@@ -826,6 +826,182 @@
         "Dus als ik het goed begrijp, ...",
         "Ik ga het in het Nederlands proberen. Als het niet lukt, zeg ik het in het Engels."
       ]
+    },
+    {
+      "id": "delmolen_sara_screening",
+      "label": "Delmolen Group — présélection téléphonique RH (Sara)",
+      "_source": "Questions construites à partir d'une fiche de préparation de Joas pour un entretien réel chez un groupe agroalimentaire belge, anonymisée : entreprise, personnes, lieux et données modifiés.",
+      "poste": "Planning & Dispatch Officer, Transport Solutions — achat et gestion du transport sous-traité (planification, suivi administratif des commandes de transport, relation transporteurs/clients)",
+      "contexte": "Tu es Sara, employée du service du personnel de Delmolen Group, grand groupe agroalimentaire belge de plusieurs milliers d'employés. Tu mènes un entretien téléphonique de présélection pour le poste de Planning & Dispatch Officer chez Delmolen Transport Solutions à Tielt, la centrale d'achat de transport du groupe, spécialisée dans le transport frigorifique de produits alimentaires. Registre : cordiale, professionnelle, vouvoiement (u), néerlandais clair de Flandre-Occidentale, rythme normal d'un screening téléphonique de 10 à 15 minutes. Les questions sont un guide : si le candidat dévie, prends le pas naturellement (recadre, relance ou enchaîne sur ce qu'il vient de dire).",
+      "niveau": "B1-B2",
+      "tirage": {
+        "min": 6,
+        "max": 9
+      },
+      "welcome": "Goeiedag, u spreekt met Sara van Delmolen Group, Transport Solutions. Bel ik met de kandidaat voor de functie van Planning en Dispatch Officer?",
+      "questions": {
+        "accroche": [
+          "Kunt u zich kort voorstellen?"
+        ],
+        "clarification_poste": [
+          "Wat weet u over Delmolen Group en over Transport Solutions specifiek?"
+        ],
+        "motivation": [
+          "Waarom spreekt deze functie u aan?",
+          "Waarom nu de transportsector, en niet verder in bijvoorbeeld de retail of horeca?"
+        ],
+        "verif_cv": [
+          "Kan u iets meer vertellen over uw ervaring in het transportbedrijf waar u gewerkt hebt?",
+          "Welke software kent u? Excel, SAP?"
+        ],
+        "objections": [
+          "Hoe schat u uw niveau Nederlands zelf in, zeker voor telefonisch contact?",
+          "Voelt u zich comfortabel om de hele dag in het Nederlands te werken?"
+        ],
+        "dispo": [
+          "Wanneer zou u kunnen starten?",
+          "Is Tielt een haalbare afstand voor u?"
+        ],
+        "cloture": [
+          "Heeft u nog vragen voor mij?"
+        ]
+      },
+      "difficultes": {
+        "facile": "Une seule question à la fois, tu laisses le candidat finir ses phrases, tu reformules si besoin.",
+        "moyen": "Tu enchaînes les questions sans trop de transition, ton professionnel standard d'un screening RH.",
+        "difficile": "Tu es un peu pressée (plusieurs appels à faire), tu coupes parfois, et tu insistes une fois sur la question du niveau de néerlandais si la réponse te semble vague."
+      },
+      "criteres": [
+        "Aborder spontanément le niveau de néerlandais plutôt que l'éviter, de façon précise et cohérente",
+        "Valoriser l'expérience administrative dans le transport (CMR, suivi des assurances et contrôles techniques des camions, encodage)",
+        "Montrer qu'il a compris le rôle de Transport Solutions : achat et pilotage de transporteurs sous-traités, pas une flotte maison",
+        "Poser au moins une question à la fin de l'entretien"
+      ],
+      "erreurs_frequentes": [
+        {
+          "faux": "ik hebt",
+          "correct": "ik heb"
+        },
+        {
+          "faux": "de meeste relevant",
+          "correct": "de meest relevante"
+        },
+        {
+          "faux": "passer à l'anglais dès qu'un mot manque",
+          "correct": "utiliser une phrase de secours (Hoe zegt men dat in het Nederlands?)"
+        }
+      ],
+      "vocabulaire": [
+        "de vervoerder",
+        "de onderaannemer",
+        "de charter",
+        "de rit",
+        "de oplegger",
+        "de koeloplegger",
+        "de temperatuurzone",
+        "het tarief",
+        "de prijsaanvraag",
+        "de offerte",
+        "de ophaling",
+        "de levering",
+        "het tijdslot",
+        "de laadbon",
+        "de CMR",
+        "de douanedocumenten",
+        "opvolgen",
+        "inboeken",
+        "bijsturen",
+        "de vertraging",
+        "de klacht",
+        "de doorlooptijd",
+        "de levertermijn"
+      ],
+      "bequilles": [
+        "Sorry, kan u dat herhalen?",
+        "Een beetje langzamer, alstublieft?",
+        "Hoe zegt men dat in het Nederlands?",
+        "Mag ik even nadenken?",
+        "Dus als ik het goed begrijp, ..."
+      ]
+    },
+    {
+      "id": "delmolen_bram_technique",
+      "label": "Delmolen Group — entretien technique planning (Bram)",
+      "_source": "Questions construites à partir d'une fiche de préparation de Joas pour un entretien réel chez un groupe agroalimentaire belge, anonymisée : entreprise, personnes, lieux et données modifiés.",
+      "poste": "Planning & Dispatch Officer, Transport Solutions — achat et gestion du transport sous-traité",
+      "contexte": "Tu es Bram, responsable planning chez Delmolen Transport Solutions à Tielt. Tu mènes le deuxième tour d'entretien, plus technique, pour le poste de Planning & Dispatch Officer. Le groupe vient de racheter un grand groupe alimentaire français, ce qui ajoute des flux et des transporteurs francophones à gérer. Registre : direct, professionnel, vouvoiement (u), néerlandais clair de Flandre-Occidentale. Les questions sont un guide : si le candidat dévie, prends le pas naturellement (recadre, relance ou creuse ce qu'il vient de dire, comme un vrai responsable).",
+      "niveau": "B1-B2",
+      "tirage": {
+        "min": 6,
+        "max": 9
+      },
+      "welcome": "Goeiedag, met Bram, verantwoordelijke planning. Fijn dat u er bent. Vertel eens, wat weet u over de rol van Transport Solutions binnen de groep?",
+      "questions": {
+        "clarification_poste": [
+          "Wat weet u over Transport Solutions en de rol van aankoop van transport?"
+        ],
+        "technique": [
+          "Hebt u al gewerkt met een TMS of planningssoftware?",
+          "Hoe zou u omgaan met een chauffeur die een uur te laat is bij een klant?",
+          "Hoe reageert u als een vervoerder achteraf een afgesproken tarief wil optrekken?"
+        ],
+        "verif_cv": [
+          "Kan u een voorbeeld geven van administratieve nauwkeurigheid uit uw vorige ervaring?"
+        ],
+        "objections": [
+          "Met de recente overname van een Franse voedingsgroep komen er meer Franstalige vervoerders en sites bij. Hoe denkt u dat uw profiel daarbij past?"
+        ],
+        "vision_carriere": [
+          "Waar ziet u zichzelf over twee jaar binnen Transport Solutions?"
+        ],
+        "cloture": [
+          "Heeft u nog vragen voor mij?"
+        ]
+      },
+      "difficultes": {
+        "facile": "Une question technique à la fois, ton posé, tu reformules si le candidat hésite.",
+        "moyen": "Tu enchaînes les questions techniques normalement, ton exigeant mais correct.",
+        "difficile": "Tu relances une fois fermement si la réponse sur le TMS ou le tarif te semble trop vague, et tu gardes la question sur l'overname pour la fin."
+      },
+      "criteres": [
+        "Mettre en avant l'atout du français natif face à l'arrivée de sites et transporteurs francophones",
+        "Rester honnête sur l'absence d'expérience directe avec un TMS, en insistant sur la maîtrise d'Excel/Access/SAP et la capacité à apprendre vite",
+        "Poser au moins deux questions à la fin, dont une sur le système de planification utilisé"
+      ],
+      "erreurs_frequentes": [
+        {
+          "faux": "ik hebt",
+          "correct": "ik heb"
+        },
+        {
+          "faux": "geontvangen",
+          "correct": "ontvangen"
+        }
+      ],
+      "vocabulaire": [
+        "de vervoerder",
+        "de onderaannemer",
+        "de charter",
+        "de koeloplegger",
+        "het tarief",
+        "de prijsaanvraag",
+        "de kade",
+        "het laaddok",
+        "de weegbrug",
+        "de palletuitwisseling",
+        "ADR",
+        "opvolgen",
+        "bijsturen",
+        "de vertraging",
+        "de schade",
+        "de doorlooptijd"
+      ],
+      "bequilles": [
+        "Sorry, kan u dat herhalen?",
+        "Hoe zegt men dat in het Nederlands?",
+        "Ik ga het proberen, en als het niet lukt zeg ik het even in het Engels of Frans.",
+        "Dus als ik het goed begrijp, ..."
+      ]
     }
   ]
 }
