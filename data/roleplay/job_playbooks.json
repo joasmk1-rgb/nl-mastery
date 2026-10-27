@@ -2100,6 +2100,56 @@
         "Commencer sans savoir ce que la personne veut en faire.",
         "Envoyer des chiffres sans dire d'où ils viennent."
       ]
+    },
+    "ap_stock_arbitrage": {
+      "titre": "Répartir un stock insuffisant",
+      "etapes": [
+        {
+          "fr": "Poser le problème en chiffres.",
+          "phrase": "We hebben vier stuks en er worden er twaalf gevraagd."
+        },
+        {
+          "fr": "Donner tes critères avant ta décision.",
+          "phrase": "Ik kijk eerst naar de leverdatum van de klantenorders en naar wat de productie echt stillegt."
+        },
+        {
+          "fr": "Proposer une répartition et dire pourquoi.",
+          "phrase": "Ik stel voor om de vier motoren aan de montage te geven, want die order moet vrijdag weg."
+        },
+        {
+          "fr": "Dire ce que tu fais pour les autres.",
+          "phrase": "Voor de andere afdelingen vraag ik de leverancier of de volgende levering sneller kan."
+        }
+      ],
+      "a_eviter": [
+        "Répartir un peu à chacun : plus personne ne peut terminer sa commande.",
+        "Décider sans prévenir les départements qui n'auront rien."
+      ]
+    },
+    "ap_uitleg_proces": {
+      "titre": "Comprendre une explication à l'oral",
+      "etapes": [
+        {
+          "fr": "Montrer que tu suis, et noter.",
+          "phrase": "Ja, ik volg. Ik noteer het even."
+        },
+        {
+          "fr": "Faire répéter un mot ou une étape.",
+          "phrase": "Sorry, wat gebeurt er na de voormontage?"
+        },
+        {
+          "fr": "Reformuler pour vérifier.",
+          "phrase": "Dus als ik het goed begrijp: lakkerij, voormontage, montage, en dan de stock. Klopt dat?"
+        },
+        {
+          "fr": "Demander ce qui te concerne.",
+          "phrase": "En op welk moment moet ik iets ingeven in het systeem?"
+        }
+      ],
+      "a_eviter": [
+        "Dire « oui » à tout sans avoir compris.",
+        "Attendre la fin pour poser toutes les questions : la moitié sera oubliée."
+      ]
     }
   }
 }

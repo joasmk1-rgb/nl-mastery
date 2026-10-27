@@ -201,6 +201,7 @@ async function accAfterLogin(user, userDoc) {
     cloudLastCheckAt = Date.now();
     const reloading = await cloudReconcile(userDoc, true);
     if (reloading) return;
+    tutorMemSeedAdmin();
     gateOpen();
     showHome();
     socialEnsureProfileDocs();
@@ -670,7 +671,9 @@ async function cloudCheck() {
         if (userDoc.disabled) { await auth.signOut(); currentUser = null; currentUserDoc = null; betaKeyRefresh(null); return false; }
         currentUserDoc = userDoc;
         betaKeyRefresh(userDoc);
-        return await cloudReconcile(userDoc, false);
+        const reloading = await cloudReconcile(userDoc, false);
+        if (!reloading) tutorMemSeedAdmin();
+        return reloading;
     } catch (e) {
         cloudSyncFailed(e);
         return false;
@@ -9013,8 +9016,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // (Joas, octobre 2026 : « un mode accessible que pour moi pour l'instant »). vigilance :
             // fautes fréquentes données au correcteur pendant ses situations (rien de personnel).
             admin_productie: { prive: true, csv: 'THEME_ADMIN_PRODUCTIE',
-                vigilance: "Fautes fréquentes chez cet apprenant, à relever à chaque fois : « ik hebt » au lieu de « ik heb » ; participe des verbes en ont-, be-, ver-, her- sans ge- (« ontvangen », pas « geontvangen ») ; verbe en DEUXIÈME position (inversion après un complément en tête de phrase) ; « de meest relevante », pas « de meeste relevant » ; mot anglais glissé quand un mot néerlandais manque.",
-                label: '🏭 Soutien administratif production', domaine: 'soutien administratif à la production chez un fabricant (commandes, stock, kanban, analyses, accueil et téléphone)', noms: 'Zonvella pour l\'entreprise du candidat (fabricant familial de terrasoverkappingen, zonwering et pergola\'s), Delmaro pour un fournisseur de composants, Transvio ou Nordvracht pour des transporteurs' }
+                vigilance: "Fautes fréquentes chez cet apprenant, à relever à chaque fois : verbe pas à la fin dans une subordonnée (« dat ik ben stressbestendig » → « dat ik stressbestendig ben », sa faute n° 1) ; pas d'inversion après un élément en tête (« Voor mij, het is… » → « Voor mij is het… ») ; préposition calquée du français (wachten op, praten over) ; « het is … dat » au lieu de « al » ; -e de l'adjectif devant le nom ; « ik voel geen probleem » → « ik heb geen probleem » ; « ik hebt » → « ik heb » ; participe sans ge- des verbes en ont-, be-, ver- (« ontvangen ») ; mot anglais glissé quand un mot manque.",
+                label: '🏭 Soutien administratif production', domaine: 'soutien administratif à la production chez un fabricant (commandes, stock, kanban, analyses, accueil et téléphone ; l\'entreprise change de logiciel de gestion en ce moment, d\'où beaucoup d\'encodage manuel ; la hiérarchie parle néerlandais, l\'atelier souvent français)', noms: 'Zonvella pour l\'entreprise du candidat (fabricant familial de terrasoverkappingen, zonwering et pergola\'s), Delmaro pour un fournisseur de composants, Transvio ou Nordvracht pour des transporteurs' }
         };
         function metierVisible(m) {
             const M = RP_METIERS[m];
@@ -13719,10 +13722,97 @@ Réponds UNIQUEMENT en JSON :
                 ${all.slice(0, 12).map(([k, r]) => `<div class="tmem-row">
                     <div><b>${rpEscapeHtml(r.label)}</b> <small class="report-meta">${r.n} fois</small>
                     ${(r.ex || []).slice(0, 2).map(x => `<div class="tmem-ex">${x.faux ? rpEscapeHtml(x.faux) + ' → ' : ''}<b>${rpEscapeHtml(x.correct)}</b> ${x.correct ? speakBtnHtml(x.correct) : ''}</div>`).join('')}</div>
-                    <button type="button" class="rp-coach-btn" onclick="tutorMemDone('${k}')">✅ C'est acquis</button>
+                    <span class="tmem-btns"><button type="button" class="rp-coach-btn" onclick="tutorMemTrain('${k}')">🎯 M'entraîner</button><button type="button" class="rp-coach-btn" onclick="tutorMemDone('${k}')">✅ C'est acquis</button></span>
                 </div>`).join('')}
                 <button class="btn btn-gray" style="margin-top:8px;" onclick="showProf()">🎓 Les travailler en cours particulier</button>`;
         }
+        // Fautes relevées dans les entretiens réels de Joas (fiche d'erreurs hors dépôt, octobre 2026),
+        // versées UNE fois dans la mémoire du tuteur de son compte (admin), comme déjà vues deux fois :
+        // tous les correcteurs, interlocuteurs et tuteurs les surveillent alors. Règles génériques,
+        // exemples sans nom ; la progression (privée) garde le résultat.
+        const TUTOR_SEED_ADMIN = { id: 'fiche_erreurs_2026_10', rules: [
+            { regle: 'verbe à la fin dans une subordonnée (dat, omdat, als…)', faux: 'ik kan zeggen dat ik ben stressbestendig', correct: 'ik kan zeggen dat ik stressbestendig ben' },
+            { regle: 'inversion après un élément en tête de phrase (V2)', faux: 'Voor mij, het is mijn profiel.', correct: 'Voor mij is dat mijn profiel.' },
+            { regle: 'préposition propre au verbe (wachten op, praten over)', faux: 'Ik wacht van nieuws.', correct: 'Ik wacht op nieuws.' },
+            { regle: '« al » au lieu de « het is … dat » (depuis)', faux: 'Het is zeven jaar dat hij daar werkt.', correct: 'Hij werkt daar al zeven jaar.' },
+            { regle: "-e de l'adjectif placé devant le nom", faux: 'ervaring administratief', correct: 'administratieve ervaring' },
+            { regle: 'phrase complète, avec son verbe conjugué', faux: "Het was gewoon 's avonds, achttien uur.", correct: 'Het ging in totaal om achttien uur.' },
+            { regle: 'kritiek (nom) ou kritisch (adjectif)', faux: 'Ik ben niet kritiek.', correct: 'Ik ben niet kritisch.' },
+            { regle: 'een probleem hebben, pas voelen', faux: 'Ik voel geen probleem met nachtwerk.', correct: 'Ik heb geen probleem met nachtwerk.' },
+            { regle: '« daardoor heb ik besloten », pas « dat besloot me »', faux: 'Dat besloot me om logistiek te kiezen.', correct: 'Daardoor heb ik besloten om logistiek te kiezen.' }
+        ] };
+        function tutorMemSeedAdmin() {
+            try {
+                if (!(currentUserDoc && currentUserDoc.role === 'admin')) return;
+                if (!state.tutorMem) state.tutorMem = {};
+                if (!state.tutorMem.seeds) state.tutorMem.seeds = {};
+                if (state.tutorMem.seeds[TUTOR_SEED_ADMIN.id]) return;
+                tutorMemAdd(TUTOR_SEED_ADMIN.rules, 'entretiens');
+                tutorMemAdd(TUTOR_SEED_ADMIN.rules, 'entretiens');
+                state.tutorMem.seeds[TUTOR_SEED_ADMIN.id] = true;
+                save();
+            } catch (e) { console.warn('Mémoire du tuteur :', e); }
+        }
+
+        // 🎯 S'entraîner sur UNE faute de la mémoire du tuteur (bouton sur chaque point faible) :
+        // 5 phrases françaises qui obligent à appliquer la règle (Gemini), traduites à l'oral ou à
+        // l'écrit, jugées et corrigées comme les blocs, en vérifiant surtout ce point.
+        function tutorMemTrain(k) {
+            const r = state.tutorMem && state.tutorMem.rules && state.tutorMem.rules[k];
+            if (!r) return;
+            routineDrill('motif', showProfil, { label: r.label, key: k, rule: r });
+        }
+        async function routineDrillMotif(r) {
+            const rule = r.train && r.train.rule;
+            if (!rule) return 'empty';
+            if (!GeminiService.isAvailable()) { await routineSay(r, "Pour préparer les phrases, il me faut la clé Gemini."); return 'empty'; }
+            const ex = (rule.ex || [])[0];
+            const wait = routineBubble('info', '<span class="report-meta">🤔</span>');
+            let list = [];
+            try {
+                const a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}.
+Il veut automatiser cette règle, sur laquelle il se trompe souvent : « ${rule.label} »${ex && ex.correct ? ` (exemple : il a dit « ${ex.faux || ''} », il fallait « ${ex.correct} »)` : ''}.
+Écris 5 phrases françaises courtes et naturelles (travail, entretien d'embauche, vie quotidienne) dont la traduction néerlandaise OBLIGE à appliquer cette règle, de la plus simple à la plus difficile, avec leur traduction néerlandaise naturelle.
+Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": ""}]}`));
+                list = (a && Array.isArray(a.phrases) ? a.phrases : []).filter(x => x && x.fr && x.nl).slice(0, 5);
+            } catch (e) { list = []; }
+            if (wait) wait.remove();
+            if (!routineActive(r)) return false;
+            if (!list.length) { await routineSay(r, "Je n'ai pas réussi à préparer les phrases, réessaie dans un instant."); return 'empty'; }
+            let ok = 0, asked = 0;
+            for (let i = 0; i < list.length && routineActive(r); i++) {
+                const x = list[i];
+                const q = { kind: 'phrase', fr: x.fr, ex: x.nl, target: x.nl, before: '', after: '', focus: rule.label };
+                r.ctx = `traduire « ${x.fr} » en appliquant la règle « ${rule.label} » (modèle : « ${x.nl} »)`;
+                const say = () => conjAudioSpeak(x.fr, 'fr', 1.05);
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${list.length} · ${rpEscapeHtml(rule.label)}</small><div class="chunk-q-fr">${rpEscapeHtml(x.fr)}</div></div>`, say, say);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                if (given === '__passive') { routineFeedback(null, x.nl, '', true); if (routineActive(r)) await conjAudioSpeak(x.nl, 'nl', 0.9); continue; }
+                asked++;
+                let j = { ok: false };
+                if (given) {
+                    const w2 = routineBubble('info', '<span class="report-meta">🤔</span>');
+                    j = await routineTranslateJudge(q, given);
+                    if (w2) w2.remove();
+                }
+                if (!routineActive(r)) return false;
+                if (j.ok) ok++;
+                await routineJudgeFeedback(r, q, given, j, rpEscapeHtml(x.nl));
+            }
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (!routinePassive() && asked) {
+                await routineSay(r, `${ok} sur ${asked}.${ok === asked && asked >= 4 ? ' Ce point a l\'air acquis.' : ''}`);
+                if (ok === asked && asked >= 4) {
+                    const v = await routineWait(r, [['acquis', "✅ C'est acquis"], ['pas', 'On continue à le surveiller', 'btn-gray']]);
+                    if (v === 'acquis') { tutorMemDone(r.train.key); routineBubble('info', '<span class="report-meta">✅ Retiré de tes points faibles. S\'il revient dans une conversation, il réapparaîtra.</span>'); }
+                    if (v === 'quit') return false;
+                }
+            }
+            return true;
+        }
+
         function tutorMemDone(k) {
             const r = state.tutorMem && state.tutorMem.rules && state.tutorMem.rules[k];
             if (!r) return;
@@ -14456,6 +14546,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 icon: '✍️', label: "S'entraîner", run: r => routineDrillTrain(r),
                 why: "On travaille ces mots, du plus courant au plus rare, par paquets de dix : un paquet s'ouvre quand le précédent est acquis. Je te dis le mot, tu me le traduis, à l'oral ou à l'écrit. Un mot raté ne revient pas tout de suite : il va dans tes mots à revoir.",
                 whyPassive: "On écoute ces mots, du plus courant au plus rare : le mot, un instant pour chercher, puis sa traduction."
+            },
+            motif: {
+                icon: '🎯', label: 'Une faute à automatiser', back: '← Profil', run: r => routineDrillMotif(r),
+                why: "On travaille une seule faute, celle qui revient chez toi. Je te dis cinq phrases en français qui obligent à appliquer la règle : traduis-les à ta manière, à l'oral ou à l'écrit. Je regarde surtout ce point.",
+                whyPassive: "On écoute cinq phrases qui appliquent la règle : le français, un instant pour chercher, puis le néerlandais."
             },
             dire: {
                 icon: '💭', label: 'Dis-le en néerlandais', nav: 'nav-pratiquer', back: '← Pratiquer', run: r => routineDrillSay(r),
@@ -15243,7 +15338,8 @@ Le modèle n'est qu'UNE façon de le dire : juge sur le SENS et la justesse, jam
 - "sa_version" : SA phrase corrigée, en gardant au maximum ses mots et sa construction (recopie-la si elle est juste).
 - "explication_fr" : une phrase courte, en français, sur ce qui n'allait pas (vide si tout est juste).
 - "bloc_fr" : ${q.kind === 'phrase' ? 'vide.' : `s'il n'a pas employé « ${q.target} » alors que sa phrase est juste, une courte phrase en français qui le lui fait remarquer comme une autre façon courante de le dire (sinon vide).`}
-- ${TUTOR_REGLE_FIELD} (seulement s'il y a une vraie faute, sinon vide)
+${q.focus ? `- Point travaillé : « ${q.focus} ». S'il se trompe sur CE point, "juste" = false, et "explication_fr" parle d'abord de ce point.
+` : ''}- ${TUTOR_REGLE_FIELD} (seulement s'il y a une vraie faute, sinon vide)
 Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "", "explication_fr": "", "bloc_fr": "", "regle": ""}`));
                 if (!a || typeof a.sens_ok !== 'boolean') return { ok: false };
                 return { ok: a.sens_ok && a.juste !== false, close: a.sens_ok && a.juste !== false && !!a.explication_fr, version: String(a.sa_version || ''), explication: String(a.explication_fr || ''), bloc: String(a.bloc_fr || ''), regle: String(a.regle || '') };

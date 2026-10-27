@@ -1635,6 +1635,42 @@
         "SOMMEN.ALS"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "ap_stock_arbitrage",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Ce matin, le tableau croisé du stock montre 4 moteurs disponibles, mais trois départements (montage, pré-montage et le deuxième site) en demandent 4 chacun. Le chef de production te demande comment tu répartis, sans faire au hasard : explique tes critères (délai de la commande client, criticité, ancienneté de la demande, prochaine livraison) et propose une répartition.",
+      "amorce": "We hebben maar vier motoren in stock en drie afdelingen vragen er elk vier. Hoe ga jij dat verdelen?",
+      "vocabulaire_cible": [
+        "verdelen",
+        "de prioriteit",
+        "de afdeling",
+        "de klantenorder",
+        "de volgende levering"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "ap_uitleg_proces",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Ton responsable t'explique à l'oral, sans support écrit, le trajet d'une pièce : laquage, pré-montage, montage, puis stock, entre deux sites, avec les demandes des départements. Écoute, pose des questions et reformule pour vérifier que tu as bien compris chaque étape.",
+      "amorce": "Ik leg je even uit hoe een profiel bij ons door de productie gaat. Eerst gaat het naar de lakkerij, dan naar de voormontage... Volg je nog?",
+      "vocabulaire_cible": [
+        "de lakkerij",
+        "de voormontage",
+        "de montage",
+        "de stap",
+        "als ik het goed begrijp"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [

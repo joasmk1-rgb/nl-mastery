@@ -886,3 +886,4 @@
         .say-nl { font-size: 1.1rem; margin-bottom: 2px; }
         .say-parts { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
         .say-parts span { background: var(--bg-secondary, rgba(127,127,127,0.12)); border-radius: 8px; padding: 2px 8px; font-size: 0.85rem; }
+        .tmem-btns { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
