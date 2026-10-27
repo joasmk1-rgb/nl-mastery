@@ -368,6 +368,208 @@
           "suggestion_fr": "Donne tes disponibilités précises (jours et heures) et remercie-la."
         }
       ]
+    },
+    {
+      "id": "korenveld_transportplanner_reel",
+      "label": "Korenveld — planning & dispatching transport (entretien réel)",
+      "contexte": "Entretien téléphonique réel pour un poste de planning & dispatching transport chez Korenveld, un groupe agroalimentaire belge qui a son propre service transport (camions frigorifiques et sous-traitants). Un seul interlocuteur, le recruteur. Répliques du recruteur telles quelles, à vitesse naturelle.",
+      "turns": [
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Dus een goede test voor de transcriptie ook dan.",
+          "fr_cue": "Donc un bon test pour la transcription aussi, alors.",
+          "candidate_reply": "Ja.",
+          "suggestion_fr": "Un simple « ja » suffit."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Ja, geen probleem. We redden ons wel. We kunnen ook een stukje in het Frans of in het Engels doen; dat zijn de talen die ook belangrijk zijn. Maar jouw Nederlands lijkt mij wel goed te zijn, dus we kunnen zeker verder.",
+          "fr_cue": "Oui, pas de problème. On s'en sortira. On peut aussi faire un bout en français ou en anglais ; ce sont aussi des langues importantes. Mais ton néerlandais me semble bien, donc on peut certainement continuer.",
+          "candidate_reply": "Top.",
+          "suggestion_fr": "Montre que tu es rassuré, en un mot (« top », « fijn »)."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Elias, je bent ons aangeboden voor een rol als planning en dispatcher voor onze transportafdeling. Ik weet niet of jij weet wat Korenveld allemaal doet?",
+          "fr_cue": "Elias, on t'a proposé pour un rôle de planning et dispatching pour notre service transport. Je ne sais pas si tu sais tout ce que fait Korenveld ?",
+          "candidate_reply": "Niet allemaal, maar Korenveld is een welbekend bedrijf, dus ik weet een beetje wat ze doen. De interim heeft me de post als transportplanner gegeven, en ik wist in het begin niet dat het Korenveld was, maar ik ken Korenveld een beetje.",
+          "suggestion_fr": "Dis honnêtement ce que tu sais de l'entreprise, même un peu, et comment l'agence d'intérim t'a proposé le poste."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Oké, is goed. We hebben eigenlijk twee grote afdelingen. Eén is alles rond bakkerijproducten — als je naar bepaalde grote supermarktketens gaat om broodjes te kopen, dan komen ze eigenlijk van bij ons. We leveren over quasi heel de wereld. En dan hebben we een tweede afdeling die vooral sauzen, oliën, margarines maakt — plantaardige vetten. Die moeten ook getransporteerd worden, vandaar deze rol. We hebben een eigen transportafdeling en een eigen vrachtwagenpark, maar dat is niet altijd voldoende — vandaar de uitdaging: eigen vrachtwagens plannen, maar ook subcontractors aansturen zodat de producten tijdig bij onze klanten geraken. We zoeken iemand die kan helpen met die volledige planning en dispatching op te volgen. Vertel even wat je allemaal al gedaan hebt, waar jouw interesses liggen, en dan zien we wel waar de raakvlakken zijn.",
+          "fr_cue": "Ok, c'est bien. On a en fait deux grands départements. Un, c'est tout ce qui concerne les produits de boulangerie — si tu vas chez certaines grandes chaînes de supermarché acheter des petits pains, en fait ils viennent de chez nous. On livre dans quasiment le monde entier. Et on a un deuxième département qui fait surtout des sauces, huiles, margarines — des matières grasses végétales. Ça doit aussi être transporté, d'où ce rôle. On a notre propre département transport et notre propre parc de camions, mais ce n'est pas toujours suffisant — d'où le défi : planifier nos propres camions, mais aussi piloter des sous-traitants pour que les produits arrivent à temps chez nos clients. On cherche quelqu'un qui peut aider à suivre toute cette planification et ce dispatching. Raconte un peu ce que tu as déjà fait, où sont tes intérêts, et on verra bien où sont les points de convergence.",
+          "candidate_reply": "Ik heb een bachelor in handelsingenieur gedaan — in die studie kan je een beetje van alles doen. Tijdens mijn studentenjob en mijn opleiding heb ik veel gedaan in de logistiek, onder andere bij mijn vorige werkgever, waar ik mijn stage heb gedaan. Dat heeft me doen beslissen om een master in supply chain en management te doen, die ik dit jaar nog moet afronden — met gewoon één les. Mijn thesis is al gedaan, dus het is nog één les, ongeveer 18 uur op het jaar. Dat besloot ik om in de richting van logistiek en supply chain te gaan, omdat dat de leukste ervaring was die ik als studentenjob heb gehad. Ik zie mezelf goed in deze rol, want de persoon die mij tijdens mijn stage opleidde, was iemand die een beetje overal bezig was — met de planning, met het leiden van het magazijn. Dus ik zie me ook wel in deze functie.",
+          "suggestion_fr": "Parle de tes études (bachelier d'ingénieur de gestion, master en supply chain presque terminé), de ton stage et de ton job étudiant en logistique, puis dis pourquoi tu te vois dans ce poste (ton formateur de stage touchait au planning et au magasin)."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "En wat lijkt jou het meest interessant aan zo'n job?",
+          "fr_cue": "Et qu'est-ce qui te semble le plus intéressant dans un tel travail ?",
+          "candidate_reply": "Het is een uitdagende job, en ik hou van uitdaging — je moet altijd dingen oplossen, en dat trekt me echt aan. Iedere dag is niet dezelfde; het is een beetje vreemd, want je maakt de planning, maar je weet zeker dat het nooit precies zo zal gebeuren.",
+          "suggestion_fr": "Parle du défi : il faut toujours résoudre des problèmes, aucune journée ne ressemble à l'autre, le planning ne se passe jamais exactement comme prévu."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Je houdt van de variatie.",
+          "fr_cue": "Tu aimes la variété.",
+          "candidate_reply": "Ja.",
+          "suggestion_fr": "Confirme simplement."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Dat is belangrijk, want zoals je zegt: we proberen planning te maken, maar er zijn altijd dingen die fout lopen of veranderen. Het is belangrijk om positief te blijven en te blijven zoeken naar oplossingen. We vervoeren meestal diepvriesproducten of producten die koel moeten blijven — je moet creatief zijn om het opgelost te krijgen. Je kan een diepvrieswagen niet twee weken laten stilstaan, dat gaat niet goed komen.",
+          "fr_cue": "C'est important, car comme tu le dis : on essaie de faire une planification, mais il y a toujours des choses qui se passent mal ou qui changent. C'est important de rester positif et de continuer à chercher des solutions. On transporte surtout des produits surgelés ou des produits qui doivent rester froids — il faut être créatif pour trouver une solution. Tu ne peux pas laisser un camion frigorifique à l'arrêt pendant deux semaines, ça ne va pas bien se passer.",
+          "candidate_reply": "Nee.",
+          "suggestion_fr": "Écoute et confirme : il décrit le froid et l'urgence, pas besoin de développer."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Oké. Jij spreekt ook Engels?",
+          "fr_cue": "Ok. Toi aussi tu parles anglais ?",
+          "candidate_reply": "Yes, we can speak in English. My English is, I think, better than my Dutch, but I'm not sure — in English the sentences have the same structure as in French, so it's easier for me to form sentences. But yeah, I feel more comfortable in English.",
+          "suggestion_fr": "Dis que tu parles anglais, que c'est plus facile pour toi parce que la structure des phrases ressemble au français (tu peux répondre en anglais, comme dans le vrai entretien)."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Ik kan je alvast geruststellen: jouw Nederlands is goed, dus twijfel niet te hard. Een beetje oefening zal misschien ook helpen om nog beter te worden.",
+          "fr_cue": "Je peux déjà te rassurer : ton néerlandais est bon, donc ne doute pas trop. Un peu de pratique t'aidera peut-être aussi à devenir encore meilleur.",
+          "candidate_reply": "Ja, ja. Het is gewoon dat ik in een volledig Nederlandstalige omgeving moet blijven. Ik weet dat ik binnen twee maanden veel beter kan zijn, ook in het Engels. Ik voel me niet onzeker om talen te leren.",
+          "suggestion_fr": "Dis que tu progresses vite quand tu es dans un environnement entièrement néerlandophone, que dans deux mois tu seras bien plus à l'aise."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Misschien nog wat praktische dingen. Jij woont in...?",
+          "fr_cue": "Peut-être encore quelques détails pratiques. Toi, tu habites à... ?",
+          "candidate_reply": "Ik woon op ongeveer dertig kilometer van het hoofdkantoor, maar ik heb al mijn studies in een andere stad gedaan.",
+          "suggestion_fr": "Donne la distance (une trentaine de kilomètres) plutôt que la ville, et dis où tu as fait tes études."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "En naar ons hoofdkantoor komen, dat is geen probleem?",
+          "fr_cue": "Et venir à notre hoofdkantoor, ce n'est pas un problème ?",
+          "candidate_reply": "Nee, dat is geen probleem — de afstand is haalbaar, en ik heb mijn rijbewijs.",
+          "suggestion_fr": "Confirme que la distance est faisable, et que tu as ton permis."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Heb je een auto?",
+          "fr_cue": "Tu as une voiture ?",
+          "candidate_reply": "Ik heb nog geen auto, maar momenteel gebruik ik de auto van mijn broer, want hij heeft die niet nodig als hij werkt.",
+          "suggestion_fr": "Explique ta situation : pas encore de voiture à toi, mais tu utilises celle de ton frère."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Oké. Wij voorzien twee thuiswerkdagen — je kan op woensdag en vrijdag thuiswerken. Misschien niet de eerste weken; de eerste week is het als introductie beter dat je op kantoor bent, als de collega's er ook zijn. Dus reken op drie dagen per week op kantoor en twee dagen van thuis, als je van thuis kan werken.",
+          "fr_cue": "Ok. On prévoit deux jours de télétravail — tu peux télétravailler le mercredi et le vendredi. Peut-être pas les premières semaines ; la première semaine, pour l'introduction, c'est mieux que tu sois au bureau, quand les collègues sont là aussi. Donc compte sur trois jours par semaine au bureau et deux jours de chez toi, si tu peux travailler de chez toi.",
+          "candidate_reply": "Dus er is een soort inwerkperiode.",
+          "suggestion_fr": "Reformule ce que tu as compris : il y a une période d'intégration avant le télétravail."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Ja — je moet de collega's leren kennen, de procedures, de tools die we gebruiken. Dus reken op een paar weken, misschien een paar maanden, om alles goed te leren kennen. Maar daar zorgen we ook voor de juiste ondersteuning — je krijgt collega's die je gaan helpen. Misschien nog even toelichten: de rol waarvoor je was aangeboden, is ondertussen ingevuld; er is geen vacature meer, maar er is ondertussen een nieuwe opengesteld. Vandaar dat ik het gesprek toch laat doorgaan — we zijn nu volop aan het praten met mensen om die rol in te vullen. Dat zal eind deze week of begin volgende week een volgende stap krijgen: een gesprek met onze manager op het hoofdkantoor. Als die, na het lezen van je cv, denkt dat je een goede kandidaat bent, willen we je graag op het hoofdkantoor ontvangen om met de mensen te spreken.",
+          "fr_cue": "Oui — tu dois apprendre à connaître les collègues, les procédures, les outils qu'on utilise. Donc compte sur quelques semaines, peut-être quelques mois, pour bien tout connaître. Mais pour ça on prévoit aussi le bon accompagnement — tu auras des collègues qui vont t'aider. Peut-être encore préciser : le rôle pour lequel tu avais été proposé est entre-temps pourvu ; il n'y a plus de poste vacant, mais un nouveau a été ouvert depuis. C'est pour ça que je fais quand même continuer l'entretien — on est en pleine discussion avec des gens pour pourvoir ce rôle. Ça aura une suite fin de cette semaine ou début de la semaine prochaine : un entretien avec notre manager au hoofdkantoor. Si, après avoir lu ton cv, il pense que tu es un bon candidat, on aimerait bien te recevoir au hoofdkantoor pour parler avec les gens.",
+          "candidate_reply": "Oké, dat is goed. Reken op een uurtje, plus de rit erheen en terug.",
+          "suggestion_fr": "Montre que l'étape suivante (une heure d'entretien avec le manager, plus le trajet) te convient."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Dus reken op een tweetal uur die je nodig hebt.",
+          "fr_cue": "Donc compte sur environ deux heures dont tu as besoin.",
+          "candidate_reply": "Geen probleem. Momenteel loopt er bij mij nog een andere sollicitatie, dus ik moet daar misschien ook een datum voor hebben — ik zal gewoon zeggen dat ik hier al iets gevonden heb. Maar ik heb eerlijk gezegd meer interesse in Korenveld.",
+          "suggestion_fr": "Dis que ça ne pose pas de problème ; tu peux mentionner une autre candidature en cours et dire que tu préfères leur entreprise."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Alle begrip daarvoor, het is belangrijk om een job te hebben. Wij gaan proberen snel te werken, maar we hebben een aantal stappen te doorlopen. Mocht iemand anders je een aanbod doen, denk aan jezelf en maak een goede keuze. Het positieve is dat je bij ons door de preselectie bent — anders zouden we deze babbel niet hebben. Maar er zijn nog twee stappen voor we iets kunnen afronden, dus het zal wat tijd vragen. Ik kan je geen garantie geven dat de job voor jou is, maar we hebben een goede babbel gehad, en dat is belangrijk. Het feit dat je Frans, Nederlands en Engels spreekt, is positief.",
+          "fr_cue": "Toute compréhension pour ça, c'est important d'avoir un emploi. On va essayer d'être rapides, mais on a plusieurs étapes à parcourir. Si quelqu'un d'autre te fait une offre, pense à toi et fais le bon choix. Le positif, c'est que tu es passé notre présélection — sinon on n'aurait pas cette discussion. Mais il reste encore deux étapes avant qu'on puisse conclure, donc ça demandera un peu de temps. Je ne peux pas te garantir que le poste est pour toi, mais on a eu une bonne discussion, et ça c'est important. Le fait que tu parles français, néerlandais et anglais, c'est positif.",
+          "candidate_reply": "Ik heb misschien niet zoveel ervaring die rechtstreeks als dispatcher telt, maar ik heb veel dingen gedaan rond planning. Ik heb bijvoorbeeld met de studentenkring van de universiteit een soort agendaplanning gemaakt — ook met behulp van AI, maar vooral door goed na te denken over hoe ik de processen moest opzetten. De studentenkring gebruikt die agenda nog steeds. Dat is iets dat me echt interesseert.",
+          "suggestion_fr": "Compense le manque d'expérience directe en dispatching : parle du planning d'agenda que tu as construit pour le cercle étudiant, toujours utilisé aujourd'hui."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "En welke AI heb je gebruikt?",
+          "fr_cue": "Et quelle IA as-tu utilisée ?",
+          "candidate_reply": "Meestal Claude, want Claude was het beste om iets te programmeren. Maar ik denk dat je met ChatGPT Codex nu ook op hetzelfde niveau kan komen.",
+          "suggestion_fr": "Nomme l'outil d'IA que tu as utilisé pour programmer, et compare-le brièvement à un autre."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Nee, ik zou zeggen: dat is een interessant idee. Wij gebruiken het voor planning nog niet zoveel, maar iemand die nieuwe ideeën meebrengt, is zeker positief — waarom zouden we alles manueel doen als er tools zijn die kunnen helpen?",
+          "fr_cue": "Non, je dirais : c'est une idée intéressante. On ne l'utilise pas encore tellement pour la planification, mais quelqu'un qui apporte de nouvelles idées, c'est certainement positif — pourquoi tout faire manuellement s'il y a des outils qui peuvent aider ?",
+          "candidate_reply": "Het is een tool, dus iets dat je moet gebruiken. De ERP-systemen zijn ook heel belangrijk voor een bedrijf — ik heb vorig jaar een SAP-opleiding gevolgd. Met de juiste software kan je veel processen makkelijker maken.",
+          "suggestion_fr": "Dis que c'est un outil parmi d'autres, et parle de ta formation SAP : avec le bon logiciel, beaucoup de processus deviennent plus simples."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Dat is zeker belangrijk, om de tools goed te gebruiken. Ben jij stressbestendig?",
+          "fr_cue": "C'est certainement important de bien utiliser les outils. Es-tu résistant au stress ?",
+          "candidate_reply": "Ja, ik kan zeggen dat ik nogal stressbestendig ben. In mijn studentenjob moest ik altijd met arbeiders werken, en soms was ik een van de jongsten die met hen werkte — dat kan soms wel stressvolle situaties opleveren. Bij mijn vorige werkgever werkte ik bijvoorbeeld aan de laadhal voor de verschillende chauffeurs — mensen die vaak uit Polen kwamen, met een vreemd Engels, en soms ook een beetje dronken. Dat kan wel stressend zijn, maar ik weet dat ik altijd rustig en kalm moet blijven, anders gaat het niet. Stress kan ook iets goeds zijn — je volgt gewoon de processen, en dat is het belangrijkste.",
+          "suggestion_fr": "Donne un exemple vécu : ton travail au quai de chargement avec des chauffeurs étrangers parfois difficiles ; rester calme et suivre les procédures."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Dat is goed. Heb jij nog vragen voor mij?",
+          "fr_cue": "C'est bien. As-tu encore des questions pour moi ?",
+          "candidate_reply": "Ik moet ook zeggen dat ik in de horeca gewerkt heb — een andere soort stress, maar ook met klanten interageren.",
+          "suggestion_fr": "Ajoute ton expérience en horeca (un autre type de stress, le contact client), puis réponds à sa question."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Ik wil gewoon even weten of jij nog vragen hebt voor mij.",
+          "fr_cue": "Je veux juste savoir si tu as encore des questions pour moi.",
+          "candidate_reply": "Nee, momenteel denk ik dat ik genoeg informatie over de functie heb. Er is ook een inwerkperiode — in de volgende stap zal ik zeker meer vragen hebben, maar momenteel niet.",
+          "suggestion_fr": "Dis que tu as assez d'informations pour l'instant, et que tu auras des questions pour l'étape suivante."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Oké, is goed. Noteer vragen zeker voor het gesprek met de manager — dat is het belangrijkste. Ik doe de follow-up, en zodra wij een beslissing hebben, nemen we contact met je op.",
+          "fr_cue": "Ok, c'est bien. Note bien des questions pour l'entretien avec le manager — c'est le plus important. Je fais le suivi, et dès qu'on a une décision, on reprend contact avec toi.",
+          "candidate_reply": "Oké, top.",
+          "suggestion_fr": "Confirme simplement."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Elias, bedankt voor het gesprek.",
+          "fr_cue": "Elias, merci pour l'entretien.",
+          "candidate_reply": "Bedankt.",
+          "suggestion_fr": "Remercie en retour."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Twijfel niet aan je Nederlands — jouw Nederlands is goed, dat is geen probleem.",
+          "fr_cue": "Ne doute pas de ton néerlandais — ton néerlandais est bon, ce n'est pas un problème.",
+          "candidate_reply": "Ja, ik weet dat ik 90% kan begrijpen als iemand Nederlands spreekt — ik versta alles, maar het gaat vooral om de structuur van mijn eigen zinnen als ik zelf praat. Ik lees ook goed Nederlands.",
+          "suggestion_fr": "Distingue compréhension et expression : tu comprends presque tout (environ 90 %), c'est la construction de tes propres phrases que tu travailles ; tu lis bien le néerlandais."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Ja, en ik begrijp ook alles wat jij zegt, dus jouw Nederlands is wel goed.",
+          "fr_cue": "Oui, et je comprends aussi tout ce que tu dis, donc ton néerlandais est bien.",
+          "candidate_reply": "Oké, top.",
+          "suggestion_fr": "Accepte le compliment simplement."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Ik hou je op de hoogte, zodra we feedback hebben kom ik naar je terug.",
+          "fr_cue": "Je te tiens au courant, dès qu'on a un retour je reviens vers toi.",
+          "candidate_reply": "Ja, merci.",
+          "suggestion_fr": "Remercie, court."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Elias, prettige dag.",
+          "fr_cue": "Elias, bonne journée.",
+          "candidate_reply": "Jij ook, fijne dag nog.",
+          "suggestion_fr": "Renvoie la formule de politesse (« Jij ook, nog een fijne dag »)."
+        },
+        {
+          "speaker": "De recruiter",
+          "nl_original": "Dag.",
+          "fr_cue": "Au revoir."
+        }
+      ],
+      "_source": "Transcription réelle d'un entretien de Joas (octobre 2026), anonymisée : nom de l'entreprise inventé, prénom du candidat changé, nom du département retiré ; répliques reprises telles quelles sinon. Idées de réponse tirées de ses vraies réponses, rédigées par Claude."
     }
   ]
 }

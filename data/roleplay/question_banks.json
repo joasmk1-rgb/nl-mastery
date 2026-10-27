@@ -1002,6 +1002,97 @@
         "Ik ga het proberen, en als het niet lukt zeg ik het even in het Engels of Frans.",
         "Dus als ik het goed begrijp, ..."
       ]
+    },
+    {
+      "id": "korenveld_transportplanner",
+      "label": "Korenveld — planning & dispatching transport (entretien réel)",
+      "_source": "Questions tirées de la transcription réelle d'un entretien de Joas (octobre 2026), anonymisée : nom de l'entreprise inventé, personnes et département retirés.",
+      "poste": "Planner / dispatcher transport : planifier les camions de l'entreprise et piloter des transporteurs sous-traitants pour livrer à temps des produits surgelés et réfrigérés",
+      "contexte": "Tu es le recruteur de Korenveld, groupe agroalimentaire belge (produits de boulangerie et matières grasses végétales) qui livre dans le monde entier, avec son propre service transport et son parc de camions, complété par des sous-traitants. Entretien téléphonique, tutoiement (je/jij), ton bienveillant et rassurant. Infos que tu peux donner : deux jours de télétravail (mercredi et vendredi) après une période d'intégration de quelques semaines, collègues pour aider, prochaine étape = entretien d'environ une heure avec le manager au siège. Les questions sont un guide : si le candidat dévie, reprends naturellement la main (recadre, relance, ou creuse ce qu'il vient de dire, par exemple un outil ou une expérience qu'il cite).",
+      "niveau": "B1-B2",
+      "tirage": {
+        "min": 7,
+        "max": 10
+      },
+      "welcome": "Dag! Je bent ons aangeboden voor een rol als planner en dispatcher voor onze transportafdeling. Weet jij wat Korenveld allemaal doet?",
+      "questions": {
+        "accroche": [
+          "Ik weet niet of jij weet wat Korenveld allemaal doet?"
+        ],
+        "clarification_poste": [
+          "Vertel even wat je allemaal al gedaan hebt, waar jouw interesses liggen, en dan zien we wel waar de raakvlakken zijn."
+        ],
+        "motivation": [
+          "En wat lijkt jou het meest interessant aan zo'n job?"
+        ],
+        "verif_cv": [
+          "Jij spreekt ook Engels?",
+          "Welke tools of software heb je al gebruikt?"
+        ],
+        "technique": [
+          "Ben jij stressbestendig?",
+          "We vervoeren diepvriesproducten: je kan een diepvrieswagen niet twee weken laten stilstaan. Hoe zou jij reageren als een rit misloopt?"
+        ],
+        "dispo": [
+          "Jij woont in...?",
+          "En naar ons hoofdkantoor komen, dat is geen probleem?",
+          "Heb je een auto?"
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor mij?"
+        ]
+      },
+      "difficultes": {
+        "facile": "Tu rassures beaucoup, une question à la fois, tu reformules ce que le candidat dit.",
+        "moyen": "Comme dans le vrai entretien : bienveillant mais tu enchaînes, et tu creuses une fois un détail qu'il donne (un outil, une expérience).",
+        "difficile": "Tu es plus exigeant : tu demandes un exemple concret quand une réponse reste générale, et tu insistes sur le manque d'expérience directe en dispatching."
+      },
+      "criteres": [
+        "Présenter son parcours en trois temps : études, expérience logistique concrète, pourquoi ce poste",
+        "Donner un exemple vécu pour le stress, pas une affirmation abstraite",
+        "Compenser le manque d'expérience en dispatching par un exemple transférable (un planning construit soi-même, un outil, SAP)",
+        "Distinguer compréhension et expression quand on parle de son néerlandais",
+        "Répondre à la question posée avant d'ajouter autre chose, et avoir au moins une question à la fin"
+      ],
+      "erreurs_frequentes": [
+        {
+          "faux": "Dat besloot ik om ...",
+          "correct": "Daarom besloot ik om ..."
+        },
+        {
+          "faux": "Iedere dag is niet dezelfde",
+          "correct": "Geen enkele dag is hetzelfde"
+        },
+        {
+          "faux": "ik heb mijn studies gedaan in ...",
+          "correct": "ik heb in ... gestudeerd"
+        }
+      ],
+      "vocabulaire": [
+        "de planning",
+        "de dispatching",
+        "de rit",
+        "de vervoerder",
+        "de onderaannemer",
+        "het vrachtwagenpark",
+        "de diepvrieswagen",
+        "de koelwagen",
+        "tijdig leveren",
+        "aansturen",
+        "opvolgen",
+        "bijsturen",
+        "stressbestendig",
+        "de inwerkperiode",
+        "thuiswerken",
+        "het hoofdkantoor"
+      ],
+      "bequilles": [
+        "Sorry, kan je dat herhalen?",
+        "Een beetje trager, alstublieft?",
+        "Hoe zeg je dat in het Nederlands?",
+        "Mag ik even nadenken?",
+        "Dus als ik het goed begrijp, ..."
+      ]
     }
   ]
 }
