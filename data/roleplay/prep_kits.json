@@ -1927,6 +1927,341 @@
           "fr": "Peux-tu relire mon mail ?"
         }
       ]
+    },
+    "dom_kantoor": {
+      "label": "Logiciels de bureau en néerlandais",
+      "verbes": [
+        "opslaan",
+        "openen",
+        "delen",
+        "maken",
+        "plakken",
+        "sturen",
+        "doorsturen",
+        "invoeren",
+        "zoeken",
+        "sorteren"
+      ],
+      "mots": [
+        {
+          "nl": "het bestand",
+          "fr": "le fichier"
+        },
+        {
+          "nl": "de map",
+          "fr": "le dossier"
+        },
+        {
+          "nl": "de gedeelde schijf",
+          "fr": "le disque partagé"
+        },
+        {
+          "nl": "de bijlage",
+          "fr": "la pièce jointe"
+        },
+        {
+          "nl": "het werkblad",
+          "fr": "la feuille de calcul"
+        },
+        {
+          "nl": "de kolom",
+          "fr": "la colonne"
+        },
+        {
+          "nl": "de rij",
+          "fr": "la ligne"
+        },
+        {
+          "nl": "de draaitabel",
+          "fr": "le tableau croisé dynamique"
+        },
+        {
+          "nl": "VERT.ZOEKEN",
+          "fr": "RECHERCHEV"
+        },
+        {
+          "nl": "het wachtwoord",
+          "fr": "le mot de passe"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Waar staat dat bestand?",
+          "fr": "Où se trouve ce fichier ?"
+        },
+        {
+          "nl": "Ik stuur het je door.",
+          "fr": "Je te le transfère."
+        },
+        {
+          "nl": "Kan je me in cc zetten?",
+          "fr": "Peux-tu me mettre en copie ?"
+        },
+        {
+          "nl": "Ik heb geen toegang tot die map.",
+          "fr": "Je n'ai pas accès à ce dossier."
+        }
+      ]
+    },
+    "sit_lg_disp": {
+      "label": "Dispatcher — au quotidien",
+      "verbes": [
+        "plannen",
+        "regelen",
+        "verwittigen",
+        "bellen",
+        "leveren",
+        "laden",
+        "lossen",
+        "afspreken",
+        "melden",
+        "controleren"
+      ],
+      "mots": [
+        {
+          "nl": "de rit",
+          "fr": "la tournée"
+        },
+        {
+          "nl": "het tijdslot",
+          "fr": "le créneau horaire"
+        },
+        {
+          "nl": "de charter",
+          "fr": "le transporteur affrété"
+        },
+        {
+          "nl": "de prijsaanvraag",
+          "fr": "la demande de prix"
+        },
+        {
+          "nl": "het tarief",
+          "fr": "le tarif"
+        },
+        {
+          "nl": "de koeloplegger",
+          "fr": "la semi-remorque frigorifique"
+        },
+        {
+          "nl": "de koelgroep",
+          "fr": "le groupe froid"
+        },
+        {
+          "nl": "de retourvracht",
+          "fr": "le fret retour"
+        },
+        {
+          "nl": "de lege rit",
+          "fr": "le trajet à vide"
+        },
+        {
+          "nl": "de file",
+          "fr": "l'embouteillage"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Hoe laat denk je er te zijn?",
+          "fr": "À quelle heure penses-tu y être ?"
+        },
+        {
+          "nl": "Ik verwittig de klant meteen.",
+          "fr": "Je préviens le client tout de suite."
+        },
+        {
+          "nl": "Kunnen jullie de prijs per mail bevestigen?",
+          "fr": "Pouvez-vous confirmer le prix par mail ?"
+        }
+      ]
+    },
+    "sit_lg_acc": {
+      "label": "Accueil & réception — au quotidien",
+      "verbes": [
+        "doorverbinden",
+        "terugbellen",
+        "noteren",
+        "spellen",
+        "tekenen",
+        "wachten",
+        "verwittigen",
+        "ontvangen",
+        "ophalen",
+        "helpen"
+      ],
+      "mots": [
+        {
+          "nl": "het onthaal",
+          "fr": "l'accueil"
+        },
+        {
+          "nl": "de afspraak",
+          "fr": "le rendez-vous"
+        },
+        {
+          "nl": "de bezoekersbadge",
+          "fr": "le badge visiteur"
+        },
+        {
+          "nl": "het pakje",
+          "fr": "le colis"
+        },
+        {
+          "nl": "de koerier",
+          "fr": "le coursier"
+        },
+        {
+          "nl": "de laadkade",
+          "fr": "le quai de chargement"
+        },
+        {
+          "nl": "het fluohesje",
+          "fr": "le gilet fluo"
+        },
+        {
+          "nl": "de veiligheidsschoenen",
+          "fr": "les chaussures de sécurité"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Hij zit in vergadering tot elf uur.",
+          "fr": "Il est en réunion jusqu'à 11 h."
+        },
+        {
+          "nl": "Mag ik een bericht noteren?",
+          "fr": "Puis-je prendre un message ?"
+        },
+        {
+          "nl": "Bij ons leveren we alleen op afspraak.",
+          "fr": "Chez nous, on livre seulement sur rendez-vous."
+        }
+      ]
+    },
+    "sit_lg_stock": {
+      "label": "Stock & magasin — au quotidien",
+      "verbes": [
+        "tellen",
+        "scannen",
+        "controleren",
+        "boeken",
+        "verwijderen",
+        "melden",
+        "zoeken",
+        "aanpassen",
+        "reserveren",
+        "nakijken"
+      ],
+      "mots": [
+        {
+          "nl": "de cyclische telling",
+          "fr": "l'inventaire tournant"
+        },
+        {
+          "nl": "de locatie",
+          "fr": "l'emplacement"
+        },
+        {
+          "nl": "het verschil",
+          "fr": "l'écart"
+        },
+        {
+          "nl": "de ontvangst",
+          "fr": "la réception"
+        },
+        {
+          "nl": "het voorbehoud",
+          "fr": "la réserve (sur la CMR)"
+        },
+        {
+          "nl": "de houdbaarheidsdatum",
+          "fr": "la date de péremption"
+        },
+        {
+          "nl": "FEFO",
+          "fr": "premier périmé, premier sorti"
+        },
+        {
+          "nl": "de partij",
+          "fr": "le lot"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Het systeem zegt vijftig, maar ik tel er zesenveertig.",
+          "fr": "Le système dit 50, mais j'en compte 46."
+        },
+        {
+          "nl": "Zal ik het nog eens tellen?",
+          "fr": "Je recompte ?"
+        },
+        {
+          "nl": "We schrijven een voorbehoud op de CMR.",
+          "fr": "On fait une réserve sur la CMR."
+        }
+      ]
+    },
+    "sit_lg_enc": {
+      "label": "Encodage & administration — au quotidien",
+      "verbes": [
+        "invoeren",
+        "ingeven",
+        "bevestigen",
+        "nakijken",
+        "verbeteren",
+        "opvolgen",
+        "melden",
+        "sturen",
+        "delen",
+        "uitleggen"
+      ],
+      "mots": [
+        {
+          "nl": "de bestelbon",
+          "fr": "le bon de commande"
+        },
+        {
+          "nl": "de artikelfiche",
+          "fr": "la fiche article"
+        },
+        {
+          "nl": "de stamgegevens",
+          "fr": "les données de base"
+        },
+        {
+          "nl": "het klantnummer",
+          "fr": "le numéro de client"
+        },
+        {
+          "nl": "in bijlage",
+          "fr": "en pièce jointe"
+        },
+        {
+          "nl": "in cc",
+          "fr": "en copie"
+        },
+        {
+          "nl": "het scherm delen",
+          "fr": "partager l'écran"
+        },
+        {
+          "nl": "geblokkeerd",
+          "fr": "bloqué"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "In bijlage vindt u ...",
+          "fr": "Vous trouverez en pièce jointe ..."
+        },
+        {
+          "nl": "Ik herhaal: ... Klopt dat?",
+          "fr": "Je répète : ... C'est bien ça ?"
+        },
+        {
+          "nl": "Zien jullie mijn scherm nu?",
+          "fr": "Vous voyez mon écran maintenant ?"
+        }
+      ]
     }
   },
   "scenarios": {
@@ -1967,6 +2302,10 @@
     "da_": ["sit_da"],
     "pmo_": ["sit_pmo"],
     "cf_": ["sit_cf"],
-    "ap_": ["dom_ap", "sit_ap", "dom_ap_analyse"]
+    "ap_": ["dom_ap", "sit_ap", "dom_ap_analyse"],
+    "lg_disp_": ["sit_lg_disp", "sit_dispatch"],
+    "lg_acc_": ["sit_lg_acc", "sit_guichet"],
+    "lg_stock_": ["sit_lg_stock", "dom_entrepot"],
+    "lg_enc_": ["sit_lg_enc", "dom_kantoor"]
   }
 }

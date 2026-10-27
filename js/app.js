@@ -2253,6 +2253,7 @@ if (firebaseAvailable) {
                 'THEME_DATA.csv',
                 'THEME_PMO.csv',
                 'THEME_ERP.csv',
+                'THEME_KANTOORSOFTWARE.csv',
                 'THEME_ADMIN_PRODUCTIE.csv'
             ];
             const errors = [];
@@ -5786,7 +5787,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', THEME_ADMIN_PRODUCTIE: '🏭 Admin. production', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', THEME_KANTOORSOFTWARE: '💻 Logiciels de bureau', THEME_ADMIN_PRODUCTIE: '🏭 Admin. production', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -9322,6 +9323,13 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             chat: { label: '💬 Messagerie interne', prompt: 'par messagerie instantanée : tes messages sont courts et écrits, et l\'apprenant répond par écrit' },
             balie: { label: '🛎️ Accueil / comptoir', prompt: 'au comptoir d\'accueil, en face à face' }
         };
+        // Rôles d'un métier (champ « role » des situations) : affichage groupé par rôle.
+        const RP_JOB_ROLES = {
+            dispatch: '🚛 Dispatcher / planner transport',
+            accueil: '🛎️ Accueil & réception',
+            stock: '📦 Stock & magasin',
+            encodage: '⌨️ Encodage & administration'
+        };
         // Intensité par type de situation, pour ordonner une journée tirée au sort (calme → pic → calme).
         const RP_JOB_INTENSITY = { administratif: 1, clarification: 1, probleme_document: 2, proposition_solution: 2, presentation: 2, negociation: 3, urgence: 3, reclamation: 3, retour: 2 };
         const RP_JOB_DURATIONS = { courte: 6, longue: 10 };
@@ -10450,13 +10458,19 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const chip = (active, onclick, label, disabled) =>
                 `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" ${disabled ? 'disabled style="opacity:0.45; cursor:default;"' : `onclick="${onclick}"`}>${label}</button>`;
 
+            const sitRow = s => rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartSituation('${s.id}')">${rpEscapeHtml(rpSitTitle(s))}${rpSitLang(s) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}</button>`, 'sit:' + s.id, rpSitTitle(s), { type: 'sit', id: s.id });
+            // Rangement par RÔLE quand les situations en ont un (logistique : dispatcher, accueil,
+            // stock, encodage — choix de Joas, octobre 2026), sinon par canal.
+            const hasRole = s => !!(s.role && RP_JOB_ROLES[s.role]);
             const canaux = [...new Set(bank.map(s => s.canal))];
-            const isolated = canaux.map(c =>
-                `<div class="rp-job-canal">${rpEscapeHtml((RP_JOB_CANAUX[c] || { label: c }).label)}</div>` +
-                bank.filter(s => s.canal === c).map(s =>
-                    rpPrepRow(`<button class="rp-scenario-btn" onclick="rpStartSituation('${s.id}')">${rpEscapeHtml(rpSitTitle(s))}${rpSitLang(s) === 'en' ? ' <span class="wl-badge unseen">🇬🇧 en anglais</span>' : ''}</button>`, 'sit:' + s.id, rpSitTitle(s), { type: 'sit', id: s.id })
-                ).join('')
-            ).join('');
+            const isolated = bank.some(hasRole)
+                ? Object.keys(RP_JOB_ROLES).filter(r => bank.some(s => s.role === r)).map(r =>
+                    `<div class="rp-job-canal">${RP_JOB_ROLES[r]}</div>` + bank.filter(s => s.role === r).map(sitRow).join('')).join('') +
+                    (bank.some(s => !hasRole(s)) ? `<div class="rp-job-canal">Autres</div>` + bank.filter(s => !hasRole(s)).map(sitRow).join('') : '')
+                : canaux.map(c =>
+                    `<div class="rp-job-canal">${rpEscapeHtml((RP_JOB_CANAUX[c] || { label: c }).label)}</div>` +
+                    bank.filter(s => s.canal === c).map(sitRow).join('')
+                ).join('');
 
             listDiv.innerHTML = `
                 <div class="rp-group-title">${RP_JOB_METIERS[rpJobMetier] || rpEscapeHtml(rpJobMetier)}</div>

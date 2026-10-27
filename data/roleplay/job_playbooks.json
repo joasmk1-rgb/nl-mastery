@@ -2150,6 +2150,506 @@
         "Dire « oui » à tout sans avoir compris.",
         "Attendre la fin pour poser toutes les questions : la moitié sera oubliée."
       ]
+    },
+    "lg_disp_ritten_morgen": {
+      "titre": "Planifier les tournées du lendemain",
+      "etapes": [
+        {
+          "fr": "Lister les contraintes avant de planifier.",
+          "phrase": "Welke leveringen hebben een vast tijdslot, en welke zijn diepvries?"
+        },
+        {
+          "fr": "Commencer par ce qui est imposé (créneaux, température).",
+          "phrase": "Ik plan eerst de ritten met een tijdslot en de koelritten."
+        },
+        {
+          "fr": "Regrouper par zone pour limiter les kilomètres.",
+          "phrase": "Ik combineer de leveringen per regio."
+        },
+        {
+          "fr": "Prévoir un charter pour ce qui ne rentre pas.",
+          "phrase": "Voor de drie leveringen die overblijven vraag ik een prijs aan een charter."
+        }
+      ],
+      "a_eviter": [
+        "Planifier dans l'ordre d'arrivée des commandes.",
+        "Oublier la température ou les heures d'ouverture du client."
+      ]
+    },
+    "lg_disp_tijdslot_gemist": {
+      "titre": "Un chauffeur va rater son créneau",
+      "etapes": [
+        {
+          "fr": "Demander où il est et son heure d'arrivée estimée.",
+          "phrase": "Waar sta je precies, en hoe laat denk je er te zijn?"
+        },
+        {
+          "fr": "Prévenir le client tout de suite, avec une heure réaliste.",
+          "phrase": "Ik verwittig de klant meteen en vraag een nieuw tijdslot."
+        },
+        {
+          "fr": "Revoir la suite de sa tournée.",
+          "phrase": "Ik kijk of de volgende leveringen nog lukken."
+        },
+        {
+          "fr": "Rappeler le chauffeur avec la nouvelle consigne.",
+          "phrase": "Ik bel je terug zodra ik een nieuw uur heb."
+        }
+      ],
+      "a_eviter": [
+        "Laisser le client découvrir le retard tout seul.",
+        "Promettre une heure sans marge."
+      ]
+    },
+    "lg_disp_charter_prijs": {
+      "titre": "Demander un prix à un transporteur",
+      "etapes": [
+        {
+          "fr": "Donner toutes les infos d'un coup.",
+          "phrase": "Het gaat om zesentwintig paletten diepvries, laden morgen om zes uur, leveren in Lyon overmorgen."
+        },
+        {
+          "fr": "Demander prix et disponibilité.",
+          "phrase": "Hebben jullie een koelwagen beschikbaar, en wat is jullie tarief?"
+        },
+        {
+          "fr": "Négocier poliment si c'est trop cher.",
+          "phrase": "Dat is boven ons budget. Kunnen jullie iets doen aan de prijs?"
+        },
+        {
+          "fr": "Faire confirmer par écrit.",
+          "phrase": "Kunnen jullie de prijs en het laaduur per mail bevestigen?"
+        }
+      ],
+      "a_eviter": [
+        "Oublier la température ou le nombre de palettes.",
+        "Accepter oralement sans confirmation écrite."
+      ]
+    },
+    "lg_disp_temperatuur": {
+      "titre": "Un problème de température en route",
+      "etapes": [
+        {
+          "fr": "Poser les questions clés.",
+          "phrase": "Sinds wanneer is het acht graden? Werkt de koelgroep nog?"
+        },
+        {
+          "fr": "Donner une consigne claire.",
+          "phrase": "Stop op een veilige plek en controleer de koelgroep. Doe de deuren niet open."
+        },
+        {
+          "fr": "Prévenir la qualité et le client.",
+          "phrase": "Ik verwittig de kwaliteitsdienst en de klant."
+        },
+        {
+          "fr": "Faire noter les températures.",
+          "phrase": "Noteer de temperatuur elk kwartier en stuur me een foto van het display."
+        }
+      ],
+      "a_eviter": [
+        "Laisser livrer sans prévenir personne.",
+        "Donner des consignes vagues."
+      ]
+    },
+    "lg_disp_retourvracht": {
+      "titre": "Proposer un fret retour",
+      "etapes": [
+        {
+          "fr": "Partir du coût du trajet à vide.",
+          "phrase": "Een lege rit kost ons de volledige terugweg."
+        },
+        {
+          "fr": "Proposer des pistes.",
+          "phrase": "We kunnen een klant of leverancier in de regio vragen, of op een vrachtbeurs zoeken."
+        },
+        {
+          "fr": "Dire ce qu'il faut vérifier.",
+          "phrase": "We moeten wel het uur, de temperatuur en de documenten nakijken."
+        },
+        {
+          "fr": "Proposer de tester.",
+          "phrase": "Zal ik het voor deze rit proberen?"
+        }
+      ],
+      "a_eviter": [
+        "Accepter n'importe quelle marchandise (contamination, température).",
+        "Oublier les horaires du chauffeur."
+      ]
+    },
+    "lg_acc_standaard": {
+      "titre": "Le standard : la personne n'est pas là",
+      "etapes": [
+        {
+          "fr": "Dire où est la personne et jusqu'à quand.",
+          "phrase": "Meneer Peeters zit in vergadering tot elf uur."
+        },
+        {
+          "fr": "Proposer une solution.",
+          "phrase": "Zal ik een bericht noteren, of wil u een collega spreken?"
+        },
+        {
+          "fr": "Prendre le message complet.",
+          "phrase": "Mag ik uw naam, uw bedrijf en uw nummer?"
+        },
+        {
+          "fr": "Relire et promettre de transmettre.",
+          "phrase": "Ik lees het nummer nog eens voor. Ik geef het door en hij belt u terug."
+        }
+      ],
+      "a_eviter": [
+        "Dire seulement « il n'est pas là ».",
+        "Noter un numéro sans le relire."
+      ]
+    },
+    "lg_acc_leverancier_zonder_afspraak": {
+      "titre": "Une livraison sans rendez-vous",
+      "etapes": [
+        {
+          "fr": "Accueillir et expliquer la règle.",
+          "phrase": "Bij ons leveren we alleen op afspraak."
+        },
+        {
+          "fr": "Vérifier s'il y a une possibilité.",
+          "phrase": "Ik vraag even aan het magazijn of er een kade vrij is."
+        },
+        {
+          "fr": "Proposer une solution.",
+          "phrase": "U kan om twee uur lossen, of ik geef u een tijdslot voor morgen."
+        },
+        {
+          "fr": "Donner la marche à suivre pour la prochaine fois.",
+          "phrase": "De volgende keer kan u een afspraak maken via dit nummer."
+        }
+      ],
+      "a_eviter": [
+        "Le laisser entrer sans prévenir le magasin.",
+        "Le renvoyer sèchement sans solution."
+      ]
+    },
+    "lg_acc_pakjes_post": {
+      "titre": "Réceptionner des colis",
+      "etapes": [
+        {
+          "fr": "Vérifier l'adresse de chaque colis.",
+          "phrase": "Een moment, ik kijk de adressen even na."
+        },
+        {
+          "fr": "Signaler celui qui n'est pas pour vous.",
+          "phrase": "Dit pakje is niet voor ons, het is voor een ander bedrijf."
+        },
+        {
+          "fr": "Signer seulement pour ce que vous recevez.",
+          "phrase": "Ik teken voor twee pakjes, niet voor drie."
+        },
+        {
+          "fr": "Prévenir les destinataires.",
+          "phrase": "Ik verwittig de collega's dat hun pakje er is."
+        }
+      ],
+      "a_eviter": [
+        "Signer pour tout sans regarder.",
+        "Garder un colis qui n'est pas pour vous."
+      ]
+    },
+    "lg_acc_veiligheid_bezoeker": {
+      "titre": "Un visiteur entre dans l'entrepôt",
+      "etapes": [
+        {
+          "fr": "Faire signer le registre et donner le badge.",
+          "phrase": "Wilt u hier tekenen? Dit is uw bezoekersbadge."
+        },
+        {
+          "fr": "Donner l'équipement.",
+          "phrase": "In het magazijn draagt u altijd een fluohesje en veiligheidsschoenen."
+        },
+        {
+          "fr": "Expliquer les règles de circulation.",
+          "phrase": "Blijf op het voetgangerspad, de heftrucks hebben voorrang."
+        },
+        {
+          "fr": "Prévenir le responsable.",
+          "phrase": "Ik verwittig de magazijnverantwoordelijke, hij komt u halen."
+        }
+      ],
+      "a_eviter": [
+        "Laisser entrer sans équipement de sécurité.",
+        "Oublier de prévenir le responsable."
+      ]
+    },
+    "lg_acc_franstalige_bezoeker": {
+      "titre": "Un visiteur qui ne parle que français",
+      "etapes": [
+        {
+          "fr": "Accueillir en français et rassurer.",
+          "phrase": "(en français) Bienvenue, pas de problème, je préviens la personne."
+        },
+        {
+          "fr": "Appeler le collègue et annoncer la visite en néerlandais.",
+          "phrase": "Er is een kandidate voor je, voor het gesprek van elf uur."
+        },
+        {
+          "fr": "Signaler qu'elle parle seulement français.",
+          "phrase": "Ze spreekt alleen Frans. Wil je dat ik mee kom om te helpen?"
+        },
+        {
+          "fr": "Faire patienter.",
+          "phrase": "(en français) Il arrive dans deux minutes, installez-vous."
+        }
+      ],
+      "a_eviter": [
+        "Laisser le visiteur sans explication.",
+        "Oublier de prévenir le collègue de la langue."
+      ]
+    },
+    "lg_stock_cyclische_telling": {
+      "titre": "Un inventaire tournant",
+      "etapes": [
+        {
+          "fr": "Confirmer ce qu'il faut compter.",
+          "phrase": "Ik tel dus de locaties C01 tot C05. In stuks of in dozen?"
+        },
+        {
+          "fr": "Donner les quantités clairement.",
+          "phrase": "C01: twaalf dozen, C02: acht dozen."
+        },
+        {
+          "fr": "Signaler l'écart.",
+          "phrase": "Op C03 tel ik zesenveertig dozen, maar het systeem zegt vijftig."
+        },
+        {
+          "fr": "Proposer de recompter avant de corriger.",
+          "phrase": "Zal ik het nog eens tellen voor we het aanpassen?"
+        }
+      ],
+      "a_eviter": [
+        "Corriger le système sans recompter.",
+        "Arrondir les chiffres."
+      ]
+    },
+    "lg_stock_ontvangst_niet_conform": {
+      "titre": "Une réception non conforme",
+      "etapes": [
+        {
+          "fr": "Constater et nommer le problème.",
+          "phrase": "Twee dozen zijn beschadigd en er ontbreekt er een."
+        },
+        {
+          "fr": "Faire une réserve sur la CMR.",
+          "phrase": "We schrijven een voorbehoud op de CMR en de chauffeur tekent."
+        },
+        {
+          "fr": "Prendre des photos.",
+          "phrase": "Ik neem foto's van de beschadigde dozen."
+        },
+        {
+          "fr": "Encoder une réception partielle et prévenir les achats.",
+          "phrase": "Ik boek alleen wat in orde is en ik verwittig de aankoop."
+        }
+      ],
+      "a_eviter": [
+        "Signer la CMR sans réserve.",
+        "Encoder la quantité du bordereau au lieu de la quantité reçue."
+      ]
+    },
+    "lg_stock_locatie_vol": {
+      "titre": "L'emplacement est déjà occupé",
+      "etapes": [
+        {
+          "fr": "Vérifier dans le système.",
+          "phrase": "Ik kijk in het WMS wat er op D12 zou moeten staan."
+        },
+        {
+          "fr": "Proposer un emplacement libre.",
+          "phrase": "Zet de palet maar op D14, die locatie is vrij."
+        },
+        {
+          "fr": "Mettre le système à jour.",
+          "phrase": "Ik pas de locatie aan in het systeem."
+        },
+        {
+          "fr": "Chercher la cause.",
+          "phrase": "Iemand heeft een palet niet gescand. Ik meld het aan de ploegbaas."
+        }
+      ],
+      "a_eviter": [
+        "Poser la palette n'importe où sans le noter.",
+        "Laisser le système faux."
+      ]
+    },
+    "lg_stock_houdbaarheid": {
+      "titre": "Des produits périmés trouvés en stock",
+      "etapes": [
+        {
+          "fr": "Mettre les produits de côté.",
+          "phrase": "We halen die drie dozen meteen uit de voorraad."
+        },
+        {
+          "fr": "Les bloquer dans le système.",
+          "phrase": "Ik blokkeer ze in het systeem zodat niemand ze nog pickt."
+        },
+        {
+          "fr": "Rappeler la règle FEFO.",
+          "phrase": "De kortste datum moet altijd vooraan staan."
+        },
+        {
+          "fr": "Prévenir le responsable.",
+          "phrase": "Ik meld het aan de verantwoordelijke en we controleren de rest van de gang."
+        }
+      ],
+      "a_eviter": [
+        "Remettre les produits en rayon.",
+        "Ranger les nouvelles livraisons devant les anciennes."
+      ]
+    },
+    "lg_stock_dubbele_reservatie": {
+      "titre": "Une palette réservée deux fois",
+      "etapes": [
+        {
+          "fr": "Vérifier dans le système.",
+          "phrase": "Ik kijk even na: ze is gereserveerd voor order 7720, sinds gisteren."
+        },
+        {
+          "fr": "Expliquer ce que tu vois.",
+          "phrase": "Die palet is dus al beloofd aan een andere klant."
+        },
+        {
+          "fr": "Proposer des solutions.",
+          "phrase": "We hebben nog een andere partij, of de volgende levering komt woensdag."
+        },
+        {
+          "fr": "Laisser décider la bonne personne.",
+          "phrase": "Welke klant voorrang krijgt, moet de verantwoordelijke beslissen."
+        }
+      ],
+      "a_eviter": [
+        "Retirer la réservation sans prévenir.",
+        "Promettre au client avant d'avoir vérifié."
+      ]
+    },
+    "lg_enc_bestelbon_fout": {
+      "titre": "Une erreur dans un bon de commande",
+      "etapes": [
+        {
+          "fr": "Dire pourquoi tu appelles.",
+          "phrase": "Ik bel over uw bestelbon van vandaag, er zijn twee dingen die ik wil nakijken."
+        },
+        {
+          "fr": "Nommer le problème précisément.",
+          "phrase": "Er staan vijfhonderd paletten. Is dat juist, of bedoelt u vijftig?"
+        },
+        {
+          "fr": "Faire confirmer la référence.",
+          "phrase": "En het artikelnummer 3381 bestaat niet bij ons. Kan u het nakijken?"
+        },
+        {
+          "fr": "Relire avant d'encoder.",
+          "phrase": "Ik herhaal: vijftig paletten van artikel 3318. Klopt dat?"
+        }
+      ],
+      "a_eviter": [
+        "Encoder en devinant.",
+        "Corriger sans faire confirmer par le client."
+      ]
+    },
+    "lg_enc_dubbel_artikel": {
+      "titre": "Un doublon dans l'ERP",
+      "etapes": [
+        {
+          "fr": "Comparer les deux fiches.",
+          "phrase": "Ik kijk welke van de twee voorraad heeft en recent gebruikt is."
+        },
+        {
+          "fr": "Choisir et expliquer pourquoi.",
+          "phrase": "Gebruik artikel 4410: daar staat de voorraad op en de laatste orders."
+        },
+        {
+          "fr": "Signaler le doublon.",
+          "phrase": "Ik meld het dubbel artikel aan wie de stamgegevens beheert."
+        },
+        {
+          "fr": "Noter pour l'équipe.",
+          "phrase": "Ik zet het ook in onze procedure, zodat niemand zich vergist."
+        }
+      ],
+      "a_eviter": [
+        "Utiliser au hasard l'une des deux fiches.",
+        "Créer une troisième fiche."
+      ]
+    },
+    "lg_enc_excel_vraag": {
+      "titre": "Une demande Excel",
+      "etapes": [
+        {
+          "fr": "Clarifier la demande.",
+          "phrase": "Wil je enkel het adres, of ook de postcode en de gemeente?"
+        },
+        {
+          "fr": "Dire comment tu vas faire.",
+          "phrase": "Ik doe een VERT.ZOEKEN op het klantnummer in de klantenlijst."
+        },
+        {
+          "fr": "Prévoir les erreurs.",
+          "phrase": "Als een klantnummer niet gevonden wordt, zet ik dat in het geel."
+        },
+        {
+          "fr": "Donner un délai.",
+          "phrase": "Het is klaar tegen drie uur."
+        }
+      ],
+      "a_eviter": [
+        "Copier les adresses à la main une par une.",
+        "Envoyer le fichier sans vérifier les erreurs #N/B."
+      ]
+    },
+    "lg_enc_outlook_bijlage": {
+      "titre": "Répondre à un mail avec une pièce jointe",
+      "etapes": [
+        {
+          "fr": "Saluer et confirmer.",
+          "phrase": "Beste, bedankt voor uw bericht."
+        },
+        {
+          "fr": "Dire ce qui est joint.",
+          "phrase": "In bijlage vindt u de getekende CMR van levering 5531."
+        },
+        {
+          "fr": "Proposer de l'aide.",
+          "phrase": "Laat het gerust weten als u nog iets nodig hebt."
+        },
+        {
+          "fr": "Terminer poliment.",
+          "phrase": "Met vriendelijke groeten,"
+        }
+      ],
+      "a_eviter": [
+        "Oublier la pièce jointe.",
+        "Répondre sans le numéro de livraison."
+      ]
+    },
+    "lg_enc_teams_vergadering": {
+      "titre": "Présenter ses chiffres en réunion Teams",
+      "etapes": [
+        {
+          "fr": "Gérer la technique.",
+          "phrase": "Een momentje, ik deel mijn scherm. Zien jullie het nu?"
+        },
+        {
+          "fr": "Annoncer le plan.",
+          "phrase": "Ik geef eerst de cijfers en dan de problemen."
+        },
+        {
+          "fr": "Donner les chiffres clairement.",
+          "phrase": "Deze week hebben we vierhonderdtwaalf orders ingevoerd, en negen fouten verbeterd."
+        },
+        {
+          "fr": "Dire le problème et la suite.",
+          "phrase": "Drie orders zijn geblokkeerd door een onbekende referentie. Ik volg dat op met de aankoop."
+        }
+      ],
+      "a_eviter": [
+        "Lire tout le tableau sans conclusion.",
+        "Parler pendant que le micro est coupé."
+      ]
     }
   }
 }

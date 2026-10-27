@@ -3,6 +3,7 @@
   "situations": [
     {
       "id": "guichet_chauffeur_doc_manquant",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "canal": "guichet_chauffeur",
@@ -15,6 +16,7 @@
     },
     {
       "id": "guichet_chauffeur_rdv_inconnu",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "canal": "guichet_chauffeur",
@@ -27,6 +29,7 @@
     },
     {
       "id": "guichet_collegue_urgence",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "canal": "collegue_interne",
@@ -39,6 +42,7 @@
     },
     {
       "id": "guichet_dossier_a_terminer",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "canal": "collegue_interne",
@@ -51,6 +55,7 @@
     },
     {
       "id": "guichet_bruit_a_faire_repeter",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "canal": "guichet_chauffeur",
@@ -63,6 +68,7 @@
     },
     {
       "id": "frost_document_t1",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -76,6 +82,7 @@
     },
     {
       "id": "frost_document_t2",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -89,6 +96,7 @@
     },
     {
       "id": "frost_document_veterinaire",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -102,6 +110,7 @@
     },
     {
       "id": "frost_wms_localisation",
+      "role": "stock",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -115,6 +124,7 @@
     },
     {
       "id": "frost_tms_planning_transport",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -128,6 +138,7 @@
     },
     {
       "id": "frost_edi_probleme_synchro",
+      "role": "encodage",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -141,6 +152,7 @@
     },
     {
       "id": "frost_licence_export_controle",
+      "role": "encodage",
       "metier": "logistique",
       "poste": "logistiek bediende",
       "entreprise": "Logistiko Frost",
@@ -154,6 +166,7 @@
     },
     {
       "id": "retail_pick_ecommerce_client",
+      "role": "stock",
       "metier": "logistique",
       "poste": "logistiek medewerker (retail mode, e-commerce)",
       "entreprise": "Logistiko Retail",
@@ -167,6 +180,7 @@
     },
     {
       "id": "retail_carton_reassort_magasin",
+      "role": "stock",
       "metier": "logistique",
       "poste": "logistiek medewerker (retail mode, e-commerce)",
       "entreprise": "Logistiko Retail",
@@ -180,6 +194,7 @@
     },
     {
       "id": "retail_retour_client_ecommerce",
+      "role": "stock",
       "metier": "logistique",
       "poste": "logistiek medewerker (retail mode, e-commerce)",
       "entreprise": "Logistiko Retail",
@@ -193,6 +208,7 @@
     },
     {
       "id": "retail_controle_avant_expedition",
+      "role": "stock",
       "metier": "logistique",
       "poste": "logistiek medewerker (retail mode, e-commerce)",
       "entreprise": "Logistiko Retail",
@@ -206,6 +222,7 @@
     },
     {
       "id": "retail_pic_commandes_soldes",
+      "role": "stock",
       "metier": "logistique",
       "poste": "logistiek medewerker (retail mode, e-commerce)",
       "entreprise": "Logistiko Retail",
@@ -219,6 +236,7 @@
     },
     {
       "id": "retail_transporteur_colis",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "logistiek medewerker (retail mode, e-commerce)",
       "entreprise": "Logistiko Retail",
@@ -232,6 +250,7 @@
     },
     {
       "id": "ag_client_reservation",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "telephone_client",
@@ -244,6 +263,7 @@
     },
     {
       "id": "ag_chauffeur_non_nl",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "telephone_client",
@@ -256,6 +276,7 @@
     },
     {
       "id": "ag_devis_client",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "telephone_client",
@@ -268,6 +289,7 @@
     },
     {
       "id": "ag_mailbox_entre_appels",
+      "role": "encodage",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "email",
@@ -280,6 +302,7 @@
     },
     {
       "id": "usine_chauffeur_quai",
+      "role": "accueil",
       "metier": "logistique",
       "poste": "logistiek medewerker / goederenontvangst",
       "canal": "guichet_chauffeur",
@@ -293,6 +316,7 @@
     },
     {
       "id": "usine_erp_interruption",
+      "role": "encodage",
       "metier": "logistique",
       "poste": "logistiek medewerker / goederenontvangst",
       "canal": "collegue_interne",
@@ -306,6 +330,7 @@
     },
     {
       "id": "usine_probleme_technique",
+      "role": "encodage",
       "metier": "logistique",
       "poste": "logistiek medewerker / goederenontvangst",
       "canal": "collegue_interne",
@@ -319,6 +344,7 @@
     },
     {
       "id": "invente_client_furieux_retard",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "telephone_client",
@@ -331,6 +357,7 @@
     },
     {
       "id": "invente_replanification_incident",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "telephone_client",
@@ -343,6 +370,7 @@
     },
     {
       "id": "invente_negociation_delai",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "transport planner / dispatcher",
       "canal": "telephone_client",
@@ -355,6 +383,7 @@
     },
     {
       "id": "invente_rapport_fin_service",
+      "role": "dispatch",
       "metier": "logistique",
       "poste": "logistiek bediende / dispatcher",
       "canal": "collegue_interne",
@@ -1671,6 +1700,386 @@
         "als ik het goed begrijp"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "lg_disp_ritten_morgen",
+      "metier": "logistique",
+      "role": "dispatch",
+      "poste": "transport planner / dispatcher",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Fin d'après-midi : il faut planifier les tournées de demain. Douze livraisons, neuf camions à vous, certaines livraisons surgelées, d'autres avec un créneau imposé chez le client. Ton responsable te demande comment tu t'y prends : clarifie les contraintes et propose une méthode (créneaux, température, capacité, charter pour le reste).",
+      "amorce": "Hier zijn de orders voor morgen: twaalf leveringen, en we hebben maar negen eigen wagens. Hoe pak je het aan?",
+      "vocabulaire_cible": [
+        "de rit",
+        "het tijdslot",
+        "de koeloplegger",
+        "de charter",
+        "inplannen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_disp_tijdslot_gemist",
+      "metier": "logistique",
+      "role": "dispatch",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Un de tes chauffeurs t'appelle : il est coincé dans un embouteillage et va rater son créneau de livraison de dix heures chez un client. Prends les infos (où il est, heure d'arrivée estimée), puis explique ce que tu fais : prévenir le client, demander un nouveau créneau, revoir la suite de sa tournée.",
+      "amorce": "Ik sta vast in de file aan Antwerpen, ik ga mijn tijdslot van tien uur nooit halen.",
+      "vocabulaire_cible": [
+        "het tijdslot",
+        "de file",
+        "de verwachte aankomsttijd",
+        "verwittigen",
+        "een nieuw tijdslot"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_disp_charter_prijs",
+      "metier": "logistique",
+      "role": "dispatch",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Il te manque un camion frigorifique pour demain. Tu appelles Transvio, un transporteur sous-traitant, pour une demande de prix : 26 palettes surgelées, chargement demain 6 h chez vous, livraison à Lyon après-demain matin. Donne les infos, demande le prix et la disponibilité, et négocie si c'est trop cher.",
+      "amorce": "Goeiemorgen, Transvio, planning. Waarmee kan ik helpen?",
+      "vocabulaire_cible": [
+        "de prijsaanvraag",
+        "het tarief",
+        "de palletplaats",
+        "de diepvries",
+        "beschikbaar"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_disp_temperatuur",
+      "metier": "logistique",
+      "role": "dispatch",
+      "poste": "transport planner / dispatcher",
+      "canal": "telephone_client",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Un chauffeur appelle : la température dans sa semi-remorque frigorifique est à 8 °C alors qu'elle doit rester entre 2 et 4 °C. Il transporte des produits frais. Pose les bonnes questions (depuis quand, groupe froid, marchandise), donne-lui une consigne claire et dis qui tu préviens.",
+      "amorce": "Dag, de temperatuur in mijn koeloplegger staat op acht graden, normaal moet dat tussen twee en vier zijn. Wat moet ik doen?",
+      "vocabulaire_cible": [
+        "de temperatuur",
+        "de koelgroep",
+        "de koelketen",
+        "de afwijking",
+        "melden"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_disp_retourvracht",
+      "metier": "logistique",
+      "role": "dispatch",
+      "poste": "transport planner / dispatcher",
+      "canal": "reunion",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Un de vos camions rentre à vide de Lille demain. Ton responsable trouve que ça coûte trop cher et te demande une idée. Propose de chercher un fret retour (client ou fournisseur dans la région, bourse de fret), avec les avantages et ce qu'il faut vérifier (horaires, température, documents).",
+      "amorce": "Onze wagen rijdt morgen leeg terug uit Lille. Dat kost ons geld. Heb jij een idee?",
+      "vocabulaire_cible": [
+        "de retourvracht",
+        "de lege rit",
+        "de vrachtbeurs",
+        "de kost",
+        "voorstellen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_acc_standaard",
+      "metier": "logistique",
+      "role": "accueil",
+      "poste": "receptionist / onthaalmedewerker",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Tu tiens le standard téléphonique. Quelqu'un demande à parler à un collègue des achats, qui est en réunion jusqu'à 11 h. Propose une solution (rappel, message, un autre collègue), prends le message complet et relis le numéro.",
+      "amorce": "Goeiedag, kan ik meneer Peeters van de aankoop spreken?",
+      "vocabulaire_cible": [
+        "doorverbinden",
+        "in vergadering",
+        "een bericht noteren",
+        "terugbellen",
+        "het telefoonnummer"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_acc_leverancier_zonder_afspraak",
+      "metier": "logistique",
+      "role": "accueil",
+      "poste": "receptionist / onthaalmedewerker",
+      "canal": "balie",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Un fournisseur se présente à l'accueil pour livrer, sans rendez-vous. Les quais sont pleins jusqu'à 14 h. Explique la règle (livraison sur rendez-vous), vérifie s'il y a une possibilité, propose une solution (attendre, revenir, nouveau créneau) en restant aimable.",
+      "amorce": "Dag, ik kom een levering brengen voor jullie magazijn, maar ik heb geen afspraak. Kan ik er toch even tussen?",
+      "vocabulaire_cible": [
+        "de afspraak",
+        "de laadkade",
+        "volzet",
+        "wachten",
+        "een nieuw tijdslot"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_acc_pakjes_post",
+      "metier": "logistique",
+      "role": "accueil",
+      "poste": "receptionist / onthaalmedewerker",
+      "canal": "balie",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un coursier dépose trois colis et te demande de signer. En regardant, tu vois qu'un des colis est adressé à une autre entreprise. Vérifie, signe seulement pour ce qui est à vous, et explique au coursier.",
+      "amorce": "Pakje voor jullie, kan u hier even tekenen? Er zijn er drie, maar eentje is voor een ander bedrijf, denk ik.",
+      "vocabulaire_cible": [
+        "het pakje",
+        "de koerier",
+        "het adres",
+        "aftekenen",
+        "de geadresseerde"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_acc_veiligheid_bezoeker",
+      "metier": "logistique",
+      "role": "accueil",
+      "poste": "receptionist / onthaalmedewerker",
+      "canal": "balie",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un technicien externe arrive pour réparer des chariots élévateurs dans l'entrepôt. Avant qu'il entre : registre, badge, consignes de sécurité (gilet fluo, chaussures de sécurité, zones piétonnes), et prévenir le responsable de l'entrepôt.",
+      "amorce": "Goedemorgen, ik ben de technicus voor de heftrucks. Ik mag zo het magazijn in, zegt men.",
+      "vocabulaire_cible": [
+        "de bezoekersbadge",
+        "de veiligheidsschoenen",
+        "het fluohesje",
+        "de heftruck",
+        "het voetgangerspad"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_acc_franstalige_bezoeker",
+      "metier": "logistique",
+      "role": "accueil",
+      "poste": "receptionist / onthaalmedewerker",
+      "canal": "balie",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Une candidate francophone arrive pour un entretien à 11 h et ne parle pas néerlandais. Tu l'accueilles (en français si tu veux), puis tu appelles en néerlandais le collègue qui doit la recevoir pour l'annoncer et lui dire qu'elle parle seulement français.",
+      "amorce": "Bonjour, je viens pour un entretien à onze heures, mais je ne parle pas néerlandais… Vous pouvez m'aider ?",
+      "vocabulaire_cible": [
+        "aankondigen",
+        "de afspraak",
+        "Franstalig",
+        "even wachten",
+        "iemand ophalen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_stock_cyclische_telling",
+      "metier": "logistique",
+      "role": "stock",
+      "poste": "magazijnmedewerker / voorraadbeheerder",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Aujourd'hui, inventaire tournant de l'allée C. Le magasinier te demande de compter les emplacements C01 à C05 et de lui donner les quantités. À C03, tu comptes 46 cartons alors que le système en indique 50 : signale l'écart clairement.",
+      "amorce": "Vandaag doen we de cyclische telling van gang C. Tel jij de locaties C01 tot C05 en geef je me de aantallen door?",
+      "vocabulaire_cible": [
+        "de cyclische telling",
+        "de locatie",
+        "het aantal",
+        "het verschil",
+        "doorgeven"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_stock_ontvangst_niet_conform",
+      "metier": "logistique",
+      "role": "stock",
+      "poste": "magazijnmedewerker / voorraadbeheerder",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "À la réception, une palette a deux cartons mouillés et abîmés, et il manque un carton par rapport au bordereau. Un collègue te demande s'il faut accepter. Explique la procédure : réserve sur la CMR, photos, réception partielle dans le système, prévenir les achats.",
+      "amorce": "Kijk eens naar deze palet: twee dozen zijn nat en kapot, en er ontbreekt er een. Moeten we die levering wel aannemen?",
+      "vocabulaire_cible": [
+        "de ontvangst",
+        "beschadigd",
+        "een voorbehoud maken",
+        "de CMR",
+        "de foto"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_stock_locatie_vol",
+      "metier": "logistique",
+      "role": "stock",
+      "poste": "magazijnmedewerker / voorraadbeheerder",
+      "canal": "collegue_interne",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Le WMS dit de ranger une palette à l'emplacement D12, mais il est déjà occupé. Un collègue cariste te demande où la mettre. Propose une solution (autre emplacement libre, mise à jour dans le système) et dis comment éviter que ça se reproduise.",
+      "amorce": "Het systeem zegt dat ik deze palet op D12 moet zetten, maar daar staat al iets. Waar moet ik ermee naartoe?",
+      "vocabulaire_cible": [
+        "de locatie",
+        "het WMS",
+        "vrij",
+        "bezet",
+        "aanpassen in het systeem"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_stock_houdbaarheid",
+      "metier": "logistique",
+      "role": "stock",
+      "poste": "magazijnmedewerker / voorraadbeheerder",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Un collègue a trouvé trois cartons de produits frais dont la date est dépassée depuis hier, derrière une nouvelle livraison. La règle FEFO (premier périmé, premier sorti) n'a pas été respectée. Dis quoi faire des cartons et comment remettre le stock en ordre.",
+      "amorce": "Ik heb drie dozen yoghurt gevonden waarvan de datum gisteren verstreken is. En de nieuwe levering staat ervoor. Hoe kan dat?",
+      "vocabulaire_cible": [
+        "de houdbaarheidsdatum",
+        "vervallen",
+        "FEFO",
+        "uit de voorraad halen",
+        "vooraan zetten"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_stock_dubbele_reservatie",
+      "metier": "logistique",
+      "role": "stock",
+      "poste": "magazijnmedewerker / voorraadbeheerder",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Une collègue du service commercial a promis une palette de café à un client pour demain, mais le système indique qu'elle est déjà réservée pour une autre commande. Vérifie dans le système, explique ce que tu vois, et propose une solution (autre lot, prochaine livraison, choix du responsable).",
+      "amorce": "Ik heb die palet koffie beloofd aan een klant voor morgen, maar het systeem zegt dat ze al gereserveerd is. Klopt dat?",
+      "vocabulaire_cible": [
+        "gereserveerd",
+        "de order",
+        "de partij",
+        "de volgende levering",
+        "beslissen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_enc_bestelbon_fout",
+      "metier": "logistique",
+      "role": "encodage",
+      "poste": "administratief bediende / order entry",
+      "canal": "telephone_client",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "En encodant un bon de commande du client Delmaro, tu vois une quantité bizarre (500 palettes au lieu de 50 ?) et une référence qui n'existe pas. Tu appelles le client pour vérifier : explique le problème poliment, fais confirmer quantité et référence, relis.",
+      "amorce": "Goeiedag, met de aankoopdienst van Delmaro. U belde over onze bestelbon?",
+      "vocabulaire_cible": [
+        "de bestelbon",
+        "de hoeveelheid",
+        "het artikelnummer",
+        "bevestigen",
+        "invoeren"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_enc_dubbel_artikel",
+      "metier": "logistique",
+      "role": "encodage",
+      "poste": "administratief bediende / order entry",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Dans l'ERP, il y a deux fiches article avec le même nom mais des numéros différents. Un collègue te demande lequel utiliser pour une commande. Explique comment tu vérifies (stock, dernières commandes, fournisseur), lequel tu choisis, et qu'il faut signaler le doublon pour le corriger.",
+      "amorce": "In het ERP staan er twee artikels met dezelfde naam, maar een ander nummer. Welke moet ik gebruiken voor deze order?",
+      "vocabulaire_cible": [
+        "de artikelfiche",
+        "het dubbel",
+        "de stamgegevens",
+        "nakijken",
+        "signaleren"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_enc_excel_vraag",
+      "metier": "logistique",
+      "role": "encodage",
+      "poste": "administratief bediende / order entry",
+      "canal": "chat",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Par Teams, ton responsable te demande d'ajouter l'adresse de chaque client dans la liste Excel des livraisons, en allant la chercher dans la liste des clients. Clarifie ce qu'il veut, explique comment tu vas faire (VERT.ZOEKEN sur le numéro de client) et quand ce sera prêt.",
+      "amorce": "Hoi, kan jij in Excel de adressen van de klanten bij de lijst met leveringen zetten? Gebruik maar VERT.ZOEKEN, dat gaat snel.",
+      "vocabulaire_cible": [
+        "VERT.ZOEKEN",
+        "de kolom",
+        "het klantnummer",
+        "het werkblad",
+        "klaar tegen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_enc_outlook_bijlage",
+      "metier": "logistique",
+      "role": "encodage",
+      "poste": "administratief bediende / order entry",
+      "canal": "email",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un client demande par mail une copie de la CMR signée d'une livraison. Réponds par écrit : confirme, joins le document (dis-le dans le mail), mets ton responsable en copie si besoin, formule polie de fin.",
+      "amorce": "Beste, kunt u ons een kopie van de getekende CMR van levering 5531 bezorgen? Met vriendelijke groeten, de boekhouding van Delmaro.",
+      "vocabulaire_cible": [
+        "in bijlage",
+        "de getekende CMR",
+        "in cc",
+        "Met vriendelijke groeten",
+        "bezorgen"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "lg_enc_teams_vergadering",
+      "metier": "logistique",
+      "role": "encodage",
+      "poste": "administratief bediende / order entry",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Réunion Teams du lundi. On ne voit pas encore ton écran, puis tu dois présenter les chiffres de la semaine que tu as encodés : 412 commandes, 9 erreurs corrigées, 3 commandes bloquées par une référence inconnue. Gère la technique (partage d'écran, micro) puis présente clairement.",
+      "amorce": "Ik zie je scherm nog niet. Kan je het even delen? En dan mag je de cijfers van deze week toelichten.",
+      "vocabulaire_cible": [
+        "het scherm delen",
+        "dempen",
+        "de cijfers",
+        "toelichten",
+        "geblokkeerd"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -1903,6 +2312,70 @@
         "ap_inventarisverschil",
         "ap_bestelpunt_voorstel",
         "ap_voorraadanalyse_presentatie"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_lg_dispatcher",
+      "metier": "logistique",
+      "label": "🚛 Une journée de dispatcher (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "lg_disp_ritten_morgen",
+        "ag_client_reservation",
+        "lg_disp_charter_prijs",
+        "lg_disp_tijdslot_gemist",
+        "lg_disp_temperatuur",
+        "invente_rapport_fin_service"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_lg_accueil",
+      "metier": "logistique",
+      "label": "🛎️ Une journée à l'accueil (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "lg_acc_standaard",
+        "guichet_chauffeur_doc_manquant",
+        "lg_acc_pakjes_post",
+        "lg_acc_veiligheid_bezoeker",
+        "lg_acc_leverancier_zonder_afspraak",
+        "lg_acc_franstalige_bezoeker"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_lg_stock",
+      "metier": "logistique",
+      "label": "📦 Une journée au stock (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "lg_stock_cyclische_telling",
+        "lg_stock_ontvangst_niet_conform",
+        "frost_wms_localisation",
+        "lg_stock_locatie_vol",
+        "lg_stock_houdbaarheid",
+        "lg_stock_dubbele_reservatie"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_lg_encodage",
+      "metier": "logistique",
+      "label": "⌨️ Une journée d'encodage et d'administration (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "lg_enc_bestelbon_fout",
+        "lg_enc_dubbel_artikel",
+        "usine_erp_interruption",
+        "lg_enc_outlook_bijlage",
+        "lg_enc_excel_vraag",
+        "lg_enc_teams_vergadering"
       ],
       "_source": "redige_claude"
     }

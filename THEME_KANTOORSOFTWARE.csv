@@ -1,0 +1,162 @@
+id;fr;nl;freq
+THEME_KANTOORSOFTWARE_0;le fichier;het bestand;5.20
+THEME_KANTOORSOFTWARE_1;le dossier (informatique);de map;5.15
+THEME_KANTOORSOFTWARE_2;le disque partagé;de gedeelde schijf;5.10
+THEME_KANTOORSOFTWARE_3;le raccourci;de snelkoppeling;5.05
+THEME_KANTOORSOFTWARE_4;se connecter;aanmelden;5.00
+THEME_KANTOORSOFTWARE_5;se déconnecter;afmelden;4.95
+THEME_KANTOORSOFTWARE_6;le mot de passe;het wachtwoord;4.90
+THEME_KANTOORSOFTWARE_7;le nom d'utilisateur;de gebruikersnaam;4.85
+THEME_KANTOORSOFTWARE_8;les droits d'accès;de toegangsrechten;4.80
+THEME_KANTOORSOFTWARE_9;Je n'ai pas accès.;Ik heb geen toegang.;4.75
+THEME_KANTOORSOFTWARE_10;l'imprimante;de printer;4.70
+THEME_KANTOORSOFTWARE_11;imprimer;afdrukken;4.65
+THEME_KANTOORSOFTWARE_12;scanner (un document);inscannen;4.60
+THEME_KANTOORSOFTWARE_13;le service informatique (helpdesk);de helpdesk;4.55
+THEME_KANTOORSOFTWARE_14;Le système bloque.;Het systeem hangt.;4.50
+THEME_KANTOORSOFTWARE_15;redémarrer;opnieuw opstarten;4.45
+THEME_KANTOORSOFTWARE_16;la mise à jour;de update;4.40
+THEME_KANTOORSOFTWARE_17;le message d'erreur;de foutmelding;4.35
+THEME_KANTOORSOFTWARE_18;l'écran;het scherm;4.30
+THEME_KANTOORSOFTWARE_19;le clavier;het toetsenbord;4.25
+THEME_KANTOORSOFTWARE_20;la souris;de muis;4.20
+THEME_KANTOORSOFTWARE_21;l'onglet Fichier;Bestand;4.15
+THEME_KANTOORSOFTWARE_22;l'onglet Accueil;Start;4.10
+THEME_KANTOORSOFTWARE_23;l'onglet Insertion;Invoegen;4.05
+THEME_KANTOORSOFTWARE_24;l'onglet Mise en page;Pagina-indeling;4.00
+THEME_KANTOORSOFTWARE_25;l'onglet Formules;Formules;3.95
+THEME_KANTOORSOFTWARE_26;l'onglet Données;Gegevens;3.90
+THEME_KANTOORSOFTWARE_27;l'onglet Révision;Controleren;3.85
+THEME_KANTOORSOFTWARE_28;l'onglet Affichage;Beeld;3.80
+THEME_KANTOORSOFTWARE_29;le ruban (barre de menus);het lint;3.75
+THEME_KANTOORSOFTWARE_30;l'onglet (d'un menu);het tabblad;3.70
+THEME_KANTOORSOFTWARE_31;Enregistrer;Opslaan;3.65
+THEME_KANTOORSOFTWARE_32;Enregistrer sous;Opslaan als;3.60
+THEME_KANTOORSOFTWARE_33;Ouvrir;Openen;3.55
+THEME_KANTOORSOFTWARE_34;Nouveau;Nieuw;3.50
+THEME_KANTOORSOFTWARE_35;Partager;Delen;3.45
+THEME_KANTOORSOFTWARE_36;Copier;Kopiëren;3.40
+THEME_KANTOORSOFTWARE_37;Couper;Knippen;3.35
+THEME_KANTOORSOFTWARE_38;Coller;Plakken;3.30
+THEME_KANTOORSOFTWARE_39;Collage spécial;Plakken speciaal;3.25
+THEME_KANTOORSOFTWARE_40;Annuler (la dernière action);Ongedaan maken;3.20
+THEME_KANTOORSOFTWARE_41;Rétablir;Opnieuw;3.15
+THEME_KANTOORSOFTWARE_42;Rechercher et remplacer;Zoeken en vervangen;3.10
+THEME_KANTOORSOFTWARE_43;Trier et filtrer;Sorteren en filteren;3.05
+THEME_KANTOORSOFTWARE_44;le filtre;de filter;3.00
+THEME_KANTOORSOFTWARE_45;trier de A à Z;sorteren van A naar Z;3.00
+THEME_KANTOORSOFTWARE_46;le classeur (Excel);de werkmap;3.00
+THEME_KANTOORSOFTWARE_47;la feuille de calcul;het werkblad;3.00
+THEME_KANTOORSOFTWARE_48;la cellule;de cel;3.00
+THEME_KANTOORSOFTWARE_49;la colonne;de kolom;3.00
+THEME_KANTOORSOFTWARE_50;la ligne;de rij;3.00
+THEME_KANTOORSOFTWARE_51;la plage de cellules;het bereik;3.00
+THEME_KANTOORSOFTWARE_52;la barre de formule;de formulebalk;3.00
+THEME_KANTOORSOFTWARE_53;la référence de cellule;de celverwijzing;3.00
+THEME_KANTOORSOFTWARE_54;la référence absolue ($);de absolute verwijzing;3.00
+THEME_KANTOORSOFTWARE_55;insérer une ligne;een rij invoegen;3.00
+THEME_KANTOORSOFTWARE_56;supprimer une colonne;een kolom verwijderen;3.00
+THEME_KANTOORSOFTWARE_57;Fusionner et centrer;Samenvoegen en centreren;3.00
+THEME_KANTOORSOFTWARE_58;Renvoyer à la ligne automatiquement;Tekstterugloop;3.00
+THEME_KANTOORSOFTWARE_59;Mettre sous forme de tableau;Opmaken als tabel;3.00
+THEME_KANTOORSOFTWARE_60;le tableau croisé dynamique;de draaitabel;3.00
+THEME_KANTOORSOFTWARE_61;insérer un graphique;een grafiek invoegen;3.00
+THEME_KANTOORSOFTWARE_62;la mise en forme conditionnelle;de voorwaardelijke opmaak;3.00
+THEME_KANTOORSOFTWARE_63;la validation des données;de gegevensvalidatie;3.00
+THEME_KANTOORSOFTWARE_64;la liste déroulante;de vervolgkeuzelijst;3.00
+THEME_KANTOORSOFTWARE_65;Supprimer les doublons;Duplicaten verwijderen;3.00
+THEME_KANTOORSOFTWARE_66;Convertir (texte en colonnes);Tekst naar kolommen;3.00
+THEME_KANTOORSOFTWARE_67;figer les volets;titels blokkeren;3.00
+THEME_KANTOORSOFTWARE_68;la zone d'impression;het afdrukbereik;3.00
+THEME_KANTOORSOFTWARE_69;le commentaire (Excel);de opmerking;3.00
+THEME_KANTOORSOFTWARE_70;protéger la feuille;het blad beveiligen;3.00
+THEME_KANTOORSOFTWARE_71;SOMME;SOM;3.00
+THEME_KANTOORSOFTWARE_72;MOYENNE;GEMIDDELDE;3.00
+THEME_KANTOORSOFTWARE_73;NB (nombre de valeurs numériques);AANTAL;3.00
+THEME_KANTOORSOFTWARE_74;NBVAL (cellules non vides);AANTALARG;3.00
+THEME_KANTOORSOFTWARE_75;NB.SI;AANTAL.ALS;3.00
+THEME_KANTOORSOFTWARE_76;SOMME.SI;SOM.ALS;3.00
+THEME_KANTOORSOFTWARE_77;SOMME.SI.ENS;SOMMEN.ALS;3.00
+THEME_KANTOORSOFTWARE_78;SI;ALS;3.00
+THEME_KANTOORSOFTWARE_79;ET;EN;3.00
+THEME_KANTOORSOFTWARE_80;OU;OF;3.00
+THEME_KANTOORSOFTWARE_81;SIERREUR;ALS.FOUT;3.00
+THEME_KANTOORSOFTWARE_82;RECHERCHEV;VERT.ZOEKEN;3.00
+THEME_KANTOORSOFTWARE_83;RECHERCHEX;X.ZOEKEN;3.00
+THEME_KANTOORSOFTWARE_84;INDEX;INDEX;3.00
+THEME_KANTOORSOFTWARE_85;EQUIV;VERGELIJKEN;3.00
+THEME_KANTOORSOFTWARE_86;CONCATENER;TEKST.SAMENVOEGEN;3.00
+THEME_KANTOORSOFTWARE_87;GAUCHE;LINKS;3.00
+THEME_KANTOORSOFTWARE_88;DROITE;RECHTS;3.00
+THEME_KANTOORSOFTWARE_89;AUJOURDHUI;VANDAAG;3.00
+THEME_KANTOORSOFTWARE_90;ARRONDI;AFRONDEN;3.00
+THEME_KANTOORSOFTWARE_91;l'erreur #N/A;#N/B;3.00
+THEME_KANTOORSOFTWARE_92;le mail;de e-mail;3.00
+THEME_KANTOORSOFTWARE_93;Nouveau message;Nieuwe e-mail;3.00
+THEME_KANTOORSOFTWARE_94;Répondre;Beantwoorden;3.00
+THEME_KANTOORSOFTWARE_95;Répondre à tous;Allen beantwoorden;3.00
+THEME_KANTOORSOFTWARE_96;Transférer;Doorsturen;3.00
+THEME_KANTOORSOFTWARE_97;Envoyer;Verzenden;3.00
+THEME_KANTOORSOFTWARE_98;l'objet (d'un mail);het onderwerp;3.00
+THEME_KANTOORSOFTWARE_99;la pièce jointe;de bijlage;3.00
+THEME_KANTOORSOFTWARE_100;joindre un fichier;een bijlage toevoegen;3.00
+THEME_KANTOORSOFTWARE_101;en pièce jointe;in bijlage;3.00
+THEME_KANTOORSOFTWARE_102;le destinataire;de ontvanger;3.00
+THEME_KANTOORSOFTWARE_103;en copie (cc);in cc;3.00
+THEME_KANTOORSOFTWARE_104;le brouillon;het concept;3.00
+THEME_KANTOORSOFTWARE_105;la boîte de réception;Postvak IN;3.00
+THEME_KANTOORSOFTWARE_106;les éléments envoyés;Verzonden items;3.00
+THEME_KANTOORSOFTWARE_107;les éléments supprimés;Verwijderde items;3.00
+THEME_KANTOORSOFTWARE_108;marquer comme lu;markeren als gelezen;3.00
+THEME_KANTOORSOFTWARE_109;le calendrier (agenda);de agenda;3.00
+THEME_KANTOORSOFTWARE_110;planifier une réunion;een vergadering plannen;3.00
+THEME_KANTOORSOFTWARE_111;l'invitation;de uitnodiging;3.00
+THEME_KANTOORSOFTWARE_112;accepter / refuser;accepteren / weigeren;3.00
+THEME_KANTOORSOFTWARE_113;la réponse automatique d'absence;de afwezigheidsassistent;3.00
+THEME_KANTOORSOFTWARE_114;la signature (d'un mail);de handtekening;3.00
+THEME_KANTOORSOFTWARE_115;Bonjour (début de mail);Beste;3.00
+THEME_KANTOORSOFTWARE_116;Cordialement;Met vriendelijke groeten;3.00
+THEME_KANTOORSOFTWARE_117;la réunion;de vergadering;3.00
+THEME_KANTOORSOFTWARE_118;rejoindre (une réunion);deelnemen;3.00
+THEME_KANTOORSOFTWARE_119;partager l'écran;het scherm delen;3.00
+THEME_KANTOORSOFTWARE_120;couper le micro;de microfoon dempen;3.00
+THEME_KANTOORSOFTWARE_121;allumer la caméra;de camera aanzetten;3.00
+THEME_KANTOORSOFTWARE_122;le canal (Teams);het kanaal;3.00
+THEME_KANTOORSOFTWARE_123;Je ne t'entends pas bien.;Ik hoor je niet goed.;3.00
+THEME_KANTOORSOFTWARE_124;Tu coupes.;Je valt weg.;3.00
+THEME_KANTOORSOFTWARE_125;Tu vois mon écran ?;Zie je mijn scherm?;3.00
+THEME_KANTOORSOFTWARE_126;le document;het document;3.00
+THEME_KANTOORSOFTWARE_127;la police (de caractères);het lettertype;3.00
+THEME_KANTOORSOFTWARE_128;gras;vet;3.00
+THEME_KANTOORSOFTWARE_129;italique;cursief;3.00
+THEME_KANTOORSOFTWARE_130;souligner;onderstrepen;3.00
+THEME_KANTOORSOFTWARE_131;aligner;uitlijnen;3.00
+THEME_KANTOORSOFTWARE_132;la liste à puces;de opsomming;3.00
+THEME_KANTOORSOFTWARE_133;l'en-tête;de koptekst;3.00
+THEME_KANTOORSOFTWARE_134;le pied de page;de voettekst;3.00
+THEME_KANTOORSOFTWARE_135;le modèle (de document);de sjabloon;3.00
+THEME_KANTOORSOFTWARE_136;enregistrer en PDF;opslaan als pdf;3.00
+THEME_KANTOORSOFTWARE_137;les données de base (articles);de stamgegevens;3.00
+THEME_KANTOORSOFTWARE_138;la fiche article;de artikelfiche;3.00
+THEME_KANTOORSOFTWARE_139;créer une commande;een order aanmaken;3.00
+THEME_KANTOORSOFTWARE_140;valider (comptabiliser) une commande;een order boeken;3.00
+THEME_KANTOORSOFTWARE_141;la réception de marchandises;de goederenontvangst;3.00
+THEME_KANTOORSOFTWARE_142;la liste de préparation;de picklijst;3.00
+THEME_KANTOORSOFTWARE_143;imprimer le bordereau de colisage;de pakbon afdrukken;3.00
+THEME_KANTOORSOFTWARE_144;le mouvement de stock;de voorraadmutatie;3.00
+THEME_KANTOORSOFTWARE_145;l'étiquette palette;het palletlabel;3.00
+THEME_KANTOORSOFTWARE_146;le scanner à main;de handscanner;3.00
+THEME_KANTOORSOFTWARE_147;créer une tournée;een rit aanmaken;3.00
+THEME_KANTOORSOFTWARE_148;la lettre de voiture;de vrachtbrief;3.00
+THEME_KANTOORSOFTWARE_149;le suivi des envois;de track-and-trace;3.00
+THEME_KANTOORSOFTWARE_150;mettre à jour le statut;de status bijwerken;3.00
+THEME_KANTOORSOFTWARE_151;le code client;de klantcode;3.00
+THEME_KANTOORSOFTWARE_152;le code fournisseur;de leverancierscode;3.00
+THEME_KANTOORSOFTWARE_153;Où se trouve ce fichier ?;Waar staat dat bestand?;3.00
+THEME_KANTOORSOFTWARE_154;Sur le disque partagé.;Op de gedeelde schijf.;3.00
+THEME_KANTOORSOFTWARE_155;Je te le transfère.;Ik stuur het je door.;3.00
+THEME_KANTOORSOFTWARE_156;Mets-moi en copie.;Zet me in cc.;3.00
+THEME_KANTOORSOFTWARE_157;Peux-tu renvoyer la pièce jointe ?;Kan je de bijlage nog eens sturen?;3.00
+THEME_KANTOORSOFTWARE_158;Mon écran est figé.;Mijn scherm is bevroren.;3.00
+THEME_KANTOORSOFTWARE_159;Peux-tu me donner les droits ?;Kan je me de rechten geven?;3.00
+THEME_KANTOORSOFTWARE_160;Je le mets dans un tableau croisé.;Ik zet het in een draaitabel.;3.00
