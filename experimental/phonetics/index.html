@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Atelier phonétique expérimental</title>
+  <link rel="stylesheet" href="phonetics.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">PROTOTYPE · HORS PARCOURS PRINCIPAL</p>
+      <h1>Atelier de prononciation</h1>
+      <p class="intro">Écoute la langue, observe les sons, puis essaie de répéter. La transcription aide à démarrer ; l’écriture originale reste visible pour ne pas devenir une béquille permanente.</p>
+    </header>
+
+    <section class="controls" aria-label="Réglages de l’atelier">
+      <label>Langue
+        <select id="language">
+          <option value="ru">Russe standard</option>
+          <option value="ar">Arabe standard moderne (الفصحى المعاصرة)</option>
+        </select>
+      </label>
+      <label>Affichage
+        <select id="display-mode">
+          <option value="guided">Aide phonétique</option>
+          <option value="native">Écriture originale d’abord</option>
+        </select>
+      </label>
+      <div id="voice-status" class="status" role="status">Recherche des voix installées…</div>
+    </section>
+
+    <section id="phrase-list" class="phrases" aria-live="polite"></section>
+
+    <footer>
+      <p>La prononciation et la reconnaissance dépendent du navigateur et de ses services. Le prototype n’appelle pas Gemini ; selon le navigateur, la reconnaissance vocale peut être traitée par un service externe fourni par celui-ci.</p>
+      <p id="mic-status" class="status" role="status">Le test du micro démarre seulement quand tu touches un bouton.</p>
+    </footer>
+  </main>
+  <script src="phrases.js"></script>
+  <script src="phonetics.js"></script>
+</body>
+</html>
