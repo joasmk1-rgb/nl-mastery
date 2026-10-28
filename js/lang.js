@@ -19,7 +19,17 @@ const LANG_PACKS = {
         ttsLang: 'en-GB',
         micLang: 'en-GB',
         voixPrefixe: 'en',
-        modules: ['vocabulaire', 'conjugaison', 'fondations', 'routineMots']
+        modules: ['vocabulaire', 'conjugaison', 'fondations', 'routineMots', 'cours', 'discuter', 'ecouter', 'dire']
+    },
+    es: {
+        code: 'es',
+        nom: 'espagnol',
+        nomPropre: 'Español',
+        variante: 'espagnol standard',
+        ttsLang: 'es-ES',
+        micLang: 'es-ES',
+        voixPrefixe: 'es',
+        modules: ['vocabulaire', 'conjugaison', 'fondations', 'routineMots', 'cours', 'discuter', 'ecouter', 'dire']
     }
 };
 

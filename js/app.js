@@ -2250,13 +2250,13 @@ if (firebaseAvailable) {
         async function init() {
             updateDailyStreak();
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
-            const coreFiles = studyLangCode() === 'en' ? ['data/en/VOCAB_EN.csv'] : [
+            const coreFiles = studyLangCode() !== 'nl' ? [`data/${studyLangCode()}/VOCAB_${studyLangCode().toUpperCase()}.csv`] : [
                 'VERBES_NL.csv', 'NOMS_NL.csv', 'ADJECTIFS_NL.csv', 'ADVERBES_NL.csv', 'MOTS_OUTILS_NL.csv',
                 'EXPRESSIONS_NL.csv', 'LOCUTIONS_NL.csv', 'PHRASES_LABO_avec_frequence.csv', 'MOTS_LABO_avec_frequence.csv'
             ];
             // Fichiers de thèmes métier : optionnels. Ajoute simplement un CSV avec un de ces noms
             // (ou un nouveau nom dans cette liste) pour qu'il apparaisse automatiquement dans "Thèmes".
-            const themeCandidates = studyLangCode() === 'en' ? [] : [
+            const themeCandidates = studyLangCode() !== 'nl' ? [] : [
                 'THEME_BASE_avec_frequence.csv', 'THEME_MARKETING.csv', 'THEME_FINANCE.csv',
                 'THEME_COMPTABILITE.csv', 'THEME_LOGISTIQUE.csv', 'THEME_SUPPLYCHAIN.csv',
                 'THEME_MANAGEMENT.csv', 'THEME_RH.csv', 'THEME_ENTRETIEN.csv',
@@ -2280,12 +2280,12 @@ if (firebaseAvailable) {
             // (VERBES_NL, NOMS_NL, ADJECTIFS_NL, ADVERBES_NL, MOTS_OUTILS_NL, MOTS_LABO, PHRASES_LABO)
             // suivent désormais le même schéma propre : id;fr;nl;freq
             const NL_FIRST_FILES = ['THEME_BASE'];
-            const EN_CATEGORY_FILES = { nom: 'NOMS_NL', verbe: 'VERBES_NL', adjectif: 'ADJECTIFS_NL', adverbe: 'ADVERBES_NL', 'mot-outil': 'MOTS_OUTILS_NL' };
+            const LANG_CATEGORY_FILES = { nom: 'NOMS_NL', verbe: 'VERBES_NL', adjectif: 'ADJECTIFS_NL', adverbe: 'ADVERBES_NL', 'mot-outil': 'MOTS_OUTILS_NL' };
 
             async function loadFile(f, isCore) {
                 const base = baseName(f);
                 const nlFirst = NL_FIRST_FILES.includes(base);
-                const englishData = studyLangCode() === 'en' && f === 'data/en/VOCAB_EN.csv';
+                const separateLanguageData = studyLangCode() !== 'nl' && f === `data/${studyLangCode()}/VOCAB_${studyLangCode().toUpperCase()}.csv`;
                 const frIdx = nlFirst ? 2 : 1;
                 const nlIdx = nlFirst ? 1 : 2;
                 try {
@@ -2307,7 +2307,7 @@ if (firebaseAvailable) {
                     lines.slice(1).forEach(l => {
                         if (!l.trim()) return;
                         const c = l.split(';');
-                        const targetWord = englishData ? c[headerIdx.en] : c[nlIdx];
+                        const targetWord = separateLanguageData ? c[headerIdx[studyLangCode()]] : c[nlIdx];
                         if (targetWord !== undefined && targetWord.trim()) {
                             // La fréquence est en colonne 4 (index 3) pour les fichiers fr-first (id;fr;nl;freq;...).
                             // Pour THEME_BASE (nl-first), elle reste en toute dernière colonne comme avant.
@@ -2320,9 +2320,9 @@ if (firebaseAvailable) {
                             const niveauCECRSource = nlFirst ? '' : get('niveauCECRSource');
                             const sousCategorie = nlFirst ? '' : get('sousCategorie');
                             const sousCategorieSource = nlFirst ? '' : get('sousCategorieSource');
-                            const enCategory = englishData ? (EN_CATEGORY_FILES[get('categorie')] || 'NOMS_NL') : base;
+                            const enCategory = separateLanguageData ? (LANG_CATEGORY_FILES[get('categorie')] || 'NOMS_NL') : base;
                             fullDb.push({
-                                id: (englishData ? enCategory : f) + '_row' + rowIdx, fr: (c[frIdx] || '').trim(), nl: targetWord.trim(),
+                                id: (separateLanguageData ? enCategory : f) + '_row' + rowIdx, fr: (c[frIdx] || '').trim(), nl: targetWord.trim(),
                                 file: enCategory, freq: isNaN(freqRaw) ? 0 : freqRaw, tier: tier,
                                 niveauCECR: niveauCECR || undefined, niveauCECRSource: niveauCECRSource || undefined,
                                 sousCategorie: sousCategorie || undefined, sousCategorieSource: sousCategorieSource || undefined
@@ -2398,11 +2398,11 @@ if (firebaseAvailable) {
 
         async function loadCurriculumData() {
             try {
-                const english = studyLangCode() === 'en';
+                const parallelLanguageCourse = studyLangCode() !== 'nl';
                 const [lv, curriculum] = await Promise.all([
                     fetch('data/curriculum/levels.json').then(r => r.json()),
-                    english
-                        ? fetch('data/en/course_en.json').then(r => r.json())
+                    parallelLanguageCourse
+                        ? fetch(`data/${studyLangCode()}/course_${studyLangCode()}.json`).then(r => r.json())
                         : Promise.all([
                             fetch('data/curriculum/modules.json').then(r => r.json()),
                             fetch('data/curriculum/notions.json').then(r => r.json()),
@@ -2419,7 +2419,7 @@ if (firebaseAvailable) {
                 curriculumLoaded = false;
             }
             try {
-                conjugationData = await fetch(studyLangCode() === 'en' ? 'data/en/conjugation_en.json' : 'data/curriculum/conjugation.json').then(r => r.json());
+                conjugationData = await fetch(studyLangCode() === 'nl' ? 'data/curriculum/conjugation.json' : `data/${studyLangCode()}/conjugation_${studyLangCode()}.json`).then(r => r.json());
                 conjugationLoaded = true;
             } catch (e) {
                 console.warn('Conjugaison non chargée :', e);
@@ -2775,12 +2775,12 @@ if (firebaseAvailable) {
             if (voc) {
                 const wordCount = routineRevoirItems().length;
                 const articleCount = getArticleReviewItems().length;
-                if (studyLangCode() === 'en') {
+                if (studyLangCode() !== 'nl') {
                     voc.innerHTML = `
-                    <div class="hub-card" style="grid-column:1 / -1;" onclick="showConjugaison()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison anglaise</div><div class="hub-card-desc">150 verbes fréquents, quatre temps, avec entraînement écrit et audio.</div></div>
-                    <div class="hub-card" style="grid-column:1 / -1;" onclick="vocabListenOpen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter des mots</div><div class="hub-card-desc">Écoute les mots anglais des catégories chargées.</div></div>
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="showConjugaison()"><span class="hub-card-icon">🔤</span><div class="hub-card-title">Conjugaison ${studyLang().nom}</div><div class="hub-card-desc">${conjugationData.length} verbes fréquents, quatre temps, avec entraînement écrit et audio.</div></div>
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="vocabListenOpen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter des mots</div><div class="hub-card-desc">Écoute les mots ${studyLang().nom} des catégories chargées.</div></div>
                     <div class="hub-card" style="grid-column:1 / -1;" onclick="studyReturnFn = showVocab; startRevision()"><span class="hub-card-icon">🔁</span><div class="hub-card-title">Mots à revoir</div><div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} à réviser, avec ton tuteur.</div></div>
-                    <div class="hub-card" style="grid-column:1 / -1;" onclick="startAdaptiveTest()"><span class="hub-card-icon">📏</span><div class="hub-card-title">Mon niveau de vocabulaire</div><div class="hub-card-desc">Mesure les mots anglais que tu connais déjà.</div></div>`;
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="startAdaptiveTest()"><span class="hub-card-icon">📏</span><div class="hub-card-title">Mon niveau de vocabulaire</div><div class="hub-card-desc">Mesure les mots ${studyLang().nom} que tu connais déjà.</div></div>`;
                     return;
                 }
                 voc.innerHTML = `
@@ -3006,9 +3006,9 @@ if (firebaseAvailable) {
             document.getElementById('apprendre-view').classList.add('active');
             const title = document.querySelector('#apprendre-view > h2');
             const subtitle = document.querySelector('#apprendre-view > .section-subtitle');
-            if (studyLangCode() === 'en') {
-                if (title) title.innerText = '🎓 Parcours anglais A1 → B2';
-                if (subtitle) subtitle.innerText = 'Les mêmes niveaux et étapes que le parcours néerlandais, avec les notions anglaises correspondantes. Chaque module se travaille avec le professeur particulier.';
+            if (studyLangCode() !== 'nl') {
+                if (title) title.innerText = `🎓 Parcours ${studyLang().nomPropre} A1 → B2`;
+                if (subtitle) subtitle.innerText = `Les mêmes niveaux et étapes que le parcours néerlandais, avec les notions de ${studyLang().nom} correspondantes. Chaque module se travaille avec le professeur particulier.`;
             }
             setActiveNav('nav-apprendre');
             renderModRpEntries();
@@ -3019,15 +3019,15 @@ if (firebaseAvailable) {
         function renderModRpEntries() {
             const el = document.getElementById('modrp-list');
             if (!el) return;
-            if (studyLangCode() === 'en') {
-                if (!curriculumLoaded) { el.innerHTML = '<p class="report-meta">Chargement du parcours anglais…</p>'; return; }
+            if (studyLangCode() !== 'nl') {
+                if (!curriculumLoaded) { el.innerHTML = `<p class="report-meta">Chargement du parcours ${studyLang().nom}…</p>`; return; }
                 el.innerHTML = curriculumLevels.map(level => {
                     const modules = curriculumModules.filter(m => m.level === level.id).sort((a, b) => a.order - b.order);
                     return `<section class="study-box"><h3>${rpEscapeHtml(level.id)} · ${rpEscapeHtml(level.label)}</h3><div class="grid">${modules.map(m => {
                         const notionId = m.notions[0];
                         const status = state.curriculum.notionProgress[notionId] || {};
                         const done = !!status.validated;
-                        return `<button type="button" class="card-menu blue" onclick="englishCourseStart('${notionId}')">${done ? '✅' : '🎓'} ${rpEscapeHtml(m.label)}<div class="cat-sub">${rpEscapeHtml(getNotionStatusLabel(getNotionStatus(notionId)))}</div></button>`;
+                        return `<button type="button" class="card-menu blue" onclick="languageCourseStart('${notionId}')">${done ? '✅' : '🎓'} ${rpEscapeHtml(m.label)}<div class="cat-sub">${rpEscapeHtml(getNotionStatusLabel(getNotionStatus(notionId)))}</div></button>`;
                     }).join('')}</div></section>`;
                 }).join('');
                 return;
@@ -3058,9 +3058,9 @@ if (firebaseAvailable) {
             }).join('') + convHtml();
         }
 
-        function englishCourseStart(notionId) {
+        function languageCourseStart(notionId) {
             const notion = curriculumNotions[notionId];
-            if (!notion || studyLangCode() !== 'en') return;
+            if (!notion || studyLangCode() === 'nl') return;
             const settings = profSettings();
             settings.level = notion.level;
             settings.notion = notionId;
@@ -3696,7 +3696,7 @@ if (firebaseAvailable) {
             const cards = document.querySelectorAll('#conjugaison-view .hub-grid .hub-card');
             if (cards[1]) cards[1].style.display = studyLangCode() === 'nl' ? '' : 'none';
             const search = document.getElementById('conj-search');
-            if (search) search.placeholder = studyLangCode() === 'en' ? 'Cherche un verbe (anglais ou français)…' : 'Cherche un verbe (NL ou FR)…';
+            if (search) search.placeholder = studyLangCode() === 'nl' ? 'Cherche un verbe (NL ou FR)…' : `Cherche un verbe (${studyLang().nom} ou français)…`;
             setActiveNav('nav-vocab');
             document.getElementById('conj-detail').innerHTML = '';
             if (!conjugationLoaded) {
@@ -3725,7 +3725,9 @@ if (firebaseAvailable) {
         const CONJ_TENSES = ['present', 'imperfectum', 'perfectum', 'futur'];
         const CONJ_TENSE_NAMES = studyLangCode() === 'en'
             ? { present: 'Present simple', imperfectum: 'Past simple', perfectum: 'Present perfect', futur: 'Future with will' }
-            : { present: 'Présent', imperfectum: 'Prétérit', perfectum: 'Perfectum', futur: 'Futur' };
+            : studyLangCode() === 'es'
+                ? { present: 'Presente', imperfectum: 'Pretérito indefinido', perfectum: 'Pretérito perfecto', futur: 'Futuro simple' }
+                : { present: 'Présent', imperfectum: 'Prétérit', perfectum: 'Perfectum', futur: 'Futur' };
         let conjFilterRange = 50;
         let conjCurrentList = []; // infinitifs de la liste affichée, dans l'ordre : sert à "précédent / suivant"
 
@@ -3785,7 +3787,8 @@ if (firebaseAvailable) {
 
         function conjVerbMastery(v) {
             let tried = 0, weak = 0;
-            CONJ_TENSES.forEach(t => ['ik', 'jij', 'hij', 'wij'].forEach(p => {
+            const people = studyLangCode() === 'es' ? ['ik', 'jij', 'hij', 'wij', 'jullie', 'zij'] : ['ik', 'jij', 'hij', 'wij'];
+            CONJ_TENSES.forEach(t => people.forEach(p => {
                 if (t === 'imperfectum' && (p === 'ik' || p === 'jij')) return; // même entrée que hij
                 const s = conjGetStat(v.infinitief, t, p);
                 if (!s) return;
@@ -3870,6 +3873,8 @@ if (firebaseAvailable) {
             have: { ik: 'have', jij: 'have', hij: 'has', wij: 'have', jullie: 'have', zij: 'have' },
             be: { ik: 'am', jij: 'are', hij: 'is', wij: 'are' },
             zullen: { ik: 'will', jij: 'will', hij: 'will', wij: 'will' }
+        } : studyLangCode() === 'es' ? {
+            haber: { ik: 'he', jij: 'has', hij: 'ha', wij: 'hemos', jullie: 'habéis', zij: 'han' }
         } : {
             hebben: { ik: 'heb', jij: 'hebt', hij: 'heeft', wij: 'hebben', jullie: 'hebben', zij: 'hebben' },
             zijn:   { ik: 'ben', jij: 'bent', hij: 'is',    wij: 'zijn',   jullie: 'zijn',   zij: 'zijn' },
@@ -3882,7 +3887,9 @@ if (firebaseAvailable) {
         const CONJ_PRONOUNS = [
             ...(studyLangCode() === 'en'
                 ? [{ key: 'ik', label: 'I' }, { key: 'jij', label: 'you' }, { key: 'hij', label: 'he / she / it' }, { key: 'wij', label: 'we / they' }]
-                : [{ key: 'ik', label: 'ik' }, { key: 'jij', label: 'jij / u' }, { key: 'hij', label: 'hij / zij / het' }, { key: 'wij', label: 'wij / jullie / zij' }])
+                : studyLangCode() === 'es'
+                    ? [{ key: 'ik', label: 'yo' }, { key: 'jij', label: 'tú' }, { key: 'hij', label: 'él / ella / usted' }, { key: 'wij', label: 'nosotros/as' }, { key: 'jullie', label: 'vosotros/as' }, { key: 'zij', label: 'ellos/as / ustedes' }]
+                    : [{ key: 'ik', label: 'ik' }, { key: 'jij', label: 'jij / u' }, { key: 'hij', label: 'hij / zij / het' }, { key: 'wij', label: 'wij / jullie / zij' }])
         ];
 
         // Table vérifiée à la main (voir commentaire ci-dessus) — couvre les 117 premiers-mots de
@@ -3942,6 +3949,16 @@ if (firebaseAvailable) {
         }
 
         function buildConjugationGrid(v) {
+            if (studyLangCode() === 'es') {
+                const haber = HULPWERKWOORDEN.haber;
+                return CONJ_PRONOUNS.map(p => ({
+                    pronom: p.label, pronomKey: p.key,
+                    present: v.present[p.key],
+                    futur: v.futureForms[p.key],
+                    imperfectum: v.pastSimple[p.key],
+                    perfectum: `${haber[p.key]} ${v.participePasse}`
+                }));
+            }
             if (studyLangCode() === 'en') {
                 return CONJ_PRONOUNS.map(p => {
                     const form = v.present[p.key];
@@ -4012,7 +4029,7 @@ if (firebaseAvailable) {
                     <div class="conj-verb-title">${v.infinitief} ${speakBtnHtml(v.infinitief)}</div>
                     <div style="color:#888; margin-bottom:6px;">${v.fr}</div>
                     <div class="conj-list-badges" style="margin-bottom:10px;"><span class="conj-niveau-badge">${getVerbNiveauCECR(v)}</span>${verbCategoryBadgesHtml(v)}${conjVerbMastery(v).html}</div>
-                    <div class="conj-principal">${v.infinitief} · ${v.preteritum} · ${aux.hij} ${v.participePasse}</div>
+                    <div class="conj-principal">${studyLangCode() === 'es' ? `${v.infinitief} · ${v.pastSimple.ik} · ${v.participePasse}` : `${v.infinitief} · ${v.preteritum} · ${aux.hij} ${v.participePasse}`}</div>
                     <div class="conj-tense-grid">${tenseCards}</div>
                     <div id="conj-fr-note" style="font-size:0.72rem; color:var(--text-secondary); margin-top:8px;"></div>
                     ${hasWeak ? '<div style="font-size:0.72rem; color:var(--wrong); margin-top:8px;">En rouge : les formes ratées à ta dernière tentative.</div>' : ''}
@@ -4054,9 +4071,12 @@ if (firebaseAvailable) {
             if (!GeminiService.isAvailable()) throw new Error('Gemini non configuré');
             const rows = buildConjugationGrid(v);
             const forms = CONJ_TENSES.map(t => t + ' : ' + rows.map(r => r.pronomKey + ' = ' + r[t]).join(' ; ')).join('\n');
+            const personGuide = studyLangCode() === 'es'
+                ? 'Correspondances des pronoms : ik = yo, jij = tú, hij = él/ella/usted, wij = nosotros/as, jullie = vosotros/as, zij = ellos/as/ustedes. Temps : present = présent, imperfectum = pretérito indefinido, perfectum = pretérito perfecto, futur = futur simple.'
+                : 'Correspondances : ik = je, jij = tu, hij = il, wij = nous, jullie = vous, zij = ils. Temps français à utiliser : present → présent, imperfectum → imparfait, perfectum → passé composé, futur → futur simple.';
             const raw = await GeminiService.generate(
                 'Traduis en français chaque forme conjuguée du verbe ' + studyLang().nom + ' "' + v.infinitief + '" (sens : ' + v.fr + ').\n\n' + forms + '\n\n' +
-                '(la forme "wij" vaut aussi pour jullie et zij au pluriel). Correspondances : ik = je, jij = tu, hij = il, wij = nous, jullie = vous, zij = ils. Temps français à utiliser : present → présent, imperfectum → imparfait, perfectum → passé composé, futur → futur simple. ' +
+                personGuide + ' ' +
                 'Garde un seul sens du verbe, le même partout, et inclus le pronom (ex : "je suis", "nous avons été", "ils ont été").\n' +
                 'Réponds UNIQUEMENT avec un objet JSON, sans texte autour : {"present": {"ik": "...", "jij": "...", "hij": "...", "wij": "...", "jullie": "...", "zij": "..."}, "imperfectum": {...}, "perfectum": {...}, "futur": {...}}'
             );
@@ -4113,7 +4133,7 @@ if (firebaseAvailable) {
 
         function conjQuestionLang() {
             if (state.settings && ['fr', 'nl'].includes(state.settings.conjQuestionLang)) return state.settings.conjQuestionLang;
-            return studyLangCode() === 'en' ? 'nl' : 'fr';
+            return studyLangCode() !== 'nl' ? 'nl' : 'fr';
         }
         function conjSetQuestionLang(lang, rerender) {
             state.settings.conjQuestionLang = lang;
@@ -4123,7 +4143,7 @@ if (firebaseAvailable) {
         function conjQuestionLangChipsHtml(rerenderName) {
             const lang = conjQuestionLang();
             const chip = (active, val, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="conjSetQuestionLang('${val}', ${rerenderName})">${label}</button>`;
-            return chip(lang === 'fr', 'fr', '🇫🇷 « tu as appris »') + chip(lang === 'nl', 'nl', studyLangCode() === 'nl' ? '🇳🇱 verbe + temps' : '🇬🇧 verb + tense');
+            return chip(lang === 'fr', 'fr', '🇫🇷 « tu as appris »') + chip(lang === 'nl', 'nl', studyLangCode() === 'nl' ? '🇳🇱 verbe + temps' : `${studyLang().nomPropre} + temps`);
         }
 
         function conjFrQuestion(v, tense, pronomKey, answer, force) {
@@ -4132,13 +4152,15 @@ if (firebaseAvailable) {
             let person = pronomKey;
             if (pronomKey === 'wij') person = studyLangCode() === 'en'
                 ? ['wij', 'zij'][Math.floor(Math.random() * 2)]
-                : ['wij', 'jullie', 'zij'][Math.floor(Math.random() * 3)];
+                : studyLangCode() === 'es' ? 'wij' : ['wij', 'jullie', 'zij'][Math.floor(Math.random() * 3)];
             else if (studyLangCode() === 'nl' && tense === 'imperfectum' && pronomKey === 'hij' && answer === v.preteritum) person = ['ik', 'jij', 'hij'][Math.floor(Math.random() * 3)];
             const fr = forms && forms[tense] && forms[tense][person];
             if (!fr) return null;
             const targetPronoun = studyLangCode() === 'en'
                 ? ({ ik: 'I', jij: 'you', hij: 'he/she/it', wij: 'we', jullie: 'you', zij: 'they' }[person] || person)
-                : person;
+                : studyLangCode() === 'es'
+                    ? ({ ik: 'yo', jij: 'tú', hij: 'él/ella/usted', wij: 'nosotros/as', jullie: 'vosotros/as', zij: 'ellos/as/ustedes' }[person] || person)
+                    : person;
             return { fr: String(fr), fullAnswer: targetPronoun + ' ' + answer };
         }
 
@@ -5239,7 +5261,9 @@ if (firebaseAvailable) {
         let conjExerciseState = null;
         const CONJ_TENSE_LABELS = studyLangCode() === 'en'
             ? { present: 'au present simple', futur: 'au futur avec will', imperfectum: 'au past simple', perfectum: 'au present perfect' }
-            : { present: 'au présent', futur: 'au futur', imperfectum: "à l'imperfectum (prétérit)", perfectum: 'au perfectum (passé composé)' };
+            : studyLangCode() === 'es'
+                ? { present: 'au présent', futur: 'au futur simple', imperfectum: 'au pretérito indefinido', perfectum: 'au pretérito perfecto' }
+                : { present: 'au présent', futur: 'au futur', imperfectum: "à l'imperfectum (prétérit)", perfectum: 'au perfectum (passé composé)' };
 
         function conjExerciseStart(infinitief) {
             const v = conjugationData.find(x => x.infinitief === infinitief);
@@ -5338,7 +5362,7 @@ if (firebaseAvailable) {
         // ratée revient en priorité aux sessions suivantes jusqu'à être réussie.
         // L'ancien réglage correspond à : Irréguliers seulement + Prétérit + Perfectum.
         function isStrongPreteritum(v) {
-            if (studyLangCode() === 'en') return !!v.irregulier;
+            if (studyLangCode() !== 'nl') return !!v.irregulier;
             const first = v.preteritum.split(' ')[0];
             return !(first.endsWith('de') || first.endsWith('te'));
         }
@@ -5347,12 +5371,14 @@ if (firebaseAvailable) {
         const CONJ_TRAINING_MAX_PER_VERB = 2;   // pas plus de 2 questions sur le même verbe par session
         const CONJ_TRAINING_PRONOUN_LABELS = studyLangCode() === 'en'
             ? { ik: 'I', jij: 'you', hij: 'he / she / it', wij: 'we / they' }
-            : { ik: 'ik', jij: 'jij / u', hij: 'hij / zij / het', wij: 'wij / jullie / zij' };
+            : studyLangCode() === 'es'
+                ? { ik: 'yo', jij: 'tú', hij: 'él / ella / usted', wij: 'nosotros/as', jullie: 'vosotros/as', zij: 'ellos/as / ustedes' }
+                : { ik: 'ik', jij: 'jij / u', hij: 'hij / zij / het', wij: 'wij / jullie / zij' };
 
         // Réglages mémorisés d'une session à l'autre (dans state.settings, donc propres à l'appareil).
         function conjTrainingConfig() {
             if (!state.settings.conjTraining) {
-                state.settings.conjTraining = { range: 50, tenses: studyLangCode() === 'en' ? CONJ_TENSES.slice() : ['present', 'imperfectum', 'perfectum'], irregOnly: false };
+                state.settings.conjTraining = { range: 50, tenses: studyLangCode() !== 'nl' ? CONJ_TENSES.slice() : ['present', 'imperfectum', 'perfectum'], irregOnly: false };
             }
             return state.settings.conjTraining;
         }
@@ -5927,7 +5953,7 @@ Réponds UNIQUEMENT en français, en respectant EXACTEMENT ce format à 4 sectio
 ✏️ CORRECTION: <une reformulation naturelle et correcte de sa production en ${studyLang().nom}>
 🎯 CONSEIL: <un seul conseil ciblé et actionnable, pas une liste>
 
-Puis, sur une dernière ligne séparée, ajoute exactement : MOTS_CLES: <0 à 3 mots-clés séparés par des virgules, choisis UNIQUEMENT parmi cette liste : ordre des mots, ${studyLangCode() === 'en' ? 'phrasal verbs, connecteurs, registre professionnel, temps du passé, propositions conditionnelles, present perfect, aucun' : 'verbe séparable, connecteurs, registre professionnel, temps du passé, subordonnée, passif, omdat/doordat, daarom/daardoor, aucun'}>
+Puis, sur une dernière ligne séparée, ajoute exactement : MOTS_CLES: <0 à 3 mots-clés séparés par des virgules, choisis UNIQUEMENT parmi cette liste : ${studyLangCode() === 'en' ? 'phrasal verbs, connecteurs, registre professionnel, temps du passé, propositions conditionnelles, present perfect, aucun' : studyLangCode() === 'es' ? 'accords, verbes pronominaux, connecteurs, registre professionnel, temps du passé, subjonctif, pretérito perfecto, aucun' : 'verbe séparable, connecteurs, registre professionnel, temps du passé, subordonnée, passif, omdat/doordat, daarom/daardoor, aucun'}>
 
 Reste bref et concret, évite les corrections interminables. Ne remets jamais en cause le niveau CECR de l'apprenant, le curriculum, les prérequis ou sa maîtrise globale : contente-toi d'un retour linguistique sur CETTE production.`
                     );
@@ -6100,7 +6126,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!grid) return;
             let totalWords = 0;
             let totalMastered = 0;
-            const categories = studyLangCode() === 'en'
+            const categories = studyLangCode() !== 'nl'
                 ? MAIN_CATEGORIES.filter(cat => fullDb.some(i => i.file === cat.file))
                 : MAIN_CATEGORIES;
             grid.innerHTML = categories.map(cat => {
@@ -6567,7 +6593,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             let tabs = NAV_MODES[navMode];
             document.body.classList.toggle('nav-hidden', !tabs);
             if (!tabs) { bar.innerHTML = ''; return; }
-            if (studyLangCode() === 'en') {
+            if (studyLangCode() !== 'nl') {
                 const allowed = navMode === 'nav-apprendre' ? new Set(['prof'])
                     : navMode === 'nav-pratiquer' ? new Set(['discuter', 'ecouter', 'dire'])
                         : new Set();
@@ -7073,7 +7099,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function renderStudyLangSetting() {
             const options = [
                 `<option value="nl" ${studyLangCode() === 'nl' ? 'selected' : ''}>🇳🇱 Néerlandais</option>`,
-                `<option value="en" ${studyLangCode() === 'en' ? 'selected' : ''}>🇬🇧 Anglais</option>`
+                `<option value="en" ${studyLangCode() === 'en' ? 'selected' : ''}>🇬🇧 Anglais</option>`,
+                `<option value="es" ${studyLangCode() === 'es' ? 'selected' : ''}>🇪🇸 Espagnol</option>`
             ].join('');
             return `<div class="study-box" style="margin-top:15px;">
                 <h3>🌐 Langue étudiée</h3>
@@ -8263,13 +8290,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             Object.entries(byNl).forEach(([w, i]) => add(w, i));
             // Verbes simples d'abord : « ging » doit renvoyer à gaan, pas à doorgaan (« ging door »),
             // et « was » à zijn, pas à aanwezig zijn (« was aanwezig »).
-            const isCompound = v => /\s/.test(v.infinitief) || /\s/.test(v.preteritum);
+            const isCompound = v => /\s/.test(v.infinitief) || /\s/.test(v.preteritum || v.pastSimple?.ik || '');
             // Puis du plus courant au plus rare : « was » = zijn plutôt que wassen.
             const byFreq = conjugationData.slice().sort((a, b) => (b.freq || 0) - (a.freq || 0));
             [false, true].forEach(compound => byFreq.filter(v => isCompound(v) === compound).forEach(v => {
                 const item = byNl[rpKitNorm(v.infinitief).replace(/^zich /, '')] || { id: null, nl: v.infinitief, fr: v.fr, file: 'VERBES_NL' };
-                const forms = [v.infinitief, v.preteritum, deriveImperfectumPluriel(v.preteritum), v.participePasse]
-                    .concat(Object.values(v.present || {}));
+                const forms = [v.infinitief, v.preteritum || v.pastSimple?.ik, studyLangCode() === 'nl' ? deriveImperfectumPluriel(v.preteritum) : null, v.participePasse]
+                    .concat(Object.values(v.present || {}), Object.values(v.pastForms || {}), Object.values(v.pastSimple || {}), Object.values(v.futureForms || {}));
                 forms.forEach(f => String(f || '').split(' ').forEach(part => { const k = rpKitNorm(part); if (k.length > 1 && !['zich', 'me', 'je', 'ons'].includes(k)) add(k, item); }));
             }));
             Object.entries(byNl).forEach(([w, i]) => rpInflections(w).forEach(f => add(f, i)));
@@ -8580,7 +8607,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // 'quotidien' sont redirigés.
         let rpCurrentGroup = null;
         function showRoleplay(group) {
-            if (studyLangCode() !== 'nl' && group !== 'quotidien') { showTalk(); return; }
+            if (studyLangCode() !== 'nl') { showTalk(); return; }
             if (group === 'quotidien') { showTalk(); return; }
             if (group === 'entretiens') group = 'travail';
             const lbl = document.getElementById('rp-metier-label');
@@ -11513,7 +11540,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         }
 
         function profPortrait() {
-            if (studyLangCode() === 'en') return [];
+            if (studyLangCode() !== 'nl') return [];
             try { return MODRP_IDS.flatMap(id => modRpSentences(id)).map(s => s.fr).slice(0, 14); } catch (e) { return []; }
         }
 
@@ -12028,6 +12055,13 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
 
         // Prompt du PROF pour les phases de conversation (échauffement et mise en pratique).
         function profConvPrompt(isLast) {
+            if (studyLangCode() === 'es') {
+                const phase = prof.phase === 0
+                    ? `ÉCHAUFFEMENT : échange chaleureux en espagnol sur sa semaine, son travail ou ses projets. Pose une question à la fois et rebondis sur sa réponse.${prof.last ? ' Tu peux évoquer brièvement la séance précédente.' : ''}`
+                    : `MISE EN PRATIQUE : ${prof.task.titre}. ${prof.task.role_prof}${prof.task.situation_fr ? '\nSituation : ' + prof.task.situation_fr : ''}${prof.task.infos_fr && prof.task.infos_fr.length ? '\nFaits connus : ' + prof.task.infos_fr.join(' ; ') : ''}${prof.task.a_dire_fr && prof.task.a_dire_fr.length ? '\nÉléments à obtenir : ' + prof.task.a_dire_fr.join(' ; ') : ''}\nReste dans ton rôle; pose des questions simples et ne suppose rien que l'apprenant n'a pas dit.`;
+                const histEs = prof.history.map(h => h.who === 'prof' ? 'Prof : ' + h.nl + (h.fr ? ' [aide en français : ' + h.fr + ']' : '') : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
+                return `Tu es professeur particulier d'espagnol pour un apprenant francophone. ${profContextLines()}\n${phase}\nParle en espagnol naturel, avec des phrases adaptées au niveau. Une question à la fois. Les explications et aides sont en français. Si l'apprenant parle français, réponds brièvement en français dans "fr", puis relance en espagnol dans "nl". ${courseRulesOn() ? '' : 'Ne donne pas de leçon de grammaire. '}${isLast ? 'Ceci est la dernière réplique de cette phase : conclus sans poser de question.' : ''}\n${histEs ? 'Conversation jusqu’ici :\n' + histEs : 'Salue-le et pose une première question simple.'}\nRéponds uniquement en JSON : {"fr":"aide en français ou vide","nl":"réplique en espagnol","nl_fr":"traduction française"}`;
+            }
             const english = studyLangCode() === 'en';
             const phaseTxt = prof.phase === 0
                 ? (english
@@ -12068,6 +12102,10 @@ Réponds UNIQUEMENT en JSON : {"fr": "", "nl": "ce que tu dis en ${english ? 'an
 
         // Prompt du CORRECTEUR : ne voit qu'une phrase de l'apprenant.
         function profCorrectPrompt(sentence) {
+            if (studyLangCode() === 'es') return `Tu es correcteur d'espagnol pour un apprenant francophone de niveau ${prof.level}. Ignore ponctuation, majuscules et erreurs évidentes de reconnaissance vocale. Corrige seulement les fautes de grammaire, conjugaison, accords ou vocabulaire qui comptent, sans réécrire le style.
+Si la phrase est entièrement en français, réponds {"fr": true}.${notionPromptPart()}
+Phrase : "${sentence.replace(/"/g, "'")}"
+Réponds uniquement en JSON : {"fr": false, "ok": true, "corrige": "phrase corrigée complète en espagnol", "erreurs": [{"faux":"", "correct":"", "pourquoi":"explication courte en français", ${TUTOR_REGLE_FIELD}}], "francais": [], "bloquant": false, "notions_ok": [], "notions_ko": []}`;
             if (studyLangCode() === 'en') return `Tu es correcteur d'anglais. Voici UNE phrase dite à l'oral ou écrite par un apprenant francophone de niveau ${prof.level}. Ignore la ponctuation, les majuscules et les petites erreurs de reconnaissance vocale. Corrige seulement les vraies fautes qui gênent la grammaire ou le sens, sans réécrire le style.
 Si la phrase est entièrement en français, réponds {"fr": true}. Sinon donne une phrase complète et naturelle en anglais dans "corrige", une explication courte en français et les corrections utiles.
 Phrase : "${sentence.replace(/"/g, "'")}"
@@ -12115,6 +12153,12 @@ Réponds UNIQUEMENT en JSON : {"fr": false, "ok": true, "corrige": "la phrase co
             const n = prof.plan.ex;
             const c = prof.notion.content;
             const lastErr = prof.last && prof.last.erreurs ? prof.last.erreurs.map(e => `${e.faux} → ${e.correct}`).join(' ; ') : '';
+            if (studyLangCode() === 'es') return `Tu es professeur particulier d'espagnol pour un apprenant francophone. ${profContextLines()}
+Prépare le point ciblé « ${c.titre} ». Objectif : ${c.objectif || ''}. Notion : ${String(c.comprendre || '').slice(0, 1400)}.
+${lastErr ? 'Erreurs récentes à recycler si elles sont liées : ' + lastErr : ''}
+Produis une courte explication en français, 2 ou 3 exemples espagnols avec traduction française et exactement ${n} mini-exercices oraux variés. Chaque exercice fournit les informations nécessaires et une réponse courte.
+Format des exercices : "consigne_fr", "enonce", "langue_enonce" ("es" ou "fr"), "reponse" (espagnol), "alternatives", "astuce_fr". Les champs phrases espagnoles restent nommés "nl" pour compatibilité.
+Réponds uniquement en JSON : {"explication_fr":"", "exemples":[{"nl":"", "fr":""}], "exercices":[{"consigne_fr":"", "enonce":"", "langue_enonce":"es", "reponse":"", "alternatives":[], "astuce_fr":""}]}`;
             if (studyLangCode() === 'en') return `Tu es professeur particulier d'anglais pour un apprenant francophone. ${profContextLines()}
 Prépare le POINT CIBLÉ sur « ${c.titre} ».
 Objectif : ${c.objectif || ''}
@@ -12171,6 +12215,10 @@ Réponds UNIQUEMENT en JSON : {"explication_fr": "", "exemples": [{"nl": "", "fr
 
         // Prompt du JUGE : un exercice, une réponse ; jugement sur le fond, jamais mot pour mot.
         function profJudgePrompt(ex, given, isFr) {
+            if (studyLangCode() === 'es') return `Tu juges la réponse d'un apprenant francophone de niveau ${prof.level} à un exercice oral d'espagnol.
+Notion : ${prof.notion.content.titre}. Consigne : ${ex.consigne_fr}. Énoncé : ${ex.enonce}. Réponse attendue : ${ex.reponse}${(ex.alternatives || []).length ? ' (aussi acceptées : ' + ex.alternatives.join(' / ') + ')' : ''}
+Réponse : "${given.replace(/"/g, "'")}". Juge le sens et la grammaire sans exiger une réponse mot pour mot. Si l'apprenant pose une question ou dit qu'il ne sait pas, réponds brièvement en français sans donner immédiatement la solution.
+Réponds uniquement en JSON : {"correct":false, "question":false, "explication_fr":"explication brève en français", "correction":"bonne réponse en espagnol"}`;
             if (studyLangCode() === 'en') return `Tu juges une réponse à un mini-exercice oral d'anglais pour un apprenant francophone de niveau ${prof.level}.
 Notion : ${prof.notion.content.titre}
 Consigne : ${ex.consigne_fr}
@@ -12213,13 +12261,13 @@ Réponds UNIQUEMENT en JSON : {"correct": false, "question": false, "explication
             prof.exResults.push({ enonce: ex.enonce, attendu: ex.reponse, donne: text, ok: !!r.correct });
             recordNotionAttempt(prof.notionId, !!r.correct);
             save();
-            const good = studyLangCode() === 'en'
+            const good = studyLangCode() !== 'nl'
                 ? ['Bien joué !', 'Très bien !', 'Parfait !', 'Exact !'][Math.floor(Math.random() * 4)]
                 : ['Juist!', 'Heel goed!', 'Perfect!', 'Goed zo!'][Math.floor(Math.random() * 4)];
             profAppend({ who: 'info', html: r.correct
                 ? `<div class="prof-good">✅ ${good}${r.explication_fr ? ' <small>' + rpEscapeHtml(r.explication_fr) + '</small>' : ''}</div>`
                 : `<div class="prof-bad">❌ <b>${rpEscapeHtml(r.correction || ex.reponse)}</b> ${speakBtnHtml(r.correction || ex.reponse)}<br><small>${rpEscapeHtml(r.explication_fr || ex.astuce_fr || '')}</small></div>` });
-            if (r.correct) await conjAudioSpeak(good, studyLangCode() === 'en' ? 'fr' : 'nl', 1);
+            if (r.correct) await conjAudioSpeak(good, studyLangCode() !== 'nl' ? 'fr' : 'nl', 1);
             else { await profSpeak(r.explication_fr || ex.astuce_fr, ''); if (profActive()) await conjAudioSpeak(r.correction || ex.reponse, 'nl', PROF_RATE[prof.level]); }
             if (!profActive()) return;
             prof.exIdx++;
@@ -12233,6 +12281,11 @@ Réponds UNIQUEMENT en JSON : {"correct": false, "question": false, "explication
         function profTaskPrompt(type) {
             const n = prof.plan.task;
             const past = profLessonsSorted().slice(0, 5).map(l => l.taskTitle).filter(Boolean);
+            if (studyLangCode() === 'es') return `Tu prépares la mise en pratique finale d'un cours particulier d'espagnol (${n} répliques environ). ${profContextLines()}
+Type : ${type}. Prépare une situation réaliste liée à l'objectif et fais réutiliser la notion espagnole du jour. L'apprenant joue son propre rôle et tu joues son interlocuteur.
+${past.length ? 'Évite ces sujets récents : ' + past.join(' ; ') : ''}
+Fournis une fiche en français avec titre, consigne, situation, faits connus et éléments à dire. Si type=texte ou debat, inclue un court texte ou un sujet de discussion.
+Réponds uniquement en JSON : {"titre":"", "consigne_fr":"", "situation_fr":"", "infos_fr":[], "a_dire_fr":[], "role_prof":"", "objectif_fr":"", "texte_nl":"", "texte_fr":""}`;
             if (studyLangCode() === 'en') return `Tu prépares la mise en pratique finale d'un cours particulier d'anglais (${n} répliques environ). ${profContextLines()}
 Type : ${type}. Prépare une situation adaptée à l'objectif du cours; l'apprenant joue son propre rôle et tu joues son interlocuteur. Fais réutiliser naturellement la notion anglaise du jour.
 ${past.length ? 'Évite ces sujets récents : ' + past.join(' ; ') : ''}
@@ -12310,6 +12363,10 @@ Réponds UNIQUEMENT en JSON : [{"nl": "", "fr": ""}]`);
         function profDebriefPrompt() {
             const errs = prof.errors.slice(0, 30).map(e => `- ${e.faux} → ${e.correct} (${e.pourquoi || ''})`).join('\n');
             const exs = prof.exResults.map(x => `- ${x.enonce} — attendu : ${x.attendu} — donné : ${x.donne} — ${x.ok ? 'juste' : 'faux'}`).join('\n');
+            if (studyLangCode() === 'es') return `Tu es le professeur particulier d'espagnol. Fais le bilan en français de la séance (${prof.level}, ${prof.dur} minutes, objectif : ${PROF_GOALS[prof.goal].desc}).
+Notion : ${prof.notion.content.titre}. Mise en pratique : ${prof.task ? prof.task.titre : 'non faite'}.
+Phrases de l'apprenant :\n${prof.learner.map(t => '- ' + t).join('\n') || '(aucune)'}\nErreurs :\n${errs || '(aucune)'}\nExercices :\n${exs || '(aucun)'}\nMots vus : ${prof.words.map(w => w.nl).join(', ')}
+Donne des observations précises tirées de la séance. Réponds uniquement en JSON : {"forces":[], "erreurs":[{"faux":"", "correct":"", "explication":""}], "mots":[{"nl":"mot espagnol", "fr":"sens français"}], "defi":"", "resume":"", "fluidite":6}`;
             if (studyLangCode() === 'en') return `Tu es le professeur particulier d'anglais. Fais le bilan de la séance (niveau ${prof.level}, ${prof.dur} minutes, objectif : ${PROF_GOALS[prof.goal].desc}).
 Point ciblé : ${prof.notion.content.titre}. Mise en pratique : ${prof.task ? prof.task.titre : 'non faite'}.
 Phrases de l'apprenant :\n${prof.learner.map(t => '- ' + t).join('\n') || '(aucune)'}
@@ -13327,7 +13384,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                 <div id="talk-chat" class="talk-chat"></div>
                 <div id="talk-sugg" class="talk-sugg"></div>
                 <div id="talk-text-row" class="prof-input-row" style="display:none;">
-                    <input type="text" id="talk-input" placeholder="Écris en néerlandais…" onkeydown="if(event.key==='Enter') talkSendTyped()">
+                    <input type="text" id="talk-input" placeholder="Écris en ${studyLang().nom}…" onkeydown="if(event.key==='Enter') talkSendTyped()">
                     <button type="button" class="btn btn-green prof-send" onclick="talkSendTyped()">➤</button>
                 </div>
                 <div class="talk-bar">
@@ -13415,15 +13472,16 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             const p = talk.p, mem = talkState().memory[talk.partner];
             const portrait = typeof profPortrait === 'function' ? profPortrait() : [];
             const hist = talk.history.slice(-16).map(h => h.who === 'them' ? p.name + ' : ' + h.nl : 'Apprenant' + (h.isFr ? ' (EN FRANÇAIS)' : '') + ' : ' + h.text).join('\n');
-            if (studyLangCode() === 'en') {
+            if (studyLangCode() === 'en' || studyLangCode() === 'es') {
                 const notion = talk.point && curriculumNotions[talk.point.notionId || talk.point.id];
                 const extra = talk.extraWords && talk.extraWords.length ? talk.extraWords.join(', ') : '';
-                return `Tu es ${p.name}, partenaire de conversation en anglais d'un apprenant francophone de niveau ${PROF_LEVEL_DESC[talk.level]}. Parle en anglais naturel et courant, avec des phrases adaptées à son niveau. La correction et les explications sont en français.
-Sujet : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')}${talk.sit ? `\nSituation à jouer : ${talk.sit.contexte || talk.sit.role || 'conversation quotidienne'}` : ''}${notion ? `\nPoint anglais à pratiquer : ${notion.content.titre}. ${notion.content.comprendre || ''}` : ''}${extra ? `\nMots anglais à faire réemployer naturellement : ${extra}.` : ''}
+                const target = studyLang().nom;
+                return `Tu es ${p.name}, partenaire de conversation en ${target} d'un apprenant francophone de niveau ${PROF_LEVEL_DESC[talk.level]}. Parle en ${target} naturel, avec des phrases adaptées à son niveau. La correction et les explications sont en français.
+Sujet : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')}${talk.sit ? `\nSituation à jouer : ${talk.sit.contexte || talk.sit.role || 'conversation quotidienne'}` : ''}${notion ? `\nPoint ${target} à pratiquer : ${notion.content.titre}. ${notion.content.comprendre || ''}` : ''}${extra ? `\nMots ${target} à faire réemployer naturellement : ${extra}.` : ''}
 Souviens-toi de ces échanges précédents : ${mem || 'aucun'}.
-Une vraie conversation : réagis à sa réponse, raconte aussi un peu de toi et pose UNE question à la fois. S'il parle en français, aide-le brièvement en français puis relance en anglais. Ne prétends pas que les phrases fournies sont des faits vérifiés.
+Une vraie conversation : réagis à sa réponse, raconte aussi un peu de toi et pose UNE question à la fois. S'il parle en français, aide-le brièvement en français puis relance en ${target}. Ne prétends pas que les phrases fournies sont des faits vérifiés.
 ${hist ? `Historique :\n${hist}` : 'Commence par une salutation et une question simple.'}
-Réponds UNIQUEMENT en JSON : {"reply_nl":"réplique en anglais","reply_fr":"traduction française","fr_help":"aide en français ou chaîne vide","correction":null,"suggestions":[{"nl":"réponse possible en anglais","fr":"traduction"}],"notions_ok":[],"notions_ko":[],"fin":false}`;
+Réponds UNIQUEMENT en JSON : {"reply_nl":"réplique en ${target}","reply_fr":"traduction française","fr_help":"aide en français ou chaîne vide","correction":null,"suggestions":[{"nl":"réponse possible en ${target}","fr":"traduction"}],"notions_ok":[],"notions_ko":[],"fin":false}`;
             }
             return `${p.base} Tu parles avec un(e) apprenant(e) francophone de néerlandais, niveau ${PROF_LEVEL_DESC[talk.level]}.
 ${talk.point ? talkPointPrompt() : talk.lesson ? convPrompt() : talk.sit ? `Aujourd'hui, vous jouez une SITUATION de la vie courante en Flandre. Tu restes ${p.name} (même voix, même caractère), mais tu joues ce rôle : ${talk.sit.role}
@@ -13573,13 +13631,13 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             const hist = t.history.map(h => h.who === 'them' ? t.p.name + ' : ' + h.nl : 'Apprenant : ' + h.text).join('\n');
             let r = null;
             try {
-                r = rpHelpParseJson(await GeminiService.generate(`Voici une conversation en néerlandais entre ${t.p.name} et un apprenant francophone (niveau ${t.level}).
+                r = rpHelpParseJson(await GeminiService.generate(`Voici une conversation en ${studyLang().nom} entre ${t.p.name} et un apprenant francophone (niveau ${t.level}).
 ${hist}
 Mémoire actuelle de ${t.p.name} sur l'apprenant : ${mem || '(vide)'}
 Produis en JSON :
 - "memoire" : la mémoire mise à jour, en français, 5 phrases maximum : ce que l'apprenant a raconté de lui (faits, projets, goûts) et les sujets déjà abordés, pour que ${t.p.name} puisse y revenir la prochaine fois ;
-- "mots" : 3 mots ou tournures néerlandais utiles apparus ou qui lui ont manqué, avec de/het pour les noms, et leur traduction ;
-- "tournure" : une phrase néerlandaise utile à retenir de cette conversation, avec sa traduction.
+- "mots" : 3 mots ou tournures utiles en ${studyLang().nom} apparus ou qui lui ont manqué, avec leur traduction française ;
+- "tournure" : une phrase utile en ${studyLang().nom} à retenir de cette conversation, avec sa traduction.
 Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "tournure": {"nl": "", "fr": ""}}`));
             } catch (e) { r = null; }
             const wait = document.getElementById('talk-recap-wait');
@@ -14349,7 +14407,7 @@ Réponds UNIQUEMENT en JSON :
         function notionPromptPart() {
             const list = notionCandidates();
             if (!list.length) return '';
-            if (studyLangCode() === 'en') return `\nNotions d'anglais suivies (id : intitulé) :\n${list.map(n => `- ${n.id} : ${n.titre}`).join('\n')}\nDans "notions_ok", indique les notions de cette liste réellement utilisées correctement ; dans "notions_ko", les notions tentées avec une erreur. En cas de doute, ne mets rien.`;
+            if (studyLangCode() !== 'nl') return `\nNotions de ${studyLang().nom} suivies (id : intitulé) :\n${list.map(n => `- ${n.id} : ${n.titre}`).join('\n')}\nDans "notions_ok", indique les notions de cette liste réellement utilisées correctement ; dans "notions_ko", les notions tentées avec une erreur. En cas de doute, ne mets rien.`;
             return `\nNotions de grammaire suivies (id : intitulé) :\n${list.map(n => `- ${n.id} : ${n.titre}`).join('\n')}\nDans "notions_ok", mets les ids des notions de cette liste qu'il EMPLOIE CORRECTEMENT dans sa phrase (la structure y est vraiment, ex. omdat avec le verbe à la fin) ; dans "notions_ko", celles qu'il emploie avec une faute. En cas de doute, ne mets rien.`;
         }
         function notionUsageRecord(ok, ko) {
@@ -14401,8 +14459,8 @@ Réponds UNIQUEMENT en JSON :
             if (!usedVerbForms) {
                 usedVerbForms = new Map();
                 // Verbes simples d'abord, du plus courant au plus rare (« kom » = komen, pas aankomen).
-                const isCompound = v => /\s/.test(v.infinitief) || /\s/.test(v.preteritum) || Object.values(v.present || {}).some(f => /\s/.test(f));
-                conjugationData.slice().sort((a, b) => (isCompound(a) - isCompound(b)) || ((b.freq || 0) - (a.freq || 0))).forEach(v => [v.preteritum, deriveImperfectumPluriel(v.preteritum)].concat(Object.values(v.present || {}))
+                const isCompound = v => /\s/.test(v.infinitief) || /\s/.test(v.preteritum || v.pastSimple?.ik || '') || Object.values(v.present || {}).some(f => /\s/.test(f));
+                conjugationData.slice().sort((a, b) => (isCompound(a) - isCompound(b)) || ((b.freq || 0) - (a.freq || 0))).forEach(v => [v.preteritum || v.pastSimple?.ik, ...(studyLangCode() === 'nl' ? [deriveImperfectumPluriel(v.preteritum)] : []), ...Object.values(v.pastForms || {}), ...Object.values(v.pastSimple || {}), ...Object.values(v.futureForms || {}), ...Object.values(v.present || {})]
                     .forEach(f => { const k = rpKitNorm(String(f || '').split(' ')[0]); if (k && !usedVerbForms.has(k)) usedVerbForms.set(k, v.infinitief); }));
             }
             const inf = usedVerbForms.get(token);
@@ -14595,9 +14653,9 @@ Réponds UNIQUEMENT en JSON :
             const wait = routineBubble('info', '<span class="report-meta">🤔</span>');
             let list = [];
             try {
-                const a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}.
+                const a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}.
 Il veut automatiser cette règle, sur laquelle il se trompe souvent : « ${rule.label} »${ex && ex.correct ? ` (exemple : il a dit « ${ex.faux || ''} », il fallait « ${ex.correct} »)` : ''}.
-Écris 5 phrases françaises courtes et naturelles (travail, entretien d'embauche, vie quotidienne) dont la traduction néerlandaise OBLIGE à appliquer cette règle, de la plus simple à la plus difficile, avec leur traduction néerlandaise naturelle.
+Écris 5 phrases françaises courtes et naturelles (travail et vie quotidienne) dont la traduction en ${studyLang().nom} OBLIGE à appliquer cette règle, de la plus simple à la plus difficile, avec leur traduction naturelle.
 Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": ""}]}`));
                 list = (a && Array.isArray(a.phrases) ? a.phrases : []).filter(x => x && x.fr && x.nl).slice(0, 5);
             } catch (e) { list = []; }
@@ -14692,6 +14750,10 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": ""}]}`));
         const LIVE_OFFTOPIC_RULE = `Vérifie aussi qu'il RÉPOND VRAIMENT à la question ou à la réplique de son interlocuteur : une phrase juste en néerlandais peut répondre à côté, parce qu'il a mal compris la question. Une réponse partielle, une demande de répétition (« Sorry, kunt u dat herhalen? ») ou une question en retour ne sont PAS à côté.`;
 
         function liveCorrectPrompt(text, level, question) {
+            if (studyLangCode() === 'es') return `Tu es correcteur d'espagnol pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase dite à l'oral ou écrite. Ignore ponctuation, majuscules et erreurs évidentes de reconnaissance vocale.
+Corrige les vraies fautes de grammaire, conjugaison, accords et vocabulaire ; conserve son idée. Si la phrase est entièrement en français, réponds {"tout_fr": true}.${notionPromptPart()}
+${question ? `Il répond à cette réplique : « ${String(question).replace(/"/g, "'").slice(0, 500)} ». Vérifie qu'il répond bien à la question.\n` : ''}Phrase : "${String(text).replace(/"/g, "'")}"
+Réponds uniquement en JSON : {"tout_fr": false, "ok": true, "corrige": "phrase complète en espagnol", "erreurs": [{"faux": "", "correct": "", "pourquoi": "très court, en français", ${TUTOR_REGLE_FIELD}}], "francais": [], "bloquant": false, "notions_ok": [], "notions_ko": []${question ? ', "a_cote": false, "question_fr": "", "comprehension_fr": "", "piste_nl": ""' : ''}}`;
             if (studyLangCode() === 'en') {
                 return `Tu es correcteur d'anglais pour un apprenant francophone de niveau ${level || 'A2'}. Voici UNE phrase qu'il vient de dire à l'oral (reconnaissance vocale : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) ou d'écrire.
 Corrige les vraies fautes de grammaire, conjugaison, ordre des mots ou vocabulaire ; garde son idée, ne rajoute rien. S'il y a des répétitions dues à la dictée, ne les garde qu'une fois. "corrige" contient uniquement la phrase corrigée, sans commentaire.
@@ -14818,25 +14880,25 @@ Réponds UNIQUEMENT en JSON : {"tout_fr": false, "ok": true, "corrige": "la phra
 
         function tutorPrepPrompt(lines) {
             const conv = lines.slice(-70).map(l => (l.me ? 'APPRENANT : ' : 'INTERLOCUTEUR : ') + l.text).join('\n');
-            return `Tu es le tuteur de néerlandais (Flandre) d'un apprenant francophone de niveau ${liveLevel()}. Il vient de terminer une conversation d'entraînement ; tu prends le relais pour la revoir AVEC lui, à l'oral, comme un tuteur bienveillant.
+            return `Tu es le tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}. Il vient de terminer une conversation d'entraînement ; tu prends le relais pour la revoir avec lui, à l'oral, comme un tuteur bienveillant.
 Conversation (APPRENANT = lui ; ses répliques ont pu être dictées : ignore ponctuation, majuscules et petites erreurs de transcription évidentes ; il a pu glisser des mots français quand un mot lui manquait) :
 ${conv}
 
-${tutorMemPromptLine() ? 'Ses points faibles connus (vérifie en priorité s\'il les refait, et dis-lui s\'il progresse) : ' + tutorMemTop(4).map(([, r]) => r.label).join(', ') + '.\n' : ''}Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, qui répondent À CÔTÉ de ce qu'on lui demandait (il a mal compris la question : explique-lui alors ce qu'on lui demandait vraiment, et "version_nl" est une réponse qui y répond), ou qui se diraient nettement mieux autrement (les plus utiles, dans l'ordre de la conversation), et 1 ou 2 répliques réussies à saluer.
+${tutorMemPromptLine() ? 'Ses points faibles connus (vérifie en priorité s\'il les refait, et dis-lui s\'il progresse) : ' + tutorMemTop(4).map(([, r]) => r.label).join(', ') + '.\n' : ''}Choisis au plus 8 répliques de l'APPRENANT qui contiennent une faute, un passage en français, qui répondent à côté (il a mal compris la question : explique-lui alors ce qu'on lui demandait vraiment, et "version_nl" est une réponse qui y répond), ou qui se diraient nettement mieux autrement, et 1 ou 2 répliques réussies à saluer.
 Réponds UNIQUEMENT en JSON :
 {"intro_fr": "1 ou 2 phrases chaleureuses : ton impression générale",
  "bons": [{"phrase": "sa réplique réussie, telle quelle", "pourquoi_fr": "ce qui est bien, court"}],
- "items": [{"contexte": "la réplique de l'interlocuteur à laquelle il répondait, telle quelle", "phrase": "ce qu'il a dit, tel quel", "explication_fr": "2 ou 3 phrases simples, comme à l'oral, qui expliquent la ou les fautes ; mots néerlandais entre ** **", "version_nl": "la bonne façon de le dire, en gardant son idée", "version_fr": "traduction française", "autre_nl": "une autre façon naturelle de le dire", "a_retenir": {"nl": "la tournure clé, quelques mots", "fr": "sa traduction"}}],
+ "items": [{"contexte": "la réplique de l'interlocuteur à laquelle il répondait, telle quelle", "phrase": "ce qu'il a dit, tel quel", "explication_fr": "2 ou 3 phrases simples en français, comme à l'oral", "version_nl": "la bonne façon de le dire en ${studyLang().nom}, en gardant son idée", "version_fr": "traduction française", "autre_nl": "une autre façon naturelle de le dire", "a_retenir": {"nl": "la tournure clé en ${studyLang().nom}", "fr": "sa traduction"}}],
  "conclusion_fr": "1 ou 2 phrases : le point prioritaire à travailler"}`;
         }
 
         function tutorAskPrompt(item, question) {
-            return `Tu es tuteur de néerlandais (Flandre) pour un apprenant francophone de niveau ${liveLevel()}. Vous revoyez ensemble une de ses phrases.
+            return `Tu es tuteur de ${studyLang().variante} pour un apprenant francophone de niveau ${liveLevel()}. Vous revoyez ensemble une de ses phrases.
 Il avait dit : « ${item ? item.phrase : ''} »
 Bonne version : « ${item ? item.version_nl : ''} »
 Ton explication : ${item ? item.explication_fr : ''}
 Il te demande, en français : « ${question} »
-Réponds-lui en français, comme à l'oral, en 2 à 4 phrases claires, avec les mots néerlandais entre ** ** et un exemple si utile.
+Réponds-lui en français, comme à l'oral, en 2 à 4 phrases claires, avec les mots en ${studyLang().nom} entre ** ** et un exemple si utile.
 Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
         }
 
@@ -15079,6 +15141,10 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
 
         function listenGenPrompt(type, level) {
             const len = { A2: '60 à 90', B1: '100 à 150', B2: '150 à 220' }[level] || '100 à 150';
+            if (studyLangCode() !== 'nl') return `Crée un exercice d'écoute en ${studyLang().nom} pour un adulte francophone de niveau ${level} (${PROF_LEVEL_DESC[level] || ''}).
+Type : ${LISTEN_TYPES[type].desc}. Écris un texte oral naturel en ${studyLang().nom} (${len} mots), avec deux personnes maximum et des noms inventés. Utilise une variété standard et compréhensible de ${studyLang().nom}.
+Ajoute trois questions de compréhension en ${studyLang().nom} : un détail précis, l'idée principale ou une raison, puis une action ou un avis. Réponses courtes.
+Retourne uniquement le JSON suivant (le champ de texte cible reste nommé "nl" pour compatibilité) : {"titre_fr":"", "contexte_fr":"ce que l'apprenant sait avant l'écoute, sans dévoiler les réponses", "lignes":[{"qui":"A", "nl":""}], "questions":[{"nl":"question en ${studyLang().nom}", "fr":"traduction française", "reponse":"réponse en ${studyLang().nom}", "reponse_fr":"traduction française"}], "resume_modele":"résumé modèle en ${studyLang().nom}", "mots":[{"nl":"mot ou tournure en ${studyLang().nom}", "fr":"sens français"}]}`;
             return `Crée un exercice d'ÉCOUTE de néerlandais pour un adulte francophone qui vit en Flandre, niveau ${level} (CECR ; ${PROF_LEVEL_DESC[level] || ''}).
 Type : ${LISTEN_TYPES[type].desc}.
 Le texte est ORAL et naturel, tel qu'on l'entendrait vraiment en Flandre (néerlandais standard, quelques tournures flamandes courantes bienvenues), ${len} mots. Un dialogue a deux personnes au plus. Noms de personnes et d'entreprises inventés.
@@ -15123,7 +15189,7 @@ Réponds UNIQUEMENT en JSON : {"titre_fr": "", "contexte_fr": "ce que l'apprenan
                 </div>
                 <div class="listen-q">
                     ${inSummary
-                        ? `<div class="listen-step">Pour finir</div><div class="listen-qnl">Vat in twee of drie zinnen samen wat je gehoord hebt.</div><div class="report-meta">Résume en 2 ou 3 phrases ce que tu as entendu (en néerlandais).</div>`
+                        ? `<div class="listen-step">Pour finir</div><div class="listen-qnl">${studyLangCode() === 'nl' ? 'Vat in twee of drie zinnen samen wat je gehoord hebt.' : studyLangCode() === 'es' ? 'Resume en dos o tres frases lo que has oído.' : 'Summarize what you heard in two or three sentences.'}</div><div class="report-meta">Résume en 2 ou 3 phrases ce que tu as entendu (en ${studyLang().nom}).</div>`
                         : `<div class="listen-step">Question ${l.q + 1} / ${d.questions.length}</div><div class="listen-qnl">${rpEscapeHtml(q.nl)} ${speakBtnHtml(q.nl)}</div><details class="listen-qfr"><summary>🇫🇷</summary>${rpEscapeHtml(q.fr || '')}</details>`}
                 </div>
                 <div class="prof-input-row">
@@ -15135,7 +15201,7 @@ Réponds UNIQUEMENT en JSON : {"titre_fr": "", "contexte_fr": "ce que l'apprenan
                     <button type="button" class="talk-mic" id="listen-mic" onclick="listenMic()">🎤</button>
                     <button type="button" class="talk-side" onclick="listenAnswer('')" title="Je ne sais pas">🤷</button>
                 </div>
-                <div id="listen-hint" class="talk-mic-hint">Réponds à l'oral ou à l'écrit, en néerlandais si tu peux.</div>`;
+                <div id="listen-hint" class="talk-mic-hint">Réponds à l'oral ou à l'écrit, en ${studyLang().nom} si tu peux.</div>`;
         }
 
         // Lecture du texte, avec deux voix si c'est un dialogue.
@@ -15196,6 +15262,11 @@ Réponds UNIQUEMENT en JSON : {"titre_fr": "", "contexte_fr": "ce que l'apprenan
 
         function listenJudgePrompt(l) {
             const d = l.data;
+            if (studyLangCode() !== 'nl') return `Tu corriges un exercice d'écoute en ${studyLang().nom} (niveau ${l.level}) pour un apprenant francophone. Les réponses peuvent avoir été dictées; ignore ponctuation, majuscules et petites erreurs de transcription. Il peut répondre en français.
+Texte entendu :\n${d.lignes.map(x => x.qui + ' : ' + x.nl).join('\n')}\n\n${d.questions.map((q, i) => `Question ${i + 1} : ${q.nl}\nRéponse attendue : ${q.reponse}\nRéponse de l'apprenant : ${l.answers[i] || '(pas de réponse)'}`).join('\n\n')}
+Résumé demandé : l'apprenant a écrit ou dit « ${l.summary || '(pas de résumé)'} ». Résumé modèle : ${d.resume_modele || ''}
+Juge d'abord la compréhension. Pour chaque réponse, donne "juste", "partiel" ou "faux" et une explication brève en français. Signale séparément une faute importante en ${studyLang().nom} dans "correction_nl", sans pénaliser la compréhension. Pour le résumé, liste les points présents et manquants et une version corrigée.
+Réponds uniquement en JSON : {"questions":[{"verdict":"juste|partiel|faux", "explication_fr":"", "correction_nl":""}], "resume":{"points_ok":[], "points_manquants":[], "corrige_nl":"", "commentaire_fr":""}, "note":0, "conseil_fr":""}`;
             return `Tu corriges un exercice d'ÉCOUTE de néerlandais (niveau ${l.level}) fait par un apprenant francophone. Ses réponses ont pu être dictées (ignore ponctuation, majuscules et petites erreurs de transcription) ; il a pu répondre en français ou mêler les deux.
 Texte entendu :
 ${d.lignes.map(x => x.qui + ' : ' + x.nl).join('\n')}
@@ -15285,12 +15356,12 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             blocs: { icon: '🧩', label: 'Blocs et petits mots', whyPassive: "Ensuite, les blocs de mots puis les petits mots, dans de vraies phrases. Je te dis la phrase en français, tu as un instant pour la chercher, puis tu l'entends en néerlandais.", why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. Je te donne une phrase en français, tu la traduis à ta manière ; je te dis si le sens est bon, je corrige ta version et je te montre la mienne. Si tu sèches, 💡 te donne la phrase à trou." },
             pratique: { icon: '💬', label: 'Pratique', whyPassive: "Pour finir, une scène à écouter : deux personnes dans une situation de tous les jours. Écoute comme si tu étais dans la pièce.", why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
         };
-        if (studyLangCode() === 'en') {
+        if (studyLangCode() !== 'nl') {
             delete ROUTINE_STEPS.blocs;
-            ROUTINE_STEPS.conj.whyPassive = 'On révise quelques verbes anglais courants. Écoute la forme au présent, au passé, au present perfect et au futur.';
-            ROUTINE_STEPS.conj.why = 'Révise quelques verbes anglais fréquents aux quatre temps étudiés : present simple, past simple, present perfect et futur avec will.';
-            ROUTINE_STEPS.mots.whyPassive = 'Écoute quelques mots anglais fréquents avec leur traduction et un exemple.';
-            ROUTINE_STEPS.mots.why = 'Découvre des mots anglais fréquents que tu n’as pas encore révisés. Les réponses sont enregistrées dans ta progression anglaise.';
+            ROUTINE_STEPS.conj.whyPassive = `On révise quelques verbes ${studyLang().nom} courants. Écoute les formes aux quatre temps étudiés.`;
+            ROUTINE_STEPS.conj.why = `Révise des verbes ${studyLang().nom} fréquents aux quatre temps étudiés : ${studyLangCode() === 'en' ? 'present simple, past simple, present perfect et futur avec will' : 'présent, pretérito indefinido, pretérito perfecto et futur simple'}.`;
+            ROUTINE_STEPS.mots.whyPassive = `Écoute quelques mots ${studyLang().nom} fréquents avec leur traduction et un exemple.`;
+            ROUTINE_STEPS.mots.why = `Découvre des mots ${studyLang().nom} fréquents que tu n’as pas encore révisés. Les réponses sont enregistrées dans ta progression ${studyLang().nom}.`;
             ROUTINE_STEPS.pratique.label = 'Discuter';
             ROUTINE_STEPS.pratique.whyPassive = `Écoute une conversation en ${studyLang().nom}.`;
             ROUTINE_STEPS.pratique.why = `Pratique ${studyLang().nom} avec ton partenaire de conversation, ou pose-lui une question.`;
@@ -15411,8 +15482,8 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 whyPassive: "On écoute cinq phrases qui appliquent la règle : le français, un instant pour chercher, puis le néerlandais."
             },
             dire: {
-                icon: '💭', label: 'Dis-le en néerlandais', nav: 'nav-pratiquer', back: '← Parler', run: r => routineDrillSay(r),
-                why: "Dis-moi en français ce qui te passe par la tête : une pensée, une envie, quelque chose qui t'est arrivé. Je t'apprends à le dire en néerlandais, naturellement, à ton niveau. Puis tu le redis à ta manière, et je te corrige.",
+                icon: '💭', label: studyLangCode() === 'nl' ? 'Dis-le en néerlandais' : `Dis-le en ${studyLang().nom}`, nav: 'nav-pratiquer', back: '← Parler', run: r => routineDrillSay(r),
+                why: `Dis-moi en français ce qui te passe par la tête : une pensée, une envie, quelque chose qui t'est arrivé. Je t'apprends à le dire en ${studyLang().variante}, naturellement, à ton niveau. Puis tu le redis à ta manière, et je te corrige.`,
                 whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
             },
             dehet: {
@@ -15508,8 +15579,8 @@ Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr
                 // À lui de le redire, à sa manière ; un second essai s'il sèche.
                 const q = { kind: 'phrase', fr, ex: nl, target: nl, before: '', after: '' };
                 for (let essai = 0; essai < 2 && routineActive(r); essai++) {
-                    r.ctx = `redire en néerlandais « ${fr} » (modèle : « ${nl} »)`;
-                    const given = await routineAskAnswer(r, `<div class="routine-q"><small>À toi</small><div>Redis-le en néerlandais, à ta manière.</div></div>`, () => conjAudioSpeak('À toi.', 'fr', 1.05), null);
+                    r.ctx = `redire en ${studyLang().nom} « ${fr} » (modèle : « ${nl} »)`;
+                    const given = await routineAskAnswer(r, `<div class="routine-q"><small>À toi</small><div>Redis-le en ${studyLang().nom}, à ta manière.</div></div>`, () => conjAudioSpeak('À toi.', 'fr', 1.05), null);
                     if (given === null) return false;
                     if (given === '__stop' || given === '__passive') return true;
                     if (!given) { routineBubble('info', `<div class="say-nl"><b>${rpEscapeHtml(nl)}</b></div>`); await conjAudioSpeak(nl, 'nl', 0.8); continue; }
@@ -16198,13 +16269,13 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             if (!q.strictOrder && ((part && evaluateAnswer(part, q.target).status !== 'wrong') || evaluateAnswer(given, q.ex).status !== 'wrong' || rpSpeechMatch(given, q.ex))) return { ok: true };
             if (!GeminiService.isAvailable()) return { ok: false };
             try {
-                const a = rpHelpParseJson(await GeminiService.generate(`Exercice de traduction pour un apprenant francophone de néerlandais (Flandre), niveau ${liveLevel()}.
+                const a = rpHelpParseJson(await GeminiService.generate(`Exercice de traduction pour un apprenant francophone de ${studyLang().variante}, niveau ${liveLevel()}.
 Phrase française : « ${q.fr} »
 Traduction modèle : « ${q.ex} »${q.kind === 'phrase' ? '' : ` (${q.kind === 'petit' ? 'petit mot travaillé' : 'bloc de mots travaillé'} : « ${q.target} »)`}
 Sa traduction (peut-être dictée : ignore ponctuation, majuscules et petites erreurs de transcription évidentes) : « ${given} »
 Le modèle n'est qu'UNE façon de le dire : juge sur le SENS et la justesse, jamais sur la ressemblance avec le modèle.
 - "sens_ok" : il dit bien la même chose (petites nuances acceptées).
-- "juste" : c'est du néerlandais correct et naturel (une petite faute d'orthographe ou de transcription ne compte pas).
+- "juste" : c'est du ${studyLang().nom} correct et naturel (une petite faute d'orthographe ou de transcription ne compte pas).
 - "sa_version" : SA phrase corrigée, en gardant au maximum ses mots et sa construction (recopie-la si elle est juste).
 - "explication_fr" : une phrase courte, en français, sur ce qui n'allait pas (vide si tout est juste).
 - "bloc_fr" : ${q.kind === 'phrase' ? 'vide.' : `s'il n'a pas employé « ${q.target} » alors que sa phrase est juste, une courte phrase en français qui le lui fait remarquer comme une autre façon courante de le dire (sinon vide).`}
@@ -16314,7 +16385,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
         async function routinePratique(r) {
             const rs = routineState();
             const words = rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
-            if (studyLangCode() === 'en') {
+            if (studyLangCode() !== 'nl') {
                 if (routinePassive()) {
                     rs.done.pratique = 'ecoute';
                     save();
@@ -16401,13 +16472,17 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             { id: 'v50pf', icon: '🔤', label: 'Les 50 verbes au passé composé (perfectum)', n: 50, tenses: ['perfectum'] },
             { id: 'v50i', icon: '🔤', label: 'Les 50 verbes au prétérit (imperfectum)', n: 50, tenses: ['imperfectum'] }
         ];
-        if (studyLangCode() === 'en') {
-            FOND_PALIERS[0].label = 'Les 20 verbes anglais les plus courants au present simple';
-            FOND_PALIERS[2].label = 'Les 20 verbes anglais au present perfect';
-            FOND_PALIERS[3].label = 'Les 20 verbes anglais au past simple';
-            FOND_PALIERS[4].label = 'Les 50 verbes anglais les plus courants au present simple';
-            FOND_PALIERS[6].label = 'Les 50 verbes anglais au present perfect';
-            FOND_PALIERS[7].label = 'Les 50 verbes anglais au past simple';
+        if (studyLangCode() !== 'nl') {
+            const verbLang = studyLangCode() === 'en' ? 'anglais' : 'espagnol';
+            const present = studyLangCode() === 'en' ? 'present simple' : 'présent';
+            const perfect = studyLangCode() === 'en' ? 'present perfect' : 'pretérito perfecto';
+            const past = studyLangCode() === 'en' ? 'past simple' : 'pretérito indefinido';
+            FOND_PALIERS[0].label = `Les 20 verbes ${verbLang} les plus courants au ${present}`;
+            FOND_PALIERS[2].label = `Les 20 verbes ${verbLang} au ${perfect}`;
+            FOND_PALIERS[3].label = `Les 20 verbes ${verbLang} au ${past}`;
+            FOND_PALIERS[4].label = `Les 50 verbes ${verbLang} les plus courants au ${present}`;
+            FOND_PALIERS[6].label = `Les 50 verbes ${verbLang} au ${perfect}`;
+            FOND_PALIERS[7].label = `Les 50 verbes ${verbLang} au ${past}`;
         }
         const FOND_DONE_RATE = 0.9;
         function fondState() {
@@ -16834,7 +16909,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             categorie: { desc: "fiche d'une catégorie de mots ; params.categorie parmi " + Object.keys(BUDDY_CATS).join(', ') + " ; params.entrainer=true pour lancer l'entraînement", run: p => { const f = BUDDY_CATS[p.categorie]; if (!f) return showVocab(); vocabOpenCat('file', f); if (p.entrainer) vocabTrain(); } },
             erreurs: { desc: 'réviser les mots ratés', check: () => routineRevoirItems().length ? null : "Tu n'as aucun mot raté à revoir pour l'instant, bravo ! On fait autre chose ?", run: () => { studyReturnFn = showHome; startRevision(); } },
             dehet: { desc: 'réviser les articles de / het', run: () => { studyReturnFn = showHome; startArticleRevision(); } },
-            conjugaison: { desc: "conjugaison ; params.verbe = infinitif néerlandais pour ouvrir sa fiche ; params.entrainer=true pour l'entraînement", run: p => { const v = p.verbe && conjugationLoaded && conjugationData.find(x => normalize(x.infinitief) === normalize(p.verbe)); if (p.entrainer && !v) return startConjTrainingSession(); showConjugaison(); if (v) showConjugaisonDetail(v.infinitief); } },
+            conjugaison: { desc: `conjugaison ${studyLang().nom} ; params.verbe = infinitif pour ouvrir sa fiche ; params.entrainer=true pour l'entraînement`, run: p => { const v = p.verbe && conjugationLoaded && conjugationData.find(x => normalize(x.infinitief) === normalize(p.verbe)); if (p.entrainer && !v) return startConjTrainingSession(); showConjugaison(); if (v) showConjugaisonDetail(v.infinitief); } },
             separables: { desc: "entraînement aux verbes à particule séparable", run: () => startSeparableTrainingSession() },
             blocs: { desc: 'blocs de mots (mots en contexte)', run: () => showChunkTraining() },
             test: { desc: 'mesurer mon niveau de vocabulaire (test rapide par fréquence)', run: () => startAdaptiveTest() },
@@ -16845,7 +16920,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             routine: { desc: 'ma routine du jour (conjugaison, nouveaux mots, blocs de mots, pratique) avec le tuteur', run: () => showRoutine() },
             progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
-            dire: { desc: "dire en néerlandais ce qu'on pense en français (le tuteur apprend la phrase)", run: () => showSayIt() },
+            dire: { desc: `dire en ${studyLang().nom} ce qu'on pense en français (le tuteur apprend la phrase)`, run: () => showSayIt() },
             ordre: { desc: "l'ordre des mots (verbe en 2e position, verbe à la fin après dat / omdat, daarom…)", run: () => showWordOrder() },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
@@ -16859,8 +16934,10 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             profil: { desc: 'profil, statistiques, carte des compétences', run: () => showProfil() }
         };
         function buddyActionEntries() {
-            const unavailableEnglish = new Set(['dehet', 'separables', 'blocs', 'ordre', 'entretiens', 'rejouer', 'etude_de_cas', 'travail']);
-            return Object.entries(BUDDY_ACTIONS).filter(([key]) => studyLangCode() !== 'en' || !unavailableEnglish.has(key));
+            const unavailableEnglish = new Set(['dehet', 'separables', 'blocs', 'ordre', 'module', 'situation', 'faire_le_point', 'entretiens', 'rejouer', 'etude_de_cas', 'travail', 'progresser']);
+            const unavailableSpanish = new Set(['dehet', 'separables', 'blocs', 'ordre', 'module', 'situation', 'faire_le_point', 'entretiens', 'rejouer', 'etude_de_cas', 'travail', 'progresser']);
+            return Object.entries(BUDDY_ACTIONS).filter(([key]) => studyLangCode() === 'nl'
+                || !(studyLangCode() === 'en' ? unavailableEnglish : unavailableSpanish).has(key));
         }
 
         // ----- Reconnaissance locale des demandes courantes (sans Gemini) -----
@@ -16955,7 +17032,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
                     <button type="button" class="talk-mic" id="buddy-mic" onclick="buddyMic()">🎤</button>
                     <span class="talk-side" style="visibility:hidden;"></span>
                 </div>
-                <div id="buddy-hint" class="talk-mic-hint">Parle-moi en ${s.lang === 'fr' ? 'français' : 'néerlandais'} (touche le drapeau pour changer).</div>
+                <div id="buddy-hint" class="talk-mic-hint">Parle-moi en ${s.lang === 'fr' ? 'français' : studyLang().nom} (touche le drapeau pour changer).</div>
                 ${s.lang === 'nl' ? `<div class="lc-row">${liveCorrectToggleHtml()}</div>` : ''}`;
             buddyLog.forEach(m => buddyAppend(m, true));
             buddyRenderSugg();
@@ -16999,7 +17076,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             const name = currentUserDoc && currentUserDoc.pseudo ? ' ' + currentUserDoc.pseudo : '';
             const next = buddyNextModule();
             const n = getReviewItems().length;
-            const idea = next ? `on continue « ${next.titre} » ?` : (n ? `on revoit tes ${n} mots ratés ?` : 'on discute un peu en néerlandais ?');
+            const idea = next ? `on continue « ${next.titre} » ?` : (n ? `on revoit tes ${n} mots ratés ?` : `on discute un peu en ${studyLang().nom} ?`);
             return `Salut${name} ! C'est ${p.name}. Dis-moi ce que tu veux faire, ou ${idea}`;
         }
         function buddyGreet() {
@@ -17016,6 +17093,10 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         // Exécute une action : courte confirmation, puis le panneau se ferme et l'écran s'ouvre.
         async function buddyRun(id, params) {
             const a = BUDDY_ACTIONS[id];
+            if (studyLangCode() !== 'nl' && !buddyActionEntries().some(([key]) => key === id)) {
+                await buddySay(`Cette activité n'est pas disponible pour le parcours ${studyLang().nom}.`);
+                return false;
+            }
             if (!a) return false;
             const why = a.check && a.check(params || {});
             if (why) { await buddySay(why); return true; }

@@ -1,0 +1,1115 @@
+{
+  "modules": [
+    {
+      "id": "a1-m1",
+      "level": "A1",
+      "order": 1,
+      "label": "Premiers contacts",
+      "notions": [
+        "es_a1_m1"
+      ]
+    },
+    {
+      "id": "a1-m2",
+      "level": "A1",
+      "order": 2,
+      "label": "Construire une phrase",
+      "notions": [
+        "es_a1_m2"
+      ]
+    },
+    {
+      "id": "a1-m3",
+      "level": "A1",
+      "order": 3,
+      "label": "Noms et articles",
+      "notions": [
+        "es_a1_m3"
+      ]
+    },
+    {
+      "id": "a1-m4",
+      "level": "A1",
+      "order": 4,
+      "label": "Pronoms",
+      "notions": [
+        "es_a1_m4"
+      ]
+    },
+    {
+      "id": "a1-m5",
+      "level": "A1",
+      "order": 5,
+      "label": "Verbes",
+      "notions": [
+        "es_a1_m5"
+      ]
+    },
+    {
+      "id": "a1-m6",
+      "level": "A1",
+      "order": 6,
+      "label": "Adjectifs et adverbes",
+      "notions": [
+        "es_a1_m6"
+      ]
+    },
+    {
+      "id": "a1-m7",
+      "level": "A1",
+      "order": 7,
+      "label": "Prépositions",
+      "notions": [
+        "es_a1_m7"
+      ]
+    },
+    {
+      "id": "a1-m8",
+      "level": "A1",
+      "order": 8,
+      "label": "Négation et questions",
+      "notions": [
+        "es_a1_m8"
+      ]
+    },
+    {
+      "id": "a1-m9",
+      "level": "A1",
+      "order": 9,
+      "label": "Temps de base",
+      "notions": [
+        "es_a1_m9"
+      ]
+    },
+    {
+      "id": "a1-m10",
+      "level": "A1",
+      "order": 10,
+      "label": "Vie quotidienne",
+      "notions": [
+        "es_a1_m10"
+      ]
+    },
+    {
+      "id": "a2-m1",
+      "level": "A2",
+      "order": 1,
+      "label": "Raconter le passé",
+      "notions": [
+        "es_a2_m1"
+      ]
+    },
+    {
+      "id": "a2-m2",
+      "level": "A2",
+      "order": 2,
+      "label": "Verbes plus complexes",
+      "notions": [
+        "es_a2_m2"
+      ]
+    },
+    {
+      "id": "a2-m3",
+      "level": "A2",
+      "order": 3,
+      "label": "Futur, intention et modalité",
+      "notions": [
+        "es_a2_m3"
+      ]
+    },
+    {
+      "id": "a2-m4",
+      "level": "A2",
+      "order": 4,
+      "label": "Quantité et référence",
+      "notions": [
+        "es_a2_m4"
+      ]
+    },
+    {
+      "id": "a2-m5",
+      "level": "A2",
+      "order": 5,
+      "label": "Construire des phrases plus riches",
+      "notions": [
+        "es_a2_m5"
+      ]
+    },
+    {
+      "id": "a2-m6",
+      "level": "A2",
+      "order": 6,
+      "label": "Description et comparaison",
+      "notions": [
+        "es_a2_m6"
+      ]
+    },
+    {
+      "id": "a2-m7",
+      "level": "A2",
+      "order": 7,
+      "label": "Situations de vie réelle",
+      "notions": [
+        "es_a2_m7"
+      ]
+    },
+    {
+      "id": "a2-m8",
+      "level": "A2",
+      "order": 8,
+      "label": "Interaction et expression personnelle",
+      "notions": [
+        "es_a2_m8"
+      ]
+    },
+    {
+      "id": "b1-m1",
+      "level": "B1",
+      "order": 1,
+      "label": "Cause, conséquence et opposition",
+      "notions": [
+        "es_b1_m1"
+      ]
+    },
+    {
+      "id": "b1-m2",
+      "level": "B1",
+      "order": 2,
+      "label": "Syntaxe complexe",
+      "notions": [
+        "es_b1_m2"
+      ]
+    },
+    {
+      "id": "b1-m3",
+      "level": "B1",
+      "order": 3,
+      "label": "Raconter et structurer",
+      "notions": [
+        "es_b1_m3"
+      ]
+    },
+    {
+      "id": "b1-m4",
+      "level": "B1",
+      "order": 4,
+      "label": "Donner son opinion et argumenter",
+      "notions": [
+        "es_b1_m4"
+      ]
+    },
+    {
+      "id": "b1-m5",
+      "level": "B1",
+      "order": 5,
+      "label": "Espagnol fonctionnel réel",
+      "notions": [
+        "es_b1_m5"
+      ]
+    },
+    {
+      "id": "b1-m6",
+      "level": "B1",
+      "order": 6,
+      "label": "Comprendre l'espagnol réel",
+      "notions": [
+        "es_b1_m6"
+      ]
+    },
+    {
+      "id": "b1-m7",
+      "level": "B1",
+      "order": 7,
+      "label": "Interaction B1",
+      "notions": [
+        "es_b1_m7"
+      ]
+    },
+    {
+      "id": "b2-m1",
+      "level": "B2",
+      "order": 1,
+      "label": "Nuances grammaticales avancées",
+      "notions": [
+        "es_b2_m1"
+      ]
+    },
+    {
+      "id": "b2-m2",
+      "level": "B2",
+      "order": 2,
+      "label": "Précision et registre",
+      "notions": [
+        "es_b2_m2"
+      ]
+    },
+    {
+      "id": "b2-m3",
+      "level": "B2",
+      "order": 3,
+      "label": "Cohésion et style avancé",
+      "notions": [
+        "es_b2_m3"
+      ]
+    },
+    {
+      "id": "b2-m4",
+      "level": "B2",
+      "order": 4,
+      "label": "Argumentation et résolution de problèmes",
+      "notions": [
+        "es_b2_m4"
+      ]
+    },
+    {
+      "id": "b2-m5",
+      "level": "B2",
+      "order": 5,
+      "label": "Communication professionnelle",
+      "notions": [
+        "es_b2_m5"
+      ]
+    },
+    {
+      "id": "b2-m6",
+      "level": "B2",
+      "order": 6,
+      "label": "Compréhension avancée et synthèse",
+      "notions": [
+        "es_b2_m6"
+      ]
+    }
+  ],
+  "notions": {
+    "es_a1_m1": {
+      "level": "A1",
+      "module": "a1-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Premiers contacts",
+        "objectif": "Saluer, se présenter et faire connaissance.",
+        "comprendre": "Usa Hola, Buenos días, Encantado/a y ¿Qué tal? para iniciar un intercambio.",
+        "regle": "Les salutations dépendent du moment et du degré de proximité.",
+        "exemples": [
+          "Hola, me llamo Ana.",
+          "Encantado de conocerte.",
+          "Buenos días, ¿qué tal?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m2": {
+      "level": "A1",
+      "module": "a1-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Construire une phrase",
+        "objectif": "Former une phrase affirmative simple avec un sujet, un verbe et un complément.",
+        "comprendre": "El orden frecuente es sujeto + verbo + complemento, pero el pronombre sujeto suele omitirse: Trabajo en Bruselas.",
+        "regle": "Le sujet peut être omis quand la terminaison verbale indique déjà la personne.",
+        "exemples": [
+          "Trabajo en Bruselas.",
+          "Ella vive aquí.",
+          "¿Hablas español?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m3": {
+      "level": "A1",
+      "module": "a1-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Noms et articles",
+        "objectif": "Employer les noms, les articles définis et indéfinis et le pluriel.",
+        "comprendre": "El libro, la casa, los libros, las casas; un amigo, una amiga.",
+        "regle": "Les noms espagnols ont un genre grammatical et l'article s'accorde en genre et en nombre.",
+        "exemples": [
+          "Tengo una reunión.",
+          "La reunión empieza a las nueve.",
+          "Necesitamos información."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m4": {
+      "level": "A1",
+      "module": "a1-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Pronoms",
+        "objectif": "Employer les pronoms sujets, compléments et possessifs les plus fréquents.",
+        "comprendre": "Yo, tú, él/ella, nosotros/as, vosotros/as, ellos/as; me, te, lo/la, nos, os, los/las.",
+        "regle": "Les pronoms compléments se placent généralement avant le verbe conjugué.",
+        "exemples": [
+          "Ella me envía sus notas.",
+          "Nos invitaron.",
+          "Esta es nuestra oficina."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m5": {
+      "level": "A1",
+      "module": "a1-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Verbes",
+        "objectif": "Utiliser ser, estar, tener et le présent des verbes réguliers.",
+        "comprendre": "Hablar: hablo, hablas, habla, hablamos, habláis, hablan. Ser expresa identidad y características; estar suele describir estados y ubicación.",
+        "regle": "Les verbes se conjuguent selon six personnes. Ser et estar ne s'emploient pas dans les mêmes contextes.",
+        "exemples": [
+          "Trabajo desde casa.",
+          "Ella trabaja en una oficina.",
+          "¿Tienes una reunión?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m6": {
+      "level": "A1",
+      "module": "a1-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Adjectifs et adverbes",
+        "objectif": "Décrire des personnes, des objets et des actions avec des accords corrects.",
+        "comprendre": "Una casa bonita, unos informes claros; muchos adverbios se forman con -mente.",
+        "regle": "L'adjectif s'accorde généralement avec le nom en genre et en nombre.",
+        "exemples": [
+          "Es una propuesta clara.",
+          "El sistema funciona bien.",
+          "Están muy ocupados."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m7": {
+      "level": "A1",
+      "module": "a1-m7",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m6"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Prépositions",
+        "objectif": "Situer dans l'espace et dans le temps avec les prépositions fréquentes.",
+        "comprendre": "A las diez, el lunes, en mayo; en la estación, sobre la mesa, cerca de la oficina.",
+        "regle": "Les prépositions espagnoles s'apprennent avec les expressions et les verbes qui les gouvernent.",
+        "exemples": [
+          "La reunión es a las diez.",
+          "Trabajo en Bruselas.",
+          "El documento está sobre la mesa."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m8": {
+      "level": "A1",
+      "module": "a1-m8",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m7"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Négation et questions",
+        "objectif": "Former des phrases négatives et des questions simples.",
+        "comprendre": "No entiendo. ¿Trabajas aquí? ¿Está listo? La forme du verbe porte la personne.",
+        "regle": "La négation no se place avant le verbe. Les questions sont marquées par ¿ ? à l'écrit.",
+        "exemples": [
+          "No lo entiendo.",
+          "¿Trabaja aquí?",
+          "No están disponibles."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m9": {
+      "level": "A1",
+      "module": "a1-m9",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m8"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Temps de base",
+        "objectif": "Distinguer le présent, le présent progressif et le passé récent.",
+        "comprendre": "Trabajo cada día. Estoy trabajando ahora. Ayer trabajé.",
+        "regle": "Le présent décrit habitudes et faits; estar + gerundio décrit une action en cours.",
+        "exemples": [
+          "Normalmente voy en tren.",
+          "Ahora estoy tomando el tren.",
+          "Ayer tomé el tren."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a1_m10": {
+      "level": "A1",
+      "module": "a1-m10",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a1_m9"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Vie quotidienne",
+        "objectif": "Parler de routines, d'horaires, de besoins et d'activités courantes.",
+        "comprendre": "Los adverbios de frecuencia suelen ir antes del verbo: Normalmente empiezo a las ocho.",
+        "regle": "Les verbes pronominaux et les marqueurs de fréquence rendent les échanges naturels.",
+        "exemples": [
+          "Normalmente empiezo a las ocho.",
+          "Almorzamos al mediodía.",
+          "¿Me trae un poco de agua?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m1": {
+      "level": "A2",
+      "module": "a2-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Raconter le passé",
+        "objectif": "Raconter un événement terminé au pretérito indefinido.",
+        "comprendre": "Ayer trabajé; ella salió; fuimos al centro. El indefinido presenta hechos terminados.",
+        "regle": "Les terminaisons varient selon les verbes en -ar, -er et -ir, avec plusieurs formes irrégulières fréquentes.",
+        "exemples": [
+          "Visitamos Madrid el año pasado.",
+          "Ella fue a la oficina.",
+          "Vi tu mensaje."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m2": {
+      "level": "A2",
+      "module": "a2-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Verbes plus complexes",
+        "objectif": "Exprimer une expérience liée au présent et employer des verbes pronominaux fréquents.",
+        "comprendre": "He terminado, has visto; levantarse: me levanto, te levantas.",
+        "regle": "Haber + participe forme le pretérito perfecto compuesto; les pronoms pronominaux accompagnent le verbe.",
+        "exemples": [
+          "He terminado el informe.",
+          "Se ha dado cuenta del error.",
+          "¿Puedes encender la pantalla?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m3": {
+      "level": "A2",
+      "module": "a2-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Futur, intention et modalité",
+        "objectif": "Exprimer projets, prédictions, obligations et possibilités.",
+        "comprendre": "Te llamaré. Voy a presentar mi candidatura. Deberías comprobarlo.",
+        "regle": "Le futur simple, ir a + infinitif et les verbes modaux expriment des intentions différentes.",
+        "exemples": [
+          "Te lo enviaré mañana.",
+          "Vamos a reunirnos con el cliente.",
+          "Deberías guardar una copia."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m4": {
+      "level": "A2",
+      "module": "a2-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Quantité et référence",
+        "objectif": "Exprimer des quantités et reprendre une information sans répétition.",
+        "comprendre": "Muchos informes, poco tiempo, algunas preguntas; lo/la/los/las reprennent un complément.",
+        "regle": "Les quantifieurs s'accordent parfois avec le nom; les pronoms de reprise varient en genre et en nombre.",
+        "exemples": [
+          "Tenemos algunas preguntas.",
+          "No queda mucho tiempo.",
+          "Los archivos están listos; los envié."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m5": {
+      "level": "A2",
+      "module": "a2-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Construire des phrases plus riches",
+        "objectif": "Relier des propositions et exprimer cause, résultat et contraste.",
+        "comprendre": "Usa porque, así que, aunque, cuando y si para enlazar ideas.",
+        "regle": "Les connecteurs organisent les relations logiques entre les idées.",
+        "exemples": [
+          "Me quedé porque tenía trabajo.",
+          "Era tarde, así que volvimos a casa.",
+          "Aunque había mucho trabajo, terminamos."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m6": {
+      "level": "A2",
+      "module": "a2-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Description et comparaison",
+        "objectif": "Comparer personnes, objets, quantités et expériences.",
+        "comprendre": "Más pequeño que, tan útil como, el más interesante.",
+        "regle": "Les comparatifs se forment souvent avec más/menos + adjectif et que; les superlatifs avec el/la más.",
+        "exemples": [
+          "Esta opción es más barata.",
+          "Es la herramienta más útil.",
+          "La oficina nueva es tan luminosa como la antigua."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m7": {
+      "level": "A2",
+      "module": "a2-m7",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m6"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Situations de vie réelle",
+        "objectif": "Gérer demandes, achats, déplacements et rendez-vous.",
+        "comprendre": "¿Podría reservar una mesa? ¿Le importaría ayudarme? Quisiera cambiar la cita.",
+        "regle": "Les demandes indirectes avec poder et querer sont souvent plus polies.",
+        "exemples": [
+          "¿Podría reservar una mesa para dos?",
+          "Quisiera cambiar la cita.",
+          "¿Cómo llego a la estación?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_a2_m8": {
+      "level": "A2",
+      "module": "a2-m8",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_a2_m7"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Interaction et expression personnelle",
+        "objectif": "Exprimer préférences, invitations, accord et désaccord.",
+        "comprendre": "Creo que sí; no estoy seguro/a; me parece bien; ¿te apetece venir?",
+        "regle": "Les réactions brèves et les questions de suivi entretiennent une conversation.",
+        "exemples": [
+          "Me parece una buena idea.",
+          "No estoy seguro de estar de acuerdo.",
+          "¿Te gustaría venir con nosotros?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m1": {
+      "level": "B1",
+      "module": "b1-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Cause, conséquence et opposition",
+        "objectif": "Nuancer les liens logiques et les concessions.",
+        "comprendre": "Usa puesto que para la causa, por lo tanto para la consecuencia y sin embargo para el contraste.",
+        "regle": "Le niveau B1 demande de choisir un connecteur adapté à la relation et au registre.",
+        "exemples": [
+          "Como aumentó la demanda, contratamos a más personas.",
+          "El coste fue alto; sin embargo, el resultado fue bueno.",
+          "Mientras las ventas subían, bajaban las quejas."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m2": {
+      "level": "B1",
+      "module": "b1-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b1_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Syntaxe complexe",
+        "objectif": "Employer relatives, subordonnées et propositions conditionnelles.",
+        "comprendre": "La persona que llamó está esperando. Si salimos ahora, llegaremos a tiempo.",
+        "regle": "Les relatives et les conditionnelles ajoutent des précisions; certaines structures demandent le subjonctif.",
+        "exemples": [
+          "El informe que enviaste es útil.",
+          "Si salimos ahora, llegaremos a tiempo.",
+          "Sé lo que quiere decir."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m3": {
+      "level": "B1",
+      "module": "b1-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b1_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Raconter et structurer",
+        "objectif": "Organiser un récit en distinguant événements, contexte et antériorité.",
+        "comprendre": "Estaba revisando el documento cuando llamó. Ya habíamos enviado la actualización.",
+        "regle": "L'indefinido raconte les faits; l'imperfecto décrit le contexte ou les habitudes passées.",
+        "exemples": [
+          "Estaba revisando el documento cuando llamó.",
+          "Ya habíamos enviado la actualización.",
+          "Después, comprobamos las cifras."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m4": {
+      "level": "B1",
+      "module": "b1-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b1_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Donner son opinion et argumenter",
+        "objectif": "Présenter une opinion, la justifier et répondre à un contre-argument.",
+        "comprendre": "En mi opinión; la razón principal es; por otro lado; dicho esto.",
+        "regle": "Une argumentation claire annonce position, raisons et limites.",
+        "exemples": [
+          "En mi opinión, deberíamos simplificar el proceso.",
+          "La razón principal es el coste.",
+          "Dicho esto, la propuesta tiene ventajas."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m5": {
+      "level": "B1",
+      "module": "b1-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b1_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Espagnol fonctionnel réel",
+        "objectif": "Comprendre les formulations courantes et les expressions en contexte.",
+        "comprendre": "Averiguar = descubrir; aplazar = posponer; seguir adelante = continuar.",
+        "regle": "Les expressions idiomatiques changent parfois de sens selon le contexte et la région.",
+        "exemples": [
+          "Voy a averiguar qué ha pasado.",
+          "Aplazaron la reunión.",
+          "Por favor, sigue adelante."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m6": {
+      "level": "B1",
+      "module": "b1-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b1_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Comprendre l'espagnol réel",
+        "objectif": "Repérer l'idée principale, l'intention, les détails et les implicites d'un message.",
+        "comprendre": "Escucha las palabras tónicas, los conectores y autocorrecciones como en realidad o quiero decir.",
+        "regle": "Le contexte, l'accentuation et les reformulations aident à comprendre différents accents.",
+        "exemples": [
+          "En realidad, necesitamos la versión anterior.",
+          "Lo que quiero decir es que ha cambiado la fecha límite.",
+          "El punto clave es el presupuesto revisado."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b1_m7": {
+      "level": "B1",
+      "module": "b1-m7",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b1_m6"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Interaction B1",
+        "objectif": "Prendre son tour, clarifier, reformuler et maintenir un échange.",
+        "comprendre": "¿Podría aclararlo? Déjame reformularlo. ¿Qué quieres decir con…?",
+        "regle": "Les formules de clarification donnent du temps et préviennent les malentendus.",
+        "exemples": [
+          "¿Podría aclarar el último punto?",
+          "Déjame reformular la pregunta.",
+          "¿Qué quieres decir con flexible?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b2_m1": {
+      "level": "B2",
+      "module": "b2-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Nuances grammaticales avancées",
+        "objectif": "Choisir entre temps et constructions proches selon le point de vue.",
+        "comprendre": "Compara indefinido y perfecto compuesto: trabajé allí un año; he trabajado aquí desde mayo.",
+        "regle": "Le choix du temps dépend de la région, de la durée et du lien avec le présent.",
+        "exemples": [
+          "Trabajé allí durante un año.",
+          "He trabajado aquí desde mayo.",
+          "Llevo toda la mañana trabajando."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b2_m2": {
+      "level": "B2",
+      "module": "b2-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b2_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Précision et registre",
+        "objectif": "Adapter le degré de formalité et choisir des formulations précises.",
+        "comprendre": "¿Podría confirmarlo? es más formal que ¿Puedes comprobarlo? Evita las expresiones vagas.",
+        "regle": "Le registre dépend du destinataire, du but et du contexte.",
+        "exemples": [
+          "¿Podría confirmar la recepción?",
+          "¿Sería posible cambiar la fecha?",
+          "Las cifras aumentaron un doce por ciento."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b2_m3": {
+      "level": "B2",
+      "module": "b2-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b2_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Cohésion et style avancé",
+        "objectif": "Structurer un texte avec reprises, transitions et variations de rythme.",
+        "comprendre": "Usa además, no obstante, por consiguiente y referencias precisas para guiar al lector.",
+        "regle": "La cohésion dépend des connecteurs, des reprises lexicales et de l'ordre des informations.",
+        "exemples": [
+          "El plan es ambicioso. No obstante, la primera fase es viable.",
+          "Este cambio redujo los retrasos; por consiguiente, mejoraron las entregas.",
+          "La propuesta tiene tres partes. La última trata de la formación."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b2_m4": {
+      "level": "B2",
+      "module": "b2-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b2_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Argumentation et résolution de problèmes",
+        "objectif": "Évaluer des options, exprimer des réserves et proposer un compromis.",
+        "comprendre": "Si retrasáramos el proyecto, subirían los costes; siempre que…, podríamos…; la contrapartida es…",
+        "regle": "Une discussion compare les critères, risques et avantages avant de recommander une solution.",
+        "exemples": [
+          "La principal contrapartida es la rapidez frente al coste.",
+          "Siempre que las cifras sean correctas, podemos continuar.",
+          "Una implantación gradual reduciría el riesgo."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b2_m5": {
+      "level": "B2",
+      "module": "b2-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b2_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Communication professionnelle",
+        "objectif": "Participer à une réunion, présenter un résultat et négocier la prochaine étape.",
+        "comprendre": "Estructura una presentación, invita a hacer preguntas, resume los acuerdos y asigna responsables.",
+        "regle": "La communication professionnelle privilégie les messages concis, explicites et adaptés.",
+        "exemples": [
+          "Empezaré por los resultados principales.",
+          "¿Podemos acordar quién se encargará de esta acción?",
+          "En resumen, revisaremos el borrador el viernes."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "es_b2_m6": {
+      "level": "B2",
+      "module": "b2-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "es_b2_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Compréhension avancée et synthèse",
+        "objectif": "Synthétiser des sources, distinguer faits et interprétations et restituer les nuances.",
+        "comprendre": "Atribuye las afirmaciones, compara fuentes y usa expresiones prudentes como parece que o sugiere que.",
+        "regle": "Une synthèse fidèle hiérarchise les idées et signale les réserves de l'auteur.",
+        "exemples": [
+          "El informe sugiere que la demanda podría recuperarse.",
+          "Ambas fuentes coinciden en la tendencia, pero discrepan sobre la causa.",
+          "Las pruebas son limitadas, así que la conclusión es provisional."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure espagnole."
+        ]
+      },
+      "exerciseIds": []
+    }
+  },
+  "exercises": {}
+}
