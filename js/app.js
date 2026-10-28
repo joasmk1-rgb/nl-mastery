@@ -2091,7 +2091,7 @@ if (firebaseAvailable) {
             if (!text) return;
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'nl-NL';
+            utterance.lang = studyLang().ttsLang;
             if (typeof rpDutchVoice !== 'undefined' && rpDutchVoice) utterance.voice = rpDutchVoice;
             utterance.rate = 0.95 * voiceSpeed();
             window.speechSynthesis.speak(utterance);
@@ -4255,9 +4255,9 @@ if (firebaseAvailable) {
             return new Promise(resolve => {
                 if (!('speechSynthesis' in window) || !text) return resolve();
                 const u = new SpeechSynthesisUtterance(speechBlanks(stripMarkdown(text)));
-                u.lang = lang === 'fr' ? 'fr-FR' : 'nl-NL';
+                u.lang = lang === 'fr' ? 'fr-FR' : studyLang().ttsLang;
                 const voices = window.speechSynthesis.getVoices();
-                const nlVoices = voices.filter(x => x.lang.toLowerCase().startsWith('nl'));
+                const nlVoices = voices.filter(x => x.lang.toLowerCase().startsWith(studyLang().voixPrefixe));
                 let voice = lang === 'fr'
                     ? voices.find(x => x.lang.toLowerCase().startsWith('fr'))
                     : (rpDutchVoice || nlVoices[0]);
@@ -4427,7 +4427,7 @@ if (firebaseAvailable) {
                 if (!window.SpeechRecognition) return resolve(null);
                 if (rpIsRecording && rpRecognition) rpRecognition.stop();
                 const rec = new window.SpeechRecognition();
-                rec.lang = lang || 'nl-NL';
+                rec.lang = lang || studyLang().micLang;
                 rec.continuous = false;
                 rec.interimResults = false;
                 rec.maxAlternatives = 3;
@@ -5031,7 +5031,7 @@ if (firebaseAvailable) {
             };
             let ok = 0, done = 0;
             const missed = [];
-            const listenLang = dir === 'fr2nl' ? 'nl-NL' : 'fr-FR';
+            const listenLang = dir === 'fr2nl' ? studyLang().micLang : 'fr-FR';
             const matches = (heard, q) => {
                 if (!heard || !heard.length) return false;
                 const targets = dir === 'fr2nl' ? [q.frq.fullAnswer, q.answer] : [q.frq.fr];
@@ -5698,6 +5698,28 @@ if (firebaseAvailable) {
         // ===== GeminiService (abstraction IA) =====
         // Le curriculum NL Mastery reste toujours la source de vérité pédagogique.
         // Gemini n'intervient qu'en complément (reformulations, exemples, correction) — jamais pour définir le programme.
+        // Les consignes Gemini utilisent la fiche de langue pour le nom de la langue étudiée.
+        // Avec le néerlandais, les textes envoyés restent strictement identiques.
+        function studyLangGeminiPrompt(prompt) {
+            const lang = studyLang();
+            const nominal = lang.nom;
+            const preserveCase = (value, reference) => {
+                if (reference === reference.toUpperCase()) return value.toUpperCase();
+                if (reference[0] === reference[0].toUpperCase()) return value.charAt(0).toUpperCase() + value.slice(1);
+                return value;
+            };
+            return String(prompt)
+                .replace(/néerlandais de Flandre/gi, match => preserveCase(lang.variante, match))
+                .replace(/néerlandaises?/gi, match => {
+                    const lower = match.toLowerCase();
+                    const feminine = lower.endsWith('e') || lower.endsWith('es');
+                    const plural = feminine && lower.endsWith('s');
+                    const word = nominal + (feminine ? 'e' : '') + (plural ? 's' : '');
+                    return preserveCase(word, match);
+                })
+                .replace(/nederlands/gi, match => preserveCase(lang.nomPropre, match));
+        }
+
         const GeminiService = (() => {
             // Sa propre clé d'abord ; sinon la clé partagée par l'admin aux bêta-testeurs
             // (BETA_KEY_STORAGE, copiée depuis Firestore config/gemini à la connexion).
@@ -5708,6 +5730,7 @@ if (firebaseAvailable) {
                 return !!getKey();
             }
             async function generate(prompt) {
+                prompt = studyLangGeminiPrompt(prompt);
                 const apiKey = getKey();
                 if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (Profil → 🤖 Intelligence IA).');
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
@@ -7821,7 +7844,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!('speechSynthesis' in window)) return;
             const findVoice = () => {
                 const voices = window.speechSynthesis.getVoices();
-                rpDutchVoice = voices.find(v => v.lang.toLowerCase().startsWith('nl')) || null;
+                rpDutchVoice = voices.find(v => v.lang.toLowerCase().startsWith(studyLang().voixPrefixe)) || null;
                 const warningDiv = document.getElementById('rp-voice-warning');
                 if (!warningDiv) return;
                 if (!rpDutchVoice) {
@@ -7843,7 +7866,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!window.SpeechRecognition) return; // le message d'erreur s'affichera au clic si besoin
 
             rpRecognition = new SpeechRecognition();
-            rpRecognition.lang = 'nl-NL';
+            rpRecognition.lang = studyLang().micLang;
             rpRecognition.continuous = true; // ne coupe pas à la première pause : on gère l'arrêt via le bouton
             rpRecognition.interimResults = true;
             rpRecognition.maxAlternatives = 1;
@@ -7862,7 +7885,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             let lastStartAt = 0;
             let quickEnds = 0;            // arrêts spontanés quasi immédiats à la suite (micro indisponible...)
             // Bascule en français (voir MIC_FR_CUE) : seulement quand la dictée est en néerlandais.
-            let frMode = false, baseLang = 'nl-NL', cueFrom = 0, switchT = null, backT = null, lastInterim = '', switching = false;
+            let frMode = false, baseLang = studyLang().micLang, cueFrom = 0, switchT = null, backT = null, lastInterim = '', switching = false;
             const rpSwitch = toFr => {
                 clearTimeout(switchT); clearTimeout(backT);
                 if (stopRequested || frMode === toFr) return;
@@ -7918,7 +7941,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 const all = (carriedTranscript + ' ' + rpFinalTranscript + interim).trim();
                 const statusEl = document.getElementById(activeVoiceStatusId);
                 if (statusEl) statusEl.innerText = (frMode ? "🇫🇷 " : "🎤 ") + (all || '...');
-                if (baseLang === 'nl-NL') {
+                if (baseLang === studyLang().micLang) {
                     clearTimeout(switchT); clearTimeout(backT);
                     if (!frMode && micFrCue(all.slice(cueFrom))) switchT = setTimeout(() => rpSwitch(true), MIC_FR_WAIT);
                     else if (frMode) backT = setTimeout(() => rpSwitch(false), MIC_FR_BACK);
@@ -7989,7 +8012,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             } else {
                 // La dictée suit la langue du scénario (une dictée en français de l'aide ou la
                 // Production orale ont pu la changer entre-temps).
-                rpRecognition.lang = (rpCurrentScenario && rpCurrentScenario.lang === 'en') ? 'en-US' : 'nl-NL';
+                rpRecognition.lang = (rpCurrentScenario && rpCurrentScenario.lang === 'en') ? 'en-US' : studyLang().micLang;
                 try {
                     rpFinalTranscript = '';
                     rpRecognition.start();
@@ -8019,7 +8042,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             activeVoiceBtnId = btnId;
             activeVoiceStatusId = statusId;
             voiceTranscriptCallback = onFinalTranscript;
-            rpRecognition.lang = lang || 'nl-NL';
+            rpRecognition.lang = lang || studyLang().micLang;
             try {
                 rpFinalTranscript = '';
                 rpRecognition.start();
@@ -8365,7 +8388,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             try {
                 // Règles de conversation naturelle pour TOUS les jeux de rôle, + deux réessais si
                 // Gemini est surchargé (comme GeminiService.generate).
-                const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '') }] } });
+                const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: studyLangGeminiPrompt(CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '')) }] } });
                 let data = null;
                 for (let attempt = 0; attempt < 3; attempt++) {
                     let status = 0;
@@ -8540,7 +8563,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             rpJobHideNav();
             rpJobHideDebrief();
             // La dictée suit la langue du scénario (anglais pour un scénario réel en anglais).
-            if (rpRecognition) rpRecognition.lang = scenario.lang === 'en' ? 'en-US' : 'nl-NL';
+            if (rpRecognition) rpRecognition.lang = scenario.lang === 'en' ? 'en-US' : studyLang().micLang;
             const choicesDiv = document.getElementById('rp-scripted-choices');
             if (choicesDiv) { choicesDiv.style.display = 'none'; choicesDiv.innerHTML = ''; }
             const banner = document.getElementById('rp-mode-banner');
@@ -11702,7 +11725,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 // Pas d'écoute pendant qu'une voix de l'app parle : sinon le micro l'enregistre.
                 if (ttsBusy()) { setTimeout(startSession, 300); return; }
                 const rec = new window.SpeechRecognition();
-                rec.lang = st.curLang === 'fr' ? 'fr-FR' : 'nl-NL';
+                rec.lang = st.curLang === 'fr' ? 'fr-FR' : studyLang().micLang;
                 rec.continuous = true;
                 rec.interimResults = true;
                 rec.onresult = e => {
