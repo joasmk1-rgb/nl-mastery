@@ -4490,7 +4490,13 @@ if (firebaseAvailable) {
                         <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭ Passer</button>
                         <button type="button" class="btn btn-gray" onclick="conjAudioStop(); ${setupCall};">⏹ Arrêter</button>
                     </div>
+                    <div class="wa-mark">
+                        <button type="button" class="btn btn-green" onclick="conjAudioMark(true)">✅ Je la connais</button>
+                        <button type="button" class="btn btn-red" onclick="conjAudioMark(false)">❌ À revoir</button>
+                    </div>
+                    <div id="wa-mark-fb" class="report-meta"></div>
                 </div>`;
+            run.known = new Set();
 
             let cycle = 0;
             do {
@@ -4515,6 +4521,9 @@ if (firebaseAvailable) {
                         if (run.stop) break;
                         run.skip = false;
                         const { form, sentence } = nlForm(t, p);
+                        const formKey = v.infinitief + '|' + t + '|' + p.key;
+                        if (run.known.has(formKey)) continue; // marquée « je la connais » pendant cette écoute
+                        run.curForm = { key: formKey, inf: v.infinitief, tense: t, pk: p.stat, label: sentence };
                         const frText = fr && fr[t] && fr[t][p.key] ? String(fr[t][p.key]) : '';
                         const header = `<div class="conj-audio-verb">${rpEscapeHtml(v.infinitief)} <span>— ${CONJ_TENSE_NAMES[t]} · ${p.plural ? 'pluriel' : 'singulier'}</span></div>`;
                         const card = (showNl, extra) => header +
@@ -4744,6 +4753,19 @@ if (firebaseAvailable) {
                         <button class="btn btn-gray" onclick="wordAudioRenderSetup()">⚙️ Changer les réglages</button>
                     </div>`;
             }
+        }
+
+        // Pendant l'écoute de la conjugaison : ✅ / ❌ sur la forme en cours. Connue = réussie (comptée
+        // comme une bonne réponse), plus relue dans cette écoute, passage à la suivante ; à revoir =
+        // ratée : posée en priorité dans les prochains entraînements.
+        function conjAudioMark(ok) {
+            const run = conjAudioRun, f = run && run.curForm;
+            if (!f) return;
+            conjRecordResult(f.inf, f.tense, f.pk, !!ok);
+            save();
+            const fb = document.getElementById('wa-mark-fb');
+            if (fb) fb.innerHTML = ok ? `✅ « ${rpEscapeHtml(f.label)} » : connue, je ne la relis plus.` : `❌ « ${rpEscapeHtml(f.label)} » : elle reviendra en priorité dans tes entraînements.`;
+            if (ok) { if (run.known) run.known.add(f.key); run.curForm = null; conjAudioSkip(); }
         }
 
         // Pendant l'écoute des mots : ✅ / ❌ sur le mot en cours (Joas, 28 octobre 2026), sans arrêter
@@ -4989,8 +5011,14 @@ if (firebaseAvailable) {
                         <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
                         <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭ Passer</button>
                         <button type="button" class="btn btn-gray" onclick="conjAudioStop(); conjHfExit && conjHfExit();">⏹ Arrêter</button>
+                    </div>${listenOnly ? `
+                    <div class="wa-mark">
+                        <button type="button" class="btn btn-green" onclick="conjAudioMark(true)">✅ Je la connais</button>
+                        <button type="button" class="btn btn-red" onclick="conjAudioMark(false)">❌ À revoir</button>
                     </div>
+                    <div id="wa-mark-fb" class="report-meta"></div>` : ''}
                 </div>`;
+            run.known = new Set();
             const show = (q, idx, status, reveal) => {
                 const el = document.getElementById('conj-hf-now');
                 if (!el) return;
@@ -5011,6 +5039,9 @@ if (firebaseAvailable) {
             };
             for (let idx = 0; idx < list.length && !run.stop; idx++) {
                 const q = list[idx];
+                const formKey = q.verb.infinitief + '|' + q.tense + '|' + q.pronomKey;
+                if (run.known.has(formKey)) continue;
+                run.curForm = { key: formKey, inf: q.verb.infinitief, tense: q.tense, pk: q.pronomKey, label: q.frq.fullAnswer };
                 run.skip = false;
                 const asked = dir === 'fr2nl' ? q.frq.fr : q.frq.fullAnswer;
                 const expected = dir === 'fr2nl' ? q.frq.fullAnswer : q.frq.fr;
