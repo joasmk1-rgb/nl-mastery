@@ -2757,6 +2757,11 @@ if (firebaseAvailable) {
                         <div class="hub-card-title">Conjugaison</div>
                         <div class="hub-card-desc">Les tables des verbes (les 25, 50, 100 plus courants ou tous) et l'entraînement, à l'écrit, à l'oral ou en écoute.</div>
                     </div>
+                    <div class="hub-card" style="grid-column:1 / -1;" onclick="vocabListenOpen()">
+                        <span class="hub-card-icon">🎧</span>
+                        <div class="hub-card-title">Écouter des mots</div>
+                        <div class="hub-card-desc">Noms, adjectifs, adverbes, expressions, un thème ou une de tes listes, en boucle avec un minuteur, ou 😴 pour t'endormir.</div>
+                    </div>
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startRevision()">
                         <span class="hub-card-icon">🔁</span>
                         <div class="hub-card-title">Mots à revoir</div>
@@ -4107,13 +4112,15 @@ if (firebaseAvailable) {
             save();
             if (typeof window[rerender] === 'function') window[rerender]();
         }
-        function audioTimerHtml(rerender) {
+        function audioTimerHtml(rerender, opts) {
             const s = audioTimerSettings();
+            const zero = (opts && opts.zero) || 'Une fois la liste';
+            const sleepOk = !(opts && opts.noSleep);
             const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
             return `<div class="conj-audio-label">Durée</div>
-                <div class="conj-audio-chips">${AUDIO_DURATIONS.map(m => chip(s.minutes === m, `audioTimerSet('minutes', ${m}, '${rerender}')`, m ? m + ' min' : 'Une fois la liste')).join('')}</div>
-                <div class="conj-audio-chips">${chip(s.sleep, `audioTimerSet('sleep', 0, '${rerender}')`, "😴 Pour m'endormir")}</div>
-                ${s.sleep ? '<p class="conj-audio-hint">Écoute seule, voix plus lente, le volume baisse doucement à la fin, puis tout s\'arrête et l\'écran peut s\'éteindre. Baisse la luminosité ; ne verrouille pas l\'écran pendant la lecture, sinon le téléphone coupe la voix.</p>' : (s.minutes ? '<p class="conj-audio-hint">La liste recommence jusqu\'à la fin du minuteur.</p>' : '')}`;
+                <div class="conj-audio-chips">${AUDIO_DURATIONS.map(m => chip(s.minutes === m, `audioTimerSet('minutes', ${m}, '${rerender}')`, m ? m + ' min' : zero)).join('')}</div>
+                ${sleepOk ? `<div class="conj-audio-chips">${chip(s.sleep, `audioTimerSet('sleep', 0, '${rerender}')`, "😴 Pour m'endormir")}</div>` : ''}
+                ${s.sleep && sleepOk ? '<p class="conj-audio-hint">Écoute seule, voix plus lente, le volume baisse doucement à la fin, puis tout s\'arrête et l\'écran peut s\'éteindre. Baisse la luminosité ; ne verrouille pas l\'écran pendant la lecture, sinon le téléphone coupe la voix.</p>' : (s.minutes ? '<p class="conj-audio-hint">La liste recommence jusqu\'à la fin du minuteur.</p>' : '')}`;
         }
         function audioTimerStart(run) {
             const s = audioTimerSettings();
@@ -4932,7 +4939,7 @@ if (firebaseAvailable) {
         // réponse dans l'autre langue, dit la bonne réponse et enchaîne seule. Un 2e essai après la
         // correction (non compté). Seul le sens fr2nl (produire la forme néerlandaise) alimente
         // state.conjStats, comme l'entraînement écrit. Moteur audio commun (Pause/Passer/Arrêter).
-        async function conjHandsfreeRun(questions, dir, boxId, viewId, onExit, listenOnly) {
+        async function conjHandsfreeRun(questions, dir, boxId, viewId, onExit, listenOnly, timed) {
             if (!listenOnly && !window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible dans ce navigateur (utilise Chrome)."); return; }
             questions.forEach(q => { if (!q.frq) q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer, true); });
             const list = questions.filter(q => q.frq);
@@ -4940,12 +4947,13 @@ if (firebaseAvailable) {
             conjAudioStop();
             const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId };
             conjAudioRun = run;
+            if (timed) { audioTimerStart(run); if (!listenOnly) run.sleep = false; }
             try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
             const box = document.getElementById(boxId);
             conjHfExit = onExit;
             box.innerHTML = `
                 <div class="conj-card conj-audio">
-                    <div class="conj-audio-title">${listenOnly ? '👂 Écoute seule' : '🗣️ Mains libres'} · ${dir === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷'}</div>
+                    <div class="conj-audio-title">${listenOnly ? '👂 Écoute seule' : '🗣️ Mains libres'} · ${dir === 'fr2nl' ? '🇫🇷 → 🇳🇱' : '🇳🇱 → 🇫🇷'} <span id="audio-timer" class="audio-timer"></span></div>
                     <div id="conj-hf-now" class="conj-audio-now"></div>
                     <div class="conj-audio-controls">
                         <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
@@ -5015,7 +5023,7 @@ if (firebaseAvailable) {
                 conjAudioRun = null;
                 box.innerHTML = `
                     <div class="conj-card conj-audio">
-                        <div class="conj-audio-title">${listenOnly ? '👂 Terminé : ' + done + ' formes écoutées' : '🗣️ Terminé : ' + ok + '/' + done + ' du premier coup'}</div>
+                        <div class="conj-audio-title">${run.sleep && run.timeUp ? '😴 Bonne nuit ! ' : run.timeUp ? '⏱ Temps écoulé · ' : ''}${listenOnly ? '👂 ' + done + ' formes écoutées' : '🗣️ ' + ok + '/' + done + ' du premier coup'}</div>
                         ${listenOnly ? '' : missed.length ? `<div class="section-title">📌 À revoir</div>${missed.map(m => `
                             <div class="conj-tense-row" style="border-bottom:1px solid var(--border); padding:6px 0;">
                                 <span class="conj-grid-pronom" style="flex:1 1 45%;">${rpEscapeHtml(m.frq.fr)}</span>
@@ -5344,7 +5352,8 @@ if (firebaseAvailable) {
                     <div style="font-size:0.8rem; color:var(--text-secondary); margin:6px 0 12px;">
                         ${verbCount} verbe(s) · ${cells.length} formes · ${seenCount} déjà travaillée(s)${dueCount ? ` · <b style="color:var(--wrong);">${dueCount} à revoir, posée(s) en priorité</b>` : ''}
                     </div>
-                    <button class="btn btn-green" onclick="conjTrainingLaunch()">▶️ Lancer (${Math.min(CONJ_TRAINING_SESSION_SIZE, cells.length)} questions)</button>
+                    ${audioTimerHtml('renderConjTrainingSetup', { zero: CONJ_TRAINING_SESSION_SIZE + ' questions', noSleep: !(cfg.handsfree && cfg.hfListen) })}
+                    <button class="btn btn-green" onclick="conjTrainingLaunch()">▶️ Lancer (${audioTimerSettings().minutes ? audioTimerSettings().minutes + ' min' : Math.min(CONJ_TRAINING_SESSION_SIZE, cells.length) + ' questions'})</button>
                 </div>`;
         }
 
@@ -5357,15 +5366,18 @@ if (firebaseAvailable) {
         }
         function conjTrainingSetHfDir(dir) { conjTrainingConfig().hfDir = dir; save(); renderConjTrainingSetup(); }
 
+        // Avec une durée (minuteur commun) : des questions tant qu'il reste du temps.
         function conjTrainingLaunch() {
-            const questions = pickConjTrainingQuestions(conjTrainingConfig());
+            const minutes = audioTimerSettings().minutes;
+            let questions = pickConjTrainingQuestions(conjTrainingConfig());
             if (!questions.length) return;
+            if (minutes && conjTrainingConfig().handsfree) for (let k = 0; k < 6; k++) questions = questions.concat(pickConjTrainingQuestions(conjTrainingConfig()));
             if (conjTrainingConfig().handsfree) {
-                conjHandsfreeRun(questions, conjTrainingConfig().hfDir === 'nl2fr' ? 'nl2fr' : 'fr2nl', 'conj-training-content', 'conj-training-view', () => renderConjTrainingSetup(), !!conjTrainingConfig().hfListen);
+                conjHandsfreeRun(questions, conjTrainingConfig().hfDir === 'nl2fr' ? 'nl2fr' : 'fr2nl', 'conj-training-content', 'conj-training-view', () => renderConjTrainingSetup(), !!conjTrainingConfig().hfListen, !!minutes);
                 return;
             }
             questions.forEach(q => { q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer); });
-            conjTrainingState = { questions, index: 0, score: 0, missed: [] };
+            conjTrainingState = { questions, index: 0, score: 0, missed: [], deadline: minutes ? Date.now() + minutes * 60000 : 0 };
             renderConjTrainingQuestion();
         }
 
@@ -5373,14 +5385,21 @@ if (firebaseAvailable) {
             const content = document.getElementById('conj-training-content');
             const st = conjTrainingState;
             if (!content || !st) return;
+            if (st.deadline && Date.now() >= st.deadline) { renderConjTrainingSummary(); return; }
+            if (st.index >= st.questions.length && st.deadline) {
+                const more = pickConjTrainingQuestions(conjTrainingConfig());
+                more.forEach(q => { q.frq = conjFrQuestion(q.verb, q.tense, q.pronomKey, q.answer); });
+                st.questions = st.questions.concat(more);
+            }
             if (st.index >= st.questions.length) {
                 renderConjTrainingSummary();
                 return;
             }
             const q = st.questions[st.index];
+            const left = st.deadline ? Math.max(0, st.deadline - Date.now()) : 0;
             content.innerHTML = `
                 <div class="conj-card">
-                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">Question ${st.index + 1}/${st.questions.length} · Score : ${st.score}${conjIsWeak(q.stat) ? ' · <span style="color:var(--wrong);">à revoir</span>' : ''}</div>
+                    <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">${st.deadline ? `⏱ ${Math.floor(left / 60000)}:${String(Math.floor(left / 1000) % 60).padStart(2, '0')} · question ${st.index + 1}` : `Question ${st.index + 1}/${st.questions.length}`} · Score : ${st.score}${conjIsWeak(q.stat) ? ' · <span style="color:var(--wrong);">à revoir</span>' : ''}</div>
                     ${q.frq ? `
                     <div class="conj-question-fr">${rpEscapeHtml(q.frq.fr)}</div>
                     <div class="conj-question-hint">${q.verb.infinitief} · ${CONJ_TENSE_NAMES[q.tense]}</div>` : `
@@ -5444,7 +5463,7 @@ if (firebaseAvailable) {
                     </div>`).join('')}` : `<p style="color:var(--success); margin-top:var(--space-4);">Aucune erreur, bien joué ! 🎉</p>`;
             content.innerHTML = `
                 <div class="conj-card">
-                    <div class="conj-verb-title">Résultat : ${st.score}/${st.questions.length}</div>
+                    <div class="conj-verb-title">${st.deadline ? '⏱ Temps écoulé · ' : ''}Résultat : ${st.score}/${st.deadline ? st.index : st.questions.length}</div>
                     ${missedHtml}
                     <button class="btn btn-green" style="margin-top:14px;" onclick="conjTrainingLaunch()">🔁 Nouvelle session</button>
                     <button class="btn btn-gray" style="margin-top:8px;" onclick="startConjTrainingSession()">⚙️ Changer les réglages</button>
@@ -5999,6 +6018,42 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${kind === 'file' ? `<div class="hub-card" onclick="showWordList('vocab', '${key}')"><span class="hub-card-icon">📋</span><div class="hub-card-title">Voir la liste</div><div class="hub-card-desc">Chercher, filtrer, sélectionner des mots pour en faire une liste.</div></div>` : ''}
                 </div>`;
         }
+        // Vocabulaire → S'entraîner → 🎧 Écouter des mots : choix de la catégorie, puis le lecteur de
+        // mots habituel (wordAudioRenderSetup : mode, ordre, vitesse, nombre, durée, 😴).
+        const VOCAB_LISTEN_FILES = ['NOMS_NL', 'ADJECTIFS_NL', 'ADVERBES_NL', 'VERBES_NL', 'EXPRESSIONS_NL', 'MOTS_OUTILS_NL', 'LOCUTIONS_NL'];
+        function vocabListenOpen() {
+            const box = document.getElementById('vocab-listen-box');
+            if (!box) return;
+            if (box.innerHTML && !conjAudioRun) { box.innerHTML = ''; return; }
+            conjAudioStop();
+            const src = (state.settings && state.settings.vocabListenSrc) || { kind: 'file', key: 'NOMS_NL' };
+            vocabListenPick(src.kind, src.key);
+            box.scrollIntoView({ block: 'nearest' });
+        }
+        function vocabListenPick(kind, key) {
+            const box = document.getElementById('vocab-listen-box');
+            if (!box) return;
+            if (!state.settings) state.settings = {};
+            state.settings.vocabListenSrc = { kind, key };
+            save();
+            conjAudioStop();
+            const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            const on = (k, x) => kind === k && key === x;
+            const themes = (vocabThemes || []).filter(t => !metierHiddenFile(t.file));
+            const lists = Object.keys(state.customLists || {}).filter(n => state.customLists[n].length);
+            box.innerHTML = `<div class="conj-card conj-audio">
+                    <div class="conj-audio-title">🎧 Écouter des mots</div>
+                    <div class="conj-audio-label">Quels mots ?</div>
+                    <div class="conj-audio-chips">${VOCAB_LISTEN_FILES.filter(f => fullDb.some(i => i.file === f)).map(f => chip(on('file', f), `vocabListenPick('file', '${f}')`, rpEscapeHtml(categoryLabel(f)))).join('')}</div>
+                    ${themes.length ? `<div class="conj-audio-chips">${themes.map(t => chip(on('file', t.file), `vocabListenPick('file', '${t.file}')`, rpEscapeHtml(categoryLabel(t.file)))).join('')}</div>` : ''}
+                    ${lists.length ? `<div class="conj-audio-chips">${lists.map(n => chip(on('list', n), `vocabListenPick('list', decodeURIComponent('${encodeURIComponent(n).replace(/'/g, '%27')}'))`, '📋 ' + rpEscapeHtml(n))).join('')}</div>` : ''}
+                </div>
+                <div id="vocab-listen-audio"></div>`;
+            const label = kind === 'list' ? key : categoryLabel(key);
+            wordAudioCtx = { boxId: 'vocab-listen-audio', viewId: 'vocab-view', items: vocabItems(kind, key), label: `les mots « ${label} », du plus courant au plus rare` };
+            wordAudioRenderSetup();
+        }
+
         function vocabTrain() {
             if (!vocabCurrent) return;
             const { kind, key } = vocabCurrent;
