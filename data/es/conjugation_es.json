@@ -1,0 +1,5102 @@
+[
+  {
+    "infinitief": "ser",
+    "fr": "être",
+    "present": {
+      "ik": "soy",
+      "jij": "eres",
+      "hij": "es",
+      "wij": "somos",
+      "jullie": "sois",
+      "zij": "son"
+    },
+    "pastSimple": {
+      "ik": "fui",
+      "jij": "fuiste",
+      "hij": "fue",
+      "wij": "fuimos",
+      "jullie": "fuisteis",
+      "zij": "fueron"
+    },
+    "futureForms": {
+      "ik": "seré",
+      "jij": "serás",
+      "hij": "será",
+      "wij": "seremos",
+      "jullie": "seréis",
+      "zij": "serán"
+    },
+    "participePasse": "sido",
+    "auxiliaire": "haber",
+    "freq": 21718.9511,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "estar",
+    "fr": "être",
+    "present": {
+      "ik": "estoy",
+      "jij": "estás",
+      "hij": "está",
+      "wij": "estamos",
+      "jullie": "estáis",
+      "zij": "están"
+    },
+    "pastSimple": {
+      "ik": "estuve",
+      "jij": "estuviste",
+      "hij": "estuvo",
+      "wij": "estuvimos",
+      "jullie": "estuvisteis",
+      "zij": "estuvieron"
+    },
+    "futureForms": {
+      "ik": "estaré",
+      "jij": "estarás",
+      "hij": "estará",
+      "wij": "estaremos",
+      "jullie": "estaréis",
+      "zij": "estarán"
+    },
+    "participePasse": "estado",
+    "auxiliaire": "haber",
+    "freq": 1084.5401,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "hacer",
+    "fr": "faire",
+    "present": {
+      "ik": "hago",
+      "jij": "haces",
+      "hij": "hace",
+      "wij": "hacemos",
+      "jullie": "hacéis",
+      "zij": "hacen"
+    },
+    "pastSimple": {
+      "ik": "hice",
+      "jij": "hiciste",
+      "hij": "hizo",
+      "wij": "hicimos",
+      "jullie": "hicisteis",
+      "zij": "hicieron"
+    },
+    "futureForms": {
+      "ik": "haré",
+      "jij": "harás",
+      "hij": "hará",
+      "wij": "haremos",
+      "jullie": "haréis",
+      "zij": "harán"
+    },
+    "participePasse": "hecho",
+    "auxiliaire": "haber",
+    "freq": 4886.6043,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "ir",
+    "fr": "aller",
+    "present": {
+      "ik": "voy",
+      "jij": "vas",
+      "hij": "va",
+      "wij": "vamos",
+      "jullie": "vais",
+      "zij": "van"
+    },
+    "pastSimple": {
+      "ik": "fui",
+      "jij": "fuiste",
+      "hij": "fue",
+      "wij": "fuimos",
+      "jullie": "fuisteis",
+      "zij": "fueron"
+    },
+    "futureForms": {
+      "ik": "iré",
+      "jij": "irás",
+      "hij": "irá",
+      "wij": "iremos",
+      "jullie": "iréis",
+      "zij": "irán"
+    },
+    "participePasse": "ido",
+    "auxiliaire": "haber",
+    "freq": 4617.3129,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "poder",
+    "fr": "pouvoir",
+    "present": {
+      "ik": "puedo",
+      "jij": "podés",
+      "hij": "puede",
+      "wij": "podemos",
+      "jullie": "podéis",
+      "zij": "pueden"
+    },
+    "pastSimple": {
+      "ik": "pude",
+      "jij": "pudiste",
+      "hij": "pudo",
+      "wij": "pudimos",
+      "jullie": "pudisteis",
+      "zij": "pudieron"
+    },
+    "futureForms": {
+      "ik": "podré",
+      "jij": "podrás",
+      "hij": "podrá",
+      "wij": "podremos",
+      "jullie": "podréis",
+      "zij": "podrán"
+    },
+    "participePasse": "podido",
+    "auxiliaire": "haber",
+    "freq": 4078.5652,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "decir",
+    "fr": "dire",
+    "present": {
+      "ik": "digo",
+      "jij": "decís",
+      "hij": "dice",
+      "wij": "decimos",
+      "jullie": "decís",
+      "zij": "dicen"
+    },
+    "pastSimple": {
+      "ik": "dije",
+      "jij": "dijiste",
+      "hij": "dijo",
+      "wij": "dijimos",
+      "jullie": "dijisteis",
+      "zij": "dijeron"
+    },
+    "futureForms": {
+      "ik": "diré",
+      "jij": "dirás",
+      "hij": "dirá",
+      "wij": "diremos",
+      "jullie": "diréis",
+      "zij": "dirán"
+    },
+    "participePasse": "dicho",
+    "auxiliaire": "haber",
+    "freq": 3720.2046,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "dar",
+    "fr": "donner",
+    "present": {
+      "ik": "doy",
+      "jij": "das",
+      "hij": "da",
+      "wij": "damos",
+      "jullie": "dais",
+      "zij": "dan"
+    },
+    "pastSimple": {
+      "ik": "di",
+      "jij": "diste",
+      "hij": "dio",
+      "wij": "dimos",
+      "jullie": "disteis",
+      "zij": "dieron"
+    },
+    "futureForms": {
+      "ik": "daré",
+      "jij": "darás",
+      "hij": "dará",
+      "wij": "daremos",
+      "jullie": "daréis",
+      "zij": "darán"
+    },
+    "participePasse": "dado",
+    "auxiliaire": "haber",
+    "freq": 1777.0714,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "ver",
+    "fr": "voir",
+    "present": {
+      "ik": "veo",
+      "jij": "ves",
+      "hij": "ve",
+      "wij": "vemos",
+      "jullie": "veis",
+      "zij": "ven"
+    },
+    "pastSimple": {
+      "ik": "vi",
+      "jij": "viste",
+      "hij": "vio",
+      "wij": "vimos",
+      "jullie": "visteis",
+      "zij": "vieron"
+    },
+    "futureForms": {
+      "ik": "veré",
+      "jij": "verás",
+      "hij": "verá",
+      "wij": "veremos",
+      "jullie": "veréis",
+      "zij": "verán"
+    },
+    "participePasse": "visto",
+    "auxiliaire": "haber",
+    "freq": 2541.2926,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "saber",
+    "fr": "savoir",
+    "present": {
+      "ik": "sé",
+      "jij": "sabes",
+      "hij": "sabe",
+      "wij": "sabemos",
+      "jullie": "sabéis",
+      "zij": "saben"
+    },
+    "pastSimple": {
+      "ik": "supe",
+      "jij": "supiste",
+      "hij": "supo",
+      "wij": "supimos",
+      "jullie": "supisteis",
+      "zij": "supieron"
+    },
+    "futureForms": {
+      "ik": "sabré",
+      "jij": "sabrás",
+      "hij": "sabrá",
+      "wij": "sabremos",
+      "jullie": "sabréis",
+      "zij": "sabrán"
+    },
+    "participePasse": "sabido",
+    "auxiliaire": "haber",
+    "freq": 2369.2211,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "hablar",
+    "fr": "parler",
+    "present": {
+      "ik": "hablo",
+      "jij": "hablas",
+      "hij": "habla",
+      "wij": "hablamos",
+      "jullie": "habláis",
+      "zij": "hablan"
+    },
+    "pastSimple": {
+      "ik": "hablé",
+      "jij": "hablaste",
+      "hij": "habló",
+      "wij": "hablamos",
+      "jullie": "hablasteis",
+      "zij": "hablaron"
+    },
+    "futureForms": {
+      "ik": "hablaré",
+      "jij": "hablarás",
+      "hij": "hablará",
+      "wij": "hablaremos",
+      "jullie": "hablaréis",
+      "zij": "hablarán"
+    },
+    "participePasse": "hablado",
+    "auxiliaire": "haber",
+    "freq": 1681.6023,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "pasar",
+    "fr": "passer (temps/lieu)",
+    "present": {
+      "ik": "paso",
+      "jij": "pasas",
+      "hij": "pasa",
+      "wij": "pasamos",
+      "jullie": "pasáis",
+      "zij": "pasan"
+    },
+    "pastSimple": {
+      "ik": "pasé",
+      "jij": "pasaste",
+      "hij": "pasó",
+      "wij": "pasamos",
+      "jullie": "pasasteis",
+      "zij": "pasaron"
+    },
+    "futureForms": {
+      "ik": "pasaré",
+      "jij": "pasarás",
+      "hij": "pasará",
+      "wij": "pasaremos",
+      "jullie": "pasaréis",
+      "zij": "pasarán"
+    },
+    "participePasse": "pasado",
+    "auxiliaire": "haber",
+    "freq": 1662.2592,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "llamar",
+    "fr": "appeler",
+    "present": {
+      "ik": "llamo",
+      "jij": "llamas",
+      "hij": "llama",
+      "wij": "llamamos",
+      "jullie": "llamáis",
+      "zij": "llaman"
+    },
+    "pastSimple": {
+      "ik": "llamé",
+      "jij": "llamaste",
+      "hij": "llamó",
+      "wij": "llamamos",
+      "jullie": "llamasteis",
+      "zij": "llamaron"
+    },
+    "futureForms": {
+      "ik": "llamaré",
+      "jij": "llamarás",
+      "hij": "llamará",
+      "wij": "llamaremos",
+      "jullie": "llamaréis",
+      "zij": "llamarán"
+    },
+    "participePasse": "llamado",
+    "auxiliaire": "haber",
+    "freq": 1583.6058,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "vivir",
+    "fr": "habiter",
+    "present": {
+      "ik": "vivo",
+      "jij": "vives",
+      "hij": "vive",
+      "wij": "vivimos",
+      "jullie": "vivís",
+      "zij": "viven"
+    },
+    "pastSimple": {
+      "ik": "viví",
+      "jij": "viviste",
+      "hij": "vivió",
+      "wij": "vivimos",
+      "jullie": "vivisteis",
+      "zij": "vivieron"
+    },
+    "futureForms": {
+      "ik": "viviré",
+      "jij": "vivirás",
+      "hij": "vivirá",
+      "wij": "viviremos",
+      "jullie": "viviréis",
+      "zij": "vivirán"
+    },
+    "participePasse": "vivido",
+    "auxiliaire": "haber",
+    "freq": 1405.767,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "gustar",
+    "fr": "plaire",
+    "present": {
+      "ik": "gusto",
+      "jij": "gustas",
+      "hij": "gusta",
+      "wij": "gustamos",
+      "jullie": "gustáis",
+      "zij": "gustan"
+    },
+    "pastSimple": {
+      "ik": "gusté",
+      "jij": "gustaste",
+      "hij": "gustó",
+      "wij": "gustamos",
+      "jullie": "gustasteis",
+      "zij": "gustaron"
+    },
+    "futureForms": {
+      "ik": "gustaré",
+      "jij": "gustarás",
+      "hij": "gustará",
+      "wij": "gustaremos",
+      "jullie": "gustaréis",
+      "zij": "gustarán"
+    },
+    "participePasse": "gustado",
+    "auxiliaire": "haber",
+    "freq": 1359.9793,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "llegar",
+    "fr": "arriver",
+    "present": {
+      "ik": "llego",
+      "jij": "llegas",
+      "hij": "llega",
+      "wij": "llegamos",
+      "jullie": "llegáis",
+      "zij": "llegan"
+    },
+    "pastSimple": {
+      "ik": "llegué",
+      "jij": "llegaste",
+      "hij": "llegó",
+      "wij": "llegamos",
+      "jullie": "llegasteis",
+      "zij": "llegaron"
+    },
+    "futureForms": {
+      "ik": "llegaré",
+      "jij": "llegarás",
+      "hij": "llegará",
+      "wij": "llegaremos",
+      "jullie": "llegaréis",
+      "zij": "llegarán"
+    },
+    "participePasse": "llegado",
+    "auxiliaire": "haber",
+    "freq": 1298.0418,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "conocer",
+    "fr": "connaître",
+    "present": {
+      "ik": "conozco",
+      "jij": "conoces",
+      "hij": "conoce",
+      "wij": "conocemos",
+      "jullie": "conocéis",
+      "zij": "conocen"
+    },
+    "pastSimple": {
+      "ik": "conocí",
+      "jij": "conociste",
+      "hij": "conoció",
+      "wij": "conocimos",
+      "jullie": "conocisteis",
+      "zij": "conocieron"
+    },
+    "futureForms": {
+      "ik": "conoceré",
+      "jij": "conocerás",
+      "hij": "conocerá",
+      "wij": "conoceremos",
+      "jullie": "conoceréis",
+      "zij": "conocerán"
+    },
+    "participePasse": "conocido",
+    "auxiliaire": "haber",
+    "freq": 1292.5616,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "llevar",
+    "fr": "porter",
+    "present": {
+      "ik": "llevo",
+      "jij": "llevas",
+      "hij": "lleva",
+      "wij": "llevamos",
+      "jullie": "lleváis",
+      "zij": "llevan"
+    },
+    "pastSimple": {
+      "ik": "llevé",
+      "jij": "llevaste",
+      "hij": "llevó",
+      "wij": "llevamos",
+      "jullie": "llevasteis",
+      "zij": "llevaron"
+    },
+    "futureForms": {
+      "ik": "llevaré",
+      "jij": "llevarás",
+      "hij": "llevará",
+      "wij": "llevaremos",
+      "jullie": "llevaréis",
+      "zij": "llevarán"
+    },
+    "participePasse": "llevado",
+    "auxiliaire": "haber",
+    "freq": 1239.7802,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "parecer",
+    "fr": "paraître",
+    "present": {
+      "ik": "parezco",
+      "jij": "pareces",
+      "hij": "parece",
+      "wij": "parecemos",
+      "jullie": "parecéis",
+      "zij": "parecen"
+    },
+    "pastSimple": {
+      "ik": "parecí",
+      "jij": "pareciste",
+      "hij": "pareció",
+      "wij": "parecimos",
+      "jullie": "parecisteis",
+      "zij": "parecieron"
+    },
+    "futureForms": {
+      "ik": "pareceré",
+      "jij": "parecerás",
+      "hij": "parecerá",
+      "wij": "pareceremos",
+      "jullie": "pareceréis",
+      "zij": "parecerán"
+    },
+    "participePasse": "parecido",
+    "auxiliaire": "haber",
+    "freq": 1203.4291,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "pensar",
+    "fr": "penser",
+    "present": {
+      "ik": "pienso",
+      "jij": "pensás",
+      "hij": "piensa",
+      "wij": "pensamos",
+      "jullie": "pensáis",
+      "zij": "piensan"
+    },
+    "pastSimple": {
+      "ik": "pensé",
+      "jij": "pensaste",
+      "hij": "pensó",
+      "wij": "pensamos",
+      "jullie": "pensasteis",
+      "zij": "pensaron"
+    },
+    "futureForms": {
+      "ik": "pensaré",
+      "jij": "pensarás",
+      "hij": "pensará",
+      "wij": "pensaremos",
+      "jullie": "pensaréis",
+      "zij": "pensarán"
+    },
+    "participePasse": "pensado",
+    "auxiliaire": "haber",
+    "freq": 1167.9568,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "encontrar",
+    "fr": "trouver",
+    "present": {
+      "ik": "encuentro",
+      "jij": "encontrás",
+      "hij": "encuentra",
+      "wij": "encontramos",
+      "jullie": "encontráis",
+      "zij": "encuentran"
+    },
+    "pastSimple": {
+      "ik": "encontré",
+      "jij": "encontraste",
+      "hij": "encontró",
+      "wij": "encontramos",
+      "jullie": "encontrasteis",
+      "zij": "encontraron"
+    },
+    "futureForms": {
+      "ik": "encontraré",
+      "jij": "encontrarás",
+      "hij": "encontrará",
+      "wij": "encontraremos",
+      "jullie": "encontraréis",
+      "zij": "encontrarán"
+    },
+    "participePasse": "encontrado",
+    "auxiliaire": "haber",
+    "freq": 1055.0527,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "empezar",
+    "fr": "commencer",
+    "present": {
+      "ik": "empiezo",
+      "jij": "empezás",
+      "hij": "empieza",
+      "wij": "empezamos",
+      "jullie": "empezáis",
+      "zij": "empiezan"
+    },
+    "pastSimple": {
+      "ik": "empecé",
+      "jij": "empezaste",
+      "hij": "empezó",
+      "wij": "empezamos",
+      "jullie": "empezasteis",
+      "zij": "empezaron"
+    },
+    "futureForms": {
+      "ik": "empezaré",
+      "jij": "empezarás",
+      "hij": "empezará",
+      "wij": "empezaremos",
+      "jullie": "empezaréis",
+      "zij": "empezarán"
+    },
+    "participePasse": "empezado",
+    "auxiliaire": "haber",
+    "freq": 1000.1671,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "salir",
+    "fr": "partir",
+    "present": {
+      "ik": "salgo",
+      "jij": "sales",
+      "hij": "sale",
+      "wij": "salimos",
+      "jullie": "salís",
+      "zij": "salen"
+    },
+    "pastSimple": {
+      "ik": "salí",
+      "jij": "saliste",
+      "hij": "salió",
+      "wij": "salimos",
+      "jullie": "salisteis",
+      "zij": "salieron"
+    },
+    "futureForms": {
+      "ik": "saldré",
+      "jij": "saldrás",
+      "hij": "saldrá",
+      "wij": "saldremos",
+      "jullie": "saldréis",
+      "zij": "saldrán"
+    },
+    "participePasse": "salido",
+    "auxiliaire": "haber",
+    "freq": 978.3401,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "creer",
+    "fr": "croire",
+    "present": {
+      "ik": "creo",
+      "jij": "crees",
+      "hij": "cree",
+      "wij": "creemos",
+      "jullie": "creéis",
+      "zij": "creen"
+    },
+    "pastSimple": {
+      "ik": "creí",
+      "jij": "creíste",
+      "hij": "creyó",
+      "wij": "creímos",
+      "jullie": "creísteis",
+      "zij": "creyeron"
+    },
+    "futureForms": {
+      "ik": "creeré",
+      "jij": "creerás",
+      "hij": "creerá",
+      "wij": "creeremos",
+      "jullie": "creeréis",
+      "zij": "creerán"
+    },
+    "participePasse": "creído",
+    "auxiliaire": "haber",
+    "freq": 963.9461,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "trabajar",
+    "fr": "travailler",
+    "present": {
+      "ik": "trabajo",
+      "jij": "trabajas",
+      "hij": "trabaja",
+      "wij": "trabajamos",
+      "jullie": "trabajáis",
+      "zij": "trabajan"
+    },
+    "pastSimple": {
+      "ik": "trabajé",
+      "jij": "trabajaste",
+      "hij": "trabajó",
+      "wij": "trabajamos",
+      "jullie": "trabajasteis",
+      "zij": "trabajaron"
+    },
+    "futureForms": {
+      "ik": "trabajaré",
+      "jij": "trabajarás",
+      "hij": "trabajará",
+      "wij": "trabajaremos",
+      "jullie": "trabajaréis",
+      "zij": "trabajarán"
+    },
+    "participePasse": "trabajado",
+    "auxiliaire": "haber",
+    "freq": 934.331,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "dejar",
+    "fr": "déposer / passer (un examen)",
+    "present": {
+      "ik": "dejo",
+      "jij": "dejas",
+      "hij": "deja",
+      "wij": "dejamos",
+      "jullie": "dejáis",
+      "zij": "dejan"
+    },
+    "pastSimple": {
+      "ik": "dejé",
+      "jij": "dejaste",
+      "hij": "dejó",
+      "wij": "dejamos",
+      "jullie": "dejasteis",
+      "zij": "dejaron"
+    },
+    "futureForms": {
+      "ik": "dejaré",
+      "jij": "dejarás",
+      "hij": "dejará",
+      "wij": "dejaremos",
+      "jullie": "dejaréis",
+      "zij": "dejarán"
+    },
+    "participePasse": "dejado",
+    "auxiliaire": "haber",
+    "freq": 884.4894,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "mirar",
+    "fr": "regarder",
+    "present": {
+      "ik": "miro",
+      "jij": "miras",
+      "hij": "mira",
+      "wij": "miramos",
+      "jullie": "miráis",
+      "zij": "miran"
+    },
+    "pastSimple": {
+      "ik": "miré",
+      "jij": "miraste",
+      "hij": "miró",
+      "wij": "miramos",
+      "jullie": "mirasteis",
+      "zij": "miraron"
+    },
+    "futureForms": {
+      "ik": "miraré",
+      "jij": "mirarás",
+      "hij": "mirará",
+      "wij": "miraremos",
+      "jullie": "miraréis",
+      "zij": "mirarán"
+    },
+    "participePasse": "mirado",
+    "auxiliaire": "haber",
+    "freq": 883.3983,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "comer",
+    "fr": "manger",
+    "present": {
+      "ik": "como",
+      "jij": "comes",
+      "hij": "come",
+      "wij": "comemos",
+      "jullie": "coméis",
+      "zij": "comen"
+    },
+    "pastSimple": {
+      "ik": "comí",
+      "jij": "comiste",
+      "hij": "comió",
+      "wij": "comimos",
+      "jullie": "comisteis",
+      "zij": "comieron"
+    },
+    "futureForms": {
+      "ik": "comeré",
+      "jij": "comerás",
+      "hij": "comerá",
+      "wij": "comeremos",
+      "jullie": "comeréis",
+      "zij": "comerán"
+    },
+    "participePasse": "comido",
+    "auxiliaire": "haber",
+    "freq": 873.4565,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "tomar",
+    "fr": "prendre",
+    "present": {
+      "ik": "tomo",
+      "jij": "tomas",
+      "hij": "toma",
+      "wij": "tomamos",
+      "jullie": "tomáis",
+      "zij": "toman"
+    },
+    "pastSimple": {
+      "ik": "tomé",
+      "jij": "tomaste",
+      "hij": "tomó",
+      "wij": "tomamos",
+      "jullie": "tomasteis",
+      "zij": "tomaron"
+    },
+    "futureForms": {
+      "ik": "tomaré",
+      "jij": "tomarás",
+      "hij": "tomará",
+      "wij": "tomaremos",
+      "jullie": "tomaréis",
+      "zij": "tomarán"
+    },
+    "participePasse": "tomado",
+    "auxiliaire": "haber",
+    "freq": 822.4696,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "volver",
+    "fr": "retourner / revenir",
+    "present": {
+      "ik": "vuelvo",
+      "jij": "volvés",
+      "hij": "vuelve",
+      "wij": "volvemos",
+      "jullie": "volvéis",
+      "zij": "vuelven"
+    },
+    "pastSimple": {
+      "ik": "volví",
+      "jij": "volviste",
+      "hij": "volvió",
+      "wij": "volvimos",
+      "jullie": "volvisteis",
+      "zij": "volvieron"
+    },
+    "futureForms": {
+      "ik": "volveré",
+      "jij": "volverás",
+      "hij": "volverá",
+      "wij": "volveremos",
+      "jullie": "volveréis",
+      "zij": "volverán"
+    },
+    "participePasse": "vuelto",
+    "auxiliaire": "haber",
+    "freq": 781.9134,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "quedar",
+    "fr": "rester",
+    "present": {
+      "ik": "quedo",
+      "jij": "quedas",
+      "hij": "queda",
+      "wij": "quedamos",
+      "jullie": "quedáis",
+      "zij": "quedan"
+    },
+    "pastSimple": {
+      "ik": "quedé",
+      "jij": "quedaste",
+      "hij": "quedó",
+      "wij": "quedamos",
+      "jullie": "quedasteis",
+      "zij": "quedaron"
+    },
+    "futureForms": {
+      "ik": "quedaré",
+      "jij": "quedarás",
+      "hij": "quedará",
+      "wij": "quedaremos",
+      "jullie": "quedaréis",
+      "zij": "quedarán"
+    },
+    "participePasse": "quedado",
+    "auxiliaire": "haber",
+    "freq": 775.5883,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "deber",
+    "fr": "devoir",
+    "present": {
+      "ik": "debo",
+      "jij": "debes",
+      "hij": "debe",
+      "wij": "debemos",
+      "jullie": "debéis",
+      "zij": "deben"
+    },
+    "pastSimple": {
+      "ik": "debí",
+      "jij": "debiste",
+      "hij": "debió",
+      "wij": "debimos",
+      "jullie": "debisteis",
+      "zij": "debieron"
+    },
+    "futureForms": {
+      "ik": "deberé",
+      "jij": "deberás",
+      "hij": "deberá",
+      "wij": "deberemos",
+      "jullie": "deberéis",
+      "zij": "deberán"
+    },
+    "participePasse": "debido",
+    "auxiliaire": "haber",
+    "freq": 759.0803,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "seguir",
+    "fr": "suivre",
+    "present": {
+      "ik": "sigo",
+      "jij": "seguís",
+      "hij": "sigue",
+      "wij": "seguimos",
+      "jullie": "seguís",
+      "zij": "siguen"
+    },
+    "pastSimple": {
+      "ik": "seguí",
+      "jij": "seguiste",
+      "hij": "siguió",
+      "wij": "seguimos",
+      "jullie": "seguisteis",
+      "zij": "siguieron"
+    },
+    "futureForms": {
+      "ik": "seguiré",
+      "jij": "seguirás",
+      "hij": "seguirá",
+      "wij": "seguiremos",
+      "jullie": "seguiréis",
+      "zij": "seguirán"
+    },
+    "participePasse": "seguido",
+    "auxiliaire": "haber",
+    "freq": 652.6334,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "comprar",
+    "fr": "acheter",
+    "present": {
+      "ik": "compro",
+      "jij": "compras",
+      "hij": "compra",
+      "wij": "compramos",
+      "jullie": "compráis",
+      "zij": "compran"
+    },
+    "pastSimple": {
+      "ik": "compré",
+      "jij": "compraste",
+      "hij": "compró",
+      "wij": "compramos",
+      "jullie": "comprasteis",
+      "zij": "compraron"
+    },
+    "futureForms": {
+      "ik": "compraré",
+      "jij": "comprarás",
+      "hij": "comprará",
+      "wij": "compraremos",
+      "jullie": "compraréis",
+      "zij": "comprarán"
+    },
+    "participePasse": "comprado",
+    "auxiliaire": "haber",
+    "freq": 643.9425,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "buscar",
+    "fr": "chercher",
+    "present": {
+      "ik": "busco",
+      "jij": "buscas",
+      "hij": "busca",
+      "wij": "buscamos",
+      "jullie": "buscáis",
+      "zij": "buscan"
+    },
+    "pastSimple": {
+      "ik": "busqué",
+      "jij": "buscaste",
+      "hij": "buscó",
+      "wij": "buscamos",
+      "jullie": "buscasteis",
+      "zij": "buscaron"
+    },
+    "futureForms": {
+      "ik": "buscaré",
+      "jij": "buscarás",
+      "hij": "buscará",
+      "wij": "buscaremos",
+      "jullie": "buscaréis",
+      "zij": "buscarán"
+    },
+    "participePasse": "buscado",
+    "auxiliaire": "haber",
+    "freq": 638.9214,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "contar",
+    "fr": "compter",
+    "present": {
+      "ik": "cuento",
+      "jij": "contás",
+      "hij": "cuenta",
+      "wij": "contamos",
+      "jullie": "contáis",
+      "zij": "cuentan"
+    },
+    "pastSimple": {
+      "ik": "conté",
+      "jij": "contaste",
+      "hij": "contó",
+      "wij": "contamos",
+      "jullie": "contasteis",
+      "zij": "contaron"
+    },
+    "futureForms": {
+      "ik": "contaré",
+      "jij": "contarás",
+      "hij": "contará",
+      "wij": "contaremos",
+      "jullie": "contaréis",
+      "zij": "contarán"
+    },
+    "participePasse": "contado",
+    "auxiliaire": "haber",
+    "freq": 638.5146,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "usar",
+    "fr": "utiliser",
+    "present": {
+      "ik": "uso",
+      "jij": "usas",
+      "hij": "usa",
+      "wij": "usamos",
+      "jullie": "usáis",
+      "zij": "usan"
+    },
+    "pastSimple": {
+      "ik": "usé",
+      "jij": "usaste",
+      "hij": "usó",
+      "wij": "usamos",
+      "jullie": "usasteis",
+      "zij": "usaron"
+    },
+    "futureForms": {
+      "ik": "usaré",
+      "jij": "usarás",
+      "hij": "usará",
+      "wij": "usaremos",
+      "jullie": "usaréis",
+      "zij": "usarán"
+    },
+    "participePasse": "usado",
+    "auxiliaire": "haber",
+    "freq": 604.5128,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "necesitar",
+    "fr": "nécessiter / préciser",
+    "present": {
+      "ik": "necesito",
+      "jij": "necesitas",
+      "hij": "necesita",
+      "wij": "necesitamos",
+      "jullie": "necesitáis",
+      "zij": "necesitan"
+    },
+    "pastSimple": {
+      "ik": "necesité",
+      "jij": "necesitaste",
+      "hij": "necesitó",
+      "wij": "necesitamos",
+      "jullie": "necesitasteis",
+      "zij": "necesitaron"
+    },
+    "futureForms": {
+      "ik": "necesitaré",
+      "jij": "necesitarás",
+      "hij": "necesitará",
+      "wij": "necesitaremos",
+      "jullie": "necesitaréis",
+      "zij": "necesitarán"
+    },
+    "participePasse": "necesitado",
+    "auxiliaire": "haber",
+    "freq": 586.0332,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "abrir",
+    "fr": "ouvrir",
+    "present": {
+      "ik": "abro",
+      "jij": "abres",
+      "hij": "abre",
+      "wij": "abrimos",
+      "jullie": "abrís",
+      "zij": "abren"
+    },
+    "pastSimple": {
+      "ik": "abrí",
+      "jij": "abriste",
+      "hij": "abrió",
+      "wij": "abrimos",
+      "jullie": "abristeis",
+      "zij": "abrieron"
+    },
+    "futureForms": {
+      "ik": "abriré",
+      "jij": "abrirás",
+      "hij": "abrirá",
+      "wij": "abriremos",
+      "jullie": "abriréis",
+      "zij": "abrirán"
+    },
+    "participePasse": "abierto",
+    "auxiliaire": "haber",
+    "freq": 582.6354,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "esperar",
+    "fr": "espérer",
+    "present": {
+      "ik": "espero",
+      "jij": "esperas",
+      "hij": "espera",
+      "wij": "esperamos",
+      "jullie": "esperáis",
+      "zij": "esperan"
+    },
+    "pastSimple": {
+      "ik": "esperé",
+      "jij": "esperaste",
+      "hij": "esperó",
+      "wij": "esperamos",
+      "jullie": "esperasteis",
+      "zij": "esperaron"
+    },
+    "futureForms": {
+      "ik": "esperaré",
+      "jij": "esperarás",
+      "hij": "esperará",
+      "wij": "esperaremos",
+      "jullie": "esperaréis",
+      "zij": "esperarán"
+    },
+    "participePasse": "esperado",
+    "auxiliaire": "haber",
+    "freq": 566.0412,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "leer",
+    "fr": "lire",
+    "present": {
+      "ik": "leo",
+      "jij": "lees",
+      "hij": "lee",
+      "wij": "leemos",
+      "jullie": "leéis",
+      "zij": "leen"
+    },
+    "pastSimple": {
+      "ik": "leí",
+      "jij": "leíste",
+      "hij": "leyó",
+      "wij": "leímos",
+      "jullie": "leísteis",
+      "zij": "leyeron"
+    },
+    "futureForms": {
+      "ik": "leeré",
+      "jij": "leerás",
+      "hij": "leerá",
+      "wij": "leeremos",
+      "jullie": "leeréis",
+      "zij": "leerán"
+    },
+    "participePasse": "leído",
+    "auxiliaire": "haber",
+    "freq": 554.6611,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "sentar",
+    "fr": "asseoir",
+    "present": {
+      "ik": "siento",
+      "jij": "sentás",
+      "hij": "sienta",
+      "wij": "sentamos",
+      "jullie": "sentáis",
+      "zij": "sientan"
+    },
+    "pastSimple": {
+      "ik": "senté",
+      "jij": "sentaste",
+      "hij": "sentó",
+      "wij": "sentamos",
+      "jullie": "sentasteis",
+      "zij": "sentaron"
+    },
+    "futureForms": {
+      "ik": "sentaré",
+      "jij": "sentarás",
+      "hij": "sentará",
+      "wij": "sentaremos",
+      "jullie": "sentaréis",
+      "zij": "sentarán"
+    },
+    "participePasse": "sentado",
+    "auxiliaire": "haber",
+    "freq": 554.4115,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "preguntar",
+    "fr": "demander",
+    "present": {
+      "ik": "pregunto",
+      "jij": "preguntas",
+      "hij": "pregunta",
+      "wij": "preguntamos",
+      "jullie": "preguntáis",
+      "zij": "preguntan"
+    },
+    "pastSimple": {
+      "ik": "pregunté",
+      "jij": "preguntaste",
+      "hij": "preguntó",
+      "wij": "preguntamos",
+      "jullie": "preguntasteis",
+      "zij": "preguntaron"
+    },
+    "futureForms": {
+      "ik": "preguntaré",
+      "jij": "preguntarás",
+      "hij": "preguntará",
+      "wij": "preguntaremos",
+      "jullie": "preguntaréis",
+      "zij": "preguntarán"
+    },
+    "participePasse": "preguntado",
+    "auxiliaire": "haber",
+    "freq": 540.6747,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "pedir",
+    "fr": "demander",
+    "present": {
+      "ik": "pido",
+      "jij": "pedís",
+      "hij": "pide",
+      "wij": "pedimos",
+      "jullie": "pedís",
+      "zij": "piden"
+    },
+    "pastSimple": {
+      "ik": "pedí",
+      "jij": "pediste",
+      "hij": "pidió",
+      "wij": "pedimos",
+      "jullie": "pedisteis",
+      "zij": "pidieron"
+    },
+    "futureForms": {
+      "ik": "pediré",
+      "jij": "pedirás",
+      "hij": "pedirá",
+      "wij": "pediremos",
+      "jullie": "pediréis",
+      "zij": "pedirán"
+    },
+    "participePasse": "pedido",
+    "auxiliaire": "haber",
+    "freq": 494.4251,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "sentir",
+    "fr": "sentir",
+    "present": {
+      "ik": "siento",
+      "jij": "sentís",
+      "hij": "siente",
+      "wij": "sentimos",
+      "jullie": "sentís",
+      "zij": "sienten"
+    },
+    "pastSimple": {
+      "ik": "sentí",
+      "jij": "sentiste",
+      "hij": "sintió",
+      "wij": "sentimos",
+      "jullie": "sentisteis",
+      "zij": "sintieron"
+    },
+    "futureForms": {
+      "ik": "sentiré",
+      "jij": "sentirás",
+      "hij": "sentirá",
+      "wij": "sentiremos",
+      "jullie": "sentiréis",
+      "zij": "sentirán"
+    },
+    "participePasse": "sentido",
+    "auxiliaire": "haber",
+    "freq": 459.4399,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "entrar",
+    "fr": "entrer",
+    "present": {
+      "ik": "entro",
+      "jij": "entras",
+      "hij": "entra",
+      "wij": "entramos",
+      "jullie": "entráis",
+      "zij": "entran"
+    },
+    "pastSimple": {
+      "ik": "entré",
+      "jij": "entraste",
+      "hij": "entró",
+      "wij": "entramos",
+      "jullie": "entrasteis",
+      "zij": "entraron"
+    },
+    "futureForms": {
+      "ik": "entraré",
+      "jij": "entrarás",
+      "hij": "entrará",
+      "wij": "entraremos",
+      "jullie": "entraréis",
+      "zij": "entrarán"
+    },
+    "participePasse": "entrado",
+    "auxiliaire": "haber",
+    "freq": 442.9209,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "dormir",
+    "fr": "dormir",
+    "present": {
+      "ik": "duermo",
+      "jij": "dormís",
+      "hij": "duerme",
+      "wij": "dormimos",
+      "jullie": "dormís",
+      "zij": "duermen"
+    },
+    "pastSimple": {
+      "ik": "dormí",
+      "jij": "dormiste",
+      "hij": "durmió",
+      "wij": "dormimos",
+      "jullie": "dormisteis",
+      "zij": "durmieron"
+    },
+    "futureForms": {
+      "ik": "dormiré",
+      "jij": "dormirás",
+      "hij": "dormirá",
+      "wij": "dormiremos",
+      "jullie": "dormiréis",
+      "zij": "dormirán"
+    },
+    "participePasse": "dormido",
+    "auxiliaire": "haber",
+    "freq": 436.4347,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "perder",
+    "fr": "perdre / rater / reperdre",
+    "present": {
+      "ik": "pierdo",
+      "jij": "perdés",
+      "hij": "pierde",
+      "wij": "perdemos",
+      "jullie": "perdéis",
+      "zij": "pierden"
+    },
+    "pastSimple": {
+      "ik": "perdí",
+      "jij": "perdiste",
+      "hij": "perdió",
+      "wij": "perdimos",
+      "jullie": "perdisteis",
+      "zij": "perdieron"
+    },
+    "futureForms": {
+      "ik": "perderé",
+      "jij": "perderás",
+      "hij": "perderá",
+      "wij": "perderemos",
+      "jullie": "perderéis",
+      "zij": "perderán"
+    },
+    "participePasse": "perdido",
+    "auxiliaire": "haber",
+    "freq": 430.617,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "explicar",
+    "fr": "expliquer",
+    "present": {
+      "ik": "explico",
+      "jij": "explicas",
+      "hij": "explica",
+      "wij": "explicamos",
+      "jullie": "explicáis",
+      "zij": "explican"
+    },
+    "pastSimple": {
+      "ik": "expliqué",
+      "jij": "explicaste",
+      "hij": "explicó",
+      "wij": "explicamos",
+      "jullie": "explicasteis",
+      "zij": "explicaron"
+    },
+    "futureForms": {
+      "ik": "explicaré",
+      "jij": "explicarás",
+      "hij": "explicará",
+      "wij": "explicaremos",
+      "jullie": "explicaréis",
+      "zij": "explicarán"
+    },
+    "participePasse": "explicado",
+    "auxiliaire": "haber",
+    "freq": 406.0903,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "cambiar",
+    "fr": "changer",
+    "present": {
+      "ik": "cambio",
+      "jij": "cambias",
+      "hij": "cambia",
+      "wij": "cambiamos",
+      "jullie": "cambiáis",
+      "zij": "cambian"
+    },
+    "pastSimple": {
+      "ik": "cambié",
+      "jij": "cambiaste",
+      "hij": "cambió",
+      "wij": "cambiamos",
+      "jullie": "cambiasteis",
+      "zij": "cambiaron"
+    },
+    "futureForms": {
+      "ik": "cambiaré",
+      "jij": "cambiarás",
+      "hij": "cambiará",
+      "wij": "cambiaremos",
+      "jullie": "cambiaréis",
+      "zij": "cambiarán"
+    },
+    "participePasse": "cambiado",
+    "auxiliaire": "haber",
+    "freq": 387.3604,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "decidir",
+    "fr": "décider",
+    "present": {
+      "ik": "decido",
+      "jij": "decides",
+      "hij": "decide",
+      "wij": "decidimos",
+      "jullie": "decidís",
+      "zij": "deciden"
+    },
+    "pastSimple": {
+      "ik": "decidí",
+      "jij": "decidiste",
+      "hij": "decidió",
+      "wij": "decidimos",
+      "jullie": "decidisteis",
+      "zij": "decidieron"
+    },
+    "futureForms": {
+      "ik": "decidiré",
+      "jij": "decidirás",
+      "hij": "decidirá",
+      "wij": "decidiremos",
+      "jullie": "decidiréis",
+      "zij": "decidirán"
+    },
+    "participePasse": "decidido",
+    "auxiliaire": "haber",
+    "freq": 386.9646,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ofrecer",
+    "fr": "offrir",
+    "present": {
+      "ik": "ofrezco",
+      "jij": "ofreces",
+      "hij": "ofrece",
+      "wij": "ofrecemos",
+      "jullie": "ofrecéis",
+      "zij": "ofrecen"
+    },
+    "pastSimple": {
+      "ik": "ofrecí",
+      "jij": "ofreciste",
+      "hij": "ofreció",
+      "wij": "ofrecimos",
+      "jullie": "ofrecisteis",
+      "zij": "ofrecieron"
+    },
+    "futureForms": {
+      "ik": "ofreceré",
+      "jij": "ofrecerás",
+      "hij": "ofrecerá",
+      "wij": "ofreceremos",
+      "jullie": "ofreceréis",
+      "zij": "ofrecerán"
+    },
+    "participePasse": "ofrecido",
+    "auxiliaire": "haber",
+    "freq": 374.1021,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ayudar",
+    "fr": "aider",
+    "present": {
+      "ik": "ayudo",
+      "jij": "ayudas",
+      "hij": "ayuda",
+      "wij": "ayudamos",
+      "jullie": "ayudáis",
+      "zij": "ayudan"
+    },
+    "pastSimple": {
+      "ik": "ayudé",
+      "jij": "ayudaste",
+      "hij": "ayudó",
+      "wij": "ayudamos",
+      "jullie": "ayudasteis",
+      "zij": "ayudaron"
+    },
+    "futureForms": {
+      "ik": "ayudaré",
+      "jij": "ayudarás",
+      "hij": "ayudará",
+      "wij": "ayudaremos",
+      "jullie": "ayudaréis",
+      "zij": "ayudarán"
+    },
+    "participePasse": "ayudado",
+    "auxiliaire": "haber",
+    "freq": 357.4682,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "estudiar",
+    "fr": "étudier",
+    "present": {
+      "ik": "estudio",
+      "jij": "estudias",
+      "hij": "estudia",
+      "wij": "estudiamos",
+      "jullie": "estudiáis",
+      "zij": "estudian"
+    },
+    "pastSimple": {
+      "ik": "estudié",
+      "jij": "estudiaste",
+      "hij": "estudió",
+      "wij": "estudiamos",
+      "jullie": "estudiasteis",
+      "zij": "estudiaron"
+    },
+    "futureForms": {
+      "ik": "estudiaré",
+      "jij": "estudiarás",
+      "hij": "estudiará",
+      "wij": "estudiaremos",
+      "jullie": "estudiaréis",
+      "zij": "estudiarán"
+    },
+    "participePasse": "estudiado",
+    "auxiliaire": "haber",
+    "freq": 351.4191,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "nacer",
+    "fr": "naître",
+    "present": {
+      "ik": "nazco",
+      "jij": "naces",
+      "hij": "nace",
+      "wij": "nacemos",
+      "jullie": "nacéis",
+      "zij": "nacen"
+    },
+    "pastSimple": {
+      "ik": "nací",
+      "jij": "naciste",
+      "hij": "nació",
+      "wij": "nacimos",
+      "jullie": "nacisteis",
+      "zij": "nacieron"
+    },
+    "futureForms": {
+      "ik": "naceré",
+      "jij": "nacerás",
+      "hij": "nacerá",
+      "wij": "naceremos",
+      "jullie": "naceréis",
+      "zij": "nacerán"
+    },
+    "participePasse": "nacido",
+    "auxiliaire": "haber",
+    "freq": 349.1114,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "oír",
+    "fr": "entendre",
+    "present": {
+      "ik": "oigo",
+      "jij": "oyes",
+      "hij": "oye",
+      "wij": "oímos",
+      "jullie": "oís",
+      "zij": "oyen"
+    },
+    "pastSimple": {
+      "ik": "oí",
+      "jij": "oíste",
+      "hij": "oyó",
+      "wij": "oímos",
+      "jullie": "oísteis",
+      "zij": "oyeron"
+    },
+    "futureForms": {
+      "ik": "oiré",
+      "jij": "oirás",
+      "hij": "oirá",
+      "wij": "oiremos",
+      "jullie": "oiréis",
+      "zij": "oirán"
+    },
+    "participePasse": "oído",
+    "auxiliaire": "haber",
+    "freq": 344.5165,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "realizar",
+    "fr": "réaliser",
+    "present": {
+      "ik": "realizo",
+      "jij": "realizas",
+      "hij": "realiza",
+      "wij": "realizamos",
+      "jullie": "realizáis",
+      "zij": "realizan"
+    },
+    "pastSimple": {
+      "ik": "realicé",
+      "jij": "realizaste",
+      "hij": "realizó",
+      "wij": "realizamos",
+      "jullie": "realizasteis",
+      "zij": "realizaron"
+    },
+    "futureForms": {
+      "ik": "realizaré",
+      "jij": "realizarás",
+      "hij": "realizará",
+      "wij": "realizaremos",
+      "jullie": "realizaréis",
+      "zij": "realizarán"
+    },
+    "participePasse": "realizado",
+    "auxiliaire": "haber",
+    "freq": 341.4453,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "descubrir",
+    "fr": "découvrir",
+    "present": {
+      "ik": "descubro",
+      "jij": "descubres",
+      "hij": "descubre",
+      "wij": "descubrimos",
+      "jullie": "descubrís",
+      "zij": "descubren"
+    },
+    "pastSimple": {
+      "ik": "descubrí",
+      "jij": "descubriste",
+      "hij": "descubrió",
+      "wij": "descubrimos",
+      "jullie": "descubristeis",
+      "zij": "descubrieron"
+    },
+    "futureForms": {
+      "ik": "descubriré",
+      "jij": "descubrirás",
+      "hij": "descubrirá",
+      "wij": "descubriremos",
+      "jullie": "descubriréis",
+      "zij": "descubrirán"
+    },
+    "participePasse": "descubierto",
+    "auxiliaire": "haber",
+    "freq": 332.6428,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "utilizar",
+    "fr": "utiliser",
+    "present": {
+      "ik": "utilizo",
+      "jij": "utilizas",
+      "hij": "utiliza",
+      "wij": "utilizamos",
+      "jullie": "utilizáis",
+      "zij": "utilizan"
+    },
+    "pastSimple": {
+      "ik": "utilicé",
+      "jij": "utilizaste",
+      "hij": "utilizó",
+      "wij": "utilizamos",
+      "jullie": "utilizasteis",
+      "zij": "utilizaron"
+    },
+    "futureForms": {
+      "ik": "utilizaré",
+      "jij": "utilizarás",
+      "hij": "utilizará",
+      "wij": "utilizaremos",
+      "jullie": "utilizaréis",
+      "zij": "utilizarán"
+    },
+    "participePasse": "utilizado",
+    "auxiliaire": "haber",
+    "freq": 329.7141,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "existir",
+    "fr": "exister",
+    "present": {
+      "ik": "existo",
+      "jij": "existes",
+      "hij": "existe",
+      "wij": "existimos",
+      "jullie": "existís",
+      "zij": "existen"
+    },
+    "pastSimple": {
+      "ik": "existí",
+      "jij": "exististe",
+      "hij": "existió",
+      "wij": "existimos",
+      "jullie": "exististeis",
+      "zij": "existieron"
+    },
+    "futureForms": {
+      "ik": "existiré",
+      "jij": "existirás",
+      "hij": "existirá",
+      "wij": "existiremos",
+      "jullie": "existiréis",
+      "zij": "existirán"
+    },
+    "participePasse": "existido",
+    "auxiliaire": "haber",
+    "freq": 329.5878,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "entender",
+    "fr": "comprendre",
+    "present": {
+      "ik": "entiendo",
+      "jij": "entendés",
+      "hij": "entiende",
+      "wij": "entendemos",
+      "jullie": "entendéis",
+      "zij": "entienden"
+    },
+    "pastSimple": {
+      "ik": "entendí",
+      "jij": "entendiste",
+      "hij": "entendió",
+      "wij": "entendimos",
+      "jullie": "entendisteis",
+      "zij": "entendieron"
+    },
+    "futureForms": {
+      "ik": "entenderé",
+      "jij": "entenderás",
+      "hij": "entenderá",
+      "wij": "entenderemos",
+      "jullie": "entenderéis",
+      "zij": "entenderán"
+    },
+    "participePasse": "entendido",
+    "auxiliaire": "haber",
+    "freq": 325.8209,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "visitar",
+    "fr": "visiter",
+    "present": {
+      "ik": "visito",
+      "jij": "visitas",
+      "hij": "visita",
+      "wij": "visitamos",
+      "jullie": "visitáis",
+      "zij": "visitan"
+    },
+    "pastSimple": {
+      "ik": "visité",
+      "jij": "visitaste",
+      "hij": "visitó",
+      "wij": "visitamos",
+      "jullie": "visitasteis",
+      "zij": "visitaron"
+    },
+    "futureForms": {
+      "ik": "visitaré",
+      "jij": "visitarás",
+      "hij": "visitará",
+      "wij": "visitaremos",
+      "jullie": "visitaréis",
+      "zij": "visitarán"
+    },
+    "participePasse": "visitado",
+    "auxiliaire": "haber",
+    "freq": 325.2769,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "conseguir",
+    "fr": "réussir",
+    "present": {
+      "ik": "consigo",
+      "jij": "conseguís",
+      "hij": "consigue",
+      "wij": "conseguimos",
+      "jullie": "conseguís",
+      "zij": "consiguen"
+    },
+    "pastSimple": {
+      "ik": "conseguí",
+      "jij": "conseguiste",
+      "hij": "consiguió",
+      "wij": "conseguimos",
+      "jullie": "conseguisteis",
+      "zij": "consiguieron"
+    },
+    "futureForms": {
+      "ik": "conseguiré",
+      "jij": "conseguirás",
+      "hij": "conseguirá",
+      "wij": "conseguiremos",
+      "jullie": "conseguiréis",
+      "zij": "conseguirán"
+    },
+    "participePasse": "conseguido",
+    "auxiliaire": "haber",
+    "freq": 322.7465,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "morir",
+    "fr": "mourir",
+    "present": {
+      "ik": "muero",
+      "jij": "morís",
+      "hij": "muere",
+      "wij": "morimos",
+      "jullie": "morís",
+      "zij": "mueren"
+    },
+    "pastSimple": {
+      "ik": "morí",
+      "jij": "moriste",
+      "hij": "murió",
+      "wij": "morimos",
+      "jullie": "moristeis",
+      "zij": "murieron"
+    },
+    "futureForms": {
+      "ik": "moriré",
+      "jij": "morirás",
+      "hij": "morirá",
+      "wij": "moriremos",
+      "jullie": "moriréis",
+      "zij": "morirán"
+    },
+    "participePasse": "muerto",
+    "auxiliaire": "haber",
+    "freq": 321.1396,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "presentar",
+    "fr": "présenter",
+    "present": {
+      "ik": "presento",
+      "jij": "presentas",
+      "hij": "presenta",
+      "wij": "presentamos",
+      "jullie": "presentáis",
+      "zij": "presentan"
+    },
+    "pastSimple": {
+      "ik": "presenté",
+      "jij": "presentaste",
+      "hij": "presentó",
+      "wij": "presentamos",
+      "jullie": "presentasteis",
+      "zij": "presentaron"
+    },
+    "futureForms": {
+      "ik": "presentaré",
+      "jij": "presentarás",
+      "hij": "presentará",
+      "wij": "presentaremos",
+      "jullie": "presentaréis",
+      "zij": "presentarán"
+    },
+    "participePasse": "presentado",
+    "auxiliaire": "haber",
+    "freq": 319.879,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "aprender",
+    "fr": "apprendre",
+    "present": {
+      "ik": "aprendo",
+      "jij": "aprendes",
+      "hij": "aprende",
+      "wij": "aprendemos",
+      "jullie": "aprendéis",
+      "zij": "aprenden"
+    },
+    "pastSimple": {
+      "ik": "aprendí",
+      "jij": "aprendiste",
+      "hij": "aprendió",
+      "wij": "aprendimos",
+      "jullie": "aprendisteis",
+      "zij": "aprendieron"
+    },
+    "futureForms": {
+      "ik": "aprenderé",
+      "jij": "aprenderás",
+      "hij": "aprenderá",
+      "wij": "aprenderemos",
+      "jullie": "aprenderéis",
+      "zij": "aprenderán"
+    },
+    "participePasse": "aprendido",
+    "auxiliaire": "haber",
+    "freq": 315.2025,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "escuchar",
+    "fr": "écouter",
+    "present": {
+      "ik": "escucho",
+      "jij": "escuchas",
+      "hij": "escucha",
+      "wij": "escuchamos",
+      "jullie": "escucháis",
+      "zij": "escuchan"
+    },
+    "pastSimple": {
+      "ik": "escuché",
+      "jij": "escuchaste",
+      "hij": "escuchó",
+      "wij": "escuchamos",
+      "jullie": "escuchasteis",
+      "zij": "escucharon"
+    },
+    "futureForms": {
+      "ik": "escucharé",
+      "jij": "escucharás",
+      "hij": "escuchará",
+      "wij": "escucharemos",
+      "jullie": "escucharéis",
+      "zij": "escucharán"
+    },
+    "participePasse": "escuchado",
+    "auxiliaire": "haber",
+    "freq": 309.5206,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "significar",
+    "fr": "signifier",
+    "present": {
+      "ik": "significo",
+      "jij": "significas",
+      "hij": "significa",
+      "wij": "significamos",
+      "jullie": "significáis",
+      "zij": "significan"
+    },
+    "pastSimple": {
+      "ik": "signifiqué",
+      "jij": "significaste",
+      "hij": "significó",
+      "wij": "significamos",
+      "jullie": "significasteis",
+      "zij": "significaron"
+    },
+    "futureForms": {
+      "ik": "significaré",
+      "jij": "significarás",
+      "hij": "significará",
+      "wij": "significaremos",
+      "jullie": "significaréis",
+      "zij": "significarán"
+    },
+    "participePasse": "significado",
+    "auxiliaire": "haber",
+    "freq": 308.5121,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "interesar",
+    "fr": "intéresser",
+    "present": {
+      "ik": "intereso",
+      "jij": "interesas",
+      "hij": "interesa",
+      "wij": "interesamos",
+      "jullie": "interesáis",
+      "zij": "interesan"
+    },
+    "pastSimple": {
+      "ik": "interesé",
+      "jij": "interesaste",
+      "hij": "interesó",
+      "wij": "interesamos",
+      "jullie": "interesasteis",
+      "zij": "interesaron"
+    },
+    "futureForms": {
+      "ik": "interesaré",
+      "jij": "interesarás",
+      "hij": "interesará",
+      "wij": "interesaremos",
+      "jullie": "interesaréis",
+      "zij": "interesarán"
+    },
+    "participePasse": "interesado",
+    "auxiliaire": "haber",
+    "freq": 307.425,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ganar",
+    "fr": "gagner",
+    "present": {
+      "ik": "gano",
+      "jij": "ganas",
+      "hij": "gana",
+      "wij": "ganamos",
+      "jullie": "ganáis",
+      "zij": "ganan"
+    },
+    "pastSimple": {
+      "ik": "gané",
+      "jij": "ganaste",
+      "hij": "ganó",
+      "wij": "ganamos",
+      "jullie": "ganasteis",
+      "zij": "ganaron"
+    },
+    "futureForms": {
+      "ik": "ganaré",
+      "jij": "ganarás",
+      "hij": "ganará",
+      "wij": "ganaremos",
+      "jullie": "ganaréis",
+      "zij": "ganarán"
+    },
+    "participePasse": "ganado",
+    "auxiliaire": "haber",
+    "freq": 306.2686,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "pagar",
+    "fr": "payer",
+    "present": {
+      "ik": "pago",
+      "jij": "pagas",
+      "hij": "paga",
+      "wij": "pagamos",
+      "jullie": "pagáis",
+      "zij": "pagan"
+    },
+    "pastSimple": {
+      "ik": "pagué",
+      "jij": "pagaste",
+      "hij": "pagó",
+      "wij": "pagamos",
+      "jullie": "pagasteis",
+      "zij": "pagaron"
+    },
+    "futureForms": {
+      "ik": "pagaré",
+      "jij": "pagarás",
+      "hij": "pagará",
+      "wij": "pagaremos",
+      "jullie": "pagaréis",
+      "zij": "pagarán"
+    },
+    "participePasse": "pagado",
+    "auxiliaire": "haber",
+    "freq": 298.753,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "encantar",
+    "fr": "charmer / enchanter",
+    "present": {
+      "ik": "encanto",
+      "jij": "encantas",
+      "hij": "encanta",
+      "wij": "encantamos",
+      "jullie": "encantáis",
+      "zij": "encantan"
+    },
+    "pastSimple": {
+      "ik": "encanté",
+      "jij": "encantaste",
+      "hij": "encantó",
+      "wij": "encantamos",
+      "jullie": "encantasteis",
+      "zij": "encantaron"
+    },
+    "futureForms": {
+      "ik": "encantaré",
+      "jij": "encantarás",
+      "hij": "encantará",
+      "wij": "encantaremos",
+      "jullie": "encantaréis",
+      "zij": "encantarán"
+    },
+    "participePasse": "encantado",
+    "auxiliaire": "haber",
+    "freq": 290.5661,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "preferir",
+    "fr": "aimerbien / préférer",
+    "present": {
+      "ik": "prefiero",
+      "jij": "preferís",
+      "hij": "prefiere",
+      "wij": "preferimos",
+      "jullie": "preferís",
+      "zij": "prefieren"
+    },
+    "pastSimple": {
+      "ik": "preferí",
+      "jij": "preferiste",
+      "hij": "prefirió",
+      "wij": "preferimos",
+      "jullie": "preferisteis",
+      "zij": "prefirieron"
+    },
+    "futureForms": {
+      "ik": "preferiré",
+      "jij": "preferirás",
+      "hij": "preferirá",
+      "wij": "preferiremos",
+      "jullie": "preferiréis",
+      "zij": "preferirán"
+    },
+    "participePasse": "preferido",
+    "auxiliaire": "haber",
+    "freq": 288.2921,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "viajar",
+    "fr": "voyager",
+    "present": {
+      "ik": "viajo",
+      "jij": "viajas",
+      "hij": "viaja",
+      "wij": "viajamos",
+      "jullie": "viajáis",
+      "zij": "viajan"
+    },
+    "pastSimple": {
+      "ik": "viajé",
+      "jij": "viajaste",
+      "hij": "viajó",
+      "wij": "viajamos",
+      "jullie": "viajasteis",
+      "zij": "viajaron"
+    },
+    "futureForms": {
+      "ik": "viajaré",
+      "jij": "viajarás",
+      "hij": "viajará",
+      "wij": "viajaremos",
+      "jullie": "viajaréis",
+      "zij": "viajarán"
+    },
+    "participePasse": "viajado",
+    "auxiliaire": "haber",
+    "freq": 284.1051,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "crear",
+    "fr": "créer",
+    "present": {
+      "ik": "creo",
+      "jij": "creas",
+      "hij": "crea",
+      "wij": "creamos",
+      "jullie": "creáis",
+      "zij": "crean"
+    },
+    "pastSimple": {
+      "ik": "creé",
+      "jij": "creaste",
+      "hij": "creó",
+      "wij": "creamos",
+      "jullie": "creasteis",
+      "zij": "crearon"
+    },
+    "futureForms": {
+      "ik": "crearé",
+      "jij": "crearás",
+      "hij": "creará",
+      "wij": "crearemos",
+      "jullie": "crearéis",
+      "zij": "crearán"
+    },
+    "participePasse": "creado",
+    "auxiliaire": "haber",
+    "freq": 281.6486,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "acabar",
+    "fr": "achever / finir",
+    "present": {
+      "ik": "acabo",
+      "jij": "acabas",
+      "hij": "acaba",
+      "wij": "acabamos",
+      "jullie": "acabáis",
+      "zij": "acaban"
+    },
+    "pastSimple": {
+      "ik": "acabé",
+      "jij": "acabaste",
+      "hij": "acabó",
+      "wij": "acabamos",
+      "jullie": "acabasteis",
+      "zij": "acabaron"
+    },
+    "futureForms": {
+      "ik": "acabaré",
+      "jij": "acabarás",
+      "hij": "acabará",
+      "wij": "acabaremos",
+      "jullie": "acabaréis",
+      "zij": "acabarán"
+    },
+    "participePasse": "acabado",
+    "auxiliaire": "haber",
+    "freq": 272.911,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "servir",
+    "fr": "servir",
+    "present": {
+      "ik": "sirvo",
+      "jij": "servís",
+      "hij": "sirve",
+      "wij": "servimos",
+      "jullie": "servís",
+      "zij": "sirven"
+    },
+    "pastSimple": {
+      "ik": "serví",
+      "jij": "serviste",
+      "hij": "sirvió",
+      "wij": "servimos",
+      "jullie": "servisteis",
+      "zij": "sirvieron"
+    },
+    "futureForms": {
+      "ik": "serviré",
+      "jij": "servirás",
+      "hij": "servirá",
+      "wij": "serviremos",
+      "jullie": "serviréis",
+      "zij": "servirán"
+    },
+    "participePasse": "servido",
+    "auxiliaire": "haber",
+    "freq": 270.3182,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "soler",
+    "fr": "avoirl'habitudede",
+    "present": {
+      "ik": "suelo",
+      "jij": "solés",
+      "hij": "suele",
+      "wij": "solemos",
+      "jullie": "soléis",
+      "zij": "suelen"
+    },
+    "pastSimple": {
+      "ik": "solí",
+      "jij": "soliste",
+      "hij": "solió",
+      "wij": "solimos",
+      "jullie": "solisteis",
+      "zij": "solieron"
+    },
+    "futureForms": {
+      "ik": "soleré",
+      "jij": "solerás",
+      "hij": "solerá",
+      "wij": "soleremos",
+      "jullie": "soleréis",
+      "zij": "solerán"
+    },
+    "participePasse": "solido",
+    "auxiliaire": "haber",
+    "freq": 262.66,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "intentar",
+    "fr": "essayer",
+    "present": {
+      "ik": "intento",
+      "jij": "intentas",
+      "hij": "intenta",
+      "wij": "intentamos",
+      "jullie": "intentáis",
+      "zij": "intentan"
+    },
+    "pastSimple": {
+      "ik": "intenté",
+      "jij": "intentaste",
+      "hij": "intentó",
+      "wij": "intentamos",
+      "jullie": "intentasteis",
+      "zij": "intentaron"
+    },
+    "futureForms": {
+      "ik": "intentaré",
+      "jij": "intentarás",
+      "hij": "intentará",
+      "wij": "intentaremos",
+      "jullie": "intentaréis",
+      "zij": "intentarán"
+    },
+    "participePasse": "intentado",
+    "auxiliaire": "haber",
+    "freq": 257.6388,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "convertir",
+    "fr": "convertir",
+    "present": {
+      "ik": "convierto",
+      "jij": "convertís",
+      "hij": "convierte",
+      "wij": "convertimos",
+      "jullie": "convertís",
+      "zij": "convierten"
+    },
+    "pastSimple": {
+      "ik": "convertí",
+      "jij": "convertiste",
+      "hij": "convirtió",
+      "wij": "convertimos",
+      "jullie": "convertisteis",
+      "zij": "convirtieron"
+    },
+    "futureForms": {
+      "ik": "convertiré",
+      "jij": "convertirás",
+      "hij": "convertirá",
+      "wij": "convertiremos",
+      "jullie": "convertiréis",
+      "zij": "convertirán"
+    },
+    "participePasse": "convertido",
+    "auxiliaire": "haber",
+    "freq": 249.7157,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "bailar",
+    "fr": "danser",
+    "present": {
+      "ik": "bailo",
+      "jij": "bailas",
+      "hij": "baila",
+      "wij": "bailamos",
+      "jullie": "bailáis",
+      "zij": "bailan"
+    },
+    "pastSimple": {
+      "ik": "bailé",
+      "jij": "bailaste",
+      "hij": "bailó",
+      "wij": "bailamos",
+      "jullie": "bailasteis",
+      "zij": "bailaron"
+    },
+    "futureForms": {
+      "ik": "bailaré",
+      "jij": "bailarás",
+      "hij": "bailará",
+      "wij": "bailaremos",
+      "jullie": "bailaréis",
+      "zij": "bailarán"
+    },
+    "participePasse": "bailado",
+    "auxiliaire": "haber",
+    "freq": 247.3594,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "formar",
+    "fr": "former",
+    "present": {
+      "ik": "formo",
+      "jij": "formas",
+      "hij": "forma",
+      "wij": "formamos",
+      "jullie": "formáis",
+      "zij": "forman"
+    },
+    "pastSimple": {
+      "ik": "formé",
+      "jij": "formaste",
+      "hij": "formó",
+      "wij": "formamos",
+      "jullie": "formasteis",
+      "zij": "formaron"
+    },
+    "futureForms": {
+      "ik": "formaré",
+      "jij": "formarás",
+      "hij": "formará",
+      "wij": "formaremos",
+      "jullie": "formaréis",
+      "zij": "formarán"
+    },
+    "participePasse": "formado",
+    "auxiliaire": "haber",
+    "freq": 243.7546,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "aparecer",
+    "fr": "apparaître / paraître",
+    "present": {
+      "ik": "aparezco",
+      "jij": "apareces",
+      "hij": "aparece",
+      "wij": "aparecemos",
+      "jullie": "aparecéis",
+      "zij": "aparecen"
+    },
+    "pastSimple": {
+      "ik": "aparecí",
+      "jij": "apareciste",
+      "hij": "apareció",
+      "wij": "aparecimos",
+      "jullie": "aparecisteis",
+      "zij": "aparecieron"
+    },
+    "futureForms": {
+      "ik": "apareceré",
+      "jij": "aparecerás",
+      "hij": "aparecerá",
+      "wij": "apareceremos",
+      "jullie": "apareceréis",
+      "zij": "aparecerán"
+    },
+    "participePasse": "aparecido",
+    "auxiliaire": "haber",
+    "freq": 242.7447,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "levantar",
+    "fr": "dresser / lever / relever",
+    "present": {
+      "ik": "levanto",
+      "jij": "levantas",
+      "hij": "levanta",
+      "wij": "levantamos",
+      "jullie": "levantáis",
+      "zij": "levantan"
+    },
+    "pastSimple": {
+      "ik": "levanté",
+      "jij": "levantaste",
+      "hij": "levantó",
+      "wij": "levantamos",
+      "jullie": "levantasteis",
+      "zij": "levantaron"
+    },
+    "futureForms": {
+      "ik": "levantaré",
+      "jij": "levantarás",
+      "hij": "levantará",
+      "wij": "levantaremos",
+      "jullie": "levantaréis",
+      "zij": "levantarán"
+    },
+    "participePasse": "levantado",
+    "auxiliaire": "haber",
+    "freq": 242.2679,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "celebrar",
+    "fr": "célébrer / fêter",
+    "present": {
+      "ik": "celebro",
+      "jij": "celebras",
+      "hij": "celebra",
+      "wij": "celebramos",
+      "jullie": "celebráis",
+      "zij": "celebran"
+    },
+    "pastSimple": {
+      "ik": "celebré",
+      "jij": "celebraste",
+      "hij": "celebró",
+      "wij": "celebramos",
+      "jullie": "celebrasteis",
+      "zij": "celebraron"
+    },
+    "futureForms": {
+      "ik": "celebraré",
+      "jij": "celebrarás",
+      "hij": "celebrará",
+      "wij": "celebraremos",
+      "jullie": "celebraréis",
+      "zij": "celebrarán"
+    },
+    "participePasse": "celebrado",
+    "auxiliaire": "haber",
+    "freq": 238.2914,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "valer",
+    "fr": "valoir",
+    "present": {
+      "ik": "valgo",
+      "jij": "vales",
+      "hij": "vale",
+      "wij": "valemos",
+      "jullie": "valéis",
+      "zij": "valen"
+    },
+    "pastSimple": {
+      "ik": "valí",
+      "jij": "valiste",
+      "hij": "valió",
+      "wij": "valimos",
+      "jullie": "valisteis",
+      "zij": "valieron"
+    },
+    "futureForms": {
+      "ik": "valdré",
+      "jij": "valdrás",
+      "hij": "valdrá",
+      "wij": "valdremos",
+      "jullie": "valdréis",
+      "zij": "valdrán"
+    },
+    "participePasse": "valido",
+    "auxiliaire": "haber",
+    "freq": 228.1897,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "producir",
+    "fr": "produire",
+    "present": {
+      "ik": "produzco",
+      "jij": "produces",
+      "hij": "produce",
+      "wij": "producimos",
+      "jullie": "producís",
+      "zij": "producen"
+    },
+    "pastSimple": {
+      "ik": "produje",
+      "jij": "produjiste",
+      "hij": "produjo",
+      "wij": "produjimos",
+      "jullie": "produjisteis",
+      "zij": "produjeron"
+    },
+    "futureForms": {
+      "ik": "produciré",
+      "jij": "producirás",
+      "hij": "producirá",
+      "wij": "produciremos",
+      "jullie": "produciréis",
+      "zij": "producirán"
+    },
+    "participePasse": "producido",
+    "auxiliaire": "haber",
+    "freq": 227.4341,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "olvidar",
+    "fr": "oublier",
+    "present": {
+      "ik": "olvido",
+      "jij": "olvidas",
+      "hij": "olvida",
+      "wij": "olvidamos",
+      "jullie": "olvidáis",
+      "zij": "olvidan"
+    },
+    "pastSimple": {
+      "ik": "olvidé",
+      "jij": "olvidaste",
+      "hij": "olvidó",
+      "wij": "olvidamos",
+      "jullie": "olvidasteis",
+      "zij": "olvidaron"
+    },
+    "futureForms": {
+      "ik": "olvidaré",
+      "jij": "olvidarás",
+      "hij": "olvidará",
+      "wij": "olvidaremos",
+      "jullie": "olvidaréis",
+      "zij": "olvidarán"
+    },
+    "participePasse": "olvidado",
+    "auxiliaire": "haber",
+    "freq": 227.3959,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "jugar",
+    "fr": "jouer",
+    "present": {
+      "ik": "juego",
+      "jij": "juegas",
+      "hij": "juega",
+      "wij": "jugamos",
+      "jullie": "jugáis",
+      "zij": "juegan"
+    },
+    "pastSimple": {
+      "ik": "jugué",
+      "jij": "jugaste",
+      "hij": "jugó",
+      "wij": "jugamos",
+      "jullie": "jugasteis",
+      "zij": "jugaron"
+    },
+    "futureForms": {
+      "ik": "jugaré",
+      "jij": "jugarás",
+      "hij": "jugará",
+      "wij": "jugaremos",
+      "jullie": "jugaréis",
+      "zij": "jugarán"
+    },
+    "participePasse": "jugado",
+    "auxiliaire": "haber",
+    "freq": 224.4888,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "sacar",
+    "fr": "enlever",
+    "present": {
+      "ik": "saco",
+      "jij": "sacas",
+      "hij": "saca",
+      "wij": "sacamos",
+      "jullie": "sacáis",
+      "zij": "sacan"
+    },
+    "pastSimple": {
+      "ik": "saqué",
+      "jij": "sacaste",
+      "hij": "sacó",
+      "wij": "sacamos",
+      "jullie": "sacasteis",
+      "zij": "sacaron"
+    },
+    "futureForms": {
+      "ik": "sacaré",
+      "jij": "sacarás",
+      "hij": "sacará",
+      "wij": "sacaremos",
+      "jullie": "sacaréis",
+      "zij": "sacarán"
+    },
+    "participePasse": "sacado",
+    "auxiliaire": "haber",
+    "freq": 219.2921,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "acompañar",
+    "fr": "accompagner",
+    "present": {
+      "ik": "acompaño",
+      "jij": "acompañas",
+      "hij": "acompaña",
+      "wij": "acompañamos",
+      "jullie": "acompañáis",
+      "zij": "acompañan"
+    },
+    "pastSimple": {
+      "ik": "acompañé",
+      "jij": "acompañaste",
+      "hij": "acompañó",
+      "wij": "acompañamos",
+      "jullie": "acompañasteis",
+      "zij": "acompañaron"
+    },
+    "futureForms": {
+      "ik": "acompañaré",
+      "jij": "acompañarás",
+      "hij": "acompañará",
+      "wij": "acompañaremos",
+      "jullie": "acompañaréis",
+      "zij": "acompañarán"
+    },
+    "participePasse": "acompañado",
+    "auxiliaire": "haber",
+    "freq": 217.9192,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "casar",
+    "fr": "marier",
+    "present": {
+      "ik": "caso",
+      "jij": "casas",
+      "hij": "casa",
+      "wij": "casamos",
+      "jullie": "casáis",
+      "zij": "casan"
+    },
+    "pastSimple": {
+      "ik": "casé",
+      "jij": "casaste",
+      "hij": "casó",
+      "wij": "casamos",
+      "jullie": "casasteis",
+      "zij": "casaron"
+    },
+    "futureForms": {
+      "ik": "casaré",
+      "jij": "casarás",
+      "hij": "casará",
+      "wij": "casaremos",
+      "jullie": "casaréis",
+      "zij": "casarán"
+    },
+    "participePasse": "casado",
+    "auxiliaire": "haber",
+    "freq": 214.8546,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "vestir",
+    "fr": "affubler / habiller / vêtir",
+    "present": {
+      "ik": "visto",
+      "jij": "vestís",
+      "hij": "viste",
+      "wij": "vestimos",
+      "jullie": "vestís",
+      "zij": "visten"
+    },
+    "pastSimple": {
+      "ik": "vestí",
+      "jij": "vestiste",
+      "hij": "vistió",
+      "wij": "vestimos",
+      "jullie": "vestisteis",
+      "zij": "vistieron"
+    },
+    "futureForms": {
+      "ik": "vestiré",
+      "jij": "vestirás",
+      "hij": "vestirá",
+      "wij": "vestiremos",
+      "jullie": "vestiréis",
+      "zij": "vestirán"
+    },
+    "participePasse": "vestido",
+    "auxiliaire": "haber",
+    "freq": 212.1184,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "cerrar",
+    "fr": "fermer",
+    "present": {
+      "ik": "cierro",
+      "jij": "cerrás",
+      "hij": "cierra",
+      "wij": "cerramos",
+      "jullie": "cerráis",
+      "zij": "cierran"
+    },
+    "pastSimple": {
+      "ik": "cerré",
+      "jij": "cerraste",
+      "hij": "cerró",
+      "wij": "cerramos",
+      "jullie": "cerrasteis",
+      "zij": "cerraron"
+    },
+    "futureForms": {
+      "ik": "cerraré",
+      "jij": "cerrarás",
+      "hij": "cerrará",
+      "wij": "cerraremos",
+      "jullie": "cerraréis",
+      "zij": "cerrarán"
+    },
+    "participePasse": "cerrado",
+    "auxiliaire": "haber",
+    "freq": 210.1917,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "dirigir",
+    "fr": "adresser / diriger",
+    "present": {
+      "ik": "dirijo",
+      "jij": "diriges",
+      "hij": "dirige",
+      "wij": "dirigimos",
+      "jullie": "dirigís",
+      "zij": "dirigen"
+    },
+    "pastSimple": {
+      "ik": "dirigí",
+      "jij": "dirigiste",
+      "hij": "dirigió",
+      "wij": "dirigimos",
+      "jullie": "dirigisteis",
+      "zij": "dirigieron"
+    },
+    "futureForms": {
+      "ik": "dirigiré",
+      "jij": "dirigirás",
+      "hij": "dirigirá",
+      "wij": "dirigiremos",
+      "jullie": "dirigiréis",
+      "zij": "dirigirán"
+    },
+    "participePasse": "dirigido",
+    "auxiliaire": "haber",
+    "freq": 210.113,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "considerar",
+    "fr": "considérer / envisager",
+    "present": {
+      "ik": "considero",
+      "jij": "consideras",
+      "hij": "considera",
+      "wij": "consideramos",
+      "jullie": "consideráis",
+      "zij": "consideran"
+    },
+    "pastSimple": {
+      "ik": "consideré",
+      "jij": "consideraste",
+      "hij": "consideró",
+      "wij": "consideramos",
+      "jullie": "considerasteis",
+      "zij": "consideraron"
+    },
+    "futureForms": {
+      "ik": "consideraré",
+      "jij": "considerarás",
+      "hij": "considerará",
+      "wij": "consideraremos",
+      "jullie": "consideraréis",
+      "zij": "considerarán"
+    },
+    "participePasse": "considerado",
+    "auxiliaire": "haber",
+    "freq": 207.6034,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "organizar",
+    "fr": "organiser",
+    "present": {
+      "ik": "organizo",
+      "jij": "organizas",
+      "hij": "organiza",
+      "wij": "organizamos",
+      "jullie": "organizáis",
+      "zij": "organizan"
+    },
+    "pastSimple": {
+      "ik": "organicé",
+      "jij": "organizaste",
+      "hij": "organizó",
+      "wij": "organizamos",
+      "jullie": "organizasteis",
+      "zij": "organizaron"
+    },
+    "futureForms": {
+      "ik": "organizaré",
+      "jij": "organizarás",
+      "hij": "organizará",
+      "wij": "organizaremos",
+      "jullie": "organizaréis",
+      "zij": "organizarán"
+    },
+    "participePasse": "organizado",
+    "auxiliaire": "haber",
+    "freq": 204.4653,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "tratar",
+    "fr": "agir / tâcher / traiter",
+    "present": {
+      "ik": "trato",
+      "jij": "tratas",
+      "hij": "trata",
+      "wij": "tratamos",
+      "jullie": "tratáis",
+      "zij": "tratan"
+    },
+    "pastSimple": {
+      "ik": "traté",
+      "jij": "trataste",
+      "hij": "trató",
+      "wij": "tratamos",
+      "jullie": "tratasteis",
+      "zij": "trataron"
+    },
+    "futureForms": {
+      "ik": "trataré",
+      "jij": "tratarás",
+      "hij": "tratará",
+      "wij": "trataremos",
+      "jullie": "trataréis",
+      "zij": "tratarán"
+    },
+    "participePasse": "tratado",
+    "auxiliaire": "haber",
+    "freq": 197.7777,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "tocar",
+    "fr": "toucher",
+    "present": {
+      "ik": "toco",
+      "jij": "tocas",
+      "hij": "toca",
+      "wij": "tocamos",
+      "jullie": "tocáis",
+      "zij": "tocan"
+    },
+    "pastSimple": {
+      "ik": "toqué",
+      "jij": "tocaste",
+      "hij": "tocó",
+      "wij": "tocamos",
+      "jullie": "tocasteis",
+      "zij": "tocaron"
+    },
+    "futureForms": {
+      "ik": "tocaré",
+      "jij": "tocarás",
+      "hij": "tocará",
+      "wij": "tocaremos",
+      "jullie": "tocaréis",
+      "zij": "tocarán"
+    },
+    "participePasse": "tocado",
+    "auxiliaire": "haber",
+    "freq": 197.36,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "cenar",
+    "fr": "dîner / souper",
+    "present": {
+      "ik": "ceno",
+      "jij": "cenas",
+      "hij": "cena",
+      "wij": "cenamos",
+      "jullie": "cenáis",
+      "zij": "cenan"
+    },
+    "pastSimple": {
+      "ik": "cené",
+      "jij": "cenaste",
+      "hij": "cenó",
+      "wij": "cenamos",
+      "jullie": "cenasteis",
+      "zij": "cenaron"
+    },
+    "futureForms": {
+      "ik": "cenaré",
+      "jij": "cenarás",
+      "hij": "cenará",
+      "wij": "cenaremos",
+      "jullie": "cenaréis",
+      "zij": "cenarán"
+    },
+    "participePasse": "cenado",
+    "auxiliaire": "haber",
+    "freq": 192.4588,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "andar",
+    "fr": "cheminer / marcher",
+    "present": {
+      "ik": "ando",
+      "jij": "andas",
+      "hij": "anda",
+      "wij": "andamos",
+      "jullie": "andáis",
+      "zij": "andan"
+    },
+    "pastSimple": {
+      "ik": "anduve",
+      "jij": "anduviste",
+      "hij": "anduvo",
+      "wij": "anduvimos",
+      "jullie": "anduvisteis",
+      "zij": "anduvieron"
+    },
+    "futureForms": {
+      "ik": "andaré",
+      "jij": "andarás",
+      "hij": "andará",
+      "wij": "andaremos",
+      "jullie": "andaréis",
+      "zij": "andarán"
+    },
+    "participePasse": "andado",
+    "auxiliaire": "haber",
+    "freq": 190.8465,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "cantar",
+    "fr": "chanter",
+    "present": {
+      "ik": "canto",
+      "jij": "cantas",
+      "hij": "canta",
+      "wij": "cantamos",
+      "jullie": "cantáis",
+      "zij": "cantan"
+    },
+    "pastSimple": {
+      "ik": "canté",
+      "jij": "cantaste",
+      "hij": "cantó",
+      "wij": "cantamos",
+      "jullie": "cantasteis",
+      "zij": "cantaron"
+    },
+    "futureForms": {
+      "ik": "cantaré",
+      "jij": "cantarás",
+      "hij": "cantará",
+      "wij": "cantaremos",
+      "jullie": "cantaréis",
+      "zij": "cantarán"
+    },
+    "participePasse": "cantado",
+    "auxiliaire": "haber",
+    "freq": 189.9129,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "dedicar",
+    "fr": "consacrer",
+    "present": {
+      "ik": "dedico",
+      "jij": "dedicas",
+      "hij": "dedica",
+      "wij": "dedicamos",
+      "jullie": "dedicáis",
+      "zij": "dedican"
+    },
+    "pastSimple": {
+      "ik": "dediqué",
+      "jij": "dedicaste",
+      "hij": "dedicó",
+      "wij": "dedicamos",
+      "jullie": "dedicasteis",
+      "zij": "dedicaron"
+    },
+    "futureForms": {
+      "ik": "dedicaré",
+      "jij": "dedicarás",
+      "hij": "dedicará",
+      "wij": "dedicaremos",
+      "jullie": "dedicaréis",
+      "zij": "dedicarán"
+    },
+    "participePasse": "dedicado",
+    "auxiliaire": "haber",
+    "freq": 188.1232,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "traer",
+    "fr": "apporter",
+    "present": {
+      "ik": "traigo",
+      "jij": "traes",
+      "hij": "trae",
+      "wij": "traemos",
+      "jullie": "traéis",
+      "zij": "traen"
+    },
+    "pastSimple": {
+      "ik": "traje",
+      "jij": "trajiste",
+      "hij": "trajo",
+      "wij": "trajimos",
+      "jullie": "trajisteis",
+      "zij": "trajeron"
+    },
+    "futureForms": {
+      "ik": "traeré",
+      "jij": "traerás",
+      "hij": "traerá",
+      "wij": "traeremos",
+      "jullie": "traeréis",
+      "zij": "traerán"
+    },
+    "participePasse": "traído",
+    "auxiliaire": "haber",
+    "freq": 187.0132,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "correr",
+    "fr": "courir",
+    "present": {
+      "ik": "corro",
+      "jij": "corres",
+      "hij": "corre",
+      "wij": "corremos",
+      "jullie": "corréis",
+      "zij": "corren"
+    },
+    "pastSimple": {
+      "ik": "corrí",
+      "jij": "corriste",
+      "hij": "corrió",
+      "wij": "corrimos",
+      "jullie": "corristeis",
+      "zij": "corrieron"
+    },
+    "futureForms": {
+      "ik": "correré",
+      "jij": "correrás",
+      "hij": "correrá",
+      "wij": "correremos",
+      "jullie": "correréis",
+      "zij": "correrán"
+    },
+    "participePasse": "corrido",
+    "auxiliaire": "haber",
+    "freq": 185.646,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "subir",
+    "fr": "monter",
+    "present": {
+      "ik": "subo",
+      "jij": "subes",
+      "hij": "sube",
+      "wij": "subimos",
+      "jullie": "subís",
+      "zij": "suben"
+    },
+    "pastSimple": {
+      "ik": "subí",
+      "jij": "subiste",
+      "hij": "subió",
+      "wij": "subimos",
+      "jullie": "subisteis",
+      "zij": "subieron"
+    },
+    "futureForms": {
+      "ik": "subiré",
+      "jij": "subirás",
+      "hij": "subirá",
+      "wij": "subiremos",
+      "jullie": "subiréis",
+      "zij": "subirán"
+    },
+    "participePasse": "subido",
+    "auxiliaire": "haber",
+    "freq": 184.3947,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "elegir",
+    "fr": "choisir",
+    "present": {
+      "ik": "elijo",
+      "jij": "elegís",
+      "hij": "elige",
+      "wij": "elegimos",
+      "jullie": "elegís",
+      "zij": "eligen"
+    },
+    "pastSimple": {
+      "ik": "elegí",
+      "jij": "elegiste",
+      "hij": "eligió",
+      "wij": "elegimos",
+      "jullie": "elegisteis",
+      "zij": "eligieron"
+    },
+    "futureForms": {
+      "ik": "elegiré",
+      "jij": "elegirás",
+      "hij": "elegirá",
+      "wij": "elegiremos",
+      "jullie": "elegiréis",
+      "zij": "elegirán"
+    },
+    "participePasse": "electo",
+    "auxiliaire": "haber",
+    "freq": 183.7309,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "invitar",
+    "fr": "inviter",
+    "present": {
+      "ik": "invito",
+      "jij": "invitas",
+      "hij": "invita",
+      "wij": "invitamos",
+      "jullie": "invitáis",
+      "zij": "invitan"
+    },
+    "pastSimple": {
+      "ik": "invité",
+      "jij": "invitaste",
+      "hij": "invitó",
+      "wij": "invitamos",
+      "jullie": "invitasteis",
+      "zij": "invitaron"
+    },
+    "futureForms": {
+      "ik": "invitaré",
+      "jij": "invitarás",
+      "hij": "invitará",
+      "wij": "invitaremos",
+      "jullie": "invitaréis",
+      "zij": "invitarán"
+    },
+    "participePasse": "invitado",
+    "auxiliaire": "haber",
+    "freq": 181.3961,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "preocupar",
+    "fr": "préoccuper / soucier / tracasser",
+    "present": {
+      "ik": "preocupo",
+      "jij": "preocupas",
+      "hij": "preocupa",
+      "wij": "preocupamos",
+      "jullie": "preocupáis",
+      "zij": "preocupan"
+    },
+    "pastSimple": {
+      "ik": "preocupé",
+      "jij": "preocupaste",
+      "hij": "preocupó",
+      "wij": "preocupamos",
+      "jullie": "preocupasteis",
+      "zij": "preocuparon"
+    },
+    "futureForms": {
+      "ik": "preocuparé",
+      "jij": "preocuparás",
+      "hij": "preocupará",
+      "wij": "preocuparemos",
+      "jullie": "preocuparéis",
+      "zij": "preocuparán"
+    },
+    "participePasse": "preocupado",
+    "auxiliaire": "haber",
+    "freq": 180.4756,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "desaparecer",
+    "fr": "disparaître",
+    "present": {
+      "ik": "desaparezco",
+      "jij": "desapareces",
+      "hij": "desaparece",
+      "wij": "desaparecemos",
+      "jullie": "desaparecéis",
+      "zij": "desaparecen"
+    },
+    "pastSimple": {
+      "ik": "desaparecí",
+      "jij": "desapareciste",
+      "hij": "desapareció",
+      "wij": "desaparecimos",
+      "jullie": "desaparecisteis",
+      "zij": "desaparecieron"
+    },
+    "futureForms": {
+      "ik": "desapareceré",
+      "jij": "desaparecerás",
+      "hij": "desaparecerá",
+      "wij": "desapareceremos",
+      "jullie": "desapareceréis",
+      "zij": "desaparecerán"
+    },
+    "participePasse": "desaparecido",
+    "auxiliaire": "haber",
+    "freq": 179.2619,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "responder",
+    "fr": "répondre",
+    "present": {
+      "ik": "respondo",
+      "jij": "respondes",
+      "hij": "responde",
+      "wij": "respondemos",
+      "jullie": "respondéis",
+      "zij": "responden"
+    },
+    "pastSimple": {
+      "ik": "respondí",
+      "jij": "respondiste",
+      "hij": "respondió",
+      "wij": "respondimos",
+      "jullie": "respondisteis",
+      "zij": "respondieron"
+    },
+    "futureForms": {
+      "ik": "responderé",
+      "jij": "responderás",
+      "hij": "responderá",
+      "wij": "responderemos",
+      "jullie": "responderéis",
+      "zij": "responderán"
+    },
+    "participePasse": "respondido",
+    "auxiliaire": "haber",
+    "freq": 176.6996,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "relacionar",
+    "fr": "lier",
+    "present": {
+      "ik": "relaciono",
+      "jij": "relacionas",
+      "hij": "relaciona",
+      "wij": "relacionamos",
+      "jullie": "relacionáis",
+      "zij": "relacionan"
+    },
+    "pastSimple": {
+      "ik": "relacioné",
+      "jij": "relacionaste",
+      "hij": "relacionó",
+      "wij": "relacionamos",
+      "jullie": "relacionasteis",
+      "zij": "relacionaron"
+    },
+    "futureForms": {
+      "ik": "relacionaré",
+      "jij": "relacionarás",
+      "hij": "relacionará",
+      "wij": "relacionaremos",
+      "jullie": "relacionaréis",
+      "zij": "relacionarán"
+    },
+    "participePasse": "relacionado",
+    "auxiliaire": "haber",
+    "freq": 169.3025,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "beber",
+    "fr": "boire",
+    "present": {
+      "ik": "bebo",
+      "jij": "bebes",
+      "hij": "bebe",
+      "wij": "bebemos",
+      "jullie": "bebéis",
+      "zij": "beben"
+    },
+    "pastSimple": {
+      "ik": "bebí",
+      "jij": "bebiste",
+      "hij": "bebió",
+      "wij": "bebimos",
+      "jullie": "bebisteis",
+      "zij": "bebieron"
+    },
+    "futureForms": {
+      "ik": "beberé",
+      "jij": "beberás",
+      "hij": "beberá",
+      "wij": "beberemos",
+      "jullie": "beberéis",
+      "zij": "beberán"
+    },
+    "participePasse": "bebido",
+    "auxiliaire": "haber",
+    "freq": 167.9863,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "mantener",
+    "fr": "arrêter / maintenir",
+    "present": {
+      "ik": "mantengo",
+      "jij": "mantenés",
+      "hij": "mantiene",
+      "wij": "mantenemos",
+      "jullie": "mantenéis",
+      "zij": "mantienen"
+    },
+    "pastSimple": {
+      "ik": "mantuve",
+      "jij": "mantuviste",
+      "hij": "mantuvo",
+      "wij": "mantuvimos",
+      "jullie": "mantuvisteis",
+      "zij": "mantuvieron"
+    },
+    "futureForms": {
+      "ik": "mantendré",
+      "jij": "mantendrás",
+      "hij": "mantendrá",
+      "wij": "mantendremos",
+      "jullie": "mantendréis",
+      "zij": "mantendrán"
+    },
+    "participePasse": "mantenido",
+    "auxiliaire": "haber",
+    "freq": 166.6391,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "permitir",
+    "fr": "permettre",
+    "present": {
+      "ik": "permito",
+      "jij": "permites",
+      "hij": "permite",
+      "wij": "permitimos",
+      "jullie": "permitís",
+      "zij": "permiten"
+    },
+    "pastSimple": {
+      "ik": "permití",
+      "jij": "permitiste",
+      "hij": "permitió",
+      "wij": "permitimos",
+      "jullie": "permitisteis",
+      "zij": "permitieron"
+    },
+    "futureForms": {
+      "ik": "permitiré",
+      "jij": "permitirás",
+      "hij": "permitirá",
+      "wij": "permitiremos",
+      "jullie": "permitiréis",
+      "zij": "permitirán"
+    },
+    "participePasse": "permitido",
+    "auxiliaire": "haber",
+    "freq": 165.0043,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "disfrutar",
+    "fr": "jouir",
+    "present": {
+      "ik": "disfruto",
+      "jij": "disfrutas",
+      "hij": "disfruta",
+      "wij": "disfrutamos",
+      "jullie": "disfrutáis",
+      "zij": "disfrutan"
+    },
+    "pastSimple": {
+      "ik": "disfruté",
+      "jij": "disfrutaste",
+      "hij": "disfrutó",
+      "wij": "disfrutamos",
+      "jullie": "disfrutasteis",
+      "zij": "disfrutaron"
+    },
+    "futureForms": {
+      "ik": "disfrutaré",
+      "jij": "disfrutarás",
+      "hij": "disfrutará",
+      "wij": "disfrutaremos",
+      "jullie": "disfrutaréis",
+      "zij": "disfrutarán"
+    },
+    "participePasse": "disfrutado",
+    "auxiliaire": "haber",
+    "freq": 162.742,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "participar",
+    "fr": "participer",
+    "present": {
+      "ik": "participo",
+      "jij": "participas",
+      "hij": "participa",
+      "wij": "participamos",
+      "jullie": "participáis",
+      "zij": "participan"
+    },
+    "pastSimple": {
+      "ik": "participé",
+      "jij": "participaste",
+      "hij": "participó",
+      "wij": "participamos",
+      "jullie": "participasteis",
+      "zij": "participaron"
+    },
+    "futureForms": {
+      "ik": "participaré",
+      "jij": "participarás",
+      "hij": "participará",
+      "wij": "participaremos",
+      "jullie": "participaréis",
+      "zij": "participarán"
+    },
+    "participePasse": "participado",
+    "auxiliaire": "haber",
+    "freq": 162.0032,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "contestar",
+    "fr": "répondre",
+    "present": {
+      "ik": "contesto",
+      "jij": "contestas",
+      "hij": "contesta",
+      "wij": "contestamos",
+      "jullie": "contestáis",
+      "zij": "contestan"
+    },
+    "pastSimple": {
+      "ik": "contesté",
+      "jij": "contestaste",
+      "hij": "contestó",
+      "wij": "contestamos",
+      "jullie": "contestasteis",
+      "zij": "contestaron"
+    },
+    "futureForms": {
+      "ik": "contestaré",
+      "jij": "contestarás",
+      "hij": "contestará",
+      "wij": "contestaremos",
+      "jullie": "contestaréis",
+      "zij": "contestarán"
+    },
+    "participePasse": "contestado",
+    "auxiliaire": "haber",
+    "freq": 161.8497,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "pintar",
+    "fr": "peindre",
+    "present": {
+      "ik": "pinto",
+      "jij": "pintas",
+      "hij": "pinta",
+      "wij": "pintamos",
+      "jullie": "pintáis",
+      "zij": "pintan"
+    },
+    "pastSimple": {
+      "ik": "pinté",
+      "jij": "pintaste",
+      "hij": "pintó",
+      "wij": "pintamos",
+      "jullie": "pintasteis",
+      "zij": "pintaron"
+    },
+    "futureForms": {
+      "ik": "pintaré",
+      "jij": "pintarás",
+      "hij": "pintará",
+      "wij": "pintaremos",
+      "jullie": "pintaréis",
+      "zij": "pintarán"
+    },
+    "participePasse": "pintado",
+    "auxiliaire": "haber",
+    "freq": 161.6567,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "desear",
+    "fr": "souhaiter",
+    "present": {
+      "ik": "deseo",
+      "jij": "deseas",
+      "hij": "desea",
+      "wij": "deseamos",
+      "jullie": "deseáis",
+      "zij": "desean"
+    },
+    "pastSimple": {
+      "ik": "deseé",
+      "jij": "deseaste",
+      "hij": "deseó",
+      "wij": "deseamos",
+      "jullie": "deseasteis",
+      "zij": "desearon"
+    },
+    "futureForms": {
+      "ik": "desearé",
+      "jij": "desearás",
+      "hij": "deseará",
+      "wij": "desearemos",
+      "jullie": "desearéis",
+      "zij": "desearán"
+    },
+    "participePasse": "deseado",
+    "auxiliaire": "haber",
+    "freq": 159.5077,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "probar",
+    "fr": "goûter",
+    "present": {
+      "ik": "pruebo",
+      "jij": "probás",
+      "hij": "prueba",
+      "wij": "probamos",
+      "jullie": "probáis",
+      "zij": "prueban"
+    },
+    "pastSimple": {
+      "ik": "probé",
+      "jij": "probaste",
+      "hij": "probó",
+      "wij": "probamos",
+      "jullie": "probasteis",
+      "zij": "probaron"
+    },
+    "futureForms": {
+      "ik": "probaré",
+      "jij": "probarás",
+      "hij": "probará",
+      "wij": "probaremos",
+      "jullie": "probaréis",
+      "zij": "probarán"
+    },
+    "participePasse": "probado",
+    "auxiliaire": "haber",
+    "freq": 157.0172,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "comenzar",
+    "fr": "commencer",
+    "present": {
+      "ik": "comienzo",
+      "jij": "comenzás",
+      "hij": "comienza",
+      "wij": "comenzamos",
+      "jullie": "comenzáis",
+      "zij": "comienzan"
+    },
+    "pastSimple": {
+      "ik": "comencé",
+      "jij": "comenzaste",
+      "hij": "comenzó",
+      "wij": "comenzamos",
+      "jullie": "comenzasteis",
+      "zij": "comenzaron"
+    },
+    "futureForms": {
+      "ik": "comenzaré",
+      "jij": "comenzarás",
+      "hij": "comenzará",
+      "wij": "comenzaremos",
+      "jullie": "comenzaréis",
+      "zij": "comenzarán"
+    },
+    "participePasse": "comenzado",
+    "auxiliaire": "haber",
+    "freq": 156.7078,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "mostrar",
+    "fr": "montrer",
+    "present": {
+      "ik": "muestro",
+      "jij": "mostrás",
+      "hij": "muestra",
+      "wij": "mostramos",
+      "jullie": "mostráis",
+      "zij": "muestran"
+    },
+    "pastSimple": {
+      "ik": "mostré",
+      "jij": "mostraste",
+      "hij": "mostró",
+      "wij": "mostramos",
+      "jullie": "mostrasteis",
+      "zij": "mostraron"
+    },
+    "futureForms": {
+      "ik": "mostraré",
+      "jij": "mostrarás",
+      "hij": "mostrará",
+      "wij": "mostraremos",
+      "jullie": "mostraréis",
+      "zij": "mostrarán"
+    },
+    "participePasse": "mostrado",
+    "auxiliaire": "haber",
+    "freq": 154.4264,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "acercar",
+    "fr": "rapprocher",
+    "present": {
+      "ik": "acerco",
+      "jij": "acercas",
+      "hij": "acerca",
+      "wij": "acercamos",
+      "jullie": "acercáis",
+      "zij": "acercan"
+    },
+    "pastSimple": {
+      "ik": "acerqué",
+      "jij": "acercaste",
+      "hij": "acercó",
+      "wij": "acercamos",
+      "jullie": "acercasteis",
+      "zij": "acercaron"
+    },
+    "futureForms": {
+      "ik": "acercaré",
+      "jij": "acercarás",
+      "hij": "acercará",
+      "wij": "acercaremos",
+      "jullie": "acercaréis",
+      "zij": "acercarán"
+    },
+    "participePasse": "acercado",
+    "auxiliaire": "haber",
+    "freq": 154.3356,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "disponer",
+    "fr": "disposer",
+    "present": {
+      "ik": "dispongo",
+      "jij": "dispones",
+      "hij": "dispone",
+      "wij": "disponemos",
+      "jullie": "disponéis",
+      "zij": "disponen"
+    },
+    "pastSimple": {
+      "ik": "dispuse",
+      "jij": "dispusiste",
+      "hij": "dispuso",
+      "wij": "dispusimos",
+      "jullie": "dispusisteis",
+      "zij": "dispusieron"
+    },
+    "futureForms": {
+      "ik": "dispondré",
+      "jij": "dispondrás",
+      "hij": "dispondrá",
+      "wij": "dispondremos",
+      "jullie": "dispondréis",
+      "zij": "dispondrán"
+    },
+    "participePasse": "dispuesto",
+    "auxiliaire": "haber",
+    "freq": 153.9889,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "cansar",
+    "fr": "fatiguer",
+    "present": {
+      "ik": "canso",
+      "jij": "cansas",
+      "hij": "cansa",
+      "wij": "cansamos",
+      "jullie": "cansáis",
+      "zij": "cansan"
+    },
+    "pastSimple": {
+      "ik": "cansé",
+      "jij": "cansaste",
+      "hij": "cansó",
+      "wij": "cansamos",
+      "jullie": "cansasteis",
+      "zij": "cansaron"
+    },
+    "futureForms": {
+      "ik": "cansaré",
+      "jij": "cansarás",
+      "hij": "cansará",
+      "wij": "cansaremos",
+      "jullie": "cansaréis",
+      "zij": "cansarán"
+    },
+    "participePasse": "cansado",
+    "auxiliaire": "haber",
+    "freq": 152.7212,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "comprender",
+    "fr": "comprendre",
+    "present": {
+      "ik": "comprendo",
+      "jij": "comprendes",
+      "hij": "comprende",
+      "wij": "comprendemos",
+      "jullie": "comprendéis",
+      "zij": "comprenden"
+    },
+    "pastSimple": {
+      "ik": "comprendí",
+      "jij": "comprendiste",
+      "hij": "comprendió",
+      "wij": "comprendimos",
+      "jullie": "comprendisteis",
+      "zij": "comprendieron"
+    },
+    "futureForms": {
+      "ik": "comprenderé",
+      "jij": "comprenderás",
+      "hij": "comprenderá",
+      "wij": "comprenderemos",
+      "jullie": "comprenderéis",
+      "zij": "comprenderán"
+    },
+    "participePasse": "comprendido",
+    "auxiliaire": "haber",
+    "freq": 152.257,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "reír",
+    "fr": "rire",
+    "present": {
+      "ik": "río",
+      "jij": "reís",
+      "hij": "ríe",
+      "wij": "reímos",
+      "jullie": "reís",
+      "zij": "ríen"
+    },
+    "pastSimple": {
+      "ik": "reí",
+      "jij": "reíste",
+      "hij": "rio",
+      "wij": "reímos",
+      "jullie": "reísteis",
+      "zij": "rieron"
+    },
+    "futureForms": {
+      "ik": "reiré",
+      "jij": "reirás",
+      "hij": "reirá",
+      "wij": "reiremos",
+      "jullie": "reiréis",
+      "zij": "reirán"
+    },
+    "participePasse": "reído",
+    "auxiliaire": "haber",
+    "freq": 150.4178,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "imaginar",
+    "fr": "imaginer",
+    "present": {
+      "ik": "imagino",
+      "jij": "imaginas",
+      "hij": "imagina",
+      "wij": "imaginamos",
+      "jullie": "imagináis",
+      "zij": "imaginan"
+    },
+    "pastSimple": {
+      "ik": "imaginé",
+      "jij": "imaginaste",
+      "hij": "imaginó",
+      "wij": "imaginamos",
+      "jullie": "imaginasteis",
+      "zij": "imaginaron"
+    },
+    "futureForms": {
+      "ik": "imaginaré",
+      "jij": "imaginarás",
+      "hij": "imaginará",
+      "wij": "imaginaremos",
+      "jullie": "imaginaréis",
+      "zij": "imaginarán"
+    },
+    "participePasse": "imaginado",
+    "auxiliaire": "haber",
+    "freq": 149.6381,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "echar",
+    "fr": "jeter / verser",
+    "present": {
+      "ik": "echo",
+      "jij": "echas",
+      "hij": "echa",
+      "wij": "echamos",
+      "jullie": "echáis",
+      "zij": "echan"
+    },
+    "pastSimple": {
+      "ik": "eché",
+      "jij": "echaste",
+      "hij": "echó",
+      "wij": "echamos",
+      "jullie": "echasteis",
+      "zij": "echaron"
+    },
+    "futureForms": {
+      "ik": "echaré",
+      "jij": "echarás",
+      "hij": "echará",
+      "wij": "echaremos",
+      "jullie": "echaréis",
+      "zij": "echarán"
+    },
+    "participePasse": "echado",
+    "auxiliaire": "haber",
+    "freq": 149.1526,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "divertir",
+    "fr": "amuser",
+    "present": {
+      "ik": "divierto",
+      "jij": "divertís",
+      "hij": "divierte",
+      "wij": "divertimos",
+      "jullie": "divertís",
+      "zij": "divierten"
+    },
+    "pastSimple": {
+      "ik": "divertí",
+      "jij": "divertiste",
+      "hij": "divirtió",
+      "wij": "divertimos",
+      "jullie": "divertisteis",
+      "zij": "divirtieron"
+    },
+    "futureForms": {
+      "ik": "divertiré",
+      "jij": "divertirás",
+      "hij": "divertirá",
+      "wij": "divertiremos",
+      "jullie": "divertiréis",
+      "zij": "divertirán"
+    },
+    "participePasse": "divertido",
+    "auxiliaire": "haber",
+    "freq": 148.5903,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "construir",
+    "fr": "construire",
+    "present": {
+      "ik": "construyo",
+      "jij": "construyes",
+      "hij": "construye",
+      "wij": "construimos",
+      "jullie": "construís",
+      "zij": "construyen"
+    },
+    "pastSimple": {
+      "ik": "construí",
+      "jij": "construiste",
+      "hij": "construyó",
+      "wij": "construimos",
+      "jullie": "construisteis",
+      "zij": "construyeron"
+    },
+    "futureForms": {
+      "ik": "construiré",
+      "jij": "construirás",
+      "hij": "construirá",
+      "wij": "construiremos",
+      "jullie": "construiréis",
+      "zij": "construirán"
+    },
+    "participePasse": "construido",
+    "auxiliaire": "haber",
+    "freq": 148.049,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ocupar",
+    "fr": "occuper",
+    "present": {
+      "ik": "ocupo",
+      "jij": "ocupas",
+      "hij": "ocupa",
+      "wij": "ocupamos",
+      "jullie": "ocupáis",
+      "zij": "ocupan"
+    },
+    "pastSimple": {
+      "ik": "ocupé",
+      "jij": "ocupaste",
+      "hij": "ocupó",
+      "wij": "ocupamos",
+      "jullie": "ocupasteis",
+      "zij": "ocuparon"
+    },
+    "futureForms": {
+      "ik": "ocuparé",
+      "jij": "ocuparás",
+      "hij": "ocupará",
+      "wij": "ocuparemos",
+      "jullie": "ocuparéis",
+      "zij": "ocuparán"
+    },
+    "participePasse": "ocupado",
+    "auxiliaire": "haber",
+    "freq": 147.2888,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "situar",
+    "fr": "situer",
+    "present": {
+      "ik": "sitúo",
+      "jij": "situás",
+      "hij": "sitúa",
+      "wij": "situamos",
+      "jullie": "situáis",
+      "zij": "sitúan"
+    },
+    "pastSimple": {
+      "ik": "situé",
+      "jij": "situaste",
+      "hij": "situó",
+      "wij": "situamos",
+      "jullie": "situasteis",
+      "zij": "situaron"
+    },
+    "futureForms": {
+      "ik": "situaré",
+      "jij": "situarás",
+      "hij": "situará",
+      "wij": "situaremos",
+      "jullie": "situaréis",
+      "zij": "situarán"
+    },
+    "participePasse": "situado",
+    "auxiliaire": "haber",
+    "freq": 144.8588,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "enviar",
+    "fr": "envoyer",
+    "present": {
+      "ik": "envío",
+      "jij": "enviás",
+      "hij": "envía",
+      "wij": "enviamos",
+      "jullie": "enviáis",
+      "zij": "envían"
+    },
+    "pastSimple": {
+      "ik": "envié",
+      "jij": "enviaste",
+      "hij": "envió",
+      "wij": "enviamos",
+      "jullie": "enviasteis",
+      "zij": "enviaron"
+    },
+    "futureForms": {
+      "ik": "enviaré",
+      "jij": "enviarás",
+      "hij": "enviará",
+      "wij": "enviaremos",
+      "jullie": "enviaréis",
+      "zij": "enviarán"
+    },
+    "participePasse": "enviado",
+    "auxiliaire": "haber",
+    "freq": 144.4925,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "importar",
+    "fr": "importer",
+    "present": {
+      "ik": "importo",
+      "jij": "importas",
+      "hij": "importa",
+      "wij": "importamos",
+      "jullie": "importáis",
+      "zij": "importan"
+    },
+    "pastSimple": {
+      "ik": "importé",
+      "jij": "importaste",
+      "hij": "importó",
+      "wij": "importamos",
+      "jullie": "importasteis",
+      "zij": "importaron"
+    },
+    "futureForms": {
+      "ik": "importaré",
+      "jij": "importarás",
+      "hij": "importará",
+      "wij": "importaremos",
+      "jullie": "importaréis",
+      "zij": "importarán"
+    },
+    "participePasse": "importado",
+    "auxiliaire": "haber",
+    "freq": 139.6143,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "cuidar",
+    "fr": "soigner",
+    "present": {
+      "ik": "cuido",
+      "jij": "cuidas",
+      "hij": "cuida",
+      "wij": "cuidamos",
+      "jullie": "cuidáis",
+      "zij": "cuidan"
+    },
+    "pastSimple": {
+      "ik": "cuidé",
+      "jij": "cuidaste",
+      "hij": "cuidó",
+      "wij": "cuidamos",
+      "jullie": "cuidasteis",
+      "zij": "cuidaron"
+    },
+    "futureForms": {
+      "ik": "cuidaré",
+      "jij": "cuidarás",
+      "hij": "cuidará",
+      "wij": "cuidaremos",
+      "jullie": "cuidaréis",
+      "zij": "cuidarán"
+    },
+    "participePasse": "cuidado",
+    "auxiliaire": "haber",
+    "freq": 138.2205,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "comunicar",
+    "fr": "communiquer",
+    "present": {
+      "ik": "comunico",
+      "jij": "comunicas",
+      "hij": "comunica",
+      "wij": "comunicamos",
+      "jullie": "comunicáis",
+      "zij": "comunican"
+    },
+    "pastSimple": {
+      "ik": "comuniqué",
+      "jij": "comunicaste",
+      "hij": "comunicó",
+      "wij": "comunicamos",
+      "jullie": "comunicasteis",
+      "zij": "comunicaron"
+    },
+    "futureForms": {
+      "ik": "comunicaré",
+      "jij": "comunicarás",
+      "hij": "comunicará",
+      "wij": "comunicaremos",
+      "jullie": "comunicaréis",
+      "zij": "comunicarán"
+    },
+    "participePasse": "comunicado",
+    "auxiliaire": "haber",
+    "freq": 137.6184,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "coger",
+    "fr": "prendre / rejoindre / saisir",
+    "present": {
+      "ik": "cojo",
+      "jij": "coges",
+      "hij": "coge",
+      "wij": "cogemos",
+      "jullie": "cogéis",
+      "zij": "cogen"
+    },
+    "pastSimple": {
+      "ik": "cogí",
+      "jij": "cogiste",
+      "hij": "cogió",
+      "wij": "cogimos",
+      "jullie": "cogisteis",
+      "zij": "cogieron"
+    },
+    "futureForms": {
+      "ik": "cogeré",
+      "jij": "cogerás",
+      "hij": "cogerá",
+      "wij": "cogeremos",
+      "jullie": "cogeréis",
+      "zij": "cogerán"
+    },
+    "participePasse": "cogido",
+    "auxiliaire": "haber",
+    "freq": 136.9329,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "compartir",
+    "fr": "partager",
+    "present": {
+      "ik": "comparto",
+      "jij": "compartes",
+      "hij": "comparte",
+      "wij": "compartimos",
+      "jullie": "compartís",
+      "zij": "comparten"
+    },
+    "pastSimple": {
+      "ik": "compartí",
+      "jij": "compartiste",
+      "hij": "compartió",
+      "wij": "compartimos",
+      "jullie": "compartisteis",
+      "zij": "compartieron"
+    },
+    "futureForms": {
+      "ik": "compartiré",
+      "jij": "compartirás",
+      "hij": "compartirá",
+      "wij": "compartiremos",
+      "jullie": "compartiréis",
+      "zij": "compartirán"
+    },
+    "participePasse": "compartido",
+    "auxiliaire": "haber",
+    "freq": 136.4173,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "faltar",
+    "fr": "manquer",
+    "present": {
+      "ik": "falto",
+      "jij": "faltas",
+      "hij": "falta",
+      "wij": "faltamos",
+      "jullie": "faltáis",
+      "zij": "faltan"
+    },
+    "pastSimple": {
+      "ik": "falté",
+      "jij": "faltaste",
+      "hij": "faltó",
+      "wij": "faltamos",
+      "jullie": "faltasteis",
+      "zij": "faltaron"
+    },
+    "futureForms": {
+      "ik": "faltaré",
+      "jij": "faltarás",
+      "hij": "faltará",
+      "wij": "faltaremos",
+      "jullie": "faltaréis",
+      "zij": "faltarán"
+    },
+    "participePasse": "faltado",
+    "auxiliaire": "haber",
+    "freq": 134.455,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "sonar",
+    "fr": "sonner",
+    "present": {
+      "ik": "sueno",
+      "jij": "sonás",
+      "hij": "suena",
+      "wij": "sonamos",
+      "jullie": "sonáis",
+      "zij": "suenan"
+    },
+    "pastSimple": {
+      "ik": "soné",
+      "jij": "sonaste",
+      "hij": "sonó",
+      "wij": "sonamos",
+      "jullie": "sonasteis",
+      "zij": "sonaron"
+    },
+    "futureForms": {
+      "ik": "sonaré",
+      "jij": "sonarás",
+      "hij": "sonará",
+      "wij": "sonaremos",
+      "jullie": "sonaréis",
+      "zij": "sonarán"
+    },
+    "participePasse": "sonado",
+    "auxiliaire": "haber",
+    "freq": 128.9595,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "proponer",
+    "fr": "proposer",
+    "present": {
+      "ik": "propongo",
+      "jij": "propones",
+      "hij": "propone",
+      "wij": "proponemos",
+      "jullie": "proponéis",
+      "zij": "proponen"
+    },
+    "pastSimple": {
+      "ik": "propuse",
+      "jij": "propusiste",
+      "hij": "propuso",
+      "wij": "propusimos",
+      "jullie": "propusisteis",
+      "zij": "propusieron"
+    },
+    "futureForms": {
+      "ik": "propondré",
+      "jij": "propondrás",
+      "hij": "propondrá",
+      "wij": "propondremos",
+      "jullie": "propondréis",
+      "zij": "propondrán"
+    },
+    "participePasse": "propuesto",
+    "auxiliaire": "haber",
+    "freq": 127.2935,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": true
+  },
+  {
+    "infinitief": "pasear",
+    "fr": "se promener",
+    "present": {
+      "ik": "paseo",
+      "jij": "paseas",
+      "hij": "pasea",
+      "wij": "paseamos",
+      "jullie": "paseáis",
+      "zij": "pasean"
+    },
+    "pastSimple": {
+      "ik": "paseé",
+      "jij": "paseaste",
+      "hij": "paseó",
+      "wij": "paseamos",
+      "jullie": "paseasteis",
+      "zij": "pasearon"
+    },
+    "futureForms": {
+      "ik": "pasearé",
+      "jij": "pasearás",
+      "hij": "paseará",
+      "wij": "pasearemos",
+      "jullie": "pasearéis",
+      "zij": "pasearán"
+    },
+    "participePasse": "paseado",
+    "auxiliaire": "haber",
+    "freq": 125.7843,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "meter",
+    "fr": "mettre",
+    "present": {
+      "ik": "meto",
+      "jij": "metes",
+      "hij": "mete",
+      "wij": "metemos",
+      "jullie": "metéis",
+      "zij": "meten"
+    },
+    "pastSimple": {
+      "ik": "metí",
+      "jij": "metiste",
+      "hij": "metió",
+      "wij": "metimos",
+      "jullie": "metisteis",
+      "zij": "metieron"
+    },
+    "futureForms": {
+      "ik": "meteré",
+      "jij": "meterás",
+      "hij": "meterá",
+      "wij": "meteremos",
+      "jullie": "meteréis",
+      "zij": "meterán"
+    },
+    "participePasse": "metido",
+    "auxiliaire": "haber",
+    "freq": 125.5489,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "practicar",
+    "fr": "pratiquer",
+    "present": {
+      "ik": "practico",
+      "jij": "practicas",
+      "hij": "practica",
+      "wij": "practicamos",
+      "jullie": "practicáis",
+      "zij": "practican"
+    },
+    "pastSimple": {
+      "ik": "practiqué",
+      "jij": "practicaste",
+      "hij": "practicó",
+      "wij": "practicamos",
+      "jullie": "practicasteis",
+      "zij": "practicaron"
+    },
+    "futureForms": {
+      "ik": "practicaré",
+      "jij": "practicarás",
+      "hij": "practicará",
+      "wij": "practicaremos",
+      "jullie": "practicaréis",
+      "zij": "practicarán"
+    },
+    "participePasse": "practicado",
+    "auxiliaire": "haber",
+    "freq": 125.4612,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "funcionar",
+    "fr": "fonctionner",
+    "present": {
+      "ik": "funciono",
+      "jij": "funcionas",
+      "hij": "funciona",
+      "wij": "funcionamos",
+      "jullie": "funcionáis",
+      "zij": "funcionan"
+    },
+    "pastSimple": {
+      "ik": "funcioné",
+      "jij": "funcionaste",
+      "hij": "funcionó",
+      "wij": "funcionamos",
+      "jullie": "funcionasteis",
+      "zij": "funcionaron"
+    },
+    "futureForms": {
+      "ik": "funcionaré",
+      "jij": "funcionarás",
+      "hij": "funcionará",
+      "wij": "funcionaremos",
+      "jullie": "funcionaréis",
+      "zij": "funcionarán"
+    },
+    "participePasse": "funcionado",
+    "auxiliaire": "haber",
+    "freq": 125.3377,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "bajar",
+    "fr": "échouer / descendre",
+    "present": {
+      "ik": "bajo",
+      "jij": "bajas",
+      "hij": "baja",
+      "wij": "bajamos",
+      "jullie": "bajáis",
+      "zij": "bajan"
+    },
+    "pastSimple": {
+      "ik": "bajé",
+      "jij": "bajaste",
+      "hij": "bajó",
+      "wij": "bajamos",
+      "jullie": "bajasteis",
+      "zij": "bajaron"
+    },
+    "futureForms": {
+      "ik": "bajaré",
+      "jij": "bajarás",
+      "hij": "bajará",
+      "wij": "bajaremos",
+      "jullie": "bajaréis",
+      "zij": "bajarán"
+    },
+    "participePasse": "bajado",
+    "auxiliaire": "haber",
+    "freq": 122.4808,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "cumplir",
+    "fr": "accomplir",
+    "present": {
+      "ik": "cumplo",
+      "jij": "cumples",
+      "hij": "cumple",
+      "wij": "cumplimos",
+      "jullie": "cumplís",
+      "zij": "cumplen"
+    },
+    "pastSimple": {
+      "ik": "cumplí",
+      "jij": "cumpliste",
+      "hij": "cumplió",
+      "wij": "cumplimos",
+      "jullie": "cumplisteis",
+      "zij": "cumplieron"
+    },
+    "futureForms": {
+      "ik": "cumpliré",
+      "jij": "cumplirás",
+      "hij": "cumplirá",
+      "wij": "cumpliremos",
+      "jullie": "cumpliréis",
+      "zij": "cumplirán"
+    },
+    "participePasse": "cumplido",
+    "auxiliaire": "haber",
+    "freq": 122.3961,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "enseñar",
+    "fr": "enseigner",
+    "present": {
+      "ik": "enseño",
+      "jij": "enseñas",
+      "hij": "enseña",
+      "wij": "enseñamos",
+      "jullie": "enseñáis",
+      "zij": "enseñan"
+    },
+    "pastSimple": {
+      "ik": "enseñé",
+      "jij": "enseñaste",
+      "hij": "enseñó",
+      "wij": "enseñamos",
+      "jullie": "enseñasteis",
+      "zij": "enseñaron"
+    },
+    "futureForms": {
+      "ik": "enseñaré",
+      "jij": "enseñarás",
+      "hij": "enseñará",
+      "wij": "enseñaremos",
+      "jullie": "enseñaréis",
+      "zij": "enseñarán"
+    },
+    "participePasse": "enseñado",
+    "auxiliaire": "haber",
+    "freq": 122.2641,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  },
+  {
+    "infinitief": "enamorar",
+    "fr": "tomberamoureux",
+    "present": {
+      "ik": "enamoro",
+      "jij": "enamoras",
+      "hij": "enamora",
+      "wij": "enamoramos",
+      "jullie": "enamoráis",
+      "zij": "enamoran"
+    },
+    "pastSimple": {
+      "ik": "enamoré",
+      "jij": "enamoraste",
+      "hij": "enamoró",
+      "wij": "enamoramos",
+      "jullie": "enamorasteis",
+      "zij": "enamoraron"
+    },
+    "futureForms": {
+      "ik": "enamoraré",
+      "jij": "enamorarás",
+      "hij": "enamorará",
+      "wij": "enamoraremos",
+      "jullie": "enamoraréis",
+      "zij": "enamorarán"
+    },
+    "participePasse": "enamorado",
+    "auxiliaire": "haber",
+    "freq": 121.3643,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "elelex",
+    "irregulier": false
+  }
+]

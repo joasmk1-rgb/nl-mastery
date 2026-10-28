@@ -1,0 +1,1115 @@
+{
+  "modules": [
+    {
+      "id": "a1-m1",
+      "level": "A1",
+      "order": 1,
+      "label": "Premiers contacts",
+      "notions": [
+        "en_a1_m1"
+      ]
+    },
+    {
+      "id": "a1-m2",
+      "level": "A1",
+      "order": 2,
+      "label": "Construire une phrase",
+      "notions": [
+        "en_a1_m2"
+      ]
+    },
+    {
+      "id": "a1-m3",
+      "level": "A1",
+      "order": 3,
+      "label": "Noms et articles",
+      "notions": [
+        "en_a1_m3"
+      ]
+    },
+    {
+      "id": "a1-m4",
+      "level": "A1",
+      "order": 4,
+      "label": "Pronoms",
+      "notions": [
+        "en_a1_m4"
+      ]
+    },
+    {
+      "id": "a1-m5",
+      "level": "A1",
+      "order": 5,
+      "label": "Verbes",
+      "notions": [
+        "en_a1_m5"
+      ]
+    },
+    {
+      "id": "a1-m6",
+      "level": "A1",
+      "order": 6,
+      "label": "Adjectifs et adverbes",
+      "notions": [
+        "en_a1_m6"
+      ]
+    },
+    {
+      "id": "a1-m7",
+      "level": "A1",
+      "order": 7,
+      "label": "Prépositions",
+      "notions": [
+        "en_a1_m7"
+      ]
+    },
+    {
+      "id": "a1-m8",
+      "level": "A1",
+      "order": 8,
+      "label": "Négation et questions",
+      "notions": [
+        "en_a1_m8"
+      ]
+    },
+    {
+      "id": "a1-m9",
+      "level": "A1",
+      "order": 9,
+      "label": "Temps de base",
+      "notions": [
+        "en_a1_m9"
+      ]
+    },
+    {
+      "id": "a1-m10",
+      "level": "A1",
+      "order": 10,
+      "label": "Vie quotidienne",
+      "notions": [
+        "en_a1_m10"
+      ]
+    },
+    {
+      "id": "a2-m1",
+      "level": "A2",
+      "order": 1,
+      "label": "Raconter le passé",
+      "notions": [
+        "en_a2_m1"
+      ]
+    },
+    {
+      "id": "a2-m2",
+      "level": "A2",
+      "order": 2,
+      "label": "Verbes plus complexes",
+      "notions": [
+        "en_a2_m2"
+      ]
+    },
+    {
+      "id": "a2-m3",
+      "level": "A2",
+      "order": 3,
+      "label": "Futur, intention et modalité",
+      "notions": [
+        "en_a2_m3"
+      ]
+    },
+    {
+      "id": "a2-m4",
+      "level": "A2",
+      "order": 4,
+      "label": "Quantité et référence",
+      "notions": [
+        "en_a2_m4"
+      ]
+    },
+    {
+      "id": "a2-m5",
+      "level": "A2",
+      "order": 5,
+      "label": "Construire des phrases plus riches",
+      "notions": [
+        "en_a2_m5"
+      ]
+    },
+    {
+      "id": "a2-m6",
+      "level": "A2",
+      "order": 6,
+      "label": "Description et comparaison",
+      "notions": [
+        "en_a2_m6"
+      ]
+    },
+    {
+      "id": "a2-m7",
+      "level": "A2",
+      "order": 7,
+      "label": "Situations de vie réelle",
+      "notions": [
+        "en_a2_m7"
+      ]
+    },
+    {
+      "id": "a2-m8",
+      "level": "A2",
+      "order": 8,
+      "label": "Interaction et expression personnelle",
+      "notions": [
+        "en_a2_m8"
+      ]
+    },
+    {
+      "id": "b1-m1",
+      "level": "B1",
+      "order": 1,
+      "label": "Cause, conséquence et opposition",
+      "notions": [
+        "en_b1_m1"
+      ]
+    },
+    {
+      "id": "b1-m2",
+      "level": "B1",
+      "order": 2,
+      "label": "Syntaxe complexe",
+      "notions": [
+        "en_b1_m2"
+      ]
+    },
+    {
+      "id": "b1-m3",
+      "level": "B1",
+      "order": 3,
+      "label": "Raconter et structurer",
+      "notions": [
+        "en_b1_m3"
+      ]
+    },
+    {
+      "id": "b1-m4",
+      "level": "B1",
+      "order": 4,
+      "label": "Donner son opinion et argumenter",
+      "notions": [
+        "en_b1_m4"
+      ]
+    },
+    {
+      "id": "b1-m5",
+      "level": "B1",
+      "order": 5,
+      "label": "Anglais fonctionnel réel",
+      "notions": [
+        "en_b1_m5"
+      ]
+    },
+    {
+      "id": "b1-m6",
+      "level": "B1",
+      "order": 6,
+      "label": "Comprendre l'anglais réel",
+      "notions": [
+        "en_b1_m6"
+      ]
+    },
+    {
+      "id": "b1-m7",
+      "level": "B1",
+      "order": 7,
+      "label": "Interaction B1",
+      "notions": [
+        "en_b1_m7"
+      ]
+    },
+    {
+      "id": "b2-m1",
+      "level": "B2",
+      "order": 1,
+      "label": "Nuances grammaticales avancées",
+      "notions": [
+        "en_b2_m1"
+      ]
+    },
+    {
+      "id": "b2-m2",
+      "level": "B2",
+      "order": 2,
+      "label": "Précision et registre",
+      "notions": [
+        "en_b2_m2"
+      ]
+    },
+    {
+      "id": "b2-m3",
+      "level": "B2",
+      "order": 3,
+      "label": "Cohésion et style avancé",
+      "notions": [
+        "en_b2_m3"
+      ]
+    },
+    {
+      "id": "b2-m4",
+      "level": "B2",
+      "order": 4,
+      "label": "Argumentation et résolution de problèmes",
+      "notions": [
+        "en_b2_m4"
+      ]
+    },
+    {
+      "id": "b2-m5",
+      "level": "B2",
+      "order": 5,
+      "label": "Communication professionnelle",
+      "notions": [
+        "en_b2_m5"
+      ]
+    },
+    {
+      "id": "b2-m6",
+      "level": "B2",
+      "order": 6,
+      "label": "Compréhension avancée et synthèse",
+      "notions": [
+        "en_b2_m6"
+      ]
+    }
+  ],
+  "notions": {
+    "en_a1_m1": {
+      "level": "A1",
+      "module": "a1-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Premiers contacts",
+        "objectif": "Saluer, se présenter et faire connaissance.",
+        "comprendre": "Use Hello, Good morning, Nice to meet you, and How are you? to open a conversation.",
+        "regle": "Les formules changent selon le degré de politesse et le moment.",
+        "exemples": [
+          "Hello, my name is Alex.",
+          "Nice to meet you.",
+          "Good morning. How are you?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m2": {
+      "level": "A1",
+      "module": "a1-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Construire une phrase",
+        "objectif": "Construire une phrase affirmative simple.",
+        "comprendre": "Subject + verb + object: I work in Brussels. Questions use do/does or the verb be.",
+        "regle": "L'anglais suit généralement l'ordre sujet + verbe + complément.",
+        "exemples": [
+          "I work in Brussels.",
+          "She likes coffee.",
+          "Do you speak English?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m3": {
+      "level": "A1",
+      "module": "a1-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Noms et articles",
+        "objectif": "Employer les noms dénombrables et indénombrables, les articles et le pluriel.",
+        "comprendre": "Use a/an with a singular countable noun, the for something identified, and no a/an with uncountable nouns.",
+        "regle": "Les noms dénombrables prennent généralement a/an au singulier et un pluriel; les indénombrables s'emploient sans article indéfini.",
+        "exemples": [
+          "I have a meeting.",
+          "The meeting starts at nine.",
+          "We need information."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m4": {
+      "level": "A1",
+      "module": "a1-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Pronoms",
+        "objectif": "Employer les pronoms personnels, compléments et possessifs.",
+        "comprendre": "I/me/my, he/him/his, she/her/her, we/us/our; you and it do not change in the object form.",
+        "regle": "Les pronoms sujets, compléments et possessifs ont des formes distinctes.",
+        "exemples": [
+          "She sent me her notes.",
+          "They invited us.",
+          "This is our office."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m5": {
+      "level": "A1",
+      "module": "a1-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Verbes",
+        "objectif": "Utiliser be, have, do et le present simple.",
+        "comprendre": "I work; she works. Do you work? She doesn't work. Be and have have their own forms.",
+        "regle": "Au present simple, la troisième personne du singulier prend généralement -s; les questions et négations utilisent do/does.",
+        "exemples": [
+          "I work from home.",
+          "He works in finance.",
+          "Do they have a meeting?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m6": {
+      "level": "A1",
+      "module": "a1-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Adjectifs et adverbes",
+        "objectif": "Décrire des personnes, objets et actions.",
+        "comprendre": "A useful report; the report is useful. Many adverbs use -ly: carefully, quickly.",
+        "regle": "L'adjectif précède souvent le nom et ne varie pas en genre ou en nombre.",
+        "exemples": [
+          "She wrote a clear email.",
+          "The system works well.",
+          "They are very busy."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m7": {
+      "level": "A1",
+      "module": "a1-m7",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m6"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Prépositions",
+        "objectif": "Situer dans l'espace et le temps avec les prépositions fréquentes.",
+        "comprendre": "At a time, on a day, in a month/year; at the station, on the desk, in the office.",
+        "regle": "Les prépositions anglaises s'apprennent dans des expressions et contextes courants.",
+        "exemples": [
+          "The meeting is at ten.",
+          "I work in Brussels.",
+          "The file is on the desk."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m8": {
+      "level": "A1",
+      "module": "a1-m8",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m7"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Négation et questions",
+        "objectif": "Former des phrases négatives et des questions simples.",
+        "comprendre": "I don't know. She doesn't agree. Do you understand? With be: Are you ready?",
+        "regle": "Do/does porte la négation et la question avec la plupart des verbes au présent.",
+        "exemples": [
+          "I don't understand.",
+          "Does he work here?",
+          "They aren't available."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m9": {
+      "level": "A1",
+      "module": "a1-m9",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m8"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Temps de base",
+        "objectif": "Distinguer le present simple, le present continuous et le past simple.",
+        "comprendre": "I work every day. I am working now. I worked yesterday.",
+        "regle": "Le présent simple décrit habitudes et faits; le continu décrit une action en cours; le passé simple situe un événement terminé.",
+        "exemples": [
+          "She usually takes the train.",
+          "She is taking the train now.",
+          "She took the train yesterday."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a1_m10": {
+      "level": "A1",
+      "module": "a1-m10",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a1_m9"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Vie quotidienne",
+        "objectif": "Parler des routines, horaires, besoins et activités courantes.",
+        "comprendre": "Use frequency adverbs before most verbs, but after be: I usually start at eight; I am often busy.",
+        "regle": "Les verbes fréquents et expressions de temps rendent les échanges quotidiens plus naturels.",
+        "exemples": [
+          "I usually start at eight.",
+          "We have lunch at noon.",
+          "Could I have some water?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m1": {
+      "level": "A2",
+      "module": "a2-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Raconter le passé",
+        "objectif": "Raconter un événement passé avec le past simple.",
+        "comprendre": "Use the past simple for completed events; learn common irregular pairs such as go/went and see/saw.",
+        "regle": "Les verbes réguliers prennent -ed; de nombreux verbes fréquents sont irréguliers.",
+        "exemples": [
+          "We visited London last year.",
+          "She went to the office.",
+          "I saw your message."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m2": {
+      "level": "A2",
+      "module": "a2-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Verbes plus complexes",
+        "objectif": "Utiliser le present perfect et les verbes à particule fréquents.",
+        "comprendre": "Have/has + past participle: I have finished. Phrasal verbs: find out, look for, turn on.",
+        "regle": "Le present perfect relie une expérience ou un résultat au présent; les phrasal verbs associent un verbe à une particule.",
+        "exemples": [
+          "I have finished the report.",
+          "She has found out the answer.",
+          "Can you turn on the screen?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m3": {
+      "level": "A2",
+      "module": "a2-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Futur, intention et modalité",
+        "objectif": "Exprimer projets, prédictions, obligations et possibilités.",
+        "comprendre": "I'll call you. I'm going to apply. You should check it. We must leave now.",
+        "regle": "Will, going to et les modaux expriment des intentions et degrés de certitude différents.",
+        "exemples": [
+          "I'll send it tomorrow.",
+          "We're going to meet the client.",
+          "You should save a copy."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m4": {
+      "level": "A2",
+      "module": "a2-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Quantité et référence",
+        "objectif": "Parler de quantités et reprendre une information sans la répéter.",
+        "comprendre": "Many reports but much work; a few questions but a little time; use it/they to refer back.",
+        "regle": "Some/any, much/many, a few/a little et les pronoms de reprise dépendent du type de nom.",
+        "exemples": [
+          "We have a few questions.",
+          "There isn't much time.",
+          "The files are ready; I sent them."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m5": {
+      "level": "A2",
+      "module": "a2-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Construire des phrases plus riches",
+        "objectif": "Relier les propositions et exprimer la cause, le résultat et le contraste.",
+        "comprendre": "Use because, so, although, when and if to connect clauses; keep the word order clear.",
+        "regle": "Les conjonctions permettent d'exprimer les relations logiques entre deux idées.",
+        "exemples": [
+          "I stayed because I had work.",
+          "It was late, so we went home.",
+          "Although it was busy, we finished."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m6": {
+      "level": "A2",
+      "module": "a2-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Description et comparaison",
+        "objectif": "Comparer des personnes, objets, quantités et expériences.",
+        "comprendre": "Smaller / more useful; the smallest / the most useful; as useful as.",
+        "regle": "Les comparatifs et superlatifs varient selon la longueur et la forme de l'adjectif.",
+        "exemples": [
+          "This option is cheaper.",
+          "It is the most useful tool.",
+          "The new office is as bright as the old one."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m7": {
+      "level": "A2",
+      "module": "a2-m7",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m6"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Situations de vie réelle",
+        "objectif": "Gérer des demandes, achats, déplacements et rendez-vous.",
+        "comprendre": "Could I book a table? Would you mind helping me? I'd like to change my appointment.",
+        "regle": "Les demandes indirectes avec can, could et would sont souvent plus polies.",
+        "exemples": [
+          "Could I book a table for two?",
+          "I'd like to change my appointment.",
+          "How can I get to the station?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_a2_m8": {
+      "level": "A2",
+      "module": "a2-m8",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_a2_m7"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Interaction et expression personnelle",
+        "objectif": "Exprimer préférences, invitations, accord et désaccord.",
+        "comprendre": "I think so; I'm not sure; That sounds good; Would you like to join us?",
+        "regle": "Les réponses courtes et les formules de réaction entretiennent une conversation naturelle.",
+        "exemples": [
+          "That sounds like a good idea.",
+          "I'm not sure I agree.",
+          "Would you like to join us?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m1": {
+      "level": "B1",
+      "module": "b1-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Cause, conséquence et opposition",
+        "objectif": "Nuancer les liens logiques et les concessions.",
+        "comprendre": "Use because/since for causes, therefore/as a result for consequences, whereas/however for contrast.",
+        "regle": "B1 demande de choisir un connecteur adapté au lien logique et au registre.",
+        "exemples": [
+          "Since demand increased, we hired more staff.",
+          "The cost was high; however, the result was strong.",
+          "Whereas sales rose, complaints fell."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m2": {
+      "level": "B1",
+      "module": "b1-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b1_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Syntaxe complexe",
+        "objectif": "Employer les relatives, les subordonnées et les propositions conditionnelles.",
+        "comprendre": "The colleague who called is waiting. If we leave now, we'll arrive on time.",
+        "regle": "Les propositions relatives et conditionnelles ajoutent des précisions sans casser la structure.",
+        "exemples": [
+          "The report that you sent is useful.",
+          "If we leave now, we'll arrive on time.",
+          "I know what she means."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m3": {
+      "level": "B1",
+      "module": "b1-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b1_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Raconter et structurer",
+        "objectif": "Organiser un récit avec des temps et marqueurs de séquence adaptés.",
+        "comprendre": "I was reviewing the file when he called. We had already sent the update.",
+        "regle": "Past simple, past continuous et past perfect distinguent événement, contexte et antériorité.",
+        "exemples": [
+          "I was reviewing the file when he called.",
+          "We had already sent the update.",
+          "After that, we checked the figures."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m4": {
+      "level": "B1",
+      "module": "b1-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b1_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Donner son opinion et argumenter",
+        "objectif": "Présenter une opinion, la justifier et répondre à un contre-argument.",
+        "comprendre": "In my view; the main reason is; on the other hand; that said.",
+        "regle": "Une argumentation claire annonce la position, les raisons et les limites.",
+        "exemples": [
+          "In my view, we should simplify the process.",
+          "The main reason is the cost.",
+          "That said, the proposal has clear benefits."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m5": {
+      "level": "B1",
+      "module": "b1-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b1_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Anglais fonctionnel réel",
+        "objectif": "Comprendre les formulations courantes et les phrasal verbs en contexte.",
+        "comprendre": "Look into = investigate; put off = postpone; carry on = continue.",
+        "regle": "Les phrasal verbs et expressions idiomatiques changent parfois de sens selon le contexte.",
+        "exemples": [
+          "I'll look into the issue.",
+          "They put off the meeting.",
+          "Please carry on with your work."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m6": {
+      "level": "B1",
+      "module": "b1-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b1_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Comprendre l'anglais réel",
+        "objectif": "Repérer idée principale, intention, détails et implicites dans un message.",
+        "comprendre": "Listen for stressed content words, linking expressions and corrections such as actually or I mean.",
+        "regle": "La compréhension s'appuie sur le contexte, les mots accentués et les reformulations.",
+        "exemples": [
+          "Actually, we need the earlier version.",
+          "What I mean is that the deadline has changed.",
+          "The key point is the revised budget."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b1_m7": {
+      "level": "B1",
+      "module": "b1-m7",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b1_m6"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Interaction B1",
+        "objectif": "Prendre son tour, clarifier, reformuler et maintenir un échange.",
+        "comprendre": "Could you clarify that? Let me rephrase. What do you mean by...?",
+        "regle": "Des formules de clarification donnent du temps et évitent les malentendus.",
+        "exemples": [
+          "Could you clarify the last point?",
+          "Let me rephrase the question.",
+          "What do you mean by 'flexible'?"
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b2_m1": {
+      "level": "B2",
+      "module": "b2-m1",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [],
+      "status": "pret",
+      "content": {
+        "titre": "Nuances grammaticales avancées",
+        "objectif": "Choisir entre des temps et constructions proches selon le sens.",
+        "comprendre": "Compare past simple, present perfect and present perfect continuous in context.",
+        "regle": "Le choix du temps dépend du point de vue, de la durée et du lien avec le présent.",
+        "exemples": [
+          "I worked there for a year.",
+          "I have worked here since May.",
+          "I have been working all morning."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b2_m2": {
+      "level": "B2",
+      "module": "b2-m2",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b2_m1"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Précision et registre",
+        "objectif": "Adapter le niveau de formalité et choisir des formulations précises.",
+        "comprendre": "Could you please confirm is more formal than Can you check; avoid vague words in reports.",
+        "regle": "Le registre dépend du destinataire, du but et du canal de communication.",
+        "exemples": [
+          "Could you please confirm receipt?",
+          "Would it be possible to reschedule?",
+          "The figures increased by twelve percent."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b2_m3": {
+      "level": "B2",
+      "module": "b2-m3",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b2_m2"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Cohésion et style avancé",
+        "objectif": "Structurer un texte avec reprises, transitions et variations de rythme.",
+        "comprendre": "Use moreover, nevertheless, consequently and specific reference words to guide the reader.",
+        "regle": "La cohésion dépend des connecteurs, des reprises lexicales et d'une information bien ordonnée.",
+        "exemples": [
+          "The plan is ambitious. Nevertheless, the first phase is achievable.",
+          "This change reduced delays; consequently, delivery improved.",
+          "The proposal has three parts. The final one concerns training."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b2_m4": {
+      "level": "B2",
+      "module": "b2-m4",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b2_m3"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Argumentation et résolution de problèmes",
+        "objectif": "Évaluer des options, exprimer des réserves et proposer un compromis.",
+        "comprendre": "If we were to delay, costs would rise; provided that..., we could...; the trade-off is...",
+        "regle": "Une discussion efficace compare critères, risques et bénéfices avant une recommandation.",
+        "exemples": [
+          "The main trade-off is speed versus cost.",
+          "Provided that the figures are correct, we can proceed.",
+          "A phased rollout would reduce the risk."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b2_m5": {
+      "level": "B2",
+      "module": "b2-m5",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b2_m4"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Communication professionnelle",
+        "objectif": "Participer à une réunion, présenter un résultat et négocier une prochaine étape.",
+        "comprendre": "Signpost a presentation, invite questions, summarize decisions and assign owners.",
+        "regle": "L'anglais professionnel privilégie des messages concis, explicites et adaptés au contexte.",
+        "exemples": [
+          "Let me start with the key findings.",
+          "Could we agree on an owner for this action?",
+          "To summarize, we will review the draft on Friday."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    },
+    "en_b2_m6": {
+      "level": "B2",
+      "module": "b2-m6",
+      "skills": [
+        "grammaire",
+        "vocabulaire"
+      ],
+      "prerequisites": [
+        "en_b2_m5"
+      ],
+      "status": "pret",
+      "content": {
+        "titre": "Compréhension avancée et synthèse",
+        "objectif": "Synthétiser des sources, distinguer faits et interprétations, restituer les nuances.",
+        "comprendre": "Attribute claims, compare sources and use cautious language: appears to, suggests that, is likely to.",
+        "regle": "Une synthèse fidèle hiérarchise les idées et signale les réserves de l'auteur.",
+        "exemples": [
+          "The report suggests that demand may recover.",
+          "Both sources agree on the trend, but differ on its cause.",
+          "The evidence is limited, so the conclusion remains tentative."
+        ],
+        "erreursFrequentes": [
+          "Traduire mot à mot depuis le français au lieu d'utiliser la structure anglaise."
+        ]
+      },
+      "exerciseIds": []
+    }
+  },
+  "exercises": {}
+}

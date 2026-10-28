@@ -1,0 +1,3001 @@
+id;fr;es;freq;categorie;niveauCECR;niveauCECRSource;traductionSource
+S1;être;ser;21718.9511;verbe;A1;elelex;existante
+S2;pour / devant;para;8308.1791;adjectif;A1;elelex;existante
+S3;avoir;tener;7472.3025;verbe;A1;elelex;existante
+S4;faire;hacer;4886.6043;verbe;A1;elelex;existante
+S5;aller;ir;4617.3129;verbe;A1;elelex;existante
+S6;pouvoir;poder;4078.5652;verbe;A1;elelex;existante
+S7;dire;decir;3720.2046;verbe;A1;elelex;existante
+S8;entier / tout;todo;3322.3519;adjectif;A1;elelex;existante
+S9;voir;ver;2541.2926;verbe;A1;elelex;existante
+S10;vouloir;querer;2371.1421;verbe;A1;elelex;existante
+S11;savoir;saber;2369.2211;verbe;A1;elelex;existante
+S12;autre;otro;2154.7991;adjectif;A1;elelex;existante
+S13;donner;dar;1777.0714;verbe;A1;elelex;existante
+S14;parler;hablar;1681.6023;verbe;A1;elelex;existante
+S15;passer (temps/lieu);pasar;1662.2592;verbe;A1;elelex;existante
+S16;appeler;llamar;1583.6058;verbe;A1;elelex;existante
+S17;bon;bueno;1540.0995;adjectif;A1;elelex;existante
+S18;habiter;vivir;1405.7670;verbe;A1;elelex;existante
+S19;arriver;llegar;1298.0418;verbe;A1;elelex;existante
+S20;connaître;conocer;1292.5616;verbe;A1;elelex;existante
+S21;porter;llevar;1239.7802;verbe;A1;elelex;existante
+S22;paraître;parecer;1203.4291;verbe;A1;elelex;existante
+S23;penser;pensar;1167.9568;verbe;A1;elelex;existante
+S24;être;estar;1084.5401;verbe;A1;elelex;existante
+S25;trouver;encontrar;1055.0527;verbe;A1;elelex;existante
+S26;nouveau;nuevo;1049.9963;adjectif;A1;elelex;existante
+S27;commencer;empezar;1000.1671;verbe;A1;elelex;existante
+S28;partir;salir;978.3401;verbe;A1;elelex;existante
+S29;croire;creer;963.9461;verbe;A1;elelex;existante
+S30;travailler;trabajar;934.3310;verbe;A1;elelex;existante
+S31;propre / lui-même;mismo;933.7523;adjectif;A1;elelex;existante
+S32;déposer / passer (un examen);dejar;884.4894;verbe;A1;elelex;existante
+S33;regarder;mirar;883.3983;verbe;A1;elelex;existante
+S34;manger;comer;873.4565;verbe;A1;elelex;existante
+S35;important;importante;837.7673;adjectif;A1;elelex;existante
+S36;meilleur;mejor;831.6148;adjectif;A1;elelex;existante
+S37;prendre;tomar;822.4696;verbe;A1;elelex;existante
+S38;le soir;noche;766.4015;nom;A1;elelex;existante
+S39;devoir;deber;759.0803;verbe;A1;elelex;existante
+S40;petit;pequeño;727.4849;adjectif;A1;elelex;existante
+S41;suivre;seguir;652.6334;verbe;A1;elelex;existante
+S42;acheter;comprar;643.9425;verbe;A1;elelex;existante
+S43;ensuite;después;640.2913;adjectif;A1;elelex;existante
+S44;chercher;buscar;638.9214;verbe;A1;elelex;existante
+S45;compter;contar;638.5146;verbe;A1;elelex;existante
+S46;grand;grande;628.8159;adjectif;A1;elelex;existante
+S47;utiliser;usar;604.5128;verbe;A1;elelex;existante
+S48;peu;poco;599.9624;adjectif;A1;elelex;existante
+S49;ouvrir;abrir;582.6354;verbe;A1;elelex;existante
+S50;écrire;escribir;567.2833;verbe;A1;elelex;existante
+S51;espérer;esperar;566.0412;verbe;A1;elelex;existante
+S52;lire;leer;554.6611;verbe;A1;elelex;existante
+S53;demander;preguntar;540.6747;verbe;A1;elelex;existante
+S54;différent;diferente;528.8523;adjectif;A1;elelex;existante
+S55;demander;pedir;494.4251;verbe;A1;elelex;existante
+S56;sentir;sentir;459.4399;verbe;A1;elelex;existante
+S57;entrer;entrar;442.9209;verbe;A1;elelex;existante
+S58;dormir;dormir;436.4347;verbe;A1;elelex;existante
+S59;ensuite;luego;436.2180;adjectif;A1;elelex;existante
+S60;haut;alto;424.8586;adjectif;A1;elelex;existante
+S61;expliquer;explicar;406.0903;verbe;A1;elelex;existante
+S62;finir;terminar;394.8508;verbe;A1;elelex;existante
+S63;long;largo;388.6255;adjectif;A1;elelex;existante
+S64;changer;cambiar;387.3604;verbe;A1;elelex;existante
+S65;décider;decidir;386.9646;verbe;A1;elelex;existante
+S66;préparer;preparar;379.7440;verbe;A1;elelex;existante
+S67;offrir;ofrecer;374.1021;verbe;A1;elelex;existante
+S68;aider;ayudar;357.4682;verbe;A1;elelex;existante
+S69;social;social;355.2389;adjectif;A1;elelex;existante
+S70;étudier;estudiar;351.4191;verbe;A1;elelex;existante
+S71;recevoir;recibir;346.0253;verbe;A1;elelex;existante
+S72;entendre;oír;344.5165;verbe;A1;elelex;existante
+S73;se souvenir;recordar;340.9934;verbe;A1;elelex;existante
+S74;découvrir;descubrir;332.6428;verbe;A1;elelex;existante
+S75;utiliser;utilizar;329.7141;verbe;A1;elelex;existante
+S76;exister;existir;329.5878;verbe;A1;elelex;existante
+S77;comprendre;entender;325.8209;verbe;A1;elelex;existante
+S78;visiter;visitar;325.2769;verbe;A1;elelex;existante
+S79;apprendre;aprender;315.2025;verbe;A1;elelex;existante
+S80;blanc;blanco;312.9017;adjectif;A1;elelex;existante
+S81;écouter;escuchar;309.5206;verbe;A1;elelex;existante
+S82;signifier;significar;308.5121;verbe;A1;elelex;existante
+S83;gagner;ganar;306.2686;verbe;A1;elelex;existante
+S84;célèbre;famoso;301.3814;adjectif;A1;elelex;existante
+S85;payer;pagar;298.7530;verbe;A1;elelex;existante
+S86;typique;típico;285.0900;adjectif;A1;elelex;existante
+S87;voyager;viajar;284.1051;verbe;A1;elelex;existante
+S88;créer;crear;281.6486;verbe;A1;elelex;existante
+S89;ancien / ex-;antiguo;273.6209;adjectif;A1;elelex;existante
+S90;propre / lui-même;propio;269.2879;adjectif;A1;elelex;existante
+S91;suivant;siguiente;267.5769;adjectif;A1;elelex;existante
+S92;libre / assez;bastante;262.4343;adjectif;A1;elelex;existante
+S93;spécial;especial;259.8277;adjectif;A1;elelex;existante
+S94;essayer;intentar;257.6388;verbe;A1;elelex;existante
+S95;vendre;vender;255.5540;verbe;A1;elelex;existante
+S96;dur / difficile;difícil;247.9573;adjectif;A1;elelex;existante
+S97;danser;bailar;247.3594;verbe;A1;elelex;existante
+S98;produire;producir;227.4341;verbe;A1;elelex;existante
+S99;oublier;olvidar;227.3959;verbe;A1;elelex;existante
+S100;mauvais;malo;224.5144;adjectif;A1;elelex;existante
+S101;jouer;jugar;224.4888;verbe;A1;elelex;existante
+S102;nécessaire;necesario;223.5444;adjectif;A1;elelex;existante
+S103;culturel;cultural;221.2570;adjectif;A1;elelex;existante
+S104;plein;lleno;218.5813;adjectif;A1;elelex;existante
+S105;accompagner;acompañar;217.9192;verbe;A1;elelex;existante
+S106;joli;bonito;213.0657;adjectif;A1;elelex;existante
+S107;fermer;cerrar;210.1917;verbe;A1;elelex;existante
+S108;noir;negro;210.1063;adjectif;A1;elelex;existante
+S109;vert;verde;208.9607;adjectif;A1;elelex;existante
+S110;organiser;organizar;204.4653;verbe;A1;elelex;existante
+S111;calme;tranquilo;200.4999;adjectif;A1;elelex;existante
+S112;personnel;personal;199.0660;adjectif;A1;elelex;existante
+S113;principal;principal;198.8382;adjectif;A1;elelex;existante
+S114;toucher;tocar;197.3600;verbe;A1;elelex;existante
+S115;contre;contra;196.4153;adjectif;A1;elelex;existante
+S116;libre / assez;libre;194.7742;adjectif;A1;elelex;existante
+S117;populaire;popular;193.8189;adjectif;A1;elelex;existante
+S118;chanter;cantar;189.9129;verbe;A1;elelex;existante
+S119;clair;claro;189.9025;adjectif;A1;elelex;existante
+S120;public;público;188.0260;adjectif;A1;elelex;existante
+S121;heureux;feliz;187.5408;adjectif;A1;elelex;existante
+S122;intéressant;interesante;187.2642;adjectif;A1;elelex;existante
+S123;apporter;traer;187.0132;verbe;A1;elelex;existante
+S124;courir;correr;185.6460;verbe;A1;elelex;existante
+S125;monter;subir;184.3947;verbe;A1;elelex;existante
+S126;choisir;elegir;183.7309;verbe;A1;elelex;existante
+S127;inviter;invitar;181.3961;verbe;A1;elelex;existante
+S128;répondre;responder;176.6996;verbe;A1;elelex;existante
+S129;national;nacional;169.9496;adjectif;A1;elelex;existante
+S130;naturel;natural;169.3512;adjectif;A1;elelex;existante
+S131;boire;beber;167.9863;verbe;A1;elelex;existante
+S132;arrêter / maintenir;mantener;166.6391;verbe;A1;elelex;existante
+S133;triste;triste;164.2277;adjectif;A1;elelex;existante
+S134;jouir;disfrutar;162.7420;verbe;A1;elelex;existante
+S135;peindre;pintar;161.6567;verbe;A1;elelex;existante
+S136;souhaiter;desear;159.5077;verbe;A1;elelex;existante
+S137;goûter;probar;157.0172;verbe;A1;elelex;existante
+S138;commencer;comenzar;156.7078;verbe;A1;elelex;existante
+S139;riche;rico;155.2660;adjectif;A1;elelex;existante
+S140;montrer;mostrar;154.4264;verbe;A1;elelex;existante
+S141;comprendre;comprender;152.2570;verbe;A1;elelex;existante
+S142;rire;reír;150.4178;verbe;A1;elelex;existante
+S143;construire;construir;148.0490;verbe;A1;elelex;existante
+S144;envoyer;enviar;144.4925;verbe;A1;elelex;existante
+S145;pauvre;pobre;144.2375;adjectif;A1;elelex;existante
+S146;commun / général;general;141.0972;adjectif;A1;elelex;existante
+S147;partager;compartir;136.4173;verbe;A1;elelex;existante
+S148;reconnaître;reconocer;136.1642;verbe;A1;elelex;existante
+S149;manquer;faltar;134.4550;verbe;A1;elelex;existante
+S150;international;internacional;134.1213;adjectif;A1;elelex;existante
+S151;commercial;comercial;132.3704;adjectif;A1;elelex;existante
+S152;cher;caro;130.1664;adjectif;A1;elelex;existante
+S153;étrange / étranger;extraño;128.8792;adjectif;A1;elelex;existante
+S154;se promener;pasear;125.7843;verbe;A1;elelex;existante
+S155;rapide / vite;rápido;123.1174;adjectif;A1;elelex;existante
+S156;échouer / descendre;bajar;122.4808;verbe;A1;elelex;existante
+S157;enseigner;enseñar;122.2641;verbe;A1;elelex;existante
+S158;commun / général;común;121.6801;adjectif;A1;elelex;existante
+S159;content;contento;118.3557;adjectif;A1;elelex;existante
+S160;proche / suivant;próximo;117.9011;adjectif;A1;elelex;existante
+S161;étrange / étranger;extranjero;117.1158;adjectif;A1;elelex;existante
+S162;cuisiner;cocinar;116.3956;verbe;A1;elelex;existante
+S163;froid;frío;111.0564;adjectif;A1;elelex;existante
+S164;marcher;caminar;111.0400;verbe;A1;elelex;existante
+S165;tomber;caer;110.5141;verbe;A1;elelex;existante
+S166;remarquer;observar;109.9553;verbe;A1;elelex;existante
+S167;se reposer;descansar;109.3443;verbe;A1;elelex;existante
+S168;sûr;seguro;109.0184;adjectif;A1;elelex;existante
+S169;bouger;mover;107.6753;verbe;A1;elelex;existante
+S170;rouge;rojo;106.2712;adjectif;A1;elelex;existante
+S171;actuel;actual;103.0106;adjectif;A1;elelex;existante
+S172;bleu;azul;100.4227;adjectif;A1;elelex;existante
+S173;faux / injuste;falso;96.9618;adjectif;A1;elelex;existante
+S174;conserver;conservar;96.7956;verbe;A1;elelex;existante
+S175;politique;político;92.4966;adjectif;A1;elelex;existante
+S176;séparer;separar;91.5173;verbe;A1;elelex;existante
+S177;parfait;perfecto;89.1896;adjectif;A1;elelex;existante
+S178;quotidien;diario;83.9005;adjectif;A1;elelex;existante
+S179;professionnel;profesional;83.8275;adjectif;A1;elelex;existante
+S180;physique;físico;83.3957;adjectif;A1;elelex;existante
+S181;joli;lindo;83.0934;adjectif;A1;elelex;existante
+S182;promettre;prometer;82.6879;verbe;A1;elelex;existante
+S183;vif / vivant;vivo;82.1718;adjectif;A1;elelex;existante
+S184;jeter;tirar;80.6645;verbe;A1;elelex;existante
+S185;voler (avion);volar;79.9523;verbe;A1;elelex;existante
+S186;officiel;oficial;79.8123;adjectif;A1;elelex;existante
+S187;voler (vol);robar;77.8852;verbe;A1;elelex;existante
+S188;frisquet / frais;fresco;77.6430;adjectif;A1;elelex;existante
+S189;crier;gritar;73.3002;verbe;A1;elelex;existante
+S190;complet / complètement;completo;72.6294;adjectif;A1;elelex;existante
+S191;arrêter / maintenir;detener;71.4549;verbe;A1;elelex;existante
+S192;original;original;68.5306;adjectif;A1;elelex;existante
+S193;sucré;dulce;64.8679;adjectif;A1;elelex;existante
+S194;indiquer;señalar;64.5410;verbe;A1;elelex;existante
+S195;publier;publicar;62.8012;verbe;A1;elelex;existante
+S196;sec;seco;62.4635;adjectif;A1;elelex;existante
+S197;moitié;mitad;60.5536;adjectif;A1;elelex;existante
+S198;pleuvoir;llover;60.3814;verbe;A1;elelex;existante
+S199;utile;útil;55.9047;adjectif;A1;elelex;existante
+S200;cuire / frire;freír;54.6662;verbe;A1;elelex;existante
+S201;direct;directo;54.2256;adjectif;A1;elelex;existante
+S202;aimer;amar;53.8309;verbe;A1;elelex;existante
+S203;sombre;oscuro;53.7861;adjectif;A1;elelex;existante
+S204;sportif;deportivo;53.0596;adjectif;A1;elelex;existante
+S205;gris;gris;52.7683;adjectif;A1;elelex;existante
+S206;chaud;caliente;52.5283;adjectif;A1;elelex;existante
+S207;s'arrêter;parar;51.8303;verbe;A1;elelex;existante
+S208;court;corto;51.7354;adjectif;A1;elelex;existante
+S209;éveiller;despertar;51.6472;verbe;A1;elelex;existante
+S210;extraordinaire;extraordinario;50.9243;adjectif;A1;elelex;existante
+S211;raccorder / s'affilier;conectar;47.7439;verbe;A1;elelex;existante
+S212;joyeux;alegre;47.1117;adjectif;A1;elelex;existante
+S213;conseiller;aconsejar;46.8834;verbe;A1;elelex;existante
+S214;entier / tout;entero;46.1224;adjectif;A1;elelex;existante
+S215;épais / gros;gordo;43.4028;adjectif;A1;elelex;existante
+S216;sauter;saltar;41.5054;verbe;A1;elelex;existante
+S217;amical / aimable;amable;40.6298;adjectif;A1;elelex;existante
+S218;délicieux;delicioso;37.3333;adjectif;A1;elelex;existante
+S219;curieux / bizarre;curioso;36.2906;adjectif;A1;elelex;existante
+S220;étroit;estrecho;34.6904;adjectif;A1;elelex;existante
+S221;fumer;fumar;28.8644;verbe;A1;elelex;existante
+S222;nager;nadar;25.7216;verbe;A1;elelex;existante
+S223;léger;ligero;24.5342;adjectif;A1;elelex;existante
+S224;pousser / croître;empujar;23.7358;verbe;A1;elelex;existante
+S225;corriger;corregir;22.4254;verbe;A1;elelex;existante
+S226;rouler;rodar;3.3668;verbe;A1;elelex;existante
+S227;ensemble;juntos;3.2940;adjectif;A1;elelex;existante
+S228;bas;bajo;188.4235;adjectif;A2;elelex;existante
+S229;permettre;permitir;165.0043;verbe;A2;elelex;existante
+S230;sûr;cierto;155.3418;adjectif;A2;elelex;existante
+S231;proposer;proponer;127.2935;verbe;A2;elelex;existante
+S232;accepter;aceptar;125.4159;verbe;A2;elelex;existante
+S233;rare;raro;125.2639;adjectif;A2;elelex;existante
+S234;développer;desarrollar;117.2044;verbe;A2;elelex;existante
+S235;droit;derecho;112.9390;adjectif;A2;elelex;existante
+S236;pleurer;llorar;108.3403;verbe;A2;elelex;existante
+S237;continuer;continuar;106.7248;verbe;A2;elelex;existante
+S238;placer / fixer;colocar;105.9677;verbe;A2;elelex;existante
+S239;conduire;conducir;102.1158;verbe;A2;elelex;existante
+S240;vrai;verdadero;101.8623;adjectif;A2;elelex;existante
+S241;dur / difficile;duro;97.2039;adjectif;A2;elelex;existante
+S242;précédent;anterior;89.3237;adjectif;A2;elelex;existante
+S243;démontrer / prouver;demostrar;87.9077;verbe;A2;elelex;existante
+S244;annoncer / s'inscrire;anunciar;86.3413;verbe;A2;elelex;existante
+S245;obliger;obligar;74.0840;verbe;A2;elelex;existante
+S246;pousser / croître;crecer;72.2689;verbe;A2;elelex;existante
+S247;laver;lavar;71.7228;verbe;A2;elelex;existante
+S248;répéter;repetir;71.2621;verbe;A2;elelex;existante
+S249;propre;limpio;70.6474;adjectif;A2;elelex;existante
+S250;nettoyer;limpiar;69.7477;verbe;A2;elelex;existante
+S251;indiquer;indicar;68.3307;verbe;A2;elelex;existante
+S252;envoyer;mandar;68.1043;verbe;A2;elelex;existante
+S253;quotidien;cotidiano;65.3266;adjectif;A2;elelex;existante
+S254;suffisant;suficiente;63.3032;adjectif;A2;elelex;existante
+S255;contrôler;controlar;61.5973;verbe;A2;elelex;existante
+S256;mort;muerto;60.7262;adjectif;A2;elelex;existante
+S257;durer;durar;60.6247;verbe;A2;elelex;existante
+S258;jeter;lanzar;59.1485;verbe;A2;elelex;existante
+S259;grave;grave;57.3495;adjectif;A2;elelex;existante
+S260;décrire;describir;54.8682;verbe;A2;elelex;existante
+S261;total;total;52.9137;adjectif;A2;elelex;existante
+S262;remarquer;notar;52.1638;verbe;A2;elelex;existante
+S263;interdire;prohibir;52.0816;verbe;A2;elelex;existante
+S264;couper;cortar;52.0200;verbe;A2;elelex;existante
+S265;vaste;amplio;50.6346;adjectif;A2;elelex;existante
+S266;positif;positivo;49.5880;adjectif;A2;elelex;existante
+S267;appartenir;pertenecer;49.5809;verbe;A2;elelex;existante
+S268;remercier;agradecer;48.6902;verbe;A2;elelex;existante
+S269;scientifique;científico;48.3102;adjectif;A2;elelex;existante
+S270;fin;fino;48.0205;adjectif;A2;elelex;existante
+S271;arriver (se produire);suceder;47.9962;verbe;A2;elelex;existante
+S272;ranger;ordenar;46.2305;verbe;A2;elelex;existante
+S273;réel / vraiment;real;45.8256;adjectif;A2;elelex;existante
+S274;accepter / engager;contratar;44.5668;verbe;A2;elelex;existante
+S275;éprouver;experimentar;42.0246;verbe;A2;elelex;existante
+S276;jaune;amarillo;41.9422;adjectif;A2;elelex;existante
+S277;enquêter;investigar;40.9405;verbe;A2;elelex;existante
+S278;respirer;respirar;40.8021;verbe;A2;elelex;existante
+S279;confirmer;confirmar;39.3268;verbe;A2;elelex;existante
+S280;exiger;exigir;38.6265;verbe;A2;elelex;existante
+S281;détester;odiar;38.5314;verbe;A2;elelex;existante
+S282;sentir;oler;35.5892;verbe;A2;elelex;existante
+S283;sale;sucio;35.1898;adjectif;A2;elelex;existante
+S284;contenir;contener;35.1098;verbe;A2;elelex;existante
+S285;simple;sencillo;34.6113;adjectif;A2;elelex;existante
+S286;mentir;mentir;33.9472;verbe;A2;elelex;existante
+S287;négatif;negativo;33.3526;adjectif;A2;elelex;existante
+S288;proche / suivant;cercano;33.0956;adjectif;A2;elelex;existante
+S289;remplir;llenar;32.2128;verbe;A2;elelex;existante
+S290;tôt;temprano;31.0734;adjectif;A2;elelex;existante
+S291;technique;técnico;30.2126;adjectif;A2;elelex;existante
+S292;limiter;limitar;29.7198;verbe;A2;elelex;existante
+S293;particulier / spécial;particular;28.6768;adjectif;A2;elelex;existante
+S294;lointain;lejano;26.8360;adjectif;A2;elelex;existante
+S295;profond;profundo;25.4237;adjectif;A2;elelex;existante
+S296;sauver;salvar;24.9840;verbe;A2;elelex;existante
+S297;calme;calma;24.2966;adjectif;A2;elelex;existante
+S298;tourner;girar;23.8846;verbe;A2;elelex;existante
+S299;prévenir / avertir;avisar;23.8312;verbe;A2;elelex;existante
+S300;dessiner;dibujar;23.0687;verbe;A2;elelex;existante
+S301;élever / éduquer;educar;22.5385;verbe;A2;elelex;existante
+S302;double;doble;22.5164;adjectif;A2;elelex;existante
+S303;détruire;destruir;21.1662;verbe;A2;elelex;existante
+S304;habiter;habitar;20.6834;verbe;A2;elelex;existante
+S305;conduire;manejar;19.4363;verbe;A2;elelex;existante
+S306;épais / gros;grueso;19.0128;adjectif;A2;elelex;existante
+S307;éveillé;despierto;18.9885;adjectif;A2;elelex;existante
+S308;diminuer / prélever;retirar;18.3818;verbe;A2;elelex;existante
+S309;absolu / absolument;absoluto;17.8359;adjectif;A2;elelex;existante
+S310;pour / devant;delante;17.7968;adjectif;A2;elelex;existante
+S311;sauvage;salvaje;17.6496;adjectif;A2;elelex;existante
+S312;poli;cortés;16.0201;adjectif;A2;elelex;existante
+S313;nommer;nombrar;15.8824;verbe;A2;elelex;existante
+S314;prêt;listo;15.3469;adjectif;A2;elelex;existante
+S315;rond;redondo;14.6860;adjectif;A2;elelex;existante
+S316;concret;concreto;14.5411;adjectif;A2;elelex;existante
+S317;brun / marron;marrón;14.3913;adjectif;A2;elelex;existante
+S318;échouer / descendre;suspender;14.0924;verbe;A2;elelex;existante
+S319;ancien / ex-;ex;13.4604;adjectif;A2;elelex;existante
+S320;humide;húmedo;12.0426;adjectif;A2;elelex;existante
+S321;inconnu;desconocido;12.0112;adjectif;A2;elelex;existante
+S322;identique;idéntico;11.6635;adjectif;A2;elelex;existante
+S323;réparer;reparar;10.2305;verbe;A2;elelex;existante
+S324;planter;plantar;8.6679;verbe;A2;elelex;existante
+S325;aimable / gentil;gentil;1.9444;adjectif;A2;elelex;existante
+S326;vaste;vasto;1.2637;adjectif;A2;elelex;existante
+S327;reprendre;retomar;0.9129;verbe;A2;elelex;existante
+S328;fatigué;cansado;0.8352;adjectif;A2;elelex;existante
+S329;arriver (événement);ocurrir;62.6285;verbe;B1;elelex;existante
+S330;placer / fixer;fijar;36.5060;verbe;B1;elelex;existante
+S331;simple;simple;35.7295;adjectif;B1;elelex;existante
+S332;posséder;poseer;33.4735;verbe;B1;elelex;existante
+S333;fixe;fijo;32.1542;adjectif;B1;elelex;existante
+S334;financier;financiero;30.6346;adjectif;B1;elelex;existante
+S335;craindre;temer;27.2584;verbe;B1;elelex;existante
+S336;diminuer / prélever;disminuir;26.2516;verbe;B1;elelex;existante
+S337;disponible;disponible;21.6352;adjectif;B1;elelex;existante
+S338;large;ancho;20.9598;adjectif;B1;elelex;existante
+S339;élever / éduquer;criar;15.9310;verbe;B1;elelex;existante
+S340;lent;lento;14.7227;adjectif;B1;elelex;existante
+S341;prévenir;prevenir;12.6164;verbe;B1;elelex;existante
+S342;calculer;calcular;12.3736;verbe;B1;elelex;existante
+S343;refuser;rechazar;12.1020;verbe;B1;elelex;existante
+S344;probable;probable;11.9296;adjectif;B1;elelex;existante
+S345;immédiat;inmediato;10.6505;adjectif;B1;elelex;existante
+S346;célèbre;célebre;10.4813;adjectif;B1;elelex;existante
+S347;raisonnable / sage;razonable;10.4561;adjectif;B1;elelex;existante
+S348;prier;rezar;9.2246;verbe;B1;elelex;existante
+S349;goûter;saborear;8.6904;verbe;B1;elelex;existante
+S350;aveugle;ciego;4.9824;adjectif;B1;elelex;existante
+S351;fondre;derretir;2.6527;verbe;B1;elelex;existante
+S352;honnête;honesto;1.8183;adjectif;B1;elelex;existante
+S353;provisoire;provisional;0.9069;adjectif;B1;elelex;existante
+S354;connu;conocido;0.8953;adjectif;B1;elelex;existante
+S355;amical / aimable;amistoso;0.4501;adjectif;B1;elelex;existante
+S356;le cours;el curso;0.0776;nom;B1;elelex;existante
+S357;salé;salado;0.0776;adjectif;B1;elelex;existante
+S358;reprendre;reanudar;0.0110;verbe;B1;elelex;existante
+S359;douter;dudar;29.1079;verbe;B2;elelex;existante
+S360;conviendrait;conveniente;16.2693;adjectif;B2;elelex;existante
+S361;précis;preciso;16.0029;adjectif;B2;elelex;existante
+S362;prévenir / avertir;advertir;14.8685;verbe;B2;elelex;existante
+S363;procurer / fournir;proporcionar;13.6553;verbe;B2;elelex;existante
+S364;continu;continuo;13.1377;adjectif;B2;elelex;existante
+S365;fermer / conclure;concluir;9.8118;verbe;B2;elelex;existante
+S366;gentil / mignon;tierno;6.4390;adjectif;B2;elelex;existante
+S367;faux / injuste;injusto;5.6484;adjectif;B2;elelex;existante
+S368;impliqué / concerné;afectado;3.4022;adjectif;B2;elelex;existante
+S369;moral;moral;2.6433;adjectif;B2;elelex;existante
+S370;tenir;sujetar;2.2056;verbe;B2;elelex;existante
+S371;sage;sabio;2.1271;adjectif;B2;elelex;existante
+S372;raisonnable / sage;sensato;1.0615;adjectif;B2;elelex;existante
+S373;rétablir;restablecer;0.1385;verbe;B2;elelex;existante
+S374;absolu / absolument;absolutamente;0.0000;adjectif;B2;elelex;existante
+S375;s'habituer;acostumbrarse;0.0000;verbe;B2;elelex;existante
+S376;se raser;afeitarse;0.0000;verbe;B2;elelex;existante
+S377;raccorder / s'affilier;afiliarse;0.0000;verbe;B2;elelex;existante
+S378;peureux / effrayé;asustado;0.0000;adjectif;B2;elelex;existante
+S379;oser;atreverse;0.0000;verbe;B2;elelex;existante
+S380;étourdi / vertigineux;aturdido;0.0000;adjectif;B2;elelex;existante
+S381;complet / complètement;completamente;0.0000;adjectif;B2;elelex;existante
+S382;concerner;concernir;0.0000;verbe;B2;elelex;existante
+S383;consister (en);consistir (en);0.0000;verbe;B2;elelex;existante
+S384;devenir;convertirse en;0.0000;verbe;B2;elelex;existante
+S385;de base;de base;0.0000;adjectif;B2;elelex;existante
+S386;réel / vraiment;de verdad;0.0000;adjectif;B2;elelex;existante
+S387;dépendre (de);depender (de);0.0000;verbe;B2;elelex;existante
+S388;s'arrêter;detenerse;0.0000;verbe;B2;elelex;existante
+S389;déterminé / certain;determinado;0.0000;adjectif;B2;elelex;existante
+S390;prêt / disposé;dispuesto;0.0000;adjectif;B2;elelex;existante
+S391;manquer;echar de menos;0.0000;verbe;B2;elelex;existante
+S392;poli;educado;0.0000;adjectif;B2;elelex;existante
+S393;l'avocat;el abogado;0.0000;nom;B2;elelex;existante
+S394;le grand-père;el abuelo;0.0000;nom;B2;elelex;existante
+S395;l'acteur;el actor;0.0000;nom;B2;elelex;existante
+S396;l'accord;el acuerdo;0.0000;nom;B2;elelex;existante
+S397;l'avance;el adelanto;0.0000;nom;B2;elelex;existante
+S398;l'aéroport;el aeropuerto;0.0000;nom;B2;elelex;existante
+S399;l'eau;el agua;0.0000;nom;B2;elelex;existante
+S400;le trou;el agujero;0.0000;nom;B2;elelex;existante
+S401;l'air;el aire;0.0000;nom;B2;elelex;existante
+S402;l'âme;el alma;0.0000;nom;B2;elelex;existante
+S403;le stockage;el almacenamiento;0.0000;nom;B2;elelex;existante
+S404;l'élève;el alumno;0.0000;nom;B2;elelex;existante
+S405;le jaune;el amarillo;0.0000;nom;B2;elelex;existante
+S406;l'amour;el amor;0.0000;nom;B2;elelex;existante
+S407;la bague;el anillo;0.0000;nom;B2;elelex;existante
+S408;l'animal;el animal;0.0000;nom;B2;elelex;existante
+S409;l'appareil;el aparato;0.0000;nom;B2;elelex;existante
+S410;l'appartement;el apartamento;0.0000;nom;B2;elelex;existante
+S411;le nom de famille;el apellido;0.0000;nom;B2;elelex;existante
+S412;le soutien;el apoyo;0.0000;nom;B2;elelex;existante
+S413;l'apprentissage;el aprendizaje;0.0000;nom;B2;elelex;existante
+S414;le fichier;el archivo;0.0000;nom;B2;elelex;existante
+S415;le sable;el arena;0.0000;nom;B2;elelex;existante
+S416;l'armoire;el armario;0.0000;nom;B2;elelex;existante
+S417;l'art;el arte;0.0000;nom;B2;elelex;existante
+S418;l'artiste;el artista;0.0000;nom;B2;elelex;existante
+S419;l'article;el artículo;0.0000;nom;B2;elelex;existante
+S420;l'ascenseur;el ascensor;0.0000;nom;B2;elelex;existante
+S421;le siège;el asiento;0.0000;nom;B2;elelex;existante
+S422;l'affaire;el asunto;0.0000;nom;B2;elelex;existante
+S423;le bus;el autobús;0.0000;nom;B2;elelex;existante
+S424;l'avion;el avión;0.0000;nom;B2;elelex;existante
+S425;la mairie;el ayuntamiento;0.0000;nom;B2;elelex;existante
+S426;le bleu;el azul;0.0000;nom;B2;elelex;existante
+S427;le sucre;el azúcar;0.0000;nom;B2;elelex;existante
+S428;l'année;el año;0.0000;nom;B2;elelex;existante
+S429;la banque;el banco;0.0000;nom;B2;elelex;existante
+S430;le bateau;el barco;0.0000;nom;B2;elelex;existante
+S431;le quartier;el barrio;0.0000;nom;B2;elelex;existante
+S432;la salle de bain;el baño;0.0000;nom;B2;elelex;existante
+S433;le bénéfice;el beneficio;0.0000;nom;B2;elelex;existante
+S434;le bien-être;el bienestar;0.0000;nom;B2;elelex;existante
+S435;le billet (ticket);el billete;0.0000;nom;B2;elelex;existante
+S436;le blanc;el blanco;0.0000;nom;B2;elelex;existante
+S437;la poche;el bolsillo;0.0000;nom;B2;elelex;existante
+S438;le sac;el bolso;0.0000;nom;B2;elelex;existante
+S439;le stylo;el bolígrafo;0.0000;nom;B2;elelex;existante
+S440;la forêt;el bosque;0.0000;nom;B2;elelex;existante
+S441;le bras;el brazo;0.0000;nom;B2;elelex;existante
+S442;le cheval;el caballo;0.0000;nom;B2;elelex;existante
+S443;le café;el café;0.0000;nom;B2;elelex;existante
+S444;la chaleur;el calor;0.0000;nom;B2;elelex;existante
+S445;le changement;el cambio;0.0000;nom;B2;elelex;existante
+S446;le chemin;el camino;0.0000;nom;B2;elelex;existante
+S447;la campagne;el campo;0.0000;nom;B2;elelex;existante
+S448;le chant;el canto;0.0000;nom;B2;elelex;existante
+S449;le caractère;el carácter;0.0000;nom;B2;elelex;existante
+S450;le cas;el caso;0.0000;nom;B2;elelex;existante
+S451;le château;el castillo;0.0000;nom;B2;elelex;existante
+S452;le cimetière;el cementerio;0.0000;nom;B2;elelex;existante
+S453;le centre-ville;el centro;0.0000;nom;B2;elelex;existante
+S454;le centre commercial;el centro comercial;0.0000;nom;B2;elelex;existante
+S455;le cerveau;el cerebro;0.0000;nom;B2;elelex;existante
+S456;le ciel;el cielo;0.0000;nom;B2;elelex;existante
+S457;le scientifique;el científico;0.0000;nom;B2;elelex;existante
+S458;le cinéma;el cine;0.0000;nom;B2;elelex;existante
+S459;le citoyen;el ciudadano;0.0000;nom;B2;elelex;existante
+S460;le client;el cliente;0.0000;nom;B2;elelex;existante
+S461;le climat;el clima;0.0000;nom;B2;elelex;existante
+S462;la voiture;el coche;0.0000;nom;B2;elelex;existante
+S463;le collègue;el colega;0.0000;nom;B2;elelex;existante
+S464;le collier;el collar;0.0000;nom;B2;elelex;existante
+S465;la couleur;el color;0.0000;nom;B2;elelex;existante
+S466;le carburant;el combustible;0.0000;nom;B2;elelex;existante
+S467;le commerce;el comercio;0.0000;nom;B2;elelex;existante
+S468;le début;el comienzo;0.0000;nom;B2;elelex;existante
+S469;le comportement;el comportamiento;0.0000;nom;B2;elelex;existante
+S470;le concept;el concepto;0.0000;nom;B2;elelex;existante
+S471;le concert;el concierto;0.0000;nom;B2;elelex;existante
+S472;le conflit;el conflicto;0.0000;nom;B2;elelex;existante
+S473;la connaissance;el conocimiento;0.0000;nom;B2;elelex;existante
+S474;le consommateur;el consumidor;0.0000;nom;B2;elelex;existante
+S475;le contact;el contacto;0.0000;nom;B2;elelex;existante
+S476;le contenu;el contenido;0.0000;nom;B2;elelex;existante
+S477;le contrat;el contrato;0.0000;nom;B2;elelex;existante
+S478;le courage;el coraje;0.0000;nom;B2;elelex;existante
+S479;le cœur;el corazón;0.0000;nom;B2;elelex;existante
+S480;le courrier;el correo;0.0000;nom;B2;elelex;existante
+S481;le coût;el coste;0.0000;nom;B2;elelex;existante
+S482;la croissance;el crecimiento;0.0000;nom;B2;elelex;existante
+S483;le crime;el crimen;0.0000;nom;B2;elelex;existante
+S484;le cahier;el cuaderno;0.0000;nom;B2;elelex;existante
+S485;le carré;el cuadrado;0.0000;nom;B2;elelex;existante
+S486;le tableau;el cuadro;0.0000;nom;B2;elelex;existante
+S487;le quart;el cuarto;0.0000;nom;B2;elelex;existante
+S488;le couteau;el cuchillo;0.0000;nom;B2;elelex;existante
+S489;le cou;el cuello;0.0000;nom;B2;elelex;existante
+S490;le corps;el cuerpo;0.0000;nom;B2;elelex;existante
+S491;le cercle;el círculo;0.0000;nom;B2;elelex;existante
+S492;le débat;el debate;0.0000;nom;B2;elelex;existante
+S493;le devoir;el deber;0.0000;nom;B2;elelex;existante
+S494;le doigt;el dedo;0.0000;nom;B2;elelex;existante
+S495;le rayon / le département;el departamento;0.0000;nom;B2;elelex;existante
+S496;le sport;el deporte;0.0000;nom;B2;elelex;existante
+S497;le droit;el derecho;0.0000;nom;B2;elelex;existante
+S498;le développement;el desarrollo;0.0000;nom;B2;elelex;existante
+S499;la découverte;el descubrimiento;0.0000;nom;B2;elelex;existante
+S500;le chômage;el desempleo;0.0000;nom;B2;elelex;existante
+S501;le désert;el desierto;0.0000;nom;B2;elelex;existante
+S502;la destination;el destino;0.0000;nom;B2;elelex;existante
+S503;l'argent;el dinero;0.0000;nom;B2;elelex;existante
+S504;le dieu;el dios;0.0000;nom;B2;elelex;existante
+S505;le discours;el discurso;0.0000;nom;B2;elelex;existante
+S506;le design;el diseño;0.0000;nom;B2;elelex;existante
+S507;le divorce;el divorcio;0.0000;nom;B2;elelex;existante
+S508;le dialogue;el diálogo;0.0000;nom;B2;elelex;existante
+S509;le double;el doble;0.0000;nom;B2;elelex;existante
+S510;la douleur;el dolor;0.0000;nom;B2;elelex;existante
+S511;le domicile;el domicilio;0.0000;nom;B2;elelex;existante
+S512;le jour;el día;0.0000;nom;B2;elelex;existante
+S513;le bâtiment;el edificio;0.0000;nom;B2;elelex;existante
+S514;l'effet;el efecto;0.0000;nom;B2;elelex;existante
+S515;l'exercice;el ejercicio;0.0000;nom;B2;elelex;existante
+S516;l'armée;el ejército;0.0000;nom;B2;elelex;existante
+S517;l'éléphant;el elefante;0.0000;nom;B2;elelex;existante
+S518;l'élément;el elemento;0.0000;nom;B2;elelex;existante
+S519;l'émetteur;el emisor;0.0000;nom;B2;elelex;existante
+S520;l'employé;el empleado;0.0000;nom;B2;elelex;existante
+S521;l'emploi;el empleo;0.0000;nom;B2;elelex;existante
+S522;la rencontre;el encuentro;0.0000;nom;B2;elelex;existante
+S523;l'entraîneur;el entrenador;0.0000;nom;B2;elelex;existante
+S524;le divertissement;el entretenimiento;0.0000;nom;B2;elelex;existante
+S525;le contenant;el envase;0.0000;nom;B2;elelex;existante
+S526;l'équipe;el equipo;0.0000;nom;B2;elelex;existante
+S527;l'espace;el espacio;0.0000;nom;B2;elelex;existante
+S528;le miroir;el espejo;0.0000;nom;B2;elelex;existante
+S529;l'esprit;el espíritu;0.0000;nom;B2;elelex;existante
+S530;le stade;el estadio;0.0000;nom;B2;elelex;existante
+S531;l'état;el estado;0.0000;nom;B2;elelex;existante
+S532;l'état civil;el estado civil;0.0000;nom;B2;elelex;existante
+S533;l'étagère;el estante;0.0000;nom;B2;elelex;existante
+S534;le style;el estilo;0.0000;nom;B2;elelex;existante
+S535;l'étude;el estudio;0.0000;nom;B2;elelex;existante
+S536;l'euro;el euro;0.0000;nom;B2;elelex;existante
+S537;l'examen;el examen;0.0000;nom;B2;elelex;existante
+S538;l'étranger;el extranjero;0.0000;nom;B2;elelex;existante
+S539;la fin;el fin;0.0000;nom;B2;elelex;existante
+S540;l'échec;el fracaso;0.0000;nom;B2;elelex;existante
+S541;le devant;el frente;0.0000;nom;B2;elelex;existante
+S542;le froid;el frío;0.0000;nom;B2;elelex;existante
+S543;le feu;el fuego;0.0000;nom;B2;elelex;existante
+S544;le futur;el futuro;0.0000;nom;B2;elelex;existante
+S545;le football;el fútbol;0.0000;nom;B2;elelex;existante
+S546;le garage;el garaje;0.0000;nom;B2;elelex;existante
+S547;le gaz;el gas;0.0000;nom;B2;elelex;existante
+S548;la dépense;el gasto;0.0000;nom;B2;elelex;existante
+S549;le chat;el gato;0.0000;nom;B2;elelex;existante
+S550;le gouvernement;el gobierno;0.0000;nom;B2;elelex;existante
+S551;le degré;el grado;0.0000;nom;B2;elelex;existante
+S552;le gris;el gris;0.0000;nom;B2;elelex;existante
+S553;le groupe;el grupo;0.0000;nom;B2;elelex;existante
+S554;le goût;el gusto;0.0000;nom;B2;elelex;existante
+S555;le fait;el hecho;0.0000;nom;B2;elelex;existante
+S556;le frère;el hermano;0.0000;nom;B2;elelex;existante
+S557;le fer;el hierro;0.0000;nom;B2;elelex;existante
+S558;le fils;el hijo;0.0000;nom;B2;elelex;existante
+S559;l'homme;el hombre;0.0000;nom;B2;elelex;existante
+S560;l'épaule;el hombro;0.0000;nom;B2;elelex;existante
+S561;l'honneur;el honor;0.0000;nom;B2;elelex;existante
+S562;le four;el horno;0.0000;nom;B2;elelex;existante
+S563;l'hôpital;el hospital;0.0000;nom;B2;elelex;existante
+S564;la fumée;el humo;0.0000;nom;B2;elelex;existante
+S565;l'habitude;el hábito;0.0000;nom;B2;elelex;existante
+S566;l'impôt;el impuesto;0.0000;nom;B2;elelex;existante
+S567;l'individu;el individuo;0.0000;nom;B2;elelex;existante
+S568;le rapport;el informe;0.0000;nom;B2;elelex;existante
+S569;l'ingrédient;el ingrediente;0.0000;nom;B2;elelex;existante
+S570;l'instrument;el instrumento;0.0000;nom;B2;elelex;existante
+S571;l'internet;el internet;0.0000;nom;B2;elelex;existante
+S572;l'invité;el invitado;0.0000;nom;B2;elelex;existante
+S573;le jardin;el jardín;0.0000;nom;B2;elelex;existante
+S574;le patron;el jefe;0.0000;nom;B2;elelex;existante
+S575;le jeu;el juego;0.0000;nom;B2;elelex;existante
+S576;le juge;el juez;0.0000;nom;B2;elelex;existante
+S577;le joueur;el jugador;0.0000;nom;B2;elelex;existante
+S578;le jouet;el juguete;0.0000;nom;B2;elelex;existante
+S579;la lèvre;el labio;0.0000;nom;B2;elelex;existante
+S580;le côté;el lado;0.0000;nom;B2;elelex;existante
+S581;le lac;el lago;0.0000;nom;B2;elelex;existante
+S582;le langage;el lenguaje;0.0000;nom;B2;elelex;existante
+S583;le lion;el león;0.0000;nom;B2;elelex;existante
+S584;le livre;el libro;0.0000;nom;B2;elelex;existante
+S585;le lieu;el lugar;0.0000;nom;B2;elelex;existante
+S586;le lieu de naissance;el lugar de nacimiento;0.0000;nom;B2;elelex;existante
+S587;la limite;el límite;0.0000;nom;B2;elelex;existante
+S588;le liquide;el líquido;0.0000;nom;B2;elelex;existante
+S589;la carte (géo);el mapa;0.0000;nom;B2;elelex;existante
+S590;la mer;el mar;0.0000;nom;B2;elelex;existante
+S591;le mari;el marido;0.0000;nom;B2;elelex;existante
+S592;le brun;el marrón;0.0000;nom;B2;elelex;existante
+S593;le matériel;el material;0.0000;nom;B2;elelex;existante
+S594;le mariage;el matrimonio;0.0000;nom;B2;elelex;existante
+S595;le médicament;el medicamento;0.0000;nom;B2;elelex;existante
+S596;le milieu;el medio;0.0000;nom;B2;elelex;existante
+S597;l'environnement;el medio ambiente;0.0000;nom;B2;elelex;existante
+S598;le midi;el mediodía;0.0000;nom;B2;elelex;existante
+S599;le message;el mensaje;0.0000;nom;B2;elelex;existante
+S600;le marché;el mercado;0.0000;nom;B2;elelex;existante
+S601;le mois;el mes;0.0000;nom;B2;elelex;existante
+S602;le métal;el metal;0.0000;nom;B2;elelex;existante
+S603;la peur;el miedo;0.0000;nom;B2;elelex;existante
+S604;le membre;el miembro;0.0000;nom;B2;elelex;existante
+S605;la minute;el minuto;0.0000;nom;B2;elelex;existante
+S606;le modèle;el modelo;0.0000;nom;B2;elelex;existante
+S607;le moment;el momento;0.0000;nom;B2;elelex;existante
+S608;le monument;el monumento;0.0000;nom;B2;elelex;existante
+S609;le moteur;el motor;0.0000;nom;B2;elelex;existante
+S610;le mouvement;el movimiento;0.0000;nom;B2;elelex;existante
+S611;le meuble;el mueble;0.0000;nom;B2;elelex;existante
+S612;le monde;el mundo;0.0000;nom;B2;elelex;existante
+S613;la commune;el municipio;0.0000;nom;B2;elelex;existante
+S614;le musée;el museo;0.0000;nom;B2;elelex;existante
+S615;le médecin;el médico;0.0000;nom;B2;elelex;existante
+S616;la méthode;el método;0.0000;nom;B2;elelex;existante
+S617;la naissance;el nacimiento;0.0000;nom;B2;elelex;existante
+S618;l'orange (couleur);el naranja;0.0000;nom;B2;elelex;existante
+S619;le noir;el negro;0.0000;nom;B2;elelex;existante
+S620;le nerf;el nervio;0.0000;nom;B2;elelex;existante
+S621;le niveau;el nivel;0.0000;nom;B2;elelex;existante
+S622;l'enfant;el niño;0.0000;nom;B2;elelex;existante
+S623;le prénom;el nombre;0.0000;nom;B2;elelex;existante
+S624;le prénom;el nombre de pila;0.0000;nom;B2;elelex;existante
+S625;le nombre;el número;0.0000;nom;B2;elelex;existante
+S626;le numéro de téléphone;el número de teléfono;0.0000;nom;B2;elelex;existante
+S627;le but;el objetivo;0.0000;nom;B2;elelex;existante
+S628;l'objet;el objeto;0.0000;nom;B2;elelex;existante
+S629;l'ouvrier;el obrero;0.0000;nom;B2;elelex;existante
+S630;le loisir;el ocio;0.0000;nom;B2;elelex;existante
+S631;l'océan;el océano;0.0000;nom;B2;elelex;existante
+S632;la haine;el odio;0.0000;nom;B2;elelex;existante
+S633;le métier;el oficio;0.0000;nom;B2;elelex;existante
+S634;l'œil;el ojo;0.0000;nom;B2;elelex;existante
+S635;l'odeur;el olor;0.0000;nom;B2;elelex;existante
+S636;l'ordre;el orden;0.0000;nom;B2;elelex;existante
+S637;l'ordinateur;el ordenador;0.0000;nom;B2;elelex;existante
+S638;l'origine;el origen;0.0000;nom;B2;elelex;existante
+S639;l'or;el oro;0.0000;nom;B2;elelex;existante
+S640;le patient;el paciente;0.0000;nom;B2;elelex;existante
+S641;le père;el padre;0.0000;nom;B2;elelex;existante
+S642;le paysage;el paisaje;0.0000;nom;B2;elelex;existante
+S643;le palais;el palacio;0.0000;nom;B2;elelex;existante
+S644;le pain;el pan;0.0000;nom;B2;elelex;existante
+S645;le boulanger;el panadero;0.0000;nom;B2;elelex;existante
+S646;le pantalon;el pantalón;0.0000;nom;B2;elelex;existante
+S647;le papier;el papel;0.0000;nom;B2;elelex;existante
+S648;le colis;el paquete;0.0000;nom;B2;elelex;existante
+S649;le parapluie;el paraguas;0.0000;nom;B2;elelex;existante
+S650;le parc;el parque;0.0000;nom;B2;elelex;existante
+S651;le match;el partido;0.0000;nom;B2;elelex;existante
+S652;le passé;el pasado;0.0000;nom;B2;elelex;existante
+S653;le passe-temps;el pasatiempo;0.0000;nom;B2;elelex;existante
+S654;la cour;el patio;0.0000;nom;B2;elelex;existante
+S655;le pays;el país;0.0000;nom;B2;elelex;existante
+S656;le danger;el peligro;0.0000;nom;B2;elelex;existante
+S657;la pensée;el pensamiento;0.0000;nom;B2;elelex;existante
+S658;la période;el periodo;0.0000;nom;B2;elelex;existante
+S659;le journal;el periódico;0.0000;nom;B2;elelex;existante
+S660;le chien;el perro;0.0000;nom;B2;elelex;existante
+S661;le poisson;el pescado;0.0000;nom;B2;elelex;existante
+S662;le poids;el peso;0.0000;nom;B2;elelex;existante
+S663;le pied;el pie;0.0000;nom;B2;elelex;existante
+S664;le plaisir;el placer;0.0000;nom;B2;elelex;existante
+S665;le plan;el plan;0.0000;nom;B2;elelex;existante
+S666;la planète;el planeta;0.0000;nom;B2;elelex;existante
+S667;l'assiette;el plato;0.0000;nom;B2;elelex;existante
+S668;le plastique;el plástico;0.0000;nom;B2;elelex;existante
+S669;le pouvoir;el poder;0.0000;nom;B2;elelex;existante
+S670;la poussière;el polvo;0.0000;nom;B2;elelex;existante
+S671;le prix;el precio;0.0000;nom;B2;elelex;existante
+S672;le présent;el presente;0.0000;nom;B2;elelex;existante
+S673;le président;el presidente;0.0000;nom;B2;elelex;existante
+S674;le regard / le prestige;el prestigio;0.0000;nom;B2;elelex;existante
+S675;le budget;el presupuesto;0.0000;nom;B2;elelex;existante
+S676;le cousin;el primo;0.0000;nom;B2;elelex;existante
+S677;le début;el principio;0.0000;nom;B2;elelex;existante
+S678;le problème;el problema;0.0000;nom;B2;elelex;existante
+S679;le processus;el proceso;0.0000;nom;B2;elelex;existante
+S680;le produit;el producto;0.0000;nom;B2;elelex;existante
+S681;le professeur;el profesor;0.0000;nom;B2;elelex;existante
+S682;le programme;el programa;0.0000;nom;B2;elelex;existante
+S683;le progrès;el progreso;0.0000;nom;B2;elelex;existante
+S684;le projet;el proyecto;0.0000;nom;B2;elelex;existante
+S685;le peuple;el pueblo;0.0000;nom;B2;elelex;existante
+S686;le pont;el puente;0.0000;nom;B2;elelex;existante
+S687;le port;el puerto;0.0000;nom;B2;elelex;existante
+S688;le point;el punto;0.0000;nom;B2;elelex;existante
+S689;l'oiseau;el pájaro;0.0000;nom;B2;elelex;existante
+S690;le paragraphe;el párrafo;0.0000;nom;B2;elelex;existante
+S691;le public;el público;0.0000;nom;B2;elelex;existante
+S692;la souris (informatique);el ratón;0.0000;nom;B2;elelex;existante
+S693;le reçu;el recibo;0.0000;nom;B2;elelex;existante
+S694;le recyclage;el reciclaje;0.0000;nom;B2;elelex;existante
+S695;la ressource;el recurso;0.0000;nom;B2;elelex;existante
+S696;le cadeau;el regalo;0.0000;nom;B2;elelex;existante
+S697;la montre;el reloj;0.0000;nom;B2;elelex;existante
+S698;le déchet;el residuo;0.0000;nom;B2;elelex;existante
+S699;le respect;el respeto;0.0000;nom;B2;elelex;existante
+S700;le restaurant;el restaurante;0.0000;nom;B2;elelex;existante
+S701;le reste;el resto;0.0000;nom;B2;elelex;existante
+S702;le résultat;el resultado;0.0000;nom;B2;elelex;existante
+S703;le retard;el retraso;0.0000;nom;B2;elelex;existante
+S704;le roi;el rey;0.0000;nom;B2;elelex;existante
+S705;le risque;el riesgo;0.0000;nom;B2;elelex;existante
+S706;le rouge;el rojo;0.0000;nom;B2;elelex;existante
+S707;le bruit;el ruido;0.0000;nom;B2;elelex;existante
+S708;la rivière;el río;0.0000;nom;B2;elelex;existante
+S709;le goût;el sabor;0.0000;nom;B2;elelex;existante
+S710;le sac;el saco;0.0000;nom;B2;elelex;existante
+S711;le salaire;el salario;0.0000;nom;B2;elelex;existante
+S712;le salon;el salón;0.0000;nom;B2;elelex;existante
+S713;le secret;el secreto;0.0000;nom;B2;elelex;existante
+S714;la seconde;el segundo;0.0000;nom;B2;elelex;existante
+S715;le six;el seis;0.0000;nom;B2;elelex;existante
+S716;le sentiment;el sentimiento;0.0000;nom;B2;elelex;existante
+S717;l'être humain;el ser humano;0.0000;nom;B2;elelex;existante
+S718;le service;el servicio;0.0000;nom;B2;elelex;existante
+S719;le sexe;el sexo;0.0000;nom;B2;elelex;existante
+S720;le siècle;el siglo;0.0000;nom;B2;elelex;existante
+S721;le signe;el signo;0.0000;nom;B2;elelex;existante
+S722;le silence;el silencio;0.0000;nom;B2;elelex;existante
+S723;le système;el sistema;0.0000;nom;B2;elelex;existante
+S724;le site web;el sitio web;0.0000;nom;B2;elelex;existante
+S725;le neveu;el sobrino;0.0000;nom;B2;elelex;existante
+S726;le partenaire;el socio;0.0000;nom;B2;elelex;existante
+S727;le logiciel;el software;0.0000;nom;B2;elelex;existante
+S728;le canapé;el sofá;0.0000;nom;B2;elelex;existante
+S729;le soleil;el sol;0.0000;nom;B2;elelex;existante
+S730;le chapeau;el sombrero;0.0000;nom;B2;elelex;existante
+S731;le son;el sonido;0.0000;nom;B2;elelex;existante
+S732;le sol;el suelo;0.0000;nom;B2;elelex;existante
+S733;le rêve;el sueño;0.0000;nom;B2;elelex;existante
+S734;le supermarché;el supermercado;0.0000;nom;B2;elelex;existante
+S735;le symbole;el símbolo;0.0000;nom;B2;elelex;existante
+S736;le symptôme;el síntoma;0.0000;nom;B2;elelex;existante
+S737;le solide;el sólido;0.0000;nom;B2;elelex;existante
+S738;le toucher;el tacto;0.0000;nom;B2;elelex;existante
+S739;la taille;el tamaño;0.0000;nom;B2;elelex;existante
+S740;le théâtre;el teatro;0.0000;nom;B2;elelex;existante
+S741;le toit;el techo;0.0000;nom;B2;elelex;existante
+S742;le clavier;el teclado;0.0000;nom;B2;elelex;existante
+S743;le téléphone;el teléfono;0.0000;nom;B2;elelex;existante
+S744;le temple;el templo;0.0000;nom;B2;elelex;existante
+S745;la fourchette;el tenedor;0.0000;nom;B2;elelex;existante
+S746;le tiers;el tercio;0.0000;nom;B2;elelex;existante
+S747;le témoin;el testigo;0.0000;nom;B2;elelex;existante
+S748;le texte;el texto;0.0000;nom;B2;elelex;existante
+S749;la météo;el tiempo;0.0000;nom;B2;elelex;existante
+S750;le temps libre;el tiempo libre;0.0000;nom;B2;elelex;existante
+S751;le type;el tipo;0.0000;nom;B2;elelex;existante
+S752;le total;el total;0.0000;nom;B2;elelex;existante
+S753;le travail;el trabajo;0.0000;nom;B2;elelex;existante
+S754;le transport;el transporte;0.0000;nom;B2;elelex;existante
+S755;le traitement;el tratamiento;0.0000;nom;B2;elelex;existante
+S756;le train;el tren;0.0000;nom;B2;elelex;existante
+S757;le morceau;el trozo;0.0000;nom;B2;elelex;existante
+S758;le touriste;el turista;0.0000;nom;B2;elelex;existante
+S759;le thé;el té;0.0000;nom;B2;elelex;existante
+S760;l'oncle;el tío;0.0000;nom;B2;elelex;existante
+S761;le diplôme;el título;0.0000;nom;B2;elelex;existante
+S762;l'univers;el universo;0.0000;nom;B2;elelex;existante
+S763;l'un;el uno;0.0000;adjectif;B2;elelex;existante
+S764;l'utilisation;el uso;0.0000;nom;B2;elelex;existante
+S765;la vallée;el valle;0.0000;nom;B2;elelex;existante
+S766;la valeur;el valor;0.0000;nom;B2;elelex;existante
+S767;le verre (récipient);el vaso;0.0000;nom;B2;elelex;existante
+S768;le voisin;el vecino;0.0000;nom;B2;elelex;existante
+S769;le vendeur;el vendedor;0.0000;nom;B2;elelex;existante
+S770;l'été;el verano;0.0000;nom;B2;elelex;existante
+S771;le vert;el verde;0.0000;nom;B2;elelex;existante
+S772;la robe;el vestido;0.0000;nom;B2;elelex;existante
+S773;le voyage;el viaje;0.0000;nom;B2;elelex;existante
+S774;le verre (matière);el vidrio;0.0000;nom;B2;elelex;existante
+S775;le vent;el viento;0.0000;nom;B2;elelex;existante
+S776;le volume;el volumen;0.0000;nom;B2;elelex;existante
+S777;la chaussure;el zapato;0.0000;nom;B2;elelex;existante
+S778;l'arbre;el árbol;0.0000;nom;B2;elelex;existante
+S779;le succès;el éxito;0.0000;nom;B2;elelex;existante
+S780;rencontrer;encontrarse con;0.0000;verbe;B2;elelex;existante
+S781;être présent;estar presente;0.0000;verbe;B2;elelex;existante
+S782;honnête;honrado;0.0000;adjectif;B2;elelex;existante
+S783;impliqué / concerné;implicado;0.0000;adjectif;B2;elelex;existante
+S784;annoncer / s'inscrire;inscribirse;0.0000;verbe;B2;elelex;existante
+S785;partir;irse;0.0000;verbe;B2;elelex;existante
+S786;l'invention;l'invento;0.0000;nom;B2;elelex;existante
+S787;la grand-mère;la abuela;0.0000;nom;B2;elelex;existante
+S788;l'action;la acción;0.0000;nom;B2;elelex;existante
+S789;la joie;la alegría;0.0000;nom;B2;elelex;existante
+S790;le tapis;la alfombra;0.0000;nom;B2;elelex;existante
+S791;l'amitié;la amistad;0.0000;nom;B2;elelex;existante
+S792;l'apparence;la apariencia;0.0000;nom;B2;elelex;existante
+S793;le sable;la arena;0.0000;nom;B2;elelex;existante
+S794;l'architecture;la arquitectura;0.0000;nom;B2;elelex;existante
+S795;l'attention;la atención;0.0000;nom;B2;elelex;existante
+S796;l'aventure;la aventura;0.0000;nom;B2;elelex;existante
+S797;l'aide;la ayuda;0.0000;nom;B2;elelex;existante
+S798;la baisse;la bajada;0.0000;nom;B2;elelex;existante
+S799;le drapeau;la bandera;0.0000;nom;B2;elelex;existante
+S800;la base;la base;0.0000;nom;B2;elelex;existante
+S801;la boisson;la bebida;0.0000;nom;B2;elelex;existante
+S802;la beauté;la belleza;0.0000;nom;B2;elelex;existante
+S803;la bibliothèque;la biblioteca;0.0000;nom;B2;elelex;existante
+S804;le vélo;la bicicleta;0.0000;nom;B2;elelex;existante
+S805;la bouche;la boca;0.0000;nom;B2;elelex;existante
+S806;le sac;la bolsa;0.0000;nom;B2;elelex;existante
+S807;la bouteille;la botella;0.0000;nom;B2;elelex;existante
+S808;la recherche;la búsqueda;0.0000;nom;B2;elelex;existante
+S809;la tête;la cabeza;0.0000;nom;B2;elelex;existante
+S810;la casserole;la cacerola;0.0000;nom;B2;elelex;existante
+S811;la boîte;la caja;0.0000;nom;B2;elelex;existante
+S812;la qualité;la calidad;0.0000;nom;B2;elelex;existante
+S813;la rue;la calle;0.0000;nom;B2;elelex;existante
+S814;le lit;la cama;0.0000;nom;B2;elelex;existante
+S815;la chemise;la camisa;0.0000;nom;B2;elelex;existante
+S816;la chanson;la canción;0.0000;nom;B2;elelex;existante
+S817;la quantité;la cantidad;0.0000;nom;B2;elelex;existante
+S818;le visage;la cara;0.0000;nom;B2;elelex;existante
+S819;la viande;la carne;0.0000;nom;B2;elelex;existante
+S820;le dossier;la carpeta;0.0000;nom;B2;elelex;existante
+S821;la carrière;la carrera;0.0000;nom;B2;elelex;existante
+S822;la lettre;la carta;0.0000;nom;B2;elelex;existante
+S823;le portefeuille;la cartera;0.0000;nom;B2;elelex;existante
+S824;la maison;la casa;0.0000;nom;B2;elelex;existante
+S825;la cathédrale;la catedral;0.0000;nom;B2;elelex;existante
+S826;la catégorie;la categoría;0.0000;nom;B2;elelex;existante
+S827;la cause;la causa;0.0000;nom;B2;elelex;existante
+S828;la certitude;la certeza;0.0000;nom;B2;elelex;existante
+S829;la science;la ciencia;0.0000;nom;B2;elelex;existante
+S830;le chiffre;la cifra;0.0000;nom;B2;elelex;existante
+S831;le rendez-vous;la cita;0.0000;nom;B2;elelex;existante
+S832;la ville;la ciudad;0.0000;nom;B2;elelex;existante
+S833;la sorte;la clase;0.0000;nom;B2;elelex;existante
+S834;la cuisine;la cocina;0.0000;nom;B2;elelex;existante
+S835;la file d'attente;la cola;0.0000;nom;B2;elelex;existante
+S836;la colline;la colina;0.0000;nom;B2;elelex;existante
+S837;la nourriture;la comida;0.0000;nom;B2;elelex;existante
+S838;l'achat;la compra;0.0000;nom;B2;elelex;existante
+S839;la communication;la comunicación;0.0000;nom;B2;elelex;existante
+S840;la communauté;la comunidad;0.0000;nom;B2;elelex;existante
+S841;la connexion;la conexión;0.0000;nom;B2;elelex;existante
+S842;la confiance;la confianza;0.0000;nom;B2;elelex;existante
+S843;la construction;la construcción;0.0000;nom;B2;elelex;existante
+S844;la pollution;la contaminación;0.0000;nom;B2;elelex;existante
+S845;le mot de passe;la contraseña;0.0000;nom;B2;elelex;existante
+S846;la conversation;la conversación;0.0000;nom;B2;elelex;existante
+S847;la coopération;la cooperación;0.0000;nom;B2;elelex;existante
+S848;le courant;la corriente;0.0000;nom;B2;elelex;existante
+S849;le rideau;la cortina;0.0000;nom;B2;elelex;existante
+S850;la chose;la cosa;0.0000;nom;B2;elelex;existante
+S851;la coutume;la costumbre;0.0000;nom;B2;elelex;existante
+S852;la créativité;la creatividad;0.0000;nom;B2;elelex;existante
+S853;la croyance;la creencia;0.0000;nom;B2;elelex;existante
+S854;la crise;la crisis;0.0000;nom;B2;elelex;existante
+S855;la cuillère;la cuchara;0.0000;nom;B2;elelex;existante
+S856;le compte;la cuenta;0.0000;nom;B2;elelex;existante
+S857;la culture;la cultura;0.0000;nom;B2;elelex;existante
+S858;la prison;la cárcel;0.0000;nom;B2;elelex;existante
+S859;la danse;la danza;0.0000;nom;B2;elelex;existante
+S860;la décision;la decisión;0.0000;nom;B2;elelex;existante
+S861;la droite;la derecha;0.0000;nom;B2;elelex;existante
+S862;la défaite;la derrota;0.0000;nom;B2;elelex;existante
+S863;la différence;la diferencia;0.0000;nom;B2;elelex;existante
+S864;la dimension;la dimensión;0.0000;nom;B2;elelex;existante
+S865;l'adresse;la dirección;0.0000;nom;B2;elelex;existante
+S866;la discussion;la discusión;0.0000;nom;B2;elelex;existante
+S867;la disposition;la disposición;0.0000;nom;B2;elelex;existante
+S868;la distance;la distancia;0.0000;nom;B2;elelex;existante
+S869;le doute;la duda;0.0000;nom;B2;elelex;existante
+S870;la durée;la duración;0.0000;nom;B2;elelex;existante
+S871;l'économie;la economía;0.0000;nom;B2;elelex;existante
+S872;l'âge;la edad;0.0000;nom;B2;elelex;existante
+S873;l'éducation;la educación;0.0000;nom;B2;elelex;existante
+S874;le choix;la elección;0.0000;nom;B2;elelex;existante
+S875;l'électricité;la electricidad;0.0000;nom;B2;elelex;existante
+S876;l'émotion;la emoción;0.0000;nom;B2;elelex;existante
+S877;l'entreprise;la empresa;0.0000;nom;B2;elelex;existante
+S878;l'énergie;la energía;0.0000;nom;B2;elelex;existante
+S879;la maladie;la enfermedad;0.0000;nom;B2;elelex;existante
+S880;la livraison;la entrega;0.0000;nom;B2;elelex;existante
+S881;l'escalier;la escalera;0.0000;nom;B2;elelex;existante
+S882;l'école;la escuela;0.0000;nom;B2;elelex;existante
+S883;la sculpture;la escultura;0.0000;nom;B2;elelex;existante
+S884;l'espoir;la esperanza;0.0000;nom;B2;elelex;existante
+S885;la spiritualité;la espiritualidad;0.0000;nom;B2;elelex;existante
+S886;la femme (épouse);la esposa;0.0000;nom;B2;elelex;existante
+S887;le coin;la esquina;0.0000;nom;B2;elelex;existante
+S888;la saison;la estación;0.0000;nom;B2;elelex;existante
+S889;l'étoile;la estrella;0.0000;nom;B2;elelex;existante
+S890;la structure;la estructura;0.0000;nom;B2;elelex;existante
+S891;l'évolution;la evolución;0.0000;nom;B2;elelex;existante
+S892;l'existence;la existencia;0.0000;nom;B2;elelex;existante
+S893;l'expérience;la experiencia;0.0000;nom;B2;elelex;existante
+S894;l'exposition;la exposición;0.0000;nom;B2;elelex;existante
+S895;la facture;la factura;0.0000;nom;B2;elelex;existante
+S896;la jupe;la falda;0.0000;nom;B2;elelex;existante
+S897;la famille;la familia;0.0000;nom;B2;elelex;existante
+S898;la pharmacie;la farmacia;0.0000;nom;B2;elelex;existante
+S899;la date;la fecha;0.0000;nom;B2;elelex;existante
+S900;la date de naissance;la fecha de nacimiento;0.0000;nom;B2;elelex;existante
+S901;le bonheur;la felicidad;0.0000;nom;B2;elelex;existante
+S902;la fête;la fiesta;0.0000;nom;B2;elelex;existante
+S903;la philosophie;la filosofía;0.0000;nom;B2;elelex;existante
+S904;la fleur;la flor;0.0000;nom;B2;elelex;existante
+S905;la forme;la forma;0.0000;nom;B2;elelex;existante
+S906;la formation;la formación;0.0000;nom;B2;elelex;existante
+S907;la photo;la foto;0.0000;nom;B2;elelex;existante
+S908;la phrase;la frase;0.0000;nom;B2;elelex;existante
+S909;la fréquence;la frecuencia;0.0000;nom;B2;elelex;existante
+S910;le fruit;la fruta;0.0000;nom;B2;elelex;existante
+S911;la force;la fuerza;0.0000;nom;B2;elelex;existante
+S912;l'usine;la fábrica;0.0000;nom;B2;elelex;existante
+S913;la géographie;la geografía;0.0000;nom;B2;elelex;existante
+S914;la gestion;la gestión;0.0000;nom;B2;elelex;existante
+S915;la gloire;la gloria;0.0000;nom;B2;elelex;existante
+S916;la ferme;la granja;0.0000;nom;B2;elelex;existante
+S917;la guerre;la guerra;0.0000;nom;B2;elelex;existante
+S918;le guide;la guía;0.0000;nom;B2;elelex;existante
+S919;la chambre;la habitación;0.0000;nom;B2;elelex;existante
+S920;la sœur;la hermana;0.0000;nom;B2;elelex;existante
+S921;l'outil;la herramienta;0.0000;nom;B2;elelex;existante
+S922;l'herbe;la hierba;0.0000;nom;B2;elelex;existante
+S923;la fille;la hija;0.0000;nom;B2;elelex;existante
+S924;l'histoire;la historia;0.0000;nom;B2;elelex;existante
+S925;la feuille;la hoja;0.0000;nom;B2;elelex;existante
+S926;l'heure;la hora;0.0000;nom;B2;elelex;existante
+S927;l'idée;la idea;0.0000;nom;B2;elelex;existante
+S928;l'église;la iglesia;0.0000;nom;B2;elelex;existante
+S929;l'égalité;la igualdad;0.0000;nom;B2;elelex;existante
+S930;l'image;la imagen;0.0000;nom;B2;elelex;existante
+S931;l'imagination;la imaginación;0.0000;nom;B2;elelex;existante
+S932;l'importance;la importancia;0.0000;nom;B2;elelex;existante
+S933;l'imprimante;la impresora;0.0000;nom;B2;elelex;existante
+S934;l'industrie;la industria;0.0000;nom;B2;elelex;existante
+S935;l'information;la información;0.0000;nom;B2;elelex;existante
+S936;l'intelligence;la inteligencia;0.0000;nom;B2;elelex;existante
+S937;l'investissement;la inversión;0.0000;nom;B2;elelex;existante
+S938;la recherche;la investigación;0.0000;nom;B2;elelex;existante
+S939;la colère;la ira;0.0000;nom;B2;elelex;existante
+S940;l'île;la isla;0.0000;nom;B2;elelex;existante
+S941;la gauche;la izquierda;0.0000;nom;B2;elelex;existante
+S942;le bijou;la joya;0.0000;nom;B2;elelex;existante
+S943;la retraite;la jubilación;0.0000;nom;B2;elelex;existante
+S944;la justice;la justicia;0.0000;nom;B2;elelex;existante
+S945;la machine à laver;la lavadora;0.0000;nom;B2;elelex;existante
+S946;la leçon;la lección;0.0000;nom;B2;elelex;existante
+S947;le lait;la leche;0.0000;nom;B2;elelex;existante
+S948;la langue;la lengua;0.0000;nom;B2;elelex;existante
+S949;la langue maternelle;la lengua materna;0.0000;nom;B2;elelex;existante
+S950;la lettre;la letra;0.0000;nom;B2;elelex;existante
+S951;la loi;la ley;0.0000;nom;B2;elelex;existante
+S952;la liberté;la libertad;0.0000;nom;B2;elelex;existante
+S953;la littérature;la literatura;0.0000;nom;B2;elelex;existante
+S954;l'arrivée;la llegada;0.0000;nom;B2;elelex;existante
+S955;la pluie;la lluvia;0.0000;nom;B2;elelex;existante
+S956;la lutte;la lucha;0.0000;nom;B2;elelex;existante
+S957;la lune;la luna;0.0000;nom;B2;elelex;existante
+S958;la lumière;la luz;0.0000;nom;B2;elelex;existante
+S959;la lampe;la lámpara;0.0000;nom;B2;elelex;existante
+S960;la ligne;la línea;0.0000;nom;B2;elelex;existante
+S961;le bois;la madera;0.0000;nom;B2;elelex;existante
+S962;la mère;la madre;0.0000;nom;B2;elelex;existante
+S963;la valise;la maleta;0.0000;nom;B2;elelex;existante
+S964;la main;la mano;0.0000;nom;B2;elelex;existante
+S965;la marque;la marca;0.0000;nom;B2;elelex;existante
+S966;la matière;la materia;0.0000;nom;B2;elelex;existante
+S967;la matière première;la materia prima;0.0000;nom;B2;elelex;existante
+S968;le matin;la mañana;0.0000;nom;B2;elelex;existante
+S969;la mesure;la medida;0.0000;nom;B2;elelex;existante
+S970;la mémoire;la memoria;0.0000;nom;B2;elelex;existante
+S971;l'esprit;la mente;0.0000;nom;B2;elelex;existante
+S972;le mensonge;la mentira;0.0000;nom;B2;elelex;existante
+S973;la table;la mesa;0.0000;nom;B2;elelex;existante
+S974;la mosquée;la mezquita;0.0000;nom;B2;elelex;existante
+S975;le regard / le prestige;la mirada;0.0000;nom;B2;elelex;existante
+S976;la moitié;la mitad;0.0000;nom;B2;elelex;existante
+S977;la mode;la moda;0.0000;nom;B2;elelex;existante
+S978;la monnaie;la moneda;0.0000;nom;B2;elelex;existante
+S979;la montagne;la montaña;0.0000;nom;B2;elelex;existante
+S980;la morale;la moral;0.0000;nom;B2;elelex;existante
+S981;la mort;la muerte;0.0000;nom;B2;elelex;existante
+S982;la femme;la mujer;0.0000;nom;B2;elelex;existante
+S983;la foule;la multitud;0.0000;nom;B2;elelex;existante
+S984;la machine;la máquina;0.0000;nom;B2;elelex;existante
+S985;la musique;la música;0.0000;nom;B2;elelex;existante
+S986;la nationalité;la nacionalidad;0.0000;nom;B2;elelex;existante
+S987;la nation;la nación;0.0000;nom;B2;elelex;existante
+S988;le nez;la nariz;0.0000;nom;B2;elelex;existante
+S989;la nature;la naturaleza;0.0000;nom;B2;elelex;existante
+S990;le réfrigérateur;la nevera;0.0000;nom;B2;elelex;existante
+S991;la neige;la nieve;0.0000;nom;B2;elelex;existante
+S992;la nuit;la noche;0.0000;nom;B2;elelex;existante
+S993;la norme;la norma;0.0000;nom;B2;elelex;existante
+S994;la note (école);la nota;0.0000;nom;B2;elelex;existante
+S995;la nouvelle;la noticia;0.0000;nom;B2;elelex;existante
+S996;le nuage;la nube;0.0000;nom;B2;elelex;existante
+S997;la pièce (théâtre);la obra;0.0000;nom;B2;elelex;existante
+S998;l'occasion;la ocasión;0.0000;nom;B2;elelex;existante
+S999;le bureau;la oficina;0.0000;nom;B2;elelex;existante
+S1000;l'opinion;la opinión;0.0000;nom;B2;elelex;existante
+S1001;l'opportunité;la oportunidad;0.0000;nom;B2;elelex;existante
+S1002;la phrase;la oración;0.0000;nom;B2;elelex;existante
+S1003;l'oreille;la oreja;0.0000;nom;B2;elelex;existante
+S1004;l'organisation;la organización;0.0000;nom;B2;elelex;existante
+S1005;l'obscurité;la oscuridad;0.0000;nom;B2;elelex;existante
+S1006;la patience;la paciencia;0.0000;nom;B2;elelex;existante
+S1007;le mot;la palabra;0.0000;nom;B2;elelex;existante
+S1008;l'écran;la pantalla;0.0000;nom;B2;elelex;existante
+S1009;le mur;la pared;0.0000;nom;B2;elelex;existante
+S1010;la partie;la parte;0.0000;nom;B2;elelex;existante
+S1011;le bas;la parte inferior;0.0000;nom;B2;elelex;existante
+S1012;le haut;la parte superior;0.0000;nom;B2;elelex;existante
+S1013;le derrière;la parte trasera;0.0000;nom;B2;elelex;existante
+S1014;la pomme de terre;la patata;0.0000;nom;B2;elelex;existante
+S1015;la patrie;la patria;0.0000;nom;B2;elelex;existante
+S1016;la paix;la paz;0.0000;nom;B2;elelex;existante
+S1017;le film;la película;0.0000;nom;B2;elelex;existante
+S1018;la personne;la persona;0.0000;nom;B2;elelex;existante
+S1019;la personnalité;la personalidad;0.0000;nom;B2;elelex;existante
+S1020;la pierre;la piedra;0.0000;nom;B2;elelex;existante
+S1021;la jambe;la pierna;0.0000;nom;B2;elelex;existante
+S1022;la peinture;la pintura;0.0000;nom;B2;elelex;existante
+S1023;la plante;la planta;0.0000;nom;B2;elelex;existante
+S1024;l'argent (matière);la plata;0.0000;nom;B2;elelex;existante
+S1025;la plage;la playa;0.0000;nom;B2;elelex;existante
+S1026;la place;la plaza;0.0000;nom;B2;elelex;existante
+S1027;la population;la población;0.0000;nom;B2;elelex;existante
+S1028;la pauvreté;la pobreza;0.0000;nom;B2;elelex;existante
+S1029;la poésie;la poesía;0.0000;nom;B2;elelex;existante
+S1030;la police;la policía;0.0000;nom;B2;elelex;existante
+S1031;la politique;la política;0.0000;nom;B2;elelex;existante
+S1032;la possession;la posesión;0.0000;nom;B2;elelex;existante
+S1033;la puissance;la potencia;0.0000;nom;B2;elelex;existante
+S1034;la question;la pregunta;0.0000;nom;B2;elelex;existante
+S1035;la production;la producción;0.0000;nom;B2;elelex;existante
+S1036;la profession;la profesión;0.0000;nom;B2;elelex;existante
+S1037;la protection;la protección;0.0000;nom;B2;elelex;existante
+S1038;la province;la provincia;0.0000;nom;B2;elelex;existante
+S1039;la preuve;la prueba;0.0000;nom;B2;elelex;existante
+S1040;la psychologie;la psicología;0.0000;nom;B2;elelex;existante
+S1041;la publicité;la publicidad;0.0000;nom;B2;elelex;existante
+S1042;la porte;la puerta;0.0000;nom;B2;elelex;existante
+S1043;la radio;la radio;0.0000;nom;B2;elelex;existante
+S1044;la raison;la razón;0.0000;nom;B2;elelex;existante
+S1045;la réalité;la realidad;0.0000;nom;B2;elelex;existante
+S1046;la recette;la receta;0.0000;nom;B2;elelex;existante
+S1047;le réseau;la red;0.0000;nom;B2;elelex;existante
+S1048;la région;la región;0.0000;nom;B2;elelex;existante
+S1049;la règle;la regla;0.0000;nom;B2;elelex;existante
+S1050;la reine;la reina;0.0000;nom;B2;elelex;existante
+S1051;la relation;la relación;0.0000;nom;B2;elelex;existante
+S1052;la religion;la religión;0.0000;nom;B2;elelex;existante
+S1053;la responsabilité;la responsabilidad;0.0000;nom;B2;elelex;existante
+S1054;la réponse;la respuesta;0.0000;nom;B2;elelex;existante
+S1055;la réunion;la reunión;0.0000;nom;B2;elelex;existante
+S1056;le magazine;la revista;0.0000;nom;B2;elelex;existante
+S1057;la richesse;la riqueza;0.0000;nom;B2;elelex;existante
+S1058;le vêtement;la ropa;0.0000;nom;B2;elelex;existante
+S1059;la sagesse;la sabiduría;0.0000;nom;B2;elelex;existante
+S1060;le sel;la sal;0.0000;nom;B2;elelex;existante
+S1061;la salle;la sala;0.0000;nom;B2;elelex;existante
+S1062;la santé;la salud;0.0000;nom;B2;elelex;existante
+S1063;le sang;la sangre;0.0000;nom;B2;elelex;existante
+S1064;la sécurité;la seguridad;0.0000;nom;B2;elelex;existante
+S1065;la semaine;la semana;0.0000;nom;B2;elelex;existante
+S1066;la sensation;la sensación;0.0000;nom;B2;elelex;existante
+S1067;la séance;la sesión;0.0000;nom;B2;elelex;existante
+S1068;le signal;la señal;0.0000;nom;B2;elelex;existante
+S1069;la chaise;la silla;0.0000;nom;B2;elelex;existante
+S1070;la nièce;la sobrina;0.0000;nom;B2;elelex;existante
+S1071;la société;la sociedad;0.0000;nom;B2;elelex;existante
+S1072;la sociologie;la sociología;0.0000;nom;B2;elelex;existante
+S1073;la solution;la solución;0.0000;nom;B2;elelex;existante
+S1074;l'ombre;la sombra;0.0000;nom;B2;elelex;existante
+S1075;la chance;la suerte;0.0000;nom;B2;elelex;existante
+S1076;la somme;la suma;0.0000;nom;B2;elelex;existante
+S1077;la surface;la superficie;0.0000;nom;B2;elelex;existante
+S1078;la taille (vêtement);la talla;0.0000;nom;B2;elelex;existante
+S1079;le soir;la tarde;0.0000;nom;B2;elelex;existante
+S1080;la carte de crédit;la tarjeta de crédito;0.0000;nom;B2;elelex;existante
+S1081;la tasse;la taza;0.0000;nom;B2;elelex;existante
+S1082;la technologie;la tecnología;0.0000;nom;B2;elelex;existante
+S1083;le tissu;la tela;0.0000;nom;B2;elelex;existante
+S1084;la télévision;la televisión;0.0000;nom;B2;elelex;existante
+S1085;la température;la temperatura;0.0000;nom;B2;elelex;existante
+S1086;la théorie;la teoría;0.0000;nom;B2;elelex;existante
+S1087;le magasin;la tienda;0.0000;nom;B2;elelex;existante
+S1088;la terre;la tierra;0.0000;nom;B2;elelex;existante
+S1089;l'orage;la tormenta;0.0000;nom;B2;elelex;existante
+S1090;la tour;la torre;0.0000;nom;B2;elelex;existante
+S1091;la tradition;la tradición;0.0000;nom;B2;elelex;existante
+S1092;la tristesse;la tristeza;0.0000;nom;B2;elelex;existante
+S1093;la technique;la técnica;0.0000;nom;B2;elelex;existante
+S1094;la tante;la tía;0.0000;nom;B2;elelex;existante
+S1095;l'université;la universidad;0.0000;nom;B2;elelex;existante
+S1096;la vache;la vaca;0.0000;nom;B2;elelex;existante
+S1097;la vaisselle;la vajilla;0.0000;nom;B2;elelex;existante
+S1098;la vitesse;la velocidad;0.0000;nom;B2;elelex;existante
+S1099;la vente;la venta;0.0000;nom;B2;elelex;existante
+S1100;la fenêtre;la ventana;0.0000;nom;B2;elelex;existante
+S1101;la vérité;la verdad;0.0000;nom;B2;elelex;existante
+S1102;le légume;la verdura;0.0000;nom;B2;elelex;existante
+S1103;la victoire;la victoria;0.0000;nom;B2;elelex;existante
+S1104;la vie;la vida;0.0000;nom;B2;elelex;existante
+S1105;la visite;la visita;0.0000;nom;B2;elelex;existante
+S1106;le logement;la vivienda;0.0000;nom;B2;elelex;existante
+S1107;la voix;la voz;0.0000;nom;B2;elelex;existante
+S1108;l'époque;la época;0.0000;nom;B2;elelex;existante
+S1109;l'éthique;la ética;0.0000;nom;B2;elelex;existante
+S1110;la banlieue;las afueras;0.0000;nom;B2;elelex;existante
+S1111;les lunettes;las gafas;0.0000;nom;B2;elelex;existante
+S1112;les vacances;las vacaciones;0.0000;nom;B2;elelex;existante
+S1113;se lever;levantarse;0.0000;verbe;B2;elelex;existante
+S1114;devenir;llegar a ser;0.0000;verbe;B2;elelex;existante
+S1115;porter (vêtement);llevar puesto;0.0000;verbe;B2;elelex;existante
+S1116;les parents;los padres;0.0000;nom;B2;elelex;existante
+S1117;peureux / effrayé;miedoso;0.0000;adjectif;B2;elelex;existante
+S1118;occupé;ocupado;0.0000;adjectif;B2;elelex;existante
+S1119;ressembler;parecerse;0.0000;verbe;B2;elelex;existante
+S1120;lourd;pesado;0.0000;adjectif;B2;elelex;existante
+S1121;rester;quedarse;0.0000;verbe;B2;elelex;existante
+S1122;déposer / passer (un examen);realizar (un examen);0.0000;verbe;B2;elelex;existante
+S1123;réel / vraiment;realmente;0.0000;adjectif;B2;elelex;existante
+S1124;satisfait;satisfecho;0.0000;adjectif;B2;elelex;existante
+S1125;s'asseoir;sentarse;0.0000;verbe;B2;elelex;existante
+S1126;surtout;sobre todo;0.0000;adjectif;B2;elelex;existante
+S1127;ensoleillé;soleado;0.0000;adjectif;B2;elelex;existante
+S1128;fournir;suministrar;0.0000;verbe;B2;elelex;existante
+S1129;soi-même;sí mismo;0.0000;adjectif;B2;elelex;existante
+S1130;tester;testar;0.0000;verbe;B2;elelex;existante
+S1131;un de ces;uno de esos;0.0000;adjectif;B2;elelex;existante
+S1132;frapper;golpear;7.7940;verbe;C1;elelex;existante
+S1133;examiner;examinar;4.6499;verbe;C1;elelex;existante
+S1134;prudent;prudente;3.8201;adjectif;C1;elelex;existante
+S1135;étourdi / vertigineux;vertiginoso;1.6298;adjectif;C1;elelex;existante
+S1136;privé;privado;0.2103;adjectif;C1;elelex;existante
+S1137;le;el;103732.1973;mot-outil;A1;elelex;apertium_a_verifier
+S1138;de;de;58562.0658;mot-outil;A1;elelex;apertium_a_verifier
+S1139;et;y;33158.7894;mot-outil;A1;elelex;apertium_a_verifier
+S1140;chez / dans / en;en;27878.9355;mot-outil;A1;elelex;apertium_a_verifier
+S1141;un;uno;27490.5883;mot-outil;A1;elelex;apertium_a_verifier
+S1142;à;a;27471.6884;mot-outil;A1;elelex;apertium_a_verifier
+S1143;que / qui;que;14548.9056;mot-outil;A1;elelex;apertium_a_verifier
+S1144;ne / non;no;12394.8837;adverbe;A1;elelex;apertium_a_verifier
+S1145;on;se;12247.7433;mot-outil;A1;elelex;apertium_a_verifier
+S1146;avec;con;10182.3835;mot-outil;A1;elelex;apertium_a_verifier
+S1147;actif / avoir;haber;7564.9543;nom;A1;elelex;apertium_a_verifier
+S1148;par;por;7476.7701;mot-outil;A1;elelex;apertium_a_verifier
+S1149;le;lo;5912.0625;mot-outil;A1;elelex;apertium_a_verifier
+S1150;davantage / plus;más;5818.5274;adverbe;A1;elelex;apertium_a_verifier
+S1151;mais;pero;4630.9672;mot-outil;A1;elelex;apertium_a_verifier
+S1152;leur / lui;le;4606.9375;mot-outil;A1;elelex;apertium_a_verifier
+S1153;ou;o;4297.3650;mot-outil;A1;elelex;apertium_a_verifier
+S1154;très;muy;4246.9123;mot-outil;A1;elelex;apertium_a_verifier
+S1155;ce;este;3725.6125;mot-outil;A1;elelex;apertium_a_verifier
+S1156;que / quel;qué;2926.1416;mot-outil;A1;elelex;apertium_a_verifier
+S1157;an / année;año;2579.3406;nom;A1;elelex;apertium_a_verifier
+S1158;beaucoup / beaucoupde;mucho;2484.1098;adverbe;A1;elelex;apertium_a_verifier
+S1159;si;si;2403.8057;mot-outil;A1;elelex;apertium_a_verifier
+S1160;je;yo;2324.1200;mot-outil;A1;elelex;apertium_a_verifier
+S1161;aussi;también;2175.3422;adverbe;A1;elelex;apertium_a_verifier
+S1162;maison;casa;2028.0407;nom;A1;elelex;apertium_a_verifier
+S1163;jour;día;2003.7575;nom;A1;elelex;apertium_a_verifier
+S1164;lorsque / quand;cuando;1741.9438;mot-outil;A1;elelex;apertium_a_verifier
+S1165;fois;vez;1655.4408;nom;A1;elelex;apertium_a_verifier
+S1166;déjà;ya;1620.7523;adverbe;A1;elelex;apertium_a_verifier
+S1167;eux / il / lui;él;1600.6445;mot-outil;A1;elelex;apertium_a_verifier
+S1168;àcauseque / car / parceque;porque;1494.8899;mot-outil;A1;elelex;apertium_a_verifier
+S1169;personne;persona;1388.3236;nom;A1;elelex;apertium_a_verifier
+S1170;enveloppe / sur;sobre;1368.6193;nom;A1;elelex;apertium_a_verifier
+S1171;plaire;gustar;1359.9793;verbe;A1;elelex;apertium_a_verifier
+S1172;bien;bien;1319.1992;adverbe;A1;elelex;apertium_a_verifier
+S1173;ànous;nuestro;1314.2163;adjectif;A1;elelex;apertium_a_verifier
+S1174;ce;ese;1295.7440;mot-outil;A1;elelex;apertium_a_verifier
+S1175;cité / ville;ciudad;1291.4527;nom;A1;elelex;apertium_a_verifier
+S1176;monde;mundo;1285.5699;nom;A1;elelex;apertium_a_verifier
+S1177;sans;sin;1268.2242;mot-outil;A1;elelex;apertium_a_verifier
+S1178;pays;país;1245.6461;nom;A1;elelex;apertium_a_verifier
+S1179;certains / quelque;alguno;1229.6859;mot-outil;A1;elelex;apertium_a_verifier
+S1180;chose;cosa;1202.2151;nom;A1;elelex;apertium_a_verifier
+S1181;espagnol;español;1197.8846;adjectif;A1;elelex;apertium_a_verifier
+S1182;toujours;siempre;1193.2673;adverbe;A1;elelex;apertium_a_verifier
+S1183;emploi / travail;trabajo;1186.2233;nom;A1;elelex;apertium_a_verifier
+S1184;oui / si / soi;sí;1181.9148;adverbe;A1;elelex;apertium_a_verifier
+S1185;depuis / dès;desde;1165.7698;mot-outil;A1;elelex;apertium_a_verifier
+S1186;jusqu'à / jusque;hasta;1112.8912;mot-outil;A1;elelex;apertium_a_verifier
+S1187;temps;tiempo;1110.9596;nom;A1;elelex;apertium_a_verifier
+S1188;brancher / mettre / remettre;poner;1094.8423;verbe;A1;elelex;apertium_a_verifier
+S1189;vie;vida;1091.7008;nom;A1;elelex;apertium_a_verifier
+S1190;maintenant;ahora;1071.4506;adverbe;A1;elelex;apertium_a_verifier
+S1191;entre / parmi;entre;1016.8139;mot-outil;A1;elelex;apertium_a_verifier
+S1192;chaque;cada;977.9763;mot-outil;A1;elelex;apertium_a_verifier
+S1193;femme;mujer;941.1237;nom;A1;elelex;apertium_a_verifier
+S1194;quelquechose;algo;925.3228;mot-outil;A1;elelex;apertium_a_verifier
+S1195;ami;amigo;906.6130;adjectif;A1;elelex;apertium_a_verifier
+S1196;ci / ici;aquí;880.0195;adverbe;A1;elelex;apertium_a_verifier
+S1197;gens;gente;832.7808;nom;A1;elelex;apertium_a_verifier
+S1198;où;donde;827.7274;mot-outil;A1;elelex;apertium_a_verifier
+S1199;rien;nada;793.9698;mot-outil;A1;elelex;apertium_a_verifier
+S1200;tellement;tan;789.1567;mot-outil;A1;elelex;apertium_a_verifier
+S1201;retourner / revenir;volver;781.9134;verbe;A1;elelex;apertium_a_verifier
+S1202;rester;quedar;775.5883;verbe;A1;elelex;apertium_a_verifier
+S1203;ni;ni;770.5889;mot-outil;A1;elelex;apertium_a_verifier
+S1204;ainsi;así;760.1320;adverbe;A1;elelex;apertium_a_verifier
+S1205;toi / tu;tú;758.4708;mot-outil;A1;elelex;apertium_a_verifier
+S1206;lieu / place;lugar;754.4428;nom;A1;elelex;apertium_a_verifier
+S1207;grand;gran;752.8597;adjectif;A1;elelex;apertium_a_verifier
+S1208;venir;venir;749.8558;verbe;A1;elelex;apertium_a_verifier
+S1209;homme;hombre;730.2126;nom;A1;elelex;apertium_a_verifier
+S1210;problème;problema;729.8854;nom;A1;elelex;apertium_a_verifier
+S1211;moi;mí;717.1724;mot-outil;A1;elelex;apertium_a_verifier
+S1212;histoire;historia;701.6899;nom;A1;elelex;apertium_a_verifier
+S1213;père;padre;698.7482;nom;A1;elelex;apertium_a_verifier
+S1214;jamais;nunca;666.8938;adverbe;A1;elelex;apertium_a_verifier
+S1215;heure;hora;666.8051;nom;A1;elelex;apertium_a_verifier
+S1216;enfant;niño;665.0992;nom;A1;elelex;apertium_a_verifier
+S1217;aucoursde / durant / lorsde;durante;658.8853;mot-outil;A1;elelex;apertium_a_verifier
+S1218;moment;momento;647.4284;nom;A1;elelex;apertium_a_verifier
+S1219;famille;familia;644.0710;nom;A1;elelex;apertium_a_verifier
+S1220;semaine;semana;637.5784;nom;A1;elelex;apertium_a_verifier
+S1221;deplus / enplus;además;634.6826;adverbe;A1;elelex;apertium_a_verifier
+S1222;presque / quasi;casi;621.1160;mot-outil;A1;elelex;apertium_a_verifier
+S1223;part / partie;parte;615.1146;nom;A1;elelex;apertium_a_verifier
+S1224;aujourd'hui;hoy;608.5114;adverbe;A1;elelex;apertium_a_verifier
+S1225;fils;hijo;600.9859;nom;A1;elelex;apertium_a_verifier
+S1226;nom / prénom;nombre;599.5831;nom;A1;elelex;apertium_a_verifier
+S1227;seul / seulement;solo;596.5253;adjectif;A1;elelex;apertium_a_verifier
+S1228;vérité / vraiment;verdad;589.6181;nom;A1;elelex;apertium_a_verifier
+S1229;nécessiter / préciser;necesitar;586.0332;verbe;A1;elelex;apertium_a_verifier
+S1230;centre;centro;581.6454;mot-outil;A1;elelex;apertium_a_verifier
+S1231;c / cème;c;578.0374;mot-outil;A1;elelex;apertium_a_verifier
+S1232;vous;usted;573.7395;mot-outil;A1;elelex;apertium_a_verifier
+S1233;moins;menos;565.4820;adverbe;A1;elelex;apertium_a_verifier
+S1234;rue;calle;555.5175;nom;A1;elelex;apertium_a_verifier
+S1235;asseoir;sentar;554.4115;verbe;A1;elelex;apertium_a_verifier
+S1236;forme;forma;545.5544;nom;A1;elelex;apertium_a_verifier
+S1237;fête;fiesta;542.2282;nom;A1;elelex;apertium_a_verifier
+S1238;voyage;viaje;532.3776;nom;A1;elelex;apertium_a_verifier
+S1239;donc;pues;519.0457;mot-outil;A1;elelex;apertium_a_verifier
+S1240;groupe;grupo;504.5960;nom;A1;elelex;apertium_a_verifier
+S1241;dernier / ultime;último;497.9718;adjectif;A1;elelex;apertium_a_verifier
+S1242;entreprise;empresa;490.9500;nom;A1;elelex;apertium_a_verifier
+S1243;âgé / majeur;mayor;489.8421;adjectif;A1;elelex;apertium_a_verifier
+S1244;main;mano;480.9882;nom;A1;elelex;apertium_a_verifier
+S1245;musique;música;480.4688;nom;A1;elelex;apertium_a_verifier
+S1246;mois;mes;469.1581;nom;A1;elelex;apertium_a_verifier
+S1247;langue;lengua;455.6338;nom;A1;elelex;apertium_a_verifier
+S1248;quelqu'un;alguien;452.9963;mot-outil;A1;elelex;apertium_a_verifier
+S1249;qui / quiest-cequi;quién;451.9875;mot-outil;A1;elelex;apertium_a_verifier
+S1250;bienque / encoreque / mêmesi;aunque;441.0227;mot-outil;A1;elelex;apertium_a_verifier
+S1251;livre;libro;439.6965;nom;A1;elelex;apertium_a_verifier
+S1252;fin;fin;438.1166;nom;A1;elelex;apertium_a_verifier
+S1253;produit;producto;433.3738;nom;A1;elelex;apertium_a_verifier
+S1254;perdre / rater / reperdre;perder;430.6170;verbe;A1;elelex;apertium_a_verifier
+S1255;classe;clase;427.4920;nom;A1;elelex;apertium_a_verifier
+S1256;peuple / village;pueblo;425.6592;nom;A1;elelex;apertium_a_verifier
+S1257;alors / lors;entonces;417.8527;adverbe;A1;elelex;apertium_a_verifier
+S1258;nombre / numéro;número;411.2140;nom;A1;elelex;apertium_a_verifier
+S1259;culture;cultura;408.6397;nom;A1;elelex;apertium_a_verifier
+S1260;milieu / moyen;medio;403.2937;nom;A1;elelex;apertium_a_verifier
+S1261;mère;madre;396.8636;nom;A1;elelex;apertium_a_verifier
+S1262;eau;agua;395.7321;nom;A1;elelex;apertium_a_verifier
+S1263;mot / parole;palabra;393.0236;nom;A1;elelex;apertium_a_verifier
+S1264;oeil;ojo;389.7910;nom;A1;elelex;apertium_a_verifier
+S1265;idée;idea;387.2496;nom;A1;elelex;apertium_a_verifier
+S1266;étude;estudio;384.8097;nom;A1;elelex;apertium_a_verifier
+S1267;hôtel;hotel;375.4537;nom;A1;elelex;apertium_a_verifier
+S1268;café;café;373.2938;nom;A1;elelex;apertium_a_verifier
+S1269;sorte / type;tipo;372.5820;nom;A1;elelex;apertium_a_verifier
+S1270;voiture;coche;368.4563;nom;A1;elelex;apertium_a_verifier
+S1271;cas;caso;367.9979;nom;A1;elelex;apertium_a_verifier
+S1272;autant / tant / tellement;tanto;366.0311;adverbe;A1;elelex;apertium_a_verifier
+S1273;amour;amor;361.6452;nom;A1;elelex;apertium_a_verifier
+S1274;porte;puerta;359.3061;nom;A1;elelex;apertium_a_verifier
+S1275;déjeuner / repas;comida;357.7728;nom;A1;elelex;apertium_a_verifier
+S1276;argent;dinero;356.5824;nom;A1;elelex;apertium_a_verifier
+S1277;question;pregunta;353.5473;nom;A1;elelex;apertium_a_verifier
+S1278;façon / manière;manera;349.7848;nom;A1;elelex;apertium_a_verifier
+S1279;restaurant;restaurante;349.2800;nom;A1;elelex;apertium_a_verifier
+S1280;naître;nacer;349.1114;verbe;A1;elelex;apertium_a_verifier
+S1281;film;película;347.5441;nom;A1;elelex;apertium_a_verifier
+S1282;là;allí;347.4456;adverbe;A1;elelex;apertium_a_verifier
+S1283;aucun / personne;nadie;342.6144;mot-outil;A1;elelex;apertium_a_verifier
+S1284;envers / vers;hacia;341.6912;mot-outil;A1;elelex;apertium_a_verifier
+S1285;réaliser;realizar;341.4453;verbe;A1;elelex;apertium_a_verifier
+S1286;cuisine;cocina;341.2704;nom;A1;elelex;apertium_a_verifier
+S1287;fin / final;final;339.1280;nom;A1;elelex;apertium_a_verifier
+S1288;place / poste;plaza;335.5171;nom;A1;elelex;apertium_a_verifier
+S1289;demain / matin / matinée;mañana;334.2907;adverbe;A1;elelex;apertium_a_verifier
+S1290;unique;único;330.1352;adjectif;A1;elelex;apertium_a_verifier
+S1291;collègue / compagnon;compañero;328.6054;nom;A1;elelex;apertium_a_verifier
+S1292;fille / garçon;chico;327.3318;nom;A1;elelex;apertium_a_verifier
+S1293;nous;nosotros;326.1070;mot-outil;A1;elelex;apertium_a_verifier
+S1294;couleur;color;323.5970;nom;A1;elelex;apertium_a_verifier
+S1295;réussir;conseguir;322.7465;verbe;A1;elelex;apertium_a_verifier
+S1296;mourir;morir;321.1396;verbe;A1;elelex;apertium_a_verifier
+S1297;plage;playa;320.4401;nom;A1;elelex;apertium_a_verifier
+S1298;présenter;presentar;319.8790;verbe;A1;elelex;apertium_a_verifier
+S1299;université;universidad;318.6637;nom;A1;elelex;apertium_a_verifier
+S1300;téléphone;teléfono;309.7235;nom;A1;elelex;apertium_a_verifier
+S1301;vêtement;ropa;307.8556;nom;A1;elelex;apertium_a_verifier
+S1302;intéresser;interesar;307.4250;verbe;A1;elelex;apertium_a_verifier
+S1303;après-midi / soir;tarde;306.9581;nom;A1;elelex;apertium_a_verifier
+S1304;audirede / d'après / selon;según;305.5988;mot-outil;A1;elelex;apertium_a_verifier
+S1305;zone;zona;301.6608;nom;A1;elelex;apertium_a_verifier
+S1306;jeune / jeunefille;joven;299.1626;adjectif;A1;elelex;apertium_a_verifier
+S1307;soleil;sol;298.8067;nom;A1;elelex;apertium_a_verifier
+S1308;vacance / vacances;vacaciones;295.8580;nom;A1;elelex;apertium_a_verifier
+S1309;relation;relación;291.5533;nom;A1;elelex;apertium_a_verifier
+S1310;information / renseignement;información;290.7820;nom;A1;elelex;apertium_a_verifier
+S1311;charmer / enchanter;encantar;290.5661;verbe;A1;elelex;apertium_a_verifier
+S1312;appartement;piso;290.3686;nom;A1;elelex;apertium_a_verifier
+S1313;aimerbien / préférer;preferir;288.2921;verbe;A1;elelex;apertium_a_verifier
+S1314;vieil / vieux;viejo;287.8969;adjectif;A1;elelex;apertium_a_verifier
+S1315;prix;precio;286.8260;nom;A1;elelex;apertium_a_verifier
+S1316;papier;papel;283.0881;nom;A1;elelex;apertium_a_verifier
+S1317;encore;todavía;282.2085;adverbe;A1;elelex;apertium_a_verifier
+S1318;sport;deporte;279.5501;nom;A1;elelex;apertium_a_verifier
+S1319;coté / côté;lado;278.4129;nom;A1;elelex;apertium_a_verifier
+S1320;acquis / expérience;experiencia;277.1887;nom;A1;elelex;apertium_a_verifier
+S1321;grâce;gracia;275.7629;nom;A1;elelex;apertium_a_verifier
+S1322;boutique / magasin;tienda;274.1270;nom;A1;elelex;apertium_a_verifier
+S1323;auparavant / avant;antes;273.1933;adverbe;A1;elelex;apertium_a_verifier
+S1324;achever / finir;acabar;272.9110;verbe;A1;elelex;apertium_a_verifier
+S1325;servir;servir;270.3182;verbe;A1;elelex;apertium_a_verifier
+S1326;cinéma;cine;269.4282;nom;A1;elelex;apertium_a_verifier
+S1327;école;escuela;268.0317;nom;A1;elelex;apertium_a_verifier
+S1328;musée;museo;266.7641;nom;A1;elelex;apertium_a_verifier
+S1329;activité;actividad;265.5724;nom;A1;elelex;apertium_a_verifier
+S1330;chambre / habitation;habitación;265.4998;nom;A1;elelex;apertium_a_verifier
+S1331;quartier;barrio;264.1999;nom;A1;elelex;apertium_a_verifier
+S1332;avoirl'habitudede;soler;262.6600;verbe;A1;elelex;apertium_a_verifier
+S1333;changement / saute;cambio;262.4270;nom;A1;elelex;apertium_a_verifier
+S1334;photo;foto;261.0793;nom;A1;elelex;apertium_a_verifier
+S1335;économique;económico;260.2300;adjectif;A1;elelex;apertium_a_verifier
+S1336;tantque;mientras;258.3804;mot-outil;A1;elelex;apertium_a_verifier
+S1337;corps;cuerpo;257.0109;nom;A1;elelex;apertium_a_verifier
+S1338;n'importequi;cualquiera;255.5853;mot-outil;A1;elelex;apertium_a_verifier
+S1339;toi;ti;254.7452;mot-outil;A1;elelex;apertium_a_verifier
+S1340;d;d;254.0114;nom;A1;elelex;apertium_a_verifier
+S1341;couple;pareja;252.5001;nom;A1;elelex;apertium_a_verifier
+S1342;bureau / office;oficina;251.7612;nom;A1;elelex;apertium_a_verifier
+S1343;maille / point;punto;248.5135;nom;A1;elelex;apertium_a_verifier
+S1344;image;imagen;245.3133;nom;A1;elelex;apertium_a_verifier
+S1345;former;formar;243.7546;verbe;A1;elelex;apertium_a_verifier
+S1346;dresser / lever / relever;levantar;242.2679;verbe;A1;elelex;apertium_a_verifier
+S1347;me;me;240.7372;mot-outil;A1;elelex;apertium_a_verifier
+S1348;chantier / oeuvre;obra;238.6919;nom;A1;elelex;apertium_a_verifier
+S1349;célébrer / fêter;celebrar;238.2914;verbe;A1;elelex;apertium_a_verifier
+S1350;àcoté / àcôté / auprès;cerca;236.1220;adverbe;A1;elelex;apertium_a_verifier
+S1351;face / gueule / visage;cara;235.8397;nom;A1;elelex;apertium_a_verifier
+S1352;possible;posible;233.1513;adjectif;A1;elelex;apertium_a_verifier
+S1353;assiette;plato;232.4356;nom;A1;elelex;apertium_a_verifier
+S1354;bar;bar;231.2136;nom;A1;elelex;apertium_a_verifier
+S1355;professeur;profesor;229.6872;nom;A1;elelex;apertium_a_verifier
+S1356;valoir;valer;228.1897;verbe;A1;elelex;apertium_a_verifier
+S1357;thème;tema;227.8919;nom;A1;elelex;apertium_a_verifier
+S1358;seulement;sólo;227.1359;adverbe;A1;elelex;apertium_a_verifier
+S1359;bientôt;pronto;227.1200;adverbe;A1;elelex;apertium_a_verifier
+S1360;tête;cabeza;226.7038;nom;A1;elelex;apertium_a_verifier
+S1361;saisie;embargo;226.0267;nom;A1;elelex;apertium_a_verifier
+S1362;police / policier;policía;224.4203;nom;A1;elelex;apertium_a_verifier
+S1363;aucun / nul;ninguno;223.9914;mot-outil;A1;elelex;apertium_a_verifier
+S1364;trop;demasiado;221.5445;adverbe;A1;elelex;apertium_a_verifier
+S1365;été;verano;220.7870;nom;A1;elelex;apertium_a_verifier
+S1366;enlever;sacar;219.2921;verbe;A1;elelex;apertium_a_verifier
+S1367;même / voire / voiremême;incluso;216.7503;adverbe;A1;elelex;apertium_a_verifier
+S1368;équipe / équipement;equipo;215.6438;nom;A1;elelex;apertium_a_verifier
+S1369;marier;casar;214.8546;verbe;A1;elelex;apertium_a_verifier
+S1370;table;mesa;212.1573;nom;A1;elelex;apertium_a_verifier
+S1371;affubler / habiller / vêtir;vestir;212.1184;verbe;A1;elelex;apertium_a_verifier
+S1372;adresser / diriger;dirigir;210.1130;verbe;A1;elelex;apertium_a_verifier
+S1373;mer;mar;209.0618;nom;A1;elelex;apertium_a_verifier
+S1374;siècle;siglo;208.6473;nom;A1;elelex;apertium_a_verifier
+S1375;vin;vino;208.5603;nom;A1;elelex;apertium_a_verifier
+S1376;fiancé;novio;202.4282;nom;A1;elelex;apertium_a_verifier
+S1377;cours;curso;201.8550;nom;A1;elelex;apertium_a_verifier
+S1378;mal;mal;201.4690;adverbe;A1;elelex;apertium_a_verifier
+S1379;programme;programa;201.0940;nom;A1;elelex;apertium_a_verifier
+S1380;voix;voz;200.9165;nom;A1;elelex;apertium_a_verifier
+S1381;chanson;canción;200.4429;nom;A1;elelex;apertium_a_verifier
+S1382;situation;situación;200.0417;nom;A1;elelex;apertium_a_verifier
+S1383;île;isla;199.3380;nom;A1;elelex;apertium_a_verifier
+S1384;accord;acuerdo;199.2545;nom;A1;elelex;apertium_a_verifier
+S1385;mais / sinon;sino;198.5060;mot-outil;A1;elelex;apertium_a_verifier
+S1386;agir / tâcher / traiter;tratar;197.7777;verbe;A1;elelex;apertium_a_verifier
+S1387;san;san;196.7523;mot-outil;A1;elelex;apertium_a_verifier
+S1388;ah;ah;196.4638;mot-outil;A1;elelex;apertium_a_verifier
+S1389;chapitre;capítulo;195.9345;nom;A1;elelex;apertium_a_verifier
+S1390;parc;parque;194.6338;nom;A1;elelex;apertium_a_verifier
+S1391;marché;mercado;194.6216;nom;A1;elelex;apertium_a_verifier
+S1392;chair / viande;carne;194.2676;nom;A1;elelex;apertium_a_verifier
+S1393;charte / lettre;carta;193.9522;nom;A1;elelex;apertium_a_verifier
+S1394;majorité / plupart;mayoría;193.1920;nom;A1;elelex;apertium_a_verifier
+S1395;dîner / souper;cenar;192.4588;verbe;A1;elelex;apertium_a_verifier
+S1396;dame / madame / monsieur;señor;191.7018;nom;A1;elelex;apertium_a_verifier
+S1397;réponse;respuesta;191.4582;nom;A1;elelex;apertium_a_verifier
+S1398;client;cliente;191.2307;nom;A1;elelex;apertium_a_verifier
+S1399;air;aire;190.9280;nom;A1;elelex;apertium_a_verifier
+S1400;cheminer / marcher;andar;190.8465;verbe;A1;elelex;apertium_a_verifier
+S1401;âge;edad;189.5842;nom;A1;elelex;apertium_a_verifier
+S1402;théâtre;teatro;188.7691;nom;A1;elelex;apertium_a_verifier
+S1403;consacrer;dedicar;188.1232;verbe;A1;elelex;apertium_a_verifier
+S1404;pied;pie;186.2649;nom;A1;elelex;apertium_a_verifier
+S1405;roi;rey;184.6120;nom;A1;elelex;apertium_a_verifier
+S1406;fort;fuerte;184.0246;adverbe;A1;elelex;apertium_a_verifier
+S1407;habitant;habitante;183.6955;nom;A1;elelex;apertium_a_verifier
+S1408;ici;ahí;183.6138;adverbe;A1;elelex;apertium_a_verifier
+S1409;étudiant;estudiante;182.9917;nom;A1;elelex;apertium_a_verifier
+S1410;raison;razón;182.8377;nom;A1;elelex;apertium_a_verifier
+S1411;traditionnel;tradicional;181.3884;adjectif;A1;elelex;apertium_a_verifier
+S1412;achat / emplette;compra;180.7459;nom;A1;elelex;apertium_a_verifier
+S1413;préoccuper / soucier / tracasser;preocupar;180.4756;verbe;A1;elelex;apertium_a_verifier
+S1414;service;servicio;179.5069;nom;A1;elelex;apertium_a_verifier
+S1415;lumière;luz;179.0287;nom;A1;elelex;apertium_a_verifier
+S1416;origine;origen;178.3310;nom;A1;elelex;apertium_a_verifier
+S1417;plante;planta;177.9072;nom;A1;elelex;apertium_a_verifier
+S1418;idiome;idioma;176.2705;nom;A1;elelex;apertium_a_verifier
+S1419;dépêche / nouvelle;noticia;174.3373;nom;A1;elelex;apertium_a_verifier
+S1420;système;sistema;174.1329;nom;A1;elelex;apertium_a_verifier
+S1421;fleur;flor;173.6548;nom;A1;elelex;apertium_a_verifier
+S1422;autres;demás;172.0277;adjectif;A1;elelex;apertium_a_verifier
+S1423;chemin;camino;171.6991;nom;A1;elelex;apertium_a_verifier
+S1424;aide / ayuda;ayuda;170.8638;nom;A1;elelex;apertium_a_verifier
+S1425;tour;vuelta;170.7297;nom;A1;elelex;apertium_a_verifier
+S1426;argentin;argentino;170.6735;adjectif;A1;elelex;apertium_a_verifier
+S1427;sol;suelo;170.6580;nom;A1;elelex;apertium_a_verifier
+S1428;avion;avión;169.7372;nom;A1;elelex;apertium_a_verifier
+S1429;espace;espacio;167.4750;nom;A1;elelex;apertium_a_verifier
+S1430;touriste;turista;167.4744;nom;A1;elelex;apertium_a_verifier
+S1431;mort;muerte;167.2657;nom;A1;elelex;apertium_a_verifier
+S1432;tel;tal;166.9605;adjectif;A1;elelex;apertium_a_verifier
+S1433;familial / familier;familiar;166.2671;adjectif;A1;elelex;apertium_a_verifier
+S1434;mexicain;mexicano;165.9303;adjectif;A1;elelex;apertium_a_verifier
+S1435;démarche / pas;paso;163.3143;nom;A1;elelex;apertium_a_verifier
+S1436;guerre;guerra;162.9306;nom;A1;elelex;apertium_a_verifier
+S1437;époque;época;162.7362;nom;A1;elelex;apertium_a_verifier
+S1438;éducation;educación;162.5879;nom;A1;elelex;apertium_a_verifier
+S1439;grand-mère / grand-père;abuelo;162.4024;nom;A1;elelex;apertium_a_verifier
+S1440;participer;participar;162.0032;verbe;A1;elelex;apertium_a_verifier
+S1441;répondre;contestar;161.8497;verbe;A1;elelex;apertium_a_verifier
+S1442;texte;texto;161.7337;nom;A1;elelex;apertium_a_verifier
+S1443;banc / banque;banco;161.2968;nom;A1;elelex;apertium_a_verifier
+S1444;journal / périodique;periódico;160.5187;nom;A1;elelex;apertium_a_verifier
+S1445;population;población;159.3445;nom;A1;elelex;apertium_a_verifier
+S1446;région;región;158.7300;nom;A1;elelex;apertium_a_verifier
+S1447;directeur;director;158.6362;nom;A1;elelex;apertium_a_verifier
+S1448;montagne;montaña;158.0994;nom;A1;elelex;apertium_a_verifier
+S1449;frère;hermano;157.9084;nom;A1;elelex;apertium_a_verifier
+S1450;camp / champ;campo;157.8711;nom;A1;elelex;apertium_a_verifier
+S1451;allure / aspect;aspecto;157.2735;nom;A1;elelex;apertium_a_verifier
+S1452;visite;visita;156.2408;nom;A1;elelex;apertium_a_verifier
+S1453;bicyclette / vélo;bicicleta;155.2948;nom;A1;elelex;apertium_a_verifier
+S1454;télé / télévision;televisión;154.7894;nom;A1;elelex;apertium_a_verifier
+S1455;anglais;inglés;154.7867;adjectif;A1;elelex;apertium_a_verifier
+S1456;rapprocher;acercar;154.3356;verbe;A1;elelex;apertium_a_verifier
+S1457;capital;capital;153.5543;nom;A1;elelex;apertium_a_verifier
+S1458;poil;pelo;153.1652;nom;A1;elelex;apertium_a_verifier
+S1459;expression;expresión;153.0154;nom;A1;elelex;apertium_a_verifier
+S1460;fatiguer;cansar;152.7212;verbe;A1;elelex;apertium_a_verifier
+S1461;objet;objeto;152.7187;nom;A1;elelex;apertium_a_verifier
+S1462;tradition;tradición;152.4515;nom;A1;elelex;apertium_a_verifier
+S1463;devant;ante;151.8545;mot-outil;A1;elelex;apertium_a_verifier
+S1464;chance / sort;suerte;151.2910;nom;A1;elelex;apertium_a_verifier
+S1465;baiser / bisou;beso;151.2806;nom;A1;elelex;apertium_a_verifier
+S1466;nature;naturaleza;151.1992;nom;A1;elelex;apertium_a_verifier
+S1467;principe;principio;150.5992;nom;A1;elelex;apertium_a_verifier
+S1468;qualité;calidad;150.0365;nom;A1;elelex;apertium_a_verifier
+S1469;imaginer;imaginar;149.6381;verbe;A1;elelex;apertium_a_verifier
+S1470;jeter / verser;echar;149.1526;verbe;A1;elelex;apertium_a_verifier
+S1471;amuser;divertir;148.5903;verbe;A1;elelex;apertium_a_verifier
+S1472;foot / football;fútbol;148.4955;nom;A1;elelex;apertium_a_verifier
+S1473;fruit;fruto;147.9564;nom;A1;elelex;apertium_a_verifier
+S1474;salut;hola;147.6902;mot-outil;A1;elelex;apertium_a_verifier
+S1475;santé;salud;147.6098;nom;A1;elelex;apertium_a_verifier
+S1476;occuper;ocupar;147.2888;verbe;A1;elelex;apertium_a_verifier
+S1477;internet;internet;146.9548;mot-outil;A1;elelex;apertium_a_verifier
+S1478;sens;sentido;146.8202;nom;A1;elelex;apertium_a_verifier
+S1479;nonplus;tampoco;146.6192;adverbe;A1;elelex;apertium_a_verifier
+S1480;baignade / bain / toilette;baño;146.3829;nom;A1;elelex;apertium_a_verifier
+S1481;agence;agencia;145.5222;nom;A1;elelex;apertium_a_verifier
+S1482;phrase;frase;145.4321;nom;A1;elelex;apertium_a_verifier
+S1483;situer;situar;144.8588;verbe;A1;elelex;apertium_a_verifier
+S1484;monsieur;don;144.3311;nom;A1;elelex;apertium_a_verifier
+S1485;entrée;entrada;144.1634;nom;A1;elelex;apertium_a_verifier
+S1486;animal;animal;143.8821;nom;A1;elelex;apertium_a_verifier
+S1487;aisé / facile;fácil;143.6453;adjectif;A1;elelex;apertium_a_verifier
+S1488;maman;mamá;143.5392;nom;A1;elelex;apertium_a_verifier
+S1489;message;mensaje;141.6453;nom;A1;elelex;apertium_a_verifier
+S1490;arbre;árbol;141.6114;nom;A1;elelex;apertium_a_verifier
+S1491;normal;normal;141.5829;adjectif;A1;elelex;apertium_a_verifier
+S1492;importer;importar;139.6143;verbe;A1;elelex;apertium_a_verifier
+S1493;àmoi;mío;138.8403;adjectif;A1;elelex;apertium_a_verifier
+S1494;voisin;vecino;138.3610;adjectif;A1;elelex;apertium_a_verifier
+S1495;appétit / faim;gana;138.2837;nom;A1;elelex;apertium_a_verifier
+S1496;soigner;cuidar;138.2205;verbe;A1;elelex;apertium_a_verifier
+S1497;communiquer;comunicar;137.6184;verbe;A1;elelex;apertium_a_verifier
+S1498;prendre / rejoindre / saisir;coger;136.9329;verbe;A1;elelex;apertium_a_verifier
+S1499;horaire;horario;135.8619;nom;A1;elelex;apertium_a_verifier
+S1500;affaire / négoce;negocio;135.6720;nom;A1;elelex;apertium_a_verifier
+S1501;huile;aceite;135.0326;nom;A1;elelex;apertium_a_verifier
+S1502;combien;cuánto;134.5321;mot-outil;A1;elelex;apertium_a_verifier
+S1503;adresse / direction;dirección;134.1871;nom;A1;elelex;apertium_a_verifier
+S1504;lit;cama;133.0694;nom;A1;elelex;apertium_a_verifier
+S1505;européen;europeo;133.0006;adjectif;A1;elelex;apertium_a_verifier
+S1506;bâtiment / édifice;edificio;132.6720;nom;A1;elelex;apertium_a_verifier
+S1507;travailleur;trabajador;131.9611;adjectif;A1;elelex;apertium_a_verifier
+S1508;dieu;dios;131.8762;nom;A1;elelex;apertium_a_verifier
+S1509;bière;cerveza;131.7606;nom;A1;elelex;apertium_a_verifier
+S1510;jeu;juego;131.0409;nom;A1;elelex;apertium_a_verifier
+S1511;tableau;cuadro;130.5981;nom;A1;elelex;apertium_a_verifier
+S1512;balade / promenade;paseo;130.5395;nom;A1;elelex;apertium_a_verifier
+S1513;moment / rato;rato;129.8385;nom;A1;elelex;apertium_a_verifier
+S1514;serieux;serio;129.6288;adjectif;A1;elelex;apertium_a_verifier
+S1515;poisson;pescado;129.4572;nom;A1;elelex;apertium_a_verifier
+S1516;succès;éxito;129.3967;nom;A1;elelex;apertium_a_verifier
+S1517;énorme;enorme;129.2570;adjectif;A1;elelex;apertium_a_verifier
+S1518;bel;guapo;129.0645;adjectif;A1;elelex;apertium_a_verifier
+S1519;post;puesto;128.7244;nom;A1;elelex;apertium_a_verifier
+S1520;boisson;bebida;127.7871;nom;A1;elelex;apertium_a_verifier
+S1521;reunion / réunion;reunión;127.3643;mot-outil;A1;elelex;apertium_a_verifier
+S1522;merveilleux;maravilloso;127.0511;adjectif;A1;elelex;apertium_a_verifier
+S1523;vue;vista;127.0443;nom;A1;elelex;apertium_a_verifier
+S1524;cadeau;regalo;125.8274;nom;A1;elelex;apertium_a_verifier
+S1525;littérature;literatura;125.7463;nom;A1;elelex;apertium_a_verifier
+S1526;pratiquer;practicar;125.4612;verbe;A1;elelex;apertium_a_verifier
+S1527;affaire / sujet;asunto;125.4600;nom;A1;elelex;apertium_a_verifier
+S1528;fonctionner;funcionar;125.3377;verbe;A1;elelex;apertium_a_verifier
+S1529;fourrure / peau;piel;124.7303;nom;A1;elelex;apertium_a_verifier
+S1530;donnée;dato;124.6336;nom;A1;elelex;apertium_a_verifier
+S1531;électronique;electrónico;124.5323;adjectif;A1;elelex;apertium_a_verifier
+S1532;élève;alumno;124.5209;nom;A1;elelex;apertium_a_verifier
+S1533;bouche;boca;124.1417;nom;A1;elelex;apertium_a_verifier
+S1534;communauté;comunidad;123.8799;nom;A1;elelex;apertium_a_verifier
+S1535;caractère;carácter;123.3926;nom;A1;elelex;apertium_a_verifier
+S1536;différent / divers;distinto;122.5186;adjectif;A1;elelex;apertium_a_verifier
+S1537;accomplir;cumplir;122.3961;verbe;A1;elelex;apertium_a_verifier
+S1538;ambiance / environnement;ambiente;122.3768;nom;A1;elelex;apertium_a_verifier
+S1539;pire / pis;peor;122.0000;adjectif;A1;elelex;apertium_a_verifier
+S1540;tomberamoureux;enamorar;121.3643;verbe;A1;elelex;apertium_a_verifier
+S1541;fenêtre;ventana;121.2942;nom;A1;elelex;apertium_a_verifier
+S1542;ramasser / recueillir;recoger;120.8840;verbe;A1;elelex;apertium_a_verifier
+S1543;te;te;119.8414;mot-outil;A1;elelex;apertium_a_verifier
+S1544;résultat / score;resultado;119.8321;nom;A1;elelex;apertium_a_verifier
+S1545;aéroport;aeropuerto;119.5824;nom;A1;elelex;apertium_a_verifier
+S1546;ajouter / rajouter;añadir;119.5585;verbe;A1;elelex;apertium_a_verifier
+S1547;photographie;fotografía;119.5557;nom;A1;elelex;apertium_a_verifier
+S1548;art;arte;119.4264;nom;A1;elelex;apertium_a_verifier
+S1549;goût;gusto;119.0407;nom;A1;elelex;apertium_a_verifier
+S1550;salon;salón;118.5622;nom;A1;elelex;apertium_a_verifier
+S1551;chaleur;calor;118.4912;nom;A1;elelex;apertium_a_verifier
+S1552;avecmoi;conmigo;118.0152;mot-outil;A1;elelex;apertium_a_verifier
+S1553;peinture;pintura;117.9021;nom;A1;elelex;apertium_a_verifier
+S1554;côte;costa;117.4692;nom;A1;elelex;apertium_a_verifier
+S1555;intérêt;interés;117.2736;nom;A1;elelex;apertium_a_verifier
+S1556;paysage;paisaje;117.0552;nom;A1;elelex;apertium_a_verifier
+S1557;communication / comunication;comunicación;117.0518;nom;A1;elelex;apertium_a_verifier
+S1558;fleuve / rivière;río;114.3288;nom;A1;elelex;apertium_a_verifier
+S1559;ordinateur;ordenador;113.0072;nom;A1;elelex;apertium_a_verifier
+S1560;église;iglesia;112.9720;nom;A1;elelex;apertium_a_verifier
+S1561;consommer;consumir;112.8516;verbe;A1;elelex;apertium_a_verifier
+S1562;endroit;sitio;112.7443;nom;A1;elelex;apertium_a_verifier
+S1563;débris / restant / reste;resto;112.4639;nom;A1;elelex;apertium_a_verifier
+S1564;pommedeterre;patata;112.3029;nom;A1;elelex;apertium_a_verifier
+S1565;exemple;ejemplo;111.9545;nom;A1;elelex;apertium_a_verifier
+S1566;mètre / métro;metro;111.4163;nom;A1;elelex;apertium_a_verifier
+S1567;protéger;proteger;111.2851;verbe;A1;elelex;apertium_a_verifier
+S1568;mode;moda;111.2644;nom;A1;elelex;apertium_a_verifier
+S1569;niveau;nivel;111.0208;nom;A1;elelex;apertium_a_verifier
+S1570;fantastique;fantástico;110.8633;adjectif;A1;elelex;apertium_a_verifier
+S1571;détective;detective;109.4191;nom;A1;elelex;apertium_a_verifier
+S1572;légume;verdura;109.3670;nom;A1;elelex;apertium_a_verifier
+S1573;page;página;109.2818;nom;A1;elelex;apertium_a_verifier
+S1574;conte;cuento;108.5561;nom;A1;elelex;apertium_a_verifier
+S1575;exceller / souligner;destacar;107.9370;verbe;A1;elelex;apertium_a_verifier
+S1576;contact;contacto;107.2916;nom;A1;elelex;apertium_a_verifier
+S1577;prix;premio;106.9442;nom;A1;elelex;apertium_a_verifier
+S1578;nourriture;alimento;106.9129;nom;A1;elelex;apertium_a_verifier
+S1579;convenir;acordar;106.8042;verbe;A1;elelex;apertium_a_verifier
+S1580;chien;perro;106.6558;nom;A1;elelex;apertium_a_verifier
+S1581;médecin;médico;106.3874;nom;A1;elelex;apertium_a_verifier
+S1582;douleur;dolor;106.1466;nom;A1;elelex;apertium_a_verifier
+S1583;beau;bello;106.1209;adjectif;A1;elelex;apertium_a_verifier
+S1584;salle;sala;106.0044;nom;A1;elelex;apertium_a_verifier
+S1585;dîner / souper;cena;105.9142;nom;A1;elelex;apertium_a_verifier
+S1586;énervé / nerveux;nervioso;105.8142;adjectif;A1;elelex;apertium_a_verifier
+S1587;valise;maleta;105.3495;nom;A1;elelex;apertium_a_verifier
+S1588;éviter;evitar;105.2116;verbe;A1;elelex;apertium_a_verifier
+S1589;courrier;correo;105.1923;nom;A1;elelex;apertium_a_verifier
+S1590;ciel;cielo;105.1713;nom;A1;elelex;apertium_a_verifier
+S1591;spectacle;espectáculo;104.0997;nom;A1;elelex;apertium_a_verifier
+S1592;marquer;marcar;103.7217;verbe;A1;elelex;apertium_a_verifier
+S1593;importance;importancia;103.1985;nom;A1;elelex;apertium_a_verifier
+S1594;historique;histórico;103.0542;adjectif;A1;elelex;apertium_a_verifier
+S1595;bourse / sac;bolsa;102.7860;nom;A1;elelex;apertium_a_verifier
+S1596;saint;santo;102.6496;adjectif;A1;elelex;apertium_a_verifier
+S1597;match / parti;partido;102.4957;nom;A1;elelex;apertium_a_verifier
+S1598;lait;leche;102.0815;nom;A1;elelex;apertium_a_verifier
+S1599;projet;proyecto;102.0217;nom;A1;elelex;apertium_a_verifier
+S1600;débarrasser / enlever;quitar;101.9464;verbe;A1;elelex;apertium_a_verifier
+S1601;conseil;consejo;101.8065;nom;A1;elelex;apertium_a_verifier
+S1602;jardin;jardín;101.7274;nom;A1;elelex;apertium_a_verifier
+S1603;lettre;letra;101.4289;nom;A1;elelex;apertium_a_verifier
+S1604;mobile;móvil;101.3412;adjectif;A1;elelex;apertium_a_verifier
+S1605;éberluer / étonner / surprendre;sorprender;101.2666;verbe;A1;elelex;apertium_a_verifier
+S1606;pardonner;perdonar;101.0398;verbe;A1;elelex;apertium_a_verifier
+S1607;chaussure / soulier;zapato;100.9732;nom;A1;elelex;apertium_a_verifier
+S1608;bois;madera;100.4228;nom;A1;elelex;apertium_a_verifier
+S1609;cercler / contourner / entourer;rodear;100.3901;verbe;A1;elelex;apertium_a_verifier
+S1610;télé;tele;100.2144;nom;A1;elelex;apertium_a_verifier
+S1611;marque;marca;99.7361;nom;A1;elelex;apertium_a_verifier
+S1612;abandonner / quitter;abandonar;99.7315;verbe;A1;elelex;apertium_a_verifier
+S1613;compagnie;compañía;99.5666;nom;A1;elelex;apertium_a_verifier
+S1614;exposé / exposition;exposición;99.3626;nom;A1;elelex;apertium_a_verifier
+S1615;vous;vosotros;99.1560;mot-outil;A1;elelex;apertium_a_verifier
+S1616;touristique;turístico;98.7973;adjectif;A1;elelex;apertium_a_verifier
+S1617;bonmarché;barato;98.1216;adjectif;A1;elelex;apertium_a_verifier
+S1618;concert;concierto;97.6850;nom;A1;elelex;apertium_a_verifier
+S1619;moderne;moderno;97.3472;adjectif;A1;elelex;apertium_a_verifier
+S1620;étoile / vedette;estrella;96.8418;nom;A1;elelex;apertium_a_verifier
+S1621;guide;guía;96.6150;nom;A1;elelex;apertium_a_verifier
+S1622;offre;oferta;96.4718;nom;A1;elelex;apertium_a_verifier
+S1623;bateau;barco;96.4055;nom;A1;elelex;apertium_a_verifier
+S1624;minute;minuto;96.3811;nom;A1;elelex;apertium_a_verifier
+S1625;taxi;taxi;96.3242;nom;A1;elelex;apertium_a_verifier
+S1626;mari;marido;96.2915;nom;A1;elelex;apertium_a_verifier
+S1627;train;tren;96.1901;nom;A1;elelex;apertium_a_verifier
+S1628;associé / partenaire;socio;95.9229;nom;A1;elelex;apertium_a_verifier
+S1629;rallier / rassembler / réunir;reunir;95.0559;verbe;A1;elelex;apertium_a_verifier
+S1630;dos;espalda;94.9814;nom;A1;elelex;apertium_a_verifier
+S1631;conversation;conversación;94.5736;nom;A1;elelex;apertium_a_verifier
+S1632;là-bas;allá;94.5286;adverbe;A1;elelex;apertium_a_verifier
+S1633;indigène;indígena;94.1436;adjectif;A1;elelex;apertium_a_verifier
+S1634;roman;novela;93.9864;nom;A1;elelex;apertium_a_verifier
+S1635;tomate;tomate;93.9636;nom;A1;elelex;apertium_a_verifier
+S1636;nombreux;numeroso;93.3278;adjectif;A1;elelex;apertium_a_verifier
+S1637;tâche;tarea;93.2712;nom;A1;elelex;apertium_a_verifier
+S1638;mondial;mundial;93.1461;adjectif;A1;elelex;apertium_a_verifier
+S1639;priver;privar;92.6837;verbe;A1;elelex;apertium_a_verifier
+S1640;bras;brazo;92.6664;nom;A1;elelex;apertium_a_verifier
+S1641;danse;baile;92.4893;nom;A1;elelex;apertium_a_verifier
+S1642;transport;transporte;92.2985;nom;A1;elelex;apertium_a_verifier
+S1643;précieux;precioso;92.2806;adjectif;A1;elelex;apertium_a_verifier
+S1644;français;francés;92.2304;adjectif;A1;elelex;apertium_a_verifier
+S1645;direaurevoir / licencier / renvoyer;despedir;92.1644;verbe;A1;elelex;apertium_a_verifier
+S1646;papa;papá;92.1519;nom;A1;elelex;apertium_a_verifier
+S1647;agir / jouer;actuar;91.2747;verbe;A1;elelex;apertium_a_verifier
+S1648;recette;receta;91.1593;nom;A1;elelex;apertium_a_verifier
+S1649;occasion / opportunité;oportunidad;91.1387;nom;A1;elelex;apertium_a_verifier
+S1650;membre;miembro;90.8481;nom;A1;elelex;apertium_a_verifier
+S1651;pair;par;90.6931;adjectif;A1;elelex;apertium_a_verifier
+S1652;exercice;ejercicio;89.5897;nom;A1;elelex;apertium_a_verifier
+S1653;mur / paroi;pared;89.4032;nom;A1;elelex;apertium_a_verifier
+S1654;matériel;material;88.6071;nom;A1;elelex;apertium_a_verifier
+S1655;départ / issue / sortie;salida;88.5043;nom;A1;elelex;apertium_a_verifier
+S1656;disque;disco;87.4090;nom;A1;elelex;apertium_a_verifier
+S1657;américain;americano;86.9978;nom;A1;elelex;apertium_a_verifier
+S1658;paix;paz;86.9903;nom;A1;elelex;apertium_a_verifier
+S1659;lac / loch;lago;86.7935;nom;A1;elelex;apertium_a_verifier
+S1660;magazine / revue;revista;86.6853;nom;A1;elelex;apertium_a_verifier
+S1661;souffrir;sufrir;86.0424;verbe;A1;elelex;apertium_a_verifier
+S1662;coupe;copa;85.8820;nom;A1;elelex;apertium_a_verifier
+S1663;oeuf;huevo;85.8502;nom;A1;elelex;apertium_a_verifier
+S1664;riz;arroz;85.7524;nom;A1;elelex;apertium_a_verifier
+S1665;écrivain;escritor;85.6949;nom;A1;elelex;apertium_a_verifier
+S1666;égal;igual;85.5648;adjectif;A1;elelex;apertium_a_verifier
+S1667;commenter;comentar;85.5211;verbe;A1;elelex;apertium_a_verifier
+S1668;espèce;especie;85.2043;nom;A1;elelex;apertium_a_verifier
+S1669;couvrir / joncher / napper;cubrir;85.1924;verbe;A1;elelex;apertium_a_verifier
+S1670;peut-être;quizá;85.0861;adverbe;A1;elelex;apertium_a_verifier
+S1671;compte;cuenta;84.8747;nom;A1;elelex;apertium_a_verifier
+S1672;poids;peso;84.8722;nom;A1;elelex;apertium_a_verifier
+S1673;pain;pan;84.3699;nom;A1;elelex;apertium_a_verifier
+S1674;annonce;anuncio;84.2030;nom;A1;elelex;apertium_a_verifier
+S1675;oiseau;pájaro;83.6676;nom;A1;elelex;apertium_a_verifier
+S1676;carrière / course;carrera;83.5694;nom;A1;elelex;apertium_a_verifier
+S1677;péruvien;peruano;83.3441;adjectif;A1;elelex;apertium_a_verifier
+S1678;hiver;invierno;83.2041;nom;A1;elelex;apertium_a_verifier
+S1679;gare / saison / station;estación;83.0787;nom;A1;elelex;apertium_a_verifier
+S1680;offrir;regalar;83.0369;verbe;A1;elelex;apertium_a_verifier
+S1681;cubain;cubano;82.7347;adjectif;A1;elelex;apertium_a_verifier
+S1682;provoquer;provocar;82.1770;verbe;A1;elelex;apertium_a_verifier
+S1683;terrasse;terraza;81.9789;nom;A1;elelex;apertium_a_verifier
+S1684;humeur / humour;humor;81.6824;nom;A1;elelex;apertium_a_verifier
+S1685;doute;duda;81.4089;nom;A1;elelex;apertium_a_verifier
+S1686;sucre;azúcar;81.3920;nom;A1;elelex;apertium_a_verifier
+S1687;chilien;chileno;81.1876;adjectif;A1;elelex;apertium_a_verifier
+S1688;journaliste;periodista;81.1485;nom;A1;elelex;apertium_a_verifier
+S1689;silence;silencio;81.0161;nom;A1;elelex;apertium_a_verifier
+S1690;solution;solución;80.9929;nom;A1;elelex;apertium_a_verifier
+S1691;louer;alquilar;80.6968;verbe;A1;elelex;apertium_a_verifier
+S1692;aventure;aventura;80.5763;nom;A1;elelex;apertium_a_verifier
+S1693;médecine;medicina;80.2560;nom;A1;elelex;apertium_a_verifier
+S1694;motif;motivo;80.2116;nom;A1;elelex;apertium_a_verifier
+S1695;émotion;emoción;80.1921;nom;A1;elelex;apertium_a_verifier
+S1696;améliorer;mejorar;80.1750;verbe;A1;elelex;apertium_a_verifier
+S1697;tourisme;turismo;80.0627;nom;A1;elelex;apertium_a_verifier
+S1698;italien;italiano;79.5396;adjectif;A1;elelex;apertium_a_verifier
+S1699;faim;hambre;79.4791;nom;A1;elelex;apertium_a_verifier
+S1700;coûter;costar;78.9700;verbe;A1;elelex;apertium_a_verifier
+S1701;décision;decisión;78.5062;nom;A1;elelex;apertium_a_verifier
+S1702;excursion;excursión;78.3114;nom;A1;elelex;apertium_a_verifier
+S1703;d'abord / premier / premièrement;primero;78.2503;adverbe;A1;elelex;apertium_a_verifier
+S1704;informer / rapporter;informar;78.1793;verbe;A1;elelex;apertium_a_verifier
+S1705;dérider / sourire;sonreír;78.1567;verbe;A1;elelex;apertium_a_verifier
+S1706;planète;planeta;78.0507;nom;A1;elelex;apertium_a_verifier
+S1707;revolution / révolution;revolución;77.9711;nom;A1;elelex;apertium_a_verifier
+S1708;hopital / hôpital;hospital;77.5489;nom;A1;elelex;apertium_a_verifier
+S1709;document;documento;77.5213;nom;A1;elelex;apertium_a_verifier
+S1710;aussitôt;enseguida;77.1654;adverbe;A1;elelex;apertium_a_verifier
+S1711;génial;genial;76.5725;adjectif;A1;elelex;apertium_a_verifier
+S1712;nord;norte;76.3826;mot-outil;A1;elelex;apertium_a_verifier
+S1713;clé / clef;llave;75.7887;nom;A1;elelex;apertium_a_verifier
+S1714;déclarer;declarar;75.2310;verbe;A1;elelex;apertium_a_verifier
+S1715;assommer / tuer;matar;75.1911;verbe;A1;elelex;apertium_a_verifier
+S1716;bibliothèque;biblioteca;75.1412;nom;A1;elelex;apertium_a_verifier
+S1717;chocolat;chocolate;75.0937;nom;A1;elelex;apertium_a_verifier
+S1718;classique;clásico;75.0283;adjectif;A1;elelex;apertium_a_verifier
+S1719;deuxième;segundo;74.9587;adjectif;A1;elelex;apertium_a_verifier
+S1720;prôner / recommander;recomendar;74.8528;verbe;A1;elelex;apertium_a_verifier
+S1721;beau;hermoso;74.7917;adjectif;A1;elelex;apertium_a_verifier
+S1722;climat / météo;clima;74.6610;nom;A1;elelex;apertium_a_verifier
+S1723;taire;callar;74.4514;verbe;A1;elelex;apertium_a_verifier
+S1724;mandat / ordre;orden;74.2275;nom;A1;elelex;apertium_a_verifier
+S1725;festival;festival;73.9931;nom;A1;elelex;apertium_a_verifier
+S1726;bagarrer / lutter;luchar;73.1148;verbe;A1;elelex;apertium_a_verifier
+S1727;rencontre;encuentro;72.9757;nom;A1;elelex;apertium_a_verifier
+S1728;loisir;ocio;72.9232;nom;A1;elelex;apertium_a_verifier
+S1729;dangereux;peligroso;72.5826;adjectif;A1;elelex;apertium_a_verifier
+S1730;petitdéjeuner;desayuno;72.5563;nom;A1;elelex;apertium_a_verifier
+S1731;incroyable / stupéfiant;increíble;72.5371;adjectif;A1;elelex;apertium_a_verifier
+S1732;création;diseño;72.2637;nom;A1;elelex;apertium_a_verifier
+S1733;unir;unir;72.2011;verbe;A1;elelex;apertium_a_verifier
+S1734;enbas;abajo;72.1413;adverbe;A1;elelex;apertium_a_verifier
+S1735;ingrédient;ingrediente;72.1107;nom;A1;elelex;apertium_a_verifier
+S1736;vente;venta;71.9295;nom;A1;elelex;apertium_a_verifier
+S1737;feuille;hoja;71.7149;nom;A1;elelex;apertium_a_verifier
+S1738;animer / encourager;animar;71.7140;verbe;A1;elelex;apertium_a_verifier
+S1739;surprise;sorpresa;71.7065;nom;A1;elelex;apertium_a_verifier
+S1740;enfantin;infantil;70.5883;adjectif;A1;elelex;apertium_a_verifier
+S1741;alemán / allemand;alemán;70.2883;mot-outil;A1;elelex;apertium_a_verifier
+S1742;flamme;llama;70.1762;nom;A1;elelex;apertium_a_verifier
+S1743;personnage;personaje;70.1241;nom;A1;elelex;apertium_a_verifier
+S1744;sain;sano;70.0047;adjectif;A1;elelex;apertium_a_verifier
+S1745;mec / oncle;tío;69.9732;nom;A1;elelex;apertium_a_verifier
+S1746;vol;vuelo;69.9591;nom;A1;elelex;apertium_a_verifier
+S1747;ail;ajo;69.9550;nom;A1;elelex;apertium_a_verifier
+S1748;coucher;acostar;69.2931;verbe;A1;elelex;apertium_a_verifier
+S1749;àvous;vuestro;69.2002;adjectif;A1;elelex;apertium_a_verifier
+S1750;musicien;músico;69.0898;nom;A1;elelex;apertium_a_verifier
+S1751;bouteille;botella;68.9699;nom;A1;elelex;apertium_a_verifier
+S1752;peintre;pintor;68.8462;nom;A1;elelex;apertium_a_verifier
+S1753;gratuit;gratuito;68.4576;adjectif;A1;elelex;apertium_a_verifier
+S1754;cathédrale;catedral;68.0702;nom;A1;elelex;apertium_a_verifier
+S1755;rythme;ritmo;67.8956;nom;A1;elelex;apertium_a_verifier
+S1756;sel;sal;67.5649;nom;A1;elelex;apertium_a_verifier
+S1757;fréquent;frecuente;67.4869;adjectif;A1;elelex;apertium_a_verifier
+S1758;passion;pasión;67.4694;nom;A1;elelex;apertium_a_verifier
+S1759;base;base;67.4140;nom;A1;elelex;apertium_a_verifier
+S1760;kilo;kilo;67.2445;nom;A1;elelex;apertium_a_verifier
+S1761;stress;estrés;67.0447;nom;A1;elelex;apertium_a_verifier
+S1762;examen;examen;66.9468;nom;A1;elelex;apertium_a_verifier
+S1763;régime;dieta;66.7918;nom;A1;elelex;apertium_a_verifier
+S1764;religieux;religioso;66.6464;adjectif;A1;elelex;apertium_a_verifier
+S1765;figure;figura;66.6038;nom;A1;elelex;apertium_a_verifier
+S1766;fabriquer;fabricar;66.2414;verbe;A1;elelex;apertium_a_verifier
+S1767;port;puerto;66.2260;nom;A1;elelex;apertium_a_verifier
+S1768;petit-déjeuner;desayunar;66.0781;verbe;A1;elelex;apertium_a_verifier
+S1769;sauce;salsa;66.0584;nom;A1;elelex;apertium_a_verifier
+S1770;acteur;actor;65.6270;nom;A1;elelex;apertium_a_verifier
+S1771;vendeur;vendedor;65.4327;nom;A1;elelex;apertium_a_verifier
+S1772;valeur;valor;65.0994;nom;A1;elelex;apertium_a_verifier
+S1773;confiance;confianza;65.0420;nom;A1;elelex;apertium_a_verifier
+S1774;monnaie;moneda;64.9623;nom;A1;elelex;apertium_a_verifier
+S1775;appel;llamada;64.9037;nom;A1;elelex;apertium_a_verifier
+S1776;idéal;ideal;64.8184;adjectif;A1;elelex;apertium_a_verifier
+S1777;feu;fuego;64.5863;nom;A1;elelex;apertium_a_verifier
+S1778;loin;lejos;64.4051;adverbe;A1;elelex;apertium_a_verifier
+S1779;sud;sur;64.3933;nom;A1;elelex;apertium_a_verifier
+S1780;instrument;instrumento;64.2662;nom;A1;elelex;apertium_a_verifier
+S1781;avectoi;contigo;64.0776;mot-outil;A1;elelex;apertium_a_verifier
+S1782;pluie;lluvia;64.0665;nom;A1;elelex;apertium_a_verifier
+S1783;palais;palacio;63.9861;nom;A1;elelex;apertium_a_verifier
+S1784;fille / garçon;muchacho;63.8191;nom;A1;elelex;apertium_a_verifier
+S1785;étaler / étendre / tendre;extender;63.6689;verbe;A1;elelex;apertium_a_verifier
+S1786;coup;golpe;63.5741;nom;A1;elelex;apertium_a_verifier
+S1787;écologique;ecológico;63.5662;adjectif;A1;elelex;apertium_a_verifier
+S1788;composer;componer;63.4585;verbe;A1;elelex;apertium_a_verifier
+S1789;réserver;reservar;63.2045;verbe;A1;elelex;apertium_a_verifier
+S1790;confortable;cómodo;62.9820;adjectif;A1;elelex;apertium_a_verifier
+S1791;amant;amante;62.9558;nom;A1;elelex;apertium_a_verifier
+S1792;timide;tímido;62.8301;adjectif;A1;elelex;apertium_a_verifier
+S1793;menu;menudo;62.7182;adjectif;A1;elelex;apertium_a_verifier
+S1794;excellent;excelente;62.4709;adjectif;A1;elelex;apertium_a_verifier
+S1795;vent;viento;62.3361;nom;A1;elelex;apertium_a_verifier
+S1796;route;ruta;62.2927;nom;A1;elelex;apertium_a_verifier
+S1797;sandwich;bocadillo;62.0758;nom;A1;elelex;apertium_a_verifier
+S1798;résidence;residencia;61.9510;nom;A1;elelex;apertium_a_verifier
+S1799;chanteur;cantante;61.9259;nom;A1;elelex;apertium_a_verifier
+S1800;citation / rendez-vous;cita;61.7518;nom;A1;elelex;apertium_a_verifier
+S1801;contenant / continent;continente;61.7016;nom;A1;elelex;apertium_a_verifier
+S1802;mélanger / mêler;mezclar;61.6577;verbe;A1;elelex;apertium_a_verifier
+S1803;titre;título;61.6494;nom;A1;elelex;apertium_a_verifier
+S1804;réserve;reserva;61.5720;nom;A1;elelex;apertium_a_verifier
+S1805;commerce;comercio;61.1661;nom;A1;elelex;apertium_a_verifier
+S1806;amicale / association;asociación;61.1517;nom;A1;elelex;apertium_a_verifier
+S1807;oliva / olive;oliva;61.0023;mot-outil;A1;elelex;apertium_a_verifier
+S1808;croiser;cruzar;60.5450;verbe;A1;elelex;apertium_a_verifier
+S1809;éloigner;alejar;60.3752;verbe;A1;elelex;apertium_a_verifier
+S1810;universitaire;universitario;60.2805;adjectif;A1;elelex;apertium_a_verifier
+S1811;sourire;sonrisa;60.2790;nom;A1;elelex;apertium_a_verifier
+S1812;partir / repartir;marchar;60.2364;verbe;A1;elelex;apertium_a_verifier
+S1813;personnalité;personalidad;60.0779;nom;A1;elelex;apertium_a_verifier
+S1814;ennuyer;aburrir;60.0593;verbe;A1;elelex;apertium_a_verifier
+S1815;bus;autobús;59.6743;nom;A1;elelex;apertium_a_verifier
+S1816;destin / destination;destino;59.6460;nom;A1;elelex;apertium_a_verifier
+S1817;collège;colegio;59.6214;nom;A1;elelex;apertium_a_verifier
+S1818;boîte;discoteca;59.5927;nom;A1;elelex;apertium_a_verifier
+S1819;actu / actualité;actualidad;59.5151;nom;A1;elelex;apertium_a_verifier
+S1820;jambon;jamón;59.4387;nom;A1;elelex;apertium_a_verifier
+S1821;coutume / habitude / moeurs;costumbre;59.4241;nom;A1;elelex;apertium_a_verifier
+S1822;adieu / aurevoir;adiós;59.0075;nom;A1;elelex;apertium_a_verifier
+S1823;peut-être;quizás;58.9562;adverbe;A1;elelex;apertium_a_verifier
+S1824;sentiment;sentimiento;58.8720;nom;A1;elelex;apertium_a_verifier
+S1825;force;fuerza;58.8179;nom;A1;elelex;apertium_a_verifier
+S1826;piscine;piscina;58.7807;nom;A1;elelex;apertium_a_verifier
+S1827;chef;jefe;58.6727;nom;A1;elelex;apertium_a_verifier
+S1828;verbe;verbo;58.4922;nom;A1;elelex;apertium_a_verifier
+S1829;musical;musical;58.3330;adjectif;A1;elelex;apertium_a_verifier
+S1830;sympa / sympathique;simpático;58.2883;adjectif;A1;elelex;apertium_a_verifier
+S1831;artiste;artista;58.2068;nom;A1;elelex;apertium_a_verifier
+S1832;hispanique;hispano;58.1953;adjectif;A1;elelex;apertium_a_verifier
+S1833;japonais;japonés;57.9885;adjectif;A1;elelex;apertium_a_verifier
+S1834;urbain;urbano;57.9481;adjectif;A1;elelex;apertium_a_verifier
+S1835;poche;bolsillo;57.8565;nom;A1;elelex;apertium_a_verifier
+S1836;hâte;prisa;57.5616;nom;A1;elelex;apertium_a_verifier
+S1837;or;oro;57.4630;nom;A1;elelex;apertium_a_verifier
+S1838;style;estilo;57.2463;nom;A1;elelex;apertium_a_verifier
+S1839;agréable / plaisant;agradable;57.2134;adjectif;A1;elelex;apertium_a_verifier
+S1840;cheval;caballo;57.0643;nom;A1;elelex;apertium_a_verifier
+S1841;cousin / premier;primo;56.3873;nom;A1;elelex;apertium_a_verifier
+S1842;chaise;silla;56.3168;nom;A1;elelex;apertium_a_verifier
+S1843;intelligent;inteligente;56.1967;adjectif;A1;elelex;apertium_a_verifier
+S1844;flamand;flamenco;55.9753;adjectif;A1;elelex;apertium_a_verifier
+S1845;blond;rubio;55.8806;adjectif;A1;elelex;apertium_a_verifier
+S1846;meuble;mueble;55.6830;nom;A1;elelex;apertium_a_verifier
+S1847;cacher;esconder;55.5689;verbe;A1;elelex;apertium_a_verifier
+S1848;adulte;adulto;55.5168;nom;A1;elelex;apertium_a_verifier
+S1849;delgado / maigre;delgado;55.0126;mot-outil;A1;elelex;apertium_a_verifier
+S1850;difficulté;dificultad;54.5514;nom;A1;elelex;apertium_a_verifier
+S1851;supermarché;supermercado;54.3780;nom;A1;elelex;apertium_a_verifier
+S1852;amitié;amistad;54.1029;nom;A1;elelex;apertium_a_verifier
+S1853;autour;alrededor;54.0587;adverbe;A1;elelex;apertium_a_verifier
+S1854;monastère;monasterio;53.7414;nom;A1;elelex;apertium_a_verifier
+S1855;favori;favorito;53.6668;adjectif;A1;elelex;apertium_a_verifier
+S1856;balcon;balcón;53.5228;nom;A1;elelex;apertium_a_verifier
+S1857;caméra;cámara;53.2307;nom;A1;elelex;apertium_a_verifier
+S1858;avocat;abogado;53.2121;nom;A1;elelex;apertium_a_verifier
+S1859;rêver / songer;soñar;52.9911;verbe;A1;elelex;apertium_a_verifier
+S1860;àdehors / dehors / endehors;fuera;52.8926;adverbe;A1;elelex;apertium_a_verifier
+S1861;pur;puro;52.8631;adjectif;A1;elelex;apertium_a_verifier
+S1862;saluer;saludar;52.7923;verbe;A1;elelex;apertium_a_verifier
+S1863;impressionnant;impresionante;52.3976;adjectif;A1;elelex;apertium_a_verifier
+S1864;lecture;lectura;52.3830;nom;A1;elelex;apertium_a_verifier
+S1865;canal / chaîne;canal;52.3003;nom;A1;elelex;apertium_a_verifier
+S1866;alimentation;alimentación;52.1468;nom;A1;elelex;apertium_a_verifier
+S1867;secrétaire;secretario;52.0553;nom;A1;elelex;apertium_a_verifier
+S1868;erreur / maldonne;error;52.0219;nom;A1;elelex;apertium_a_verifier
+S1869;mélange;mezcla;51.9812;nom;A1;elelex;apertium_a_verifier
+S1870;hacher;picar;51.7814;verbe;A1;elelex;apertium_a_verifier
+S1871;plan;plan;51.4340;nom;A1;elelex;apertium_a_verifier
+S1872;varier;variar;51.1927;verbe;A1;elelex;apertium_a_verifier
+S1873;bois;bosque;51.0548;nom;A1;elelex;apertium_a_verifier
+S1874;risque;riesgo;50.8800;nom;A1;elelex;apertium_a_verifier
+S1875;forêt;selva;50.8393;nom;A1;elelex;apertium_a_verifier
+S1876;catalan;catalán;50.5283;adjectif;A1;elelex;apertium_a_verifier
+S1877;location / loyer;alquiler;49.8829;nom;A1;elelex;apertium_a_verifier
+S1878;verre;vaso;49.8354;nom;A1;elelex;apertium_a_verifier
+S1879;territoire;territorio;49.7456;nom;A1;elelex;apertium_a_verifier
+S1880;arabe;árabe;49.6286;adjectif;A1;elelex;apertium_a_verifier
+S1881;langue;habla;48.6671;nom;A1;elelex;apertium_a_verifier
+S1882;haut / hauteur;altura;48.6060;nom;A1;elelex;apertium_a_verifier
+S1883;doigt;dedo;48.5893;nom;A1;elelex;apertium_a_verifier
+S1884;galicien;gallego;48.5839;adjectif;A1;elelex;apertium_a_verifier
+S1885;carte;tarjeta;48.2620;nom;A1;elelex;apertium_a_verifier
+S1886;règle;regla;47.7982;nom;A1;elelex;apertium_a_verifier
+S1887;immigrant;inmigrante;46.8673;adjectif;A1;elelex;apertium_a_verifier
+S1888;vidéo;vídeo;46.6122;nom;A1;elelex;apertium_a_verifier
+S1889;appartement;apartamento;46.5058;nom;A1;elelex;apertium_a_verifier
+S1890;présentation;presentación;46.4788;nom;A1;elelex;apertium_a_verifier
+S1891;province;provincia;46.2117;nom;A1;elelex;apertium_a_verifier
+S1892;fromage;queso;46.1907;nom;A1;elelex;apertium_a_verifier
+S1893;magnifique;estupendo;46.1081;adjectif;A1;elelex;apertium_a_verifier
+S1894;visiteur;visitante;46.0099;adjectif;A1;elelex;apertium_a_verifier
+S1895;petit-fils;nieto;45.6227;nom;A1;elelex;apertium_a_verifier
+S1896;discuter;charlar;45.3944;verbe;A1;elelex;apertium_a_verifier
+S1897;vallée;valle;45.3389;nom;A1;elelex;apertium_a_verifier
+S1898;correct;correcto;44.8144;adjectif;A1;elelex;apertium_a_verifier
+S1899;traverser;atravesar;44.8109;verbe;A1;elelex;apertium_a_verifier
+S1900;merveille;maravilla;44.8080;nom;A1;elelex;apertium_a_verifier
+S1901;apprendre;enterar;44.7525;verbe;A1;elelex;apertium_a_verifier
+S1902;volcan;volcán;44.7191;nom;A1;elelex;apertium_a_verifier
+S1903;intérieur;interior;44.5439;nom;A1;elelex;apertium_a_verifier
+S1904;renommée;fama;44.3578;nom;A1;elelex;apertium_a_verifier
+S1905;élégant;elegante;44.3138;adjectif;A1;elelex;apertium_a_verifier
+S1906;avenue;avenida;43.9569;nom;A1;elelex;apertium_a_verifier
+S1907;méthode;método;43.6496;nom;A1;elelex;apertium_a_verifier
+S1908;route;carretera;43.5418;nom;A1;elelex;apertium_a_verifier
+S1909;lignée / nom;apellido;43.5174;nom;A1;elelex;apertium_a_verifier
+S1910;romantique;romántico;43.4826;adjectif;A1;elelex;apertium_a_verifier
+S1911;billet;billete;43.2081;nom;A1;elelex;apertium_a_verifier
+S1912;guitare;guitarra;43.1773;nom;A1;elelex;apertium_a_verifier
+S1913;tennis;tenis;42.8605;nom;A1;elelex;apertium_a_verifier
+S1914;méditerranée / méditerranéen;mediterráneo;42.6721;mot-outil;A1;elelex;apertium_a_verifier
+S1915;secret;secreto;42.6430;adjectif;A1;elelex;apertium_a_verifier
+S1916;passeport;pasaporte;42.5173;nom;A1;elelex;apertium_a_verifier
+S1917;cela;eso;42.4049;mot-outil;A1;elelex;apertium_a_verifier
+S1918;rose;rosa;42.2672;adjectif;A1;elelex;apertium_a_verifier
+S1919;dictature;dictadura;42.2609;nom;A1;elelex;apertium_a_verifier
+S1920;statue;estatua;42.1391;nom;A1;elelex;apertium_a_verifier
+S1921;chômage;paro;42.0690;nom;A1;elelex;apertium_a_verifier
+S1922;cour;patio;42.0547;nom;A1;elelex;apertium_a_verifier
+S1923;spécialité;especialidad;42.0458;nom;A1;elelex;apertium_a_verifier
+S1924;f;f;41.9911;nom;A1;elelex;apertium_a_verifier
+S1925;ici;acá;41.8938;adverbe;A1;elelex;apertium_a_verifier
+S1926;divorcer;divorciar;41.8840;verbe;A1;elelex;apertium_a_verifier
+S1927;étape;etapa;41.8577;nom;A1;elelex;apertium_a_verifier
+S1928;attractif / attrait;atractivo;41.8551;adjectif;A1;elelex;apertium_a_verifier
+S1929;secondaire;secundario;41.6602;adjectif;A1;elelex;apertium_a_verifier
+S1930;garçon / steward;camarero;41.1461;nom;A1;elelex;apertium_a_verifier
+S1931;gymnase;gimnasio;41.0071;nom;A1;elelex;apertium_a_verifier
+S1932;mensonge;mentira;40.8695;nom;A1;elelex;apertium_a_verifier
+S1933;action;actuación;40.5619;nom;A1;elelex;apertium_a_verifier
+S1934;bébé;bebé;40.4527;nom;A1;elelex;apertium_a_verifier
+S1935;vierge;virgen;39.8295;adjectif;A1;elelex;apertium_a_verifier
+S1936;brun;moreno;39.7036;adjectif;A1;elelex;apertium_a_verifier
+S1937;maya;maya;39.6601;mot-outil;A1;elelex;apertium_a_verifier
+S1938;poulet;pollo;39.5100;nom;A1;elelex;apertium_a_verifier
+S1939;mars;marzo;39.3309;nom;A1;elelex;apertium_a_verifier
+S1940;profession;profesión;38.7467;nom;A1;elelex;apertium_a_verifier
+S1941;orange;naranja;38.3530;nom;A1;elelex;apertium_a_verifier
+S1942;miroir;espejo;38.1319;nom;A1;elelex;apertium_a_verifier
+S1943;bonjour / salutation;saludo;37.9993;nom;A1;elelex;apertium_a_verifier
+S1944;diviser;dividir;37.9634;verbe;A1;elelex;apertium_a_verifier
+S1945;durée;duración;37.7924;nom;A1;elelex;apertium_a_verifier
+S1946;omelette;tortilla;37.7301;nom;A1;elelex;apertium_a_verifier
+S1947;temple;templo;37.5958;nom;A1;elelex;apertium_a_verifier
+S1948;écolier / scolaire;escolar;37.5408;nom;A1;elelex;apertium_a_verifier
+S1949;désert;desierto;37.1995;adjectif;A1;elelex;apertium_a_verifier
+S1950;colombien;colombiano;36.9294;adjectif;A1;elelex;apertium_a_verifier
+S1951;samedi;sábado;36.9100;nom;A1;elelex;apertium_a_verifier
+S1952;salade;ensalada;36.7590;nom;A1;elelex;apertium_a_verifier
+S1953;arène / sable;arena;36.6462;nom;A1;elelex;apertium_a_verifier
+S1954;lèvre;labio;36.3890;nom;A1;elelex;apertium_a_verifier
+S1955;sacàdos;mochila;36.3454;nom;A1;elelex;apertium_a_verifier
+S1956;vélocité / vitesse;velocidad;36.2271;nom;A1;elelex;apertium_a_verifier
+S1957;canton / coin;esquina;36.1458;nom;A1;elelex;apertium_a_verifier
+S1958;habit;hábito;35.9832;nom;A1;elelex;apertium_a_verifier
+S1959;hébergement / logement;alojamiento;35.9641;nom;A1;elelex;apertium_a_verifier
+S1960;gastronomie;gastronomía;35.9395;nom;A1;elelex;apertium_a_verifier
+S1961;cuisinier;cocinero;35.6982;nom;A1;elelex;apertium_a_verifier
+S1962;embrassade;abrazo;35.6263;nom;A1;elelex;apertium_a_verifier
+S1963;queue;cola;35.4836;nom;A1;elelex;apertium_a_verifier
+S1964;printemps;primavera;35.2183;nom;A1;elelex;apertium_a_verifier
+S1965;identité;identidad;35.1158;nom;A1;elelex;apertium_a_verifier
+S1966;crème;crema;35.1001;nom;A1;elelex;apertium_a_verifier
+S1967;casque / coque;casco;35.0685;nom;A1;elelex;apertium_a_verifier
+S1968;pacifique;pacífico;35.0680;adjectif;A1;elelex;apertium_a_verifier
+S1969;violent;violento;34.7745;adjectif;A1;elelex;apertium_a_verifier
+S1970;madrilène;madrileño;34.6291;adjectif;A1;elelex;apertium_a_verifier
+S1971;nationalité;nacionalidad;34.5736;nom;A1;elelex;apertium_a_verifier
+S1972;actif / allant;activo;34.3465;adjectif;A1;elelex;apertium_a_verifier
+S1973;enfant;nene;34.2478;nom;A1;elelex;apertium_a_verifier
+S1974;rural;rural;34.0287;adjectif;A1;elelex;apertium_a_verifier
+S1975;poêle;paella;34.0219;nom;A1;elelex;apertium_a_verifier
+S1976;maître;maestro;33.9274;nom;A1;elelex;apertium_a_verifier
+S1977;nocturne;nocturno;33.5771;adjectif;A1;elelex;apertium_a_verifier
+S1978;américain;estadounidense;33.5518;adjectif;A1;elelex;apertium_a_verifier
+S1979;vitre;cristal;33.2299;nom;A1;elelex;apertium_a_verifier
+S1980;loger;alojar;32.9570;verbe;A1;elelex;apertium_a_verifier
+S1981;trafic;tráfico;32.9025;nom;A1;elelex;apertium_a_verifier
+S1982;architecture;arquitectura;32.8802;nom;A1;elelex;apertium_a_verifier
+S1983;impôt;impuesto;32.6333;nom;A1;elelex;apertium_a_verifier
+S1984;signer;firmar;32.6243;verbe;A1;elelex;apertium_a_verifier
+S1985;roseau;caña;32.2732;nom;A1;elelex;apertium_a_verifier
+S1986;tropical;tropical;32.2127;adjectif;A1;elelex;apertium_a_verifier
+S1987;ingénieur;ingeniero;31.3818;nom;A1;elelex;apertium_a_verifier
+S1988;glace;helado;31.2143;nom;A1;elelex;apertium_a_verifier
+S1989;gramme;gramo;31.1920;nom;A1;elelex;apertium_a_verifier
+S1990;coin;rincón;31.0162;nom;A1;elelex;apertium_a_verifier
+S1991;grec;griego;30.9561;adjectif;A1;elelex;apertium_a_verifier
+S1992;scie / sierra;sierra;30.6368;nom;A1;elelex;apertium_a_verifier
+S1993;doux;suave;29.9681;adjectif;A1;elelex;apertium_a_verifier
+S1994;char;carro;29.8950;nom;A1;elelex;apertium_a_verifier
+S1995;ruine;ruina;29.7616;nom;A1;elelex;apertium_a_verifier
+S1996;chaîne;cadena;29.6533;nom;A1;elelex;apertium_a_verifier
+S1997;analyser;analizar;29.4265;verbe;A1;elelex;apertium_a_verifier
+S1998;galerie;galería;29.3396;nom;A1;elelex;apertium_a_verifier
+S1999;fondation;fundación;29.1466;nom;A1;elelex;apertium_a_verifier
+S2000;respect;respeto;28.6633;nom;A1;elelex;apertium_a_verifier
+S2001;baigner;bañar;28.5742;verbe;A1;elelex;apertium_a_verifier
+S2002;tabac;tabaco;28.4312;nom;A1;elelex;apertium_a_verifier
+S2003;limite / plafonnement;límite;28.0792;nom;A1;elelex;apertium_a_verifier
+S2004;opiner / penser;opinar;27.7848;verbe;A1;elelex;apertium_a_verifier
+S2005;échange;intercambio;27.7793;nom;A1;elelex;apertium_a_verifier
+S2006;collègue;colega;27.6407;nom;A1;elelex;apertium_a_verifier
+S2007;jaquette;chaqueta;27.5523;nom;A1;elelex;apertium_a_verifier
+S2008;passager;pasajero;27.5397;adjectif;A1;elelex;apertium_a_verifier
+S2009;sieste;siesta;27.3366;nom;A1;elelex;apertium_a_verifier
+S2010;collection;colección;27.2106;nom;A1;elelex;apertium_a_verifier
+S2011;charme;encanto;27.1568;nom;A1;elelex;apertium_a_verifier
+S2012;monument;monumento;27.0766;nom;A1;elelex;apertium_a_verifier
+S2013;librairie;librería;27.0143;nom;A1;elelex;apertium_a_verifier
+S2014;fabrique / usine;fábrica;26.8219;nom;A1;elelex;apertium_a_verifier
+S2015;bout / extrême;extremo;26.7534;nom;A1;elelex;apertium_a_verifier
+S2016;h;h;26.7375;nom;A1;elelex;apertium_a_verifier
+S2017;fascinant;fascinante;26.6407;adjectif;A1;elelex;apertium_a_verifier
+S2018;échanger;intercambiar;26.2485;verbe;A1;elelex;apertium_a_verifier
+S2019;soupe;sopa;26.2070;nom;A1;elelex;apertium_a_verifier
+S2020;rituel;ritual;25.9495;nom;A1;elelex;apertium_a_verifier
+S2021;trésor;tesoro;25.5448;nom;A1;elelex;apertium_a_verifier
+S2022;équilibre;equilibrio;25.3069;nom;A1;elelex;apertium_a_verifier
+S2023;température;temperatura;25.1605;nom;A1;elelex;apertium_a_verifier
+S2024;hasard;casualidad;24.9409;nom;A1;elelex;apertium_a_verifier
+S2025;pizza;pizza;24.6482;nom;A1;elelex;apertium_a_verifier
+S2026;pension;pensión;24.6382;nom;A1;elelex;apertium_a_verifier
+S2027;chili;chile;24.4250;mot-outil;A1;elelex;apertium_a_verifier
+S2028;pause;pausa;24.3915;nom;A1;elelex;apertium_a_verifier
+S2029;arrêt;parada;24.3275;nom;A1;elelex;apertium_a_verifier
+S2030;plan / plat;plano;24.2641;nom;A1;elelex;apertium_a_verifier
+S2031;vague;ola;23.9408;nom;A1;elelex;apertium_a_verifier
+S2032;hollandais;holandés;23.9066;adjectif;A1;elelex;apertium_a_verifier
+S2033;farine;harina;23.8948;nom;A1;elelex;apertium_a_verifier
+S2034;voyageur;viajero;23.8424;adjectif;A1;elelex;apertium_a_verifier
+S2035;concentrer;concentrar;23.6608;verbe;A1;elelex;apertium_a_verifier
+S2036;sang;sangre;23.6182;nom;A1;elelex;apertium_a_verifier
+S2037;paradis;paraíso;23.4638;nom;A1;elelex;apertium_a_verifier
+S2038;fruitsdemer;marisco;23.4245;nom;A1;elelex;apertium_a_verifier
+S2039;tortue;tortuga;23.3061;nom;A1;elelex;apertium_a_verifier
+S2040;barbe;barba;22.8179;nom;A1;elelex;apertium_a_verifier
+S2041;attraction;atracción;22.6234;nom;A1;elelex;apertium_a_verifier
+S2042;pantalon;pantalón;22.6118;nom;A1;elelex;apertium_a_verifier
+S2043;inoubliable;inolvidable;22.2069;adjectif;A1;elelex;apertium_a_verifier
+S2044;amas / monceau / tas;montón;22.1631;nom;A1;elelex;apertium_a_verifier
+S2045;documentaire;documental;22.1132;adjectif;A1;elelex;apertium_a_verifier
+S2046;ligue;liga;22.0304;nom;A1;elelex;apertium_a_verifier
+S2047;inverser / investir;invertir;21.0669;verbe;A1;elelex;apertium_a_verifier
+S2048;mission;misión;20.7362;nom;A1;elelex;apertium_a_verifier
+S2049;romano;romano;20.5964;mot-outil;A1;elelex;apertium_a_verifier
+S2050;aménager;acondicionar;20.1480;verbe;A1;elelex;apertium_a_verifier
+S2051;passionner;apasionar;19.9344;verbe;A1;elelex;apertium_a_verifier
+S2052;cave;bodega;19.8929;nom;A1;elelex;apertium_a_verifier
+S2053;équilibrer;equilibrar;19.4479;verbe;A1;elelex;apertium_a_verifier
+S2054;tour;torre;19.3214;nom;A1;elelex;apertium_a_verifier
+S2055;célibataire;soltero;19.2934;adjectif;A1;elelex;apertium_a_verifier
+S2056;sculpture;escultura;19.2552;nom;A1;elelex;apertium_a_verifier
+S2057;portugais;portugués;19.2290;adjectif;A1;elelex;apertium_a_verifier
+S2058;sportif;deportista;19.1412;adjectif;A1;elelex;apertium_a_verifier
+S2059;fier / orgueilleux;orgulloso;19.1157;adjectif;A1;elelex;apertium_a_verifier
+S2060;prime;prima;18.9739;nom;A1;elelex;apertium_a_verifier
+S2061;neige;nieve;18.8079;nom;A1;elelex;apertium_a_verifier
+S2062;piano;piano;18.7901;nom;A1;elelex;apertium_a_verifier
+S2063;decommerceetdegestion / desentreprises;empresarial;18.5663;adjectif;A1;elelex;apertium_a_verifier
+S2064;hautevitesseespagnole / oiseau;ave;18.5454;mot-outil;A1;elelex;apertium_a_verifier
+S2065;alcool;alcohol;18.4434;nom;A1;elelex;apertium_a_verifier
+S2066;taquet;taco;18.3944;nom;A1;elelex;apertium_a_verifier
+S2067;latin;latino;18.1328;adjectif;A1;elelex;apertium_a_verifier
+S2068;menu;menú;18.0245;nom;A1;elelex;apertium_a_verifier
+S2069;fasciner;fascinar;17.7934;verbe;A1;elelex;apertium_a_verifier
+S2070;terrible;tremendo;17.6319;adjectif;A1;elelex;apertium_a_verifier
+S2071;yaourt;yogur;17.6289;nom;A1;elelex;apertium_a_verifier
+S2072;mur;muro;17.5219;nom;A1;elelex;apertium_a_verifier
+S2073;balle / ballon;pelota;17.5203;nom;A1;elelex;apertium_a_verifier
+S2074;bahia / baie;bahía;17.4667;mot-outil;A1;elelex;apertium_a_verifier
+S2075;manche;mango;17.3908;nom;A1;elelex;apertium_a_verifier
+S2076;écrier;exclamar;17.2284;verbe;A1;elelex;apertium_a_verifier
+S2077;jazz;jazz;17.1591;nom;A1;elelex;apertium_a_verifier
+S2078;chinois;chino;16.9341;adjectif;A1;elelex;apertium_a_verifier
+S2079;pharmacie;farmacia;16.6846;nom;A1;elelex;apertium_a_verifier
+S2080;position;postura;16.5081;nom;A1;elelex;apertium_a_verifier
+S2081;rapidement;deprisa;16.4061;adverbe;A1;elelex;apertium_a_verifier
+S2082;intense;intenso;15.9785;adjectif;A1;elelex;apertium_a_verifier
+S2083;dollar;dólar;15.9212;nom;A1;elelex;apertium_a_verifier
+S2084;guider;guiar;15.9087;verbe;A1;elelex;apertium_a_verifier
+S2085;fabrication;fabricación;15.4039;nom;A1;elelex;apertium_a_verifier
+S2086;chemisette;camiseta;15.2390;nom;A1;elelex;apertium_a_verifier
+S2087;sac / saco;saco;15.2292;nom;A1;elelex;apertium_a_verifier
+S2088;chausson;zapatilla;15.1610;nom;A1;elelex;apertium_a_verifier
+S2089;baisse;baja;14.9211;nom;A1;elelex;apertium_a_verifier
+S2090;intensif;intensivo;14.8426;adjectif;A1;elelex;apertium_a_verifier
+S2091;suédois;sueco;14.3898;adjectif;A1;elelex;apertium_a_verifier
+S2092;bravo;bravo;14.1688;mot-outil;A1;elelex;apertium_a_verifier
+S2093;invitation;invitación;13.8475;nom;A1;elelex;apertium_a_verifier
+S2094;kilomètre;kilómetro;13.5612;nom;A1;elelex;apertium_a_verifier
+S2095;talent;talento;13.3150;nom;A1;elelex;apertium_a_verifier
+S2096;front;frente;13.2692;nom;A1;elelex;apertium_a_verifier
+S2097;ferme / fisc;hacienda;13.2132;nom;A1;elelex;apertium_a_verifier
+S2098;skier;esquiar;13.1812;verbe;A1;elelex;apertium_a_verifier
+S2099;cuivre;cobre;11.7585;nom;A1;elelex;apertium_a_verifier
+S2100;fraise;fresa;11.5843;nom;A1;elelex;apertium_a_verifier
+S2101;coq;gallo;11.5635;nom;A1;elelex;apertium_a_verifier
+S2102;palma / paume;palma;11.3955;mot-outil;A1;elelex;apertium_a_verifier
+S2103;verger;huerto;11.1167;nom;A1;elelex;apertium_a_verifier
+S2104;progrès;progreso;10.7886;nom;A1;elelex;apertium_a_verifier
+S2105;jersey;jersey;10.4545;mot-outil;A1;elelex;apertium_a_verifier
+S2106;poster;póster;10.3508;nom;A1;elelex;apertium_a_verifier
+S2107;policier;policíaco;10.1371;adjectif;A1;elelex;apertium_a_verifier
+S2108;tome;tomo;9.7815;nom;A1;elelex;apertium_a_verifier
+S2109;fiscal;fiscal;9.5306;adjectif;A1;elelex;apertium_a_verifier
+S2110;crevette;gamba;9.2044;nom;A1;elelex;apertium_a_verifier
+S2111;retraiter;jubilar;9.1546;verbe;A1;elelex;apertium_a_verifier
+S2112;auberge;albergue;9.1455;nom;A1;elelex;apertium_a_verifier
+S2113;emblématique;emblemático;8.8832;adjectif;A1;elelex;apertium_a_verifier
+S2114;batterie;batería;8.8449;nom;A1;elelex;apertium_a_verifier
+S2115;filmer;filmar;8.7717;verbe;A1;elelex;apertium_a_verifier
+S2116;effectif / espèces;efectivo;8.7336;adjectif;A1;elelex;apertium_a_verifier
+S2117;belge;belga;8.5973;adjectif;A1;elelex;apertium_a_verifier
+S2118;permanent;permanente;8.5419;adjectif;A1;elelex;apertium_a_verifier
+S2119;fonctionnaire;funcionario;8.5375;nom;A1;elelex;apertium_a_verifier
+S2120;glacier;glaciar;8.4192;nom;A1;elelex;apertium_a_verifier
+S2121;muraille;muralla;8.2494;nom;A1;elelex;apertium_a_verifier
+S2122;veuf;viudo;7.6850;adjectif;A1;elelex;apertium_a_verifier
+S2123;pianiste;pianista;7.3439;nom;A1;elelex;apertium_a_verifier
+S2124;puissance;potencia;7.3030;nom;A1;elelex;apertium_a_verifier
+S2125;aller;ida;7.2348;nom;A1;elelex;apertium_a_verifier
+S2126;fax;fax;7.1930;nom;A1;elelex;apertium_a_verifier
+S2127;géant;gigante;7.1341;nom;A1;elelex;apertium_a_verifier
+S2128;cosmopolite;cosmopolita;7.0473;adjectif;A1;elelex;apertium_a_verifier
+S2129;ouest;oeste;6.8074;nom;A1;elelex;apertium_a_verifier
+S2130;joue;mejilla;6.6999;nom;A1;elelex;apertium_a_verifier
+S2131;gothique;gótico;6.6348;adjectif;A1;elelex;apertium_a_verifier
+S2132;coeur;coro;6.0574;nom;A1;elelex;apertium_a_verifier
+S2133;mosquée;mezquita;5.7751;nom;A1;elelex;apertium_a_verifier
+S2134;brésilien;brasileño;5.7337;adjectif;A1;elelex;apertium_a_verifier
+S2135;fibre;fibra;5.7145;nom;A1;elelex;apertium_a_verifier
+S2136;trekking;senderismo;5.6510;nom;A1;elelex;apertium_a_verifier
+S2137;émigrer;emigrar;5.5614;verbe;A1;elelex;apertium_a_verifier
+S2138;bronze;bronce;5.5376;nom;A1;elelex;apertium_a_verifier
+S2139;opéra;ópera;5.4196;nom;A1;elelex;apertium_a_verifier
+S2140;cocaïne;cocaína;5.4169;nom;A1;elelex;apertium_a_verifier
+S2141;autoroute;autopista;5.4048;nom;A1;elelex;apertium_a_verifier
+S2142;organe;órgano;5.3649;nom;A1;elelex;apertium_a_verifier
+S2143;complément;complemento;5.3203;nom;A1;elelex;apertium_a_verifier
+S2144;maritime;marítimo;5.1594;adjectif;A1;elelex;apertium_a_verifier
+S2145;communautéautonome;ca;5.1466;nom;A1;elelex;apertium_a_verifier
+S2146;rock;rock;5.0177;nom;A1;elelex;apertium_a_verifier
+S2147;conde;conde;4.9181;mot-outil;A1;elelex;apertium_a_verifier
+S2148;pèlerin;peregrino;4.6147;adjectif;A1;elelex;apertium_a_verifier
+S2149;programmation;programación;4.5650;nom;A1;elelex;apertium_a_verifier
+S2150;autoriser;autorizar;4.4440;verbe;A1;elelex;apertium_a_verifier
+S2151;fusionner;fusionar;4.3961;verbe;A1;elelex;apertium_a_verifier
+S2152;sémaphore;semáforo;4.3550;nom;A1;elelex;apertium_a_verifier
+S2153;olympiade;olimpiada;4.3480;nom;A1;elelex;apertium_a_verifier
+S2154;scandale;escándalo;4.3043;nom;A1;elelex;apertium_a_verifier
+S2155;gardien;cuidador;4.2661;nom;A1;elelex;apertium_a_verifier
+S2156;archéologique;arqueológico;4.2208;adjectif;A1;elelex;apertium_a_verifier
+S2157;déterminant;determinante;4.1926;adjectif;A1;elelex;apertium_a_verifier
+S2158;mâle;macho;4.0562;nom;A1;elelex;apertium_a_verifier
+S2159;amuse-gueule / pique;pincho;4.0334;nom;A1;elelex;apertium_a_verifier
+S2160;cadrer / carrer;cuadrar;3.9822;verbe;A1;elelex;apertium_a_verifier
+S2161;équipement;equipamiento;3.9627;nom;A1;elelex;apertium_a_verifier
+S2162;as;as;3.8592;nom;A1;elelex;apertium_a_verifier
+S2163;notaire;notario;3.8522;nom;A1;elelex;apertium_a_verifier
+S2164;retrait / retraite;retirada;3.7777;nom;A1;elelex;apertium_a_verifier
+S2165;archipel;archipiélago;3.7022;nom;A1;elelex;apertium_a_verifier
+S2166;golf;golf;3.6946;nom;A1;elelex;apertium_a_verifier
+S2167;cours;rambla;3.6863;nom;A1;elelex;apertium_a_verifier
+S2168;rebelle / réfractaire;rebelde;3.4771;adjectif;A1;elelex;apertium_a_verifier
+S2169;rébellion;rebeldía;3.3721;nom;A1;elelex;apertium_a_verifier
+S2170;leçon;lección;3.3429;nom;A1;elelex;apertium_a_verifier
+S2171;grève;huelga;3.3064;nom;A1;elelex;apertium_a_verifier
+S2172;marta;marta;3.3059;mot-outil;A1;elelex;apertium_a_verifier
+S2173;feuilleton;telenovela;3.2453;nom;A1;elelex;apertium_a_verifier
+S2174;déficient;deficiente;3.2047;adjectif;A1;elelex;apertium_a_verifier
+S2175;nautique;náutico;3.1879;adjectif;A1;elelex;apertium_a_verifier
+S2176;sculpteur;escultor;3.1616;nom;A1;elelex;apertium_a_verifier
+S2177;botero;botero;3.1507;mot-outil;A1;elelex;apertium_a_verifier
+S2178;charité;caridad;3.1507;nom;A1;elelex;apertium_a_verifier
+S2179;n'importequel;cualquier;3.1234;mot-outil;A1;elelex;apertium_a_verifier
+S2180;multiculturel;multicultural;3.1073;adjectif;A1;elelex;apertium_a_verifier
+S2181;danois;danés;3.0942;adjectif;A1;elelex;apertium_a_verifier
+S2182;pétard;petardo;3.0616;nom;A1;elelex;apertium_a_verifier
+S2183;caresse;caricia;3.0589;nom;A1;elelex;apertium_a_verifier
+S2184;étalage / vitrine;escaparate;3.0409;nom;A1;elelex;apertium_a_verifier
+S2185;porcelaine / saxe;porcelana;2.9880;nom;A1;elelex;apertium_a_verifier
+S2186;bourgade;aldea;2.9496;nom;A1;elelex;apertium_a_verifier
+S2187;pablo;pablo;2.9177;mot-outil;A1;elelex;apertium_a_verifier
+S2188;incorrect;incorrecto;2.8869;adjectif;A1;elelex;apertium_a_verifier
+S2189;céder;ceder;2.8578;verbe;A1;elelex;apertium_a_verifier
+S2190;salvador;salvador;2.8546;mot-outil;A1;elelex;apertium_a_verifier
+S2191;méditer;meditar;2.8407;verbe;A1;elelex;apertium_a_verifier
+S2192;corridor;corredor;2.7023;nom;A1;elelex;apertium_a_verifier
+S2193;épuiser;apurar;2.7006;verbe;A1;elelex;apertium_a_verifier
+S2194;ré;re;2.6960;nom;A1;elelex;apertium_a_verifier
+S2195;quique;quique;2.6339;mot-outil;A1;elelex;apertium_a_verifier
+S2196;comptoir;mostrador;2.5138;nom;A1;elelex;apertium_a_verifier
+S2197;dialecte;dialecto;2.4936;nom;A1;elelex;apertium_a_verifier
+S2198;pionnier;pionero;2.4668;adjectif;A1;elelex;apertium_a_verifier
+S2199;chapelle;capilla;2.4310;nom;A1;elelex;apertium_a_verifier
+S2200;jardinier;jardinero;2.3688;nom;A1;elelex;apertium_a_verifier
+S2201;inspection;inspección;2.3646;nom;A1;elelex;apertium_a_verifier
+S2202;t;t;2.3096;nom;A1;elelex;apertium_a_verifier
+S2203;sexualité;sexualidad;2.3021;nom;A1;elelex;apertium_a_verifier
+S2204;vieillesse;vejez;2.2992;nom;A1;elelex;apertium_a_verifier
+S2205;remplacer;suplir;2.2674;verbe;A1;elelex;apertium_a_verifier
+S2206;pampa;pampa;2.2477;nom;A1;elelex;apertium_a_verifier
+S2207;métropolitain;metropolitano;2.1289;adjectif;A1;elelex;apertium_a_verifier
+S2208;hydraulique;hidráulico;2.1090;adjectif;A1;elelex;apertium_a_verifier
+S2209;terrasse;azotea;2.0892;nom;A1;elelex;apertium_a_verifier
+S2210;rationaliser;racionalizar;2.0248;verbe;A1;elelex;apertium_a_verifier
+S2211;affirmatif;afirmativo;2.0162;adjectif;A1;elelex;apertium_a_verifier
+S2212;incomplet;incompleto;2.0156;adjectif;A1;elelex;apertium_a_verifier
+S2213;passage;pasaje;1.9934;nom;A1;elelex;apertium_a_verifier
+S2214;agile;ágil;1.9911;adjectif;A1;elelex;apertium_a_verifier
+S2215;flacon;frasco;1.9766;nom;A1;elelex;apertium_a_verifier
+S2216;bijouterie;joyería;1.9480;nom;A1;elelex;apertium_a_verifier
+S2217;chute;catarata;1.9436;nom;A1;elelex;apertium_a_verifier
+S2218;reviser;repasar;1.9431;verbe;A1;elelex;apertium_a_verifier
+S2219;pop;pop;1.9384;nom;A1;elelex;apertium_a_verifier
+S2220;goûter;merendar;1.9368;verbe;A1;elelex;apertium_a_verifier
+S2221;psychique;psíquico;1.9326;nom;A1;elelex;apertium_a_verifier
+S2222;animique;anímico;1.9324;adjectif;A1;elelex;apertium_a_verifier
+S2223;paresseux;perezoso;1.9306;adjectif;A1;elelex;apertium_a_verifier
+S2224;cyclisme;ciclismo;1.9232;nom;A1;elelex;apertium_a_verifier
+S2225;pneumatique;neumático;1.9021;nom;A1;elelex;apertium_a_verifier
+S2226;greffe;trasplante;1.9007;nom;A1;elelex;apertium_a_verifier
+S2227;relaxation;relajación;1.8853;nom;A1;elelex;apertium_a_verifier
+S2228;panier;canasta;1.8846;nom;A1;elelex;apertium_a_verifier
+S2229;suisse;suizo;1.8818;adjectif;A1;elelex;apertium_a_verifier
+S2230;réputation;reputación;1.8789;nom;A1;elelex;apertium_a_verifier
+S2231;séminaire;seminario;1.8743;nom;A1;elelex;apertium_a_verifier
+S2232;continental;continental;1.8689;adjectif;A1;elelex;apertium_a_verifier
+S2233;instable;inestable;1.8685;adjectif;A1;elelex;apertium_a_verifier
+S2234;romantisme;romanticismo;1.8681;nom;A1;elelex;apertium_a_verifier
+S2235;lutteur;luchador;1.8255;nom;A1;elelex;apertium_a_verifier
+S2236;bilingue;bilingüe;1.8246;adjectif;A1;elelex;apertium_a_verifier
+S2237;longe;lomo;1.8095;nom;A1;elelex;apertium_a_verifier
+S2238;comprendre;abarcar;1.8080;verbe;A1;elelex;apertium_a_verifier
+S2239;pressentir;intuir;1.8061;verbe;A1;elelex;apertium_a_verifier
+S2240;bondir;botar;1.8004;verbe;A1;elelex;apertium_a_verifier
+S2241;boule;bola;1.7958;nom;A1;elelex;apertium_a_verifier
+S2242;bikini;bikini;1.7913;nom;A1;elelex;apertium_a_verifier
+S2243;publiciste;publicista;1.7888;nom;A1;elelex;apertium_a_verifier
+S2244;cyclone;ciclón;1.7831;nom;A1;elelex;apertium_a_verifier
+S2245;indication;indicación;1.7716;nom;A1;elelex;apertium_a_verifier
+S2246;marocain;marroquí;1.7694;adjectif;A1;elelex;apertium_a_verifier
+S2247;pingouin;pingüino;1.7507;nom;A1;elelex;apertium_a_verifier
+S2248;constructeur;constructor;1.7170;nom;A1;elelex;apertium_a_verifier
+S2249;variante;variante;1.6912;nom;A1;elelex;apertium_a_verifier
+S2250;haricot;alubia;1.6566;nom;A1;elelex;apertium_a_verifier
+S2251;chausseur / cordonnier / zapatero;zapatero;1.6359;nom;A1;elelex;apertium_a_verifier
+S2252;bavard;charlatán;1.5888;adjectif;A1;elelex;apertium_a_verifier
+S2253;cyprès;ciprés;1.5858;nom;A1;elelex;apertium_a_verifier
+S2254;tribunal;juzgado;1.4080;nom;A1;elelex;apertium_a_verifier
+S2255;vainqueur;vencedor;1.4080;adjectif;A1;elelex;apertium_a_verifier
+S2256;amandier;almendro;1.3896;nom;A1;elelex;apertium_a_verifier
+S2257;chômeur;desempleado;1.3783;nom;A1;elelex;apertium_a_verifier
+S2258;coupdefouet / élan;empujón;1.3618;nom;A1;elelex;apertium_a_verifier
+S2259;coquin;pícaro;1.3503;adjectif;A1;elelex;apertium_a_verifier
+S2260;digestif;digestivo;1.3367;nom;A1;elelex;apertium_a_verifier
+S2261;enraciner;arraigar;1.2995;verbe;A1;elelex;apertium_a_verifier
+S2262;athlète / l'athlète;atleta;1.2637;adjectif;A1;elelex;apertium_a_verifier
+S2263;capital;caudal;1.2637;nom;A1;elelex;apertium_a_verifier
+S2264;confier;encomendar;1.2637;verbe;A1;elelex;apertium_a_verifier
+S2265;enfuir;fugar;1.2637;verbe;A1;elelex;apertium_a_verifier
+S2266;pensionnaire;pensionista;1.2637;nom;A1;elelex;apertium_a_verifier
+S2267;v / vème;v;1.2637;nom;A1;elelex;apertium_a_verifier
+S2268;terminal;terminal;1.1823;nom;A1;elelex;apertium_a_verifier
+S2269;défier;desafiar;1.1428;verbe;A1;elelex;apertium_a_verifier
+S2270;canalisation;canalización;1.1256;nom;A1;elelex;apertium_a_verifier
+S2271;baie;baya;1.0963;nom;A1;elelex;apertium_a_verifier
+S2272;rationalisation;racionalización;1.0828;nom;A1;elelex;apertium_a_verifier
+S2273;antiquaire;anticuario;1.0761;nom;A1;elelex;apertium_a_verifier
+S2274;espionnage;espionaje;1.0492;nom;A1;elelex;apertium_a_verifier
+S2275;certifier;certificar;1.0161;verbe;A1;elelex;apertium_a_verifier
+S2276;ce;ce;0.9584;nom;A1;elelex;apertium_a_verifier
+S2277;gratification;gratificación;0.9455;nom;A1;elelex;apertium_a_verifier
+S2278;malice;malicia;0.9298;nom;A1;elelex;apertium_a_verifier
+S2279;assaut;asalto;0.9002;nom;A1;elelex;apertium_a_verifier
+S2280;convertible;convertible;0.9002;adjectif;A1;elelex;apertium_a_verifier
+S2281;glorieux;glorioso;0.9002;adjectif;A1;elelex;apertium_a_verifier
+S2282;paraguayen;paraguayo;0.9002;nom;A1;elelex;apertium_a_verifier
+S2283;soviétique;soviético;0.9002;adjectif;A1;elelex;apertium_a_verifier
+S2284;contraste;contraste;0.8782;nom;A1;elelex;apertium_a_verifier
+S2285;migration;migración;0.8715;nom;A1;elelex;apertium_a_verifier
+S2286;hymne;himno;0.8627;nom;A1;elelex;apertium_a_verifier
+S2287;communicateur;comunicador;0.8604;adjectif;A1;elelex;apertium_a_verifier
+S2288;quito;quito;0.8583;mot-outil;A1;elelex;apertium_a_verifier
+S2289;bikini;biquini;0.8567;nom;A1;elelex;apertium_a_verifier
+S2290;carbone;carbono;0.8561;nom;A1;elelex;apertium_a_verifier
+S2291;colón;colón;0.8543;mot-outil;A1;elelex;apertium_a_verifier
+S2292;escroc;estafador;0.8465;nom;A1;elelex;apertium_a_verifier
+S2293;retransmission;retransmisión;0.8464;nom;A1;elelex;apertium_a_verifier
+S2294;atlantique;atlántico;0.8360;mot-outil;A1;elelex;apertium_a_verifier
+S2295;basilique;basílica;0.8331;nom;A1;elelex;apertium_a_verifier
+S2296;questionnaire;cuestionario;0.8309;nom;A1;elelex;apertium_a_verifier
+S2297;cantabrique;cantábrico;0.8295;adjectif;A1;elelex;apertium_a_verifier
+S2298;analytique;analítico;0.8258;nom;A1;elelex;apertium_a_verifier
+S2299;pharmacien;farmacéutico;0.8253;nom;A1;elelex;apertium_a_verifier
+S2300;autrichien;austríaco;0.8156;adjectif;A1;elelex;apertium_a_verifier
+S2301;mixte;mixto;0.8114;adjectif;A1;elelex;apertium_a_verifier
+S2302;esmeralda;esmeralda;0.7948;mot-outil;A1;elelex;apertium_a_verifier
+S2303;brochette;brocheta;0.7741;nom;A1;elelex;apertium_a_verifier
+S2304;fruit;fruta;0.7741;nom;A1;elelex;apertium_a_verifier
+S2305;muet;mudo;0.7684;adjectif;A1;elelex;apertium_a_verifier
+S2306;film;film;0.7650;nom;A1;elelex;apertium_a_verifier
+S2307;triathlon;triatlón;0.7640;nom;A1;elelex;apertium_a_verifier
+S2308;dégustation;cata;0.7591;nom;A1;elelex;apertium_a_verifier
+S2309;documenter;documentar;0.7566;verbe;A1;elelex;apertium_a_verifier
+S2310;restaurer;restaurar;0.7519;verbe;A1;elelex;apertium_a_verifier
+S2311;roumain;rumano;0.7412;adjectif;A1;elelex;apertium_a_verifier
+S2312;choral;coral;0.7305;adjectif;A1;elelex;apertium_a_verifier
+S2313;saucisse;salchicha;0.7305;nom;A1;elelex;apertium_a_verifier
+S2314;bander;vendar;0.7218;verbe;A1;elelex;apertium_a_verifier
+S2315;leal;leal;0.7214;mot-outil;A1;elelex;apertium_a_verifier
+S2316;sanctuaire;santuario;0.7169;nom;A1;elelex;apertium_a_verifier
+S2317;forgeron / herrero;herrero;0.7029;nom;A1;elelex;apertium_a_verifier
+S2318;humoriste;humorista;0.6446;nom;A1;elelex;apertium_a_verifier
+S2319;progressiste;progresista;0.5644;adjectif;A1;elelex;apertium_a_verifier
+S2320;acclimatation;aclimatación;0.4501;nom;A1;elelex;apertium_a_verifier
+S2321;astuce / ruse;astucia;0.4501;nom;A1;elelex;apertium_a_verifier
+S2322;bermudes;bermudas;0.4501;mot-outil;A1;elelex;apertium_a_verifier
+S2323;bête;bobo;0.4501;adjectif;A1;elelex;apertium_a_verifier
+S2324;consigne;consigna;0.4501;nom;A1;elelex;apertium_a_verifier
+S2325;mécontent / mécontentement;descontento;0.4501;adjectif;A1;elelex;apertium_a_verifier
+S2326;janvier;enero;0.4501;nom;A1;elelex;apertium_a_verifier
+S2327;deguérilleros / guérillero;guerrillero;0.4501;adjectif;A1;elelex;apertium_a_verifier
+S2328;ressemblance;semejanza;0.4501;nom;A1;elelex;apertium_a_verifier
+S2329;devandalisme;vandálico;0.4501;adjectif;A1;elelex;apertium_a_verifier
+S2330;routeàquatrevoies;autovía;0.2822;nom;A1;elelex;apertium_a_verifier
+S2331;baron;barón;0.2822;nom;A1;elelex;apertium_a_verifier
+S2332;dossier;dossier;0.2822;nom;A1;elelex;apertium_a_verifier
+S2333;norvégien;noruego;0.2822;adjectif;A1;elelex;apertium_a_verifier
+S2334;mettresonvetoà;vetar;0.2822;verbe;A1;elelex;apertium_a_verifier
+S2335;boulettedeviande;albóndiga;0.1545;nom;A1;elelex;apertium_a_verifier
+S2336;roque;roque;0.1211;mot-outil;A1;elelex;apertium_a_verifier
+S2337;biosphère;biosfera;0.0574;nom;A1;elelex;apertium_a_verifier
+S2338;decantabria;cántabro;0.0574;adjectif;A1;elelex;apertium_a_verifier
+S2339;basque;euskera;0.0574;nom;A1;elelex;apertium_a_verifier
+S2340;polaire;polar;0.0574;adjectif;A1;elelex;apertium_a_verifier
+S2341;thalassothérapie;talasoterapia;0.0574;nom;A1;elelex;apertium_a_verifier
+S2342;canaries;canarias;0.0404;mot-outil;A1;elelex;apertium_a_verifier
+S2343;numance / numancia;numancia;0.0404;mot-outil;A1;elelex;apertium_a_verifier
+S2344;tante;tía;0.0404;nom;A1;elelex;apertium_a_verifier
+S2345;charismatique;carismático;0.0397;adjectif;A1;elelex;apertium_a_verifier
+S2346;confort;confort;0.0397;nom;A1;elelex;apertium_a_verifier
+S2347;où;dónde;0.0397;adverbe;A1;elelex;apertium_a_verifier
+S2348;interposer;interponer;0.0397;verbe;A1;elelex;apertium_a_verifier
+S2349;nomade;nómada;0.0397;nom;A1;elelex;apertium_a_verifier
+S2350;depampelune;pamplonés;0.0397;adjectif;A1;elelex;apertium_a_verifier
+S2351;sangria;sangría;0.0397;nom;A1;elelex;apertium_a_verifier
+S2352;serbe;serbio;0.0397;adjectif;A1;elelex;apertium_a_verifier
+S2353;bridge;bridge;0.0386;nom;A1;elelex;apertium_a_verifier
+S2354;cano;cano;0.0386;mot-outil;A1;elelex;apertium_a_verifier
+S2355;cinquante;cincuenta;0.0386;mot-outil;A1;elelex;apertium_a_verifier
+S2356;equateur / équateur;ecuador;0.0386;mot-outil;A1;elelex;apertium_a_verifier
+S2357;majuscule;mayúscula;0.0386;nom;A1;elelex;apertium_a_verifier
+S2358;octobre;octubre;0.0386;nom;A1;elelex;apertium_a_verifier
+S2359;boucher;carnicero;0.0322;nom;A1;elelex;apertium_a_verifier
+S2360;dix;diez;0.0322;mot-outil;A1;elelex;apertium_a_verifier
+S2361;douze;doce;0.0322;mot-outil;A1;elelex;apertium_a_verifier
+S2362;forfait;forfait;0.0322;nom;A1;elelex;apertium_a_verifier
+S2363;insurgé;insurgente;0.0322;adjectif;A1;elelex;apertium_a_verifier
+S2364;jerez;jerez;0.0322;mot-outil;A1;elelex;apertium_a_verifier
+S2365;ouvrable;laborable;0.0322;adjectif;A1;elelex;apertium_a_verifier
+S2366;protocolaire;protocolario;0.0322;adjectif;A1;elelex;apertium_a_verifier
+S2367;velero / voilier;velero;0.0322;nom;A1;elelex;apertium_a_verifier
+S2368;terre / terroir;tierra;282.9906;nom;A2;elelex;apertium_a_verifier
+S2369;convertir;convertir;249.7157;verbe;A2;elelex;apertium_a_verifier
+S2370;apparaître / paraître;aparecer;242.7447;verbe;A2;elelex;apertium_a_verifier
+S2371;ce;aquel;230.7206;mot-outil;A2;elelex;apertium_a_verifier
+S2372;qui;quien;222.3333;mot-outil;A2;elelex;apertium_a_verifier
+S2373;peur;miedo;218.1959;nom;A2;elelex;apertium_a_verifier
+S2374;considérer / envisager;considerar;207.6034;verbe;A2;elelex;apertium_a_verifier
+S2375;usage;uso;194.1781;nom;A2;elelex;apertium_a_verifier
+S2376;disparaître;desaparecer;179.2619;verbe;A2;elelex;apertium_a_verifier
+S2377;lier;relacionar;169.3025;verbe;A2;elelex;apertium_a_verifier
+S2378;hier;ayer;167.2475;adverbe;A2;elelex;apertium_a_verifier
+S2379;réalité;realidad;165.0683;nom;A2;elelex;apertium_a_verifier
+S2380;humain;humano;165.0401;adjectif;A2;elelex;apertium_a_verifier
+S2381;même;aun;158.0224;adverbe;A2;elelex;apertium_a_verifier
+S2382;disposer;disponer;153.9889;verbe;A2;elelex;apertium_a_verifier
+S2383;après;tras;152.5845;mot-outil;A2;elelex;apertium_a_verifier
+S2384;etat / état;estado;151.7994;nom;A2;elelex;apertium_a_verifier
+S2385;gouv / gouvernement;gobierno;147.0040;nom;A2;elelex;apertium_a_verifier
+S2386;logement / logis;vivienda;136.2511;nom;A2;elelex;apertium_a_verifier
+S2387;obtenir;obtener;132.9853;verbe;A2;elelex;apertium_a_verifier
+S2388;opinion;opinión;129.2820;nom;A2;elelex;apertium_a_verifier
+S2389;sonner;sonar;128.9595;verbe;A2;elelex;apertium_a_verifier
+S2390;rêve;sueño;126.4614;nom;A2;elelex;apertium_a_verifier
+S2391;mettre;meter;125.5489;verbe;A2;elelex;apertium_a_verifier
+S2392;fait;hecho;125.2343;nom;A2;elelex;apertium_a_verifier
+S2393;série;serie;123.8535;nom;A2;elelex;apertium_a_verifier
+S2394;note / notice;nota;123.8242;nom;A2;elelex;apertium_a_verifier
+S2395;société;sociedad;123.5442;nom;A2;elelex;apertium_a_verifier
+S2396;futur;futuro;123.3227;adjectif;A2;elelex;apertium_a_verifier
+S2397;mouvement;movimiento;122.7259;nom;A2;elelex;apertium_a_verifier
+S2398;but / objectif;objetivo;121.3832;nom;A2;elelex;apertium_a_verifier
+S2399;dépense;gasto;120.9418;nom;A2;elelex;apertium_a_verifier
+S2400;énergie;energía;115.4517;nom;A2;elelex;apertium_a_verifier
+S2401;épreuve / essai / preuve;prueba;114.6162;nom;A2;elelex;apertium_a_verifier
+S2402;représenter;representar;114.2675;verbe;A2;elelex;apertium_a_verifier
+S2403;cela;ello;110.1633;mot-outil;A2;elelex;apertium_a_verifier
+S2404;detravail;laboral;109.2885;adjectif;A2;elelex;apertium_a_verifier
+S2405;filet / réseau;red;108.8439;nom;A2;elelex;apertium_a_verifier
+S2406;quantité;cantidad;108.1624;nom;A2;elelex;apertium_a_verifier
+S2407;attention;atención;106.9326;nom;A2;elelex;apertium_a_verifier
+S2408;comprendre;incluir;105.1442;verbe;A2;elelex;apertium_a_verifier
+S2409;secteur;sector;105.0942;nom;A2;elelex;apertium_a_verifier
+S2410;développement;desarrollo;105.0133;nom;A2;elelex;apertium_a_verifier
+S2411;modèle;modelo;102.5240;nom;A2;elelex;apertium_a_verifier
+S2412;peine;pena;102.4388;nom;A2;elelex;apertium_a_verifier
+S2413;impossible;imposible;102.3722;adjectif;A2;elelex;apertium_a_verifier
+S2414;besoin / nécessité;necesidad;101.6053;nom;A2;elelex;apertium_a_verifier
+S2415;àil / leur / son;suyo;101.3566;adjectif;A2;elelex;apertium_a_verifier
+S2416;chambre / quart / quatrième;cuarto;100.5146;nom;A2;elelex;apertium_a_verifier
+S2417;consommation;consumo;100.0674;nom;A2;elelex;apertium_a_verifier
+S2418;ligne;línea;100.0470;nom;A2;elelex;apertium_a_verifier
+S2419;dépendre;depender;99.1770;verbe;A2;elelex;apertium_a_verifier
+S2420;garder;guardar;99.0317;verbe;A2;elelex;apertium_a_verifier
+S2421;condition;condición;97.5015;nom;A2;elelex;apertium_a_verifier
+S2422;économie;economía;96.9164;nom;A2;elelex;apertium_a_verifier
+S2423;faute;falta;96.4612;nom;A2;elelex;apertium_a_verifier
+S2424;atelier;taller;95.3568;nom;A2;elelex;apertium_a_verifier
+S2425;réduire;reducir;94.2611;verbe;A2;elelex;apertium_a_verifier
+S2426;argent;plata;92.8256;nom;A2;elelex;apertium_a_verifier
+S2427;fond;fondo;91.9718;nom;A2;elelex;apertium_a_verifier
+S2428;concours;concurso;91.9549;nom;A2;elelex;apertium_a_verifier
+S2429;production;producción;91.7146;nom;A2;elelex;apertium_a_verifier
+S2430;auteur;autor;91.6872;nom;A2;elelex;apertium_a_verifier
+S2431;robe;traje;91.2703;nom;A2;elelex;apertium_a_verifier
+S2432;mil;mil;90.2640;mot-outil;A2;elelex;apertium_a_verifier
+S2433;science;ciencia;89.5389;nom;A2;elelex;apertium_a_verifier
+S2434;augmenter;aumentar;89.1027;verbe;A2;elelex;apertium_a_verifier
+S2435;effet;efecto;89.0918;nom;A2;elelex;apertium_a_verifier
+S2436;devenir / résulter;resultar;88.7602;verbe;A2;elelex;apertium_a_verifier
+S2437;plastique;plástico;87.8350;nom;A2;elelex;apertium_a_verifier
+S2438;date;fecha;87.4947;nom;A2;elelex;apertium_a_verifier
+S2439;bruit;ruido;87.3493;nom;A2;elelex;apertium_a_verifier
+S2440;caillou / pierre;piedra;86.6380;nom;A2;elelex;apertium_a_verifier
+S2441;entretien / interview;entrevista;86.5875;nom;A2;elelex;apertium_a_verifier
+S2442;coeur;corazón;86.5302;nom;A2;elelex;apertium_a_verifier
+S2443;citoyen;ciudadano;86.1945;nom;A2;elelex;apertium_a_verifier
+S2444;supérieur;superior;85.8261;mot-outil;A2;elelex;apertium_a_verifier
+S2445;organisation / organization;organización;84.9889;nom;A2;elelex;apertium_a_verifier
+S2446;fou;loco;84.0445;adjectif;A2;elelex;apertium_a_verifier
+S2447;divers;diverso;83.0841;adjectif;A2;elelex;apertium_a_verifier
+S2448;publicité;publicidad;82.9662;nom;A2;elelex;apertium_a_verifier
+S2449;poète;poeta;81.9689;nom;A2;elelex;apertium_a_verifier
+S2450;civil;civil;80.6148;adjectif;A2;elelex;apertium_a_verifier
+S2451;connaissance;conocimiento;80.2077;nom;A2;elelex;apertium_a_verifier
+S2452;mariage;boda;79.0670;nom;A2;elelex;apertium_a_verifier
+S2453;briser / casser / rompre;romper;78.3103;verbe;A2;elelex;apertium_a_verifier
+S2454;technologie;tecnología;78.2910;nom;A2;elelex;apertium_a_verifier
+S2455;endessus / enhaut;arriba;78.2040;adverbe;A2;elelex;apertium_a_verifier
+S2456;récupérer / regagner;recuperar;78.0977;verbe;A2;elelex;apertium_a_verifier
+S2457;possibilité;posibilidad;77.8411;nom;A2;elelex;apertium_a_verifier
+S2458;accident;accidente;77.2624;nom;A2;elelex;apertium_a_verifier
+S2459;expert;experto;77.0195;adjectif;A2;elelex;apertium_a_verifier
+S2460;adapter;adecuar;76.7397;verbe;A2;elelex;apertium_a_verifier
+S2461;maladie;enfermedad;76.4664;nom;A2;elelex;apertium_a_verifier
+S2462;estimer / supputer;valorar;76.0197;verbe;A2;elelex;apertium_a_verifier
+S2463;crise;crisis;75.9791;nom;A2;elelex;apertium_a_verifier
+S2464;article;artículo;75.8666;nom;A2;elelex;apertium_a_verifier
+S2465;anniversaire;cumpleaños;75.6721;nom;A2;elelex;apertium_a_verifier
+S2466;contrat;contrato;75.2653;nom;A2;elelex;apertium_a_verifier
+S2467;différence;diferencia;74.8751;nom;A2;elelex;apertium_a_verifier
+S2468;capacité;capacidad;74.8623;nom;A2;elelex;apertium_a_verifier
+S2469;terrible;terrible;74.6718;adjectif;A2;elelex;apertium_a_verifier
+S2470;compliquer;complicar;74.5432;verbe;A2;elelex;apertium_a_verifier
+S2471;profiterde;aprovechar;74.3153;verbe;A2;elelex;apertium_a_verifier
+S2472;mesure;medida;74.1607;nom;A2;elelex;apertium_a_verifier
+S2473;entourage / environnement;entorno;73.1008;nom;A2;elelex;apertium_a_verifier
+S2474;rendre;devolver;72.8983;verbe;A2;elelex;apertium_a_verifier
+S2475;installer;instalar;72.5869;verbe;A2;elelex;apertium_a_verifier
+S2476;élément;elemento;72.2961;nom;A2;elelex;apertium_a_verifier
+S2477;foyer;hogar;72.2401;nom;A2;elelex;apertium_a_verifier
+S2478;charger;encargar;71.5741;verbe;A2;elelex;apertium_a_verifier
+S2479;prêter;prestar;70.9951;verbe;A2;elelex;apertium_a_verifier
+S2480;souvenir;recuerdo;70.1957;nom;A2;elelex;apertium_a_verifier
+S2481;recours / ressource;recurso;70.0996;nom;A2;elelex;apertium_a_verifier
+S2482;contrôle;control;69.5241;nom;A2;elelex;apertium_a_verifier
+S2483;liberté;libertad;69.4405;nom;A2;elelex;apertium_a_verifier
+S2484;exprimer;expresar;69.1411;verbe;A2;elelex;apertium_a_verifier
+S2485;rapporter;referir;68.4372;verbe;A2;elelex;apertium_a_verifier
+S2486;alegría / joie;alegría;68.2029;mot-outil;A2;elelex;apertium_a_verifier
+S2487;liste;lista;68.1387;nom;A2;elelex;apertium_a_verifier
+S2488;local;local;68.0127;nom;A2;elelex;apertium_a_verifier
+S2489;déranger / gêner;molestar;67.9955;verbe;A2;elelex;apertium_a_verifier
+S2490;beauté;belleza;67.2953;nom;A2;elelex;apertium_a_verifier
+S2491;protagoniste;protagonista;67.2060;nom;A2;elelex;apertium_a_verifier
+S2492;chiffre;cifra;66.4723;nom;A2;elelex;apertium_a_verifier
+S2493;generation / génération;generación;66.2196;nom;A2;elelex;apertium_a_verifier
+S2494;légende;leyenda;65.8814;nom;A2;elelex;apertium_a_verifier
+S2495;mémoire;memoria;65.3372;nom;A2;elelex;apertium_a_verifier
+S2496;rentrer;regresar;65.3351;verbe;A2;elelex;apertium_a_verifier
+S2497;franchir / repasser / surmonter;superar;65.1214;verbe;A2;elelex;apertium_a_verifier
+S2498;sécurité / sûreté;seguridad;64.6980;nom;A2;elelex;apertium_a_verifier
+S2499;appuyer / soutenir;apoyar;64.6637;verbe;A2;elelex;apertium_a_verifier
+S2500;mairie;ayuntamiento;64.1993;nom;A2;elelex;apertium_a_verifier
+S2501;action;acción;64.1066;nom;A2;elelex;apertium_a_verifier
+S2502;façon / mode;modo;63.9603;nom;A2;elelex;apertium_a_verifier
+S2503;degré;grado;63.7939;nom;A2;elelex;apertium_a_verifier
+S2504;endurer / supporter;soportar;63.1987;verbe;A2;elelex;apertium_a_verifier
+S2505;institut;instituto;63.1746;nom;A2;elelex;apertium_a_verifier
+S2506;piste;pista;62.8221;nom;A2;elelex;apertium_a_verifier
+S2507;appliquer;aplicar;62.3871;verbe;A2;elelex;apertium_a_verifier
+S2508;solliciter;solicitar;62.3283;verbe;A2;elelex;apertium_a_verifier
+S2509;rapport;informe;62.1890;nom;A2;elelex;apertium_a_verifier
+S2510;accoutumer;acostumbrar;62.1518;verbe;A2;elelex;apertium_a_verifier
+S2511;salaire;sueldo;62.1280;nom;A2;elelex;apertium_a_verifier
+S2512;mineur;menor;61.9834;nom;A2;elelex;apertium_a_verifier
+S2513;son;sonido;61.8768;nom;A2;elelex;apertium_a_verifier
+S2514;responsable;responsable;61.6242;adjectif;A2;elelex;apertium_a_verifier
+S2515;pâte;pasta;61.5065;nom;A2;elelex;apertium_a_verifier
+S2516;poème;poema;61.3330;nom;A2;elelex;apertium_a_verifier
+S2517;construction;construcción;61.0620;nom;A2;elelex;apertium_a_verifier
+S2518;journée;jornada;60.9310;nom;A2;elelex;apertium_a_verifier
+S2519;honte;vergüenza;60.9030;nom;A2;elelex;apertium_a_verifier
+S2520;spécialiser;especializar;60.8656;verbe;A2;elelex;apertium_a_verifier
+S2521;radio;radio;60.7437;nom;A2;elelex;apertium_a_verifier
+S2522;investigation / recherche;investigación;60.5806;nom;A2;elelex;apertium_a_verifier
+S2523;dent;diente;60.4424;nom;A2;elelex;apertium_a_verifier
+S2524;influence;influencia;60.4167;nom;A2;elelex;apertium_a_verifier
+S2525;maximal / maximum;máximo;60.0495;adjectif;A2;elelex;apertium_a_verifier
+S2526;celebration / célébration;celebración;59.5656;nom;A2;elelex;apertium_a_verifier
+S2527;habituel;habitual;59.2305;adjectif;A2;elelex;apertium_a_verifier
+S2528;consister;consistir;59.0883;verbe;A2;elelex;apertium_a_verifier
+S2529;arrivée;llegada;58.8448;nom;A2;elelex;apertium_a_verifier
+S2530;dedans;dentro;58.5370;adverbe;A2;elelex;apertium_a_verifier
+S2531;source;fuente;58.5287;nom;A2;elelex;apertium_a_verifier
+S2532;consulter;consultar;58.3381;verbe;A2;elelex;apertium_a_verifier
+S2533;propriétaire;propietario;58.1558;adjectif;A2;elelex;apertium_a_verifier
+S2534;parcourir;recorrer;57.9902;verbe;A2;elelex;apertium_a_verifier
+S2535;pratique;práctica;57.9098;nom;A2;elelex;apertium_a_verifier
+S2536;monter;montar;57.6546;verbe;A2;elelex;apertium_a_verifier
+S2537;plein / sessionplénière;pleno;57.5098;adjectif;A2;elelex;apertium_a_verifier
+S2538;désirer;apetecer;57.3927;verbe;A2;elelex;apertium_a_verifier
+S2539;moto;moto;57.2982;nom;A2;elelex;apertium_a_verifier
+S2540;poésie;poesía;57.1457;nom;A2;elelex;apertium_a_verifier
+S2541;supposer;suponer;56.9098;verbe;A2;elelex;apertium_a_verifier
+S2542;traitement;tratamiento;56.7844;nom;A2;elelex;apertium_a_verifier
+S2543;venger;vengar;56.7193;verbe;A2;elelex;apertium_a_verifier
+S2544;brûler;quemar;56.5413;verbe;A2;elelex;apertium_a_verifier
+S2545;résoudre;resolver;56.3903;verbe;A2;elelex;apertium_a_verifier
+S2546;campagne;campaña;56.3654;nom;A2;elelex;apertium_a_verifier
+S2547;contenu;contenido;56.1378;adjectif;A2;elelex;apertium_a_verifier
+S2548;regard;mirada;55.6526;nom;A2;elelex;apertium_a_verifier
+S2549;assurer;asegurar;55.6202;verbe;A2;elelex;apertium_a_verifier
+S2550;méconnaître;desconocer;55.5693;verbe;A2;elelex;apertium_a_verifier
+S2551;établir;establecer;55.5443;verbe;A2;elelex;apertium_a_verifier
+S2552;déterminer;determinar;55.5320;verbe;A2;elelex;apertium_a_verifier
+S2553;dimanche;domingo;55.2539;nom;A2;elelex;apertium_a_verifier
+S2554;variété;variedad;55.2078;nom;A2;elelex;apertium_a_verifier
+S2555;affecter;afectar;55.1976;verbe;A2;elelex;apertium_a_verifier
+S2556;fondamental;fundamental;55.1071;adjectif;A2;elelex;apertium_a_verifier
+S2557;bureau;despacho;54.9376;nom;A2;elelex;apertium_a_verifier
+S2558;distance;distancia;54.9001;nom;A2;elelex;apertium_a_verifier
+S2559;fonction;función;54.8840;nom;A2;elelex;apertium_a_verifier
+S2560;récemment;recién;54.8538;adverbe;A2;elelex;apertium_a_verifier
+S2561;sensation;sensación;54.6744;nom;A2;elelex;apertium_a_verifier
+S2562;décorer;decorar;54.5244;verbe;A2;elelex;apertium_a_verifier
+S2563;touche;tecla;54.3514;nom;A2;elelex;apertium_a_verifier
+S2564;geste;gesto;54.0807;nom;A2;elelex;apertium_a_verifier
+S2565;occasion;ocasión;53.8789;nom;A2;elelex;apertium_a_verifier
+S2566;baser;basar;53.7261;verbe;A2;elelex;apertium_a_verifier
+S2567;politique;política;53.7069;nom;A2;elelex;apertium_a_verifier
+S2568;position;posición;53.6144;nom;A2;elelex;apertium_a_verifier
+S2569;lune;luna;53.0729;nom;A2;elelex;apertium_a_verifier
+S2570;accès;acceso;53.0622;nom;A2;elelex;apertium_a_verifier
+S2571;soin;cuidado;53.0519;nom;A2;elelex;apertium_a_verifier
+S2572;littéraire;literario;52.9996;adjectif;A2;elelex;apertium_a_verifier
+S2573;frontière;frontera;52.8130;nom;A2;elelex;apertium_a_verifier
+S2574;livrer;entregar;52.6822;verbe;A2;elelex;apertium_a_verifier
+S2575;chat;gato;52.6111;nom;A2;elelex;apertium_a_verifier
+S2576;fonder;fundar;52.5901;verbe;A2;elelex;apertium_a_verifier
+S2577;danger / péril;peligro;52.4763;nom;A2;elelex;apertium_a_verifier
+S2578;luxe;lujo;52.4413;nom;A2;elelex;apertium_a_verifier
+S2579;employer;emplear;52.4059;verbe;A2;elelex;apertium_a_verifier
+S2580;industrie;industria;52.1734;nom;A2;elelex;apertium_a_verifier
+S2581;département;departamento;52.1682;nom;A2;elelex;apertium_a_verifier
+S2582;attirer;atraer;52.0149;verbe;A2;elelex;apertium_a_verifier
+S2583;adapter / remanier;adaptar;51.9678;verbe;A2;elelex;apertium_a_verifier
+S2584;président;presidente;51.8848;nom;A2;elelex;apertium_a_verifier
+S2585;allumer;encender;51.8079;verbe;A2;elelex;apertium_a_verifier
+S2586;dépenser;gastar;51.7597;verbe;A2;elelex;apertium_a_verifier
+S2587;fatal;fatal;51.6929;adjectif;A2;elelex;apertium_a_verifier
+S2588;confier;confiar;51.6441;verbe;A2;elelex;apertium_a_verifier
+S2589;presse;prensa;51.4554;nom;A2;elelex;apertium_a_verifier
+S2590;assister;asistir;51.4042;verbe;A2;elelex;apertium_a_verifier
+S2591;jambe;pierna;51.2315;nom;A2;elelex;apertium_a_verifier
+S2592;cause;causa;51.2314;nom;A2;elelex;apertium_a_verifier
+S2593;agrès / appareil;aparato;50.9752;nom;A2;elelex;apertium_a_verifier
+S2594;symbole;símbolo;50.9399;nom;A2;elelex;apertium_a_verifier
+S2595;magnifique;magnífico;50.5071;adjectif;A2;elelex;apertium_a_verifier
+S2596;médicament;medicamento;50.5002;nom;A2;elelex;apertium_a_verifier
+S2597;boîte / caisse;caja;49.9139;nom;A2;elelex;apertium_a_verifier
+S2598;marche;marcha;49.7451;nom;A2;elelex;apertium_a_verifier
+S2599;citron;limón;49.7332;nom;A2;elelex;apertium_a_verifier
+S2600;empire;imperio;49.7125;nom;A2;elelex;apertium_a_verifier
+S2601;municipal;municipal;49.1802;adjectif;A2;elelex;apertium_a_verifier
+S2602;catholique;católico;49.1014;adjectif;A2;elelex;apertium_a_verifier
+S2603;créatif;creativo;48.7917;adjectif;A2;elelex;apertium_a_verifier
+S2604;employé;empleado;48.7026;nom;A2;elelex;apertium_a_verifier
+S2605;véritable;auténtico;48.5069;adjectif;A2;elelex;apertium_a_verifier
+S2606;version;versión;48.4194;nom;A2;elelex;apertium_a_verifier
+S2607;devancer;avanzar;48.1998;verbe;A2;elelex;apertium_a_verifier
+S2608;patron;patrón;48.0378;nom;A2;elelex;apertium_a_verifier
+S2609;ordures;basura;48.0290;nom;A2;elelex;apertium_a_verifier
+S2610;présence;presencia;47.9983;nom;A2;elelex;apertium_a_verifier
+S2611;taille;tamaño;47.9955;nom;A2;elelex;apertium_a_verifier
+S2612;naissance;nacimiento;47.9804;nom;A2;elelex;apertium_a_verifier
+S2613;pratique;práctico;47.9620;adjectif;A2;elelex;apertium_a_verifier
+S2614;éducatif;educativo;47.9292;adjectif;A2;elelex;apertium_a_verifier
+S2615;lutte;lucha;47.7324;nom;A2;elelex;apertium_a_verifier
+S2616;vérifier;comprobar;47.6400;verbe;A2;elelex;apertium_a_verifier
+S2617;ibérique;ibérico;47.6377;adjectif;A2;elelex;apertium_a_verifier
+S2618;minimal / minime;mínimo;47.5095;adjectif;A2;elelex;apertium_a_verifier
+S2619;pendre;colgar;47.4682;verbe;A2;elelex;apertium_a_verifier
+S2620;gestion;gestión;47.4225;nom;A2;elelex;apertium_a_verifier
+S2621;explication;explicación;47.1822;nom;A2;elelex;apertium_a_verifier
+S2622;déplacer;trasladar;46.8123;verbe;A2;elelex;apertium_a_verifier
+S2623;goût;sabor;46.8112;nom;A2;elelex;apertium_a_verifier
+S2624;familier;coloquial;46.6301;adjectif;A2;elelex;apertium_a_verifier
+S2625;poisson;pez;46.3957;nom;A2;elelex;apertium_a_verifier
+S2626;fréquence;frecuencia;46.1835;nom;A2;elelex;apertium_a_verifier
+S2627;armoire;armario;46.1780;nom;A2;elelex;apertium_a_verifier
+S2628;péninsule;península;46.0459;nom;A2;elelex;apertium_a_verifier
+S2629;alimenter / nourrir;alimentar;45.9489;verbe;A2;elelex;apertium_a_verifier
+S2630;recueil / sélection;selección;45.8937;nom;A2;elelex;apertium_a_verifier
+S2631;juste;justo;45.8128;adverbe;A2;elelex;apertium_a_verifier
+S2632;spectaculaire;espectacular;45.5329;adjectif;A2;elelex;apertium_a_verifier
+S2633;tango;tango;45.4855;nom;A2;elelex;apertium_a_verifier
+S2634;jus;zumo;45.4358;nom;A2;elelex;apertium_a_verifier
+S2635;inventer;inventar;45.4236;verbe;A2;elelex;apertium_a_verifier
+S2636;étoffe / toile;tela;45.3853;nom;A2;elelex;apertium_a_verifier
+S2637;question;cuestión;45.3319;nom;A2;elelex;apertium_a_verifier
+S2638;similaire;similar;45.0687;adjectif;A2;elelex;apertium_a_verifier
+S2639;emploi;empleo;45.0064;nom;A2;elelex;apertium_a_verifier
+S2640;peser;pesar;44.9498;verbe;A2;elelex;apertium_a_verifier
+S2641;remporter;lograr;44.9473;verbe;A2;elelex;apertium_a_verifier
+S2642;clef;clave;44.8582;adjectif;A2;elelex;apertium_a_verifier
+S2643;apprécier;apreciar;44.2382;verbe;A2;elelex;apertium_a_verifier
+S2644;accent;acento;43.9504;nom;A2;elelex;apertium_a_verifier
+S2645;producteur;productor;43.9377;adjectif;A2;elelex;apertium_a_verifier
+S2646;désir;deseo;43.7362;nom;A2;elelex;apertium_a_verifier
+S2647;tendance;tendencia;43.5254;nom;A2;elelex;apertium_a_verifier
+S2648;spécialiste;especialista;43.3616;adjectif;A2;elelex;apertium_a_verifier
+S2649;arranger;arreglar;43.3593;verbe;A2;elelex;apertium_a_verifier
+S2650;consommateur;consumidor;43.2975;nom;A2;elelex;apertium_a_verifier
+S2651;indispensable;imprescindible;43.2548;adjectif;A2;elelex;apertium_a_verifier
+S2652;militaire / militer;militar;43.0850;adjectif;A2;elelex;apertium_a_verifier
+S2653;transformer;transformar;42.8934;verbe;A2;elelex;apertium_a_verifier
+S2654;plateau;escenario;42.7569;nom;A2;elelex;apertium_a_verifier
+S2655;solitude;soledad;42.7430;nom;A2;elelex;apertium_a_verifier
+S2656;aisance / facilité;facilidad;42.7213;nom;A2;elelex;apertium_a_verifier
+S2657;tarder;tardar;42.6470;verbe;A2;elelex;apertium_a_verifier
+S2658;écran;pantalla;42.6010;nom;A2;elelex;apertium_a_verifier
+S2659;cultiver;cultivar;42.3867;verbe;A2;elelex;apertium_a_verifier
+S2660;acte;acto;42.0253;nom;A2;elelex;apertium_a_verifier
+S2661;droite;derecha;42.0232;nom;A2;elelex;apertium_a_verifier
+S2662;propreté;limpieza;41.9820;nom;A2;elelex;apertium_a_verifier
+S2663;conjoint / ensemble;conjunto;41.6299;adjectif;A2;elelex;apertium_a_verifier
+S2664;surface;superficie;41.5822;nom;A2;elelex;apertium_a_verifier
+S2665;interrompre;interrumpir;41.4977;verbe;A2;elelex;apertium_a_verifier
+S2666;enfance;infancia;41.3835;nom;A2;elelex;apertium_a_verifier
+S2667;bourse;beca;41.3753;nom;A2;elelex;apertium_a_verifier
+S2668;repos;descanso;41.2301;nom;A2;elelex;apertium_a_verifier
+S2669;basque;vasco;41.2225;adjectif;A2;elelex;apertium_a_verifier
+S2670;inspirer;inspirar;41.2202;verbe;A2;elelex;apertium_a_verifier
+S2671;participant;participante;41.2178;adjectif;A2;elelex;apertium_a_verifier
+S2672;bio;biológico;41.1016;adjectif;A2;elelex;apertium_a_verifier
+S2673;contexte;contexto;40.9005;nom;A2;elelex;apertium_a_verifier
+S2674;détail;detalle;40.8319;nom;A2;elelex;apertium_a_verifier
+S2675;bougie / voile;vela;40.7383;nom;A2;elelex;apertium_a_verifier
+S2676;comparer;comparar;40.5314;verbe;A2;elelex;apertium_a_verifier
+S2677;paquet;paquete;40.4259;nom;A2;elelex;apertium_a_verifier
+S2678;religion;religión;40.3057;nom;A2;elelex;apertium_a_verifier
+S2679;web;web;40.2899;nom;A2;elelex;apertium_a_verifier
+S2680;gauche;izquierda;40.2665;nom;A2;elelex;apertium_a_verifier
+S2681;pièce;pieza;40.1921;nom;A2;elelex;apertium_a_verifier
+S2682;terme;término;40.0249;nom;A2;elelex;apertium_a_verifier
+S2683;introduire;introducir;39.9649;verbe;A2;elelex;apertium_a_verifier
+S2684;dominer;dominar;39.7769;verbe;A2;elelex;apertium_a_verifier
+S2685;combiner;combinar;39.7104;verbe;A2;elelex;apertium_a_verifier
+S2686;dessin;dibujo;39.6629;nom;A2;elelex;apertium_a_verifier
+S2687;dépôt / revenu;ingreso;39.5380;nom;A2;elelex;apertium_a_verifier
+S2688;phénomène;fenómeno;39.4964;nom;A2;elelex;apertium_a_verifier
+S2689;digne;digno;39.3194;adjectif;A2;elelex;apertium_a_verifier
+S2690;mesurer / métrer;medir;39.0674;verbe;A2;elelex;apertium_a_verifier
+S2691;paloma;paloma;39.0641;mot-outil;A2;elelex;apertium_a_verifier
+S2692;allégresse / gaieté;joya;38.9943;nom;A2;elelex;apertium_a_verifier
+S2693;horloge / montre;reloj;38.9636;nom;A2;elelex;apertium_a_verifier
+S2694;compromis / engagement;compromiso;38.9579;nom;A2;elelex;apertium_a_verifier
+S2695;âme;alma;38.7535;nom;A2;elelex;apertium_a_verifier
+S2696;estimer;estimar;38.2478;verbe;A2;elelex;apertium_a_verifier
+S2697;universal / universel;universal;38.1131;mot-outil;A2;elelex;apertium_a_verifier
+S2698;électrique;eléctrico;37.8779;adjectif;A2;elelex;apertium_a_verifier
+S2699;chapeau;sombrero;37.8744;nom;A2;elelex;apertium_a_verifier
+S2700;central;central;37.8617;adjectif;A2;elelex;apertium_a_verifier
+S2701;enseignement;enseñanza;37.8145;nom;A2;elelex;apertium_a_verifier
+S2702;formation;formación;37.7792;nom;A2;elelex;apertium_a_verifier
+S2703;esprit;espíritu;37.4995;nom;A2;elelex;apertium_a_verifier
+S2704;pardon;perdón;37.3012;nom;A2;elelex;apertium_a_verifier
+S2705;immense;inmenso;37.0261;adjectif;A2;elelex;apertium_a_verifier
+S2706;esprit;mente;36.9441;nom;A2;elelex;apertium_a_verifier
+S2707;éteindre;apagar;36.7009;verbe;A2;elelex;apertium_a_verifier
+S2708;carnaval;carnaval;36.6923;nom;A2;elelex;apertium_a_verifier
+S2709;échapper;escapar;36.5420;verbe;A2;elelex;apertium_a_verifier
+S2710;destiner;destinar;36.4121;verbe;A2;elelex;apertium_a_verifier
+S2711;description / signalement;descripción;36.4029;nom;A2;elelex;apertium_a_verifier
+S2712;richesse;riqueza;36.1727;nom;A2;elelex;apertium_a_verifier
+S2713;permis / permission;permiso;36.0405;nom;A2;elelex;apertium_a_verifier
+S2714;responsabilité;responsabilidad;35.9802;nom;A2;elelex;apertium_a_verifier
+S2715;patte;pata;35.9460;nom;A2;elelex;apertium_a_verifier
+S2716;événement;evento;35.8632;nom;A2;elelex;apertium_a_verifier
+S2717;hideux;horrible;35.6157;adjectif;A2;elelex;apertium_a_verifier
+S2718;réfrigérateur;nevera;35.4574;nom;A2;elelex;apertium_a_verifier
+S2719;résoudre;solucionar;35.2355;verbe;A2;elelex;apertium_a_verifier
+S2720;réclamer;reclamar;35.2274;verbe;A2;elelex;apertium_a_verifier
+S2721;maire;alcalde;35.2202;nom;A2;elelex;apertium_a_verifier
+S2722;plaisir;placer;35.1349;nom;A2;elelex;apertium_a_verifier
+S2723;sofa;sofá;35.1292;nom;A2;elelex;apertium_a_verifier
+S2724;artistique;artístico;35.0265;adjectif;A2;elelex;apertium_a_verifier
+S2725;mystérieux;misterioso;34.9577;adjectif;A2;elelex;apertium_a_verifier
+S2726;chambre;dormitorio;34.9041;nom;A2;elelex;apertium_a_verifier
+S2727;penchant / supporters;afición;34.8886;nom;A2;elelex;apertium_a_verifier
+S2728;suffire;bastar;34.7040;verbe;A2;elelex;apertium_a_verifier
+S2729;vélo;bici;34.5037;nom;A2;elelex;apertium_a_verifier
+S2730;existence;existencia;34.4268;nom;A2;elelex;apertium_a_verifier
+S2731;magique;mágico;34.3778;adjectif;A2;elelex;apertium_a_verifier
+S2732;extérieur;exterior;34.3292;nom;A2;elelex;apertium_a_verifier
+S2733;défendre / plaider;defender;34.3269;verbe;A2;elelex;apertium_a_verifier
+S2734;élever;elevar;34.2050;verbe;A2;elelex;apertium_a_verifier
+S2735;castillan;castellano;34.1470;adjectif;A2;elelex;apertium_a_verifier
+S2736;événement;acontecimiento;34.0728;nom;A2;elelex;apertium_a_verifier
+S2737;àtoi;tuyo;34.0592;adjectif;A2;elelex;apertium_a_verifier
+S2738;collet / cou / encolure;cuello;34.0403;nom;A2;elelex;apertium_a_verifier
+S2739;bonheur / félicité;felicidad;33.9885;nom;A2;elelex;apertium_a_verifier
+S2740;assassiner;asesinar;33.8227;verbe;A2;elelex;apertium_a_verifier
+S2741;sélectionner;seleccionar;33.7925;verbe;A2;elelex;apertium_a_verifier
+S2742;scène;escena;33.7597;nom;A2;elelex;apertium_a_verifier
+S2743;théorie;teoría;33.7495;nom;A2;elelex;apertium_a_verifier
+S2744;croissance;crecimiento;33.6985;nom;A2;elelex;apertium_a_verifier
+S2745;genre;género;33.5615;nom;A2;elelex;apertium_a_verifier
+S2746;entamer / initier;iniciar;33.5337;verbe;A2;elelex;apertium_a_verifier
+S2747;industriel;industrial;33.3812;adjectif;A2;elelex;apertium_a_verifier
+S2748;coïncider;coincidir;33.3212;verbe;A2;elelex;apertium_a_verifier
+S2749;cimetière;cementerio;33.2403;nom;A2;elelex;apertium_a_verifier
+S2750;conquérir;conquistar;33.0677;verbe;A2;elelex;apertium_a_verifier
+S2751;petit-déjeuner;almuerzo;32.9320;nom;A2;elelex;apertium_a_verifier
+S2752;saison;temporada;32.8145;nom;A2;elelex;apertium_a_verifier
+S2753;eh;eh;32.7583;mot-outil;A2;elelex;apertium_a_verifier
+S2754;derrière;atrás;32.7081;adverbe;A2;elelex;apertium_a_verifier
+S2755;ong;ong;32.5215;mot-outil;A2;elelex;apertium_a_verifier
+S2756;ton;tono;32.5077;nom;A2;elelex;apertium_a_verifier
+S2757;régime;régimen;32.3139;nom;A2;elelex;apertium_a_verifier
+S2758;demeurer;permanecer;32.2919;verbe;A2;elelex;apertium_a_verifier
+S2759;espérance / espoir;esperanza;32.2701;nom;A2;elelex;apertium_a_verifier
+S2760;terrain;terreno;32.2664;nom;A2;elelex;apertium_a_verifier
+S2761;signification;significado;32.2081;nom;A2;elelex;apertium_a_verifier
+S2762;douche;ducha;32.1808;nom;A2;elelex;apertium_a_verifier
+S2763;interpréter;interpretar;32.1358;verbe;A2;elelex;apertium_a_verifier
+S2764;parcours;recorrido;32.1332;nom;A2;elelex;apertium_a_verifier
+S2765;lecteur;lector;32.1135;nom;A2;elelex;apertium_a_verifier
+S2766;procession;procesión;32.1101;nom;A2;elelex;apertium_a_verifier
+S2767;autorité;autoridad;32.0940;nom;A2;elelex;apertium_a_verifier
+S2768;million;millón;32.0331;nom;A2;elelex;apertium_a_verifier
+S2769;andalou;andaluz;31.9267;adjectif;A2;elelex;apertium_a_verifier
+S2770;domicile;domicilio;31.8773;nom;A2;elelex;apertium_a_verifier
+S2771;identifier;identificar;31.5591;verbe;A2;elelex;apertium_a_verifier
+S2772;banlieue;afueras;31.4958;nom;A2;elelex;apertium_a_verifier
+S2773;morceau / tronçon;trozo;31.4874;nom;A2;elelex;apertium_a_verifier
+S2774;maternel;materno;31.3885;adjectif;A2;elelex;apertium_a_verifier
+S2775;drogue;droga;31.3677;nom;A2;elelex;apertium_a_verifier
+S2776;guérir / soigner;curar;31.3644;verbe;A2;elelex;apertium_a_verifier
+S2777;grammaire;gramática;31.3345;nom;A2;elelex;apertium_a_verifier
+S2778;remède;remedio;31.2863;nom;A2;elelex;apertium_a_verifier
+S2779;répartir;repartir;31.1150;verbe;A2;elelex;apertium_a_verifier
+S2780;cour;corte;31.0199;nom;A2;elelex;apertium_a_verifier
+S2781;tombe / tombeau;tumba;31.0018;nom;A2;elelex;apertium_a_verifier
+S2782;contester / disputer;discutir;30.9258;verbe;A2;elelex;apertium_a_verifier
+S2783;porche / portail;portal;30.9014;nom;A2;elelex;apertium_a_verifier
+S2784;oignon;cebolla;30.8492;nom;A2;elelex;apertium_a_verifier
+S2785;pomme;manzana;30.7718;nom;A2;elelex;apertium_a_verifier
+S2786;tasse;taza;30.6746;nom;A2;elelex;apertium_a_verifier
+S2787;océan;océano;30.5592;nom;A2;elelex;apertium_a_verifier
+S2788;bande;banda;30.3471;nom;A2;elelex;apertium_a_verifier
+S2789;embrasser;abrazar;30.1937;verbe;A2;elelex;apertium_a_verifier
+S2790;terme;plazo;30.0295;nom;A2;elelex;apertium_a_verifier
+S2791;désastre;desastre;30.0205;nom;A2;elelex;apertium_a_verifier
+S2792;mentionner;mencionar;29.9961;verbe;A2;elelex;apertium_a_verifier
+S2793;contraire;contrario;29.9708;adjectif;A2;elelex;apertium_a_verifier
+S2794;collaborer;colaborar;29.9526;verbe;A2;elelex;apertium_a_verifier
+S2795;causer;causar;29.9192;verbe;A2;elelex;apertium_a_verifier
+S2796;chefd'entreprise;empresario;29.7413;nom;A2;elelex;apertium_a_verifier
+S2797;armée;ejército;29.6858;nom;A2;elelex;apertium_a_verifier
+S2798;lesdeux / touslesdeux;ambos;29.6433;mot-outil;A2;elelex;apertium_a_verifier
+S2799;inspecteur;inspector;29.6042;nom;A2;elelex;apertium_a_verifier
+S2800;barre;barra;29.5121;nom;A2;elelex;apertium_a_verifier
+S2801;hiersoir;anoche;29.4947;adverbe;A2;elelex;apertium_a_verifier
+S2802;assise / conférence;conferencia;29.4812;nom;A2;elelex;apertium_a_verifier
+S2803;horreur;horror;29.4081;nom;A2;elelex;apertium_a_verifier
+S2804;ski;esquí;29.3629;nom;A2;elelex;apertium_a_verifier
+S2805;choisir;escoger;29.3617;verbe;A2;elelex;apertium_a_verifier
+S2806;oreille;oreja;29.3155;nom;A2;elelex;apertium_a_verifier
+S2807;création;creación;29.2517;nom;A2;elelex;apertium_a_verifier
+S2808;poule;gallina;29.2374;nom;A2;elelex;apertium_a_verifier
+S2809;sac;bolso;29.0380;nom;A2;elelex;apertium_a_verifier
+S2810;dictionnaire;diccionario;28.9998;nom;A2;elelex;apertium_a_verifier
+S2811;provenir;provenir;28.8767;verbe;A2;elelex;apertium_a_verifier
+S2812;prononcer;pronunciar;28.8383;verbe;A2;elelex;apertium_a_verifier
+S2813;représentant;representante;28.7963;nom;A2;elelex;apertium_a_verifier
+S2814;norme;norma;28.7945;nom;A2;elelex;apertium_a_verifier
+S2815;chemise;camisa;28.5692;nom;A2;elelex;apertium_a_verifier
+S2816;jamais;jamás;28.4460;adverbe;A2;elelex;apertium_a_verifier
+S2817;excuser;disculpar;28.3528;verbe;A2;elelex;apertium_a_verifier
+S2818;carnet;carné;28.3268;nom;A2;elelex;apertium_a_verifier
+S2819;épaule;hombro;28.2799;nom;A2;elelex;apertium_a_verifier
+S2820;imagination;imaginación;27.9888;nom;A2;elelex;apertium_a_verifier
+S2821;pointe;punta;27.8903;nom;A2;elelex;apertium_a_verifier
+S2822;mouchoir;pañuelo;27.8126;nom;A2;elelex;apertium_a_verifier
+S2823;admirer;admirar;27.7669;verbe;A2;elelex;apertium_a_verifier
+S2824;plafond;techo;27.5947;nom;A2;elelex;apertium_a_verifier
+S2825;recommandation;recomendación;27.5822;nom;A2;elelex;apertium_a_verifier
+S2826;période;periodo;27.5809;nom;A2;elelex;apertium_a_verifier
+S2827;dessiner;diseñar;27.5640;verbe;A2;elelex;apertium_a_verifier
+S2828;montagne;monte;27.5232;nom;A2;elelex;apertium_a_verifier
+S2829;mériter;merecer;27.3473;verbe;A2;elelex;apertium_a_verifier
+S2830;comportement;comportamiento;27.1580;nom;A2;elelex;apertium_a_verifier
+S2831;réagir;reaccionar;27.0623;verbe;A2;elelex;apertium_a_verifier
+S2832;indépendance;independencia;27.0506;nom;A2;elelex;apertium_a_verifier
+S2833;nord-américain;norteamericano;26.9856;adjectif;A2;elelex;apertium_a_verifier
+S2834;proposition;propuesta;26.9809;nom;A2;elelex;apertium_a_verifier
+S2835;édition;edición;26.9430;nom;A2;elelex;apertium_a_verifier
+S2836;promotion;promoción;26.8630;nom;A2;elelex;apertium_a_verifier
+S2837;thé;té;26.8111;nom;A2;elelex;apertium_a_verifier
+S2838;machine;máquina;26.7248;nom;A2;elelex;apertium_a_verifier
+S2839;cuir;cuero;26.6765;nom;A2;elelex;apertium_a_verifier
+S2840;imiter / singer;imitar;26.5868;verbe;A2;elelex;apertium_a_verifier
+S2841;agenda;agenda;26.5859;nom;A2;elelex;apertium_a_verifier
+S2842;concept;concepto;26.5324;nom;A2;elelex;apertium_a_verifier
+S2843;león / lion;león;26.4606;mot-outil;A2;elelex;apertium_a_verifier
+S2844;via / voie;vía;26.3215;mot-outil;A2;elelex;apertium_a_verifier
+S2845;agent;agente;26.2877;nom;A2;elelex;apertium_a_verifier
+S2846;respecter;respetar;26.2668;verbe;A2;elelex;apertium_a_verifier
+S2847;cerveau;cerebro;26.2632;nom;A2;elelex;apertium_a_verifier
+S2848;malade;enfermo;26.1842;adjectif;A2;elelex;apertium_a_verifier
+S2849;consultation;consulta;26.1543;nom;A2;elelex;apertium_a_verifier
+S2850;tranquillité;tranquilidad;26.1398;nom;A2;elelex;apertium_a_verifier
+S2851;dessert;postre;26.1304;nom;A2;elelex;apertium_a_verifier
+S2852;esclave;esclavo;26.1069;nom;A2;elelex;apertium_a_verifier
+S2853;début;comienzo;26.0401;nom;A2;elelex;apertium_a_verifier
+S2854;adolescent;adolescente;26.0341;nom;A2;elelex;apertium_a_verifier
+S2855;siège;asiento;26.0223;nom;A2;elelex;apertium_a_verifier
+S2856;jeunesse / juventud;juventud;25.9679;nom;A2;elelex;apertium_a_verifier
+S2857;gâteau;pastel;25.9606;nom;A2;elelex;apertium_a_verifier
+S2858;exquis;exquisito;25.8205;adjectif;A2;elelex;apertium_a_verifier
+S2859;saisir;agarrar;25.8120;verbe;A2;elelex;apertium_a_verifier
+S2860;échelle / escalier;escalera;25.8099;nom;A2;elelex;apertium_a_verifier
+S2861;exact;exacto;25.7574;adjectif;A2;elelex;apertium_a_verifier
+S2862;couloir;pasillo;25.7564;nom;A2;elelex;apertium_a_verifier
+S2863;bagage;equipaje;25.7018;nom;A2;elelex;apertium_a_verifier
+S2864;enregistrer / graver;grabar;25.6640;verbe;A2;elelex;apertium_a_verifier
+S2865;passé;pasado;25.6577;nom;A2;elelex;apertium_a_verifier
+S2866;effaroucher / effrayer / épouvanter;asustar;25.5474;verbe;A2;elelex;apertium_a_verifier
+S2867;contamination / pollution;contaminación;25.5139;nom;A2;elelex;apertium_a_verifier
+S2868;tromper;equivocar;25.5015;verbe;A2;elelex;apertium_a_verifier
+S2869;i / ième;i;25.4318;nom;A2;elelex;apertium_a_verifier
+S2870;coller / taper;pegar;25.3483;verbe;A2;elelex;apertium_a_verifier
+S2871;vitamine;vitamina;25.3003;nom;A2;elelex;apertium_a_verifier
+S2872;miel;miel;25.2189;nom;A2;elelex;apertium_a_verifier
+S2873;laine;lana;25.1718;nom;A2;elelex;apertium_a_verifier
+S2874;agriculture;agricultura;25.0857;nom;A2;elelex;apertium_a_verifier
+S2875;équipier / joueur;jugador;25.0775;nom;A2;elelex;apertium_a_verifier
+S2876;pourcentage;porcentaje;24.9947;nom;A2;elelex;apertium_a_verifier
+S2877;essentiel;esencial;24.8562;adjectif;A2;elelex;apertium_a_verifier
+S2878;application;aplicación;24.7696;nom;A2;elelex;apertium_a_verifier
+S2879;enserrer / serrer;apretar;24.7523;verbe;A2;elelex;apertium_a_verifier
+S2880;sottise;tontería;24.7037;nom;A2;elelex;apertium_a_verifier
+S2881;découverte;descubrimiento;24.6186;nom;A2;elelex;apertium_a_verifier
+S2882;docteur;doctor;24.5916;nom;A2;elelex;apertium_a_verifier
+S2883;bataille;batalla;24.5652;nom;A2;elelex;apertium_a_verifier
+S2884;efficace;eficaz;24.5635;adjectif;A2;elelex;apertium_a_verifier
+S2885;budget;presupuesto;24.4683;nom;A2;elelex;apertium_a_verifier
+S2886;médie / moyenne;media;24.3728;mot-outil;A2;elelex;apertium_a_verifier
+S2887;désespérer;desesperar;24.3410;verbe;A2;elelex;apertium_a_verifier
+S2888;estomac;estómago;24.3112;nom;A2;elelex;apertium_a_verifier
+S2889;inscrire;inscribir;24.2004;verbe;A2;elelex;apertium_a_verifier
+S2890;sollicitude;solicitud;24.1652;nom;A2;elelex;apertium_a_verifier
+S2891;vide;vacío;24.1616;nom;A2;elelex;apertium_a_verifier
+S2892;apporter;aportar;24.1601;verbe;A2;elelex;apertium_a_verifier
+S2893;contempler;contemplar;24.1508;verbe;A2;elelex;apertium_a_verifier
+S2894;moyen;mediano;24.0582;adjectif;A2;elelex;apertium_a_verifier
+S2895;publicitaire;publicitario;24.0249;adjectif;A2;elelex;apertium_a_verifier
+S2896;confusion;lío;24.0246;nom;A2;elelex;apertium_a_verifier
+S2897;àl'exceptionde / hormis;excepto;23.9317;mot-outil;A2;elelex;apertium_a_verifier
+S2898;moteur;motor;23.8930;nom;A2;elelex;apertium_a_verifier
+S2899;singe;mono;23.8503;nom;A2;elelex;apertium_a_verifier
+S2900;catégorie;categoría;23.7740;nom;A2;elelex;apertium_a_verifier
+S2901;exagérer;exagerar;23.7713;verbe;A2;elelex;apertium_a_verifier
+S2902;incendie;incendio;23.6913;nom;A2;elelex;apertium_a_verifier
+S2903;assistant;asistente;23.6564;nom;A2;elelex;apertium_a_verifier
+S2904;salleàmanger;comedor;23.6099;nom;A2;elelex;apertium_a_verifier
+S2905;résumer;resumir;23.5326;verbe;A2;elelex;apertium_a_verifier
+S2906;adorer;adorar;23.4330;verbe;A2;elelex;apertium_a_verifier
+S2907;conducteur;conductor;23.4136;adjectif;A2;elelex;apertium_a_verifier
+S2908;herbe;hierba;23.3714;nom;A2;elelex;apertium_a_verifier
+S2909;qualité;cualidad;23.2540;nom;A2;elelex;apertium_a_verifier
+S2910;garer;aparcar;23.2327;verbe;A2;elelex;apertium_a_verifier
+S2911;plaisanterie;broma;23.1862;nom;A2;elelex;apertium_a_verifier
+S2912;institution;institución;23.1709;nom;A2;elelex;apertium_a_verifier
+S2913;bouquet;ramo;23.0272;nom;A2;elelex;apertium_a_verifier
+S2914;académie;academia;22.9770;nom;A2;elelex;apertium_a_verifier
+S2915;choix / election / élection;elección;22.9576;nom;A2;elelex;apertium_a_verifier
+S2916;violence;violencia;22.9027;nom;A2;elelex;apertium_a_verifier
+S2917;séance / session;sesión;22.8864;nom;A2;elelex;apertium_a_verifier
+S2918;fuir;huir;22.7380;verbe;A2;elelex;apertium_a_verifier
+S2919;compléter;completar;22.6933;verbe;A2;elelex;apertium_a_verifier
+S2920;intervenir;intervenir;22.6815;verbe;A2;elelex;apertium_a_verifier
+S2921;laid;feo;22.5448;adjectif;A2;elelex;apertium_a_verifier
+S2922;odeur;olor;22.5250;nom;A2;elelex;apertium_a_verifier
+S2923;assistance;asistencia;22.4276;nom;A2;elelex;apertium_a_verifier
+S2924;protestation;protesta;22.3762;nom;A2;elelex;apertium_a_verifier
+S2925;gaz;gas;22.3213;nom;A2;elelex;apertium_a_verifier
+S2926;âgé / ancien / vieillard;anciano;22.3184;adjectif;A2;elelex;apertium_a_verifier
+S2927;chrétien;cristiano;22.3090;adjectif;A2;elelex;apertium_a_verifier
+S2928;salondecoiffure;peluquería;22.2897;nom;A2;elelex;apertium_a_verifier
+S2929;doucement;despacio;22.2770;adverbe;A2;elelex;apertium_a_verifier
+S2930;forum;foro;22.2201;nom;A2;elelex;apertium_a_verifier
+S2931;africain;africano;22.1012;adjectif;A2;elelex;apertium_a_verifier
+S2932;tension;tensión;22.0443;nom;A2;elelex;apertium_a_verifier
+S2933;combattre;combatir;21.9411;verbe;A2;elelex;apertium_a_verifier
+S2934;honneur;honor;21.9043;nom;A2;elelex;apertium_a_verifier
+S2935;cellulaire;celular;21.8873;adjectif;A2;elelex;apertium_a_verifier
+S2936;géographique;geográfico;21.8736;adjectif;A2;elelex;apertium_a_verifier
+S2937;rentrer;caber;21.8289;verbe;A2;elelex;apertium_a_verifier
+S2938;féminin;femenino;21.7969;adjectif;A2;elelex;apertium_a_verifier
+S2939;autonome;autónomo;21.7415;adjectif;A2;elelex;apertium_a_verifier
+S2940;foire;feria;21.7267;nom;A2;elelex;apertium_a_verifier
+S2941;sentimental;sentimental;21.6694;adjectif;A2;elelex;apertium_a_verifier
+S2942;royaume;reino;21.6631;nom;A2;elelex;apertium_a_verifier
+S2943;garage;garaje;21.6487;nom;A2;elelex;apertium_a_verifier
+S2944;commune;municipio;21.5550;nom;A2;elelex;apertium_a_verifier
+S2945;préalable;previo;21.4513;adjectif;A2;elelex;apertium_a_verifier
+S2946;disparition;desaparición;21.4474;nom;A2;elelex;apertium_a_verifier
+S2947;mine;mina;21.3863;nom;A2;elelex;apertium_a_verifier
+S2948;leader;líder;21.3652;nom;A2;elelex;apertium_a_verifier
+S2949;poivron;pimiento;21.3487;nom;A2;elelex;apertium_a_verifier
+S2950;contenter / égayer / réjouir;alegrar;21.3465;verbe;A2;elelex;apertium_a_verifier
+S2951;chômé / férié / festif;festivo;21.3150;adjectif;A2;elelex;apertium_a_verifier
+S2952;liquide;líquido;21.2751;nom;A2;elelex;apertium_a_verifier
+S2953;individuel;individual;21.2304;adjectif;A2;elelex;apertium_a_verifier
+S2954;journalisme;periodismo;21.1975;nom;A2;elelex;apertium_a_verifier
+S2955;temporaire / temporel;temporal;21.1875;adjectif;A2;elelex;apertium_a_verifier
+S2956;initiative;iniciativa;21.1420;nom;A2;elelex;apertium_a_verifier
+S2957;informel;informal;21.1192;adjectif;A2;elelex;apertium_a_verifier
+S2958;poignet / poupée;muñeca;21.1005;nom;A2;elelex;apertium_a_verifier
+S2959;soie;seda;21.0955;nom;A2;elelex;apertium_a_verifier
+S2960;accueil / réception;recepción;20.9327;nom;A2;elelex;apertium_a_verifier
+S2961;retour;regreso;20.8803;nom;A2;elelex;apertium_a_verifier
+S2962;communiqué;comunicado;20.8500;nom;A2;elelex;apertium_a_verifier
+S2963;biscuit;galleta;20.7824;nom;A2;elelex;apertium_a_verifier
+S2964;gêne;molestia;20.6891;nom;A2;elelex;apertium_a_verifier
+S2965;briller;brillar;20.6618;verbe;A2;elelex;apertium_a_verifier
+S2966;formule;fórmula;20.5882;nom;A2;elelex;apertium_a_verifier
+S2967;feràrepasser;plancha;20.5535;nom;A2;elelex;apertium_a_verifier
+S2968;époux;esposo;20.5164;nom;A2;elelex;apertium_a_verifier
+S2969;tigre;tigre;20.4825;nom;A2;elelex;apertium_a_verifier
+S2970;apéritif;aperitivo;20.4799;adjectif;A2;elelex;apertium_a_verifier
+S2971;naviguer;navegar;20.4508;verbe;A2;elelex;apertium_a_verifier
+S2972;vase;barro;20.4123;nom;A2;elelex;apertium_a_verifier
+S2973;trouver;hallar;20.4091;verbe;A2;elelex;apertium_a_verifier
+S2974;thérapie;terapia;20.3728;nom;A2;elelex;apertium_a_verifier
+S2975;téléviseur;televisor;20.3525;nom;A2;elelex;apertium_a_verifier
+S2976;début;inicio;20.3488;nom;A2;elelex;apertium_a_verifier
+S2977;grand-mère;abuela;20.3431;nom;A2;elelex;apertium_a_verifier
+S2978;paysan;campesino;20.3245;nom;A2;elelex;apertium_a_verifier
+S2979;approuver;aprobar;20.3213;verbe;A2;elelex;apertium_a_verifier
+S2980;avouer;confesar;20.2922;verbe;A2;elelex;apertium_a_verifier
+S2981;nage / natation;natación;20.1961;nom;A2;elelex;apertium_a_verifier
+S2982;siège;sede;20.1899;nom;A2;elelex;apertium_a_verifier
+S2983;administratif;administrativo;20.1490;adjectif;A2;elelex;apertium_a_verifier
+S2984;victoire / victoria;victoria;20.1375;nom;A2;elelex;apertium_a_verifier
+S2985;euro;euro;20.1111;nom;A2;elelex;apertium_a_verifier
+S2986;collaboration;colaboración;20.0398;nom;A2;elelex;apertium_a_verifier
+S2987;parfum;perfume;19.9346;nom;A2;elelex;apertium_a_verifier
+S2988;séjour;estancia;19.8501;nom;A2;elelex;apertium_a_verifier
+S2989;lier;ligar;19.8221;verbe;A2;elelex;apertium_a_verifier
+S2990;infirmier;enfermero;19.7926;nom;A2;elelex;apertium_a_verifier
+S2991;conquête;conquista;19.7705;nom;A2;elelex;apertium_a_verifier
+S2992;indépendant;independiente;19.6823;adjectif;A2;elelex;apertium_a_verifier
+S2993;n;n;19.6493;nom;A2;elelex;apertium_a_verifier
+S2994;cassette / ruban;cinta;19.5788;nom;A2;elelex;apertium_a_verifier
+S2995;harasser;agotar;19.5399;verbe;A2;elelex;apertium_a_verifier
+S2996;compterendu;resumen;19.5387;nom;A2;elelex;apertium_a_verifier
+S2997;four;horno;19.5337;nom;A2;elelex;apertium_a_verifier
+S2998;critique;crítico;19.5030;adjectif;A2;elelex;apertium_a_verifier
+S2999;fomenter / promouvoir;fomentar;19.4883;verbe;A2;elelex;apertium_a_verifier
+S3000;amateur;aficionado;19.4647;adjectif;A2;elelex;apertium_a_verifier

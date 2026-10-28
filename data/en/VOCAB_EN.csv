@@ -1,0 +1,3001 @@
+id;fr;en;freq;categorie;niveauCECR;niveauCECRSource;traductionSource
+E1;le;the;7.73;mot-outil;A1;freq;apertium_a_verifier
+E2;à / envers / vers;to;7.43;mot-outil;A1;freq;apertium_a_verifier
+E3;et;and;7.41;mot-outil;A1;freq;apertium_a_verifier
+E4;de;of;7.40;mot-outil;A1;freq;apertium_a_verifier
+E5;un;a;7.36;mot-outil;A1;freq;apertium_a_verifier
+E6;chez / dans / en;in;7.27;mot-outil;A1;freq;apertium_a_verifier
+E7;puisque / pendant / pour;for;7.01;mot-outil;A1;freq;apertium_a_verifier
+E8;que / cela;that;7.01;mot-outil;A1;freq;apertium_a_verifier
+E9;chez / dans / en;on;6.91;mot-outil;A1;freq;apertium_a_verifier
+E10;avec;with;6.85;mot-outil;A1;freq;apertium_a_verifier
+E11;ceci / ce / ça;this;6.82;mot-outil;A1;freq;apertium_a_verifier
+E12;être;be;6.79;mot-outil;A1;freq;apertium_a_verifier
+E13;lorsque / d'après / suivantque;as;6.77;mot-outil;A1;freq;apertium_a_verifier
+E14;avoir;have;6.71;mot-outil;A1;freq;apertium_a_verifier
+E15;à / en;at;6.70;mot-outil;A1;freq;apertium_a_verifier
+E16;pas / ne;not;6.69;adverbe;A1;freq;apertium_a_verifier
+E17;par;by;6.66;mot-outil;A1;freq;apertium_a_verifier
+E18;mais / àl'exceptionde;but;6.63;mot-outil;A1;freq;apertium_a_verifier
+E19;de / dès / depuis;from;6.63;mot-outil;A1;freq;apertium_a_verifier
+E20;mon;my;6.57;mot-outil;A1;freq;apertium_a_verifier
+E21;ou;or;6.54;mot-outil;A1;freq;apertium_a_verifier
+E22;ton;your;6.53;mot-outil;A1;freq;apertium_a_verifier
+E23;tout;all;6.52;mot-outil;A1;freq;apertium_a_verifier
+E24;donc / tellement;so;6.52;mot-outil;A1;freq;apertium_a_verifier
+E25;son;his;6.51;mot-outil;A1;freq;apertium_a_verifier
+E26;si;if;6.47;mot-outil;A1;freq;apertium_a_verifier
+E27;un;one;6.47;mot-outil;A1;freq;apertium_a_verifier
+E28;boîtedeconserve / pouvoir;can;6.46;nom;A1;freq;apertium_a_verifier
+E29;testament / volonté;will;6.45;nom;A1;freq;apertium_a_verifier
+E30;juste / exactement;just;6.43;adjectif;A1;freq;apertium_a_verifier
+E31;comme / plaire;like;6.41;mot-outil;A1;freq;apertium_a_verifier
+E32;sur / environ;about;6.40;mot-outil;A1;freq;apertium_a_verifier
+E33;endessus / enhaut;up;6.39;adverbe;A1;freq;apertium_a_verifier
+E34;endehorsde / hors / dehors;out;6.38;mot-outil;A1;freq;apertium_a_verifier
+E35;qu'est-cequec'estque / que / qu'est-ceque;what;6.38;mot-outil;A1;freq;apertium_a_verifier
+E36;lorsque / quand;when;6.37;mot-outil;A1;freq;apertium_a_verifier
+E37;davantage / plus;more;6.36;adverbe;A1;freq;apertium_a_verifier
+E38;faire / glander;do;6.35;verbe;A1;freq;apertium_a_verifier
+E39;aucun / non / ne;no;6.35;mot-outil;A1;freq;apertium_a_verifier
+E40;quiest-cequi / qui;who;6.34;mot-outil;A1;freq;apertium_a_verifier
+E41;son;their;6.33;mot-outil;A1;freq;apertium_a_verifier
+E42;là-bas / là;there;6.31;adverbe;A1;freq;apertium_a_verifier
+E43;son;her;6.30;mot-outil;A1;freq;apertium_a_verifier
+E44;quel;which;6.30;mot-outil;A1;freq;apertium_a_verifier
+E45;le temps;time;6.29;nom;A1;freq;existante
+E46;atteindre / prendre / réussir;get;6.28;verbe;A1;freq;apertium_a_verifier
+E47;neuf / nouveau;new;6.25;adjectif;A1;freq;apertium_a_verifier
+E48;le peuple;people;6.25;nom;A1;freq;existante
+E49;comment;how;6.24;adverbe;A1;freq;apertium_a_verifier
+E50;quelqu'un / certains;some;6.20;mot-outil;A1;freq;apertium_a_verifier
+E51;aussi;also;6.19;adverbe;A1;freq;apertium_a_verifier
+E52;maintenant;now;6.18;adverbe;A1;freq;apertium_a_verifier
+E53;unautre;other;6.16;mot-outil;A1;freq;apertium_a_verifier
+E54;son;its;6.14;mot-outil;A1;freq;apertium_a_verifier
+E55;notre;our;6.14;mot-outil;A1;freq;apertium_a_verifier
+E56;bien / bon / meilleur;good;6.12;nom;A1;freq;apertium_a_verifier
+E57;unique / seulement / uniquement;only;6.12;adjectif;A1;freq;apertium_a_verifier
+E58;aprèsque / après;after;6.11;mot-outil;A1;freq;apertium_a_verifier
+E59;premier / d'abord / premièrement;first;6.11;adjectif;A1;freq;apertium_a_verifier
+E60;à;into;6.11;mot-outil;A1;freq;apertium_a_verifier
+E61;connaître / savoir;know;6.10;verbe;A1;freq;apertium_a_verifier
+E62;voir;see;6.10;verbe;A1;freq;apertium_a_verifier
+E63;marque / faire;make;6.08;nom;A1;freq;apertium_a_verifier
+E64;pendant / sur / dessus;over;6.08;mot-outil;A1;freq;apertium_a_verifier
+E65;opiner / penser / aviser;think;6.08;verbe;A1;freq;apertium_a_verifier
+E66;n'importequi / certains;any;6.07;mot-outil;A1;freq;apertium_a_verifier
+E67;alors / lors;then;6.07;mot-outil;A1;freq;apertium_a_verifier
+E68;le derrière;back;6.04;nom;A1;freq;existante
+E69;ee.uu.;us;6.04;mot-outil;A1;freq;apertium_a_verifier
+E70;avoirenviede / vouloir;want;6.04;verbe;A1;freq;apertium_a_verifier
+E71;car / parceque / àcauseque;because;6.03;mot-outil;A1;freq;apertium_a_verifier
+E72;aller / rouler;go;6.03;verbe;A1;freq;apertium_a_verifier
+E73;bien;well;6.03;adverbe;A1;freq;apertium_a_verifier
+E74;said;said;6.01;mot-outil;A1;freq;apertium_a_verifier
+E75;le moyen;way;6.01;nom;A1;freq;existante
+E76;plus;most;6.00;adverbe;A1;freq;apertium_a_verifier
+E77;beaucoup;much;6.00;adverbe;A1;freq;apertium_a_verifier
+E78;très / bien / bigrement;very;6.00;mot-outil;A1;freq;apertium_a_verifier
+E79;où;where;6.00;mot-outil;A1;freq;apertium_a_verifier
+E80;voiremême / voire / même;even;5.99;adverbe;A1;freq;apertium_a_verifier
+E81;mai;may;5.98;nom;A1;freq;apertium_a_verifier
+E82;ci / ici;here;5.97;adverbe;A1;freq;apertium_a_verifier
+E83;besoin / nécessité / nécessiter;need;5.97;nom;A1;freq;apertium_a_verifier
+E84;réellement;really;5.97;adverbe;A1;freq;apertium_a_verifier
+E85;le droit;right;5.96;nom;A1;freq;existante
+E86;le travail;work;5.96;nom;A1;freq;existante
+E87;l'année;year;5.96;nom;A1;freq;existante
+E88;être;being;5.95;nom;A1;freq;apertium_a_verifier
+E89;le jour;day;5.95;nom;A1;freq;existante
+E90;aussi;too;5.95;adverbe;A1;freq;apertium_a_verifier
+E91;avantque / avant;before;5.93;mot-outil;A1;freq;apertium_a_verifier
+E92;de / dehors;off;5.93;mot-outil;A1;freq;apertium_a_verifier
+E93;pourquoi;why;5.93;adverbe;A1;freq;apertium_a_verifier
+E94;encore;still;5.92;adverbe;A1;freq;apertium_a_verifier
+E95;rejoindre / saisir / prendre;take;5.92;verbe;A1;freq;apertium_a_verifier
+E96;jamais;never;5.91;adverbe;A1;freq;apertium_a_verifier
+E97;la vie;life;5.89;nom;A1;freq;existante
+E98;dire;say;5.89;verbe;A1;freq;apertium_a_verifier
+E99;le monde;world;5.89;nom;A1;freq;existante
+E100;enbas;down;5.88;adverbe;A1;freq;apertium_a_verifier
+E101;grand / majeur;great;5.88;adjectif;A1;freq;apertium_a_verifier
+E102;par / àtravers;through;5.87;mot-outil;A1;freq;apertium_a_verifier
+E103;dernier / ultime / durer;last;5.86;adjectif;A1;freq;apertium_a_verifier
+E104;tandisque / tantque / moment;while;5.86;mot-outil;A1;freq;apertium_a_verifier
+E105;plus;best;5.84;adverbe;A1;freq;apertium_a_verifier
+E106;l'amour;love;5.82;nom;A1;freq;existante
+E107;l'homme;man;5.82;nom;A1;freq;existante
+E108;le domicile;home;5.81;nom;A1;freq;existante
+E109;long / longtemps;long;5.81;adjectif;A1;freq;apertium_a_verifier
+E110;aspect / regard / dévisager;look;5.81;nom;A1;freq;apertium_a_verifier
+E111;quelquechose;something;5.81;mot-outil;A1;freq;apertium_a_verifier
+E112;l'utilisation;use;5.81;nom;A1;freq;existante
+E113;même;same;5.80;adjectif;A1;freq;apertium_a_verifier
+E114;touslesdeux / lesdeux;both;5.79;mot-outil;A1;freq;apertium_a_verifier
+E115;chaque;every;5.79;mot-outil;A1;freq;apertium_a_verifier
+E116;venir;come;5.78;verbe;A1;freq;apertium_a_verifier
+E117;la partie;part;5.78;nom;A1;freq;existante
+E118;l'état;state;5.78;nom;A1;freq;existante
+E119;autour;around;5.77;adverbe;A1;freq;apertium_a_verifier
+E120;parmi / entre;between;5.77;mot-outil;A1;freq;apertium_a_verifier
+E121;toujours;always;5.76;adverbe;A1;freq;apertium_a_verifier
+E122;rencontrer / retrouver / trouver;find;5.76;verbe;A1;freq;apertium_a_verifier
+E123;l'aide;help;5.75;nom;A1;freq;existante
+E124;grand;high;5.75;adjectif;A1;freq;apertium_a_verifier
+E125;petit / peu;little;5.75;adjectif;A1;freq;apertium_a_verifier
+E126;vieil / vieux;old;5.75;adjectif;A1;freq;apertium_a_verifier
+E127;depuisque / puisque / vuque;since;5.75;mot-outil;A1;freq;apertium_a_verifier
+E128;autrui / unautre;another;5.74;mot-outil;A1;freq;apertium_a_verifier
+E129;propre / posséder;own;5.74;adjectif;A1;freq;apertium_a_verifier
+E130;sous / endessous;under;5.73;mot-outil;A1;freq;apertium_a_verifier
+E131;durant / pendant / lorsde;during;5.72;mot-outil;A1;freq;apertium_a_verifier
+E132;le match;game;5.72;nom;A1;freq;existante
+E133;la chose;thing;5.72;nom;A1;freq;existante
+E134;donner;give;5.71;verbe;A1;freq;apertium_a_verifier
+E135;la maison;house;5.71;nom;A1;freq;existante
+E136;la place;place;5.71;nom;A1;freq;existante
+E137;l'école;school;5.71;nom;A1;freq;existante
+E138;ànouveau / denouveau;again;5.70;adverbe;A1;freq;apertium_a_verifier
+E139;prochain;next;5.70;adjectif;A1;freq;apertium_a_verifier
+E140;chacun / chaque;each;5.69;mot-outil;A1;freq;apertium_a_verifier
+E141;sans;without;5.69;mot-outil;A1;freq;apertium_a_verifier
+E142;contre / contrairementà;against;5.68;mot-outil;A1;freq;apertium_a_verifier
+E143;la fin;end;5.68;nom;A1;freq;existante
+E144;fonder;found;5.68;verbe;A1;freq;apertium_a_verifier
+E145;spectacle / show / démontrer;show;5.68;nom;A1;freq;apertium_a_verifier
+E146;grand;big;5.67;adjectif;A1;freq;apertium_a_verifier
+E147;entendre / ouïr / ressentir;feel;5.67;verbe;A1;freq;apertium_a_verifier
+E148;sûr;sure;5.67;adjectif;A1;freq;apertium_a_verifier
+E149;l'équipe;team;5.67;nom;A1;freq;existante
+E150;jamais;ever;5.66;adverbe;A1;freq;apertium_a_verifier
+E151;la famille;family;5.66;nom;A1;freq;existante
+E152;continuer / maintenir / tenir;keep;5.66;verbe;A1;freq;apertium_a_verifier
+E153;complaire;please;5.66;verbe;A1;freq;apertium_a_verifier
+E154;brancher / remettre / mettre;put;5.66;verbe;A1;freq;apertium_a_verifier
+E155;l'argent;money;5.64;nom;A1;freq;existante
+E156;gratuit / libre / gratis;free;5.63;adjectif;A1;freq;apertium_a_verifier
+E157;la seconde;second;5.63;nom;A1;freq;existante
+E158;quelqu'un;someone;5.63;mot-outil;A1;freq;apertium_a_verifier
+E159;dehors;away;5.62;adverbe;A1;freq;apertium_a_verifier
+E160;la gauche;left;5.62;nom;A1;freq;existante
+E161;le nombre;number;5.62;nom;A1;freq;existante
+E162;la ville;city;5.61;nom;A1;freq;existante
+E163;parcelle / lot;lot;5.61;nom;A1;freq;apertium_a_verifier
+E164;le nom;name;5.61;nom;A1;freq;existante
+E165;la nuit;night;5.61;nom;A1;freq;existante
+E166;la pièce (théâtre);play;5.61;nom;A1;freq;existante
+E167;jusqu'àceque / jusque / jusqu'à;until;5.61;mot-outil;A1;freq;apertium_a_verifier
+E168;l'entreprise;company;5.60;nom;A1;freq;existante
+E169;laisser;let;5.60;verbe;A1;freq;apertium_a_verifier
+E170;réel / royal;real;5.60;adjectif;A1;freq;apertium_a_verifier
+E171;différent / distinct;different;5.59;adjectif;A1;freq;apertium_a_verifier
+E172;ensemble / mettre / instaurer;set;5.59;nom;A1;freq;apertium_a_verifier
+E173;la pensée;thought;5.59;nom;A1;freq;existante
+E174;cependant / pourtant / toutefois;however;5.58;adverbe;A1;freq;apertium_a_verifier
+E175;le dieu;god;5.57;nom;A1;freq;existante
+E176;le gouvernement;government;5.57;nom;A1;freq;existante
+E177;le groupe;group;5.57;nom;A1;freq;existante
+E178;le public;public;5.57;nom;A1;freq;existante
+E179;le haut;top;5.57;nom;A1;freq;existante
+E180;l'affaire;business;5.56;nom;A1;freq;existante
+E181;soin / veiller;care;5.56;nom;A1;freq;apertium_a_verifier
+E182;le début;start;5.56;nom;A1;freq;existante
+E183;le système;system;5.56;nom;A1;freq;existante
+E184;la semaine;week;5.56;nom;A1;freq;existante
+E185;déjà;already;5.55;adverbe;A1;freq;apertium_a_verifier
+E186;quelquechose / rien / n'importequoi;anything;5.55;mot-outil;A1;freq;apertium_a_verifier
+E187;l'affaire;case;5.55;nom;A1;freq;existante
+E188;rien / aucunement;nothing;5.55;mot-outil;A1;freq;apertium_a_verifier
+E189;la personne;person;5.55;nom;A1;freq;existante
+E190;aujourd'hui;today;5.55;adverbe;A1;freq;apertium_a_verifier
+E191;le changement;change;5.54;nom;A1;freq;existante
+E192;assez;enough;5.54;adverbe;A1;freq;apertium_a_verifier
+E193;tout;everything;5.54;mot-outil;A1;freq;apertium_a_verifier
+E194;plein;full;5.54;adjectif;A1;freq;apertium_a_verifier
+E195;vivre / habiter;live;5.54;verbe;A1;freq;apertium_a_verifier
+E196;le point;point;5.54;nom;A1;freq;existante
+E197;lire;read;5.54;verbe;A1;freq;apertium_a_verifier
+E198;encore;yet;5.54;adverbe;A1;freq;apertium_a_verifier
+E199;mauvais / pire;bad;5.53;adjectif;A1;freq;apertium_a_verifier
+E200;dur;hard;5.53;adjectif;A1;freq;apertium_a_verifier
+E201;mauvais / signifier;mean;5.53;adjectif;A1;freq;apertium_a_verifier
+E202;unefois;once;5.53;adverbe;A1;freq;apertium_a_verifier
+E203;le soutien;support;5.53;nom;A1;freq;existante
+E204;dire;tell;5.53;verbe;A1;freq;apertium_a_verifier
+E205;la musique;music;5.52;nom;A1;freq;existante
+E206;la puissance;power;5.52;nom;A1;freq;existante
+E207;arrêt / détenir / arrêter;stop;5.52;nom;A1;freq;apertium_a_verifier
+E208;l'eau;water;5.52;nom;A1;freq;existante
+E209;croire;believe;5.51;verbe;A1;freq;apertium_a_verifier
+E210;appel / appeler;call;5.51;nom;A1;freq;apertium_a_verifier
+E211;la tête;head;5.51;nom;A1;freq;existante
+E212;national;national;5.51;adjectif;A1;freq;apertium_a_verifier
+E213;petit;small;5.51;adjectif;A1;freq;apertium_a_verifier
+E214;le blanc;white;5.51;nom;A1;freq;existante
+E215;reculé / lointain / loin;far;5.50;adjectif;A1;freq;apertium_a_verifier
+E216;le travail;job;5.50;nom;A1;freq;existante
+E217;le côté;side;5.50;nom;A1;freq;existante
+E218;bienque / quandmême;though;5.50;mot-outil;A1;freq;apertium_a_verifier
+E219;essayer / tenter / prouver;try;5.50;verbe;A1;freq;apertium_a_verifier
+E220;si / oui;yes;5.50;adverbe;A1;freq;apertium_a_verifier
+E221;enfait / vraiment;actually;5.49;adverbe;A2;freq;apertium_a_verifier
+E222;américain;american;5.49;nom;A2;freq;apertium_a_verifier
+E223;postérieurement;later;5.49;adverbe;A2;freq;apertium_a_verifier
+E224;moins;less;5.49;adverbe;A2;freq;apertium_a_verifier
+E225;la file d'attente;line;5.49;nom;A2;freq;existante
+E226;l'ordre;order;5.49;nom;A2;freq;existante
+E227;la fête;party;5.49;nom;A2;freq;existante
+E228;course / courir / fonctionner;run;5.49;nom;A2;freq;apertium_a_verifier
+E229;le service;service;5.49;nom;A2;freq;existante
+E230;le pays;country;5.48;nom;A2;freq;existante
+E231;ouvert / écarquiller / épanouir;open;5.48;adjectif;A2;freq;apertium_a_verifier
+E232;la saison;season;5.48;nom;A2;freq;existante
+E233;toutlemonde;everyone;5.47;mot-outil;A2;freq;apertium_a_verifier
+E234;général;general;5.47;nom;A2;freq;apertium_a_verifier
+E235;la surface;area;5.46;nom;A2;freq;existante
+E236;le noir;black;5.46;nom;A2;freq;existante
+E237;partisan / suivant;following;5.46;nom;A2;freq;apertium_a_verifier
+E238;la loi;law;5.46;nom;A2;freq;existante
+E239;la guerre;war;5.46;nom;A2;freq;existante
+E240;totalité / entier;whole;5.46;nom;A2;freq;apertium_a_verifier
+E241;la voiture;car;5.45;nom;A2;freq;existante
+E242;le visage;face;5.45;nom;A2;freq;existante
+E243;la sorte;kind;5.45;nom;A2;freq;existante
+E244;peut-être;maybe;5.45;adverbe;A2;freq;apertium_a_verifier
+E245;par;per;5.45;mot-outil;A2;freq;apertium_a_verifier
+E246;le président;president;5.45;nom;A2;freq;existante
+E247;l'histoire;story;5.45;nom;A2;freq;existante
+E248;ouvrable / ouvrier;working;5.45;adjectif;A2;freq;apertium_a_verifier
+E249;le cours;course;5.44;nom;A2;freq;existante
+E250;la santé;health;5.44;nom;A2;freq;existante
+E251;l'espoir;hope;5.44;nom;A2;freq;existante
+E252;important;important;5.44;adjectif;A2;freq;apertium_a_verifier
+E253;moins;least;5.44;adverbe;A2;freq;apertium_a_verifier
+E254;le moyen;means;5.44;nom;A2;freq;existante
+E255;la nouvelle;news;5.44;nom;A2;freq;existante
+E256;dedans;within;5.44;adverbe;A2;freq;apertium_a_verifier
+E257;capable;able;5.43;adjectif;A2;freq;apertium_a_verifier
+E258;le livre;book;5.43;nom;A2;freq;existante
+E259;bientôt / tôt;early;5.43;adverbe;A2;freq;apertium_a_verifier
+E260;l'information;information;5.43;nom;A2;freq;existante
+E261;régional / local;local;5.43;adjectif;A2;freq;apertium_a_verifier
+E262;oh;oh;5.43;mot-outil;A2;freq;apertium_a_verifier
+E263;charge / courrier / poteau;post;5.43;nom;A2;freq;apertium_a_verifier
+E264;vidéo;video;5.43;nom;A2;freq;apertium_a_verifier
+E265;young / jeune;young;5.43;mot-outil;A2;freq;apertium_a_verifier
+E266;autrui;others;5.42;mot-outil;A2;freq;apertium_a_verifier
+E267;social;social;5.42;adjectif;A2;freq;apertium_a_verifier
+E268;bavardage / parler;talk;5.42;nom;A2;freq;apertium_a_verifier
+E269;cour / tribunal;court;5.41;nom;A2;freq;apertium_a_verifier
+E270;le fait;fact;5.41;nom;A2;freq;existante
+E271;la moitié;half;5.41;nom;A2;freq;existante
+E272;la main;hand;5.41;nom;A2;freq;existante
+E273;le niveau;level;5.41;nom;A2;freq;existante
+E274;l'esprit;mind;5.41;nom;A2;freq;existante
+E275;souvent;often;5.41;adverbe;A2;freq;apertium_a_verifier
+E276;célibataire / seul;single;5.41;nom;A2;freq;apertium_a_verifier
+E277;devenir;become;5.40;verbe;A2;freq;apertium_a_verifier
+E278;le corps;body;5.40;nom;A2;freq;existante
+E279;commandement / contrôle / contrôler;control;5.40;nom;A2;freq;apertium_a_verifier
+E280;la mort;death;5.40;nom;A2;freq;existante
+E281;la nourriture;food;5.40;nom;A2;freq;existante
+E282;type / guy;guy;5.40;nom;A2;freq;apertium_a_verifier
+E283;le bureau;office;5.40;nom;A2;freq;existante
+E284;appointer / payer / rétribuer;pay;5.40;verbe;A2;freq;apertium_a_verifier
+E285;le problème;problem;5.40;nom;A2;freq;existante
+E286;sud;south;5.40;nom;A2;freq;apertium_a_verifier
+E287;véritable / vrai;true;5.40;adjectif;A2;freq;apertium_a_verifier
+E288;l'histoire;history;5.39;nom;A2;freq;existante
+E289;grand;large;5.39;adjectif;A2;freq;apertium_a_verifier
+E290;la recherche;research;5.39;nom;A2;freq;existante
+E291;la salle;room;5.39;nom;A2;freq;existante
+E292;l'université;university;5.39;nom;A2;freq;existante
+E293;vaincre / gagner;win;5.39;verbe;A2;freq;apertium_a_verifier
+E294;incorrect / mal;wrong;5.39;adjectif;A2;freq;apertium_a_verifier
+E295;toutaulongde / lelongde;along;5.38;mot-outil;A2;freq;apertium_a_verifier
+E296;n'importequi / quelqu'un / personne;anyone;5.38;mot-outil;A2;freq;apertium_a_verifier
+E297;plus;else;5.38;adverbe;A2;freq;apertium_a_verifier
+E298;enfant / fille / garçon;girl;5.38;nom;A2;freq;apertium_a_verifier
+E299;john;john;5.38;mot-outil;A2;freq;apertium_a_verifier
+E300;la matière;matter;5.38;nom;A2;freq;existante
+E301;joli;pretty;5.38;adjectif;A2;freq;apertium_a_verifier
+E302;rappeler / souvenir;remember;5.38;verbe;A2;freq;apertium_a_verifier
+E303;l'air;air;5.37;nom;A2;freq;existante
+E304;bit;bit;5.37;nom;A2;freq;apertium_a_verifier
+E305;ami;friend;5.37;nom;A2;freq;apertium_a_verifier
+E306;coup / impact / succès;hit;5.37;nom;A2;freq;apertium_a_verifier
+E307;nice / sympathique / sympa;nice;5.37;mot-outil;A2;freq;apertium_a_verifier
+E308;probablement;probably;5.37;adverbe;A2;freq;apertium_a_verifier
+E309;proverbe;saying;5.37;nom;A2;freq;apertium_a_verifier
+E310;piger / comprendre;understand;5.37;verbe;A2;freq;apertium_a_verifier
+E311;york;york;5.37;mot-outil;A2;freq;apertium_a_verifier
+E312;le cours;class;5.36;nom;A2;freq;existante
+E313;proche / fermer;close;5.36;adjectif;A2;freq;apertium_a_verifier
+E314;l'idée;idea;5.36;nom;A2;freq;existante
+E315;international;international;5.36;adjectif;A2;freq;apertium_a_verifier
+E316;le passé;past;5.36;nom;A2;freq;existante
+E317;possible;possible;5.36;adjectif;A2;freq;apertium_a_verifier
+E318;la cause;cause;5.35;nom;A2;freq;existante
+E319;content / heureux;happy;5.35;adjectif;A2;freq;apertium_a_verifier
+E320;humain;human;5.35;nom;A2;freq;apertium_a_verifier
+E321;mouvement / bouger / mouvoir;move;5.35;nom;A2;freq;apertium_a_verifier
+E322;la question;question;5.35;nom;A2;freq;existante
+E323;série;series;5.35;nom;A2;freq;apertium_a_verifier
+E324;espérer / attendre;wait;5.35;verbe;A2;freq;apertium_a_verifier
+E325;la femme;woman;5.35;nom;A2;freq;existante
+E326;demander;ask;5.34;verbe;A2;freq;apertium_a_verifier
+E327;la communauté;community;5.34;nom;A2;freq;existante
+E328;donnée;data;5.34;nom;A2;freq;apertium_a_verifier
+E329;tardif / tard;late;5.34;adjectif;A2;freq;apertium_a_verifier
+E330;congé / laisser / repartir;leave;5.34;nom;A2;freq;apertium_a_verifier
+E331;nord;north;5.34;nom;A2;freq;apertium_a_verifier
+E332;sierra / scier;saw;5.34;nom;A2;freq;apertium_a_verifier
+E333;spécial;special;5.34;adjectif;A2;freq;apertium_a_verifier
+E334;la montre;watch;5.34;nom;A2;freq;existante
+E335;ou / n'importequi;either;5.33;mot-outil;A2;freq;apertium_a_verifier
+E336;le futur;future;5.33;nom;A2;freq;existante
+E337;la lumière;light;5.33;nom;A2;freq;existante
+E338;moindre / bas;low;5.33;adjectif;A2;freq;apertium_a_verifier
+E339;million;million;5.33;nom;A2;freq;apertium_a_verifier
+E340;le matin;morning;5.33;nom;A2;freq;existante
+E341;la police;police;5.33;nom;A2;freq;existante
+E342;bas / court;short;5.33;adjectif;A2;freq;apertium_a_verifier
+E343;séjour / rester;stay;5.33;nom;A2;freq;apertium_a_verifier
+E344;l'époque;age;5.32;nom;A2;freq;existante
+E345;acheter;buy;5.32;verbe;A2;freq;apertium_a_verifier
+E346;traitement / traiter;deal;5.32;nom;A2;freq;apertium_a_verifier
+E347;assez;rather;5.32;adverbe;A2;freq;apertium_a_verifier
+E348;la raison;reason;5.32;nom;A2;freq;existante
+E349;le rouge;red;5.32;nom;A2;freq;existante
+E350;le rapport;report;5.32;nom;A2;freq;existante
+E351;bientôt / prochainement;soon;5.32;adverbe;A2;freq;apertium_a_verifier
+E352;le tiers;third;5.32;nom;A2;freq;existante
+E353;tour / tourner;turn;5.32;nom;A2;freq;apertium_a_verifier
+E354;si;whether;5.32;mot-outil;A2;freq;apertium_a_verifier
+E355;parmi / entre;among;5.31;mot-outil;A2;freq;apertium_a_verifier
+E356;contrôle / vérifier;check;5.31;nom;A2;freq;apertium_a_verifier
+E357;le développement;development;5.31;nom;A2;freq;existante
+E358;la forme;form;5.31;nom;A2;freq;existante
+E359;au-delà;further;5.31;adverbe;A2;freq;apertium_a_verifier
+E360;le cœur;heart;5.31;nom;A2;freq;existante
+E361;acte / loi / agir;act;5.30;nom;A2;freq;apertium_a_verifier
+E362;malgrélefaitque / lorsmêmeque;although;5.30;mot-outil;A2;freq;apertium_a_verifier
+E363;l'enfant;child;5.30;nom;A2;freq;existante
+E364;le feu;fire;5.30;nom;A2;freq;existante
+E365;divertissement;fun;5.30;nom;A2;freq;apertium_a_verifier
+E366;important;major;5.30;adjectif;A2;freq;apertium_a_verifier
+E367;média;media;5.30;nom;A2;freq;apertium_a_verifier
+E368;le téléphone;phone;5.30;nom;A2;freq;existante
+E369;l'art;art;5.29;nom;A2;freq;existante
+E370;le derrière;behind;5.29;mot-outil;A2;freq;existante
+E371;le bâtiment;building;5.29;nom;A2;freq;existante
+E372;aisé / facile;easy;5.29;adjectif;A2;freq;apertium_a_verifier
+E373;le marché;market;5.29;nom;A2;freq;existante
+E374;proche / auprès / près;near;5.29;adjectif;A2;freq;apertium_a_verifier
+E375;ne;non;5.29;adverbe;A2;freq;apertium_a_verifier
+E376;le plan;plan;5.29;nom;A2;freq;existante
+E377;politique;political;5.29;adjectif;A2;freq;apertium_a_verifier
+E378;le six;six;5.29;nom;A2;freq;existante
+E379;ouest;west;5.29;nom;A2;freq;apertium_a_verifier
+E380;selon;according;5.28;mot-outil;A2;freq;apertium_a_verifier
+E381;disponible;available;5.28;adjectif;A2;freq;apertium_a_verifier
+E382;l'éducation;education;5.28;nom;A2;freq;existante
+E383;fin / final;final;5.28;nom;A2;freq;apertium_a_verifier
+E384;antérieur;former;5.28;adjectif;A2;freq;apertium_a_verifier
+E385;le devant;front;5.28;nom;A2;freq;existante
+E386;liste / lister;list;5.28;nom;A2;freq;apertium_a_verifier
+E387;parfois / quelquefois;sometimes;5.28;adverbe;A2;freq;apertium_a_verifier
+E388;le fils;son;5.28;nom;A2;freq;existante
+E389;la rue;street;5.28;nom;A2;freq;existante
+E390;amener / brouetter / emmener;bring;5.27;verbe;A2;freq;apertium_a_verifier
+E391;université / universitaire;college;5.27;nom;A2;freq;apertium_a_verifier
+E392;le courant;current;5.27;nom;A2;freq;existante
+E393;exemple;example;5.27;nom;A2;freq;apertium_a_verifier
+E394;l'expérience;experience;5.27;nom;A2;freq;existante
+E395;londres;london;5.27;mot-outil;A2;freq;apertium_a_verifier
+E396;connaître / accomplir;meet;5.27;verbe;A2;freq;apertium_a_verifier
+E397;le programme;program;5.27;nom;A2;freq;existante
+E398;le type;type;5.27;nom;A2;freq;existante
+E399;créature / bébé;baby;5.26;nom;A2;freq;apertium_a_verifier
+E400;la chance;chance;5.26;nom;A2;freq;existante
+E401;le père;father;5.26;nom;A2;freq;existante
+E402;marche / mars;march;5.26;nom;A2;freq;apertium_a_verifier
+E403;le processus;process;5.26;nom;A2;freq;existante
+E404;la chanson;song;5.26;nom;A2;freq;existante
+E405;l'étude;study;5.26;nom;A2;freq;existante
+E406;le mot;word;5.26;nom;A2;freq;existante
+E407;àtravers;across;5.25;mot-outil;A2;freq;apertium_a_verifier
+E408;l'action;action;5.25;nom;A2;freq;existante
+E409;clair / éclaircir / liquider;clear;5.25;adjectif;A2;freq;apertium_a_verifier
+E410;soi;himself;5.25;mot-outil;A2;freq;apertium_a_verifier
+E411;le mois;month;5.25;nom;A2;freq;existante
+E412;endehorsde / extérieur;outside;5.25;mot-outil;A2;freq;apertium_a_verifier
+E413;le tableau;board;5.24;nom;A2;freq;existante
+E414;le coût;cost;5.24;nom;A2;freq;existante
+E415;cour / découpage / recépage;cut;5.24;nom;A2;freq;apertium_a_verifier
+E416;le champ;field;5.24;nom;A2;freq;existante
+E417;enrevanche / parcontre;instead;5.24;adverbe;A2;freq;apertium_a_verifier
+E418;majeur / âgé / principal;main;5.24;adjectif;A2;freq;apertium_a_verifier
+E419;le moment;moment;5.24;nom;A2;freq;existante
+E420;la mère;mother;5.24;nom;A2;freq;existante
+E421;route / voie / routier;road;5.24;nom;A2;freq;apertium_a_verifier
+E422;pensée;thinking;5.24;nom;A2;freq;apertium_a_verifier
+E423;la ville;town;5.24;nom;A2;freq;existante
+E424;le rayon / le département;department;5.23;nom;A2;freq;existante
+E425;l'énergie;energy;5.23;nom;A2;freq;existante
+E426;la lutte;fight;5.23;nom;A2;freq;existante
+E427;amende / bon / fin;fine;5.23;nom;A2;freq;apertium_a_verifier
+E428;la force;force;5.23;nom;A2;freq;existante
+E429;écouter;hear;5.23;verbe;A2;freq;apertium_a_verifier
+E430;sujet / émettre / publier;issue;5.23;nom;A2;freq;apertium_a_verifier
+E431;le prix;price;5.23;nom;A2;freq;existante
+E432;le reste;rest;5.23;nom;A2;freq;existante
+E433;l'espace;space;5.23;nom;A2;freq;existante
+E434;l'été;summer;5.23;nom;A2;freq;existante
+E435;terme;term;5.23;nom;A2;freq;apertium_a_verifier
+E436;la femme (épouse);wife;5.23;nom;A2;freq;existante
+E437;amérique;america;5.22;mot-outil;A2;freq;apertium_a_verifier
+E438;joli / beau;beautiful;5.22;adjectif;A2;freq;apertium_a_verifier
+E439;la date;date;5.22;nom;A2;freq;existante
+E440;terre / terroir / atterrir;land;5.22;nom;A2;freq;apertium_a_verifier
+E441;reperdre / perdre / rater;miss;5.22;verbe;A2;freq;apertium_a_verifier
+E442;le projet;project;5.22;nom;A2;freq;existante
+E443;le sexe;sex;5.22;nom;A2;freq;existante
+E444;tir / trait;shot;5.22;nom;A2;freq;apertium_a_verifier
+E445;site;site;5.22;nom;A2;freq;apertium_a_verifier
+E446;fort;strong;5.22;adjectif;A2;freq;apertium_a_verifier
+E447;le compte;account;5.21;nom;A2;freq;existante
+E448;spécialement / notamment / surtout;especially;5.21;adverbe;A2;freq;apertium_a_verifier
+E449;comprendre;include;5.21;verbe;A2;freq;apertium_a_verifier
+E450;juin;june;5.21;nom;A2;freq;apertium_a_verifier
+E451;les parents;parents;5.21;nom;A2;freq;existante
+E452;la période;period;5.21;nom;A2;freq;existante
+E453;position / placer / positionner;position;5.21;nom;A2;freq;apertium_a_verifier
+E454;record / registre / graver;record;5.21;nom;A2;freq;apertium_a_verifier
+E455;similaire;similar;5.21;adjectif;A2;freq;apertium_a_verifier
+E456;le total;total;5.21;nom;A2;freq;existante
+E457;dessus;above;5.20;adverbe;A2;freq;apertium_a_verifier
+E458;club;club;5.20;nom;A2;freq;apertium_a_verifier
+E459;commun / courant;common;5.20;adjectif;A2;freq;apertium_a_verifier
+E460;le film;film;5.20;nom;A2;freq;existante
+E461;avantage / diriger;lead;5.20;nom;A2;freq;apertium_a_verifier
+E462;probable / probablement;likely;5.20;adjectif;A2;freq;apertium_a_verifier
+E463;armée / militaire;military;5.20;nom;A2;freq;apertium_a_verifier
+E464;parfait / perfectionner;perfect;5.20;adjectif;A2;freq;apertium_a_verifier
+E465;personnel;personal;5.20;adjectif;A2;freq;apertium_a_verifier
+E466;la sécurité;security;5.20;nom;A2;freq;existante
+E467;la part / l'action;share;5.20;nom;A2;freq;existante
+E468;la télévision;tv;5.20;nom;A2;freq;existante
+E469;avril;april;5.19;nom;A2;freq;apertium_a_verifier
+E470;comté;county;5.19;nom;A2;freq;apertium_a_verifier
+E471;couple / paire / mariage;couple;5.19;nom;A2;freq;apertium_a_verifier
+E472;mort;dead;5.19;adjectif;A2;freq;apertium_a_verifier
+E473;anglais;english;5.19;nom;A2;freq;apertium_a_verifier
+E474;passer;happen;5.19;verbe;A2;freq;apertium_a_verifier
+E475;contrôle / résister;hold;5.19;nom;A2;freq;apertium_a_verifier
+E476;l'industrie;industry;5.19;nom;A2;freq;existante
+E477;intérieur / àdedans / àl'intérieur;inside;5.19;nom;A2;freq;apertium_a_verifier
+E478;le joueur;player;5.19;nom;A2;freq;existante
+E479;privé;private;5.19;adjectif;A2;freq;apertium_a_verifier
+E480;renvoi / retour / tour;return;5.19;nom;A2;freq;apertium_a_verifier
+E481;sens;sense;5.19;nom;A2;freq;apertium_a_verifier
+E482;l'étoile;star;5.19;nom;A2;freq;existante
+E483;épreuve / essai / preuve;test;5.19;nom;A2;freq;apertium_a_verifier
+E484;le regard / le prestige;view;5.19;nom;A2;freq;existante
+E485;rupture / manquerà / fairefaillite;break;5.18;nom;A2;freq;apertium_a_verifier
+E486;britannique;british;5.18;adjectif;A2;freq;apertium_a_verifier
+E487;événement;event;5.18;nom;A2;freq;apertium_a_verifier
+E488;l'heure;hour;5.18;nom;A2;freq;existante
+E489;le membre;member;5.18;nom;A2;freq;existante
+E490;le milieu;middle;5.18;nom;A2;freq;existante
+E491;le présent;present;5.18;nom;A2;freq;existante
+E492;le résultat;result;5.18;nom;A2;freq;existante
+E493;triste;sorry;5.18;adjectif;A2;freq;apertium_a_verifier
+E494;la formation;training;5.18;nom;A2;freq;existante
+E495;désir / souhait / désirer;wish;5.18;nom;A2;freq;apertium_a_verifier
+E496;la réponse;answer;5.17;nom;A2;freq;existante
+E497;enfant / fille / garçon;boy;5.17;nom;A2;freq;apertium_a_verifier
+E498;le design;design;5.17;nom;A2;freq;existante
+E499;finalement / enfin / ensomme;finally;5.17;adverbe;A2;freq;apertium_a_verifier
+E500;l'or;gold;5.17;nom;A2;freq;existante
+E501;supposition / deviner;guess;5.17;nom;A2;freq;apertium_a_verifier
+E502;intérêt / inquiétude / intéresser;interest;5.17;nom;A2;freq;apertium_a_verifier
+E503;juillet;july;5.17;nom;A2;freq;apertium_a_verifier
+E504;le roi;king;5.17;nom;A2;freq;existante
+E505;apprendre;learn;5.17;verbe;A2;freq;apertium_a_verifier
+E506;politique;policy;5.17;nom;A2;freq;apertium_a_verifier
+E507;la société;society;5.17;nom;A2;freq;existante
+E508;seul / seulement;alone;5.16;adjectif;A2;freq;apertium_a_verifier
+E509;moyenne / moyen;average;5.16;nom;A2;freq;apertium_a_verifier
+E510;la banque;bank;5.16;nom;A2;freq;existante
+E511;sûr;certain;5.16;adjectif;A2;freq;apertium_a_verifier
+E512;l'église;church;5.16;nom;A2;freq;existante
+E513;est;east;5.16;nom;A2;freq;apertium_a_verifier
+E514;chaud;hot;5.16;adjectif;A2;freq;apertium_a_verifier
+E515;médical;medical;5.16;adjectif;A2;freq;apertium_a_verifier
+E516;le film;movie;5.16;nom;A2;freq;existante
+E517;original;original;5.16;adjectif;A2;freq;apertium_a_verifier
+E518;le parc;park;5.16;nom;A2;freq;existante
+E519;action / interprétation / rendement;performance;5.16;nom;A2;freq;apertium_a_verifier
+E520;presse / appuyersur / pressurer;press;5.16;nom;A2;freq;apertium_a_verifier
+E521;fonction / rôle;role;5.16;nom;A2;freq;apertium_a_verifier
+E522;valeur;worth;5.16;nom;A2;freq;apertium_a_verifier
+E523;la facture;bill;5.15;nom;A2;freq;existante
+E524;frais / refroidir;cool;5.15;adjectif;A2;freq;apertium_a_verifier
+E525;réalisateur / directeur;director;5.15;nom;A2;freq;apertium_a_verifier
+E526;exactement;exactly;5.15;adverbe;A2;freq;apertium_a_verifier
+E527;la terre;ground;5.15;nom;A2;freq;existante
+E528;la réunion;meeting;5.15;nom;A2;freq;existante
+E529;fournir;provide;5.15;verbe;A2;freq;apertium_a_verifier
+E530;la relation;relationship;5.15;nom;A2;freq;existante
+E531;septembre;september;5.15;nom;A2;freq;apertium_a_verifier
+E532;le son;sound;5.15;nom;A2;freq;existante
+E533;source;source;5.15;nom;A2;freq;apertium_a_verifier
+E534;habituellement / normalement;usually;5.15;adverbe;A2;freq;apertium_a_verifier
+E535;la valeur;value;5.15;nom;A2;freq;existante
+E536;la preuve;evidence;5.14;nom;A2;freq;existante
+E537;suivre;follow;5.14;verbe;A2;freq;apertium_a_verifier
+E538;officiel / officier;official;5.14;nom;A2;freq;apertium_a_verifier
+E539;la production;production;5.14;nom;A2;freq;existante
+E540;indice / rythme / tarif;rate;5.14;nom;A2;freq;apertium_a_verifier
+E541;lecture;reading;5.14;nom;A2;freq;apertium_a_verifier
+E542;assaut / ronde / rond;round;5.14;nom;A2;freq;apertium_a_verifier
+E543;épargner / garder / sauver;save;5.14;verbe;A2;freq;apertium_a_verifier
+E544;position / post / support;stand;5.14;nom;A2;freq;apertium_a_verifier
+E545;matériel;stuff;5.14;nom;A2;freq;apertium_a_verifier
+E546;l'impôt;tax;5.14;nom;A2;freq;existante
+E547;n'importequoi / n'importequel;whatever;5.14;mot-outil;A2;freq;apertium_a_verifier
+E548;la somme;amount;5.13;nom;A2;freq;existante
+E549;le bleu;blue;5.13;adjectif;A2;freq;existante
+E550;david;david;5.13;mot-outil;A2;freq;apertium_a_verifier
+E551;promenade / traction / piloter;drive;5.13;nom;A2;freq;apertium_a_verifier
+E552;manger / déjeuner;eat;5.13;verbe;A2;freq;apertium_a_verifier
+E553;chute / choir / tomber;fall;5.13;nom;A2;freq;apertium_a_verifier
+E554;rapide / vite;fast;5.13;adjectif;A2;freq;apertium_a_verifier
+E555;fédéral;federal;5.13;adjectif;A2;freq;apertium_a_verifier
+E556;le sentiment;feeling;5.13;nom;A2;freq;existante
+E557;le vert;green;5.13;nom;A2;freq;existante
+E558;ligue / lieue;league;5.13;nom;A2;freq;apertium_a_verifier
+E559;la gestion;management;5.13;nom;A2;freq;existante
+E560;le match;match;5.13;nom;A2;freq;existante
+E561;le modèle;model;5.13;nom;A2;freq;existante
+E562;la photo;picture;5.13;nom;A2;freq;existante
+E563;la taille;size;5.13;nom;A2;freq;existante
+E564;pas;step;5.13;nom;A2;freq;apertium_a_verifier
+E565;la confiance;trust;5.13;nom;A2;freq;existante
+E566;central;central;5.12;adjectif;A2;freq;apertium_a_verifier
+E567;angleterre;england;5.12;mot-outil;A2;freq;apertium_a_verifier
+E568;avant / devant;forward;5.12;nom;A2;freq;apertium_a_verifier
+E569;clef / clé / ton;key;5.12;nom;A2;freq;apertium_a_verifier
+E570;maman;mom;5.12;nom;A2;freq;apertium_a_verifier
+E571;page;page;5.12;nom;A2;freq;apertium_a_verifier
+E572;portée / gamme / varier;range;5.12;nom;A2;freq;apertium_a_verifier
+E573;révision / revue / signalement;review;5.12;nom;A2;freq;apertium_a_verifier
+E574;la science;science;5.12;nom;A2;freq;existante
+E575;le métier;trade;5.12;nom;A2;freq;existante
+E576;royaume-uni;uk;5.12;mot-outil;A2;freq;apertium_a_verifier
+E577;à;upon;5.12;mot-outil;A2;freq;apertium_a_verifier
+E578;l'attention;attention;5.11;nom;A2;freq;existante
+E579;le frère;brother;5.11;nom;A2;freq;existante
+E580;le caractère;character;5.11;nom;A2;freq;existante
+E581;chef;chief;5.11;nom;A2;freq;apertium_a_verifier
+E582;la tasse;cup;5.11;nom;A2;freq;existante
+E583;le football;football;5.11;nom;A2;freq;existante
+E584;la haine;hate;5.11;nom;A2;freq;existante
+E585;james;james;5.11;mot-outil;A2;freq;apertium_a_verifier
+E586;descendre;lower;5.11;verbe;A2;freq;apertium_a_verifier
+E587;naturel;natural;5.11;adjectif;A2;freq;apertium_a_verifier
+E588;octobre;october;5.11;nom;A2;freq;apertium_a_verifier
+E589;domaine / propriété;property;5.11;nom;A2;freq;apertium_a_verifier
+E590;la qualité;quality;5.11;nom;A2;freq;existante
+E591;envoyer;send;5.11;verbe;A2;freq;apertium_a_verifier
+E592;le style;style;5.11;nom;A2;freq;existante
+E593;voeu / votation / vote;vote;5.11;nom;A2;freq;apertium_a_verifier
+E594;août;august;5.10;nom;A2;freq;apertium_a_verifier
+E595;le sang;blood;5.10;nom;A2;freq;existante
+E596;porcelaine / saxe / chine;china;5.10;nom;A2;freq;apertium_a_verifier
+E597;complet / compléter;complete;5.10;adjectif;A2;freq;apertium_a_verifier
+E598;le chien;dog;5.10;nom;A2;freq;existante
+E599;économique;economic;5.10;adjectif;A2;freq;apertium_a_verifier
+E600;enfer;hell;5.10;nom;A2;freq;apertium_a_verifier
+E601;la langue;language;5.10;nom;A2;freq;existante
+E602;dame / madame / monsieur;lord;5.10;nom;A2;freq;apertium_a_verifier
+E603;novembre;november;5.10;nom;A2;freq;apertium_a_verifier
+E604;huile / pétrole / huiler;oil;5.10;nom;A2;freq;apertium_a_verifier
+E605;serieux / sérieux;serious;5.10;adjectif;A2;freq;apertium_a_verifier
+E606;étape / plateau;stage;5.10;nom;A2;freq;apertium_a_verifier
+E607;titre / intituler;title;5.10;nom;A2;freq;apertium_a_verifier
+E608;ajouter / additionner / annexer;add;5.09;verbe;A2;freq;apertium_a_verifier
+E609;l'article;article;5.09;nom;A2;freq;existante
+E610;attaque / attentat / attaquer;attack;5.09;nom;A2;freq;apertium_a_verifier
+E611;la décision;decision;5.09;nom;A2;freq;existante
+E612;plaire / amuser;enjoy;5.09;verbe;A2;freq;apertium_a_verifier
+E613;entier;entire;5.09;adjectif;A2;freq;apertium_a_verifier
+E614;français;french;5.09;nom;A2;freq;apertium_a_verifier
+E615;janvier;january;5.09;nom;A2;freq;apertium_a_verifier
+E616;assommer / tuer;kill;5.09;verbe;A2;freq;apertium_a_verifier
+E617;peut-être;perhaps;5.09;adverbe;A2;freq;apertium_a_verifier
+E618;pauvre;poor;5.09;adjectif;A2;freq;apertium_a_verifier
+E619;désincarcération / émission / liberation;release;5.09;nom;A2;freq;apertium_a_verifier
+E620;situation / conjoncture;situation;5.09;nom;A2;freq;apertium_a_verifier
+E621;la technologie;technology;5.09;nom;A2;freq;existante
+E622;le site web;website;5.09;nom;A2;freq;existante
+E623;le choix;choice;5.08;nom;A2;freq;existante
+E624;code / recodage;code;5.08;nom;A2;freq;apertium_a_verifier
+E625;continuer / poursuivre;continue;5.08;verbe;A2;freq;apertium_a_verifier
+E626;conseil;council;5.08;nom;A2;freq;apertium_a_verifier
+E627;couverture / joncher / napper;cover;5.08;nom;A2;freq;apertium_a_verifier
+E628;actuellement;currently;5.08;adverbe;A2;freq;apertium_a_verifier
+E629;la porte;door;5.08;nom;A2;freq;existante
+E630;choix / election / élection;election;5.08;nom;A2;freq;apertium_a_verifier
+E631;européen;european;5.08;nom;A2;freq;apertium_a_verifier
+E632;financier;financial;5.08;adjectif;A2;freq;apertium_a_verifier
+E633;étranger;foreign;5.08;adjectif;A2;freq;apertium_a_verifier
+E634;cheveu / poil;hair;5.08;nom;A2;freq;apertium_a_verifier
+E635;accroissement / augmentation / augmenter;increase;5.08;nom;A2;freq;apertium_a_verifier
+E636;légal;legal;5.08;adjectif;A2;freq;apertium_a_verifier
+E637;reperdre / perdre / rater;lose;5.08;verbe;A2;freq;apertium_a_verifier
+E638;michael;michael;5.08;mot-outil;A2;freq;apertium_a_verifier
+E639;choisir / ramasser;pick;5.08;verbe;A2;freq;apertium_a_verifier
+E640;carrière / course / race;race;5.08;nom;A2;freq;apertium_a_verifier
+E641;sembler / ressembler;seem;5.08;verbe;A2;freq;apertium_a_verifier
+E642;le signe;sign;5.08;nom;A2;freq;existante
+E643;simple;simple;5.08;adjectif;A2;freq;apertium_a_verifier
+E644;simplement / bonnement;simply;5.08;adverbe;A2;freq;apertium_a_verifier
+E645;personnel / renforçage;staff;5.08;nom;A2;freq;apertium_a_verifier
+E646;syndicat / union;union;5.08;nom;A2;freq;apertium_a_verifier
+E647;balade / promenade / cheminer;walk;5.08;nom;A2;freq;apertium_a_verifier
+E648;washington;washington;5.08;mot-outil;A2;freq;apertium_a_verifier
+E649;le lit;bed;5.07;nom;A2;freq;existante
+E650;la carrière;career;5.07;nom;A2;freq;existante
+E651;fou;crazy;5.07;adjectif;A2;freq;apertium_a_verifier
+E652;quotidien / quotidiennement;daily;5.07;adjectif;A2;freq;apertium_a_verifier
+E653;la fille;daughter;5.07;nom;A2;freq;existante
+E654;décembre;december;5.07;nom;A2;freq;apertium_a_verifier
+E655;décéder / mourir;die;5.07;verbe;A2;freq;apertium_a_verifier
+E656;difficile;difficult;5.07;adjectif;A2;freq;apertium_a_verifier
+E657;le chiffre;figure;5.07;nom;A2;freq;existante
+E658;l'hôpital;hospital;5.07;nom;A2;freq;existante
+E659;déchet / perte;loss;5.07;nom;A2;freq;apertium_a_verifier
+E660;moderne;modern;5.07;adjectif;A2;freq;apertium_a_verifier
+E661;le papier;paper;5.07;nom;A2;freq;existante
+E662;populaire;popular;5.07;adjectif;A2;freq;apertium_a_verifier
+E663;sûr;safe;5.07;adjectif;A2;freq;apertium_a_verifier
+E664;version;version;5.07;nom;A2;freq;apertium_a_verifier
+E665;la voix;voice;5.07;nom;A2;freq;existante
+E666;dont;whose;5.07;mot-outil;A2;freq;apertium_a_verifier
+E667;écriture / redaction / rédaction;writing;5.07;nom;A2;freq;apertium_a_verifier
+E668;l'armée;army;5.06;nom;A2;freq;existante
+E669;australie;australia;5.06;mot-outil;A2;freq;apertium_a_verifier
+E670;la terre;earth;5.06;nom;A2;freq;existante
+E671;oublier;forget;5.06;verbe;A2;freq;apertium_a_verifier
+E672;le but;goal;5.06;nom;A2;freq;existante
+E673;énorme;huge;5.06;adjectif;A2;freq;apertium_a_verifier
+E674;l'internet;internet;5.06;nom;A2;freq;existante
+E675;écouter;listen;5.06;verbe;A2;freq;apertium_a_verifier
+E676;pratique / pratiquer;practice;5.06;nom;A2;freq;apertium_a_verifier
+E677;la mer;sea;5.06;nom;A2;freq;existante
+E678;dame / monsieur;sir;5.06;nom;A2;freq;apertium_a_verifier
+E679;le succès;success;5.06;nom;A2;freq;existante
+E680;vers;towards;5.06;mot-outil;A2;freq;apertium_a_verifier
+E681;accès;access;5.05;nom;A2;freq;apertium_a_verifier
+E682;la base;base;5.05;nom;A2;freq;existante
+E683;sous / enbas / endessous;below;5.05;mot-outil;A2;freq;apertium_a_verifier
+E684;profond;deep;5.05;adjectif;A2;freq;apertium_a_verifier
+E685;la note (école);mark;5.05;nom;A2;freq;existante
+E686;offre / offrir / trinquer;offer;5.05;nom;A2;freq;apertium_a_verifier
+E687;passer;pass;5.05;verbe;A2;freq;apertium_a_verifier
+E688;professionnel;professional;5.05;nom;A2;freq;apertium_a_verifier
+E689;le risque;risk;5.05;nom;A2;freq;existante
+E690;rêve / sommeil / endormir;sleep;5.05;nom;A2;freq;apertium_a_verifier
+E691;la table;table;5.05;nom;A2;freq;existante
+E692;dix / dizaine;ten;5.05;mot-outil;A2;freq;apertium_a_verifier
+E693;la vérité;truth;5.05;nom;A2;freq;existante
+E694;bal / balle / ballon;ball;5.04;nom;A2;freq;apertium_a_verifier
+E695;la boîte;box;5.04;nom;A2;freq;existante
+E696;construire / bâtir;build;5.04;verbe;A2;freq;apertium_a_verifier
+E697;carte / charte / lettre;card;5.04;nom;A2;freq;apertium_a_verifier
+E698;obscurité / obscur;dark;5.04;nom;A2;freq;apertium_a_verifier
+E699;le quartier;district;5.04;nom;A2;freq;existante
+E700;europe;europe;5.04;mot-outil;A2;freq;apertium_a_verifier
+E701;george;george;5.04;mot-outil;A2;freq;apertium_a_verifier
+E702;inde;india;5.04;mot-outil;A2;freq;apertium_a_verifier
+E703;mine / àmoi / miner;mine;5.04;nom;A2;freq;apertium_a_verifier
+E704;ministre;minister;5.04;nom;A2;freq;apertium_a_verifier
+E705;billet / note / notice;note;5.04;nom;A2;freq;apertium_a_verifier
+E706;pourcentage / pourcent;percent;5.04;nom;A2;freq;apertium_a_verifier
+E707;le morceau;piece;5.04;nom;A2;freq;existante
+E708;récent;recent;5.04;adjectif;A2;freq;apertium_a_verifier
+E709;directement;straight;5.04;adverbe;A2;freq;apertium_a_verifier
+E710;la visite;visit;5.04;nom;A2;freq;existante
+E711;le mur;wall;5.04;nom;A2;freq;existante
+E712;la culture;culture;5.03;nom;A2;freq;existante
+E713;février;february;5.03;nom;A2;freq;apertium_a_verifier
+E714;la croissance;growth;5.03;nom;A2;freq;existante
+E715;inclus;included;5.03;adverbe;A2;freq;apertium_a_verifier
+E716;agent;officer;5.03;nom;A2;freq;apertium_a_verifier
+E717;la douleur;pain;5.03;nom;A2;freq;existante
+E718;paul;paul;5.03;mot-outil;A2;freq;apertium_a_verifier
+E719;le respect;respect;5.03;nom;A2;freq;existante
+E720;réponse;response;5.03;nom;A2;freq;apertium_a_verifier
+E721;la rivière;river;5.03;nom;A2;freq;existante
+E722;la pierre;rock;5.03;nom;A2;freq;existante
+E723;parler;speak;5.03;verbe;A2;freq;apertium_a_verifier
+E724;spécifique;specific;5.03;adjectif;A2;freq;apertium_a_verifier
+E725;la norme;standard;5.03;nom;A2;freq;existante
+E726;écrire;write;5.03;verbe;A2;freq;apertium_a_verifier
+E727;album;album;5.02;nom;A2;freq;apertium_a_verifier
+E728;le siècle;century;5.02;nom;A2;freq;existante
+E729;charge / toucher;charge;5.02;nom;A2;freq;apertium_a_verifier
+E730;le froid;cold;5.02;nom;A2;freq;existante
+E731;créer;create;5.02;verbe;A2;freq;apertium_a_verifier
+E732;l'effet;effect;5.02;nom;A2;freq;existante
+E733;àl'exceptionde / sauf / excepter;except;5.02;mot-outil;A2;freq;apertium_a_verifier
+E734;l'œil;eye;5.02;nom;A2;freq;existante
+E735;drôle / gracieux;funny;5.02;adjectif;A2;freq;apertium_a_verifier
+E736;remuement;moving;5.02;nom;A2;freq;apertium_a_verifier
+E737;le réseau;network;5.02;nom;A2;freq;existante
+E738;la paix;peace;5.02;nom;A2;freq;existante
+E739;si;provided;5.02;mot-outil;A2;freq;apertium_a_verifier
+E740;naguère / récemment;recently;5.02;adverbe;A2;freq;apertium_a_verifier
+E741;le magasin;store;5.02;nom;A2;freq;existante
+E742;l'élève;student;5.02;nom;A2;freq;existante
+E743;lendemain / demain;tomorrow;5.02;nom;A2;freq;apertium_a_verifier
+E744;court / piste / suivre;track;5.02;nom;A2;freq;apertium_a_verifier
+E745;via;via;5.02;mot-outil;A2;freq;apertium_a_verifier
+E746;le poids;weight;5.02;nom;A2;freq;existante
+E747;addition;addition;5.01;nom;A2;freq;apertium_a_verifier
+E748;avant;ahead;5.01;adverbe;A2;freq;apertium_a_verifier
+E749;laisser / permettre / permettrede;allow;5.01;verbe;A2;freq;apertium_a_verifier
+E750;amicale / association;association;5.01;nom;A2;freq;apertium_a_verifier
+E751;battre / heurter / rosser;beat;5.01;verbe;A2;freq;apertium_a_verifier
+E752;le brun;brown;5.01;mot-outil;A2;freq;existante
+E753;capitale / capital;capital;5.01;nom;A2;freq;apertium_a_verifier
+E754;chinois;chinese;5.01;nom;A2;freq;apertium_a_verifier
+E755;comité;committee;5.01;nom;A2;freq;apertium_a_verifier
+E756;assise / conférence;conference;5.01;nom;A2;freq;apertium_a_verifier
+E757;la différence;difference;5.01;nom;A2;freq;existante
+E758;le double;double;5.01;adjectif;A2;freq;existante
+E759;espérer / attendre;expect;5.01;verbe;A2;freq;apertium_a_verifier
+E760;le gaz;gas;5.01;nom;A2;freq;existante
+E761;l'île;island;5.01;nom;A2;freq;existante
+E762;normal;normal;5.01;adjectif;A2;freq;apertium_a_verifier
+E763;la population;population;5.01;nom;A2;freq;existante
+E764;potentiel;potential;5.01;adjectif;A2;freq;apertium_a_verifier
+E765;pression;pressure;5.01;nom;A2;freq;apertium_a_verifier
+E766;la radio;radio;5.01;nom;A2;freq;existante
+E767;russe;russian;5.01;nom;A2;freq;apertium_a_verifier
+E768;la station / gare;station;5.01;nom;A2;freq;existante
+E769;le texte;text;5.01;nom;A2;freq;existante
+E770;le traitement;treatment;5.01;nom;A2;freq;existante
+E771;occidental;western;5.01;adjectif;A2;freq;apertium_a_verifier
+E772;le début;beginning;5.00;nom;A2;freq;existante
+E773;californie;california;5.00;mot-outil;A2;freq;apertium_a_verifier
+E774;campagne;campaign;5.00;nom;A2;freq;apertium_a_verifier
+E775;assurément / certes;certainly;5.00;adverbe;A2;freq;apertium_a_verifier
+E776;complètement;completely;5.00;adverbe;A2;freq;apertium_a_verifier
+E777;le contenu;content;5.00;nom;A2;freq;existante
+E778;crédit / abonner / régler;credit;5.00;nom;A2;freq;apertium_a_verifier
+E779;croix;cross;5.00;nom;A2;freq;apertium_a_verifier
+E780;malgré;despite;5.00;mot-outil;A2;freq;apertium_a_verifier
+E781;femelle / femme;female;5.00;nom;A2;freq;apertium_a_verifier
+E782;recentrage / foyer / centrer;focus;5.00;nom;A2;freq;apertium_a_verifier
+E783;salut;hi;5.00;mot-outil;A2;freq;apertium_a_verifier
+E784;le mari;husband;5.00;nom;A2;freq;existante
+E785;gel;ice;5.00;nom;A2;freq;apertium_a_verifier
+E786;l'individu;individual;5.00;nom;A2;freq;existante
+E787;intéressant;interesting;5.00;adjectif;A2;freq;apertium_a_verifier
+E788;unir;join;5.00;verbe;A2;freq;apertium_a_verifier
+E789;dedevant / principal;leading;5.00;adjectif;A2;freq;apertium_a_verifier
+E790;le message;message;5.00;nom;A2;freq;existante
+E791;particulier;particular;5.00;adjectif;A2;freq;apertium_a_verifier
+E792;antérieur / préalable;previous;5.00;adjectif;A2;freq;apertium_a_verifier
+E793;rapidement / promptement / vite;quickly;5.00;adverbe;A2;freq;apertium_a_verifier
+E794;la région;region;5.00;nom;A2;freq;existante
+E795;section;section;5.00;nom;A2;freq;apertium_a_verifier
+E796;la sorte;sort;5.00;nom;A2;freq;existante
+E797;la vitesse;speed;5.00;nom;A2;freq;existante
+E798;le voyage;travel;5.00;nom;A2;freq;existante
+E799;estimer / considérer / envisager;consider;4.99;verbe;A2;freq;apertium_a_verifier
+E800;le contact;contact;4.99;nom;A2;freq;existante
+E801;la baisse;drop;4.99;nom;A2;freq;existante
+E802;foire / juste;fair;4.99;nom;A2;freq;apertium_a_verifier
+E803;jesus / jesús;jesus;4.99;mot-outil;A2;freq;apertium_a_verifier
+E804;enfant / rigoler;kid;4.99;nom;A2;freq;apertium_a_verifier
+E805;chaînon / rapprochement / raccorder;link;4.99;nom;A2;freq;apertium_a_verifier
+E806;positif;positive;4.99;adjectif;A2;freq;apertium_a_verifier
+E807;la vente;sale;4.99;nom;A2;freq;existante
+E808;pendant;throughout;4.99;mot-outil;A2;freq;apertium_a_verifier
+E809;visite / visiter;tour;4.99;nom;A2;freq;apertium_a_verifier
+E810;bienvenue;welcome;4.99;nom;A2;freq;apertium_a_verifier
+E811;absolument;absolutely;4.98;adverbe;A2;freq;apertium_a_verifier
+E812;additionnel / supplémentaire;additional;4.98;adjectif;A2;freq;apertium_a_verifier
+E813;au-delà;beyond;4.98;adverbe;A2;freq;apertium_a_verifier
+E814;aussitôt / immédiatement;immediately;4.98;adverbe;A2;freq;apertium_a_verifier
+E815;jobs;jobs;4.98;mot-outil;A2;freq;apertium_a_verifier
+E816;la minute;minute;4.98;nom;A2;freq;existante
+E817;la nature;nature;4.98;nom;A2;freq;existante
+E818;rapide / vite;quick;4.98;adjectif;A2;freq;apertium_a_verifier
+E819;débiter / vendre;sell;4.98;verbe;A2;freq;apertium_a_verifier
+E820;significatif;significant;4.98;adjectif;A2;freq;apertium_a_verifier
+E821;àmoinsque;unless;4.98;mot-outil;A2;freq;apertium_a_verifier
+E822;gagnant;winning;4.98;adjectif;A2;freq;apertium_a_verifier
+E823;convenir / concorder / approuver;agree;4.97;verbe;A2;freq;apertium_a_verifier
+E824;canada;canada;4.97;mot-outil;A2;freq;apertium_a_verifier
+E825;net / toiletter / torcher;clean;4.97;adjectif;A2;freq;apertium_a_verifier
+E826;l'ordinateur;computer;4.97;nom;A2;freq;existante
+E827;la construction;construction;4.97;nom;A2;freq;existante
+E828;épisode;episode;4.97;nom;A2;freq;apertium_a_verifier
+E829;dépôt / revenu;income;4.97;nom;A2;freq;apertium_a_verifier
+E830;la justice;justice;4.97;nom;A2;freq;existante
+E831;gérant / responsable / gestionnaire;manager;4.97;nom;A2;freq;apertium_a_verifier
+E832;le mouvement;movement;4.97;nom;A2;freq;existante
+E833;la photo;photo;4.97;nom;A2;freq;existante
+E834;la sécurité;safety;4.97;nom;A2;freq;existante
+E835;scène;scene;4.97;nom;A2;freq;apertium_a_verifier
+E836;dépenser / passer;spend;4.97;verbe;A2;freq;apertium_a_verifier
+E837;declaration / déclaration;statement;4.97;nom;A2;freq;apertium_a_verifier
+E838;le soleil;sun;4.97;nom;A2;freq;existante
+E839;habilité;ability;4.96;nom;A2;freq;apertium_a_verifier
+E840;l'entraîneur;coach;4.96;nom;A2;freq;existante
+E841;collection / encaissement / recueillement;collection;4.96;nom;A2;freq;apertium_a_verifier
+E842;decidément;definitely;4.96;adverbe;A2;freq;apertium_a_verifier
+E843;vendredi;friday;4.96;nom;A2;freq;apertium_a_verifier
+E844;pistolet;gun;4.96;nom;A2;freq;apertium_a_verifier
+E845;lourd;heavy;4.96;adjectif;A2;freq;apertium_a_verifier
+E846;la connaissance;knowledge;4.96;nom;A2;freq;existante
+E847;particulièrement;particularly;4.96;adverbe;A2;freq;apertium_a_verifier
+E848;la recherche;search;4.96;nom;A2;freq;existante
+E849;affaire / matière / sujet;subject;4.96;nom;A2;freq;apertium_a_verifier
+E850;le train;train;4.96;nom;A2;freq;existante
+E851;ample / large;wide;4.96;adjectif;A2;freq;apertium_a_verifier
+E852;ah;wow;4.96;mot-outil;A2;freq;apertium_a_verifier
+E853;auteur;author;4.95;nom;A2;freq;apertium_a_verifier
+E854;centre / central / centrer;centre;4.95;nom;A2;freq;apertium_a_verifier
+E855;réclamation / revendication / affirmer;claim;4.95;nom;A2;freq;apertium_a_verifier
+E856;papa;dad;4.95;nom;A2;freq;apertium_a_verifier
+E857;la peur;fear;4.95;nom;A2;freq;existante
+E858;apte / rentrer;fit;4.95;adjectif;A2;freq;apertium_a_verifier
+E859;généralement;generally;4.95;adverbe;A2;freq;apertium_a_verifier
+E860;allemand;german;4.95;nom;A2;freq;apertium_a_verifier
+E861;global;global;4.95;adjectif;A2;freq;apertium_a_verifier
+E862;l'hôtel;hotel;4.95;nom;A2;freq;existante
+E863;le juge;judge;4.95;nom;A2;freq;existante
+E864;dame / madame / monsieur;lady;4.95;nom;A2;freq;apertium_a_verifier
+E865;cadre / dirigeant;leader;4.95;nom;A2;freq;apertium_a_verifier
+E866;la lettre;letter;4.95;nom;A2;freq;existante
+E867;la matière;material;4.95;nom;A2;freq;existante
+E868;aucun / personne;nobody;4.95;mot-outil;A2;freq;apertium_a_verifier
+E869;l'opportunité;opportunity;4.95;nom;A2;freq;existante
+E870;plus;plus;4.95;nom;A2;freq;apertium_a_verifier
+E871;le produit;product;4.95;nom;A2;freq;existante
+E872;régulier;regular;4.95;adjectif;A2;freq;apertium_a_verifier
+E873;secrétaire;secretary;4.95;nom;A2;freq;apertium_a_verifier
+E874;la sœur;sister;4.95;nom;A2;freq;existante
+E875;unité;unit;4.95;nom;A2;freq;apertium_a_verifier
+E876;annuel / annal;annual;4.94;adjectif;A2;freq;apertium_a_verifier
+E877;plus;anymore;4.94;adverbe;A2;freq;apertium_a_verifier
+E878;barre / bar / barreau;bar;4.94;nom;A2;freq;apertium_a_verifier
+E879;bataille;battle;4.94;nom;A2;freq;apertium_a_verifier
+E880;le cerveau;brain;4.94;nom;A2;freq;existante
+E881;le contrat;contract;4.94;nom;A2;freq;existante
+E882;le degré;degree;4.94;nom;A2;freq;existante
+E883;le sol;floor;4.94;nom;A2;freq;existante
+E884;france;france;4.94;mot-outil;A2;freq;apertium_a_verifier
+E885;l'image;image;4.94;nom;A2;freq;existante
+E886;assurance;insurance;4.94;nom;A2;freq;apertium_a_verifier
+E887;majorité / plupart;majority;4.94;nom;A2;freq;apertium_a_verifier
+E888;ouverture;opening;4.94;nom;A2;freq;apertium_a_verifier
+E889;l'opinion;opinion;4.94;nom;A2;freq;existante
+E890;physique;physical;4.94;adjectif;A2;freq;apertium_a_verifier
+E891;remporter;reach;4.94;verbe;A2;freq;apertium_a_verifier
+E892;la règle;rule;4.94;nom;A2;freq;existante
+E893;sérieusement;seriously;4.94;adverbe;A2;freq;apertium_a_verifier
+E894;stupide;stupid;4.94;adjectif;A2;freq;apertium_a_verifier
+E895;réussi;successful;4.94;adjectif;A2;freq;apertium_a_verifier
+E896;allant / actif;active;4.93;adjectif;A2;freq;apertium_a_verifier
+E897;administration;administration;4.93;nom;A2;freq;apertium_a_verifier
+E898;approche / approximation;approach;4.93;nom;A2;freq;apertium_a_verifier
+E899;australien;australian;4.93;adjectif;A2;freq;apertium_a_verifier
+E900;cancer;cancer;4.93;nom;A2;freq;apertium_a_verifier
+E901;civil;civil;4.93;adjectif;A2;freq;apertium_a_verifier
+E902;la danse;dance;4.93;nom;A2;freq;existante
+E903;défense;defense;4.93;nom;A2;freq;apertium_a_verifier
+E904;la direction;direction;4.93;nom;A2;freq;existante
+E905;indépendant;independent;4.93;adjectif;A2;freq;apertium_a_verifier
+E906;master / maître;master;4.93;nom;A2;freq;apertium_a_verifier
+E907;aucun;none;4.93;mot-outil;A2;freq;apertium_a_verifier
+E908;russie;russia;4.93;mot-outil;A2;freq;apertium_a_verifier
+E909;le bateau;ship;4.93;nom;A2;freq;existante
+E910;stock / élevage;stock;4.93;nom;A2;freq;apertium_a_verifier
+E911;week-end;weekend;4.93;nom;A2;freq;apertium_a_verifier
+E912;merveille;wonder;4.93;nom;A2;freq;apertium_a_verifier
+E913;afrique;africa;4.92;mot-outil;A2;freq;apertium_a_verifier
+E914;bande / frange;band;4.92;nom;A2;freq;apertium_a_verifier
+E915;la plage;beach;4.92;nom;A2;freq;existante
+E916;encaisser;cash;4.92;verbe;A2;freq;apertium_a_verifier
+E917;nettement / clairement;clearly;4.92;adverbe;A2;freq;apertium_a_verifier
+E918;annonce / commercial;commercial;4.92;nom;A2;freq;apertium_a_verifier
+E919;effort;effort;4.92;nom;A2;freq;apertium_a_verifier
+E920;éventail / ventilateur / fan;fan;4.92;nom;A2;freq;apertium_a_verifier
+E921;imaginer;imagine;4.92;verbe;A2;freq;apertium_a_verifier
+E922;impact;impact;4.92;nom;A2;freq;apertium_a_verifier
+E923;manque;lack;4.92;nom;A2;freq;apertium_a_verifier
+E924;l'apprentissage;learning;4.92;nom;A2;freq;existante
+E925;multiple;multiple;4.92;nom;A2;freq;apertium_a_verifier
+E926;operation / opération / fonctionnement;operation;4.92;nom;A2;freq;apertium_a_verifier
+E927;l'organisation;organization;4.92;nom;A2;freq;existante
+E928;protéger / abriter / réfugier;protect;4.92;verbe;A2;freq;apertium_a_verifier
+E929;le secret;secret;4.92;nom;A2;freq;existante
+E930;printemps / source;spring;4.92;nom;A2;freq;apertium_a_verifier
+E931;dimanche;sunday;4.92;nom;A2;freq;apertium_a_verifier
+E932;usure / mener / porter;wear;4.92;nom;A2;freq;apertium_a_verifier
+E933;l'adresse;address;4.91;nom;A2;freq;existante
+E934;analyse;analysis;4.91;nom;A2;freq;apertium_a_verifier
+E935;detoutefaçon;anyway;4.91;adverbe;A2;freq;apertium_a_verifier
+E936;élire / choisir;choose;4.91;verbe;A2;freq;apertium_a_verifier
+E937;noël;christmas;4.91;nom;A2;freq;apertium_a_verifier
+E938;la couleur;color;4.91;nom;A2;freq;existante
+E939;commission / charger;commission;4.91;nom;A2;freq;apertium_a_verifier
+E940;compétence / competition / compétition;competition;4.91;nom;A2;freq;apertium_a_verifier
+E941;direct / adresser / diriger;direct;4.91;adjectif;A2;freq;apertium_a_verifier
+E942;le rêve;dream;4.91;nom;A2;freq;existante
+E943;aisément / facilement;easily;4.91;adverbe;A2;freq;apertium_a_verifier
+E944;arrivée / achever / finir;finish;4.91;nom;A2;freq;apertium_a_verifier
+E945;indien;indian;4.91;nom;A2;freq;apertium_a_verifier
+E946;littéralement;literally;4.91;adverbe;A2;freq;apertium_a_verifier
+E947;la chance;luck;4.91;nom;A2;freq;existante
+E948;le mariage;marriage;4.91;nom;A2;freq;existante
+E949;nécessaire;necessary;4.91;adjectif;A2;freq;apertium_a_verifier
+E950;riche;rich;4.91;adjectif;A2;freq;apertium_a_verifier
+E951;couche / fourrure / peau;skin;4.91;nom;A2;freq;apertium_a_verifier
+E952;présumé;supposed;4.91;adjectif;A2;freq;apertium_a_verifier
+E953;friandise / gourmandise / doux;sweet;4.91;nom;A2;freq;apertium_a_verifier
+E954;c'estpourcelaque / ducoup / ainsi;thus;4.91;mot-outil;A2;freq;apertium_a_verifier
+E955;le toucher;touch;4.91;nom;A2;freq;existante
+E956;hier;yesterday;4.91;adverbe;A2;freq;apertium_a_verifier
+E957;congrès;congress;4.90;nom;A2;freq;apertium_a_verifier
+E958;dommage / mal / endommager;damage;4.90;nom;A2;freq;apertium_a_verifier
+E959;directement;directly;4.90;adverbe;A2;freq;apertium_a_verifier
+E960;la maladie;disease;4.90;nom;A2;freq;existante
+E961;le médecin;doctor;4.90;nom;A2;freq;existante
+E962;le doute;doubt;4.90;nom;A2;freq;existante
+E963;la boisson;drink;4.90;nom;A2;freq;existante
+E964;conduite;driving;4.90;nom;A2;freq;apertium_a_verifier
+E965;le poisson;fish;4.90;nom;A2;freq;existante
+E966;allemagne;germany;4.90;mot-outil;A2;freq;apertium_a_verifier
+E967;heureux;glad;4.90;adjectif;A2;freq;apertium_a_verifier
+E968;croître / grandir / cultiver;grow;4.90;verbe;A2;freq;apertium_a_verifier
+E969;la machine;machine;4.90;nom;A2;freq;existante
+E970;avis;notice;4.90;nom;A2;freq;apertium_a_verifier
+E971;globale;overall;4.90;adjectif;A2;freq;apertium_a_verifier
+E972;planification;planning;4.90;nom;A2;freq;apertium_a_verifier
+E973;professeur;professor;4.90;nom;A2;freq;apertium_a_verifier
+E974;asseoir;sit;4.90;verbe;A2;freq;apertium_a_verifier
+E975;le voyage;trip;4.90;nom;A2;freq;existante
+E976;basique;basic;4.89;adjectif;A2;freq;apertium_a_verifier
+E977;capitaine;captain;4.89;nom;A2;freq;apertium_a_verifier
+E978;mener / porter / emporter;carry;4.89;verbe;A2;freq;apertium_a_verifier
+E979;le crime;crime;4.89;nom;A2;freq;existante
+E980;efficace;effective;4.89;adjectif;A2;freq;apertium_a_verifier
+E981;compter / conter / raconter;explain;4.89;verbe;A2;freq;apertium_a_verifier
+E982;pleinement;fully;4.89;adverbe;A2;freq;apertium_a_verifier
+E983;hautement;highly;4.89;adverbe;A2;freq;apertium_a_verifier
+E984;holding;holding;4.89;nom;A2;freq;apertium_a_verifier
+E985;japon;japan;4.89;mot-outil;A2;freq;apertium_a_verifier
+E986;homme;male;4.89;nom;A2;freq;apertium_a_verifier
+E987;la plante;plant;4.89;nom;A2;freq;existante
+E988;la réalité;reality;4.89;nom;A2;freq;existante
+E989;forgeron / smith;smith;4.89;nom;A2;freq;apertium_a_verifier
+E990;grain / granite / site;spot;4.89;nom;A2;freq;apertium_a_verifier
+E991;texas;texas;4.89;mot-outil;A2;freq;apertium_a_verifier
+E992;hiver;winter;4.89;nom;A2;freq;apertium_a_verifier
+E993;conseil;advice;4.88;nom;A2;freq;apertium_a_verifier
+E994;l'accord;agreement;4.88;nom;A2;freq;existante
+E995;prix;award;4.88;nom;A2;freq;apertium_a_verifier
+E996;blocage / bloc / bloquer;block;4.88;nom;A2;freq;apertium_a_verifier
+E997;défi / récusation / défier;challenge;4.88;nom;A2;freq;apertium_a_verifier
+E998;chrétien / christian;christian;4.88;nom;A2;freq;apertium_a_verifier
+E999;commentaire / commenter;comment;4.88;nom;A2;freq;apertium_a_verifier
+E1000;l'équipement;equipment;4.88;nom;A2;freq;existante
+E1001;enfin;eventually;4.88;adverbe;A2;freq;apertium_a_verifier
+E1002;sacré / saint;holy;4.88;adjectif;A2;freq;apertium_a_verifier
+E1003;assassinat;killing;4.88;nom;A2;freq;apertium_a_verifier
+E1004;la nation;nation;4.88;nom;A2;freq;existante
+E1005;peter;peter;4.88;mot-outil;A2;freq;apertium_a_verifier
+E1006;primaire;primary;4.88;adjectif;A2;freq;apertium_a_verifier
+E1007;le but;purpose;4.88;nom;A2;freq;existante
+E1008;responsable;responsible;4.88;adjectif;A2;freq;apertium_a_verifier
+E1009;le magasin;shop;4.88;nom;A2;freq;existante
+E1010;malade;sick;4.88;adjectif;A2;freq;apertium_a_verifier
+E1011;le professeur;teacher;4.88;nom;A2;freq;existante
+E1012;la théorie;theory;4.88;nom;A2;freq;existante
+E1013;william;william;4.88;mot-outil;A2;freq;apertium_a_verifier
+E1014;agence;agency;4.87;nom;A2;freq;apertium_a_verifier
+E1015;éviter;avoid;4.87;verbe;A2;freq;apertium_a_verifier
+E1016;caméra;camera;4.87;nom;A2;freq;apertium_a_verifier
+E1017;prendre;catch;4.87;verbe;A2;freq;apertium_a_verifier
+E1018;cellule;cell;4.87;nom;A2;freq;apertium_a_verifier
+E1019;côte;coast;4.87;nom;A2;freq;apertium_a_verifier
+E1020;drogue / médicament / droguer;drug;4.87;nom;A2;freq;apertium_a_verifier
+E1021;l'économie;economy;4.87;nom;A2;freq;existante
+E1022;l'environnement;environment;4.87;nom;A2;freq;existante
+E1023;exécutif;executive;4.87;nom;A2;freq;apertium_a_verifier
+E1024;le pied;foot;4.87;nom;A2;freq;existante
+E1025;la salle;hall;4.87;nom;A2;freq;existante
+E1026;masse / messe / concentrer;mass;4.87;nom;A2;freq;apertium_a_verifier
+E1027;signification;meaning;4.87;nom;A2;freq;apertium_a_verifier
+E1028;mission;mission;4.87;nom;A2;freq;apertium_a_verifier
+E1029;la politique;politics;4.87;nom;A2;freq;existante
+E1030;pop / éclater;pop;4.87;nom;A2;freq;apertium_a_verifier
+E1031;samedi;saturday;4.87;nom;A2;freq;apertium_a_verifier
+E1032;état / statut;status;4.87;nom;A2;freq;apertium_a_verifier
+E1033;parconséquent / donc / c'estpourquoi;therefore;4.87;mot-outil;A2;freq;apertium_a_verifier
+E1034;jugement / preuve;trial;4.87;nom;A2;freq;apertium_a_verifier
+E1035;véritablement;truly;4.87;adverbe;A2;freq;apertium_a_verifier
+E1036;la météo;weather;4.87;nom;A2;freq;existante
+E1037;activité;activity;4.86;nom;A2;freq;apertium_a_verifier
+E1038;application / sollicitude;application;4.86;nom;A2;freq;apertium_a_verifier
+E1039;le café;coffee;4.86;nom;A2;freq;existante
+E1040;complexe;complex;4.86;nom;A2;freq;apertium_a_verifier
+E1041;condition / aménager / conditionner;condition;4.86;nom;A2;freq;apertium_a_verifier
+E1042;division;division;4.86;nom;A2;freq;apertium_a_verifier
+E1043;le soir;evening;4.86;nom;A2;freq;existante
+E1044;vol / fuite;flight;4.86;nom;A2;freq;apertium_a_verifier
+E1045;la liberté;freedom;4.86;nom;A2;freq;existante
+E1046;la chaleur;heat;4.86;nom;A2;freq;existante
+E1047;entretien / interview / interviewer;interview;4.86;nom;A2;freq;apertium_a_verifier
+E1048;la bibliothèque;library;4.86;nom;A2;freq;existante
+E1049;emplacement / repérage;location;4.86;nom;A2;freq;apertium_a_verifier
+E1050;assassinat / assassiner;murder;4.86;nom;A2;freq;apertium_a_verifier
+E1051;obama;obama;4.86;mot-outil;A2;freq;apertium_a_verifier
+E1052;la reine;queen;4.86;nom;A2;freq;existante
+E1053;accepter / agréer;accept;4.85;verbe;A2;freq;apertium_a_verifier
+E1054;réel;actual;4.85;adjectif;A2;freq;apertium_a_verifier
+E1055;paraître / apparaître / sembler;appear;4.85;verbe;A2;freq;apertium_a_verifier
+E1056;attentat / tentative / essayer;attempt;4.85;nom;A2;freq;apertium_a_verifier
+E1057;canal / chaîne;channel;4.85;nom;A2;freq;apertium_a_verifier
+E1058;la distance;distance;4.85;nom;A2;freq;existante
+E1059;changement / échange / échanger;exchange;4.85;nom;A2;freq;apertium_a_verifier
+E1060;graisse / gras;fat;4.85;nom;A2;freq;apertium_a_verifier
+E1061;trouvaille;finding;4.85;nom;A2;freq;apertium_a_verifier
+E1062;le verre (matière);glass;4.85;nom;A2;freq;existante
+E1063;perdant;losing;4.85;adjectif;A2;freq;apertium_a_verifier
+E1064;mobile;mobile;4.85;nom;A2;freq;apertium_a_verifier
+E1065;puissant;powerful;4.85;adjectif;A2;freq;apertium_a_verifier
+E1066;prieur / préalable;prior;4.85;nom;A2;freq;apertium_a_verifier
+E1067;la protection;protection;4.85;nom;A2;freq;existante
+E1068;accueillir / recevoir;receive;4.85;verbe;A2;freq;apertium_a_verifier
+E1069;religieux;religious;4.85;adjectif;A2;freq;apertium_a_verifier
+E1070;promenade / monter / chevaucher;ride;4.85;nom;A2;freq;apertium_a_verifier
+E1071;robert;robert;4.85;mot-outil;A2;freq;apertium_a_verifier
+E1072;réel / royal;royal;4.85;adjectif;A2;freq;apertium_a_verifier
+E1073;l'écran;screen;4.85;nom;A2;freq;existante
+E1074;servir;serve;4.85;verbe;A2;freq;apertium_a_verifier
+E1075;lent / doucement / arriérer;slow;4.85;adjectif;A2;freq;apertium_a_verifier
+E1076;espèce;species;4.85;nom;A2;freq;apertium_a_verifier
+E1077;le discours;speech;4.85;nom;A2;freq;existante
+E1078;trafic / transit;traffic;4.85;nom;A2;freq;apertium_a_verifier
+E1079;l'arbre;tree;4.85;nom;A2;freq;existante
+E1080;qui;whom;4.85;mot-outil;A2;freq;apertium_a_verifier
+E1081;merveilleux;wonderful;4.85;adjectif;A2;freq;apertium_a_verifier
+E1082;l'aéroport;airport;4.84;nom;A2;freq;existante
+E1083;commencer;begin;4.84;verbe;A2;freq;apertium_a_verifier
+E1084;le bas;bottom;4.84;nom;A2;freq;existante
+E1085;demande / exigence / réclamer;demand;4.84;nom;A2;freq;apertium_a_verifier
+E1086;le moteur;engine;4.84;nom;A2;freq;existante
+E1087;célèbre / fameux;famous;4.84;adjectif;A2;freq;apertium_a_verifier
+E1088;l'investissement;investment;4.84;nom;A2;freq;existante
+E1089;le mensonge;lie;4.84;nom;A2;freq;existante
+E1090;le partenaire;partner;4.84;nom;A2;freq;existante
+E1091;triste;sad;4.84;adjectif;A2;freq;apertium_a_verifier
+E1092;la solution;solution;4.84;nom;A2;freq;existante
+E1093;la place;square;4.84;nom;A2;freq;existante
+E1094;la structure;structure;4.84;nom;A2;freq;existante
+E1095;thomas;thomas;4.84;mot-outil;A2;freq;apertium_a_verifier
+E1096;traditionnel;traditional;4.84;adjectif;A2;freq;apertium_a_verifier
+E1097;le vent;wind;4.84;nom;A2;freq;existante
+E1098;préoccupation / souci;worry;4.84;nom;A2;freq;apertium_a_verifier
+E1099;la marque;brand;4.83;nom;A2;freq;existante
+E1100;le bus;bus;4.83;nom;A2;freq;existante
+E1101;chicago;chicago;4.83;mot-outil;A2;freq;apertium_a_verifier
+E1102;compter / conter / raconter;count;4.83;verbe;A2;freq;apertium_a_verifier
+E1103;critique;critical;4.83;adjectif;A2;freq;apertium_a_verifier
+E1104;digital;digital;4.83;adjectif;A2;freq;apertium_a_verifier
+E1105;frais;fresh;4.83;adjectif;A2;freq;apertium_a_verifier
+E1106;le lac;lake;4.83;nom;A2;freq;existante
+E1107;mental;mental;4.83;adjectif;A2;freq;apertium_a_verifier
+E1108;majoritairement;mostly;4.83;adverbe;A2;freq;apertium_a_verifier
+E1109;la bouche;mouth;4.83;nom;A2;freq;existante
+E1110;propriétaire;owner;4.83;nom;A2;freq;apertium_a_verifier
+E1111;antérieurement / préalablement;previously;4.83;adverbe;A2;freq;apertium_a_verifier
+E1112;demeurer / rester;remain;4.83;verbe;A2;freq;apertium_a_verifier
+E1113;balance / échelle;scale;4.83;nom;A2;freq;apertium_a_verifier
+E1114;ponctuation / marquer / évaluer;score;4.83;nom;A2;freq;apertium_a_verifier
+E1115;séparer / écarter;separate;4.83;verbe;A2;freq;apertium_a_verifier
+E1116;prêt;smart;4.83;adjectif;A2;freq;apertium_a_verifier
+E1117;la surface;surface;4.83;nom;A2;freq;existante
+E1118;jeter / verser;throw;4.83;verbe;A2;freq;apertium_a_verifier
+E1119;tom;tom;4.83;mot-outil;A2;freq;apertium_a_verifier
+E1120;entièrement / totalement;totally;4.83;adverbe;A2;freq;apertium_a_verifier
+E1121;le mariage;wedding;4.83;nom;A2;freq;existante
+E1122;suppléant;acting;4.82;adjectif;A2;freq;apertium_a_verifier
+E1123;africain;african;4.82;adjectif;A2;freq;apertium_a_verifier
+E1124;le bénéfice;benefit;4.82;nom;A2;freq;existante
+E1125;le budget;budget;4.82;nom;A2;freq;existante
+E1126;clic;click;4.82;nom;A2;freq;apertium_a_verifier
+E1127;propriété;estate;4.82;nom;A2;freq;apertium_a_verifier
+E1128;foi;faith;4.82;nom;A2;freq;apertium_a_verifier
+E1129;la mode;fashion;4.82;nom;A2;freq;existante
+E1130;performance / prestation / figurer;feature;4.82;nom;A2;freq;apertium_a_verifier
+E1131;fond / financer;fund;4.82;nom;A2;freq;apertium_a_verifier
+E1132;generation / génération;generation;4.82;nom;A2;freq;apertium_a_verifier
+E1133;vue;hearing;4.82;nom;A2;freq;apertium_a_verifier
+E1134;la colline;hill;4.82;nom;A2;freq;existante
+E1135;jack;jack;4.82;mot-outil;A2;freq;apertium_a_verifier
+E1136;louis;louis;4.82;mot-outil;A2;freq;apertium_a_verifier
+E1137;le métal;metal;4.82;nom;A2;freq;existante
+E1138;paris;paris;4.82;mot-outil;A2;freq;apertium_a_verifier
+E1139;profil;profile;4.82;nom;A2;freq;apertium_a_verifier
+E1140;attraction / raidir;pull;4.82;nom;A2;freq;apertium_a_verifier
+E1141;élan / pousser / appuyersur;push;4.82;nom;A2;freq;apertium_a_verifier
+E1142;rose / rosace;rose;4.82;nom;A2;freq;apertium_a_verifier
+E1143;le siège;seat;4.82;nom;A2;freq;existante
+E1144;sexuel;sexual;4.82;adjectif;A2;freq;apertium_a_verifier
+E1145;blanc / but / cible;target;4.82;nom;A2;freq;apertium_a_verifier
+E1146;compréhension / entendement;understanding;4.82;nom;A2;freq;apertium_a_verifier
+E1147;le village;village;4.82;nom;A2;freq;existante
+E1148;agent;agent;4.81;nom;A2;freq;apertium_a_verifier
+E1149;l'animal;animal;4.81;nom;A2;freq;existante
+E1150;appliquer;apply;4.81;verbe;A2;freq;apertium_a_verifier
+E1151;autorité;authority;4.81;nom;A2;freq;apertium_a_verifier
+E1152;base;basis;4.81;nom;A2;freq;apertium_a_verifier
+E1153;chris;chris;4.81;mot-outil;A2;freq;apertium_a_verifier
+E1154;tirageausort / dessiner / appâter;draw;4.81;nom;A2;freq;apertium_a_verifier
+E1155;introduire / comptabiliser;enter;4.81;verbe;A2;freq;apertium_a_verifier
+E1156;fondation / fondement;foundation;4.81;nom;A2;freq;apertium_a_verifier
+E1157;bénéfice / gain / obtenir;gain;4.81;nom;A2;freq;apertium_a_verifier
+E1158;http;http;4.81;nom;A2;freq;apertium_a_verifier
+E1159;japonais;japanese;4.81;nom;A2;freq;apertium_a_verifier
+E1160;la mémoire;memory;4.81;nom;A2;freq;existante
+E1161;premier / préparer;prime;4.81;adjectif;A2;freq;apertium_a_verifier
+E1162;la bague;ring;4.81;nom;A2;freq;existante
+E1163;augmentation / montée / augmenter;rise;4.81;nom;A2;freq;apertium_a_verifier
+E1164;l'argent (matière);silver;4.81;nom;A2;freq;existante
+E1165;l'âme;soul;4.81;nom;A2;freq;existante
+E1166;divulguer / étendre;spread;4.81;verbe;A2;freq;apertium_a_verifier
+E1167;fourniture / distribuer;supply;4.81;nom;A2;freq;apertium_a_verifier
+E1168;le déchet;waste;4.81;nom;A2;freq;existante
+E1169;bizarre;weird;4.81;adjectif;A2;freq;apertium_a_verifier
+E1170;adulte;adult;4.80;nom;A2;freq;apertium_a_verifier
+E1171;apparemment;apparently;4.80;adverbe;A2;freq;apertium_a_verifier
+E1172;l'artiste;artist;4.80;nom;A2;freq;existante
+E1173;président;chairman;4.80;nom;A2;freq;apertium_a_verifier
+E1174;édition;edition;4.80;nom;A2;freq;apertium_a_verifier
+E1175;ingénierie;engineering;4.80;nom;A2;freq;apertium_a_verifier
+E1176;la note (école);grade;4.80;nom;A2;freq;existante
+E1177;sain;healthy;4.80;adjectif;A2;freq;apertium_a_verifier
+E1178;institut;institute;4.80;nom;A2;freq;apertium_a_verifier
+E1179;la méthode;method;4.80;nom;A2;freq;existante
+E1180;mike;mike;4.80;mot-outil;A2;freq;apertium_a_verifier
+E1181;lundi;monday;4.80;nom;A2;freq;apertium_a_verifier
+E1182;évidemment;obviously;4.80;adverbe;A2;freq;apertium_a_verifier
+E1183;option;option;4.80;nom;A2;freq;apertium_a_verifier
+E1184;la prison;prison;4.80;nom;A2;freq;existante
+E1185;reste;remains;4.80;nom;A2;freq;apertium_a_verifier
+E1186;sénat;senate;4.80;nom;A2;freq;apertium_a_verifier
+E1187;quelqu'un;somebody;4.80;mot-outil;A2;freq;apertium_a_verifier
+E1188;la pierre;stone;4.80;nom;A2;freq;existante
+E1189;la force;strength;4.80;nom;A2;freq;existante
+E1190;sauvage;wild;4.80;adjectif;A2;freq;apertium_a_verifier
+E1191;la fenêtre;window;4.80;nom;A2;freq;existante
+E1192;gagnant;winner;4.80;nom;A2;freq;apertium_a_verifier
+E1193;le sac;bag;4.79;nom;A2;freq;existante
+E1194;gageure / pari / miser;bet;4.79;nom;A2;freq;apertium_a_verifier
+E1195;camper;camp;4.79;verbe;A2;freq;apertium_a_verifier
+E1196;moule / répartition / jeter;cast;4.79;nom;A2;freq;apertium_a_verifier
+E1197;correct / corriger / rectifier;correct;4.79;adjectif;A2;freq;apertium_a_verifier
+E1198;dangereux / périlleux;dangerous;4.79;adjectif;A2;freq;apertium_a_verifier
+E1199;extrêmement;extremely;4.79;adverbe;A2;freq;apertium_a_verifier
+E1200;entreprise / ferme;firm;4.79;nom;A2;freq;apertium_a_verifier
+E1201;manche / manier / ménager;handle;4.79;nom;A2;freq;apertium_a_verifier
+E1202;améliorer / bonifier;improve;4.79;verbe;A2;freq;apertium_a_verifier
+E1203;enfait;indeed;4.79;adverbe;A2;freq;apertium_a_verifier
+E1204;le cinéma;movies;4.79;nom;A2;freq;existante
+E1205;négatif;negative;4.79;adjectif;A2;freq;apertium_a_verifier
+E1206;empêcher / prévenir;prevent;4.79;verbe;A2;freq;apertium_a_verifier
+E1207;richard;richard;4.79;mot-outil;A2;freq;apertium_a_verifier
+E1208;l'esprit;spirit;4.79;nom;A2;freq;existante
+E1209;la télévision;television;4.79;nom;A2;freq;existante
+E1210;problème;trouble;4.79;nom;A2;freq;apertium_a_verifier
+E1211;ee.uu.;usa;4.79;mot-outil;A2;freq;apertium_a_verifier
+E1212;avantage;advantage;4.78;nom;A2;freq;apertium_a_verifier
+E1213;àpart;apart;4.78;adverbe;A2;freq;apertium_a_verifier
+E1214;conscient;aware;4.78;adjectif;A2;freq;apertium_a_verifier
+E1215;le chat;cat;4.78;nom;A2;freq;existante
+E1216;statuer / décider;decide;4.78;verbe;A2;freq;apertium_a_verifier
+E1217;dîner / souper;dinner;4.78;nom;A2;freq;apertium_a_verifier
+E1218;oriental;eastern;4.78;adjectif;A2;freq;apertium_a_verifier
+E1219;fonction / fonctionner;function;4.78;nom;A2;freq;apertium_a_verifier
+E1220;le cadeau;gift;4.78;nom;A2;freq;existante
+E1221;impossible;impossible;4.78;adjectif;A2;freq;apertium_a_verifier
+E1222;influence / influencer / influer;influence;4.78;nom;A2;freq;apertium_a_verifier
+E1223;joe;joe;4.78;mot-outil;A2;freq;apertium_a_verifier
+E1224;marketing / mercatique;marketing;4.78;nom;A2;freq;apertium_a_verifier
+E1225;mary;mary;4.78;mot-outil;A2;freq;apertium_a_verifier
+E1226;ni;nor;4.78;mot-outil;A2;freq;apertium_a_verifier
+E1227;produit / produire;produce;4.78;nom;A2;freq;apertium_a_verifier
+E1228;le progrès;progress;4.78;nom;A2;freq;existante
+E1229;fier / orgueilleux;proud;4.78;adjectif;A2;freq;apertium_a_verifier
+E1230;requérir;require;4.78;verbe;A2;freq;apertium_a_verifier
+E1231;exécution / fusillade;shooting;4.78;nom;A2;freq;apertium_a_verifier
+E1232;renfermer / enfermer / fermer;shut;4.78;verbe;A2;freq;apertium_a_verifier
+E1233;fourgonnette / fourgon;van;4.78;nom;A2;freq;apertium_a_verifier
+E1234;le bois;wood;4.78;nom;A2;freq;existante
+E1235;fond;background;4.77;nom;A2;freq;apertium_a_verifier
+E1236;la naissance;birth;4.77;nom;A2;freq;existante
+E1237;le pont;bridge;4.77;nom;A2;freq;existante
+E1238;charles;charles;4.77;mot-outil;A2;freq;apertium_a_verifier
+E1239;le concept;concept;4.77;nom;A2;freq;existante
+E1240;exemplaire / copie / recopiage;copy;4.77;nom;A2;freq;apertium_a_verifier
+E1241;le jardin;garden;4.77;nom;A2;freq;existante
+E1242;amphitryon;host;4.77;adjectif;A2;freq;apertium_a_verifier
+E1243;le logement;housing;4.77;nom;A2;freq;existante
+E1244;israël;israel;4.77;mot-outil;A2;freq;apertium_a_verifier
+E1245;revue;journal;4.77;nom;A2;freq;apertium_a_verifier
+E1246;le travail;labor;4.77;verbe;A2;freq;existante
+E1247;leadership;leadership;4.77;nom;A2;freq;apertium_a_verifier
+E1248;durée / longitude / long;length;4.77;nom;A2;freq;apertium_a_verifier
+E1249;fortuné;lucky;4.77;adjectif;A2;freq;apertium_a_verifier
+E1250;ni / nonplus;neither;4.77;mot-outil;A2;freq;apertium_a_verifier
+E1251;à;onto;4.77;mot-outil;A2;freq;apertium_a_verifier
+E1252;le patient;patient;4.77;nom;A2;freq;existante
+E1253;vraisemblablement / éventuellement;possibly;4.77;adverbe;A2;freq;apertium_a_verifier
+E1254;essayer;prove;4.77;verbe;A2;freq;apertium_a_verifier
+E1255;rare;rare;4.77;adjectif;A2;freq;apertium_a_verifier
+E1256;reboutage;setting;4.77;nom;A2;freq;apertium_a_verifier
+E1257;le logiciel;software;4.77;nom;A2;freq;existante
+E1258;dur;tough;4.77;adjectif;A2;freq;apertium_a_verifier
+E1259;la publicité;ad;4.76;nom;A2;freq;existante
+E1260;vif;alive;4.76;adjectif;A2;freq;apertium_a_verifier
+E1261;pomme / apple;apple;4.76;nom;A2;freq;apertium_a_verifier
+E1262;bilan / équilibre / solde;balance;4.76;nom;A2;freq;apertium_a_verifier
+E1263;anniversaire;birthday;4.76;nom;A2;freq;apertium_a_verifier
+E1264;le patron;boss;4.76;nom;A2;freq;existante
+E1265;la connexion;connection;4.76;nom;A2;freq;existante
+E1266;la robe;dress;4.76;nom;A2;freq;existante
+E1267;partenaire / gaillard / ami;fellow;4.76;nom;A2;freq;apertium_a_verifier
+E1268;floride;florida;4.76;mot-outil;A2;freq;apertium_a_verifier
+E1269;le cheval;horse;4.76;nom;A2;freq;existante
+E1270;magie / magique;magic;4.76;nom;A2;freq;apertium_a_verifier
+E1271;la carte (géo);map;4.76;nom;A2;freq;existante
+E1272;filet / réseau / net;net;4.76;nom;A2;freq;apertium_a_verifier
+E1273;demande / pétition / requête;request;4.76;nom;A2;freq;apertium_a_verifier
+E1274;bâton / poteau / stick;stick;4.76;nom;A2;freq;apertium_a_verifier
+E1275;véhicule;vehicle;4.76;nom;A2;freq;apertium_a_verifier
+E1276;le volume;volume;4.76;nom;A2;freq;existante
+E1277;réveiller;wake;4.76;verbe;A2;freq;apertium_a_verifier
+E1278;l'aide;aid;4.75;nom;A2;freq;existante
+E1279;la beauté;beauty;4.75;nom;A2;freq;existante
+E1280;la conversation;conversation;4.75;nom;A2;freq;existante
+E1281;le coin;corner;4.75;nom;A2;freq;existante
+E1282;culturel;cultural;4.75;adjectif;A2;freq;apertium_a_verifier
+E1283;développer / dérouler;develop;4.75;verbe;A2;freq;apertium_a_verifier
+E1284;roulier / conducteur;driver;4.75;nom;A2;freq;apertium_a_verifier
+E1285;la ferme;farm;4.75;nom;A2;freq;existante
+E1286;le fichier;file;4.75;nom;A2;freq;existante
+E1287;arranger / apposer / fixer;fix;4.75;verbe;A2;freq;apertium_a_verifier
+E1288;mouche / envoler / voler;fly;4.75;nom;A2;freq;apertium_a_verifier
+E1289;frank / franc;frank;4.75;mot-outil;A2;freq;apertium_a_verifier
+E1290;le guide;guide;4.75;nom;A2;freq;existante
+E1291;investigation / recherche;investigation;4.75;nom;A2;freq;apertium_a_verifier
+E1292;mexique;mexico;4.75;mot-outil;A2;freq;apertium_a_verifier
+E1293;opérationnel;operating;4.75;adjectif;A2;freq;apertium_a_verifier
+E1294;augmenter / dresser / relever;raise;4.75;verbe;A2;freq;apertium_a_verifier
+E1295;la responsabilité;responsibility;4.75;nom;A2;freq;existante
+E1296;cercle / rouleau / rouler;roll;4.75;nom;A2;freq;apertium_a_verifier
+E1297;légèrement;slightly;4.75;adverbe;A2;freq;apertium_a_verifier
+E1298;suggérer;suggest;4.75;verbe;A2;freq;apertium_a_verifier
+E1299;surprise / étonner / éberluer;surprise;4.75;nom;A2;freq;apertium_a_verifier
+E1300;technique;technical;4.75;adjectif;A2;freq;apertium_a_verifier
+E1301;traiter / tâcher / agir;treat;4.75;verbe;A2;freq;apertium_a_verifier
+E1302;unique;unique;4.75;adjectif;A2;freq;apertium_a_verifier
+E1303;variété;variety;4.75;nom;A2;freq;apertium_a_verifier
+E1304;violence;violence;4.75;nom;A2;freq;apertium_a_verifier
+E1305;àtoi / àvous;yours;4.75;adjectif;A2;freq;apertium_a_verifier
+E1306;jeunesse;youth;4.75;nom;A2;freq;apertium_a_verifier
+E1307;apprécier / estimer / remercier;appreciate;4.74;verbe;A2;freq;apertium_a_verifier
+E1308;sec / sécher;dry;4.74;adjectif;A2;freq;apertium_a_verifier
+E1309;bord / chant;edge;4.74;nom;A2;freq;apertium_a_verifier
+E1310;mal;evil;4.74;nom;A2;freq;apertium_a_verifier
+E1311;henry;henry;4.74;mot-outil;A2;freq;apertium_a_verifier
+E1312;dommage / lésion;injury;4.74;nom;A2;freq;apertium_a_verifier
+E1313;le fer;iron;4.74;nom;A2;freq;existante
+E1314;précieux;lovely;4.74;adjectif;A2;freq;apertium_a_verifier
+E1315;fou;mad;4.74;adjectif;A2;freq;apertium_a_verifier
+E1316;le magazine;magazine;4.74;nom;A2;freq;existante
+E1317;martin;martin;4.74;mot-outil;A2;freq;apertium_a_verifier
+E1318;parlement;parliament;4.74;nom;A2;freq;apertium_a_verifier
+E1319;référence;reference;4.74;nom;A2;freq;apertium_a_verifier
+E1320;la religion;religion;4.74;nom;A2;freq;existante
+E1321;stratégie;strategy;4.74;nom;A2;freq;apertium_a_verifier
+E1322;web;web;4.74;nom;A2;freq;apertium_a_verifier
+E1323;vin;wine;4.74;nom;A2;freq;apertium_a_verifier
+E1324;le bras;arm;4.73;nom;A2;freq;existante
+E1325;le public;audience;4.73;nom;A2;freq;existante
+E1326;baie / laurier;bay;4.73;nom;A2;freq;apertium_a_verifier
+E1327;blog;blog;4.73;nom;A2;freq;apertium_a_verifier
+E1328;noyau;core;4.73;nom;A2;freq;apertium_a_verifier
+E1329;démocratique;democratic;4.73;adjectif;A2;freq;apertium_a_verifier
+E1330;description / signalement;description;4.73;nom;A2;freq;apertium_a_verifier
+E1331;excellent;excellent;4.73;adjectif;A2;freq;apertium_a_verifier
+E1332;exister / subsister;exist;4.73;verbe;A2;freq;apertium_a_verifier
+E1333;garde / gardien;guard;4.73;nom;A2;freq;apertium_a_verifier
+E1334;sincère;honest;4.73;adjectif;A2;freq;apertium_a_verifier
+E1335;jones;jones;4.73;mot-outil;A2;freq;apertium_a_verifier
+E1336;lee;lee;4.73;mot-outil;A2;freq;apertium_a_verifier
+E1337;le médicament;medicine;4.73;nom;A2;freq;existante
+E1338;mentionner;mention;4.73;verbe;A2;freq;apertium_a_verifier
+E1339;la montagne;mountain;4.73;nom;A2;freq;existante
+E1340;nucléaire;nuclear;4.73;adjectif;A2;freq;apertium_a_verifier
+E1341;le port;port;4.73;nom;A2;freq;existante
+E1342;présence;presence;4.73;nom;A2;freq;apertium_a_verifier
+E1343;réaction;reaction;4.73;nom;A2;freq;apertium_a_verifier
+E1344;réduire;reduce;4.73;verbe;A2;freq;apertium_a_verifier
+E1345;pousse / rejeton / tirersur;shoot;4.73;nom;A2;freq;apertium_a_verifier
+E1346;le solide;solid;4.73;adjectif;A2;freq;existante
+E1347;castillan / espagnol;spanish;4.73;adjectif;A2;freq;apertium_a_verifier
+E1348;le sport;sport;4.73;nom;A2;freq;existante
+E1349;accent / tension / stress;stress;4.73;nom;A2;freq;apertium_a_verifier
+E1350;le goût;taste;4.73;nom;A2;freq;existante
+E1351;le thé;tea;4.73;nom;A2;freq;existante
+E1352;la victoire;victory;4.73;nom;A2;freq;existante
+E1353;l'après-midi;afternoon;4.72;nom;A2;freq;existante
+E1354;assistant;assistant;4.72;nom;A2;freq;apertium_a_verifier
+E1355;grande-bretagne;britain;4.72;mot-outil;A2;freq;apertium_a_verifier
+E1356;le vêtement;clothes;4.72;nom;A2;freq;existante
+E1357;émergence;emergency;4.72;nom;A2;freq;apertium_a_verifier
+E1358;complètement / entoutpoint / entièrement;entirely;4.72;adverbe;A2;freq;apertium_a_verifier
+E1359;l'échec;failure;4.72;nom;A2;freq;existante
+E1360;festival;festival;4.72;nom;A2;freq;apertium_a_verifier
+E1361;appartement / plat;flat;4.72;nom;A2;freq;apertium_a_verifier
+E1362;le carburant;fuel;4.72;nom;A2;freq;existante
+E1363;harry;harry;4.72;mot-outil;A2;freq;apertium_a_verifier
+E1364;salut;hello;4.72;mot-outil;A2;freq;apertium_a_verifier
+E1365;malade;ill;4.72;adjectif;A2;freq;apertium_a_verifier
+E1366;initial;initial;4.72;adjectif;A2;freq;apertium_a_verifier
+E1367;johnson;johnson;4.72;mot-outil;A2;freq;apertium_a_verifier
+E1368;le courrier;mail;4.72;nom;A2;freq;existante
+E1369;massif;massive;4.72;adjectif;A2;freq;apertium_a_verifier
+E1370;paire;pair;4.72;nom;A2;freq;apertium_a_verifier
+E1371;avion / plan;plane;4.72;nom;A2;freq;apertium_a_verifier
+E1372;abondance;plenty;4.72;nom;A2;freq;apertium_a_verifier
+E1373;prince;prince;4.72;nom;A2;freq;apertium_a_verifier
+E1374;approprié;proper;4.72;adjectif;A2;freq;apertium_a_verifier
+E1375;le quart;quarter;4.72;nom;A2;freq;existante
+E1376;régional;regional;4.72;adjectif;A2;freq;apertium_a_verifier
+E1377;scott;scott;4.72;mot-outil;A2;freq;apertium_a_verifier
+E1378;la séance;session;4.72;nom;A2;freq;existante
+E1379;la forme;shape;4.72;nom;A2;freq;existante
+E1380;le ciel;sky;4.72;nom;A2;freq;existante
+E1381;enseignement;teaching;4.72;nom;A2;freq;apertium_a_verifier
+E1382;déplacement / transfert / virement;transfer;4.72;nom;A2;freq;apertium_a_verifier
+E1383;supérieur;upper;4.72;adjectif;A2;freq;apertium_a_verifier
+E1384;utile;useful;4.72;adjectif;A2;freq;apertium_a_verifier
+E1385;la vallée;valley;4.72;nom;A2;freq;existante
+E1386;zone / qualifier;zone;4.72;nom;A2;freq;apertium_a_verifier
+E1387;accident;accident;4.71;nom;A2;freq;apertium_a_verifier
+E1388;alternative / alternatif;alternative;4.71;nom;A2;freq;apertium_a_verifier
+E1389;ours / résister;bear;4.71;nom;A2;freq;apertium_a_verifier
+E1390;le bateau;boat;4.71;nom;A2;freq;existante
+E1391;capacité / contenance;capacity;4.71;nom;A2;freq;apertium_a_verifier
+E1392;bonmarché;cheap;4.71;adjectif;A2;freq;apertium_a_verifier
+E1393;le climat;climate;4.71;nom;A2;freq;existante
+E1394;la discussion;discussion;4.71;nom;A2;freq;existante
+E1395;le devoir;duty;4.71;nom;A2;freq;existante
+E1396;fantastique;fantastic;4.71;adjectif;A2;freq;apertium_a_verifier
+E1397;vol;flying;4.71;nom;A2;freq;apertium_a_verifier
+E1398;gouverneur;governor;4.71;nom;A2;freq;apertium_a_verifier
+E1399;centaine;hundred;4.71;nom;A2;freq;apertium_a_verifier
+E1400;industriel;industrial;4.71;adjectif;A2;freq;apertium_a_verifier
+E1401;articulation / junte / joindre;joint;4.71;nom;A2;freq;apertium_a_verifier
+E1402;mélange / mélanger / mêler;mix;4.71;nom;A2;freq;apertium_a_verifier
+E1403;le musée;museum;4.71;nom;A2;freq;existante
+E1404;le chemin;path;4.71;nom;A2;freq;existante
+E1405;promesse / promettre;promise;4.71;nom;A2;freq;apertium_a_verifier
+E1406;l'achat;purchase;4.71;nom;A2;freq;existante
+E1407;la pluie;rain;4.71;nom;A2;freq;existante
+E1408;enlever / retirer / éloigner;remove;4.71;verbe;A2;freq;apertium_a_verifier
+E1409;la dépense;spending;4.71;nom;A2;freq;existante
+E1410;acier;steel;4.71;nom;A2;freq;apertium_a_verifier
+E1411;steve;steve;4.71;mot-outil;A2;freq;apertium_a_verifier
+E1412;terrible;terrible;4.71;adjectif;A2;freq;apertium_a_verifier
+E1413;vice;vice;4.71;nom;A2;freq;apertium_a_verifier
+E1414;animer / échauffer;warm;4.71;verbe;A2;freq;apertium_a_verifier
+E1415;bière;beer;4.70;nom;A2;freq;apertium_a_verifier
+E1416;bord / frontière / frontalier;border;4.70;nom;A2;freq;apertium_a_verifier
+E1417;canadien;canadian;4.70;adjectif;A2;freq;apertium_a_verifier
+E1418;domination / maîtrise / mandat;command;4.70;nom;A2;freq;apertium_a_verifier
+E1419;équipage;crew;4.70;nom;A2;freq;apertium_a_verifier
+E1420;la foule;crowd;4.70;nom;A2;freq;existante
+E1421;datation;dating;4.70;nom;A2;freq;apertium_a_verifier
+E1422;ennemi;enemy;4.70;nom;A2;freq;apertium_a_verifier
+E1423;assurer;ensure;4.70;verbe;A2;freq;apertium_a_verifier
+E1424;environnemental;environmental;4.70;adjectif;A2;freq;apertium_a_verifier
+E1425;fixe;fixed;4.70;adjectif;A2;freq;apertium_a_verifier
+E1426;la forêt;forest;4.70;nom;A2;freq;existante
+E1427;l'intelligence;intelligence;4.70;nom;A2;freq;existante
+E1428;travail / detravail;labour;4.70;nom;A2;freq;apertium_a_verifier
+E1429;la limite;limit;4.70;nom;A2;freq;existante
+E1430;la lune;moon;4.70;nom;A2;freq;existante
+E1431;l'océan;ocean;4.70;nom;A2;freq;existante
+E1432;le bénéfice;profit;4.70;nom;A2;freq;existante
+E1433;la preuve;proof;4.70;nom;A2;freq;existante
+E1434;républicain;republican;4.70;adjectif;A2;freq;apertium_a_verifier
+E1435;robe / procès;suit;4.70;nom;A2;freq;apertium_a_verifier
+E1436;l'apparence;appearance;4.69;nom;A2;freq;existante
+E1437;asiatique;asian;4.69;adjectif;A2;freq;apertium_a_verifier
+E1438;avocat;attorney;4.69;nom;A2;freq;apertium_a_verifier
+E1439;le comportement;behavior;4.69;nom;A2;freq;existante
+E1440;ben;ben;4.69;mot-outil;A2;freq;apertium_a_verifier
+E1441;la chaise;chair;4.69;nom;A2;freq;existante
+E1442;dette;debt;4.69;nom;A2;freq;apertium_a_verifier
+E1443;domestique;domestic;4.69;adjectif;A2;freq;apertium_a_verifier
+E1444;cher;expensive;4.69;adjectif;A2;freq;apertium_a_verifier
+E1445;historique;historical;4.69;adjectif;A2;freq;apertium_a_verifier
+E1446;honnêtement;honestly;4.69;adverbe;A2;freq;apertium_a_verifier
+E1447;l'honneur;honor;4.69;nom;A2;freq;existante
+E1448;saut / sauter;jump;4.69;nom;A2;freq;apertium_a_verifier
+E1449;lancement / lancer / jeter;launch;4.69;nom;A2;freq;apertium_a_verifier
+E1450;minimum / minime / minimal;minimum;4.69;nom;A2;freq;apertium_a_verifier
+E1451;indigène / natif;native;4.69;nom;A2;freq;apertium_a_verifier
+E1452;rai / rayon / ray;ray;4.69;nom;A2;freq;apertium_a_verifier
+E1453;subitement;suddenly;4.69;adverbe;A2;freq;apertium_a_verifier
+E1454;suprême;supreme;4.69;adjectif;A2;freq;apertium_a_verifier
+E1455;enquête;survey;4.69;nom;A2;freq;apertium_a_verifier
+E1456;actualisation / actualiser / mettreàjour;update;4.69;nom;A2;freq;apertium_a_verifier
+E1457;utilisateur;user;4.69;nom;A2;freq;apertium_a_verifier
+E1458;écrivain;writer;4.69;nom;A2;freq;apertium_a_verifier
+E1459;le jaune;yellow;4.69;adjectif;A2;freq;existante
+E1460;antique / ancien;ancient;4.68;adjectif;A2;freq;apertium_a_verifier
+E1461;la communication;communication;4.68;nom;A2;freq;existante
+E1462;téléchargement / décharger / télécharger;download;4.68;nom;A2;freq;apertium_a_verifier
+E1463;fin;ending;4.68;nom;A2;freq;apertium_a_verifier
+E1464;l'exercice;exercise;4.68;nom;A2;freq;existante
+E1465;exprimer / répandre;express;4.68;verbe;A2;freq;apertium_a_verifier
+E1466;flux;flow;4.68;nom;A2;freq;apertium_a_verifier
+E1467;fiancé;girlfriend;4.68;nom;A2;freq;apertium_a_verifier
+E1468;héros;hero;4.68;nom;A2;freq;apertium_a_verifier
+E1469;illégal;illegal;4.68;adjectif;A2;freq;apertium_a_verifier
+E1470;croissant / grandissant;increasing;4.68;adjectif;A2;freq;apertium_a_verifier
+E1471;blague / blaguer / plaisanter;joke;4.68;nom;A2;freq;apertium_a_verifier
+E1472;prêt / prêter;loan;4.68;nom;A2;freq;apertium_a_verifier
+E1473;la planète;planet;4.68;nom;A2;freq;existante
+E1474;le restaurant;restaurant;4.68;nom;A2;freq;existante
+E1475;écosse;scotland;4.68;mot-outil;A2;freq;apertium_a_verifier
+E1476;achat / emplette;shopping;4.68;nom;A2;freq;apertium_a_verifier
+E1477;doux;soft;4.68;adjectif;A2;freq;apertium_a_verifier
+E1478;le sucre;sugar;4.68;nom;A2;freq;existante
+E1479;le transport;transport;4.68;nom;A2;freq;existante
+E1480;attrait / appellation / sollicitude;appeal;4.67;nom;A2;freq;apertium_a_verifier
+E1481;approprié / approprier;appropriate;4.67;adjectif;A2;freq;apertium_a_verifier
+E1482;boston;boston;4.67;mot-outil;A2;freq;apertium_a_verifier
+E1483;l'appareil;device;4.67;nom;A2;freq;existante
+E1484;théâtre / drame / oeuvre;drama;4.67;nom;A2;freq;apertium_a_verifier
+E1485;entrée / dépôt / revenu;entry;4.67;nom;A2;freq;apertium_a_verifier
+E1486;l'époque;era;4.67;nom;A2;freq;existante
+E1487;facteur;factor;4.67;nom;A2;freq;apertium_a_verifier
+E1488;nourrir / alimenter;feed;4.67;verbe;A2;freq;apertium_a_verifier
+E1489;bourse / subvention / octroi;grant;4.67;nom;A2;freq;apertium_a_verifier
+E1490;l'avocat;lawyer;4.67;nom;A2;freq;existante
+E1491;incorrection;mistake;4.67;nom;A2;freq;apertium_a_verifier
+E1492;musulman;muslim;4.67;nom;A2;freq;apertium_a_verifier
+E1493;plate-forme / quai / estrade;platform;4.67;nom;A2;freq;apertium_a_verifier
+E1494;groupe / piscine;pool;4.67;nom;A2;freq;apertium_a_verifier
+E1495;parrapportà / pourcequiestde / quantà;regarding;4.67;mot-outil;A2;freq;apertium_a_verifier
+E1496;route / trajet / parcours;route;4.67;nom;A2;freq;apertium_a_verifier
+E1497;horaire / programme / planifier;schedule;4.67;nom;A2;freq;apertium_a_verifier
+E1498;scientifique;scientific;4.67;adjectif;A2;freq;apertium_a_verifier
+E1499;la fumée;smoke;4.67;nom;A2;freq;existante
+E1500;enseigner;teach;4.67;verbe;A2;freq;apertium_a_verifier
+E1501;williams;williams;4.67;mot-outil;A2;freq;apertium_a_verifier
+E1502;abus;abuse;4.66;nom;A2;freq;apertium_a_verifier
+E1503;candidat;candidate;4.66;nom;A2;freq;apertium_a_verifier
+E1504;confortable;comfortable;4.66;adjectif;A2;freq;apertium_a_verifier
+E1505;préoccupation / préoccuper / tracasser;concern;4.66;nom;A2;freq;apertium_a_verifier
+E1506;parler;discuss;4.66;verbe;A2;freq;apertium_a_verifier
+E1507;émotionnel;emotional;4.66;adjectif;A2;freq;apertium_a_verifier
+E1508;partout / partoutdanslemonde;everywhere;4.66;adverbe;A2;freq;apertium_a_verifier
+E1509;renard;fox;4.66;nom;A2;freq;apertium_a_verifier
+E1510;le trou;hole;4.66;nom;A2;freq;existante
+E1511;jourférié / vacance / vacances;holiday;4.66;nom;A2;freq;apertium_a_verifier
+E1512;interne;internal;4.66;adjectif;A2;freq;apertium_a_verifier
+E1513;irlande;ireland;4.66;mot-outil;A2;freq;apertium_a_verifier
+E1514;italien;italian;4.66;nom;A2;freq;apertium_a_verifier
+E1515;italie;italy;4.66;mot-outil;A2;freq;apertium_a_verifier
+E1516;sweater / jersey;jersey;4.66;nom;A2;freq;apertium_a_verifier
+E1517;rire / rigolade;laugh;4.66;nom;A2;freq;apertium_a_verifier
+E1518;la jambe;leg;4.66;nom;A2;freq;existante
+E1519;libéral;liberal;4.66;adjectif;A2;freq;apertium_a_verifier
+E1520;déjeuner / repas / manger;lunch;4.66;nom;A2;freq;apertium_a_verifier
+E1521;max;max;4.66;mot-outil;A2;freq;apertium_a_verifier
+E1522;le lait;milk;4.66;nom;A2;freq;existante
+E1523;paquet / pack / colis;pack;4.66;nom;A2;freq;apertium_a_verifier
+E1524;paiement / payement;payment;4.66;nom;A2;freq;apertium_a_verifier
+E1525;agir / jouer;perform;4.66;verbe;A2;freq;apertium_a_verifier
+E1526;relativement;relatively;4.66;adverbe;A2;freq;apertium_a_verifier
+E1527;secteur;sector;4.66;nom;A2;freq;apertium_a_verifier
+E1528;la neige;snow;4.66;nom;A2;freq;existante
+E1529;l'orage;storm;4.66;nom;A2;freq;existante
+E1530;grève / attaquer / frapper;strike;4.66;nom;A2;freq;apertium_a_verifier
+E1531;étude;studio;4.66;nom;A2;freq;apertium_a_verifier
+E1532;faible;weak;4.66;adjectif;A2;freq;apertium_a_verifier
+E1533;l'acteur;actor;4.65;nom;A2;freq;existante
+E1534;l'avance;advance;4.65;nom;A2;freq;existante
+E1535;l'appartement;apartment;4.65;nom;A2;freq;existante
+E1536;asie;asia;4.65;mot-outil;A2;freq;apertium_a_verifier
+E1537;chaîne / enchaîner;chain;4.65;nom;A2;freq;apertium_a_verifier
+E1538;chapitre;chapter;4.65;nom;A2;freq;apertium_a_verifier
+E1539;la confiance;confidence;4.65;nom;A2;freq;existante
+E1540;cuisinier / cuisiner;cook;4.65;nom;A2;freq;apertium_a_verifier
+E1541;égal / égaliser / équivaloir;equal;4.65;adjectif;A2;freq;apertium_a_verifier
+E1542;contrefaçon / falsification;fake;4.65;nom;A2;freq;apertium_a_verifier
+E1543;finance / financer;finance;4.65;nom;A2;freq;apertium_a_verifier
+E1544;identité;identity;4.65;nom;A2;freq;apertium_a_verifier
+E1545;le voyage;journey;4.65;nom;A2;freq;existante
+E1546;la cuisine;kitchen;4.65;nom;A2;freq;existante
+E1547;corée;korea;4.65;mot-outil;A2;freq;apertium_a_verifier
+E1548;maintenir / tenir / entretenir;maintain;4.65;verbe;A2;freq;apertium_a_verifier
+E1549;la mesure;measure;4.65;nom;A2;freq;existante
+E1550;nombreux;numerous;4.65;adjectif;A2;freq;apertium_a_verifier
+E1551;tranquille;quiet;4.65;adjectif;A2;freq;apertium_a_verifier
+E1552;concrètement / spécifiquement;specifically;4.65;adverbe;A2;freq;apertium_a_verifier
+E1553;rupture / partir / scinder;split;4.65;nom;A2;freq;apertium_a_verifier
+E1554;tâche;task;4.65;nom;A2;freq;apertium_a_verifier
+E1555;taylor;taylor;4.65;mot-outil;A2;freq;apertium_a_verifier
+E1556;vingtaine;twenty;4.65;nom;A2;freq;apertium_a_verifier
+E1557;urbain;urban;4.65;adjectif;A2;freq;apertium_a_verifier
+E1558;aéronef;aircraft;4.64;nom;A2;freq;apertium_a_verifier
+E1559;approximativement / environ;approximately;4.64;adverbe;A2;freq;apertium_a_verifier
+E1560;argument / discussion;argument;4.64;nom;A2;freq;apertium_a_verifier
+E1561;le conflit;conflict;4.64;nom;A2;freq;existante
+E1562;corporatif;corporate;4.64;adjectif;A2;freq;apertium_a_verifier
+E1563;le débat;debate;4.64;nom;A2;freq;existante
+E1564;allant / aménagement / disposition;distribution;4.64;nom;A2;freq;apertium_a_verifier
+E1565;fuir / échapper / enfuir;escape;4.64;verbe;A2;freq;apertium_a_verifier
+E1566;faute / tort;fault;4.64;nom;A2;freq;apertium_a_verifier
+E1567;farcir / remplir;fill;4.64;verbe;A2;freq;apertium_a_verifier
+E1568;amical;friendly;4.64;adjectif;A2;freq;apertium_a_verifier
+E1569;mettre;lay;4.64;verbe;A2;freq;apertium_a_verifier
+E1570;mixte;mixed;4.64;adjectif;A2;freq;apertium_a_verifier
+E1571;phase;phase;4.64;nom;A2;freq;apertium_a_verifier
+E1572;adéquatement / correctement / dûment;properly;4.64;adverbe;A2;freq;apertium_a_verifier
+E1573;pur;pure;4.64;adjectif;A2;freq;apertium_a_verifier
+E1574;revenu;revenue;4.64;nom;A2;freq;apertium_a_verifier
+E1575;sam;sam;4.64;mot-outil;A2;freq;apertium_a_verifier
+E1576;sûr / assurer;secure;4.64;adjectif;A2;freq;apertium_a_verifier
+E1577;sourire / dérider;smile;4.64;nom;A2;freq;apertium_a_verifier
+E1578;bizarre;strange;4.64;adjectif;A2;freq;apertium_a_verifier
+E1579;talent;talent;4.64;nom;A2;freq;apertium_a_verifier
+E1580;la température;temperature;4.64;nom;A2;freq;existante
+E1581;mil / millier;thousand;4.64;mot-outil;A2;freq;apertium_a_verifier
+E1582;tony;tony;4.64;mot-outil;A2;freq;apertium_a_verifier
+E1583;camion;truck;4.64;nom;A2;freq;apertium_a_verifier
+E1584;basiquement;basically;4.63;adverbe;A2;freq;apertium_a_verifier
+E1585;enplus / deplus;besides;4.63;adverbe;A2;freq;apertium_a_verifier
+E1586;l'oiseau;bird;4.63;nom;A2;freq;existante
+E1587;tort / blâmer;blame;4.63;nom;A2;freq;apertium_a_verifier
+E1588;boule;bowl;4.63;nom;A2;freq;apertium_a_verifier
+E1589;poulet;chicken;4.63;nom;A2;freq;apertium_a_verifier
+E1590;contexte;context;4.63;nom;A2;freq;apertium_a_verifier
+E1591;couverture / réseau;coverage;4.63;nom;A2;freq;apertium_a_verifier
+E1592;déterminer;determine;4.63;verbe;A2;freq;apertium_a_verifier
+E1593;exhibition / affichage / montrer;display;4.63;nom;A2;freq;apertium_a_verifier
+E1594;faux;false;4.63;adjectif;A2;freq;apertium_a_verifier
+E1595;financement;funding;4.63;nom;A2;freq;apertium_a_verifier
+E1596;incroyable / stupéfiant;incredible;4.63;adjectif;A2;freq;apertium_a_verifier
+E1597;la viande;meat;4.63;nom;A2;freq;existante
+E1598;ministère;ministry;4.63;nom;A2;freq;apertium_a_verifier
+E1599;façon;mode;4.63;nom;A2;freq;apertium_a_verifier
+E1600;le cou;neck;4.63;nom;A2;freq;existante
+E1601;roman;novel;4.63;nom;A2;freq;apertium_a_verifier
+E1602;mort / pas;passing;4.63;nom;A2;freq;apertium_a_verifier
+E1603;la chemise;shirt;4.63;nom;A2;freq;existante
+E1604;doucement / lentement;slowly;4.63;adverbe;A2;freq;apertium_a_verifier
+E1605;le stade;stadium;4.63;nom;A2;freq;existante
+E1606;chirurgie / consultation;surgery;4.63;nom;A2;freq;apertium_a_verifier
+E1607;commerce;trading;4.63;nom;A2;freq;apertium_a_verifier
+E1608;mardi;tuesday;4.63;nom;A2;freq;apertium_a_verifier
+E1609;vision;vision;4.63;nom;A2;freq;apertium_a_verifier
+E1610;zéro;zero;4.63;mot-outil;A2;freq;apertium_a_verifier
+E1611;alex;alex;4.62;mot-outil;A2;freq;apertium_a_verifier
+E1612;champion;champion;4.62;nom;A2;freq;apertium_a_verifier
+E1613;crème;cream;4.62;nom;A2;freq;apertium_a_verifier
+E1614;la crise;crisis;4.62;nom;A2;freq;existante
+E1615;daniel;daniel;4.62;mot-outil;A2;freq;apertium_a_verifier
+E1616;rédacteur / éditeur;editor;4.62;nom;A2;freq;apertium_a_verifier
+E1617;géant;giant;4.62;nom;A2;freq;apertium_a_verifier
+E1618;iran;iran;4.62;mot-outil;A2;freq;apertium_a_verifier
+E1619;la prison;jail;4.62;nom;A2;freq;existante
+E1620;jim;jim;4.62;mot-outil;A2;freq;apertium_a_verifier
+E1621;la littérature;literature;4.62;nom;A2;freq;existante
+E1622;maire;mayor;4.62;nom;A2;freq;apertium_a_verifier
+E1623;mineur / moindre;minor;4.62;nom;A2;freq;apertium_a_verifier
+E1624;opposé;opposite;4.62;adjectif;A2;freq;apertium_a_verifier
+E1625;l'orange (couleur);orange;4.62;nom;A2;freq;existante
+E1626;recueil / sélection;selection;4.62;nom;A2;freq;apertium_a_verifier
+E1627;le signal;signal;4.62;nom;A2;freq;existante
+E1628;courant / moiscourant / flot;stream;4.62;nom;A2;freq;apertium_a_verifier
+E1629;la lutte;struggle;4.62;nom;A2;freq;existante
+E1630;suicide / suicidé;suicide;4.62;nom;A2;freq;apertium_a_verifier
+E1631;thème;theme;4.62;nom;A2;freq;apertium_a_verifier
+E1632;jeudi;thursday;4.62;nom;A2;freq;apertium_a_verifier
+E1633;minuscule;tiny;4.62;adjectif;A2;freq;apertium_a_verifier
+E1634;typiquement;typically;4.62;adverbe;A2;freq;apertium_a_verifier
+E1635;onu;un;4.62;nom;A2;freq;apertium_a_verifier
+E1636;malencontreusement;unfortunately;4.62;adverbe;A2;freq;apertium_a_verifier
+E1637;habituel;usual;4.62;adjectif;A2;freq;apertium_a_verifier
+E1638;virginia / virginie;virginia;4.62;mot-outil;A2;freq;apertium_a_verifier
+E1639;onde / vague / agiter;wave;4.62;nom;A2;freq;apertium_a_verifier
+E1640;alcool;alcohol;4.61;nom;A2;freq;apertium_a_verifier
+E1641;assemblée / montage;assembly;4.61;nom;A2;freq;apertium_a_verifier
+E1642;petit-déjeuner;breakfast;4.61;nom;A2;freq;apertium_a_verifier
+E1643;brillant;bright;4.61;adjectif;A2;freq;apertium_a_verifier
+E1644;capable;capable;4.61;adjectif;A2;freq;apertium_a_verifier
+E1645;combinaison;combination;4.61;nom;A2;freq;apertium_a_verifier
+E1646;conservateur;conservative;4.61;adjectif;A2;freq;apertium_a_verifier
+E1647;le client;customer;4.61;nom;A2;freq;existante
+E1648;taillage / rauchage / coupant;cutting;4.61;nom;A2;freq;apertium_a_verifier
+E1649;désir / souhaiter;desire;4.61;nom;A2;freq;apertium_a_verifier
+E1650;brouillon / recruter;draft;4.61;nom;A2;freq;apertium_a_verifier
+E1651;essentiel;essential;4.61;adjectif;A2;freq;apertium_a_verifier
+E1652;faillir / omettre;fail;4.61;verbe;A2;freq;apertium_a_verifier
+E1653;familier / familial;familiar;4.61;adjectif;A2;freq;apertium_a_verifier
+E1654;coupable;guilty;4.61;adjectif;A2;freq;apertium_a_verifier
+E1655;juif;jewish;4.61;adjectif;A2;freq;apertium_a_verifier
+E1656;milieu;medium;4.61;nom;A2;freq;apertium_a_verifier
+E1657;ohio;ohio;4.61;mot-outil;A2;freq;apertium_a_verifier
+E1658;parfaitement;perfectly;4.61;adverbe;A2;freq;apertium_a_verifier
+E1659;recommander / prôner;recommend;4.61;verbe;A2;freq;apertium_a_verifier
+E1660;pertinent;relevant;4.61;adjectif;A2;freq;apertium_a_verifier
+E1661;chercher;seek;4.61;verbe;A2;freq;apertium_a_verifier
+E1662;envoi;sending;4.61;nom;A2;freq;apertium_a_verifier
+E1663;le billet (ticket);ticket;4.61;nom;A2;freq;existante
+E1664;incapable;unable;4.61;adjectif;A2;freq;apertium_a_verifier
+E1665;bouleverser / inquiéter;upset;4.61;verbe;A2;freq;apertium_a_verifier
+E1666;aile;wing;4.61;nom;A2;freq;apertium_a_verifier
+E1667;bombe / pompe / bombarder;bomb;4.60;nom;A2;freq;apertium_a_verifier
+E1668;créatif;creative;4.60;adjectif;A2;freq;apertium_a_verifier
+E1669;cycle;cycle;4.60;nom;A2;freq;apertium_a_verifier
+E1670;éducatif;educational;4.60;adjectif;A2;freq;apertium_a_verifier
+E1671;le divertissement;entertainment;4.60;nom;A2;freq;existante
+E1672;bout / extrême;extreme;4.60;nom;A2;freq;apertium_a_verifier
+E1673;facilité / installation;facility;4.60;nom;A2;freq;apertium_a_verifier
+E1674;pendre;hang;4.60;verbe;A2;freq;apertium_a_verifier
+E1675;principalement;mainly;4.60;adverbe;A2;freq;apertium_a_verifier
+E1676;maximum / maximal;maximum;4.60;nom;A2;freq;apertium_a_verifier
+E1677;le journal;newspaper;4.60;nom;A2;freq;existante
+E1678;offrande;offering;4.60;nom;A2;freq;apertium_a_verifier
+E1679;le tableau;painting;4.60;nom;A2;freq;existante
+E1680;république;republic;4.60;nom;A2;freq;apertium_a_verifier
+E1681;réserve / réserver;reserve;4.60;nom;A2;freq;apertium_a_verifier
+E1682;file / ramer;row;4.60;nom;A2;freq;apertium_a_verifier
+E1683;le sel;salt;4.60;nom;A2;freq;existante
+E1684;écossais;scottish;4.60;adjectif;A2;freq;apertium_a_verifier
+E1685;changement / interrupteur / changer;switch;4.60;nom;A2;freq;apertium_a_verifier
+E1686;territoire;territory;4.60;nom;A2;freq;apertium_a_verifier
+E1687;menace;threat;4.60;nom;A2;freq;apertium_a_verifier
+E1688;paysdegalles / galles;wales;4.60;mot-outil;A2;freq;apertium_a_verifier
+E1689;affecter;affect;4.59;verbe;A2;freq;apertium_a_verifier
+E1690;àpart;aside;4.59;adverbe;A2;freq;apertium_a_verifier
+E1691;assistance;assistance;4.59;nom;A2;freq;apertium_a_verifier
+E1692;cloche / sonnette / clochette;bell;4.59;nom;A2;freq;apertium_a_verifier
+E1693;coup / souffler / sucer;blow;4.59;nom;A2;freq;apertium_a_verifier
+E1694;lien;bond;4.59;nom;A2;freq;apertium_a_verifier
+E1695;fiancé;boyfriend;4.59;nom;A2;freq;apertium_a_verifier
+E1696;prudent / sage;careful;4.59;adjectif;A2;freq;apertium_a_verifier
+E1697;entreprise;corporation;4.59;nom;A2;freq;apertium_a_verifier
+E1698;cri / pleur / crier;cry;4.59;nom;A2;freq;apertium_a_verifier
+E1699;le danger;danger;4.59;nom;A2;freq;existante
+E1700;la livraison;delivery;4.59;nom;A2;freq;existante
+E1701;mériter;deserve;4.59;verbe;A2;freq;apertium_a_verifier
+E1702;dollar;dollar;4.59;nom;A2;freq;apertium_a_verifier
+E1703;vide / désert;empty;4.59;adjectif;A2;freq;apertium_a_verifier
+E1704;le sexe;gender;4.59;nom;A2;freq;existante
+E1705;instance / cas;instance;4.59;nom;A2;freq;apertium_a_verifier
+E1706;kim;kim;4.59;mot-outil;A2;freq;apertium_a_verifier
+E1707;mille;mile;4.59;nom;A2;freq;apertium_a_verifier
+E1708;motion / mouvement;motion;4.59;nom;A2;freq;apertium_a_verifier
+E1709;nick;nick;4.59;mot-outil;A2;freq;apertium_a_verifier
+E1710;prix;prize;4.59;nom;A2;freq;apertium_a_verifier
+E1711;raisonnable;reasonable;4.59;adjectif;A2;freq;apertium_a_verifier
+E1712;recèlement;receiving;4.59;nom;A2;freq;apertium_a_verifier
+E1713;registre / enregistrer;register;4.59;nom;A2;freq;apertium_a_verifier
+E1714;résolution;resolution;4.59;nom;A2;freq;apertium_a_verifier
+E1715;rural;rural;4.59;adjectif;A2;freq;apertium_a_verifier
+E1716;ryan;ryan;4.59;mot-outil;A2;freq;apertium_a_verifier
+E1717;épargne;saving;4.59;nom;A2;freq;apertium_a_verifier
+E1718;le chant;singing;4.59;nom;A2;freq;existante
+E1719;espagne;spain;4.59;mot-outil;A2;freq;apertium_a_verifier
+E1720;typique;typical;4.59;adjectif;A2;freq;apertium_a_verifier
+E1721;l'univers;universe;4.59;nom;A2;freq;existante
+E1722;avertissement / avis;warning;4.59;nom;A2;freq;apertium_a_verifier
+E1723;mercredi;wednesday;4.59;nom;A2;freq;apertium_a_verifier
+E1724;admettre;admit;4.58;verbe;A2;freq;apertium_a_verifier
+E1725;attitude;attitude;4.58;nom;A2;freq;apertium_a_verifier
+E1726;bifurcation / branche / succursale;branch;4.58;nom;A2;freq;apertium_a_verifier
+E1727;brésil;brazil;4.58;mot-outil;A2;freq;apertium_a_verifier
+E1728;définition;definition;4.58;nom;A2;freq;apertium_a_verifier
+E1729;dessin / rentrage;drawing;4.58;nom;A2;freq;apertium_a_verifier
+E1730;grâce;favor;4.58;nom;A2;freq;apertium_a_verifier
+E1731;le drapeau;flag;4.58;nom;A2;freq;existante
+E1732;cadre / structure / membrure;frame;4.58;nom;A2;freq;apertium_a_verifier
+E1733;l'invité;guest;4.58;nom;A2;freq;existante
+E1734;ciel;heaven;4.58;nom;A2;freq;apertium_a_verifier
+E1735;indépendance;independence;4.58;nom;A2;freq;apertium_a_verifier
+E1736;jackson;jackson;4.58;mot-outil;A2;freq;apertium_a_verifier
+E1737;baiser / bisou;kiss;4.58;nom;A2;freq;apertium_a_verifier
+E1738;cargaison / charge / encombrer;load;4.58;nom;A2;freq;apertium_a_verifier
+E1739;trame / complot / parcelle;plot;4.58;nom;A2;freq;apertium_a_verifier
+E1740;possibilité;possibility;4.58;nom;A2;freq;apertium_a_verifier
+E1741;aléatoire;random;4.58;adjectif;A2;freq;apertium_a_verifier
+E1742;récupération / relance / reprise;recovery;4.58;nom;A2;freq;apertium_a_verifier
+E1743;location / loyer / louer;rent;4.58;nom;A2;freq;apertium_a_verifier
+E1744;remplacer / replacer;replace;4.58;verbe;A2;freq;apertium_a_verifier
+E1745;représenter;represent;4.58;verbe;A2;freq;apertium_a_verifier
+E1746;sénateur / sénatrice;senator;4.58;nom;A2;freq;apertium_a_verifier
+E1747;la phrase;sentence;4.58;nom;A2;freq;existante
+E1748;académique;academic;4.57;adjectif;A2;freq;apertium_a_verifier
+E1749;académie;academy;4.57;nom;A2;freq;apertium_a_verifier
+E1750;réussir;achieve;4.57;verbe;A2;freq;apertium_a_verifier
+E1751;adam;adam;4.57;mot-outil;A2;freq;apertium_a_verifier
+E1752;fournir;afford;4.57;verbe;A2;freq;apertium_a_verifier
+E1753;andrew;andrew;4.57;mot-outil;A2;freq;apertium_a_verifier
+E1754;assumer / supposer;assume;4.57;verbe;A2;freq;apertium_a_verifier
+E1755;bbc;bbc;4.57;nom;A2;freq;apertium_a_verifier
+E1756;la bouteille;bottle;4.57;nom;A2;freq;existante
+E1757;bouquet / faisceau / poignée;bunch;4.57;nom;A2;freq;apertium_a_verifier
+E1758;la catégorie;category;4.57;nom;A2;freq;existante
+E1759;bavardage / chat / discuter;chat;4.57;nom;A2;freq;apertium_a_verifier
+E1760;fromage;cheese;4.57;nom;A2;freq;apertium_a_verifier
+E1761;chimique;chemical;4.57;adjectif;A2;freq;apertium_a_verifier
+E1762;clinton;clinton;4.57;mot-outil;A2;freq;apertium_a_verifier
+E1763;compétitif / concurrentiel;competitive;4.57;adjectif;A2;freq;apertium_a_verifier
+E1764;détail / détailler;detail;4.57;nom;A2;freq;apertium_a_verifier
+E1765;régime;diet;4.57;nom;A2;freq;apertium_a_verifier
+E1766;favori;favourite;4.57;adjectif;A2;freq;apertium_a_verifier
+E1767;le fruit;fruit;4.57;nom;A2;freq;existante
+E1768;indice / index / indexer;index;4.57;nom;A2;freq;apertium_a_verifier
+E1769;élément;item;4.57;nom;A2;freq;apertium_a_verifier
+E1770;chemin / voie;lane;4.57;nom;A2;freq;apertium_a_verifier
+E1771;désordre;mess;4.57;nom;A2;freq;apertium_a_verifier
+E1772;normalement;normally;4.57;adverbe;A2;freq;apertium_a_verifier
+E1773;opposition;opposition;4.57;nom;A2;freq;apertium_a_verifier
+E1774;parent / père;parent;4.57;nom;A2;freq;apertium_a_verifier
+E1775;permanent;permanent;4.57;adjectif;A2;freq;apertium_a_verifier
+E1776;personnellement;personally;4.57;adverbe;A2;freq;apertium_a_verifier
+E1777;le plaisir;pleasure;4.57;nom;A2;freq;existante
+E1778;préférer / aimerbien;prefer;4.57;verbe;A2;freq;apertium_a_verifier
+E1779;programme;programme;4.57;nom;A2;freq;apertium_a_verifier
+E1780;représentant / représentatif;representative;4.57;nom;A2;freq;apertium_a_verifier
+E1781;schéma / machiner;scheme;4.57;nom;A2;freq;apertium_a_verifier
+E1782;changement / tour / changer;shift;4.57;nom;A2;freq;apertium_a_verifier
+E1783;le stockage;storage;4.57;nom;A2;freq;existante
+E1784;avoir / dépôt / tank;tank;4.57;nom;A2;freq;apertium_a_verifier
+E1785;le transport;transportation;4.57;nom;A2;freq;existante
+E1786;enfin;ultimately;4.57;adverbe;A2;freq;apertium_a_verifier
+E1787;différent;unlike;4.57;adjectif;A2;freq;apertium_a_verifier
+E1788;hebdomadaire / chaquesemaine;weekly;4.57;adjectif;A2;freq;apertium_a_verifier
+E1789;la cour;yard;4.57;nom;A2;freq;existante
+E1790;quelqu'un / aucun;anybody;4.56;mot-outil;A2;freq;apertium_a_verifier
+E1791;basket-ball;basketball;4.56;nom;A2;freq;apertium_a_verifier
+E1792;bouton;button;4.56;nom;A2;freq;apertium_a_verifier
+E1793;combattre;combat;4.56;verbe;A2;freq;apertium_a_verifier
+E1794;constitution;constitution;4.56;nom;A2;freq;apertium_a_verifier
+E1795;le consommateur;consumer;4.56;nom;A2;freq;existante
+E1796;compteur / comptoir;counter;4.56;nom;A2;freq;apertium_a_verifier
+E1797;création / élaboration;creation;4.56;nom;A2;freq;apertium_a_verifier
+E1798;couronne;crown;4.56;nom;A2;freq;apertium_a_verifier
+E1799;dépression / renfoncement;depression;4.56;nom;A2;freq;apertium_a_verifier
+E1800;décrire / qualifier;describe;4.56;verbe;A2;freq;apertium_a_verifier
+E1801;l'emploi;employment;4.56;nom;A2;freq;existante
+E1802;exclusivité / exclusif;exclusive;4.56;nom;A2;freq;apertium_a_verifier
+E1803;excuse / excuser;excuse;4.56;nom;A2;freq;apertium_a_verifier
+E1804;expert;expert;4.56;nom;A2;freq;apertium_a_verifier
+E1805;fréquemment;frequently;4.56;adverbe;A2;freq;apertium_a_verifier
+E1806;golf;golf;4.56;nom;A2;freq;apertium_a_verifier
+E1807;grâce;grace;4.56;nom;A2;freq;apertium_a_verifier
+E1808;identifier;identify;4.56;verbe;A2;freq;apertium_a_verifier
+E1809;l'importance;importance;4.56;nom;A2;freq;existante
+E1810;kevin;kevin;4.56;mot-outil;A2;freq;apertium_a_verifier
+E1811;dernier;latter;4.56;adjectif;A2;freq;apertium_a_verifier
+E1812;fabrication;manufacturing;4.56;nom;A2;freq;apertium_a_verifier
+E1813;minier;mining;4.56;adjectif;A2;freq;apertium_a_verifier
+E1814;l'objet;object;4.56;nom;A2;freq;existante
+E1815;patron;pattern;4.56;nom;A2;freq;apertium_a_verifier
+E1816;personnel;personnel;4.56;nom;A2;freq;apertium_a_verifier
+E1817;perspective;perspective;4.56;nom;A2;freq;apertium_a_verifier
+E1818;promouvoir;promote;4.56;verbe;A2;freq;apertium_a_verifier
+E1819;revolution / révolution;revolution;4.56;nom;A2;freq;apertium_a_verifier
+E1820;sévère;severe;4.56;adjectif;A2;freq;apertium_a_verifier
+E1821;supposer;suppose;4.56;verbe;A2;freq;apertium_a_verifier
+E1822;l'outil;tool;4.56;nom;A2;freq;existante
+E1823;tournoi;tournament;4.56;nom;A2;freq;apertium_a_verifier
+E1824;turquie;turkey;4.56;mot-outil;A2;freq;apertium_a_verifier
+E1825;victime;victim;4.56;nom;A2;freq;apertium_a_verifier
+E1826;arrestation / detention / détention;arrest;4.55;nom;A2;freq;apertium_a_verifier
+E1827;répondre;attend;4.55;verbe;A2;freq;apertium_a_verifier
+E1828;interdiction / interdire;ban;4.55;nom;A2;freq;apertium_a_verifier
+E1829;brillant / luisant / éclatant;brilliant;4.55;adjectif;A2;freq;apertium_a_verifier
+E1830;carbone;carbon;4.55;nom;A2;freq;apertium_a_verifier
+E1831;catholique;catholic;4.55;nom;A2;freq;apertium_a_verifier
+E1832;le cercle;circle;4.55;nom;A2;freq;existante
+E1833;le concert;concert;4.55;nom;A2;freq;existante
+E1834;accident / choc / choquer;crash;4.55;nom;A2;freq;apertium_a_verifier
+E1835;répartir / livrer;deliver;4.55;verbe;A2;freq;apertium_a_verifier
+E1836;profondeur;depth;4.55;nom;A2;freq;apertium_a_verifier
+E1837;assistant / député;deputy;4.55;nom;A2;freq;apertium_a_verifier
+E1838;sale;dirty;4.55;adjectif;A2;freq;apertium_a_verifier
+E1839;électronique;electronic;4.55;adjectif;A2;freq;apertium_a_verifier
+E1840;erreur / maldonne;error;4.55;nom;A2;freq;apertium_a_verifier
+E1841;l'existence;existence;4.55;nom;A2;freq;existante
+E1842;expression;expression;4.55;nom;A2;freq;apertium_a_verifier
+E1843;l'usine;factory;4.55;nom;A2;freq;existante
+E1844;intérieur;interior;4.55;nom;A2;freq;apertium_a_verifier
+E1845;la joie;joy;4.55;nom;A2;freq;existante
+E1846;législation;legislation;4.55;nom;A2;freq;apertium_a_verifier
+E1847;entretien / maintien / manutention;maintenance;4.55;nom;A2;freq;apertium_a_verifier
+E1848;façon;manner;4.55;nom;A2;freq;apertium_a_verifier
+E1849;collègue / compagnon;mate;4.55;nom;A2;freq;apertium_a_verifier
+E1850;proche;nearby;4.55;adjectif;A2;freq;apertium_a_verifier
+E1851;le bruit;noise;4.55;nom;A2;freq;existante
+E1852;l'origine;origin;4.55;nom;A2;freq;existante
+E1853;pakistan;pakistan;4.55;mot-outil;A2;freq;apertium_a_verifier
+E1854;échiquier;panel;4.55;nom;A2;freq;apertium_a_verifier
+E1855;la personnalité;personality;4.55;nom;A2;freq;existante
+E1856;l'assiette;plate;4.55;nom;A2;freq;existante
+E1857;préparer;prepare;4.55;verbe;A2;freq;apertium_a_verifier
+E1858;soulagement / dégrèvement / relief;relief;4.55;nom;A2;freq;apertium_a_verifier
+E1859;résistance;resistance;4.55;nom;A2;freq;apertium_a_verifier
+E1860;riz;rice;4.55;nom;A2;freq;apertium_a_verifier
+E1861;le toit;roof;4.55;nom;A2;freq;existante
+E1862;honte;shame;4.55;nom;A2;freq;apertium_a_verifier
+E1863;certainement / sûrement;surely;4.55;adverbe;A2;freq;apertium_a_verifier
+E1864;conseil / pointe / verser;tip;4.55;nom;A2;freq;apertium_a_verifier
+E1865;absolu;absolute;4.54;adjectif;A2;freq;apertium_a_verifier
+E1866;la publicité;advertising;4.54;nom;A2;freq;existante
+E1867;base-ball;baseball;4.54;nom;A2;freq;apertium_a_verifier
+E1868;la salle de bain;bathroom;4.54;nom;A2;freq;existante
+E1869;câble;cable;4.54;nom;A2;freq;apertium_a_verifier
+E1870;calme / tranquille;calm;4.54;nom;A2;freq;apertium_a_verifier
+E1871;championnat;championship;4.54;nom;A2;freq;apertium_a_verifier
+E1872;le client;client;4.54;nom;A2;freq;existante
+E1873;constante / soutenu;constant;4.54;nom;A2;freq;apertium_a_verifier
+E1874;muet;dumb;4.54;adjectif;A2;freq;apertium_a_verifier
+E1875;empire;empire;4.54;nom;A2;freq;apertium_a_verifier
+E1876;expansion;expansion;4.54;nom;A2;freq;apertium_a_verifier
+E1877;fortement / lourdement;heavily;4.54;adverbe;A2;freq;apertium_a_verifier
+E1878;cacher / dérober / tapir;hide;4.54;verbe;A2;freq;apertium_a_verifier
+E1879;incident;incident;4.54;nom;A2;freq;apertium_a_verifier
+E1880;irlandais;irish;4.54;adjectif;A2;freq;apertium_a_verifier
+E1881;atteindre / réussir / diriger;manage;4.54;verbe;A2;freq;apertium_a_verifier
+E1882;michigan;michigan;4.54;mot-outil;A2;freq;apertium_a_verifier
+E1883;empreinte / impression / empreindre;print;4.54;nom;A2;freq;apertium_a_verifier
+E1884;vue;sight;4.54;nom;A2;freq;apertium_a_verifier
+E1885;significativement;significantly;4.54;adverbe;A2;freq;apertium_a_verifier
+E1886;chanter;sing;4.54;verbe;A2;freq;apertium_a_verifier
+E1887;soviétique;soviet;4.54;adjectif;A2;freq;apertium_a_verifier
+E1888;arme;weapon;4.54;nom;A2;freq;apertium_a_verifier
+E1889;humide;wet;4.54;adjectif;A2;freq;apertium_a_verifier
+E1890;largement;widely;4.54;adverbe;A2;freq;apertium_a_verifier
+E1891;anniversaire;anniversary;4.53;nom;A2;freq;apertium_a_verifier
+E1892;attractif;attractive;4.53;adjectif;A2;freq;apertium_a_verifier
+E1893;le vélo;bike;4.53;nom;A2;freq;existante
+E1894;large;broad;4.53;adjectif;A2;freq;apertium_a_verifier
+E1895;brûlure / brûler / arder;burn;4.53;nom;A2;freq;apertium_a_verifier
+E1896;gâteau;cake;4.53;nom;A2;freq;apertium_a_verifier
+E1897;étroitement;closely;4.53;adverbe;A2;freq;apertium_a_verifier
+E1898;constamment;constantly;4.53;adverbe;A2;freq;apertium_a_verifier
+E1899;concours;contest;4.53;nom;A2;freq;apertium_a_verifier
+E1900;francisco;francisco;4.53;mot-outil;A2;freq;apertium_a_verifier
+E1901;difficilement;hardly;4.53;adverbe;A2;freq;apertium_a_verifier
+E1902;le chapeau;hat;4.53;nom;A2;freq;existante
+E1903;cote / hauteur / haut;height;4.53;nom;A2;freq;apertium_a_verifier
+E1904;marine / marin;marine;4.53;mot-outil;A2;freq;apertium_a_verifier
+E1905;le moteur;motor;4.53;nom;A2;freq;existante
+E1906;officiellement;officially;4.53;adverbe;A2;freq;apertium_a_verifier
+E1907;pc;pc;4.53;nom;A2;freq;apertium_a_verifier
+E1908;cime;peak;4.53;nom;A2;freq;apertium_a_verifier
+E1909;portion;portion;4.53;nom;A2;freq;apertium_a_verifier
+E1910;prince;princess;4.53;nom;A2;freq;apertium_a_verifier
+E1911;protéine;protein;4.53;nom;A2;freq;apertium_a_verifier
+E1912;cru;raw;4.53;adjectif;A2;freq;apertium_a_verifier
+E1913;réforme / réformer;reform;4.53;nom;A2;freq;apertium_a_verifier
+E1914;la retraite;retirement;4.53;nom;A2;freq;existante
+E1915;échantillon / goûter;sample;4.53;nom;A2;freq;apertium_a_verifier
+E1916;secondaire;secondary;4.53;adjectif;A2;freq;apertium_a_verifier
+E1917;solaire;solar;4.53;adjectif;A2;freq;apertium_a_verifier
+E1918;souffrance;suffering;4.53;nom;A2;freq;apertium_a_verifier
+E1919;sydney;sydney;4.53;mot-outil;A2;freq;apertium_a_verifier
+E1920;définitif;ultimate;4.53;adjectif;A2;freq;apertium_a_verifier
+E1921;wilson;wilson;4.53;mot-outil;A2;freq;apertium_a_verifier
+E1922;automatiquement;automatically;4.52;adverbe;A2;freq;apertium_a_verifier
+E1923;batterie;battery;4.52;nom;A2;freq;apertium_a_verifier
+E1924;aveugle;blind;4.52;adjectif;A2;freq;apertium_a_verifier
+E1925;haleine / respiration;breath;4.52;nom;A2;freq;apertium_a_verifier
+E1926;bref / informer;brief;4.52;adjectif;A2;freq;apertium_a_verifier
+E1927;carolina;carolina;4.52;mot-outil;A2;freq;apertium_a_verifier
+E1928;poitrine;chest;4.52;nom;A2;freq;apertium_a_verifier
+E1929;conduite / conduire / diriger;conduct;4.52;nom;A2;freq;apertium_a_verifier
+E1930;début / débuter;debut;4.52;nom;A2;freq;apertium_a_verifier
+E1931;décade / décennie;decade;4.52;nom;A2;freq;apertium_a_verifier
+E1932;détruire;destroy;4.52;verbe;A2;freq;apertium_a_verifier
+E1933;edward;edward;4.52;mot-outil;A2;freq;apertium_a_verifier
+E1934;extérieur / externe;external;4.52;adjectif;A2;freq;apertium_a_verifier
+E1935;fantaisie;fantasy;4.52;nom;A2;freq;apertium_a_verifier
+E1936;hollywood;hollywood;4.52;mot-outil;A2;freq;apertium_a_verifier
+E1937;immédiat;immediate;4.52;adjectif;A2;freq;apertium_a_verifier
+E1938;introduction;introduction;4.52;nom;A2;freq;apertium_a_verifier
+E1939;joseph;joseph;4.52;mot-outil;A2;freq;apertium_a_verifier
+E1940;licence;license;4.52;nom;A2;freq;apertium_a_verifier
+E1941;peinture / peinturer / peindre;paint;4.52;nom;A2;freq;apertium_a_verifier
+E1942;peloton / pilote;pilot;4.52;nom;A2;freq;apertium_a_verifier
+E1943;rose / rosée / roseur;pink;4.52;nom;A2;freq;apertium_a_verifier
+E1944;présidentiel;presidential;4.52;adjectif;A2;freq;apertium_a_verifier
+E1945;principal;principal;4.52;adjectif;A2;freq;apertium_a_verifier
+E1946;régulièrement;regularly;4.52;adverbe;A2;freq;apertium_a_verifier
+E1947;navire;shipping;4.52;nom;A2;freq;apertium_a_verifier
+E1948;chanteur;singer;4.52;nom;A2;freq;apertium_a_verifier
+E1949;vapeur;steam;4.52;nom;A2;freq;apertium_a_verifier
+E1950;survivre;survive;4.52;verbe;A2;freq;apertium_a_verifier
+E1951;grand;tall;4.52;adjectif;A2;freq;apertium_a_verifier
+E1952;théâtre;theatre;4.52;nom;A2;freq;apertium_a_verifier
+E1953;thérapie;therapy;4.52;nom;A2;freq;apertium_a_verifier
+E1954;le témoin;witness;4.52;nom;A2;freq;existante
+E1955;le but;aim;4.51;nom;A2;freq;existante
+E1956;campus;campus;4.51;nom;A2;freq;apertium_a_verifier
+E1957;bonnet / bouchon;cap;4.51;nom;A2;freq;apertium_a_verifier
+E1958;enfance;childhood;4.51;nom;A2;freq;apertium_a_verifier
+E1959;clinique;clinical;4.51;adjectif;A2;freq;apertium_a_verifier
+E1960;comédie;comedy;4.51;nom;A2;freq;apertium_a_verifier
+E1961;comparaison;comparison;4.51;nom;A2;freq;apertium_a_verifier
+E1962;dan;dan;4.51;mot-outil;A2;freq;apertium_a_verifier
+E1963;la défaite;defeat;4.51;nom;A2;freq;existante
+E1964;défense;defence;4.51;nom;A2;freq;apertium_a_verifier
+E1965;démocratie;democracy;4.51;nom;A2;freq;apertium_a_verifier
+E1966;exact;exact;4.51;adjectif;A2;freq;apertium_a_verifier
+E1967;coût;fee;4.51;nom;A2;freq;apertium_a_verifier
+E1968;jan;jan;4.51;mot-outil;A2;freq;apertium_a_verifier
+E1969;jordan / jordanie;jordan;4.51;mot-outil;A2;freq;apertium_a_verifier
+E1970;serrure / verrou / fermer;lock;4.51;nom;A2;freq;apertium_a_verifier
+E1971;musical;musical;4.51;adjectif;A2;freq;apertium_a_verifier
+E1972;le nez;nose;4.51;nom;A2;freq;existante
+E1973;le plastique;plastic;4.51;nom;A2;freq;existante
+E1974;citer / coter;quote;4.51;verbe;A2;freq;apertium_a_verifier
+E1975;enregistrement / registre;recording;4.51;nom;A2;freq;apertium_a_verifier
+E1976;suspect / suspecter;suspect;4.51;nom;A2;freq;apertium_a_verifier
+E1977;sacrer / jurer;swear;4.51;verbe;A2;freq;apertium_a_verifier
+E1978;ballottage / cravate / lien;tie;4.51;nom;A2;freq;apertium_a_verifier
+E1979;tim;tim;4.51;mot-outil;A2;freq;apertium_a_verifier
+E1980;tendance;trend;4.51;nom;A2;freq;apertium_a_verifier
+E1981;devaleur / précieux;valuable;4.51;adjectif;A2;freq;apertium_a_verifier
+E1982;la richesse;wealth;4.51;nom;A2;freq;existante
+E1983;savant;wise;4.51;adjectif;A2;freq;apertium_a_verifier
+E1984;approbation;approval;4.50;nom;A2;freq;apertium_a_verifier
+E1985;le pain;bread;4.50;nom;A2;freq;existante
+E1986;contenir;contain;4.50;verbe;A2;freq;apertium_a_verifier
+E1987;convention;convention;4.50;nom;A2;freq;apertium_a_verifier
+E1988;document / documenter;document;4.50;nom;A2;freq;apertium_a_verifier
+E1989;l'employé;employee;4.50;nom;A2;freq;existante
+E1990;ingénieur;engineer;4.50;nom;A2;freq;apertium_a_verifier
+E1991;équivalent;equivalent;4.50;adjectif;A2;freq;apertium_a_verifier
+E1992;ford;ford;4.50;mot-outil;A2;freq;apertium_a_verifier
+E1993;diplômé;graduate;4.50;nom;A2;freq;apertium_a_verifier
+E1994;grec;greek;4.50;nom;A2;freq;apertium_a_verifier
+E1995;intérieur;inner;4.50;adjectif;A2;freq;apertium_a_verifier
+E1996;l'ascenseur;lift;4.50;nom;A2;freq;existante
+E1997;miller;miller;4.50;mot-outil;A2;freq;apertium_a_verifier
+E1998;mensuel / mensuellement;monthly;4.50;adjectif;A2;freq;apertium_a_verifier
+E1999;le quartier;neighborhood;4.50;nom;A2;freq;existante
+E2000;fonctionner / manier / opérer;operate;4.50;verbe;A2;freq;apertium_a_verifier
+E2001;exceptionnel;outstanding;4.50;adjectif;A2;freq;apertium_a_verifier
+E2002;autorisation / permission / permis;permission;4.50;nom;A2;freq;apertium_a_verifier
+E2003;réplique / réponse / répondre;reply;4.50;nom;A2;freq;apertium_a_verifier
+E2004;livrer / délivrer / défausser;rid;4.50;verbe;A2;freq;apertium_a_verifier
+E2005;roman;roman;4.50;mot-outil;A2;freq;apertium_a_verifier
+E2006;l'épaule;shoulder;4.50;nom;A2;freq;existante
+E2007;averse / douche / pleuvoir;shower;4.50;nom;A2;freq;apertium_a_verifier
+E2008;stephen;stephen;4.50;mot-outil;A2;freq;apertium_a_verifier
+E2009;la tour;tower;4.50;nom;A2;freq;existante
+E2010;la tradition;tradition;4.50;nom;A2;freq;existante
+E2011;visuel;visual;4.50;adjectif;A2;freq;apertium_a_verifier
+E2012;étrave / roue / volant;wheel;4.50;nom;A2;freq;apertium_a_verifier
+E2013;le rendez-vous;appointment;4.49;nom;B1;freq;existante
+E2014;àpeine;barely;4.49;adverbe;B1;freq;apertium_a_verifier
+E2015;arbuste / arbrisseau / bush;bush;4.49;nom;B1;freq;apertium_a_verifier
+E2016;armoire / cabinet;cabinet;4.49;nom;B1;freq;apertium_a_verifier
+E2017;fêter / célébrer;celebrate;4.49;verbe;B1;freq;apertium_a_verifier
+E2018;chocolat;chocolate;4.49;nom;B1;freq;apertium_a_verifier
+E2019;charbon / houille;coal;4.49;nom;B1;freq;apertium_a_verifier
+E2020;couleur / peindre;colour;4.49;nom;B1;freq;apertium_a_verifier
+E2021;contemporain;contemporary;4.49;adjectif;B1;freq;apertium_a_verifier
+E2022;davis;davis;4.49;mot-outil;B1;freq;apertium_a_verifier
+E2023;adn;dna;4.49;nom;B1;freq;apertium_a_verifier
+E2024;efficacement;effectively;4.49;adverbe;B1;freq;apertium_a_verifier
+E2025;eric;eric;4.49;mot-outil;B1;freq;apertium_a_verifier
+E2026;étendu;extensive;4.49;adjectif;B1;freq;apertium_a_verifier
+E2027;formation;formation;4.49;nom;B1;freq;apertium_a_verifier
+E2028;galerie;gallery;4.49;nom;B1;freq;apertium_a_verifier
+E2029;autoroute / route;highway;4.49;nom;B1;freq;apertium_a_verifier
+E2030;chasser;hunt;4.49;verbe;B1;freq;apertium_a_verifier
+E2031;amélioration;improvement;4.49;nom;B1;freq;apertium_a_verifier
+E2032;pouce;inch;4.49;nom;B1;freq;apertium_a_verifier
+E2033;initialement;initially;4.49;adverbe;B1;freq;apertium_a_verifier
+E2034;jeune / junior;junior;4.49;nom;B1;freq;apertium_a_verifier
+E2035;jury;jury;4.49;nom;B1;freq;apertium_a_verifier
+E2036;coréen;korean;4.49;adjectif;B1;freq;apertium_a_verifier
+E2037;monstre;monster;4.49;nom;B1;freq;apertium_a_verifier
+E2038;olympique;olympic;4.49;adjectif;B1;freq;apertium_a_verifier
+E2039;la philosophie;philosophy;4.49;nom;B1;freq;existante
+E2040;orgueil;pride;4.49;nom;B1;freq;apertium_a_verifier
+E2041;rediffusion / ressassage / répéter;repeat;4.49;nom;B1;freq;apertium_a_verifier
+E2042;équitation;riding;4.49;nom;B1;freq;apertium_a_verifier
+E2043;âpre;rough;4.49;adjectif;B1;freq;apertium_a_verifier
+E2044;l'odeur;smell;4.49;nom;B1;freq;existante
+E2045;haut-parleur / interlocuteur;speaker;4.49;nom;B1;freq;apertium_a_verifier
+E2046;ton;tone;4.49;nom;B1;freq;apertium_a_verifier
+E2047;thème;topic;4.49;nom;B1;freq;apertium_a_verifier
+E2048;universel;universal;4.49;adjectif;B1;freq;apertium_a_verifier
+E2049;vaste;vast;4.49;adjectif;B1;freq;apertium_a_verifier
+E2050;voiture;auto;4.48;nom;B1;freq;apertium_a_verifier
+E2051;compatible / conséquent;consistent;4.48;adjectif;B1;freq;apertium_a_verifier
+E2052;gagner;earn;4.48;verbe;B1;freq;apertium_a_verifier
+E2053;le doigt;finger;4.48;nom;B1;freq;existante
+E2054;gris;grey;4.48;adjectif;B1;freq;apertium_a_verifier
+E2055;guitare;guitar;4.48;nom;B1;freq;apertium_a_verifier
+E2056;howard;howard;4.48;mot-outil;B1;freq;apertium_a_verifier
+E2057;ignorer / méconnaître;ignore;4.48;verbe;B1;freq;apertium_a_verifier
+E2058;latin;latin;4.48;nom;B1;freq;apertium_a_verifier
+E2059;lewis;lewis;4.48;mot-outil;B1;freq;apertium_a_verifier
+E2060;repas;meal;4.48;nom;B1;freq;apertium_a_verifier
+E2061;naturellement;naturally;4.48;adverbe;B1;freq;apertium_a_verifier
+E2062;nécessairement;necessarily;4.48;adverbe;B1;freq;apertium_a_verifier
+E2063;le pantalon;pants;4.48;nom;B1;freq;existante
+E2064;société;partnership;4.48;nom;B1;freq;apertium_a_verifier
+E2065;pourcentage;percentage;4.48;nom;B1;freq;apertium_a_verifier
+E2066;la poche;pocket;4.48;nom;B1;freq;existante
+E2067;pratique;practical;4.48;adjectif;B1;freq;apertium_a_verifier
+E2068;principalement / prioritairement;primarily;4.48;adverbe;B1;freq;apertium_a_verifier
+E2069;violation;rape;4.48;nom;B1;freq;apertium_a_verifier
+E2070;parent / relatif;relative;4.48;nom;B1;freq;apertium_a_verifier
+E2071;rachat / sauvetage / sauver;rescue;4.48;nom;B1;freq;apertium_a_verifier
+E2072;hâte;rush;4.48;nom;B1;freq;apertium_a_verifier
+E2073;aiguisé / aigu;sharp;4.48;adjectif;B1;freq;apertium_a_verifier
+E2074;simon;simon;4.48;mot-outil;B1;freq;apertium_a_verifier
+E2075;le football;soccer;4.48;nom;B1;freq;existante
+E2076;étable;stable;4.48;nom;B1;freq;apertium_a_verifier
+E2077;ravitaillement;supplies;4.48;nom;B1;freq;apertium_a_verifier
+E2078;provisoire;temporary;4.48;adjectif;B1;freq;apertium_a_verifier
+E2079;truc;trick;4.48;nom;B1;freq;apertium_a_verifier
+E2080;os;bone;4.47;nom;B1;freq;apertium_a_verifier
+E2081;brian;brian;4.47;mot-outil;B1;freq;apertium_a_verifier
+E2082;chambre / quart;chamber;4.47;nom;B1;freq;apertium_a_verifier
+E2083;carte / graphique;chart;4.47;nom;B1;freq;apertium_a_verifier
+E2084;circuit;circuit;4.47;nom;B1;freq;apertium_a_verifier
+E2085;le vêtement;clothing;4.47;nom;B1;freq;existante
+E2086;défendre / plaider;defend;4.47;verbe;B1;freq;apertium_a_verifier
+E2087;elizabeth;elizabeth;4.47;mot-outil;B1;freq;apertium_a_verifier
+E2088;quotidien;everyday;4.47;adjectif;B1;freq;apertium_a_verifier
+E2089;extension / portée;extent;4.47;nom;B1;freq;apertium_a_verifier
+E2090;pêche;fishing;4.47;nom;B1;freq;apertium_a_verifier
+E2091;format / formater;format;4.47;nom;B1;freq;apertium_a_verifier
+E2092;vide / brèche / lacune;gap;4.47;nom;B1;freq;apertium_a_verifier
+E2093;pale / porte;gate;4.47;nom;B1;freq;apertium_a_verifier
+E2094;dommage / mal / préjudice;harm;4.47;nom;B1;freq;apertium_a_verifier
+E2095;maison;household;4.47;nom;B1;freq;apertium_a_verifier
+E2096;immigration;immigration;4.47;nom;B1;freq;apertium_a_verifier
+E2097;impressionant;impressive;4.47;adjectif;B1;freq;apertium_a_verifier
+E2098;la leçon;lesson;4.47;nom;B1;freq;existante
+E2099;affectueux;loving;4.47;adjectif;B1;freq;apertium_a_verifier
+E2100;affiliation / filiation;membership;4.47;nom;B1;freq;apertium_a_verifier
+E2101;miami;miami;4.47;mot-outil;B1;freq;apertium_a_verifier
+E2102;le miroir;mirror;4.47;nom;B1;freq;existante
+E2103;montagne / monture / monter;mount;4.47;nom;B1;freq;apertium_a_verifier
+E2104;arriver;occur;4.47;verbe;B1;freq;apertium_a_verifier
+E2105;stationnement;parking;4.47;nom;B1;freq;apertium_a_verifier
+E2106;proposition;proposal;4.47;nom;B1;freq;apertium_a_verifier
+E2107;la province;province;4.47;nom;B1;freq;existante
+E2108;reconnaissance / recognition;recognition;4.47;nom;B1;freq;apertium_a_verifier
+E2109;réputation;reputation;4.47;nom;B1;freq;apertium_a_verifier
+E2110;roulage;rolling;4.47;nom;B1;freq;apertium_a_verifier
+E2111;danspeudetemps;shortly;4.47;adverbe;B1;freq;apertium_a_verifier
+E2112;fortement;strongly;4.47;adverbe;B1;freq;apertium_a_verifier
+E2113;la technique;technique;4.47;nom;B1;freq;existante
+E2114;maigre / mince / amaigrir;thin;4.47;adjectif;B1;freq;apertium_a_verifier
+E2115;l'aventure;adventure;4.46;nom;B1;freq;existante
+E2116;argumenter / disputer / contester;argue;4.46;verbe;B1;freq;apertium_a_verifier
+E2117;estimation / expertise;assessment;4.46;nom;B1;freq;apertium_a_verifier
+E2118;atmosphère;atmosphere;4.46;nom;B1;freq;apertium_a_verifier
+E2119;terrible;awful;4.46;adjectif;B1;freq;apertium_a_verifier
+E2120;la chambre;bedroom;4.46;nom;B1;freq;existante
+E2121;la croyance;belief;4.46;nom;B1;freq;existante
+E2122;soigneusement;carefully;4.46;adverbe;B1;freq;apertium_a_verifier
+E2123;fermeture;closing;4.46;nom;B1;freq;apertium_a_verifier
+E2124;le nuage;cloud;4.46;nom;B1;freq;existante
+E2125;colorado;colorado;4.46;mot-outil;B1;freq;apertium_a_verifier
+E2126;contraste / contraster;contrast;4.46;nom;B1;freq;apertium_a_verifier
+E2127;donald;donald;4.46;mot-outil;B1;freq;apertium_a_verifier
+E2128;oeuf;egg;4.46;nom;B1;freq;apertium_a_verifier
+E2129;l'élément;element;4.46;nom;B1;freq;existante
+E2130;ailleurs;elsewhere;4.46;adverbe;B1;freq;apertium_a_verifier
+E2131;établir;establish;4.46;verbe;B1;freq;apertium_a_verifier
+E2132;acroissement / agrandissement / élargissement;extension;4.46;nom;B1;freq;apertium_a_verifier
+E2133;fondateur;founder;4.46;nom;B1;freq;apertium_a_verifier
+E2134;équipe / marche;gear;4.46;nom;B1;freq;apertium_a_verifier
+E2135;géorgie;georgia;4.46;mot-outil;B1;freq;apertium_a_verifier
+E2136;hanche;hip;4.46;nom;B1;freq;apertium_a_verifier
+E2137;infrastructure;infrastructure;4.46;nom;B1;freq;apertium_a_verifier
+E2138;jason;jason;4.46;mot-outil;B1;freq;apertium_a_verifier
+E2139;morale / moral;moral;4.46;nom;B1;freq;apertium_a_verifier
+E2140;offensif;offensive;4.46;adjectif;B1;freq;apertium_a_verifier
+E2141;le colis;package;4.46;nom;B1;freq;existante
+E2142;la pauvreté;poverty;4.46;nom;B1;freq;existante
+E2143;traitement;processing;4.46;nom;B1;freq;apertium_a_verifier
+E2144;qualifié;qualified;4.46;adjectif;B1;freq;apertium_a_verifier
+E2145;voie;railway;4.46;nom;B1;freq;apertium_a_verifier
+E2146;ridicule;ridiculous;4.46;adjectif;B1;freq;apertium_a_verifier
+E2147;sensible;sensitive;4.46;adjectif;B1;freq;apertium_a_verifier
+E2148;serviteur;server;4.46;nom;B1;freq;apertium_a_verifier
+E2149;commotion / impressionner;shock;4.46;nom;B1;freq;apertium_a_verifier
+E2150;le silence;silence;4.46;nom;B1;freq;existante
+E2151;militaire / soldat;soldier;4.46;nom;B1;freq;apertium_a_verifier
+E2152;supérieur;superior;4.46;adjectif;B1;freq;apertium_a_verifier
+E2153;gros;thick;4.46;adjectif;B1;freq;apertium_a_verifier
+E2154;transition;transition;4.46;nom;B1;freq;apertium_a_verifier
+E2155;violent;violent;4.46;adjectif;B1;freq;apertium_a_verifier
+E2156;laver;wash;4.46;verbe;B1;freq;apertium_a_verifier
+E2157;acide;acid;4.45;nom;B1;freq;apertium_a_verifier
+E2158;actrice;actress;4.45;nom;B1;freq;apertium_a_verifier
+E2159;administratif;administrative;4.45;adjectif;B1;freq;apertium_a_verifier
+E2160;alan;alan;4.45;mot-outil;B1;freq;apertium_a_verifier
+E2161;ange / angel;angel;4.45;nom;B1;freq;apertium_a_verifier
+E2162;angoisse / anxiété / détresse;anxiety;4.45;nom;B1;freq;apertium_a_verifier
+E2163;allégement / allègement / bonification;bonus;4.45;nom;B1;freq;apertium_a_verifier
+E2164;le château;castle;4.45;nom;B1;freq;existante
+E2165;charité;charity;4.45;nom;B1;freq;apertium_a_verifier
+E2166;comparer;compare;4.45;verbe;B1;freq;apertium_a_verifier
+E2167;la cuisine;cooking;4.45;nom;B1;freq;existante
+E2168;couverture / recouvrement;covering;4.45;nom;B1;freq;apertium_a_verifier
+E2169;curieux;curious;4.45;adjectif;B1;freq;apertium_a_verifier
+E2170;la découverte;discovery;4.45;nom;B1;freq;existante
+E2171;duc;duke;4.45;nom;B1;freq;apertium_a_verifier
+E2172;égypte;egypt;4.45;mot-outil;B1;freq;apertium_a_verifier
+E2173;animer / encourager / efforcer;encourage;4.45;verbe;B1;freq;apertium_a_verifier
+E2174;flash;flash;4.45;nom;B1;freq;apertium_a_verifier
+E2175;formel;formal;4.45;adjectif;B1;freq;apertium_a_verifier
+E2176;formule;formula;4.45;nom;B1;freq;apertium_a_verifier
+E2177;le gris;gray;4.45;nom;B1;freq;existante
+E2178;brut;gross;4.45;adjectif;B1;freq;apertium_a_verifier
+E2179;innocent;innocent;4.45;adjectif;B1;freq;apertium_a_verifier
+E2180;jeff;jeff;4.45;mot-outil;B1;freq;apertium_a_verifier
+E2181;mystère;mystery;4.45;nom;B1;freq;apertium_a_verifier
+E2182;le palais;palace;4.45;nom;B1;freq;existante
+E2183;peine / pénalisation;penalty;4.45;nom;B1;freq;apertium_a_verifier
+E2184;mascotte;pet;4.45;nom;B1;freq;apertium_a_verifier
+E2185;photographie;photography;4.45;nom;B1;freq;apertium_a_verifier
+E2186;producteur;producing;4.45;adjectif;B1;freq;apertium_a_verifier
+E2187;protestation / protêt / protester;protest;4.45;nom;B1;freq;apertium_a_verifier
+E2188;publication;publication;4.45;nom;B1;freq;apertium_a_verifier
+E2189;indice / rating;rating;4.45;nom;B1;freq;apertium_a_verifier
+E2190;rapporter;refer;4.45;verbe;B1;freq;apertium_a_verifier
+E2191;respectivement;respectively;4.45;adverbe;B1;freq;apertium_a_verifier
+E2192;rome;rome;4.45;mot-outil;B1;freq;apertium_a_verifier
+E2193;sélectionner / sélecter;select;4.45;verbe;B1;freq;apertium_a_verifier
+E2194;silencieux;silent;4.45;adjectif;B1;freq;apertium_a_verifier
+E2195;galérer / subir / souffrir;suffer;4.45;verbe;B1;freq;apertium_a_verifier
+E2196;le temple;temple;4.45;nom;B1;freq;existante
+E2197;sillage;trail;4.45;nom;B1;freq;apertium_a_verifier
+E2198;l'oncle;uncle;4.45;nom;B1;freq;existante
+E2199;inaccoutumé / insolite;unusual;4.45;adjectif;B1;freq;apertium_a_verifier
+E2200;l'arrivée;arrival;4.44;nom;B1;freq;existante
+E2201;agression;assault;4.44;nom;B1;freq;apertium_a_verifier
+E2202;mal;badly;4.44;adverbe;B1;freq;apertium_a_verifier
+E2203;baignade / baignoire / bain;bath;4.44;nom;B1;freq;apertium_a_verifier
+E2204;poursuite / courser / pourchasser;chase;4.44;nom;B1;freq;apertium_a_verifier
+E2205;béton / concret;concrete;4.44;nom;B1;freq;apertium_a_verifier
+E2206;profondément;deeply;4.44;adverbe;B1;freq;apertium_a_verifier
+E2207;éclaircissement / explication;explanation;4.44;nom;B1;freq;apertium_a_verifier
+E2208;exposé / exposition;exposure;4.44;nom;B1;freq;apertium_a_verifier
+E2209;fiction;fiction;4.44;nom;B1;freq;apertium_a_verifier
+E2210;aval / garantie / garantir;guarantee;4.44;nom;B1;freq;apertium_a_verifier
+E2211;le bonheur;happiness;4.44;nom;B1;freq;existante
+E2212;hideux / horrible;horrible;4.44;adjectif;B1;freq;apertium_a_verifier
+E2213;idéal;ideal;4.44;adjectif;B1;freq;apertium_a_verifier
+E2214;illinois;illinois;4.44;mot-outil;B1;freq;apertium_a_verifier
+E2215;islamique / islamiste;islamic;4.44;adjectif;B1;freq;apertium_a_verifier
+E2216;jimmy;jimmy;4.44;mot-outil;B1;freq;apertium_a_verifier
+E2217;kelly;kelly;4.44;mot-outil;B1;freq;apertium_a_verifier
+E2218;légende;legend;4.44;nom;B1;freq;apertium_a_verifier
+E2219;lieutenant;lieutenant;4.44;nom;B1;freq;apertium_a_verifier
+E2220;façon / humeur;mood;4.44;nom;B1;freq;apertium_a_verifier
+E2221;muscle;muscle;4.44;nom;B1;freq;apertium_a_verifier
+E2222;passion / ardeur;passion;4.44;nom;B1;freq;apertium_a_verifier
+E2223;procédure;procedure;4.44;nom;B1;freq;apertium_a_verifier
+E2224;producteur;producer;4.44;nom;B1;freq;apertium_a_verifier
+E2225;file / graduation / rang;rank;4.44;nom;B1;freq;apertium_a_verifier
+E2226;remplacement / substitution / replacement;replacement;4.44;nom;B1;freq;apertium_a_verifier
+E2227;le sable;sand;4.44;nom;B1;freq;existante
+E2228;l'ombre;shadow;4.44;nom;B1;freq;existante
+E2229;cassette / ruban;tape;4.44;nom;B1;freq;apertium_a_verifier
+E2230;fil;thread;4.44;nom;B1;freq;apertium_a_verifier
+E2231;victoria;victoria;4.44;mot-outil;B1;freq;apertium_a_verifier
+E2232;salaire;wage;4.44;nom;B1;freq;apertium_a_verifier
+E2233;andy;andy;4.43;mot-outil;B1;freq;apertium_a_verifier
+E2234;avenue;avenue;4.43;nom;B1;freq;apertium_a_verifier
+E2235;battement / rouste;beating;4.43;nom;B1;freq;apertium_a_verifier
+E2236;charlie;charlie;4.43;mot-outil;B1;freq;apertium_a_verifier
+E2237;l'horloge;clock;4.43;nom;B1;freq;existante
+E2238;commissaire;commissioner;4.43;nom;B1;freq;apertium_a_verifier
+E2239;engagement / compromis;commitment;4.43;nom;B1;freq;apertium_a_verifier
+E2240;sûr;confident;4.43;adjectif;B1;freq;apertium_a_verifier
+E2241;la coutume;custom;4.43;nom;B1;freq;existante
+E2242;le bureau;desk;4.43;nom;B1;freq;existante
+E2243;l'oreille;ear;4.43;nom;B1;freq;existante
+E2244;l'électricité;electricity;4.43;nom;B1;freq;existante
+E2245;fbi;fbi;4.43;nom;B1;freq;apertium_a_verifier
+E2246;gymnase;gym;4.43;nom;B1;freq;apertium_a_verifier
+E2247;utile;helpful;4.43;adjectif;B1;freq;apertium_a_verifier
+E2248;horreur;horror;4.43;nom;B1;freq;apertium_a_verifier
+E2249;iraq / irak;iraq;4.43;mot-outil;B1;freq;apertium_a_verifier
+E2250;étiquette / label / référencer;label;4.43;nom;B1;freq;apertium_a_verifier
+E2251;départ / issue / sortie;output;4.43;nom;B1;freq;apertium_a_verifier
+E2252;ton;pitch;4.43;nom;B1;freq;apertium_a_verifier
+E2253;pizza;pizza;4.43;nom;B1;freq;apertium_a_verifier
+E2254;plaine / simple;plain;4.43;nom;B1;freq;apertium_a_verifier
+E2255;révéler;reveal;4.43;verbe;B1;freq;apertium_a_verifier
+E2256;romantique;romantic;4.43;adjectif;B1;freq;apertium_a_verifier
+E2257;stratégique;strategic;4.43;adjectif;B1;freq;apertium_a_verifier
+E2258;nage / natation;swimming;4.43;nom;B1;freq;apertium_a_verifier
+E2259;bien-être;welfare;4.43;nom;B1;freq;apertium_a_verifier
+E2260;câble / fildefer;wire;4.43;nom;B1;freq;apertium_a_verifier
+E2261;l'ouvrier;worker;4.43;nom;B1;freq;existante
+E2262;après / puis / tantôt;afterwards;4.42;adverbe;B1;freq;apertium_a_verifier
+E2263;bien;alright;4.42;adverbe;B1;freq;apertium_a_verifier
+E2264;la colère;anger;4.42;nom;B1;freq;existante
+E2265;l'architecture;architecture;4.42;nom;B1;freq;existante
+E2266;assister / secourir;assist;4.42;verbe;B1;freq;apertium_a_verifier
+E2267;ceinture / courroie;belt;4.42;nom;B1;freq;apertium_a_verifier
+E2268;capturer;capture;4.42;verbe;B1;freq;apertium_a_verifier
+E2269;cérémonie;ceremony;4.42;nom;B1;freq;apertium_a_verifier
+E2270;bandedessinée;comic;4.42;nom;B1;freq;apertium_a_verifier
+E2271;diamant;diamond;4.42;nom;B1;freq;apertium_a_verifier
+E2272;économie;economics;4.42;nom;B1;freq;apertium_a_verifier
+E2273;efficace / performant;efficient;4.42;adjectif;B1;freq;apertium_a_verifier
+E2274;électrique;electrical;4.42;adjectif;B1;freq;apertium_a_verifier
+E2275;essentiellement;essentially;4.42;adverbe;B1;freq;apertium_a_verifier
+E2276;établissement;establishment;4.42;nom;B1;freq;apertium_a_verifier
+E2277;la fleur;flower;4.42;nom;B1;freq;existante
+E2278;fantôme;ghost;4.42;nom;B1;freq;apertium_a_verifier
+E2279;hockey;hockey;4.42;nom;B1;freq;apertium_a_verifier
+E2280;houston;houston;4.42;mot-outil;B1;freq;apertium_a_verifier
+E2281;https;https;4.42;nom;B1;freq;apertium_a_verifier
+E2282;chasse;hunting;4.42;nom;B1;freq;apertium_a_verifier
+E2283;islam;islam;4.42;nom;B1;freq;apertium_a_verifier
+E2284;jane;jane;4.42;mot-outil;B1;freq;apertium_a_verifier
+E2285;trousse;kit;4.42;nom;B1;freq;apertium_a_verifier
+E2286;laboratoire;lab;4.42;nom;B1;freq;apertium_a_verifier
+E2287;morgan;morgan;4.42;mot-outil;B1;freq;apertium_a_verifier
+E2288;moscou;moscow;4.42;mot-outil;B1;freq;apertium_a_verifier
+E2289;nerveux / énervé;nervous;4.42;adjectif;B1;freq;apertium_a_verifier
+E2290;ànouveau;newly;4.42;adverbe;B1;freq;apertium_a_verifier
+E2291;bizarre / étrange;odd;4.42;adjectif;B1;freq;apertium_a_verifier
+E2292;normal;ordinary;4.42;adjectif;B1;freq;apertium_a_verifier
+E2293;participer;participate;4.42;verbe;B1;freq;apertium_a_verifier
+E2294;philadelphie;philadelphia;4.42;mot-outil;B1;freq;apertium_a_verifier
+E2295;la prière;prayer;4.42;nom;B1;freq;existante
+E2296;raciste;racist;4.42;adjectif;B1;freq;apertium_a_verifier
+E2297;rarement;rarely;4.42;adverbe;B1;freq;apertium_a_verifier
+E2298;sexy;sexy;4.42;adjectif;B1;freq;apertium_a_verifier
+E2299;habilité;skill;4.42;nom;B1;freq;apertium_a_verifier
+E2300;sol / terre / terroir;soil;4.42;nom;B1;freq;apertium_a_verifier
+E2301;résoudre;solve;4.42;verbe;B1;freq;apertium_a_verifier
+E2302;estomac / ventre;stomach;4.42;nom;B1;freq;apertium_a_verifier
+E2303;le déchet;trash;4.42;nom;B1;freq;existante
+E2304;laid;ugly;4.42;adjectif;B1;freq;apertium_a_verifier
+E2305;virus;virus;4.42;nom;B1;freq;apertium_a_verifier
+E2306;n'importequi;whoever;4.42;mot-outil;B1;freq;apertium_a_verifier
+E2307;anthony;anthony;4.41;mot-outil;B1;freq;apertium_a_verifier
+E2308;arthur;arthur;4.41;mot-outil;B1;freq;apertium_a_verifier
+E2309;aspect;aspect;4.41;nom;B1;freq;apertium_a_verifier
+E2310;impulsion / augmenter / stimuler;boost;4.41;nom;B1;freq;apertium_a_verifier
+E2311;agence;bureau;4.41;nom;B1;freq;apertium_a_verifier
+E2312;colonel;colonel;4.41;nom;B1;freq;apertium_a_verifier
+E2313;aise / commodité / confort;comfort;4.41;nom;B1;freq;apertium_a_verifier
+E2314;le cousin;cousin;4.41;nom;B1;freq;existante
+E2315;crevasse / fente;crack;4.41;nom;B1;freq;apertium_a_verifier
+E2316;dragon;dragon;4.41;nom;B1;freq;apertium_a_verifier
+E2317;dramatique;dramatic;4.41;adjectif;B1;freq;apertium_a_verifier
+E2318;la poussière;dust;4.41;nom;B1;freq;existante
+E2319;hollandais;dutch;4.41;nom;B1;freq;apertium_a_verifier
+E2320;l'évolution;evolution;4.41;nom;B1;freq;existante
+E2321;la maladie;illness;4.41;nom;B1;freq;existante
+E2322;inspiration;inspiration;4.41;nom;B1;freq;apertium_a_verifier
+E2323;institution;institution;4.41;nom;B1;freq;apertium_a_verifier
+E2324;le couteau;knife;4.41;nom;B1;freq;existante
+E2325;dernièrement;lately;4.41;adverbe;B1;freq;apertium_a_verifier
+E2326;monument / mémorial / commémoratif;memorial;4.41;nom;B1;freq;apertium_a_verifier
+E2327;mexicain;mexican;4.41;adjectif;B1;freq;apertium_a_verifier
+E2328;minorité;minority;4.41;nom;B1;freq;apertium_a_verifier
+E2329;mamelle;mum;4.41;nom;B1;freq;apertium_a_verifier
+E2330;priorité;priority;4.41;nom;B1;freq;apertium_a_verifier
+E2331;hausse / promotion;promotion;4.41;nom;B1;freq;apertium_a_verifier
+E2332;barre / rail / rambarde;rail;4.41;nom;B1;freq;apertium_a_verifier
+E2333;lointain;remote;4.41;adjectif;B1;freq;apertium_a_verifier
+E2334;réparation / réparer;repair;4.41;nom;B1;freq;apertium_a_verifier
+E2335;racine / enraciner;root;4.41;nom;B1;freq;apertium_a_verifier
+E2336;saint;saint;4.41;nom;B1;freq;apertium_a_verifier
+E2337;voler;steal;4.41;verbe;B1;freq;apertium_a_verifier
+E2338;téléphone / téléphoner;telephone;4.41;nom;B1;freq;apertium_a_verifier
+E2339;alorsque / enattendantque / pendantque;whereas;4.41;mot-outil;B1;freq;apertium_a_verifier
+E2340;alexander;alexander;4.40;mot-outil;B1;freq;apertium_a_verifier
+E2341;alliance;alliance;4.40;nom;B1;freq;apertium_a_verifier
+E2342;offre / tentative / enchérir;bid;4.40;nom;B1;freq;apertium_a_verifier
+E2343;beurre;butter;4.40;nom;B1;freq;apertium_a_verifier
+E2344;conclusion / constat;conclusion;4.40;nom;B1;freq;apertium_a_verifier
+E2345;confirmer;confirm;4.40;verbe;B1;freq;apertium_a_verifier
+E2346;vitre;crystal;4.40;nom;B1;freq;apertium_a_verifier
+E2347;doyen;dean;4.40;nom;B1;freq;apertium_a_verifier
+E2348;décent;decent;4.40;adjectif;B1;freq;apertium_a_verifier
+E2349;diminution / décliner;decline;4.40;nom;B1;freq;apertium_a_verifier
+E2350;le retard;delay;4.40;nom;B1;freq;existante
+E2351;le désert;desert;4.40;nom;B1;freq;existante
+E2352;le centre-ville;downtown;4.40;nom;B1;freq;existante
+E2353;élite;elite;4.40;nom;B1;freq;apertium_a_verifier
+E2354;avant;forth;4.40;adverbe;B1;freq;apertium_a_verifier
+E2355;location / loyer / embaucher;hire;4.40;nom;B1;freq;apertium_a_verifier
+E2356;israélien;israeli;4.40;nom;B1;freq;apertium_a_verifier
+E2357;palier;landing;4.40;nom;B1;freq;apertium_a_verifier
+E2358;cape / nappe;layer;4.40;nom;B1;freq;apertium_a_verifier
+E2359;marier;marry;4.40;verbe;B1;freq;apertium_a_verifier
+E2360;infirmier;nurse;4.40;nom;B1;freq;apertium_a_verifier
+E2361;obtenir;obtain;4.40;verbe;B1;freq;apertium_a_verifier
+E2362;organique;organic;4.40;adjectif;B1;freq;apertium_a_verifier
+E2363;propriété;ownership;4.40;nom;B1;freq;apertium_a_verifier
+E2364;pennsylvanie;pennsylvania;4.40;mot-outil;B1;freq;apertium_a_verifier
+E2365;la poésie;poetry;4.40;nom;B1;freq;existante
+E2366;la casserole;pot;4.40;nom;B1;freq;existante
+E2367;supplier / prierde / prier;pray;4.40;verbe;B1;freq;apertium_a_verifier
+E2368;remémoration / retirer / rappeler;recall;4.40;nom;B1;freq;apertium_a_verifier
+E2369;rugby;rugby;4.40;nom;B1;freq;apertium_a_verifier
+E2370;la feuille;sheet;4.40;nom;B1;freq;existante
+E2371;radoucir;smooth;4.40;verbe;B1;freq;apertium_a_verifier
+E2372;spirituel;spiritual;4.40;adjectif;B1;freq;apertium_a_verifier
+E2373;corde / recordage;string;4.40;nom;B1;freq;apertium_a_verifier
+E2374;soudain / subit;sudden;4.40;adjectif;B1;freq;apertium_a_verifier
+E2375;suède;sweden;4.40;mot-outil;B1;freq;apertium_a_verifier
+E2376;syrie;syria;4.40;mot-outil;B1;freq;apertium_a_verifier
+E2377;les vacances;vacation;4.40;nom;B1;freq;existante
+E2378;arabe;arab;4.39;nom;B1;freq;apertium_a_verifier
+E2379;associer / fréquenter;associate;4.39;verbe;B1;freq;apertium_a_verifier
+E2380;atlantique;atlantic;4.39;adjectif;B1;freq;apertium_a_verifier
+E2381;gêner / déranger;bother;4.39;verbe;B1;freq;apertium_a_verifier
+E2382;émission;broadcast;4.39;nom;B1;freq;apertium_a_verifier
+E2383;aurevoir;bye;4.39;mot-outil;B1;freq;apertium_a_verifier
+E2384;le citoyen;citizen;4.39;nom;B1;freq;existante
+E2385;propreté;cleaning;4.39;nom;B1;freq;apertium_a_verifier
+E2386;concourir;compete;4.39;verbe;B1;freq;apertium_a_verifier
+E2387;désastre;disaster;4.39;nom;B1;freq;apertium_a_verifier
+E2388;déceler / dépister / découvrir;discover;4.39;verbe;B1;freq;apertium_a_verifier
+E2389;disney;disney;4.39;mot-outil;B1;freq;apertium_a_verifier
+E2390;entrée;entrance;4.39;nom;B1;freq;apertium_a_verifier
+E2391;également;equally;4.39;adverbe;B1;freq;apertium_a_verifier
+E2392;francis;francis;4.39;mot-outil;B1;freq;apertium_a_verifier
+E2393;l'amitié;friendship;4.39;nom;B1;freq;existante
+E2394;gary;gary;4.39;mot-outil;B1;freq;apertium_a_verifier
+E2395;idiot;idiot;4.39;nom;B1;freq;apertium_a_verifier
+E2396;intense;intense;4.39;adjectif;B1;freq;apertium_a_verifier
+E2397;le liquide;liquid;4.39;nom;B1;freq;existante
+E2398;faire / inventer;makeup;4.39;verbe;B1;freq;apertium_a_verifier
+E2399;médaille;medal;4.39;nom;B1;freq;apertium_a_verifier
+E2400;hypothèque / hypothéquer;mortgage;4.39;nom;B1;freq;apertium_a_verifier
+E2401;narratif;narrative;4.39;adjectif;B1;freq;apertium_a_verifier
+E2402;étroit;narrow;4.39;adjectif;B1;freq;apertium_a_verifier
+E2403;occasionnellement;occasionally;4.39;adverbe;B1;freq;apertium_a_verifier
+E2404;la casserole;pan;4.39;nom;B1;freq;existante
+E2405;potentiellement;potentially;4.39;adverbe;B1;freq;apertium_a_verifier
+E2406;reduction / réduction;reduction;4.39;nom;B1;freq;apertium_a_verifier
+E2407;refléter;reflect;4.39;verbe;B1;freq;apertium_a_verifier
+E2408;résidu / repousser;refuse;4.39;nom;B1;freq;apertium_a_verifier
+E2409;la ressource;resource;4.39;nom;B1;freq;existante
+E2410;roger;roger;4.39;mot-outil;B1;freq;apertium_a_verifier
+E2411;seattle;seattle;4.39;mot-outil;B1;freq;apertium_a_verifier
+E2412;coquille;shell;4.39;nom;B1;freq;apertium_a_verifier
+E2413;bête;silly;4.39;adjectif;B1;freq;apertium_a_verifier
+E2414;traduction;translation;4.39;nom;B1;freq;apertium_a_verifier
+E2415;visible;visible;4.39;adjectif;B1;freq;apertium_a_verifier
+E2416;allen;allen;4.38;mot-outil;B1;freq;apertium_a_verifier
+E2417;amendement;amendment;4.38;nom;B1;freq;apertium_a_verifier
+E2418;angle / orienter;angle;4.38;nom;B1;freq;apertium_a_verifier
+E2419;arizona;arizona;4.38;mot-outil;B1;freq;apertium_a_verifier
+E2420;parvenir / arriver;arrive;4.38;verbe;B1;freq;apertium_a_verifier
+E2421;appartenir;belong;4.38;verbe;B1;freq;apertium_a_verifier
+E2422;berlin;berlin;4.38;mot-outil;B1;freq;apertium_a_verifier
+E2423;évêque;bishop;4.38;nom;B1;freq;apertium_a_verifier
+E2424;clark;clark;4.38;mot-outil;B1;freq;apertium_a_verifier
+E2425;généralement / populairement;commonly;4.38;adverbe;B1;freq;apertium_a_verifier
+E2426;relier;connect;4.38;verbe;B1;freq;apertium_a_verifier
+E2427;défensif;defensive;4.38;adjectif;B1;freq;apertium_a_verifier
+E2428;efficacité / efficience;efficiency;4.38;nom;B1;freq;apertium_a_verifier
+E2429;entreprise;enterprise;4.38;nom;B1;freq;apertium_a_verifier
+E2430;expérience;experiment;4.38;nom;B1;freq;apertium_a_verifier
+E2431;forum;forum;4.38;nom;B1;freq;apertium_a_verifier
+E2432;l'herbe;grass;4.38;nom;B1;freq;existante
+E2433;deplusenplus;increasingly;4.38;adverbe;B1;freq;apertium_a_verifier
+E2434;incroyablement;incredibly;4.38;adverbe;B1;freq;apertium_a_verifier
+E2435;journaliste;journalist;4.38;nom;B1;freq;apertium_a_verifier
+E2436;moulin;mill;4.38;nom;B1;freq;apertium_a_verifier
+E2437;l'occasion;occasion;4.38;nom;B1;freq;existante
+E2438;pas;pace;4.38;nom;B1;freq;apertium_a_verifier
+E2439;le stylo;pen;4.38;nom;B1;freq;existante
+E2440;pape;pope;4.38;nom;B1;freq;apertium_a_verifier
+E2441;la possession;possession;4.38;nom;B1;freq;existante
+E2442;pp;pp;4.38;nom;B1;freq;apertium_a_verifier
+E2443;rapide;rapid;4.38;adjectif;B1;freq;apertium_a_verifier
+E2444;allant / aménagement / contrôle;regulation;4.38;nom;B1;freq;apertium_a_verifier
+E2445;résident;resident;4.38;nom;B1;freq;apertium_a_verifier
+E2446;tourner;spin;4.38;verbe;B1;freq;apertium_a_verifier
+E2447;approprié;suitable;4.38;adjectif;B1;freq;apertium_a_verifier
+E2448;trentaine;thirty;4.38;nom;B1;freq;apertium_a_verifier
+E2449;envigueur / valable;valid;4.38;adjectif;B1;freq;apertium_a_verifier
+E2450;vital;vital;4.38;mot-outil;B1;freq;apertium_a_verifier
+E2451;agriculture;agriculture;4.37;nom;B1;freq;apertium_a_verifier
+E2452;anna;anna;4.37;mot-outil;B1;freq;apertium_a_verifier
+E2453;atlanta;atlanta;4.37;mot-outil;B1;freq;apertium_a_verifier
+E2454;percevoir / collecter / recueillir;collect;4.37;verbe;B1;freq;apertium_a_verifier
+E2455;le commerce;commerce;4.37;nom;B1;freq;existante
+E2456;la monnaie;currency;4.37;nom;B1;freq;existante
+E2457;l'exposition;exhibition;4.37;nom;B1;freq;existante
+E2458;fraude;fraud;4.37;nom;B1;freq;apertium_a_verifier
+E2459;obsèques;funeral;4.37;nom;B1;freq;apertium_a_verifier
+E2460;gordon;gordon;4.37;mot-outil;B1;freq;apertium_a_verifier
+E2461;miel;honey;4.37;nom;B1;freq;apertium_a_verifier
+E2462;honneur / honorer;honour;4.37;nom;B1;freq;apertium_a_verifier
+E2463;crochet / hameçon / crocher;hook;4.37;nom;B1;freq;apertium_a_verifier
+E2464;chasseur;hunter;4.37;nom;B1;freq;apertium_a_verifier
+E2465;introduire / présenter;introduce;4.37;verbe;B1;freq;apertium_a_verifier
+E2466;kansas;kansas;4.37;mot-outil;B1;freq;apertium_a_verifier
+E2467;matthew;matthew;4.37;mot-outil;B1;freq;apertium_a_verifier
+E2468;simplement;merely;4.37;adverbe;B1;freq;apertium_a_verifier
+E2469;moniteur / contrôler;monitor;4.37;nom;B1;freq;apertium_a_verifier
+E2470;patrick;patrick;4.37;mot-outil;B1;freq;apertium_a_verifier
+E2471;programmation;programming;4.37;nom;B1;freq;apertium_a_verifier
+E2472;éditorial;publishing;4.37;nom;B1;freq;apertium_a_verifier
+E2473;proportion / ratio;ratio;4.37;nom;B1;freq;apertium_a_verifier
+E2474;regret / repentir / regretter;regret;4.37;nom;B1;freq;apertium_a_verifier
+E2475;rappeler / souvenir;remind;4.37;verbe;B1;freq;apertium_a_verifier
+E2476;ressource / faireappel;resort;4.37;nom;B1;freq;apertium_a_verifier
+E2477;envers;reverse;4.37;nom;B1;freq;apertium_a_verifier
+E2478;routine;routine;4.37;nom;B1;freq;apertium_a_verifier
+E2479;pépite / semer;seed;4.37;nom;B1;freq;apertium_a_verifier
+E2480;résoudre;settle;4.37;verbe;B1;freq;apertium_a_verifier
+E2481;péché;sin;4.37;nom;B1;freq;apertium_a_verifier
+E2482;période / maléfice;spell;4.37;nom;B1;freq;apertium_a_verifier
+E2483;compterendu / sommaire;summary;4.37;nom;B1;freq;apertium_a_verifier
+E2484;survivance / survie;survival;4.37;nom;B1;freq;apertium_a_verifier
+E2485;épée;sword;4.37;nom;B1;freq;apertium_a_verifier
+E2486;la langue;tongue;4.37;nom;B1;freq;existante
+E2487;réussite;achievement;4.36;nom;B1;freq;apertium_a_verifier
+E2488;anderson;anderson;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2489;austin;austin;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2490;automatique;automatic;4.36;adjectif;B1;freq;apertium_a_verifier
+E2491;comportement / conduite;behaviour;4.36;nom;B1;freq;apertium_a_verifier
+E2492;cd;cd;4.36;nom;B1;freq;apertium_a_verifier
+E2493;abri / cape / manteau;coat;4.36;nom;B1;freq;apertium_a_verifier
+E2494;compréhensible;comprehensive;4.36;adjectif;B1;freq;apertium_a_verifier
+E2495;consentement;consent;4.36;nom;B1;freq;apertium_a_verifier
+E2496;papa;daddy;4.36;nom;B1;freq;apertium_a_verifier
+E2497;destruction;destruction;4.36;nom;B1;freq;apertium_a_verifier
+E2498;diego;diego;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2499;le divorce;divorce;4.36;nom;B1;freq;existante
+E2500;compromettre / embarrasser / engager;engage;4.36;verbe;B1;freq;apertium_a_verifier
+E2501;extraordinaire;extraordinary;4.36;adjectif;B1;freq;apertium_a_verifier
+E2502;destination / destin;fate;4.36;nom;B1;freq;apertium_a_verifier
+E2503;la fréquence;frequency;4.36;nom;B1;freq;existante
+E2504;gène;gene;4.36;nom;B1;freq;apertium_a_verifier
+E2505;la gloire;glory;4.36;nom;B1;freq;existante
+E2506;siège;headquarters;4.36;nom;B1;freq;apertium_a_verifier
+E2507;patrimoine;heritage;4.36;nom;B1;freq;apertium_a_verifier
+E2508;initiative;initiative;4.36;nom;B1;freq;apertium_a_verifier
+E2509;jean;jean;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2510;jus;juice;4.36;nom;B1;freq;apertium_a_verifier
+E2511;le paysage;landscape;4.36;nom;B1;freq;existante
+E2512;logique;logic;4.36;nom;B1;freq;apertium_a_verifier
+E2513;microsoft;microsoft;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2514;but / objectif;objective;4.36;nom;B1;freq;apertium_a_verifier
+E2515;organisation / organization;organisation;4.36;nom;B1;freq;apertium_a_verifier
+E2516;caractèreprivé / intimité;privacy;4.36;nom;B1;freq;apertium_a_verifier
+E2517;considération / égard / envisager;regard;4.36;nom;B1;freq;apertium_a_verifier
+E2518;le domicile;residence;4.36;nom;B1;freq;existante
+E2519;approchant / environ / quelque;roughly;4.36;adverbe;B1;freq;apertium_a_verifier
+E2520;le salaire;salary;4.36;nom;B1;freq;existante
+E2521;scénario;script;4.36;nom;B1;freq;apertium_a_verifier
+E2522;cassette / ruban;strip;4.36;nom;B1;freq;apertium_a_verifier
+E2523;mètre / tuyau;tube;4.36;nom;B1;freq;apertium_a_verifier
+E2524;walter;walter;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2525;wisconsin;wisconsin;4.36;mot-outil;B1;freq;apertium_a_verifier
+E2526;ambassadeur;ambassador;4.35;nom;B1;freq;apertium_a_verifier
+E2527;ann;ann;4.35;mot-outil;B1;freq;apertium_a_verifier
+E2528;banque / bancaire;banking;4.35;nom;B1;freq;apertium_a_verifier
+E2529;poitrine / sein;breast;4.35;nom;B1;freq;apertium_a_verifier
+E2530;chelsea;chelsea;4.35;mot-outil;B1;freq;apertium_a_verifier
+E2531;chimie;chemistry;4.35;nom;B1;freq;apertium_a_verifier
+E2532;consommation;consumption;4.35;nom;B1;freq;apertium_a_verifier
+E2533;corruption;corruption;4.35;nom;B1;freq;apertium_a_verifier
+E2534;rabais;discount;4.35;nom;B1;freq;apertium_a_verifier
+E2535;douzaine;dozen;4.35;nom;B1;freq;apertium_a_verifier
+E2536;exception;exception;4.35;nom;B1;freq;apertium_a_verifier
+E2537;départ / issue / sortie;exit;4.35;nom;B1;freq;apertium_a_verifier
+E2538;élargir / développer;expand;4.35;verbe;B1;freq;apertium_a_verifier
+E2539;élégant / plaire;fancy;4.35;adjectif;B1;freq;apertium_a_verifier
+E2540;impression;impression;4.35;nom;B1;freq;apertium_a_verifier
+E2541;indiquer;indicate;4.35;verbe;B1;freq;apertium_a_verifier
+E2542;entrée / apport;input;4.35;nom;B1;freq;apertium_a_verifier
+E2543;johnny;johnny;4.35;mot-outil;B1;freq;apertium_a_verifier
+E2544;coup / frapper;knock;4.35;nom;B1;freq;apertium_a_verifier
+E2545;couche / fourrure / peau;leather;4.35;nom;B1;freq;apertium_a_verifier
+E2546;luxe;luxury;4.35;nom;B1;freq;apertium_a_verifier
+E2547;résultat;outcome;4.35;nom;B1;freq;apertium_a_verifier
+E2548;enquête / sondage;poll;4.35;nom;B1;freq;apertium_a_verifier
+E2549;tirage;pulling;4.35;nom;B1;freq;apertium_a_verifier
+E2550;déplacement / extraction / retirage;removal;4.35;nom;B1;freq;apertium_a_verifier
+E2551;séquence;sequence;4.35;nom;B1;freq;apertium_a_verifier
+E2552;singapour;singapore;4.35;mot-outil;B1;freq;apertium_a_verifier
+E2553;étendre;stretch;4.35;verbe;B1;freq;apertium_a_verifier
+E2554;larme;tear;4.35;nom;B1;freq;apertium_a_verifier
+E2555;tennis;tennis;4.35;nom;B1;freq;apertium_a_verifier
+E2556;terroriste;terrorist;4.35;nom;B1;freq;apertium_a_verifier
+E2557;le théâtre;theater;4.35;nom;B1;freq;existante
+E2558;douze;twelve;4.35;mot-outil;B1;freq;apertium_a_verifier
+E2559;vierge;virgin;4.35;nom;B1;freq;apertium_a_verifier
+E2560;loup;wolf;4.35;nom;B1;freq;apertium_a_verifier
+E2561;absence;absence;4.34;nom;B1;freq;apertium_a_verifier
+E2562;agraire / agricole;agricultural;4.34;adjectif;B1;freq;apertium_a_verifier
+E2563;bruce;bruce;4.34;mot-outil;B1;freq;apertium_a_verifier
+E2564;taureau;bull;4.34;nom;B1;freq;apertium_a_verifier
+E2565;contribuer / apporter;contribute;4.34;verbe;B1;freq;apertium_a_verifier
+E2566;contribution;contribution;4.34;nom;B1;freq;apertium_a_verifier
+E2567;délicieux;delicious;4.34;adjectif;B1;freq;apertium_a_verifier
+E2568;nier / démentir / dénier;deny;4.34;verbe;B1;freq;apertium_a_verifier
+E2569;aisance / facilité / soulager;ease;4.34;nom;B1;freq;apertium_a_verifier
+E2570;étaler / étendre / tendre;extend;4.34;verbe;B1;freq;apertium_a_verifier
+E2571;renommée;fame;4.34;nom;B1;freq;apertium_a_verifier
+E2572;inondation / inonder;flood;4.34;nom;B1;freq;apertium_a_verifier
+E2573;génétique;genetic;4.34;adjectif;B1;freq;apertium_a_verifier
+E2574;les lunettes;glasses;4.34;nom;B1;freq;existante
+E2575;instant;instant;4.34;nom;B1;freq;apertium_a_verifier
+E2576;kate;kate;4.34;mot-outil;B1;freq;apertium_a_verifier
+E2577;la liberté;liberty;4.34;mot-outil;B1;freq;existante
+E2578;maria;maria;4.34;mot-outil;B1;freq;apertium_a_verifier
+E2579;contrôle;monitoring;4.34;nom;B1;freq;apertium_a_verifier
+E2580;le principe;principle;4.34;nom;B1;freq;existante
+E2581;progressiste / progressif;progressive;4.34;adjectif;B1;freq;apertium_a_verifier
+E2582;punition;punishment;4.34;nom;B1;freq;apertium_a_verifier
+E2583;rallye / rally;rally;4.34;nom;B1;freq;apertium_a_verifier
+E2584;vite;rapidly;4.34;adverbe;B1;freq;apertium_a_verifier
+E2585;lecteur;reader;4.34;nom;B1;freq;apertium_a_verifier
+E2586;représentation;representation;4.34;nom;B1;freq;apertium_a_verifier
+E2587;la somme;sum;4.34;nom;B1;freq;existante
+E2588;changement / oscillation / balancer;swing;4.34;nom;B1;freq;apertium_a_verifier
+E2589;queue;tail;4.34;nom;B1;freq;apertium_a_verifier
+E2590;jumeau;twin;4.34;nom;B1;freq;apertium_a_verifier
+E2591;alerter;alert;4.33;verbe;B1;freq;apertium_a_verifier
+E2592;brave / courageux;brave;4.33;adjectif;B1;freq;apertium_a_verifier
+E2593;colonne;column;4.33;nom;B1;freq;apertium_a_verifier
+E2594;commettre;commit;4.33;verbe;B1;freq;apertium_a_verifier
+E2595;indemnisation / compensation;compensation;4.33;nom;B1;freq;apertium_a_verifier
+E2596;composition;composition;4.33;nom;B1;freq;apertium_a_verifier
+E2597;conservation;conservation;4.33;nom;B1;freq;apertium_a_verifier
+E2598;constitutionnel;constitutional;4.33;adjectif;B1;freq;apertium_a_verifier
+E2599;carrefour / croisée / croisement;crossing;4.33;nom;B1;freq;apertium_a_verifier
+E2600;densité;density;4.33;nom;B1;freq;apertium_a_verifier
+E2601;difficulté / embarras;difficulty;4.33;nom;B1;freq;apertium_a_verifier
+E2602;élémentaire;elementary;4.33;adjectif;B1;freq;apertium_a_verifier
+E2603;ethnique;ethnic;4.33;adjectif;B1;freq;apertium_a_verifier
+E2604;flotte;fleet;4.33;nom;B1;freq;apertium_a_verifier
+E2605;adoptif;foster;4.33;adjectif;B1;freq;apertium_a_verifier
+E2606;fondamental;fundamental;4.33;adjectif;B1;freq;apertium_a_verifier
+E2607;caractère;genius;4.33;nom;B1;freq;apertium_a_verifier
+E2608;beaucoup;greatly;4.33;adverbe;B1;freq;apertium_a_verifier
+E2609;infection;infection;4.33;nom;B1;freq;apertium_a_verifier
+E2610;intention;intention;4.33;nom;B1;freq;apertium_a_verifier
+E2611;iowa;iowa;4.33;mot-outil;B1;freq;apertium_a_verifier
+E2612;genou;knee;4.33;nom;B1;freq;apertium_a_verifier
+E2613;mécanicien;mechanical;4.33;adjectif;B1;freq;apertium_a_verifier
+E2614;nigeria / nigéria;nigeria;4.33;mot-outil;B1;freq;apertium_a_verifier
+E2615;participation;participation;4.33;nom;B1;freq;apertium_a_verifier
+E2616;précieux;precious;4.33;adjectif;B1;freq;apertium_a_verifier
+E2617;prime;premium;4.33;nom;B1;freq;apertium_a_verifier
+E2618;viserà / prétendre;pretend;4.33;verbe;B1;freq;apertium_a_verifier
+E2619;curé / soin / prêtre;priest;4.33;nom;B1;freq;apertium_a_verifier
+E2620;radical;radical;4.33;adjectif;B1;freq;apertium_a_verifier
+E2621;résidentiel;residential;4.33;adjectif;B1;freq;apertium_a_verifier
+E2622;rétribution / décernerunprix;reward;4.33;nom;B1;freq;apertium_a_verifier
+E2623;robin;robin;4.33;mot-outil;B1;freq;apertium_a_verifier
+E2624;russell;russell;4.33;mot-outil;B1;freq;apertium_a_verifier
+E2625;satellite;satellite;4.33;nom;B1;freq;apertium_a_verifier
+E2626;ébranler / secouer;shake;4.33;verbe;B1;freq;apertium_a_verifier
+E2627;shore;shore;4.33;mot-outil;B1;freq;apertium_a_verifier
+E2628;transmission / trasmission;transmission;4.33;nom;B1;freq;apertium_a_verifier
+E2629;piège / attraper;trap;4.33;nom;B1;freq;apertium_a_verifier
+E2630;uniforme;uniform;4.33;nom;B1;freq;apertium_a_verifier
+E2631;agressif;aggressive;4.32;adjectif;B1;freq;apertium_a_verifier
+E2632;anne;anne;4.32;mot-outil;B1;freq;apertium_a_verifier
+E2633;apparent;apparent;4.32;adjectif;B1;freq;apertium_a_verifier
+E2634;frapper / cogner;bang;4.32;verbe;B1;freq;apertium_a_verifier
+E2635;explosion / bourrasque / attaquer;blast;4.32;nom;B1;freq;apertium_a_verifier
+E2636;communiste;communist;4.32;nom;B1;freq;apertium_a_verifier
+E2637;dénonciation / grief / plainte;complaint;4.32;nom;B1;freq;apertium_a_verifier
+E2638;composant;component;4.32;nom;B1;freq;apertium_a_verifier
+E2639;le courage;courage;4.32;nom;B1;freq;existante
+E2640;curé / soin / soigner;cure;4.32;nom;B1;freq;apertium_a_verifier
+E2641;diversité;diversity;4.32;nom;B1;freq;apertium_a_verifier
+E2642;veille;eve;4.32;nom;B1;freq;apertium_a_verifier
+E2643;faculté;faculty;4.32;nom;B1;freq;apertium_a_verifier
+E2644;rebouclage;feedback;4.32;nom;B1;freq;apertium_a_verifier
+E2645;lutteur;fighter;4.32;nom;B1;freq;apertium_a_verifier
+E2646;ian;ian;4.32;mot-outil;B1;freq;apertium_a_verifier
+E2647;innovation;innovation;4.32;nom;B1;freq;apertium_a_verifier
+E2648;investir / inverser;invest;4.32;verbe;B1;freq;apertium_a_verifier
+E2649;jaquette;jacket;4.32;nom;B1;freq;apertium_a_verifier
+E2650;législatif;legislative;4.32;adjectif;B1;freq;apertium_a_verifier
+E2651;listage;listing;4.32;nom;B1;freq;apertium_a_verifier
+E2652;manuel;manual;4.32;nom;B1;freq;apertium_a_verifier
+E2653;actuel;ongoing;4.32;adjectif;B1;freq;apertium_a_verifier
+E2654;opérateur;operator;4.32;nom;B1;freq;apertium_a_verifier
+E2655;douloureux;painful;4.32;adjectif;B1;freq;apertium_a_verifier
+E2656;préparation / préparatif;preparation;4.32;nom;B1;freq;apertium_a_verifier
+E2657;coller;punch;4.32;verbe;B1;freq;apertium_a_verifier
+E2658;violet;purple;4.32;nom;B1;freq;apertium_a_verifier
+E2659;inscription / immatriculation;registration;4.32;nom;B1;freq;apertium_a_verifier
+E2660;rick;rick;4.32;mot-outil;B1;freq;apertium_a_verifier
+E2661;suffisant;sufficient;4.32;adjectif;B1;freq;apertium_a_verifier
+E2662;mouchoir / tissu;tissue;4.32;nom;B1;freq;apertium_a_verifier
+E2663;ukraine;ukraine;4.32;mot-outil;B1;freq;apertium_a_verifier
+E2664;souterrain;underground;4.32;adjectif;B1;freq;apertium_a_verifier
+E2665;virtuel;virtual;4.32;adjectif;B1;freq;apertium_a_verifier
+E2666;ali;ali;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2667;entre;amongst;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2668;convocation / annonce / annonciation;announcement;4.31;nom;B1;freq;apertium_a_verifier
+E2669;arsenal;arsenal;4.31;nom;B1;freq;apertium_a_verifier
+E2670;biologique / bio;biological;4.31;adjectif;B1;freq;apertium_a_verifier
+E2671;bouchée / mordre;bite;4.31;nom;B1;freq;apertium_a_verifier
+E2672;morceau / puce / jeton;chip;4.31;nom;B1;freq;apertium_a_verifier
+E2673;encequiconcerne;concerning;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2674;défier;dare;4.31;verbe;B1;freq;apertium_a_verifier
+E2675;définir;define;4.31;verbe;B1;freq;apertium_a_verifier
+E2676;discrimination;discrimination;4.31;nom;B1;freq;apertium_a_verifier
+E2677;désordre;disorder;4.31;nom;B1;freq;apertium_a_verifier
+E2678;documentaire;documentary;4.31;nom;B1;freq;apertium_a_verifier
+E2679;cadre / milieu;domain;4.31;nom;B1;freq;apertium_a_verifier
+E2680;dynamique;dynamic;4.31;adjectif;B1;freq;apertium_a_verifier
+E2681;engagement / compromis;engagement;4.31;nom;B1;freq;apertium_a_verifier
+E2682;explorer;explore;4.31;verbe;B1;freq;apertium_a_verifier
+E2683;faveur / favoriser / avantager;favour;4.31;nom;B1;freq;apertium_a_verifier
+E2684;tombeau / tombe / grave;grave;4.31;nom;B1;freq;apertium_a_verifier
+E2685;hamilton;hamilton;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2686;implémentation;implementation;4.31;nom;B1;freq;apertium_a_verifier
+E2687;indiana;indiana;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2688;enquêter / rechercher;investigate;4.31;verbe;B1;freq;apertium_a_verifier
+E2689;jazz;jazz;4.31;nom;B1;freq;apertium_a_verifier
+E2690;jon;jon;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2691;jonathan;jonathan;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2692;laboratoire;laboratory;4.31;nom;B1;freq;apertium_a_verifier
+E2693;lawrence;lawrence;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2694;littéraire;literary;4.31;adjectif;B1;freq;apertium_a_verifier
+E2695;masque / masquer;mask;4.31;nom;B1;freq;apertium_a_verifier
+E2696;massachusetts;massachusetts;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2697;minuit;midnight;4.31;nom;B1;freq;apertium_a_verifier
+E2698;minnesota;minnesota;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2699;la souris (informatique);mouse;4.31;nom;B1;freq;existante
+E2700;oscar;oscar;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2701;piano;piano;4.31;nom;B1;freq;apertium_a_verifier
+E2702;éloge / louange / louer;praise;4.31;nom;B1;freq;apertium_a_verifier
+E2703;présentation;presentation;4.31;nom;B1;freq;apertium_a_verifier
+E2704;la psychologie;psychology;4.31;nom;B1;freq;existante
+E2705;relation;relation;4.31;nom;B1;freq;apertium_a_verifier
+E2706;roquette / chupinazo;rocket;4.31;nom;B1;freq;apertium_a_verifier
+E2707;ruine / abîmer / détraquer;ruin;4.31;nom;B1;freq;apertium_a_verifier
+E2708;esclave;slave;4.31;nom;B1;freq;apertium_a_verifier
+E2709;stabilité;stability;4.31;nom;B1;freq;apertium_a_verifier
+E2710;le symbole;symbol;4.31;nom;B1;freq;existante
+E2711;terminal;terminal;4.31;nom;B1;freq;apertium_a_verifier
+E2712;lavabo;toilet;4.31;nom;B1;freq;apertium_a_verifier
+E2713;traité;treaty;4.31;nom;B1;freq;apertium_a_verifier
+E2714;triple / tripler;triple;4.31;adjectif;B1;freq;apertium_a_verifier
+E2715;improbable;unlikely;4.31;adjectif;B1;freq;apertium_a_verifier
+E2716;viêtnam / viêt-nam;vietnam;4.31;mot-outil;B1;freq;apertium_a_verifier
+E2717;sujet;affair;4.30;nom;B1;freq;apertium_a_verifier
+E2718;lien / proue / incliner;bow;4.30;nom;B1;freq;apertium_a_verifier
+E2719;calendrier;calendar;4.30;nom;B1;freq;apertium_a_verifier
+E2720;cap;cape;4.30;nom;B1;freq;apertium_a_verifier
+E2721;collectif;collective;4.30;adjectif;B1;freq;apertium_a_verifier
+E2722;la coopération;cooperation;4.30;nom;B1;freq;existante
+E2723;embarcation / habilité / métier;craft;4.30;nom;B1;freq;apertium_a_verifier
+E2724;l'obscurité;darkness;4.30;nom;B1;freq;existante
+E2725;diable;devil;4.30;nom;B1;freq;apertium_a_verifier
+E2726;éditer;edit;4.30;verbe;B1;freq;apertium_a_verifier
+E2727;habiliter;enable;4.30;verbe;B1;freq;apertium_a_verifier
+E2728;équité;equity;4.30;nom;B1;freq;apertium_a_verifier
+E2729;fortune;fortune;4.30;nom;B1;freq;apertium_a_verifier
+E2730;gates;gates;4.30;mot-outil;B1;freq;apertium_a_verifier
+E2731;adieu / aurevoir;goodbye;4.30;nom;B1;freq;apertium_a_verifier
+E2732;le matériel;hardware;4.30;nom;B1;freq;existante
+E2733;hillary;hillary;4.30;mot-outil;B1;freq;apertium_a_verifier
+E2734;intellectuel;intellectual;4.30;nom;B1;freq;apertium_a_verifier
+E2735;convier / inviter;invite;4.30;verbe;B1;freq;apertium_a_verifier
+E2736;implication;involvement;4.30;nom;B1;freq;apertium_a_verifier
+E2737;kentucky;kentucky;4.30;mot-outil;B1;freq;apertium_a_verifier
+E2738;madrid;madrid;4.30;mot-outil;B1;freq;apertium_a_verifier
+E2739;oregon;oregon;4.30;mot-outil;B1;freq;apertium_a_verifier
+E2740;enpartie;partly;4.30;adverbe;B1;freq;apertium_a_verifier
+E2741;phrase / phraser;phrase;4.30;nom;B1;freq;apertium_a_verifier
+E2742;physiquement;physically;4.30;adverbe;B1;freq;apertium_a_verifier
+E2743;racial;racial;4.30;adjectif;B1;freq;apertium_a_verifier
+E2744;régime;regime;4.30;nom;B1;freq;apertium_a_verifier
+E2745;sauce;sauce;4.30;nom;B1;freq;apertium_a_verifier
+E2746;phoque / sceau / cacheter;seal;4.30;nom;B1;freq;apertium_a_verifier
+E2747;bouclier;shield;4.30;nom;B1;freq;apertium_a_verifier
+E2748;racine / juguler;stem;4.30;nom;B1;freq;apertium_a_verifier
+E2749;cime / sommet / comble;summit;4.30;nom;B1;freq;apertium_a_verifier
+E2750;gorge;throat;4.30;nom;B1;freq;apertium_a_verifier
+E2751;tigre;tiger;4.30;nom;B1;freq;apertium_a_verifier
+E2752;le jouet;toy;4.30;nom;B1;freq;existante
+E2753;la sagesse;wisdom;4.30;nom;B1;freq;existante
+E2754;comptabilité;accounting;4.29;nom;B1;freq;apertium_a_verifier
+E2755;gênant;awkward;4.29;adjectif;B1;freq;apertium_a_verifier
+E2756;bête;beast;4.29;nom;B1;freq;apertium_a_verifier
+E2757;veau;beef;4.29;nom;B1;freq;apertium_a_verifier
+E2758;bonbon;candy;4.29;nom;B1;freq;apertium_a_verifier
+E2759;transporteur / porteur;carrier;4.29;nom;B1;freq;apertium_a_verifier
+E2760;la fête;celebration;4.29;nom;B1;freq;existante
+E2761;célébrité;celebrity;4.29;nom;B1;freq;apertium_a_verifier
+E2762;certificat / accessit;certificate;4.29;nom;B1;freq;apertium_a_verifier
+E2763;argile;clay;4.29;nom;B1;freq;apertium_a_verifier
+E2764;le dialogue;dialogue;4.29;nom;B1;freq;existante
+E2765;handicapé;disabled;4.29;adjectif;B1;freq;apertium_a_verifier
+E2766;divers / différent;distinct;4.29;adjectif;B1;freq;apertium_a_verifier
+E2767;traîner;drag;4.29;verbe;B1;freq;apertium_a_verifier
+E2768;éligible;eligible;4.29;adjectif;B1;freq;apertium_a_verifier
+E2769;budget / estimation / estimer;estimate;4.29;nom;B1;freq;apertium_a_verifier
+E2770;execution / exécution;execution;4.29;nom;B1;freq;apertium_a_verifier
+E2771;cadre / armature;framework;4.29;nom;B1;freq;apertium_a_verifier
+E2772;franchise;franchise;4.29;nom;B1;freq;apertium_a_verifier
+E2773;le meuble;furniture;4.29;nom;B1;freq;existante
+E2774;intelligent;intelligent;4.29;adjectif;B1;freq;apertium_a_verifier
+E2775;interaction;interaction;4.29;nom;B1;freq;apertium_a_verifier
+E2776;éclairage;lighting;4.29;nom;B1;freq;apertium_a_verifier
+E2777;lisa;lisa;4.29;mot-outil;B1;freq;apertium_a_verifier
+E2778;le centre commercial;mall;4.29;nom;B1;freq;existante
+E2779;philippines;philippines;4.29;mot-outil;B1;freq;apertium_a_verifier
+E2780;polonais / cirer;polish;4.29;adjectif;B1;freq;apertium_a_verifier
+E2781;regagner / récupérer;recover;4.29;verbe;B1;freq;apertium_a_verifier
+E2782;fiable;reliable;4.29;adjectif;B1;freq;apertium_a_verifier
+E2783;confier;rely;4.29;verbe;B1;freq;apertium_a_verifier
+E2784;notable;remarkable;4.29;adjectif;B1;freq;apertium_a_verifier
+E2785;sacrifice / sacrifier;sacrifice;4.29;nom;B1;freq;apertium_a_verifier
+E2786;unique;sole;4.29;adjectif;B1;freq;apertium_a_verifier
+E2787;conte;tale;4.29;nom;B1;freq;apertium_a_verifier
+E2788;chronométrage;timing;4.29;nom;B1;freq;apertium_a_verifier
+E2789;tonne;ton;4.29;nom;B1;freq;apertium_a_verifier
+E2790;adoration;worship;4.29;nom;B1;freq;apertium_a_verifier
+E2791;digne;worthy;4.29;adjectif;B1;freq;apertium_a_verifier
+E2792;alarme / alarmer;alarm;4.28;nom;B1;freq;apertium_a_verifier
+E2793;ensanglanter;bloody;4.28;verbe;B1;freq;apertium_a_verifier
+E2794;respiration;breathing;4.28;nom;B1;freq;apertium_a_verifier
+E2795;collaboration;collaboration;4.28;nom;B1;freq;apertium_a_verifier
+E2796;considération / égard;consideration;4.28;nom;B1;freq;apertium_a_verifier
+E2797;crucial;crucial;4.28;adjectif;B1;freq;apertium_a_verifier
+E2798;édimbourg;edinburgh;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2799;expérimental;experimental;4.28;adjectif;B1;freq;apertium_a_verifier
+E2800;filtre / filtrer;filter;4.28;nom;B1;freq;apertium_a_verifier
+E2801;galaxie;galaxy;4.28;nom;B1;freq;apertium_a_verifier
+E2802;globe;globe;4.28;nom;B1;freq;apertium_a_verifier
+E2803;grèce;greece;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2804;golfe;gulf;4.28;nom;B1;freq;apertium_a_verifier
+E2805;impliquer / concerner;involve;4.28;verbe;B1;freq;apertium_a_verifier
+E2806;jugement / sentence;judgment;4.28;nom;B1;freq;apertium_a_verifier
+E2807;kennedy;kennedy;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2808;cavalier;knight;4.28;nom;B1;freq;apertium_a_verifier
+E2809;larry;larry;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2810;logo;logo;4.28;nom;B1;freq;apertium_a_verifier
+E2811;malaisie;malaysia;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2812;mûr;mature;4.28;adjectif;B1;freq;apertium_a_verifier
+E2813;nazi;nazi;4.28;nom;B1;freq;apertium_a_verifier
+E2814;pays-bas;netherlands;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2815;pacifique;peaceful;4.28;adjectif;B1;freq;apertium_a_verifier
+E2816;philip;philip;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2817;photographe;photographer;4.28;nom;B1;freq;apertium_a_verifier
+E2818;clouer;pin;4.28;verbe;B1;freq;apertium_a_verifier
+E2819;prevention / prévention;prevention;4.28;nom;B1;freq;apertium_a_verifier
+E2820;impression / imprimerie;printing;4.28;nom;B1;freq;apertium_a_verifier
+E2821;publiquement;publicly;4.28;adverbe;B1;freq;apertium_a_verifier
+E2822;bombe / pompe / bomber;pump;4.28;nom;B1;freq;apertium_a_verifier
+E2823;revanche / revanchisme;revenge;4.28;nom;B1;freq;apertium_a_verifier
+E2824;glisser;slip;4.28;verbe;B1;freq;apertium_a_verifier
+E2825;rechange / épargner;spare;4.28;nom;B1;freq;apertium_a_verifier
+E2826;spécialiste;specialist;4.28;nom;B1;freq;apertium_a_verifier
+E2827;livrer;submit;4.28;verbe;B1;freq;apertium_a_verifier
+E2828;étonnant / frappant / renversant;surprising;4.28;adjectif;B1;freq;apertium_a_verifier
+E2829;robinet / toucher;tap;4.28;nom;B1;freq;apertium_a_verifier
+E2830;thompson;thompson;4.28;mot-outil;B1;freq;apertium_a_verifier
+E2831;tourisme;tourism;4.28;nom;B1;freq;apertium_a_verifier
+E2832;turc;turkish;4.28;nom;B1;freq;apertium_a_verifier
+E2833;acceptable;acceptable;4.27;adjectif;B1;freq;apertium_a_verifier
+E2834;venteauxenchères / vendreauxenchères;auction;4.27;nom;B1;freq;apertium_a_verifier
+E2835;chaos;chaos;4.27;nom;B1;freq;apertium_a_verifier
+E2836;concentration / rassemblement;concentration;4.27;nom;B1;freq;apertium_a_verifier
+E2837;cuivre;copper;4.27;nom;B1;freq;apertium_a_verifier
+E2838;corps;corps;4.27;nom;B1;freq;apertium_a_verifier
+E2839;dispute;dispute;4.27;nom;B1;freq;apertium_a_verifier
+E2840;revenu;earnings;4.27;nom;B1;freq;apertium_a_verifier
+E2841;fréquent;frequent;4.27;adjectif;B1;freq;apertium_a_verifier
+E2842;berge / marge / rive;margin;4.27;nom;B1;freq;apertium_a_verifier
+E2843;mars;mars;4.27;mot-outil;B1;freq;apertium_a_verifier
+E2844;maryland;maryland;4.27;mot-outil;B1;freq;apertium_a_verifier
+E2845;mécanisme;mechanism;4.27;nom;B1;freq;apertium_a_verifier
+E2846;modérer;moderate;4.27;verbe;B1;freq;apertium_a_verifier
+E2847;oklahoma;oklahoma;4.27;mot-outil;B1;freq;apertium_a_verifier
+E2848;opéra;opera;4.27;nom;B1;freq;apertium_a_verifier
+E2849;vaincre;overcome;4.27;verbe;B1;freq;apertium_a_verifier
+E2850;parallèle;parallel;4.27;adjectif;B1;freq;apertium_a_verifier
+E2851;passage / pas;passage;4.27;nom;B1;freq;apertium_a_verifier
+E2852;psychologique;psychological;4.27;adjectif;B1;freq;apertium_a_verifier
+E2853;radiation / rayonnement;radiation;4.27;nom;B1;freq;apertium_a_verifier
+E2854;attaque / coup / trait;stroke;4.27;nom;B1;freq;apertium_a_verifier
+E2855;tokyo;tokyo;4.27;mot-outil;B1;freq;apertium_a_verifier
+E2856;ritournelle;tune;4.27;nom;B1;freq;apertium_a_verifier
+E2857;utilité;utility;4.27;nom;B1;freq;apertium_a_verifier
+E2858;bateau;vessel;4.27;nom;B1;freq;apertium_a_verifier
+E2859;acquisition;acquisition;4.26;nom;B1;freq;apertium_a_verifier
+E2860;alabama;alabama;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2861;alice;alice;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2862;afficher / annoncer;announce;4.26;verbe;B1;freq;apertium_a_verifier
+E2863;automne;autumn;4.26;nom;B1;freq;apertium_a_verifier
+E2864;barry;barry;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2865;respirer;breathe;4.26;verbe;B1;freq;apertium_a_verifier
+E2866;cameron;cameron;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2867;classique;classical;4.26;adjectif;B1;freq;apertium_a_verifier
+E2868;clip;clip;4.26;nom;B1;freq;apertium_a_verifier
+E2869;conspiration;conspiracy;4.26;nom;B1;freq;apertium_a_verifier
+E2870;controverse / polémique;controversy;4.26;nom;B1;freq;apertium_a_verifier
+E2871;convaincre;convince;4.26;verbe;B1;freq;apertium_a_verifier
+E2872;cooper;cooper;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2873;la rencontre;encounter;4.26;nom;B1;freq;existante
+E2874;l'égalité;equality;4.26;nom;B1;freq;existante
+E2875;l'examen;exam;4.26;nom;B1;freq;existante
+E2876;examen / inspection / interrogatoire;examination;4.26;nom;B1;freq;apertium_a_verifier
+E2877;federation / fédération;federation;4.26;nom;B1;freq;apertium_a_verifier
+E2878;fiscal;fiscal;4.26;adjectif;B1;freq;apertium_a_verifier
+E2879;l'instrument;instrument;4.26;nom;B1;freq;existante
+E2880;intervention;intervention;4.26;nom;B1;freq;apertium_a_verifier
+E2881;jerry;jerry;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2882;amant;lover;4.26;nom;B1;freq;apertium_a_verifier
+E2883;charte / lettre / menu;menu;4.26;nom;B1;freq;apertium_a_verifier
+E2884;missouri;missouri;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2885;mutuel;mutual;4.26;adjectif;B1;freq;apertium_a_verifier
+E2886;infraction;offense;4.26;nom;B1;freq;apertium_a_verifier
+E2887;oral;oral;4.26;adjectif;B1;freq;apertium_a_verifier
+E2888;panique;panic;4.26;nom;B1;freq;apertium_a_verifier
+E2889;courser / pourchasser;pursue;4.26;verbe;B1;freq;apertium_a_verifier
+E2890;réaliser;realise;4.26;verbe;B1;freq;apertium_a_verifier
+E2891;raturage;removing;4.26;nom;B1;freq;apertium_a_verifier
+E2892;conditionrequise;requirement;4.26;nom;B1;freq;apertium_a_verifier
+E2893;portée;scope;4.26;nom;B1;freq;apertium_a_verifier
+E2894;segment;segment;4.26;nom;B1;freq;apertium_a_verifier
+E2895;spectre;spectrum;4.26;nom;B1;freq;apertium_a_verifier
+E2896;terreur;terror;4.26;nom;B1;freq;apertium_a_verifier
+E2897;aventure / oser;venture;4.26;nom;B1;freq;apertium_a_verifier
+E2898;virtuellement;virtually;4.26;adverbe;B1;freq;apertium_a_verifier
+E2899;warren;warren;4.26;mot-outil;B1;freq;apertium_a_verifier
+E2900;adams;adams;4.25;mot-outil;B1;freq;apertium_a_verifier
+E2901;la disposition;arrangement;4.25;nom;B1;freq;existante
+E2902;brique;brick;4.25;nom;B1;freq;apertium_a_verifier
+E2903;considérable;considerable;4.25;adjectif;B1;freq;apertium_a_verifier
+E2904;conventionnel;conventional;4.25;adjectif;B1;freq;apertium_a_verifier
+E2905;danny;danny;4.25;mot-outil;B1;freq;apertium_a_verifier
+E2906;dvd;dvd;4.25;nom;B1;freq;apertium_a_verifier
+E2907;empereur;emperor;4.25;nom;B1;freq;apertium_a_verifier
+E2908;énorme;enormous;4.25;adjectif;B1;freq;apertium_a_verifier
+E2909;pardonner;forgive;4.25;verbe;B1;freq;apertium_a_verifier
+E2910;le garage;garage;4.25;nom;B1;freq;existante
+E2911;indonésie;indonesia;4.25;mot-outil;B1;freq;apertium_a_verifier
+E2912;consultation / recherche;inquiry;4.25;nom;B1;freq;apertium_a_verifier
+E2913;inspecteur;inspector;4.25;nom;B1;freq;apertium_a_verifier
+E2914;le lion;lion;4.25;nom;B1;freq;existante
+E2915;solitaire;lonely;4.25;adjectif;B1;freq;apertium_a_verifier
+E2916;piété;mercy;4.25;nom;B1;freq;apertium_a_verifier
+E2917;extérieur;outer;4.25;adjectif;B1;freq;apertium_a_verifier
+E2918;oxygène;oxygen;4.25;nom;B1;freq;apertium_a_verifier
+E2919;conduit / pipe / tuyau;pipe;4.25;nom;B1;freq;apertium_a_verifier
+E2920;poème;poem;4.25;nom;B1;freq;apertium_a_verifier
+E2921;poussière;powder;4.25;nom;B1;freq;apertium_a_verifier
+E2922;racisme;racism;4.25;nom;B1;freq;apertium_a_verifier
+E2923;roy;roy;4.25;mot-outil;B1;freq;apertium_a_verifier
+E2924;refuge;shelter;4.25;nom;B1;freq;apertium_a_verifier
+E2925;firme / signature;signature;4.25;nom;B1;freq;apertium_a_verifier
+E2926;araignée;spider;4.25;nom;B1;freq;apertium_a_verifier
+E2927;stewart;stewart;4.25;mot-outil;B1;freq;apertium_a_verifier
+E2928;tribut;tribute;4.25;nom;B1;freq;apertium_a_verifier
+E2929;provoquer;trigger;4.25;verbe;B1;freq;apertium_a_verifier
+E2930;varier;vary;4.25;verbe;B1;freq;apertium_a_verifier
+E2931;local;venue;4.25;nom;B1;freq;apertium_a_verifier
+E2932;le salaire;wages;4.25;nom;B1;freq;existante
+E2933;avortement;abortion;4.24;nom;B1;freq;apertium_a_verifier
+E2934;justesse;accuracy;4.24;nom;B1;freq;apertium_a_verifier
+E2935;albert;albert;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2936;artificiel;artificial;4.24;adjectif;B1;freq;apertium_a_verifier
+E2937;endessous;beneath;4.24;adverbe;B1;freq;apertium_a_verifier
+E2938;balle;bullet;4.24;nom;B1;freq;apertium_a_verifier
+E2939;carl;carl;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2940;conversion;conversion;4.24;nom;B1;freq;apertium_a_verifier
+E2941;copyright;copyright;4.24;nom;B1;freq;apertium_a_verifier
+E2942;démocrate;democrat;4.24;nom;B1;freq;apertium_a_verifier
+E2943;avoir / dépôt / gisement;deposit;4.24;nom;B1;freq;apertium_a_verifier
+E2944;la destination;destination;4.24;nom;B1;freq;existante
+E2945;divers;diverse;4.24;adjectif;B1;freq;apertium_a_verifier
+E2946;divin;divine;4.24;adjectif;B1;freq;apertium_a_verifier
+E2947;exclusivement;exclusively;4.24;adverbe;B1;freq;apertium_a_verifier
+E2948;exportation;export;4.24;nom;B1;freq;apertium_a_verifier
+E2949;antérieurement / autrefois;formerly;4.24;adverbe;B1;freq;apertium_a_verifier
+E2950;fonctionnel;functional;4.24;adjectif;B1;freq;apertium_a_verifier
+E2951;rallier / rassembler / réunir;gather;4.24;verbe;B1;freq;apertium_a_verifier
+E2952;le grand-père;grandfather;4.24;nom;B1;freq;existante
+E2953;l'habitude;habit;4.24;nom;B1;freq;existante
+E2954;laura;laura;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2955;paresseux;lazy;4.24;adjectif;B1;freq;apertium_a_verifier
+E2956;marshall;marshall;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2957;mitchell;mitchell;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2958;municipal;municipal;4.24;adjectif;B1;freq;apertium_a_verifier
+E2959;naval;naval;4.24;adjectif;B1;freq;apertium_a_verifier
+E2960;nelson;nelson;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2961;noble;noble;4.24;adjectif;B1;freq;apertium_a_verifier
+E2962;pologne;poland;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2963;popularité;popularity;4.24;nom;B1;freq;apertium_a_verifier
+E2964;lier / relater;relate;4.24;verbe;B1;freq;apertium_a_verifier
+E2965;robot;robot;4.24;nom;B1;freq;apertium_a_verifier
+E2966;sacré;sacred;4.24;adjectif;B1;freq;apertium_a_verifier
+E2967;la chaussure;shoe;4.24;nom;B1;freq;existante
+E2968;barbouze / espion;spy;4.24;nom;B1;freq;apertium_a_verifier
+E2969;steven;steven;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2970;susan;susan;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2971;suspension;suspension;4.24;nom;B1;freq;apertium_a_verifier
+E2972;terrorisme;terrorism;4.24;nom;B1;freq;apertium_a_verifier
+E2973;terry;terry;4.24;mot-outil;B1;freq;apertium_a_verifier
+E2974;toxique;toxic;4.24;adjectif;B1;freq;apertium_a_verifier
+E2975;trésorerie;treasury;4.24;nom;B1;freq;apertium_a_verifier
+E2976;tunnel;tunnel;4.24;nom;B1;freq;apertium_a_verifier
+E2977;revaloriser / valoriser;upgrade;4.24;verbe;B1;freq;apertium_a_verifier
+E2978;warrant;warrant;4.24;nom;B1;freq;apertium_a_verifier
+E2979;blessure;wound;4.24;nom;B1;freq;apertium_a_verifier
+E2980;activement;actively;4.23;adverbe;B1;freq;apertium_a_verifier
+E2981;afghanistan;afghanistan;4.23;mot-outil;B1;freq;apertium_a_verifier
+E2982;avantage;asset;4.23;nom;B1;freq;apertium_a_verifier
+E2983;le boulanger;baker;4.23;nom;B1;freq;existante
+E2984;barcelone;barcelona;4.23;mot-outil;B1;freq;apertium_a_verifier
+E2985;brésilien;brazilian;4.23;adjectif;B1;freq;apertium_a_verifier
+E2986;brosse / pinceau / frôlement;brush;4.23;nom;B1;freq;apertium_a_verifier
+E2987;charge / charger / allier;burden;4.23;nom;B1;freq;apertium_a_verifier
+E2988;campbell;campbell;4.23;mot-outil;B1;freq;apertium_a_verifier
+E2989;affrioler / fréter;charter;4.23;verbe;B1;freq;apertium_a_verifier
+E2990;civil;civilian;4.23;nom;B1;freq;apertium_a_verifier
+E2991;coalition;coalition;4.23;nom;B1;freq;apertium_a_verifier
+E2992;maugréer;complain;4.23;verbe;B1;freq;apertium_a_verifier
+E2993;controversé / polémique;controversial;4.23;adjectif;B1;freq;apertium_a_verifier
+E2994;autrement;differently;4.23;adverbe;B1;freq;apertium_a_verifier
+E2995;discipline;discipline;4.23;nom;B1;freq;apertium_a_verifier
+E2996;dominant;dominant;4.23;adjectif;B1;freq;apertium_a_verifier
+E2997;emma;emma;4.23;mot-outil;B1;freq;apertium_a_verifier
+E2998;essai;essay;4.23;nom;B1;freq;apertium_a_verifier
+E2999;la dépense;expense;4.23;nom;B1;freq;existante
+E3000;enplus;furthermore;4.23;adverbe;B1;freq;apertium_a_verifier
