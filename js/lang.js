@@ -19,7 +19,7 @@ const LANG_PACKS = {
         ttsLang: 'en-GB',
         micLang: 'en-GB',
         voixPrefixe: 'en',
-        modules: []
+        modules: ['vocabulaire', 'conjugaison', 'fondations', 'routineMots']
     }
 };
 

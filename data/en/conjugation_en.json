@@ -1,0 +1,2858 @@
+[
+  {
+    "infinitief": "be",
+    "fr": "être",
+    "present": {
+      "ik": "am",
+      "jij": "are",
+      "hij": "is",
+      "wij": "are"
+    },
+    "preteritum": "was",
+    "pastForms": {
+      "ik": "was",
+      "jij": "were",
+      "hij": "was",
+      "wij": "were"
+    },
+    "participePasse": "been",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.79,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "have",
+    "fr": "avoir",
+    "present": {
+      "ik": "have",
+      "jij": "have",
+      "hij": "has",
+      "wij": "have"
+    },
+    "preteritum": "had",
+    "participePasse": "had",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.71,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "do",
+    "fr": "faire / glander",
+    "present": {
+      "ik": "do",
+      "jij": "do",
+      "hij": "does",
+      "wij": "do"
+    },
+    "preteritum": "did",
+    "participePasse": "done",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.35,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "get",
+    "fr": "atteindre / prendre / réussir",
+    "present": {
+      "ik": "get",
+      "jij": "get",
+      "hij": "gets",
+      "wij": "get"
+    },
+    "preteritum": "got",
+    "participePasse": "got",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.28,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "know",
+    "fr": "connaître / savoir",
+    "present": {
+      "ik": "know",
+      "jij": "know",
+      "hij": "knows",
+      "wij": "know"
+    },
+    "preteritum": "knew",
+    "participePasse": "known",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.1,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "see",
+    "fr": "voir",
+    "present": {
+      "ik": "see",
+      "jij": "see",
+      "hij": "sees",
+      "wij": "see"
+    },
+    "preteritum": "saw",
+    "participePasse": "seen",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.1,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "think",
+    "fr": "opiner / penser / aviser",
+    "present": {
+      "ik": "think",
+      "jij": "think",
+      "hij": "thinks",
+      "wij": "think"
+    },
+    "preteritum": "thought",
+    "participePasse": "thought",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.08,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "go",
+    "fr": "aller / rouler",
+    "present": {
+      "ik": "go",
+      "jij": "go",
+      "hij": "goes",
+      "wij": "go"
+    },
+    "preteritum": "went",
+    "participePasse": "gone",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 6.03,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "take",
+    "fr": "rejoindre / saisir / prendre",
+    "present": {
+      "ik": "take",
+      "jij": "take",
+      "hij": "takes",
+      "wij": "take"
+    },
+    "preteritum": "took",
+    "participePasse": "taken",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.92,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "say",
+    "fr": "dire",
+    "present": {
+      "ik": "say",
+      "jij": "say",
+      "hij": "says",
+      "wij": "say"
+    },
+    "preteritum": "said",
+    "participePasse": "said",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.89,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "come",
+    "fr": "venir",
+    "present": {
+      "ik": "come",
+      "jij": "come",
+      "hij": "comes",
+      "wij": "come"
+    },
+    "preteritum": "came",
+    "participePasse": "come",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.78,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "give",
+    "fr": "donner",
+    "present": {
+      "ik": "give",
+      "jij": "give",
+      "hij": "gives",
+      "wij": "give"
+    },
+    "preteritum": "gave",
+    "participePasse": "given",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.71,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "feel",
+    "fr": "entendre / ouïr / ressentir",
+    "present": {
+      "ik": "feel",
+      "jij": "feel",
+      "hij": "feels",
+      "wij": "feel"
+    },
+    "preteritum": "felt",
+    "participePasse": "felt",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.67,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "keep",
+    "fr": "continuer / maintenir / tenir",
+    "present": {
+      "ik": "keep",
+      "jij": "keep",
+      "hij": "keeps",
+      "wij": "keep"
+    },
+    "preteritum": "kept",
+    "participePasse": "kept",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.66,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "please",
+    "fr": "complaire",
+    "present": {
+      "ik": "please",
+      "jij": "please",
+      "hij": "pleases",
+      "wij": "please"
+    },
+    "preteritum": "pleased",
+    "participePasse": "pleased",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.66,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "put",
+    "fr": "brancher / remettre / mettre",
+    "present": {
+      "ik": "put",
+      "jij": "put",
+      "hij": "puts",
+      "wij": "put"
+    },
+    "preteritum": "put",
+    "participePasse": "put",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.66,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "let",
+    "fr": "laisser",
+    "present": {
+      "ik": "let",
+      "jij": "let",
+      "hij": "lets",
+      "wij": "let"
+    },
+    "preteritum": "let",
+    "participePasse": "let",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.6,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "live",
+    "fr": "vivre / habiter",
+    "present": {
+      "ik": "live",
+      "jij": "live",
+      "hij": "lives",
+      "wij": "live"
+    },
+    "preteritum": "lived",
+    "participePasse": "lived",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.54,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "read",
+    "fr": "lire",
+    "present": {
+      "ik": "read",
+      "jij": "read",
+      "hij": "reads",
+      "wij": "read"
+    },
+    "preteritum": "read",
+    "participePasse": "read",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.54,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "tell",
+    "fr": "dire",
+    "present": {
+      "ik": "tell",
+      "jij": "tell",
+      "hij": "tells",
+      "wij": "tell"
+    },
+    "preteritum": "told",
+    "participePasse": "told",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.53,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "believe",
+    "fr": "croire",
+    "present": {
+      "ik": "believe",
+      "jij": "believe",
+      "hij": "believes",
+      "wij": "believe"
+    },
+    "preteritum": "believed",
+    "participePasse": "believed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.51,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "try",
+    "fr": "essayer / tenter / prouver",
+    "present": {
+      "ik": "try",
+      "jij": "try",
+      "hij": "tries",
+      "wij": "try"
+    },
+    "preteritum": "tried",
+    "participePasse": "tried",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.5,
+    "niveauCECR": "A1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "become",
+    "fr": "devenir",
+    "present": {
+      "ik": "become",
+      "jij": "become",
+      "hij": "becomes",
+      "wij": "become"
+    },
+    "preteritum": "became",
+    "participePasse": "become",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.4,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "pay",
+    "fr": "appointer / payer / rétribuer",
+    "present": {
+      "ik": "pay",
+      "jij": "pay",
+      "hij": "pays",
+      "wij": "pay"
+    },
+    "preteritum": "paid",
+    "participePasse": "paid",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.4,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "win",
+    "fr": "vaincre / gagner",
+    "present": {
+      "ik": "win",
+      "jij": "win",
+      "hij": "wins",
+      "wij": "win"
+    },
+    "preteritum": "won",
+    "participePasse": "won",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.39,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "understand",
+    "fr": "piger / comprendre",
+    "present": {
+      "ik": "understand",
+      "jij": "understand",
+      "hij": "understands",
+      "wij": "understand"
+    },
+    "preteritum": "understood",
+    "participePasse": "understood",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.37,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "wait",
+    "fr": "espérer / attendre",
+    "present": {
+      "ik": "wait",
+      "jij": "wait",
+      "hij": "waits",
+      "wij": "wait"
+    },
+    "preteritum": "waited",
+    "participePasse": "waited",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.35,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ask",
+    "fr": "demander",
+    "present": {
+      "ik": "ask",
+      "jij": "ask",
+      "hij": "asks",
+      "wij": "ask"
+    },
+    "preteritum": "asked",
+    "participePasse": "asked",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.34,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "buy",
+    "fr": "acheter",
+    "present": {
+      "ik": "buy",
+      "jij": "buy",
+      "hij": "buys",
+      "wij": "buy"
+    },
+    "preteritum": "bought",
+    "participePasse": "bought",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.32,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "bring",
+    "fr": "amener / brouetter / emmener",
+    "present": {
+      "ik": "bring",
+      "jij": "bring",
+      "hij": "brings",
+      "wij": "bring"
+    },
+    "preteritum": "brought",
+    "participePasse": "brought",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.27,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "meet",
+    "fr": "connaître / accomplir",
+    "present": {
+      "ik": "meet",
+      "jij": "meet",
+      "hij": "meets",
+      "wij": "meet"
+    },
+    "preteritum": "met",
+    "participePasse": "met",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.27,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "hear",
+    "fr": "écouter",
+    "present": {
+      "ik": "hear",
+      "jij": "hear",
+      "hij": "hears",
+      "wij": "hear"
+    },
+    "preteritum": "heard",
+    "participePasse": "heard",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.23,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "miss",
+    "fr": "reperdre / perdre / rater",
+    "present": {
+      "ik": "miss",
+      "jij": "miss",
+      "hij": "misses",
+      "wij": "miss"
+    },
+    "preteritum": "missed",
+    "participePasse": "missed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.22,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "include",
+    "fr": "comprendre",
+    "present": {
+      "ik": "include",
+      "jij": "include",
+      "hij": "includes",
+      "wij": "include"
+    },
+    "preteritum": "included",
+    "participePasse": "included",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.21,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "learn",
+    "fr": "apprendre",
+    "present": {
+      "ik": "learn",
+      "jij": "learn",
+      "hij": "learns",
+      "wij": "learn"
+    },
+    "preteritum": "learned",
+    "participePasse": "learned",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.17,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "provide",
+    "fr": "fournir",
+    "present": {
+      "ik": "provide",
+      "jij": "provide",
+      "hij": "provides",
+      "wij": "provide"
+    },
+    "preteritum": "provided",
+    "participePasse": "provided",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.15,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "follow",
+    "fr": "suivre",
+    "present": {
+      "ik": "follow",
+      "jij": "follow",
+      "hij": "follows",
+      "wij": "follow"
+    },
+    "preteritum": "followed",
+    "participePasse": "followed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.14,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "save",
+    "fr": "épargner / garder / sauver",
+    "present": {
+      "ik": "save",
+      "jij": "save",
+      "hij": "saves",
+      "wij": "save"
+    },
+    "preteritum": "saved",
+    "participePasse": "saved",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.14,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "eat",
+    "fr": "manger / déjeuner",
+    "present": {
+      "ik": "eat",
+      "jij": "eat",
+      "hij": "eats",
+      "wij": "eat"
+    },
+    "preteritum": "ate",
+    "participePasse": "eaten",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.13,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "send",
+    "fr": "envoyer",
+    "present": {
+      "ik": "send",
+      "jij": "send",
+      "hij": "sends",
+      "wij": "send"
+    },
+    "preteritum": "sent",
+    "participePasse": "sent",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.11,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "add",
+    "fr": "ajouter / additionner / annexer",
+    "present": {
+      "ik": "add",
+      "jij": "add",
+      "hij": "adds",
+      "wij": "add"
+    },
+    "preteritum": "added",
+    "participePasse": "added",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.09,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "kill",
+    "fr": "assommer / tuer",
+    "present": {
+      "ik": "kill",
+      "jij": "kill",
+      "hij": "kills",
+      "wij": "kill"
+    },
+    "preteritum": "killed",
+    "participePasse": "killed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.09,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "continue",
+    "fr": "continuer / poursuivre",
+    "present": {
+      "ik": "continue",
+      "jij": "continue",
+      "hij": "continues",
+      "wij": "continue"
+    },
+    "preteritum": "continued",
+    "participePasse": "continued",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.08,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "lose",
+    "fr": "reperdre / perdre / rater",
+    "present": {
+      "ik": "lose",
+      "jij": "lose",
+      "hij": "loses",
+      "wij": "lose"
+    },
+    "preteritum": "lost",
+    "participePasse": "lost",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.08,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "pick",
+    "fr": "choisir / ramasser",
+    "present": {
+      "ik": "pick",
+      "jij": "pick",
+      "hij": "picks",
+      "wij": "pick"
+    },
+    "preteritum": "picked",
+    "participePasse": "picked",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.08,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "die",
+    "fr": "décéder / mourir",
+    "present": {
+      "ik": "die",
+      "jij": "die",
+      "hij": "dies",
+      "wij": "die"
+    },
+    "preteritum": "died",
+    "participePasse": "died",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.07,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "forget",
+    "fr": "oublier",
+    "present": {
+      "ik": "forget",
+      "jij": "forget",
+      "hij": "forgets",
+      "wij": "forget"
+    },
+    "preteritum": "forgot",
+    "participePasse": "forgotten",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.06,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "listen",
+    "fr": "écouter",
+    "present": {
+      "ik": "listen",
+      "jij": "listen",
+      "hij": "listens",
+      "wij": "listen"
+    },
+    "preteritum": "listened",
+    "participePasse": "listened",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.06,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "pass",
+    "fr": "passer",
+    "present": {
+      "ik": "pass",
+      "jij": "pass",
+      "hij": "passes",
+      "wij": "pass"
+    },
+    "preteritum": "passed",
+    "participePasse": "passed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.05,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "build",
+    "fr": "construire / bâtir",
+    "present": {
+      "ik": "build",
+      "jij": "build",
+      "hij": "builds",
+      "wij": "build"
+    },
+    "preteritum": "built",
+    "participePasse": "built",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.04,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "speak",
+    "fr": "parler",
+    "present": {
+      "ik": "speak",
+      "jij": "speak",
+      "hij": "speaks",
+      "wij": "speak"
+    },
+    "preteritum": "spoke",
+    "participePasse": "spoken",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.03,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "write",
+    "fr": "écrire",
+    "present": {
+      "ik": "write",
+      "jij": "write",
+      "hij": "writes",
+      "wij": "write"
+    },
+    "preteritum": "wrote",
+    "participePasse": "written",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.03,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "create",
+    "fr": "créer",
+    "present": {
+      "ik": "create",
+      "jij": "create",
+      "hij": "creates",
+      "wij": "create"
+    },
+    "preteritum": "created",
+    "participePasse": "created",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.02,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "beat",
+    "fr": "battre / heurter / rosser",
+    "present": {
+      "ik": "beat",
+      "jij": "beat",
+      "hij": "beats",
+      "wij": "beat"
+    },
+    "preteritum": "beat",
+    "participePasse": "beaten",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.01,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "join",
+    "fr": "unir",
+    "present": {
+      "ik": "join",
+      "jij": "join",
+      "hij": "joins",
+      "wij": "join"
+    },
+    "preteritum": "joined",
+    "participePasse": "joined",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 5.0,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "sell",
+    "fr": "débiter / vendre",
+    "present": {
+      "ik": "sell",
+      "jij": "sell",
+      "hij": "sells",
+      "wij": "sell"
+    },
+    "preteritum": "sold",
+    "participePasse": "sold",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.98,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "agree",
+    "fr": "convenir / concorder / approuver",
+    "present": {
+      "ik": "agree",
+      "jij": "agree",
+      "hij": "agrees",
+      "wij": "agree"
+    },
+    "preteritum": "agreed",
+    "participePasse": "agreed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.97,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "spend",
+    "fr": "dépenser / passer",
+    "present": {
+      "ik": "spend",
+      "jij": "spend",
+      "hij": "spends",
+      "wij": "spend"
+    },
+    "preteritum": "spent",
+    "participePasse": "spent",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.97,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "reach",
+    "fr": "remporter",
+    "present": {
+      "ik": "reach",
+      "jij": "reach",
+      "hij": "reaches",
+      "wij": "reach"
+    },
+    "preteritum": "reached",
+    "participePasse": "reached",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.94,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "cash",
+    "fr": "encaisser",
+    "present": {
+      "ik": "cash",
+      "jij": "cash",
+      "hij": "cashes",
+      "wij": "cash"
+    },
+    "preteritum": "cashed",
+    "participePasse": "cashed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "imagine",
+    "fr": "imaginer",
+    "present": {
+      "ik": "imagine",
+      "jij": "imagine",
+      "hij": "imagines",
+      "wij": "imagine"
+    },
+    "preteritum": "imagined",
+    "participePasse": "imagined",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.92,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "choose",
+    "fr": "élire / choisir",
+    "present": {
+      "ik": "choose",
+      "jij": "choose",
+      "hij": "chooses",
+      "wij": "choose"
+    },
+    "preteritum": "chose",
+    "participePasse": "chosen",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.91,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "grow",
+    "fr": "croître / grandir / cultiver",
+    "present": {
+      "ik": "grow",
+      "jij": "grow",
+      "hij": "grows",
+      "wij": "grow"
+    },
+    "preteritum": "grew",
+    "participePasse": "grown",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.9,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "sit",
+    "fr": "asseoir",
+    "present": {
+      "ik": "sit",
+      "jij": "sit",
+      "hij": "sits",
+      "wij": "sit"
+    },
+    "preteritum": "sat",
+    "participePasse": "sat",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.9,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "carry",
+    "fr": "mener / porter / emporter",
+    "present": {
+      "ik": "carry",
+      "jij": "carry",
+      "hij": "carries",
+      "wij": "carry"
+    },
+    "preteritum": "carried",
+    "participePasse": "carried",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.89,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "avoid",
+    "fr": "éviter",
+    "present": {
+      "ik": "avoid",
+      "jij": "avoid",
+      "hij": "avoids",
+      "wij": "avoid"
+    },
+    "preteritum": "avoided",
+    "participePasse": "avoided",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.87,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "catch",
+    "fr": "prendre",
+    "present": {
+      "ik": "catch",
+      "jij": "catch",
+      "hij": "catches",
+      "wij": "catch"
+    },
+    "preteritum": "caught",
+    "participePasse": "caught",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.87,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "receive",
+    "fr": "accueillir / recevoir",
+    "present": {
+      "ik": "receive",
+      "jij": "receive",
+      "hij": "receives",
+      "wij": "receive"
+    },
+    "preteritum": "received",
+    "participePasse": "received",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.85,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "serve",
+    "fr": "servir",
+    "present": {
+      "ik": "serve",
+      "jij": "serve",
+      "hij": "serves",
+      "wij": "serve"
+    },
+    "preteritum": "served",
+    "participePasse": "served",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.85,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "begin",
+    "fr": "commencer",
+    "present": {
+      "ik": "begin",
+      "jij": "begin",
+      "hij": "begins",
+      "wij": "begin"
+    },
+    "preteritum": "began",
+    "participePasse": "begun",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.84,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "count",
+    "fr": "compter / conter / raconter",
+    "present": {
+      "ik": "count",
+      "jij": "count",
+      "hij": "counts",
+      "wij": "count"
+    },
+    "preteritum": "counted",
+    "participePasse": "counted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "remain",
+    "fr": "demeurer / rester",
+    "present": {
+      "ik": "remain",
+      "jij": "remain",
+      "hij": "remains",
+      "wij": "remain"
+    },
+    "preteritum": "remained",
+    "participePasse": "remained",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "separate",
+    "fr": "séparer / écarter",
+    "present": {
+      "ik": "separate",
+      "jij": "separate",
+      "hij": "separates",
+      "wij": "separate"
+    },
+    "preteritum": "separated",
+    "participePasse": "separated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "throw",
+    "fr": "jeter / verser",
+    "present": {
+      "ik": "throw",
+      "jij": "throw",
+      "hij": "throws",
+      "wij": "throw"
+    },
+    "preteritum": "threw",
+    "participePasse": "thrown",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.83,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "apply",
+    "fr": "appliquer",
+    "present": {
+      "ik": "apply",
+      "jij": "apply",
+      "hij": "applies",
+      "wij": "apply"
+    },
+    "preteritum": "applied",
+    "participePasse": "applied",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.81,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "enter",
+    "fr": "introduire / comptabiliser",
+    "present": {
+      "ik": "enter",
+      "jij": "enter",
+      "hij": "enters",
+      "wij": "enter"
+    },
+    "preteritum": "entered",
+    "participePasse": "entered",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.81,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "spread",
+    "fr": "divulguer / étendre",
+    "present": {
+      "ik": "spread",
+      "jij": "spread",
+      "hij": "spreads",
+      "wij": "spread"
+    },
+    "preteritum": "spread",
+    "participePasse": "spread",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.81,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "improve",
+    "fr": "améliorer / bonifier",
+    "present": {
+      "ik": "improve",
+      "jij": "improve",
+      "hij": "improves",
+      "wij": "improve"
+    },
+    "preteritum": "improved",
+    "participePasse": "improved",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.79,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "decide",
+    "fr": "statuer / décider",
+    "present": {
+      "ik": "decide",
+      "jij": "decide",
+      "hij": "decides",
+      "wij": "decide"
+    },
+    "preteritum": "decided",
+    "participePasse": "decided",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.78,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "require",
+    "fr": "requérir",
+    "present": {
+      "ik": "require",
+      "jij": "require",
+      "hij": "requires",
+      "wij": "require"
+    },
+    "preteritum": "required",
+    "participePasse": "required",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.78,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "shut",
+    "fr": "renfermer / enfermer / fermer",
+    "present": {
+      "ik": "shut",
+      "jij": "shut",
+      "hij": "shuts",
+      "wij": "shut"
+    },
+    "preteritum": "shut",
+    "participePasse": "shut",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.78,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "prove",
+    "fr": "essayer",
+    "present": {
+      "ik": "prove",
+      "jij": "prove",
+      "hij": "proves",
+      "wij": "prove"
+    },
+    "preteritum": "proved",
+    "participePasse": "proved",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.77,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "wake",
+    "fr": "réveiller",
+    "present": {
+      "ik": "wake",
+      "jij": "wake",
+      "hij": "wakes",
+      "wij": "wake"
+    },
+    "preteritum": "woke",
+    "participePasse": "woken",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.76,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "develop",
+    "fr": "développer / dérouler",
+    "present": {
+      "ik": "develop",
+      "jij": "develop",
+      "hij": "develops",
+      "wij": "develop"
+    },
+    "preteritum": "developed",
+    "participePasse": "developed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "fix",
+    "fr": "arranger / apposer / fixer",
+    "present": {
+      "ik": "fix",
+      "jij": "fix",
+      "hij": "fixes",
+      "wij": "fix"
+    },
+    "preteritum": "fixt",
+    "participePasse": "fixt",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "raise",
+    "fr": "augmenter / dresser / relever",
+    "present": {
+      "ik": "raise",
+      "jij": "raise",
+      "hij": "raises",
+      "wij": "raise"
+    },
+    "preteritum": "raised",
+    "participePasse": "raised",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "treat",
+    "fr": "traiter / tâcher / agir",
+    "present": {
+      "ik": "treat",
+      "jij": "treat",
+      "hij": "treats",
+      "wij": "treat"
+    },
+    "preteritum": "treated",
+    "participePasse": "treated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.75,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "appreciate",
+    "fr": "apprécier / estimer / remercier",
+    "present": {
+      "ik": "appreciate",
+      "jij": "appreciate",
+      "hij": "appreciates",
+      "wij": "appreciate"
+    },
+    "preteritum": "appreciated",
+    "participePasse": "appreciated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.74,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "mention",
+    "fr": "mentionner",
+    "present": {
+      "ik": "mention",
+      "jij": "mention",
+      "hij": "mentions",
+      "wij": "mention"
+    },
+    "preteritum": "mentioned",
+    "participePasse": "mentioned",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.73,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "reduce",
+    "fr": "réduire",
+    "present": {
+      "ik": "reduce",
+      "jij": "reduce",
+      "hij": "reduces",
+      "wij": "reduce"
+    },
+    "preteritum": "reduced",
+    "participePasse": "reduced",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.73,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "remove",
+    "fr": "enlever / retirer / éloigner",
+    "present": {
+      "ik": "remove",
+      "jij": "remove",
+      "hij": "removes",
+      "wij": "remove"
+    },
+    "preteritum": "removed",
+    "participePasse": "removed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.71,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "warm",
+    "fr": "animer / échauffer",
+    "present": {
+      "ik": "warm",
+      "jij": "warm",
+      "hij": "warms",
+      "wij": "warm"
+    },
+    "preteritum": "warmed",
+    "participePasse": "warmed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.71,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ensure",
+    "fr": "assurer",
+    "present": {
+      "ik": "ensure",
+      "jij": "ensure",
+      "hij": "ensures",
+      "wij": "ensure"
+    },
+    "preteritum": "ensured",
+    "participePasse": "ensured",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.7,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "express",
+    "fr": "exprimer / répandre",
+    "present": {
+      "ik": "express",
+      "jij": "express",
+      "hij": "expresses",
+      "wij": "express"
+    },
+    "preteritum": "expressed",
+    "participePasse": "expressed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.68,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "feed",
+    "fr": "nourrir / alimenter",
+    "present": {
+      "ik": "feed",
+      "jij": "feed",
+      "hij": "feeds",
+      "wij": "feed"
+    },
+    "preteritum": "fed",
+    "participePasse": "fed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.67,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "teach",
+    "fr": "enseigner",
+    "present": {
+      "ik": "teach",
+      "jij": "teach",
+      "hij": "teaches",
+      "wij": "teach"
+    },
+    "preteritum": "taught",
+    "participePasse": "taught",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.67,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "discuss",
+    "fr": "parler",
+    "present": {
+      "ik": "discuss",
+      "jij": "discuss",
+      "hij": "discusses",
+      "wij": "discuss"
+    },
+    "preteritum": "discussed",
+    "participePasse": "discussed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.66,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "escape",
+    "fr": "fuir / échapper / enfuir",
+    "present": {
+      "ik": "escape",
+      "jij": "escape",
+      "hij": "escapes",
+      "wij": "escape"
+    },
+    "preteritum": "escaped",
+    "participePasse": "escaped",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.64,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "fill",
+    "fr": "farcir / remplir",
+    "present": {
+      "ik": "fill",
+      "jij": "fill",
+      "hij": "fills",
+      "wij": "fill"
+    },
+    "preteritum": "filled",
+    "participePasse": "filled",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.64,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "lay",
+    "fr": "mettre",
+    "present": {
+      "ik": "lay",
+      "jij": "lay",
+      "hij": "lays",
+      "wij": "lay"
+    },
+    "preteritum": "laid",
+    "participePasse": "laid",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.64,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "determine",
+    "fr": "déterminer",
+    "present": {
+      "ik": "determine",
+      "jij": "determine",
+      "hij": "determines",
+      "wij": "determine"
+    },
+    "preteritum": "determined",
+    "participePasse": "determined",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.63,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "fail",
+    "fr": "faillir / omettre",
+    "present": {
+      "ik": "fail",
+      "jij": "fail",
+      "hij": "fails",
+      "wij": "fail"
+    },
+    "preteritum": "failed",
+    "participePasse": "failed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.61,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "seek",
+    "fr": "chercher",
+    "present": {
+      "ik": "seek",
+      "jij": "seek",
+      "hij": "seeks",
+      "wij": "seek"
+    },
+    "preteritum": "sought",
+    "participePasse": "sought",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.61,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "upset",
+    "fr": "bouleverser / inquiéter",
+    "present": {
+      "ik": "upset",
+      "jij": "upset",
+      "hij": "upsets",
+      "wij": "upset"
+    },
+    "preteritum": "upset",
+    "participePasse": "upset",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.61,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "hang",
+    "fr": "pendre",
+    "present": {
+      "ik": "hang",
+      "jij": "hang",
+      "hij": "hangs",
+      "wij": "hang"
+    },
+    "preteritum": "hung",
+    "participePasse": "hung",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.6,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "affect",
+    "fr": "affecter",
+    "present": {
+      "ik": "affect",
+      "jij": "affect",
+      "hij": "affects",
+      "wij": "affect"
+    },
+    "preteritum": "affected",
+    "participePasse": "affected",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.59,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "deserve",
+    "fr": "mériter",
+    "present": {
+      "ik": "deserve",
+      "jij": "deserve",
+      "hij": "deserves",
+      "wij": "deserve"
+    },
+    "preteritum": "deserved",
+    "participePasse": "deserved",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.59,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "admit",
+    "fr": "admettre",
+    "present": {
+      "ik": "admit",
+      "jij": "admit",
+      "hij": "admits",
+      "wij": "admit"
+    },
+    "preteritum": "admitted",
+    "participePasse": "admitted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "replace",
+    "fr": "remplacer / replacer",
+    "present": {
+      "ik": "replace",
+      "jij": "replace",
+      "hij": "replaces",
+      "wij": "replace"
+    },
+    "preteritum": "replaced",
+    "participePasse": "replaced",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.58,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "achieve",
+    "fr": "réussir",
+    "present": {
+      "ik": "achieve",
+      "jij": "achieve",
+      "hij": "achieves",
+      "wij": "achieve"
+    },
+    "preteritum": "achieved",
+    "participePasse": "achieved",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.57,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "assume",
+    "fr": "assumer / supposer",
+    "present": {
+      "ik": "assume",
+      "jij": "assume",
+      "hij": "assumes",
+      "wij": "assume"
+    },
+    "preteritum": "assumed",
+    "participePasse": "assumed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.57,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "prefer",
+    "fr": "préférer / aimerbien",
+    "present": {
+      "ik": "prefer",
+      "jij": "prefer",
+      "hij": "prefers",
+      "wij": "prefer"
+    },
+    "preteritum": "preferred",
+    "participePasse": "preferred",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.57,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "combat",
+    "fr": "combattre",
+    "present": {
+      "ik": "combat",
+      "jij": "combat",
+      "hij": "combats",
+      "wij": "combat"
+    },
+    "preteritum": "combatted",
+    "participePasse": "combatted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "describe",
+    "fr": "décrire / qualifier",
+    "present": {
+      "ik": "describe",
+      "jij": "describe",
+      "hij": "describes",
+      "wij": "describe"
+    },
+    "preteritum": "described",
+    "participePasse": "described",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "identify",
+    "fr": "identifier",
+    "present": {
+      "ik": "identify",
+      "jij": "identify",
+      "hij": "identifies",
+      "wij": "identify"
+    },
+    "preteritum": "identified",
+    "participePasse": "identified",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "promote",
+    "fr": "promouvoir",
+    "present": {
+      "ik": "promote",
+      "jij": "promote",
+      "hij": "promotes",
+      "wij": "promote"
+    },
+    "preteritum": "promoted",
+    "participePasse": "promoted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "suppose",
+    "fr": "supposer",
+    "present": {
+      "ik": "suppose",
+      "jij": "suppose",
+      "hij": "supposes",
+      "wij": "suppose"
+    },
+    "preteritum": "supposed",
+    "participePasse": "supposed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.56,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "prepare",
+    "fr": "préparer",
+    "present": {
+      "ik": "prepare",
+      "jij": "prepare",
+      "hij": "prepares",
+      "wij": "prepare"
+    },
+    "preteritum": "prepared",
+    "participePasse": "prepared",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.55,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "hide",
+    "fr": "cacher / dérober / tapir",
+    "present": {
+      "ik": "hide",
+      "jij": "hide",
+      "hij": "hides",
+      "wij": "hide"
+    },
+    "preteritum": "hid",
+    "participePasse": "hidden",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.54,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "manage",
+    "fr": "atteindre / réussir / diriger",
+    "present": {
+      "ik": "manage",
+      "jij": "manage",
+      "hij": "manages",
+      "wij": "manage"
+    },
+    "preteritum": "managed",
+    "participePasse": "managed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.54,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "sing",
+    "fr": "chanter",
+    "present": {
+      "ik": "sing",
+      "jij": "sing",
+      "hij": "sings",
+      "wij": "sing"
+    },
+    "preteritum": "sang",
+    "participePasse": "sung",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.54,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "destroy",
+    "fr": "détruire",
+    "present": {
+      "ik": "destroy",
+      "jij": "destroy",
+      "hij": "destroys",
+      "wij": "destroy"
+    },
+    "preteritum": "destroyed",
+    "participePasse": "destroyed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.52,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "survive",
+    "fr": "survivre",
+    "present": {
+      "ik": "survive",
+      "jij": "survive",
+      "hij": "survives",
+      "wij": "survive"
+    },
+    "preteritum": "survived",
+    "participePasse": "survived",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.52,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "quote",
+    "fr": "citer / coter",
+    "present": {
+      "ik": "quote",
+      "jij": "quote",
+      "hij": "quotes",
+      "wij": "quote"
+    },
+    "preteritum": "quoted",
+    "participePasse": "quoted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.51,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "swear",
+    "fr": "sacrer / jurer",
+    "present": {
+      "ik": "swear",
+      "jij": "swear",
+      "hij": "swears",
+      "wij": "swear"
+    },
+    "preteritum": "swore",
+    "participePasse": "sworn",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.51,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "operate",
+    "fr": "fonctionner / manier / opérer",
+    "present": {
+      "ik": "operate",
+      "jij": "operate",
+      "hij": "operates",
+      "wij": "operate"
+    },
+    "preteritum": "operated",
+    "participePasse": "operated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.5,
+    "niveauCECR": "A2",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "celebrate",
+    "fr": "fêter / célébrer",
+    "present": {
+      "ik": "celebrate",
+      "jij": "celebrate",
+      "hij": "celebrates",
+      "wij": "celebrate"
+    },
+    "preteritum": "celebrated",
+    "participePasse": "celebrated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.49,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "hunt",
+    "fr": "chasser",
+    "present": {
+      "ik": "hunt",
+      "jij": "hunt",
+      "hij": "hunts",
+      "wij": "hunt"
+    },
+    "preteritum": "hunted",
+    "participePasse": "hunted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.49,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "earn",
+    "fr": "gagner",
+    "present": {
+      "ik": "earn",
+      "jij": "earn",
+      "hij": "earns",
+      "wij": "earn"
+    },
+    "preteritum": "earned",
+    "participePasse": "earned",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.48,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "ignore",
+    "fr": "ignorer / méconnaître",
+    "present": {
+      "ik": "ignore",
+      "jij": "ignore",
+      "hij": "ignores",
+      "wij": "ignore"
+    },
+    "preteritum": "ignored",
+    "participePasse": "ignored",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.48,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "occur",
+    "fr": "arriver",
+    "present": {
+      "ik": "occur",
+      "jij": "occur",
+      "hij": "occurs",
+      "wij": "occur"
+    },
+    "preteritum": "occurred",
+    "participePasse": "occurred",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.47,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "argue",
+    "fr": "argumenter / disputer / contester",
+    "present": {
+      "ik": "argue",
+      "jij": "argue",
+      "hij": "argues",
+      "wij": "argue"
+    },
+    "preteritum": "argued",
+    "participePasse": "argued",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.46,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "establish",
+    "fr": "établir",
+    "present": {
+      "ik": "establish",
+      "jij": "establish",
+      "hij": "establishes",
+      "wij": "establish"
+    },
+    "preteritum": "established",
+    "participePasse": "established",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.46,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "wash",
+    "fr": "laver",
+    "present": {
+      "ik": "wash",
+      "jij": "wash",
+      "hij": "washes",
+      "wij": "wash"
+    },
+    "preteritum": "washed",
+    "participePasse": "washed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.46,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "compare",
+    "fr": "comparer",
+    "present": {
+      "ik": "compare",
+      "jij": "compare",
+      "hij": "compares",
+      "wij": "compare"
+    },
+    "preteritum": "compared",
+    "participePasse": "compared",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.45,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "encourage",
+    "fr": "animer / encourager / efforcer",
+    "present": {
+      "ik": "encourage",
+      "jij": "encourage",
+      "hij": "encourages",
+      "wij": "encourage"
+    },
+    "preteritum": "encouraged",
+    "participePasse": "encouraged",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.45,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "refer",
+    "fr": "rapporter",
+    "present": {
+      "ik": "refer",
+      "jij": "refer",
+      "hij": "refers",
+      "wij": "refer"
+    },
+    "preteritum": "referred",
+    "participePasse": "referred",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.45,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "reveal",
+    "fr": "révéler",
+    "present": {
+      "ik": "reveal",
+      "jij": "reveal",
+      "hij": "reveals",
+      "wij": "reveal"
+    },
+    "preteritum": "revealed",
+    "participePasse": "revealed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.43,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "assist",
+    "fr": "assister / secourir",
+    "present": {
+      "ik": "assist",
+      "jij": "assist",
+      "hij": "assists",
+      "wij": "assist"
+    },
+    "preteritum": "assisted",
+    "participePasse": "assisted",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.42,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "capture",
+    "fr": "capturer",
+    "present": {
+      "ik": "capture",
+      "jij": "capture",
+      "hij": "captures",
+      "wij": "capture"
+    },
+    "preteritum": "captured",
+    "participePasse": "captured",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.42,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "participate",
+    "fr": "participer",
+    "present": {
+      "ik": "participate",
+      "jij": "participate",
+      "hij": "participates",
+      "wij": "participate"
+    },
+    "preteritum": "participated",
+    "participePasse": "participated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.42,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "solve",
+    "fr": "résoudre",
+    "present": {
+      "ik": "solve",
+      "jij": "solve",
+      "hij": "solves",
+      "wij": "solve"
+    },
+    "preteritum": "solved",
+    "participePasse": "solved",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.42,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "steal",
+    "fr": "voler",
+    "present": {
+      "ik": "steal",
+      "jij": "steal",
+      "hij": "steals",
+      "wij": "steal"
+    },
+    "preteritum": "stole",
+    "participePasse": "stolen",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.41,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "marry",
+    "fr": "marier",
+    "present": {
+      "ik": "marry",
+      "jij": "marry",
+      "hij": "marries",
+      "wij": "marry"
+    },
+    "preteritum": "married",
+    "participePasse": "married",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.4,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "smooth",
+    "fr": "radoucir",
+    "present": {
+      "ik": "smooth",
+      "jij": "smooth",
+      "hij": "smooths",
+      "wij": "smooth"
+    },
+    "preteritum": "smoothed",
+    "participePasse": "smoothed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.4,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "associate",
+    "fr": "associer / fréquenter",
+    "present": {
+      "ik": "associate",
+      "jij": "associate",
+      "hij": "associates",
+      "wij": "associate"
+    },
+    "preteritum": "associated",
+    "participePasse": "associated",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.39,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "compete",
+    "fr": "concourir",
+    "present": {
+      "ik": "compete",
+      "jij": "compete",
+      "hij": "competes",
+      "wij": "compete"
+    },
+    "preteritum": "competed",
+    "participePasse": "competed",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.39,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "arrive",
+    "fr": "parvenir / arriver",
+    "present": {
+      "ik": "arrive",
+      "jij": "arrive",
+      "hij": "arrives",
+      "wij": "arrive"
+    },
+    "preteritum": "arrived",
+    "participePasse": "arrived",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.38,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  },
+  {
+    "infinitief": "spin",
+    "fr": "tourner",
+    "present": {
+      "ik": "spin",
+      "jij": "spin",
+      "hij": "spins",
+      "wij": "spin"
+    },
+    "preteritum": "spun",
+    "participePasse": "spun",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.38,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": true
+  },
+  {
+    "infinitief": "introduce",
+    "fr": "introduire / présenter",
+    "present": {
+      "ik": "introduce",
+      "jij": "introduce",
+      "hij": "introduces",
+      "wij": "introduce"
+    },
+    "preteritum": "introduced",
+    "participePasse": "introduced",
+    "auxiliaire": "have",
+    "exempleNl": "",
+    "exempleFr": "",
+    "freq": 4.37,
+    "niveauCECR": "B1",
+    "niveauCECRSource": "freq",
+    "irregulier": false
+  }
+]
