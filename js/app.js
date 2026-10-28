@@ -4692,7 +4692,13 @@ if (firebaseAvailable) {
                         <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭ Passer</button>
                         <button type="button" class="btn btn-gray" onclick="conjAudioStop(); wordAudioRenderSetup();">⏹ Arrêter</button>
                     </div>
+                    <div class="wa-mark">
+                        <button type="button" class="btn btn-green" onclick="wordAudioMark(true)">✅ Je le connais</button>
+                        <button type="button" class="btn btn-red" onclick="wordAudioMark(false)">❌ À revoir</button>
+                    </div>
+                    <div id="wa-mark-fb" class="report-meta"></div>
                 </div>`;
+            run.known = new Set();
             const show = (i, idx, showSecond) => {
                 const el = document.getElementById('word-audio-now');
                 if (!el) return;
@@ -4707,6 +4713,8 @@ if (firebaseAvailable) {
             if (cycle++ > 0) list = items.slice().sort(() => Math.random() - 0.5); // tours suivants dans le désordre
             for (let idx = 0; idx < list.length && !run.stop; idx++) {
                 const i = list[idx];
+                if (run.known.has(i.id)) continue; // marqué « je le connais » pendant cette écoute
+                run.curItem = i;
                 run.skip = false;
                 // Une traduction comme « le fait de / l'acte de » se lit mieux sans les barres obliques.
                 const frSpoken = i.fr.replace(/\s*\/\s*/g, ', ');
@@ -4736,6 +4744,28 @@ if (firebaseAvailable) {
                         <button class="btn btn-gray" onclick="wordAudioRenderSetup()">⚙️ Changer les réglages</button>
                     </div>`;
             }
+        }
+
+        // Pendant l'écoute des mots : ✅ / ❌ sur le mot en cours (Joas, 28 octobre 2026), sans arrêter
+        // la lecture. Connu = maîtrisé (et plus relu dans cette écoute) ; à revoir = « Mots à revoir ».
+        function wordAudioMark(ok) {
+            const run = conjAudioRun, i = run && run.curItem;
+            if (!i) return;
+            const key = i.id + '::fr2nl';
+            state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+            if (ok) {
+                state.stats.trueMastered[key] = true;
+                state.stats.wrongCount[key] = 0;
+                if (!state.mastered.includes(key)) state.mastered.push(key);
+                if (run.known) run.known.add(i.id);
+            } else {
+                state.stats.wrongCount[key] = Math.max(1, state.stats.wrongCount[key] || 0);
+                state.stats.trueMastered[key] = false;
+            }
+            save();
+            const fb = document.getElementById('wa-mark-fb');
+            if (fb) fb.innerHTML = ok ? `✅ « ${rpEscapeHtml(i.nl)} » : connu, je ne le relis plus.` : `❌ « ${rpEscapeHtml(i.nl)} » ajouté à tes mots à revoir.`;
+            if (ok) { run.curItem = null; conjAudioSkip(); } // connu : on passe directement au suivant
         }
 
         // ===== Écouter une scène (spectateur) =====
