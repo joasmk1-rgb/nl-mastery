@@ -14,7 +14,7 @@
 <body>
 
     <header>
-        <div class="header-title">NL <span style="color:var(--primary)">Mastery</span></div>
+        <div class="header-title" onclick="showHome()" role="button" title="Accueil" style="cursor:pointer;">NL <span style="color:var(--primary)">Mastery</span></div>
         <div class="header-stats">
             <span class="xp-mini-badge" id="xp-mini-badge">⭐ 0 XP</span>
             <div class="xp-badge" id="cecr-badge">A1 • 0%</div>
@@ -75,25 +75,29 @@
          la même fiche partout : s'entraîner, écouter, voir la liste (+ conjugaison pour les verbes). -->
     <div id="vocab-view" class="view">
         <h2>📖 Vocabulaire</h2>
-        <p class="section-subtitle" style="margin-top:0;">D'abord comment travailler, puis sur quels mots.</p>
-        <!-- Les modes en haut, les catégories en dessous (Joas, octobre 2026). -->
-        <div class="section-title" style="margin-top:0;">🛠️ Comment travailler</div>
+        <!-- Trois sous-parties, choisies dans la barre du bas (showVocab(tab)). -->
+        <div class="vtab" data-vtab="train">
+        <p class="section-subtitle" style="margin-top:0;">Les façons de travailler tes mots et ta conjugaison.</p>
         <div id="vocab-review" class="hub-grid"></div>
-        <!-- Les jeux sont des façons de travailler le vocabulaire (plus d'onglet « Jouer ») -->
-        <div class="section-title" id="vocab-games-title">🎮 En jouant</div>
+        <div class="grid" style="margin-top:10px;">
+            <div class="card-menu" style="grid-column: span 2; color:#8b5cf6;" id="direction-btn" onclick="toggleDirection()"></div>
+        </div>
+        </div>
+        <div class="vtab" data-vtab="jeux">
+        <p class="section-subtitle" style="margin-top:0;">Les mêmes mots, en jouant.</p>
         <div class="hub-grid" id="vocab-games">
             <div class="hub-card" onclick="startMemory()"><span class="hub-card-icon">🧩</span><div class="hub-card-title">Memory</div><div class="hub-card-desc">Associe les mots et leur traduction.</div></div>
             <div class="hub-card" onclick="showTASelect()"><span class="hub-card-icon">⏱️</span><div class="hub-card-title">Contre-la-montre</div><div class="hub-card-desc">Un maximum de mots avant la fin du chrono.</div></div>
             <div class="hub-card" onclick="startAnagram()"><span class="hub-card-icon">🔀</span><div class="hub-card-title">Mot mélangé</div><div class="hub-card-desc">Reconstitue le mot à partir des lettres.</div></div>
             <div class="hub-card" onclick="showSwipeSelect()"><span class="hub-card-icon">👉</span><div class="hub-card-title">Tri rapide</div><div class="hub-card-desc">Trie en un geste les mots que tu connais.</div></div>
         </div>
-        <div class="section-title">📚 Sur quels mots</div>
+        </div>
+        <div class="vtab" data-vtab="mots">
+        <p class="section-subtitle" style="margin-top:0;">Tous les mots, par catégorie, par métier, et tes listes : pour consulter, écouter ou t'entraîner sur un groupe.</p>
         <div id="total-words-count" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;"></div>
         <div class="grid" id="main-categories-grid" style="margin-top:0;"></div>
         <div id="theme-section" style="width:100%;"></div>
         <div id="customlist-section" style="width:100%;"></div>
-        <div class="grid" style="margin-top:10px;">
-            <div class="card-menu" style="grid-column: span 2; color:#8b5cf6;" id="direction-btn" onclick="toggleDirection()"></div>
         </div>
     </div>
 
@@ -160,21 +164,6 @@
         <div id="notifications-list" class="hub-grid single"></div>
     </div>
 
-    <div id="pratiquer-view" class="view">
-        <h2>🎭 Pratiquer</h2>
-        <p class="section-subtitle" style="margin-top:0;">Parle et écoute en situation réelle : la vie courante, ton travail, la compréhension orale, et tes propres phrases.</p>
-
-        <div class="talk-entry" onclick="showTalk()">
-            <span class="talk-entry-avatars">👩🏼👨🏽</span>
-            <div><b>💬 Discuter</b><br><small>De tout et de rien, ou une situation de la vie courante (commune, médecin, logement, soirée…) avec Svetlana ou John. Ils t'aident quand tu bloques.</small></div>
-        </div>
-        <div class="hub-grid single">
-            <div class="hub-card accent" onclick="showRoleplay('travail')"><span class="hub-card-icon">💼</span><div class="hub-card-title">Mon travail</div><div class="hub-card-desc">Entretiens d'embauche et mises en situation dans ton métier.</div></div>
-            <div class="hub-card accent" onclick="showListen()"><span class="hub-card-icon">👂</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Message vocal, annonce, radio, consigne : écoute, réponds, résume.</div></div>
-            <div class="hub-card accent" onclick="showSayIt()"><span class="hub-card-icon">💭</span><div class="hub-card-title">Dis-le en néerlandais</div><div class="hub-card-desc">Dis en français ce qui te passe par la tête : ton tuteur t'apprend à le dire, puis tu le redis.</div></div>
-        </div>
-
-    </div>
     <div id="memory-view" class="view">
         <button class="back-btn" onclick="showReviser()">← Retour</button>
         <div id="memory-stats" style="font-weight:bold; margin-bottom:10px;"></div>
@@ -206,6 +195,7 @@
     </div>
 
     <div id="profil-view" class="view">
+        <button class="back-btn" onclick="showHome()">← Accueil</button>
         <h2>👤 Profil</h2>
         <div class="grid" style="margin-top:0;">
             <div class="card-menu" style="grid-column: span 2; color:#0891b2;" id="theme-btn" onclick="toggleTheme()"></div>
@@ -468,12 +458,12 @@
     </div>
 
     <div id="listen-view" class="view">
-        <button class="back-btn" onclick="listenStop(); showPratiquer()">← Pratiquer</button>
+        <button class="back-btn" onclick="listenStop(); showListen()">← Écouter</button>
         <div id="listen-content" class="content-col"></div>
     </div>
 
     <div id="talk-view" class="view">
-        <button class="back-btn" onclick="talkStop(); showPratiquer()">← Pratiquer</button>
+        <button class="back-btn" onclick="talkStop(); showTalk()">← Discuter</button>
         <div id="talk-content" class="content-col"></div>
     </div>
 
@@ -491,16 +481,10 @@
         <h2>📚 Cours</h2>
         <p class="section-subtitle" style="margin-top:0;">Ton parcours de A1 à B2, calqué sur les cours de néerlandais en Flandre : commence par faire le point, puis avance niveau par niveau.</p>
         <div id="modrp-list"></div>
-        <div class="section-title" style="margin-top:var(--space-4);">À côté du parcours</div>
-        <div class="hub-grid single">
-            <div class="hub-card" onclick="showProf()"><span class="hub-card-icon">🎓</span><div class="hub-card-title">Cours particulier</div><div class="hub-card-desc">15 ou 30 min avec un prof : conversation, point ciblé, mise en pratique, bilan. Différent à chaque fois.</div></div>
-            <div class="hub-card" onclick="showComprendre()"><span class="hub-card-icon">🧠</span><div class="hub-card-title">Grammaire & structures</div><div class="hub-card-desc">Le mémo : ordre des mots, temps, subordonnées, connecteurs.</div></div>
-        </div>
     </div>
 
     <div id="comprendre-view" class="view">
-        <button class="back-btn" onclick="showApprendre()">← Retour</button>
-        <h2>🧠 Comprendre</h2>
+        <h2>🧠 Grammaire & structures</h2>
         <p class="section-subtitle" style="margin-top:0;">Comprends le mécanisme derrière chaque règle — ordre des mots, subordonnées, temps, connecteurs — pas juste une traduction à retenir.</p>
         <div id="comprendre-content"></div>
     </div>
@@ -626,11 +610,9 @@
          avec le contenu. 5 onglets, un par intention : Accueil (que faire aujourd'hui), Vocabulaire
          (les mots, la conjugaison), Cours (modules en situation, grammaire), Pratiquer (jeu de rôle,
          écrit), Jouer (les 4 jeux). Le Profil est l'icône 👤 du bandeau du haut. -->
-    <nav class="bottom-nav">
-        <button onclick="showHome()" id="nav-home"><span class="icon">🏠</span>Accueil</button>
-        <button onclick="showVocab()" id="nav-vocab"><span class="icon">📖</span>Vocabulaire</button>
-        <button onclick="showApprendre()" id="nav-apprendre"><span class="icon">📚</span>Cours</button>
-        <button onclick="showPratiquer()" id="nav-pratiquer"><span class="icon">🎭</span>Pratiquer</button>
+    <!-- Barre du bas : les sous-parties du mode en cours (navBarRender) ; absente de l'accueil,
+         qui a ses grosses tuiles (Joas, octobre 2026). -->
+    <nav class="bottom-nav" id="bottom-nav">
     </nav>
 
     <!-- Compagnon vocal : micro flottant présent sur tous les écrans (sauf ceux qui ont leur micro) -->

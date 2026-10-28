@@ -2736,20 +2736,13 @@ if (firebaseAvailable) {
 
 
         // ===== Vue "Pratiquer" (roleplay, pratique ciblée, production — 100% de systèmes existants) =====
-        function showPratiquer() {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('pratiquer-view').classList.add('active');
-            setActiveNav('nav-pratiquer');
-        }
+        // Mode « Parler » : plus de page d'entrée, ses sous-parties sont les onglets du bas.
+        function showPratiquer() { showTalk(); }
 
 
         // Les 4 jeux vivent dans Vocabulaire (section « En jouant ») ; plus d'onglet « Jouer ».
         // showReviser (retour des jeux, compagnon) ramène à cette section.
-        function showReviser() {
-            showVocab();
-            const t = document.getElementById('vocab-games-title');
-            if (t) setTimeout(() => t.scrollIntoView({ block: 'start' }), 50);
-        }
+        function showReviser() { showVocab('jeux'); }
 
         // Ce qui est à revoir : les mots (en bas de Vocabulaire) et les notions fragiles (dans
         // Cours). Chacun est dessiné là où sa vue existe.
@@ -2961,6 +2954,7 @@ if (firebaseAvailable) {
                 ${headerHtml}
                 ${placementNudgeHtml}
                 ${routineHomeHtml()}
+                ${homeTilesHtml()}
                 ${socialHtml}
                 ${accountNudgeHtml}`;
         }
@@ -5847,10 +5841,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         // ===== Onglet « Vocabulaire » =====
-        function showVocab() {
+        let vocabTab = 'train';
+        function showVocab(tab) {
+            if (tab && ['train', 'mots', 'jeux'].includes(tab)) vocabTab = tab;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('vocab-view').classList.add('active');
-            setActiveNav('nav-vocab');
+            document.querySelectorAll('#vocab-view .vtab').forEach(el => { el.style.display = el.dataset.vtab === vocabTab ? '' : 'none'; });
+            window.scrollTo(0, 0);
+            setActiveNav('nav-vocab', vocabTab);
             renderMainCategories();
             renderThemes(vocabThemes);
             renderCustomListsHome();
@@ -6182,15 +6180,57 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             alert(`Liste "${name}" sauvegardée avec ${wlSelected.size} mots.`);
         }
 
-        function setActiveNav(id) {
+        // ===== Navigation : accueil en tuiles, barre du bas propre à chaque mode =====
+        // (Joas, 28 octobre 2026 : « l'écran d'accueil avec de grosses tuiles, les onglets en bas
+        // réservés à l'intérieur des modes »). Un mode = un id historique (nav-vocab, nav-apprendre,
+        // nav-pratiquer) ; ses onglets sont ses sous-parties, plus 🏠. L'onglet actif se déduit de
+        // l'écran affiché (NAV_VIEW_TAB), ou du sous-onglet passé à setActiveNav.
+        const NAV_MODES = {
+            'nav-vocab': [
+                { k: 'train', icon: '🛠️', label: "S'entraîner", go: "showVocab('train')" },
+                { k: 'mots', icon: '📚', label: 'Les mots', go: "showVocab('mots')" },
+                { k: 'jeux', icon: '🎮', label: 'Jeux', go: "showVocab('jeux')" }
+            ],
+            'nav-apprendre': [
+                { k: 'parcours', icon: '🗺️', label: 'Parcours', go: 'showApprendre()' },
+                { k: 'prof', icon: '🎓', label: 'Prof', go: 'showProf()' },
+                { k: 'grammaire', icon: '🧠', label: 'Grammaire', go: 'showComprendre()' }
+            ],
+            'nav-pratiquer': [
+                { k: 'discuter', icon: '💬', label: 'Discuter', go: 'showTalk()' },
+                { k: 'travail', icon: '💼', label: 'Travail', go: "showRoleplay('travail')" },
+                { k: 'ecouter', icon: '👂', label: 'Écouter', go: 'showListen()' },
+                { k: 'dire', icon: '💭', label: 'Dis-le', go: 'showSayIt()' }
+            ]
+        };
+        const NAV_VIEW_TAB = {
+            'conjugaison-view': 'train', 'conj-training-view': 'train', 'vocabcat-view': 'mots', 'wordlist-view': 'mots',
+            'memory-view': 'jeux', 'anagram-view': 'jeux', 'ta-select-view': 'jeux', 'timeattack-view': 'jeux', 'swipe-view': 'jeux', 'swipe-select-view': 'jeux',
+            'apprendre-view': 'parcours', 'modguide-view': 'parcours', 'modrp-view': 'parcours', 'lesson-view': 'parcours', 'prof-view': 'prof', 'comprendre-view': 'grammaire',
+            'talk-view': 'discuter', 'roleplay-view': 'travail', 'replay-view': 'travail', 'prep-view': 'travail', 'tutor-view': 'travail', 'listen-view': 'ecouter', 'scene-view': 'ecouter'
+        };
+        let navMode = 'nav-home';
+        function navBarRender(sub) {
+            const bar = document.getElementById('bottom-nav');
+            if (!bar) return;
+            const tabs = NAV_MODES[navMode];
+            document.body.classList.toggle('nav-hidden', !tabs);
+            if (!tabs) { bar.innerHTML = ''; return; }
+            const view = (document.querySelector('.view.active') || {}).id;
+            const cur = sub || (view === 'vocab-view' ? vocabTab : NAV_VIEW_TAB[view]);
+            bar.innerHTML = `<button type="button" onclick="showHome()"><span class="icon">🏠</span>Accueil</button>` +
+                tabs.map(t => `<button type="button" class="${t.k === cur ? 'active' : ''}" onclick="${t.go}"><span class="icon">${t.icon}</span>${t.label}</button>`).join('');
+        }
+
+        function setActiveNav(id, sub) {
             // Sécurité anti-friction : si l'utilisateur quitte l'écran d'exercice via un onglet
-            // principal (la barre du bas reste visible partout) pendant que l'auto-avance est en
-            // attente, on annule ce minuteur plutôt que de le laisser rappeler nextExercise() sur un
-            // tout autre écran quelques instants plus tard.
+            // pendant que l'auto-avance est en attente, on annule ce minuteur plutôt que de le
+            // laisser rappeler nextExercise() sur un tout autre écran quelques instants plus tard.
             clearTimeout(exerciseAutoAdvanceTimer);
-            document.querySelectorAll('.bottom-nav button, .header-profil-btn').forEach(b => b.classList.remove('active'));
-            const btn = document.getElementById(id);
-            if (btn) btn.classList.add('active');
+            document.querySelectorAll('.header-profil-btn').forEach(b => b.classList.remove('active'));
+            if (id === 'nav-profil') { const btn = document.getElementById(id); if (btn) btn.classList.add('active'); }
+            navMode = id;
+            navBarRender(sub);
             // showLesson()/showExercise() n'appellent jamais setActiveNav (ce sont des sous-vues
             // atteintes depuis Apprendre) : ce point ne se déclenche donc que lorsque l'utilisateur
             // rejoint un onglet principal (Accueil, Apprendre, Révision, Jeux, Roleplay, etc.), ce
@@ -14852,7 +14892,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 whyPassive: "On écoute cinq phrases qui appliquent la règle : le français, un instant pour chercher, puis le néerlandais."
             },
             dire: {
-                icon: '💭', label: 'Dis-le en néerlandais', nav: 'nav-pratiquer', back: '← Pratiquer', run: r => routineDrillSay(r),
+                icon: '💭', label: 'Dis-le en néerlandais', nav: 'nav-pratiquer', back: '← Parler', run: r => routineDrillSay(r),
                 why: "Dis-moi en français ce qui te passe par la tête : une pensée, une envie, quelque chose qui t'est arrivé. Je t'apprends à le dire en néerlandais, naturellement, à ton niveau. Puis tu le redis à ta manière, et je te corrige.",
                 whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
             },
@@ -14867,7 +14907,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!d) return;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('routine-view').classList.add('active');
-            setActiveNav(d.nav || 'nav-vocab');
+            setActiveNav(d.nav || 'nav-vocab', k === 'dire' ? 'dire' : k === 'canevas' ? 'travail' : (d.nav ? null : 'train'));
             if (routine) routineQuitRun();
             const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab, train: train || null };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
@@ -15788,6 +15828,14 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
         }
 
         // Carte de l'accueil.
+        // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
+        function homeTilesHtml() {
+            return `<div class="home-tiles">
+                <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>Ton parcours A1 → B2</small></div>
+                <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>Discuter, travail, écoute</small></div>
+                <div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>
+            </div>`;
+        }
         function routineHomeHtml() {
             const rs = routineState();
             const n = Object.keys(ROUTINE_STEPS).filter(k => rs.done[k]).length;
@@ -15858,7 +15906,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
             discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
-            pratiquer: { desc: 'onglet Pratiquer', run: () => showPratiquer() },
+            pratiquer: { desc: 'mode Parler (Discuter, Mon travail, Écouter, Dis-le)', run: () => showPratiquer() },
             entretiens: { desc: "entraînement aux entretiens d'embauche (questions de vrais entretiens)", run: () => { showRoleplay('travail'); rpShowRealCandidateList(); } },
             rejouer: { desc: 'rejouer un vrai entretien mot pour mot', run: () => rpShowReplayList() },
             etude_de_cas: { desc: 'étude de cas (business case)', run: () => { showRoleplay('travail'); rpShowCaseHome(); } },
