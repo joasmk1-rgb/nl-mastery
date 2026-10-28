@@ -909,3 +909,11 @@
         .fond-row > div { flex: 1; min-width: 0; }
         .fond-row.ok b { color: var(--success); }
         .home-advice { font-size: 0.82rem; color: var(--text-secondary); margin: 4px 0 10px; text-align: left; width: 100%; }
+        .wo-v { background: color-mix(in srgb, var(--primary) 22%, transparent); border-radius: 4px; padding: 0 3px; font-weight: 700; }
+        .wo-e { background: color-mix(in srgb, #f59e0b 28%, transparent); border-radius: 4px; padding: 0 3px; font-weight: 700; }
+        .wo-legend { font-size: 0.78rem; }
+        .wo-card { width: 100%; border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 12px; margin-bottom: 12px; text-align: left; background: var(--card-bg); }
+        .wo-title { font-weight: 700; margin-bottom: 6px; }
+        .wo-rule { font-size: 0.86rem; margin-bottom: 8px; text-align: left; }
+        .wo-ex { font-size: 0.9rem; display: grid; gap: 3px; margin-bottom: 8px; }
+        .wo-calque { font-size: 1.05rem; font-weight: 600; margin: 4px 0; }

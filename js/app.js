@@ -6196,7 +6196,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             'nav-apprendre': [
                 { k: 'parcours', icon: '🗺️', label: 'Parcours', go: 'showApprendre()' },
                 { k: 'prof', icon: '🎓', label: 'Prof', go: 'showProf()' },
-                { k: 'grammaire', icon: '🧠', label: 'Grammaire', go: 'showComprendre()' }
+                { k: 'grammaire', icon: '🧠', label: 'Grammaire', go: 'showComprendre()' },
+                { k: 'ordre', icon: '🧩', label: 'Ordre', go: 'showWordOrder()' }
             ],
             'nav-pratiquer': [
                 { k: 'discuter', icon: '💬', label: 'Discuter', go: 'showTalk()' },
@@ -6208,7 +6209,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         const NAV_VIEW_TAB = {
             'conjugaison-view': 'train', 'conj-training-view': 'train', 'vocabcat-view': 'mots', 'wordlist-view': 'mots',
             'memory-view': 'jeux', 'anagram-view': 'jeux', 'ta-select-view': 'jeux', 'timeattack-view': 'jeux', 'swipe-view': 'jeux', 'swipe-select-view': 'jeux',
-            'apprendre-view': 'parcours', 'modguide-view': 'parcours', 'modrp-view': 'parcours', 'lesson-view': 'parcours', 'prof-view': 'prof', 'comprendre-view': 'grammaire',
+            'apprendre-view': 'parcours', 'modguide-view': 'parcours', 'modrp-view': 'parcours', 'lesson-view': 'parcours', 'prof-view': 'prof', 'comprendre-view': 'grammaire', 'ordre-view': 'ordre',
             'talk-view': 'discuter', 'roleplay-view': 'travail', 'replay-view': 'travail', 'prep-view': 'travail', 'tutor-view': 'travail', 'listen-view': 'ecouter', 'scene-view': 'ecouter'
         };
         let navMode = 'nav-home';
@@ -14883,6 +14884,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On travaille ces mots, du plus courant au plus rare, par paquets de dix : un paquet s'ouvre quand le précédent est acquis. Je te dis le mot, tu me le traduis, à l'oral ou à l'écrit. Un mot raté ne revient pas tout de suite : il va dans tes mots à revoir.",
                 whyPassive: "On écoute ces mots, du plus courant au plus rare : le mot, un instant pour chercher, puis sa traduction."
             },
+            ordre: {
+                icon: '🧩', label: "L'ordre des mots", back: '← Ordre des mots', nav: 'nav-apprendre', run: r => routineDrillOrder(r),
+                why: "On travaille l'ordre des mots, en trois étapes : d'abord tu traduis du français déjà rangé à la néerlandaise, ensuite tu ranges toi-même, puis tu le dis à l'oral.",
+                whyPassive: "On écoute : la phrase rangée à la néerlandaise, puis le néerlandais. Laisse ton oreille s'habituer à cette place des mots."
+            },
             fond: {
                 icon: '🧱', label: 'Les fondations', back: '← Cours', nav: 'nav-apprendre', run: r => routineDrillFond(r),
                 why: "On pose les fondations : les verbes et les mots qui reviennent tout le temps. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit. Ce que tu rates revient en premier ; un palier est acquis quand tu en réussis neuf sur dix.",
@@ -14914,7 +14920,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!d) return;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('routine-view').classList.add('active');
-            setActiveNav(d.nav || 'nav-vocab', k === 'dire' ? 'dire' : k === 'canevas' ? 'travail' : k === 'fond' ? 'parcours' : (d.nav ? null : 'train'));
+            setActiveNav(d.nav || 'nav-vocab', k === 'dire' ? 'dire' : k === 'canevas' ? 'travail' : k === 'fond' ? 'parcours' : k === 'ordre' ? 'ordre' : (d.nav ? null : 'train'));
             if (routine) routineQuitRun();
             const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab, train: train || null };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
@@ -15683,7 +15689,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         // peu près), sinon Gemini juge le sens et la justesse ; sans Gemini, compté faux.
         async function routineTranslateJudge(q, given) {
             const part = chunkAnswerPart(given, q.before, q.after);
-            if ((part && evaluateAnswer(part, q.target).status !== 'wrong') || evaluateAnswer(given, q.ex).status !== 'wrong' || rpSpeechMatch(given, q.ex)) return { ok: true };
+            if (!q.strictOrder && ((part && evaluateAnswer(part, q.target).status !== 'wrong') || evaluateAnswer(given, q.ex).status !== 'wrong' || rpSpeechMatch(given, q.ex))) return { ok: true };
             if (!GeminiService.isAvailable()) return { ok: false };
             try {
                 const a = rpHelpParseJson(await GeminiService.generate(`Exercice de traduction pour un apprenant francophone de néerlandais (Flandre), niveau ${liveLevel()}.
@@ -15697,6 +15703,7 @@ Le modèle n'est qu'UNE façon de le dire : juge sur le SENS et la justesse, jam
 - "explication_fr" : une phrase courte, en français, sur ce qui n'allait pas (vide si tout est juste).
 - "bloc_fr" : ${q.kind === 'phrase' ? 'vide.' : `s'il n'a pas employé « ${q.target} » alors que sa phrase est juste, une courte phrase en français qui le lui fait remarquer comme une autre façon courante de le dire (sinon vide).`}
 ${q.focus ? `- Point travaillé : « ${q.focus} ». S'il se trompe sur CE point, "juste" = false, et "explication_fr" parle d'abord de ce point.
+` : ''}${q.strictOrder ? `- L'ORDRE DES MOTS est l'objet de l'exercice : une phrase avec les bons mots dans un mauvais ordre n'est PAS juste.
 ` : ''}- ${TUTOR_REGLE_FIELD} (seulement s'il y a une vraie faute, sinon vide)
 Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "", "explication_fr": "", "bloc_fr": "", "regle": ""}`));
                 if (!a || typeof a.sens_ok !== 'boolean') return { ok: false };
@@ -16031,6 +16038,198 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             return `<p class="home-advice">💡 ${txt}</p>`;
         }
 
+
+        // ===== 🧩 L'ordre des mots (Cours → onglet Ordre) =====
+        // Joas (28 octobre 2026) : sa faute n° 1 est l'ordre des mots (verbe pas à la fin après
+        // « dat », inversion oubliée). Méthode du « décodage » (Vera Birkenbihl) : le français est
+        // réécrit mot à mot DANS L'ORDRE NÉERLANDAIS, pour séparer « trouver les mots » et « les
+        // placer ». 7 leçons ; chacune en trois étapes : 1) décoder (français calqué → néerlandais),
+        // 2) remettre en ordre (français normal → néerlandais, calque en indice), 3) dire (phrase
+        // entendue en français, réponse orale). Marques : [[verbe conjugué à sa place]] et
+        // {{ce qui part à la fin}}, colorées pareil dans le calque et le néerlandais. Exemples écrits
+        // à la main (fonctionnent sans Gemini) + phrases générées dans ses contextes. Jugement strict
+        // sur l'ordre (q.strictOrder). Notions du curriculum alimentées (recordNotionAttempt).
+        const WORD_ORDER_LESSONS = [
+            { id: 'v2', icon: '2️⃣', titre: 'Le verbe en 2e position et l\'inversion',
+              regle: "Dans la phrase principale, le verbe conjugué est toujours le DEUXIÈME élément. Si la phrase commence par autre chose que le sujet (un moment, un lieu, « voor mij », « daarom »…), le sujet passe juste APRÈS le verbe.",
+              notions: ['inversion', 'hoofdzin', 'ordre_des_mots_base'],
+              ex: [
+                { fr: 'Demain, je travaille à Gand.', calque: 'Demain [[travaille]] je à Gand.', nl: 'Morgen [[werk]] ik in Gent.' },
+                { fr: 'Pour moi, c\'est important.', calque: 'Pour moi [[est]] cela important.', nl: 'Voor mij [[is]] dat belangrijk.' },
+                { fr: 'Au bureau, nous parlons néerlandais.', calque: 'Au bureau [[parlons]] nous néerlandais.', nl: 'Op kantoor [[spreken]] we Nederlands.' },
+                { fr: 'Ce matin, le camion est arrivé en retard.', calque: 'Ce matin [[est]] le camion trop tard {{arrivé}}.', nl: 'Vanochtend [[is]] de vrachtwagen te laat {{aangekomen}}.' }
+              ] },
+            { id: 'coord', icon: '🔗', titre: 'en, maar, want, of, dus : rien ne bouge',
+              regle: "Après « en », « maar », « want » (car), « of » (ou) et « dus », l'ordre reste NORMAL : sujet, puis verbe. Piège : « want » (car) garde l'ordre normal, alors que « omdat » (parce que) envoie le verbe à la fin. Après « dus », on entend aussi l'inversion (« dus vertrekt hij ») : les deux se disent.",
+              notions: ['conjonctions_coordination', 'want_vs_omdat_b1'],
+              ex: [
+                { fr: 'Je suis fatigué, mais je travaille encore.', calque: 'Je [[suis]] fatigué, mais je [[travaille]] encore.', nl: 'Ik [[ben]] moe, maar ik [[werk]] nog.' },
+                { fr: 'Je reste à la maison, car je suis malade.', calque: 'Je [[reste]] à la maison, car je [[suis]] malade.', nl: 'Ik [[blijf]] thuis, want ik [[ben]] ziek.' },
+                { fr: 'Il appelle le client et je contrôle la commande.', calque: 'Il [[appelle]] le client et je [[contrôle]] la commande.', nl: 'Hij [[belt]] de klant en ik [[controleer]] de bestelling.' },
+                { fr: 'Le camion est plein, donc il part.', calque: 'Le camion [[est]] plein, donc il [[part]].', nl: 'De vrachtwagen [[is]] vol, dus hij [[vertrekt]].' }
+              ] },
+            { id: 'sub', icon: '⏩', titre: 'dat, omdat, als, of… : le verbe à la fin',
+              regle: "Après dat (que), omdat (parce que), als / wanneer (si, quand), of (si), terwijl, zodat, voordat, nadat, hoewel…, le verbe conjugué part à la FIN de la proposition. Et si la phrase COMMENCE par cette proposition, la suite commence par le verbe (inversion).",
+              notions: ['subordonnee_omdat', 'dat_of_als', 'ordre_mots_subordonnee', 'zodat', 'hoewel_ondanks'],
+              ex: [
+                { fr: 'Je pense que le client est content.', calque: 'Je pense que le client content {{est}}.', nl: 'Ik denk dat de klant tevreden {{is}}.' },
+                { fr: 'Je reste parce que j\'ai encore du travail.', calque: 'Je reste parce que je encore du travail {{ai}}.', nl: 'Ik blijf omdat ik nog werk {{heb}}.' },
+                { fr: 'Quand le camion arrive, je signe la CMR.', calque: 'Quand le camion {{arrive}}, [[signe]] je la CMR.', nl: 'Als de vrachtwagen {{aankomt}}, [[teken]] ik de CMR.' },
+                { fr: 'Je ne sais pas si la livraison est arrivée.', calque: 'Je sais pas si la livraison {{arrivée est}}.', nl: 'Ik weet niet of de levering {{aangekomen is}}.' }
+              ] },
+            { id: 'cause', icon: '⚖️', titre: 'omdat / doordat contre daarom / daardoor',
+              regle: "Même idée, deux ordres. « omdat » et « doordat » (parce que, à cause du fait que) envoient le verbe à la FIN. « daarom » et « daardoor » (c'est pourquoi, de ce fait) sont en tête de la phrase principale : le verbe vient JUSTE APRÈS (inversion). Ne dis pas « dat besloot me » : dis « daarom heb ik besloten ».",
+              notions: ['omdat_vs_doordat', 'dus_daarom_daardoor'],
+              ex: [
+                { fr: 'Je suis en retard parce qu\'il y a des bouchons.', calque: 'Je suis trop tard parce que il bouchon {{est}}.', nl: 'Ik ben te laat omdat er file {{is}}.' },
+                { fr: 'Il y a des bouchons, c\'est pourquoi je suis en retard.', calque: 'Il y a bouchon, c\'est pourquoi [[suis]] je trop tard.', nl: 'Er is file, daarom [[ben]] ik te laat.' },
+                { fr: 'La livraison est arrivée tard parce que le camion avait une panne.', calque: 'La livraison arriva tard parce que le camion une panne {{avait}}.', nl: 'De levering kwam laat doordat de vrachtwagen pech {{had}}.' },
+                { fr: 'J\'ai aimé ce stage, c\'est pour ça que j\'ai choisi la logistique.', calque: 'Je trouvais ce stage chouette, c\'est pourquoi [[ai]] je pour la logistique {{choisi}}.', nl: 'Ik vond die stage leuk, daarom [[heb]] ik voor logistiek {{gekozen}}.' }
+              ] },
+            { id: 'fin', icon: '🔚', titre: 'Participe, infinitif et particule : à la fin',
+              regle: "Avec « hebben / zijn » (passé composé), le participe part à la FIN. Avec un verbe comme « moeten, kunnen, willen, gaan », l'infinitif part à la FIN. Et un verbe séparable se coupe : la petite partie (terug, aan, op, mee…) part à la FIN.",
+              notions: ['participe_passe', 'verbes_separables_intro', 'verbes_separables_avances', 'modaux_infinitif_perfectum'],
+              ex: [
+                { fr: 'J\'ai encodé la commande hier.', calque: 'J\'[[ai]] la commande hier {{encodé}}.', nl: 'Ik [[heb]] de bestelling gisteren {{ingevoerd}}.' },
+                { fr: 'Je dois appeler le fournisseur.', calque: 'Je [[dois]] le fournisseur {{appeler}}.', nl: 'Ik [[moet]] de leverancier {{bellen}}.' },
+                { fr: 'Je te rappelle demain.', calque: 'Je [[appelle]] te demain {{en retour}}.', nl: 'Ik [[bel]] je morgen {{terug}}.' },
+                { fr: 'Le camion arrive à six heures.', calque: 'Le camion [[vient]] à six heures {{à destination}}.', nl: 'De vrachtwagen [[komt]] om zes uur {{aan}}.' }
+              ] },
+            { id: 'cluster', icon: '🧱', titre: 'Plusieurs verbes au bout de la subordonnée',
+              regle: "Dans une subordonnée (après dat, omdat, of…), TOUS les verbes se regroupent à la fin : « dat ik {{moet werken}} », « omdat hij niet {{kan komen}} », « dat ik {{heb moeten werken}} ». Le verbe conjugué reste collé au groupe, souvent en premier.",
+              notions: ['plusieurs_verbes_bijzin', 'perfectum_bijzin', 'combiner_structures_verbales'],
+              ex: [
+                { fr: 'Il appelle parce qu\'il ne peut pas venir.', calque: 'Il appelle parce qu\'il pas {{peut venir}}.', nl: 'Hij belt omdat hij niet {{kan komen}}.' },
+                { fr: 'Elle demande si je veux commencer lundi.', calque: 'Elle demande si je lundi {{veux commencer}}.', nl: 'Ze vraagt of ik maandag {{wil beginnen}}.' },
+                { fr: 'Je dis que j\'ai dû travailler.', calque: 'Je dis que je {{ai dû travailler}}.', nl: 'Ik zeg dat ik {{heb moeten werken}}.' },
+                { fr: 'Je pense que la commande sera livrée demain.', calque: 'Je pense que la commande demain {{livrée est}}.', nl: 'Ik denk dat de bestelling morgen {{geleverd wordt}}.' }
+              ] },
+            { id: 'tmp', icon: '🕒', titre: 'Quand, comment, où — et la place de niet',
+              regle: "Après le verbe, l'ordre habituel est : QUAND (temps), puis COMMENT (manière), puis OÙ (lieu). « niet » se place plutôt vers la fin : après le complément direct (« ik begrijp de vraag niet »), mais avant un lieu, un adjectif ou la partie qui part à la fin (« ik kom niet naar kantoor »).",
+              notions: ['position_niet', 'niet'],
+              ex: [
+                { fr: 'Je vais au travail en voiture tous les jours.', calque: 'Je [[vais]] chaque jour en voiture au travail.', nl: 'Ik [[ga]] elke dag met de auto naar het werk.' },
+                { fr: 'Je ne travaille pas demain.', calque: 'Je [[travaille]] demain {{pas}}.', nl: 'Ik [[werk]] morgen {{niet}}.' },
+                { fr: 'Je ne comprends pas la question.', calque: 'Je [[comprends]] la question {{pas}}.', nl: 'Ik [[begrijp]] de vraag {{niet}}.' },
+                { fr: 'Il ne vient pas au bureau aujourd\'hui.', calque: 'Il [[vient]] aujourd\'hui {{pas}} au bureau.', nl: 'Hij [[komt]] vandaag {{niet}} naar kantoor.' }
+              ] }
+        ];
+        const woPlain = s => String(s || '').replace(/\[\[|\]\]|\{\{|\}\}/g, '');
+        const woHtml = s => rpEscapeHtml(String(s || '')).replace(/\[\[(.+?)\]\]/g, '<span class="wo-v">$1</span>').replace(/\{\{(.+?)\}\}/g, '<span class="wo-e">$1</span>');
+        const WO_LEGEND = '<span class="wo-legend"><span class="wo-v">verbe à sa place</span> <span class="wo-e">part à la fin</span></span>';
+        function woState() { if (!state.wordOrder) state.wordOrder = {}; return state.wordOrder; }
+
+        function showWordOrder() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('ordre-view').classList.add('active');
+            setActiveNav('nav-apprendre', 'ordre');
+            const S = woState();
+            document.getElementById('ordre-content').innerHTML = `
+                <p class="section-subtitle" style="margin-top:0;">Le néerlandais ne range pas les mots comme le français. Ici, tu vois d'abord le français réécrit DANS L'ORDRE NÉERLANDAIS, pour t'habituer à cette place ; puis tu ranges toi-même ; puis tu le dis.</p>
+                <p class="report-meta" style="text-align:left;">${WO_LEGEND}</p>
+                ${WORD_ORDER_LESSONS.map(L => {
+                    const s = S[L.id] || {};
+                    const e = L.ex[0];
+                    return `<div class="wo-card">
+                        <div class="wo-title">${L.icon} ${rpEscapeHtml(L.titre)} ${s.n ? `<small class="report-meta">· ${s.ok || 0}/${s.n} réussies</small>` : ''}</div>
+                        <div class="wo-rule">${rpEscapeHtml(L.regle)}</div>
+                        <div class="wo-ex"><div>🇫🇷 ${rpEscapeHtml(e.fr)}</div><div>🔀 ${woHtml(e.calque)}</div><div>🇳🇱 ${woHtml(e.nl)} ${speakBtnHtml(woPlain(e.nl))}</div></div>
+                        <button class="btn btn-green" onclick="woStart('${L.id}')">▶️ S'entraîner</button>
+                    </div>`;
+                }).join('')}`;
+        }
+        function woStart(id) {
+            const L = WORD_ORDER_LESSONS.find(x => x.id === id);
+            if (!L) return;
+            routineDrill('ordre', showWordOrder, { label: L.icon + ' ' + L.titre, lesson: id });
+        }
+
+        async function woGenerate(L, n) {
+            if (!GeminiService.isAvailable()) return [];
+            try {
+                const a = rpHelpParseJson(await GeminiService.generate(`Tu prépares un exercice d'ordre des mots en néerlandais (Flandre) pour un apprenant francophone de niveau ${liveLevel()}, sur ce point : « ${L.titre} ». ${L.regle}
+Écris ${n} phrases courtes et naturelles (travail, logistique, bureau, entretien d'embauche, vie quotidienne), de la plus simple à la plus difficile, qui appliquent ce point.
+Pour chacune :
+- "fr" : la phrase en français normal ;
+- "nl" : sa traduction néerlandaise naturelle et correcte ;
+- "calque" : la phrase française réécrite mot à mot DANS L'ORDRE NÉERLANDAIS (méthode du décodage), même si ce n'est pas du français correct.
+Dans "nl" et "calque", entoure par [[ ]] le verbe conjugué de la proposition principale quand sa place compte (2e position, inversion), et par {{ }} ce qui part à la fin (verbe de subordonnée, participe, infinitif, particule séparable, niet…). Mêmes marques aux mêmes endroits dans les deux.
+Exemple : {"fr": "Demain, je travaille à la maison.", "nl": "Morgen [[werk]] ik thuis.", "calque": "Demain [[travaille]] je à la maison."}
+Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`));
+                return (a && Array.isArray(a.phrases) ? a.phrases : []).filter(x => x && x.fr && x.nl && x.calque).slice(0, n);
+            } catch (e) { return []; }
+        }
+
+        async function routineDrillOrder(r) {
+            const L = WORD_ORDER_LESSONS.find(x => x.id === r.train.lesson);
+            if (!L) return 'empty';
+            if (!r.train.ruleSaid) {
+                r.train.ruleSaid = true;
+                routineBubble('info', `<div class="wo-rule">${rpEscapeHtml(L.regle)}</div><div class="report-meta">${WO_LEGEND}</div>`);
+                if (courseRulesOn() && !routinePassive()) await conjAudioSpeak(L.regle, 'fr', 1.05);
+                if (!routineActive(r)) return false;
+            }
+            const wait = routineBubble('info', '<span class="report-meta">🤔 Je prépare tes phrases…</span>');
+            const gen = await woGenerate(L, 8);
+            if (wait) wait.remove();
+            if (!routineActive(r)) return false;
+            const statics = L.ex.slice().sort(() => Math.random() - 0.5);
+            const list = gen.length ? statics.slice(0, 2).concat(gen) : statics;
+            const n = list.length, nDec = Math.round(n * 0.4), nOrd = Math.round(n * 0.4);
+            const S = woState(); if (!S[L.id]) S[L.id] = { n: 0, ok: 0 };
+            let ok = 0, asked = 0, step = '';
+            for (let i = 0; i < n && routineActive(r); i++) {
+                const x = list[i], plain = woPlain(x.nl);
+                const kind = i < nDec ? 'dec' : i < nDec + nOrd ? 'ord' : 'dire';
+                if (kind !== step) {
+                    step = kind;
+                    const t = { dec: '1. Décoder : le français est déjà dans l\'ordre néerlandais, traduis mot à mot.', ord: '2. À toi de ranger : la phrase en français normal, remets les mots dans l\'ordre néerlandais.', dire: '3. Dis-le : écoute la phrase en français et réponds à l\'oral.' }[kind];
+                    routineBubble('info', `<div class="prof-phase-title">${t}</div>`);
+                    if (!routinePassive()) await conjAudioSpeak(t.replace(/^\d\. /, ''), 'fr', 1.05);
+                    if (!routineActive(r)) return false;
+                }
+                const hid = 'wo-hint-' + Math.floor(Math.random() * 1e9);
+                const html = kind === 'dec'
+                    ? `<div class="routine-q"><small>${i + 1}/${n} · décoder</small><div class="wo-calque">🔀 ${woHtml(x.calque)}</div><small>🇫🇷 ${rpEscapeHtml(x.fr)}</small></div>`
+                    : kind === 'ord'
+                        ? `<div class="routine-q"><small>${i + 1}/${n} · à toi de ranger</small><div>🇫🇷 ${rpEscapeHtml(x.fr)}</div><button type="button" class="report-link" onclick="const h = document.getElementById('${hid}'); if (h) h.style.display = ''; this.remove();">💡 L'ordre néerlandais</button><div id="${hid}" style="display:none;" class="wo-calque">🔀 ${woHtml(x.calque)}</div></div>`
+                        : `<div class="routine-q"><small>${i + 1}/${n} · dis-le</small><div>🎧 Écoute, puis réponds en néerlandais.</div><button type="button" class="report-link" data-fr="${rpEscapeHtml(x.fr)}" onclick="conjAudioSpeak(this.dataset.fr, 'fr', 1.05)">🔁 Réécouter</button> <button type="button" class="report-link" data-fr="${rpEscapeHtml(x.fr)}" onclick="const s = document.createElement('small'); s.textContent = ' ' + this.dataset.fr; this.after(s); this.remove();">👁 Voir</button></div>`;
+                const say = () => conjAudioSpeak(kind === 'dec' ? woPlain(x.calque) : x.fr, 'fr', 1.05);
+                r.ctx = `ordre des mots (« ${L.titre} ») : traduire « ${x.fr} » (modèle : « ${plain} »)`;
+                const given = await routineAskAnswer(r, html, say, say);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineBubble('info', `<div class="routine-fb">🎧 ${woHtml(x.nl)} ${speakBtnHtml(plain)}<div class="report-meta">🔀 ${woHtml(x.calque)}</div></div>`);
+                    if (routineActive(r)) await conjAudioSpeak(plain, 'nl', 0.9);
+                    continue;
+                }
+                const q = { kind: 'phrase', fr: x.fr, ex: plain, target: plain, before: '', after: '', focus: L.titre, strictOrder: true };
+                let j = { ok: false };
+                if (given) {
+                    const clean = s => normalize(s).replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').trim();
+                    const loc = evaluateAnswer(clean(given), clean(plain));
+                    if (loc.status === 'correct' || (loc.status === 'close' && !loc.particleOrder)) j = { ok: true };
+                    else {
+                        const w2 = routineBubble('info', '<span class="report-meta">🤔</span>');
+                        j = await routineTranslateJudge(q, given);
+                        if (w2) w2.remove();
+                    }
+                }
+                if (!routineActive(r)) return false;
+                asked++; if (j.ok) ok++;
+                S[L.id].n++; if (j.ok) S[L.id].ok++;
+                S[L.id].last = Date.now();
+                (L.notions || []).slice(0, 2).forEach(nid => { try { recordNotionAttempt(nid, !!j.ok); } catch (e) { /* notion absente */ } });
+                save();
+                await routineJudgeFeedback(r, q, given, j, woHtml(x.nl));
+            }
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (!routinePassive() && asked) await routineSay(r, `${ok} sur ${asked}.${ok === asked ? ' Bravo, cet ordre devient naturel.' : ' Les erreurs d\'ordre reviennent dans tes points faibles : on les retravaillera.'}`);
+            return true;
+        }
+
         // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
         function homeTilesHtml() {
             return `<div class="home-tiles">
@@ -16106,6 +16305,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             dire: { desc: "dire en néerlandais ce qu'on pense en français (le tuteur apprend la phrase)", run: () => showSayIt() },
+            ordre: { desc: "l'ordre des mots (verbe en 2e position, verbe à la fin après dat / omdat, daarom…)", run: () => showWordOrder() },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
             discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
@@ -16140,6 +16340,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             if (has(/comment progresser|devenir bon|etre bon|conseils?|routine|comment (ca|ça) marche|par ou commencer/)) return { action: 'progresser' };
             if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
             if (has(/dis le en|dire en neerlandais|comment dire ce que|ce qui me passe|exprimer ce que je pense|apprends? moi a dire/)) return { action: 'dire' };
+            if (has(/ordre des mots|place du verbe|verbe a la fin|inversion|structure des phrases/)) return { action: 'ordre' };
             if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };
             if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
             if (has(/discut|parler (avec|de|un peu)|bavard|conversation/)) return { action: 'discuter', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null), sujet: text, lancer: true } };
