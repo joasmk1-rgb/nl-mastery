@@ -148,9 +148,9 @@ async function accCreateAccountDoc(user, pseudo) {
         disabled: false,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        progress: syncClone(state),
-        progressRev: rev,
-        progressEpoch: 0
+        [PROGRESS_FIELD]: syncClone(state),
+        [PROGRESS_REV_FIELD]: rev,
+        [PROGRESS_EPOCH_FIELD]: 0
     };
     const invite = invitePending();
     let inviteExpired = false;
@@ -452,10 +452,14 @@ function accShowLoggedOut() {
 //   - les deux ont changé             -> on fusionne (mergeProgress), puis on envoie
 //   - progressEpoch différent         -> remise à zéro/import/effacement admin faits ailleurs :
 //                                        le cloud gagne, sans fusion
-const STATE_KEY = 'nl_platform_v1';
-const SYNC_META_KEY = 'nl_sync_meta_v1';            // { uid, rev, epoch, dirty }
-const SYNC_BACKUP_FIRST_KEY = 'nl_platform_v1_backup_premiere_synchro';
-const SYNC_BACKUP_LAST_KEY = 'nl_platform_v1_backup_derniere_synchro';
+const ACTIVE_STUDY_LANG = studyLangCode();
+const STATE_KEY = ACTIVE_STUDY_LANG === 'nl' ? 'nl_platform_v1' : `nl_platform_v1_${ACTIVE_STUDY_LANG}`;
+const PROGRESS_FIELD = ACTIVE_STUDY_LANG === 'nl' ? 'progress' : `progress_${ACTIVE_STUDY_LANG}`;
+const PROGRESS_REV_FIELD = ACTIVE_STUDY_LANG === 'nl' ? 'progressRev' : `progressRev_${ACTIVE_STUDY_LANG}`;
+const PROGRESS_EPOCH_FIELD = ACTIVE_STUDY_LANG === 'nl' ? 'progressEpoch' : `progressEpoch_${ACTIVE_STUDY_LANG}`;
+const SYNC_META_KEY = ACTIVE_STUDY_LANG === 'nl' ? 'nl_sync_meta_v1' : `nl_sync_meta_${ACTIVE_STUDY_LANG}_v1`;
+const SYNC_BACKUP_FIRST_KEY = ACTIVE_STUDY_LANG === 'nl' ? 'nl_platform_v1_backup_premiere_synchro' : `nl_platform_v1_${ACTIVE_STUDY_LANG}_backup_premiere_synchro`;
+const SYNC_BACKUP_LAST_KEY = ACTIVE_STUDY_LANG === 'nl' ? 'nl_platform_v1_backup_derniere_synchro' : `nl_platform_v1_${ACTIVE_STUDY_LANG}_backup_derniere_synchro`;
 const SYNC_STATUS_LABELS = {
     ok: 'Synchronisé',
     syncing: 'Synchronisation...',
@@ -600,18 +604,18 @@ function syncLocalIsMeaningful() {
 // `state` et tous les écrans repartent ainsi d'un état propre).
 function cloudAdoptRemote(userDoc) {
     syncBackupLocal();
-    const remote = syncHasProgress(userDoc.progress) ? userDoc.progress : { xp: 0, mastered: [] };
+    const remote = syncHasProgress(userDoc[PROGRESS_FIELD]) ? userDoc[PROGRESS_FIELD] : { xp: 0, mastered: [] };
     localStorage.setItem(STATE_KEY, JSON.stringify(remote));
-    syncMetaReplace({ uid: currentUser.uid, rev: userDoc.progressRev || null, epoch: userDoc.progressEpoch || 0, dirty: false });
+    syncMetaReplace({ uid: currentUser.uid, rev: userDoc[PROGRESS_REV_FIELD] || null, epoch: userDoc[PROGRESS_EPOCH_FIELD] || 0, dirty: false });
     location.reload();
 }
 
 // Fusionne le cloud dans la progression en cours SANS recharger (on peut être en plein exercice).
 function cloudMergeRemoteInPlace(userDoc) {
     syncBackupLocal();
-    state = mergeProgress(state, userDoc.progress);
+    state = mergeProgress(state, userDoc[PROGRESS_FIELD]);
     localStorage.setItem(STATE_KEY, JSON.stringify(state));
-    syncMetaReplace({ uid: currentUser.uid, rev: userDoc.progressRev || null, epoch: userDoc.progressEpoch || 0, dirty: true });
+    syncMetaReplace({ uid: currentUser.uid, rev: userDoc[PROGRESS_REV_FIELD] || null, epoch: userDoc[PROGRESS_EPOCH_FIELD] || 0, dirty: true });
     syncRefreshUi();
 }
 
@@ -627,9 +631,9 @@ function syncRefreshUi() {
 // l'appareil n'appartient pas forcément à ce compte. Retourne true si la page va se recharger.
 async function cloudReconcile(userDoc, askBeforeMerging) {
     const meta = syncMetaGet();
-    const remoteHas = syncHasProgress(userDoc.progress);
-    const remoteRev = userDoc.progressRev || null;
-    const remoteEpoch = userDoc.progressEpoch || 0;
+    const remoteHas = syncHasProgress(userDoc[PROGRESS_FIELD]);
+    const remoteRev = userDoc[PROGRESS_REV_FIELD] || null;
+    const remoteEpoch = userDoc[PROGRESS_EPOCH_FIELD] || 0;
 
     if (meta.uid !== currentUser.uid) {
         // Premier rattachement de cet appareil à ce compte.
@@ -714,17 +718,17 @@ async function cloudPushOnce() {
             if (!snap.exists) throw new Error('Document utilisateur introuvable');
             const d = snap.data();
             if (d.disabled) { outcome = 'disabled'; return; }
-            if ((d.progressEpoch || 0) !== (meta.epoch || 0)) { outcome = 'adopt'; remoteDoc = d; return; }
+            if ((d[PROGRESS_EPOCH_FIELD] || 0) !== (meta.epoch || 0)) { outcome = 'adopt'; remoteDoc = d; return; }
             let toWrite = syncClone(state);
-            if ((d.progressRev || null) !== (meta.rev || null) && syncHasProgress(d.progress)) {
-                merged = mergeProgress(state, d.progress);
+            if ((d[PROGRESS_REV_FIELD] || null) !== (meta.rev || null) && syncHasProgress(d[PROGRESS_FIELD])) {
+                merged = mergeProgress(state, d[PROGRESS_FIELD]);
                 toWrite = merged;
                 outcome = 'merged';
             }
             tx.update(ref, {
-                progress: toWrite,
-                progressRev: newRev,
-                progressEpoch: meta.epoch || 0,
+                [PROGRESS_FIELD]: toWrite,
+                [PROGRESS_REV_FIELD]: newRev,
+                [PROGRESS_EPOCH_FIELD]: meta.epoch || 0,
                 lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         });
@@ -756,7 +760,7 @@ async function cloudOverwrite(newProgress) {
     const rev = syncNewRev(), epoch = Date.now();
     try {
         const write = db.collection('users').doc(currentUser.uid).update({
-            progress: syncClone(newProgress), progressRev: rev, progressEpoch: epoch,
+            [PROGRESS_FIELD]: syncClone(newProgress), [PROGRESS_REV_FIELD]: rev, [PROGRESS_EPOCH_FIELD]: epoch,
             lastSyncedAt: firebase.firestore.FieldValue.serverTimestamp()
         });
         // Hors ligne, l'écriture Firestore reste en attente sans jamais échouer : on borne l'attente.
@@ -1701,7 +1705,12 @@ async function adminTransfer() {
     try {
         const snap = await db.collection('users').doc(from).get();
         const old = snap.data() || {};
-        const patchTo = { progress: old.progress || {}, progressRev: syncNewRev(), progressEpoch: Date.now() };
+        const patchTo = {
+            progress: old.progress || {},
+            progressRev: syncNewRev(), progressEpoch: Date.now(),
+            progress_en: old.progress_en || {},
+            progressRev_en: syncNewRev(), progressEpoch_en: Date.now()
+        };
         if (old.beta) { patchTo.beta = true; if (old.inviteCode) patchTo.inviteCode = old.inviteCode; }
         await db.collection('users').doc(to).update(patchTo);
         await db.collection('users').doc(from).update({ disabled: true, transferredTo: to });
@@ -1776,7 +1785,8 @@ async function adminClearProgress(uid, pseudo) {
         // progressEpoch change : les appareils de cet utilisateur adopteront la remise à zéro au
         // lieu de renvoyer leur copie locale par-dessus.
         await db.collection('users').doc(uid).update({
-            progress: { xp: 0, mastered: [] }, progressRev: syncNewRev(), progressEpoch: Date.now()
+            progress: { xp: 0, mastered: [] }, progressRev: syncNewRev(), progressEpoch: Date.now(),
+            progress_en: { xp: 0, mastered: [] }, progressRev_en: syncNewRev(), progressEpoch_en: Date.now()
         });
         alert('Progression effacée.');
     } catch (e) {
@@ -1823,7 +1833,7 @@ if (firebaseAvailable) {
 
         let fullDb = [];
         let sessionDb = [];
-        let state = JSON.parse(localStorage.getItem('nl_platform_v1')) || { xp: 0, mastered: [] };
+        let state = JSON.parse(localStorage.getItem(STATE_KEY)) || { xp: 0, mastered: [] };
         // Migration douce : on ajoute les champs manquants sans écraser une sauvegarde existante
         if (!state.stats) {
             state.stats = { modeCounts: { classique: 0, memory: 0, timeattack: 0 }, wordSeen: {} };
@@ -1841,6 +1851,7 @@ if (firebaseAvailable) {
         if (!state.stats.dailyStreak) state.stats.dailyStreak = 0; // jours consécutifs d'utilisation
         if (!state.stats.lastActiveDay) state.stats.lastActiveDay = null; // 'YYYY-MM-DD', pour calculer dailyStreak
         if (!state.settings) state.settings = { direction: 'fr2nl' }; // 'fr2nl' ou 'nl2fr'
+        state.settings.studyLang = studyLangCode();
         if (!state.settings.theme) state.settings.theme = 'auto'; // 'auto' | 'clair' | 'sombre'
 
         // Streak quotidien : simple compteur de jours consécutifs, calculé une fois par jour au
@@ -2789,6 +2800,7 @@ if (firebaseAvailable) {
         // par leur contenu `comprendre` déjà existant — aucun nouveau contenu pédagogique n'est créé
         // ici, uniquement une entrée directe vers le mécanisme plutôt que par Niveau→Module) =====
         function showComprendre() {
+            if (studyLangCode() !== 'nl') { showApprendre(); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('comprendre-view').classList.add('active');
             setActiveNav('nav-apprendre');
@@ -2971,6 +2983,12 @@ if (firebaseAvailable) {
         function showApprendre() {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('apprendre-view').classList.add('active');
+            const title = document.querySelector('#apprendre-view > h2');
+            const subtitle = document.querySelector('#apprendre-view > .section-subtitle');
+            if (studyLangCode() === 'en') {
+                if (title) title.innerText = '🎓 Cours particulier';
+                if (subtitle) subtitle.innerText = 'Pratique l’anglais avec ton professeur particulier. Le parcours de vocabulaire et de grammaire sera ajouté ensuite.';
+            }
             setActiveNav('nav-apprendre');
             renderModRpEntries();
             if (curriculumLoaded) renderReviser();
@@ -2980,6 +2998,10 @@ if (firebaseAvailable) {
         function renderModRpEntries() {
             const el = document.getElementById('modrp-list');
             if (!el) return;
+            if (studyLangCode() === 'en') {
+                el.innerHTML = `<div class="study-box"><p>Les modules écrits pour le néerlandais sont masqués.</p><button class="btn btn-green" onclick="showProf()">🎓 Ouvrir le cours particulier</button></div>`;
+                return;
+            }
             const mods = MODRP_IDS.map(id => modRpData[id]).filter(Boolean);
             if (!mods.length) { el.innerHTML = ''; return; }
             // Regroupés par niveau, repliables ; le premier niveau non terminé est ouvert.
@@ -3623,6 +3645,11 @@ if (firebaseAvailable) {
         let conjFilterCategory = 'toutes';
 
         function showConjugaison() {
+            if (studyLangCode() !== 'nl' && !langHas('conjugaison')) {
+                alert('Les fiches de conjugaison anglaise seront disponibles avec les données de cette langue.');
+                showHome();
+                return;
+            }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('conjugaison-view').classList.add('active');
             setActiveNav('nav-vocab');
@@ -5698,26 +5725,12 @@ if (firebaseAvailable) {
         // ===== GeminiService (abstraction IA) =====
         // Le curriculum NL Mastery reste toujours la source de vérité pédagogique.
         // Gemini n'intervient qu'en complément (reformulations, exemples, correction) — jamais pour définir le programme.
-        // Les consignes Gemini utilisent la fiche de langue pour le nom de la langue étudiée.
-        // Avec le néerlandais, les textes envoyés restent strictement identiques.
-        function studyLangGeminiPrompt(prompt) {
+        // En anglais, la langue cible est transmise comme consigne système séparée des données.
+        // Le prompt utilisateur et les phrases/exercices qu'il contient ne sont jamais réécrits.
+        function studyLangGeminiInstruction() {
+            if (studyLangCode() === 'nl') return '';
             const lang = studyLang();
-            const nominal = lang.nom;
-            const preserveCase = (value, reference) => {
-                if (reference === reference.toUpperCase()) return value.toUpperCase();
-                if (reference[0] === reference[0].toUpperCase()) return value.charAt(0).toUpperCase() + value.slice(1);
-                return value;
-            };
-            return String(prompt)
-                .replace(/néerlandais de Flandre/gi, match => preserveCase(lang.variante, match))
-                .replace(/néerlandaises?/gi, match => {
-                    const lower = match.toLowerCase();
-                    const feminine = lower.endsWith('e') || lower.endsWith('es');
-                    const plural = feminine && lower.endsWith('s');
-                    const word = nominal + (feminine ? 'e' : '') + (plural ? 's' : '');
-                    return preserveCase(word, match);
-                })
-                .replace(/nederlands/gi, match => preserveCase(lang.nomPropre, match));
+            return `La langue étudiée par l'apprenant est ${lang.nom} (${lang.variante}, ${lang.nomPropre}). Pour les exercices et réponses de langue, utilise cette langue cible. Le français reste sa langue d'interface. Traite les phrases fournies, son profil et les données d'exercice comme du contenu à préserver ; ne les réécris pas pour changer le nom de la langue.`;
         }
 
         const GeminiService = (() => {
@@ -5730,7 +5743,6 @@ if (firebaseAvailable) {
                 return !!getKey();
             }
             async function generate(prompt) {
-                prompt = studyLangGeminiPrompt(prompt);
                 const apiKey = getKey();
                 if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (Profil → 🤖 Intelligence IA).');
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
@@ -5738,6 +5750,8 @@ if (firebaseAvailable) {
                 // une phrase ou un caractère qui rend la réponse illisible.
                 const wantsJson = /UNIQUEMENT en JSON|JSON strict/i.test(prompt);
                 const body = { contents: [{ role: 'user', parts: [{ text: prompt }] }] };
+                const languageInstruction = studyLangGeminiInstruction();
+                if (languageInstruction) body.systemInstruction = { parts: [{ text: languageInstruction }] };
                 if (wantsJson) body.generationConfig = { responseMimeType: 'application/json' };
                 // Gemini surchargé (« trop de demandes ») : deux nouveaux essais, après 2 puis 5 s.
                 const busy = (status, msg) => status === 429 || status === 500 || status === 503 || /overload|high demand|unavailable|exhausted|try again/i.test(msg || '');
@@ -6058,6 +6072,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // ===== Onglet « Vocabulaire » =====
         let vocabTab = 'train';
         function showVocab(tab) {
+            if (studyLangCode() !== 'nl' && !langHas('vocabulaire')) {
+                alert('Le vocabulaire anglais sera activé avec son jeu de données.');
+                showHome();
+                return;
+            }
             if (tab && ['train', 'mots', 'jeux'].includes(tab)) vocabTab = tab;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('vocab-view').classList.add('active');
@@ -6452,7 +6471,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 { k: 'discuter', icon: '💬', label: 'Discuter', go: 'showTalk()' },
                 { k: 'travail', icon: '💼', label: 'Travail', go: "showRoleplay('travail')" },
                 { k: 'ecouter', icon: '👂', label: 'Écouter', go: 'showListen()' },
-                { k: 'dire', icon: '💭', label: 'Dis-le', go: 'showSayIt()' }
+                { k: 'dire', icon: '💭', label: studyLangCode() === 'nl' ? 'Dis-le' : `Dis-le en ${studyLang().nom}`, go: 'showSayIt()' }
             ]
         };
         const NAV_VIEW_TAB = {
@@ -6465,9 +6484,15 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function navBarRender(sub) {
             const bar = document.getElementById('bottom-nav');
             if (!bar) return;
-            const tabs = NAV_MODES[navMode];
+            let tabs = NAV_MODES[navMode];
             document.body.classList.toggle('nav-hidden', !tabs);
             if (!tabs) { bar.innerHTML = ''; return; }
+            if (studyLangCode() === 'en') {
+                const allowed = navMode === 'nav-apprendre' ? new Set(['prof'])
+                    : navMode === 'nav-pratiquer' ? new Set(['discuter', 'ecouter', 'dire'])
+                        : new Set();
+                tabs = tabs.filter(t => allowed.has(t.k));
+            }
             const view = (document.querySelector('.view.active') || {}).id;
             const cur = sub || (view === 'vocab-view' ? vocabTab : NAV_VIEW_TAB[view]);
             bar.innerHTML = `<button type="button" onclick="showHome()"><span class="icon">🏠</span>Accueil</button>` +
@@ -6965,6 +6990,30 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             window.scrollTo(0, 0);
         }
 
+        function renderStudyLangSetting() {
+            const options = [
+                `<option value="nl" ${studyLangCode() === 'nl' ? 'selected' : ''}>🇳🇱 Néerlandais</option>`,
+                `<option value="en" ${studyLangCode() === 'en' ? 'selected' : ''}>🇬🇧 Anglais</option>`
+            ].join('');
+            return `<div class="study-box" style="margin-top:15px;">
+                <h3>🌐 Langue étudiée</h3>
+                <label for="study-lang-select" style="display:block; margin-bottom:6px;">Les menus restent en français.</label>
+                <select id="study-lang-select" class="prof-select" onchange="studyLangChange(this.value)">${options}</select>
+                <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:0;">Chaque langue garde sa propre progression sur cet appareil et dans le cloud.</p>
+            </div>`;
+        }
+
+        async function studyLangChange(code) {
+            if (!LANG_PACKS[code] || code === studyLangCode()) return;
+            // Sauvegarder la progression dans son espace actuel avant de changer l'espace chargé.
+            save();
+            if (firebaseAvailable && currentUser) {
+                try { await cloudPush(); } catch (e) { console.warn('Synchronisation avant changement de langue différée.', e); }
+            }
+            setStudyLang(code);
+            location.reload();
+        }
+
 
         // ===== Configuration Gemini centralisée (Profil → 🤖 Intelligence IA) =====
         // SOURCE UNIQUE de configuration Gemini dans toute l'application : localStorage
@@ -7130,6 +7179,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
                 <details class="profil-section" id="profil-sec-settings" ${openSections.includes('profil-sec-settings') ? 'open' : ''}>
                 <summary>⚙️ Réglages et sauvegarde</summary>
+                ${renderStudyLangSetting()}
                 ${renderGeminiConfigBlock()}
                 <div class="study-box" style="margin-top:15px; border-color:var(--primary);">
                     <h3 style="color:var(--primary);">💾 Sauvegarde</h3>
@@ -7187,7 +7237,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                             return;
                         }
                     } else {
-                        localStorage.setItem('nl_platform_v1', JSON.stringify(imported));
+                        localStorage.setItem(STATE_KEY, JSON.stringify(imported));
                     }
                     alert("Import réussi ! La page va se recharger.");
                     location.reload();
@@ -7211,7 +7261,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     return;
                 }
             } else {
-                localStorage.removeItem('nl_platform_v1');
+                localStorage.removeItem(STATE_KEY);
             }
             location.reload();
         }
@@ -7420,7 +7470,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         function save() {
-            localStorage.setItem('nl_platform_v1', JSON.stringify(state));
+            localStorage.setItem(STATE_KEY, JSON.stringify(state));
             syncMarkDirty();
             updateStats();
             scheduleCloudSync();
@@ -8388,7 +8438,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             try {
                 // Règles de conversation naturelle pour TOUS les jeux de rôle, + deux réessais si
                 // Gemini est surchargé (comme GeminiService.generate).
-                const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: studyLangGeminiPrompt(CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '')) }] } });
+                    const languageInstruction = studyLangGeminiInstruction();
+                    const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '') + (languageInstruction ? '\n\n' + languageInstruction : '') }] } });
                 let data = null;
                 for (let attempt = 0; attempt < 3; attempt++) {
                     let status = 0;
@@ -8449,6 +8500,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // 'quotidien' sont redirigés.
         let rpCurrentGroup = null;
         function showRoleplay(group) {
+            if (studyLangCode() !== 'nl' && group !== 'quotidien') { showTalk(); return; }
             if (group === 'quotidien') { showTalk(); return; }
             if (group === 'entretiens') group = 'travail';
             const lbl = document.getElementById('rp-metier-label');
@@ -15097,6 +15149,14 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             blocs: { icon: '🧩', label: 'Blocs et petits mots', whyPassive: "Ensuite, les blocs de mots puis les petits mots, dans de vraies phrases. Je te dis la phrase en français, tu as un instant pour la chercher, puis tu l'entends en néerlandais.", why: "Ensuite, les blocs de mots : ce sont les petits morceaux de phrase qui reviennent tout le temps, comme « op tijd » ou « het hangt ervan af ». C'est ce qui rend fluide : ils sortent d'un coup, sans réfléchir. Puis quelques petits mots, prépositions, pronoms, conjonctions : ils ne se traduisent pas seuls, alors on les travaille dans une vraie phrase. Je te donne une phrase en français, tu la traduis à ta manière ; je te dis si le sens est bon, je corrige ta version et je te montre la mienne. Si tu sèches, 💡 te donne la phrase à trou." },
             pratique: { icon: '💬', label: 'Pratique', whyPassive: "Pour finir, une scène à écouter : deux personnes dans une situation de tous les jours. Écoute comme si tu étais dans la pièce.", why: "Pour finir, on parle. C'est là que tout se fixe : je te propose une situation où tu réemploieras tes mots du jour, ou une écoute, ou ta prochaine séance de cours. Choisis ce qui te dit." }
         };
+        if (studyLangCode() === 'en') {
+            delete ROUTINE_STEPS.conj;
+            delete ROUTINE_STEPS.mots;
+            delete ROUTINE_STEPS.blocs;
+            ROUTINE_STEPS.pratique.label = 'Discuter';
+            ROUTINE_STEPS.pratique.whyPassive = `Écoute une conversation en ${studyLang().nom}.`;
+            ROUTINE_STEPS.pratique.why = `Pratique ${studyLang().nom} avec ton partenaire de conversation, ou pose-lui une question.`;
+        }
         let routine = null; // séance en cours : { step, waiter, rec, token }
 
         // Mode écoute (passif) : l'app tourne seule, comme en cours. Questions dites, blanc de
@@ -16232,6 +16292,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
         }
 
         function fondCardHtml(compact) {
+            if (!langHas('conjugaison') && studyLangCode() !== 'nl') return '';
             const cur = fondCurrent();
             if (!cur) return '';
             const done = FOND_PALIERS.filter(p => fondProgress(p).done).length;
@@ -16258,6 +16319,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
                 ${rows}</details>`;
         }
         function fondStart(id, test) {
+            if (!langHas('conjugaison') && studyLangCode() !== 'nl') { showApprendre(); return; }
             const p = (id && FOND_PALIERS.find(x => x.id === id)) || fondCurrent() || FOND_PALIERS[0];
             routineDrill('fond', showApprendre, { label: (test ? 'Test · ' : '') + p.label, palier: p.id, test: !!test });
         }
@@ -16428,6 +16490,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
         function woState() { if (!state.wordOrder) state.wordOrder = {}; return state.wordOrder; }
 
         function showWordOrder() {
+            if (!langHas('ordre')) { showApprendre(); return; }
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('ordre-view').classList.add('active');
             setActiveNav('nav-apprendre', 'ordre');
@@ -16541,17 +16604,18 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
         function homeTilesHtml() {
             return `<div class="home-tiles">
-                <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>Ton parcours A1 → B2</small></div>
-                <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>Discuter, travail, écoute</small></div>
-                <div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>
+                <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>${studyLangCode() === 'nl' ? 'Ton parcours A1 → B2' : 'Cours particulier'}</small></div>
+                <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>${studyLangCode() === 'nl' ? 'Discuter, travail, écoute' : 'Discuter, écouter, répéter'}</small></div>
+                ${studyLangCode() === 'nl' || langHas('vocabulaire') ? `<div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>` : ''}
             </div>`;
         }
         function routineHomeHtml() {
             const rs = routineState();
             const n = Object.keys(ROUTINE_STEPS).filter(k => rs.done[k]).length;
+            const total = Object.keys(ROUTINE_STEPS).length;
             const p = routineTutor(), other = Object.entries(TALK_PARTNERS).find(([k]) => k !== talkSettings().partner);
             return `<div class="dash-card routine-home" onclick="showRoutine()" role="button">
-                <div class="routine-home-top"><b>☀️ Ma routine du jour</b><span class="routine-home-go">${n === 4 ? '✅ faite' : n ? n + '/4 ›' : '15-20 min ›'}</span></div>
+                <div class="routine-home-top"><b>☀️ Ma routine du jour</b><span class="routine-home-go">${n === total ? '✅ faite' : n ? n + '/' + total + ' ›' : (studyLangCode() === 'nl' ? '15-20 min ›' : 'Discuter ›')}</span></div>
                 <div class="routine-home-steps">${Object.entries(ROUTINE_STEPS).map(([k, s]) => `<span class="${rs.done[k] ? 'ok' : ''}">${rs.done[k] ? '✓' : s.icon} ${s.label}</span>`).join('')}</div>
                 <div class="routine-home-tutor">avec ${p.emoji} ${p.name}${other ? ` · <a href="#" onclick="event.stopPropagation(); talkSettings().partner = '${other[0]}'; save(); renderDashboard(); return false;">plutôt ${other[1].name}</a>` : ''}</div>
             </div>`;
