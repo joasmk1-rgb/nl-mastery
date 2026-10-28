@@ -917,3 +917,4 @@
         .wo-rule { font-size: 0.86rem; margin-bottom: 8px; text-align: left; }
         .wo-ex { font-size: 0.9rem; display: grid; gap: 3px; margin-bottom: 8px; }
         .wo-calque { font-size: 1.05rem; font-weight: 600; margin: 4px 0; }
+        .audio-timer { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-left: 6px; }

@@ -4087,6 +4087,52 @@ if (firebaseAvailable) {
                 <div class="conj-audio-chips">${AUDIO_PAUSES.map(p => chip(s.pause === p, `${setter}('pause',${p})`, p ? p + ' s' : 'Aucun')).join('')}</div>`;
         }
 
+        // ===== Minuteur d'écoute et mode « pour m'endormir » =====
+        // Joas (28 octobre 2026) : lancer une écoute de 5 minutes (conjugaison, mots), et pouvoir
+        // s'endormir sur une liste. Durée commune (state.settings.audioTimer) : la lecture boucle sur
+        // la liste jusqu'à la fin du minuteur. 😴 : écoute seule, voix plus lente, volume qui baisse
+        // dans les 2 dernières minutes, arrêt automatique ; l'écran reste allumé pendant la lecture
+        // (sinon le téléphone coupe la voix), puis il est libéré.
+        const AUDIO_DURATIONS = [0, 5, 10, 15, 30];
+        function audioTimerSettings() {
+            if (!state.settings) state.settings = {};
+            const s = state.settings.audioTimer || {};
+            state.settings.audioTimer = { minutes: AUDIO_DURATIONS.includes(s.minutes) ? s.minutes : 0, sleep: !!s.sleep };
+            return state.settings.audioTimer;
+        }
+        function audioTimerSet(key, value, rerender) {
+            const s = audioTimerSettings();
+            s[key] = key === 'sleep' ? !s.sleep : value;
+            if (key === 'sleep' && s.sleep && !s.minutes) s.minutes = 15;
+            save();
+            if (typeof window[rerender] === 'function') window[rerender]();
+        }
+        function audioTimerHtml(rerender) {
+            const s = audioTimerSettings();
+            const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            return `<div class="conj-audio-label">Durée</div>
+                <div class="conj-audio-chips">${AUDIO_DURATIONS.map(m => chip(s.minutes === m, `audioTimerSet('minutes', ${m}, '${rerender}')`, m ? m + ' min' : 'Une fois la liste')).join('')}</div>
+                <div class="conj-audio-chips">${chip(s.sleep, `audioTimerSet('sleep', 0, '${rerender}')`, "😴 Pour m'endormir")}</div>
+                ${s.sleep ? '<p class="conj-audio-hint">Écoute seule, voix plus lente, le volume baisse doucement à la fin, puis tout s\'arrête et l\'écran peut s\'éteindre. Baisse la luminosité ; ne verrouille pas l\'écran pendant la lecture, sinon le téléphone coupe la voix.</p>' : (s.minutes ? '<p class="conj-audio-hint">La liste recommence jusqu\'à la fin du minuteur.</p>' : '')}`;
+        }
+        function audioTimerStart(run) {
+            const s = audioTimerSettings();
+            run.sleep = s.sleep;
+            run.deadline = s.minutes ? Date.now() + s.minutes * 60000 : 0;
+            if (run.deadline) run.tick = setInterval(() => {
+                const el = document.getElementById('audio-timer');
+                if (!el) return;
+                const left = Math.max(0, run.deadline - Date.now());
+                el.textContent = '⏱ ' + Math.floor(left / 60000) + ':' + String(Math.floor(left / 1000) % 60).padStart(2, '0') + (run.sleep ? ' · 😴' : '');
+            }, 1000);
+        }
+        const audioTimeUp = run => !!(run && run.deadline && Date.now() >= run.deadline);
+        function audioRunVolume(run) {
+            if (!run || !run.sleep || !run.deadline) return 1;
+            const left = run.deadline - Date.now();
+            return left < 120000 ? Math.max(0.15, left / 120000) : 1;
+        }
+
         function conjAudioSettings() {
             if (!state.settings) state.settings = {};
             const s = state.settings.conjAudio || {};
@@ -4097,7 +4143,8 @@ if (firebaseAvailable) {
                 order: s.order === 'nl' ? 'nl' : 'fr',
                 rate: AUDIO_RATES.some(r => r.v === s.rate) ? s.rate : 0.95,
                 pause: AUDIO_PAUSES.includes(s.pause) ? s.pause : 4,
-                count: [1, 5, 10].includes(s.count) ? s.count : 1
+                count: [1, 5, 10].includes(s.count) ? s.count : 1,
+                range: [20, 50, 100].includes(s.range) ? s.range : 20
             };
             return state.settings.conjAudio;
         }
@@ -4112,11 +4159,48 @@ if (firebaseAvailable) {
                 s[key] = value;
             }
             save();
-            conjAudioRenderSetup();
+            if (conjAudioPanel === 'listen') conjListenRender(); else conjAudioRenderSetup();
+        }
+        let conjAudioPanel = 'verb';
+        // Conjugaison → 🎧 Écoute en continu : les N verbes les plus courants, minuteur, 😴.
+        function conjListenOpen() {
+            const box = document.getElementById('conj-listen-box');
+            if (!box) return;
+            if (box.innerHTML && !conjAudioRun) { box.innerHTML = ''; conjAudioPanel = 'verb'; return; }
+            conjAudioStop();
+            conjListenRender();
+            box.scrollIntoView({ block: 'nearest' });
+        }
+        function conjListenRender() {
+            const box = document.getElementById('conj-listen-box');
+            if (!box) return;
+            conjAudioPanel = 'listen';
+            const s = conjAudioSettings();
+            if (![20, 50, 100].includes(s.range)) s.range = 20;
+            const chip = (active, onclick, label) => `<button type="button" class="conj-filter-chip${active ? ' active' : ''}" onclick="${onclick}">${label}</button>`;
+            box.innerHTML = `
+                <div class="conj-card conj-audio">
+                    <div class="conj-audio-title">🎧 Écoute en continu</div>
+                    <div class="conj-audio-label">Verbes</div>
+                    <div class="conj-audio-chips">${[20, 50, 100].map(n => chip(s.range === n, `conjAudioSet('range', ${n})`, 'Les ' + n + ' plus courants')).join('')}</div>
+                    <div class="conj-audio-label">Temps</div>
+                    <div class="conj-audio-chips">${CONJ_TENSES.map(t => chip(s.tenses.includes(t), `conjAudioSet('tense','${t}')`, CONJ_TENSE_NAMES[t])).join('')}</div>
+                    <div class="conj-audio-label">Mode</div>
+                    <div class="conj-audio-chips">${CONJ_AUDIO_MODES.filter(m => m.key !== 'check').map(m => chip(s.mode === m.key, `conjAudioSet('mode','${m.key}')`, m.label)).join('')}</div>
+                    <div class="conj-audio-label">Ordre</div>
+                    <div class="conj-audio-chips">
+                        ${chip(s.order === 'fr', "conjAudioSet('order','fr')", '🇫🇷 Français d\'abord')}
+                        ${chip(s.order === 'nl', "conjAudioSet('order','nl')", '🇳🇱 Néerlandais d\'abord')}
+                    </div>
+                    ${audioSpeedPauseHtml(s, 'conjAudioSet')}
+                    ${audioTimerHtml('conjListenRender')}
+                    <button class="btn btn-green" style="margin-top:8px;" onclick="conjAudioStart({ range: ${s.range} })">▶️ Lancer</button>
+                </div>`;
         }
 
         function conjAudioOpen() {
             if (!conjugaisonSelectedVerb) return;
+            conjAudioPanel = 'verb';
             conjAudioStop();
             conjExerciseState = null;
             conjAudioRenderSetup();
@@ -4175,6 +4259,7 @@ if (firebaseAvailable) {
                     if (other) voice = other; else u.pitch = 0.75;
                 }
                 if (opt && opt.pitch) u.pitch = opt.pitch;
+                if (opt && typeof opt.volume === 'number') u.volume = opt.volume;
                 if (voice) u.voice = voice;
                 const eff = Math.max(0.5, Math.min(2, rate * (opt && opt.raw ? 1 : voiceSpeed())));
                 u.rate = eff;
@@ -4192,6 +4277,7 @@ if (firebaseAvailable) {
             const run = conjAudioRun;
             let left = ms / voiceSpeed();
             while (run && !run.stop && !run.skip && (left > 0 || run.paused)) {
+                if (audioTimeUp(run)) { run.timeUp = true; run.stop = true; window.speechSynthesis.cancel(); break; }
                 await new Promise(r => setTimeout(r, 100));
                 if (!run.paused) left -= 100;
                 // Changement d'écran : on coupe la lecture plutôt que de parler dans le vide.
@@ -4206,7 +4292,8 @@ if (firebaseAvailable) {
             await conjAudioWait(0);
             if (run.stop || run.skip) return;
             if (!document.getElementById(run.viewId).classList.contains('active')) { conjAudioStop(); return; }
-            await conjAudioSpeak(text, lang, rate, opt);
+            if (audioTimeUp(run)) { run.timeUp = true; run.stop = true; return; }
+            await conjAudioSpeak(text, lang, run.sleep ? Math.min(rate, 0.85) : rate, Object.assign({}, opt || {}, { volume: audioRunVolume(run) }));
         }
 
         // ===== Lecture bilingue =====
@@ -4363,31 +4450,44 @@ if (firebaseAvailable) {
             if (el) el.innerHTML = html;
         }
 
-        async function conjAudioStart() {
+        // cont = { range } : écoute en continu sur les N verbes les plus courants (Conjugaison →
+        // 🎧 Écoute en continu), sinon le verbe affiché et les suivants.
+        async function conjAudioStart(cont) {
             const first = conjugaisonSelectedVerb;
-            if (!first) return;
+            if (!cont && !first) return;
+            const boxId = cont ? 'conj-listen-box' : 'conj-exercise-box';
+            const setupCall = cont ? 'conjListenRender()' : 'conjAudioRenderSetup()';
             if (!('speechSynthesis' in window)) { alert('Ton navigateur ne sait pas lire à voix haute.'); return; }
             const s = conjAudioSettings();
             if (s.mode === 'check' && !window.SpeechRecognition) { alert("Ton navigateur ne supporte pas la reconnaissance vocale : choisis « Répète après moi », ou utilise Google Chrome."); return; }
             conjAudioStop();
-            const pos = conjCurrentList.indexOf(first.infinitief);
-            const names = pos >= 0 ? conjCurrentList.slice(pos, pos + s.count) : [first.infinitief];
-            const verbs = names.map(n => conjugationData.find(x => x.infinitief === n)).filter(Boolean);
+            let verbs;
+            if (cont) verbs = conjByFrequency().sorted.slice(0, cont.range || 20);
+            else {
+                const pos = conjCurrentList.indexOf(first.infinitief);
+                const names = pos >= 0 ? conjCurrentList.slice(pos, pos + s.count) : [first.infinitief];
+                verbs = names.map(n => conjugationData.find(x => x.infinitief === n)).filter(Boolean);
+            }
             const run = { stop: false, paused: false, skip: false, wakeLock: null, ok: 0, ko: 0, viewId: 'conjugaison-view' };
             conjAudioRun = run;
+            audioTimerStart(run);
+            const mode = run.sleep ? 'listen' : s.mode;
             try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
 
-            document.getElementById('conj-exercise-box').innerHTML = `
+            document.getElementById(boxId).innerHTML = `
                 <div class="conj-card conj-audio">
-                    <div class="conj-audio-title">🎧 Écouter et répéter</div>
+                    <div class="conj-audio-title">🎧 ${cont ? 'Écoute en continu' : 'Écouter et répéter'} <span id="audio-timer" class="audio-timer"></span></div>
                     <div id="conj-audio-now" class="conj-audio-now"></div>
                     <div class="conj-audio-controls">
                         <button type="button" class="btn btn-gray" id="conj-audio-pause" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
                         <button type="button" class="btn btn-gray" onclick="conjAudioSkip()">⏭ Passer</button>
-                        <button type="button" class="btn btn-gray" onclick="conjAudioStop(); conjAudioRenderSetup();">⏹ Arrêter</button>
+                        <button type="button" class="btn btn-gray" onclick="conjAudioStop(); ${setupCall};">⏹ Arrêter</button>
                     </div>
                 </div>`;
 
+            let cycle = 0;
+            do {
+            if (cycle++ > 0) verbs = verbs.slice().sort(() => Math.random() - 0.5); // les tours suivants dans le désordre
             for (const v of verbs) {
                 if (run.stop) break;
                 let fr = null;
@@ -4416,7 +4516,7 @@ if (firebaseAvailable) {
                         if (s.order === 'fr' && frText) {
                             conjAudioShow(card(false));
                             await conjAudioSay(frText, 'fr', s.rate);
-                            if (s.mode !== 'listen') await conjAudioWait(s.pause * 1000);
+                            if (mode !== 'listen') await conjAudioWait(s.pause * 1000);
                             if (run.stop || run.skip) continue;
                             conjAudioShow(card(true));
                             await conjAudioSay(sentence, 'nl', s.rate);
@@ -4426,8 +4526,8 @@ if (firebaseAvailable) {
                             if (frText) await conjAudioSay(frText, 'fr', s.rate);
                         }
                         if (run.stop || run.skip) continue;
-                        if (s.mode === 'listen') { await conjAudioWait(s.pause ? 300 : 0); continue; }
-                        if (s.mode === 'repeat') { conjAudioShow(card(true, '<div class="conj-audio-status">🗣️ À toi…</div>')); await conjAudioWait(s.pause * 1000); continue; }
+                        if (mode === 'listen') { await conjAudioWait(run.sleep ? 1500 : s.pause ? 300 : 0); continue; }
+                        if (mode === 'repeat') { conjAudioShow(card(true, '<div class="conj-audio-status">🗣️ À toi…</div>')); await conjAudioWait(s.pause * 1000); continue; }
                         // Répétition vérifiée : deux essais au plus, seul le premier compte.
                         for (let attempt = 0; attempt < 2 && !run.stop && !run.skip; attempt++) {
                             while (run.paused && !run.stop) await conjAudioWait(100);
@@ -4445,24 +4545,26 @@ if (firebaseAvailable) {
                     }
                 }
             }
-            const finished = !run.stop;
-            const stats = s.mode === 'check' && (run.ok + run.ko) ? ` ${run.ok} ✅ / ${run.ko} ❌ du premier coup.` : '';
-            if (s.mode === 'check' && (run.ok + run.ko)) save();
-            if (conjAudioRun === run) {
+            } while (run.deadline && !run.stop);
+            const finished = !run.stop || run.timeUp;
+            const stats = mode === 'check' && (run.ok + run.ko) ? ` ${run.ok} ✅ / ${run.ko} ❌ du premier coup.` : '';
+            if (mode === 'check' && (run.ok + run.ko)) save();
+            if (conjAudioRun === run || run.timeUp) {
                 conjAudioRelease(run);
-                conjAudioRun = null;
+                if (conjAudioRun === run) conjAudioRun = null;
                 if (finished) {
-                    document.getElementById('conj-exercise-box').innerHTML = `
+                    document.getElementById(boxId).innerHTML = `
                         <div class="conj-card conj-audio">
-                            <div class="conj-audio-title">🎧 Terminé !${stats}</div>
-                            <button class="btn btn-green" style="margin-top:8px;" onclick="conjAudioStart()">🔁 Recommencer</button>
-                            <button class="btn btn-gray" onclick="conjAudioRenderSetup()">⚙️ Changer les réglages</button>
+                            <div class="conj-audio-title">${run.sleep ? '😴 Bonne nuit !' : '🎧 Terminé !'}${stats}</div>
+                            <button class="btn btn-green" style="margin-top:8px;" onclick="${cont ? `conjAudioStart({ range: ${cont.range || 20} })` : 'conjAudioStart()'}">🔁 Recommencer</button>
+                            <button class="btn btn-gray" onclick="${setupCall}">⚙️ Changer les réglages</button>
                         </div>`;
                 }
             }
         }
 
         function conjAudioRelease(run) {
+            if (run && run.tick) { clearInterval(run.tick); run.tick = null; }
             if (run && run.wakeLock) { try { run.wakeLock.release(); } catch (e) {} run.wakeLock = null; }
         }
 
@@ -4557,6 +4659,7 @@ if (firebaseAvailable) {
                     ${audioSpeedPauseHtml(s, 'wordAudioSet')}
                     <div class="conj-audio-label">Nombre de mots</div>
                     <div class="conj-audio-chips">${WORD_AUDIO_COUNTS.map(n => chip(s.count === n, `wordAudioSet('count',${n})`, n ? String(n) : 'Tous')).join('')}</div>
+                    ${audioTimerHtml('wordAudioRenderSetup')}
                     <button class="btn btn-green" style="margin-top:12px;" onclick="wordAudioStart()">▶️ Lancer</button>
                 </div>`;
         }
@@ -4569,10 +4672,13 @@ if (firebaseAvailable) {
             conjAudioStop();
             const run = { stop: false, paused: false, skip: false, wakeLock: null, viewId: wordAudioCtx.viewId };
             conjAudioRun = run;
+            audioTimerStart(run);
+            const mode = run.sleep ? 'listen' : s.mode;
             try { if (navigator.wakeLock) run.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* pas grave */ }
             const box = document.getElementById(wordAudioCtx.boxId);
             box.innerHTML = `
                 <div class="conj-card conj-audio">
+                    <div class="conj-audio-title"><span id="audio-timer" class="audio-timer"></span></div>
                     <div id="word-audio-now" class="conj-audio-now"></div>
                     <div class="conj-audio-controls">
                         <button type="button" class="btn btn-gray" data-audio-pause onclick="conjAudioTogglePause()">⏸ Pause</button>
@@ -4589,15 +4695,18 @@ if (firebaseAvailable) {
                     `<div class="${s.order === 'fr' ? 'conj-audio-fr' : 'conj-audio-nl'}">${rpEscapeHtml(first)}</div>` +
                     `<div class="${s.order === 'fr' ? 'conj-audio-nl' : 'conj-audio-fr'}">${showSecond ? rpEscapeHtml(second) : '…'}</div>`;
             };
-            for (let idx = 0; idx < items.length && !run.stop; idx++) {
-                const i = items[idx];
+            let list = items, cycle = 0;
+            do {
+            if (cycle++ > 0) list = items.slice().sort(() => Math.random() - 0.5); // tours suivants dans le désordre
+            for (let idx = 0; idx < list.length && !run.stop; idx++) {
+                const i = list[idx];
                 run.skip = false;
                 // Une traduction comme « le fait de / l'acte de » se lit mieux sans les barres obliques.
                 const frSpoken = i.fr.replace(/\s*\/\s*/g, ', ');
                 if (s.order === 'fr') {
                     show(i, idx, false);
                     await conjAudioSay(frSpoken, 'fr', s.rate);
-                    if (s.mode === 'repeat') await conjAudioWait(s.pause * 1000);
+                    if (mode === 'repeat') await conjAudioWait(s.pause * 1000);
                     if (run.stop || run.skip) continue;
                     show(i, idx, true);
                     await conjAudioSay(i.nl, 'nl', s.rate);
@@ -4607,14 +4716,15 @@ if (firebaseAvailable) {
                     await conjAudioSay(frSpoken, 'fr', s.rate);
                 }
                 if (run.stop || run.skip) continue;
-                await conjAudioWait(s.mode === 'repeat' ? s.pause * 1000 : (s.pause ? 300 : 0));
+                await conjAudioWait(mode === 'repeat' ? s.pause * 1000 : (run.sleep ? 1500 : s.pause ? 300 : 0));
             }
-            if (conjAudioRun === run) {
+            } while (run.deadline && !run.stop);
+            if (conjAudioRun === run || run.timeUp) {
                 conjAudioRelease(run);
-                conjAudioRun = null;
+                if (conjAudioRun === run) conjAudioRun = null;
                 box.innerHTML = `
                     <div class="conj-card conj-audio">
-                        <div class="conj-audio-title">🎧 Terminé : ${items.length} mot(s) écouté(s).</div>
+                        <div class="conj-audio-title">${run.sleep ? '😴 Bonne nuit !' : run.deadline ? '🎧 Minuteur terminé.' : `🎧 Terminé : ${items.length} mot(s) écouté(s).`}</div>
                         <button class="btn btn-green" style="margin-top:8px;" onclick="wordAudioStart()">🔁 Recommencer</button>
                         <button class="btn btn-gray" onclick="wordAudioRenderSetup()">⚙️ Changer les réglages</button>
                     </div>`;

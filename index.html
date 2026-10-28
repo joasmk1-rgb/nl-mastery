@@ -506,7 +506,9 @@
         <div class="hub-grid">
             <div class="hub-card" onclick="startConjTrainingSession(null)"><span class="hub-card-icon">🎯</span><div class="hub-card-title">Lancer un entraînement</div><div class="hub-card-desc">Tu choisis les verbes (les plus courants d'abord) et les temps. Les formes ratées reviennent en priorité.</div></div>
             <div class="hub-card" onclick="startSeparableTrainingSession()"><span class="hub-card-icon">✂️</span><div class="hub-card-title">Particules séparables</div><div class="hub-card-desc">aanbieden, opstaan... et leurs 3 comportements différents.</div></div>
+            <div class="hub-card" style="grid-column:1 / -1;" onclick="conjListenOpen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écoute en continu</div><div class="hub-card-desc">Les 20, 50 ou 100 verbes les plus courants en boucle, avec un minuteur (5 à 30 min) ou 😴 pour t'endormir.</div></div>
         </div>
+        <div id="conj-listen-box" class="content-col"></div>
         <div class="conj-search-row content-col">
             <input type="text" id="conj-search" placeholder="Cherche un verbe (NL ou FR)..." oninput="renderConjugaisonList()">
         </div>
