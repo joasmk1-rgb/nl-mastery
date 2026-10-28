@@ -2839,15 +2839,15 @@ if (firebaseAvailable) {
                     <p class="placement-intro-text">Un vrai programme structuré (A1 → B2) pour apprendre le néerlandais professionnel — pas juste des flashcards à mémoriser.</p>
                     <div class="section-title" style="margin-top:var(--space-4);">Comment utiliser l'appli</div>
                     <div class="intent-grid" style="margin-top:var(--space-2);">
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">☀️</div><div class="qa-label">Routine</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎓</div><div class="qa-label">Cours</div></div>
+                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">💬</div><div class="qa-label">Parler</div></div>
                         <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📖</div><div class="qa-label">Vocabulaire</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">📚</div><div class="qa-label">Cours</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎭</div><div class="qa-label">Pratiquer</div></div>
-                        <div class="quick-access-card" style="cursor:default;"><div class="qa-icon">🎮</div><div class="qa-label">Jouer</div></div>
                     </div>
-                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">📖 Les mots et la conjugaison · 📚 Des leçons en situation · 🎭 Parler et écrire en situation réelle · 🎮 Des jeux pour entretenir ton vocabulaire · 👤 en haut : ta progression et ton compte. L'accueil te propose toujours la prochaine chose à faire.</p>
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:var(--space-3);">☀️ Ta routine du jour, un seul bouton · 🎓 Ton parcours A1 → B2 · 💬 Parler en situation réelle, au travail et au quotidien · 📖 Les mots et la conjugaison · 👤 en haut : ta progression et ton compte. Tout est ouvert : l'accueil te conseille selon ton niveau.</p>
                     <p style="font-size:0.85rem; margin-top:var(--space-3);"><a href="#" onclick="onboardingMarkSeen(); showProgress(); return false;">🌱 Comment devenir bon en néerlandais, et comment l'app t'y aide</a></p>
                     <div class="section-title" style="margin-top:var(--space-5);">Par où commencer ?</div>
-                    <button class="btn btn-green" style="margin-top:var(--space-2);" onclick="onboardingGoTo('debut')">🌱 Je débute : premier module</button>
+                    <button class="btn btn-green" style="margin-top:var(--space-2);" onclick="onboardingGoTo('debut')">🌱 Je débute : les fondations (verbes et mots de base)</button>
                     <button class="btn btn-gray" style="margin-top:10px;" onclick="onboardingGoTo('bases')">💪 J'ai déjà des bases : on fait connaissance en conversation, et ce que je sais est validé</button>
                     <p style="font-size:0.78rem; margin-top:var(--space-4);">${currentUser ? '' : `<a href="#" onclick="onboardingGoTo('compte'); return false;">Créer un compte pour synchroniser ta progression (optionnel)</a>`}</p>
                 </div>`;
@@ -2861,8 +2861,8 @@ if (firebaseAvailable) {
         function onboardingGoTo(dest) {
             onboardingMarkSeen();
             if (dest === 'compte') showCompte();
-            else if (dest === 'debut') guideStart(MODRP_IDS[0]);
-            else if (dest === 'bases') talkStartPoint(talkSettings().partner);
+            else if (dest === 'debut') { state.startLevel = 'debut'; save(); fondStart(); }
+            else if (dest === 'bases') { state.startLevel = 'bases'; save(); talkStartPoint(talkSettings().partner); }
             else showHome();
         }
 
@@ -2953,8 +2953,10 @@ if (firebaseAvailable) {
             block.innerHTML = `
                 ${headerHtml}
                 ${placementNudgeHtml}
+                ${learnerStage() === 'fondations' ? fondCardHtml() : ''}
                 ${routineHomeHtml()}
                 ${homeTilesHtml()}
+                ${homeAdviceHtml()}
                 ${socialHtml}
                 ${accountNudgeHtml}`;
         }
@@ -2981,7 +2983,7 @@ if (firebaseAvailable) {
             const openLevel = levels.find(l => mods.filter(m => m.niveau === l).some(m => !isPassed(m))) || levels[levels.length - 1];
             const hint = state.coursBasesHint ? `<div class="cours-hint">💪 Tu as des bases : pour chaque module que tu connais déjà, touche <b>🏆 Examen</b>. Réussi, le module et ses notions sont validés et tu passes au suivant. <button type="button" class="rp-coach-btn" onclick="state.coursBasesHint=false; save(); renderModRpEntries();">OK</button></div>` : '';
             if (!convData) convLoad().then(() => { if (document.getElementById('apprendre-view').classList.contains('active')) renderModRpEntries(); });
-            el.innerHTML = talkPointCardHtml() + levels.map(level => {
+            el.innerHTML = fondListHtml() + talkPointCardHtml() + levels.map(level => {
                 const list = mods.filter(m => m.niveau === level);
                 const nPassed = list.filter(isPassed).length;
                 return `<details class="modrp-level" ${level === openLevel ? 'open' : ''}>
@@ -14881,6 +14883,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On travaille ces mots, du plus courant au plus rare, par paquets de dix : un paquet s'ouvre quand le précédent est acquis. Je te dis le mot, tu me le traduis, à l'oral ou à l'écrit. Un mot raté ne revient pas tout de suite : il va dans tes mots à revoir.",
                 whyPassive: "On écoute ces mots, du plus courant au plus rare : le mot, un instant pour chercher, puis sa traduction."
             },
+            fond: {
+                icon: '🧱', label: 'Les fondations', back: '← Cours', nav: 'nav-apprendre', run: r => routineDrillFond(r),
+                why: "On pose les fondations : les verbes et les mots qui reviennent tout le temps. Je te donne la forme en français, tu me la dis en néerlandais, à l'oral ou à l'écrit. Ce que tu rates revient en premier ; un palier est acquis quand tu en réussis neuf sur dix.",
+                whyPassive: "On écoute les fondations : la forme en français, un instant pour chercher, puis le néerlandais."
+            },
             canevas: {
                 icon: '🗂️', label: 'Mes réponses types', back: '← Mes réponses', nav: 'nav-pratiquer', run: r => routineDrillCanvas(r),
                 why: "Je te pose les questions d'entretien qui reviennent tout le temps. Réponds à ta manière, à l'oral ou à l'écrit ; si tu sèches, 💡 te rappelle ton idée. Je regarde si tu as dit l'essentiel, je corrige ton néerlandais, et tu réentends ta réponse modèle.",
@@ -14907,7 +14914,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!d) return;
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('routine-view').classList.add('active');
-            setActiveNav(d.nav || 'nav-vocab', k === 'dire' ? 'dire' : k === 'canevas' ? 'travail' : (d.nav ? null : 'train'));
+            setActiveNav(d.nav || 'nav-vocab', k === 'dire' ? 'dire' : k === 'canevas' ? 'travail' : k === 'fond' ? 'parcours' : (d.nav ? null : 'train'));
             if (routine) routineQuitRun();
             const r = routine = { token: Date.now(), waiter: null, rec: null, step: null, flow: false, drill: k, back: back || showVocab, train: train || null };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
@@ -15398,6 +15405,14 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
 
         // ----- 1. Conjugaison -----
         function routinePickConj() {
+            if (learnerStage() === 'fondations') {
+                const p = fondCurrent('conj');
+                if (p) {
+                    const cells = fondConjCells(p).sort(() => Math.random() - 0.5);
+                    cells.sort((a, b) => (conjIsWeak(b.stat) - conjIsWeak(a.stat)) || (fondCellOk(a) - fondCellOk(b)));
+                    return cells.slice(0, ROUTINE.conj);
+                }
+            }
             const saveFilter = conjTrainingVerbFilter;
             conjTrainingVerbFilter = null;
             // Formes incomplètes dans les données (ex. perfectum de « zullen » = « hebt - ») : écartées.
@@ -15467,6 +15482,10 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
 
         function routineWordPool() {
             const rs = routineState();
+            if (learnerStage() === 'fondations') {
+                const p = fondCurrent('words');
+                if (p) return fondWords(p.words).filter(i => !fondWordOk(i) && !rs.newWords.includes(i.id) && wordStatus(i.id) === 'unseen');
+            }
             const order = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
             // Mots de son niveau d'abord, puis du niveau en dessous, puis au-dessus ; dans chaque
             // niveau, du plus courant au plus rare. Mots-outils (de, van, en…) et mots très courts
@@ -15828,6 +15847,190 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
         }
 
         // Carte de l'accueil.
+
+        // ===== 🧱 Les fondations (débutants) =====
+        // Joas (28 octobre 2026) : un vrai débutant doit d'abord avoir une base de travail — les 20
+        // puis 50 verbes les plus courants au présent, au perfectum et au prétérit, et les mots les
+        // plus fréquents — avant de se lancer dans la pratique. AUCUN blocage : tout reste ouvert,
+        // mais l'accueil et la routine recommandent cette façon de travailler tant que les paliers
+        // ne sont pas faits (selon le niveau choisi ou évalué). Un palier est acquis à 90 % de formes
+        // (ou de mots) réussies, ou par un test rapide (7 sur 8). state.fondations.passed[id].
+        const FOND_PALIERS = [
+            { id: 'v20p', icon: '🔤', label: 'Les 20 verbes les plus courants, au présent', n: 20, tenses: ['present'] },
+            { id: 'm100', icon: '📖', label: 'Les 100 mots les plus courants', words: 100 },
+            { id: 'v20pf', icon: '🔤', label: 'Les 20 verbes au passé composé (perfectum)', n: 20, tenses: ['perfectum'] },
+            { id: 'v20i', icon: '🔤', label: 'Les 20 verbes au prétérit (imperfectum)', n: 20, tenses: ['imperfectum'] },
+            { id: 'v50p', icon: '🔤', label: 'Les 50 verbes les plus courants, au présent', n: 50, tenses: ['present'] },
+            { id: 'm300', icon: '📖', label: 'Les 300 mots les plus courants', words: 300 },
+            { id: 'v50pf', icon: '🔤', label: 'Les 50 verbes au passé composé (perfectum)', n: 50, tenses: ['perfectum'] },
+            { id: 'v50i', icon: '🔤', label: 'Les 50 verbes au prétérit (imperfectum)', n: 50, tenses: ['imperfectum'] }
+        ];
+        const FOND_DONE_RATE = 0.9;
+        function fondState() {
+            if (!state.fondations) state.fondations = {};
+            if (!state.fondations.passed) state.fondations.passed = {};
+            return state.fondations;
+        }
+        function fondConjCells(p) {
+            if (!conjugationLoaded) return [];
+            const saveFilter = conjTrainingVerbFilter;
+            conjTrainingVerbFilter = null;
+            const cells = conjTrainingCells({ range: p.n, tenses: p.tenses, irregOnly: false, skipPresentPlural: true })
+                .filter(x => x.answer && String(x.answer).trim() && !/(^|\s)-(\s|$)/.test(String(x.answer)));
+            conjTrainingVerbFilter = saveFilter;
+            return cells;
+        }
+        let fondWordCache = null;
+        function fondWords(n) {
+            if (!fondWordCache || fondWordCache.dbLen !== fullDb.length) {
+                const seen = new Set();
+                fondWordCache = fullDb.filter(i => i.nl && i.fr && ['VERBES_NL', 'NOMS_NL', 'ADJECTIFS_NL', 'ADVERBES_NL', 'EXPRESSIONS_NL'].includes(i.file) && (i.freq || 0) > 0)
+                    .sort((a, b) => (b.freq || 0) - (a.freq || 0))
+                    .filter(i => { const k = normalize(String(i.nl)); if (seen.has(k)) return false; seen.add(k); return true; });
+                fondWordCache.dbLen = fullDb.length;
+            }
+            return fondWordCache.slice(0, n);
+        }
+        const fondCellOk = x => !!(x.stat && (x.stat.ok || 0) > 0 && (x.stat.streak || 0) >= 1);
+        const fondWordOk = i => !!(state.stats.trueMastered[i.id + '::fr2nl'] || isActiveWord(i.id));
+        function fondProgress(p) {
+            const items = p.words ? fondWords(p.words) : fondConjCells(p);
+            const ok = items.filter(p.words ? fondWordOk : fondCellOk).length;
+            const passed = !!fondState().passed[p.id];
+            const rate = items.length ? ok / items.length : 0;
+            return { ok, total: items.length, rate, done: passed || (items.length > 0 && rate >= FOND_DONE_RATE), passed };
+        }
+        function fondCurrent(kind) {
+            return FOND_PALIERS.find(p => (!kind || (kind === 'words' ? p.words : !p.words)) && !fondProgress(p).done) || null;
+        }
+        function fondAllDone() { return !fondCurrent(); }
+        // Étape conseillée selon le niveau choisi (« Je débute ») ou évalué ; sans info : débutant si
+        // niveau A1 et quasi aucune conjugaison travaillée. Jamais de blocage, seulement des conseils.
+        function learnerStage() {
+            const lvl = routineWordLevel();
+            const start = state.startLevel;
+            // « Débutant » déduit seulement d'un compte presque neuf : peu de conjugaison, presque
+            // aucune conversation, aucune évaluation.
+            const fresh = Object.keys(state.conjStats || {}).length < 30 && Object.keys((state.talk && state.talk.days) || {}).length < 3 && Object.keys(state.usedWords || {}).length < 50;
+            if (!fondAllDone() && (start === 'debut' || (!start && !state.coursPoint && lvl === 'A1' && fresh))) return 'fondations';
+            return ['A1', 'A2'].includes(lvl) ? 'base' : 'avance';
+        }
+
+        function fondCardHtml(compact) {
+            const cur = fondCurrent();
+            if (!cur) return '';
+            const done = FOND_PALIERS.filter(p => fondProgress(p).done).length;
+            const pr = fondProgress(cur);
+            return `<div class="dash-card fond-card" onclick="fondStart()" role="button">
+                <div class="routine-home-top"><b>🧱 Les fondations</b><span class="routine-home-go">${done}/${FOND_PALIERS.length} ›</span></div>
+                <div class="fond-now">${cur.icon} ${rpEscapeHtml(cur.label)} · ${Math.round(pr.rate * 100)} %</div>
+                <div class="cat-bar"><div class="cat-bar-fill" style="width:${Math.round(pr.rate * 100)}%"></div></div>
+                ${compact ? '' : `<small class="report-meta">Avant de te lancer dans les conversations : les verbes et les mots qui reviennent tout le temps. Tout le reste reste ouvert.</small>`}
+            </div>`;
+        }
+        // Liste des paliers (en tête du Parcours, dans Cours).
+        function fondListHtml() {
+            const rows = FOND_PALIERS.map(p => {
+                const pr = fondProgress(p);
+                return `<div class="fond-row${pr.done ? ' ok' : ''}">
+                    <div><b>${pr.done ? '✅' : p.icon} ${rpEscapeHtml(p.label)}</b><small class="report-meta"> ${pr.ok}/${pr.total}</small>
+                        <div class="cat-bar"><div class="cat-bar-fill" style="width:${Math.round(pr.rate * 100)}%"></div></div></div>
+                    <span class="tmem-btns">${pr.done ? '' : `<button type="button" class="rp-coach-btn" onclick="fondStart('${p.id}')">▶️ Travailler</button>`}<button type="button" class="rp-coach-btn" onclick="fondStart('${p.id}', true)">🎯 ${pr.done ? 'Revoir' : 'Je connais : test'}</button></span>
+                </div>`;
+            }).join('');
+            return `<details class="fond-list"${learnerStage() === 'fondations' ? ' open' : ''}><summary>🧱 Les fondations · ${FOND_PALIERS.filter(p => fondProgress(p).done).length}/${FOND_PALIERS.length} paliers</summary>
+                <p class="report-meta">La base de travail : les verbes les plus courants à trois temps, et les mots les plus fréquents. Conseillé avant la pratique si tu débutes ; si tu les connais, le test 🎯 valide un palier en une minute.</p>
+                ${rows}</details>`;
+        }
+        function fondStart(id, test) {
+            const p = (id && FOND_PALIERS.find(x => x.id === id)) || fondCurrent() || FOND_PALIERS[0];
+            routineDrill('fond', showApprendre, { label: (test ? 'Test · ' : '') + p.label, palier: p.id, test: !!test });
+        }
+
+        async function routineDrillFond(r) {
+            const p = FOND_PALIERS.find(x => x.id === r.train.palier);
+            if (!p) return 'empty';
+            if (!p.words && !conjugationLoaded) { await routineSay(r, "La conjugaison n'est pas encore chargée, réessaie dans un instant."); return 'empty'; }
+            const test = r.train.test;
+            const N = test ? 8 : 10;
+            let pool = p.words ? fondWords(p.words) : fondConjCells(p);
+            const okFn = p.words ? fondWordOk : fondCellOk;
+            // Entraînement : les ratés d'abord, puis le pas-encore-réussi, puis le reste ; test : au hasard.
+            pool = pool.slice().sort(() => Math.random() - 0.5);
+            if (!test) {
+                const weak = p.words ? (i => (state.stats.wrongCount[i.id + '::fr2nl'] || 0) > 0) : (x => conjIsWeak(x.stat));
+                pool.sort((a, b) => (weak(b) - weak(a)) || (okFn(a) - okFn(b)));
+            }
+            const list = [];
+            const usedVerb = {};
+            for (const x of pool) {
+                if (list.length >= N) break;
+                if (!p.words) { const k = x.verb.infinitief; if ((usedVerb[k] || 0) >= 2) continue; usedVerb[k] = (usedVerb[k] || 0) + 1; }
+                list.push(x);
+            }
+            if (!list.length) return 'empty';
+            let ok = 0, asked = 0;
+            for (let i = 0; i < list.length && routineActive(r); i++) {
+                const x = list[i];
+                if (p.words) {
+                    const fr = String(x.fr).split('/')[0].trim();
+                    r.ctx = `traduire « ${x.fr} » (réponse : ${x.nl})`;
+                    const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${list.length} · mot</small><div>${rpEscapeHtml(x.fr)}</div></div>`, fr, fr);
+                    if (given === null) return false;
+                    if (given === '__stop') break;
+                    if (given === '__passive') { routineFeedback(null, x.nl, '', true); if (routineActive(r)) await conjAudioSpeak(x.nl, 'nl', 0.9); continue; }
+                    const good = !!given && (evaluateAnswer(given, x.nl).status !== 'wrong' || (nounHasArticle(x) && evaluateAnswer(stripArticle(given), stripArticle(x.nl)).status !== 'wrong'));
+                    const key = x.id + '::fr2nl';
+                    state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+                    if (good) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (!state.mastered.includes(key)) state.mastered.push(key); }
+                    else { state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1; state.stats.trueMastered[key] = false; }
+                    asked++; if (good) ok++;
+                    save();
+                    routineFeedback(good, x.nl, rpEscapeHtml(x.fr), true);
+                    if (routineActive(r)) await conjAudioSpeak(x.nl, 'nl', 0.9);
+                } else {
+                    x.frq = conjFrQuestion(x.verb, x.tense, x.pronomKey, x.answer, true);
+                    r.ctx = `conjuguer « ${x.verb.infinitief} » au ${CONJ_TENSE_NAMES[x.tense]}`;
+                    const label = x.frq ? `« ${x.frq.fr} »` : `${x.verb.infinitief} · ${x.pronom}`;
+                    const given = await routineAskAnswer(r, `<div class="routine-q"><small>${i + 1}/${list.length} · ${CONJ_TENSE_NAMES[x.tense]}</small><div>${rpEscapeHtml(label)}</div><small>${rpEscapeHtml(x.verb.infinitief)} (${rpEscapeHtml(x.verb.fr || '')})</small></div>`, x.frq ? x.frq.fr : null, x.frq ? x.frq.fr : null);
+                    if (given === null) return false;
+                    if (given === '__stop') break;
+                    const passive = given === '__passive';
+                    const res = passive ? null : given ? conjEvaluate(given, x) : { status: 'wrong' };
+                    const good = passive ? null : res.status !== 'wrong';
+                    if (!passive) { conjRecordResult(x.verb.infinitief, x.tense, x.pronomKey, good); asked++; if (good) ok++; }
+                    const form = x.frq ? x.frq.fullAnswer : x.answer;
+                    routineFeedback(good, form, x.frq ? rpEscapeHtml(x.frq.fr) : '', true);
+                    if (routineActive(r)) await conjAudioSpeak(form, 'nl', 0.9);
+                    if (routineActive(r) && x.frq) await conjAudioSpeak(x.frq.fr, 'fr', 1.05);
+                }
+            }
+            if (!routineActive(r)) return false;
+            if (routinePassive() || !asked) return true;
+            if (test) {
+                const pass = asked >= 8 && ok >= 7;
+                if (pass) { fondState().passed[p.id] = true; save(); }
+                await routineSay(r, `${ok} sur ${asked}. ${pass ? 'Palier validé : tu le connais déjà, on passe au suivant.' : 'Pas encore : travaille ce palier, les formes ratées reviendront en premier.'}`);
+            } else {
+                const pr = fondProgress(p);
+                await routineSay(r, `${ok} sur ${asked}. Ce palier est à ${Math.round(pr.rate * 100)} %.${pr.done ? ' Palier acquis, bravo !' : ''}`);
+            }
+            const next = fondCurrent();
+            if (next && next.id !== p.id) { r.train.palier = next.id; r.train.test = false; r.train.label = next.label; await routineSay(r, `Prochain palier : ${next.label}.`); }
+            if (!next) await routineSay(r, 'Toutes les fondations sont posées. Place au parcours et à la pratique !');
+            return true;
+        }
+
+        // Conseil de l'accueil selon le niveau (jamais un blocage).
+        function homeAdviceHtml() {
+            const stage = learnerStage(), lvl = routineWordLevel();
+            if (stage === 'fondations') return '';
+            const txt = stage === 'base'
+                ? `Pour ton niveau (${lvl}) : ta routine chaque jour, puis le <a href="#" onclick="showApprendre(); return false;">parcours</a> module par module${fondAllDone() ? '' : ', et les <a href="#" onclick="fondStart(); return false;">fondations</a> s\'il te manque des verbes'}.`
+                : `Pour ton niveau (${lvl}) : ta routine chaque jour, puis <a href="#" onclick="showPratiquer(); return false;">Parler</a> — Discuter et Mon travail — pour gagner en aisance.`;
+            return `<p class="home-advice">💡 ${txt}</p>`;
+        }
+
         // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
         function homeTilesHtml() {
             return `<div class="home-tiles">
