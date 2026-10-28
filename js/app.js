@@ -7678,7 +7678,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 let interim = '';
                 for (let i = 0; i < event.results.length; i++) {
                     const transcript = event.results[i][0].transcript.trim();
-                    if (!transcript) continue;
+                    if (!transcript || isEchoText(transcript, lastStartAt)) continue;
                     if (!event.results[i].isFinal) { interim += ' ' + transcript; continue; }
                     const acc = finalText.toLowerCase(), seg = transcript.toLowerCase();
                     if (!acc || seg.startsWith(acc)) finalText = transcript;
@@ -11345,9 +11345,52 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             return MIC_FR_CUE.test(w) && (MIC_FR_END.test(w) || /\bhoe (zeg|noem) (je|jij|u)$/.test(w));
         }
 
+        // Micro et voix de l'app (Joas, 28 octobre 2026 : le micro enregistrait encore des bouts de
+        // ce que dit John, et remettait parfois sa phrase précédente). 1) Toute voix de l'app passe
+        // par speechSynthesis.speak : on la suit nous-mêmes (sur Android, speaking / pending ne sont
+        // pas fiables), on prévient les micros AU MOMENT où elle démarre (événement nlm-tts-start),
+        // et on attend TTS_GRACE_MS après la fin avant de réécouter (la fin de la voix résonne).
+        // 2) Ce que l'app vient de dire, et la phrase que l'apprenant vient d'envoyer, ne peuvent
+        // pas revenir comme une nouvelle réponse (isEchoText).
+        let ttsActive = 0, ttsLastEnd = 0;
+        const TTS_GRACE_MS = 700;
+        const ttsRecent = []; // [{ t: texte normalisé, at }]
+        let longListenLast = { text: '', at: 0 };
+        (function ttsHook() {
+            const ss = window.speechSynthesis;
+            if (!ss || ss.__nlmHooked) return;
+            const speak = ss.speak.bind(ss), cancel = ss.cancel.bind(ss);
+            ss.speak = u => {
+                ttsActive++;
+                let ended = false;
+                const rec = { t: '', at: Date.now(), end: 0 };
+                const end = () => { if (ended) return; ended = true; ttsActive = Math.max(0, ttsActive - 1); ttsLastEnd = Date.now(); rec.end = ttsLastEnd; };
+                try { u.addEventListener('end', end); u.addEventListener('error', end); } catch (e) { /* vieux navigateur */ }
+                setTimeout(end, 30000); // garde-fou si « end » ne vient jamais
+                try { rec.t = normalize(String(u.text || '')); ttsRecent.push(rec); if (ttsRecent.length > 6) ttsRecent.shift(); } catch (e) { /* pas grave */ }
+                try { window.dispatchEvent(new Event('nlm-tts-start')); } catch (e) { /* pas grave */ }
+                speak(u);
+            };
+            ss.cancel = () => { ttsActive = 0; ttsLastEnd = Date.now(); cancel(); };
+            ss.__nlmHooked = true;
+        })();
+        // Texte reconnu qui n'est qu'un écho : un bout de ce que la voix de l'app vient de dire, ou la
+        // phrase que l'apprenant vient d'envoyer (Android la renvoie parfois au micro suivant).
+        // Fenêtres courtes, pour ne pas jeter une vraie répétition (« redis la phrase du tuteur ») :
+        // l'écho de la voix arrive pendant elle ou juste après (2,5 s) ; la phrase précédente
+        // revient au tout début d'un nouveau micro (4 s après son lancement, startAt).
+        function isEchoText(t, startAt) {
+            const n = normalize(String(t || '')).replace(/[.,!?;:]/g, '').trim();
+            if (n.split(/\s+/).length < 3) return false;
+            const now = Date.now();
+            if (ttsRecent.some(x => (!x.end || now - x.end < 2500) && now - x.at < 60000 && x.t.replace(/[.,!?;:]/g, '').includes(n))) return true;
+            const prev = normalize(longListenLast.text || '').replace(/[.,!?;:]/g, '');
+            return !!(startAt && now - startAt < 4000 && prev && now - longListenLast.at < 30000 && prev.includes(n));
+        }
+
         let ttsBusySince = 0;
         function ttsBusy() {
-            const busy = !!(window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending));
+            const busy = ttsActive > 0 || Date.now() - ttsLastEnd < TTS_GRACE_MS || !!(window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending));
             if (!busy) { ttsBusySince = 0; return false; }
             if (!ttsBusySince) ttsBusySince = Date.now();
             return Date.now() - ttsBusySince < 25000;
@@ -11408,10 +11451,25 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 st.done = true;
                 clearInterval(st.timer);
                 try { st.rec && st.rec.abort(); } catch (e) {}
+                window.removeEventListener('nlm-tts-start', st.onTts);
                 if (o.onEnd) o.onEnd(st);
                 const text = input ? input.value.trim() : '';
-                if (submit && text && o.isActive()) { input.value = ''; o.onSubmit(text, st); }
+                if (submit && text && o.isActive()) { longListenLast = { text, at: Date.now() }; input.value = ''; o.onSubmit(text, st); }
             };
+            // Une voix de l'app démarre : on coupe l'écoute tout de suite (ce qui a déjà été dit est
+            // gardé) ; elle reprendra après la voix et sa résonance (startSession attend ttsBusy).
+            st.onTts = () => {
+                if (st.done || !st.rec) return;
+                st.committed = joinNoOverlap(st.committed, st.session);
+                st.session = '';
+                const r = st.rec;
+                st.rec = null;
+                r.dead = true;
+                try { r.abort(); } catch (e) { /* déjà arrêtée */ }
+                st.lastAt = Date.now();
+                setTimeout(startSession, 300);
+            };
+            window.addEventListener('nlm-tts-start', st.onTts);
             st.pause = () => { st.hold = true; if (o.onState) o.onState(st, 0); };
             const startSession = () => {
                 if (st.done) return;
@@ -11429,6 +11487,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     let interim = '';
                     for (let i = 0; i < e.results.length; i++) {
                         const t = e.results[i][0].transcript.trim();
+                        if (isEchoText(t, st.startAt)) continue; // la voix de l'app, ou la phrase déjà envoyée
                         if (!e.results[i].isFinal) { interim += ' ' + t; continue; }
                         const prev = finals[finals.length - 1];
                         if (prev && normalize(t).startsWith(normalize(prev))) finals[finals.length - 1] = t;
