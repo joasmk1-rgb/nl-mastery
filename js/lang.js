@@ -30,6 +30,14 @@ const LANG_PACKS = {
         micLang: 'es-ES',
         voixPrefixe: 'es',
         modules: ['vocabulaire', 'conjugaison', 'fondations', 'routineMots', 'cours', 'discuter', 'ecouter', 'dire']
+    },
+    ru: {
+        code: 'ru', nom: 'russe', nomPropre: 'Русский', variante: 'russe standard',
+        ttsLang: 'ru-RU', micLang: 'ru-RU', voixPrefixe: 'ru', modules: ['atelierPhonetique']
+    },
+    ar: {
+        code: 'ar', nom: 'arabe standard moderne', nomPropre: 'العربية الفصحى', variante: 'arabe standard moderne',
+        ttsLang: 'ar-SA', micLang: 'ar-SA', voixPrefixe: 'ar', modules: ['atelierPhonetique']
     }
 };
 

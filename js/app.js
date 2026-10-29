@@ -2248,6 +2248,12 @@ if (firebaseAvailable) {
         }
 
         async function init() {
+            if (['ru', 'ar'].includes(studyLangCode())) {
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                document.getElementById('experimental-study-view').classList.add('active');
+                document.getElementById('experimental-study-frame').src = `experimental/phonetics/index.html?lang=${studyLangCode()}`;
+                return;
+            }
             updateDailyStreak();
             // Fichiers de vocabulaire "de base" : obligatoires, erreur affichée si absents/vides
             const coreFiles = studyLangCode() !== 'nl' ? [`data/${studyLangCode()}/VOCAB_${studyLangCode().toUpperCase()}.csv`] : [
@@ -7101,7 +7107,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const options = [
                 `<option value="nl" ${studyLangCode() === 'nl' ? 'selected' : ''}>🇳🇱 Néerlandais</option>`,
                 `<option value="en" ${studyLangCode() === 'en' ? 'selected' : ''}>🇬🇧 Anglais</option>`,
-                `<option value="es" ${studyLangCode() === 'es' ? 'selected' : ''}>🇪🇸 Espagnol</option>`
+                `<option value="es" ${studyLangCode() === 'es' ? 'selected' : ''}>🇪🇸 Espagnol</option>`,
+                `<option value="ru" ${studyLangCode() === 'ru' ? 'selected' : ''}>🇷🇺 Russe (expérimental)</option>`,
+                `<option value="ar" ${studyLangCode() === 'ar' ? 'selected' : ''}>🕌 Arabe standard (expérimental)</option>`
             ].join('');
             return `<div class="study-box" style="margin-top:15px;">
                 <h3>🌐 Langue étudiée</h3>

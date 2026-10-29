@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Atelier phonétique expérimental</title>
+  <link rel="stylesheet" href="phonetics.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">PARCOURS EXPÉRIMENTAL</p>
+      <h1 id="page-title">Atelier de prononciation</h1>
+      <p class="intro">Écoute la langue, observe les sons, puis essaie de répéter. La transcription aide à démarrer ; l’écriture originale reste visible pour ne pas devenir une béquille permanente. Change de langue étudiée dans Profil, en haut de l’application.</p>
+    </header>
+
+    <section class="controls" aria-label="Réglages de l’atelier">
+        <label hidden>Langue
+        <select id="language">
+          <option value="ru">Russe standard</option>
+          <option value="ar">Arabe standard moderne (الفصحى المعاصرة)</option>
+        </select>
+      </label>
+      <label>Affichage
+        <select id="display-mode">
+          <option value="guided">Aide phonétique</option>
+          <option value="native">Écriture originale d’abord</option>
+        </select>
+      </label>
+      <div id="voice-status" class="status" role="status">Recherche des voix installées…</div>
+      <div id="practice-count" class="status" role="status"></div>
+    </section>
+
+    <section id="phrase-list" class="phrases" aria-live="polite"></section>
+
+    <section class="controls vocabulary-controls" aria-label="Vocabulaire expérimental">
+      <label for="word-search">Vocabulaire français → langue étudiée
+        <input id="word-search" type="search" placeholder="Chercher un mot français ou sa transcription" autocomplete="off">
+      </label>
+      <div id="vocab-status" class="status" role="status">Chargement du vocabulaire…</div>
+      <div id="word-list" class="words" aria-live="polite"></div>
+    </section>
+
+    <footer>
+      <p>Les traductions et romanisations sont extraites automatiquement de dictionnaires et doivent être vérifiées. L’arabe non vocalisé n’indique souvent pas les voyelles brèves : sa prononciation écrite reste approximative. Ce corpus expérimental n’est pas un cours complet et n’a pas encore de progression par niveaux. Sources : <a href="https://fr.wiktionary.org/" target="_blank" rel="noreferrer">Wiktionnaire français</a> (licence CC BY-SA 4.0 / GFDL selon les notices ; réutilisation avec attribution, lien vers la licence et indication des modifications).</p>
+      <p>La prononciation et la reconnaissance dépendent du navigateur et de ses services. L’atelier n’appelle pas Gemini ; la reconnaissance vocale peut être traitée par le navigateur.</p>
+      <p id="mic-status" class="status" role="status">Le test du micro démarre seulement quand tu touches un bouton.</p>
+    </footer>
+  </main>
+  <script src="phrases.js"></script>
+  <script src="phonetics.js"></script>
+</body>
+</html>

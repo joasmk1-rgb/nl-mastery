@@ -1,0 +1,159 @@
+﻿id;fr;ru;prononciation;ipa;freq;statut_examen;priorite_frequence;niveauCECR;niveauCECRSource;sousCategorie;source_fr;statut_traduction;statut_prononciation
+MOTS_OUTILS_RU_0;le / la;;;;7.73;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_0;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_1;de;;;;7.51;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_1;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_2;le (neutre);;;;7.49;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_2;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_3;un / une;;;;7.41;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_3;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_4;et;;;;7.4;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_4;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_5;dans;;;;7.36;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_5;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_6;sur;;;;7.12;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_6;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_7;je;;;;7.11;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_7;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_8;que / cela;;;;7.1;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_8;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_9;pour;;;;7.05;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_9;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_10;tu;;;;7.04;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_10;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_11;à / trop;;;;7.02;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_11;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_12;avec;;;;7.0;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_12;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_13;celui-ci / qui;;;;6.9;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_13;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_14;si / comme;;;;6.8;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_14;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_15;mais;;;;6.77;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_15;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_16;pour / autour de;;;;6.77;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_16;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_17;à;;;;6.76;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_17;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_18;il;;;;6.7;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_18;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_19;elle / ils/elles;;;;6.69;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_19;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_20;par / à travers;;;;6.66;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_20;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_21;vers;;;;6.65;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_21;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_22;hors de;;;;6.65;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_22;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_23;chez / auprès de;;;;6.62;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_23;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_24;alors / que (comparaison);;;;6.62;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_24;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_25;ceci;;;;6.61;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_25;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_26;nous;;;;6.6;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_26;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_27;quoi / ce que;;;;6.58;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_27;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_28;ou / si;;;;6.54;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_28;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_29;sur / à propos de;;;;6.54;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_29;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_30;celui-ci/celle-ci;;;;6.51;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_30;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_31;aucun(e);;;;6.42;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_31;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_32;mon / ma;;;;6.41;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_32;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_33;jusqu'à;;;;6.39;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_33;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_34;vous (formel);;;;6.39;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_34;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_35;elle / son (féminin);;;;6.3;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_35;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_36;beaucoup;;;;6.26;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_36;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_37;me / moi;;;;6.25;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_37;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_38;après;;;;6.21;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_38;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_39;notre / nous;;;;6.21;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_39;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_40;notre;;;;6.18;;Essentiel;A1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_40;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_41;se (réfléchi);;;;6.17;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_41;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_42;contre;;;;6.11;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_42;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_43;moi;;;;6.08;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_43;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_44;sous;;;;6.08;;Essentiel;A2;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_44;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_45;leur / eux;;;;6.07;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_45;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_46;tu;;;;6.03;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_46;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_47;nous;;;;6.02;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_47;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_48;avec (soi);;;;5.99;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_48;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_49;tous/toutes;;;;5.97;;Essentiel;B1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_49;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_50;elle / ils/elles;;;;5.97;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_50;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_51;comme / tel que;;;;5.97;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_51;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_52;quelque chose;;;;5.95;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_52;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_53;parce que;;;;5.95;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_53;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_54;quand (passé) / alors;;;;5.95;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_54;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_55;lui;;;;5.91;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_56;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_56;vous (pluriel);;;;5.91;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_57;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_57;pendant;;;;5.91;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_58;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_58;entre;;;;5.9;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_59;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_59;oui;;;;5.89;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_60;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_60;qui;;;;5.89;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_61;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_61;tout;;;;5.86;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_62;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_62;via / par;;;;5.86;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_63;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_63;fini / à partir de;;;;5.84;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_64;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_64;sans;;;;5.84;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_65;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_65;tout le monde;;;;5.8;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_66;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_66;quelqu'un;;;;5.79;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_67;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_67;à l'intérieur;;;;5.78;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_68;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_68;votre (formel);;;;5.78;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_69;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_69;vers / assez;;;;5.74;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_70;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_70;l'un l'autre;;;;5.73;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_71;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_71;à partir de;;;;5.73;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_72;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_72;car;;;;5.72;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_73;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_73;selon;;;;5.68;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_74;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_74;toi;;;;5.66;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_75;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_75;quand;;;;5.66;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_76;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_76;rien;;;;5.65;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_77;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_77;par;;;;5.65;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_78;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_78;chaque;;;;5.64;;Essentiel;A1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_79;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_79;non;;;;5.63;;Essentiel;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_80;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_80;derrière;;;;5.59;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_82;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_81;depuis;;;;5.59;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_83;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_82;un tel;;;;5.59;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_84;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_83;à / au (fixe);;;;5.58;;Essentiel;A1;freq_estime;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_85;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_84;autour de;;;;5.56;;Essentiel;A2;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_86;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_85;ton / ta;;;;5.55;;Essentiel;B1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_87;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_86;lequel / quel;;;;5.53;;Essentiel;A1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_88;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_87;dehors;;;;5.52;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_89;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_88;quelques;;;;5.52;;Essentiel;A1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_90;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_89;à / pour (fixe);;;;5.51;;Essentiel;A1;freq_estime;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_91;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_90;quelque(s) / seul;;;;5.5;;Essentiel;A1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_92;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_91;on;;;;5.5;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_93;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_92;moins;;;;5.5;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_94;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_93;rien;;;;5.47;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_95;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_94;eux / leur;;;;5.46;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_96;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_95;tandis que;;;;5.46;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_97;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_96;depuis;;;;5.44;;Essentiel;A1;freq_estime;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_98;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_97;de sorte que;;;;5.42;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_99;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_98;au-dessus;;;;5.4;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_100;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_99;de la (archaïque/figé);;;;5.4;;Essentiel;A1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_101;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_100;personne (nobody);;;;5.4;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_103;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_101;à côté de;;;;5.37;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_104;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_102;aussi bien;;;;5.36;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_105;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_103;hein / tu sais (particule);;;;5.35;;Essentiel;A1;freq_estime;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_106;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_104;peu;;;;5.35;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_107;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_105;plein;;;;5.34;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_108;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_106;certains;;;;5.33;;Essentiel;A2;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_110;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_107;le long de;;;;5.31;;Essentiel;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_111;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_108;après que;;;;5.3;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_113;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_109;à cause de;;;;5.26;;Essentiel;A2;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_114;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_110;chaque;;;;5.25;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_115;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_111;avant que;;;;5.25;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_116;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_112;les deux;;;;5.24;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_117;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_113;vers (là-bas);;;;5.2;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_118;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_114;chaque / chacun;;;;5.2;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_119;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_115;oh;;;;5.18;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_120;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_116;lui-même/elle-même;;;;5.18;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_121;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_117;comme si;;;;5.17;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_122;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_118;bien que;;;;5.14;;Essentiel;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_123;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_119;chaque;;;;5.14;;Essentiel;A2;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_124;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_120;toi-même;;;;5.13;;Essentiel;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_125;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_121;plusieurs;;;;5.09;;Essentiel;A2;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_126;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_122;malgré;;;;5.06;;Essentiel;B1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_127;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_123;son / sa (contraction de zijn);;;;5.06;;Essentiel;A2;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_128;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_124;il (familier);;;;5.05;;Essentiel;A2;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_129;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_125;grâce à;;;;5.03;;Essentiel;A2;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_132;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_126;un / une (variante affaiblie);;;;5.0;;Essentiel;A2;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_134;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_127;pendant (durée);;;;4.99;;Courant;B1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_135;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_128;sauf;;;;4.98;;Courant;A2;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_136;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_129;moi-même;;;;4.95;;Courant;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_137;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_130;du fait que;;;;4.94;;Courant;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_138;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_131;quel;;;;4.94;;Courant;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_139;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_132;en raison de;;;;4.9;;Courant;B1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_141;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_133;étant donné que;;;;4.88;;Courant;B1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_142;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_134;tous;;;;4.86;;Courant;B1;freq_estime;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_143;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_135;bonjour / allô;;;;4.82;;Courant;A1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_144;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_136;d'accord;;;;4.82;;Courant;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_145;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_137;dès que;;;;4.82;;Courant;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_146;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_138;tant que;;;;4.81;;Courant;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_147;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_139;vers le bas;;;;4.79;;Courant;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_148;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_140;en face de;;;;4.79;;Courant;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_149;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_141;de (provenance : waar kom je vandaan?);;;;4.76;;Courant;A1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_150;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_142;autour de;;;;4.65;;Courant;B1;nt2lex;Préposition;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_151;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_143;ni;;;;4.53;;Courant;B1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_152;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_144;jusqu'à ce que;;;;4.79;;Courant;A2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_153;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_145;ou bien;;;;4.42;;Courant;B2;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_154;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_146;à moins que;;;;4.71;;Courant;B1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_155;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_147;si (formel);;;;4.62;;Courant;B1;nt2lex;Conjonction & mot grammatical;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_156;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_148;tous les deux;;;;4.59;;Courant;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_157;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_149;quelque chose comme ça;;;;4.73;;Courant;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_158;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_150;de tels;;;;4.78;;Courant;A2;estimation_manuelle;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_159;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_151;vous-même;;;;3.96;;Courant;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_160;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_152;nous-mêmes;;;;4.35;;Courant;B1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_161;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_153;moi-même;;;;4.23;;Courant;A2;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_162;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_154;deux;;;;6.06;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_163;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_155;trois;;;;5.76;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_164;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_156;quatre;;;;5.46;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_165;a_produire;a_produire_et_verifier
+MOTS_OUTILS_RU_157;cinq;;;;5.41;;Essentiel;A1;nt2lex;Pronom & déterminant;MOTS_OUTILS_NL.csv:MOTS_OUTILS_NL_166;a_produire;a_produire_et_verifier
