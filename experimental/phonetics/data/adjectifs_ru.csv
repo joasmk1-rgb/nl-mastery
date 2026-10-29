@@ -1,0 +1,522 @@
+﻿id;fr;ru;prononciation;ipa;freq;statut_examen;priorite_frequence;niveauCECR;niveauCECRSource;sousCategorie;source_fr;statut_traduction;statut_prononciation
+ADJECTIFS_RU_0;aimable / gentil;;;;4.77;Prioritaire;Courant;A1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_0;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_1;absolu / absolument;;;;4.8;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_1;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_2;actuel;;;;4.11;Prioritaire;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_2;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_3;général;;;;5.15;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_3;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_4;autre;;;;5.37;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_4;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_5;pauvre;;;;4.67;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_5;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_6;peureux / effrayé;;;;5.18;Prioritaire;Essentiel;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_6;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_7;de base;;;;5.17;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_7;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_8;connu;;;;5.49;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_8;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_9;important;;;;5.34;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_9;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_10;poli;;;;4.0;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_10;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_11;curieux (de savoir);;;;4.54;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_11;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_12;déterminé / certain;;;;4.86;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_12;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_13;prêt / disposé;;;;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_13;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_14;célèbre;;;;4.13;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_14;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_15;disponible;;;;5.01;Prioritaire;Essentiel;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_15;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_16;meilleur;;;;5.41;Prioritaire;Essentiel;A1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_16;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_17;impliqué / concerné;;;;5.01;Prioritaire;Essentiel;A2;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_17;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_18;occupé;;;;5.31;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_18;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_19;particulier / spécial;;;;4.99;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_19;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_20;bleu;;;;4.73;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_20;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_21;content;;;;5.34;Prioritaire;Essentiel;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_21;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_22;aveugle;;;;4.35;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_22;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_23;large;;;;4.55;Prioritaire;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_23;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_24;brun / marron;;;;4.42;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_24;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_25;étranger;;;;3.68;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_25;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_26;commercial;;;;4.27;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_26;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_27;complet;;;;4.68;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_27;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_28;concret;;;;3.9;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_28;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_29;continu;;;;4.01;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_29;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_30;culturel;;;;4.27;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_30;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_31;quotidien;;;;4.89;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_31;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_32;profond;;;;4.76;Prioritaire;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_32;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_33;fermé / dense;;;;5.05;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_33;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_34;gros / épais;;;;4.59;Prioritaire;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_34;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_35;divers;;;;3.95;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_35;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_36;bête;;;;4.67;Standard;Courant;A1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_36;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_37;sombre / foncé;;;;4.53;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_37;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_38;sourd;;;;3.72;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_38;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_39;efficace;;;;3.37;Standard;Spécialisé;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_39;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_40;mort;;;;5.57;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_40;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_41;sec;;;;4.51;Prioritaire;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_41;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_42;animé / occupé;;;;5.34;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_42;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_43;double;;;;4.5;Prioritaire;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_43;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_44;clair / distinct;;;;5.36;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_44;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_45;cher;;;;4.71;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_45;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_46;vrai / véritable;;;;6.01;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_46;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_47;économique;;;;4.36;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_47;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_48;simple;;;;0.0;Prioritaire;Spécialisé;C1;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_48;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_49;propre (à soi);;;;5.81;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_49;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_50;seul / unique / chouette;;;;4.55;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_50;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_51;enthousiaste;;;;4.5;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_51;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_52;grave / très;;;;5.71;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_52;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_53;sérieux;;;;4.57;Prioritaire;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_53;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_54;égal;;;;5.85;Prioritaire;Essentiel;A2;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_54;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_55;éventuel;;;;4.14;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_55;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_56;exclusif;;;;4.15;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_56;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_57;externe;;;;3.36;Standard;Spécialisé;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_57;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_58;supplémentaire;;;;5.16;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_58;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_59;fin / agréable;;;;5.09;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_59;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_60;financier;;;;4.47;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_60;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_61;physique;;;;4.25;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_61;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_62;jaune;;;;4.54;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_62;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_63;entier;;;;5.03;Prioritaire;Essentiel;B1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_63;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_64;fou;;;;5.13;Standard;Essentiel;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_64;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_65;heureux;;;;5.23;Prioritaire;Essentiel;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_65;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_66;facile;;;;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_66;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_67;moyen;;;;4.55;Prioritaire;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_67;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_68;assez;;;;5.49;Prioritaire;Essentiel;A1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_68;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_69;rassuré / tranquille;;;;4.45;Prioritaire;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_69;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_70;sensible;;;;4.32;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_70;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_71;dangereux;;;;4.63;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_71;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_72;convivial / agréable;;;;4.64;Prioritaire;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_72;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_73;sain / en bonne santé;;;;4.71;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_73;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_74;bon / bien;;;;6.2;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_74;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_75;bon marché;;;;4.43;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_75;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_76;grand;;;;5.59;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_76;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_77;vert;;;;4.82;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_77;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_78;favorable;;;;4.0;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_78;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_79;demi;;;;5.05;Prioritaire;Essentiel;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_79;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_80;dur / fort / vite;;;;5.15;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_80;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_81;très chaud;;;;5.02;Standard;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_81;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_82;clair / limpide;;;;4.5;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_82;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_83;tout / entier;;;;5.79;Prioritaire;Essentiel;A1;freq_estime;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_83;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_84;haut;;;;5.04;Prioritaire;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_84;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_85;actuel;;;;3.75;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_85;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_86;chaque;;;;5.2;Prioritaire;Essentiel;A1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_86;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_87;international;;;;4.77;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_87;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_88;dommage;;;;4.85;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_88;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_89;jeune;;;;5.01;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_89;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_90;juste / correct;;;;5.26;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_90;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_91;calme;;;;3.9;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_91;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_92;cassé;;;;4.7;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_92;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_93;caractéristique;;;;3.88;Standard;Courant;C1;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_93;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_94;prêt / fini;;;;5.51;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_94;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_95;petit;;;;5.3;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_95;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_96;coloré;;;;3.64;Standard;Courant;B1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_96;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_97;beau / intelligent;;;;4.47;Standard;Courant;A1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_97;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_98;court;;;;5.16;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_98;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_99;froid;;;;4.72;Prioritaire;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_99;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_100;puissant;;;;4.23;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_100;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_101;qualitatif;;;;3.57;Standard;Courant;C1;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_101;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_102;perdu (égaré);;;;4.93;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_102;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_103;bas;;;;4.77;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_103;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_104;tard;;;;5.84;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_104;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_105;long;;;;5.65;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_105;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_106;lent;;;;4.73;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_106;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_107;pénible / difficile;;;;4.81;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_107;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_108;vide;;;;4.67;Prioritaire;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_108;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_109;laid;;;;4.17;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_109;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_110;chouette / amusant;;;;5.6;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_110;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_111;gentil / cher;;;;4.76;Prioritaire;Courant;A1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_111;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_112;léger / clair;;;;5.11;Prioritaire;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_112;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_113;gauche;;;;4.05;Prioritaire;Courant;C1;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_113;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_114;à gauche;;;;5.15;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_114;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_115;local;;;;4.36;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_115;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_116;détaché / libre;;;;5.13;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_116;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_117;social;;;;4.23;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_117;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_118;facile;;;;4.99;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_118;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_119;maximal;;;;4.46;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_119;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_120;humain;;;;4.42;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_120;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_121;immédiat;;;;5.22;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_121;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_122;environnemental;;;;4.65;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_122;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_123;moins;;;;5.5;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_123;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_124;minimal;;;;4.35;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_124;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_125;difficile;;;;5.32;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_125;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_126;beau;;;;5.58;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_126;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_127;fatigué;;;;4.64;Standard;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_127;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_128;nu;;;;4.36;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_128;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_129;proche;;;;4.51;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_129;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_130;mouillé;;;;4.41;Prioritaire;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_130;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_131;naturel;;;;5.59;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_131;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_132;étroit / précis;;;;4.16;Prioritaire;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_132;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_133;propre / net;;;;5.86;Prioritaire;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_133;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_134;soigné;;;;4.54;Standard;Courant;B2;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_134;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_135;nouveau;;;;5.51;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_135;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_136;nécessaire;;;;5.73;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_136;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_137;normal;;;;5.09;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_137;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_138;utile;;;;4.29;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_138;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_139;officiel;;;;4.85;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_139;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_140;inconnu;;;;4.36;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_140;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_141;mutuel / entre soi;;;;4.14;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_141;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_142;récemment;;;;4.55;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_142;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_143;immédiat;;;;4.61;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_143;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_144;impossible;;;;4.65;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_144;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_145;inquiet / agité;;;;3.5;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_145;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_146;terrible / énormément;;;;4.68;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_146;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_147;inattendu;;;;4.07;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_147;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_148;de guerre;;;;5.29;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_148;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_149;ouvert;;;;5.5;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_149;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_150;public;;;;4.85;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_150;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_151;frappant / remarquable;;;;4.41;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_151;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_152;vieux / ancien;;;;5.34;Prioritaire;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_152;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_153;restant / autre;;;;3.73;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_153;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_154;après-demain;;;;3.43;Standard;Spécialisé;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_154;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_155;seulement / à peine;;;;5.45;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_155;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_156;adéquat / convenable;;;;3.82;Standard;Courant;C1;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_156;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_157;personnel;;;;4.9;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_157;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_158;soudain;;;;4.15;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_158;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_159;politique;;;;5.17;Prioritaire;Essentiel;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_159;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_160;populaire;;;;4.65;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_160;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_161;positif;;;;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_161;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_162;précis / exactement;;;;5.34;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_162;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_163;agréable;;;;4.28;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_163;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_164;excellent / parfait;;;;5.1;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_164;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_165;privé;;;;4.57;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_165;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_166;pour cent;;;;4.97;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_166;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_167;professionnel;;;;4.39;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_167;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_168;bizarre;;;;4.68;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_168;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_169;plus récent;;;;2.72;Standard;Spécialisé;C1;freq_estime;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_169;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_170;droit;;;;5.29;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_170;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_171;direct / directement;;;;4.41;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_171;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_172;régulier;;;;4.88;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_172;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_173;riche;;;;4.86;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_173;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_174;rouge;;;;4.84;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_174;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_175;rond / environ;;;;5.56;Prioritaire;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_175;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_176;large / vaste / plus de;;;;5.05;Prioritaire;Essentiel;A1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_176;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_177;calme / tranquille;;;;5.0;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_177;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_178;ensemble;;;;5.75;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_178;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_179;propre / beau;;;;4.69;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_179;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_180;rapide / vite;;;;5.74;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_180;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_181;certains;;;;5.33;Prioritaire;Essentiel;A2;freq_estime;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_181;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_182;social;;;;4.8;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_182;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_183;captivant / passionnant;;;;4.43;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_183;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_184;spécial;;;;4.92;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_184;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_185;serré / raide;;;;4.17;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_185;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_186;sévère;;;;4.12;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_186;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_187;innombrables;;;;4.26;Standard;Courant;B2;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_187;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_188;contre;;;;6.11;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_188;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_189;actuel / de nos jours;;;;5.06;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_189;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_190;au moins;;;;4.69;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_190;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_191;enfin / finalement;;;;4.34;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_191;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_192;à juste titre;;;;4.95;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_192;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_193;content / satisfait;;;;4.66;Prioritaire;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_193;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_194;à la maison;;;;5.48;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_194;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_195;pourtant / quand même;;;;6.0;Prioritaire;Essentiel;A1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_195;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_196;futur;;;;3.49;Prioritaire;Spécialisé;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_196;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_197;par hasard;;;;4.56;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_197;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_198;total;;;;5.12;Prioritaire;Essentiel;B1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_198;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_199;fidèle;;;;4.56;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_199;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_200;entre;;;;5.9;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_200;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_201;extrême / extrêmement;;;;4.27;Prioritaire;Courant;B1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_201;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_202;excellent;;;;4.42;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_202;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_203;souvent;;;;5.6;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_203;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_204;fixe / solide;;;;5.43;Prioritaire;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_204;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_205;sûr / en sécurité;;;;5.12;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_205;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_206;beaucoup;;;;6.26;Prioritaire;Essentiel;A1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_206;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_207;loin;;;;5.15;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_207;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_208;responsable;;;;4.88;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_208;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_209;mauvais / trompeur;;;;4.84;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_209;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_210;passé;;;;4.93;Prioritaire;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_210;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_211;obligatoire;;;;4.64;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_211;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_212;différent;;;;4.13;Prioritaire;Courant;A2;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_212;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_213;raisonnable / sage;;;;4.26;Prioritaire;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_213;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_214;ensuite;;;;5.24;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_214;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_215;sale;;;;4.16;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_215;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_216;rapide / vite;;;;3.88;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_216;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_217;plein;;;;5.34;Prioritaire;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_217;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_218;suffisant;;;;4.74;Prioritaire;Courant;B1;freq_estime;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_218;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_219;suivant;;;;4.5;Prioritaire;Courant;B2;freq_estime;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_219;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_220;complet / complètement;;;;5.08;Prioritaire;Essentiel;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_220;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_221;pour / devant;;;;7.05;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_221;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_222;surtout;;;;5.61;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_222;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_223;provisoire;;;;4.51;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_223;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_224;ancien / ex-;;;;4.79;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_224;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_225;prudent;;;;4.42;Prioritaire;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_225;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_226;précédent;;;;4.95;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_226;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_227;libre / assez;;;;5.42;Prioritaire;Essentiel;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_227;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_228;étrange / étranger;;;;4.76;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_228;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_229;amical / aimable;;;;4.53;Prioritaire;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_229;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_230;tôt;;;;5.35;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_230;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_231;joyeux;;;;4.43;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_231;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_232;vrai;;;;6.21;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_232;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_233;probable / sans doute;;;;5.24;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_233;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_234;éveillé;;;;5.06;Standard;Essentiel;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_234;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_235;chaud;;;;4.86;Prioritaire;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_235;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_236;peu;;;;5.35;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_236;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_237;réel / vraiment;;;;4.71;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_237;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_238;scientifique;;;;4.41;Prioritaire;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_238;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_239;sage;;;;4.16;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_239;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_240;sauvage;;;;4.48;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_240;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_241;blanc;;;;5.0;Standard;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_241;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_242;furieux;;;;3.93;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_242;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_243;professionnel / d'affaires;;;;4.19;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_243;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_244;doux;;;;4.4;Prioritaire;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_244;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_245;sûr / certain;;;;5.69;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_245;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_246;même;;;;4.39;Prioritaire;Courant;B1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_246;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_247;malade;;;;4.86;Prioritaire;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_247;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_248;ainsi / si;;;;6.43;Prioritaire;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_248;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_249;comme;;;;5.97;Prioritaire;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_249;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_250;sucré / doux;;;;4.19;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_250;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_251;à l'instant;;;;4.42;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_251;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_252;soigneusement;;;;4.0;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_252;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_253;jusque là;;;;4.87;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_253;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_254;lourd;;;;4.91;Prioritaire;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_254;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_255;noir;;;;5.0;Standard;Essentiel;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_255;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_256;faible;;;;4.45;Prioritaire;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_256;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_257;entier / très;;;;6.0;Standard;Essentiel;A1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_257;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_258;ordinaire / simplement;;;;5.85;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_258;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_259;mauvais;;;;5.24;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_259;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_260;né;;;;5.12;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_260;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_261;possible;;;;5.49;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_261;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_262;fâché;;;;4.91;Standard;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_262;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_263;fort;;;;5.12;Standard;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_263;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_264;intéressant;;;;4.88;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_264;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_265;bon (au goût) / agréable;;;;5.35;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_265;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_266;favori;;;;4.25;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_266;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_267;magnifique;;;;5.09;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_267;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_268;le même / la même chose;;;;5.24;Standard;Essentiel;A1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_268;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_269;plus tôt / plutôt;;;;5.39;Standard;Essentiel;A2;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_269;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_270;formidable;;;;5.15;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_270;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_271;le même;;;;5.33;Standard;Essentiel;A1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_271;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_272;allergique;;;;3.63;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_272;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_273;honnête;;;;5.0;Standard;Essentiel;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_273;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_274;passé / fini;;;;5.11;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_274;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_275;japonais;;;;4.37;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_275;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_276;en fait / véritable;;;;5.45;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_276;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_277;silencieux / calme;;;;4.91;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_277;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_278;qui vaut (de moeite waard);;;;4.97;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_278;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_279;enfin;;;;5.08;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_279;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_280;fâché / en colère;;;;4.63;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_280;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_281;finalement;;;;5.22;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_281;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_282;amoureux;;;;4.72;Standard;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_282;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_283;fier;;;;5.09;Standard;Essentiel;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_283;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_284;français;;;;4.9;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_284;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_285;raté / faux;;;;5.12;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_285;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_286;d'habitude;;;;4.27;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_286;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_287;coupable;;;;4.64;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_287;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_288;nerveux;;;;3.44;Standard;Spécialisé;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_288;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_289;blessé;;;;4.69;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_289;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_290;terrible;;;;4.48;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_290;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_291;simple;;;;4.65;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_291;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_292;gratuit;;;;5.35;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_292;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_293;parfait;;;;4.92;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_293;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_294;intelligent / malin;;;;4.65;Standard;Courant;A1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_294;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_295;énorme;;;;4.91;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_295;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_296;chinois;;;;4.44;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_296;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_297;sérieux;;;;4.89;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_297;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_298;nerveux / stressé;;;;4.0;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_298;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_299;américain;;;;4.37;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_299;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_300;drôle;;;;4.84;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_300;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_301;ivre;;;;4.32;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_301;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_302;délicieux;;;;5.06;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_302;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_303;affreux;;;;4.6;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_303;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_304;présent;;;;5.1;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_304;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_305;ennuyeux;;;;4.36;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_305;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_306;gris;;;;4.28;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_306;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_307;soudain;;;;4.27;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_307;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_308;innocent;;;;4.23;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_308;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_309;allemand;;;;4.65;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_309;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_310;timide;;;;3.83;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_310;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_311;anglais;;;;4.97;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_311;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_312;actuellement;;;;4.83;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_312;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_313;frais (aliment);;;;4.28;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_313;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_314;intelligent;;;;3.99;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_314;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_315;fou (dol op = fou de);;;;4.19;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_315;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_316;d'accord;;;;4.69;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_316;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_317;enceinte;;;;4.55;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_317;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_318;triste;;;;4.2;Standard;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_318;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_319;ennuyeux / embêtant;;;;4.35;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_319;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_320;malheureux;;;;3.98;Standard;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_320;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_321;assez / convenable;;;;4.59;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_321;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_322;bête / stupide;;;;4.31;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_322;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_323;adulte;;;;4.62;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_323;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_324;fantastique;;;;4.77;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_324;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_325;conscient;;;;4.72;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_325;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_326;seul / solitaire;;;;3.89;Standard;Courant;A1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_326;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_327;idiot;;;;4.25;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_327;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_328;moyen / secondaire (école);;;;3.77;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_328;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_329;direct / tout de suite;;;;5.18;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_329;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_330;fort (son);;;;4.05;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_330;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_331;raisonnable;;;;4.47;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_331;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_332;faux;;;;4.17;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_332;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_333;méchant;;;;4.21;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_333;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_334;à droite / de droite;;;;4.84;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_334;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_335;moderne;;;;4.31;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_335;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_336;orange (couleur);;;;4.77;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_336;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_337;en or / doré;;;;4.81;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_337;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_338;curieux;;;;4.27;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_338;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_339;lent;;;;4.12;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_339;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_340;frais;;;;4.1;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_340;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_341;patient;;;;3.74;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_341;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_342;reconnaissant;;;;4.4;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_342;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_343;européen;;;;4.6;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_343;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_344;ridicule;;;;4.64;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_344;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_345;néerlandais;;;;5.08;Standard;Essentiel;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_345;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_346;tranchant / pointu / épicé;;;;4.49;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_346;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_347;somnolent;;;;3.01;Standard;Spécialisé;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_347;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_348;fade / pas drôle;;;;4.05;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_348;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_349;violet;;;;3.95;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_349;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_350;italien;;;;4.2;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_350;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_351;blond;;;;4.09;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_351;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_352;correct;;;;4.23;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_352;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_353;indépendant;;;;4.52;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_353;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_354;impoli;;;;3.05;Standard;Spécialisé;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_354;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_355;bientôt / rapide;;;;4.16;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_355;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_356;urgent;;;;4.35;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_356;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_357;nécessaire;;;;4.32;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_357;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_358;éternel;;;;4.1;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_358;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_359;chauve;;;;3.87;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_359;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_360;classique;;;;4.08;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_360;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_361;apparemment;;;;4.92;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_361;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_362;absent;;;;3.87;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_362;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_363;cordial;;;;4.3;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_363;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_364;aimé / populaire;;;;4.01;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_364;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_365;pratique;;;;4.18;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_365;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_366;attirant;;;;4.28;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_366;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_367;vite / bientôt;;;;4.43;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_367;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_368;médical;;;;4.49;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_368;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_369;électrique;;;;4.01;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_369;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_370;enrhumé;;;;3.34;Standard;Spécialisé;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_370;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_371;sot / fou;;;;3.43;Standard;Spécialisé;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_371;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_372;espagnol;;;;4.59;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_372;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_373;mobile;;;;4.48;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_373;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_374;national;;;;4.73;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_374;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_375;amer;;;;3.68;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_375;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_376;pareil / de ce genre;;;;4.08;Standard;Courant;B1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_376;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_377;constant;;;;4.39;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_377;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_378;simple;;;;4.69;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_378;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_379;compliqué;;;;4.1;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_379;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_380;courageux;;;;3.89;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_380;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_381;espérons que;;;;4.73;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_381;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_382;illégal;;;;4.23;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_382;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_383;effrayant / étroit;;;;4.35;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_383;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_384;automatique;;;;4.39;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_384;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_385;russe;;;;4.42;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_385;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_386;mince / fin;;;;4.08;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_386;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_387;rose;;;;4.52;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_387;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_388;extrême;;;;4.45;Standard;Courant;B2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_388;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_389;précieux;;;;3.95;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_389;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_390;confus;;;;4.08;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_390;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_391;courageux;;;;4.01;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_391;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_392;en ligne;;;;5.55;Standard;Essentiel;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_392;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_393;cru;;;;3.68;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_393;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_394;toxique / vénéneux;;;;3.78;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_394;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_395;sale;;;;4.27;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_395;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_396;incroyable;;;;4.46;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_396;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_397;triste;;;;3.82;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_397;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_398;agaçant;;;;3.89;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_398;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_399;impressionnant;;;;4.28;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_399;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_400;saint / sacré;;;;4.12;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_400;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_401;contagieux;;;;3.61;Standard;Courant;B1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_401;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_402;pratique / habile;;;;4.58;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_402;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_403;idéal;;;;4.15;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_403;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_404;égoïste;;;;3.29;Standard;Spécialisé;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_404;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_405;agressif;;;;4.01;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_405;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_406;britannique;;;;4.08;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_406;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_407;logique;;;;4.52;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_407;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_408;romantique;;;;3.97;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_408;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_409;dépressif;;;;3.78;Standard;Courant;B2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_409;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_410;couronné de succès;;;;4.53;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_410;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_411;plat;;;;4.28;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_411;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_412;dépendant;;;;4.74;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_412;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_413;canadien;;;;3.67;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_413;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_414;proche / tout près;;;;4.67;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_414;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_415;temporaire;;;;4.64;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_415;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_416;optimiste;;;;3.76;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_416;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_417;pris de vertige;;;;3.35;Standard;Spécialisé;B1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_417;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_418;nu;;;;4.04;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_418;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_419;en vain;;;;3.77;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_419;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_420;islamique;;;;3.85;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_420;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_421;d'origine / à l'origine;;;;4.63;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_421;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_422;artificiel;;;;3.45;Standard;Spécialisé;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_422;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_423;fiable;;;;4.15;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_423;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_424;certainement / résolu;;;;4.49;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_424;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_425;pur;;;;4.46;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_425;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_426;mort de peur;;;;3.65;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_426;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_427;pourri;;;;4.29;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_427;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_428;improbable;;;;3.82;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_428;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_429;sincère;;;;4.18;Standard;Courant;B2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_429;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_430;acide / aigre;;;;4.02;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_430;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_431;impatient;;;;3.53;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_431;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_432;alternatif;;;;4.41;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_432;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_433;modeste;;;;4.17;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_433;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_434;lisse / glissant;;;;4.02;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_434;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_435;inconfortable / mal à l'aise;;;;3.92;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_435;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_436;violent / intense;;;;3.8;Standard;Courant;A1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_436;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_437;douloureux;;;;4.3;Standard;Courant;B1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_437;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_438;comptant (en espèces);;;;3.72;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_438;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_439;triste;;;;4.38;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_439;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_440;accro / dépendant;;;;3.96;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_440;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_441;extraordinaire;;;;4.13;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_441;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_442;féminin;;;;3.99;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_442;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_443;original;;;;4.26;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_443;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_444;indépendant / autonome;;;;4.37;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_444;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_445;solide / ferme;;;;4.21;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_445;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_446;complètement / parfait;;;;4.21;Standard;Courant;B1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_446;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_447;glacial;;;;3.44;Standard;Spécialisé;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_447;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_448;inutile;;;;3.78;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_448;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_449;cruel;;;;3.83;Standard;Courant;B2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_449;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_450;horrible;;;;3.93;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_450;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_451;mûr;;;;3.85;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_451;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_452;visible;;;;4.53;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_452;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_453;latin;;;;3.98;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_453;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_454;têtu;;;;3.56;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_454;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_455;costaud / considérable;;;;4.67;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_455;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_456;creux;;;;4.06;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_456;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_457;apparenté;;;;3.51;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_457;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_458;ensoleillé;;;;3.65;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_458;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_459;bruyant;;;;3.11;Standard;Spécialisé;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_459;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_460;confortable;;;;3.85;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_460;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_461;approfondi;;;;4.04;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_461;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_462;attentif;;;;3.54;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_462;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_463;catholique;;;;3.81;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_463;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_464;turc;;;;4.04;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_464;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_465;commun;;;;3.92;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_465;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_466;valable;;;;4.38;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_466;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_467;nommé;;;;4.73;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_467;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_468;désagréable;;;;3.25;Standard;Spécialisé;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_468;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_469;religieux;;;;3.93;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_469;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_470;mortel;;;;4.2;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_470;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_471;biologique;;;;3.93;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_471;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_472;arrogant;;;;3.76;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_472;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_473;soûl / qui en a assez;;;;5.21;Standard;Essentiel;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_473;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_474;mineur (âge);;;;3.34;Standard;Spécialisé;B1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_474;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_475;dont c'est l'anniversaire;;;;4.5;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_475;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_476;local;;;;3.89;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_476;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_477;littéral / littéralement;;;;4.59;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_477;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_478;grec;;;;3.96;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_478;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_479;nuageux;;;;3.33;Standard;Spécialisé;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_479;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_480;désespéré;;;;4.04;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_480;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_481;étroit;;;;3.72;Standard;Courant;A2;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_481;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_482;efficace;;;;3.89;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_482;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_483;assez;;;;3.88;Standard;Courant;B1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_483;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_484;sans espoir;;;;3.77;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_484;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_485;gigantesque;;;;3.92;Standard;Courant;B1;nt2lex;Taille-quantité;ADJECTIFS_NL.csv:ADJECTIFS_NL_485;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_486;nuisible;;;;3.94;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_486;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_487;qui en a marre;;;;3.83;Standard;Courant;B1;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_487;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_488;inconscient (évanoui);;;;3.51;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_488;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_489;soulagé;;;;3.7;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_489;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_490;remarquable;;;;4.15;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_490;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_491;récent;;;;4.31;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_491;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_492;incroyable;;;;4.2;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_492;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_493;exact;;;;4.27;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_493;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_494;frais / froid;;;;3.87;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_494;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_495;typique;;;;4.41;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_495;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_496;inclus;;;;3.57;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_496;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_497;criminel;;;;4.22;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_497;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_498;dégoûtant;;;;4.17;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_498;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_499;passé / dernier (afgelopen week);;;;5.33;Standard;Essentiel;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_499;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_500;belge;;;;4.2;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_500;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_501;vif / animé;;;;3.73;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_501;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_502;essentiel;;;;4.11;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_502;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_503;humide;;;;3.77;Standard;Courant;A2;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_503;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_504;inutile / absurde;;;;3.95;Standard;Courant;A2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_504;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_505;créatif;;;;4.24;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_505;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_506;à part / particulier;;;;4.42;Standard;Courant;A1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_506;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_507;inhabituel;;;;3.84;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_507;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_508;serviable;;;;3.57;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_508;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_509;magique;;;;3.77;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_509;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_510;mondial;;;;4.64;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_510;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_511;masculin;;;;3.9;Standard;Courant;B1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_511;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_512;grossier;;;;4.01;Standard;Courant;A2;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_512;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_513;maigre;;;;3.69;Standard;Courant;A1;nt2lex;Description physique;ADJECTIFS_NL.csv:ADJECTIFS_NL_513;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_514;le plus proche;;;;1.04;Standard;Spécialisé;B1;nt2lex;Comparaison;ADJECTIFS_NL.csv:ADJECTIFS_NL_514;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_515;ancien (d'époque);;;;3.68;Standard;Courant;B2;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_515;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_516;inquiet;;;;3.63;Standard;Courant;A2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_516;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_517;ambitieux;;;;3.6;Standard;Courant;B1;nt2lex;Personnalité;ADJECTIFS_NL.csv:ADJECTIFS_NL_517;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_518;habituel;;;;4.1;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_518;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_519;grincheux;;;;3.35;Standard;Spécialisé;B2;nt2lex;Émotions;ADJECTIFS_NL.csv:ADJECTIFS_NL_519;a_produire;a_produire_et_verifier
+ADJECTIFS_RU_520;légal;;;;4.03;Standard;Courant;B1;nt2lex;Qualité;ADJECTIFS_NL.csv:ADJECTIFS_NL_520;a_produire;a_produire_et_verifier

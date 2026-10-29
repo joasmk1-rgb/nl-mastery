@@ -1,0 +1,236 @@
+﻿id;fr;ar;prononciation;ipa;freq;statut_examen;priorite_frequence;niveauCECR;niveauCECRSource;sousCategorie;source_fr;statut_traduction;statut_prononciation
+ADVERBES_AR_0;ne...pas;;;;6.96;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_0;a_produire;a_produire_et_verifier
+ADVERBES_AR_1;y / il y a;;;;6.78;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_1;a_produire;a_produire_et_verifier
+ADVERBES_AR_2;aussi;;;;6.69;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_2;a_produire;a_produire_et_verifier
+ADVERBES_AR_3;encore;;;;6.53;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_3;a_produire;a_produire_et_verifier
+ADVERBES_AR_4;plus;;;;6.44;;Essentiel;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_4;a_produire;a_produire_et_verifier
+ADVERBES_AR_5;ainsi / si;;;;6.43;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_5;a_produire;a_produire_et_verifier
+ADVERBES_AR_6;déjà;;;;6.42;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_6;a_produire;a_produire_et_verifier
+ADVERBES_AR_7;bien / si;;;;6.4;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_7;a_produire;a_produire_et_verifier
+ADVERBES_AR_8;maintenant;;;;6.37;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_8;a_produire;a_produire_et_verifier
+ADVERBES_AR_9;comment;;;;6.23;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_9;a_produire;a_produire_et_verifier
+ADVERBES_AR_10;où;;;;6.21;;Essentiel;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_10;a_produire;a_produire_et_verifier
+ADVERBES_AR_11;ici;;;;6.12;;Essentiel;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_11;a_produire;a_produire_et_verifier
+ADVERBES_AR_12;donc;;;;6.11;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_12;a_produire;a_produire_et_verifier
+ADVERBES_AR_13;seulement;;;;6.09;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_13;a_produire;a_produire_et_verifier
+ADVERBES_AR_14;de nouveau;;;;6.05;;Essentiel;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_14;a_produire;a_produire_et_verifier
+ADVERBES_AR_15;une fois;;;;6.01;;Essentiel;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_15;a_produire;a_produire_et_verifier
+ADVERBES_AR_16;là;;;;6.0;;Essentiel;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_16;a_produire;a_produire_et_verifier
+ADVERBES_AR_17;quand même;;;;6.0;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_17;a_produire;a_produire_et_verifier
+ADVERBES_AR_18;toujours;;;;5.9;;Essentiel;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_18;a_produire;a_produire_et_verifier
+ADVERBES_AR_19;pourquoi;;;;5.88;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_19;a_produire;a_produire_et_verifier
+ADVERBES_AR_20;juste / justement;;;;5.86;;Essentiel;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_20;a_produire;a_produire_et_verifier
+ADVERBES_AR_21;un instant;;;;5.85;;Essentiel;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_21;a_produire;a_produire_et_verifier
+ADVERBES_AR_22;de retour;;;;5.85;;Essentiel;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_22;a_produire;a_produire_et_verifier
+ADVERBES_AR_23;toujours (de plus en plus);;;;5.82;;Essentiel;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_23;a_produire;a_produire_et_verifier
+ADVERBES_AR_24;parti(e) / au loin;;;;5.8;;Essentiel;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_24;a_produire;a_produire_et_verifier
+ADVERBES_AR_25;jamais;;;;5.77;;Essentiel;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_25;a_produire;a_produire_et_verifier
+ADVERBES_AR_26;soi-même;;;;5.76;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_26;a_produire;a_produire_et_verifier
+ADVERBES_AR_27;ensemble;;;;5.75;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_27;a_produire;a_produire_et_verifier
+ADVERBES_AR_28;tous / tout;;;;5.71;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_28;a_produire;a_produire_et_verifier
+ADVERBES_AR_29;peut-être;;;;5.68;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_29;a_produire;a_produire_et_verifier
+ADVERBES_AR_30;autrement;;;;5.67;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_30;a_produire;a_produire_et_verifier
+ADVERBES_AR_31;volontiers;;;;5.66;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_31;a_produire;a_produire_et_verifier
+ADVERBES_AR_32;aujourd'hui;;;;5.65;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_32;a_produire;a_produire_et_verifier
+ADVERBES_AR_33;d'abord;;;;5.64;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_33;a_produire;a_produire_et_verifier
+ADVERBES_AR_34;même;;;;5.64;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_34;a_produire;a_produire_et_verifier
+ADVERBES_AR_35;entièrement;;;;5.62;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_35;a_produire;a_produire_et_verifier
+ADVERBES_AR_36;surtout;;;;5.61;;Essentiel;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_36;a_produire;a_produire_et_verifier
+ADVERBES_AR_37;presque;;;;5.58;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_37;a_produire;a_produire_et_verifier
+ADVERBES_AR_38;il y a (temps);;;;5.52;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_38;a_produire;a_produire_et_verifier
+ADVERBES_AR_39;cependant;;;;5.5;;Essentiel;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_39;a_produire;a_produire_et_verifier
+ADVERBES_AR_40;eh bien;;;;5.5;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_40;a_produire;a_produire_et_verifier
+ADVERBES_AR_41;assez;;;;5.49;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_41;a_produire;a_produire_et_verifier
+ADVERBES_AR_42;parfois;;;;5.48;;Essentiel;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_42;a_produire;a_produire_et_verifier
+ADVERBES_AR_43;à la maison;;;;5.48;;Essentiel;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_43;a_produire;a_produire_et_verifier
+ADVERBES_AR_44;seulement / à peine;;;;5.45;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_44;a_produire;a_produire_et_verifier
+ADVERBES_AR_45;dans lequel;;;;5.45;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_45;a_produire;a_produire_et_verifier
+ADVERBES_AR_46;un jour / jamais (question);;;;5.43;;Essentiel;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_46;a_produire;a_produire_et_verifier
+ADVERBES_AR_47;très;;;;5.43;;Essentiel;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_47;a_produire;a_produire_et_verifier
+ADVERBES_AR_48;donc / c'est pourquoi;;;;5.41;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_48;a_produire;a_produire_et_verifier
+ADVERBES_AR_49;environ;;;;5.41;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_49;a_produire;a_produire_et_verifier
+ADVERBES_AR_50;le plus;;;;5.39;;Essentiel;A1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_50;a_produire;a_produire_et_verifier
+ADVERBES_AR_51;à nouveau;;;;5.38;;Essentiel;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_51;a_produire;a_produire_et_verifier
+ADVERBES_AR_52;seulement;;;;5.37;;Essentiel;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_52;a_produire;a_produire_et_verifier
+ADVERBES_AR_53;auprès duquel;;;;5.37;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_53;a_produire;a_produire_et_verifier
+ADVERBES_AR_54;ensuite;;;;5.36;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_54;a_produire;a_produire_et_verifier
+ADVERBES_AR_55;demain;;;;5.31;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_55;a_produire;a_produire_et_verifier
+ADVERBES_AR_56;beaucoup de;;;;5.3;;Essentiel;A2;freq_estime;Degré;ADVERBES_NL.csv:ADVERBES_NL_56;a_produire;a_produire_et_verifier
+ADVERBES_AR_57;par exemple;;;;5.29;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_57;a_produire;a_produire_et_verifier
+ADVERBES_AR_58;la plupart;;;;5.28;;Essentiel;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_58;a_produire;a_produire_et_verifier
+ADVERBES_AR_59;ce qui fait que;;;;5.26;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_59;a_produire;a_produire_et_verifier
+ADVERBES_AR_60;au milieu;;;;5.24;;Essentiel;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_60;a_produire;a_produire_et_verifier
+ADVERBES_AR_61;ensuite;;;;5.24;;Essentiel;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_61;a_produire;a_produire_et_verifier
+ADVERBES_AR_62;en (de cela);;;;5.22;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_62;a_produire;a_produire_et_verifier
+ADVERBES_AR_63;tout de suite;;;;5.22;;Essentiel;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_63;a_produire;a_produire_et_verifier
+ADVERBES_AR_64;seulement / quelques;;;;5.17;;Essentiel;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_64;a_produire;a_produire_et_verifier
+ADVERBES_AR_65;partout;;;;5.17;;Essentiel;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_65;a_produire;a_produire_et_verifier
+ADVERBES_AR_66;dont;;;;5.17;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_66;a_produire;a_produire_et_verifier
+ADVERBES_AR_67;devant cela / pour cela;;;;5.16;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_67;a_produire;a_produire_et_verifier
+ADVERBES_AR_68;avec cela;;;;5.15;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_68;a_produire;a_produire_et_verifier
+ADVERBES_AR_69;ce soir;;;;5.15;;Essentiel;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_69;a_produire;a_produire_et_verifier
+ADVERBES_AR_70;avec lequel;;;;5.14;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_70;a_produire;a_produire_et_verifier
+ADVERBES_AR_71;sur lequel;;;;5.14;;Essentiel;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_71;a_produire;a_produire_et_verifier
+ADVERBES_AR_72;en effet;;;;5.13;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_72;a_produire;a_produire_et_verifier
+ADVERBES_AR_73;dessus;;;;5.12;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_73;a_produire;a_produire_et_verifier
+ADVERBES_AR_74;malheureusement;;;;5.12;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_74;a_produire;a_produire_et_verifier
+ADVERBES_AR_75;parmi lesquels;;;;5.12;;Essentiel;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_75;a_produire;a_produire_et_verifier
+ADVERBES_AR_76;entre-temps;;;;5.11;;Essentiel;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_76;a_produire;a_produire_et_verifier
+ADVERBES_AR_77;la plupart du temps;;;;5.1;;Essentiel;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_77;a_produire;a_produire_et_verifier
+ADVERBES_AR_78;de plus;;;;5.08;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_78;a_produire;a_produire_et_verifier
+ADVERBES_AR_79;quelque part;;;;5.08;;Essentiel;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_79;a_produire;a_produire_et_verifier
+ADVERBES_AR_80;hier;;;;5.07;;Essentiel;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_80;a_produire;a_produire_et_verifier
+ADVERBES_AR_81;en outre;;;;5.06;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_81;a_produire;a_produire_et_verifier
+ADVERBES_AR_82;plutôt (préférence);;;;5.03;;Essentiel;A1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_82;a_produire;a_produire_et_verifier
+ADVERBES_AR_83;de cela;;;;5.0;;Essentiel;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_83;a_produire;a_produire_et_verifier
+ADVERBES_AR_84;à cela;;;;4.98;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_84;a_produire;a_produire_et_verifier
+ADVERBES_AR_85;également;;;;4.96;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_85;a_produire;a_produire_et_verifier
+ADVERBES_AR_86;avec cela;;;;4.95;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_86;a_produire;a_produire_et_verifier
+ADVERBES_AR_87;à savoir / en effet;;;;4.94;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_87;a_produire;a_produire_et_verifier
+ADVERBES_AR_88;de plus / avec cela;;;;4.9;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_88;a_produire;a_produire_et_verifier
+ADVERBES_AR_89;pour cela / avant;;;;4.9;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_89;a_produire;a_produire_et_verifier
+ADVERBES_AR_90;à cause de cela;;;;4.9;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_90;a_produire;a_produire_et_verifier
+ADVERBES_AR_91;nulle part;;;;4.9;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_91;a_produire;a_produire_et_verifier
+ADVERBES_AR_92;tout à l'heure;;;;4.9;;Courant;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_92;a_produire;a_produire_et_verifier
+ADVERBES_AR_93;comme ça / sans raison;;;;4.9;;Courant;A2;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_93;a_produire;a_produire_et_verifier
+ADVERBES_AR_94;avec ceci;;;;4.89;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_94;a_produire;a_produire_et_verifier
+ADVERBES_AR_95;dehors / apparence;;;;4.88;;Courant;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_95;a_produire;a_produire_et_verifier
+ADVERBES_AR_96;jusque-là;;;;4.87;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_96;a_produire;a_produire_et_verifier
+ADVERBES_AR_97;entre-temps;;;;4.84;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_97;a_produire;a_produire_et_verifier
+ADVERBES_AR_98;en chemin;;;;4.84;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_98;a_produire;a_produire_et_verifier
+ADVERBES_AR_99;dedans;;;;4.83;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_99;a_produire;a_produire_et_verifier
+ADVERBES_AR_100;d'ailleurs;;;;4.83;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_100;a_produire;a_produire_et_verifier
+ADVERBES_AR_101;à cause de cela;;;;4.81;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_101;a_produire;a_produire_et_verifier
+ADVERBES_AR_102;ci-joint / avec ceci;;;;4.81;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_102;a_produire;a_produire_et_verifier
+ADVERBES_AR_103;de ceci;;;;4.79;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_103;a_produire;a_produire_et_verifier
+ADVERBES_AR_104;déjà;;;;4.79;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_104;a_produire;a_produire_et_verifier
+ADVERBES_AR_105;pour cela / avant ceci;;;;4.78;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_105;a_produire;a_produire_et_verifier
+ADVERBES_AR_106;également / co-;;;;4.78;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_106;a_produire;a_produire_et_verifier
+ADVERBES_AR_107;bientôt;;;;4.77;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_107;a_produire;a_produire_et_verifier
+ADVERBES_AR_108;assez / plutôt;;;;4.77;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_108;a_produire;a_produire_et_verifier
+ADVERBES_AR_109;pratiquement;;;;4.77;;Courant;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_109;a_produire;a_produire_et_verifier
+ADVERBES_AR_110;ainsi;;;;4.76;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_110;a_produire;a_produire_et_verifier
+ADVERBES_AR_111;une fois (pour toutes);;;;4.75;;Courant;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_111;a_produire;a_produire_et_verifier
+ADVERBES_AR_112;avec cela;;;;4.75;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_112;a_produire;a_produire_et_verifier
+ADVERBES_AR_113;moins;;;;4.75;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_113;a_produire;a_produire_et_verifier
+ADVERBES_AR_114;pour quoi / pourquoi;;;;4.75;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_114;a_produire;a_produire_et_verifier
+ADVERBES_AR_115;à peine;;;;4.72;;Courant;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_116;a_produire;a_produire_et_verifier
+ADVERBES_AR_116;vers le haut;;;;4.71;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_117;a_produire;a_produire_et_verifier
+ADVERBES_AR_117;peut-être;;;;4.71;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_118;a_produire;a_produire_et_verifier
+ADVERBES_AR_118;déjà de nouveau;;;;4.7;;Courant;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_119;a_produire;a_produire_et_verifier
+ADVERBES_AR_119;au moins;;;;4.69;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_120;a_produire;a_produire_et_verifier
+ADVERBES_AR_120;là-dessus / ensuite;;;;4.68;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_121;a_produire;a_produire_et_verifier
+ADVERBES_AR_121;soudain;;;;4.67;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_122;a_produire;a_produire_et_verifier
+ADVERBES_AR_122;d'ailleurs;;;;4.67;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_123;a_produire;a_produire_et_verifier
+ADVERBES_AR_123;trop;;;;4.66;;Courant;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_124;a_produire;a_produire_et_verifier
+ADVERBES_AR_124;bien sûr;;;;4.66;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_125;a_produire;a_produire_et_verifier
+ADVERBES_AR_125;dedans (dans cela);;;;4.65;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_126;a_produire;a_produire_et_verifier
+ADVERBES_AR_126;à ce sujet;;;;4.65;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_127;a_produire;a_produire_et_verifier
+ADVERBES_AR_127;en avant;;;;4.65;;Courant;B1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_128;a_produire;a_produire_et_verifier
+ADVERBES_AR_128;en avant;;;;4.65;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_129;a_produire;a_produire_et_verifier
+ADVERBES_AR_129;s'il te plaît;;;;4.63;;Courant;A1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_130;a_produire;a_produire_et_verifier
+ADVERBES_AR_130;de préférence;;;;4.62;;Courant;B1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_131;a_produire;a_produire_et_verifier
+ADVERBES_AR_131;en même temps;;;;4.62;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_132;a_produire;a_produire_et_verifier
+ADVERBES_AR_132;également;;;;4.61;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_133;a_produire;a_produire_et_verifier
+ADVERBES_AR_133;hier soir;;;;4.59;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_134;a_produire;a_produire_et_verifier
+ADVERBES_AR_134;dans ceci;;;;4.59;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_135;a_produire;a_produire_et_verifier
+ADVERBES_AR_135;au moins;;;;4.59;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_136;a_produire;a_produire_et_verifier
+ADVERBES_AR_136;plus;;;;4.59;;Courant;C1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_137;a_produire;a_produire_et_verifier
+ADVERBES_AR_137;à ce sujet;;;;4.58;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_138;a_produire;a_produire_et_verifier
+ADVERBES_AR_138;encore une fois;;;;4.58;;Courant;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_139;a_produire;a_produire_et_verifier
+ADVERBES_AR_139;après quoi;;;;4.57;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_140;a_produire;a_produire_et_verifier
+ADVERBES_AR_140;depuis lors;;;;4.56;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_141;a_produire;a_produire_et_verifier
+ADVERBES_AR_141;récemment;;;;4.55;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_142;a_produire;a_produire_et_verifier
+ADVERBES_AR_142;en même temps;;;;4.52;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_143;a_produire;a_produire_et_verifier
+ADVERBES_AR_143;quand même (plus tard);;;;4.51;;Courant;B2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_144;a_produire;a_produire_et_verifier
+ADVERBES_AR_144;soudain;;;;4.51;;Courant;B2;freq_estime;Temps;ADVERBES_NL.csv:ADVERBES_NL_145;a_produire;a_produire_et_verifier
+ADVERBES_AR_145;ce matin;;;;4.51;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_146;a_produire;a_produire_et_verifier
+ADVERBES_AR_146;à chaque fois;;;;4.5;;Courant;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_147;a_produire;a_produire_et_verifier
+ADVERBES_AR_147;en grande partie;;;;4.49;;Courant;B2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_149;a_produire;a_produire_et_verifier
+ADVERBES_AR_148;ce matin;;;;4.49;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_150;a_produire;a_produire_et_verifier
+ADVERBES_AR_149;à l'avant;;;;4.49;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_151;a_produire;a_produire_et_verifier
+ADVERBES_AR_150;de nouveau;;;;4.49;;Courant;B2;freq_estime;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_152;a_produire;a_produire_et_verifier
+ADVERBES_AR_151;après cela;;;;4.48;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_153;a_produire;a_produire_et_verifier
+ADVERBES_AR_152;en effet (car);;;;4.47;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_154;a_produire;a_produire_et_verifier
+ADVERBES_AR_153;déjà (par avance);;;;4.46;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_155;a_produire;a_produire_et_verifier
+ADVERBES_AR_154;auquel;;;;4.46;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_156;a_produire;a_produire_et_verifier
+ADVERBES_AR_155;là-dessus;;;;4.45;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_157;a_produire;a_produire_et_verifier
+ADVERBES_AR_156;d'où / voilà pourquoi;;;;4.45;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_158;a_produire;a_produire_et_verifier
+ADVERBES_AR_157;cette nuit;;;;4.45;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_159;a_produire;a_produire_et_verifier
+ADVERBES_AR_158;le moins;;;;4.44;;Courant;B2;freq_estime;Degré;ADVERBES_NL.csv:ADVERBES_NL_160;a_produire;a_produire_et_verifier
+ADVERBES_AR_159;presque / hâte;;;;4.42;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_161;a_produire;a_produire_et_verifier
+ADVERBES_AR_160;entre-temps;;;;4.42;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_162;a_produire;a_produire_et_verifier
+ADVERBES_AR_161;à l'instant;;;;4.42;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_163;a_produire;a_produire_et_verifier
+ADVERBES_AR_162;rarement;;;;4.41;;Courant;B1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_164;a_produire;a_produire_et_verifier
+ADVERBES_AR_163;abondamment;;;;4.4;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_165;a_produire;a_produire_et_verifier
+ADVERBES_AR_164;à propos de quoi;;;;4.37;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_166;a_produire;a_produire_et_verifier
+ADVERBES_AR_165;à peine;;;;4.36;;Courant;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_167;a_produire;a_produire_et_verifier
+ADVERBES_AR_166;à cela;;;;4.36;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_168;a_produire;a_produire_et_verifier
+ADVERBES_AR_167;ailleurs;;;;4.36;;Courant;B1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_169;a_produire;a_produire_et_verifier
+ADVERBES_AR_168;mais si;;;;4.36;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_170;a_produire;a_produire_et_verifier
+ADVERBES_AR_169;désormais;;;;4.36;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_171;a_produire;a_produire_et_verifier
+ADVERBES_AR_170;duquel / dont;;;;4.35;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_173;a_produire;a_produire_et_verifier
+ADVERBES_AR_171;à ce sujet;;;;4.34;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_174;a_produire;a_produire_et_verifier
+ADVERBES_AR_172;derrière cela;;;;4.34;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_175;a_produire;a_produire_et_verifier
+ADVERBES_AR_173;enfin / finalement;;;;4.34;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_176;a_produire;a_produire_et_verifier
+ADVERBES_AR_174;environ;;;;4.33;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_177;a_produire;a_produire_et_verifier
+ADVERBES_AR_175;ci-dessus;;;;4.33;;Courant;B2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_178;a_produire;a_produire_et_verifier
+ADVERBES_AR_176;cet après-midi;;;;4.33;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_179;a_produire;a_produire_et_verifier
+ADVERBES_AR_177;automatiquement;;;;4.32;;Courant;A2;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_180;a_produire;a_produire_et_verifier
+ADVERBES_AR_178;en revanche;;;;4.31;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_181;a_produire;a_produire_et_verifier
+ADVERBES_AR_179;vers cela;;;;4.31;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_182;a_produire;a_produire_et_verifier
+ADVERBES_AR_180;au préalable;;;;4.31;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_183;a_produire;a_produire_et_verifier
+ADVERBES_AR_181;souvent;;;;4.3;;Courant;B1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_184;a_produire;a_produire_et_verifier
+ADVERBES_AR_182;auparavant;;;;4.3;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_185;a_produire;a_produire_et_verifier
+ADVERBES_AR_183;parfois;;;;4.3;;Courant;A1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_186;a_produire;a_produire_et_verifier
+ADVERBES_AR_184;à cela (contribuer);;;;4.27;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_190;a_produire;a_produire_et_verifier
+ADVERBES_AR_185;en accord;;;;4.27;;Courant;B2;freq_estime;Manière;ADVERBES_NL.csv:ADVERBES_NL_191;a_produire;a_produire_et_verifier
+ADVERBES_AR_186;sans aucun doute;;;;4.24;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_193;a_produire;a_produire_et_verifier
+ADVERBES_AR_187;à la rencontre de;;;;4.24;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_194;a_produire;a_produire_et_verifier
+ADVERBES_AR_188;en journée;;;;4.23;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_196;a_produire;a_produire_et_verifier
+ADVERBES_AR_189;après coup;;;;4.22;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_197;a_produire;a_produire_et_verifier
+ADVERBES_AR_190;malgré cela;;;;4.22;;Courant;C1;freq_estime;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_198;a_produire;a_produire_et_verifier
+ADVERBES_AR_191;généralement;;;;4.22;;Courant;B1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_199;a_produire;a_produire_et_verifier
+ADVERBES_AR_192;plus loin;;;;4.22;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_200;a_produire;a_produire_et_verifier
+ADVERBES_AR_193;à ceci;;;;4.21;;Courant;B2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_201;a_produire;a_produire_et_verifier
+ADVERBES_AR_194;en arrière;;;;4.2;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_203;a_produire;a_produire_et_verifier
+ADVERBES_AR_195;s'il vous plaît;;;;4.2;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_204;a_produire;a_produire_et_verifier
+ADVERBES_AR_196;quelque peu;;;;4.19;;Courant;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_205;a_produire;a_produire_et_verifier
+ADVERBES_AR_197;en dehors de cela;;;;4.17;;Courant;B1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_208;a_produire;a_produire_et_verifier
+ADVERBES_AR_198;pour cela (raison);;;;4.17;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_209;a_produire;a_produire_et_verifier
+ADVERBES_AR_199;non;;;;4.17;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_210;a_produire;a_produire_et_verifier
+ADVERBES_AR_200;depuis longtemps déjà;;;;4.16;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_211;a_produire;a_produire_et_verifier
+ADVERBES_AR_201;ensemble (réunis);;;;4.16;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_212;a_produire;a_produire_et_verifier
+ADVERBES_AR_202;super / vachement;;;;4.16;;Courant;A2;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_213;a_produire;a_produire_et_verifier
+ADVERBES_AR_203;par ailleurs / d'autre part;;;;4.15;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_215;a_produire;a_produire_et_verifier
+ADVERBES_AR_204;tout simplement;;;;4.15;;Courant;B1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_217;a_produire;a_produire_et_verifier
+ADVERBES_AR_205;en avant / au premier plan;;;;4.15;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_218;a_produire;a_produire_et_verifier
+ADVERBES_AR_206;de là (conclusion);;;;4.14;;Courant;A2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_219;a_produire;a_produire_et_verifier
+ADVERBES_AR_207;après cela;;;;4.13;;Courant;C1;freq_estime;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_220;a_produire;a_produire_et_verifier
+ADVERBES_AR_208;vers le bas;;;;4.13;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_221;a_produire;a_produire_et_verifier
+ADVERBES_AR_209;en arrière;;;;4.12;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_222;a_produire;a_produire_et_verifier
+ADVERBES_AR_210;de ceci (conclusion);;;;4.12;;Courant;B2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_223;a_produire;a_produire_et_verifier
+ADVERBES_AR_211;auparavant;;;;4.11;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_224;a_produire;a_produire_et_verifier
+ADVERBES_AR_212;peu (de);;;;4.11;;Courant;C1;freq_estime;Degré;ADVERBES_NL.csv:ADVERBES_NL_225;a_produire;a_produire_et_verifier
+ADVERBES_AR_213;par la suite;;;;4.1;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_226;a_produire;a_produire_et_verifier
+ADVERBES_AR_214;à cette fin;;;;4.09;;Courant;B2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_227;a_produire;a_produire_et_verifier
+ADVERBES_AR_215;pour cause de;;;;4.09;;Courant;B2;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_228;a_produire;a_produire_et_verifier
+ADVERBES_AR_216;en morceaux / séparément;;;;4.09;;Courant;B1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_229;a_produire;a_produire_et_verifier
+ADVERBES_AR_217;certes;;;;4.08;;Courant;B1;nt2lex;Connecteur & mot grammatical;ADVERBES_NL.csv:ADVERBES_NL_230;a_produire;a_produire_et_verifier
+ADVERBES_AR_218;à l'inverse;;;;4.05;;Courant;B1;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_232;a_produire;a_produire_et_verifier
+ADVERBES_AR_219;de côté;;;;4.05;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_234;a_produire;a_produire_et_verifier
+ADVERBES_AR_220;à peu près;;;;4.04;;Courant;B1;nt2lex;Degré;ADVERBES_NL.csv:ADVERBES_NL_235;a_produire;a_produire_et_verifier
+ADVERBES_AR_221;combien de temps;;;;4.09;;Courant;A1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_236;a_produire;a_produire_et_verifier
+ADVERBES_AR_222;vers (là) / y (direction);;;;4.39;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_237;a_produire;a_produire_et_verifier
+ADVERBES_AR_223;souvent;;;;3.87;;Courant;B1;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_238;a_produire;a_produire_et_verifier
+ADVERBES_AR_224;demain matin;;;;4.07;;Courant;A2;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_239;a_produire;a_produire_et_verifier
+ADVERBES_AR_225;tout près;;;;4.4;;Courant;A1;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_240;a_produire;a_produire_et_verifier
+ADVERBES_AR_226;là-bas (direction);;;;3.71;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_241;a_produire;a_produire_et_verifier
+ADVERBES_AR_227;par ici (direction);;;;3.7;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_242;a_produire;a_produire_et_verifier
+ADVERBES_AR_228;plus près;;;;4.25;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_243;a_produire;a_produire_et_verifier
+ADVERBES_AR_229;avant-hier;;;;3.58;;Courant;B1;nt2lex;Temps;ADVERBES_NL.csv:ADVERBES_NL_244;a_produire;a_produire_et_verifier
+ADVERBES_AR_230;deux fois;;;;4.02;;Courant;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_245;a_produire;a_produire_et_verifier
+ADVERBES_AR_231;au grand jour (tevoorschijn komen = apparaître);;;;4.04;;Courant;A2;nt2lex;Manière;ADVERBES_NL.csv:ADVERBES_NL_246;a_produire;a_produire_et_verifier
+ADVERBES_AR_232;y (direction);;;;3.48;;Spécialisé;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_247;a_produire;a_produire_et_verifier
+ADVERBES_AR_233;trois fois;;;;3.44;;Spécialisé;A2;nt2lex;Fréquence;ADVERBES_NL.csv:ADVERBES_NL_248;a_produire;a_produire_et_verifier
+ADVERBES_AR_234;en bas;;;;4.75;;Courant;A2;nt2lex;Lieu;ADVERBES_NL.csv:ADVERBES_NL_249;a_produire;a_produire_et_verifier
