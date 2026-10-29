@@ -2,6 +2,8 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 .shell { width: min(920px, 100% - 28px); margin: 32px auto 60px; }
+.back-link { display: inline-block; margin-bottom: 1rem; color: #3157a4; font-weight: 650; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
 header, .controls, .phrase, footer { background: #fff; border: 1px solid #e3e8f0; border-radius: 16px; box-shadow: 0 4px 18px #18243a0b; }
 header { padding: 26px; }
 .eyebrow { color: #5267a0; font-size: .75rem; font-weight: 800; letter-spacing: .1em; }

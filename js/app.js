@@ -7101,7 +7101,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const options = [
                 `<option value="nl" ${studyLangCode() === 'nl' ? 'selected' : ''}>🇳🇱 Néerlandais</option>`,
                 `<option value="en" ${studyLangCode() === 'en' ? 'selected' : ''}>🇬🇧 Anglais</option>`,
-                `<option value="es" ${studyLangCode() === 'es' ? 'selected' : ''}>🇪🇸 Espagnol</option>`
+                `<option value="es" ${studyLangCode() === 'es' ? 'selected' : ''}>🇪🇸 Espagnol</option>`,
+                '<option value="experimental">🧪 Atelier russe / arabe</option>'
             ].join('');
             return `<div class="study-box" style="margin-top:15px;">
                 <h3>🌐 Langue étudiée</h3>
@@ -7112,6 +7113,10 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
 
         async function studyLangChange(code) {
+            if (code === 'experimental') {
+                window.location.href = 'experimental/phonetics/index.html';
+                return;
+            }
             if (!LANG_PACKS[code] || code === studyLangCode()) return;
             // Sauvegarder la progression dans son espace actuel avant de changer l'espace chargé.
             save();
@@ -16855,6 +16860,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
                 <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>${studyLangCode() === 'nl' ? 'Ton parcours A1 → B2' : 'Cours particulier'}</small></div>
                 <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>${studyLangCode() === 'nl' ? 'Discuter, travail, écoute' : 'Discuter, écouter, répéter'}</small></div>
                 ${studyLangCode() === 'nl' || langHas('vocabulaire') ? `<div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>` : ''}
+                <div class="home-tile" onclick="window.location.href='experimental/phonetics/index.html'" role="link"><span class="ht-icon">🧪</span><b>Russe / arabe</b><small>Atelier phonétique expérimental</small></div>
             </div>`;
         }
         function routineHomeHtml() {
