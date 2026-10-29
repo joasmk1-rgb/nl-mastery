@@ -4627,7 +4627,8 @@ if (firebaseAvailable) {
                 const rows = buildConjugationGrid(v);
                 const nlForm = (t, p) => {
                     const r = rows.find(x => x.pronomKey === (p.plural ? 'wij' : p.key));
-                    return { form: r[t], sentence: p.key + ' ' + r[t] };
+                    const pronoun = CONJ_PRONOUNS.find(x => x.key === p.key);
+                    return { form: r[t], sentence: (pronoun ? pronoun.label : p.key) + ' ' + r[t] };
                 };
                 for (const t of s.tenses) {
                     if (run.stop) break;
@@ -13364,8 +13365,8 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0, extraWords: routineWordsForTalk.splice(0) };
             talkRenderChat();
             if (sit) talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>🎭 ${rpEscapeHtml(sit.label)}</b><div>${rpEscapeHtml(sit.contexte)}</div>
-                ${(sit.kit && sit.kit.phrases || []).length ? `<details><summary>💬 Phrases utiles</summary>${sit.kit.phrases.map(x => `<div class="talk-sit-ph">${rpEscapeHtml(x.nl)} ${speakBtnHtml(x.nl)}<br><small>${rpEscapeHtml(x.fr)}</small></div>`).join('')}</details>` : ''}
-                ${(sit.kit && sit.kit.mots || []).length ? `<details><summary>📖 Mots utiles</summary>${sit.kit.mots.map(x => `<span class="talk-sit-word"><b>${rpEscapeHtml(x.nl)}</b> ${rpEscapeHtml(x.fr)}</span>`).join(' · ')}</details>` : ''}</div>` });
+                ${studyLangCode() === 'nl' && (sit.kit && sit.kit.phrases || []).length ? `<details><summary>💬 Phrases utiles</summary>${sit.kit.phrases.map(x => `<div class="talk-sit-ph">${rpEscapeHtml(x.nl)} ${speakBtnHtml(x.nl)}<br><small>${rpEscapeHtml(x.fr)}</small></div>`).join('')}</details>` : ''}
+                ${studyLangCode() === 'nl' && (sit.kit && sit.kit.mots || []).length ? `<details><summary>📖 Mots utiles</summary>${sit.kit.mots.map(x => `<span class="talk-sit-word"><b>${rpEscapeHtml(x.nl)}</b> ${rpEscapeHtml(x.fr)}</span>`).join(' · ')}</details>` : ''}</div>` });
             talkTurn();
         }
 
@@ -13389,7 +13390,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                 </div>
                 <div class="talk-bar">
                     <button type="button" class="talk-side" onclick="talkToggleText()" title="Écrire">⌨️</button>
-                    <button type="button" class="talk-mic" id="talk-mic" onclick="talkMic('nl')">🎤</button>
+                    <button type="button" class="talk-mic" id="talk-mic" onclick="talkMic(studyLang().micLang)">🎤</button>
                     <span class="talk-side" style="visibility:hidden;"></span>
                 </div>
                 <div id="talk-mic-hint" class="talk-mic-hint">Touche le micro pour parler</div>
@@ -13477,10 +13478,10 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                 const extra = talk.extraWords && talk.extraWords.length ? talk.extraWords.join(', ') : '';
                 const target = studyLang().nom;
                 return `Tu es ${p.name}, partenaire de conversation en ${target} d'un apprenant francophone de niveau ${PROF_LEVEL_DESC[talk.level]}. Parle en ${target} naturel, avec des phrases adaptées à son niveau. La correction et les explications sont en français.
-Sujet : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')}${talk.sit ? `\nSituation à jouer : ${talk.sit.contexte || talk.sit.role || 'conversation quotidienne'}` : ''}${notion ? `\nPoint ${target} à pratiquer : ${notion.content.titre}. ${notion.content.comprendre || ''}` : ''}${extra ? `\nMots ${target} à faire réemployer naturellement : ${extra}.` : ''}
+${talk.sit ? `Tu joues une scène : ton rôle est « ${talk.sit.role || p.name} ». Situation : ${talk.sit.contexte || 'conversation quotidienne'}. Reste dans ce rôle et fais avancer la scène par tes répliques, sans expliquer le scénario ni donner de consignes au narrateur. Commence par une réplique naturelle en ${target}. Les éventuelles formulations d'origine de cette situation sont dans une autre langue : ne les reprends pas et ne les traduis pas mot à mot.` : `Sujet : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')}`}${notion ? `\nPoint ${target} à pratiquer : ${notion.content.titre}. ${notion.content.comprendre || ''}` : ''}${extra ? `\nMots ${target} à faire réemployer naturellement : ${extra}.` : ''}
 Souviens-toi de ces échanges précédents : ${mem || 'aucun'}.
-Une vraie conversation : réagis à sa réponse, raconte aussi un peu de toi et pose UNE question à la fois. S'il parle en français, aide-le brièvement en français puis relance en ${target}. Ne prétends pas que les phrases fournies sont des faits vérifiés.
-${hist ? `Historique :\n${hist}` : 'Commence par une salutation et une question simple.'}
+Une vraie conversation : réagis à sa réponse, raconte aussi un peu de toi et pose UNE question à la fois. S'il parle en français, aide-le brièvement en français puis relance en ${target}. Ne prétends pas que les phrases fournies sont des faits vérifiés.\nDans "fr_help", écris uniquement une aide très courte, directement adressée à l'apprenant et naturelle à lire à voix haute (par exemple : « Tu peux dire … »). N'y écris jamais une consigne destinée à un modèle, une analyse, une description de la réponse attendue ou une phrase comme « le répondant a dit… ». Si aucune aide directe n'est nécessaire, renvoie une chaîne vide.
+${hist ? `Historique :\n${hist}` : (talk.sit ? `Ouvre directement la scène en ${target}, par une réplique naturelle et adaptée à la situation.` : 'Commence par une salutation et une question simple.')}
 Réponds UNIQUEMENT en JSON : {"reply_nl":"réplique en ${target}","reply_fr":"traduction française","fr_help":"aide en français ou chaîne vide","correction":null,"suggestions":[{"nl":"réponse possible en ${target}","fr":"traduction"}],"notions_ok":[],"notions_ko":[],"fin":false}`;
             }
             return `${p.base} Tu parles avec un(e) apprenant(e) francophone de néerlandais, niveau ${PROF_LEVEL_DESC[talk.level]}.
@@ -13535,6 +13536,9 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>${talk.point && talk.userCount ? ' <button class="rp-coach-btn" onclick="talkEnd()">🏁 Terminer et faire le point</button>' : ''}` });
                 return;
             }
+            const rawHelp = typeof r.fr_help === 'string' ? r.fr_help.trim() : '';
+            const metaHelp = /\b(le répondant|la réponse attendue|réponds?-lui|dis-lui|consigne|instruction|prompt|analyse|l'apprenant doit)\b/i.test(rawHelp);
+            const speakableHelp = studyLangCode() === 'nl' || (rawHelp.length <= 220 && !metaHelp) ? rawHelp : '';
             if (lastMsg && r.correction && r.correction.regle && r.correction.natural) tutorMemAdd([{ faux: lastMsg.text, correct: r.correction.natural, regle: r.correction.regle }], 'discuter');
             if (lastMsg && liveCorrectOn() && r.correction && ((r.correction.natural && normalize(r.correction.natural) !== normalize(lastMsg.text)) || r.correction.a_cote)) {
                 r.correction.francais = (Array.isArray(r.correction.francais) ? r.correction.francais : []).filter(x => x && x.fr && x.nl);
@@ -13547,14 +13551,14 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             if (talk.lesson) convHandle(r);
             talk.history.push({ who: 'them', nl: r.reply_nl });
             talk.suggestions = (Array.isArray(r.suggestions) ? r.suggestions : []).filter(s => s && s.nl).slice(0, 3);
-            talkAppend({ who: 'them', nl: r.reply_nl, fr: r.reply_fr || '', help: r.fr_help || '' });
+            talkAppend({ who: 'them', nl: r.reply_nl, fr: r.reply_fr || '', help: speakableHelp });
             talkRenderSugg();
             if (!talkActive()) return;
-            if (r.fr_help) await conjAudioSpeakMixed(r.fr_help, 1, PROF_RATE[talk.level], talkActive);
-            if (talkActive()) await conjAudioSpeak(r.reply_nl, 'nl', PROF_RATE[talk.level], { speaker: talk.p.speaker });
+            if (speakableHelp) await conjAudioSpeakMixed(speakableHelp, 1, PROF_RATE[talk.level], talkActive);
+            if (talkActive()) await conjAudioSpeak(r.reply_nl, studyLangCode(), PROF_RATE[talk.level], { speaker: talk.p.speaker });
             // Le partenaire a conclu : le récap s'enchaîne tout seul (on peut encore continuer).
             if (r.fin === true && talk.userCount > 0 && talkActive()) { talkEnd(); return; }
-            if (talkActive() && talk.handsfree && window.SpeechRecognition && !talkRec) talkMic('nl');
+            if (talkActive() && talk.handsfree && window.SpeechRecognition && !talkRec) talkMic(studyLang().micLang);
         }
 
         function talkSubmit(text, isFr) {
@@ -13589,7 +13593,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
 
         function talkMicState(lang, cd, hold) {
             const mic = document.getElementById('talk-mic'), fr = document.getElementById('talk-fr'), hint = document.getElementById('talk-mic-hint');
-            if (mic) mic.classList.toggle('listening', lang === 'nl');
+            if (mic) mic.classList.toggle('listening', !!lang && lang !== 'fr');
             if (fr) fr.classList.toggle('listening', lang === 'fr');
             if (hint && lang) hint.innerText = cd ? `Envoi dans ${cd}… (touche le micro pour envoyer)` : (lang === 'fr' ? 'J\'écoute en français…' : (hold ? 'J\'écoute… touche le micro pour envoyer' : 'J\'écoute… (touche le micro pour envoyer)'));
             if (hint && !lang && hint.innerText.startsWith('J\'écoute')) hint.innerText = 'Touche le micro pour parler';
@@ -13667,7 +13671,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const bar = document.querySelector('#talk-content .talk-bar');
             if (bar) bar.style.display = '';
             talkAppend({ who: 'info', html: `🔁 On continue ! Réponds à ${rpEscapeHtml(t.p.name)} quand tu veux.` });
-            if (t.handsfree && window.SpeechRecognition && !talkRec) talkMic('nl');
+            if (t.handsfree && window.SpeechRecognition && !talkRec) talkMic(studyLang().micLang);
         }
 
         const TALK_WORDS_LIST = '💬 Mes discussions';
