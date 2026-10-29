@@ -52,7 +52,9 @@ La translittération n'est pas automatiquement une prononciation fiable. En russ
 
 ## Licence et intégration
 
-Les données sources ne doivent pas être copiées dans le bundle principal ni publiées sans revue de licence et attribution. Les sources téléchargées sont ignorées par Git avec la règle locale du dossier de sources. Le prototype reste hors de `LANG_PACKS` jusqu'à ce que le format, la phonétique, les exercices et les licences soient validés.
+Les nouveaux fichiers `vocabulary_ru.json` et `vocabulary_ar.json` sont des extractions automatiques du Wiktionnaire français. Ils gardent une URL vers la notice source de chaque entrée, indiquent leur provenance et signalent les modifications (sélection, normalisation et romanisation automatique). Les notices Wiktionnaire applicables sont sous CC BY-SA 4.0 et/ou GFDL : consulter leurs mentions et les conditions de réutilisation avant toute réutilisation séparée. L'atelier affiche la provenance et ces réserves.
+
+Le contenu reste expérimental : il n'est pas le parcours pédagogique complet de 4 761 mots dérivé du pivot. Les anciennes bases CSV vides ne sont pas chargées. Les fichiers sources volumineux demeurent ignorés par Git.
 
 ## Liens
 

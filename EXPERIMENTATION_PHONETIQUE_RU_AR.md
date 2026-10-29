@@ -13,13 +13,14 @@ Ouvrir `experimental/phonetics/index.html` via un serveur web, ou après publica
 
 Le prototype montre les voix détectées. La locale de reconnaissance est une indication au navigateur, pas une garantie que son moteur comprend bien l'arabe standard moderne. Les voix disponibles, l'accent, la reconnaissance et les résultats dépendent du navigateur et du système. Il n'envoie pas d'audio à Gemini et n'évalue pas encore la qualité de prononciation.
 
-## Limites à résoudre avant intégration au parcours
+## Limites du parcours expérimental intégré
 
 - Faire relire et normaliser les translittérations et transcriptions IPA par des locuteurs compétents ; la version actuelle est un échantillon de conception.
 - Tester la reconnaissance et les voix sur les appareils visés. L'arabe standard peut être reconnu avec un accent dialectal, même quand `ar-SA` est demandé.
 - Décider comment noter l'accent tonique russe et les voyelles réduites, et comment présenter les sons arabes sans équivalent français (par ex. ع et ح).
-- Construire des données de vocabulaire et de cours seulement après validation du prototype phonétique.
-- Ne pas ajouter encore `ru` ou `ar` à `LANG_PACKS` : les écrans actuels supposent des données et comportements anglais/espagnols ou néerlandais. L'ajout direct ferait apparaître des parcours incomplets.
+- Le profil propose désormais russe et arabe comme parcours séparés. Leur choix ouvre cet atelier intégré et n'active pas les écrans de cours génériques.
+- Le corpus consultable est extrait automatiquement de Wiktionnaire : 2 569 candidats russes et 1 336 arabes. Il ne constitue pas un cours complet, et ses traductions et aides de lecture restent à vérifier.
+- La progression des essais de prononciation est mémorisée séparément sur l'appareil. Il n'y a pas encore de cursus A1–B2, de progression cloud, ni d'exercices de grammaire.
 
 ## Vérification locale du prototype
 
