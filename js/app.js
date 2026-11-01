@@ -13414,6 +13414,9 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             if (!state.talk) state.talk = {};
             if (!state.talk.memory) state.talk.memory = {};
             if (!state.talk.days) state.talk.days = {};
+            // Un seul tuteur désormais : il reprend ce que Svetlana et John avaient retenu.
+            const M = state.talk.memory;
+            if (!M.tuteur && (M.svetlana || M.john)) M.tuteur = [M.svetlana, M.john].filter(Boolean).join(' ').slice(0, 900);
             return state.talk;
         }
         function talkToday() { return new Date().toISOString().slice(0, 10); }
