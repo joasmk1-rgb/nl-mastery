@@ -213,3 +213,93 @@ THEME_ADMIN_PRODUCTIE_210;Où en est la commande ?;Hoe ver staat de bestelling?;
 THEME_ADMIN_PRODUCTIE_211;Quand sera-t-elle livrée ?;Wanneer wordt ze geleverd?;3.00
 THEME_ADMIN_PRODUCTIE_212;Nous en avons besoin demain.;We hebben ze morgen nodig.;3.00
 THEME_ADMIN_PRODUCTIE_213;C'est urgent.;Het is dringend.;3.00
+THEME_ADMIN_PRODUCTIE_214;le toit à lamelles;het lamellendak;3.50
+THEME_ADMIN_PRODUCTIE_215;les lamelles basculantes;de kantelbare lamellen;3.50
+THEME_ADMIN_PRODUCTIE_216;le toit en toile;het doekdak;3.50
+THEME_ADMIN_PRODUCTIE_217;le toit en verre;het glasdak;3.50
+THEME_ADMIN_PRODUCTIE_218;le toit fixe;het vast dak;3.50
+THEME_ADMIN_PRODUCTIE_219;les panneaux sandwich;de sandwichpanelen;3.50
+THEME_ADMIN_PRODUCTIE_220;adossé (à la façade);aangebouwd;3.50
+THEME_ADMIN_PRODUCTIE_221;autoportant;vrijstaand;3.50
+THEME_ADMIN_PRODUCTIE_222;la paroi coulissante;de schuifwand;3.50
+THEME_ADMIN_PRODUCTIE_223;le carport;de carport;3.50
+THEME_ADMIN_PRODUCTIE_224;la véranda;de veranda;3.50
+THEME_ADMIN_PRODUCTIE_225;le store de véranda;de verandazonwering;3.50
+THEME_ADMIN_PRODUCTIE_226;l'auvent, le store banne;de zonneluifel;3.50
+THEME_ADMIN_PRODUCTIE_227;le caisson du store;de luifelkast;3.50
+THEME_ADMIN_PRODUCTIE_228;la cassette;de cassette;3.50
+THEME_ADMIN_PRODUCTIE_229;le bras articulé;de knikarm;3.50
+THEME_ADMIN_PRODUCTIE_230;le coude (du bras);de elleboog;3.50
+THEME_ADMIN_PRODUCTIE_231;le lambrequin, le tablier;de volant;3.50
+THEME_ADMIN_PRODUCTIE_232;le lambrequin enroulable;de oprolbare volant;3.50
+THEME_ADMIN_PRODUCTIE_233;les câbles en acier;de staalkabels;3.50
+THEME_ADMIN_PRODUCTIE_234;l'écran en applique;de opbouwscreen;3.50
+THEME_ADMIN_PRODUCTIE_235;l'écran encastré;de inbouwscreen;3.50
+THEME_ADMIN_PRODUCTIE_236;l'écran latéral;de zij-screen;3.50
+THEME_ADMIN_PRODUCTIE_237;le guide (de screen);de geleider;3.50
+THEME_ADMIN_PRODUCTIE_238;les guides latéraux;de zijgeleiders;3.50
+THEME_ADMIN_PRODUCTIE_239;le système à fermeture éclair (ZIP);het ritssysteem;3.50
+THEME_ADMIN_PRODUCTIE_240;l'écran ZIP;de ZIP-screen;3.50
+THEME_ADMIN_PRODUCTIE_241;le paravent coupe-vent;de windblocker;3.50
+THEME_ADMIN_PRODUCTIE_242;le store enrouleur;het rolgordijn;3.50
+THEME_ADMIN_PRODUCTIE_243;la toile acrylique;het acryldoek;3.50
+THEME_ADMIN_PRODUCTIE_244;la toile occultante;het verduisterend doek;3.50
+THEME_ADMIN_PRODUCTIE_245;la couleur de toile;de doekkleur;3.50
+THEME_ADMIN_PRODUCTIE_246;la finition;de afwerking;3.50
+THEME_ADMIN_PRODUCTIE_247;la structure en aluminium;de aluminium structuur;3.50
+THEME_ADMIN_PRODUCTIE_248;l'extension télescopique;de uitschuifbare extensie;3.50
+THEME_ADMIN_PRODUCTIE_249;le support;de steun;3.50
+THEME_ADMIN_PRODUCTIE_250;la commande électrique;de elektrische bediening;3.50
+THEME_ADMIN_PRODUCTIE_251;à commande manuelle;manueel te bedienen;3.50
+THEME_ADMIN_PRODUCTIE_252;le capteur;de sensor;3.50
+THEME_ADMIN_PRODUCTIE_253;le capteur de soleil;de zonsensor;3.50
+THEME_ADMIN_PRODUCTIE_254;le capteur de pluie;de regensensor;3.50
+THEME_ADMIN_PRODUCTIE_255;l'automatisation;de automatisatie;3.50
+THEME_ADMIN_PRODUCTIE_256;le moteur Somfy;de Somfy-motor;3.50
+THEME_ADMIN_PRODUCTIE_257;le spot LED;de ledspot;3.50
+THEME_ADMIN_PRODUCTIE_258;l'éclairage;de verlichting;3.50
+THEME_ADMIN_PRODUCTIE_259;l'enceinte Bluetooth;de Bluetoothluidspreker;3.50
+THEME_ADMIN_PRODUCTIE_260;la prise de courant;het stopcontact;3.50
+THEME_ADMIN_PRODUCTIE_261;le panneau solaire avec batterie;het zonnepaneel met batterij;3.50
+THEME_ADMIN_PRODUCTIE_262;la résistance au vent;de windvastheid;3.50
+THEME_ADMIN_PRODUCTIE_263;la force du vent;de windkracht;3.50
+THEME_ADMIN_PRODUCTIE_264;les rafales de vent;de windvlagen;3.50
+THEME_ADMIN_PRODUCTIE_265;résistant à la décoloration;kleurvast;3.50
+THEME_ADMIN_PRODUCTIE_266;résistant à l'usure;slijtvast;3.50
+THEME_ADMIN_PRODUCTIE_267;résistant à la corrosion;corrosiebestendig;3.50
+THEME_ADMIN_PRODUCTIE_268;l'évacuation des eaux;de afwatering;3.50
+THEME_ADMIN_PRODUCTIE_269;l'atelier de thermolaquage;de poederlakkerij;3.50
+THEME_ADMIN_PRODUCTIE_270;l'atelier de découpe;de zagerij;3.50
+THEME_ADMIN_PRODUCTIE_271;la confection (des toiles);de confectie;3.50
+THEME_ADMIN_PRODUCTIE_272;le département montage et contrôle;de montage- en controleafdeling;3.50
+THEME_ADMIN_PRODUCTIE_273;le pré-montage;de voormontage;3.50
+THEME_ADMIN_PRODUCTIE_274;le laquage;de lakkerij;3.50
+THEME_ADMIN_PRODUCTIE_275;l'entrepôt automatisé;het volautomatisch magazijn;3.50
+THEME_ADMIN_PRODUCTIE_276;l'usine de production;de productiefabriek;3.50
+THEME_ADMIN_PRODUCTIE_277;le montage en façade;de montage aan de gevel;3.50
+THEME_ADMIN_PRODUCTIE_278;le montage au plafond;de montage aan het plafond;3.50
+THEME_ADMIN_PRODUCTIE_279;l'installation;de installatie;3.50
+THEME_ADMIN_PRODUCTIE_280;le service après-vente;de service;3.50
+THEME_ADMIN_PRODUCTIE_281;le revendeur;de dealer;3.50
+THEME_ADMIN_PRODUCTIE_282;le revendeur agréé;de erkende dealer;3.50
+THEME_ADMIN_PRODUCTIE_283;le devis sans engagement;de vrijblijvende offerte;3.50
+THEME_ADMIN_PRODUCTIE_284;la haute saison;het hoogseizoen;3.50
+THEME_ADMIN_PRODUCTIE_285;la fermeture collective;het collectief verlof;3.50
+THEME_ADMIN_PRODUCTIE_286;entièrement sur mesure;volledig op maat gemaakt;3.50
+THEME_ADMIN_PRODUCTIE_287;personnalisable;personaliseerbaar;3.50
+THEME_ADMIN_PRODUCTIE_288;les déchets de poudre;het poederafval;3.50
+THEME_ADMIN_PRODUCTIE_289;les déchets textiles;het textielafval;3.50
+THEME_ADMIN_PRODUCTIE_290;la nomenclature;de nomenclatuur;3.50
+THEME_ADMIN_PRODUCTIE_291;la fiche article;de artikelfiche;3.50
+THEME_ADMIN_PRODUCTIE_292;le mouvement de stock;de voorraadbeweging;3.50
+THEME_ADMIN_PRODUCTIE_293;le changement de système;de systeemwissel;3.50
+THEME_ADMIN_PRODUCTIE_294;prélever (en stock);picken;3.50
+THEME_ADMIN_PRODUCTIE_295;encoder (une entrée);inboeken;3.50
+THEME_ADMIN_PRODUCTIE_296;livrer (à un atelier);aanleveren;3.50
+THEME_ADMIN_PRODUCTIE_297;le département;de afdeling;3.50
+THEME_ADMIN_PRODUCTIE_298;la couleur standard;de standaardkleur;3.50
+THEME_ADMIN_PRODUCTIE_299;Peux-tu l'expliquer autrement ?;Kan je dat anders uitleggen?;3.50
+THEME_ADMIN_PRODUCTIE_300;Si je résume, ...;Als ik het samenvat, ...;3.50
+THEME_ADMIN_PRODUCTIE_301;Qui dois-je prévenir ?;Wie moet ik verwittigen?;3.50
+THEME_ADMIN_PRODUCTIE_302;Où est-ce que je trouve ça dans le système ?;Waar vind ik dat in het systeem?;3.50
+THEME_ADMIN_PRODUCTIE_303;Qu'est-ce qui a la priorité ?;Wat heeft voorrang?;3.50

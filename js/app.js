@@ -5119,6 +5119,12 @@ if (firebaseAvailable) {
                 return { title: rpSitTitle(s), roleA: 'L\'interlocuteur', roleB: 'L\'employé (toi)', welcome: rpSitAmorce(s),
                     desc: 'Situation au travail (' + (s.poste || 'logistique') + ') : ' + s.contexte + ' A est la personne qui s\'adresse à l\'employé ; B est l\'employé, qui gère bien la situation.' };
             }
+            if (launch.type === 'form') {
+                const f = FORMATION_SESSIONS.find(x => x.id === launch.id);
+                if (!f) return null;
+                return { title: f.label.replace(/^\S+\s/, ''), roleA: 'Ton formateur', roleB: 'Toi (le nouvel employé)', welcome: f.welcome, length: '24 à 32',
+                    desc: 'Séance de formation d\'un nouvel employé administratif chez un fabricant de protections solaires. A est le collègue chargé de sa formation : il explique par petits morceaux, vérifie la compréhension, fait reformuler. B est le nouvel employé, qui pose de bonnes questions et reformule. Points couverts : ' + f.points + ' Entreprise : ' + FORMATION_COMPANY + ((state.companyDossier || '').trim() ? ' Dossier : ' + state.companyDossier.trim() : '') };
+            }
             if (launch.type === 'lib') {
                 const e = rpLibFind(launch.id);
                 if (!e) return null;
@@ -11003,6 +11009,8 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <details class="rp-more" style="width:100%; max-width:520px;"><summary>Changer de métier</summary>
                     <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
                 </details>
+                ${rpJobMetier === 'admin_productie' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
+                <button class="rp-scenario-btn" onclick="formationShowHome()">🧑‍🏫 Ma formation : on t'explique le travail, en néerlandais</button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -11069,6 +11077,76 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             rpJobLiveMetier = s.metier || null;
             rpDayState = null;
             rpJobBeginSituation(s);
+        }
+
+        // ===== Ma formation (Joas, 1er novembre 2026) =====
+        // Gemini joue la personne chargée de former le nouvel employé : elle explique à l'oral, par
+        // petits morceaux, vérifie la compréhension et fait reformuler. Les vrais noms (produits,
+        // sites, ateliers, outils, ce que le responsable a expliqué) ne sont JAMAIS dans le dépôt :
+        // ils vivent dans le dossier privé state.companyDossier (compte de l'utilisateur).
+        const FORMATION_SESSIONS = [
+            { id: 'rondleiding', label: '🏭 La visite de l\'entreprise', welcome: 'Goedemorgen en welkom! Vandaag geef ik je eerst een rondleiding, zodat je weet wie wat doet. Zullen we beginnen?',
+                points: 'les sites et ce qui se fait où ; les ateliers de production dans l\'ordre du flux (découpe des profilés, laquage, confection des toiles, montage, contrôle, magasin / expédition) ; le bureau des chefs de production où travaille l\'apprenant ; la loge / le portier ; qui est qui (chef d\'équipe, responsable production, achats, logistique) ; les horaires et la pause.' },
+            { id: 'bestelling', label: '📦 Le trajet d\'une commande', welcome: 'Vandaag leg ik je uit hoe een bestelling door het bedrijf loopt, van de klant tot de levering. Ben je er klaar voor?',
+                points: 'commande du revendeur (verdeler / dealer) → encodage → ordre de production → besoin en composants (nomenclature) → commande fournisseur si manque → réception (pakbon, leveringsbon) → production à travers les ateliers → contrôle → expédition (CMR, transporteur) → facture. À chaque étape : quel document, quel système, quelle personne, et ce qui se passe si ça dérape.' },
+            { id: 'producten', label: '☀️ Les produits', welcome: 'Je moet onze producten een beetje kennen, anders begrijp je de bestellingen niet. Ik overloop ze even met jou, oké?',
+                points: 'les familles de produits (terrasoverkappingen avec toit à lamelles, toile, verre ou toit fixe ; knikarmschermen ; screens ; verandazonwering ; carports ; accessoires) et leurs composants : profielen, lamellen, doek, cassette / luifelkast, knikarm, elleboog, volant, geleiders, motor, afstandsbediening, sensoren, ledverlichting, RAL-kleur ; tout est fait sur mesure (op maat), ce qui rend chaque commande différente.' },
+            { id: 'kanban', label: '🗂️ Le kanban', welcome: 'Een groot deel van je werk draait rond kanban. Weet je al een beetje wat dat is? Ik leg het je uit.',
+                points: 'le bac et la kanbankaart ; le bac vide = signal ; ce que l\'apprenant fait du signal (encoder la recommande, vérifier le levertermijn, suivre la livraison) ; le bestelpunt et la quantité par bac ; l\'analyse kanban : ces paramètres collent-ils encore à la consommation réelle (trop haut = argent et place immobilisés, trop bas = la production s\'arrête) ; signaler les ruptures qui reviennent.' },
+            { id: 'voorraad', label: '📊 Le stock et le draaitabel', welcome: 'Elke ochtend begin je met de voorraad. Ik toon je hoe we dat opvolgen in Excel, met de draaitabel.',
+                points: 'inboeken des entrées et sorties ; stock théorique (systeem) contre stock physique (geteld) et het verschil ; le draaitabel mis à jour chaque matin (vernieuwen, filtres, par référence / atelier / semaine) ; Excel en néerlandais (VERT.ZOEKEN, SOMMEN.ALS, AANTAL.ALS, voorwaardelijke opmaak) ; une pièce passe par 3-4 étapes avant d\'arriver en stock ; repérer les ruptures et ce qui dort.' },
+            { id: 'erp', label: '💻 Le système (ERP)', welcome: 'We zijn net van systeem aan het veranderen, dus er is voorlopig wat meer manueel werk. Ik leg je uit hoe dat zit.',
+                points: 'le changement d\'ERP en cours et pourquoi il y a plus d\'encodage manuel pour l\'instant ; où trouver la fiche article (artikelnummer, referentie), les commandes, les mouvements de stock ; les rapports qui existent déjà ; l\'importance de l\'exactitude (une mauvaise référence coûte plus cher qu\'une minute de lenteur) ; faire confirmer une référence reçue par téléphone.' },
+            { id: 'verdelen', label: '⚖️ Répartir un stock qui manque', welcome: 'Ik geef je een situatie die vaak voorkomt. We hebben nog maar vier stuks in voorraad, en drie afdelingen vragen ernaar. Wat doe je?',
+                points: 'un cas concret : 4 pièces en stock, demandées par plusieurs ateliers à la fois ; ne pas répartir au hasard : date de livraison au client, commande déjà lancée en production, criticité (un atelier à l\'arrêt), ancienneté de la demande ; prévenir, en parler au chef d\'équipe ou au responsable, relancer le fournisseur. Fais d\'abord raisonner l\'apprenant, puis donne la façon de faire habituelle.' },
+            { id: 'portier', label: '🚪 Remplacer le portier', welcome: 'Soms zal je de portier vervangen als hij afwezig is. Ik leg je uit wat je dan moet doen aan de loge.',
+                points: 'accueillir un visiteur (registre, badge, consignes de sécurité, prévenir la personne attendue) ; un chauffeur qui livre (pakbon, quai, prévenir le magasin) ; un chauffeur qui vient charger ; les colis ; le téléphone (prendre un message complet) ; un visiteur francophone ; ce qu\'on ne fait jamais seul.' }
+        ];
+
+        // Connaissances publiques de l'entreprise (site du fabricant, novembre 2026) : produits,
+        // modèles, ateliers, sites. Le dossier privé complète (collègues, ce qu'on lui a expliqué).
+        const FORMATION_COMPANY = 'Fabricant familial belge de protections solaires, 100 % belge, tout fait sur mesure, vendu via un réseau de revendeurs agréés (verdelers / dealers) qui installent. Historique : bâches et zonwering depuis 1965, marque lancée en 1997 ; ancien site à Geluwe (encore utilisé), siège et production à Gullegem depuis 2013 (40 000 m² : production, magasin, bureaux), site supplémentaire sur le parc Evolis à Courtrai depuis 2024. Ateliers propres : zagerij (découpe des profilés), poederlakkerij (thermolaquage, couleurs RAL), confectie (toiles), montage- en controleafdeling ; deux magasins entièrement automatisés qui alimentent les lignes. Produits : terrasoverkappingen (pergolas aluminium, aangebouwd ou vrijstaand) à lamellendak (B160 XL, B200 XL, B250 XL, B600 S, B720), doekdak (B128, B128 Horizontal, B310), glasdak (B700, B720, B800), vast dak en sandwichpanelen (B910), avec schuifwanden (verre, lamelles bois ou alu) ; knikarmschermen séries B20 (B20, B24, B25 met volant, B27, Twinstor), B30 (B35, B38), B50 (B50, B50S, B50 XL), versions Solar (panneau et batterie) ; screens opbouw / voorzet (B1100, B1085, B2100, B1350), inbouw (B1200), ZIP-screen, windblocker ; verandazonwering B126, B127, B128, B129, Topscreen ; carport B910. Composants et options : profielen, lamellen (kantelbaar, openschuifbaar), doek (acryl, block-out), cassette / luifelkast, knikarm (Standaard, Elite, Prestige), elleboog, volant, geleiders, Somfy-motor, afstandsbediening, zon-, wind- en regensensor, ledverlichting, terrasverwarming, Bluetoothluidsprekers, stopcontacten. Haute saison de février-mars à fin juillet, fermeture collective en été. Changement d\'ERP en cours. Langue avec la hiérarchie : néerlandais ; sur le terrain, beaucoup de francophones.';
+
+        function formationPrompt(f) {
+            const dossier = (state.companyDossier || '').trim();
+            return 'Tu es la personne chargée de former l\'apprenant pendant ses premiers jours. Il vient d\'être engagé comme administratief medewerker (soutien administratif à la production, au stock et aux achats) chez un fabricant de protections solaires (pergolas, stores, screens). Tu es un collègue expérimenté, bienveillant mais réel.\n\n' +
+                'Thème de la séance : ' + f.label.replace(/^\S+\s/, '') + '.\nPoints à couvrir, dans un ordre naturel : ' + f.points + '\n\n' +
+                'Ce que tu sais de l\'entreprise : ' + FORMATION_COMPANY + '\n\n' +
+                (dossier ? 'En plus (dossier privé de l\'apprenant : collègues, outils, ce que le responsable lui a déjà expliqué ; n\'invente rien qui le contredise) :\n"""' + dossier + '"""\n\n' : '') +
+                'Tu as ouvert la séance en disant : """' + f.welcome + '"""\n\n' +
+                'Façon de faire : exclusivement en néerlandais de Flandre, naturel, au débit d\'un collègue, avec le vocabulaire exact du métier. Explique par petits morceaux (2 à 4 phrases par réplique), puis vérifie la compréhension : une question, une demande de reformuler avec ses mots, ou un petit cas concret (« Stel: … »). S\'il ne comprend pas, réexplique autrement, plus simplement, avec un exemple. Réponds à ses questions. S\'il parle français, tu le comprends : réponds en néerlandais simple (la langue de travail avec la hiérarchie est le néerlandais). Ne fais pas de cours de langue. Quand tous les points sont couverts, fais un court récapitulatif et conclus.';
+        }
+
+        function formationShowHome() {
+            const box = document.getElementById('rp-scenario-list');
+            const filled = !!(state.companyDossier || '').trim();
+            box.innerHTML = `
+                <button class="back-btn" onclick="rpShowJobHome()">← Mon travail</button>
+                <div class="rp-group-title">🧑‍🏫 Ma formation</div>
+                <p class="rp-real-hint">La personne chargée de ta formation t'explique le travail en néerlandais, vérifie que tu as compris et te fait reformuler. Tu peux poser tes questions, même en français. 👂 = écouter sans participer.</p>
+                <button class="rp-scenario-btn rp-profile-btn" onclick="formationEditDossier()">🏭 Mon entreprise <small>(privé, facultatif : ${filled ? 'rempli' : 'vide'})</small></button>
+                ${filled ? '' : '<p class="rp-real-hint">⚠️ Sans dossier, le formateur invente des détails génériques. Colle-y les vrais produits, sites, ateliers et ce qu\'on t\'a déjà expliqué.</p>'}
+                ${FORMATION_SESSIONS.map(f => rpPrepRow(`<button class="rp-scenario-btn" onclick="formationStart('${f.id}')">${rpEscapeHtml(f.label)}</button>`, 'form:' + f.id, f.label, { type: 'form', id: f.id })).join('')}`;
+        }
+
+        function formationEditDossier() {
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <button class="back-btn" onclick="formationShowHome()">← Ma formation</button>
+                <div class="rp-group-title">🏭 Mon entreprise</div>
+                <p class="rp-real-hint">Le formateur connaît déjà les produits, les sites et les ateliers. Ajoute ici ce qui est personnel : collègues, outils, ce qu'on t'a déjà expliqué. C'est privé : enregistré dans ton compte uniquement, jamais publié.</p>
+                <textarea id="form-dossier-text" class="rp-profile-text" rows="14">${rpEscapeHtml(state.companyDossier || '')}</textarea>
+                <button class="btn btn-green" onclick="state.companyDossier = document.getElementById('form-dossier-text').value; save(); formationShowHome();">💾 Enregistrer</button>`;
+        }
+
+        function formationStart(id) {
+            const f = FORMATION_SESSIONS.find(x => x.id === id);
+            if (!f || !rpJobRequireGemini()) return;
+            rpJobLiveMetier = 'admin_productie';
+            rpDayState = null;
+            rpBeginScenario({ id: 'form_' + f.id, lang: 'nl', label: f.label, welcome: f.welcome, prompt: formationPrompt(f) });
+            const banner = document.getElementById('rp-mode-banner');
+            banner.style.display = '';
+            banner.innerHTML = `<div class="rp-job-banner"><div class="rp-iv-label" style="margin-top:0;">🧑‍🏫 Ma formation</div><div>Écoute, pose tes questions, reformule avec tes mots. Si tu ne comprends pas, dis-le : « Kan je dat anders uitleggen? »</div></div>`;
         }
 
         function rpStartDay(journeeIndex) {
