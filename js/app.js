@@ -6680,6 +6680,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.querySelectorAll('.header-profil-btn').forEach(b => b.classList.remove('active'));
             if (id === 'nav-profil') { const btn = document.getElementById(id); if (btn) btn.classList.add('active'); }
             navMode = id;
+            document.body.dataset.mode = { 'nav-vocab': 'vocab', 'nav-apprendre': 'cours', 'nav-pratiquer': 'parler' }[id] || 'home';
             navBarRender(sub);
             // showLesson()/showExercise() n'appellent jamais setActiveNav (ce sont des sous-vues
             // atteintes depuis Apprendre) : ce point ne se déclenche donc que lorsque l'utilisateur
