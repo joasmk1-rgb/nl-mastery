@@ -2096,6 +2096,67 @@ if (firebaseAvailable) {
             if (row) row.innerText = voiceSpeedLabel();
         }
 
+        // ===== Choix des voix (Joas, 1er novembre 2026 : « les voix sont robotiques ») =====
+        // Les voix sont celles de l'appareil. L'app prend la MEILLEURE disponible (« Natural »,
+        // « Neural », « Online », « Premium », « Améliorée », Google…) plutôt que la première trouvée,
+        // et on peut en choisir une autre dans le Profil (state.settings.voices[prefixe] = nom).
+        function voiceRank(v) {
+            const n = String(v.name || '');
+            let s = 0;
+            if (/natural|neural/i.test(n)) s += 60;
+            if (/online/i.test(n)) s += 15;
+            if (/premium|enhanced|améliorée|verbeterd|mejorada|high quality/i.test(n)) s += 45;
+            if (/google/i.test(n)) s += 25;
+            if (v.localService === false) s += 5;
+            if (/compact|espeak/i.test(n)) s -= 30;
+            return s;
+        }
+        function voicesFor(prefix) {
+            if (!('speechSynthesis' in window)) return [];
+            return window.speechSynthesis.getVoices().filter(v => String(v.lang).toLowerCase().startsWith(prefix)).sort((a, b) => voiceRank(b) - voiceRank(a));
+        }
+        function bestVoice(prefix) {
+            const list = voicesFor(prefix);
+            const chosen = state.settings && state.settings.voices && state.settings.voices[prefix];
+            return (chosen && list.find(v => v.name === chosen)) || list[0] || null;
+        }
+        function studyVoice() { return bestVoice(studyLang().voixPrefixe); }
+        function frVoice() { return bestVoice('fr'); }
+        function voicePickerToggle() {
+            const box = document.getElementById('profil-voice-box');
+            if (!box) return;
+            if (box.innerHTML) { box.innerHTML = ''; return; }
+            voicePickerRender();
+        }
+        function voicePickerRender() {
+            const box = document.getElementById('profil-voice-box');
+            if (!box) return;
+            const block = (prefix, label, sample) => {
+                const list = voicesFor(prefix), cur = bestVoice(prefix);
+                if (!list.length) return `<p class="report-meta">${label} : aucune voix installée sur cet appareil.</p>`;
+                return `<div class="conj-audio-label">${label}</div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <select class="prof-select" style="flex:1;" onchange="voicePick('${prefix}', this.value)">${list.map(v => `<option value="${rpEscapeHtml(v.name)}"${cur && v.name === cur.name ? ' selected' : ''}>${rpEscapeHtml(v.name)}${voiceRank(v) >= 40 ? ' ★' : ''}</option>`).join('')}</select>
+                        <button type="button" class="rp-coach-btn" onclick="conjAudioSpeak('${sample}', '${prefix === 'fr' ? 'fr' : 'nl'}', 0.95)">▶️</button>
+                    </div>`;
+            };
+            const samples = { nl: 'Goedemorgen, hoe gaat het met jou?', en: 'Good morning, how are you today?', es: 'Buenos días, ¿cómo estás?' };
+            const sp = studyLang().voixPrefixe;
+            box.innerHTML = `<div class="conj-card" style="text-align:left;">
+                ${block(sp, '🗣️ Voix de la langue étudiée', (samples[sp] || samples.nl).replace(/'/g, "\\'"))}
+                ${block('fr', '🇫🇷 Voix française', "Bonjour, comment ça va aujourd\\'hui ?")}
+                <p class="report-meta">★ = voix de meilleure qualité. Pour des voix plus naturelles : sur Android, télécharge les voix du moteur Google (Paramètres → Synthèse vocale) ; sur iPhone, une voix « Améliorée » ou « Premium » (Accessibilité → Contenu énoncé) ; sur PC, ouvre l'app dans Microsoft Edge (voix « Natural »).</p>
+            </div>`;
+        }
+        function voicePick(prefix, name) {
+            if (!state.settings) state.settings = {};
+            if (!state.settings.voices) state.settings.voices = {};
+            state.settings.voices[prefix] = name;
+            save();
+            if (prefix !== 'fr') rpDutchVoice = studyVoice();
+        }
+        if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', () => { if (document.getElementById('profil-voice-box') && document.getElementById('profil-voice-box').innerHTML) voicePickerRender(); });
+
         function speakNL(text) {
             if (!('speechSynthesis' in window) || !text) return;
             // Pour la voix, on retire aussi les emojis, que certaines voix décrivent à haute voix.
@@ -2104,7 +2165,8 @@ if (firebaseAvailable) {
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = studyLang().ttsLang;
-            if (typeof rpDutchVoice !== 'undefined' && rpDutchVoice) utterance.voice = rpDutchVoice;
+            const sv = studyVoice();
+            if (sv) utterance.voice = sv;
             utterance.rate = 0.95 * voiceSpeed();
             window.speechSynthesis.speak(utterance);
         }
@@ -4381,10 +4443,8 @@ if (firebaseAvailable) {
                 const u = new SpeechSynthesisUtterance(speechBlanks(stripMarkdown(text)));
                 u.lang = lang === 'fr' ? 'fr-FR' : studyLang().ttsLang;
                 const voices = window.speechSynthesis.getVoices();
-                const nlVoices = voices.filter(x => x.lang.toLowerCase().startsWith(studyLang().voixPrefixe));
-                let voice = lang === 'fr'
-                    ? voices.find(x => x.lang.toLowerCase().startsWith('fr'))
-                    : (rpDutchVoice || nlVoices[0]);
+                const nlVoices = voicesFor(studyLang().voixPrefixe);
+                let voice = lang === 'fr' ? frVoice() : studyVoice();
                 if (lang !== 'fr' && opt && opt.speaker === 1) {
                     const other = nlVoices.find(x => x !== voice);
                     if (other) voice = other; else u.pitch = 0.75;
@@ -7251,6 +7311,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 </div>
                 <div class="profil-menu">
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="voicePickerToggle()"><span class="pm-icon">🗣️</span><span>Voix</span><span class="pm-chevron">›</span></div>
+                    <div id="profil-voice-box"></div>
                     <div class="profil-menu-row" onclick="micModeToggle()"><span class="pm-icon">🎤</span><span>Micro</span><span class="pm-chevron" id="profil-mic-val">${micAuto() ? 'Mains libres' : 'Je touche pour parler'}</span></div>
                     <div class="profil-menu-row" onclick="voiceSpeedCycle()"><span class="pm-icon">⏩</span><span>Vitesse des voix</span><span class="pm-chevron" id="profil-speed-val">${voiceSpeedLabel()}</span></div>
                     <div class="profil-menu-row" onclick="showProgress()"><span class="pm-icon">🌱</span><span>Comment progresser</span><span class="pm-chevron">›</span></div>
@@ -8011,7 +8073,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!('speechSynthesis' in window)) return;
             const findVoice = () => {
                 const voices = window.speechSynthesis.getVoices();
-                rpDutchVoice = voices.find(v => v.lang.toLowerCase().startsWith(studyLang().voixPrefixe)) || null;
+                rpDutchVoice = studyVoice();
                 const warningDiv = document.getElementById('rp-voice-warning');
                 if (!warningDiv) return;
                 if (!rpDutchVoice) {
