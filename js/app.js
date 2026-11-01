@@ -4606,7 +4606,7 @@ if (firebaseAvailable) {
 
         // Une écoute courte, sur une instance de reconnaissance dédiée (non continue : elle s'arrête
         // d'elle-même après une phrase), distincte de celle du jeu de rôle.
-        function conjAudioListen(lang) {
+        function conjAudioListen(lang, ms) {
             return new Promise(resolve => {
                 if (!window.SpeechRecognition) return resolve(null);
                 if (rpIsRecording && rpRecognition) rpRecognition.stop();
@@ -4624,7 +4624,7 @@ if (firebaseAvailable) {
                 };
                 rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') heard.denied = true; finish(); };
                 rec.onend = finish;
-                setTimeout(() => { try { rec.abort(); } catch (e) {} finish(); }, 7000);
+                setTimeout(() => { try { rec.abort(); } catch (e) {} finish(); }, ms || 7000);
                 try { rec.start(); } catch (e) { finish(); }
             });
         }
@@ -6644,14 +6644,15 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 { k: 'discuter', icon: '💬', label: 'Discuter', go: 'showTalk()' },
                 { k: 'travail', icon: '💼', label: 'Travail', go: "showRoleplay('travail')" },
                 { k: 'ecouter', icon: '👂', label: 'Écouter', go: 'showListen()' },
-                { k: 'dire', icon: '💭', label: studyLangCode() === 'nl' ? 'Dis-le' : `Dis-le en ${studyLang().nom}`, go: 'showSayIt()' }
+                { k: 'dire', icon: '💭', label: studyLangCode() === 'nl' ? 'Dis-le' : `Dis-le en ${studyLang().nom}`, go: 'showSayIt()' },
+                { k: 'voiture', icon: '🚗', label: 'Voiture', go: 'showCar()' }
             ]
         };
         const NAV_VIEW_TAB = {
             'conjugaison-view': 'train', 'conj-training-view': 'train', 'vocabcat-view': 'mots', 'wordlist-view': 'mots',
             'memory-view': 'jeux', 'anagram-view': 'jeux', 'ta-select-view': 'jeux', 'timeattack-view': 'jeux', 'swipe-view': 'jeux', 'swipe-select-view': 'jeux',
             'apprendre-view': 'parcours', 'modguide-view': 'parcours', 'modrp-view': 'parcours', 'lesson-view': 'parcours', 'prof-view': 'prof', 'comprendre-view': 'grammaire', 'ordre-view': 'ordre',
-            'talk-view': 'discuter', 'roleplay-view': 'travail', 'replay-view': 'travail', 'prep-view': 'travail', 'tutor-view': 'travail', 'listen-view': 'ecouter', 'scene-view': 'ecouter'
+            'talk-view': 'discuter', 'roleplay-view': 'travail', 'replay-view': 'travail', 'prep-view': 'travail', 'tutor-view': 'travail', 'listen-view': 'ecouter', 'scene-view': 'ecouter', 'car-view': 'voiture'
         };
         let navMode = 'nav-home';
         function navBarRender(sub) {
@@ -6662,7 +6663,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!tabs) { bar.innerHTML = ''; return; }
             if (studyLangCode() !== 'nl') {
                 const allowed = navMode === 'nav-apprendre' ? new Set(['prof'])
-                    : navMode === 'nav-pratiquer' ? new Set(['discuter', 'ecouter', 'dire'])
+                    : navMode === 'nav-pratiquer' ? new Set(['discuter', 'ecouter', 'dire', 'voiture'])
                         : new Set();
                 tabs = tabs.filter(t => allowed.has(t.k));
             }
@@ -17013,6 +17014,214 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             </div>`;
         }
 
+        // ===== Mode voiture (1er novembre 2026) =====
+        // Joas : pratiquer en conduisant, sans regarder ni toucher l'écran. Un seul écran à gros
+        // boutons ; tout est dit ; on répond à voix haute ; on pilote à la voix (« volgende »,
+        // « nog eens », « langzamer », « weet ik niet », « stop »). 🔁 Répéter (français, puis
+        // néerlandais, il répète, l'app vérifie), 🧠 Traduire de tête (français, il le dit en
+        // néerlandais, puis la bonne version), 🎧 Leçon (dialogues du module en cours). « Laisse-toi
+        // porter » alterne Répéter et Traduire par séries de 5 pendant 20 min. Phrases (carPool) :
+        // mes corrections, mes phrases, mots à revoir, mots du jour, dialogues du module en cours.
+        // Rien n'est compté dans les statistiques. Le micro du navigateur ne marche qu'écran allumé.
+        let car = null;
+        const CAR_CMD = {
+            stop: /^(stop|stoppen|arrete|halt|einde)\b/,
+            next: /\b(volgende|verder|next|suivant|passe|overslaan)\b/,
+            again: /\b(nog eens|nog een keer|herhaal|opnieuw|repeat|repete)\b/,
+            slow: /\b(langzamer|trager|slower|lentement)\b/,
+            dunno: /\b(weet (ik )?(het )?niet|geen idee|je sais pas)\b/
+        };
+        function carCmd(heard) {
+            const t = normalize((heard || []).join(' | '));
+            return Object.keys(CAR_CMD).find(k => CAR_CMD[k].test(t)) || null;
+        }
+        function carCurrentModule() {
+            const done = id => { const s = modRpState(id); return !!(s.finalResult && s.finalResult.passed); };
+            return MODRP_IDS.find(id => modRpData[id] && !done(id)) || MODRP_IDS.find(id => modRpData[id]);
+        }
+        function carPool() {
+            const seen = new Set(), out = [];
+            const add = (nl, fr) => {
+                nl = String(nl || '').trim(); fr = String(fr || '').trim();
+                const k = normalize(nl);
+                if (!nl || !fr || nl.length < 2 || seen.has(k)) return;
+                seen.add(k); out.push({ nl, fr });
+            };
+            const lists = state.customLists || {};
+            const byId = id => fullDb.find(i => i.id === id);
+            [LIVE_WORDS_LIST, SAY_LIST].forEach(L => (lists[L] || []).slice(-25).reverse().forEach(id => { const i = byId(id); if (i) add(i.nl, i.fr); }));
+            routineRevoirItems().slice(0, 15).forEach(i => add(i.nl, i.fr));
+            (routineState().newWords || []).forEach(id => { const i = byId(id); if (i) add(i.nl, i.fr); });
+            const mid = carCurrentModule(), m = mid && modRpData[mid];
+            if (m) m.etapes.forEach(e => (e.dialogue || []).forEach(d => add(d.nl, d.fr)));
+            // Le plus utile d'abord (mélangé pour ne pas toujours commencer pareil), puis le reste.
+            const head = out.slice(0, 30).sort(() => Math.random() - 0.5), tail = out.slice(30).sort(() => Math.random() - 0.5);
+            return head.concat(tail);
+        }
+        async function showCar() {
+            carStop();
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            let v = document.getElementById('car-view');
+            if (!v) {
+                v = document.createElement('div');
+                v.id = 'car-view';
+                v.className = 'view';
+                const ref = document.getElementById('listen-view');
+                ref.parentNode.insertBefore(v, ref);
+            }
+            v.classList.add('active');
+            setActiveNav('nav-pratiquer', 'voiture');
+            if (studyLangCode() === 'nl') await modRpLoadAll();
+            const n = carPool().length, m = modRpData[carCurrentModule()];
+            v.innerHTML = `<div class="car-wrap">
+                <h2 style="margin-bottom:4px;">🚗 En voiture</h2>
+                <p class="section-subtitle" style="margin-top:0;">Tout est dit, tu réponds à voix haute. Téléphone sur son support, écran allumé, son sur la voiture. Pendant l'écoute, dis <b>volgende</b> (suivant), <b>nog eens</b> (répète), <b>langzamer</b> (plus lent), <b>weet ik niet</b> ou <b>stop</b>.</p>
+                ${window.SpeechRecognition ? '' : `<div class="prof-warn">Ce navigateur n'a pas de reconnaissance vocale : ouvre l'app dans Chrome.</div>`}
+                <div id="car-live" class="car-live" style="display:none;"></div>
+                <div id="car-menu" class="car-menu">
+                    <button class="car-btn car-go" onclick="carStart('porter')">▶️ Laisse-toi porter<small>20 min : répéter, puis traduire</small></button>
+                    <button class="car-btn" onclick="carStart('repeter')">🔁 Répéter des phrases<small>${n} phrases et mots pour toi</small></button>
+                    <button class="car-btn" onclick="carStart('traduire')">🧠 Traduire de tête<small>le français, tu le dis en ${studyLang().nom}</small></button>
+                    ${m ? `<button class="car-btn" onclick="carStart('lecon')">🎧 Écouter la leçon<small>${rpEscapeHtml(m.titre)}</small></button>` : ''}
+                </div>
+            </div>`;
+        }
+        function carActive(r) { const v = document.getElementById('car-view'); return car === r && !r.stop && !!v && v.classList.contains('active'); }
+        function carStop() {
+            if (!car) return;
+            car.stop = true;
+            try { window.speechSynthesis.cancel(); } catch (e) { /* pas grave */ }
+            try { if (car.wakeLock) car.wakeLock.release(); } catch (e) { /* pas grave */ }
+            car = null;
+        }
+        function carShow(html) {
+            const live = document.getElementById('car-live'), menu = document.getElementById('car-menu');
+            if (menu) menu.style.display = 'none';
+            if (live) { live.style.display = ''; live.innerHTML = html + `<button class="car-btn car-stop" onclick="carEnd()">⏹ Arrêter</button>`; }
+        }
+        function carEnd() {
+            const r = car;
+            carStop();
+            showCar();
+            if (r && (r.done || r.mode === 'lecon')) carSaySummary(r);
+        }
+        async function carSay(r, text, lang, slow) {
+            if (!carActive(r)) return;
+            await conjAudioSpeak(text, lang, (lang === 'fr' ? 1 : 0.95) * (slow || r.slow ? 0.8 : 1));
+        }
+        // Écoute courte ; renvoie { heard, cmd } (cmd = commande vocale reconnue).
+        async function carListen(r, ms) {
+            if (!carActive(r)) return { heard: [], cmd: 'stop' };
+            await new Promise(res => setTimeout(res, 350)); // la voix se tait vraiment
+            const heard = (await conjAudioListen(studyLang().micLang, ms)) || [];
+            if (!carActive(r)) return { heard: [], cmd: 'stop' };
+            const cmd = carCmd(heard);
+            if (cmd === 'slow') { r.slow = true; await carSay(r, 'Oké, langzamer.', 'nl'); }
+            if (cmd === 'stop') carEnd();
+            return { heard, cmd };
+        }
+        function carMatch(heard, nl) { return heard.some(h => rpSpeechMatch(h, nl) || evaluateAnswer(h, nl).status !== 'wrong'); }
+        async function carStart(mode) {
+            carStop();
+            const r = car = { mode, stop: false, slow: false, done: 0, ok: 0, start: Date.now(), until: mode === 'porter' ? Date.now() + 20 * 60000 : 0 };
+            try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
+            if (mode === 'lecon') return carLesson(r);
+            const pool = carPool();
+            if (!pool.length) { carShow('<p>Pas encore de phrases : fais une routine ou un module, puis reviens.</p>'); await carSay(r, "Je n'ai pas encore de phrases pour toi. Fais d'abord une routine ou un module.", 'fr'); return; }
+            await carSay(r, mode === 'traduire' ? `Je te dis une phrase en français, tu la dis en ${studyLang().nom}.` : mode === 'repeter' ? `Je te dis la phrase en français puis en ${studyLang().nom}. Tu répètes.` : "C'est parti pour vingt minutes. D'abord tu répètes, puis tu traduis de tête.", 'fr');
+            let i = 0;
+            while (carActive(r)) {
+                if (r.until && Date.now() > r.until) break;
+                if (!r.until && i >= Math.min(pool.length, 20)) break;
+                const item = pool[i % pool.length];
+                const how = mode === 'porter' ? (Math.floor(i / 5) % 2 ? 'traduire' : 'repeter') : mode;
+                if (mode === 'porter' && i && i % 5 === 0) await carSay(r, how === 'traduire' ? 'Maintenant, tu traduis.' : 'Maintenant, tu répètes.', 'fr');
+                const res = how === 'traduire' ? await carTranslate(r, item) : await carRepeat(r, item);
+                if (res === 'stop') return;
+                i++;
+            }
+            if (car === r) carEnd();
+        }
+        async function carRepeat(r, item) {
+            let again = 0;
+            for (let tries = 0; tries < 2 && again < 3; tries++) {
+                carShow(`<div class="car-fr">${rpEscapeHtml(item.fr)}</div><div class="car-nl">${rpEscapeHtml(item.nl)}</div>`);
+                if (tries === 0 && !again) await carSay(r, item.fr, 'fr');
+                await carSay(r, item.nl, 'nl', tries > 0);
+                const { heard, cmd } = await carListen(r, 6000);
+                if (!carActive(r)) return 'stop';
+                if (cmd === 'next') break;
+                if (cmd === 'again' || cmd === 'slow') { tries--; again++; continue; }
+                if (heard.length && carMatch(heard, item.nl)) { r.ok++; await carSay(r, ['Goed!', 'Perfect!', 'Heel goed!'][Math.floor(Math.random() * 3)], 'nl'); break; }
+                if (heard.length && tries === 0) await carSay(r, 'Nog eens, rustig.', 'nl');
+            }
+            r.done++;
+        }
+        async function carTranslate(r, item) {
+            carShow(`<div class="car-fr">${rpEscapeHtml(item.fr)}</div><div class="car-nl car-hide">…</div>`);
+            await carSay(r, item.fr, 'fr');
+            let { heard, cmd } = await carListen(r, 9000);
+            if (!carActive(r)) return 'stop';
+            if (cmd === 'again' || cmd === 'slow') {
+                await carSay(r, item.fr, 'fr', true);
+                ({ heard, cmd } = await carListen(r, 9000));
+                if (!carActive(r)) return 'stop';
+            }
+            let ok = false, version = '';
+            if (heard.length && cmd !== 'dunno' && cmd !== 'next') {
+                ok = carMatch(heard, item.nl);
+                if (!ok && GeminiService.isAvailable()) {
+                    const j = await routineTranslateJudge({ fr: item.fr, ex: item.nl, target: item.nl, kind: 'phrase' }, heard[0]);
+                    if (!carActive(r)) return 'stop';
+                    ok = !!j.ok;
+                    if (!ok && j.version) version = j.version;
+                }
+            }
+            carShow(`<div class="car-fr">${rpEscapeHtml(item.fr)}</div><div class="car-nl">${rpEscapeHtml(item.nl)}</div>${heard[0] ? `<div class="car-heard">${ok ? '✅' : '🗣️'} ${rpEscapeHtml(heard[0])}</div>` : ''}`);
+            if (ok) {
+                r.ok++;
+                await carSay(r, 'Juist!', 'nl');
+                if (normalize(heard[0]) !== normalize(item.nl)) { await carSay(r, 'On dit aussi :', 'fr'); await carSay(r, item.nl, 'nl'); }
+            } else {
+                if (version && normalize(version) !== normalize(item.nl)) { await carSay(r, 'À ta manière :', 'fr'); await carSay(r, version, 'nl'); await carSay(r, 'ou :', 'fr'); }
+                else await carSay(r, heard.length && cmd !== 'dunno' && cmd !== 'next' ? 'On dit :' : 'La réponse :', 'fr');
+                await carSay(r, item.nl, 'nl');
+                await carListen(r, 5000); // il le redit une fois, sans jugement
+                if (!carActive(r)) return 'stop';
+            }
+            r.done++;
+        }
+        async function carLesson(r) {
+            const m = modRpData[carCurrentModule()];
+            if (!m) { carShow('<p>Module introuvable.</p>'); return; }
+            const line = d => conjAudioSpeak(d.nl, 'nl', r.slow ? 0.8 : 0.95, { speaker: d.qui === 'B' ? 1 : 0 });
+            await carSay(r, 'Leçon : ' + m.titre + '.', 'fr');
+            for (const e of m.etapes) {
+                if (!carActive(r)) return;
+                if (!(e.dialogue || []).length) continue;
+                carShow(`<div class="car-fr">${rpEscapeHtml(m.titre)}</div><div class="car-nl">${rpEscapeHtml(e.titre)}</div>`);
+                await carSay(r, e.titre + '.', 'fr');
+                if (e.intro) await carSay(r, e.intro, 'fr');
+                for (const d of e.dialogue) {
+                    if (!carActive(r)) return;
+                    carShow(`<div class="car-fr">${rpEscapeHtml(d.fr)}</div><div class="car-nl">${rpEscapeHtml(d.nl)}</div>`);
+                    await line(d);
+                    await carSay(r, d.fr, 'fr');
+                }
+                if (!carActive(r)) return;
+                await carSay(r, 'Encore une fois, tout en néerlandais.', 'fr');
+                for (const d of e.dialogue) { if (!carActive(r)) return; await line(d); }
+                r.done++;
+            }
+            if (car === r) carEnd();
+        }
+        function carSaySummary(r) {
+            const min = Math.max(1, Math.round((Date.now() - r.start) / 60000));
+            const txt = r.mode === 'lecon' ? `Leçon écoutée en ${min} minute${min > 1 ? 's' : ''}. Bonne route !`
+                : `${r.done} phrase${r.done > 1 ? 's' : ''} en ${min} minute${min > 1 ? 's' : ''}, ${r.ok} réussie${r.ok > 1 ? 's' : ''}. Bonne route !`;
+            conjAudioSpeak(txt, 'fr', 1);
+        }
+
         // ===== Compagnon vocal (ton tuteur, partout) =====
         // Un micro flottant sur tous les écrans : on parle (ou écrit) au compagnon, en français ou en
         // néerlandais ; il ouvre l'activité demandée, répond aux questions de langue, ou propose la
@@ -17032,7 +17241,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         function buddyPartner() { return TALK_PARTNERS[buddySettings().partner]; }
 
         // Écrans qui ont déjà leur propre micro : le bouton flottant s'y efface.
-        const BUDDY_HIDDEN_VIEWS = ['routine-view', 'listen-view', 'tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
+        const BUDDY_HIDDEN_VIEWS = ['car-view', 'routine-view', 'listen-view', 'tutor-view', 'talk-view', 'replay-view', 'prof-view', 'modguide-view', 'roleplay-view', 'scene-view', 'compte-view', 'onboarding-view'];
         function buddyRefreshFab() {
             const fab = document.getElementById('buddy-fab');
             if (!fab) return;
@@ -17053,6 +17262,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         const BUDDY_CATS = { verbes: 'VERBES_NL', noms: 'NOMS_NL', adjectifs: 'ADJECTIFS_NL', adverbes: 'ADVERBES_NL', expressions: 'EXPRESSIONS_NL', locutions: 'LOCUTIONS_NL', 'mots-outils': 'MOTS_OUTILS_NL' };
         const BUDDY_ACTIONS = {
             accueil: { desc: "écran d'accueil", run: () => showHome() },
+            voiture: { desc: 'mode voiture : pratiquer en conduisant, tout à la voix (répéter, traduire de tête, écouter la leçon)', run: () => showCar() },
             vocabulaire: { desc: 'onglet Vocabulaire (choix des catégories de mots)', run: () => showVocab() },
             categorie: { desc: "fiche d'une catégorie de mots ; params.categorie parmi " + Object.keys(BUDDY_CATS).join(', ') + " ; params.entrainer=true pour lancer l'entraînement", run: p => { const f = BUDDY_CATS[p.categorie]; if (!f) return showVocab(); vocabOpenCat('file', f); if (p.entrainer) vocabTrain(); } },
             erreurs: { desc: 'réviser les mots ratés', check: () => routineRevoirItems().length ? null : "Tu n'as aucun mot raté à revoir pour l'instant, bravo ! On fait autre chose ?", run: () => { studyReturnFn = showHome; startRevision(); } },

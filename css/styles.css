@@ -1005,3 +1005,17 @@
         .view.active > * { animation: viewIn .18s ease; }
         @keyframes viewIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+        /* ===== Mode voiture : très gros, lisible d'un coup d'œil ===== */
+        .car-menu { display: flex; flex-direction: column; gap: 12px; }
+        .car-btn { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; min-height: 76px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 18px; background: var(--card-bg); color: var(--text); font-size: 1.25rem; font-weight: 700; text-align: left; box-shadow: var(--shadow-sm); cursor: pointer; font-family: inherit; }
+        .car-btn small { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+        .car-btn:active { transform: scale(0.985); }
+        .car-go { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .car-go small { color: rgba(255,255,255,0.85); }
+        .car-live { display: flex; flex-direction: column; gap: 14px; text-align: center; padding-top: 8px; }
+        .car-fr { font-size: 1.3rem; color: var(--text-secondary); }
+        .car-nl { font-size: 1.9rem; font-weight: 700; line-height: 1.25; }
+        .car-hide { opacity: 0.3; }
+        .car-heard { font-size: 1.05rem; color: var(--text-secondary); }
+        .car-stop { align-items: center; min-height: 90px; margin-top: 20px; background: var(--wrong); border-color: var(--wrong); color: #fff; font-size: 1.4rem; }
