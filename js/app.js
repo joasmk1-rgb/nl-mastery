@@ -13902,7 +13902,22 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                     <div class="conj-audio-label">Micro</div>
                     <div class="conj-audio-chips">${chip(s.handsfree, set('handsfree', true), '🗣️ Mains libres')}${chip(!s.handsfree, set('handsfree', false), '👆 Je touche le micro')}</div>
                     <button class="btn btn-green" style="margin-top:10px;" onclick="rpReplayStart(${index})">▶️ Commencer</button>
-                </div>`;
+                </div>
+                <button class="btn btn-gray" style="margin-top:10px; width:100%;" onclick="rpReplayListen(${index})">👂 Écouter sans participer</button>`;
+        }
+
+        // Écoute seule (Joas, 1er novembre 2026 : habituer l'oreille au débit) : l'entretien tel
+        // quel, recruteur(s) mot pour mot puis la vraie réponse du candidat, dans le lecteur de scènes.
+        function rpReplayListen(index) {
+            const d = rpRealData.dialogues[index];
+            const lines = [];
+            d.turns.forEach(t => {
+                if (t.nl_original) lines.push({ qui: 'A', nl: t.nl_original, fr: t.fr_cue || '', who: t.speaker || 'Le recruteur' });
+                if (t.candidate_reply) lines.push({ qui: 'B', nl: t.candidate_reply, fr: '' });
+            });
+            sceneOpen({ title: d.label, subtitle: 'L\'entretien réel, du début à la fin : les vraies phrases du recruteur et tes vraies réponses.', lines, roles: { A: 'Le recruteur', B: 'Toi (vraie réponse)' }, back: () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('replay-view').classList.add('active'); setActiveNav('nav-pratiquer'); rpReplaySetup(index); } });
+            lines.forEach((l, i) => { if (l.who) { const w = document.querySelector('#scene-line-' + i + ' .scene-who'); if (w) w.textContent = l.who; } });
+            setActiveNav('nav-pratiquer');
         }
 
         function rpReplayStart(index) {
