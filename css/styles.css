@@ -1019,3 +1019,17 @@
         .car-hide { opacity: 0.3; }
         .car-heard { font-size: 1.05rem; color: var(--text-secondary); }
         .car-stop { align-items: center; min-height: 90px; margin-top: 20px; background: var(--wrong); border-color: var(--wrong); color: #fff; font-size: 1.4rem; }
+
+/* Tableau de bord admin */
+#admin-dash h4 { margin: 18px 0 6px; }
+.admin-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }
+.admin-kpis > div { background: var(--card-bg, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 10px; text-align: center; }
+.admin-kpis b { display: block; font-size: 1.4rem; }
+.admin-kpis small, .admin-bar small, .admin-line small { color: var(--text-secondary); }
+.admin-bar { display: grid; grid-template-columns: 1fr; gap: 2px; margin: 6px 0; }
+.admin-bar-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.admin-bar-track > div { height: 100%; background: var(--primary); }
+.admin-line { margin: 4px 0; }
+.admin-user-card { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; margin: 6px 0; }
+.admin-user-card summary { cursor: pointer; }
+.admin-user-body > div { margin-top: 8px; }

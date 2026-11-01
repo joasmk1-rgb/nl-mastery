@@ -1729,6 +1729,137 @@ async function adminToggleBeta(uid, newVal) {
     }
 }
 
+// ===== Usage et tableau de bord admin (Joas, 1er novembre 2026 : « je suis le tuteur des autres
+// comptes : voir ce qu'ils font, les modes les plus utilisés, les plaintes, les erreurs courantes ») =====
+// Chaque appareil compte, par jour, le temps passé sur chaque écran et les ouvertures
+// (state.usage.days[AAAA-MM-JJ][vue] = { s, o }), les appels Gemini (g) et les échecs Gemini (ge).
+// Rangé dans la progression (synchro normale, 60 jours gardés) ; seul l'admin le lit, avec le reste.
+const USAGE_LABELS = {
+    'home-view': '🏠 Accueil', 'routine-view': '☀️ Routine / entraînements', 'vocab-view': '📚 Vocabulaire', 'vocabcat-view': '📚 Fiche de catégorie',
+    'wordlist-view': '📋 Liste de mots', 'conjugaison-view': '🔤 Conjugaison', 'conj-training-view': '🔤 Entraînement conjugaison', 'separable-training-view': '🔤 Verbes séparables',
+    'memory-view': '🎮 Jeu Memory', 'timeattack-view': '🎮 Contre-la-montre', 'swipe-view': '🎮 Swipe', 'anagram-view': '🎮 Anagrammes', 'test-view': '📏 Test de vocabulaire',
+    'apprendre-view': '🎓 Cours (parcours)', 'modguide-view': '🎓 Session guidée (module)', 'modrp-view': '🎓 Module (sommaire)', 'ordre-view': '🧩 Ordre des mots',
+    'lesson-view': '📖 Leçon de grammaire', 'exercise-view': '✏️ Exercices', 'comprendre-view': '📖 Comprendre', 'prof-view': '🧑‍🏫 Cours particulier',
+    'talk-view': '💬 Discuter', 'roleplay-view': '💼 Jeu de rôle / travail / formation', 'replay-view': '🎬 Rejouer un entretien', 'prep-view': '📚 Kit de préparation',
+    'scene-view': '👂 Écouter une scène', 'listen-view': '👂 Écouter (compréhension)', 'tutor-view': '🧑‍🏫 Revoir avec le tuteur', 'car-view': '🚗 Mode voiture',
+    'progress-view': '🌱 Comment progresser', 'profil-view': '👤 Profil', 'social-view': '👥 Amis', 'onboarding-view': '🚀 Premier lancement'
+};
+function usageDay() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function usageBucket() {
+    if (!state.usage) state.usage = { days: {} };
+    const day = usageDay(), days = state.usage.days || (state.usage.days = {});
+    if (!days[day]) {
+        days[day] = {};
+        Object.keys(days).sort().slice(0, -60).forEach(k => delete days[k]);
+    }
+    return days[day];
+}
+function usageCount(field) {
+    try { const b = usageBucket(); b[field] = (b[field] || 0) + 1; } catch (e) { /* pas grave */ }
+}
+let usageLastView = null, usageLastSave = 0;
+setInterval(() => {
+    try {
+        if (document.hidden || !state || document.body.classList.contains('gated')) return;
+        const v = document.querySelector('.view.active');
+        if (!v || !v.id) return;
+        const b = usageBucket();
+        const e = b[v.id] || (b[v.id] = { s: 0, o: 0 });
+        e.s += 15;
+        if (usageLastView !== v.id) { e.o += 1; usageLastView = v.id; }
+        if (Date.now() - usageLastSave > 120000) { usageLastSave = Date.now(); save(); }
+    } catch (e) { /* jamais bloquant */ }
+}, 15000);
+
+// ----- Tableau de bord (panneau admin) -----
+function adminDayAgo(n) { const d = new Date(); d.setDate(d.getDate() - n); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function adminUserUsage(p, sinceDay) {
+    const days = (p.usage && p.usage.days) || {};
+    const modes = {}; let g = 0, ge = 0, active = [];
+    Object.keys(days).filter(d => d >= sinceDay).forEach(d => {
+        const b = days[d]; let any = false;
+        Object.keys(b).forEach(k => {
+            if (k === 'g') { g += b.g; return; }
+            if (k === 'ge') { ge += b.ge; return; }
+            if (!b[k] || typeof b[k] !== 'object') return;
+            const m = modes[k] || (modes[k] = { s: 0, o: 0 });
+            m.s += b[k].s || 0; m.o += b[k].o || 0; any = true;
+        });
+        if (any) active.push(d);
+    });
+    return { modes, g, ge, active };
+}
+function adminFmtTime(s) { s = Math.round(s / 60); return s < 60 ? s + ' min' : Math.floor(s / 60) + ' h ' + String(s % 60).padStart(2, '0'); }
+let adminDashPeriod = 7;
+function adminRenderDash() {
+    const box = document.getElementById('admin-dash');
+    if (!box) return;
+    const users = (adminUsersCache || []).filter(u => !u.disabled);
+    const since = adminDayAgo(adminDashPeriod - 1), today = usageDay();
+    const per = users.map(u => {
+        const p = u.progress || {};
+        const us = adminUserUsage(p, since);
+        const last = Object.keys((p.usage && p.usage.days) || {}).sort().pop() || (p.stats && p.stats.lastActiveDay) || '';
+        const rules = Object.entries((p.tutorMem && p.tutorMem.rules) || {}).filter(([, r]) => r && !r.done).sort((a, b) => (b[1].n || 0) - (a[1].n || 0));
+        const reports = Object.entries(p.reports || {}).filter(([, r]) => r && !r.done).sort((a, b) => (b[1].at || 0) - (a[1].at || 0));
+        return { u, p, us, last, rules, reports };
+    });
+    // Modes les plus utilisés
+    const modes = {};
+    per.forEach(x => Object.entries(x.us.modes).forEach(([k, m]) => {
+        const t = modes[k] || (modes[k] = { s: 0, o: 0, users: 0 });
+        t.s += m.s; t.o += m.o; t.users += 1;
+    }));
+    const ranked = Object.entries(modes).filter(([k]) => k !== 'admin-view' && k !== 'compte-view').sort((a, b) => b[1].s - a[1].s);
+    const maxS = ranked.length ? ranked[0][1].s : 1;
+    // Erreurs courantes, tous comptes confondus
+    const errs = {};
+    per.forEach(x => x.rules.forEach(([k, r]) => {
+        const e = errs[k] || (errs[k] = { label: r.label || k, n: 0, users: [] });
+        e.n += r.n || 0; e.users.push(x.u.pseudo);
+    }));
+    const errRanked = Object.values(errs).sort((a, b) => b.users.length - a.users.length || b.n - a.n).slice(0, 15);
+    const allReports = [];
+    per.forEach(x => x.reports.forEach(([, r]) => allReports.push(Object.assign({ pseudo: x.u.pseudo }, r))));
+    allReports.sort((a, b) => (b.at || 0) - (a.at || 0));
+    window.adminReportsText = allReports.map(r => `[${r.pseudo}] ${r.kind} ${r.ref || ''} : ${r.nl || ''} = ${r.fr || ''}${r.note ? ' → ' + r.note : ''}${r.context ? ' (' + r.context + ')' : ''}`).join('\n');
+    const activeN = n => per.filter(x => x.last && x.last >= adminDayAgo(n - 1)).length;
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const chip = (n, label) => `<button type="button" class="conj-filter-chip${adminDashPeriod === n ? ' active' : ''}" onclick="adminDashPeriod=${n}; adminRenderDash()">${label}</button>`;
+    const sortedUsers = per.slice().sort((a, b) => (b.last || '').localeCompare(a.last || ''));
+    box.innerHTML = `
+        <h3>📊 Tableau de bord</h3>
+        <div class="conj-filter-chips-row">${chip(1, "Aujourd'hui")}${chip(7, '7 jours')}${chip(30, '30 jours')}${chip(60, '60 jours')}</div>
+        <div class="admin-kpis">
+            <div><b>${users.length}</b><small>comptes</small></div>
+            <div><b>${activeN(1)}</b><small>actifs aujourd'hui</small></div>
+            <div><b>${activeN(7)}</b><small>actifs 7 j</small></div>
+            <div><b>${activeN(30)}</b><small>actifs 30 j</small></div>
+            <div><b>${per.reduce((n, x) => n + x.us.g, 0)}</b><small>appels Gemini</small></div>
+            <div><b>${per.reduce((n, x) => n + x.us.ge, 0)}</b><small>échecs Gemini</small></div>
+        </div>
+        <h4>Modes les plus utilisés</h4>
+        ${ranked.length ? ranked.slice(0, 20).map(([k, m]) => `<div class="admin-bar"><span>${esc(USAGE_LABELS[k] || k)}</span><div class="admin-bar-track"><div style="width:${Math.max(3, Math.round(m.s / maxS * 100))}%"></div></div><small>${adminFmtTime(m.s)} · ${m.o} ouv. · ${m.users} pers.</small></div>`).join('') : '<p class="report-meta">Pas encore de données (le compteur démarre avec cette version).</p>'}
+        <h4>Erreurs de langue les plus courantes</h4>
+        ${errRanked.length ? errRanked.map(e => `<div class="admin-line">• <b>${esc(e.label)}</b> <small>— ${e.users.length} pers. (${esc(e.users.join(', '))}), ${e.n} fois</small></div>`).join('') : '<p class="report-meta">Aucune.</p>'}
+        <h4>🚩 Signalements non traités (${allReports.length})</h4>
+        ${allReports.length ? `<button type="button" class="btn btn-gray" style="margin:0 0 8px;" onclick="navigator.clipboard.writeText(window.adminReportsText).then(() => alert('Copié : colle-le à Claude.'))">📋 Copier tout (pour Claude)</button>` : ''}
+        ${allReports.slice(0, 40).map(r => `<div class="admin-line"><small>${new Date(r.at || 0).toLocaleDateString('fr-BE')} · ${esc(r.pseudo)} · ${esc(r.kind)}</small><br>${esc(r.nl)} = ${esc(r.fr)}${r.note ? ` <i>→ ${esc(r.note)}</i>` : ''}</div>`).join('') || '<p class="report-meta">Aucun.</p>'}
+        <h4>👥 Par compte (comme son tuteur)</h4>
+        ${sortedUsers.map(x => {
+            const top = Object.entries(x.us.modes).sort((a, b) => b[1].s - a[1].s).slice(0, 3).map(([k, m]) => esc(USAGE_LABELS[k] || k) + ' ' + adminFmtTime(m.s)).join(' · ');
+            const cp = x.p.coursPoint || {};
+            const mods = Object.values(x.p.modRp || {}).filter(m => m && m.finalResult && m.finalResult.passed).length;
+            return `<details class="admin-user-card"><summary><b>${esc(x.u.pseudo)}</b> <small>· vu ${x.last ? (x.last === today ? "aujourd'hui" : x.last) : 'jamais'} · série ${(x.p.stats && x.p.stats.dailyStreak) || 0} j · ${x.us.active.length} j actifs${x.reports.length ? ' · 🚩 ' + x.reports.length : ''}${x.us.ge ? ' · ⚠️ ' + x.us.ge + ' échecs' : ''}</small></summary>
+                <div class="admin-user-body">
+                    <div><b>Niveau évalué :</b> ${esc(cp.niveau || '—')} · <b>XP :</b> ${x.p.xp || 0} · <b>mots maîtrisés :</b> ${(x.p.mastered || []).length} · <b>modules réussis :</b> ${mods} · <b>appels Gemini :</b> ${x.us.g}</div>
+                    <div><b>Ce qu'il fait :</b> ${top || '—'}</div>
+                    <div><b>Erreurs récurrentes :</b> ${x.rules.slice(0, 6).map(([, r]) => esc(r.label || '') + ' (' + (r.n || 0) + ')' + ((r.ex || []).length ? ` <small>ex. « ${esc(r.ex[r.ex.length - 1].faux || '')} » → « ${esc(r.ex[r.ex.length - 1].correct || '')} »</small>` : '')).join('<br>') || '—'}</div>
+                    <div><b>Signalements :</b> ${x.reports.slice(0, 8).map(([, r]) => esc(r.nl) + ' = ' + esc(r.fr) + (r.note ? ' → <i>' + esc(r.note) + '</i>' : '')).join('<br>') || '—'}</div>
+                </div></details>`;
+        }).join('')}`;
+}
+
 // ===== Panneau admin =====
 function showAdmin() {
     if (!currentUserDoc || currentUserDoc.role !== 'admin') {
@@ -1751,6 +1882,7 @@ async function loadAdminUsers() {
         adminUsersCache = [];
         snap.forEach(doc => adminUsersCache.push(Object.assign({ uid: doc.id }, doc.data())));
         adminRenderTransfer();
+        adminRenderDash();
         snap.forEach(doc => {
             const u = doc.data();
             const uid = doc.id;
@@ -6009,6 +6141,7 @@ if (firebaseAvailable) {
                     if (!(data && data.error && busy(status, data.error.message)) || attempt === 2) break;
                     await new Promise(r => setTimeout(r, attempt ? 5000 : 2000));
                 }
+                usageCount(data.error ? 'ge' : 'g');
                 if (data.error) throw new Error(/overload|high demand|unavailable|exhausted|try again/i.test(data.error.message || '') ? 'Gemini est surchargé pour le moment (trop de demandes), réessaie dans un instant' : (data.error.message || 'Erreur API Gemini'));
                 if (data.candidates && data.candidates[0].content) {
                     return (data.candidates[0].content.parts || []).map(x => x.text || '').join('');
@@ -8709,6 +8842,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     await new Promise(r => setTimeout(r, attempt ? 5000 : 2000));
                 }
 
+                usageCount(data.error ? 'ge' : 'g');
                 if (data.error) {
                     throw new Error(data.error.message || "Erreur API inconnue");
                 }
