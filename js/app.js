@@ -11046,7 +11046,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 lang: rpSitLang(s),
                 label: rpSitTitle(s),
                 welcome: rpSitAmorce(s),
-                prompt: rpBuildSituationPrompt(s)
+                prompt: s._prompt || rpBuildSituationPrompt(s)
             });
             const banner = document.getElementById('rp-mode-banner');
             const day = rpDayState;
@@ -11126,6 +11126,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <p class="rp-real-hint">La personne chargée de ta formation t'explique le travail en néerlandais, vérifie que tu as compris et te fait reformuler. Tu peux poser tes questions, même en français. 👂 = écouter sans participer.</p>
                 <button class="rp-scenario-btn rp-profile-btn" onclick="formationEditDossier()">🏭 Mon entreprise <small>(privé, facultatif : ${filled ? 'rempli' : 'vide'})</small></button>
                 ${filled ? '' : '<p class="rp-real-hint">⚠️ Sans dossier, le formateur invente des détails génériques. Colle-y les vrais produits, sites, ateliers et ce qu\'on t\'a déjà expliqué.</p>'}
+                ${formationDaysHtml()}
                 ${FORMATION_SESSIONS.map(f => rpPrepRow(`<button class="rp-scenario-btn" onclick="formationStart('${f.id}')">${rpEscapeHtml(f.label)}</button>`, 'form:' + f.id, f.label, { type: 'form', id: f.id })).join('')}`;
         }
 
@@ -11147,6 +11148,117 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const banner = document.getElementById('rp-mode-banner');
             banner.style.display = '';
             banner.innerHTML = `<div class="rp-job-banner"><div class="rp-iv-label" style="margin-top:0;">🧑‍🏫 Ma formation</div><div>Écoute, pose tes questions, reformule avec tes mots. Si tu ne comprends pas, dis-le : « Kan je dat anders uitleggen? »</div></div>`;
+        }
+
+        // ----- Journées d'initiation (Joas, 1er novembre 2026 : « simuler la première journée où on
+        // me fait visiter l'entreprise, où on me montre ce que je dois faire et comment ») -----
+        // Chaque journée = une suite de moments joués par des personnes différentes (portier, RH,
+        // formateur, plant manager, chef d'équipe…), avec le moteur des journées (rpDayState, bilan
+        // rpDayDebrief). Mode 'montre' : on lui explique puis on lui fait faire ; 'fais' : il fait.
+        // Contenu tiré de sa fiche de poste et de son entretien (sans données personnelles).
+        const FORMATION_DAYS = [
+            { id: 'jour1', label: '1️⃣ Premier jour : accueil, visite, ton poste', moments: [
+                { id: 'loge', canal: 'guichet_chauffeur', qui: 'le portier, à la loge', mode: 'montre',
+                    contexte: 'Premier matin : tu arrives à la loge, le portier t\'accueille.',
+                    amorce: 'Goedemorgen! Kan ik u helpen? Voor wie komt u?',
+                    points: 'il demande qui il est et pour qui il vient, le fait signer le registre, lui donne un badge provisoire, explique où se garer la prochaine fois et qu\'il entrera avec son badge, prévient la personne qui l\'attend.' },
+                { id: 'hr', canal: 'collegue_interne', qui: 'la personne des ressources humaines (HR)', mode: 'montre',
+                    contexte: 'Accueil par les ressources humaines : contrat, horaires, règles.',
+                    amorce: 'Welkom bij ons! Fijn dat je er bent. Ik overloop eerst even de praktische zaken met jou, goed?',
+                    points: 'contrat intérim avec option fixe ; horaire de jour (environ 8 h à 16 h 45), horaire flexible en haute saison (février-mars à fin juillet), fermeture collective l\'été ; pointer ; pauses et réfectoire ; chèques-repas ; vêtements : veiligheidsschoenen, fluohesje dans la production ; règles de sécurité (circuler sur les passages piétons, chariots élévateurs) ; que faire en cas de maladie (prévenir avant le début, certificat) ; qui sera son aanspreekpunt. Vérifie qu\'il a compris en lui posant une ou deux questions.' },
+                { id: 'rondleiding', canal: 'picking_zone', qui: 'ton formateur, le collègue chargé de ta formation', mode: 'montre', session: 'rondleiding',
+                    contexte: 'Visite de l\'entreprise avec ton formateur, atelier par atelier.',
+                    amorce: 'Zo, ik ben de persoon die je de komende weken zal opleiden. We beginnen met een rondleiding. Volg mij maar!' },
+                { id: 'container', canal: 'collegue_interne', qui: 'un chef d\'équipe (ploegbaas) dans le bureau central des chefs de production', mode: 'montre',
+                    contexte: 'Présentation aux chefs d\'équipe dans le bureau central de la production.',
+                    amorce: 'Ah, jij bent de nieuwe collega voor de administratie? Welkom! Ik ben ploegbaas in de montage. Weet je al wat je bij ons gaat doen?',
+                    points: 'il se présente, demande ce que l\'apprenant sait déjà ; explique ce que les chefs d\'équipe attendront de lui (suivre les demandes de pièces, signaler les manques, encoder, répondre aux mails) ; à l\'atelier on parle souvent français, avec la hiérarchie néerlandais ; comment le joindre ; il lui demande quelque chose de concret pour voir s\'il a compris.' },
+                { id: 'werkpost', canal: 'collegue_interne', qui: 'ton formateur', mode: 'montre',
+                    contexte: 'Ton poste de travail : le PC, la messagerie, les dossiers, le fichier de stock.',
+                    amorce: 'Dit is jouw bureau. Ik toon je even hoe je inlogt en waar je alles terugvindt.',
+                    points: 'se connecter (gebruikersnaam, wachtwoord), Outlook et la boîte mail partagée, Teams, les dossiers partagés sur le réseau, le fichier Excel de stock avec son draaitabel, le système (ERP) en cours de changement ; lui demander de redire où il trouve quoi.' },
+                { id: 'flow', canal: 'reunion', qui: 'le plant manager (responsable de l\'usine)', mode: 'montre', session: 'bestelling',
+                    contexte: 'Le plant manager t\'explique le flux de l\'usine et pourquoi ton rôle est important.',
+                    amorce: 'Goedemiddag. Ik wil je even zelf uitleggen hoe alles bij ons loopt, want dat is belangrijk voor jouw job. Heb je even?',
+                    points: 'le flux entre les sites (dont l\'ancien site proche), une pièce passe par 3-4 étapes avant d\'arriver en stock, les départements demandent des pièces, le stock ne suffit pas toujours (exemple : 4 pièces, plusieurs départements) et il ne faut pas répartir au hasard ; le changement d\'ERP ; il attend quelqu\'un d\'analytique qui comprend ce que disent les chiffres. Il parle vite et naturellement, comme un vrai responsable, puis lui demande ce qu\'il a retenu.' },
+                { id: 'eerste', canal: 'collegue_interne', qui: 'ton formateur', mode: 'fais',
+                    contexte: 'Première tâche : encoder une réception de marchandise, d\'abord montrée, puis à toi.',
+                    amorce: 'Kijk, er is net een levering binnengekomen. Ik doe de eerste pakbon samen met jou, en de volgende doe jij, oké?',
+                    points: 'il montre : vérifier le pakbon contre la commande (artikelnummer, hoeveelheid), compter, signaler un écart, inboeken dans le système, classer le document. Puis il donne un deuxième pakbon inventé (2-3 lignes, une quantité qui ne correspond pas) et demande à l\'apprenant de dire étape par étape ce qu\'il fait ; il corrige le fond, pas la langue.' },
+                { id: 'einde', canal: 'collegue_interne', qui: 'ton formateur', mode: 'montre',
+                    contexte: 'Fin de la journée : ce que tu as retenu, tes questions, le programme de demain.',
+                    amorce: 'Zo, je eerste dag zit erop. Hoe was het? Wat heb je vandaag allemaal gezien?',
+                    points: 'il lui fait résumer sa journée, répond à ses questions, annonce le programme de demain (stock du matin, kanban, mails), lui dit à quelle heure et où le retrouver.' }
+            ] },
+            { id: 'jour2', label: '2️⃣ Deuxième jour : stock du matin, kanban, mails', moments: [
+                { id: 'ochtend', canal: 'collegue_interne', qui: 'ton formateur', mode: 'fais', session: 'voorraad',
+                    contexte: 'Le stock du matin : mettre à jour le draaitabel et repérer les problèmes.',
+                    amorce: 'Goedemorgen! Elke ochtend begin je met de voorraad. Ik toon het je één keer, daarna doe jij het.',
+                    points: 'il montre la mise à jour (nouvelles données, vernieuwen, filtres), puis décrit oralement ce qu\'on voit (une référence à zéro, une à moitié du bestelpunt, une qui ne bouge plus) et demande à l\'apprenant ce qu\'il en conclut et ce qu\'il fait.' },
+                { id: 'kanban', canal: 'picking_zone', qui: 'ton formateur, puis un magasinier', mode: 'fais', session: 'kanban',
+                    contexte: 'Tournée kanban : les bacs vides, les cartes, la recommande.',
+                    amorce: 'Kom, we doen samen de kanbanronde. Zie je die lege bak daar? Wat betekent dat voor jou?',
+                    points: 'bac vide, carte, recommande, délai fournisseur ; une carte manque ou un bac est vide depuis longtemps : l\'apprenant doit dire ce qu\'il fait.' },
+                { id: 'mails', canal: 'email', qui: 'des collègues et un fournisseur, par mail', mode: 'fais',
+                    contexte: 'La boîte mail partagée : trier et répondre aux premiers mails.',
+                    amorce: 'Onderwerp: dringend – profielen voor de montage. Hallo, de montage heeft morgen 20 profielen nodig voor een spoedorder. Kan je nakijken of we die op voorraad hebben? Groeten, de ploegbaas montage',
+                    points: 'enchaîne 3 mails courts : la demande urgente de la montage, un fournisseur qui annonce un retard, une demande de fournitures de bureau ; l\'apprenant répond par écrit, brièvement et poliment.' },
+                { id: 'leverancier', canal: 'telephone_client', qui: 'un fournisseur au téléphone', mode: 'fais',
+                    contexte: 'Appel d\'un fournisseur : une livraison de composants aura du retard.',
+                    amorce: 'Goeiedag, u spreekt met de leverancier van de motoren. Ik bel over uw bestelling van vorige week: er is helaas een probleem met de levering.',
+                    points: 'retard d\'une semaine ; l\'apprenant doit noter la référence, la quantité, la nouvelle date, demander une livraison partielle, puis dire qui il va prévenir.' },
+                { id: 'einde2', canal: 'collegue_interne', qui: 'ton formateur', mode: 'montre',
+                    contexte: 'Point de fin de journée avec ton formateur.',
+                    amorce: 'En, hoe ging het vandaag? Vertel eens: wat heb je met die vertraging gedaan?',
+                    points: 'il lui fait raconter ce qu\'il a fait, lui donne un retour concret, une astuce de travail, et le programme de demain.' }
+            ] },
+            { id: 'jour3', label: '3️⃣ Troisième jour : système, priorités, loge', moments: [
+                { id: 'erp', canal: 'collegue_interne', qui: 'ton formateur', mode: 'fais', session: 'erp',
+                    contexte: 'Le système : retrouver une fiche article et encoder un mouvement de stock.',
+                    amorce: 'Vandaag gaan we wat dieper in het systeem. Zoek eens de fiche van dit artikelnummer op. Wat zie je?',
+                    points: 'fiche article, stock, commandes en cours, mouvement de stock ; l\'apprenant dit ce qu\'il fait ; une référence dictée par téléphone à faire confirmer.' },
+                { id: 'verdelen', canal: 'collegue_interne', qui: 'deux chefs d\'équipe qui demandent la même pièce, puis ton formateur', mode: 'fais', session: 'verdelen',
+                    contexte: 'Il reste 4 pièces et trois départements les demandent : à toi de répartir.',
+                    amorce: 'Hé, ik heb dringend zes van die profielen nodig voor de montage, anders staat mijn ploeg stil!',
+                    points: 'joue d\'abord un chef d\'équipe pressé, puis un autre qui réclame aussi ; l\'apprenant doit se renseigner (pour quand, quelle commande), proposer une répartition et dire qui il prévient ; ensuite le formateur commente.' },
+                { id: 'portier', canal: 'guichet_chauffeur', qui: 'des personnes qui arrivent à la loge (chauffeur, visiteur)', mode: 'fais', session: 'portier',
+                    contexte: 'Tu remplaces le portier : un chauffeur, puis un visiteur.',
+                    amorce: 'Goeiemiddag! Ik kom een levering brengen voor jullie, waar moet ik lossen?',
+                    points: 'un chauffeur qui livre (pakbon, quai, prévenir le magasin), puis un visiteur attendu par le plant manager (registre, badge, consignes) ; l\'apprenant gère chacun.' },
+                { id: 'feedback', canal: 'reunion', qui: 'ton responsable direct', mode: 'montre',
+                    contexte: 'Petit bilan de tes premiers jours avec ton responsable.',
+                    amorce: 'Zo, je bent nu een paar dagen bij ons. Ik wil graag even horen hoe jij het ervaart. Hoe gaat het?',
+                    points: 'il lui demande ce qui va bien, ce qui est difficile, ce dont il a besoin ; donne son retour ; fixe un ou deux objectifs pour les semaines suivantes ; l\'apprenant doit pouvoir expliquer son travail avec ses mots.' }
+            ] }
+        ];
+
+        function formationMomentPrompt(m) {
+            const f = m.session && FORMATION_SESSIONS.find(x => x.id === m.session);
+            const dossier = (state.companyDossier || '').trim();
+            return 'Simulation des premiers jours d\'un nouvel employé, administratief medewerker (soutien administratif à la production, au stock et aux achats) chez un fabricant de protections solaires. Tu joues ' + m.qui + ' — jamais l\'apprenant lui-même.\n\n' +
+                'Moment : ' + m.contexte + '\nCe que tu dois faire passer : ' + (m.points || (f ? f.points : '')) + '\n' +
+                (m.mode === 'fais' ? 'Mode « montrer puis faire faire » : explique brièvement, puis donne-lui une tâche concrète et laisse-le dire ce qu\'il fait ; guide-le s\'il bloque, corrige le fond (la méthode), jamais la langue.\n' : 'Mode « expliquer » : explique par petits morceaux et vérifie sa compréhension (question, reformulation, petit cas concret).\n') +
+                'L\'échange a lieu ' + rpSitCanal(m).prompt + '.\n\n' +
+                'Ce que tu sais de l\'entreprise : ' + FORMATION_COMPANY + '\n' +
+                (dossier ? 'En plus (dossier privé de l\'apprenant ; n\'invente rien qui le contredise) : """' + dossier + '"""\n' : '') +
+                '\nTu as ouvert l\'échange en disant : """' + m.amorce + '"""\n\n' +
+                'Exclusivement en néerlandais de Flandre, naturel, au débit d\'une vraie personne de ce poste, avec le vocabulaire exact du métier ; 2 à 4 phrases par réplique. Réagis à ce qu\'il dit vraiment. S\'il parle français, tu le comprends et tu réponds en néerlandais simple. Invente les détails plausibles (références, quantités, heures). Ne fais pas de cours de langue. Quand ce moment est terminé, conclus brièvement (l\'apprenant passera au moment suivant).';
+        }
+
+        function formationDaysHtml() {
+            return `<div class="rp-group-title">📅 Mes premiers jours</div>
+                <p class="rp-real-hint">Des journées entières, moment par moment : la loge, les RH, la visite, les chefs d'équipe, le plant manager, puis tes premières tâches. Bilan à la fin.</p>
+                ${FORMATION_DAYS.map((d, i) => `<button class="rp-scenario-btn" onclick="formationStartDay(${i})">${rpEscapeHtml(d.label)} <small>· ${d.moments.length} moments</small></button>`).join('')}
+                <div class="rp-group-title">🎯 Une séance à la fois</div>`;
+        }
+
+        function formationStartDay(i) {
+            const d = FORMATION_DAYS[i];
+            if (!d || !rpJobRequireGemini()) return;
+            rpJobLiveMetier = 'admin_productie';
+            const situations = d.moments.map(m => ({ id: 'fd_' + d.id + '_' + m.id, metier: 'admin_productie', canal: m.canal, contexte: m.contexte, amorce: m.amorce, _prompt: formationMomentPrompt(m) }));
+            rpDayState = { label: d.label.replace(/^\S+\s/, ''), journeeId: 'fd_' + d.id, situations, index: 0, log: [] };
+            rpJobBeginSituation(situations[0]);
         }
 
         function rpStartDay(journeeIndex) {
