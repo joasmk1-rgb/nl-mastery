@@ -11248,8 +11248,58 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
         function formationDaysHtml() {
             return `<div class="rp-group-title">📅 Mes premiers jours</div>
                 <p class="rp-real-hint">Des journées entières, moment par moment : la loge, les RH, la visite, les chefs d'équipe, le plant manager, puis tes premières tâches. Bilan à la fin.</p>
-                ${FORMATION_DAYS.map((d, i) => `<button class="rp-scenario-btn" onclick="formationStartDay(${i})">${rpEscapeHtml(d.label)} <small>· ${d.moments.length} moments</small></button>`).join('')}
+                ${FORMATION_DAYS.map((d, i) => `<div style="display:flex; gap:8px; width:100%; max-width:520px;"><button class="rp-scenario-btn" style="flex:1;" onclick="formationStartDay(${i})">${rpEscapeHtml(d.label)} <small>· ${d.moments.length} moments</small></button><button class="rp-scenario-btn" style="flex:0 0 auto; width:auto;" title="Écouter sans participer" onclick="formationListenDay(${i})">👂</button></div>`).join('')}
                 <div class="rp-group-title">🎯 Une séance à la fois</div>`;
+        }
+
+        // Écouter une journée d'initiation sans participer : une scène par moment (Gemini, gardée
+        // dans le cache des scènes, clé fd:<jour>:<moment>), enchaînées avec un titre par moment.
+        async function formationMomentScene(d, m, forceNew) {
+            const key = 'fd:' + d.id + ':' + m.id;
+            const cache = scenesCache();
+            if (!forceNew && (cache[key] || []).length) return cache[key][cache[key].length - 1];
+            const f = m.session && FORMATION_SESSIONS.find(x => x.id === m.session);
+            const raw = await GeminiService.generate(
+                'Écris une scène de dialogue réaliste en néerlandais de Flandre courant, à l\'oral, au débit naturel d\'un lieu de travail, entre deux personnes.\n' +
+                'Contexte : premiers jours d\'un nouvel employé administratif (soutien à la production, au stock et aux achats) chez un fabricant de protections solaires. Entreprise : ' + FORMATION_COMPANY + '\n' +
+                'Moment : ' + m.contexte + ' Ce qui doit passer : ' + (m.points || (f ? f.points : '')) + '\n' +
+                'A = ' + m.qui + ' ; B = le nouvel employé, un francophone qui parle bien néerlandais, pose de bonnes questions, reformule et fait ce qu\'on lui demande : il sert de modèle.\n' +
+                'La scène commence par cette réplique de A : """' + m.amorce + '"""\n' +
+                '14 à 22 répliques, avec un vrai déroulé. Noms de personnes inventés.\n' +
+                'Réponds UNIQUEMENT en JSON : {"roleA": "nom court de A en français", "lignes": [{"qui": "A", "nl": "réplique", "fr": "traduction française"}]}'
+            );
+            const obj = rpHelpParseJson(raw);
+            const lignes = obj && Array.isArray(obj.lignes) ? obj.lignes.filter(l => l && (l.qui === 'A' || l.qui === 'B') && l.nl).map(l => ({ qui: l.qui, nl: String(l.nl), fr: String(l.fr || '') })) : [];
+            if (lignes.length < 4) throw new Error('scène incomplète');
+            const sc = { roleA: obj.roleA ? String(obj.roleA) : m.qui, lignes, at: Date.now() };
+            const c2 = scenesCache();
+            c2[key] = (c2[key] || []).concat(sc).slice(-2);
+            scenesSave(c2);
+            return sc;
+        }
+
+        async function formationListenDay(i, forceNew) {
+            const d = FORMATION_DAYS[i];
+            if (!d) return;
+            if (!GeminiService.getKey()) { alert('Générer les scènes nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'); return; }
+            const back = () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); formationShowHome(); };
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('scene-view').classList.add('active');
+            sceneCurrent = { back };
+            const lines = [], names = [];
+            for (let k = 0; k < d.moments.length; k++) {
+                const m = d.moments[k];
+                document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(d.label)}</h2><p class="prep-sub">Gemini écrit le moment ${k + 1}/${d.moments.length} : ${rpEscapeHtml(m.contexte)}</p>`;
+                let sc;
+                try { sc = await formationMomentScene(d, m, forceNew); } catch (e) { continue; }
+                if (sceneCurrent.back !== back) return; // l'utilisateur a quitté
+                lines.push({ qui: 'titre', nl: (k + 1) + '. ' + m.contexte });
+                sc.lignes.forEach(l => { lines.push(l); names.push(l.qui === 'A' ? sc.roleA : null); });
+            }
+            if (!lines.length) { document.getElementById('scene-content').innerHTML += '<p style="color:var(--wrong);">Scènes impossibles à générer.</p>'; return; }
+            sceneOpen({ title: d.label, subtitle: 'Toute la journée, moment par moment, comme si tu y étais.', lines, roles: { A: 'Collègue', B: 'Toi' }, back, regen: () => formationListenDay(i, true) });
+            let n = 0;
+            lines.forEach((l, j) => { if (l.qui === 'titre') return; const who = names[n++]; if (who) { const w = document.querySelector('#scene-line-' + j + ' .scene-who'); if (w) w.textContent = who; } });
         }
 
         function formationStartDay(i) {
