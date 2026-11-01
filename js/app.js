@@ -13376,12 +13376,14 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
         // (exception assumée à la séparation des prompts : ici, pas d'examen ni de note).
         // Micro mains libres (longListen), mots touchables, mémoire des conversations par
         // partenaire et petit objectif quotidien (state.talk).
+        // Un seul tuteur (Joas, 1er novembre 2026 : choisir entre Svetlana et John n'apportait rien).
         const TALK_PARTNERS = {
-            svetlana: { name: 'Svetlana', emoji: '👩🏼', speaker: 0, desc: 'Curieuse et chaleureuse : elle rebondit sur chaque détail et adore les histoires.',
-                base: "Tu es Svetlana, une femme d'une trentaine d'années qui vit en Flandre depuis longtemps : chaleureuse, curieuse, tu rebondis sur les détails et tu partages volontiers tes propres anecdotes." },
-            john: { name: 'John', emoji: '👨🏽', speaker: 1, desc: 'Détendu et blagueur : il donne son avis sur tout et aime les bons plans.',
-                base: "Tu es John, un homme d'une quarantaine d'années, détendu, avec de l'humour ; tu aimes le sport, la musique et les bons plans, et tu donnes volontiers ton avis." }
+            tuteur: { name: 'ton tuteur', emoji: '🧑‍🏫', speaker: 0, desc: '',
+                base: "Tu es un Flamand chaleureux et naturel, à la fois partenaire de conversation et tuteur : curieux, tu rebondis sur ce que dit la personne, tu partages parfois un avis ou une anecdote, avec un peu d'humour." }
         };
+        // Anciennes clés (progressions et réglages existants) : même tuteur, invisibles dans les listes.
+        Object.defineProperty(TALK_PARTNERS, 'svetlana', { value: TALK_PARTNERS.tuteur, enumerable: false });
+        Object.defineProperty(TALK_PARTNERS, 'john', { value: TALK_PARTNERS.tuteur, enumerable: false });
         const TALK_FAMILIES_FALLBACK = { demarches: '🏛️ Démarches', logement: '🏠 Logement', sante: '🩺 Santé et urgences', courses: '🛒 Courses et services', sorties: '🍽️ Sorties', social: '🤝 Vie sociale', telephone: '☎️ Au téléphone', transport: '🚆 Transports' };
         function talkFamilies() { return (rpLibData && rpLibData.familles) || TALK_FAMILIES_FALLBACK; }
         function talkSituations() { return rpLibAll().filter(e => e.theme === 'quotidien'); }
@@ -13398,7 +13400,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             const s = state.settings.talk || {};
             const lvl = ['A1', 'A2', 'B1', 'B2'];
             state.settings.talk = {
-                partner: TALK_PARTNERS[s.partner] ? s.partner : 'svetlana',
+                partner: 'tuteur',
                 mode: s.mode === 'situation' ? 'situation' : 'libre',
                 topic: TALK_TOPICS[s.topic] || s.topic === 'surprise' ? s.topic : 'libre',
                 level: lvl.includes(s.level) ? s.level : (curriculumLoaded && lvl.includes(getCurriculumLevel().level) ? getCurriculumLevel().level : 'A1'),
@@ -13458,7 +13460,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             document.getElementById('talk-content').innerHTML = `
                 <div class="talk-goal">${talkRingHtml(46)}<div><b>${talkTodayCount()} / ${TALK_GOAL} échanges aujourd'hui</b><br><small>${streak > 1 ? '🔥 ' + streak + ' jours de suite' : 'Un peu chaque jour, c\'est ce qui compte.'}</small></div></div>
                 ${GeminiService.isAvailable() ? '' : '<div class="prof-warn">Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA.</div>'}
-                <div class="talk-partners">${Object.entries(TALK_PARTNERS).map(([k, p]) => `
+                <div class="talk-partners"${Object.keys(TALK_PARTNERS).length > 1 ? '' : ' style="display:none;"'}>${Object.entries(TALK_PARTNERS).map(([k, p]) => `
                     <button type="button" class="talk-partner${s.partner === k ? ' active' : ''}" onclick="talkSet('partner','${k}')">
                         <span class="talk-avatar">${p.emoji}</span><b>${p.name}</b><small>${p.desc}</small>
                         ${talkState().memory[k] ? '<small class="talk-remember">💭 se souvient de vous</small>' : ''}
@@ -13614,7 +13616,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                 const notion = talk.point && curriculumNotions[talk.point.notionId || talk.point.id];
                 const extra = talk.extraWords && talk.extraWords.length ? talk.extraWords.join(', ') : '';
                 const target = studyLang().nom;
-                return `Tu es ${p.name}, partenaire de conversation en ${target} d'un apprenant francophone de niveau ${PROF_LEVEL_DESC[talk.level]}. Parle en ${target} naturel, avec des phrases adaptées à son niveau. La correction et les explications sont en français.
+                return `Tu es le partenaire de conversation en ${target} d'un apprenant francophone de niveau ${PROF_LEVEL_DESC[talk.level]}. Parle en ${target} naturel, avec des phrases adaptées à son niveau. La correction et les explications sont en français.
 ${talk.sit ? `Tu joues une scène : ton rôle est « ${talk.sit.role || p.name} ». Situation : ${talk.sit.contexte || 'conversation quotidienne'}. Reste dans ce rôle et fais avancer la scène par tes répliques, sans expliquer le scénario ni donner de consignes au narrateur. Commence par une réplique naturelle en ${target}. Les éventuelles formulations d'origine de cette situation sont dans une autre langue : ne les reprends pas et ne les traduis pas mot à mot.` : `Sujet : ${TALK_TOPICS[talk.topic].replace(/^\S+\s/, '')}`}${notion ? `\nPoint ${target} à pratiquer : ${notion.content.titre}. ${notion.content.comprendre || ''}` : ''}${extra ? `\nMots ${target} à faire réemployer naturellement : ${extra}.` : ''}
 Souviens-toi de ces échanges précédents : ${mem || 'aucun'}.
 Une vraie conversation : réagis à sa réponse, raconte aussi un peu de toi et pose UNE question à la fois. S'il parle en français, aide-le brièvement en français puis relance en ${target}. Ne prétends pas que les phrases fournies sont des faits vérifiés.\nDans "fr_help", écris uniquement une aide très courte, directement adressée à l'apprenant et naturelle à lire à voix haute (par exemple : « Tu peux dire … »). N'y écris jamais une consigne destinée à un modèle, une analyse, une description de la réponse attendue ou une phrase comme « le répondant a dit… ». Si aucune aide directe n'est nécessaire, renvoie une chaîne vide.
@@ -14185,7 +14187,7 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
         // ===== Modules B1 et B2 en conversation (CVO 2.1 à 2.4, 3.1 et 3.2) =====
         // data/modules_conv/b1.json : 4 modules × 2 séances, calqués sur le B1 oral des CVO
         // (Richtgraad 2 Mondeling) ; b2.json : 2 modules × 3 séances (Richtgraad 3, Vantage). Une séance = une conversation de Discuter (talk.lesson) où
-        // Svetlana ou John enseignent les tâches une à une (explication courte + tournures dans
+        // ton tuteur enseignent les tâches une à une (explication courte + tournures dans
         // fr_help, mini-situation dans reply_nl) et renvoient, dans le même appel, "validee" /
         // "ratee" quand une tâche est réussie seul ou abandonnée après trois essais. Séance réussie
         // = 70 % des tâches validées : ses notions B1 sont alors validées (le niveau CECR monte).
@@ -14312,7 +14314,7 @@ ${tasks}`;
                 const open = lvl === 'B1' ? ((pl === 'B1' || a2Done) && !levelOk('B1')) : (pl === 'B2' || levelOk('B1'));
                 return `<details class="modrp-level" ${open ? 'open' : ''}>
                     <summary><span class="conj-niveau-badge">${lvl}</span> ${mods.length} modules en conversation · ${nOk}/${nAll} séances <small class="cvo-eq">${CONV_CVO[lvl] || ''}</small></summary>
-                    <p class="report-meta" style="margin:6px 0;">Ton prof te fait parler et valide chaque tâche. Prof : <b>${p.emoji} ${p.name}</b> · <a href="#" onclick="talkSettings().partner = talkSettings().partner === 'john' ? 'svetlana' : 'john'; save(); renderModRpEntries(); return false;">changer</a></p>
+                    <p class="report-meta" style="margin:6px 0;">Ton prof te fait parler et valide chaque tâche. Prof : <b>${p.emoji} ${p.name}</b></p>
                     ${mods.map(m => {
                         const done = m.seances.every(s => convSeanceOk(m.id, s.id));
                         return `<div class="modrp-entry conv-entry${done ? ' passed' : ''}">
@@ -14327,7 +14329,7 @@ ${tasks}`;
         }
 
         // ===== Faire le point en conversation (placement) =====
-        // Au lieu de refaire les cours notion après notion, Svetlana ou John (les profs) font
+        // Au lieu de refaire les cours notion après notion, ton tuteur (les profs) font
         // parler l'apprenant, du plus simple (se présenter, épeler, son numéro) au plus difficile
         // (argumenter, hypothèses), en sautant ce qu'il montre déjà. S'il bloque, il le dit en
         // français : le prof lui montre comment le dire et l'invite à essayer. Moteur : Discuter
@@ -14523,7 +14525,7 @@ Réponds UNIQUEMENT en JSON :
             if (state.coursPointPending && !state.coursPointPending.done) return `<div class="cours-point open"><b>🧑‍🏫 Ton point n'est pas terminé</b><p>Ta dernière séance avec ${rpEscapeHtml((TALK_PARTNERS[state.coursPointPending.partner] || TALK_PARTNERS.svetlana).name)} est gardée, mais l'évaluation détaillée n'a pas pu se faire (Gemini surchargé).${pl && pl.provisoire ? ' Un compte rendu provisoire a déjà été fait.' : ''}</p><button class="btn btn-green" style="margin:6px 0 0;" onclick="talkPointRetry(this)">🔁 Relancer l'évaluation détaillée</button></div>`;
             const btns = Object.entries(TALK_PARTNERS).map(([k, p]) => `<button class="btn ${pl ? 'btn-gray' : 'btn-green'}" style="margin:6px 0 0;" onclick="talkStartPoint('${k}')">${p.emoji} Avec ${p.name}</button>`).join('');
             if (pl) return `<details class="cours-point"><summary>🧑‍🏫 Dernier point : ${pl.niveau ? 'niveau ' + pl.niveau + ' · ' : ''}${new Date(pl.at).toLocaleDateString('fr-BE')} · refaire le point</summary><div class="cours-point-btns">${btns}</div></details>`;
-            return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as déjà des bases ? Svetlana ou John te font parler (te présenter, ton numéro, ta journée, tes projets…) et valident ce que tu sais déjà : pas besoin de refaire ces cours. Si tu bloques, dis-le en français, ils te montrent comment le dire.</p><div class="cours-point-btns">${btns}</div></div>`;
+            return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as déjà des bases ? ton tuteur te font parler (te présenter, ton numéro, ta journée, tes projets…) et valident ce que tu sais déjà : pas besoin de refaire ces cours. Si tu bloques, dis-le en français, ils te montrent comment le dire.</p><div class="cours-point-btns">${btns}</div></div>`;
         }
 
         // ===== Notions employées en conversation =====
@@ -14795,7 +14797,7 @@ Réponds UNIQUEMENT en JSON :
             const wait = routineBubble('info', '<span class="report-meta">🤔</span>');
             let list = [];
             try {
-                const a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}.
+                const a = rpHelpParseJson(await GeminiService.generate(`Tu es le tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}.
 Il veut automatiser cette règle, sur laquelle il se trompe souvent : « ${rule.label} »${ex && ex.correct ? ` (exemple : il a dit « ${ex.faux || ''} », il fallait « ${ex.correct} »)` : ''}.
 Écris 5 phrases françaises courtes et naturelles (travail et vie quotidienne) dont la traduction en ${studyLang().nom} OBLIGE à appliquer cette règle, de la plus simple à la plus difficile, avec leur traduction naturelle.
 Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": ""}]}`));
@@ -15488,7 +15490,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
         // 3. Blocs de mots : 8, ceux des mots du jour d'abord.
         // 4. Pratique : une situation de Discuter qui fait réemployer les mots du jour, ou une
         //    écoute, la prochaine séance de cours, Mon travail.
-        // Le tuteur (Svetlana ou John) explique avant chaque étape pourquoi et comment, en français,
+        // Le tuteur (ton tuteur) explique avant chaque étape pourquoi et comment, en français,
         // et répond aux questions (❓, appel Gemini) à tout moment. Mêmes statistiques que les
         // entraînements (conjStats, mots, chunkStats). État du jour : state.routine.
         const ROUTINE = { conj: 8, conjVerbs: 20, newWords: 6, maxWords: 25, blocs: 6, petitsMots: 4 };
@@ -15554,7 +15556,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             const left = Object.keys(ROUTINE_STEPS).filter(k => !rs.done[k]);
 
             const hello = left.length === 4
-                ? `Bonjour ! C'est ${p.name}, ton tuteur pour la routine du jour. On fait quatre petites étapes : conjugaison, nouveaux mots, blocs de mots, puis on parle. Tu peux les faire dans l'ordre que tu veux, ou te laisser porter et je m'occupe de tout.`
+                ? `Bonjour ! C'est ton tuteur pour la routine du jour. On fait quatre petites étapes : conjugaison, nouveaux mots, blocs de mots, puis on parle. Tu peux les faire dans l'ordre que tu veux, ou te laisser porter et je m'occupe de tout.`
                 : (left.length ? `Re-bonjour ! Il te reste ${left.map(k => ROUTINE_STEPS[k].label.toLowerCase()).join(', ')}. On continue ?` : `Ta routine du jour est finie, bravo ! Tu peux refaire une étape, ou continuer à pratiquer.`);
             routineSay(r, hello).then(() => routineMenu(r));
         }
@@ -15691,7 +15693,7 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 const wait = routineBubble('info', '<span class="report-meta">🤔</span>');
                 let a = null;
                 try {
-                    a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}.
+                    a = rpHelpParseJson(await GeminiService.generate(`Tu es le tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}.
 Il te dit en français ce qu'il voudrait exprimer (peut-être dicté : ignore les petites erreurs de transcription) : « ${fr} »
 ${tutorMemPromptLine()}
 Apprends-lui à le dire :
@@ -16079,7 +16081,7 @@ Réponds UNIQUEMENT en JSON : {"sens": ["passage 1", "passage 2"]} (même ordre,
             const wait = routineBubble('info', '…');
             let a = null;
             try {
-                a = rpHelpParseJson(await GeminiService.generate(`Tu es ${routineTutor().name}, tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}. Vous faites ${r.drill ? 'un entraînement « ' + ROUTINE_DRILLS[r.drill].label + ' »' : 'sa routine du jour' + (r.step ? ', étape « ' + ROUTINE_STEPS[r.step].label + ' »' : '')}${r.ctx ? ' ; exercice en cours : ' + r.ctx : ''}.
+                a = rpHelpParseJson(await GeminiService.generate(`Tu es le tuteur de ${studyLang().variante} d'un apprenant francophone de niveau ${liveLevel()}. Vous faites ${r.drill ? 'un entraînement « ' + ROUTINE_DRILLS[r.drill].label + ' »' : 'sa routine du jour' + (r.step ? ', étape « ' + ROUTINE_STEPS[r.step].label + ' »' : '')}${r.ctx ? ' ; exercice en cours : ' + r.ctx : ''}.
 ${tutorMemPromptLine()}
 Il te demande : « ${q} »
 Réponds dans sa langue (français s'il parle français), comme à l'oral, en 2 à 4 phrases claires ; les mots en ${studyLang().nom} entre ** **, avec un exemple si utile. Si sa question porte sur la routine (pourquoi, comment), explique-lui simplement.
@@ -17007,7 +17009,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             </div>`;
         }
 
-        // ===== Compagnon vocal (Svetlana ou John, partout) =====
+        // ===== Compagnon vocal (ton tuteur, partout) =====
         // Un micro flottant sur tous les écrans : on parle (ou écrit) au compagnon, en français ou en
         // néerlandais ; il ouvre l'activité demandée, répond aux questions de langue, ou propose la
         // suite. Les demandes courantes sont reconnues dans l'app, sans Gemini (buddyLocal) ; les
@@ -17020,7 +17022,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         function buddySettings() {
             if (!state.settings) state.settings = {};
             const s = state.settings.buddy || {};
-            state.settings.buddy = { partner: TALK_PARTNERS[s.partner] ? s.partner : 'svetlana', lang: s.lang === 'nl' ? 'nl' : 'fr' };
+            state.settings.buddy = { partner: 'tuteur', lang: s.lang === 'nl' ? 'nl' : 'fr' };
             return state.settings.buddy;
         }
         function buddyPartner() { return TALK_PARTNERS[buddySettings().partner]; }
@@ -17064,7 +17066,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             dire: { desc: `dire en ${studyLang().nom} ce qu'on pense en français (le tuteur apprend la phrase)`, run: () => showSayIt() },
             ordre: { desc: "l'ordre des mots (verbe en 2e position, verbe à la fin après dat / omdat, daarom…)", run: () => showWordOrder() },
-            faire_le_point: { desc: "faire le point sur son niveau en conversation avec Svetlana ou John (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
+            faire_le_point: { desc: "faire le point sur son niveau en conversation avec ton tuteur (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
             discuter: { desc: 'conversation libre ; params.partenaire svetlana ou john ; params.sujet (week-end, travail, voyages…)', run: async p => { const s = talkSettings(); if (TALK_PARTNERS[p.partenaire]) s.partner = p.partenaire; const sj = p.sujet ? normalize(p.sujet).replace(/-/g, '') : ''; const tk = sj && Object.keys(TALK_TOPICS).find(k => k !== 'libre' && (sj.includes(k) || normalize(TALK_TOPICS[k]).replace(/-/g, '').includes(sj))); if (tk) s.topic = tk; s.mode = 'libre'; await showTalk(); if (p.lancer) talkStart(); } },
             pratiquer: { desc: 'mode Parler (Discuter, Mon travail, Écouter, Dis-le)', run: () => showPratiquer() },
@@ -17160,7 +17162,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             const p = buddyPartner(), s = buddySettings();
             document.getElementById('buddy-sheet').innerHTML = `
                 <div class="buddy-head">
-                    <div class="buddy-who">${Object.entries(TALK_PARTNERS).map(([k, x]) => `<button type="button" class="buddy-pick${s.partner === k ? ' active' : ''}" onclick="buddySetPartner('${k}')">${x.emoji} ${x.name}</button>`).join('')}</div>
+                    <div class="buddy-who"${Object.keys(TALK_PARTNERS).length > 1 ? '' : ' style="display:none;"'}>${Object.entries(TALK_PARTNERS).map(([k, x]) => `<button type="button" class="buddy-pick${s.partner === k ? ' active' : ''}" onclick="buddySetPartner('${k}')">${x.emoji} ${x.name}</button>`).join('')}</div>
                     <button type="button" class="buddy-close" onclick="buddyClose()" title="Fermer">✕</button>
                 </div>
                 <div id="buddy-chat" class="buddy-chat"></div>
