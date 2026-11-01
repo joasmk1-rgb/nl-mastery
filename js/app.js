@@ -13875,12 +13875,13 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
         }
 
         // Lit une réplique et ajuste la vitesse de la voix pour viser le débit réel du recruteur.
-        async function rpReplaySpeak(text, speakerName) {
+        async function rpReplaySpeak(text, speakerName, lang) {
             const r = rpReplay, s = replaySettings();
             const voice = REPLAY_VOICES[Math.max(0, r.speakers.indexOf(speakerName)) % REPLAY_VOICES.length];
             const words = (text.match(/[A-Za-zÀ-ÿ']+/g) || []).length;
             const t0 = Date.now(), token = r.token;
-            await conjAudioSpeak(text, 'nl', s.rate, Object.assign({ raw: true }, voice));
+            await conjAudioSpeak(text, lang === 'fr' ? 'fr' : 'nl', s.rate, Object.assign({ raw: true }, voice));
+            if (lang === 'fr') return; // pas de mesure du débit sur une réplique en français
             const dt = (Date.now() - t0) / 1000;
             // Mesure seulement sur une lecture complète (pas interrompue par une réponse, un saut
             // ou un arrêt, ni terminée par le délai de secours).
@@ -13909,7 +13910,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 (t.candidate_reply ? `<div class="replay-real">🗣️ Ta vraie réponse : « ${rpEscapeHtml(t.candidate_reply)} » ${speakBtnHtml(t.candidate_reply)}</div>` : '');
             rpReplayRenderIdea();
             const token = r.token;
-            await rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
+            await rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur', t.lang);
             if (!replayActive() || rpReplay.token !== token || rpReplay.i !== r.i) return;
             if (micAuto() && s.handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
         }
@@ -13927,7 +13928,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             if (!r || r.ended) return;
             const t = r.d.turns[r.i];
             if (r.pending) rpReplaySpeak(r.pending.q, r.pending.speaker);
-            else if (t) rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
+            else if (t) rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur', t.lang);
         }
 
         // ----- Le recruteur réagit (Gemini, appel séparé du correcteur) -----
