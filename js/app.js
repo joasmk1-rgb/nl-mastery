@@ -7251,6 +7251,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 </div>
                 <div class="profil-menu">
                     <div class="profil-menu-row" onclick="showSocial()"><span class="pm-icon">👥</span><span>Amis, défis & sessions</span><span class="pm-chevron">›</span></div>
+                    <div class="profil-menu-row" onclick="micModeToggle()"><span class="pm-icon">🎤</span><span>Micro</span><span class="pm-chevron" id="profil-mic-val">${micAuto() ? 'Mains libres' : 'Je touche pour parler'}</span></div>
                     <div class="profil-menu-row" onclick="voiceSpeedCycle()"><span class="pm-icon">⏩</span><span>Vitesse des voix</span><span class="pm-chevron" id="profil-speed-val">${voiceSpeedLabel()}</span></div>
                     <div class="profil-menu-row" onclick="showProgress()"><span class="pm-icon">🌱</span><span>Comment progresser</span><span class="pm-chevron">›</span></div>
                     <div class="profil-menu-row" onclick="showCompte()"><span class="pm-icon">🔐</span><span>Compte</span><span class="pm-chevron">›</span></div>
@@ -11717,7 +11718,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
         // Après une réplique du prof : en mains libres, le micro s'ouvre tout seul.
         function profAwaitAnswer() {
             if (!profActive()) return;
-            if (prof.handsfree && window.SpeechRecognition) profMic('nl');
+            if (micAuto() && prof.handsfree && window.SpeechRecognition) profMic('nl');
         }
 
         // countdown : secondes avant l'envoi automatique (affichées dans le bouton), hold : envoi
@@ -11806,6 +11807,45 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             return !!(startAt && now - startAt < 4000 && prev && now - longListenLast.at < 30000 && prev.includes(n));
         }
 
+        // ===== Micro : « je touche pour parler » (par défaut) ou mains libres =====
+        // Joas (1er novembre 2026) : en mains libres, le micro s'allumait quand il ne voulait pas,
+        // avec de la latence, et on ne pouvait pas effacer ce qui avait été entendu. Par défaut : le
+        // micro ne démarre jamais seul ; on touche 🎤 pour parler, on retouche pour arrêter ; le texte
+        // reste dans le champ (corriger, 🗑️ effacer), et ➤ l'envoie. Mains libres en option (Profil).
+        function micAuto() { return !!(state.settings && state.settings.micMode === 'auto'); }
+        function micModeToggle() {
+            if (!state.settings) state.settings = {};
+            state.settings.micMode = micAuto() ? 'tap' : 'auto';
+            save();
+            const el = document.getElementById('profil-mic-val');
+            if (el) el.textContent = micAuto() ? 'Mains libres' : 'Je touche pour parler';
+        }
+        // Bouton 🗑️ à côté du champ, pour effacer ce qui a été entendu.
+        function micClearBtn(input) {
+            const row = input && input.closest('.prof-input-row');
+            if (!row || row.querySelector('.mic-clear')) return;
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'btn btn-gray mic-clear';
+            b.title = 'Effacer ce qui a été entendu';
+            b.textContent = '🗑️';
+            b.onclick = () => { input.value = ''; input.focus(); };
+            row.insertBefore(b, row.lastElementChild);
+        }
+        function micVoiceCommand(t) {
+            const n = normalize(String(t || '')).replace(/[.,!?;:]/g, '').trim();
+            if (/^(efface|effacer|efface tout|wis|wissen|alles wissen|opnieuw|annule|annuler)$/.test(n)) return 'clear';
+            if (/^(envoie|envoyer|envoie le|verstuur|versturen|verzenden|stuur)$/.test(n)) return 'send';
+            return null;
+        }
+        function micReview(input) {
+            const row = input.closest('.prof-input-row');
+            if (row) row.style.display = '';
+            micClearBtn(input);
+            input.focus();
+            try { input.setSelectionRange(input.value.length, input.value.length); } catch (e) { /* pas grave */ }
+        }
+
         let ttsBusySince = 0;
         function ttsBusy() {
             const busy = ttsActive > 0 || Date.now() - ttsLastEnd < TTS_GRACE_MS || !!(window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending));
@@ -11872,7 +11912,11 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 window.removeEventListener('nlm-tts-start', st.onTts);
                 if (o.onEnd) o.onEnd(st);
                 const text = input ? input.value.trim() : '';
-                if (submit && text && o.isActive()) { longListenLast = { text, at: Date.now() }; input.value = ''; o.onSubmit(text, st); }
+                if (!submit || !text || !o.isActive()) return;
+                // Mode « je touche pour parler » (par défaut) : ce qui a été entendu reste dans le champ,
+                // à corriger ou effacer (🗑️), puis à envoyer avec ➤. Mains libres : envoi direct.
+                if (!micAuto() && input && !st.forceSend) { micReview(input); return; }
+                longListenLast = { text, at: Date.now() }; input.value = ''; o.onSubmit(text, st);
             };
             // Une voix de l'app démarre : on coupe l'écoute tout de suite (ce qui a déjà été dit est
             // gardé) ; elle reprendra après la voix et sa résonance (startSession attend ttsBusy).
@@ -11910,6 +11954,25 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                         const prev = finals[finals.length - 1];
                         if (prev && normalize(t).startsWith(normalize(prev))) finals[finals.length - 1] = t;
                         else if (t) finals.push(t);
+                    }
+                    // Commandes vocales (Joas : corriger aussi à la voix) : « efface » vide le champ,
+                    // « envoie » envoie ; seulement quand le mot est dit seul (une phrase à lui).
+                    const cmd = finals.length ? micVoiceCommand(finals[finals.length - 1]) : null;
+                    if (cmd) {
+                        finals.pop();
+                        if (cmd === 'clear') {
+                            st.committed = ''; st.session = ''; st.text = '';
+                            if (input) input.value = '';
+                            const r = st.rec; st.rec = null; if (r) r.dead = true;
+                            try { r && r.abort(); } catch (err) { /* déjà arrêtée */ }
+                            setTimeout(startSession, 150);
+                            return;
+                        }
+                        st.session = finals.reduce((acc, f) => joinNoOverlap(acc, f), '');
+                        show('');
+                        st.forceSend = true;
+                        st.finish(true);
+                        return;
                     }
                     st.session = finals.reduce((acc, f) => joinNoOverlap(acc, f), '');
                     // Android renvoie parfois, dans la nouvelle session, le texte déjà retenu.
@@ -11956,6 +12019,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     return;
                 }
                 if (now - st.startAt > 120000) { st.finish(true); return; }
+                if (!micAuto()) return; // « je touche pour parler » : on s'arrête quand l'apprenant retouche 🎤
                 if (!silence || st.hold) return;
                 if (!st.heard) { if (now - st.startAt > 10000) st.finish(true); return; }
                 const text = input ? input.value.trim() : '';
@@ -11965,7 +12029,10 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                 const cd = left <= 2000 ? Math.ceil(left / 1000) : 0;
                 if (cd !== st.cd) { st.cd = cd; if (o.onState) o.onState(st, cd); }
             }, 200);
-            if (input) { input.value = ''; input.classList.remove('mic-fr'); }
+            // En « je touche », on garde ce qui est déjà écrit (on peut compléter au micro).
+            if (input && micAuto()) input.value = '';
+            if (input) { input.classList.remove('mic-fr'); micClearBtn(input); }
+            if (st.committed === '' && input && input.value.trim()) st.committed = input.value.trim();
             if (o.onState) o.onState(st, 0);
             startSession();
             return st;
@@ -12039,7 +12106,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             prof.awaitNext = true;
             const el = document.getElementById('prof-next');
             el.innerHTML = `<button class="btn btn-green" onclick="profNextPhase()">➡️ ${label}</button>`;
-            if (prof.handsfree) {
+            if (micAuto() && prof.handsfree) {
                 const phase = prof.phase;
                 setTimeout(() => { if (prof && prof.phase === phase && prof.awaitNext && profActive() && !prof.busy) profNextPhase(); }, 2500);
             }
@@ -12920,7 +12987,7 @@ Réponds UNIQUEMENT en JSON : {"forces": ["2 ou 3 points forts précis, avec un 
                     // Saisie libre : micro de conversation ou texte (et 🇫🇷 pour demander la phrase).
                     guide.conv = { busy: false, dialogue: true, history: [], userLines: [] };
                     if (row) row.style.display = '';
-                    if (window.SpeechRecognition && !guide.rec) guideMic('nl');
+                    if (micAuto() && window.SpeechRecognition && !guide.rec) guideMic('nl');
                     const ans = await guideWaitFor();
                     guideStopListen();
                     if (row) row.style.display = 'none';
@@ -13102,7 +13169,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             const fallback = ['Oké. En verder?', 'Goed. Vertel nog iets.', 'Interessant! En wat nog meer?'];
             let turns = 0, finished = false;
             while (guideAlive(token) && !finished) {
-                if (window.SpeechRecognition && !guide.rec) guideMic('nl');
+                if (micAuto() && window.SpeechRecognition && !guide.rec) guideMic('nl');
                 const ans = await guideWaitFor();
                 guideStopListen();
                 if (!guideAlive(token) || ans === null || ans === '__skip__') break;
@@ -13566,7 +13633,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             if (talkActive()) await conjAudioSpeak(r.reply_nl, studyLangCode(), PROF_RATE[talk.level], { speaker: talk.p.speaker });
             // Le partenaire a conclu : le récap s'enchaîne tout seul (on peut encore continuer).
             if (r.fin === true && talk.userCount > 0 && talkActive()) { talkEnd(); return; }
-            if (talkActive() && talk.handsfree && window.SpeechRecognition && !talkRec) talkMic(studyLang().micLang);
+            if (micAuto() && talkActive() && talk.handsfree && window.SpeechRecognition && !talkRec) talkMic(studyLang().micLang);
         }
 
         function talkSubmit(text, isFr) {
@@ -13679,7 +13746,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const bar = document.querySelector('#talk-content .talk-bar');
             if (bar) bar.style.display = '';
             talkAppend({ who: 'info', html: `🔁 On continue ! Réponds à ${rpEscapeHtml(t.p.name)} quand tu veux.` });
-            if (t.handsfree && window.SpeechRecognition && !talkRec) talkMic(studyLang().micLang);
+            if (micAuto() && t.handsfree && window.SpeechRecognition && !talkRec) talkMic(studyLang().micLang);
         }
 
         const TALK_WORDS_LIST = '💬 Mes discussions';
@@ -13844,7 +13911,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             const token = r.token;
             await rpReplaySpeak(t.nl_original, t.speaker || 'Le recruteur');
             if (!replayActive() || rpReplay.token !== token || rpReplay.i !== r.i) return;
-            if (s.handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
+            if (micAuto() && s.handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
         }
 
         function rpReplayRenderIdea(force) {
@@ -13982,7 +14049,7 @@ Réponds UNIQUEMENT en JSON : {"reaction": "", "reaction_fr": "", "relance": "",
                         await rpReplaySpeak(say, speaker);
                         if (!replayActive() || rpReplay !== r || r.token !== token) return;
                         if (relance) {
-                            if (replaySettings().handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
+                            if (micAuto() && replaySettings().handsfree && window.SpeechRecognition && !rpReplayRec) rpReplayMic();
                             return;
                         }
                     }
@@ -15981,7 +16048,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 return '__passive';
             }
             r.answerLang = (opt && opt.lang) || 'nl';
-            if (routineActive(r) && window.SpeechRecognition && !r.rec) routineMic(r.answerLang, true);
+            if (micAuto() && routineActive(r) && window.SpeechRecognition && !r.rec) routineMic(r.answerLang, true);
             const extra = (opt && opt.btns) || [];
             const v = await routineWait(r, extra.concat([['__idk', '🤷 Je ne sais pas', 'btn-gray'], ['__stop', r.drill ? '⏹ Arrêter' : '⏹ Arrêter cette étape', 'btn-gray']]));
             routineStopRec();

@@ -920,3 +920,4 @@
         .audio-timer { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-left: 6px; }
         .wa-mark { display: flex; gap: 10px; margin-top: 10px; }
         .wa-mark .btn { margin: 0; flex: 1; }
+        .mic-clear { margin: 0; padding: 0 12px; flex: 0 0 auto; }
