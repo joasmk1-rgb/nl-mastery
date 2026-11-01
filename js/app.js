@@ -5137,6 +5137,61 @@ if (firebaseAvailable) {
             try { const d = JSON.parse(decodeURIComponent(btn.dataset.scene)); rpSceneOpen(d.key, d.launch, false); } catch (e) { console.warn(e); }
         }
 
+        // ----- Bibliothèque commune de scènes (Joas, 1er novembre 2026 : « au fur et à mesure il
+        // n'y aura plus d'appel Gemini pour personne ») -----
+        // Firestore sharedScenes/{langue__clé} = { key, lang, versions: [scène] } (5 versions au
+        // plus). Avant d'appeler Gemini, on prend une version déjà écrite par quelqu'un ; une scène
+        // écrite avec des données privées (profil de candidat, dossier « Mon entreprise ») n'est
+        // jamais partagée. Règle Firestore : firestore.rules, bloc sharedScenes.
+        const SHARED_SCENES_MAX = 5;
+        function sharedSceneRef(key) {
+            if (!db || !auth || !auth.currentUser) return null;
+            return db.collection('sharedScenes').doc((studyLangCode() + '__' + key).replace(/[\/.#$\[\]]/g, '_').slice(0, 400));
+        }
+        async function sharedScenesGet(key) {
+            const ref = sharedSceneRef(key);
+            if (!ref) return [];
+            try { const snap = await ref.get(); return snap.exists && Array.isArray(snap.data().versions) ? snap.data().versions : []; } catch (e) { return []; }
+        }
+        async function sharedScenesAdd(key, sc) {
+            const ref = sharedSceneRef(key);
+            if (!ref) return;
+            try {
+                const have = await sharedScenesGet(key);
+                if (have.length >= SHARED_SCENES_MAX) return;
+                await ref.set({ key, lang: studyLangCode(), versions: firebase.firestore.FieldValue.arrayUnion({ roleA: sc.roleA || '', lignes: sc.lignes, at: sc.at }) }, { merge: true });
+            } catch (e) { console.warn('Bibliothèque de scènes :', e.message); }
+        }
+        async function sharedScenesRemove(key, at) {
+            const ref = sharedSceneRef(key);
+            if (!ref) return;
+            const have = await sharedScenesGet(key);
+            await ref.set({ key, lang: studyLangCode(), versions: have.filter(v => v.at !== at) }, { merge: true });
+        }
+        // Une version pas encore vue sur cet appareil : la bibliothèque d'abord, Gemini seulement
+        // quand tout a été vu et qu'il reste de la place.
+        async function sharedScenesPick(key, seen) {
+            const all = await sharedScenesGet(key);
+            const fresh = all.filter(v => !(seen || []).some(s => s.at === v.at));
+            return { pick: fresh.length ? fresh[Math.floor(Math.random() * fresh.length)] : null, full: all.length >= SHARED_SCENES_MAX, all };
+        }
+        function rpScenePublic(launch) {
+            if (!launch) return false;
+            if (launch.type === 'bank') return !(state.candidateProfile || '').trim() && !((state.candidateNotes || {})[((rpRealData && rpRealData.banks[launch.index]) || {}).id] || '').trim();
+            if (launch.type === 'form') return !(state.companyDossier || '').trim();
+            if (launch.type === 'lib') { const e = rpLibFind(launch.id); return !!(e && !e.generated); }
+            return launch.type === 'rp' || launch.type === 'sit';
+        }
+        function sceneAdminBtnHtml(key, at) {
+            if (!(currentUserDoc && currentUserDoc.role === 'admin' && at)) return '';
+            return `<button type="button" class="report-link" onclick="sceneAdminRemove(this)" data-key="${rpEscapeHtml(key)}" data-at="${Number(at)}">🗑️ Retirer de la bibliothèque commune (admin)</button>`;
+        }
+        async function sceneAdminRemove(btn) {
+            if (!confirm('Retirer cette version de la bibliothèque commune ?')) return;
+            await sharedScenesRemove(btn.dataset.key, Number(btn.dataset.at));
+            btn.textContent = '✅ Retirée';
+        }
+
         async function rpSceneOpen(key, launch, forceNew) {
             const src = rpSceneSource(launch);
             if (!src) return;
@@ -5146,11 +5201,24 @@ if (firebaseAvailable) {
             const show = sc => sceneOpen({ title: src.title, subtitle: (saved.length > 1 ? 'Scène ' + (saved.indexOf(sc) + 1) + '/' + saved.length + ' · ' : '') + 'Écoute la scène comme si tu étais dans la pièce.',
                 lines: sc.lignes, roles: { A: sc.roleA || src.roleA, B: src.roleB }, back, regen: () => rpSceneOpen(key, launch, true) });
             if (saved.length && !forceNew) { show(saved[saved.length - 1]); return; }
-            if (!GeminiService.getKey()) { alert('Générer une scène nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'); return; }
+            const isPublic = rpScenePublic(launch);
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('scene-view').classList.add('active');
-            document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p class="prep-sub">Gemini écrit la scène…</p>`;
+            document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p class="prep-sub">Je cherche une scène…</p>`;
             sceneCurrent = { back };
+            if (isPublic) {
+                const lib = await sharedScenesPick(key, saved);
+                const sc = lib.pick && (lib.full || !forceNew || !GeminiService.getKey()) ? lib.pick
+                    : (lib.full && lib.all.length ? lib.all[Math.floor(Math.random() * lib.all.length)] : null);
+                if (sc) {
+                    const c1 = scenesCache(); c1[key] = (c1[key] || []).filter(s => s.at !== sc.at).concat(sc).slice(-3); scenesSave(c1);
+                    saved.push(sc); show(sc);
+                    document.getElementById('scene-content').insertAdjacentHTML('beforeend', sceneAdminBtnHtml(key, sc.at));
+                    return;
+                }
+            }
+            if (!GeminiService.getKey()) { document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p>Aucune scène enregistrée pour l'instant : il faut une clé Gemini pour en écrire une (Profil → 🤖 Intelligence IA).</p><button class="btn btn-gray" onclick="sceneBack()">← Retour</button>`; return; }
+            document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p class="prep-sub">Gemini écrit la scène…</p>`;
             const kit = rpHasKit(key) ? rpBuildKit(key) : null;
             const words = kit ? kit.verbs.map(v => v.inf).concat(kit.words.map(w => w.nl)).slice(0, 18) : [];
             try {
@@ -5172,6 +5240,7 @@ if (firebaseAvailable) {
                 scenesSave(c2);
                 saved.push(sc);
                 show(sc);
+                if (isPublic) sharedScenesAdd(key, sc);
             } catch (e) {
                 document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p style="color:var(--wrong);">Scène impossible à générer : ${rpEscapeHtml(e.message)}</p><button class="btn btn-gray" onclick="sceneBack()">← Retour</button>`;
             }
@@ -11258,6 +11327,17 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const key = 'fd:' + d.id + ':' + m.id;
             const cache = scenesCache();
             if (!forceNew && (cache[key] || []).length) return cache[key][cache[key].length - 1];
+            const isPublic = !(state.companyDossier || '').trim();
+            if (isPublic) {
+                const lib = await sharedScenesPick(key, cache[key]);
+                const pick = lib.pick && (lib.full || !forceNew || !GeminiService.getKey()) ? lib.pick
+                    : (lib.full && lib.all.length ? lib.all[Math.floor(Math.random() * lib.all.length)] : null);
+                if (pick) {
+                    const c1 = scenesCache(); c1[key] = (c1[key] || []).filter(s => s.at !== pick.at).concat(pick).slice(-2); scenesSave(c1);
+                    return pick;
+                }
+            }
+            if (!GeminiService.getKey()) throw new Error('clé Gemini absente');
             const f = m.session && FORMATION_SESSIONS.find(x => x.id === m.session);
             const raw = await GeminiService.generate(
                 'Écris une scène de dialogue réaliste en néerlandais de Flandre courant, à l\'oral, au débit naturel d\'un lieu de travail, entre deux personnes.\n' +
@@ -11275,13 +11355,13 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const c2 = scenesCache();
             c2[key] = (c2[key] || []).concat(sc).slice(-2);
             scenesSave(c2);
+            if (isPublic) sharedScenesAdd(key, sc);
             return sc;
         }
 
         async function formationListenDay(i, forceNew) {
             const d = FORMATION_DAYS[i];
             if (!d) return;
-            if (!GeminiService.getKey()) { alert('Générer les scènes nécessite ta clé Gemini (Profil → 🤖 Intelligence IA).'); return; }
             const back = () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); formationShowHome(); };
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('scene-view').classList.add('active');
@@ -11289,7 +11369,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const lines = [], names = [];
             for (let k = 0; k < d.moments.length; k++) {
                 const m = d.moments[k];
-                document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(d.label)}</h2><p class="prep-sub">Gemini écrit le moment ${k + 1}/${d.moments.length} : ${rpEscapeHtml(m.contexte)}</p>`;
+                document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(d.label)}</h2><p class="prep-sub">Préparation du moment ${k + 1}/${d.moments.length} : ${rpEscapeHtml(m.contexte)}</p>`;
                 let sc;
                 try { sc = await formationMomentScene(d, m, forceNew); } catch (e) { continue; }
                 if (sceneCurrent.back !== back) return; // l'utilisateur a quitté
