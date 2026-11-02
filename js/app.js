@@ -9551,6 +9551,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     ${it ? `<div class="canvas-idee">💡 ${rpEscapeHtml(it.idee || '').replace(/\n/g, '<br>')}</div>
                         <div class="canvas-rep" id="canvas-rep-${q.id}">🇳🇱 ${rpEscapeHtml(it.rep || '')} ${it.rep ? speakBtnHtml(it.rep) : ''}</div>
                         <button type="button" class="rp-coach-btn" onclick="rpCanvasEdit('${q.id}', '${k}')">✏️ Modifier ma réponse</button>` : ''}
+                    <button type="button" class="rp-coach-btn" onclick="rpCanvasFr('${q.id}')">🇫🇷 ${it && it.fr ? 'Reprendre ma réponse en français' : 'Répondre en français'}</button>
+                    <div id="canvas-fr-${q.id}"></div>
                 </details>`;
             }).join('');
             document.getElementById('rp-scenario-list').innerHTML = `
@@ -9609,6 +9611,69 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (!it || !box) return;
             box.innerHTML = `<textarea id="canvas-edit-${qid}" class="rp-profile-text" rows="5">${rpEscapeHtml(it.rep || '')}</textarea>
                 <button class="btn btn-green" onclick="const v = document.getElementById('canvas-edit-${qid}').value.trim(); if (v) { canvasState().items['${key}'].rep = v; canvasState().items['${key}'].edited = Date.now(); save(); } rpCanvasShow('Réponse modifiée.')">💾 Enregistrer</button>`;
+        }
+
+        // 🇫🇷 Répondre en français (Joas, 2 novembre 2026 : « pour aller plus vite, et être
+        // exhaustif ») : il dit ou écrit TOUT ce qu'il veut répondre en français, Gemini en fait sa
+        // réponse en néerlandais B1 sans rien perdre ni inventer ; gardée comme réponse modifiée à la
+        // main (edited : jamais écrasée par ✨), texte français gardé dans item.fr.
+        let canvasFrRec = null;
+        function rpCanvasFr(qid) {
+            const box = document.getElementById('canvas-fr-' + qid);
+            if (!box) return;
+            const C = canvasState(), o = canvasOffer();
+            const it = (o && C.items[o.id + ':' + qid]) || C.items[qid];
+            box.innerHTML = `<textarea id="canvas-fr-text-${qid}" class="rp-profile-text" rows="7" placeholder="Dis ou écris en français tout ce que tu veux répondre, sans rien oublier (exemples, chiffres, ce que tu as appris…). L'app en fait ta réponse en néerlandais.">${rpEscapeHtml((it && it.fr) || '')}</textarea>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-gray" id="canvas-fr-mic-${qid}" onclick="rpCanvasFrMic('${qid}')">🎤 Dicter en français</button>
+                    <button type="button" class="btn btn-green" onclick="rpCanvasFrTranslate('${qid}')">✨ En faire ma réponse en néerlandais</button>
+                </div>`;
+        }
+        function rpCanvasFrMic(qid) {
+            const btn = document.getElementById('canvas-fr-mic-' + qid), ta = document.getElementById('canvas-fr-text-' + qid);
+            if (canvasFrRec) { canvasFrRec.finish(false); return; }
+            if (!window.SpeechRecognition) { alert("La reconnaissance vocale n'est pas disponible ici : écris ta réponse (ou utilise la dictée du clavier)."); return; }
+            if (!ta) return;
+            const prefix = ta.value.trim();
+            canvasFrRec = longListen({
+                lang: 'fr', input: ta, noFrSwitch: true,
+                isActive: () => !!document.getElementById('canvas-fr-text-' + qid),
+                onState: () => { if (btn) btn.innerText = '⏹️ Arrêter la dictée'; },
+                onEnd: st => { if (canvasFrRec === st) canvasFrRec = null; if (btn) btn.innerText = '🎤 Dicter en français'; },
+                onSubmit: () => {}
+            });
+            if (canvasFrRec && prefix) canvasFrRec.committed = prefix;
+        }
+        async function rpCanvasFrTranslate(qid) {
+            if (canvasFrRec) canvasFrRec.finish(false);
+            if (!GeminiService.isAvailable()) { alert('Il faut la clé Gemini pour traduire ta réponse.'); return; }
+            const ta = document.getElementById('canvas-fr-text-' + qid), q = RH_QUESTIONS.find(x => x.id === qid);
+            const text = ta ? ta.value.trim() : '';
+            if (!text || !q) { alert("Dis ou écris d'abord ta réponse en français."); return; }
+            const C = canvasState(), o = canvasOffer(), key = o ? o.id + ':' + qid : qid;
+            const box = document.getElementById('canvas-fr-' + qid);
+            if (box) box.insertAdjacentHTML('beforeend', '<p class="report-meta" id="canvas-fr-wait">Je fais ta réponse en néerlandais…</p>');
+            let a = null;
+            try {
+                a = rpHelpParseJson(await GeminiService.generate(`Un candidat francophone prépare un entretien d'embauche en Flandre (néerlandais ${liveLevel()}, vise un niveau B1 clair).
+Question du recruteur : « ${q.nl} » (${q.fr})
+Ce qu'il veut répondre, dit en FRANÇAIS (peut avoir été dicté : corrige les erreurs de transcription) :
+« ${text.slice(0, 5000)} »
+${o ? `Offre visée : « ${o.titre} » — ${o.texte.slice(0, 2000)}
+Quand c'est naturel, emploie les mots de l'offre.` : ''}
+${tutorMemPromptLine()}
+Fais-en SA réponse en néerlandais parlé, niveau B1 (phrases courtes, verbe à la fin dans les subordonnées, inversion après un élément en tête), comme en Flandre. Garde TOUT ce qu'il dit : chaque fait, exemple, chiffre, argument et nuance, dans son ordre ; n'ajoute et n'invente rien. Si c'est long, la réponse est longue.
+"idee" : ses points en français, très courts, dans l'ordre, un par ligne commençant par « - ».
+Réponds UNIQUEMENT en JSON : {"idee": "", "rep": ""}`));
+            } catch (e) { a = { error: e.message }; }
+            const wait = document.getElementById('canvas-fr-wait');
+            if (wait) wait.remove();
+            if (!a || !a.rep) { alert("Je n'ai pas réussi à faire la réponse" + (a && a.error ? ' (' + a.error + ')' : '') + '. Réessaie dans un instant.'); return; }
+            C.items[key] = { idee: String(a.idee || '').slice(0, 1500), rep: String(a.rep).slice(0, 4000), fr: text.slice(0, 5000), edited: Date.now(), at: Date.now() };
+            save();
+            rpCanvasShow('✅ Ta réponse en néerlandais est prête : « ' + rpEscapeHtml(q.nl) + ' ».');
+            const d = document.getElementById('canvas-rep-' + qid);
+            if (d) { d.closest('details').open = true; d.scrollIntoView({ block: 'center' }); }
         }
 
         async function rpCanvasGenerate() {
