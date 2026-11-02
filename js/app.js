@@ -11246,7 +11246,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                     <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
                 </details>
                 ${rpJobMetier === 'admin_productie' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
-                <button class="rp-scenario-btn" onclick="formationShowHome()">🧑‍🏫 Ma formation (inwerkperiode) : tes premiers jours et on t'explique le travail</button>` : ''}
+                <button class="rp-scenario-btn" onclick="formationShowHome()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -11363,8 +11363,11 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <button class="rp-scenario-btn rp-profile-btn" onclick="formationEditDossier()">🏭 Mon entreprise <small>(privé, facultatif : ${filled ? 'rempli' : 'vide'})</small></button>
                 ${filled ? '' : '<p class="rp-real-hint">⚠️ Sans dossier, le formateur invente des détails génériques. Colle-y les vrais produits, sites, ateliers et ce qu\'on t\'a déjà expliqué.</p>'}
                 <button class="rp-scenario-btn" onclick="rpSceneOpen('vocabstory:admin', { type: 'vocabstory' }, true)">🎧 Histoire du vocabulaire (aléatoire)</button>
+                ${formationAllHtml()}
+                <details class="rp-more" style="width:100%; max-width:520px;"><summary>Par journée ou par séance</summary>
                 ${formationDaysHtml()}
-                ${FORMATION_SESSIONS.map(f => rpPrepRow(`<button class="rp-scenario-btn" onclick="formationStart('${f.id}')">${rpEscapeHtml(f.label)}</button>`, 'form:' + f.id, f.label, { type: 'form', id: f.id })).join('')}`;
+                ${FORMATION_SESSIONS.map(f => rpPrepRow(`<button class="rp-scenario-btn" onclick="formationStart('${f.id}')">${rpEscapeHtml(f.label)}</button>`, 'form:' + f.id, f.label, { type: 'form', id: f.id })).join('')}
+                </details>`;
         }
 
         function formationEditDossier() {
@@ -11550,6 +11553,29 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             lines.forEach((l, j) => { if (l.qui === 'titre') return; const who = names[n++]; if (who) { const w = document.querySelector('#scene-line-' + j + ' .scene-who'); if (w) w.textContent = who; } });
         }
 
+        // ▶️ Mon inwerkperiode (Joas, 2 novembre 2026 : « une seule séance, quitte à ce qu'elle dure
+        // une heure, qui se rappelle où j'ai stoppé ») : tous les moments des journées à la suite,
+        // position gardée dans state.formation.pos (moment en cours, repris au début du moment).
+        function formationAllMoments() { return FORMATION_DAYS.flatMap(d => d.moments.map(m => ({ d, m }))); }
+        function formationAllHtml() {
+            const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
+            const done = pos >= n;
+            return `<button class="btn btn-green" style="width:100%; max-width:520px; margin:6px 0;" onclick="formationStartAll(${done})">${done ? '✅ Inwerkperiode terminée · ↺ la refaire' : pos ? `▶️ Reprendre mon inwerkperiode <small>(moment ${pos + 1} / ${n})</small>` : `▶️ Commencer mon inwerkperiode <small>(${n} moments, environ 1 h)</small>`}</button>
+                <p class="rp-real-hint">Tout à la suite : la loge, les RH, la visite, les chefs d'équipe, le plant manager, puis tes premières tâches. Arrête-toi quand tu veux, l'app reprend au moment où tu t'es arrêté.</p>
+                ${pos && !done ? `<button class="report-link" onclick="if (confirm('Recommencer l'inwerkperiode depuis le début ?')) formationStartAll(true)">↺ Recommencer depuis le début</button>` : ''}`;
+        }
+        function formationStartAll(restart) {
+            if (!rpJobRequireGemini()) return;
+            const all = formationAllMoments();
+            if (!state.formation) state.formation = {};
+            if (restart || (state.formation.pos || 0) >= all.length) state.formation.pos = 0;
+            save();
+            rpJobLiveMetier = 'admin_productie';
+            const situations = all.map(({ d, m }) => ({ id: 'fd_' + d.id + '_' + m.id, metier: 'admin_productie', canal: m.canal, contexte: d.label + ' — ' + m.contexte, amorce: m.amorce, _prompt: formationMomentPrompt(m) }));
+            rpDayState = { label: 'Mon inwerkperiode', journeeId: 'fd_all', situations, index: state.formation.pos, log: [], formationAll: true };
+            rpJobBeginSituation(situations[rpDayState.index]);
+        }
+
         function formationStartDay(i) {
             const d = FORMATION_DAYS[i];
             if (!d || !rpJobRequireGemini()) return;
@@ -11587,6 +11613,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             if (rpIsRecording && rpRecognition) rpRecognition.stop();
             rpDayArchiveCurrent();
             day.index++;
+            if (day.formationAll) { state.formation.pos = day.index; save(); }
             if (day.index < day.situations.length) rpJobBeginSituation(day.situations[day.index]);
             else rpDayDebrief();
         }
