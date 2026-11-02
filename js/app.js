@@ -11246,7 +11246,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                     <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
                 </details>
                 ${rpJobMetier === 'admin_productie' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
-                <button class="rp-scenario-btn" onclick="formationShowHome()">🧑‍🏫 Ma formation : on t'explique le travail, en néerlandais</button>` : ''}
+                <button class="rp-scenario-btn" onclick="formationShowHome()">🧑‍🏫 Ma formation (inwerkperiode) : tes premiers jours et on t'explique le travail</button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -11483,7 +11483,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
         }
 
         function formationDaysHtml() {
-            return `<div class="rp-group-title">📅 Mes premiers jours</div>
+            return `<div class="rp-group-title">📅 Mes premiers jours (inwerkperiode)</div>
                 <p class="rp-real-hint">Des journées entières, moment par moment : la loge, les RH, la visite, les chefs d'équipe, le plant manager, puis tes premières tâches. Bilan à la fin.</p>
                 ${FORMATION_DAYS.map((d, i) => `<div style="display:flex; gap:8px; width:100%; max-width:520px;"><button class="rp-scenario-btn" style="flex:1;" onclick="formationStartDay(${i})">${rpEscapeHtml(d.label)} <small>· ${d.moments.length} moments</small></button><button class="rp-scenario-btn" style="flex:0 0 auto; width:auto;" title="Écouter sans participer" onclick="formationListenDay(${i})">👂</button></div>`).join('')}
                 <div class="rp-group-title">🎯 Une séance à la fois</div>`;
