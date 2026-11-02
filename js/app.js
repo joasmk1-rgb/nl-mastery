@@ -11245,8 +11245,8 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <details class="rp-more" style="width:100%; max-width:520px;"><summary>Changer de métier</summary>
                     <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
                 </details>
-                ${rpJobMetier === 'admin_productie' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
-                <button class="rp-scenario-btn" onclick="formationShowHome()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>` : ''}
+                ${metierVisible('admin_productie') ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
+                <button class="rp-scenario-btn" onclick="formationOpen()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -11556,6 +11556,25 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
         // ▶️ Mon inwerkperiode (Joas, 2 novembre 2026 : « une seule séance, quitte à ce qu'elle dure
         // une heure, qui se rappelle où j'ai stoppé ») : tous les moments des journées à la suite,
         // position gardée dans state.formation.pos (moment en cours, repris au début du moment).
+        // Entrée directe (accueil, Mon travail quel que soit le métier affiché) : passe sur le métier
+        // admin_productie puis ouvre la page de la formation.
+        async function formationOpen() {
+            if (!state.settings) state.settings = {};
+            state.settings.jobMetier = 'admin_productie';
+            rpJobMetier = 'admin_productie';
+            save();
+            showRoleplay('travail');
+            await rpShowJobHome();
+            formationShowHome();
+        }
+        function formationHomeCardHtml() {
+            if (studyLangCode() !== 'nl' || !metierVisible('admin_productie')) return '';
+            const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
+            if (pos >= n) return '';
+            return `<div class="dash-card routine-home" onclick="formationOpen()" role="button">
+                <div class="routine-home-top"><b>🧑‍🏫 Mon inwerkperiode</b><span class="routine-home-go">${pos ? 'moment ' + (pos + 1) + ' / ' + n + ' ›' : '≈ 1 h ›'}</span></div>
+            </div>`;
+        }
         function formationAllMoments() { return FORMATION_DAYS.flatMap(d => d.moments.map(m => ({ d, m }))); }
         function formationAllHtml() {
             const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
@@ -17549,7 +17568,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
 
         // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
         function homeTilesHtml() {
-            return `<div class="home-tiles">
+            return `${typeof formationHomeCardHtml === 'function' ? formationHomeCardHtml() : ''}<div class="home-tiles">
                 <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>${studyLangCode() === 'nl' ? 'Ton parcours A1 → B2' : 'Cours particulier'}</small></div>
                 <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>${studyLangCode() === 'nl' ? 'Discuter, travail, écoute' : 'Discuter, écouter, répéter'}</small></div>
                 ${studyLangCode() === 'nl' || langHas('vocabulaire') ? `<div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>` : ''}
