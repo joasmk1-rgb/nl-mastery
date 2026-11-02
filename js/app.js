@@ -6508,6 +6508,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="hub-grid single">
                     <div class="hub-card accent" onclick="vocabTrain()"><span class="hub-card-icon">✍️</span><div class="hub-card-title">S'entraîner</div><div class="hub-card-desc">Avec ton tuteur, à l'oral ou à l'écrit : du plus courant au plus rare, par paquets.</div></div>
                     <div class="hub-card" onclick="vocabListen()"><span class="hub-card-icon">🎧</span><div class="hub-card-title">Écouter</div><div class="hub-card-desc">Les mots lus en néerlandais et en français, mains libres.</div></div>
+                    <div class="hub-card" onclick="vocabTalk()"><span class="hub-card-icon">💬</span><div class="hub-card-title">En parler</div><div class="hub-card-desc">Une conversation avec ton tuteur qui t'amène à employer 8 de ces mots, puis le bilan des mots placés.</div></div>
                     ${kind === 'file' ? `<div class="hub-card" onclick="showWordList('vocab', '${key}')"><span class="hub-card-icon">📋</span><div class="hub-card-title">Voir la liste</div><div class="hub-card-desc">Chercher, filtrer, sélectionner des mots pour en faire une liste.</div></div>` : ''}
                 </div>`;
         }
@@ -6545,6 +6546,29 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const label = kind === 'list' ? key : categoryLabel(key);
             wordAudioCtx = { boxId: 'vocab-listen-audio', viewId: 'vocab-view', items: vocabItems(kind, key), label: `les mots « ${label} », du plus courant au plus rare` };
             wordAudioRenderSetup();
+        }
+
+        // 💬 En parler : une conversation de Discuter qui fait employer 8 mots de la fiche (ratés
+        // d'abord, puis pas encore maîtrisés, du plus courant au plus rare) ; bilan à la fin
+        // (talkWordTargetHtml : mots placés / évités).
+        let talkWordTargetNext = null;
+        async function vocabTalk() {
+            if (!vocabCurrent) return;
+            if (!GeminiService.isAvailable()) { alert('Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA.'); return; }
+            const { kind, key } = vocabCurrent;
+            const all = vocabItems(kind, key).filter(i => i.nl && i.fr);
+            const todo = all.filter(i => !isTrueMastered(i.id));
+            const pool = todo.length ? todo : all;
+            const review = pool.filter(i => wordStatus(i.id) === 'review');
+            const items = review.concat(pool.filter(i => !review.includes(i))).slice(0, 8).map(i => ({ id: i.id, nl: i.nl, fr: i.fr }));
+            if (!items.length) return;
+            talkSettings().mode = 'libre';
+            talkSettings().topic = 'libre';
+            if (talk && !talk.ended) talkStop();
+            talk = null;
+            await showTalk();
+            talkWordTargetNext = { label: kind === 'list' ? key : categoryLabel(key), items };
+            talkStart();
         }
 
         function vocabTrain() {
@@ -13970,7 +13994,9 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             if (sitId === '__random') { const all = talkSituations(); sit = all[Math.floor(Math.random() * all.length)] || null; }
             else if (sitId) sit = rpLibFind(sitId);
             const topic = s.topic === 'surprise' ? pick(TALK_TOPICS) : s.topic;
-            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0, extraWords: routineWordsForTalk.splice(0) };
+            talk = { partner: s.partner, p: TALK_PARTNERS[s.partner], sit, topic, level: s.level, handsfree: s.handsfree, history: [], log: [], suggestions: [], busy: false, ended: false, userCount: 0, extraWords: routineWordsForTalk.splice(0), wordTarget: talkWordTargetNext };
+            talkWordTargetNext = null;
+            if (talk.wordTarget) talk.extraWords = talk.wordTarget.items.map(w => w.nl);
             talkRenderChat();
             if (sit) talkAppend({ who: 'info', html: `<div class="talk-sit-card"><b>🎭 ${rpEscapeHtml(sit.label)}</b><div>${rpEscapeHtml(sit.contexte)}</div>
                 ${studyLangCode() === 'nl' && (sit.kit && sit.kit.phrases || []).length ? `<details><summary>💬 Phrases utiles</summary>${sit.kit.phrases.map(x => `<div class="talk-sit-ph">${rpEscapeHtml(x.nl)} ${speakBtnHtml(x.nl)}<br><small>${rpEscapeHtml(x.fr)}</small></div>`).join('')}</details>` : ''}
@@ -13983,7 +14009,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             document.getElementById('talk-content').innerHTML = `
                 <div class="talk-head">
                     <span class="talk-avatar small">${p.emoji}</span>
-                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : TALK_TOPICS[talk.topic]}</small></div>
+                    <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : talk.wordTarget ? '💬 ' + rpEscapeHtml(talk.wordTarget.label) : TALK_TOPICS[talk.topic]}</small></div>
                     ${speedBtnHtml()}
                     ${talk.lesson ? courseRulesBtnHtml() : ''}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
@@ -14099,7 +14125,8 @@ Registre : vouvoiement (u) avec un client, un patient ou un usager ; tutoiement 
 Ce dont tu te souviens de vos conversations précédentes : ${mem || "rien, c'est votre première conversation"}.
 ${portrait.length ? "Ce que tu sais de l'apprenant : " + portrait.join(' ') : ''}
 ${tutorMemPromptLine()}
-${talk.extraWords && talk.extraWords.length ? "Mots que l'apprenant a appris aujourd'hui : " + talk.extraWords.join(', ') + ". Amène-le naturellement à les employer (des questions qui les appellent), sans en faire une leçon." : ''}
+${talk.wordTarget ? `EXERCICE : amène l'apprenant à employer lui-même ces mots (thème « ${talk.wordTarget.label} ») : ${talk.wordTarget.items.map(w => w.nl + ' (' + w.fr + ')').join(', ')}. Choisis toi-même un sujet ou une petite scène (quotidien ou travail selon les mots) qui les appelle naturellement, au lieu du sujet de départ ; pose des questions qui l'obligent à les dire, un ou deux à la fois, sans lui donner la liste ni en faire une leçon. S'il ne trouve pas un mot, glisse-le dans ta réplique pour qu'il puisse le reprendre. Quand il les a presque tous employés, cherche une fin naturelle.` : ''}
+${!talk.wordTarget && talk.extraWords && talk.extraWords.length ? "Mots que l'apprenant a appris aujourd'hui : " + talk.extraWords.join(', ') + ". Amène-le naturellement à les employer (des questions qui les appellent), sans en faire une leçon." : ''}
 Règles :
 - Une vraie conversation, vivante, comme entre deux personnes : réagis à ce qu'il dit, raconte aussi un peu de toi, pose UNE question à la fois. 1 à 3 phrases courtes, adaptées à son niveau (A1 : phrases très simples et mots très courants).
 - Néerlandais standard, comme en Flandre. Pas d'emojis.
@@ -14261,6 +14288,7 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
                 <div class="prof-target-title">👋 Fin de la conversation · ${t.userCount} échange${t.userCount > 1 ? 's' : ''}</div>
                 ${mots.length ? `<div class="prof-deb-sec">📖 À garder${added ? ' (ajoutés à « 💬 Mes discussions »)' : ''}</div><ul>${mots.map(m => `<li><b>${rpEscapeHtml(m.nl)}</b> ${speakBtnHtml(m.nl)} = ${rpEscapeHtml(m.fr || '')}</li>`).join('')}</ul>` : ''}
                 ${r && r.tournure && r.tournure.nl ? `<div class="prof-deb-sec">💬 Tournure du jour</div><p><b>${rpEscapeHtml(r.tournure.nl)}</b> ${speakBtnHtml(r.tournure.nl)}<br><small>${rpEscapeHtml(r.tournure.fr || '')}</small></p>` : ''}
+                ${talkWordTargetHtml(t)}
                 ${usedSessionHtml()}
                 <div class="prof-actions"><button class="btn btn-green" onclick="tutorOpen('talk')">🧑‍🏫 Revoir avec mon tuteur</button><button class="btn btn-gray" onclick="talk = null; talkRenderSetup();">💬 Nouvelle conversation</button><button class="btn btn-gray" onclick="talkResume()">🔁 On continue encore un peu</button></div>
             </div>` });
@@ -14268,6 +14296,25 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
             if (bar) bar.style.display = 'none';
             const sugg = document.getElementById('talk-sugg');
             if (sugg) sugg.innerHTML = '';
+        }
+
+        // Bilan de « 💬 En parler » : chaque mot visé, placé ou non dans ce que l'apprenant a dit
+        // (forme exacte, forme fléchie reconnue par rpWordLookup, ou mot composé qui le contient).
+        function talkWordTargetHtml(t) {
+            if (!t.wordTarget) return '';
+            const said = t.history.filter(h => h.who === 'me' && !h.isFr).map(h => rpKitNorm(h.text)).join(' ');
+            const toks = said.split(' ').filter(Boolean);
+            const used = w => {
+                const base = rpKitNorm(String(w.nl).split(/[\/(,;]/)[0].replace(/^(de|het|een) /i, ''));
+                if (!base) return false;
+                if (base.includes(' ')) return (' ' + said + ' ').includes(' ' + base + ' ');
+                return toks.some(tok => tok === base || (base.length >= 5 && tok.includes(base)) || ((rpWordLookup(tok) || {}).id === w.id));
+            };
+            const ok = t.wordTarget.items.filter(used), ko = t.wordTarget.items.filter(w => !ok.includes(w));
+            const li = w => `<li><b>${rpEscapeHtml(w.nl)}</b> ${speakBtnHtml(w.nl)} = ${rpEscapeHtml(w.fr)}</li>`;
+            return `<div class="prof-deb-sec">🎯 Mots de « ${rpEscapeHtml(t.wordTarget.label)} » : ${ok.length} / ${t.wordTarget.items.length} placés</div>
+                ${ok.length ? `<p><small>✅ Tu les as employés :</small></p><ul>${ok.map(li).join('')}</ul>` : ''}
+                ${ko.length ? `<p><small>➖ Pas encore dits (relance « 💬 En parler » pour les retenter) :</small></p><ul>${ko.map(li).join('')}</ul>` : ''}`;
         }
 
         // Reprendre après la fin : les repères de fin repartent de là où on en est (talk.extra).
