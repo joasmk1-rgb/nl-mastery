@@ -5262,6 +5262,15 @@ if (firebaseAvailable) {
                 if (!e) return null;
                 return { title: e.label, roleA: 'L\'interlocuteur', roleB: 'Toi', welcome: e.welcome, desc: 'Rôle de A : ' + e.role + ' Situation (vue par B) : ' + e.contexte };
             }
+            if (launch.type === 'vocabstory') {
+                const pool = fullDb.filter(i => ['THEME_ADMIN_PRODUCTIE', 'THEME_ERP', 'THEME_KANTOORSOFTWARE'].includes(i.file) && i.nl && i.fr);
+                if (!pool.length) return null;
+                const picked = pool.slice().sort(() => Math.random() - 0.5).slice(0, 28);
+                const list = picked.map(i => i.nl + ' (' + i.fr + ')').join(', ');
+                return { title: '🎧 Visite guidée — vocabulaire admin / production / ERP', roleA: 'Le guide', roleB: 'Toi (le visiteur)',
+                    welcome: 'Goedemorgen! Welkom, ik neem je even mee op een rondleiding. Volg mij maar.', length: '26 à 34',
+                    desc: 'Un guide fait visiter un bureau et un atelier de production dans une entreprise belge (administration, production, informatique de gestion). Il montre des objets, des lieux et des situations, et DÉCRIT chaque élément de façon naturelle avant ou en donnant le mot juste, jamais une simple liste de vocabulaire, toujours une phrase descriptive en contexte (par exemple : « dit is de perforatrice, een kantoortool waarmee je gaatjes maakt in papier » pour une perforatrice). Utilise naturellement et définis en contexte le plus grand nombre possible de ces mots, dans un ordre logique de visite : ' + list + '. B réagit brièvement de temps en temps (une question, un « ah oké », un petit commentaire) mais c\'est surtout A qui parle et décrit.' };
+            }
             return null;
         }
 
@@ -11329,6 +11338,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <p class="rp-real-hint">La personne chargée de ta formation t'explique le travail en néerlandais, vérifie que tu as compris et te fait reformuler. Tu peux poser tes questions, même en français. 👂 = écouter sans participer.</p>
                 <button class="rp-scenario-btn rp-profile-btn" onclick="formationEditDossier()">🏭 Mon entreprise <small>(privé, facultatif : ${filled ? 'rempli' : 'vide'})</small></button>
                 ${filled ? '' : '<p class="rp-real-hint">⚠️ Sans dossier, le formateur invente des détails génériques. Colle-y les vrais produits, sites, ateliers et ce qu\'on t\'a déjà expliqué.</p>'}
+                <button class="rp-scenario-btn" onclick="rpSceneOpen('vocabstory:admin', { type: 'vocabstory' }, true)">🎧 Histoire du vocabulaire (aléatoire)</button>
                 ${formationDaysHtml()}
                 ${FORMATION_SESSIONS.map(f => rpPrepRow(`<button class="rp-scenario-btn" onclick="formationStart('${f.id}')">${rpEscapeHtml(f.label)}</button>`, 'form:' + f.id, f.label, { type: 'form', id: f.id })).join('')}`;
         }
