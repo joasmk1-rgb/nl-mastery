@@ -11313,7 +11313,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <details class="rp-more" style="width:100%; max-width:520px;"><summary>Changer de métier</summary>
                     <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
                 </details>
-                ${metierVisible('admin_productie') ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
+                ${studyLangCode() === 'nl' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
                 <button class="rp-scenario-btn" onclick="formationOpen()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
@@ -11636,7 +11636,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             formationShowHome();
         }
         function formationHomeCardHtml() {
-            if (studyLangCode() !== 'nl' || !metierVisible('admin_productie')) return '';
+            if (studyLangCode() !== 'nl') return '';
             const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
             if (pos >= n) return '';
             return `<div class="dash-card routine-home" onclick="formationOpen()" role="button">
