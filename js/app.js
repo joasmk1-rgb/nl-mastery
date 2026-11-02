@@ -2268,7 +2268,7 @@ if (firebaseAvailable) {
             if (!box) return;
             const block = (prefix, label, sample) => {
                 const list = voicesFor(prefix), cur = bestVoice(prefix);
-                if (!list.length) return `<p class="report-meta">${label} : aucune voix installée sur cet appareil.</p>`;
+                if (!list.length) return prefix === 'fr' ? `<p class="report-meta">${label} : aucune voix installée sur cet appareil.</p>` : voiceInstallHtml();
                 return `<div class="conj-audio-label">${label}</div>
                     <div style="display:flex; gap:8px; align-items:center;">
                         <select class="prof-select" style="flex:1;" onchange="voicePick('${prefix}', this.value)">${list.map(v => `<option value="${rpEscapeHtml(v.name)}"${cur && v.name === cur.name ? ' selected' : ''}>${rpEscapeHtml(v.name)}${voiceRank(v) >= 40 ? ' ★' : ''}</option>`).join('')}</select>
@@ -2292,8 +2292,48 @@ if (firebaseAvailable) {
         }
         if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', () => { if (document.getElementById('profil-voice-box') && document.getElementById('profil-voice-box').innerHTML) voicePickerRender(); });
 
+        // Pas de voix de la langue étudiée sur l'appareil (Joas, 2 novembre 2026) : au lieu d'un
+        // simple avertissement, on mène là où l'installer, selon l'appareil. Bandeau une fois par
+        // ouverture de l'app (voiceMissingCheck, appelé avant chaque lecture), et dans Profil → Voix.
+        function voiceDevice() {
+            const ua = navigator.userAgent || '';
+            if (/android/i.test(ua)) return 'android';
+            if (/iphone|ipad|ipod/i.test(ua) || (/macintosh/i.test(ua) && navigator.maxTouchPoints > 1)) return 'ios';
+            if (/windows/i.test(ua)) return 'windows';
+            if (/macintosh/i.test(ua)) return 'mac';
+            return 'other';
+        }
+        function voiceInstallHtml() {
+            const L = studyLang().nom, Lc = L.charAt(0).toUpperCase() + L.slice(1);
+            const d = voiceDevice();
+            const link = (href, label) => `<a class="btn btn-green" style="display:inline-block; margin:4px 4px 0 0; text-decoration:none;" href="${href}" target="_blank" rel="noopener">${label}</a>`;
+            const steps = {
+                android: `${link('intent:#Intent;action=com.android.settings.TTS_SETTINGS;end', '⚙️ Ouvrir la synthèse vocale')}${link('https://play.google.com/store/apps/details?id=com.google.android.tts', '📲 Moteur vocal Google (Play Store)')}
+                    <ol><li>Moteur préféré : <b>Services vocaux Google</b> (à installer avec le 2e bouton s'il manque).</li><li>Touche ⚙️ à côté → <b>Installer les données vocales</b> → <b>${Lc}</b> (Belgique ou Pays-Bas) → télécharge.</li><li>Si le 1er bouton ne fait rien : Paramètres → Accessibilité → Synthèse vocale.</li></ol>`,
+                ios: `<ol><li>Ouvre <b>Réglages</b> → <b>Accessibilité</b> → <b>Contenu énoncé</b> → <b>Voix</b>.</li><li>Choisis <b>${Lc}</b>, puis télécharge une voix (de préférence « Améliorée » ou « Premium »).</li></ol>`,
+                windows: `${link('ms-settings:speech', '⚙️ Ouvrir les réglages Voix de Windows')}
+                    <ol><li><b>Voix</b> → <b>Ajouter des voix</b> → <b>${Lc}</b>.</li><li>Ou plus simple : ouvre l'app dans <b>Microsoft Edge</b>, qui a des voix « Natural » de toutes les langues.</li></ol>`,
+                mac: `<ol><li><b>Réglages système</b> → <b>Accessibilité</b> → <b>Contenu énoncé</b> → <b>Voix du système</b> → <b>Gérer les voix</b>.</li><li>Coche une voix <b>${Lc}</b>.</li></ol>`,
+                other: `<p>Ajoute une voix ${L} dans les réglages de synthèse vocale de ton appareil, ou ouvre l'app dans Chrome ou Edge.</p>`
+            };
+            return `<div class="voice-install"><b>🔇 Pas de voix pour le ${L} sur cet appareil</b> : le ${L} est lu avec un mauvais accent.${steps[d]}
+                <p class="report-meta">Ensuite, ferme complètement le navigateur et rouvre l'app.</p></div>`;
+        }
+        let voiceMissingShown = false;
+        function voiceMissingCheck() {
+            if (voiceMissingShown || !('speechSynthesis' in window)) return;
+            if (!window.speechSynthesis.getVoices().length || studyVoice()) return; // voix pas encore chargées, ou présente
+            voiceMissingShown = true;
+            const el = document.createElement('div');
+            el.id = 'voice-missing';
+            el.style.cssText = 'position:fixed; left:12px; right:12px; bottom:12px; z-index:3000; max-width:520px; margin:0 auto; background:var(--card-bg, #fff); color:inherit; border:2px solid var(--wrong, #c0392b); border-radius:12px; padding:12px 14px; box-shadow:0 6px 24px rgba(0,0,0,.35); max-height:70vh; overflow:auto;';
+            el.innerHTML = `<button type="button" onclick="this.parentElement.remove()" style="float:right; background:none; border:none; font-size:1.2rem; cursor:pointer; color:inherit;">✕</button>${voiceInstallHtml()}`;
+            document.body.appendChild(el);
+        }
+
         function speakNL(text) {
             if (!('speechSynthesis' in window) || !text) return;
+            voiceMissingCheck();
             // Pour la voix, on retire aussi les emojis, que certaines voix décrivent à haute voix.
             text = speechBlanks(stripMarkdown(text)).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '').trim();
             if (!text) return;
@@ -4577,6 +4617,7 @@ if (firebaseAvailable) {
                 if (!('speechSynthesis' in window) || !text) return resolve();
                 const u = new SpeechSynthesisUtterance(speechBlanks(stripMarkdown(text)));
                 u.lang = lang === 'fr' ? 'fr-FR' : studyLang().ttsLang;
+                if (lang !== 'fr') voiceMissingCheck();
                 const voices = window.speechSynthesis.getVoices();
                 const nlVoices = voicesFor(studyLang().voixPrefixe);
                 let voice = lang === 'fr' ? frVoice() : studyVoice();
@@ -8324,10 +8365,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 if (!warningDiv) return;
                 if (!rpDutchVoice) {
                     warningDiv.style.display = 'block';
-                    warningDiv.innerHTML = "⚠️ Aucune voix néerlandaise installée sur cet appareil — le texte sera lu avec une voix par défaut. "
-                        + "<br>Windows : Paramètres → Heure et langue → Voix, ajoute \"Nederlands\". "
-                        + "<br>Mac : Réglages système → Accessibilité → Contenu énoncé, ajoute une voix néerlandaise. "
-                        + "<br>Android/Chrome : Paramètres → Accessibilité → Synthèse vocale, installe les données néerlandaises.";
+                    warningDiv.innerHTML = voiceInstallHtml();
                 } else {
                     warningDiv.style.display = 'none';
                 }
