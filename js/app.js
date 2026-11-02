@@ -677,6 +677,9 @@ async function cloudCheck() {
         betaKeyRefresh(userDoc);
         const reloading = await cloudReconcile(userDoc, false);
         if (!reloading) tutorMemSeedAdmin();
+        // L'accueil a pu s'afficher avant de savoir que le compte est admin (cartes réservées, ex.
+        // Mon inwerkperiode) : on le redessine.
+        if (!reloading && curriculumLoaded && document.getElementById('home-view').classList.contains('active')) renderDashboard();
         return reloading;
     } catch (e) {
         cloudSyncFailed(e);
