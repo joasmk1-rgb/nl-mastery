@@ -723,6 +723,12 @@
         .talk-corr { margin-top: 6px; font-size: 0.8rem; background: rgba(255,255,255,.15); border-radius: 8px; padding: 4px 8px; }
         .talk-corr summary { cursor: pointer; }
         .talk-sugg { display: flex; gap: 6px; overflow-x: auto; width: 100%; padding: 6px 0; scrollbar-width: none; }
+        .sugg-ideas { width: 100%; display: flex; flex-direction: column; gap: 5px; }
+        .sugg-title { font-size: 0.75rem; color: var(--text-secondary); }
+        .sugg-idea { border: 1px dashed var(--primary); border-radius: 12px; padding: 7px 11px; cursor: pointer; background: color-mix(in srgb, var(--primary) 6%, transparent); }
+        .sugg-fr { font-size: 0.88rem; color: var(--text); }
+        .sugg-nl { display: none; margin-top: 4px; font-weight: 600; font-size: 0.86rem; color: var(--primary); }
+        .sugg-idea.show .sugg-nl { display: block; }
         .talk-chip { flex: 0 0 auto; max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid var(--primary); background: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--text); border-radius: var(--radius-pill); padding: 7px 12px; font-size: 0.82rem; cursor: pointer; }
         .talk-bar { display: flex; align-items: center; justify-content: center; gap: 22px; width: 100%; margin-top: 6px; }
         .talk-mic { width: 74px; height: 74px; border-radius: 50%; border: none; background: var(--success); color: #fff; font-size: 2rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25); }

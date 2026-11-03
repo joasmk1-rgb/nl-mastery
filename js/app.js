@@ -13834,7 +13834,22 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
         function guideRenderSugg(list) {
             guideSuggList = (list || []).filter(s => s && s.nl).slice(0, 3);
             const el = document.getElementById('guide-sugg');
-            if (el) el.innerHTML = guideSuggList.map((s, i) => `<button type="button" class="talk-chip" title="${rpEscapeHtml(s.fr || '')}" onclick="guideUseSugg(${i})">${rpEscapeHtml(s.nl)}</button>`).join('');
+            if (el) el.innerHTML = suggIdeasHtml(guideSuggList, 'guideUseSugg');
+        }
+        // Idées de réponse affichées EN FRANÇAIS (Joas, 3 novembre 2026 : « la suggestion directement
+        // en français », comme le sous-titre du mode spectateur) : il la dit lui-même en néerlandais ;
+        // toucher l'idée montre et fait entendre la version néerlandaise, « Utiliser » la met dans le champ.
+        function suggIdeasHtml(list, useFn) {
+            if (!list || !list.length) return '';
+            return `<div class="sugg-ideas"><div class="sugg-title">💭 Tu pourrais dire…</div>${list.map((s, i) => `<div class="sugg-idea" onclick="suggReveal(this)" data-nl="${rpEscapeHtml(s.nl)}">
+                <div class="sugg-fr">${rpEscapeHtml(s.fr || s.nl)}</div>
+                <div class="sugg-nl">${rpEscapeHtml(s.nl)} <button type="button" class="report-link" onclick="event.stopPropagation(); ${useFn}(${i})">✍️ Utiliser</button></div>
+            </div>`).join('')}</div>`;
+        }
+        function suggReveal(el) {
+            const open = !el.classList.contains('show');
+            el.classList.toggle('show', open);
+            if (open) conjAudioSpeak(el.dataset.nl, 'nl', 0.9);
         }
         function guideToggleSugg() {
             const el = document.getElementById('guide-sugg');
@@ -14218,7 +14233,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
         function talkRenderSugg() {
             const el = document.getElementById('talk-sugg');
             if (!el || !talk) return;
-            el.innerHTML = (talk.suggestions || []).map((s, i) => `<button type="button" class="talk-chip" onclick="talkUseSugg(${i})" title="${rpEscapeHtml(s.fr || '')}">${rpEscapeHtml(s.nl)}</button>`).join('');
+            el.innerHTML = suggIdeasHtml(talk.suggestions || [], 'talkUseSugg');
         }
 
         function talkToggleSugg() {
