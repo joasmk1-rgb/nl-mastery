@@ -3915,7 +3915,7 @@ if (firebaseAvailable) {
             try {
                 r = rpHelpParseJson(await GeminiService.generate(`Tu écris des blocs de mots (chunks) en ${studyLang().variante} pour un apprenant francophone de niveau ${liveLevel()}.
 Pour chaque mot ci-dessous, donne 3 blocs : les combinaisons de 2 à 4 mots les plus FRÉQUENTES et utiles où ce mot apparaît (verbe + complément, préposition + nom, adjectif + nom, tournure figée).
-LA FRÉQUENCE EST LA CONTRAINTE LA PLUS FORTE : autour du mot, n'emploie que des mots parmi les plus courants de la langue (comme ceux-ci : ${aiChunksFrequentWords()}), dans le bloc comme dans la phrase d'exemple ; jamais de mot rare ou recherché. Pour chaque bloc :
+La FRÉQUENCE pèse le plus, mais en proportion : autour du mot, emploie surtout des mots très courants (comme ceux-ci : ${aiChunksFrequentWords()}) ; une tournure plus recherchée ou un mot plus rare reste permis de temps en temps (environ un bloc sur trois au plus), s'il est naturel. Varie les constructions : pas trois blocs sur le même moule. Pour chaque bloc :
 - "c" : le bloc, en minuscules, tel qu'il apparaît dans la phrase ;
 - "ex" : une phrase courte, naturelle, de tous les jours ou du travail, qui contient EXACTEMENT ce bloc ;
 - "fr" : la traduction française naturelle de la phrase.
@@ -10638,8 +10638,11 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             const all = p.kit.words.map(w => ({ nl: w.nl, fr: w.fr, id: w.item && w.item.id, item: w.item }))
                 .concat(p.kit.verbs.filter(v => v.item || v.conj).map(v => ({ nl: v.inf, fr: v.conj ? v.conj.fr : v.item.fr, id: v.item && v.item.id, item: v.item })))
                 .filter(w => w.nl && w.fr);
-            // La fréquence d'abord (Joas) : les mots les plus courants du kit passent avant les autres.
-            all.sort((a, b) => ((b.item && b.item.freq) || 0) - ((a.item && a.item.freq) || 0));
+            // La fréquence pèse le plus, mais en proportion (Joas) : tirage pondéré, un mot courant
+            // sort bien plus souvent qu'un rare, sans que les rares soient exclus.
+            const wkey = w => Math.pow(Math.random(), 1 / Math.pow(10, (((w.item && w.item.freq) || 3) - 3)));
+            all.forEach(w => { w._k = wkey(w); });
+            all.sort((a, b) => b._k - a._k);
             const cands = all.filter(w => !known(w.item));
             // 1. Les mots
             await routineSay(r, `1. Les mots de la situation. ${cands.length ? 'Dis-moi chaque mot en néerlandais.' : 'Tu les connais déjà tous : on passe aux blocs.'}`);
