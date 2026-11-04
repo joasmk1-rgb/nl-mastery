@@ -3852,7 +3852,7 @@ if (firebaseAvailable) {
             if (!chunksLoading) {
                 chunksLoading = fetch('data/chunks/chunks_nl.json')
                     .then(r => r.ok ? r.json() : { chunks: {} })
-                    .then(d => { chunksData = d.chunks || {}; return chunksData; })
+                    .then(d => { chunksData = d.chunks || {}; aiChunksMergeCache(); return chunksData; })
                     .catch(() => { chunksData = {}; return chunksData; });
             }
             return chunksLoading;
@@ -3864,6 +3864,66 @@ if (firebaseAvailable) {
         }
         function chunksForItem(item) {
             return (chunksData && chunksData[chunkKey(item.nl)]) || [];
+        }
+
+        // ----- Blocs écrits par l'IA, puis figés pour tout le monde (Joas, 4 novembre 2026) -----
+        // Le corpus Tatoeba ne couvre pas tous les mots (vocabulaire du travail, mots des kits).
+        // Pour un mot sans bloc, on cherche d'abord dans la bibliothèque commune Firestore
+        // sharedChunks/{langue__mot} ; sinon Gemini écrit 3 blocs (un appel pour toute la série),
+        // rangés là pour tous les comptes et jamais réécrits. Copie locale : localStorage
+        // nl_ai_chunks_v1. Les blocs IA portent ai: true (⚠️ signalables, l'admin peut les retirer).
+        const AI_CHUNKS_LS = 'nl_ai_chunks_v1';
+        function aiChunksCache() { try { return JSON.parse(localStorage.getItem(AI_CHUNKS_LS) || '{}') || {}; } catch (e) { return {}; } }
+        function aiChunksMergeCache() {
+            if (!chunksData) return;
+            Object.entries(aiChunksCache()).forEach(([k, list]) => { if (!(chunksData[k] || []).length && Array.isArray(list) && list.length) chunksData[k] = list; });
+        }
+        function aiChunksStore(k, list) {
+            const c = aiChunksCache();
+            c[k] = list;
+            try { localStorage.setItem(AI_CHUNKS_LS, JSON.stringify(c)); } catch (e) { /* plein : tant pis */ }
+            if (chunksData) chunksData[k] = list;
+        }
+        function sharedChunkRef(k) {
+            if (typeof db === 'undefined' || !db || !auth || !auth.currentUser) return null;
+            return db.collection('sharedChunks').doc((studyLangCode() + '__' + k).replace(/[\/.#$\[\]]/g, '_').slice(0, 400));
+        }
+        function aiChunkClean(list) {
+            return (Array.isArray(list) ? list : []).map(b => ({ c: String(b.c || '').trim().toLowerCase(), ex: String(b.ex || '').trim(), fr: String(b.fr || '').trim(), n: 0, ai: true }))
+                .filter(b => b.c && b.ex && b.fr && b.ex.toLowerCase().includes(b.c)).slice(0, 4);
+        }
+        async function aiChunksEnsure(items) {
+            await loadChunks();
+            const todo = new Map();
+            (items || []).forEach(i => { const k = chunkKey(i.nl); if (k && k.length >= 2 && !(chunksData[k] || []).length && !todo.has(k)) todo.set(k, i); });
+            if (!todo.size) return;
+            await Promise.all([...todo.keys()].map(async k => {
+                const ref = sharedChunkRef(k);
+                if (!ref) return;
+                try { const snap = await ref.get(); const list = snap.exists ? aiChunkClean(snap.data().chunks) : []; if (list.length) { aiChunksStore(k, list); todo.delete(k); } } catch (e) { /* hors ligne */ }
+            }));
+            if (!todo.size || !GeminiService.isAvailable()) return;
+            const words = [...todo.entries()].slice(0, 12);
+            let r = null;
+            try {
+                r = rpHelpParseJson(await GeminiService.generate(`Tu écris des blocs de mots (chunks) en ${studyLang().variante} pour un apprenant francophone de niveau ${liveLevel()}.
+Pour chaque mot ci-dessous, donne 3 blocs : les combinaisons de 2 à 4 mots les plus FRÉQUENTES et utiles où ce mot apparaît (verbe + complément, préposition + nom, adjectif + nom, tournure figée). Pour chaque bloc :
+- "c" : le bloc, en minuscules, tel qu'il apparaît dans la phrase ;
+- "ex" : une phrase courte, naturelle, de tous les jours ou du travail, qui contient EXACTEMENT ce bloc ;
+- "fr" : la traduction française naturelle de la phrase.
+Mots :
+${words.map(([k, i]) => `- ${k} (${String(i.fr || '').split('/')[0]})`).join('\n')}
+Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": "", "fr": ""}]}]}`));
+            } catch (e) { return; }
+            ((r && r.mots) || []).forEach(m => {
+                const k = chunkKey(m && m.mot);
+                if (!todo.has(k)) return;
+                const list = aiChunkClean(m.blocs);
+                if (!list.length) return;
+                aiChunksStore(k, list);
+                const ref = sharedChunkRef(k);
+                if (ref) ref.set({ key: k, lang: studyLangCode(), chunks: list.map(b => ({ c: b.c, ex: b.ex, fr: b.fr })), at: Date.now() }).catch(e => console.warn('Bibliothèque de blocs :', e.message));
+            });
         }
 
         const escHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -3884,7 +3944,7 @@ if (firebaseAvailable) {
                 <div class="wl-chunk">
                     <div class="chunk-text">${escHtml(k.c)} ${speakBtnHtml(k.c)}</div>
                     <div class="chunk-ex">${escHtml(k.ex)} ${speakBtnHtml(k.ex)}</div>
-                    <div class="chunk-fr">${escHtml(k.fr)}</div>
+                    <div class="chunk-fr">${escHtml(k.fr)}${k.ai ? ' <small class="report-meta">🤖 bloc écrit par l\'IA</small> ' + reportBtnHtml({ kind: 'chunk', ref: chunkKey(item.nl), nl: k.ex, fr: k.fr, context: 'bloc IA « ' + k.c + ' »' }) : ''}</div>
                 </div>`).join('')}</div>`;
         }
 
@@ -10550,6 +10610,97 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             window.scrollTo(0, 0);
         }
 
+        // ----- 🎯 Situation → mots → blocs → jeu de rôle (Joas, 4 novembre 2026) -----
+        // On part de la situation : ses mots (kit) qu'il ne connaît pas encore, puis ces mots dans
+        // leurs blocs (corpus ou écrits par l'IA, figés ensuite), puis le jeu de rôle, où le tuteur
+        // les lui fait placer (bilan « X / n placés » dans Discuter).
+        const PATH_WORDS = 8;
+        let pathCurrent = null;
+        function rpPrepPath() {
+            if (!rpPrepCurrent) return;
+            if (routinePassive()) { state.settings.routinePassive = false; save(); }
+            pathCurrent = rpPrepCurrent;
+            routineDrill('chemin', () => rpPrepOpen(pathCurrent.key, pathCurrent.label, pathCurrent.launch), { label: pathCurrent.label });
+        }
+        async function routineDrillPath(r) {
+            const p = pathCurrent;
+            if (!p) return 'empty';
+            if (routinePassive()) { state.settings.routinePassive = false; save(); }
+            const known = it => it && (state.stats.trueMastered[it.id + '::fr2nl'] || isActiveWord(it.id));
+            const all = p.kit.words.map(w => ({ nl: w.nl, fr: w.fr, id: w.item && w.item.id, item: w.item }))
+                .concat(p.kit.verbs.filter(v => v.item || v.conj).map(v => ({ nl: v.inf, fr: v.conj ? v.conj.fr : v.item.fr, id: v.item && v.item.id, item: v.item })))
+                .filter(w => w.nl && w.fr);
+            const cands = all.filter(w => !known(w.item));
+            // 1. Les mots
+            await routineSay(r, `1. Les mots de la situation. ${cands.length ? 'Dis-moi chaque mot en néerlandais.' : 'Tu les connais déjà tous : on passe aux blocs.'}`);
+            const fresh = [], ok = [];
+            for (const w of cands) {
+                if (!routineActive(r)) return false;
+                if (fresh.length >= PATH_WORDS || fresh.length + ok.length >= PATH_WORDS + 4) break;
+                r.ctx = `traduire « ${w.fr} »`;
+                const given = await routineAskAnswer(r, `<div class="routine-q"><small>Mot ${fresh.length + ok.length + 1} · à apprendre : ${fresh.length}/${PATH_WORDS}</small><div>${rpEscapeHtml(w.fr)}</div></div>`, String(w.fr).split('/')[0]);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                const good = !!given && given !== '__passive' && evaluateAnswer(given, w.nl).status !== 'wrong';
+                if (w.item) {
+                    const key = w.item.id + '::fr2nl';
+                    state.stats.wordSeen[key] = (state.stats.wordSeen[key] || 0) + 1;
+                    if (good) { state.stats.trueMastered[key] = true; state.stats.wrongCount[key] = 0; if (!state.mastered.includes(key)) state.mastered.push(key); }
+                    else { state.stats.wrongCount[key] = (state.stats.wrongCount[key] || 0) + 1; state.stats.trueMastered[key] = false; routineSpacedAdd(w.item.id); }
+                }
+                routineFeedback(good, w.nl, good ? 'Tu le connais : validé.' : 'À apprendre.');
+                (good ? ok : fresh).push(w);
+            }
+            save();
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (fresh.length) {
+                await routineSay(r, `Voici tes ${fresh.length} mots à apprendre pour cette situation.`);
+                if (await routinePresentWords(r, fresh.map(w => w.item || w), false) === false) return false;
+            }
+            // 2. Les blocs : les mots appris d'abord, complétés par les autres mots du kit.
+            const target = fresh.concat(ok, all.filter(w => !fresh.includes(w) && !ok.includes(w))).slice(0, PATH_WORDS);
+            const wait = routineBubble('info', '<span class="report-meta">🧩 Je prépare les blocs…</span>');
+            await aiChunksEnsure(target.map(w => w.item || w));
+            if (wait) wait.remove();
+            if (!routineActive(r)) return false;
+            const qs = [];
+            target.forEach(w => { const k = chunksForItem(w).find(x => chunkBlank(x)); if (k) qs.push({ item: w.item || w, k, blank: chunkBlank(k) }); });
+            if (qs.length) {
+                await routineSay(r, `2. Ces mots dans leurs blocs. Traduis chaque phrase à ta manière.`);
+                await chunkGapFrFetch(qs);
+                let score = 0;
+                for (let i = 0; i < qs.length && routineActive(r); i++) {
+                    const q = qs[i];
+                    r.ctx = `traduire « ${q.k.fr} » (modèle : « ${q.k.ex} », bloc « ${q.k.c} »)`;
+                    const res = await routineTranslateQ(r, { kind: 'bloc', label: `Bloc ${i + 1}/${qs.length}`, fr: q.k.fr, ex: q.k.ex, target: q.blank.answer, before: q.blank.before, after: q.blank.after, gapFr: q.gapFr, gapMark: '_ '.repeat(q.k.c.split(' ').length).trim() });
+                    if (res === null) return false;
+                    if (res === '__stop') break;
+                    if (res === '__passive') continue;
+                    if (res.ok) score++;
+                    if (!state.chunkStats) state.chunkStats = {};
+                    const s = state.chunkStats[q.k.c] || { ok: 0, ko: 0, streak: 0, last: 0 };
+                    if (res.ok) { s.ok++; s.streak++; } else { s.ko++; s.streak = 0; }
+                    s.last = Date.now();
+                    state.chunkStats[q.k.c] = s;
+                    save();
+                }
+                r.ctx = null;
+                if (routineActive(r)) await routineSay(r, `${score} sur ${qs.length}.`);
+            }
+            if (!routineActive(r)) return false;
+            // 3. Le jeu de rôle
+            await routineSay(r, `3. Maintenant on joue « ${p.label} ». Essaie de placer tes mots : je te dirai à la fin lesquels tu as utilisés.`);
+            const v = await routineWait(r, [['go', '▶️ Jouer la situation'], ['back', '← Plus tard', 'btn-gray']]);
+            if (!routineActive(r) || v === 'quit') return false;
+            if (v === 'back') return 'empty';
+            routineQuitRun();
+            rpPrepCurrent = p;
+            talkWordTargetNext = p.launch && p.launch.type === 'lib' && (rpLibFind(p.launch.id) || {}).theme === 'quotidien' ? { label: p.label, items: target.map(w => ({ id: w.id, nl: w.nl, fr: w.fr })) } : null;
+            rpPrepLaunch();
+            return false;
+        }
+
         function rpPrepRender() {
             const p = rpPrepCurrent;
             const box = document.getElementById('prep-content');
@@ -10566,8 +10717,9 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             box.innerHTML = `
                 <h2 style="margin-bottom:4px;">📚 Me préparer</h2>
                 <p class="prep-sub">${rpEscapeHtml(p.label)} · ${rpEscapeHtml(kit.themes.join(' + '))}</p>
+                ${p.launch && studyLangCode() === 'nl' ? `<button class="btn btn-green" style="width:100%;margin-bottom:8px;" onclick="rpPrepPath()">🎯 Mots → blocs → jeu de rôle</button>` : ''}
                 <div class="prep-actions-grid">
-                    <button class="btn btn-green" onclick="rpPrepVocab()">📝 Réviser les ${kit.verbs.length + kit.words.length} mots</button>
+                    <button class="btn btn-gray" onclick="rpPrepVocab()">📝 Réviser les ${kit.verbs.length + kit.words.length} mots</button>
                     <button class="btn btn-gray" onclick="rpPrepConj()" ${conjCount ? '' : 'disabled'}>🔤 Conjuguer les ${conjCount} verbes</button>
                     <button class="btn btn-gray" onclick="rpPrepAudio()">🎧 Écouter le kit</button>
                     <button class="btn btn-gray" onclick="rpPrepLaunch()">▶️ Lancer le jeu de rôle</button>
@@ -16328,6 +16480,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: `Dis-moi en français ce qui te passe par la tête : une pensée, une envie, quelque chose qui t'est arrivé. Je t'apprends à le dire en ${studyLang().variante}, naturellement, à ton niveau. Puis tu le redis à ta manière, et je te corrige.`,
                 whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
             },
+            chemin: {
+                icon: '🎯', label: 'Me préparer à la situation', back: '← Retour', nav: 'nav-pratiquer', run: r => routineDrillPath(r),
+                why: "On prépare la situation en trois temps. D'abord ses mots : je te les demande, ceux que tu connais sont validés, les autres je te les présente. Ensuite, ces mots dans leurs blocs : je te dis une phrase en français, tu la traduis à ta manière. Enfin, on joue la situation, et tu essaies de les placer.",
+                whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
+            },
             dehet: {
                 icon: '⚖️', label: 'De ou het ?', run: r => routineDrillDeHet(r),
                 why: "De ou het ? Je te dis un nom : réponds avec son article, par exemple « de tafel », ou touche DE ou HET. Deux bonnes réponses, et le nom est acquis.",
@@ -17135,6 +17292,8 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             const nBlocs = (opt && opt.blocs) || ROUTINE.blocs, nPetits = (opt && opt.petits) || ROUTINE.petitsMots;
             const rs = routineState();
             const today = r.drill ? [] : rs.newWords.map(id => fullDb.find(i => i.id === id)).filter(Boolean);
+            if (today.length) await aiChunksEnsure(today);
+            if (!routineActive(r)) return false;
             const qs = [], usedC = new Set();
             const add = (item, k) => { const blank = chunkBlank(k); if (blank && !usedC.has(k.c) && qs.length < nBlocs) { usedC.add(k.c); qs.push({ item, k, blank }); } };
             today.forEach(i => { const k = chunksForItem(i)[0]; if (k) add(i, k); });

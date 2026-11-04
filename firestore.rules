@@ -123,6 +123,16 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // ================= sharedChunks/{id} — blocs de mots écrits par l'IA, figés pour tous =================
+    // Écrits une seule fois (création), jamais réécrits ensuite ; l'admin peut corriger ou retirer.
+    match /sharedChunks/{id} {
+      allow get: if isSignedIn();
+      allow list: if isAdmin();
+      allow create: if isSignedIn() && request.resource.data.chunks is list &&
+        request.resource.data.chunks.size() >= 1 && request.resource.data.chunks.size() <= 4;
+      allow update, delete: if isAdmin();
+    }
+
     // ================= usernames/{pseudoLower} — mapping pseudo -> uid (existait déjà) =================
     match /usernames/{pseudoLower} {
       // Lecture publique nécessaire : (1) vérifier l'unicité d'un pseudo AVANT la création du
