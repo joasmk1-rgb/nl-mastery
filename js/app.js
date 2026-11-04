@@ -3892,6 +3892,13 @@ if (firebaseAvailable) {
             return (Array.isArray(list) ? list : []).map(b => ({ c: String(b.c || '').trim().toLowerCase(), ex: String(b.ex || '').trim(), fr: String(b.fr || '').trim(), n: 0, ai: true }))
                 .filter(b => b.c && b.ex && b.fr && b.ex.toLowerCase().includes(b.c)).slice(0, 4);
         }
+        // Les ~120 mots les plus fréquents du vocabulaire : le vocabulaire autorisé autour du mot.
+        let aiChunksFreqCache = null;
+        function aiChunksFrequentWords() {
+            if (!aiChunksFreqCache) aiChunksFreqCache = [...new Set(fullDb.filter(i => i.nl && i.freq && !String(i.id).startsWith('KIT:'))
+                .sort((a, b) => b.freq - a.freq).map(i => chunkKey(i.nl)).filter(w => w && !w.includes(' ')))].slice(0, 120).join(', ');
+            return aiChunksFreqCache;
+        }
         async function aiChunksEnsure(items) {
             await loadChunks();
             const todo = new Map();
@@ -3903,11 +3910,12 @@ if (firebaseAvailable) {
                 try { const snap = await ref.get(); const list = snap.exists ? aiChunkClean(snap.data().chunks) : []; if (list.length) { aiChunksStore(k, list); todo.delete(k); } } catch (e) { /* hors ligne */ }
             }));
             if (!todo.size || !GeminiService.isAvailable()) return;
-            const words = [...todo.entries()].slice(0, 12);
+            const words = [...todo.entries()].sort((a, b) => (b[1].freq || 0) - (a[1].freq || 0)).slice(0, 12);
             let r = null;
             try {
                 r = rpHelpParseJson(await GeminiService.generate(`Tu écris des blocs de mots (chunks) en ${studyLang().variante} pour un apprenant francophone de niveau ${liveLevel()}.
-Pour chaque mot ci-dessous, donne 3 blocs : les combinaisons de 2 à 4 mots les plus FRÉQUENTES et utiles où ce mot apparaît (verbe + complément, préposition + nom, adjectif + nom, tournure figée). Pour chaque bloc :
+Pour chaque mot ci-dessous, donne 3 blocs : les combinaisons de 2 à 4 mots les plus FRÉQUENTES et utiles où ce mot apparaît (verbe + complément, préposition + nom, adjectif + nom, tournure figée).
+LA FRÉQUENCE EST LA CONTRAINTE LA PLUS FORTE : autour du mot, n'emploie que des mots parmi les plus courants de la langue (comme ceux-ci : ${aiChunksFrequentWords()}), dans le bloc comme dans la phrase d'exemple ; jamais de mot rare ou recherché. Pour chaque bloc :
 - "c" : le bloc, en minuscules, tel qu'il apparaît dans la phrase ;
 - "ex" : une phrase courte, naturelle, de tous les jours ou du travail, qui contient EXACTEMENT ce bloc ;
 - "fr" : la traduction française naturelle de la phrase.
@@ -10630,6 +10638,8 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             const all = p.kit.words.map(w => ({ nl: w.nl, fr: w.fr, id: w.item && w.item.id, item: w.item }))
                 .concat(p.kit.verbs.filter(v => v.item || v.conj).map(v => ({ nl: v.inf, fr: v.conj ? v.conj.fr : v.item.fr, id: v.item && v.item.id, item: v.item })))
                 .filter(w => w.nl && w.fr);
+            // La fréquence d'abord (Joas) : les mots les plus courants du kit passent avant les autres.
+            all.sort((a, b) => ((b.item && b.item.freq) || 0) - ((a.item && a.item.freq) || 0));
             const cands = all.filter(w => !known(w.item));
             // 1. Les mots
             await routineSay(r, `1. Les mots de la situation. ${cands.length ? 'Dis-moi chaque mot en néerlandais.' : 'Tu les connais déjà tous : on passe aux blocs.'}`);
