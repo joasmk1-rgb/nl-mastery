@@ -5433,7 +5433,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             if (launch.type === 'bank') return !(state.candidateProfile || '').trim() && !((state.candidateNotes || {})[((rpRealData && rpRealData.banks[launch.index]) || {}).id] || '').trim();
             if (launch.type === 'form') return !(state.companyDossier || '').trim();
             if (launch.type === 'lib') { const e = rpLibFind(launch.id); return !!(e && !e.generated); }
-            return launch.type === 'rp' || launch.type === 'sit';
+            return launch.type === 'rp' || launch.type === 'sit' || launch.type === 'vocabstory';
         }
         function sceneAdminBtnHtml(key, at) {
             if (!(currentUserDoc && currentUserDoc.role === 'admin' && at)) return '';
@@ -5443,6 +5443,47 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             if (!confirm('Retirer cette version de la bibliothèque commune ?')) return;
             await sharedScenesRemove(btn.dataset.key, Number(btn.dataset.at));
             btn.textContent = '✅ Retirée';
+        }
+
+        async function rpSceneGenerateOne(key, launch, src) {
+            if (!GeminiService.getKey()) throw new Error('clé Gemini absente');
+            const kit = rpHasKit(key) ? rpBuildKit(key) : null;
+            const words = kit ? kit.verbs.map(v => v.inf).concat(kit.words.map(w => w.nl)).slice(0, 18) : [];
+            const raw = await GeminiService.generate(
+                'Écris une scène de dialogue réaliste en néerlandais de Flandre courant (niveau ' + (src.level || 'B1') + ', phrases naturelles à l\'oral, pas trop longues) entre deux personnes.\n' +
+                'Situation : ' + src.desc + '\n' +
+                'A = ' + src.roleA + ' ; B = ' + src.roleB + ', un francophone qui parle bien néerlandais et se débrouille très bien : il sert de modèle à imiter.\n' +
+                'La scène commence par cette réplique de A : """' + src.welcome + '"""\n' +
+                (src.length || '12 à 16') + ' répliques qui alternent, avec un vrai déroulé (début, questions, réponses précises, conclusion).' + (String(src.roleB).startsWith('Toi') ? '' : ' Noms de personnes et d\'entreprises inventés.') +
+                (words.length ? ' Emploie naturellement plusieurs de ces mots : ' + words.join(', ') + '.' : '') + '\n' +
+                'Réponds UNIQUEMENT en JSON : {"roleA": "nom court de A en français (ex. La recruteuse)", "lignes": [{"qui": "A", "nl": "réplique", "fr": "traduction française"}]}'
+            );
+            const obj = rpHelpParseJson(raw);
+            const lignes = obj && Array.isArray(obj.lignes) ? obj.lignes.filter(l => l && (l.qui === 'A' || l.qui === 'B') && l.nl).map(l => ({ qui: l.qui, nl: String(l.nl), fr: String(l.fr || '') })) : [];
+            if (lignes.length < 4) throw new Error('scène incomplète');
+            const sc = { roleA: obj.roleA ? String(obj.roleA) : src.roleA, lignes, at: Date.now() };
+            const c2 = scenesCache();
+            c2[key] = (c2[key] || []).concat(sc).slice(-3);
+            scenesSave(c2);
+            if (rpScenePublic(launch)) sharedScenesAdd(key, sc);
+            return sc;
+        }
+
+        async function scenePrewarm(key, launch, targetTotal, onStatus) {
+            const src = rpSceneSource(launch);
+            if (!src) return { have: 0, made: 0, error: 'scène introuvable' };
+            if (!GeminiService.getKey()) return { have: (scenesCache()[key] || []).length, made: 0, error: 'clé Gemini absente' };
+            let have = (scenesCache()[key] || []).length;
+            let made = 0, attempts = 0, lastError = null;
+            const maxAttempts = Math.max(2, targetTotal - have) + 2;
+            while (have < targetTotal && attempts < maxAttempts) {
+                attempts++;
+                if (onStatus) onStatus(have, targetTotal);
+                try { await rpSceneGenerateOne(key, launch, src); have++; made++; }
+                catch (e) { lastError = e.message; }
+            }
+            if (onStatus) onStatus(have, targetTotal);
+            return { have, made, error: have < targetTotal ? lastError : null };
         }
 
         async function rpSceneOpen(key, launch, forceNew) {
@@ -5472,28 +5513,10 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             }
             if (!GeminiService.getKey()) { document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p>Aucune scène enregistrée pour l'instant : il faut une clé Gemini pour en écrire une (Profil → 🤖 Intelligence IA).</p><button class="btn btn-gray" onclick="sceneBack()">← Retour</button>`; return; }
             document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p class="prep-sub">Gemini écrit la scène…</p>`;
-            const kit = rpHasKit(key) ? rpBuildKit(key) : null;
-            const words = kit ? kit.verbs.map(v => v.inf).concat(kit.words.map(w => w.nl)).slice(0, 18) : [];
             try {
-                const raw = await GeminiService.generate(
-                    'Écris une scène de dialogue réaliste en néerlandais de Flandre courant (niveau ' + (src.level || 'B1') + ', phrases naturelles à l\'oral, pas trop longues) entre deux personnes.\n' +
-                    'Situation : ' + src.desc + '\n' +
-                    'A = ' + src.roleA + ' ; B = ' + src.roleB + ', un francophone qui parle bien néerlandais et se débrouille très bien : il sert de modèle à imiter.\n' +
-                    'La scène commence par cette réplique de A : """' + src.welcome + '"""\n' +
-                    (src.length || '12 à 16') + ' répliques qui alternent, avec un vrai déroulé (début, questions, réponses précises, conclusion).' + (String(src.roleB).startsWith('Toi') ? '' : ' Noms de personnes et d\'entreprises inventés.') +
-                    (words.length ? ' Emploie naturellement plusieurs de ces mots : ' + words.join(', ') + '.' : '') + '\n' +
-                    'Réponds UNIQUEMENT en JSON : {"roleA": "nom court de A en français (ex. La recruteuse)", "lignes": [{"qui": "A", "nl": "réplique", "fr": "traduction française"}]}'
-                );
-                const obj = rpHelpParseJson(raw);
-                const lignes = obj && Array.isArray(obj.lignes) ? obj.lignes.filter(l => l && (l.qui === 'A' || l.qui === 'B') && l.nl).map(l => ({ qui: l.qui, nl: String(l.nl), fr: String(l.fr || '') })) : [];
-                if (lignes.length < 4) throw new Error('scène incomplète');
-                const sc = { roleA: obj.roleA ? String(obj.roleA) : src.roleA, lignes, at: Date.now() };
-                const c2 = scenesCache();
-                c2[key] = (c2[key] || []).concat(sc).slice(-3);
-                scenesSave(c2);
+                const sc = await rpSceneGenerateOne(key, launch, src);
                 saved.push(sc);
                 show(sc);
-                if (isPublic) sharedScenesAdd(key, sc);
             } catch (e) {
                 document.getElementById('scene-content').innerHTML = `<h2>👂 ${rpEscapeHtml(src.title)}</h2><p style="color:var(--wrong);">Scène impossible à générer : ${rpEscapeHtml(e.message)}</p><button class="btn btn-gray" onclick="sceneBack()">← Retour</button>`;
             }
@@ -11633,7 +11656,8 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 <p class="rp-real-hint">La personne chargée de ta formation t'explique le travail en néerlandais, vérifie que tu as compris et te fait reformuler. Tu peux poser tes questions, même en français. 👂 = écouter sans participer.</p>
                 <button class="rp-scenario-btn rp-profile-btn" onclick="formationEditDossier()">🏭 Mon entreprise <small>(privé, facultatif : ${filled ? 'rempli' : 'vide'})</small></button>
                 ${filled ? '' : '<p class="rp-real-hint">⚠️ Sans dossier, le formateur invente des détails génériques. Colle-y les vrais produits, sites, ateliers et ce qu\'on t\'a déjà expliqué.</p>'}
-                <button class="rp-scenario-btn" onclick="rpSceneOpen('vocabstory:admin', { type: 'vocabstory' }, true)">🎧 Histoire du vocabulaire (aléatoire)</button>
+                <button class="rp-scenario-btn" onclick="rpSceneOpen('vocabstory:admin', { type: 'vocabstory' }, false)">🎧 Histoire du vocabulaire</button>
+                <button class="rp-scenario-btn rp-profile-btn" onclick="formationVocabPrewarm(this)">📥 Préparer 3 histoires pour le hors-ligne</button>
                 ${formationAllHtml()}
                 <details class="rp-more" style="width:100%; max-width:520px;"><summary>Par journée ou par séance</summary>
                 ${formationDaysHtml()}
@@ -11659,6 +11683,14 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const banner = document.getElementById('rp-mode-banner');
             banner.style.display = '';
             banner.innerHTML = `<div class="rp-job-banner"><div class="rp-iv-label" style="margin-top:0;">🧑‍🏫 Ma formation</div><div>Écoute, pose tes questions, reformule avec tes mots. Si tu ne comprends pas, dis-le : « Kan je dat anders uitleggen? »</div></div>`;
+        }
+        async function formationVocabPrewarm(btn) {
+            const key = 'vocabstory:admin', launch = { type: 'vocabstory' };
+            const original = btn.textContent;
+            btn.disabled = true;
+            const r = await scenePrewarm(key, launch, 3, (have, target) => { btn.textContent = `📥 ${have}/${target}…`; });
+            btn.textContent = r.have >= 3 ? '✅ 3 histoires prêtes hors-ligne' : `📥 ${r.have}/3 prêtes` + (r.error ? ' — ' + r.error : '');
+            setTimeout(() => { btn.disabled = false; btn.textContent = original; }, 5000);
         }
 
         // ----- Journées d'initiation (Joas, 1er novembre 2026 : « simuler la première journée où on
