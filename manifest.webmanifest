@@ -1,0 +1,17 @@
+{
+  "name": "NL Mastery",
+  "short_name": "NL Mastery",
+  "description": "Apprendre le néerlandais en situation : cours guidés, jeux de rôle à l'oral, vocabulaire du travail.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#15202b",
+  "theme_color": "#15202b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

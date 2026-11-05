@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>NL Mastery Platform</title>
-    <!-- Version changée toutes les 10 minutes : sans ça, les téléphones gardaient l'ancien code
-         (app.js, styles.css) pendant des heures après une mise à jour. -->
-    <script>window.NLM_V = Math.floor(Date.now() / 600000); document.write('<link rel="stylesheet" href="css/styles.css?v=' + NLM_V + '">');</script>
+    <!-- App installable (écran d'accueil, plein écran) -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#15202b">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="NL Mastery">
+    <!-- Version du code : À CHANGER À CHAQUE COMMIT qui touche js/ ou css/ (date-heure). Une
+         nouvelle version = nouvelle adresse = les téléphones prennent le nouveau code ; sinon tout
+         vient du cache (sw.js), sans rien retélécharger. -->
+    <script>window.NLM_V = '202611052000'; document.write('<link rel="stylesheet" href="css/styles.css?v=' + NLM_V + '">');</script>
     <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
 
     <!-- Firebase (comptes + synchro cloud) -->
@@ -635,5 +645,6 @@
     <div id="buddy-sheet" class="buddy-sheet"></div>
 
     <script>document.write('<script src="js/lang.js?v=' + NLM_V + '"><\/script><script src="js/app.js?v=' + NLM_V + '"><\/script>');</script>
+    <script>if ('serviceWorker' in navigator && location.protocol === 'https:') window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));</script>
 </body>
 </html>

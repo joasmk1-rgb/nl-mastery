@@ -2608,6 +2608,7 @@ if (firebaseAvailable) {
             await loadCurriculumData();
             updateStats(); // relit le niveau CECR maintenant que le curriculum est chargé (getCurriculumLevel)
             renderDashboard();
+            navHistoryInit();
         }
 
         // ===== Curriculum (données de programme A1→B2) =====
@@ -2639,7 +2640,13 @@ if (firebaseAvailable) {
         // reste lue par isNotionUnlocked pour les comptes qui l'avaient activé. =====
         if (state.freeAccess === undefined) state.freeAccess = false;
 
+        let conjFrReady = null; // promesse du chargement de conjugation_fr.json (en arrière-plan)
         async function loadCurriculumData() {
+            // Tout part en même temps (avant : l'un après l'autre) ; les traductions françaises de la
+            // conjugaison (440 Ko) ne bloquent pas l'ouverture, conjFetchFrenchForms les attend.
+            const conjP = fetch(studyLangCode() === 'nl' ? 'data/curriculum/conjugation.json' : `data/${studyLangCode()}/conjugation_${studyLangCode()}.json`).then(r => r.json());
+            conjFrReady = (studyLangCode() === 'nl' ? fetch('data/curriculum/conjugation_fr.json').then(r => r.ok ? r.json() : {}) : Promise.resolve({}))
+                .then(d => { conjFrStatic = d || {}; }).catch(() => { conjFrStatic = {}; });
             try {
                 const parallelLanguageCourse = studyLangCode() !== 'nl';
                 const [lv, curriculum] = await Promise.all([
@@ -2662,7 +2669,7 @@ if (firebaseAvailable) {
                 curriculumLoaded = false;
             }
             try {
-                conjugationData = await fetch(studyLangCode() === 'nl' ? 'data/curriculum/conjugation.json' : `data/${studyLangCode()}/conjugation_${studyLangCode()}.json`).then(r => r.json());
+                conjugationData = await conjP;
                 conjugationLoaded = true;
             } catch (e) {
                 console.warn('Conjugaison non chargée :', e);
@@ -2670,13 +2677,6 @@ if (firebaseAvailable) {
             }
             // Traduction française de chaque forme, générée une fois pour toutes (voir
             // tools/noyau/build_conjugation_fr.py) : plus besoin de Gemini pour la conjugaison.
-            try {
-                conjFrStatic = studyLangCode() === 'nl'
-                    ? await fetch('data/curriculum/conjugation_fr.json').then(r => r.ok ? r.json() : {})
-                    : {};
-            } catch (e) {
-                conjFrStatic = {};
-            }
         }
 
         function ntProgress(notionId) {
@@ -4376,6 +4376,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
         }
 
         async function conjFetchFrenchForms(v, full) {
+            if (conjFrReady) await conjFrReady;
             if (conjFrStatic[v.infinitief]) return conjFrStatic[v.infinitief];
             const cached = conjFrCacheGet()[v.infinitief];
             if (cached && (!full || CONJ_TENSES.every(t => cached[t] && cached[t].jullie && cached[t].zij))) return cached;
@@ -7049,6 +7050,71 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 tabs.map(t => `<button type="button" class="${t.k === cur ? 'active' : ''}" onclick="${t.go}"><span class="icon">${t.icon}</span>${t.label}</button>`).join('');
         }
 
+        // ===== Bouton retour du téléphone (Joas, 5 novembre 2026 : « fluidifier au maximum ») =====
+        // Avant, aucun écran n'entrait dans l'historique : le retour d'Android quittait l'app. Chaque
+        // changement d'écran (classe .active d'une .view, quel que soit le code qui l'a fait) ajoute
+        // une entrée ; le retour réaffiche l'écran d'avant TEL QU'IL ÉTAIT (son contenu reste dans la
+        // page), à la même hauteur, après avoir coupé micro et voix de l'écran quitté. Le panneau du
+        // compagnon se ferme d'abord. L'écran de connexion n'entre jamais dans l'historique.
+        const NAV_HISTORY = { ready: false, restoring: false, cur: null };
+        function navHistoryView() { const v = document.querySelector('.view.active'); return v ? v.id : null; }
+        function navHistoryLeave(id) {
+            const stops = {
+                'talk-view': () => talkStop(), 'routine-view': () => routineQuitRun(), 'replay-view': () => rpReplayStop(),
+                'listen-view': () => listenStop(), 'car-view': () => carStop(), 'modguide-view': () => guideStopListen(),
+                'prof-view': () => profStopAudio(), 'timeattack-view': () => stopTimeAttack(),
+                'roleplay-view': () => { if (rpIsRecording && rpRecognition) rpRecognition.stop(); }
+            };
+            try { if (stops[id]) stops[id](); } catch (e) { /* écran déjà arrêté */ }
+            try { conjAudioStop(); } catch (e) { /* rien en cours */ }
+            try { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); } catch (e) { /* pas grave */ }
+        }
+        function navHistoryInit() {
+            if (NAV_HISTORY.ready || !window.history || !history.pushState) return;
+            NAV_HISTORY.ready = true;
+            NAV_HISTORY.cur = navHistoryView();
+            try { history.replaceState({ nlm: 1, v: NAV_HISTORY.cur, nav: navMode }, ''); } catch (e) { /* pas grave */ }
+            const obs = new MutationObserver(() => {
+                const v = navHistoryView();
+                if (!v || v === NAV_HISTORY.cur) return;
+                const prev = NAV_HISTORY.cur;
+                NAV_HISTORY.cur = v;
+                if (NAV_HISTORY.restoring) return;
+                const entry = { nlm: 1, v, nav: navMode };
+                try {
+                    if (!prev || prev === 'compte-view' || document.body.classList.contains('gated') || document.body.classList.contains('auth-pending')) { history.replaceState(entry, ''); return; }
+                    history.replaceState(Object.assign({}, history.state, { y: window.scrollY }), '');
+                    history.pushState(entry, '');
+                } catch (e) { /* pas grave */ }
+            });
+            document.querySelectorAll('.view').forEach(el => obs.observe(el, { attributes: true, attributeFilter: ['class'] }));
+            window.addEventListener('popstate', e => {
+                const sheet = document.getElementById('buddy-sheet');
+                if (sheet && sheet.classList.contains('open')) {
+                    buddyClose();
+                    try { history.pushState({ nlm: 1, v: NAV_HISTORY.cur, nav: navMode }, ''); } catch (err) { /* pas grave */ }
+                    return;
+                }
+                const st = e.state;
+                if (!st || !st.nlm || !st.v || !document.getElementById(st.v) || st.v === NAV_HISTORY.cur) return;
+                navHistoryLeave(NAV_HISTORY.cur);
+                NAV_HISTORY.restoring = true;
+                document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+                document.getElementById(st.v).classList.add('active');
+                setActiveNav(st.nav || 'nav-home');
+                if (st.v === 'home-view' && curriculumLoaded) renderDashboard();
+                if (typeof buddyRefreshFab === 'function') buddyRefreshFab();
+                setTimeout(() => { NAV_HISTORY.restoring = false; }, 0);
+                window.scrollTo(0, st.y || 0);
+            });
+        }
+        // setActiveNav appelé après coup (écran déjà dans l'historique) : on y note le mode de la barre.
+        function navHistoryNoteNav(id) {
+            if (!NAV_HISTORY.ready || NAV_HISTORY.restoring) return;
+            const st = history.state;
+            if (st && st.nlm && st.v === navHistoryView() && st.nav !== id) { try { history.replaceState(Object.assign({}, st, { nav: id }), ''); } catch (e) { /* pas grave */ } }
+        }
+
         function setActiveNav(id, sub) {
             // Sécurité anti-friction : si l'utilisateur quitte l'écran d'exercice via un onglet
             // pendant que l'auto-avance est en attente, on annule ce minuteur plutôt que de le
@@ -7057,6 +7123,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.querySelectorAll('.header-profil-btn').forEach(b => b.classList.remove('active'));
             if (id === 'nav-profil') { const btn = document.getElementById(id); if (btn) btn.classList.add('active'); }
             navMode = id;
+            navHistoryNoteNav(id);
             document.body.dataset.mode = { 'nav-vocab': 'vocab', 'nav-apprendre': 'cours', 'nav-pratiquer': 'parler' }[id] || 'home';
             navBarRender(sub);
             // showLesson()/showExercise() n'appellent jamais setActiveNav (ce sont des sous-vues
