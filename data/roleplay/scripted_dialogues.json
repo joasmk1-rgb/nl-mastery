@@ -732,6 +732,77 @@
         }
       ],
       "source": "appel_agence_reel_anonymise"
+    },
+    {
+      "id": "korenveld_rh_gesprek_sofie_reel",
+      "label": "Korenveld — entretien sur site avec la responsable planning (entretien réel, suite)",
+      "contexte": "Deuxième entretien réel, cette fois sur site chez Korenveld, avec Sofie, responsable du service planning (segment transporteurs externes). Entretien en profondeur : parcours, gestion du stress, système ERP, organisation de l'équipe, projet professionnel à moyen terme, conditions de travail.",
+      "turns": [
+        {
+          "speaker": "Sofie",
+          "nl_original": "Kan je misschien kort je CV toelichten? Je studies en dergelijke.",
+          "fr_cue": "Peux-tu brièvement présenter ton CV ? Tes études et le reste.",
+          "candidate_reply": "Ik heb een ingenieursstudie gevolgd. Ik zit nu met mijn master te afronden — ik moet nog één les volgen, 18 uur, in juni. Ik heb mijn thesis al gedaan, dus het is prima.",
+          "suggestion_fr": "Résume ton parcours académique en insistant sur ce qui est déjà bouclé plutôt que sur ce qui reste à faire."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "Nog iets helemaal anders dan een planning dispatcher-functie dan?",
+          "fr_cue": "Donc quelque chose de complètement différent d'une fonction de planning dispatcher, alors ?",
+          "candidate_reply": "Ja, de echte planning dispatcher ervaring is met mijn vorige studentenjob. Ik heb veel geleerd, gewoon om gestructureerd te worden, om altijd organisatie te hebben.",
+          "suggestion_fr": "Distingue clairement une expérience proche du poste visé d'autres expériences plus éloignées."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "Als we spreken over die stressituaties: is dat iets wat jou energie geeft, of is dat eerder iets dat buiten je comfortzone ligt? Hoe reageer jij daarop?",
+          "fr_cue": "Quand on parle de ces situations de stress : est-ce que ça te donne de l'énergie, ou est-ce plutôt en dehors de ta zone de confort ? Comment réagis-tu ?",
+          "candidate_reply": "Met stress kan ik zeggen dat ik ga goed met om. Soms spreken chauffeurs geen Engels, geen Nederlands, geen Frans, en ze worden soms een beetje boos. Ik weet dat je altijd rustig moet blijven, gewoon de situatie uitleggen, iets vinden — er is altijd een oplossing.",
+          "suggestion_fr": "Attention à la subordonnée en « dat » : « ik kan zeggen dat ik goed met stress omga » (verbe en fin de proposition), pas « dat ik ga goed met om »."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "Dus we werken hier met ERP-systemen — ken je dat?",
+          "fr_cue": "On travaille ici avec des systèmes ERP — tu connais ça ?",
+          "candidate_reply": "Ik ken SAP, want ik heb daar een opleiding over gedaan. Jullie systeem heb ik wel al gehoord, maar niet echt gebruikt.",
+          "suggestion_fr": "Même sans connaître l'outil exact, montre que tu as déjà une base ERP transférable."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "In ons team zitten we in een landschapsbureau, allemaal samen. De opdrachten zijn verdeeld per regio, en om de zoveel tijd roteren we, zodat iedereen kan bijleren en bijblijven.",
+          "fr_cue": "Dans notre équipe on est tous ensemble en open space. Les tâches sont réparties par région, et régulièrement on tourne, pour que chacun puisse apprendre et rester à jour.",
+          "candidate_reply": "Ik ben iemand die leergericht is — ik wil vooral veel dingen weten, hoe het werkt, hoe ik het moet doen. Ik ben nu junior, dus het is vooral belangrijk om ervaring op te bouwen om beter te kunnen worden.",
+          "suggestion_fr": "Montre ta motivation à apprendre plutôt que de t'inquiéter de ton statut de junior."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "Je bent inderdaad nu nog junior, een schoolverlater — maar dat is voor ons zeker geen probleem.",
+          "fr_cue": "Tu es en effet encore junior, tout juste sorti des études — mais pour nous ce n'est vraiment pas un problème.",
+          "candidate_reply": "Voor mij is het ook een dubbele uitdaging: ik wil mijn Nederlands verbeteren, en ik ken al wel iets van logistiek. Beginnen in een functie als dispatcher is voor mij perfect — twee, drie jaar — en daarna ben ik stabiel met mijn drie talen.",
+          "suggestion_fr": "Explique ton plan en deux volets (langue + expérience) de façon claire et séquencée."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "We zijn inderdaad nog een familiebedrijf — een groot bedrijf, maar een familiebedrijf.",
+          "fr_cue": "Nous sommes en effet encore une entreprise familiale — une grande entreprise, mais familiale.",
+          "candidate_reply": "Ja, ik hoop ook op een beetje dat familiegevoel. Altijd in een bedrijf blijven interesseert me wel — voor mij is stabiliteit beter.",
+          "suggestion_fr": "Exprime une préférence personnelle pour la stabilité, en lien avec la culture d'entreprise mentionnée."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "Je hebt de kans, niet de verplichting, om twee dagen per week van thuis te werken, eenmaal je zelfstandig bent. Tijdens de opleiding werk je wel voltijds op kantoor.",
+          "fr_cue": "Tu as la possibilité, pas l'obligation, de travailler deux jours par semaine depuis chez toi, une fois autonome. Pendant la formation tu travailles à temps plein au bureau.",
+          "candidate_reply": "Voor mij is dat iets waarin ik wel geïnteresseerd ben, al is het een beetje vreemd om thuis te zijn als je net met je collega's kennismaakt.",
+          "suggestion_fr": "Nuance ton intérêt pour le télétravail en reconnaissant l'importance de la phase d'intégration en présentiel."
+        },
+        {
+          "speaker": "Sofie",
+          "nl_original": "Ik stel voor dat ik je meeneem naar de volgende ronde: we sturen je een aantal testen die je thuis kan doen. Let op, er is ook een tijdseffect dat meetelt.",
+          "fr_cue": "Je propose de t'emmener à la prochaine étape : on t'envoie quelques tests que tu peux faire chez toi. Attention, il y a aussi un facteur temps qui compte.",
+          "candidate_reply": "Ik heb al een paar tests gedaan, zoals C4-testen, dus ik weet ongeveer hoe dat werkt.",
+          "suggestion_fr": "Rassure brièvement sur une expérience préalable similaire, sans en faire trop."
+        }
+      ],
+      "source": "appel_entretien_reel_anonymise"
     }
   ]
 }

@@ -4574,6 +4574,196 @@
         ]
       },
       "_source": "redige_claude"
+    },
+    {
+      "id": "social_waarden_gesprek",
+      "_source": "redige_claude",
+      "theme": "quotidien",
+      "label": "Een diep gesprek over je waarden",
+      "contexte": "Een goede vriend(in) stelt je vragen over wat voor jou echt belangrijk is in het leven — je relaties, wat je wil bereiken, je innerlijk leven, vrijheid en stabiliteit.",
+      "role": "Tu es un ami ou une amie proche, bienveillant·e et à l'écoute. Tu animes un petit exercice de réflexion sur les valeurs : tu proposes des catégories (relations, réussite/accomplissement, vie intérieure, liberté, stabilité) et tu demandes à la personne de citer un ou deux mots qu'elle valorise dans chaque catégorie, en lui demandant à chaque fois d'expliquer pourquoi avec un exemple concret. Rebondis avec empathie sur ce qu'elle dit, pose des questions de suivi sincères plutôt que de juger, et termine en résumant en une phrase ce que tu as compris de ses valeurs profondes.",
+      "welcome": "Hoi! Ik wil je graag een paar vragen stellen over wat voor jou echt belangrijk is in het leven. Is dat oké?",
+      "kit": {
+        "verbes": [
+          "waarderen",
+          "kiezen",
+          "uitleggen",
+          "groeien",
+          "leren",
+          "vertrouwen",
+          "delen",
+          "nadenken",
+          "bereiken"
+        ],
+        "mots": [
+          {
+            "nl": "de waarde",
+            "fr": "la valeur"
+          },
+          {
+            "nl": "de liefde",
+            "fr": "l'amour"
+          },
+          {
+            "nl": "de grens",
+            "fr": "la limite"
+          },
+          {
+            "nl": "de vrijgevigheid",
+            "fr": "la générosité"
+          },
+          {
+            "nl": "het eigenbelang",
+            "fr": "l'intérêt personnel"
+          },
+          {
+            "nl": "de verbetering",
+            "fr": "l'amélioration"
+          },
+          {
+            "nl": "de strategie",
+            "fr": "la stratégie"
+          },
+          {
+            "nl": "het bewustzijn",
+            "fr": "la conscience, l'awareness"
+          },
+          {
+            "nl": "de nederigheid",
+            "fr": "l'humilité"
+          },
+          {
+            "nl": "de dankbaarheid",
+            "fr": "la gratitude"
+          },
+          {
+            "nl": "het evenwicht",
+            "fr": "l'équilibre"
+          },
+          {
+            "nl": "het geluk",
+            "fr": "le bonheur"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Wat vind jij echt belangrijk in het leven?",
+            "fr": "Qu'est-ce qui compte vraiment pour toi dans la vie ?"
+          },
+          {
+            "nl": "Ik waardeer vooral... omdat...",
+            "fr": "Je valorise surtout... parce que..."
+          },
+          {
+            "nl": "Voor mij telt niet het resultaat, maar de inspanning die ik lever.",
+            "fr": "Pour moi, ce n'est pas le résultat qui compte, mais l'effort que je fournis."
+          },
+          {
+            "nl": "Ik ben dankbaar voor...",
+            "fr": "Je suis reconnaissant·e pour..."
+          },
+          {
+            "nl": "Dat is een moeilijke vraag, laat me er even over nadenken.",
+            "fr": "C'est une question difficile, laisse-moi y réfléchir un instant."
+          },
+          {
+            "nl": "Ik probeer altijd een goed evenwicht te vinden tussen...",
+            "fr": "J'essaie toujours de trouver un bon équilibre entre..."
+          }
+        ]
+      },
+      "famille": "social",
+      "source": "reflexion_personnelle_reelle"
+    },
+    {
+      "id": "emploi_kiezen_tussen_twee_aanbiedingen",
+      "_source": "redige_claude",
+      "theme": "emploi",
+      "label": "Aan een consulent uitleggen dat je voor een ander aanbod kiest",
+      "contexte": "Je bent in twee aanwervingsprocessen tegelijk bezig. Je moet aan een interim-consulent of een werkgever uitleggen dat je uiteindelijk voor de andere optie kiest — op een nette, duidelijke manier, zonder bruggen te verbranden. Misschien speelt ook een persoonlijke reden mee: je kent iemand die er al werkt, of het ligt dichter bij huis.",
+      "role": "Tu es un ou une consultant·e d'agence d'intérim ou un recruteur. Tu demandes calmement à la personne où en est sa réflexion, tu l'écoutes expliquer son choix (proximité, lien personnel, conditions), et tu réagis de façon professionnelle et bienveillante — tu laisses la porte ouverte pour une collaboration future plutôt que de prendre la nouvelle mal.",
+      "welcome": "Hoi, ik wou even afchecken: heb je al een keuze kunnen maken tussen de twee opties?",
+      "kit": {
+        "verbes": [
+          "kiezen",
+          "beslissen",
+          "afronden",
+          "starten",
+          "doorgaan",
+          "overwegen",
+          "bevestigen",
+          "informeren"
+        ],
+        "mots": [
+          {
+            "nl": "het aanbod",
+            "fr": "l'offre"
+          },
+          {
+            "nl": "de keuze",
+            "fr": "le choix"
+          },
+          {
+            "nl": "de afstand",
+            "fr": "la distance"
+          },
+          {
+            "nl": "het contract",
+            "fr": "le contrat"
+          },
+          {
+            "nl": "de proef",
+            "fr": "la période d'essai"
+          },
+          {
+            "nl": "de voorkeur",
+            "fr": "la préférence"
+          },
+          {
+            "nl": "de samenwerking",
+            "fr": "la collaboration"
+          },
+          {
+            "nl": "de reden",
+            "fr": "la raison"
+          }
+        ],
+        "phrases": [
+          {
+            "nl": "Ik heb twee processen samen lopen, om zeker te zijn iets te vinden.",
+            "fr": "J'ai deux processus en parallèle, pour être sûr de trouver quelque chose."
+          },
+          {
+            "nl": "Mijn eerste keuze is uiteindelijk dit aanbod, vooral omwille van de afstand.",
+            "fr": "Mon premier choix est finalement cette offre, surtout à cause de la distance."
+          },
+          {
+            "nl": "Ik ken daar trouwens al iemand, dus ik wist al wat over het bedrijf.",
+            "fr": "J'y connais d'ailleurs déjà quelqu'un, donc je savais déjà un peu comment fonctionne l'entreprise."
+          },
+          {
+            "nl": "Ik wil dat netjes afronden, zonder iemand in de steek te laten.",
+            "fr": "Je veux clore ça proprement, sans laisser tomber personne."
+          },
+          {
+            "nl": "Als het hier niet zou lukken, hoop ik dat er later nog een kans is bij jullie.",
+            "fr": "Si ça ne marchait pas ici, j'espère qu'il y aura encore une chance chez vous plus tard."
+          },
+          {
+            "nl": "Ik had dat ook eerlijk gezegd aan de andere werkgever.",
+            "fr": "Je l'avais aussi dit honnêtement à l'autre employeur."
+          },
+          {
+            "nl": "Bedankt voor het begrip, ik hou contact.",
+            "fr": "Merci pour la compréhension, je reste en contact."
+          },
+          {
+            "nl": "Het is ook maar twee, drie kilometer van bij mij, dat scheelt echt.",
+            "fr": "C'est aussi à seulement deux ou trois kilomètres de chez moi, ça change vraiment beaucoup."
+          }
+        ]
+      },
+      "source": "situation_reelle_generalisee"
     }
   ]
 }
