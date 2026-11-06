@@ -1571,8 +1571,13 @@ async function betaKeyRefresh(userDoc) {
         const key = snap.exists ? String(snap.data().key || '').trim() : '';
         if (key) localStorage.setItem(BETA_KEY_STORAGE, key); else localStorage.removeItem(BETA_KEY_STORAGE);
     } catch (e) {
-        // Règles pas encore publiées, ou accès retiré : pas de clé partagée.
-        localStorage.removeItem(BETA_KEY_STORAGE);
+        // Accès refusé (accès retiré, ou règles Firestore qui bloquent) : pas de clé partagée.
+        // Une simple erreur réseau (téléphone qui capte mal) garde la clé déjà sur l'appareil :
+        // avant, elle était effacée et plus rien ne marchait avec Gemini, sans explication.
+        if (e && e.code === 'permission-denied') {
+            localStorage.removeItem(BETA_KEY_STORAGE);
+            console.warn('Clé Gemini partagée : lecture refusée par les règles Firestore (config/gemini).');
+        }
     }
 }
 
@@ -7072,11 +7077,20 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             }
             const text = String(msg == null ? '' : msg);
             el.textContent = text;
+            // Juste après un toucher, le message s'affiche au-dessus du doigt (là où on regarde) ;
+            // sinon en haut de l'écran.
+            const tap = window.lastTapY && Date.now() - window.lastTapAt < 2500 ? window.lastTapY : null;
+            el.style.top = '';
             el.classList.add('show');
+            if (tap !== null) {
+                const h = el.offsetHeight || 60;
+                el.style.top = Math.max(12, Math.min(window.innerHeight - h - 12, tap - h - 24)) + 'px';
+            }
             clearTimeout(toastTimer);
             toastTimer = setTimeout(() => el.classList.remove('show'), Math.min(12000, 2600 + text.length * 45));
         }
         window.alert = toast;
+        document.addEventListener('pointerdown', e => { window.lastTapY = e.clientY; window.lastTapAt = Date.now(); }, true);
 
         // Retour immédiat sur une réponse, comme Duolingo : petite vibration et son discret.
         let fxCtx = null;
@@ -11692,7 +11706,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
 
         function rpJobRequireGemini() {
             if (GeminiService.isAvailable()) return true;
-            alert("Les mises en situation ont besoin de Gemini : renseigne ta clé API dans Profil → 🤖 Intelligence IA.");
+            alert("Pas de clé Gemini sur cet appareil : les mises en situation en ont besoin. Profil 👤 → 🤖 Intelligence IA (ou déconnecte-toi puis reconnecte-toi si ta clé est partagée).");
             return false;
         }
 
