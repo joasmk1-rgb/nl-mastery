@@ -8826,16 +8826,47 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             const msgDiv = document.createElement('div');
             msgDiv.className = `rp-message ${sender}`;
             // Répliques de l'interlocuteur en néerlandais : mots cliquables, inconnus soulignés.
-            if (sender === 'assistant' && !(rpCurrentScenario && rpCurrentScenario.lang === 'en')) {
-                msgDiv.innerHTML = rpAnnotateText(text);
+            const en = !!(rpCurrentScenario && rpCurrentScenario.lang === 'en');
+            if (sender === 'assistant' && !en) {
+                msgDiv.innerHTML = `<span class="rp-msg-text">${rpAnnotateText(text)}</span>`;
                 msgDiv.dataset.text = text;
                 rpWordSessionHear(text);
             } else {
                 msgDiv.innerText = text;
             }
+            // Sous chaque réplique, comme dans Discuter : 🔊 réécouter et 🌐 la traduction française,
+            // dévoilée d'un toucher (Joas, 7 novembre 2026).
+            if (sender === 'assistant') {
+                msgDiv.dataset.text = text;
+                msgDiv.insertAdjacentHTML('beforeend', `<div class="talk-tools">${en ? '' : '<button type="button" onclick="rpSpeakText(this.closest(\'.rp-message\').dataset.text)" title="Réécouter">🔊</button>'}<button type="button" onclick="rpMsgTranslate(this)" title="Traduire en français">🌐</button></div><div class="talk-fr"></div>`);
+            }
             historyDiv.appendChild(msgDiv);
             historyDiv.scrollTop = historyDiv.scrollHeight;
             return msgDiv;
+        }
+
+        // Traduction française d'une réplique, demandée une fois puis gardée (un toucher la cache).
+        const rpMsgFrCache = new Map();
+        async function rpMsgTranslate(btn) {
+            const msg = btn.closest('.rp-message');
+            const box = msg && msg.querySelector('.talk-fr');
+            if (!box) return;
+            if (box.dataset.done) { box.classList.toggle('show'); return; }
+            const text = msg.dataset.text || '';
+            if (rpMsgFrCache.has(text)) { box.textContent = rpMsgFrCache.get(text); box.dataset.done = '1'; box.classList.add('show'); return; }
+            if (!GeminiService.isAvailable()) { alert('La traduction a besoin de Gemini (Profil 👤 → 🤖 Intelligence IA).'); return; }
+            box.textContent = '…';
+            box.classList.add('show');
+            try {
+                const fr = String(await GeminiService.generate(`Traduis en français naturel cette réplique d'un jeu de rôle${rpCurrentScenario ? ' (situation : ' + rpCurrentScenario.label + ')' : ''}. Réponds UNIQUEMENT par la traduction, sans guillemets ni commentaire.\n\n${text}`)).trim().replace(/^["«»\s]+|["«»\s]+$/g, '');
+                rpMsgFrCache.set(text, fr);
+                box.textContent = fr;
+                box.dataset.done = '1';
+            } catch (e) {
+                box.textContent = 'Traduction impossible : ' + e.message;
+            }
+            const h = document.getElementById('rp-chat-history');
+            if (h && msg === h.lastElementChild) h.scrollTop = h.scrollHeight;
         }
 
         // ===== Mots cliquables dans les répliques du jeu de rôle =====
@@ -9114,7 +9145,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpToggleUnderlineUnseen() {
             state.settings.rpUnderlineUnseen = !state.settings.rpUnderlineUnseen;
             save();
-            document.querySelectorAll('#rp-chat-history .rp-message.assistant[data-text]').forEach(m => { m.innerHTML = rpAnnotateText(m.dataset.text); });
+            document.querySelectorAll('#rp-chat-history .rp-message.assistant[data-text] .rp-msg-text').forEach(t => { t.innerHTML = rpAnnotateText(t.closest('.rp-message').dataset.text); });
             rpShowUnderlineHelp();
         }
 
