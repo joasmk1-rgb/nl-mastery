@@ -8821,13 +8821,64 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (st) st.innerText = "Prêt";
         }
 
+        // Mode « d'abord en français » du jeu de rôle (voir « En deux temps ») : l'interlocuteur parle
+        // français, micro en français, ni correction ni mots comptés ; « 🏁 » donne la conversation en
+        // néerlandais. Gardé d'une situation à l'autre dans une journée (rpDayState.frMode).
+        let rpFrMode = false;
+        let rpFrWelcome = '';
+        function rpFrBarRender() {
+            const bar = document.getElementById('rp-fr-bar');
+            if (!bar) return;
+            const ok = studyLangCode() === 'nl' && rpCurrentScenario && rpCurrentScenario.lang !== 'en' && !rpScriptedActive;
+            const started = rpConversationHistory.length > 1;
+            bar.innerHTML = !ok ? '' : rpFrMode
+                ? `<div class="ts-bar"><span>🇫🇷 En français</span><button type="button" class="btn btn-green" onclick="rpFrFinish()">🏁 J'ai fini : en néerlandais</button><button type="button" class="report-link" onclick="rpFrStop()">Repasser en néerlandais</button></div>`
+                : (started ? '' : `<div class="ts-bar"><button type="button" class="rp-coach-btn" onclick="rpFrStart()">🇫🇷 D'abord en français, puis en néerlandais</button></div>`);
+        }
+        async function rpFrStart() {
+            if (!GeminiService.isAvailable()) { alert('Ce mode a besoin de Gemini (Profil 👤 → 🤖 Intelligence IA).'); return; }
+            rpFrMode = true;
+            if (rpDayState) rpDayState.frMode = true;
+            if (rpRecognition) rpRecognition.lang = 'fr-FR';
+            const input = document.getElementById('rp-text-input');
+            if (input) input.placeholder = '…ou écris ta réponse en français';
+            rpFrBarRender();
+            const first = document.querySelector('#rp-chat-history .rp-message.assistant');
+            const nl = rpCurrentScenario.welcome || '';
+            rpFrWelcome = nl;
+            try { rpFrWelcome = String(await GeminiService.generate(`Traduis en français naturel, à l'oral, cette première réplique d'un jeu de rôle (situation : ${rpCurrentScenario.label}). Réponds UNIQUEMENT par la traduction.\n\n${nl}`)).trim().replace(/^["«»\s]+|["«»\s]+$/g, ''); } catch (e) { /* on garde l'original */ }
+            if (first) {
+                first.dataset.text = rpFrWelcome;
+                const t = first.querySelector('.rp-msg-text');
+                if (t) t.textContent = rpFrWelcome;
+                const tr = first.querySelector('.talk-tools button[title^="Traduire"]');
+                if (tr) tr.remove();
+            }
+            rpSpeakText(rpFrWelcome);
+        }
+        function rpFrStop() {
+            rpFrMode = false;
+            if (rpDayState) rpDayState.frMode = false;
+            if (rpRecognition) rpRecognition.lang = studyLang().micLang;
+            const input = document.getElementById('rp-text-input');
+            if (input) input.placeholder = '...ou écris ta réponse en néerlandais';
+            rpFrBarRender();
+        }
+        function rpFrFinish() {
+            const lines = [{ who: 'them', fr: rpFrWelcome }].concat(rpConversationHistory.slice(1).map(h => ({ who: h.role === 'user' ? 'me' : 'them', fr: (h.parts && h.parts[0] && h.parts[0].text) || '' })));
+            twoStepShow(rpCurrentScenario.label, 'L\'autre', lines, document.getElementById('rp-twostep'));
+        }
+
         function rpAppendMessage(text, sender) {
             const historyDiv = document.getElementById('rp-chat-history');
             const msgDiv = document.createElement('div');
             msgDiv.className = `rp-message ${sender}`;
             // Répliques de l'interlocuteur en néerlandais : mots cliquables, inconnus soulignés.
             const en = !!(rpCurrentScenario && rpCurrentScenario.lang === 'en');
-            if (sender === 'assistant' && !en) {
+            if (sender === 'assistant' && rpFrMode) {
+                msgDiv.innerHTML = `<span class="rp-msg-text"></span>`;
+                msgDiv.firstChild.textContent = text;
+            } else if (sender === 'assistant' && !en) {
                 msgDiv.innerHTML = `<span class="rp-msg-text">${rpAnnotateText(text)}</span>`;
                 msgDiv.dataset.text = text;
                 rpWordSessionHear(text);
@@ -8838,7 +8889,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // dévoilée d'un toucher (Joas, 7 novembre 2026).
             if (sender === 'assistant') {
                 msgDiv.dataset.text = text;
-                msgDiv.insertAdjacentHTML('beforeend', `<div class="talk-tools">${en ? '' : '<button type="button" onclick="rpSpeakText(this.closest(\'.rp-message\').dataset.text)" title="Réécouter">🔊</button>'}<button type="button" onclick="rpMsgTranslate(this)" title="Traduire en français">🌐</button></div><div class="talk-fr"></div>`);
+                msgDiv.insertAdjacentHTML('beforeend', `<div class="talk-tools">${en ? '' : '<button type="button" onclick="rpSpeakText(this.closest(\'.rp-message\').dataset.text)" title="Réécouter">🔊</button>'}${rpFrMode ? '' : '<button type="button" onclick="rpMsgTranslate(this)" title="Traduire en français">🌐</button>'}</div><div class="talk-fr"></div>`);
             }
             historyDiv.appendChild(msgDiv);
             historyDiv.scrollTop = historyDiv.scrollHeight;
@@ -9162,6 +9213,15 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 <div class="rp-help-actions"><button type="button" class="rp-coach-btn" onclick="rpToggleUnderlineUnseen()">${on ? '✓ ' : ''}Souligner aussi les mots jamais travaillés</button></div>`;
         }
 
+        // L'interlocuteur a conclu la situation d'une journée ([FIN]) : on le dit, et « Situation
+        // suivante » passe en vert (Joas : on ne savait pas quand un moment était fini).
+        function rpSituationDone() {
+            const h = document.getElementById('rp-chat-history');
+            if (h) { h.insertAdjacentHTML('beforeend', `<div class="rp-done">✅ Ce moment est terminé.${rpFrMode ? ' Touche « 🏁 J\'ai fini » pour le voir en néerlandais, ou passe' : ' Passe'} à la suite quand tu veux.</div>`); h.scrollTop = h.scrollHeight; }
+            const btn = document.querySelector('#rp-day-nav button');
+            if (btn) { btn.classList.remove('btn-gray'); btn.classList.add('btn-green'); }
+        }
+
         async function rpSendToGemini(userText) {
             const apiKey = GeminiService.getKey();
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
@@ -9173,7 +9233,9 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 // Règles de conversation naturelle pour TOUS les jeux de rôle, + deux réessais si
                 // Gemini est surchargé (comme GeminiService.generate).
                     const languageInstruction = studyLangGeminiInstruction();
-                    const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '') + (languageInstruction ? '\n\n' + languageInstruction : '') }] } });
+                    const frLine = rpFrMode ? "\n\nMODE FRANÇAIS : l'apprenant fait d'abord cette conversation EN FRANÇAIS, pour se concentrer sur ce qu'il veut dire ; il la refera ensuite en néerlandais. Joue ton rôle exactement de la même façon, mais parle UNIQUEMENT en français naturel, même si tes consignes disent de parler néerlandais." : '';
+                    const finLine = rpDayState ? "\n\nFIN DE LA SITUATION : quand le but de cette situation est atteint et que l'échange se termine naturellement (tâche réglée, au revoir), termine ta dernière réplique par [FIN]. Jamais avant." : '';
+                    const body = JSON.stringify({ contents: rpConversationHistory, systemInstruction: { parts: [{ text: CONV_NATURAL_RULES + (tutorMemPromptLine() ? '\n\n' + tutorMemPromptLine() : '') + (languageInstruction && !rpFrMode ? '\n\n' + languageInstruction : '') + frLine + finLine }] } });
                 let data = null;
                 for (let attempt = 0; attempt < 3; attempt++) {
                     let status = 0;
@@ -9194,11 +9256,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
 
                 if (data.candidates && data.candidates[0].content) {
                     // Un interlocuteur à l'oral ne parle pas en gras ni en listes à puces.
-                    const aiResponse = stripMarkdown(data.candidates[0].content.parts[0].text);
+                    let aiResponse = stripMarkdown(data.candidates[0].content.parts[0].text);
+                    const fin = /\[\s*FIN\s*\]/i.test(aiResponse);
+                    aiResponse = aiResponse.replace(/\s*\[\s*FIN\s*\]\s*/gi, ' ').trim();
                     rpConversationHistory.push({ role: "model", parts: [{ text: aiResponse }] });
                     rpAppendMessage(aiResponse, 'assistant');
                     rpSpeakText(aiResponse);
                     document.getElementById('rp-status').innerText = "Prêt";
+                    if (fin) rpSituationDone();
                 } else {
                     throw new Error("Réponse invalide de l'API (pas de contenu retourné, peut-être bloqué par un filtre de sécurité)");
                 }
@@ -9227,6 +9292,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // lieu d'être dupliqué.
             // Scénario réel mené en anglais : pas de lecture, la voix configurée est néerlandaise.
             if (rpCurrentScenario && rpCurrentScenario.lang === 'en') return;
+            if (rpFrMode) { conjAudioSpeak(text, 'fr', 1.05); return; }
             speakNL(text);
         }
 
@@ -9361,8 +9427,17 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             document.getElementById('rp-step-chat').style.display = 'flex';
 
             document.getElementById('rp-chat-history').innerHTML = '';
+            const tsBox = document.getElementById('rp-twostep');
+            if (tsBox) tsBox.innerHTML = '';
+            const keepFr = !!(rpDayState && rpDayState.frMode && String(scenario.id || '').startsWith('job_'));
+            rpFrMode = false;
+            rpFrWelcome = '';
+            if (rpRecognition && scenario.lang !== 'en') rpRecognition.lang = studyLang().micLang;
+            const textInput = document.getElementById('rp-text-input');
+            if (textInput) textInput.placeholder = '...ou écris ta réponse en néerlandais';
             rpAppendMessage(scenario.welcome, 'assistant');
-            rpSpeakText(scenario.welcome);
+            if (keepFr) rpFrStart(); else rpSpeakText(scenario.welcome);
+            rpFrBarRender();
             document.getElementById('rp-status').innerText = "Prêt";
 
             // Gemini non configuré du tout : bascule directe en mode script si ce scénario en a un,
@@ -9390,6 +9465,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Les répliques pré-écrites du mode script n'y passent pas : rien à corriger.
         function rpAppendUserTurn(text) {
             const msgDiv = rpAppendMessage(text, 'user');
+            rpFrBarRender();
+            if (rpFrMode) return; // en français : ni correction ni mots comptés
             if (rpWordSession) rpWordSession.userTexts.push(text);
             // Examen de module : après quelques échanges, le bouton « J'ai fini » ressort.
             const finishBtn = document.getElementById('modrp-finish-btn');
@@ -14561,6 +14638,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                     <div class="talk-head-txt"><b>${p.name}</b><small>${talk.lesson ? '📘 ' + rpEscapeHtml(talk.lesson.s.titre) : talk.point ? '🧑‍🏫 On fait connaissance' : talk.sit ? '🎭 ' + rpEscapeHtml(talk.sit.label) : talk.wordTarget ? '💬 ' + rpEscapeHtml(talk.wordTarget.label) : TALK_TOPICS[talk.topic]}</small></div>
                     ${speedBtnHtml()}
                     ${talk.lesson ? courseRulesBtnHtml() : ''}
+                    ${talkFrEligible() ? (talk.frMode ? '<span class="ts-badge">🇫🇷 En français</span>' : (talk.userCount ? '' : '<button type="button" class="rp-coach-btn" id="talk-fr-first" onclick="talkFrFirst()" title="La faire d\'abord en français, puis en néerlandais">🇫🇷 D\'abord en français</button>')) : ''}
                     <span id="talk-ring-small">${talkRingHtml(34)}</span>
                     <button type="button" class="rp-coach-btn" onclick="talkEnd()">Terminer</button>
                 </div>
@@ -14583,12 +14661,37 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
             convRenderTasks();
         }
 
+        function talkFrEligible() { return !!(talk && studyLangCode() === 'nl' && !talk.point && !talk.lesson && !talk.wordTarget); }
+        function talkFrFirst() {
+            if (!talk || talk.userCount || talk.busy) return;
+            talkStop();
+            talk.frMode = true;
+            talk.history = [];
+            talk.log = [];
+            talk.suggestions = [];
+            talkRenderChat();
+            talkAppend({ who: 'info', html: `<span class="report-meta">🇫🇷 On la fait d'abord en français : dis vraiment ce que tu veux dire. Quand tu as fini, touche « Terminer » : je te la donne en néerlandais, et tu pourras la refaire.</span>` });
+            talkTurn();
+        }
+        function talkFrPrompt() {
+            const p = talk.p;
+            const hist = talk.history.map(h => h.who === 'them' ? 'Toi : ' + h.nl : 'Apprenant : ' + h.text).join('\n');
+            return `Jeu de rôle EN FRANÇAIS. Un apprenant de ${studyLang().nom} fait d'abord cette conversation en français pour se concentrer sur ce qu'il veut dire ; il la refera ensuite en ${studyLang().nom}. Parle UNIQUEMENT en français naturel, à l'oral.
+${talk.sit ? `Tu joues ce rôle : ${talk.sit.role || ''}\nSituation : ${talk.sit.contexte || talk.sit.label}` : `Tu es ${p.name}, un ami, et vous discutez de : ${String(TALK_TOPICS[talk.topic] || 'tout et rien').replace(/^\S+\s/, '')}.`}
+Une vraie conversation : réagis à ce qu'il dit vraiment, une question à la fois, répliques courtes (une à trois phrases), fais avancer la scène. Ne corrige jamais son français. Quand la situation est réglée (ou après une dizaine d'échanges pour une discussion libre), conclus naturellement et mets "fin": true.
+${hist ? 'Conversation :\n' + hist : 'Ouvre la scène par une première réplique naturelle.'}
+Réponds UNIQUEMENT en JSON : {"reply_nl": "ta réplique, EN FRANÇAIS", "fin": false}`;
+        }
+
         function talkAppend(m, replay) {
             if (!replay) talk.log.push(m);
             const chat = document.getElementById('talk-chat');
             if (!chat) return null;
             const div = document.createElement('div');
-            if (m.who === 'them') {
+            if (m.who === 'them' && m.frm) {
+                div.className = 'talk-msg them';
+                div.innerHTML = `<div class="talk-nl">${rpEscapeHtml(m.nl)}</div><div class="talk-tools"><button type="button" onclick="conjAudioSpeak(this.closest('.talk-msg').querySelector('.talk-nl').innerText, 'fr', 1.05)" title="Réécouter">🔊</button></div>`;
+            } else if (m.who === 'them') {
                 div.className = 'talk-msg them';
                 const words = rpAnnotateText(m.nl).replace(/rpWordTap\(this\)/g, 'talkWordTap(this)');
                 div.innerHTML = `${m.help ? `<div class="talk-help">🇫🇷 ${rpEscapeHtml(m.help)}</div>` : ''}<div class="talk-nl">${words}</div>
@@ -14710,14 +14813,22 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
         async function talkTurn(lastMsg, lastDiv) {
             talkThinking(true);
             let r = null;
-            try { r = rpHelpParseJson(await GeminiService.generate(talkPrompt())); } catch (e) { r = { error: e.message }; }
+            const prompt = () => talk.frMode ? talkFrPrompt() : talkPrompt();
+            try { r = rpHelpParseJson(await GeminiService.generate(prompt())); } catch (e) { r = { error: e.message }; }
             if (talk && !talk.ended && (!r || r.error || !r.reply_nl)) {
-                try { r = rpHelpParseJson(await GeminiService.generate(talkPrompt())); } catch (e) { r = { error: e.message }; }
+                try { r = rpHelpParseJson(await GeminiService.generate(prompt())); } catch (e) { r = { error: e.message }; }
             }
             if (!talk || talk.ended) return;
             talkThinking(false);
             if (!r || r.error || !r.reply_nl) {
                 talkAppend({ who: 'info', html: `⚠️ Pas de réponse (${rpEscapeHtml((r && r.error) || 'réponse illisible')}). <button class="rp-coach-btn" onclick="talkTurn()">Réessayer</button>${talk.point && talk.userCount ? ' <button class="rp-coach-btn" onclick="talkEnd()">🏁 Terminer et faire le point</button>' : ''}` });
+                return;
+            }
+            if (talk.frMode) {
+                talk.history.push({ who: 'them', nl: r.reply_nl });
+                talkAppend({ who: 'them', nl: r.reply_nl, frm: true });
+                if (talkActive()) await conjAudioSpeak(r.reply_nl, 'fr', 1.05);
+                if (r.fin === true && talk.userCount > 0 && talkActive()) talkEnd();
                 return;
             }
             const rawHelp = typeof r.fr_help === 'string' ? r.fr_help.trim() : '';
@@ -14751,11 +14862,15 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
                 const rulesMsg = courseRulesHeard(text);
                 if (rulesMsg) { talkAppend({ who: 'info', html: `<span class="report-meta">${rulesMsg}</span>` }); if (isFr) return; }
             }
+            if (talk.frMode) isFr = false;
+            const ff = document.getElementById('talk-fr-first');
+            if (ff) ff.remove();
             const msg = { who: 'me', text, isFr };
             const div = talkAppend(msg);
             talk.history.push({ who: 'me', text, isFr });
             document.getElementById('talk-mic-hint').innerText = 'Touche le micro pour parler';
-            if (!isFr) {
+            if (!isFr && talk.frMode) talk.userCount++;
+            else if (!isFr) {
                 talk.userCount++;
                 const d = talkState().days;
                 d[talkToday()] = (d[talkToday()] || 0) + 1;
@@ -14785,6 +14900,7 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
 
         function talkMic(lang) {
             if (!talk || talk.ended) return;
+            if (talk.frMode) lang = 'fr';
             if (talkRec) { talkRec.finish(true); return; }
             if (!window.SpeechRecognition) { talkToggleText(true); alert("La reconnaissance vocale n'est pas disponible dans ce navigateur : écris ta réponse (⌨️), ou utilise Chrome."); return; }
             if (talk.busy) return;
@@ -14811,6 +14927,16 @@ Réponds UNIQUEMENT en JSON : {"reply_nl": "", "reply_fr": "traduction français
             const t = talk;
             t.ended = true;
             if (!t.userCount) { talk = null; talkRenderSetup(); return; }
+            if (t.frMode) {
+                const bar = document.querySelector('#talk-content .talk-bar');
+                if (bar) bar.style.display = 'none';
+                const sugg = document.getElementById('talk-sugg');
+                if (sugg) sugg.innerHTML = '';
+                const box = talkAppend({ who: 'info', html: '<div class="ts-box"></div>' });
+                const label = t.sit ? t.sit.label : 'Discussion avec ' + t.p.name;
+                await twoStepShow(label, t.sit ? 'L\'autre' : t.p.name, t.history.map(h => ({ who: h.who === 'them' ? 'them' : 'me', fr: h.who === 'them' ? h.nl : h.text })), box && box.querySelector('.ts-box'));
+                return;
+            }
             if (t.point && !t.point.done) { t.point.done = true; await talkPointEvaluate(t); }
             if (t.lesson) convSaveResult(t);
             const box = document.getElementById('talk-chat');
@@ -16715,6 +16841,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On prépare la situation en trois temps. D'abord ses mots : je te les demande, ceux que tu connais sont validés, les autres je te les présente. Ensuite, ces mots dans leurs blocs : je te dis une phrase en français, tu la traduis à ta manière. Enfin, on joue la situation, et tu essaies de les placer.",
                 whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
             },
+            deuxtemps: {
+                icon: '🔁', label: 'La refaire en néerlandais', nav: 'nav-pratiquer', back: '← Retour à la conversation', run: r => routineDrillTwoStep(r),
+                why: "On refait ta conversation en néerlandais. Tu entends l'autre, puis je te rappelle ce que tu as dit en français : dis-le en néerlandais, à ta manière. Si tu bloques, 💡 te montre ta phrase. Je juge sur le sens et je corrige en gardant tes mots.",
+                whyPassive: "Ici, c'est toi qui parles : je repasse en mode actif."
+            },
             dehet: {
                 icon: '⚖️', label: 'De ou het ?', run: r => routineDrillDeHet(r),
                 why: "De ou het ? Je te dis un nom : réponds avec son article, par exemple « de tafel », ou touche DE ou HET. Deux bonnes réponses, et le nom est acquis.",
@@ -16750,10 +16881,104 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
             if (!routineActive(r) || res === false) return;
             // En écoute seule, ça tourne tout seul (comme en cours) tant qu'il y a de quoi faire.
             if (routinePassive() && res !== 'empty') { routineDrillLoop(r, false); return; }
-            const v = await routineWait(r, (res === 'empty' ? [] : [['again', r.drill === 'dire' ? '💭 Autre chose' : '🔁 Encore une série']]).concat([['back', d.back || (r.train ? '← Retour' : '← Vocabulaire'), 'btn-gray']]));
+            const v = await routineWait(r, (res === 'empty' ? [] : [['again', r.drill === 'dire' ? '💭 Autre chose' : r.drill === 'deuxtemps' ? '🔁 La refaire encore' : '🔁 Encore une série']]).concat([['back', d.back || (r.train ? '← Retour' : '← Vocabulaire'), 'btn-gray']]));
             if (!routineActive(r) || v === 'quit') return;
             if (v === 'back') { routineQuitRun(); r.back(); return; }
             routineDrillLoop(r, false);
+        }
+
+        // ===== 🇫🇷 → 🇳🇱 En deux temps (Joas, 7 novembre 2026) =====
+        // Dans tout jeu de rôle (Discuter, Mon travail, inwerkperiode, entretiens…) : on le fait
+        // d'abord EN FRANÇAIS, pour dire vraiment ce qu'on veut dire, puis au choix on lit toute la
+        // conversation traduite en néerlandais (ses répliques rendues à son niveau, sans rien perdre
+        // de son idée), ou on la refait en néerlandais (drill deuxtemps de l'écran du tuteur : les
+        // répliques de l'autre, sa phrase française en repère, jugée comme les blocs). Un appel Gemini
+        // pour toute la traduction, puis un par réponse jugée. Ses phrases → « 💭 Mes phrases ».
+        let twoStepCurrent = null; // { label, other, lines: [{ who: 'me' | 'them', fr, nl }] }
+        let twoStepListenToken = 0;
+        async function twoStepTranslate(label, lines) {
+            const r = rpHelpParseJson(await GeminiService.generate(`Voici une conversation de jeu de rôle (situation : ${label}) qu'un apprenant francophone de ${studyLang().variante} (niveau ${liveLevel()}) a faite EN FRANÇAIS avec son interlocuteur, pour se concentrer sur ce qu'il voulait dire. Traduis chaque réplique en ${studyLang().nom} oral et naturel.
+- Répliques de l'APPRENANT : sa façon de le dire à son niveau (${liveLevel()}), phrases justes et simples, qui gardent EXACTEMENT son idée, sans rien ajouter ni retirer ; garde son point de vue (« je » = lui).
+- Répliques de l'INTERLOCUTEUR : comme il l'aurait dit dans cette situation.
+Même nombre de lignes, même ordre.
+${lines.map((l, i) => `${i + 1}. ${l.who === 'me' ? 'APPRENANT' : 'INTERLOCUTEUR'} : ${l.fr}`).join('\n')}
+Réponds UNIQUEMENT en JSON : {"lignes": [{"nl": ""}]}`));
+            const out = r && Array.isArray(r.lignes) ? r.lignes : [];
+            if (out.length !== lines.length) return false;
+            lines.forEach((l, i) => { l.nl = String((out[i] && out[i].nl) || '').trim(); });
+            return lines.every(l => l.nl);
+        }
+        async function twoStepShow(label, other, lines, box) {
+            if (!box) return;
+            lines = lines.filter(l => l.fr && l.fr.trim());
+            if (!lines.some(l => l.who === 'me')) { box.innerHTML = '<p class="report-meta">Dis au moins une phrase en français, puis reviens ici.</p>'; return; }
+            box.innerHTML = '<p class="report-meta">📄 Je traduis toute la conversation…</p>';
+            let ok = false;
+            try { ok = await twoStepTranslate(label, lines); } catch (e) { ok = false; }
+            if (!ok) { box.innerHTML = `<p class="report-meta">⚠️ La traduction n'a pas marché. <button class="rp-coach-btn" onclick="twoStepRetry()">Réessayer</button></p>`; twoStepCurrent = { label, other, lines, box, retry: true }; return; }
+            twoStepCurrent = { label, other, lines };
+            box.innerHTML = twoStepCardHtml();
+            box.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+        function twoStepRetry() { const c = twoStepCurrent; if (c && c.retry) twoStepShow(c.label, c.other, c.lines.map(l => ({ who: l.who, fr: l.fr })), c.box); }
+        function twoStepCardHtml() {
+            const c = twoStepCurrent;
+            return `<div class="prof-debrief two-step">
+                <div class="prof-target-title">📄 Ta conversation en ${studyLang().nom}</div>
+                <p class="report-meta">Tes répliques sont rendues à ton niveau, en gardant ton idée.</p>
+                ${c.lines.map(l => `<div class="ts-line ${l.who === 'me' ? 'ts-me' : 'ts-them'}"><small>${l.who === 'me' ? '🧑 Toi' : '🗣️ ' + rpEscapeHtml(c.other || 'L\'autre')}</small><div><b>${rpEscapeHtml(l.nl)}</b> ${speakBtnHtml(l.nl)}</div><small class="report-meta">${rpEscapeHtml(l.fr)}</small></div>`).join('')}
+                <div class="prof-actions"><button class="btn btn-green" onclick="twoStepReplay()">🔁 La refaire en ${studyLang().nom}</button><button class="btn btn-gray" onclick="twoStepListen()">▶️ Tout écouter</button><button class="btn btn-gray" onclick="twoStepSave(this)">💾 Garder mes phrases</button></div>
+            </div>`;
+        }
+        async function twoStepListen() {
+            const c = twoStepCurrent;
+            if (!c) return;
+            const tok = ++twoStepListenToken;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            for (const l of c.lines) {
+                if (tok !== twoStepListenToken) return;
+                await conjAudioSpeak(l.nl, 'nl', 0.95, { speaker: l.who === 'me' ? 1 : 0 });
+            }
+        }
+        function twoStepSave(btn) {
+            const c = twoStepCurrent;
+            if (!c) return;
+            liveSaveWords(c.lines.filter(l => l.who === 'me').map(l => ({ nl: l.nl, fr: l.fr })), SAY_LIST);
+            save();
+            if (btn) { btn.disabled = true; btn.textContent = '✅ Dans « 💭 Mes phrases »'; }
+        }
+        function twoStepReplay() {
+            if (!twoStepCurrent) return;
+            twoStepListenToken++;
+            if (routinePassive()) { state.settings.routinePassive = false; save(); }
+            routineDrill('deuxtemps', () => history.back(), { label: twoStepCurrent.label });
+        }
+        async function routineDrillTwoStep(r) {
+            const c = twoStepCurrent;
+            if (!c) return 'empty';
+            if (routinePassive()) { state.settings.routinePassive = false; save(); }
+            const mine = c.lines.filter(l => l.who === 'me');
+            let k = 0, score = 0, asked = 0;
+            for (const l of c.lines) {
+                if (!routineActive(r)) return false;
+                if (l.who === 'them') {
+                    routineBubble('prof', `<div class="prof-nl"><b>${rpEscapeHtml(l.nl)}</b> ${speakBtnHtml(l.nl)}</div><small class="report-meta">${rpEscapeHtml(l.fr)}</small>`);
+                    await conjAudioSpeak(l.nl, 'nl', 0.95, { speaker: 0 });
+                    continue;
+                }
+                k++;
+                r.ctx = `dire en ${studyLang().nom} : « ${l.fr} » (modèle : « ${l.nl} »)`;
+                const res = await routineTranslateQ(r, { kind: 'phrase', label: `Ta réplique ${k}/${mine.length}`, fr: l.fr, ex: l.nl, target: l.nl, before: '', after: '', gapFr: '', gapMark: '', hintHtml: `<div class="chunk-q-nl">${rpEscapeHtml(l.nl)}</div>` });
+                if (res === null) return false;
+                if (res === '__stop') break;
+                if (res === '__passive') continue;
+                asked++;
+                if (res.ok) score++;
+                usedWordsRecord(l.nl);
+            }
+            r.ctx = null;
+            if (routineActive(r) && asked) await routineSay(r, `${score} sur ${asked}. ${score === asked ? 'Bravo, toute la conversation en néerlandais !' : 'Refais-la quand tu veux : les phrases reviennent vite.'}`);
+            return true;
         }
 
         // ===== 💭 Dis-le en néerlandais (Joas, 25 octobre 2026) =====
@@ -17459,7 +17684,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
                 ? `<div class="routine-q"><small>${q.label}</small><div class="chunk-q-fr">${rpEscapeHtml(q.fr)}</div><div class="chunk-q-nl">${hole}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small></div>`
                 : `<div class="routine-q"><small>${q.label} · traduis toute la phrase, à ta manière</small><div class="chunk-q-fr">${rpEscapeHtml(q.fr)}</div>
                     <button type="button" class="report-link" onclick="const h = document.getElementById('${holeId}'); if (h) h.style.display = ''; this.remove();">💡 Indice</button>
-                    <div id="${holeId}" style="display:none;"><div class="chunk-q-nl">${hole}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small></div></div>`;
+                    <div id="${holeId}" style="display:none;">${q.hintHtml || `<div class="chunk-q-nl">${hole}</div><small>🇫🇷 le trou : ${rpEscapeHtml(q.gapFr || '')}</small>`}</div></div>`;
             const given = await routineAskAnswer(r, html, () => conjAudioSpeak(q.fr, 'fr', 1.05), sayPassive);
             const model = rpEscapeHtml(q.before) + '<b>' + rpEscapeHtml(q.target) + '</b>' + rpEscapeHtml(q.after);
             if (given === null || given === '__stop') return given;

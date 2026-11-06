@@ -16,7 +16,7 @@
     <!-- Version du code : À CHANGER À CHAQUE COMMIT qui touche js/ ou css/ (date-heure). Une
          nouvelle version = nouvelle adresse = les téléphones prennent le nouveau code ; sinon tout
          vient du cache (sw.js), sans rien retélécharger. -->
-    <script>window.NLM_V = '202611070030'; document.write('<link rel="stylesheet" href="css/styles.css?v=' + NLM_V + '">');</script>
+    <script>window.NLM_V = '202611071200'; document.write('<link rel="stylesheet" href="css/styles.css?v=' + NLM_V + '">');</script>
     <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
 
     <!-- Firebase (comptes + synchro cloud) -->
@@ -407,7 +407,9 @@
         <div id="rp-step-chat" style="display:none; width:100%; display:flex; flex-direction:column; align-items:center;">
             <button class="back-btn" onclick="rpShowScenarioPicker()">← Changer de scénario</button>
             <div id="rp-mode-banner" style="display:none; width:100%;"></div>
+            <div id="rp-fr-bar" style="width:100%;"></div>
             <div id="rp-chat-history"></div>
+            <div id="rp-twostep" style="width:100%;"></div>
             <button id="rp-mic-btn" class="btn btn-green" onclick="rpToggleSpeechRecognition()">🎤 Cliquer pour parler</button>
             <div id="rp-status">Prêt</div>
             <div id="rp-text-row">

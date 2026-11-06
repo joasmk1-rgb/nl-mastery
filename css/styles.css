@@ -1075,3 +1075,11 @@
         .hub-card .hub-card-icon { grid-row: span 2; margin: 0; font-size: 1.45rem; }
         .hub-card .hub-card-title { margin-bottom: 0; }
         @media (max-width: 520px) { .hub-grid:not(.single) { grid-template-columns: 1fr; gap: 10px; } }
+        /* 🇫🇷 → 🇳🇱 En deux temps */
+        .ts-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0; }
+        .ts-bar .btn { width: auto; margin: 0; padding: 8px 14px; font-size: 0.9rem; }
+        .ts-badge { font-size: 0.78rem; padding: 4px 8px; border-radius: 999px; background: color-mix(in srgb, var(--primary) 15%, transparent); white-space: nowrap; }
+        .ts-line { padding: 8px 10px; border-radius: 10px; margin: 6px 0; background: var(--bg); }
+        .ts-line.ts-me { border-left: 3px solid var(--success); }
+        .ts-line.ts-them { border-left: 3px solid var(--primary); }
+        .rp-done { align-self: center; font-size: 0.85rem; color: var(--success); margin: 6px 0; text-align: center; }
