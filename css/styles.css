@@ -1039,3 +1039,21 @@
 .admin-user-card { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; margin: 6px 0; }
 .admin-user-card summary { cursor: pointer; }
 .admin-user-body > div { margin-top: 8px; }
+
+        /* ===== Lot 2 de la revue d'ergonomie (6 novembre 2026) ===== */
+        /* Bandeau de message (remplace les fenêtres « OK ») */
+        .app-toast { position: fixed; left: 50%; top: calc(12px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -16px); width: max-content; max-width: min(92vw, 520px); box-sizing: border-box; background: #1f2937; color: #fff; padding: 12px 16px; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.35); font-size: 0.92rem; line-height: 1.4; white-space: pre-line; z-index: 3000; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; cursor: pointer; }
+        .app-toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+        /* Encoches et barre d'état (app installée) */
+        header { padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+        /* Conversations et séances en plein écran : pas de bandeau du haut (retour : ← ou le bouton du téléphone) */
+        body[data-view="talk-view"] header, body[data-view="routine-view"] header, body[data-view="modguide-view"] header,
+        body[data-view="prof-view"] header, body[data-view="replay-view"] header, body[data-view="car-view"] header,
+        body[data-view="tutor-view"] header, body[data-view="listen-view"] header { display: none; }
+        body[data-view="talk-view"] .view.active, body[data-view="routine-view"] .view.active, body[data-view="modguide-view"] .view.active,
+        body[data-view="prof-view"] .view.active, body[data-view="replay-view"] .view.active, body[data-view="car-view"] .view.active,
+        body[data-view="tutor-view"] .view.active, body[data-view="listen-view"] .view.active { padding-top: calc(14px + env(safe-area-inset-top, 0px)); }
+        /* Fondu doux entre écrans */
+        .view.active { animation: viewIn .16s ease-out; }
+        @keyframes viewIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { .view.active { animation: none; } .app-toast { transition: none; } }

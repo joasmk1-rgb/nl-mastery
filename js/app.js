@@ -6029,6 +6029,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             const q = st.questions[st.index];
             const result = conjEvaluate(document.getElementById('conj-tr-input').value, q);
             const isCorrect = result.status !== 'wrong';
+            answerFx(isCorrect);
             const fb = document.getElementById('conj-tr-feedback');
             const shown = q.frq ? q.frq.fullAnswer : q.answer;
             if (isCorrect) {
@@ -7050,13 +7051,61 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 tabs.map(t => `<button type="button" class="${t.k === cur ? 'active' : ''}" onclick="${t.go}"><span class="icon">${t.icon}</span>${t.label}</button>`).join('');
         }
 
+        // ===== Bandeaux à la place des fenêtres « OK » (lot 2 de la revue d'ergonomie, 6 novembre 2026) =====
+        // Les ~100 alert() de l'app bloquaient l'écran jusqu'à « OK » : ils deviennent un bandeau en
+        // bas, qui disparaît seul (plus longtemps si le message est long) ou d'un toucher. Les vraies
+        // questions (confirm, prompt) restent des fenêtres.
+        let toastTimer = null;
+        function toast(msg) {
+            let el = document.getElementById('app-toast');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'app-toast';
+                el.className = 'app-toast';
+                el.setAttribute('role', 'status');
+                el.onclick = () => el.classList.remove('show');
+                document.body.appendChild(el);
+            }
+            const text = String(msg == null ? '' : msg);
+            el.textContent = text;
+            el.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => el.classList.remove('show'), Math.min(12000, 2600 + text.length * 45));
+        }
+        window.alert = toast;
+
+        // Retour immédiat sur une réponse, comme Duolingo : petite vibration et son discret.
+        let fxCtx = null;
+        function answerFx(ok) {
+            try { if (navigator.vibrate) navigator.vibrate(ok ? 12 : [35, 50, 35]); } catch (e) { /* pas grave */ }
+            try {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return;
+                if (!fxCtx) fxCtx = new AC();
+                if (fxCtx.state === 'suspended') fxCtx.resume();
+                const t0 = fxCtx.currentTime;
+                const notes = ok ? [[660, 0, 0.07], [880, 0.07, 0.11]] : [[240, 0, 0.16]];
+                notes.forEach(([f, at, dur]) => {
+                    const o = fxCtx.createOscillator(), g = fxCtx.createGain();
+                    o.type = ok ? 'sine' : 'triangle';
+                    o.frequency.value = f;
+                    g.gain.setValueAtTime(0.0001, t0 + at);
+                    g.gain.exponentialRampToValueAtTime(0.07, t0 + at + 0.01);
+                    g.gain.exponentialRampToValueAtTime(0.0001, t0 + at + dur);
+                    o.connect(g).connect(fxCtx.destination);
+                    o.start(t0 + at);
+                    o.stop(t0 + at + dur + 0.02);
+                });
+            } catch (e) { /* pas de son, tant pis */ }
+        }
+
         // ===== Bouton retour du téléphone (Joas, 5 novembre 2026 : « fluidifier au maximum ») =====
         // Avant, aucun écran n'entrait dans l'historique : le retour d'Android quittait l'app. Chaque
         // changement d'écran (classe .active d'une .view, quel que soit le code qui l'a fait) ajoute
         // une entrée ; le retour réaffiche l'écran d'avant TEL QU'IL ÉTAIT (son contenu reste dans la
         // page), à la même hauteur, après avoir coupé micro et voix de l'écran quitté. Le panneau du
         // compagnon se ferme d'abord. L'écran de connexion n'entre jamais dans l'historique.
-        const NAV_HISTORY = { ready: false, restoring: false, cur: null };
+        const NAV_HISTORY = { ready: false, restoring: false, cur: null, scroll: {} };
         function navHistoryView() { const v = document.querySelector('.view.active'); return v ? v.id : null; }
         function navHistoryLeave(id) {
             const stops = {
@@ -7073,9 +7122,16 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (NAV_HISTORY.ready || !window.history || !history.pushState) return;
             NAV_HISTORY.ready = true;
             NAV_HISTORY.cur = navHistoryView();
+            document.body.dataset.view = NAV_HISTORY.cur || '';
             try { history.replaceState({ nlm: 1, v: NAV_HISTORY.cur, nav: navMode }, ''); } catch (e) { /* pas grave */ }
+            // Chaque écran défile dans sa propre boîte (.view) : on retient sa hauteur pour le retour.
+            document.addEventListener('scroll', e => {
+                const t = e.target;
+                if (t && t.classList && t.classList.contains('view') && t.classList.contains('active')) NAV_HISTORY.scroll[t.id] = t.scrollTop;
+            }, true);
             const obs = new MutationObserver(() => {
                 const v = navHistoryView();
+                if (v) document.body.dataset.view = v;
                 if (!v || v === NAV_HISTORY.cur) return;
                 const prev = NAV_HISTORY.cur;
                 NAV_HISTORY.cur = v;
@@ -7083,7 +7139,6 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 const entry = { nlm: 1, v, nav: navMode };
                 try {
                     if (!prev || prev === 'compte-view' || document.body.classList.contains('gated') || document.body.classList.contains('auth-pending')) { history.replaceState(entry, ''); return; }
-                    history.replaceState(Object.assign({}, history.state, { y: window.scrollY }), '');
                     history.pushState(entry, '');
                 } catch (e) { /* pas grave */ }
             });
@@ -7100,12 +7155,13 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 navHistoryLeave(NAV_HISTORY.cur);
                 NAV_HISTORY.restoring = true;
                 document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
-                document.getElementById(st.v).classList.add('active');
+                const back = document.getElementById(st.v);
+                back.classList.add('active');
+                back.scrollTop = NAV_HISTORY.scroll[st.v] || 0;
                 setActiveNav(st.nav || 'nav-home');
                 if (st.v === 'home-view' && curriculumLoaded) renderDashboard();
                 if (typeof buddyRefreshFab === 'function') buddyRefreshFab();
                 setTimeout(() => { NAV_HISTORY.restoring = false; }, 0);
-                window.scrollTo(0, st.y || 0);
             });
         }
         // setActiveNav appelé après coup (écran déjà dans l'historique) : on y note le mode de la barre.
@@ -7864,7 +7920,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                         localStorage.setItem(STATE_KEY, JSON.stringify(imported));
                     }
                     alert("Import réussi ! La page va se recharger.");
-                    location.reload();
+                    setTimeout(() => location.reload(), 1500);
                 } catch (err) {
                     alert("Erreur : le fichier n'a pas pu être lu (" + err.message + ").");
                 }
@@ -11387,6 +11443,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 }
             }
             ex.heard = null;
+            answerFx(!!ok);
             if (ok) ex.score++;
             (ex.results || (ex.results = []))[ex.i] = ok;
             modRpEtapeNotions(modRpCurrent, ex.etapeId).forEach(n => { if (curriculumNotions[n]) recordNotionAttempt(n, ok); });
@@ -17093,6 +17150,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
             return v.text;
         }
         function routineFeedback(ok, answer, extra, silent) {
+            if (ok !== null) answerFx(!!ok);
             routineBubble('info', `<div class="routine-fb ${ok === null ? '' : ok ? 'ok' : 'ko'}">${ok === null ? '🎧' : ok ? '✅' : '❌'} <b>${rpEscapeHtml(answer)}</b> ${speakBtnHtml(answer)}${extra ? `<div class="report-meta">${extra}</div>` : ''}</div>`);
             if (!ok && !silent) conjAudioSpeak(answer, 'nl', 0.9);
         }
@@ -17362,6 +17420,7 @@ Réponds UNIQUEMENT en JSON : {"reponse": ""}`));
         // Retour commun après une traduction libre : bon ou pas, SA phrase corrigée (✨ À ta manière),
         // l'explication, et la version attendue ; dits à voix haute ; la règle va dans la mémoire du tuteur.
         async function routineJudgeFeedback(r, q, given, j, model) {
+            answerFx(!!j.ok);
             const own = j.version && normalize(j.version) !== normalize(given) && normalize(j.version) !== normalize(q.ex) ? j.version : '';
             routineBubble('info', `<div class="routine-fb ${j.ok ? 'ok' : 'ko'}">${j.ok ? (j.close ? '🟡 Le sens est bon' : '✅ C\'est bon') : given ? '❌ Pas tout à fait' : '🤷'}
                 ${own ? `<div class="report-meta">✨ À ta manière : <b>${rpEscapeHtml(own)}</b> ${speakBtnHtml(own)}</div>` : ''}
