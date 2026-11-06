@@ -803,6 +803,92 @@
         }
       ],
       "source": "appel_entretien_reel_anonymise"
+    },
+    {
+      "id": "zonvella_agence_suivi_reel",
+      "label": "Agence d'intérim — confirmation de la mission chez Zonvella (réel)",
+      "contexte": "Appel réel de suivi avec la consultante de l'agence d'intérim, juste avant le premier jour chez Zonvella : heure de début, contrats et paie à la semaine, test et formation sécurité, durée de la mission, signature en ligne, et comment dire qu'on a encore un autre entretien en cours.",
+      "_source": "Transcription réelle d'un appel de Joas (novembre 2026), FR/NL mélangé et de très mauvaise qualité : répliques de la consultante nettoyées (passages incompréhensibles retirés, passages en français traduits), anonymisée (agence et entreprises, montant du salaire, adresse e-mail, lieu et détails familiaux retirés). Réponses du candidat reprises de ce qu'il a dit, remises en néerlandais.",
+      "wpm": "135",
+      "turns": [
+        {
+          "speaker": "De consulente",
+          "nl_original": "Dag Joas! Alles is in orde: je begint maandag om kwart voor acht. Daar wacht iemand op je voor de opleiding.",
+          "fr_cue": "Bonjour Joas ! Tout est en ordre : tu commences lundi à 8 h moins le quart. Quelqu'un t'attend là-bas pour la formation.",
+          "candidate_reply": "Oké, maandag om kwart voor acht. Dat is genoteerd.",
+          "suggestion_fr": "Confirme le jour et l'heure, pour montrer que tu as bien compris."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Je werkt met weekcontracten, en je wordt ook per week betaald. Je werkt deze week, en tussen donderdag en vrijdag van de week daarna staat je loon op je rekening. Dat hangt een beetje af van je bank.",
+          "fr_cue": "Tu travailles avec des contrats à la semaine, et tu es aussi payé à la semaine. Tu travailles cette semaine, et entre le jeudi et le vendredi de la semaine suivante, ton salaire est sur ton compte. Ça dépend un peu de ta banque.",
+          "candidate_reply": "Oké, dus elke week een nieuw contract, en elke week betaald. Dat is duidelijk.",
+          "suggestion_fr": "Reformule pour vérifier : un contrat et une paie chaque semaine."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Daarna moet je alleen nog een korte test op de computer doen, en een kleine veiligheidsopleiding. Dat duurt een tiental minuten.",
+          "fr_cue": "Ensuite, il te reste juste un petit test sur ordinateur et une courte formation sécurité. Ça prend une dizaine de minutes.",
+          "candidate_reply": "Geen probleem. Ik heb dat lang geleden al eens gedaan, maar ik doe het graag opnieuw.",
+          "suggestion_fr": "Dis que tu l'as déjà fait il y a longtemps, mais que ça ne pose aucun problème."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Heb je nog een vraag voor mij?",
+          "fr_cue": "Tu as encore une question pour moi ?",
+          "candidate_reply": "Ja, twee eigenlijk. Ik weet nog niet goed wat ik daar precies ga doen. En de opdracht duurt zes maanden, klopt dat? Daarna kijken ze of het oké is.",
+          "suggestion_fr": "Pose tes deux questions : ce que tu vas faire exactement, et la durée de la mission (six mois ?)."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Wat je precies gaat doen, leer je ter plaatse: je kan niet alles op voorhand weten, dat is normaal. Over de duur hebben wij nog geen informatie. De contracten zijn wekelijks. Dat geeft misschien een beetje onzekerheid, maar je blijft zo ook vrij, en het kost jou niets meer.",
+          "fr_cue": "Ce que tu vas faire exactement, tu l'apprendras sur place : tu ne peux pas tout savoir à l'avance, c'est normal. Pour la durée, nous n'avons pas encore d'information. Les contrats sont hebdomadaires. Ça donne peut-être un peu d'incertitude, mais tu restes libre, et ça ne te coûte rien de plus.",
+          "candidate_reply": "Ja, ik begrijp het. Het is week na week, dus het is een beetje onzeker, maar dat is oké.",
+          "suggestion_fr": "Montre que tu comprends le principe, et que l'incertitude ne te dérange pas trop."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "We hebben heel wat mensen die eerst wekelijks werken en daarna vast worden. Een vast contract is zeker mogelijk, dat is ook de bedoeling, maar die beslissing ligt niet bij ons.",
+          "fr_cue": "Nous avons pas mal de gens qui travaillent d'abord à la semaine, puis qui sont engagés en fixe. Un contrat fixe est tout à fait possible, c'est le but, mais la décision ne nous appartient pas.",
+          "candidate_reply": "Dat is goed om te weten. Ik hoop natuurlijk dat het een vast contract wordt.",
+          "suggestion_fr": "Dis que tu espères un contrat fixe."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Je krijgt ook een kaart thuis toegestuurd. Dat duurt een week of twee.",
+          "fr_cue": "Tu recevras aussi une carte chez toi. Ça prend une semaine ou deux.",
+          "candidate_reply": "Oké, ik let erop. En moet ik maandag daar een contract tekenen?",
+          "suggestion_fr": "Accuse réception, puis demande si tu dois signer un contrat sur place lundi."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Nee, het contract teken je in ons online systeem. De bevestiging komt meestal op zondagavond, rond tien, elf uur. Je hoeft daar niet op te wachten: je tekent op het moment dat het jou past. En je loonfiche komt elke week in hetzelfde systeem.",
+          "fr_cue": "Non, le contrat se signe dans notre système en ligne. La confirmation arrive en général le dimanche soir, vers 22-23 h. Tu n'as pas besoin de l'attendre : tu signes quand ça t'arrange. Et ta fiche de paie arrive chaque semaine dans le même système.",
+          "candidate_reply": "Perfect. En als er iets niet klopt?",
+          "suggestion_fr": "Demande ce que tu dois faire si quelque chose ne va pas."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Als je denkt dat er iets niet klopt, stuur ons dan vooraf een mail, en we checken het. Veel succes, Joas! Als er iets is, kom je gewoon terug.",
+          "fr_cue": "Si tu penses que quelque chose ne va pas, envoie-nous un mail avant, et on vérifie. Bonne chance, Joas ! S'il y a quoi que ce soit, tu reviens vers nous.",
+          "candidate_reply": "Dank je! Ik heb trouwens straks nog een afspraak bij een ander bedrijf. Ik ga daar zeggen dat ik hier al iets heb. Ik had twee processen tegelijk lopen, om zeker iets te vinden.",
+          "suggestion_fr": "Explique que tu as encore un rendez-vous ailleurs tout à l'heure, et que tu vas leur dire que tu as déjà trouvé."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Ja, natuurlijk, op een bepaald moment moet je een keuze maken. Deze opdracht staat vast: je kan hen ook gewoon bellen om te zeggen dat je maandag start.",
+          "fr_cue": "Oui, bien sûr, à un moment donné il faut faire un choix. Cette mission est confirmée : tu peux aussi simplement les appeler pour dire que tu commences lundi.",
+          "candidate_reply": "Ja. Dit was mijn eerste keuze. Het ligt ook dichter bij huis, dat scheelt echt.",
+          "suggestion_fr": "Dis que c'était ton premier choix, et pourquoi (par exemple la distance)."
+        },
+        {
+          "speaker": "De consulente",
+          "nl_original": "Super. In het slechtste geval, als het toch niet loopt, rond je het netjes af. Maar ik hoop vooral op een lange samenwerking. Ik bevestig je alles nog maandagavond.",
+          "fr_cue": "Super. Dans le pire des cas, si ça ne marche quand même pas, tu clôtures ça proprement. Mais j'espère surtout une longue collaboration. Je te confirme tout lundi soir.",
+          "candidate_reply": "Ik ook. Bedankt voor alles, en tot maandag!",
+          "suggestion_fr": "Remercie et dis au revoir."
+        }
+      ]
     }
   ]
 }
