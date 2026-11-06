@@ -3030,32 +3030,32 @@ if (firebaseAvailable) {
                     <div class="hub-card" style="grid-column:1 / -1;" onclick="showConjugaison()">
                         <span class="hub-card-icon">🔤</span>
                         <div class="hub-card-title">Conjugaison</div>
-                        <div class="hub-card-desc">Les tables des verbes (les 25, 50, 100 plus courants ou tous) et l'entraînement, à l'écrit, à l'oral ou en écoute.</div>
+                        <div class="hub-card-desc">Tables et entraînement</div>
                     </div>
                     <div class="hub-card" style="grid-column:1 / -1;" onclick="vocabListenOpen()">
                         <span class="hub-card-icon">🎧</span>
                         <div class="hub-card-title">Écouter des mots</div>
-                        <div class="hub-card-desc">Noms, adjectifs, adverbes, expressions, un thème ou une de tes listes, en boucle avec un minuteur, ou 😴 pour t'endormir.</div>
+                        <div class="hub-card-desc">En boucle, ou 😴 pour t'endormir</div>
                     </div>
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startRevision()">
                         <span class="hub-card-icon">🔁</span>
                         <div class="hub-card-title">Mots à revoir</div>
-                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''}, avec ton tuteur, à l'oral.</div>
+                        <div class="hub-card-desc">${wordCount} mot${wordCount > 1 ? 's' : ''} raté${wordCount > 1 ? 's' : ''}</div>
                     </div>
                     <div class="hub-card" onclick="studyReturnFn = showVocab; startArticleRevision()">
                         <span class="hub-card-icon">⚖️</span>
                         <div class="hub-card-title">De ou het ?</div>
-                        <div class="hub-card-desc">${articleCount ? `${articleCount} mot${articleCount > 1 ? 's' : ''} à revoir` : 'Les noms courants'}, à l'oral.</div>
+                        <div class="hub-card-desc">${articleCount ? `${articleCount} à revoir` : 'Les noms courants'}</div>
                     </div>
                     <div class="hub-card" onclick="showChunkTraining()">
                         <span class="hub-card-icon">🧩</span>
                         <div class="hub-card-title">Blocs de mots</div>
-                        <div class="hub-card-desc">Les mots en contexte, avec ton tuteur, à l'oral.</div>
+                        <div class="hub-card-desc">Les mots en contexte</div>
                     </div>
                     <div class="hub-card" onclick="startAdaptiveTest()">
                         <span class="hub-card-icon">📏</span>
                         <div class="hub-card-title">Mon niveau de vocabulaire</div>
-                        <div class="hub-card-desc">3 minutes pour mesurer jusqu'où tu connais les mots ; la routine en tient compte.</div>
+                        <div class="hub-card-desc">Test de 3 minutes</div>
                     </div>`;
             }
         }
@@ -12603,7 +12603,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             const plan = PROF_PLAN[s.dur];
             box.innerHTML = `
                 <h2 style="margin-bottom:4px;">🎓 Cours particulier</h2>
-                <p class="section-subtitle" style="margin-top:0;">Comme avec un prof : on discute, on travaille un point précis, on le met en pratique, puis le bilan. Le contenu change à chaque séance.</p>
+                <p class="section-subtitle" style="margin-top:0;">Une séance avec un prof, différente à chaque fois.</p>
                 ${GeminiService.isAvailable() ? '' : `<div class="prof-warn">Il faut une clé Gemini (gratuite) : Profil 👤 → 🤖 Intelligence IA.</div>`}
                 <div class="conj-card conj-audio">
                     <div class="conj-audio-label">Niveau</div>
@@ -12620,7 +12620,7 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
                     <div class="conj-audio-chips">${chip(s.handsfree, "profSet('handsfree',true)", '🗣️ Mains libres')}${chip(!s.handsfree, "profSet('handsfree',false)", '👆 Je touche 🎤 pour parler')}</div>
                     <div class="conj-audio-label">Envoi de ma réponse</div>
                     <div class="conj-audio-chips">${PROF_SILENCES.map(ms => chip(s.silence === ms, `profSet('silence',${ms})`, ms ? `après ${String(ms / 1000).replace('.', ',')} s de silence` : '👆 quand je touche le micro')).join('')}</div>
-                    <p class="conj-audio-hint">${s.dur} min : échauffement (${plan.warm} échanges) · point ciblé (${plan.ex} exercices) · mise en pratique (${plan.task} répliques) · bilan. Tu peux parler 🇫🇷 en français à tout moment pour poser une question.</p>
+                    <p class="conj-audio-hint">${s.dur} min : échauffement · point ciblé · mise en pratique · bilan.</p>
                     <button class="btn btn-green" style="margin-top:8px;" onclick="profStart()" ${GeminiService.isAvailable() && ids.length ? '' : 'disabled'}>▶️ Commencer le cours</button>
                 </div>
                 ${history.length ? `<div class="section-title">🗂️ Séances précédentes</div>${history.map(l => `
@@ -15548,7 +15548,7 @@ Réponds UNIQUEMENT en JSON :
             if (state.coursPointPending && !state.coursPointPending.done) return `<div class="cours-point open"><b>🧑‍🏫 Ton point n'est pas terminé</b><p>Ta dernière séance avec ${rpEscapeHtml((TALK_PARTNERS[state.coursPointPending.partner] || TALK_PARTNERS.svetlana).name)} est gardée, mais l'évaluation détaillée n'a pas pu se faire (Gemini surchargé).${pl && pl.provisoire ? ' Un compte rendu provisoire a déjà été fait.' : ''}</p><button class="btn btn-green" style="margin:6px 0 0;" onclick="talkPointRetry(this)">🔁 Relancer l'évaluation détaillée</button></div>`;
             const btns = Object.entries(TALK_PARTNERS).map(([k, p]) => `<button class="btn ${pl ? 'btn-gray' : 'btn-green'}" style="margin:6px 0 0;" onclick="talkStartPoint('${k}')">${p.emoji} Avec ${p.name}</button>`).join('');
             if (pl) return `<details class="cours-point"><summary>🧑‍🏫 Dernier point : ${pl.niveau ? 'niveau ' + pl.niveau + ' · ' : ''}${new Date(pl.at).toLocaleDateString('fr-BE')} · refaire le point</summary><div class="cours-point-btns">${btns}</div></details>`;
-            return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as déjà des bases ? ton tuteur te font parler (te présenter, ton numéro, ta journée, tes projets…) et valident ce que tu sais déjà : pas besoin de refaire ces cours. Si tu bloques, dis-le en français, ils te montrent comment le dire.</p><div class="cours-point-btns">${btns}</div></div>`;
+            return `<div class="cours-point open"><b>🧑‍🏫 On fait connaissance ?</b><p>Tu as des bases ? Ton tuteur te fait parler et valide ce que tu sais déjà, pour ne pas refaire ces cours.</p><div class="cours-point-btns">${btns}</div></div>`;
         }
 
         // ===== Notions employées en conversation =====
@@ -16299,7 +16299,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             const total = Object.values(st).reduce((n, x) => n + (x.n || 0), 0);
             document.getElementById('listen-content').innerHTML = `
                 <h2 style="margin-bottom:4px;">👂 Écouter</h2>
-                <p class="section-subtitle" style="margin-top:0;">Un message, une annonce, la radio… Écoute (autant de fois que tu veux), réponds à 3 questions, puis résume ce que tu as compris. Niveau ${listenLevel()}${total ? ` · ${total} écoute${total > 1 ? 's' : ''} faite${total > 1 ? 's' : ''}` : ''}.</p>
+                <p class="section-subtitle" style="margin-top:0;">Écoute, réponds à 3 questions, résume. Niveau ${listenLevel()}${total ? ` · ${total} écoute${total > 1 ? 's' : ''} faite${total > 1 ? 's' : ''}` : ''}.</p>
                 ${GeminiService.isAvailable() ? '' : '<div class="prof-warn">Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA.</div>'}
                 <button class="btn btn-green" onclick="listenStart()" ${GeminiService.isAvailable() ? '' : 'disabled'}>🎲 Une écoute au hasard</button>
                 <div class="hub-grid" style="margin-top:12px;">${Object.entries(LISTEN_TYPES).map(([k, t]) => `
@@ -17735,7 +17735,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
                 </div>`;
             }).join('');
             return `<details class="fond-list"${learnerStage() === 'fondations' ? ' open' : ''}><summary>🧱 Les fondations · ${FOND_PALIERS.filter(p => fondProgress(p).done).length}/${FOND_PALIERS.length} paliers</summary>
-                <p class="report-meta">La base de travail : les verbes les plus courants à trois temps, et les mots les plus fréquents. Conseillé avant la pratique si tu débutes ; si tu les connais, le test 🎯 valide un palier en une minute.</p>
+                <p class="report-meta">Les verbes et les mots les plus courants. Tu les connais ? 🎯 valide un palier en une minute.</p>
                 ${rows}</details>`;
         }
         function fondStart(id, test) {
@@ -17916,7 +17916,7 @@ Réponds UNIQUEMENT en JSON : {"sens_ok": true, "juste": true, "sa_version": "",
             setActiveNav('nav-apprendre', 'ordre');
             const S = woState();
             document.getElementById('ordre-content').innerHTML = `
-                <p class="section-subtitle" style="margin-top:0;">Le néerlandais ne range pas les mots comme le français. Ici, tu vois d'abord le français réécrit DANS L'ORDRE NÉERLANDAIS, pour t'habituer à cette place ; puis tu ranges toi-même ; puis tu le dis.</p>
+                <p class="section-subtitle" style="margin-top:0;">Le français rangé à la néerlandaise, puis tu ranges toi-même, puis tu le dis.</p>
                 <p class="report-meta" style="text-align:left;">${WO_LEGEND}</p>
                 ${WORD_ORDER_LESSONS.map(L => {
                     const s = S[L.id] || {};

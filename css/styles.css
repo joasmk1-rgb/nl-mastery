@@ -1070,3 +1070,8 @@
         .hn-btn { flex: 0 0 auto; border: none; background: #fff; color: var(--primary); font-weight: 800; font-size: 0.95rem; padding: 11px 14px; border-radius: 999px; cursor: pointer; }
         .talk-tools { gap: 8px; margin-top: 6px; }
         .talk-tools button { width: 34px; height: 34px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); opacity: 1; padding: 0; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; }
+        /* Cartes de menu compactes : icône à gauche du titre (lot 3) */
+        .hub-card { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center; padding: 12px 14px; }
+        .hub-card .hub-card-icon { grid-row: span 2; margin: 0; font-size: 1.45rem; }
+        .hub-card .hub-card-title { margin-bottom: 0; }
+        @media (max-width: 520px) { .hub-grid:not(.single) { grid-template-columns: 1fr; gap: 10px; } }

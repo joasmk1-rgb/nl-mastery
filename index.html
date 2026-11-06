@@ -16,7 +16,7 @@
     <!-- Version du code : À CHANGER À CHAQUE COMMIT qui touche js/ ou css/ (date-heure). Une
          nouvelle version = nouvelle adresse = les téléphones prennent le nouveau code ; sinon tout
          vient du cache (sw.js), sans rien retélécharger. -->
-    <script>window.NLM_V = '202611061300'; document.write('<link rel="stylesheet" href="css/styles.css?v=' + NLM_V + '">');</script>
+    <script>window.NLM_V = '202611061400'; document.write('<link rel="stylesheet" href="css/styles.css?v=' + NLM_V + '">');</script>
     <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
 
     <!-- Firebase (comptes + synchro cloud) -->
@@ -93,7 +93,7 @@
         <h2>📖 Vocabulaire</h2>
         <!-- Trois sous-parties, choisies dans la barre du bas (showVocab(tab)). -->
         <div class="vtab" data-vtab="train">
-        <p class="section-subtitle" style="margin-top:0;">Les façons de travailler tes mots et ta conjugaison.</p>
+        <p class="section-subtitle" style="margin-top:0;">Tes mots et ta conjugaison.</p>
         <div id="vocab-review" class="hub-grid"></div>
         <div id="vocab-listen-box" class="content-col"></div>
         <div class="grid" style="margin-top:10px;">
@@ -110,7 +110,7 @@
         </div>
         </div>
         <div class="vtab" data-vtab="mots">
-        <p class="section-subtitle" style="margin-top:0;">Tous les mots, par catégorie, par métier, et tes listes : pour consulter, écouter ou t'entraîner sur un groupe.</p>
+        <p class="section-subtitle" style="margin-top:0;">Par catégorie, par métier, et tes listes.</p>
         <div id="total-words-count" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;"></div>
         <div class="grid" id="main-categories-grid" style="margin-top:0;"></div>
         <div id="theme-section" style="width:100%;"></div>
@@ -152,17 +152,17 @@
         </div>
 
         <div id="social-panel-challenges" class="mots-panel" style="display:none;">
-            <p class="section-subtitle" style="margin-top:0;">Défie un ami sur une notion précise — c'est votre progression habituelle (le même moteur, les mêmes notions) qui compte, pas un nouveau système de points.</p>
+            <p class="section-subtitle" style="margin-top:0;">Défie un ami sur une notion.</p>
             <div id="social-challenges-list" class="hub-grid single"></div>
         </div>
 
         <div id="social-panel-sessions" class="mots-panel" style="display:none;">
-            <p class="section-subtitle" style="margin-top:0;">Propose un créneau pour réviser ensemble — c'est juste un rendez-vous partagé, pas d'appel ni de synchronisation en direct.</p>
+            <p class="section-subtitle" style="margin-top:0;">Propose un créneau pour réviser ensemble.</p>
             <div id="social-sessions-list" class="hub-grid single"></div>
         </div>
 
         <div id="social-panel-search" class="mots-panel" style="display:none;">
-            <p class="section-subtitle" style="margin-top:0;">Recherche un pseudo exact (ex. maikel_nl) — pas de recherche floue pour l'instant.</p>
+            <p class="section-subtitle" style="margin-top:0;">Cherche un pseudo exact (ex. maikel_nl).</p>
             <div style="width:100%; display:flex; gap:8px; margin-bottom:10px;">
                 <input type="text" id="social-search-input" placeholder="pseudo à rechercher..." style="margin:0;" onkeydown="if(event.key==='Enter') socialSearch();">
                 <button class="btn btn-green" style="margin:0; width:auto; padding:0 18px;" onclick="socialSearch()">🔍</button>
@@ -496,7 +496,7 @@
 
     <div id="apprendre-view" class="view">
         <h2>📚 Cours</h2>
-        <p class="section-subtitle" style="margin-top:0;">Ton parcours de A1 à B2, calqué sur les cours de néerlandais en Flandre : commence par faire le point, puis avance niveau par niveau.</p>
+        <p class="section-subtitle" style="margin-top:0;">De A1 à B2, comme les cours de néerlandais en Flandre.</p>
         <div id="modrp-list"></div>
     </div>
 
@@ -507,7 +507,7 @@
 
     <div id="comprendre-view" class="view">
         <h2>🧠 Grammaire & structures</h2>
-        <p class="section-subtitle" style="margin-top:0;">Comprends le mécanisme derrière chaque règle — ordre des mots, subordonnées, temps, connecteurs — pas juste une traduction à retenir.</p>
+        <p class="section-subtitle" style="margin-top:0;">Le pourquoi de chaque règle.</p>
         <div id="comprendre-content"></div>
     </div>
 
