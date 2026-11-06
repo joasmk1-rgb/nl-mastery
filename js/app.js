@@ -3231,12 +3231,16 @@ if (firebaseAvailable) {
             // d'avoir plein de fonctions parce qu'on peut y aller de plein de façons ») : l'en-tête, puis
             // la routine du jour. Pas de tuiles (= barre du bas), pas de bloc compagnon (= micro
             // flottant), pas de « Continuer » (= Cours, et la routine propose la prochaine séance).
+            // Un seul gros bouton « Continuer » (lot 3, 6 novembre 2026, comme Duolingo) : la chose à
+            // faire maintenant ; la carte qu'il remplace n'est pas répétée en dessous.
+            const next = homeNext(isBrandNew);
             block.innerHTML = `
                 ${headerHtml}
-                ${placementNudgeHtml}
-                ${learnerStage() === 'fondations' ? fondCardHtml() : ''}
-                ${routineHomeHtml()}
-                ${homeTilesHtml()}
+                ${homeNextHtml(next)}
+                ${next.k === 'onboarding' ? '' : placementNudgeHtml}
+                ${learnerStage() === 'fondations' && next.k !== 'fond' ? fondCardHtml(true) : ''}
+                ${next.k === 'routine' ? '' : routineHomeHtml()}
+                ${homeTilesHtml(next.k === 'formation')}
                 ${homeAdviceHtml()}
                 ${socialHtml}
                 ${accountNudgeHtml}`;
@@ -14531,7 +14535,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true, "explication_fr": "une phrase courte"
                 div.className = 'talk-msg them';
                 const words = rpAnnotateText(m.nl).replace(/rpWordTap\(this\)/g, 'talkWordTap(this)');
                 div.innerHTML = `${m.help ? `<div class="talk-help">🇫🇷 ${rpEscapeHtml(m.help)}</div>` : ''}<div class="talk-nl">${words}</div>
-                    <div class="talk-tools"><button type="button" onclick="talkReplay(this)" data-nl="${rpEscapeHtml(m.nl)}">🔁</button><button type="button" onclick="this.closest('.talk-msg').querySelector('.talk-fr').classList.toggle('show')">🇫🇷</button></div>
+                    <div class="talk-tools"><button type="button" onclick="talkReplay(this)" data-nl="${rpEscapeHtml(m.nl)}" title="Réécouter">🔊</button><button type="button" onclick="this.closest('.talk-msg').querySelector('.talk-fr').classList.toggle('show')" title="Traduire en français">🌐</button></div>
                     <div class="talk-fr">${rpEscapeHtml(m.fr || '')}</div><div class="talk-word"></div>`;
             } else if (m.who === 'me') {
                 div.className = 'talk-msg me';
@@ -18018,8 +18022,38 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         }
 
         // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
-        function homeTilesHtml() {
-            return `${typeof formationHomeCardHtml === 'function' ? formationHomeCardHtml() : ''}<div class="home-tiles">
+        // ----- Le gros bouton « Continuer » de l'accueil -----
+        // Ordre : découverte (compte neuf) → routine du jour pas finie → fondations (débutant) →
+        // inwerkperiode en cours → parcours. Toute la carte se touche.
+        function homeNext(isBrandNew) {
+            const nl = studyLangCode() === 'nl';
+            if (isBrandNew) return { k: 'onboarding', icon: '👋', title: 'Découvrir NL Mastery', sub: 'Une courte présentation, puis on voit ce que tu sais déjà.', go: 'showOnboarding()', btn: 'Commencer' };
+            const rs = routineState();
+            const steps = Object.keys(ROUTINE_STEPS);
+            const left = steps.filter(k => !rs.done[k]);
+            if (left.length) {
+                const n = steps.length - left.length;
+                return { k: 'routine', icon: '☀️', title: 'Ma routine du jour', sub: `${n ? `${n}/${steps.length} · ` : ''}${ROUTINE_STEPS[left[0]].icon} ${ROUTINE_STEPS[left[0]].label}${nl && !n ? ' · 15-20 min' : ''}`, go: 'showRoutine()', btn: n ? 'Continuer' : 'Commencer', steps: steps.map(k => `<span class="${rs.done[k] ? 'ok' : ''}">${rs.done[k] ? '✓' : ROUTINE_STEPS[k].icon}</span>`).join('') };
+            }
+            if (learnerStage() === 'fondations' && typeof fondCurrent === 'function' && fondCurrent()) {
+                const cur = fondCurrent();
+                return { k: 'fond', icon: '🧱', title: 'Les fondations', sub: `${cur.icon} ${cur.label}`, go: 'fondStart()', btn: 'Continuer' };
+            }
+            if (nl && typeof formationAllMoments === 'function') {
+                const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
+                if (pos > 0 && pos < n) return { k: 'formation', icon: '🧑‍🏫', title: 'Mon inwerkperiode', sub: `moment ${pos + 1} / ${n}`, go: 'formationOpen()', btn: 'Reprendre' };
+            }
+            return { k: 'cours', icon: '🎓', title: 'Mon parcours', sub: "Routine faite ✓ · la suite de ton cours", go: 'showApprendre()', btn: 'Continuer' };
+        }
+        function homeNextHtml(x) {
+            return `<div class="home-next" onclick="${x.go}" role="button">
+                <div class="hn-txt"><div class="hn-title">${x.icon} ${rpEscapeHtml(x.title)}</div><div class="hn-sub">${x.sub}</div>${x.steps ? `<div class="hn-steps">${x.steps}</div>` : ''}</div>
+                <button type="button" class="hn-btn">▶ ${x.btn}</button>
+            </div>`;
+        }
+
+        function homeTilesHtml(noFormation) {
+            return `${!noFormation && typeof formationHomeCardHtml === 'function' ? formationHomeCardHtml() : ''}<div class="home-tiles">
                 <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>${studyLangCode() === 'nl' ? 'Ton parcours A1 → B2' : 'Cours particulier'}</small></div>
                 <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>${studyLangCode() === 'nl' ? 'Discuter, travail, écoute' : 'Discuter, écouter, répéter'}</small></div>
                 ${studyLangCode() === 'nl' || langHas('vocabulaire') ? `<div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>` : ''}

@@ -1057,3 +1057,16 @@
         .view.active { animation: viewIn .16s ease-out; }
         @keyframes viewIn { from { opacity: 0; } to { opacity: 1; } }
         @media (prefers-reduced-motion: reduce) { .view.active { animation: none; } .app-toast { transition: none; } }
+
+        /* ===== Lot 3 : gros bouton « Continuer » de l'accueil, outils des bulles ===== */
+        .home-next { width: 100%; max-width: 560px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 18px 16px; margin: 0 0 14px; border-radius: 18px; background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 70%, #000)); color: #fff; cursor: pointer; box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 35%, transparent); }
+        .home-next:active { transform: scale(.985); }
+        .hn-txt { flex: 1; min-width: 0; }
+        .hn-title { font-weight: 800; font-size: 1.12rem; }
+        .hn-sub { font-size: 0.86rem; opacity: .9; margin-top: 2px; }
+        .hn-steps { display: flex; gap: 6px; margin-top: 8px; }
+        .hn-steps span { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.18); display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .hn-steps span.ok { background: #fff; color: var(--primary); font-weight: 800; }
+        .hn-btn { flex: 0 0 auto; border: none; background: #fff; color: var(--primary); font-weight: 800; font-size: 0.95rem; padding: 11px 14px; border-radius: 999px; cursor: pointer; }
+        .talk-tools { gap: 8px; margin-top: 6px; }
+        .talk-tools button { width: 34px; height: 34px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); opacity: 1; padding: 0; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; }
