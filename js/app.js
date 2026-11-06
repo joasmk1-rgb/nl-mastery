@@ -7077,7 +7077,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Retour immédiat sur une réponse, comme Duolingo : petite vibration et son discret.
         let fxCtx = null;
         function answerFx(ok) {
-            try { if (navigator.vibrate) navigator.vibrate(ok ? 12 : [35, 50, 35]); } catch (e) { /* pas grave */ }
+            try { if (navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) navigator.vibrate(ok ? 12 : [35, 50, 35]); } catch (e) { /* pas grave */ }
             try {
                 const AC = window.AudioContext || window.webkitAudioContext;
                 if (!AC) return;
