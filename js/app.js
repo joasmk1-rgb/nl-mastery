@@ -7091,6 +7091,14 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         }
         window.alert = toast;
         document.addEventListener('pointerdown', e => { window.lastTapY = e.clientY; window.lastTapAt = Date.now(); }, true);
+        // Un bouton qui plante juste après un toucher : on le dit au lieu de ne rien faire (Joas,
+        // 7 novembre 2026 : « je vois toujours rien »), avec le message pour pouvoir le signaler.
+        function tapErrorToast(msg) {
+            if (!window.lastTapAt || Date.now() - window.lastTapAt > 3000) return;
+            toast("⚠️ Ça n'a pas marché. Fais une capture et envoie-la à Claude.\n(" + String(msg || 'erreur inconnue').slice(0, 140) + ')');
+        }
+        window.addEventListener('error', e => tapErrorToast(e.message));
+        window.addEventListener('unhandledrejection', e => tapErrorToast(e.reason && (e.reason.message || e.reason)));
 
         // Retour immédiat sur une réponse, comme Duolingo : petite vibration et son discret.
         let fxCtx = null;
@@ -12032,7 +12040,10 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             if (!rpJobRequireGemini()) return;
             const all = formationAllMoments();
             if (!state.formation) state.formation = {};
-            if (restart || (state.formation.pos || 0) >= all.length) state.formation.pos = 0;
+            // La fiche « formation » peut exister sans position (séances, dossier, histoires) : sans
+            // ce garde-fou, le bouton cherchait le moment « undefined » et plantait sans rien dire.
+            const pos = Math.floor(Number(state.formation.pos) || 0);
+            state.formation.pos = restart || pos < 0 || pos >= all.length ? 0 : pos;
             save();
             rpJobLiveMetier = 'admin_productie';
             const situations = all.map(({ d, m }) => ({ id: 'fd_' + d.id + '_' + m.id, metier: 'admin_productie', canal: m.canal, contexte: d.label + ' — ' + m.contexte, amorce: m.amorce, _prompt: formationMomentPrompt(m) }));
