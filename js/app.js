@@ -9616,6 +9616,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                     'Derniers échanges :\n"""' + rpHelpTranscript() + '"""\n\n' +
                     'Il veut répondre ceci, qu\'il a formulé en français : """' + text + '"""\n' +
                     'Donne la façon naturelle de le dire en ' + langName + ', à l\'oral, avec le registre qui convient à la situation, sans rien ajouter à son idée. ' +
+                    'C\'est LUI qui parle, à son interlocuteur : garde son point de vue (« je » = lui, « tu / vous » = l\'interlocuteur) et ne lui fais jamais dire une tournure qui revient à l\'autre (exemple : s\'il accepte de suivre quelqu\'un, « oui, allons-y » = « Ja, laten we gaan » ou « Oké, ik kom mee », pas « kom maar mee », que dit celui qui emmène). ' +
                     'Ajoute une remarque d\'une phrase en français sur LE mot ou la tournure à retenir.\n' +
                     'Réponds UNIQUEMENT en JSON, sans texte autour : {"phrase":"...","note":"..."}'
                 );
