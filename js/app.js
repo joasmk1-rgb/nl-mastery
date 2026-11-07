@@ -18487,6 +18487,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
                 <div id="car-live" class="car-live" style="display:none;"></div>
                 <div id="car-menu" class="car-menu">
                     <button class="car-btn car-go" onclick="carStart('porter')">▶️ Laisse-toi porter<small>20 min : répéter, puis traduire</small></button>
+                    ${studyLangCode() === 'nl' ? `<button class="car-btn car-go" onclick="carStart('radio')">📻 La radio<small>20 min de conversations à écouter : travail, entretiens, quotidien</small></button>` : ''}
                     <button class="car-btn" onclick="carStart('repeter')">🔁 Répéter des phrases<small>${n} phrases et mots pour toi</small></button>
                     <button class="car-btn" onclick="carStart('traduire')">🧠 Traduire de tête<small>le français, tu le dis en ${studyLang().nom}</small></button>
                     ${m ? `<button class="car-btn" onclick="carStart('lecon')">🎧 Écouter la leçon<small>${rpEscapeHtml(m.titre)}</small></button>` : ''}
@@ -18511,6 +18512,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             carStop();
             showCar();
             if (r && (r.done || r.mode === 'lecon')) carSaySummary(r);
+            else if (r && r.mode === 'radio') carSaySummary(r);
         }
         async function carSay(r, text, lang, slow) {
             if (!carActive(r)) return;
@@ -18533,6 +18535,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             const r = car = { mode, stop: false, slow: false, done: 0, ok: 0, start: Date.now(), until: mode === 'porter' ? Date.now() + 20 * 60000 : 0 };
             try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => { r.wakeLock = w; }).catch(() => {}); } catch (e) { /* pas grave */ }
             if (mode === 'lecon') return carLesson(r);
+            if (mode === 'radio') return carRadio(r);
             const pool = carPool();
             if (!pool.length) { carShow('<p>Pas encore de phrases : fais une routine ou un module, puis reviens.</p>'); await carSay(r, "Je n'ai pas encore de phrases pour toi. Fais d'abord une routine ou un module.", 'fr'); return; }
             await carSay(r, mode === 'traduire' ? `Je te dis une phrase en français, tu la dis en ${studyLang().nom}.` : mode === 'repeter' ? `Je te dis la phrase en français puis en ${studyLang().nom}. Tu répètes.` : "C'est parti pour vingt minutes. D'abord tu répètes, puis tu traduis de tête.", 'fr');
@@ -18598,6 +18601,84 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             }
             r.done++;
         }
+        // ----- 📻 La radio (Joas, 7 novembre 2026 : enchaîner les conversations, « c'est le mode
+        // voiture ») : 20 minutes de conversations à la suite, rien à répondre. Mélange : situations du
+        // métier, moments de l'inwerkperiode, vrais entretiens, quotidien, dialogues des cours. Scène
+        // prise dans le cache ou la bibliothèque commune, Gemini seulement si elle n'existe pas encore ;
+        // la suivante est préparée pendant que la précédente joue. Traduction selon le réglage des
+        // scènes (sceneMode). ⏭ = conversation suivante.
+        async function sceneFetch(key, launch) {
+            const src = rpSceneSource(launch);
+            if (!src) return null;
+            const saved = scenesCache()[key] || [];
+            if (saved.length) return { src, sc: saved[saved.length - 1] };
+            if (rpScenePublic(launch)) {
+                const lib = await sharedScenesPick(key, saved);
+                const sc = lib.pick || (lib.all && lib.all.length ? lib.all[0] : null);
+                if (sc) { const c = scenesCache(); c[key] = (c[key] || []).concat(sc).slice(-3); scenesSave(c); return { src, sc }; }
+            }
+            if (!GeminiService.getKey()) return null;
+            return { src, sc: await rpSceneGenerateOne(key, launch, src) };
+        }
+        async function carRadioPlaylist() {
+            await Promise.all([rpLoadRealData(), rpLoadJobData(), rpLoadLibrary(), modRpLoadAll()]);
+            const shuffle = a => a.map(x => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+            const scene = (key, launch) => async () => { const f = await sceneFetch(key, launch); return f && f.sc && { title: f.src.title, lines: f.sc.lignes, roleA: f.sc.roleA || f.src.roleA }; };
+            const metier = (state.settings && state.settings.jobMetier) || rpJobMetier;
+            const lists = {
+                travail: shuffle(((rpJobData && rpJobData.situations) || []).filter(s => s.metier === metier && rpSitLang(s) === 'nl').map(s => scene('sit:' + s.id, { type: 'sit', id: s.id }))),
+                inwerk: shuffle(FORMATION_DAYS.flatMap(d => d.moments.map(m => async () => { const sc = await formationMomentScene(d, m); return sc && { title: m.contexte, lines: sc.lignes, roleA: sc.roleA }; }))),
+                entretiens: shuffle(((rpRealData && rpRealData.dialogues) || []).filter(d => (d.turns || []).length).map(d => async () => ({ title: d.label, lines: d.turns.flatMap(t => [t.nl_original && { qui: 'A', nl: t.nl_original, fr: t.fr_cue || '' }, t.candidate_reply && { qui: 'B', nl: t.candidate_reply, fr: '' }].filter(Boolean)) }))),
+                quotidien: shuffle(talkSituations().map(e => scene('lib:' + e.id, { type: 'lib', id: e.id }))),
+                cours: shuffle(MODRP_IDS.filter(id => modRpData[id]).flatMap(id => modRpData[id].etapes.filter(e => (e.dialogue || []).length).map(e => async () => ({ title: modRpData[id].titre + ', ' + e.titre, lines: e.dialogue.map(l => ({ qui: l.qui, nl: l.nl, fr: l.fr })) }))))
+            };
+            const order = ['travail', 'inwerk', 'entretiens', 'quotidien', 'travail', 'cours'];
+            const out = [];
+            for (let k = 0; out.length < 60 && order.some(o => lists[o].length); k++) { const l = lists[order[k % order.length]]; if (l.length) out.push(l.shift()); }
+            return out;
+        }
+        function carRadioSkip() {
+            if (!car || car.mode !== 'radio') return;
+            car.skip = true;
+            try { window.speechSynthesis.cancel(); } catch (e) { /* pas grave */ }
+        }
+        async function carRadio(r) {
+            r.until = Date.now() + 20 * 60000;
+            const esc = rpEscapeHtml, noEmoji = t => String(t || '').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
+            const skipBtn = `<button class="car-btn" onclick="carRadioSkip()">⏭ Conversation suivante</button>`;
+            carShow(`<div class="car-fr">📻 La radio</div><div class="car-nl">Je prépare les conversations…</div>`);
+            const list = await carRadioPlaylist();
+            if (!carActive(r)) return;
+            if (!list.length) { carShow('<p>Rien à écouter pour l\'instant.</p>'); return; }
+            await carSay(r, "C'est parti pour vingt minutes de conversations. Écoute, sans rien dire. Pour passer à la suivante, touche l'écran.", 'fr');
+            const take = () => list.length ? list.shift()().catch(() => null) : null;
+            let next = take();
+            while (carActive(r) && next && Date.now() < r.until) {
+                const conv = await next;
+                next = take();
+                if (!carActive(r)) return;
+                if (!conv || !Array.isArray(conv.lines) || !conv.lines.length) continue;
+                r.skip = false;
+                carShow(`<div class="car-fr">📻 ${esc(conv.title)}</div>${skipBtn}`);
+                await carSay(r, noEmoji(conv.title) + '.', 'fr');
+                for (const l of conv.lines) {
+                    if (!carActive(r) || r.skip) break;
+                    if (!l.nl || l.qui === 'titre') continue;
+                    carShow(`<div class="car-fr">📻 ${esc(conv.title)}</div><div class="car-nl">${esc(l.nl)}</div>${l.fr ? `<div class="car-fr">${esc(l.fr)}</div>` : ''}${skipBtn}`);
+                    const mode = sceneMode();
+                    if (mode === 'fr_nl' && l.fr) await carSay(r, l.fr, 'fr');
+                    if (!carActive(r) || r.skip) break;
+                    await conjAudioSpeak(l.nl, 'nl', r.slow ? 0.8 : 0.95, { speaker: l.qui === 'B' ? 1 : 0 });
+                    if (mode === 'nl_fr' && l.fr && carActive(r) && !r.skip) await carSay(r, l.fr, 'fr');
+                    await new Promise(res => setTimeout(res, 400));
+                }
+                if (!carActive(r)) return;
+                r.done++;
+                await new Promise(res => setTimeout(res, 900));
+            }
+            if (car === r) carEnd();
+        }
+
         async function carLesson(r) {
             const m = modRpData[carCurrentModule()];
             if (!m) { carShow('<p>Module introuvable.</p>'); return; }
@@ -18624,7 +18705,8 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         }
         function carSaySummary(r) {
             const min = Math.max(1, Math.round((Date.now() - r.start) / 60000));
-            const txt = r.mode === 'lecon' ? `Leçon écoutée en ${min} minute${min > 1 ? 's' : ''}. Bonne route !`
+            const txt = r.mode === 'radio' ? `${r.done} conversation${r.done > 1 ? 's' : ''} écoutée${r.done > 1 ? 's' : ''} en ${min} minute${min > 1 ? 's' : ''}. Bonne route !`
+                : r.mode === 'lecon' ? `Leçon écoutée en ${min} minute${min > 1 ? 's' : ''}. Bonne route !`
                 : `${r.done} phrase${r.done > 1 ? 's' : ''} en ${min} minute${min > 1 ? 's' : ''}, ${r.ok} réussie${r.ok > 1 ? 's' : ''}. Bonne route !`;
             conjAudioSpeak(txt, 'fr', 1);
         }
