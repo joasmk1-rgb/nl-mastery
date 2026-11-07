@@ -5326,7 +5326,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
         }
 
         // Tous les dialogues modèles d'un module, étape par étape.
-        function sceneModule(id) {
+        function sceneModule(id, backFn) {
             const m = modRpData[id];
             if (!m) return;
             const lines = [];
@@ -5337,7 +5337,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             });
             // Le nom du personnage A change d'une étape à l'autre : on l'affiche ligne par ligne.
             const roles = { A: 'Interlocuteur', B: 'Toi' };
-            sceneOpen({ title: m.titre, subtitle: 'Tous les dialogues du module, à écouter comme un podcast.', lines: lines.map(l => l.roleA ? Object.assign({}, l) : l), roles, back: () => showModuleRp(id) });
+            sceneOpen({ title: m.titre, subtitle: 'Tous les dialogues du module, à écouter comme un podcast.', lines: lines.map(l => l.roleA ? Object.assign({}, l) : l), roles, back: backFn || (() => showModuleRp(id)) });
             lines.forEach((l, i) => { if (l.roleA && l.qui === 'A') { const w = document.querySelector('#scene-line-' + i + ' .scene-who'); if (w) w.textContent = l.roleA; } });
         }
 
@@ -5496,14 +5496,14 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             return { have, made, error: have < targetTotal ? lastError : null };
         }
 
-        async function rpSceneOpen(key, launch, forceNew) {
+        async function rpSceneOpen(key, launch, forceNew, backFn) {
             const src = rpSceneSource(launch);
             if (!src) return;
-            const back = () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); rpShowScenarioPicker(); };
+            const back = backFn || (() => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); rpShowScenarioPicker(); });
             const cache = scenesCache();
             const saved = (cache[key] || []);
             const show = sc => sceneOpen({ title: src.title, subtitle: (saved.length > 1 ? 'Scène ' + (saved.indexOf(sc) + 1) + '/' + saved.length + ' · ' : '') + 'Écoute la scène comme si tu étais dans la pièce.',
-                lines: sc.lignes, roles: { A: sc.roleA || src.roleA, B: src.roleB }, back, regen: () => rpSceneOpen(key, launch, true) });
+                lines: sc.lignes, roles: { A: sc.roleA || src.roleA, B: src.roleB }, back, regen: () => rpSceneOpen(key, launch, true, backFn) });
             if (saved.length && !forceNew) { show(saved[saved.length - 1]); return; }
             const isPublic = rpScenePublic(launch);
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -12095,10 +12095,10 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             return sc;
         }
 
-        async function formationListenDay(i, forceNew) {
+        async function formationListenDay(i, forceNew, backFn) {
             const d = FORMATION_DAYS[i];
             if (!d) return;
-            const back = () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); formationShowHome(); };
+            const back = backFn || (() => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('roleplay-view').classList.add('active'); setActiveNav('nav-pratiquer'); formationShowHome(); });
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('scene-view').classList.add('active');
             sceneCurrent = { back };
@@ -12113,7 +12113,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 sc.lignes.forEach(l => { lines.push(l); names.push(l.qui === 'A' ? sc.roleA : null); });
             }
             if (!lines.length) { document.getElementById('scene-content').innerHTML += '<p style="color:var(--wrong);">Scènes impossibles à générer.</p>'; return; }
-            sceneOpen({ title: d.label, subtitle: 'Toute la journée, moment par moment, comme si tu y étais.', lines, roles: { A: 'Collègue', B: 'Toi' }, back, regen: () => formationListenDay(i, true) });
+            sceneOpen({ title: d.label, subtitle: 'Toute la journée, moment par moment, comme si tu y étais.', lines, roles: { A: 'Collègue', B: 'Toi' }, back, regen: () => formationListenDay(i, true, backFn) });
             let n = 0;
             lines.forEach((l, j) => { if (l.qui === 'titre') return; const who = names[n++]; if (who) { const w = document.querySelector('#scene-line-' + j + ' .scene-who'); if (w) w.textContent = who; } });
         }
@@ -15097,14 +15097,14 @@ Réponds UNIQUEMENT en JSON : {"memoire": "", "mots": [{"nl": "", "fr": ""}], "t
 
         // Écoute seule (Joas, 1er novembre 2026 : habituer l'oreille au débit) : l'entretien tel
         // quel, recruteur(s) mot pour mot puis la vraie réponse du candidat, dans le lecteur de scènes.
-        function rpReplayListen(index) {
+        function rpReplayListen(index, backFn) {
             const d = rpRealData.dialogues[index];
             const lines = [];
             d.turns.forEach(t => {
                 if (t.nl_original) lines.push({ qui: 'A', nl: t.nl_original, fr: t.fr_cue || '', who: t.speaker || 'Le recruteur' });
                 if (t.candidate_reply) lines.push({ qui: 'B', nl: t.candidate_reply, fr: '' });
             });
-            sceneOpen({ title: d.label, subtitle: 'L\'entretien réel, du début à la fin : les vraies phrases du recruteur et tes vraies réponses.', lines, roles: { A: 'Le recruteur', B: 'Toi (vraie réponse)' }, back: () => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('replay-view').classList.add('active'); setActiveNav('nav-pratiquer'); rpReplaySetup(index); } });
+            sceneOpen({ title: d.label, subtitle: 'L\'entretien réel, du début à la fin : les vraies phrases du recruteur et tes vraies réponses.', lines, roles: { A: 'Le recruteur', B: 'Toi (vraie réponse)' }, back: backFn || (() => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('replay-view').classList.add('active'); setActiveNav('nav-pratiquer'); rpReplaySetup(index); }) });
             lines.forEach((l, i) => { if (l.who) { const w = document.querySelector('#scene-line-' + i + ' .scene-who'); if (w) w.textContent = l.who; } });
             setActiveNav('nav-pratiquer');
         }
@@ -16483,13 +16483,78 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
             listen = null;
             const st = listenStats();
             const total = Object.values(st).reduce((n, x) => n + (x.n || 0), 0);
+            const nl = studyLangCode() === 'nl';
+            const conv = (k, icon, title, desc) => `<div class="hub-card" onclick="listenConvList('${k}')"><span class="hub-card-icon">${icon}</span><div class="hub-card-title">${title}</div><div class="hub-card-desc">${desc}</div></div>`;
             document.getElementById('listen-content').innerHTML = `
                 <h2 style="margin-bottom:4px;">👂 Écouter</h2>
-                <p class="section-subtitle" style="margin-top:0;">Écoute, réponds à 3 questions, résume. Niveau ${listenLevel()}${total ? ` · ${total} écoute${total > 1 ? 's' : ''} faite${total > 1 ? 's' : ''}` : ''}.</p>
+                <p class="section-subtitle" style="margin-top:0;">Habituer ton oreille : des conversations à écouter, puis des écoutes avec questions.</p>
                 ${GeminiService.isAvailable() ? '' : '<div class="prof-warn">Il faut une clé Gemini : Profil 👤 → 🤖 Intelligence IA.</div>'}
+                ${nl ? `<div class="section-title" style="margin-top:6px;">🎧 Des conversations à écouter</div>
+                <button class="btn btn-green" onclick="listenConvRandom()">🎲 Une conversation au hasard</button>
+                <div class="hub-grid" style="margin-top:12px;">
+                    ${conv('travail', '💼', 'Mon travail', 'Les situations de ton métier')}
+                    ${conv('inwerk', '🧑‍🏫', 'Mon inwerkperiode', 'Tes journées, moment par moment')}
+                    ${conv('entretiens', '🎬', 'Mes vrais entretiens', 'Recruteurs réels, mot pour mot')}
+                    ${conv('quotidien', '💬', 'La vie de tous les jours', 'Commune, médecin, magasin…')}
+                    ${conv('cours', '🎓', 'Mes cours', 'Les dialogues des modules')}
+                </div>
+                <div class="section-title">🧠 Écouter et répondre</div>
+                <p class="section-subtitle" style="margin-top:0;">Écoute, réponds à 3 questions, résume. Niveau ${listenLevel()}${total ? ` · ${total} écoute${total > 1 ? 's' : ''} faite${total > 1 ? 's' : ''}` : ''}.</p>` : ''}
                 <button class="btn btn-green" onclick="listenStart()" ${GeminiService.isAvailable() ? '' : 'disabled'}>🎲 Une écoute au hasard</button>
                 <div class="hub-grid" style="margin-top:12px;">${Object.entries(LISTEN_TYPES).map(([k, t]) => `
                     <div class="hub-card" onclick="listenStart('${k}')"><span class="hub-card-icon">${t.icon}</span><div class="hub-card-title">${t.label}</div>${st[k] && st[k].n ? `<div class="hub-card-desc">${st[k].n} faite${st[k].n > 1 ? 's' : ''} · ${Math.round((st[k].ok || 0) / Math.max(1, st[k].q || 0) * 100)} % compris</div>` : ''}</div>`).join('')}</div>`;
+        }
+
+        // ----- 🎧 Des conversations à écouter (Joas, 7 novembre 2026 : « c'est le mode pour m'habituer
+        // à entendre ») : toutes les scènes de l'app réunies ici, sans rien à répondre. Elles viennent
+        // de la bibliothèque commune de scènes (ou de Gemini la première fois), des vrais entretiens et
+        // des dialogues des modules. Retour = l'écran d'avant (historique).
+        const listenBackFn = () => history.back();
+        async function listenConvItems(kind) {
+            if (kind === 'travail') {
+                await rpLoadJobData();
+                const metier = (state.settings && state.settings.jobMetier) || rpJobMetier;
+                const items = ((rpJobData && rpJobData.situations) || []).filter(s => s.metier === metier && rpSitLang(s) === 'nl')
+                    .map(s => ({ label: rpSitTitle(s), go: () => rpSceneOpen('sit:' + s.id, { type: 'sit', id: s.id }, false, listenBackFn) }));
+                if (metier === 'admin_productie') items.unshift({ label: '🎧 Visite guidée : le vocabulaire admin et production', go: () => rpSceneOpen('vocabstory:admin', { type: 'vocabstory' }, false, listenBackFn) });
+                const m = RP_METIERS[metier];
+                return { title: '💼 ' + (m ? m.label.replace(/^\S+\s/, '') : 'Mon travail'), items };
+            }
+            if (kind === 'inwerk') {
+                return { title: '🧑‍🏫 Mon inwerkperiode', items: FORMATION_DAYS.map((d, i) => ({ label: d.label + ' (toute la journée)', go: () => formationListenDay(i, false, listenBackFn) }))
+                    .concat(FORMATION_SESSIONS.map(f => ({ label: f.label, go: () => rpSceneOpen('form:' + f.id, { type: 'form', id: f.id }, false, listenBackFn) }))) };
+            }
+            if (kind === 'entretiens') {
+                const { dialogues } = await rpLoadRealData();
+                return { title: '🎬 Mes vrais entretiens', items: dialogues.map((d, i) => ({ d, i })).filter(x => (x.d.turns || []).length).map(x => ({ label: x.d.label, go: () => rpReplayListen(x.i, listenBackFn) })) };
+            }
+            if (kind === 'quotidien') {
+                await rpLoadLibrary();
+                return { title: '💬 La vie de tous les jours', items: talkSituations().map(e => ({ label: e.label, go: () => rpSceneOpen('lib:' + e.id, { type: 'lib', id: e.id }, false, listenBackFn) })) };
+            }
+            if (kind === 'cours') {
+                await modRpLoadAll();
+                return { title: '🎓 Mes cours', items: MODRP_IDS.filter(id => modRpData[id]).map(id => ({ label: modRpData[id].titre, go: () => sceneModule(id, listenBackFn) })) };
+            }
+            return { title: '', items: [] };
+        }
+        let listenConvCurrent = [];
+        async function listenConvList(kind) {
+            const box = document.getElementById('listen-content');
+            box.innerHTML = '<p class="report-meta">…</p>';
+            const { title, items } = await listenConvItems(kind);
+            listenConvCurrent = items;
+            box.innerHTML = `<button class="back-btn" onclick="showListen()">← Écouter</button>
+                <h2 style="margin-bottom:4px;">${rpEscapeHtml(title)}</h2>
+                <p class="section-subtitle" style="margin-top:0;">Touche une conversation : écoute-la comme si tu étais dans la pièce.</p>
+                ${items.length ? `<button class="btn btn-green" onclick="listenConvGo(${Math.floor(Math.random() * items.length)})">🎲 Une au hasard</button>` : '<p class="report-meta">Rien à écouter ici pour l\'instant.</p>'}
+                ${items.map((x, i) => `<button class="rp-scenario-btn" onclick="listenConvGo(${i})">👂 ${rpEscapeHtml(x.label)}</button>`).join('')}`;
+        }
+        function listenConvGo(i) { const x = listenConvCurrent[i]; if (x) x.go(); }
+        async function listenConvRandom() {
+            const kinds = ['travail', 'travail', 'quotidien', 'entretiens'];
+            const { items } = await listenConvItems(kinds[Math.floor(Math.random() * kinds.length)]);
+            if (items.length) items[Math.floor(Math.random() * items.length)].go();
         }
 
         function listenGenPrompt(type, level) {
