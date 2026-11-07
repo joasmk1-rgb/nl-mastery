@@ -8765,11 +8765,12 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             } else {
                 // La dictée suit la langue du scénario (une dictée en français de l'aide ou la
                 // Production orale ont pu la changer entre-temps).
-                rpRecognition.lang = (rpCurrentScenario && rpCurrentScenario.lang === 'en') ? 'en-US' : studyLang().micLang;
+                rpRecognition.lang = rpFrMode ? 'fr-FR' : (rpCurrentScenario && rpCurrentScenario.lang === 'en') ? 'en-US' : studyLang().micLang;
                 try {
                     rpFinalTranscript = '';
                     rpRecognition.start();
                     rpStartRecordingUI();
+                    if (rpFrMode) { const st = document.getElementById('rp-status'); if (st) st.innerText = 'Parle en français…'; }
                 } catch (e) {
                     console.error(e);
                 }
@@ -8853,6 +8854,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 if (t) t.textContent = rpFrWelcome;
                 const tr = first.querySelector('.talk-tools button[title^="Traduire"]');
                 if (tr) tr.remove();
+                const frBox = first.querySelector('.talk-fr');
+                if (frBox) { frBox.textContent = ''; frBox.classList.remove('show'); delete frBox.dataset.done; }
             }
             rpSpeakText(rpFrWelcome);
         }
