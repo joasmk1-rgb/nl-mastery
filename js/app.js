@@ -3245,7 +3245,7 @@ if (firebaseAvailable) {
                 ${next.k === 'onboarding' ? '' : placementNudgeHtml}
                 ${learnerStage() === 'fondations' && next.k !== 'fond' ? fondCardHtml(true) : ''}
                 ${next.k === 'routine' ? '' : routineHomeHtml()}
-                ${homeTilesHtml(next.k === 'formation')}
+                ${homeTilesHtml()}
                 ${homeAdviceHtml()}
                 ${socialHtml}
                 ${accountNudgeHtml}`;
@@ -12121,7 +12121,7 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
         // ▶️ Mon inwerkperiode (Joas, 2 novembre 2026 : « une seule séance, quitte à ce qu'elle dure
         // une heure, qui se rappelle où j'ai stoppé ») : tous les moments des journées à la suite,
         // position gardée dans state.formation.pos (moment en cours, repris au début du moment).
-        // Entrée directe (accueil, Mon travail quel que soit le métier affiché) : passe sur le métier
+        // Entrée directe (Mon travail quel que soit le métier affiché) : passe sur le métier
         // admin_productie puis ouvre la page de la formation.
         async function formationOpen() {
             if (!state.settings) state.settings = {};
@@ -12131,14 +12131,6 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             showRoleplay('travail');
             await rpShowJobHome();
             formationShowHome();
-        }
-        function formationHomeCardHtml() {
-            if (studyLangCode() !== 'nl') return '';
-            const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
-            if (pos >= n) return '';
-            return `<div class="dash-card routine-home" onclick="formationOpen()" role="button">
-                <div class="routine-home-top"><b>🧑‍🏫 Mon inwerkperiode</b><span class="routine-home-go">${pos ? 'moment ' + (pos + 1) + ' / ' + n + ' ›' : '≈ 1 h ›'}</span></div>
-            </div>`;
         }
         function formationAllMoments() { return FORMATION_DAYS.flatMap(d => d.moments.map(m => ({ d, m }))); }
         function formationAllHtml() {
@@ -18374,7 +18366,8 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         // Les trois modes, en grosses tuiles (l'accueil n'a pas de barre du bas).
         // ----- Le gros bouton « Continuer » de l'accueil -----
         // Ordre : découverte (compte neuf) → routine du jour pas finie → fondations (débutant) →
-        // inwerkperiode en cours → parcours. Toute la carte se touche.
+        // parcours. Toute la carte se touche. L'inwerkperiode n'est plus à l'accueil (Joas, 7 novembre
+        // 2026) : seulement dans Mon travail et Écouter.
         function homeNext(isBrandNew) {
             const nl = studyLangCode() === 'nl';
             if (isBrandNew) return { k: 'onboarding', icon: '👋', title: 'Découvrir NL Mastery', sub: 'Une courte présentation, puis on voit ce que tu sais déjà.', go: 'showOnboarding()', btn: 'Commencer' };
@@ -18389,10 +18382,6 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
                 const cur = fondCurrent();
                 return { k: 'fond', icon: '🧱', title: 'Les fondations', sub: `${cur.icon} ${cur.label}`, go: 'fondStart()', btn: 'Continuer' };
             }
-            if (nl && typeof formationAllMoments === 'function') {
-                const n = formationAllMoments().length, pos = Math.min((state.formation && state.formation.pos) || 0, n);
-                if (pos > 0 && pos < n) return { k: 'formation', icon: '🧑‍🏫', title: 'Mon inwerkperiode', sub: `moment ${pos + 1} / ${n}`, go: 'formationOpen()', btn: 'Reprendre' };
-            }
             return { k: 'cours', icon: '🎓', title: 'Mon parcours', sub: "Routine faite ✓ · la suite de ton cours", go: 'showApprendre()', btn: 'Continuer' };
         }
         function homeNextHtml(x) {
@@ -18402,8 +18391,8 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             </div>`;
         }
 
-        function homeTilesHtml(noFormation) {
-            return `${!noFormation && typeof formationHomeCardHtml === 'function' ? formationHomeCardHtml() : ''}<div class="home-tiles">
+        function homeTilesHtml() {
+            return `<div class="home-tiles">
                 <div class="home-tile" onclick="showApprendre()" role="button"><span class="ht-icon">🎓</span><b>Cours</b><small>${studyLangCode() === 'nl' ? 'Ton parcours A1 → B2' : 'Cours particulier'}</small></div>
                 <div class="home-tile" onclick="showPratiquer()" role="button"><span class="ht-icon">💬</span><b>Parler</b><small>${studyLangCode() === 'nl' ? 'Discuter, travail, écoute' : 'Discuter, écouter, répéter'}</small></div>
                 ${studyLangCode() === 'nl' || langHas('vocabulaire') ? `<div class="home-tile" onclick="showVocab()" role="button"><span class="ht-icon">📖</span><b>Vocabulaire</b><small>Mots et conjugaison</small></div>` : ''}
