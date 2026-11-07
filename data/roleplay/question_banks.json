@@ -111,7 +111,7 @@
     },
     {
       "id": "stockage_frigorifique_logistiek_bediende",
-      "label": "Logistiko — logistiek bediende (stockage frigorifique)",
+      "label": "Polarveld — logistiek bediende (stockage frigorifique)",
       "poste": "Logistiek bediende (onthaal chauffeurs, planning quais)",
       "contexte": "Entretien entièrement en néerlandais dans une entreprise de stockage frigorifique de denrées alimentaires (pas de transport propre, uniquement de l'entreposage pour des clients).",
       "niveau": "NL",
