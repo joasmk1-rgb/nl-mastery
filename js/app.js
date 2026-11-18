@@ -5370,7 +5370,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             if (launch.type === 'sit' && rpJobData) {
                 const s = rpJobData.situations.find(x => x.id === launch.id);
                 if (!s || rpSitLang(s) !== 'nl') return null;
-                return { title: rpSitTitle(s), roleA: 'L\'interlocuteur', roleB: 'L\'employé (toi)', welcome: rpSitAmorce(s),
+                return { title: rpSitTitle(s), roleA: 'L\'interlocuteur', roleB: 'L\'employé (toi)', welcome: rpSitAmorce(s), fixed: s.scene && (s.scene.lignes || []).length ? s.scene : null,
                     desc: 'Situation au travail (' + (s.poste || 'logistique') + ') : ' + s.contexte + ' A est la personne qui s\'adresse à l\'employé ; B est l\'employé, qui gère bien la situation.' };
             }
             if (launch.type === 'form') {
@@ -5505,6 +5505,8 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             const show = sc => sceneOpen({ title: src.title, subtitle: (saved.length > 1 ? 'Scène ' + (saved.indexOf(sc) + 1) + '/' + saved.length + ' · ' : '') + 'Écoute la scène comme si tu étais dans la pièce.',
                 lines: sc.lignes, roles: { A: sc.roleA || src.roleA, B: src.roleB }, back, regen: () => rpSceneOpen(key, launch, true, backFn) });
             if (saved.length && !forceNew) { show(saved[saved.length - 1]); return; }
+            // Scène écrite d'avance dans les données (champ « scene » d'une situation) : lue sans Gemini.
+            if (src.fixed && !forceNew) { saved.push(src.fixed); show(src.fixed); return; }
             const isPublic = rpScenePublic(launch);
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('scene-view').classList.add('active');
@@ -18603,6 +18605,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             if (!src) return null;
             const saved = scenesCache()[key] || [];
             if (saved.length) return { src, sc: saved[saved.length - 1] };
+            if (src.fixed) return { src, sc: src.fixed };
             if (rpScenePublic(launch)) {
                 const lib = await sharedScenesPick(key, saved);
                 const sc = lib.pick || (lib.all && lib.all.length ? lib.all[0] : null);

@@ -2117,6 +2117,53 @@
         "de datum van ontvangst",
         "de aankoop"
       ],
+      "scene": {
+        "roleA": "Kevin (il raconte sa routine du matin)",
+        "_source": "genere_claude",
+        "at": "fixe",
+        "lignes": [
+          {
+            "qui": "A",
+            "nl": "Elke ochtend, voor de briefing om negen uur, open ik het bestand met de replenishmentkaarten.",
+            "fr": "Chaque matin, avant le briefing de 9 h, j'ouvre le fichier des cartes de réapprovisionnement."
+          },
+          {
+            "qui": "A",
+            "nl": "Dat zijn de kaarten die aangeven welke artikelen opnieuw aangevuld moeten worden.",
+            "fr": "Ce sont les cartes qui indiquent quels articles doivent être réapprovisionnés."
+          },
+          {
+            "qui": "A",
+            "nl": "Ik filter eerst op de kolom \"datum naar MIG\": als die leeg is, betekent het dat de kaart nog in mijn bezit is en dus nog opgelost moet worden.",
+            "fr": "Je filtre d'abord sur la colonne « datum naar MIG » : si elle est vide, la carte est encore en ma possession et doit donc encore être résolue."
+          },
+          {
+            "qui": "A",
+            "nl": "Daarna kijk ik naar de locatie: eerst op LV-0, de plek waar goederen net binnengekomen zijn maar nog niet opgeruimd. Dat is meestal de snelste bron.",
+            "fr": "Ensuite je regarde l'emplacement : d'abord LV-0, là où les marchandises viennent d'arriver mais ne sont pas encore rangées. C'est en général la source la plus rapide."
+          },
+          {
+            "qui": "A",
+            "nl": "Als daar niet genoeg voorraad ligt, kijk ik verder naar de Kardex, een automatisch opslagmagazijn voor kleine onderdelen.",
+            "fr": "S'il n'y a pas assez de stock, je regarde ensuite le Kardex, un stockage automatique pour les petites pièces."
+          },
+          {
+            "qui": "A",
+            "nl": "Maar die maak ik bijna nooit volledig leeg, want de voormontage heeft die reserve zelf ook nodig.",
+            "fr": "Mais je ne le vide presque jamais complètement, parce que le pré-montage a lui aussi besoin de cette réserve."
+          },
+          {
+            "qui": "A",
+            "nl": "Zodra ik voldoende stock vind, noteer ik de datum van vandaag bij \"datum naar MIG\" en geef ik de kaart door aan Bart, die ze naar de juiste afdeling brengt:",
+            "fr": "Dès que je trouve assez de stock, je note la date du jour dans « datum naar MIG » et je passe la carte à Bart, qui l'apporte au bon département :"
+          },
+          {
+            "qui": "A",
+            "nl": "de zagerij als het om een machine gaat, de lakkerij als het artikel gelakt moet worden, of aankoop als het om een externe bestelling gaat.",
+            "fr": "la scierie s'il s'agit d'une machine, la peinture si l'article doit être laqué, ou l'achat s'il s'agit d'une commande externe."
+          }
+        ]
+      },
       "_source": "transcriptions_joas_anonymisees"
     },
     {
@@ -2174,6 +2221,58 @@
         "verdelen",
         "de voormontage"
       ],
+      "scene": {
+        "roleA": "Kevin",
+        "_source": "genere_claude",
+        "at": "fixe",
+        "lignes": [
+          {
+            "qui": "A",
+            "nl": "Goeiemorgen. Heb je de kanbankaarten van vanmorgen al bekeken?",
+            "fr": "Bonjour. Tu as déjà regardé les cartes kanban de ce matin ?"
+          },
+          {
+            "qui": "B",
+            "nl": "Ja, ik ben er net mee bezig. Er liggen drie kaarten voor hetzelfde artikelnummer, maar voor verschillende afdelingen.",
+            "fr": "Oui, je suis justement dessus. Il y a trois cartes pour le même numéro d'article, mais pour des départements différents."
+          },
+          {
+            "qui": "A",
+            "nl": "Oké, en hoeveel voorraad staat er op de locatie LV-0?",
+            "fr": "D'accord, et combien de stock y a-t-il à l'emplacement LV-0 ?"
+          },
+          {
+            "qui": "B",
+            "nl": "Honderdzevenentachtig stuks. Maar de eerste kaart heeft er al dertig van genomen, dus er blijft minder over voor de volgende.",
+            "fr": "187 pièces. Mais la première carte en a déjà pris trente, donc il en reste moins pour la suivante."
+          },
+          {
+            "qui": "A",
+            "nl": "Let op: je moet altijd rekening houden met wat de vorige kaart al opgelost heeft, anders maak je een fout bij de tweede toewijzing.",
+            "fr": "Attention : tu dois toujours tenir compte de ce que la carte précédente a déjà résolu, sinon tu fais une erreur à la deuxième attribution."
+          },
+          {
+            "qui": "B",
+            "nl": "Begrepen. En als het voorraadniveau niet volstaat voor de volledige vraag?",
+            "fr": "Compris. Et si le niveau de stock ne suffit pas pour toute la demande ?"
+          },
+          {
+            "qui": "A",
+            "nl": "Dan stuur je de kaart toch terug als opgelost, ook al is het maar gedeeltelijk. Zo komt ze sneller terug in de cyclus.",
+            "fr": "Alors tu renvoies quand même la carte comme résolue, même si ce n'est que partiel. Comme ça, elle revient plus vite dans le cycle."
+          },
+          {
+            "qui": "B",
+            "nl": "En de voormontage en de Kardex, mag ik die altijd volledig leegmaken?",
+            "fr": "Et le pré-montage et le Kardex, je peux toujours les vider complètement ?"
+          },
+          {
+            "qui": "A",
+            "nl": "Nee, die twee zijn beschermd. We maken ze bijna nooit leeg voor een andere afdeling, want ze hebben hun eigen reserve nodig.",
+            "fr": "Non, ces deux-là sont protégés. On ne les vide presque jamais pour un autre département, parce qu'ils ont besoin de leur propre réserve."
+          }
+        ]
+      },
       "_source": "transcriptions_joas_anonymisees"
     },
     {
