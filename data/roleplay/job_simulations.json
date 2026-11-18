@@ -2080,6 +2080,291 @@
         "geblokkeerd"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "apr_briefing",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Le briefing de 9 h devant le tableau. Lundi, 9 h : Jens, le productieleider, fait le briefing devant le tableau avec les chefs d'équipe. Au tableau : sécurité (jours sans accident, absents), focus klant (LAK, CONF, les uitstelcases) et la liste des articles bloqués. Ta mission depuis cette semaine : noter les articles bloqués et faire circuler l'information pour savoir quand ils seront débloqués. Jens te demande où en sont les articles de jeudi, puis te confie de nouveaux articles et te dit à qui t'adresser : lakkerij → Filip et Ine ; zagerij → Dirk ; aankoop → l'acheteur de l'inkoopgroep (souvent Sandra). Réponds, prends note, reformule.",
+      "amorce": "Goeiemorgen allemaal. Veiligheid eerst: veertien dagen zonder ongeval, twee afwezigen. Dan de geblokkeerde artikelen: jij volgt die op. Wat is er nieuw sinds donderdag?",
+      "vocabulaire_cible": [
+        "het briefingbord",
+        "het geblokkeerde artikel",
+        "deblokkeren",
+        "de afwezigen",
+        "opvolgen"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_kanban_kaarten",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Traiter les cartes kanban du jour avec Kevin. Kevin, le collègue qui t'a formé, te regarde faire ta tournée dans l'Excel Replenishment kanban (feuilles ZAAG, LAK, AANKOOP). Règles réelles : un numéro d'article qui commence par 0, 1 ou 2 = aankoop ; sinon c'est le DERNIER mot du nom qui décide : « coated » = lakkerij, « machine » = zagerij. Pour chaque carte reçue : chercher la ligne par artikelnummer (puis configuratie), mettre la date du jour dans « datum van ontvangst » ; « datum naar MIG » vide = la carte est encore chez nous. Quantité changée sur la carte (50 → 100) : corriger la ligne ; article absent de la feuille : copier la dernière ligne et changer numéro, configuratie, date et quantité. Kevin te montre une carte après l'autre, te laisse expliquer et te corrige si tu te trompes.",
+      "amorce": "Goeiemorgen! Daar liggen de kaarten van vandaag. Neem de eerste maar: artikelnummer 0214, bevestigingsplaat. Op welk werkblad zet je die?",
+      "vocabulaire_cible": [
+        "de kanbankaart",
+        "het werkblad",
+        "de configuratie",
+        "de datum van ontvangst",
+        "de aankoop"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_kaart_dubbel",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Une troisième carte identique. Lien, de la voormontage du site d'Oudeberg, vient te voir : elle a déposé une carte pour une pièce, mais dans l'Excel il y a déjà deux cartes en circulation pour la même configuratie et le même département. Règle : maximum 2 cartes identiques (même configuratie ET même afdeling) en rotation ; une troisième n'est pas normale (carte périmée ou doublon) et va dans le casier de Geert, le plant manager. Attention : deux cartes qui se ressemblent peuvent être pour deux départements différents. Lien insiste parce qu'elle manque de pièces : explique calmement, vérifie avec elle le département, propose une solution (regarder le stock disponible, prévenir Geert).",
+      "amorce": "Hé, ik heb vanmorgen een kaart in de bak gelegd voor de armsteunen, maar ik zie nog niks. Ik heb die stukken echt nodig vandaag!",
+      "vocabulaire_cible": [
+        "de dubbele kaart",
+        "in omloop",
+        "de afdeling",
+        "het vakje",
+        "nakijken"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_kardex_vragen",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Demander des pièces au Kardex. Pour résoudre une carte de la lakkerij, il te manque 20 pièces ; il y en a au Kardex, chez Lotte. Ordre réel : d'abord LV-0 (reçu au MIG, pas encore rangé), LV-I (magasin) et le MIG, qu'on peut vider entièrement ; le Kardex et le plateau de voormontage ne se vident presque jamais : c'est la responsable qui décide ce qu'elle peut céder. Tu appelles Lotte : explique la carte (artikelnummer, quantité, département demandeur), demande combien elle peut donner sans se mettre en difficulté, et note où la lakkerij pourra récupérer les pièces (tu l'écriras au dos de la carte).",
+      "amorce": "Kardex, met Lotte.",
+      "vocabulaire_cible": [
+        "de Kardex",
+        "de locatie",
+        "leegmaken",
+        "de achterkant van de kaart",
+        "missen"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_stock_statisch",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Le piège du stock qui ne bouge pas. Kevin relit ton travail. Pour une même référence, deux cartes : 50 pièces pour la montage, 100 pour la voormontage. L'emplacement LV-0 affiche 120 pièces, mais ce chiffre ne baisse pas tout seul quand tu résous une carte : si tu l'oublies, tu donnes deux fois le même stock. Règles : la voormontage a la priorité ; on résout d'abord ce qu'on peut couvrir entièrement ; une résolution partielle = date + commentaire « 15 op 30 », puis une ligne en plus avec le reste et « datum naar MIG » vide. En pratique, on renvoie quand même une carte partiellement couverte pour qu'elle revienne plus vite dans le circuit. Kevin te demande comment tu as réparti et pourquoi.",
+      "amorce": "Ik zie dat je de twee kaarten van artikel 5108 allebei opgelost hebt. Er lagen er honderdtwintig op LV-0. Hoe heb je dat verdeeld?",
+      "vocabulaire_cible": [
+        "gedeeltelijk opgelost",
+        "de voorrang",
+        "de opmerkingen",
+        "verdelen",
+        "de voormontage"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_kaarten_scannen",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Scanner les cartes résolues dans AX. Fin de tournée : Kevin te montre comment fermer la boucle dans AX. Chemin : ZON → Productgegevensbeheer → Lijst aanvraag montageplateau → bouton « Scan barcode », une carte après l'autre. Pièges réels : brancher le scanner avant (« de scanner aansluiten ») et vérifier que la touche majuscules (Caps Lock) est désactivée, sinon le scan ne passe pas. Au dos de chaque carte, tu as écrit où le département peut récupérer les pièces. Kevin te laisse faire et te demande de dire chaque étape à voix haute.",
+      "amorce": "Oké, alle kaarten zijn opgelost. Nu moeten ze nog in AX. Waar ga je naartoe?",
+      "vocabulaire_cible": [
+        "de barcode scannen",
+        "de scanner aansluiten",
+        "de hoofdlettertoets",
+        "het productgegevensbeheer",
+        "afsluiten"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_uitstel_mail",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Reporter des commandes après le mail du plant manager. Geert, le plant manager, passe à ton bureau après son mail : « Volgende moeten nog uitgesteld worden. Twee weken. Reden: stockbreuk door levering leverancier. Omschrijving 1 t.e.m. 4: armblok stock nul door manco onderdeel. » Il veut savoir comment tu vas faire. Procédure réelle : Alle productieorders → filtrer Configuratie avec le numéro de commande (*VO…*) → choisir la ligne du département à l'origine du retard → Uitstel verzenddatum → la date la plus proche (souvent un jeudi) → dans le case : LD_Categorie dringend ou niet dringend, LD_Reden (numéro d'article + description, visible par le client), LD_Uitstel volledig ou deelleveringen → Bevestig gewijzigde verzenddatum (mail automatique au client) → Activiteiten : afgesloten. Reformule sa demande et pose les bonnes questions (dringend ? volledig ou deellevering ?).",
+      "amorce": "Je hebt mijn mail gezien? Die vijf configuraties moeten twee weken uitgesteld worden. Lukt dat vandaag nog?",
+      "vocabulaire_cible": [
+        "uitstellen",
+        "de verzenddatum",
+        "de reden",
+        "dringend",
+        "de deellevering"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_welke_po_lijn",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Quelle ligne de PO reporter ? Dans Alle productieorders, tu as filtré une configuratie et tu vois quatre lignes : zagerij, lakkerij, voormontage, montage, chacune avec un statut (Gepland, Geraamd, Vrijgegeven…). Tu vas demander à Jens, le productieleider, laquelle reporter. Ce qu'on sait : on reporte la ligne du département qui est à l'origine du retard, et un report en amont (lakkerij) se répercute sur la montage. Jens t'explique, te fait reformuler et vérifie que tu as compris les statuts.",
+      "amorce": "Zeg het maar, waar zit je mee?",
+      "vocabulaire_cible": [
+        "het productieorder",
+        "de status",
+        "vrijgegeven",
+        "gepland",
+        "de oorzaak"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_deblokkeren_lakkerij",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Demander à la lakkerij quand un article sera débloqué. Après le briefing, tu appelles Filip, à la lakkerij. Trois articles du tableau sont bloqués chez eux : des profils en couleur spéciale et une série refusée pour mauvaise qualité de laquage. Tu dois savoir quand chacun pourra être débloqué, pour le dire aux chefs d'équipe. Donne les numéros d'article clairement, note les dates, reformule, et demande qui prévenir si ça change. Filip est pressé et parle vite, avec des mots de l'atelier.",
+      "amorce": "Lakkerij, Filip. Zeg het eens, maar snel, want de lijn staat stil.",
+      "vocabulaire_cible": [
+        "de speciale kleur",
+        "afgekeurd",
+        "de lakkwaliteit",
+        "deblokkeren",
+        "verwittigen"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_inkoopgroep",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Trouver l'acheteur et lui demander une date. Un article d'achat est en stockbreuk. Pour savoir qui contacter : ZON → Productgegevensbeheer → Algemeen → Vrijgegeven producten → l'article → l'inkoopgroep, qui donne l'acheteur responsable : Sandra (sinon Els). Tu appelles Sandra : explique quel article manque, pour quels départements, depuis quand, et demande quand la livraison est prévue et si une livraison partielle est possible. Elle te pose des questions sur les quantités.",
+      "amorce": "Aankoop, met Sandra. Wat kan ik voor je doen?",
+      "vocabulaire_cible": [
+        "de inkoopgroep",
+        "de stockbreuk",
+        "de levering",
+        "verwachten",
+        "de deellevering"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_ontvangst_mig",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Valider une réception au MIG avec Wim. Wim, à la réception (le MIG), t'explique comment il valide un colis fournisseur : une feuille de contrôle avec un code-barres par article ; on scanne puis on imprime la feuille comme preuve ; chaque article a son journal (un numéro). Si le fournisseur a livré 310 au lieu de 300, on corrige la quantité, mais il faut alors barrer le code-barres sur l'étiquette et écrire la bonne quantité, sinon le magasinier scannera l'ancienne. Les profilés ont deux codes-barres : il faut scanner les deux, et si l'un est abîmé, il faut tout recommencer avec l'achat. Écoute, pose des questions et reformule.",
+      "amorce": "Kom maar mee naar de ontvangst. Ik toon je hoe we een levering valideren. Zie je die controlelijst met de barcodes?",
+      "vocabulaire_cible": [
+        "de controlelijst",
+        "valideren",
+        "het journaal",
+        "de barcode doorstrepen",
+        "het etiket"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_minder_ontvangen",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "telephone_client",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Moins reçu que commandé : prévenir l'achat. Au MIG, une livraison de Delmaro arrive avec 3 900 pièces au lieu des 4 000 commandées. Wim a validé la quantité réelle. Tu appelles Els, à l'achat, pour qu'elle relance le fournisseur et commande le manque à temps : donne le numéro de commande, l'article, les quantités, et demande ce qu'elle fait pour le reste (une deellevering ?). Elle te demande aussi si le code-barres de l'étiquette a bien été corrigé.",
+      "amorce": "Met Els van aankoop. Ja, zeg het maar.",
+      "vocabulaire_cible": [
+        "de bestelde hoeveelheid",
+        "de geleverde hoeveelheid",
+        "het tekort",
+        "de leverancier",
+        "aanvullen"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_meerlevering",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Une sur-livraison bloquée. Delmaro a livré 520 pièces pour une commande de 500 : une meerlevering. Le système refuse d'enregistrer l'excédent. Stijn, au MIG, te demande quoi faire. Comprends le problème, propose de prévenir l'achat (accepter la meerlevering ou renvoyer le surplus) et dis ce que vous faites des pièces en attendant.",
+      "amorce": "Hé, die levering van Delmaro: vijfhonderdtwintig stuks in plaats van vijfhonderd. AX wil het niet inboeken. Wat doen we daarmee?",
+      "vocabulaire_cible": [
+        "de meerlevering",
+        "inboeken",
+        "het overschot",
+        "terugsturen",
+        "apart zetten"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_klein_magazijn",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Préparer les chariots au petit magasin avec Nathalie. Nathalie te montre comment elle prépare les chariots pour le montage des bras : maximum 8 stores par chariot ; pour chaque store, le type, la quantité, la couleur RAL, le moteur et l'orientation RH (droite) ou LH (gauche) ; ces infos se trouvent dans Productieorders → filtrer Artikelnummer avec *01 → le chariot → onglet Bijlagen. On ne donne jamais une boîte entière, seulement la quantité nécessaire. Elle note les chariots faits dans son carnet. Pose des questions, répète les codes, vérifie que tu as compris.",
+      "amorce": "Kijk, dit is kar B38. Acht schermen maximum per kar. Eerst kijken we in AX welke kleur en welke motor. Weet je nog waar dat staat?",
+      "vocabulaire_cible": [
+        "de kar",
+        "de bijlagen",
+        "rechts",
+        "links",
+        "de RAL-kleur"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "apr_heftruck_dringend",
+      "metier": "admin_productie",
+      "poste": "administratief medewerker productie",
+      "role": "reel",
+      "canal": "collegue_interne",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Trois urgences en même temps pour le cariste. Bart, le cariste du grand magasin, passe au bureau : trois personnes lui ont dit que c'était urgent (la voormontage, la lakkerij et la montage). Il te demande ce qui est vraiment urgent. Aide-le : demande pour quelles commandes, quelles dates de départ, ce qui arrête une ligne de production ; rappelle que la voormontage a la priorité ; proposez un ordre ensemble.",
+      "amorce": "Ik word gek. Drie mensen zeggen dat hun stukken dringend zijn. Ik kan maar één ding tegelijk doen. Wat eerst?",
+      "vocabulaire_cible": [
+        "de heftruck",
+        "dringend",
+        "de voorrang",
+        "stilstaan",
+        "eerst"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
     }
   ],
   "journees": [
@@ -2378,6 +2663,58 @@
         "lg_enc_teams_vergadering"
       ],
       "_source": "redige_claude"
+    },
+    {
+      "id": "journee_apr_ochtend",
+      "metier": "admin_productie",
+      "label": "Mon vrai matin : briefing et cartes kanban",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "apr_briefing",
+        "apr_kanban_kaarten",
+        "apr_kaart_dubbel",
+        "apr_kardex_vragen",
+        "apr_stock_statisch",
+        "apr_kaarten_scannen"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "journee_apr_namiddag",
+      "metier": "admin_productie",
+      "label": "Mon vrai après-midi : reports, achats et réception",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "apr_uitstel_mail",
+        "apr_welke_po_lijn",
+        "apr_deblokkeren_lakkerij",
+        "apr_inkoopgroep",
+        "apr_ontvangst_mig",
+        "apr_minder_ontvangen"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "journee_apr_volledig",
+      "metier": "admin_productie",
+      "label": "Ma vraie journée complète chez Zonvella",
+      "duree_situations": 10,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "apr_briefing",
+        "apr_kanban_kaarten",
+        "apr_kardex_vragen",
+        "apr_stock_statisch",
+        "apr_kaarten_scannen",
+        "apr_uitstel_mail",
+        "apr_inkoopgroep",
+        "apr_ontvangst_mig",
+        "apr_meerlevering",
+        "apr_heftruck_dringend"
+      ],
+      "_source": "transcriptions_joas_anonymisees"
     }
   ]
 }

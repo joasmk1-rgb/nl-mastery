@@ -2650,6 +2650,377 @@
         "Lire tout le tableau sans conclusion.",
         "Parler pendant que le micro est coupé."
       ]
+    },
+    "apr_briefing": {
+      "titre": "Le briefing du lundi et du jeudi",
+      "etapes": [
+        {
+          "fr": "Donner l'état des articles suivis.",
+          "phrase": "Voor artikel 5108 heb ik nieuws: de lakkerij verwacht het donderdag."
+        },
+        {
+          "fr": "Dire ce qui n'est pas encore réglé.",
+          "phrase": "Voor de andere twee heb ik nog geen datum, ik bel vandaag terug."
+        },
+        {
+          "fr": "Noter les nouveaux articles et la personne à contacter.",
+          "phrase": "Ik noteer het: drie nieuwe artikelen, twee voor de zagerij en één voor aankoop."
+        },
+        {
+          "fr": "Confirmer quand tu redonnes l'info.",
+          "phrase": "Ik laat het jullie tegen donderdag weten."
+        }
+      ],
+      "a_eviter": [
+        "Dire « c'est bon » sans date précise.",
+        "Oublier de demander à qui s'adresser pour un nouvel article."
+      ]
+    },
+    "apr_kanban_kaarten": {
+      "titre": "Traiter les cartes kanban du jour",
+      "etapes": [
+        {
+          "fr": "Classer la carte : préfixe 0, 1 ou 2 = aankoop, sinon le dernier mot du nom.",
+          "phrase": "Die begint met 02, dus dat is aankoop."
+        },
+        {
+          "fr": "Chercher la ligne par artikelnummer, puis configuratie.",
+          "phrase": "Ik filter op het artikelnummer en dan op de configuratie."
+        },
+        {
+          "fr": "Dater la réception.",
+          "phrase": "Ik zet de datum van vandaag bij datum van ontvangst."
+        },
+        {
+          "fr": "Quantité changée ou nouvel article : corriger ou copier la dernière ligne.",
+          "phrase": "De hoeveelheid is van vijftig naar honderd gegaan, ik pas de lijn aan."
+        }
+      ],
+      "a_eviter": [
+        "Se fier à un mot au milieu du nom : c'est le DERNIER mot qui compte.",
+        "Effacer les colonnes de formules à droite de la feuille."
+      ]
+    },
+    "apr_kaart_dubbel": {
+      "titre": "Une carte en double",
+      "etapes": [
+        {
+          "fr": "Vérifier configuratie ET département.",
+          "phrase": "Is het voor dezelfde afdeling? Dan zijn er al twee kaarten in omloop."
+        },
+        {
+          "fr": "Expliquer la règle des deux cartes.",
+          "phrase": "Er mogen maximum twee kaarten tegelijk in omloop zijn."
+        },
+        {
+          "fr": "Mettre la troisième de côté.",
+          "phrase": "Ik leg de derde in het vakje van de plant manager."
+        },
+        {
+          "fr": "Proposer une solution pour le manque.",
+          "phrase": "Ik kijk wel meteen of er nog stock is, dan kan je verder."
+        }
+      ],
+      "a_eviter": [
+        "Encoder la troisième carte comme une nouvelle demande.",
+        "Jeter une carte qui est en fait pour un autre département."
+      ]
+    },
+    "apr_kardex_vragen": {
+      "titre": "Demander du stock au Kardex ou à la voormontage",
+      "etapes": [
+        {
+          "fr": "Dire qui tu es et pour quelle carte.",
+          "phrase": "Hallo, met de administratie productie. Ik heb een kaart van de lakkerij voor artikel 5023."
+        },
+        {
+          "fr": "Dire ce qui manque.",
+          "phrase": "Ik kom twintig stuks tekort, en ik zie dat er bij jou nog staan."
+        },
+        {
+          "fr": "Lui laisser décider.",
+          "phrase": "Hoeveel kan je missen zonder zelf in de problemen te komen?"
+        },
+        {
+          "fr": "Dire où les pièces seront récupérées.",
+          "phrase": "Goed, ik schrijf op de achterkant van de kaart dat ze bij de Kardex mogen halen."
+        }
+      ],
+      "a_eviter": [
+        "Annoncer que tu vides le Kardex sans demander.",
+        "Oublier d'écrire l'emplacement au dos de la carte."
+      ]
+    },
+    "apr_stock_statisch": {
+      "titre": "Répartir un stock entre plusieurs cartes",
+      "etapes": [
+        {
+          "fr": "Calculer avant de résoudre : le chiffre affiché ne baisse pas tout seul.",
+          "phrase": "Er liggen er honderdtwintig, maar dat cijfer past zich niet aan."
+        },
+        {
+          "fr": "Donner la priorité à la voormontage.",
+          "phrase": "De voormontage heeft voorrang, dus die krijgt eerst honderd."
+        },
+        {
+          "fr": "Noter la résolution partielle.",
+          "phrase": "Voor de montage zet ik twintig op vijftig in de opmerkingen."
+        },
+        {
+          "fr": "Créer une ligne pour le reste.",
+          "phrase": "Ik maak een nieuwe lijn voor de dertig die nog ontbreken."
+        }
+      ],
+      "a_eviter": [
+        "Résoudre deux cartes avec le même stock.",
+        "Oublier la ligne du reste : le manque disparaît du suivi."
+      ]
+    },
+    "apr_kaarten_scannen": {
+      "titre": "Scanner les cartes résolues",
+      "etapes": [
+        {
+          "fr": "Préparer le matériel.",
+          "phrase": "Ik sluit eerst de scanner aan."
+        },
+        {
+          "fr": "Ouvrir le bon écran.",
+          "phrase": "Productgegevensbeheer, Lijst aanvraag montageplateau, Scan barcode."
+        },
+        {
+          "fr": "Vérifier la touche majuscules.",
+          "phrase": "De hoofdlettertoets staat uit, anders werkt de scan niet."
+        },
+        {
+          "fr": "Scanner une par une et vérifier.",
+          "phrase": "Ik scan de kaarten één voor één en ik kijk of ze verschijnen."
+        }
+      ],
+      "a_eviter": [
+        "Scanner avec Caps Lock activé.",
+        "Scanner une carte pas encore résolue dans l'Excel."
+      ]
+    },
+    "apr_uitstel_mail": {
+      "titre": "Reporter une commande (uitstel)",
+      "etapes": [
+        {
+          "fr": "Reformuler la demande.",
+          "phrase": "Als ik het goed begrijp: vijf configuraties, twee weken uitstellen, reden stockbreuk."
+        },
+        {
+          "fr": "Poser les questions qui manquent.",
+          "phrase": "Is het dringend? En volledig of in deelleveringen?"
+        },
+        {
+          "fr": "Annoncer les étapes.",
+          "phrase": "Ik zoek ze op in Alle productieorders en ik doe het uitstel van de verzenddatum per lijn."
+        },
+        {
+          "fr": "Confirmer la fin.",
+          "phrase": "Ik bevestig de nieuwe datum, de klant krijgt automatisch een mail, en ik sluit de case af."
+        }
+      ],
+      "a_eviter": [
+        "Écrire dans LD_Reden un détail interne : le client le voit.",
+        "Reporter toutes les lignes au lieu de celle du département en cause."
+      ]
+    },
+    "apr_welke_po_lijn": {
+      "titre": "Demander quelle ligne de PO reporter",
+      "etapes": [
+        {
+          "fr": "Expliquer ce que tu vois.",
+          "phrase": "Ik zie vier lijnen voor dezelfde configuratie: zagerij, lakkerij, voormontage en montage."
+        },
+        {
+          "fr": "Poser la question précise.",
+          "phrase": "Welke lijn moet ik uitstellen: die van de afdeling waar het probleem zit?"
+        },
+        {
+          "fr": "Vérifier ce que veulent dire les statuts.",
+          "phrase": "Gepland betekent dat het nog niet gelanceerd is, klopt dat?"
+        },
+        {
+          "fr": "Reformuler la réponse.",
+          "phrase": "Dus ik stel de lakkerij uit, en de montage volgt automatisch."
+        }
+      ],
+      "a_eviter": [
+        "Choisir une ligne au hasard.",
+        "Ne pas demander par peur de déranger : une erreur ici prévient le client."
+      ]
+    },
+    "apr_deblokkeren_lakkerij": {
+      "titre": "Demander quand un article sera débloqué",
+      "etapes": [
+        {
+          "fr": "Aller droit au but.",
+          "phrase": "Ik bel voor drie geblokkeerde artikelen van het briefingbord."
+        },
+        {
+          "fr": "Donner les numéros lentement.",
+          "phrase": "Het eerste is 5023, vijf nul twee drie, in speciale kleur."
+        },
+        {
+          "fr": "Obtenir une date.",
+          "phrase": "Wanneer denk je dat het gedeblokkeerd kan worden?"
+        },
+        {
+          "fr": "Reformuler et prévoir la suite.",
+          "phrase": "Dus donderdag voor het eerste. Wie moet ik verwittigen als het verandert?"
+        }
+      ],
+      "a_eviter": [
+        "Raccrocher sans date ni prochaine étape.",
+        "Donner trois numéros d'un coup sans vérifier qu'il note."
+      ]
+    },
+    "apr_inkoopgroep": {
+      "titre": "Trouver l'acheteur et demander une livraison",
+      "etapes": [
+        {
+          "fr": "Trouver l'inkoopgroep dans AX.",
+          "phrase": "Vrijgegeven producten, het artikel, en daar staat de inkoopgroep."
+        },
+        {
+          "fr": "Expliquer le manque.",
+          "phrase": "Artikel 0214 staat op nul, de montage en de voormontage wachten erop."
+        },
+        {
+          "fr": "Demander une date.",
+          "phrase": "Wanneer verwacht je de volgende levering?"
+        },
+        {
+          "fr": "Proposer une solution partielle.",
+          "phrase": "Is een deellevering mogelijk, om de dringendste kaarten op te lossen?"
+        }
+      ],
+      "a_eviter": [
+        "Appeler sans le numéro d'article sous les yeux.",
+        "Oublier de dire combien de pièces il faut et pour quand."
+      ]
+    },
+    "apr_ontvangst_mig": {
+      "titre": "Valider une réception au MIG",
+      "etapes": [
+        {
+          "fr": "Scanner et imprimer la feuille de contrôle.",
+          "phrase": "Ik scan elke barcode en ik print de controlelijst als bewijs."
+        },
+        {
+          "fr": "Comparer commandé et livré.",
+          "phrase": "Er zijn er driehonderdtien geleverd in plaats van driehonderd."
+        },
+        {
+          "fr": "Corriger ET barrer le code-barres.",
+          "phrase": "Ik pas de hoeveelheid aan en ik streep de barcode op het etiket door."
+        },
+        {
+          "fr": "Profilés : scanner les deux codes-barres.",
+          "phrase": "Bij profielen scan ik altijd de twee barcodes."
+        }
+      ],
+      "a_eviter": [
+        "Corriger la quantité sans barrer le code-barres : le magasinier scannera l'ancienne.",
+        "Garder pour soi un manque : l'achat doit le savoir tout de suite."
+      ]
+    },
+    "apr_minder_ontvangen": {
+      "titre": "Signaler un manque à l'achat",
+      "etapes": [
+        {
+          "fr": "Dire d'où tu appelles et pourquoi.",
+          "phrase": "Ik bel voor de levering van Delmaro van vanmorgen."
+        },
+        {
+          "fr": "Donner les chiffres.",
+          "phrase": "Er zijn er drieduizend negenhonderd geleverd in plaats van vierduizend."
+        },
+        {
+          "fr": "Demander la suite.",
+          "phrase": "Kan je de leverancier vragen om de honderd stuks na te leveren?"
+        },
+        {
+          "fr": "Confirmer ce qui a été fait au MIG.",
+          "phrase": "De hoeveelheid is aangepast en de barcode is doorgestreept."
+        }
+      ],
+      "a_eviter": [
+        "Attendre la fin de la semaine pour prévenir.",
+        "Oublier le numéro de commande."
+      ]
+    },
+    "apr_meerlevering": {
+      "titre": "Une sur-livraison (meerlevering)",
+      "etapes": [
+        {
+          "fr": "Décrire le problème.",
+          "phrase": "Het is een meerlevering: twintig stuks te veel, en AX blokkeert het."
+        },
+        {
+          "fr": "Proposer de prévenir l'achat.",
+          "phrase": "Ik verwittig aankoop: zij beslissen of we het houden of terugsturen."
+        },
+        {
+          "fr": "Dire quoi faire en attendant.",
+          "phrase": "Zet de twintig stuks apart met een briefje, tot we antwoord hebben."
+        }
+      ],
+      "a_eviter": [
+        "Ranger l'excédent avec le reste sans rien dire.",
+        "Décider seul de garder ou de renvoyer."
+      ]
+    },
+    "apr_klein_magazijn": {
+      "titre": "Préparer un chariot au petit magasin",
+      "etapes": [
+        {
+          "fr": "Trouver les infos dans AX.",
+          "phrase": "Productieorders, filter op artikelnummer met sterretje nul één, en dan de bijlagen."
+        },
+        {
+          "fr": "Vérifier store par store.",
+          "phrase": "Kleur, motor, en rechts of links: RH is rechts, LH is links."
+        },
+        {
+          "fr": "Respecter la limite.",
+          "phrase": "Maximum acht schermen per kar."
+        },
+        {
+          "fr": "Ne donner que la quantité utile.",
+          "phrase": "Ik geef alleen wat nodig is, geen volle doos."
+        }
+      ],
+      "a_eviter": [
+        "Confondre RH et LH.",
+        "Donner une boîte entière : on perd le contrôle du stock."
+      ]
+    },
+    "apr_heftruck_dringend": {
+      "titre": "Trier des urgences",
+      "etapes": [
+        {
+          "fr": "Faire préciser chaque urgence.",
+          "phrase": "Voor welke bestelling is het, en wanneer moet die vertrekken?"
+        },
+        {
+          "fr": "Chercher ce qui arrête une ligne.",
+          "phrase": "Staat er een lijn stil als het niet komt?"
+        },
+        {
+          "fr": "Appliquer la priorité connue.",
+          "phrase": "De voormontage heeft voorrang."
+        },
+        {
+          "fr": "Proposer un ordre et prévenir.",
+          "phrase": "Eerst de voormontage, dan de montage, dan de lakkerij. Ik verwittig de anderen."
+        }
+      ],
+      "a_eviter": [
+        "Croire la première personne qui crie le plus fort.",
+        "Décider sans connaître les dates de départ."
+      ]
     }
   }
 }

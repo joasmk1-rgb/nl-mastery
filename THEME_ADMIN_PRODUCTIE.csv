@@ -303,3 +303,132 @@ THEME_ADMIN_PRODUCTIE_300;Si je résume, ...;Als ik het samenvat, ...;3.50
 THEME_ADMIN_PRODUCTIE_301;Qui dois-je prévenir ?;Wie moet ik verwittigen?;3.50
 THEME_ADMIN_PRODUCTIE_302;Où est-ce que je trouve ça dans le système ?;Waar vind ik dat in het systeem?;3.50
 THEME_ADMIN_PRODUCTIE_303;Qu'est-ce qui a la priorité ?;Wat heeft voorrang?;3.50
+THEME_ADMIN_PRODUCTIE_304;les produits lancés (écran AX);Vrijgegeven producten;3.84
+THEME_ADMIN_PRODUCTIE_305;la gestion des stocks;het voorraadbeheer;2.51
+THEME_ADMIN_PRODUCTIE_306;le stock disponible;de voorhanden voorraad;3.46
+THEME_ADMIN_PRODUCTIE_307;physiquement disponible;fysiek beschikbaar;4.18
+THEME_ADMIN_PRODUCTIE_308;le contrôle de production (menu AX);de productiecontrole;2.00
+THEME_ADMIN_PRODUCTIE_309;tous les ordres de production;alle productieorders;2.00
+THEME_ADMIN_PRODUCTIE_310;les ordres de production ouverts;de openstaande productieorders;2.00
+THEME_ADMIN_PRODUCTIE_311;la gestion des données produit;het productgegevensbeheer;2.00
+THEME_ADMIN_PRODUCTIE_312;appliquer le filtre;de filter toepassen;3.60
+THEME_ADMIN_PRODUCTIE_313;la configuration;de configuratie;3.32
+THEME_ADMIN_PRODUCTIE_314;le nom du produit;de productnaam;2.00
+THEME_ADMIN_PRODUCTIE_315;l'emplacement;de locatie;4.84
+THEME_ADMIN_PRODUCTIE_316;le magasin;het magazijn;3.86
+THEME_ADMIN_PRODUCTIE_317;les pièces jointes (onglet);de bijlagen;2.74
+THEME_ADMIN_PRODUCTIE_318;le numéro de nomenclature;het stuklijstnummer;2.00
+THEME_ADMIN_PRODUCTIE_319;le numéro de référence;het referentienummer;2.38
+THEME_ADMIN_PRODUCTIE_320;les remarques;de opmerkingen;4.33
+THEME_ADMIN_PRODUCTIE_321;la date de réception;de datum van ontvangst;4.13
+THEME_ADMIN_PRODUCTIE_322;le statut;de status;4.67
+THEME_ADMIN_PRODUCTIE_323;prévu (statut);gepland;4.44
+THEME_ADMIN_PRODUCTIE_324;estimé (statut);geraamd;2.85
+THEME_ADMIN_PRODUCTIE_325;lancé (statut);vrijgegeven;3.90
+THEME_ADMIN_PRODUCTIE_326;le groupe d'achat;de inkoopgroep;2.00
+THEME_ADMIN_PRODUCTIE_327;l'acheteur responsable;de verantwoordelijke aankoper;2.00
+THEME_ADMIN_PRODUCTIE_328;le scanner;de scanner;3.51
+THEME_ADMIN_PRODUCTIE_329;scanner le code-barres;de barcode scannen;2.96
+THEME_ADMIN_PRODUCTIE_330;brancher le scanner;de scanner aansluiten;3.40
+THEME_ADMIN_PRODUCTIE_331;la touche majuscules;de hoofdlettertoets;2.00
+THEME_ADMIN_PRODUCTIE_332;la liste des demandes du plateau de montage;de lijst aanvraag montageplateau;2.00
+THEME_ADMIN_PRODUCTIE_333;la commande client;het verkooporder;2.00
+THEME_ADMIN_PRODUCTIE_334;simuler les dates de livraison;de leveringsdatums simuleren;2.00
+THEME_ADMIN_PRODUCTIE_335;le report;het uitstel;3.96
+THEME_ADMIN_PRODUCTIE_336;reporter la date d'expédition;de verzenddatum uitstellen;2.00
+THEME_ADMIN_PRODUCTIE_337;la date d'expédition;de verzenddatum;2.00
+THEME_ADMIN_PRODUCTIE_338;la nouvelle date de livraison;de nieuwe leverdatum;2.17
+THEME_ADMIN_PRODUCTIE_339;le dossier de report;de uitstelcase;2.00
+THEME_ADMIN_PRODUCTIE_340;le journal du dossier;het caselogboek;2.00
+THEME_ADMIN_PRODUCTIE_341;la raison du retard;de reden van de vertraging;4.06
+THEME_ADMIN_PRODUCTIE_342;urgent;dringend;4.35
+THEME_ADMIN_PRODUCTIE_343;pas urgent;niet dringend;4.35
+THEME_ADMIN_PRODUCTIE_344;la livraison complète;de volledige levering;3.89
+THEME_ADMIN_PRODUCTIE_345;confirmer la date d'expédition modifiée;de gewijzigde verzenddatum bevestigen;2.00
+THEME_ADMIN_PRODUCTIE_346;clôturé;afgesloten;4.67
+THEME_ADMIN_PRODUCTIE_347;pas encore lancé à la scierie;nog niet gelanceerd in de zagerij;2.46
+THEME_ADMIN_PRODUCTIE_348;la carte verte;de groene kaart;4.64
+THEME_ADMIN_PRODUCTIE_349;la carte bleue;de blauwe kaart;4.59
+THEME_ADMIN_PRODUCTIE_350;la carte en double;de dubbele kaart;4.45
+THEME_ADMIN_PRODUCTIE_351;en circulation;in omloop;3.88
+THEME_ADMIN_PRODUCTIE_352;la carte résolue;de opgeloste kaart;2.75
+THEME_ADMIN_PRODUCTIE_353;au dos de la carte;op de achterkant van de kaart;4.14
+THEME_ADMIN_PRODUCTIE_354;le casier;het vakje;3.10
+THEME_ADMIN_PRODUCTIE_355;la rupture de stock;de stockbreuk;2.00
+THEME_ADMIN_PRODUCTIE_356;le manque (manco);het manco;2.57
+THEME_ADMIN_PRODUCTIE_357;la quantité minimum;de minimumhoeveelheid;2.00
+THEME_ADMIN_PRODUCTIE_358;le réapprovisionnement;de bevoorrading;3.40
+THEME_ADMIN_PRODUCTIE_359;la tournée;de ronde;4.94
+THEME_ADMIN_PRODUCTIE_360;vider un emplacement;een locatie leegmaken;2.91
+THEME_ADMIN_PRODUCTIE_361;céder (pouvoir se passer de);missen;4.71
+THEME_ADMIN_PRODUCTIE_362;la zone de réception;de ontvangstzone;2.00
+THEME_ADMIN_PRODUCTIE_363;le plateau de pré-montage;het voormontageplateau;2.00
+THEME_ADMIN_PRODUCTIE_364;le Kardex (stockage automatique);de Kardex;2.00
+THEME_ADMIN_PRODUCTIE_365;les petites pièces;de korte stukjes;4.07
+THEME_ADMIN_PRODUCTIE_366;résolu en partie;gedeeltelijk opgelost;4.08
+THEME_ADMIN_PRODUCTIE_367;15 sur 30;15 op 30;4.86
+THEME_ADMIN_PRODUCTIE_368;le département demandeur;de aanvragende afdeling;2.00
+THEME_ADMIN_PRODUCTIE_369;répartir;verdelen;4.10
+THEME_ADMIN_PRODUCTIE_370;la priorité;de voorrang;3.76
+THEME_ADMIN_PRODUCTIE_371;la feuille de contrôle;de controlelijst;2.00
+THEME_ADMIN_PRODUCTIE_372;valider une livraison;een levering valideren;2.36
+THEME_ADMIN_PRODUCTIE_373;le journal (numéro AX);het journaal;3.70
+THEME_ADMIN_PRODUCTIE_374;la quantité commandée;de bestelde hoeveelheid;3.62
+THEME_ADMIN_PRODUCTIE_375;la quantité livrée;de geleverde hoeveelheid;3.14
+THEME_ADMIN_PRODUCTIE_376;la sur-livraison;de meerlevering;2.00
+THEME_ADMIN_PRODUCTIE_377;la sous-livraison;de minderlevering;2.00
+THEME_ADMIN_PRODUCTIE_378;l'étiquette;het etiket;3.63
+THEME_ADMIN_PRODUCTIE_379;barrer le code-barres;de barcode doorstrepen;2.00
+THEME_ADMIN_PRODUCTIE_380;abîmé;beschadigd;4.31
+THEME_ADMIN_PRODUCTIE_381;illisible;onleesbaar;2.97
+THEME_ADMIN_PRODUCTIE_382;recommencer;opnieuw beginnen;5.05
+THEME_ADMIN_PRODUCTIE_383;ranger la marchandise;de goederen wegzetten;2.80
+THEME_ADMIN_PRODUCTIE_384;le contrôle à la réception;de ingangscontrole;2.00
+THEME_ADMIN_PRODUCTIE_385;mettre de côté;apart zetten;4.37
+THEME_ADMIN_PRODUCTIE_386;renvoyer;terugsturen;3.39
+THEME_ADMIN_PRODUCTIE_387;livrer le reste plus tard;naleveren;2.00
+THEME_ADMIN_PRODUCTIE_388;le chariot;de kar;3.81
+THEME_ADMIN_PRODUCTIE_389;le bras (du store);de arm;4.67
+THEME_ADMIN_PRODUCTIE_390;le bloc de bras;het armblok;2.00
+THEME_ADMIN_PRODUCTIE_391;le ressort;de veer;3.79
+THEME_ADMIN_PRODUCTIE_392;l'avancée du store;de uitval;3.52
+THEME_ADMIN_PRODUCTIE_393;la largeur totale;de totale breedte;3.90
+THEME_ADMIN_PRODUCTIE_394;la couleur du coffre;de kleur van de kast;4.43
+THEME_ADMIN_PRODUCTIE_395;à droite (RH);rechts;4.84
+THEME_ADMIN_PRODUCTIE_396;à gauche (LH);links;5.15
+THEME_ADMIN_PRODUCTIE_397;la série refusée;de afgekeurde reeks;2.62
+THEME_ADMIN_PRODUCTIE_398;refusé;afgekeurd;3.69
+THEME_ADMIN_PRODUCTIE_399;la qualité de laquage;de lakkwaliteit;2.00
+THEME_ADMIN_PRODUCTIE_400;la couleur spéciale;de speciale kleur;4.77
+THEME_ADMIN_PRODUCTIE_401;le directeur d'usine;de plant manager;4.20
+THEME_ADMIN_PRODUCTIE_402;le cariste;de heftruckchauffeur;2.38
+THEME_ADMIN_PRODUCTIE_403;le chariot élévateur;de heftruck;3.00
+THEME_ADMIN_PRODUCTIE_404;le grand magasin;het grote magazijn;3.86
+THEME_ADMIN_PRODUCTIE_405;le petit magasin;het kleine magazijn;3.85
+THEME_ADMIN_PRODUCTIE_406;le site;de vestiging;4.18
+THEME_ADMIN_PRODUCTIE_407;le capteur soleil et vent;de zon-windsensor;2.00
+THEME_ADMIN_PRODUCTIE_408;le câble;de kabel;4.07
+THEME_ADMIN_PRODUCTIE_409;payer d'avance;op voorhand betalen;3.60
+THEME_ADMIN_PRODUCTIE_410;la facture pro forma;de proformafactuur;2.00
+THEME_ADMIN_PRODUCTIE_411;le camion;de vrachtwagen;4.21
+THEME_ADMIN_PRODUCTIE_412;le briefing;de briefing;3.32
+THEME_ADMIN_PRODUCTIE_413;le tableau du briefing;het briefingbord;2.00
+THEME_ADMIN_PRODUCTIE_414;les jours sans accident;de dagen zonder ongeval;4.21
+THEME_ADMIN_PRODUCTIE_415;les absents;de afwezigen;2.41
+THEME_ADMIN_PRODUCTIE_416;l'article bloqué;het geblokkeerde artikel;3.01
+THEME_ADMIN_PRODUCTIE_417;débloquer;deblokkeren;2.37
+THEME_ADMIN_PRODUCTIE_418;la ligne est à l'arrêt;de lijn staat stil;4.61
+THEME_ADMIN_PRODUCTIE_419;faire circuler l'information;de informatie doorgeven;4.11
+THEME_ADMIN_PRODUCTIE_420;Sur quelle feuille je mets cette carte ?;Op welk werkblad zet ik die kaart?;3.50
+THEME_ADMIN_PRODUCTIE_421;La date « vers le MIG » est encore vide.;De datum naar MIG is nog leeg.;3.50
+THEME_ADMIN_PRODUCTIE_422;Combien tu peux céder sans te mettre en difficulté ?;Hoeveel kan je missen zonder in de problemen te komen?;3.50
+THEME_ADMIN_PRODUCTIE_423;J'écris l'emplacement au dos de la carte.;Ik schrijf de locatie op de achterkant van de kaart.;3.50
+THEME_ADMIN_PRODUCTIE_424;Elles doivent être reportées de deux semaines.;Die moeten twee weken uitgesteld worden.;3.50
+THEME_ADMIN_PRODUCTIE_425;C'est urgent ou pas ?;Is het dringend of niet dringend?;3.50
+THEME_ADMIN_PRODUCTIE_426;En une fois ou en livraisons partielles ?;Volledig of in deelleveringen?;3.50
+THEME_ADMIN_PRODUCTIE_427;Quelle ligne je dois reporter ?;Welke lijn moet ik uitstellen?;3.50
+THEME_ADMIN_PRODUCTIE_428;Quand est-ce que ça peut être débloqué ?;Wanneer kan dat gedeblokkeerd worden?;3.50
+THEME_ADMIN_PRODUCTIE_429;Il y en a 3 900 livrées au lieu de 4 000.;Er zijn er 3900 geleverd in plaats van 4000.;3.50
+THEME_ADMIN_PRODUCTIE_430;Le code-barres est illisible.;De barcode is onleesbaar.;3.50
+THEME_ADMIN_PRODUCTIE_431;Quand attends-tu la livraison ?;Wanneer verwacht je de levering?;3.50
+THEME_ADMIN_PRODUCTIE_432;Je le mets dans les remarques.;Ik zet het in de opmerkingen.;3.50

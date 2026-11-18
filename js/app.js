@@ -10548,8 +10548,10 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             chat: { label: '💬 Messagerie interne', prompt: 'par messagerie instantanée : tes messages sont courts et écrits, et l\'apprenant répond par écrit' },
             balie: { label: '🛎️ Accueil / comptoir', prompt: 'au comptoir d\'accueil, en face à face' }
         };
-        // Rôles d'un métier (champ « role » des situations) : affichage groupé par rôle.
+        // Rôles d'un métier (champ « role » des situations) : affichage groupé par rôle. « reel » =
+        // situations tirées des vrais enregistrements de travail de Joas (anonymisées), en tête.
         const RP_JOB_ROLES = {
+            reel: '🏭 Mon vrai poste (d’après tes enregistrements)',
             dispatch: '🚛 Dispatcher / planner transport',
             accueil: '🛎️ Accueil & réception',
             stock: '📦 Stock & magasin',

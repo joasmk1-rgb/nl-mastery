@@ -2262,6 +2262,182 @@
           "fr": "Vous voyez mon écran maintenant ?"
         }
       ]
+    },
+    "dom_apr": {
+      "label": "Mon vrai poste — kanban, AX, uitstel, réception",
+      "verbes": [
+        "sorteren",
+        "filteren",
+        "scannen",
+        "oplossen",
+        "uitstellen",
+        "nakijken",
+        "bevestigen",
+        "afsluiten",
+        "doorgeven",
+        "verwittigen",
+        "opzoeken",
+        "invullen",
+        "verwijderen",
+        "plakken",
+        "tellen"
+      ],
+      "mots": [
+        {
+          "nl": "de kanbankaart",
+          "fr": "la carte kanban"
+        },
+        {
+          "nl": "de dubbele kaart",
+          "fr": "la carte en double"
+        },
+        {
+          "nl": "het werkblad",
+          "fr": "la feuille (Excel)"
+        },
+        {
+          "nl": "het artikelnummer",
+          "fr": "le numéro d'article"
+        },
+        {
+          "nl": "de configuratie",
+          "fr": "la configuration"
+        },
+        {
+          "nl": "de datum van ontvangst",
+          "fr": "la date de réception"
+        },
+        {
+          "nl": "de opmerkingen",
+          "fr": "les remarques"
+        },
+        {
+          "nl": "de locatie",
+          "fr": "l'emplacement"
+        },
+        {
+          "nl": "het vakje",
+          "fr": "le casier"
+        },
+        {
+          "nl": "de stockbreuk",
+          "fr": "la rupture de stock"
+        },
+        {
+          "nl": "het manco",
+          "fr": "le manque"
+        },
+        {
+          "nl": "de lakkerij",
+          "fr": "l'atelier de peinture"
+        },
+        {
+          "nl": "de zagerij",
+          "fr": "la scierie"
+        },
+        {
+          "nl": "de voormontage",
+          "fr": "le pré-montage"
+        },
+        {
+          "nl": "de aankoop",
+          "fr": "l'achat"
+        },
+        {
+          "nl": "de inkoopgroep",
+          "fr": "le groupe d'achat"
+        },
+        {
+          "nl": "het uitstel",
+          "fr": "le report"
+        },
+        {
+          "nl": "de verzenddatum",
+          "fr": "la date d'expédition"
+        },
+        {
+          "nl": "de reden",
+          "fr": "la raison"
+        },
+        {
+          "nl": "de deellevering",
+          "fr": "la livraison partielle"
+        },
+        {
+          "nl": "de meerlevering",
+          "fr": "la sur-livraison"
+        },
+        {
+          "nl": "de controlelijst",
+          "fr": "la feuille de contrôle"
+        },
+        {
+          "nl": "het etiket",
+          "fr": "l'étiquette"
+        },
+        {
+          "nl": "de barcode",
+          "fr": "le code-barres"
+        },
+        {
+          "nl": "de kar",
+          "fr": "le chariot"
+        },
+        {
+          "nl": "het armblok",
+          "fr": "le bloc de bras"
+        },
+        {
+          "nl": "de briefing",
+          "fr": "le briefing"
+        },
+        {
+          "nl": "het geblokkeerde artikel",
+          "fr": "l'article bloqué"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Op welk werkblad zet ik die kaart?",
+          "fr": "Sur quelle feuille je mets cette carte ?"
+        },
+        {
+          "nl": "De datum naar MIG is nog leeg.",
+          "fr": "La date « vers le MIG » est encore vide."
+        },
+        {
+          "nl": "Hoeveel kan je missen zonder in de problemen te komen?",
+          "fr": "Combien tu peux céder sans te mettre en difficulté ?"
+        },
+        {
+          "nl": "Ik schrijf de locatie op de achterkant van de kaart.",
+          "fr": "J'écris l'emplacement au dos de la carte."
+        },
+        {
+          "nl": "Die moeten twee weken uitgesteld worden.",
+          "fr": "Elles doivent être reportées de deux semaines."
+        },
+        {
+          "nl": "Is het dringend of niet dringend?",
+          "fr": "C'est urgent ou pas ?"
+        },
+        {
+          "nl": "Volledig of in deelleveringen?",
+          "fr": "En une fois ou en livraisons partielles ?"
+        },
+        {
+          "nl": "Welke lijn moet ik uitstellen?",
+          "fr": "Quelle ligne je dois reporter ?"
+        },
+        {
+          "nl": "Wanneer kan dat gedeblokkeerd worden?",
+          "fr": "Quand est-ce que ça peut être débloqué ?"
+        },
+        {
+          "nl": "De barcode is onleesbaar.",
+          "fr": "Le code-barres est illisible."
+        }
+      ]
     }
   },
   "scenarios": {
@@ -2302,6 +2478,7 @@
     "da_": ["sit_da"],
     "pmo_": ["sit_pmo"],
     "cf_": ["sit_cf"],
+    "apr_": ["dom_apr", "dom_ap", "sit_ap"],
     "ap_": ["dom_ap", "sit_ap", "dom_ap_analyse"],
     "lg_disp_": ["sit_lg_disp", "sit_dispatch"],
     "lg_acc_": ["sit_lg_acc", "sit_guichet"],
