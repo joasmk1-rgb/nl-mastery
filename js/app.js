@@ -3057,6 +3057,11 @@ if (firebaseAvailable) {
                         <div class="hub-card-title">Blocs de mots</div>
                         <div class="hub-card-desc">Les mots en contexte</div>
                     </div>
+                    <div class="hub-card" onclick="showNumbers()">
+                        <span class="hub-card-icon">🔢</span>
+                        <div class="hub-card-title">Les nombres</div>
+                        <div class="hub-card-desc">Numéros, quantités, prix</div>
+                    </div>
                     <div class="hub-card" onclick="startAdaptiveTest()">
                         <span class="hub-card-icon">📏</span>
                         <div class="hub-card-title">Mon niveau de vocabulaire</div>
@@ -16895,6 +16900,11 @@ Réponds UNIQUEMENT en JSON : {"questions": [{"verdict": "juste|partiel|faux", "
                 why: "On travaille une seule faute, celle qui revient chez toi. Je te dis cinq phrases en français qui obligent à appliquer la règle : traduis-les à ta manière, à l'oral ou à l'écrit. Je regarde surtout ce point.",
                 whyPassive: "On écoute cinq phrases qui appliquent la règle : le français, un instant pour chercher, puis le néerlandais."
             },
+            nombres: {
+                icon: '🔢', label: 'Les nombres', run: r => routineDrillNumbers(r),
+                why: "On travaille les nombres du travail : numéros d'article, quantités, prix, numéros de téléphone. Une fois je te montre un nombre et tu me le dis en néerlandais, le plus vite possible ; une fois je te le dis et tu l'écris. Je chronomètre : le but, c'est de le dire sans réfléchir.",
+                whyPassive: "On écoute des nombres : je te montre le nombre, un instant pour le dire dans ta tête, puis je le dis en néerlandais."
+            },
             dire: {
                 icon: '💭', label: studyLangCode() === 'nl' ? 'Dis-le en néerlandais' : `Dis-le en ${studyLang().nom}`, nav: 'nav-pratiquer', back: '← Parler', run: r => routineDrillSay(r),
                 why: `Dis-moi en français ce qui te passe par la tête : une pensée, une envie, quelque chose qui t'est arrivé. Je t'apprends à le dire en ${studyLang().variante}, naturellement, à ton niveau. Puis tu le redis à ta manière, et je te corrige.`,
@@ -17246,6 +17256,136 @@ Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr
             }
             return true;
         }
+
+        // ===== 🔢 Les nombres (Joas, 18 novembre 2026 : « prononcer les grands chiffres comme
+        // 5002552 ou 0667345 et être fluide avec ça ») =====
+        // Drill de l'écran du tuteur, sans Gemini : numéros d'article (7 chiffres), quantités, prix,
+        // téléphones belges. Une question sur deux : 👀 le nombre est montré, il le DIT (chronométré) ;
+        // 👂 l'app le dit, il l'écrit. Lecture néerlandaise calculée par l'app (nlNumberWords) ; la
+        // réponse est jugée sur la suite de chiffres, quelle que soit la façon de grouper (« vijf nul
+        // nul… », « vijfhonderd, vijfentwintig, tweeënvijftig », ou les chiffres renvoyés par le micro).
+        const NL_UNITS = ['nul', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf', 'twaalf', 'dertien', 'veertien', 'vijftien', 'zestien', 'zeventien', 'achttien', 'negentien'];
+        const NL_TENS = ['', '', 'twintig', 'dertig', 'veertig', 'vijftig', 'zestig', 'zeventig', 'tachtig', 'negentig'];
+        function nlBelow100(n) {
+            if (n < 20) return NL_UNITS[n];
+            const u = n % 10, t = NL_TENS[Math.floor(n / 10)];
+            return u ? NL_UNITS[u] + (NL_UNITS[u].endsWith('e') ? 'ën' : 'en') + t : t;
+        }
+        function nlBelow1000(n) {
+            const h = Math.floor(n / 100), r = n % 100;
+            return (h ? (h > 1 ? NL_UNITS[h] : '') + 'honderd' : '') + (r || !h ? nlBelow100(r) : '');
+        }
+        function nlNumberWords(n) {
+            n = Math.floor(n);
+            if (n < 1000) return nlBelow1000(n);
+            const m = Math.floor(n / 1e6), th = Math.floor((n % 1e6) / 1000), rest = n % 1000;
+            return [m ? nlBelow1000(m) + ' miljoen' : '', th ? (th > 1 ? nlBelow1000(th) : '') + 'duizend' : '', rest ? nlBelow1000(rest) : '']
+                .filter(Boolean).join(' ');
+        }
+        // Un groupe de chiffres comme on le dit au téléphone : « 066 » = nul zesenzestig, « 05 » = nul vijf,
+        // « 0490 » = nul vier negen nul.
+        function nlDigitGroup(g) {
+            if (g[0] === '0' && g.length > 3) return g.split('').map(d => NL_UNITS[d]).join(' ');
+            if (g[0] === '0') return ('nul ' + (g.length > 1 ? nlDigitGroup(g.slice(1)) : '')).trim();
+            return g.length > 3 ? g.split('').map(d => NL_UNITS[d]).join(' ') : nlBelow1000(Number(g));
+        }
+        function nlDigitsOneByOne(s) { return s.split('').map(d => NL_UNITS[d]).join(', '); }
+        function numSplit(s, sizes) { const out = []; let i = 0; sizes.forEach(n => { out.push(s.slice(i, i + n)); i += n; }); if (i < s.length) out.push(s.slice(i)); return out.filter(Boolean); }
+        function numMakeItem() {
+            const rnd = n => Math.floor(Math.random() * n), digit = () => String(rnd(10)), zeroish = () => (Math.random() < 0.35 ? '0' : digit());
+            const x = Math.random();
+            if (x < 0.4) {
+                const pre = ['0', '0', '1', '2', '5', '50', '51'][rnd(7)];
+                let s = pre; while (s.length < 7) s += zeroish();
+                const groups = numSplit(s, [3, 2, 2]);
+                return { kind: 'article', label: "Numéro d'article", show: s, digits: s,
+                    readings: [groups.map(nlDigitGroup).join(', '), nlDigitsOneByOne(s)] };
+            }
+            if (x < 0.65) {
+                const n = [rnd(900) + 100, (rnd(90) + 10) * 50, (rnd(9) + 1) * 1000 + rnd(10) * 100, rnd(9000) + 1000, (rnd(98) + 2) * 1000 + rnd(1000), (rnd(90) + 10) * 10000][rnd(6)];
+                return { kind: 'quantite', label: 'Quantité', show: n.toLocaleString('nl-BE') + ' stuks', digits: String(n), readings: [nlNumberWords(n) + ' stuks'] };
+            }
+            if (x < 0.85) {
+                const e = rnd(980) + 12, c = rnd(99) + 1, cs = String(c).padStart(2, '0');
+                return { kind: 'prix', label: 'Prix', show: e + ',' + cs + ' €', digits: e + cs,
+                    readings: [nlNumberWords(e) + ' euro ' + (c < 10 ? 'nul ' : '') + nlBelow100(c)] };
+            }
+            let s = '04' + String(rnd(8) + 2); while (s.length < 10) s += digit();
+            const groups = numSplit(s, [4, 2, 2, 2]);
+            return { kind: 'tel', label: 'Numéro de téléphone', show: groups.join(' '), digits: s,
+                readings: [groups.map(nlDigitGroup).join(', '), nlDigitsOneByOne(s)] };
+        }
+        // Mot néerlandais → nombre (« tweeënvijftig » → 52, « drieduizend » → 3000), null si inconnu.
+        let nlWordMap = null;
+        function nlWordValue(w) {
+            if (!nlWordMap) { nlWordMap = {}; for (let i = 0; i < 100; i++) { const t = nlBelow100(i); nlWordMap[t] = i; nlWordMap[t.replace(/ë/g, 'e')] = i; } nlWordMap['één'] = 1; }
+            w = w.replace(/é/g, 'e');
+            if (!w) return null;
+            if (w in nlWordMap) return nlWordMap[w];
+            for (const [word, mult] of [['miljoen', 1e6], ['duizend', 1000], ['honderd', 100]]) {
+                const i = w.indexOf(word);
+                if (i < 0) continue;
+                const a = w.slice(0, i), b = w.slice(i + word.length).replace(/^en/, '');
+                const va = a ? nlWordValue(a) : 1, vb = b ? nlWordValue(b) : 0;
+                return va === null || vb === null ? null : va * mult + vb;
+            }
+            return null;
+        }
+        // Ce qu'il a dit ou écrit → suites de chiffres possibles (bout à bout, ou additionné).
+        function numCandidates(text) {
+            const t = String(text || '').toLowerCase().replace(/(\d)[.\s ](?=\d{3}\b)/g, '$1').replace(/(\d),(?=\d)/g, '$1');
+            const tokens = t.split(/[\s,;:/\-–]+/).map(w => w.replace(/[^\p{L}\d]/gu, '')).filter(Boolean);
+            const parts = [];
+            let total = 0, cur = 0;
+            tokens.forEach(w => {
+                const v = /^\d+$/.test(w) ? null : nlWordValue(w);
+                if (/^\d+$/.test(w)) { parts.push(w); cur += Number(w); return; }
+                if (v === null) return;
+                if (w === 'honderd') { cur = (cur || 1) * 100; parts.push('00'); return; }
+                if (w === 'duizend' || w === 'miljoen') { total += (cur || 1) * (w === 'duizend' ? 1000 : 1e6); cur = 0; parts.push(w === 'duizend' ? '000' : '000000'); return; }
+                parts.push(String(v)); cur += v;
+            });
+            return [parts.join(''), String(total + cur)];
+        }
+        async function routineDrillNumbers(r) {
+            let n = 0, ok = 0, asked = 0;
+            const times = [];
+            while (routineActive(r) && n < 10) {
+                n++;
+                const item = numMakeItem(), say = n % 2 === 1;
+                const reading = say ? item.readings[0] : item.readings[Math.floor(Math.random() * item.readings.length)];
+                r.ctx = `${say ? 'dire' : 'écrire'} le nombre ${item.show} (en néerlandais : ${item.readings[0]})`;
+                const t0 = Date.now();
+                const html = say
+                    ? `<div class="routine-q"><small>${n}/10 · 👀 ${item.label} : dis-le en néerlandais</small><div style="font-size:1.6em; letter-spacing:1px;">${rpEscapeHtml(item.show)}</div></div>`
+                    : `<div class="routine-q"><small>${n}/10 · 👂 ${item.label} : écris ce que tu entends</small><div>${speakBtnHtml(reading)} réécouter</div></div>`;
+                const ask = say ? null : () => conjAudioSpeak(reading, 'nl', 0.9);
+                const given = await routineAskAnswer(r, html, ask, ask);
+                if (given === null) return false;
+                if (given === '__stop') break;
+                if (given === '__passive') {
+                    routineFeedback(null, item.readings[0], say ? rpEscapeHtml(item.show) : '= ' + rpEscapeHtml(item.show), true);
+                    if (routineActive(r) && say) await conjAudioSpeak(item.readings[0], 'nl', 0.9);
+                    continue;
+                }
+                asked++;
+                const dt = (Date.now() - t0) / 1000;
+                const good = !!given && numCandidates(given).includes(item.digits);
+                if (good) ok++;
+                if (good && say) times.push(dt);
+                routineFeedback(good, say ? item.readings[0] : item.show,
+                    (say && item.readings[1] ? 'ou : ' + rpEscapeHtml(item.readings[1]) + ' · ' : say ? '' : rpEscapeHtml(item.readings[0]) + ' · ') + (good && say ? `⏱️ ${dt.toFixed(1).replace('.', ',')} s` : good ? '' : 'Tu as donné : ' + rpEscapeHtml(given || '—')), true);
+                if (routineActive(r)) await conjAudioSpeak(item.readings[0], 'nl', 0.9);
+            }
+            r.ctx = null;
+            if (!routineActive(r)) return false;
+            if (!routinePassive() && asked) {
+                const avg = times.length ? times.reduce((a, b) => a + b, 0) / times.length : 0;
+                await routineSay(r, `${ok} sur ${asked}.${avg ? ` Tu as dit les nombres en ${avg.toFixed(1).replace('.', ',')} secondes en moyenne${avg <= 4 ? ' : c\'est fluide.' : ' : on vise moins de quatre secondes, ça viendra en répétant.'}` : ''}`);
+            }
+            return true;
+        }
+        function showNumbers() { routineDrill('nombres', showVocab); }
 
         // De ou het : les noms ratés d'abord ; sinon des noms courants pas encore acquis.
         async function routineDrillDeHet(r) {
@@ -18762,6 +18902,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             dire: { desc: `dire en ${studyLang().nom} ce qu'on pense en français (le tuteur apprend la phrase)`, run: () => showSayIt() },
+            nombres: { desc: "s'entraîner à dire et comprendre les nombres (numéros d'article, quantités, prix, téléphones), chronométré", run: () => showNumbers() },
             ordre: { desc: "l'ordre des mots (verbe en 2e position, verbe à la fin après dat / omdat, daarom…)", run: () => showWordOrder() },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec ton tuteur (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
             situation: { desc: "jouer une situation de la vie courante dans Discuter (pharmacie, médecin, logement, soirée, téléphone…) ; params.situation = mots-clés, sinon au hasard", run: async p => { await rpLoadLibrary(); const all = talkSituations(); const q = normalize(p.situation || ''); const words = q.split(/[^a-z0-9]+/).filter(w => (w.length > 3 || /^\d+$/.test(w)) && !['avec', 'pour', 'dans', 'chez', 'veux', 'voudrais', 'faire', 'aller', 'visite', 'situation', 'simule', 'simuler', 'jouer'].includes(w)); const score = x => words.reduce((n, w) => n + (normalize(x.label + ' ' + x.contexte).includes(w) ? w.length + (normalize(x.label).includes(w) ? 5 : 0) : 0), 0); const best = all.map(x => [x, score(x)]).sort((a, b) => b[1] - a[1])[0]; const e = best && best[1] > 0 ? best[0] : null; if (TALK_PARTNERS[p.partenaire]) talkSettings().partner = p.partenaire; talkOpenSituation(e ? e.id : all[Math.floor(Math.random() * all.length)].id); } },
@@ -18803,6 +18944,7 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             if (has(/comment progresser|devenir bon|etre bon|conseils?|routine|comment (ca|ça) marche|par ou commencer/)) return { action: 'progresser' };
             if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
             if (has(/dis le en|dire en neerlandais|comment dire ce que|ce qui me passe|exprimer ce que je pense|apprends? moi a dire/)) return { action: 'dire' };
+            if (has(/\bnombres?\b|\bchiffres?\b|getallen|cijfers|numeros? d.?article/)) return { action: 'nombres' };
             if (has(/ordre des mots|place du verbe|verbe a la fin|inversion|structure des phrases/)) return { action: 'ordre' };
             if (has(/faire le point|mon niveau|evaluer|placement|ce que je sais deja/)) return { action: 'faire_le_point', params: { partenaire: has(/john/) ? 'john' : (has(/svetlana/) ? 'svetlana' : null) } };
             if (has(/simul|situation|jeu de role|pharmac|medecin|dentiste|commune|boulanger|coiffeur|restaurant|supermarche|112|urgence|appartement|plombier|soiree/) && !has(/metier|travail|entretien|module/)) return { action: 'situation', params: { situation: text } };
