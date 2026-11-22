@@ -11818,7 +11818,8 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                     <div class="conj-filter-chips-row">${metiers.map(m => chip(m === rpJobMetier, `rpJobSetMetier('${m}')`, RP_JOB_METIERS[m] || rpEscapeHtml(m))).join('')}</div>
                 </details>
                 ${studyLangCode() === 'nl' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
-                <button class="rp-scenario-btn" onclick="formationOpen()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>` : ''}
+                <button class="rp-scenario-btn" onclick="formationOpen()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>
+                <button class="rp-scenario-btn" onclick="showNumbers(true)">🔢 Les nombres au travail <small>(numéros d'article, quantités, prix, téléphones)</small></button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -17405,7 +17406,12 @@ Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr
             }
             return true;
         }
-        function showNumbers() { routineDrill('nombres', showVocab); }
+        // Deux entrées (Joas le cherchait dans Travail) : Vocabulaire → S'entraîner, et Mon travail.
+        function showNumbers(fromWork) {
+            if (!fromWork) { routineDrill('nombres', showVocab); return; }
+            routineDrill('nombres', async () => { showRoleplay('travail'); await rpShowJobHome(); });
+            setActiveNav('nav-pratiquer', 'travail');
+        }
 
         // De ou het : les noms ratés d'abord ; sinon des noms courants pas encore acquis.
         async function routineDrillDeHet(r) {
