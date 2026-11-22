@@ -17315,21 +17315,24 @@ Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr
         function numMakeItem() {
             const rnd = n => Math.floor(Math.random() * n), digit = () => String(rnd(10)), zeroish = () => (Math.random() < 0.35 ? '0' : digit());
             const x = Math.random();
-            if (x < 0.4) {
+            if (x < 0.35) {
                 const pre = ['0', '0', '1', '2', '5', '50', '51'][rnd(7)];
                 let s = pre; while (s.length < 7) s += zeroish();
                 const groups = numSplit(s, [3, 2, 2]);
                 return { kind: 'article', label: "Numéro d'article", show: s, digits: s,
                     readings: [groups.map(nlDigitGroup).join(', '), nlDigitsOneByOne(s)] };
             }
-            if (x < 0.65) {
-                const n = [rnd(900) + 100, (rnd(90) + 10) * 50, (rnd(9) + 1) * 1000 + rnd(10) * 100, rnd(9000) + 1000, (rnd(98) + 2) * 1000 + rnd(1000), (rnd(90) + 10) * 10000][rnd(6)];
+            if (x < 0.7) {
+                // Surtout des grands nombres (Joas : « les grands nombres, pour que j'aie ça en tête ») :
+                // milliers, dizaines et centaines de milliers, millions.
+                const n = [rnd(900) + 100, (rnd(9) + 1) * 1000 + rnd(10) * 100, rnd(9000) + 1000, (rnd(98) + 2) * 1000 + rnd(1000),
+                    rnd(900000) + 100000, (rnd(90) + 10) * 10000, (rnd(9) + 1) * 1e6 + rnd(1000) * 1000 + rnd(1000), (rnd(9) + 1) * 1e6 + rnd(10) * 100000][rnd(8)];
                 return { kind: 'quantite', label: 'Quantité', show: n.toLocaleString('nl-BE') + ' stuks', digits: String(n), readings: [nlNumberWords(n) + ' stuks'] };
             }
             if (x < 0.85) {
                 const e = rnd(980) + 12, c = rnd(99) + 1, cs = String(c).padStart(2, '0');
-                return { kind: 'prix', label: 'Prix', show: e + ',' + cs + ' €', digits: e + cs,
-                    readings: [nlNumberWords(e) + ' euro ' + (c < 10 ? 'nul ' : '') + nlBelow100(c)] };
+                return { kind: 'prix', label: 'Prix', show: e + ',' + cs + ' €', digits: e + cs, alts: c < 10 ? [e + String(c)] : [], // « vijfendertig euro vier » = 35,04
+                    readings: [nlNumberWords(e) + ' euro ' + nlBelow100(c)] };
             }
             let s = '04' + String(rnd(8) + 2); while (s.length < 10) s += digit();
             const groups = numSplit(s, [4, 2, 2, 2]);
@@ -17368,9 +17371,36 @@ Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr
             });
             return [parts.join(''), String(total + cur)];
         }
+        // Le mémo des nombres, montré au début de chaque série (exemples calculés par nlNumberWords).
+        const NUM_MEMO = [
+            ["Les unités AVANT les dizaines, en un seul mot (« cinq-et-vingt »)", 25],
+            ["Tréma quand le chiffre finit par e : tweeën, drieën", 52],
+            ["Jamais « een » devant honderd et duizend", 100],
+            ["Tout attaché jusqu'à mille", 187],
+            ["Après duizend, on laisse un blanc", 2552],
+            ["Entre 1 100 et 1 999, on dit aussi les centaines : elfhonderd, twaalfhonderd…", 1250],
+            ["Miljoen est un mot à part, avec « een » devant", 1000000],
+            ["Un grand nombre complet", 5002552],
+        ];
+        function numMemoHtml() {
+            const ex = ([fr, n]) => { const nl = n === 1250 ? 'twaalfhonderdvijftig' : nlNumberWords(n); return `<li>${fr}<br><b>${n.toLocaleString('nl-BE')}</b> = ${rpEscapeHtml(nl)} ${speakBtnHtml(nl)}</li>`; };
+            return `<div class="routine-q"><small>📘 Le mémo des nombres</small>
+                <ul style="margin:6px 0 4px 18px; padding:0; line-height:1.5;">${NUM_MEMO.map(ex).join('')}
+                <li>Le point sépare les milliers, la virgule les décimales : <b>3.900</b> stuks, <b>35,04</b> € = vijfendertig euro vier ${speakBtnHtml('vijfendertig euro vier')}</li>
+                <li>Numéros d'article et téléphones : par groupes, comme au téléphone, ou chiffre par chiffre : <b>0667345</b> = nul zesenzestig, drieënzeventig, vijfenveertig ${speakBtnHtml('nul zesenzestig, drieënzeventig, vijfenveertig')}</li></ul></div>`;
+        }
         async function routineDrillNumbers(r) {
             let n = 0, ok = 0, asked = 0;
             const times = [];
+            routineBubble('prof', numMemoHtml());
+            if (routinePassive()) {
+                // En écoute seule, le tuteur lit les exemples du mémo.
+                for (const [, v] of NUM_MEMO) {
+                    if (!routineActive(r)) return false;
+                    await conjAudioSpeak(v.toLocaleString('fr-BE'), 'fr', 1.05);
+                    await conjAudioSpeak(v === 1250 ? 'twaalfhonderdvijftig' : nlNumberWords(v), 'nl', 0.9);
+                }
+            } else await routineSay(r, "Voici le mémo des nombres. Remonte le fil pour le revoir pendant la série, et touche 🔊 pour écouter un exemple. On y va.");
             while (routineActive(r) && n < 10) {
                 n++;
                 const item = numMakeItem(), say = n % 2 === 1;
@@ -17391,7 +17421,8 @@ Réponds UNIQUEMENT en JSON : {"nl": "", "nl_fr": "", "morceaux": [], "astuce_fr
                 }
                 asked++;
                 const dt = (Date.now() - t0) / 1000;
-                const good = !!given && numCandidates(given).includes(item.digits);
+                const cands = given ? numCandidates(given) : [];
+                const good = [item.digits].concat(item.alts || []).some(d => cands.includes(d));
                 if (good) ok++;
                 if (good && say) times.push(dt);
                 routineFeedback(good, say ? item.readings[0] : item.show,
