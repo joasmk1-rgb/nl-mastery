@@ -12966,6 +12966,19 @@ Ne donne jamais de longue correction grammaticale pendant la conversation orale 
             };
             ss.cancel = () => { ttsActive = 0; ttsLastEnd = Date.now(); cancel(); };
             ss.__nlmHooked = true;
+            // iPhone (Safari, Edge, Chrome : tous WebKit) : la voix ne marche qu'après une première
+            // phrase lancée PENDANT un toucher ; les lectures lancées après une attente restaient
+            // muettes (Joas, 22 novembre 2026, « rien ne se passe » sur Écouter). Au premier toucher,
+            // une phrase vide et muette, hors compteurs (elle ne doit pas couper un micro qui démarre).
+            // Réarmé à chaque retour sur l'app (iOS peut reverrouiller la voix en arrière-plan).
+            const unlock = () => {
+                ['touchend', 'click'].forEach(t => document.removeEventListener(t, unlock, true));
+                if (ss.speaking || ss.pending) return;
+                try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speak(u); } catch (e) { /* pas grave */ }
+            };
+            const arm = () => ['touchend', 'click'].forEach(t => document.addEventListener(t, unlock, true));
+            arm();
+            document.addEventListener('visibilitychange', () => { if (!document.hidden) arm(); });
         })();
         // Texte reconnu qui n'est qu'un écho : un bout de ce que la voix de l'app vient de dire, ou la
         // phrase que l'apprenant vient d'envoyer (Android la renvoie parfois au micro suivant).
