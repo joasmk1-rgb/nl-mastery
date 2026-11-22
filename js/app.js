@@ -2342,13 +2342,19 @@ if (firebaseAvailable) {
             // Pour la voix, on retire aussi les emojis, que certaines voix décrivent à haute voix.
             text = speechBlanks(stripMarkdown(text)).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '').trim();
             if (!text) return;
-            window.speechSynthesis.cancel();
+            // Chrome sur Android avale souvent une phrase lancée juste après cancel() (Joas, 22 novembre
+            // 2026 : « il n'y a pas de voix » dans le jeu de rôle) : on ne coupe que si une voix parle,
+            // on relance le moteur s'il est resté en pause, et on attend un instant après une coupure.
+            const ss = window.speechSynthesis;
+            const busy = ss.speaking || ss.pending;
+            if (busy) ss.cancel();
+            try { ss.resume(); } catch (e) { /* pas grave */ }
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = studyLang().ttsLang;
             const sv = studyVoice();
             if (sv) utterance.voice = sv;
             utterance.rate = 0.95 * voiceSpeed();
-            window.speechSynthesis.speak(utterance);
+            if (busy) setTimeout(() => ss.speak(utterance), 150); else ss.speak(utterance);
         }
 
         // Bouton 🔊 réutilisable, à insérer dans n'importe quel innerHTML affichant un mot/une phrase
@@ -4718,6 +4724,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
                 u.onend = finish;
                 u.onerror = finish;
                 setTimeout(finish, 2500 + text.length * 180 / eff);
+                try { window.speechSynthesis.resume(); } catch (e) { /* moteur resté en pause (Android) */ }
                 window.speechSynthesis.speak(u);
             });
         }
