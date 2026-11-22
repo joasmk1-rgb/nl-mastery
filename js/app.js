@@ -6286,17 +6286,21 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             function isAvailable() {
                 return !!getKey();
             }
-            async function generate(prompt) {
+            // opt.search : recherche Google (vraie actualité, radio du mode voiture) ; incompatible avec
+            // le JSON imposé, le prompt demande alors le JSON en texte.
+            async function generate(prompt, opt) {
                 const apiKey = getKey();
                 if (!apiKey) throw new Error('Aucune clé API Gemini enregistrée (Profil → 🤖 Intelligence IA).');
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`;
                 // Quand le prompt demande du JSON, on l'impose à l'API : sinon Gemini glisse parfois
                 // une phrase ou un caractère qui rend la réponse illisible.
-                const wantsJson = /UNIQUEMENT en JSON|JSON strict/i.test(prompt);
+                const search = !!(opt && opt.search);
+                const wantsJson = !search && /UNIQUEMENT en JSON|JSON strict/i.test(prompt);
                 const body = { contents: [{ role: 'user', parts: [{ text: prompt }] }] };
                 const languageInstruction = studyLangGeminiInstruction();
                 if (languageInstruction) body.systemInstruction = { parts: [{ text: languageInstruction }] };
                 if (wantsJson) body.generationConfig = { responseMimeType: 'application/json' };
+                if (search) body.tools = [{ google_search: {} }];
                 // Gemini surchargé (« trop de demandes ») : deux nouveaux essais, après 2 puis 5 s.
                 const busy = (status, msg) => status === 429 || status === 500 || status === 503 || /overload|high demand|unavailable|exhausted|try again/i.test(msg || '');
                 let data = null;
@@ -18811,6 +18815,75 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             if (!GeminiService.getKey()) return null;
             return { src, sc: await rpSceneGenerateOne(key, launch, src) };
         }
+        // ----- Émissions de la radio (Joas, 22 novembre 2026 : « des sessions d'écoute où ça parle
+        // d'actualité, où ça apprend des choses, des processus, ou même des choses en néerlandais ; le
+        // but c'est juste d'apprendre ») -----
+        // Trois émissions écrites par Gemini (un appel chacune, gardées dans localStorage
+        // nl_radio_v1) : 📰 le journal (vraie actualité belge du jour, recherche Google ; sans elle,
+        // « Le saviez-vous ? » plutôt qu'une fausse actualité), 🏭 un processus (ceux de son métier
+        // d'abord), 🇳🇱 un point de néerlandais (ses points faibles d'abord). Format des scènes :
+        // lignes { qui A | B, nl, fr }, deux présentateurs.
+        const RADIO_KEY = 'nl_radio_v1';
+        const RADIO_PROCESSES = ["comment un fabricant suit son stock avec des cartes kanban", "le trajet d'une commande, de la commande du client au camion",
+            "la réception des marchandises et le contrôle des quantités", "pourquoi et comment on reporte une date de livraison", "le principe FIFO et FEFO dans un entrepôt",
+            "comment se passe un inventaire tournant", "comment un camion est planifié et chargé", "ce que fait un service achats", "lire une fiche de paie belge",
+            "comment fonctionne un briefing d'équipe en production (sécurité, qualité, délais)", "le travail en équipes et les pauses dans une usine belge",
+            "comment on fabrique une protection solaire sur mesure : sciage, laquage, confection, montage"];
+        const RADIO_LANG = ["le verbe à la fin après dat, omdat, als", "de ou het : les astuces", "les verbes à particule séparable (opbellen, afspreken)",
+            "le perfectum avec hebben ou zijn", "le petit mot er", "les diminutifs en -je", "tu ou vous : je, jij, u au travail",
+            "les faux amis entre le français et le néerlandais", "les expressions flamandes du quotidien", "dire l'heure et les dates",
+            "les phrases polies pour demander quelque chose au travail", "l'inversion : Morgen ga ik…"];
+        function radioCache() { try { return JSON.parse(localStorage.getItem(RADIO_KEY)) || {}; } catch (e) { return {}; } }
+        function radioSave(key, sc) {
+            const c = radioCache(); c[key] = { at: Date.now(), sc };
+            const keys = Object.keys(c).sort((a, b) => c[b].at - c[a].at).slice(0, 40);
+            try { localStorage.setItem(RADIO_KEY, JSON.stringify(Object.fromEntries(keys.map(k => [k, c[k]])))); } catch (e) { /* stockage plein */ }
+        }
+        function radioPrompt(kind, topic, level) {
+            const fmt = `Réponds UNIQUEMENT en JSON, sans rien autour, avec ce format : {"titre_fr":"titre court de l'émission en français","lignes":[{"qui":"A","nl":"…","fr":"traduction française"}]}. 12 à 16 lignes, qui alterne entre A et B, phrases orales et naturelles de ${level} (CECR), en néerlandais de Flandre standard, sans emojis ni noms de vraies personnes privées.`;
+            const base = `Écris une courte émission de radio en néerlandais pour un francophone qui apprend le néerlandais et travaille en Flandre (administration de production dans une usine). Deux présentateurs : A (présente) et B (pose les questions qu'un auditeur se poserait, réagit). Le but est d'APPRENDRE quelque chose en écoutant.`;
+            if (kind === 'actu') return `${base}
+Émission : le journal du jour. Cherche 3 VRAIES informations récentes (aujourd'hui ou ces derniers jours) en Belgique, surtout en Flandre : économie, travail, mobilité, météo, société. N'invente rien : seulement des faits trouvés dans ta recherche ; dis la date des faits. Explique les mots difficiles au passage.
+${fmt}`;
+            if (kind === 'savoir') return `${base}
+Émission : « Le saviez-vous ? » sur ${topic}. Faits sûrs et généraux, pas d'actualité (tu n'as pas accès aux nouvelles).
+${fmt}`;
+            if (kind === 'processus') return `${base}
+Émission : comment ça marche ? Sujet : ${topic}. A explique le processus étape par étape, avec les mots du métier en néerlandais ; B reformule et pose des questions. Entreprise fictive si besoin (Zonvella), jamais de vraie entreprise.
+${fmt}`;
+            return `${base}
+Émission : un point de néerlandais. Sujet : ${topic}. A explique la règle EN NÉERLANDAIS SIMPLE avec beaucoup d'exemples courts tirés du travail et du quotidien ; B essaie, se trompe une fois et A le corrige gentiment ; ils finissent par un truc pour s'en souvenir.
+${fmt}`;
+        }
+        async function radioShow(kind, topic) {
+            const day = new Date().toISOString().slice(0, 10);
+            const key = kind + ':' + (kind === 'actu' ? day : topic);
+            const cached = radioCache()[key];
+            const icon = { actu: '📰', savoir: '💡', processus: '🏭', langue: '🇳🇱' }[kind];
+            const done = (sc, k) => sc && Array.isArray(sc.lignes) && sc.lignes.length >= 4 ? { title: icon + ' ' + (sc.titre_fr || topic || 'Le journal'), lines: sc.lignes.filter(l => l && l.nl), roleA: 'Présentateur', _k: k } : null;
+            if (cached && (kind !== 'langue' || Date.now() - cached.at < 7 * 864e5)) return done(cached.sc);
+            if (!GeminiService.isAvailable()) return null;
+            const level = listenLevel();
+            let sc = null;
+            try { sc = rpHelpParseJson(await GeminiService.generate(radioPrompt(kind, topic, level), kind === 'actu' ? { search: true } : null)); } catch (e) { sc = null; }
+            if (!sc && kind === 'actu') {
+                const t = ['les institutions belges et flamandes', "l'économie flamande et ses grandes industries", 'la vie pratique en Flandre : commune, mutuelle, impôts',
+                    'les transports en Belgique', 'les fêtes et traditions flamandes', 'le travail en Belgique : contrats, intérim, congés'];
+                return radioShow('savoir', t[Math.floor(Math.random() * t.length)]);
+            }
+            if (sc && sc.lignes) radioSave(key, sc);
+            return done(sc);
+        }
+        function radioLangTopics() {
+            const weak = (typeof tutorMemTop === 'function' ? tutorMemTop(4) : []).map(([, r]) => r.label).filter(Boolean);
+            return weak.concat(RADIO_LANG.filter(t => !weak.includes(t)));
+        }
+        function radioProcessTopics() {
+            const metier = (state.settings && state.settings.jobMetier) || rpJobMetier;
+            const mine = ((rpJobData && rpJobData.situations) || []).filter(s => s.metier === metier && s.role === 'reel').map(s => rpSitTitle(s).replace(/\.$/, ''));
+            return mine.concat(RADIO_PROCESSES);
+        }
+
         async function carRadioPlaylist() {
             await Promise.all([rpLoadRealData(), rpLoadJobData(), rpLoadLibrary(), modRpLoadAll()]);
             const shuffle = a => a.map(x => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
@@ -18823,7 +18896,13 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
                 quotidien: shuffle(talkSituations().map(e => scene('lib:' + e.id, { type: 'lib', id: e.id }))),
                 cours: shuffle(MODRP_IDS.filter(id => modRpData[id]).flatMap(id => modRpData[id].etapes.filter(e => (e.dialogue || []).length).map(e => async () => ({ title: modRpData[id].titre + ', ' + e.titre, lines: e.dialogue.map(l => ({ qui: l.qui, nl: l.nl, fr: l.fr })) }))))
             };
-            const order = ['travail', 'inwerk', 'entretiens', 'quotidien', 'travail', 'cours'];
+            const weak = radioLangTopics().slice(0, (tutorMemTop(4) || []).length);
+            Object.assign(lists, {
+                actu: [() => radioShow('actu')],
+                processus: shuffle(radioProcessTopics()).slice(0, 8).map(t => () => radioShow('processus', t)),
+                langue: shuffle(weak).concat(shuffle(radioLangTopics().filter(t => !weak.includes(t)))).slice(0, 8).map(t => () => radioShow('langue', t))
+            });
+            const order = ['actu', 'travail', 'processus', 'inwerk', 'langue', 'entretiens', 'quotidien', 'processus', 'cours', 'langue'];
             const out = [];
             for (let k = 0; out.length < 60 && order.some(o => lists[o].length); k++) { const l = lists[order[k % order.length]]; if (l.length) out.push(l.shift()); }
             return out;
@@ -18836,12 +18915,12 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
         async function carRadio(r) {
             r.until = Date.now() + 20 * 60000;
             const esc = rpEscapeHtml, noEmoji = t => String(t || '').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
-            const skipBtn = `<button class="car-btn" onclick="carRadioSkip()">⏭ Conversation suivante</button>`;
+            const skipBtn = `<button class="car-btn" onclick="carRadioSkip()">⏭ Suivant</button>`;
             carShow(`<div class="car-fr">📻 La radio</div><div class="car-nl">Je prépare les conversations…</div>`);
             const list = await carRadioPlaylist();
             if (!carActive(r)) return;
             if (!list.length) { carShow('<p>Rien à écouter pour l\'instant.</p>'); return; }
-            await carSay(r, "C'est parti pour vingt minutes de conversations. Écoute, sans rien dire. Pour passer à la suivante, touche l'écran.", 'fr');
+            await carSay(r, "C'est parti pour vingt minutes de radio : le journal, des conversations, comment marche ton travail, et des points de néerlandais. Écoute, sans rien dire. Pour passer au suivant, touche l'écran.", 'fr');
             const take = () => list.length ? list.shift()().catch(() => null) : null;
             let next = take();
             while (carActive(r) && next && Date.now() < r.until) {
