@@ -158,6 +158,11 @@
         .rp-message { padding: 10px 14px; border-radius: 12px; max-width: 80%; line-height: 1.4; font-size: 0.9rem; }
         .rp-message.user { background: var(--primary); color: white; align-self: flex-end; }
         .rp-message.assistant { background: var(--bg); color: var(--text); align-self: flex-start; border-left: 4px solid var(--primary); }
+        .rp-message.assistant.meet-B { border-left-color: #d98a1f; }
+        .rp-message.assistant.meet-C { border-left-color: #2a9d6f; }
+        .rp-who { display: block; font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 2px; }
+        .meet-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: var(--primary); }
+        .meet-dot.meet-B { background: #d98a1f; } .meet-dot.meet-C { background: #2a9d6f; }
         #rp-mic-btn { width: 100%; max-width: 520px; box-sizing: border-box; }
         /* Jeu de rôle : saisie au clavier, bouton "Corrige-moi", encart de correction, mode intervieweur */
         #rp-step-category { width: 100%; display: flex; flex-direction: column; align-items: center; }
@@ -364,6 +369,8 @@
         .scene-line { padding: 8px 10px; border-radius: var(--radius-md); margin-bottom: 6px; cursor: pointer; max-width: 88%; }
         .scene-line.scene-A { background: var(--surface-2); }
         .scene-line.scene-B { background: color-mix(in srgb, var(--primary) 12%, transparent); margin-left: auto; }
+        .scene-line.scene-C { background: color-mix(in srgb, #d98a1f 14%, transparent); }
+        .scene-line.scene-D { background: color-mix(in srgb, #2a9d6f 14%, transparent); }
         .scene-line.active, .scene-title.active { outline: 2px solid var(--primary); }
         .scene-who { font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); }
         .scene-nl { font-weight: 600; }

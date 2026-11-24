@@ -2464,6 +2464,176 @@
         "eerst"
       ],
       "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "sap_standup",
+      "metier": "it_sap",
+      "poste": "junior SAP-consultant",
+      "canal": "reunion",
+      "type": "presentation",
+      "niveau": "B1",
+      "contexte": "Daily stand-up de l'équipe projet SAP : tu dis ce que tu as fait hier, ce que tu fais aujourd'hui et ce qui te bloque.",
+      "amorce": "Goedemorgen allemaal, we beginnen met de stand-up. Wat heb jij gisteren gedaan, en wat staat er vandaag op je planning?",
+      "vocabulaire_cible": [
+        "de stand-up",
+        "de blokkering",
+        "de planning",
+        "het actiepunt"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_wachtwoord",
+      "metier": "it_sap",
+      "poste": "IT-supportmedewerker",
+      "canal": "telephone_client",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Un utilisateur appelle le support : son compte SAP est bloqué après trois mauvais mots de passe.",
+      "amorce": "Hallo, met Koen van het magazijn. Ik kan niet meer inloggen in SAP. Er staat dat mijn gebruiker geblokkeerd is.",
+      "vocabulaire_cible": [
+        "de gebruiker",
+        "het wachtwoord",
+        "geblokkeerd",
+        "het ticket"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_foutmelding",
+      "metier": "it_sap",
+      "poste": "IT-supportmedewerker",
+      "canal": "chat",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Par messagerie, une magasinière reçoit un message d'erreur quand elle veut enregistrer une réception de marchandises dans SAP.",
+      "amorce": "Hoi, ik krijg een foutmelding als ik de goederenontvangst wil boeken. Er staat iets met 'periode gesloten'. Wat moet ik doen?",
+      "vocabulaire_cible": [
+        "de foutmelding",
+        "de goederenontvangst",
+        "boeken",
+        "de schermafdruk"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_fitgap",
+      "metier": "it_sap",
+      "poste": "junior SAP-consultant",
+      "canal": "reunion",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Atelier fit-gap avec une utilisatrice clé des achats : tu compares sa façon de travailler aujourd'hui au processus standard de SAP.",
+      "amorce": "Dus vandaag maak ik mijn bestellingen nog in Excel, en dan stuur ik ze per mail naar de leverancier. Hoe zou dat in SAP gaan?",
+      "vocabulaire_cible": [
+        "de sleutelgebruiker",
+        "het standaardproces",
+        "de bestelaanvraag",
+        "de goedkeuring"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_testdefect",
+      "metier": "it_sap",
+      "poste": "junior SAP-consultant",
+      "canal": "collegue_interne",
+      "type": "probleme_document",
+      "niveau": "B1",
+      "contexte": "Pendant les tests utilisateurs, un utilisateur clé te montre un scénario qui ne marche pas : tu notes le défaut avec assez de détails.",
+      "amorce": "Kijk, ik volg het testscenario stap voor stap, maar bij stap vier krijg ik een andere prijs dan verwacht.",
+      "vocabulaire_cible": [
+        "het testscenario",
+        "de bevinding",
+        "de stap",
+        "het verwachte resultaat"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_stamgegevens",
+      "metier": "it_sap",
+      "poste": "junior SAP-consultant",
+      "canal": "email",
+      "type": "proposition_solution",
+      "niveau": "B1",
+      "contexte": "Par e-mail, tu signales à la responsable des achats que le fichier des articles à migrer contient des doublons, et tu proposes comment les nettoyer.",
+      "amorce": "Dag, ik heb je vraag over het artikelbestand voor de migratie gelezen. Wat bedoel je precies met 'dubbele artikelen'?",
+      "vocabulaire_cible": [
+        "de stamgegevens",
+        "de datamigratie",
+        "het duplicaat",
+        "de deadline"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_golive_printer",
+      "metier": "it_sap",
+      "poste": "IT-supportmedewerker",
+      "canal": "telephone_client",
+      "type": "urgence",
+      "niveau": "B1",
+      "contexte": "Jour du démarrage de SAP : le magasin appelle, plus aucun bon de livraison ne s'imprime et les camions attendent.",
+      "amorce": "Met het magazijn. Sinds vanmorgen komen er geen leveringsbonnen meer uit de printer, en er staan al twee vrachtwagens te wachten!",
+      "vocabulaire_cible": [
+        "de livegang",
+        "de leveringsbon",
+        "de printer",
+        "de tijdelijke oplossing"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_uitleg_terugmelden",
+      "metier": "it_sap",
+      "poste": "junior SAP-consultant",
+      "canal": "collegue_interne",
+      "type": "clarification",
+      "niveau": "B1",
+      "contexte": "Tu expliques à un chef d'équipe de l'atelier comment déclarer un ordre de production terminé dans SAP.",
+      "amorce": "Ze zeggen dat ik nu zelf mijn productieorders moet terugmelden in SAP. Ik heb dat nog nooit gedaan. Hoe werkt dat?",
+      "vocabulaire_cible": [
+        "het productieorder",
+        "terugmelden",
+        "de hoeveelheid",
+        "de handleiding"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_wijziging",
+      "metier": "it_sap",
+      "poste": "junior SAP-consultant",
+      "canal": "reunion",
+      "type": "negociation",
+      "niveau": "B1",
+      "contexte": "Le responsable de production demande un champ en plus dans SAP : tu clarifies le besoin, le coût et la priorité avant la validation.",
+      "amorce": "We willen in SAP een extra veld voor de kleur van het doek. Dat moet er volgende week in zitten, kan dat?",
+      "vocabulaire_cible": [
+        "de wijzigingsaanvraag",
+        "het extra veld",
+        "de prioriteit",
+        "de stuurgroep"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "sap_nieuwe_collega",
+      "metier": "it_sap",
+      "poste": "IT-supportmedewerker",
+      "canal": "balie",
+      "type": "administratif",
+      "niveau": "B1",
+      "contexte": "Une nouvelle collègue arrive : tu lui remets son ordinateur portable, tu l'aides à se connecter et tu lui rappelles les règles de sécurité.",
+      "amorce": "Goedemorgen, ik ben Lies, ik begin vandaag in de boekhouding. Ze zeiden dat ik bij IT mijn laptop kon ophalen?",
+      "vocabulaire_cible": [
+        "de laptop",
+        "het account",
+        "de tweestapsverificatie",
+        "de phishingmail"
+      ],
+      "_source": "redige_claude"
     }
   ],
   "journees": [
@@ -2814,6 +2984,38 @@
         "apr_heftruck_dringend"
       ],
       "_source": "transcriptions_joas_anonymisees"
+    },
+    {
+      "id": "journee_sap_projet",
+      "metier": "it_sap",
+      "label": "Journée type de consultant SAP en projet (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "sap_standup",
+        "sap_fitgap",
+        "sap_testdefect",
+        "sap_stamgegevens",
+        "sap_wijziging",
+        "sap_uitleg_terugmelden"
+      ],
+      "_source": "redige_claude"
+    },
+    {
+      "id": "journee_sap_support",
+      "metier": "it_sap",
+      "label": "Journée au support IT pendant le démarrage de SAP (courte)",
+      "duree_situations": 6,
+      "courbe_intensite": "calme_pic_calme",
+      "sequence": [
+        "sap_standup",
+        "sap_wachtwoord",
+        "sap_foutmelding",
+        "sap_golive_printer",
+        "sap_nieuwe_collega",
+        "sap_uitleg_terugmelden"
+      ],
+      "_source": "redige_claude"
     }
   ]
 }

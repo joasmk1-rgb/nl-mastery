@@ -1,0 +1,120 @@
+id;fr;nl;freq
+THEME_IT_SAP_0;le support informatique;de IT-support;4.18
+THEME_IT_SAP_1;le service informatique;de IT-afdeling;4.54
+THEME_IT_SAP_2;le ticket;het ticket;4.12
+THEME_IT_SAP_3;l'utilisateur;de gebruiker;4.56
+THEME_IT_SAP_4;le compte utilisateur;het account;4.78
+THEME_IT_SAP_5;le nom d'utilisateur;de gebruikersnaam;3.52
+THEME_IT_SAP_6;le mot de passe;het wachtwoord;4.02
+THEME_IT_SAP_7;réinitialiser le mot de passe;het wachtwoord resetten;3.10
+THEME_IT_SAP_8;bloqué;geblokkeerd;4.10
+THEME_IT_SAP_9;se connecter;inloggen;3.86
+THEME_IT_SAP_10;se déconnecter;afmelden;2.99
+THEME_IT_SAP_11;la double authentification;de tweestapsverificatie;2.00
+THEME_IT_SAP_12;l'ordinateur portable;de laptop;4.46
+THEME_IT_SAP_13;l'écran;het scherm;4.40
+THEME_IT_SAP_14;la capture d'écran;de schermafdruk;2.04
+THEME_IT_SAP_15;le message d'erreur;de foutmelding;3.40
+THEME_IT_SAP_16;le bug;de bug;3.48
+THEME_IT_SAP_17;la panne;de storing;3.97
+THEME_IT_SAP_18;le réseau;het netwerk;4.86
+THEME_IT_SAP_19;le serveur;de server;4.21
+THEME_IT_SAP_20;la sauvegarde;de back-up;4.30
+THEME_IT_SAP_21;la mise à jour;de update;4.50
+THEME_IT_SAP_22;les droits d'accès;de toegangsrechten;2.00
+THEME_IT_SAP_23;l'imprimante;de printer;3.54
+THEME_IT_SAP_24;le mail d'hameçonnage;de phishingmail;2.00
+THEME_IT_SAP_25;la sécurité informatique;de informatiebeveiliging;2.90
+THEME_IT_SAP_26;le service d'assistance;de helpdesk;3.45
+THEME_IT_SAP_27;la priorité;de prioriteit;4.10
+THEME_IT_SAP_28;urgent;dringend;4.35
+THEME_IT_SAP_29;la solution provisoire;de tijdelijke oplossing;4.37
+THEME_IT_SAP_30;la cause;de oorzaak;4.62
+THEME_IT_SAP_31;l'incident;het incident;4.30
+THEME_IT_SAP_32;résolu;opgelost;4.50
+THEME_IT_SAP_33;en cours de traitement;in behandeling;4.75
+THEME_IT_SAP_34;le progiciel de gestion (ERP);het ERP-systeem;3.42
+THEME_IT_SAP_35;le consultant SAP;de SAP-consultant;3.48
+THEME_IT_SAP_36;le consultant technique;de technisch consultant;3.61
+THEME_IT_SAP_37;l'utilisateur clé;de sleutelgebruiker;2.00
+THEME_IT_SAP_38;le module;de module;3.65
+THEME_IT_SAP_39;le module achats;de inkoopmodule;2.00
+THEME_IT_SAP_40;le module ventes;de verkoopmodule;2.00
+THEME_IT_SAP_41;le module finance;de financiële module;3.62
+THEME_IT_SAP_42;la planification de la production;de productieplanning;2.00
+THEME_IT_SAP_43;la gestion des stocks;het voorraadbeheer;2.51
+THEME_IT_SAP_44;les données de base;de stamgegevens;2.00
+THEME_IT_SAP_45;la fiche article;de artikelstam;2.00
+THEME_IT_SAP_46;la fiche fournisseur;de leveranciersstam;2.00
+THEME_IT_SAP_47;la transaction;de transactie;3.65
+THEME_IT_SAP_48;le code de transaction;de transactiecode;2.00
+THEME_IT_SAP_49;l'écran de saisie;het invoerscherm;2.00
+THEME_IT_SAP_50;le champ;het veld;4.75
+THEME_IT_SAP_51;le champ obligatoire;het verplichte veld;4.04
+THEME_IT_SAP_52;la configuration;de configuratie;3.32
+THEME_IT_SAP_53;le développement spécifique;het maatwerk;3.49
+THEME_IT_SAP_54;le standard;de standaard;4.72
+THEME_IT_SAP_55;le processus standard;het standaardproces;2.00
+THEME_IT_SAP_56;l'atelier (réunion de travail);de workshop;4.58
+THEME_IT_SAP_57;l'analyse des écarts (fit-gap);de fit-gapanalyse;2.00
+THEME_IT_SAP_58;le besoin;de behoefte;4.62
+THEME_IT_SAP_59;le cahier des charges;het lastenboek;2.00
+THEME_IT_SAP_60;la demande de changement;de wijzigingsaanvraag;2.00
+THEME_IT_SAP_61;le rôle (droits);de rol;5.22
+THEME_IT_SAP_62;l'autorisation;de autorisatie;2.90
+THEME_IT_SAP_63;la migration des données;de datamigratie;2.00
+THEME_IT_SAP_64;le doublon;het duplicaat;2.58
+THEME_IT_SAP_65;nettoyer les données;de data opschonen;2.75
+THEME_IT_SAP_66;le fichier de chargement;het laadbestand;2.00
+THEME_IT_SAP_67;le test utilisateur;de gebruikerstest;2.00
+THEME_IT_SAP_68;le scénario de test;het testscenario;2.00
+THEME_IT_SAP_69;le constat (de test);de bevinding;2.57
+THEME_IT_SAP_70;le résultat attendu;het verwachte resultaat;3.99
+THEME_IT_SAP_71;l'environnement de test;de testomgeving;2.00
+THEME_IT_SAP_72;l'environnement de production;de productieomgeving;2.00
+THEME_IT_SAP_73;le démarrage (go-live);de livegang;2.00
+THEME_IT_SAP_74;la décision go / no-go;de go/no-gobeslissing;2.00
+THEME_IT_SAP_75;le plan de bascule;het cutoverplan;2.00
+THEME_IT_SAP_76;la formation des utilisateurs;de gebruikersopleiding;2.00
+THEME_IT_SAP_77;le mode d'emploi;de handleiding;3.80
+THEME_IT_SAP_78;la commande d'achat;de inkooporder;2.00
+THEME_IT_SAP_79;la demande d'achat;de bestelaanvraag;2.00
+THEME_IT_SAP_80;la réception de marchandises;de goederenontvangst;2.00
+THEME_IT_SAP_81;la sortie de marchandises;de goederenuitgifte;2.00
+THEME_IT_SAP_82;le mouvement de stock;de voorraadbeweging;2.00
+THEME_IT_SAP_83;l'ordre de production;het productieorder;2.00
+THEME_IT_SAP_84;déclarer (une production) terminée;terugmelden;2.00
+THEME_IT_SAP_85;la nomenclature;de stuklijst;2.00
+THEME_IT_SAP_86;la gamme opératoire;de routing;2.37
+THEME_IT_SAP_87;le bon de livraison;de leveringsbon;2.00
+THEME_IT_SAP_88;la clôture de période;de periodeafsluiting;2.00
+THEME_IT_SAP_89;la période comptable;de boekingsperiode;2.00
+THEME_IT_SAP_90;enregistrer (comptabiliser);boeken;5.14
+THEME_IT_SAP_91;le tableau de bord;het dashboard;3.30
+THEME_IT_SAP_92;l'interface (entre deux systèmes);de koppeling;3.77
+THEME_IT_SAP_93;le planning du projet;de projectplanning;2.00
+THEME_IT_SAP_94;le chef de projet;de projectleider;3.61
+THEME_IT_SAP_95;le comité de pilotage;de stuurgroep;2.96
+THEME_IT_SAP_96;la réunion quotidienne (stand-up);de stand-up;4.62
+THEME_IT_SAP_97;le blocage;de blokkering;2.44
+THEME_IT_SAP_98;l'échéance;de deadline;3.75
+THEME_IT_SAP_99;la charge de travail;de werklast;2.17
+THEME_IT_SAP_100;le jalon;de mijlpaal;3.88
+THEME_IT_SAP_101;le risque;het risico;4.82
+THEME_IT_SAP_102;l'action à faire;het actiepunt;2.03
+THEME_IT_SAP_103;le compte rendu;het verslag;4.67
+THEME_IT_SAP_104;le procès-verbal de réunion;de notulen;3.32
+THEME_IT_SAP_105;l'ordre du jour;de agenda;4.56
+THEME_IT_SAP_106;Pouvez-vous envoyer une capture d'écran ?;Kunt u een schermafdruk sturen?;3.50
+THEME_IT_SAP_107;Je crée un ticket.;Ik maak er een ticket van.;3.50
+THEME_IT_SAP_108;Je vérifie tout de suite.;Ik kijk het meteen na.;3.50
+THEME_IT_SAP_109;Depuis quand avez-vous ce problème ?;Sinds wanneer heeft u dat probleem?;3.50
+THEME_IT_SAP_110;Essayez de vous déconnecter et de vous reconnecter.;Probeer even af te melden en opnieuw in te loggen.;3.50
+THEME_IT_SAP_111;Je transmets aux collègues techniques.;Ik geef het door aan de technische collega's.;3.50
+THEME_IT_SAP_112;Dans le standard, ça fonctionne comme ça.;In de standaard werkt het zo.;3.50
+THEME_IT_SAP_113;Ce serait du développement spécifique.;Dat zou maatwerk zijn.;3.50
+THEME_IT_SAP_114;Hier j'ai terminé…, aujourd'hui je travaille sur…;Gisteren heb ik … afgewerkt, vandaag werk ik aan …;3.50
+THEME_IT_SAP_115;Je suis bloqué sur…;Ik zit vast op …;3.50
+THEME_IT_SAP_116;Qui prend cette action ?;Wie neemt dat actiepunt op?;3.50
+THEME_IT_SAP_117;Pour quand en avez-vous besoin ?;Tegen wanneer heeft u dat nodig?;3.50
+THEME_IT_SAP_118;J'envoie un compte rendu tout à l'heure.;Ik stuur straks een verslag rond.;3.50

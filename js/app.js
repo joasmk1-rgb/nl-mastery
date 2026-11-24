@@ -2520,7 +2520,8 @@ if (firebaseAvailable) {
                 'THEME_PMO.csv',
                 'THEME_ERP.csv',
                 'THEME_KANTOORSOFTWARE.csv',
-                'THEME_ADMIN_PRODUCTIE.csv'
+                'THEME_ADMIN_PRODUCTIE.csv',
+                'THEME_IT_SAP.csv'
             ];
             const errors = [];
             const loadedThemes = [];
@@ -5270,7 +5271,12 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
                 </div>`;
         }
 
-        // lines : [{ qui: 'A' | 'B' | 'titre', nl, fr }] ; roles : { A, B } ; back : fonction de retour.
+        // Voix d'un personnage de scène : A et B = les deux voix de l'appareil, C et D (réunions à
+        // plusieurs) = les mêmes voix, plus aiguë ou plus grave, pour qu'on les distingue.
+        const SCENE_VOICES = { A: { speaker: 0 }, B: { speaker: 1 }, C: { speaker: 0, pitch: 1.3 }, D: { speaker: 1, pitch: 0.8 } };
+        function sceneVoiceOpt(qui) { return SCENE_VOICES[qui] || SCENE_VOICES.A; }
+
+        // lines : [{ qui: 'A' | 'B' | 'C' | 'D' | 'titre', nl, fr }] ; roles : { A, B… } ; back : fonction de retour.
         function sceneOpen(scene) {
             conjAudioStop();
             sceneCurrent = scene;
@@ -5322,11 +5328,11 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
                 if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
                 const rate = sceneRate(), mode = sceneMode();
                 if (l.qui === 'titre') { await conjAudioWait(600); continue; }
-                const speaker = l.qui === 'B' ? 1 : 0;
+                const voice = sceneVoiceOpt(l.qui);
                 // Pauses raccourcies quand la lecture va plus vite.
                 const gap = ms => conjAudioWait(Math.round(ms * Math.min(1, 0.95 / rate)));
                 if (mode === 'fr_nl' && l.fr) { await conjAudioSay(l.fr, 'fr', rate); await gap(250); }
-                await conjAudioSay(l.nl, 'nl', rate, { speaker });
+                await conjAudioSay(l.nl, 'nl', rate, voice);
                 if (mode === 'nl_fr' && l.fr) { await gap(250); await conjAudioSay(l.fr, 'fr', rate); }
                 await gap(500);
             }
@@ -5434,7 +5440,7 @@ Réponds UNIQUEMENT en JSON : {"mots": [{"mot": "", "blocs": [{"c": "", "ex": ""
             try {
                 const have = await sharedScenesGet(key);
                 if (have.length >= SHARED_SCENES_MAX) return;
-                await ref.set({ key, lang: studyLangCode(), versions: firebase.firestore.FieldValue.arrayUnion({ roleA: sc.roleA || '', lignes: sc.lignes, at: sc.at }) }, { merge: true });
+                await ref.set({ key, lang: studyLangCode(), versions: firebase.firestore.FieldValue.arrayUnion(Object.assign({ roleA: sc.roleA || '', lignes: sc.lignes, at: sc.at }, sc.roles ? { roles: sc.roles } : {})) }, { merge: true });
             } catch (e) { console.warn('Bibliothèque de scènes :', e.message); }
         }
         async function sharedScenesRemove(key, at) {
@@ -6561,7 +6567,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             THEME_BASE: '📚 Base', THEME_MARKETING: '📣 Marketing', THEME_FINANCE: '💰 Finance',
             THEME_COMPTABILITE: '🧾 Comptabilité', THEME_LOGISTIQUE: '📦 Logistique',
             THEME_SUPPLYCHAIN: '🚚 Supply Chain', THEME_MANAGEMENT: '🧭 Management', THEME_RH: '👥 RH',
-            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', THEME_KANTOORSOFTWARE: '💻 Logiciels de bureau', THEME_ADMIN_PRODUCTIE: '🏭 Admin. production', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
+            THEME_ENTRETIEN: '🤝 Entretien', THEME_BUSINESS_ANALYST: '📊 Business analyst', THEME_CONSULTANT: '💼 Consultant', THEME_PROJET: '🗂️ Gestion de projet', THEME_BIBLIOTHEQUE: '📚 Bibliothèque', THEME_DATA: '📈 Data', THEME_PMO: '🧭 PMO', THEME_ERP: '🧩 Logiciel / ERP', THEME_KANTOORSOFTWARE: '💻 Logiciels de bureau', THEME_ADMIN_PRODUCTIE: '🏭 Admin. production', THEME_IT_SAP: '🖥️ IT / SAP', MOTS_LABO: 'Mots Labo', KITS_JEU_DE_ROLE: '🎭 Kits jeu de rôle',
             MOTS_JEU_DE_ROLE: '🎭 Mots repérés en jeu de rôle', MON_PORTRAIT: '🪪 Mon portrait'
         };
         function categoryLabel(file) {
@@ -8848,7 +8854,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         function rpFrBarRender() {
             const bar = document.getElementById('rp-fr-bar');
             if (!bar) return;
-            const ok = studyLangCode() === 'nl' && rpCurrentScenario && rpCurrentScenario.lang !== 'en' && !rpScriptedActive;
+            const ok = studyLangCode() === 'nl' && rpCurrentScenario && rpCurrentScenario.lang !== 'en' && !rpScriptedActive && !rpCurrentScenario.meeting;
             const started = rpConversationHistory.length > 1;
             bar.innerHTML = !ok ? '' : rpFrMode
                 ? `<div class="ts-bar"><span>🇫🇷 En français</span><button type="button" class="btn btn-green" onclick="rpFrFinish()">🏁 J'ai fini : en néerlandais</button><button type="button" class="report-link" onclick="rpFrStop()">Repasser en néerlandais</button></div>`
@@ -8890,10 +8896,21 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             twoStepShow(rpCurrentScenario.label, 'L\'autre', lines, document.getElementById('rp-twostep'));
         }
 
-        function rpAppendMessage(text, sender) {
+        function rpAppendMessage(text, sender, oneLine) {
+            // Réunion à plusieurs : une bulle par participant (« Geert: … »), avec son nom.
+            const meet = sender === 'assistant' && rpCurrentScenario && rpCurrentScenario.meeting;
+            if (meet && !oneLine) {
+                const parts = rpMeetLines(text);
+                let last = null;
+                parts.forEach(p => { last = rpAppendMessage(p.who ? p.who + ': ' + p.text : p.text, 'assistant', true); });
+                return last;
+            }
+            const who = meet ? rpMeetLines(text)[0] : null;
+            if (who && who.who) text = who.text;
             const historyDiv = document.getElementById('rp-chat-history');
             const msgDiv = document.createElement('div');
             msgDiv.className = `rp-message ${sender}`;
+            if (who && who.who) msgDiv.classList.add('meet-' + rpMeetVoiceKey(who.who));
             // Répliques de l'interlocuteur en néerlandais : mots cliquables, inconnus soulignés.
             const en = !!(rpCurrentScenario && rpCurrentScenario.lang === 'en');
             if (sender === 'assistant' && rpFrMode) {
@@ -8911,6 +8928,11 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             if (sender === 'assistant') {
                 msgDiv.dataset.text = text;
                 msgDiv.insertAdjacentHTML('beforeend', `<div class="talk-tools">${en ? '' : '<button type="button" onclick="rpSpeakText(this.closest(\'.rp-message\').dataset.text)" title="Réécouter">🔊</button>'}${rpFrMode ? '' : '<button type="button" onclick="rpMsgTranslate(this)" title="Traduire en français">🌐</button>'}</div><div class="talk-fr"></div>`);
+            }
+            if (who && who.who) {
+                const p = rpMeetPerson(who.who);
+                msgDiv.insertAdjacentHTML('afterbegin', `<span class="rp-who">${rpEscapeHtml(who.who + (p && p.fonction_nl ? ' · ' + p.fonction_nl : ''))}</span>`);
+                msgDiv.dataset.text = who.who + ': ' + text;
             }
             historyDiv.appendChild(msgDiv);
             historyDiv.scrollTop = historyDiv.scrollHeight;
@@ -9313,6 +9335,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
             // lieu d'être dupliqué.
             // Scénario réel mené en anglais : pas de lecture, la voix configurée est néerlandaise.
             if (rpCurrentScenario && rpCurrentScenario.lang === 'en') return;
+            if (rpCurrentScenario && rpCurrentScenario.meeting) { rpMeetSpeak(text); return; }
             if (rpFrMode) { conjAudioSpeak(text, 'fr', 1.05); return; }
             speakNL(text);
         }
@@ -9342,7 +9365,7 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
         // Bouton retour de la liste de scénarios : revient au choix de catégorie du groupe, ou à
         // Pratiquer quand le groupe n'a qu'une entrée (sinon on retomberait sur une carte unique).
         function rpBackFromScenarioList() {
-            if (rpCurrentCategory === '__lib:travail') rpShowJobHome();
+            if (rpCurrentCategory === '__lib:travail' || rpCurrentCategory === '__meet') rpShowJobHome();
             else rpShowCategoryPicker();
         }
 
@@ -9397,6 +9420,8 @@ Reste bref et concret, évite les corrections interminables. Ne remets jamais en
                 rpShowJobHome();
             } else if (rpCurrentCategory === '__case') {
                 rpShowCaseHome();
+            } else if (rpCurrentCategory === '__meet') {
+                meetShowHome();
             } else if (rpCurrentCategory && rpCurrentCategory.startsWith('__mod:')) {
                 showModuleRp(rpCurrentCategory.slice(6));
             } else if (rpCurrentCategory && rpCurrentCategory.startsWith('__lib:')) {
@@ -10534,6 +10559,8 @@ Réponds UNIQUEMENT en JSON : {"fond_ok": true, "manque_fr": "", "juste": true, 
             data_analyst: { label: '📈 Data analyst junior', domaine: 'analyse de données (data analyst junior)', noms: 'Zonvella pour l\'entreprise du candidat, Delmaro ou Logistiko pour des clients' },
             pmo: { label: '🧭 PMO (pilotage de projets)', domaine: 'PMO, pilotage de portefeuille de projets (assistant(e) PMO junior)', noms: 'Zonvella pour l\'entreprise du candidat, Transvio ou Delmaro pour des fournisseurs' },
             consultant_fonctionnel: { label: '🧩 Consultant fonctionnel', domaine: 'conseil fonctionnel en logiciel de gestion / ERP (consultant fonctionnel junior)', noms: 'Zonvella pour l\'éditeur ou l\'intégrateur du candidat, Delmaro ou Logistiko pour des clients (PME)' },
+            // IT et SAP mélangés (Joas, 24 novembre 2026) : support informatique + consultant SAP junior.
+            it_sap: { label: '🖥️ IT / consultant SAP', domaine: 'IT et conseil SAP (consultant SAP junior et support informatique : tickets, utilisateurs, ateliers, tests, migration des données, démarrage du système)', noms: 'Zonvella pour l\'intégrateur SAP du candidat, Delmaro ou Logistiko pour des clients (entreprises industrielles), Transvio pour un fournisseur de matériel informatique' },
             // Métier privé (prive) : visible seulement pour l'admin, ou pour qui l'a déjà choisi
             // (Joas, octobre 2026 : « un mode accessible que pour moi pour l'instant »). vigilance :
             // fautes fréquentes données au correcteur pendant ses situations (rien de personnel).
@@ -11824,6 +11851,8 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                 ${studyLangCode() === 'nl' ? `<div class="rp-group-title">🧑‍🏫 Ma formation</div>
                 <button class="rp-scenario-btn" onclick="formationOpen()">🧑‍🏫 Mon inwerkperiode${state.formation && state.formation.pos ? ` <small>(moment ${Math.min(state.formation.pos + 1, formationAllMoments().length)} / ${formationAllMoments().length})</small>` : ''}</button>
                 <button class="rp-scenario-btn" onclick="showNumbers(true)">🔢 Les nombres au travail <small>(numéros d'article, quantités, prix, téléphones)</small></button>` : ''}
+                ${studyLangCode() === 'nl' ? `<div class="rp-group-title">🗓️ Réunions à plusieurs</div>
+                <button class="rp-scenario-btn" onclick="meetShowHome()">🗓️ Réunions : écouter ou participer <small>(stock, solutions, mails ; IT et SAP)</small></button>` : ''}
                 <div class="rp-group-title">🏢 Au bureau</div>
                 <button class="rp-scenario-btn" onclick="rpShowLibrary('travail')">🏢 Situations de bureau : réunion, collègues, fournisseurs, congé, évaluation…</button>
                 <div class="rp-group-title">📅 Journée complète</div>
@@ -11934,7 +11963,6 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             const box = document.getElementById('rp-scenario-list');
             const filled = !!(state.companyDossier || '').trim();
             box.innerHTML = `
-                <button class="back-btn" onclick="rpShowJobHome()">← Mon travail</button>
                 <div class="rp-group-title">🧑‍🏫 Ma formation</div>
                 <p class="rp-real-hint">La personne chargée de ta formation t'explique le travail en néerlandais, vérifie que tu as compris et te fait reformuler. Tu peux poser tes questions, même en français. 👂 = écouter sans participer.</p>
                 <button class="rp-scenario-btn rp-profile-btn" onclick="formationEditDossier()">🏭 Mon entreprise <small>(privé, facultatif : ${filled ? 'rempli' : 'vide'})</small></button>
@@ -12355,7 +12383,11 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
             { key: 'ap_abc', metier: 'admin_productie', label: '🅰️ Analyse ABC', sujet: 'à partir d\'une courte liste de références avec leur consommation et leur valeur, lesquelles faut-il surveiller de près et pourquoi ?' },
             { key: 'ap_couverture', metier: 'admin_productie', label: '📆 Couverture de stock', sujet: 'avec le stock actuel et la consommation moyenne par semaine, combien de temps la production est-elle couverte, et faut-il commander maintenant ?' },
             { key: 'ap_kanban', metier: 'admin_productie', label: '🗂️ Paramètres kanban', sujet: 'la consommation d\'un composant a fortement changé : le point de commande et la quantité par bac kanban sont-ils encore bons ?' },
-            { key: 'ap_retard', metier: 'admin_productie', label: '⏳ Retard fournisseur', sujet: 'une livraison de composants arrive une semaine plus tard que prévu : quelles commandes clients sont touchées, et que proposer ?' }
+            { key: 'ap_retard', metier: 'admin_productie', label: '⏳ Retard fournisseur', sujet: 'une livraison de composants arrive une semaine plus tard que prévu : quelles commandes clients sont touchées, et que proposer ?' },
+            { key: 'sap_tickets', metier: 'it_sap', label: '🎫 Trier les tickets', sujet: 'le lundi matin, le support a reçu douze tickets (mot de passe, imprimante, erreur de facture, système lent…) pour deux personnes : dans quel ordre les traiter, et que dire aux utilisateurs ?' },
+            { key: 'sap_golive', metier: 'it_sap', label: '🚦 Démarrer SAP ou attendre', sujet: 'le démarrage de SAP est prévu dans dix jours, mais il reste des défauts ouverts dans les tests et le magasin n\'est pas encore formé : démarrer, démarrer en partie ou reporter ?' },
+            { key: 'sap_donnees', metier: 'it_sap', label: '🗃️ Données sales', sujet: 'dans le fichier des articles à migrer, 15 % sont en double ou incomplets : qui doit nettoyer, comment, et en combien de temps avant le démarrage ?' },
+            { key: 'sap_maatwerk', metier: 'it_sap', label: '⚙️ Standard ou spécifique', sujet: 'la production veut un écran spécifique dans SAP alors que le standard fait presque la même chose : que conseiller (coût, délai, mises à jour) ?' }
         ];
         let rpCaseMetier = 'logistique';
         const rpCaseThemesOf = m => RP_CASE_THEMES.filter(t => t.metier === m);
@@ -12548,6 +12580,374 @@ Réponds UNIQUEMENT en JSON : {"correct": true, "explication_fr": "une phrase co
                     ${d.conseil ? `<div class="rp-iv-label">Conseil pour la prochaine fois</div><div>${rpEscapeHtml(d.conseil)}</div>` : ''}
                     ${footer}
                 </div>`;
+        }
+
+        // ===== Réunions à plusieurs (Joas, 24 novembre 2026 : « assister à des réunions, même
+        // factices, entre plusieurs interlocuteurs pour m'habituer, et pouvoir y participer » : état
+        // des stocks, responsables, mails, solutions pour débloquer, rapports ; aussi IT et SAP) =====
+        // Pas de fichier de contenu : les sujets sont ici (MEET_THEMES, champ metier) et Gemini
+        // invente la réunion. 👂 Écouter = scène à 4 voix (A préside, C et D participent, B = toi en
+        // modèle ; cache des scènes + bibliothèque commune, clé meet:<sujet>, champ roles).
+        // 🎤 Participer = moteur du jeu de rôle : une fiche de faits (meetGenerate), puis Gemini joue
+        // tous les autres, une ligne « Prénom: réplique » chacun (rpMeetLines : une bulle et une voix
+        // par personne), et finit par [FIN] ; puis bilan (meetDebrief) et ✉️ mail de suivi ou
+        // 📝 compte rendu corrigé (meetWriteCheck), deux appels séparés. Pas de mode « d'abord en
+        // français » ici (une réplique = plusieurs personnes).
+        const MEET_CAST = {
+            admin_productie: {
+                toi: "l'employé administratif de production (il suit le stock, les cartes kanban, les réceptions et les reports de livraison dans le logiciel de gestion)",
+                gens: 'Geert (plant manager), Jens (productieleider), Sandra et Els (aankoop), Kevin (magazijn en kanban), Nathalie (klein magazijn), Wim (interne logistiek), Filip (lakkerij), Dirk (zagerij), Lien (voormontage)',
+                firme: "Zonvella, fabricant de protections solaires (zonwering, terrasoverkappingen, pergola's) ; fournisseurs inventés : Delmaro (composants), Transvio (transport)" },
+            it_sap: {
+                toi: "le consultant SAP junior de l'intégrateur (il suit les tickets, les tests, les données et la formation des utilisateurs)",
+                gens: 'Tom (projectleider bij de klant), Sara (sleutelgebruiker aankoop), Koen (magazijnverantwoordelijke), An (IT-manager), Ruben (technisch consultant), Marieke (financiën), Bram (productieverantwoordelijke)',
+                firme: "Zonvella (l'intégrateur SAP) en projet chez Delmaro, une entreprise industrielle inventée" }
+        };
+        const MEET_THEMES = [
+            { key: 'ap_rupture', metier: 'admin_productie', label: '📉 Une pièce en rupture', ecrit: 'mail', sujet: "un composant va manquer pour la production de la semaine prochaine : combien il en reste, ce qui est commandé, qui peut accélérer, et quelles commandes clients passer en priorité" },
+            { key: 'ap_retard', metier: 'admin_productie', label: '⏳ Le fournisseur livre en retard', ecrit: 'mail', sujet: "le fournisseur annonce une semaine de retard sur des profils : quelles commandes clients sont touchées, faut-il reporter des livraisons (uitstel) ou trouver une autre solution" },
+            { key: 'ap_inventaire', metier: 'admin_productie', label: "🔢 Un écart d'inventaire", ecrit: 'rapport', sujet: "le stock compté ne correspond pas au stock du système pour plusieurs références : d'où vient l'écart (réception mal encodée, sortie oubliée, mauvais emplacement) et qui corrige" },
+            { key: 'ap_kanban', metier: 'admin_productie', label: '🗂️ Les kanbans ne suivent plus', ecrit: 'rapport', sujet: "trop de cartes kanban en attente et des bacs vides au pré-montage : faut-il changer les quantités par bac, le point de commande, ou la façon de traiter les cartes" },
+            { key: 'ap_maandag', metier: 'admin_productie', label: '🏭 La réunion de production du lundi', ecrit: 'mail', sujet: "les priorités de la semaine : commandes urgentes, capacité de la peinture (lakkerij) et du sciage (zagerij), pièces qui manquent, ce que chacun doit faire" },
+            { key: 'ap_kwaliteit', metier: 'admin_productie', label: '⚠️ Un lot non conforme', ecrit: 'mail', sujet: "un lot de pièces reçu a un défaut (mauvaise couleur ou mauvaise longueur) : bloquer le stock, prévenir le fournisseur, et comment continuer à produire" },
+            { key: 'ap_analyse', metier: 'admin_productie', label: '📊 Présenter mon analyse de stock', ecrit: 'rapport', sujet: "l'employé présente son analyse : articles qui ne bougent plus (stock dormant), couverture en semaines, articles à risque de rupture ; les autres posent des questions et décident quoi faire" },
+            { key: 'ap_erp', metier: 'admin_productie', label: '🔄 Le passage à SAP', ecrit: 'mail', sujet: "réunion avec le consultant SAP et les utilisateurs clés : ce qui pose problème aujourd'hui dans l'encodage du stock, les données d'articles à nettoyer avant la migration, qui teste quoi" },
+            { key: 'sap_standup', metier: 'it_sap', label: '☀️ Le daily stand-up', ecrit: 'rapport', sujet: "chacun dit ce qu'il a fait hier, ce qu'il fait aujourd'hui et ce qui le bloque ; un blocage doit être réglé (qui aide qui)" },
+            { key: 'sap_fitgap', metier: 'it_sap', label: '🧩 Atelier fit-gap achats', ecrit: 'rapport', sujet: "les utilisateurs des achats décrivent leur façon de travailler ; on la compare au standard SAP ; on note les écarts et ce qui est vraiment nécessaire" },
+            { key: 'sap_incident', metier: 'it_sap', label: '🚨 Incident en production', ecrit: 'mail', sujet: "depuis ce matin, le magasin ne peut plus imprimer les bons de livraison dans SAP : solution provisoire, cause, qui prévient qui, délai" },
+            { key: 'sap_tests', metier: 'it_sap', label: '🧪 Bilan des tests utilisateurs', ecrit: 'rapport', sujet: "combien de scénarios réussis, quels défauts restent ouverts et lesquels bloquent le démarrage, qui reteste et quand" },
+            { key: 'sap_gonogo', metier: 'it_sap', label: '🚦 Go ou no-go', ecrit: 'mail', sujet: "comité de pilotage : démarrer SAP lundi, démarrer en partie, ou reporter ? risques, formation pas finie, données pas propres" },
+            { key: 'sap_migratie', metier: 'it_sap', label: '🗃️ La migration des données', ecrit: 'mail', sujet: "des articles en double et des fiches fournisseurs incomplètes : qui nettoie, comment, et pour quand avant le chargement" },
+            { key: 'sap_wijziging', metier: 'it_sap', label: '📝 Une demande de changement', ecrit: 'mail', sujet: "la production veut un champ en plus dans SAP : besoin réel, coût, délai, priorité, validation par le comité" },
+            { key: 'sap_voorraad', metier: 'it_sap', label: '📦 Le stock SAP est faux', ecrit: 'rapport', sujet: "après le démarrage, le stock dans SAP ne correspond plus au magasin : mouvements mal encodés, formation des magasiniers, comment corriger" }
+        ];
+        const MEET_WRITE = { mail: { label: '✉️ le mail de suivi', fr: 'le mail de suivi' }, rapport: { label: '📝 le compte rendu', fr: 'le compte rendu' } };
+        const MEET_LIST = '🗓️ Mes réunions';
+        const MEET_VOICES = ['A', 'B', 'C']; // voix des participants joués par Gemini (les deux voix de l'appareil d'abord)
+        let rpMeetState = null; // { t, s, turns, decisions } pendant une réunion et son bilan
+        let meetWriteRec = null;
+
+        function meetCast(m) {
+            return MEET_CAST[m] || { toi: 'un employé qui participe à la réunion', gens: 'des collègues aux prénoms flamands inventés', firme: (RP_METIERS[m] && RP_METIERS[m].noms) || 'une entreprise inventée' };
+        }
+        function meetDomain(m) { return RP_METIERS[m] ? RP_METIERS[m].domaine : m; }
+        // Métier choisi d'abord, puis les autres (Joas : « mixe les » stock et IT / SAP).
+        function meetGroups() {
+            const mine = (state.settings && state.settings.jobMetier) || rpJobMetier;
+            return [...new Set(MEET_THEMES.map(t => t.metier))].filter(metierVisible).sort((a, b) => (b === mine) - (a === mine));
+        }
+        function meetShowHome() {
+            rpCurrentCategory = '__meet';
+            rpMeetState = null;
+            rpHideInterviewer();
+            rpJobHideDebrief();
+            const row = t => `<div class="rp-scenario-row"><button class="rp-scenario-btn" onclick="meetStart('${t.key}')">🎤 ${rpEscapeHtml(t.label)}</button><button type="button" class="rp-prep-btn" onclick="meetListen('${t.key}')" title="Écouter la réunion, comme spectateur">👂</button></div>`;
+            document.getElementById('rp-scenario-list').innerHTML = `
+                <div class="rp-group-title">🗓️ Réunions à plusieurs</div>
+                <p class="rp-real-hint">🎤 Tu participes : une fiche avec tes chiffres, puis trois collègues qui parlent entre eux et te demandent où on en est, qui est responsable, ce que tu proposes. À la fin, tu écris le mail ou le compte rendu.<br>👂 Tu écoutes une réunion entière, avec « toi » en modèle.</p>
+                ${meetGroups().map(m => `<div class="rp-job-canal">${RP_JOB_METIERS[m] || rpEscapeHtml(m)}</div>` + MEET_THEMES.filter(t => t.metier === m).map(row).join('')).join('')}
+                <div id="meet-status" class="rp-real-hint" style="margin-top:8px;"></div>`;
+            document.getElementById('rp-step-category').style.display = 'none';
+            document.getElementById('rp-step-scenario').style.display = '';
+            document.getElementById('rp-step-chat').style.display = 'none';
+        }
+
+        // ----- Répliques « Prénom: texte » -----
+        function rpMeetPerson(name, meeting) {
+            const m = meeting || (rpCurrentScenario && rpCurrentScenario.meeting);
+            return m ? m.participants.find(p => p.nom.toLowerCase() === String(name).toLowerCase()) || null : null;
+        }
+        function rpMeetVoiceKey(name, meeting) {
+            const m = meeting || (rpCurrentScenario && rpCurrentScenario.meeting);
+            const i = m ? m.participants.findIndex(p => p.nom.toLowerCase() === String(name).toLowerCase()) : -1;
+            return MEET_VOICES[i] || 'A';
+        }
+        function rpMeetLines(text, meeting) {
+            const m = meeting || (rpCurrentScenario && rpCurrentScenario.meeting);
+            const src = String(text || '');
+            const names = m ? m.participants.map(p => p.nom).filter(Boolean) : [];
+            if (!names.length) return [{ who: null, text: src.trim() }];
+            const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const re = new RegExp('(^|[\\s"«])(' + names.map(esc).join('|') + ')\\s*:\\s*', 'gi');
+            const marks = [];
+            let k;
+            while ((k = re.exec(src))) marks.push({ name: (rpMeetPerson(k[2], m) || { nom: k[2] }).nom, start: k.index + k[1].length, end: re.lastIndex });
+            if (!marks.length) return [{ who: null, text: src.trim() }];
+            const out = [];
+            const before = src.slice(0, marks[0].start).trim();
+            if (before) out.push({ who: null, text: before });
+            marks.forEach((x, i) => { const body = src.slice(x.end, i + 1 < marks.length ? marks[i + 1].start : src.length).trim(); if (body) out.push({ who: x.name, text: body }); });
+            return out;
+        }
+        // Chaque participant avec sa voix, l'un après l'autre ; s'arrête si l'écran change.
+        let rpMeetSpeakId = 0;
+        async function rpMeetSpeak(text) {
+            const id = ++rpMeetSpeakId;
+            const ss = window.speechSynthesis;
+            if (ss && (ss.speaking || ss.pending)) { ss.cancel(); await new Promise(r => setTimeout(r, 150)); }
+            const meeting = rpCurrentScenario && rpCurrentScenario.meeting;
+            for (const p of rpMeetLines(text, meeting)) {
+                const view = document.getElementById('roleplay-view');
+                if (id !== rpMeetSpeakId || !(rpCurrentScenario && rpCurrentScenario.meeting === meeting) || !(view && view.classList.contains('active'))) return;
+                await conjAudioSpeak(p.text, 'nl', 0.95, sceneVoiceOpt(p.who ? rpMeetVoiceKey(p.who, meeting) : 'A'));
+            }
+        }
+
+        // ----- 👂 Écouter une réunion -----
+        function meetListenPrompt(t) {
+            const c = meetCast(t.metier);
+            return `Écris une RÉUNION DE TRAVAIL réaliste en néerlandais de Flandre (oral naturel, niveau B1-B2, phrases pas trop longues), pour un francophone qui apprend à suivre des réunions et à y participer.
+Domaine : ${meetDomain(t.metier)}. Entreprise : ${c.firme}.
+Sujet : ${t.sujet}.
+Quatre personnes. A préside, C et D participent : choisis-les parmi ${c.gens}, selon le sujet. B est ${c.toi}, un francophone qui parle bien néerlandais : il sert de MODÈLE (il donne l'état précis avec des chiffres, dit qui est responsable de quoi, propose une solution pour débloquer, et s'engage à envoyer ${MEET_WRITE[t.ecrit].fr}).
+Une vraie réunion : ouverture, tour de table, chiffres précis et cohérents (références d'article à 7 chiffres, quantités, dates), une question de précision, un désaccord poli, des solutions discutées (coût, délai), puis A résume les décisions (qui fait quoi, pour quand). 22 à 30 répliques, dans un ordre naturel (pas un tour fixe). Seulement des noms inventés, jamais de vraie entreprise ni de vraie personne.
+Réponds UNIQUEMENT en JSON : {"titre_fr":"titre court","roles":{"A":"Prénom · fonction en néerlandais","C":"…","D":"…"},"lignes":[{"qui":"A","nl":"réplique","fr":"traduction française"}]}`;
+        }
+        async function meetListenGenerate(t) {
+            const obj = rpHelpParseJson(await GeminiService.generate(meetListenPrompt(t)));
+            const lignes = obj && Array.isArray(obj.lignes) ? obj.lignes.filter(l => l && /^[ABCD]$/.test(l.qui) && l.nl).map(l => ({ qui: l.qui, nl: String(l.nl), fr: String(l.fr || '') })) : [];
+            if (lignes.length < 8) throw new Error('réunion incomplète');
+            const r = (obj && obj.roles) || {};
+            const sc = { roleA: String(r.A || 'Le président'), roles: { A: String(r.A || 'Le président'), B: 'Toi (modèle)', C: String(r.C || 'Un participant'), D: String(r.D || 'Une participante') }, lignes, at: Date.now() };
+            const key = 'meet:' + t.key, c = scenesCache();
+            c[key] = (c[key] || []).concat(sc).slice(-3);
+            scenesSave(c);
+            sharedScenesAdd(key, sc);
+            return sc;
+        }
+        // Une réunion déjà écrite (cet appareil, puis la bibliothèque commune), sinon Gemini.
+        async function meetFetch(t, forceNew) {
+            const key = 'meet:' + t.key;
+            const saved = scenesCache()[key] || [];
+            if (saved.length && !forceNew) return saved[saved.length - 1];
+            const lib = await sharedScenesPick(key, saved);
+            const sc = lib.pick && (!forceNew || lib.full || !GeminiService.getKey()) ? lib.pick
+                : (lib.full && lib.all.length ? lib.all[Math.floor(Math.random() * lib.all.length)] : null);
+            if (sc) { const c = scenesCache(); c[key] = (c[key] || []).filter(s => s.at !== sc.at).concat(sc).slice(-3); scenesSave(c); return sc; }
+            if (!GeminiService.getKey()) return null;
+            return meetListenGenerate(t);
+        }
+        async function meetListen(k, forceNew, backFn) {
+            const t = MEET_THEMES.find(x => x.key === k);
+            if (!t) return;
+            const back = backFn || (() => { showRoleplay('travail'); meetShowHome(); });
+            const title = '🗓️ ' + t.label.replace(/^\S+\s/, '');
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('scene-view').classList.add('active');
+            sceneCurrent = { back };
+            const box = document.getElementById('scene-content');
+            const fail = msg => { box.innerHTML = `<h2>👂 ${rpEscapeHtml(title)}</h2><p style="color:var(--wrong);">${msg}</p><button class="btn btn-gray" onclick="sceneBack()">← Retour</button>`; };
+            box.innerHTML = `<h2>👂 ${rpEscapeHtml(title)}</h2><p class="prep-sub">Je prépare la réunion…</p>`;
+            let sc = null;
+            try { sc = await meetFetch(t, forceNew); } catch (e) { fail('Réunion impossible à écrire : ' + rpEscapeHtml(e.message)); return; }
+            if (!sc) { fail("Aucune réunion enregistrée pour l'instant : il faut une clé Gemini pour en écrire une (Profil → 🤖 Intelligence IA)."); return; }
+            sceneOpen({ title, subtitle: 'Réunion à plusieurs : écoute comme si tu y étais. « Toi (modèle) » montre comment intervenir.', lines: sc.lignes,
+                roles: sc.roles || { A: sc.roleA, B: 'Toi (modèle)' }, back, regen: () => meetListen(k, true, backFn) });
+            box.insertAdjacentHTML('beforeend', sceneAdminBtnHtml('meet:' + k, sc.at));
+        }
+
+        // ----- 🎤 Participer -----
+        async function meetGenerate(t) {
+            const c = meetCast(t.metier);
+            const obj = rpHelpParseJson(await GeminiService.generate(`Prépare une RÉUNION DE TRAVAIL réaliste en Flandre, pour un exercice de néerlandais oral (apprenant francophone, niveau ${liveLevel()}).
+Domaine : ${meetDomain(t.metier)}. Entreprise : ${c.firme}.
+Sujet : ${t.sujet}.
+L'apprenant y participe en tant que : ${c.toi}.
+Trois participants, joués par l'IA, choisis parmi ${c.gens} selon le sujet ; le premier préside.
+Invente 4 à 6 FAITS précis et cohérents que l'apprenant a sous les yeux et devra donner pendant la réunion (références d'article à 7 chiffres, quantités, stock, consommation par semaine, dates, fournisseur, qui est responsable de quoi). Seulement des noms inventés, jamais de vraie entreprise.
+L'ouverture : 2 ou 3 répliques courtes en néerlandais ; le président ouvre, quelqu'un pose le problème, la dernière demande à l'apprenant (jij) où on en est.
+Réponds UNIQUEMENT en JSON : {"titre_fr":"titre court","contexte_fr":"2 phrases : pourquoi cette réunion","participants":[{"nom":"prénom seul","fonction_nl":"fonction en néerlandais","fonction_fr":"fonction en français","attitude_fr":"son attitude en 3-4 mots"}],"faits":[{"nl":"fait en néerlandais","fr":"traduction"}],"attendu_fr":["ce qu'on attend de l'apprenant : 3 points courts"],"ouverture":[{"nom":"prénom","nl":"réplique"}],"ecrire_a":"prénoms de ceux qui recevront ${MEET_WRITE[t.ecrit].fr}"}`));
+            if (!obj || !Array.isArray(obj.participants) || !Array.isArray(obj.ouverture)) throw new Error('réunion incomplète');
+            obj.participants = obj.participants.slice(0, 3).map(p => ({ nom: String((p && p.nom) || '').trim().split(/\s+/)[0], fonction_nl: String((p && p.fonction_nl) || ''), fonction_fr: String((p && p.fonction_fr) || ''), attitude_fr: String((p && p.attitude_fr) || '') })).filter(p => p.nom);
+            obj.faits = Array.isArray(obj.faits) ? obj.faits.filter(f => f && f.nl) : [];
+            obj.attendu_fr = Array.isArray(obj.attendu_fr) ? obj.attendu_fr.filter(Boolean).map(String) : [];
+            obj.ouverture = obj.ouverture.filter(o => o && o.nl);
+            if (obj.participants.length < 2 || !obj.ouverture.length) throw new Error('réunion incomplète');
+            obj.ecrire_a = String(obj.ecrire_a || '');
+            return obj;
+        }
+        function meetPrompt(t, s) {
+            const c = meetCast(t.metier);
+            return `Tu joues une RÉUNION DE TRAVAIL à plusieurs, en néerlandais de Flandre (oral naturel, phrases courtes), pour un francophone qui s'entraîne à participer à des réunions. Tu joues TOUS les participants, sauf lui :
+${s.participants.map(p => '- ' + p.nom + ', ' + p.fonction_nl + (p.attitude_fr ? ' (' + p.attitude_fr + ')' : '')).join('\n')}
+${s.participants[0].nom} préside. Entreprise : ${c.firme}. Sujet : ${t.sujet}.
+L'apprenant (« jij ») : ${c.toi}. Il a sous les yeux ces faits : ${s.faits.map(f => f.nl).join(' ; ')}.
+On attend de lui : ${s.attendu_fr.join(' ; ')}.
+L'ouverture a déjà été dite :
+${s.ouverture.map(o => (o.nom || s.participants[0].nom) + ': ' + o.nl).join('\n')}
+
+FORMAT OBLIGATOIRE de chaque réponse : 1 à 3 répliques, chacune sur sa propre ligne, qui commence par le prénom suivi de deux-points (« ${s.participants[0].nom}: … »). Une ou deux phrases par réplique. Rien d'autre : pas de narration, pas de didascalies, jamais de réplique à la place de l'apprenant.
+Comme dans une vraie réunion : ils réagissent à ce qu'il vient de dire, se répondent parfois entre eux (une précision, un chiffre en plus, un désaccord poli, « wie is daarvoor verantwoordelijk? »), et la dernière réplique s'adresse le plus souvent à lui : un chiffre, un responsable, une proposition, un délai, une action. Tout le monde ne parle pas à chaque tour.
+Ils ne savent que ce qu'il dit : un chiffre flou ou faux est relevé ; une solution est discutée (coût, délai, risque) puis décidée. S'il bloque, quelqu'un l'aide avec une question plus simple.
+Après 8 à 12 échanges, ${s.participants[0].nom} résume les décisions (qui fait quoi, pour quand), lui demande d'envoyer ${MEET_WRITE[t.ecrit].fr}${s.ecrire_a ? ' (à ' + s.ecrire_a + ')' : ''}, et termine sa dernière réplique par [FIN]. Jamais avant.`;
+        }
+        async function meetStart(k) {
+            const t = MEET_THEMES.find(x => x.key === k);
+            if (!t || !rpJobRequireGemini()) return;
+            const status = document.getElementById('meet-status');
+            const btns = [...document.querySelectorAll('#rp-scenario-list button')];
+            btns.forEach(b => { b.disabled = true; });
+            if (status) status.innerText = 'Je prépare la réunion : les participants et tes chiffres…';
+            let s;
+            try { s = await meetGenerate(t); }
+            catch (e) {
+                btns.forEach(b => { b.disabled = false; });
+                if (status) status.innerText = 'Impossible de préparer la réunion (' + e.message + '). Réessaie.';
+                return;
+            }
+            if (rpCurrentCategory !== '__meet') return; // parti pendant la préparation
+            rpDayState = null;
+            rpJobLiveMetier = t.metier;
+            const esc = rpEscapeHtml;
+            const welcome = s.ouverture.map(o => (rpMeetPerson(o.nom, s) ? rpMeetPerson(o.nom, s).nom : s.participants[0].nom) + ': ' + o.nl).join('\n');
+            rpBeginScenario({ id: 'meet_' + Date.now(), lang: 'nl', label: s.titre_fr || t.label.replace(/^\S+\s/, ''), welcome, prompt: meetPrompt(t, s), meeting: s });
+            rpMeetState = { t, s };
+            const banner = document.getElementById('rp-mode-banner');
+            banner.style.display = '';
+            banner.innerHTML = `
+                <div class="rp-job-banner">
+                    <div class="rp-iv-label" style="margin-top:0;">🗓️ Réunion · ${esc(s.titre_fr || t.label)}</div>
+                    ${s.contexte_fr ? `<div>${esc(s.contexte_fr)}</div>` : ''}
+                    <div class="rp-iv-label">Autour de la table</div>
+                    <div>${s.participants.map((p, i) => `<span class="meet-dot meet-${MEET_VOICES[i]}"></span><b>${esc(p.nom)}</b> · ${esc(p.fonction_nl)}${p.fonction_fr ? ` <small>(${esc(p.fonction_fr)})</small>` : ''}`).join('<br>')}</div>
+                    ${s.faits.length ? `<div class="rp-iv-label">📋 Tes chiffres</div><ul class="rp-case-figures">${s.faits.map(f => `<li>${esc(f.nl)}${f.fr ? ` <small>(${esc(f.fr)})</small>` : ''}</li>`).join('')}</ul>` : ''}
+                    ${s.attendu_fr.length ? `<details><summary>🎯 Ce qu'on attend de toi</summary>${s.attendu_fr.map(x => '• ' + esc(x)).join('<br>')}</details>` : ''}
+                </div>`;
+            const nav = document.getElementById('rp-day-nav');
+            nav.style.display = 'block';
+            nav.innerHTML = `<button class="btn btn-gray" style="margin:0;" onclick="meetDebrief()">🏁 Fin de la réunion : bilan et ${MEET_WRITE[t.ecrit].label}</button>`;
+        }
+
+        // ----- Bilan, puis le mail ou le compte rendu -----
+        async function meetDebrief() {
+            const st = rpMeetState;
+            if (!st) return;
+            if (rpIsRecording && rpRecognition) rpRecognition.stop();
+            rpMeetSpeakId++;
+            try { window.speechSynthesis.cancel(); } catch (e) { /* pas grave */ }
+            if (!st.turns) {
+                st.turns = st.s.ouverture.map(o => ({ qui: o.nom || st.s.participants[0].nom, texte: o.nl })).concat(rpConversationHistory.slice(1).flatMap(m => m.role === 'user'
+                    ? [{ qui: 'APPRENANT', texte: m.parts[0].text }]
+                    : rpMeetLines(m.parts[0].text, st.s).map(p => ({ qui: p.who || 'RÉUNION', texte: p.text }))));
+            }
+            rpJobHideNav();
+            document.getElementById('rp-step-chat').style.display = 'none';
+            document.getElementById('rp-step-debrief').style.display = 'flex';
+            rpFillDebriefWords();
+            const esc = rpEscapeHtml, W = MEET_WRITE[st.t.ecrit], c = meetCast(st.t.metier);
+            const box = document.getElementById('rp-debrief-content');
+            const header = `<div class="conj-verb-title">🏁 Bilan — ${esc(st.s.titre_fr || st.t.label)}</div>`;
+            const writeBox = `
+                <div class="rp-iv-label">${W.label} — à toi</div>
+                <p class="rp-debrief-sub">Écris-le ou dicte-le en néerlandais${st.s.ecrire_a ? ', pour ' + esc(st.s.ecrire_a) : ''} : les décisions, qui fait quoi, pour quand.</p>
+                <textarea id="meet-write" rows="7" style="width:100%; box-sizing:border-box;" placeholder="${st.t.ecrit === 'mail' ? 'Beste collega’s, …' : 'Verslag van de vergadering van …'}"></textarea>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px;">
+                    <button type="button" class="btn btn-gray" id="meet-write-mic" style="margin:0;" onclick="meetWriteMic()">🎤 Dicter</button>
+                    <button type="button" class="btn btn-green" style="margin:0;" onclick="meetWriteCheck()">✨ Corriger</button>
+                </div>
+                <div id="meet-write-result"></div>`;
+            const footer = `${usedSessionHtml()}
+                <button class="btn btn-green" style="margin-top:14px;" onclick="tutorOpen('rp')">🧑‍🏫 Revoir avec mon tuteur</button>
+                <button class="btn btn-gray" style="margin-top:8px;" onclick="meetShowHome()">Une autre réunion</button>`;
+            if (!st.turns.some(x => x.qui === 'APPRENANT')) {
+                box.innerHTML = `<div class="conj-card">${header}<p>Tu n'as rien dit pendant la réunion : rien à analyser.</p>${footer}</div>`;
+                return;
+            }
+            box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--text-secondary);">J'analyse ta participation…</p></div>`;
+            let d = null, err = '';
+            try {
+                d = rpHelpParseJson(await GeminiService.generate(`Tu es un coach de réunion et professeur de néerlandais pour francophones. Voici une réunion de travail en néerlandais ; l'APPRENANT y participait en tant que ${c.toi}. Ses répliques ont pu être dictées : ignore ponctuation et majuscules.
+Sujet : ${st.t.sujet}
+Faits qu'il avait sous les yeux : ${st.s.faits.map(f => f.nl).join(' ; ')}
+Ce qu'on attendait de lui : ${st.s.attendu_fr.join(' ; ')}
+
+${st.turns.map(x => x.qui + ' : ' + x.texte).join('\n')}
+
+Évalue UNIQUEMENT les répliques de l'APPRENANT, avec bienveillance : c'est un exercice de langue. Réponds UNIQUEMENT en JSON :
+{"decisions":[{"qui":"prénom, ou toi","quoi":"en français","quand":"échéance ou vide"}],
+ "fond":[{"point":"Donner l'état précis (chiffres)","ok":true,"commentaire_fr":"…"},{"point":"Dire qui est responsable de quoi","ok":true,"commentaire_fr":"…"},{"point":"Proposer une solution pour débloquer","ok":true,"commentaire_fr":"…"},{"point":"S'engager sur une action et un délai","ok":true,"commentaire_fr":"…"}],
+ "points_forts":["en français"],
+ "a_corriger":[{"phrase_apprenant":"ce qu'il a dit","probleme":"en français","formulation_correcte":"en néerlandais"}],
+ "phrases_utiles":[{"nl":"tournure de réunion utile ici","fr":"traduction"}],
+ "conseil":"en français, un conseil prioritaire"}
+3 points forts maximum, 5 corrections maximum, 8 phrases utiles maximum.`));
+            } catch (e) { err = e.message; }
+            if (rpMeetState !== st) return;
+            const arr = x => Array.isArray(x) ? x : [];
+            if (!d || typeof d !== 'object') {
+                box.innerHTML = `<div class="conj-card">${header}<p style="color:var(--wrong);">Bilan impossible${err ? ' : ' + esc(err) : ''}.</p>
+                    <button class="btn btn-gray" onclick="meetDebrief()">Réessayer</button>${writeBox}${footer}</div>`;
+                return;
+            }
+            st.decisions = arr(d.decisions);
+            const useful = arr(d.phrases_utiles).filter(p => p && p.nl && p.fr);
+            if (useful.length) liveSaveWords(useful.map(p => ({ nl: String(p.nl), fr: String(p.fr) })), MEET_LIST);
+            box.innerHTML = `
+                <div class="conj-card">
+                    ${header}
+                    ${st.decisions.length ? `<div class="rp-iv-label">Ce qui a été décidé</div>${st.decisions.map(x => `<div class="rp-debrief-item">📌 <b>${esc(x.qui || '')}</b> : ${esc(x.quoi || '')}${x.quand ? ` <small>(${esc(x.quand)})</small>` : ''}</div>`).join('')}` : ''}
+                    ${arr(d.fond).length ? `<div class="rp-iv-label">Ta participation</div>${arr(d.fond).map(x => `<div class="rp-debrief-item">${x.ok ? '✅' : '❌'} ${esc(x.point || '')}${x.commentaire_fr ? `<div class="rp-debrief-sub">${esc(x.commentaire_fr)}</div>` : ''}</div>`).join('')}` : ''}
+                    ${arr(d.points_forts).length ? `<div class="rp-iv-label">Points forts</div>${arr(d.points_forts).map(p => `<div class="rp-debrief-item">👍 ${esc(p)}</div>`).join('')}` : ''}
+                    <div class="rp-iv-label">Formulations à corriger</div>
+                    ${arr(d.a_corriger).length ? arr(d.a_corriger).map(b => `
+                        <div class="rp-debrief-item">
+                            <div>« ${esc(b.phrase_apprenant || '')} »</div>
+                            <div class="rp-debrief-sub">${esc(b.probleme || '')}</div>
+                            <div class="rp-iv-reference">→ ${esc(b.formulation_correcte || '')} ${speakBtnHtml(b.formulation_correcte || '')}</div>
+                        </div>`).join('') : '<div class="rp-debrief-sub">Rien à signaler, bravo.</div>'}
+                    ${useful.length ? `<div class="rp-iv-label">Tournures de réunion <small>(gardées dans « ${MEET_LIST} »)</small></div>${useful.map(v => `<div class="conj-tense-row"><span class="conj-form">${esc(v.nl)}</span> ${speakBtnHtml(v.nl)}<span class="rp-debrief-sub" style="flex:1;">${esc(v.fr)}</span></div>`).join('')}` : ''}
+                    ${d.conseil ? `<div class="rp-iv-label">Conseil pour la prochaine fois</div><div>${esc(d.conseil)}</div>` : ''}
+                    ${writeBox}
+                    ${footer}
+                </div>`;
+        }
+        function meetWriteMic() {
+            const btn = document.getElementById('meet-write-mic'), ta = document.getElementById('meet-write');
+            if (meetWriteRec) { meetWriteRec.finish(false); return; }
+            if (!window.SpeechRecognition) { toast("La reconnaissance vocale n'est pas disponible ici : écris ton texte (ou utilise la dictée du clavier)."); return; }
+            if (!ta) return;
+            const prefix = ta.value.trim();
+            meetWriteRec = longListen({
+                lang: 'nl', input: ta,
+                isActive: () => !!document.getElementById('meet-write'),
+                onState: () => { if (btn) btn.innerText = '⏹️ Arrêter la dictée'; },
+                onEnd: r => { if (meetWriteRec === r) meetWriteRec = null; if (btn) btn.innerText = '🎤 Dicter'; },
+                onSubmit: () => {}
+            });
+            if (meetWriteRec && prefix) meetWriteRec.committed = prefix;
+        }
+        async function meetWriteCheck() {
+            const st = rpMeetState, ta = document.getElementById('meet-write'), out = document.getElementById('meet-write-result');
+            if (meetWriteRec) meetWriteRec.finish(false);
+            if (!st || !ta || !out) return;
+            const text = ta.value.trim();
+            if (text.length < 15) { toast(`Écris ou dicte d'abord ${MEET_WRITE[st.t.ecrit].fr}.`); return; }
+            if (!GeminiService.isAvailable()) { toast('La correction a besoin de Gemini (Profil 👤 → 🤖 Intelligence IA).'); return; }
+            const esc = rpEscapeHtml, W = MEET_WRITE[st.t.ecrit];
+            out.innerHTML = '<p class="report-meta">Je lis ton texte…</p>';
+            let r = null, err = '';
+            try {
+                r = rpHelpParseJson(await GeminiService.generate(`Un francophone (néerlandais ${liveLevel()}) a écrit ${W.fr} après une réunion de travail en Flandre, en néerlandais.
+Sujet de la réunion : ${st.t.sujet}
+Faits : ${st.s.faits.map(f => f.nl).join(' ; ')}
+${(st.decisions || []).length ? 'Décisions prises : ' + st.decisions.map(x => (x.qui || '') + ' : ' + (x.quoi || '') + (x.quand ? ' (' + x.quand + ')' : '')).join(' ; ') : 'Réunion : ' + (st.turns || []).map(x => x.qui + ' : ' + x.texte).join(' / ').slice(0, 4000)}
+${st.s.ecrire_a ? 'Destinataires : ' + st.s.ecrire_a : ''}
+Son texte (il a pu être dicté : corrige les erreurs de transcription) :
+« ${text.slice(0, 4000)} »
+${tutorMemPromptLine()}
+Juge d'abord le FOND (décisions, qui fait quoi, pour quand, clair et professionnel), puis la langue. Réponds UNIQUEMENT en JSON :
+{"fond_fr":"1 ou 2 phrases sur le contenu","manque_fr":["ce qui manque, en français"],"version_corrigee_nl":"SON texte corrigé, en gardant ses idées, sa structure et ses mots quand ils sont justes ; ton professionnel flamand","fautes":[{"phrase":"son passage","probleme":"en français","correct":"en néerlandais"}],"modele_nl":"un modèle court et naturel du même texte"}
+5 fautes maximum.`));
+            } catch (e) { err = e.message; }
+            if (!r || typeof r !== 'object' || !document.getElementById('meet-write-result')) { out.innerHTML = `<p style="color:var(--wrong);">Correction impossible${err ? ' : ' + esc(err) : ''}. Réessaie.</p>`; return; }
+            const arr = x => Array.isArray(x) ? x : [];
+            const para = s => esc(String(s || '')).replace(/\n/g, '<br>');
+            out.innerHTML = `
+                ${r.fond_fr ? `<div class="rp-iv-label">Le fond</div><div>${esc(r.fond_fr)}</div>` : ''}
+                ${arr(r.manque_fr).length ? arr(r.manque_fr).map(x => `<div class="rp-debrief-item">➕ ${esc(x)}</div>`).join('') : ''}
+                ${arr(r.fautes).length ? `<div class="rp-iv-label">La langue</div>${arr(r.fautes).map(f => `<div class="rp-debrief-item"><div>« ${esc(f.phrase || '')} »</div><div class="rp-debrief-sub">${esc(f.probleme || '')}</div><div class="rp-iv-reference">→ ${esc(f.correct || '')}</div></div>`).join('')}` : ''}
+                ${r.version_corrigee_nl ? `<div class="rp-iv-label">✨ Ton texte corrigé</div><div class="rp-iv-reference" style="text-align:left;">${para(r.version_corrigee_nl)}</div>` : ''}
+                ${r.modele_nl ? `<details><summary>💬 Un modèle</summary><div style="text-align:left;">${para(r.modele_nl)}</div></details>` : ''}`;
         }
 
         // ===== Pratique ciblée (jeu de rôle piloté par une notion du curriculum) =====
@@ -16519,6 +16919,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
                 <button class="btn btn-green" onclick="listenConvRandom()">🎲 Une conversation au hasard</button>
                 <div class="hub-grid" style="margin-top:12px;">
                     ${conv('travail', '💼', 'Mon travail', 'Les situations de ton métier')}
+                    ${conv('reunions', '🗓️', 'Réunions', 'À plusieurs : stock, IT, SAP')}
                     ${conv('inwerk', '🧑‍🏫', 'Mon inwerkperiode', 'Tes journées, moment par moment')}
                     ${conv('entretiens', '🎬', 'Mes vrais entretiens', 'Recruteurs réels, mot pour mot')}
                     ${conv('quotidien', '💬', 'La vie de tous les jours', 'Commune, médecin, magasin…')}
@@ -16545,6 +16946,10 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
                 if (metier === 'admin_productie') items.unshift({ label: '🎧 Visite guidée : le vocabulaire admin et production', go: () => rpSceneOpen('vocabstory:admin', { type: 'vocabstory' }, false, listenBackFn) });
                 const m = RP_METIERS[metier];
                 return { title: '💼 ' + (m ? m.label.replace(/^\S+\s/, '') : 'Mon travail'), items };
+            }
+            if (kind === 'reunions') {
+                return { title: '🗓️ Réunions à plusieurs', items: meetGroups().flatMap(m => MEET_THEMES.filter(t => t.metier === m))
+                    .map(t => ({ label: t.label + (t.metier === 'it_sap' ? ' (IT / SAP)' : ''), go: () => meetListen(t.key, false, listenBackFn) })) };
             }
             if (kind === 'inwerk') {
                 return { title: '🧑‍🏫 Mon inwerkperiode', items: FORMATION_DAYS.map((d, i) => ({ label: d.label + ' (toute la journée)', go: () => formationListenDay(i, false, listenBackFn) }))
@@ -16578,7 +16983,7 @@ Réponds UNIQUEMENT en JSON : {"reponse_fr": "", "exemple_nl": ""}`;
         }
         function listenConvGo(i) { const x = listenConvCurrent[i]; if (x) x.go(); }
         async function listenConvRandom() {
-            const kinds = ['travail', 'travail', 'quotidien', 'entretiens'];
+            const kinds = ['travail', 'travail', 'reunions', 'quotidien', 'entretiens'];
             const { items } = await listenConvItems(kinds[Math.floor(Math.random() * kinds.length)]);
             if (items.length) items[Math.floor(Math.random() * items.length)].go();
         }
@@ -18833,6 +19238,13 @@ Réponds UNIQUEMENT en JSON : {"phrases": [{"fr": "", "nl": "", "calque": ""}]}`
             "le perfectum avec hebben ou zijn", "le petit mot er", "les diminutifs en -je", "tu ou vous : je, jij, u au travail",
             "les faux amis entre le français et le néerlandais", "les expressions flamandes du quotidien", "dire l'heure et les dates",
             "les phrases polies pour demander quelque chose au travail", "l'inversion : Morgen ga ik…"];
+        // 🧩 « Les phrases de l'usine » (Joas, 24 novembre 2026 : « des chunks courants dans le monde du
+        // travail, usine, production ») : thèmes ci-dessous, blocs gardés dans la liste RADIO_CHUNK_LIST.
+        const RADIO_CHUNKS = ["en réunion de production", "au magasin et autour du stock", "au téléphone avec un fournisseur", "quand il y a un problème de qualité sur une pièce",
+            "pour la sécurité à l'atelier", "pour le planning et les délais", "avec le chef d'équipe à l'atelier", "dans un mail professionnel", "quand une machine tombe en panne",
+            "pour demander de l'aide à un collègue", "pour les pauses, les équipes et les congés", "à la réception des marchandises", "pour donner son avis et proposer une solution",
+            "quand on travaille avec le logiciel de gestion (SAP, Excel)"];
+        const RADIO_CHUNK_LIST = '📻 Phrases de l’usine';
         function radioCache() { try { return JSON.parse(localStorage.getItem(RADIO_KEY)) || {}; } catch (e) { return {}; } }
         function radioSave(key, sc) {
             const c = radioCache(); c[key] = { at: Date.now(), sc };
@@ -18848,6 +19260,9 @@ ${fmt}`;
             if (kind === 'savoir') return `${base}
 Émission : « Le saviez-vous ? » sur ${topic}. Faits sûrs et généraux, pas d'actualité (tu n'as pas accès aux nouvelles).
 ${fmt}`;
+            if (kind === 'chunks') return `${base}
+Émission : « Les phrases de l'usine ». Les blocs de mots qu'on entend tout le temps ${topic}, dans une usine ou un bureau de production en Flandre. A présente 6 à 8 BLOCS très courants (2 à 6 mots, par exemple « even nakijken », « dat staat op de planning », « we zitten krap », « ik laat het je weten »), un par un : il le dit, explique en néerlandais simple quand on l'emploie, et le met dans une petite phrase de travail ; B le reprend dans un autre exemple. Ils finissent en redisant tous les blocs.${radioWorkWords()}
+Réponds UNIQUEMENT en JSON, sans rien autour : {"titre_fr":"titre court en français","blocs":[{"nl":"le bloc","fr":"son sens"}],"lignes":[{"qui":"A","nl":"…","fr":"traduction française"}]}. 18 à 24 lignes, A et B, phrases orales et naturelles de ${level} (CECR), néerlandais de Flandre standard, sans emojis ni noms de vraies personnes.`;
             if (kind === 'processus') return `${base}
 Émission : comment ça marche ? Sujet : ${topic}. A explique le processus étape par étape, avec les mots du métier en néerlandais ; B reformule et pose des questions. Entreprise fictive si besoin (Zonvella), jamais de vraie entreprise.
 ${fmt}`;
@@ -18859,9 +19274,10 @@ ${fmt}`;
             const day = new Date().toISOString().slice(0, 10);
             const key = kind + ':' + (kind === 'actu' ? day : topic);
             const cached = radioCache()[key];
-            const icon = { actu: '📰', savoir: '💡', processus: '🏭', langue: '🇳🇱' }[kind];
+            const icon = { actu: '📰', savoir: '💡', processus: '🏭', langue: '🇳🇱', chunks: '🧩' }[kind];
             const done = (sc, k) => sc && Array.isArray(sc.lignes) && sc.lignes.length >= 4 ? { title: icon + ' ' + (sc.titre_fr || topic || 'Le journal'), lines: sc.lignes.filter(l => l && l.nl), roleA: 'Présentateur', _k: k } : null;
-            if (cached && (kind !== 'langue' || Date.now() - cached.at < 7 * 864e5)) return done(cached.sc);
+            const maxAge = { langue: 7, chunks: 3 }[kind]; // jours : de nouveaux points et de nouveaux blocs de temps en temps
+            if (cached && (!maxAge || Date.now() - cached.at < maxAge * 864e5)) return done(cached.sc);
             if (!GeminiService.isAvailable()) return null;
             const level = listenLevel();
             let sc = null;
@@ -18872,7 +19288,20 @@ ${fmt}`;
                 return radioShow('savoir', t[Math.floor(Math.random() * t.length)]);
             }
             if (sc && sc.lignes) radioSave(key, sc);
+            // Les blocs de l'émission vont dans une liste à réviser (S'entraîner / Écouter des mots).
+            if (sc && kind === 'chunks' && Array.isArray(sc.blocs)) {
+                const pairs = sc.blocs.filter(b => b && b.nl && b.fr).map(b => ({ nl: String(b.nl), fr: String(b.fr) }));
+                if (pairs.length) liveSaveWords(pairs, RADIO_CHUNK_LIST);
+            }
             return done(sc);
+        }
+        // Mots du métier glissés dans « Les phrases de l'usine » (vocabulaire du thème du métier).
+        function radioWorkWords() {
+            const metier = (state.settings && state.settings.jobMetier) || rpJobMetier;
+            const file = { admin_productie: 'THEME_ADMIN_PRODUCTIE', it_sap: 'THEME_IT_SAP', logistique: 'THEME_LOGISTIQUE' }[metier];
+            const pool = file ? fullDb.filter(i => i.file === file && i.nl && !/\s.*\s.*\s/.test(i.nl)) : [];
+            const pick = pool.map(x => [Math.random(), x]).sort((a, b) => a[0] - b[0]).slice(0, 12).map(x => x[1].nl);
+            return pick.length ? ' Glisse aussi, quand c\'est naturel, quelques-uns de ces mots de son travail : ' + pick.join(', ') + '.' : '';
         }
         function radioLangTopics() {
             const weak = (typeof tutorMemTop === 'function' ? tutorMemTop(4) : []).map(([, r]) => r.label).filter(Boolean);
@@ -18900,9 +19329,14 @@ ${fmt}`;
             Object.assign(lists, {
                 actu: [() => radioShow('actu')],
                 processus: shuffle(radioProcessTopics()).slice(0, 8).map(t => () => radioShow('processus', t)),
-                langue: shuffle(weak).concat(shuffle(radioLangTopics().filter(t => !weak.includes(t)))).slice(0, 8).map(t => () => radioShow('langue', t))
+                langue: shuffle(weak).concat(shuffle(radioLangTopics().filter(t => !weak.includes(t)))).slice(0, 8).map(t => () => radioShow('langue', t)),
+                chunks: shuffle(RADIO_CHUNKS).map(t => () => radioShow('chunks', t)),
+                reunion: shuffle(meetGroups().flatMap(m => MEET_THEMES.filter(t => t.metier === m))).map(t => async () => {
+                    const sc = await meetFetch(t);
+                    return sc && { title: '🗓️ Réunion : ' + t.label.replace(/^\S+\s/, ''), lines: sc.lignes, roleA: sc.roleA };
+                })
             });
-            const order = ['actu', 'travail', 'processus', 'inwerk', 'langue', 'entretiens', 'quotidien', 'processus', 'cours', 'langue'];
+            const order = ['actu', 'chunks', 'travail', 'reunion', 'processus', 'chunks', 'inwerk', 'langue', 'reunion', 'chunks', 'entretiens', 'processus', 'quotidien', 'chunks', 'cours', 'langue'];
             const out = [];
             for (let k = 0; out.length < 60 && order.some(o => lists[o].length); k++) { const l = lists[order[k % order.length]]; if (l.length) out.push(l.shift()); }
             return out;
@@ -18920,7 +19354,7 @@ ${fmt}`;
             const list = await carRadioPlaylist();
             if (!carActive(r)) return;
             if (!list.length) { carShow('<p>Rien à écouter pour l\'instant.</p>'); return; }
-            await carSay(r, "C'est parti pour vingt minutes de radio : le journal, des conversations, comment marche ton travail, et des points de néerlandais. Écoute, sans rien dire. Pour passer au suivant, touche l'écran.", 'fr');
+            await carSay(r, "C'est parti pour vingt minutes de radio : le journal, les phrases de l'usine, des réunions, des conversations, comment marche ton travail, et des points de néerlandais. Écoute, sans rien dire. Pour passer au suivant, touche l'écran.", 'fr');
             const take = () => list.length ? list.shift()().catch(() => null) : null;
             let next = take();
             while (carActive(r) && next && Date.now() < r.until) {
@@ -18938,7 +19372,7 @@ ${fmt}`;
                     const mode = sceneMode();
                     if (mode === 'fr_nl' && l.fr) await carSay(r, l.fr, 'fr');
                     if (!carActive(r) || r.skip) break;
-                    await conjAudioSpeak(l.nl, 'nl', r.slow ? 0.8 : 0.95, { speaker: l.qui === 'B' ? 1 : 0 });
+                    await conjAudioSpeak(l.nl, 'nl', r.slow ? 0.8 : 0.95, sceneVoiceOpt(l.qui));
                     if (mode === 'nl_fr' && l.fr && carActive(r) && !r.skip) await carSay(r, l.fr, 'fr');
                     await new Promise(res => setTimeout(res, 400));
                 }
@@ -19038,6 +19472,7 @@ ${fmt}`;
             progresser: { desc: "page qui explique comment devenir bon en néerlandais et comment l'app y aide (conseils, routine)", run: () => showProgress() },
             ecouter: { desc: "exercice d'écoute (message vocal, annonce, radio, consigne, récit, avis) ; params.type parmi " + Object.keys(LISTEN_TYPES).join(', '), run: p => { showListen(); if (p.type && LISTEN_TYPES[p.type]) listenStart(p.type); } },
             dire: { desc: `dire en ${studyLang().nom} ce qu'on pense en français (le tuteur apprend la phrase)`, run: () => showSayIt() },
+            reunion: { desc: 'réunion de travail à plusieurs (stock, solutions, mail de suivi ; IT et SAP), à écouter ou à jouer', run: () => { showRoleplay('travail'); meetShowHome(); } },
             nombres: { desc: "s'entraîner à dire et comprendre les nombres (numéros d'article, quantités, prix, téléphones), chronométré", run: () => showNumbers() },
             ordre: { desc: "l'ordre des mots (verbe en 2e position, verbe à la fin après dat / omdat, daarom…)", run: () => showWordOrder() },
             faire_le_point: { desc: "faire le point sur son niveau en conversation avec ton tuteur (valide ce qu'il sait déjà) ; params.partenaire", run: p => talkStartPoint(TALK_PARTNERS[p.partenaire] ? p.partenaire : talkSettings().partner) },
@@ -19078,6 +19513,7 @@ ${fmt}`;
             if (has(/etude de cas|business case/)) return { action: 'etude_de_cas' };
             if (has(/ma routine|routine du jour|lance la routine|ma seance du jour|entrainement du jour/)) return { action: 'routine' };
             if (has(/comment progresser|devenir bon|etre bon|conseils?|routine|comment (ca|ça) marche|par ou commencer/)) return { action: 'progresser' };
+            if (has(/reunion|vergadering|meeting|stand.?up/)) return { action: 'reunion' };
             if (has(/ecout|comprehension orale|audition|message vocal|radio/) && !has(/scene|dialogue/)) return { action: 'ecouter', params: { type: has(/message|vocal|repondeur/) ? 'vocal' : has(/annonce|gare/) ? 'annonce' : has(/radio|info|meteo/) ? 'media' : has(/consigne|instruction/) ? 'consigne' : has(/recit|histoire|raconte/) ? 'recit' : has(/avis|debat|opinion/) ? 'avis' : null } };
             if (has(/dis le en|dire en neerlandais|comment dire ce que|ce qui me passe|exprimer ce que je pense|apprends? moi a dire/)) return { action: 'dire' };
             if (has(/\bnombres?\b|\bchiffres?\b|getallen|cijfers|numeros? d.?article/)) return { action: 'nombres' };

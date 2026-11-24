@@ -2438,6 +2438,220 @@
           "fr": "Le code-barres est illisible."
         }
       ]
+    },
+    "dom_sap": {
+      "label": "IT / SAP — métier",
+      "verbes": [
+        "instellen",
+        "analyseren",
+        "ondersteunen",
+        "begeleiden",
+        "uitleggen",
+        "aanpassen",
+        "invoeren",
+        "controleren",
+        "opstarten",
+        "oplossen"
+      ],
+      "mots": [
+        {
+          "nl": "het ERP-systeem",
+          "fr": "le progiciel de gestion (ERP)"
+        },
+        {
+          "nl": "de module",
+          "fr": "le module"
+        },
+        {
+          "nl": "de sleutelgebruiker",
+          "fr": "l'utilisateur clé"
+        },
+        {
+          "nl": "de stamgegevens",
+          "fr": "les données de base"
+        },
+        {
+          "nl": "de transactie",
+          "fr": "la transaction"
+        },
+        {
+          "nl": "het veld",
+          "fr": "le champ"
+        },
+        {
+          "nl": "het maatwerk",
+          "fr": "le développement spécifique"
+        },
+        {
+          "nl": "het standaardproces",
+          "fr": "le processus standard"
+        },
+        {
+          "nl": "de datamigratie",
+          "fr": "la migration des données"
+        },
+        {
+          "nl": "de gebruikerstest",
+          "fr": "le test utilisateur"
+        },
+        {
+          "nl": "de livegang",
+          "fr": "le démarrage (go-live)"
+        },
+        {
+          "nl": "de autorisatie",
+          "fr": "l'autorisation"
+        },
+        {
+          "nl": "de koppeling",
+          "fr": "l'interface entre deux systèmes"
+        },
+        {
+          "nl": "de projectleider",
+          "fr": "le chef de projet"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "In de standaard werkt het zo.",
+          "fr": "Dans le standard, ça fonctionne comme ça."
+        },
+        {
+          "nl": "Dat zou maatwerk zijn, en dat kost tijd.",
+          "fr": "Ce serait du développement spécifique, et ça prend du temps."
+        },
+        {
+          "nl": "Ik vat even samen.",
+          "fr": "Je résume rapidement."
+        },
+        {
+          "nl": "Klopt dat voor u?",
+          "fr": "Est-ce que c'est juste pour vous ?"
+        },
+        {
+          "nl": "Wie neemt dat actiepunt op?",
+          "fr": "Qui prend cette action ?"
+        },
+        {
+          "nl": "Tegen wanneer heb je dat nodig?",
+          "fr": "Pour quand en as-tu besoin ?"
+        },
+        {
+          "nl": "Ik stuur straks een verslag rond.",
+          "fr": "J'envoie un compte rendu tout à l'heure."
+        },
+        {
+          "nl": "Ik zit vast op dat punt.",
+          "fr": "Je suis bloqué sur ce point."
+        }
+      ]
+    },
+    "sit_sap": {
+      "label": "IT / SAP — situations",
+      "verbes": [
+        "melden",
+        "inloggen",
+        "boeken",
+        "opslaan",
+        "nakijken",
+        "doorsturen",
+        "bevestigen",
+        "prioriteren",
+        "noteren",
+        "opvolgen"
+      ],
+      "mots": [
+        {
+          "nl": "het ticket",
+          "fr": "le ticket"
+        },
+        {
+          "nl": "de foutmelding",
+          "fr": "le message d'erreur"
+        },
+        {
+          "nl": "de schermafdruk",
+          "fr": "la capture d'écran"
+        },
+        {
+          "nl": "het wachtwoord",
+          "fr": "le mot de passe"
+        },
+        {
+          "nl": "de gebruiker",
+          "fr": "l'utilisateur"
+        },
+        {
+          "nl": "de storing",
+          "fr": "la panne"
+        },
+        {
+          "nl": "de tijdelijke oplossing",
+          "fr": "la solution provisoire"
+        },
+        {
+          "nl": "de goederenontvangst",
+          "fr": "la réception de marchandises"
+        },
+        {
+          "nl": "het productieorder",
+          "fr": "l'ordre de production"
+        },
+        {
+          "nl": "de leveringsbon",
+          "fr": "le bon de livraison"
+        },
+        {
+          "nl": "de wijzigingsaanvraag",
+          "fr": "la demande de changement"
+        },
+        {
+          "nl": "het actiepunt",
+          "fr": "l'action à faire"
+        },
+        {
+          "nl": "het verslag",
+          "fr": "le compte rendu"
+        },
+        {
+          "nl": "de prioriteit",
+          "fr": "la priorité"
+        }
+      ],
+      "phrases": [
+        {
+          "nl": "Kunt u een schermafdruk sturen?",
+          "fr": "Pouvez-vous envoyer une capture d'écran ?"
+        },
+        {
+          "nl": "Ik maak er een ticket van.",
+          "fr": "Je crée un ticket."
+        },
+        {
+          "nl": "Ik kijk het meteen na.",
+          "fr": "Je vérifie tout de suite."
+        },
+        {
+          "nl": "Sinds wanneer heeft u dat probleem?",
+          "fr": "Depuis quand avez-vous ce problème ?"
+        },
+        {
+          "nl": "Probeer even af te melden en opnieuw in te loggen.",
+          "fr": "Essayez de vous déconnecter et de vous reconnecter."
+        },
+        {
+          "nl": "Ik geef het door aan de technische collega's.",
+          "fr": "Je transmets aux collègues techniques."
+        },
+        {
+          "nl": "Ik bel u binnen een halfuur terug.",
+          "fr": "Je vous rappelle dans une demi-heure."
+        },
+        {
+          "nl": "Lukt het nu?",
+          "fr": "Ça marche maintenant ?"
+        }
+      ]
     }
   },
   "scenarios": {
@@ -2462,7 +2676,8 @@
     "bank:data_analyst_junior": ["entretien_base", "dom_da"],
     "bank:pmo_junior": ["entretien_base", "dom_pmo"],
     "bank:consultant_fonctionnel_junior": ["entretien_base", "dom_cf"],
-    "bank:zonnewering_administratief_medewerker": ["entretien_base", "dom_zonnewering_admin"]
+    "bank:zonnewering_administratief_medewerker": ["entretien_base", "dom_zonnewering_admin"],
+    "bank:it_sap_junior": ["entretien_base", "dom_sap"]
   },
   "situations": {
     "guichet_": ["sit_guichet"],
@@ -2483,6 +2698,7 @@
     "lg_disp_": ["sit_lg_disp", "sit_dispatch"],
     "lg_acc_": ["sit_lg_acc", "sit_guichet"],
     "lg_stock_": ["sit_lg_stock", "dom_entrepot"],
-    "lg_enc_": ["sit_lg_enc", "dom_kantoor"]
+    "lg_enc_": ["sit_lg_enc", "dom_kantoor"],
+    "sap_": ["sit_sap", "dom_sap"]
   }
 }

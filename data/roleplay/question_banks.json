@@ -1093,6 +1093,75 @@
         "Mag ik even nadenken?",
         "Dus als ik het goed begrijp, ..."
       ]
+    },
+    {
+      "id": "it_sap_junior",
+      "metier": "it_sap",
+      "label": "Entretien — consultant SAP junior / support IT",
+      "poste": "Junior SAP-consultant",
+      "contexte": "Entretien pour un poste de consultant SAP junior chez Zonvella, un intégrateur qui installe SAP chez des entreprises industrielles et assure le support après le démarrage : ateliers avec les utilisateurs, paramétrage, tests, formation, tickets. Le recruteur cherche la compréhension des processus (achat, stock, production), le sens du service et la capacité à expliquer simplement.",
+      "niveau": "B1",
+      "_source": "redige_claude",
+      "welcome": "Goedemorgen, welkom bij Zonvella. Neem gerust plaats. Kun je jezelf even kort voorstellen?",
+      "questions": {
+        "accroche": [
+          "Wat weet je over SAP, en over wat een SAP-consultant doet?"
+        ],
+        "verif_cv": [
+          "Op je cv zie ik dat je bij [bedrijf] gewerkt hebt. Met welke software werkte je daar?",
+          "Heb je al met een ERP-systeem gewerkt, als gebruiker of anders?"
+        ],
+        "clarification_poste": [
+          "Wat is volgens jou het verschil tussen een functionele en een technische SAP-consultant?",
+          "Welke module interesseert je het meest: inkoop, logistiek, productie of financiën?"
+        ],
+        "technique": [
+          "Leg eens uit hoe een inkooporder verloopt, van de aanvraag tot de factuur.",
+          "Een gebruiker belt: hij krijgt een foutmelding bij een goederenontvangst. Wat vraag je hem?",
+          "Een klant wil een extra veld dat niet in de standaard zit. Wat doe je?",
+          "Hoe zou je een test voorbereiden voor een nieuw proces?",
+          "Op de dag van de livegang drukt het magazijn geen leveringsbonnen meer af. Hoe reageer je?"
+        ],
+        "motivation": [
+          "Waarom wil je SAP-consultant worden?",
+          "Waarom wil je bij ons werken?"
+        ],
+        "vision_carriere": [
+          "Waar zie je jezelf binnen drie jaar?"
+        ],
+        "objections": [
+          "Je hebt nog geen SAP-certificaat. Hoe ga je dat oplossen?",
+          "Je zult veel bij klanten zijn, soms ver weg. Is dat een probleem?"
+        ],
+        "perso": [
+          "Hoe leg je iets technisch uit aan iemand die weinig van computers kent?",
+          "Vertel eens over een moment waarop je onder druk een probleem moest oplossen."
+        ],
+        "dispo": [
+          "Wanneer kun je beginnen?",
+          "Heb je een rijbewijs?"
+        ],
+        "cloture": [
+          "Heb jij nog vragen voor ons?"
+        ]
+      },
+      "vocabulaire": [
+        "het ERP-systeem",
+        "de module",
+        "de sleutelgebruiker",
+        "de stamgegevens",
+        "de livegang",
+        "het maatwerk",
+        "het ticket",
+        "de gebruikerstest"
+      ],
+      "bequilles": [
+        "Mag ik even nadenken?",
+        "Eerst zou ik het probleem goed proberen te begrijpen.",
+        "Ik zou het eenvoudig uitleggen, met een voorbeeld.",
+        "Daar heb ik nog geen ervaring mee, maar ik leer snel.",
+        "Kunt u de vraag herhalen, alstublieft?"
+      ]
     }
   ]
 }

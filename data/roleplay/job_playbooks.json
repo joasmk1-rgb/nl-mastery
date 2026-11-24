@@ -3021,6 +3021,256 @@
         "Croire la première personne qui crie le plus fort.",
         "Décider sans connaître les dates de départ."
       ]
+    },
+    "sap_standup": {
+      "titre": "Faire son point au daily stand-up",
+      "etapes": [
+        {
+          "fr": "Dire ce que tu as terminé hier, en une phrase.",
+          "phrase": "Gisteren heb ik de testscenario's voor inkoop afgewerkt."
+        },
+        {
+          "fr": "Dire sur quoi tu travailles aujourd'hui.",
+          "phrase": "Vandaag werk ik verder aan de stamgegevens van de artikelen."
+        },
+        {
+          "fr": "Nommer ton blocage et ce dont tu as besoin.",
+          "phrase": "Ik zit vast: ik wacht nog op het bestand met de leveranciers. Wie kan me helpen?"
+        },
+        {
+          "fr": "Proposer d'en parler après, sans allonger la réunion.",
+          "phrase": "Zullen we dat na de stand-up even apart bekijken?"
+        }
+      ],
+      "a_eviter": [
+        "Raconter tout ton travail en détail : deux minutes au maximum.",
+        "Cacher un blocage par peur de déranger."
+      ]
+    },
+    "sap_wachtwoord": {
+      "titre": "Débloquer un compte SAP",
+      "etapes": [
+        {
+          "fr": "Vérifier qui appelle et le nom d'utilisateur.",
+          "phrase": "Wat is uw gebruikersnaam, en op welke afdeling werkt u?"
+        },
+        {
+          "fr": "Expliquer ce qui s'est passé.",
+          "phrase": "Na drie foute wachtwoorden wordt uw gebruiker automatisch geblokkeerd."
+        },
+        {
+          "fr": "Débloquer et donner un mot de passe provisoire.",
+          "phrase": "Ik heb uw gebruiker vrijgegeven. U krijgt een tijdelijk wachtwoord per sms."
+        },
+        {
+          "fr": "Faire changer le mot de passe et fermer le ticket.",
+          "phrase": "Kies meteen een nieuw wachtwoord. Als het werkt, sluit ik het ticket."
+        }
+      ],
+      "a_eviter": [
+        "Donner un mot de passe sans vérifier qui appelle.",
+        "Demander à l'utilisateur de te dire son mot de passe."
+      ]
+    },
+    "sap_foutmelding": {
+      "titre": "Traiter un message d'erreur",
+      "etapes": [
+        {
+          "fr": "Demander le message exact ou une capture d'écran.",
+          "phrase": "Kun je een schermafdruk van de foutmelding sturen?"
+        },
+        {
+          "fr": "Demander ce que la personne faisait juste avant.",
+          "phrase": "Welke transactie gebruikte je, en voor welk artikel?"
+        },
+        {
+          "fr": "Expliquer la cause avec des mots simples.",
+          "phrase": "De periode van vorige maand is al afgesloten. Je moet boeken met de datum van vandaag."
+        },
+        {
+          "fr": "Vérifier que c'est réglé, sinon transmettre.",
+          "phrase": "Lukt het nu? Anders geef ik het door aan de collega's van financiën."
+        }
+      ],
+      "a_eviter": [
+        "Répondre « chez moi, ça marche ».",
+        "Parler jargon SAP à un utilisateur qui ne le connaît pas."
+      ]
+    },
+    "sap_fitgap": {
+      "titre": "Mener un atelier fit-gap",
+      "etapes": [
+        {
+          "fr": "Faire décrire le processus actuel, étape par étape.",
+          "phrase": "Kunt u me tonen hoe u nu een bestelling maakt, van begin tot einde?"
+        },
+        {
+          "fr": "Montrer le processus standard de SAP.",
+          "phrase": "In de standaard maakt u eerst een bestelaanvraag, en uw verantwoordelijke keurt die goed."
+        },
+        {
+          "fr": "Noter les écarts et leur importance.",
+          "phrase": "Dat is een verschil met de standaard. Is dat voor u echt nodig, of eerder handig?"
+        },
+        {
+          "fr": "Faire valider ton résumé.",
+          "phrase": "Ik vat even samen, en u zegt me of het klopt."
+        }
+      ],
+      "a_eviter": [
+        "Promettre que tout restera comme dans Excel.",
+        "Décider à la place de l'utilisateur clé."
+      ]
+    },
+    "sap_testdefect": {
+      "titre": "Noter un défaut de test",
+      "etapes": [
+        {
+          "fr": "Faire refaire le scénario devant toi.",
+          "phrase": "Kunt u de stappen nog eens tonen? Ik noteer mee."
+        },
+        {
+          "fr": "Noter le résultat attendu et le résultat obtenu.",
+          "phrase": "Verwacht: de prijs uit het contract. Resultaat: de oude prijs."
+        },
+        {
+          "fr": "Juger la gravité avec l'utilisateur.",
+          "phrase": "Blokkeert dit de livegang, of is er een omweg?"
+        },
+        {
+          "fr": "Dire qui reprend et quand on reteste.",
+          "phrase": "Ik maak een bevinding aan voor de technische collega. We testen opnieuw op donderdag."
+        }
+      ],
+      "a_eviter": [
+        "Écrire « ça ne marche pas » sans les étapes.",
+        "Corriger directement en production sans repasser par les tests."
+      ]
+    },
+    "sap_stamgegevens": {
+      "titre": "Faire nettoyer les données avant la migration",
+      "etapes": [
+        {
+          "fr": "Expliquer le problème avec un exemple.",
+          "phrase": "Hetzelfde artikel staat er twee keer in, met een ander nummer."
+        },
+        {
+          "fr": "Dire pourquoi c'est important.",
+          "phrase": "Als we dubbele artikelen migreren, klopt de voorraad in SAP niet."
+        },
+        {
+          "fr": "Proposer une méthode et un délai.",
+          "phrase": "Ik stuur je een lijst met de dubbels. Kun je tegen vrijdag zeggen welke we houden?"
+        },
+        {
+          "fr": "Confirmer par écrit qui fait quoi.",
+          "phrase": "Ik bevestig het nog even per mail."
+        }
+      ],
+      "a_eviter": [
+        "Supprimer toi-même des articles sans l'accord du métier.",
+        "Repousser le nettoyage après le démarrage."
+      ]
+    },
+    "sap_golive_printer": {
+      "titre": "Gérer une panne le jour du démarrage",
+      "etapes": [
+        {
+          "fr": "Rassurer et poser les questions clés.",
+          "phrase": "Ik begrijp het, we lossen het samen op. Sinds wanneer, en voor welke printer?"
+        },
+        {
+          "fr": "Proposer tout de suite une solution provisoire.",
+          "phrase": "Druk de leveringsbonnen intussen af op de printer van het kantoor."
+        },
+        {
+          "fr": "Prévenir les bonnes personnes.",
+          "phrase": "Ik verwittig meteen de technische consultant en de projectleider."
+        },
+        {
+          "fr": "Donner un délai pour le prochain point.",
+          "phrase": "Ik bel u binnen een halfuur terug met nieuws."
+        }
+      ],
+      "a_eviter": [
+        "Chercher un coupable au téléphone.",
+        "Laisser l'utilisateur sans nouvelles."
+      ]
+    },
+    "sap_uitleg_terugmelden": {
+      "titre": "Expliquer une transaction à un utilisateur",
+      "etapes": [
+        {
+          "fr": "Partir de ce que la personne fait déjà.",
+          "phrase": "U vult nu een papier in als een order klaar is, toch?"
+        },
+        {
+          "fr": "Montrer les étapes une par une, avec ses mots.",
+          "phrase": "Eerst scant u het ordernummer, dan vult u de hoeveelheid in."
+        },
+        {
+          "fr": "La faire essayer elle-même.",
+          "phrase": "Probeer het maar eens zelf met dit order. Ik kijk mee."
+        },
+        {
+          "fr": "Laisser un aide-mémoire et un contact.",
+          "phrase": "Ik geef u een korte handleiding. Bij problemen belt u de helpdesk."
+        }
+      ],
+      "a_eviter": [
+        "Aller trop vite et cliquer à sa place.",
+        "Expliquer toute la théorie de SAP."
+      ]
+    },
+    "sap_wijziging": {
+      "titre": "Traiter une demande de changement",
+      "etapes": [
+        {
+          "fr": "Faire préciser le besoin réel.",
+          "phrase": "Waarvoor heeft u dat veld precies nodig, en wie gebruikt het?"
+        },
+        {
+          "fr": "Vérifier si le standard le permet déjà.",
+          "phrase": "Misschien kan dat al met een bestaand veld. Ik kijk het na."
+        },
+        {
+          "fr": "Annoncer le coût, le délai et l'impact.",
+          "phrase": "Een nieuw veld is maatwerk: dat kost ongeveer drie dagen, en het moet opnieuw getest worden."
+        },
+        {
+          "fr": "Passer par la validation.",
+          "phrase": "Ik dien een wijzigingsaanvraag in. De stuurgroep beslist volgende week."
+        }
+      ],
+      "a_eviter": [
+        "Dire oui tout de suite pour faire plaisir.",
+        "Modifier le système sans demande validée."
+      ]
+    },
+    "sap_nieuwe_collega": {
+      "titre": "Accueillir un nouveau collègue côté IT",
+      "etapes": [
+        {
+          "fr": "Vérifier le nom et ce qui est prévu.",
+          "phrase": "Welkom! Mag ik uw naam? Dan zoek ik uw laptop op."
+        },
+        {
+          "fr": "Aider à la première connexion.",
+          "phrase": "U logt in met dit tijdelijke wachtwoord, daarna kiest u een eigen wachtwoord."
+        },
+        {
+          "fr": "Installer la double authentification.",
+          "phrase": "Nu stellen we de tweestapsverificatie in op uw gsm."
+        },
+        {
+          "fr": "Rappeler les règles de sécurité.",
+          "phrase": "Klik nooit op een link in een verdachte mail. Twijfelt u, stuur hem dan door naar IT."
+        }
+      ],
+      "a_eviter": [
+        "Noter le mot de passe sur un papier collé à l'écran.",
+        "Donner plus de droits que nécessaire."
+      ]
     }
   }
 }
